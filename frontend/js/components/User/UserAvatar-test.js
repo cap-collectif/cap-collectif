@@ -3,15 +3,14 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { UserAvatar } from './UserAvatar';
-import { features } from '../../redux/modules/default';
-import { $refType } from '../../mocks';
+import { features } from '~/redux/modules/default';
+import { $refType } from '~/mocks';
 
 describe('<UserAvatar />', () => {
   it('renders correctly', () => {
     const props = {
       features,
       user: {
-        id: 'userid',
         $refType,
         username: 'toto',
         media: {
@@ -30,7 +29,6 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
-        id: 'userid',
         $refType,
         username: 'toto',
         media: null,
@@ -46,7 +44,6 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
-        id: 'userid',
         $refType,
         username: 'toto',
         media: null,
@@ -63,7 +60,6 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
-        id: 'oeoe',
         $refType,
         username: 'toto',
         media: {

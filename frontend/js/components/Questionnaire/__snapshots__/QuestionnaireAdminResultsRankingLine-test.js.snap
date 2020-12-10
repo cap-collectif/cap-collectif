@@ -20,21 +20,6 @@ exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly empty rankin
   >
     0
   </td>
-  <td
-    key="3"
-  >
-    0
-  </td>
-  <td
-    key="4"
-  >
-    0
-  </td>
-  <td
-    key="5"
-  >
-    0
-  </td>
 </tr>
 `;
 
@@ -74,7 +59,7 @@ exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly half-filled 
   <td
     key="1"
   >
-    7897
+    0
   </td>
   <td
     key="2"
@@ -84,7 +69,7 @@ exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly half-filled 
   <td
     key="3"
   >
-    68
+    0
   </td>
   <td
     key="4"
@@ -94,7 +79,7 @@ exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly half-filled 
   <td
     key="5"
   >
-    403
+    0
   </td>
   <td
     key="6"

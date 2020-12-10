@@ -36,7 +36,6 @@ export class ProjectTrashProposal extends React.Component<Props> {
               $count: Int
             ) {
               project: node(id: $projectId) {
-                id
                 ...ProposalTrashedListPaginated_project
                   @arguments(
                     count: $count

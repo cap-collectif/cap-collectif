@@ -93,7 +93,6 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMain
       ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       currentVotableStep {
-        id
         votesRanking
         voteType
         voteThreshold

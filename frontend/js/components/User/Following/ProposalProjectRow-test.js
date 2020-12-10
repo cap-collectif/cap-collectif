@@ -21,7 +21,6 @@ describe('<ProposalProjectRow />', () => {
   const viewer = {
     $refType,
     followingProposals: {
-      totalCount: 3,
       edges: [
         {
           node: {

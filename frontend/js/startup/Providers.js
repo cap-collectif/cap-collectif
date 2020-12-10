@@ -19,7 +19,7 @@ class Providers extends React.Component<Props> {
     const { children } = this.props;
 
     if (window.sentryDsn) {
-      Sentry.configureScope(function(scope) {
+      Sentry.configureScope(scope => {
         scope.setTag('request_locale', window.locale);
         scope.setTag('request_timezone', window.timeZone);
 

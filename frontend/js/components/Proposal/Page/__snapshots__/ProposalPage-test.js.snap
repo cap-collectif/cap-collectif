@@ -2998,13 +2998,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "kind": "ScalarField",
-                          "name": "donatorsCount",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
                           "concreteType": "ProposalTopDonator",
                           "kind": "LinkedField",
                           "name": "topDonators",
@@ -3171,6 +3164,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
+                              "name": "donatorsCount",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
                               "name": "donationTotalCount",
                               "storageKey": null,
                             },
@@ -3296,13 +3296,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                           "alias": null,
                                           "args": null,
                                           "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
                                           "name": "url",
                                           "storageKey": null,
                                         },
@@ -3350,6 +3343,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                           "args": null,
                                           "kind": "ScalarField",
                                           "name": "displayName",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
                                           "storageKey": null,
                                         },
                                         Object {
@@ -3454,13 +3454,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                       "alias": null,
                                                       "args": null,
                                                       "kind": "ScalarField",
-                                                      "name": "id",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
@@ -3494,6 +3487,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "id",
                                                       "storageKey": null,
                                                     },
                                                     Object {
@@ -6131,13 +6131,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "bodyText",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
                                           "concreteType": "User",
                                           "kind": "LinkedField",
                                           "name": "author",
@@ -6511,13 +6504,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                           ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "slug",
                           "storageKey": null,
                         },
                         Object {
@@ -6942,7 +6928,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6d28450954d43f5fa8c4015ac538c6c3",
+          "cacheID": "457a9d204e08049d462ed069a85f2c63",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8011,7 +7997,6 @@ fragment ProposalPageDiscussions_proposal on Proposal {
 fragment ProposalPageDonators_proposal on Proposal {
   title
   tipsmeee {
-    donatorsCount
     topDonators {
       name
       amount
@@ -8216,11 +8201,11 @@ fragment ProposalPageMainAside_proposal_zqPYL on Proposal {
   ...ProposalPageVoteThreshold_proposal_2r3fA4
   currentVotableStep {
     __typename
-    id
     votesRanking
     voteType
     voteThreshold
     ...ProposalPageVoteThreshold_step
+    id
   }
   form {
     usingCategories
@@ -8524,7 +8509,6 @@ fragment ProposalRevisionModalForm_proposal on Proposal {
         id
         reason
         createdAt
-        bodyText
         author {
           username
           id
@@ -8584,7 +8568,6 @@ fragment ProposalUserVoteItem_step on ProposalStep {
   open
   voteType
   votesRanking
-  votesLimit
   form {
     objectType
     id
@@ -8686,7 +8669,6 @@ fragment ProposalViewDecisionPanel_proposal on Proposal {
 
 fragment ProposalVoteBasketWidget_step on ProposalStep {
   __isProposalStep: __typename
-  id
   viewerVotes(orderBy: {field: POSITION, direction: ASC}) {
     totalCount
   }
@@ -8708,10 +8690,8 @@ fragment ProposalVoteBasketWidget_step on ProposalStep {
 }
 
 fragment ProposalVoteBasketWidget_viewer_2r3fA4 on User {
-  id
   proposalVotes(stepId: $stepId) {
     totalCount
-    creditsLeft
     creditsSpent
   }
 }
@@ -8829,9 +8809,7 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
 fragment ProposalsUserVotesTable_step on ProposalStep {
   __isProposalStep: __typename
   id
-  slug
   votesRanking
-  votesLimit
   viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
     totalCount
   }
@@ -8908,7 +8886,6 @@ fragment UnpublishedTooltip_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {
@@ -8918,7 +8895,6 @@ fragment UserAvatar_user on User {
 }
 
 fragment UserBox_user on User {
-  id
   ...UserPreview_user
 }
 
@@ -8951,7 +8927,6 @@ fragment UserPreview_user on User {
 
 fragment VoteButtonOverlay_step on ProposalStep {
   __isProposalStep: __typename
-  id
   votesLimit
 }
 

@@ -38,14 +38,14 @@ export class VoteListProfile extends Component<Props, State> {
     const { voteList, relay } = this.props;
     const { loading } = this.state;
 
-    if (!voteList.votes.edges || voteList.votes.edges.length === 0) {
+    if (voteList.votes.totalCount === 0) {
       return null;
     }
 
     return (
       <ListGroup bsClass="media-list" componentClass="ul">
         {voteList.votes.edges
-          .filter(Boolean)
+          ?.filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
           .map(vote => (

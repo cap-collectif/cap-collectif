@@ -3,24 +3,25 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { QuestionnaireAdminResultsRanking } from './QuestionnaireAdminResultsRanking';
-import { $refType } from '../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<QuestionnaireAdminResultsRanking />', () => {
   const props = {
     $refType,
     choices: {
+      totalCount: 4,
       edges: [
         {
-          node: { title: 'choix1', ranking: [] },
+          node: { id: 'choix1', $fragmentRefs },
         },
         {
-          node: { title: 'choix2', ranking: [] },
+          node: { id: 'choix2', $fragmentRefs },
         },
         {
-          node: { title: 'choix3', ranking: [] },
+          node: { id: 'choix3', $fragmentRefs },
         },
         {
-          node: { title: 'choix4', ranking: [] },
+          node: { id: 'choix4', $fragmentRefs },
         },
       ],
     },

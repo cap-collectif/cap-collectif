@@ -2,14 +2,13 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 import { Reply } from './Reply';
 
 const baseReply = {
   $refType,
   author: {
     $fragmentRefs,
-    vip: true,
   },
   createdAt: '2019-03-08 00:00:00',
   questionnaire: {

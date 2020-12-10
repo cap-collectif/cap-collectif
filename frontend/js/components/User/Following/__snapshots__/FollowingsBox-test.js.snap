@@ -64,13 +64,6 @@ exports[`<FollowingsBox /> render 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "kind": "ScalarField",
-                      "name": "totalCount",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
                       "concreteType": "ProposalEdge",
                       "kind": "LinkedField",
                       "name": "edges",
@@ -159,7 +152,7 @@ exports[`<FollowingsBox /> render 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "4a40df871138d73ebd6d3b6d93647b75",
+          "cacheID": "44072dd8180eb1a93e74d55c451d145b",
           "id": null,
           "metadata": Object {},
           "name": "FollowingsBoxQuery",
@@ -173,7 +166,6 @@ exports[`<FollowingsBox /> render 1`] = `
 
 fragment FollowingsProposals_viewer on User {
   followingProposals(first: 1000) {
-    totalCount
     edges {
       node {
         id

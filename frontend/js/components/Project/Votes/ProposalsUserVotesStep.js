@@ -141,13 +141,9 @@ export default createFragmentContainer(container, {
       ...VoteMinAlert_step
       id
       title
-      voteType
-      votesMin
       votesHelpText
-      open
       slug
       url
-      votesRanking
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes

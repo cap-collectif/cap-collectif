@@ -19,10 +19,10 @@ export class StepPageHeader extends React.Component<Props> {
 
     return (
       step &&
-      (step.type === 'consultation' ||
-        step.type === 'collect' ||
-        step.type === 'questionnaire' ||
-        (step.type === 'selection' && step.votable === true))
+      (step.__typename === 'ConsultationStep' ||
+        step.__typename === 'CollectStep' ||
+        step.__typename === 'QuestionnaireStep' ||
+        (step.__typename === 'SelectionStep' && step.votable === true))
     );
   }
 
@@ -52,7 +52,7 @@ export class StepPageHeader extends React.Component<Props> {
               </div>
             )}
         </div>
-        {step.type === 'selection' && step.voteThreshold && step.voteThreshold > 0 ? (
+        {step.__typename === 'SelectionStep' && step.voteThreshold && step.voteThreshold > 0 ? (
           <h4 style={{ marginBottom: '20px' }}>
             <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }} />{' '}
             <FormattedMessage
@@ -76,12 +76,8 @@ export class StepPageHeader extends React.Component<Props> {
 export default createFragmentContainer(StepPageHeader, {
   step: graphql`
     fragment StepPageHeader_step on Step {
+      __typename
       body
-      ... on SelectionStep {
-        voteThreshold
-        votable
-        ...interpellationLabelHelper_step @relay(mask: false)
-      }
       state
       title
       timeless
@@ -89,7 +85,11 @@ export default createFragmentContainer(StepPageHeader, {
         startAt
         endAt
       }
-      type
+      ... on SelectionStep {
+        voteThreshold
+        votable
+        ...interpellationLabelHelper_step @relay(mask: false)
+      }
     }
   `,
 });

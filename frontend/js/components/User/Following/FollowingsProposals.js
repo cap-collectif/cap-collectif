@@ -52,11 +52,7 @@ export class FollowingsProposals extends Component<Props, State> {
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
             <Collapse style={{ float: 'right' }} in={open}>
-              <Button
-                id="unfollow-all"
-                onClick={() => {
-                  this.onUnfollowAll();
-                }}>
+              <Button id="unfollow-all" onClick={this.onUnfollowAll}>
                 <FormattedMessage id="unfollow-all" />
               </Button>
             </Collapse>
@@ -97,7 +93,6 @@ export default createFragmentContainer(FollowingsProposals, {
     fragment FollowingsProposals_viewer on User
       @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
       followingProposals(first: $count, after: $cursor) {
-        totalCount
         edges {
           node {
             id

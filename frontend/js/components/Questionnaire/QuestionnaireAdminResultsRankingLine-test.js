@@ -3,65 +3,65 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { QuestionnaireAdminResultsRankingLine } from './QuestionnaireAdminResultsRankingLine';
+import { $refType } from '~/mocks';
 
-describe('<QuestionnaireAdminResultsRankingLine />', () => {
-  const emptyRanking = {
+const baseProps = {
+  choice: {
+    $refType,
+    title: 'First choice',
+    ranking: [
+      { position: 1, responses: { totalCount: 98 } },
+      { position: 2, responses: { totalCount: 8 } },
+      { position: 3, responses: { totalCount: 3 } },
+    ],
+  },
+  choicesNumber: 3,
+};
+
+const props = {
+  emptyRanking: {
+    ...baseProps,
     choice: {
-      title: 'First choice',
+      ...baseProps.choice,
       ranking: [],
     },
-    choicesNumber: 6,
-  };
-
-  const halfFilledRanking = {
+  },
+  halfFilledRanking: {
+    ...baseProps,
     choice: {
-      title: 'First choice',
-      ranking: [
-        { position: 2, responses: { totalCount: 7897 } },
-        { position: 4, responses: { totalCount: 68 } },
-        { position: 6, responses: { totalCount: 403 } },
-      ],
+      ...baseProps.choice,
+      ranking: [],
     },
     choicesNumber: 7,
-  };
-
-  const oneRanking = {
+  },
+  oneRanking: {
+    ...baseProps,
     choice: {
-      title: 'First choice',
+      ...baseProps.choice,
       ranking: [{ position: 3, responses: { totalCount: 7897 } }],
     },
-    choicesNumber: 3,
-  };
+  },
+  fullRanking: baseProps,
+};
 
-  const fullRanking = {
-    choice: {
-      title: 'First choice',
-      ranking: [
-        { position: 1, responses: { totalCount: 98 } },
-        { position: 2, responses: { totalCount: 8 } },
-        { position: 3, responses: { totalCount: 3 } },
-      ],
-    },
-    choicesNumber: 3,
-  };
-
+describe('<QuestionnaireAdminResultsRankingLine />', () => {
   it('renders correctly empty ranking', () => {
-    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...emptyRanking} />);
+    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...props.emptyRanking} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly half-filled ranking', () => {
-    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...halfFilledRanking} />);
+    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...props.halfFilledRanking} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly one ranking', () => {
-    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...oneRanking} />);
+    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...props.oneRanking} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly full ranking', () => {
-    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...fullRanking} />);
+    const wrapper = shallow(<QuestionnaireAdminResultsRankingLine {...props.fullRanking} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

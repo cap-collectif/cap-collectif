@@ -306,7 +306,6 @@ export default createFragmentContainer(
   {
     step: graphql`
       fragment ProposalVoteBasketWidget_step on ProposalStep {
-        id
         viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
           totalCount
         }
@@ -320,10 +319,8 @@ export default createFragmentContainer(
     viewer: graphql`
       fragment ProposalVoteBasketWidget_viewer on User
         @argumentDefinitions(stepId: { type: "ID!" }) {
-        id
         proposalVotes(stepId: $stepId) {
           totalCount
-          creditsLeft
           creditsSpent
         }
       }

@@ -3,14 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectHeaderAuthors } from './ProjectHeaderAuthors';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<ProjectHeaderAuthors />', () => {
   it('renders correctly with one author', () => {
     const props = {
       project: {
         $refType,
-        id: '1',
         authors: [
           {
             $fragmentRefs,
@@ -29,7 +28,6 @@ describe('<ProjectHeaderAuthors />', () => {
     const props = {
       project: {
         $refType,
-        id: '1',
         authors: [],
       },
       profilesToggle: true,
@@ -42,7 +40,6 @@ describe('<ProjectHeaderAuthors />', () => {
     const props = {
       project: {
         $refType,
-        id: '1',
         authors: [
           {
             $fragmentRefs,
@@ -71,7 +68,6 @@ describe('<ProjectHeaderAuthors />', () => {
     const props = {
       project: {
         $refType,
-        id: '1',
         authors: [
           {
             $fragmentRefs,
@@ -95,7 +91,6 @@ describe('<ProjectHeaderAuthors />', () => {
     const props = {
       project: {
         $refType,
-        id: '1',
         authors: [
           {
             $fragmentRefs,
@@ -114,7 +109,6 @@ describe('<ProjectHeaderAuthors />', () => {
     const props = {
       project: {
         $refType,
-        id: '1',
         authors: [
           {
             $fragmentRefs,

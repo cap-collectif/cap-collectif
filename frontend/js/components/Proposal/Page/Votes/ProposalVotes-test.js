@@ -24,7 +24,6 @@ describe('<ProposalVotes />', () => {
           { cursor: 'N0aW9uOjE=', node: { author: { id: 'userJean', $fragmentRefs } } },
         ],
         totalCount: 2,
-        totalPointsCount: 0,
         pageInfo: {
           endCursor: 'cursor1',
           hasNextPage: true,
@@ -55,7 +54,6 @@ describe('<ProposalVotes />', () => {
           { cursor: 'N0aW9uOjE=', node: { author: { id: 'userJean', $fragmentRefs } } },
         ],
         totalCount: 2,
-        totalPointsCount: 3,
         pageInfo: {
           endCursor: 'cursor1',
           hasNextPage: true,

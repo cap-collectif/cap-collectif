@@ -16,7 +16,7 @@ const mutation = graphql`
         steps {
           id
           body
-          type
+          type: __typename
           title
           timeRange {
             startAt

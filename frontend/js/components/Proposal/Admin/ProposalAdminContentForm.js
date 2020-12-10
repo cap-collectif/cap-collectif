@@ -38,7 +38,6 @@ import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
 import { styleGuideColors } from '~/utils/colors';
 import { pxToRem } from '~/utils/styles/mixins';
 
-type ProposalForm = ProposalForm_proposalForm;
 type FormValues = {|
   media: ?{ id: Uuid },
   responses: ResponsesInReduxForm,
@@ -127,7 +126,9 @@ const onSubmit = (
 
 export const checkProposalContent = (
   values: FormValues | FrontendFormValues,
-  proposalForm: ProposalForm,
+  proposalForm:
+    | ProposalForm_proposalForm
+    | $PropertyType<ProposalAdminContentForm_proposal, 'form'>,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
@@ -186,7 +187,7 @@ const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
-  proposalForm: ProposalForm,
+  proposalForm: ProposalForm_proposalForm,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
@@ -236,7 +237,7 @@ export const validateProposalContent = (
 
 export const warnProposalContent = (
   values: FormValues | FrontendFormValues,
-  proposalForm: ProposalForm,
+  proposalForm: ProposalForm_proposalForm,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
@@ -404,7 +405,8 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               target="_blank"
               rel="noopener noreferrer"
               href={intl.formatMessage({ id: 'admin.help.link.proposal.body' })}>
-              <i className="fa fa-info-circle" /> Aide
+              <i className="fa fa-info-circle" />
+              {intl.formatMessage({ id: 'global.help' })}
             </a>
           </div>
           <div className="box-content box-content__content-form">
@@ -518,7 +520,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 placeholder="proposal.map.form.placeholder"
                 addressProps={{
                   getAddress: (addressComplete: ?AddressComplete) =>
-                    change('address', addressComplete ? JSON.stringify([addressComplete]) : addressComplete),
+                    change(
+                      'address',
+                      addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
+                    ),
                 }}
               />
             )}
@@ -696,11 +701,6 @@ export default createFragmentContainer(container, {
       }
       form {
         id
-        description
-        step {
-          id
-          ...interpellationLabelHelper_step @relay(mask: false)
-        }
         districts {
           id
           name
@@ -718,25 +718,11 @@ export default createFragmentContainer(container, {
         usingSummary
         descriptionMandatory
         districtMandatory
-        districtHelpText
         usingThemes
         themeMandatory
         usingCategories
         categoryMandatory
-        categoryHelpText
         usingAddress
-        titleHelpText
-        summaryHelpText
-        themeHelpText
-        illustrationHelpText
-        usingIllustration
-        suggestingSimilarProposals
-        objectType
-        descriptionHelpText
-        addressHelpText
-        proposalInAZoneRequired
-        usingTipsmeee
-        tipsmeeeHelpText
       }
     }
   `,

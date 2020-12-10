@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalUserVoteItem } from './ProposalUserVoteItem';
-import { $refType, $fragmentRefs, intlMock } from '../../../mocks';
+import { $refType, $fragmentRefs, intlMock } from '~/mocks';
 
 describe('<ProposalUserVoteItem />', () => {
   const vote = {
@@ -31,7 +31,6 @@ describe('<ProposalUserVoteItem />', () => {
         title: 'global.consultation',
       },
     },
-    votesLimit: 3,
     $refType,
   };
 
@@ -66,7 +65,6 @@ describe('<ProposalUserVoteItem />', () => {
         title: 'project.types.interpellation',
       },
     },
-    votesLimit: null,
     $refType,
   };
 

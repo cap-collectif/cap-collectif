@@ -363,9 +363,7 @@ export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalsUserVotesTable_step on ProposalStep {
       id
-      slug
       votesRanking
-      votesLimit
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
       }

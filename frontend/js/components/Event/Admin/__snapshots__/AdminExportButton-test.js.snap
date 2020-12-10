@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalCreateFusionButton /> should render correctly 1`] = `
+exports[`<AdminExportButton /> should render correctly 1`] = `
 <div>
   <a
     className="mt-10 btn btn-default"

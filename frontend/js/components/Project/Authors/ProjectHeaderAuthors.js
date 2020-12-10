@@ -133,7 +133,6 @@ export default connect(mapStateToProps)(
   createFragmentContainer(ProjectHeaderAuthors, {
     project: graphql`
       fragment ProjectHeaderAuthors_project on Project {
-        id
         authors {
           username
           url

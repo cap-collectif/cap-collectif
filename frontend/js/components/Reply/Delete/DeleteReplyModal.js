@@ -6,9 +6,9 @@ import { Modal } from 'react-bootstrap';
 import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graphql';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import DeleteReplyMutation from '../../../mutations/DeleteReplyMutation';
-import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
+import DeleteReplyMutation from '~/mutations/DeleteReplyMutation';
+import { UPDATE_ALERT } from '~/constants/AlertConstants';
 
 type Props = {
   reply: DeleteReplyModal_reply,
@@ -63,9 +63,7 @@ export class DeleteReplyModal extends React.Component<Props, State> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            <FormattedMessage id="reply.delete.confirm" />
-          </p>
+          <FormattedMessage id="reply.delete.confirm" tagName="p" />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -87,9 +85,6 @@ export default createFragmentContainer(DeleteReplyModal, {
   reply: graphql`
     fragment DeleteReplyModal_reply on Reply {
       id
-      questionnaire {
-        id
-      }
     }
   `,
 });

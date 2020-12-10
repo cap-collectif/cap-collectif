@@ -50,7 +50,6 @@ const FRAGMENT = graphql`
   fragment ProposalPageDonators_proposal on Proposal {
     title
     tipsmeee {
-      donatorsCount
       topDonators {
         name
         amount

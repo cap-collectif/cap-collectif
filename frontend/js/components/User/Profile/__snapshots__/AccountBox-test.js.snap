@@ -1,145 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AccountBox /> should render a disabled button when the form is invalid 1`] = `
-<Fragment>
-  <Uncontrolled(Panel)>
-    <PanelHeading
+<Uncontrolled(Panel)>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
       bsClass="panel"
       componentClass="div"
     >
-      <PanelTitle
-        bsClass="panel"
-        componentClass="div"
+      <div
+        className="panel-heading profile-header"
       >
-        <div
-          className="panel-heading profile-header"
-        >
-          <h1>
-            <FormattedMessage
-              id="profile.account.title"
-              values={Object {}}
-            />
-          </h1>
-        </div>
-      </PanelTitle>
-    </PanelHeading>
-    <Relay(Connect(injectIntl(ReduxForm)))
-      languageList={
-        Array [
-          Object {
-            "code": "fr-FR",
-            "translationKey": "french",
-          },
-          Object {
-            "code": "en-GB",
-            "translationKey": "english",
-          },
-        ]
-      }
-      loginWithOpenId={false}
-      viewer={
+        <FormattedMessage
+          id="profile.account.title"
+          tagName="h1"
+          values={Object {}}
+        />
+      </div>
+    </PanelTitle>
+  </PanelHeading>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    languageList={
+      Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-        }
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
+    loginWithOpenId={false}
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
       }
-    />
-  </Uncontrolled(Panel)>
-</Fragment>
+    }
+  />
+</Uncontrolled(Panel)>
 `;
 
 exports[`<AccountBox /> should render a disabled button when the form is submitting 1`] = `
-<Fragment>
-  <Uncontrolled(Panel)>
-    <PanelHeading
+<Uncontrolled(Panel)>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
       bsClass="panel"
       componentClass="div"
     >
-      <PanelTitle
-        bsClass="panel"
-        componentClass="div"
+      <div
+        className="panel-heading profile-header"
       >
-        <div
-          className="panel-heading profile-header"
-        >
-          <h1>
-            <FormattedMessage
-              id="profile.account.title"
-              values={Object {}}
-            />
-          </h1>
-        </div>
-      </PanelTitle>
-    </PanelHeading>
-    <Relay(Connect(injectIntl(ReduxForm)))
-      languageList={
-        Array [
-          Object {
-            "code": "fr-FR",
-            "translationKey": "french",
-          },
-          Object {
-            "code": "en-GB",
-            "translationKey": "english",
-          },
-        ]
-      }
-      loginWithOpenId={false}
-      viewer={
+        <FormattedMessage
+          id="profile.account.title"
+          tagName="h1"
+          values={Object {}}
+        />
+      </div>
+    </PanelTitle>
+  </PanelHeading>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    languageList={
+      Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-        }
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
+    loginWithOpenId={false}
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
       }
-    />
-  </Uncontrolled(Panel)>
-</Fragment>
+    }
+  />
+</Uncontrolled(Panel)>
 `;
 
 exports[`<AccountBox /> should render and enabled button when the form is valid 1`] = `
-<Fragment>
-  <Uncontrolled(Panel)>
-    <PanelHeading
+<Uncontrolled(Panel)>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
       bsClass="panel"
       componentClass="div"
     >
-      <PanelTitle
-        bsClass="panel"
-        componentClass="div"
+      <div
+        className="panel-heading profile-header"
       >
-        <div
-          className="panel-heading profile-header"
-        >
-          <h1>
-            <FormattedMessage
-              id="profile.account.title"
-              values={Object {}}
-            />
-          </h1>
-        </div>
-      </PanelTitle>
-    </PanelHeading>
-    <Relay(Connect(injectIntl(ReduxForm)))
-      languageList={
-        Array [
-          Object {
-            "code": "fr-FR",
-            "translationKey": "french",
-          },
-          Object {
-            "code": "en-GB",
-            "translationKey": "english",
-          },
-        ]
-      }
-      loginWithOpenId={false}
-      viewer={
+        <FormattedMessage
+          id="profile.account.title"
+          tagName="h1"
+          values={Object {}}
+        />
+      </div>
+    </PanelTitle>
+  </PanelHeading>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    languageList={
+      Array [
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-        }
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
+    loginWithOpenId={false}
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
       }
-    />
-  </Uncontrolled(Panel)>
-</Fragment>
+    }
+  />
+</Uncontrolled(Panel)>
 `;

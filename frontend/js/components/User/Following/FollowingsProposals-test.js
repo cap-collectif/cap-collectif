@@ -3,13 +3,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FollowingsProposals } from './FollowingsProposals';
-import { $refType } from '../../../mocks';
+import { $refType } from '~/mocks';
 
 describe('<FollowingsProposals />', () => {
   const viewer = {
     $refType,
     followingProposals: {
-      totalCount: 3,
       edges: [
         {
           node: {

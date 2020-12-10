@@ -304,7 +304,6 @@ export default createFragmentContainer(container, {
             id
             reason
             createdAt
-            bodyText
             author {
               username
             }

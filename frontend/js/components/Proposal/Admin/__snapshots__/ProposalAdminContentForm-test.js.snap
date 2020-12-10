@@ -23,7 +23,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "id": "1",
         },
         "form": Object {
-          "addressHelpText": "Address Help",
           "categories": Array [
             Object {
               "id": "1",
@@ -34,18 +33,11 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
               "name": "category-2",
             },
           ],
-          "categoryHelpText": "Category Help",
           "categoryMandatory": true,
-          "description": "Description",
-          "descriptionHelpText": "Description Help",
           "descriptionMandatory": true,
-          "districtHelpText": "District Help",
           "districtMandatory": true,
           "districts": Array [],
           "id": "form1",
-          "illustrationHelpText": "Illustration Help",
-          "objectType": "PROPOSAL",
-          "proposalInAZoneRequired": true,
           "questions": Array [
             Object {
               "__typename": "SimpleQuestion",
@@ -73,28 +65,13 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
               "validationRule": null,
             },
           ],
-          "step": Object {
-            "id": "step1",
-            "project": Object {
-              "type": Object {
-                "title": "global.consultation",
-              },
-            },
-          },
-          "suggestingSimilarProposals": true,
-          "summaryHelpText": "Summary Help",
-          "themeHelpText": "Theme Help",
           "themeMandatory": true,
-          "tipsmeeeHelpText": null,
-          "titleHelpText": "Title help",
           "usingAddress": true,
           "usingCategories": true,
           "usingDescription": true,
           "usingDistrict": true,
-          "usingIllustration": true,
           "usingSummary": true,
           "usingThemes": true,
-          "usingTipsmeee": false,
         },
         "id": "1",
         "media": Object {
@@ -237,7 +214,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         <i
           className="fa fa-info-circle"
         />
-         Aide
+        global.help
       </a>
     </div>
     <div
@@ -488,7 +465,6 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "id": "1",
         },
         "form": Object {
-          "addressHelpText": "Address Help",
           "categories": Array [
             Object {
               "id": "1",
@@ -499,18 +475,11 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
               "name": "category-2",
             },
           ],
-          "categoryHelpText": "Category Help",
           "categoryMandatory": true,
-          "description": "Description",
-          "descriptionHelpText": "Description Help",
           "descriptionMandatory": true,
-          "districtHelpText": "District Help",
           "districtMandatory": true,
           "districts": Array [],
           "id": "form1",
-          "illustrationHelpText": "Illustration Help",
-          "objectType": "PROPOSAL",
-          "proposalInAZoneRequired": true,
           "questions": Array [
             Object {
               "__typename": "SimpleQuestion",
@@ -538,28 +507,13 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
               "validationRule": null,
             },
           ],
-          "step": Object {
-            "id": "step1",
-            "project": Object {
-              "type": Object {
-                "title": "global.consultation",
-              },
-            },
-          },
-          "suggestingSimilarProposals": true,
-          "summaryHelpText": "Summary Help",
-          "themeHelpText": "Theme Help",
           "themeMandatory": true,
-          "tipsmeeeHelpText": null,
-          "titleHelpText": "Title help",
           "usingAddress": true,
           "usingCategories": true,
           "usingDescription": true,
           "usingDistrict": true,
-          "usingIllustration": true,
           "usingSummary": true,
           "usingThemes": true,
-          "usingTipsmeee": false,
         },
         "id": "1",
         "media": Object {
@@ -702,7 +656,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         <i
           className="fa fa-info-circle"
         />
-         Aide
+        global.help
       </a>
     </div>
     <div
@@ -936,7 +890,6 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                 "id": "1",
               },
               "form": Object {
-                "addressHelpText": "Address Help",
                 "categories": Array [
                   Object {
                     "id": "1",
@@ -947,18 +900,11 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                     "name": "category-2",
                   },
                 ],
-                "categoryHelpText": "Category Help",
                 "categoryMandatory": true,
-                "description": "Description",
-                "descriptionHelpText": "Description Help",
                 "descriptionMandatory": true,
-                "districtHelpText": "District Help",
                 "districtMandatory": true,
                 "districts": Array [],
                 "id": "form1",
-                "illustrationHelpText": "Illustration Help",
-                "objectType": "PROPOSAL",
-                "proposalInAZoneRequired": true,
                 "questions": Array [
                   Object {
                     "__typename": "SimpleQuestion",
@@ -986,28 +932,13 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                     "validationRule": null,
                   },
                 ],
-                "step": Object {
-                  "id": "step1",
-                  "project": Object {
-                    "type": Object {
-                      "title": "global.consultation",
-                    },
-                  },
-                },
-                "suggestingSimilarProposals": true,
-                "summaryHelpText": "Summary Help",
-                "themeHelpText": "Theme Help",
                 "themeMandatory": true,
-                "tipsmeeeHelpText": null,
-                "titleHelpText": "Title help",
                 "usingAddress": true,
                 "usingCategories": true,
                 "usingDescription": true,
                 "usingDistrict": true,
-                "usingIllustration": true,
                 "usingSummary": true,
                 "usingThemes": true,
-                "usingTipsmeee": false,
               },
               "id": "1",
               "media": Object {

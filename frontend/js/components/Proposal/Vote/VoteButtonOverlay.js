@@ -62,11 +62,7 @@ export class VoteButtonOverlay extends React.Component<Props> {
           }}
         />
       );
-      help = (
-        <span>
-          <FormattedMessage id="proposal.vote.popover.limit_reached_help" />
-        </span>
-      );
+      help = <FormattedMessage id="proposal.vote.popover.limit_reached_help" />;
     }
     const overlay = (
       <Popover id={popoverId} title={title}>
@@ -94,7 +90,6 @@ export class VoteButtonOverlay extends React.Component<Props> {
 export default createFragmentContainer(VoteButtonOverlay, {
   step: graphql`
     fragment VoteButtonOverlay_step on ProposalStep {
-      id
       votesLimit
     }
   `,

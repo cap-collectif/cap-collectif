@@ -502,81 +502,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                               "name": "id",
                               "storageKey": null,
                             },
-                            Object {
-                              "abstractKey": "__isProposalStep",
-                              "kind": "InlineFragment",
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "ProposalForm",
-                                  "kind": "LinkedField",
-                                  "name": "form",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "objectType",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "Project",
-                                  "kind": "LinkedField",
-                                  "name": "project",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "concreteType": "ProjectType",
-                                      "kind": "LinkedField",
-                                      "name": "type",
-                                      "plural": false,
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "title",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                              ],
-                              "type": "ProposalStep",
-                            },
                           ],
                           "storageKey": null,
                         },
@@ -585,13 +510,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "description",
                           "storageKey": null,
                         },
                         Object {
@@ -1213,13 +1131,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "districtHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "usingThemes",
                           "storageKey": null,
                         },
@@ -1248,98 +1159,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "categoryHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "usingAddress",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "titleHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "summaryHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "themeHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "illustrationHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "usingIllustration",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "suggestingSimilarProposals",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "objectType",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "descriptionHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "addressHelpText",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "proposalInAZoneRequired",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "usingTipsmeee",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "tipsmeeeHelpText",
                           "storageKey": null,
                         },
                         Object {
@@ -2809,13 +2629,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                     Object {
                                       "alias": null,
                                       "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "bodyText",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
                                       "concreteType": "User",
                                       "kind": "LinkedField",
                                       "name": "author",
@@ -2912,7 +2725,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "27f19ec5a75238aaed3211b913f8fbd2",
+          "cacheID": "5d1aaad13a719775489f2af81b898084",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2993,24 +2806,6 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
   }
   form {
     id
-    description
-    step {
-      id
-      ... on ProposalStep {
-        __isProposalStep: __typename
-        form {
-          objectType
-          id
-        }
-        project {
-          type {
-            title
-            id
-          }
-          id
-        }
-      }
-    }
     districts {
       id
       name
@@ -3107,25 +2902,11 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
     usingSummary
     descriptionMandatory
     districtMandatory
-    districtHelpText
     usingThemes
     themeMandatory
     usingCategories
     categoryMandatory
-    categoryHelpText
     usingAddress
-    titleHelpText
-    summaryHelpText
-    themeHelpText
-    illustrationHelpText
-    usingIllustration
-    suggestingSimilarProposals
-    objectType
-    descriptionHelpText
-    addressHelpText
-    proposalInAZoneRequired
-    usingTipsmeee
-    tipsmeeeHelpText
   }
 }
 
@@ -3440,7 +3221,6 @@ fragment ProposalRevisionModalForm_proposal on Proposal {
         id
         reason
         createdAt
-        bodyText
         author {
           username
           id
@@ -3465,7 +3245,6 @@ fragment ProposalRevision_proposal on Proposal {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {
@@ -3475,7 +3254,6 @@ fragment UserAvatar_user on User {
 }
 
 fragment UserBox_user on User {
-  id
   ...UserPreview_user
 }
 

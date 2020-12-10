@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminContentForm, checkProposalContent } from './ProposalAdminContentForm';
-import { features } from '../../../redux/modules/default';
-import { $refType, $fragmentRefs, intlMock, formMock } from '../../../mocks';
+import { features } from '~/redux/modules/default';
+import { $refType, $fragmentRefs, intlMock, formMock } from '~/mocks';
 
 describe('<ProposalAdminContentForm />', () => {
   const values = {
@@ -55,16 +55,7 @@ describe('<ProposalAdminContentForm />', () => {
       media: { id: '1', url: '' },
       form: {
         id: 'form1',
-        description: 'Description',
         districts: [],
-        step: {
-          id: 'step1',
-          project: {
-            type: {
-              title: 'global.consultation',
-            },
-          },
-        },
         categories: [
           { id: '1', name: 'category-1' },
           { id: '2', name: 'category-2' },
@@ -98,7 +89,6 @@ describe('<ProposalAdminContentForm />', () => {
         ],
         usingDistrict: true,
         districtMandatory: true,
-        districtHelpText: 'District Help',
         usingThemes: true,
         usingDescription: true,
         usingSummary: true,
@@ -106,20 +96,7 @@ describe('<ProposalAdminContentForm />', () => {
         descriptionMandatory: true,
         usingCategories: true,
         categoryMandatory: true,
-        categoryHelpText: 'Category Help',
         usingAddress: true,
-        titleHelpText: 'Title help',
-        summaryHelpText: 'Summary Help',
-        themeHelpText: 'Theme Help',
-        illustrationHelpText: 'Illustration Help',
-        descriptionHelpText: 'Description Help',
-        addressHelpText: 'Address Help',
-        proposalInAZoneRequired: true,
-        usingIllustration: true,
-        suggestingSimilarProposals: true,
-        objectType: 'PROPOSAL',
-        usingTipsmeee: false,
-        tipsmeeeHelpText: null,
       },
       author: {
         id: '1',
@@ -152,7 +129,7 @@ describe('<ProposalAdminContentForm />', () => {
           title:
             'bonjour-monsieur-quand-le-minimum-contributif-va-til-etre-revaloriser-significativement-ou-alors-nous-donner-laspa-qui-va-etre-a-900-euros-notre-complementaire-nous-lavons-grace-a-notre-travail-on-devrait-avoir-laspa-notre-complementaire-car-le-minimum-co',
         },
-        { ...props.proposal.form, $refType },
+        { ...props.proposal.form },
         features,
         intlMock,
         true,

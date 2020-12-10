@@ -65,45 +65,45 @@ exports[`<QuestionnaireAdminResultsRanking /> renders correctly 1`] = `
     </tr>
   </thead>
   <tbody>
-    <QuestionnaireAdminResultsRankingLine
+    <Relay(QuestionnaireAdminResultsRankingLine)
       choice={
         Object {
-          "ranking": Array [],
-          "title": "choix1",
+          "$fragmentRefs": null,
+          "id": "choix1",
         }
       }
       choicesNumber={4}
-      key="0"
+      key="choix1"
     />
-    <QuestionnaireAdminResultsRankingLine
+    <Relay(QuestionnaireAdminResultsRankingLine)
       choice={
         Object {
-          "ranking": Array [],
-          "title": "choix2",
+          "$fragmentRefs": null,
+          "id": "choix2",
         }
       }
       choicesNumber={4}
-      key="1"
+      key="choix2"
     />
-    <QuestionnaireAdminResultsRankingLine
+    <Relay(QuestionnaireAdminResultsRankingLine)
       choice={
         Object {
-          "ranking": Array [],
-          "title": "choix3",
+          "$fragmentRefs": null,
+          "id": "choix3",
         }
       }
       choicesNumber={4}
-      key="2"
+      key="choix3"
     />
-    <QuestionnaireAdminResultsRankingLine
+    <Relay(QuestionnaireAdminResultsRankingLine)
       choice={
         Object {
-          "ranking": Array [],
-          "title": "choix4",
+          "$fragmentRefs": null,
+          "id": "choix4",
         }
       }
       choicesNumber={4}
-      key="3"
+      key="choix4"
     />
   </tbody>
 </Table>

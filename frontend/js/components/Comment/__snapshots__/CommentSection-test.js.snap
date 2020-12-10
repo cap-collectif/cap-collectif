@@ -238,13 +238,6 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -292,6 +285,13 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "displayName",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -396,13 +396,6 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
-                                                  "name": "id",
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
                                                   "name": "url",
                                                   "storageKey": null,
                                                 },
@@ -436,6 +429,13 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "id",
                                                   "storageKey": null,
                                                 },
                                                 Object {
@@ -997,7 +997,7 @@ exports[`<CommentSection /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0d2fac737813ebf9e4c49764bd0f8915",
+          "cacheID": "edd6394be0ad62412d47ba5a089b4f4d",
           "id": null,
           "metadata": Object {},
           "name": "CommentSectionQuery",
@@ -1188,7 +1188,6 @@ fragment UnpublishedTooltip_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {

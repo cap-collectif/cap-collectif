@@ -466,13 +466,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "url",
                               "storageKey": null,
                             },
@@ -488,6 +481,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -916,13 +916,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "url",
                               "storageKey": null,
                             },
@@ -938,6 +931,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -1489,13 +1489,6 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -1511,6 +1504,13 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "displayName",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -1617,7 +1617,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6e9d4507a7f3d9b7a675eaec7aaa97fa",
+          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -1844,7 +1844,6 @@ fragment TagUser_user on User {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {
@@ -2351,13 +2350,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "url",
                               "storageKey": null,
                             },
@@ -2373,6 +2365,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -2801,13 +2800,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "url",
                               "storageKey": null,
                             },
@@ -2823,6 +2815,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -3374,13 +3373,6 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -3396,6 +3388,13 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "displayName",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -3502,7 +3501,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6e9d4507a7f3d9b7a675eaec7aaa97fa",
+          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -3729,7 +3728,6 @@ fragment TagUser_user on User {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {
@@ -4236,13 +4234,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "url",
                               "storageKey": null,
                             },
@@ -4258,6 +4249,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -4686,13 +4684,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "url",
                               "storageKey": null,
                             },
@@ -4708,6 +4699,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -5259,13 +5257,6 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -5281,6 +5272,13 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "displayName",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -5387,7 +5385,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6e9d4507a7f3d9b7a675eaec7aaa97fa",
+          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -5614,7 +5612,6 @@ fragment TagUser_user on User {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {

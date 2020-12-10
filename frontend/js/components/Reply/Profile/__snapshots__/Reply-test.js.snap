@@ -18,7 +18,6 @@ exports[`<Reply /> should render correctly with step 1`] = `
         user={
           Object {
             "$fragmentRefs": null,
-            "vip": true,
           }
         }
       />
@@ -38,7 +37,6 @@ exports[`<Reply /> should render correctly with step 1`] = `
             user={
               Object {
                 "$fragmentRefs": null,
-                "vip": true,
               }
             }
           />
@@ -94,7 +92,6 @@ exports[`<Reply /> should render correctly without step 1`] = `
         user={
           Object {
             "$fragmentRefs": null,
-            "vip": true,
           }
         }
       />
@@ -114,7 +111,6 @@ exports[`<Reply /> should render correctly without step 1`] = `
             user={
               Object {
                 "$fragmentRefs": null,
-                "vip": true,
               }
             }
           />

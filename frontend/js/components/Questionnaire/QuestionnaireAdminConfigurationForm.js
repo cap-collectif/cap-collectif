@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { change, Field, FieldArray, reduxForm, SubmissionError } from 'redux-form';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type QuestionsInReduxForm, submitQuestion } from '../../utils/submitQuestion';
+import { type QuestionsInReduxForm, submitQuestion } from '~/utils/submitQuestion';
 import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
@@ -359,7 +359,14 @@ const mapStateToProps = (state: State, props: RelayProps) => {
   const questionnaire = formatChoices(props.questionnaire);
   return {
     questionnaireResultsEnabled: state.default.features.new_feature_questionnaire_result,
-    initialValues: { ...questionnaire, id: undefined },
+    initialValues: {
+      title: questionnaire.title,
+      description: questionnaire.description,
+      notifyResponseCreate: questionnaire.notifyResponseCreate,
+      notifyResponseUpdate: questionnaire.notifyResponseUpdate,
+      notifyResponseDelete: questionnaire.notifyResponseDelete,
+      questions: questionnaire.questions,
+    },
   };
 };
 

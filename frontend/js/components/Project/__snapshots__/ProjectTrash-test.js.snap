@@ -332,13 +332,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
                                         "name": "url",
                                         "storageKey": null,
                                       },
@@ -386,6 +379,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -490,13 +490,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                     "alias": null,
                                                     "args": null,
                                                     "kind": "ScalarField",
-                                                    "name": "id",
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
                                                     "name": "url",
                                                     "storageKey": null,
                                                   },
@@ -530,6 +523,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "id",
                                                     "storageKey": null,
                                                   },
                                                   Object {
@@ -1768,7 +1768,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "f670a7821d562217b4444c8520822e0b",
+            "cacheID": "5696f9acde43e0f196b3658fd1779ce3",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -2123,7 +2123,6 @@ fragment UnpublishedTooltip_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {

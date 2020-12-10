@@ -61,13 +61,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "id",
-                  "storageKey": null,
-                },
-                Object {
                   "args": Array [
                     Object {
                       "kind": "Variable",
@@ -104,7 +97,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "24da2e986e164d759d895f63afa73323",
+        "hash": "231550074c436eb3bc0644437d56806c",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -858,7 +851,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9af437d59f0b2ea8e3c84f66692abc22",
+          "cacheID": "a6d0d64ad12453cdd31d8f8875805471",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -872,8 +865,8 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
 ) {
   project: node(id: $projectId) {
     __typename
-    id
     ...ProposalTrashedListPaginated_project_3shNSw
+    id
   }
 }
 
@@ -1053,7 +1046,6 @@ fragment UnpublishedLabel_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
-  id
   url
   username
   media {

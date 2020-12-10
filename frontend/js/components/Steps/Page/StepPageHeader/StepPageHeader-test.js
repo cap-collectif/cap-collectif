@@ -16,7 +16,7 @@ describe('<StepPageHeader />', () => {
     },
     state: 'OPENED',
     timeless: false,
-    type: 'consultation',
+    __typename: 'ConsultationStep',
   };
 
   it('should render correctly a consultationStep', () => {
@@ -34,7 +34,7 @@ describe('<StepPageHeader />', () => {
   });
 
   it('should render correctly a selectionStep', () => {
-    const step = { ...defaultStep, type: 'selection', voteThreshold: 1, votable: true };
+    const step = { ...defaultStep, __typename: 'SelectionStep', voteThreshold: 1, votable: true };
     const wrapper = shallow(<StepPageHeader step={step} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -42,7 +42,7 @@ describe('<StepPageHeader />', () => {
   it('should render correctly a selectionStep with interpellation', () => {
     const step = {
       ...defaultStep,
-      type: 'selection',
+      __typename: 'SelectionStep',
       voteThreshold: 1,
       votable: true,
       form: {
@@ -59,7 +59,7 @@ describe('<StepPageHeader />', () => {
   });
 
   it('should render correctly a questionnaireStep', () => {
-    const step = { ...defaultStep, type: 'questionnaire' };
+    const step = { ...defaultStep, __typename: 'QuestionnaireStep' };
     const wrapper = shallow(<StepPageHeader step={step} />);
     expect(wrapper).toMatchSnapshot();
   });

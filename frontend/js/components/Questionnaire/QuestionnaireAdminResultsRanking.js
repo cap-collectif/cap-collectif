@@ -10,8 +10,10 @@ type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsRanking_multipleChoiceQuestion,
 };
 
-export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
-  getHead = (choicesNumber: number) => {
+export const QuestionnaireAdminResultsRanking = ({ multipleChoiceQuestion }: Props) => {
+  const choicesNumber = multipleChoiceQuestion.choices?.totalCount || 0;
+
+  const getHead = () => {
     const tableHead = [];
 
     tableHead.push(
@@ -31,52 +33,39 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
     return tableHead;
   };
 
-  render() {
-    const { multipleChoiceQuestion } = this.props;
-
-    const choicesNumber =
-      multipleChoiceQuestion.choices && multipleChoiceQuestion.choices.edges
-        ? multipleChoiceQuestion.choices.edges.length
-        : 0;
-
-    return (
-      <Table hover>
-        <thead>
-          <tr>{this.getHead(choicesNumber)}</tr>
-        </thead>
-        <tbody>
-          {multipleChoiceQuestion.choices &&
-            multipleChoiceQuestion.choices.edges &&
-            multipleChoiceQuestion.choices.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map((choice, key) => (
-                <QuestionnaireAdminResultsRankingLine
-                  key={key}
-                  choice={choice}
-                  choicesNumber={choicesNumber}
-                />
-              ))}
-        </tbody>
-      </Table>
-    );
-  }
-}
+  return (
+    <Table hover>
+      <thead>
+        <tr>{getHead()}</tr>
+      </thead>
+      <tbody>
+        {multipleChoiceQuestion.choices &&
+          multipleChoiceQuestion.choices.edges &&
+          multipleChoiceQuestion.choices.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(choice => (
+              <QuestionnaireAdminResultsRankingLine
+                key={choice.id}
+                choice={choice}
+                choicesNumber={choicesNumber}
+              />
+            ))}
+      </tbody>
+    </Table>
+  );
+};
 
 export default createFragmentContainer(QuestionnaireAdminResultsRanking, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsRanking_multipleChoiceQuestion on MultipleChoiceQuestion {
       choices(allowRandomize: false) {
+        totalCount
         edges {
           node {
-            title
-            ranking {
-              position
-              responses {
-                totalCount
-              }
-            }
+            id
+            ...QuestionnaireAdminResultsRankingLine_choice
           }
         }
       }

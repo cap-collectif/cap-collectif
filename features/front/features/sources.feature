@@ -9,6 +9,7 @@ Scenario: User wants to add a source in a contribuable opinion
   And I wait "#source-form__add" to appear on current page
   Then I wait "opinion.no_new_source" to appear on current page in "#opinion-page-tabs-pane-sources"
   When I create a new source
+  And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.source" in the "#global-alert-box" element
   And I should see my new source
 

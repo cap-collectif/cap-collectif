@@ -86,7 +86,6 @@ export default createFragmentContainer(ProposalProjectRow, {
     fragment ProposalProjectRow_viewer on User
       @argumentDefinitions(count: { type: "Int", defaultValue: 1000 }, cursor: { type: "String" }) {
       followingProposals(first: $count, after: $cursor) {
-        totalCount
         edges {
           node {
             ...ProposalRow_proposal

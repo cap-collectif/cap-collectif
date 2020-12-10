@@ -238,7 +238,6 @@ export default createFragmentContainer(container, {
       open
       voteType
       votesRanking
-      votesLimit
       ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,

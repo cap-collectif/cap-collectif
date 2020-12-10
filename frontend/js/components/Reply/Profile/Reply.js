@@ -74,7 +74,6 @@ export default createFragmentContainer(Reply, {
         }
       }
       author {
-        vip
         ...UserAvatar_user
         ...UserLink_user
       }

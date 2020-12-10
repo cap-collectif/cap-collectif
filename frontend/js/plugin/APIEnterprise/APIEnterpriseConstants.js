@@ -123,6 +123,7 @@ const dispatchFromApi = (
       if (responseNumber) {
         const isModificable = isFieldModificableIfNoResult(responseNumber, formId);
         if (!isModificable) {
+          // eslint-disable-next-line no-console
           console.warn(`Skipped ${responseNumber} because not modificable.`);
           return;
         }

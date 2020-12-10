@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalVoteBasketWidget } from './ProposalVoteBasketWidget';
-import { relayRefetchMock as relay, $refType } from '../../../mocks';
+import { relayRefetchMock as relay, $refType } from '~/mocks';
 import { features } from '~/redux/modules/default';
 
 describe('<ProposalVoteBasketWidget />', () => {
@@ -20,7 +20,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     ...colorProps,
     step: {
       $refType,
-      id: '1',
       votesMin: null,
       viewerVotes: { totalCount: 5 },
       votesLimit: null,
@@ -36,11 +35,9 @@ describe('<ProposalVoteBasketWidget />', () => {
       },
     },
     viewer: {
-      id: '1',
       $refType,
       proposalVotes: {
         totalCount: 0,
-        creditsLeft: null,
         creditsSpent: null,
       },
     },
@@ -54,7 +51,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     features,
     step: {
       $refType,
-      id: '1',
       votesMin: null,
       viewerVotes: { totalCount: 2 },
       voteType: 'SIMPLE',
@@ -71,11 +67,9 @@ describe('<ProposalVoteBasketWidget />', () => {
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
-      id: '1',
       $refType,
       proposalVotes: {
         totalCount: 1,
-        creditsLeft: null,
         creditsSpent: null,
       },
     },
@@ -89,7 +83,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     features,
     step: {
       $refType,
-      id: '1',
       votesMin: null,
       viewerVotes: { totalCount: 1 },
       voteType: 'SIMPLE',
@@ -106,11 +99,9 @@ describe('<ProposalVoteBasketWidget />', () => {
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
-      id: '1',
       $refType,
       proposalVotes: {
         totalCount: 12,
-        creditsLeft: 120000,
         creditsSpent: null,
       },
     },
@@ -123,7 +114,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     ...colorProps,
     step: {
       $refType,
-      id: '1',
       voteType: 'SIMPLE',
       votesMin: null,
       budget: null,
@@ -140,11 +130,9 @@ describe('<ProposalVoteBasketWidget />', () => {
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
-      id: '1',
       $refType,
       proposalVotes: {
         totalCount: 1,
-        creditsLeft: null,
         creditsSpent: null,
       },
     },

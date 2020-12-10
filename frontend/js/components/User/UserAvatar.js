@@ -30,7 +30,7 @@ type Props = {|
   onMouseOver?: () => void,
   onMouseOut?: () => void,
   badge?: Badge,
-  needDefaultAvatar?: boolean
+  needDefaultAvatar?: boolean,
 |};
 
 const commonStyleAvatar = hasBadge => css`
@@ -168,7 +168,6 @@ const mapStateToProps = (state: State) => ({
 export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {
   user: graphql`
     fragment UserAvatar_user on User {
-      id
       url
       username
       media {
