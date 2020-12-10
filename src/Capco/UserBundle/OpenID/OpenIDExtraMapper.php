@@ -18,6 +18,7 @@ class OpenIDExtraMapper
         $this->logger = $logger;
         switch ($instanceName) {
             case 'occitanie':
+            case 'occitanie-dedicated':
             case 'occitanie-preprod':
             case 'dev':
                 $this->extraMapper = new OccitanieExtraMapper();
