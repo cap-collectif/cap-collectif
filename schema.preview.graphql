@@ -4,7 +4,7 @@ input AddEventInput {
 
   """When the event end."""
   endAt: DateTime
-  translations: [PreviewEventTranslationInput!]!
+  translations: [EventTranslationInput!]!
   clientMutationId: String
 }
 
@@ -82,7 +82,7 @@ input ChangeEventInput {
 
   """When the event end."""
   endAt: DateTime
-  translations: [PreviewEventTranslationInput!]!
+  translations: [EventTranslationInput!]!
   clientMutationId: String
 
   """The ID of the Event to modify."""
@@ -479,6 +479,23 @@ type EventTranslation {
   link: URI
 }
 
+input EventTranslationInput {
+  """the id of the event"""
+  id: ID
+
+  """the locale of the translation"""
+  locale: String!
+
+  """the translated title of the event"""
+  title: String
+
+  """the translated body of the event"""
+  body: HTML!
+
+  """the localized link of the event"""
+  link: URI
+}
+
 """An address from Google Maps."""
 type GoogleMapsAddress {
   """The raw response from the Google Maps API that describes an address"""
@@ -772,23 +789,6 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
-}
-
-input PreviewEventTranslationInput {
-  """the id of the event"""
-  id: ID
-
-  """the locale of the translation"""
-  locale: String!
-
-  """the translated title of the event"""
-  title: String
-
-  """the translated body of the event"""
-  body: HTML!
-
-  """the localized link of the event"""
-  link: URI
 }
 
 """A participatory project."""

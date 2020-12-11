@@ -2,7 +2,7 @@
 import '../../_setup';
 
 const ChangeFontMutation = /* GraphQL */ `
-  mutation ChangeFontMutation($input: InternalChangeFontInput!) {
+  mutation ChangeFontMutation($input: ChangeFontInput!) {
     changeFont(input: $input) {
       fonts {
         id

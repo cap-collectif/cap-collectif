@@ -8,7 +8,7 @@ import type {
 } from '~relay/UpdateShieldAdminFormMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateShieldAdminFormMutation($input: InternalUpdateShieldAdminFormInput!) {
+  mutation UpdateShieldAdminFormMutation($input: UpdateShieldAdminFormInput!) {
     updateShieldAdminForm(input: $input) {
       shieldAdminForm {
         ...ShieldAdminForm_shieldAdminForm

@@ -1,8 +1,9 @@
 InternalDeleteFontInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input type of deleteFont.'
-    fields:
-      id:
-        type: 'ID!'
-        description: The ID of the font to delete.
+    type: relay-mutation-input
+    config:
+        description: 'Input type of deleteFont.'
+        name: DeleteFontInput
+        fields:
+            id:
+                type: 'ID!'
+                description: The ID of the font to delete.

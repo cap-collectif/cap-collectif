@@ -8,7 +8,7 @@ import type {
 } from '~relay/DeleteFontMutation.graphql';
 
 const mutation = graphql`
-  mutation DeleteFontMutation($input: InternalDeleteFontInput!) {
+  mutation DeleteFontMutation($input: DeleteFontInput!) {
     deleteFont(input: $input) {
       deletedFontId @deleteRecord
       bodyFont {

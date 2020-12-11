@@ -1,7 +1,8 @@
 InternalSSOConfigurationConnection:
-  type: relay-connection
-  config:
-    nodeType: InternalSSOConfiguration
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        name: SSOConfigurationConnection
+        nodeType: InternalSSOConfiguration
+        connectionFields:
+            totalCount:
+                type: Int!

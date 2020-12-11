@@ -4,7 +4,7 @@ import fs from 'fs';
 import '../../_setup';
 
 const DeleteFontMutation = /* GraphQL */ `
-  mutation DeleteFontMutation($input: InternalDeleteFontInput!) {
+  mutation DeleteFontMutation($input: DeleteFontInput!) {
     deleteFont(input: $input) {
       deletedFontId
       userErrors {

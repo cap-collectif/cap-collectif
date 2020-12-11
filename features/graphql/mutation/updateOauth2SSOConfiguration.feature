@@ -7,7 +7,7 @@ Scenario: Admin wants to update a Oauth2 SSO configuration
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: InternalUpdateOauth2SSOConfigurationInput!) {
+    "query": "mutation ($input: UpdateOauth2SSOConfigurationInput!) {
       updateOauth2SSOConfiguration(input: $input) {
         ssoConfiguration {
           name

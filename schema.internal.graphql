@@ -173,7 +173,7 @@ type AddCommentVotePayload {
 input AddContactFormInput {
   """Email of the interlocutor of the contact form."""
   email: String!
-  translations: [InternalContactFormTranslationInput!]!
+  translations: [ContactFormTranslationInput!]!
   clientMutationId: String
 }
 
@@ -282,7 +282,7 @@ input AddEventInput {
 
   """When the event end."""
   endAt: DateTime
-  translations: [InternalEventTranslationInput!]!
+  translations: [EventTranslationInput!]!
   clientMutationId: String
 
   """Whether or not this event is published."""
@@ -1246,7 +1246,7 @@ input ChangeEventInput {
 
   """When the event end."""
   endAt: DateTime
-  translations: [InternalEventTranslationInput!]!
+  translations: [EventTranslationInput!]!
   clientMutationId: String
 
   """Whether or not this event is published."""
@@ -1304,6 +1304,23 @@ type ChangeEventPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input ChangeFontInput {
+  """The new heading font ID."""
+  heading: ID!
+
+  """The new body font ID."""
+  body: ID!
+  clientMutationId: String
+}
+
+type ChangeFontPayload {
+  """Return the available platform fonts."""
+  fonts: [Font!]!
+  headingFont: Font!
+  bodyFont: Font!
   clientMutationId: String
 }
 
@@ -1553,6 +1570,18 @@ input ChangeSelectionStatusInput {
 
 type ChangeSelectionStatusPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeSiteFaviconInput {
+  """The media id to associate for the website favicon"""
+  mediaId: ID!
+  clientMutationId: String
+}
+
+type ChangeSiteFaviconPayload {
+  """The newly updated site image favicon"""
+  siteFavicon: SiteImage!
   clientMutationId: String
 }
 
@@ -2575,6 +2604,15 @@ type ContactFormTranslation {
   confidentiality: String
 }
 
+input ContactFormTranslationInput {
+  id: ID
+  locale: String!
+  title: String!
+  body: String!
+  confidentiality: String
+  clientMutationId: String
+}
+
 input ContactProposalAuthorInput {
   """id of the proposal"""
   proposalId: ID!
@@ -2843,12 +2881,54 @@ type CreateMailingListPayload {
   clientMutationId: String
 }
 
+input CreateOauth2SSOConfigurationInput {
+  """Client ID."""
+  clientId: String!
+
+  """Secret key."""
+  secret: String!
+
+  """Authorization URL."""
+  authorizationUrl: URI!
+
+  """Access token URL."""
+  accessTokenUrl: URI!
+
+  """User info URL."""
+  userInfoUrl: URI!
+
+  """Logout URL."""
+  logoutUrl: URI
+
+  """Profile URL on the SSO side."""
+  profileUrl: URI
+
+  """Specify if this SSO configuration is active or not."""
+  enabled: Boolean!
+
+  """The name of your SSO provider."""
+  name: String!
+
+  """Color in hexadecimal of SSO button."""
+  buttonColor: Color!
+
+  """Color in hexadecimal of label SSO button."""
+  labelColor: Color!
+  clientMutationId: String
+}
+
+type CreateOauth2SSOConfigurationPayload {
+  """The created oauth2 configuration."""
+  ssoConfiguration: Oauth2SSOConfiguration
+  clientMutationId: String
+}
+
 input CreateProjectDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean = false
   border: BorderStyleInput
   background: BackgroundStyleInput
-  translations: [InternalDistrictTranslationInput!]!
+  translations: [DistrictTranslationInput!]!
 }
 
 type CreateProjectDistrictPayload {
@@ -3086,7 +3166,7 @@ type Debate implements Node {
 
     """Returns the last `n` elements from the list."""
     last: Int
-  ): InternalDebateOpinionConnection!
+  ): DebateOpinionConnection!
 
   """The arguments from non-experts of the debate."""
   arguments(
@@ -3429,6 +3509,26 @@ type DebateOpinion implements Node {
   type: ForOrAgainstValue!
 }
 
+"""A connection to a list of items."""
+type DebateOpinionConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [DebateOpinionEdge]
+}
+
+"""An edge in a connection."""
+type DebateOpinionEdge {
+  """The item at the end of the edge."""
+  node: DebateOpinion!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """A step with a debate."""
 type DebateStep implements Step & Node {
   """The ID of an object."""
@@ -3725,6 +3825,22 @@ type DeleteEventPayload {
   clientMutationId: String
 }
 
+input DeleteFontInput {
+  """The ID of the font to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteFontPayload {
+  deletedFontId: ID
+  bodyFont: Font!
+  headingFont: Font!
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
 input DeleteGroupInput {
   """The group id"""
   groupId: ID!
@@ -3832,6 +3948,18 @@ type DeleteReplyPayload {
   clientMutationId: String
 }
 
+input DeleteSSOConfigurationInput {
+  """The ID of SSO Configuration that needs to be deleted."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSSOConfigurationPayload {
+  deletedSsoConfigurationId: ID
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
 input DeleteSourceInput {
   """The ID to delete."""
   sourceId: ID!
@@ -3907,7 +4035,7 @@ input DistrictInput {
   background: BackgroundStyleInput
 
   """The names of the district for each language"""
-  translations: [InternalDistrictTranslationInput!]!
+  translations: [DistrictTranslationInput!]!
 }
 
 """Ordering options for districts returned from the connection."""
@@ -3923,6 +4051,12 @@ enum DistrictOrderField {
 type DistrictTranslation {
   locale: String!
   name: String!
+}
+
+input DistrictTranslationInput {
+  id: ID
+  locale: String!
+  name: String
 }
 
 """Entities that can be drafted."""
@@ -4318,7 +4452,7 @@ input EventInput {
   customCode: String
   city: String
   country: String
-  translations: [InternalEventTranslationInput]
+  translations: [EventTranslationInput]
   title: String
   body: HTML
   link: URI
@@ -4420,6 +4554,24 @@ type EventTranslation {
 
   """The slug of event"""
   slug: String!
+  metaDescription: String
+}
+
+input EventTranslationInput {
+  """the id of the event"""
+  id: ID
+
+  """the locale of the translation"""
+  locale: String!
+
+  """the translated title of the event"""
+  title: String
+
+  """the translated body of the event"""
+  body: HTML!
+
+  """the localized link of the event"""
+  link: URI
   metaDescription: String
 }
 
@@ -4793,273 +4945,6 @@ scalar HTML
 
 """A string containing an IP address."""
 scalar IP
-
-input InternalChangeFontInput {
-  """The new heading font ID."""
-  heading: ID!
-
-  """The new body font ID."""
-  body: ID!
-  clientMutationId: String
-}
-
-type InternalChangeFontPayload {
-  """Return the available platform fonts."""
-  fonts: [Font!]!
-  headingFont: Font!
-  bodyFont: Font!
-  clientMutationId: String
-}
-
-input InternalChangeSiteFaviconInput {
-  """The media id to associate for the website favicon"""
-  mediaId: ID!
-  clientMutationId: String
-}
-
-type InternalChangeSiteFaviconPayload {
-  """The newly updated site image favicon"""
-  siteFavicon: SiteImage!
-  clientMutationId: String
-}
-
-input InternalContactFormTranslationInput {
-  id: ID
-  locale: String!
-  title: String!
-  body: String!
-  confidentiality: String
-  clientMutationId: String
-}
-
-input InternalCreateOauth2SSOConfigurationInput {
-  """Client ID."""
-  clientId: String!
-
-  """Secret key."""
-  secret: String!
-
-  """Authorization URL."""
-  authorizationUrl: URI!
-
-  """Access token URL."""
-  accessTokenUrl: URI!
-
-  """User info URL."""
-  userInfoUrl: URI!
-
-  """Logout URL."""
-  logoutUrl: URI
-
-  """Profile URL on the SSO side."""
-  profileUrl: URI
-
-  """Specify if this SSO configuration is active or not."""
-  enabled: Boolean!
-
-  """The name of your SSO provider."""
-  name: String!
-
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
-  clientMutationId: String
-}
-
-type InternalCreateOauth2SSOConfigurationPayload {
-  """The created oauth2 configuration."""
-  ssoConfiguration: Oauth2SSOConfiguration
-  clientMutationId: String
-}
-
-"""A connection to a list of items."""
-type InternalDebateOpinionConnection {
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [InternalDebateOpinionEdge]
-}
-
-"""An edge in a connection."""
-type InternalDebateOpinionEdge {
-  """The item at the end of the edge."""
-  node: DebateOpinion!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-input InternalDeleteFontInput {
-  """The ID of the font to delete."""
-  id: ID!
-  clientMutationId: String
-}
-
-type InternalDeleteFontPayload {
-  deletedFontId: ID
-  bodyFont: Font!
-  headingFont: Font!
-
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError]
-  clientMutationId: String
-}
-
-input InternalDeleteSSOConfigurationInput {
-  """The ID of SSO Configuration that needs to be deleted."""
-  id: ID!
-  clientMutationId: String
-}
-
-type InternalDeleteSSOConfigurationPayload {
-  deletedSsoConfigurationId: ID
-  userErrors: [UserError]
-  clientMutationId: String
-}
-
-input InternalDistrictTranslationInput {
-  id: ID
-  locale: String!
-  name: String
-}
-
-input InternalEventTranslationInput {
-  """the id of the event"""
-  id: ID
-
-  """the locale of the translation"""
-  locale: String!
-
-  """the translated title of the event"""
-  title: String
-
-  """the translated body of the event"""
-  body: HTML!
-
-  """the localized link of the event"""
-  link: URI
-  metaDescription: String
-}
-
-input InternalRemoveSiteFaviconInput {
-  clientMutationId: String
-}
-
-type InternalRemoveSiteFaviconPayload {
-  """The newly updated site image favicon"""
-  siteFavicon: SiteImage!
-  clientMutationId: String
-}
-
-"""A connection to a list of items."""
-type InternalSSOConfigurationConnection {
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [InternalSSOConfigurationEdge]
-}
-
-"""An edge in a connection."""
-type InternalSSOConfigurationEdge {
-  """The item at the end of the edge."""
-  node: SSOConfiguration
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-input InternalToggleSSOConfigurationStatusInput {
-  ssoConfigurationId: ID!
-  clientMutationId: String
-}
-
-type InternalToggleSSOConfigurationStatusPayload {
-  ssoConfiguration: SSOConfiguration!
-  clientMutationId: String
-}
-
-input InternalUpdateFranceConnectSSOConfigurationInput {
-  """Client ID."""
-  clientId: String!
-
-  """Secret key."""
-  secret: String!
-
-  """Environment mode."""
-  environment: SSOEnvironment!
-  clientMutationId: String
-}
-
-type InternalUpdateFranceConnectSSOConfigurationPayload {
-  """The updated France Connect configuration."""
-  fcConfiguration: FranceConnectSSOConfiguration
-  clientMutationId: String
-}
-
-input InternalUpdateOauth2SSOConfigurationInput {
-  """Client ID."""
-  clientId: String!
-
-  """Secret key."""
-  secret: String!
-
-  """Authorization URL."""
-  authorizationUrl: URI!
-
-  """Access token URL."""
-  accessTokenUrl: URI!
-
-  """User info URL."""
-  userInfoUrl: URI!
-
-  """Logout URL."""
-  logoutUrl: URI
-
-  """Profile URL on the SSO side."""
-  profileUrl: URI
-
-  """Specify if this SSO configuration is active or not."""
-  enabled: Boolean!
-
-  """The name of your SSO provider."""
-  name: String!
-
-  """Color in hexadecimal of SSO button."""
-  buttonColor: Color!
-
-  """Color in hexadecimal of label SSO button."""
-  labelColor: Color!
-
-  """The ID of oauth2 configuration that needs to be updated."""
-  id: ID!
-  clientMutationId: String
-}
-
-type InternalUpdateOauth2SSOConfigurationPayload {
-  """The updated oauth2 configuration."""
-  ssoConfiguration: Oauth2SSOConfiguration
-  clientMutationId: String
-}
-
-input InternalUpdateShieldAdminFormInput {
-  """Enable or disable shield mode."""
-  shieldMode: Boolean!
-
-  """introduction"""
-  translations: [UpdateShieldAdminFormTranslationInput!]
-
-  """The image id to associate for the shield image."""
-  mediaId: ID
-  clientMutationId: String
-}
 
 input InviteUsersInput {
   """Set the maximum results to return"""
@@ -5801,8 +5686,8 @@ type Mutation {
   deleteAccountByEmail(input: DeleteAccountByEmailInput!): DeleteAccountByEmailPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
-  removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
-  changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
+  removeSiteFavicon(input: RemoveSiteFaviconInput!): RemoveSiteFaviconPayload
+  changeSiteFavicon(input: ChangeSiteFaviconInput!): ChangeSiteFaviconPayload
   reviewEvent(input: ReviewEventInput!): ReviewEventPayload
   addEvents(input: AddEventsInput!): AddEventsPayload
   addComment(input: AddCommentInput!): AddCommentPayload
@@ -5901,18 +5786,18 @@ type Mutation {
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteMediaAdmin(input: DeleteMediaAdminInput!): DeleteMediaAdminPayload
-  updateShieldAdminForm(input: InternalUpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
-  createOauth2SSOConfiguration(input: InternalCreateOauth2SSOConfigurationInput!): InternalCreateOauth2SSOConfigurationPayload
-  updateOauth2SSOConfiguration(input: InternalUpdateOauth2SSOConfigurationInput!): InternalUpdateOauth2SSOConfigurationPayload
-  deleteSSOConfiguration(input: InternalDeleteSSOConfigurationInput!): InternalDeleteSSOConfigurationPayload
-  toggleSSOConfigurationStatus(input: InternalToggleSSOConfigurationStatusInput!): InternalToggleSSOConfigurationStatusPayload
-  updateFranceConnectSSOConfiguration(input: InternalUpdateFranceConnectSSOConfigurationInput!): InternalUpdateFranceConnectSSOConfigurationPayload
+  updateShieldAdminForm(input: UpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
+  createOauth2SSOConfiguration(input: CreateOauth2SSOConfigurationInput!): CreateOauth2SSOConfigurationPayload
+  updateOauth2SSOConfiguration(input: UpdateOauth2SSOConfigurationInput!): UpdateOauth2SSOConfigurationPayload
+  deleteSSOConfiguration(input: DeleteSSOConfigurationInput!): DeleteSSOConfigurationPayload
+  toggleSSOConfigurationStatus(input: ToggleSSOConfigurationStatusInput!): ToggleSSOConfigurationStatusPayload
+  updateFranceConnectSSOConfiguration(input: UpdateFranceConnectSSOConfigurationInput!): UpdateFranceConnectSSOConfigurationPayload
   updateLocaleStatus(input: UpdateLocaleStatusInput!): UpdateLocaleStatusPayload
   setDefaultLocale(input: SetDefaultLocaleInput!): SetDefaultLocalePayload
   setUserDefaultLocale(input: SetUserDefaultLocaleInput!): SetUserDefaultLocalePayload
   cropMedia(input: CropMediaInput!): CropMediaPayload
-  changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
-  deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
+  changeFont(input: ChangeFontInput!): ChangeFontPayload
+  deleteFont(input: DeleteFontInput!): DeleteFontPayload
   assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
   assignDecisionMakerToProposals(input: AssignDecisionMakerToProposalsInput!): AssignDecisionMakerToProposalsPayload
   configureAnalysis(input: ConfigureAnalysisInput!): ConfigureAnalysisPayload
@@ -9202,7 +9087,7 @@ type Query {
 
     """Returns the last `n` elements from the list."""
     last: Int
-  ): InternalSSOConfigurationConnection!
+  ): SSOConfigurationConnection!
 
   """List all sections."""
   sections(
@@ -10085,6 +9970,16 @@ type RemoveProposalsFromStepsPayload {
   clientMutationId: String
 }
 
+input RemoveSiteFaviconInput {
+  clientMutationId: String
+}
+
+type RemoveSiteFaviconPayload {
+  """The newly updated site image favicon"""
+  siteFavicon: SiteImage!
+  clientMutationId: String
+}
+
 input RemoveSourceVoteInput {
   """The Node ID of the source to unvote."""
   sourceId: ID!
@@ -10534,6 +10429,26 @@ interface SSOConfiguration {
 
   """Color in hexadecimal of label SSO button."""
   labelColor: Color!
+}
+
+"""A connection to a list of items."""
+type SSOConfigurationConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [SSOConfigurationEdge]
+}
+
+"""An edge in a connection."""
+type SSOConfigurationEdge {
+  """The item at the end of the edge."""
+  node: SSOConfiguration
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """Possible environments for a SSO Configuration."""
@@ -11854,6 +11769,16 @@ type TipsMeee {
   ): [ProposalTopDonator!]!
 }
 
+input ToggleSSOConfigurationStatusInput {
+  ssoConfigurationId: ID!
+  clientMutationId: String
+}
+
+type ToggleSSOConfigurationStatusPayload {
+  ssoConfiguration: SSOConfiguration!
+  clientMutationId: String
+}
+
 """A translation locale"""
 enum TranslationLocale {
   """English - UNITED KINGDOM locale"""
@@ -12049,7 +11974,7 @@ input UpdateContactFormInput {
 
   """Email of the interlocutor of the contact form."""
   email: String!
-  translations: [InternalContactFormTranslationInput!]!
+  translations: [ContactFormTranslationInput!]!
   clientMutationId: String
 }
 
@@ -12252,6 +12177,24 @@ type UpdateFollowProposalPayload {
   clientMutationId: String
 }
 
+input UpdateFranceConnectSSOConfigurationInput {
+  """Client ID."""
+  clientId: String!
+
+  """Secret key."""
+  secret: String!
+
+  """Environment mode."""
+  environment: SSOEnvironment!
+  clientMutationId: String
+}
+
+type UpdateFranceConnectSSOConfigurationPayload {
+  """The updated France Connect configuration."""
+  fcConfiguration: FranceConnectSSOConfiguration
+  clientMutationId: String
+}
+
 input UpdateGroupInput {
   groupId: ID!
   title: String!
@@ -12271,6 +12214,51 @@ input UpdateLocaleStatusInput {
 
 type UpdateLocaleStatusPayload {
   locales: LocaleConnection!
+  clientMutationId: String
+}
+
+input UpdateOauth2SSOConfigurationInput {
+  """Client ID."""
+  clientId: String!
+
+  """Secret key."""
+  secret: String!
+
+  """Authorization URL."""
+  authorizationUrl: URI!
+
+  """Access token URL."""
+  accessTokenUrl: URI!
+
+  """User info URL."""
+  userInfoUrl: URI!
+
+  """Logout URL."""
+  logoutUrl: URI
+
+  """Profile URL on the SSO side."""
+  profileUrl: URI
+
+  """Specify if this SSO configuration is active or not."""
+  enabled: Boolean!
+
+  """The name of your SSO provider."""
+  name: String!
+
+  """Color in hexadecimal of SSO button."""
+  buttonColor: Color!
+
+  """Color in hexadecimal of label SSO button."""
+  labelColor: Color!
+
+  """The ID of oauth2 configuration that needs to be updated."""
+  id: ID!
+  clientMutationId: String
+}
+
+type UpdateOauth2SSOConfigurationPayload {
+  """The updated oauth2 configuration."""
+  ssoConfiguration: Oauth2SSOConfiguration
   clientMutationId: String
 }
 
@@ -12503,7 +12491,7 @@ input UpdateProjectDistrictInput {
   background: BackgroundStyleInput
 
   """The names of the district for each language"""
-  translations: [InternalDistrictTranslationInput!]!
+  translations: [DistrictTranslationInput!]!
 }
 
 input UpdateProjectInput {
@@ -12807,6 +12795,18 @@ input UpdateRequirementInput {
 type UpdateRequirementPayload {
   viewer: User
   requirement: Requirement
+  clientMutationId: String
+}
+
+input UpdateShieldAdminFormInput {
+  """Enable or disable shield mode."""
+  shieldMode: Boolean!
+
+  """introduction"""
+  translations: [UpdateShieldAdminFormTranslationInput!]
+
+  """The image id to associate for the shield image."""
+  mediaId: ID
   clientMutationId: String
 }
 

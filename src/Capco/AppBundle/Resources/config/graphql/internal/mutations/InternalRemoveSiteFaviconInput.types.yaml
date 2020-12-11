@@ -1,2 +1,4 @@
 InternalRemoveSiteFaviconInput:
-  type: relay-mutation-input
+    type: relay-mutation-input
+    config:
+        name: RemoveSiteFaviconInput

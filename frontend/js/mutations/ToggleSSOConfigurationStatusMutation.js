@@ -9,9 +9,7 @@ import type {
 import type { SSOConfigurationInterface } from '~/types';
 
 const mutation = graphql`
-  mutation ToggleSSOConfigurationStatusMutation(
-    $input: InternalToggleSSOConfigurationStatusInput!
-  ) {
+  mutation ToggleSSOConfigurationStatusMutation($input: ToggleSSOConfigurationStatusInput!) {
     toggleSSOConfigurationStatus(input: $input) {
       ssoConfiguration {
         enabled

@@ -1,11 +1,12 @@
 InternalChangeFontInput:
-  type: relay-mutation-input
-  config:
-    description: 'Change the current font of the platform.'
-    fields:
-      heading:
-        type: 'ID!'
-        description: 'The new heading font ID.'
-      body:
-        type: 'ID!'
-        description: 'The new body font ID.'
+    type: relay-mutation-input
+    config:
+        name: ChangeFontInput
+        description: 'Change the current font of the platform.'
+        fields:
+            heading:
+                type: 'ID!'
+                description: 'The new heading font ID.'
+            body:
+                type: 'ID!'
+                description: 'The new body font ID.'

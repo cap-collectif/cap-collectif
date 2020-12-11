@@ -9,7 +9,7 @@ import type {
 } from '~relay/AddOauth2SSOConfigurationMutation.graphql';
 
 const mutation = graphql`
-  mutation AddOauth2SSOConfigurationMutation($input: InternalCreateOauth2SSOConfigurationInput!) {
+  mutation AddOauth2SSOConfigurationMutation($input: CreateOauth2SSOConfigurationInput!) {
     createOauth2SSOConfiguration(input: $input) {
       ssoConfiguration {
         id

@@ -42,7 +42,7 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: InternalUpdateShieldAdminFormInput!) {
+    "query": "mutation ($input: UpdateShieldAdminFormInput!) {
       updateShieldAdminForm(input: $input) {
         shieldAdminForm {
           shieldMode

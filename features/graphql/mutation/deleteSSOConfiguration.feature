@@ -7,7 +7,7 @@ Scenario: Admin wants to delete a SSO configuration
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: InternalDeleteSSOConfigurationInput!) {
+    "query": "mutation ($input: DeleteSSOConfigurationInput!) {
       deleteSSOConfiguration(input: $input) {
         deletedSsoConfigurationId
       }

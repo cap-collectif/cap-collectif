@@ -8,7 +8,7 @@ import type {
 } from '~relay/ChangeFontMutation.graphql';
 
 const mutation = graphql`
-  mutation ChangeFontMutation($input: InternalChangeFontInput!) {
+  mutation ChangeFontMutation($input: ChangeFontInput!) {
     changeFont(input: $input) {
       fonts {
         ...FontAdminContent_fonts

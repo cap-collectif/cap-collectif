@@ -7,7 +7,7 @@ Scenario: Admin wants to create an Oauth2 SSO configuration
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: InternalCreateOauth2SSOConfigurationInput!) {
+    "query": "mutation ($input: CreateOauth2SSOConfigurationInput!) {
       createOauth2SSOConfiguration(input: $input) {
         ssoConfiguration {
           id

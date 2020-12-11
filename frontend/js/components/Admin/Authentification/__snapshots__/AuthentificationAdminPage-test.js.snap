@@ -32,7 +32,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
             Object {
               "alias": null,
               "args": null,
-              "concreteType": "InternalSSOConfigurationConnection",
+              "concreteType": "SSOConfigurationConnection",
               "kind": "LinkedField",
               "name": "ssoConfigurations",
               "plural": false,
@@ -133,7 +133,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
             Object {
               "alias": null,
               "args": null,
-              "concreteType": "InternalSSOConfigurationConnection",
+              "concreteType": "SSOConfigurationConnection",
               "kind": "LinkedField",
               "name": "ssoConfigurations",
               "plural": false,
@@ -141,7 +141,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "concreteType": "InternalSSOConfigurationEdge",
+                  "concreteType": "SSOConfigurationEdge",
                   "kind": "LinkedField",
                   "name": "edges",
                   "plural": true,
@@ -317,7 +317,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3b4c40637181e5844a5678ce304fdd3d",
+          "cacheID": "fbd4627fb7db07bbc1753aace78a1c5b",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -335,7 +335,7 @@ fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
   ...ShieldAdminForm_shieldAdminForm
 }
 
-fragment AuthentificationAdminPageContent_ssoConfigurations on InternalSSOConfigurationConnection {
+fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection {
   ...ListSSOConfiguration_ssoConfigurations
 }
 
@@ -348,7 +348,7 @@ fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOCon
   logoutUrl
 }
 
-fragment ListCustomSSO_ssoConfigurations on InternalSSOConfigurationConnection {
+fragment ListCustomSSO_ssoConfigurations on SSOConfigurationConnection {
   edges {
     node {
       __typename
@@ -358,7 +358,7 @@ fragment ListCustomSSO_ssoConfigurations on InternalSSOConfigurationConnection {
   }
 }
 
-fragment ListPublicSSO_ssoConfigurations on InternalSSOConfigurationConnection {
+fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
   edges {
     node {
       __typename
@@ -370,7 +370,7 @@ fragment ListPublicSSO_ssoConfigurations on InternalSSOConfigurationConnection {
   }
 }
 
-fragment ListSSOConfiguration_ssoConfigurations on InternalSSOConfigurationConnection {
+fragment ListSSOConfiguration_ssoConfigurations on SSOConfigurationConnection {
   ...ListCustomSSO_ssoConfigurations
   ...ListPublicSSO_ssoConfigurations
 }

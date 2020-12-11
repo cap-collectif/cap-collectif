@@ -1,6 +1,7 @@
 PreviewEventTranslationInput:
     type: input-object
     config:
+        name: EventTranslationInput
         fields:
             id:
                 type: 'ID'

@@ -75,7 +75,7 @@ export class ListCustomSSO extends React.Component<Props, State> {
 
 export default createFragmentContainer(ListCustomSSO, {
   ssoConfigurations: graphql`
-    fragment ListCustomSSO_ssoConfigurations on InternalSSOConfigurationConnection {
+    fragment ListCustomSSO_ssoConfigurations on SSOConfigurationConnection {
       edges {
         node {
           __typename

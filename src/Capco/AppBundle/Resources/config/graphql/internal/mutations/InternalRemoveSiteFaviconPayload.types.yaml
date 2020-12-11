@@ -1,7 +1,8 @@
 InternalRemoveSiteFaviconPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      siteFavicon:
-        type: 'SiteImage!'
-        description: 'The newly updated site image favicon'
+    type: relay-mutation-payload
+    config:
+        name: RemoveSiteFaviconPayload
+        fields:
+            siteFavicon:
+                type: 'SiteImage!'
+                description: 'The newly updated site image favicon'

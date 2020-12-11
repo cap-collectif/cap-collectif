@@ -7,7 +7,7 @@ Scenario: Admin wants to update France Connect configuration
   And I send a GraphQL POST request:
    """
    {
-    "query": "mutation ($input: InternalUpdateFranceConnectSSOConfigurationInput!) {
+    "query": "mutation ($input: UpdateFranceConnectSSOConfigurationInput!) {
       updateFranceConnectSSOConfiguration(input: $input) {
         fcConfiguration {
           environment
@@ -54,7 +54,7 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: InternalUpdateFranceConnectSSOConfigurationInput!) {
+    "query": "mutation ($input: UpdateFranceConnectSSOConfigurationInput!) {
       updateFranceConnectSSOConfiguration(input: $input) {
         fcConfiguration {
           environment

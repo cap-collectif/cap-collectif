@@ -1,7 +1,8 @@
 InternalCreateOauth2SSOConfigurationPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      ssoConfiguration:
-        type: 'InternalOauth2SSOConfiguration'
-        description: 'The created oauth2 configuration.'
+    type: relay-mutation-payload
+    config:
+        name: CreateOauth2SSOConfigurationPayload
+        fields:
+            ssoConfiguration:
+                type: 'InternalOauth2SSOConfiguration'
+                description: 'The created oauth2 configuration.'

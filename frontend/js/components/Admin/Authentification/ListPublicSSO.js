@@ -158,7 +158,7 @@ export default connect(
 )(
   createFragmentContainer(ListPublicSSO, {
     ssoConfigurations: graphql`
-      fragment ListPublicSSO_ssoConfigurations on InternalSSOConfigurationConnection {
+      fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
         edges {
           node {
             ... on SSOConfiguration {

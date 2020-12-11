@@ -26,7 +26,7 @@ Scenario: GraphQL admin client wants to update the current favicon
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: InternalChangeSiteFaviconInput!) {
+    "query": "mutation ($input: ChangeSiteFaviconInput!) {
       changeSiteFavicon(input: $input) {
         siteFavicon {
           id
@@ -75,7 +75,7 @@ Scenario: GraphQL client who is not an admin wants to update the current favicon
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: InternalChangeSiteFaviconInput!) {
+    "query": "mutation ($input: ChangeSiteFaviconInput!) {
       changeSiteFavicon(input: $input) {
         siteFavicon {
           id

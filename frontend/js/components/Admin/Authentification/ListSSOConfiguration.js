@@ -56,7 +56,7 @@ const mapStateToProps = (state: State) => ({
 export default connect(mapStateToProps)(
   createFragmentContainer(ListSSOConfiguration, {
     ssoConfigurations: graphql`
-      fragment ListSSOConfiguration_ssoConfigurations on InternalSSOConfigurationConnection {
+      fragment ListSSOConfiguration_ssoConfigurations on SSOConfigurationConnection {
         ...ListCustomSSO_ssoConfigurations
         ...ListPublicSSO_ssoConfigurations
       }

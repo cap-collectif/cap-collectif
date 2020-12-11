@@ -32,7 +32,7 @@ export default createFragmentContainer(AuthentificationAdminPageContent, {
     }
   `,
   ssoConfigurations: graphql`
-    fragment AuthentificationAdminPageContent_ssoConfigurations on InternalSSOConfigurationConnection {
+    fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection {
       ...ListSSOConfiguration_ssoConfigurations
     }
   `,

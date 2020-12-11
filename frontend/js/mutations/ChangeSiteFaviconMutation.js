@@ -8,7 +8,7 @@ import type {
 } from '~relay/ChangeSiteFaviconMutation.graphql';
 
 const mutation = graphql`
-  mutation ChangeSiteFaviconMutation($input: InternalChangeSiteFaviconInput!) {
+  mutation ChangeSiteFaviconMutation($input: ChangeSiteFaviconInput!) {
     changeSiteFavicon(input: $input) {
       siteFavicon {
         ...SiteFaviconAdminForm_siteFavicon

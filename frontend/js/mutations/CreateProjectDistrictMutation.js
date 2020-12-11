@@ -8,7 +8,7 @@ import commitMutation from './commitMutation';
 import type {
   CreateProjectDistrictMutationVariables,
   CreateProjectDistrictMutationResponse,
-  InternalDistrictTranslationInput,
+  DistrictTranslationInput,
 } from '~relay/CreateProjectDistrictMutation.graphql';
 import { getTranslation } from '~/services/Translation';
 
@@ -71,7 +71,7 @@ const commit = (
     optimisticUpdater: (store: RecordSourceSelectorProxy) => {
       const root = store.getRoot();
       const id = `to-be-defined-${Math.floor(Math.random() * Math.floor(1000))}`;
-      const translation = getTranslation<InternalDistrictTranslationInput>(
+      const translation = getTranslation<DistrictTranslationInput>(
         variables.input.translations,
         locale,
       );

@@ -1,6 +1,7 @@
 InternalUpdateShieldAdminFormInput:
     type: relay-mutation-input
     config:
+        name: UpdateShieldAdminFormInput
         fields:
             shieldMode:
                 type: 'Boolean!'

@@ -9,7 +9,7 @@ import type {
 
 const mutation = graphql`
   mutation UpdateFranceConnectSSOConfigurationMutation(
-    $input: InternalUpdateFranceConnectSSOConfigurationInput!
+    $input: UpdateFranceConnectSSOConfigurationInput!
   ) {
     updateFranceConnectSSOConfiguration(input: $input) {
       fcConfiguration {

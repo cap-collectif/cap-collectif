@@ -9,7 +9,7 @@ import type {
 } from '~relay/DeleteOauth2SSOConfigurationMutation.graphql';
 
 const mutation = graphql`
-  mutation DeleteOauth2SSOConfigurationMutation($input: InternalDeleteSSOConfigurationInput!) {
+  mutation DeleteOauth2SSOConfigurationMutation($input: DeleteSSOConfigurationInput!) {
     deleteSSOConfiguration(input: $input) {
       deletedSsoConfigurationId @deleteRecord
     }

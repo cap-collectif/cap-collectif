@@ -1,11 +1,12 @@
 InternalChangeFontPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      fonts:
-        type: '[InternalFont!]!'
-        description: 'Return the available platform fonts.'
-      headingFont: 
-        type: InternalFont!
-      bodyFont: 
-         type: InternalFont!
+    type: relay-mutation-payload
+    config:
+        name: ChangeFontPayload
+        fields:
+            fonts:
+                type: '[InternalFont!]!'
+                description: 'Return the available platform fonts.'
+            headingFont:
+                type: InternalFont!
+            bodyFont:
+                type: InternalFont!

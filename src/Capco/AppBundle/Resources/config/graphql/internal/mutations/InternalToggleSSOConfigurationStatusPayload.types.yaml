@@ -1,6 +1,7 @@
 InternalToggleSSOConfigurationStatusPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      ssoConfiguration:
-        type: 'InternalSSOConfiguration!'
+    type: relay-mutation-payload
+    config:
+        name: ToggleSSOConfigurationStatusPayload
+        fields:
+            ssoConfiguration:
+                type: 'InternalSSOConfiguration!'
