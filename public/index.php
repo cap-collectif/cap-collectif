@@ -27,12 +27,11 @@ if ($debug) {
     Debug::enable();
 }
 
-if ($trustedProxies = $_SERVER['SYMFONY_TRUSTED_PROXIES'] ?? false) {
-    Request::setTrustedProxies(
-        explode(',', $trustedProxies),
-        Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST
-    );
-}
+$trustedProxies = $_SERVER['SYMFONY_TRUSTED_PROXIES'] ?? false;
+Request::setTrustedProxies(
+    array_merge(['127.0.0.1', '172.17.0.1'], explode(',', $trustedProxies)),
+    Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST
+);
 
 if ($trustedHosts = $_SERVER['SYMFONY_TRUSTED_HOSTS'] ?? false) {
     Request::setTrustedHosts(explode(',', $trustedHosts));

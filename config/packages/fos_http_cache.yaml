@@ -38,7 +38,7 @@ fos_http_cache:
             http:
                 servers:
                     - 127.0.0.1
-                    - 172.17.0.1 # Used in prod ? See with @ptondereau
+                    - 172.17.0.1 # It can be docker IP.
                 base_url: 127.0.0.1
 
 # Disable @Cache annotation, please use fos_http_cache
