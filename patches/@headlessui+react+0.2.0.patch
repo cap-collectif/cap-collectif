@@ -1,0 +1,73 @@
+diff --git a/node_modules/@headlessui/react/dist/headlessui.esm.js b/node_modules/@headlessui/react/dist/headlessui.esm.js
+index 9d9d7b7..393a323 100644
+--- a/node_modules/@headlessui/react/dist/headlessui.esm.js
++++ b/node_modules/@headlessui/react/dist/headlessui.esm.js
+@@ -1007,9 +1007,11 @@ var Items = /*#__PURE__*/forwardRefWithAs(function Items(props, ref) {
+ 
+       case Keys.Enter:
+         event.preventDefault();
+-        dispatch({
+-          type: ActionTypes.CloseMenu
+-        });
++        if (passthroughProps.closeOnSelect) {
++          dispatch({
++            type: ActionTypes.CloseMenu
++          });
++        }
+ 
+         if (state.activeItemIndex !== null) {
+           var _document$getElementB;
+@@ -1018,11 +1020,13 @@ var Items = /*#__PURE__*/forwardRefWithAs(function Items(props, ref) {
+           (_document$getElementB = document.getElementById(_id)) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.click();
+         }
+ 
+-        disposables().nextFrame(function () {
+-          var _state$buttonRef$curr2;
++        if (passthroughProps.closeOnSelect) {
++          disposables().nextFrame(function () {
++            var _state$buttonRef$curr2;
+ 
+-          return (_state$buttonRef$curr2 = state.buttonRef.current) === null || _state$buttonRef$curr2 === void 0 ? void 0 : _state$buttonRef$curr2.focus();
+-        });
++            return (_state$buttonRef$curr2 = state.buttonRef.current) === null || _state$buttonRef$curr2 === void 0 ? void 0 : _state$buttonRef$curr2.focus();
++          });
++        }
+         break;
+ 
+       case Keys.ArrowDown:
+@@ -1085,7 +1089,7 @@ var Items = /*#__PURE__*/forwardRefWithAs(function Items(props, ref) {
+ 
+         break;
+     }
+-  }, [dispatch, searchDisposables, state]);
++  }, [dispatch, searchDisposables, state, passthroughProps.closeOnSelect]);
+   var propsBag = useMemo(function () {
+     return {
+       open: state.menuState === MenuStates.Open
+@@ -1146,16 +1150,18 @@ function Item(props) {
+   }, [bag, id]);
+   var handleClick = useCallback(function (event) {
+     if (disabled) return event.preventDefault();
+-    dispatch({
+-      type: ActionTypes.CloseMenu
+-    });
+-    d.nextFrame(function () {
+-      var _state$buttonRef$curr5;
++    if (passthroughProps.closeOnSelect) {
++      dispatch({
++        type: ActionTypes.CloseMenu
++      });
++      d.nextFrame(function () {
++        var _state$buttonRef$curr5;
+ 
+-      return (_state$buttonRef$curr5 = state.buttonRef.current) === null || _state$buttonRef$curr5 === void 0 ? void 0 : _state$buttonRef$curr5.focus();
+-    });
++        return (_state$buttonRef$curr5 = state.buttonRef.current) === null || _state$buttonRef$curr5 === void 0 ? void 0 : _state$buttonRef$curr5.focus();
++      });
++    }
+     if (onClick) return onClick(event);
+-  }, [d, dispatch, state.buttonRef, disabled, onClick]);
++  }, [d, dispatch, state.buttonRef, disabled, onClick, passthroughProps.closeOnSelect]);
+   var handleFocus = useCallback(function () {
+     if (disabled) return dispatch({
+       type: ActionTypes.GoToItem,

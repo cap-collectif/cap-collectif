@@ -8,6 +8,10 @@ export type Responsive<T> = T | T[] | {| [key: string]: T |};
 
 export type ResponsiveBoolean = boolean | Array<boolean>;
 
+type CustomStyled = {|
+  +uppercase?: boolean,
+|};
+
 type Width = {|
   /** width */
   width?: Responsive<NumberOrString>,
@@ -259,6 +263,10 @@ type As = {|
   as?: any,
 |};
 
+type Input = {|
+  +checked?: boolean,
+|};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -293,4 +301,6 @@ export type AppBoxProps = {|
   ...onFocus,
   ...onClick,
   ...As,
+  ...Input,
+  ...CustomStyled,
 |};

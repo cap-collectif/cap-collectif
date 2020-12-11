@@ -5,9 +5,13 @@ import MenuList from './MenuList';
 import MenuListItem from './MenuListItem';
 import MenuDivider from './MenuDivider';
 import MenuListGroup from './MenuListGroup';
+import MenuOptionGroup from './MenuOptionGroup';
+import MenuOptionItem from './MenuOptionItem';
 import { TippyPlacementProps } from '../common';
 
-type Props = CommonProps & TippyPlacementProps
+type Props = CommonProps & TippyPlacementProps & {
+  readonly closeOnSelect?: boolean
+}
 
 declare const Menu: FC<Props> & {
     Button: typeof MenuButton
@@ -15,6 +19,8 @@ declare const Menu: FC<Props> & {
     ListItem: typeof MenuListItem
     ListGroup: typeof MenuListGroup
     Divider: typeof MenuDivider
+    OptionGroup: typeof MenuOptionGroup
+    OptionItem: typeof MenuOptionItem
 }
 
 export default Menu;

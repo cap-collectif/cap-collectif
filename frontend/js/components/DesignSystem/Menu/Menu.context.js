@@ -3,10 +3,12 @@ import * as React from 'react';
 
 export type Context = {|
   +open: boolean,
+  +closeOnSelect: boolean,
 |};
 
 export const MenuContext = React.createContext<Context>({
   open: false,
+  closeOnSelect: true,
 });
 
 export const useMenu = (): Context => {

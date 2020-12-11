@@ -24,6 +24,8 @@ const MenuItems = styled(motion.custom(Flex)).attrs(props => ({
   bg: 'white',
   boxShadow: 'medium',
   mt: 2,
+  border: 'normal',
+  borderColor: 'gray.200',
   borderRadius: 'card',
   zIndex: 100,
   overflow: 'hidden',
@@ -37,13 +39,14 @@ const MenuItems = styled(motion.custom(Flex)).attrs(props => ({
 
 const MenuList = React.forwardRef<Props, HTMLElement>(
   ({ children, align = 'right', ...props }: Props, ref) => {
-    const { open } = useMenu();
+    const { open, closeOnSelect } = useMenu();
 
     return (
       <AnimatePresence>
         {open && (
           <HeadlessMenu.Items
             static
+            closeOnSelect={closeOnSelect}
             ref={ref}
             as={MenuItems}
             align={align}

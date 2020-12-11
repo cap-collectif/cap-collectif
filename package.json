@@ -42,7 +42,8 @@
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js",
-        "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re"
+        "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re",
+        "postinstall": "patch-package"
     },
     "workspaces": [
         "packages/*"
@@ -273,9 +274,10 @@
         "node-sass": "^4.14.1",
         "now": "19.2.0",
         "papaparse": "^5.2.0",
+        "patch-package": "^6.2.2",
         "points-cluster": "^0.1.4",
         "polished": "^3.4.1",
-        "postinstall-postinstall": "^2.0.0",
+        "postinstall-postinstall": "^2.1.0",
         "pre-commit": "^1.2.2",
         "prettier": "^1.19.1",
         "prism-react-renderer": "^1.0.1",
