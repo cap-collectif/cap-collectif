@@ -62,8 +62,11 @@ final class Version20201203122444 extends AbstractMigration implements Container
         //remove doublons
         $filtered = [];
         foreach ($officialResponsesDataInPosts as $datum) {
-            $filtered[$datum['proposal_decision_id']] = $datum;
+            if ($datum['proposal_id']) {
+                $filtered[$datum['proposal_id']] = $datum;
+            }
         }
+
         foreach ($filtered as $data) {
             $this->createOfficialResponseFromPostData($data);
         }
