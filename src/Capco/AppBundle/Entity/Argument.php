@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\ReportableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -13,7 +14,6 @@ use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Model\ModerableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
@@ -25,7 +25,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, Publishable, ModerableInterface
+class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface
 {
     use UuidTrait;
     use VotableOkTrait;
@@ -241,7 +241,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(User $user = null): bool
+    public function userHasReport(?User $user = null): bool
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {

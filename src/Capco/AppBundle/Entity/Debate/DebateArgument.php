@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Model\ReportableInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
@@ -19,7 +20,6 @@ use Capco\AppBundle\Traits\ForAgainstTrait;
 use Capco\AppBundle\Traits\ReportableTrait;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
@@ -32,10 +32,10 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  */
-class DebateArgument implements Contribution, VotableInterface, ModerableInterface, Publishable
+class DebateArgument implements Contribution, VotableInterface, ReportableInterface, Publishable
 {
     use UuidTrait;
-    use VotableOkTrait;//@TODO remove votesCount when entity is added to elasticsearch
+    use VotableOkTrait; //@TODO remove votesCount when entity is added to elasticsearch
     use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;

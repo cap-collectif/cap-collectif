@@ -1,41 +1,49 @@
 Capco\AppBundle\Entity\Reporting:
-  reporting2:
-    id: 2
-    body: Je signale
-    Reporter: '@user100'
-    proposal: '@proposal1'
-    status: 2
-    isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-  reporting3:
-    id: 3
-    body: Je signale
-    Reporter: '@user100'
-    Source: '@source1'
-    status: 2
-    isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-  reporting4:
-    id: 4
-    body: Je signale
-    Reporter: '@user100'
-    opinionVersion: '@version1'
-    status: 2
-    isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-  reporting5:
-    id: 5
-    body: Je signale
-    Reporter: '@user100'
-    Argument: '@argument1'
-    status: 2
-    isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-  reporting6:
-    id: 6
-    body: Je signale
-    Reporter: '@user100'
-    Comment: '@evComment1'
-    status: 2
-    isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting2:
+        id: 2
+        body: Je signale
+        Reporter: '@user100'
+        proposal: '@proposal1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting3:
+        id: 3
+        body: Je signale
+        Reporter: '@user100'
+        Source: '@source1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting4:
+        id: 4
+        body: Je signale
+        Reporter: '@user100'
+        opinionVersion: '@version1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting5:
+        id: 5
+        body: Je signale
+        Reporter: '@user100'
+        Argument: '@argument1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting6:
+        id: 6
+        body: Je signale
+        Reporter: '@user100'
+        Comment: '@evComment1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting7:
+        id: 7
+        body: Argument très nul
+        Reporter: '@user5'
+        DebateArgument: '@debateArgument4'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>

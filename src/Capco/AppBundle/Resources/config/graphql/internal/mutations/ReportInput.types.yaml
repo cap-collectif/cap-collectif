@@ -1,0 +1,14 @@
+ReportInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of Report mutation'
+        fields:
+            reportableId:
+                type: 'ID!'
+                description: 'The id of the entity to be reported.'
+            body:
+                type: 'String!'
+                description: 'The content of the report'
+            type:
+                type: 'ReportingType!'
+                description: 'Kind of report.'

@@ -3242,7 +3242,7 @@ type Debate implements Node {
 }
 
 """A debate argument from non expert."""
-type DebateArgument implements Node {
+type DebateArgument implements Node & Reportable {
   """The ID of an object."""
   id: ID!
 
@@ -3270,7 +3270,7 @@ type DebateArgument implements Node {
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """Does the viewer already submitted a report ?"""
+  """True if the viewer has reported the argument."""
   viewerHasReport: Boolean!
 
   """The reportings related to the reportable."""
@@ -5841,6 +5841,7 @@ type Mutation {
   addDebateArgumentVote(input: AddDebateArgumentVoteInput!): AddDebateArgumentVotePayload
   removeDebateArgumentVote(input: RemoveDebateArgumentVoteInput!): RemoveDebateArgumentVotePayload
   askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
+  report(input: ReportInput!): ReportPayload
 }
 
 """A connection to a list of items."""
@@ -10111,6 +10112,36 @@ type ReportEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Available errors on report mutations."""
+enum ReportErrorCode {
+  """The entity does not exist or is not reportable."""
+  REPORTABLE_NOT_FOUND
+
+  """The viewer has already reported this content."""
+  ALREADY_REPORTED
+}
+
+input ReportInput {
+  """The id of the entity to be reported."""
+  reportableId: ID!
+
+  """The content of the report"""
+  body: String!
+
+  """Kind of report."""
+  type: ReportingType!
+  clientMutationId: String
+}
+
+type ReportPayload {
+  """The reporting just created."""
+  report: Reporting
+
+  """Contains the error code if one occurred."""
+  errorCode: ReportErrorCode
+  clientMutationId: String
 }
 
 """A reportable"""

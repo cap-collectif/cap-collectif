@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Reportable;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
@@ -16,8 +17,8 @@ use Psr\Log\LoggerInterface;
 
 class ReportableReportingResolver implements ResolverInterface
 {
-    private $repository;
-    private $logger;
+    private ReportingRepository $repository;
+    private LoggerInterface $logger;
 
     public function __construct(ReportingRepository $repository, LoggerInterface $logger)
     {
@@ -44,19 +45,21 @@ class ReportableReportingResolver implements ResolverInterface
                 $direction = $arguments->offsetGet('orderBy')['direction'];
 
                 if ($contributionType) {
-                    return $this->repository->getByContributionType(
-                        $contribution,
-                        $contributionType,
-                        $offset,
-                        $limit,
-                        $field,
-                        $direction
-                    )
+                    return $this->repository
+                        ->getByContributionType(
+                            $contribution,
+                            $contributionType,
+                            $offset,
+                            $limit,
+                            $field,
+                            $direction
+                        )
                         ->getIterator()
                         ->getArrayCopy();
                 }
 
-                return $this->repository->$getBy($contribution, $offset, $limit, $field, $direction)
+                return $this->repository
+                    ->{$getBy}($contribution, $offset, $limit, $field, $direction)
                     ->getIterator()
                     ->getArrayCopy();
             });
@@ -67,13 +70,14 @@ class ReportableReportingResolver implements ResolverInterface
                     $contributionType
                 );
             } else {
-                $totalCount = $this->repository->$countFor($contribution);
+                $totalCount = $this->repository->{$countFor}($contribution);
             }
             $this->logger->debug($totalCount);
 
             return $paginator->auto($arguments, $totalCount);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException('Could not find entity for selection step');
         }
     }
@@ -92,8 +96,11 @@ class ReportableReportingResolver implements ResolverInterface
         if ($contribution instanceof Opinion) {
             return ['getBy' => 'getByOpinion', 'countFor' => 'countForOpinion'];
         }
+        if ($contribution instanceof DebateArgument) {
+            return ['getBy' => 'getByDebateArgument', 'countFor' => 'countForDebateArgument'];
+        }
 
-        $contributionClass = explode('\\', get_class($contribution));
+        $contributionClass = explode('\\', \get_class($contribution));
         $contributionType = end($contributionClass);
 
         return [

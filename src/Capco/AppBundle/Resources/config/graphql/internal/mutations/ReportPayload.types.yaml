@@ -1,0 +1,10 @@
+ReportPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            report:
+                type: 'Reporting'
+                description: 'The reporting just created.'
+            errorCode:
+                type: 'ReportErrorCode'
+                description: 'Contains the error code if one occurred.'

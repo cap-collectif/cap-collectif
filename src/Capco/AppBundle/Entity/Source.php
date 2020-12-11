@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -27,7 +27,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, Trashable, VotableInterface, Publishable, ModerableInterface
+class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface
 {
     use UuidTrait;
     use ModerableTrait;
@@ -42,7 +42,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
 
     public static $TypesLabels = [
         self::LINK => 'global.link',
-        self::FILE => 'global.file'
+        self::FILE => 'global.file',
     ];
 
     /**
@@ -287,7 +287,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         return $this;
     }
 
-    public function getReports()
+    public function getReports(): iterable
     {
         return $this->reports;
     }
@@ -344,7 +344,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         return null;
     }
 
-    public function userHasReport(User $user = null): bool
+    public function userHasReport(?User $user = null): bool
     {
         if (null !== $user) {
             foreach ($this->reports as $report) {
@@ -417,7 +417,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
             'ElasticsearchSourceNestedOpinion',
             'ElasticsearchSourceNestedVersion',
             'ElasticsearchSourceNestedStep',
-            'ElasticsearchSourceNestedConsultation'
+            'ElasticsearchSourceNestedConsultation',
         ];
     }
 }

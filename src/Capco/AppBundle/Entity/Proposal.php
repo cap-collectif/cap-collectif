@@ -13,8 +13,8 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
@@ -66,7 +66,7 @@ class Proposal implements
     SoftDeleteable,
     DisplayableInBOInterface,
     DraftableInterface,
-    ModerableInterface
+    ReportableInterface
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -734,7 +734,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getReports(): Collection
+    public function getReports(): iterable
     {
         return $this->reports;
     }

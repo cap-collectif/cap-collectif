@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -23,8 +23,7 @@ class ReportingRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb
-            ->andWhere('r.proposal = :proposal')
+        $qb->andWhere('r.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -39,8 +38,7 @@ class ReportingRepository extends EntityRepository
     public function countAllByUser(User $user): int
     {
         $qb = $this->createQueryBuilder('r');
-        $qb
-            ->select('count(DISTINCT r)')
+        $qb->select('count(DISTINCT r)')
             ->andWhere('r.Reporter = :user')
             ->setParameter('user', $user);
 
@@ -84,8 +82,7 @@ class ReportingRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb
-            ->andWhere('r.Comment = :comment')
+        $qb->andWhere('r.Comment = :comment')
             ->setParameter('comment', $comment)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -106,8 +103,7 @@ class ReportingRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb
-            ->andWhere('r.Opinion = :opinion')
+        $qb->andWhere('r.Opinion = :opinion')
             ->setParameter('opinion', $opinion)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -138,8 +134,7 @@ class ReportingRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb
-            ->andWhere('r.opinionVersion = :opinionVersion')
+        $qb->andWhere('r.opinionVersion = :opinionVersion')
             ->setParameter('opinionVersion', $opinionVersion)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -157,6 +152,37 @@ class ReportingRepository extends EntityRepository
             ->select('COUNT(r.id)')
             ->where('r.opinionVersion = :opinionVersion')
             ->setParameter('opinionVersion', $opinionVersion)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getByDebateArgument(
+        DebateArgument $debateArgument,
+        int $offset,
+        int $limit,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb->andWhere('r.debateArgument = :debateArgument')
+            ->setParameter('debateArgument', $debateArgument)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('r.createdAt', $direction);
+        }
+
+        return new Paginator($qb);
+    }
+
+    public function countForDebateArgument(DebateArgument $debateArgument): int
+    {
+        return (int) $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('r.debateArgument = :debateArgument')
+            ->setParameter('debateArgument', $debateArgument)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -187,8 +213,7 @@ class ReportingRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb
-            ->andWhere("r.$contributionType = :contribution")
+        $qb->andWhere("r.${contributionType} = :contribution")
             ->setParameter('contribution', $contribution)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -206,7 +231,7 @@ class ReportingRepository extends EntityRepository
     ): int {
         return (int) $this->createQueryBuilder('r')
             ->select('COUNT(r.id)')
-            ->andWhere("r.$contributionType = :contribution")
+            ->andWhere("r.${contributionType} = :contribution")
             ->setParameter('contribution', $contribution)
             ->getQuery()
             ->getSingleScalarResult();

@@ -102,6 +102,9 @@ swarrot:
         debate_article.crawler:
             exchange: capco_direct_exchange
             routing_key: debate_article_crawler
+        report:
+            exchange: capco_direct_exchange
+            routing_key: report
     consumers:
         elasticsearch_indexation:
             processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
@@ -614,6 +617,23 @@ swarrot:
                       retry_routing_key_pattern: 'event_review_retry_%%attempt%%'
         debate_article_crawler:
             processor: Capco\AppBundle\Processor\Debate\DebateArticleCrawlerProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'event_review_retry_%%attempt%%'
+        report:
+            processor: Capco\AppBundle\Processor\ReportProcessor
             middleware_stack:
                 - configurator: swarrot.processor.signal_handler
                 - configurator: swarrot.processor.max_execution_time

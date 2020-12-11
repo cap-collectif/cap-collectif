@@ -11,6 +11,7 @@ InternalDebateArgument:
         description: 'A debate argument from non expert.'
         interfaces:
             - Node
+            - Reportable
         fields:
             id:
                 description: 'The ID of an object.'
@@ -44,3 +45,8 @@ InternalDebateArgument:
                 description: 'True if the viewer has upvoted the argument.'
                 type: Boolean!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasVoteResolver", [value, getUser()])'
+            viewerHasReport:
+                access: "@=hasRole('ROLE_USER')"
+                description: 'True if the viewer has reported the argument.'
+                type: Boolean!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", [value, getUser()])'

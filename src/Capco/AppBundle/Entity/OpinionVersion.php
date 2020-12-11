@@ -128,7 +128,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this->getParent();
     }
 
-    public function getReports()
+    public function getReports(): iterable
     {
         return $this->reports;
     }

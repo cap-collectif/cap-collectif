@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -54,7 +54,7 @@ abstract class Comment implements
     VotableInterface,
     HasAuthorInterface,
     CommentableInterface,
-    ModerableInterface
+    ReportableInterface
 {
     use VotableOkTrait;
     use PinnableTrait;
@@ -67,7 +67,7 @@ abstract class Comment implements
 
     public static $sortCriterias = [
         'date' => 'opinion.sort.last',
-        'popularity' => 'argument.sort.popularity'
+        'popularity' => 'argument.sort.popularity',
     ];
 
     /**
@@ -258,7 +258,7 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getReports(): ?Collection
+    public function getReports(): iterable
     {
         return $this->Reports;
     }
@@ -281,7 +281,7 @@ abstract class Comment implements
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(User $user = null): bool
+    public function userHasReport(?User $user = null): bool
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {

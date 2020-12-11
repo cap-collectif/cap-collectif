@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\ReportableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\IdTrait;
@@ -33,60 +34,60 @@ class Reporting implements CreatableInterface
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    private ?\DateTime $createdAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $Reporter;
+    private ?User $Reporter = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports")
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $Opinion;
+    private ?Opinion $Opinion = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="reports")
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $Source;
+    private ?Source $Source = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports")
      * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $Argument;
+    private ?Argument $Argument = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="reports")
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $opinionVersion;
+    private ?OpinionVersion $opinionVersion = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="Reports")
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $Comment;
+    private ?Comment $Comment = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="reports")
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $proposal;
+    private ?Proposal $proposal = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="reports")
      * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $debateArgument;
+    private ?DebateArgument $debateArgument = null;
 
     /**
      * @ORM\Column(name="is_archived", type="boolean", nullable=false)
      */
-    private $isArchived = false;
+    private bool $isArchived = false;
 
     public function __toString()
     {
@@ -283,6 +284,30 @@ class Reporting implements CreatableInterface
         if (null !== $this->proposal) {
             return $this->proposal;
         }
+        if (null !== $this->debateArgument) {
+            return $this->debateArgument;
+        }
+    }
+
+    public function setRelatedObject(ReportableInterface $reportable): self
+    {
+        if ($reportable instanceof Opinion) {
+            $this->setOpinion($reportable);
+        } elseif ($reportable instanceof Source) {
+            $this->setSource($reportable);
+        } elseif ($reportable instanceof Argument) {
+            $this->setArgument($reportable);
+        } elseif ($reportable instanceof Comment) {
+            $this->setComment($reportable);
+        } elseif ($reportable instanceof OpinionVersion) {
+            $this->setOpinionVersion($reportable);
+        } elseif ($reportable instanceof Proposal) {
+            $this->setProposal($reportable);
+        } elseif ($reportable instanceof DebateArgument) {
+            $this->setDebateArgument($reportable);
+        }
+
+        return $this;
     }
 
     // ***************************** Lifecycle *******************************
@@ -310,6 +335,10 @@ class Reporting implements CreatableInterface
 
         if (null !== $this->proposal) {
             $this->proposal->removeReport($this);
+        }
+
+        if (null !== $this->debateArgument) {
+            $this->debateArgument->removeReport($this);
         }
     }
 }
