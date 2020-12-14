@@ -34,10 +34,10 @@ export default createFragmentContainer(DebateStepPageLogic, {
         id
       }
       step: node(id: $stepId) {
+        ...DebateStepPageArguments_step
         ...DebateStepPageMainActions_step
         ...DebateStepPageFaceToFace_step
         ...DebateStepPageLinkedArticles_step
-        ...DebateStepPageArguments_step
       }
     }
   `,

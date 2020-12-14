@@ -7,16 +7,17 @@ import Button from '~ds/Button/Button';
 
 type Props = {|
   ...AppBoxProps,
-  variantColor: 'primary' | 'danger',
+  variantColor: 'primary' | 'danger' | 'green',
   icon: $Values<typeof ICON_NAME>,
   label: string,
+  iconColor?: string,
 |};
 
 const ButtonQuickAction = React.forwardRef<Props, HTMLElement>(
-  ({ variantColor, icon, label, ...props }: Props, ref) => {
+  ({ variantColor, icon, label, iconColor, ...props }: Props, ref) => {
     return (
       <Button ref={ref} p={1} borderRadius="buttonQuickAction" css={S[variantColor]} {...props}>
-        <Icon name={icon} size={ICON_SIZE.MD} color="gray.500" />
+        <Icon name={icon} size={ICON_SIZE.MD} color={iconColor || 'gray.500'} />
       </Button>
     );
   },

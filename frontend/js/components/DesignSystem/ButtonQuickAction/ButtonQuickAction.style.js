@@ -40,6 +40,25 @@ const styles = {
       boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
     },
   },
+  green: {
+    outline: 'none',
+
+    ':hover': {
+      backgroundColor: colors.green['150'],
+
+      '.icon': {
+        color: colors.green['500'],
+      },
+
+      ':focus': {
+        boxShadow: `0 0 2px 2px ${colors.green['300']}`,
+      },
+    },
+
+    ':focus': {
+      boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+    },
+  },
 };
 
 export default styles;

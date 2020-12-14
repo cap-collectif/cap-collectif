@@ -54,6 +54,9 @@
     {% endif %}
 
     {% block stepNavigation %}{% endblock %}
+    <style>
+        .main p { margin-bottom: unset; }
+    </style>
     <section style="background: #f7f7f7; border-top: 1px solid #e5e5e5;">
     <div class="container">
     {{ react_render_component('DebateStepPageApp',

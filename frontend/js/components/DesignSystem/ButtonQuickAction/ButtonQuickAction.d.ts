@@ -4,7 +4,7 @@ import { ComponentProps } from 'react';
 declare const ButtonQuickAction: PolymorphicComponent<ComponentProps<"button"> & {
     icon: string,
     label: string,
-    variantColor?: 'primary' | 'danger',
+    variantColor?: 'primary' | 'danger' | 'green',
 }>
 
 export default ButtonQuickAction

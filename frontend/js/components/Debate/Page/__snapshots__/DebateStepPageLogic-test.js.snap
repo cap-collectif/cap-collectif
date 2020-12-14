@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageLogic /> renders correcty 1`] = `
+<ForwardRef
+  direction="column"
+  spacing={8}
+>
+  <Relay(DebateStepPageMainContent)
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+    title="Pour ou contre le LSD dans nos cantines"
+  />
+  <Relay(DebateStepPageFaceToFace)
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <Relay(DebateStepPageLinkedArticles)
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <Relay(DebateStepPageArguments)
+    step={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+</ForwardRef>
+`;

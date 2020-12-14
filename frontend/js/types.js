@@ -187,6 +187,28 @@ export type Query = {|
   cached: any,
 |};
 
+// Inspired from the relay pagination props, but working with the relay-hooks implementation
+export type RelayHookPaginationProps = {|
+  +hasMore: () => boolean,
+  +isLoading: () => boolean,
+  +loadMore: (
+    connectionConfig: Object,
+    pageSize: number,
+    observerOrCallback: ?Function,
+    options?: {|
+      +force?: boolean,
+      +fetchPolicy?: 'store-or-network' | 'network-only',
+      +metadata?: { [key: string]: mixed, ... },
+    |},
+  ) => ?{ dispose(): void, ... },
+  +refetchConnection: (
+    connectionConfig: Object,
+    totalCount: number,
+    observerOrCallback: ?Function,
+    refetchVariables: ?{ +[string]: $FlowFixMe, ... },
+  ) => ?{ dispose(): void, ... },
+|};
+
 // ref => https://react-slick.neostack.com/docs/api#adaptiveHeight
 export type SettingsSlider = {|
   accessibility?: boolean,

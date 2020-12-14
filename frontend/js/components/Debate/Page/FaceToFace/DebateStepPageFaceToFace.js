@@ -37,20 +37,8 @@ export const DebateStepPageFaceToFace = ({ step }: Props) => {
         }>
         {forOpinion && againstOpinion && (
           <Flex direction={['column', 'row']} spacing={4}>
-            <DebateOpinion
-              title={forOpinion.title}
-              authorName={forOpinion.author.username}
-              authorPicture={forOpinion.author.media?.url}
-              body={forOpinion.body}
-              debateOpinionStatus="FOR"
-            />
-            <DebateOpinion
-              title={againstOpinion.title}
-              authorName={againstOpinion.author.username}
-              authorPicture={againstOpinion.author.media?.url}
-              body={againstOpinion.body}
-              debateOpinionStatus="AGAINST"
-            />
+            <DebateOpinion opinion={forOpinion} />
+            <DebateOpinion opinion={againstOpinion} />
           </Flex>
         )}
       </ReactPlaceholder>
@@ -66,14 +54,7 @@ export default createFragmentContainer(DebateStepPageFaceToFace, {
         opinions {
           edges {
             node {
-              title
-              body
-              author {
-                media {
-                  url
-                }
-                username
-              }
+              ...DebateOpinion_opinion
               type
             }
           }

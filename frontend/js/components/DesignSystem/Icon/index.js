@@ -23,3 +23,4 @@ export { default as CIRCLE_CROSS } from './svg/circle-cross.svg';
 export { default as NEWSPAPER } from './svg/newspaper.svg';
 export { default as SPINNER } from './svg/spinner.svg';
 export { default as BELL } from './svg/bell.svg';
+export { default as THUMB_UP } from './svg/thumb-up.svg';

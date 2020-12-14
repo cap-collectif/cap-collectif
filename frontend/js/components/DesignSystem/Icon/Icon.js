@@ -32,6 +32,7 @@ export const ICON_NAME = {
   NEWSPAPER: 'NEWSPAPER',
   SPINNER: 'SPINNER',
   BELL: 'BELL',
+  THUMB_UP: 'THUMB_UP',
 };
 
 export const ICON_SIZE = {

@@ -54,7 +54,7 @@ export const DebateStepPageLinkedArticles = ({ step }: Props) => {
             arrows: false,
           }}>
           {articles?.map(article => (
-            <a href={article.url}>
+            <a href={article.url} key={article.id}>
               <DebateArticleCard illustration={article.coverUrl} publishedAt={article.publishedAt}>
                 <DebateArticleCard.Title>{article.title}</DebateArticleCard.Title>
                 <DebateArticleCard.Origin>{article.origin}</DebateArticleCard.Origin>
