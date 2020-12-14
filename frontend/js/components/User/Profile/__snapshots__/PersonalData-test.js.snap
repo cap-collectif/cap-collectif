@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PersonalData /> should render user withou address 1`] = `
+exports[`<PersonalData /> should render user without address 1`] = `
 <div
   id="personal-data"
 >
@@ -679,15 +679,12 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 "birthPlace": "Paris",
                 "city": "oui",
                 "dateOfBirth": "29-02-1990",
-                "email": "oui@oui.fr",
                 "firstname": "Utilisateur",
                 "gender": "MALE",
-                "id": "user",
                 "isArchiveReady": true,
                 "isFranceConnectAccount": false,
                 "lastname": "Super",
                 "phone": "0123456789",
-                "phoneConfirmed": true,
                 "postalAddress": null,
                 "zipCode": "94500",
               }
@@ -1338,15 +1335,12 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 "birthPlace": "Paris",
                 "city": "Paris",
                 "dateOfBirth": null,
-                "email": "oui@non.fr",
                 "firstname": "Utilisateur",
                 "gender": "MALE",
-                "id": "user",
                 "isArchiveReady": true,
                 "isFranceConnectAccount": false,
                 "lastname": "oui",
                 "phone": "0123456789",
-                "phoneConfirmed": true,
                 "postalAddress": null,
                 "zipCode": "75012",
               }
@@ -2340,15 +2334,12 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 "birthPlace": "Loguetown",
                 "city": "Paris",
                 "dateOfBirth": "29-02-1990",
-                "email": "viewer@oui.fr",
                 "firstname": "Utilisateur",
                 "gender": "MALE",
-                "id": "user",
                 "isArchiveReady": true,
                 "isFranceConnectAccount": false,
                 "lastname": "Super",
                 "phone": "0123456789",
-                "phoneConfirmed": true,
                 "postalAddress": null,
                 "zipCode": "75012",
               }
@@ -2733,15 +2724,12 @@ exports[`<PersonalData /> should render with personal data not editable 1`] = `
                 "birthPlace": "Paris",
                 "city": "Paris",
                 "dateOfBirth": null,
-                "email": "oui@non.fr",
                 "firstname": "Utilisateur",
                 "gender": "MALE",
-                "id": "user",
                 "isArchiveReady": true,
                 "isFranceConnectAccount": false,
                 "lastname": "oui",
                 "phone": "0123456789",
-                "phoneConfirmed": true,
                 "postalAddress": null,
                 "zipCode": "75012",
               }

@@ -45,7 +45,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
             Object {
               "$refType": null,
               "biography": "I am a fucking customer",
-              "facebookUrl": "https://facebokk.com/mmm",
+              "facebookUrl": "https://facebook.com/mmm",
               "id": "user1234",
               "linkedInUrl": "http://linkedin.com/neurchi",
               "media": Object {
@@ -57,12 +57,10 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
               "neighborhood": "DTC",
               "profilePageIndexed": false,
               "twitterUrl": "http://twitter.com/cuicui",
-              "url": "http://linkedin.com/user/dqkfjdsmq",
               "userType": Object {
                 "id": "1",
               },
               "username": "username",
-              "websiteUrl": "http://perdu.com",
             }
           }
         />
@@ -193,29 +191,6 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
             divClassName="col-sm-6"
             id="public-data-form-neighborhood"
             name="neighborhood"
-            type="text"
-          />
-        </div>
-      </div>
-      <div
-        className="horizontal_field_with_border_top no-border"
-      >
-        <label
-          className="col-sm-3 control-label"
-          htmlFor="public-data-form-website"
-        >
-          <FormattedMessage
-            id="form.label_website"
-            values={Object {}}
-          />
-        </label>
-        <div>
-          <Field
-            component={[Function]}
-            disabled={false}
-            divClassName="col-sm-6"
-            id="public-data-form-website"
-            name="websiteUrl"
             type="text"
           />
         </div>
@@ -422,7 +397,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
             Object {
               "$refType": null,
               "biography": "I am a fucking customer",
-              "facebookUrl": "https://facebokk.com/mmm",
+              "facebookUrl": "https://facebook.com/mmm",
               "id": "user1234",
               "linkedInUrl": "http://linkedin.com/neurchi",
               "media": Object {
@@ -434,12 +409,10 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
               "neighborhood": "DTC",
               "profilePageIndexed": false,
               "twitterUrl": "http://twitter.com/cuicui",
-              "url": "http://linkedin.com/user/dqkfjdsmq",
               "userType": Object {
                 "id": "1",
               },
               "username": "username",
-              "websiteUrl": "http://perdu.com",
             }
           }
         />
@@ -533,29 +506,6 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
             divClassName="col-sm-6"
             id="public-data-form-neighborhood"
             name="neighborhood"
-            type="text"
-          />
-        </div>
-      </div>
-      <div
-        className="horizontal_field_with_border_top no-border"
-      >
-        <label
-          className="col-sm-3 control-label"
-          htmlFor="public-data-form-website"
-        >
-          <FormattedMessage
-            id="form.label_website"
-            values={Object {}}
-          />
-        </label>
-        <div>
-          <Field
-            component={[Function]}
-            disabled={false}
-            divClassName="col-sm-6"
-            id="public-data-form-website"
-            name="websiteUrl"
             type="text"
           />
         </div>

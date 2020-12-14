@@ -35,13 +35,15 @@ const validate = (values: Object) => {
   const errors = {};
   const fields = [
     'biography',
-    'websiteUrl',
     'neighborhood',
-    'linkedIn',
-    'twitter',
-    'facebook',
+    'linkedInUrl',
+    'twitterUrl',
+    'facebookUrl',
     'username',
   ];
+  const fbRegEx = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w]*\/)*([\w]*)/;
+  const twitterRegEx = /(?:https?:\/\/)?(?:www\.)?(mbasic.twitter|m\.twitter|twitter)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:[\w]*\/)*([\w]*)/;
+  const linkedInRegEx = /(?:https?:\/\/)?(?:www\.)?(mbasic.linkedin|m\.linkedin|linkedin)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w]*\/)*([\w]*)/;
 
   fields.forEach(value => {
     if (value === 'username') {
@@ -52,7 +54,21 @@ const validate = (values: Object) => {
         errors[value] = 'registration.constraints.username.symbol';
       }
     }
-
+    if (value === 'facebookUrl' && values[value] && values[value].length > 5) {
+      if (!values[value].match(fbRegEx)) {
+        errors[value] = 'not-fb-url-valide';
+      }
+    }
+    if (value === 'twitterUrl' && values[value] && values[value].length > 5) {
+      if (!values[value].match(twitterRegEx)) {
+        errors[value] = 'not-twitter-url-valide';
+      }
+    }
+    if (value === 'linkedInUrl' && values[value] && values[value].length > 5) {
+      if (!values[value].match(linkedInRegEx)) {
+        errors[value] = 'not-linkedin-url-valide';
+      }
+    }
     if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
@@ -244,26 +260,6 @@ export class Profile extends Component<Props> {
                 )}
               </div>
             </div>
-            <div className="horizontal_field_with_border_top no-border">
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-website">
-                <FormattedMessage id="form.label_website" />
-              </label>
-              <div>
-                <Field
-                  name="websiteUrl"
-                  component={component}
-                  type="text"
-                  disabled={window.location.hostname === occitanieUrl}
-                  id="public-data-form-website"
-                  divClassName="col-sm-6"
-                />
-                {isSsoFcOrOccitanie(false) && (
-                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
-                    <FormattedMessage id={getSsoTradKey()} />
-                  </div>
-                )}
-              </div>
-            </div>
             <div className="clearfix" />
             <h2>
               <FormattedMessage id="social-medias" />
@@ -379,7 +375,6 @@ const mapStateToProps = (state: State, props: Props) => ({
   initialValues: {
     username: props.viewer.username ? props.viewer.username : null,
     biography: props.viewer.biography ? props.viewer.biography : null,
-    websiteUrl: props.viewer.websiteUrl ? props.viewer.websiteUrl : null,
     facebookUrl: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
     linkedInUrl: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
     twitterUrl: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
@@ -404,10 +399,8 @@ export default createFragmentContainer(container, {
         size
         url
       }
-      url
       username
       biography
-      websiteUrl
       facebookUrl
       linkedInUrl
       twitterUrl

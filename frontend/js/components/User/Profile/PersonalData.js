@@ -863,7 +863,6 @@ const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment PersonalData_viewer on User {
-      id
       firstname
       lastname
       dateOfBirth
@@ -877,8 +876,6 @@ export default createFragmentContainer(container, {
       zipCode
       city
       gender
-      email
-      phoneConfirmed
       isArchiveReady
       birthPlace
       isFranceConnectAccount

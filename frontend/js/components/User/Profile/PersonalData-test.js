@@ -9,8 +9,6 @@ describe('<PersonalData />', () => {
   const viewer1 = {
     $refType,
     $fragmentRefs,
-    id: 'user',
-    email: 'viewer@oui.fr',
     isArchiveReady: true,
     firstname: 'Utilisateur',
     lastname: 'Super',
@@ -22,7 +20,6 @@ describe('<PersonalData />', () => {
     zipCode: '75012',
     city: 'Paris',
     gender: 'MALE',
-    phoneConfirmed: true,
     birthPlace: 'Loguetown',
     isFranceConnectAccount: false,
   };
@@ -41,7 +38,6 @@ describe('<PersonalData />', () => {
       zipCode: '75012',
       city: 'Paris',
       gender: 'MALE',
-      phoneConfirmed: true,
       isFranceConnectAccount: false,
       birthPlace: 'Noxus',
     },
@@ -74,7 +70,6 @@ describe('<PersonalData />', () => {
       zipCode: null,
       city: null,
       gender: 'MALE',
-      phoneConfirmed: true,
       birthPlace: null,
       isFranceConnectAccount: false,
     },
@@ -97,12 +92,10 @@ describe('<PersonalData />', () => {
   const viewer2 = {
     $refType,
     $fragmentRefs,
-    id: 'user',
     postalAddress: null,
     address: 'oui',
     address2: 'oui',
     city: 'oui',
-    email: 'oui@oui.fr',
     zipCode: '94500',
     isArchiveReady: true,
     firstname: 'Utilisateur',
@@ -110,7 +103,6 @@ describe('<PersonalData />', () => {
     dateOfBirth: '29-02-1990',
     phone: '0123456789',
     gender: 'MALE',
-    phoneConfirmed: true,
     birthPlace: 'Paris',
     isFranceConnectAccount: false,
   };
@@ -128,7 +120,6 @@ describe('<PersonalData />', () => {
       zipCode: '75012',
       city: 'Paris',
       gender: null,
-      phoneConfirmed: true,
       birthPlace: 'Paris',
       isFranceConnectAccount: false,
     },
@@ -150,13 +141,10 @@ describe('<PersonalData />', () => {
   const viewer3 = {
     $refType,
     $fragmentRefs,
-    id: 'user',
     dateOfBirth: null,
-    email: 'oui@non.fr',
     gender: 'MALE',
     isArchiveReady: true,
     lastname: 'oui',
-    phoneConfirmed: true,
     firstname: 'Utilisateur',
     phone: '0123456789',
     postalAddress: null,
@@ -176,7 +164,7 @@ describe('<PersonalData />', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render user withou address', () => {
+  it('should render user without address', () => {
     const wrapper = shallow(<PersonalData {...props2} viewer={viewer2} />);
     wrapper.setState({
       showDeleteModal: false,
