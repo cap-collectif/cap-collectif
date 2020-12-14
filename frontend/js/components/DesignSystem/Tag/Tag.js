@@ -33,8 +33,6 @@ export const styles = {
 
 const TagInner = styled(AppBox).attrs({
   maxHeight: Spacing.Xl,
-  position: 'relative',
-  borderRadius: 'tags',
   display: 'inline-flex',
   alignItems: 'center',
 })(
@@ -147,6 +145,8 @@ const Tag = React.forwardRef<Props, HTMLSpanElement>(
         css={styles}
         variantType={variantType}
         title={jsxInnerText(children)}
+        position="relative"
+        borderRadius="tags"
         {...props}
         onMouseLeave={() => {
           set('idle');

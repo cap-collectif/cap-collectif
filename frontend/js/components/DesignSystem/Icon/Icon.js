@@ -33,6 +33,8 @@ export const ICON_NAME = {
   SPINNER: 'SPINNER',
   BELL: 'BELL',
   THUMB_UP: 'THUMB_UP',
+  LONG_ARROW_LEFT: 'LONG_ARROW_LEFT',
+  LONG_ARROW_RIGHT: 'LONG_ARROW_RIGHT',
 };
 
 export const ICON_SIZE = {
@@ -115,6 +117,7 @@ const Icon = React.forwardRef<Props, HTMLElement>(
         className={cn('icon', className)}
         color={color}
         ref={ref}
+        css={{ overflow: 'visible !important' }}
         {...props}
       />
     );

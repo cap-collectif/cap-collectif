@@ -10,6 +10,7 @@ const defaultStep = {
   title: 'testStep',
   type: 'typeTest',
   url: 'urlTest',
+  slug: 'slugTest',
 };
 
 const defaultProps = {

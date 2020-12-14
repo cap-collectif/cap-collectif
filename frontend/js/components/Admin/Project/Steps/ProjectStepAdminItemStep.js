@@ -11,6 +11,8 @@ import type { ProjectStepAdminItemStep_project } from '~relay/ProjectStepAdminIt
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import Flex from '~ui/Primitives/Layout/Flex';
+import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
+import { getProjectAdminPath } from '~/components/Admin/Project/ProjectAdminContent';
 
 type Props = {|
   step: Step,
@@ -67,7 +69,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
             {step.type && <FormattedMessage id={getWordingStep(step.type)} />}
           </span>
 
-          {step.type === 'DebateStep' && (
+          {step.type === 'DebateStep' && step.slug && (
             <>
               <br />
               <Flex
@@ -86,7 +88,14 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
                 <Text color="blue.800">
                   <FormattedHTMLMessage
                     id="finalize.face.to.face.configuration"
-                    values={{ link: '#' }}
+                    values={{
+                      link: getContributionsPath(
+                        getProjectAdminPath(project._id, 'CONTRIBUTIONS'),
+                        'DebateStep',
+                        step.id || '',
+                        step.slug,
+                      ),
+                    }}
                   />
                 </Text>
               </Flex>
@@ -135,6 +144,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
 export default createFragmentContainer(ProjectStepAdminItemStep, {
   project: graphql`
     fragment ProjectStepAdminItemStep_project on Project {
+      _id
       ...ProjectAdminStepFormModal_project
     }
   `,

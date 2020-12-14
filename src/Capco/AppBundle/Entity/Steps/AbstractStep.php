@@ -362,6 +362,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
             $this->getIsEnabled();
     }
 
+    public function isDebateStep(): bool
+    {
+        return false;
+    }
+
     public function isConsultationStep(): bool
     {
         return false;

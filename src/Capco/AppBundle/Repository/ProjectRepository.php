@@ -47,8 +47,7 @@ class ProjectRepository extends EntityRepository
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('p');
-        $qb
-            ->addSelect('theme', 'cover', 'authors', 'positioner', 'pas', 'step', 'district')
+        $qb->addSelect('theme', 'cover', 'authors', 'positioner', 'pas', 'step', 'district')
             ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
             ->leftJoin('p.projectDistrictPositioners', 'positioner')
             ->leftJoin('positioner.district', 'district')
@@ -100,6 +99,48 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
+    public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder
+    {
+        $visibility = $this->getVisibilityForViewer($viewer);
+
+        $qb = $this->createQueryBuilder('p')
+            ->addSelect('authors')
+            ->leftJoin('p.authors', 'authors')
+            ->leftJoin('p.restrictedViewerGroups', 'pvg')
+            ->orWhere('p.visibility IN (:visibility)')
+            ->setParameter('visibility', $visibility);
+        // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
+        /** @var User $viewer */
+        $viewerGroups = $viewer && \is_object($viewer) ? $viewer->getUserGroupIds() : [];
+
+        if ($viewer && \is_object($viewer) && !$viewer->isSuperAdmin()) {
+            if ($viewerGroups) {
+                $qb->orWhere(
+                    $qb
+                        ->expr()
+                        ->andX(
+                            $qb->expr()->eq('p.visibility', ':custom'),
+                            $qb->expr()->in('pvg.id', ':pvgId')
+                        )
+                );
+                $qb->setParameter('custom', ProjectVisibilityMode::VISIBILITY_CUSTOM);
+                $qb->setParameter('pvgId', $viewerGroups);
+            }
+            $qb->orWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->eq('p.visibility', ':me'),
+                        $qb->expr()->eq('authors.user', ':viewer')
+                    )
+            );
+            $qb->setParameter('me', ProjectVisibilityMode::VISIBILITY_ME);
+            $qb->setParameter('viewer', $viewer);
+        }
+
+        return $qb;
+    }
+
     public function getByUserPublicPaginated(User $user, int $offset, int $limit): Paginator
     {
         $query = $this->getUserProjectPublicQueryBuilder($user);
@@ -147,8 +188,7 @@ class ProjectRepository extends EntityRepository
 
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer);
 
-        $qb
-            ->addSelect('t', 'pas', 's', 'pov')
+        $qb->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('t.translations', 'translation')
             ->leftJoin('p.steps', 'pas')
@@ -236,48 +276,6 @@ class ProjectRepository extends EntityRepository
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)->select('COUNT(p.id)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder
-    {
-        $visibility = $this->getVisibilityForViewer($viewer);
-
-        $qb = $this->createQueryBuilder('p')
-            ->addSelect('authors')
-            ->leftJoin('p.authors', 'authors')
-            ->leftJoin('p.restrictedViewerGroups', 'pvg')
-            ->orWhere('p.visibility IN (:visibility)')
-            ->setParameter('visibility', $visibility);
-        // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
-        /** @var User $viewer */
-        $viewerGroups = $viewer && \is_object($viewer) ? $viewer->getUserGroupIds() : [];
-
-        if ($viewer && \is_object($viewer) && !$viewer->isSuperAdmin()) {
-            if ($viewerGroups) {
-                $qb->orWhere(
-                    $qb
-                        ->expr()
-                        ->andX(
-                            $qb->expr()->eq('p.visibility', ':custom'),
-                            $qb->expr()->in('pvg.id', ':pvgId')
-                        )
-                );
-                $qb->setParameter('custom', ProjectVisibilityMode::VISIBILITY_CUSTOM);
-                $qb->setParameter('pvgId', $viewerGroups);
-            }
-            $qb->orWhere(
-                $qb
-                    ->expr()
-                    ->andX(
-                        $qb->expr()->eq('p.visibility', ':me'),
-                        $qb->expr()->eq('authors.user', ':viewer')
-                    )
-            );
-            $qb->setParameter('me', ProjectVisibilityMode::VISIBILITY_ME);
-            $qb->setParameter('viewer', $viewer);
-        }
-
-        return $qb;
     }
 
     public function getDistinctProjectTypesUsedByProjects($viewer = null): array

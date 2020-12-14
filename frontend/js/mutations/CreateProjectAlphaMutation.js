@@ -18,6 +18,7 @@ const mutation = graphql`
           body
           type: __typename
           title
+          slug
           timeRange {
             startAt
             endAt

@@ -4,7 +4,7 @@ import AppBox from '~ui/Primitives/AppBox';
 import useTheme from '~/utils/hooks/useTheme';
 import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type';
 
-type Props = {|
+export type Props = {|
   ...AppBoxProps,
   align?: Responsive<string>,
   justify?: Responsive<string>,

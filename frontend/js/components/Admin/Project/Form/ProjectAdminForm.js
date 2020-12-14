@@ -259,6 +259,7 @@ const onSubmit = (
           // DebateStep
           articles: s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
           debate: undefined,
+          slug: undefined,
         }))
       : [],
     locale: locale ? locale.value : null,
@@ -420,8 +421,8 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
                 edge?.node?.type === 'DateOfBirthRequirement'
                   ? 'DATE_OF_BIRTH'
                   : edge?.node?.type === 'PostalAddressRequirement'
-                    ? 'POSTAL_ADDRESS'
-                    : edge?.node?.type.slice(0, -11).toUpperCase(),
+                  ? 'POSTAL_ADDRESS'
+                  : edge?.node?.type.slice(0, -11).toUpperCase(),
             })),
             requirementsReason: step.requirements?.reason || null,
             consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
@@ -484,6 +485,7 @@ const form = injectIntl(
     validate,
     onSubmit,
     form: formName,
+    enableReinitialize: true,
   })(ProjectAdminForm),
 );
 
@@ -543,6 +545,7 @@ export default createFragmentContainer(container, {
         timeless
         type: __typename
         title
+        slug
         startAt: timeRange {
           startAt
         }

@@ -13,6 +13,11 @@ class AbstractStepRepository extends EntityRepository
         return Criteria::create()->orderBy($orderings);
     }
 
+    public static function createSlugCriteria(string $slug): Criteria
+    {
+        return Criteria::create()->andWhere(Criteria::expr()->eq('slug', $slug));
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

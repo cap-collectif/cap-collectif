@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -890,6 +891,18 @@ class Project implements IndexableInterface
         /** @var AbstractStep $step */
         foreach ($this->steps as $step) {
             if ($step->getStep() && $step->getStep()->isCollectStep()) {
+                return $step->getStep();
+            }
+        }
+
+        return null;
+    }
+
+    public function getFirstDebateStep(): ?DebateStep
+    {
+        /** @var AbstractStep $step */
+        foreach ($this->steps as $step) {
+            if ($step->getStep() && $step->getStep()->isDebateStep()) {
                 return $step->getStep();
             }
         }

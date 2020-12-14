@@ -3,16 +3,16 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import cn from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { Container, Tiles } from './NoCollectStep.style';
+import { Container, Tiles } from './NoContributionsStep.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
-import type { NoCollectStep_project } from '~relay/NoCollectStep_project.graphql';
+import type { NoContributionsStep_project } from '~relay/NoContributionsStep_project.graphql';
 
 type Props = {|
-  project: NoCollectStep_project,
+  project: NoContributionsStep_project,
 |};
 
-const NoCollectStep = ({ project }: Props) => {
+const NoContributionsStep = ({ project }: Props) => {
   const hasQuestionnaireStep =
     project.steps.filter(({ __typename }) => __typename === 'QuestionnaireStep').length > 0;
   const hasConsultationStep =
@@ -95,9 +95,9 @@ const NoCollectStep = ({ project }: Props) => {
   );
 };
 
-export default createFragmentContainer(NoCollectStep, {
+export default createFragmentContainer(NoContributionsStep, {
   project: graphql`
-    fragment NoCollectStep_project on Project {
+    fragment NoContributionsStep_project on Project {
       _id
       steps {
         __typename

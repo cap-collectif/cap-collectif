@@ -46,6 +46,7 @@ const mutation = graphql`
           body
           type: __typename
           title
+          slug
           startAt: timeRange {
             startAt
           }
@@ -89,6 +90,12 @@ const mutation = graphql`
                   }
                 }
               }
+            }
+          }
+          ... on QuestionnaireStep {
+            questionnaire {
+              value: id
+              label: title
             }
           }
         }

@@ -174,67 +174,6 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                         "args": null,
                         "concreteType": null,
                         "kind": "LinkedField",
-                        "name": "firstAnalysisStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalConnection",
-                            "kind": "LinkedField",
-                            "name": "proposals",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "totalCount",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "UserConnection",
-                        "kind": "LinkedField",
-                        "name": "contributors",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "totalCount",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
                         "name": "steps",
                         "plural": true,
                         "selections": Array [
@@ -242,11 +181,11 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "__typename",
+                            "name": "id",
                             "storageKey": null,
                           },
                           Object {
-                            "alias": "type",
+                            "alias": null,
                             "args": null,
                             "kind": "ScalarField",
                             "name": "__typename",
@@ -256,7 +195,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "slug",
                             "storageKey": null,
                           },
                           Object {
@@ -271,6 +210,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                             "args": null,
                             "kind": "ScalarField",
                             "name": "timeless",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": "type",
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
                             "storageKey": null,
                           },
                           Object {
@@ -1302,6 +1248,92 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "DebateStep",
+                        "kind": "LinkedField",
+                        "name": "firstDebateStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "slug",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "firstAnalysisStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProposalConnection",
+                            "kind": "LinkedField",
+                            "name": "proposals",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "UserConnection",
+                        "kind": "LinkedField",
+                        "name": "contributors",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "metaDescription",
                         "storageKey": null,
@@ -1705,7 +1737,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "152ce154626b20e570b5c1082a330eea",
+        "cacheID": "55c80eb74a9569a7427f710525179cdb",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1735,6 +1767,15 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
   proposals {
     totalCount
   }
+  steps {
+    id
+    __typename
+    slug
+  }
+  firstDebateStep {
+    id
+    slug
+  }
   firstAnalysisStep {
     __typename
     proposals {
@@ -1744,11 +1785,6 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
   }
   contributors {
     totalCount
-  }
-  steps {
-    __typename
-    type: __typename
-    id
   }
   ...ProjectAdminForm_project
 }
@@ -1812,6 +1848,7 @@ fragment ProjectAdminForm_project on Project {
     timeless
     type: __typename
     title
+    slug
     startAt: timeRange {
       startAt
     }
@@ -2088,6 +2125,7 @@ fragment ProjectPublishAdminForm_project on Project {
 }
 
 fragment ProjectStepAdminItemStep_project on Project {
+  _id
   ...ProjectAdminStepFormModal_project
 }
 
@@ -2291,67 +2329,6 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                         "args": null,
                         "concreteType": null,
                         "kind": "LinkedField",
-                        "name": "firstAnalysisStep",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalConnection",
-                            "kind": "LinkedField",
-                            "name": "proposals",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "totalCount",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "UserConnection",
-                        "kind": "LinkedField",
-                        "name": "contributors",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "totalCount",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
                         "name": "steps",
                         "plural": true,
                         "selections": Array [
@@ -2359,11 +2336,11 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "__typename",
+                            "name": "id",
                             "storageKey": null,
                           },
                           Object {
-                            "alias": "type",
+                            "alias": null,
                             "args": null,
                             "kind": "ScalarField",
                             "name": "__typename",
@@ -2373,7 +2350,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "slug",
                             "storageKey": null,
                           },
                           Object {
@@ -2388,6 +2365,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                             "args": null,
                             "kind": "ScalarField",
                             "name": "timeless",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": "type",
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
                             "storageKey": null,
                           },
                           Object {
@@ -3419,6 +3403,92 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "DebateStep",
+                        "kind": "LinkedField",
+                        "name": "firstDebateStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "slug",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "firstAnalysisStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProposalConnection",
+                            "kind": "LinkedField",
+                            "name": "proposals",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "UserConnection",
+                        "kind": "LinkedField",
+                        "name": "contributors",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "metaDescription",
                         "storageKey": null,
@@ -3822,7 +3892,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "152ce154626b20e570b5c1082a330eea",
+        "cacheID": "55c80eb74a9569a7427f710525179cdb",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3852,6 +3922,15 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
   proposals {
     totalCount
   }
+  steps {
+    id
+    __typename
+    slug
+  }
+  firstDebateStep {
+    id
+    slug
+  }
   firstAnalysisStep {
     __typename
     proposals {
@@ -3861,11 +3940,6 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
   }
   contributors {
     totalCount
-  }
-  steps {
-    __typename
-    type: __typename
-    id
   }
   ...ProjectAdminForm_project
 }
@@ -3929,6 +4003,7 @@ fragment ProjectAdminForm_project on Project {
     timeless
     type: __typename
     title
+    slug
     startAt: timeRange {
       startAt
     }
@@ -4205,6 +4280,7 @@ fragment ProjectPublishAdminForm_project on Project {
 }
 
 fragment ProjectStepAdminItemStep_project on Project {
+  _id
   ...ProjectAdminStepFormModal_project
 }
 

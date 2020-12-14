@@ -135,6 +135,7 @@ export type ParentProps = {|
   groupedResponsesEnabled?: boolean,
   responseColorsDisabled?: boolean,
   isValidDate?: (current: moment) => boolean,
+  withCharacterCounter?: boolean,
 |};
 
 type Props = {|
@@ -215,6 +216,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     groupedResponsesEnabled,
     responseColorsDisabled,
     isValidDate,
+    withCharacterCounter,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -229,7 +231,13 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (type === 'editor') {
       return (
         <React.Fragment>
-          <Editor value={value} className={wrapperClassName} {...props} />
+          <Editor
+            value={value}
+            className={wrapperClassName}
+            withCharacterCounter={withCharacterCounter}
+            maxLength={props.maxLength}
+            {...props}
+          />
           <Notepad />
         </React.Fragment>
       );
@@ -242,6 +250,8 @@ class ReactBootstrapInput extends React.Component<Props> {
           name={props.name}
           initialContent={value}
           onChange={props.onChange}
+          withCharacterCounter={withCharacterCounter}
+          maxLength={props.maxLength}
           {...props}
         />
       );

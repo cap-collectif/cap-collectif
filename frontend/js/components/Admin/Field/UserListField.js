@@ -6,21 +6,21 @@ import select from '../../Form/Select';
 import environment from '../../../createRelayEnvironment';
 
 type Props = {
-  id: ?string,
+  id?: ?string,
   name: string,
   label?: React$Element<*>,
-  labelClassName: ?string,
-  inputClassName: ?string,
-  placeholder: ?string,
-  ariaControls: ?string,
+  labelClassName?: ?string,
+  inputClassName?: ?string,
+  placeholder?: ?string,
+  ariaControls?: ?string,
   userListToNoSearch?: ?Array<string>,
   disabled?: boolean,
   selectFieldIsObject?: boolean,
   multi?: boolean,
-  autoload: boolean,
-  debounce: boolean,
-  authorOfEvent: boolean,
-  clearable: boolean,
+  autoload?: boolean,
+  debounce?: boolean,
+  authorOfEvent?: boolean,
+  clearable?: boolean,
 };
 
 const getUsersList = graphql`

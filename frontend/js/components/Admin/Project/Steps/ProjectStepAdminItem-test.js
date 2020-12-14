@@ -10,7 +10,9 @@ const defaultStep = {
   title: 'testStep',
   type: 'typeTest',
   url: 'urlTest',
+  slug: 'urlTest',
 };
+
 const defaultProps = {
   formName: 'oui',
   index: 0,

@@ -1,12 +1,14 @@
 // @flow
 import React from 'react';
 import Quill from 'quill';
+import styled, { type StyledComponent } from 'styled-components';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState } from '~/types';
 import QuillToolbar from './QuillToolbar';
 import { selectLocalImage } from './EditorImageUpload';
+import Text from '~ui/Primitives/Text';
 
 type Props = {
   intl: IntlShape,
@@ -18,9 +20,32 @@ type Props = {
   disabled?: boolean,
   initialContent?: ?string,
   currentLanguage: string,
+  withCharacterCounter?: boolean,
+  maxLength?: string,
 };
 
-export class Editor extends React.Component<Props> {
+type State = {|
+  valueWithoutHtml: ?string,
+|};
+
+export const Container: StyledComponent<{ hasCounter: boolean }, {}, HTMLDivElement> = styled.div`
+  ${props =>
+    props.hasCounter &&
+    `
+    .editor .ql-container .ql-editor {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  `}
+
+  .character-counter {
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+  }
+`;
+
+export class Editor extends React.Component<Props, State> {
   static defaultProps = {
     id: '',
     className: '',
@@ -38,10 +63,13 @@ export class Editor extends React.Component<Props> {
 
     this.editorRef = React.createRef();
     this.toolbarRef = React.createRef();
+    this.state = {
+      valueWithoutHtml: null,
+    };
   }
 
   componentDidMount() {
-    const { onBlur, onChange, value, intl, disabled } = this.props;
+    const { onBlur, onChange, value, intl, disabled, maxLength } = this.props;
 
     const size = Quill.import('formats/size');
     size.whitelist = ['small', 'normal', 'large'];
@@ -92,6 +120,7 @@ export class Editor extends React.Component<Props> {
     const defaultValue = value;
     if (defaultValue) {
       this.quill.clipboard.dangerouslyPasteHTML(defaultValue);
+      this.setState({ valueWithoutHtml: this.quill.root.innerText });
     }
 
     this.quill.on('selection-change', range => {
@@ -101,8 +130,17 @@ export class Editor extends React.Component<Props> {
     });
 
     this.quill.on('text-change', () => {
+      const valueWithoutHtml = this.quill.root.textContent;
+      const valueLength = this.quill.getLength() - 1;
+
+      if (valueLength > parseInt(maxLength, 10)) {
+        return this.quill.deleteText(parseInt(maxLength, 10), valueLength);
+      }
+
       onChange(this.quill.root.innerHTML);
+      this.setState({ valueWithoutHtml });
     });
+
     this.quill.enable(!disabled);
   }
 
@@ -128,20 +166,27 @@ export class Editor extends React.Component<Props> {
   }
 
   render() {
-    const { className, id } = this.props;
+    const { className, id, withCharacterCounter, maxLength } = this.props;
+    const { valueWithoutHtml } = this.state;
 
     const classes = {
       editor: true,
       'form-control': false,
       [className]: true,
     };
+
     return (
-      <div id={id} className={classNames(classes)}>
+      <Container id={id} className={classNames(classes)} hasCounter={withCharacterCounter}>
         <div ref={this.toolbarRef}>
           <QuillToolbar />
         </div>
         <div ref={this.editorRef} />
-      </div>
+        {withCharacterCounter && maxLength && (
+          <Text className="character-counter" color="gray.500" fontSize={1}>
+            {`${valueWithoutHtml?.length || 0}/${parseInt(maxLength, 10)}`}
+          </Text>
+        )}
+      </Container>
     );
   }
 }

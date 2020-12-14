@@ -10,13 +10,16 @@ const defaultStep = {
   title: 'testStep',
   type: 'typeTest',
   url: 'urlTest',
+  slug: 'slugTest',
 };
+
 const defaultProps = {
   formName: 'oui',
   index: 0,
   step: defaultStep,
   fields: { length: 0, map: () => [], remove: jest.fn() },
   project: {
+    _id: 'project123',
     $fragmentRefs,
     $refType,
   },

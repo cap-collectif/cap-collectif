@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminDebate /> should render correctly 1`] = `
+<ForwardRef
+  direction="column"
+>
+  <Accordion
+    defaultAccordion="face-to-face"
+    spacing={2}
+  >
+    <AccordionItem
+      id="face-to-face"
+    >
+      <AccordionButton>
+        <FormattedMessage
+          id="the.face-to-face"
+          values={Object {}}
+        />
+      </AccordionButton>
+      <AccordionPanel>
+        <Relay(FaceToFace)
+          debate={
+            Object {
+              "$fragmentRefs": null,
+            }
+          }
+        />
+      </AccordionPanel>
+    </AccordionItem>
+    <AccordionItem
+      id="argument"
+    >
+      <AccordionButton>
+        0 argument
+      </AccordionButton>
+      <AccordionPanel>
+        WIP
+      </AccordionPanel>
+    </AccordionItem>
+    <AccordionItem
+      id="vote"
+    >
+      <AccordionButton>
+        0 vote
+      </AccordionButton>
+      <AccordionPanel>
+        WIP
+      </AccordionPanel>
+    </AccordionItem>
+  </Accordion>
+</ForwardRef>
+`;
+
+exports[`<ProjectAdminDebate /> should render correctly with contributions step 1`] = `
+<ForwardRef
+  direction="column"
+>
+  <Button
+    leftIcon="LONG_ARROW_LEFT"
+    mb={8}
+    onClick={[Function]}
+    size="small"
+    variant="tertiary"
+  >
+    <FormattedMessage
+      id="global.steps"
+      values={Object {}}
+    />
+  </Button>
+  <Accordion
+    defaultAccordion="face-to-face"
+    spacing={2}
+  >
+    <AccordionItem
+      id="face-to-face"
+    >
+      <AccordionButton>
+        <FormattedMessage
+          id="the.face-to-face"
+          values={Object {}}
+        />
+      </AccordionButton>
+      <AccordionPanel>
+        <Relay(FaceToFace)
+          debate={
+            Object {
+              "$fragmentRefs": null,
+            }
+          }
+        />
+      </AccordionPanel>
+    </AccordionItem>
+    <AccordionItem
+      id="argument"
+    >
+      <AccordionButton>
+        0 argument
+      </AccordionButton>
+      <AccordionPanel>
+        WIP
+      </AccordionPanel>
+    </AccordionItem>
+    <AccordionItem
+      id="vote"
+    >
+      <AccordionButton>
+        0 vote
+      </AccordionButton>
+      <AccordionPanel>
+        WIP
+      </AccordionPanel>
+    </AccordionItem>
+  </Accordion>
+</ForwardRef>
+`;

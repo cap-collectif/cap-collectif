@@ -188,7 +188,7 @@ Scenario: Logged in admin wants to add a debate step to a project
 @database
 Scenario: Admin merges two proposals
   Given I am logged in as admin
-  And I go to "/admin/alpha/project/projectCorona/proposals?step=Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBDb3JvbmE%3D"
+  And I go to "/admin/alpha/project/projectCorona/contributions/proposals?step=Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBDb3JvbmE%3D"
   And I wait ".analysis-pickable-list-container" to appear on current page
   Then I select the first 2 checkboxes in list ".pickableList-row"
   And I click on button "#merge-button"
@@ -196,7 +196,7 @@ Scenario: Admin merges two proposals
     | title | Merged proposal |
   And I click on button "#merge-proposal-submit-button"
   And I wait "#merge-proposal-submit-button" to disappear on current page
-  And I go to "/admin/alpha/project/projectCorona/proposals?step=Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBDb3JvbmE%3D"
+  And I go to "/admin/alpha/project/projectCorona/contributions/proposals?step=Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBDb3JvbmE%3D"
   And I wait ".analysis-pickable-list-container" to appear on current page
   And the number 1 element in ".pickableList-row h2 a" should contain "Merged proposal"
   And I should see 2 ".merge-tag" elements

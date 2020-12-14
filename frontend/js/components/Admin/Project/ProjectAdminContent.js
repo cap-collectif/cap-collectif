@@ -11,10 +11,7 @@ import environment from '~/createRelayEnvironment';
 import type { FeatureToggles, GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
-import ProjectAdminProposalsPage, {
-  initialVariables as queryVariableContribution,
-  queryProposals,
-} from '~/components/Admin/Project/ProjectAdminProposalsPage';
+import { initialVariables as queryVariableContribution } from '~/components/Admin/Project/ProjectAdminProposalsPage';
 import ProjectAdminAnalysisTab, {
   initialVariables as queryVariableAnalysis,
   queryAnalysis,
@@ -27,6 +24,10 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { BoxDeprecated, BoxContainer } from './Form/ProjectAdminForm.style';
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 import { ProjectAdminParticipantsProvider } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
+import ProjectAdminContributionsPage, {
+  queryContributions,
+} from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminContributionsPage';
+import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
 
 type Props = {|
   +features: FeatureToggles,
@@ -42,38 +43,95 @@ type Links = Array<{|
   component: any,
 |}>;
 
+// TODO: change when the page is complete
+const getProjectAdminBaseUrl = (projectId: string) => `/admin/alpha/project/${projectId}`;
+
+const PROJECT_ROUTE = {
+  CONTRIBUTIONS: '/contributions',
+  PARTICIPANTS: '/participants',
+  ANALYSIS: '/analysis',
+  CONFIGURATION: '/edit',
+};
+
+export const getProjectAdminPath = (
+  projectId: string,
+  type: $Keys<typeof PROJECT_ROUTE>,
+): string => {
+  switch (type) {
+    case 'CONTRIBUTIONS':
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONTRIBUTIONS}`;
+    case 'PARTICIPANTS':
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.PARTICIPANTS}`;
+    case 'ANALYSIS':
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.ANALYSIS}`;
+    case 'CONFIGURATION':
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`;
+    default:
+      return getProjectAdminBaseUrl(projectId);
+  }
+};
+
+const getRouteContributionPath = (
+  project: ProjectAdminContent_project,
+  baseUrlContributions: string,
+  firstCollectStepId: ?string,
+): string => {
+  const collectSteps = project.steps.filter(step => step.__typename === 'CollectStep');
+  const debateSteps = project.steps.filter(step => step.__typename === 'DebateStep');
+
+  const hasCollectStep = collectSteps.length > 0;
+  const hasDebateStep = debateSteps.length > 0;
+
+  const onlyDebateStep = !hasCollectStep && debateSteps.length === 1 && !!project.firstDebateStep;
+  const onlyCollectStep = !hasDebateStep && collectSteps.length === 1 && firstCollectStepId;
+
+  if (onlyCollectStep && firstCollectStepId) {
+    return getContributionsPath(baseUrlContributions, 'CollectStep', firstCollectStepId);
+  }
+
+  if (onlyDebateStep && project.firstDebateStep) {
+    return getContributionsPath(
+      baseUrlContributions,
+      'DebateStep',
+      project.firstDebateStep.id,
+      project.firstDebateStep.slug,
+    );
+  }
+
+  return baseUrlContributions;
+};
+
 const formatNavbarLinks = (
-  project,
-  features,
-  path,
-  setTitle,
-  firstCollectStepId,
+  project: ProjectAdminContent_project,
+  features: FeatureToggles,
+  path: string,
+  setTitle: string => void,
+  firstCollectStepId: ?string,
   dataPrefetchPage,
+  location: string,
 ) => {
   const links = [];
-  const hasCollectStep = project.steps.some(step => step.type === 'CollectStep');
+  const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS');
+  const isCollectStepPage = location === getContributionsPath(baseUrlContributions, 'CollectStep');
 
   links.push({
     title: 'global.contribution',
-    count: project.proposals.totalCount,
-    url: `${path}/proposals`,
-    to: `${path}/proposals?step=${encodeURIComponent(firstCollectStepId ?? '')}`,
+    count: isCollectStepPage ? project.proposals.totalCount : undefined,
+    url: baseUrlContributions,
+    to: getRouteContributionPath(project, baseUrlContributions, firstCollectStepId),
     component: () => (
-      <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
-        <ProjectAdminProposalsPage
-          projectId={project.id}
-          hasCollectStep={hasCollectStep}
-          dataPrefetch={dataPrefetchPage.contribution}
-        />
-      </ProjectAdminProposalsProvider>
+      <ProjectAdminContributionsPage
+        dataPrefetch={dataPrefetchPage.contributions}
+        projectId={project.id}
+      />
     ),
   });
 
   links.push({
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,
-    url: `${path}/participants`,
-    to: `${path}/participants`,
+    url: getProjectAdminPath(project._id, 'PARTICIPANTS'),
+    to: getProjectAdminPath(project._id, 'PARTICIPANTS'),
     component: () => (
       <ProjectAdminParticipantsProvider>
         <ProjectAdminParticipantTab
@@ -84,11 +142,11 @@ const formatNavbarLinks = (
     ),
   });
 
-  if (features.unstable__analysis && project.hasAnalysis)
+  if (features.unstable__analysis && project.hasAnalysis) {
     links.push({
       title: 'proposal.tabs.evaluation',
-      url: `${path}/analysis`,
-      to: `${path}/analysis`,
+      url: getProjectAdminPath(project._id, 'ANALYSIS'),
+      to: getProjectAdminPath(project._id, 'ANALYSIS'),
       count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
       component: () => (
         <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
@@ -99,22 +157,22 @@ const formatNavbarLinks = (
         </ProjectAdminProposalsProvider>
       ),
     });
+  }
+
   links.push({
     title: 'global.configuration',
-    url: `${path}/edit`,
-    to: `${path}/edit`,
+    url: getProjectAdminPath(project._id, 'CONFIGURATION'),
+    to: getProjectAdminPath(project._id, 'CONFIGURATION'),
     component: () => <ProjectAdminForm project={project} onTitleChange={setTitle} />,
   });
+
   return links;
 };
-
-// TODO: change when the page is complete
-const basePath = '/admin/alpha/project/';
 
 export const ProjectAdminContent = ({ project, firstCollectStepId, features }: Props) => {
   const location = useLocation();
   const [title, setTitle] = useState<string>(project.title);
-  const path = `${basePath}${project._id}`;
+  const path = getProjectAdminBaseUrl(project._id);
 
   const dataAnalysisPrefetch = loadQuery();
   dataAnalysisPrefetch.next(
@@ -128,10 +186,10 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
     { fetchPolicy: 'store-or-network' },
   );
 
-  const dataContributionPublishedPrefetch = loadQuery();
-  dataContributionPublishedPrefetch.next(
+  const dataContributionsPrefetch = loadQuery();
+  dataContributionsPrefetch.next(
     environment,
-    queryProposals,
+    queryContributions,
     {
       projectId: project.id,
       ...queryVariableContribution,
@@ -151,14 +209,22 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
 
   const dataPrefetchPage = {
     analysis: dataAnalysisPrefetch,
-    contribution: dataContributionPublishedPrefetch,
+    contributions: dataContributionsPrefetch,
     participant: dataParticipantPrefetch,
   };
 
   const links: Links = useMemo(
     () =>
-      formatNavbarLinks(project, features, path, setTitle, firstCollectStepId, dataPrefetchPage),
-    [project, features, path, setTitle, firstCollectStepId, dataPrefetchPage],
+      formatNavbarLinks(
+        project,
+        features,
+        path,
+        setTitle,
+        firstCollectStepId,
+        dataPrefetchPage,
+        location.pathname,
+      ),
+    [project, features, path, setTitle, firstCollectStepId, dataPrefetchPage, location.pathname],
   );
 
   return (
@@ -171,19 +237,22 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
             <FormattedMessage id="global.preview" />
           </a>
         </div>
+
         <NavContainer>
           {links.map((link, idx) => (
-            <NavItem key={idx} active={location.pathname === link.url}>
+            <NavItem key={idx} active={location.pathname.includes(link.url)}>
               <Link to={link.to}>
                 <FormattedMessage id={link.title} />
               </Link>
+
               {link.count !== undefined && (
-                <Count active={location.pathname === link.url}>{link.count}</Count>
+                <Count active={location.pathname.includes(link.url)}>{link.count}</Count>
               )}
             </NavItem>
           ))}
         </NavContainer>
       </Header>
+
       <Content>
         <BoxContainer className="box container-fluid" color="#ffc206">
           <BoxDeprecated>
@@ -243,6 +312,15 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       proposals {
         totalCount
       }
+      steps {
+        id
+        __typename
+        slug
+      }
+      firstDebateStep {
+        id
+        slug
+      }
       firstAnalysisStep {
         proposals {
           totalCount
@@ -250,9 +328,6 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       }
       contributors {
         totalCount
-      }
-      steps {
-        type: __typename
       }
       ...ProjectAdminForm_project
     }

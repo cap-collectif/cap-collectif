@@ -862,29 +862,24 @@ describe('<ProjectAdminProposals />', () => {
       ...DEFAULT_PROJECT,
     },
     themes,
+    baseUrl: 'jesuislurldebase',
+    hasContributionsStep: true,
   };
 
-  const mergedProposalsProps = {
-    relay: { ...relayPaginationMock },
-    project: {
-      $refType,
-      ...DEFAULT_MERGED_PROPOSALS_PROJECT,
+  const props = {
+    basic: defaultProps,
+    withMergeProposals: {
+      ...defaultProps,
+      project: {
+        $refType,
+        ...DEFAULT_MERGED_PROPOSALS_PROJECT,
+      },
     },
-    themes,
-  };
-
-  it('renders correctly when the project have proposals', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...defaultProps} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly with badges when the project has merged proposals', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...mergedProposalsProps} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders the "No proposals" placeholder when the project does not have any proposals', () => {
-    const props = {
+    noContributionStep: {
+      ...defaultProps,
+      hasContributionsStep: false,
+    },
+    noProposals: {
       ...defaultProps,
       project: {
         ...defaultProps.project,
@@ -908,8 +903,26 @@ describe('<ProjectAdminProposals />', () => {
           totalCount: 0,
         },
       },
-    };
-    const wrapper = shallow(<ProjectAdminProposals {...props} />);
+    },
+  };
+
+  it('renders correctly when the project have proposals', () => {
+    const wrapper = shallow(<ProjectAdminProposals {...props.basic} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with badges when the project has merged proposals', () => {
+    const wrapper = shallow(<ProjectAdminProposals {...props.withMergeProposals} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly  when no contributions step', () => {
+    const wrapper = shallow(<ProjectAdminProposals {...props.noContributionStep} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders the "No proposals" placeholder when the project does not have any proposals', () => {
+    const wrapper = shallow(<ProjectAdminProposals {...props.noProposals} />);
     expect(wrapper.find(AnalysisNoProposal)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });

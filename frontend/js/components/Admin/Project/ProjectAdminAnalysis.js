@@ -966,7 +966,22 @@ export default createPaginationContainer(
         steps {
           id
           __typename
-          ... on ProposalStep {
+          # ProposalStep could be used here for CollectStep & SelectionStep
+          # but relay-hooks doesn't retrieve this in store when preloading
+          ... on CollectStep {
+            form {
+              usingThemes
+              districts {
+                id
+                name
+              }
+              categories {
+                id
+                name
+              }
+            }
+          }
+          ... on SelectionStep {
             form {
               usingThemes
               districts {

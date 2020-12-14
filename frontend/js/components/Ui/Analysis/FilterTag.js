@@ -14,7 +14,6 @@ type FilterTagProps = {|
 
 const FilterTagContainer: StyledComponent<{ bgColor?: ?string }, {}, HTMLDivElement> = styled.div`
   border-radius: 20px;
-  margin-top: 0.75rem;
   font-weight: 600;
   font-size: 12px;
   height: 18px;

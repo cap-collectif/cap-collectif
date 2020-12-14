@@ -175,3 +175,11 @@ jest.mock('react-on-rails', () => {
   };
   return ReactOnRails;
 });
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+  useRouteMatch: () => ({ url: '/mock/url' }),
+}));

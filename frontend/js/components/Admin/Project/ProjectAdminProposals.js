@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql';
@@ -35,6 +36,7 @@ import {
   getFormattedStepsChoicesForProject,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import { ICON_NAME as ICON_NAME_DS } from '~ds/Icon/Icon';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
 import FilterTag from '~ui/Analysis/FilterTag';
 import {
@@ -62,6 +64,7 @@ import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisPro
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
+import Button from '~ds/Button/Button';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -69,6 +72,13 @@ const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 
 type Props = {|
   +relay: RelayPaginationProp,
+  +project: ProjectAdminProposals_project,
+  +themes: ProjectAdminProposals_themes,
+  +hasContributionsStep: boolean,
+  +baseUrl: string,
+|};
+
+type HeaderProps = {|
   +project: ProjectAdminProposals_project,
   +themes: ProjectAdminProposals_themes,
 |};
@@ -146,7 +156,7 @@ const assignStatus = async (
   }
 };
 
-const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>) => {
+const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
   const [isMergeModaleVisible, setIsMergeModaleVisible] = React.useState(false);
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
@@ -529,9 +539,16 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
   );
 };
 
-export const ProjectAdminProposals = ({ project, themes, relay }: Props) => {
+export const ProjectAdminProposals = ({
+  project,
+  themes,
+  relay,
+  baseUrl,
+  hasContributionsStep,
+}: Props) => {
   const { parameters, dispatch, status } = useProjectAdminProposalsContext();
   const intl = useIntl();
+  const history = useHistory();
   const hasProposals = project.proposals?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
   const hasNoResultWithFilter = !hasProposals && hasSelectedFilters;
@@ -556,6 +573,17 @@ export const ProjectAdminProposals = ({ project, themes, relay }: Props) => {
 
   return (
     <PickableList.Provider>
+      {hasContributionsStep && baseUrl && (
+        <Button
+          variant="tertiary"
+          onClick={() => history.push(baseUrl)}
+          leftIcon={ICON_NAME_DS.LONG_ARROW_LEFT}
+          size="small"
+          mb={8}>
+          <FormattedMessage id="global.steps" />
+        </Button>
+      )}
+
       <AnalysisPickableListContainer>
         <S.ProjectAdminProposalsHeader>
           <div>
@@ -764,7 +792,29 @@ export default createPaginationContainer(
           __typename
           id
           title
-          ... on ProposalStep {
+          # ProposalStep could be used here for CollectStep & SelectionStep
+          # but relay-hooks doesn't retrieve this in store when preloading
+          ... on CollectStep {
+            votable
+            votesRanking
+            statuses {
+              id
+              name
+              color
+            }
+            form {
+              usingThemes
+              districts {
+                id
+                name
+              }
+              categories {
+                id
+                name
+              }
+            }
+          }
+          ... on SelectionStep {
             votable
             votesRanking
             statuses {

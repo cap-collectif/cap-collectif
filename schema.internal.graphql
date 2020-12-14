@@ -6940,6 +6940,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """Identifies the first collect step of the project, if any."""
   firstCollectStep: CollectStep
 
+  """Identifies the first debate step of the project, if any."""
+  firstDebateStep: DebateStep
+
   """Identifies the first analysis step of the project, if any."""
   firstAnalysisStep: ProposalStep
   hasParticipativeStep(

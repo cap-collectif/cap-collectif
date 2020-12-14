@@ -142,6 +142,10 @@ type MaxWidth = {|
 
 type BorderRadius = {|
   borderRadius?: NumberOrString,
+  borderTopRightRadius?: NumberOrString,
+  borderTopLeftRadius?: NumberOrString,
+  borderBottomLeftRadius?: NumberOrString,
+  borderBottomRightRadius?: NumberOrString,
 |};
 
 type BorderWidth = {|

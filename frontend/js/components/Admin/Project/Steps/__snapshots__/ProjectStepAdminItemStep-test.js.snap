@@ -74,12 +74,14 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
+            "_id": "project123",
           }
         }
         show={false}
         step={
           Object {
             "id": "1",
+            "slug": "slugTest",
             "title": "testStep",
             "type": "typeTest",
             "url": "urlTest",

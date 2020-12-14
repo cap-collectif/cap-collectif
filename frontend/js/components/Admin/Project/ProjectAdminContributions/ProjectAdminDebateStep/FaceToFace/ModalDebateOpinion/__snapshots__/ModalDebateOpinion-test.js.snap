@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
+  >
+    <Heading
+      as="h4"
+      fontWeight="semibold"
+    >
+      <FormattedMessage
+        id="add.opinion.for"
+        values={Object {}}
+      />
+    </Heading>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Tag
+      mb={4}
+      variant="green"
+    >
+      <FormattedMessage
+        id="opinion.for"
+        values={Object {}}
+      />
+    </Tag>
+    <form>
+      <UserListField
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        id="author"
+        label={
+          <FormattedMessage
+            id="admin.fields.opinion.author"
+            values={Object {}}
+          />
+        }
+        multi={false}
+        name="author"
+        placeholder=""
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        id="title"
+        label={
+          <FormattedMessage
+            id="admin.fields.opinion.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="body"
+        label={
+          <FormattedMessage
+            id="global.review"
+            values={Object {}}
+          />
+        }
+        maxLength="2000"
+        name="body"
+        type="editor"
+        withCharacterCounter={true}
+      />
+    </form>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
+  >
+    <ButtonGroup
+      justifyContent="flex-end"
+    >
+      <CloseButton
+        label="editor.undo"
+        onClose={[MockFunction]}
+      />
+      <Button
+        onClick={[MockFunction]}
+        variant="primary"
+        variantColor="primary"
+      >
+        <FormattedMessage
+          id="global.create"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonGroup>
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
+  >
+    <Heading
+      as="h4"
+      fontWeight="semibold"
+    >
+      <FormattedMessage
+        id="edit.opinion.for"
+        values={Object {}}
+      />
+    </Heading>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Tag
+      mb={4}
+      variant="green"
+    >
+      <FormattedMessage
+        id="opinion.for"
+        values={Object {}}
+      />
+    </Tag>
+    <form>
+      <UserListField
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        id="author"
+        label={
+          <FormattedMessage
+            id="admin.fields.opinion.author"
+            values={Object {}}
+          />
+        }
+        multi={false}
+        name="author"
+        placeholder=""
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        id="title"
+        label={
+          <FormattedMessage
+            id="admin.fields.opinion.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="body"
+        label={
+          <FormattedMessage
+            id="global.review"
+            values={Object {}}
+          />
+        }
+        maxLength="2000"
+        name="body"
+        type="editor"
+        withCharacterCounter={true}
+      />
+    </form>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
+  >
+    <ButtonGroup
+      justifyContent="flex-end"
+    >
+      <CloseButton
+        label="editor.undo"
+        onClose={[MockFunction]}
+      />
+      <Button
+        onClick={[MockFunction]}
+        variant="primary"
+        variantColor="primary"
+      >
+        <FormattedMessage
+          id="global.change"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonGroup>
+  </ModalFooter>
+</Modal>
+`;

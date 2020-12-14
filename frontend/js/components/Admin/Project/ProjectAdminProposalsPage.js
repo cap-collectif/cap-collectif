@@ -1,6 +1,7 @@
 // @flow
-import React from 'react';
-import { useQuery, graphql, usePreloadedQuery } from 'relay-hooks';
+import * as React from 'react';
+import { useQuery, graphql } from 'relay-hooks';
+import { createFragmentContainer } from 'react-relay';
 import isEqual from 'lodash/isEqual';
 import ReactPlaceholder from 'react-placeholder';
 import { connect } from 'react-redux';
@@ -10,14 +11,14 @@ import type {
   ProposalOrderField,
   OrderDirection,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
-import type { ResultPreloadQuery, Query, GlobalState } from '~/types';
+import type { ProjectAdminProposalsPage_query } from '~relay/ProjectAdminProposalsPage_query.graphql';
+import type { Query, GlobalState } from '~/types';
 import type { ProjectAdminPageParameters, SortValues } from './ProjectAdminPage.reducer';
 import ProjectAdminProposals, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminProposals';
 import { useProjectAdminProposalsContext } from './ProjectAdminPage.context';
 import ProjectAdminProposalsPlaceholder from './ProjectAdminProposalsPlaceholder';
-import NoCollectStep from '~/components/Admin/Project/NoCollectStep';
 
 type ReduxProps = {|
   +proposalRevisionsEnabled: boolean,
@@ -25,9 +26,10 @@ type ReduxProps = {|
 
 type Props = {|
   ...ReduxProps,
+  +query: ProjectAdminProposalsPage_query,
   +projectId: string,
-  +dataPrefetch: ResultPreloadQuery,
-  +hasCollectStep: boolean,
+  +hasContributionsStep: boolean,
+  +baseUrl: string,
 |};
 
 type PropsQuery = {|
@@ -63,7 +65,7 @@ const getSortType = (sortType: SortValues): OrderDirection => {
   }
 };
 
-const createQueryVariables = (
+export const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminPageParameters,
   proposalRevisionsEnabled: boolean = false,
@@ -101,7 +103,6 @@ export const queryProposals = graphql`
     $term: String
   ) {
     project: node(id: $projectId) {
-      ...NoCollectStep_project
       ...ProjectAdminProposals_project
         @arguments(
           projectId: $projectId
@@ -141,14 +142,14 @@ export const initialVariables = {
 };
 
 const ProjectAdminProposalsPage = ({
+  query: dataPreloaded,
   projectId,
-  hasCollectStep,
-  dataPrefetch,
   proposalRevisionsEnabled,
+  hasContributionsStep,
+  baseUrl,
 }: Props) => {
   const { parameters, firstCollectStepId } = useProjectAdminProposalsContext();
 
-  const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
   const queryVariablesWithParameters = createQueryVariables(
     projectId,
     parameters,
@@ -160,6 +161,7 @@ const ProjectAdminProposalsPage = ({
       ...initialVariables,
       projectId,
       step: firstCollectStepId,
+      proposalRevisionsEnabled,
     },
     queryVariablesWithParameters,
   );
@@ -173,20 +175,18 @@ const ProjectAdminProposalsPage = ({
     },
   );
 
-  if (!hasCollectStep && dataPreloaded && dataPreloaded.project) {
-    const project: any = dataPreloaded?.project;
-
-    return <NoCollectStep project={project} />;
-  }
-
-  if (
-    (hasCollectStep && !hasFilters && dataPreloaded && dataPreloaded.project) ||
-    (hasFilters && data && data.project)
-  ) {
+  if ((!hasFilters && dataPreloaded) || (hasFilters && data)) {
     const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
     const themes: any = dataPreloaded && !hasFilters ? dataPreloaded.themes : data.themes;
 
-    return <ProjectAdminProposals project={project} themes={themes} />;
+    return (
+      <ProjectAdminProposals
+        project={project}
+        themes={themes}
+        hasContributionsStep={hasContributionsStep}
+        baseUrl={baseUrl}
+      />
+    );
   }
 
   return (
@@ -207,4 +207,44 @@ const mapStateToProps = (state: GlobalState) => ({
   proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
 });
 
-export default connect(mapStateToProps)(ProjectAdminProposalsPage);
+export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminProposalsPage), {
+  query: graphql`
+    fragment ProjectAdminProposalsPage_query on Query
+      @argumentDefinitions(
+        projectId: { type: "ID!" }
+        count: { type: "Int!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+        cursor: { type: "String" }
+        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        state: { type: "ProposalsState!", defaultValue: ALL }
+        category: { type: "ID", defaultValue: null }
+        district: { type: "ID", defaultValue: null }
+        theme: { type: "ID", defaultValue: null }
+        status: { type: "ID", defaultValue: null }
+        step: { type: "ID", defaultValue: null }
+        term: { type: "String", defaultValue: null }
+      ) {
+      project: node(id: $projectId) {
+        id
+        ...ProjectAdminProposals_project
+          @arguments(
+            projectId: $projectId
+            count: $count
+            proposalRevisionsEnabled: $proposalRevisionsEnabled
+            cursor: $cursor
+            orderBy: $orderBy
+            state: $state
+            category: $category
+            district: $district
+            theme: $theme
+            status: $status
+            step: $step
+            term: $term
+          )
+      }
+      themes {
+        ...ProjectAdminProposals_themes
+      }
+    }
+  `,
+});

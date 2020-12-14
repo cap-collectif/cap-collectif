@@ -18,7 +18,7 @@ export type AvatarProps = {|
   +alt?: string,
 |};
 
-type Props = {|
+export type Props = {|
   ...AppBoxProps,
   +children?: React.Node,
   +size?: AvatarSize,
