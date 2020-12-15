@@ -1,12 +1,14 @@
 PreviewProjectOrder:
-  type: input-object
-  config:
-    name: ProjectOrder
-    description: 'Ways in which project can be ordered.'
-    fields:
-      direction:
-        type: 'OrderDirection!'
-        description: 'The direction in which to order nodes.'
-      field:
-        type: 'PreviewProjectOrderField!'
-        description: 'The field in which to order nodes by.'
+    type: input-object
+    config:
+        name: ProjectOrder
+        description: 'Ways in which project can be ordered.'
+        fields:
+            direction:
+                type: 'OrderDirection!'
+                description: 'The direction in which to order nodes.'
+                defaultValue: 'DESC'
+            field:
+                type: 'PreviewProjectOrderField!'
+                description: 'The field in which to order nodes by.'
+                defaultValue: 'PUBLISHED_AT'

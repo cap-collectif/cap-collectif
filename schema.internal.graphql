@@ -7181,10 +7181,10 @@ enum ProjectHeaderType {
 """Ways in which project can be ordered."""
 input ProjectOrder {
   """The direction in which to order nodes."""
-  direction: OrderDirection!
+  direction: OrderDirection! = DESC
 
   """The field in which to order nodes by."""
-  field: ProjectOrderField!
+  field: ProjectOrderField! = PUBLISHED_AT
 }
 
 """Ordering options for projects returned from the connection."""
