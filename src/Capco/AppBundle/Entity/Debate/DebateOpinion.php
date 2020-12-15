@@ -30,8 +30,8 @@ class DebateOpinion
     use HasAuthorTrait;
     use TimestampableTrait;
 
-    public const TYPE_AGAINST = 0;
-    public const TYPE_FOR = 1;
+    public const TYPE_AGAINST = 1;
+    public const TYPE_FOR = 0;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

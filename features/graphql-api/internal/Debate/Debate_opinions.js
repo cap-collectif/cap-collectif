@@ -15,6 +15,7 @@ const DebateOpinionsQuery = /* GraphQL */ `
               id
               title
               body
+              type
               author {
                 id
               }
