@@ -24,7 +24,7 @@ echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/
 
 timeout=1;
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
-while ! (mysqladmin ping --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD})
+while ! (mysqladmin ping --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD} --port=${SYMFONY_DATABASE_PORT:3306})
 do
     sleep $timeout
     timeout=$(( $timeout + 1 ))
