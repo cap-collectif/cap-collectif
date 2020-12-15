@@ -12,6 +12,7 @@ InternalDebateArgument:
         interfaces:
             - Node
             - Reportable
+            - Trashable
         fields:
             id:
                 description: 'The ID of an object.'

@@ -1122,3 +1122,17 @@ InternalMutation:
                     inputType: ReportInput
                     payloadType: ReportPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ReportMutation", [value, getUser()])'
+            trash:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: TrashInput
+                    payloadType: TrashPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\TrashMutation", [value, getUser()])'
+            untrash:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UnTrashInput
+                    payloadType: UnTrashPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnTrashMutation", [value, getUser()])'

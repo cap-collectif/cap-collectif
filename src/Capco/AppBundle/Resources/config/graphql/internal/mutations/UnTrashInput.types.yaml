@@ -1,0 +1,8 @@
+UnTrashInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of untrash mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the trashed entity.'

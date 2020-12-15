@@ -1,0 +1,12 @@
+UnTrashErrorCode:
+    type: enum
+    config:
+        name: UnTrashErrorCode
+        description: 'Available errors for an `unTrash` mutation.'
+        values:
+            TRASHABLE_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UnTrashMutation::TRASHABLE_NOT_FOUND")'
+                description: 'No trashable entity match your id.'
+            NOT_TRASHED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UnTrashMutation::NOT_TRASHED")'
+                description: 'The entity is not trashed.'

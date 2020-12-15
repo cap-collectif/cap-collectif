@@ -1,0 +1,10 @@
+UnTrashPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            trashable:
+                type: 'Trashable'
+                description: 'The entity that had just been untrashed.'
+            errorCode:
+                type: 'UnTrashErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

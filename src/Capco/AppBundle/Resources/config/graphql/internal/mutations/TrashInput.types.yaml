@@ -1,0 +1,13 @@
+TrashInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of trash mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the trashable entity.'
+            trashedStatus:
+                type: 'TrashableStatus!'
+            trashedReason:
+                type: 'String'
+                description: 'The reason why the entity is trashed.'

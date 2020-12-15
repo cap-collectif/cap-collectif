@@ -3242,7 +3242,7 @@ type Debate implements Node {
 }
 
 """A debate argument from non expert."""
-type DebateArgument implements Node & Reportable {
+type DebateArgument implements Node & Reportable & Trashable {
   """The ID of an object."""
   id: ID!
 
@@ -5842,6 +5842,8 @@ type Mutation {
   removeDebateArgumentVote(input: RemoveDebateArgumentVoteInput!): RemoveDebateArgumentVotePayload
   askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
   report(input: ReportInput!): ReportPayload
+  trash(input: TrashInput!): TrashPayload
+  untrash(input: UnTrashInput!): UnTrashPayload
 }
 
 """A connection to a list of items."""
@@ -11840,6 +11842,31 @@ enum TranslationLocale {
   OC_OC
 }
 
+"""Available errors for a `trash` mutation."""
+enum TrashErrorCode {
+  """No trashable entity match your id."""
+  TRASHABLE_NOT_FOUND
+}
+
+input TrashInput {
+  """The id of the trashable entity."""
+  id: ID!
+  trashedStatus: TrashableStatus!
+
+  """The reason why the entity is trashed."""
+  trashedReason: String
+  clientMutationId: String
+}
+
+type TrashPayload {
+  """The entity that had just been trashed."""
+  trashable: Trashable
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: TrashErrorCode
+  clientMutationId: String
+}
+
 """Entities that can be trashed."""
 interface Trashable {
   """Whether or not the contribution is trashed."""
@@ -11866,6 +11893,30 @@ enum TrashableStatus {
 
 """An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string."""
 scalar URI
+
+"""Available errors for an `unTrash` mutation."""
+enum UnTrashErrorCode {
+  """No trashable entity match your id."""
+  TRASHABLE_NOT_FOUND
+
+  """The entity is not trashed."""
+  NOT_TRASHED
+}
+
+input UnTrashInput {
+  """The id of the trashed entity."""
+  id: ID!
+  clientMutationId: String
+}
+
+type UnTrashPayload {
+  """The entity that had just been untrashed."""
+  trashable: Trashable
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: UnTrashErrorCode
+  clientMutationId: String
+}
 
 input UnfollowOpinionInput {
   """The opinion id"""
