@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|SelectionStep.proposals fetches the proposals from a selection step with status 4 & type 1 filters 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "userType": Object {
+                "id": "1",
+                "name": "Citoyen",
+              },
+            },
+            "status": Object {
+              "id": "status4",
+              "name": "Soumis au vote",
+            },
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "title": "Sélection",
+  },
+}
+`;
+
+exports[`Preview|SelectionStep.proposals fetches the proposals from a selection step with status 5 & type 1 filters 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "userType": Object {
+                "id": "1",
+                "name": "Citoyen",
+              },
+            },
+            "status": Object {
+              "id": "status5",
+              "name": "Vote gagné",
+            },
+            "title": "Rénovation du gymnase",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "title": "Sélection",
+  },
+}
+`;

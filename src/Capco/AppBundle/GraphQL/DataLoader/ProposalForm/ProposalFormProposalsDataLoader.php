@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
+use Capco\AppBundle\Search\Search;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -237,16 +238,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         ) {
             $filters['proposalForm'] = $form->getId();
             $filters['collectStep'] = $form->getStep()->getId();
-
-            if ($viewer instanceof User) {
-                // sprintf with %u is here in order to avoid negative int.
-                $seed = sprintf('%u', crc32($viewer->getId()));
-            } elseif ($request && $request->getCurrentRequest()) {
-                // sprintf with %u is here in order to avoid negative int.
-                $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
-            } else {
-                $seed = random_int(0, PHP_INT_MAX);
-            }
+            $seed = Search::generateSeed($request, $viewer);
 
             return $this->proposalSearch->searchProposals(
                 $limit,
