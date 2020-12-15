@@ -54,8 +54,14 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
         <ButtonQuickAction
           icon="THUMB_UP"
           iconColor="green.500"
-          label="Supprimer"
+          label={
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          }
           mr={1}
+          onClick={[Function]}
           size="md"
           variantColor="green"
         />
