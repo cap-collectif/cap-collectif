@@ -4,17 +4,18 @@ import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import { isSubmitting, change, submit, isPristine } from 'redux-form';
+import { isSubmitting, change, submit, isPristine, isInvalid } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
-import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
+import { openCreateModal, closeCreateModal } from '~/redux/modules/proposal';
 import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
-import type { Dispatch, GlobalState } from '../../../types';
+import type { Dispatch, GlobalState } from '~/types';
 import type { ProposalCreate_proposalForm } from '~relay/ProposalCreate_proposalForm.graphql';
 import { mediaQueryMobile } from '~/utils/sizes';
+import AlertForm from '~/components/Alert/AlertForm';
 
 type Props = {
   intl: IntlShape,
@@ -22,6 +23,7 @@ type Props = {
   showModal: boolean,
   submitting: boolean,
   pristine: boolean,
+  invalid: boolean,
   dispatch: Dispatch,
   projectType: string,
 };
@@ -34,23 +36,19 @@ const ModalProposalCreateContainer: StyledComponent<{}, {}, typeof Modal> = styl
   }
 `;
 
-const ModalProposalFormFooter: StyledComponent<{}, {}, typeof Modal.Footer> = styled(
-  Modal.Footer,
-).attrs({
-  className: 'modal-footer',
-})`
+const ModalProposalFormFooter: StyledComponent<{}, {}, typeof Modal.Footer> = styled(Modal.Footer)`
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     display: flex;
     flex-direction: column-reverse;
-    button {
-      width: 200px;
-      margin: auto;
-      margin-bottom: 5px;
-    }
+
+    .btn,
     .btn + .btn {
       width: 200px;
-      margin: auto;
-      margin-bottom: 5px;
+      margin: auto auto 5px auto;
+    }
+
+    .alert__form_invalid-field {
+      text-align: center;
     }
   }
 `;
@@ -65,7 +63,9 @@ export class ProposalCreate extends React.Component<Props> {
       submitting,
       dispatch,
       projectType,
+      invalid,
     } = this.props;
+
     const modalTitleTradKey =
       proposalForm.objectType === 'PROPOSAL'
         ? getProposalLabelByType(projectType, 'add')
@@ -104,10 +104,13 @@ export class ProposalCreate extends React.Component<Props> {
               <FormattedMessage id={modalTitleTradKey} tagName="b" />
             </Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
             <ProposalForm proposalForm={proposalForm} proposal={null} />
           </Modal.Body>
+
           <ModalProposalFormFooter>
+            <AlertForm invalid={invalid && !pristine} />
             <CloseButton onClose={() => dispatch(closeCreateModal())} />
             <SubmitButton
               id="confirm-proposal-create-as-draft"
@@ -151,6 +154,7 @@ export class ProposalCreate extends React.Component<Props> {
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
+  invalid: isInvalid(formName)(state),
   showModal: state.proposal.showCreateModal,
 });
 

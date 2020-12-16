@@ -59,6 +59,9 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
       />
     </ModalBody>
     <ProposalCreate__ModalProposalFormFooter>
+      <AlertForm
+        invalid={false}
+      />
       <CloseButton
         label="global.cancel"
         onClose={[Function]}
@@ -87,7 +90,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
   <Relay(ProposalCreateButton)
     disabled={false}
     handleClick={[Function]}
-    projectType="global.consultations"
+    projectType="global.consultation"
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -141,6 +144,94 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
       />
     </ModalBody>
     <ProposalCreate__ModalProposalFormFooter>
+      <AlertForm
+        invalid={false}
+      />
+      <CloseButton
+        label="global.cancel"
+        onClose={[Function]}
+      />
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-proposal-create-as-draft"
+        isSubmitting={true}
+        label="global.save_as_draft"
+        onSubmit={[Function]}
+      />
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-proposal-create"
+        isSubmitting={true}
+        label="global.submit"
+        onSubmit={[Function]}
+      />
+    </ProposalCreate__ModalProposalFormFooter>
+  </ProposalCreate__ModalProposalCreateContainer>
+</div>
+`;
+
+exports[`<ProposalCreate /> should render correctly with error 1`] = `
+<div>
+  <Relay(ProposalCreateButton)
+    disabled={false}
+    handleClick={[Function]}
+    projectType="global.consultation"
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contribuable": true,
+        "id": "2",
+        "objectType": "PROPOSAL",
+      }
+    }
+  />
+  <ProposalCreate__ModalProposalCreateContainer
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    bsSize="large"
+    dialogClassName="custom-modal-dialog"
+    onHide={[Function]}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="proposal.add"
+          tagName="b"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Relay(Connect(injectIntl(ReduxForm)))
+        proposal={null}
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "contribuable": true,
+            "id": "2",
+            "objectType": "PROPOSAL",
+          }
+        }
+      />
+    </ModalBody>
+    <ProposalCreate__ModalProposalFormFooter>
+      <AlertForm
+        invalid={false}
+      />
       <CloseButton
         label="global.cancel"
         onClose={[Function]}
