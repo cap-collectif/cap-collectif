@@ -3228,6 +3228,12 @@ type Debate implements Node {
     orderBy: DebateVoteOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateVoteConnection!
 
+  """True if the viewer has upvoted the argument."""
+  viewerHasVote: Boolean!
+
+  """True if the viewer has upvoted the argument."""
+  viewerVote: DebateVote
+
   """The associated articles of the debate."""
   articles(
     """

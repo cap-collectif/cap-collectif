@@ -54,6 +54,16 @@ InternalDebate:
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                 type: DebateVoteConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateVotesResolver", [value, args])'
+            viewerHasVote:
+                access: "@=hasRole('ROLE_USER')"
+                description: 'True if the viewer has upvoted the argument.'
+                type: Boolean!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerHasVoteResolver", [value, getUser()])'
+            viewerVote:
+                access: "@=hasRole('ROLE_USER')"
+                description: 'True if the viewer has upvoted the argument.'
+                type: InternalDebateVote
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerVoteResolver", [value, getUser()])'
             articles:
                 description: 'The associated articles of the debate.'
                 argsBuilder: 'Relay::Connection'

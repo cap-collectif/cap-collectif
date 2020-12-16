@@ -50,6 +50,19 @@ const DebateVotesCountersQuery = /* GraphQL */ `
   }
 `;
 
+const DebateViewerHasVoteQuery = /* GraphQL */ `
+  query DebateVotesQuery($id: ID!) {
+    node(id: $id) {
+      ... on Debate {
+        viewerHasVote
+        viewerVote {
+          value
+        }
+      }
+    }
+  }
+`;
+
 describe('Internal|Debate.Votes connection', () => {
   it('fetches 5 first votes associated to a debate with a cursor', async () => {
     await expect(
@@ -117,6 +130,32 @@ describe('Internal|Debate.Votes connection', () => {
           id: toGlobalId('Debate', 'debateCannabis'),
         },
         'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+});
+
+describe('Internal|Debate.Votes connection', () => {
+  it('fetches debate not voted by viewer', async () => {
+    await expect(
+      graphql(
+        DebateViewerHasVoteQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+        },
+        'internal_user',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches debate voted by viewer', async () => {
+    await expect(
+      graphql(
+        DebateViewerHasVoteQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+        },
+        'internal_spylou',
       ),
     ).resolves.toMatchSnapshot();
   });
