@@ -14,7 +14,7 @@ export interface FlexOptions {
     spacing?: number | string
 }
 
-type Props = Omit<
+export type Props = Omit<
     AppBoxOwnProps,
     'display' |
     'flexDirection' |

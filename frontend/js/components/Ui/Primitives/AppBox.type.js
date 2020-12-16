@@ -271,6 +271,14 @@ type Input = {|
   +checked?: boolean,
 |};
 
+type TabIndex = {|
+  +tabIndex?: number,
+|};
+
+type Accessibility = {|
+  +'aria-hidden'?: boolean,
+|};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -307,4 +315,6 @@ export type AppBoxProps = {|
   ...As,
   ...Input,
   ...CustomStyled,
+  ...TabIndex,
+  ...Accessibility,
 |};

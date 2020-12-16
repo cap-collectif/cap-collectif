@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { cleanChildren } from '~/utils/clearChildren';
+import { cleanChildren } from '~/utils/cleanChildren';
 import Avatar, { type AvatarSize } from '~ds/Avatar/Avatar';
 import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';

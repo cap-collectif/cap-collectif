@@ -16,13 +16,13 @@ import jsxInnerText from '~/utils/jsxInnerText';
 import type { AvatarProps } from '~ds/Avatar/Avatar';
 import Avatar from '~ds/Avatar/Avatar';
 
-type Props = {|
+export type Props = {|
   ...AppBoxProps,
   +icon?: $Values<typeof ICON_NAME>,
   +variantType?: 'tag' | 'badge',
   +avatar?: {| ...AvatarProps, props?: AppBoxProps |},
   +onRemove?: (e?: MouseEvent) => void,
-  +variant: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray',
+  +variant?: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray',
 |};
 
 export const styles = {
@@ -152,7 +152,8 @@ const Tag = React.forwardRef<Props, HTMLSpanElement>(
           set('idle');
         }}
         onMouseEnter={onFocus}
-        onClick={onFocus}>
+        onClick={onFocus}
+        {...props}>
         {avatar && (avatar.src || avatar.name) && (
           <Avatar
             {...avatar.props}
