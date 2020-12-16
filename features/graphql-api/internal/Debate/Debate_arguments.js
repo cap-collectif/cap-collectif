@@ -57,13 +57,22 @@ const DebateArgumentsCountersQuery = /* GraphQL */ `
   query DebateArgumentsCountersQuery($id: ID!) {
     node(id: $id) {
       ... on Debate {
-        allArguments: votes(first: 0) {
+        allArguments: arguments(first: 0) {
           totalCount
         }
-        forArguments: votes(first: 0, value: FOR) {
+        forArguments: arguments(first: 0, value: FOR) {
           totalCount
         }
-        againstArguments: votes(first: 0, value: AGAINST) {
+        againstArguments: arguments(first: 0, value: AGAINST) {
+          totalCount
+        }
+        totalArguments: arguments(first: 0, isPublished: null, isTrashed: null) {
+          totalCount
+        }
+        unpublishedArguments: arguments(first: 0, isPublished: false) {
+          totalCount
+        }
+        trashedArguments: arguments(first: 0, isTrashed: true) {
           totalCount
         }
       }
@@ -112,7 +121,7 @@ describe('Internal|Debate.arguments connection', () => {
         {
           id: toGlobalId('Debate', 'debateCannabis'),
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });

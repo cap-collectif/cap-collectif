@@ -52,8 +52,17 @@ class DebateArgumentsResolver implements ResolverInterface
         if ($args->offsetExists('value')) {
             $filters['value'] = $args->offsetGet('value');
         }
-        if (null === $viewer || !$viewer->isAdmin() || !($args->offsetGet('includeUnpublished'))) {
-            $filters['publishedOnly'] = true;
+
+        if (null === $viewer || !$viewer->isAdmin()) {
+            $filters['isPublished'] = true;
+        } else {
+            $filters['isPublished'] = $args->offsetGet('isPublished');
+        }
+
+        if (null === $viewer || !$viewer->isAdmin()) {
+            $filters['isTrashed'] = false;
+        } else {
+            $filters['isTrashed'] = $args->offsetGet('isTrashed');
         }
 
         return $filters;
@@ -63,12 +72,13 @@ class DebateArgumentsResolver implements ResolverInterface
     {
         $orderByFields = [
             'PUBLISHED_AT' => 'publishedAt',
-            'VOTE_COUNT' => 'votesCount'
+            'VOTE_COUNT' => 'votesCount',
         ];
         $orderBy = $args->offsetGet('orderBy');
         if ($orderBy) {
             $orderBy['field'] = $orderByFields[$orderBy['field']];
         }
+
         return $orderBy;
     }
 }

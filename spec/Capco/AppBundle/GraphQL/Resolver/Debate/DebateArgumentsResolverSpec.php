@@ -27,7 +27,10 @@ class DebateArgumentsResolverSpec extends ObjectBehavior
         Debate $debate
     ) {
         $args = new Argument(['first' => 0, 'after' => null]);
-        $filters = ['publishedOnly' => true];
+        $filters = [
+            'isPublished' => true,
+            'isTrashed' => false,
+        ];
         $repository
             ->countByDebate($debate, $filters)
             ->willReturn(0)
@@ -43,7 +46,10 @@ class DebateArgumentsResolverSpec extends ObjectBehavior
         DebateArgument $b
     ) {
         $args = new Argument(['first' => 10, 'after' => null]);
-        $filters = ['publishedOnly' => true];
+        $filters = [
+            'isPublished' => true,
+            'isTrashed' => false,
+        ];
         $repository
             ->getByDebate($debate, 11, 0, $filters, null)
             ->willReturn($paginator)

@@ -3189,8 +3189,15 @@ type Debate implements Node {
     """Filter by an argument's stand."""
     value: ForOrAgainstValue = null
 
-    """(ROLE_ADMIN only) See also unpublished arguments."""
-    includeUnpublished: Boolean = false
+    """
+    (ROLE_ADMIN only) True to see only published arguments, false to see only unpublished, null to see both.
+    """
+    isPublished: Boolean = true
+
+    """
+    (ROLE_ADMIN only) True to see only trashed arguments, false to not see trashed, null to see both.
+    """
+    isTrashed: Boolean = false
 
     """Order by."""
     orderBy: DebateArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
