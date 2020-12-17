@@ -5,7 +5,7 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
   direction="column"
 >
   <Accordion
-    defaultAccordion="face-to-face"
+    defaultAccordion="argument"
     spacing={2}
   >
     <AccordionItem
@@ -22,6 +22,16 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
           debate={
             Object {
               "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsPublished": Object {
+                "totalCount": 1,
+              },
+              "argumentsTrashed": Object {
+                "totalCount": 1,
+              },
+              "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
             }
           }
         />
@@ -31,10 +41,33 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
       id="argument"
     >
       <AccordionButton>
-        0 argument
+        <FormattedMessage
+          id="argument-count"
+          values={
+            Object {
+              "count": 3,
+            }
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
-        WIP
+        <Relay(ArgumentTab)
+          debate={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsPublished": Object {
+                "totalCount": 1,
+              },
+              "argumentsTrashed": Object {
+                "totalCount": 1,
+              },
+              "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
+            }
+          }
+        />
       </AccordionPanel>
     </AccordionItem>
     <AccordionItem
@@ -68,7 +101,7 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
     />
   </Button>
   <Accordion
-    defaultAccordion="face-to-face"
+    defaultAccordion="argument"
     spacing={2}
   >
     <AccordionItem
@@ -85,6 +118,16 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
           debate={
             Object {
               "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsPublished": Object {
+                "totalCount": 1,
+              },
+              "argumentsTrashed": Object {
+                "totalCount": 1,
+              },
+              "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
             }
           }
         />
@@ -94,10 +137,33 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
       id="argument"
     >
       <AccordionButton>
-        0 argument
+        <FormattedMessage
+          id="argument-count"
+          values={
+            Object {
+              "count": 3,
+            }
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
-        WIP
+        <Relay(ArgumentTab)
+          debate={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsPublished": Object {
+                "totalCount": 1,
+              },
+              "argumentsTrashed": Object {
+                "totalCount": 1,
+              },
+              "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
+            }
+          }
+        />
       </AccordionPanel>
     </AccordionItem>
     <AccordionItem

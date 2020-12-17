@@ -37,6 +37,22 @@ type PropsQuery = {|
   props: ProjectAdminProposalsPageQueryResponse,
 |};
 
+type VariableQuery = {|
+  +count: number,
+  +cursor: ?string,
+  +orderBy: {|
+    +field: 'VOTES' | 'POINTS' | 'PUBLISHED_AT',
+    +direction: 'ASC' | 'DESC',
+  |},
+  +state: string,
+  +category: ?string,
+  +district: ?string,
+  +theme: ?string,
+  +step: ?string,
+  +status: ?string,
+  +term: ?string,
+|};
+
 const getSortField = (sortType: SortValues): ProposalOrderField => {
   switch (sortType) {
     case 'most-votes':
@@ -124,6 +140,30 @@ export const queryProposals = graphql`
     }
   }
 `;
+
+export const renameInitialVariable = ({
+  count,
+  cursor,
+  orderBy,
+  state,
+  category,
+  district,
+  theme,
+  step,
+  status,
+  term,
+}: VariableQuery) => ({
+  countProposalPagination: count,
+  cursorProposalPagination: cursor,
+  proposalOrderBy: orderBy,
+  proposalState: state,
+  proposalCategory: category,
+  proposalDistrict: district,
+  proposalTheme: theme,
+  proposalStatus: status,
+  proposalStep: step,
+  proposalTerm: term,
+});
 
 export const initialVariables = {
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,

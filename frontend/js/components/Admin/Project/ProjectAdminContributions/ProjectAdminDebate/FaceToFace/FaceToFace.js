@@ -7,7 +7,7 @@ import Text from '~ui/Primitives/Text';
 import DebateOpinion from '~/components/Admin/Debate/DebateOpinion/DebateOpinion';
 import { type FaceToFace_debate, type ForOrAgainstValue } from '~relay/FaceToFace_debate.graphql';
 import DebateEmptyOpinion from '~/components/Admin/Debate/DebateOpinion/DebateEmptyOpinion';
-import ModalDebateOpinion from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebateStep/FaceToFace/ModalDebateOpinion/ModalDebateOpinion';
+import ModalDebateOpinion from './ModalDebateOpinion/ModalDebateOpinion';
 import { type ModalDebateOpinion_opinion$ref } from '~relay/ModalDebateOpinion_opinion.graphql';
 import Button from '~ds/Button/Button';
 import DeleteDebateOpinionMutation from '~/mutations/DeleteDebateOpinionMutation';
@@ -42,14 +42,14 @@ const deleteDebateOpinion = (debateOpinionId: string, debateId: string, intl: In
   })
     .then(response => {
       if (response.deleteDebateOpinion?.errorCode) {
-        return toast({
+        toast({
           variant: 'danger',
           content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
         });
       }
     })
     .catch(() => {
-      return toast({
+      toast({
         variant: 'danger',
         content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
       });

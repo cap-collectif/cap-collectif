@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NoResultArgument /> should render correctly 1`] = `
+<ForwardRef
+  align="center"
+  direction="column"
+  mt={0}
+  spacing={2}
+>
+  <SpotIcon
+    name="PENCIL_SOFTWARE"
+    size="lg"
+  />
+  <Text
+    color="gray.500"
+    fontWeight="semibold"
+  >
+    no-argument-against-published
+  </Text>
+  <ForwardRef
+    direction="row"
+  >
+    <Text
+      color="gray.500"
+    >
+      consult-arguments
+    </Text>
+    <Tag
+      ml={3}
+      onClick={[Function]}
+      variant="red"
+    >
+      argument.show.type.against
+    </Tag>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`<NoResultArgument /> should render correctly when no argument 1`] = `
+<ForwardRef
+  align="center"
+  direction="column"
+  mt={0}
+  spacing={2}
+>
+  <SpotIcon
+    name="PENCIL_SOFTWARE"
+    size="lg"
+  />
+  <Text
+    color="gray.500"
+    fontWeight="semibold"
+  >
+    arguments-waiting-email-confirmation-display
+  </Text>
+</ForwardRef>
+`;

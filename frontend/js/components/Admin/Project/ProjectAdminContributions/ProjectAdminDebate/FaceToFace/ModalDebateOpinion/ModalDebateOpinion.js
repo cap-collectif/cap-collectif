@@ -70,7 +70,7 @@ const addDebateOpinion = (input, debateId, onClose, connections, intl) => {
       onClose();
 
       if (response.addDebateOpinion?.errorCode) {
-        return toast({
+        toast({
           variant: 'danger',
           content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
         });
@@ -78,7 +78,7 @@ const addDebateOpinion = (input, debateId, onClose, connections, intl) => {
     })
     .catch(() => {
       onClose();
-      return toast({
+      toast({
         variant: 'danger',
         content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
       });
@@ -95,7 +95,7 @@ const updateDebateOpinion = (input, debateOpinionId, onClose, intl) => {
     .then(response => {
       onClose();
       if (response.updateDebateOpinion?.errorCode) {
-        return toast({
+        toast({
           variant: 'danger',
           content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
         });
@@ -103,7 +103,7 @@ const updateDebateOpinion = (input, debateOpinionId, onClose, intl) => {
     })
     .catch(() => {
       onClose();
-      return toast({
+      toast({
         variant: 'danger',
         content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
       });

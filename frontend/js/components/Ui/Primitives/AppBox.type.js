@@ -246,15 +246,17 @@ type HTML = {|
   dangerouslySetInnerHTML?: {| __html: any |},
 |};
 
-type onMouseOver = {|
+type onMouse = {|
   +onMouseOver?: Function,
-|};
-type onMouseLeave = {|
+  +onMouseEnter?: Function,
   +onMouseLeave?: Function,
+  +onMouseOut?: Function,
 |};
+
 type onBlur = {|
   +onBlur?: Function,
 |};
+
 type onFocus = {|
   +onFocus?: Function,
 |};
@@ -307,8 +309,7 @@ export type AppBoxProps = {|
   ...Grid,
   ...Css,
   ...HTML,
-  ...onMouseOver,
-  ...onMouseLeave,
+  ...onMouse,
   ...onBlur,
   ...onFocus,
   ...onClick,

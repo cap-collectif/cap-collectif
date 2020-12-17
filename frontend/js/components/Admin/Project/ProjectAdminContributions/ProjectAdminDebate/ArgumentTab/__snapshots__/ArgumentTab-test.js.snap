@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentTab /> should render correctly 1`] = `
+<ForwardRef
+  direction="column"
+>
+  <ForwardRef
+    align="center"
+    direction="row"
+    justify="space-between"
+  >
+    <InlineSelect
+      onChange={[Function]}
+      value="PUBLISHED"
+    >
+      <InlineSelect.Choice
+        value="PUBLISHED"
+      >
+        filter.count.status.published
+      </InlineSelect.Choice>
+      <InlineSelect.Choice
+        value="WAITING"
+      >
+        filter.count.status.awaiting
+      </InlineSelect.Choice>
+      <InlineSelect.Choice
+        value="TRASHED"
+      >
+        filter.count.status.trash
+      </InlineSelect.Choice>
+    </InlineSelect>
+    <ForwardRef
+      align="center"
+      direction="row"
+      spacing={5}
+    >
+      <Menu>
+        <Menu.Button
+          __type="MenuButton"
+          as={Symbol(react.fragment)}
+        >
+          <Button
+            color="gray.500"
+            p={0}
+            rightIcon="ARROW_DOWN_O"
+          >
+            label_filters
+          </Button>
+        </Menu.Button>
+        <Menu.List
+          __type="MenuList"
+        >
+          <Menu.OptionGroup
+            onChange={[Function]}
+            title="filter-arguments"
+            type="checkbox"
+            value={
+              Array [
+                "FOR",
+                "AGAINST",
+              ]
+            }
+          >
+            <Menu.OptionItem
+              value="FOR"
+            >
+              <Text
+                color="gray.900"
+              >
+                global.for
+              </Text>
+            </Menu.OptionItem>
+            <Menu.OptionItem
+              value="AGAINST"
+            >
+              <Text
+                color="gray.900"
+              >
+                global.against
+              </Text>
+            </Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.List>
+      </Menu>
+      <Button
+        disabled={true}
+        variant="primary"
+        variantColor="primary"
+        variantSize="small"
+      >
+        global.export
+      </Button>
+    </ForwardRef>
+  </ForwardRef>
+  <ArgumentTab___StyledAppBox
+    as="ul"
+    m={0}
+    mt={4}
+    p={0}
+  >
+    <InfiniteScroll
+      element="div"
+      getScrollParent={[Function]}
+      hasMore={false}
+      initialLoad={false}
+      isReverse={false}
+      key="infinite-scroll-argument"
+      loadMore={[Function]}
+      loader={
+        <ForwardRef
+          direction="row"
+          justify="center"
+        >
+          <ForwardRef
+            size="m"
+          />
+        </ForwardRef>
+      }
+      pageStart={0}
+      ref={null}
+      threshold={250}
+      useCapture={false}
+      useWindow={false}
+    >
+      <AppBox
+        as="li"
+        key="argument123"
+      >
+        <Relay(DebateArgument)
+          argument={
+            Object {
+              "$fragmentRefs": null,
+              "id": "argument123",
+            }
+          }
+          debate={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsAgainst": Object {
+                "totalCount": 1,
+              },
+              "argumentsFor": Object {
+                "totalCount": 1,
+              },
+              "debateArguments": Object {
+                "edges": Array [
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==1",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "id": "argument123",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==2",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "id": "argument456",
+                    },
+                  },
+                ],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 2,
+              },
+              "debateArgumentsPublished": Object {
+                "totalCount": 2,
+              },
+              "debateArgumentsTrashed": Object {
+                "totalCount": 0,
+              },
+              "debateArgumentsWaiting": Object {
+                "totalCount": 0,
+              },
+              "id": "debate123",
+            }
+          }
+        />
+      </AppBox>
+      <AppBox
+        as="li"
+        key="argument456"
+      >
+        <Relay(DebateArgument)
+          argument={
+            Object {
+              "$fragmentRefs": null,
+              "id": "argument456",
+            }
+          }
+          debate={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsAgainst": Object {
+                "totalCount": 1,
+              },
+              "argumentsFor": Object {
+                "totalCount": 1,
+              },
+              "debateArguments": Object {
+                "edges": Array [
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==1",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "id": "argument123",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==2",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "id": "argument456",
+                    },
+                  },
+                ],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 2,
+              },
+              "debateArgumentsPublished": Object {
+                "totalCount": 2,
+              },
+              "debateArgumentsTrashed": Object {
+                "totalCount": 0,
+              },
+              "debateArgumentsWaiting": Object {
+                "totalCount": 0,
+              },
+              "id": "debate123",
+            }
+          }
+        />
+      </AppBox>
+    </InfiniteScroll>
+  </ArgumentTab___StyledAppBox>
+</ForwardRef>
+`;
+
+exports[`<ArgumentTab /> should render correctly when no argument 1`] = `
+<ForwardRef
+  align="center"
+  direction="column"
+  spacing={6}
+>
+  <AppBox
+    as="img"
+    src="http://localhost/image/contribution_debate_argument.png"
+  />
+  <Text
+    color="gray.500"
+  >
+    debate.empty.arguments.section
+  </Text>
+</ForwardRef>
+`;

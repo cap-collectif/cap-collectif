@@ -11,7 +11,10 @@ import environment from '~/createRelayEnvironment';
 import type { FeatureToggles, GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
-import { initialVariables as queryVariableContribution } from '~/components/Admin/Project/ProjectAdminProposalsPage';
+import {
+  initialVariables as queryVariableProposal,
+  renameInitialVariable,
+} from '~/components/Admin/Project/ProjectAdminProposalsPage';
 import ProjectAdminAnalysisTab, {
   initialVariables as queryVariableAnalysis,
   queryAnalysis,
@@ -28,6 +31,7 @@ import ProjectAdminContributionsPage, {
   queryContributions,
 } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminContributionsPage';
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
+import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab';
 
 type Props = {|
   +features: FeatureToggles,
@@ -191,10 +195,17 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
     environment,
     queryContributions,
     {
+      // CollectStep
+      ...renameInitialVariable(queryVariableProposal),
       projectId: project.id,
-      ...queryVariableContribution,
-      step: firstCollectStepId,
+      proposalStep: firstCollectStepId,
       proposalRevisionsEnabled: features.proposal_revisions ?? false,
+      // DebateStep (argument)
+      countArgumentPagination: ARGUMENT_PAGINATION,
+      cursorArgumentPagination: null,
+      argumentValue: null,
+      isPublishedArgument: true,
+      isTrashedArgument: false,
     },
     { fetchPolicy: 'store-or-network' },
   );

@@ -3,13 +3,14 @@ import * as React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { usePreloadedQuery, graphql } from 'relay-hooks';
 import NoContributionsStep from '~/components/Admin/Project/ProjectAdminContributions/NoContributions/NoContributionsStep';
-import ProjectAdminDebate from './ProjectAdminDebateStep/ProjectAdminDebate';
-import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 import IndexContributions, { getContributionsPath } from './IndexContributions/IndexContributions';
 import AppBox from '~ui/Primitives/AppBox';
 import type { ResultPreloadQuery } from '~/types';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
+import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
+import { ProjectAdminDebatePageProvider } from './ProjectAdminDebatePage/ProjectAdminDebatePage.context';
+import ProjectAdminDebatePage from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebatePage/ProjectAdminDebatePage';
 
 type Props = {|
   +dataPrefetch: ResultPreloadQuery,
@@ -18,18 +19,25 @@ type Props = {|
 
 export const queryContributions = graphql`
   query ProjectAdminContributionsPageQuery(
+    # ARGUMENTS OF ProjectAdminProposals
     $projectId: ID!
-    $count: Int!
+    $countProposalPagination: Int!
+    $cursorProposalPagination: String
     $proposalRevisionsEnabled: Boolean!
-    $cursor: String
-    $orderBy: ProposalOrder!
-    $state: ProposalsState!
-    $category: ID
-    $district: ID
-    $theme: ID
-    $status: ID
-    $step: ID
-    $term: String
+    $proposalOrderBy: ProposalOrder!
+    $proposalState: ProposalsState!
+    $proposalCategory: ID
+    $proposalDistrict: ID
+    $proposalTheme: ID
+    $proposalStatus: ID
+    $proposalStep: ID
+    $proposalTerm: String
+    # ARGUMENTS OF ProjectAdminDebate (DebateArgument)
+    $countArgumentPagination: Int!
+    $cursorArgumentPagination: String
+    $argumentType: ForOrAgainstValue
+    $isPublishedArgument: Boolean!
+    $isTrashedArgument: Boolean!
   ) {
     project: node(id: $projectId) {
       ... on Project {
@@ -40,7 +48,19 @@ export const queryContributions = graphql`
           id
           __typename
           slug
-          ...ProjectAdminDebate_step
+          ... on DebateStep {
+            debate {
+              id
+              ...ProjectAdminDebatePage_debate
+                @arguments(
+                  countArgumentPagination: $countArgumentPagination
+                  cursorArgumentPagination: $cursorArgumentPagination
+                  argumentType: $argumentType
+                  isPublishedArgument: $isPublishedArgument
+                  isTrashedArgument: $isTrashedArgument
+                )
+            }
+          }
         }
         ...NoContributionsStep_project
         ...IndexContributions_project
@@ -49,17 +69,17 @@ export const queryContributions = graphql`
     ...ProjectAdminProposalsPage_query
       @arguments(
         projectId: $projectId
-        count: $count
+        count: $countProposalPagination
+        cursor: $cursorProposalPagination
         proposalRevisionsEnabled: $proposalRevisionsEnabled
-        cursor: $cursor
-        orderBy: $orderBy
-        state: $state
-        category: $category
-        district: $district
-        theme: $theme
-        status: $status
-        step: $step
-        term: $term
+        orderBy: $proposalOrderBy
+        state: $proposalState
+        category: $proposalCategory
+        district: $proposalDistrict
+        theme: $proposalTheme
+        status: $proposalStatus
+        step: $proposalStep
+        term: $proposalTerm
       )
   }
 `;
@@ -82,10 +102,10 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
   const hasIndex =
     collectSteps.length > 1 ||
     debateSteps.length > 1 ||
-    (collectSteps.length === 1 && debateSteps.length === 1);
+    (collectSteps.length >= 1 && debateSteps.length >= 1);
 
   return (
-    <AppBox m="2rem">
+    <AppBox m={5}>
       <Switch>
         <Route exact path={baseUrl}>
           {!hasAtLeastOneContributionsStep ? (
@@ -109,12 +129,17 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
         <Route
           path={getContributionsPath(baseUrl, 'DebateStep')}
           component={routeProps => (
-            <ProjectAdminDebate
-              hasContributionsStep={hasIndex}
-              baseUrl={baseUrl}
-              step={project?.steps.find(({ slug }) => slug === routeProps.match.params.stepSlug)}
-              {...routeProps}
-            />
+            <ProjectAdminDebatePageProvider>
+              <ProjectAdminDebatePage
+                hasContributionsStep={hasIndex}
+                baseUrl={baseUrl}
+                debate={
+                  project?.steps.find(({ slug }) => slug === routeProps.match.params.stepSlug)
+                    ?.debate
+                }
+                {...routeProps}
+              />
+            </ProjectAdminDebatePageProvider>
           )}
         />
       </Switch>

@@ -6,10 +6,17 @@ import { ProjectAdminDebate } from './ProjectAdminDebate';
 import { $fragmentRefs, $refType } from '~/mocks';
 
 const baseProps = {
-  step: {
+  debate: {
     $refType,
-    debate: {
-      $fragmentRefs,
+    $fragmentRefs,
+    argumentsPublished: {
+      totalCount: 1,
+    },
+    argumentsWaiting: {
+      totalCount: 1,
+    },
+    argumentsTrashed: {
+      totalCount: 1,
     },
   },
   hasContributionsStep: false,
@@ -18,7 +25,10 @@ const baseProps = {
 
 const props = {
   noContributionsStep: baseProps,
-  withContributionsStep: { ...baseProps, hasContributionsStep: true },
+  withContributionsStep: {
+    ...baseProps,
+    hasContributionsStep: true,
+  },
 };
 
 describe('<ProjectAdminDebate />', () => {
