@@ -40,7 +40,7 @@ Scenario: The email sent to the interlocutor should be sent
   Given I visited "contact page"
   And I click the ".contact__form__list button:first-of-type" element
   And I fill in the following:
-    | name         | Marie Lopez                                      |
+    | name         | Marie Lopez                                    |
     | title        | Proposition de partenariat avec Dop            |
     | email        | enjoyphoenix@gmail.com                         |
     | body         | Salut les filles, aujourd'hui je vous présente ce super shampooing à la madeleine ! |

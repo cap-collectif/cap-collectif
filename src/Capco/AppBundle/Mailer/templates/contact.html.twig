@@ -1,6 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% set siteName = capco_site_parameter_value('global.site.fullname') %}
+{% set baseUrl = url('app_homepage') %}
 
 {% block html_title %}
 {% endblock %}
@@ -30,15 +31,26 @@
                 <b>{{ 'contact.form.message'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</b>: <div style="padding: 10px; border: 1px solid #acacac;background-color: #fafafa; border-radius: 5px;">{{ message }}</div>
             </p>
         </td>
-
     </tr>
 {% endblock %}
-
-
 
 {% block footer_mail %}
     <span style="font-size:13px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#999999;">
         <hr>
-        {{ 'user.register.confirmation_message.footer2'|trans({'{siteLink}': siteUrl, '{sitename}': sitename}, 'CapcoAppBundle', user_locale) | raw }}
+        {{ 'user.register.confirmation_message.footer2'|trans({'{siteLink}': siteUrl, '{siteName}': siteName}, 'CapcoAppBundle', user_locale) | raw }}
     </span>
+{% endblock %}
+
+{% block style_mail %}
+    {{ parent() }}
+
+    #body {
+        max-width: 600px;
+        margin: auto;
+    }
+
+    #top-mail a {
+        margin: auto;
+        width: auto;
+    }
 {% endblock %}

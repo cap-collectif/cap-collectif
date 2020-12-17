@@ -18,14 +18,21 @@ final class ContactNotifier extends BaseNotifier
         $message = [
             'object' => $object,
             'title' => $title,
-            'message' => $message
+            'message' => $message,
         ];
         $params = [
             'senderName' => $senderName ? $senderName : 'Anonyme',
-            'senderEmail' => $senderEmail
+            'senderEmail' => $senderEmail,
         ];
         $recipient = new User();
         $recipient->setEmail($recipientEmail); //todo set locale
-        $this->mailer->createAndSendMessage(ContactMessage::class, $message, $params, $recipient);
+        $this->mailer->createAndSendMessage(
+            ContactMessage::class,
+            $message,
+            $params,
+            $recipient,
+            null,
+            $senderEmail
+        );
     }
 }

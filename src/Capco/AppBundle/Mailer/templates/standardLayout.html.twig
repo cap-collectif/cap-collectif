@@ -9,6 +9,7 @@
         {% block html_title %}{% endblock %}
     </title>
     <style type="text/css" media="screen">
+        {% block style_mail %}
         .ExternalClass * {line-height:100%}
         .bb {
             border-bottom: 1px solid #d9d9d9;
@@ -63,10 +64,11 @@
             font-weight: normal;
             font-style: normal;
         }
+        {% endblock %}
     </style>
 </head>
 <body>
-<div align="center">
+<div id="body" align="center">
     <table id="email-penrose-conteneur" align="center" style="margin: 15px 0 5px 0; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>

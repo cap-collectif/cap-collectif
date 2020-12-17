@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\MessageRecipient;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
-use Capco\AppBundle\Mailer\Message\User\ContactMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\RouterInterface;
@@ -14,9 +12,9 @@ use Twig\Environment;
 
 class MailerService extends MailerFactory
 {
-    protected $mailer;
-    protected $templating;
-    protected $failedRecipients;
+    protected \Swift_Mailer $mailer;
+    protected Environment $templating;
+    protected array $failedRecipients;
 
     public function __construct(
         \Swift_Mailer $mailer,
@@ -81,13 +79,6 @@ class MailerService extends MailerFactory
 
     private function configureMessage(AbstractMessage $message): AbstractMessage
     {
-        // ReplyTo's header is used in Contact's context because we want to keep platform's sender but
-        // deliver as final user (eg: from: sender@cap-collectif.com in API but show in mailbox from: user@gmail.com)
-        if ($message instanceof ContactMessage) {
-            $message->setReplyTo($message->getSenderEmail());
-            // this trigger next condition below.
-            $message->setSenderEmail(null);
-        }
         if (!$message->getSenderEmail()) {
             $this->setDefaultSender($message);
         }
