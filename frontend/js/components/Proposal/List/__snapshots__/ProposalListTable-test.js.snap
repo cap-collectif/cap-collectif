@@ -171,6 +171,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
   <thead>
     <tr>
       <th
+        className="column-title"
         key="0"
         scope="col"
         style={
@@ -186,6 +187,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-implementationPhase"
         key="1"
         scope="col"
         style={
@@ -201,6 +203,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-status"
         key="2"
         scope="col"
         style={
@@ -216,6 +219,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-author"
         key="3"
         scope="col"
         style={
@@ -231,6 +235,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-ref"
         key="4"
         scope="col"
         style={
@@ -246,6 +251,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-district"
         key="5"
         scope="col"
         style={
@@ -261,6 +267,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-category"
         key="6"
         scope="col"
         style={
@@ -276,6 +283,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-theme"
         key="7"
         scope="col"
         style={
@@ -291,6 +299,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-priceEstimation"
         key="8"
         scope="col"
         style={
@@ -306,6 +315,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-likers"
         key="9"
         scope="col"
         style={
@@ -321,6 +331,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-lastActivity"
         key="10"
         scope="col"
         style={
@@ -336,6 +347,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         />
       </th>
       <th
+        className="column-publishedOn"
         key="11"
         scope="col"
         style={

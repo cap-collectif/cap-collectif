@@ -36,6 +36,7 @@ type Column = {
   hidden: ?boolean,
   text: string,
   key: number,
+  columnName: string,
 };
 
 export class ProposalListTable extends React.Component<Props, State> {
@@ -190,6 +191,7 @@ export class ProposalListTable extends React.Component<Props, State> {
           : isHidden(columnName),
       text: firstData[columnName] && firstData[columnName].text,
       key,
+      columnName,
     }));
 
     return column;
@@ -376,6 +378,7 @@ export class ProposalListTable extends React.Component<Props, State> {
                   width: column.style.width ? column.style.width : '200px',
                   display: column.hidden === true ? 'none' : 'table-cell',
                 }}
+                className={`column-${column.columnName}`}
                 key={key}
                 scope="col">
                 <FormattedMessage id={column.text || 'global.non_applicable'} />

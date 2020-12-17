@@ -3,12 +3,13 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import cn from 'classnames';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPaginated_step.graphql';
 import type { ProposalListViewPaginated_viewer } from '~relay/ProposalListViewPaginated_viewer.graphql';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import ProposalList from './ProposalList';
-import type { ProposalViewMode } from '../../../redux/modules/proposal';
+import type { ProposalViewMode } from '~/redux/modules/proposal';
 import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap';
 import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
 import type { State } from '~/types';
@@ -38,9 +39,11 @@ const ProposalListViewPaginated = ({
   const [loading, setLoading] = React.useState<boolean>(false);
 
   return (
-    <div>
+    <div
+      className={cn('proposal-list-view-paginated', {
+        [`displayMode-${displayMode}`]: !!displayMode,
+      })}>
       {displayMap && displayMode === 'map' ? (
-        // $FlowFixMe
         <ProposalsDisplayMap
           className="zi-0"
           step={step}
