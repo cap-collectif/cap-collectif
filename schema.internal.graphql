@@ -4651,7 +4651,6 @@ enum FeatureFlagType {
   reporting
   display_map
   unstable__remote_events
-  user_invitations
   votes_min
   majority_vote_question
   unstable__emailing

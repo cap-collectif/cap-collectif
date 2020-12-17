@@ -229,10 +229,6 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "user_invitations",
-    },
-    Object {
-      "enabled": false,
       "type": "majority_vote_question",
     },
     Object {

@@ -66,7 +66,6 @@ class Manager
     public const phone_confirmation = 'phone_confirmation';
     public const reporting = 'reporting';
     public const unstable__remote_events = 'unstable__remote_events';
-    public const user_invitations = 'user_invitations';
     public const majority_vote_question = 'majority_vote_question';
     public const unstable__emailing = 'unstable__emailing';
     public const unstable__debate = 'unstable__debate';
@@ -155,7 +154,6 @@ class Manager
         self::http_redirects,
         self::report_browers_errors_to_sentry,
         self::unstable__remote_events,
-        self::user_invitations,
         self::majority_vote_question,
         self::unstable__emailing,
         self::unstable__debate,
@@ -163,11 +161,11 @@ class Manager
         self::unstable__tipsmeee,
     ];
 
-    protected $toggleManager;
+    protected ToggleManager $toggleManager;
 
     protected $context;
 
-    protected $knownValues = [];
+    protected array $knownValues = [];
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
     {
@@ -273,6 +271,11 @@ class Manager
     public function set(string $name, bool $value): void
     {
         $value ? $this->activate($name) : $this->deactivate($name);
+    }
+
+    public function getToggleManager(): ToggleManager
+    {
+        return $this->toggleManager;
     }
 
     private function createToggle(string $name, int $status, array $conditions = []): Toggle

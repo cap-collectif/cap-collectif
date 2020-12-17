@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/invitation", name="capco_app_user_invitation", options={"i18n" = false}, defaults={"_feature_flags" = "user_invitations"})
+     * @Route("/invitation", name="capco_app_user_invitation", options={"i18n" = false})
      * @Template("@CapcoApp/User/invitation.html.twig")
      */
     public function invitation(

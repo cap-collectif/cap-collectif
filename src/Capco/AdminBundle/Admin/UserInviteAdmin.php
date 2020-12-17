@@ -29,8 +29,7 @@ class UserInviteAdmin extends AbstractAdmin
 
     public function showIn($context)
     {
-        return $this->checker->isGranted(UserRole::ROLE_ADMIN) &&
-            $this->manager->isActive(Manager::user_invitations);
+        return $this->checker->isGranted(UserRole::ROLE_ADMIN);
     }
 
     protected function configureRoutes(RouteCollection $collection)

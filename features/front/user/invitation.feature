@@ -2,7 +2,7 @@
 Feature: User invitation
 
 Background:
-  Given features "user_invitations", "registration", "user_type", "zipcode_at_register", "captcha" are enabled
+  Given features "registration", "user_type", "zipcode_at_register", "captcha" are enabled
 
 @database
 Scenario: An expired invitation should redirect to homepage

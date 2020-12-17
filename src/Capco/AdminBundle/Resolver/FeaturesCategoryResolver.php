@@ -61,7 +61,6 @@ class FeaturesCategoryResolver
                     Manager::unstable__analysis,
                     Manager::report_browers_errors_to_sentry,
                     Manager::http_redirects,
-                    Manager::user_invitations,
                     Manager::majority_vote_question,
                     Manager::unstable__emailing,
                     Manager::unstable__debate,

@@ -93,7 +93,6 @@ export type FeatureToggles = {
   display_pictures_in_event_list: ?boolean,
   unstable__analysis: ?boolean,
   report_browers_errors_to_sentry: ?boolean,
-  user_invitations: ?boolean,
   majority_vote_question: ?boolean,
   unstable__emailing: ?boolean,
   proposal_revisions: ?boolean,

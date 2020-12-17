@@ -1,8 +1,6 @@
 /* eslint-env jest */
 import '../../_setup';
 
-const DENIED_ERROR_MESSAGE = 'Access denied to this field';
-
 const InviteUsersMutation = /* GraphQL */ `
   fragment UserInviteInfos on UserInvite {
     id
@@ -31,30 +29,14 @@ describe('Internal|inviteUsers mutation access control', () => {
     emails: ['iwillberejected@sad.com'],
     isAdmin: true,
   };
-  it('should throw an error when the flag is deactivated and the user has ROLE_SUPER_ADMIN', async () => {
-    await disableFeatureFlag('user_invitations');
-    expect.assertions(1);
-    await expect(
-      graphql(InviteUsersMutation, { input }, 'internal_super_admin'),
-    ).rejects.toThrowError(DENIED_ERROR_MESSAGE);
-  });
   it('should not throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
-    await enableFeatureFlag('user_invitations');
     expect.assertions(1);
     await expect(graphql(InviteUsersMutation, { input }, 'internal_admin')).resolves.not.toBeNull();
-  });
-  it('should throw an error when the flag is deactivated and the user has ROLE_ADMIN', async () => {
-    await disableFeatureFlag('user_invitations');
-    expect.assertions(1);
-    await expect(graphql(InviteUsersMutation, { input }, 'internal_admin')).rejects.toThrowError(
-      DENIED_ERROR_MESSAGE,
-    );
   });
 });
 
 describe('Internal|inviteUsers mutation', () => {
   it('should invite new users as non admin', async () => {
-    await enableFeatureFlag('user_invitations');
     const response = await graphql(
       InviteUsersMutation,
       {
@@ -76,7 +58,6 @@ describe('Internal|inviteUsers mutation', () => {
   });
 
   it('should invite new users as admin', async () => {
-    await enableFeatureFlag('user_invitations');
     const response = await graphql(
       InviteUsersMutation,
       {
@@ -98,8 +79,6 @@ describe('Internal|inviteUsers mutation', () => {
   });
 
   it('should update existing user invitations', async () => {
-    await enableFeatureFlag('user_invitations');
-
     // We first invite the users for the first time
     const emails = ['mail@test.com', 'mail2@test.com'];
 

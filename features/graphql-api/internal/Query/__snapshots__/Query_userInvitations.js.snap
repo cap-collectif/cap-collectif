@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|UserInvitations query should fetch the current available user invitations when the flag is activated 1`] = `
+exports[`Internal|UserInvitations query should fetch the current available user invitations 1`] = `
 Object {
   "userInvitations": Object {
     "edges": Array [
