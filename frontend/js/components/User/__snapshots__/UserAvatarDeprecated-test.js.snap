@@ -17,6 +17,7 @@ exports[`<UserAvatarDeprecated /> renders correctly 1`] = `
     style={
       Object {
         "height": "16px",
+        "minWidth": "16px",
         "width": "16px",
       }
     }
@@ -58,6 +59,7 @@ exports[`<UserAvatarDeprecated /> renders correctly with custom default avatar 1
     style={
       Object {
         "height": "16px",
+        "minWidth": "16px",
         "width": "16px",
       }
     }

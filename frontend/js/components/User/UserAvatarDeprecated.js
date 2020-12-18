@@ -47,7 +47,7 @@ export class UserAvatarDeprecated extends React.Component<Props> {
           src={user.media.url}
           alt=""
           className="img-circle object-cover mr-10"
-          style={{ width: mediaSize, height: mediaSize }}
+          style={{ minWidth: mediaSize, width: mediaSize, height: mediaSize }}
         />
       );
     }
@@ -58,7 +58,7 @@ export class UserAvatarDeprecated extends React.Component<Props> {
           src={defaultAvatar}
           alt=""
           className="img-circle object-cover mr-10"
-          style={{ width: mediaSize, height: mediaSize }}
+          style={{ minWidth: mediaSize, width: mediaSize, height: mediaSize }}
         />
       );
     }
