@@ -14,6 +14,7 @@ import { useProjectAdminDebatePageContext } from './ProjectAdminDebatePage.conte
 import ProjectAdminDebate from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate';
 import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab';
 import Loader from '~ui/FeedbacksIndicators/Loader';
+import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab';
 
 type Props = {|
   +debate: ProjectAdminDebatePage_debate,
@@ -40,6 +41,9 @@ const createQueryVariables = (
     parameters.filters.argument.state === 'PUBLISHED' ||
     parameters.filters.argument.state === 'TRASHED',
   isTrashedArgument: parameters.filters.argument.state === 'TRASHED',
+  // VOTE
+  countVotePagination: VOTE_PAGINATION,
+  cursorVotePagination: null,
 });
 
 export const queryDebate = graphql`
@@ -50,6 +54,8 @@ export const queryDebate = graphql`
     $argumentType: ForOrAgainstValue
     $isPublishedArgument: Boolean!
     $isTrashedArgument: Boolean!
+    $countVotePagination: Int!
+    $cursorVotePagination: String
   ) {
     debate: node(id: $debateId) {
       ...ProjectAdminDebate_debate
@@ -59,15 +65,21 @@ export const queryDebate = graphql`
           argumentType: $argumentType
           isPublishedArgument: $isPublishedArgument
           isTrashedArgument: $isTrashedArgument
+          countVotePagination: $countVotePagination
+          cursorVotePagination: $cursorVotePagination
         )
     }
   }
 `;
 
 export const initialVariables = {
+  // ARGUMENT
   countArgumentPagination: ARGUMENT_PAGINATION,
   cursorArgumentPagination: null,
   argumentType: null,
+  // VOTE
+  countVotePagination: VOTE_PAGINATION,
+  cursorVotePagination: null,
 };
 
 const ProjectAdminDebatePage = ({ debate, hasContributionsStep, baseUrl }: Props) => {
@@ -112,6 +124,8 @@ export default createFragmentContainer(ProjectAdminDebatePage, {
         argumentType: { type: "ForOrAgainstValue", defaultValue: null }
         isPublishedArgument: { type: "Boolean!" }
         isTrashedArgument: { type: "Boolean!" }
+        countVotePagination: { type: "Int!" }
+        cursorVotePagination: { type: "String" }
       ) {
       id
       ...ProjectAdminDebate_debate
@@ -121,6 +135,8 @@ export default createFragmentContainer(ProjectAdminDebatePage, {
           argumentType: $argumentType
           isPublishedArgument: $isPublishedArgument
           isTrashedArgument: $isTrashedArgument
+          countVotePagination: $countVotePagination
+          cursorVotePagination: $cursorVotePagination
         )
     }
   `,

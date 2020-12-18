@@ -32,6 +32,7 @@ import ProjectAdminContributionsPage, {
 } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminContributionsPage';
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
 import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab';
+import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab';
 
 type Props = {|
   +features: FeatureToggles,
@@ -206,6 +207,9 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
       argumentValue: null,
       isPublishedArgument: true,
       isTrashedArgument: false,
+      // DebateStep (vote)
+      countVotePagination: VOTE_PAGINATION,
+      cursorVotePagination: null,
     },
     { fetchPolicy: 'store-or-network' },
   );

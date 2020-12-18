@@ -18,6 +18,9 @@ const baseProps = {
     argumentsTrashed: {
       totalCount: 1,
     },
+    votes: {
+      totalCount: 1,
+    },
   },
   hasContributionsStep: false,
   baseUrl: 'index/',

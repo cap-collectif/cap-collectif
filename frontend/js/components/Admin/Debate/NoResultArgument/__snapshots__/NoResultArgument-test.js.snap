@@ -6,6 +6,7 @@ exports[`<NoResultArgument /> should render correctly 1`] = `
   direction="column"
   mt={0}
   spacing={2}
+  textAlign="center"
 >
   <SpotIcon
     name="PENCIL_SOFTWARE"
@@ -14,6 +15,7 @@ exports[`<NoResultArgument /> should render correctly 1`] = `
   <Text
     color="gray.500"
     fontWeight="semibold"
+    maxWidth="400px"
   >
     no-argument-against-published
   </Text>
@@ -42,6 +44,7 @@ exports[`<NoResultArgument /> should render correctly when no argument 1`] = `
   direction="column"
   mt={0}
   spacing={2}
+  textAlign="center"
 >
   <SpotIcon
     name="PENCIL_SOFTWARE"
@@ -49,7 +52,8 @@ exports[`<NoResultArgument /> should render correctly when no argument 1`] = `
   />
   <Text
     color="gray.500"
-    fontWeight="semibold"
+    fontWeight="normal"
+    maxWidth="400px"
   >
     arguments-waiting-email-confirmation-display
   </Text>

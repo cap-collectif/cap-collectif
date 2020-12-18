@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VoteTab /> should render correctly 1`] = `
+<ForwardRef
+  direction="column"
+>
+  <ForwardRef
+    align="center"
+    direction="row"
+    justify="space-between"
+    mb={4}
+  >
+    <Text
+      color="gray.700"
+    >
+      vote-count-for-and-against
+    </Text>
+    <Button
+      disabled={true}
+      variant="primary"
+      variantColor="primary"
+      variantSize="small"
+    >
+      global.export
+    </Button>
+  </ForwardRef>
+  <VoteTab___StyledFlex
+    _css="500px"
+    direction="column"
+  >
+    <InfiniteScroll
+      element="div"
+      getScrollParent={[Function]}
+      hasMore={false}
+      initialLoad={false}
+      isReverse={false}
+      key="infinite-scroll-vote"
+      loadMore={[Function]}
+      loader={
+        <ForwardRef
+          direction="row"
+          justify="center"
+        >
+          <ForwardRef
+            size="m"
+          />
+        </ForwardRef>
+      }
+      pageStart={0}
+      ref={null}
+      threshold={250}
+      useCapture={false}
+      useWindow={false}
+    >
+      <ForwardRef
+        align="flex-start"
+        direction="row"
+        justify="space-between"
+      >
+        <VoteTab___StyledAppBox
+          as="ul"
+          borderColor="gray.200"
+          borderRight="normal"
+          flex="1"
+          m={0}
+          p={0}
+          pr={7}
+        >
+          <AppBox
+            as="li"
+            key="value123"
+            mb={4}
+          >
+            <Relay(DebateVote)
+              vote={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "value123",
+                  "value": "FOR",
+                }
+              }
+            />
+          </AppBox>
+        </VoteTab___StyledAppBox>
+        <VoteTab___StyledAppBox2
+          _css3={[Function]}
+          as="ul"
+          flex="1"
+          m={0}
+          ml={7}
+          p={0}
+        >
+          <AppBox
+            as="li"
+            key="value456"
+            mb={4}
+          >
+            <Relay(DebateVote)
+              vote={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "value456",
+                  "value": "AGAINST",
+                }
+              }
+            />
+          </AppBox>
+        </VoteTab___StyledAppBox2>
+      </ForwardRef>
+    </InfiniteScroll>
+  </VoteTab___StyledFlex>
+</ForwardRef>
+`;
+
+exports[`<VoteTab /> should render correctly when no argument 1`] = `
+<ForwardRef
+  align="center"
+  direction="column"
+  spacing={6}
+>
+  <AppBox
+    as="img"
+    src="http://localhost/image/contribution_debate_vote.png"
+  />
+  <Text
+    color="gray.500"
+  >
+    debate.empty.votes.section
+  </Text>
+</ForwardRef>
+`;

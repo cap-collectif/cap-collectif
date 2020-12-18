@@ -93,6 +93,7 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
     </ForwardRef>
   </ForwardRef>
   <ArgumentTab___StyledAppBox
+    _css="520px"
     as="ul"
     m={0}
     mt={4}

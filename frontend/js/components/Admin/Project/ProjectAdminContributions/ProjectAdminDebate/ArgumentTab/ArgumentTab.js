@@ -21,6 +21,8 @@ import { type ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql';
 
 export const ARGUMENT_PAGINATION = 10;
 
+const MAX_HEIGHT_8_ARGUMENTS = 520;
+
 type Props = {|
   debate: ArgumentTab_debate,
   +relay: RelayPaginationProp,
@@ -121,7 +123,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
           p={0}
           m={0}
           mt={4}
-          css={{ listStyle: 'none', overflow: 'auto', maxHeight: '520px' }}
+          css={{ listStyle: 'none', overflow: 'auto', maxHeight: `${MAX_HEIGHT_8_ARGUMENTS}px` }}
           ref={listArgumentRef}>
           <InfiniteScroll
             key="infinite-scroll-argument"

@@ -21,9 +21,17 @@ type Props = {|
 
 export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
   const { title, body, author, type } = debateOpinion;
+  const [hovering, setHovering] = React.useState<boolean>(false);
 
   return (
-    <Card p={0} bg="white" flex="1" position="relative" overflow="hidden">
+    <Card
+      p={0}
+      bg="white"
+      flex="1"
+      position="relative"
+      overflow="hidden"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}>
       <Tag
         variant={type === 'FOR' ? 'green' : 'red'}
         css={css({
@@ -36,26 +44,28 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
         <FormattedMessage id={type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
       </Tag>
 
-      <Flex
-        direction="row"
-        css={css({
-          position: 'absolute',
-          top: 2,
-          right: 2,
-        })}>
-        <ButtonQuickAction
-          icon={ICON_NAME.PENCIL}
-          label={<FormattedMessage id="global.change" />}
-          onClick={onEdit}
-          variantColor="primary"
-        />
-        <ButtonQuickAction
-          icon={ICON_NAME.TRASH}
-          label={<FormattedMessage id="global.delete" />}
-          onClick={onDelete}
-          variantColor="danger"
-        />
-      </Flex>
+      {hovering && (
+        <Flex
+          direction="row"
+          css={css({
+            position: 'absolute',
+            top: 2,
+            right: 2,
+          })}>
+          <ButtonQuickAction
+            icon={ICON_NAME.PENCIL}
+            label={<FormattedMessage id="global.change" />}
+            onClick={onEdit}
+            variantColor="primary"
+          />
+          <ButtonQuickAction
+            icon={ICON_NAME.TRASH}
+            label={<FormattedMessage id="global.delete" />}
+            onClick={onDelete}
+            variantColor="danger"
+          />
+        </Flex>
+      )}
 
       <Flex direction="column" px={4} pt={10} pb={6}>
         <Flex direction="row" spacing={2} mb={4} align="center">

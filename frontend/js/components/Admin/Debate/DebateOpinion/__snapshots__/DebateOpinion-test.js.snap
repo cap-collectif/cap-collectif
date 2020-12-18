@@ -4,6 +4,8 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
 <Card
   bg="white"
   flex="1"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   overflow="hidden"
   p={0}
   position="relative"
@@ -19,33 +21,6 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
       values={Object {}}
     />
   </DebateOpinion___StyledTag>
-  <DebateOpinion___StyledFlex
-    _css2={[Function]}
-    direction="row"
-  >
-    <ButtonQuickAction
-      icon="PENCIL"
-      label={
-        <FormattedMessage
-          id="global.change"
-          values={Object {}}
-        />
-      }
-      onClick={[MockFunction]}
-      variantColor="primary"
-    />
-    <ButtonQuickAction
-      icon="TRASH"
-      label={
-        <FormattedMessage
-          id="global.delete"
-          values={Object {}}
-        />
-      }
-      onClick={[MockFunction]}
-      variantColor="danger"
-    />
-  </DebateOpinion___StyledFlex>
   <ForwardRef
     direction="column"
     pb={6}

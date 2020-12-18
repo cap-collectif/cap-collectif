@@ -15,7 +15,7 @@ export const InlineList = ({ children, separator, spacing = 1, ...props }: Props
   const validChildren = cleanChildren(children);
 
   return (
-    <Flex direction="row" spacing={spacing} align="center" {...props}>
+    <Flex direction="row" spacing={spacing} align="center" flexWrap="wrap" {...props}>
       {React.Children.map(validChildren, (child, idx) => (
         <>
           {child}

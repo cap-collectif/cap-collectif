@@ -30,10 +30,10 @@ const AccordionButton = ({ children, ...props }: Props) => {
       py={8}
       width="100%"
       fontWeight={FontWeight.Normal}
+      color="blue.900"
       {...props}>
       <Icon
         name={open ? ICON_NAME.ARROW_DOWN : ICON_NAME.ARROW_RIGHT}
-        color="blue.900"
         size={ICON_SIZE.MD}
         marginRight={1}
       />

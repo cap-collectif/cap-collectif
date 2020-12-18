@@ -60,7 +60,7 @@ export const DebateArgument = ({ argument, debate }: Props) => {
       justify="space-between"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}>
-      <Flex direction="column" flex="3">
+      <Flex direction="column" flex="3" mr={4}>
         <Text truncate={100} color="blue.900">
           {body}
         </Text>

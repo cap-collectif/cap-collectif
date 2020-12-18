@@ -71,12 +71,16 @@ export const NoResultArgument = ({ debate }: Props) => {
       direction="column"
       spacing={2}
       align="center"
+      textAlign="center"
       mt={parameters.filters.argument.state === 'WAITING' && hasArgumentForOrAgainst ? 12 : 0}>
       <SpotIcon
         name={getSpotIconName(parameters.filters.argument.state)}
         size={SPOT_ICON_SIZE.LG}
       />
-      <Text fontWeight={FontWeight.Semibold} color="gray.500">
+      <Text
+        fontWeight={hasArgumentForOrAgainst ? FontWeight.Semibold : FontWeight.Normal}
+        color="gray.500"
+        maxWidth="400px">
         {getWordingTitle(
           parameters.filters.argument.state,
           parameters.filters.argument.type,

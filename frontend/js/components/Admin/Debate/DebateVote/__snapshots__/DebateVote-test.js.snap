@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateVote /> should render correctly 1`] = `
+<ForwardRef
+  align="center"
+  direction="row"
+  justify="space-between"
+>
+  <ForwardRef
+    direction="column"
+    mr={4}
+  >
+    <Text
+      color="blue.900"
+      truncate={60}
+    >
+      Vince
+    </Text>
+    <InlineList
+      color="gray.600"
+      separator="•"
+    >
+      <Text
+        truncate={50}
+      >
+        Vincent Damssss
+      </Text>
+      <Text>
+        <FormattedMessage
+          id="global.dates.full_day"
+          values={
+            Object {
+              "date": <FormattedDate
+                day="numeric"
+                month="short"
+                value={"2020-01-31T23:03:00.000Z"}
+                year="numeric"
+              />,
+              "time": <FormattedDate
+                hour="numeric"
+                minute="numeric"
+                value={"2020-01-31T23:03:00.000Z"}
+              />,
+            }
+          }
+        />
+      </Text>
+    </InlineList>
+  </ForwardRef>
+  <Tag
+    variant="green"
+  >
+    <FormattedMessage
+      id="argument.show.type.for"
+      values={Object {}}
+    />
+  </Tag>
+</ForwardRef>
+`;

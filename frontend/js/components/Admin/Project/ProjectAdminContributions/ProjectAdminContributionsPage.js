@@ -38,6 +38,9 @@ export const queryContributions = graphql`
     $argumentType: ForOrAgainstValue
     $isPublishedArgument: Boolean!
     $isTrashedArgument: Boolean!
+    # ARGUMENTS OF ProjectAdminDebate (DebateVote)
+    $countVotePagination: Int!
+    $cursorVotePagination: String
   ) {
     project: node(id: $projectId) {
       ... on Project {
@@ -58,6 +61,8 @@ export const queryContributions = graphql`
                   argumentType: $argumentType
                   isPublishedArgument: $isPublishedArgument
                   isTrashedArgument: $isTrashedArgument
+                  countVotePagination: $countVotePagination
+                  cursorVotePagination: $cursorVotePagination
                 )
             }
           }

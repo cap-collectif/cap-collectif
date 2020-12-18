@@ -5,7 +5,7 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
   direction="column"
 >
   <Accordion
-    defaultAccordion="argument"
+    defaultAccordion="face-to-face"
     spacing={2}
   >
     <AccordionItem
@@ -30,6 +30,9 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
                 "totalCount": 1,
               },
               "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
+              "votes": Object {
                 "totalCount": 1,
               },
             }
@@ -65,6 +68,9 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
               "argumentsWaiting": Object {
                 "totalCount": 1,
               },
+              "votes": Object {
+                "totalCount": 1,
+              },
             }
           }
         />
@@ -74,10 +80,36 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
       id="vote"
     >
       <AccordionButton>
-        0 vote
+        <FormattedMessage
+          id="votes-count"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
-        WIP
+        <Relay(VoteTab)
+          debate={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsPublished": Object {
+                "totalCount": 1,
+              },
+              "argumentsTrashed": Object {
+                "totalCount": 1,
+              },
+              "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
+              "votes": Object {
+                "totalCount": 1,
+              },
+            }
+          }
+        />
       </AccordionPanel>
     </AccordionItem>
   </Accordion>
@@ -101,7 +133,7 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
     />
   </Button>
   <Accordion
-    defaultAccordion="argument"
+    defaultAccordion="face-to-face"
     spacing={2}
   >
     <AccordionItem
@@ -126,6 +158,9 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
                 "totalCount": 1,
               },
               "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
+              "votes": Object {
                 "totalCount": 1,
               },
             }
@@ -161,6 +196,9 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
               "argumentsWaiting": Object {
                 "totalCount": 1,
               },
+              "votes": Object {
+                "totalCount": 1,
+              },
             }
           }
         />
@@ -170,10 +208,36 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
       id="vote"
     >
       <AccordionButton>
-        0 vote
+        <FormattedMessage
+          id="votes-count"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
-        WIP
+        <Relay(VoteTab)
+          debate={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "argumentsPublished": Object {
+                "totalCount": 1,
+              },
+              "argumentsTrashed": Object {
+                "totalCount": 1,
+              },
+              "argumentsWaiting": Object {
+                "totalCount": 1,
+              },
+              "votes": Object {
+                "totalCount": 1,
+              },
+            }
+          }
+        />
       </AccordionPanel>
     </AccordionItem>
   </Accordion>
