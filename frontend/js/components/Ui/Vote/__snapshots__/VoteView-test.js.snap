@@ -14,36 +14,36 @@ exports[`<VoteView /> should render correctly 1`] = `
         className="circle"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
     </div>
@@ -58,36 +58,36 @@ exports[`<VoteView /> should render correctly 1`] = `
         className="circle red"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
     </div>
@@ -133,63 +133,63 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
         className="circle red"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble reverse"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
     </div>
@@ -226,63 +226,63 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
         className="circle"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
       <div
         className="bubble"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
     </div>
@@ -297,9 +297,9 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
         className="circle red"
       >
         <Icon
-          color="#ffffff"
-          name="thumb-o"
-          size={30}
+          color="white"
+          name="THUMB_UP"
+          size="lg"
         />
       </div>
     </div>

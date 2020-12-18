@@ -6,11 +6,11 @@ import type { ArgumentCard_argument } from '~relay/ArgumentCard_argument.graphql
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
 import Tag from '~ds/Tag/Tag';
-import { toast } from '~ds/Toast';
 import Text from '~ui/Primitives/Text';
 import Heading from '~ui/Primitives/Heading';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentVoteMutation from '~/mutations/AddDebateArgumentVoteMutation';
 import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVoteMutation';
 
@@ -20,31 +20,25 @@ type Props = {|
   +argument: ArgumentCard_argument,
 |};
 
-const errorToast = (intl: IntlShape) =>
-  toast({
-    variant: 'danger',
-    content: intl.formatMessage({ id: 'global.error.server.form' }),
-  });
-
 const voteForArgument = (debateArgumentId: string, viewerHasVote: ?boolean, intl: IntlShape) => {
   if (viewerHasVote)
     return RemoveDebateArgumentVoteMutation.commit({ input: { debateArgumentId } })
       .then(response => {
         if (response.removeDebateArgumentVote?.errorCode) {
-          errorToast(intl);
+          mutationErrorToast(intl);
         }
       })
       .catch(() => {
-        errorToast(intl);
+        mutationErrorToast(intl);
       });
   return AddDebateArgumentVoteMutation.commit({ input: { debateArgumentId } })
     .then(response => {
       if (response.addDebateArgumentVote?.errorCode) {
-        errorToast(intl);
+        mutationErrorToast(intl);
       }
     })
     .catch(() => {
-      errorToast(intl);
+      mutationErrorToast(intl);
     });
 };
 

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageVote/> renders correcty 1`] = `
+<ForwardRef(MotionComponent)
+  alignItems="center"
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  direction="row"
+  initial={
+    Object {
+      "opacity": 0,
+    }
+  }
+  justifyContent="center"
+  spacing={6}
+  transition={
+    Object {
+      "duration": 0.5,
+    }
+  }
+  width="100%"
+>
+  <Connect(LoginOverlay)>
+    <DebateStepPageVote___StyledButton
+      _css={[Function]}
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <Icon
+        mr="1"
+        name="THUMB_UP"
+      />
+      <FormattedMessage
+        id="global.for"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton>
+  </Connect(LoginOverlay)>
+  <Connect(LoginOverlay)>
+    <DebateStepPageVote___StyledButton2
+      _css2={[Function]}
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <DebateStepPageVote___StyledIcon
+        mr="1"
+        name="THUMB_UP"
+      />
+      <FormattedMessage
+        id="global.against"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton2>
+  </Connect(LoginOverlay)>
+</ForwardRef(MotionComponent)>
+`;

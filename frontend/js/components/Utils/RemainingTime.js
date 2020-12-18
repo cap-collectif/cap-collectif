@@ -5,11 +5,12 @@ import { FormattedMessage } from 'react-intl';
 
 type Props = {
   +endAt: string,
+  +noStyle?: boolean,
 };
 
 export class RemainingTime extends React.Component<Props> {
   render() {
-    const { endAt } = this.props;
+    const { endAt, noStyle } = this.props;
 
     const endDate = moment(endAt);
     const now = moment();
@@ -20,7 +21,7 @@ export class RemainingTime extends React.Component<Props> {
 
     let timeLeft = (
       <span>
-        <span className="excerpt_dark">{daysLeft}</span>{' '}
+        <span className={!noStyle && 'excerpt_dark'}>{daysLeft}</span>{' '}
         <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
       </span>
     );

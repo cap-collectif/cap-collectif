@@ -18,7 +18,7 @@ export const DebateStepPageLogic = ({ query, title }: Props) => {
   const step = query?.step || null;
   return (
     <Flex direction="column" spacing={8}>
-      <DebateStepPageMainActions title={title} step={step} />
+      <DebateStepPageMainActions title={title} step={step} isAuthenticated={!!query?.viewer} />
       <DebateStepPageFaceToFace step={step} />
       <DebateStepPageLinkedArticles step={step} />
       <DebateStepPageArguments step={step} />

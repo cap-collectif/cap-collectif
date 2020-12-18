@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageMainActions/> renders correcty 1`] = `
+<AppBox
+  id="DebateStepPageMainActions"
+>
+  <ReactPlaceholder
+    customPlaceholder={<DebateStepPageMainActionsPlaceholder />}
+    ready={true}
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="column"
+      spacing={4}
+    >
+      <Tag
+        icon="CLOCK"
+        variant="yellow"
+        variantType="badge"
+      >
+        <RemainingTime
+          endAt="2021-18-02:00:00"
+          noStyle={true}
+        />
+      </Tag>
+      <Heading
+        as="h2"
+        color="gray.900"
+        fontWeight="400"
+        mb={6}
+        textAlign="center"
+      >
+        Pour ou contre le LSD dans nos cantines
+      </Heading>
+      <Relay(Connect(ReduxForm))
+        debate={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+        isAuthenticated={true}
+      />
+    </ForwardRef>
+  </ReactPlaceholder>
+</AppBox>
+`;

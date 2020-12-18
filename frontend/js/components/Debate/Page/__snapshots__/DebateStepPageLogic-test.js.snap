@@ -5,7 +5,8 @@ exports[`<DebateStepPageLogic /> renders correcty 1`] = `
   direction="column"
   spacing={8}
 >
-  <Relay(DebateStepPageMainContent)
+  <Relay(DebateStepPageMainActions)
+    isAuthenticated={true}
     step={
       Object {
         "$fragmentRefs": null,

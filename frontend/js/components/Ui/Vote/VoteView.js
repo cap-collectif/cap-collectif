@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
-import colors from '~/utils/colors';
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import Icon from '~ds/Icon/Icon';
 import { Container } from './VoteView.style';
 
 type Props = {|
@@ -18,22 +17,22 @@ export const VoteView = ({ positivePercentage }: Props) => {
         {left > 5 ? (
           <div>
             <div className="circle">
-              <Icon name={ICON_NAME.thumbO} size={30} color={colors.white} />
+              <Icon name="THUMB_UP" color="white" size="lg" />
             </div>
             {[...Array(Math.floor(left / 20) + (left > 10 ? 1 : 0))].map(() => (
               <div className="bubble">
-                <Icon name={ICON_NAME.thumbO} size={30} color={colors.white} />
+                <Icon name="THUMB_UP" color="white" size="lg" />
               </div>
             ))}
           </div>
         ) : null}
         <div style={{ opacity: right > 5 ? 1 : 0 }}>
           <div className="circle red">
-            <Icon name={ICON_NAME.thumbO} size={30} color={colors.white} />
+            <Icon name="THUMB_UP" color="white" size="lg" />
           </div>
           {[...Array(Math.floor(right / 20) + (right > 10 ? 1 : 0))].map(() => (
             <div className="bubble reverse">
-              <Icon name={ICON_NAME.thumbO} size={30} color={colors.white} />
+              <Icon name="THUMB_UP" color="white" size="lg" />
             </div>
           ))}
         </div>
