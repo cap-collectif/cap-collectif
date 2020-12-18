@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import css from '@styled-system/css';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import type { DebateOpinion_opinion } from '~relay/DebateOpinion_opinion.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
@@ -11,14 +12,18 @@ import Avatar from '~ds/Avatar/Avatar';
 import Text from '~ui/Primitives/Text';
 import Heading from '~ui/Primitives/Heading';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import Button from '~ds/Button/Button';
+import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
 type Props = {|
   +opinion: DebateOpinion_opinion,
+  +isMobile: boolean,
 |};
 
-export const DebateOpinion = ({ opinion }: Props) => {
+export const DebateOpinion = ({ opinion, isMobile }: Props) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Card p={0} bg="white" flex="1">
       <Tag
@@ -44,18 +49,28 @@ export const DebateOpinion = ({ opinion }: Props) => {
             <Text fontSize={3} fontWeight="600">
               {opinion.author.username}
             </Text>
-            <Text fontSize={3}>{opinion.author.biography}</Text>
+            <Text color="neutral-gray.700" fontSize={3}>
+              {opinion.author.biography}
+            </Text>
           </Flex>
         </Flex>
-        <Flex direction="column" spacing={2}>
+        <Flex direction="column" spacing={3}>
           <Heading as="h4" fontWeight="600">
             {opinion.title}
           </Heading>
-          <Text truncate={100}>
-            <WYSIWYGRender value={opinion.body} />
+          <Text>
+            <WYSIWYGRender truncate={isMobile ? 80 : 0} value={opinion.body} />
           </Text>
+          {isMobile && (
+            <Button onClick={onOpen} variant="link" alignSelf="center">
+              <FormattedMessage id="capco.module.read_more" />
+            </Button>
+          )}
         </Flex>
       </Flex>
+      {isMobile && (
+        <DebateStepPageOpinionDrawer onClose={onClose} isOpen={isOpen} opinion={opinion} />
+      )}
     </Card>
   );
 };
@@ -63,6 +78,7 @@ export const DebateOpinion = ({ opinion }: Props) => {
 export default createFragmentContainer(DebateOpinion, {
   opinion: graphql`
     fragment DebateOpinion_opinion on DebateOpinion {
+      ...DebateStepPageOpinionDrawer_opinion
       title
       body
       author {

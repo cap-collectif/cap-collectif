@@ -4,7 +4,6 @@ import MenuButton from './MenuButton';
 import MenuList from './MenuList';
 import MenuListItem from './MenuListItem';
 import MenuDivider from './MenuDivider';
-import MenuListGroup from './MenuListGroup';
 import MenuOptionGroup from './MenuOptionGroup';
 import MenuOptionItem from './MenuOptionItem';
 import { TippyPlacementProps } from '../common';
@@ -17,7 +16,6 @@ declare const Menu: FC<Props> & {
     Button: typeof MenuButton
     List: typeof MenuList
     ListItem: typeof MenuListItem
-    ListGroup: typeof MenuListGroup
     Divider: typeof MenuDivider
     OptionGroup: typeof MenuOptionGroup
     OptionItem: typeof MenuOptionItem

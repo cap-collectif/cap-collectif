@@ -247,6 +247,7 @@
         "graphql-request": "^1.8.2",
         "graphql-schema-linter": "^0.2.0",
         "history": "4.10.1",
+        "html-truncate": "^1.2.2",
         "ignore-loader": "^0.1.2",
         "immutable": "^3.8.1",
         "imports-loader": "^1.1.0",

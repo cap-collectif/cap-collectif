@@ -9,8 +9,8 @@ type Props = {|
   user: NewUserAvatar_user,
 |};
 
-export const NewUserAvatar = ({ user, ...props }: Props) => (
-  <Avatar name={user.username} src={user.media?.url} {...props} />
+export const NewUserAvatar = ({ user, alt, ...props }: Props) => (
+  <Avatar name={user.username} src={user.media?.url} alt={alt ?? user.username} {...props} />
 );
 
 export default createFragmentContainer(NewUserAvatar, {

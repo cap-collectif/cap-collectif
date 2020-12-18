@@ -17,6 +17,7 @@ describe('<DebateStepPageMainActions/>', () => {
     const wrapper = shallow(
       <DebateStepPageMainActions
         isAuthenticated
+        isMobile={false}
         step={step}
         title="Pour ou contre le LSD dans nos cantines"
       />,

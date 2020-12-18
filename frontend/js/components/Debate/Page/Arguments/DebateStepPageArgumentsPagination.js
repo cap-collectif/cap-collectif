@@ -15,12 +15,12 @@ type Props = {|
   +handleChange: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
 |};
 
-export const CONNECTION_NODES_PER_PAGE = 3; // Pour la recette plus tard, ça bougera
+export const CONNECTION_NODES_PER_PAGE = 1; // Pour la recette plus tard, ça bougera
 
 export const FRAGMENT = graphql`
   fragment DebateStepPageArgumentsPagination_debate on Debate
     @argumentDefinitions(
-      first: { type: "Int", defaultValue: 3 }
+      first: { type: "Int", defaultValue: 1 }
       cursor: { type: "String" }
       value: { type: "ForOrAgainstValue!" }
       orderBy: { type: "DebateArgumentOrder" }

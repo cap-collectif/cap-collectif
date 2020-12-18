@@ -1,120 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageArguments /> renders correcty 1`] = `
-<AppBox
-  id="DebateStepPageArguments"
->
-  <ForwardRef
-    direction="row"
-    justifyContent="space-between"
-  >
-    <Heading
-      as="h3"
-      capitalize={true}
-      fontWeight="400"
-      mb={6}
-    >
-      <FormattedMessage
-        id="shortcut.opinion"
-        values={
-          Object {
-            "num": 7,
-          }
-        }
-      />
-    </Heading>
-    <Collapsable
-      align="right"
-    >
-      <CollapsableButton>
-        <FormattedMessage
-          id="argument.sort.label"
-          values={Object {}}
-        />
-      </CollapsableButton>
-      <CollapsableElement
-        ariaLabel="argument.sort.label"
-      >
-        <DropdownSelect
-          defaultValue="DESC"
-          onChange={[Function]}
-          title={
-            <FormattedMessage
-              id="arguments.sort"
-              values={Object {}}
-            />
-          }
-          value="DESC"
-        >
-          <DropdownSelect.Choice
-            value="DESC"
-          >
-            <FormattedMessage
-              id="project.sort.last"
-              values={Object {}}
-            />
-          </DropdownSelect.Choice>
-          <DropdownSelect.Choice
-            value="ASC"
-          >
-            <FormattedMessage
-              id="opinion.sort.old"
-              values={Object {}}
-            />
-          </DropdownSelect.Choice>
-          <DropdownSelect.Choice
-            value="MOST_SUPPORTED"
-          >
-            <FormattedMessage
-              id="filter.most_supported"
-              values={Object {}}
-            />
-          </DropdownSelect.Choice>
-          <DropdownSelect.Choice
-            value="RANDOM"
-          >
-            <FormattedMessage
-              id="global.filter_random"
-              values={Object {}}
-            />
-          </DropdownSelect.Choice>
-        </DropdownSelect>
-      </CollapsableElement>
-    </Collapsable>
-  </ForwardRef>
-  <ForwardRef
-    direction="row"
-  >
-    <ForwardRef
-      direction="column"
-      p={3}
-      width="50%"
-    >
-      <DebateStepPageArgumentsPagination
-        debate={
-          Object {
-            "$fragmentRefs": null,
-            "id": "debat-cannabis",
-          }
-        }
-        handleChange={[Function]}
-      />
-    </ForwardRef>
-    <ForwardRef
-      direction="column"
-      p={3}
-      width="50%"
-    >
-      <DebateStepPageArgumentsPagination
-        debate={
-          Object {
-            "$fragmentRefs": null,
-            "id": "debat-cannabis",
-          }
-        }
-        handleChange={[Function]}
-      />
-    </ForwardRef>
-  </ForwardRef>
-</AppBox>
+<DesktopDebateStepPageArguments
+  step={
+    Object {
+      "$refType": null,
+      "debate": Object {
+        "$fragmentRefs": null,
+        "arguments": Object {
+          "totalCount": 7,
+        },
+        "id": "debat-cannabis",
+      },
+      "noDebate": Object {
+        "$fragmentRefs": null,
+        "id": "debat-cannabis",
+      },
+      "yesDebate": Object {
+        "$fragmentRefs": null,
+        "id": "debat-cannabis",
+      },
+    }
+  }
+/>
+`;
+
+exports[`<DebateStepPageArguments /> renders correcty on mobile 1`] = `
+<Fragment>
+  <MobileDebateStepPageArguments
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "arguments": Object {
+          "totalCount": 7,
+        },
+        "id": "debat-cannabis",
+      }
+    }
+  />
+</Fragment>
 `;

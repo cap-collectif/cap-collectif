@@ -7,6 +7,7 @@ import DebateStepPageMainActions from './MainActions/DebateStepPageMainActions';
 import DebateStepPageFaceToFace from './FaceToFace/DebateStepPageFaceToFace';
 import DebateStepPageLinkedArticles from './LinkedArticles/DebateStepPageLinkedArticles';
 import DebateStepPageArguments from './Arguments/DebateStepPageArguments';
+import useIsMobile from '~/utils/hooks/useIsMobile';
 
 export type Props = {|
   query: ?DebateStepPageLogic_query,
@@ -15,13 +16,19 @@ export type Props = {|
 |};
 
 export const DebateStepPageLogic = ({ query, title }: Props) => {
+  const isMobile = useIsMobile();
   const step = query?.step || null;
   return (
     <Flex direction="column" spacing={8}>
-      <DebateStepPageMainActions title={title} step={step} isAuthenticated={!!query?.viewer} />
-      <DebateStepPageFaceToFace step={step} />
-      <DebateStepPageLinkedArticles step={step} />
-      <DebateStepPageArguments step={step} />
+      <DebateStepPageMainActions
+        isMobile={isMobile}
+        title={title}
+        step={step}
+        isAuthenticated={!!query?.viewer}
+      />
+      <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
+      <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
+      <DebateStepPageArguments isMobile={isMobile} step={step} />
     </Flex>
   );
 };

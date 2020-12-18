@@ -7,6 +7,7 @@ exports[`<DebateStepPageLogic /> renders correcty 1`] = `
 >
   <Relay(DebateStepPageMainActions)
     isAuthenticated={true}
+    isMobile={false}
     step={
       Object {
         "$fragmentRefs": null,
@@ -15,6 +16,7 @@ exports[`<DebateStepPageLogic /> renders correcty 1`] = `
     title="Pour ou contre le LSD dans nos cantines"
   />
   <Relay(DebateStepPageFaceToFace)
+    isMobile={false}
     step={
       Object {
         "$fragmentRefs": null,
@@ -22,6 +24,7 @@ exports[`<DebateStepPageLogic /> renders correcty 1`] = `
     }
   />
   <Relay(DebateStepPageLinkedArticles)
+    isMobile={false}
     step={
       Object {
         "$fragmentRefs": null,
@@ -29,6 +32,7 @@ exports[`<DebateStepPageLogic /> renders correcty 1`] = `
     }
   />
   <Relay(DebateStepPageArguments)
+    isMobile={false}
     step={
       Object {
         "$fragmentRefs": null,

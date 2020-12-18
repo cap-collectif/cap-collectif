@@ -1,0 +1,7 @@
+DebateArgumentAlternateConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalDebateArgumentAlternate!
+        connectionFields:
+            totalCount:
+                type: Int!

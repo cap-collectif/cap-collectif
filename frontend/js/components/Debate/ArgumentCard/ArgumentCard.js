@@ -1,7 +1,9 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
+import { truncate } from 'lodash';
+import { createFragmentContainer, graphql } from 'react-relay';
+import moment from 'moment';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import type { ArgumentCard_argument } from '~relay/ArgumentCard_argument.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
@@ -13,14 +15,24 @@ import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentVoteMutation from '~/mutations/AddDebateArgumentVoteMutation';
 import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVoteMutation';
+import Button from '~ds/Button/Button';
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import { ICON_SIZE } from '~ds/Icon/Icon';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
 type Props = {|
+  ...AppBoxProps,
+  +onReadMore?: () => void,
   +argument: ArgumentCard_argument,
+  +isMobile?: boolean,
 |};
 
-const voteForArgument = (debateArgumentId: string, viewerHasVote: ?boolean, intl: IntlShape) => {
+export const voteForArgument = (
+  debateArgumentId: string,
+  viewerHasVote: ?boolean,
+  intl: IntlShape,
+) => {
   if (viewerHasVote)
     return RemoveDebateArgumentVoteMutation.commit({ input: { debateArgumentId } })
       .then(response => {
@@ -42,29 +54,49 @@ const voteForArgument = (debateArgumentId: string, viewerHasVote: ?boolean, intl
     });
 };
 
-export const ArgumentCard = ({ argument }: Props) => {
+const getTruncatedLength = (isMobile?: boolean): number => {
+  if (isMobile) return 230;
+  return 450;
+};
+export const ArgumentCard = ({ argument, isMobile, onReadMore, ...props }: Props) => {
   const intl = useIntl();
   return (
-    <Card p={6} bg="white">
+    <Card p={6} bg="white" {...props}>
       <Flex direction="column">
         <Flex mb={2} direction="row" justifyContent="space-between" alignItems="center">
           <Flex direction="row" alignItems="center">
-            <Text mr={2}>{argument.author.username}</Text>
+            <Text maxWidth="100px" mr={2}>
+              {argument.author.username}
+            </Text>
             <Tag variant={argument.type === 'FOR' ? 'green' : 'red'}>
               <Heading as="h5" fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
               </Heading>
             </Tag>
           </Flex>
-          <Flex>{argument.publishedAt}</Flex>
+          <Text color="neutral-gray.500">
+            {moment(argument.publishedAt)
+              .startOf('day')
+              .fromNow()}
+          </Text>
         </Flex>
-        <Text>{argument.body}</Text>
+        <Text>
+          {truncate(argument.body, { length: getTruncatedLength(isMobile) })}{' '}
+          {getTruncatedLength(isMobile) < argument.body.length && (
+            <>
+              &nbsp;
+              <Button display="inline-block" onClick={onReadMore} variant="link">
+                <FormattedMessage id="capco.module.read_more" />
+              </Button>
+            </>
+          )}
+        </Text>
         <Flex mt={3} alignItems="center" flexDirection="row">
           <LoginOverlay>
             <ButtonQuickAction
               onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
               mr={1}
-              size="md"
+              size={isMobile ? ICON_SIZE.LG : ICON_SIZE.MD}
               icon="THUMB_UP"
               variantColor="green"
               label={
@@ -88,7 +120,7 @@ export default createFragmentContainer(ArgumentCard, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       body
-      votes {
+      votes(first: 0) {
         totalCount
       }
       author {

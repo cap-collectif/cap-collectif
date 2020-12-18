@@ -1,20 +1,21 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ReactPlaceholder from 'react-placeholder';
 import type { DebateStepPageFaceToFace_step } from '~relay/DebateStepPageFaceToFace_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
-import Flex from '~ui/Primitives/Layout/Flex';
-import DebateOpinion from '~/components/Debate/Opinion/DebateOpinion';
-import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionPlaceholder';
 import Heading from '~ui/Primitives/Heading';
+import Flex from '~ui/Primitives/Layout/Flex';
+import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionPlaceholder';
+import DebateOpinion from '~/components/Debate/Opinion/DebateOpinion';
 
 type Props = {|
   +step: ?DebateStepPageFaceToFace_step,
+  +isMobile: boolean,
 |};
 
-export const DebateStepPageFaceToFace = ({ step }: Props) => {
+export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
   const debate = step?.debate;
   const opinions = debate?.opinions?.edges
     ?.filter(Boolean)
@@ -37,8 +38,8 @@ export const DebateStepPageFaceToFace = ({ step }: Props) => {
         }>
         {forOpinion && againstOpinion && (
           <Flex direction={['column', 'row']} spacing={4}>
-            <DebateOpinion opinion={forOpinion} />
-            <DebateOpinion opinion={againstOpinion} />
+            <DebateOpinion isMobile={isMobile} opinion={forOpinion} />
+            <DebateOpinion isMobile={isMobile} opinion={againstOpinion} />
           </Flex>
         )}
       </ReactPlaceholder>
@@ -49,7 +50,6 @@ export const DebateStepPageFaceToFace = ({ step }: Props) => {
 export default createFragmentContainer(DebateStepPageFaceToFace, {
   step: graphql`
     fragment DebateStepPageFaceToFace_step on DebateStep {
-      id
       debate {
         opinions {
           edges {

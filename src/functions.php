@@ -4,16 +4,16 @@
 if (!function_exists('random_user_agent')) {
     function random_user_agent()
     {
-        $browserFreq = array(
+        $browserFreq = [
             'Internet Explorer' => 24.3,
             'Firefox' => 42.9,
             'Chrome' => 24.6,
             'Safari' => 4.1,
-            'Opera' => 2.6
-        );
+            'Opera' => 2.6,
+        ];
 
-        $browserStrings = array(
-            'Internet Explorer' => array(
+        $browserStrings = [
+            'Internet Explorer' => [
                 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
                 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)',
                 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/5.0)',
@@ -59,8 +59,8 @@ if (!function_exists('random_user_agent')) {
                 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MS-RTC LM 8)',
                 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; Zune 4.0)',
                 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E; MS-RTC LM 8; Zune 4.7)',
-            ),
-            'Firefox' => array(
+            ],
+            'Firefox' => [
                 'Mozilla/5.0 (X11; Linux x86_64; rv:2.2a1pre) Gecko/20110324 Firefox/4.2a1pre',
                 'Mozilla/5.0 (X11; Linux x86_64; rv:2.2a1pre) Gecko/20100101 Firefox/4.2a1pre',
                 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.2a1pre) Gecko/20110324 Firefox/4.2a1pre',
@@ -505,8 +505,8 @@ if (!function_exists('random_user_agent')) {
                 'Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.1) Gecko/20090624 Firefox/3.5 (.NET CLR 4.0.20506)',
                 'Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.1) Gecko/20090624 Firefox/3.5',
                 'Mozilla/5.0 (Windows; U; Windows NT 6.0; zh-TW; rv:1.9.1) Gecko/20090624 Firefox/3.5 (.NET CLR 3.5.30729)',
-            ),
-            'Chrome' => array(
+            ],
+            'Chrome' => [
                 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.25 (KHTML, like Gecko) Chrome/12.0.706.0 Safari/534.25',
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Ubuntu/10.10 Chromium/12.0.703.0 Chrome/12.0.703.0 Safari/534.24',
                 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Ubuntu/10.10 Chromium/12.0.702.0 Chrome/12.0.702.0 Safari/534.24',
@@ -638,8 +638,8 @@ if (!function_exists('random_user_agent')) {
                 'Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.514.0 Safari/534.7',
                 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.514.0 Safari/534.7',
                 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.6 (KHTML, like Gecko) Chrome/7.0.500.0 Safari/534.6',
-            ),
-            'Safari' => array(
+            ],
+            'Safari' => [
                 'Mozilla/5.0 (Windows; U; Windows NT 6.1; tr-TR) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27',
                 'Mozilla/5.0 (Windows; U; Windows NT 6.1; ko-KR) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27',
                 'Mozilla/5.0 (Windows; U; Windows NT 6.1; fr-FR) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27',
@@ -804,8 +804,8 @@ if (!function_exists('random_user_agent')) {
                 'Mozilla/5.0 (Windows; U; Windows NT 5.1; hu-HU) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16',
                 'Mozilla/5.0 (Windows; U; Windows NT 5.1; fr-FR) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16',
                 'Mozilla/5.0 (Windows; U; Windows NT 5.1; fi-FI) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16',
-            ),
-            'Opera' => array(
+            ],
+            'Opera' => [
                 'Opera/9.80 (Windows NT 6.0; U; en) Presto/2.8.99 Version/11.10',
                 'Opera/9.80 (Windows NT 5.1; U; zh-tw) Presto/2.8.131 Version/11.10',
                 'Opera/9.80 (X11; Linux x86_64; U; Ubuntu/10.10 (maverick); pl) Presto/2.7.62 Version/11.01',
@@ -920,9 +920,9 @@ if (!function_exists('random_user_agent')) {
                 'Opera/9.80 (Windows NT 6.0; U; de) Presto/2.2.15 Version/10.00',
                 'Opera/9.80 (Windows NT 5.2; U; en) Presto/2.2.15 Version/10.00',
                 'Opera/9.80 (Windows NT 5.1; U; zh-cn) Presto/2.2.15 Version/10.00',
-                'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.2.15 Version/10.00'
-            )
-        );
+                'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.2.15 Version/10.00',
+            ],
+        ];
 
         $max = 0;
         foreach ($browserFreq as $k => $v) {
@@ -932,7 +932,7 @@ if (!function_exists('random_user_agent')) {
         $rcount = 0;
         $browserType = null;
         foreach ($browserFreq as $k => $v) {
-            if (($roll <= ($rcount += $v)) && (!$browserType)) {
+            if ($roll <= ($rcount += $v) && !$browserType) {
                 $browserType = $k;
             }
         }
@@ -941,5 +941,4 @@ if (!function_exists('random_user_agent')) {
 
         return $userAgent[0];
     }
-
 }

@@ -13,11 +13,14 @@ import DebateStepPageVoteAndShare from './DebateStepPageVoteAndShare';
 
 type Props = {|
   +step: ?DebateStepPageMainActions_step,
+  +isMobile: boolean,
   +title: string,
   +isAuthenticated: boolean,
 |};
 
-export const DebateStepPageMainActions = ({ step, title, isAuthenticated }: Props) => (
+// TODO: make the DebateStepPageVoteAndShare mobile friendly in the next PR, for now we do not display it
+// to avoid breaking mobile layout
+export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticated }: Props) => (
   <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
     <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
       <Flex direction="column" alignItems="center" spacing={4}>
@@ -27,7 +30,7 @@ export const DebateStepPageMainActions = ({ step, title, isAuthenticated }: Prop
         <Heading as="h2" fontWeight="400" mb={6} textAlign="center" color="gray.900">
           {title}
         </Heading>
-        {step && (
+        {!isMobile && step && (
           <DebateStepPageVoteAndShare debate={step?.debate} isAuthenticated={isAuthenticated} />
         )}
       </Flex>

@@ -1,0 +1,12 @@
+InternalDebateArgumentAlternate:
+    type: object
+    config:
+        name: DebateArgumentAlternate
+        description: 'Two debate arguments from non expert, one for and one against.'
+        fields:
+            for:
+                description: 'The FOR argument.'
+                type: InternalDebateArgument
+            against:
+                description: 'The AGAINST argument.'
+                type: InternalDebateArgument

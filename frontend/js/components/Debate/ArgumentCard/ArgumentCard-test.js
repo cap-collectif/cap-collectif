@@ -26,4 +26,9 @@ describe('<ArgumentCard />', () => {
     const wrapper = shallow(<ArgumentCard argument={argument} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correcty on mobile', () => {
+    const wrapper = shallow(<ArgumentCard isMobile argument={argument} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

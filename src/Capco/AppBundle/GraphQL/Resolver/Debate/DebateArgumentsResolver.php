@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -46,7 +47,7 @@ class DebateArgumentsResolver implements ResolverInterface
         return $paginator->auto($args, $totalCount);
     }
 
-    private static function getFilters(Argument $args, ?User $viewer): array
+    public static function getFilters(Argument $args, ?User $viewer, ?string $value = null): array
     {
         $filters = [];
         if ($args->offsetExists('value')) {
@@ -65,10 +66,16 @@ class DebateArgumentsResolver implements ResolverInterface
             $filters['isTrashed'] = $args->offsetGet('isTrashed');
         }
 
+        if ('FOR' === $value) {
+            $filters['value'] = DebateArgument::TYPE_FOR;
+        } elseif ('AGAINST' === $value) {
+            $filters['value'] = DebateArgument::TYPE_AGAINST;
+        }
+
         return $filters;
     }
 
-    private static function getOrderBy(Argument $args): ?array
+    public static function getOrderBy(Argument $args): ?array
     {
         $orderByFields = [
             'PUBLISHED_AT' => 'publishedAt',

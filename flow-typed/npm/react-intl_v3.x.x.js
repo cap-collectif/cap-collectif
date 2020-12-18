@@ -151,7 +151,7 @@ declare module "react-intl" {
   declare type IntlInjectedComponentClass<TOwnProps, TDefaultProps: {} = {}> = Class<
     IntlInjectedComponent<TOwnProps, TDefaultProps>
     >;
-  
+
   declare function useIntl(): $npm$ReactIntl$IntlShape;
   declare function injectIntl<P: {}, Component: React$ComponentType<P>>(
     WrappedComponent: Component,
@@ -195,7 +195,7 @@ declare module "react-intl" {
   declare class FormattedMessage extends React$Component<
     $npm$ReactIntl$MessageDescriptor & {
     values?: Object,
-    tagName?: string,
+    tagName?: string | React$FragmentType,
     children?:
       | ((...formattedMessage: Array<React$Node>) => React$Node)
       | (string => React$Node)
