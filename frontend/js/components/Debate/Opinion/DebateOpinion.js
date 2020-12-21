@@ -14,15 +14,17 @@ import Heading from '~ui/Primitives/Heading';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import Button from '~ds/Button/Button';
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
+import { type ReadMoreState } from '~/components/Debate/Page/FaceToFace/DebateStepPageFaceToFace';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
 type Props = {|
   +opinion: DebateOpinion_opinion,
   +isMobile: boolean,
+  +readMoreState: ReadMoreState,
 |};
 
-export const DebateOpinion = ({ opinion, isMobile }: Props) => {
+export const DebateOpinion = ({ opinion, isMobile, readMoreState }: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Card p={0} bg="white" flex="1">
@@ -59,7 +61,13 @@ export const DebateOpinion = ({ opinion, isMobile }: Props) => {
             {opinion.title}
           </Heading>
           <Text>
-            <WYSIWYGRender truncate={isMobile ? 80 : 0} value={opinion.body} />
+            <WYSIWYGRender
+              /**  Should be 500in desktop BUT html-truncate has issues truncating  the HTML content.
+              Maybe it's the embedded youtube video, idk. This require further processing
+               */
+              truncate={isMobile ? 80 : readMoreState === 'READ_MORE' ? 80 : 0}
+              value={opinion.body}
+            />
           </Text>
           {isMobile && (
             <Button onClick={onOpen} variant="link" alignSelf="center">
