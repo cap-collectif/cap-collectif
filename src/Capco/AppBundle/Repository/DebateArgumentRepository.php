@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -40,6 +41,18 @@ class DebateArgumentRepository extends EntityRepository
             ->getQuery();
 
         return (int) $query->getSingleScalarResult();
+    }
+
+    public function countByDebateAndUser(Debate $debate, User $user): int
+    {
+        return (int) $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->andWhere('a.debate = :debate')
+            ->andWhere('a.author = :user')
+            ->setParameter('debate', $debate)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     private function getByDebateQueryBuilder(Debate $debate, array $filters = []): QueryBuilder

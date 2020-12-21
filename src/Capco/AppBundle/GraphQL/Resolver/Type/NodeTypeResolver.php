@@ -2,13 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Debate\DebateArticle;
-use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
@@ -22,20 +18,26 @@ use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
@@ -43,7 +45,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 
@@ -160,7 +161,7 @@ class NodeTypeResolver implements ResolverInterface
 
             return $this->typeResolver->resolve('InternalSelectionStep');
         }
-        
+
         if ($node instanceof CollectStep) {
             if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PreviewCollectStep');
@@ -275,6 +276,10 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof DebateOpinion) {
             return $this->typeResolver->resolve('InternalDebateOpinion');
+        }
+
+        if ($node instanceof DebateArgument) {
+            return $this->typeResolver->resolve('InternalDebateArgument');
         }
 
         if ($node instanceof DebateArticle) {

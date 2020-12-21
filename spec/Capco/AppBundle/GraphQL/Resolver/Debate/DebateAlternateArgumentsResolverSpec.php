@@ -26,7 +26,11 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
         DebateArgumentRepository $repository,
         Debate $debate
     ) {
-        $args = new Argument(['first' => 0, 'after' => null]);
+        $args = new Argument([
+            'first' => 0,
+            'after' => null,
+            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+        ]);
         $filters = [
             'isPublished' => true,
             'isTrashed' => false,
@@ -47,7 +51,11 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
         DebateArgument $b,
         DebateArgument $c
     ) {
-        $args = new Argument(['first' => 10, 'after' => null]);
+        $args = new Argument([
+            'first' => 10,
+            'after' => null,
+            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+        ]);
         $filters = [
             'isPublished' => true,
             'isTrashed' => false,
@@ -55,19 +63,23 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
         $forFilters = [
             'isPublished' => true,
             'isTrashed' => false,
-            'value' => 1
+            'value' => 'FOR',
         ];
         $againstFilters = [
             'isPublished' => true,
             'isTrashed' => false,
-            'value' => 0
+            'value' => 'AGAINST',
+        ];
+        $orderBy = [
+            'field' => 'publishedAt',
+            'direction' => 'DESC',
         ];
         $repository
-            ->getByDebate($debate, 11, 0, $forFilters, null)
+            ->getByDebate($debate, 11, 0, $forFilters, $orderBy)
             ->willReturn($forPaginator)
             ->shouldBeCalled();
         $repository
-            ->getByDebate($debate, 11, 0, $againstFilters, null)
+            ->getByDebate($debate, 11, 0, $againstFilters, $orderBy)
             ->willReturn($againstPaginator)
             ->shouldBeCalled();
         $repository
@@ -75,7 +87,7 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
             ->willReturn(3)
             ->shouldBeCalled();
         $forPaginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
-        $forPaginator->getIterator()->willReturn(new \ArrayIterator([$c]));
+        $againstPaginator->getIterator()->willReturn(new \ArrayIterator([$c]));
         $this->__invoke($debate, $args, null)->shouldReturnConnection();
     }
 }

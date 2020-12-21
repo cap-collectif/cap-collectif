@@ -17,7 +17,7 @@ class DebateArgumentVote extends AbstractVote
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="votes")
-     * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $debateArgument;
 

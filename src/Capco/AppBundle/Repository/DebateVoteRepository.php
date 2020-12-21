@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Enum\ForOrAgainstType;
+use Psr\Log\LoggerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\VoteOrderField;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Enum\ForOrAgainstType;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 
@@ -19,15 +21,31 @@ use Capco\AppBundle\Entity\Debate\DebateVote;
  */
 class DebateVoteRepository extends EntityRepository
 {
+    private LoggerInterface $logger;
+
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function getOneByDebateAndUser(Debate $debate, User $user): ?DebateVote
     {
-        $qb = $this->createQueryBuilder('v')
-            ->andWhere('v.debate = :debate')
-            ->andWhere('v.user = :user')
-            ->setParameter('debate', $debate)
-            ->setParameter('user', $user);
+        try {
+            $qb = $this->createQueryBuilder('v')
+                ->andWhere('v.debate = :debate')
+                ->andWhere('v.user = :user')
+                ->setParameter('debate', $debate)
+                ->setParameter('user', $user);
 
-        return $qb->getQuery()->getOneOrNullResult();
+            return $qb->getQuery()->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            $this->logger->critical(
+                'A user has multiple votes on a debate. This should not happen.',
+                ['debate' => $debate, 'user' => $user]
+            );
+
+            return null;
+        }
     }
 
     public function getByDebate(

@@ -58,6 +58,11 @@ InternalDebate:
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                 type: DebateArgumentConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentsResolver", [value, args, getUser()])'
+            viewerHasArgument:
+                access: "@=hasRole('ROLE_USER')"
+                description: 'True if the viewer has created an argument.'
+                type: Boolean!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerHasArgumentResolver", [value, getUser()])'
             votes:
                 description: 'The votes from experts of the debate.'
                 argsBuilder: 'Relay::Connection'

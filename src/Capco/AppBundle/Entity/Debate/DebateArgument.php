@@ -23,13 +23,24 @@ use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * An argument in a debate.
  *
- * @ORM\Table(name="debate_argument", indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
- * })
+ * @ORM\Table(
+ *     name="debate_argument",
+ *     indexes={
+ *       @Index(name="idx_author", columns={"id", "author_id"})
+ *     },
+ *     uniqueConstraints={
+ *        @UniqueConstraint(
+ *            name="argument_debate_unique",
+ *            columns={"debate_id", "author_id"}
+ *        )
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  */
 class DebateArgument implements Contribution, VotableInterface, ReportableInterface, Publishable

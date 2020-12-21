@@ -5,11 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Repository\DebateVoteRepository;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 
 class DebateViewerVoteResolver implements ResolverInterface
 {
+    use ResolverTrait;
     private DebateVoteRepository $repository;
 
     public function __construct(DebateVoteRepository $repository)
@@ -17,11 +18,9 @@ class DebateViewerVoteResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(Debate $debate, ?User $viewer): ?DebateVote
+    public function __invoke(Debate $debate, $viewer): ?DebateVote
     {
-        if (null === $viewer) {
-            return null;
-        }
+        $this->preventNullableViewer($viewer);
 
         return $this->repository->getOneByDebateAndUser($debate, $viewer);
     }

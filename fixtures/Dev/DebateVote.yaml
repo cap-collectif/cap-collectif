@@ -44,7 +44,7 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         createdAt: $publishedAt
     debateCannabisVote7:
         id: 13006
-        user: '@userVincent'
+        user: '@userJean'
         debate: '@debateCannabis'
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:07:00'))>

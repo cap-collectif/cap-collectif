@@ -3,22 +3,24 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\DebateArgument;
-use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Repository\ReportingRepository;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class DebateArgumentViewerHasReportResolver implements ResolverInterface
 {
-    private DebateArgumentVoteRepository $repository;
+    use ResolverTrait;
+    private ReportingRepository $repository;
 
-    public function __construct(DebateArgumentVoteRepository $repository)
+    public function __construct(ReportingRepository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function __invoke(DebateArgument $debateArgument, ?User $viewer = null): bool
+    public function __invoke(DebateArgument $debateArgument, $viewer): bool
     {
-        return $viewer &&
-            $this->repository->getOneByDebateArgumentAndUser($debateArgument, $viewer);
+        $this->preventNullableViewer($viewer);
+
+        return $this->repository->countByDebateArgumentAndUser($debateArgument, $viewer) > 0;
     }
 }

@@ -3235,6 +3235,9 @@ type Debate implements Node {
     orderBy: DebateArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateArgumentConnection!
 
+  """True if the viewer has created an argument."""
+  viewerHasArgument: Boolean!
+
   """The votes from experts of the debate."""
   votes(
     """

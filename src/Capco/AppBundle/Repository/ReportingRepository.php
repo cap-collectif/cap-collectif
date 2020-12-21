@@ -14,6 +14,17 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ReportingRepository extends EntityRepository
 {
+    public function countByDebateArgumentAndUser(DebateArgument $argument, User $user): int
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->select('count(DISTINCT r)')
+            ->andWhere('r.Reporter = :user')
+            ->setParameter('user', $user);
+        $qb->andWhere('r.debateArgument = :argument')->setParameter('argument', $argument);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getByProposal(
         Proposal $proposal,
         int $offset,

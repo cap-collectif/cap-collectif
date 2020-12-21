@@ -54,6 +54,14 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *        @UniqueConstraint(
  *            name="comment_vote_unique",
  *            columns={"voter_id", "comment_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="debate_vote_unique",
+ *            columns={"voter_id", "debate_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="debate_argument_vote_unique",
+ *            columns={"voter_id", "debate_argument_id"}
  *        )
  *    }
  * )

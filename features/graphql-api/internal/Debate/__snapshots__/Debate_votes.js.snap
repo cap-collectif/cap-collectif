@@ -186,26 +186,6 @@ Object {
 }
 `;
 
-exports[`Internal|Debate.Votes connection fetches debate not voted by viewer 1`] = `
-Object {
-  "node": Object {
-    "viewerHasVote": false,
-    "viewerVote": null,
-  },
-}
-`;
-
-exports[`Internal|Debate.Votes connection fetches debate voted by viewer 1`] = `
-Object {
-  "node": Object {
-    "viewerHasVote": true,
-    "viewerVote": Object {
-      "type": "AGAINST",
-    },
-  },
-}
-`;
-
 exports[`Internal|Debate.Votes connection fetches votes associated to a debate and a FOR type with a cursor 1`] = `
 Object {
   "node": Object {

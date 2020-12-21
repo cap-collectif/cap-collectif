@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Debate.viewerHasVote bool fetches debate not voted by viewer 1`] = `
+Object {
+  "node": Object {
+    "viewerHasVote": false,
+    "viewerVote": null,
+  },
+}
+`;
+
+exports[`Internal|Debate.viewerHasVote bool fetches debate voted by viewer 1`] = `
+Object {
+  "node": Object {
+    "viewerHasVote": true,
+    "viewerVote": Object {
+      "type": "AGAINST",
+    },
+  },
+}
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DebateArgument.viewerHasReport bool fetches if viewer has report an argument 1`] = `
+Object {
+  "node": Object {
+    "viewerHasReport": false,
+  },
+}
+`;
+
+exports[`Internal|DebateArgument.viewerHasReport bool fetches if viewer has report an argument 2`] = `
+Object {
+  "node": Object {
+    "viewerHasReport": true,
+  },
+}
+`;
