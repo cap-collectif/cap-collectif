@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -33,10 +34,10 @@ class DebateVoteRepository extends EntityRepository
         Debate $debate,
         int $limit,
         int $offset,
-        ?int $filterByValue,
+        ?string $filterByType,
         array $orderBy
     ): Paginator {
-        $qb = $this->getByDebateAndValueQB($debate, $filterByValue);
+        $qb = $this->getByDebateAndTypeQB($debate, $filterByType);
 
         if (VoteOrderField::PUBLISHED_AT === $orderBy['field']) {
             $qb->addOrderBy('v.publishedAt', $orderBy['direction']);
@@ -52,19 +53,21 @@ class DebateVoteRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countByDebate(Debate $debate, ?int $filterByValue = null): int
+    public function countByDebate(Debate $debate, ?string $filterByType = null): int
     {
-        $qb = $this->getByDebateAndValueQB($debate, $filterByValue)->select('COUNT(v)');
+        $qb = $this->getByDebateAndTypeQB($debate, $filterByType)->select('COUNT(v)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    private function getByDebateAndValueQB(Debate $debate, ?int $filterByValue = null): QueryBuilder
-    {
+    private function getByDebateAndTypeQB(
+        Debate $debate,
+        ?string $filterByType = null
+    ): QueryBuilder {
         $qb = $this->getByDebateQB($debate);
 
-        if (0 === $filterByValue || 1 === $filterByValue) {
-            $qb->andWhere('v.yesNoValue = :value')->setParameter('value', $filterByValue);
+        if ($filterByType && ForOrAgainstType::isValid($filterByType)) {
+            $qb->andWhere('v.type = :type')->setParameter('type', $filterByType);
         }
 
         return $qb;

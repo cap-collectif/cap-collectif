@@ -9,7 +9,7 @@ const baseProps = {
   vote: {
     $refType,
     createdAt: '2020-02-01 00:03:00',
-    value: 'FOR',
+    type: 'FOR',
     author: {
       username: 'Vince',
       firstname: 'Vincent',

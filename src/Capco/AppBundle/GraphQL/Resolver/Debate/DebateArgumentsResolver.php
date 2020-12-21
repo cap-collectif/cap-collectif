@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -66,10 +67,8 @@ class DebateArgumentsResolver implements ResolverInterface
             $filters['isTrashed'] = $args->offsetGet('isTrashed');
         }
 
-        if ('FOR' === $value) {
-            $filters['value'] = DebateArgument::TYPE_FOR;
-        } elseif ('AGAINST' === $value) {
-            $filters['value'] = DebateArgument::TYPE_AGAINST;
+        if ($value && ForOrAgainstType::isValid($value)) {
+            $filters['value'] = $value;
         }
 
         return $filters;

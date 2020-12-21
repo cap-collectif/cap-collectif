@@ -34,20 +34,17 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  */
 class DebateArgument implements Contribution, VotableInterface, ReportableInterface, Publishable
 {
-    use UuidTrait;
-    use VotableOkTrait; //@TODO remove votesCount when entity is added to elasticsearch
-    use TextableTrait;
+    use DebatableTrait;
+    use ForAgainstTrait; //@TODO remove votesCount when entity is added to elasticsearch
+    use HasAuthorTrait;
     use ModerableTrait;
     use PublishableTrait;
-    use TrashableTrait;
-    use ForAgainstTrait;
     use ReportableTrait;
-    use HasAuthorTrait;
-    use DebatableTrait;
+    use TextableTrait;
     use TimestampableTrait;
-
-    public const TYPE_AGAINST = 0;
-    public const TYPE_FOR = 1;
+    use TrashableTrait;
+    use UuidTrait;
+    use VotableOkTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

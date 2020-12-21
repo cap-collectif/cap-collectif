@@ -22,16 +22,13 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  */
 class DebateOpinion
 {
-    use UuidTrait;
-    use TitleTrait;
-    use TextableTrait;
-    use ForAgainstTrait;
     use DebatableTrait;
+    use ForAgainstTrait;
     use HasAuthorTrait;
+    use TextableTrait;
     use TimestampableTrait;
-
-    public const TYPE_AGAINST = 1;
-    public const TYPE_FOR = 0;
+    use TitleTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})

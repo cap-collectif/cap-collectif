@@ -6,6 +6,6 @@ AddDebateVoteInput:
             debateId:
                 type: 'ID!'
                 description: 'The Node ID of the `Debate` to vote on.'
-            value:
+            type:
                 type: 'ForOrAgainstValue!'
                 description: 'Whether the vote will be `FOR` or `AGAINST`.'

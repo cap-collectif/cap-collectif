@@ -76,7 +76,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
                 Object {
                   "$fragmentRefs": null,
                   "id": "value123",
-                  "value": "FOR",
+                  "type": "FOR",
                 }
               }
             />
@@ -100,7 +100,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
                 Object {
                   "$fragmentRefs": null,
                   "id": "value456",
-                  "value": "AGAINST",
+                  "type": "AGAINST",
                 }
               }
             />

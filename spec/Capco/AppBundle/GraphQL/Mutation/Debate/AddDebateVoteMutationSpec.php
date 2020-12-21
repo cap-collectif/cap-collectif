@@ -5,7 +5,6 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\Form;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
@@ -38,13 +37,12 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $repository,
         Arg $input,
-        Form $form,
         Debate $debate,
         User $viewer
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
-        $input->offsetGet('value')->willReturn(0);
+        $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
 
@@ -69,7 +67,6 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         Arg $input,
-        Form $form,
         Debate $debate,
         DebateVoteRepository $repository,
         DebateVote $debateVote,
@@ -77,7 +74,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
-        $input->offsetGet('value')->willReturn(0);
+        $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
 
@@ -101,13 +98,12 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         Arg $input,
-        Form $form,
         Debate $debate,
         User $viewer
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
-        $input->offsetGet('value')->willReturn(0);
+        $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
 
@@ -152,7 +148,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
-        $input->offsetGet('value')->willReturn(0);
+        $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
 

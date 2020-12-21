@@ -22,7 +22,7 @@ InternalDebateVote:
                 type: 'InternalUser!'
                 description: 'The author of the vote.'
                 resolve: '@=value.getUser()'
-            value:
+            type:
                 type: 'ForOrAgainstValue!'
                 description: 'The value of the vote.'
             debate:

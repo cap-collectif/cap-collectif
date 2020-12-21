@@ -1,14 +1,14 @@
 Capco\AppBundle\Entity\Debate\DebateOpinion:
     debateCannabisOpinion1:
         id: 'debateCannabisOpinion1'
-        type: 0
+        type: FOR
         author: '@userBobMarley'
         title: 'Je suis pour'
         debate: '@debateCannabis'
         body: <stripslashes('\<p>Légaliser le cannabis, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler, contrôler sa production, sa qualité mais aussi sa distribution que ce soit pour des objectifs thérapeutiques ou récréatifs. Mais c’est surtout <strong>réduire drastiquement</strong> son trafic et les délits associés. Pour être efficace la légalisation devra être absolument accompagnée par des mesures sociales en faveur des familles qui ne survivent souvent que grâce au trafic de cannabis.</p><p><br></p><iframe class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/FNcLyk7B6xw?showinfo=0"></iframe><p><br></p>\')>
     debateCannabisOpinion2:
         id: 'debateCannabisOpinion2'
-        type: 1
+        type: AGAINST
         author: '@userLaurentAlexandre'
         title: 'Je suis contre'
         debate: '@debateCannabis'

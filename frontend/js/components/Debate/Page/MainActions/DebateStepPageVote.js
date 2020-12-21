@@ -19,12 +19,12 @@ type Props = {|
 
 const voteForDebate = (
   debateId: string,
-  value: 'FOR' | 'AGAINST',
+  type: 'FOR' | 'AGAINST',
   intl: IntlShape,
   onSuccess: VoteState => void,
   isAuthenticated,
 ) => {
-  return AddDebateVoteMutation.commit({ input: { debateId, value }, isAuthenticated })
+  return AddDebateVoteMutation.commit({ input: { debateId, type }, isAuthenticated })
     .then(response => {
       if (response.addDebateVote?.errorCode) {
         mutationErrorToast(intl);

@@ -4,76 +4,76 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         id: 13000
         user: '@userSpyl'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:01:00'))>
         createdAt: $publishedAt
     debateCannabisVote2:
         id: 13001
         user: '@userIan'
         debate: '@debateCannabis'
-        value: 1
+        type: FOR
         publishedAt: <(new \DateTime('2015-01-01 09:02:00'))>
         createdAt: $publishedAt
     debateCannabisVote3:
         id: 13002
         user: '@userMickael'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:03:00'))>
         createdAt: $publishedAt
     debateCannabisVote4:
         id: 13003
         user: '@userJpec'
         debate: '@debateCannabis'
-        value: 1
+        type: FOR
         publishedAt: <(new \DateTime('2015-01-01 09:04:00'))>
         createdAt: $publishedAt
     debateCannabisVote5:
         id: 13004
         user: '@userTheo'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:05:00'))>
         createdAt: $publishedAt
     debateCannabisVote6:
         id: 13005
         user: '@userOmar'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:06:00'))>
         createdAt: $publishedAt
     debateCannabisVote7:
         id: 13006
         user: '@userVincent'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:07:00'))>
         createdAt: $publishedAt
     debateCannabisVote8:
         id: 13007
         user: '@userVincent'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:08:00'))>
         createdAt: $publishedAt
     debateCannabisVote9:
         id: 13008
         user: '@userAgui'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:09:00'))>
         createdAt: $publishedAt
     debateCannabisVote10:
         id: 13009
         user: '@userMaxime'
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:10:00'))>
         createdAt: $publishedAt
     # A not confirmed vote
     debateCannabisVote11:
         id: 13010
         debate: '@debateCannabis'
-        value: 0
+        type: AGAINST
         user: '@user_not_confirmed'
         createdAt: <(new \DateTime('2015-01-01 09:11:00'))>

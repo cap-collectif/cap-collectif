@@ -20,12 +20,12 @@ class DebateVotesResolver implements ResolverInterface
 
     public function __invoke(Debate $debate, Argument $args): ConnectionInterface
     {
-        $filterByValue = $args->offsetGet('value');
+        $filterByType = $args->offsetGet('type');
         $orderBy = $args->offsetGet('orderBy');
 
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $debate,
-            $filterByValue,
+            $filterByType,
             $orderBy
         ) {
             if (0 === $offset && 0 === $limit) {
@@ -33,11 +33,11 @@ class DebateVotesResolver implements ResolverInterface
             }
 
             return $this->repository
-                ->getByDebate($debate, $limit, $offset, $filterByValue, $orderBy)
+                ->getByDebate($debate, $limit, $offset, $filterByType, $orderBy)
                 ->getIterator()
                 ->getArrayCopy();
         });
-        $totalCount = $this->repository->countByDebate($debate, $filterByValue);
+        $totalCount = $this->repository->countByDebate($debate, $filterByType);
 
         return $paginator->auto($args, $totalCount);
     }

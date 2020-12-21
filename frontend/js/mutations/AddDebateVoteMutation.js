@@ -25,7 +25,7 @@ const mutation = graphql`
             totalCount
           }
         }
-        value
+        type
         createdAt
         author {
           id

@@ -260,7 +260,7 @@ input AddDebateVoteInput {
   debateId: ID!
 
   """Whether the vote will be `FOR` or `AGAINST`."""
-  value: ForOrAgainstValue!
+  type: ForOrAgainstValue!
   clientMutationId: String
 }
 
@@ -3253,8 +3253,8 @@ type Debate implements Node {
     """Returns the last `n` elements from the list."""
     last: Int
 
-    """Filter by a vote's value."""
-    value: ForOrAgainstValue = null
+    """Filter by a vote's type."""
+    type: ForOrAgainstValue = null
 
     """Order by."""
     orderBy: DebateVoteOrder = {field: PUBLISHED_AT, direction: DESC}
@@ -3695,7 +3695,7 @@ type DebateVote implements Node & Publishable {
   author: User!
 
   """The value of the vote."""
-  value: ForOrAgainstValue!
+  type: ForOrAgainstValue!
 
   """The debate of the vote."""
   debate: Debate!

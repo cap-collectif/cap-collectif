@@ -21,7 +21,7 @@ const MAX_HEIGHT_8_VOTES = 500;
 
 type Vote = {|
   +id: string,
-  +value: ForOrAgainstValue,
+  +type: ForOrAgainstValue,
   +$fragmentRefs: DebateVote_vote$ref,
 |};
 
@@ -50,8 +50,8 @@ const formatVotesForAndAgainst = (
         .map(edge => edge && edge.node)
         .reduce(
           (acc, vote) => ({
-            FOR: vote?.value === 'FOR' ? [...acc.FOR, vote] : acc.FOR,
-            AGAINST: vote?.value === 'AGAINST' ? [...acc.AGAINST, vote] : acc.AGAINST,
+            FOR: vote?.type === 'FOR' ? [...acc.FOR, vote] : acc.FOR,
+            AGAINST: vote?.type === 'AGAINST' ? [...acc.AGAINST, vote] : acc.AGAINST,
           }),
           defaultForAndAgainstVotes,
         )
@@ -198,15 +198,15 @@ export default createPaginationContainer(
             cursor
             node {
               id
-              value
+              type
               ...DebateVote_vote
             }
           }
         }
-        debateVotesFor: votes(value: FOR) {
+        debateVotesFor: votes(type: FOR) {
           totalCount
         }
-        debateVotesAgainst: votes(value: AGAINST) {
+        debateVotesAgainst: votes(type: AGAINST) {
           totalCount
         }
       }

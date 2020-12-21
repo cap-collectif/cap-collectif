@@ -4,8 +4,8 @@ ForOrAgainstValue:
         description: 'For or against.'
         values:
             AGAINST:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Debate\\DebateOpinion::TYPE_AGAINST")'
+                value: '@=constant("Capco\\AppBundle\\Enum\\ForOrAgainstType::AGAINST")'
                 description: 'An against value'
             FOR:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Debate\\DebateOpinion::TYPE_FOR")'
+                value: '@=constant("Capco\\AppBundle\\Enum\\ForOrAgainstType::FOR")'
                 description: 'A for value'

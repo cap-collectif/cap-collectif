@@ -18,7 +18,7 @@ const AddDebateVoteMutation = /* GraphQL */ `
             totalCount
           }
         }
-        value
+        type
         createdAt
         author {
           id
@@ -35,7 +35,7 @@ describe('Internal|addDebateVote mutation', () => {
       {
         input: {
           debateId: toGlobalId('Debate', 'debateCannabis'),
-          value: 'FOR',
+          type: 'FOR',
         },
       },
       'internal_admin',
@@ -56,7 +56,7 @@ describe('Internal|addDebateVote mutation', () => {
       {
         input: {
           debateId: toGlobalId('Debate', 'debateCannabis'),
-          value: 'AGAINST',
+          type: 'AGAINST',
         },
       },
       'internal_admin',
@@ -82,7 +82,7 @@ describe('Internal|addDebateVote mutation', () => {
       {
         input: {
           debateId: toGlobalId('Debate', 'debateCannabis'),
-          value: 'FOR',
+          type: 'FOR',
         },
       },
       'internal_not_confirmed',

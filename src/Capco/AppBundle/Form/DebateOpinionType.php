@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class DebateOpinionType extends AbstractType
@@ -29,7 +28,7 @@ class DebateOpinionType extends AbstractType
             ->add('author', RelayNodeType::class, [
                 'class' => User::class,
             ])
-            ->add('type', IntegerType::class, []);
+            ->add('type', TextType::class, []);
     }
 
     public function configureOptions(OptionsResolver $resolver)

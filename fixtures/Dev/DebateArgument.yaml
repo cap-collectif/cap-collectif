@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument1:
         __construct: ['@debateCannabis']
         id: 'debateArgument1'
-        type: 0
+        type: AGAINST
         author: '@userSpyl'
         body: Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.
         createdAt: <(new \DateTime('2020-10-23 09:00:00'))>
@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument2:
         __construct: ['@debateCannabis']
         id: 'debateArgument2'
-        type: 0
+        type: AGAINST
         author: '@userTheo'
         body: Les partisans de la légalisation estiment que le cannabis n’est pas plus nocif que le tabac ou l’alcool et doit être encadré de la même manière. Il pose un problème d’addiction qu’on peut contrer plus aisément en encadrant sa consommation.
         createdAt: <(new \DateTime('2020-10-23 09:01:00'))>
@@ -20,7 +20,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument3:
         __construct: ['@debateCannabis']
         id: 'debateArgument3'
-        type: 0
+        type: AGAINST
         author: '@userAgui'
         body: La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.
         createdAt: <(new \DateTime('2020-10-23 09:02:00'))>
@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument4:
         __construct: ['@debateCannabis']
         id: 'debateArgument4'
-        type: 0
+        type: AGAINST
         author: '@userVincent'
         body: Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.
         createdAt: <(new \DateTime('2020-10-23 09:03:00'))>
@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument5:
         __construct: ['@debateCannabis']
         id: 'debateArgument5'
-        type: 1
+        type: FOR
         author: '@userJpec'
         body: Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).
         createdAt: <(new \DateTime('2020-10-23 09:04:00'))>
@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument6:
         __construct: ['@debateCannabis']
         id: 'debateArgument6'
-        type: 1
+        type: FOR
         author: '@userMaximeQA'
         body: Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.
         createdAt: <(new \DateTime('2020-10-23 09:05:00'))>
@@ -53,7 +53,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument7:
         __construct: ['@debateCannabis']
         id: 'debateArgument7'
-        type: 1
+        type: FOR
         author: '@userIan'
         body: Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.
         createdAt: <(new \DateTime('2020-10-23 09:06:00'))>
@@ -61,14 +61,14 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument8:
         __construct: ['@debateCannabis']
         id: 'debateArgument8'
-        type: 1
+        type: FOR
         author: '@userMickael'
         body: Je réfléchis encore
         createdAt: <(new \DateTime('2020-10-23 09:07:00'))>
     debateArgument9:
         __construct: ['@debateCannabis']
         id: 'debateArgument9'
-        type: 1
+        type: FOR
         author: '@user42'
         body: 'Vous etes le 1.000.000e visiteur du site ! cliquez ici pour recevoir 1000€ ===> www.pigeon.com'
         createdAt: <(new \DateTime('2020-10-23 09:08:00'))>

@@ -19,7 +19,7 @@ const baseProps = {
           cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==1',
           node: {
             id: 'value123',
-            value: 'FOR',
+            type: 'FOR',
             $fragmentRefs,
           },
         },
@@ -27,7 +27,7 @@ const baseProps = {
           cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==2',
           node: {
             id: 'value456',
-            value: 'AGAINST',
+            type: 'AGAINST',
             $fragmentRefs,
           },
         },

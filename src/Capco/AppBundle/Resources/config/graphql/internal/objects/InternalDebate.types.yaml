@@ -62,10 +62,10 @@ InternalDebate:
                 description: 'The votes from experts of the debate.'
                 argsBuilder: 'Relay::Connection'
                 args:
-                    value:
+                    type:
                         type: 'ForOrAgainstValue'
                         defaultValue: null
-                        description: "Filter by a vote's value."
+                        description: "Filter by a vote's type."
                     orderBy:
                         type: 'DebateVoteOrder'
                         description: 'Order by.'

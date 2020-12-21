@@ -54,10 +54,10 @@ class AddDebateVoteMutation implements MutationInterface
             return $this->generateErrorPayload(self::CLOSED_DEBATE);
         }
 
-        $value = $input->offsetGet('value');
+        $type = $input->offsetGet('type');
         $debateVote = (new DebateVote())
             ->setDebate($debate)
-            ->setValue($value)
+            ->setType($type)
             ->setUser($viewer);
 
         $previousVote = $this->repository->getOneByDebateAndUser($debate, $viewer);

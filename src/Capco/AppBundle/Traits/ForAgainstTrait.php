@@ -2,24 +2,26 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Enum\ForOrAgainstType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait ForAgainstTrait
 {
     /**
-     * @ORM\Column(name="type", type="integer", nullable=false)
-     * @Assert\Choice(choices={0, 1})
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('FOR', 'AGAINST')", nullable=true)
+     * @Assert\Choice(choices=ForOrAgainstType::ALL)
      */
-    private $type = 1;
+    private string $type = ForOrAgainstType::FOR;
 
-    public function getType(): int
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(int $type): self
+    public function setType(string $type): self
     {
+        ForOrAgainstType::checkIsValid($type);
         $this->type = $type;
 
         return $this;

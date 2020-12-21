@@ -1,9 +1,9 @@
 /* eslint-env jest */
 const DebateVotesQuery = /* GraphQL */ `
-  query DebateVotesQuery($id: ID!, $count: Int!, $cursor: String, $value: ForOrAgainstValue) {
+  query DebateVotesQuery($id: ID!, $count: Int!, $cursor: String, $type: ForOrAgainstValue) {
     node(id: $id) {
       ... on Debate {
-        votes(first: $count, after: $cursor, value: $value) {
+        votes(first: $count, after: $cursor, type: $type) {
           totalCount
           pageInfo {
             hasPreviousPage
@@ -15,7 +15,7 @@ const DebateVotesQuery = /* GraphQL */ `
             cursor
             node {
               id
-              value
+              type
               createdAt
               publishedAt
               debate {
@@ -39,10 +39,10 @@ const DebateVotesCountersQuery = /* GraphQL */ `
         allVotes: votes(first: 0) {
           totalCount
         }
-        forVotes: votes(first: 0, value: FOR) {
+        forVotes: votes(first: 0, type: FOR) {
           totalCount
         }
-        againstVotes: votes(first: 0, value: AGAINST) {
+        againstVotes: votes(first: 0, type: AGAINST) {
           totalCount
         }
       }
@@ -56,7 +56,7 @@ const DebateViewerHasVoteQuery = /* GraphQL */ `
       ... on Debate {
         viewerHasVote
         viewerVote {
-          value
+          type
         }
       }
     }
@@ -92,14 +92,14 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot();
   });
 
-  it('fetches votes associated to a debate and a FOR value with a cursor', async () => {
+  it('fetches votes associated to a debate and a FOR type with a cursor', async () => {
     await expect(
       graphql(
         DebateVotesQuery,
         {
           count: 100,
           id: toGlobalId('Debate', 'debateCannabis'),
-          value: 'FOR',
+          type: 'FOR',
           cursor: null,
         },
         'internal',
@@ -107,14 +107,14 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot();
   });
 
-  it('fetches votes associated to a debate and an AGAINST value with a cursor', async () => {
+  it('fetches votes associated to a debate and an AGAINST type with a cursor', async () => {
     await expect(
       graphql(
         DebateVotesQuery,
         {
           count: 100,
           id: toGlobalId('Debate', 'debateCannabis'),
-          value: 'AGAINST',
+          type: 'AGAINST',
           cursor: null,
         },
         'internal',

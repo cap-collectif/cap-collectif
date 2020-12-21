@@ -71,7 +71,7 @@ export const DebateStepPageVoteAndShare = ({ debate, isAuthenticated, body }: Pr
   const [voteState, setVoteState] = useState<VoteState>(debate.viewerHasVote ? 'VOTED' : 'NONE');
   const [showArgumentForm, setShowArgumentForm] = useState(true);
 
-  const viewerVoteValue = debate.viewerVote?.value;
+  const viewerVoteValue = debate.viewerVote?.type;
 
   return (
     <>
@@ -197,9 +197,9 @@ export default createFragmentContainer(connect(mapStateToProps)(form), {
       id
       viewerHasVote @include(if: $isAuthenticated)
       viewerVote @include(if: $isAuthenticated) {
-        value
+        type
       }
-      yesVotes: votes(value: FOR) {
+      yesVotes: votes(type: FOR) {
         totalCount
       }
       votes {

@@ -14,7 +14,7 @@ type Props = {|
 |};
 
 export const DebateVote = ({ vote }: Props) => {
-  const { value, author, createdAt } = vote;
+  const { type, author, createdAt } = vote;
   const userName: ?string =
     author.firstname && author.lastname ? `${author.firstname} ${author.lastname}` : null;
 
@@ -47,9 +47,9 @@ export const DebateVote = ({ vote }: Props) => {
         </InlineList>
       </Flex>
 
-      <Tag variant={value === 'FOR' ? 'green' : 'red'}>
+      <Tag variant={type === 'FOR' ? 'green' : 'red'}>
         <FormattedMessage
-          id={value === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'}
+          id={type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'}
         />
       </Tag>
     </Flex>
@@ -59,7 +59,7 @@ export const DebateVote = ({ vote }: Props) => {
 export default createFragmentContainer(DebateVote, {
   vote: graphql`
     fragment DebateVote_vote on DebateVote {
-      value
+      type
       createdAt
       author {
         username
