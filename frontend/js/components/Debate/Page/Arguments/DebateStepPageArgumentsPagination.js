@@ -1,17 +1,21 @@
 // @flow
 import * as React from 'react';
 import { graphql } from 'react-relay';
-import { usePagination } from 'relay-hooks';
+import { useFragment, usePagination } from 'relay-hooks';
 import type {
   DebateStepPageArgumentsPagination_debate,
   DebateStepPageArgumentsPagination_debate$key,
 } from '~relay/DebateStepPageArgumentsPagination_debate.graphql';
+import type { DebateStepPageArgumentsPagination_viewer$key } from '~relay/DebateStepPageArgumentsPagination_viewer.graphql';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { RelayHookPaginationProps, ConnectionMetadata } from '~/types';
+import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
+import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
 
 type Props = {|
   +debate: DebateStepPageArgumentsPagination_debate$key,
+  +viewer: ?DebateStepPageArgumentsPagination_viewer$key,
   +handleChange: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
 |};
 
@@ -40,6 +44,12 @@ export const FRAGMENT = graphql`
         }
       }
     }
+  }
+`;
+
+const VIEWER_FRAGMENT = graphql`
+  fragment DebateStepPageArgumentsPagination_viewer on User {
+    ...ArgumentCard_viewer
   }
 `;
 
@@ -105,11 +115,18 @@ export const CONNECTION_CONFIG_NO = {
   `,
 };
 
-export const DebateStepPageArgumentsPagination = ({ debate, handleChange }: Props) => {
+export const DebateStepPageArgumentsPagination = ({
+  debate,
+  viewer: viewerFragment,
+  handleChange,
+}: Props) => {
   const [argumentsQuery, paginationProps]: [
     DebateStepPageArgumentsPagination_debate,
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debate);
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const [reportModalId, setReportModalId] = React.useState<?string>(null);
+  const [moderateModalId, setModerateModalId] = React.useState<?string>(null);
 
   if (handleChange) handleChange({ ...paginationProps, hasMore: paginationProps.hasMore() });
 
@@ -123,9 +140,25 @@ export const DebateStepPageArgumentsPagination = ({ debate, handleChange }: Prop
     <>
       {debateArguments?.map(argument => (
         <AppBox key={argument.id} marginBottom={6}>
-          <ArgumentCard argument={argument} />
+          <ArgumentCard
+            argument={argument}
+            viewer={viewer}
+            setReportModalId={setReportModalId}
+            setModerateModalId={setModerateModalId}
+          />
         </AppBox>
       ))}
+
+      {moderateModalId && (
+        <ModalModerateArgument
+          argumentId={moderateModalId}
+          onClose={() => setModerateModalId(null)}
+        />
+      )}
+
+      {reportModalId && (
+        <ModalReportArgument argumentId={reportModalId} onClose={() => setReportModalId(null)} />
+      )}
     </>
   );
 };

@@ -1,7 +1,9 @@
 // @flow
 import React, { useState } from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
+import type { DesktopDebateStepPageArguments_viewer } from '~relay/DesktopDebateStepPageArguments_viewer.graphql';
 import Heading from '~ui/Primitives/Heading';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import Button from '~ds/Button/Button';
@@ -18,11 +20,12 @@ import Text from '~ui/Primitives/Text';
 
 type Props = {|
   +step: ?DebateStepPageArguments_step,
+  +viewer: ?DesktopDebateStepPageArguments_viewer,
 |};
 
 type Filter = 'ASC' | 'DESC' | 'MOST_SUPPORTED' | 'RANDOM';
 
-export const DesktopDebateStepPageArguments = ({ step }: Props) => {
+export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
   const [filter, setFilter] = useState<Filter>('DESC');
   const [yesState, setYesState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
   const [noState, setNoState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
@@ -99,6 +102,7 @@ export const DesktopDebateStepPageArguments = ({ step }: Props) => {
         <Flex direction="column" width="50%" p={3}>
           <DebateStepPageArgumentsPagination
             debate={step.yesDebate}
+            viewer={viewer}
             handleChange={value => {
               if (value.hasMore !== yesState?.hasMore) setYesState(value);
             }}
@@ -107,6 +111,7 @@ export const DesktopDebateStepPageArguments = ({ step }: Props) => {
         <Flex direction="column" width="50%" p={3}>
           <DebateStepPageArgumentsPagination
             debate={step.noDebate}
+            viewer={viewer}
             handleChange={value => {
               if (value.hasMore !== noState?.hasMore) setNoState(value);
             }}
@@ -130,4 +135,10 @@ export const DesktopDebateStepPageArguments = ({ step }: Props) => {
   );
 };
 
-export default DesktopDebateStepPageArguments;
+export default createFragmentContainer(DesktopDebateStepPageArguments, {
+  viewer: graphql`
+    fragment DesktopDebateStepPageArguments_viewer on User {
+      ...DebateStepPageArgumentsPagination_viewer
+    }
+  `,
+});

@@ -76,9 +76,7 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
         </Flex>
         <Flex direction="column" spacing={2}>
           <Text fontWeight="600">{title}</Text>
-          <Text truncate={340}>
-            <WYSIWYGRender value={body} />
-          </Text>
+          <WYSIWYGRender value={body} truncate={340} />
         </Flex>
       </Flex>
     </Card>

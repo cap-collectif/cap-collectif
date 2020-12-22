@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageArguments /> renders correcty 1`] = `
-<DesktopDebateStepPageArguments
+<Relay(DesktopDebateStepPageArguments)
   step={
     Object {
       "$refType": null,
@@ -22,6 +22,12 @@ exports[`<DebateStepPageArguments /> renders correcty 1`] = `
       },
     }
   }
+  viewer={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+    }
+  }
 />
 `;
 
@@ -37,6 +43,38 @@ exports[`<DebateStepPageArguments /> renders correcty on mobile 1`] = `
         "id": "debat-cannabis",
       }
     }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
   />
 </Fragment>
+`;
+
+exports[`<DebateStepPageArguments /> renders correcty when no viewer 1`] = `
+<Relay(DesktopDebateStepPageArguments)
+  step={
+    Object {
+      "$refType": null,
+      "debate": Object {
+        "$fragmentRefs": null,
+        "arguments": Object {
+          "totalCount": 7,
+        },
+        "id": "debat-cannabis",
+      },
+      "noDebate": Object {
+        "$fragmentRefs": null,
+        "id": "debat-cannabis",
+      },
+      "yesDebate": Object {
+        "$fragmentRefs": null,
+        "id": "debat-cannabis",
+      },
+    }
+  }
+  viewer={null}
+/>
 `;

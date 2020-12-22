@@ -38,6 +38,11 @@ exports[`<DebateStepPageLogic /> renders correcty 1`] = `
         "$fragmentRefs": null,
       }
     }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
   />
 </ForwardRef>
 `;

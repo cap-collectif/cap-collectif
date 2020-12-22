@@ -29,6 +29,9 @@ declare export const ICON_NAME = {
     THUMB_UP: 'THUMB_UP',
     LONG_ARROW_LEFT: 'LONG_ARROW_LEFT',
     LONG_ARROW_RIGHT: 'LONG_ARROW_RIGHT',
+    FLAG: 'FLAG',
+    MORE: 'MORE',
+    MODERATE: 'MODERATE',
 };
 
 declare const Icon: PolymorphicComponent<ComponentProps<SVGElement> & {

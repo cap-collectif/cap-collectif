@@ -39,11 +39,16 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
           </Heading>
         </Tag>
       </ForwardRef>
-      <Text
-        color="neutral-gray.500"
+      <ForwardRef
+        align="center"
+        direction="row"
       >
-        Invalid date
-      </Text>
+        <Text
+          color="neutral-gray.500"
+        >
+          Invalid date
+        </Text>
+      </ForwardRef>
     </ForwardRef>
     <Text>
       Je suis pour le LSD dans nos cantines
@@ -121,11 +126,16 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
           </Heading>
         </Tag>
       </ForwardRef>
-      <Text
-        color="neutral-gray.500"
+      <ForwardRef
+        align="center"
+        direction="row"
       >
-        Invalid date
-      </Text>
+        <Text
+          color="neutral-gray.500"
+        >
+          Invalid date
+        </Text>
+      </ForwardRef>
     </ForwardRef>
     <Text>
       Je suis pour le LSD dans nos cantines
@@ -149,6 +159,212 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
           mr={1}
           onClick={[Function]}
           size="lg"
+          variantColor="green"
+        />
+      </Connect(LoginOverlay)>
+      <Text
+        as="span"
+        color="gray.500"
+        fontSize={3}
+      >
+        500
+      </Text>
+    </ForwardRef>
+  </ForwardRef>
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <ForwardRef
+    direction="column"
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      justifyContent="space-between"
+      mb={2}
+    >
+      <ForwardRef
+        alignItems="center"
+        direction="row"
+      >
+        <Text
+          maxWidth="100px"
+          mr={2}
+        >
+          Agui
+        </Text>
+        <Tag
+          variant="green"
+        >
+          <Heading
+            as="h5"
+            fontWeight="700"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Heading>
+        </Tag>
+      </ForwardRef>
+      <ForwardRef
+        align="center"
+        direction="row"
+      >
+        <Text
+          color="neutral-gray.500"
+        >
+          Invalid date
+        </Text>
+        <Button
+          color="blue.900"
+          onClick={[Function]}
+          p={0}
+          rightIcon="MODERATE"
+        />
+      </ForwardRef>
+    </ForwardRef>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <ForwardRef
+      alignItems="center"
+      flexDirection="row"
+      mt={3}
+    >
+      <Connect(LoginOverlay)>
+        <ButtonQuickAction
+          icon="THUMB_UP"
+          iconColor="green.500"
+          label={
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          }
+          mr={1}
+          onClick={[Function]}
+          size="md"
+          variantColor="green"
+        />
+      </Connect(LoginOverlay)>
+      <Text
+        as="span"
+        color="gray.500"
+        fontSize={3}
+      >
+        500
+      </Text>
+    </ForwardRef>
+  </ForwardRef>
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <ForwardRef
+    direction="column"
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      justifyContent="space-between"
+      mb={2}
+    >
+      <ForwardRef
+        alignItems="center"
+        direction="row"
+      >
+        <Text
+          maxWidth="100px"
+          mr={2}
+        >
+          Agui
+        </Text>
+        <Tag
+          variant="green"
+        >
+          <Heading
+            as="h5"
+            fontWeight="700"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Heading>
+        </Tag>
+      </ForwardRef>
+      <ForwardRef
+        align="center"
+        direction="row"
+      >
+        <Text
+          color="neutral-gray.500"
+        >
+          Invalid date
+        </Text>
+        <Menu>
+          <Menu.Button
+            __type="MenuButton"
+            as={Symbol(react.fragment)}
+          >
+            <Button
+              aria-label="global.menu"
+              color="blue.900"
+              p={0}
+              rightIcon="MORE"
+            />
+          </Menu.Button>
+          <Menu.List
+            __type="MenuList"
+          >
+            <Menu.ListItem>
+              <Button
+                color="blue.900"
+                leftIcon="FLAG"
+                onClick={[Function]}
+              >
+                global.report.submit
+              </Button>
+            </Menu.ListItem>
+          </Menu.List>
+        </Menu>
+      </ForwardRef>
+    </ForwardRef>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <ForwardRef
+      alignItems="center"
+      flexDirection="row"
+      mt={3}
+    >
+      <Connect(LoginOverlay)>
+        <ButtonQuickAction
+          icon="THUMB_UP"
+          iconColor="green.500"
+          label={
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          }
+          mr={1}
+          onClick={[Function]}
+          size="md"
           variantColor="green"
         />
       </Connect(LoginOverlay)>

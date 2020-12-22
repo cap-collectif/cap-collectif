@@ -26,3 +26,6 @@ export { default as BELL } from './svg/bell.svg';
 export { default as THUMB_UP } from './svg/thumb-up.svg';
 export { default as LONG_ARROW_LEFT } from './svg/long-arrow-left.svg';
 export { default as LONG_ARROW_RIGHT } from './svg/long-arrow-right.svg';
+export { default as FLAG } from './svg/flag.svg';
+export { default as MORE } from './svg/more.svg';
+export { default as MODERATE } from './svg/moderate.svg';

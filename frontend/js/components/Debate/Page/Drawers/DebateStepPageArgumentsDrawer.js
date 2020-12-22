@@ -12,8 +12,9 @@ import type {
   DebateStepPageArgumentsDrawer_debate,
   DebateStepPageArgumentsDrawer_debate$key,
 } from '~relay/DebateStepPageArgumentsDrawer_debate.graphql';
+import type { DebateStepPageArgumentsDrawer_viewer } from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
 
-const FRAGMENT = graphql`
+const DEBATE_FRAGMENT = graphql`
   fragment DebateStepPageArgumentsDrawer_debate on Debate
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
     arguments(first: 0) {
@@ -33,14 +34,23 @@ const FRAGMENT = graphql`
   }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+  fragment DebateStepPageArgumentsDrawer_viewer on User {
+    ...DebateStepPageAlternateArgumentsPagination_viewer
+  }
+`;
+
 const DebateStepPageArgumentsDrawer = ({
   debate: debateFragment,
+  viewer: viewerFragment,
   ...drawerProps
 }: {|
   ...DetailDrawerProps,
   +debate: DebateStepPageArgumentsDrawer_debate$key,
+  +viewer: ?DebateStepPageArgumentsDrawer_viewer,
 |}) => {
-  const debate: DebateStepPageArgumentsDrawer_debate = useFragment(FRAGMENT, debateFragment);
+  const debate: DebateStepPageArgumentsDrawer_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
+  const viewer: DebateStepPageArgumentsDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
 
   return (
     <DetailDrawer {...drawerProps}>
@@ -67,7 +77,7 @@ const DebateStepPageArgumentsDrawer = ({
       </DetailDrawer.Header>
       <DetailDrawer.Body>
         <Flex overflow="auto" height="100%" direction="column" spacing={4}>
-          <DebateStepPageAlternateArgumentsPagination debate={debate} />
+          <DebateStepPageAlternateArgumentsPagination debate={debate} viewer={viewer} />
         </Flex>
       </DetailDrawer.Body>
     </DetailDrawer>

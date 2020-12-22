@@ -60,13 +60,10 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
       >
         Thats my opinion
       </Text>
-      <Text
+      <WYSIWYGRender
         truncate={340}
-      >
-        <WYSIWYGRender
-          value="Thats it"
-        />
-      </Text>
+        value="Thats it"
+      />
     </ForwardRef>
   </ForwardRef>
 </Card>

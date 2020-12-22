@@ -18,6 +18,8 @@ export type Props = {|
 export const DebateStepPageLogic = ({ query, title }: Props) => {
   const isMobile = useIsMobile();
   const step = query?.step || null;
+  const viewer = query?.viewer || null;
+
   return (
     <Flex direction="column" spacing={8}>
       <DebateStepPageMainActions
@@ -28,7 +30,7 @@ export const DebateStepPageLogic = ({ query, title }: Props) => {
       />
       <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
       <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
-      <DebateStepPageArguments isMobile={isMobile} step={step} />
+      <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
     </Flex>
   );
 };
@@ -38,7 +40,7 @@ export default createFragmentContainer(DebateStepPageLogic, {
     fragment DebateStepPageLogic_query on Query
       @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
       viewer @include(if: $isAuthenticated) {
-        id
+        ...DebateStepPageArguments_viewer
       }
       step: node(id: $stepId) {
         ...DebateStepPageArguments_step

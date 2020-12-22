@@ -9,7 +9,9 @@ describe('<DebateStepPageLogic />', () => {
   const query = {
     $refType,
     step: { $fragmentRefs },
-    viewer: { id: 'user1' },
+    viewer: {
+      $fragmentRefs,
+    },
   };
 
   it('renders correcty', () => {

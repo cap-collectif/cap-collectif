@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalReportArgument /> should renders correcty with argument 1`] = `
+<ModalReportArgument__ModalContainer
+  animation={false}
+  aria-labelledby="modal-title"
+  bsSize="large"
+  onHide={[MockFunction]}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="modal-title"
+    >
+      <FormattedMessage
+        id="moderate-argument"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <injectIntl(ReduxForm)
+      onSubmit={[Function]}
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="editor.undo"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      bsStyle="danger"
+      isSubmitting={false}
+      label="global.report.submit"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</ModalReportArgument__ModalContainer>
+`;

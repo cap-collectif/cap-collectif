@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
 import { graphql } from 'react-relay';
-import { usePagination } from 'relay-hooks';
+import { useFragment, usePagination } from 'relay-hooks';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useMultipleDisclosure } from '@liinkiing/react-hooks';
 import type {
   DebateStepPageAlternateArgumentsPagination_debate,
   DebateStepPageAlternateArgumentsPagination_debate$key,
 } from '~relay/DebateStepPageAlternateArgumentsPagination_debate.graphql';
+import type { DebateStepPageAlternateArgumentsPagination_viewer$key } from '~relay/DebateStepPageAlternateArgumentsPagination_viewer.graphql';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { ConnectionMetadata, RelayHookPaginationProps } from '~/types';
@@ -15,9 +16,12 @@ import Spinner from '~ds/Spinner/Spinner';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { StyledSlider } from '~/components/Debate/Page/LinkedArticles/DebateStepPageLinkedArticles';
 import DebateStepPageArgumentDrawer from '~/components/Debate/Page/Drawers/DebateStepPageArgumentDrawer';
+import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
+import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
 
 type Props = {|
   +debate: DebateStepPageAlternateArgumentsPagination_debate$key,
+  +viewer: ?DebateStepPageAlternateArgumentsPagination_viewer$key,
   +preview?: boolean,
 |};
 
@@ -61,6 +65,12 @@ export const FRAGMENT = graphql`
   }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+  fragment DebateStepPageAlternateArgumentsPagination_viewer on User {
+    ...ArgumentCard_viewer
+  }
+`;
+
 const getVariables = (
   props: {| id: string |},
   { count, cursor }: ConnectionMetadata,
@@ -99,6 +109,7 @@ export const CONNECTION_CONFIG = {
 
 export const DebateStepPageAlternateArgumentsPagination = ({
   debate: debateFragment,
+  viewer: viewerFragment,
   preview = false,
 }: Props) => {
   const { onClose, onOpen, isOpen } = useMultipleDisclosure({});
@@ -106,6 +117,9 @@ export const DebateStepPageAlternateArgumentsPagination = ({
     DebateStepPageAlternateArgumentsPagination_debate,
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debateFragment);
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const [reportModalId, setReportModalId] = React.useState<?string>(null);
+  const [moderateModalId, setModerateModalId] = React.useState<?string>(null);
 
   if (!debateFragment || !debate) return null;
   const debateArguments =
@@ -115,70 +129,91 @@ export const DebateStepPageAlternateArgumentsPagination = ({
       .reduce((prev, current) => [...prev, current.for, current.against], [])
       .filter(Boolean) ?? [];
 
-  return preview ? (
-    <AppBox width="100%">
-      <StyledSlider
-        {...{
-          infinite: false,
-          dots: true,
-          slidesToScroll: 1,
-          slidesToShow: 1,
-          arrows: false,
-        }}>
-        {debateArguments.slice(0, MOBILE_PREVIEW_MAX_ARGUMENTS).map(argument => (
-          <React.Fragment key={argument.id}>
-            <DebateStepPageArgumentDrawer
-              key={`drawer-${argument.id}`}
-              argument={argument}
-              isOpen={isOpen(`drawer-${argument.id}`)}
-              onClose={onClose(`drawer-${argument.id}`)}
-            />
-            <ArgumentCard
-              onReadMore={onOpen(`drawer-${argument.id}`)}
-              isMobile
-              argument={argument}
-            />
-          </React.Fragment>
-        ))}
-      </StyledSlider>
-    </AppBox>
-  ) : (
-    <InfiniteScroll
-      pageStart={0}
-      loadMore={() => {
-        loadMore(CONNECTION_CONFIG, CONNECTION_NODES_PER_PAGE, error => {
-          // eslint-disable-next-line no-console
-          console.error(error);
-        });
-      }}
-      hasMore={hasMore()}
-      loader={
-        <Flex align="center" justify="center" key={0}>
-          <Spinner />
-        </Flex>
-      }
-      useWindow={false}>
-      {debateArguments?.map(argument => (
-        <AppBox key={argument.id} marginBottom={6}>
-          <>
-            <DebateStepPageArgumentDrawer
-              key={`drawer-${argument.id}`}
-              argument={argument}
-              isOpen={isOpen(`drawer-${argument.id}`)}
-              onClose={onClose(`drawer-${argument.id}`)}
-            />
-            <ArgumentCard
-              key={argument.id}
-              onReadMore={onOpen(`drawer-${argument.id}`)}
-              isMobile
-              argument={argument}
-              bg="neutral-gray.100"
-              mb={6}
-            />
-          </>
+  return (
+    <>
+      {preview ? (
+        <AppBox width="100%">
+          <StyledSlider
+            {...{
+              infinite: false,
+              dots: true,
+              slidesToScroll: 1,
+              slidesToShow: 1,
+              arrows: false,
+            }}>
+            {debateArguments.slice(0, MOBILE_PREVIEW_MAX_ARGUMENTS).map(argument => (
+              <React.Fragment key={argument.id}>
+                <DebateStepPageArgumentDrawer
+                  key={`drawer-${argument.id}`}
+                  argument={argument}
+                  isOpen={isOpen(`drawer-${argument.id}`)}
+                  onClose={onClose(`drawer-${argument.id}`)}
+                />
+                <ArgumentCard
+                  onReadMore={onOpen(`drawer-${argument.id}`)}
+                  isMobile
+                  argument={argument}
+                  viewer={viewer}
+                  setReportModalId={setReportModalId}
+                  setModerateModalId={setModerateModalId}
+                />
+              </React.Fragment>
+            ))}
+          </StyledSlider>
         </AppBox>
-      ))}
-    </InfiniteScroll>
+      ) : (
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={() => {
+            loadMore(CONNECTION_CONFIG, CONNECTION_NODES_PER_PAGE, error => {
+              // eslint-disable-next-line no-console
+              console.error(error);
+            });
+          }}
+          hasMore={hasMore()}
+          loader={
+            <Flex align="center" justify="center" key={0}>
+              <Spinner />
+            </Flex>
+          }
+          useWindow={false}>
+          {debateArguments?.map(argument => (
+            <AppBox key={argument.id} marginBottom={6}>
+              <>
+                <DebateStepPageArgumentDrawer
+                  key={`drawer-${argument.id}`}
+                  argument={argument}
+                  isOpen={isOpen(`drawer-${argument.id}`)}
+                  onClose={onClose(`drawer-${argument.id}`)}
+                />
+                <ArgumentCard
+                  key={argument.id}
+                  onReadMore={onOpen(`drawer-${argument.id}`)}
+                  isMobile
+                  argument={argument}
+                  viewer={viewer}
+                  bg="neutral-gray.100"
+                  mb={6}
+                  setReportModalId={setReportModalId}
+                  setModerateModalId={setModerateModalId}
+                />
+              </>
+            </AppBox>
+          ))}
+        </InfiniteScroll>
+      )}
+
+      {moderateModalId && (
+        <ModalModerateArgument
+          argumentId={moderateModalId}
+          onClose={() => setModerateModalId(null)}
+        />
+      )}
+
+      {reportModalId && (
+        <ModalReportArgument argumentId={reportModalId} onClose={() => setReportModalId(null)} />
+      )}
+    </>
   );
 };
 

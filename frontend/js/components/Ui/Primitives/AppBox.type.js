@@ -279,6 +279,7 @@ type TabIndex = {|
 
 type Accessibility = {|
   +'aria-hidden'?: boolean,
+  +'aria-label'?: string,
 |};
 
 export type AppBoxProps = {|
