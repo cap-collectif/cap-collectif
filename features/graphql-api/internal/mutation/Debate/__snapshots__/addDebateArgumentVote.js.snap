@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Mutation.addDebateArgumentVote try to vote for an argument but already voted 1`] = `
+Object {
+  "addDebateArgumentVote": Object {
+    "debateArgument": null,
+    "debateArgumentVote": null,
+    "errorCode": "ALREADY_VOTED",
+  },
+}
+`;
+
+exports[`Internal|Mutation.addDebateArgumentVote try to vote with wrong argument id 1`] = `
+Object {
+  "addDebateArgumentVote": Object {
+    "debateArgument": null,
+    "debateArgumentVote": null,
+    "errorCode": "UNKNOWN_DEBATE_ARGUMENT",
+  },
+}
+`;
+
+exports[`Internal|Mutation.addDebateArgumentVote vote for a debate argument 1`] = `
+Object {
+  "addDebateArgumentVote": Object {
+    "debateArgument": Object {
+      "viewerHasVote": true,
+      "votes": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "author": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+              },
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+    },
+    "debateArgumentVote": Object {
+      "published": true,
+    },
+    "errorCode": null,
+  },
+}
+`;

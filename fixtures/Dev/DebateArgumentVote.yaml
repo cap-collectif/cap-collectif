@@ -9,5 +9,29 @@ Capco\AppBundle\Entity\Debate\DebateArgumentVote:
         id: 12001
         user: '@user5'
         debateArgument: '@debateArgument2'
-        publishedAt: <(new \DateTime('2015-01-02 00:00:00'))>
+        publishedAt: <(new \DateTime('2015-01-02 01:00:00'))>
+        createdAt: $publishedAt
+    debateArgumentVote3:
+        id: 12002
+        user: '@userSpyl'
+        debateArgument: '@debateArgument2'
+        publishedAt: <(new \DateTime('2015-01-02 02:00:00'))>
+        createdAt: $publishedAt
+    debateConfinementArgument6Vote{6..200}:
+        id: <(12002+$current)>
+        user: '@user<current()>'
+        debateArgument: '@debateConfinement200'
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt
+    debateConfinementArgument7Vote{6..100}:
+        id: <(12502+$current)>
+        user: '@user<current()>'
+        debateArgument: '@debateConfinement199'
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt
+    debateConfinementArgument8Vote{6..50}:
+        id: <(12702+$current)>
+        user: '@user<current()>'
+        debateArgument: '@debateConfinement198'
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt

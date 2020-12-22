@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../../_setup';
 
 const AddDebateVoteMutation = /* GraphQL */ `
   mutation AddDebateVoteMutation($input: AddDebateVoteInput!) {

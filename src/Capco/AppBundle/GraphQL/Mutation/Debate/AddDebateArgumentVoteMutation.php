@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use Capco\AppBundle\Entity\Debate\DebateArgument;
-use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
-use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements
     MutationInterface
@@ -23,9 +23,22 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
             $this->checkNoPreviousVote($debateArgument, $viewer);
             $debateArgumentVote = self::createNewVote($debateArgument, $viewer);
             $this->em->persist($debateArgumentVote);
-            $this->em->flush();
+
+            try {
+                $this->em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                return [
+                    'errorCode' => self::ALREADY_VOTED,
+                    'debateArgument' => null,
+                    'debateArgumentVote' => null,
+                ];
+            }
         } catch (UserError $error) {
-            return ['errorCode' => $error->getMessage()];
+            return [
+                'errorCode' => $error->getMessage(),
+                'debateArgument' => null,
+                'debateArgumentVote' => null,
+            ];
         }
 
         return [
@@ -37,7 +50,7 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
 
     private function checkNoPreviousVote(DebateArgument $debateArgument, User $viewer): void
     {
-        if (!$this->authorizationChecker->isGranted(DebateArgumentVoter::VOTE, $debateArgument)) {
+        if (null !== $this->repository->getOneByDebateArgumentAndUser($debateArgument, $viewer)) {
             throw new UserError(self::ALREADY_VOTED);
         }
     }

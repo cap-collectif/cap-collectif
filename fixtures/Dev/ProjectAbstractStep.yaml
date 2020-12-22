@@ -364,3 +364,13 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectStepCafetier'
         project: '@projectCafetier'
         position: 1
+    pasOculusQuest1:
+        id: pasOculusQuest1
+        step: '@debateStepOculusQuest'
+        project: '@projectOculusQuest'
+        position: 1
+    pasConfinement1:
+        id: pasConfinement1
+        step: '@debateStepConfinement'
+        project: '@projectConfinement'
+        position: 1

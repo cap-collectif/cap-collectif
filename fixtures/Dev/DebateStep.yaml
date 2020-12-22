@@ -8,3 +8,21 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         body: null
         startAt: <identity((new \DateTime('2020-10-01')))>
         endAt: <identity((new \DateTime('2024-10-01')))>
+    debateStepOculusQuest:
+        __construct: ['@debateOculusQuest']
+        id: debateStepOculusQuest
+        title: Une entreprise doit-elle offrir un oculus quest 2 à tous les salariés pour le confinement ?
+        slug: pour-ou-contre-offrir-un-oculus-quest
+        label: Débat pas commencé (malheureusement)
+        body: null
+        startAt: <identity((new \DateTime('2022-10-01')))>
+        endAt: <identity((new \DateTime('2024-10-01')))>
+    debateStepConfinement:
+        __construct: ['@debateConfinement']
+        id: debateStepConfinement
+        title: Pour ou contre le reconfinement ?
+        slug: pour-ou-contre-le-reconfinement
+        label: Pour ou contre le reconfinement ?
+        body: null
+        startAt: <identity((new \DateTime('2020-01-01')))>
+        endAt: <identity((new \DateTime('2020-10-01')))>

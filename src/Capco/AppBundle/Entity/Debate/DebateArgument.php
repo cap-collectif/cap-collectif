@@ -25,6 +25,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Index;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 
 /**
  * An argument in a debate.
@@ -43,7 +44,12 @@ use Doctrine\ORM\Mapping\Index;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  */
-class DebateArgument implements Contribution, VotableInterface, ReportableInterface, Publishable
+class DebateArgument implements
+    Contribution,
+    VotableInterface,
+    ReportableInterface,
+    Publishable,
+    Authorable
 {
     use DebatableTrait;
     use ForAgainstTrait; //@TODO remove votesCount when entity is added to elasticsearch

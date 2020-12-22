@@ -123,3 +123,11 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2020-09-01'))>
         user: '@userVincent'
         project: '@projectFood'
+    pa32:
+        createdAt: <(new \DateTime('2020-09-01'))>
+        user: '@userSpyl'
+        project: '@projectOculusQuest'
+    pa33:
+        createdAt: <(new \DateTime('2020-09-01'))>
+        user: '@userSpyl'
+        project: '@projectConfinement'

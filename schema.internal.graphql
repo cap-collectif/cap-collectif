@@ -3347,6 +3347,9 @@ type DebateArgument implements Node & Reportable & Trashable {
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
+  """Did the viewer author this entity."""
+  viewerDidAuthor: Boolean
+
   """The content of the argument."""
   body: String!
 
@@ -12198,13 +12201,10 @@ enum UpdateDebateArgumentErrorCode {
 
 input UpdateDebateArgumentInput {
   """The global id of the argument to update."""
-  id: ID
+  id: ID!
 
   """The body value of the argument."""
   body: String!
-
-  """Whether the argument will be `FOR` or `AGAINST`."""
-  type: ForOrAgainstValue!
   clientMutationId: String
 }
 

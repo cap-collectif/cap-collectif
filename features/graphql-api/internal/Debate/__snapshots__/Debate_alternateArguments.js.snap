@@ -8,14 +8,14 @@ Object {
         Object {
           "node": Object {
             "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
-              "type": "AGAINST",
-              "votes": Object {
-                "totalCount": 0,
-              },
-            },
-            "for": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+              "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
               "type": "FOR",
               "votes": Object {
                 "totalCount": 0,
@@ -26,32 +26,14 @@ Object {
         Object {
           "node": Object {
             "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
-              "type": "AGAINST",
-              "votes": Object {
-                "totalCount": 0,
-              },
-            },
-            "for": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
-              "type": "FOR",
-              "votes": Object {
-                "totalCount": 0,
-              },
-            },
-          },
-        },
-        Object {
-          "node": Object {
-            "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
               "type": "AGAINST",
               "votes": Object {
-                "totalCount": 1,
+                "totalCount": 0,
               },
             },
             "for": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
               "type": "FOR",
               "votes": Object {
                 "totalCount": 0,
@@ -62,13 +44,31 @@ Object {
         Object {
           "node": Object {
             "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
               "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+              "type": "FOR",
+              "votes": Object {
+                "totalCount": 2,
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "against": null,
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+              "type": "FOR",
               "votes": Object {
                 "totalCount": 1,
               },
             },
-            "for": null,
           },
         },
       ],
@@ -86,17 +86,17 @@ Object {
         Object {
           "node": Object {
             "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
-              "type": "AGAINST",
-              "votes": Object {
-                "totalCount": 1,
-              },
-            },
-            "for": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
-              "type": "FOR",
+              "type": "AGAINST",
               "votes": Object {
                 "totalCount": 0,
+              },
+            },
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+              "type": "FOR",
+              "votes": Object {
+                "totalCount": 2,
               },
             },
           },
@@ -104,32 +104,32 @@ Object {
         Object {
           "node": Object {
             "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
               "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+              "type": "FOR",
               "votes": Object {
                 "totalCount": 1,
               },
             },
-            "for": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
-              "type": "FOR",
-              "votes": Object {
-                "totalCount": 0,
-              },
-            },
           },
         },
         Object {
           "node": Object {
             "against": Object {
-              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
-              "type": "AGAINST",
-              "votes": Object {
-                "totalCount": 0,
-              },
-            },
-            "for": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+              "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
               "type": "FOR",
               "votes": Object {
                 "totalCount": 0,
@@ -139,14 +139,14 @@ Object {
         },
         Object {
           "node": Object {
-            "against": Object {
+            "against": null,
+            "for": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
-              "type": "AGAINST",
+              "type": "FOR",
               "votes": Object {
                 "totalCount": 0,
               },
             },
-            "for": null,
           },
         },
       ],

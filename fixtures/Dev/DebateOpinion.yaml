@@ -16,3 +16,31 @@ Capco\AppBundle\Entity\Debate\DebateOpinion:
             <p>La loi de 1970, qui a rendu illicite le cannabis, reste pertinente, avec la confirmation de la nocivité de cette drogue. La France est, pour sa consommation, au premier rang des 27 états Européens, avec 1 600 000 usagers réguliers et 600 000 usagers quotidiens ou multi-quotidiens.</p><br/><br/>
             <p>Le cannabis, par son tétrahydrocannabinol (THC), induit une dépendance psychique ainsi qu’une dépendance physique. Les taux de THC des produits en circulation ont été multipliés d’un facteur 3 à 8 en 30 ans, accroissant d’autant sa nocivité ;  300 000 collégiens l’ont déjà expérimenté. Or, plus tôt l’essayer, c’est plus vite l’adopter et plus intensément se détériorer. 20% de ceux qui l’ont expérimenté en <strong>sont devenus dépendants</strong>, alors qu’on ne dispose d’aucun traitement pour les en détacher.</p><br/><br/>
             <p>Le THC est la seule drogue qui se stocke très durablement dans l’organisme. «Un joint perdure huit jours dans la tête et plein de joints des mois dans le cerveau». Le cannabis n’est pas une drogue douce, c’est une drogue lente !</p>')>
+    debateConfinementOpinion1:
+        id: 'debateConfinementOpinion1'
+        type: FOR
+        author: '@user1'
+        title: 'Il faut sauver nos hôpitaux'
+        debate: '@debateConfinement'
+        body: <stripslashes('\<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p><p><br></p><ul><li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li><li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li><li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li><li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li></ul><iframe class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/FNcLyk7B6xw?showinfo=0"></iframe><p><br></p>\')>
+    debateConfinementOpinion2:
+        id: 'debateConfinementOpinion2'
+        type: AGAINST
+        author: '@user2'
+        title: 'Je suis contre'
+        debate: '@debateConfinement'
+        body: <stripslashes('\
+            <h1>HTML Ipsum Presents</h1>
+            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+            <h2>Header Level 2</h2>
+            <ol>
+                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                <li>Aliquam tincidunt mauris eu risus.</li>
+            </ol>
+            <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+            <h3>Header Level 3</h3>
+            <ul>
+                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                <li>Aliquam tincidunt mauris eu risus.</li>
+            </ul>
+            ')>

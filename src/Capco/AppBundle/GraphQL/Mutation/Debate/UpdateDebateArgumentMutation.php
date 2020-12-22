@@ -7,7 +7,6 @@ use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Debate\Debate;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -24,13 +23,11 @@ class UpdateDebateArgumentMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
 
-
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker
-
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -44,7 +41,6 @@ class UpdateDebateArgumentMutation implements MutationInterface
             $debateArgument = $this->getArgument($input, $viewer);
             $debateArgument->setAuthor($viewer);
             $debateArgument->setBody(strip_tags($input->offsetGet('body')));
-            $debateArgument->setType($input->offsetGet('type'));
 
             $this->em->flush($debateArgument);
         } catch (UserError $error) {

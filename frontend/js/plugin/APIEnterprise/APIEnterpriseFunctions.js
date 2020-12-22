@@ -340,9 +340,9 @@ export const handleVisibilityAccordingToType = (
     });
     return;
   }
+  // TODO @spyl94 fixme
   // In this case, it's a draft that has been reopened
   // only show fields according to enterprise's type in case user change is mind
-
   if (apiEnterpriseType) {
     // Refetch to know which hidden fields should be visible again once modal reopen
     if (siret && !isSiretNotValid) {

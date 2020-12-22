@@ -20,7 +20,7 @@ Object {
       "debate": Object {
         "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
       },
-      "type": "AGAINST",
+      "type": "FOR",
     },
     "errorCode": null,
   },

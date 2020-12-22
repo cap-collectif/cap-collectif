@@ -1,3 +1,7 @@
 Capco\AppBundle\Entity\Debate\Debate:
     debateCannabis:
         id: debateCannabis
+    debateOculusQuest:
+        id: debateOculusQuest
+    debateConfinement:
+        id: debateConfinement

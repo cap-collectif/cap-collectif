@@ -1,4 +1,5 @@
 /* eslint-env jest */
+import '../../../_setup';
 
 const DeleteDebateArgumentMutation = /* GraphQL */ `
   mutation DeleteDebateArgumentMutation($input: DeleteDebateArgumentInput!) {

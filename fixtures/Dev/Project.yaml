@@ -333,3 +333,19 @@ Capco\AppBundle\Entity\Project:
         publishedAt: <identity((new \DateTime('2020-06-18 12:00:00')))>
         visibility: 2
         Cover: '@imageCafe'
+    projectOculusQuest:
+        id: 'projectOculusQuest'
+        title: Débat sur l'Oculus Quest
+        projectType: '@projectType8'
+        createdAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
+        updatedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
+        publishedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
+        visibility: 2
+    projectConfinement:
+        id: 'projectConfinement'
+        title: Débat du mois
+        projectType: '@projectType8'
+        createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        visibility: 2

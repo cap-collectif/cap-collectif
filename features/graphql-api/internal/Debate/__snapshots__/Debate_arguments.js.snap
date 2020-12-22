@@ -22,7 +22,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [
@@ -56,16 +56,25 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": true,
             "votes": Object {
               "edges": Array [
                 Object {
                   "node": Object {
                     "author": Object {
+                      "id": "VXNlcjp1c2VyU3B5bA==",
+                    },
+                    "createdAt": "2015-01-02 02:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAy",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "author": Object {
                       "id": "VXNlcjp1c2VyNQ==",
                     },
-                    "createdAt": "2015-01-02 00:00:00",
+                    "createdAt": "2015-01-02 01:00:00",
                     "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
                   },
                 },
@@ -90,7 +99,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -114,7 +123,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -138,7 +147,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -162,7 +171,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -186,7 +195,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -208,19 +217,19 @@ exports[`Internal|Debate.arguments connection fetches counters associated to a d
 Object {
   "node": Object {
     "againstArguments": Object {
-      "totalCount": 4,
+      "totalCount": 3,
     },
     "allArguments": Object {
       "totalCount": 7,
     },
     "forArguments": Object {
-      "totalCount": 3,
+      "totalCount": 4,
     },
     "totalArguments": Object {
-      "totalCount": 9,
+      "totalCount": 10,
     },
     "trashedArguments": Object {
-      "totalCount": 1,
+      "totalCount": 2,
     },
     "unpublishedArguments": Object {
       "totalCount": 1,
@@ -251,16 +260,25 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": true,
             "votes": Object {
               "edges": Array [
                 Object {
                   "node": Object {
                     "author": Object {
+                      "id": "VXNlcjp1c2VyU3B5bA==",
+                    },
+                    "createdAt": "2015-01-02 02:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAy",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "author": Object {
                       "id": "VXNlcjp1c2VyNQ==",
                     },
-                    "createdAt": "2015-01-02 00:00:00",
+                    "createdAt": "2015-01-02 01:00:00",
                     "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
                   },
                 },
@@ -285,7 +303,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [
@@ -319,7 +337,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -343,7 +361,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "AGAINST",
+            "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -367,7 +385,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -391,7 +409,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
@@ -415,7 +433,7 @@ Object {
             "trashedAt": null,
             "trashedReason": null,
             "trashedStatus": null,
-            "type": "FOR",
+            "type": "AGAINST",
             "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],

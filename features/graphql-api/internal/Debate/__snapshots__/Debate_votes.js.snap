@@ -54,7 +54,7 @@ Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyVmluY2VudA==",
+              "id": "VXNlcjp1c2VySmVhbg==",
             },
             "createdAt": "2015-01-01 09:07:00",
             "debate": Object {
@@ -288,7 +288,7 @@ Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyVmluY2VudA==",
+              "id": "VXNlcjp1c2VySmVhbg==",
             },
             "createdAt": "2015-01-01 09:07:00",
             "debate": Object {

@@ -1,4 +1,5 @@
 /* eslint-env jest */
+import '../../../_setup';
 
 const UpdateDebateArgumentMutation = /* GraphQL */ `
   mutation UpdateDebateArgumentMutation($input: UpdateDebateArgumentInput!) {
@@ -27,7 +28,6 @@ describe('Internal|UpdateDebateArgument', () => {
           input: {
             id: 'wrongId',
             body: "oups je me suis trompé d'id pour l'argument",
-            type: 'FOR',
           },
         },
         'internal_user',
@@ -42,7 +42,6 @@ describe('Internal|UpdateDebateArgument', () => {
           input: {
             id: toGlobalId('DebateArgument', 'debateArgument2'),
             body: "j'ai changé d'avis",
-            type: 'AGAINST',
           },
         },
         'internal_theo',

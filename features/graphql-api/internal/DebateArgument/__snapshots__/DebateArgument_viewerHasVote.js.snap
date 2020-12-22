@@ -11,7 +11,7 @@ Object {
 exports[`Internal|Debate.viewerHasVote bool fetches debate voted by viewer 1`] = `
 Object {
   "node": Object {
-    "viewerHasVote": false,
+    "viewerHasVote": true,
   },
 }
 `;

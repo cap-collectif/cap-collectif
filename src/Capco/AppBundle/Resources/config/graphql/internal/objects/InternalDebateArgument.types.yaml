@@ -6,6 +6,7 @@ InternalDebateArgument:
         - PublicPublishable
         - Reportable
         - Timestampable
+        - Authorable
     config:
         name: DebateArgument
         description: 'A debate argument from non expert.'

@@ -72,8 +72,16 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         createdAt: $publishedAt
     # A not confirmed vote
     debateCannabisVote11:
-        id: 13010
+        id: 13020
         debate: '@debateCannabis'
         type: AGAINST
-        user: '@user_not_confirmed'
+        user: '@user_not_confirmed_with_contributions'
         createdAt: <(new \DateTime('2015-01-01 09:11:00'))>
+    # Confinement
+    debateConfinementVote{6..200}:
+        id: <(13300 + $current)>
+        user: '@user<current()>'
+        debate: '@debateConfinement'
+        type: AGAINST
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt

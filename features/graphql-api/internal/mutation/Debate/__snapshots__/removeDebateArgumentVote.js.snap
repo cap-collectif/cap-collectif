@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Mutation.removeDebateArgumentVote remove vote for an argument 1`] = `
+Object {
+  "removeDebateArgumentVote": Object {
+    "debateArgument": Object {
+      "viewerHasVote": false,
+      "votes": Object {
+        "totalCount": 1,
+      },
+    },
+    "deletedDebateArgumentVoteId": null,
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`Internal|Mutation.removeDebateArgumentVote try to remove nonexistent vote for an argument 1`] = `
+Object {
+  "removeDebateArgumentVote": Object {
+    "debateArgument": null,
+    "deletedDebateArgumentVoteId": null,
+    "errorCode": "NOT_VOTED",
+  },
+}
+`;
+
+exports[`Internal|Mutation.removeDebateArgumentVote try to remove vote with wrong argument id 1`] = `
+Object {
+  "removeDebateArgumentVote": Object {
+    "debateArgument": null,
+    "deletedDebateArgumentVoteId": null,
+    "errorCode": "UNKNOWN_DEBATE_ARGUMENT",
+  },
+}
+`;

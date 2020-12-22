@@ -65,6 +65,7 @@ class AddDebateVoteMutation implements MutationInterface
         if ($previousVote) {
             $previousVoteId = $previousVote->getId();
             $this->em->remove($previousVote);
+            $this->em->flush();
         }
         $this->em->persist($debateVote);
 

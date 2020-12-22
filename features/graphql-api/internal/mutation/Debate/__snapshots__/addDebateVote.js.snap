@@ -22,7 +22,7 @@ Object {
       "type": "FOR",
     },
     "errorCode": null,
-    "previousVoteId": "RGViYXRlVm90ZToxMzAxMA==",
+    "previousVoteId": null,
   },
 }
 `;

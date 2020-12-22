@@ -1,4 +1,5 @@
 /* eslint-env jest */
+import '../../../_setup';
 
 const CreateDebateArgumentMutation = /* GraphQL */ `
   mutation CreateDebateArgumentMutation($input: CreateDebateArgumentInput!) {
@@ -13,6 +14,9 @@ const CreateDebateArgumentMutation = /* GraphQL */ `
         }
         body
         type
+        published
+        publishableUntil
+        notPublishedReason
       }
     }
   }
@@ -46,6 +50,22 @@ describe('Internal|CreateDebateArgument', () => {
           },
         },
         'internal_user',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('create unpublished argument', async () => {
+    await expect(
+      graphql(
+        CreateDebateArgumentMutation,
+        {
+          input: {
+            debate: toGlobalId('Debate', 'debateCannabis'),
+            body: "J'ai plein de trucs à dire",
+            type: 'FOR',
+          },
+        },
+        'internal_not_confirmed',
       ),
     ).resolves.toMatchSnapshot();
   });
