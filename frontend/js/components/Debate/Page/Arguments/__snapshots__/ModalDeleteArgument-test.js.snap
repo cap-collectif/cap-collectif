@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
+<ModalDeleteArgument__ModalContainer
+  closeDeleteModal={[MockFunction]}
+  deleteElement={[Function]}
+  deleteModalContent="group-admin-parameters-modal-delete-content"
+  deleteModalTitle="argument.delete.subtitle"
+  showDeleteModal={true}
+/>
+`;

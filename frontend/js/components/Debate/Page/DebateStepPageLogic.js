@@ -7,6 +7,7 @@ import DebateStepPageMainActions from './MainActions/DebateStepPageMainActions';
 import DebateStepPageFaceToFace from './FaceToFace/DebateStepPageFaceToFace';
 import DebateStepPageLinkedArticles from './LinkedArticles/DebateStepPageLinkedArticles';
 import DebateStepPageArguments from './Arguments/DebateStepPageArguments';
+import DebateStepPageNotYetStarted from './NotYetStarted/DebateStepPageNotYetStarted';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 
 export type Props = {|
@@ -19,20 +20,24 @@ export const DebateStepPageLogic = ({ query, title }: Props) => {
   const isMobile = useIsMobile();
   const step = query?.step || null;
   const viewer = query?.viewer || null;
+  const startAt = query?.step?.timeRange?.startAt || null;
+  const isStarted = startAt != null ? new Date(startAt).getTime() <= new Date().getTime() : false;
 
-  return (
-    <Flex direction="column" spacing={8}>
-      <DebateStepPageMainActions
-        isMobile={isMobile}
-        title={title}
-        step={step}
-        isAuthenticated={!!query?.viewer}
-      />
-      <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
-      <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
-      <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
-    </Flex>
-  );
+  if (isStarted || !step)
+    return (
+      <Flex direction="column" spacing={8}>
+        <DebateStepPageMainActions
+          isMobile={isMobile}
+          title={title}
+          step={step}
+          isAuthenticated={!!query?.viewer}
+        />
+        <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
+        <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
+        <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
+      </Flex>
+    );
+  return <DebateStepPageNotYetStarted step={step} title={title} />;
 };
 
 export default createFragmentContainer(DebateStepPageLogic, {
@@ -43,6 +48,12 @@ export default createFragmentContainer(DebateStepPageLogic, {
         ...DebateStepPageArguments_viewer
       }
       step: node(id: $stepId) {
+        ... on DebateStep {
+          timeRange {
+            startAt
+          }
+        }
+        ...DebateStepPageNotYetStarted_step
         ...DebateStepPageArguments_step
         ...DebateStepPageMainActions_step
         ...DebateStepPageFaceToFace_step

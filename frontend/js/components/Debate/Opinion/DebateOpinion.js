@@ -11,20 +11,20 @@ import Tag from '~ds/Tag/Tag';
 import Avatar from '~ds/Avatar/Avatar';
 import Text from '~ui/Primitives/Text';
 import Heading from '~ui/Primitives/Heading';
+import { LineHeight } from '~ui/Primitives/constants';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import Button from '~ds/Button/Button';
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
-import { type ReadMoreState } from '~/components/Debate/Page/FaceToFace/DebateStepPageFaceToFace';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
 type Props = {|
   +opinion: DebateOpinion_opinion,
   +isMobile: boolean,
-  +readMoreState: ReadMoreState,
+  +readMore: boolean,
 |};
 
-export const DebateOpinion = ({ opinion, isMobile, readMoreState }: Props) => {
+export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Card p={0} bg="white" flex="1">
@@ -33,9 +33,9 @@ export const DebateOpinion = ({ opinion, isMobile, readMoreState }: Props) => {
         css={css({
           position: 'absolute',
         })}>
-        <Heading as="h5" fontWeight="700" uppercase>
+        <Text as="span" fontSize={1} lineHeight={LineHeight.S} fontWeight="700" uppercase>
           <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
-        </Heading>
+        </Text>
       </Tag>
       <Flex direction="column" m={6} mt={10}>
         <Flex direction="row" spacing={6} mb={5} alignItems="center">
@@ -65,7 +65,7 @@ export const DebateOpinion = ({ opinion, isMobile, readMoreState }: Props) => {
               /**  Should be 500in desktop BUT html-truncate has issues truncating  the HTML content.
               Maybe it's the embedded youtube video, idk. This require further processing
                */
-              truncate={isMobile ? 80 : readMoreState === 'READ_MORE' ? 80 : 0}
+              truncate={isMobile ? 80 : !readMore ? 80 : 0}
               value={opinion.body}
             />
           </Text>

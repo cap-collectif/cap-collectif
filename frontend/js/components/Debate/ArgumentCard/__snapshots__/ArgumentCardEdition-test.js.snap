@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentCardEdition /> renders correcty 1`] = `
+<ArgumentCardEdition__Form
+  id="argument-card-edition-form"
+>
+  <Field
+    autoComplete="off"
+    component={[Function]}
+    id="body"
+    minLength="1"
+    name="body"
+    type="textarea"
+  />
+  <ForwardRef
+    justifyContent="flex-end"
+    mt={2}
+  >
+    <Button
+      color="neutral-gray.500"
+      mr={6}
+      onClick={[MockFunction]}
+      type="button"
+      variantSize="small"
+    >
+      <FormattedMessage
+        id="global.cancel"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+      variant="primary"
+      variantColor="primary"
+      variantSize="medium"
+    >
+      <FormattedMessage
+        id="modifications.publish"
+        values={Object {}}
+      />
+    </Button>
+  </ForwardRef>
+</ArgumentCardEdition__Form>
+`;

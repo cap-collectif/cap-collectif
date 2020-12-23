@@ -12,9 +12,10 @@ import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { RelayHookPaginationProps, ConnectionMetadata } from '~/types';
 import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
+import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
 
 type Props = {|
-  +debate: DebateStepPageArgumentsPagination_debate$key,
+  +debate: DebateStepPageArgumentsPagination_debate$key & { +id: string },
   +viewer: ?DebateStepPageArgumentsPagination_viewer$key,
   +handleChange: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
 |};
@@ -127,6 +128,10 @@ export const DebateStepPageArgumentsPagination = ({
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const [reportModalId, setReportModalId] = React.useState<?string>(null);
   const [moderateModalId, setModerateModalId] = React.useState<?string>(null);
+  const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
+    id: string,
+    type: 'FOR' | 'AGAINST',
+  }>(null);
 
   if (handleChange) handleChange({ ...paginationProps, hasMore: paginationProps.hasMore() });
 
@@ -145,6 +150,7 @@ export const DebateStepPageArgumentsPagination = ({
             viewer={viewer}
             setReportModalId={setReportModalId}
             setModerateModalId={setModerateModalId}
+            setDeleteModalInfo={setDeleteModalInfo}
           />
         </AppBox>
       ))}
@@ -158,6 +164,14 @@ export const DebateStepPageArgumentsPagination = ({
 
       {reportModalId && (
         <ModalReportArgument argumentId={reportModalId} onClose={() => setReportModalId(null)} />
+      )}
+
+      {deleteModalInfo && (
+        <ModalDeleteArgument
+          debateId={debate.id}
+          argumentInfo={deleteModalInfo}
+          onClose={() => setDeleteModalInfo(null)}
+        />
       )}
     </>
   );

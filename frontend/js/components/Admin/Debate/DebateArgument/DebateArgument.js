@@ -28,6 +28,7 @@ const onDelete = (argumentId: string, debateId: string, intl: IntlShape) => {
       id: argumentId,
     },
     connections,
+    debateId,
   })
     .then(response => {
       if (response.deleteDebateArgument?.errorCode) {

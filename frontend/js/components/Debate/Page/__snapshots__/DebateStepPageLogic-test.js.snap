@@ -1,48 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageLogic /> renders correcty 1`] = `
-<ForwardRef
-  direction="column"
-  spacing={8}
->
-  <Relay(DebateStepPageMainActions)
-    isAuthenticated={true}
-    isMobile={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-      }
+<Relay(DebateStepPageNotYetStarted)
+  step={
+    Object {
+      "$fragmentRefs": null,
     }
-    title="Pour ou contre le LSD dans nos cantines"
-  />
-  <Relay(DebateStepPageFaceToFace)
-    isMobile={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-      }
-    }
-  />
-  <Relay(DebateStepPageLinkedArticles)
-    isMobile={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-      }
-    }
-  />
-  <Relay(DebateStepPageArguments)
-    isMobile={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-      }
-    }
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-      }
-    }
-  />
-</ForwardRef>
+  }
+  title="Pour ou contre le LSD dans nos cantines"
+/>
 `;

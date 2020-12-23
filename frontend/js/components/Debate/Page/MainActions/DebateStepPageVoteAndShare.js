@@ -20,6 +20,7 @@ import component from '~/components/Form/Field';
 import type { GlobalState } from '~/types';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentMutation from '~/mutations/AddDebateArgumentMutation';
+import { formatConnectionPath } from '~/shared/utils/relay';
 
 type Props = {|
   +debate: DebateStepPageVoteAndShare_debate,
@@ -51,7 +52,22 @@ const addArgumentOnDebate = (
   onSuccess: () => void,
 ) => {
   if (!type) return;
-  return AddDebateArgumentMutation.commit({ input: { debate, body, type } })
+  const connections = [
+    formatConnectionPath(
+      ['client', debate],
+      'DebateStepPageArgumentsPagination_arguments',
+      `(value:"${type}")`,
+    ),
+    formatConnectionPath(
+      ['client', debate],
+      'DebateStepPageAlternateArgumentsPagination_alternateArguments',
+    ),
+  ];
+  return AddDebateArgumentMutation.commit({
+    input: { debate, body, type },
+    connections,
+    edgeTypeName: 'DebateArgumentConnection',
+  })
     .then(response => {
       if (response.createDebateArgument?.errorCode) {
         mutationErrorToast(intl);
@@ -68,8 +84,10 @@ export type VoteState = 'NONE' | 'VOTED' | 'ARGUMENTED';
 
 export const DebateStepPageVoteAndShare = ({ debate, isAuthenticated, body }: Props) => {
   const intl = useIntl();
-  const [voteState, setVoteState] = useState<VoteState>(debate.viewerHasVote ? 'VOTED' : 'NONE');
-  const [showArgumentForm, setShowArgumentForm] = useState(true);
+  const [voteState, setVoteState] = useState<VoteState>(
+    debate.viewerHasVote ? (debate.viewerHasArgument ? 'ARGUMENTED' : 'VOTED') : 'NONE',
+  );
+  const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
 
   const viewerVoteValue = debate.viewerVote?.type;
 
@@ -195,6 +213,7 @@ export default createFragmentContainer(connect(mapStateToProps)(form), {
     fragment DebateStepPageVoteAndShare_debate on Debate
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
+      viewerHasArgument @include(if: $isAuthenticated)
       viewerHasVote @include(if: $isAuthenticated)
       viewerVote @include(if: $isAuthenticated) {
         type

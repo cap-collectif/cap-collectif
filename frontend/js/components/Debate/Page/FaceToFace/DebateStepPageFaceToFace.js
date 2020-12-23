@@ -16,10 +16,8 @@ type Props = {|
   +isMobile: boolean,
 |};
 
-export type ReadMoreState = 'READ_MORE' | 'SHOW_LESS';
-
 export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
-  const [readMoreState, setReadMoreState] = useState<ReadMoreState>('READ_MORE');
+  const [readMore, setReadMore] = useState(false);
   const debate = step?.debate;
   const opinions = debate?.opinions?.edges
     ?.filter(Boolean)
@@ -43,25 +41,15 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
             <DebateOpinionPlaceholder debateOpinionStatus="AGAINST" />
           </Flex>
         }>
-        {forOpinion && againstOpinion && (
+        {forOpinion && againstOpinion ? (
           <>
             <Flex direction={['column', 'row']} spacing={4}>
-              <DebateOpinion
-                isMobile={isMobile}
-                opinion={forOpinion}
-                readMoreState={readMoreState}
-              />
-              <DebateOpinion
-                isMobile={isMobile}
-                opinion={againstOpinion}
-                readMoreState={readMoreState}
-              />
+              <DebateOpinion isMobile={isMobile} opinion={forOpinion} readMore={readMore} />
+              <DebateOpinion isMobile={isMobile} opinion={againstOpinion} readMore={readMore} />
             </Flex>
             {hasMore && (
               <Button
-                onClick={() =>
-                  setReadMoreState(readMoreState === 'READ_MORE' ? 'SHOW_LESS' : 'READ_MORE')
-                }
+                onClick={() => setReadMore(!readMore)}
                 variant="link"
                 variantColor="primary"
                 variantSize="small"
@@ -70,12 +58,12 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
                 mt={7}>
                 <FormattedMessage
                   tagName={React.Fragment}
-                  id={readMoreState === 'READ_MORE' ? 'capco.module.read_more' : 'global.less'}
+                  id={readMore ? 'read-less-opinions' : 'capco.module.read_more'}
                 />
               </Button>
             )}
           </>
-        )}
+        ) : null}
       </ReactPlaceholder>
     </AppBox>
   );

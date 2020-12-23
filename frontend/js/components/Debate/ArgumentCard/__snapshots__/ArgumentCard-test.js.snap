@@ -27,16 +27,18 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
         <Tag
           variant="green"
         >
-          <Heading
-            as="h5"
+          <Text
+            as="span"
+            fontSize={1}
             fontWeight="700"
+            lineHeight="s"
             uppercase={true}
           >
             <FormattedMessage
               id="global.for"
               values={Object {}}
             />
-          </Heading>
+          </Text>
         </Tag>
       </ForwardRef>
       <ForwardRef
@@ -45,9 +47,29 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
       >
         <Text
           color="neutral-gray.500"
+          fontSize={
+            Array [
+              1,
+              3,
+            ]
+          }
         >
           Invalid date
         </Text>
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="PENCIL"
+        />
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="TRASH"
+        />
       </ForwardRef>
     </ForwardRef>
     <Text>
@@ -114,16 +136,18 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
         <Tag
           variant="green"
         >
-          <Heading
-            as="h5"
+          <Text
+            as="span"
+            fontSize={1}
             fontWeight="700"
+            lineHeight="s"
             uppercase={true}
           >
             <FormattedMessage
               id="global.for"
               values={Object {}}
             />
-          </Heading>
+          </Text>
         </Tag>
       </ForwardRef>
       <ForwardRef
@@ -132,9 +156,29 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
       >
         <Text
           color="neutral-gray.500"
+          fontSize={
+            Array [
+              1,
+              3,
+            ]
+          }
         >
           Invalid date
         </Text>
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="PENCIL"
+        />
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="TRASH"
+        />
       </ForwardRef>
     </ForwardRef>
     <Text>
@@ -201,16 +245,18 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
         <Tag
           variant="green"
         >
-          <Heading
-            as="h5"
+          <Text
+            as="span"
+            fontSize={1}
             fontWeight="700"
+            lineHeight="s"
             uppercase={true}
           >
             <FormattedMessage
               id="global.for"
               values={Object {}}
             />
-          </Heading>
+          </Text>
         </Tag>
       </ForwardRef>
       <ForwardRef
@@ -219,14 +265,28 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
       >
         <Text
           color="neutral-gray.500"
+          fontSize={
+            Array [
+              1,
+              3,
+            ]
+          }
         >
           Invalid date
         </Text>
         <Button
-          color="blue.900"
+          color="neutral-gray.500"
+          disabled={false}
           onClick={[Function]}
           p={0}
-          rightIcon="MODERATE"
+          rightIcon="PENCIL"
+        />
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="TRASH"
         />
       </ForwardRef>
     </ForwardRef>
@@ -294,16 +354,18 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
         <Tag
           variant="green"
         >
-          <Heading
-            as="h5"
+          <Text
+            as="span"
+            fontSize={1}
             fontWeight="700"
+            lineHeight="s"
             uppercase={true}
           >
             <FormattedMessage
               id="global.for"
               values={Object {}}
             />
-          </Heading>
+          </Text>
         </Tag>
       </ForwardRef>
       <ForwardRef
@@ -312,9 +374,29 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
       >
         <Text
           color="neutral-gray.500"
+          fontSize={
+            Array [
+              1,
+              3,
+            ]
+          }
         >
           Invalid date
         </Text>
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="PENCIL"
+        />
+        <Button
+          color="neutral-gray.500"
+          disabled={false}
+          onClick={[Function]}
+          p={0}
+          rightIcon="TRASH"
+        />
         <Menu>
           <Menu.Button
             __type="MenuButton"

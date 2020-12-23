@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { truncate } from 'lodash';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
@@ -10,7 +10,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
 import Tag from '~ds/Tag/Tag';
 import Text from '~ui/Primitives/Text';
-import Heading from '~ui/Primitives/Heading';
+import { LineHeight } from '~ui/Primitives/constants';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
@@ -19,7 +19,8 @@ import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVo
 import Button from '~ds/Button/Button';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
-import Menu from '../../DesignSystem/Menu/Menu';
+import Menu from '~ds/Menu/Menu';
+import ArgumentCardEdition from './ArgumentCardEdition';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
@@ -31,6 +32,7 @@ type Props = {|
   +isMobile?: boolean,
   +setReportModalId: (id: string) => void,
   +setModerateModalId: (id: string) => void,
+  +setDeleteModalInfo: ({ id: string, type: DebateOpinionStatus }) => void,
 |};
 
 export const voteForArgument = (
@@ -63,6 +65,7 @@ const getTruncatedLength = (isMobile?: boolean): number => {
   if (isMobile) return 230;
   return 450;
 };
+
 export const ArgumentCard = ({
   argument,
   viewer,
@@ -70,11 +73,13 @@ export const ArgumentCard = ({
   onReadMore,
   setModerateModalId,
   setReportModalId,
+  setDeleteModalInfo,
   ...props
 }: Props) => {
-  const intl = useIntl();
   const isViewerAdmin = viewer && viewer.isAdmin;
 
+  const intl = useIntl();
+  const [isEditing, setIsEditing] = useState(false);
   return (
     <Card p={6} bg="white" {...props}>
       <Flex direction="column">
@@ -84,28 +89,44 @@ export const ArgumentCard = ({
               {argument.author.username}
             </Text>
             <Tag variant={argument.type === 'FOR' ? 'green' : 'red'}>
-              <Heading as="h5" fontWeight="700" uppercase>
+              <Text as="span" fontSize={1} lineHeight={LineHeight.S} fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
-              </Heading>
+              </Text>
             </Tag>
           </Flex>
 
           <Flex direction="row" align="center">
-            <Text color="neutral-gray.500">
+            <Text fontSize={[1, 3]} color="neutral-gray.500">
               {moment(argument.publishedAt)
                 .startOf('day')
                 .fromNow()}
             </Text>
-
-            {isViewerAdmin && (
+            {isViewerAdmin && !argument.viewerDidAuthor && (
               <Button
                 onClick={() => setModerateModalId(argument.id)}
                 rightIcon={ICON_NAME.MODERATE}
-                color="blue.900"
+                color="neutral-gray.500"
                 p={0}
               />
             )}
-
+            {argument.viewerDidAuthor && (
+              <>
+                <Button
+                  disabled={isEditing}
+                  onClick={() => setIsEditing(true)}
+                  rightIcon={ICON_NAME.PENCIL}
+                  color="neutral-gray.500"
+                  p={0}
+                />
+                <Button
+                  disabled={isEditing}
+                  onClick={() => setDeleteModalInfo({ id: argument.id, type: argument.type })}
+                  rightIcon={ICON_NAME.TRASH}
+                  color="neutral-gray.500"
+                  p={0}
+                />
+              </>
+            )}
             {viewer && !isViewerAdmin && !argument.viewerHasReport && (
               <Menu>
                 <Menu.Button as={React.Fragment}>
@@ -130,18 +151,21 @@ export const ArgumentCard = ({
             )}
           </Flex>
         </Flex>
-
-        <Text>
-          {truncate(argument.body, { length: getTruncatedLength(isMobile) })}{' '}
-          {getTruncatedLength(isMobile) < argument.body.length && (
-            <>
-              &nbsp;
-              <Button display="inline-block" onClick={onReadMore} variant="link">
-                <FormattedMessage id="capco.module.read_more" />
-              </Button>
-            </>
-          )}
-        </Text>
+        {isEditing ? (
+          <ArgumentCardEdition argument={argument} goBack={() => setIsEditing(false)} />
+        ) : (
+          <Text>
+            {truncate(argument.body, { length: getTruncatedLength(isMobile) })}{' '}
+            {getTruncatedLength(isMobile) < argument.body.length && (
+              <>
+                &nbsp;
+                <Button display="inline-block" onClick={onReadMore} variant="link">
+                  <FormattedMessage id="capco.module.read_more" />
+                </Button>
+              </>
+            )}
+          </Text>
+        )}
         <Flex mt={3} alignItems="center" flexDirection="row">
           <LoginOverlay>
             <ButtonQuickAction
@@ -175,12 +199,15 @@ export default createFragmentContainer(ArgumentCard, {
         totalCount
       }
       author {
+        id
         username
       }
       type
       publishedAt
+      viewerDidAuthor @include(if: $isAuthenticated)
       viewerHasReport @include(if: $isAuthenticated)
       viewerHasVote @include(if: $isAuthenticated)
+      ...ArgumentCardEdition_argument
     }
   `,
   viewer: graphql`

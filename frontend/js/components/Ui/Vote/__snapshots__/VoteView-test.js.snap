@@ -21,6 +21,7 @@ exports[`<VoteView /> should render correctly 1`] = `
       </div>
       <div
         className="bubble"
+        key="0-green"
       >
         <Icon
           color="white"
@@ -30,6 +31,7 @@ exports[`<VoteView /> should render correctly 1`] = `
       </div>
       <div
         className="bubble"
+        key="1-green"
       >
         <Icon
           color="white"
@@ -39,6 +41,7 @@ exports[`<VoteView /> should render correctly 1`] = `
       </div>
       <div
         className="bubble"
+        key="2-green"
       >
         <Icon
           color="white"
@@ -65,6 +68,7 @@ exports[`<VoteView /> should render correctly 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="0-red"
       >
         <Icon
           color="white"
@@ -74,6 +78,7 @@ exports[`<VoteView /> should render correctly 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="1-red"
       >
         <Icon
           color="white"
@@ -83,6 +88,7 @@ exports[`<VoteView /> should render correctly 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="2-red"
       >
         <Icon
           color="white"
@@ -140,6 +146,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="0-red"
       >
         <Icon
           color="white"
@@ -149,6 +156,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="1-red"
       >
         <Icon
           color="white"
@@ -158,6 +166,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="2-red"
       >
         <Icon
           color="white"
@@ -167,6 +176,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="3-red"
       >
         <Icon
           color="white"
@@ -176,6 +186,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="4-red"
       >
         <Icon
           color="white"
@@ -185,6 +196,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
       </div>
       <div
         className="bubble reverse"
+        key="5-red"
       >
         <Icon
           color="white"
@@ -233,6 +245,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
       </div>
       <div
         className="bubble"
+        key="0-green"
       >
         <Icon
           color="white"
@@ -242,6 +255,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
       </div>
       <div
         className="bubble"
+        key="1-green"
       >
         <Icon
           color="white"
@@ -251,6 +265,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
       </div>
       <div
         className="bubble"
+        key="2-green"
       >
         <Icon
           color="white"
@@ -260,6 +275,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
       </div>
       <div
         className="bubble"
+        key="3-green"
       >
         <Icon
           color="white"
@@ -269,6 +285,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
       </div>
       <div
         className="bubble"
+        key="4-green"
       >
         <Icon
           color="white"
@@ -278,6 +295,7 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
       </div>
       <div
         className="bubble"
+        key="5-green"
       >
         <Icon
           color="white"

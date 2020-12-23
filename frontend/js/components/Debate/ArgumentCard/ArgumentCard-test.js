@@ -3,25 +3,29 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ArgumentCard } from './ArgumentCard';
-import { $refType } from '~/mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 const defaultProps = {
   argument: {
     $refType,
+    $fragmentRefs,
     id: 'argumentPour42',
     body: 'Je suis pour le LSD dans nos cantines',
     votes: {
       totalCount: 500,
     },
     author: {
+      id: 'AguiLeBg',
       username: 'Agui',
     },
     type: 'FOR',
     publishedAt: '01-02-2021:19h00',
     viewerHasVote: true,
+    viewerDidAuthor: true,
   },
   setReportModalId: jest.fn(),
   setModerateModalId: jest.fn(),
+  setDeleteModalInfo: jest.fn(),
   isMobile: false,
   viewer: null,
 };

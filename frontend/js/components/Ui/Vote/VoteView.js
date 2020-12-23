@@ -19,8 +19,8 @@ export const VoteView = ({ positivePercentage }: Props) => {
             <div className="circle">
               <Icon name="THUMB_UP" color="white" size="lg" />
             </div>
-            {[...Array(Math.floor(left / 20) + (left > 10 ? 1 : 0))].map(() => (
-              <div className="bubble">
+            {[...Array(Math.floor(left / 20) + (left > 10 ? 1 : 0))].map((_, index) => (
+              <div className="bubble" key={`${index}-green`}>
                 <Icon name="THUMB_UP" color="white" size="lg" />
               </div>
             ))}
@@ -30,8 +30,8 @@ export const VoteView = ({ positivePercentage }: Props) => {
           <div className="circle red">
             <Icon name="THUMB_UP" color="white" size="lg" />
           </div>
-          {[...Array(Math.floor(right / 20) + (right > 10 ? 1 : 0))].map(() => (
-            <div className="bubble reverse">
+          {[...Array(Math.floor(right / 20) + (right > 10 ? 1 : 0))].map((_, index) => (
+            <div className="bubble reverse" key={`${index}-red`}>
               <Icon name="THUMB_UP" color="white" size="lg" />
             </div>
           ))}

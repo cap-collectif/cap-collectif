@@ -18,6 +18,7 @@ import { StyledSlider } from '~/components/Debate/Page/LinkedArticles/DebateStep
 import DebateStepPageArgumentDrawer from '~/components/Debate/Page/Drawers/DebateStepPageArgumentDrawer';
 import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
+import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
 
 type Props = {|
   +debate: DebateStepPageAlternateArgumentsPagination_debate$key,
@@ -120,6 +121,10 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const [reportModalId, setReportModalId] = React.useState<?string>(null);
   const [moderateModalId, setModerateModalId] = React.useState<?string>(null);
+  const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
+    id: string,
+    type: 'FOR' | 'AGAINST',
+  }>(null);
 
   if (!debateFragment || !debate) return null;
   const debateArguments =
@@ -156,6 +161,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   viewer={viewer}
                   setReportModalId={setReportModalId}
                   setModerateModalId={setModerateModalId}
+                  setDeleteModalInfo={setDeleteModalInfo}
                 />
               </React.Fragment>
             ))}
@@ -196,6 +202,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   mb={6}
                   setReportModalId={setReportModalId}
                   setModerateModalId={setModerateModalId}
+                  setDeleteModalInfo={setDeleteModalInfo}
                 />
               </>
             </AppBox>
@@ -212,6 +219,14 @@ export const DebateStepPageAlternateArgumentsPagination = ({
 
       {reportModalId && (
         <ModalReportArgument argumentId={reportModalId} onClose={() => setReportModalId(null)} />
+      )}
+
+      {deleteModalInfo && (
+        <ModalDeleteArgument
+          debateId={debate.id}
+          argumentInfo={deleteModalInfo}
+          onClose={() => setDeleteModalInfo(null)}
+        />
       )}
     </>
   );

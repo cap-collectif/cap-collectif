@@ -6,7 +6,8 @@ import css from '@styled-system/css';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
 import Tag from '~ds/Tag/Tag';
-import Heading from '~ui/Primitives/Heading';
+import { LineHeight } from '~ui/Primitives/constants';
+import Text from '~ui/Primitives/Text';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
@@ -21,9 +22,9 @@ export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props)
       css={css({
         position: 'absolute',
       })}>
-      <Heading as="h5" fontWeight="700" uppercase>
+      <Text as="span" fontSize={1} lineHeight={LineHeight.S} fontWeight="700" uppercase>
         <FormattedMessage id={debateOpinionStatus === 'FOR' ? 'opinion.for' : 'opinion.against'} />
-      </Heading>
+      </Text>
     </Tag>
     <Flex direction="column" m={6} mt={10}>
       <Flex direction="row" spacing={6} mb={5}>
