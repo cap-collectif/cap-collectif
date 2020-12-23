@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * @method ProjectAbstractStep|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
  * @method ProjectAbstractStep[]    findAll()
  * @method ProjectAbstractStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProjectAbstractStepRepository extends EntityRepository
+class ProjectAbstractStepRepository extends AbstractStepRepository
 {
     public static function createOrderedByCritera(array $orderings): Criteria
     {

@@ -2,12 +2,11 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 
-class CollectStepRepository extends EntityRepository
+class CollectStepRepository extends AbstractStepRepository
 {
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException

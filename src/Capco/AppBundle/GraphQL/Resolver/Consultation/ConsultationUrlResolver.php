@@ -9,7 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ConsultationUrlResolver implements ResolverInterface
 {
-    protected $router;
+    protected RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {
@@ -18,10 +18,17 @@ class ConsultationUrlResolver implements ResolverInterface
 
     public function __invoke(Consultation $consultation): string
     {
-        return $this->router->generate('app_project_consultations_show_consultation', [
-            'projectSlug' => $consultation->getStep()->getProject()->getSlug(),
-            'stepSlug' => $consultation->getStep()->getSlug(),
-            'consultationSlug' => $consultation->getSlug(),
-        ], UrlGeneratorInterface::ABSOLUTE_URL);
+        return $this->router->generate(
+            'app_project_consultations_show_consultation',
+            [
+                'projectSlug' => $consultation
+                    ->getStep()
+                    ->getProject()
+                    ->getSlug(),
+                'stepSlug' => $consultation->getStep()->getSlug(),
+                'consultationSlug' => $consultation->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 }

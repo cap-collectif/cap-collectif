@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\DebateStep;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * @method DebateStep|null find($id, $lockMode = null, $lockVersion = null)
@@ -11,6 +10,6 @@ use Doctrine\ORM\EntityRepository;
  * @method DebateStep[]    findAll()
  * @method DebateStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DebateStepRepository extends EntityRepository
+class DebateStepRepository extends AbstractStepRepository
 {
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class RankingStep.
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RankingStepRepository")
  */
 class RankingStep extends AbstractStep
 {

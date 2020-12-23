@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class ProgressStepRepository extends EntityRepository
+class ProgressStepRepository extends AbstractStepRepository
 {
 }
