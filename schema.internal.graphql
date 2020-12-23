@@ -253,6 +253,9 @@ type AddDebateOpinionPayload {
 enum AddDebateVoteErrorCode {
   """No `Debate` match your `debateId`."""
   UNKNOWN_DEBATE
+
+  """The debate is closed and be voted."""
+  CLOSED_DEBATE
 }
 
 input AddDebateVoteInput {

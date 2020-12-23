@@ -7,3 +7,6 @@ AddDebateVoteErrorCode:
             UNKNOWN_DEBATE:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateVoteMutation::UNKNOWN_DEBATE")'
                 description: 'No `Debate` match your `debateId`.'
+            CLOSED_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateVoteMutation::CLOSED_DEBATE")'
+                description: 'The debate is closed and be voted.'
