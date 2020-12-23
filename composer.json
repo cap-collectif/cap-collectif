@@ -98,7 +98,7 @@
     ],
     "require": {
         "php": ">=7.4",
-        "symfony/symfony": "~4.4.13",
+        "symfony/symfony": "~4.4.18",
         "doctrine/doctrine-bundle": "^2.0",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "^3.4",
@@ -202,7 +202,7 @@
         "doctrine/cache": "^1.10",
         "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/maker-bundle": "^1.20",
-        "symfony/http-client": "4.4.13",
+        "symfony/http-client": "~4.4.18",
         "fabpot/goutte": "^4.0",
         "symfony/panther": "^0.8.0"
     },
