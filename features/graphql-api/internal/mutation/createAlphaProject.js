@@ -47,7 +47,6 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
             }
           }
         }
-        opinionTerm
         type {
           id
           title
@@ -134,7 +133,6 @@ const BASE_PROJECT = {
   Cover: 'media1',
   video: 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg',
   authors: ['VXNlcjp1c2VyQWRtaW4=', 'VXNlcjp1c2VyMQ=='],
-  opinionTerm: 2,
   metaDescription: 'Je suis la super meta',
   visibility: 'PUBLIC',
   themes: ['theme3'],

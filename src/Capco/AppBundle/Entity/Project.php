@@ -37,10 +37,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project implements IndexableInterface
 {
-    use UuidTrait;
+    use LocalizableTrait;
     use MetaDescriptionCustomCodeTrait;
     use ProjectVisibilityTrait;
-    use LocalizableTrait;
+    use UuidTrait;
 
     public const FILTER_ALL = 'all';
 
@@ -51,9 +51,6 @@ class Project implements IndexableInterface
     public const STATE_OPENED = 1;
     public const STATE_FUTURE_WITH_FINISHED_STEPS = 1;
     public const STATE_CLOSED = 2;
-
-    public const OPINION_TERM_OPINION = 0;
-    public const OPINION_TERM_ARTICLE = 1;
 
     public const DEFAULT_COVER_FILTER_OPACITY = 50;
 
@@ -72,11 +69,6 @@ class Project implements IndexableInterface
         'future_with_finished_steps' => self::STATE_FUTURE_WITH_FINISHED_STEPS,
         'opened' => self::STATE_OPENED,
         'closed' => self::STATE_CLOSED,
-    ];
-
-    public static $opinionTermsLabels = [
-        'project.opinion_term.opinion' => self::OPINION_TERM_OPINION,
-        'project.opinion_term.article' => self::OPINION_TERM_ARTICLE,
     ];
 
     /**
@@ -188,11 +180,6 @@ class Project implements IndexableInterface
      * @ORM\Column(name="include_author_in_ranking", type="boolean")
      */
     private $includeAuthorInRanking = false;
-
-    /**
-     * @ORM\Column(name="opinion_term", type="integer", nullable=false)
-     */
-    private $opinionTerm = self::OPINION_TERM_OPINION;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProjectType", inversedBy="projects")
@@ -691,18 +678,6 @@ class Project implements IndexableInterface
     public function setIncludeAuthorInRanking($includeAuthorInRanking)
     {
         $this->includeAuthorInRanking = $includeAuthorInRanking;
-    }
-
-    public function getOpinionTerm(): int
-    {
-        return $this->opinionTerm;
-    }
-
-    public function setOpinionTerm(int $opinionTerm): self
-    {
-        $this->opinionTerm = $opinionTerm;
-
-        return $this;
     }
 
     // ******************** Custom methods ******************************

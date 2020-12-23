@@ -56,17 +56,6 @@ export type Author = {|
   label: string,
 |};
 
-const opinionTerms = [
-  {
-    id: 0,
-    label: 'project.opinion_term.opinion',
-  },
-  {
-    id: 1,
-    label: 'project.opinion_term.article',
-  },
-];
-
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
 const getViewEnabled = (stepType: string, proposalForm, firstCollectStepForm) => {
@@ -130,7 +119,6 @@ const onSubmit = (
   {
     title,
     authors,
-    opinionTerm,
     projectType,
     Cover,
     video,
@@ -155,7 +143,6 @@ const onSubmit = (
   const input = {
     title,
     authors: formatAuthors(authors),
-    opinionTerm,
     projectType,
     Cover: Cover ? Cover.id : null,
     video,
@@ -303,7 +290,6 @@ const validate = (props: FormValues) => {
     districts,
     isExternal,
     publishedAt,
-    opinionTerm,
     projectType,
     externalLink,
     externalVotesCount,
@@ -317,7 +303,6 @@ const validate = (props: FormValues) => {
     ...validateContent({
       title,
       authors,
-      opinionTerm,
       projectType,
       video,
       themes,
@@ -406,7 +391,6 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
   return {
     features: state.default.features,
     initialValues: {
-      opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
       authors: project ? project.authors : [],
       title: project ? project.title : null,
       projectType: project && project.type ? project.type.id : null,
@@ -501,7 +485,6 @@ export default createFragmentContainer(container, {
         value: id
         label: username
       }
-      opinionTerm
       type {
         id
       }
@@ -708,7 +691,6 @@ export default createFragmentContainer(container, {
         }
       }
       visibility
-      opinionTerm
       publishedAt
       opinionCanBeFollowed
       isExternal

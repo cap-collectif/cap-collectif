@@ -1373,13 +1373,6 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "kind": "ScalarField",
-                        "name": "opinionTerm",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
                         "concreteType": "ProjectType",
                         "kind": "LinkedField",
                         "name": "type",
@@ -1737,7 +1730,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "55c80eb74a9569a7427f710525179cdb",
+        "cacheID": "51d056e6347aaf8e859e7e707c9eda09",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1798,7 +1791,6 @@ fragment ProjectAdminForm_project on Project {
     label: username
     id
   }
-  opinionTerm
   type {
     id
   }
@@ -2070,7 +2062,6 @@ fragment ProjectContentAdminForm_project on Project {
     label: username
     id
   }
-  opinionTerm
   type {
     id
   }
@@ -3528,13 +3519,6 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "kind": "ScalarField",
-                        "name": "opinionTerm",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
                         "concreteType": "ProjectType",
                         "kind": "LinkedField",
                         "name": "type",
@@ -3892,7 +3876,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "55c80eb74a9569a7427f710525179cdb",
+        "cacheID": "51d056e6347aaf8e859e7e707c9eda09",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3953,7 +3937,6 @@ fragment ProjectAdminForm_project on Project {
     label: username
     id
   }
-  opinionTerm
   type {
     id
   }
@@ -4225,7 +4208,6 @@ fragment ProjectContentAdminForm_project on Project {
     label: username
     id
   }
-  opinionTerm
   type {
     id
   }

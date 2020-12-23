@@ -152,9 +152,6 @@ InternalProject:
             externalVotesCount:
                 type: 'Int'
                 description: 'Vote count of the external project.'
-            opinionTerm:
-                type: 'Int!'
-                description: 'Opinion term of the project.'
             headerType:
                 type: 'ProjectHeaderType'
                 description: "The header's format of the project."

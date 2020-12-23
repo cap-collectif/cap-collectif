@@ -6,12 +6,6 @@
             ? project.projectType.title
             : null
         %}
-        {% set opinionLabel = project.opinionTerm == 0
-            ? projectType is not null and projectType is same as('project.types.interpellation')
-                ? 'interpellation.count'
-                : 'proposal-count'
-            : 'article-count' %}
-        {{ opinionLabel | trans({'count': opinions}, 'CapcoAppBundle') }}
         </br>
     {% endif %}
     {% set versions = project.totalVersionsCount %}

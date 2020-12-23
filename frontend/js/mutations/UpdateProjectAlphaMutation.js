@@ -18,7 +18,6 @@ const mutation = graphql`
           value: id
           label: username
         }
-        opinionTerm
         type {
           id
         }
@@ -101,7 +100,6 @@ const mutation = graphql`
         }
         ...ProjectAccessAdminForm_project
 
-        opinionTerm
         visibility
         publishedAt
         opinionCanBeFollowed

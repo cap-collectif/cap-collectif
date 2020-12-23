@@ -25,7 +25,6 @@ Scenario: GraphQL client wants to update a project and add an author
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "thisisnotatestupdated",
           "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg=="],
-          "opinionTerm": 1,
           "projectType": "2"
         }
       }
@@ -72,7 +71,6 @@ Scenario: GraphQL client wants to update a project and delete an author
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "thisisnotatestupdated",
           "authors": ["VXNlcjp1c2VyMg=="],
-          "opinionTerm": 1,
           "projectType": "2"
         }
       }
@@ -121,7 +119,6 @@ Scenario: GraphQL client wants to update a project without type
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "thisisnotatestupdated",
           "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg=="],
-          "opinionTerm": 1,
           "projectType": null
         }
       }
@@ -173,7 +170,6 @@ Scenario: GraphQL client wants to update a project without authors
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
           "title": "thisisnotatestupdated",
           "authors": [],
-          "opinionTerm": 1,
           "projectType": null
         }
       }
@@ -308,7 +304,6 @@ Scenario: GraphQL client wants to update project with empty group in custom view
             "VXNlcjp1c2VyQWRtaW4=",
             "VXNlcjp1c2VyMQ=="
           ],
-          "opinionTerm": 2,
           "metaDescription": "Je suis la super meta",
           "visibility": "CUSTOM",
           "themes": [
@@ -389,7 +384,6 @@ Scenario: GraphQL client wants to update project with votesMin greater than vote
                "VXNlcjp1c2VyQWRtaW4=",
                "VXNlcjp1c2VyMQ=="
             ],
-            "opinionTerm":2,
             "metaDescription":"Je suis la super meta",
             "visibility":"PUBLIC",
             "themes":[
@@ -492,7 +486,6 @@ Scenario: GraphQL client wants to update project with votesMin below 1
                "VXNlcjp1c2VyQWRtaW4=",
                "VXNlcjp1c2VyMQ=="
             ],
-            "opinionTerm":2,
             "metaDescription":"Je suis la super meta",
             "visibility":"PUBLIC",
             "themes":[

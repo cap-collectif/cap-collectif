@@ -1,54 +1,51 @@
 UpdateProjectInput:
-  type: relay-mutation-input
-  config:
-    description: 'Create a project'
-    fields:
-      id:
-        type: 'ID!'
-        description: "The project's ID"
-      title:
-        type: 'String'
-        description: "The project's title"
-      authors:
-        type: '[ID!]'
-        description: "The project's authors"
-      opinionTerm:
-        type: 'Int'
-        description: "The project's opinion term"
-      projectType:
-        type: 'String'
-        description: "The project's type"
-      publishedAt:
-        type: 'String'
-        description: "The project's date of publication"
-      themes:
-        type: '[ID]'
-        description: "The project's themes"
-      Cover:
-        type: 'ID'
-        description: "The project's image"
-      video:
-        type: 'String'
-        description: "The project's video"
-      districts:
-        type: '[ID!]'
-        description: "The project's districts"
-      locale:
-          type: 'ID'
-          description: 'The uuid of the locale of this project, null if none'
+    type: relay-mutation-input
+    config:
+        description: 'Create a project'
+        fields:
+            id:
+                type: 'ID!'
+                description: "The project's ID"
+            title:
+                type: 'String'
+                description: "The project's title"
+            authors:
+                type: '[ID!]'
+                description: "The project's authors"
+            projectType:
+                type: 'String'
+                description: "The project's type"
+            publishedAt:
+                type: 'String'
+                description: "The project's date of publication"
+            themes:
+                type: '[ID]'
+                description: "The project's themes"
+            Cover:
+                type: 'ID'
+                description: "The project's image"
+            video:
+                type: 'String'
+                description: "The project's video"
+            districts:
+                type: '[ID!]'
+                description: "The project's districts"
+            locale:
+                type: 'ID'
+                description: 'The uuid of the locale of this project, null if none'
 
-      isExternal:
-        type: 'Boolean'
-        description: 'Is the project external or not'
-      externalLink:
-        type: 'String'
-        description: 'The link of an external project'
-      externalParticipantsCount:
-        type: 'Int'
-        description: 'The number of participants in an external project'
-      externalContributionsCount:
-        type: 'Int'
-        description: 'The number of contributions in an external project'
-      externalVotesCount:
-        type: 'Int'
-        description: 'The number of votes in an external project'
+            isExternal:
+                type: 'Boolean'
+                description: 'Is the project external or not'
+            externalLink:
+                type: 'String'
+                description: 'The link of an external project'
+            externalParticipantsCount:
+                type: 'Int'
+                description: 'The number of participants in an external project'
+            externalContributionsCount:
+                type: 'Int'
+                description: 'The number of contributions in an external project'
+            externalVotesCount:
+                type: 'Int'
+                description: 'The number of votes in an external project'

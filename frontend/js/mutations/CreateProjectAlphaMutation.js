@@ -24,7 +24,6 @@ const mutation = graphql`
             endAt
           }
         }
-        opinionTerm
         ...ProjectContentAdminForm_project
         ...ProjectExternalAdminPage_project
         ...ProjectAccessAdminForm_project

@@ -29,23 +29,20 @@ class UpdateProjectFormType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
             ->add('authors', EntityType::class, [
                 'class' => ProjectAuthor::class,
                 'multiple' => true,
-                'choice_label' => 'id'
+                'choice_label' => 'id',
             ])
             ->add('projectType', EntityType::class, [
                 'required' => false,
-                'class' => ProjectType::class
-            ])
-            ->add('opinionTerm', NumberType::class, [
-                'required' => true
+                'class' => ProjectType::class,
             ])
             ->add('isExternal')
             ->add('externalLink', UrlType::class, [
-                'constraints' => [new CheckExternalLink(), new NotBlank()]
+                'constraints' => [new CheckExternalLink(), new NotBlank()],
             ])
             ->add('externalParticipantsCount', NumberType::class, [])
             ->add('externalContributionsCount', NumberType::class, [])
@@ -53,25 +50,24 @@ class UpdateProjectFormType extends AbstractType
             ->add('publishedAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss'
+                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('themes', EntityType::class, [
                 'class' => Theme::class,
                 'multiple' => true,
-                'choice_label' => 'id'
+                'choice_label' => 'id',
             ])
             ->add('Cover', EntityType::class, [
                 'required' => false,
-                'class' => Media::class
+                'class' => Media::class,
             ])
             ->add('video', TextType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('locale', EntityType::class, [
                 'required' => false,
-                'class' => Locale::class
-            ])
-        ;
+                'class' => Locale::class,
+            ]);
     }
 
     /**

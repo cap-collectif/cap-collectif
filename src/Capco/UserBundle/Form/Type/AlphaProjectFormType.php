@@ -42,9 +42,6 @@ class AlphaProjectFormType extends AbstractType
                 'strip_tags' => true,
                 'purify_html_profile' => 'default',
             ])
-            ->add('opinionTerm', NumberType::class, [
-                'required' => true,
-            ])
             ->add('restrictedViewerGroups', EntityType::class, [
                 'class' => Group::class,
                 'multiple' => true,

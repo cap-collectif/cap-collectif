@@ -27,7 +27,6 @@ describe('<ProjectAdminForm />', () => {
       themes: [],
       districts: null,
       metaDescription: 'so meta',
-      opinionTerm: 1,
       opinionCanBeFollowed: true,
       isExternal: false,
       externalLink: null,

@@ -2741,9 +2741,6 @@ input CreateAlphaProjectInput {
   """The project authors IDs"""
   authors: [ID!]!
 
-  """The project opinion term"""
-  opinionTerm: Int!
-
   """The project type ID"""
   projectType: ID
 
@@ -2951,9 +2948,6 @@ input CreateProjectInput {
 
   """The project's authors, accept IDs of User"""
   authors: [ID!]!
-
-  """The project's opinion term"""
-  opinionTerm: Int!
 
   """The project's type"""
   projectType: String
@@ -7125,9 +7119,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Vote count of the external project."""
   externalVotesCount: Int
-
-  """Opinion term of the project."""
-  opinionTerm: Int!
 
   """The header's format of the project."""
   headerType: ProjectHeaderType
@@ -12074,9 +12065,6 @@ input UpdateAlphaProjectInput {
   """The project authors IDs"""
   authors: [ID!]!
 
-  """The project opinion term"""
-  opinionTerm: Int!
-
   """The project type ID"""
   projectType: ID
 
@@ -12667,9 +12655,6 @@ input UpdateProjectInput {
 
   """The project's authors"""
   authors: [ID!]
-
-  """The project's opinion term"""
-  opinionTerm: Int
 
   """The project's type"""
   projectType: String

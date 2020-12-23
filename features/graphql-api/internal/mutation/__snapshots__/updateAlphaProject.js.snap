@@ -24,7 +24,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -158,7 +157,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -268,7 +266,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -335,7 +332,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -393,7 +389,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -447,7 +442,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -501,7 +495,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -559,7 +552,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -639,7 +631,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -700,7 +691,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -756,7 +746,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -830,7 +819,6 @@ Object {
       "id": Any<String>,
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],
@@ -887,7 +875,6 @@ Object {
       "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
       "isExternal": false,
       "opinionCanBeFollowed": true,
-      "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
       "restrictedViewers": Object {
         "edges": Array [],

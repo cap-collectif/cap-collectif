@@ -28,7 +28,6 @@ Scenario: GraphQL client wants to create a project
         "input": {
           "title": "thisisnotatest",
           "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ=="],
-          "opinionTerm": 2,
           "projectType": "2"
         }
       }
@@ -78,8 +77,7 @@ Scenario: GraphQL client wants to create a project without type
       "variables": {
         "input": {
           "title": "thisisnotatest",
-          "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ=="],
-          "opinionTerm": 2
+          "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ=="]
         }
       }
     }
@@ -126,8 +124,7 @@ Scenario: GraphQL client wants to create a project without authors
       "variables": {
         "input": {
           "title": "thisisnotatest",
-          "authors": [],
-          "opinionTerm": 2
+          "authors": []
         }
       }
     }
@@ -164,7 +161,6 @@ Scenario: GraphQL client wants to create a project in english
         "input": {
           "title": "thisisnotatest",
           "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ=="],
-          "opinionTerm": 2,
           "projectType": "2",
           "locale": "locale-en-GB"
         }

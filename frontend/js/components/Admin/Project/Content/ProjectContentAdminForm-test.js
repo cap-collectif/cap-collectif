@@ -33,7 +33,6 @@ describe('<ProjectContentAdminForm />', () => {
         themes: [],
         districts: null,
         metaDescription: 'so meta',
-        opinionTerm: 1,
       },
     };
     const wrapper = shallow(<ProjectContentAdminForm {...props} />);

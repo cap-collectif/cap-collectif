@@ -28,19 +28,6 @@ type Props = {|
   features: FeatureToggles,
 |};
 
-const opinionTerms = [
-  {
-    id: 0,
-    label: 'project.opinion_term.opinion',
-  },
-  {
-    id: 1,
-    label: 'project.opinion_term.article',
-  },
-];
-
-const convertOpinionTerm = (opinionTerm: string): number => parseInt(opinionTerm, 10);
-
 type Author = {|
   value: string,
   label: string,
@@ -49,20 +36,18 @@ type Author = {|
 type FormValues = {|
   title: string,
   authors: Author[],
-  opinionTerm: number,
   projectType: string,
 |};
 
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
 const onSubmit = (
-  { title, authors, opinionTerm, projectType }: FormValues,
+  { title, authors, projectType }: FormValues,
   dispatch: Dispatch,
   props: Props,
 ) => {
   const input = {
     title,
-    opinionTerm,
     projectType,
     authors: formatAuthors(authors),
   };
@@ -202,23 +187,6 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
             />
 
             <ProjectTypeListField />
-            <Field
-              name="opinionTerm"
-              type="select"
-              component={renderComponent}
-              parse={convertOpinionTerm}
-              normalize={convertOpinionTerm}
-              label={
-                <span>
-                  <FormattedMessage id="admin.fields.project.opinion_term" />
-                </span>
-              }>
-              {opinionTerms.map(projectTerm => (
-                <option key={projectTerm.id} value={projectTerm.id}>
-                  {intl.formatMessage({ id: projectTerm.label })}
-                </option>
-              ))}
-            </Field>
             <Button
               id="submit-project-content"
               type="submit"
@@ -240,7 +208,6 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
 const mapStateToProps = (state, { project }: Props) => ({
   features: state.default.features,
   initialValues: {
-    opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
     authors: project ? project.authors : [],
     title: project ? project.title : null,
     projectType: project && project.type ? project.type.id : null,
@@ -268,7 +235,6 @@ export default createFragmentContainer(container, {
         value: id
         label: username
       }
-      opinionTerm
       type {
         id
       }

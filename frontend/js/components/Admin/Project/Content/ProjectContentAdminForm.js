@@ -28,7 +28,6 @@ type Option = {|
 export type FormValues = {|
   title: string,
   authors: Author[],
-  opinionTerm: number,
   projectType: string,
   themes: Option[],
   Cover: ?{
@@ -203,7 +202,6 @@ export default createFragmentContainer(ProjectContentAdminForm, {
         value: id
         label: username
       }
-      opinionTerm
       type {
         id
       }
