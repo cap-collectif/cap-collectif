@@ -92,3 +92,6 @@ Capco\AppBundle\Entity\Proposal:
         getRevisionsArray:
             serialized_name: revisions
             groups: [ElasticsearchProposal]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ ElasticsearchProposal ]

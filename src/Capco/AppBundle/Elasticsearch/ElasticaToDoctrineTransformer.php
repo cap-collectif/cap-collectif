@@ -67,8 +67,15 @@ class ElasticaToDoctrineTransformer
         $objects = $ids = $toFetchByType = [];
         /** @var Result $elasticaObject */
         foreach ($elasticaObjects as $elasticaObject) {
-            $ids[] = $elasticaObject->getType() . '#' . $elasticaObject->getId();
-            $toFetchByType[$elasticaObject->getType()][] = $elasticaObject->getId();
+            [$type, $id] = explode(':', $elasticaObject->getId());
+
+            if (!$type || !$id) {
+                throw new RuntimeException(
+                    "Id format for current document is not type:id, can't hydrate to Doctrine!"
+                );
+            }
+            $ids[] = $type . '#' . $id;
+            $toFetchByType[$type][] = $id;
         }
 
         foreach ($toFetchByType as $type => $toFetchIds) {
@@ -135,7 +142,10 @@ class ElasticaToDoctrineTransformer
             } else {
                 $id = $object[$this->getIdentifierField()];
             }
-            $result[] = new HybridResult($indexedElasticaResults[$id], $object);
+            $result[] = new HybridResult(
+                $indexedElasticaResults[sprintf('%s:%s', $object::getElasticsearchTypeName(), $id)],
+                $object
+            );
         }
 
         return $result;

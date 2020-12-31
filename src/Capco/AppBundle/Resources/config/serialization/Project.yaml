@@ -68,4 +68,7 @@ Capco\AppBundle\Entity\Project:
       serialized_name: districts
       groups: [ElasticsearchProjectNestedProjectDistrictPositioner]
     locale:
-        groups: [Projects, ElasticsearchProject]
+      groups: [Projects, ElasticsearchProject]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ ElasticsearchProject ]

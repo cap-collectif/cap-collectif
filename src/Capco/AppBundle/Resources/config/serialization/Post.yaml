@@ -23,3 +23,6 @@ Capco\AppBundle\Entity\Post:
     getBodyText:
       serialized_name: body
       groups: [Proposals, Elasticsearch]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ Elasticsearch ]

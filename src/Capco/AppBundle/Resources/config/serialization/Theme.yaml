@@ -11,3 +11,6 @@ Capco\AppBundle\Entity\Theme:
     isEnabled:
       groups: [ThemeDetails]
       serialized_name: enabled
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ ElasticsearchTheme ]

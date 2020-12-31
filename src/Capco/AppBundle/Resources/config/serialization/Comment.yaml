@@ -13,3 +13,6 @@ Capco\AppBundle\Entity\Comment:
       groups: [ElasticsearchComment, ElasticsearchNestedComment]
     trashedStatus:
       groups: [ElasticsearchComment, ElasticsearchNestedComment]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ ElasticsearchComment ]

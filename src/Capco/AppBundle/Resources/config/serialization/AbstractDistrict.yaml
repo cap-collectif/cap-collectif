@@ -10,3 +10,6 @@ Capco\AppBundle\Entity\District\AbstractDistrict:
       groups: [DistrictDetails]
     displayedOnMap:
       groups: [DistrictDetails]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ Elasticsearch ]

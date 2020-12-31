@@ -11,3 +11,6 @@ Capco\AppBundle\Entity\Consultation:
             ElasticsearchArgumentNestedConsultation,
             ElasticsearchSourceNestedConsultation,
         ]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ Elasticsearch ]

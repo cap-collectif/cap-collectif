@@ -33,3 +33,6 @@ Capco\AppBundle\Entity\Argument:
       type: object
       serialized_name: consultation
       groups: [ElasticsearchArgumentNestedConsultation]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ ElasticsearchArgument ]

@@ -8,6 +8,7 @@ use Elastica\Request;
 use Elastica\Response;
 use Elasticsearch\Endpoints\Indices\Aliases\Get;
 use Symfony\Component\Yaml\Yaml;
+use function Rector\Php71\Tests\Rector\FuncCall\CountOnNullRector\Fixture\c;
 
 /**
  * Handle index creation and manipulation.
@@ -48,7 +49,7 @@ class IndexBuilder
 
     public function generateIndexName(): string
     {
-        return sprintf('capco_%s', date('Y-m-d-H:i:s'));
+        return sprintf('capco_%s', date('Y-m-d-H-i-s'));
     }
 
     public function cleanOldIndices(int $afterLiveLimit = 2): array
@@ -64,7 +65,7 @@ class IndexBuilder
             }
 
             $date = \DateTime::createFromFormat(
-                'Y-m-d-H:i:s',
+                'Y-m-d-H-i-s',
                 str_replace('capco_', '', $indexName)
             );
 

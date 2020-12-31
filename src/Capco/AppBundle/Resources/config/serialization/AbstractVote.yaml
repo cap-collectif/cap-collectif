@@ -24,3 +24,6 @@ Capco\AppBundle\Entity\AbstractVote:
       type: object
       groups: [ElasticsearchVoteNestedAuthor]
       serialized_name: author
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ Elasticsearch ]
