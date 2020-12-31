@@ -118,6 +118,14 @@
                                                                 </span>
                                                             </li>
                                                         {% endif %}
+                                                        {% if proposal.officialResponses > 0 %}
+                                                            <li>
+                                                                <span style="color: #000000;">
+                                                                    {{ 'new-official-response' | trans({'count': proposal.officialResponses, 'num': proposal.officialResponses}, 'CapcoAppBundle') }}
+                                                                </span>
+                                                            </li>
+                                                        {% endif %}
+
                                                         {% if proposal.lastStep and proposal.lastStep.sName %}
                                                             <li><span style="color: #000000;">{{ 'moving-to-the-step-with-status'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName }, 'CapcoAppBundle', user_locale) }}</span> </li>
                                                         {% elseif proposal.lastStep  %}

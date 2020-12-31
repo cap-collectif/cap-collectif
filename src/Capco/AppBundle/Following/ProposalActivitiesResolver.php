@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -20,15 +21,24 @@ use Symfony\Component\Routing\RouterInterface;
 class ProposalActivitiesResolver extends ActivitiesResolver
 {
     public const NOT_FOLLOWED = 0;
-    public const ACTIVITIES = ['isUpdated', 'isDeleted', 'comments', 'votes', 'lastStep', 'posts'];
+    public const ACTIVITIES = [
+        'isUpdated',
+        'isDeleted',
+        'comments',
+        'votes',
+        'lastStep',
+        'posts',
+        'officialResponses',
+    ];
 
-    protected $followerRepository;
-    protected $proposalRepository;
-    protected $proposalFormRepository;
-    protected $projectRepository;
-    protected $logger;
-    protected $router;
-    private $postRepository;
+    protected FollowerRepository $followerRepository;
+    protected ProposalRepository $proposalRepository;
+    protected ProposalFormRepository $proposalFormRepository;
+    protected ProjectRepository $projectRepository;
+    protected LoggerInterface $logger;
+    protected RouterInterface $router;
+    private PostRepository $postRepository;
+    private OfficialResponseRepository $officialResponseRepository;
 
     public function __construct(
         FollowerRepository $followerRepository,
@@ -36,6 +46,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         PostRepository $postRepository,
         ProposalFormRepository $proposalFormRepository,
         ProjectRepository $projectRepository,
+        OfficialResponseRepository $officialResponseRepository,
         LoggerInterface $logger,
         RouterInterface $router
     ) {
@@ -44,6 +55,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         $this->postRepository = $postRepository;
         $this->proposalFormRepository = $proposalFormRepository;
         $this->projectRepository = $projectRepository;
+        $this->officialResponseRepository = $officialResponseRepository;
         $this->logger = $logger;
         $this->router = $router;
     }
@@ -148,6 +160,13 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 $currentProposal['posts'] = !empty($proposalBlogPostInYesterday)
                     ? $proposalBlogPostInYesterday
                     : false;
+                $currentProposal[
+                    'officialResponses'
+                ] = $this->officialResponseRepository->countPublishedBetween(
+                    $yesterdayMidnight,
+                    $yesterdayLasTime,
+                    $proposalId
+                );
 
                 $currentProposal['title'] = $proposal->getTitle();
                 $currentProposal['link'] = $proposal->getProject()
@@ -156,7 +175,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                         [
                             'projectSlug' => $proposal->getProject()->getSlug(),
                             'stepSlug' => $proposal->getStep()->getSlug(),
-                            'proposalSlug' => $proposal->getSlug()
+                            'proposalSlug' => $proposal->getSlug(),
                         ],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     )

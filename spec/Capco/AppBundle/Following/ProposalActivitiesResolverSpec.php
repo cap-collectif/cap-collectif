@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Following\ActivitiesResolver;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -25,6 +26,7 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         PostRepository $postRepository,
         ProposalFormRepository $proposalFormRepository,
         ProjectRepository $projectRepository,
+        OfficialResponseRepository $officialResponseRepository,
         Logger $logger,
         Router $router
     ) {
@@ -34,6 +36,7 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $postRepository,
             $proposalFormRepository,
             $projectRepository,
+            $officialResponseRepository,
             $logger,
             $router
         );
@@ -52,6 +55,7 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         PostRepository $postRepository,
         ProposalFormRepository $proposalFormRepository,
         ProjectRepository $projectRepository,
+        OfficialResponseRepository $officialResponseRepository,
         Logger $logger,
         Router $router
     ) {
@@ -63,6 +67,7 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $postRepository,
             $proposalFormRepository,
             $projectRepository,
+            $officialResponseRepository,
             $logger,
             $router
         );
@@ -113,29 +118,29 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
                 'projectId' => 'project1',
                 'comments' => 10,
                 'votes' => 5,
-                'lastStep' => 'Selection'
+                'lastStep' => 'Selection',
             ],
             'proposal2' => [
                 'projectId' => 'project2',
                 'comments' => 10,
                 'votes' => 5,
-                'lastStep' => false
-            ]
+                'lastStep' => false,
+            ],
         ];
         $userProposalsUncomplete = [
             'proposal1' => [
                 'projectId' => '',
                 'comments' => 0,
                 'votes' => 0,
-                'lastStep' => false
-            ]
+                'lastStep' => false,
+            ],
         ];
         $userProposalsEmpty = [];
 
         $userProject = [
             'proposals' => [$userProposalsComplete],
             'projectTitle' => 'Project title',
-            'projectType' => 'project type'
+            'projectType' => 'project type',
         ];
 
         $userActivity->setUserProposals(Argument::type('array'))->willReturn($userActivity);
@@ -172,20 +177,20 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
                 'projectId' => 'project1',
                 'comments' => 10,
                 'votes' => 5,
-                'lastStep' => 'Selection'
+                'lastStep' => 'Selection',
             ],
             'proposal2' => [
                 'projectId' => 'project2',
                 'comments' => 10,
                 'votes' => 5,
-                'lastStep' => false
-            ]
+                'lastStep' => false,
+            ],
         ];
 
         $userProject = [
             'proposals' => [],
             'projectTitle' => 'Project title',
-            'projectType' => 'project type'
+            'projectType' => 'project type',
         ];
         $userActivity->setUserProposals(Argument::type('array'))->willReturn($userActivity);
         $userActivity->hasUserProject()->willReturn(true);

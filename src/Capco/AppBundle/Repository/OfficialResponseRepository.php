@@ -35,4 +35,21 @@ class OfficialResponseRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function countPublishedBetween(\DateTime $from, \DateTime $to, string $proposalId): int
+    {
+        $query = $this->createQueryBuilder('response')
+            ->select('COUNT(DISTINCT response)')
+            ->andWhere('response.isPublished = true')
+            ->leftJoin('response.proposal', 'proposal')
+            ->andWhere('proposal.id = :id')
+            ->setParameter('id', $proposalId);
+
+        $query
+            ->andWhere($query->expr()->between('response.publishedAt', ':from', ':to'))
+            ->setParameter('from', $from)
+            ->setParameter('to', $to);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
 }
