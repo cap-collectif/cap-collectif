@@ -183,7 +183,7 @@
         "bjeavons/zxcvbn-php": "^0.4",
         "bgalati/monolog-sentry-handler": "^1.0",
         "overblog/graphql-bundle": "0.12.x-dev",
-        "friendsofsymfony/elastica-bundle": "5.1.*",
+        "friendsofsymfony/elastica-bundle": "5.2.*",
         "sentry/sdk": "^2.0",
         "knplabs/doctrine-behaviors": "~1.1",
         "sonata-project/translation-bundle": "^2.4",
