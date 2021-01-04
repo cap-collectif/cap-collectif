@@ -195,7 +195,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         Argument $args
     ): ?OfficialResponse {
         $officialResponse = null;
-        if ($args->offsetGet('body') || !empty($args->offsetGet('authors'))) {
+        if (strip_tags($args->offsetGet('body')) || !empty($args->offsetGet('authors'))) {
             $officialResponse = $proposalDecision->getOfficialResponse();
             if (null === $officialResponse) {
                 $officialResponse = new OfficialResponse();
@@ -203,8 +203,10 @@ class ChangeProposalDecisionMutation implements MutationInterface
                     ->setProposal($proposalDecision->getProposal())
                     ->setIsPublished(false);
             }
-            $officialResponse->setBody($args->offsetGet('body') ?? '');
+            $officialResponse->setBody(strip_tags($args->offsetGet('body')));
             $this->updateDecisionOfficialResponseAuthors($officialResponse, $args);
+        } elseif ($proposalDecision->getOfficialResponse()) {
+            $this->entityManager->remove($proposalDecision->getOfficialResponse());
         }
 
         $proposalDecision->setOfficialResponse($officialResponse);

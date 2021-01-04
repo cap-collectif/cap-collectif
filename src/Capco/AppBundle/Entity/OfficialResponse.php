@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Traits\NullableTextableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
@@ -19,9 +18,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OfficialResponse
 {
-    use UuidTrait;
     use NullableTextableTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean")
@@ -40,7 +39,7 @@ class OfficialResponse
     private \DateTime $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=Proposal::class, inversedBy="officialResponse", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Proposal::class, inversedBy="officialResponse")
      * @ORM\JoinColumn(nullable=false)
      */
     private Proposal $proposal;
