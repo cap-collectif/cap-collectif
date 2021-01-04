@@ -4,8 +4,11 @@ namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\ProposalAnalysis;
+use Capco\AppBundle\Entity\ProposalAnalyst;
 use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
@@ -40,26 +43,99 @@ class ProposalSpec extends ObjectBehavior
         Proposal $proposal
     ): void {
         $viewer->isAdmin()->willReturn(false);
-        $proposal->viewerCanSeeInBo($viewer)->willReturn(false);
+        $this->viewerCanSeeInBo($viewer)->shouldReturn(false);
 
         $viewer->isAdmin()->willReturn(true);
-        $proposal->viewerCanSeeInBo($viewer)->willReturn(true);
+        $this->viewerCanSeeInBo($viewer)->shouldReturn(true);
     }
 
     public function it_can_be_seen_by_admin_or_super_admin(User $viewer, Proposal $proposal): void
     {
         $viewer->isAdmin()->willReturn(true);
-        $proposal->viewerCanSee($viewer)->willReturn(true);
+        $this->viewerCanSee($viewer)->shouldReturn(true);
     }
 
     public function it_can_be_seen_by_author_if_not_published(
         User $viewer,
-        Proposal $proposal
+        ProposalForm $proposalForm,
+        CollectStep $collectStep
     ): void {
+        $collectStep->isPrivate()->willReturn(true);
+        $proposalForm->getStep()->willReturn($collectStep);
         $viewer->isAdmin()->willReturn(false);
-        $proposal->isPublished()->willReturn(false);
-        $proposal->getAuthor()->willReturn($viewer);
-        $proposal->viewerCanSee($viewer)->willReturn(true);
+        $this->setProposalForm($proposalForm);
+        $this->setProposalDecisionMaker(null);
+        $this->setSupervisor(null);
+        $this->isPublished()->shouldReturn(false);
+        $this->setAuthor($viewer);
+        $this->viewerCanSee($viewer)->shouldReturn(true);
+    }
+
+    public function it_can_not_be_seen_by_anonymous_if_step_is_private(
+        User $author,
+        ProposalForm $proposalForm,
+        CollectStep $collectStep
+    ): void {
+        $collectStep->isPrivate()->willReturn(true);
+        $proposalForm->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+        $this->setProposalDecisionMaker(null);
+        $this->setSupervisor(null);
+        $this->setAuthor($author);
+        $this->viewerCanSee(null)->shouldReturn(false);
+    }
+
+    public function it_can_be_seen_by_author_if_step_is_private(
+        User $author,
+        ProposalForm $proposalForm,
+        CollectStep $collectStep
+    ): void {
+        $author->isAdmin()->willReturn(false);
+        $collectStep->isPrivate()->willReturn(true);
+        $proposalForm->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+        $this->setProposalDecisionMaker(null);
+        $this->setSupervisor(null);
+        $this->setAuthor($author);
+        $this->viewerCanSee($author)->shouldReturn(true);
+    }
+
+    public function it_can_be_seen_by_analyst_if_step_is_private(
+        User $analyst,
+        ProposalAnalyst $proposalAnalyst,
+        ProposalForm $proposalForm,
+        CollectStep $collectStep
+    ): void {
+        $analyst->isAdmin()->willReturn(false);
+        $collectStep->isPrivate()->willReturn(true);
+        $proposalForm->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+        $this->setProposalDecisionMaker(null);
+        $this->setSupervisor(null);
+
+        $proposalAnalyst->setProposal($this);
+        $proposalAnalyst->setAnalyst($analyst);
+        $proposalAnalyst->getProposal()->willReturn($this);
+        $proposalAnalyst->getAnalyst()->willReturn($analyst);
+        $this->addProposalAnalyst($proposalAnalyst);
+        $this->getProposalAnalystsArray()->shouldReturn([$proposalAnalyst]);
+
+        $this->viewerCanSee($analyst)->shouldReturn(true);
+    }
+
+    public function it_can_be_seen_by_admin_if_step_is_private(
+        User $author,
+        ProposalForm $proposalForm,
+        CollectStep $collectStep
+    ): void {
+        $author->isAdmin()->willReturn(true);
+        $collectStep->isPrivate()->willReturn(true);
+        $proposalForm->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+        $this->setProposalDecisionMaker(null);
+        $this->setSupervisor(null);
+        $this->setAuthor($author);
+        $this->viewerCanSee($author)->shouldReturn(true);
     }
 
     public function it_should_return_todo_progress_status()
