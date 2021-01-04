@@ -12,6 +12,11 @@ const ChangeProposalAnalysisMutation = /* GraphQL*/ `
           id
         }
         responses {
+          ...on MediaResponse {
+            medias {
+              url 
+            }
+          }
           ...on ValueResponse {
             formattedValue
           }
@@ -30,6 +35,11 @@ const AnalyseProposalAnalysisMutation = /* GraphQL */ `
         id
         comment
         responses {
+          ... on MediaResponse {
+            medias {
+              url
+            }
+          }
           ... on ValueResponse {
             formattedValue
           }

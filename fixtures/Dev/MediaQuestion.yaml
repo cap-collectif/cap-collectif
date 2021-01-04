@@ -195,4 +195,9 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         private: true
         required: true
         type: 7 # media
+    mediaquestionIdfQuestionnaireEvaluation:
+        id: 144
+        title: Mettez vos plus belles photos de Genshin Impact
+        required: false
+        type: 7 # media
     # End

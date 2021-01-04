@@ -74,7 +74,8 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_decision-maker_email' => 'decision.decisionMaker.email',
         'proposal_decision-maker_CostEstimated' => 'decision.estimatedCost',
         'proposal_decision-maker_OfficialResponseDraft' => 'decision.officialResponse.isPublished',
-        'proposal_decision-maker_OfficialResponseDraft_Author' => 'decision.officialResponse.authors',
+        'proposal_decision-maker_OfficialResponseDraft_Author' =>
+            'decision.officialResponse.authors',
         'proposal_decision-maker_OfficialResponseDraft_Content' => 'decision.officialResponse.body',
         'proposal_decision-maker_decision' => 'decision.state',
         'proposal_decision-maker_decision_reason' => 'decision.refusedReason.name',
@@ -142,8 +143,15 @@ fragment proposalInfos on Proposal {
     estimatedCost
     responses {
       id
+      __typename
       ...on ValueResponse{
         formattedValue
+      }
+      ... on MediaResponse {
+        medias {
+          id
+          url
+        }
       }
       question {
         id
@@ -183,153 +191,6 @@ EOF;
         $this->projectRootDir = $projectRootDir;
         $this->projectRepository = $projectRepository;
         $this->connectionTraversor = $connectionTraversor;
-    }
-
-    public function getRowCellValue(array $proposal, string $headerCell)
-    {
-        $fragmentDot = explode('.', $headerCell);
-        if (1 === \count($fragmentDot)) {
-            return $proposal[$headerCell] ?? '';
-        }
-        $value = $proposal;
-        foreach ($fragmentDot as $fragment) {
-            if (!$value || ($value && !\array_key_exists($fragment, $value))) {
-                return '';
-            }
-            $value = $value[$fragment];
-        }
-
-        return $value ?? '';
-    }
-
-    public function setAnalysisRows(
-        WriterInterface $writer,
-        array $defaultRowContent,
-        array $analyses,
-        array $dynamicQuestionHeaderPart
-    ): void {
-        foreach ($analyses as $analysis) {
-            $dynamicRowContent = [];
-            foreach (self::ANALYST_DEFAULT_HEADER as $headerKey => $headerPath) {
-                $cellValue = $this->getRowCellValue($analysis, $headerPath);
-                $dynamicRowContent[] = $cellValue;
-            }
-            foreach ($dynamicQuestionHeaderPart as $headerKey => $headerPath) {
-                $cellValue = $this->getRowCellValue($analysis, $headerPath);
-                $dynamicRowContent[] = $cellValue;
-            }
-            $writer->addRow(
-                WriterEntityFactory::createRowFromArray(
-                    array_merge($defaultRowContent, $dynamicRowContent)
-                )
-            );
-        }
-    }
-
-    public function formatAuthors(array $authors): string
-    {
-        $authorUsernames = [];
-        foreach ($authors as $author) {
-            $authorUsernames[] = $author['username'];
-        }
-
-        return implode(', ', $authorUsernames);
-    }
-
-    public function setDecisionRows(
-        WriterInterface $writer,
-        array $defaultRowContent,
-        array $proposal
-    ): void {
-        $dynamicRowContent = [];
-        foreach (self::DECISION_DEFAULT_HEADER as $headerKey => $headerPath) {
-            $cellValue = $this->getRowCellValue($proposal, $headerPath);
-            $dynamicRowContent[] = \is_array($cellValue)
-                ? $this->formatAuthors($cellValue)
-                : $cellValue;
-        }
-
-        $writer->addRow(
-            WriterEntityFactory::createRowFromArray(
-                array_merge($defaultRowContent, $dynamicRowContent)
-            )
-        );
-    }
-
-    public function addProposalRow(
-        WriterInterface $writer,
-        OutputInterface $output,
-        array $proposal,
-        array $dynamicQuestionHeaderPart,
-        bool $isOnlyDecision,
-        bool $isVerbose = false
-    ): void {
-        $defaultRowContent = [];
-        $analyses = $proposal['analyses'] ?? [];
-        $assessment = $proposal['assessment'] ?? [];
-        $decision = $proposal['decision'] ?? [];
-        if (!$analyses && !$assessment && !$decision) {
-            if ($isVerbose) {
-                $output->writeln("\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>");
-            }
-
-            $output->writeln(
-                "\t<info>/!\\ There is no analysis in this proposal -> generating empty export.</info>"
-            );
-
-            return;
-        }
-        if ($isVerbose) {
-            $output->writeln("\t<info>Adding analysis of proposal ${proposal['title']}.</info>");
-        }
-
-        // We iterate over each column of a row to fill them
-        foreach (self::PROPOSAL_DEFAULT_HEADER as $headerKey => $headerPath) {
-            $cellValue = $this->getRowCellValue($proposal, $headerPath);
-            $defaultRowContent[] = $cellValue;
-        }
-
-        if ($isOnlyDecision) {
-            $this->setDecisionRows($writer, $defaultRowContent, $proposal);
-        } else {
-            $this->setAnalysisRows(
-                $writer,
-                $defaultRowContent,
-                $proposal['analyses'],
-                $dynamicQuestionHeaderPart
-            );
-        }
-    }
-
-    public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): array
-    {
-        $dynamicQuestionHeaderPart = [];
-        if (!$isOnlyDecision) {
-            $dynamicQuestionHeaderPart = $this->getDynamicQuestionHeaderForProject(
-                $firstAnalysisStepForm
-            );
-            $writer->addRow(
-                WriterEntityFactory::createRowFromArray(
-                    array_keys(
-                        array_merge(
-                            self::PROPOSAL_DEFAULT_HEADER,
-                            self::ANALYST_DEFAULT_HEADER,
-                            $dynamicQuestionHeaderPart
-                        )
-                    )
-                )
-            );
-        } else {
-            $writer->addRow(
-                WriterEntityFactory::createRowFromArray(
-                    array_keys(
-                        array_merge(self::PROPOSAL_DEFAULT_HEADER, self::DECISION_DEFAULT_HEADER)
-                    )
-                )
-            );
-        }
-
-        return $dynamicQuestionHeaderPart;
     }
 
     public function generateProjectProposalsCSV(
@@ -428,11 +289,183 @@ EOF;
         return self::getShortenedFilename("project-${projectSlug}-analysis");
     }
 
-    protected function getPath(string $projectSlug, bool $isOnlyDecision): string
+    public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): array
     {
-        return $this->projectRootDir .
-            '/public/export/' .
-            self::getFilename($projectSlug, $isOnlyDecision);
+        $dynamicQuestionHeaderPart = [];
+        if (!$isOnlyDecision) {
+            $dynamicQuestionHeaderPart = $this->getDynamicQuestionHeaderForProject(
+                $firstAnalysisStepForm
+            );
+            $writer->addRow(
+                WriterEntityFactory::createRowFromArray(
+                    array_keys(
+                        array_merge(
+                            self::PROPOSAL_DEFAULT_HEADER,
+                            self::ANALYST_DEFAULT_HEADER,
+                            $dynamicQuestionHeaderPart
+                        )
+                    )
+                )
+            );
+        } else {
+            $writer->addRow(
+                WriterEntityFactory::createRowFromArray(
+                    array_keys(
+                        array_merge(self::PROPOSAL_DEFAULT_HEADER, self::DECISION_DEFAULT_HEADER)
+                    )
+                )
+            );
+        }
+
+        return $dynamicQuestionHeaderPart;
+    }
+
+    public function addProposalRow(
+        WriterInterface $writer,
+        OutputInterface $output,
+        array $proposal,
+        array $dynamicQuestionHeaderPart,
+        bool $isOnlyDecision,
+        bool $isVerbose = false
+    ): void {
+        $defaultRowContent = [];
+        $analyses = $proposal['analyses'] ?? [];
+        $assessment = $proposal['assessment'] ?? [];
+        $decision = $proposal['decision'] ?? [];
+        if (!$analyses && !$assessment && !$decision) {
+            if ($isVerbose) {
+                $output->writeln("\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>");
+            }
+
+            $output->writeln(
+                "\t<info>/!\\ There is no analysis in this proposal -> generating empty export.</info>"
+            );
+
+            return;
+        }
+        if ($isVerbose) {
+            $output->writeln("\t<info>Adding analysis of proposal ${proposal['title']}.</info>");
+        }
+
+        // We iterate over each column of a row to fill them
+        foreach (self::PROPOSAL_DEFAULT_HEADER as $headerKey => $headerPath) {
+            $cellValue = $this->getRowCellValue($proposal, $headerPath);
+            $defaultRowContent[] = $cellValue;
+        }
+
+        if ($isOnlyDecision) {
+            $this->setDecisionRows($writer, $defaultRowContent, $proposal);
+        } else {
+            $this->setAnalysisRows(
+                $writer,
+                $defaultRowContent,
+                $proposal['analyses'],
+                $dynamicQuestionHeaderPart
+            );
+        }
+    }
+
+    public function getRowCellValue(array $proposal, string $headerCell)
+    {
+        $fragmentDot = explode('.', $headerCell);
+        if (1 === \count($fragmentDot)) {
+            return $proposal[$headerCell] ?? '';
+        }
+        $value = $proposal;
+        foreach ($fragmentDot as $fragment) {
+            if (!$value || ($value && !\array_key_exists($fragment, $value))) {
+                return '';
+            }
+            $value = $value[$fragment];
+        }
+
+        return $value ?? '';
+    }
+
+    public function getProposalQuestionAnswer(array $proposal, string $questionId): string
+    {
+        if (!isset($proposal['responses'])) {
+            return '';
+        }
+        $match = array_values(
+            array_filter(
+                $proposal['responses'],
+                static fn(array $response) => isset($response['question']['id']) &&
+                    $response['question']['id'] === $questionId
+            )
+        );
+
+        if (\count($match) > 0) {
+            $response = $match[0];
+            switch ($response['__typename']) {
+                case 'ValueResponse':
+                    return $response['formattedValue'] ?? '';
+                case 'MediaResponse':
+                    $urls = array_map(
+                        static fn(array $media) => $media['url'],
+                        $response['medias']
+                    );
+
+                    return implode(' | ', $urls);
+            }
+        }
+
+        return '';
+    }
+
+    public function setDecisionRows(
+        WriterInterface $writer,
+        array $defaultRowContent,
+        array $proposal
+    ): void {
+        $dynamicRowContent = [];
+        foreach (self::DECISION_DEFAULT_HEADER as $headerKey => $headerPath) {
+            $cellValue = $this->getRowCellValue($proposal, $headerPath);
+            $dynamicRowContent[] = \is_array($cellValue)
+                ? $this->formatAuthors($cellValue)
+                : $cellValue;
+        }
+
+        $writer->addRow(
+            WriterEntityFactory::createRowFromArray(
+                array_merge($defaultRowContent, $dynamicRowContent)
+            )
+        );
+    }
+
+    public function formatAuthors(array $authors): string
+    {
+        $authorUsernames = [];
+        foreach ($authors as $author) {
+            $authorUsernames[] = $author['username'];
+        }
+
+        return implode(', ', $authorUsernames);
+    }
+
+    public function setAnalysisRows(
+        WriterInterface $writer,
+        array $defaultRowContent,
+        array $analyses,
+        array $dynamicQuestionHeaderPart
+    ): void {
+        foreach ($analyses as $analysis) {
+            $dynamicRowContent = [];
+            foreach (self::ANALYST_DEFAULT_HEADER as $headerKey => $headerPath) {
+                $cellValue = $this->getRowCellValue($analysis, $headerPath);
+                $dynamicRowContent[] = $cellValue;
+            }
+            foreach ($dynamicQuestionHeaderPart as $questionTitle => $questionId) {
+                $cellValue = $this->getProposalQuestionAnswer($analysis, $questionId);
+                $dynamicRowContent[] = $cellValue;
+            }
+
+            $writer->addRow(
+                WriterEntityFactory::createRowFromArray(
+                    array_merge($defaultRowContent, $dynamicRowContent)
+                )
+            );
+        }
     }
 
     protected function configure(): void
@@ -512,6 +545,7 @@ ${PROPOSAL_FRAGMENT}
             analysisConfiguration {
               evaluationForm {
                 questions {
+                  id
                   title
                 }
               }
@@ -599,6 +633,7 @@ ${PROPOSAL_FRAGMENT}
             analysisConfiguration {
               evaluationForm {
                 questions {
+                  id  
                   title
                 }
               }
@@ -611,15 +646,20 @@ ${PROPOSAL_FRAGMENT}
 EOF;
     }
 
+    protected function getPath(string $projectSlug, bool $isOnlyDecision): string
+    {
+        return $this->projectRootDir .
+            '/public/export/' .
+            self::getFilename($projectSlug, $isOnlyDecision);
+    }
+
     private function getDynamicQuestionHeaderForProject(array $form): array
     {
         $qHeader = [];
         if (isset($form['analysisConfiguration']['evaluationForm']['questions'])) {
             $questions = $form['analysisConfiguration']['evaluationForm']['questions'];
-            $index = 0;
             foreach ($questions as $question) {
-                $qHeader[$question['title']] = "responses.${index}.formattedValue";
-                ++$index;
+                $qHeader[$question['title']] = $question['id'];
             }
         }
 

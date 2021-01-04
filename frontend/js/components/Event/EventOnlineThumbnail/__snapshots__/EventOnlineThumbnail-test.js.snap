@@ -28,7 +28,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started 1`] = `
            
           <Component
             unit="year"
-            value={2}
+            value={1}
           />
         </strong>
       </span>
@@ -78,7 +78,7 @@ exports[`<EventOnlineThumbnail /> it renders correctly when not started and anim
            
           <Component
             unit="year"
-            value={2}
+            value={1}
           />
         </strong>
       </span>

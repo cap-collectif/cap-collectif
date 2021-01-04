@@ -1,25 +1,29 @@
 Capco\AppBundle\Entity\Responses\MediaResponse:
-  mediaResponse1:
-    question: '@mediaquestion1'
-    proposal: '@proposal1'
-    medias: ['@MediaCapcoSite', '@ProfilePicSpyl']
-  mediaResponse2:
-    question: '@mediaquestion2'
-    proposal: '@proposal1'
-    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
-  mediaResponse3:
-    question: '@mediaquestion2'
-    proposal: '@proposal2'
-    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
-  mediaResponse4:
-    question: '@mediaquestion2'
-    proposal: '@proposal12'
-    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
-  mediaResponse5:
-    question: '@mediaquestion3'
-    proposal: '@proposal106'
-    medias: ['@MediaCapcoSite', '@ProfilePicSpyl']
-  mediaResponse6:
-    question: '@mediaquestion4'
-    proposal: '@proposal106'
-    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
+    mediaResponse1:
+        question: '@mediaquestion1'
+        proposal: '@proposal1'
+        medias: ['@MediaCapcoSite', '@ProfilePicSpyl']
+    mediaResponse2:
+        question: '@mediaquestion2'
+        proposal: '@proposal1'
+        medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
+    mediaResponse3:
+        question: '@mediaquestion2'
+        proposal: '@proposal2'
+        medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
+    mediaResponse4:
+        question: '@mediaquestion2'
+        proposal: '@proposal12'
+        medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
+    mediaResponse5:
+        question: '@mediaquestion3'
+        proposal: '@proposal106'
+        medias: ['@MediaCapcoSite', '@ProfilePicSpyl']
+    mediaResponse6:
+        question: '@mediaquestion4'
+        proposal: '@proposal106'
+        medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
+    mediaResponseIdfGenshinImpactPictureOmar:
+        question: '@mediaquestionIdfQuestionnaireEvaluation'
+        analysis: '@proposalAnalysisIdf1Omar'
+        medias: ['@ProfilePicSfavot']
