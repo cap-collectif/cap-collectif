@@ -198,6 +198,10 @@ class SiteParameterAdmin extends AbstractAdmin
         $zones = [];
 
         foreach ($timezones as $zone) {
+            if ('UTC' === $zone) {
+                continue;
+            }
+
             $zones[$zone] = sprintf(
                 '%s (GMT%s)',
                 self::formatTimezoneName($zone),
