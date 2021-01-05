@@ -180,7 +180,7 @@
         "egeloen/ckeditor-bundle": "dev-feature/symfony4-compat#f9f68afcff81a210f2122013a852384f4102b65a",
         "egeloen/json-builder": "dev-feature/symfony4",
         "stof/doctrine-extensions-bundle": "1.4",
-        "bjeavons/zxcvbn-php": "^0.4",
+        "bjeavons/zxcvbn-php": "^1.0",
         "bgalati/monolog-sentry-handler": "^1.0",
         "overblog/graphql-bundle": "0.12.x-dev",
         "friendsofsymfony/elastica-bundle": "5.2.*",

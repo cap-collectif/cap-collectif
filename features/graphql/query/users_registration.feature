@@ -48,7 +48,7 @@ Scenario: User wants to check the complexity of his bad password
   """
   {
     "data": {
-      "passwordComplexityScore": 0
+      "passwordComplexityScore": 1
     }
   }
   """
