@@ -318,8 +318,7 @@ Capco\AppBundle\Entity\Project:
     projectCannabis:
         id: 'projectCannabis'
         title: Débat sur le cannabis
-        # TODO: create a new project type
-        projectType: '@projectType8'
+        projectType: '@projectType9'
         createdAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
@@ -336,7 +335,7 @@ Capco\AppBundle\Entity\Project:
     projectOculusQuest:
         id: 'projectOculusQuest'
         title: Débat sur l'Oculus Quest
-        projectType: '@projectType8'
+        projectType: '@projectType9'
         createdAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
@@ -344,7 +343,7 @@ Capco\AppBundle\Entity\Project:
     projectConfinement:
         id: 'projectConfinement'
         title: Débat du mois
-        projectType: '@projectType8'
+        projectType: '@projectType9'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>

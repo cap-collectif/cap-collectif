@@ -39,3 +39,8 @@ Capco\AppBundle\Entity\ProjectType:
         title: project.types.suggestionBox
         slug: suggestion-box
         color: '#f0ad4e'
+    projectType9:
+        id: 9
+        title: global.debate
+        slug: debate
+        color: '#7ED6DF'

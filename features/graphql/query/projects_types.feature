@@ -25,7 +25,8 @@ Scenario: GraphQL client wants to list projects types
         {"id":"5","title":"project.types.petition"},
         {"id":"6","title":"project.types.publicInquiry"},
         {"id":"7","title":"global.questionnaire"},
-        {"id":"8","title":"project.types.suggestionBox"}
+        {"id":"8","title":"project.types.suggestionBox"},
+        {"id":"9","title":"global.debate"}
       ]
     }
   }
@@ -81,6 +82,11 @@ Scenario: GraphQL client wants to list projects types only used by projects
               "id":"8",
               "title":"project.types.suggestionBox",
               "slug":"suggestion-box"
+           },
+           {
+              "id":"9",
+              "title":"global.debate",
+              "slug":"debate"
            }
         ]
      }
@@ -138,6 +144,11 @@ Scenario: GraphQL user wants to list projects types only used by projects
              "id":"8",
              "title":"project.types.suggestionBox",
              "slug":"suggestion-box"
+           },
+           {
+              "id":"9",
+              "title":"global.debate",
+              "slug":"debate"
            }
         ]
      }
@@ -195,7 +206,12 @@ Scenario: GraphQL admin wants to list projects types only used by projects
               "id":"8",
               "title":"project.types.suggestionBox",
               "slug":"suggestion-box"
-            }
+           },
+           {
+              "id":"9",
+              "title":"global.debate",
+              "slug":"debate"
+           }
         ]
      }
   }
