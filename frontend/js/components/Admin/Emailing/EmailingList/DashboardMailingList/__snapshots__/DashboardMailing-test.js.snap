@@ -59,5 +59,6 @@ exports[`<DashboardMailingList /> should renders correctly 1`] = `
       />
     </PickableList.Body>
   </PickableList>
+  <ModalOnboarding />
 </Fragment>
 `;

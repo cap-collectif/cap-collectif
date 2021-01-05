@@ -11,6 +11,7 @@ import MailingListItem from '~/components/Admin/Emailing/EmailingList/MailingLis
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 import { type DashboardMailingList_query } from '~relay/DashboardMailingList_query.graphql';
 import NoMailingList from '~/components/Admin/Emailing/EmailingList/NoMailingList/NoMailingList';
+import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding';
 
 export const MAILING_LIST_PAGINATION = 30;
 
@@ -127,6 +128,7 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
             .find(m => m.id === mailingListSelected)}
         />
       )}
+      <ModalOnboarding />
     </>
   );
 };

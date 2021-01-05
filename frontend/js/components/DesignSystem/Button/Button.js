@@ -95,17 +95,17 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
         {...props}>
         {isLoading ? (
           <>
-            <Spinner marginRight={leftIcon || rightIcon ? 2 : 0} />
+            <Spinner marginRight={leftIcon || rightIcon ? 1 : 0} />
             {leftIcon || rightIcon ? children : null}
           </>
         ) : (
           <>
             {leftIcon && (
-              <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={2} />
+              <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={1} />
             )}
             {children}
             {rightIcon && (
-              <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={2} />
+              <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={1} />
             )}
           </>
         )}

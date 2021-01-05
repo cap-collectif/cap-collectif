@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import ReactPlaceholder from 'react-placeholder';
 import environment from '~/createRelayEnvironment';
@@ -17,6 +17,10 @@ import type {
 } from '~relay/EmailingCampaignPageQuery.graphql';
 import { ORDER_BY } from './DashboardCampaign/DashboardCampaign.reducer';
 import DashboardCampaignPlaceholder from './DashboardCampaignPlaceholder/DashboardCampaignPlaceholder';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Tag from '~ds/Tag/Tag';
+import Button from '~ds/Button/Button';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
 const listCampaign = ({
   error,
@@ -65,6 +69,7 @@ export const createQueryVariables = (
 
 export const EmailingCampaignPage = () => {
   const { parameters, dispatch } = useDashboardCampaignContext();
+  const intl = useIntl();
 
   React.useEffect(() => {
     dispatch({
@@ -75,7 +80,24 @@ export const EmailingCampaignPage = () => {
   return (
     <Container className="emailing-campaign-page">
       <Header>
-        <FormattedMessage id="admin-menu-campaign-list" tagName="h2" />
+        <Flex direction="row">
+          <FormattedMessage id="admin-menu-campaign-list" tagName="h2" />
+          <Tag variant="yellow" ml={2}>
+            {intl.formatMessage({ id: 'global.beta' })}
+          </Tag>
+        </Flex>
+
+        <Button
+          leftIcon={ICON_NAME.CIRCLE_INFO}
+          variant="link"
+          variantColor="primary"
+          onClick={() => {
+            window.location.href = intl.formatMessage({
+              id: 'admin.help.link.emailing',
+            });
+          }}>
+          {intl.formatMessage({ id: 'about-campaigns' })}
+        </Button>
       </Header>
 
       <Content>

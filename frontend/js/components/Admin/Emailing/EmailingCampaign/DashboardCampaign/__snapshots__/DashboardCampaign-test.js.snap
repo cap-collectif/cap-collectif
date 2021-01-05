@@ -171,6 +171,7 @@ exports[`<DashboardCampaign /> should renders correctly 1`] = `
     onClose={[Function]}
     show={false}
   />
+  <ModalOnboarding />
 </Fragment>
 `;
 
@@ -303,5 +304,6 @@ exports[`<DashboardCampaign /> should renders correctly with no campaigns 1`] = 
     onClose={[Function]}
     show={false}
   />
+  <ModalOnboarding />
 </Fragment>
 `;

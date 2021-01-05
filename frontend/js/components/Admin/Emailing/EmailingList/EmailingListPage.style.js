@@ -7,8 +7,11 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 export const Header: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px;
-  font-weight: bold;
   background-color: #fff;
   color: #000;
 

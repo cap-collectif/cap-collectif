@@ -19,6 +19,7 @@ import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMu
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import NoCampaign from '~/components/Admin/Emailing/EmailingCampaign/NoCampaign/NoCampaign';
+import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding';
 
 export const CAMPAIGN_PAGINATION = 30;
 
@@ -234,6 +235,7 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
       </PickableList>
 
       <ModalConfirmDelete show={isOpen} onClose={onClose} campaignsIds={selectedRows} />
+      <ModalOnboarding />
     </>
   );
 };

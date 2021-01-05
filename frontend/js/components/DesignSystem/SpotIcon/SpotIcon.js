@@ -10,6 +10,7 @@ import AppBox from '~ui/Primitives/AppBox';
 export const SPOT_ICON_NAME = {
   PENCIL_SOFTWARE: 'PENCIL_SOFTWARE',
   EMAIL_TIMEOUT: 'EMAIL_TIMEOUT',
+  EMAIL_SEND: 'EMAIL_SEND',
   RATING_CLICK: 'RATING_CLICK',
   DELETE: 'DELETE',
 };
@@ -17,7 +18,7 @@ export const SPOT_ICON_NAME = {
 export const SPOT_ICON_SIZE = {
   SM: 'sm', // 56px
   MD: 'md', // 64px
-  LG: 'lg', // 104px
+  LG: 'lg', // 124px
 };
 
 export type Props = {|
@@ -36,7 +37,7 @@ const getSize = (size: $PropertyType<Props, 'size'> = 'md'): number | string => 
     default:
       return 12;
     case 'lg':
-      return '104px';
+      return '124px';
   }
 };
 
@@ -55,7 +56,7 @@ const SpotIconInner: StyledComponent<{}, {}, any> = styled(AppBox).attrs(props =
         p: '10px',
       },
       lg: {
-        size: '104px',
+        size: '124px',
         p: 4,
       },
     },
