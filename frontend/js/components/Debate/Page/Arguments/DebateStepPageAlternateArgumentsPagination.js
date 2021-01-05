@@ -21,12 +21,13 @@ import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportA
 import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
 
 type Props = {|
+  +handleChange?: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
   +debate: DebateStepPageAlternateArgumentsPagination_debate$key,
   +viewer: ?DebateStepPageAlternateArgumentsPagination_viewer$key,
   +preview?: boolean,
 |};
 
-export const CONNECTION_NODES_PER_PAGE = 2;
+export const CONNECTION_NODES_PER_PAGE = 8;
 
 const MOBILE_PREVIEW_MAX_ARGUMENTS = 4;
 
@@ -93,6 +94,7 @@ export const CONNECTION_CONFIG = {
       $debateId: ID!
       $first: Int!
       $cursor: String
+      $orderBy: DebateArgumentOrder
       $isAuthenticated: Boolean!
     ) {
       debate: node(id: $debateId) {
@@ -101,7 +103,7 @@ export const CONNECTION_CONFIG = {
             isAuthenticated: $isAuthenticated
             first: $first
             cursor: $cursor
-            orderBy: { field: PUBLISHED_AT, direction: DESC }
+            orderBy: $orderBy
           )
       }
     }
@@ -111,10 +113,11 @@ export const CONNECTION_CONFIG = {
 export const DebateStepPageAlternateArgumentsPagination = ({
   debate: debateFragment,
   viewer: viewerFragment,
+  handleChange,
   preview = false,
 }: Props) => {
   const { onClose, onOpen, isOpen } = useMultipleDisclosure({});
-  const [debate, { hasMore, loadMore }]: [
+  const [debate, paginationProps]: [
     DebateStepPageAlternateArgumentsPagination_debate,
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debateFragment);
@@ -125,6 +128,8 @@ export const DebateStepPageAlternateArgumentsPagination = ({
     id: string,
     type: 'FOR' | 'AGAINST',
   }>(null);
+
+  if (handleChange) handleChange({ ...paginationProps, hasMore: paginationProps.hasMore() });
 
   if (!debateFragment || !debate) return null;
   const debateArguments =
@@ -171,12 +176,12 @@ export const DebateStepPageAlternateArgumentsPagination = ({
         <InfiniteScroll
           pageStart={0}
           loadMore={() => {
-            loadMore(CONNECTION_CONFIG, CONNECTION_NODES_PER_PAGE, error => {
+            paginationProps.loadMore(CONNECTION_CONFIG, CONNECTION_NODES_PER_PAGE, error => {
               // eslint-disable-next-line no-console
               console.error(error);
             });
           }}
-          hasMore={hasMore()}
+          hasMore={paginationProps.hasMore()}
           loader={
             <Flex align="center" justify="center" key={0}>
               <Spinner />

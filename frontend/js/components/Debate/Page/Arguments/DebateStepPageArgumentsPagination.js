@@ -20,7 +20,7 @@ type Props = {|
   +handleChange: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
 |};
 
-export const CONNECTION_NODES_PER_PAGE = 1; // Pour la recette plus tard, ça bougera
+export const CONNECTION_NODES_PER_PAGE = 8;
 
 export const FRAGMENT = graphql`
   fragment DebateStepPageArgumentsPagination_debate on Debate

@@ -41,6 +41,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
     ?.filter(Boolean)
     .map(edge => edge.node)
     .filter(Boolean);
+  if (!articles || articles.length === 0) return null;
   return (
     <AppBox id={step ? 'DebateStepPageLinkedArticles' : 'DebateStepPageLinkedArticlesLoading'}>
       {step && step.debate && isMobile && (

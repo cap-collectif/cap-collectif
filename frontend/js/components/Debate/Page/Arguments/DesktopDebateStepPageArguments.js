@@ -17,13 +17,12 @@ import DebateStepPageArgumentsPagination, {
 import type { RelayHookPaginationProps as PaginationProps } from '~/types';
 import { Menu } from '~ds/Menu';
 import Text from '~ui/Primitives/Text';
+import type { Filter } from '~/components/Debate/Page/Arguments/types';
 
 type Props = {|
   +step: ?DebateStepPageArguments_step,
   +viewer: ?DesktopDebateStepPageArguments_viewer,
 |};
-
-type Filter = 'ASC' | 'DESC' | 'MOST_SUPPORTED' | 'RANDOM';
 
 export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
   const [filter, setFilter] = useState<Filter>('DESC');
@@ -87,11 +86,6 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
               <Menu.OptionItem value="MOST_SUPPORTED">
                 <Text>
                   <FormattedMessage tagName={React.Fragment} id="filter.most_supported" />
-                </Text>
-              </Menu.OptionItem>
-              <Menu.OptionItem value="RANDOM">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="global.filter_random" />
                 </Text>
               </Menu.OptionItem>
             </Menu.OptionGroup>
