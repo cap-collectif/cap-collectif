@@ -65,6 +65,29 @@ abstract class Search
         return $results;
     }
 
+    /**
+     * Type does not exists anymore in Elasticsearch,
+     * so we use this method to add a "objectType" filter.
+     */
+    protected function addObjectTypeFilter(Query $query, $type = null)
+    {
+        if (!$this->type && !$type) {
+            throw new \RuntimeException('Type is not specified!');
+        }
+
+        $filter = new Query\Term(['objectType' => $type ?? $this->type]);
+
+        $bool = $query->getQuery();
+
+        if (!($bool instanceof Query\BoolQuery)) {
+            $bool = new Query\BoolQuery();
+            $bool->addMust($query->getQuery());
+        }
+
+        $bool->addFilter($filter);
+        $query->setQuery($bool);
+    }
+
     protected function searchTermsInMultipleFields(
         Query\BoolQuery $query,
         array $fields,

@@ -29,7 +29,6 @@ class QuestionChoiceSearch extends Search
 
         foreach ($questionDatas as $questionData) {
             $searchQuery = $this->index->createSearch();
-            $searchQuery->addType($this->type);
             $boolQuery = new BoolQuery();
 
             list($term, $cursor, $limit, $random, $isRandomQuestionChoices, $seed) = [
@@ -38,13 +37,14 @@ class QuestionChoiceSearch extends Search
                 $questionData['args']->offsetGet('first'),
                 $questionData['args']->offsetGet('allowRandomize'),
                 $questionData['isRandomQuestionChoices'],
-                $questionData['seed'] ?: null
+                $questionData['seed'] ?: null,
             ];
             $boolQuery->addFilter(new Term(['question.id' => $questionData['id']]));
 
             if ($random && $isRandomQuestionChoices) {
                 $query = $this->getRandomSortedQuery($boolQuery, $seed);
                 $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
+                $this->addObjectTypeFilter($query, $this->type);
             } else {
                 $query = new Query();
                 if (!$term) {
@@ -70,12 +70,13 @@ class QuestionChoiceSearch extends Search
                         (new Query\MatchPhrasePrefix())
                             ->setFieldQuery('label', $sanitizedTerm)
                             ->setFieldMaxExpansions('label'),
-                        new Query\Match('label', $sanitizedTerm)
+                        new Query\Match('label', $sanitizedTerm),
                     ]);
                     $query->setQuery($boolQuery);
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
                     $query->setMinScore(0.1);
                 }
+                $this->addObjectTypeFilter($query, $this->type);
             }
 
             if ($cursor) {
@@ -91,10 +92,12 @@ class QuestionChoiceSearch extends Search
         $responses = $multiSearchQuery->search();
         $results = [];
         foreach ($responses->getResultSets() as $key => $resultSet) {
+            $data = $resultSet->getResponse()->getData();
+            $count = $data['hits']['total']['value'];
             $results[] = new ElasticsearchPaginatedResult(
                 $this->getHydratedResultsFromResultSet($this->choiceRepository, $resultSet),
                 $this->getCursors($resultSet),
-                $resultSet->getTotalHits()
+                $count
             );
         }
 

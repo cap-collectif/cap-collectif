@@ -253,8 +253,9 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
+        $count = $response->getResponse()->getData()['hits']['total']['value'];
         if (0 === $limit && null === $cursor) {
-            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
+            return new ElasticsearchPaginatedResult([], [], $count);
         }
 
         return $this->getQueryOrderedResults($response);
@@ -285,9 +286,10 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
+        $count = $response->getResponse()->getData()['hits']['total']['value'];
 
         if (0 === $limit && null === $cursor) {
-            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
+            return new ElasticsearchPaginatedResult([], [], $count);
         }
 
         return $this->getQueryOrderedResults($response);
@@ -431,7 +433,7 @@ class ContributionSearch extends Search
         $query
             ->addFilter(
                 new Query\Terms(
-                    '_type',
+                    'objectType',
                     $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
                 )
             )

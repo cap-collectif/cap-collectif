@@ -46,7 +46,7 @@ class OpinionVersionNormalizer implements
         $voteCountNok = 0;
         $voteCountMitige = 0;
         $votes = $this->voteSearch->getVotesCountsByVersion($object->getId());
-        $data['votesCount'] = $votes->getTotalHits();
+        $data['votesCount'] = $votes->getResponse()->getData()['hits']['total']['value'];
         foreach ($votes->getAggregation('votesCounts')['buckets'] as $voteCounts) {
             $voteValue = $voteCounts['key'];
             if (OpinionVote::VOTE_OK === $voteValue) {

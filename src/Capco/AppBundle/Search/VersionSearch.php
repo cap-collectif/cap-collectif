@@ -80,14 +80,17 @@ class VersionSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
+        $data = $response->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
 
         $cursors = $this->getCursors($response);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->opinionVersionRepo, $response),
             $cursors,
-            $response->getTotalHits()
+            $count
         );
     }
 

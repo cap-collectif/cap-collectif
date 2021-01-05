@@ -34,7 +34,8 @@ class CommentSearch extends Search
         $query = $this->createCommentsByAuthorViewerCanSeeQuery($author, $viewer);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
@@ -48,7 +49,8 @@ class CommentSearch extends Search
         $query = $this->createPublicCommentsByAuthorQuery($author);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
+        $response = $this->index->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
@@ -62,7 +64,8 @@ class CommentSearch extends Search
         $query = $this->createCommentsByUserQuery($user);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
