@@ -16,10 +16,14 @@ export type Props = {|
 const MenuListItemInner = styled(Flex).attrs(props => ({
   bg: props.active ? 'gray.100' : 'transparent',
 }))`
+  pointer-events: all;
+  &[disabled] {
+    pointer-events: none;
+  }
   &:hover {
     cursor: pointer;
     &[disabled] {
-      user-select: none;
+      pointer-events: none;
       cursor: not-allowed;
     }
   }

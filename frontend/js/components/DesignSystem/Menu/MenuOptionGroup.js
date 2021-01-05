@@ -28,6 +28,7 @@ const MenuOptionGroup = ({ children, title, value, onChange, type, ...props }: P
     <MenuOptionGroupContext.Provider value={context}>
       <AppBox
         css={css({
+          pointerEvents: 'all',
           '&:first-of-type .menu__option__group--title': {
             borderTop: 'none',
           },

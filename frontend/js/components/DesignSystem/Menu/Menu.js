@@ -48,7 +48,6 @@ const Menu = ({ placement = 'bottom-end', closeOnSelect = true, children }: Prop
               placement={placement}
               render={attrs => (list ? React.cloneElement(list, attrs) : null)}
               animation
-              interactive
               trigger="click">
               {button}
             </Tippy>
