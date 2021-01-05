@@ -10,8 +10,10 @@ import AddDebateVoteMutation from '~/mutations/AddDebateVoteMutation';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { type VoteState } from './DebateStepPageVoteAndShare';
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 type Props = {|
+  ...AppBoxProps,
   +debateId: string,
   +isAuthenticated: boolean,
   +onSuccess: VoteState => void,
@@ -53,7 +55,7 @@ const buttonColor = (styleColor: string, disabled: boolean) => ({
 
 const Container = motion.custom(Flex);
 
-export const DebateStepPageVote = ({ debateId, isAuthenticated, onSuccess }: Props) => {
+export const DebateStepPageVote = ({ debateId, isAuthenticated, onSuccess, ...props }: Props) => {
   const intl = useIntl();
   const [isHover, setIsHover] = useState<'FOR' | 'AGAINST' | false>(false);
 
@@ -66,7 +68,8 @@ export const DebateStepPageVote = ({ debateId, isAuthenticated, onSuccess }: Pro
       alignItems="center"
       spacing={6}
       justifyContent="center"
-      width="100%">
+      width="100%"
+      {...props}>
       <LoginOverlay>
         <Button
           onMouseEnter={() => setIsHover('FOR')}

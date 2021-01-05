@@ -282,6 +282,8 @@ type Accessibility = {|
   +'aria-label'?: string,
 |};
 
+type ZIndex = {| +zIndex?: number |};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -319,4 +321,5 @@ export type AppBoxProps = {|
   ...CustomStyled,
   ...TabIndex,
   ...Accessibility,
+  ...ZIndex,
 |};

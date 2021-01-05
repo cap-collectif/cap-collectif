@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
+<Fragment>
+  <DebateStepPageAbsoluteVoteAndShare
+    body="Oui je suis pour"
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "debate1",
+        "votes": Object {
+          "totalCount": 5,
+        },
+        "yesVotes": Object {
+          "totalCount": 4,
+        },
+      }
+    }
+    isAuthenticated={true}
+    setShowArgumentForm={[Function]}
+    setVoteState={[Function]}
+    showArgumentForm={true}
+    title="Pour ou contre le LSD dans nos cantines"
+    voteState="NONE"
+  />
+  <div>
+    <DebateStepPageVote
+      debateId="debate1"
+      isAuthenticated={true}
+      onSuccess={[Function]}
+    />
+  </div>
+</Fragment>
+`;

@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
+<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  p={8}
+  position="fixed"
+  top={50}
+  width="100%"
+  zIndex={999}
+>
+  <ForwardRef
+    alignItems="center"
+    justifyContent="center"
+  >
+    <Text
+      as="p"
+      color="gray.900"
+      fontSize={4}
+    >
+      Pour ou contre le LSD dans nos cantines
+    </Text>
+    <DebateStepPageVote
+      debateId="debate1"
+      isAuthenticated={true}
+      ml={4}
+      onSuccess={[MockFunction]}
+      width="unset"
+    />
+  </ForwardRef>
+</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 1`] = `
+<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  p={8}
+  position="fixed"
+  top={50}
+  width="100%"
+  zIndex={999}
+>
+  <Relay(DebateStepPageVoteForm)
+    body="Oui je suis pour"
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "debate1",
+        "votes": Object {
+          "totalCount": 5,
+        },
+        "yesVotes": Object {
+          "totalCount": 4,
+        },
+      }
+    }
+    setShowArgumentForm={[MockFunction]}
+    setVoteState={[MockFunction]}
+    showArgumentForm={true}
+    voteState="ARGUMENTED"
+  />
+</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] = `
+<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  p={8}
+  position="fixed"
+  top={50}
+  width="100%"
+  zIndex={999}
+>
+  <Relay(DebateStepPageVoteForm)
+    body="Oui je suis pour"
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "debate1",
+        "votes": Object {
+          "totalCount": 5,
+        },
+        "yesVotes": Object {
+          "totalCount": 4,
+        },
+      }
+    }
+    setShowArgumentForm={[MockFunction]}
+    setVoteState={[MockFunction]}
+    showArgumentForm={true}
+    voteState="VOTED"
+  />
+</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+`;

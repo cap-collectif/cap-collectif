@@ -39,6 +39,7 @@ exports[`<DebateStepPageMainActions/> renders correcty 1`] = `
           }
         }
         isAuthenticated={true}
+        title="Pour ou contre le LSD dans nos cantines"
       />
     </ForwardRef>
   </ReactPlaceholder>

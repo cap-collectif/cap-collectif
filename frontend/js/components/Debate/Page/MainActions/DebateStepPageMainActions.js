@@ -31,7 +31,11 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
           {title}
         </Heading>
         {!isMobile && step && (
-          <DebateStepPageVoteAndShare debate={step?.debate} isAuthenticated={isAuthenticated} />
+          <DebateStepPageVoteAndShare
+            title={title}
+            debate={step?.debate}
+            isAuthenticated={isAuthenticated}
+          />
         )}
       </Flex>
     </ReactPlaceholder>

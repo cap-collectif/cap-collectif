@@ -48,6 +48,11 @@ global.Modernizr = {
 
 global.window.__SERVER__ = false;
 
+global.window.IntersectionObserver = jest.fn(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+}));
+
 global.window.matchMedia =
   window.matchMedia ||
   function() {
