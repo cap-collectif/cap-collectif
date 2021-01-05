@@ -78,13 +78,14 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
             ],
         ];
 
+        $res1 = new ElasticsearchPaginatedResult([$vote1], [['azerty']], 1);
+        $res1->totalPointsCount = 3;
+        $res2 = new ElasticsearchPaginatedResult([$vote1, $vote2], [['uiop'], ['uioazp']], 2);
+        $res2->totalPointsCount = 7;
         $voteSearch
             ->searchProposalVotes($keys)
             ->shouldBeCalled()
-            ->willReturn([
-                new ElasticsearchPaginatedResult([$vote1], [['azerty']], 1),
-                new ElasticsearchPaginatedResult([$vote1, $vote2], [['uiop'], ['uioazp']], 2),
-            ]);
+            ->willReturn([$res1, $res2]);
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
@@ -94,7 +95,7 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
                         1 === $connections[0]->totalCount &&
                         3 === $connections[0]->totalPointsCount &&
                         2 === $connections[1]->totalCount &&
-                        7 === $connections[2]->totalPointsCount;
+                        7 === $connections[1]->totalPointsCount;
                 })
             )
             ->shouldBeCalled()
@@ -133,13 +134,15 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
             ],
         ];
 
+        $res1 = new ElasticsearchPaginatedResult([$vote1], [['azerty']], 1);
+        $res1->totalPointsCount = 3;
+        $res2 = new ElasticsearchPaginatedResult([$vote1, $vote2], [['uiop'], ['uioazp']], 2);
+        $res2->totalPointsCount = 7;
+
         $voteSearch
             ->searchProposalVotes($keys)
             ->shouldBeCalled()
-            ->willReturn([
-                new ElasticsearchPaginatedResult([$vote1], [['azerty']], 1),
-                new ElasticsearchPaginatedResult([$vote1, $vote2], [['uiop'], ['uioazp']], 2),
-            ]);
+            ->willReturn([$res1, $res2]);
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
@@ -149,7 +152,7 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
                         1 === $connections[0]->totalCount &&
                         3 === $connections[0]->totalPointsCount &&
                         2 === $connections[1]->totalCount &&
-                        7 === $connections[2]->totalPointsCount;
+                        7 === $connections[1]->totalPointsCount;
                 })
             )
             ->shouldBeCalled()

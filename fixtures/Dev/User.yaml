@@ -208,6 +208,7 @@ Capco\UserBundle\Entity\User:
         firstname: user_not_confirmed
         lastname: user_not_confirmed
         email: user_not_confirmed@test.com
+        dateOfBirth: <(new \DateTime('1990-03-10'))>
         userType: '@UserType1'
         plainPassword: user_not_confirmed
         phone: '+33628353289'

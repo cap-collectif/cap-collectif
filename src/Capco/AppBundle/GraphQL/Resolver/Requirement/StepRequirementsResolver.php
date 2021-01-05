@@ -63,7 +63,6 @@ class StepRequirementsResolver implements ResolverInterface
     public function viewerMeetsTheRequirementsResolver(User $user, AbstractStep $step): bool
     {
         $requirements = $this->repository->getByStep($step);
-
         foreach ($requirements as $requirement) {
             if (!$this->viewerMeetsTheRequirementResolver->__invoke($requirement, $user)) {
                 return false;

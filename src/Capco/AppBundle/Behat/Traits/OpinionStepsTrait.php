@@ -424,7 +424,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->waitAndThrowOnFailure(
-            7000,
+            10000,
             "$('" . $page->getArgumentVoteButtonSelector() . "').length > 0"
         );
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;

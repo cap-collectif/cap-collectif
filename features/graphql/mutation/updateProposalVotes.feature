@@ -168,7 +168,7 @@ Scenario: Logged in API client wants to reorder his votes
                           "proposal":{
                              "id":"UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
                              "votes":{
-                                "totalPointsCount":28
+                                "totalPointsCount":7
                              }
                           }
                        }
@@ -178,7 +178,7 @@ Scenario: Logged in API client wants to reorder his votes
                           "proposal":{
                              "id":"UHJvcG9zYWw6cHJvcG9zYWwyNg==",
                              "votes":{
-                                "totalPointsCount":29
+                                "totalPointsCount":8
                              }
                           }
                        }
@@ -188,7 +188,7 @@ Scenario: Logged in API client wants to reorder his votes
                           "proposal":{
                              "id":"UHJvcG9zYWw6cHJvcG9zYWwyNA==",
                              "votes":{
-                                "totalPointsCount":8
+                                "totalPointsCount":1
                              }
                           }
                        }

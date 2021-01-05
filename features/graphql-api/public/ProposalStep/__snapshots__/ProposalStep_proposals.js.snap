@@ -6,7 +6,7 @@ Object {
     "proposals": Object {
       "edges": Array [
         Object {
-          "cursor": "YTozOntpOjA7aToyOTtpOjE7aToxNDg1OTA1MTYwMDAwO2k6MjtzOjEwOiJwcm9wb3NhbDI2Ijt9",
+          "cursor": "YTozOntpOjA7aTo4O2k6MTtpOjE0ODU5MDUxNjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjYiO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -20,12 +20,12 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 29,
+              "totalPointsCount": 8,
             },
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aToyODtpOjE7aToxNDg1OTAzNzcwMDAwO2k6MjtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+          "cursor": "YTozOntpOjA7aTo3O2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
           "node": Object {
             "category": null,
             "comments": Object {
@@ -39,13 +39,13 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 28,
+              "totalPointsCount": 7,
             },
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YTozOntpOjA7aToyODtpOjE7aToxNDg1OTAzNzcwMDAwO2k6MjtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+        "endCursor": "YTozOntpOjA7aTo3O2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
         "hasNextPage": true,
       },
       "totalCount": 5,
@@ -74,7 +74,7 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 29,
+              "totalPointsCount": 8,
             },
           },
         },
@@ -93,7 +93,7 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 28,
+              "totalPointsCount": 7,
             },
           },
         },
@@ -829,7 +829,7 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 29,
+              "totalPointsCount": 8,
             },
           },
         },
@@ -883,7 +883,7 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 29,
+              "totalPointsCount": 8,
             },
           },
         },
@@ -940,7 +940,7 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 3,
-              "totalPointsCount": 28,
+              "totalPointsCount": 7,
             },
           },
         },
@@ -959,7 +959,7 @@ Object {
             "status": null,
             "votes": Object {
               "totalCount": 1,
-              "totalPointsCount": 8,
+              "totalPointsCount": 1,
             },
           },
         },

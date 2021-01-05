@@ -209,7 +209,6 @@ class ProposalCollectVoteRepository extends EntityRepository
     {
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
-            ->andWhere('pv.published = true')
             ->andWhere('pv.collectStep = :collectStep')
             ->andWhere('pv.user = :user')
             ->setParameter('collectStep', $step)
@@ -229,12 +228,12 @@ class ProposalCollectVoteRepository extends EntityRepository
         // TODO includeUnpublished
         $query = $this->_em
             ->createNativeQuery(
-                "SELECT v.proposal_id as id, COUNT(v.id) as total 
+                "SELECT v.proposal_id as id, COUNT(v.id) as total
               FROM votes v
               WHERE v.collect_step_id = :collect_step_id
                 AND v.proposal_id IN (:ids)
                 AND v.published = 1
-                AND v.voteType IN ('proposalCollect') 
+                AND v.voteType IN ('proposalCollect')
               GROUP BY v.proposal_id
           ",
                 $rsm
@@ -328,15 +327,13 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('step', $step);
 
         if ($themeId) {
-            $qb
-                ->leftJoin('p.theme', 't')
+            $qb->leftJoin('p.theme', 't')
                 ->andWhere('t.id = :themeId')
                 ->setParameter('themeId', $themeId);
         }
 
         if ($districtId) {
-            $qb
-                ->leftJoin('p.district', 'd')
+            $qb->leftJoin('p.district', 'd')
                 ->andWhere('d.id = :districtId')
                 ->setParameter('districtId', $districtId);
         }
@@ -461,8 +458,7 @@ class ProposalCollectVoteRepository extends EntityRepository
                 ->getId();
         }
 
-        $qb
-            ->leftJoin('pv.collectStep', 'cs')
+        $qb->leftJoin('pv.collectStep', 'cs')
             ->andWhere('pv.proposal = :proposal')
             ->andWhere('pv.published = true')
             ->andWhere('pv.isAccounted = 1')

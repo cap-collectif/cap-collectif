@@ -157,7 +157,6 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(pv.id)')
             ->andWhere('pv.selectionStep = :selectionStep')
             ->andWhere('pv.user = :user')
-            ->andWhere('pv.published = true')
             ->setParameter('selectionStep', $step)
             ->setParameter('user', $user)
             ->getQuery()
@@ -317,22 +316,19 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->setParameter('step', $step);
         if ($themeId) {
-            $qb
-                ->leftJoin('p.theme', 't')
+            $qb->leftJoin('p.theme', 't')
                 ->andWhere('t.id = :themeId')
                 ->setParameter('themeId', $themeId);
         }
 
         if ($districtId) {
-            $qb
-                ->leftJoin('p.district', 'd')
+            $qb->leftJoin('p.district', 'd')
                 ->andWhere('d.id = :districtId')
                 ->setParameter('districtId', $districtId);
         }
 
         if ($categoryId) {
-            $qb
-                ->leftJoin('p.category', 'category')
+            $qb->leftJoin('p.category', 'category')
                 ->andWhere('category.id = :categoryId')
                 ->setParameter('categoryId', $categoryId);
         }
@@ -451,8 +447,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             );
         }
 
-        $qb
-            ->leftJoin('pv.selectionStep', 'ss')
+        $qb->leftJoin('pv.selectionStep', 'ss')
             ->andWhere('pv.proposal = :proposal')
             ->andWhere('pv.published = true')
             ->andWhere('pv.isAccounted = 1')

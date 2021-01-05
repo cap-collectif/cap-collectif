@@ -1,3 +1,17 @@
 Capco\AppBundle\Entity\UserRequirement:
-  userRequirement1:
-    __construct: ['@user5', '@requirement1', true]
+    userRequirement1:
+        __construct: ['@user5', '@requirement1', true]
+    userRequirement2:
+        __construct: ['@user_not_confirmed', '@requirement1', true]
+    userRequirement3:
+        __construct: ['@user_not_confirmed', '@requirement2', true]
+    userRequirement4:
+        __construct: ['@user_not_confirmed', '@requirement3', true]
+    userRequirement5:
+        __construct: ['@user_not_confirmed', '@requirement4', true]
+    userRequirement6:
+        __construct: ['@user_not_confirmed', '@requirement5', true]
+    userRequirement7:
+        __construct: ['@user_not_confirmed', '@requirement6', true]
+    userRequirement8:
+        __construct: ['@user_not_confirmed', '@requirement7', true]

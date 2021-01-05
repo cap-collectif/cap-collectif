@@ -38,6 +38,42 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
   """
 
 @security
+Scenario: Logged in API client wants to vote for a proposal in a step with vote limited but has already reached vote limit
+  Given I am logged in to graphql as user_not_confirmed
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddProposalVoteInput!) {
+      addProposalVote(input: $input) {
+        vote {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMzg="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors": [
+      {
+        "message": "You have reached the limit of votes.",
+        "@*@": "@*@"
+      }
+    ],
+    "data": {
+      "addProposalVote": null
+    }
+  }
+  """
+
+@security
 Scenario: Logged in API client without all requirements wants to vote for a proposal in a step with requirements
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

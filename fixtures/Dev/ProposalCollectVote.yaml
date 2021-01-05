@@ -112,3 +112,24 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         position: 1
         publishedAt: <(new \DateTime('2015-03-01 00:00:59'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:59'))>
+    proposalCollectVote64:
+        id: 2064
+        proposal: '@proposal25'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user_not_confirmed'
+        position: 0
+        createdAt: <(new \DateTime('2015-03-01 00:01:00'))>
+    proposalCollectVote65:
+        id: 2065
+        proposal: '@proposal26'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user_not_confirmed'
+        position: 1
+        createdAt: <(new \DateTime('2015-03-01 00:01:01'))>
+    proposalCollectVote66:
+        id: 2066
+        proposal: '@proposal24'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user_not_confirmed'
+        position: 2
+        createdAt: <(new \DateTime('2015-03-01 00:01:02'))>

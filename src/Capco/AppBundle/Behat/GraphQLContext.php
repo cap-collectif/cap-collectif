@@ -63,6 +63,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When I am logged in to graphql as user_not_confirmed
+     */
+    public function iAmLoggedInToGraphQLAsUserNotConfirmed()
+    {
+        $this->createAuthenticatedClient('user_not_confirmed@test.com', 'user_not_confirmed');
+    }
+
+    /**
      * @Given I am logged in to graphql as super admin
      */
     public function iAmLoggedInToGraphQLAsSfavot()
