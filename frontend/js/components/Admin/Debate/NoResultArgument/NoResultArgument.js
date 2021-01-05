@@ -3,9 +3,9 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useIntl, type IntlShape } from 'react-intl';
 import Text from '~ui/Primitives/Text';
-import { useProjectAdminDebatePageContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebatePage/ProjectAdminDebatePage.context';
+import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import Flex from '~ui/Primitives/Layout/Flex';
-import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebatePage/ProjectAdminDebatePage.reducer';
+import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { type ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql';
 import Tag from '~ds/Tag/Tag';
 import { FontWeight } from '~ui/Primitives/constants';
@@ -61,7 +61,7 @@ const getWordingTitle = (
 
 export const NoResultArgument = ({ debate }: Props) => {
   const { debateArgumentsFor, debateArgumentsAgainst } = debate;
-  const { parameters, dispatch } = useProjectAdminDebatePageContext();
+  const { parameters, dispatch } = useProjectAdminDebateContext();
   const intl = useIntl();
   const hasArgumentForOrAgainst =
     debateArgumentsFor.totalCount > 0 || debateArgumentsAgainst.totalCount > 0;

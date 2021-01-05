@@ -9,8 +9,8 @@ import type { ResultPreloadQuery } from '~/types';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
-import { ProjectAdminDebatePageProvider } from './ProjectAdminDebatePage/ProjectAdminDebatePage.context';
-import ProjectAdminDebatePage from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebatePage/ProjectAdminDebatePage';
+import { ProjectAdminDebateProvider } from './ProjectAdminDebate/ProjectAdminDebate.context';
+import ProjectAdminDebate from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate';
 
 type Props = {|
   +dataPrefetch: ResultPreloadQuery,
@@ -54,7 +54,7 @@ export const queryContributions = graphql`
           ... on DebateStep {
             debate {
               id
-              ...ProjectAdminDebatePage_debate
+              ...ProjectAdminDebate_debate
                 @arguments(
                   countArgumentPagination: $countArgumentPagination
                   cursorArgumentPagination: $cursorArgumentPagination
@@ -134,8 +134,8 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
         <Route
           path={getContributionsPath(baseUrl, 'DebateStep')}
           component={routeProps => (
-            <ProjectAdminDebatePageProvider>
-              <ProjectAdminDebatePage
+            <ProjectAdminDebateProvider>
+              <ProjectAdminDebate
                 hasContributionsStep={hasIndex}
                 baseUrl={baseUrl}
                 debate={
@@ -144,7 +144,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
                 }
                 {...routeProps}
               />
-            </ProjectAdminDebatePageProvider>
+            </ProjectAdminDebateProvider>
           )}
         />
       </Switch>

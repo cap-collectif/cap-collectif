@@ -54,7 +54,7 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
         />
       </AccordionButton>
       <AccordionPanel>
-        <Relay(ArgumentTab)
+        <Relay(ArgumentTabQuery)
           debate={
             Object {
               "$fragmentRefs": null,
@@ -90,7 +90,7 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
         />
       </AccordionButton>
       <AccordionPanel>
-        <Relay(VoteTab)
+        <Relay(VoteTabQuery)
           debate={
             Object {
               "$fragmentRefs": null,
@@ -182,7 +182,7 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
         />
       </AccordionButton>
       <AccordionPanel>
-        <Relay(ArgumentTab)
+        <Relay(ArgumentTabQuery)
           debate={
             Object {
               "$fragmentRefs": null,
@@ -218,7 +218,7 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
         />
       </AccordionButton>
       <AccordionPanel>
-        <Relay(VoteTab)
+        <Relay(VoteTabQuery)
           debate={
             Object {
               "$fragmentRefs": null,

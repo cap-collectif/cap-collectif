@@ -12,19 +12,19 @@ export type Filters = {|
   +argument: FilterArgument,
 |};
 
-export type ProjectAdminDebatePageState = {|
+export type ProjectAdminDebateState = {|
   +filters: Filters,
 |};
 
-export type ProjectAdminDebatePageParameters = {|
-  +filters: $PropertyType<ProjectAdminDebatePageState, 'filters'>,
+export type ProjectAdminDebateParameters = {|
+  +filters: $PropertyType<ProjectAdminDebateState, 'filters'>,
 |};
 
 export type Action =
   | { type: 'CHANGE_ARGUMENT_TYPE', payload: ForOrAgainstValue[] }
   | { type: 'CHANGE_ARGUMENT_STATE', payload: ArgumentState };
 
-export const createReducer = (state: ProjectAdminDebatePageState, action: Action) => {
+export const createReducer = (state: ProjectAdminDebateState, action: Action) => {
   switch (action.type) {
     case 'CHANGE_ARGUMENT_TYPE':
       return {

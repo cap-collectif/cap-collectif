@@ -9,8 +9,8 @@ import { ICON_NAME } from '~ds/Icon/Icon';
 import Accordion from '~ds/Accordion';
 import { type ProjectAdminDebate_debate } from '~relay/ProjectAdminDebate_debate.graphql';
 import FaceToFace from './FaceToFace/FaceToFace';
-import ArgumentTab from './ArgumentTab/ArgumentTab';
-import VoteTab from './VoteTab/VoteTab';
+import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery';
+import VoteTabQuery from './VoteTab/VoteTabQuery';
 
 type Props = {|
   hasContributionsStep: boolean,
@@ -55,7 +55,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
           </Accordion.Button>
 
           <Accordion.Panel>
-            <ArgumentTab debate={debate} />
+            <ArgumentTabQuery debate={debate} />
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -64,7 +64,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
             <FormattedMessage id="votes-count" values={{ num: votes.totalCount }} />
           </Accordion.Button>
           <Accordion.Panel>
-            <VoteTab debate={debate} />
+            <VoteTabQuery debate={debate} />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
@@ -97,7 +97,7 @@ export default createFragmentContainer(ProjectAdminDebate, {
         totalCount
       }
       ...FaceToFace_debate
-      ...ArgumentTab_debate
+      ...ArgumentTabQuery_debate
         @arguments(
           count: $countArgumentPagination
           cursor: $cursorArgumentPagination
@@ -105,7 +105,7 @@ export default createFragmentContainer(ProjectAdminDebate, {
           isPublished: $isPublishedArgument
           isTrashed: $isTrashedArgument
         )
-      ...VoteTab_debate @arguments(count: $countVotePagination, cursor: $cursorVotePagination)
+      ...VoteTabQuery_debate @arguments(count: $countVotePagination, cursor: $cursorVotePagination)
     }
   `,
 });

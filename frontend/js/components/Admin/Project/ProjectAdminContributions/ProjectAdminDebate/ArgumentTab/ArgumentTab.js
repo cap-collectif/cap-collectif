@@ -12,11 +12,11 @@ import AppBox from '~ui/Primitives/AppBox';
 import Menu from '~ds/Menu/Menu';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import Spinner from '~ds/Spinner/Spinner';
-import { useProjectAdminDebatePageContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebatePage/ProjectAdminDebatePage.context';
+import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import InlineSelect from '~ds/InlineSelect';
 import { baseUrl } from '~/config';
 import NoResultArgument from '~/components/Admin/Debate/NoResultArgument/NoResultArgument';
-import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebatePage/ProjectAdminDebatePage.reducer';
+import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { type ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql';
 
 export const ARGUMENT_PAGINATION = 10;
@@ -38,7 +38,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
     debateArgumentsTrashed,
   } = debate;
   const listArgumentRef = React.useRef(null);
-  const { parameters, dispatch } = useProjectAdminDebatePageContext();
+  const { parameters, dispatch } = useProjectAdminDebateContext();
   const intl = useIntl();
 
   const sumCountArguments: number =
