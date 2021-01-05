@@ -37,7 +37,7 @@ const DetailDrawerInner = styled(motion.custom(AppBox)).attrs({
   bottom: 0,
   top: 0,
   bg: 'white',
-  zIndex: 9999,
+  zIndex: 1030,
   display: 'flex',
   flexDirection: 'column',
 })``;

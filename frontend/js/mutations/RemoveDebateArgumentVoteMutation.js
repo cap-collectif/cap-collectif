@@ -12,17 +12,7 @@ const mutation = graphql`
     removeDebateArgumentVote(input: $input) {
       errorCode
       debateArgument {
-        votes {
-          edges {
-            node {
-              author {
-                id
-              }
-            }
-          }
-          totalCount
-        }
-        viewerHasVote
+        ...ArgumentCard_argument @arguments(isAuthenticated: true)
       }
     }
   }
