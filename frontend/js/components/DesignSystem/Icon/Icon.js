@@ -38,6 +38,7 @@ export const ICON_NAME = {
   FLAG: 'FLAG',
   MORE: 'MORE',
   MODERATE: 'MODERATE',
+  HYPERLINK: 'HYPERLINK',
 };
 
 export const ICON_SIZE = {

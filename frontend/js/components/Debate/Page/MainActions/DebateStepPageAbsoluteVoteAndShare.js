@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import css from '@styled-system/css';
 import type { DebateStepPageVoteAndShare_debate } from '~relay/DebateStepPageVoteAndShare_debate.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
@@ -17,6 +18,8 @@ type Props = {|
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
   +setShowArgumentForm: boolean => void,
+  +viewerHasArgument: boolean,
+  +url: string,
 |};
 
 export const DebateStepPageAbsoluteVoteAndShare = ({
@@ -28,7 +31,14 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   setVoteState,
   showArgumentForm,
   setShowArgumentForm,
+  viewerHasArgument,
+  url,
 }: Props) => {
+  const background =
+    voteState === 'VOTED'
+      ? 'linear-gradient(to bottom, rgba(255,255,255,1) 85%,rgba(255,255,255,0) 100%);'
+      : 'white';
+  const boxShadow = voteState === 'VOTED' ? '' : 'medium';
   return (
     <AppBox
       top={50}
@@ -36,16 +46,18 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       width="100%"
       position="fixed"
       zIndex={999}
-      css={{
+      css={css({
         marginTop: '0 !important',
-        background: 'linear-gradient(to bottom, rgba(255,255,255,1) 85%,rgba(255,255,255,0) 100%);',
-      }}>
+        background,
+        boxShadow,
+      })}>
       {voteState === 'NONE' && (
         <Flex justifyContent="center" alignItems="center">
           <Text as="p" color="gray.900" fontSize={4}>
             {title}
           </Text>
           <DebateStepPageVote
+            viewerHasArgument={viewerHasArgument}
             width="unset"
             ml={4}
             debateId={debate.id}
@@ -56,6 +68,8 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       )}
       {voteState !== 'NONE' && (
         <DebateStepPageVoteForm
+          isAbsolute
+          url={url}
           debate={debate}
           body={body}
           voteState={voteState}

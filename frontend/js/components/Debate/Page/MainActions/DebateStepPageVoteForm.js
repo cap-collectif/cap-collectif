@@ -3,20 +3,24 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
+import copy from 'copy-to-clipboard';
 import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import styled, { type StyledComponent } from 'styled-components';
 import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
+import Icon from '~ds/Icon/Icon';
 import Card from '~ds/Card/Card';
 import colors from '~/styles/modules/colors';
+import Tooltip from '~ds/Tooltip/Tooltip';
 import typography from '~/styles/theme/typography';
 import component from '~/components/Form/Field';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentMutation from '~/mutations/AddDebateArgumentMutation';
 import { formatConnectionPath } from '~/shared/utils/relay';
 import { type VoteState, formName } from './DebateStepPageVoteAndShare';
+import useScript from '~/utils/hooks/useScript';
 
 type Props = {|
   +debate: DebateStepPageVoteForm_debate,
@@ -25,6 +29,8 @@ type Props = {|
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
   +setShowArgumentForm: boolean => void,
+  +isAbsolute?: boolean,
+  +url?: string,
 |};
 
 export const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
@@ -84,7 +90,10 @@ export const DebateStepPageVoteForm = ({
   setVoteState,
   showArgumentForm,
   setShowArgumentForm,
+  isAbsolute,
+  url,
 }: Props) => {
+  useScript('https://platform.twitter.com/widgets.js');
   const intl = useIntl();
 
   const viewerVoteValue = debate.viewerVote?.type;
@@ -96,28 +105,65 @@ export const DebateStepPageVoteForm = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>
-      <Flex alignItems="center" justifyContent="center" mb={8}>
+      <Flex alignItems="center" justifyContent="center" mb={isAbsolute ? 0 : 8}>
         <span role="img" aria-label="vote" css={{ fontSize: 36, marginRight: 8 }}>
           {voteState === 'ARGUMENTED' ? '🎉' : '🗳️'}
         </span>
         <FormattedMessage
           id={voteState === 'ARGUMENTED' ? 'thanks-for-debate-richer' : 'thanks-for-your-vote'}
         />
-        <Button
-          css={css({
-            color: 'gray.700',
-            '&:hover': {
+        {!isAbsolute && (
+          <Button
+            css={css({
               color: 'gray.700',
-            },
-          })}
-          ml={2}
-          variant="link"
-          variantSize="small"
-          onClick={() => setVoteState('NONE')}>
-          <FormattedMessage
-            id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
-          />
-        </Button>
+              '&:hover': {
+                color: 'gray.700',
+              },
+            })}
+            ml={2}
+            variant="link"
+            variantSize="small"
+            onClick={() => setVoteState('NONE')}>
+            <FormattedMessage
+              id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
+            />
+          </Button>
+        )}
+        {isAbsolute && (
+          <Flex ml={2} flexDirection="row" spacing={2}>
+            <iframe
+              title="facebook share button"
+              src={`https://www.facebook.com/plugins/share_button.php?href=${url ||
+                ''}&layout=button&size=small&width=81&height=20&appId`}
+              width="81"
+              height="20"
+              style={{ border: 'none', overflow: 'hidden' }}
+              scrolling="no"
+              frameBorder="0"
+              allowFullScreen="true"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            />
+            <a
+              href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+              className="twitter-share-button"
+              data-show-count="false">
+              Tweet
+            </a>
+
+            <Tooltip label={intl.formatMessage({ id: 'copied-link' })} trigger={['click']}>
+              <Button
+                backgroundColor="gray.500"
+                color="white"
+                height={5}
+                p="4px 8px"
+                fontSize={11}
+                onClick={() => copy(url)}>
+                <Icon name="HYPERLINK" mr="1" size="sm" />
+                <FormattedMessage id="global.link" />
+              </Button>
+            </Tooltip>
+          </Flex>
+        )}
       </Flex>
 
       {showArgumentForm && (

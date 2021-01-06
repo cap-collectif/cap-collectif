@@ -17,6 +17,7 @@ type Props = {|
   +debateId: string,
   +isAuthenticated: boolean,
   +onSuccess: VoteState => void,
+  +viewerHasArgument: boolean,
 |};
 
 const voteForDebate = (
@@ -24,13 +25,14 @@ const voteForDebate = (
   type: 'FOR' | 'AGAINST',
   intl: IntlShape,
   onSuccess: VoteState => void,
-  isAuthenticated,
+  isAuthenticated: boolean,
+  viewerHasArgument: boolean,
 ) => {
   return AddDebateVoteMutation.commit({ input: { debateId, type }, isAuthenticated })
     .then(response => {
       if (response.addDebateVote?.errorCode) {
         mutationErrorToast(intl);
-      } else onSuccess('VOTED');
+      } else onSuccess(viewerHasArgument ? 'ARGUMENTED' : 'VOTED');
     })
     .catch(() => {
       mutationErrorToast(intl);
@@ -55,7 +57,13 @@ const buttonColor = (styleColor: string, disabled: boolean) => ({
 
 const Container = motion.custom(Flex);
 
-export const DebateStepPageVote = ({ debateId, isAuthenticated, onSuccess, ...props }: Props) => {
+export const DebateStepPageVote = ({
+  debateId,
+  isAuthenticated,
+  onSuccess,
+  viewerHasArgument,
+  ...props
+}: Props) => {
   const intl = useIntl();
   const [isHover, setIsHover] = useState<'FOR' | 'AGAINST' | false>(false);
 
@@ -76,7 +84,9 @@ export const DebateStepPageVote = ({ debateId, isAuthenticated, onSuccess, ...pr
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('green', isHover === 'AGAINST'))}
           variantSize="big"
-          onClick={() => voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated)}>
+          onClick={() =>
+            voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated, viewerHasArgument)
+          }>
           <Icon name="THUMB_UP" mr="1" />
           <FormattedMessage id="global.for" />
         </Button>
@@ -87,7 +97,9 @@ export const DebateStepPageVote = ({ debateId, isAuthenticated, onSuccess, ...pr
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('red', isHover === 'FOR'))}
           variantSize="big"
-          onClick={() => voteForDebate(debateId, 'AGAINST', intl, onSuccess, isAuthenticated)}>
+          onClick={() =>
+            voteForDebate(debateId, 'AGAINST', intl, onSuccess, isAuthenticated, viewerHasArgument)
+          }>
           <Icon name="THUMB_UP" mr="1" css={{ transform: 'rotate(180deg)' }} />
           <FormattedMessage id="global.against" />
         </Button>

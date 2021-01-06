@@ -18,6 +18,7 @@ describe('<DebateStepPageVoteAndShare/>', () => {
     title: 'Pour ou contre le LSD dans nos cantines',
     body: 'Oui je suis pour',
     isAuthenticated: true,
+    url: '/debate1',
   };
 
   it('renders correcty', () => {

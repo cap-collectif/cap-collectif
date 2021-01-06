@@ -294,6 +294,7 @@
         "react-bootstrap": "^0.32.1",
         "react-color": "^2.18.1",
         "react-copy-to-clipboard": "^5.0.2",
+        "copy-to-clipboard": "^3.3.1",
         "react-datetime": "^2.9.0",
         "react-dom": "^16.8.6",
         "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48",

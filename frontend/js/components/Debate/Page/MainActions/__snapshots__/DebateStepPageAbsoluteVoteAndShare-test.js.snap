@@ -2,6 +2,7 @@
 
 exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  _css={[Function]}
   p={8}
   position="fixed"
   top={50}
@@ -24,6 +25,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
       isAuthenticated={true}
       ml={4}
       onSuccess={[MockFunction]}
+      viewerHasArgument={false}
       width="unset"
     />
   </ForwardRef>
@@ -32,6 +34,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
 
 exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  _css={[Function]}
   p={8}
   position="fixed"
   top={50}
@@ -53,9 +56,11 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
         },
       }
     }
+    isAbsolute={true}
     setShowArgumentForm={[MockFunction]}
     setVoteState={[MockFunction]}
     showArgumentForm={true}
+    url="/debate1"
     voteState="ARGUMENTED"
   />
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
@@ -63,6 +68,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
 
 exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  _css={[Function]}
   p={8}
   position="fixed"
   top={50}
@@ -84,9 +90,11 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] =
         },
       }
     }
+    isAbsolute={true}
     setShowArgumentForm={[MockFunction]}
     setVoteState={[MockFunction]}
     showArgumentForm={true}
+    url="/debate1"
     voteState="VOTED"
   />
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>

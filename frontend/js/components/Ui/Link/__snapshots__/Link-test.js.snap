@@ -9,47 +9,43 @@ exports[`<Link /> renders correctly 1`] = `
     type="text"
     value="/url.url"
   />
-  <CopyToClipboard
-    onCopy={[Function]}
-    text="/url.url"
-  >
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      key="top"
-      overlay={
-        <_default
-          id="tooltip-url-/url.url"
-          style={
-            Object {
-              "transition": "unset",
-              "width": "86px",
-            }
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    key="top"
+    overlay={
+      <_default
+        id="tooltip-url-/url.url"
+        style={
+          Object {
+            "transition": "unset",
+            "width": "86px",
           }
-        >
-          <FormattedMessage
-            id="copy-link"
-            values={Object {}}
-          />
-        </_default>
-      }
-      placement="top"
-      trigger={
-        Array [
-          "hover",
-          "focus",
-        ]
-      }
-    >
-      <button
-        type="button"
+        }
       >
-        <Icon
-          color="#ffffff"
-          name="link"
-          size={15}
+        <FormattedMessage
+          id="copy-link"
+          values={Object {}}
         />
-      </button>
-    </OverlayTrigger>
-  </CopyToClipboard>
+      </_default>
+    }
+    placement="top"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      <Icon
+        color="#ffffff"
+        name="link"
+        size={15}
+      />
+    </button>
+  </OverlayTrigger>
 </Link__Container>
 `;

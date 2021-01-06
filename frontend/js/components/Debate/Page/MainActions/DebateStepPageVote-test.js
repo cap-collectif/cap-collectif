@@ -7,7 +7,12 @@ import { DebateStepPageVote } from './DebateStepPageVote';
 describe('<DebateStepPageVote/>', () => {
   it('renders correcty', () => {
     const wrapper = shallow(
-      <DebateStepPageVote isAuthenticated debateId="debateId" onSuccess={jest.fn()} />,
+      <DebateStepPageVote
+        isAuthenticated
+        viewerHasArgument
+        debateId="debateId"
+        onSuccess={jest.fn()}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

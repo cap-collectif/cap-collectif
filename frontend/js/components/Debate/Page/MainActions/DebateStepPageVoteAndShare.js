@@ -17,13 +17,20 @@ type Props = {|
   +isAuthenticated: boolean,
   +body: string,
   +title: string,
+  +url: string,
 |};
 
 export const formName = 'debate-argument-form';
 
 export type VoteState = 'NONE' | 'VOTED' | 'ARGUMENTED';
 
-export const DebateStepPageVoteAndShare = ({ debate, isAuthenticated, body, title }: Props) => {
+export const DebateStepPageVoteAndShare = ({
+  debate,
+  isAuthenticated,
+  body,
+  title,
+  url,
+}: Props) => {
   const [voteState, setVoteState] = useState<VoteState>(
     debate.viewerHasVote ? (debate.viewerHasArgument ? 'ARGUMENTED' : 'VOTED') : 'NONE',
   );
@@ -43,6 +50,8 @@ export const DebateStepPageVoteAndShare = ({ debate, isAuthenticated, body, titl
           setVoteState={setVoteState}
           showArgumentForm={showArgumentForm}
           setShowArgumentForm={setShowArgumentForm}
+          viewerHasArgument={debate.viewerHasArgument || false}
+          url={url}
         />
       )}
       <div ref={ref}>
@@ -50,6 +59,7 @@ export const DebateStepPageVoteAndShare = ({ debate, isAuthenticated, body, titl
           <DebateStepPageVote
             debateId={debate.id}
             isAuthenticated={isAuthenticated}
+            viewerHasArgument={debate.viewerHasArgument || false}
             onSuccess={setVoteState}
           />
         )}

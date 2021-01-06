@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import copy from 'copy-to-clipboard';
 import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import colors from '~/utils/colors';
@@ -47,20 +47,23 @@ export const Link = ({ url, className }: Props) => {
   return (
     <Container className={className} onMouseLeave={() => setIsCopied(false)}>
       <input type="text" value={url} disabled />
-      <CopyToClipboard text={url} onCopy={() => setIsCopied(true)}>
-        <OverlayTrigger
-          key="top"
-          placement="top"
-          overlay={
-            <Tooltip id={`tooltip-url-${url}`} style={{ width: '86px', transition: 'unset' }}>
-              <FormattedMessage id={isCopied ? 'copied-link' : 'copy-link'} />
-            </Tooltip>
-          }>
-          <button type="button">
-            <Icon name={ICON_NAME.link} size={15} color={colors.white} />
-          </button>
-        </OverlayTrigger>
-      </CopyToClipboard>
+      <OverlayTrigger
+        key="top"
+        placement="top"
+        overlay={
+          <Tooltip id={`tooltip-url-${url}`} style={{ width: '86px', transition: 'unset' }}>
+            <FormattedMessage id={isCopied ? 'copied-link' : 'copy-link'} />
+          </Tooltip>
+        }>
+        <button
+          type="button"
+          onClick={() => {
+            copy(url);
+            setIsCopied(true);
+          }}>
+          <Icon name={ICON_NAME.link} size={15} color={colors.white} />
+        </button>
+      </OverlayTrigger>
     </Container>
   );
 };

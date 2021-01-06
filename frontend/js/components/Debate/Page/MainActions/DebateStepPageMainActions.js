@@ -35,6 +35,7 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
             title={title}
             debate={step?.debate}
             isAuthenticated={isAuthenticated}
+            url={step?.url}
           />
         )}
       </Flex>
@@ -49,6 +50,7 @@ export default createFragmentContainer(DebateStepPageMainActions, {
       timeRange {
         endAt
       }
+      url
       debate {
         ...DebateStepPageVoteAndShare_debate @arguments(isAuthenticated: $isAuthenticated)
       }

@@ -22,6 +22,8 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
     setVoteState={[Function]}
     showArgumentForm={true}
     title="Pour ou contre le LSD dans nos cantines"
+    url="/debate1"
+    viewerHasArgument={false}
     voteState="NONE"
   />
   <div>
@@ -29,6 +31,7 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
       debateId="debate1"
       isAuthenticated={true}
       onSuccess={[Function]}
+      viewerHasArgument={false}
     />
   </div>
 </Fragment>

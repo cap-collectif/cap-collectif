@@ -11,6 +11,7 @@ describe('<DebateStepPageMainActions/>', () => {
     id: 'step1',
     timeRange: { endAt: '2021-18-02:00:00' },
     debate: { $fragmentRefs },
+    url: '/debatestep1',
   };
 
   it('renders correcty', () => {

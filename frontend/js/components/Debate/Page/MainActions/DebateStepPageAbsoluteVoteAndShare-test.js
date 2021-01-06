@@ -21,6 +21,8 @@ describe('<DebateStepPageAbsoluteVoteAndShare/>', () => {
     showArgumentForm: true,
     setVoteState: jest.fn(),
     setShowArgumentForm: jest.fn(),
+    url: '/debate1',
+    viewerHasArgument: false,
   };
 
   it('renders correcty', () => {
@@ -36,9 +38,15 @@ describe('<DebateStepPageAbsoluteVoteAndShare/>', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+
   it('renders correcty when argumented', () => {
     const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="ARGUMENTED" debate={debate} />,
+      <DebateStepPageAbsoluteVoteAndShare
+        {...props}
+        viewerHasArgument
+        voteState="ARGUMENTED"
+        debate={debate}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
