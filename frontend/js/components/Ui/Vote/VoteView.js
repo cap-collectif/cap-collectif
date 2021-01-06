@@ -46,8 +46,8 @@ export const VoteView = ({ positivePercentage }: Props) => {
         </span>
       </div>
       <div>
-        {left ? <span>{`${left}%`}</span> : null}
-        {right ? <span>{`${right === 100 ? 0 : right}%`}</span> : null}
+        {left ? <span>{`${Math.round(left * 100) / 100}%`}</span> : null}
+        {right ? <span>{`${right === 100 ? 0 : Math.round(right * 100) / 100}%`}</span> : null}
       </div>
     </Container>
   );

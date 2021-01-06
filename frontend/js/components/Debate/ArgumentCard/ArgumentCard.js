@@ -80,6 +80,8 @@ export const ArgumentCard = ({
 
   const intl = useIntl();
   const [isEditing, setIsEditing] = useState(false);
+  const [readMore, setReadMore] = useState(false);
+
   return (
     <Card p={6} bg="white" {...props}>
       <Flex direction="column">
@@ -155,12 +157,20 @@ export const ArgumentCard = ({
           <ArgumentCardEdition argument={argument} goBack={() => setIsEditing(false)} />
         ) : (
           <Text>
-            {truncate(argument.body, { length: getTruncatedLength(isMobile) })}{' '}
+            {readMore
+              ? argument.body
+              : truncate(argument.body, { length: getTruncatedLength(isMobile) })}{' '}
             {getTruncatedLength(isMobile) < argument.body.length && (
               <>
                 &nbsp;
-                <Button display="inline-block" onClick={onReadMore} variant="link">
-                  <FormattedMessage id="capco.module.read_more" />
+                <Button
+                  display="inline-block"
+                  onClick={() => {
+                    if (onReadMore) onReadMore();
+                    else setReadMore(!readMore);
+                  }}
+                  variant="link">
+                  <FormattedMessage id={readMore ? 'see-less' : 'capco.module.read_more'} />
                 </Button>
               </>
             )}
