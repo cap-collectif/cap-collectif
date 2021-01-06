@@ -112,6 +112,34 @@ class IndexBuilder
         return $this->indexName . '_indexing';
     }
 
+    public function getLastIndexRealName(): string
+    {
+        $indexNames = $this->client->getCluster()->getIndexNames();
+        $indexes = [];
+        foreach ($indexNames as $indexName) {
+            if (0 !== strpos($indexName, 'capco_')) {
+                unset($indexNames[$indexName]);
+
+                continue;
+            }
+            $date = \DateTime::createFromFormat(
+                'Y-m-d-H-i-s',
+                str_replace('capco_', '', $indexName)
+            );
+
+            $indexes[] = [
+                'date' => $date,
+                'name' => $indexName,
+            ];
+        }
+        // Newest first
+        uasort($indexes, static function ($a, $b) {
+            return $a['date'] < $b['date'];
+        });
+
+        return $indexes[0]['name'];
+    }
+
     public function markAsLive(Index $index): Response
     {
         $data = ['actions' => []];
@@ -130,6 +158,11 @@ class IndexBuilder
         ];
 
         return $this->client->request('_aliases', Request::POST, $data);
+    }
+
+    public function getClient(): Client
+    {
+        return $this->client;
     }
 
     /**

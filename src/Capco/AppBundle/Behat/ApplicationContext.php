@@ -194,11 +194,14 @@ class ApplicationContext extends UserContext
         }
 
         echo 'Restoring ElasticSearch snapshot.' . PHP_EOL;
+        /** @var IndexBuilder $indexManager */
         $indexManager = $this->getService(IndexBuilder::class);
         $indexManager->getLiveSearchIndex()->close();
-        $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], true);
+        $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], 'true');
         $indexManager->getLiveSearchIndex()->open();
-        $indexManager->markAsLive($indexManager->getLiveSearchIndex());
+        $indexManager->markAsLive(
+            $indexManager->getClient()->getIndex($indexManager->getLastIndexRealName())
+        );
     }
 
     /**
