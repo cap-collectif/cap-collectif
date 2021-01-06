@@ -8,14 +8,12 @@ use Elastica\Request;
 use Elastica\Response;
 use Elasticsearch\Endpoints\Indices\Aliases\Get;
 use Symfony\Component\Yaml\Yaml;
-use function Rector\Php71\Tests\Rector\FuncCall\CountOnNullRector\Fixture\c;
 
 /**
  * Handle index creation and manipulation.
  */
 class IndexBuilder
 {
-
     /**
      * @var Client
      */
@@ -119,16 +117,16 @@ class IndexBuilder
         $data = ['actions' => []];
 
         $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()]
+            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()],
         ];
         $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()]
+            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()],
         ];
         $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()]
+            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()],
         ];
         $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()]
+            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()],
         ];
 
         return $this->client->request('_aliases', Request::POST, $data);

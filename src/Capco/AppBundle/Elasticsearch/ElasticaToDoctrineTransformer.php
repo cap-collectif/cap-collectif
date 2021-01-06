@@ -67,10 +67,10 @@ class ElasticaToDoctrineTransformer
         $objects = $ids = $toFetchByType = [];
         /** @var Result $elasticaObject */
         foreach ($elasticaObjects as $elasticaObject) {
-            [$type, $id] = explode(':', $elasticaObject->getId());
+            list($type, $id) = explode(':', $elasticaObject->getId());
 
             if (!$type || !$id) {
-                throw new RuntimeException(
+                throw new \RuntimeException(
                     "Id format for current document is not type:id, can't hydrate to Doctrine!"
                 );
             }
@@ -172,11 +172,9 @@ class ElasticaToDoctrineTransformer
         $hydrationMode = $hydrate ? Query::HYDRATE_OBJECT : Query::HYDRATE_ARRAY;
 
         $qb = $this->getEntityQueryBuilder($objectClass);
-        $qb
-            ->andWhere(
-                $qb->expr()->in(static::ENTITY_ALIAS . '.' . $this->getIdentifierField(), ':values')
-            )
-            ->setParameter('values', $identifierValues);
+        $qb->andWhere(
+            $qb->expr()->in(static::ENTITY_ALIAS . '.' . $this->getIdentifierField(), ':values')
+        )->setParameter('values', $identifierValues);
 
         $query = $qb->getQuery();
 
