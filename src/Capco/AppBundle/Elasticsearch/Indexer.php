@@ -156,7 +156,7 @@ class Indexer
      */
     public function remove(string $entityFQN, $identifier): void
     {
-        $this->addToBulk(new Document(sprintf('%s:%s', $this->getTypeFromEntityFQN($entityFQN), $identifier), [], '_doc'));
+        $this->addToBulk(new Document($identifier, [], $this->getTypeFromEntityFQN($entityFQN)));
     }
 
     /**
@@ -241,11 +241,8 @@ class Indexer
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }
-        return new Document(
-            sprintf('%s:%s', $object::getElasticsearchTypeName(), $object->getId()),
-            $json,
-            '_doc'
-        );
+
+        return new Document($object->getId(), $json, $object::getElasticsearchTypeName());
     }
 
     /**
@@ -325,11 +322,7 @@ class Indexer
             } else {
                 // Empty mean DELETE
                 $this->addToBulk(
-                    new Document(
-                        sprintf('%s:%s', $object::getElasticsearchTypeName(), $object->getId()),
-                        [],
-                        '_doc'
-                    )
+                    new Document($object->getId(), [], $object::getElasticsearchTypeName())
                 );
                 ++$correctlyDeleted;
             }

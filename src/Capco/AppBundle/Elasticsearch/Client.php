@@ -28,11 +28,6 @@ class Client extends BaseClient
         array $query = [],
         $contentType = Request::DEFAULT_CONTENT_TYPE
     ): Response {
-        // ES < 7 compatibility, always count real total
-        if (false !== strpos($path, '_search') && \is_array($query)) {
-            $query['track_total_hits'] = true;
-        }
-
         if (!$this->debug || !\is_array($data)) {
             return parent::request($path, $method, $data, $query);
         }
@@ -49,7 +44,7 @@ class Client extends BaseClient
                 $query,
                 $start,
                 $response->getEngineTime(),
-                $responseData['hits']['total']['value'],
+                $responseData['hits']['total'],
                 $responseData
             );
         } else {

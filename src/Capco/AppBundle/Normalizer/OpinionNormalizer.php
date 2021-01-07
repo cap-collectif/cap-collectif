@@ -72,7 +72,7 @@ class OpinionNormalizer implements
         $voteCountNok = 0;
         $voteCountMitige = 0;
         $votes = $this->voteSearch->getVotesCountsByOpinion($object->getId());
-        $data['votesCount'] = $votes->getResponse()->getData()['hits']['total']['value'];
+        $data['votesCount'] = $votes->getTotalHits();
         foreach ($votes->getAggregation('votesCounts')['buckets'] as $voteCounts) {
             $voteValue = $voteCounts['key'];
             if (OpinionVote::VOTE_OK === $voteValue) {

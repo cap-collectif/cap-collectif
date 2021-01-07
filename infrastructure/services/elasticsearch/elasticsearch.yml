@@ -8,6 +8,9 @@ http.host: 0.0.0.0
 transport.host: 127.0.0.1
 bootstrap.memory_lock: true
 
-path.repo: ['var']
+xpack.security.enabled: false
+xpack.ml.enabled: false
+xpack.monitoring.enabled: false
+xpack.watcher.enabled: false
 
-plugin.mandatory: analysis-icu
+path.repo: ['var']

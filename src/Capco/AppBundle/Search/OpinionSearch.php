@@ -85,16 +85,13 @@ class OpinionSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $response = $this->index->search($query);
+        $response = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($response);
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->opinionRepo, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 

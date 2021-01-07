@@ -116,7 +116,6 @@ class UserNormalizer implements
         }
 
         $data['_links'] = $links;
-        $data['objectType'] = $object::getElasticsearchTypeName();
 
         return $data;
     }
