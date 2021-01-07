@@ -63,7 +63,7 @@ class OrderedCollectionType extends CollectionType
                         }
                     } elseif (!$item->getId()) {
                         // Else, it is a creation
-                        if (method_exists($match, 'setPosition')) {
+                        if (method_exists($item, 'setPosition')) {
                             $this->propertyAccessor->setValue($item, 'position', ++$position);
                         }
                         $this->propertyAccessor->setValue(

@@ -24,6 +24,6 @@
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
-{{ parent() }}
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {{ parent() }}
 {% endblock %}
