@@ -75,15 +75,13 @@ export const FaceToFace = ({ debate }: Props) => {
       { FOR: null, AGAINST: null },
     ) || { FOR: null, AGAINST: null };
 
-  const hasOpinionForAndAgainst = !!opinionForAndAgainst.FOR && !!opinionForAndAgainst.AGAINST;
-
   return (
     <Flex direction="column">
       <Text color="gray.500" mb={8}>
         {intl.formatMessage({ id: 'add.opposing.opinions' })}
       </Text>
 
-      <Flex direction="row" spacing={6} align={hasOpinionForAndAgainst ? 'stretch' : 'flex-start'}>
+      <Flex direction="row" spacing={6} align="flex-start">
         {opinionForAndAgainst.FOR?.id ? (
           <DebateOpinion
             debateOpinion={opinionForAndAgainst.FOR}

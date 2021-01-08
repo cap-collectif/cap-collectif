@@ -63,7 +63,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
           component={[Function]}
           id="cover"
           label={
-            <ForwardRef>
+            <div>
               proposal.media
               <span
                 className="excerpt inline"
@@ -71,7 +71,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                 global.optional
                  
               </span>
-            </ForwardRef>
+            </div>
           }
           name="Cover"
           type="image"
@@ -81,7 +81,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
         component={[Function]}
         id="video"
         label={
-          <ForwardRef>
+          <div>
             admin.fields.project.video
             <span
               className="excerpt inline"
@@ -118,7 +118,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                 <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
-          </ForwardRef>
+          </div>
         }
         name="video"
         placeholder="admin-project-video-placeholder"
@@ -134,7 +134,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
         id="themes"
         inputClassName="fake-inputClassName"
         label={
-          <ForwardRef>
+          <div>
             global.themes
             <span
               className="excerpt inline"
@@ -142,7 +142,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
               global.optional
                
             </span>
-          </ForwardRef>
+          </div>
         }
         labelClassName="control-label"
         loadOptions={[Function]}
@@ -162,7 +162,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
         id="districts"
         inputClassName="fake-inputClassName"
         label={
-          <ForwardRef>
+          <div>
             proposal_form.districts
             <span
               className="excerpt inline"
@@ -170,7 +170,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
               global.optional
                
             </span>
-          </ForwardRef>
+          </div>
         }
         labelClassName="control-label"
         loadOptions={[Function]}
@@ -182,7 +182,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
       <Field
         component={[Function]}
         label={
-          <ForwardRef>
+          <div>
             global.meta.description
             <span
               className="excerpt inline"
@@ -219,7 +219,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                 <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
-          </ForwardRef>
+          </div>
         }
         name="metaDescription"
         type="textarea"
@@ -292,7 +292,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
           component={[Function]}
           id="cover"
           label={
-            <ForwardRef>
+            <div>
               proposal.media
               <span
                 className="excerpt inline"
@@ -300,7 +300,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                 global.optional
                  
               </span>
-            </ForwardRef>
+            </div>
           }
           name="Cover"
           type="image"
@@ -310,7 +310,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
         component={[Function]}
         id="video"
         label={
-          <ForwardRef>
+          <div>
             admin.fields.project.video
             <span
               className="excerpt inline"
@@ -347,7 +347,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                 <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
-          </ForwardRef>
+          </div>
         }
         name="video"
         placeholder="admin-project-video-placeholder"
@@ -363,7 +363,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
         id="themes"
         inputClassName="fake-inputClassName"
         label={
-          <ForwardRef>
+          <div>
             global.themes
             <span
               className="excerpt inline"
@@ -371,7 +371,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
               global.optional
                
             </span>
-          </ForwardRef>
+          </div>
         }
         labelClassName="control-label"
         loadOptions={[Function]}
@@ -391,7 +391,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
         id="districts"
         inputClassName="fake-inputClassName"
         label={
-          <ForwardRef>
+          <div>
             proposal_form.districts
             <span
               className="excerpt inline"
@@ -399,7 +399,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
               global.optional
                
             </span>
-          </ForwardRef>
+          </div>
         }
         labelClassName="control-label"
         loadOptions={[Function]}
@@ -411,7 +411,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
       <Field
         component={[Function]}
         label={
-          <ForwardRef>
+          <div>
             global.meta.description
             <span
               className="excerpt inline"
@@ -448,7 +448,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                 <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
-          </ForwardRef>
+          </div>
         }
         name="metaDescription"
         type="textarea"

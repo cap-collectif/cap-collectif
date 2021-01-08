@@ -11,7 +11,7 @@ exports[`<FaceToFace /> should render correctly 1`] = `
     add.opposing.opinions
   </Text>
   <ForwardRef
-    align="stretch"
+    align="flex-start"
     direction="row"
     spacing={6}
   >

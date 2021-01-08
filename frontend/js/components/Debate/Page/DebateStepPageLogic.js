@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import moment from 'moment';
 import type { DebateStepPageLogic_query } from '~relay/DebateStepPageLogic_query.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import DebateStepPageMainActions from './MainActions/DebateStepPageMainActions';
@@ -22,10 +21,9 @@ export const DebateStepPageLogic = ({ query, title }: Props) => {
   const step = query?.step || null;
   const viewer = query?.viewer || null;
   const startAt = query?.step?.timeRange?.startAt || null;
-  const isTimeless = query?.step?.timeless || false;
-  const isStarted = startAt != null ? moment().isAfter(startAt) : false;
+  const isStarted = startAt != null ? new Date(startAt).getTime() <= new Date().getTime() : false;
 
-  if (isTimeless || isStarted || !step)
+  if (isStarted || !step)
     return (
       <Flex direction="column" spacing={8}>
         <DebateStepPageMainActions
@@ -51,7 +49,6 @@ export default createFragmentContainer(DebateStepPageLogic, {
       }
       step: node(id: $stepId) {
         ... on DebateStep {
-          timeless
           timeRange {
             startAt
           }

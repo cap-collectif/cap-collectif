@@ -11,7 +11,6 @@ import { type ProjectAdminDebate_debate } from '~relay/ProjectAdminDebate_debate
 import FaceToFace from './FaceToFace/FaceToFace';
 import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery';
 import VoteTabQuery from './VoteTab/VoteTabQuery';
-import Heading from '~ui/Primitives/Heading';
 
 type Props = {|
   hasContributionsStep: boolean,
@@ -42,9 +41,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
       <Accordion spacing={2} defaultAccordion="face-to-face">
         <Accordion.Item id="face-to-face">
           <Accordion.Button>
-            <Heading as="h4">
-              <FormattedMessage id="the.face-to-face" tagName={React.Fragment} />
-            </Heading>
+            <FormattedMessage id="the.face-to-face" />
           </Accordion.Button>
 
           <Accordion.Panel>
@@ -54,13 +51,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
 
         <Accordion.Item id="argument">
           <Accordion.Button>
-            <Heading as="h4">
-              <FormattedMessage
-                id="argument-count"
-                values={{ count: sumCountArguments }}
-                tagName={React.Fragment}
-              />
-            </Heading>
+            <FormattedMessage id="argument-count" values={{ count: sumCountArguments }} />
           </Accordion.Button>
 
           <Accordion.Panel>
@@ -70,13 +61,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
 
         <Accordion.Item id="vote">
           <Accordion.Button>
-            <Heading as="h4">
-              <FormattedMessage
-                id="votes-count"
-                values={{ num: votes.totalCount }}
-                tagName={React.Fragment}
-              />
-            </Heading>
+            <FormattedMessage id="votes-count" values={{ num: votes.totalCount }} />
           </Accordion.Button>
           <Accordion.Panel>
             <VoteTabQuery debate={debate} />

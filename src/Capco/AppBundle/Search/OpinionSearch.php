@@ -82,16 +82,18 @@ class OpinionSearch extends Search
                     ->addSort(['id' => new \stdClass()]);
             }
         }
-
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $response = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
+        $data = $response->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->opinionRepo, $response),
             $cursors,
-            $response->getTotalHits()
+            $count
         );
     }
 

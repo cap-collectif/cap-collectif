@@ -21,8 +21,8 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
     "variables": {
       "input": {
         "emails": [
-          "lbrunet@cap-collectif.com",
-          "sfavot@cap-collectif.com",
+          "lbrunet@jolicode.com",
+          "sfavot@jolicode.com",
           "pierre@cap-collectif.com",
           "unknown@unknown.com",
           "unknown@unknown.com"
@@ -41,11 +41,11 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
         "importedUsers": [
           {
             "_id": "user1",
-            "email": "lbrunet@cap-collectif.com"
+            "email": "lbrunet@jolicode.com"
           },
           {
             "_id": "user2",
-            "email": "sfavot@cap-collectif.com"
+            "email": "sfavot@jolicode.com"
           },
           {
             "_id": "userKiroule",
@@ -117,8 +117,8 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
     "variables": {
       "input": {
         "emails": [
-          "lbrunet@cap-collectif.com",
-          "sfavot@cap-collectif.com",
+          "lbrunet@jolicode.com",
+          "sfavot@jolicode.com",
           "pierre@cap-collectif.com",
           "unknown@unknown.com"
         ],
@@ -136,11 +136,11 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
         "importedUsers": [
           {
             "_id": "user1",
-            "email": "lbrunet@cap-collectif.com"
+            "email": "lbrunet@jolicode.com"
           },
           {
             "_id": "user2",
-            "email": "sfavot@cap-collectif.com"
+            "email": "sfavot@jolicode.com"
           },
           {
             "_id": "userKiroule",

@@ -1,17 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`] = `
-<ModalDebateOpinionstyle__ModalContainer
+<Modal
   animation={false}
   aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
   bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
   onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
   show={true}
 >
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
     closeLabel="Close"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
   >
     <Heading
       as="h4"
@@ -86,6 +111,11 @@ exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`
   <ModalFooter
     bsClass="modal-footer"
     componentClass="div"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
   >
     <ButtonGroup
       justifyContent="flex-end"
@@ -106,21 +136,46 @@ exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`
       </Button>
     </ButtonGroup>
   </ModalFooter>
-</ModalDebateOpinionstyle__ModalContainer>
+</Modal>
 `;
 
 exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`] = `
-<ModalDebateOpinionstyle__ModalContainer
+<Modal
   animation={false}
   aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
   bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
   onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
   show={true}
 >
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
     closeLabel="Close"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
   >
     <Heading
       as="h4"
@@ -195,6 +250,11 @@ exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`]
   <ModalFooter
     bsClass="modal-footer"
     componentClass="div"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
   >
     <ButtonGroup
       justifyContent="flex-end"
@@ -215,5 +275,5 @@ exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`]
       </Button>
     </ButtonGroup>
   </ModalFooter>
-</ModalDebateOpinionstyle__ModalContainer>
+</Modal>
 `;

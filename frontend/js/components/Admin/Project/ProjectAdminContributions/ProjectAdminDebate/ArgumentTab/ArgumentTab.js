@@ -14,10 +14,10 @@ import { ICON_NAME } from '~ds/Icon/Icon';
 import Spinner from '~ds/Spinner/Spinner';
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import InlineSelect from '~ds/InlineSelect';
+import { baseUrl } from '~/config';
 import NoResultArgument from '~/components/Admin/Debate/NoResultArgument/NoResultArgument';
 import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { type ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql';
-import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
 
 export const ARGUMENT_PAGINATION = 10;
 
@@ -154,7 +154,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
     </Flex>
   ) : (
     <Flex direction="column" spacing={6} align="center">
-      <SpotIcon name={SPOT_ICON_NAME.PENCIL_SOFTWARE} size="lg" />
+      <AppBox as="img" src={`${baseUrl}/image/contribution_debate_argument.png`} />
       <Text color="gray.500">{intl.formatMessage({ id: 'debate.empty.arguments.section' })}</Text>
     </Flex>
   );

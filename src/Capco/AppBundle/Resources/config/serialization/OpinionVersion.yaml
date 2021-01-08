@@ -54,3 +54,6 @@ Capco\AppBundle\Entity\OpinionVersion:
       type: object
       serialized_name: opinion
       groups: [ElasticsearchVersion]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [ElasticsearchVersion]

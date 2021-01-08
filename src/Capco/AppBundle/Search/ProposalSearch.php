@@ -22,14 +22,14 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ProposalSearch extends Search
 {
     public const SEARCH_FIELDS = [
-        'title',
+        'proposalTitle',
         'author.username.std',
         'author.username',
-        'title.std',
+        'proposalTitle.std',
         'reference',
         'reference.std',
-        'body',
-        'body.std',
+        'proposalBody',
+        'proposalBody.std',
         'object',
         'object.std',
         'teaser',
@@ -98,7 +98,10 @@ class ProposalSearch extends Search
                 ['id' => new \stdClass()],
             ]);
         }
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
+        $data = $resultSet->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
         $ids = [];
         $cursors = [];
         foreach ($resultSet as $result) {
@@ -107,7 +110,7 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $count);
     }
 
     // This method is called in ProposalFormProposalsDataLoader and is based only on the first collectstep of the project.
@@ -186,7 +189,11 @@ class ProposalSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
+        $data = $resultSet->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
+
         $ids = [];
         $cursors = [];
         foreach ($resultSet as $result) {
@@ -195,7 +202,7 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $count);
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
@@ -317,7 +324,8 @@ class ProposalSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
@@ -432,10 +440,13 @@ class ProposalSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
+        $data = $response->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
+
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->proposalRepo, $response),
             $cursors,
-            $response->getTotalHits()
+            $count
         );
     }
 

@@ -18,7 +18,7 @@ Scenario: API client wants to know if a user has reply to a questionnaire
     "variables": {
       "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
       "loginA": "aurelien@cap-collectif.com",
-      "loginB": "msantostefano@cap-collectif.com",
+      "loginB": "msantostefano@jolicode.com",
       "loginC": "unknown@gmail.com"
     }
   }
