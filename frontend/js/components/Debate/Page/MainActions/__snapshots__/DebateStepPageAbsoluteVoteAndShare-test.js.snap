@@ -3,7 +3,12 @@
 exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
-  p={8}
+  p={
+    Array [
+      6,
+      8,
+    ]
+  }
   position="fixed"
   top={50}
   width="100%"
@@ -11,19 +16,82 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
 >
   <ForwardRef
     alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
     justifyContent="center"
+    spacing={4}
   >
     <Text
       as="p"
       color="gray.900"
       fontSize={4}
+      textAlign={
+        Array [
+          "center",
+          "left",
+        ]
+      }
     >
       Pour ou contre le LSD dans nos cantines
     </Text>
     <DebateStepPageVote
       debateId="debate1"
       isAuthenticated={true}
-      ml={4}
+      onSuccess={[MockFunction]}
+      viewerHasArgument={false}
+      width="unset"
+    />
+  </ForwardRef>
+</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty on mobile 1`] = `
+<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  _css={[Function]}
+  borderTopLeftRadius="poppin"
+  borderTopRightRadius="poppin"
+  bottom={0}
+  p={
+    Array [
+      6,
+      8,
+    ]
+  }
+  position="fixed"
+  width="100%"
+  zIndex={999}
+>
+  <ForwardRef
+    alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    justifyContent="center"
+    spacing={4}
+  >
+    <Text
+      as="p"
+      color="gray.900"
+      fontSize={4}
+      textAlign={
+        Array [
+          "center",
+          "left",
+        ]
+      }
+    >
+      Pour ou contre le LSD dans nos cantines
+    </Text>
+    <DebateStepPageVote
+      debateId="debate1"
+      isAuthenticated={true}
       onSuccess={[MockFunction]}
       viewerHasArgument={false}
       width="unset"
@@ -35,7 +103,12 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
 exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
-  p={8}
+  p={
+    Array [
+      6,
+      8,
+    ]
+  }
   position="fixed"
   top={50}
   width="100%"
@@ -66,10 +139,57 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
+exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented on mobile 1`] = `
+<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  _css={[Function]}
+  borderTopLeftRadius="poppin"
+  borderTopRightRadius="poppin"
+  bottom={0}
+  p={
+    Array [
+      6,
+      8,
+    ]
+  }
+  position="fixed"
+  width="100%"
+  zIndex={999}
+>
+  <Relay(DebateStepPageVoteForm)
+    body="Oui je suis pour"
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "debate1",
+        "votes": Object {
+          "totalCount": 5,
+        },
+        "yesVotes": Object {
+          "totalCount": 4,
+        },
+      }
+    }
+    isAbsolute={true}
+    isMobile={true}
+    setShowArgumentForm={[MockFunction]}
+    setVoteState={[MockFunction]}
+    showArgumentForm={true}
+    url="/debate1"
+    voteState="ARGUMENTED"
+  />
+</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+`;
+
 exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
-  p={8}
+  p={
+    Array [
+      6,
+      8,
+    ]
+  }
   position="fixed"
   top={50}
   width="100%"
@@ -91,6 +211,48 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] =
       }
     }
     isAbsolute={true}
+    setShowArgumentForm={[MockFunction]}
+    setVoteState={[MockFunction]}
+    showArgumentForm={true}
+    url="/debate1"
+    voteState="VOTED"
+  />
+</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted on mobile 1`] = `
+<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
+  _css={[Function]}
+  borderTopLeftRadius="poppin"
+  borderTopRightRadius="poppin"
+  bottom={0}
+  p={
+    Array [
+      6,
+      8,
+    ]
+  }
+  position="fixed"
+  width="100%"
+  zIndex={999}
+>
+  <Relay(DebateStepPageVoteForm)
+    body="Oui je suis pour"
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "debate1",
+        "votes": Object {
+          "totalCount": 5,
+        },
+        "yesVotes": Object {
+          "totalCount": 4,
+        },
+      }
+    }
+    isAbsolute={true}
+    isMobile={true}
     setShowArgumentForm={[MockFunction]}
     setVoteState={[MockFunction]}
     showArgumentForm={true}

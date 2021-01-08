@@ -18,8 +18,6 @@ type Props = {|
   +isAuthenticated: boolean,
 |};
 
-// TODO: make the DebateStepPageVoteAndShare mobile friendly in the next PR, for now we do not display it
-// to avoid breaking mobile layout
 export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticated }: Props) => (
   <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
     <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
@@ -30,8 +28,9 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
         <Heading as="h2" fontWeight="400" mb={6} textAlign="center" color="gray.900">
           {title}
         </Heading>
-        {!isMobile && step && (
+        {step && (
           <DebateStepPageVoteAndShare
+            isMobile={isMobile}
             title={title}
             debate={step?.debate}
             isAuthenticated={isAuthenticated}

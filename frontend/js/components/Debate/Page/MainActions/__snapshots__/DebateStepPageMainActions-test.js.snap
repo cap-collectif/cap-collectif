@@ -39,6 +39,7 @@ exports[`<DebateStepPageMainActions/> renders correcty 1`] = `
           }
         }
         isAuthenticated={true}
+        isMobile={false}
         title="Pour ou contre le LSD dans nos cantines"
         url="/debatestep1"
       />

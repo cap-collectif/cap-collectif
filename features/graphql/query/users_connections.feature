@@ -45,7 +45,7 @@ Scenario: lbrunet wants to see lbrunet's successful connections
                 },
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:06:00",
-                "email": "lbrunet@jolicode.com"
+                "email": "lbrunet@cap-collectif.com"
               }
             }
           ]
@@ -57,7 +57,7 @@ Scenario: lbrunet wants to see lbrunet's successful connections
 
 @read-only @database
 Scenario: lbrunet wants to see lbrunet's unsuccessful connections
-  Given I am logged in to graphql as "lbrunet@jolicode.com" with password "toto"
+  Given I am logged in to graphql as "lbrunet@cap-collectif.com" with password "toto"
   When I send a GraphQL POST request:
   """
   {
@@ -82,7 +82,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
     }",
     "variables": {
       "userId": "VXNlcjp1c2VyMQ==",
-      "email": "lbrunet@jolicode.com"
+      "email": "lbrunet@cap-collectif.com"
     }
   }
   """
@@ -99,7 +99,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
                 "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:01:00",
-                "email": "lbrunet@jolicode.com"
+                "email": "lbrunet@cap-collectif.com"
               }
             },
             {
@@ -107,7 +107,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
                 "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:02:00",
-                "email": "lbrunet@jolicode.com"
+                "email": "lbrunet@cap-collectif.com"
               }
             },
             {
@@ -115,7 +115,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
                 "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:03:00",
-                "email": "lbrunet@jolicode.com"
+                "email": "lbrunet@cap-collectif.com"
               }
             },
             {
@@ -123,7 +123,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
                 "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:04:00",
-                "email": "lbrunet@jolicode.com"
+                "email": "lbrunet@cap-collectif.com"
               }
             },
             {
@@ -131,7 +131,7 @@ Scenario: lbrunet wants to see lbrunet's unsuccessful connections
                 "user": null,
                 "ipAddress": "192.168.64.1",
                 "datetime": "2017-01-01 00:05:00",
-                "email": "lbrunet@jolicode.com"
+                "email": "lbrunet@cap-collectif.com"
               }
             }
           ]

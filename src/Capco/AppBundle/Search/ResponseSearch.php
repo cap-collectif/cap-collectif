@@ -67,16 +67,13 @@ class ResponseSearch extends Search
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
+        $resultSet = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
             $cursors,
-            $count
+            $resultSet->getTotalHits()
         );
     }
 
@@ -94,16 +91,13 @@ class ResponseSearch extends Search
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
+        $resultSet = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
             $cursors,
-            $count
+            $resultSet->getTotalHits()
         );
     }
 
@@ -149,16 +143,13 @@ class ResponseSearch extends Search
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
+        $resultSet = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
             $cursors,
-            $count
+            $resultSet->getTotalHits()
         );
     }
 
@@ -171,9 +162,8 @@ class ResponseSearch extends Search
         $agg->setOrder('_count', 'desc');
         $agg->setField('textValue.tag')->setSize($size);
         $query->addAggregation($agg);
-        $this->addObjectTypeFilter($query, $this->type);
 
-        return $this->index->search($query);
+        return $this->index->getType($this->type)->search($query);
     }
 
     private function getNoEmptyResultQueryBuilder(

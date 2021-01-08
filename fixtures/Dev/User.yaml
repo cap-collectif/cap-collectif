@@ -4,7 +4,7 @@ Capco\UserBundle\Entity\User:
         username: lbrunet
         firstname: Laurent
         lastname: Brunet
-        email: lbrunet@jolicode.com
+        email: lbrunet@cap-collectif.com
         phone: '+3300000000'
         userType: '@UserType1'
         plainPassword: toto
@@ -21,7 +21,7 @@ Capco\UserBundle\Entity\User:
         username: sfavot
         firstname: Suzanne
         lastname: Favot
-        email: sfavot@jolicode.com
+        email: sfavot@cap-collectif.com
         userType: '@UserType1'
         plainPassword: toto
         roles:
@@ -41,7 +41,7 @@ Capco\UserBundle\Entity\User:
         username: xlacot
         firstname: Xavier
         lastname: Lacot
-        email: xlacot@jolicode.com
+        email: xlacot@cap-collectif.com
         userType: '@UserType1'
         plainPassword: toto
         roles:
@@ -146,7 +146,7 @@ Capco\UserBundle\Entity\User:
         username: welcomattic
         firstname: Mathieu
         lastname: Santostefano
-        email: msantostefano@jolicode.com
+        email: msantostefano@cap-collectif.com
         userType: '@UserType1'
         plainPassword: capco
         roles:

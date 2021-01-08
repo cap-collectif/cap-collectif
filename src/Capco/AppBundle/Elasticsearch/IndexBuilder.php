@@ -14,6 +14,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IndexBuilder
 {
+
     /**
      * @var Client
      */
@@ -47,7 +48,7 @@ class IndexBuilder
 
     public function generateIndexName(): string
     {
-        return sprintf('capco_%s', date('Y-m-d-H-i-s'));
+        return sprintf('capco_%s', date('Y-m-d-H:i:s'));
     }
 
     public function cleanOldIndices(int $afterLiveLimit = 2): array
@@ -63,7 +64,7 @@ class IndexBuilder
             }
 
             $date = \DateTime::createFromFormat(
-                'Y-m-d-H-i-s',
+                'Y-m-d-H:i:s',
                 str_replace('capco_', '', $indexName)
             );
 
@@ -112,57 +113,24 @@ class IndexBuilder
         return $this->indexName . '_indexing';
     }
 
-    public function getLastIndexRealName(): string
-    {
-        $indexNames = $this->client->getCluster()->getIndexNames();
-        $indexes = [];
-        foreach ($indexNames as $indexName) {
-            if (0 !== strpos($indexName, 'capco_')) {
-                unset($indexNames[$indexName]);
-
-                continue;
-            }
-            $date = \DateTime::createFromFormat(
-                'Y-m-d-H-i-s',
-                str_replace('capco_', '', $indexName)
-            );
-
-            $indexes[] = [
-                'date' => $date,
-                'name' => $indexName,
-            ];
-        }
-        // Newest first
-        uasort($indexes, static function ($a, $b) {
-            return $a['date'] < $b['date'];
-        });
-
-        return $indexes[0]['name'];
-    }
-
     public function markAsLive(Index $index): Response
     {
         $data = ['actions' => []];
 
         $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()],
+            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()]
         ];
         $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()],
+            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()]
         ];
         $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()],
+            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()]
         ];
         $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()],
+            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()]
         ];
 
         return $this->client->request('_aliases', Request::POST, $data);
-    }
-
-    public function getClient(): Client
-    {
-        return $this->client;
     }
 
     /**

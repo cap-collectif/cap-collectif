@@ -94,15 +94,12 @@ class ProjectSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
 
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
+        $resultSet = $this->index->getType($this->type)->search($query);
         $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
 
         return [
             'projects' => $results,
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -110,8 +107,9 @@ class ProjectSearch extends Search
     {
         $query = new Query();
         $query->setSource(['contributionsCount', 'visibility']);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query, $this->projectRepo->count([]));
+        $resultSet = $this->index
+            ->getType($this->type)
+            ->search($query, $this->projectRepo->count([]));
         $totalCount = array_sum(
             array_map(static function (Result $result) {
                 if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $result->getData()['visibility']) {

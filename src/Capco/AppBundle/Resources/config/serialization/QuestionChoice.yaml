@@ -14,7 +14,4 @@ Capco\AppBundle\Entity\QuestionChoice:
     getQuestion:
       groups: [ElasticsearchQuestionChoiceNestedQuestion]
       serialized_name: question
-    elasticsearchTypeName:
-      serialized_name: objectType
-      groups: [ ElasticsearchQuestionChoice ]
 

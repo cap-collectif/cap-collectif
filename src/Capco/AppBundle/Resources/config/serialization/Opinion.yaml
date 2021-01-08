@@ -89,6 +89,3 @@ Capco\AppBundle\Entity\Opinion:
             type: object
             serialized_name: project
             groups: [ElasticsearchOpinionNestedProject]
-        elasticsearchTypeName:
-            serialized_name: objectType
-            groups: [ElasticsearchOpinion]

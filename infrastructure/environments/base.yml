@@ -129,7 +129,7 @@ services:
   #    - ../services/cerebro:/opt/cerebro/conf
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.0.0
+    image: kibana:5
     links:
       - elasticsearch
     ports:

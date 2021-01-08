@@ -31,21 +31,31 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
 >
   <ForwardRef
     alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
     justifyContent="center"
-    mb={8}
   >
-    <DebateStepPageVoteForm___StyledSpan
+    <DebateStepPageVoteForm___StyledSpan2
       aria-label="vote"
       role="img"
     >
       🗳️
-    </DebateStepPageVoteForm___StyledSpan>
+    </DebateStepPageVoteForm___StyledSpan2>
     <FormattedMessage
       id="thanks-for-your-vote"
       values={Object {}}
     />
-    <DebateStepPageVoteForm___StyledButton
-      _css={[Function]}
+    <DebateStepPageVoteForm___StyledButton2
+      _css2={[Function]}
       ml={2}
       onClick={[Function]}
       variant="link"
@@ -55,12 +65,13 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
         id="edit.vote.against"
         values={Object {}}
       />
-    </DebateStepPageVoteForm___StyledButton>
+    </DebateStepPageVoteForm___StyledButton2>
   </ForwardRef>
   <Card
     bg="white"
     borderRadius="8px"
     boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+    mt={8}
     p={6}
     pb={6}
     width="100%"
@@ -108,6 +119,108 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
       </ForwardRef>
     </DebateStepPageVoteForm__Form>
   </Card>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVoteForm/> renders correcty on mobile 1`] = `
+<ForwardRef(MotionComponent)
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  exit={
+    Object {
+      "opacity": 0,
+    }
+  }
+  initial={
+    Object {
+      "opacity": 1,
+    }
+  }
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  transition={
+    Object {
+      "delay": 0.75,
+      "duration": 0.5,
+    }
+  }
+>
+  <ForwardRef
+    alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
+    justifyContent="center"
+  >
+    <DebateStepPageVoteForm___StyledButton
+      _css={[Function]}
+      mb={
+        Array [
+          3,
+          0,
+        ]
+      }
+      ml={
+        Array [
+          0,
+          2,
+        ]
+      }
+      onClick={[Function]}
+      variant="link"
+      variantSize="small"
+    >
+      <FormattedMessage
+        id="edit.vote.against"
+        values={Object {}}
+      />
+    </DebateStepPageVoteForm___StyledButton>
+    <Text
+      textAlign="center"
+    >
+      <DebateStepPageVoteForm___StyledSpan
+        aria-label="vote"
+        role="img"
+      >
+        🗳️
+      </DebateStepPageVoteForm___StyledSpan>
+      <FormattedMessage
+        id="thanks-for-your-vote"
+        tagName={Symbol(react.fragment)}
+        values={Object {}}
+      />
+    </Text>
+  </ForwardRef>
+  <Connect(MobilePublishArgumentModal)
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    title="why-are-you-against"
+  />
+  <Button
+    justifyContent="center"
+    mt={3}
+    onClick={[Function]}
+    variant="primary"
+    variantSize="big"
+    width="100%"
+  >
+    publish-argument
+  </Button>
 </ForwardRef(MotionComponent)>
 `;
 
@@ -142,21 +255,31 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
 >
   <ForwardRef
     alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
     justifyContent="center"
-    mb={8}
   >
-    <DebateStepPageVoteForm___StyledSpan
+    <DebateStepPageVoteForm___StyledSpan2
       aria-label="vote"
       role="img"
     >
       🎉
-    </DebateStepPageVoteForm___StyledSpan>
+    </DebateStepPageVoteForm___StyledSpan2>
     <FormattedMessage
       id="thanks-for-debate-richer"
       values={Object {}}
     />
-    <DebateStepPageVoteForm___StyledButton
-      _css={[Function]}
+    <DebateStepPageVoteForm___StyledButton2
+      _css2={[Function]}
       ml={2}
       onClick={[Function]}
       variant="link"
@@ -166,12 +289,54 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
         id="edit.vote.against"
         values={Object {}}
       />
-    </DebateStepPageVoteForm___StyledButton>
+    </DebateStepPageVoteForm___StyledButton2>
+  </ForwardRef>
+  <ForwardRef
+    flexDirection="row"
+    justify="center"
+    mt={3}
+    spacing={2}
+  >
+    <a
+      className="twitter-share-button"
+      data-show-count="false"
+      href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+    >
+      Tweet
+    </a>
+    <Tooltip
+      label="copied-link"
+      trigger={
+        Array [
+          "click",
+        ]
+      }
+    >
+      <Button
+        backgroundColor="gray.500"
+        color="white"
+        fontSize={11}
+        height={5}
+        onClick={[Function]}
+        p="4px 8px"
+      >
+        <Icon
+          mr="1"
+          name="HYPERLINK"
+          size="sm"
+        />
+        <FormattedMessage
+          id="global.link"
+          values={Object {}}
+        />
+      </Button>
+    </Tooltip>
   </ForwardRef>
   <Card
     bg="white"
     borderRadius="8px"
     boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+    mt={8}
     p={6}
     pb={6}
     width="100%"
@@ -222,6 +387,149 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
 </ForwardRef(MotionComponent)>
 `;
 
+exports[`<DebateStepPageVoteForm/> renders correcty when argumented on mobile 1`] = `
+<ForwardRef(MotionComponent)
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  exit={
+    Object {
+      "opacity": 0,
+    }
+  }
+  initial={
+    Object {
+      "opacity": 1,
+    }
+  }
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  transition={
+    Object {
+      "delay": 0.75,
+      "duration": 0.5,
+    }
+  }
+>
+  <ForwardRef
+    alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
+    justifyContent="center"
+  >
+    <DebateStepPageVoteForm___StyledButton
+      _css={[Function]}
+      mb={
+        Array [
+          3,
+          0,
+        ]
+      }
+      ml={
+        Array [
+          0,
+          2,
+        ]
+      }
+      onClick={[Function]}
+      variant="link"
+      variantSize="small"
+    >
+      <FormattedMessage
+        id="edit.vote.against"
+        values={Object {}}
+      />
+    </DebateStepPageVoteForm___StyledButton>
+    <Text
+      textAlign="center"
+    >
+      <DebateStepPageVoteForm___StyledSpan
+        aria-label="vote"
+        role="img"
+      >
+        🎉
+      </DebateStepPageVoteForm___StyledSpan>
+      <FormattedMessage
+        id="thanks-for-debate-richer"
+        tagName={Symbol(react.fragment)}
+        values={Object {}}
+      />
+    </Text>
+  </ForwardRef>
+  <ForwardRef
+    flexDirection="row"
+    justify="center"
+    mt={3}
+    spacing={2}
+  >
+    <a
+      className="twitter-share-button"
+      data-show-count="false"
+      href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+    >
+      Tweet
+    </a>
+    <Tooltip
+      label="copied-link"
+      trigger={
+        Array [
+          "click",
+        ]
+      }
+    >
+      <Button
+        backgroundColor="gray.500"
+        color="white"
+        fontSize={11}
+        height={5}
+        onClick={[Function]}
+        p="4px 8px"
+      >
+        <Icon
+          mr="1"
+          name="HYPERLINK"
+          size="sm"
+        />
+        <FormattedMessage
+          id="global.link"
+          values={Object {}}
+        />
+      </Button>
+    </Tooltip>
+  </ForwardRef>
+  <Connect(MobilePublishArgumentModal)
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    title="why-are-you-against"
+  />
+  <Button
+    justifyContent="center"
+    mt={3}
+    onClick={[Function]}
+    variant="primary"
+    variantSize="big"
+    width="100%"
+  >
+    publish-argument
+  </Button>
+</ForwardRef(MotionComponent)>
+`;
+
 exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
 <ForwardRef(MotionComponent)
   animate={
@@ -253,21 +561,31 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
 >
   <ForwardRef
     alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
     justifyContent="center"
-    mb={8}
   >
-    <DebateStepPageVoteForm___StyledSpan
+    <DebateStepPageVoteForm___StyledSpan2
       aria-label="vote"
       role="img"
     >
       🗳️
-    </DebateStepPageVoteForm___StyledSpan>
+    </DebateStepPageVoteForm___StyledSpan2>
     <FormattedMessage
       id="thanks-for-your-vote"
       values={Object {}}
     />
-    <DebateStepPageVoteForm___StyledButton
-      _css={[Function]}
+    <DebateStepPageVoteForm___StyledButton2
+      _css2={[Function]}
       ml={2}
       onClick={[Function]}
       variant="link"
@@ -277,12 +595,13 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
         id="edit.vote.against"
         values={Object {}}
       />
-    </DebateStepPageVoteForm___StyledButton>
+    </DebateStepPageVoteForm___StyledButton2>
   </ForwardRef>
   <Card
     bg="white"
     borderRadius="8px"
     boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+    mt={8}
     p={6}
     pb={6}
     width="100%"
@@ -330,5 +649,107 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
       </ForwardRef>
     </DebateStepPageVoteForm__Form>
   </Card>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVoteForm/> renders correcty when voted on mobile 1`] = `
+<ForwardRef(MotionComponent)
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  exit={
+    Object {
+      "opacity": 0,
+    }
+  }
+  initial={
+    Object {
+      "opacity": 1,
+    }
+  }
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  transition={
+    Object {
+      "delay": 0.75,
+      "duration": 0.5,
+    }
+  }
+>
+  <ForwardRef
+    alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
+    justifyContent="center"
+  >
+    <DebateStepPageVoteForm___StyledButton
+      _css={[Function]}
+      mb={
+        Array [
+          3,
+          0,
+        ]
+      }
+      ml={
+        Array [
+          0,
+          2,
+        ]
+      }
+      onClick={[Function]}
+      variant="link"
+      variantSize="small"
+    >
+      <FormattedMessage
+        id="edit.vote.against"
+        values={Object {}}
+      />
+    </DebateStepPageVoteForm___StyledButton>
+    <Text
+      textAlign="center"
+    >
+      <DebateStepPageVoteForm___StyledSpan
+        aria-label="vote"
+        role="img"
+      >
+        🗳️
+      </DebateStepPageVoteForm___StyledSpan>
+      <FormattedMessage
+        id="thanks-for-your-vote"
+        tagName={Symbol(react.fragment)}
+        values={Object {}}
+      />
+    </Text>
+  </ForwardRef>
+  <Connect(MobilePublishArgumentModal)
+    onClose={[Function]}
+    onSubmit={[Function]}
+    show={false}
+    title="why-are-you-against"
+  />
+  <Button
+    justifyContent="center"
+    mt={3}
+    onClick={[Function]}
+    variant="primary"
+    variantSize="big"
+    width="100%"
+  >
+    publish-argument
+  </Button>
 </ForwardRef(MotionComponent)>
 `;

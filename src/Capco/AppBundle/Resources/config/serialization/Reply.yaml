@@ -24,6 +24,3 @@ Capco\AppBundle\Entity\Reply:
             type: object
             serialized_name: step
             groups: [ElasticsearchReplyNestedStep]
-        elasticsearchTypeName:
-            serialized_name: objectType
-            groups: [ElasticsearchReply]
