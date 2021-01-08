@@ -248,9 +248,9 @@ exports[`<ArgumentTab /> should render correctly when no argument 1`] = `
   direction="column"
   spacing={6}
 >
-  <AppBox
-    as="img"
-    src="http://localhost/image/contribution_debate_argument.png"
+  <SpotIcon
+    name="PENCIL_SOFTWARE"
+    size="lg"
   />
   <Text
     color="gray.500"

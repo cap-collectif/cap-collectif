@@ -22,9 +22,11 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
   <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
     <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
       <Flex direction="column" alignItems="center" spacing={4}>
-        <Tag variantType="badge" variant="yellow" icon="CLOCK">
-          {step?.timeRange?.endAt && <RemainingTime noStyle endAt={step?.timeRange?.endAt} />}
-        </Tag>
+        {!step?.timeless && step?.timeRange?.endAt && (
+          <Tag variantType="badge" variant="yellow" icon="CLOCK">
+            <RemainingTime noStyle endAt={step?.timeRange?.endAt} />
+          </Tag>
+        )}
         <Heading as="h2" fontWeight="400" mb={6} textAlign="center" color="gray.900">
           {title}
         </Heading>
@@ -45,7 +47,7 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
 export default createFragmentContainer(DebateStepPageMainActions, {
   step: graphql`
     fragment DebateStepPageMainActions_step on DebateStep {
-      id
+      timeless
       timeRange {
         endAt
       }

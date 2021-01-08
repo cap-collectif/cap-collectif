@@ -27,6 +27,7 @@ export type Step = {|
   +type: ?string,
   +url: ?string,
   +slug: ?string,
+  +hasOpinionsFilled: ?boolean,
 |};
 
 export type Steps = $ReadOnlyArray<Step>;

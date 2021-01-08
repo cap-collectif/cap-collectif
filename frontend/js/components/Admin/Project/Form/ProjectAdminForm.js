@@ -247,6 +247,7 @@ const onSubmit = (
           articles: s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
           debate: undefined,
           slug: undefined,
+          hasOpinionsFilled: undefined,
         }))
       : [],
     locale: locale ? locale.value : null,
@@ -420,6 +421,8 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
               step.type === 'DebateStep'
                 ? step?.debate?.articles?.edges?.filter(Boolean).map(edge => edge.node)
                 : [],
+            hasOpinionsFilled:
+              step.type === 'DebateStep' ? step?.debate?.opinions.totalCount === 2 : undefined,
             debate: undefined,
           }))
         : [],
@@ -679,6 +682,9 @@ export default createFragmentContainer(container, {
         }
         ... on DebateStep {
           debate {
+            opinions {
+              totalCount
+            }
             articles {
               edges {
                 node {
