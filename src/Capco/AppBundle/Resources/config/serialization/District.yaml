@@ -1,0 +1,15 @@
+Capco\AppBundle\Entity\District\ProposalDistrict:
+  attributes:
+    id:
+      groups: [Districts, Proposals, Elasticsearch]
+    name:
+      groups: [Districts, Proposals, Elasticsearch]
+    geojson:
+      groups: [DistrictDetails]
+    geojsonStyle:
+      groups: [DistrictDetails]
+    displayedOnMap:
+      groups: [DistrictDetails]
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [Elasticsearch]

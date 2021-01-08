@@ -166,7 +166,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInToGraphQLAsSfavot()
     {
-        $this->iAmAuthenticatedAs('sfavot@cap-collectif.com');
+        $this->iAmAuthenticatedAs('sfavot@jolicode.com');
     }
 
     /**

@@ -1,10 +1,6 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:5.6.13
+FROM docker.elastic.co/elasticsearch/elasticsearch-oss:7.0.0
 
-ADD elasticsearch.yml /usr/share/elasticsearch/config/
-
-USER root
-
-RUN chown elasticsearch:elasticsearch config/elasticsearch.yml
+COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsearch/config/
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 

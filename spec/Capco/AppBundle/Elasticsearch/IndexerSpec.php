@@ -67,67 +67,67 @@ class IndexerSpec extends ObjectBehavior
 
     public function it_remove_proposal_comment()
     {
-        $this->itShouldDeleteIndex(ProposalComment::class, 'proposalComment3', 'comment');
+        $this->itShouldDeleteIndex(ProposalComment::class, 'proposalComment3', '_doc');
     }
 
     public function it_remove_event_comment()
     {
-        $this->itShouldDeleteIndex(EventComment::class, 'eventComment2', 'comment');
+        $this->itShouldDeleteIndex(EventComment::class, 'eventComment2', '_doc');
     }
 
     public function it_remove_post_comment()
     {
-        $this->itShouldDeleteIndex(PostComment::class, 'postComment1', 'comment');
+        $this->itShouldDeleteIndex(PostComment::class, 'postComment1', '_doc');
     }
 
     public function it_remove_value_response()
     {
-        $this->itShouldDeleteIndex(ValueResponse::class, 'valueResponse1', 'response');
+        $this->itShouldDeleteIndex(ValueResponse::class, 'valueResponse1', '_doc');
     }
 
     public function it_remove_media_response()
     {
-        $this->itShouldDeleteIndex(MediaResponse::class, 'mediaResponse1', 'response');
+        $this->itShouldDeleteIndex(MediaResponse::class, 'mediaResponse1', '_doc');
     }
 
     public function it_remove_project_district()
     {
-        $this->itShouldDeleteIndex(ProjectDistrict::class, 'pdistrict1', 'district');
+        $this->itShouldDeleteIndex(ProjectDistrict::class, 'district1', '_doc');
     }
 
     public function it_remove_vote()
     {
-        $this->itShouldDeleteIndex(AbstractVote::class, 'vote1', 'vote');
+        $this->itShouldDeleteIndex(AbstractVote::class, 'vote1', '_doc');
     }
 
     public function it_remove_proposal_selection_vote()
     {
-        $this->itShouldDeleteIndex(ProposalSelectionVote::class, 'proposalSelectionVote1', 'vote');
+        $this->itShouldDeleteIndex(ProposalSelectionVote::class, 'proposalSelectionVote1', '_doc');
     }
 
     public function it_remove_argument_vote()
     {
-        $this->itShouldDeleteIndex(ArgumentVote::class, 'argumentVote1', 'vote');
+        $this->itShouldDeleteIndex(ArgumentVote::class, 'argumentVote1', '_doc');
     }
 
     public function it_remove_source_vote()
     {
-        $this->itShouldDeleteIndex(SourceVote::class, 'sourceVote1', 'vote');
+        $this->itShouldDeleteIndex(SourceVote::class, 'sourceVote1', '_doc');
     }
 
     public function it_remove_opinion_vote()
     {
-        $this->itShouldDeleteIndex(OpinionVote::class, 'opinionVote1', 'vote');
+        $this->itShouldDeleteIndex(OpinionVote::class, 'opinionVote1', '_doc');
     }
 
     public function it_remove_opinion_version_vote()
     {
-        $this->itShouldDeleteIndex(OpinionVersionVote::class, 'opinionVersionVote1', 'vote');
+        $this->itShouldDeleteIndex(OpinionVersionVote::class, 'opinionVersionVote1', '_doc');
     }
 
     public function it_remove_proposal_collect_vote()
     {
-        $this->itShouldDeleteIndex(ProposalCollectVote::class, 'proposalCollectVote1', 'vote');
+        $this->itShouldDeleteIndex(ProposalCollectVote::class, 'proposalCollectVote1', '_doc');
     }
 
     private function itShouldDeleteIndex(string $class, string $id, string $type)
@@ -135,7 +135,9 @@ class IndexerSpec extends ObjectBehavior
         $this->remove($class, $id);
         $this->__get('currentDeleteBulk')->shouldHaveCount(1);
         $document = $this->__get('currentDeleteBulk')[0];
-        $document->getId()->shouldBe($id);
+        $document
+            ->getId()
+            ->shouldBe(\call_user_func([$class, 'getElasticsearchTypeName']) . ':' . $id);
         $document->getType()->shouldBe($type);
     }
 }

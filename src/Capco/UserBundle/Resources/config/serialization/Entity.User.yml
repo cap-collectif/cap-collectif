@@ -53,3 +53,6 @@ Capco\UserBundle\Entity\User:
     enabled:
       groups: [Elasticsearch]
       type: boolean
+    elasticsearchTypeName:
+      serialized_name: objectType
+      groups: [Elasticsearch]
