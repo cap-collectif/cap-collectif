@@ -49,8 +49,8 @@ class CommentSearch extends Search
         $query = $this->createPublicCommentsByAuthorQuery($author);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $response = $this->index->search($query);
         $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
