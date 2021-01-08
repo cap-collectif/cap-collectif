@@ -57,7 +57,6 @@ export const DebateStepPageNotYetStarted = ({ step, title }: Props) => {
 export default createFragmentContainer(DebateStepPageNotYetStarted, {
   step: graphql`
     fragment DebateStepPageNotYetStarted_step on DebateStep {
-      id
       timeRange {
         startAt
       }

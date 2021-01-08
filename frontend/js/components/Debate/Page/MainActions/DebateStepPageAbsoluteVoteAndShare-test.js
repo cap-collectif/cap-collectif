@@ -32,9 +32,23 @@ describe('<DebateStepPageAbsoluteVoteAndShare/>', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders correcty on mobile', () => {
+    const wrapper = shallow(
+      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="NONE" debate={debate} isMobile />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders correcty when voted', () => {
     const wrapper = shallow(
       <DebateStepPageAbsoluteVoteAndShare {...props} voteState="VOTED" debate={debate} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correcty when voted on mobile', () => {
+    const wrapper = shallow(
+      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="VOTED" debate={debate} isMobile />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -46,6 +60,19 @@ describe('<DebateStepPageAbsoluteVoteAndShare/>', () => {
         viewerHasArgument
         voteState="ARGUMENTED"
         debate={debate}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correcty when argumented on mobile', () => {
+    const wrapper = shallow(
+      <DebateStepPageAbsoluteVoteAndShare
+        {...props}
+        viewerHasArgument
+        voteState="ARGUMENTED"
+        debate={debate}
+        isMobile
       />,
     );
     expect(wrapper).toMatchSnapshot();

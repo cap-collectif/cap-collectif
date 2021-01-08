@@ -177,7 +177,7 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a proposal made by msantostefano@jolicode.com
+     * @When I go to a proposal made by msantostefano@cap-collectif.com
      */
     public function iGoToAProposalMadeByMSantoStefano()
     {

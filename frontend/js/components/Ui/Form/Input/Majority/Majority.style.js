@@ -60,7 +60,12 @@ const MajorityContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div
     }
 
     input {
-      display: none;
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
     }
 
     ${disabled && !asPreview && !checked && styleDisabled()};

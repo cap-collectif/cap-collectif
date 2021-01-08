@@ -26,8 +26,7 @@ const AccordionButton = ({ children, ...props }: Props) => {
       ref={button}
       disabled={disabled}
       onClick={toggle}
-      px={9}
-      py={8}
+      p={8}
       width="100%"
       fontWeight={FontWeight.Normal}
       color="blue.900"

@@ -164,7 +164,7 @@ class ContributionSearch extends Search
                     $resultSet
                 ),
                 $this->getCursors($resultSet),
-                $resultSet->getResponse()->getData()['hits']['total']['value']
+                $resultSet->getTotalHits()
             );
         }
 
@@ -253,9 +253,8 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
-        $count = $response->getResponse()->getData()['hits']['total']['value'];
         if (0 === $limit && null === $cursor) {
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         return $this->getQueryOrderedResults($response);
@@ -286,10 +285,9 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
-        $count = $response->getResponse()->getData()['hits']['total']['value'];
 
         if (0 === $limit && null === $cursor) {
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         return $this->getQueryOrderedResults($response);
@@ -333,9 +331,7 @@ class ContributionSearch extends Search
         $response = $this->index->search($query);
 
         if (0 === $limit && null === $cursor) {
-            $count = $response->getResponse()->getData()['hits']['total']['value'];
-
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         return $this->getQueryOrderedResults($response);
@@ -395,11 +391,9 @@ class ContributionSearch extends Search
         $contributions = ['results' => []];
         $cursors = $this->getCursors($response);
         foreach ($response->getResults() as $result) {
-            $document = $result->getDocument();
-            $contributions['types'][$document->get('objectType')][] = $document->get('id');
-            $contributions['ids'][] = $document->get('id');
+            $contributions['types'][$result->getType()][] = $result->getId();
+            $contributions['ids'][] = $result->getId();
         }
-        $count = $response->getResponse()->getData()['hits']['total']['value'];
 
         if (!empty($contributions['types'])) {
             foreach ($contributions['types'] as $type => $contributionsData) {
@@ -416,7 +410,7 @@ class ContributionSearch extends Search
             }
             unset($contributions['types']);
         } else {
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         $ids = $contributions['ids'];
@@ -425,7 +419,7 @@ class ContributionSearch extends Search
             return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
         });
 
-        return new ElasticsearchPaginatedResult($results, $cursors, $count);
+        return new ElasticsearchPaginatedResult($results, $cursors, $response->getTotalHits());
     }
 
     private function applyContributionsFilters(
@@ -437,7 +431,7 @@ class ContributionSearch extends Search
         $query
             ->addFilter(
                 new Query\Terms(
-                    'objectType',
+                    '_type',
                     $contributionTypes ?: $this->getContributionElasticsearchTypes($inConsultation)
                 )
             )

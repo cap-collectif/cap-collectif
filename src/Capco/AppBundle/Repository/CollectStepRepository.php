@@ -61,14 +61,6 @@ class CollectStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOneBySlugAndProjectSlug(string $slug, string $projectSlug): ?CollectStep
-    {
-        return parent::getOneBySlugAndProjectSlug($slug, $projectSlug);
-    }
-
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('cs')

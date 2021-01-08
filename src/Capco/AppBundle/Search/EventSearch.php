@@ -98,19 +98,15 @@ class EventSearch extends Search
             ->setSource(['id'])
             ->setFrom($offset)
             ->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
+        $resultSet = $this->index->getType($this->type)->search($query);
 
         $ids = array_map(function (Result $result) {
             return $result->getData()['id'];
         }, $resultSet->getResults());
 
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return [
             'events' => $this->getHydratedResults($this->eventRepository, $ids),
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -125,8 +121,7 @@ class EventSearch extends Search
         );
 
         $query = new Query($boolQuery);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
+        $resultSet = $this->index->getType($this->type)->search($query);
 
         $authorIds = array_map(function (Result $result) {
             return $result->getData()['author']['id'];

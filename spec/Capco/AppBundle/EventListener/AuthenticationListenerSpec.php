@@ -43,7 +43,7 @@ class AuthenticationListenerSpec extends ObjectBehavior
         $request
             ->getContent()
             ->shouldBeCalled()
-            ->willReturn('{"username": "lbrunet@jolicode.com"}');
+            ->willReturn('{"username": "lbrunet@cap-collectif.com"}');
         $request
             ->getClientIp()
             ->shouldBeCalled()
@@ -53,7 +53,7 @@ class AuthenticationListenerSpec extends ObjectBehavior
         $expectedUserConnection = new UserConnection();
         $expectedUserConnection->setDatetime(new \DateTime());
         $expectedUserConnection->setSuccess(false);
-        $expectedUserConnection->setEmail('lbrunet@jolicode.com');
+        $expectedUserConnection->setEmail('lbrunet@cap-collectif.com');
         $expectedUserConnection->setNavigator('TEST');
         $expectedUserConnection->setIpAddress('192.168.64.2');
 
@@ -113,7 +113,7 @@ class AuthenticationListenerSpec extends ObjectBehavior
         $request
             ->getContent()
             ->shouldBeCalled()
-            ->willReturn('{"username": "lbrunet@jolicode.com"}');
+            ->willReturn('{"username": "lbrunet@cap-collectif.com"}');
         $request
             ->getClientIp()
             ->shouldBeCalled()
@@ -123,7 +123,7 @@ class AuthenticationListenerSpec extends ObjectBehavior
         $expectedUserConnection = new UserConnection();
         $expectedUserConnection->setDatetime(new \DateTime());
         $expectedUserConnection->setSuccess(true);
-        $expectedUserConnection->setEmail('lbrunet@jolicode.com');
+        $expectedUserConnection->setEmail('lbrunet@cap-collectif.com');
         $expectedUserConnection->setNavigator('TEST');
         $expectedUserConnection->setIpAddress('192.168.64.2');
 

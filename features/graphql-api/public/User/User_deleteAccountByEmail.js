@@ -33,7 +33,11 @@ describe('Delete user by email', () => {
 
   it('Delete super admin user by email', async () => {
     await expect(
-      graphql(DeleteAccountByEmail, { input: { email: 'lbrunet@jolicode.com' } }, 'super_admin'),
+      graphql(
+        DeleteAccountByEmail,
+        { input: { email: 'lbrunet@cap-collectif.com' } },
+        'super_admin',
+      ),
     ).resolves.toMatchSnapshot();
   });
 });

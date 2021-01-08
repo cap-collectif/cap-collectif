@@ -166,7 +166,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInToGraphQLAsSfavot()
     {
-        $this->iAmAuthenticatedAs('sfavot@jolicode.com');
+        $this->iAmAuthenticatedAs('sfavot@cap-collectif.com');
     }
 
     /**
@@ -183,14 +183,6 @@ class UserContext extends DefaultContext
     public function iAmLoggedInAsJean()
     {
         $this->iAmAuthenticatedAs('jean@cap-collectif.com');
-    }
-
-    /**
-     * @Given I am logged in as theo
-     */
-    public function iAmLoggedInAsTheo()
-    {
-        $this->iAmAuthenticatedAs('theo@cap-collectif.com');
     }
 
     /**
