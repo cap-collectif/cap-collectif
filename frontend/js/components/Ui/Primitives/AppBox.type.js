@@ -88,7 +88,7 @@ type Font = {|
   fontSize?: Responsive<NumberOrString>,
   f?: Responsive<NumberOrString>,
   fontFamily?: Responsive<string>,
-  fontWeight?: Responsive<NumberOrString>,
+  fontWeight?: NumberOrString,
 |};
 
 type Color = {|

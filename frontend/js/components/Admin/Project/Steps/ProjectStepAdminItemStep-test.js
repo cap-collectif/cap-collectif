@@ -11,7 +11,6 @@ const defaultStep = {
   type: 'typeTest',
   url: 'urlTest',
   slug: 'slugTest',
-  hasOpinionsFilled: false,
 };
 
 const defaultProps = {

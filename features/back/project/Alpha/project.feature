@@ -209,14 +209,3 @@ Scenario: Admin merges two proposals
   And I click on button "#export-button"
   # Only 1 export should be visible for other don't have participants
   And I should see 1 ".export-option" elements
-
-@database
-Scenario: Logged in admin wants to edit alpha project with a locale 
-  Given I am logged in as admin
-  Then I go to "/admin/alpha/project/englishProject/edit"
-  And I wait "#projectAdminForm" to appear on current page
-  And I fill in the following:
-    | title    | English Project Edited      |
-  And I fill the project authors field with name 'spyl'
-  And I click the "#submit-project-content" element
-  And I wait ".alert__form_succeeded-message" to appear on current page

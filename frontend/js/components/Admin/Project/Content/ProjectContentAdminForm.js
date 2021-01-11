@@ -19,7 +19,6 @@ import {
   ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import Text from '~ui/Primitives/Text';
 
 type Option = {|
   value: string,
@@ -60,7 +59,7 @@ export const InformationIcon: StyledComponent<{}, {}, ComponentType<any>> = styl
 `;
 
 export const renderLabel = (id: string, intl: IntlShape, helpText?: string, optional?: boolean) => (
-  <Text>
+  <div>
     {intl.formatMessage({ id })}
     <span className="excerpt inline">
       {!optional && intl.formatMessage({ id: 'global.optional' })}{' '}
@@ -77,7 +76,7 @@ export const renderLabel = (id: string, intl: IntlShape, helpText?: string, opti
         </OverlayTrigger>
       )}
     </span>
-  </Text>
+  </div>
 );
 
 export const validate = (props: FormValues) => {
@@ -117,7 +116,7 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
             clearable
             selectFieldIsObject
             debounce
-            autoload
+            autoload={false}
             multi
             placeholder=" "
             labelClassName="control-label"

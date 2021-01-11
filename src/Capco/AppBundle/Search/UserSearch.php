@@ -72,12 +72,12 @@ class UserSearch extends Search
         if ($pagination > 0) {
             $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
         }
-
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getTotalHits(),
+            'totalCount' => $resultSet->getResponse()->getData()['hits']['total']['value'],
         ];
     }
 
@@ -105,13 +105,14 @@ class UserSearch extends Search
         $query->setSize($limit);
 
         $query->addSort($this->getSort($orderBy));
-        $response = $this->index->getType('user')->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->userRepo, $response),
             $cursors,
-            $response->getTotalHits()
+            $response->getResponse()->getData()['hits']['total']['value']
         );
     }
 
@@ -151,16 +152,21 @@ class UserSearch extends Search
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
 
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $realQuery = Query::create($query);
+        $this->addObjectTypeFilter($realQuery);
+        $resultSet = $this->index->search($realQuery);
         $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
 
         if ($onlyUsers) {
             return $users;
         }
 
+        $data = $resultSet->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
+
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits(),
+            'count' => $count,
         ];
     }
 
@@ -179,16 +185,21 @@ class UserSearch extends Search
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
 
-        $resultSet = $this->index->getType($this->type)->search($query, 300);
+        $realQuery = Query::create($query);
+        $this->addObjectTypeFilter($realQuery, $this->type);
+        $resultSet = $this->index->search($query, 300);
         $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
 
         if ($onlyUsers) {
             return $users;
         }
 
+        $data = $resultSet->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
+
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits(),
+            'count' => $count,
         ];
     }
 
@@ -312,7 +323,8 @@ class UserSearch extends Search
         );
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
@@ -349,7 +361,8 @@ class UserSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id']);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
@@ -380,7 +393,8 @@ class UserSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
@@ -406,21 +420,26 @@ class UserSearch extends Search
             ->setFrom($offset)
             ->setSize($limit)
             ->setSource(['id']);
-
-        $resultSet = $this->index->getType('user')->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
+        $data = $resultSet->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getTotalHits(),
+            'totalCount' => $count,
         ];
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
+        $data = $response->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
+
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->userRepo, $response),
             $cursors,
-            $response->getTotalHits()
+            $count
         );
     }
 

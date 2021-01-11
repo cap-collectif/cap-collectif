@@ -92,7 +92,3 @@ InternalDebate:
                 argsBuilder: 'Relay::Connection'
                 type: DebateArticleConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArticlesResolver", [value, args])'
-            url:
-                type: 'URI!'
-                description: 'The url of the debate'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateUrlResolver", [value])'

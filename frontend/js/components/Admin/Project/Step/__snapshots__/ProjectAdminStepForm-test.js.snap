@@ -71,7 +71,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
           formName="ProjectAdminForm"
           id="step-endAt"
           label={
-            <ForwardRef>
+            <div>
               end
               <span
                 className="excerpt inline"
@@ -79,7 +79,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                 global.optional
                  
               </span>
-            </ForwardRef>
+            </div>
           }
           name="endAt"
           type="datetime"
@@ -89,7 +89,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
         component={[Function]}
         id="step-body"
         label={
-          <ForwardRef>
+          <div>
             proposal.body
             <span
               className="excerpt inline"
@@ -97,7 +97,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
               global.optional
                
             </span>
-          </ForwardRef>
+          </div>
         }
         name="body"
         type="editor"
@@ -106,7 +106,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
         component={[Function]}
         id="step-metaDescription"
         label={
-          <ForwardRef>
+          <div>
             global.meta.description
             <span
               className="excerpt inline"
@@ -143,7 +143,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                 <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
-          </ForwardRef>
+          </div>
         }
         name="metaDescription"
         type="textarea"
@@ -199,7 +199,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
           component={[Function]}
           id="step-customCode"
           label={
-            <ForwardRef>
+            <div>
               admin.customcode
               <span
                 className="excerpt inline"
@@ -236,7 +236,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                   <ForwardRef(ProjectContentAdminForm__InformationIcon) />
                 </OverlayTrigger>
               </span>
-            </ForwardRef>
+            </div>
           }
           name="customCode"
           placeholder="<script type=\\"text/javascript\\"> </script>"
@@ -351,7 +351,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
           formName="ProjectAdminForm"
           id="step-endAt"
           label={
-            <ForwardRef>
+            <div>
               end
               <span
                 className="excerpt inline"
@@ -359,7 +359,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
                 global.optional
                  
               </span>
-            </ForwardRef>
+            </div>
           }
           name="endAt"
           type="datetime"
@@ -369,7 +369,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
         component={[Function]}
         id="step-body"
         label={
-          <ForwardRef>
+          <div>
             proposal.body
             <span
               className="excerpt inline"
@@ -377,7 +377,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
               global.optional
                
             </span>
-          </ForwardRef>
+          </div>
         }
         name="body"
         type="editor"
@@ -386,7 +386,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
         component={[Function]}
         id="step-metaDescription"
         label={
-          <ForwardRef>
+          <div>
             global.meta.description
             <span
               className="excerpt inline"
@@ -423,7 +423,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
                 <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
-          </ForwardRef>
+          </div>
         }
         name="metaDescription"
         type="textarea"
@@ -479,7 +479,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
           component={[Function]}
           id="step-customCode"
           label={
-            <ForwardRef>
+            <div>
               admin.customcode
               <span
                 className="excerpt inline"
@@ -516,7 +516,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
                   <ForwardRef(ProjectContentAdminForm__InformationIcon) />
                 </OverlayTrigger>
               </span>
-            </ForwardRef>
+            </div>
           }
           name="customCode"
           placeholder="<script type=\\"text/javascript\\"> </script>"

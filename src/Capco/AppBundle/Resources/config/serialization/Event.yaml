@@ -39,3 +39,6 @@ Capco\AppBundle\Entity\Event:
         isPresential:
             serialized_name: isPresential
             groups: [ElasticsearchEvent]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchEvent]

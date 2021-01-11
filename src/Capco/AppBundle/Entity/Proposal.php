@@ -68,22 +68,22 @@ class Proposal implements
     DraftableInterface,
     ReportableInterface
 {
-    use UuidTrait;
-    use ReferenceTrait;
-    use TimestampableTrait;
-    use TrashableTrait;
-    use SluggableTitleTrait;
-    use SelfLinkableTrait;
-    use SoftDeleteTrait;
-    use NullableTextableTrait;
-    use SummarizableTrait;
-    use DraftableTrait;
-    use HasResponsesTrait;
-    use PublishableTrait;
-    use FollowableTrait;
     use AddressableTrait;
     use CommentableWithoutCounterTrait;
+    use DraftableTrait;
+    use FollowableTrait;
+    use HasResponsesTrait;
     use ModerableTrait;
+    use NullableTextableTrait;
+    use PublishableTrait;
+    use ReferenceTrait;
+    use SelfLinkableTrait;
+    use SluggableTitleTrait;
+    use SoftDeleteTrait;
+    use SummarizableTrait;
+    use TimestampableTrait;
+    use TrashableTrait;
+    use UuidTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -365,7 +365,7 @@ class Proposal implements
         return $this->supervisor ? $this->supervisor->getSupervisor() : null;
     }
 
-    public function setSupervisor(ProposalSupervisor $proposalSupervisor): self
+    public function setSupervisor(?ProposalSupervisor $proposalSupervisor): self
     {
         $this->supervisor = $proposalSupervisor;
 
@@ -449,20 +449,25 @@ class Proposal implements
     }
 
     /**
-     * @return Collection|ProposalAnalyst[]
+     * @return Collection|User[]
      */
     public function getAnalysts(): Collection
     {
-        // TODO, wtf with this getter ?
+        // TODO, wtf with this getter ? It just to get user list of analysts
         $analysts = new ArrayCollection();
         if (!empty($this->proposalAnalysts)) {
-            /** @var ProposalAnalyst $analyst */
-            foreach ($this->proposalAnalysts as $analyst) {
-                $analysts->add($analyst->getAnalyst());
+            /** @var ProposalAnalyst $proposalAnalyst */
+            foreach ($this->proposalAnalysts as $proposalAnalyst) {
+                $analysts->add($proposalAnalyst->getAnalyst());
             }
         }
 
         return $analysts;
+    }
+
+    public function getAnalystsArray(): array
+    {
+        return $this->getAnalysts()->toArray();
     }
 
     public function removeAnalyst(User $analyst): self
@@ -805,22 +810,45 @@ class Proposal implements
         return $user && $user->isAdmin();
     }
 
-    public function viewerCanSee(?User $user = null): bool
+    public function viewerCanSee(?User $viewer = null): bool
     {
         // Admin and SuperAdmin can access everything
-        if ($user && $user->isAdmin()) {
+        if ($viewer && $viewer->isAdmin()) {
             return true;
+        }
+
+        if ($this->isPrivate() && !$viewer) {
+            return false;
+        }
+
+        if ($this->isPrivate() && $viewer) {
+            if (\in_array($viewer, $this->getAnalystsArray())) {
+                return true;
+            }
+            if (
+                $this->getDecisionMaker() &&
+                $viewer->getId() === $this->getDecisionMaker()->getId()
+            ) {
+                return true;
+            }
+            if ($this->getSupervisor() && $viewer->getId() === $this->getSupervisor()->getId()) {
+                return true;
+            }
+
+            if ($this->getAuthor() !== $viewer) {
+                return false;
+            }
         }
 
         if ($this->isPublished()) {
             if (!$this->isDeleted()) {
-                return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
+                return $this->getStep() ? $this->getStep()->canDisplay($viewer) : false;
             }
 
             return false;
         }
 
-        return $this->getAuthor() === $user;
+        return $this->getAuthor() === $viewer;
     }
 
     public function isPrivate(): bool

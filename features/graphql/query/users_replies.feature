@@ -323,7 +323,7 @@ Scenario: admin wants to see user5's replies
 
 @read-only
 Scenario: admin in group wants to see user5's replies
-  Given I am logged in to graphql as "lbrunet@cap-collectif.com" with password "toto"
+  Given I am logged in to graphql as "lbrunet@jolicode.com" with password "toto"
   When I send a GraphQL POST request:
   """
   {

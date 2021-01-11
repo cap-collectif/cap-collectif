@@ -116,6 +116,7 @@ class UserNormalizer implements
         }
 
         $data['_links'] = $links;
+        $data['objectType'] = $object::getElasticsearchTypeName();
 
         return $data;
     }
@@ -132,7 +133,9 @@ class UserNormalizer implements
         $resultsCountByConsultation = [];
 
         $results = $this->contributionSearch->getSubmissionsByAuthor($object, $aggregatePrefix);
-        $data['total' . ucfirst($aggregatePrefix) . 'Count'] = $results->getTotalHits();
+        $data['total' . ucfirst($aggregatePrefix) . 'Count'] = $results->getResponse()->getData()[
+            'hits'
+        ]['total']['value'];
 
         foreach (
             $results->getAggregation($aggregatePrefix . 'ByProject')['buckets']
