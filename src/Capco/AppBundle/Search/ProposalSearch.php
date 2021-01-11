@@ -100,8 +100,6 @@ class ProposalSearch extends Search
         }
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
         $ids = [];
         $cursors = [];
         foreach ($resultSet as $result) {
@@ -110,7 +108,7 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $count);
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
     }
 
     // This method is called in ProposalFormProposalsDataLoader and is based only on the first collectstep of the project.
@@ -191,8 +189,6 @@ class ProposalSearch extends Search
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
 
         $ids = [];
         $cursors = [];
@@ -202,7 +198,7 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $count);
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
@@ -440,13 +436,10 @@ class ProposalSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->proposalRepo, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 

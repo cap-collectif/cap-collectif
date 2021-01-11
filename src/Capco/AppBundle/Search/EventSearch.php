@@ -103,12 +103,9 @@ class EventSearch extends Search
             return $result->getData()['id'];
         }, $resultSet->getResults());
 
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return [
             'events' => $this->getHydratedResults($this->eventRepository, $ids),
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 

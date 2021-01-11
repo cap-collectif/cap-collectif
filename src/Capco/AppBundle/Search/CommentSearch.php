@@ -73,12 +73,10 @@ class CommentSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $count = $response->getResponse()->getData()['hits']['total']['value'];
-
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->commentRepository, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 

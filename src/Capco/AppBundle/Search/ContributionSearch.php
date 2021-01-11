@@ -164,7 +164,7 @@ class ContributionSearch extends Search
                     $resultSet
                 ),
                 $this->getCursors($resultSet),
-                $resultSet->getResponse()->getData()['hits']['total']['value']
+                $resultSet->getTotalHits()
             );
         }
 
@@ -253,9 +253,8 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
-        $count = $response->getResponse()->getData()['hits']['total']['value'];
         if (0 === $limit && null === $cursor) {
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         return $this->getQueryOrderedResults($response);
@@ -286,10 +285,8 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
-        $count = $response->getResponse()->getData()['hits']['total']['value'];
-
         if (0 === $limit && null === $cursor) {
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         return $this->getQueryOrderedResults($response);
@@ -333,9 +330,7 @@ class ContributionSearch extends Search
         $response = $this->index->search($query);
 
         if (0 === $limit && null === $cursor) {
-            $count = $response->getResponse()->getData()['hits']['total']['value'];
-
-            return new ElasticsearchPaginatedResult([], [], $count);
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
         return $this->getQueryOrderedResults($response);

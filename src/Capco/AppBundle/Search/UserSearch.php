@@ -77,7 +77,7 @@ class UserSearch extends Search
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getResponse()->getData()['hits']['total']['value'],
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -112,7 +112,7 @@ class UserSearch extends Search
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->userRepo, $response),
             $cursors,
-            $response->getResponse()->getData()['hits']['total']['value']
+            $response->getTotalHits()
         );
     }
 
@@ -161,12 +161,9 @@ class UserSearch extends Search
             return $users;
         }
 
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return [
             'users' => $users,
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -194,12 +191,9 @@ class UserSearch extends Search
             return $users;
         }
 
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return [
             'users' => $users,
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -422,24 +416,19 @@ class UserSearch extends Search
             ->setSource(['id']);
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $count,
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->userRepo, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 

@@ -171,7 +171,7 @@ class VoteSearch extends Search
             $connection = new ElasticsearchPaginatedResult(
                 $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $resultSet),
                 $this->getCursors($resultSet),
-                $resultSet->getResponse()->getData()['hits']['total']['value']
+                $resultSet->getTotalHits()
             );
             $connection->totalPointsCount = $points[$resultKey];
             $results[] = $connection;
@@ -229,13 +229,10 @@ class VoteSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 

@@ -96,13 +96,11 @@ class ProjectSearch extends Search
 
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
         $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
 
         return [
             'projects' => $results,
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 

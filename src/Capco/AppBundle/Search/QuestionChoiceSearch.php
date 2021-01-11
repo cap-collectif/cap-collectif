@@ -92,12 +92,10 @@ class QuestionChoiceSearch extends Search
         $responses = $multiSearchQuery->search();
         $results = [];
         foreach ($responses->getResultSets() as $key => $resultSet) {
-            $data = $resultSet->getResponse()->getData();
-            $count = $data['hits']['total']['value'];
             $results[] = new ElasticsearchPaginatedResult(
                 $this->getHydratedResultsFromResultSet($this->choiceRepository, $resultSet),
                 $this->getCursors($resultSet),
-                $count
+                $resultSet->getTotalHits()
             );
         }
 

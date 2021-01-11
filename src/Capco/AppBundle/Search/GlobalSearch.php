@@ -63,13 +63,11 @@ class GlobalSearch extends Search
 
         $resultSet = $this->index->search($query);
         $results = $this->transformer->hybridTransform($resultSet->getResults());
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
 
         return [
-            'count' => $count,
+            'count' => $resultSet->getTotalHits(),
             'results' => $results,
-            'pages' => ceil($count / $pagination),
+            'pages' => ceil($resultSet->getTotalHits() / $pagination),
         ];
     }
 }

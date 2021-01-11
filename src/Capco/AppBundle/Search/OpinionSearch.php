@@ -87,13 +87,11 @@ class OpinionSearch extends Search
         $this->addObjectTypeFilter($query, $this->type);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->opinionRepo, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 
@@ -129,7 +127,8 @@ class OpinionSearch extends Search
             ->setSource(['id'])
             ->setFrom($offset)
             ->setSize($limit);
-        $resultSet = $this->index->getType($this->type)->search($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $resultSet = $this->index->search($query);
 
         return [
             'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),

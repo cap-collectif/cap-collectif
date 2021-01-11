@@ -37,10 +37,7 @@ class ResponseSearch extends Search
         $query = new Query($boolQuery);
         $this->addObjectTypeFilter($query, $this->type);
 
-        return $this->index
-            ->search($query)
-            ->getResponse()
-            ->getData()['hits']['total']['value'];
+        return $this->index->count($query);
     }
 
     public function getResponsesByQuestion(
@@ -73,14 +70,12 @@ class ResponseSearch extends Search
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
         $cursors = $this->getCursors($resultSet);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
             $cursors,
-            $count
+            $resultSet->getTotalHits()
         );
     }
 
@@ -100,14 +95,12 @@ class ResponseSearch extends Search
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
         $cursors = $this->getCursors($resultSet);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
             $cursors,
-            $count
+            $resultSet->getTotalHits()
         );
     }
 
@@ -155,14 +148,12 @@ class ResponseSearch extends Search
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
         $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
         $cursors = $this->getCursors($resultSet);
 
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
             $cursors,
-            $count
+            $resultSet->getTotalHits()
         );
     }
 
