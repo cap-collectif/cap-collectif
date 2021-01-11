@@ -83,8 +83,7 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
         </Menu.List>
       </Menu>
       <Button
-        aria-label="global.export"
-        onClick={[Function]}
+        disabled={true}
         variant="primary"
         variantColor="primary"
         variantSize="small"
@@ -249,9 +248,9 @@ exports[`<ArgumentTab /> should render correctly when no argument 1`] = `
   direction="column"
   spacing={6}
 >
-  <SpotIcon
-    name="PENCIL_SOFTWARE"
-    size="lg"
+  <AppBox
+    as="img"
+    src="http://localhost/image/contribution_debate_argument.png"
   />
   <Text
     color="gray.500"

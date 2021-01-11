@@ -13,14 +13,4 @@ use Doctrine\ORM\EntityRepository;
  */
 class DebateRepository extends EntityRepository
 {
-    public function findAllIds(): array
-    {
-        return array_column(
-            $this->createQueryBuilder('debate')
-                ->select('debate.id')
-                ->getQuery()
-                ->getArrayResult(),
-            'id'
-        );
-    }
 }

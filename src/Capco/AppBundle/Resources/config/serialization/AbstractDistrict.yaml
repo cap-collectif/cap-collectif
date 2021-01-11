@@ -1,12 +1,22 @@
 Capco\AppBundle\Entity\District\AbstractDistrict:
-  attributes:
-    id:
-      groups: [Districts, Proposals, Elasticsearch,ElasticsearchProposalNestedDistrict, ElasticsearchProjectNestedProjectDistrictPositioner]
-    name:
-      groups: [Districts, Proposals, Elasticsearch, ElasticsearchProposalNestedDistrict]
-    geojson:
-      groups: [DistrictDetails]
-    geojsonStyle:
-      groups: [DistrictDetails]
-    displayedOnMap:
-      groups: [DistrictDetails]
+    attributes:
+        id:
+            groups:
+                [
+                    Districts,
+                    Proposals,
+                    Elasticsearch,
+                    ElasticsearchProposalNestedDistrict,
+                    ElasticsearchProjectNestedProjectDistrictPositioner,
+                ]
+        name:
+            groups: [Districts, Proposals, Elasticsearch, ElasticsearchProposalNestedDistrict]
+        geojson:
+            groups: [DistrictDetails]
+        geojsonStyle:
+            groups: [DistrictDetails]
+        displayedOnMap:
+            groups: [DistrictDetails]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [Elasticsearch]

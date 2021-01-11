@@ -80,7 +80,6 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
         show={false}
         step={
           Object {
-            "hasOpinionsFilled": false,
             "id": "1",
             "slug": "slugTest",
             "title": "testStep",
@@ -89,6 +88,13 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
           }
         }
         type="typeTest"
+      />
+      <Connect(DeleteModal)
+        closeDeleteModal={[Function]}
+        deleteElement={[Function]}
+        deleteModalContent="group.admin.step.modal.delete.content"
+        deleteModalTitle="group.admin.step.modal.delete.title"
+        showDeleteModal={false}
       />
     </ButtonToolbar>
   </Col>

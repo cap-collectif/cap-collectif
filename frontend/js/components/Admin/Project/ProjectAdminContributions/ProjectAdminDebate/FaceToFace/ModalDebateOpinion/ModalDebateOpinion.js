@@ -22,7 +22,6 @@ import Tag from '~ds/Tag/Tag';
 import Heading from '~ui/Primitives/Heading';
 import { FontWeight } from '~ui/Primitives/constants';
 import { toast } from '~ds/Toast';
-import { ModalContainer } from './ModalDebateOpinion.style';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -141,13 +140,13 @@ const onValidate = (values: Values) => {
 const formName = 'form-debate-opinion';
 
 export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: Props) => (
-  <ModalContainer
+  <Modal
     show
     animation={false}
     onHide={onClose}
     bsSize="large"
     aria-labelledby="contained-modal-title-lg">
-    <Modal.Header closeButton>
+    <Modal.Header closeButton style={{ border: 'none' }}>
       <Heading as="h4" fontWeight={FontWeight.Semibold}>
         <FormattedMessage id={getTitle(type, isCreating)} />
       </Heading>
@@ -186,7 +185,7 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
         />
       </form>
     </Modal.Body>
-    <Modal.Footer>
+    <Modal.Footer style={{ border: 'none' }}>
       <ButtonGroup justifyContent="flex-end">
         <CloseButton onClose={onClose} label="editor.undo" />
         <Button variant="primary" variantColor="primary" onClick={handleSubmit}>
@@ -194,7 +193,7 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
         </Button>
       </ButtonGroup>
     </Modal.Footer>
-  </ModalContainer>
+  </Modal>
 );
 
 const form = reduxForm({

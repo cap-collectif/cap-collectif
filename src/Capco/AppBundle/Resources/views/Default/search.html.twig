@@ -75,12 +75,12 @@
                             {% for result in results %}
                                 {% set entity = result.transformed %}
                                 {% set default_title = 'global.more' | trans({}, 'CapcoAppBundle') %}
-                                {% set type_label    = 'global.' ~ result.result.hit['_type'] %}
+                                {% set type_label    = 'global.' ~ result.result.hit._source.objectType %}
 
                                 {% if result.result.hit['_type'] == 'user' %}
                                     {% set title = result.result.hit['_source']['displayName'] is defined ? result.result.hit['_source']['displayName'] : result.transformed.displayName %}
-                                {% elseif result.result.hit['_type'] == 'comment' %}
-                                    {% set title = result.result.hit['_source']['body'] is defined ? result.result.hit['_source']['body']|truncate(30) : result.result.hit['_type'] %}
+                                {% elseif result.result.hit._source.objectType == 'comment' %}
+                                    {% set title = result.result.hit['_source']['body'] is defined ? result.result.hit['_source']['body']|truncate(30) : result.result.hit._source.objectType %}
                                 {% else %}
                                     {% set title = result.result.hit['_source']['title'] is defined ? result.result.hit['_source']['title'] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
                                 {% endif %}

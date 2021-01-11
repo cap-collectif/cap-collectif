@@ -11,7 +11,7 @@ const AccordionPanel = ({ children, ...props }: Props) => {
   const { open } = React.useContext(AccordionItemContext);
 
   return open ? (
-    <Flex direction="column" px={8} pb={8} {...props}>
+    <Flex direction="column" px={9} pb={8} {...props}>
       {children}
     </Flex>
   ) : null;

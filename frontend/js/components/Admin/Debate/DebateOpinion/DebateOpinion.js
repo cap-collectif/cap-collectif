@@ -67,7 +67,7 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
         </Flex>
       )}
 
-      <Flex direction="column" px={6} pt={10} pb={6}>
+      <Flex direction="column" px={4} pt={10} pb={6}>
         <Flex direction="row" spacing={2} mb={4} align="center">
           <NewUserAvatar user={author} size="md" border="2px solid" borderColor="yellow.500" />
           <Text fontSize={3} color="gray.500">

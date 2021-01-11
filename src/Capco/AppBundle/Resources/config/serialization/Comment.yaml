@@ -1,15 +1,18 @@
 Capco\AppBundle\Entity\Comment:
-  attributes:
-    id:
-      groups: [ElasticsearchComment, ElasticsearchNestedComment]
-    createdAt:
-      groups: [ElasticsearchComment]
-    authorName:
-      groups: [ElasticsearchComment]
-    Author:
-      groups: [ElasticsearchNestedAuthor]
-      serialized_name: author
-    published:
-      groups: [ElasticsearchComment, ElasticsearchNestedComment]
-    trashedStatus:
-      groups: [ElasticsearchComment, ElasticsearchNestedComment]
+    attributes:
+        id:
+            groups: [ElasticsearchComment, ElasticsearchNestedComment]
+        createdAt:
+            groups: [ElasticsearchComment]
+        authorName:
+            groups: [ElasticsearchComment]
+        Author:
+            groups: [ElasticsearchNestedAuthor]
+            serialized_name: author
+        published:
+            groups: [ElasticsearchComment, ElasticsearchNestedComment]
+        trashedStatus:
+            groups: [ElasticsearchComment, ElasticsearchNestedComment]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchComment]

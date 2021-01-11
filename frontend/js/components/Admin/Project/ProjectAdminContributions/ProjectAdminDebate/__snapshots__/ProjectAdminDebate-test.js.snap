@@ -12,15 +12,10 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
       id="face-to-face"
     >
       <AccordionButton>
-        <Heading
-          as="h4"
-        >
-          <FormattedMessage
-            id="the.face-to-face"
-            tagName={Symbol(react.fragment)}
-            values={Object {}}
-          />
-        </Heading>
+        <FormattedMessage
+          id="the.face-to-face"
+          values={Object {}}
+        />
       </AccordionButton>
       <AccordionPanel>
         <Relay(FaceToFace)
@@ -49,19 +44,14 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
       id="argument"
     >
       <AccordionButton>
-        <Heading
-          as="h4"
-        >
-          <FormattedMessage
-            id="argument-count"
-            tagName={Symbol(react.fragment)}
-            values={
-              Object {
-                "count": 3,
-              }
+        <FormattedMessage
+          id="argument-count"
+          values={
+            Object {
+              "count": 3,
             }
-          />
-        </Heading>
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
         <Relay(ArgumentTabQuery)
@@ -90,19 +80,14 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
       id="vote"
     >
       <AccordionButton>
-        <Heading
-          as="h4"
-        >
-          <FormattedMessage
-            id="votes-count"
-            tagName={Symbol(react.fragment)}
-            values={
-              Object {
-                "num": 1,
-              }
+        <FormattedMessage
+          id="votes-count"
+          values={
+            Object {
+              "num": 1,
             }
-          />
-        </Heading>
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
         <Relay(VoteTabQuery)
@@ -155,15 +140,10 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
       id="face-to-face"
     >
       <AccordionButton>
-        <Heading
-          as="h4"
-        >
-          <FormattedMessage
-            id="the.face-to-face"
-            tagName={Symbol(react.fragment)}
-            values={Object {}}
-          />
-        </Heading>
+        <FormattedMessage
+          id="the.face-to-face"
+          values={Object {}}
+        />
       </AccordionButton>
       <AccordionPanel>
         <Relay(FaceToFace)
@@ -192,19 +172,14 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
       id="argument"
     >
       <AccordionButton>
-        <Heading
-          as="h4"
-        >
-          <FormattedMessage
-            id="argument-count"
-            tagName={Symbol(react.fragment)}
-            values={
-              Object {
-                "count": 3,
-              }
+        <FormattedMessage
+          id="argument-count"
+          values={
+            Object {
+              "count": 3,
             }
-          />
-        </Heading>
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
         <Relay(ArgumentTabQuery)
@@ -233,19 +208,14 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
       id="vote"
     >
       <AccordionButton>
-        <Heading
-          as="h4"
-        >
-          <FormattedMessage
-            id="votes-count"
-            tagName={Symbol(react.fragment)}
-            values={
-              Object {
-                "num": 1,
-              }
+        <FormattedMessage
+          id="votes-count"
+          values={
+            Object {
+              "num": 1,
             }
-          />
-        </Heading>
+          }
+        />
       </AccordionButton>
       <AccordionPanel>
         <Relay(VoteTabQuery)

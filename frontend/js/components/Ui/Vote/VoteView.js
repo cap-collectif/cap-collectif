@@ -1,63 +1,16 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
 import Icon from '~ds/Icon/Icon';
 import { Container } from './VoteView.style';
-import Flex from '~ui/Primitives/Layout/Flex';
-import AppBox from '~ui/Primitives/AppBox';
-import Text from '~ui/Primitives/Text';
 
 type Props = {|
   +positivePercentage: number,
-  +isMobile?: boolean,
 |};
 
-const MobileTextPercentage = styled(Text).attrs({
-  uppercase: true,
-  fontSize: 1,
-  lineHeight: 's',
-  fontWeight: 700,
-  mt: 1,
-})``;
-
-export const VoteView = ({ positivePercentage, isMobile }: Props) => {
+export const VoteView = ({ positivePercentage }: Props) => {
   if (positivePercentage < 0 || positivePercentage > 100) return null;
   const left = positivePercentage;
   const right = 100 - positivePercentage;
-  const leftPercentage = `${Math.round(left * 100) / 100}%`;
-  const rightPercentage = right === 100 ? '0%' : `${Math.round(right * 100) / 100}%`;
-  if (isMobile) {
-    return (
-      <Flex position="relative" justify="space-between">
-        <MobileTextPercentage color="green.500">
-          {leftPercentage}&nbsp;
-          <FormattedMessage id="argument.show.type.for" tagName={React.Fragment} />
-        </MobileTextPercentage>
-        <AppBox
-          flex={Math.floor(left)}
-          bg="green.500"
-          position="absolute"
-          left={0}
-          height="2px"
-          width={leftPercentage}
-        />
-        <MobileTextPercentage color="red.500">
-          {rightPercentage}&nbsp;
-          <FormattedMessage id="argument.show.type.against" tagName={React.Fragment} />
-        </MobileTextPercentage>
-        <AppBox
-          flex={Math.floor(right)}
-          bg="red.500"
-          position="absolute"
-          height="2px"
-          left={leftPercentage}
-          width={rightPercentage}
-        />
-      </Flex>
-    );
-  }
-
   return (
     <Container left={left} right={right} key={positivePercentage}>
       <div>
@@ -93,8 +46,8 @@ export const VoteView = ({ positivePercentage, isMobile }: Props) => {
         </span>
       </div>
       <div>
-        {left ? <span>{leftPercentage}</span> : null}
-        {right ? <span>{rightPercentage}</span> : null}
+        {left ? <span>{`${Math.round(left * 100) / 100}%`}</span> : null}
+        {right ? <span>{`${right === 100 ? 0 : Math.round(right * 100) / 100}%`}</span> : null}
       </div>
     </Container>
   );

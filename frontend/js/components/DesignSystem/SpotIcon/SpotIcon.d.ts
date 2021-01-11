@@ -7,8 +7,6 @@ declare export const SPOT_ICON_NAME = {
     EMAIL_SEND: 'EMAIL_SEND',
     RATING_CLICK: 'RATING_CLICK',
     DELETE: 'DELETE',
-    USER_DISCUSS: 'USER_DISCUSS',
-    BULB_SKETCH: 'BULB_SKETCH',
 };
 
 declare const SpotIcon: PolymorphicComponent<ComponentProps<SVGElement> & {

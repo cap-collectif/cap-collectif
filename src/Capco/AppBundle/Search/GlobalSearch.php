@@ -23,6 +23,10 @@ class GlobalSearch extends Search
         'username.std',
         'biography',
         'biography.std',
+        'proposalTitle',
+        'proposalTitle.std',
+        'proposalBody',
+        'proposalBody.std',
     ];
 
     protected $transformer;
@@ -36,7 +40,12 @@ class GlobalSearch extends Search
     public function search($page, $terms, $sortField, $sortOrder, $type = 'all'): array
     {
         $boolQuery = new Query\BoolQuery();
-        $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
+        $boolQuery = $this->searchTermsInMultipleFields(
+            $boolQuery,
+            self::SEARCH_FIELDS,
+            $terms,
+            'phrase_prefix'
+        );
 
         $query = new Query($boolQuery);
         $query->setSort([
@@ -48,14 +57,14 @@ class GlobalSearch extends Search
         $query->setFrom($from);
         $query->setSize($pagination);
 
-        if ('all' === $type) {
-            $resultSet = $this->index->search($query);
-        } else {
-            $resultSet = $this->index->getType($type)->search($query);
+        if ('all' !== $type) {
+            $this->addObjectTypeFilter($query, $type);
         }
 
+        $resultSet = $this->index->search($query);
         $results = $this->transformer->hybridTransform($resultSet->getResults());
-        $count = $resultSet->getTotalHits();
+        $data = $resultSet->getResponse()->getData();
+        $count = $data['hits']['total']['value'];
 
         return [
             'count' => $count,

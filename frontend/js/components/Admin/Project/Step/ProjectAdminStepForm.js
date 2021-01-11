@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal, Button } from 'react-bootstrap';
 import { submit, reduxForm, Field, arrayPush, change, formValueSelector } from 'redux-form';
@@ -381,13 +380,12 @@ export function ProjectAdminStepForm({
     <>
       <Modal.Body>
         <FormContainer onSubmit={handleSubmit} id={form}>
-          {step.type !== 'DebateStep' && renderSubSection('global.general')}
+          {renderSubSection('global.general')}
 
           <Field
             type="text"
             name="label"
             id="step-label"
-            placeholder={step.type === 'DebateStep' ? 'placeholderText.debat.menuLabel' : undefined}
             label={<FormattedMessage id="color.main_menu.text" />}
             component={renderComponent}
           />
@@ -571,7 +569,7 @@ export function ProjectAdminStepForm({
 
           {step.type === 'DebateStep' && <StepArticle />}
 
-          {step.type !== 'DebateStep' && renderSubSection('global.publication')}
+          {renderSubSection('global.publication')}
           <>
             <Field
               icons
@@ -593,7 +591,7 @@ export function ProjectAdminStepForm({
             )}
           </>
 
-          {step.type !== 'DebateStep' && renderSubSection('global-customization')}
+          {renderSubSection('global-customization')}
           <CustomCodeArea>
             <Field
               name="customCode"
@@ -645,7 +643,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       body: step?.body ? step.body : null,
       title: step?.title ? step.title : null,
       endAt: step?.endAt ? step.endAt : null,
-      startAt: step?.startAt || moment(),
+      startAt: step?.startAt ? step.startAt : null,
       isEnabled: step?.isEnabled ? step.isEnabled : true,
       timeless: step?.timeless ? step.timeless : false,
       metaDescription: step?.metaDescription ? step.metaDescription : null,

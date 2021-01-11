@@ -12,7 +12,6 @@ import DebateStepPageVoteForm from './DebateStepPageVoteForm';
 type Props = {|
   +debate: DebateStepPageVoteAndShare_debate,
   +isAuthenticated: boolean,
-  +isMobile?: boolean,
   +body: string,
   +title: string,
   +voteState: VoteState,
@@ -25,7 +24,6 @@ type Props = {|
 
 export const DebateStepPageAbsoluteVoteAndShare = ({
   debate,
-  isMobile,
   title,
   isAuthenticated,
   body,
@@ -36,28 +34,32 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   viewerHasArgument,
   url,
 }: Props) => {
+  const background =
+    voteState === 'VOTED'
+      ? 'linear-gradient(to bottom, rgba(255,255,255,1) 85%,rgba(255,255,255,0) 100%);'
+      : 'white';
+  const boxShadow = voteState === 'VOTED' ? '' : 'medium';
   return (
     <AppBox
-      p={[6, 8]}
+      top={50}
+      p={8}
       width="100%"
       position="fixed"
       zIndex={999}
-      {...(isMobile
-        ? { bottom: 0, borderTopLeftRadius: 'poppin', borderTopRightRadius: 'poppin' }
-        : { top: 50 })}
       css={css({
         marginTop: '0 !important',
-        background: 'white',
-        boxShadow: isMobile ? 'none' : ' 0 10px 14px 0px white;',
+        background,
+        boxShadow,
       })}>
       {voteState === 'NONE' && (
-        <Flex direction={['column', 'row']} spacing={4} justifyContent="center" alignItems="center">
-          <Text textAlign={['center', 'left']} as="p" color="gray.900" fontSize={4}>
+        <Flex justifyContent="center" alignItems="center">
+          <Text as="p" color="gray.900" fontSize={4}>
             {title}
           </Text>
           <DebateStepPageVote
             viewerHasArgument={viewerHasArgument}
             width="unset"
+            ml={4}
             debateId={debate.id}
             isAuthenticated={isAuthenticated}
             onSuccess={setVoteState}
@@ -66,7 +68,6 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       )}
       {voteState !== 'NONE' && (
         <DebateStepPageVoteForm
-          isMobile={isMobile}
           isAbsolute
           url={url}
           debate={debate}

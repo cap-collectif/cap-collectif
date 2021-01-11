@@ -18,21 +18,20 @@ type Props = {|
   +isAuthenticated: boolean,
 |};
 
+// TODO: make the DebateStepPageVoteAndShare mobile friendly in the next PR, for now we do not display it
+// to avoid breaking mobile layout
 export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticated }: Props) => (
   <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
     <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
       <Flex direction="column" alignItems="center" spacing={4}>
-        {!step?.timeless && step?.timeRange?.endAt && (
-          <Tag variantType="badge" variant="yellow" icon="CLOCK">
-            <RemainingTime noStyle endAt={step?.timeRange?.endAt} />
-          </Tag>
-        )}
+        <Tag variantType="badge" variant="yellow" icon="CLOCK">
+          {step?.timeRange?.endAt && <RemainingTime noStyle endAt={step?.timeRange?.endAt} />}
+        </Tag>
         <Heading as="h2" fontWeight="400" mb={6} textAlign="center" color="gray.900">
           {title}
         </Heading>
-        {step && (
+        {!isMobile && step && (
           <DebateStepPageVoteAndShare
-            isMobile={isMobile}
             title={title}
             debate={step?.debate}
             isAuthenticated={isAuthenticated}
@@ -47,7 +46,7 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
 export default createFragmentContainer(DebateStepPageMainActions, {
   step: graphql`
     fragment DebateStepPageMainActions_step on DebateStep {
-      timeless
+      id
       timeRange {
         endAt
       }

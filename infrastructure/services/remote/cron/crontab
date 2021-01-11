@@ -26,7 +26,6 @@
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:step-contributors --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:analysis --env=prod --quiet
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:analysis --only-decisions --env=prod --quiet
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate --env=prod --quiet
 
 # Process analysis at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:process_proposals --env=prod --quiet

@@ -60,29 +60,29 @@ const SNAPSHOT_NAME = 'snap_qa';
 
 class ApplicationContext extends UserContext
 {
+    use AdminDashboardTait;
+    use AdminEventTrait;
+    use AdminGeneralTait;
+    use AdminOpinionTait;
+    use AdminOpinionTypeTrait;
+    use AdminProjectTrait;
+    use AdminSectionTrait;
+    use AdminShieldTrait;
+    use AdminTrait;
     use CommentStepsTrait;
+    use ExportDatasUserTrait;
+    use LocaleTrait;
     use NotificationsStepTrait;
     use OpinionStepsTrait;
     use ProjectStepsTrait;
-    use ProposalStepsTrait;
     use ProposalEvaluationTrait;
+    use ProposalStepsTrait;
     use QuestionnaireStepsTrait;
     use ReportingStepsTrait;
     use SharingStepsTrait;
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
     use UserProfileTrait;
-    use AdminTrait;
-    use ExportDatasUserTrait;
-    use AdminEventTrait;
-    use AdminGeneralTait;
-    use AdminDashboardTait;
-    use AdminProjectTrait;
-    use AdminShieldTrait;
-    use AdminOpinionTait;
-    use AdminOpinionTypeTrait;
-    use AdminSectionTrait;
-    use LocaleTrait;
 
     protected $cookieConsented;
     protected $currentPage = 'home page';
@@ -148,11 +148,12 @@ class ApplicationContext extends UserContext
             echo 'No ElasticSearch snapshot detected.' . PHP_EOL;
         }
         echo 'Writing ElasticSearch snapshot.' . PHP_EOL;
+        // We pass true as string because of php casting true to 1 and this is not authorized in ES 7.
         $this->snapshot->createSnapshot(
             REPOSITORY_NAME,
             SNAPSHOT_NAME,
             ['indices' => $this->indexManager->getLiveSearchIndexName()],
-            true
+            'true'
         );
         $this->cookieConsented = !$this->isSuiteWithJS($suite);
     }
@@ -193,11 +194,14 @@ class ApplicationContext extends UserContext
         }
 
         echo 'Restoring ElasticSearch snapshot.' . PHP_EOL;
+        /** @var IndexBuilder $indexManager */
         $indexManager = $this->getService(IndexBuilder::class);
         $indexManager->getLiveSearchIndex()->close();
-        $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], true);
+        $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], 'true');
         $indexManager->getLiveSearchIndex()->open();
-        $indexManager->markAsLive($indexManager->getLiveSearchIndex());
+        $indexManager->markAsLive(
+            $indexManager->getClient()->getIndex($indexManager->getLastIndexRealName())
+        );
     }
 
     /**

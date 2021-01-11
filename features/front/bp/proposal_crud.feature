@@ -106,7 +106,7 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
 
 @database @rabbitmq
 Scenario: Author of a proposal should be notified when someone comment if he has turned on comments notifications
-  Given I go to a proposal made by msantostefano@cap-collectif.com
+  Given I go to a proposal made by msantostefano@jolicode.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
   | 0 | {"commentId": "@string@"} |

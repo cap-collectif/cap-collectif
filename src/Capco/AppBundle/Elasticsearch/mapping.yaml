@@ -41,495 +41,316 @@ settings:
 
 # Only map the fields we need to search on.
 mappings:
-    _default_:
-        dynamic: false
-        _all:
-            enabled: false
+    properties:
+        id: { type: keyword } # type:db ID
+        objectType: { type: keyword } # replace ES < 6 "type" field
+        slug: { type: keyword }
+        createdAt: { type: date }
+        email: &text_analysis_highlighted
+            type: text
+            analyzer: capco_french
+            index_options: offsets
+            fields:
+                std: { type: text, analyzer: capco_standard }
+        username: *text_analysis_highlighted
+        biography: *text_analysis_highlighted
+        firstname: *text_analysis_highlighted
+        lastname: *text_analysis_highlighted
+        enabled: { type: boolean }
+        roles: { type: text }
+        userType:
+            type: object
+            properties:
+                id:
+                    type: keyword
+        vip: { type: boolean }
+        participationsCountByProject:
+            type: nested
+            properties:
+                project: &Project
+                    type: object
+                    properties:
+                        id: { type: keyword }
+                        visibility: { type: long }
+                        restrictedViewerIds: { type: keyword }
+                        authors: &Author
+                            type: object
+                            properties:
+                                id: { type: keyword }
+                                username: *text_analysis_highlighted
+                                email: *text_analysis_highlighted
+                                userType:
+                                    type: object
+                                    properties:
+                                        id: { type: keyword }
+                        locale: &Locale
+                            type: object
+                            properties:
+                                id: { type: keyword }
+                                code: { type: keyword }
+                        count:
+                            type: long
+        participationsCountByStep:
+            type: nested
+            properties:
+                step: &Step
+                    type: object
+                    properties:
+                        id: { type: keyword }
+                count:
+                    type: long
+        totalParticipationsCount: { type: long }
+        participationsCountByConsultation:
+            type: nested
+            properties:
+                consultation:
+                    type: object
+                    properties:
+                        id: { type: keyword }
+                count:
+                    type: long
+        body: *text_analysis_highlighted
+        trashedAt: { type: date }
+        trashedStatus: { type: keyword }
+        updatedAt: { type: date }
+        published: { type: boolean }
+        publishedAt: { type: date }
+        project: *Project
+        step: *Step
+        author: *Author
+        consultation: &Consultation
+            type: object
+            properties:
+                id: { type: keyword }
+        opinion:
+            properties:
+                id: { type: keyword }
+                published: { type: boolean }
+                trashedAt: { type: date }
+        opinionVersion:
+            properties:
+                id: { type: keyword }
+                published: { type: boolean }
+                trashedAt: { type: date }
+        title: *text_analysis_highlighted
+        authors: *Author
+        visibility: { type: long }
+        districts:
+            type: object
+            properties:
+                id: { type: keyword }
+                position:
+                    type: long
+                district:
+                    type: object
+                    properties:
+                        id: { type: keyword }
+                        name: *text_analysis_highlighted
+        projectType:
+            type: object
+            properties:
+                id: { type: keyword }
+                title: { type: keyword }
+        projectStatus: { type: keyword }
+        contributionsCount: { type: long }
+        themes:
+            type: object
+            properties:
+                id: { type: keyword }
+                slug: { type: keyword }
+        eventCount: { type: long }
+        locale:
+            type: object
+            properties:
+                id: { type: keyword }
+                code: { type: keyword }
+        authorName: *text_analysis_highlighted
+        proposal:
+            type: object
+            properties:
+                id: { type: keyword }
+                project: *Project
+                author: *Author
+                visible: { type: boolean }
 
-    user:
-        properties:
-            id: { type: keyword }
-            slug: { type: keyword }
-            createdAt: { type: date }
-            email: &text_analysis_highlighted
-                type: text
-                analyzer: capco_french
-                index_options: offsets
-                fields:
-                    std: { type: text, analyzer: capco_standard }
-            username: *text_analysis_highlighted
-            biography: *text_analysis_highlighted
-            firstname: *text_analysis_highlighted
-            lastname: *text_analysis_highlighted
-            enabled: { type: boolean }
-            roles: { type: text }
-            userType:
-                type: object
-                properties:
-                    id:
-                        type: keyword
-            vip: { type: boolean }
-            participationsCountByProject:
-                type: nested
-                properties:
-                    project: &Project
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                            visibility: { type: long }
-                            restrictedViewerIds: { type: keyword }
-                            authors: &Author
-                                type: object
-                                properties:
-                                    id: { type: keyword }
-                                    username: *text_analysis_highlighted
-                                    email: *text_analysis_highlighted
-                                    userType:
-                                        type: object
-                                        properties:
-                                            id: { type: keyword }
-                            locale: &Locale
-                                type: object
-                                properties:
-                                    id: { type: keyword }
-                                    code: { type: keyword }
-                    count:
-                        type: long
-            participationsCountByStep:
-                type: nested
-                properties:
-                    step: &Step
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
-            totalParticipationsCount: { type: long }
-            participationsCountByConsultation:
-                type: nested
-                properties:
-                    consultation:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
+        fullAddress: *text_analysis_highlighted
+        startAt: { type: date }
+        endAt: { type: date }
+        isRegistrable: { type: boolean }
+        isPresential: { type: boolean }
+        link: *text_analysis_highlighted
+        projects:
+            type: object
+            properties:
+                id: { type: keyword }
+                slug: { type: keyword }
+        translations:
+            type: object
+            properties:
+                locale: { type: keyword }
+                slug: { type: keyword }
 
-    consultation: &Consultation
-        properties:
-            id: { type: keyword }
+        visible: { type: boolean }
+        proposalTitle: &text_analysis_highlighted_autocompleted
+            type: text
+            analyzer: capco_french
+            index_options: offsets
+            fields:
+                std: { type: text, analyzer: capco_standard }
+                autocomplete: { type: text, analyzer: capco_autocomplete }
+        proposalBody: *text_analysis_highlighted_autocompleted
+        reference: *text_analysis_highlighted
+        deletedAt: { type: date }
+        trashed: { type: boolean }
+        draft: { type: boolean }
+        commentsCount: { type: long }
+        estimation: { type: float }
+        district:
+            type: object
+            properties:
+                id: { type: keyword }
+        status:
+            type: object
+            properties:
+                id: { type: keyword }
+        proposalForm:
+            type: object
+            properties:
+                id: { type: keyword }
+        category:
+            type: object
+            properties:
+                id: { type: keyword }
+        theme:
+            type: object
+            properties:
+                id: { type: keyword }
+        selections:
+            type: object
+            properties:
+                step: *Step
+                status:
+                    type: object
+                    properties:
+                        id: { type: keyword }
+        pointsCount: { type: long }
+        votesCount: { type: long }
+        votesCountByStep:
+            type: nested
+            properties:
+                step: *Step
+                count:
+                    type: long
+        pointsCountByStep:
+            type: nested
+            properties:
+                step: *Step
+                count:
+                    type: long
+        proposalAnalysts:
+            type: object
+            properties:
+                analyst: *Author
+        supervisor: *Author
+        decisionMaker: *Author
+        analyses:
+            type: nested
+            properties:
+                updatedBy: *Author
+                state: { type: keyword }
+        decision:
+            type: object
+            properties:
+                updatedBy: *Author
+                state: { type: keyword }
+        assessment:
+            type: object
+            properties:
+                updatedBy: *Author
+                state: { type: keyword }
+        progressStatus: { type: keyword }
+        revisions:
+            type: nested
+            properties:
+                author: *Author
+                state: { type: keyword }
+                createdAt: { type: date }
 
-    argument:
-        properties:
-            id: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            trashedAt: { type: date }
-            trashedStatus: { type: keyword }
-            updatedAt: { type: date }
-            published: { type: boolean }
-            publishedAt: { type: date }
-            project: *Project
-            step: *Step
-            author: *Author
-            consultation: *Consultation
-            opinion:
-                properties:
-                    id: { type: keyword }
-                    published: { type: boolean }
-                    trashedAt: { type: date }
-            opinionVersion:
-                properties:
-                    id: { type: keyword }
-                    published: { type: boolean }
-                    trashedAt: { type: date }
+        position: { type: long }
+        pinned: { type: boolean }
+        votesCountOk: { type: long }
+        votesCountNok: { type: long }
+        votesCountMitige: { type: long }
+        argumentsCount: { type: long }
+        type:
+            type: object
+            properties:
+                id: { type: keyword }
 
-    district:
-        properties:
-            id: { type: keyword }
-            name: { type: keyword }
+        abstract: *text_analysis_highlighted
+        Author: *Author
 
-    project:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            createdAt: { type: date }
-            publishedAt: { type: date }
-            authors: *Author
-            visibility: { type: long }
-            districts:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    position:
-                        type: long
-                    district:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                            name: *text_analysis_highlighted
-            projectType:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    title: { type: keyword }
-            projectStatus: { type: string }
-            contributionsCount: { type: long }
-            themes:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    slug: { type: keyword }
-            eventCount: { type: long }
-            locale:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    code: { type: keyword }
-    comment:
-        properties:
-            id: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            authorName: *text_analysis_highlighted
-            author: *Author
-            published: { type: boolean }
-            trashedStatus: { type: keyword }
-            proposal:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    project: *Project
-                    author: *Author
-                    visible: { type: boolean }
+        teaser: *text_analysis_highlighted
 
-    event:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            fullAddress: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            startAt: { type: date }
-            endAt: { type: date }
-            author: *Author
-            isRegistrable: { type: boolean }
-            isPresential: { type: boolean }
-            link: *text_analysis_highlighted
-            enabled: { type: boolean }
-            themes:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    slug: { type: keyword }
-            projects:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    slug: { type: keyword }
-            translations:
-                type: object
-                properties:
-                    locale: { type: keyword }
-                    slug: { type: keyword }
+        private: { type: boolean }
+        user: *Author
+        isAccounted: { type: boolean }
+        value: { type: long }
 
-    proposal:
-        properties:
-            id: { type: keyword }
-            visible: { type: boolean }
-            title: &text_analysis_highlighted_autocompleted
-                type: text
-                analyzer: capco_french
-                index_options: offsets
-                fields:
-                    std: { type: text, analyzer: capco_standard }
-                    autocomplete: { type: text, analyzer: capco_autocomplete }
-            slug: { type: keyword }
-            body: *text_analysis_highlighted_autocompleted
-            reference: *text_analysis_highlighted
-            author: *Author
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            deletedAt: { type: date }
-            publishedAt: { type: date }
-            trashed: { type: boolean }
-            draft: { type: boolean }
-            published: { type: boolean }
-            commentsCount: { type: long }
-            estimation: { type: float }
-            district:
-                type: object
-                properties:
-                    id: { type: keyword }
-            status:
-                type: object
-                properties:
-                    id: { type: keyword }
-            proposalForm:
-                type: object
-                properties:
-                    id: { type: keyword }
-            category:
-                type: object
-                properties:
-                    id: { type: keyword }
-            theme:
-                type: object
-                properties:
-                    id: { type: keyword }
-            selections:
-                type: object
-                properties:
-                    step: *Step
-                    status:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-            pointsCount: { type: long }
-            votesCount: { type: long }
-            votesCountByStep:
-                type: nested
-                properties:
-                    step: *Step
-                    count:
-                        type: long
-            pointsCountByStep:
-                type: nested
-                properties:
-                    step: *Step
-                    count:
-                        type: long
-            project: *Project
-            step: *Step
-            proposalAnalysts:
-                type: object
-                properties:
-                    analyst: *Author
-            supervisor: *Author
-            decisionMaker: *Author
-            analyses:
-                type: nested
-                properties:
-                    updatedBy: *Author
-                    state: { type: keyword }
-            decision:
-                type: object
-                properties:
-                    updatedBy: *Author
-                    state: { type: keyword }
-            assessment:
-                type: object
-                properties:
-                    updatedBy: *Author
-                    state: { type: keyword }
-            progressStatus: { type: keyword }
-            revisions:
-                type: nested
-                properties:
-                    author: *Author
-                    state: { type: keyword }
-                    createdAt: { type: date }
-    opinion:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            publishedAt: { type: date }
-            published: { type: boolean }
-            trashedAt: { type: date }
-            position: { type: long }
-            pinned: { type: boolean }
-            step: *Step
-            project: *Project
-            author: *Author
-            consultation: *Consultation
-            votesCount: { type: long }
-            votesCountOk: { type: long }
-            votesCountNok: { type: long }
-            votesCountMitige: { type: long }
-            argumentsCount: { type: long }
-            type:
-                type: object
-                properties:
-                    id: { type: keyword }
+        source:
+            type: object
+            properties:
+                id: { type: keyword }
 
-    opinionVersion:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            published: { type: boolean }
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            trashedAt: { type: date }
-            publishedAt: { type: date }
-            author: *Author
-            step: *Step
-            project: *Project
-            consultation: *Consultation
-            votesCount: { type: long }
-            votesCountOk: { type: long }
-            votesCountNok: { type: long }
-            votesCountMitige: { type: long }
-            argumentsCount: { type: long }
-            opinion:
-                type: object
-                properties:
-                    id: { type: keyword }
+        comment:
+            type: object
+            properties:
+                id: { type: keyword }
+                published: { type: boolean }
+                trashedStatus: { type: keyword }
 
-    post:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            abstract: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            publishedAt: { type: date }
-            Author: *Author
+        label: *text_analysis_highlighted
+        description: *text_analysis_highlighted
+        color: { type: keyword }
 
-    source:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            published: { type: boolean }
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            trashedAt: { type: date }
-            publishedAt: { type: date }
-            author: *Author
-            project: *Project
-            step: *Step
-            consultation: *Consultation
+        responseType: { type: keyword }
+        textValue:
+            type: text
+            analyzer: capco_french
+            index_options: offsets
+            fields:
+                std: { type: text, analyzer: capco_standard }
+                tag: { type: text, analyzer: tag_cloud, fielddata: true }
+        objectValue:
+            type: object
+            properties:
+                labels: { type: keyword }
+                other: { type: keyword }
+        question:
+            type: object
+            properties:
+                id: { type: keyword }
+                type: { type: keyword }
+        reply:
+            type: object
+            properties:
+                id: { type: keyword }
+                author: *Author
+                createdAt: { type: date }
+                published: { type: boolean }
+        questionnaire:
+            type: object
+            properties:
+                id: { type: keyword }
 
-    theme:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            teaser: *text_analysis_highlighted
-            body: *text_analysis_highlighted
-            Author: *Author
-            createdAt: { type: date }
-            updatedAt: { type: date }
+        #
+        # This allow ous to monitore the usage of our API.
+        #
+        # This will move later to another index.
+        #
 
-    vote:
-        properties:
-            id: { type: keyword }
-            private: { type: boolean }
-            author: *Author
-            user: *Author
-            createdAt: { type: date }
-            project: *Project
-            published: { type: boolean }
-            isAccounted: { type: boolean }
-            publishedAt: { type: date }
-            step: *Step
-            value: { type: long }
-            consultation: *Consultation
-            opinionVersion:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    published: { type: boolean }
-                    trashedStatus: { type: keyword }
-            source:
-                type: object
-                properties:
-                    id: { type: keyword }
-            opinion:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    published: { type: boolean }
-                    trashedStatus: { type: keyword }
-            comment:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    published: { type: boolean }
-                    trashedStatus: { type: keyword }
-            proposal:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    visible: { type: boolean }
-
-    reply:
-        properties:
-            id: { type: keyword }
-            published: { type: boolean }
-            author: *Author
-            project: *Project
-            step: *Step
-            createdAt: { type: date }
-            draft: { type: boolean }
-
-    questionChoice:
-        properties:
-            id: { type: keyword }
-            label: *text_analysis_highlighted
-            position: { type: long }
-            description: *text_analysis_highlighted
-            color: { type: keyword }
-            question:
-                type: object
-                properties:
-                    id: { type: keyword }
-
-    response:
-        properties:
-            id: { type: keyword }
-            responseType: { type: keyword }
-            createdAt: { type: date }
-            textValue:
-                type: text
-                analyzer: capco_french
-                index_options: offsets
-                fields:
-                    std: { type: text, analyzer: capco_standard }
-                    tag: { type: text, analyzer: tag_cloud, fielddata: true }
-            objectValue:
-                type: object
-                properties:
-                    labels: { type: keyword }
-                    other: { type: keyword }
-            question:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    type: { type: keyword }
-            reply:
-                type: object
-                properties:
-                    id: { type: keyword }
-                    author: *Author
-                    createdAt: { type: date }
-                    published: { type: boolean }
-            questionnaire:
-                type: object
-                properties:
-                    id: { type: keyword }
-
-    #
-    # This allow ous to monitore the usage of our API.
-    #
-    # This will move later to another index.
-    #
-    api_analytics:
-        properties:
-            graphql_type: { type: keyword }
-            graphql_field: { type: keyword }
-            host: { type: keyword }
-            graphql_schema: { type: keyword }
-            clientId: { type: keyword }
-            createdAt: { type: date }
+        graphql_type: { type: keyword }
+        graphql_field: { type: keyword }
+        host: { type: keyword }
+        graphql_schema: { type: keyword }
+        clientId: { type: keyword }

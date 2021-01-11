@@ -75,7 +75,7 @@ class GraphQLContext implements Context
      */
     public function iAmLoggedInToGraphQLAsSfavot()
     {
-        $this->createAuthenticatedClient('sfavot@cap-collectif.com', 'toto');
+        $this->createAuthenticatedClient('sfavot@jolicode.com', 'toto');
     }
 
     /**
@@ -83,7 +83,7 @@ class GraphQLContext implements Context
      */
     public function iAmLoggedInToGraphQLAsWelcomatic()
     {
-        $this->createAuthenticatedClient('msantostefano@cap-collectif.com', 'capco');
+        $this->createAuthenticatedClient('msantostefano@jolicode.com', 'capco');
     }
 
     /**
@@ -107,7 +107,7 @@ class GraphQLContext implements Context
      */
     public function iAmLoggedInToGraphQLAsLbrunet()
     {
-        $this->createAuthenticatedClient('lbrunet@cap-collectif.com', 'toto');
+        $this->createAuthenticatedClient('lbrunet@jolicode.com', 'toto');
     }
 
     /**
