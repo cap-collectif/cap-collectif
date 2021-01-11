@@ -1185,6 +1185,24 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
+                                    "concreteType": "DebateOpinionConnection",
+                                    "kind": "LinkedField",
+                                    "name": "opinions",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
                                     "concreteType": "DebateArticleConnection",
                                     "kind": "LinkedField",
                                     "name": "articles",
@@ -1730,7 +1748,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "51d056e6347aaf8e859e7e707c9eda09",
+        "cacheID": "56a3e9d804fa0cae8661050196076a56",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -2003,6 +2021,9 @@ fragment ProjectAdminForm_project on Project {
     }
     ... on DebateStep {
       debate {
+        opinions {
+          totalCount
+        }
         articles {
           edges {
             node {
@@ -3331,6 +3352,24 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
+                                    "concreteType": "DebateOpinionConnection",
+                                    "kind": "LinkedField",
+                                    "name": "opinions",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
                                     "concreteType": "DebateArticleConnection",
                                     "kind": "LinkedField",
                                     "name": "articles",
@@ -3876,7 +3915,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "51d056e6347aaf8e859e7e707c9eda09",
+        "cacheID": "56a3e9d804fa0cae8661050196076a56",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4149,6 +4188,9 @@ fragment ProjectAdminForm_project on Project {
     }
     ... on DebateStep {
       debate {
+        opinions {
+          totalCount
+        }
         articles {
           edges {
             node {

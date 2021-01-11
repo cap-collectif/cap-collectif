@@ -19,6 +19,3 @@ Capco\AppBundle\Entity\Responses\AbstractResponse:
         type:
             groups: [ElasticsearchResponse]
             serialized_name: responseType
-        elasticsearchTypeName:
-            serialized_name: objectType
-            groups: [ElasticsearchResponse]

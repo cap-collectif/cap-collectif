@@ -160,10 +160,10 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $args->offsetGet('includeDraft'),
         ];
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
+
         if (!$form->getStep()) {
             return $emptyConnection;
         }
-        $filters['allowAnalysts'] = false;
         /*
          * When a collect step is private, only the author
          * or an admin can see proposals inside.
@@ -185,7 +185,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 $filters['author'] = $args->offsetGet('author');
             } elseif (!$viewer->isAdmin()) {
                 // When the step is private, only an author or an admin can see proposals
-                $filters['allowAnalysts'] = $viewer->getId();
+                $filters['author'] = $viewer->getId();
             }
         } elseif ($author) {
             $filters['author'] = $author;

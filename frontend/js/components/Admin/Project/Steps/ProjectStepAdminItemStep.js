@@ -5,7 +5,6 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type Step } from './ProjectStepAdminList';
-import DeleteModal from '~/components/Modal/DeleteModal';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
 import type { ProjectStepAdminItemStep_project } from '~relay/ProjectStepAdminItemStep_project.graphql';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
@@ -19,8 +18,6 @@ type Props = {|
   index: number,
   formName: string,
   fields: { length: number, map: Function, remove: Function },
-  handleClickEdit?: (index: number, type: any) => void,
-  handleClickDelete?: (index: number, type: any) => void,
   project: ProjectStepAdminItemStep_project,
 |};
 
@@ -53,7 +50,6 @@ const getWordingStep = (type: string) =>
   type === 'DebateStep' ? 'global.debate' : `${type.slice(0, -4).toLowerCase()}_step`;
 
 export const ProjectStepAdminItemStep = ({ step, index, fields, formName, project }: Props) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
   return (
@@ -69,7 +65,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
             {step.type && <FormattedMessage id={getWordingStep(step.type)} />}
           </span>
 
-          {step.type === 'DebateStep' && step.slug && (
+          {step.type === 'DebateStep' && step.slug && !step.hasOpinionsFilled && (
             <>
               <br />
               <Flex
@@ -116,7 +112,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
             bsStyle="danger"
             id={`js-btn-delete-${index}`}
             className="btn-outline-danger"
-            onClick={() => setShowDeleteModal(true)}>
+            onClick={() => onDeleteStep(fields, index)}>
             <i className="fa fa-trash" />
           </Button>
           <ProjectAdminStepFormModal
@@ -127,13 +123,6 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
             form={formName}
             index={index}
             project={project}
-          />
-          <DeleteModal
-            showDeleteModal={showDeleteModal}
-            deleteElement={() => onDeleteStep(fields, index)}
-            closeDeleteModal={() => setShowDeleteModal(false)}
-            deleteModalTitle="group.admin.step.modal.delete.title"
-            deleteModalContent="group.admin.step.modal.delete.content"
           />
         </ButtonToolbar>
       </Col>

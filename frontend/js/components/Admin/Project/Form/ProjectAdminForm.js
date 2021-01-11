@@ -247,6 +247,7 @@ const onSubmit = (
           articles: s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
           debate: undefined,
           slug: undefined,
+          hasOpinionsFilled: undefined,
         }))
       : [],
     locale: locale ? locale.value : null,
@@ -387,7 +388,7 @@ export function ProjectAdminForm(props: Props) {
   );
 }
 
-const mapStateToProps = (state: GlobalState, { project }: Props) => {
+const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
   return {
     features: state.default.features,
     initialValues: {
@@ -420,6 +421,8 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
               step.type === 'DebateStep'
                 ? step?.debate?.articles?.edges?.filter(Boolean).map(edge => edge.node)
                 : [],
+            hasOpinionsFilled:
+              step.type === 'DebateStep' ? step?.debate?.opinions.totalCount === 2 : undefined,
             debate: undefined,
           }))
         : [],
@@ -455,7 +458,7 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
         project && project.locale
           ? {
               value: project.locale.value,
-              label: <FormattedMessage id={project.locale.label} />,
+              label: intl.formatMessage({ id: project.locale.label }),
             }
           : null,
     },
@@ -464,18 +467,16 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
   };
 };
 
-const form = injectIntl(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName,
-    enableReinitialize: true,
-  })(ProjectAdminForm),
-);
+const form = reduxForm({
+  validate,
+  onSubmit,
+  form: formName,
+  enableReinitialize: true,
+})(ProjectAdminForm);
 
 const container = connect(mapStateToProps)(form);
 
-export default createFragmentContainer(container, {
+export default createFragmentContainer(injectIntl(container), {
   project: graphql`
     fragment ProjectAdminForm_project on Project {
       id
@@ -679,6 +680,9 @@ export default createFragmentContainer(container, {
         }
         ... on DebateStep {
           debate {
+            opinions {
+              totalCount
+            }
             articles {
               edges {
                 node {

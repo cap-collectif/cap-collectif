@@ -10,12 +10,10 @@ Capco\AppBundle\Entity\Proposal:
                     ElasticsearchVoteNestedProposal,
                 ]
         title:
-            serialized_name: proposalTitle
             groups: [Proposals, ElasticsearchProposal]
         summary:
             groups: [Proposals, ElasticsearchProposal]
         body:
-            serialized_name: proposalBody
             groups: [Proposals, ElasticsearchProposal]
         author:
             groups: [Proposals, ElasticsearchProposal]
@@ -93,7 +91,4 @@ Capco\AppBundle\Entity\Proposal:
             groups: [ElasticsearchProposal]
         getRevisionsArray:
             serialized_name: revisions
-            groups: [ElasticsearchProposal]
-        elasticsearchTypeName:
-            serialized_name: objectType
             groups: [ElasticsearchProposal]

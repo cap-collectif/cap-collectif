@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Search\EventSearch;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -11,6 +10,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\EventOrderField;
@@ -38,14 +38,14 @@ class QueryEventsResolver implements ResolverInterface
         Argument $args,
         ResolveInfo $resolveInfo,
         RequestStack $requestStack
-    ): ConnectionInterface {
+    ): Connection {
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
         return $this->getEventsConnection($args);
     }
 
-    public function getEventsConnection(Argument $args): ConnectionInterface
+    public function getEventsConnection(Argument $args): Connection
     {
         $totalCount = 0;
 

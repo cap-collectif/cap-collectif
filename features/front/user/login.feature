@@ -39,34 +39,34 @@ Scenario: Anonymous wants to register with user type and zipcode
   And I visited "home page"
   When I press "global.login"
   And I fill in the following:
-    | username             | lbrunet@jolicode.com    |
+    | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
   Then I should see a ".hide-captcha" element
   And I fill in the following:
-    | username             | lbrunet@jolicode.com    |
+    | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
   And I fill in the following:
-    | username             | lbrunet@jolicode.com    |
+    | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
   And I fill in the following:
-    | username             | lbrunet@jolicode.com    |
+    | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
   And I fill in the following:
-    | username             | lbrunet@jolicode.com    |
+    | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
   When I press "global.login_me"
   And I wait 3 seconds
   Then I should not see a ".hide-captcha" element
   And I fill in the following:
-    | username             | lbrunet@jolicode.com    |
+    | username             | lbrunet@cap-collectif.com    |
     | password             | toto                    |
   When I press "global.login_me"
   Then I should see "registration.constraints.captcha.invalid"

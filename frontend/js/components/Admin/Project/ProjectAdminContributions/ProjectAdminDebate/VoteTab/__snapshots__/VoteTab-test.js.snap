@@ -16,7 +16,8 @@ exports[`<VoteTab /> should render correctly 1`] = `
       vote-count-for-and-against
     </Text>
     <Button
-      disabled={true}
+      aria-label="global.export"
+      onClick={[Function]}
       variant="primary"
       variantColor="primary"
       variantSize="small"
@@ -53,9 +54,8 @@ exports[`<VoteTab /> should render correctly 1`] = `
       useWindow={false}
     >
       <ForwardRef
-        align="flex-start"
+        align="stretch"
         direction="row"
-        justify="space-between"
       >
         <VoteTab___StyledAppBox
           as="ul"
@@ -83,7 +83,6 @@ exports[`<VoteTab /> should render correctly 1`] = `
           </AppBox>
         </VoteTab___StyledAppBox>
         <VoteTab___StyledAppBox2
-          _css3={[Function]}
           as="ul"
           flex="1"
           m={0}
@@ -118,9 +117,9 @@ exports[`<VoteTab /> should render correctly when no argument 1`] = `
   direction="column"
   spacing={6}
 >
-  <AppBox
-    as="img"
-    src="http://localhost/image/contribution_debate_vote.png"
+  <SpotIcon
+    name="RATING_CLICK"
+    size="lg"
   />
   <Text
     color="gray.500"

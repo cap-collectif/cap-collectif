@@ -25,4 +25,9 @@ describe('<DebateStepPageVoteAndShare/>', () => {
     const wrapper = shallow(<DebateStepPageVoteAndShare {...props} debate={debate} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correcty on mobile', () => {
+    const wrapper = shallow(<DebateStepPageVoteAndShare {...props} debate={debate} isMobile />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

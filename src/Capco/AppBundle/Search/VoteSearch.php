@@ -46,8 +46,7 @@ class VoteSearch extends Search
         );
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $response = $this->index->search($query);
+        $response = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
@@ -62,8 +61,7 @@ class VoteSearch extends Search
         $query = $this->createVotesByUserQuery($user, $onlyAccounted);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $response = $this->index->search($query);
+        $response = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
@@ -78,8 +76,7 @@ class VoteSearch extends Search
         $query = $this->createPublicVotesByAuthorQuery($author, $onlyAccounted);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $response = $this->index->search($query);
+        $response = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($response);
 
         return $this->getData($cursors, $response);
@@ -97,9 +94,8 @@ class VoteSearch extends Search
         $agg = new Terms('votesCounts');
         $agg->setField('value')->setSize(Search::BIG_INT_VALUE);
         $query->addAggregation($agg);
-        $this->addObjectTypeFilter($query, $this->type);
 
-        return $this->index->search($query);
+        return $this->index->getType($this->type)->search($query);
     }
 
     public function getVotesCountsByVersion(string $versionId): ResultSet
@@ -114,9 +110,8 @@ class VoteSearch extends Search
         $agg = new Terms('votesCounts');
         $agg->setField('value')->setSize(Search::BIG_INT_VALUE);
         $query->addAggregation($agg);
-        $this->addObjectTypeFilter($query, $this->type);
 
-        return $this->index->search($query);
+        return $this->index->getType($this->type)->search($query);
     }
 
     public function getSortField(string $field): string
@@ -171,7 +166,7 @@ class VoteSearch extends Search
             $connection = new ElasticsearchPaginatedResult(
                 $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $resultSet),
                 $this->getCursors($resultSet),
-                $resultSet->getResponse()->getData()['hits']['total']['value']
+                $resultSet->getTotalHits()
             );
             $connection->totalPointsCount = $points[$resultKey];
             $results[] = $connection;
@@ -217,7 +212,7 @@ class VoteSearch extends Search
             $this->applyCursor($query, $cursor);
 
             $searchQuery = $this->index->createSearch($query);
-            $this->addObjectTypeFilter($query, $this->type);
+            $searchQuery->addType($this->type);
             $searchQuery->setQuery($query);
             $globalQuery->addSearch($searchQuery);
         }
@@ -229,13 +224,10 @@ class VoteSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 

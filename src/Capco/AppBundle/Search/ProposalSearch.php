@@ -22,14 +22,14 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ProposalSearch extends Search
 {
     public const SEARCH_FIELDS = [
-        'proposalTitle',
+        'title',
         'author.username.std',
         'author.username',
-        'proposalTitle.std',
+        'title.std',
         'reference',
         'reference.std',
-        'proposalBody',
-        'proposalBody.std',
+        'body',
+        'body.std',
         'object',
         'object.std',
         'teaser',
@@ -98,10 +98,7 @@ class ProposalSearch extends Search
                 ['id' => new \stdClass()],
             ]);
         }
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
+        $resultSet = $this->index->getType($this->type)->search($query);
         $ids = [];
         $cursors = [];
         foreach ($resultSet as $result) {
@@ -110,7 +107,7 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $count);
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
     }
 
     // This method is called in ProposalFormProposalsDataLoader and is based only on the first collectstep of the project.
@@ -153,18 +150,6 @@ class ProposalSearch extends Search
                 $boolQuery->addFilter($term);
             }
         }
-        if (isset($providedFilters['allowAnalysts']) && $providedFilters['allowAnalysts']) {
-            $terms = [
-                new Term([
-                    'proposalAnalysts.analyst.id' => ['value' => $providedFilters['allowAnalysts']],
-                ]),
-                new Term(['author.id' => ['value' => $providedFilters['allowAnalysts']]]),
-                new Term(['supervisor.id' => ['value' => $providedFilters['allowAnalysts']]]),
-                new Term(['decisionMaker.id' => ['value' => $providedFilters['allowAnalysts']]]),
-            ];
-
-            $boolQuery->addMust((new Query\BoolQuery())->addShould($terms));
-        }
         if (\count($stateTerms) > 0) {
             $boolQuery->addFilter((new Query\BoolQuery())->addShould($stateTerms));
         }
@@ -189,11 +174,7 @@ class ProposalSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
-        $data = $resultSet->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
+        $resultSet = $this->index->getType($this->type)->search($query);
         $ids = [];
         $cursors = [];
         foreach ($resultSet as $result) {
@@ -202,7 +183,7 @@ class ProposalSearch extends Search
         }
         $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
 
-        return new ElasticsearchPaginatedResult($proposals, $cursors, $count);
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
@@ -324,8 +305,7 @@ class ProposalSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-        $this->addObjectTypeFilter($query, $this->type);
-        $resultSet = $this->index->search($query);
+        $resultSet = $this->index->getType($this->type)->search($query);
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
@@ -440,13 +420,10 @@ class ProposalSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $data = $response->getResponse()->getData();
-        $count = $data['hits']['total']['value'];
-
         return new ElasticsearchPaginatedResult(
             $this->getHydratedResultsFromResultSet($this->proposalRepo, $response),
             $cursors,
-            $count
+            $response->getTotalHits()
         );
     }
 
@@ -555,6 +532,7 @@ class ProposalSearch extends Search
         $filters = [];
         $filters['draft'] = false;
         $filters['published'] = true;
+
         if (isset($providedFilters['trashedStatus'])) {
             if (ProposalTrashedStatus::TRASHED === $providedFilters['trashedStatus']) {
                 $filters['trashed'] = true;

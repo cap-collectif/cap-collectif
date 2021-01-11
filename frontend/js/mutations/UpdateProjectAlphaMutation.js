@@ -46,6 +46,7 @@ const mutation = graphql`
           type: __typename
           title
           slug
+          timeless
           startAt: timeRange {
             startAt
           }
@@ -81,6 +82,9 @@ const mutation = graphql`
           }
           ... on DebateStep {
             debate {
+              opinions {
+                totalCount
+              }
               articles {
                 edges {
                   node {

@@ -11,6 +11,7 @@ import { renderLabel } from '~/components/Admin/Project/Content/ProjectContentAd
 import type { Dispatch, GlobalState } from '~/types';
 import { stepFormName } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 import { ICON_NAME } from '~ds/Icon/Icon';
+import { FontWeight } from '~ui/Primitives/constants';
 
 export type Articles = Array<{
   id: ?string,
@@ -29,7 +30,11 @@ const renderArticles = ({ fields: articles }) =>
       type="text"
       name={`${article}.url`}
       id={`step-article-${idx}`}
-      label={<FormattedMessage id="global.link" />}
+      label={
+        <Text fontWeight={FontWeight.Normal}>
+          <FormattedMessage id="global.link" tagName={React.Fragment} />
+        </Text>
+      }
       placeholder="placeholderText.debat.articleLink"
       component={renderComponent}
     />
@@ -50,8 +55,8 @@ export const StepArticle = ({ dispatch, articles }: Props) => {
   }, [articles.length, dispatch]);
 
   return (
-    <Flex direction="column" spacing={4}>
-      <Text color="gray.900">
+    <Flex direction="column" spacing={4} mb={6}>
+      <Text color="gray.900" fontWeight={FontWeight.Bold}>
         {renderLabel('related.articles', intl, 'helpText.add.press.articles')}
       </Text>
 

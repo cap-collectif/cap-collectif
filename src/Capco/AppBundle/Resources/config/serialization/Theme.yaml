@@ -1,23 +1,13 @@
 Capco\AppBundle\Entity\Theme:
-    attributes:
-        id:
-            groups:
-                [
-                    ThemeDetails,
-                    ElasticsearchTheme,
-                    ElasticsearchProposalNestedTheme,
-                    ElasticsearchProjectNestedTheme,
-                    ElasticsearchEventNestedTheme,
-                ]
-        title:
-            groups: [Themes, ThemeDetails, ElasticsearchTheme]
-        slug:
-            groups: [Themes, ThemeDetails, ElasticsearchTheme]
-        media:
-            groups: [Default]
-        isEnabled:
-            groups: [ThemeDetails]
-            serialized_name: enabled
-        elasticsearchTypeName:
-            serialized_name: objectType
-            groups: [ElasticsearchTheme]
+  attributes:
+    id:
+      groups: [ThemeDetails, ElasticsearchTheme, ElasticsearchProposalNestedTheme, ElasticsearchProjectNestedTheme, ElasticsearchEventNestedTheme]
+    title:
+      groups: [Themes, ThemeDetails, ElasticsearchTheme]
+    slug:
+      groups: [Themes, ThemeDetails, ElasticsearchTheme]
+    media:
+      groups: [Default]
+    isEnabled:
+      groups: [ThemeDetails]
+      serialized_name: enabled
