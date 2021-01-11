@@ -8,10 +8,10 @@ import Text from '~ui/Primitives/Text';
 import DebateVote from '~/components/Admin/Debate/DebateVote/DebateVote';
 import type { DebateVote_vote$ref } from '~relay/DebateVote_vote.graphql';
 import type { ForOrAgainstValue, VoteTab_debate } from '~relay/VoteTab_debate.graphql';
-import Button from '~ds/Button/Button';
 import AppBox from '~ui/Primitives/AppBox';
 import Spinner from '~ds/Spinner/Spinner';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
+import Button from '~ds/Button/Button';
 
 export const VOTE_PAGINATION = 10;
 
@@ -66,6 +66,7 @@ export const VoteTab = ({ debate, relay }: Props) => {
     () => formatVotesForAndAgainst(debateVotes),
     [debateVotes],
   );
+  const exportUrl = `/debate/${debate.id}/download/votes`;
 
   return hasVotes ? (
     <Flex direction="column">
@@ -77,7 +78,14 @@ export const VoteTab = ({ debate, relay }: Props) => {
           )}
         </Text>
 
-        <Button variant="primary" variantColor="primary" variantSize="small" disabled>
+        <Button
+          variant="primary"
+          variantColor="primary"
+          variantSize="small"
+          onClick={() => {
+            window.location.href = exportUrl;
+          }}
+          aria-label={intl.formatMessage({ id: 'global.export' })}>
           {intl.formatMessage({ id: 'global.export' })}
         </Button>
       </Flex>

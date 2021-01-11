@@ -83,7 +83,8 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
         </Menu.List>
       </Menu>
       <Button
-        disabled={true}
+        aria-label="global.export"
+        onClick={[Function]}
         variant="primary"
         variantColor="primary"
         variantSize="small"

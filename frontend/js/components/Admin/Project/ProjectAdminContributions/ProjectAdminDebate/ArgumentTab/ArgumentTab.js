@@ -47,6 +47,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
     debateArgumentsTrashed.totalCount;
   const hasArguments = sumCountArguments > 0;
   const hasArgumentForOrAgainst = argumentsFor.totalCount > 0 || argumentsAgainst.totalCount > 0;
+  const exportUrl = `/debate/${debate.id}/download/arguments`;
 
   return hasArguments ? (
     <Flex direction="column">
@@ -105,7 +106,14 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
             </Menu.List>
           </Menu>
 
-          <Button variant="primary" variantColor="primary" variantSize="small" disabled>
+          <Button
+            variant="primary"
+            variantColor="primary"
+            variantSize="small"
+            onClick={() => {
+              window.location.href = exportUrl;
+            }}
+            aria-label={intl.formatMessage({ id: 'global.export' })}>
             {intl.formatMessage({ id: 'global.export' })}
           </Button>
         </Flex>

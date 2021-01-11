@@ -80,6 +80,17 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
       >
         Pour ou contre le LSD dans nos cantines
       </Heading>
+      <Relay(Connect(ReduxForm))
+        debate={
+          Object {
+            "$fragmentRefs": null,
+          }
+        }
+        isAuthenticated={true}
+        isMobile={true}
+        title="Pour ou contre le LSD dans nos cantines"
+        url="/debatestep1"
+      />
     </ForwardRef>
   </ReactPlaceholder>
 </AppBox>
@@ -114,6 +125,7 @@ exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`
           }
         }
         isAuthenticated={true}
+        isMobile={false}
         title="Pour ou contre le LSD dans nos cantines"
         url="/debatestep1"
       />

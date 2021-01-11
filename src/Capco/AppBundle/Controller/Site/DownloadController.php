@@ -5,22 +5,73 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DownloadController extends Controller
 {
-    private $logger;
+    private LoggerInterface $logger;
+    private SessionInterface $session;
+    private TranslatorInterface $translator;
+    private string $projectDir;
 
-    public function __construct(LoggerInterface $logger)
-    {
+    public function __construct(
+        LoggerInterface $logger,
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        string $projectDir
+    ) {
         $this->logger = $logger;
+        $this->session = $session;
+        $this->translator = $translator;
+        $this->projectDir = $projectDir;
+    }
+
+    /**
+     * @Route("/debate/{debateId}/download/{type}", name="app_debate_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function downloadArgumentsAction(
+        Request $request,
+        string $debateId,
+        string $type
+    ): Response {
+        $debateId = GlobalId::fromGlobalId($debateId)['id'];
+        $fileName = "debate-${debateId}-${type}.csv";
+        $filePath = $this->projectDir . '/public/export/' . $fileName;
+
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->translator->trans('project.download.not_yet_generated'));
+
+            return $this->redirect($request->headers->get('referer'));
+        }
+        $date = (new \DateTime())->format('Y-m-d');
+
+        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
+        $response = new BinaryFileResponse($filePath);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $date . '_' . $fileName
+        );
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
+
+        return $response;
     }
 
     /**

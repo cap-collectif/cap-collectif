@@ -16,7 +16,8 @@ exports[`<VoteTab /> should render correctly 1`] = `
       vote-count-for-and-against
     </Text>
     <Button
-      disabled={true}
+      aria-label="global.export"
+      onClick={[Function]}
       variant="primary"
       variantColor="primary"
       variantSize="small"
