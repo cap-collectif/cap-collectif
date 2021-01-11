@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\ArgumentVote;
@@ -32,6 +33,7 @@ class IndexerSpec extends ObjectBehavior
         RegistryInterface $registry,
         SerializerInterface $serializer,
         Index $index,
+        Client $client,
         LoggerInterface $logger,
         EntityManagerInterface $em,
         ClassMetadataFactory $factory,
@@ -39,6 +41,8 @@ class IndexerSpec extends ObjectBehavior
     ): void {
         $registry->getManager()->willReturn($em);
         $em->getMetadataFactory()->willReturn($factory);
+        $index->getClient()->willReturn($client);
+        $index->getName()->willReturn('capco');
         $factory
             ->getAllMetadata()
             ->willReturn([
@@ -138,6 +142,5 @@ class IndexerSpec extends ObjectBehavior
         $document
             ->getId()
             ->shouldBe(\call_user_func([$class, 'getElasticsearchTypeName']) . ':' . $id);
-        $document->getType()->shouldBe($type);
     }
 }

@@ -41,6 +41,7 @@ settings:
 
 # Only map the fields we need to search on.
 mappings:
+    dynamic: false
     properties:
         id: { type: keyword } # type:db ID
         objectType: { type: keyword } # replace ES < 6 "type" field

@@ -6,7 +6,7 @@ use Elastica\Client;
 use Elastica\Index;
 use Elastica\Request;
 use Elastica\Response;
-use Elasticsearch\Endpoints\Indices\Aliases\Get;
+use Elasticsearch\Endpoints\Get;
 use Symfony\Component\Yaml\Yaml;
 
 /**
