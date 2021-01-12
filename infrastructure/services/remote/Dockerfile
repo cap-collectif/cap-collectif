@@ -124,7 +124,7 @@ RUN apt-get update && apt-get install -y openjdk-8-jdk-headless net-tools && \
     rm -rf /var/lib/apt/lists/*
 
 # Install ES
-ENV ES_VERSION 7.0.0
+ENV ES_VERSION 7.0.0-linux-x86_64
 RUN cd / && \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz && \
     tar -xzf elasticsearch-$ES_VERSION.tar.gz && \
