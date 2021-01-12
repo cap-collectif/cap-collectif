@@ -124,11 +124,11 @@ RUN apt-get update && apt-get install -y openjdk-8-jdk-headless net-tools && \
     rm -rf /var/lib/apt/lists/*
 
 # Install ES
-ENV ES_VERSION 7.0.0-linux-x86_64
+ENV ES_VERSION 7.0.0
 RUN cd / && \
-    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz && \
-    tar -xzf elasticsearch-$ES_VERSION.tar.gz && \
-    rm -f elasticsearch-$ES_VERSION.tar.gz && \
+    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION-linux-x86_64.tar.gz && \
+    tar -xzf elasticsearch-$ES_VERSION-linux-x86_64.tar.gz && \
+    rm -f elasticsearch-$ES_VERSION-linux-x86_64.tar.gz && \
     mv /elasticsearch-$ES_VERSION /etc/elasticsearch
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
