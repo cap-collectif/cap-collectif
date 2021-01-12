@@ -227,10 +227,12 @@ class UserSearch extends Search
                 $sort = [
                     'participationsCountByStep.count' => [
                         'order' => strtolower($orderBy['direction']),
-                        'nested_path' => 'participationsCountByStep',
-                        'nested_filter' => [
-                            'term' => [
-                                'participationsCountByStep.step.id' => $providedFilters['step'],
+                        'nested' => [
+                            'path' => 'participationsCountByStep',
+                            'filter' => [
+                                'term' => [
+                                    'participationsCountByStep.step.id' => $providedFilters['step'],
+                                ],
                             ],
                         ],
                     ],
@@ -291,9 +293,13 @@ class UserSearch extends Search
             $sort = [
                 'participationsCountByProject.count' => [
                     'order' => strtolower($orderBy['direction']),
-                    'nested_path' => 'participationsCountByProject',
-                    'nested_filter' => [
-                        'term' => ['participationsCountByProject.project.id' => $project->getId()],
+                    'nested' => [
+                        'path' => 'participationsCountByProject',
+                        'filter' => [
+                            'term' => [
+                                'participationsCountByProject.project.id' => $project->getId(),
+                            ],
+                        ],
                     ],
                 ],
                 'id' => new \stdClass(),
@@ -339,9 +345,11 @@ class UserSearch extends Search
         $query->setSort([
             'participationsCountByStep.count' => [
                 'order' => 'desc',
-                'nested_path' => 'participationsCountByStep',
-                'nested_filter' => [
-                    'term' => ['participationsCountByStep.step.id' => $step->getId()],
+                'nested' => [
+                    'path' => 'participationsCountByStep',
+                    'filter' => [
+                        'term' => ['participationsCountByStep.step.id' => $step->getId()],
+                    ],
                 ],
             ],
             'createdAt' => [

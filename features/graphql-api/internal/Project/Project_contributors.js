@@ -109,7 +109,6 @@ describe('Internal.projects.contributors', () => {
       {
         projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
         contribuableId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-
         term: 'sf',
       },
       'internal_admin',

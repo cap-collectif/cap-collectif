@@ -65,7 +65,7 @@ mappings:
                 id:
                     type: keyword
         vip: { type: boolean }
-        participationsCountByProject:
+        participationsCountByProject: &ContributionProject
             type: nested
             properties:
                 project: &Project
@@ -89,9 +89,10 @@ mappings:
                             properties:
                                 id: { type: keyword }
                                 code: { type: keyword }
-                        count:
-                            type: long
-        participationsCountByStep:
+                count:
+                    type: long
+
+        participationsCountByStep: &ContributionStep
             type: nested
             properties:
                 step: &Step
@@ -100,8 +101,7 @@ mappings:
                         id: { type: keyword }
                 count:
                     type: long
-        totalParticipationsCount: { type: long }
-        participationsCountByConsultation:
+        participationsCountByConsultation: &ContributionConsultation
             type: nested
             properties:
                 consultation:
@@ -110,6 +110,10 @@ mappings:
                         id: { type: keyword }
                 count:
                     type: long
+        totalParticipationsCount: { type: long }
+        contributionsCountByProject: *ContributionProject
+        contributionsCountByStep: *ContributionStep
+        contributionsCountByConsultation: *ContributionConsultation
         body: *text_analysis_highlighted
         trashedAt: { type: date }
         trashedStatus: { type: keyword }
@@ -236,12 +240,9 @@ mappings:
                         id: { type: keyword }
         pointsCount: { type: long }
         votesCount: { type: long }
-        votesCountByStep:
-            type: nested
-            properties:
-                step: *Step
-                count:
-                    type: long
+        votesCountByStep: *ContributionStep
+        votesCountByProject: *ContributionProject
+        votesCountByConsultation: *ContributionConsultation
         pointsCountByStep:
             type: nested
             properties:
