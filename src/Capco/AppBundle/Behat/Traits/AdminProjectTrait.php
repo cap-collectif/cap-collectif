@@ -85,4 +85,17 @@ trait AdminProjectTrait
     {
         $this->iVisitedPage('AdminProjectConsultationCreationPage');
     }
+
+    /**
+     * @When I fill the project authors field with name :username
+     */
+    public function iFillProjectAuthorsFieldWithName(string $username)
+    {
+        /** @var DocumentElement $page */
+        $page = $this->getCurrentPage();
+        $page->find('css', '#project-author .react-select__input input')->setValue($username);
+        $this->iWait(3);
+        $page->find('css', '#project-author')->click();
+        $page->find('css', '#project-author .react-select__option:first-child')->click();
+    }
 }

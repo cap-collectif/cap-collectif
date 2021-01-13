@@ -14,6 +14,7 @@ import useOnScreen from '~/utils/hooks/useOnScreen';
 
 type Props = {|
   +debate: DebateStepPageVoteAndShare_debate,
+  +isMobile?: boolean,
   +isAuthenticated: boolean,
   +body: string,
   +title: string,
@@ -30,6 +31,7 @@ export const DebateStepPageVoteAndShare = ({
   body,
   title,
   url,
+  isMobile,
 }: Props) => {
   const [voteState, setVoteState] = useState<VoteState>(
     debate.viewerHasVote ? (debate.viewerHasArgument ? 'ARGUMENTED' : 'VOTED') : 'NONE',
@@ -42,6 +44,7 @@ export const DebateStepPageVoteAndShare = ({
     <>
       {!isVisible && (
         <DebateStepPageAbsoluteVoteAndShare
+          isMobile={isMobile}
           title={title}
           debate={debate}
           isAuthenticated={isAuthenticated}
@@ -54,7 +57,7 @@ export const DebateStepPageVoteAndShare = ({
           url={url}
         />
       )}
-      <div ref={ref}>
+      <AppBox width={['100%', 580]} ref={ref}>
         {voteState === 'NONE' && (
           <DebateStepPageVote
             debateId={debate.id}
@@ -65,12 +68,13 @@ export const DebateStepPageVoteAndShare = ({
         )}
         {voteState !== 'NONE' && (
           <>
-            <AppBox width={570}>
-              <VoteView
-                positivePercentage={(debate.yesVotes.totalCount / debate.votes.totalCount) * 100}
-              />
-            </AppBox>
+            <VoteView
+              isMobile={isMobile}
+              positivePercentage={(debate.yesVotes.totalCount / debate.votes.totalCount) * 100}
+            />
             <DebateStepPageVoteForm
+              isMobile={isMobile}
+              url={url}
               debate={debate}
               body={body}
               voteState={voteState}
@@ -80,7 +84,7 @@ export const DebateStepPageVoteAndShare = ({
             />
           </>
         )}
-      </div>
+      </AppBox>
     </>
   );
 };

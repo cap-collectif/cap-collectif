@@ -33,7 +33,7 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
     "eventId": "event1",
     "eventParticipants": [
        {
-          "email":"lbrunet@jolicode.com",
+          "email":"lbrunet@cap-collectif.com",
           "username":"lbrunet"
        },
        {
@@ -52,7 +52,7 @@ Scenario: Email should be sent if a message is sent to the event_delete queue
   And I consume "event_delete"
   Then I open mail to 'dev@cap-collectif.com'
   And email should match snapshot "notifyAdminOfDeletedEvent.html"
-  Then I open mail to 'lbrunet@jolicode.com'
+  Then I open mail to 'lbrunet@cap-collectif.com'
   And email should match snapshot "notifyParticipantOfDeletedEvent.html"
   Then I open mail to 'toto@tata.fr'
   And email should match snapshot "notifyRegisteredParticipantOfDeletedEvent.html"

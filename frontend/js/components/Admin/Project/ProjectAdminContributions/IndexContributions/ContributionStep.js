@@ -6,15 +6,17 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { type ContributionStep_step } from '~relay/ContributionStep_step.graphql';
 import { STEP_TYPES, type StepType } from '~/constants/StepTypeConstants';
-import { baseUrl } from '~/config';
 import Heading from '~ui/Primitives/Heading';
+import SpotIcon, { SPOT_ICON_NAME, SPOT_ICON_SIZE } from '~ds/SpotIcon/SpotIcon';
 
-const getIllustrationStep = (type: string): string => {
+const getIllustrationStep = (
+  type: string,
+): typeof SPOT_ICON_NAME.BULB_SKETCH | typeof SPOT_ICON_NAME.USER_DISCUSS => {
   switch (type) {
     case 'CollectStep':
-      return `${baseUrl}/image/contribution_consultation.png`;
+      return SPOT_ICON_NAME.BULB_SKETCH;
     case 'DebateStep':
-      return `${baseUrl}/image/contribution_debate.png`;
+      return SPOT_ICON_NAME.USER_DISCUSS;
     default:
       return '';
   }
@@ -38,7 +40,7 @@ const ContributionStep = ({ step }: Props) => {
       align="center"
       spacing={3}
       width="50%">
-      <img src={getIllustrationStep(step.__typename)} alt="" />
+      <SpotIcon name={getIllustrationStep(step.__typename)} size={SPOT_ICON_SIZE.SM} />
 
       <Flex direction="column">
         <Heading as="h4" color="blue.900" m={0}>

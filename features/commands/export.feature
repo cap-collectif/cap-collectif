@@ -142,3 +142,15 @@ Scenario: Admin wants to export proposal decisions
   Then the command exit code should be 0
   And exported "csv" file with name "project-budget-participatif-idf-decision.csv" should match its snapshot
   And exported "csv" file with name "project-project-analyse-decision.csv" should match its snapshot
+
+@snapshot
+Scenario: Admin wants to export debate arguments and votes
+  Given I run a command "capco:export:debate" with parameters:
+    | --delimiter |,|
+  Then the command exit code should be 0
+  And exported "csv" file with name "debate-debateCannabis-arguments.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateConfinement-arguments.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateOculusQuest-arguments.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateCannabis-votes.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateConfinement-votes.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateOculusQuest-votes.csv" should match its snapshot

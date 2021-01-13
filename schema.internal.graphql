@@ -3284,6 +3284,9 @@ type Debate implements Node {
     """Returns the last `n` elements from the list."""
     last: Int
   ): DebateArticleConnection!
+
+  """The url of the debate"""
+  url: URI!
 }
 
 """A debate argument from non expert."""

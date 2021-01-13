@@ -151,18 +151,6 @@ class ProposalSearch extends Search
                 $boolQuery->addFilter($term);
             }
         }
-        if (isset($providedFilters['allowAnalysts']) && $providedFilters['allowAnalysts']) {
-            $terms = [
-                new Term([
-                    'proposalAnalysts.analyst.id' => ['value' => $providedFilters['allowAnalysts']],
-                ]),
-                new Term(['author.id' => ['value' => $providedFilters['allowAnalysts']]]),
-                new Term(['supervisor.id' => ['value' => $providedFilters['allowAnalysts']]]),
-                new Term(['decisionMaker.id' => ['value' => $providedFilters['allowAnalysts']]]),
-            ];
-
-            $boolQuery->addMust((new Query\BoolQuery())->addShould($terms));
-        }
         if (\count($stateTerms) > 0) {
             $boolQuery->addFilter((new Query\BoolQuery())->addShould($stateTerms));
         }
@@ -548,6 +536,7 @@ class ProposalSearch extends Search
         $filters = [];
         $filters['draft'] = false;
         $filters['published'] = true;
+
         if (isset($providedFilters['trashedStatus'])) {
             if (ProposalTrashedStatus::TRASHED === $providedFilters['trashedStatus']) {
                 $filters['trashed'] = true;

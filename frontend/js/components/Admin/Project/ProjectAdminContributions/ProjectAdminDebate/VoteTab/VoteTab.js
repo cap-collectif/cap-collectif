@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import css from '@styled-system/css';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -9,13 +8,12 @@ import Text from '~ui/Primitives/Text';
 import DebateVote from '~/components/Admin/Debate/DebateVote/DebateVote';
 import type { DebateVote_vote$ref } from '~relay/DebateVote_vote.graphql';
 import type { ForOrAgainstValue, VoteTab_debate } from '~relay/VoteTab_debate.graphql';
-import Button from '~ds/Button/Button';
 import AppBox from '~ui/Primitives/AppBox';
 import Spinner from '~ds/Spinner/Spinner';
-import { baseUrl } from '~/config';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
+import Button from '~ds/Button/Button';
 
-export const VOTE_PAGINATION = 8;
+export const VOTE_PAGINATION = 10;
 
 const MAX_HEIGHT_8_VOTES = 500;
 
@@ -68,9 +66,7 @@ export const VoteTab = ({ debate, relay }: Props) => {
     () => formatVotesForAndAgainst(debateVotes),
     [debateVotes],
   );
-  const hasOnlyVotesFor = votesFor.length > 0 && votesAgainst.length === 0;
-  const hasOnlyVotesAgainst = votesAgainst.length > 0 && votesFor.length === 0;
-  const hasOnlyForOrAgainstVote = hasOnlyVotesFor || hasOnlyVotesAgainst;
+  const exportUrl = `/debate/${debate.id}/download/votes`;
 
   return hasVotes ? (
     <Flex direction="column">
@@ -82,7 +78,14 @@ export const VoteTab = ({ debate, relay }: Props) => {
           )}
         </Text>
 
-        <Button variant="primary" variantColor="primary" variantSize="small" disabled>
+        <Button
+          variant="primary"
+          variantColor="primary"
+          variantSize="small"
+          onClick={() => {
+            window.location.href = exportUrl;
+          }}
+          aria-label={intl.formatMessage({ id: 'global.export' })}>
           {intl.formatMessage({ id: 'global.export' })}
         </Button>
       </Flex>
@@ -104,10 +107,7 @@ export const VoteTab = ({ debate, relay }: Props) => {
           }
           getScrollParent={() => listVoteRef.current}
           useWindow={false}>
-          <Flex
-            direction="row"
-            justify="space-between"
-            align={hasOnlyForOrAgainstVote ? 'center' : 'flex-start'}>
+          <Flex direction="row" align="stretch">
             {votesFor.length > 0 ? (
               <AppBox
                 as="ul"
@@ -130,9 +130,8 @@ export const VoteTab = ({ debate, relay }: Props) => {
                 align="center"
                 flex="1"
                 textAlign="center"
-                css={css({
-                  ...(!hasVotes && { pr: 7, borderRight: 'normal', borderColor: 'gray.200' }),
-                })}>
+                borderRight="normal"
+                borderColor="gray.200">
                 <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
                 <Text color="gray.500" maxWidth="200px">
                   {intl.formatMessage({ id: 'no-argument-for-published-yet' })}
@@ -141,20 +140,7 @@ export const VoteTab = ({ debate, relay }: Props) => {
             )}
 
             {votesAgainst.length > 0 ? (
-              <AppBox
-                as="ul"
-                p={0}
-                m={0}
-                ml={7}
-                flex="1"
-                css={css({
-                  listStyle: 'none',
-                  ...(hasOnlyVotesAgainst && {
-                    borderLeft: 'normal',
-                    borderColor: 'gray.200',
-                    pl: 7,
-                  }),
-                })}>
+              <AppBox as="ul" p={0} m={0} ml={7} flex="1" css={{ listStyle: 'none' }}>
                 {votesAgainst.map(vote => (
                   <AppBox as="li" key={vote.id} mb={4}>
                     <DebateVote vote={vote} />
@@ -175,7 +161,7 @@ export const VoteTab = ({ debate, relay }: Props) => {
     </Flex>
   ) : (
     <Flex direction="column" spacing={6} align="center">
-      <AppBox as="img" src={`${baseUrl}/image/contribution_debate_vote.png`} />
+      <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="lg" />
       <Text color="gray.500">{intl.formatMessage({ id: 'debate.empty.votes.section' })}</Text>
     </Flex>
   );

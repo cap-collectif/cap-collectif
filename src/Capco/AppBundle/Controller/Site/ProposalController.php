@@ -24,7 +24,7 @@ class ProposalController extends Controller
     /**
      * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal", options={"i18n" = false})
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @Entity("step", class="CapcoAppBundle:Steps\CollectStep", options={
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
@@ -49,7 +49,7 @@ class ProposalController extends Controller
             );
         }
 
-        if (!$proposal->viewerCanSee($viewer)) {
+        if (!$proposal->canDisplay($viewer)) {
             throw new ProjectAccessDeniedException();
         }
 

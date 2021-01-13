@@ -26,13 +26,65 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
     viewerHasArgument={false}
     voteState="NONE"
   />
-  <div>
+  <AppBox
+    width={
+      Array [
+        "100%",
+        580,
+      ]
+    }
+  >
     <DebateStepPageVote
       debateId="debate1"
       isAuthenticated={true}
       onSuccess={[Function]}
       viewerHasArgument={false}
     />
-  </div>
+  </AppBox>
+</Fragment>
+`;
+
+exports[`<DebateStepPageVoteAndShare/> renders correcty on mobile 1`] = `
+<Fragment>
+  <DebateStepPageAbsoluteVoteAndShare
+    body="Oui je suis pour"
+    debate={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "debate1",
+        "votes": Object {
+          "totalCount": 5,
+        },
+        "yesVotes": Object {
+          "totalCount": 4,
+        },
+      }
+    }
+    isAuthenticated={true}
+    isMobile={true}
+    setShowArgumentForm={[Function]}
+    setVoteState={[Function]}
+    showArgumentForm={true}
+    title="Pour ou contre le LSD dans nos cantines"
+    url="/debate1"
+    viewerHasArgument={false}
+    voteState="NONE"
+  />
+  <AppBox
+    width={
+      Array [
+        "100%",
+        580,
+      ]
+    }
+  >
+    <DebateStepPageVote
+      debateId="debate1"
+      isAuthenticated={true}
+      onSuccess={[Function]}
+      viewerHasArgument={false}
+    />
+  </AppBox>
 </Fragment>
 `;

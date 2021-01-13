@@ -2,6 +2,8 @@
 
 exports[`<VoteView /> should not render when our ouf range percentage 1`] = `""`;
 
+exports[`<VoteView /> should not render when our ouf range percentage on mobile 1`] = `""`;
+
 exports[`<VoteView /> should render correctly 1`] = `
 <VoteViewstyle__Container
   key="42"
@@ -121,6 +123,52 @@ exports[`<VoteView /> should render correctly 1`] = `
 </VoteViewstyle__Container>
 `;
 
+exports[`<VoteView /> should render correctly on mobile 1`] = `
+<ForwardRef
+  justify="space-between"
+  position="relative"
+>
+  <VoteView__MobileTextPercentage
+    color="green.500"
+  >
+    42%
+     
+    <FormattedMessage
+      id="argument.show.type.for"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="green.500"
+    flex={42}
+    height="2px"
+    left={0}
+    position="absolute"
+    width="42%"
+  />
+  <VoteView__MobileTextPercentage
+    color="red.500"
+  >
+    58%
+     
+    <FormattedMessage
+      id="argument.show.type.against"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="red.500"
+    flex={58}
+    height="2px"
+    left="42%"
+    position="absolute"
+    width="58%"
+  />
+</ForwardRef>
+`;
+
 exports[`<VoteView /> should render correctly when 0% positive 1`] = `
 <VoteViewstyle__Container
   key="0"
@@ -224,6 +272,52 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
     </span>
   </div>
 </VoteViewstyle__Container>
+`;
+
+exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
+<ForwardRef
+  justify="space-between"
+  position="relative"
+>
+  <VoteView__MobileTextPercentage
+    color="green.500"
+  >
+    0%
+     
+    <FormattedMessage
+      id="argument.show.type.for"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="green.500"
+    flex={0}
+    height="2px"
+    left={0}
+    position="absolute"
+    width="0%"
+  />
+  <VoteView__MobileTextPercentage
+    color="red.500"
+  >
+    0%
+     
+    <FormattedMessage
+      id="argument.show.type.against"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="red.500"
+    flex={100}
+    height="2px"
+    left="0%"
+    position="absolute"
+    width="0%"
+  />
+</ForwardRef>
 `;
 
 exports[`<VoteView /> should render correctly when 100% positive 1`] = `
@@ -340,4 +434,50 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
     </span>
   </div>
 </VoteViewstyle__Container>
+`;
+
+exports[`<VoteView /> should render correctly when 100% positive on mobile 1`] = `
+<ForwardRef
+  justify="space-between"
+  position="relative"
+>
+  <VoteView__MobileTextPercentage
+    color="green.500"
+  >
+    100%
+     
+    <FormattedMessage
+      id="argument.show.type.for"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="green.500"
+    flex={100}
+    height="2px"
+    left={0}
+    position="absolute"
+    width="100%"
+  />
+  <VoteView__MobileTextPercentage
+    color="red.500"
+  >
+    0%
+     
+    <FormattedMessage
+      id="argument.show.type.against"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="red.500"
+    flex={0}
+    height="2px"
+    left="100%"
+    position="absolute"
+    width="0%"
+  />
+</ForwardRef>
 `;

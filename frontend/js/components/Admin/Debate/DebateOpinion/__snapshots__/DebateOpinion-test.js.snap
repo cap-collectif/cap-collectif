@@ -25,7 +25,7 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
     direction="column"
     pb={6}
     pt={10}
-    px={4}
+    px={6}
   >
     <ForwardRef
       align="center"
