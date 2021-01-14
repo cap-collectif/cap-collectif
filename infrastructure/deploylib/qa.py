@@ -31,13 +31,6 @@ def phpspec(desc=False):
             'application', env.www_app)
 
 
-@task(environments=['ci'])
-def perf():
-    "Run perf Tests"
-    # env.compose(
-    #     'run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
-
-
 @task(environments=['local', 'ci'])
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"

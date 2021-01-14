@@ -35,7 +35,8 @@
         "graphql:lint:internal": "graphql-schema-linter schema.internal.graphql --custom-rule-paths schema-linter/*.js",
         "lint": "eslint --cache --fix --report-unused-disable-directives frontend/js",
         "lint:css": "stylelint 'frontend/js/components/**/*.js'",
-        "bundlesize": "bundlesize",
+        "bundlesize": "bundlewatch",
+        "bundlewatch": "bundlewatch",
         "storybook": "start-storybook -p 9001 -c .storybook",
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
         "prettier:js": "prettier --parser flow --write '{features/graphql-api,frontend/js}/**/*.js'",
@@ -127,22 +128,30 @@
             "php -d memory_limit=-1 bin/console lint:twig"
         ]
     },
-    "bundlesize": [
+    "bundlewatch": [
         {
             "path": "./public/css/app.css",
             "maxSize": "60 kB"
         },
         {
             "path": "./public/css/style-admin.css",
-            "maxSize": "50 kB"
+            "maxSize": "105 kB"
+        },
+        {
+            "path": "./public/js/admin.js",
+            "maxSize": "950 KB"
+        },
+        {
+            "path": "./public/js/front.js",
+            "maxSize": "1.1 MB"
         },
         {
             "path": "./public/js/app.js",
-            "maxSize": "1140 KB"
+            "maxSize": "1 KB"
         },
         {
             "path": "./public/js/vendor.js",
-            "maxSize": "230 KB"
+            "maxSize": "21 KB"
         }
     ],
     "prettier": {
@@ -200,9 +209,9 @@
         "babel-polyfill": "^6.26.0",
         "babel-relay-plugin": "^0.11.0",
         "bootstrap-sass": "^3.4.1",
-        "bundlesize": "^0.17.2",
         "classnames": "^2.2.6",
         "color-hash": "^1.0.3",
+        "copy-to-clipboard": "^3.3.1",
         "copy-webpack-plugin": "^6.0.3",
         "core-js": "^3.6.5",
         "create-react-class": "^15.6.3",
@@ -294,7 +303,6 @@
         "react-bootstrap": "^0.32.1",
         "react-color": "^2.18.1",
         "react-copy-to-clipboard": "^5.0.2",
-        "copy-to-clipboard": "^3.3.1",
         "react-datetime": "^2.9.0",
         "react-dom": "^16.8.6",
         "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48",
@@ -398,6 +406,7 @@
         "@types/styled-components": "^5.1.4",
         "@types/styled-system": "^5.1.10",
         "@types/styled-system__css": "^5.0.14",
+        "bundlewatch": "^0.3.1",
         "fast-xml-parser": "^3.17.4",
         "playwright": "^1.2.1"
     }
