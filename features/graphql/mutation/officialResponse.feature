@@ -299,3 +299,48 @@ Scenario: GraphQL client wants to delete an officialResponse but wrong id
     }
   }
   """
+
+@database
+Scenario: GraphQL client remove an author from an officialResponse
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateOfficialResponseInput!) {
+      updateOfficialResponse(input: $input) {
+        error
+        officialResponse {
+          authors {
+            id
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "T2ZmaWNpYWxSZXNwb25zZTpvZmZpY2lhbFJlc3BvbnNlMjI=",
+        "body": "osef",
+        "isPublished": true,
+        "authors": ["VXNlcjp1c2VyU3B5bA=="],
+        "proposal": "UHJvcG9zYWw6cHJvcG9zYWxJZGYz"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateOfficialResponse": {
+        "error": null,
+        "officialResponse": {
+          "authors": [
+            {
+              "id": "VXNlcjp1c2VyU3B5bA=="
+            }
+          ]
+        }
+      }
+    }
+  }
+  """

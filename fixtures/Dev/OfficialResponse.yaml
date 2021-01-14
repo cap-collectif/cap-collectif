@@ -65,6 +65,7 @@ Capco\AppBundle\Entity\OfficialResponse:
         updatedAt: <(new \DateTime('2020-01-01 00:01:25'))>
         Authors:
             - '@userSpyl'
+            - '@userMickael'
         proposal: '@proposalIdf3'
         body: 'Déso, on en veut pas'
     officialResponse23:
@@ -74,5 +75,6 @@ Capco\AppBundle\Entity\OfficialResponse:
         updatedAt: <(new \DateTime('2020-01-01 00:01:30'))>
         Authors:
             - '@userDecisionMaker'
+            - '@userMickael'
         proposal: '@assignedProposals121'
         body: 'Déso, on en veut pas'

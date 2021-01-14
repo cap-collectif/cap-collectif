@@ -86,6 +86,7 @@ class UpdateOfficialResponseMutation implements MutationInterface
             throw new UserError(UpdateOfficialResponseErrorCode::NO_AUTHOR);
         }
 
+        $officialResponse->getAuthors()->clear();
         foreach ($authorsIds as $authorsId) {
             $author = $this->resolver->resolve($authorsId, $user);
             if (null === $author) {
