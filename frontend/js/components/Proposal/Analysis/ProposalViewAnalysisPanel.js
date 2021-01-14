@@ -52,7 +52,16 @@ export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
         {analysis.responses
           ?.filter(Boolean)
           .filter(response => response.question)
-          .filter(response => response.value)
+          .filter(response => {
+            switch (response.__typename) {
+              case 'MediaResponse':
+                return response.medias && response.medias.length > 0;
+              case 'ValueResponse':
+                return !!response.value;
+              default:
+                return false;
+            }
+          })
           .filter(response => questions.includes(response.question.id))
           .map((response, index) => (
             <ProposalResponse key={index} response={response} />
@@ -78,6 +87,7 @@ export default createFragmentContainer(ProposalViewAnalysisPanel, {
         comment
         state
         responses {
+          __typename
           ...responsesHelper_response @relay(mask: false)
           ...ProposalResponse_response
         }
