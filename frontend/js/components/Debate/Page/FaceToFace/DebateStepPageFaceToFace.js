@@ -25,6 +25,9 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
     .filter(Boolean);
   const forOpinion = opinions?.find(o => o.type === 'FOR');
   const againstOpinion = opinions?.find(o => o.type === 'AGAINST');
+  if (!forOpinion || !againstOpinion) {
+    return null;
+  }
   const hasMore =
     !isMobile && ((againstOpinion?.body.length || 0) > 500 || (forOpinion?.body.length || 0) > 500);
 
@@ -43,7 +46,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
         }>
         {forOpinion && againstOpinion ? (
           <>
-            <Flex direction={['column', 'row']} spacing={4}>
+            <Flex direction={['column', 'row']} spacing={6}>
               <DebateOpinion isMobile={isMobile} opinion={forOpinion} readMore={readMore} />
               <DebateOpinion isMobile={isMobile} opinion={againstOpinion} readMore={readMore} />
             </Flex>
@@ -53,7 +56,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
                 variant="link"
                 variantColor="primary"
                 variantSize="small"
-                leftIcon="ADD"
+                rightIcon="ARROW_DOWN_O"
                 m="auto"
                 mt={7}>
                 <FormattedMessage

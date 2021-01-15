@@ -39,7 +39,7 @@ const MenuOptionGroup = ({ children, title, value, onChange, type, ...props }: P
           <Text
             className="menu__option__group--title"
             color="gray.900"
-            lineHeight="s"
+            lineHeight="sm"
             fontSize={1}
             fontWeight="semibold"
             px={3}

@@ -136,7 +136,7 @@ export const Tooltip = ({
           {...props}
           style={{ scale, opacity }}>
           {typeof label === 'string' && (
-            <Text minWidth={6} textAlign="center" lineHeight="s" fontSize={1} truncate={truncate}>
+            <Text minWidth={6} textAlign="center" lineHeight="sm" fontSize={1} truncate={truncate}>
               {label}
             </Text>
           )}

@@ -26,8 +26,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
       <Heading
         as="h2"
         color="gray.900"
-        fontWeight="400"
-        mb={6}
+        mb={2}
         textAlign="center"
       >
         Pour ou contre le LSD dans nos cantines
@@ -74,8 +73,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
       <Heading
         as="h2"
         color="gray.900"
-        fontWeight="400"
-        mb={6}
+        mb={2}
         textAlign="center"
       >
         Pour ou contre le LSD dans nos cantines
@@ -112,8 +110,7 @@ exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`
       <Heading
         as="h2"
         color="gray.900"
-        fontWeight="400"
-        mb={6}
+        mb={2}
         textAlign="center"
       >
         Pour ou contre le LSD dans nos cantines

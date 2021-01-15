@@ -26,13 +26,10 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
     viewerHasArgument={false}
     voteState="NONE"
   />
-  <AppBox
-    width={
-      Array [
-        "100%",
-        580,
-      ]
-    }
+  <ForwardRef
+    align="center"
+    direction="column"
+    width="100%"
   >
     <DebateStepPageVote
       debateId="debate1"
@@ -40,7 +37,7 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
       onSuccess={[Function]}
       viewerHasArgument={false}
     />
-  </AppBox>
+  </ForwardRef>
 </Fragment>
 `;
 
@@ -71,13 +68,10 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty on mobile 1`] = `
     viewerHasArgument={false}
     voteState="NONE"
   />
-  <AppBox
-    width={
-      Array [
-        "100%",
-        580,
-      ]
-    }
+  <ForwardRef
+    align="center"
+    direction="column"
+    width="100%"
   >
     <DebateStepPageVote
       debateId="debate1"
@@ -85,6 +79,6 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty on mobile 1`] = `
       onSuccess={[Function]}
       viewerHasArgument={false}
     />
-  </AppBox>
+  </ForwardRef>
 </Fragment>
 `;

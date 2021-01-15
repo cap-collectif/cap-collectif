@@ -25,7 +25,7 @@ export const CONNECTION_NODES_PER_PAGE = 8;
 export const FRAGMENT = graphql`
   fragment DebateStepPageArgumentsPagination_debate on Debate
     @argumentDefinitions(
-      first: { type: "Int", defaultValue: 1 }
+      first: { type: "Int", defaultValue: 3 }
       cursor: { type: "String" }
       value: { type: "ForOrAgainstValue!" }
       orderBy: { type: "DebateArgumentOrder" }

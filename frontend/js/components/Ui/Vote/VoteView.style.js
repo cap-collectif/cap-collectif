@@ -55,6 +55,7 @@ export const Container: StyledComponent<
   {},
   HTMLDivElement,
 > = styled.div`
+  width: 60%;
   ${({ left, right }) => css`
     > div:first-child {
       display: flex;

@@ -11,11 +11,12 @@ declare const FontWeight: {
 };
 
 declare const LineHeight: {
-    S: 'S',
+    SM: 'sm',
+    S: 's',
     Base: 'base',
-    M: 'M',
-    L: 'L',
-    XL: 'XL',
+    M: 'm',
+    L: 'l',
+    XL: 'xl',
 }
 
 declare const LetterSpacing: {

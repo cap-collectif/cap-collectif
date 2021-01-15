@@ -160,6 +160,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${argument.id}`)}
                 />
                 <ArgumentCard
+                  height="100%"
                   onReadMore={onOpen(`drawer-${argument.id}`)}
                   isMobile
                   argument={argument}

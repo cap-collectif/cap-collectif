@@ -5,12 +5,12 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import type { DebateStepPageVoteAndShare_debate } from '~relay/DebateStepPageVoteAndShare_debate.graphql';
 import VoteView from '~/components/Ui/Vote/VoteView';
-import AppBox from '~/components/Ui/Primitives/AppBox';
 import DebateStepPageVote from './DebateStepPageVote';
 import type { GlobalState } from '~/types';
 import DebateStepPageAbsoluteVoteAndShare from './DebateStepPageAbsoluteVoteAndShare';
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
 import useOnScreen from '~/utils/hooks/useOnScreen';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   +debate: DebateStepPageVoteAndShare_debate,
@@ -57,7 +57,7 @@ export const DebateStepPageVoteAndShare = ({
           url={url}
         />
       )}
-      <AppBox width={['100%', 580]} ref={ref}>
+      <Flex width="100%" direction="column" align="center" ref={ref}>
         {voteState === 'NONE' && (
           <DebateStepPageVote
             debateId={debate.id}
@@ -84,7 +84,7 @@ export const DebateStepPageVoteAndShare = ({
             />
           </>
         )}
-      </AppBox>
+      </Flex>
     </>
   );
 };

@@ -8,13 +8,13 @@ import type { DebateOpinion_opinion } from '~relay/DebateOpinion_opinion.graphql
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
 import Tag from '~ds/Tag/Tag';
-import Avatar from '~ds/Avatar/Avatar';
 import Text from '~ui/Primitives/Text';
 import Heading from '~ui/Primitives/Heading';
 import { LineHeight } from '~ui/Primitives/constants';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import Button from '~ds/Button/Button';
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
+import NewUserAvatar from '~/components/User/NewUserAvatar';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
@@ -30,28 +30,31 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
     <Card p={0} bg="white" flex="1">
       <Tag
         variant={opinion.type === 'FOR' ? 'green' : 'red'}
+        borderBottomLeftRadius={0}
+        borderTopLeftRadius={0}
+        borderTopRightRadius={0}
         css={css({
           position: 'absolute',
         })}>
-        <Text as="span" fontSize={1} lineHeight={LineHeight.S} fontWeight="700" uppercase>
+        <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
           <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
         </Text>
       </Tag>
       <Flex direction="column" m={6} mt={10}>
         <Flex direction="row" spacing={6} mb={5} alignItems="center">
-          <Avatar
-            src={opinion.author.media?.url}
-            name={opinion.author.username}
-            alt={opinion.author.username}
+          <NewUserAvatar
+            alignSelf="flex-start"
             size="xl"
             borderColor="yellow.500"
-            border="3px"
+            color="yellow.500"
+            border="2px solid"
+            user={opinion.author}
           />
           <Flex direction="column">
             <Text fontSize={3} fontWeight="600">
               {opinion.author.username}
             </Text>
-            <Text color="neutral-gray.700" fontSize={3}>
+            <Text color="neutral-gray.700" fontSize={3} lineHeight="19px">
               {opinion.author.biography}
             </Text>
           </Flex>
@@ -90,9 +93,7 @@ export default createFragmentContainer(DebateOpinion, {
       title
       body
       author {
-        media {
-          url
-        }
+        ...NewUserAvatar_user
         username
         biography
       }

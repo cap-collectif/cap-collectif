@@ -166,7 +166,7 @@ const Tag = React.forwardRef<Props, HTMLSpanElement>(
         )}
         {icon && <Icon name={icon} size="sm" mr={1} />}
         <Text
-          lineHeight="s"
+          lineHeight="sm"
           fontFamily="inherit"
           css={css({
             overflow: 'hidden',

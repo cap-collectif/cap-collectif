@@ -47,7 +47,7 @@ storiesOf('Design system|Tooltip', module)
       <Flex align="center" gridGap={2}>
         <Tooltip
           label={
-            <Text textAlign="center" lineHeight="s" fontSize={1}>
+            <Text textAlign="center" lineHeight="sm" fontSize={1}>
               Salut{' '}
               <AppBox as="span" fontWeight="bold" color="blue.300">
                 les filles

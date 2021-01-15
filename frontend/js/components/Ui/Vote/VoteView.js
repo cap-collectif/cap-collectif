@@ -29,7 +29,7 @@ export const VoteView = ({ positivePercentage, isMobile }: Props) => {
   const rightPercentage = right === 100 ? '0%' : `${Math.round(right * 100) / 100}%`;
   if (isMobile) {
     return (
-      <Flex position="relative" justify="space-between">
+      <Flex width="100%" position="relative" justify="space-between">
         <MobileTextPercentage color="green.500">
           {leftPercentage}&nbsp;
           <FormattedMessage id="argument.show.type.for" tagName={React.Fragment} />

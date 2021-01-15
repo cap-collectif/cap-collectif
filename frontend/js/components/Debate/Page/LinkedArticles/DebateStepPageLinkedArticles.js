@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import moment from 'moment';
 import ReactPlaceholder from 'react-placeholder';
 import { FormattedMessage } from 'react-intl';
 import type { StyledComponent } from 'styled-components';
@@ -15,6 +16,7 @@ import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionP
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
 import Button from '~ds/Button/Button';
 import DebateStepPageLinkedArticlesDrawer from '~/components/Debate/Page/Drawers/DebateStepPageLinkedArticlesDrawer';
+import { DATE_SHORT_LOCALIZED_FORMAT } from '~/shared/date';
 
 type Props = {|
   +step: ?DebateStepPageLinkedArticles_step,
@@ -25,12 +27,16 @@ const SLIDER_MAX_ARTICLES_MOBILE = 4;
 
 export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slider)`
   .slick-slide {
-    padding: 0 16px;
+    padding: 0 ${props => props.theme.space[3]};
+    height: unset;
+    & > div {
+      height: 100%;
+    }
   }
 
   .slick-track {
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
 `;
 
@@ -91,14 +97,21 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
             {articles
               .slice(0, isMobile ? SLIDER_MAX_ARTICLES_MOBILE : articles.length)
               .map(article => (
-                <a href={article.url} key={article.id}>
+                <AppBox
+                  as="a"
+                  css={{
+                    userSelect: 'none',
+                    '-webkit-user-drag': 'none',
+                  }}
+                  href={article.url}
+                  key={article.id}>
                   <DebateArticleCard
                     illustration={article.coverUrl}
-                    publishedAt={article.publishedAt}>
-                    <DebateArticleCard.Title>{article.title}</DebateArticleCard.Title>
+                    publishedAt={moment(article.publishedAt).format(DATE_SHORT_LOCALIZED_FORMAT)}>
+                    <DebateArticleCard.Title truncate={54}>{article.title}</DebateArticleCard.Title>
                     <DebateArticleCard.Origin>{article.origin}</DebateArticleCard.Origin>
                   </DebateArticleCard>
-                </a>
+                </AppBox>
               ))}
           </StyledSlider>
         )}

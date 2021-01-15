@@ -12,6 +12,10 @@ type CustomStyled = {|
   +uppercase?: boolean,
 |};
 
+type LinkProps = {|
+  +href?: string,
+|};
+
 type Width = {|
   /** width */
   width?: Responsive<NumberOrString>,
@@ -126,7 +130,7 @@ type Align = {|
 type Flex = {|
   ...Justify,
   ...Align,
-  flex?: Responsive<string>,
+  flex?: Responsive<NumberOrString>,
   flexAlign?: Responsive<string>,
   flexJustify?: Responsive<string>,
   flexWrap?: Responsive<string>,
@@ -322,4 +326,5 @@ export type AppBoxProps = {|
   ...TabIndex,
   ...Accessibility,
   ...ZIndex,
+  ...LinkProps,
 |};

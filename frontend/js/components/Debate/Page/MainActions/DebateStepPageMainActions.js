@@ -27,7 +27,7 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
             <RemainingTime noStyle endAt={step?.timeRange?.endAt} />
           </Tag>
         )}
-        <Heading as="h2" fontWeight="400" mb={6} textAlign="center" color="gray.900">
+        <Heading as="h2" mb={2} textAlign="center" color="gray.900">
           {title}
         </Heading>
         {step && (

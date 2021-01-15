@@ -35,6 +35,15 @@ declare export const ICON_NAME = {
     HYPERLINK: 'HYPERLINK',
 };
 
+declare export const ICON_SIZE = {
+    XS: 'xs',
+    SM: 'sm',
+    MD: 'md',
+    LG: 'lg',
+    XL: 'xl',
+    XXL: 'xxl',
+};
+
 declare const Icon: PolymorphicComponent<ComponentProps<SVGElement> & {
     name: keyof typeof ICON_NAME,
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | string,

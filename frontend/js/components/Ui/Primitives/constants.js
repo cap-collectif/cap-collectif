@@ -14,6 +14,7 @@ export const FontWeight = {
 };
 
 export const LineHeight = {
+  SM: 'sm',
   S: 's',
   Base: 'base',
   M: 'm',

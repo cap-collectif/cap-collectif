@@ -62,7 +62,7 @@ export const voteForArgument = (
 };
 
 const getTruncatedLength = (isMobile?: boolean): number => {
-  if (isMobile) return 230;
+  if (isMobile) return 210;
   return 450;
 };
 
@@ -84,14 +84,14 @@ export const ArgumentCard = ({
 
   return (
     <Card p={6} bg="white" {...props}>
-      <Flex direction="column">
+      <Flex height="100%" direction="column">
         <Flex mb={2} direction="row" justifyContent="space-between" alignItems="center">
           <Flex direction="row" alignItems="center">
             <Text maxWidth="100px" mr={2}>
               {argument.author.username}
             </Text>
             <Tag variant={argument.type === 'FOR' ? 'green' : 'red'}>
-              <Text as="span" fontSize={1} lineHeight={LineHeight.S} fontWeight="700" uppercase>
+              <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
               </Text>
             </Tag>
@@ -176,7 +176,11 @@ export const ArgumentCard = ({
             )}
           </Text>
         )}
-        <Flex mt={3} alignItems="center" flexDirection="row">
+        <Flex
+          mt={['auto', 3]}
+          align="center"
+          justify={['center', 'flex-start']}
+          flexDirection="row">
           <LoginOverlay>
             <ButtonQuickAction
               onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
@@ -190,7 +194,7 @@ export const ArgumentCard = ({
               iconColor={argument.viewerHasVote ? 'green.500' : 'gray.500'}
             />
           </LoginOverlay>
-          <Text as="span" fontSize={3} color="gray.500">
+          <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.700">
             {argument.votes.totalCount}
           </Text>
         </Flex>

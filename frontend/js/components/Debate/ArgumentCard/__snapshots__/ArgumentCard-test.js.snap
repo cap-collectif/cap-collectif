@@ -7,6 +7,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
 >
   <ForwardRef
     direction="column"
+    height="100%"
   >
     <ForwardRef
       alignItems="center"
@@ -31,7 +32,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
             as="span"
             fontSize={1}
             fontWeight="700"
-            lineHeight="s"
+            lineHeight="sm"
             uppercase={true}
           >
             <FormattedMessage
@@ -77,9 +78,20 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
        
     </Text>
     <ForwardRef
-      alignItems="center"
+      align="center"
       flexDirection="row"
-      mt={3}
+      justify={
+        Array [
+          "center",
+          "flex-start",
+        ]
+      }
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
     >
       <Connect(LoginOverlay)>
         <ButtonQuickAction
@@ -99,8 +111,19 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="gray.500"
-        fontSize={3}
+        color="neutral-gray.700"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
       >
         500
       </Text>
@@ -116,6 +139,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
 >
   <ForwardRef
     direction="column"
+    height="100%"
   >
     <ForwardRef
       alignItems="center"
@@ -140,7 +164,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
             as="span"
             fontSize={1}
             fontWeight="700"
-            lineHeight="s"
+            lineHeight="sm"
             uppercase={true}
           >
             <FormattedMessage
@@ -186,9 +210,20 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
        
     </Text>
     <ForwardRef
-      alignItems="center"
+      align="center"
       flexDirection="row"
-      mt={3}
+      justify={
+        Array [
+          "center",
+          "flex-start",
+        ]
+      }
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
     >
       <Connect(LoginOverlay)>
         <ButtonQuickAction
@@ -208,8 +243,19 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="gray.500"
-        fontSize={3}
+        color="neutral-gray.700"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
       >
         500
       </Text>
@@ -225,6 +271,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
 >
   <ForwardRef
     direction="column"
+    height="100%"
   >
     <ForwardRef
       alignItems="center"
@@ -249,7 +296,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
             as="span"
             fontSize={1}
             fontWeight="700"
-            lineHeight="s"
+            lineHeight="sm"
             uppercase={true}
           >
             <FormattedMessage
@@ -295,9 +342,20 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
        
     </Text>
     <ForwardRef
-      alignItems="center"
+      align="center"
       flexDirection="row"
-      mt={3}
+      justify={
+        Array [
+          "center",
+          "flex-start",
+        ]
+      }
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
     >
       <Connect(LoginOverlay)>
         <ButtonQuickAction
@@ -317,8 +375,19 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="gray.500"
-        fontSize={3}
+        color="neutral-gray.700"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
       >
         500
       </Text>
@@ -334,6 +403,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
 >
   <ForwardRef
     direction="column"
+    height="100%"
   >
     <ForwardRef
       alignItems="center"
@@ -358,7 +428,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
             as="span"
             fontSize={1}
             fontWeight="700"
-            lineHeight="s"
+            lineHeight="sm"
             uppercase={true}
           >
             <FormattedMessage
@@ -430,9 +500,20 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
        
     </Text>
     <ForwardRef
-      alignItems="center"
+      align="center"
       flexDirection="row"
-      mt={3}
+      justify={
+        Array [
+          "center",
+          "flex-start",
+        ]
+      }
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
     >
       <Connect(LoginOverlay)>
         <ButtonQuickAction
@@ -452,8 +533,19 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="gray.500"
-        fontSize={3}
+        color="neutral-gray.700"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
       >
         500
       </Text>

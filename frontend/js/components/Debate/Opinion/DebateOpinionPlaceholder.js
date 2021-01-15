@@ -22,7 +22,7 @@ export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props)
       css={css({
         position: 'absolute',
       })}>
-      <Text as="span" fontSize={1} lineHeight={LineHeight.S} fontWeight="700" uppercase>
+      <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
         <FormattedMessage id={debateOpinionStatus === 'FOR' ? 'opinion.for' : 'opinion.against'} />
       </Text>
     </Tag>

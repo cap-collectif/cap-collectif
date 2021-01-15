@@ -37,12 +37,12 @@ const sizes = {
   h4: {
     fontSize: 4,
     fontWeight: FontWeight.Normal,
-    lineHeight: LineHeight.S,
+    lineHeight: LineHeight.SM,
   },
   h5: {
     fontSize: 1,
     fontWeight: FontWeight.Normal,
-    lineHeight: LineHeight.S,
+    lineHeight: LineHeight.SM,
   },
 };
 

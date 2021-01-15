@@ -30,6 +30,12 @@ export const DebateArticleCardDescription: StyledComponent<{}, {}, typeof Text> 
 export const DebateArticleCardOrigin: StyledComponent<{}, {}, typeof Text> = styled(Text).attrs(
   props => ({
     color: props.color ?? 'gray.900',
+    /*
+    Because in the platform the root font size is set to 16px, 1rem corresponds to 16px but here
+    it must be 14px... Because we cannot change the root font size in platform (lot of BCs), it's
+    safer to put here the value because it must never change
+     */
+    fontSize: '14px',
   }),
 )``;
 

@@ -13,6 +13,9 @@ type Props = {|
 |};
 
 export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
+  if (step?.debate?.arguments.totalCount === 0) {
+    return null;
+  }
   return isMobile ? (
     <>{step?.debate && <MobileDebateStepPageArguments debate={step.debate} viewer={viewer} />}</>
   ) : (

@@ -92,8 +92,8 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
           </Menu.List>
         </Menu>
       </Flex>
-      <Flex direction="row">
-        <Flex direction="column" width="50%" p={3}>
+      <Flex direction="row" spacing={6}>
+        <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
             debate={step.yesDebate}
             viewer={viewer}
@@ -102,7 +102,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
             }}
           />
         </Flex>
-        <Flex direction="column" width="50%" p={3}>
+        <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
             debate={step.noDebate}
             viewer={viewer}

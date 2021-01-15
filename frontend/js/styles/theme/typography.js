@@ -15,7 +15,8 @@ const typography = {
     l: pxToRem(48),
     m: pxToRem(32),
     base: pxToRem(24),
-    s: pxToRem(16),
+    s: pxToRem(18),
+    sm: pxToRem(16),
   },
   fontWeights: {
     hairline: 100,
