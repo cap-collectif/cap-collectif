@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Alert, type BsStyle } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
+import type { BsStyle } from '~/types/ReactBootstrap.type';
 
 type Props = {
   errors?: Array<$FlowFixMe>,

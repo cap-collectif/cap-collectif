@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormControl } from 'react-bootstrap';
-import { ChromePicker } from 'react-color';
+import ChromePicker from 'react-color/lib/Chrome';
 import useClickAway from '~/utils/hooks/useClickAway';
 import { ColorPickerInputContainer, PreviewColor } from './ColorPickerInput.style';
 

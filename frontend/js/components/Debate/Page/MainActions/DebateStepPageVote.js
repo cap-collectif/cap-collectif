@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';

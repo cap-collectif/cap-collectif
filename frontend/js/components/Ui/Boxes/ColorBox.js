@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { darken } from 'polished';
+import tinycolor from 'tinycolor2';
 
 type Props = {
   backgroundColor: string,
@@ -14,7 +14,9 @@ const BoxContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div`
   padding: 15px;
   background-color: ${props =>
     props.darkness && props.darkness > 0
-      ? darken(props.darkness, props.backgroundColor)
+      ? tinycolor(props.backgroundColor)
+          .darken(props.darkness)
+          .toString()
       : props.backgroundColor};
   border-radius: 4px;
 `;

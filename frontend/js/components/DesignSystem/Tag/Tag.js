@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { variant } from 'styled-system';
 import styled from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import AppBox from '~ui/Primitives/AppBox';

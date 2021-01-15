@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Menu as HeadlessMenu } from '@headlessui/react';
 import styled from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { useMenu } from '~ds/Menu/Menu.context';

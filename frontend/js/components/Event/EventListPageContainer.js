@@ -135,9 +135,7 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
           </div>
         </div>
       </div>
-      <EventFiltersContainer
-        darkness={0.1}
-        backgroundColor={backgroundColor || colors.primaryColor}>
+      <EventFiltersContainer darkness={10} backgroundColor={backgroundColor || colors.primaryColor}>
         <EventListFilters query={query} addToggleViewButton />
       </EventFiltersContainer>
       <div id="event-page-rendered">

@@ -2,11 +2,12 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button, type BsStyle } from 'react-bootstrap';
-import { baseUrl } from '../../../config';
-import { showLoginModal, type ShowLoginModalAction } from '../../../redux/modules/user';
-import type { State } from '../../../types';
-import { loginWithOpenID as isLoginWithOpenID } from '../../../redux/modules/default';
+import { Button } from 'react-bootstrap';
+import { baseUrl } from '~/config';
+import { showLoginModal, type ShowLoginModalAction } from '~/redux/modules/user';
+import type { State } from '~/types';
+import type { BsStyle } from '~/types/ReactBootstrap.type';
+import { loginWithOpenID as isLoginWithOpenID } from '~/redux/modules/default';
 
 type StateProps = {|
   loginWithMonCompteParis: boolean,

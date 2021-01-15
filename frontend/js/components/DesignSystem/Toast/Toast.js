@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { variant as styledVariant } from 'styled-system';
 import {
   fadeOut,

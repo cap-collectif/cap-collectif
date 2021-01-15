@@ -1,8 +1,12 @@
 // @flow
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { Cell, Pie, PieChart as Chart, ResponsiveContainer, Tooltip } from 'recharts';
-import defaultColors from '../../../utils/colors';
+import Chart from 'recharts/es6/chart/PieChart';
+import ResponsiveContainer from 'recharts/es6/component/ResponsiveContainer';
+import Cell from 'recharts/es6/component/Cell';
+import Pie from 'recharts/es6/polar/Pie';
+import Tooltip from 'recharts/es6/component/Tooltip';
+import defaultColors from '~/utils/colors';
 import config from '~/config';
 
 type Data = {

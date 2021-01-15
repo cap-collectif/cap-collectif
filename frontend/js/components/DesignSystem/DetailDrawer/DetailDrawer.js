@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useKeyboardShortcuts } from '@liinkiing/react-hooks';
 import { createPortal } from 'react-dom';

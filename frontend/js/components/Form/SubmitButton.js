@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { Button, type BsStyle } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
-import type { State, User } from '../../types';
+import type { State, User } from '~/types';
+import type { BsStyle } from '~/types/ReactBootstrap.type';
 
 type Props = {
   id?: ?string,

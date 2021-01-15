@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
 import copy from 'copy-to-clipboard';
 import css from '@styled-system/css';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import styled, { type StyledComponent } from 'styled-components';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';

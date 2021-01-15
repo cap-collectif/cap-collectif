@@ -33,4 +33,5 @@ module.exports = {
   transform: {
     '.*': 'babel-jest',
   },
+  transformIgnorePatterns: ['node_modules/(?!(recharts)/)'],
 };

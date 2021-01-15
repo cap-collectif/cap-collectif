@@ -54,7 +54,16 @@ module.exports = function(api) {
       'react-docgen',
       ['relay', { artifactDirectory: './frontend/js/__generated__/~relay' }],
       'transform-class-properties',
-      'polished',
+      'lodash',
+      [
+        'transform-imports',
+        {
+          'react-bootstrap': {
+            transform: 'react-bootstrap/lib/${member}',
+            preventFullImport: true,
+          },
+        },
+      ],
     ];
     return {
       compact,

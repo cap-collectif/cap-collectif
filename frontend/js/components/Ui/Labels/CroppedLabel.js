@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
-import { Label, OverlayTrigger, type BsStyle } from 'react-bootstrap';
+import { Label, OverlayTrigger } from 'react-bootstrap';
 import Tooltip from '../../Utils/Tooltip';
+import type { BsStyle } from '~/types/ReactBootstrap.type';
 
 type LabelType = {
   name: string,

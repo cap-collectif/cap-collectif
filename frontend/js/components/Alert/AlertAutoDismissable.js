@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Alert, type BsStyle } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
+import type { BsStyle } from '~/types/ReactBootstrap.type';
 
 type Props = {
   children: $FlowFixMe,

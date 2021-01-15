@@ -6,6 +6,7 @@ const { merge } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const webpackConfig = require('./config');
 
@@ -35,6 +36,7 @@ const devConf = {
       '~svg': path.resolve(__dirname, '../public/svg'),
       '~image': path.resolve(__dirname, '../public/image'),
       react: path.resolve('./node_modules/react'),
+      'lodash-es': 'lodash',
     },
   },
   entry: {
@@ -91,6 +93,12 @@ const devConf = {
   },
   mode: 'development',
   plugins: [
+    new CleanWebpackPlugin({
+      // Simulate the removal of files
+      dry: false,
+      // Path files removed (Relative to webpack's output.path directory)
+      cleanOnceBeforeBuildPatterns: ['js/chunks/*'],
+    }),
     // This plugin extracts CSS into separate files located in /css folder
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',

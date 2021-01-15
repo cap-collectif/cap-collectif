@@ -2,9 +2,14 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import Bar from 'recharts/es6/cartesian/Bar';
+import BarChart from 'recharts/es6/chart/BarChart';
+import ResponsiveContainer from 'recharts/es6/component/ResponsiveContainer';
+import LabelList from 'recharts/es6/component/LabelList';
+import XAxis from 'recharts/es6/cartesian/XAxis';
+import YAxis from 'recharts/es6/cartesian/YAxis';
 import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
-import { cleanMultipleChoiceQuestion } from '../../utils/cleanMultipleChoiceQuestion';
+import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion';
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsBarChart_multipleChoiceQuestion,

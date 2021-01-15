@@ -2,8 +2,9 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Modal, type BsSize } from 'react-bootstrap';
-import type { GlobalState } from '../../types';
+import { Modal } from 'react-bootstrap';
+import type { GlobalState } from '~/types';
+import type { BsSize } from '~/types/ReactBootstrap.type';
 import ShareButton from '../Ui/Button/ShareButton';
 import ShareButtonAction from '../Ui/Button/ShareButtonAction';
 

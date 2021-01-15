@@ -2,10 +2,14 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import Legend from 'recharts/es6/component/Legend';
+import ResponsiveContainer from 'recharts/es6/component/ResponsiveContainer';
+import Cell from 'recharts/es6/component/Cell';
+import Pie from 'recharts/es6/polar/Pie';
+import PieChart from 'recharts/es6/chart/PieChart';
 import { type QuestionnaireAdminResultsPieChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsPieChart_multipleChoiceQuestion.graphql';
-import colors from '../../utils/colors';
-import { cleanMultipleChoiceQuestion } from '../../utils/cleanMultipleChoiceQuestion';
+import colors from '~/utils/colors';
+import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion';
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsPieChart_multipleChoiceQuestion,

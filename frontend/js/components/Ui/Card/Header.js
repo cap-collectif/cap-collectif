@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { darken } from 'polished';
+import tinycolor from 'tinycolor2';
+
 import colors, { CardHeaderColors } from '~/utils/colors';
 
 type Props = {
@@ -14,7 +15,12 @@ const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: 'card__header',
 })`
   background-color: ${props => props.bgColor};
-  color: ${props => (props.bgColor === colors.pageBgc ? colors.dark : darken(0.6, props.bgColor))};
+  color: ${props =>
+    props.bgColor === colors.pageBgc
+      ? colors.dark
+      : tinycolor(props.bgColor)
+          .darken(60)
+          .toString()};
   border: 1px solid ${colors.borderColor};
   border-bottom: 0;
   border-top-right-radius: 3px;

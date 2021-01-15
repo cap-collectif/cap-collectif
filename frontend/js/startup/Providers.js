@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { MotionConfig, AnimationFeature, ExitFeature } from 'framer-motion';
 import * as Sentry from '@sentry/browser';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
@@ -40,7 +41,9 @@ class Providers extends React.Component<Props> {
       <Provider store={store}>
         {/** $FlowFixMe */}
         <IntlProvider timeZone={window.timeZone}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>
+          </ThemeProvider>
         </IntlProvider>
       </Provider>
     );

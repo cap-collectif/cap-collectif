@@ -4,15 +4,7 @@ import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import moment from 'moment';
-import {
-  FormGroup,
-  FormControl,
-  InputGroup,
-  Thumbnail,
-  OverlayTrigger,
-  type BsSize,
-  type ValidationState,
-} from 'react-bootstrap';
+import { FormGroup, FormControl, InputGroup, Thumbnail, OverlayTrigger } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
 import DateTime, { type DateTimeInputProps, type TimeConstraintsProps } from './DateTime';
 import Editor from './Editor';
@@ -45,6 +37,7 @@ import isQuestionnaire from '~/utils/isQuestionnaire';
 import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInput';
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
 import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
+import type { BsSize, ValidationState } from '~/types/ReactBootstrap.type';
 
 const acceptedMimeTypes = [
   'image/*',

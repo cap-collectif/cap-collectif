@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { ChromePicker } from 'react-color';
+import ChromePicker from 'react-color/lib/Chrome';
 
 type Props = {
   input: {

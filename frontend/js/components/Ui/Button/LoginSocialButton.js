@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
-import { darken } from 'polished';
-import { baseUrl } from '../../../config';
+import tinycolor from 'tinycolor2';
+import { baseUrl } from '~/config';
 import SocialIcon from '../Icons/SocialIcon';
 
 type LoginSocialButtonType = 'facebook' | 'google' | 'openId' | 'franceConnect' | 'saml';
@@ -114,7 +114,10 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
   .loginIcon {
     top: 0;
     fill: ${props => getLabelColorForType(props.type, props.labelColor)};
-    background-color: ${props => darken(0.1, getButtonColorForType(props.type, props.buttonColor))};
+    background-color: ${props =>
+      tinycolor(getButtonColorForType(props.type, props.buttonColor))
+        .darken(10)
+        .toString()};
     height: 34px;
     width: 15%;
     border-radius: 3px 0 0 3px;
@@ -149,10 +152,11 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
 
   &:focus,
   &:hover {
-    background-color: ${props => darken(0.1, getButtonColorForType(props.type, props.buttonColor))};
+    background-color: ${props =>
+      tinycolor(getButtonColorForType(props.type, props.buttonColor)).darken(10)};
     .loginIcon {
       background-color: ${props =>
-        darken(0.2, getButtonColorForType(props.type, props.buttonColor))};
+        tinycolor(getButtonColorForType(props.type, props.buttonColor)).darken(20)};
     }
   }
 `;
@@ -196,12 +200,14 @@ export default class LoginSocialButton extends React.Component<Props, State> {
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;
 
-    if(text === "grandLyonConnect") {
-      return <GrandLyonConnectButton type={text} labelColor={labelColor} buttonColor={buttonColor}>
-        <a href={getButtonLinkForType(type, redirectUri)} title={type}>
-          <SocialIcon className="loginIcon" name={text} />
-        </a>
-      </GrandLyonConnectButton>;
+    if (text === 'grandLyonConnect') {
+      return (
+        <GrandLyonConnectButton type={text} labelColor={labelColor} buttonColor={buttonColor}>
+          <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+            <SocialIcon className="loginIcon" name={text} />
+          </a>
+        </GrandLyonConnectButton>
+      );
     }
 
     return (

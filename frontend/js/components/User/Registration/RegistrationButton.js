@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { Button, type BsStyle } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { showRegistrationModal } from '../../../redux/modules/user';
-import type { State, Dispatch } from '../../../types';
+import { showRegistrationModal } from '~/redux/modules/user';
+import type { State, Dispatch } from '~/types';
+import type { BsStyle } from '~/types/ReactBootstrap.type';
 
 type Props = {
   features: Object,
