@@ -9,6 +9,7 @@ import OpinionPreviewCounters from './OpinionPreviewCounters';
 import type { OpinionPreview_opinion } from '~relay/OpinionPreview_opinion.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 import Media from '../Ui/Medias/Media/Media';
+import config from '~/config';
 
 type Props = {|
   +showUpdatedDate: boolean,
@@ -48,19 +49,25 @@ class OpinionPreview extends React.Component<Props> {
             opinion={opinion}
             showUpdatedDate={showUpdatedDate}
           />
-          <div className="web">
+
+          {!config.isMobile && (
+            <>
+              <TrashedMessage contribution={opinion}>
+                <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
+              </TrashedMessage>
+              <OpinionPreviewCounters opinion={opinion} />
+            </>
+          )}
+        </Media.Body>
+
+        {config.isMobile && (
+          <div className="opinion__body mt-10">
             <TrashedMessage contribution={opinion}>
               <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
             </TrashedMessage>
             <OpinionPreviewCounters opinion={opinion} />
           </div>
-        </Media.Body>
-        <div className="opinion__body mt-10 mobile">
-          <TrashedMessage contribution={opinion}>
-            <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
-          </TrashedMessage>
-          <OpinionPreviewCounters opinion={opinion} />
-        </div>
+        )}
       </div>
     );
   }
