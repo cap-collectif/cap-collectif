@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -14,62 +14,51 @@ type Props = {|
   +project: CommentTrashedListPaginated_project,
 |};
 
-type State = {|
-  +isLoading: boolean,
-|};
+export const CommentTrashedListPaginated = ({ project, relay }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-export class CommentTrashedListPaginated extends React.Component<Props, State> {
-  state = {
-    isLoading: false,
-  };
-
-  handleLoadMore = () => {
-    const { relay } = this.props;
-    this.setState({ isLoading: true });
+  const handleLoadMore = () => {
+    setLoading(true);
     relay.loadMore(TRASHED_COMMENT_PAGINATOR_COUNT, () => {
-      this.setState({ isLoading: false });
+      setLoading(false);
     });
   };
 
-  render() {
-    const { project, relay } = this.props;
-    const { isLoading } = this.state;
-    if (!project.comments || project.comments.totalCount === 0) {
-      return null;
-    }
-
-    return (
-      <React.Fragment>
-        <FormattedMessage
-          id="comment.list"
-          values={{
-            num: project.comments.totalCount,
-          }}
-          tagName="h3"
-        />
-        <ListGroup bsClass="media-list" componentClass="ul">
-          {project?.comments?.edges
-            ?.filter(Boolean)
-            .map(edge => edge.node)
-            .filter(Boolean)
-            .map(node => (
-              <Comment key={node.id} comment={node} disabledButton />
-            ))}
-          {relay.hasMore() && (
-            <div id="proposal-list-pagination-footer" className="text-center">
-              <Button
-                id="CommentTrashedListPaginated-loadMore"
-                disabled={isLoading}
-                onClick={this.handleLoadMore}>
-                <FormattedMessage id={isLoading ? 'global.loading' : 'global.more'} />
-              </Button>
-            </div>
-          )}
-        </ListGroup>
-      </React.Fragment>
-    );
+  if (!project.comments || project.comments.totalCount === 0) {
+    return null;
   }
-}
+
+  return (
+    <React.Fragment>
+      <FormattedMessage
+        id="comment.list"
+        values={{
+          num: project.comments.totalCount,
+        }}
+        tagName="h3"
+      />
+      <ListGroup bsClass="media-list" componentClass="ul">
+        {project?.comments?.edges
+          ?.filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(node => (
+            <Comment key={node.id} comment={node} disabledButton />
+          ))}
+        {relay.hasMore() && (
+          <div id="proposal-list-pagination-footer" className="text-center">
+            <Button
+              id="CommentTrashedListPaginated-loadMore"
+              disabled={loading}
+              onClick={handleLoadMore}>
+              <FormattedMessage id={loading ? 'global.loading' : 'global.more'} />
+            </Button>
+          </div>
+        )}
+      </ListGroup>
+    </React.Fragment>
+  );
+};
 
 export default createPaginationContainer(
   CommentTrashedListPaginated,

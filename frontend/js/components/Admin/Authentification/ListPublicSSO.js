@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Button, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -31,10 +31,6 @@ export type FranceConnectSSOConfiguration = {|
   +$fragmentRefs: FranceConnectConfigurationModal_ssoConfiguration$ref,
 |};
 
-type State = {|
-  showFranceConnectModal: boolean,
-|};
-
 const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, typeof ListGroupItem> = styled(
   ListGroupItem,
 )`
@@ -54,93 +50,84 @@ const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(
   }
 `;
 
-export class ListPublicSSO extends React.Component<Props, State> {
-  state = {
-    showFranceConnectModal: false,
+export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) => {
+  const [showFranceConnectModal, setShowFranceConnectModal] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setShowFranceConnectModal(false);
   };
 
-  handleClose = () => {
-    this.setState({ showFranceConnectModal: false });
-  };
+  const franceConnect =
+    ssoConfigurations.edges &&
+    ssoConfigurations.edges
+      .filter(Boolean)
+      .map(edge => edge.node)
+      .filter(Boolean)
+      .find(node => node.__typename === 'FranceConnectSSOConfiguration');
 
-  render() {
-    const { onToggle, features, ssoConfigurations } = this.props;
-    const { showFranceConnectModal } = this.state;
-    const franceConnect =
-      ssoConfigurations.edges &&
-      ssoConfigurations.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean)
-        .find(node => node.__typename === 'FranceConnectSSOConfiguration');
-
-    return (
-      <>
-        <ListGroup>
-          {features.login_franceconnect && franceConnect && (
-            <ListGroupItemWithJustifyContentEnd>
-              <Toggle
-                id="toggle-franceConnect"
-                checked={franceConnect.enabled}
-                onChange={() => toggleStatus(franceConnect)}
-                label={
-                  <h5 className="mb-0 mt-0">
-                    <FormattedMessage id="capco.module.login_franceconnect" />
-                  </h5>
-                }
-              />
-
-              <ButtonWithMarginLeftAuto
-                bsStyle="warning"
-                className="btn-outline-warning"
-                onClick={() => {
-                  this.setState((prevState: State) => ({
-                    ...prevState,
-                    showFranceConnectModal: !prevState.showFranceConnectModal,
-                  }));
-                }}>
-                <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
-              </ButtonWithMarginLeftAuto>
-              <FranceConnectConfigurationModal
-                show={showFranceConnectModal}
-                onClose={this.handleClose}
-                ssoConfiguration={franceConnect}
-              />
-            </ListGroupItemWithJustifyContentEnd>
-          )}
+  return (
+    <>
+      <ListGroup>
+        {features.login_franceconnect && franceConnect && (
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
-              id="toggle-facebook"
-              checked={features.login_facebook}
-              onChange={() => onToggle('login_facebook', !features.login_facebook)}
-              label={<h5 className="mb-0 mt-0">Facebook</h5>}
-            />
-          </ListGroupItemWithJustifyContentEnd>
-          <ListGroupItemWithJustifyContentEnd>
-            <Toggle
-              id="toggle-google-plus"
-              checked={features.login_gplus}
-              onChange={() => onToggle('login_gplus', !features.login_gplus)}
-              label={<h5 className="mb-0 mt-0">Google</h5>}
-            />
-          </ListGroupItemWithJustifyContentEnd>
-          <ListGroupItemWithJustifyContentEnd>
-            <Toggle
-              id="toggle-email"
-              checked
-              disabled
+              id="toggle-franceConnect"
+              checked={franceConnect.enabled}
+              onChange={() => toggleStatus(franceConnect)}
               label={
                 <h5 className="mb-0 mt-0">
-                  <FormattedMessage id="global.email" />
+                  <FormattedMessage id="capco.module.login_franceconnect" />
                 </h5>
               }
             />
+
+            <ButtonWithMarginLeftAuto
+              bsStyle="warning"
+              className="btn-outline-warning"
+              onClick={() => {
+                setShowFranceConnectModal(!showFranceConnectModal);
+              }}>
+              <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
+            </ButtonWithMarginLeftAuto>
+            <FranceConnectConfigurationModal
+              show={showFranceConnectModal}
+              onClose={handleClose}
+              ssoConfiguration={franceConnect}
+            />
           </ListGroupItemWithJustifyContentEnd>
-        </ListGroup>
-      </>
-    );
-  }
-}
+        )}
+        <ListGroupItemWithJustifyContentEnd>
+          <Toggle
+            id="toggle-facebook"
+            checked={features.login_facebook}
+            onChange={() => onToggle('login_facebook', !features.login_facebook)}
+            label={<h5 className="mb-0 mt-0">Facebook</h5>}
+          />
+        </ListGroupItemWithJustifyContentEnd>
+        <ListGroupItemWithJustifyContentEnd>
+          <Toggle
+            id="toggle-google-plus"
+            checked={features.login_gplus}
+            onChange={() => onToggle('login_gplus', !features.login_gplus)}
+            label={<h5 className="mb-0 mt-0">Google</h5>}
+          />
+        </ListGroupItemWithJustifyContentEnd>
+        <ListGroupItemWithJustifyContentEnd>
+          <Toggle
+            id="toggle-email"
+            checked
+            disabled
+            label={
+              <h5 className="mb-0 mt-0">
+                <FormattedMessage id="global.email" />
+              </h5>
+            }
+          />
+        </ListGroupItemWithJustifyContentEnd>
+      </ListGroup>
+    </>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,

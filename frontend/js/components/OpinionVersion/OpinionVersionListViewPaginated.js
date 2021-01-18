@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import { ListGroupItem, Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -14,65 +14,54 @@ type Props = {|
   opinion: OpinionVersionListViewPaginated_opinion,
 |};
 
-type State = {|
-  loading: boolean,
-|};
+const OpinionVersionListViewPaginated = ({ opinion, relay, isProfile }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-class OpinionVersionListViewPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
-  static defaultProps = {
-    isProfile: false,
-  };
-
-  render() {
-    const { opinion, relay, isProfile } = this.props;
-    const { loading } = this.state;
-    const { edges } = opinion.versions;
-    if (!edges || edges.length === 0) {
-      return (
-        <Panel.Body className="text-center excerpt">
-          <i className="cap-32 cap-baloon-1" />
-          <br />
-          <FormattedMessage id="opinion.no_new_version" />
-        </Panel.Body>
-      );
-    }
-
+  const { edges } = opinion.versions;
+  if (!edges || edges.length === 0) {
     return (
-      <ListGroup id="versions-list">
-        {edges
-          .filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          .map(version => (
-            <OpinionVersion key={version.id} version={version} isProfile={isProfile} />
-          ))}
-        {relay.hasMore() && (
-          <ListGroupItem>
-            {loading ? (
-              <Loader size={28} inline />
-            ) : (
-              <Button
-                block
-                bsStyle="link"
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(50, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id="see-more-amendments" />
-              </Button>
-            )}
-          </ListGroupItem>
-        )}
-      </ListGroup>
+      <Panel.Body className="text-center excerpt">
+        <i className="cap-32 cap-baloon-1" />
+        <br />
+        <FormattedMessage id="opinion.no_new_version" />
+      </Panel.Body>
     );
   }
-}
+
+  return (
+    <ListGroup id="versions-list">
+      {edges
+        .filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map(version => (
+          <OpinionVersion key={version.id} version={version} isProfile={isProfile} />
+        ))}
+      {relay.hasMore() && (
+        <ListGroupItem>
+          {loading ? (
+            <Loader size={28} inline />
+          ) : (
+            <Button
+              block
+              bsStyle="link"
+              onClick={() => {
+                setLoading(true);
+                relay.loadMore(50, () => {
+                  setLoading(false);
+                });
+              }}>
+              <FormattedMessage id="see-more-amendments" />
+            </Button>
+          )}
+        </ListGroupItem>
+      )}
+    </ListGroup>
+  );
+};
+OpinionVersionListViewPaginated.defaultProps = {
+  isProfile: false,
+};
 
 export default createPaginationContainer(
   OpinionVersionListViewPaginated,

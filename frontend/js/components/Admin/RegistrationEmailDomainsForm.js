@@ -34,24 +34,19 @@ type Props = {
   submitting: boolean,
 };
 
-export class RegistrationEmailDomainsForm extends React.Component<Props> {
-  render() {
-    const { handleSubmit, submitting } = this.props;
-    return (
-      <div>
-        <p style={{ marginTop: 10 }}>
-          <strong>Nom(s) de domaine</strong>
-        </p>
-        <form onSubmit={handleSubmit}>
-          <FieldArray name="domains" component={renderDomains} />
-          <Button type="submit" disabled={submitting}>
-            {submitting ? 'Chargement...' : 'Enregistrer'}
-          </Button>
-        </form>
-      </div>
-    );
-  }
-}
+export const RegistrationEmailDomainsForm = ({ handleSubmit, submitting }: Props) => (
+  <div>
+    <p style={{ marginTop: 10 }}>
+      <strong>Nom(s) de domaine</strong>
+    </p>
+    <form onSubmit={handleSubmit}>
+      <FieldArray name="domains" component={renderDomains} />
+      <Button type="submit" disabled={submitting}>
+        {submitting ? 'Chargement...' : 'Enregistrer'}
+      </Button>
+    </form>
+  </div>
+);
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting('registration-email-domains')(state),

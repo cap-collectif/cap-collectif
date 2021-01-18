@@ -11,31 +11,26 @@ type Props = {
   target: () => null | Element | Text,
 };
 
-export class UnpublishedTooltip extends React.Component<Props> {
-  render() {
-    const { publishable, target } = this.props;
-    return (
-      <Overlay
-        show={!!publishable && !publishable.published}
-        container={() => document.querySelector('body')}
-        target={target}
-        placement="top">
-        <Tooltip id="UnpublishedTooltip">
-          <i className="cap cap-delete-2" />{' '}
-          {publishable && publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION' ? (
-            <FormattedMessage id="voting-pending-publication" />
-          ) : null}
-          {publishable && publishable.notPublishedReason === 'AUTHOR_NOT_CONFIRMED' ? (
-            <FormattedMessage id="unpublished-vote" />
-          ) : null}
-          {publishable && publishable.notPublishedReason === 'AUTHOR_CONFIRMED_TOO_LATE' ? (
-            <FormattedMessage id="unpublished-vote" />
-          ) : null}
-        </Tooltip>
-      </Overlay>
-    );
-  }
-}
+export const UnpublishedTooltip = ({ publishable, target }: Props) => (
+  <Overlay
+    show={!!publishable && !publishable.published}
+    container={() => document.querySelector('body')}
+    target={target}
+    placement="top">
+    <Tooltip id="UnpublishedTooltip">
+      <i className="cap cap-delete-2" />{' '}
+      {publishable && publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION' ? (
+        <FormattedMessage id="voting-pending-publication" />
+      ) : null}
+      {publishable && publishable.notPublishedReason === 'AUTHOR_NOT_CONFIRMED' ? (
+        <FormattedMessage id="unpublished-vote" />
+      ) : null}
+      {publishable && publishable.notPublishedReason === 'AUTHOR_CONFIRMED_TOO_LATE' ? (
+        <FormattedMessage id="unpublished-vote" />
+      ) : null}
+    </Tooltip>
+  </Overlay>
+);
 
 export default createFragmentContainer(UnpublishedTooltip, {
   publishable: graphql`

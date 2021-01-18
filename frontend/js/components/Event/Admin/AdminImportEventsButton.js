@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -9,10 +9,6 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { GlobalState, Dispatch } from '../../../types';
 
-type State = {|
-  showModal: boolean,
-|};
-
 type Props = {|
   submitting: boolean,
   pristine: boolean,
@@ -20,67 +16,61 @@ type Props = {|
   submitForm: () => void,
 |};
 
-export class AdminImportEventsButton extends React.Component<Props, State> {
-  state = {
-    showModal: false,
-  };
+export const AdminImportEventsButton = ({ invalid, pristine, submitting, submitForm }: Props) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  render() {
-    const { invalid, pristine, submitting, submitForm } = this.props;
-    const { showModal } = this.state;
-    return (
-      <div>
-        <Button
-          id="AdminImportEventsButton-import"
-          bsStyle="default"
-          className="mt-10"
-          onClick={() => {
-            this.setState({ showModal: true });
-          }}>
-          <FormattedMessage id="import" />
-        </Button>
-        <Modal
-          animation={false}
-          show={showModal}
-          onHide={() => {
-            this.setState({ showModal: false });
-          }}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="modal-add-events-via-file" />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>
-              <FormattedMessage id="import-events-helptext" />
-            </p>
-            <AdminImportEventsForm
-              onClose={() => {
-                this.setState({ showModal: false });
-              }}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton
-              onClose={() => {
-                this.setState({ showModal: false });
-              }}
-            />
-            <SubmitButton
-              id="AdminImportEventsButton-submit"
-              label="import"
-              isSubmitting={submitting}
-              disabled={invalid || pristine}
-              onSubmit={() => submitForm()}
-            />
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Button
+        id="AdminImportEventsButton-import"
+        bsStyle="default"
+        className="mt-10"
+        onClick={() => {
+          setShowModal(true);
+        }}>
+        <FormattedMessage id="import" />
+      </Button>
+      <Modal
+        animation={false}
+        show={showModal}
+        onHide={() => {
+          setShowModal(false);
+        }}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage id="modal-add-events-via-file" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            <FormattedMessage id="import-events-helptext" />
+          </p>
+          <AdminImportEventsForm
+            onClose={() => {
+              setShowModal(false);
+            }}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton
+            onClose={() => {
+              setShowModal(false);
+            }}
+          />
+          <SubmitButton
+            id="AdminImportEventsButton-submit"
+            label="import"
+            isSubmitting={submitting}
+            disabled={invalid || pristine}
+            onSubmit={() => submitForm()}
+          />
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),

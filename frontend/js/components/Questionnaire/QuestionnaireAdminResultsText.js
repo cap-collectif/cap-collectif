@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -15,58 +15,46 @@ type Props = {
   simpleQuestion: QuestionnaireAdminResultsText_simpleQuestion,
 };
 
-type State = {
-  loading: boolean,
-};
+export const QuestionnaireAdminResultsText = ({ relay, simpleQuestion }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-export class QuestionnaireAdminResultsText extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
-  handleLoadMore = () => {
-    const { relay } = this.props;
-    this.setState({ loading: true });
+  const handleLoadMore = () => {
+    setLoading(true);
     relay.loadMore(RESPONSE_PAGINATION, () => {
-      this.setState({ loading: false });
+      setLoading(false);
     });
   };
 
-  render() {
-    const { relay, simpleQuestion } = this.props;
-    const { loading } = this.state;
-
-    if (simpleQuestion?.responses?.edges) {
-      return (
-        <div className="mb-20">
-          <ListGroupFlush striped className="border-bottom">
-            {simpleQuestion.responses.edges.map((response, key) => (
-              <ListGroupItem key={response ? response.node.id : key}>
-                <WYSIWYGRender value={response?.node?.value} />
-              </ListGroupItem>
-            ))}
-          </ListGroupFlush>
-          {relay.hasMore() && (
-            <>
-              {loading ? (
-                <Loader />
-              ) : (
-                <Button
-                  bsStyle="primary"
-                  className="btn-outline-primary mt-20"
-                  onClick={this.handleLoadMore}>
-                  <FormattedMessage id="see-more-answers" />
-                </Button>
-              )}
-            </>
-          )}
-        </div>
-      );
-    }
-
-    return null;
+  if (simpleQuestion?.responses?.edges) {
+    return (
+      <div className="mb-20">
+        <ListGroupFlush striped className="border-bottom">
+          {simpleQuestion.responses.edges.map((response, key) => (
+            <ListGroupItem key={response ? response.node.id : key}>
+              <WYSIWYGRender value={response?.node?.value} />
+            </ListGroupItem>
+          ))}
+        </ListGroupFlush>
+        {relay.hasMore() && (
+          <>
+            {loading ? (
+              <Loader />
+            ) : (
+              <Button
+                bsStyle="primary"
+                className="btn-outline-primary mt-20"
+                onClick={handleLoadMore}>
+                <FormattedMessage id="see-more-answers" />
+              </Button>
+            )}
+          </>
+        )}
+      </div>
+    );
   }
-}
+
+  return null;
+};
 
 export default createPaginationContainer(
   QuestionnaireAdminResultsText,

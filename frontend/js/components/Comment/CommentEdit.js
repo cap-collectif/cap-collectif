@@ -24,20 +24,17 @@ const CommentEditLink: StyledComponent<{}, {}, HTMLAnchorElement> = styled.a`
   }
 `;
 
-export class CommentEdit extends React.Component<Props> {
-  render() {
-    const { comment } = this.props;
-    if (comment.contribuable && comment.author && comment.author.isViewer) {
-      return (
-        <CommentEditLink id={`CommentEdit-${comment.id}`} href={comment.editUrl}>
-          <Icon name={ICON_NAME.pen} size={15} color={colors.darkGray} />
-          <FormattedMessage id="global.change" />
-        </CommentEditLink>
-      );
-    }
-    return null;
+export const CommentEdit = ({ comment }: Props) => {
+  if (comment.contribuable && comment.author && comment.author.isViewer) {
+    return (
+      <CommentEditLink id={`CommentEdit-${comment.id}`} href={comment.editUrl}>
+        <Icon name={ICON_NAME.pen} size={15} color={colors.darkGray} />
+        <FormattedMessage id="global.change" />
+      </CommentEditLink>
+    );
   }
-}
+  return null;
+};
 
 export default createFragmentContainer(CommentEdit, {
   comment: graphql`

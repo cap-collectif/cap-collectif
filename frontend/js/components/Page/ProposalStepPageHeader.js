@@ -13,75 +13,72 @@ type Props = {
   step: ProposalStepPageHeader_step,
 };
 
-export class ProposalStepPageHeader extends React.Component<Props> {
-  render() {
-    const { step } = this.props;
-    const projectType = step.project && step.project.type ? step.project.type.title : null;
-    const queryCount = step.proposals.totalCount;
-    const total = step.allProposals.totalCount;
-    const { fusionCount } = step.allProposals;
-    const isInterpellation = isInterpellationContextFromStep(step);
-    const isEstablishment = isEstablishmentFormStep(step);
-    const isProposalForm = step.form && step.form.objectType === 'PROPOSAL';
-    const tradKeyForTotalCount = isInterpellation
-      ? 'interpellation.count_with_total'
-      : isEstablishment
-      ? 'establishment.count_with_total'
-      : isProposalForm
-      ? 'proposal.count_with_total'
-      : 'question-total-count';
-    const tradKeyForCount = isInterpellation
-      ? 'interpellation.count'
-      : isEstablishment
-      ? 'establishment.count'
-      : isProposalForm
-      ? 'proposal.count'
-      : 'count-questions';
+export const ProposalStepPageHeader = ({ step }: Props) => {
+  const projectType = step.project && step.project.type ? step.project.type.title : null;
+  const queryCount = step.proposals.totalCount;
+  const total = step.allProposals.totalCount;
+  const { fusionCount } = step.allProposals;
+  const isInterpellation = isInterpellationContextFromStep(step);
+  const isEstablishment = isEstablishmentFormStep(step);
+  const isProposalForm = step.form && step.form.objectType === 'PROPOSAL';
+  const tradKeyForTotalCount = isInterpellation
+    ? 'interpellation.count_with_total'
+    : isEstablishment
+    ? 'establishment.count_with_total'
+    : isProposalForm
+    ? 'proposal.count_with_total'
+    : 'question-total-count';
+  const tradKeyForCount = isInterpellation
+    ? 'interpellation.count'
+    : isEstablishment
+    ? 'establishment.count'
+    : isProposalForm
+    ? 'proposal.count'
+    : 'count-questions';
 
-    return (
-      <React.Fragment>
-        <h3 className="h3 d-ib mb-15">
-          {total !== queryCount ? (
+  return (
+    <React.Fragment>
+      <h3 className="h3 d-ib mb-15">
+        {total !== queryCount ? (
+          <FormattedMessage
+            id={tradKeyForTotalCount}
+            values={{
+              num: queryCount,
+              total,
+            }}
+          />
+        ) : (
+          <FormattedMessage
+            id={tradKeyForCount}
+            values={{
+              num: total,
+            }}
+          />
+        )}
+        {step.form && step.kind === 'collect' && fusionCount > 0 && (
+          <span className="font-weight-300 color-dark-gray">
+            {' '}
             <FormattedMessage
-              id={tradKeyForTotalCount}
+              id={
+                isInterpellation || isEstablishment
+                  ? 'interpellation.count_fusions'
+                  : 'proposal.count_fusions'
+              }
               values={{
-                num: queryCount,
-                total,
+                num: fusionCount,
               }}
             />
-          ) : (
-            <FormattedMessage
-              id={tradKeyForCount}
-              values={{
-                num: total,
-              }}
-            />
-          )}
-          {step.form && step.kind === 'collect' && fusionCount > 0 && (
-            <span className="font-weight-300 color-dark-gray">
-              {' '}
-              <FormattedMessage
-                id={
-                  isInterpellation || isEstablishment
-                    ? 'interpellation.count_fusions'
-                    : 'proposal.count_fusions'
-                }
-                values={{
-                  num: fusionCount,
-                }}
-              />
-            </span>
-          )}
-        </h3>
-        {step.form && step.kind === 'collect' && (
-          <span className="pull-right mb-20 mt-20">
-            <ProposalCreate proposalForm={step.form} projectType={projectType} />
           </span>
         )}
-      </React.Fragment>
-    );
-  }
-}
+      </h3>
+      {step.form && step.kind === 'collect' && (
+        <span className="pull-right mb-20 mt-20">
+          <ProposalCreate proposalForm={step.form} projectType={projectType} />
+        </span>
+      )}
+    </React.Fragment>
+  );
+};
 
 export default createFragmentContainer(ProposalStepPageHeader, {
   step: graphql`

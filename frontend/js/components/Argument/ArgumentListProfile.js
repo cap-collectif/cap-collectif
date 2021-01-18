@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -17,51 +17,39 @@ type Props = {
   argumentList: ArgumentListProfile_argumentList,
 };
 
-type State = {
-  loading: boolean,
-};
+export const ArgumentListProfile = ({ argumentList, relay }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-export class ArgumentListProfile extends Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
-  handleLoadMore = () => {
-    const { relay } = this.props;
-    this.setState({ loading: true });
+  const handleLoadMore = () => {
+    setLoading(true);
     relay.loadMore(ARGUMENTS_PAGINATION, () => {
-      this.setState({ loading: false });
+      setLoading(false);
     });
   };
 
-  render() {
-    const { argumentList, relay } = this.props;
-    const { loading } = this.state;
-
-    return (
-      <ListGroup bsClass="media-list">
-        {argumentList.arguments &&
-          argumentList.arguments.edges &&
-          argumentList.arguments.edges
-            .filter(Boolean)
-            .map(edge => edge.node)
-            .filter(Boolean)
-            .map(argument => <ArgumentItem key={argument.id} argument={argument} isProfile />)}
-        {relay.hasMore() && (
-          <ListGroupItem>
-            {loading ? (
-              <Loader size={28} inline />
-            ) : (
-              <Button block bsStyle="link" onClick={this.handleLoadMore}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </ListGroupItem>
-        )}
-      </ListGroup>
-    );
-  }
-}
+  return (
+    <ListGroup bsClass="media-list">
+      {argumentList.arguments &&
+        argumentList.arguments.edges &&
+        argumentList.arguments.edges
+          .filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(argument => <ArgumentItem key={argument.id} argument={argument} isProfile />)}
+      {relay.hasMore() && (
+        <ListGroupItem>
+          {loading ? (
+            <Loader size={28} inline />
+          ) : (
+            <Button block bsStyle="link" onClick={handleLoadMore}>
+              <FormattedMessage id="global.more" />
+            </Button>
+          )}
+        </ListGroupItem>
+      )}
+    </ListGroup>
+  );
+};
 
 export default createPaginationContainer(
   ArgumentListProfile,

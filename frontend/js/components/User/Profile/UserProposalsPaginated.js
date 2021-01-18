@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Button, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
@@ -16,66 +16,54 @@ type Props = {|
 
 export const PROPOSAL_PAGINATION = 50;
 
-type State = {
-  loading: boolean,
-};
-
 const classes = classNames({
   'media-list': true,
   'proposal-preview-list': true,
   opinion__list: true,
 });
 
-export class UserProposalsPaginated extends Component<Props, State> {
-  state = {
-    loading: false,
-  };
+export const UserProposalsPaginated = ({ user, relay }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-  handleLoadMore = () => {
-    const { relay } = this.props;
-    this.setState({ loading: true });
+  const handleLoadMore = () => {
+    setLoading(true);
     relay.loadMore(PROPOSAL_PAGINATION, () => {
-      this.setState({ loading: false });
+      setLoading(true);
     });
   };
 
-  render() {
-    const { user, relay } = this.props;
-    const { loading } = this.state;
-
-    if (!user.proposals.edges || user.proposals.edges.length === 0) {
-      return null;
-    }
-
-    return (
-      <div>
-        <Row>
-          <ul className={classes}>
-            {user.proposals.edges &&
-              user.proposals.edges
-                .filter(Boolean)
-                .map(edge => edge.node)
-                .filter(Boolean)
-                .map((node, key) => (
-                  <ProposalPreview key={key} proposal={node} step={null} viewer={null} />
-                ))}
-          </ul>
-        </Row>
-        {relay.hasMore() && (
-          <div className="text-center">
-            {loading ? (
-              <Loader />
-            ) : (
-              <Button bsStyle="default" onClick={this.handleLoadMore}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </div>
-        )}
-      </div>
-    );
+  if (!user.proposals.edges || user.proposals.edges.length === 0) {
+    return null;
   }
-}
+
+  return (
+    <div>
+      <Row>
+        <ul className={classes}>
+          {user.proposals.edges &&
+            user.proposals.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map((node, key) => (
+                <ProposalPreview key={key} proposal={node} step={null} viewer={null} />
+              ))}
+        </ul>
+      </Row>
+      {relay.hasMore() && (
+        <div className="text-center">
+          {loading ? (
+            <Loader />
+          ) : (
+            <Button bsStyle="default" onClick={handleLoadMore}>
+              <FormattedMessage id="global.more" />
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default createPaginationContainer(
   UserProposalsPaginated,

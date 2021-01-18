@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Button, Panel } from 'react-bootstrap';
@@ -17,63 +17,52 @@ type Props = {|
   +type: ArgumentType,
 |};
 
-type State = {|
-  +loading: boolean,
-|};
-
 const ARGUMENTS_PAGINATION = config.isMobile ? 3 : 25;
 
-export class ArgumentListViewPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
+export const ArgumentListViewPaginated = ({ argumentable, relay, type }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-  render() {
-    const { argumentable, relay, type } = this.props;
-    const { loading } = this.state;
-
-    if (!argumentable.arguments.edges || argumentable.arguments.edges.length === 0) {
-      return (
-        <Panel.Body className="text-center excerpt">
-          <i className="cap-32 cap-baloon-1" />
-          <br />
-          <FormattedMessage id={`no-argument-${type.toLowerCase()}`} />
-        </Panel.Body>
-      );
-    }
-
+  if (!argumentable.arguments.edges || argumentable.arguments.edges.length === 0) {
     return (
-      <ListGroup>
-        {argumentable.arguments.edges
-          .filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          .map(argument => (
-            <ArgumentItem key={argument.id} argument={argument} />
-          ))}
-        {relay.hasMore() && (
-          <ListGroupItem>
-            {loading ? (
-              <Loader size={28} inline />
-            ) : (
-              <Button
-                block
-                bsStyle="link"
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(ARGUMENTS_PAGINATION, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id={`see-more-arguments-${type.toLowerCase()}`} />
-              </Button>
-            )}
-          </ListGroupItem>
-        )}
-      </ListGroup>
+      <Panel.Body className="text-center excerpt">
+        <i className="cap-32 cap-baloon-1" />
+        <br />
+        <FormattedMessage id={`no-argument-${type.toLowerCase()}`} />
+      </Panel.Body>
     );
   }
-}
+
+  return (
+    <ListGroup>
+      {argumentable.arguments.edges
+        .filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map(argument => (
+          <ArgumentItem key={argument.id} argument={argument} />
+        ))}
+      {relay.hasMore() && (
+        <ListGroupItem>
+          {loading ? (
+            <Loader size={28} inline />
+          ) : (
+            <Button
+              block
+              bsStyle="link"
+              onClick={() => {
+                setLoading(true);
+                relay.loadMore(ARGUMENTS_PAGINATION, () => {
+                  setLoading(false);
+                });
+              }}>
+              <FormattedMessage id={`see-more-arguments-${type.toLowerCase()}`} />
+            </Button>
+          )}
+        </ListGroupItem>
+      )}
+    </ListGroup>
+  );
+};
 
 export default createPaginationContainer(
   ArgumentListViewPaginated,

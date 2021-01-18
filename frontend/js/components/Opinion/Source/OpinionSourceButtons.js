@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
@@ -18,55 +18,41 @@ type Props = {
   dispatch: Function,
 };
 
-type State = {
-  isDeleting: boolean,
+const OpinionSourceButtons = ({ source, sourceable, dispatch }: Props) => {
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  const openDeleteModal = () => {
+    setIsDeleting(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleting(false);
+  };
+
+  return (
+    <div>
+      {/* $FlowFixMe */}
+      <OpinionSourceVoteBox source={source} />
+      <OpinionSourceReportButton sourceable={sourceable} source={source} />{' '}
+      <EditButton
+        onClick={() => {
+          dispatch(showSourceEditModal(source.id));
+        }}
+        author={{ uniqueId: source.author.slug }}
+        editable={source.contribuable}
+        className="btn-xs btn--outline source__btn--edit"
+      />{' '}
+      <OpinionSourceFormModal sourceable={sourceable} source={source} />
+      <DeleteButton
+        onClick={openDeleteModal}
+        author={{ uniqueId: source.author.slug }}
+        className="btn-xs source__btn--delete"
+      />
+      {/* $FlowFixMe */}
+      <OpinionSourceDeleteModal source={source} show={isDeleting} onClose={closeDeleteModal} />
+    </div>
+  );
 };
-
-class OpinionSourceButtons extends React.Component<Props, State> {
-  state = {
-    isDeleting: false,
-  };
-
-  openDeleteModal = () => {
-    this.setState({ isDeleting: true });
-  };
-
-  closeDeleteModal = () => {
-    this.setState({ isDeleting: false });
-  };
-
-  render() {
-    const { source, sourceable, dispatch } = this.props;
-    const { isDeleting } = this.state;
-    return (
-      <div>
-        {/* $FlowFixMe */}
-        <OpinionSourceVoteBox source={source} />
-        <OpinionSourceReportButton sourceable={sourceable} source={source} />{' '}
-        <EditButton
-          onClick={() => {
-            dispatch(showSourceEditModal(source.id));
-          }}
-          author={{ uniqueId: source.author.slug }}
-          editable={source.contribuable}
-          className="btn-xs btn--outline source__btn--edit"
-        />{' '}
-        <OpinionSourceFormModal sourceable={sourceable} source={source} />
-        <DeleteButton
-          onClick={this.openDeleteModal}
-          author={{ uniqueId: source.author.slug }}
-          className="btn-xs source__btn--delete"
-        />
-        {/* $FlowFixMe */}
-        <OpinionSourceDeleteModal
-          source={source}
-          show={isDeleting}
-          onClose={this.closeDeleteModal}
-        />
-      </div>
-    );
-  }
-}
 
 const container = connect()(OpinionSourceButtons);
 export default createFragmentContainer(container, {

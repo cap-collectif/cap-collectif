@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -22,60 +22,46 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
-type State = {|
-  isDeleting: boolean,
-|};
+const ArgumentButtons = ({ argument, dispatch }: Props) => {
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-class ArgumentButtons extends React.Component<Props, State> {
-  state = {
-    isDeleting: false,
+  const openDeleteModal = () => {
+    setIsDeleting(true);
   };
 
-  openDeleteModal = () => {
-    this.setState({ isDeleting: true });
+  const closeDeleteModal = () => {
+    setIsDeleting(false);
   };
 
-  closeDeleteModal = () => {
-    this.setState({ isDeleting: false });
-  };
-
-  render() {
-    const { argument, dispatch } = this.props;
-    const { isDeleting } = this.state;
-    return (
-      <div className="small">
-        <ArgumentVoteBox argument={argument} />
-        <ArgumentReportButton argument={argument} />
-        <EditButton
-          onClick={() => {
-            dispatch(openArgumentEditModal(argument.id));
-          }}
-          author={{ uniqueId: argument.author.slug }}
-          editable={argument.contribuable}
-          className="argument__btn--edit btn-xs btn-dark-gray btn--outline"
-        />
-        <ArgumentEditModal argument={argument} />{' '}
-        <DeleteButton
-          onClick={this.openDeleteModal}
-          author={{ uniqueId: argument.author.slug }}
-          className="argument__btn--delete btn-xs"
-        />
-        <ArgumentDeleteModal
-          argument={argument}
-          show={isDeleting}
-          onClose={this.closeDeleteModal}
-        />{' '}
-        <ShareButtonDropdown
-          id={`arg-${argument.id}-share-button`}
-          url={argument.url}
-          bsSize="xs"
-          outline
-          grey
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="small">
+      <ArgumentVoteBox argument={argument} />
+      <ArgumentReportButton argument={argument} />
+      <EditButton
+        onClick={() => {
+          dispatch(openArgumentEditModal(argument.id));
+        }}
+        author={{ uniqueId: argument.author.slug }}
+        editable={argument.contribuable}
+        className="argument__btn--edit btn-xs btn-dark-gray btn--outline"
+      />
+      <ArgumentEditModal argument={argument} />{' '}
+      <DeleteButton
+        onClick={openDeleteModal}
+        author={{ uniqueId: argument.author.slug }}
+        className="argument__btn--delete btn-xs"
+      />
+      <ArgumentDeleteModal argument={argument} show={isDeleting} onClose={closeDeleteModal} />{' '}
+      <ShareButtonDropdown
+        id={`arg-${argument.id}-share-button`}
+        url={argument.url}
+        bsSize="xs"
+        outline
+        grey
+      />
+    </div>
+  );
+};
 
 const container = connect()(ArgumentButtons);
 export default createFragmentContainer(container, {

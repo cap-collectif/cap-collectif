@@ -17,37 +17,31 @@ type Props = {|
   isSuperAdmin: boolean,
 |};
 
-export class ListSSOConfiguration extends React.Component<Props> {
-  render() {
-    const { ssoConfigurations, isSuperAdmin } = this.props;
-
-    return (
-      <div className="box box-primary container-fluid">
-        <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="method" />
-          </h3>
-        </div>
-        <div className="box-content box-content__content-form">
-          {isSuperAdmin && (
-            <>
-              <h4>
-                <FormattedMessage id="global.custom.feminine" />
-              </h4>
-              <ListCustomSSO ssoConfigurations={ssoConfigurations} />
-            </>
-          )}
-          <div className={isSuperAdmin ? 'mt-30' : ''}>
-            <h4>
-              <FormattedMessage id="preconfigured" />
-            </h4>
-            <ListPublicSSO ssoConfigurations={ssoConfigurations} />
-          </div>
-        </div>
+export const ListSSOConfiguration = ({ ssoConfigurations, isSuperAdmin }: Props) => (
+  <div className="box box-primary container-fluid">
+    <div className="box-header">
+      <h3 className="box-title">
+        <FormattedMessage id="method" />
+      </h3>
+    </div>
+    <div className="box-content box-content__content-form">
+      {isSuperAdmin && (
+        <>
+          <h4>
+            <FormattedMessage id="global.custom.feminine" />
+          </h4>
+          <ListCustomSSO ssoConfigurations={ssoConfigurations} />
+        </>
+      )}
+      <div className={isSuperAdmin ? 'mt-30' : ''}>
+        <h4>
+          <FormattedMessage id="preconfigured" />
+        </h4>
+        <ListPublicSSO ssoConfigurations={ssoConfigurations} />
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
 
 const mapStateToProps = (state: State) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),

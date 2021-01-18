@@ -12,39 +12,33 @@ type Props = {|
   isSuperAdmin: boolean,
 |};
 
-export class SSOByPassAuthForm extends React.Component<Props> {
-  render() {
-    const { onToggle, features, isSuperAdmin } = this.props;
-    return (
-      isSuperAdmin && (
-        <div className="box box-primary container-fluid">
-          <div className="box-header">
-            <h3 className="box-title">
-              <FormattedMessage id="option" />
-            </h3>
-          </div>
-          <div className="box-content box-content__content-form">
-            <div className="d-flex flex-row align-items-baseline mb-15">
-              <Toggle
-                id="toggle-sso-by-pass-auth"
-                checked={features.sso_by_pass_auth}
-                onChange={() => onToggle('sso_by_pass_auth', !features.sso_by_pass_auth)}
-                label={
-                  <div className="d-flex flex-column">
-                    <FormattedMessage id="instant-authentication" tagName="strong" />
-                    <div className="color-dark-gray">
-                      <FormattedMessage id="bypass-the-selection-of-an-authentication-method" />
-                    </div>
-                  </div>
-                }
-              />
-            </div>
-          </div>
+export const SSOByPassAuthForm = ({ onToggle, features, isSuperAdmin }: Props) =>
+  isSuperAdmin && (
+    <div className="box box-primary container-fluid">
+      <div className="box-header">
+        <h3 className="box-title">
+          <FormattedMessage id="option" />
+        </h3>
+      </div>
+      <div className="box-content box-content__content-form">
+        <div className="d-flex flex-row align-items-baseline mb-15">
+          <Toggle
+            id="toggle-sso-by-pass-auth"
+            checked={features.sso_by_pass_auth}
+            onChange={() => onToggle('sso_by_pass_auth', !features.sso_by_pass_auth)}
+            label={
+              <div className="d-flex flex-column">
+                <FormattedMessage id="instant-authentication" tagName="strong" />
+                <div className="color-dark-gray">
+                  <FormattedMessage id="bypass-the-selection-of-an-authentication-method" />
+                </div>
+              </div>
+            }
+          />
         </div>
-      )
-    );
-  }
-}
+      </div>
+    </div>
+  );
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,

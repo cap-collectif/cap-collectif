@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -78,67 +78,58 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-export class RegistrationFormCommunication extends Component<Props> {
-  render() {
-    const {
-      features,
-      submitting,
-      handleSubmit,
-      useTopText,
-      useBottomText,
-      submitSucceeded,
-      submitFailed,
-    } = this.props;
-    return (
-      <div className="box box-primary container-fluid">
-        <div className="box-content box-content__content-form">
-          <form onSubmit={handleSubmit}>
-            <Title>
-              <h3 className="box-title">
-                <FormattedMessage id="communication" />
-              </h3>
-              <span className="mr-30 mt-15">
-                {features.multilangue && <LanguageButtonContainer />}
-              </span>
-            </Title>
-            <Field
-              type="checkbox"
-              name="topTextDisplayed"
-              children={<FormattedMessage id="registration.admin.topText" />}
-              component={renderInput}
-              id="display-message-above-form"
-            />
-            {useTopText && <Field name="topText" type="admin-editor" component={renderInput} />}
-            <Field
-              type="checkbox"
-              name="bottomTextDisplayed"
-              children={<FormattedMessage id="registration.admin.bottomText" />}
-              component={renderInput}
-              id="display-message-below-form"
-            />
-            {useBottomText && (
-              <Field name="bottomText" type="admin-editor" component={renderInput} />
+export const RegistrationFormCommunication = ({
+  features,
+  submitting,
+  handleSubmit,
+  useTopText,
+  useBottomText,
+  submitSucceeded,
+  submitFailed,
+}: Props) => (
+  <div className="box box-primary container-fluid">
+    <div className="box-content box-content__content-form">
+      <form onSubmit={handleSubmit}>
+        <Title>
+          <h3 className="box-title">
+            <FormattedMessage id="communication" />
+          </h3>
+          <span className="mr-30 mt-15">{features.multilangue && <LanguageButtonContainer />}</span>
+        </Title>
+        <Field
+          type="checkbox"
+          name="topTextDisplayed"
+          children={<FormattedMessage id="registration.admin.topText" />}
+          component={renderInput}
+          id="display-message-above-form"
+        />
+        {useTopText && <Field name="topText" type="admin-editor" component={renderInput} />}
+        <Field
+          type="checkbox"
+          name="bottomTextDisplayed"
+          children={<FormattedMessage id="registration.admin.bottomText" />}
+          component={renderInput}
+          id="display-message-below-form"
+        />
+        {useBottomText && <Field name="bottomText" type="admin-editor" component={renderInput} />}
+        <div className="box-content__toolbar btn-toolbar">
+          <Button type="submit" disabled={submitting} className="btn btn-primary">
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save" />
             )}
-            <div className="box-content__toolbar btn-toolbar">
-              <Button type="submit" disabled={submitting} className="btn btn-primary">
-                {submitting ? (
-                  <FormattedMessage id="global.loading" />
-                ) : (
-                  <FormattedMessage id="global.save" />
-                )}
-              </Button>
-              <AlertForm
-                submitting={submitting}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-              />
-            </div>
-          </form>
+          </Button>
+          <AlertForm
+            submitting={submitting}
+            submitSucceeded={submitSucceeded}
+            submitFailed={submitFailed}
+          />
         </div>
-      </div>
-    );
-  }
-}
+      </form>
+    </div>
+  </div>
+);
 
 const form = reduxForm({
   onSubmit,

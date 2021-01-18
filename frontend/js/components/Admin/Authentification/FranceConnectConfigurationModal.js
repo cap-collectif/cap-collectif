@@ -76,108 +76,103 @@ const validate = ({ secret, clientId, environment }: FormValues) => {
   return errors;
 };
 
-export class FranceConnectConfigurationModal extends React.Component<Props> {
-  render() {
-    const {
-      show,
-      onClose,
-      pristine,
-      invalid,
-      handleSubmit,
-      submitting,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      dispatch,
-    } = this.props;
-    return (
-      <Modal show={show} onHide={onClose} aria-labelledby="france-connect-modal-lg">
-        <form onSubmit={handleSubmit} id={`${formName}`}>
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="oauth2-sso-modal-lg"
-              children={<FormattedMessage id="edit-france-connect-authentication-method" />}
-            />
-          </Modal.Header>
-          <Modal.Body>
-            <h4>
-              <FormattedMessage id="Configuration" />
-            </h4>
-            <FormattedMessage id="environment" tagName="p" />
-            <Field
-              id={`${formName}_environment`}
-              name="environment"
-              type="radio-buttons"
-              required
-              component={component}>
-              <ToggleButton
-                value="TESTING"
-                onClick={() => dispatch(change(formName, 'environment', 'TESTING'))}>
-                <FormattedMessage id="integration" />
-              </ToggleButton>
-              <ToggleButton
-                value="PRODUCTION"
-                onClick={() => dispatch(change(formName, 'environment', 'PRODUCTION'))}>
-                <FormattedMessage id="production" />
-              </ToggleButton>
-            </Field>
-            <Field
-              id={`${formName}_clientId`}
-              name="clientId"
-              type="text"
-              required
-              component={component}
-              label={<FormattedMessage id="client-id" />}
-            />
-            <Field
-              id={`${formName}_secret`}
-              name="secret"
-              type="text"
-              required
-              component={component}
-              label={<FormattedMessage id="secret" />}
-            />
-            <Field
-              id={`${formName}_redirectUri`}
-              name="redirectUri"
-              disabled
-              required
-              type="text"
-              component={component}
-              label={<FormattedMessage id="callback-url" />}
-            />
-            <Field
-              id={`${formName}_logoutUrl`}
-              name="logoutUrl"
-              disabled
-              required
-              type="text"
-              component={component}
-              label={<FormattedMessage id="logout-url" />}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <AlertForm
-              valid={valid}
-              invalid={invalid && !pristine}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-            <CloseButton onClose={onClose} />
-            <Button
-              type="submit"
-              id={`${formName}_submit`}
-              bsStyle="primary"
-              disabled={pristine || invalid || submitting}>
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-            </Button>
-          </Modal.Footer>
-        </form>
-      </Modal>
-    );
-  }
-}
+export const FranceConnectConfigurationModal = ({
+  show,
+  onClose,
+  pristine,
+  invalid,
+  handleSubmit,
+  submitting,
+  valid,
+  submitSucceeded,
+  submitFailed,
+  dispatch,
+}: Props) => (
+  <Modal show={show} onHide={onClose} aria-labelledby="france-connect-modal-lg">
+    <form onSubmit={handleSubmit} id={`${formName}`}>
+      <Modal.Header closeButton>
+        <Modal.Title
+          id="oauth2-sso-modal-lg"
+          children={<FormattedMessage id="edit-france-connect-authentication-method" />}
+        />
+      </Modal.Header>
+      <Modal.Body>
+        <h4>
+          <FormattedMessage id="Configuration" />
+        </h4>
+        <FormattedMessage id="environment" tagName="p" />
+        <Field
+          id={`${formName}_environment`}
+          name="environment"
+          type="radio-buttons"
+          required
+          component={component}>
+          <ToggleButton
+            value="TESTING"
+            onClick={() => dispatch(change(formName, 'environment', 'TESTING'))}>
+            <FormattedMessage id="integration" />
+          </ToggleButton>
+          <ToggleButton
+            value="PRODUCTION"
+            onClick={() => dispatch(change(formName, 'environment', 'PRODUCTION'))}>
+            <FormattedMessage id="production" />
+          </ToggleButton>
+        </Field>
+        <Field
+          id={`${formName}_clientId`}
+          name="clientId"
+          type="text"
+          required
+          component={component}
+          label={<FormattedMessage id="client-id" />}
+        />
+        <Field
+          id={`${formName}_secret`}
+          name="secret"
+          type="text"
+          required
+          component={component}
+          label={<FormattedMessage id="secret" />}
+        />
+        <Field
+          id={`${formName}_redirectUri`}
+          name="redirectUri"
+          disabled
+          required
+          type="text"
+          component={component}
+          label={<FormattedMessage id="callback-url" />}
+        />
+        <Field
+          id={`${formName}_logoutUrl`}
+          name="logoutUrl"
+          disabled
+          required
+          type="text"
+          component={component}
+          label={<FormattedMessage id="logout-url" />}
+        />
+      </Modal.Body>
+      <Modal.Footer>
+        <AlertForm
+          valid={valid}
+          invalid={invalid && !pristine}
+          submitSucceeded={submitSucceeded}
+          submitFailed={submitFailed}
+          submitting={submitting}
+        />
+        <CloseButton onClose={onClose} />
+        <Button
+          type="submit"
+          id={`${formName}_submit`}
+          bsStyle="primary"
+          disabled={pristine || invalid || submitting}>
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+        </Button>
+      </Modal.Footer>
+    </form>
+  </Modal>
+);
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   return {

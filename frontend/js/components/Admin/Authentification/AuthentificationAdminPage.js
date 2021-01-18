@@ -28,29 +28,25 @@ const component = ({
   return <Loader />;
 };
 
-export class AuthentificationAdminPage extends React.Component<{}> {
-  render() {
-    return (
-      <>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query AuthentificationAdminPageQuery {
-              shieldAdminForm {
-                ...AuthentificationAdminPageContent_shieldAdminForm
-              }
-              ssoConfigurations {
-                ...AuthentificationAdminPageContent_ssoConfigurations
-              }
-            }
-          `}
-          variables={{}}
-          render={component}
-        />
-        <SSOByPassAuthForm />
-      </>
-    );
-  }
-}
+export const AuthentificationAdminPage = () => (
+  <>
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query AuthentificationAdminPageQuery {
+          shieldAdminForm {
+            ...AuthentificationAdminPageContent_shieldAdminForm
+          }
+          ssoConfigurations {
+            ...AuthentificationAdminPageContent_ssoConfigurations
+          }
+        }
+      `}
+      variables={{}}
+      render={component}
+    />
+    <SSOByPassAuthForm />
+  </>
+);
 
 export default AuthentificationAdminPage;

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import type { RelayPaginationProp } from 'react-relay';
 import { createPaginationContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
@@ -15,60 +15,48 @@ type RelayProps = {|
   +user: UserCommentsPaginated_user,
 |};
 
-type State = {|
-  +loading: boolean,
-|};
-
 type Props = {|
   ...RelayProps,
 |};
 
-export class UserCommentsPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
+export const UserCommentsPaginated = ({ user, relay }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-  handleLoadMore = () => {
-    const { relay } = this.props;
-    this.setState({ loading: true });
+  const handleLoadMore = () => {
+    setLoading(true);
     relay.loadMore(COMMENT_PAGINATION, () => {
-      this.setState({ loading: false });
+      setLoading(false);
     });
   };
 
-  render() {
-    const { user, relay } = this.props;
-    const { loading } = this.state;
-
-    if (!user.comments.edges || user.comments.edges.length === 0) {
-      return null;
-    }
-
-    return (
-      <>
-        <ul className="media-list">
-          {user.comments.edges &&
-            user.comments.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map((node, key) => <ProfileComment key={key} comment={node} />)}
-        </ul>
-        {relay.hasMore() && (
-          <div className="text-center">
-            {loading ? (
-              <Loader />
-            ) : (
-              <Button bsStyle="default" onClick={this.handleLoadMore}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </div>
-        )}
-      </>
-    );
+  if (!user.comments.edges || user.comments.edges.length === 0) {
+    return null;
   }
-}
+
+  return (
+    <>
+      <ul className="media-list">
+        {user.comments.edges &&
+          user.comments.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map((node, key) => <ProfileComment key={key} comment={node} />)}
+      </ul>
+      {relay.hasMore() && (
+        <div className="text-center">
+          {loading ? (
+            <Loader />
+          ) : (
+            <Button bsStyle="default" onClick={handleLoadMore}>
+              <FormattedMessage id="global.more" />
+            </Button>
+          )}
+        </div>
+      )}
+    </>
+  );
+};
 
 export default createPaginationContainer(
   UserCommentsPaginated,

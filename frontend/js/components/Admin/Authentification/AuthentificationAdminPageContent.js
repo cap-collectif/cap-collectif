@@ -11,19 +11,13 @@ type Props = {|
   +ssoConfigurations: AuthentificationAdminPageContent_ssoConfigurations,
 |};
 
-export class AuthentificationAdminPageContent extends React.Component<Props> {
-  render() {
-    const { shieldAdminForm, ssoConfigurations } = this.props;
-
-    return (
-      <>
-        <ShieldAdminForm shieldAdminForm={shieldAdminForm} />
-        {/* $FlowFixMe TODO fix the props */}
-        <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />
-      </>
-    );
-  }
-}
+export const AuthentificationAdminPageContent = ({ shieldAdminForm, ssoConfigurations }: Props) => (
+  <>
+    <ShieldAdminForm shieldAdminForm={shieldAdminForm} />
+    {/* $FlowFixMe TODO fix the props */}
+    <ListSSOConfiguration ssoConfigurations={ssoConfigurations} />
+  </>
+);
 
 export default createFragmentContainer(AuthentificationAdminPageContent, {
   shieldAdminForm: graphql`

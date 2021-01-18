@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { reduxForm, Field, submit, SubmissionError, clearSubmitErrors } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
@@ -24,10 +24,6 @@ type Props = {|
   form: string,
   dispatch: Dispatch,
 |};
-
-type LocalState = {
-  showModal: boolean,
-};
 
 const onSubmit = (
   values: FormValidValues,
@@ -78,87 +74,87 @@ const validate = ({ body }: FormValues) => {
   return errors;
 };
 
-export class ArgumentCreate extends React.Component<Props, LocalState> {
-  state = { showModal: false };
+export const ArgumentCreate = ({
+  user,
+  argumentable,
+  type,
+  dispatch,
+  form,
+  submitting,
+  error,
+}: Props) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  openModal = () => {
-    this.setState({ showModal: true });
+  const openModal = () => {
+    setShowModal(true);
   };
 
-  closeModal = () => {
-    this.setState({ showModal: false });
+  const closeModal = () => {
+    setShowModal(false);
   };
 
-  render() {
-    const { user, argumentable, type, dispatch, form, submitting, error } = this.props;
-    const { showModal } = this.state;
-    const disabled = !argumentable.contribuable || !user;
-    return (
-      <div className="opinion__body box">
-        {argumentable.step && (
-          <RequirementsFormModal
-            step={argumentable.step}
-            handleClose={this.closeModal}
-            show={showModal}
+  const disabled = !argumentable.contribuable || !user;
+  return (
+    <div className="opinion__body box">
+      {argumentable.step && (
+        <RequirementsFormModal step={argumentable.step} handleClose={closeModal} show={showModal} />
+      )}
+      <div className="opinion__data">
+        <form id={`argument-form--${type}`}>
+          {error && (
+            <Alert
+              bsStyle="warning"
+              onDismiss={() => {
+                dispatch(clearSubmitErrors(form));
+              }}>
+              {error === 'publication-limit-reached' ? (
+                <div>
+                  <h4>
+                    <strong>
+                      <FormattedMessage id="publication-limit-reached" />
+                    </strong>
+                  </h4>
+                  <FormattedMessage id="publication-limit-reached-argument-content" />
+                </div>
+              ) : (
+                <FormattedHTMLMessage id="global.error.server.form" />
+              )}
+            </Alert>
+          )}
+          <Field
+            name="body"
+            component={component}
+            id={`arguments-body-${type}`}
+            type="textarea"
+            rows={2}
+            label={<FormattedMessage id={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`} />}
+            placeholder={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`}
+            labelClassName="sr-only"
+            disabled={disabled}
           />
-        )}
-        <div className="opinion__data">
-          <form id={`argument-form--${type}`}>
-            {error && (
-              <Alert
-                bsStyle="warning"
-                onDismiss={() => {
-                  dispatch(clearSubmitErrors(form));
-                }}>
-                {error === 'publication-limit-reached' ? (
-                  <div>
-                    <h4>
-                      <strong>
-                        <FormattedMessage id="publication-limit-reached" />
-                      </strong>
-                    </h4>
-                    <FormattedMessage id="publication-limit-reached-argument-content" />
-                  </div>
-                ) : (
-                  <FormattedHTMLMessage id="global.error.server.form" />
-                )}
-              </Alert>
-            )}
-            <Field
-              name="body"
-              component={component}
-              id={`arguments-body-${type}`}
-              type="textarea"
-              rows={2}
-              label={<FormattedMessage id={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`} />}
-              placeholder={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`}
-              labelClassName="sr-only"
-              disabled={disabled}
-            />
-            {!disabled && (
-              <Button
-                disabled={submitting}
-                onClick={() => {
-                  if (
-                    argumentable.step &&
-                    argumentable.step.requirements &&
-                    !argumentable.step.requirements.viewerMeetsTheRequirements
-                  ) {
-                    this.openModal();
-                    return;
-                  }
-                  dispatch(submit(form));
-                }}
-                bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.publish'} />
-              </Button>
-            )}
-          </form>
-        </div>
+          {!disabled && (
+            <Button
+              disabled={submitting}
+              onClick={() => {
+                if (
+                  argumentable.step &&
+                  argumentable.step.requirements &&
+                  !argumentable.step.requirements.viewerMeetsTheRequirements
+                ) {
+                  openModal();
+                  return;
+                }
+                dispatch(submit(form));
+              }}
+              bsStyle="primary">
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.publish'} />
+            </Button>
+          )}
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   user: state.user.user,

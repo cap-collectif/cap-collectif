@@ -13,48 +13,44 @@ type Props = {
   enabled?: boolean,
 };
 
-export class VisibilityBox extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-    enabled: false,
-  };
+export const VisibilityBox = ({ user, children, enabled }: Props) => {
+  if (!enabled) {
+    return children;
+  }
 
-  render() {
-    const { user, children, enabled } = this.props;
-
-    if (!enabled) {
-      return children;
-    }
-
-    if (enabled && !user) {
-      return (
-        <Jumbotron className={{ 'p--centered': true }}>
-          <p>
-            <FormattedMessage id="proposal.private.show_login" />
-          </p>
-          <p>
-            <LoginButton bsStyle="primary" />
-          </p>
-        </Jumbotron>
-      );
-    }
-
-    const rootClasses = classNames({ PrivateList: true });
-    const boxClasses = classNames({ PrivateList__box: true });
-
+  if (enabled && !user) {
     return (
-      <div className={rootClasses}>
-        <p id="privateInfo">
-          <i className="glyphicon glyphicon-lock" />{' '}
-          <strong>
-            <FormattedMessage id="global.private" />
-          </strong>
+      <Jumbotron className={{ 'p--centered': true }}>
+        <p>
+          <FormattedMessage id="proposal.private.show_login" />
         </p>
-        <div className={boxClasses}>{children}</div>
-      </div>
+        <p>
+          <LoginButton bsStyle="primary" />
+        </p>
+      </Jumbotron>
     );
   }
-}
+
+  const rootClasses = classNames({ PrivateList: true });
+  const boxClasses = classNames({ PrivateList__box: true });
+
+  return (
+    <div className={rootClasses}>
+      <p id="privateInfo">
+        <i className="glyphicon glyphicon-lock" />{' '}
+        <strong>
+          <FormattedMessage id="global.private" />
+        </strong>
+      </p>
+      <div className={boxClasses}>{children}</div>
+    </div>
+  );
+};
+
+VisibilityBox.defaultProps = {
+  user: null,
+  enabled: false,
+};
 
 const mapStateToProps = (state: State) => ({
   user: state.user.user,

@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
@@ -13,55 +13,45 @@ type Props = {
   paginate: boolean,
 };
 
-type State = {
-  loading: boolean,
-};
+export const ProjectListViewPaginated = ({ relay, query, limit, paginate }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-export class ProjectListViewPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
-  render() {
-    const { relay, query, limit, paginate } = this.props;
-    const { loading } = this.state;
-    if (query.projects && query.projects.edges) {
-      if (query.projects.edges.length > 0) {
-        return (
-          <div>
-            <div className="d-flex flex-wrap">
-              {query.projects.edges
-                .filter(Boolean)
-                .map(edge => edge.node)
-                .filter(Boolean)
-                .map((node, index) => (
-                  <ProjectPreview key={index} project={node} />
-                ))}
-            </div>
-            {paginate && relay.hasMore() && (
-              <Button
-                className="see-more-projects-button ml-15"
-                disabled={loading}
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(limit, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id="see-more-projects" />
-              </Button>
-            )}
+  if (query.projects && query.projects.edges) {
+    if (query.projects.edges.length > 0) {
+      return (
+        <div>
+          <div className="d-flex flex-wrap">
+            {query.projects.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map((node, index) => (
+                <ProjectPreview key={index} project={node} />
+              ))}
           </div>
-        );
-      }
+          {paginate && relay.hasMore() && (
+            <Button
+              className="see-more-projects-button ml-15"
+              disabled={loading}
+              onClick={() => {
+                setLoading(true);
+                relay.loadMore(limit, () => {
+                  setLoading(false);
+                });
+              }}>
+              <FormattedMessage id="see-more-projects" />
+            </Button>
+          )}
+        </div>
+      );
     }
-    return (
-      <React.Fragment>
-        <FormattedMessage id="project.none" />
-      </React.Fragment>
-    );
   }
-}
+  return (
+    <React.Fragment>
+      <FormattedMessage id="project.none" />
+    </React.Fragment>
+  );
+};
 
 export default createPaginationContainer(
   ProjectListViewPaginated,

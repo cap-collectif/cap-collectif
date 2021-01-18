@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
@@ -17,55 +17,44 @@ type Props = {
   voteList: VoteListProfile_voteList,
 };
 
-type State = {
-  loading: boolean,
-};
+export const VoteListProfile = ({ voteList, relay }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-export class VoteListProfile extends Component<Props, State> {
-  state = {
-    loading: false,
-  };
+  const handleLoadMore = () => {
+    setLoading(true);
 
-  handleLoadMore = () => {
-    this.setState({ loading: true });
-    const { relay } = this.props;
     relay.loadMore(VOTE_PAGINATION, () => {
-      this.setState({ loading: false });
+      setLoading(false);
     });
   };
 
-  render() {
-    const { voteList, relay } = this.props;
-    const { loading } = this.state;
-
-    if (voteList.votes.totalCount === 0) {
-      return null;
-    }
-
-    return (
-      <ListGroup bsClass="media-list" componentClass="ul">
-        {voteList.votes.edges
-          ?.filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          .map(vote => (
-            <VoteItem vote={vote} key={vote.id} />
-          ))}
-        {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
-            {loading ? (
-              <Loader />
-            ) : (
-              <Button bsStyle="link" onClick={this.handleLoadMore}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </ListGroupItem>
-        )}
-      </ListGroup>
-    );
+  if (voteList.votes.totalCount === 0) {
+    return null;
   }
-}
+
+  return (
+    <ListGroup bsClass="media-list" componentClass="ul">
+      {voteList.votes.edges
+        ?.filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map(vote => (
+          <VoteItem vote={vote} key={vote.id} />
+        ))}
+      {relay.hasMore() && (
+        <ListGroupItem style={{ textAlign: 'center' }}>
+          {loading ? (
+            <Loader />
+          ) : (
+            <Button bsStyle="link" onClick={handleLoadMore}>
+              <FormattedMessage id="global.more" />
+            </Button>
+          )}
+        </ListGroupItem>
+      )}
+    </ListGroup>
+  );
+};
 
 export default createPaginationContainer(
   VoteListProfile,
