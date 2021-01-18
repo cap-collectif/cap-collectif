@@ -47,6 +47,7 @@ class VoteSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -63,6 +64,7 @@ class VoteSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -79,6 +81,7 @@ class VoteSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -98,6 +101,7 @@ class VoteSearch extends Search
         $agg->setField('value')->setSize(Search::BIG_INT_VALUE);
         $query->addAggregation($agg);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
 
         return $this->index->search($query);
     }
@@ -115,6 +119,7 @@ class VoteSearch extends Search
         $agg->setField('value')->setSize(Search::BIG_INT_VALUE);
         $query->addAggregation($agg);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
 
         return $this->index->search($query);
     }
@@ -218,6 +223,7 @@ class VoteSearch extends Search
 
             $searchQuery = $this->index->createSearch($query);
             $this->addObjectTypeFilter($query, $this->type);
+            $query->setTrackTotalHits(true);
             $searchQuery->setQuery($query);
             $globalQuery->addSearch($searchQuery);
         }

@@ -97,6 +97,7 @@ class EventSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
         $ids = array_map(static function (Result $result) {
@@ -121,6 +122,7 @@ class EventSearch extends Search
 
         $query = new Query($boolQuery);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
         $authorIds = array_map(function (Result $result) {

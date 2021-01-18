@@ -69,6 +69,7 @@ class ResponseSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
@@ -94,6 +95,7 @@ class ResponseSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
@@ -147,6 +149,7 @@ class ResponseSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
@@ -167,6 +170,7 @@ class ResponseSearch extends Search
         $agg->setField('textValue.tag')->setSize($size);
         $query->addAggregation($agg);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
 
         return $this->index->search($query);
     }

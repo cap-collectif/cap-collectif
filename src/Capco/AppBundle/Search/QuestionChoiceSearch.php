@@ -44,6 +44,7 @@ class QuestionChoiceSearch extends Search
             if ($random && $isRandomQuestionChoices) {
                 $query = $this->getRandomSortedQuery($boolQuery, $seed);
                 $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
+                $query->setTrackTotalHits(true);
                 $this->addObjectTypeFilter($query, $this->type);
             } else {
                 $query = new Query();
@@ -76,6 +77,7 @@ class QuestionChoiceSearch extends Search
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
                     $query->setMinScore(0.1);
                 }
+                $query->setTrackTotalHits(true);
                 $this->addObjectTypeFilter($query, $this->type);
             }
 

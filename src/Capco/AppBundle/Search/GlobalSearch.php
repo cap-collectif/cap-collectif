@@ -61,6 +61,7 @@ class GlobalSearch extends Search
             $this->addObjectTypeFilter($query, $type);
         }
 
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $results = $this->transformer->hybridTransform($resultSet->getResults());
 

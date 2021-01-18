@@ -85,6 +85,7 @@ class OpinionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -128,6 +129,7 @@ class OpinionSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
         return [

@@ -95,6 +95,7 @@ class ProjectSearch extends Search
             ->setSize($limit);
 
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
 
@@ -109,6 +110,7 @@ class ProjectSearch extends Search
         $query = new Query();
         $query->setSource(['contributionsCount', 'visibility']);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query, $this->projectRepo->count([]));
         $totalCount = array_sum(
             array_map(static function (Result $result) {

@@ -81,6 +81,7 @@ class VersionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
 
         $cursors = $this->getCursors($response);

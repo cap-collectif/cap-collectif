@@ -73,6 +73,7 @@ class UserSearch extends Search
             $query->setFrom(($page - 1) * $pagination)->setSize($pagination);
         }
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
         return [
@@ -106,6 +107,7 @@ class UserSearch extends Search
 
         $query->addSort($this->getSort($orderBy));
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -154,6 +156,7 @@ class UserSearch extends Search
 
         $realQuery = Query::create($query);
         $this->addObjectTypeFilter($realQuery);
+        $realQuery->setTrackTotalHits(true);
         $resultSet = $this->index->search($realQuery);
         $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
 
@@ -184,6 +187,7 @@ class UserSearch extends Search
 
         $realQuery = Query::create($query);
         $this->addObjectTypeFilter($realQuery, $this->type);
+        $realQuery->setTrackTotalHits(true);
         $resultSet = $this->index->search($query, 300);
         $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
 
@@ -324,6 +328,7 @@ class UserSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
@@ -364,6 +369,7 @@ class UserSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id']);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
@@ -396,6 +402,7 @@ class UserSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 
@@ -423,6 +430,7 @@ class UserSearch extends Search
             ->setSize($limit)
             ->setSource(['id']);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
         return [

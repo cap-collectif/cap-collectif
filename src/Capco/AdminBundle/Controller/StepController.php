@@ -37,15 +37,16 @@ class StepController extends CRUDController
                 'proposalForm.id' => $project
                     ->getFirstStep()
                     ->getProposalForm()
-                    ->getId()
+                    ->getId(),
             ])
         );
-
+        $boolQuery->addFilter(
+            new Term(['objectType' => ['value' => Proposal::getElasticsearchTypeName()]])
+        );
         $query = new Query($boolQuery);
+        $query->setTrackTotalHits(true);
         $query->setSource(['id', 'title']);
-        $results = $this->get(Indexer::class)
-            ->getType(Proposal::getElasticsearchTypeName())
-            ->search($query);
+        $results = $this->get(Indexer::class)->search($query);
 
         $items = array_map(function ($result) {
             return ['id' => $result->getData()['id'], 'label' => $result->getData()['title']];
@@ -54,7 +55,7 @@ class StepController extends CRUDController
         return new JsonResponse([
             'status' => 'OK',
             'more' => false,
-            'items' => $items
+            'items' => $items,
         ]);
     }
 }

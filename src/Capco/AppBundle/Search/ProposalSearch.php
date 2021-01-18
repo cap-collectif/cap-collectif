@@ -81,6 +81,7 @@ class ProposalSearch extends Search
 
         $query = new Query($boolQuery);
         $this->applyCursor($query, $cursor);
+        $query->setTrackTotalHits(true);
         $query->setSource(['id'])->setSize($limit);
 
         $stepid = $providedFilters['step'];
@@ -99,6 +100,7 @@ class ProposalSearch extends Search
             ]);
         }
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $ids = [];
         $cursors = [];
@@ -176,6 +178,7 @@ class ProposalSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
         $ids = [];
@@ -309,6 +312,7 @@ class ProposalSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
         $cursors = $this->getCursors($resultSet);
 

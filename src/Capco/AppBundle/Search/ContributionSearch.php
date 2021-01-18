@@ -78,6 +78,7 @@ class ContributionSearch extends Search
                     ->setSize(Search::BIG_INT_VALUE)
             );
         }
+        $query->setTrackTotalHits(true);
 
         return $this->index->search($query);
     }
@@ -138,6 +139,7 @@ class ContributionSearch extends Search
             }
 
             $query = new Query($boolQuery);
+            $query->setTrackTotalHits(true);
 
             $order = [
                 $this->getSortField($field) => ['order' => $direction],
@@ -252,6 +254,7 @@ class ContributionSearch extends Search
         $query = $this->createSortedQuery($order, $boolQuery, $seed);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         if (0 === $limit && null === $cursor) {
             return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
@@ -284,6 +287,7 @@ class ContributionSearch extends Search
         $query = $this->createSortedQuery($order, $boolQuery, $seed);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         if (0 === $limit && null === $cursor) {
             return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
@@ -327,6 +331,7 @@ class ContributionSearch extends Search
         }
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
 
         if (0 === $limit && null === $cursor) {
