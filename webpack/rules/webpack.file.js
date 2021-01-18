@@ -8,7 +8,14 @@ function getRulesConf() {
         {
           test: /\.(woff|woff2|ttf|eot|svg)$/,
           exclude: [webpackConfig.frontendDir, `${webpackConfig.outputDir}/svg`],
-          use: 'url-loader',
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'fonts/[name].[ext]',
+              },
+            },
+          ],
         },
         {
           test: /\.(png|jpe?g|gif|swf|zip|ico|otf|pdf)$/,
