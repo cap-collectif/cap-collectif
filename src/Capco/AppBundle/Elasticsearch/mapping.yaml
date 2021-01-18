@@ -123,6 +123,10 @@ mappings:
         project: *Project
         step: *Step
         author: *Author
+        argument:
+            type: object
+            properties:
+                id: { type: keyword }
         consultation: &Consultation
             type: object
             properties:

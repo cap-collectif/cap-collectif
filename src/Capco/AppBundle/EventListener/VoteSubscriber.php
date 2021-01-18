@@ -44,18 +44,18 @@ class VoteSubscriber implements EventSubscriberInterface
             $opinion->decreaseVotesCount($event->getPrevious());
         }
     }
-
+    
     public function onAbstractVoteChanged(AbstractVoteChangedEvent $event)
     {
         $vote = $event->getVote();
         $action = $event->getAction();
         $entity = $vote->getRelated();
 
-        if ('remove' === $action) {
+        if ('remove' === $action && method_exists($entity, 'decrementVotesCount')) {
             $entity->decrementVotesCount();
         }
 
-        if ('add' === $action) {
+        if ('add' === $action && method_exists($entity, 'incrementVotesCount')) {
             $entity->incrementVotesCount();
         }
     }

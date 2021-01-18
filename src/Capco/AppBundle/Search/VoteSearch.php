@@ -3,9 +3,11 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
@@ -21,13 +23,18 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class VoteSearch extends Search
 {
     private AbstractVoteRepository $abstractVoteRepository;
+    private ArgumentVoteRepository $argumentVoteRepository;
 
-    public function __construct(Index $index, AbstractVoteRepository $abstractVoteRepository)
-    {
+    public function __construct(
+        Index $index,
+        AbstractVoteRepository $abstractVoteRepository,
+        ArgumentVoteRepository $argumentVoteRepository
+    ) {
         parent::__construct($index);
         $this->type = 'vote';
         $this->index = $index;
         $this->abstractVoteRepository = $abstractVoteRepository;
+        $this->argumentVoteRepository = $argumentVoteRepository;
     }
 
     public function getVotesByAuthorViewerCanSee(
@@ -183,6 +190,33 @@ class VoteSearch extends Search
         }
 
         return $results;
+    }
+
+    public function searchArgumentVotes(
+        Argument $argument,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = new BoolQuery();
+        $boolQuery->addFilter(new Term(['argument.id' => $argument->getId()]));
+        $boolQuery->addFilter(new Term(['published' => true]));
+        $boolQuery->addFilter(new Term(['isAccounted' => true]));
+
+        $query = new Query($boolQuery);
+        if ($limit) {
+            $query->setSize($limit + 1);
+        }
+        $this->applyCursor($query, $cursor);
+
+        $searchQuery = $this->index->createSearch($query);
+        $this->addObjectTypeFilter($query, $this->type);
+        $searchQuery->setQuery($query);
+
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
+        $cursors = $this->getCursors($response);
+
+        return $this->getData($cursors, $response);
     }
 
     private function proposalVotesQuery(array $keys)

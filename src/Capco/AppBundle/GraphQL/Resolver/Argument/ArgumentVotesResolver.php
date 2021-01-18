@@ -2,33 +2,45 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ArgumentVotesResolver implements ResolverInterface
 {
-    private $repo;
+    private VoteSearch $voteSearch;
 
-    public function __construct(ArgumentVoteRepository $repo)
+    public function __construct(VoteSearch $voteSearch)
     {
-        $this->repo = $repo;
+        $this->voteSearch = $voteSearch;
     }
 
-    public function __invoke(Argument $argument, Arg $args): ConnectionInterface
+    public function __invoke(Argument $argument, ?Arg $args = null): ConnectionInterface
     {
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($argument) {
-            return $this->repo
-                ->getByContribution($argument, $limit, $offset)
-                ->getIterator()
-                ->getArrayCopy();
+        if (null === $args) {
+            $args = new Arg([
+                'first' => 0,
+            ]);
+        }
+
+        $totalCount = 0;
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $argument,
+            &$totalCount
+        ) {
+            $response = $this->voteSearch->searchArgumentVotes($argument, $limit, $cursor);
+            $totalCount = $response->getTotalCount();
+
+            return $response;
         });
 
-        $totalCount = $this->repo->countByContribution($argument);
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
 
-        return $paginator->auto($args, $totalCount);
+        return $connection;
     }
 }

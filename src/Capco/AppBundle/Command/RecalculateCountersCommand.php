@@ -79,15 +79,6 @@ class RecalculateCountersCommand extends Command
 
         // TODO fix this performance issue
         $this->executeQuery(
-            'UPDATE CapcoAppBundle:Argument a set a.votesCount = (
-          select count(DISTINCT av.id)
-          from CapcoAppBundle:ArgumentVote av
-          where av.argument = a AND av.published = 1 group by av.argument
-        )'
-        );
-
-        // TODO fix this performance issue
-        $this->executeQuery(
             'UPDATE CapcoAppBundle:Source s set s.votesCount = (
           select count(DISTINCT sv.id)
           from CapcoAppBundle:SourceVote sv
@@ -109,7 +100,7 @@ class RecalculateCountersCommand extends Command
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount = (
           select count(DISTINCT o.id)
-          from CapcoAppBundle:Opinion o 
+          from CapcoAppBundle:Opinion o
           INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
           WHERE oc.step = cs AND o.published = 1 AND o.trashedAt IS NULL group by oc.step
         )'
@@ -127,9 +118,9 @@ class RecalculateCountersCommand extends Command
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionVersionsCount = (
           select count(DISTINCT ov.id)
-          from CapcoAppBundle:OpinionVersion ov 
+          from CapcoAppBundle:OpinionVersion ov
           INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc 
+          INNER JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
           WHERE oc.step = cs AND ov.published = 1 AND ov.trashedAt IS NOT NULL AND o.published = 1 group by oc.step
         )'
         );

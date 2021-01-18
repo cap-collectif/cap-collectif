@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\ArgumentVote;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Doctrine\DBAL\Exception\DriverException;
@@ -19,24 +21,27 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class AddArgumentVoteMutation implements MutationInterface
 {
-    private $em;
-    private $argumentRepo;
-    private $argumentVoteRepo;
-    private $redisStorageHelper;
-    private $stepRequirementsResolver;
+    private EntityManagerInterface $em;
+    private ArgumentRepository $argumentRepo;
+    private ArgumentVoteRepository $argumentVoteRepo;
+    private RedisStorageHelper $redisStorageHelper;
+    private StepRequirementsResolver $stepRequirementsResolver;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         ArgumentRepository $argumentRepo,
         ArgumentVoteRepository $argumentVoteRepo,
         RedisStorageHelper $redisStorageHelper,
-        StepRequirementsResolver $stepRequirementsResolver
+        StepRequirementsResolver $stepRequirementsResolver,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->argumentRepo = $argumentRepo;
         $this->argumentVoteRepo = $argumentVoteRepo;
         $this->redisStorageHelper = $redisStorageHelper;
         $this->stepRequirementsResolver = $stepRequirementsResolver;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -55,7 +60,7 @@ class AddArgumentVoteMutation implements MutationInterface
 
         $previousVote = $this->argumentVoteRepo->findOneBy([
             'user' => $viewer,
-            'argument' => $argument
+            'argument' => $argument,
         ]);
 
         if ($previousVote) {
@@ -77,6 +82,8 @@ class AddArgumentVoteMutation implements MutationInterface
             $this->em->persist($vote);
             $this->em->flush();
             $this->redisStorageHelper->recomputeUserCounters($viewer);
+            $this->indexer->index(ClassUtils::getClass($vote), $vote->getId());
+            $this->indexer->finishBulk();
         } catch (DriverException $e) {
             // Updating arguments votes count failed
             throw new UserError($e->getMessage());
@@ -86,7 +93,7 @@ class AddArgumentVoteMutation implements MutationInterface
 
         return [
             'voteEdge' => $edge,
-            'viewer' => $viewer
+            'viewer' => $viewer,
         ];
     }
 }

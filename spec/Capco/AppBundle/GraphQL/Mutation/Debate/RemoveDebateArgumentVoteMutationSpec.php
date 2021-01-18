@@ -46,7 +46,6 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('debateArgumentId')->willReturn($debateArgumentId);
         $globalIdResolver->resolve($debateArgumentId, $viewer)->willReturn($debateArgument);
         $debateArgument->setVotes(new ArrayCollection([$debateArgument]));
-        $debateArgument->setVotesCount(1);
         $debateArgument->isPublished()->willReturn(true);
         $debateArgumentVote->getId()->willReturn($debateArgumentVoteId);
 
@@ -59,7 +58,6 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
             ->willReturn($debateArgumentVote);
 
         $debateArgument->removeVote($debateArgumentVote)->shouldBeCalled();
-        $debateArgument->decrementVotesCount()->shouldBeCalled();
         $em->remove($debateArgumentVote)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 

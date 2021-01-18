@@ -87,9 +87,9 @@ abstract class AbstractVote implements
     HasAuthorInterface,
     IndexableInterface
 {
-    use TimestampableTrait;
     use IdTrait;
     use PublishableTrait;
+    use TimestampableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")
@@ -198,6 +198,7 @@ abstract class AbstractVote implements
             'ElasticsearchVoteNestedProject',
             'ElasticsearchVoteNestedAuthor',
             'ElasticsearchVoteNestedStep',
+            'ElasticsearchVoteNestedArgument',
         ];
     }
 }

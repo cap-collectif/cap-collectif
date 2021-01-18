@@ -1,6 +1,8 @@
 {% set opinion = argument.linkedOpinion %}
 {% set project = opinion.step.project %}
 {% set opinionType = opinion.opinionType %}
+{% set nbVotes = argumentVotesResolver.__invoke(argument).totalCount %}
+
 <li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="arg-{{ argument.id }}">
     <div class="opinion__body  box">
         {% if argument.Author is not null %}
@@ -44,10 +46,10 @@
         </p>
         {% if not argument.isTrashed() %}
             <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'global.ok'|trans({}, 'CapcoAppBundle') }}</button>
-            <span class="opinion__votes-nb">{{ argument.votesCount }}</span>
+            <span class="opinion__votes-nb">{{ nbVotes }}</span>
         {% else %}
             <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'global.ok'|trans({}, 'CapcoAppBundle') }}</button>
-            <span class="opinion__votes-nb">{{ argument.votesCount }}</span>
+            <span class="opinion__votes-nb">{{ nbVotes }}</span>
         {% endif %}
     </div>
 </li>

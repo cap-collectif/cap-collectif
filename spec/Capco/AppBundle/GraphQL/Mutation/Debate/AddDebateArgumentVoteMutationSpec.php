@@ -44,7 +44,6 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('debateArgumentId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->setVotes(new ArrayCollection());
-        $debateArgument->setVotesCount(0);
         $debateArgument->isPublished()->willReturn(true);
 
         $authorizationChecker
@@ -52,7 +51,6 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
             ->willReturn(true);
 
         $debateArgument->addVote(Argument::type(DebateArgumentVote::class))->shouldBeCalled();
-        $debateArgument->incrementVotesCount()->shouldBeCalled();
         $em->persist(Argument::type(DebateArgumentVote::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
@@ -102,27 +100,4 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
             'debateArgumentVote' => null,
         ]);
     }
-
-//    public function it_fails_if_already_voted(
-//        GlobalIdResolver $globalIdResolver,
-//        AuthorizationCheckerInterface $authorizationChecker,
-//        Arg $input,
-//        DebateArgument $debateArgument,
-//        User $viewer
-//    ) {
-//        $id = 'debateArgumentId';
-//        $input->offsetGet('debateArgumentId')->willReturn($id);
-//        $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
-//        $debateArgument->isPublished()->willReturn(true);
-//
-//        $authorizationChecker
-//            ->isGranted(DebateArgumentVoter::PARTICIPATE, $debateArgument)
-//            ->willReturn(true);
-//
-//        $this->__invoke($input, $viewer)->shouldBe([
-//            'errorCode' => 'ALREADY_VOTED',
-//            'debateArgument' => null,
-//            'debateArgumentVote' => null,
-//        ]);
-//    }
 }

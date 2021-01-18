@@ -11,9 +11,10 @@ trait VotableOkTrait
 {
     /**
      * @ORM\Column(name="votes_count", type="integer")
+     * TODO replace by call to ES. Still used in comment, source and DebateArgument
      */
-    protected $votesCount = 0;
-    private $votes; // Dynamic Relation
+    protected int $votesCount = 0;
+    private Collection $votes; // Dynamic Relation
 
     public function resetVotes()
     {
@@ -25,12 +26,12 @@ trait VotableOkTrait
         return $this;
     }
 
-    public function userHasVote(User $user = null): bool
+    public function userHasVote(?User $user = null): bool
     {
-        return $this->userGetVote($user) !== null;
+        return null !== $this->userGetVote($user);
     }
 
-    public function userGetVote(User $user = null): ?AbstractVote
+    public function userGetVote(?User $user = null): ?AbstractVote
     {
         if (null !== $user) {
             foreach ($this->votes as $vote) {
@@ -39,6 +40,7 @@ trait VotableOkTrait
                 }
             }
         }
+
         return null;
     }
 
@@ -50,6 +52,7 @@ trait VotableOkTrait
     public function setVotes(Collection $votes)
     {
         $this->votes = $votes;
+        $this->votesCount = $votes->count();
 
         return $this;
     }
@@ -58,6 +61,7 @@ trait VotableOkTrait
     {
         if (!$this->votes->contains($vote)) {
             $this->votes->add($vote);
+            ++$this->votesCount;
         }
 
         return $this;
@@ -67,36 +71,25 @@ trait VotableOkTrait
     {
         if ($this->votes->contains($vote)) {
             $this->votes->removeElement($vote);
-        }
-
-        return $this;
-    }
-
-    public function incrementVotesCount()
-    {
-        ++$this->votesCount;
-
-        return $this;
-    }
-
-    public function decrementVotesCount()
-    {
-        if ($this->votesCount > 0) {
             --$this->votesCount;
         }
 
         return $this;
     }
 
-    public function getVotesCount()
+    /**
+     * @deprecated use a resolver instead
+     */
+    public function getVotesCount(): int
     {
         return $this->votesCount;
     }
 
-    public function setVotesCount($votesCount)
+    /**
+     * @deprecated do not use it
+     */
+    public function setVotesCount(int $votesCount)
     {
-        $this->votesCount = $votesCount;
-
-        return $this;
+        return $this->votesCount = $votesCount;
     }
 }

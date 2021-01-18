@@ -63,7 +63,6 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
         $vote->setDebateArgument($debateArgument);
         $vote->setUser($viewer);
         $debateArgument->addVote($vote);
-        $debateArgument->incrementVotesCount();
 
         return $vote;
     }

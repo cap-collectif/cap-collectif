@@ -88,7 +88,6 @@ class ArgumentAdmin extends AbstractAdmin
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
-            ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('published', null, ['label' => 'global.published'])
             ->add('trashedStatus', null, ['label' => 'global.is_trashed'])

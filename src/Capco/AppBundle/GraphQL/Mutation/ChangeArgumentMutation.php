@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Argument;
+use Doctrine\Common\Util\ClassUtils;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
@@ -19,24 +22,27 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class ChangeArgumentMutation implements MutationInterface
 {
-    private $em;
-    private $argumentRepo;
-    private $formFactory;
-    private $redisStorage;
-    private $publisher;
+    private EntityManagerInterface $em;
+    private ArgumentRepository $argumentRepo;
+    private FormFactoryInterface $formFactory;
+    private RedisStorageHelper $redisStorage;
+    private Publisher $publisher;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ArgumentRepository $argumentRepo,
         RedisStorageHelper $redisStorage,
-        Publisher $publisher
+        Publisher $publisher,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->argumentRepo = $argumentRepo;
         $this->redisStorage = $redisStorage;
         $this->publisher = $publisher;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Arg $input, User $user): array
@@ -67,9 +73,10 @@ class ChangeArgumentMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $argument->resetVotes();
+        $argument = $this->resetVotes($argument);
 
         $this->em->flush();
+        $this->indexer->finishBulk();
 
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::ARGUMENT_UPDATE,
@@ -77,5 +84,15 @@ class ChangeArgumentMutation implements MutationInterface
         );
 
         return ['argument' => $argument];
+    }
+
+    private function resetVotes(Argument $argument): Argument
+    {
+        foreach ($argument->getVotes() as $vote) {
+            $this->indexer->remove(ClassUtils::getClass($vote), $vote->getId());
+        }
+        $argument->resetVotes();
+
+        return $argument;
     }
 }

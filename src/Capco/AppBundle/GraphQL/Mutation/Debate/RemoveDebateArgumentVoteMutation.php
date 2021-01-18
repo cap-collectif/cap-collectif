@@ -54,6 +54,5 @@ class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutatio
         DebateArgumentVote $debateArgumentVote
     ): void {
         $debateArgument->removeVote($debateArgumentVote);
-        $debateArgument->decrementVotesCount();
     }
 }
