@@ -13,95 +13,159 @@
     line-height: 32px;
 }
 
-/*client fonts */
+/* Client fonts */
 @font-face {
   font-family: "montserrat";
-  src:url("../../../public/fonts/Montserrat-Bold.ttf") format("truetype");
-  font-weight: bold;
   font-style: normal;
+  font-weight: bold;
+    src: local(''),
+    url('../../../public/fonts/Montserrat/Montserrat-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Montserrat/Montserrat-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
   font-family: "montserrat";
-  src: url("../../../public/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-style: normal;
   font-weight: normal;
-  font-style: normal;
+    src: local(''),
+    url('../../../public/fonts/Montserrat/Montserrat-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Montserrat/Montserrat-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
+// Regular
 @font-face {
-  font-family: "openSans";
-  src: url("../../../public/fonts/openSans/OpenSans-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "openSans";
+    font-style: normal;
+    font-weight: normal;
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
+// Semi bold
 @font-face {
-  font-family: "openSans";
-  src: url("../../../public/fonts/openSans/OpenSans-Semibold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
+    font-family: "openSans";
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-SemiBold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-SemiBold.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
+// Bold
 @font-face {
   font-family: "openSans";
-  src: url("../../../public/fonts/openSans/OpenSans-Bold.ttf") format("truetype");
+  font-style: normal;
   font-weight: bold;
-  font-style: normal;
+  src: url("../../../public/fonts/openSans/OpenSans-Bold.ttf");
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
+// Italic
 @font-face {
   font-family: "openSans";
-  src: url("../../../public/fonts/openSans/OpenSans-Italic.ttf") format("truetype");
-  font-weight: normal;
   font-style: italic;
+  font-weight: normal;
+    src: url("../../../public/fonts/openSans/OpenSans-Italic.ttf");
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-Italic.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Italic.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Italic.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
+// Light
 @font-face {
   font-family: "openSans";
-  src: url("../../../public/fonts/openSans/OpenSans-Light.ttf") format("truetype");
+  font-style: normal;
   font-weight: 100;
-  font-style: normal;
+    src: url("../../../public/fonts/openSans/OpenSans-Light.ttf");
+    src: local(''),
+    url('../../../public/fonts/openSans/OpenSans-Light.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Light.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/openSans/OpenSans-Light.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../../public/fonts/Ubuntu/Ubuntu-Regular.ttf");
+    src: local(''),
+    url('../../../public/fonts/Ubuntu/Ubuntu-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
   font-family: "Ubuntu";
-  src: url("../../../public/fonts/Ubuntu-Regular.ttf") format("truetype");
-  font-weight: normal;
   font-style: normal;
-}
-
-@font-face {
-  font-family: "Ubuntu";
-  src: url("../../../public/fonts/Ubuntu-Medium.ttf") format("truetype");
   font-weight: 600;
-  font-style: normal;
+    src: url("../../../public/fonts/Ubuntu/Ubuntu-SemiBold.ttf");
+    src: local(''),
+    url('../../../public/fonts/Ubuntu/Ubuntu-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-SemiBold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-SemiBold.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
   font-family: "Ubuntu";
-  src: url("../../../public/fonts/Ubuntu-Light.ttf") format("truetype");
+  font-style: normal;
   font-weight: 100;
-  font-style: normal;
+    src: url("../../../public/fonts/Ubuntu/Ubuntu-Light.ttf");
+    src: local(''),
+    url('../../../public/fonts/Ubuntu/Ubuntu-Light.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-Light.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-Light.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
   font-family: "Ubuntu";
-  src: url("../../../public/fonts/Ubuntu-Bold.ttf") format("truetype");
+  font-style: normal;
   font-weight: bold;
-  font-style: normal;
+    src: url("../../../public/fonts/Ubuntu/Ubuntu-Bold.ttf");
+    src: local(''),
+    url('../../../public/fonts/Ubuntu/Ubuntu-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Ubuntu/Ubuntu-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
-  font-family: "afternightregular";
-  src: url("../../../public/fonts/after_night_pl-webfont.woff2") format('woff2'),
-       url("../../../public/fonts/after_night_pl-webfont.woff") format('woff');
-  font-weight: normal;
-  font-style: normal;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../../public/fonts/Roboto/Roboto-Regular.ttf");
+    src: local(''),
+    url('../../../public/fonts/Roboto/Roboto-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Roboto/Roboto-Regular.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Roboto/Roboto-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
-  font-family: "Phosphate";
-  src: url("../../../public/fonts/Phosphate.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 600;
+    src: url("../../../public/fonts/Roboto/Roboto-SemiBold.ttf");
+    src: local(''),
+    url('../../../public/fonts/Roboto/Roboto-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Roboto/Roboto-SemiBold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Roboto/Roboto-SemiBold.ttf') format('truetype'); /* Safari, Android, iOS */
 }
+
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    src: url("../../../public/fonts/Roboto/Roboto-Bold.ttf");
+    src: local(''),
+    url('../../../public/fonts/Roboto/Roboto-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../../public/fonts/Roboto/Roboto-Bold.woff') format('woff'), /* Modern Browsers */
+    url('../../../public/fonts/Roboto/Roboto-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+

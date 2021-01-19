@@ -12,7 +12,8 @@ function getRulesConf() {
             {
               loader: 'file-loader',
               options: {
-                name: 'fonts/[name].[ext]',
+                emitFile: false, // Don't create a file
+                name: '/fonts/[folder]/[name].[ext]',
               },
             },
           ],
