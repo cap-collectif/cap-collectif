@@ -86,15 +86,6 @@ class RecalculateCountersCommand extends Command
         )'
         );
 
-        // TODO fix this performance issue
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Comment c set c.votesCount = (
-          select count(DISTINCT cv.id)
-          from CapcoAppBundle:CommentVote cv
-          where cv.comment = c AND cv.published = 1 group by cv.comment
-        )'
-        );
-
         // ************************ Consultation step counters ***********************************************
 
         $this->executeQuery(

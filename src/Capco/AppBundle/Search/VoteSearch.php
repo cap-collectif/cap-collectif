@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
@@ -197,8 +198,25 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
+        return $this->searchEntityVotes($argument->getId(), 'argument.id', $limit, $cursor);
+    }
+
+    public function searchCommentVotes(
+        Comment $comment,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        return $this->searchEntityVotes($comment->getId(), 'comment.id', $limit, $cursor);
+    }
+
+    private function searchEntityVotes(
+        string $entityId,
+        string $entityIdTerm,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
-        $boolQuery->addFilter(new Term(['argument.id' => $argument->getId()]));
+        $boolQuery->addFilter(new Term([$entityIdTerm => $entityId]));
         $boolQuery->addFilter(new Term(['published' => true]));
         $boolQuery->addFilter(new Term(['isAccounted' => true]));
 

@@ -2,49 +2,38 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Repository\CommentVoteRepository;
+use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Psr\Log\LoggerInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class CommentVotesResolver implements ResolverInterface
 {
-    private $logger;
-    private $repository;
+    private VoteSearch $voteSearch;
 
-    public function __construct(CommentVoteRepository $repository, LoggerInterface $logger)
+    public function __construct(VoteSearch $voteSearch)
     {
-        $this->logger = $logger;
-        $this->repository = $repository;
+        $this->voteSearch = $voteSearch;
     }
 
-    public function __invoke(Comment $comment, Argument $args): Connection
+    public function __invoke(Comment $comment, Argument $args): ConnectionInterface
     {
-        try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($comment, $args) {
-                $field = $args->offsetGet('orderBy')['field'];
-                $direction = $args->offsetGet('orderBy')['direction'];
+        $totalCount = 0;
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $comment,
+            &$totalCount
+        ) {
+            $response = $this->voteSearch->searchCommentVotes($comment, $limit, $cursor);
+            $totalCount = $response->getTotalCount();
 
-                return $this->repository->getAllByComment(
-                    $comment,
-                    $offset,
-                    $limit,
-                    $field,
-                    $direction
-                )
-                    ->getIterator()
-                    ->getArrayCopy();
-            });
+            return $response;
+        });
 
-            $totalCount = $this->repository->countAllByComment($comment);
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
 
-            return $paginator->auto($args, $totalCount);
-        } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-            throw new \RuntimeException('Could not find proposals for selection step');
-        }
+        return $connection;
     }
 }
