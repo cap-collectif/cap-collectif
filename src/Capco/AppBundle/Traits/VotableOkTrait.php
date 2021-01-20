@@ -5,15 +5,9 @@ namespace Capco\AppBundle\Traits;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 trait VotableOkTrait
 {
-    /**
-     * @ORM\Column(name="votes_count", type="integer")
-     * TODO replace by call to ES. Still used in comment, source and DebateArgument
-     */
-    protected int $votesCount = 0;
     private Collection $votes; // Dynamic Relation
 
     public function resetVotes()
@@ -21,7 +15,6 @@ trait VotableOkTrait
         foreach ($this->votes as $vote) {
             $this->removeVote($vote);
         }
-        $this->votesCount = 0;
 
         return $this;
     }
@@ -52,7 +45,6 @@ trait VotableOkTrait
     public function setVotes(Collection $votes)
     {
         $this->votes = $votes;
-        $this->votesCount = $votes->count();
 
         return $this;
     }
@@ -61,7 +53,6 @@ trait VotableOkTrait
     {
         if (!$this->votes->contains($vote)) {
             $this->votes->add($vote);
-            ++$this->votesCount;
         }
 
         return $this;
@@ -71,7 +62,6 @@ trait VotableOkTrait
     {
         if ($this->votes->contains($vote)) {
             $this->votes->removeElement($vote);
-            --$this->votesCount;
         }
 
         return $this;
@@ -82,14 +72,6 @@ trait VotableOkTrait
      */
     public function getVotesCount(): int
     {
-        return $this->votesCount;
-    }
-
-    /**
-     * @deprecated do not use it
-     */
-    public function setVotesCount(int $votesCount)
-    {
-        return $this->votesCount = $votesCount;
+        return $this->votes->count();
     }
 }

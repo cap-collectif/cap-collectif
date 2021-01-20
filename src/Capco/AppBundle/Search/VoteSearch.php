@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
@@ -207,6 +208,14 @@ class VoteSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         return $this->searchEntityVotes($comment->getId(), 'comment.id', $limit, $cursor);
+    }
+
+    public function searchSourceVotes(
+        Source $source,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        return $this->searchEntityVotes($source->getId(), 'source.id', $limit, $cursor);
     }
 
     private function searchEntityVotes(

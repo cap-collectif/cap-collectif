@@ -90,7 +90,6 @@ class SourceAdmin extends AbstractAdmin
             ->add('opinion', null, ['label' => 'global.proposal'])
             ->add('category', null, ['label' => 'global.type'])
             ->add('link', null, ['label' => 'global.link'])
-            ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('published', null, ['label' => 'global.published'])

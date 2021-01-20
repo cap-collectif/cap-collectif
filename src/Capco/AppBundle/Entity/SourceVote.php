@@ -76,7 +76,8 @@ class SourceVote extends AbstractVote
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchNestedSource',
-            'ElasticsearchVoteNestedConsultation'
+            'ElasticsearchVoteNestedSource',
+            'ElasticsearchVoteNestedConsultation',
         ]);
     }
 }

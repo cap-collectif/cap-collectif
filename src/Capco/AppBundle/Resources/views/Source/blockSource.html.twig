@@ -1,3 +1,5 @@
+{% set nbVotes = sourceVotesResolver.__invoke(source).totalCount %}
+
 <li class="opinion opinion--source media box {% if source.author.isVip %}bg-vip{% endif %}" id="source{{ source.id }}">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': source.Author, 'link_classes': 'pull-left media-middle', format: 'avatar_source'} only %}
     <div class="media-body">
@@ -26,10 +28,10 @@
         </p>
         {% if not source.isTrashed() %}
             <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
-            <span class="nb-votes">{{ source.votesCount }}</span>
+            <span class="nb-votes">{{ nbVotes }}</span>
         {% else %}
             <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
-            <span class="nb-votes">{{ source.votesCount }}</span>
+            <span class="nb-votes">{{ nbVotes }}</span>
         {% endif %}
     </div>
 </li>

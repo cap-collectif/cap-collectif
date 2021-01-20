@@ -75,17 +75,6 @@ class RecalculateCountersCommand extends Command
             true
         );
 
-        // ************************************ Votes counters **********************************************
-
-        // TODO fix this performance issue
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Source s set s.votesCount = (
-          select count(DISTINCT sv.id)
-          from CapcoAppBundle:SourceVote sv
-          where sv.source = s AND sv.published = 1 group by sv.source
-        )'
-        );
-
         // ************************ Consultation step counters ***********************************************
 
         $this->executeQuery(

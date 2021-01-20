@@ -80,7 +80,6 @@ class CommentAdmin extends AbstractAdmin
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
-            ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('published', null, ['label' => 'global.published'])
             ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
