@@ -32,11 +32,11 @@ class Post implements
     Translatable
 {
     use CommentableTrait;
-    use UuidTrait;
     use CustomCodeTrait;
-    use TimestampableTrait;
     use SonataTranslatableTrait;
+    use TimestampableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean")
@@ -301,7 +301,7 @@ class Post implements
         return $this->isPublished && $now > $this->publishedAt;
     }
 
-    public function setMedia(Media $media = null): self
+    public function setMedia(?Media $media = null): self
     {
         $this->media = $media;
 
@@ -449,6 +449,11 @@ class Post implements
                 $project->removePost($this);
             }
         }
+    }
+
+    public function isAuthor(User $user): bool
+    {
+        return $this->getAuthors()->contains($user);
     }
 
     public function isIndexable(): bool

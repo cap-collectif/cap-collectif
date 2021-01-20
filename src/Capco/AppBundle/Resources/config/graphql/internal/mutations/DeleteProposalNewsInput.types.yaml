@@ -1,0 +1,8 @@
+DeleteProposalNewsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type to DeleteProposalNewsInput'
+        fields:
+            postId:
+                type: 'ID!'
+                description: 'The Node ID of the proposal news.'

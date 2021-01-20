@@ -1,0 +1,111 @@
+<?php
+
+namespace Capco\AppBundle\GraphQL\Mutation;
+
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostTranslation;
+use Capco\AppBundle\Form\ProposalPostType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+class UpdateProposalNewsMutation implements MutationInterface
+{
+    public const POST_NOT_FOUND = 'POST_NOT_FOUND';
+    public const ACCESS_DENIED = 'ACCESS_DENIED';
+    public const INVALID_DATA = 'INVALID_DATA';
+
+    private EntityManagerInterface $em;
+    private GlobalIdResolver $globalIdResolver;
+    private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
+    private TranslatorInterface $translator;
+    private LocaleRepository $localeRepository;
+
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        GlobalIdResolver $globalIdResolver,
+        LoggerInterface $logger,
+        TranslatorInterface $translator,
+        LocaleRepository $localeRepository
+    ) {
+        $this->em = $em;
+        $this->formFactory = $formFactory;
+        $this->globalIdResolver = $globalIdResolver;
+        $this->logger = $logger;
+        $this->translator = $translator;
+        $this->localeRepository = $localeRepository;
+    }
+
+    public function __invoke(Arg $input, User $viewer): array
+    {
+        try {
+            $proposalPost = $this->getPost($input, $viewer);
+            $proposalPost = $this->updateProposalNews($input, $proposalPost);
+
+            return ['proposalPost' => $proposalPost, 'errorCode' => null];
+        } catch (UserError $error) {
+            return ['errorCode' => $error->getMessage()];
+        }
+    }
+
+    private function getPost(Arg $input, User $viewer): Post
+    {
+        $proposalPostGlobalId = $input->offsetGet('postId');
+        $proposalPost = $this->globalIdResolver->resolve($proposalPostGlobalId, $viewer);
+        if (!$proposalPost || !$proposalPost instanceof Post) {
+            $this->logger->error('Unknown post with id: ' . $proposalPostGlobalId);
+
+            throw new UserError(self::POST_NOT_FOUND);
+        }
+        if (!$proposalPost->isAuthor($viewer) && !$viewer->isAdmin()) {
+            throw new UserError(self::ACCESS_DENIED);
+        }
+
+        return $proposalPost;
+    }
+
+    private function updateProposalNews(Arg $input, Post $proposalPost): Post
+    {
+        $values = $input->getArrayCopy();
+        unset($values['postId']);
+        $form = $this->formFactory->create(ProposalPostType::class, $proposalPost);
+        $form->submit($values, false);
+
+        if (!$form->isValid()) {
+            throw new UserError(self::INVALID_DATA);
+        }
+
+        LocaleUtils::indexTranslations($values);
+
+        $translations = $proposalPost->getTranslations();
+        /** @var PostTranslation $translation */
+        foreach ($translations as $translation) {
+            if (isset($values['translations'][$translation->getLocale()]['title'])) {
+                $translation->setTitle($values['translations'][$translation->getLocale()]['title']);
+            }
+            if (isset($values['translations'][$translation->getLocale()]['body'])) {
+                $translation->setBody($values['translations'][$translation->getLocale()]['body']);
+            }
+            if (isset($values['translations'][$translation->getLocale()]['abstract'])) {
+                $translation->setAbstract(
+                    $values['translations'][$translation->getLocale()]['abstract']
+                );
+            }
+        }
+
+        $this->em->flush();
+
+        return $proposalPost;
+    }
+}

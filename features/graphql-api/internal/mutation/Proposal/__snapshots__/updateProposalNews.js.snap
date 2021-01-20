@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|update proposal news fail to update proposal news, cause of user not is not author 1`] = `
+Object {
+  "updateProposalNews": Object {
+    "errorCode": "ACCESS_DENIED",
+    "proposalPost": null,
+  },
+}
+`;
+
+exports[`Internal|update proposal news fail to update proposal news, cause post not found 1`] = `
+Object {
+  "updateProposalNews": Object {
+    "errorCode": "POST_NOT_FOUND",
+    "proposalPost": null,
+  },
+}
+`;
+
+exports[`Internal|update proposal news update proposal news 1`] = `
+Object {
+  "updateProposalNews": Object {
+    "errorCode": null,
+    "proposalPost": Object {
+      "id": "UG9zdDpwb3N0MTc=",
+      "title": "Un nouveau titre",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "very good that, I validate",
+          "title": "User's Post on his own proposal",
+        },
+        Object {
+          "abstract": "un résumé",
+          "body": "This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.",
+          "title": "Un nouveau titre",
+        },
+      ],
+    },
+  },
+}
+`;

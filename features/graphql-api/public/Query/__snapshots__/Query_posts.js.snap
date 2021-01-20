@@ -24,6 +24,66 @@ Object {
       ],
     },
     Object {
+      "enTitle": "User's Post on his own proposal",
+      "frTitle": "Post d'un utilisateur sur sa proposition",
+      "id": "UG9zdDpwb3N0MTc=",
+      "title": "Post d'un utilisateur sur sa proposition",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "very good that, I validate",
+          "locale": "EN_GB",
+          "title": "User's Post on his own proposal",
+        },
+        Object {
+          "abstract": null,
+          "body": "Très bien tout ça je valide",
+          "locale": "FR_FR",
+          "title": "Post d'un utilisateur sur sa proposition",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Welcomatic's Post on his own proposal",
+      "frTitle": "Post de welcomatic sur sa proposition",
+      "id": "UG9zdDpwb3N0MTg=",
+      "title": "Post de welcomatic sur sa proposition",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "very good that, I validate",
+          "locale": "EN_GB",
+          "title": "Welcomatic's Post on his own proposal",
+        },
+        Object {
+          "abstract": null,
+          "body": "Très bien tout ça je valide",
+          "locale": "FR_FR",
+          "title": "Post de welcomatic sur sa proposition",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "user4's Post on his own proposal",
+      "frTitle": "Post de user4 sur sa proposition",
+      "id": "UG9zdDpwb3N0MTk=",
+      "title": "Post de user4 sur sa proposition",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "very good that, I validate",
+          "locale": "EN_GB",
+          "title": "user4's Post on his own proposal",
+        },
+        Object {
+          "abstract": null,
+          "body": "Très bien tout ça je valide",
+          "locale": "FR_FR",
+          "title": "Post de user4 sur sa proposition",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

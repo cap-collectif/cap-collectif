@@ -46,6 +46,17 @@ Scenario: Admin wants to get the related content of the first proposal
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "news": {
           "edges": [
+             {
+              "node":{
+                "id": @string@,
+                "title": @string@,
+                 "relatedContent":[
+                    {
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx"
+                    }
+                 ]
+              }
+             },
             {
               "node": {
                 "id": @string@,
@@ -111,6 +122,17 @@ Scenario: Admin wants to get only themes on the related content of the first pro
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "news": {
           "edges": [
+             {
+                "node":{
+                    "id": @string@,
+                    "title": @string@,
+                   "relatedContent":[
+                      {
+
+                      }
+                   ]
+                }
+             },
             {
               "node": {
                 "id": @string@,
@@ -173,6 +195,17 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "news": {
           "edges": [
+           {
+              "node":{
+                "id": @string@,
+                "title": @string@,
+                 "relatedContent":[
+                    {
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx"
+                    }
+                 ]
+              }
+           },
             {
               "node": {
                 "id": @string@,

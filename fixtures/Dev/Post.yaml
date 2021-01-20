@@ -38,16 +38,45 @@ Capco\AppBundle\Entity\Post:
             - '@user1'
         themes: ['@theme1', '@theme2']
         media: null
-
     post16:
         id: post16
         isPublished: true
         createdAt: <(new \DateTime('2019-01-01 00:00:00'))>
-        publishedAt: <(new \DateTime('2019-01-01 00:00:00'))>
-        updatedAt: <(new \DateTime('2019-01-01 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
         Authors:
             - '@user4'
         themes: ['@theme1', '@theme2']
         media: null
         projects: ['@p19']
         proposals: ['@proposal1']
+    post17:
+        id: post17
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@user5'
+        media: null
+        proposals: ['@proposal2']
+    post18:
+        id: post18
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@userWelcomattic'
+        media: null
+        proposals: ['@proposal1']
+    post19:
+        id: post19
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@user4'
+        media: null
+        proposals: ['@proposal2']

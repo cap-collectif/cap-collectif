@@ -22,12 +22,12 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class ContactFormMutation implements MutationInterface
 {
-    private $em;
-    private $logger;
-    private $formFactory;
-    private $contactNotifier;
-    private $globalIdResolver;
-    private $localeRepository;
+    private EntityManagerInterface $em;
+    private LoggerInterface $logger;
+    private FormFactoryInterface $formFactory;
+    private ContactNotifier $contactNotifier;
+    private GlobalIdResolver $globalIdResolver;
+    private LocaleRepository $localeRepository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -77,11 +77,11 @@ class ContactFormMutation implements MutationInterface
         $this->em->flush();
 
         return [
-            'contactForm' => $contactForm
+            'contactForm' => $contactForm,
         ];
     }
 
-    public function add(Argument $input)
+    public function add(Argument $input): array
     {
         $arguments = $input->getArrayCopy();
 
@@ -93,6 +93,7 @@ class ContactFormMutation implements MutationInterface
         $form->submit($arguments, false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
         foreach ($this->localeRepository->findEnabledLocalesCodes() as $availableLocale) {
@@ -107,7 +108,9 @@ class ContactFormMutation implements MutationInterface
                     $translation->setBody($arguments['translations'][$availableLocale]['body']);
                 }
                 if (isset($arguments['translations'][$availableLocale]['confidentiality'])) {
-                    $translation->setConfidentiality($arguments['translations'][$availableLocale]['confidentiality']);
+                    $translation->setConfidentiality(
+                        $arguments['translations'][$availableLocale]['confidentiality']
+                    );
                 }
             }
         }
@@ -116,11 +119,11 @@ class ContactFormMutation implements MutationInterface
         $this->em->flush();
 
         return [
-            'contactForm' => $contactForm
+            'contactForm' => $contactForm,
         ];
     }
 
-    public function update(Argument $input, ?User $viewer)
+    public function update(Argument $input, ?User $viewer): array
     {
         $arguments = $input->getArrayCopy();
         $id = $arguments['id'];
@@ -152,11 +155,11 @@ class ContactFormMutation implements MutationInterface
         }
 
         return [
-            'contactForm' => $contactForm
+            'contactForm' => $contactForm,
         ];
     }
 
-    public function remove(Argument $input, ?User $viewer)
+    public function remove(Argument $input, ?User $viewer): array
     {
         $arguments = $input->getArrayCopy();
         $id = $arguments['id'];
@@ -179,7 +182,7 @@ class ContactFormMutation implements MutationInterface
         }
 
         return [
-            'deletedContactFormId' => $arguments['id']
+            'deletedContactFormId' => $arguments['id'],
         ];
     }
 }

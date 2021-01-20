@@ -55,9 +55,9 @@ use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 
 class GlobalIdResolver
 {
-    private $container;
-    private $logger;
-    private $entityManager;
+    private ContainerInterface $container;
+    private LoggerInterface $logger;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         ContainerInterface $container,

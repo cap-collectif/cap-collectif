@@ -9,6 +9,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         endAt: <identity((new \DateTime('2024-01-01')))>
         voteType: 0
         defaultStatus: '@status1'
+        allowAuthorsToAddNews: true
     collectStepWithVote:
         id: collectStepWithVote
         title: Dépôt avec vote

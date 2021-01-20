@@ -1,0 +1,10 @@
+DeleteProposalNewsPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            postId:
+                type: 'ID'
+                description: 'The Node ID of the proposal news.'
+            errorCode:
+                type: 'ProposalNewsErrorCode'
+                description: 'An unsuccessful mutation will return an error message'

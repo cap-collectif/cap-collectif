@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|add proposal news add proposal news 1`] = `
+Object {
+  "addProposalNews": Object {
+    "errorCode": null,
+    "proposalPost": Object {
+      "title": "Look at Washington DC",
+      "translations": Array [
+        Object {
+          "locale": "FR_FR",
+          "title": "Look at Washington DC",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|add proposal news fail to add proposal news, cause of project dont allow news 1`] = `
+Object {
+  "addProposalNews": Object {
+    "errorCode": "PROPOSAL_DOESNT_ALLOW_NEWS",
+    "proposalPost": null,
+  },
+}
+`;
+
+exports[`Internal|add proposal news fail to add proposal news, cause of user not available 1`] = `
+Object {
+  "addProposalNews": Object {
+    "errorCode": "ACCESS_DENIED",
+    "proposalPost": null,
+  },
+}
+`;
+
+exports[`Internal|add proposal news fail to add proposal news, cause proposal not found 1`] = `
+Object {
+  "addProposalNews": Object {
+    "errorCode": "PROPOSAL_NOT_FOUND",
+    "proposalPost": null,
+  },
+}
+`;

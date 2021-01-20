@@ -1,0 +1,13 @@
+AddProposalNewsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of ProposalNews'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The Node ID of the proposal to add news.'
+            translations:
+                type: '[InternalNewsTranslationInput!]!'
+            media:
+                type: 'ID'
+                description: 'Current media id'

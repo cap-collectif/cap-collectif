@@ -7,7 +7,7 @@ use Capco\UserBundle\Entity\User;
 
 class ProposalHelper
 {
-    protected $globalIdResolver;
+    protected GlobalIdResolver $globalIdResolver;
 
     public function __construct(GlobalIdResolver $globalIdResolver)
     {

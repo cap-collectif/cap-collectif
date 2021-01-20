@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
+use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -20,6 +21,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
+    use AllowAuthorsToAddNewsTrait;
     use TimelessStepTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;

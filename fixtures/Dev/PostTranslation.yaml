@@ -57,3 +57,33 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post16'
         title: Private project post for admin@test.com
         body: Very good, approved by la street
+    postFr17:
+        locale: fr-FR
+        translatable: '@post17'
+        title: Post d'un utilisateur sur sa proposition
+        body: Très bien tout ça je valide
+    postFr18:
+        locale: fr-FR
+        translatable: '@post18'
+        title: Post de welcomatic sur sa proposition
+        body: Très bien tout ça je valide
+    postFr19:
+        locale: fr-FR
+        translatable: '@post19'
+        title: Post de user4 sur sa proposition
+        body: Très bien tout ça je valide
+    postEn17:
+        locale: en-GB
+        translatable: '@post17'
+        title: User's Post on his own proposal
+        body: 'very good that, I validate'
+    postEn18:
+        locale: en-GB
+        translatable: '@post18'
+        title: Welcomatic's Post on his own proposal
+        body: 'very good that, I validate'
+    postEn19:
+        locale: en-GB
+        translatable: '@post19'
+        title: user4's Post on his own proposal
+        body: 'very good that, I validate'

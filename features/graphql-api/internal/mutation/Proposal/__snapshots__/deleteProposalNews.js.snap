@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|delete proposal news delete proposal news 1`] = `
+Object {
+  "deleteProposalNews": Object {
+    "errorCode": null,
+    "postId": "UG9zdDpwb3N0MTc=",
+  },
+}
+`;
+
+exports[`Internal|delete proposal news fail to delete proposal news, cause of user not is not author 1`] = `
+Object {
+  "deleteProposalNews": Object {
+    "errorCode": "ACCESS_DENIED",
+    "postId": null,
+  },
+}
+`;
+
+exports[`Internal|delete proposal news fail to delete proposal news, cause post not found 1`] = `
+Object {
+  "deleteProposalNews": Object {
+    "errorCode": "POST_NOT_FOUND",
+    "postId": null,
+  },
+}
+`;

@@ -1,0 +1,15 @@
+InternalNewsTranslationInput:
+    type: input-object
+    config:
+        name: NewsTranslationInput
+        fields:
+            title:
+                type: 'String!'
+            body:
+                type: 'HTML!'
+            abstract:
+                type: 'String'
+                description: 'abstract of proposal news'
+            locale:
+                type: 'TranslationLocale!'
+                description: 'the locale of the translation'

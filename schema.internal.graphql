@@ -386,6 +386,25 @@ type AddOpinionVotePayload {
   clientMutationId: String
 }
 
+input AddProposalNewsInput {
+  """The Node ID of the proposal to add news."""
+  proposalId: ID!
+  translations: [NewsTranslationInput!]!
+
+  """Current media id"""
+  media: ID
+  clientMutationId: String
+}
+
+type AddProposalNewsPayload {
+  """The new post."""
+  proposalPost: Post
+
+  """An unsuccessful mutation will return an error message"""
+  errorCode: ProposalNewsErrorCode
+  clientMutationId: String
+}
+
 input AddProposalVoteInput {
   """The Node ID of the proposal to vote."""
   proposalId: ID!
@@ -4011,6 +4030,21 @@ input DeleteProposalInput {
   clientMutationId: String
 }
 
+input DeleteProposalNewsInput {
+  """The Node ID of the proposal news."""
+  postId: ID!
+  clientMutationId: String
+}
+
+type DeleteProposalNewsPayload {
+  """The Node ID of the proposal news."""
+  postId: ID
+
+  """An unsuccessful mutation will return an error message"""
+  errorCode: ProposalNewsErrorCode
+  clientMutationId: String
+}
+
 type DeleteProposalPayload {
   proposal: Proposal!
   step: CollectStep!
@@ -5923,6 +5957,9 @@ type Mutation {
   report(input: ReportInput!): ReportPayload
   trash(input: TrashInput!): TrashPayload
   untrash(input: UnTrashInput!): UnTrashPayload
+  addProposalNews(input: AddProposalNewsInput!): AddProposalNewsPayload
+  updateProposalNews(input: UpdateProposalNewsInput!): UpdateProposalNewsPayload
+  deleteProposalNews(input: DeleteProposalNewsInput!): DeleteProposalNewsPayload
 }
 
 """A connection to a list of items."""
@@ -5943,6 +5980,17 @@ type NewsEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+input NewsTranslationInput {
+  title: String!
+  body: HTML!
+
+  """abstract of proposal news"""
+  abstract: String
+
+  """the locale of the translation"""
+  locale: TranslationLocale!
 }
 
 """Fetches an object given its ID"""
@@ -8166,6 +8214,24 @@ enum ProposalFormObjectType {
 
   """The proposal form is an Establishment"""
   ESTABLISHMENT
+}
+
+"""Available errors on proposal news mutation"""
+enum ProposalNewsErrorCode {
+  """No proposal match your id"""
+  PROPOSAL_NOT_FOUND
+
+  """ROLE_USER cant add porposal news on this project"""
+  PROPOSAL_DOESNT_ALLOW_NEWS
+
+  """No post match your id"""
+  POST_NOT_FOUND
+
+  """Access denied."""
+  ACCESS_DENIED
+
+  """Invalid data in submitted form ."""
+  INVALID_DATA
 }
 
 """Properties by which proposal connections can be ordered."""
@@ -12812,6 +12878,25 @@ type UpdateProposalFusionPayload {
 
   """The proposals that have been removed from the fusion."""
   removedMergedFrom: [Proposal]!
+  clientMutationId: String
+}
+
+input UpdateProposalNewsInput {
+  """The Node ID of the proposal news."""
+  postId: ID!
+  translations: [NewsTranslationInput!]!
+
+  """Current media id"""
+  media: ID
+  clientMutationId: String
+}
+
+type UpdateProposalNewsPayload {
+  """The post to update."""
+  proposalPost: Post
+
+  """An unsuccessful mutation will return an error message"""
+  errorCode: ProposalNewsErrorCode
   clientMutationId: String
 }
 

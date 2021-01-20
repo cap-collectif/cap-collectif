@@ -36,10 +36,10 @@ abstract class AbstractMessage
         array $subjectVars,
         string $template, // twig or trad key
         array $templateVars,
-        string $senderEmail = null,
-        string $senderName = null,
-        string $replyTo = null,
-        ?string $footerTemplate = null,// twig or trad key
+        ?string $senderEmail = null,
+        ?string $senderName = null,
+        ?string $replyTo = null,
+        ?string $footerTemplate = null, // twig or trad key
         array $footerTemplateVars = []
     ) {
         $this->subject = $subject;
@@ -129,13 +129,18 @@ abstract class AbstractMessage
     final public function addRecipient(
         string $recipientEmail,
         ?string $locale = null,
-        string $recipientName = null,
+        ?string $recipientName = null,
         array $vars = []
     ) {
         //: void
         $key = mb_strtolower($recipientEmail);
 
-        $this->recipients[$key] = new MessageRecipient($recipientEmail, $locale, $recipientName, $vars);
+        $this->recipients[$key] = new MessageRecipient(
+            $recipientEmail,
+            $locale,
+            $recipientName,
+            $vars
+        );
     }
 
     final public function getRecipients(): array
@@ -249,7 +254,7 @@ abstract class AbstractMessage
         return $this->siteUrl ?? '';
     }
 
-    final protected static function escape(string $string): string
+    final public static function escape(string $string): string
     {
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', false);
     }

@@ -1136,3 +1136,24 @@ InternalMutation:
                     inputType: UnTrashInput
                     payloadType: UnTrashPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnTrashMutation", [value, getUser()])'
+            addProposalNews:
+                access: '@=hasRole("ROLE_USER")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddProposalNewsInput
+                    payloadType: AddProposalNewsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalNewsMutation", [value, getUser()])'
+            updateProposalNews:
+                access: '@=hasRole("ROLE_USER")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProposalNewsInput
+                    payloadType: UpdateProposalNewsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalNewsMutation", [value, getUser()])'
+            deleteProposalNews:
+                access: '@=hasRole("ROLE_USER")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteProposalNewsInput
+                    payloadType: DeleteProposalNewsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalNewsMutation", [value, getUser()])'

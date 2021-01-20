@@ -1,0 +1,11 @@
+UpdateProposalNewsPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload type of ProposalNews'
+        fields:
+            proposalPost:
+                type: 'InternalPost'
+                description: 'The post to update.'
+            errorCode:
+                type: 'ProposalNewsErrorCode'
+                description: 'An unsuccessful mutation will return an error message'
