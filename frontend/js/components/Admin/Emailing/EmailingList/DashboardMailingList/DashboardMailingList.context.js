@@ -1,8 +1,13 @@
 // @flow
 import * as React from 'react';
 import { useEffect } from 'react';
-import { type Action, createReducer, type DashboardState } from './DashboardMailingList.reducer';
-import type { Filters, DashboardParameters } from './DashboardMailingList.reducer';
+import {
+  DEFAULT_FILTERS,
+  type DashboardParameters,
+  type Action,
+  createReducer,
+  type DashboardState,
+} from './DashboardMailingList.reducer';
 
 export type DashboardStatus = 'ready' | 'loading';
 
@@ -17,10 +22,6 @@ export type Context = {|
 |};
 
 const DEFAULT_STATUS: DashboardStatus = 'ready';
-
-export const DEFAULT_FILTERS: Filters = {
-  term: null,
-};
 
 export const DashboardMailingListContext = React.createContext<Context>({
   status: DEFAULT_STATUS,

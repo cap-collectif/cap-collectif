@@ -7,7 +7,7 @@ import { submit, Field } from 'redux-form';
 import type { Dispatch } from '../../types';
 import CloseButton from '../Form/CloseButton';
 import renderComponent from '~/components/Form/Field';
-import { formName } from '~/components/User/Profile/AccountForm';
+import { accountForm as formName } from '~/redux/modules/user';
 
 export const passwordForm = 'passwordForm';
 

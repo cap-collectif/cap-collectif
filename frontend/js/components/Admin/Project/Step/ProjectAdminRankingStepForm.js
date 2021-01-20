@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 import component from '~/components/Form/Field';
-import { renderSubSection } from './ProjectAdminStepForm';
+import { renderSubSection } from './ProjectAdminStepForm.utils';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 
 export const ProjectAdminRankingStepForm = () => (

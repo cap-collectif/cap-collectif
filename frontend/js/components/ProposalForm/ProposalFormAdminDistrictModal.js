@@ -32,6 +32,7 @@ type Props = {|
   member: string,
   isCreating: boolean,
   district: ?District,
+  formName: string,
 |};
 
 type ModalState = {
@@ -62,7 +63,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
   }
 
   render() {
-    const { member, show, isCreating, onClose, onSubmit, district } = this.props;
+    const { member, show, isCreating, onClose, onSubmit, district, formName } = this.props;
     const { valid } = this.state;
 
     return (
@@ -80,6 +81,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
         <Modal.Body>
           {/* $FlowFixMe Here we pass the redux form props instead of fragment */}
           <DistrictAdminFieldsConnected
+            formName={formName}
             member={member}
             district={district}
             enableDesignFields

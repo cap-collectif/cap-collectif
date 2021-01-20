@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import AccountForm, { formName as accountForm } from './AccountForm';
+import AccountForm from './AccountForm';
 import type { GlobalState, Dispatch } from '~/types';
 import type { AccountBox_viewer } from '~relay/AccountBox_viewer.graphql';
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
+import { accountForm } from '~/redux/modules/user';
 
 type Props = {|
   viewer: AccountBox_viewer,

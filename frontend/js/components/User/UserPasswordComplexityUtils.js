@@ -10,7 +10,6 @@ import CheckCircle from '../Ui/Icons/CheckCircle';
 import config from '../../config';
 import type { Dispatch, State } from '../../types';
 import environment from '../../createRelayEnvironment';
-import { formName as CHANGE_PASSWORD_FORM_NAME } from './Profile/ChangePasswordForm';
 import Popover from '../Utils/Popover';
 
 type Props = {|
@@ -22,6 +21,8 @@ type Props = {|
   +passwordConditions: { length: boolean, upperLowercase: boolean, digit: boolean },
   +formAsyncErrors: Object,
 |};
+
+export const CHANGE_PASSWORD_FORM_NAME = 'password-form';
 
 const StyleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: inline-block;

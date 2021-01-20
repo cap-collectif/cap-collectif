@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { type IntlShape } from 'react-intl';
 
-import type { GlobalState, FeatureToggles } from '../../../../types';
+import type { GlobalState, FeatureToggles } from '~/types';
 import ProjectsListFilterTypes from './ProjectListFilterTypes';
 import ProjectsListFilterAuthors from './ProjectListFilterAuthors';
 import ProjectsListFilterThemes from './ProjectListFilterThemes';
@@ -13,6 +13,8 @@ import ProjectsListFilterStatus from './ProjectListFilterStatus';
 import ProjectsListFilterDistricts from './ProjectListFilterDistricts';
 import type { ProjectType, ProjectAuthor, ProjectTheme } from './ProjectListFiltersContainer';
 import type { ProjectListFiltersContainerQueryResponse } from '~relay/ProjectListFiltersContainerQuery.graphql';
+
+const formName = 'ProjectListFilters';
 
 type Props = {
   author: ?string,
@@ -30,7 +32,7 @@ type Props = {
 class ProjectListFilters extends React.Component<Props> {
   renderTypeFilter() {
     const { projectTypes } = this.props;
-    return <ProjectsListFilterTypes projectTypes={projectTypes} />;
+    return <ProjectsListFilterTypes projectTypes={projectTypes} formName={formName} />;
   }
 
   renderAuthorsFilter() {
@@ -84,7 +86,6 @@ class ProjectListFilters extends React.Component<Props> {
   }
 }
 
-const formName = 'ProjectListFilters';
 export const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState) => ({

@@ -210,6 +210,7 @@
         "babel-plugin-transform-imports": "^2.0.0",
         "babel-plugin-lodash": "^3.3.4",
         "bootstrap-sass": "^3.4.1",
+        "circular-dependency-plugin": "^5.2.2",
         "classnames": "^2.2.6",
         "color-hash": "^1.0.3",
         "copy-to-clipboard": "^3.3.1",

@@ -4,11 +4,13 @@ import { useEffect } from 'react';
 import {
   type Action,
   createReducer,
+  DEFAULT_FILTERS,
+  getInitialState,
   type DashboardState,
-  type SortValues,
-  ORDER_BY,
+  DEFAULT_STATUS,
+  DEFAULT_SORT,
 } from './DashboardCampaign.reducer';
-import type { Filters, DashboardParameters } from './DashboardCampaign.reducer';
+import type { DashboardParameters } from './DashboardCampaign.reducer';
 
 export type DashboardStatus = 'ready' | 'loading';
 
@@ -21,15 +23,6 @@ export type Context = {|
   +parameters: DashboardParameters,
   +dispatch: Action => void,
 |};
-
-const DEFAULT_STATUS: DashboardStatus = 'ready';
-
-const DEFAULT_SORT: SortValues = ORDER_BY.NEWEST;
-
-export const DEFAULT_FILTERS: Filters = {
-  state: 'ALL',
-  term: null,
-};
 
 export const DashboardCampaignContext = React.createContext<Context>({
   status: DEFAULT_STATUS,
@@ -49,12 +42,6 @@ export const useDashboardCampaignContext = (): Context => {
   }
   return context;
 };
-
-export const getInitialState = (): DashboardState => ({
-  status: DEFAULT_STATUS,
-  sort: DEFAULT_SORT,
-  filters: DEFAULT_FILTERS,
-});
 
 export const DashboardCampaignProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = React.useReducer<DashboardState, Action>(

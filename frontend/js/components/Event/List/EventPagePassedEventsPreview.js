@@ -6,7 +6,6 @@ import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { formName } from '../EventListPageContainer';
 import EventPreview from '../EventPreview/EventPreview';
 import type { Dispatch } from '~/types';
 import type { EventPagePassedEventsPreview_query } from '~relay/EventPagePassedEventsPreview_query.graphql';
@@ -14,6 +13,7 @@ import type { EventPagePassedEventsPreview_query } from '~relay/EventPagePassedE
 type Props = {|
   query: EventPagePassedEventsPreview_query,
   dispatch: Dispatch,
+  formName: string,
 |};
 
 const EventPagePassedEventsPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -28,7 +28,7 @@ const EventPagePassedEventsPreviewContainer: StyledComponent<{}, {}, HTMLDivElem
   }
 `;
 
-export const EventPagePassedEventsPreview = ({ query, dispatch }: Props) =>
+export const EventPagePassedEventsPreview = ({ query, dispatch, formName }: Props) =>
   !query.previewPassedEvents || query.previewPassedEvents.totalCount === 0 ? null : (
     <EventPagePassedEventsPreviewContainer>
       <h4>

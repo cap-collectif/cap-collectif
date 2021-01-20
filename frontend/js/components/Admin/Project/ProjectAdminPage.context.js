@@ -5,14 +5,13 @@ import {
   type Action,
   createReducer,
   type ProjectAdminPageState,
-  type SortValues,
+  DEFAULT_STATUS,
+  DEFAULT_SORT,
+  DEFAULT_FILTERS,
+  getInitialState,
 } from './ProjectAdminPage.reducer';
-import type {
-  Filters,
-  ProjectAdminPageParameters,
-} from '~/components/Admin/Project/ProjectAdminPage.reducer';
-
-export type ProjectAdminPageStatus = 'ready' | 'loading';
+import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.utils';
 
 type ProviderProps = {|
   +children: React.Node,
@@ -25,24 +24,6 @@ export type Context = {|
   +firstCollectStepId: ?string,
   +dispatch: Action => void,
 |};
-
-const DEFAULT_STATUS: ProjectAdminPageStatus = 'ready';
-
-const DEFAULT_SORT: SortValues = 'newest';
-
-export const DEFAULT_FILTERS: Filters = {
-  state: 'PUBLISHED',
-  progressState: 'ALL',
-  category: 'ALL',
-  theme: 'ALL',
-  district: 'ALL',
-  step: null,
-  status: 'ALL',
-  term: null,
-  analysts: [],
-  supervisor: null,
-  decisionMaker: null,
-};
 
 export const ProjectAdminPageContext = React.createContext<Context>({
   status: DEFAULT_STATUS,
@@ -64,17 +45,6 @@ export const useProjectAdminProposalsContext = (): Context => {
   }
   return context;
 };
-
-export const getInitialState = (initialSelectedStep: ?string): ProjectAdminPageState => ({
-  status: DEFAULT_STATUS,
-  sort: DEFAULT_SORT,
-  filters: {
-    ...DEFAULT_FILTERS,
-    step: initialSelectedStep,
-  },
-  filtersOrdered: [...(initialSelectedStep ? [{ id: initialSelectedStep, type: 'step' }] : [])],
-  initialSelectedStep,
-});
 
 export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: ProviderProps) => {
   const [state, dispatch] = React.useReducer<ProjectAdminPageState, Action>(

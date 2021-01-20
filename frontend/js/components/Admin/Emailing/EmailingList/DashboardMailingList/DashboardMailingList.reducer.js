@@ -1,5 +1,4 @@
 // @flow
-import { DEFAULT_FILTERS } from './DashboardMailingList.context';
 import { getFieldsFromUrl } from '~/shared/utils/getFieldsFromUrl';
 
 export type DashboardStatus = 'ready' | 'loading';
@@ -7,6 +6,10 @@ export type DashboardStatus = 'ready' | 'loading';
 export type Filters = {|
   +term: ?string,
 |};
+
+export const DEFAULT_FILTERS: Filters = {
+  term: null,
+};
 
 export type DashboardState = {|
   +status: DashboardStatus,

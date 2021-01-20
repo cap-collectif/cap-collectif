@@ -3,15 +3,15 @@ import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
+import CommentTrashedListPaginated, {
+  TRASHED_COMMENT_PAGINATOR_COUNT,
+} from '../Comment/CommentTrashedListPaginated';
 import type { ProjectTrashCommentQueryResponse } from '~relay/ProjectTrashCommentQuery.graphql';
 
 export type Props = {|
   +projectId: string,
   +isAuthenticated: boolean,
 |};
-
-export const TRASHED_COMMENT_PAGINATOR_COUNT = 20;
 
 export class ProjectTrashComment extends React.Component<Props> {
   render() {

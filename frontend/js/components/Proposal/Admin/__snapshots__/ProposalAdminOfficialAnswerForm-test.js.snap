@@ -4,7 +4,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly with response 1`] 
 <div
   className="mt-20"
 >
-  <ProposalAdminOfficialAnswer__Container>
+  <ProposalAdminstyle__Container>
     <div>
       <h3>
         <FormattedMessage
@@ -69,7 +69,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly with response 1`] 
         type="datetime"
       />
     </ProposalAdminOfficialAnswerForm__Form>
-  </ProposalAdminOfficialAnswer__Container>
+  </ProposalAdminstyle__Container>
   <Connect(SubmitButton)
     bsStyle="primary"
     disabled={true}
@@ -99,7 +99,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly without response 1
 <div
   className="mt-20"
 >
-  <ProposalAdminOfficialAnswer__Container>
+  <ProposalAdminstyle__Container>
     <div>
       <h3>
         <FormattedMessage
@@ -163,7 +163,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly without response 1
         type="datetime"
       />
     </ProposalAdminOfficialAnswerForm__Form>
-  </ProposalAdminOfficialAnswer__Container>
+  </ProposalAdminstyle__Container>
   <Connect(SubmitButton)
     bsStyle="primary"
     disabled={true}

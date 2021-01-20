@@ -5,15 +5,16 @@ import { useIntl, type IntlShape } from 'react-intl';
 import { Field, formValueSelector } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
-
 import type { GlobalState } from '~/types';
 import select from '~/components/Form/Select';
-import { formName, type Locales } from './LocaleAdminForm';
 import type { LocaleAdminSelect_locales } from '~relay/LocaleAdminSelect_locales.graphql';
+
+export type Locales = { [string]: { id: string, isPublished: boolean, isEnabled: boolean } };
 
 type Props = {|
   locales: LocaleAdminSelect_locales,
   currentValues: Locales,
+  formName: string,
 |};
 
 type LocaleOption = {|
@@ -61,7 +62,7 @@ export const LocaleAdminSelect = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState, { formName }: Props) => ({
   currentValues: formValueSelector(formName)(state, 'locales'),
 });
 

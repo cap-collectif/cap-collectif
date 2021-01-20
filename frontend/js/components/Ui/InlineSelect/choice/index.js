@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useKeyboardShortcuts } from '@liinkiing/react-hooks';
 import * as S from './index.style';
-import { useInlineSelect } from '~ui/InlineSelect';
+import { useInlineSelect } from '~ui/InlineSelect/useInlineSelect';
 
 type Props = {|
   +value: string,

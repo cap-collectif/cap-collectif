@@ -6,8 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import { ListGroup, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Comment from './Comment';
-import { TRASHED_COMMENT_PAGINATOR_COUNT } from '../Project/ProjectTrashComment';
 import type { CommentTrashedListPaginated_project } from '~relay/CommentTrashedListPaginated_project.graphql';
+
+export const TRASHED_COMMENT_PAGINATOR_COUNT = 20;
 
 type Props = {|
   +relay: RelayPaginationProp,

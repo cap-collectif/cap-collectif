@@ -7,7 +7,7 @@ import type {
   DeleteEmailingCampaignMutationVariables,
   DeleteEmailingCampaignMutationResponse,
 } from '~relay/DeleteEmailingCampaignMutation.graphql';
-import { createQueryVariables } from '~/components/Admin/Emailing/EmailingCampaign/EmailingCampaignPage';
+import { createQueryVariables } from '~/components/Admin/Emailing/EmailingCampaign/utils';
 import type { DashboardParameters } from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign.reducer';
 
 type Variables = {|

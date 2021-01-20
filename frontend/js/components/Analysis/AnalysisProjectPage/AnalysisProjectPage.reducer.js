@@ -1,7 +1,6 @@
 // @flow
 import type { Uuid } from '~/types';
 import type { AnalysisProjectPageStatus } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
-import { INITIAL_STATE, DEFAULT_FILTERS } from './AnalysisProjectPage.context';
 import {
   getFieldsFromUrl,
   updateQueryUrl,
@@ -28,6 +27,10 @@ export const ORDER_BY: {
 
 export type SortValues = $Values<typeof ORDER_BY>;
 
+export const DEFAULT_SORT: SortValues = ORDER_BY.NEWEST;
+
+export const DEFAULT_STATUS: AnalysisProjectPageStatus = 'ready';
+
 export const STATE: {
   ALL: 'ALL',
   TODO: 'TODO',
@@ -50,6 +53,24 @@ export type Filters = {|
   +decisionMaker: ?Uuid,
   +term: ?string,
 |};
+
+export const DEFAULT_FILTERS: Filters = {
+  state: STATE.TODO,
+  district: 'ALL',
+  category: 'ALL',
+  theme: 'ALL',
+  analysts: [],
+  supervisor: null,
+  decisionMaker: null,
+  term: null,
+};
+
+export const INITIAL_STATE = {
+  status: DEFAULT_STATUS,
+  sort: DEFAULT_SORT,
+  filters: DEFAULT_FILTERS,
+  filtersOrdered: [],
+};
 
 // Filter 'status', 'step' and 'progressState' are for ProjectAdminAnalysis
 export type Filter = {|

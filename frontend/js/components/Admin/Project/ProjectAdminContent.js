@@ -33,6 +33,7 @@ import ProjectAdminContributionsPage, {
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
 import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab';
 import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab';
+import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils';
 
 type Props = {|
   +features: FeatureToggles,
@@ -47,34 +48,6 @@ type Links = Array<{|
   to: string,
   component: any,
 |}>;
-
-// TODO: change when the page is complete
-const getProjectAdminBaseUrl = (projectId: string) => `/admin/alpha/project/${projectId}`;
-
-const PROJECT_ROUTE = {
-  CONTRIBUTIONS: '/contributions',
-  PARTICIPANTS: '/participants',
-  ANALYSIS: '/analysis',
-  CONFIGURATION: '/edit',
-};
-
-export const getProjectAdminPath = (
-  projectId: string,
-  type: $Keys<typeof PROJECT_ROUTE>,
-): string => {
-  switch (type) {
-    case 'CONTRIBUTIONS':
-      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONTRIBUTIONS}`;
-    case 'PARTICIPANTS':
-      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.PARTICIPANTS}`;
-    case 'ANALYSIS':
-      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.ANALYSIS}`;
-    case 'CONFIGURATION':
-      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`;
-    default:
-      return getProjectAdminBaseUrl(projectId);
-  }
-};
 
 const getRouteContributionPath = (
   project: ProjectAdminContent_project,

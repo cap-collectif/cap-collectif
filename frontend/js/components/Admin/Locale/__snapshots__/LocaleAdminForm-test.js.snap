@@ -22,6 +22,7 @@ exports[`<ProjectCreateButton /> renders correctly 1`] = `
     }
   />
   <Relay(Connect(LocaleAdminSelect))
+    formName="local-admin"
     locales={
       Array [
         Object {
@@ -71,6 +72,7 @@ exports[`<ProjectCreateButton /> renders correctly empty 1`] = `
     locales={Array []}
   />
   <Relay(Connect(LocaleAdminSelect))
+    formName="local-admin"
     locales={Array []}
   />
   <Button

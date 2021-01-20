@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableList from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
 import type { ProjectAdminAnalysis_themes } from '~relay/ProjectAdminAnalysis_themes.graphql';
 import DropdownSelect from '~ui/DropdownSelect';

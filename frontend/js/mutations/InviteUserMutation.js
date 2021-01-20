@@ -8,7 +8,8 @@ import type {
   InviteUserMutationVariables,
 } from '~relay/InviteUserMutation.graphql';
 import { CONNECTION_NODES_PER_PAGE } from '~/components/Admin/UserInvite/UserInviteList.relay';
-import { INVITE_USERS_MAX_RESULTS } from '~/components/Admin/UserInvite/Modal/UserInviteModalStepChooseRole';
+
+export const INVITE_USERS_MAX_RESULTS = 100;
 
 const mutation = graphql`
   mutation InviteUserMutation($input: InviteUsersInput!) {

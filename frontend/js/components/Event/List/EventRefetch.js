@@ -23,6 +23,7 @@ type Props = {|
   +isRegistrable: ?string,
   +author: ?{ value: string },
   +orderBy: EventOrder,
+  +formName: string,
 |};
 
 type State = {|
@@ -88,7 +89,7 @@ export class EventRefetch extends React.Component<Props, State> {
   }
 
   render() {
-    const { query } = this.props;
+    const { query, formName } = this.props;
     const { isRefetching, hasRefetchError } = this.state;
 
     if (hasRefetchError) {
@@ -100,7 +101,7 @@ export class EventRefetch extends React.Component<Props, State> {
     }
 
     // $FlowFixMe Flow failed to infer redux's dispatch
-    return <EventListPaginated query={query} />;
+    return <EventListPaginated query={query} formName={formName} />;
   }
 }
 

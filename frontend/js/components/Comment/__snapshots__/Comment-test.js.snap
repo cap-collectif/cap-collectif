@@ -58,7 +58,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -118,7 +118,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
         }
       />
        
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -201,7 +201,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -261,7 +261,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
         }
       />
        
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -344,7 +344,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -404,7 +404,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
         }
       />
        
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -503,7 +503,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -563,7 +563,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
         }
       />
        
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -669,7 +669,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -735,7 +735,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
         }
       />
        
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -821,7 +821,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -881,7 +881,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
         }
       />
        
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
     <div
       className="CommentAnswer"
     >

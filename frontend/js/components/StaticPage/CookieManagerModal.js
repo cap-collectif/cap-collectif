@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -7,7 +8,6 @@ import CloseButton from '../Form/CloseButton';
 import Cookie from './Cookie';
 import CookieMonster from '../../CookieMonster';
 import type { State } from '../../types';
-import { LinkSeparator } from '../Footer/FooterLinks';
 
 type Props = {
   analyticsJs: ?string,
@@ -21,6 +21,13 @@ type Props = {
 type CookieModalState = {
   showModal: boolean,
 };
+
+export const LinkSeparator: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  padding: 0 8px;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
 
 export class CookieManagerModal extends React.Component<Props, CookieModalState> {
   static defaultProps = {

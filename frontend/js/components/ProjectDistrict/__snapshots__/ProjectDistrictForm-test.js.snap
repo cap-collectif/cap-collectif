@@ -78,6 +78,7 @@ exports[`<ProjectDistrictForm /> should render correctly 1`] = `
           }
         }
         enableDesignFields={false}
+        formName="proposal-form-admin-configuration"
         member="oui"
       />
     </ModalBody>

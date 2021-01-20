@@ -31,7 +31,6 @@ import select from '~/components/Form/Select';
 import approve from '~/components/Form/Approve';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation } from '~/services/Translation';
-import { validate } from '~/components/Event/Form/EventFormPage';
 import SelectStep from '~/components/Utils/SelectStep';
 import colors from '~/utils/colors';
 import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
@@ -127,6 +126,79 @@ const FormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 export const formName = 'EventForm';
+
+export type FormValues = {|
+  customcode: string,
+  metadescription: string,
+  title: string,
+  body: string,
+  author?: { value: string, label: string },
+  startAt: string,
+  endAt: ?string,
+  commentable: boolean,
+  guestListEnabled: boolean,
+  link: ?string,
+  addressJson: ?string,
+  address: ?string,
+  enabled: boolean,
+  media: ?{
+    id: string,
+    url: string,
+  },
+  themes: [],
+  projects: [],
+  steps: [],
+  animator: { value: string, label: string },
+  isPresential: boolean,
+  isRecordingPublished: boolean,
+  refusedReason: ?EventRefusedReason,
+  status: ?EventReviewStatus,
+  authorAgreeToUsePersonalDataForEventOnly: ?boolean,
+  adminAuthorizeDataTransfer: ?boolean,
+|};
+
+export const validate = (values: FormValues, props: Props) => {
+  const { isFrontendView } = props;
+
+  const errors = {};
+  const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
+  fields.forEach(value => {
+    if (value === 'endAt' && values.endAt) {
+      if (!values.startAt) {
+        errors.startAt = 'fill-field';
+      }
+      if (values.startAt) {
+        if (moment(values.startAt).isAfter(moment(values.endAt))) {
+          errors.endAt = {
+            id: 'event-before-date-error',
+            values: { before: '<i class="cap cap-attention pr-5" />' },
+          };
+        }
+      }
+    }
+    if (value === 'body' && values[value] && values[value] === '<p><br></p>') {
+      errors[value] = 'fill-field';
+    }
+
+    if (value !== 'endAt' && (!values[value] || values[value].length === 0)) {
+      errors[value] = 'fill-field';
+    }
+  });
+  if (values.guestListEnabled && values.link) {
+    errors.link = 'error-alert-choosing-subscription-mode';
+  }
+  if (values.status === 'REFUSED' && (!values.refusedReason || values.refusedReason === 'NONE')) {
+    errors.refusedReason = 'fill-field';
+  }
+  if (isFrontendView && values.authorAgreeToUsePersonalDataForEventOnly === false) {
+    errors.authorAgreeToUsePersonalDataForEventOnly = {
+      id: 'error-message-event-creation-checkbox',
+      values: { before: '<i class="cap cap-attention pr-5" />' },
+    };
+  }
+
+  return errors;
+};
 
 export const EventForm = ({
   features,
@@ -346,7 +418,13 @@ export const EventForm = ({
             placeholder="proposal.map.form.placeholder"
             addressProps={{
               getAddress: (addressComplete: ?AddressComplete) =>
-                dispatch(change(formName, 'address', addressComplete ? JSON.stringify([addressComplete]) : addressComplete)),
+                dispatch(
+                  change(
+                    formName,
+                    'address',
+                    addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
+                  ),
+                ),
             }}
           />
           {/* This part is tempory, it will be delete after migration complete */}

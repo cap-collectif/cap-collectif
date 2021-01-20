@@ -4,7 +4,9 @@ import { QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import ProposalTrashedListPaginated from '../Proposal/List/ProposalTrashedListPaginated';
+import ProposalTrashedListPaginated, {
+  TRASHED_PROPOSAL_PAGINATOR_COUNT,
+} from '../Proposal/List/ProposalTrashedListPaginated';
 import type {
   ProjectTrashProposalQueryResponse,
   ProjectTrashProposalQueryVariables,
@@ -16,8 +18,6 @@ export type Props = {|
   +isAuthenticated: boolean,
   +isTipsMeeeEnabled: boolean,
 |};
-
-export const TRASHED_PROPOSAL_PAGINATOR_COUNT = 20;
 
 export class ProjectTrashProposal extends React.Component<Props> {
   render() {

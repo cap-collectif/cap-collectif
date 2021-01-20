@@ -9,7 +9,7 @@ import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import environment from '~/createRelayEnvironment';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
-import { renderSubSection } from './ProjectAdminStepForm';
+import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepStatusesList, { type ProposalStepStatus } from './StepStatusesList';
 import type { Dispatch } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';

@@ -10,7 +10,7 @@ import { renderLabel } from '../Content/ProjectContentAdminForm';
 import toggle from '~/components/Form/Toggle';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch, GlobalState, FeatureToggles } from '~/types';
-import { ProjectBoxHeader, PermalinkWrapper } from '../Form/ProjectAdminForm.style';
+import { PermalinkWrapper } from '../Form/ProjectAdminForm.style';
 import ProjectAdminQuestionnaireStepForm from './ProjectAdminQuestionnaireStepForm';
 import ProjectAdminConsultationStepForm from './ProjectAdminConsultationStepForm';
 import {
@@ -36,6 +36,7 @@ import IconMapView from '~svg/map_view.svg';
 import type { ProposalViewMode } from '~/redux/modules/proposal';
 import StepArticle from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import type { Articles } from '~/components/Admin/Project/Step/StepArticle/StepArticle';
+import { renderSubSection } from './ProjectAdminStepForm.utils';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -310,14 +311,6 @@ const validate = (
   }
   return errors;
 };
-
-export const renderSubSection = (label: string) => (
-  <ProjectBoxHeader>
-    <h5>
-      <FormattedMessage id={label} />
-    </h5>
-  </ProjectBoxHeader>
-);
 
 const renderDateContainer = (formName: string, intl: IntlShape) => (
   <DateContainer>

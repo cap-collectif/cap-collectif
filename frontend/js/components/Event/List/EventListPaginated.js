@@ -28,6 +28,7 @@ type Props = {|
   features: FeatureToggles,
   isMobileListView: boolean,
   status: string,
+  formName: string,
 |};
 
 const EVENTS_PAGINATION = 100;
@@ -48,7 +49,16 @@ const EventListContainer: StyledComponent<{}, {}, typeof Col> = styled(Col)`
 `;
 
 export const EventListPaginated = (props: Props) => {
-  const { status, query, relay, features, dispatch, eventSelected, isMobileListView } = props;
+  const {
+    status,
+    query,
+    relay,
+    features,
+    dispatch,
+    eventSelected,
+    isMobileListView,
+    formName,
+  } = props;
   const [loading, setLoading] = useState(false);
   const { width } = useWindowWidth();
 
@@ -86,7 +96,9 @@ export const EventListPaginated = (props: Props) => {
         <p className={classNames({ 'p--centered': true, 'mb-40': true })}>
           <FormattedMessage id={showPreviewPassedEvents ? 'no-upcoming-events' : 'event.empty'} />
         </p>
-        {showPreviewPassedEvents ? <EventPagePassedEventsPreview query={query} /> : null}
+        {showPreviewPassedEvents ? (
+          <EventPagePassedEventsPreview query={query} formName={formName} />
+        ) : null}
       </>
     );
   }

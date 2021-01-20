@@ -9,7 +9,10 @@ import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
 import type { Dispatch } from '../../../types';
-import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
+import {
+  asyncPasswordValidate,
+  CHANGE_PASSWORD_FORM_NAME as formName,
+} from '../UserPasswordComplexityUtils';
 import UserPasswordField from '../UserPasswordField';
 import config from '../../../config';
 
@@ -25,8 +28,6 @@ type FormValues = {|
   new_password: string,
   new_password_confirmation: string,
 |};
-
-export const formName = 'password-form';
 
 const Container = styled.div`
   .flex-column {
@@ -45,7 +46,7 @@ const Container = styled.div`
   .full-width {
     width: 100%;
   }
-  .horizontal_field_with_border_top{
+  .horizontal_field_with_border_top {
     .no-border {
       border: 0;
     }

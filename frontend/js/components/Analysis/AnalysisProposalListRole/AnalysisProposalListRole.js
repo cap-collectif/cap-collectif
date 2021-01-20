@@ -1,11 +1,9 @@
 // @flow
 import * as React from 'react';
-import isEmpty from 'lodash/isEmpty';
 import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import UserAvatar, { type Badge } from '~/components/User/UserAvatar';
-import { PROPOSAL_STATUS } from '~/constants/AnalyseConstants';
+import UserAvatar from '~/components/User/UserAvatar';
 import { ICON_NAME } from '~ui/Icons/Icon';
 import type { AnalysisProposalListRole_proposal } from '~relay/AnalysisProposalListRole_proposal.graphql';
 import AnalysisProposalListRoleContainer, {
@@ -13,6 +11,7 @@ import AnalysisProposalListRoleContainer, {
   RoleWrapper,
 } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
 import UserAnalystList from '~/components/Analysis/UserAnalystList/UserAnalystList';
+import { getBadge, getHeadStatus } from '~/components/Analysis/UserAnalystList/UserAnalyst.utils';
 
 export type Status = {|
   name: string,
@@ -26,52 +25,10 @@ type Props = {|
   dispatch: any => void,
 |};
 
-export const getStatus = (
-  analyse: ?Object,
-  isDecisionMaker: boolean = false,
-  decisionStatus?: Status,
-): Status => {
-  if (isEmpty(analyse) || !analyse) {
-    if (decisionStatus && decisionStatus.name === PROPOSAL_STATUS.DONE.name) {
-      return PROPOSAL_STATUS.TOO_LATE;
-    }
-
-    return PROPOSAL_STATUS.TODO;
-  }
-
-  const status = PROPOSAL_STATUS[analyse.state];
-
-  if (
-    !isDecisionMaker &&
-    decisionStatus &&
-    (status === PROPOSAL_STATUS.IN_PROGRESS || status === PROPOSAL_STATUS.TODO)
-  ) {
-    return PROPOSAL_STATUS.TOO_LATE;
-  }
-
-  if (isDecisionMaker && analyse.state === 'DONE' && analyse.isApproved) {
-    return PROPOSAL_STATUS.DONE;
-  }
-
-  if (isDecisionMaker && analyse.state === 'DONE' && !analyse.isApproved) {
-    return PROPOSAL_STATUS.UNFAVOURABLE;
-  }
-
-  return status;
-};
-
-export const getBadge = ({ icon, color }: Status, isSmall: boolean = false): Badge => ({
-  icon,
-  color,
-  size: isSmall ? 10 : 16,
-  iconSize: isSmall ? 6 : 10,
-  iconColor: '#fff',
-});
-
 const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
   const { assessment, decision, supervisor, decisionMaker } = proposal;
-  const decisionStatus = getStatus(decision, true);
-  const assessmentStatus = getStatus(assessment, false, decisionStatus);
+  const decisionStatus = getHeadStatus(decision, true);
+  const assessmentStatus = getHeadStatus(assessment, false, decisionStatus);
   const intl = useIntl();
 
   return (

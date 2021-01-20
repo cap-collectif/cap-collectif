@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
 import * as S from './index.style';
-import { useDropdownSelect } from '~ui/DropdownSelect';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import type {
   DropdownMode,
   DropdownValueAddedRemovedType,
   DropdownValueType,
+  Context,
 } from '~ui/DropdownSelect/context';
+import { DropdownSelectContext } from '~ui/DropdownSelect/context';
 
 type Props = {|
   +isIndeterminate?: boolean,
@@ -19,6 +20,14 @@ type Props = {|
   +value: string | Object,
   +children: React.Node,
 |};
+
+export const useDropdownSelect = (): Context => {
+  const context = React.useContext(DropdownSelectContext);
+  if (!context) {
+    throw new Error(`You can't use the DropdownSelectContext outsides a DropdownSelect component.`);
+  }
+  return context;
+};
 
 const getChecked = (
   isMultiSelect: boolean,
@@ -160,7 +169,11 @@ const DropdownSelectChoice = ({
     <S.Container onClick={handler} className={className} isDisabled={disabled || dropdownDisabled}>
       {indeterminate && <Icon name={ICON_NAME.plus} size="1rem" />}
       {isChecked && !indeterminate && <Icon name={ICON_NAME.check} size="1rem" color="#333" />}
-      {hasBody ? <div className="dropdown-inside-container">{children}</div> : <span>{children}</span>}
+      {hasBody ? (
+        <div className="dropdown-inside-container">{children}</div>
+      ) : (
+        <span>{children}</span>
+      )}
     </S.Container>
   );
 };

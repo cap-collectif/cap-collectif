@@ -8,7 +8,7 @@ import { Button, ToggleButton } from 'react-bootstrap';
 import component from '~/components/Form/Field';
 import toggle from '~/components/Form/Toggle';
 import select from '~/components/Form/Select';
-import { renderSubSection } from './ProjectAdminStepForm';
+import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepStatusesList, { type ProposalStepStatus } from './StepStatusesList';
 import type { Dispatch } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';

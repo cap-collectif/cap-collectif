@@ -139,7 +139,7 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
         <EventListFilters query={query} addToggleViewButton />
       </EventFiltersContainer>
       <div id="event-page-rendered">
-        <EventRefetch query={query} />
+        <EventRefetch query={query} formName={formName} />
       </div>
     </div>
   );

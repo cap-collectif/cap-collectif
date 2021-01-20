@@ -2,7 +2,6 @@
 import * as React from 'react';
 import * as S from './index.style';
 import InlineSelectChoice from '~ui/InlineSelect/choice';
-import type { Context } from '~ui/InlineSelect/context';
 import { InlineSelectContext } from '~ui/InlineSelect/context';
 import InlineList from '~ui/List/InlineList';
 
@@ -23,14 +22,6 @@ type Props = {|
   +onChange?: (value: string) => void,
   +children: React.ChildrenArray<React.Element<typeof InlineSelectChoice>>,
 |};
-
-export const useInlineSelect = (): Context => {
-  const context = React.useContext(InlineSelectContext);
-  if (!context) {
-    throw new Error(`You can't use the InlineSelectContext outsides a InlineSelect component.`);
-  }
-  return context;
-};
 
 const InlineSelect = ({ children, value, onChange }: Props) => {
   const contextValue = React.useMemo(() => ({ value, onChange }), [value, onChange]);

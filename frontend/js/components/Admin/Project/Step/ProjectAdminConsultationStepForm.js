@@ -9,7 +9,7 @@ import { Button } from 'react-bootstrap';
 import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
 import environment from '~/createRelayEnvironment';
-import { renderSubSection } from './ProjectAdminStepForm';
+import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 import type { Dispatch } from '~/types';
 

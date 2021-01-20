@@ -6,48 +6,14 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import UserAvatarList from '~ui/List/UserAvatarList';
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
 import UserAvatar from '~/components/User/UserAvatar';
-import {
-  getBadge,
-  getStatus as getHeadStatus,
-  type Status,
-} from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import type { UserAnalystList_proposal } from '~relay/UserAnalystList_proposal.graphql';
 import UserAnalystListContainer, {
   SPACE_BETWEEN_AVATAR,
 } from '~/components/Analysis/UserAnalystList/UserAnalystList.style';
 import UserAnalystListHidden from '~/components/Analysis/UserAnalystListHidden/UserAnalystListHidden';
-import { PROPOSAL_STATUS } from '~/constants/AnalyseConstants';
+import { getStatus, getBadge, getHeadStatus } from './UserAnalyst.utils';
 
 export const MAX_AVATAR_DISPLAY = 3;
-
-export const getStatus = (
-  analyses: ?$ReadOnlyArray<Object>,
-  idUser: string,
-  decisionState: Status,
-  assessmentState: Status,
-): Status => {
-  let status = PROPOSAL_STATUS.TODO;
-
-  if (analyses && analyses?.length > 0) {
-    analyses.forEach(analyse => {
-      const isAnalyseMadeByUser = analyse.analyst.id === idUser;
-
-      if (isAnalyseMadeByUser) {
-        status = PROPOSAL_STATUS[analyse.state];
-      }
-    });
-  }
-  if (
-    (decisionState.name === PROPOSAL_STATUS.DONE.name ||
-      assessmentState.name === PROPOSAL_STATUS.FAVOURABLE.name ||
-      assessmentState.name === PROPOSAL_STATUS.UNFAVOURABLE.name) &&
-    (status.name === PROPOSAL_STATUS.TODO.name || status.name === PROPOSAL_STATUS.IN_PROGRESS.name)
-  ) {
-    return PROPOSAL_STATUS.TOO_LATE;
-  }
-
-  return status;
-};
 
 type Props = {
   proposal: UserAnalystList_proposal,
@@ -91,7 +57,7 @@ const UserAnalystList = ({ proposal, dispatch }: Props) => {
         ))}
       </UserAvatarList>
       {analysts && analysts.length > MAX_AVATAR_DISPLAY && (
-        <UserAnalystListHidden proposal={proposal} />
+        <UserAnalystListHidden proposal={proposal} max={MAX_AVATAR_DISPLAY} />
       )}
     </UserAnalystListContainer>
   );

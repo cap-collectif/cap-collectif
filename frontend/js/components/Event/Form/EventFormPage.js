@@ -20,7 +20,7 @@ import {
   type EventRefusedReason,
   type EventReviewStatus,
 } from '~relay/ReviewEventMutation.graphql';
-import EventForm, { formName } from './EventForm';
+import EventForm, { formName, type FormValues } from './EventForm';
 import type { Dispatch, GlobalState } from '~/types';
 import AlertForm from '~/components/Alert/AlertForm';
 import DeleteModal from '~/components/Modal/DeleteModal';
@@ -45,36 +45,6 @@ type Props = {|
   currentLanguage: string,
 |};
 
-type FormValues = {|
-  customcode: string,
-  metadescription: string,
-  title: string,
-  body: string,
-  author?: { value: string, label: string },
-  startAt: string,
-  endAt: ?string,
-  commentable: boolean,
-  guestListEnabled: boolean,
-  link: ?string,
-  addressJson: ?string,
-  address: ?string,
-  enabled: boolean,
-  media: ?{
-    id: string,
-    url: string,
-  },
-  themes: [],
-  projects: [],
-  steps: [],
-  animator: { value: string, label: string },
-  isPresential: boolean,
-  isRecordingPublished: boolean,
-  refusedReason: ?EventRefusedReason,
-  status: ?EventReviewStatus,
-  authorAgreeToUsePersonalDataForEventOnly: ?boolean,
-  adminAuthorizeDataTransfer: ?boolean,
-|};
-
 type ReviewEventForm = {|
   comment: ?string,
   refusedReason: ?EventRefusedReason,
@@ -88,49 +58,6 @@ type EditFormValue = {|
 |};
 
 type State = {| showDeleteModal: boolean |};
-
-export const validate = (values: FormValues, props: Props) => {
-  const { isFrontendView } = props;
-
-  const errors = {};
-  const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
-  fields.forEach(value => {
-    if (value === 'endAt' && values.endAt) {
-      if (!values.startAt) {
-        errors.startAt = 'fill-field';
-      }
-      if (values.startAt) {
-        if (moment(values.startAt).isAfter(moment(values.endAt))) {
-          errors.endAt = {
-            id: 'event-before-date-error',
-            values: { before: '<i class="cap cap-attention pr-5" />' },
-          };
-        }
-      }
-    }
-    if (value === 'body' && values[value] && values[value] === '<p><br></p>') {
-      errors[value] = 'fill-field';
-    }
-
-    if (value !== 'endAt' && (!values[value] || values[value].length === 0)) {
-      errors[value] = 'fill-field';
-    }
-  });
-  if (values.guestListEnabled && values.link) {
-    errors.link = 'error-alert-choosing-subscription-mode';
-  }
-  if (values.status === 'REFUSED' && (!values.refusedReason || values.refusedReason === 'NONE')) {
-    errors.refusedReason = 'fill-field';
-  }
-  if (isFrontendView && values.authorAgreeToUsePersonalDataForEventOnly === false) {
-    errors.authorAgreeToUsePersonalDataForEventOnly = {
-      id: 'error-message-event-creation-checkbox',
-      values: { before: '<i class="cap cap-attention pr-5" />' },
-    };
-  }
-
-  return errors;
-};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { intl, isFrontendView } = props;

@@ -2,13 +2,13 @@
 import * as React from 'react';
 import styled, { type StyledComponent, css } from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
-import ReactPlaceholder from 'react-placeholder';
 import { FormattedNumber } from 'react-intl';
 import colors from '~/utils/colors';
 import ProposalDetailLikers from '../../Detail/ProposalDetailLikers';
 import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_proposal.graphql';
 import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import { MetadataPlaceHolder } from './ProposalPageMetadata.placeholder';
 
 const ProposalPageMetadataContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 20px;
@@ -43,28 +43,6 @@ const Element: StyledComponent<{ iconOnly?: boolean }, {}, HTMLDivElement> = sty
       }
     `}
 `;
-
-export const MetadataPlaceHolder = ({
-  ready,
-  children,
-}: {
-  ready: boolean,
-  children: React.Node,
-}) => (
-  <ReactPlaceholder
-    type="textRow"
-    style={{
-      marginTop: 3,
-      marginLeft: 10,
-      width: 150,
-      height: 12,
-    }}
-    showLoadingAnimation
-    color={colors.borderColor}
-    ready={ready}>
-    {children}
-  </ReactPlaceholder>
-);
 
 type Props = {
   proposal: ProposalPageMetadata_proposal,

@@ -73,6 +73,7 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
                   onSubmit={this.handleSubmit}
                   member={member}
                   show={index === editIndex}
+                  formName={formName}
                 />
                 <Row>
                   <Col xs={8}>

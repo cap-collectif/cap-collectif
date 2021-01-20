@@ -11,7 +11,7 @@ import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
-import { getProjectAdminPath } from '~/components/Admin/Project/ProjectAdminContent';
+import { getProjectAdminPath } from '~/components/Admin/Project/ProjectAdminPage.utils';
 
 type Props = {|
   step: Step,

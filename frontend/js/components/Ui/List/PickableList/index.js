@@ -7,7 +7,6 @@ import Header from './header';
 import Body from './body';
 import Row from './row';
 import { type Action, createReducer, type State } from '~ui/List/PickableList/reducer';
-import type { Context } from '~ui/List/PickableList/context';
 import { PickableListContext } from '~ui/List/PickableList/context';
 
 type Props = {
@@ -22,16 +21,6 @@ type Props = {
     | React.Element<StyledComponent<{}, {}, typeof Body>>
     | React.Element<StyledComponent<{}, {}, typeof Header>>,
   >,
-};
-
-export const usePickableList = (): Context => {
-  const context = React.useContext(PickableListContext);
-  if (!context) {
-    throw new Error(
-      `You can't use the PickableListContext outsides a PickableList.Provider component.`,
-    );
-  }
-  return context;
 };
 
 type ProviderProps = {|

@@ -5,21 +5,26 @@ import isEqual from 'lodash/isEqual';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql';
 import type { Uuid } from '~/types';
-import type { ProjectAdminPageState, ProposalsStepValues } from './ProjectAdminPage.reducer';
+import {
+  DEFAULT_FILTERS,
+  type ProjectAdminPageState,
+  type ProposalsStepValues,
+} from './ProjectAdminPage.reducer';
 import type {
   UserSearchDropdownChoice_user,
   UserSearchDropdownChoice_user$ref,
 } from '~relay/UserSearchDropdownChoice_user.graphql';
 import type { ModalConfirmRevokement_analystsWithAnalyseBegin } from '~relay/ModalConfirmRevokement_analystsWithAnalyseBegin.graphql';
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
-import { DEFAULT_FILTERS } from '~/components/Admin/Project/ProjectAdminPage.context';
 import {
   type RowType,
   type AllUserAssigned,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
-import { getStatus as getStatusAnalyst } from '~/components/Analysis/UserAnalystList/UserAnalystList';
+import {
+  getStatus as getStatusAnalyst,
+  getHeadStatus as getStatus,
+} from '~/components/Analysis/UserAnalystList/UserAnalyst.utils';
 import { PROPOSAL_STATUS, SHOWING_STEP_TYPENAME } from '~/constants/AnalyseConstants';
-import { getStatus } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import type { CategoryFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql';

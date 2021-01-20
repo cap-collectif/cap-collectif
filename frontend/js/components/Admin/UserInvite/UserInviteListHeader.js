@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { usePickableList } from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import CancelUserInvitationsMutation from '~/mutations/CancelUserInvitationsMutation';
 
 type Props = {|

@@ -6,7 +6,7 @@ import { Button, InputGroup, Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useUserInviteModalContext } from '~/components/Admin/UserInvite/Modal/UserInviteModal.context';
 import Checkbox from '~ui/Form/Input/Checkbox/Checkbox';
-import InviteUserMutation from '~/mutations/InviteUserMutation';
+import InviteUserMutation, { INVITE_USERS_MAX_RESULTS } from '~/mutations/InviteUserMutation';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '~/constants/AlertConstants';
@@ -14,8 +14,6 @@ import { UPDATE_ALERT } from '~/constants/AlertConstants';
 type Props = {|
   +onSubmitSucces?: () => void,
 |};
-
-export const INVITE_USERS_MAX_RESULTS = 100;
 
 export const UserInviteModalStepChooseRole = ({ onSubmitSucces }: Props) => {
   const { dispatch, emails } = useUserInviteModalContext();

@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { renderSubSection } from './ProjectAdminStepForm';
+import { renderSubSection } from './ProjectAdminStepForm.utils';
 
 export const ProjectAdminSynthesisStepForm = () => (
   <>

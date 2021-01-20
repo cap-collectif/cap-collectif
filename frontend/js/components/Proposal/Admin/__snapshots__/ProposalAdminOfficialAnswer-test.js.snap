@@ -36,7 +36,7 @@ exports[`<ProposalAdminOfficialAnswer /> render correctly with response 1`] = `
 <div
   className="mt-20"
 >
-  <ProposalAdminOfficialAnswer__Container>
+  <ProposalAdminstyle__Container>
     <div>
       <h3>
         <FormattedMessage
@@ -73,7 +73,7 @@ exports[`<ProposalAdminOfficialAnswer /> render correctly with response 1`] = `
     />
     <br />
     0
-  </ProposalAdminOfficialAnswer__Container>
+  </ProposalAdminstyle__Container>
   <Connect(SubmitButton)
     bsStyle="primary"
     id="proposal_admin_official_answer_publish"

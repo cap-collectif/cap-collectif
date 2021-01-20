@@ -3,7 +3,7 @@ import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import * as S from './styles';
 import Row from '~ui/List/PickableList/row';
-import { usePickableList } from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 
 type Props = {
   children?: null | React.ChildrenArray<React.Element<typeof Row | any>>,

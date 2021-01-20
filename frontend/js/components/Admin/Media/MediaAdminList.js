@@ -6,13 +6,15 @@ import { createPaginationContainer, graphql, type RelayPaginationProp } from 're
 import * as S from './MediaAdminPage.style';
 import type { MediaAdminList_query } from '~relay/MediaAdminList_query.graphql';
 import { convertFileSize } from '~ui/File/File';
-import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableList from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import DeleteMediaAdminMutation from '~/mutations/DeleteMediaAdminMutation';
 import { Link as Url } from '~ui/Link/Link';
 import MediaAdminFileView from './MediaAdminFileView';
 import MediaViewModal from './MediaViewModal';
 import DeleteModal from '~/components/Modal/DeleteModal';
-import { MEDIA_PAGINATION } from './MediaAdminContainer';
+
+export const MEDIA_PAGINATION = 50;
 
 type Props = {|
   query: MediaAdminList_query,

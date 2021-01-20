@@ -8,14 +8,15 @@ import type {
 } from '~relay/UserSearchDropdownChoice_user.graphql';
 import type { Uuid } from '~/types';
 import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHeader_project.graphql';
-import type { AnalysisProjectPageState } from './AnalysisProjectPage.reducer';
+import { DEFAULT_FILTERS, type AnalysisProjectPageState } from './AnalysisProjectPage.reducer';
 import type { User } from '~/components/Analysis/AnalysisFilter/AnalysisFilterRole';
 import type { CategoryFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import { PROPOSAL_STATUS, TYPE_ACTION, SHOWING_STEP_TYPENAME } from '~/constants/AnalyseConstants';
-import { DEFAULT_FILTERS } from './AnalysisProjectPage.context';
-import { getStatus as getStatusAnalyst } from '~/components/Analysis/UserAnalystList/UserAnalystList';
-import { getStatus } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
+import {
+  getStatus as getStatusAnalyst,
+  getHeadStatus as getStatus,
+} from '~/components/Analysis/UserAnalystList/UserAnalyst.utils';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
 import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';

@@ -58,7 +58,6 @@ import {
   TRIGGER_FOR,
 } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
-import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Page/Header/ProposalPageHeaderButtons';
 import config from '~/config';
 
 const getAvailableDistrictsQuery = graphql`
@@ -102,6 +101,7 @@ type LatLng = {
 };
 
 export const formName = 'proposal-form';
+export const EDIT_MODAL_ANCHOR = '#edit-proposal';
 
 type RelayProps = {|
   +proposalForm: ProposalForm_proposalForm,

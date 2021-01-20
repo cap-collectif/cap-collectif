@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Field, getFormSyncErrors, isSubmitting } from 'redux-form';
+import { Field, getFormSyncErrors, isSubmitting, formValueSelector } from 'redux-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useResize } from '@liinkiing/react-hooks';
@@ -11,11 +11,6 @@ import component from '~/components/Form/Field';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import LabelState from '~/components/Admin/Emailing/MailParameter/LabelState/LabelState';
-import {
-  formName,
-  PATHS,
-  selectorForm,
-} from '~/components/Admin/Emailing/MailParameter/MailParameterPage';
 import {
   Container,
   ButtonCancelPlanned,
@@ -28,6 +23,16 @@ import {
 } from './Header.style';
 import type { Header_emailingCampaign } from '~relay/Header_emailingCampaign.graphql';
 import type { GlobalState } from '~/types';
+
+export const PATHS = {
+  PARAMETER: '/',
+  CONTENT: '/content',
+  SENDING: '/sending',
+};
+
+export const formName = 'form-edit-emailing-campaign';
+
+export const selectorForm = formValueSelector(formName);
 
 type Error = {|
   id: string,

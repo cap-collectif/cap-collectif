@@ -4,7 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { connect } from 'react-redux';
-import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableList from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import DropdownSelect from '~ui/DropdownSelect';
 import Collapsable from '~ui/Collapsable';
 import {

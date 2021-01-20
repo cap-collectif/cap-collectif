@@ -16,6 +16,7 @@ const baseProps = {
     },
   },
   member: 'form',
+  formName: 'formName',
   enableDesignFields: false,
   isDisplayedOnMap: true,
   dispatch: jest.fn(),

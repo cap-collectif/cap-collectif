@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
 import { type IntlShape, injectIntl } from 'react-intl';
-import { Field } from 'redux-form';
+import { Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import type { GlobalState } from '../../../../types';
-import { selector } from './ProjectListFilters';
 import select from '../../../Form/Select';
 import type { ProjectType } from './ProjectListFiltersContainer';
 
@@ -12,6 +11,7 @@ type Props = {
   intl: IntlShape,
   type: ?string,
   projectTypes: ProjectType[],
+  formName: string,
 };
 
 export class ProjectsListFilterTypes extends React.Component<Props> {
@@ -40,8 +40,11 @@ export class ProjectsListFilterTypes extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  type: selector(state, 'type'),
-});
+const mapStateToProps = (state: GlobalState, { formName }: Props) => {
+  const selector = formValueSelector(formName);
+  return {
+    type: selector(state, 'type'),
+  };
+};
 
 export default connect(mapStateToProps)(injectIntl(ProjectsListFilterTypes));

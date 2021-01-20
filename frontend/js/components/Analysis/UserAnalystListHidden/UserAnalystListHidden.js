@@ -4,15 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { Overlay, Tooltip } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import {
-  MAX_AVATAR_DISPLAY,
   getStatus as getStatusAnalyst,
-} from '~/components/Analysis/UserAnalystList/UserAnalystList';
+  getBadge,
+  getHeadStatus as getStatus,
+} from '../UserAnalystList/UserAnalyst.utils';
 import UserAvatar from '~/components/User/UserAvatar';
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
-import {
-  getBadge,
-  getStatus,
-} from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import { AvatarHidden } from '~ui/List/UserAvatarList';
 import type { UserAnalystListHidden_proposal } from '~relay/UserAnalystListHidden_proposal.graphql';
 import UserAnalystListHiddenContainer, {
@@ -25,9 +22,10 @@ const HIDDEN_AVATAR_SIZE = 15;
 
 type Props = {
   proposal: UserAnalystListHidden_proposal,
+  max: number,
 };
 
-const UserAnalystListHidden = ({ proposal }: Props) => {
+const UserAnalystListHidden = ({ proposal, max }: Props) => {
   const [isTooltipRestAnalystsDisplay, setTooltipRestAnalystsDisplay] = useState<boolean>(false);
   const refTooltipRestAnalysts = useRef(null);
   const { analysts, analyses, decision, assessment } = proposal;
@@ -36,9 +34,7 @@ const UserAnalystListHidden = ({ proposal }: Props) => {
 
   if (analysts && analysts.length === 0) return null;
 
-  const restAnalysts = analysts
-    ? Array.from(analysts).slice(MAX_AVATAR_DISPLAY, analysts.length)
-    : [];
+  const restAnalysts = analysts ? Array.from(analysts).slice(max, analysts.length) : [];
 
   return (
     <UserAnalystListHiddenContainer>

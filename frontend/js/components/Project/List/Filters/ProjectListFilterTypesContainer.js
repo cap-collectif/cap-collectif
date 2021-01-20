@@ -24,7 +24,9 @@ export default class ProjectsListFilterTypesContainer extends React.Component<Pr
       if (props.projectTypes) {
         const { projectTypes } = props;
         if (projectTypes.length > 0) {
-          return <ProjectsListFilterTypes projectTypes={projectTypes} />;
+          return (
+            <ProjectsListFilterTypes projectTypes={projectTypes} formName="ProjectListFilters" />
+          );
         }
       }
     }

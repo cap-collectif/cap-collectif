@@ -9,7 +9,7 @@ import { ToggleButton } from 'react-bootstrap';
 import { Container } from '../common.style';
 import component from '~/components/Form/Field';
 import type { Dispatch, GlobalState } from '~/types';
-import { formName, selectorForm } from '../MailParameterPage';
+import { formName, selectorForm } from '../Header/Header';
 import { FieldContainer, InfoRow } from './style';
 import LabelState from '~/components/Admin/Emailing/MailParameter/LabelState/LabelState';
 import colors from '~/utils/colors';

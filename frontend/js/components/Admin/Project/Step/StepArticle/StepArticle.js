@@ -9,9 +9,10 @@ import renderComponent from '~/components/Form/Field';
 import Button from '~ds/Button/Button';
 import { renderLabel } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
 import type { Dispatch, GlobalState } from '~/types';
-import { stepFormName } from '~/components/Admin/Project/Step/ProjectAdminStepForm';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import { FontWeight } from '~ui/Primitives/constants';
+
+const stepFormName = 'stepForm';
 
 export type Articles = Array<{
   id: ?string,

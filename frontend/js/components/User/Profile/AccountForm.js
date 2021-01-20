@@ -26,7 +26,11 @@ import type { State, Dispatch, FeatureToggles } from '../../../types';
 import select from '~/components/Form/Select';
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
 import ConfirmPasswordModal, { passwordForm } from '~/components/User/ConfirmPasswordModal';
-import { resendConfirmation, cancelEmailChange } from '~/redux/modules/user';
+import {
+  resendConfirmation,
+  cancelEmailChange,
+  accountForm as formName,
+} from '~/redux/modules/user';
 import DeleteAccountModal from '~/components/User/DeleteAccountModal';
 import type { AccountForm_viewer } from '~relay/AccountForm_viewer.graphql';
 import CookieMonster from '~/CookieMonster';
@@ -43,8 +47,6 @@ import { getButtonLinkForType } from '~ui/Button/LoginSocialButton';
 import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal';
 import Tooltip from '~/components/Utils/Tooltip';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-
-export const formName = 'accountForm';
 
 type RelayProps = {| viewer: AccountForm_viewer |};
 

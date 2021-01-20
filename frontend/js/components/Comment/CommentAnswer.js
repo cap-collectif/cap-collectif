@@ -10,7 +10,7 @@ import CommentEdit from './CommentEdit';
 import Media from '../Ui/Medias/Media/Media';
 import { CommentContainer } from './styles';
 import type { CommentAnswer_comment } from '~relay/CommentAnswer_comment.graphql';
-import { CommentBottom } from './Comment';
+import { CommentBottom } from './Comment.style';
 
 type Props = {|
   +comment: CommentAnswer_comment,

@@ -23,6 +23,7 @@ import type { Dispatch, State, User } from '~/types';
 import ProposalEditModal from '../../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../../Delete/ProposalDeleteModal';
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton';
+import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm';
 
 type ReduxProps = {|
   +dispatch: Dispatch,
@@ -37,8 +38,6 @@ type Props = {|
   +opinionCanBeFollowed: boolean,
   +hasVotableStep: boolean,
 |};
-
-export const EDIT_MODAL_ANCHOR = '#edit-proposal';
 
 const Buttons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   button {

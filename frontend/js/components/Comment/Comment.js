@@ -16,6 +16,7 @@ import { CommentContainer } from './styles';
 import type { Comment_comment } from '~relay/Comment_comment.graphql';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
+import { CommentBottom } from './Comment.style';
 
 type Props = {|
   +comment: Comment_comment,
@@ -23,16 +24,6 @@ type Props = {|
   +disabledButton?: ?boolean,
   +useBodyColor: boolean,
 |};
-
-export const CommentBottom: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 10px;
-
-  button {
-    margin-right: 10px;
-  }
-`;
 
 const AnswerButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   display: flex;

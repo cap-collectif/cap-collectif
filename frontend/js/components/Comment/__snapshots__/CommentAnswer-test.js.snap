@@ -58,7 +58,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
         }
       />
     </Body>
-    <Comment__CommentBottom>
+    <Commentstyle__CommentBottom>
       <Relay(CommentVoteButton)
         comment={
           Object {
@@ -101,7 +101,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
           }
         }
       />
-    </Comment__CommentBottom>
+    </Commentstyle__CommentBottom>
   </Media>
 </Connect(ComponentWithColors)>
 `;

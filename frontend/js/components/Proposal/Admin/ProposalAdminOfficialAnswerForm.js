@@ -9,7 +9,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import type { ProposalAdminOfficialAnswerForm_proposal } from '~relay/ProposalAdminOfficialAnswerForm_proposal.graphql';
 import type { GlobalState, Dispatch } from '~/types';
-import { Container } from './ProposalAdminOfficialAnswer';
+import { Container } from './ProposalAdmin.style';
 import UserListField from '~/components/Admin/Field/UserListField';
 import component from '~/components/Form/Field';
 import SubmitButton from '~/components/Form/SubmitButton';

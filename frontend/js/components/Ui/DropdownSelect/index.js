@@ -4,7 +4,7 @@ import * as S from './index.style';
 import DropdownSelectChoice from '~ui/DropdownSelect/choice';
 import DropdownSelectSeparator from '~ui/DropdownSelect/separator';
 import DropdownSelectMenu from '~ui/DropdownSelect/menu';
-import type { Context, DropdownOnChangeType, DropdownValueType } from '~ui/DropdownSelect/context';
+import type { DropdownOnChangeType, DropdownValueType } from '~ui/DropdownSelect/context';
 import { DropdownSelectContext } from '~ui/DropdownSelect/context';
 import DropdownSelectHeader from '~ui/DropdownSelect/header';
 import DropdownSelectMessage from '~ui/DropdownSelect/message';
@@ -41,14 +41,6 @@ export type Props = {|
   +disabled?: boolean,
   +defaultValue?: string,
 |};
-
-export const useDropdownSelect = (): Context => {
-  const context = React.useContext(DropdownSelectContext);
-  if (!context) {
-    throw new Error(`You can't use the DropdownSelectContext outsides a DropdownSelect component.`);
-  }
-  return context;
-};
 
 const DropdownSelect = ({
   children,

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import css from '@styled-system/css';
 import { useKeyboardShortcuts } from '@liinkiing/react-hooks';
-import { useInlineSelect } from '~ui/InlineSelect';
+import { useInlineSelect } from '~ui/InlineSelect/useInlineSelect';
 import Tag, { type Props as TagProps } from '~ds/Tag/Tag';
 import AppBox from '~ui/Primitives/AppBox';
 

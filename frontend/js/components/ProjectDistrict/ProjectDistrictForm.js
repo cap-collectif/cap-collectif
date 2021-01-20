@@ -178,7 +178,12 @@ export class ProjectDistrictForm extends React.Component<Props> {
             </ModalHeaderContainer>
           </Modal.Header>
           <Modal.Body>
-            <DistrictAdminFields member={member} district={district} enableDesignFields={false} />
+            <DistrictAdminFields
+              formName="proposal-form-admin-configuration"
+              member={member}
+              district={district}
+              enableDesignFields={false}
+            />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={handleClose} />

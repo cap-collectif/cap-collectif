@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Field } from 'redux-form';
+import { Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -13,7 +13,6 @@ import { isValid } from '~/services/GeoJsonValidator';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import type { State, Dispatch } from '~/types';
-import { selector } from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
 
 type Props = {|
   member: string,
@@ -23,6 +22,7 @@ type Props = {|
   onChange?: Function,
   isDisplayedOnMap?: boolean,
   dispatch?: Dispatch,
+  formName: string,
 |};
 
 const isBorderEnable = district => district && district.border && district.border.enabled;
@@ -51,6 +51,7 @@ export const DistrictAdminFields = ({
   onChange,
   isDisplayedOnMap,
   dispatch,
+  formName,
 }: Props) => (
   <>
     <Field
@@ -98,11 +99,13 @@ export const DistrictAdminFields = ({
           <div>
             <FormattedMessage id="styles" tagName="h4" />
             <PanelBorderStyle
+              formName={formName}
               member={member}
               isEnabled={!!isBorderEnable(district)}
               dispatch={dispatch}
             />
             <PanelBackgroundStyle
+              formName={formName}
               member={member}
               isEnabled={!!isBackgroundEnable(district)}
               dispatch={dispatch}
@@ -114,9 +117,12 @@ export const DistrictAdminFields = ({
   </>
 );
 
-const mapStateToProps = (state: State, props: Props) => ({
-  isDisplayedOnMap: selector(state, `${props.member}.displayedOnMap`),
-});
+const mapStateToProps = (state: State, { member, formName }: Props) => {
+  const selector = formValueSelector(formName);
+  return {
+    isDisplayedOnMap: selector(state, `${member}.displayedOnMap`),
+  };
+};
 
 /* /!\ Care, This component is used as fragment, connect component and default functional component, sad story */
 export const DistrictAdminFieldsConnected = connect(mapStateToProps)(DistrictAdminFields);

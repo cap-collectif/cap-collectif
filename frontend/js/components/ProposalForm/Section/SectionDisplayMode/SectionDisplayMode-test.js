@@ -6,6 +6,7 @@ import { SectionDisplayMode, LOCATION_PARIS } from './SectionDisplayMode';
 import { $refType, $fragmentRefs, googleAddressMock } from '~/mocks';
 
 const props = {
+  formName: 'formName',
   dispatch: jest.fn(),
   latitude: LOCATION_PARIS.lat,
   longitude: LOCATION_PARIS.lng,

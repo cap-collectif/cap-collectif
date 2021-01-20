@@ -5,22 +5,17 @@ import { QueryRenderer, graphql } from 'react-relay';
 import ReactPlaceholder from 'react-placeholder';
 import environment from '~/createRelayEnvironment';
 import { Container, Header, Content } from './EmailingCampaignPage.style';
-import DashboardCampaign, {
-  CAMPAIGN_PAGINATION,
-} from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign';
+import DashboardCampaign from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign';
 import PickableList from '~ui/List/PickableList';
 import type { DashboardParameters } from './DashboardCampaign/DashboardCampaign.reducer';
 import { useDashboardCampaignContext } from './DashboardCampaign/DashboardCampaign.context';
-import type {
-  EmailingCampaignPageQueryResponse,
-  EmailingCampaignPageQueryVariables,
-} from '~relay/EmailingCampaignPageQuery.graphql';
-import { ORDER_BY } from './DashboardCampaign/DashboardCampaign.reducer';
+import type { EmailingCampaignPageQueryResponse } from '~relay/EmailingCampaignPageQuery.graphql';
 import DashboardCampaignPlaceholder from './DashboardCampaignPlaceholder/DashboardCampaignPlaceholder';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Tag from '~ds/Tag/Tag';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
+import { createQueryVariables } from './utils';
 
 const listCampaign = ({
   error,
@@ -53,19 +48,6 @@ const listCampaign = ({
     />
   );
 };
-
-export const createQueryVariables = (
-  parameters: DashboardParameters,
-): EmailingCampaignPageQueryVariables => ({
-  count: CAMPAIGN_PAGINATION,
-  cursor: null,
-  term: parameters.filters.term,
-  orderBy: {
-    field: 'SEND_AT',
-    direction: parameters.sort === ORDER_BY.NEWEST ? 'DESC' : 'ASC',
-  },
-  status: parameters.filters.state === 'ALL' ? null : parameters.filters.state,
-});
 
 export const EmailingCampaignPage = () => {
   const { parameters, dispatch } = useDashboardCampaignContext();

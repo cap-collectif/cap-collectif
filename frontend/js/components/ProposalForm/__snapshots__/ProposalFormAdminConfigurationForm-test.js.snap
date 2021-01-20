@@ -138,6 +138,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
   </div>
   <Relay(Connect(SectionDisplayMode))
     dispatch={[MockFunction]}
+    formName="proposal-form-admin-configuration"
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -901,6 +902,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
   </div>
   <Relay(Connect(SectionDisplayMode))
     dispatch={[MockFunction]}
+    formName="proposal-form-admin-configuration"
     proposalForm={
       Object {
         "$fragmentRefs": null,
@@ -1666,6 +1668,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
   </div>
   <Relay(Connect(SectionDisplayMode))
     dispatch={[MockFunction]}
+    formName="proposal-form-admin-configuration"
     proposalForm={
       Object {
         "$fragmentRefs": null,

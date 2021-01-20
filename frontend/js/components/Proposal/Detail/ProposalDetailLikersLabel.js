@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import Tag from '~/components/Ui/Labels/Tag';
 import type { ProposalDetailLikersLabel_proposal } from '~relay/ProposalDetailLikersLabel_proposal.graphql';
-import { MetadataPlaceHolder } from '~/components/Proposal/Page/Aside/ProposalPageMetadata';
+import { MetadataPlaceHolder } from '~/components/Proposal/Page/Aside/ProposalPageMetadata.placeholder';
 
 type Props = {
   proposal: ProposalDetailLikersLabel_proposal,

@@ -18,6 +18,7 @@ const emptyConnection = {
 };
 
 const props = {
+  formName: 'formName',
   query: {
     $refType,
     $fragmentRefs,

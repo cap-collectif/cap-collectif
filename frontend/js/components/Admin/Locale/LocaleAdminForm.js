@@ -7,7 +7,7 @@ import { reduxForm, SubmissionError } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import type { GlobalState } from '~/types';
-import LocaleAdminSelect from './LocaleAdminSelect';
+import LocaleAdminSelect, { type Locales } from './LocaleAdminSelect';
 import AlertForm from '~/components/Alert/AlertForm';
 import LocaleAdminList from './List/LocaleAdminList';
 import UpdateLocaleStatusMutation from '~/mutations/UpdateLocaleStatusMutation';
@@ -18,8 +18,6 @@ type Props = {|
   ...ReduxFormFormProps,
   query: LocaleAdminForm_query,
 |};
-
-export type Locales = { [string]: { id: string, isPublished: boolean, isEnabled: boolean } };
 
 type FormValues = {
   locales: Locales,
@@ -88,7 +86,7 @@ export const LocaleAdminForm = ({
 }: Props) => (
   <form onSubmit={handleSubmit} id={`${formName}`}>
     <LocaleAdminList locales={query.availableLocales} />
-    <LocaleAdminSelect locales={query.availableLocales} />
+    <LocaleAdminSelect locales={query.availableLocales} formName={formName} />
     <Button
       type="submit"
       id={`${formName}_submit`}

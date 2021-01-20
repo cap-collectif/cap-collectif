@@ -3,12 +3,11 @@ import * as React from 'react';
 import { Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { change, Field } from 'redux-form';
+import { change, Field, formValueSelector } from 'redux-form';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import withPanelStyle from './withPanelStyle';
 import { PanelHeader, PanelBody } from './PanelStyle.style';
-import { formName, selector } from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
 import type { State, Dispatch } from '~/types';
 
 type Props = {
@@ -17,6 +16,7 @@ type Props = {
   handlePanelToggle: () => void,
   dispatch: Dispatch,
   opacity: ?number,
+  formName: string,
 };
 
 const PanelBackgroundStyle = ({
@@ -25,6 +25,7 @@ const PanelBackgroundStyle = ({
   handlePanelToggle,
   dispatch,
   opacity,
+  formName,
 }: Props) => (
   <Panel expanded={isPanelOpen} onToggle={() => {}}>
     <PanelHeader>
@@ -82,8 +83,11 @@ const PanelBackgroundStyle = ({
   </Panel>
 );
 
-const mapStateToProps = (state: State, props: Props) => ({
-  opacity: selector(state, `${props.member}.background.opacity`),
-});
+const mapStateToProps = (state: State, { formName, member }: Props) => {
+  const selector = formValueSelector(formName);
+  return {
+    opacity: selector(state, `${member}.background.opacity`),
+  };
+};
 
 export default withPanelStyle(connect(mapStateToProps)(PanelBackgroundStyle));

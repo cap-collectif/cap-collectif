@@ -7,6 +7,7 @@ import { $refType } from '~/mocks';
 
 describe('<LocaleAdminSelect />', () => {
   const defaultProps = {
+    formName: 'form',
     locales: [
       {
         $refType,
@@ -42,6 +43,7 @@ describe('<LocaleAdminSelect />', () => {
     const props = {
       locales: [],
       currentValues: {},
+      formName: 'form',
     };
     const wrapper = shallow(<LocaleAdminSelect {...props} />);
     expect(wrapper).toMatchSnapshot();

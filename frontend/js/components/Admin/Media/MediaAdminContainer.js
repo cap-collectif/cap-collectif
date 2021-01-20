@@ -5,7 +5,7 @@ import { useQuery } from 'relay-hooks';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { debounce } from 'lodash';
 import type { Query } from '~/types';
-import MediaAdminList from './MediaAdminList';
+import MediaAdminList, { MEDIA_PAGINATION } from './MediaAdminList';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import { useMediaAdminListContext } from './MediaAdminList.context';
 import type { MediaAdminListParameters } from './MediaAdminList.reducer';
@@ -18,7 +18,6 @@ import ClearableInput from '~ui/Form/Input/ClearableInput';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { MediaListHead } from './MediaAdminPage.style';
 
-export const MEDIA_PAGINATION = 50;
 export const MEDIA_DEBOUNCE_MS = 500;
 
 export const queryMedias = graphql`

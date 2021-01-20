@@ -1,5 +1,4 @@
 // @flow
-import { DEFAULT_FILTERS, getInitialState } from './DashboardCampaign.context';
 import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl } from '~/shared/utils/getFieldsFromUrl';
 
 export const ORDER_BY: {
@@ -21,6 +20,11 @@ export type Filters = {|
   +term: ?string,
 |};
 
+export const DEFAULT_FILTERS: Filters = {
+  state: 'ALL',
+  term: null,
+};
+
 export type DashboardState = {|
   +status: DashboardStatus,
   +sort: SortValues,
@@ -31,6 +35,16 @@ export type DashboardParameters = {|
   +sort: $PropertyType<DashboardState, 'sort'>,
   +filters: $PropertyType<DashboardState, 'filters'>,
 |};
+
+export const DEFAULT_STATUS: DashboardStatus = 'ready';
+
+export const DEFAULT_SORT: SortValues = ORDER_BY.NEWEST;
+
+export const getInitialState = (): DashboardState => ({
+  status: DEFAULT_STATUS,
+  sort: DEFAULT_SORT,
+  filters: DEFAULT_FILTERS,
+});
 
 export type Action =
   | { type: 'START_LOADING' }

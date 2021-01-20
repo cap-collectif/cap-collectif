@@ -5,9 +5,10 @@ import { FormattedMessage } from 'react-intl';
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, Button } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import { TRASHED_PROPOSAL_PAGINATOR_COUNT } from '../../Project/ProjectTrashProposal';
 import type { ProposalTrashedListPaginated_project } from '~relay/ProposalTrashedListPaginated_project.graphql';
 import ProposalPreview from '../Preview/ProposalPreview';
+
+export const TRASHED_PROPOSAL_PAGINATOR_COUNT = 20;
 
 type Props = {|
   +relay: RelayPaginationProp,

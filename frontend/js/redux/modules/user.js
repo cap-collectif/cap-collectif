@@ -8,7 +8,8 @@ import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
-import { formName as accountForm } from '~/components/User/Profile/AccountForm';
+
+export const accountForm = 'accountForm';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
 

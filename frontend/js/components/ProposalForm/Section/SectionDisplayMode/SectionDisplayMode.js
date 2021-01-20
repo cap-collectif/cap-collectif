@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
-import { change, Field, getFormSyncErrors } from 'redux-form';
+import { change, Field, getFormSyncErrors, formValueSelector } from 'redux-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { Panel } from 'react-bootstrap';
 import L from 'leaflet';
 import { Map, Marker, TileLayer, ZoomControl } from 'react-leaflet';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import viewChoice from './ViewChoice/ViewChoice';
 import {
   PanelHeader,
@@ -20,11 +20,6 @@ import IconMapView from '~svg/map_view.svg';
 import IconGridView from '~svg/grid_view.svg';
 import IconListView from '~svg/list_view.svg';
 import component from '~/components/Form/Field';
-import {
-  formName,
-  zoomLevels,
-  selector as formSelector,
-} from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import PopoverToggleView from './PopoverToggleView/PopoverToggleView';
@@ -45,6 +40,29 @@ export const LOCATION_PARIS = {
   lat: 48.8534,
   lng: 2.3488,
 };
+
+export const zoomLevels = [
+  { id: 1, name: 'map.zoom.world' },
+  { id: 2 },
+  { id: 3 },
+  { id: 4 },
+  { id: 5, name: 'map.zoom.mainland' },
+  { id: 6 },
+  { id: 7 },
+  { id: 8 },
+  { id: 9 },
+  { id: 10, name: 'map.zoom.city' },
+  { id: 11 },
+  { id: 12 },
+  { id: 13 },
+  { id: 14 },
+  { id: 15, name: 'map.zoom.street' },
+  { id: 16 },
+  { id: 17 },
+  { id: 18 },
+  { id: 19 },
+  { id: 20, name: 'map.zoom.building' },
+];
 
 const getStepsDependOfView = (
   proposalForm: SectionDisplayMode_proposalForm,
@@ -117,6 +135,7 @@ type Props = {|
     lat: number,
     lng: number,
   },
+  formName: string,
 |};
 
 const USER_LOCATION_QUERY = graphql`
@@ -155,6 +174,7 @@ export const SectionDisplayMode = ({
   proposalForm,
   errorViewEnabled,
   dataMap,
+  formName,
 }: Props) => {
   const intl = useIntl();
   const [isOpen, setIsOpen] = React.useState(true);
@@ -174,7 +194,7 @@ export const SectionDisplayMode = ({
       if (previewLocationDisplay) setPreviewLocation(previewLocationDisplay);
       dispatch(change(formName, 'address', dataLocation.address));
     },
-    [dispatch],
+    [dispatch, formName],
   );
 
   const setPosition = React.useCallback(
@@ -198,7 +218,7 @@ export const SectionDisplayMode = ({
         refMap.current.leafletElement.setView([lat, lng], zoomId);
       }
     },
-    [dispatch, updateInfoLocation],
+    [dispatch, updateInfoLocation, formName],
   );
 
   const getLocationUser = React.useCallback(
@@ -476,14 +496,17 @@ export const SectionDisplayMode = ({
   );
 };
 
-const mapStateToProps = state => ({
-  latitude: formSelector(state, 'mapCenter')?.lat,
-  longitude: formSelector(state, 'mapCenter')?.lng,
-  dataMap: formSelector(state, 'mapCenter'),
-  zoom: formSelector(state, 'zoomMap'),
-  isMapViewEnabled: formSelector(state, 'viewEnabled')?.isMapViewEnabled,
-  errorViewEnabled: getFormSyncErrors(formName)(state)?.viewEnabled,
-});
+const mapStateToProps = (state: GlobalState, { formName }: Props) => {
+  const formSelector = formValueSelector(formName);
+  return {
+    latitude: formSelector(state, 'mapCenter')?.lat,
+    longitude: formSelector(state, 'mapCenter')?.lng,
+    dataMap: formSelector(state, 'mapCenter'),
+    zoom: formSelector(state, 'zoomMap'),
+    isMapViewEnabled: formSelector(state, 'viewEnabled')?.isMapViewEnabled,
+    errorViewEnabled: getFormSyncErrors(formName)(state)?.viewEnabled,
+  };
+};
 
 const SectionDisplayModeConnected = connect(mapStateToProps)(SectionDisplayMode);
 

@@ -3,7 +3,8 @@ import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableList from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import Collapsable from '~ui/Collapsable';
 import DropdownSelect from '~ui/DropdownSelect';
 import { useDashboardCampaignContext } from './DashboardCampaign.context';
@@ -20,8 +21,7 @@ import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import NoCampaign from '~/components/Admin/Emailing/EmailingCampaign/NoCampaign/NoCampaign';
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding';
-
-export const CAMPAIGN_PAGINATION = 30;
+import { CAMPAIGN_PAGINATION } from '../utils';
 
 type Props = {|
   relay: RelayPaginationProp,

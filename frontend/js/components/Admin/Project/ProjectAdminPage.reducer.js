@@ -1,11 +1,7 @@
 // @flow
 
 import type { Uuid } from '~/types';
-import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.context';
-import {
-  DEFAULT_FILTERS,
-  getInitialState,
-} from '~/components/Admin/Project/ProjectAdminPage.context';
+import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.utils';
 import {
   clearQueryUrl,
   getFieldsFromUrl,
@@ -47,6 +43,10 @@ export type ProposalsStepValues = ?Uuid;
 
 export type ProposalsStatusValues = 'ALL' | 'NONE' | string;
 
+export const DEFAULT_STATUS: ProjectAdminPageStatus = 'ready';
+
+export const DEFAULT_SORT: SortValues = 'newest';
+
 export type ProposalsProgressStateValues =
   | 'ALL'
   | 'TODO'
@@ -68,6 +68,20 @@ export type Filters = {|
   +supervisor: ?Uuid,
   +decisionMaker: ?Uuid,
 |};
+
+export const DEFAULT_FILTERS: Filters = {
+  state: 'PUBLISHED',
+  progressState: 'ALL',
+  category: 'ALL',
+  theme: 'ALL',
+  district: 'ALL',
+  step: null,
+  status: 'ALL',
+  term: null,
+  analysts: [],
+  supervisor: null,
+  decisionMaker: null,
+};
 
 export type Filter = {|
   +id: Uuid,
@@ -126,6 +140,17 @@ export type Action =
   | { type: 'INIT_FILTERS_FROM_URL' };
 
 const url = new URL(window.location.href);
+
+export const getInitialState = (initialSelectedStep: ?string): ProjectAdminPageState => ({
+  status: DEFAULT_STATUS,
+  sort: DEFAULT_SORT,
+  filters: {
+    ...DEFAULT_FILTERS,
+    step: initialSelectedStep,
+  },
+  filtersOrdered: [...(initialSelectedStep ? [{ id: initialSelectedStep, type: 'step' }] : [])],
+  initialSelectedStep,
+});
 
 export const createReducer = (state: ProjectAdminPageState, action: Action) => {
   switch (action.type) {

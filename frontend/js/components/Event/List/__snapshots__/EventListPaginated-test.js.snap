@@ -11,6 +11,7 @@ exports[`<EventListPaginated /> renders a preview of passed events when status f
     />
   </p>
   <Relay(Connect(EventPagePassedEventsPreview))
+    formName="formName"
     query={
       Object {
         "$fragmentRefs": null,

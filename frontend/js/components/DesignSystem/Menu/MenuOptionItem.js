@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import css from '@styled-system/css';
-import { MenuListItem } from '~ds/Menu/index';
-import { type Props as ListItemProps } from './MenuListItem';
+import MenuListItem, { type Props as ListItemProps } from './MenuListItem';
 import { useMenuOptionGroup } from '~ds/Menu/MenuOptionGroup.context';
 import AppBox from '~ui/Primitives/AppBox';
 import { SPACES_SCALES } from '~/styles/theme/base';

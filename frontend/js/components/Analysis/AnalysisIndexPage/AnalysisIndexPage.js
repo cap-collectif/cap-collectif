@@ -158,6 +158,7 @@ export const renderComponent = ({
         customPlaceholder={
           <AnalysisPageContentPlaceholder
             isProjectPage
+            // eslint-disable-next-line react/destructuring-assignment
             hasError={!!error || (!!props && !props?.viewerAssignedProjectsToAnalyse)}
             fetchData={retry}
           />
@@ -172,6 +173,7 @@ export const renderComponent = ({
         ready={false}
         customPlaceholder={
           <AnalysisPageContentPlaceholder
+            // eslint-disable-next-line react/destructuring-assignment
             hasError={!!error || (!!props && !props?.viewerAssignedProjectsToAnalyse)}
             fetchData={retry}
             selectedTab={parameters.filters.state}

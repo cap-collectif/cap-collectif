@@ -2,18 +2,15 @@
 import * as React from 'react';
 import { Menu as HeadlessMenu } from '@headlessui/react';
 import Tippy from '@tippyjs/react/headless';
-import {
-  MenuButton,
-  MenuDivider,
-  MenuList,
-  MenuListItem,
-  MenuOptionGroup,
-  MenuOptionItem,
-} from './index';
+import MenuButton, { MENU_BUTTON_TYPE } from './MenuButton';
+import MenuDivider from './MenuDivider';
+import MenuList, { MENU_LIST_TYPE } from './MenuList';
+import MenuListItem from './MenuListItem';
+import MenuOptionGroup from './MenuOptionGroup';
+import MenuOptionItem from './MenuOptionItem';
+
 import AppBox from '~ui/Primitives/AppBox';
 import { MenuContext } from '~ds/Menu/Menu.context';
-import { MENU_BUTTON_TYPE } from '~ds/Menu/MenuButton';
-import { MENU_LIST_TYPE } from '~ds/Menu/MenuList';
 import type { TippyPlacementProps } from '~ds/common.type';
 import type { Context } from '~ds/Menu/Menu.context';
 

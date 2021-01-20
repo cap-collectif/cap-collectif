@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
-import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableList from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import { useDashboardMailingListContext } from './DashboardMailingList.context';
 import * as S from './DashboardMailingList.style';
 import ClearableInput from '~ui/Form/Input/ClearableInput';

@@ -7,22 +7,11 @@ import styled, { type StyledComponent } from 'styled-components';
 import ProposalAnalysisUserRow from './ProposalAnalysisUserRow';
 import type { ProposalAnalysisPanel_proposal } from '~relay/ProposalAnalysisPanel_proposal.graphql';
 import colors from '~/utils/colors';
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { State } from '~/types';
 import ProposalFormSwitcher from './ProposalFormSwitcher';
 import { PROPOSAL_STATUS } from '~/constants/AnalyseConstants';
-
-const CloseIconContainer: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
-  right: 30px;
-  z-index: 1;
-  border: none;
-  padding: 0;
-  background: none;
-
-  :hover {
-    cursor: pointer;
-  }
-`;
+import type { PanelState, User } from './types';
+import { CloseIcon } from './ProposalAnalysisPanelCloseIcon';
 
 const PanelsSlider: StyledComponent<{ home: boolean }, {}, HTMLDivElement> = styled.div`
   display: flex;
@@ -66,28 +55,11 @@ const CloseIconWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export type User = {| id: string, displayName: string |};
-
 type Props = {|
   proposal: ProposalAnalysisPanel_proposal,
   onClose: () => void,
   user: User,
 |};
-
-export type PanelState =
-  | 'HOME'
-  | 'EDIT_ANALYSIS'
-  | 'VIEW_ANALYSIS'
-  | 'EDIT_ASSESSMENT'
-  | 'VIEW_ASSESSMENT'
-  | 'EDIT_DECISION'
-  | 'VIEW_DECISION';
-
-export const CloseIcon = ({ onClose }: { onClose: () => void }) => (
-  <CloseIconContainer onClick={onClose}>
-    <Icon name={ICON_NAME.close} size={16} color={colors.secondaryGray} />
-  </CloseIconContainer>
-);
 
 export const getStatus = (status: ?any, proposal: any) => {
   if (

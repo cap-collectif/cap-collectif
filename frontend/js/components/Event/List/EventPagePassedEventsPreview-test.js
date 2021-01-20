@@ -7,6 +7,7 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<EventPagePassedEventsPreviews />', () => {
   const props = {
+    formName: 'formName',
     dispatch: jest.fn(),
     query: {
       $refType,

@@ -6,7 +6,7 @@ import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { injectIntl } from 'react-intl';
-import { reduxForm, formValueSelector, registerField } from 'redux-form';
+import { reduxForm, registerField } from 'redux-form';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import { Form } from './MailParameterPage.style';
@@ -22,7 +22,7 @@ import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import { type MailParameterPage_emailingCampaign } from '~relay/MailParameterPage_emailingCampaign.graphql';
 import { type MailParameterPage_query } from '~relay/MailParameterPage_query.graphql';
-import Header from './Header/Header';
+import Header, { formName, PATHS } from './Header/Header';
 import SendEmailingCampaignMutation from '~/mutations/SendEmailingCampaignMutation';
 import stripHtml from '~/utils/stripHtml';
 import { DATE_ISO8601_FORMAT } from '~/shared/date';
@@ -54,14 +54,6 @@ type Props = {|
   +dispatch: Dispatch,
   +registeredFieldsName: string[],
 |};
-
-export const PATHS = {
-  PARAMETER: '/',
-  CONTENT: '/content',
-  SENDING: '/sending',
-};
-
-export const formName = 'form-edit-emailing-campaign';
 
 const handleChangeEmailingCampaign = (values: Values, dispatch: Dispatch, props: Props) => {
   const {
@@ -326,8 +318,6 @@ export const MailParameterPage = ({
     </Form>
   );
 };
-
-export const selectorForm = formValueSelector(formName);
 
 const MailParameterPageForm = reduxForm({
   onSubmit,

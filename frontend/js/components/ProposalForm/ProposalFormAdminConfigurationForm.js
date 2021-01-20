@@ -50,29 +50,6 @@ const TYPE_PROPOSAL_FORM = {
   ESTABLISHMENT: 'ESTABLISHMENT',
 };
 
-export const zoomLevels = [
-  { id: 1, name: 'map.zoom.world' },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5, name: 'map.zoom.mainland' },
-  { id: 6 },
-  { id: 7 },
-  { id: 8 },
-  { id: 9 },
-  { id: 10, name: 'map.zoom.city' },
-  { id: 11 },
-  { id: 12 },
-  { id: 13 },
-  { id: 14 },
-  { id: 15, name: 'map.zoom.street' },
-  { id: 16 },
-  { id: 17 },
-  { id: 18 },
-  { id: 19 },
-  { id: 20, name: 'map.zoom.building' },
-];
-
 export const formName = 'proposal-form-admin-configuration';
 
 export const validate = (values: Object) => {
@@ -525,7 +502,7 @@ export const ProposalFormAdminConfigurationForm = ({
         </div>
       </div>
 
-      <SectionDisplayMode proposalForm={proposalForm} dispatch={dispatch} />
+      <SectionDisplayMode proposalForm={proposalForm} dispatch={dispatch} formName={formName} />
 
       <div className="box box-primary container-fluid mt-10">
         <div className="box-header">

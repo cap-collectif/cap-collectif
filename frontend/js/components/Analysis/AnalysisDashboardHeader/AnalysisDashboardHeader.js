@@ -7,7 +7,7 @@ import type { GlobalState, Uuid } from '~/types';
 import type { User } from '~/redux/modules/user';
 import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHeader_project.graphql';
 import type { AnalysisDashboardHeader_themes } from '~relay/AnalysisDashboardHeader_themes.graphql';
-import { usePickableList } from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import {
   getAllFormattedChoicesForProject,

@@ -30,6 +30,7 @@ const defaultPropsTypes = {
   ],
   type: null,
   intl: intlMock,
+  formName: 'formName',
 };
 
 describe('<ProjectsListFilterTypes />', () => {

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as S from './styles';
-import { usePickableList } from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
 
 type Props = {
   className?: string,

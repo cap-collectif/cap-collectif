@@ -5,9 +5,9 @@ import { type FooterLink, type Legals } from './Footer';
 import SiteLanguageChangeButton from '../Ui/Button/SiteLanguageChangeButton';
 import CapcoPowered from './CapcoPowered';
 import FooterLinksRender from './FooterLinksRender';
-import type {LocaleMap} from "../Ui/Button/SiteLanguageChangeButton";
-import Fetcher from "~/services/Fetcher";
-import CookieMonster from "~/CookieMonster";
+import type { LocaleMap } from '../Ui/Button/SiteLanguageChangeButton';
+import Fetcher from '~/services/Fetcher';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {|
   currentRouteParams: {},
@@ -59,13 +59,6 @@ const Links: StyledComponent<
       margin: auto;
       margin-top: 15px;
     }
-  }
-`;
-
-export const LinkSeparator: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
-  padding: 0 8px;
-  @media (max-width: 767px) {
-    display: none;
   }
 `;
 
@@ -129,46 +122,46 @@ const FooterLinks = ({
   privacyPath,
   legalPath,
 }: Props) => (
-    <Links backgroundColor={backgroundColor} textColor={textColor} id="footer-links">
-      <FlexContainer>
-        {links && (
-          <FooterLinksRender
-            links={links}
-            legals={legals}
-            cookiesText={cookiesText}
-            cookiesPath={cookiesPath}
-            privacyPath={privacyPath}
-            legalPath={legalPath}
-            // TODO Deactivate left when multilangue feature enabled & completed
-            left={false}
-          />
-        )}
-        {multilingual && (
-          <SiteLanguageChangeButton
-            languageList={languageList}
-            defaultLanguage={defaultLocale}
-            onChange={(currentLanguage: LocaleMap) => {
-              Fetcher.postToJson(`/change-locale/${currentLanguage.code}`, {
-                routeName: currentRouteName,
-                routeParams: currentRouteParams
-              }).then((response) => {
-                CookieMonster.setLocale(currentLanguage.code);
-                window.location.href = response.path;
-              });
-            }}
-            backgroundColor={`${backgroundColor} !important`}
-            textColor={textColor}
-            borderless
-            dropup
-            pullRight
-          />
-        )}
-      </FlexContainer>
-      <SectionSeparator />
-      <FlexContainer>
-        <CapcoPowered textColor={textColor} />
-      </FlexContainer>
-    </Links>
-  );
+  <Links backgroundColor={backgroundColor} textColor={textColor} id="footer-links">
+    <FlexContainer>
+      {links && (
+        <FooterLinksRender
+          links={links}
+          legals={legals}
+          cookiesText={cookiesText}
+          cookiesPath={cookiesPath}
+          privacyPath={privacyPath}
+          legalPath={legalPath}
+          // TODO Deactivate left when multilangue feature enabled & completed
+          left={false}
+        />
+      )}
+      {multilingual && (
+        <SiteLanguageChangeButton
+          languageList={languageList}
+          defaultLanguage={defaultLocale}
+          onChange={(currentLanguage: LocaleMap) => {
+            Fetcher.postToJson(`/change-locale/${currentLanguage.code}`, {
+              routeName: currentRouteName,
+              routeParams: currentRouteParams,
+            }).then(response => {
+              CookieMonster.setLocale(currentLanguage.code);
+              window.location.href = response.path;
+            });
+          }}
+          backgroundColor={`${backgroundColor} !important`}
+          textColor={textColor}
+          borderless
+          dropup
+          pullRight
+        />
+      )}
+    </FlexContainer>
+    <SectionSeparator />
+    <FlexContainer>
+      <CapcoPowered textColor={textColor} />
+    </FlexContainer>
+  </Links>
+);
 
 export default FooterLinks;
