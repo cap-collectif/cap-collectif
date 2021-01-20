@@ -341,6 +341,38 @@ class ContributionSearch extends Search
         return $this->getQueryOrderedResults($response);
     }
 
+    public function getContributionsCountsByProject(
+        string $projectId,
+        array $objectTypes
+    ): ResultSet {
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+        $this->applyContributionsFilters($boolQuery, $objectTypes, true, true);
+
+        $boolQuery->addFilter(
+            (new BoolQuery())->addShould([
+                (new BoolQuery())
+                    ->addFilter(new Query\Exists('opinion'))
+                    ->addFilter(new Term(['opinion.published' => ['value' => true]])),
+                (new BoolQuery())
+                    ->addFilter(new Query\Exists('opinionVersion'))
+                    ->addFilter(new Term(['opinionVersion.published' => ['value' => true]])),
+                new Query\MatchAll(),
+            ])
+        );
+
+        $query = new Query($boolQuery);
+        $query->addAggregation(
+            (new Terms('contributionsCountsByType'))
+                ->setField('objectType')
+                ->setSize(Search::BIG_INT_VALUE)
+        );
+        $query->setSize(0);
+        $query->setTrackTotalHits(true);
+
+        return $this->index->search($query);
+    }
+
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         $order = ContributionOrderField::RANDOM;

@@ -247,6 +247,10 @@ Object {
       "enabled": true,
       "type": "unstable__tipsmeee",
     },
+    Object {
+      "enabled": false,
+      "type": "to_performance_test_counters",
+    },
   ],
 }
 `;

@@ -71,6 +71,7 @@ class Manager
     public const unstable__debate = 'unstable__debate';
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
+    public const to_performance_test_counters = 'to_performance_test_counters';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -159,6 +160,7 @@ class Manager
         self::unstable__debate,
         self::proposal_revisions,
         self::unstable__tipsmeee,
+        self::to_performance_test_counters,
     ];
 
     protected ToggleManager $toggleManager;

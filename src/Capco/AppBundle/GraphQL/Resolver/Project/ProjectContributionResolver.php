@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Search\ContributionSearch;
@@ -14,10 +15,12 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class ProjectContributionResolver implements ResolverInterface
 {
     protected ContributionSearch $contributionSearch;
+    private RedisCache $cache;
 
-    public function __construct(ContributionSearch $contributionSearch)
+    public function __construct(ContributionSearch $contributionSearch, RedisCache $cache)
     {
         $this->contributionSearch = $contributionSearch;
+        $this->cache = $cache;
     }
 
     public function __invoke(Project $project, ?Argument $args = null): ConnectionInterface
@@ -74,5 +77,33 @@ class ProjectContributionResolver implements ResolverInterface
         $connection->setTotalCount($totalCount);
 
         return $connection;
+    }
+
+    public function getTotalContributionsCountsByTypes(string $projectId, array $objectTypes): array
+    {
+        $cacheKey = 'totalContributionsCounts-' . $projectId;
+        $cachedTotalContributionCount = $this->cache->getItem($cacheKey);
+
+        if ($cachedTotalContributionCount->isHit()) {
+            return $cachedTotalContributionCount->get('value');
+        }
+
+        $counters = [];
+        $response = $this->contributionSearch
+            ->getContributionsCountsByProject($projectId, $objectTypes)
+            ->getAggregation('contributionsCountsByType');
+        foreach ($objectTypes as $objectType) {
+            $counters[$objectType] = 0;
+            foreach ($response['buckets'] as $bucket) {
+                if ($bucket['key'] === $objectType) {
+                    $counters[$objectType] = $bucket['doc_count'];
+                }
+            }
+        }
+
+        $cachedTotalContributionCount->set($counters)->expiresAfter(RedisCache::ONE_MINUTE);
+        $this->cache->save($cachedTotalContributionCount);
+
+        return $counters;
     }
 }

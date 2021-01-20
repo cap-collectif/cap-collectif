@@ -54,12 +54,7 @@ class OpinionSearch extends Search
             ]);
         }
 
-        if (isset($filters['trashed']) && !$filters['trashed']) {
-            $boolQuery->addMustNot(new Exists('trashedAt'));
-            unset($filters['trashed']);
-        } else {
-            unset($filters['trashed']);
-        }
+        $this->filterTrashed($filters, $boolQuery);
         foreach ($filters as $key => $value) {
             $conditions[] = new Term([$key => ['value' => $value]]);
         }

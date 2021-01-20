@@ -1,32 +1,45 @@
-{% macro contributions_popover(project) %}{% spaceless %}
-    {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
-    {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
-    {% if opinions > 0 %}
-        {% set projectType = project.projectType is defined and project.projectType is not null
-            ? project.projectType.title
-            : null
-        %}
-        </br>
-    {% endif %}
-    {% set versions = project.totalVersionsCount %}
-    {% if versions > 0 %}
-        {{ 'amendment-count' | trans({'count': versions}, 'CapcoAppBundle') }}
-        </br>
-    {% endif %}
-    {% set arguments = project.totalArgumentsCount %}
-    {% if arguments > 0 %}
-        {{ 'argument-count' | trans({'count': arguments}, 'CapcoAppBundle') }}
-        </br>
-    {% endif %}
-    {% set sources = project.totalSourcesCount %}
-    {% if sources > 0 %}
-        {{ 'source-count' | trans({'count': sources}, 'CapcoAppBundle') }}
-    {% endif %}
-    {% set replies = project.totalRepliesCount %}
-    {% if replies > 0 %}
-        {{ 'answer-count' | trans({'count': replies}, 'CapcoAppBundle') }}
-    {% endif %}
-{% endspaceless %}{% endmacro %}
+{% macro contributions_popover(project) %}
+    {% apply spaceless %}
+        {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
+        {% if is_feature_enabled('to_performance_test_counters') and app.request.query.get('performance_test') %}
+            {% set counters = projectContributionResolver.getTotalContributionsCountsByTypes(project.id, ['opinion', 'opinionVersion', 'source', 'reply', 'argument']) %}
+            {% set opinions = counters['opinion'] + totalProposalsCount %}
+            {% set versions = counters['opinionVersion'] %}
+            {% set arguments = counters['argument'] %}
+            {% set sources = counters['source'] %}
+            {% set replies = counters['reply'] %}
+        {% else %}
+            {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
+            {% set versions = project.totalVersionsCount %}
+            {% set arguments = project.totalArgumentsCount %}
+            {% set sources = project.totalSourcesCount %}
+            {% set replies = project.totalRepliesCount %}
+        {% endif %}
+        {% if opinions > 0 %}
+            {% set projectType = project.projectType is defined and project.projectType is not null
+                ? project.projectType.title
+                : null
+            %}
+            {{ 'proposal-count' | trans({'count': opinions}, 'CapcoAppBundle') }}
+            <br/>
+        {% endif %}
+
+        {% if versions > 0 %}
+            {{ 'amendment-count' | trans({'count': versions}, 'CapcoAppBundle') }}
+            </br>
+        {% endif %}
+        {% if arguments > 0 %}
+            {{ 'argument-count' | trans({'count': arguments}, 'CapcoAppBundle') }}
+            </br>
+        {% endif %}
+        {% if sources > 0 %}
+            {{ 'source-count' | trans({'count': sources}, 'CapcoAppBundle') }}
+        {% endif %}
+        {% if replies > 0 %}
+            {{ 'answer-count' | trans({'count': replies}, 'CapcoAppBundle') }}
+        {% endif %}
+    {% endapply %}
+{% endmacro %}
 
 {% import _self as render %}
 

@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
@@ -69,7 +70,7 @@ abstract class Search
      * Type does not exists anymore in Elasticsearch,
      * so we use this method to add a "objectType" filter.
      */
-    protected function addObjectTypeFilter(Query $query, $type = null)
+    protected function addObjectTypeFilter(Query $query, $type = null): void
     {
         if (!$this->type && !$type) {
             throw new \RuntimeException('Type is not specified!');
@@ -208,5 +209,14 @@ abstract class Search
     protected function setSortWithId(Query $query, array $sortArgs)
     {
         return $query->setParam('sort', array_merge($sortArgs, ['id' => new \stdClass()]));
+    }
+
+    protected function filterTrashed(array &$filters, BoolQuery $boolQuery): void
+    {
+        if (isset($filters['trashed']) && !$filters['trashed']) {
+            $boolQuery->addMustNot(new Exists('trashedAt'));
+            unset($filters['trashed']);
+        }
+        unset($filters['trashed']);
     }
 }

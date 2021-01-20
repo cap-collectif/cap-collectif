@@ -135,7 +135,8 @@ describe('Preview|Query.projects connection', () => {
   it('fetches the public projects with a cursor', async () => {
     await expect(
       graphql(ProjectsPublicQuery, {
-        count: 100,
+        count: 5,
+        cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
       }),
     ).resolves.toMatchSnapshot();
   });
@@ -145,7 +146,8 @@ describe('Preview|Query.projects connection', () => {
       graphql(
         ProjectsPublicQuery,
         {
-          count: 100,
+          count: 5,
+          cursor: 'YXJyYXljb25uZWN0aW9uOjI=',
         },
         'admin',
       ),
@@ -158,7 +160,7 @@ describe('Preview|Query.projects connection', () => {
         ProjectsInternalQuery,
         {
           orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
-          count: 100,
+          count: 5,
         },
         'internal',
       ),
@@ -171,7 +173,7 @@ describe('Preview|Query.projects connection', () => {
         ProjectsThemeQuery,
         {
           theme: 'theme1',
-          count: 100,
+          count: 5,
         },
         'internal',
       ),
@@ -184,7 +186,7 @@ describe('Preview|Query.projects connection', () => {
         ProjectsAuthorsQuery,
         {
           authorId: 'VXNlcjp1c2VyQWRtaW4=',
-          count: 100,
+          count: 5,
         },
         'internal',
       ),
@@ -197,7 +199,7 @@ describe('Preview|Query.projects connection', () => {
         ProjectsDistrictsQuery,
         {
           districtId: 'projectDistrict6',
-          count: 100,
+          count: 5,
         },
         'internal',
       ),
@@ -210,7 +212,7 @@ describe('Preview|Query.projects connection', () => {
         ProjectsTypeQuery,
         {
           type: '3',
-          count: 100,
+          count: 5,
         },
         'internal',
       ),
@@ -223,7 +225,7 @@ describe('Preview|Query.projects connection', () => {
         ProjectsInternalQuery,
         {
           term: 'Croissance',
-          count: 100,
+          count: 5,
         },
         'internal',
       ),
