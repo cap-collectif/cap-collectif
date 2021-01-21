@@ -52,33 +52,31 @@ const Tab: StyledComponent<{ selected: boolean }, {}, HTMLSpanElement> = styled.
 `;
 
 type Props = {
-  isProjectPage?: boolean,
+  isIndexPage: boolean,
   fetchData: ?() => void,
   hasError: boolean,
-  selectedTab?: StateValues,
+  selectedTab?: ?StateValues,
 };
 
-const renderContent = ({ isProjectPage, fetchData, hasError }: Props) => {
-  if (isProjectPage) {
+const renderContent = ({ isIndexPage, fetchData, hasError }: Props) => {
+  if (isIndexPage) {
     const fakeProjects = new Array(3).fill(null);
 
     if (hasError) return <ErrorQuery retry={fetchData} />;
     return fakeProjects.map((preview, idx) => <ProjectAnalysisPreviewPlaceholder key={idx} />);
   }
 
-  if (!isProjectPage) {
-    return (
-      <AnalysisPlaceholderDashboard
-        type={TYPE_DASHBOARD.ANALYSIS}
-        hasError={hasError}
-        fetchData={fetchData}
-      />
-    );
-  }
+  return (
+    <AnalysisPlaceholderDashboard
+      type={TYPE_DASHBOARD.ANALYSIS}
+      hasError={hasError}
+      fetchData={fetchData}
+    />
+  );
 };
 
-const renderHeader = (intl: IntlShape, isProjectPage?: boolean, selectedTab: ?string) => {
-  if (!isProjectPage && selectedTab) {
+const renderHeader = (intl: IntlShape, isIndexPage?: boolean, selectedTab: ?string) => {
+  if (!isIndexPage && selectedTab) {
     return (
       <>
         <TextRow color={colors.borderColor} style={{ width: 250, height: 30, marginBottom: 30 }} />
@@ -106,7 +104,7 @@ const renderHeader = (intl: IntlShape, isProjectPage?: boolean, selectedTab: ?st
 };
 
 const AnalysisPageContentPlaceholder = ({
-  isProjectPage,
+  isIndexPage,
   fetchData,
   hasError,
   selectedTab,
@@ -115,8 +113,8 @@ const AnalysisPageContentPlaceholder = ({
 
   return (
     <AnalysisPageContainerPlaceholder>
-      <Header hasMarge={!isProjectPage}>{renderHeader(intl, isProjectPage, selectedTab)}</Header>
-      <Container>{renderContent({ isProjectPage, fetchData, hasError })}</Container>
+      <Header hasMarge={!isIndexPage}>{renderHeader(intl, isIndexPage, selectedTab)}</Header>
+      <Container>{renderContent({ isIndexPage, fetchData, hasError })}</Container>
     </AnalysisPageContainerPlaceholder>
   );
 };

@@ -135,7 +135,7 @@
         },
         {
             "path": "./public/css/style-admin.css",
-            "maxSize": "105 kB"
+            "maxSize": "110 kB"
         },
         {
             "path": "./public/js/admin.js",

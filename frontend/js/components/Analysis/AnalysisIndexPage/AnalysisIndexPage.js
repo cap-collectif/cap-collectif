@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '~/createRelayEnvironment';
-import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
 import ScrollToTop from '~/components/Utils/ScrollToTop';
 import AnalysisListProjectPage from '~/components/Analysis/AnalysisListProjectPage/AnalysisListProjectPage';
@@ -151,39 +150,23 @@ export const renderComponent = ({
     }
   }
 
-  if (window.location.pathname === BASE_URL_ANALYSIS) {
-    return (
-      <ReactPlaceholder
-        ready={false}
-        customPlaceholder={
-          <AnalysisPageContentPlaceholder
-            isProjectPage
-            // eslint-disable-next-line react/destructuring-assignment
-            hasError={!!error || (!!props && !props?.viewerAssignedProjectsToAnalyse)}
-            fetchData={retry}
-          />
-        }
-      />
-    );
-  }
+  const hasError = !!error || (!!props && !props?.viewerAssignedProjectsToAnalyse);
+  const isIndexPage = !window.location.pathname.includes('project');
 
-  if (window.location.pathname !== BASE_URL_ANALYSIS) {
-    return (
-      <ReactPlaceholder
-        ready={false}
-        customPlaceholder={
-          <AnalysisPageContentPlaceholder
-            // eslint-disable-next-line react/destructuring-assignment
-            hasError={!!error || (!!props && !props?.viewerAssignedProjectsToAnalyse)}
-            fetchData={retry}
-            selectedTab={parameters.filters.state}
-          />
-        }
-      />
-    );
-  }
-
-  return <Loader />;
+  return (
+    <ReactPlaceholder
+      ready={false}
+      children={null}
+      customPlaceholder={
+        <AnalysisPageContentPlaceholder
+          isIndexPage={isIndexPage}
+          hasError={hasError}
+          fetchData={retry}
+          selectedTab={isIndexPage ? null : parameters.filters.state}
+        />
+      }
+    />
+  );
 };
 
 type Props = {|

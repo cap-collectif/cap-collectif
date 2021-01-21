@@ -1,4 +1,3 @@
-// @flow
 const webpackConfig = require('../config');
 
 function getRulesConf() {
@@ -13,7 +12,18 @@ function getRulesConf() {
               loader: 'file-loader',
               options: {
                 emitFile: false, // Don't create a file
-                name: '/fonts/[folder]/[name].[ext]',
+                name: file => {
+                  const pathFile = file.split('/');
+                  const fontName = pathFile[pathFile.length - 1];
+
+                  // Don't use [folder] for slick font (used for slick-carousel)
+                  // because the file is in "fonts" folder in node_modules that we don't need
+                  if (fontName.includes('slick')) {
+                    return 'fonts/[name].[ext]';
+                  }
+
+                  return 'fonts/[folder]/[name].[ext]';
+                },
               },
             },
           ],
