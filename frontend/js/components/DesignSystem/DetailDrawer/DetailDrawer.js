@@ -25,7 +25,7 @@ let portal: HTMLDivElement;
 if (config.canUseDOM && document) {
   portal = document.createElement('div');
   portal.id = DRAWER_CONTAINER_ID;
-  if (document.body) {
+  if (document.body && !document.getElementById(DRAWER_CONTAINER_ID)) {
     document.body.appendChild(portal);
   }
 }

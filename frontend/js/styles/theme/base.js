@@ -32,7 +32,7 @@ const borderRadius: { [string]: number } = {
   button: 4,
   buttonQuickAction: 50,
   card: 4,
-  modal: 4,
+  modal: 5,
   tags: 4,
   tooltip: 4,
   notifications: 4,

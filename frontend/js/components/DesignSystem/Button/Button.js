@@ -9,7 +9,7 @@ import S from './Button.style';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import Spinner from '~ds/Spinner/Spinner';
 
-type Props = {|
+export type ButtonProps = {|
   ...AppBoxProps,
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link',
   variantColor?: 'primary' | 'danger',
@@ -55,7 +55,7 @@ const ButtonInner = styled(AppBox)(
     }),
 );
 
-const Button = React.forwardRef<Props, HTMLButtonElement>(
+const Button = React.forwardRef<ButtonProps, HTMLButtonElement>(
   (
     {
       variantSize,
@@ -68,7 +68,7 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
       alternative,
       isLoading,
       ...props
-    }: Props,
+    }: ButtonProps,
     ref,
   ) => {
     return (
