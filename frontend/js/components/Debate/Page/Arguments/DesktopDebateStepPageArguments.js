@@ -42,7 +42,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
         </Heading>
         <Menu>
           <Menu.Button as={React.Fragment}>
-            <Button p={0} rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
+            <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
               <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
             </Button>
           </Menu.Button>

@@ -8,15 +8,16 @@ import AppBox from '~ui/Primitives/AppBox';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { TippyPlacementProps } from '~ds/common.type';
 import { LAYOUT_TRANSITION_SPRING } from '~/utils/motion';
-import Text from '~ui/Primitives/Text';
+import PopoverTrigger, { POPOVER_TRIGGER_TYPE } from './trigger';
+import PopoverContent from './content';
+import PopoverHeader from './header';
+import PopoverBody from './body';
+import PopoverFooter from './footer';
 
 type Props = {|
   ...AppBoxProps,
   ...TippyPlacementProps,
-  +label: React.Node,
-  +truncate?: number,
   +trigger?: $ReadOnlyArray<'mouseenter' | 'focus' | 'click' | 'focusin' | 'manual'>,
-  +isDisabled?: boolean,
   +useArrow?: boolean,
   +keepOnHover?: boolean,
   +delay?: number | [number | null, number | null],
@@ -25,7 +26,7 @@ type Props = {|
   +onHide?: (instance: any) => void | false,
 |};
 
-const TooltipInner = styled(motion.custom(AppBox))`
+const PopoverInner = styled(motion.custom(AppBox))`
   &[data-placement^='top'] > #arrow {
     bottom: -4px;
   }
@@ -60,23 +61,35 @@ const Arrow = styled(AppBox)`
 
 const INITIAL_SCALE = 0.8;
 
-export const Tooltip = ({
+const Popover = ({
   children,
-  label,
   showOnCreate,
   onShow,
   onHide,
-  delay = [400, null],
-  truncate = 100,
+  delay,
   trigger = ['mouseenter', 'focus'],
-  useArrow = true,
+  useArrow,
   keepOnHover = false,
   isDisabled = false,
-  placement = 'top',
+  placement,
   ...props
 }: Props) => {
   const opacity = useSpring(0, LAYOUT_TRANSITION_SPRING);
   const scale = useSpring(INITIAL_SCALE, LAYOUT_TRANSITION_SPRING);
+  const [triggerChild] = React.useState(
+    React.Children.toArray(children).find(child => {
+      if (React.isValidElement(child)) {
+        return child.type.name === POPOVER_TRIGGER_TYPE;
+      }
+    }),
+  );
+  const [popoverChildren] = React.useState(
+    React.Children.toArray(children).filter(child => {
+      if (React.isValidElement(child)) {
+        return child.type.name !== POPOVER_TRIGGER_TYPE;
+      }
+    }),
+  );
 
   function onMount() {
     scale.set(1);
@@ -97,7 +110,8 @@ export const Tooltip = ({
     scale.set(INITIAL_SCALE);
     opacity.set(0);
   }
-  return (
+
+  return triggerChild ? (
     <Tippy
       disabled={isDisabled}
       placement={placement}
@@ -127,37 +141,31 @@ export const Tooltip = ({
       }}
       {...(onShow && { onShow })}
       render={attrs => (
-        <TooltipInner
-          p={1}
-          bg="gray.900"
-          color="white"
-          borderRadius="tooltip"
-          maxWidth="270px"
-          {...attrs}
-          {...props}
-          style={{ scale, opacity }}>
-          {typeof label === 'string' && (
-            <Text minWidth={6} textAlign="center" lineHeight="sm" fontSize={1} truncate={truncate}>
-              {label}
-            </Text>
-          )}
-          {typeof label !== 'string' && <>{label}</>}
+        <PopoverInner {...attrs} {...props} style={{ scale, opacity }}>
+          {popoverChildren}
+
           {useArrow && (
             <Arrow
               css={css({
                 '&::before': {
-                  bg: props.bg ?? props.backgroundColor ?? 'gray.900',
+                  bg: props.bg ?? props.backgroundColor ?? 'white',
                 },
               })}
               id="arrow"
               data-popper-arrow
             />
           )}
-        </TooltipInner>
+        </PopoverInner>
       )}>
-      {children}
+      {triggerChild}
     </Tippy>
-  );
+  ) : null;
 };
 
-export default Tooltip;
+Popover.Trigger = PopoverTrigger;
+Popover.Content = PopoverContent;
+Popover.Header = PopoverHeader;
+Popover.Body = PopoverBody;
+Popover.Footer = PopoverFooter;
+
+export default Popover;

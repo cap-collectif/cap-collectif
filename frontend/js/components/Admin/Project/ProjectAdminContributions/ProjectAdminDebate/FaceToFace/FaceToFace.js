@@ -97,7 +97,7 @@ export const FaceToFace = ({ debate }: Props) => {
             }
           />
         ) : (
-          <Button onClick={() => setOpinionSelected('FOR')} flex="1" p={0}>
+          <Button onClick={() => setOpinionSelected('FOR')} flex="1">
             <DebateEmptyOpinion type="FOR" />
           </Button>
         )}
@@ -117,7 +117,7 @@ export const FaceToFace = ({ debate }: Props) => {
             }
           />
         ) : (
-          <Button onClick={() => setOpinionSelected('AGAINST')} flex="1" p={0}>
+          <Button onClick={() => setOpinionSelected('AGAINST')} flex="1">
             <DebateEmptyOpinion type="AGAINST" />
           </Button>
         )}

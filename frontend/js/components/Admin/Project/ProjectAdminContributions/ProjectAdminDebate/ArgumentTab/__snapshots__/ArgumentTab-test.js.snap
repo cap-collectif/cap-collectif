@@ -36,20 +36,16 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
     >
       <Menu>
         <Menu.Button
-          __type="MenuButton"
           as={Symbol(react.fragment)}
         >
           <Button
             color="gray.500"
-            p={0}
             rightIcon="ARROW_DOWN_O"
           >
             label_filters
           </Button>
         </Menu.Button>
-        <Menu.List
-          __type="MenuList"
-        >
+        <Menu.List>
           <Menu.OptionGroup
             onChange={[Function]}
             title="filter-arguments"

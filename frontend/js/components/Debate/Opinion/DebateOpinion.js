@@ -73,7 +73,7 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
             />
           </Text>
           {isMobile && (
-            <Button onClick={onOpen} variant="link" alignSelf="center">
+            <Button onClick={onOpen} variant="link" variantSize="medium" alignSelf="center">
               <FormattedMessage id="capco.module.read_more" />
             </Button>
           )}

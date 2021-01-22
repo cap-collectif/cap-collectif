@@ -108,7 +108,6 @@ export const ArgumentCard = ({
                 onClick={() => setModerateModalId(argument.id)}
                 rightIcon={ICON_NAME.MODERATE}
                 color="neutral-gray.500"
-                p={0}
               />
             )}
             {argument.viewerDidAuthor && (
@@ -118,14 +117,12 @@ export const ArgumentCard = ({
                   onClick={() => setIsEditing(true)}
                   rightIcon={ICON_NAME.PENCIL}
                   color="neutral-gray.500"
-                  p={0}
                 />
                 <Button
                   disabled={isEditing}
                   onClick={() => setDeleteModalInfo({ id: argument.id, type: argument.type })}
                   rightIcon={ICON_NAME.TRASH}
                   color="neutral-gray.500"
-                  p={0}
                 />
               </>
             )}
@@ -135,7 +132,6 @@ export const ArgumentCard = ({
                   <Button
                     rightIcon={ICON_NAME.MORE}
                     aria-label={intl.formatMessage({ id: 'global.menu' })}
-                    p={0}
                     color="blue.900"
                   />
                 </Menu.Button>
@@ -169,7 +165,7 @@ export const ArgumentCard = ({
                     if (onReadMore) onReadMore();
                     else setReadMore(!readMore);
                   }}
-                  variant="link">
+                  variant="link" variantSize="medium">
                   <FormattedMessage id={readMore ? 'see-less' : 'capco.module.read_more'} />
                 </Button>
               </>

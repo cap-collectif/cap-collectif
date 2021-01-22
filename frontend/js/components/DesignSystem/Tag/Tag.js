@@ -23,6 +23,7 @@ export type Props = {|
   +avatar?: {| ...AvatarProps, props?: AppBoxProps |},
   +onRemove?: (e?: MouseEvent) => void,
   +variant?: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray',
+  +interactive?: boolean,
 |};
 
 export const styles = {
@@ -133,12 +134,17 @@ const TagInner = styled(AppBox).attrs({
 const IconContainer = motion.custom(AppBox);
 
 const Tag = React.forwardRef<Props, HTMLSpanElement>(
-  ({ children, icon, onRemove, avatar, variantType = 'tag', ...props }: Props, ref) => {
+  (
+    { children, icon, onRemove, avatar, variantType = 'tag', interactive = true, ...props }: Props,
+    ref,
+  ) => {
     const [state, set] = useState<'idle' | 'hovering'>('idle');
+
     const onFocus = () => {
       if (!onRemove) return;
-      set('hovering');
+      if (interactive) set('hovering');
     };
+
     return (
       <TagInner
         ref={ref}
@@ -149,7 +155,7 @@ const Tag = React.forwardRef<Props, HTMLSpanElement>(
         borderRadius="tags"
         {...props}
         onMouseLeave={() => {
-          set('idle');
+          if (interactive) set('idle');
         }}
         onMouseEnter={onFocus}
         onClick={onFocus}

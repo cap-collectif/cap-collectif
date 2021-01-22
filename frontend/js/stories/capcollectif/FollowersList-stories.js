@@ -11,7 +11,6 @@ import UserLink from '../../components/User/UserLink';
 
 import { followers as followersMock } from '../mocks/users';
 
-/* eslint-disable react/prop-types */
 const FollowerItem = ({ user }) => (
   <Card>
     <Card.Body>

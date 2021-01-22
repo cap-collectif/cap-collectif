@@ -37,7 +37,9 @@ storiesOf('Design system|Tooltip', module)
     return (
       <Flex align="center" gridGap={2}>
         <Tooltip label="Salut les filles">
-          <Button variant="primary">Hover moi</Button>
+          <Button variant="primary" variantSize="medium">
+            Hover moi
+          </Button>
         </Tooltip>
       </Flex>
     );
@@ -54,7 +56,9 @@ storiesOf('Design system|Tooltip', module)
               </AppBox>
             </Text>
           }>
-          <Button variant="primary">Hover moi</Button>
+          <Button variant="primary" variantSize="medium">
+            Hover moi
+          </Button>
         </Tooltip>
       </Flex>
     );
@@ -63,7 +67,9 @@ storiesOf('Design system|Tooltip', module)
     return (
       <Flex align="center" gridGap={2}>
         <Tooltip p={2} bg="red.700" label="Salut les filles">
-          <Button variant="primary">Hover moi</Button>
+          <Button variant="primary" variantSize="medium">
+            Hover moi
+          </Button>
         </Tooltip>
       </Flex>
     );
@@ -72,7 +78,9 @@ storiesOf('Design system|Tooltip', module)
     return (
       <Flex align="center" gridGap={2}>
         <Tooltip label="Salut les filles" trigger={['click']}>
-          <Button variant="primary">On click</Button>
+          <Button variant="primary" variantSize="medium">
+            On click
+          </Button>
         </Tooltip>
       </Flex>
     );
@@ -81,7 +89,9 @@ storiesOf('Design system|Tooltip', module)
     return (
       <Flex align="center" gridGap={2}>
         <Tooltip useArrow={false} label="Salut les filles">
-          <Button variant="primary">Hover moi</Button>
+          <Button variant="primary" variantSize="medium">
+            Hover moi
+          </Button>
         </Tooltip>
       </Flex>
     );
@@ -116,7 +126,9 @@ storiesOf('Design system|Tooltip', module)
     return (
       <Flex align="center" gridGap={2}>
         <Tooltip isDisabled label="Salut les filles">
-          <Button variant="primary">Hover moi</Button>
+          <Button variant="primary" variantSize="medium">
+            Hover moi
+          </Button>
         </Tooltip>
       </Flex>
     );
@@ -125,19 +137,29 @@ storiesOf('Design system|Tooltip', module)
     return (
       <Flex align="center" gridGap={2} wrap="wrap">
         <Tooltip label="Salut les filles" delay={0}>
-          <Button variant="primary">No delay</Button>
+          <Button variant="primary" variantSize="medium">
+            No delay
+          </Button>
         </Tooltip>
         <Tooltip label="Salut les filles" delay={[500, null]}>
-          <Button variant="primary">500ms delay on open</Button>
+          <Button variant="primary" variantSize="medium">
+            500ms delay on open
+          </Button>
         </Tooltip>
         <Tooltip label="Salut les filles" delay={[null, 500]}>
-          <Button variant="primary">500ms delay on close</Button>
+          <Button variant="primary" variantSize="medium">
+            500ms delay on close
+          </Button>
         </Tooltip>
         <Tooltip label="Salut les filles" keepOnHover>
-          <Button variant="primary">Keep on hover</Button>
+          <Button variant="primary" variantSize="medium">
+            Keep on hover
+          </Button>
         </Tooltip>
         <Tooltip label="Salut les filles" showOnCreate>
-          <Button variant="primary">Show on create</Button>
+          <Button variant="primary" variantSize="medium">
+            Show on create
+          </Button>
         </Tooltip>
       </Flex>
     );

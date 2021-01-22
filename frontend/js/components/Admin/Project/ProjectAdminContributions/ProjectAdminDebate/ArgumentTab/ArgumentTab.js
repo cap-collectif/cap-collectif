@@ -80,7 +80,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
         <Flex direction="row" align="center" spacing={5}>
           <Menu>
             <Menu.Button as={React.Fragment}>
-              <Button rightIcon={ICON_NAME.ARROW_DOWN_O} color="gray.500" p={0}>
+              <Button rightIcon={ICON_NAME.ARROW_DOWN_O} color="gray.500">
                 {intl.formatMessage({ id: 'label_filters' })}
               </Button>
             </Menu.Button>

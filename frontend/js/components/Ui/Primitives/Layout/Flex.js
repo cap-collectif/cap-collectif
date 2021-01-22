@@ -4,7 +4,7 @@ import AppBox from '~ui/Primitives/AppBox';
 import useTheme from '~/utils/hooks/useTheme';
 import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type';
 
-export type Props = {|
+export type FlexProps = {|
   ...AppBoxProps,
   align?: Responsive<string>,
   justify?: Responsive<string>,
@@ -17,7 +17,7 @@ export type Props = {|
 |};
 
 // typings is handled by the .d.ts file
-const Flex = React.forwardRef<Props, HTMLElement>((props: Props, ref) => {
+const Flex = React.forwardRef<FlexProps, HTMLElement>((props: FlexProps, ref) => {
   const {
     direction = 'row',
     align,

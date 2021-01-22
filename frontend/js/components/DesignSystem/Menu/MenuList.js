@@ -63,14 +63,7 @@ const MenuList = React.forwardRef<Props, HTMLElement>(
   },
 );
 
-// When using forwardRef, it does not understand defaultProps but it is working
-// I need those defaultProps in `Menu.js` component to filter the children and wrap them with Tippy to
-// have a correct positionnable dropdown element but keeping the same Menu component API
-// $FlowFixMe
-MenuList.defaultProps = {
-  __type: MENU_LIST_TYPE,
-};
-
+MenuList.name = MENU_LIST_TYPE;
 MenuList.displayName = 'Menu.List';
 
 export default MenuList;

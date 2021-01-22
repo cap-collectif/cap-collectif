@@ -101,6 +101,8 @@ module.exports = {
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967
     'react/no-children-prop': 'off',
+    // TODO: There is a problem around props-types (source: https://stackoverflow.com/a/38685130)
+    'react/prop-types': 'off',
     // TODO enable this
     'react/default-props-match-prop-types': 'off',
     'react/no-unused-prop-types': 'off',

@@ -38,6 +38,7 @@ const borderRadius: { [string]: number } = {
   notifications: 4,
   toasts: 4,
   accordion: 8,
+  popover: 8,
   poppin: 8,
 };
 

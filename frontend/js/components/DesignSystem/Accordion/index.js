@@ -5,7 +5,7 @@ import AccordionItem from './item/index';
 import AccordionButton from './button/index';
 import AccordionPanel from './panel/index';
 import { AccordionContext } from './context';
-import type { Props as FlexProps } from '~ui/Primitives/Layout/Flex';
+import type { FlexProps } from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   ...FlexProps,

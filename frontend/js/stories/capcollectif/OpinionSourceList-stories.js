@@ -9,7 +9,6 @@ import Card from '../../components/Ui/Card/Card';
 import Loader from '../../components/Ui/FeedbacksIndicators/Loader';
 import { opinionSources as opinionSourcesMock } from '../mocks/opinionSources';
 
-/* eslint-disable react/prop-types */
 const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
   <Media>
     {isProfile && item.related && (

@@ -1,4 +1,4 @@
-/* eslint-disable flowtype/require-valid-file-annotation,react/prop-types */
+/* eslint-disable flowtype/require-valid-file-annotation */
 import * as React from 'react';
 import AppBox from '~ui/Primitives/AppBox';
 

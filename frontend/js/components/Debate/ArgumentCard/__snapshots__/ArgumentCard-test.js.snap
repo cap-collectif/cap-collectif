@@ -61,14 +61,12 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="PENCIL"
         />
         <Button
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="TRASH"
         />
       </ForwardRef>
@@ -193,14 +191,12 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="PENCIL"
         />
         <Button
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="TRASH"
         />
       </ForwardRef>
@@ -325,14 +321,12 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="PENCIL"
         />
         <Button
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="TRASH"
         />
       </ForwardRef>
@@ -457,31 +451,25 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="PENCIL"
         />
         <Button
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
-          p={0}
           rightIcon="TRASH"
         />
         <Menu>
           <Menu.Button
-            __type="MenuButton"
             as={Symbol(react.fragment)}
           >
             <Button
               aria-label="global.menu"
               color="blue.900"
-              p={0}
               rightIcon="MORE"
             />
           </Menu.Button>
-          <Menu.List
-            __type="MenuList"
-          >
+          <Menu.List>
             <Menu.ListItem>
               <Button
                 color="blue.900"

@@ -14,6 +14,7 @@ storiesOf('Design system|Toasts', module)
       <Flex direction={['column', 'row']} gridGap={2} wrap="wrap">
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'success',
@@ -24,6 +25,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'info',
@@ -34,6 +36,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'warning',
@@ -44,6 +47,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           variantColor="danger"
           onClick={() => {
             toast({
@@ -62,6 +66,7 @@ storiesOf('Design system|Toasts', module)
       <Flex direction={['column', 'row']} gridGap={2} wrap="wrap">
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'success',
@@ -77,6 +82,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'info',
@@ -92,6 +98,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'warning',
@@ -108,6 +115,7 @@ storiesOf('Design system|Toasts', module)
         <Button
           variant="primary"
           variantColor="danger"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'danger',
@@ -129,6 +137,7 @@ storiesOf('Design system|Toasts', module)
       <Flex direction={['column', 'row']} gridGap={2} wrap="wrap">
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'success',
@@ -143,6 +152,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'info',
@@ -157,6 +167,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               variant: 'warning',
@@ -171,6 +182,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           variantColor="danger"
           onClick={() => {
             toast({
@@ -192,6 +204,7 @@ storiesOf('Design system|Toasts', module)
       <Flex direction={['column', 'row']} gridGap={2} wrap="wrap">
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               position: 'top-left',
@@ -203,6 +216,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               position: 'top',
@@ -214,6 +228,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               position: 'top-right',
@@ -225,6 +240,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               position: 'bottom-left',
@@ -236,6 +252,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               position: 'bottom',
@@ -247,6 +264,7 @@ storiesOf('Design system|Toasts', module)
         </Button>
         <Button
           variant="primary"
+          variantSize="medium"
           onClick={() => {
             toast({
               position: 'bottom-right',

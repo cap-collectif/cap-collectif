@@ -189,7 +189,7 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
     <Modal.Footer>
       <ButtonGroup justifyContent="flex-end">
         <CloseButton onClose={onClose} label="editor.undo" />
-        <Button variant="primary" variantColor="primary" onClick={handleSubmit}>
+        <Button variant="primary" variantColor="primary" variantSize="medium" onClick={handleSubmit}>
           <FormattedMessage id={isCreating ? 'global.create' : 'global.change'} />
         </Button>
       </ButtonGroup>

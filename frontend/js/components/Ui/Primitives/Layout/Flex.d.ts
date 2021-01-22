@@ -14,7 +14,7 @@ export interface FlexOptions {
     spacing?: number | string
 }
 
-export type Props = Omit<
+export type FlexProps = Omit<
     AppBoxOwnProps,
     'display' |
     'flexDirection' |
@@ -25,6 +25,6 @@ export type Props = Omit<
     'flexGrow'
 > & FlexOptions
 
-declare const Flex: FC<Props>
+declare const Flex: FC<FlexProps>
 
 export default Flex

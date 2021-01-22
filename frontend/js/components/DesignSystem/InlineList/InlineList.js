@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import Flex, { type Props as FlexProps } from '~ui/Primitives/Layout/Flex';
+import Flex, { type FlexProps } from '~ui/Primitives/Layout/Flex';
 import AppBox from '~ui/Primitives/AppBox';
 import { cleanChildren } from '~/utils/cleanChildren';
 

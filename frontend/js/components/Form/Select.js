@@ -54,7 +54,6 @@ type Props = {
 
 const ClearIndicator = props => {
   const {
-    // eslint-disable-next-line react/prop-types
     innerProps: { ref, ...restInnerProps },
   } = props;
   return (

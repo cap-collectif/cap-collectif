@@ -23,7 +23,6 @@ import Loader from '../../components/Ui/FeedbacksIndicators/Loader';
 import PinnedLabel from '../../components/Utils/PinnedLabel';
 import { opinionVersions as opinionVersionsMock } from '../mocks/opinionVersions';
 
-/* eslint-disable react/prop-types */
 const OpinionVersion = ({ item, typeLabel, isProfile }) => (
   <React.Fragment>
     <Media>

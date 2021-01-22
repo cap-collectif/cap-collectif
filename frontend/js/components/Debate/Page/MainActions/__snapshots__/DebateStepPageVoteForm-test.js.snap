@@ -59,7 +59,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
       ml={2}
       onClick={[Function]}
       variant="link"
-      variantSize="small"
     >
       <FormattedMessage
         id="edit.vote.against"
@@ -97,7 +96,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
           type="button"
           variant="link"
           variantColor="primary"
-          variantSize="small"
         >
           <FormattedMessage
             id="global.cancel"
@@ -182,7 +180,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty on mobile 1`] = `
       }
       onClick={[Function]}
       variant="link"
-      variantSize="small"
     >
       <FormattedMessage
         id="edit.vote.against"
@@ -283,7 +280,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
       ml={2}
       onClick={[Function]}
       variant="link"
-      variantSize="small"
     >
       <FormattedMessage
         id="edit.vote.against"
@@ -362,7 +358,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
           type="button"
           variant="link"
           variantColor="primary"
-          variantSize="small"
         >
           <FormattedMessage
             id="global.cancel"
@@ -447,7 +442,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented on mobile 1`
       }
       onClick={[Function]}
       variant="link"
-      variantSize="small"
     >
       <FormattedMessage
         id="edit.vote.against"
@@ -589,7 +583,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
       ml={2}
       onClick={[Function]}
       variant="link"
-      variantSize="small"
     >
       <FormattedMessage
         id="edit.vote.against"
@@ -627,7 +620,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
           type="button"
           variant="link"
           variantColor="primary"
-          variantSize="small"
         >
           <FormattedMessage
             id="global.cancel"
@@ -712,7 +704,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted on mobile 1`] = `
       }
       onClick={[Function]}
       variant="link"
-      variantSize="small"
     >
       <FormattedMessage
         id="edit.vote.against"

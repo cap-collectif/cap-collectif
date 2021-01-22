@@ -38,7 +38,6 @@ const ModalOnboarding = () => {
             onClick={onClose}
             rightIcon={ICON_NAME.CROSS}
             aria-label={intl.formatMessage({ id: 'global.close' })}
-            p={0}
           />
         </Flex>
 
@@ -61,6 +60,7 @@ const ModalOnboarding = () => {
         <Button
           variant="primary"
           variantColor="primary"
+          variantSize="medium"
           alignSelf="center"
           onClick={() => {
             window.location.href = intl.formatMessage({

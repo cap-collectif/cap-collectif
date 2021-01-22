@@ -24,7 +24,6 @@ exports[`<ModalOnboarding /> should not open when key is set in local storage 1`
       <Button
         aria-label="global.close"
         onClick={[Function]}
-        p={0}
         rightIcon="CROSS"
       />
     </ForwardRef>
@@ -68,6 +67,7 @@ exports[`<ModalOnboarding /> should not open when key is set in local storage 1`
       onClick={[Function]}
       variant="primary"
       variantColor="primary"
+      variantSize="medium"
     >
       learn.more.plus
     </Button>
@@ -99,7 +99,6 @@ exports[`<ModalOnboarding /> should open when no key in local storage 1`] = `
       <Button
         aria-label="global.close"
         onClick={[Function]}
-        p={0}
         rightIcon="CROSS"
       />
     </ForwardRef>
@@ -143,6 +142,7 @@ exports[`<ModalOnboarding /> should open when no key in local storage 1`] = `
       onClick={[Function]}
       variant="primary"
       variantColor="primary"
+      variantSize="medium"
     >
       learn.more.plus
     </Button>

@@ -58,7 +58,7 @@ const ButtonInner = styled(AppBox)(
 const Button = React.forwardRef<Props, HTMLButtonElement>(
   (
     {
-      variantSize = 'medium',
+      variantSize,
       variant,
       variantColor = 'primary',
       leftIcon,
@@ -86,8 +86,8 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
         borderRadius="button"
         bg="transparent"
         disabled={disabled}
-        px={SIZE[variantSize].px}
-        py={SIZE[variantSize].py}
+        px={variantSize ? SIZE[variantSize].px : 0}
+        py={variantSize ? SIZE[variantSize].py : 0}
         variantColor={variantColor}
         variant={variant}
         alternative={alternative}

@@ -33,8 +33,8 @@ const Provider = ({
 );
 
 const Menu = ({ placement = 'bottom-end', closeOnSelect = true, children }: Props) => {
-  const button = React.Children.toArray(children).find(c => c.props.__type === MENU_BUTTON_TYPE);
-  const list = React.Children.toArray(children).find(c => c.props.__type === MENU_LIST_TYPE);
+  const button = React.Children.toArray(children).find(c => c.type.name === MENU_BUTTON_TYPE);
+  const list = React.Children.toArray(children).find(c => c.type.name === MENU_LIST_TYPE);
 
   return (
     <AppBox position="relative" display="inline-block">
@@ -45,7 +45,10 @@ const Menu = ({ placement = 'bottom-end', closeOnSelect = true, children }: Prop
               placement={placement}
               render={attrs => (list ? React.cloneElement(list, attrs) : null)}
               animation
-              trigger="click">
+              trigger="click"
+              popperOptions={{
+                strategy: 'fixed',
+              }}>
               {button}
             </Tippy>
           </Provider>

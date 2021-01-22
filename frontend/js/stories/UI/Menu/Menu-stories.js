@@ -39,7 +39,7 @@ storiesOf('Design system|Menu', module)
       <Flex justify="center">
         <Menu>
           <Menu.Button as={React.Fragment}>
-            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary">
+            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
               Menu
             </Button>
           </Menu.Button>
@@ -65,7 +65,7 @@ storiesOf('Design system|Menu', module)
       <Flex justify="center">
         <Menu closeOnSelect={false}>
           <Menu.Button as={React.Fragment}>
-            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary">
+            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
               Menu
             </Button>
           </Menu.Button>
@@ -104,7 +104,7 @@ storiesOf('Design system|Menu', module)
       <Flex justify="center">
         <Menu>
           <Menu.Button as={React.Fragment}>
-            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary">
+            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
               Menu
             </Button>
           </Menu.Button>
@@ -133,7 +133,7 @@ storiesOf('Design system|Menu', module)
       <Flex justify="center">
         <Menu>
           <Menu.Button as={React.Fragment}>
-            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="tertiary">
+            <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="tertiary" variantSize="medium">
               Sort
             </Button>
           </Menu.Button>
@@ -157,7 +157,7 @@ storiesOf('Design system|Menu', module)
     return (
       <Flex justify="center">
         <Menu placement={placement()}>
-          <Menu.Button as={Button} variant="primary" rightIcon={ICON_NAME.ARROW_DOWN_O}>
+          <Menu.Button as={Button} variant="primary" rightIcon={ICON_NAME.ARROW_DOWN_O} variantSize="medium">
             Menu
           </Menu.Button>
           <Menu.List>

@@ -46,7 +46,6 @@ const voteWidgetTypes = {
   both: 2,
 };
 
-/* eslint-disable react/prop-types */
 const OpinionItem = ({ item, typeLabel = null }) => (
   <React.Fragment>
     <Media>

@@ -139,7 +139,6 @@ export const DebateStepPageVoteForm = ({
                   ml={[0, 2]}
                   mb={[3, 0]}
                   variant="link"
-                  variantSize="small"
                   onClick={() => setVoteState('NONE')}>
                   <FormattedMessage
                     id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
@@ -178,7 +177,6 @@ export const DebateStepPageVoteForm = ({
                 })}
                 ml={2}
                 variant="link"
-                variantSize="small"
                 onClick={() => setVoteState('NONE')}>
                 <FormattedMessage
                   id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
@@ -251,8 +249,7 @@ export const DebateStepPageVoteForm = ({
                   type="button"
                   mr={7}
                   variant="link"
-                  variantColor="primary"
-                  variantSize="small">
+                  variantColor="primary">
                   <FormattedMessage id="global.cancel" />
                 </Button>
                 <Button
