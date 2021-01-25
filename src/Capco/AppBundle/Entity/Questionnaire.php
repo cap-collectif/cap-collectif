@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -22,9 +23,9 @@ use Capco\AppBundle\Enum\QuestionnaireType;
  */
 class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
 {
-    use UuidTrait;
-    use TimestampableTrait;
     use SluggableTitleTrait;
+    use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @var \DateTime
@@ -140,10 +141,44 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
             $this->createdAt = new \DateTime();
             $this->updatedAt = new \DateTime();
             $questionsClone = new ArrayCollection();
+            $cloneReferences = [];
             foreach ($this->questions as $question) {
-                $itemClone = clone $question;
-                $itemClone->setQuestionnaire($this);
-                $questionsClone->add($itemClone);
+                $clonedQaq = $this->getCloneQuestionReference($cloneReferences, $question);
+                if (
+                    $clonedQaq->getQuestion() instanceof MultipleChoiceQuestion &&
+                    !empty($clonedQaq->getQuestion()->getJumps())
+                ) {
+                    foreach ($clonedQaq->getQuestion()->getJumps() as $jump) {
+                        $clonedJump = clone $jump;
+                        $clonedOriginQaq = $this->getCloneQuestionReference(
+                            $cloneReferences,
+                            $jump->getOrigin()->getQuestionnaireAbstractQuestion()
+                        );
+                        $clonedJump->setOrigin($clonedOriginQaq->getQuestion());
+                        $clonedDestinationQaq = $this->getCloneQuestionReference(
+                            $cloneReferences,
+                            $jump->getDestination()->getQuestionnaireAbstractQuestion()
+                        );
+                        $clonedJump->setDestination($clonedDestinationQaq->getQuestion());
+                        foreach ($jump->getConditions() as $condition) {
+                            $clonedCondition = clone $condition;
+                            $clonedCondition->setQuestion($clonedQaq->getQuestion());
+                            $clonedCondition->setJump($clonedJump);
+                            $clonedCondition->setValue(
+                                $this->findChoiceByTitle(
+                                    $clonedQaq
+                                        ->getQuestion()
+                                        ->getChoices()
+                                        ->toArray(),
+                                    $condition->getValue()->getTitle()
+                                )
+                            );
+                            $clonedJump->addCondition($clonedCondition);
+                        }
+                        $clonedQaq->getQuestion()->addJump($clonedJump);
+                    }
+                }
+                $questionsClone->add($clonedQaq);
             }
 
             $this->questions = $questionsClone;
@@ -506,5 +541,32 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         $this->notifyResponseDelete = $value;
 
         return $this;
+    }
+
+    private function getCloneQuestionReference(
+        array &$cloneReferences,
+        QuestionnaireAbstractQuestion $qaq
+    ): QuestionnaireAbstractQuestion {
+        $key = $qaq->getQuestion()->getTitle() . $qaq->getQuestion()->getPosition();
+        if (\array_key_exists($key, $cloneReferences)) {
+            return $cloneReferences[$key];
+        }
+
+        $clonedAbstractQaq = clone $qaq;
+        $clonedAbstractQaq->setQuestionnaire($this);
+        $cloneReferences[$key] = $clonedAbstractQaq;
+
+        return $clonedAbstractQaq;
+    }
+
+    private function findChoiceByTitle(array $array, string $title)
+    {
+        foreach ($array as $element) {
+            if ($title === $element->getTitle()) {
+                return $element;
+            }
+        }
+
+        return null;
     }
 }

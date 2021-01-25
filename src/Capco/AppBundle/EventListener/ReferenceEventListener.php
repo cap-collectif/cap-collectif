@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 
@@ -11,6 +12,7 @@ class ReferenceEventListener
     const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
 
     private $lastProposals = [];
+    private $lastProposalFormsReferences = [];
 
     public function preFlush(PreFlushEventArgs $args)
     {
@@ -57,6 +59,24 @@ class ReferenceEventListener
         $lastEntity = $om
             ->getRepository(\get_class($entity))
             ->findOneBy([], ['reference' => 'DESC']);
+
+        if ($entity instanceof ProposalForm) {
+            if (!empty($this->lastProposalFormsReferences)) {
+                $entity->setReference(end($this->lastProposalFormsReferences) + 1);
+                $this->lastProposalFormsReferences[] = $entity->getReference();
+
+                return;
+            }
+            if (null === $lastEntity) {
+                $entity->setReference(1);
+            } else {
+                $entity->setReference($lastEntity->getReference() + 1);
+            }
+
+            $this->lastProposalFormsReferences[] = $entity->getReference();
+
+            return;
+        }
 
         if (null === $lastEntity) {
             $entity->setReference(1);

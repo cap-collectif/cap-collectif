@@ -23,7 +23,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     const VERIFICATION_SMS = 'sms';
     public static $verificationLabels = [
         'step.verification.none' => self::VERIFICATION_NONE,
-        'step.verification.sms' => self::VERIFICATION_SMS
+        'step.verification.sms' => self::VERIFICATION_SMS,
     ];
 
     /**
@@ -50,12 +50,20 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
      */
     private $footer;
 
+    public function __clone()
+    {
+        parent::__clone();
+        $this->questionnaire = clone $this->questionnaire;
+        $this->questionnaire->setTitle('Copie de ' . $this->questionnaire->getTitle());
+        $this->questionnaire->setStep($this);
+    }
+
     public function getFooter()
     {
         return $this->footer;
     }
 
-    public function setFooter(string $footer = null)
+    public function setFooter(?string $footer = null)
     {
         $this->footer = $footer;
 
@@ -118,7 +126,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
      *
      * @return QuestionnaireStep
      */
-    public function setQuestionnaire(Questionnaire $questionnaire = null)
+    public function setQuestionnaire(?Questionnaire $questionnaire = null)
     {
         if ($questionnaire) {
             $questionnaire->setStep($this);

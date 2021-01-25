@@ -40,10 +40,10 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  */
 class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 {
-    use UuidTrait;
     use ReferenceTrait;
-    use TimestampableTrait;
     use SluggableTitleTrait;
+    use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
@@ -1023,7 +1023,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $clonedAbstractQaq;
     }
 
-    private function findChoiceByTitle(array $array, string $title)
+    private function findChoiceByTitle(array $array, string $title): ?QuestionChoice
     {
         foreach ($array as $element) {
             if ($title === $element->getTitle()) {
@@ -1031,7 +1031,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
             }
         }
 
-        return false;
+        return null;
     }
 
     private function cloneProposalFormQuestions(): Collection

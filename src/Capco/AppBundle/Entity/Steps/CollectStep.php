@@ -80,10 +80,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
                 $clonedProposalForm = clone $proposalForm;
                 $clonedProposalForm->setStep($this);
                 $this->proposalForm = $clonedProposalForm;
-                if ($this->defaultStatus) {
-                    $clonedDefaultStatus = clone $this->defaultStatus;
-                    $clonedDefaultStatus->setStep($this);
-                }
             }
         }
     }

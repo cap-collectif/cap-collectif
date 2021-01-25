@@ -66,14 +66,21 @@ class DuplicateProjectMutation implements MutationInterface
             $step = $abstractStep->getStep();
             /** @var Status $status */
             foreach ($step->getStatuses() as $status) {
-                $this->getStatusCloneReference($status, $clonedAbstractStep);
+                $this->getStatusCloneReference($status, $clonedAbstractStep, $step->getId());
+            }
+            if (method_exists($step, 'getDefaultStatus') && null !== $step->getDefaultStatus()) {
+                $clonedAbstractStep
+                    ->getStep()
+                    ->setDefaultStatus(
+                        $this->getStatusCloneReference(
+                            $step->getDefaultStatus(),
+                            $clonedAbstractStep,
+                            $step->getId()
+                        )
+                    );
             }
 
             if ($step instanceof CollectStep && ($proposalForm = $step->getProposalForm())) {
-                if ($step->getDefaultStatus()) {
-                    $clonedDefaultStatus = clone $step->getDefaultStatus();
-                    $clonedDefaultStatus->setStep($clonedAbstractStep->getStep());
-                }
                 $clonedProposalForm = $clonedAbstractStep->getStep()->getProposalForm();
                 $clonedProposalForm->setTitle(
                     $this->translator->trans('copy-of') . ' ' . $proposalForm->getTitle()
@@ -89,7 +96,8 @@ class DuplicateProjectMutation implements MutationInterface
                         $clonedAnalysisConfiguration->setSelectionStepStatus(
                             $this->getStatusCloneReference(
                                 $proposalAnalysisConfiguration->getSelectionStepStatus(),
-                                $clonedAbstractStep
+                                $clonedAbstractStep,
+                                $step->getId()
                             )
                         );
                     }
@@ -100,7 +108,8 @@ class DuplicateProjectMutation implements MutationInterface
                         $clonedAnalysisConfiguration->setFavourableStatus(
                             $this->getStatusCloneReference(
                                 $analysisConfigFavourableStatus,
-                                $clonedAbstractStep
+                                $clonedAbstractStep,
+                                $step->getId()
                             )
                         );
                     }
@@ -118,7 +127,8 @@ class DuplicateProjectMutation implements MutationInterface
                     ) {
                         $clonedUnfavourableStatus = $this->getStatusCloneReference(
                             $unfavourableStatus,
-                            $clonedAbstractStep
+                            $clonedAbstractStep,
+                            $step->getId()
                         );
                         $clonedAnalysisConfiguration->addUnfavourableStatus(
                             $clonedUnfavourableStatus
@@ -157,10 +167,18 @@ class DuplicateProjectMutation implements MutationInterface
 
     private function getStatusCloneReference(
         Status $status,
-        ProjectAbstractStep $clonedAbstractStep
+        ProjectAbstractStep $clonedAbstractStep,
+        string $refererId
     ): Status {
-        if (\array_key_exists($status->getName(), $this->cloneStatusReferences)) {
-            return $this->cloneStatusReferences[$status->getName()];
+        if (
+            \array_key_exists(
+                $status->getName() . '-' . $status->getColor() . '-' . $refererId,
+                $this->cloneStatusReferences
+            )
+        ) {
+            return $this->cloneStatusReferences[
+                $status->getName() . '-' . $status->getColor() . '-' . $refererId
+            ];
         }
 
         $clonedStatus = clone $status;
@@ -170,7 +188,10 @@ class DuplicateProjectMutation implements MutationInterface
                 $clonedAbstractStep->getProject()
             )->getStep()
         );
-        $this->cloneStatusReferences[$status->getName()] = $clonedStatus;
+        $clonedAbstractStep->getStep()->addStatus($clonedStatus);
+        $this->cloneStatusReferences[
+            $status->getName() . '-' . $status->getColor() . '-' . $refererId
+        ] = $clonedStatus;
 
         return $clonedStatus;
     }
