@@ -12,7 +12,7 @@ import LoginModal from '~/components/User/Login/LoginModal';
 import RegistrationModal from '~/components/User/Registration/RegistrationModal';
 import LanguageHeader from '~/components/Navbar/LanguageHeader';
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
-import type { Dispatch, GlobalState } from '~/types';
+import type { GlobalState } from '~/types';
 import { useBoundingRect } from '~/utils/hooks/useBoundingRect';
 import { useEventListener } from '~/utils/hooks/useEventListener';
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader';
@@ -36,6 +36,7 @@ export type Props = {|
   siteName: ?string,
   contentRight?: Element<Object>,
   isMultilangueEnabled: boolean,
+  isAuthenticated: boolean,
   ...LanguageProps,
 |};
 
@@ -61,6 +62,7 @@ export const Navbar = ({
   currentRouteParams,
   isMultilangueEnabled,
   localeChoiceTranslations,
+  isAuthenticated,
   ...rest
 }: Props) => {
   const [expanded, setExpanded] = useState(false);
@@ -124,18 +126,23 @@ export const Navbar = ({
               />
             ) : null}
             <div className="container">
-              <QueryRenderer
-                environment={environment}
-                query={graphql`
-                  query NavbarQuery {
-                    ...RegistrationModal_query
-                  }
-                `}
-                variables={{}}
-                render={renderRegistrationForm}
-              />
+              {!isAuthenticated && (
+                <>
+                  <QueryRenderer
+                    environment={environment}
+                    query={graphql`
+                      query NavbarQuery {
+                        ...RegistrationModal_query
+                      }
+                    `}
+                    variables={{}}
+                    render={renderRegistrationForm}
+                  />
 
-              <LoginModal />
+                  <LoginModal />
+                </>
+              )}
+
               <NavigationSkip />
               <S.NavigationContainer id="main-navbar" role="navigation">
                 <S.NavigationHeader>
@@ -180,17 +187,12 @@ export const Navbar = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    dispatch,
-  };
-};
-
 const mapStateToProps = (state: GlobalState) => {
   return {
     isLocaleHeaderVisible: state.user.showLocaleHeader || true,
     isMultilangueEnabled: state.default.features.multilangue,
+    isAuthenticated: !!state.user.user,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Navbar));
+export default connect(mapStateToProps)(injectIntl(Navbar));

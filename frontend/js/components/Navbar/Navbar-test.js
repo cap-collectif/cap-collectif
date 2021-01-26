@@ -29,6 +29,7 @@ const defaultProps = {
   items: [],
   siteName: 'cap-collectif.com',
   contentRight: <div id="content-contentRight" />,
+  isAuthenticated: false,
 };
 
 const noHeaderProps = {
@@ -52,6 +53,11 @@ describe('<Navbar />', () => {
 
   it('should render correctly with header', () => {
     const wrapper = shallow(<Navbar {...defaultProps} {...headerProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when authenticated', () => {
+    const wrapper = shallow(<Navbar {...defaultProps} {...headerProps} isAuthenticated />);
     expect(wrapper).toMatchSnapshot();
   });
 });
