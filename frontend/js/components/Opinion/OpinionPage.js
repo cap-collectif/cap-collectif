@@ -12,11 +12,11 @@ import type {
   OpinionPageQueryResponse,
 } from '~relay/OpinionPageQuery.graphql';
 
-export type Props = {
+export type Props = {|
   opinionId?: string,
   versionId?: string,
   isAuthenticated: boolean,
-};
+|};
 
 export class OpinionPage extends React.Component<Props> {
   render() {

@@ -2,7 +2,8 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { graphql, QueryRenderer } from 'react-relay';
-import type { RelayGlobalId } from '../../types';
+import { connect } from 'react-redux';
+import type { GlobalState, RelayGlobalId } from '../../types';
 import colors from '../../utils/colors';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
@@ -11,7 +12,12 @@ import type {
 } from '~relay/MetaStepNavigationBoxQuery.graphql';
 import MetaStepNavigation from './MetaStepNavigation';
 
+type ReduxProps = {|
+  +hasNewConsultationPage: boolean,
+|};
+
 export type Props = {|
+  ...ReduxProps,
   +stepId: RelayGlobalId,
   +relatedSlug: string,
 |};
@@ -43,12 +49,17 @@ const MetaStepNavigationBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styl
 `;
 
 const renderMetaStepNavigation = ({
+  hasNewConsultationPage,
+}: {|
+  hasNewConsultationPage: boolean,
+|}) => ({
   error,
   props,
 }: {
   ...ReactRelayReadyState,
   props: ?MetaStepNavigationBoxQueryResponse,
 }) => {
+  if (hasNewConsultationPage) return null;
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
@@ -56,35 +67,41 @@ const renderMetaStepNavigation = ({
   if (props) {
     if (props.step) {
       const { step } = props;
-      return <MetaStepNavigation step={step} />;
+      return (
+        <MetaStepNavigationBoxInner>
+          <MetaStepNavigation step={step} />;
+        </MetaStepNavigationBoxInner>
+      );
     }
     return graphqlError;
   }
   return null;
 };
 
-export const MetaStepNavigationBox = ({ stepId, relatedSlug }: Props) => {
+export const MetaStepNavigationBox = ({ stepId, relatedSlug, hasNewConsultationPage }: Props) => {
   return (
-    <MetaStepNavigationBoxInner>
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query MetaStepNavigationBoxQuery($stepId: ID!, $relatedSlug: String!) {
-            step: node(id: $stepId) {
-              ...MetaStepNavigation_step @arguments(relatedSlug: $relatedSlug)
-            }
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query MetaStepNavigationBoxQuery($stepId: ID!, $relatedSlug: String!) {
+          step: node(id: $stepId) {
+            ...MetaStepNavigation_step @arguments(relatedSlug: $relatedSlug)
           }
-        `}
-        variables={
-          ({
-            stepId,
-            relatedSlug,
-          }: MetaStepNavigationBoxQueryVariables)
         }
-        render={renderMetaStepNavigation}
-      />
-    </MetaStepNavigationBoxInner>
+      `}
+      variables={
+        ({
+          stepId,
+          relatedSlug,
+        }: MetaStepNavigationBoxQueryVariables)
+      }
+      render={renderMetaStepNavigation({ hasNewConsultationPage })}
+    />
   );
 };
 
-export default MetaStepNavigationBox;
+const mapStateToProps = (state: GlobalState) => ({
+  hasNewConsultationPage: state.default.features.unstable__new_consultation_page,
+});
+
+export default connect(mapStateToProps)(MetaStepNavigationBox);

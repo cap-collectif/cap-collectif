@@ -251,6 +251,10 @@ Object {
       "enabled": false,
       "type": "to_performance_test_counters",
     },
+    Object {
+      "enabled": true,
+      "type": "unstable__new_consultation_page",
+    },
   ],
 }
 `;

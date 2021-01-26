@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block details %}
-    {% if currentStep.isClosed %}
+    {% if not is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page')) and currentStep.isClosed %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p>
                 <strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'thank.for.contribution'|trans({}, 'CapcoAppBundle') }}
@@ -38,7 +38,7 @@
         </div>
     {% endif %}
 
-    {% if currentStep.isFuture %}
+    {% if not is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page')) and currentStep.isFuture %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p>
                 <strong>{{ 'step.consultation.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'consultation.start.future'|trans({'date': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}

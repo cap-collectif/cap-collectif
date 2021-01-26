@@ -131,3 +131,6 @@ InternalFeatureFlagType:
             to_performance_test_counters:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::to_performance_test_counters")'
                 description: 'Whether or not the performance test is active.'
+            unstable__new_consultation_page:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page")'
+                description: 'Whether or not the new consultation page is active.'

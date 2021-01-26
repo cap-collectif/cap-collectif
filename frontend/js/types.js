@@ -98,6 +98,7 @@ export type FeatureToggles = {
   proposal_revisions: ?boolean,
   unstable__debate: ?boolean,
   unstable__tipsmeee: ?boolean,
+  unstable__new_consultation_page: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

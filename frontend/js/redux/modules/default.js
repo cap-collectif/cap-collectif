@@ -98,6 +98,7 @@ export const features: FeatureToggles = {
   proposal_revisions: false,
   unstable__debate: false,
   unstable__tipsmeee: false,
+  unstable__new_consultation_page: false,
 };
 
 export const initialState: State = {

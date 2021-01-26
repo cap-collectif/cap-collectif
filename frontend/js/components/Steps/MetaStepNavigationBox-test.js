@@ -9,6 +9,7 @@ describe('<MetaStepNavigationBox />', () => {
     const props = {
       stepId: 'cstep1',
       relatedSlug: 'deuxieme-consultation',
+      hasNewConsultationPage: false,
     };
 
     const wrapper = shallow(<MetaStepNavigationBox {...props} />);
