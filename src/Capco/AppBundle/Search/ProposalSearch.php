@@ -153,6 +153,18 @@ class ProposalSearch extends Search
                 $boolQuery->addFilter($term);
             }
         }
+        if (isset($providedFilters['restrictedViewerId']) && $providedFilters['restrictedViewerId']) {
+            $terms = [
+                new Term([
+                    'proposalAnalysts.analyst.id' => ['value' => $providedFilters['restrictedViewerId']],
+                ]),
+                new Term(['author.id' => ['value' => $providedFilters['restrictedViewerId']]]),
+                new Term(['supervisor.id' => ['value' => $providedFilters['restrictedViewerId']]]),
+                new Term(['decisionMaker.id' => ['value' => $providedFilters['restrictedViewerId']]]),
+            ];
+
+            $boolQuery->addMust((new Query\BoolQuery())->addShould($terms));
+        }
         if (\count($stateTerms) > 0) {
             $boolQuery->addFilter((new Query\BoolQuery())->addShould($stateTerms));
         }

@@ -44,6 +44,57 @@ Scenario: Anonymous user wants to see proposals in a private collect step
   Given I go to a private open collect step
   Then there should be 0 proposals
 
+@security
+Scenario: Anonymous user wants to see a private proposal not in selection step
+  Given I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-qui-ne-sera-pas-analyse"
+  And I should see "403-error"
+
+@security
+Scenario: Anonymous user wants to see a private proposal in selection step
+  Given I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quentreprise"
+  And I should not see "403-error"
+
+@security
+Scenario: Logged in user wants to a private proposal not in selection step
+  Given I am logged in as user
+  Given I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-qui-ne-sera-pas-analyse"
+  And I should see "403-error"
+
+@security
+Scenario: Logged in user wants to see a private proposal not in selection step
+  Given I am logged in as theo
+  Given I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-qui-ne-sera-pas-analyse"
+  And I should see "403-error"
+
+@security
+Scenario: Logged in user wants to see a private proposal not in selection step
+  Given I am logged in as admin
+  Given I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-qui-ne-sera-pas-analyse"
+  And I should not see "403-error"
+
+@security
+Scenario: Anonymous user wants to see a proposal in a private collect step
+  Given I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions-privee/proposals/proposition-plus-votable-1"
+  And I should see "403-error"
+
+@security
+Scenario: Logged in user wants to see my proposal in a private collect step
+  Given I am logged in as user
+  And I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions-privee/proposals/proposition-plus-votable-1"
+  And I should not see "403-error"
+
+@security
+Scenario: Logged in admin wants to see a proposal in a private collect step
+  Given I am logged in as admin
+  And I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions-privee/proposals/proposition-plus-votable-1"
+  And I should not see "403-error"
+
+@security
+Scenario: Logged in admin wants to see a proposal in a private collect step
+  Given I am logged in as theo
+  And I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-grand-projet"
+  And I should not see "403-error"
+
 @elasticsearch
 Scenario: Logged in user wants to see its proposals in a private collect step
   Given I am logged in as user
