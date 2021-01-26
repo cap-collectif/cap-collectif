@@ -4,11 +4,13 @@ import { Menu as HeadlessMenu } from '@headlessui/react';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import type { ButtonProps } from '~ds/Button/Button';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { useMenu } from '~ds/Menu/Menu.context';
 
 export type Props = {|
   ...AppBoxProps,
+  ...ButtonProps,
   +disabled?: boolean,
   +children: React.Node,
 |};

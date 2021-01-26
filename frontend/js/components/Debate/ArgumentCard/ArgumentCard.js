@@ -78,6 +78,8 @@ export const ArgumentCard = ({
   ...props
 }: Props) => {
   const isViewerAdmin = viewer && viewer.isAdmin;
+  const canReport =
+    viewer && !isViewerAdmin && !argument.viewerHasReport && !argument.viewerDidAuthor;
 
   const intl = useIntl();
   const [isEditing, setIsEditing] = useState(false);
@@ -136,23 +138,23 @@ export const ArgumentCard = ({
                 />
               </>
             )}
-            {viewer && !isViewerAdmin && !argument.viewerHasReport && (
+
+            {canReport && (
               <Menu>
                 <Menu.Button as={React.Fragment}>
                   <Button
                     rightIcon={ICON_NAME.MORE}
                     aria-label={intl.formatMessage({ id: 'global.menu' })}
-                    color="blue.900"
+                    color="gray.500"
                   />
                 </Menu.Button>
                 <Menu.List>
-                  <Menu.ListItem>
-                    <Button
-                      onClick={() => setReportModalId(argument.id)}
-                      leftIcon={ICON_NAME.FLAG}
-                      color="blue.900">
-                      {intl.formatMessage({ id: 'global.report.submit' })}
-                    </Button>
+                  <Menu.ListItem
+                    as={Button}
+                    onClick={() => setReportModalId(argument.id)}
+                    leftIcon={ICON_NAME.FLAG}
+                    color="blue.900">
+                    {intl.formatMessage({ id: 'global.report.submit' })}
                   </Menu.ListItem>
                 </Menu.List>
               </Menu>
@@ -175,7 +177,8 @@ export const ArgumentCard = ({
                     if (onReadMore) onReadMore();
                     else setReadMore(!readMore);
                   }}
-                  variant="link" variantSize="medium">
+                  variant="link"
+                  variantSize="medium">
                   <FormattedMessage id={readMore ? 'see-less' : 'capco.module.read_more'} />
                 </Button>
               </>

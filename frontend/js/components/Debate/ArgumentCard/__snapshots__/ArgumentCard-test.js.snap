@@ -459,28 +459,6 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
           onClick={[Function]}
           rightIcon="TRASH"
         />
-        <Menu>
-          <Menu.Button
-            as={Symbol(react.fragment)}
-          >
-            <Button
-              aria-label="global.menu"
-              color="blue.900"
-              rightIcon="MORE"
-            />
-          </Menu.Button>
-          <Menu.List>
-            <Menu.ListItem>
-              <Button
-                color="blue.900"
-                leftIcon="FLAG"
-                onClick={[Function]}
-              >
-                global.report.submit
-              </Button>
-            </Menu.ListItem>
-          </Menu.List>
-        </Menu>
       </ForwardRef>
     </ForwardRef>
     <Text>
