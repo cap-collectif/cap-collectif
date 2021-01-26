@@ -21,11 +21,11 @@ use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class UrlResolver
 {
-    protected $router;
-    protected $requestStack;
-    protected $manager;
-    protected $defaultLocale;
-    protected $stepUrlResolver;
+    protected RouterInterface $router;
+    protected RequestStack $requestStack;
+    protected Manager $manager;
+    protected string $defaultLocale;
+    protected StepUrlResolver $stepUrlResolver;
 
     public function __construct(
         RouterInterface $router,

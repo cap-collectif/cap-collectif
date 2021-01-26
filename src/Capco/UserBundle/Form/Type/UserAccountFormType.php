@@ -24,6 +24,9 @@ class UserAccountFormType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ]);
+        if ($options['isAdmin']) {
+            $builder->add('subscribedToProposalNews', CheckboxType::class);
+        }
     }
 
     /**
@@ -31,6 +34,6 @@ class UserAccountFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => User::class]);
+        $resolver->setDefaults(['data_class' => User::class, 'isAdmin' => false]);
     }
 }

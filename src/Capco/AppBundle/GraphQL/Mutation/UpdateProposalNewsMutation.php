@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostTranslation;
 use Capco\AppBundle\Form\ProposalPostType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +15,8 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -30,6 +32,7 @@ class UpdateProposalNewsMutation implements MutationInterface
     private LoggerInterface $logger;
     private TranslatorInterface $translator;
     private LocaleRepository $localeRepository;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,7 +40,8 @@ class UpdateProposalNewsMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
         TranslatorInterface $translator,
-        LocaleRepository $localeRepository
+        LocaleRepository $localeRepository,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -45,6 +49,7 @@ class UpdateProposalNewsMutation implements MutationInterface
         $this->logger = $logger;
         $this->translator = $translator;
         $this->localeRepository = $localeRepository;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -52,6 +57,10 @@ class UpdateProposalNewsMutation implements MutationInterface
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $proposalPost = $this->updateProposalNews($input, $proposalPost);
+            $this->publisher->publish(
+                'proposal_news.update',
+                new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
+            );
 
             return ['proposalPost' => $proposalPost, 'errorCode' => null];
         } catch (UserError $error) {
@@ -95,7 +104,11 @@ class UpdateProposalNewsMutation implements MutationInterface
                 $translation->setTitle($values['translations'][$translation->getLocale()]['title']);
             }
             if (isset($values['translations'][$translation->getLocale()]['body'])) {
-                $translation->setBody($values['translations'][$translation->getLocale()]['body']);
+                $translation->setBody(
+                    AbstractMessage::escape(
+                        $values['translations'][$translation->getLocale()]['body']
+                    )
+                );
             }
             if (isset($values['translations'][$translation->getLocale()]['abstract'])) {
                 $translation->setAbstract(

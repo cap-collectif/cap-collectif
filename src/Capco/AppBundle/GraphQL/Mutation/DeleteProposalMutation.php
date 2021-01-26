@@ -16,12 +16,12 @@ use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoa
 
 class DeleteProposalMutation implements MutationInterface
 {
-    private $em;
-    private $redisHelper;
-    private $publisher;
-    private $indexer;
-    private $dataloader;
-    private $globalIdResolver;
+    private EntityManagerInterface $em;
+    private RedisStorageHelper $redisHelper;
+    private Publisher $publisher;
+    private Indexer $indexer;
+    private ProposalFormProposalsDataLoader $dataloader;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

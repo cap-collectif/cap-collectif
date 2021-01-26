@@ -33,9 +33,12 @@ class CreateUserMutation implements MutationInterface
     {
         $arguments = $input->getArrayCopy();
         $user = new User();
+        if (isset($arguments['roles']['ROLE_ADMIN'])) {
+            $user->setSubscribedToActualitiesPosted(true);
+        }
 
         $form = $this->formFactory->create(UserFormType::class, $user, [
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {

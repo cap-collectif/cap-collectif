@@ -191,3 +191,21 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: debate_article_crawler
+        proposal_news_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_news_create
+        proposal_news_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_news_update
+        proposal_news_delete:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_news_delete

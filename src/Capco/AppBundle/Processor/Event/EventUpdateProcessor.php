@@ -11,9 +11,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class EventUpdateProcessor implements ProcessorInterface
 {
-    private $eventRepository;
-    private $notifier;
-    private $logger;
+    private EventRepository $eventRepository;
+    private EventNotifier $notifier;
+    private LoggerInterface $logger;
 
     public function __construct(
         EventRepository $eventRepository,

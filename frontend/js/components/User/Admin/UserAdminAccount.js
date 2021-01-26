@@ -34,6 +34,7 @@ type FormValues = {
   vip: boolean,
   enabled: boolean,
   locked: boolean,
+  isSubscribedToProposalNews: boolean,
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
@@ -47,6 +48,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
     enabled,
     roles,
     userId: user.id,
+    subscribedToProposalNews: user.isAdmin ? values.isSubscribedToProposalNews : undefined,
   };
 
   return UpdateUserAccountMutation.commit({ input })
@@ -73,7 +75,15 @@ const validate = (values: FormValues) => {
 
 type State = {
   showDeleteAccountModal: boolean,
-};
+}
+
+type FeatureFlags = {|
+  ENABLE_SUBSCRIBE_TO_PROPOSAL_NEWS: boolean,
+|};
+
+const RelayFeatureFlags: FeatureFlags = {
+  ENABLE_SUBSCRIBE_TO_PROPOSAL_NEWS: false,
+}
 
 export class UserAdminAccount extends React.Component<Props, State> {
   state = {
@@ -93,6 +103,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
       isViewerOrAdmin,
     } = this.props;
     const { showDeleteAccountModal } = this.state;
+
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
@@ -152,6 +163,17 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 </div>
               }
             />
+            {/* should be displayed when feature is delivered */}
+            {user.isAdmin && RelayFeatureFlags.ENABLE_SUBSCRIBE_TO_PROPOSAL_NEWS && (
+              <Field
+                id="isSubscribedToProposalNews"
+                name="isSubscribedToProposalNews"
+                component={component}
+                type="checkbox"
+                disabled={!user.isViewer}
+                children={<FormattedMessage id="proposals-actualities" />}
+              />
+            )}
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 type="submit"
@@ -211,6 +233,7 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
     locked: user.locked,
     roles: { labels: user.roles, other: null },
     newsletter: user.isSubscribedToNewsLetter,
+    isSubscribedToProposalNews: user.isSubscribedToProposalNews,
   },
   isViewerOrAdmin: user.isViewer || viewer.isAdmin,
 });
@@ -226,7 +249,9 @@ export default createFragmentContainer(container, {
       locked
       vip
       enabled
+      isAdmin
       isSubscribedToNewsLetter
+      isSubscribedToProposalNews
       subscribedToNewsLetterAt
       ...DeleteAccountModal_viewer
     }

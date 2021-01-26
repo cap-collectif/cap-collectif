@@ -41,45 +41,35 @@ Scenario: Admin wants to get the related content of the first proposal
   Then the JSON response should match:
   """
   {
-    "data": {
-      "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-        "news": {
-          "edges": [
-             {
-              "node":{
-                "id": @string@,
-                "title": @string@,
-                 "relatedContent":[
-                    {
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx"
+     "data":{
+        "proposal":{
+           "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+           "news":{
+              "edges":[
+                 {
+                    "node":{
+                       "id": @string@,
+                       "title": @string@,
+                       "relatedContent":[
+                          {
+                             "id":"theme1"
+                          },
+                          {
+                             "id":"theme2"
+                          },
+                          {
+                             "id":"UHJvcG9zYWw6cHJvcG9zYWwx"
+                          },
+                          {
+                             "id":"UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4="
+                          }
+                       ]
                     }
-                 ]
-              }
-             },
-            {
-              "node": {
-                "id": @string@,
-                "title": @string@,
-                "relatedContent": [
-                  {
-                    "id": "theme1"
-                  },
-                  {
-                    "id": "theme2"
-                  },
-                  {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
-                  },
-                  @...@
-                ]
-              }
-            },
-            @...@
-          ]
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
@@ -117,42 +107,35 @@ Scenario: Admin wants to get only themes on the related content of the first pro
   Then the JSON response should match:
   """
   {
-    "data": {
-      "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-        "news": {
-          "edges": [
-             {
-                "node":{
-                    "id": @string@,
-                    "title": @string@,
-                   "relatedContent":[
-                      {
+     "data":{
+        "proposal":{
+           "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+           "news":{
+              "edges":[
+                 {
+                    "node":{
+                       "id": @string@,
+                       "title": @string@,
+                       "relatedContent":[
+                          {
+                             "id":"theme1"
+                          },
+                          {
+                             "id":"theme2"
+                          },
+                          {
 
-                      }
-                   ]
-                }
-             },
-            {
-              "node": {
-                "id": @string@,
-                "title": @string@,
-                "relatedContent": [
-                  {
-                    "id": "theme1"
-                  },
-                  {
-                    "id": "theme2"
-                  },
-                  @...@
-                ]
-              }
-            },
-            @...@
-          ]
+                          },
+                          {
+
+                          }
+                       ]
+                    }
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
@@ -190,40 +173,34 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
   Then the JSON response should match:
   """
   {
-    "data": {
-      "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-        "news": {
-          "edges": [
-           {
-              "node":{
-                "id": @string@,
-                "title": @string@,
-                 "relatedContent":[
-                    {
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx"
+     "data":{
+        "proposal":{
+           "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+           "news":{
+              "edges":[
+                 {
+                    "node":{
+                       "id": @string@,
+                       "title": @string@,
+                       "relatedContent":[
+                          {
+
+                          },
+                          {
+
+                          },
+                          {
+                             "id":"UHJvcG9zYWw6cHJvcG9zYWwx"
+                          },
+                          {
+
+                          }
+                       ]
                     }
-                 ]
-              }
-           },
-            {
-              "node": {
-                "id": @string@,
-                "title": @string@,
-                "relatedContent": [
-                  {},
-                  {},
-                  {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
-                  },
-                  @...@
-                ]
-              }
-            },
-            @...@
-          ]
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """

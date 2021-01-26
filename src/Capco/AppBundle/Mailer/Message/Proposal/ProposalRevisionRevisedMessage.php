@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\SiteColorRepository;

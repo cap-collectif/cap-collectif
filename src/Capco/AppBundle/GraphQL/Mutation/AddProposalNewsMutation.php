@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalPostType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
@@ -19,6 +18,8 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -34,6 +35,7 @@ class AddProposalNewsMutation implements MutationInterface
     private LoggerInterface $logger;
     private TranslatorInterface $translator;
     private LocaleRepository $localeRepository;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -41,7 +43,8 @@ class AddProposalNewsMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
         TranslatorInterface $translator,
-        LocaleRepository $localeRepository
+        LocaleRepository $localeRepository,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -49,6 +52,7 @@ class AddProposalNewsMutation implements MutationInterface
         $this->logger = $logger;
         $this->translator = $translator;
         $this->localeRepository = $localeRepository;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -57,6 +61,10 @@ class AddProposalNewsMutation implements MutationInterface
             $proposal = $this->getProposal($input, $viewer);
             $this->checkProjectAllowProposalNews($proposal);
             $proposalPost = $this->createProposalPost($input, $proposal, $viewer);
+            $this->publisher->publish(
+                'proposal_news.create',
+                new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
+            );
 
             return ['proposalPost' => $proposalPost, 'errorCode' => null];
         } catch (UserError $error) {

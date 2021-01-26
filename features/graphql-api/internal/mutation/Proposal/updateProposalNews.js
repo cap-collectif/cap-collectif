@@ -32,7 +32,7 @@ describe('Internal|update proposal news', () => {
     ],
   };
   it('update proposal news', async () => {
-    const response = await graphql(updateProposalNews, { input }, 'internal_user');
+    const response = await graphql(updateProposalNews, { input }, 'internal_ian');
     expect(response).toMatchSnapshot();
   });
 

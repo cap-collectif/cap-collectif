@@ -8,6 +8,8 @@ use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewApprovedMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewRefusedMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsUpdateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionRevisedMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
@@ -24,6 +26,8 @@ final class MessagesList
         'proposal_update_status' => ProposalStatusChangeMessage::class,
         'proposal_revision' => ProposalRevisionMessage::class,
         'proposal_revision_revise' => ProposalRevisionRevisedMessage::class,
+        'proposal_news_create' => ProposalNewsCreateAdminMessage::class,
+        'proposal_news_update' => ProposalNewsUpdateAdminMessage::class,
     ];
 
     public const TEMPLATE_LIST = [
@@ -36,5 +40,7 @@ final class MessagesList
         'proposal_update_status' =>
             '@CapcoMail/Proposal/notifyProposalAuthorStatusChange.html.twig',
         'proposal_revision' => '@CapcoMail/notifyProposalRevision.html.twig',
+        'proposal_news_create' => ProposalNewsCreateAdminMessage::TEMPLATE,
+        'proposal_news_update' => ProposalNewsUpdateAdminMessage::TEMPLATE,
     ];
 }

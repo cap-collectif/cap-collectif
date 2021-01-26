@@ -264,6 +264,9 @@ InternalUser:
                         description: 'The id of the contribuable entity (Project, Consultation, Step)'
                 description: "Return the user's contributions of the type requested."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args, getUser(), serv("request_stack")])'
+            isSubscribedToProposalNews:
+                type: 'Boolean!'
+                description: 'Is user subscribed to the proposal news posted by the author ?'
             isSubscribedToNewsLetter:
                 type: 'Boolean!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIsSubscribedToNewsLetterResolver", [value])'

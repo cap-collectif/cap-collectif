@@ -13072,6 +13072,7 @@ input UpdateUserAccountInput {
   locked: Boolean
   vip: Boolean
   enabled: Boolean
+  subscribedToProposalNews: Boolean
   clientMutationId: String
 }
 
@@ -13543,6 +13544,9 @@ type User implements Node & UniformResourceLocatable {
     """The id of the contribuable entity (Project, Consultation, Step)"""
     contribuableId: ID
   ): ContributionConnection!
+
+  """Is user subscribed to the proposal news posted by the author ?"""
+  isSubscribedToProposalNews: Boolean!
 
   """Is user subscribed to the newsletter ?"""
   isSubscribedToNewsLetter: Boolean!

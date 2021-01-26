@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserSubscribedToNewsLetterAtResolver implements ResolverInterface
 {
-    protected $newLetterRepository;
+    protected NewsletterSubscriptionRepository $newLetterRepository;
 
     public function __construct(NewsletterSubscriptionRepository $newsletterSubscriptionRepository)
     {

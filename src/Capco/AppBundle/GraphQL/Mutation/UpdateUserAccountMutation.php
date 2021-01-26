@@ -46,7 +46,8 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
         }
 
         $form = $this->formFactory->create(UserAccountFormType::class, $user, [
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'isAdmin' => $user->isAdmin(),
         ]);
         $form->submit($arguments, false);
 

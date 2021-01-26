@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Processor\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Notifier\ProposalRevisionNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
@@ -19,7 +18,6 @@ class ProposalRevisionReviseProcessor implements ProcessorInterface
     private ProposalRevisionNotifier $notifier;
     private LoggerInterface $logger;
     private KernelInterface $kernel;
-
 
     public function __construct(
         ProposalRepository $proposalRepository,
@@ -56,9 +54,10 @@ class ProposalRevisionReviseProcessor implements ProcessorInterface
 
     private function getProposalRevisionsFromMessage(array $json): ?array
     {
-        $revisedAt = $this->kernel->getEnvironment() == 'test'
-            ? (new \DateTime($json['date']))->setTime(00, 00)
-            : new \DateTime($json['date']);
+        $revisedAt =
+            'test' == $this->kernel->getEnvironment()
+                ? (new \DateTime($json['date']))->setTime(00, 00)
+                : new \DateTime($json['date']);
 
         $proposalRevisions = $this->proposalRevisionRepository->findBy([
             'revisedAt' => $revisedAt,

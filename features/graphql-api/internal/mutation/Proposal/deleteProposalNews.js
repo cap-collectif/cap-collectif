@@ -15,7 +15,7 @@ describe('Internal|delete proposal news', () => {
     postId: 'UG9zdDpwb3N0MTc=',
   };
   it('delete proposal news', async () => {
-    const response = await graphql(deleteProposalNews, { input }, 'internal_user');
+    const response = await graphql(deleteProposalNews, { input }, 'internal_ian');
     expect(response).toMatchSnapshot();
   });
 

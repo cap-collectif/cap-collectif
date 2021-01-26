@@ -256,3 +256,42 @@ Scenario: assigned users and admin receive message when author revised his propo
   And I consume "proposal_revision_revise"
   Then I open mail to "aurelien@cap-collectif.com"
   And email should match snapshot "notifyProposalRevisionRevise.html"
+
+@rabbitmq @snapshot-email
+Scenario: User add an news on his proposal
+  Given I publish in "proposal_news_create" with message below:
+  """
+  {
+    "proposalNewsId": "post18"
+  }
+  """
+  And I consume "proposal_news_create"
+  Then I open mail to "admin@cap-collectif.com"
+  And email should match snapshot "notifyCreateProposalNewsAdmin.html"
+
+@rabbitmq @snapshot-email
+Scenario: User update an news on his proposal
+  Given I publish in "proposal_news_update" with message below:
+  """
+  {
+    "proposalNewsId": "post18"
+  }
+  """
+  And I consume "proposal_news_update"
+  Then I open mail to "admin@cap-collectif.com"
+  And email should match snapshot "notifyUpdateProposalNewsAdmin.html"
+
+@rabbitmq @snapshot-email
+Scenario: User delete an news on his proposal
+  Given I publish in "proposal_news_delete" with message below:
+  """
+  {
+    "proposalNewsId": "post18",
+    "proposalName": "Il fait beau dehors",
+    "projectName": "Le projet de la pluie et du beau temps",
+    "postAuthor": "Senku"
+  }
+  """
+  And I consume "proposal_news_delete"
+  Then I open mail to "admin@cap-collectif.com"
+  And email should match snapshot "notifyDeleteProposalNewsAdmin.html"

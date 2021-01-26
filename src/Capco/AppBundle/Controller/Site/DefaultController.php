@@ -149,7 +149,7 @@ class DefaultController extends Controller
             $messager = MessagesList::MESSAGES_LIST[$messageType];
             $data = $messager::mockData($this->container);
 
-            return $this->render($data['template'], $data);
+            return $this->render(MessagesList::TEMPLATE_LIST[$messageType], $data);
         }
 
         throw new NotFoundHttpException("${messageType} message doesnt exist");

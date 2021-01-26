@@ -1,16 +1,18 @@
 UpdateUserAccountInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input type of UpdateUserAccount'
-    fields:
-      userId:
-        type: 'ID!'
-      roles:
-        type: '[UserRole]'
-        description: 'Unattended roles as array.'
-      locked:
-        type: 'Boolean'
-      vip:
-        type: 'Boolean'
-      enabled:
-        type: 'Boolean'
+    type: relay-mutation-input
+    config:
+        description: 'Input type of UpdateUserAccount'
+        fields:
+            userId:
+                type: 'ID!'
+            roles:
+                type: '[UserRole]'
+                description: 'Unattended roles as array.'
+            locked:
+                type: 'Boolean'
+            vip:
+                type: 'Boolean'
+            enabled:
+                type: 'Boolean'
+            subscribedToProposalNews:
+                type: 'Boolean'

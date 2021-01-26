@@ -153,7 +153,21 @@ exports[`<UserAdminPage/> should render 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "isAdmin",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "isSubscribedToNewsLetter",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isSubscribedToProposalNews",
                       "storageKey": null,
                     },
                     Object {
@@ -440,7 +454,7 @@ exports[`<UserAdminPage/> should render 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9f58fa32c77601cd64097d3d0c72a50f",
+          "cacheID": "c7d66fc565920a521e01ab01f9a2735a",
           "id": null,
           "metadata": Object {},
           "name": "UserAdminPageQuery",
@@ -475,7 +489,9 @@ fragment UserAdminAccount_user on User {
   locked
   vip
   enabled
+  isAdmin
   isSubscribedToNewsLetter
+  isSubscribedToProposalNews
   subscribedToNewsLetterAt
   ...DeleteAccountModal_viewer
 }

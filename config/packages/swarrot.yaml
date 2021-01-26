@@ -105,6 +105,15 @@ swarrot:
         report:
             exchange: capco_direct_exchange
             routing_key: report
+        proposal_news.create:
+            exchange: capco_direct_exchange
+            routing_key: proposal_news_create
+        proposal_news.update:
+            exchange: capco_direct_exchange
+            routing_key: proposal_news_update
+        proposal_news.delete:
+            exchange: capco_direct_exchange
+            routing_key: proposal_news_delete
     consumers:
         elasticsearch_indexation:
             processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
@@ -649,3 +658,54 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'event_review_retry_%%attempt%%'
+        proposal_news_create:
+            processor: Capco\AppBundle\Processor\Proposal\ProposalNewsCreateProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'proposal_news_create_retry_%%attempt%%'
+        proposal_news_update:
+            processor: Capco\AppBundle\Processor\Proposal\ProposalNewsUpdateProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'proposal_news_update_retry_%%attempt%%'
+        proposal_news_delete:
+            processor: Capco\AppBundle\Processor\Proposal\ProposalNewsDeleteProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'proposal_news_delete_retry_%%attempt%%'

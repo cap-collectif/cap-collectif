@@ -132,6 +132,7 @@
         <field name="deletedAccountAt" column="deleted_account_at" type="datetime" nullable="true" />
 
         <field name="remindedAccountConfirmationAfter1Hour" column="remind_account_confirmation" type="boolean" nullable="false" />
+        <field name="subscribedToProposalNews" column="subscribed_to_proposal_news" type="boolean" nullable="false" />
 
         <many-to-one field="userType" target-entity="Capco\UserBundle\Entity\UserType">
             <cascade>

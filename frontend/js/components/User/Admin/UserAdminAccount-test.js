@@ -25,9 +25,11 @@ describe('<UserAdminAccount/>', () => {
       locked: false,
       roles: [],
       vip: false,
+      isAdmin: true,
       subscribedToNewsLetterAt: '2018-05-03 11:11:11',
       $fragmentRefs,
       isSubscribedToNewsLetter: true,
+      isSubscribedToProposalNews: true,
     };
     const wrapper = shallow(
       <UserAdminAccount {...props1} isViewerOrAdmin viewer={viewer} user={userSubscribed} />,
@@ -45,8 +47,10 @@ describe('<UserAdminAccount/>', () => {
       locked: false,
       roles: [],
       vip: false,
+      isAdmin: false,
       subscribedToNewsLetterAt: null,
       isSubscribedToNewsLetter: false,
+      isSubscribedToProposalNews: false,
     };
     const wrapper = shallow(
       <UserAdminAccount

@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
@@ -44,7 +42,9 @@ class ProposalRevisionMessage extends AbstractExternalMessage
 
     public static function mockData(ContainerInterface $container)
     {
-        $revision = $container->get(ProposalRevisionRepository::class)->find('proposalRevisionInPending2');
+        $revision = $container
+            ->get(ProposalRevisionRepository::class)
+            ->find('proposalRevisionInPending2');
         $otherRevisions = $container
             ->get(ProposalRevisionRepository::class)
             ->findByProposal('proposalIdf4');

@@ -27,8 +27,8 @@ class User extends BaseUser implements
     EquatableInterface,
     IndexableInterface
 {
-    use UserSSOTrait;
     use UserAddressTrait;
+    use UserSSOTrait;
 
     public const GENDER_OTHER = 'o';
     protected const SORT_ORDER_CREATED_AT = 0;
@@ -92,6 +92,7 @@ class User extends BaseUser implements
     protected UserNotificationsConfiguration $notificationsConfiguration;
     protected bool $consentExternalCommunication = false;
     protected bool $consentInternalCommunication = false;
+    protected bool $subscribedToProposalNews = false;
 
     protected Collection $archives;
     protected Collection $responses;
@@ -680,6 +681,23 @@ class User extends BaseUser implements
         UserNotificationsConfiguration $notificationsConfiguration
     ): self {
         $this->notificationsConfiguration = $notificationsConfiguration;
+
+        return $this;
+    }
+
+    public function getSubscribedToProposalNews(): bool
+    {
+        return $this->subscribedToProposalNews;
+    }
+
+    public function isSubscribedToProposalNews(): bool
+    {
+        return $this->subscribedToProposalNews;
+    }
+
+    public function setSubscribedToProposalNews(bool $subscribedToProposalNews): self
+    {
+        $this->subscribedToProposalNews = $subscribedToProposalNews;
 
         return $this;
     }

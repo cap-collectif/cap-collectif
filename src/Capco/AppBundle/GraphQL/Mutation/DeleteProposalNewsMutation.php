@@ -10,6 +10,8 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteProposalNewsMutation implements MutationInterface
 {
@@ -19,15 +21,18 @@ class DeleteProposalNewsMutation implements MutationInterface
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private LoggerInterface $logger;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->logger = $logger;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -36,6 +41,32 @@ class DeleteProposalNewsMutation implements MutationInterface
             $proposalPost = $this->getPost($input, $viewer);
             $id = $input->offsetGet('postId');
             $this->em->remove($proposalPost);
+            $proposalName = $proposalPost
+                ->getProposals()
+                ->first()
+                ->getTitle();
+            $projectName = $proposalPost
+                ->getProposals()
+                ->first()
+                ->getProject()
+                ->getTitle();
+            $proposalPostAuthor = $proposalPost
+                ->getAuthors()
+                ->first()
+                ->getDisplayname();
+
+            $this->em->remove($proposalPost);
+            $this->publisher->publish(
+                'proposal_news.delete',
+                new Message(
+                    json_encode([
+                        'postId' => $id,
+                        'proposalName' => $proposalName,
+                        'projectName' => $projectName,
+                        'postAuthor' => $proposalPostAuthor,
+                    ])
+                )
+            );
 
             return ['postId' => $id, 'errorCode' => null];
         } catch (UserError $error) {

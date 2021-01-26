@@ -57,9 +57,10 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         Authors:
-            - '@user5'
+            - '@userIan'
         media: null
-        proposals: ['@proposal2']
+        proposals: ['@proposalIdf5']
+        displayedOnBlog: false
     post18:
         id: post18
         isPublished: true
@@ -67,9 +68,10 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         Authors:
-            - '@userWelcomattic'
+            - '@userKiroule'
         media: null
-        proposals: ['@proposal1']
+        proposals: ['@proposalIdf4']
+        displayedOnBlog: false
     post19:
         id: post19
         isPublished: true
@@ -77,6 +79,7 @@ Capco\AppBundle\Entity\Post:
         publishedAt: $createdAt
         updatedAt: $createdAt
         Authors:
-            - '@user4'
+            - '@userIan'
         media: null
-        proposals: ['@proposal2']
+        proposals: ['@proposalIdf5']
+        displayedOnBlog: false
