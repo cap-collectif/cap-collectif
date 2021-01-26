@@ -10,9 +10,12 @@ import type { DebateStepPageArgumentsPagination_viewer$key } from '~relay/Debate
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { RelayHookPaginationProps, ConnectionMetadata } from '~/types';
-import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
+import ModalModerateArgument, {
+  type ModerateArgument,
+} from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
 import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
+import { formatConnectionPath } from '~/shared/utils/relay';
 
 type Props = {|
   +debate: DebateStepPageArgumentsPagination_debate$key & { +id: string },
@@ -22,7 +25,7 @@ type Props = {|
 
 export const CONNECTION_NODES_PER_PAGE = 8;
 
-export const FRAGMENT = graphql`
+const FRAGMENT = graphql`
   fragment DebateStepPageArgumentsPagination_debate on Debate
     @argumentDefinitions(
       first: { type: "Int", defaultValue: 3 }
@@ -32,7 +35,7 @@ export const FRAGMENT = graphql`
       isAuthenticated: { type: "Boolean!" }
     ) {
     id
-    arguments(value: $value, first: $first, after: $cursor, orderBy: $orderBy)
+    arguments(value: $value, first: $first, after: $cursor, orderBy: $orderBy, isTrashed: false)
       @connection(key: "DebateStepPageArgumentsPagination_arguments", filters: ["value"]) {
       pageInfo {
         hasNextPage
@@ -127,7 +130,7 @@ export const DebateStepPageArgumentsPagination = ({
   ] = usePagination(FRAGMENT, debate);
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const [reportModalId, setReportModalId] = React.useState<?string>(null);
-  const [moderateModalId, setModerateModalId] = React.useState<?string>(null);
+  const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
     id: string,
     type: 'FOR' | 'AGAINST',
@@ -149,16 +152,23 @@ export const DebateStepPageArgumentsPagination = ({
             argument={argument}
             viewer={viewer}
             setReportModalId={setReportModalId}
-            setModerateModalId={setModerateModalId}
+            setModerateArgumentModal={setModerateArgumentModal}
             setDeleteModalInfo={setDeleteModalInfo}
           />
         </AppBox>
       ))}
 
-      {moderateModalId && (
+      {moderateArgumentModal && (
         <ModalModerateArgument
-          argumentId={moderateModalId}
-          onClose={() => setModerateModalId(null)}
+          argument={moderateArgumentModal}
+          onClose={() => setModerateArgumentModal(null)}
+          relayConnection={[
+            formatConnectionPath(
+              ['client', moderateArgumentModal.debateId],
+              'DebateStepPageArgumentsPagination_arguments',
+              `(value:"${moderateArgumentModal.forOrAgainst}")`,
+            ),
+          ]}
         />
       )}
 

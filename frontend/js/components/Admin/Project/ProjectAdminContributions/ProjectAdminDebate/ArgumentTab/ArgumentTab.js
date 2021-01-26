@@ -7,17 +7,15 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import DebateArgument from '~/components/Admin/Debate/DebateArgument/DebateArgument';
 import { type ArgumentTab_debate } from '~relay/ArgumentTab_debate.graphql';
-import Button from '~ds/Button/Button';
 import AppBox from '~ui/Primitives/AppBox';
-import Menu from '~ds/Menu/Menu';
-import { ICON_NAME } from '~ds/Icon/Icon';
 import Spinner from '~ds/Spinner/Spinner';
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
-import InlineSelect from '~ds/InlineSelect';
 import NoResultArgument from '~/components/Admin/Debate/NoResultArgument/NoResultArgument';
-import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
-import { type ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
+import ModalModerateArgument, {
+  type ModerateArgument,
+} from '~/components/Debate/Page/Arguments/ModalModerateArgument';
+import { formatConnectionPath } from '~/shared/utils/relay';
 
 export const ARGUMENT_PAGINATION = 10;
 
@@ -29,96 +27,17 @@ type Props = {|
 |};
 
 export const ArgumentTab = ({ debate, relay }: Props) => {
-  const {
-    debateArguments,
-    argumentsFor,
-    argumentsAgainst,
-    debateArgumentsPublished,
-    debateArgumentsWaiting,
-    debateArgumentsTrashed,
-  } = debate;
+  const { debateArguments, argumentsFor, argumentsAgainst, allArguments } = debate;
   const listArgumentRef = React.useRef(null);
-  const { parameters, dispatch } = useProjectAdminDebateContext();
+  const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
+  const { parameters } = useProjectAdminDebateContext();
   const intl = useIntl();
 
-  const sumCountArguments: number =
-    debateArgumentsPublished.totalCount +
-    debateArgumentsWaiting.totalCount +
-    debateArgumentsTrashed.totalCount;
-  const hasArguments = sumCountArguments > 0;
+  const hasArguments = allArguments.totalCount > 0;
   const hasArgumentForOrAgainst = argumentsFor.totalCount > 0 || argumentsAgainst.totalCount > 0;
-  const exportUrl = `/debate/${debate.id}/download/arguments`;
 
   return hasArguments ? (
     <Flex direction="column">
-      <Flex direction="row" justify="space-between" align="center">
-        <InlineSelect
-          value={parameters.filters.argument.state}
-          onChange={value =>
-            dispatch({ type: 'CHANGE_ARGUMENT_STATE', payload: ((value: any): ArgumentState) })
-          }>
-          <InlineSelect.Choice value="PUBLISHED">
-            {intl.formatMessage(
-              { id: 'filter.count.status.published' },
-              { num: debateArgumentsPublished.totalCount },
-            )}
-          </InlineSelect.Choice>
-          <InlineSelect.Choice value="WAITING">
-            {intl.formatMessage(
-              { id: 'filter.count.status.awaiting' },
-              { count: debateArgumentsWaiting.totalCount },
-            )}
-          </InlineSelect.Choice>
-          <InlineSelect.Choice value="TRASHED">
-            {intl.formatMessage(
-              { id: 'filter.count.status.trash' },
-              { num: debateArgumentsTrashed.totalCount },
-            )}
-          </InlineSelect.Choice>
-        </InlineSelect>
-
-        <Flex direction="row" align="center" spacing={5}>
-          <Menu>
-            <Menu.Button as={React.Fragment}>
-              <Button rightIcon={ICON_NAME.ARROW_DOWN_O} color="gray.500">
-                {intl.formatMessage({ id: 'label_filters' })}
-              </Button>
-            </Menu.Button>
-
-            <Menu.List>
-              <Menu.OptionGroup
-                value={((parameters.filters.argument.type: any): string[])}
-                onChange={value =>
-                  dispatch({
-                    type: 'CHANGE_ARGUMENT_TYPE',
-                    payload: ((value: any): ForOrAgainstValue[]),
-                  })
-                }
-                type="checkbox"
-                title={intl.formatMessage({ id: 'filter-arguments' })}>
-                <Menu.OptionItem value="FOR">
-                  <Text color="gray.900">{intl.formatMessage({ id: 'global.for' })}</Text>
-                </Menu.OptionItem>
-                <Menu.OptionItem value="AGAINST">
-                  <Text color="gray.900">{intl.formatMessage({ id: 'global.against' })}</Text>
-                </Menu.OptionItem>
-              </Menu.OptionGroup>
-            </Menu.List>
-          </Menu>
-
-          <Button
-            variant="primary"
-            variantColor="primary"
-            variantSize="small"
-            onClick={() => {
-              window.location.href = exportUrl;
-            }}
-            aria-label={intl.formatMessage({ id: 'global.export' })}>
-            {intl.formatMessage({ id: 'global.export' })}
-          </Button>
-        </Flex>
-      </Flex>
-
       {parameters.filters.argument.state === 'WAITING' && hasArgumentForOrAgainst && (
         <Text color="gray.500" mt={4}>
           {intl.formatMessage({ id: 'argument-waiting-user-email-confirmation' })}
@@ -151,13 +70,33 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
               .map(edge => edge.node)
               .map(argument => (
                 <AppBox as="li" key={argument.id}>
-                  <DebateArgument argument={argument} debate={debate} />
+                  <DebateArgument
+                    argument={argument}
+                    setModerateArgumentModal={setModerateArgumentModal}
+                  />
                 </AppBox>
               ))}
           </InfiniteScroll>
         </AppBox>
       ) : (
         <NoResultArgument debate={debate} />
+      )}
+
+      {moderateArgumentModal && (
+        <ModalModerateArgument
+          isAdmin
+          argument={moderateArgumentModal}
+          onClose={() => setModerateArgumentModal(null)}
+          relayConnection={[
+            formatConnectionPath(
+              ['client', moderateArgumentModal.debateId],
+              'ArgumentTab_debateArguments',
+              `(isPublished:${(
+                moderateArgumentModal.state === 'PUBLISHED'
+              ).toString()},isTrashed:false)`,
+            ),
+          ]}
+        />
       )}
     </Flex>
   ) : (
@@ -204,26 +143,25 @@ export default createPaginationContainer(
             }
           }
         }
-        argumentsFor: arguments(value: FOR, isPublished: $isPublished, isTrashed: $isTrashed) {
+        argumentsFor: arguments(
+          first: 0
+          value: FOR
+          isPublished: $isPublished
+          isTrashed: $isTrashed
+        ) {
           totalCount
         }
         argumentsAgainst: arguments(
+          first: 0
           value: AGAINST
           isPublished: $isPublished
           isTrashed: $isTrashed
         ) {
           totalCount
         }
-        debateArgumentsPublished: arguments(isPublished: true, isTrashed: false) {
+        allArguments: arguments(first: 0, isPublished: null, isTrashed: null) {
           totalCount
         }
-        debateArgumentsWaiting: arguments(isPublished: false) {
-          totalCount
-        }
-        debateArgumentsTrashed: arguments(isTrashed: true) {
-          totalCount
-        }
-        ...DebateArgument_debate
         ...NoResultArgument_debate @arguments(isPublished: $isPublished, isTrashed: $isTrashed)
       }
     `,

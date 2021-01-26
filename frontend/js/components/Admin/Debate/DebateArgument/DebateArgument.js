@@ -7,21 +7,39 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Tag from '~ds/Tag/Tag';
 import Text from '~ui/Primitives/Text';
 import { type DebateArgument_argument } from '~relay/DebateArgument_argument.graphql';
-import { type DebateArgument_debate } from '~relay/DebateArgument_debate.graphql';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import InlineList from '~ds/InlineList/InlineList';
-import { formatConnectionPath } from '~/shared/utils/relay';
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
+import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument';
+import Button from '~ds/Button/Button';
 import { toast } from '~ds/Toast';
+import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
+import type { FilterArgument } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
+import { formatConnectionPath } from '~/shared/utils/relay';
+import Popover from '~ds/Popover';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 
 type Props = {|
   +argument: DebateArgument_argument,
-  +debate: DebateArgument_debate,
+  +setModerateArgumentModal: (argument: ModerateArgument) => void,
 |};
 
-const onDelete = (argumentId: string, debateId: string, intl: IntlShape) => {
-  const connections = [formatConnectionPath(['client', debateId], 'ArgumentTab_debateArguments')];
+const onDelete = (
+  argumentId: string,
+  debateId: string,
+  intl: IntlShape,
+  filters: FilterArgument,
+) => {
+  const connections = [
+    formatConnectionPath(
+      ['client', debateId],
+      'ArgumentTab_debateArguments',
+      `(isPublished:${(
+        filters.state === 'PUBLISHED' || filters.state === 'TRASHED'
+      ).toString()},isTrashed:${(filters.state === 'TRASHED').toString()})`,
+    ),
+  ];
 
   DeleteDebateArgumentMutation.commit({
     input: {
@@ -46,10 +64,21 @@ const onDelete = (argumentId: string, debateId: string, intl: IntlShape) => {
     });
 };
 
-export const DebateArgument = ({ argument, debate }: Props) => {
-  const { id, body, author, published, publishedAt, type } = argument;
-  const intl = useIntl();
+export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) => {
+  const {
+    id,
+    body,
+    author,
+    trashed,
+    published,
+    publishedAt,
+    type,
+    debate,
+    trashedStatus,
+  } = argument;
   const [hovering, setHovering] = React.useState<boolean>(false);
+  const intl = useIntl();
+  const { parameters, dispatch } = useProjectAdminDebateContext();
 
   return (
     <Flex
@@ -63,7 +92,7 @@ export const DebateArgument = ({ argument, debate }: Props) => {
       onMouseLeave={() => setHovering(false)}>
       <Flex direction="column" flex="3" mr={4}>
         <Text truncate={100} color="blue.900">
-          {body}
+          {trashedStatus === 'INVISIBLE' ? intl.formatMessage({ id: 'hidden-content' }) : body}
         </Text>
 
         <InlineList separator="•" color="gray.600">
@@ -93,20 +122,82 @@ export const DebateArgument = ({ argument, debate }: Props) => {
       </Flex>
 
       <Flex direction="row" flex="1" align="center" justify="space-between">
-        <Tag variant={type === 'FOR' ? 'green' : 'red'}>
+        <Tag
+          variant={type === 'FOR' ? 'green' : 'red'}
+          onClick={() =>
+            dispatch({
+              type: 'CHANGE_ARGUMENT_TYPE',
+              payload: [type],
+            })
+          }>
           <FormattedMessage
             id={type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'}
           />
         </Tag>
 
-        {hovering && (
-          <ButtonQuickAction
-            icon={ICON_NAME.TRASH}
-            label={<FormattedMessage id="global.delete" />}
-            onClick={() => onDelete(id, debate.id, intl)}
-            variantColor="danger"
-          />
-        )}
+        {hovering &&
+          (!trashed ? (
+            <Button
+              leftIcon={ICON_NAME.MODERATE}
+              color="gray.500"
+              onClick={() =>
+                setModerateArgumentModal({
+                  id,
+                  debateId: debate.id,
+                  state: published ? 'PUBLISHED' : 'WAITING',
+                  forOrAgainst: type,
+                })
+              }
+              p={0}
+            />
+          ) : (
+            <Popover placement="left" trigger={['click']}>
+              <Popover.Trigger>
+                <ButtonQuickAction
+                  icon={ICON_NAME.TRASH}
+                  label={<FormattedMessage id="global.delete" />}
+                  variantColor="danger"
+                />
+              </Popover.Trigger>
+              <Popover.Content>
+                {({ closePopover }) => (
+                  <React.Fragment>
+                    <Popover.Header>
+                      {intl.formatMessage({ id: 'global.removeDefinitively' })}
+                    </Popover.Header>
+                    <Popover.Body>
+                      <Text>
+                        {intl.formatMessage({
+                          id: 'body-confirm-definitively-delete-argument',
+                        })}
+                      </Text>
+                    </Popover.Body>
+                    <Popover.Footer>
+                      <ButtonGroup>
+                        <Button uppercase onClick={closePopover} color="gray.500" fontSize={1}>
+                          {intl.formatMessage({ id: 'cancel' })}
+                        </Button>
+                        <Button
+                          alternative
+                          variant="tertiary"
+                          variantColor="danger"
+                          onClick={() =>
+                            onDelete(
+                              argument.id,
+                              argument.debate.id,
+                              intl,
+                              parameters.filters.argument,
+                            )
+                          }>
+                          {intl.formatMessage({ id: 'global.removeDefinitively' })}
+                        </Button>
+                      </ButtonGroup>
+                    </Popover.Footer>
+                  </React.Fragment>
+                )}
+              </Popover.Content>
+            </Popover>
+          ))}
       </Flex>
     </Flex>
   );
@@ -118,16 +209,18 @@ export default createFragmentContainer(DebateArgument, {
       id
       body
       published
+      trashed
       publishedAt
       type
       author {
         username
       }
-    }
-  `,
-  debate: graphql`
-    fragment DebateArgument_debate on Debate {
-      id
+      debate {
+        id
+      }
+      ... on Trashable {
+        trashedStatus
+      }
     }
   `,
 });

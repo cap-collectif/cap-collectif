@@ -13,6 +13,8 @@ import ArgumentTab, { ARGUMENT_PAGINATION } from './ArgumentTab';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import type { ProjectAdminDebateParameters } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
+import Flex from '~ui/Primitives/Layout/Flex';
+import ArgumentHeaderTab from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentHeaderTab';
 
 type Props = {|
   +debate: ArgumentTabQuery_debate,
@@ -85,10 +87,19 @@ const ArgumentTabQuery = ({ debate }: Props) => {
     skip: !hasFilters,
   });
 
-  if ((!hasFilters && debate) || (hasFilters && data)) {
-    const dataDebate: any = debate && !hasFilters ? debate : data.debate;
+  if (debate) {
+    const dataDebate: any = !hasFilters ? debate : data?.debate;
 
-    return <ArgumentTab debate={dataDebate} />;
+    return (
+      <Flex direction="column">
+        <ArgumentHeaderTab debate={debate} />
+        {(hasFilters && data) || (!hasFilters && debate) ? (
+          <ArgumentTab debate={dataDebate} />
+        ) : (
+          <Loader />
+        )}
+      </Flex>
+    );
   }
 
   return <Loader />;
@@ -113,6 +124,7 @@ export default createFragmentContainer(ArgumentTabQuery, {
           isPublished: $isPublished
           isTrashed: $isTrashed
         )
+      ...ArgumentHeaderTab_debate
     }
   `,
 });

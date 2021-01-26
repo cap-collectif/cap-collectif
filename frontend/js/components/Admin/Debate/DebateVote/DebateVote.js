@@ -47,7 +47,7 @@ export const DebateVote = ({ vote }: Props) => {
         </InlineList>
       </Flex>
 
-      <Tag variant={type === 'FOR' ? 'green' : 'red'}>
+      <Tag variant={type === 'FOR' ? 'green' : 'red'} interactive={false}>
         <FormattedMessage
           id={type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'}
         />

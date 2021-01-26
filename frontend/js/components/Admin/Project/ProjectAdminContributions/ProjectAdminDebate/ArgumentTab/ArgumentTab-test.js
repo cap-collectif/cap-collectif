@@ -38,14 +38,8 @@ const baseProps = {
     argumentsFor: {
       totalCount: 1,
     },
-    debateArgumentsPublished: {
+    allArguments: {
       totalCount: 2,
-    },
-    debateArgumentsWaiting: {
-      totalCount: 0,
-    },
-    debateArgumentsTrashed: {
-      totalCount: 0,
     },
   },
   relay: relayPaginationMock,
@@ -68,13 +62,7 @@ const props = {
       argumentsFor: {
         totalCount: 0,
       },
-      debateArgumentsPublished: {
-        totalCount: 0,
-      },
-      debateArgumentsWaiting: {
-        totalCount: 0,
-      },
-      debateArgumentsTrashed: {
+      allArguments: {
         totalCount: 0,
       },
     },

@@ -18,6 +18,7 @@ import AddDebateArgumentVoteMutation from '~/mutations/AddDebateArgumentVoteMuta
 import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVoteMutation';
 import Button from '~ds/Button/Button';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import Menu from '~ds/Menu/Menu';
 import ArgumentCardEdition from './ArgumentCardEdition';
@@ -31,7 +32,7 @@ type Props = {|
   +viewer: ?ArgumentCard_viewer,
   +isMobile?: boolean,
   +setReportModalId: (id: string) => void,
-  +setModerateModalId: (id: string) => void,
+  +setModerateArgumentModal: (argument: ModerateArgument) => void,
   +setDeleteModalInfo: ({ id: string, type: DebateOpinionStatus }) => void,
 |};
 
@@ -71,7 +72,7 @@ export const ArgumentCard = ({
   viewer,
   isMobile,
   onReadMore,
-  setModerateModalId,
+  setModerateArgumentModal,
   setReportModalId,
   setDeleteModalInfo,
   ...props
@@ -103,13 +104,22 @@ export const ArgumentCard = ({
                 .startOf('day')
                 .fromNow()}
             </Text>
+
             {isViewerAdmin && !argument.viewerDidAuthor && (
               <Button
-                onClick={() => setModerateModalId(argument.id)}
+                onClick={() =>
+                  setModerateArgumentModal({
+                    id: argument.id,
+                    state: 'PUBLISHED',
+                    debateId: argument.debate.id,
+                    forOrAgainst: argument.type,
+                  })
+                }
                 rightIcon={ICON_NAME.MODERATE}
                 color="neutral-gray.500"
               />
             )}
+
             {argument.viewerDidAuthor && (
               <>
                 <Button
@@ -211,6 +221,9 @@ export default createFragmentContainer(ArgumentCard, {
       author {
         id
         username
+      }
+      debate {
+        id
       }
       type
       publishedAt

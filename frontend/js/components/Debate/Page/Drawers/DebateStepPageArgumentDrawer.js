@@ -47,6 +47,9 @@ const DebateStepPageArgumentDrawer = ({
 |}) => {
   const argument: DebateStepPageArgumentDrawer_argument = useFragment(FRAGMENT, argumentFragment);
   const intl = useIntl();
+
+  if (!argument) return null;
+
   return (
     <DetailDrawer {...drawerProps}>
       <DetailDrawer.Header textAlign="center" justifyContent="space-between">

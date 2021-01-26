@@ -19,6 +19,8 @@ import DebateStepPageArgumentDrawer from '~/components/Debate/Page/Drawers/Debat
 import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
 import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
+import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument';
+import { formatConnectionPath } from '~/shared/utils/relay';
 
 type Props = {|
   +handleChange?: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
@@ -40,7 +42,7 @@ export const FRAGMENT = graphql`
       isAuthenticated: { type: "Boolean!" }
     ) {
     id
-    alternateArguments(first: $first, after: $cursor, orderBy: $orderBy)
+    alternateArguments(first: $first, after: $cursor, orderBy: $orderBy, isTrashed: false)
       @connection(
         key: "DebateStepPageAlternateArgumentsPagination_alternateArguments"
         filters: []
@@ -123,7 +125,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   ] = usePagination(FRAGMENT, debateFragment);
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const [reportModalId, setReportModalId] = React.useState<?string>(null);
-  const [moderateModalId, setModerateModalId] = React.useState<?string>(null);
+  const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
     id: string,
     type: 'FOR' | 'AGAINST',
@@ -166,7 +168,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   argument={argument}
                   viewer={viewer}
                   setReportModalId={setReportModalId}
-                  setModerateModalId={setModerateModalId}
+                  setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
                 />
               </React.Fragment>
@@ -207,7 +209,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   bg="neutral-gray.100"
                   mb={6}
                   setReportModalId={setReportModalId}
-                  setModerateModalId={setModerateModalId}
+                  setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
                 />
               </>
@@ -216,10 +218,17 @@ export const DebateStepPageAlternateArgumentsPagination = ({
         </InfiniteScroll>
       )}
 
-      {moderateModalId && (
+      {moderateArgumentModal && (
         <ModalModerateArgument
-          argumentId={moderateModalId}
-          onClose={() => setModerateModalId(null)}
+          argument={moderateArgumentModal}
+          onClose={() => setModerateArgumentModal(null)}
+          relayConnection={[
+            formatConnectionPath(
+              ['client', moderateArgumentModal.debateId],
+              'DebateStepPageAlternateArgumentsPagination_alternateArguments',
+            ),
+          ]}
+          isArgumentAlternate
         />
       )}
 

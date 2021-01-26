@@ -217,16 +217,16 @@ exports[`Internal|Debate.arguments connection fetches counters associated to a d
 Object {
   "node": Object {
     "againstArguments": Object {
-      "totalCount": 3,
-    },
-    "allArguments": Object {
-      "totalCount": 7,
-    },
-    "forArguments": Object {
       "totalCount": 4,
     },
-    "totalArguments": Object {
+    "allArguments": Object {
       "totalCount": 10,
+    },
+    "forArguments": Object {
+      "totalCount": 6,
+    },
+    "publishedArguments": Object {
+      "totalCount": 7,
     },
     "trashedArguments": Object {
       "totalCount": 2,

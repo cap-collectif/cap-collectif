@@ -21,10 +21,7 @@ type Props = {|
 
 export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Props) => {
   const history = useHistory();
-  const { argumentsPublished, argumentsWaiting, argumentsTrashed, votes } = debate;
-
-  const sumCountArguments: number =
-    argumentsPublished.totalCount + argumentsWaiting.totalCount + argumentsTrashed.totalCount;
+  const { allArguments, votes } = debate;
 
   return (
     <Flex direction="column">
@@ -57,7 +54,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
             <Heading as="h4">
               <FormattedMessage
                 id="argument-count"
-                values={{ count: sumCountArguments }}
+                values={{ count: allArguments.totalCount }}
                 tagName={React.Fragment}
               />
             </Heading>
@@ -99,13 +96,7 @@ export default createFragmentContainer(ProjectAdminDebate, {
         countVotePagination: { type: "Int!" }
         cursorVotePagination: { type: "String" }
       ) {
-      argumentsPublished: arguments(isPublished: true, isTrashed: false) {
-        totalCount
-      }
-      argumentsWaiting: arguments(isPublished: false) {
-        totalCount
-      }
-      argumentsTrashed: arguments(isTrashed: true) {
+      allArguments: arguments(first: 0, isPublished: null, isTrashed: null) {
         totalCount
       }
       votes {

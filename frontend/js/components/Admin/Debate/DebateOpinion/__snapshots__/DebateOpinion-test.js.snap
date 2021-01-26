@@ -14,6 +14,7 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
     _css={[Function]}
     borderBottomLeftRadius={0}
     borderTopRightRadius={0}
+    interactive={false}
     variant="green"
   >
     <FormattedMessage

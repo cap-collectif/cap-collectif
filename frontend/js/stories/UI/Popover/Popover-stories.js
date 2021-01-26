@@ -95,4 +95,32 @@ storiesOf('Design system|Popover', module)
         </Popover>
       </Flex>
     );
+  })
+  .add('with close method', () => {
+    return (
+      <Flex align="center" gridGap={2}>
+        <Popover placement={placement()} trigger={['click']}>
+          <Popover.Trigger>
+            <Button variant="primary" variantSize="medium">
+              Hover moi
+            </Button>
+          </Popover.Trigger>
+
+          <Popover.Content>
+            {({ closePopover }) => (
+              <React.Fragment>
+                <Popover.Header>Welcome</Popover.Header>
+                <Popover.Body>Body</Popover.Body>
+                <Popover.Footer>
+                  <ButtonGroup>
+                    <Button onClick={closePopover}>Click here to close</Button>
+                    <Button>Confirm</Button>
+                  </ButtonGroup>
+                </Popover.Footer>
+              </React.Fragment>
+            )}
+          </Popover.Content>
+        </Popover>
+      </Flex>
+    );
   });

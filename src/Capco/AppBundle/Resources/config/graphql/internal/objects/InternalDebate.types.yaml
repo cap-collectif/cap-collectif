@@ -47,11 +47,11 @@ InternalDebate:
                     isPublished:
                         type: 'Boolean'
                         description: '(ROLE_ADMIN only) True to see only published arguments, false to see only unpublished, null to see both.'
-                        defaultValue: true
+                        defaultValue: null
                     isTrashed:
                         type: 'Boolean'
                         description: '(ROLE_ADMIN only) True to see only trashed arguments, false to not see trashed, null to see both.'
-                        defaultValue: false
+                        defaultValue: null
                     orderBy:
                         type: 'DebateArgumentOrder'
                         description: 'Order by.'

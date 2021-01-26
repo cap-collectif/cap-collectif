@@ -9,6 +9,11 @@ import type {
   DeleteDebateArgumentMutationResponse,
 } from '~relay/DeleteDebateArgumentMutation.graphql';
 
+type Variables = {|
+  ...DeleteDebateArgumentMutationVariables,
+  debateId: string,
+|};
+
 const mutation = graphql`
   mutation DeleteDebateArgumentMutation($input: DeleteDebateArgumentInput!, $connections: [ID!]!) {
     deleteDebateArgument(input: $input) {
@@ -18,10 +23,7 @@ const mutation = graphql`
   }
 `;
 
-const commit = (variables: {
-  ...DeleteDebateArgumentMutationVariables,
-  debateId: string,
-}): Promise<DeleteDebateArgumentMutationResponse> =>
+const commit = (variables: Variables): Promise<DeleteDebateArgumentMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
@@ -43,6 +45,15 @@ const commit = (variables: {
       if (!allArgumentsProxy) return;
       const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
       allArgumentsProxy.setValue(previousValue - 1, 'totalCount');
+
+      const argumentsTrashed = debateProxy.getLinkedRecord('arguments', {
+        first: 0,
+        isPublished: true,
+        isTrashed: true,
+      });
+      if (!argumentsTrashed) return;
+      const countArgumentsTrashed = parseInt(argumentsTrashed.getValue('totalCount'), 10);
+      argumentsTrashed.setValue(countArgumentsTrashed - 1, 'totalCount');
     },
   });
 

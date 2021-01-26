@@ -9,14 +9,8 @@ const baseProps = {
   debate: {
     $refType,
     $fragmentRefs,
-    argumentsPublished: {
-      totalCount: 1,
-    },
-    argumentsWaiting: {
-      totalCount: 1,
-    },
-    argumentsTrashed: {
-      totalCount: 1,
+    allArguments: {
+      totalCount: 3,
     },
     votes: {
       totalCount: 1,

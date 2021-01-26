@@ -21,7 +21,7 @@ type Props = {|
 const DEBATE_FRAGMENT = graphql`
   fragment MobileDebateStepPageArguments_debate on Debate
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-    arguments(first: 0) {
+    arguments(first: 0, isTrashed: false) {
       totalCount
     }
     ...DebateStepPageArgumentsDrawer_debate @arguments(isAuthenticated: $isAuthenticated)

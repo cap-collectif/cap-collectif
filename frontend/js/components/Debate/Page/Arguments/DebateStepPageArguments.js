@@ -49,7 +49,7 @@ export default createFragmentContainer(DebateStepPageArguments, {
       }
       debate {
         id
-        arguments(first: 0) {
+        arguments(first: 0, isTrashed: false) {
           totalCount
         }
         ...MobileDebateStepPageArguments_debate @arguments(isAuthenticated: $isAuthenticated)

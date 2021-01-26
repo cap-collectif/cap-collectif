@@ -33,6 +33,7 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}>
       <Tag
+        interactive={false}
         variant={type === 'FOR' ? 'green' : 'red'}
         css={css({
           position: 'absolute',

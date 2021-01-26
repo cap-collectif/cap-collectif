@@ -7,12 +7,9 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import debounce from 'lodash/debounce';
-
+import findLast from 'lodash/findLast';
 import AlertForm from '../../../Alert/AlertForm';
 import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
-import AppDispatcher from '~/dispatchers/AppDispatcher';
-
-import { UPDATE_ALERT } from '~/constants/AlertConstants';
 import CreateProjectAlphaMutation from '~/mutations/CreateProjectAlphaMutation';
 import UpdateProjectAlphaMutation from '~/mutations/UpdateProjectAlphaMutation';
 import { type ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql';
@@ -40,6 +37,9 @@ import ProjectProposalsAdminForm, {
 } from '../Proposals/ProjectProposalsAdminForm';
 import { type ConcreteStepType } from '~relay/CreateProjectAlphaMutation.graphql';
 import { ProjectBoxContainer } from './ProjectAdminForm.style';
+import { toast } from '~ds/Toast';
+import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
+import { getProjectAdminPath } from '~/components/Admin/Project/ProjectAdminPage.utils';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -140,6 +140,9 @@ const onSubmit = (
   dispatch: Dispatch,
   props: Props,
 ) => {
+  const hasNewDebateStepAdded =
+    steps?.length > 0 ? steps.some(s => !s.id && s.type === 'DebateStep') : false;
+
   const input = {
     title,
     authors: formatAuthors(authors),
@@ -261,21 +264,66 @@ const onSubmit = (
       },
     }).then(data => {
       if (data.updateAlphaProject && data.updateAlphaProject.project) {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'all.data.saved' },
-        });
+        if (!hasNewDebateStepAdded) {
+          toast({
+            variant: 'success',
+            content: props.intl.formatHTMLMessage({ id: 'all.data.saved' }),
+          });
+        } else if (hasNewDebateStepAdded) {
+          const lastDebateStepAdded = findLast(
+            data.updateAlphaProject.project.steps,
+            step => step.type === 'DebateStep',
+          );
+
+          toast({
+            variant: 'info',
+            content: props.intl.formatHTMLMessage(
+              { id: 'face.to.face.debate.configuration' },
+              {
+                link: getContributionsPath(
+                  getProjectAdminPath(data.updateAlphaProject?.project?._id || '', 'CONTRIBUTIONS'),
+                  'DebateStep',
+                  lastDebateStepAdded?.id || '',
+                  lastDebateStepAdded?.slug,
+                ),
+              },
+            ),
+          });
+        }
       }
     });
   }
 
   return CreateProjectAlphaMutation.commit({ input }).then(data => {
-    if (data.createAlphaProject && data.createAlphaProject.project) {
-      window.location.href = data.createAlphaProject.project.adminUrl;
-      AppDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'all.data.saved' },
-      });
+    if (data.createAlphaProject && data.createAlphaProject.project && !hasNewDebateStepAdded) {
+      if (!hasNewDebateStepAdded) {
+        window.location.href = data.createAlphaProject.project.adminUrl;
+
+        toast({
+          variant: 'success',
+          content: props.intl.formatHTMLMessage({ id: 'all.data.saved' }),
+        });
+      } else if (hasNewDebateStepAdded) {
+        const lastDebateStepAdded = findLast(
+          data.createAlphaProject.project.steps,
+          step => step.type === 'DebateStep',
+        );
+
+        toast({
+          variant: 'info',
+          content: props.intl.formatHTMLMessage(
+            { id: 'face.to.face.debate.configuration' },
+            {
+              link: getContributionsPath(
+                getProjectAdminPath(data.createAlphaProject?.project?._id || '', 'CONTRIBUTIONS'),
+                'DebateStep',
+                lastDebateStepAdded?.id || '',
+                lastDebateStepAdded?.slug,
+              ),
+            },
+          ),
+        });
+      }
     }
   });
 };

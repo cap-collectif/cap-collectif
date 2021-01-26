@@ -4,91 +4,6 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
 <ForwardRef
   direction="column"
 >
-  <ForwardRef
-    align="center"
-    direction="row"
-    justify="space-between"
-  >
-    <InlineSelect
-      onChange={[Function]}
-      value="PUBLISHED"
-    >
-      <InlineSelect.Choice
-        value="PUBLISHED"
-      >
-        filter.count.status.published
-      </InlineSelect.Choice>
-      <InlineSelect.Choice
-        value="WAITING"
-      >
-        filter.count.status.awaiting
-      </InlineSelect.Choice>
-      <InlineSelect.Choice
-        value="TRASHED"
-      >
-        filter.count.status.trash
-      </InlineSelect.Choice>
-    </InlineSelect>
-    <ForwardRef
-      align="center"
-      direction="row"
-      spacing={5}
-    >
-      <Menu>
-        <Menu.Button
-          as={Symbol(react.fragment)}
-        >
-          <Button
-            color="gray.500"
-            rightIcon="ARROW_DOWN_O"
-          >
-            label_filters
-          </Button>
-        </Menu.Button>
-        <Menu.List>
-          <Menu.OptionGroup
-            onChange={[Function]}
-            title="filter-arguments"
-            type="checkbox"
-            value={
-              Array [
-                "FOR",
-                "AGAINST",
-              ]
-            }
-          >
-            <Menu.OptionItem
-              value="FOR"
-            >
-              <Text
-                color="gray.900"
-              >
-                global.for
-              </Text>
-            </Menu.OptionItem>
-            <Menu.OptionItem
-              value="AGAINST"
-            >
-              <Text
-                color="gray.900"
-              >
-                global.against
-              </Text>
-            </Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.List>
-      </Menu>
-      <Button
-        aria-label="global.export"
-        onClick={[Function]}
-        variant="primary"
-        variantColor="primary"
-        variantSize="small"
-      >
-        global.export
-      </Button>
-    </ForwardRef>
-  </ForwardRef>
   <ArgumentTab___StyledAppBox
     _css="520px"
     as="ul"
@@ -131,50 +46,7 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
               "id": "argument123",
             }
           }
-          debate={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "argumentsAgainst": Object {
-                "totalCount": 1,
-              },
-              "argumentsFor": Object {
-                "totalCount": 1,
-              },
-              "debateArguments": Object {
-                "edges": Array [
-                  Object {
-                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==1",
-                    "node": Object {
-                      "$fragmentRefs": null,
-                      "id": "argument123",
-                    },
-                  },
-                  Object {
-                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==2",
-                    "node": Object {
-                      "$fragmentRefs": null,
-                      "id": "argument456",
-                    },
-                  },
-                ],
-                "pageInfo": Object {
-                  "hasNextPage": false,
-                },
-                "totalCount": 2,
-              },
-              "debateArgumentsPublished": Object {
-                "totalCount": 2,
-              },
-              "debateArgumentsTrashed": Object {
-                "totalCount": 0,
-              },
-              "debateArgumentsWaiting": Object {
-                "totalCount": 0,
-              },
-              "id": "debate123",
-            }
-          }
+          setModerateArgumentModal={[Function]}
         />
       </AppBox>
       <AppBox
@@ -188,50 +60,7 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
               "id": "argument456",
             }
           }
-          debate={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "argumentsAgainst": Object {
-                "totalCount": 1,
-              },
-              "argumentsFor": Object {
-                "totalCount": 1,
-              },
-              "debateArguments": Object {
-                "edges": Array [
-                  Object {
-                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==1",
-                    "node": Object {
-                      "$fragmentRefs": null,
-                      "id": "argument123",
-                    },
-                  },
-                  Object {
-                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==2",
-                    "node": Object {
-                      "$fragmentRefs": null,
-                      "id": "argument456",
-                    },
-                  },
-                ],
-                "pageInfo": Object {
-                  "hasNextPage": false,
-                },
-                "totalCount": 2,
-              },
-              "debateArgumentsPublished": Object {
-                "totalCount": 2,
-              },
-              "debateArgumentsTrashed": Object {
-                "totalCount": 0,
-              },
-              "debateArgumentsWaiting": Object {
-                "totalCount": 0,
-              },
-              "id": "debate123",
-            }
-          }
+          setModerateArgumentModal={[Function]}
         />
       </AppBox>
     </InfiniteScroll>

@@ -3,7 +3,7 @@ import { type ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql';
 
 export type ArgumentState = 'PUBLISHED' | 'WAITING' | 'TRASHED';
 
-type FilterArgument = {|
+export type FilterArgument = {|
   type: ForOrAgainstValue[],
   state: ArgumentState,
 |};

@@ -9,7 +9,7 @@ import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { TippyPlacementProps } from '~ds/common.type';
 import { LAYOUT_TRANSITION_SPRING } from '~/utils/motion';
 import PopoverTrigger, { POPOVER_TRIGGER_TYPE } from './trigger';
-import PopoverContent from './content';
+import PopoverContent, { POPOVER_CONTENT_TYPE } from './content';
 import PopoverHeader from './header';
 import PopoverBody from './body';
 import PopoverFooter from './footer';
@@ -69,26 +69,21 @@ const Popover = ({
   delay,
   trigger = ['mouseenter', 'focus'],
   useArrow,
-  keepOnHover = false,
+  keepOnHover = true,
   isDisabled = false,
-  placement,
+  placement = 'left',
   ...props
 }: Props) => {
+  const [tippyInstance, setTippyInstance] = React.useState(null);
   const opacity = useSpring(0, LAYOUT_TRANSITION_SPRING);
   const scale = useSpring(INITIAL_SCALE, LAYOUT_TRANSITION_SPRING);
-  const [triggerChild] = React.useState(
-    React.Children.toArray(children).find(child => {
-      if (React.isValidElement(child)) {
-        return child.type.name === POPOVER_TRIGGER_TYPE;
-      }
-    }),
-  );
-  const [popoverChildren] = React.useState(
-    React.Children.toArray(children).filter(child => {
-      if (React.isValidElement(child)) {
-        return child.type.name !== POPOVER_TRIGGER_TYPE;
-      }
-    }),
+  const triggerChild = React.Children.toArray(children).find(child => {
+    if (React.isValidElement(child)) {
+      return child.type.name === POPOVER_TRIGGER_TYPE;
+    }
+  });
+  const popoverChildren = React.Children.toArray(children).find(
+    child => child.type.name === POPOVER_CONTENT_TYPE,
   );
 
   function onMount() {
@@ -118,6 +113,7 @@ const Popover = ({
       interactive={keepOnHover}
       delay={trigger.includes('click') ? 0 : delay}
       onMount={onMount}
+      onCreate={setTippyInstance}
       showOnCreate={showOnCreate}
       trigger={trigger.join(' ')}
       onHide={onHideHandler}
@@ -142,7 +138,8 @@ const Popover = ({
       {...(onShow && { onShow })}
       render={attrs => (
         <PopoverInner {...attrs} {...props} style={{ scale, opacity }}>
-          {popoverChildren}
+          {popoverChildren &&
+            React.cloneElement(popoverChildren, { closePopover: tippyInstance?.unmount })}
 
           {useArrow && (
             <Arrow

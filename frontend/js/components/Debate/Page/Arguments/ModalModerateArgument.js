@@ -7,7 +7,8 @@ import { Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
-import TrashMutation from '~/mutations/TrashMutation';
+import TrashDebateArgumentMutation from '~/mutations/TrashDebateArgumentMutation';
+import TrashDebateAlternateArgumentMutation from '~/mutations/TrashDebateAlternateArgumentMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import type { Dispatch } from '~/types';
 import component from '~/components/Form/Field';
@@ -19,12 +20,22 @@ import { mediaQueryMobile } from '~/utils/sizes';
 
 const formName = 'form-moderate-argument';
 
+export type ModerateArgument = {|
+  id: string,
+  state: 'PUBLISHED' | 'WAITING' | 'TRASHED',
+  debateId: string,
+  forOrAgainst: 'FOR' | 'AGAINST',
+|};
+
 type Props = {|
   ...ReduxFormFormProps,
   dispatch: Dispatch,
   intl: IntlShape,
   onClose: () => void,
-  argumentId: string,
+  argument: ModerateArgument,
+  relayConnection: string[],
+  isAdmin?: boolean,
+  isArgumentAlternate?: boolean,
 |};
 
 type Values = {|
@@ -49,15 +60,47 @@ const ModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
 `;
 
 const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
-  const { argumentId, intl, onClose } = props;
+  const { argument, intl, onClose, relayConnection, isArgumentAlternate, isAdmin } = props;
   const { reason, hideContent } = values;
 
-  return TrashMutation.commit({
+  if (isArgumentAlternate) {
+    return TrashDebateAlternateArgumentMutation.commit({
+      input: {
+        id: argument.id,
+        trashedReason: reason,
+        trashedStatus: hideContent ? 'INVISIBLE' : 'VISIBLE',
+      },
+      debateId: argument.debateId,
+      forOrAgainst: argument.forOrAgainst,
+    })
+      .then(response => {
+        onClose();
+        if (response.trash?.errorCode) {
+          mutationErrorToast(intl);
+        }
+
+        toast({
+          variant: 'success',
+          content: intl.formatMessage({
+            id: 'the-argument-has-been-successfully-moved-to-the-trash',
+          }),
+        });
+      })
+      .catch(() => {
+        mutationErrorToast(intl);
+      });
+  }
+
+  return TrashDebateArgumentMutation.commit({
     input: {
-      id: argumentId,
+      id: argument.id,
       trashedReason: reason,
       trashedStatus: hideContent ? 'INVISIBLE' : 'VISIBLE',
     },
+    connections: relayConnection,
+    debateId: argument.debateId,
+    state: argument.state,
+    isAdmin,
   })
     .then(response => {
       onClose();
@@ -78,7 +121,7 @@ const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
 };
 
 export const ModalModerateArgument = ({
-  argumentId,
+  argument,
   onClose,
   intl,
   dispatch,
@@ -86,7 +129,7 @@ export const ModalModerateArgument = ({
 }: Props) => (
   <ModalContainer
     animation={false}
-    show={!!argumentId}
+    show={!!argument}
     onHide={onClose}
     bsSize="large"
     aria-labelledby="modal-title">

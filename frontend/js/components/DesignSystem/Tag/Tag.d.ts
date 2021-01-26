@@ -8,7 +8,8 @@ type Props = ComponentProps<'span'> & {
   readonly variantType?: 'tag' | 'badge'
   readonly avatar?: AvatarProps & { props?: AppBoxProps }
   readonly onRemove?: (e?: MouseEvent) => void
-  readonly variant?: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray'
+  readonly variant?: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray',
+  readonly interactive?: boolean,
 }
 
 declare const Tag: PolymorphicComponent<Props>

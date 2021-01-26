@@ -48,6 +48,7 @@ exports[`<DebateVote /> should render correctly 1`] = `
     </InlineList>
   </ForwardRef>
   <Tag
+    interactive={false}
     variant="green"
   >
     <FormattedMessage

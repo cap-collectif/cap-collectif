@@ -11,6 +11,7 @@ const mutation = graphql`
   mutation CreateProjectAlphaMutation($input: CreateAlphaProjectInput!) {
     createAlphaProject(input: $input) {
       project {
+        _id
         id
         adminUrl
         steps {

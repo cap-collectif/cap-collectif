@@ -1,5 +1,6 @@
 // @flow
 import colors from '~/styles/modules/colors';
+import typography from '~/styles/theme/typography';
 import { styles as stylesLink } from '~ds/Link/Link';
 
 const styles = (isLoading?: boolean, alternative?: boolean) => ({
@@ -98,6 +99,7 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
       color: 'blue.500',
       p: 0,
       textTransform: alternative ? 'uppercase' : 'initial',
+      fontSize: alternative ? typography.fontSizes[1] : typography.fontSizes[3],
 
       '.icon': {
         color: 'blue.500',
@@ -234,6 +236,7 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
       color: 'red.500',
       p: 0,
       textTransform: alternative ? 'uppercase' : 'initial',
+      fontSize: alternative ? typography.fontSizes[1] : typography.fontSizes[3],
 
       '&:hover': {
         color: 'red.700',

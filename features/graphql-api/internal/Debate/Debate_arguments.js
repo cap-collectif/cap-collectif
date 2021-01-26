@@ -66,7 +66,7 @@ const DebateArgumentsCountersQuery = /* GraphQL */ `
         againstArguments: arguments(first: 0, value: AGAINST) {
           totalCount
         }
-        totalArguments: arguments(first: 0, isPublished: null, isTrashed: null) {
+        publishedArguments: arguments(first: 0, isPublished: true, isTrashed: false) {
           totalCount
         }
         unpublishedArguments: arguments(first: 0, isPublished: false) {

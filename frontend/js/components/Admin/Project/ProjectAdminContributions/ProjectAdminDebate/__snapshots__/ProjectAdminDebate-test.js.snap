@@ -28,14 +28,8 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "argumentsPublished": Object {
-                "totalCount": 1,
-              },
-              "argumentsTrashed": Object {
-                "totalCount": 1,
-              },
-              "argumentsWaiting": Object {
-                "totalCount": 1,
+              "allArguments": Object {
+                "totalCount": 3,
               },
               "votes": Object {
                 "totalCount": 1,
@@ -69,14 +63,8 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "argumentsPublished": Object {
-                "totalCount": 1,
-              },
-              "argumentsTrashed": Object {
-                "totalCount": 1,
-              },
-              "argumentsWaiting": Object {
-                "totalCount": 1,
+              "allArguments": Object {
+                "totalCount": 3,
               },
               "votes": Object {
                 "totalCount": 1,
@@ -110,14 +98,8 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "argumentsPublished": Object {
-                "totalCount": 1,
-              },
-              "argumentsTrashed": Object {
-                "totalCount": 1,
-              },
-              "argumentsWaiting": Object {
-                "totalCount": 1,
+              "allArguments": Object {
+                "totalCount": 3,
               },
               "votes": Object {
                 "totalCount": 1,
@@ -171,14 +153,8 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "argumentsPublished": Object {
-                "totalCount": 1,
-              },
-              "argumentsTrashed": Object {
-                "totalCount": 1,
-              },
-              "argumentsWaiting": Object {
-                "totalCount": 1,
+              "allArguments": Object {
+                "totalCount": 3,
               },
               "votes": Object {
                 "totalCount": 1,
@@ -212,14 +188,8 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "argumentsPublished": Object {
-                "totalCount": 1,
-              },
-              "argumentsTrashed": Object {
-                "totalCount": 1,
-              },
-              "argumentsWaiting": Object {
-                "totalCount": 1,
+              "allArguments": Object {
+                "totalCount": 3,
               },
               "votes": Object {
                 "totalCount": 1,
@@ -253,14 +223,8 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "argumentsPublished": Object {
-                "totalCount": 1,
-              },
-              "argumentsTrashed": Object {
-                "totalCount": 1,
-              },
-              "argumentsWaiting": Object {
-                "totalCount": 1,
+              "allArguments": Object {
+                "totalCount": 3,
               },
               "votes": Object {
                 "totalCount": 1,
