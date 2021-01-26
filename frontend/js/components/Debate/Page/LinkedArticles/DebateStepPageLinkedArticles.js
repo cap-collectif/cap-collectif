@@ -34,6 +34,10 @@ export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slide
     }
   }
 
+  .slick-dots li button:before {
+    font-size: 20px;
+  }
+
   .slick-track {
     display: flex;
     align-items: stretch;
@@ -99,6 +103,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
               .map(article => (
                 <AppBox
                   as="a"
+                  height="100%"
                   css={{
                     userSelect: 'none',
                     '-webkit-user-drag': 'none',
@@ -106,8 +111,13 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
                   href={article.url}
                   key={article.id}>
                   <DebateArticleCard
+                    height="100%"
                     illustration={article.coverUrl}
-                    publishedAt={moment(article.publishedAt).format(DATE_SHORT_LOCALIZED_FORMAT)}>
+                    publishedAt={
+                      article.publishedAt
+                        ? moment(article.publishedAt).format(DATE_SHORT_LOCALIZED_FORMAT)
+                        : null
+                    }>
                     <DebateArticleCard.Title truncate={54}>{article.title}</DebateArticleCard.Title>
                     <DebateArticleCard.Origin>{article.origin}</DebateArticleCard.Origin>
                   </DebateArticleCard>

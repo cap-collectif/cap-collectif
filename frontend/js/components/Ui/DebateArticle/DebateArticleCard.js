@@ -47,8 +47,8 @@ type Props = {|
 
 const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Props) => {
   return (
-    <Card p={0} flexDirection="column" overflow="hidden" {...props}>
-      <AppBox overflow="hidden" bg="red.300" height={14}>
+    <Card bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" {...props}>
+      <AppBox overflow="hidden" height={14}>
         {illustration ? (
           <AppBox
             src={illustration}
@@ -63,14 +63,14 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
           </Flex>
         )}
       </AppBox>
-      <AppBox px={4} py={2} bg="white">
+      <Flex direction="column" px={4} py={2} bg="white" flex={1}>
         {children}
         {publishedAt && (
-          <Text color="gray.500" fontSize={3} mt={1}>
+          <Text color="gray.500" fontSize={3} mt="auto" pt={1}>
             {publishedAt}
           </Text>
         )}
-      </AppBox>
+      </Flex>
     </Card>
   );
 };
