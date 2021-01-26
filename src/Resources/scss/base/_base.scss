@@ -238,9 +238,13 @@ svg.avatar-group {
     margin: 0 35px;
 
     code {
-        background-color: $border-color;
+        background-color: black;
         color: $dark-text;
         font-weight: 300;
+    }
+
+    code .token.plain-text {
+        color: white;
     }
 
     th, td {
