@@ -6,7 +6,7 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type { VoteListAppQueryResponse } from '~relay/VoteListAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
-const VoteListProfile = lazy(() => import('~/components/Vote/VoteListProfile'));
+const VoteListProfile = lazy(() => import(/* webpackChunkName: "VoteListProfile" */ '~/components/Vote/VoteListProfile'));
 
 export default ({ userId }: { userId: string }) => (
   <Suspense fallback={<Loader />}>

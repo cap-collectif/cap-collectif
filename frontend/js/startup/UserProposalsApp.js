@@ -11,7 +11,7 @@ import type {
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const UserProposalsPaginated = lazy(() =>
-  import('~/components/User/Profile/UserProposalsPaginated'),
+  import(/* webpackChunkName: "UserProposalsPaginated" */ '~/components/User/Profile/UserProposalsPaginated'),
 );
 
 type Props = {|

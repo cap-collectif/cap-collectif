@@ -1,11 +1,20 @@
 const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
-
+const webpackConfig = require('./config');
 const devConf = require('./webpack.client');
 
 const prodConf = {
   mode: 'production',
   stats: 'minimal',
+
+  output: {
+    pathinfo: false,
+    publicPath: '/',
+    filename: 'js/[name].js',
+    chunkFilename: 'js/chunks/[id].[chunkhash].js',
+    path: webpackConfig.outputDir,
+  },
+
   // Don't attempt to continue if there are any errors.
   bail: true,
   optimization: {

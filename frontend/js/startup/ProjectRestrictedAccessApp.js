@@ -4,7 +4,7 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProjectRestrictedAccess = lazy(() =>
-  import('~/components/Project/Page/ProjectRestrictedAccess'),
+  import(/* webpackChunkName: "ProjectRestrictedAccess" */ '~/components/Project/Page/ProjectRestrictedAccess'),
 );
 
 export default (props: { projectId: string }) => (

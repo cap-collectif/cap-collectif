@@ -3,7 +3,7 @@ import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProposalStepPage = lazy(() => import('~/components/Page/ProposalStepPage'));
+const ProposalStepPage = lazy(() => import(/* webpackChunkName: "ProposalStepPage" */ '~/components/Page/ProposalStepPage'));
 
 type Props = {|
   +stepId: string,

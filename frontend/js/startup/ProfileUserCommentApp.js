@@ -7,7 +7,7 @@ import { COMMENT_PAGINATION } from '~/components/Comment/UserCommentsPaginated';
 import type { ProfileUserCommentAppQueryResponse } from '~relay/ProfileUserCommentAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const UserCommentsPaginated = lazy(() => import('~/components/Comment/UserCommentsPaginated'));
+const UserCommentsPaginated = lazy(() => import(/* webpackChunkName: "UserCommentsPaginated" */ '~/components/Comment/UserCommentsPaginated'));
 
 export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: boolean }) => (
   <Suspense fallback={<Loader />}>

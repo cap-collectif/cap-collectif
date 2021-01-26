@@ -4,7 +4,7 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const AdminImportEventsButton = lazy(() =>
-  import('~/components/Event/Admin/AdminImportEventsButton'),
+  import(/* webpackChunkName: "AdminImportEventsButton" */ '~/components/Event/Admin/AdminImportEventsButton'),
 );
 
 export default () => (

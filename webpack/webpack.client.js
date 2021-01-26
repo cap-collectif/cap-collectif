@@ -16,17 +16,17 @@ const webpackScss = require('./rules/webpack.scss.js')();
 const webpackFile = require('./rules/webpack.file.js')();
 
 const devConf = {
+  mode: 'development',
   target: 'web',
+
   output: {
     pathinfo: true,
     publicPath: '/',
     filename: 'js/[name].js',
-    chunkFilename: 'js/chunks/[name].[chunkhash].js',
+    chunkFilename: 'js/chunks/[name].js',
     path: webpackConfig.outputDir,
   },
-  optimization: {
-    namedChunks: true,
-  },
+
   resolve: {
     alias: {
       '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
@@ -40,6 +40,7 @@ const devConf = {
       'lodash-es': 'lodash',
     },
   },
+
   entry: {
     vendor: [
       path.join(
@@ -90,7 +91,7 @@ const devConf = {
       path.join(webpackConfig.nodeModulesDir, 'jquery-minicolors/jquery.minicolors.css'),
     ],
   },
-  mode: 'development',
+
   plugins: [
     new CleanWebpackPlugin({
       // Simulate the removal of files

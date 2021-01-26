@@ -4,7 +4,7 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const AuthentificationAdminPage = lazy(() =>
-  import('~/components/Admin/Authentification/AuthentificationAdminPage'),
+  import(/* webpackChunkName: "AuthentificationAdminPage" */ '~/components/Admin/Authentification/AuthentificationAdminPage'),
 );
 
 export default () => (

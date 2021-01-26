@@ -16,7 +16,7 @@ type Props = {|
 |};
 
 const ConsultationPropositionBox = lazy(() =>
-  import('~/components/Consultation/ConsultationPropositionBox'),
+  import(/* webpackChunkName: "ConsultationPropositionBox" */ '~/components/Consultation/ConsultationPropositionBox'),
 );
 
 // TODO: To use when working on the new consultation index page. For now, only the OpinionPage is being done

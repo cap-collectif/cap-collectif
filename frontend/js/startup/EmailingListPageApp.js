@@ -6,7 +6,7 @@ import { DashboardMailingListProvider } from '~/components/Admin/Emailing/Emaili
 import AlertBoxApp from '~/startup/AlertBoxApp';
 
 const EmailingListPage = lazy(() =>
-  import('~/components/Admin/Emailing/EmailingList/EmailingListPage'),
+  import(/* webpackChunkName: "EmailingListPage" */ '~/components/Admin/Emailing/EmailingList/EmailingListPage'),
 );
 
 export default () => (

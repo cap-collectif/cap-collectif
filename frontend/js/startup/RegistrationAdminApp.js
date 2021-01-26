@@ -6,7 +6,7 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import type { RegistrationAdminAppQueryResponse } from '~relay/RegistrationAdminAppQuery.graphql';
 
-const RegistrationAdminPage = lazy(() => import('~/components/Admin/RegistrationAdminPage'));
+const RegistrationAdminPage = lazy(() => import(/* webpackChunkName: "RegistrationAdminPage" */ '~/components/Admin/RegistrationAdminPage'));
 
 const renderRegistrationAdminPage = ({
   error,

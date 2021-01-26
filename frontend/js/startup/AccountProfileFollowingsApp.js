@@ -3,7 +3,7 @@ import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const FollowingsBox = lazy(() => import('~/components/User/Following/FollowingsBox'));
+const FollowingsBox = lazy(() => import(/* webpackChunkName: "FollowingsBox" */ '~/components/User/Following/FollowingsBox'));
 
 export default (props: Object) => (
   <Suspense fallback={<Loader />}>

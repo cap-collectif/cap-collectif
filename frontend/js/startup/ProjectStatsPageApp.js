@@ -4,7 +4,7 @@ import Providers from './Providers';
 import type { OwnProps as Props } from '~/components/Project/Stats/ProjectStatsPage';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProjectStatsPage = lazy(() => import('~/components/Project/Stats/ProjectStatsPage'));
+const ProjectStatsPage = lazy(() => import(/* webpackChunkName: "ProjectStatsPage" */ '~/components/Project/Stats/ProjectStatsPage'));
 
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>

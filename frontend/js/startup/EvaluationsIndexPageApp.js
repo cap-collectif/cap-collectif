@@ -7,9 +7,9 @@ import AlertBoxApp from '~/startup/AlertBoxApp';
 import { AnalysisProposalsProvider } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const EvaluationsIndexPage = lazy(() => import('~/components/Evaluation/EvaluationsIndexPage'));
+const EvaluationsIndexPage = lazy(() => import(/* webpackChunkName: "EvaluationsIndexPage" */ '~/components/Evaluation/EvaluationsIndexPage'));
 const AnalysisIndexPage = lazy(() =>
-  import('~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage'),
+  import(/* webpackChunkName: "AnalysisIndexPage" */ '~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage'),
 );
 
 const SwitchAnalysisAndLegacyEvaluation = ({ isLegacyAnalysis, ...props }: Object) =>

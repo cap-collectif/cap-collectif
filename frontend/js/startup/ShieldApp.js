@@ -3,7 +3,7 @@ import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const Shield = lazy(() => import('~/components/Page/ShieldPage'));
+const Shield = lazy(() => import(/* webpackChunkName: "Shield" */ '~/components/Page/ShieldPage'));
 
 export default (props: { chartBody: ?string }) => (
   <Suspense fallback={<Loader />}>

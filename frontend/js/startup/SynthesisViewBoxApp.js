@@ -4,7 +4,7 @@ import Providers from './Providers';
 import type { Props } from '~/components/Synthesis/SynthesisBox';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const SynthesisBox = lazy(() => import('~/components/Synthesis/SynthesisBox'));
+const SynthesisBox = lazy(() => import(/* webpackChunkName: "SynthesisBox" */ '~/components/Synthesis/SynthesisBox'));
 
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>

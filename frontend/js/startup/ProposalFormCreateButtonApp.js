@@ -5,7 +5,7 @@ import type { Props } from '~/components/ProposalForm/ProposalFormCreateButton';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProposalFormCreateButton = lazy(() =>
-  import('~/components/ProposalForm/ProposalFormCreateButton'),
+  import(/* webpackChunkName: "ProposalFormCreateButton" */ '~/components/ProposalForm/ProposalFormCreateButton'),
 );
 
 export default (props: Props) => (

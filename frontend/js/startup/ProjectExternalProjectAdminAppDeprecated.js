@@ -7,7 +7,7 @@ import type { ProjectExternalProjectAdminAppDeprecatedQueryResponse } from '~rel
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProjectExternalProjectAdminPageDeprecated = lazy(() =>
-  import('~/components/Admin/Project/External/ProjectExternalProjectAdminPageDeprecated'),
+  import(/* webpackChunkName: "ProjectExternalProjectAdminPageDeprecated" */ '~/components/Admin/Project/External/ProjectExternalProjectAdminPageDeprecated'),
 );
 
 const ProjectExternalProjectAdminAppDeprecated = ({

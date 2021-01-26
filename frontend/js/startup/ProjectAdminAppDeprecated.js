@@ -4,7 +4,7 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProjectAdminPageDeprecated = lazy(() =>
-  import('~/components/Admin/Project/Deprecated/ProjectAdminPageDeprecated'),
+  import(/* webpackChunkName: "ProjectAdminPageDeprecated" */ '~/components/Admin/Project/Deprecated/ProjectAdminPageDeprecated'),
 );
 
 const ProjectAdminAppDeprecated = ({ projectId }: { projectId: ?string }) => (

@@ -4,7 +4,7 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProjectDistrictAdmin = lazy(() =>
-  import('~/components/ProjectDistrict/ProjectDistrictAdmin'),
+  import(/* webpackChunkName: "ProjectDistrictAdmin" */ '~/components/ProjectDistrict/ProjectDistrictAdmin'),
 );
 
 type Props = {};

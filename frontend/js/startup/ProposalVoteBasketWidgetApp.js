@@ -10,7 +10,7 @@ import type {
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProposalVoteBasketWidget = lazy(() =>
-  import('~/components/Proposal/Vote/ProposalVoteBasketWidget'),
+  import(/* webpackChunkName: "ProposalVoteBasketWidget" */ '~/components/Proposal/Vote/ProposalVoteBasketWidget'),
 );
 
 type Props = {

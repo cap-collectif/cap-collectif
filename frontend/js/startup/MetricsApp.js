@@ -4,7 +4,7 @@ import Providers from './Providers';
 import type { Props } from '~/components/Section/SectionContainer';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const SectionContainer = lazy(() => import('~/components/Section/SectionContainer'));
+const SectionContainer = lazy(() => import(/* webpackChunkName: "SectionContainer" */ '~/components/Section/SectionContainer'));
 
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>

@@ -6,7 +6,7 @@ import { DashboardCampaignProvider } from '~/components/Admin/Emailing/EmailingC
 import AlertBoxApp from '~/startup/AlertBoxApp';
 
 const EmailingCampaignPage = lazy(() =>
-  import('~/components/Admin/Emailing/EmailingCampaign/EmailingCampaignPage'),
+  import(/* webpackChunkName: "EmailingCampaignPage" */ '~/components/Admin/Emailing/EmailingCampaign/EmailingCampaignPage'),
 );
 
 export default () => (

@@ -7,7 +7,7 @@ import { type ProjectStepTabsAppQueryResponse } from '~relay/ProjectStepTabsAppQ
 import type { Props } from '~/components/Project/ProjectStepTabs';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProjectStepTabs = lazy(() => import('~/components/Project/ProjectStepTabs'));
+const ProjectStepTabs = lazy(() => import(/* webpackChunkName: "ProjectStepTabs" */ '~/components/Project/ProjectStepTabs'));
 
 const ProjectStepTabsAppRender = ({
   error,

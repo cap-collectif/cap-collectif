@@ -5,7 +5,7 @@ import type { Props } from '~/components/OpinionVersion/OpinionVersionListPage';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const OpinionVersionListPage = lazy(() =>
-  import('~/components/OpinionVersion/OpinionVersionListPage'),
+  import(/* webpackChunkName: "OpinionVersionListPage" */  '~/components/OpinionVersion/OpinionVersionListPage'),
 );
 
 export default (props: Props) => (

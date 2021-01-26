@@ -6,7 +6,7 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type { ArgumentListAppQueryResponse } from '~relay/ArgumentListAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
-const ArgumentListProfile = lazy(() => import('~/components/Argument/ArgumentListProfile'));
+const ArgumentListProfile = lazy(() => import(/* webpackChunkName: "ArgumentListProfile" */ '~/components/Argument/ArgumentListProfile'));
 
 export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: boolean }) => (
   <Suspense fallback={<Loader />}>

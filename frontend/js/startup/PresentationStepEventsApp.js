@@ -5,7 +5,7 @@ import type { Props } from '~/components/PresentationStep/PresentationStepEvents
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const PresentationStepEvents = lazy(() =>
-  import('~/components/PresentationStep/PresentationStepEvents'),
+  import(/* webpackChunkName: "PresentationStepEvents" */ '~/components/PresentationStep/PresentationStepEvents'),
 );
 
 export default (props: Props) => (

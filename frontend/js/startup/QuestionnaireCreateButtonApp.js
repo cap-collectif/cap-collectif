@@ -5,7 +5,7 @@ import type { Props } from '~/components/Questionnaire/QuestionnaireAdminCreateB
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const QuestionnaireAdminCreateButton = lazy(() =>
-  import('~/components/Questionnaire/QuestionnaireAdminCreateButton'),
+  import(/* webpackChunkName: "QuestionnaireAdminCreateButton" */ '~/components/Questionnaire/QuestionnaireAdminCreateButton'),
 );
 
 export default (props: Props) => (

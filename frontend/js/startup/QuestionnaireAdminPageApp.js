@@ -5,7 +5,7 @@ import type { Props } from '~/components/Questionnaire/QuestionnaireAdminPage';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const QuestionnaireAdminPage = lazy(() =>
-  import('~/components/Questionnaire/QuestionnaireAdminPage'),
+  import(/* webpackChunkName: "QuestionnaireAdminPage" */ '~/components/Questionnaire/QuestionnaireAdminPage'),
 );
 
 export default (props: Props) => (

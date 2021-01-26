@@ -4,7 +4,7 @@ import Providers from './Providers';
 import type { Uuid } from '~/types';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProjectHeaderDistricts = lazy(() => import('~/components/Project/ProjectHeaderDistricts'));
+const ProjectHeaderDistricts = lazy(() => import(/* webpackChunkName: "ProjectHeaderDistricts" */ '~/components/Project/ProjectHeaderDistricts'));
 
 type Props = {
   projectId: Uuid,

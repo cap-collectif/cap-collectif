@@ -15,7 +15,7 @@ type Props = {|
   ...OpinionPageProps,
 |};
 
-const OpinionPage = lazy(() => import('~/components/Opinion/OpinionPage'));
+const OpinionPage = lazy(() => import(/* webpackChunkName: "OpinionPage" */ '~/components/Opinion/OpinionPage'));
 
 const NewOpinionPage = lazy(() => import('~/components/Opinion/New/NewOpinionPage'));
 
