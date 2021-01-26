@@ -73,6 +73,9 @@ unnecessary-optional-chain=off
 .*/SynthesisStore.js
 .*/SynthesisBox.js
 
+; ignore WYSIWYG files (because we uninstall draft-js & his friends, its too heavy)
+.*/AdminEditor/WysiwygEditor.js
+
 [libs]
 flow-typed
 

@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 
 type EditorWrapperProps = {
   id?: string,
-  focused: boolean,
   fullscreen: boolean,
 };
 
