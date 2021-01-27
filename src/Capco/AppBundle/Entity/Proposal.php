@@ -55,7 +55,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasDistrictIfMandatory()
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
- * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
  */
 class Proposal implements

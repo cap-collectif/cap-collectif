@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionRepository")
- * @ORM\Table(name="selection")
+ * @ORM\Table(name="selection", uniqueConstraints={@ORM\UniqueConstraint(columns={"selection_step_id", "proposal_id"})})
  * @ORM\HasLifecycleCallbacks
  * @CapcoAssert\StatusBelongsToSelectionStep()
  */
@@ -21,7 +21,7 @@ class Selection
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="selections", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
-     **/
+     */
     protected $selectionStep;
 
     /**
@@ -29,7 +29,7 @@ class Selection
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selections", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
-     **/
+     */
     protected $proposal;
 
     /**
@@ -78,7 +78,7 @@ class Selection
         return $this->status;
     }
 
-    public function setStatus(Status $status = null): self
+    public function setStatus(?Status $status = null): self
     {
         $this->status = $status;
 
