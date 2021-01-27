@@ -3761,6 +3761,15 @@ enum DebateVoteOrderField {
   CREATED_AT
 }
 
+"""Entities that can be deleted."""
+interface Deletable {
+  """The ID of an object"""
+  id: ID!
+
+  """Check if the current viewer can delete this object"""
+  viewerCanDelete: Boolean!
+}
+
 """Available errors on DeleteAccountByEmail mutation."""
 enum DeleteAccountByEmailErrorCode {
   """The given email does not correspond to an existing user."""
@@ -10164,10 +10173,27 @@ type RemoveSsoPayload {
   clientMutationId: String
 }
 
-"""Represents a type that can be retrieved by a URL."""
-type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
+"""Represents a user's answer to a questionnaire."""
+type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable & Deletable {
   """The ID of an object."""
   id: ID!
+
+  """Check if the current viewer can delete this object"""
+  viewerCanDelete: Boolean!
+
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -10187,25 +10213,11 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  """Whether or not the entity is a draft."""
-  draft: Boolean!
-
-  """Identifies when the entity was undraft at."""
-  undraftAt: DateTime
-
   """The responses of the reply."""
   responses: [Response]!
 
   """The author of the contribution."""
   author: User!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The URL to this resource."""
-  url: URI!
   private: Boolean!
 
   """The reply status."""
@@ -10214,7 +10226,6 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
   viewerCanUpdate: Boolean!
-  viewerCanDelete: Boolean!
 }
 
 """A connection to a list of items."""

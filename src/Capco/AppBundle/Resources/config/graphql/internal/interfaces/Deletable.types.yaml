@@ -1,0 +1,12 @@
+Deletable:
+    type: interface
+    inherits:
+        - Node
+    config:
+        description: 'Entities that can be deleted.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Deletable\\DeletableTypeResolver", [value])'
+        fields:
+            viewerCanDelete:
+                description: 'Check if the current viewer can delete this object'
+                type: 'Boolean!'
+                access: "@=hasRole('ROLE_USER')"
