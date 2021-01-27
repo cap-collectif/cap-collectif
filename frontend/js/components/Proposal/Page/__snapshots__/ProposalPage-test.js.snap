@@ -6928,7 +6928,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "457a9d204e08049d462ed069a85f2c63",
+          "cacheID": "c3e9d5a90c086a99df2b25c5e89d3b9d",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8371,14 +8371,6 @@ fragment ProposalPageVoteThreshold_step on Step {
 
 fragment ProposalPageVotes_proposal on Proposal {
   id
-  project {
-    type {
-      title
-      id
-    }
-    opinionCanBeFollowed
-    id
-  }
   allVotes: votes(first: 0, stepId: $stepId) {
     totalCount
   }
@@ -8390,8 +8382,6 @@ fragment ProposalPageVotes_proposal on Proposal {
   currentVotableStep {
     __typename
     id
-    voteThreshold
-    voteType
   }
 }
 

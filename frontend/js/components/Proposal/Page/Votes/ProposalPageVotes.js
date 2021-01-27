@@ -11,6 +11,10 @@ import type { ProposalPageVotes_proposal } from '~relay/ProposalPageVotes_propos
 import ProposalVotesByStep from './ProposalVotesByStep';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { CategoryCircledIcon, CategoryTitle } from '~/components/Proposal/Page/ProposalPage.style';
+import type {
+  ProposalPageVotesTotalCountQueryResponse,
+  ProposalPageVotesTotalCountQueryVariables,
+} from '~relay/ProposalPageVotesTotalCountQuery.graphql';
 
 type Props = {|
   +proposal: ProposalPageVotes_proposal,
@@ -114,11 +118,15 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
                 <MenuItem
                   key={index}
                   onSelect={() => {
-                    setSelectedStep(proposal.votableSteps[index]);
-                    fetchQuery(environment, query, {
-                      proposalId: proposal.id,
-                      stepId: proposal.votableSteps[index].id,
-                    }).then(data => {
+                    setSelectedStep(votableStep);
+                    fetchQuery(
+                      environment,
+                      query,
+                      ({
+                        proposalId: proposal.id,
+                        stepId: votableStep.id,
+                      }: ProposalPageVotesTotalCountQueryVariables),
+                    ).then((data: ProposalPageVotesTotalCountQueryResponse) => {
                       setVotesCount(data?.proposal?.allVotes?.totalCount || 0);
                       setGlobalVotesCount(data?.proposal?.allVotes?.totalCount || 0);
                     });
@@ -139,12 +147,6 @@ export default createFragmentContainer(ProposalPageVotes, {
   proposal: graphql`
     fragment ProposalPageVotes_proposal on Proposal {
       id
-      project {
-        type {
-          title
-        }
-        opinionCanBeFollowed
-      }
       allVotes: votes(first: 0, stepId: $stepId) {
         totalCount
       }
@@ -154,8 +156,6 @@ export default createFragmentContainer(ProposalPageVotes, {
       }
       currentVotableStep {
         id
-        voteThreshold
-        voteType
       }
     }
   `,
