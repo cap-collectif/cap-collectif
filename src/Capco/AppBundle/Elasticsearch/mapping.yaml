@@ -155,6 +155,7 @@ mappings:
                     properties:
                         id: { type: keyword }
                         name: *text_analysis_highlighted
+        address: *text_analysis_highlighted
         projectType:
             type: object
             properties:
@@ -218,6 +219,7 @@ mappings:
             type: object
             properties:
                 id: { type: keyword }
+                name: *text_analysis_highlighted
         status:
             type: object
             properties:
@@ -320,7 +322,7 @@ mappings:
         color: { type: keyword }
 
         responseType: { type: keyword }
-        textValue:
+        textValue: &TextValue
             type: text
             analyzer: capco_french
             index_options: offsets
@@ -332,6 +334,16 @@ mappings:
             properties:
                 labels: { type: keyword }
                 other: { type: keyword }
+        responses:
+            type: nested
+            properties:
+                id: { type: keyword }
+                textValue: *TextValue
+                objectValue:
+                    type: object
+                    properties:
+                        labels: { type: text }
+                        other: { type: text }
         question:
             type: object
             properties:

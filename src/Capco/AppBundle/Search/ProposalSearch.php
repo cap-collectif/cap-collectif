@@ -21,19 +21,29 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ProposalSearch extends Search
 {
+    // The int value represent the applied boost in the search queries.
     public const SEARCH_FIELDS = [
-        'proposalTitle',
-        'author.username.std',
-        'author.username',
-        'proposalTitle.std',
-        'reference',
-        'reference.std',
-        'proposalBody',
-        'proposalBody.std',
-        'object',
-        'object.std',
-        'teaser',
-        'teaser.std',
+        'proposalTitle' => 9,
+        'proposalTitle.std' => 9,
+        'author.username.std' => 4,
+        'author.username' => 4,
+        'reference' => 1,
+        'reference.std' => 1,
+        'proposalBody' => 8,
+        'proposalBody.std' => 8,
+        'teaser' => 7,
+        'teaser.std' => 7,
+        'district.name' => 5,
+        'district.name.std' => 5,
+        'address.std' => 6,
+        'address' => 6,
+    ];
+
+    public const NESTED_SEARCH_FIELDS = [
+        'responses.textValue.std' => 3,
+        'responses.textValue' => 3,
+        'responses.objectValue.labels' => 2,
+        'responses.objectValue.other' => 2,
     ];
 
     private ProposalRepository $proposalRepo;
@@ -53,12 +63,9 @@ class ProposalSearch extends Search
         ?string $cursor
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-        $this->searchTermsInMultipleFields(
-            $boolQuery,
-            self::SEARCH_FIELDS,
-            $providedFilters['term'],
-            'phrase_prefix'
-        );
+        if ($providedFilters['term']) {
+            $this->searchTermsInMultipleNestedFields($boolQuery, $providedFilters['term']);
+        }
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $project->getId()]]));
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
@@ -66,9 +73,9 @@ class ProposalSearch extends Search
         foreach ($filters as $key => $value) {
             $term = new Term([$key => ['value' => $value]]);
             if (
-                \in_array($key, ['draft', 'published', 'trashed'], true) &&
-                (isset($providedFilters['state']) &&
-                    ProposalsState::ALL === $providedFilters['state'])
+                isset($providedFilters['state']) &&
+                ProposalsState::ALL === $providedFilters['state'] &&
+                \in_array($key, ['draft', 'published', 'trashed'], true)
             ) {
                 $stateTerms[] = $term;
             } else {
@@ -81,7 +88,6 @@ class ProposalSearch extends Search
 
         $query = new Query($boolQuery);
         $this->applyCursor($query, $cursor);
-        $query->setTrackTotalHits(true);
         $query->setSource(['id'])->setSize($limit);
 
         $stepid = $providedFilters['step'];
@@ -91,6 +97,8 @@ class ProposalSearch extends Search
                 $stepid = $stepid['id'];
             }
         }
+        $query->setSort([['_score' => 'DESC'], ['id' => new \stdClass()]]);
+
         if ($order) {
             $query->setSort([
                 !$providedFilters['term']
@@ -99,6 +107,7 @@ class ProposalSearch extends Search
                 ['id' => new \stdClass()],
             ]);
         }
+
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
@@ -123,12 +132,9 @@ class ProposalSearch extends Search
         ?string $order = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-        $this->searchTermsInMultipleFields(
-            $boolQuery,
-            self::SEARCH_FIELDS,
-            $terms,
-            'phrase_prefix'
-        );
+        if ($terms) {
+            $this->searchTermsInMultipleNestedFields($boolQuery, $terms);
+        }
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
         $filters = $this->getFilters($providedFilters);
@@ -684,5 +690,27 @@ class ProposalSearch extends Search
         if (!empty($existsFilters)) {
             $boolQuery->addMustNot($existsFilters);
         }
+    }
+
+    private function searchTermsInMultipleNestedFields(BoolQuery $boolQuery, string $terms): void
+    {
+        $nestedBoostedFields = $this->formatFieldsBoosts(self::NESTED_SEARCH_FIELDS);
+        $boostedFields = $this->formatFieldsBoosts(self::SEARCH_FIELDS);
+        $boolQuery->addMust(
+            (new BoolQuery())->addShould([
+                (new Query\Nested())->setPath('responses')->setQuery(
+                    (new BoolQuery())->addMust(
+                        (new Query\MultiMatch())
+                            ->setFields($nestedBoostedFields)
+                            ->setQuery($terms)
+                            ->setType('phrase_prefix')
+                    )
+                ),
+                (new Query\MultiMatch())
+                    ->setFields($boostedFields)
+                    ->setQuery($terms)
+                    ->setType('phrase_prefix'),
+            ])
+        );
     }
 }

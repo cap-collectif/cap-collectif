@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -23,17 +25,20 @@ class ProposalNormalizer implements
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
     private CommentableCommentsDataLoader $commentableCommentsDataLoader;
+    private ProposalResponsesResolver $proposalResponsesResolver;
 
     public function __construct(
         ObjectNormalizer $normalizer,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        ProposalResponsesResolver $proposalResponsesResolver
     ) {
         $this->normalizer = $normalizer;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
+        $this->proposalResponsesResolver = $proposalResponsesResolver;
     }
 
     public function hasCacheableSupportsMethod(): bool
@@ -50,8 +55,30 @@ class ProposalNormalizer implements
         if (\in_array('ElasticsearchNestedProposal', $groups)) {
             return $data;
         }
+
         $data['progressStatus'] = $object->getGlobalProgressStatus();
         $data = $this->countPointsAndVotes($object, $data);
+        foreach (
+            $publicResponses = $this->proposalResponsesResolver->__invoke(
+                $object,
+                null,
+                new \ArrayObject(['disable_acl' => false])
+            )
+            as $publicResponse
+        ) {
+            if (
+                !($publicResponse instanceof MediaResponse) &&
+                ($publicResponseValue['id'] = $publicResponse->getId())
+            ) {
+                $responseValue = $publicResponse->getValue();
+                if (!\is_array($responseValue)) {
+                    $publicResponseValue['textValue'] = $responseValue;
+                } else {
+                    $publicResponseValue['objectValue'] = $responseValue;
+                }
+                $data['responses'][] = $publicResponseValue;
+            }
+        }
 
         if ($object->isCommentable()) {
             $args = new Argument([

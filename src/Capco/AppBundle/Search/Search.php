@@ -98,6 +98,7 @@ abstract class Search
         if (empty(trim($terms))) {
             $multiMatchQuery = new Query\MatchAll();
         } else {
+            $fields = $this->formatFieldsBoosts($fields);
             $multiMatchQuery = new Query\MultiMatch();
             $multiMatchQuery->setQuery($terms)->setFields($fields);
 
@@ -190,6 +191,20 @@ abstract class Search
                     ])
                 ),
         ];
+    }
+
+    protected function formatFieldsBoosts(array $fields): array
+    {
+        $formattedFields = [];
+        foreach ($fields as $key => $value) {
+            if (!\is_string($key)) {
+                $formattedFields[] = $value;
+            } else {
+                $formattedFields[] = $key . '^' . $value;
+            }
+        }
+
+        return $formattedFields;
     }
 
     protected function getCursors(ResultSet $resultSet): array

@@ -48,27 +48,236 @@ Object {
 }
 `;
 
-exports[`Internal.projects.proposals search project's proposals by given term, ordered by score 1`] = `
+exports[`Internal.projects.proposals it should return project's proposals with title that matches the given term, ordered by score 1`] = `
 Object {
   "edges": Array [
     Object {
       "node": Object {
-        "category": Object {
-          "id": "pCategoryIdf2",
-          "name": "Propreté, prévention et gestion des déchets, économie circulaire",
-        },
+        "address": null,
         "district": Object {
-          "id": "districtIdf2",
           "name": "Val de marne (94)",
         },
         "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
         "reference": "6",
-        "status": Object {
-          "color": "INFO",
-          "id": "statusIdfCollect1",
-          "name": "Nouveau projet",
-        },
-        "theme": null,
+        "responses": Array [
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+        ],
         "title": "Mon projet local en tant qu'organisme public",
       },
     },
@@ -314,5 +523,553 @@ Object {
     },
   ],
   "totalCount": 75,
+}
+`;
+
+exports[`Internal.projects.proposals should return project's proposal with district that matches the given term, ordered by score 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "address": null,
+        "district": Object {
+          "name": "Val de marne (94)",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+        "reference": "2",
+        "responses": Array [
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "Déposer un Projet Local",
+            "value": "{\\"labels\\":[\\"Déposer un Projet Local\\"],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "Une association",
+            "value": "{\\"labels\\":[\\"Une association\\"],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": "J’ai un numéro SIRET",
+            "value": "{\\"labels\\":[\\"J’ai un numéro SIRET\\"],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+        ],
+        "title": "Mon projet local en tant qu'entreprise",
+      },
+    },
+    Object {
+      "node": Object {
+        "address": null,
+        "district": Object {
+          "name": "Val de marne (94)",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+        "reference": "6",
+        "responses": Array [
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": "",
+            "value": "{\\"labels\\":[],\\"other\\":null}",
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+          Object {},
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {},
+          Object {},
+        ],
+        "title": "Mon projet local en tant qu'organisme public",
+      },
+    },
+  ],
+  "totalCount": 2,
+}
+`;
+
+exports[`Internal.projects.proposals should return project's proposals with address that matches the given term, ordered by score 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "address": Object {
+          "formatted": "10 Cours des Alliés, 35000 Rennes, France",
+        },
+        "district": Object {
+          "name": "Beauregard",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "reference": "1",
+        "responses": Array [
+          Object {
+            "formattedValue": null,
+            "value": null,
+          },
+          Object {
+            "formattedValue": "souhaitable",
+            "value": "souhaitable",
+          },
+          Object {
+            "formattedValue": "250 000 €",
+            "value": "250 000 €",
+          },
+          Object {},
+          Object {},
+        ],
+        "title": "Ravalement de la façade de la bibliothèque municipale",
+      },
+    },
+  ],
+  "totalCount": 1,
+}
+`;
+
+exports[`Internal.projects.proposals should return project's proposals with public responses which contains objectValue that matches the given term, ordered by score 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "address": Object {
+          "formatted": "263 Avenue Général Leclerc, 35700 Rennes, France",
+        },
+        "district": Object {
+          "name": "Maurepas Patton",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+        "reference": "1",
+        "responses": Array [
+          Object {
+            "formattedValue": "pas souhaitable",
+            "value": "pas souhaitable",
+          },
+          Object {
+            "formattedValue": "3 millions !",
+            "value": "3 millions !",
+          },
+          Object {},
+          Object {
+            "formattedValue": "Il bluffe",
+            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+          },
+        ],
+        "title": "Proposition plus votable",
+      },
+    },
+  ],
+  "totalCount": 1,
+}
+`;
+
+exports[`Internal.projects.proposals shouldn't return proposals with private responses that matches the given term 1`] = `
+Object {
+  "edges": Array [],
+  "totalCount": 0,
 }
 `;

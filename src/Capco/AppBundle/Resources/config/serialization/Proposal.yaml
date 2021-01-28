@@ -51,8 +51,9 @@ Capco\AppBundle\Entity\Proposal:
             groups: [Proposals, Statuses, ElasticsearchProposal]
         likers:
             groups: [Proposals]
-        address:
-            groups: [Proposals]
+        getFiledAddress:
+            serialized_name: address
+            groups: [Proposals, ElasticsearchProposal]
         isVisible:
             groups:
                 [

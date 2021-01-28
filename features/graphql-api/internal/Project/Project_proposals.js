@@ -51,6 +51,55 @@ const ProjectProposalQuery = /* GraphQL */ `
   }
 `;
 
+const ProjectProposalTermSearchQuery = /* GraphQL */ `
+  query getProjectProposals(
+    $projectId: ID!
+    $count: Int!
+    $category: ID
+    $district: ID
+    $status: ID
+    $step: ID
+    $term: String
+  ) {
+    project: node(id: $projectId) {
+      __typename
+      id
+      ... on Project {
+        proposals(
+          first: $count
+          category: $category
+          district: $district
+          step: $step
+          status: $status
+          term: $term
+        ) {
+          totalCount
+
+          edges {
+            node {
+              district {
+                name
+              }
+              address {
+                formatted
+              }
+              reference(full: false)
+              id
+              title
+              responses {
+                ... on ValueResponse {
+                  formattedValue
+                  value
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const ProjectProposalTotalCountQuery = /* GraphQL */ `
   query getProjectProposalsTotalCount(
     $projectId: ID!
@@ -165,20 +214,6 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.totalCount).toBe(1);
   });
 
-  it("search project's proposals by given term, ordered by score", async () => {
-    const response = await graphql(
-      ProjectProposalQuery,
-      {
-        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
-        state: 'ALL',
-        term: 'organisme',
-        count: 10,
-      },
-      'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
-
   it("search project's proposals by given theme", async () => {
     const response = await graphql(
       ProjectProposalQuery,
@@ -198,6 +233,78 @@ describe('Internal.projects.proposals', () => {
       {
         projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
         theme: 'NONE',
+        count: 5,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  //========= TERM TESTS ==========//
+
+  it("it should return project's proposals with title that matches the given term, ordered by score", async () => {
+    const response = await graphql(
+      ProjectProposalTermSearchQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'ALL',
+        term: 'organisme',
+        count: 10,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  it("should return project's proposals with public responses which contains objectValue that matches the given term, ordered by score", async () => {
+    const response = await graphql(
+      ProjectProposalTermSearchQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        state: 'ALL',
+        term: 'bluf',
+        count: 5,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  it("shouldn't return proposals with private responses that matches the given term", async () => {
+    const response = await graphql(
+      ProjectProposalTermSearchQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        state: 'ALL',
+        term: 'souhai',
+        count: 5,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  it("should return project's proposal with district that matches the given term, ordered by score", async () => {
+    const response = await graphql(
+      ProjectProposalTermSearchQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'ALL',
+        term: 'marne',
+        count: 5,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  it("should return project's proposals with address that matches the given term, ordered by score", async () => {
+    const response = await graphql(
+      ProjectProposalTermSearchQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        state: 'ALL',
+        term: 'Alliés',
         count: 5,
       },
       'internal_admin',
