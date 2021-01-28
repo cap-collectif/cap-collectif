@@ -94,23 +94,14 @@ class PostRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    /**
-     * Get posts depending on theme and project.
-     *
-     * @param $nbByPage
-     * @param $page
-     * @param null $themeSlug
-     * @param null $projectSlug
-     *
-     * @return array
-     */
     public function getSearchResults(
-        $nbByPage = 8,
-        $page = 1,
-        $themeSlug = null,
-        $projectSlug = null
-    ) {
-        if ((int) $page < 1) {
+        int $nbByPage = 8,
+        int $page = 1,
+        ?string $themeSlug = null,
+        ?string $projectSlug = null,
+        ?bool $displayedOnBlog = null
+    ): Paginator {
+        if ($page < 1) {
             throw new \InvalidArgumentException(
                 sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
             );
@@ -124,9 +115,16 @@ class PostRepository extends EntityRepository
             ->leftJoin('t.translations', 'translation')
             ->leftJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->leftJoin('p.proposals', 'proposal')
-            ->andWhere('p.displayedOnBlog = true')
+
             ->orderBy('p.publishedAt', 'DESC')
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+
+        if (null !== $displayedOnBlog) {
+            $qb->andWhere('p.displayedOnBlog = :displayedOnBlog')->setParameter(
+                ':displayedOnBlog',
+                $displayedOnBlog
+            );
+        }
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb->andWhere('translation.slug = :theme')->setParameter('theme', $themeSlug);
@@ -158,15 +156,13 @@ class PostRepository extends EntityRepository
         $qb = $this->getIsPublishedQueryBuilder('p')->select('COUNT(p.id)');
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb
-                ->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug);
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
-            $qb
-                ->innerJoin('p.projects', 'c')
+            $qb->innerJoin('p.projects', 'c')
                 ->andWhere('c.slug = :project')
                 ->setParameter('project', $projectSlug);
         }

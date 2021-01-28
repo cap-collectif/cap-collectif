@@ -71,7 +71,8 @@ class BlogController extends Controller
             $pagination,
             $page,
             $theme,
-            $project
+            $project,
+            true
         );
 
         //Avoid division by 0 in nbPage calculation
