@@ -19,12 +19,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectPersister
 {
-    private $em;
-    private $logger;
-    private $transformer;
-    private $formFactory;
-    private $stepPersister;
-    private $repository;
+    private EntityManagerInterface $em;
+    private LoggerInterface $logger;
+    private ProjectAuthorTransformer $transformer;
+    private FormFactoryInterface $formFactory;
+    private ProjectStepPersister $stepPersister;
+    private ProjectRepository $repository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -71,6 +71,7 @@ class ProjectPersister
 
             throw GraphQLException::fromFormErrors($form);
         }
+
         try {
             $this->em->persist($project);
             $this->em->flush();

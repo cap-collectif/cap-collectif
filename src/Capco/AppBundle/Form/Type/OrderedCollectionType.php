@@ -13,7 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 class OrderedCollectionType extends CollectionType
 {
-    private $propertyAccessor;
+    private PropertyAccessorInterface $propertyAccessor;
 
     public function __construct(PropertyAccessorInterface $propertyAccessor)
     {
@@ -102,7 +102,7 @@ class OrderedCollectionType extends CollectionType
             'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,
-            'delete_empty' => true
+            'delete_empty' => true,
         ]);
     }
 }

@@ -191,7 +191,10 @@ const onSubmit = (
               ? s.requirementsReason
               : undefined,
           proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,
-          statuses: s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.statuses : undefined,
+          statuses:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.statuses.filter(status => typeof status.name !== 'undefined')
+              : undefined,
           defaultStatus:
             s.type === 'SelectionStep' || s.type === 'CollectStep'
               ? s.defaultStatus?.value || s.defaultStatus

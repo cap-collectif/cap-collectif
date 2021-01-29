@@ -8,8 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateAlphaProjectMutation implements MutationInterface
 {
-
-    private $persister;
+    private ProjectPersister $persister;
 
     public function __construct(ProjectPersister $persister)
     {

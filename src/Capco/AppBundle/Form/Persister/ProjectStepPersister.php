@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Diff;
@@ -48,11 +49,11 @@ class ProjectStepPersister
         DebateStep::TYPE,
     ];
 
-    private $em;
-    private $formFactory;
-    private $logger;
-    private $repository;
-    private $pasRepository;
+    private EntityManagerInterface $em;
+    private LoggerInterface $logger;
+    private ProjectAbstractStepRepository $pasRepository;
+    private FormFactoryInterface $formFactory;
+    private AbstractStepRepository $repository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -81,25 +82,40 @@ class ProjectStepPersister
             if (!$entity instanceof CollectStep && !$entity instanceof SelectionStep) {
                 unset($step['votesMin']);
             }
+            if (
+                'collect' === $step['type'] ||
+                ('selection' === $step['type'] && !isset($step['mainView']))
+            ) {
+                $step['mainView'] = $project->getFirstCollectStep()
+                    ? $project->getFirstCollectStep()->getMainView()
+                    : 'grid';
+            }
             $form->submit($step);
             if (!$form->isValid()) {
                 $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
                 throw GraphQLException::fromFormErrors($form);
             }
-            $match = $this->pasRepository->findOneBy([
+            /** @var AbstractStep $stepFromData */
+            $stepFromData = $form->getData();
+            $pasMatch = $this->pasRepository->findOneBy([
                 'project' => $project,
-                'step' => $form->getData(),
+                'step' => $stepFromData,
             ]);
-            if (!$match) {
+            if (!$pasMatch) {
                 $pas = new ProjectAbstractStep();
-                $pas
-                    ->setPosition($i + 1)
+                $pas->setPosition($i + 1)
                     ->setProject($project)
-                    ->setStep($form->getData());
+                    ->setStep($stepFromData);
                 $project->addStep($pas);
             } else {
-                $match->setPosition($i + 1);
+                $pasMatch->setPosition($i + 1);
+            }
+
+            foreach ($stepFromData->getStatuses() as $pos => $status) {
+                if (null === $status->getPosition()) {
+                    $status->setPosition($pos);
+                }
             }
         }
         $stepsToDelete = Diff::fromCollectionsWithId($dbSteps, $userSteps);
