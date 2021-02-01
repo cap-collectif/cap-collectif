@@ -16,7 +16,7 @@ type Props = {|
 const ModalHeader = ({ children, ...rest }: Props) => {
   const { hide, hideCloseButton } = useModal();
   return (
-    <Flex as="header" p={6} align="center" {...rest}>
+    <Flex as="header" p={6} pb={0} align="center" {...rest}>
       <AppBox
         flex={1}
         css={css({

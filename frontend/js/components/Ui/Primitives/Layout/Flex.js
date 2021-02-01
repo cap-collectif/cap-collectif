@@ -26,6 +26,7 @@ const Flex = React.forwardRef<FlexProps, HTMLElement>((props: FlexProps, ref) =>
     basis,
     grow,
     shrink,
+    display = 'flex',
     spacing: userSpacing,
     ...rest
   } = props;
@@ -74,7 +75,7 @@ const Flex = React.forwardRef<FlexProps, HTMLElement>((props: FlexProps, ref) =>
 
   return (
     <AppBox
-      display="flex"
+      display={display}
       flexDirection={direction}
       alignItems={align}
       justifyContent={justify}

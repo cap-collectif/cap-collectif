@@ -10,7 +10,7 @@ type Props = {|
 
 const ModalFooter = ({ children, ...rest }: Props) => {
   return (
-    <Flex as="footer" p={6} align="center" justify="flex-end" {...rest}>
+    <Flex as="footer" p={6} pt={0} align="center" justify="flex-end" {...rest}>
       {children}
     </Flex>
   );

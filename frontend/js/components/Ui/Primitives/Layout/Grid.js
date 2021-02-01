@@ -19,6 +19,7 @@ const Grid = React.forwardRef((props, ref) => {
     row,
     autoFit,
     autoFill,
+    display = 'grid',
     ...rest
   } = props;
   const styles = {
@@ -45,7 +46,7 @@ const Grid = React.forwardRef((props, ref) => {
   };
   return (
     <AppBox
-      display="grid"
+      display={display}
       gridTemplateColumns={templateColumns}
       gridGap={gap}
       gridRowGap={rowGap}

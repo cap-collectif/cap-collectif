@@ -16,7 +16,6 @@ export interface FlexOptions {
 
 export type FlexProps = Omit<
     AppBoxOwnProps,
-    'display' |
     'flexDirection' |
     'alignItems' |
     'justifyContent' |

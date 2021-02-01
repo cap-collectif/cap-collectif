@@ -13,17 +13,20 @@ import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { Context } from './Modal.context';
 import { ModalContext } from './Modal.context';
 import useIsMobile from '~/utils/hooks/useIsMobile';
+import invariant from '~/utils/invariant';
 
 type RenderProps = (props: Context) => React.Node;
 
 export type ModalProps = {|
   ...AppBoxProps,
   +hideOnClickOutside?: boolean,
+  +noBackdrop?: boolean,
   +hideCloseButton?: boolean,
   +scrollBehavior?: 'inside' | 'outside',
   +hideOnEsc?: boolean,
   +preventBodyScroll?: boolean,
-  +disclosure: React$Element<any>,
+  +disclosure?: React$Element<any>,
+  +show?: boolean,
   +children: RenderProps | React.Node,
   +ariaLabel: string,
   +onOpen?: () => void,
@@ -38,7 +41,6 @@ const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   top: 0,
   p: [0, 4],
   pt: [2, 4],
-  bg: 'rgba(0,0,0,0.5)',
   zIndex: 1030,
   display: 'flex',
   flexDirection: 'column',
@@ -74,6 +76,8 @@ const Modal = ({
   ariaLabel,
   onOpen,
   onClose,
+  show,
+  noBackdrop = false,
   scrollBehavior = 'inside',
   hideCloseButton = false,
   hideOnClickOutside = true,
@@ -81,8 +85,13 @@ const Modal = ({
   preventBodyScroll = true,
   ...props
 }: ModalProps) => {
+  const isControlled = show === true || show === false;
+  invariant(
+    (isControlled && disclosure === undefined) || (!isControlled && disclosure !== undefined),
+    "You should either have a controlled Modal by using `show` props, or use the `disclosure` prop which will handle it's state internally, but you cannot use both or nothing.",
+  );
   const firstMount = useRef(true);
-  const dialog = useDialogState({ animated: TRANSITION_DURATION * 1000 });
+  const dialog = useDialogState({ animated: TRANSITION_DURATION * 1000, visible: show });
   const isMobile = useIsMobile();
   const $container = useRef<?HTMLElement>();
   const context = useMemo(
@@ -107,13 +116,21 @@ const Modal = ({
       }
     }
   }, [onOpen, onClose, dialog.visible]);
-
+  useEffect(() => {
+    if (show === true) {
+      dialog.show();
+    } else if (show === false) {
+      dialog.hide();
+    }
+  }, [dialog, show]);
   // eslint-disable-next-line react/destructuring-assignment
   const aria = ariaLabel ?? props['aria-label'] ?? undefined;
   return (
     <Provider context={context}>
-      <DialogDisclosure {...dialog} ref={disclosure.ref} {...disclosure.props}>
-        {disclosureProps => React.cloneElement(disclosure, disclosureProps)}
+      <DialogDisclosure
+        {...dialog}
+        {...(disclosure ? { ref: disclosure.ref, ...disclosure.props } : {})}>
+        {disclosureProps => (disclosure ? React.cloneElement(disclosure, disclosureProps) : null)}
       </DialogDisclosure>
       <Dialog
         {...dialog}
@@ -124,6 +141,7 @@ const Modal = ({
         <AnimatePresence>
           {dialog.visible && (
             <ModalContainerInner
+              bg={noBackdrop ? 'transparent' : 'rgba(0,0,0,0.5)'}
               overflow={scrollBehavior === 'outside' ? 'auto' : undefined}
               ref={$container}
               onClick={(e: MouseEvent) => {

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { select } from 'storybook-addon-knobs';
+import { useState } from 'react';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
@@ -50,6 +51,43 @@ storiesOf('Design system|Modal', module)
               Klee
             </Button>
           </Modal.Footer>
+        </Modal>
+      </Flex>
+    );
+  })
+  .add('without backdrop', () => {
+    return (
+      <Flex gridGap={2} wrap="wrap" align="center">
+        <Modal
+          noBackdrop
+          scrollBehavior={scrollBehaviour()}
+          ariaLabel="Confirmer"
+          disclosure={
+            <Button variant="primary" variantSize="medium">
+              Open modal
+            </Button>
+          }>
+          <Modal.Header display={['none', 'flex']}>
+            <Heading>Êtes vous sûr ?</Heading>
+          </Modal.Header>
+          <Modal.Body>
+            <Flex spacing={4} direction={['column', 'row']} justify={['center', 'flex-end']}>
+              <Button
+                justifyContent="center"
+                variant="primary"
+                variantColor="primary"
+                variantSize="medium">
+                Publier
+              </Button>
+              <Button
+                justifyContent="center"
+                variant="primary"
+                variantColor="danger"
+                variantSize="medium">
+                Supprimer
+              </Button>
+            </Flex>
+          </Modal.Body>
         </Modal>
       </Flex>
     );
@@ -310,4 +348,63 @@ storiesOf('Design system|Modal', module)
         </Modal.Footer>
       </Modal>
     </Flex>
-  ));
+  ))
+  .add('controlled', () => {
+    const PersonModal = ({ person, show, onClose }) => {
+      if (!person) return null;
+      return (
+        <Modal show={show} onClose={onClose} ariaLabel="Une personne">
+          <Modal.Header>
+            <Heading>Salut {person.name}</Heading>
+          </Modal.Header>
+          <Modal.Body>
+            <Text>{person.description}</Text>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" variantSize="medium" onClick={onClose}>
+              Fermer
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      );
+    };
+    const PERSONS = [
+      {
+        name: 'Mikasa',
+        description: 'Une vaillante combatante.',
+      },
+      {
+        name: 'Armin',
+        description: 'Un fin stratège de guerre',
+      },
+      {
+        name: 'Eren',
+        description: "Je ne dirai rien car je ne l'apprécie point.",
+      },
+    ];
+    const [personIndex, setPersonIndex] = useState(null);
+    const selectChar = (index: number) => () => {
+      setPersonIndex(index);
+    };
+    const person = personIndex !== null ? PERSONS[personIndex] : null;
+    return (
+      <Flex gridGap={2} wrap="wrap" align="center">
+        <PersonModal
+          show={!!person}
+          person={person}
+          onClose={() => {
+            setPersonIndex(null);
+          }}
+        />
+        <Button onClick={selectChar(0)} variant="primary" variantSize="medium">
+          Mikasa
+        </Button>
+        <Button onClick={selectChar(1)} variant="primary" variantSize="medium">
+          Armin
+        </Button>
+        <Button onClick={selectChar(2)} variant="primary" variantSize="medium">
+          Eren
+        </Button>
+      </Flex>
+    );
+  });

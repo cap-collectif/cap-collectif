@@ -10,7 +10,7 @@ type Props = {|
 
 const ModalBody = ({ children, ...rest }: Props) => {
   return (
-    <Flex as="main" px={6} direction="column" {...rest}>
+    <Flex as="main" p={6} direction="column" {...rest}>
       {children}
     </Flex>
   );
