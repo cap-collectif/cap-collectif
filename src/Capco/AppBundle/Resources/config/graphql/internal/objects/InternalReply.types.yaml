@@ -1,6 +1,7 @@
 InternalReply:
     type: object
     inherits:
+        - Updatable
         - Deletable
         - Draftable
         - Contribution
@@ -9,6 +10,7 @@ InternalReply:
     config:
         name: Reply
         interfaces:
+            - Updatable
             - Draftable
             - Contribution
             - UniformResourceLocatable
@@ -33,8 +35,6 @@ InternalReply:
                 type: 'InternalQuestionnaire!'
                 description: 'Identifies the form where the contribution was submitted.'
             viewerCanUpdate:
-                type: 'Boolean!'
-                access: "@=hasRole('ROLE_USER')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanUpdateResolver", [value, getUser()])'
             viewerCanDelete:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'

@@ -10171,7 +10171,10 @@ type RemoveSsoPayload {
 }
 
 """Represents a user's answer to a questionnaire."""
-type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable & Deletable {
+type Reply implements Node & Publishable & Updatable & Draftable & Contribution & UniformResourceLocatable & Deletable {
+  """Check if the current viewer can update this object"""
+  viewerCanUpdate: Boolean!
+
   """The ID of an object."""
   id: ID!
 
@@ -10222,7 +10225,6 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
-  viewerCanUpdate: Boolean!
 }
 
 """A connection to a list of items."""
@@ -12139,6 +12141,12 @@ type UnsubscribeToEventAsRegisteredPayload {
   """Event"""
   event: Event
   clientMutationId: String
+}
+
+"""Entities that can be updated."""
+interface Updatable {
+  """Check if the current viewer can update this object"""
+  viewerCanUpdate: Boolean!
 }
 
 input UpdateAlphaProjectInput {
