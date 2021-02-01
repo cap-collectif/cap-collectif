@@ -4772,9 +4772,6 @@ enum FeatureFlagType {
   """Whether or not an admin can use `TIPSmeee`. Used in dev only."""
   unstable__tipsmeee
 
-  """Whether or not the performance test is active."""
-  to_performance_test_counters
-
   """Whether or not the new consultation page is active."""
   unstable__new_consultation_page
 }

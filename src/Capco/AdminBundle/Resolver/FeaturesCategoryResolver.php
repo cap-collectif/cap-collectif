@@ -65,7 +65,6 @@ class FeaturesCategoryResolver
                     Manager::unstable__emailing,
                     Manager::unstable__debate,
                     Manager::proposal_revisions,
-                    Manager::to_performance_test_counters,
                     Manager::unstable__new_consultation_page,
                 ],
             ],

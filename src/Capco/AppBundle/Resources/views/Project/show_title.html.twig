@@ -1,20 +1,22 @@
 {% macro contributions_popover(project) %}
     {% apply spaceless %}
         {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
-        {% if is_feature_enabled('to_performance_test_counters') and app.request.query.get('performance_test') %}
-            {% set counters = projectContributionResolver.getTotalContributionsCountsByTypes(project.id, ['opinion', 'opinionVersion', 'source', 'reply', 'argument']) %}
-            {% set opinions = counters['opinion'] + totalProposalsCount %}
-            {% set versions = counters['opinionVersion'] %}
-            {% set arguments = counters['argument'] %}
-            {% set sources = counters['source'] %}
-            {% set replies = counters['reply'] %}
-        {% else %}
-            {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
-            {% set versions = project.totalVersionsCount %}
-            {% set arguments = project.totalArgumentsCount %}
-            {% set sources = project.totalSourcesCount %}
-            {% set replies = project.totalRepliesCount %}
-        {% endif %}
+        {% set counters = projectContributionResolver.getTotalContributionsCountsByTypes(
+            project.id,
+            [
+                'opinion',
+                'opinionVersion',
+                'source',
+                'reply',
+                'argument'
+            ])
+        %}
+        {% set opinions = counters['opinion'] + totalProposalsCount %}
+        {% set versions = counters['opinionVersion'] %}
+        {% set arguments = counters['argument'] %}
+        {% set sources = counters['source'] %}
+        {% set replies = counters['reply'] %}
+
         {% if opinions > 0 %}
             {% set projectType = project.projectType is defined and project.projectType is not null
                 ? project.projectType.title
