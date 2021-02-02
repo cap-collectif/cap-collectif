@@ -119,7 +119,7 @@ exports[`<CommentDate /> should render null with createdAt > publishedAt 1`] = `
     }
   >
     <span>
-      il y a un an
+      il y a 2 ans
     </span>
   </OverlayTrigger>
 </span>

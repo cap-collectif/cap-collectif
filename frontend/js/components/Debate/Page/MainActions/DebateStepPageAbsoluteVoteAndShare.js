@@ -48,35 +48,46 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       css={css({
         marginTop: '0 !important',
         background: 'white',
-        boxShadow: isMobile ? 'none' : ' 0 10px 14px 0px white;',
+        boxShadow: isMobile
+          ? 'none'
+          : !showArgumentForm || voteState === 'NONE'
+          ? 'medium'
+          : ' 0 10px 14px 0px white;',
       })}>
-      {voteState === 'NONE' && (
-        <Flex direction={['column', 'row']} spacing={4} justifyContent="center" alignItems="center">
-          <Text textAlign={['center', 'left']} as="p" color="gray.900" fontSize={4}>
-            {title}
-          </Text>
-          <DebateStepPageVote
-            viewerHasArgument={viewerHasArgument}
-            width="unset"
-            debateId={debate.id}
-            isAuthenticated={isAuthenticated}
-            onSuccess={setVoteState}
+      {/** I dont like this but for now we have to use the bootstrap container max-width, waiting for the DS one */}
+      <AppBox className="container" css={{ padding: '0 !important' }}>
+        {voteState === 'NONE' && (
+          <Flex
+            direction={['column', 'row']}
+            spacing={4}
+            justifyContent="center"
+            alignItems="center">
+            <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>
+              {title}
+            </Text>
+            <DebateStepPageVote
+              viewerHasArgument={viewerHasArgument}
+              width="unset"
+              debateId={debate.id}
+              isAuthenticated={isAuthenticated}
+              onSuccess={setVoteState}
+            />
+          </Flex>
+        )}
+        {voteState !== 'NONE' && (
+          <DebateStepPageVoteForm
+            isMobile={isMobile}
+            isAbsolute
+            url={url}
+            debate={debate}
+            body={body}
+            voteState={voteState}
+            setVoteState={setVoteState}
+            showArgumentForm={showArgumentForm}
+            setShowArgumentForm={setShowArgumentForm}
           />
-        </Flex>
-      )}
-      {voteState !== 'NONE' && (
-        <DebateStepPageVoteForm
-          isMobile={isMobile}
-          isAbsolute
-          url={url}
-          debate={debate}
-          body={body}
-          voteState={voteState}
-          setVoteState={setVoteState}
-          showArgumentForm={showArgumentForm}
-          setShowArgumentForm={setShowArgumentForm}
-        />
-      )}
+        )}
+      </AppBox>
     </AppBox>
   );
 };

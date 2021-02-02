@@ -50,6 +50,11 @@ export const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
     box-shadow: none !important;
     color: ${colors.gray[500]};
     font-size: ${typography.fontSizes[4]};
+
+    &::placeholder {
+      color: ${colors.gray[500]};
+      font-weight: normal;
+    }
   }
 `;
 
@@ -116,7 +121,7 @@ export const DebateStepPageVoteForm = ({
   return (
     <motion.div
       style={{ width: '100%' }}
-      transition={{ delay: 0.75, duration: 0.5 }}
+      transition={{ delay: isAbsolute ? 0 : 0.75, duration: isAbsolute ? 0 : 0.5 }}
       initial={{ opacity: isMobile ? 1 : 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>

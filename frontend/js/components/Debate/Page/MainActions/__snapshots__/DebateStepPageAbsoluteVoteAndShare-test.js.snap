@@ -14,38 +14,41 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
   width="100%"
   zIndex={999}
 >
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    justifyContent="center"
-    spacing={4}
+  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
+    className="container"
   >
-    <Text
-      as="p"
-      color="gray.900"
-      fontSize={4}
-      textAlign={
+    <ForwardRef
+      alignItems="center"
+      direction={
         Array [
-          "center",
-          "left",
+          "column",
+          "row",
         ]
       }
+      justifyContent="center"
+      spacing={4}
     >
-      Pour ou contre le LSD dans nos cantines
-    </Text>
-    <DebateStepPageVote
-      debateId="debate1"
-      isAuthenticated={true}
-      onSuccess={[MockFunction]}
-      viewerHasArgument={false}
-      width="unset"
-    />
-  </ForwardRef>
+      <Text
+        color="gray.900"
+        fontSize={4}
+        textAlign={
+          Array [
+            "center",
+            "left",
+          ]
+        }
+      >
+        Pour ou contre le LSD dans nos cantines
+      </Text>
+      <DebateStepPageVote
+        debateId="debate1"
+        isAuthenticated={true}
+        onSuccess={[MockFunction]}
+        viewerHasArgument={false}
+        width="unset"
+      />
+    </ForwardRef>
+  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
@@ -65,38 +68,41 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty on mobile 1`] = 
   width="100%"
   zIndex={999}
 >
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    justifyContent="center"
-    spacing={4}
+  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
+    className="container"
   >
-    <Text
-      as="p"
-      color="gray.900"
-      fontSize={4}
-      textAlign={
+    <ForwardRef
+      alignItems="center"
+      direction={
         Array [
-          "center",
-          "left",
+          "column",
+          "row",
         ]
       }
+      justifyContent="center"
+      spacing={4}
     >
-      Pour ou contre le LSD dans nos cantines
-    </Text>
-    <DebateStepPageVote
-      debateId="debate1"
-      isAuthenticated={true}
-      onSuccess={[MockFunction]}
-      viewerHasArgument={false}
-      width="unset"
-    />
-  </ForwardRef>
+      <Text
+        color="gray.900"
+        fontSize={4}
+        textAlign={
+          Array [
+            "center",
+            "left",
+          ]
+        }
+      >
+        Pour ou contre le LSD dans nos cantines
+      </Text>
+      <DebateStepPageVote
+        debateId="debate1"
+        isAuthenticated={true}
+        onSuccess={[MockFunction]}
+        viewerHasArgument={false}
+        width="unset"
+      />
+    </ForwardRef>
+  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
@@ -114,28 +120,32 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
   width="100%"
   zIndex={999}
 >
-  <Relay(DebateStepPageVoteForm)
-    body="Oui je suis pour"
-    debate={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "debate1",
-        "votes": Object {
-          "totalCount": 5,
-        },
-        "yesVotes": Object {
-          "totalCount": 4,
-        },
+  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
+    className="container"
+  >
+    <Relay(DebateStepPageVoteForm)
+      body="Oui je suis pour"
+      debate={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        }
       }
-    }
-    isAbsolute={true}
-    setShowArgumentForm={[MockFunction]}
-    setVoteState={[MockFunction]}
-    showArgumentForm={true}
-    url="/debate1"
-    voteState="ARGUMENTED"
-  />
+      isAbsolute={true}
+      setShowArgumentForm={[MockFunction]}
+      setVoteState={[MockFunction]}
+      showArgumentForm={true}
+      url="/debate1"
+      voteState="ARGUMENTED"
+    />
+  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
@@ -155,29 +165,33 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
   width="100%"
   zIndex={999}
 >
-  <Relay(DebateStepPageVoteForm)
-    body="Oui je suis pour"
-    debate={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "debate1",
-        "votes": Object {
-          "totalCount": 5,
-        },
-        "yesVotes": Object {
-          "totalCount": 4,
-        },
+  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
+    className="container"
+  >
+    <Relay(DebateStepPageVoteForm)
+      body="Oui je suis pour"
+      debate={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        }
       }
-    }
-    isAbsolute={true}
-    isMobile={true}
-    setShowArgumentForm={[MockFunction]}
-    setVoteState={[MockFunction]}
-    showArgumentForm={true}
-    url="/debate1"
-    voteState="ARGUMENTED"
-  />
+      isAbsolute={true}
+      isMobile={true}
+      setShowArgumentForm={[MockFunction]}
+      setVoteState={[MockFunction]}
+      showArgumentForm={true}
+      url="/debate1"
+      voteState="ARGUMENTED"
+    />
+  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
@@ -195,28 +209,32 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] =
   width="100%"
   zIndex={999}
 >
-  <Relay(DebateStepPageVoteForm)
-    body="Oui je suis pour"
-    debate={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "debate1",
-        "votes": Object {
-          "totalCount": 5,
-        },
-        "yesVotes": Object {
-          "totalCount": 4,
-        },
+  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
+    className="container"
+  >
+    <Relay(DebateStepPageVoteForm)
+      body="Oui je suis pour"
+      debate={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        }
       }
-    }
-    isAbsolute={true}
-    setShowArgumentForm={[MockFunction]}
-    setVoteState={[MockFunction]}
-    showArgumentForm={true}
-    url="/debate1"
-    voteState="VOTED"
-  />
+      isAbsolute={true}
+      setShowArgumentForm={[MockFunction]}
+      setVoteState={[MockFunction]}
+      showArgumentForm={true}
+      url="/debate1"
+      voteState="VOTED"
+    />
+  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
@@ -236,28 +254,32 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted on mo
   width="100%"
   zIndex={999}
 >
-  <Relay(DebateStepPageVoteForm)
-    body="Oui je suis pour"
-    debate={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "debate1",
-        "votes": Object {
-          "totalCount": 5,
-        },
-        "yesVotes": Object {
-          "totalCount": 4,
-        },
+  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
+    className="container"
+  >
+    <Relay(DebateStepPageVoteForm)
+      body="Oui je suis pour"
+      debate={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        }
       }
-    }
-    isAbsolute={true}
-    isMobile={true}
-    setShowArgumentForm={[MockFunction]}
-    setVoteState={[MockFunction]}
-    showArgumentForm={true}
-    url="/debate1"
-    voteState="VOTED"
-  />
+      isAbsolute={true}
+      isMobile={true}
+      setShowArgumentForm={[MockFunction]}
+      setVoteState={[MockFunction]}
+      showArgumentForm={true}
+      url="/debate1"
+      voteState="VOTED"
+    />
+  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
