@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
@@ -29,7 +30,7 @@ class EventRepository extends EntityRepository
      */
     public function countAllByUser(User $user): int
     {
-        $qb = $this->createQueryBuilder('e');
+        $qb = $this->createAvailableOrApprovedEventsQueryBuilder('e');
         $qb
             ->select('count(DISTINCT e)')
             ->andWhere('e.author = :user')
@@ -44,14 +45,30 @@ class EventRepository extends EntityRepository
      */
     public function findAllByUser(User $user, string $field = null, string $direction = null): array
     {
-        $qb = $this->createQueryBuilder('e');
-        $qb->andWhere('e.author = :user')->setParameter('user', $user);
+        $qb = $this->createAvailableOrApprovedEventsQueryBuilder('e')
+            ->andWhere('e.author = :user')
+            ->setParameter('user', $user);
 
         if ($field && $direction && 'START_AT' === $field) {
             $qb->addOrderBy('e.startAt', $direction);
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder {
+        $qb = $this->createQueryBuilder($alias);
+        $qb
+            ->leftJoin("$alias.review", 'review')
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->isNull('review'),
+                    $qb->expr()->eq('review.status', ':reviewStatus')
+                )
+            )
+            ->setParameter('reviewStatus', EventReviewStatusType::APPROVED);
+
+        return $qb;
     }
 
     /**

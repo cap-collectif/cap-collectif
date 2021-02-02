@@ -90,6 +90,20 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
+          "review": Object {
+            "comment": null,
+            "refusedReason": "NONE",
+            "reviewer": Object {
+              "_id": "userMaxime",
+            },
+            "status": "APPROVED",
+          },
+          "title": "evenement créer par un utilisateur anglais avec review approved",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
           "review": null,
           "title": "On vous présente Agui, l’ami du BP",
@@ -146,10 +160,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE5",
       "hasNextPage": false,
     },
-    "totalCount": 19,
+    "totalCount": 20,
   },
 }
 `;

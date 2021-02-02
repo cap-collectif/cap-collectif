@@ -136,26 +136,6 @@ Object {
         Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
           "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==",
-            "review": Object {
-              "status": "REFUSED",
-            },
-            "title": "event Create By user with review refused",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRSZXZpZXdSZWZ1c2VkV2l0aG91dENvbW1lbnQ=",
-            "review": Object {
-              "status": "REFUSED",
-            },
-            "title": "evenement refusé, sans commentaire",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
             "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
             "review": Object {
               "status": "APPROVED",
@@ -164,17 +144,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc=",
-            "review": Object {
-              "status": "AWAITING",
-            },
-            "title": "event Create By user with review in awaiting",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
             "id": "RXZlbnQ6ZXZlbnQ1",
             "review": null,
@@ -183,10 +153,10 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "hasNextPage": false,
       },
-      "totalCount": 7,
+      "totalCount": 4,
     },
   },
 }
