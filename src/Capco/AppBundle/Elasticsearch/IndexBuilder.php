@@ -6,7 +6,11 @@ use Elastica\Client;
 use Elastica\Index;
 use Elastica\Request;
 use Elastica\Response;
+use Elastica\Reindex;
+use Elastica\Task;
 use Elasticsearch\Endpoints\Get;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -43,6 +47,38 @@ class IndexBuilder
         $index->create($mapping);
 
         return $index;
+    }
+
+    public function migrate(
+        Index $currentIndex,
+        array $params = [],
+        ?OutputInterface $output = null
+    ): Index {
+        $newIndex = $this->createIndex();
+
+        $reindex = new Reindex($currentIndex, $newIndex, $params);
+        $reindex->setWaitForCompletion(Reindex::WAIT_FOR_COMPLETION_FALSE);
+
+        $response = $reindex->run();
+
+        if ($response->isOk()) {
+            $taskId = $response->getData()['task'];
+
+            $task = new Task($this->client, $taskId);
+            $progressBar = new ProgressBar($output, 50);
+
+            while (false === $task->isCompleted()) {
+                $progressBar->advance(3);
+                sleep(1); // Migrate of an index is not a production critical operation, sleep is ok.
+                $task->refresh();
+            }
+
+            $progressBar->finish();
+
+            return $newIndex;
+        }
+
+        throw new \RuntimeException(sprintf('Reindex call failed. %s', $response->getError()));
     }
 
     public function generateIndexName(): string

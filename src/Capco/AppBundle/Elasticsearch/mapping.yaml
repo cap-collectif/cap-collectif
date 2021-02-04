@@ -60,7 +60,6 @@ mappings:
         enabled: { type: boolean }
         roles: { type: text }
         userType:
-            type: object
             properties:
                 id:
                     type: keyword
@@ -69,23 +68,19 @@ mappings:
             type: nested
             properties:
                 project: &Project
-                    type: object
                     properties:
                         id: { type: keyword }
                         visibility: { type: long }
                         restrictedViewerIds: { type: keyword }
                         authors: &Author
-                            type: object
                             properties:
                                 id: { type: keyword }
                                 username: *text_analysis_highlighted
                                 email: *text_analysis_highlighted
                                 userType:
-                                    type: object
                                     properties:
                                         id: { type: keyword }
                         locale: &Locale
-                            type: object
                             properties:
                                 id: { type: keyword }
                                 code: { type: keyword }
@@ -96,7 +91,6 @@ mappings:
             type: nested
             properties:
                 step: &Step
-                    type: object
                     properties:
                         id: { type: keyword }
                 count:
@@ -105,7 +99,6 @@ mappings:
             type: nested
             properties:
                 consultation:
-                    type: object
                     properties:
                         id: { type: keyword }
                 count:
@@ -124,11 +117,9 @@ mappings:
         step: *Step
         author: *Author
         argument:
-            type: object
             properties:
                 id: { type: keyword }
         consultation: &Consultation
-            type: object
             properties:
                 id: { type: keyword }
         opinion:
@@ -145,38 +136,32 @@ mappings:
         authors: *Author
         visibility: { type: long }
         districts:
-            type: object
             properties:
                 id: { type: keyword }
                 position:
                     type: long
                 district:
-                    type: object
                     properties:
                         id: { type: keyword }
                         name: *text_analysis_highlighted
         address: *text_analysis_highlighted
         projectType:
-            type: object
             properties:
                 id: { type: keyword }
                 title: { type: keyword }
         projectStatus: { type: keyword }
         contributionsCount: { type: long }
         themes:
-            type: object
             properties:
                 id: { type: keyword }
                 slug: { type: keyword }
         eventCount: { type: long }
         locale:
-            type: object
             properties:
                 id: { type: keyword }
                 code: { type: keyword }
         authorName: *text_analysis_highlighted
         proposal:
-            type: object
             properties:
                 id: { type: keyword }
                 project: *Project
@@ -190,12 +175,10 @@ mappings:
         isPresential: { type: boolean }
         link: *text_analysis_highlighted
         projects:
-            type: object
             properties:
                 id: { type: keyword }
                 slug: { type: keyword }
         translations:
-            type: object
             properties:
                 locale: { type: keyword }
                 slug: { type: keyword }
@@ -216,32 +199,25 @@ mappings:
         commentsCount: { type: long }
         estimation: { type: float }
         district:
-            type: object
             properties:
                 id: { type: keyword }
                 name: *text_analysis_highlighted
         status:
-            type: object
             properties:
                 id: { type: keyword }
         proposalForm:
-            type: object
             properties:
                 id: { type: keyword }
         category:
-            type: object
             properties:
                 id: { type: keyword }
         theme:
-            type: object
             properties:
                 id: { type: keyword }
         selections:
-            type: object
             properties:
                 step: *Step
                 status:
-                    type: object
                     properties:
                         id: { type: keyword }
         pointsCount: { type: long }
@@ -256,7 +232,6 @@ mappings:
                 count:
                     type: long
         proposalAnalysts:
-            type: object
             properties:
                 analyst: *Author
         supervisor: *Author
@@ -267,12 +242,10 @@ mappings:
                 updatedBy: *Author
                 state: { type: keyword }
         decision:
-            type: object
             properties:
                 updatedBy: *Author
                 state: { type: keyword }
         assessment:
-            type: object
             properties:
                 updatedBy: *Author
                 state: { type: keyword }
@@ -291,7 +264,6 @@ mappings:
         votesCountMitige: { type: long }
         argumentsCount: { type: long }
         type:
-            type: object
             properties:
                 id: { type: keyword }
 
@@ -306,12 +278,10 @@ mappings:
         value: { type: long }
 
         source:
-            type: object
             properties:
                 id: { type: keyword }
 
         comment:
-            type: object
             properties:
                 id: { type: keyword }
                 published: { type: boolean }
@@ -330,7 +300,6 @@ mappings:
                 std: { type: text, analyzer: capco_standard }
                 tag: { type: text, analyzer: tag_cloud, fielddata: true }
         objectValue:
-            type: object
             properties:
                 labels: { type: keyword }
                 other: { type: keyword }
@@ -340,24 +309,20 @@ mappings:
                 id: { type: keyword }
                 textValue: *TextValue
                 objectValue:
-                    type: object
                     properties:
                         labels: { type: text }
                         other: { type: text }
         question:
-            type: object
             properties:
                 id: { type: keyword }
                 type: { type: keyword }
         reply:
-            type: object
             properties:
                 id: { type: keyword }
                 author: *Author
                 createdAt: { type: date }
                 published: { type: boolean }
         questionnaire:
-            type: object
             properties:
                 id: { type: keyword }
 

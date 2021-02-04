@@ -12,6 +12,10 @@ services:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/Command/Maker/*'
 
+    Capco\AppBundle\Command\Elasticsearch\CheckMappingCommand:
+        arguments:
+            $kernelRootDir: '%kernel.root_dir%'
+
     Capco\AppBundle\Command\GenerateMapProviderPublicToken:
         arguments:
             $mapboxSecretKey: '%mapbox_secret_key%'
