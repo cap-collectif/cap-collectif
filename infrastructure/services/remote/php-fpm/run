@@ -99,11 +99,11 @@ echo "[$(date -u)][PHP-FPM] Generating map token for Mapbox"
 gosu capco php bin/console capco:generate:map-token MAPBOX --no-debug --env=prod --no-interaction --quiet
 
 echo "[$(date -u)][PHP-FPM] Checking ES mapping..."
-gosu capco -c "php bin/console capco:es:mapping"
+gosu capco php bin/console capco:es:mapping
 mappingUpToDate=$?
 if [ $mappingUpToDate -eq 1 ]; then
     echo "[$(date -u)][PHP-FPM] Migrate mapping..."
-    gosu capco -c "php bin/console capco:es:migrate"
+    gosu capco php bin/console capco:es:migrate
     echo "[$(date -u)][PHP-FPM] Mapping is up to date."
 elif [ $mappingUpToDate -eq 0 ]; then
     echo "[$(date -u)][PHP-FPM] Starting daemon to populate elasticsearch..."
