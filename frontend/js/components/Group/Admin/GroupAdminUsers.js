@@ -148,7 +148,12 @@ export class GroupAdminUsers extends React.Component<Props, State> {
                 // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
                 .filter(Boolean)
                 .map(user => (
-                  <GroupAdminUsersListGroupItem key={user.id} user={user} groupId={group.id} />
+                  <GroupAdminUsersListGroupItem
+                    key={user.id}
+                    user={user}
+                    groupId={group.id}
+                    groupTitle={group.title}
+                  />
                 ))}
             </ListGroup>
           ) : (

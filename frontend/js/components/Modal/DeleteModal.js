@@ -12,6 +12,7 @@ type Props = {
   deleteModalTitle: string,
   deleteModalContent: string,
   buttonConfirmMessage?: string,
+  groupTitle?: string,
 };
 
 export class DeleteModal extends React.Component<Props> {
@@ -23,6 +24,7 @@ export class DeleteModal extends React.Component<Props> {
       deleteModalContent,
       deleteModalTitle,
       buttonConfirmMessage,
+      groupTitle,
     } = this.props;
 
     const onDelete = () => {
@@ -42,7 +44,7 @@ export class DeleteModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <i className="cap cap-alert-2" style={{ color: '#dc3545', fontSize: '22px' }} />
-          <FormattedMessage id={deleteModalContent} />
+          <FormattedMessage id={deleteModalContent} values={{ grouptitle: <b>{groupTitle}</b> }} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={closeDeleteModal} />

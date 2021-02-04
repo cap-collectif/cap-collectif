@@ -8,6 +8,7 @@ import { $refType } from '../../../mocks';
 describe('<GroupAdminUsers />', () => {
   const props = {
     groupId: 'group4',
+    groupTitle: 'Comité de suvi',
     user: {
       $refType,
       id: 'id1',

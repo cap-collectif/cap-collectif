@@ -11,6 +11,7 @@ describe('<DeleteModal />', () => {
     deleteElement: jest.fn(),
     deleteModalTitle: 'titre.de.la.modal.de.suppression',
     deleteModalContent: 'contenu.de.la.modal.de.suppression',
+    groupTitle: 'utilisateurs',
   };
 
   it('render correctly Delete Modal', () => {

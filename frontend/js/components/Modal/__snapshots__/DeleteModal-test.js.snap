@@ -59,7 +59,13 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
     />
     <FormattedMessage
       id="contenu.de.la.modal.de.suppression"
-      values={Object {}}
+      values={
+        Object {
+          "grouptitle": <b>
+            utilisateurs
+          </b>,
+        }
+      }
     />
   </ModalBody>
   <ModalFooter

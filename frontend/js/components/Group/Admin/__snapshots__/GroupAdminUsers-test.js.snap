@@ -135,6 +135,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
+        groupTitle="Comité de suvi"
         key="id1"
         user={
           Object {
@@ -281,6 +282,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
+        groupTitle="Comité de suvi"
         key="id1"
         user={
           Object {
@@ -429,6 +431,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
+        groupTitle="Comité de suvi"
         key="id1"
         user={
           Object {
@@ -577,6 +580,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
+        groupTitle="Comité de suvi"
         key="id1"
         user={
           Object {

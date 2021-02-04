@@ -28,6 +28,7 @@ const getUsersList = graphql`
     userSearch(displayName: $displayName, authorsOfEventOnly: $authorOfEventOnly) {
       id
       displayName
+      email
     }
   }
 `;
@@ -45,9 +46,33 @@ const getUsersListWithoutIds = graphql`
     ) {
       id
       displayName
+      email
     }
   }
 `;
+
+const formatUsersData = users => {
+  const duplicateNames = {};
+
+  users.forEach(({ displayName }, index) => {
+    if (duplicateNames[displayName]) {
+      duplicateNames[displayName].push(index);
+    } else {
+      duplicateNames[displayName] = [index];
+    }
+  });
+
+  return users.map(({ id, displayName, email }) => {
+    let label = displayName;
+    if (duplicateNames[displayName] && duplicateNames[displayName].length > 1) {
+      label = `${displayName} - ${email}`;
+    }
+    return {
+      value: id,
+      label,
+    };
+  });
+};
 
 export default class UserListField extends React.Component<Props> {
   static defaultProps = {
@@ -66,23 +91,13 @@ export default class UserListField extends React.Component<Props> {
           notInIds: usersIds,
           displayName: terms,
           authorOfEventOnly: authorOfEvent,
-        }).then(data =>
-          data.userSearch.map(u => ({
-            value: u.id,
-            label: u.displayName,
-          })),
-        );
+        }).then(data => formatUsersData(data.userSearch));
       }
 
       return fetchQuery(environment, getUsersList, {
         displayName: terms,
         authorOfEventOnly: authorOfEvent,
-      }).then(data =>
-        data.userSearch.map(u => ({
-          value: u.id,
-          label: u.displayName,
-        })),
-      );
+      }).then(data => formatUsersData(data.userSearch));
     };
 
     return retrieveUsersList(userListToNoSearch, search);

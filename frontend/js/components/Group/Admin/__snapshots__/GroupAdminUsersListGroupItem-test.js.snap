@@ -8,8 +8,9 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
   <Connect(DeleteModal)
     closeDeleteModal={[Function]}
     deleteElement={[Function]}
-    deleteModalContent="group.admin.user.modal.delete.title"
+    deleteModalContent="group.admin.user.modal.delete.content"
     deleteModalTitle="group.admin.user.modal.delete.title"
+    groupTitle="Comité de suvi"
     showDeleteModal={false}
   />
   <Row

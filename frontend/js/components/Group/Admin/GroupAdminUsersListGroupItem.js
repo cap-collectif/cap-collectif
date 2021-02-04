@@ -19,6 +19,7 @@ type Props = {
   groupId: string,
   user: GroupAdminUsersListGroupItem_user,
   dispatch: Dispatch,
+  groupTitle: string,
 };
 
 type State = {
@@ -52,8 +53,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
   };
 
   render() {
-    const { user, groupId, dispatch } = this.props;
-
+    const { user, groupId, dispatch, groupTitle } = this.props;
     const { showRemoveUserModal } = this.state;
 
     return (
@@ -65,7 +65,8 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
             onDelete(user.id, groupId, dispatch);
           }}
           deleteModalTitle="group.admin.user.modal.delete.title"
-          deleteModalContent="group.admin.user.modal.delete.title"
+          deleteModalContent="group.admin.user.modal.delete.content"
+          groupTitle={groupTitle}
         />
         <Row>
           <Col xs={3}>
