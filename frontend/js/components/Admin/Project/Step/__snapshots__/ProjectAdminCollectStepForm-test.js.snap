@@ -43,111 +43,169 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly 1`] = `
     </h5>
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-    <Field
-      clearable={false}
-      component={[Function]}
-      id="step-defaultSort"
-      inputClassName="fake-inputClassName"
-      label={
+    <ForwardRef
+      direction="row"
+      flex="1"
+    >
+      <ForwardRef
+        direction="row"
+        flex="1"
+        maxWidth="230px"
+      >
+        <Field
+          clearable={false}
+          component={[Function]}
+          id="step-defaultSort"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.opinion_type.default_filter"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          name="defaultSort"
+          options={
+            Array [
+              Object {
+                "label": "global.random",
+                "value": "RANDOM",
+              },
+              Object {
+                "label": "global.filter_f_comments",
+                "value": "COMMENTS",
+              },
+              Object {
+                "label": "global.filter_f_last",
+                "value": "LAST",
+              },
+              Object {
+                "label": "global.filter_f_old",
+                "value": "OLD",
+              },
+              Object {
+                "label": "step.sort.votes",
+                "value": "VOTES",
+              },
+              Object {
+                "label": "global.filter_f_least-votes",
+                "value": "LEAST_VOTE",
+              },
+              Object {
+                "label": "global.filter_f_cheap",
+                "value": "CHEAP",
+              },
+              Object {
+                "label": "global.filter_f_expensive",
+                "value": "EXPENSIVE",
+              },
+            ]
+          }
+          placeholder=" "
+        />
+      </ForwardRef>
+      <ForwardRef
+        direction="column"
+        maxWidth="175px"
+        ml={2}
+        width="100%"
+      >
         <FormattedMessage
-          id="admin.fields.opinion_type.default_filter"
+          id="project-visibility"
+          tagName="b"
           values={Object {}}
         />
-      }
-      labelClassName="control-label"
-      name="defaultSort"
-      options={
-        Array [
-          Object {
-            "label": "global.random",
-            "value": "RANDOM",
-          },
-          Object {
-            "label": "global.filter_f_comments",
-            "value": "COMMENTS",
-          },
-          Object {
-            "label": "global.filter_f_last",
-            "value": "LAST",
-          },
-          Object {
-            "label": "global.filter_f_old",
-            "value": "OLD",
-          },
-          Object {
-            "label": "step.sort.votes",
-            "value": "VOTES",
-          },
-          Object {
-            "label": "global.filter_f_least-votes",
-            "value": "LEAST_VOTE",
-          },
-          Object {
-            "label": "global.filter_f_cheap",
-            "value": "CHEAP",
-          },
-          Object {
-            "label": "global.filter_f_expensive",
-            "value": "EXPENSIVE",
-          },
-        ]
-      }
-      placeholder=" "
-    />
-    <ProjectAdminStepFormstyle__PrivacyContainer>
-      <FormattedMessage
-        id="project-visibility"
-        values={Object {}}
-      />
-      <DropdownButton
-        id="js-btn-visibility-step"
-        title={
-          <FormattedMessage
-            id="public"
-            values={Object {}}
-          />
-        }
+        <ForwardRef>
+          <DropdownButton
+            className="mt-15"
+            id="js-btn-visibility-step"
+            title={
+              <FormattedMessage
+                id="public"
+                values={Object {}}
+              />
+            }
+          >
+            <MenuItem
+              bsClass="dropdown"
+              disabled={false}
+              divider={false}
+              header={false}
+              id="public-collect"
+              onClick={[Function]}
+            >
+              <ProjectAdminStepFormstyle__PrivacyInfo>
+                <FormattedMessage
+                  id="public"
+                  values={Object {}}
+                />
+                <FormattedMessage
+                  id="everybody"
+                  values={Object {}}
+                />
+              </ProjectAdminStepFormstyle__PrivacyInfo>
+            </MenuItem>
+            <MenuItem
+              bsClass="dropdown"
+              disabled={false}
+              divider={false}
+              header={false}
+              id="private-collect"
+              onClick={[Function]}
+            >
+              <ProjectAdminStepFormstyle__PrivacyInfo>
+                <FormattedMessage
+                  id="global-restricted"
+                  values={Object {}}
+                />
+                <FormattedMessage
+                  id="authors-and-administrators"
+                  values={Object {}}
+                />
+              </ProjectAdminStepFormstyle__PrivacyInfo>
+            </MenuItem>
+          </DropdownButton>
+        </ForwardRef>
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      flex="1"
+    >
+      <Text
+        color="gray.900"
+        fontSize={14}
+        fontWeight={600}
       >
-        <MenuItem
-          bsClass="dropdown"
-          disabled={false}
-          divider={false}
-          header={false}
-          id="public-collect"
-          onClick={[Function]}
-        >
-          <ProjectAdminStepFormstyle__PrivacyInfo>
-            <FormattedMessage
-              id="public"
-              values={Object {}}
-            />
-            <FormattedMessage
-              id="everybody"
-              values={Object {}}
-            />
-          </ProjectAdminStepFormstyle__PrivacyInfo>
-        </MenuItem>
-        <MenuItem
-          bsClass="dropdown"
-          disabled={false}
-          divider={false}
-          header={false}
-          id="private-collect"
-          onClick={[Function]}
-        >
-          <ProjectAdminStepFormstyle__PrivacyInfo>
-            <FormattedMessage
-              id="global-restricted"
-              values={Object {}}
-            />
-            <FormattedMessage
-              id="authors-and-administrators"
-              values={Object {}}
-            />
-          </ProjectAdminStepFormstyle__PrivacyInfo>
-        </MenuItem>
-      </DropdownButton>
-    </ProjectAdminStepFormstyle__PrivacyContainer>
+        <FormattedMessage
+          id="proposal-news-label"
+          values={Object {}}
+        />
+      </Text>
+      <Text
+        color="gray.600"
+        fontSize={11}
+        lineHeight="16px"
+        mb={2}
+        mt={1}
+      >
+        <FormattedMessage
+          id="proposal-news-help-text"
+          values={Object {}}
+        />
+      </Text>
+      <Field
+        component={[Function]}
+        id="step-allowAuthorsToAddNews"
+        name="allowAuthorsToAddNews"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="allow-proposal-news"
+          values={Object {}}
+        />
+      </Field>
+    </ForwardRef>
   </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
   <Connect(StepVotesFields)
     isBudgetEnabled={true}

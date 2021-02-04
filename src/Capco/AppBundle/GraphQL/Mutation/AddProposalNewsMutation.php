@@ -10,7 +10,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalPostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Mailer\Message\AbstractMessage;
+use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,6 +36,7 @@ class AddProposalNewsMutation implements MutationInterface
     private TranslatorInterface $translator;
     private LocaleRepository $localeRepository;
     private Publisher $publisher;
+    private PostUrlResolver $urlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -44,7 +45,8 @@ class AddProposalNewsMutation implements MutationInterface
         LoggerInterface $logger,
         TranslatorInterface $translator,
         LocaleRepository $localeRepository,
-        Publisher $publisher
+        Publisher $publisher,
+        PostUrlResolver $urlResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -53,6 +55,7 @@ class AddProposalNewsMutation implements MutationInterface
         $this->translator = $translator;
         $this->localeRepository = $localeRepository;
         $this->publisher = $publisher;
+        $this->urlResolver = $urlResolver;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -66,7 +69,12 @@ class AddProposalNewsMutation implements MutationInterface
                 new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
             );
 
-            return ['proposalPost' => $proposalPost, 'errorCode' => null];
+            return [
+                'proposalPost' => $proposalPost,
+                'proposal' => $proposal,
+                'errorCode' => null,
+                'postURL' => $this->urlResolver->__invoke($proposalPost),
+            ];
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }
@@ -130,7 +138,11 @@ class AddProposalNewsMutation implements MutationInterface
                 }
                 if (isset($values['translations'][$availableLocale]['body'])) {
                     $translation->setBody(
-                        AbstractMessage::escape($values['translations'][$availableLocale]['body'])
+                        htmlentities(
+                            $values['translations'][$availableLocale]['body'],
+                            ENT_QUOTES,
+                            'UTF-8'
+                        )
                     );
                 }
                 if (isset($values['translations'][$availableLocale]['abstract'])) {

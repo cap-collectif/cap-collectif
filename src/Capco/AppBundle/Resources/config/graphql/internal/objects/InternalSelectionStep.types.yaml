@@ -25,6 +25,9 @@ InternalSelectionStep:
             allowingProgressSteps:
                 type: 'Boolean!'
                 description: 'Only one selection step inside a project can have realisation steps, true if this one'
+            allowAuthorsToAddNews:
+                type: 'Boolean!'
+                description: 'Whether or not authors can add news on proposals selected in this step'
             proposals:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
             proposalsHidden:

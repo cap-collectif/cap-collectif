@@ -63,6 +63,8 @@ ProjectStepInput:
             # SelectionStep fields
             proposalsHidden:
                 type: 'Boolean'
+            allowAuthorsToAddNews:
+                type: 'Boolean'
             allowingProgressSteps:
                 type: 'Boolean'
             # statuses and defaultStatus are used only by CollectStep and SelectionStep

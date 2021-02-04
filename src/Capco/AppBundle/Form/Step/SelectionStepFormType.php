@@ -36,6 +36,7 @@ class SelectionStepFormType extends AbstractStepFormType
             ->add('defaultStatus')
             ->add('defaultSort')
             ->add('proposalsHidden')
+            ->add('allowAuthorsToAddNews')
             ->add('mainView', ChoiceType::class, [
                 'choices' => ViewConfiguration::ALL,
             ]);

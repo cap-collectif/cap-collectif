@@ -8,6 +8,7 @@ final class ProposalNewsDeleteAdminMessage extends AbstractAdminMessage
 {
     public const SUBJECT = 'notification.proposal_activity.delete.subject';
     public const TEMPLATE = '@CapcoMail/Proposal/notifyProposalNewsAdmin.html.twig';
+    public const FOOTER = '';
 
     public static function getMyTemplateVars($element, array $params): array
     {
@@ -18,13 +19,14 @@ final class ProposalNewsDeleteAdminMessage extends AbstractAdminMessage
             'bodyTrad' => 'notification.proposal_activity.delete.body',
             'titleTrad' => 'notification.proposal_activity.delete.subject',
             'postURL' => null,
+            'baseUrl' => $params['baseURL'],
         ];
     }
 
     public static function getMySubjectVars($element, array $params): array
     {
         return [
-            'project' => self::escape($params['projectName']),
+            'projectName' => self::escape($params['projectName']),
         ];
     }
 }

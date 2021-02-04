@@ -3,15 +3,16 @@
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Resolver\UrlResolver;
 use Psr\Container\ContainerInterface;
 
 final class ProposalNewsCreateAdminMessage extends AbstractAdminMessage
 {
     public const SUBJECT = 'proposal_news.subject';
     public const TEMPLATE = '@CapcoMail/Proposal/notifyProposalNewsAdmin.html.twig';
+    public const FOOTER = '';
 
     public static function getMyTemplateVars(Post $post, array $params): array
     {
@@ -25,7 +26,8 @@ final class ProposalNewsCreateAdminMessage extends AbstractAdminMessage
                     ->getDisplayName()
             ),
             'proposalName' => self::escape($proposal->getTitle()),
-            'postUrl' => $params['postURL'],
+            'postURL' => $params['postURL'],
+            'baseUrl' => $params['baseURL'],
             'projectName' => self::escape(
                 $proposal
                     ->getProposalForm()
@@ -46,8 +48,8 @@ final class ProposalNewsCreateAdminMessage extends AbstractAdminMessage
     public static function mockData(ContainerInterface $container)
     {
         /** @var Post $post */
-        $post = $container->get(PostRepository::class)->find('post17');
-        $postUrl = $container->get(UrlResolver::class)->getObjectUrl($post);
+        $post = $container->get(PostRepository::class)->find('post18');
+        $postUrl = $container->get(PostUrlResolver::class)->__invoke($post);
 
         return [
             'postAuthor' => $post
@@ -73,5 +75,13 @@ final class ProposalNewsCreateAdminMessage extends AbstractAdminMessage
             'bodyTrad' => 'notification.proposal_activity.create.body',
             'titleTrad' => 'notification.proposal_activity.create.subject',
         ];
+    }
+
+    public static function getMyFooterVars(
+        string $recipientEmail = '',
+        string $siteName = '',
+        string $siteURL = ''
+    ): array {
+        return [];
     }
 }

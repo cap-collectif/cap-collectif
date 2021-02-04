@@ -85,6 +85,7 @@ export const ICON_NAME = {
   bell: 'bell',
   stamp: 'stamp',
   newspaper: 'newspaper',
+  newspaper2: 'newspaper2',
   pin2: 'pin2',
   folder: 'folder',
   micro: 'micro',
@@ -378,6 +379,8 @@ const getIcon = name => {
       return <Icons.Stamp />;
     case 'newspaper':
       return <Icons.Newspaper />;
+    case 'newspaper2':
+      return <Icons.Newspaper2 />;
     case 'pin2':
       return <Icons.Pin2 />;
     case 'folder':

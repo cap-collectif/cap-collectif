@@ -37,7 +37,7 @@ export const ProposalPageBlog = ({ proposal }: Props) => {
           proposal.news.edges
             .filter(Boolean)
             .filter(edge => edge?.node?.title !== 'Réponse officielle')
-            .map((edge, index) => <NewsCard post={edge.node} key={index} withContent />)}
+            .map((edge, index) => <NewsCard post={edge.node || null} key={index} withContent />)}
       </ul>
     </ProposalPageBlogContainer>
   );

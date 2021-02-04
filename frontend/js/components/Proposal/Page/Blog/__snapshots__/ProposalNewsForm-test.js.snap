@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalNewsForm /> should render correctly 1`] = `
+<customForm
+  id="ProposalNewsForm"
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    id="proposal_news_title"
+    label={
+      <FormattedMessage
+        id="global.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    required={true}
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="proposal_news_abstract"
+    label={
+      <span>
+        <FormattedMessage
+          id="proposal.summary"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.optional"
+            values={Object {}}
+          />
+        </span>
+      </span>
+    }
+    name="abstract"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="proposal_news_body"
+    label={
+      <FormattedMessage
+        id="proposal-news-body-field"
+        values={Object {}}
+      />
+    }
+    name="body"
+    type="editor"
+  />
+  <Field
+    component={[Function]}
+    id="proposal_news_media"
+    label={
+      <FormattedMessage
+        id="cover-image"
+        values={Object {}}
+      />
+    }
+    name="media"
+    type="image"
+  />
+</customForm>
+`;
+
+exports[`<ProposalNewsForm /> should render correctly with post 1`] = `
+<customForm
+  id="ProposalNewsForm"
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    id="proposal_news_title"
+    label={
+      <FormattedMessage
+        id="global.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    required={true}
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="proposal_news_abstract"
+    label={
+      <span>
+        <FormattedMessage
+          id="proposal.summary"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.optional"
+            values={Object {}}
+          />
+        </span>
+      </span>
+    }
+    name="abstract"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="proposal_news_body"
+    label={
+      <FormattedMessage
+        id="proposal-news-body-field"
+        values={Object {}}
+      />
+    }
+    name="body"
+    type="editor"
+  />
+  <Field
+    component={[Function]}
+    id="proposal_news_media"
+    label={
+      <FormattedMessage
+        id="cover-image"
+        values={Object {}}
+      />
+    }
+    name="media"
+    type="image"
+  />
+</customForm>
+`;

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
@@ -97,12 +98,15 @@ class BlogController extends Controller
      */
     public function showAction(Request $request, string $slug)
     {
+        /** @var Post $post */
         $post = $this->get(PostRepository::class)->getPublishedBySlug($slug);
 
         if (!$post) {
             throw new NotFoundHttpException('Could not find a published article for this slug.');
         }
 
-        return ['post' => $post];
+        $viewer = $this->getUser();
+
+        return ['post' => $post, 'viewerDidAuthor' => $viewer ? $post->isAuthor($viewer) : false];
     }
 }

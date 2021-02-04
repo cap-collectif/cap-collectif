@@ -23,7 +23,12 @@ final class ProposalCreateAdminMessage extends AbstractAdminMessage
             'proposalUrl' => $params['proposalURL'],
             'proposalUrlBack' => $params['adminURL'],
             'project' => self::escape(
-                $proposal->getProposalForm()->getStep()->getProject()->getTitle())
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
         ];
     }
 
@@ -32,8 +37,12 @@ final class ProposalCreateAdminMessage extends AbstractAdminMessage
         return [
             'username' => self::escape($proposal->getAuthor()->getDisplayName()),
             'project' => self::escape(
-                $proposal->getProposalForm()->getStep()->getProject()->getTitle()
-            )
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
         ];
     }
 }

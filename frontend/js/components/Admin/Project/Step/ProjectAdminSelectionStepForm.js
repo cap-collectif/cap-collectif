@@ -14,6 +14,8 @@ import type { Dispatch } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import StepVotesFields from './StepVotesFields';
 import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
 
 type Props = {|
   requirements?: Array<Requirement>,
@@ -73,36 +75,57 @@ export const ProjectAdminSelectionStepForm = ({
       />
       {renderSubSection('global.proposals')}
       <ProjectSmallFieldsContainer>
-        <Field
-          type="radio-buttons"
-          id="step-proposalsHidden"
-          name="proposalsHidden"
-          label={<FormattedMessage id="global.updated.date" />}
-          component={component}>
-          <ToggleButton
-            id="step_now"
-            onClick={() => dispatch(change(formName, 'proposalsHidden', 0))}
-            value={0}>
-            <FormattedMessage id="global.immediate" />
-          </ToggleButton>
-          <ToggleButton
-            id="step_start"
-            value={1}
-            onClick={() => dispatch(change(formName, 'proposalsHidden', 1))}>
-            <FormattedMessage id="step_start" />
-          </ToggleButton>
-        </Field>
-        <Field
-          labelClassName="control-label"
-          inputClassName="fake-inputClassName"
-          component={select}
-          name="defaultSort"
-          id="step-defaultSort"
-          placeholder=" "
-          label={<FormattedMessage id="admin.fields.opinion_type.default_filter" />}
-          options={renderSortValues(intl)}
-          clearable={false}
-        />
+        <Flex flex="1" direction="row">
+          <Flex flex="1" direction="row" maxWidth="230px">
+            <Field
+              type="radio-buttons"
+              id="step-proposalsHidden"
+              name="proposalsHidden"
+              label={<FormattedMessage id="global.updated.date" />}
+              component={component}>
+              <ToggleButton
+                id="step_now"
+                onClick={() => dispatch(change(formName, 'proposalsHidden', 0))}
+                value={0}>
+                <FormattedMessage id="global.immediate" />
+              </ToggleButton>
+              <ToggleButton
+                id="step_start"
+                value={1}
+                onClick={() => dispatch(change(formName, 'proposalsHidden', 1))}>
+                <FormattedMessage id="step_start" />
+              </ToggleButton>
+            </Field>
+          </Flex>
+          <Flex ml={2} width="100%" maxWidth="175px">
+            <Field
+              labelClassName="control-label"
+              inputClassName="fake-inputClassName"
+              component={select}
+              name="defaultSort"
+              id="step-defaultSort"
+              placeholder=" "
+              label={<FormattedMessage id="admin.fields.opinion_type.default_filter" />}
+              options={renderSortValues(intl)}
+              clearable={false}
+            />
+          </Flex>
+        </Flex>
+        <Flex direction="column" flex="1">
+          <Text color="gray.900" fontSize={14} fontWeight={600}>
+            <FormattedMessage id="proposal-news-label" />
+          </Text>
+          <Text color="gray.600" mb={2} mt={1} lineHeight="16px" fontSize={11}>
+            <FormattedMessage id="proposal-news-help-text" />
+          </Text>
+          <Field
+            component={component}
+            type="checkbox"
+            children={<FormattedMessage id="allow-proposal-news" />}
+            name="allowAuthorsToAddNews"
+            id="step-allowAuthorsToAddNews"
+          />
+        </Flex>
       </ProjectSmallFieldsContainer>
       <Field
         component={toggle}

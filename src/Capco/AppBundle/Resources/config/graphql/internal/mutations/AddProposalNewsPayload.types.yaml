@@ -9,3 +9,9 @@ AddProposalNewsPayload:
             errorCode:
                 type: 'ProposalNewsErrorCode'
                 description: 'An unsuccessful mutation will return an error message'
+            proposal:
+                type: 'InternalProposal'
+                description: 'the proposal attached to the news'
+            postURL:
+                type: 'URI'
+                description: 'the URL of proposalNews posted'

@@ -25,90 +25,145 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
     </h5>
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-    <Field
-      component={[Function]}
-      id="step-proposalsHidden"
-      label={
-        <FormattedMessage
-          id="global.updated.date"
-          values={Object {}}
-        />
-      }
-      name="proposalsHidden"
-      type="radio-buttons"
+    <ForwardRef
+      direction="row"
+      flex="1"
     >
-      <ToggleButton
-        id="step_now"
-        onClick={[Function]}
-        value={0}
+      <ForwardRef
+        direction="row"
+        flex="1"
+        maxWidth="230px"
+      >
+        <Field
+          component={[Function]}
+          id="step-proposalsHidden"
+          label={
+            <FormattedMessage
+              id="global.updated.date"
+              values={Object {}}
+            />
+          }
+          name="proposalsHidden"
+          type="radio-buttons"
+        >
+          <ToggleButton
+            id="step_now"
+            onClick={[Function]}
+            value={0}
+          >
+            <FormattedMessage
+              id="global.immediate"
+              values={Object {}}
+            />
+          </ToggleButton>
+          <ToggleButton
+            id="step_start"
+            onClick={[Function]}
+            value={1}
+          >
+            <FormattedMessage
+              id="step_start"
+              values={Object {}}
+            />
+          </ToggleButton>
+        </Field>
+      </ForwardRef>
+      <ForwardRef
+        maxWidth="175px"
+        ml={2}
+        width="100%"
+      >
+        <Field
+          clearable={false}
+          component={[Function]}
+          id="step-defaultSort"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.opinion_type.default_filter"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          name="defaultSort"
+          options={
+            Array [
+              Object {
+                "label": "global.random",
+                "value": "RANDOM",
+              },
+              Object {
+                "label": "global.filter_f_comments",
+                "value": "COMMENTS",
+              },
+              Object {
+                "label": "global.filter_f_last",
+                "value": "LAST",
+              },
+              Object {
+                "label": "global.filter_f_old",
+                "value": "OLD",
+              },
+              Object {
+                "label": "step.sort.votes",
+                "value": "VOTES",
+              },
+              Object {
+                "label": "global.filter_f_least-votes",
+                "value": "LEAST_VOTE",
+              },
+              Object {
+                "label": "global.filter_f_cheap",
+                "value": "CHEAP",
+              },
+              Object {
+                "label": "global.filter_f_expensive",
+                "value": "EXPENSIVE",
+              },
+            ]
+          }
+          placeholder=" "
+        />
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      flex="1"
+    >
+      <Text
+        color="gray.900"
+        fontSize={14}
+        fontWeight={600}
       >
         <FormattedMessage
-          id="global.immediate"
+          id="proposal-news-label"
           values={Object {}}
         />
-      </ToggleButton>
-      <ToggleButton
-        id="step_start"
-        onClick={[Function]}
-        value={1}
+      </Text>
+      <Text
+        color="gray.600"
+        fontSize={11}
+        lineHeight="16px"
+        mb={2}
+        mt={1}
       >
         <FormattedMessage
-          id="step_start"
+          id="proposal-news-help-text"
           values={Object {}}
         />
-      </ToggleButton>
-    </Field>
-    <Field
-      clearable={false}
-      component={[Function]}
-      id="step-defaultSort"
-      inputClassName="fake-inputClassName"
-      label={
+      </Text>
+      <Field
+        component={[Function]}
+        id="step-allowAuthorsToAddNews"
+        name="allowAuthorsToAddNews"
+        type="checkbox"
+      >
         <FormattedMessage
-          id="admin.fields.opinion_type.default_filter"
+          id="allow-proposal-news"
           values={Object {}}
         />
-      }
-      labelClassName="control-label"
-      name="defaultSort"
-      options={
-        Array [
-          Object {
-            "label": "global.random",
-            "value": "RANDOM",
-          },
-          Object {
-            "label": "global.filter_f_comments",
-            "value": "COMMENTS",
-          },
-          Object {
-            "label": "global.filter_f_last",
-            "value": "LAST",
-          },
-          Object {
-            "label": "global.filter_f_old",
-            "value": "OLD",
-          },
-          Object {
-            "label": "step.sort.votes",
-            "value": "VOTES",
-          },
-          Object {
-            "label": "global.filter_f_least-votes",
-            "value": "LEAST_VOTE",
-          },
-          Object {
-            "label": "global.filter_f_cheap",
-            "value": "CHEAP",
-          },
-          Object {
-            "label": "global.filter_f_expensive",
-            "value": "EXPENSIVE",
-          },
-        ]
-      }
-      placeholder=" "
-    />
+      </Field>
+    </ForwardRef>
   </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
   <Field
     component={[Function]}
@@ -239,90 +294,145 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
     </h5>
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-    <Field
-      component={[Function]}
-      id="step-proposalsHidden"
-      label={
-        <FormattedMessage
-          id="global.updated.date"
-          values={Object {}}
-        />
-      }
-      name="proposalsHidden"
-      type="radio-buttons"
+    <ForwardRef
+      direction="row"
+      flex="1"
     >
-      <ToggleButton
-        id="step_now"
-        onClick={[Function]}
-        value={0}
+      <ForwardRef
+        direction="row"
+        flex="1"
+        maxWidth="230px"
+      >
+        <Field
+          component={[Function]}
+          id="step-proposalsHidden"
+          label={
+            <FormattedMessage
+              id="global.updated.date"
+              values={Object {}}
+            />
+          }
+          name="proposalsHidden"
+          type="radio-buttons"
+        >
+          <ToggleButton
+            id="step_now"
+            onClick={[Function]}
+            value={0}
+          >
+            <FormattedMessage
+              id="global.immediate"
+              values={Object {}}
+            />
+          </ToggleButton>
+          <ToggleButton
+            id="step_start"
+            onClick={[Function]}
+            value={1}
+          >
+            <FormattedMessage
+              id="step_start"
+              values={Object {}}
+            />
+          </ToggleButton>
+        </Field>
+      </ForwardRef>
+      <ForwardRef
+        maxWidth="175px"
+        ml={2}
+        width="100%"
+      >
+        <Field
+          clearable={false}
+          component={[Function]}
+          id="step-defaultSort"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.opinion_type.default_filter"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          name="defaultSort"
+          options={
+            Array [
+              Object {
+                "label": "global.random",
+                "value": "RANDOM",
+              },
+              Object {
+                "label": "global.filter_f_comments",
+                "value": "COMMENTS",
+              },
+              Object {
+                "label": "global.filter_f_last",
+                "value": "LAST",
+              },
+              Object {
+                "label": "global.filter_f_old",
+                "value": "OLD",
+              },
+              Object {
+                "label": "step.sort.votes",
+                "value": "VOTES",
+              },
+              Object {
+                "label": "global.filter_f_least-votes",
+                "value": "LEAST_VOTE",
+              },
+              Object {
+                "label": "global.filter_f_cheap",
+                "value": "CHEAP",
+              },
+              Object {
+                "label": "global.filter_f_expensive",
+                "value": "EXPENSIVE",
+              },
+            ]
+          }
+          placeholder=" "
+        />
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      flex="1"
+    >
+      <Text
+        color="gray.900"
+        fontSize={14}
+        fontWeight={600}
       >
         <FormattedMessage
-          id="global.immediate"
+          id="proposal-news-label"
           values={Object {}}
         />
-      </ToggleButton>
-      <ToggleButton
-        id="step_start"
-        onClick={[Function]}
-        value={1}
+      </Text>
+      <Text
+        color="gray.600"
+        fontSize={11}
+        lineHeight="16px"
+        mb={2}
+        mt={1}
       >
         <FormattedMessage
-          id="step_start"
+          id="proposal-news-help-text"
           values={Object {}}
         />
-      </ToggleButton>
-    </Field>
-    <Field
-      clearable={false}
-      component={[Function]}
-      id="step-defaultSort"
-      inputClassName="fake-inputClassName"
-      label={
+      </Text>
+      <Field
+        component={[Function]}
+        id="step-allowAuthorsToAddNews"
+        name="allowAuthorsToAddNews"
+        type="checkbox"
+      >
         <FormattedMessage
-          id="admin.fields.opinion_type.default_filter"
+          id="allow-proposal-news"
           values={Object {}}
         />
-      }
-      labelClassName="control-label"
-      name="defaultSort"
-      options={
-        Array [
-          Object {
-            "label": "global.random",
-            "value": "RANDOM",
-          },
-          Object {
-            "label": "global.filter_f_comments",
-            "value": "COMMENTS",
-          },
-          Object {
-            "label": "global.filter_f_last",
-            "value": "LAST",
-          },
-          Object {
-            "label": "global.filter_f_old",
-            "value": "OLD",
-          },
-          Object {
-            "label": "step.sort.votes",
-            "value": "VOTES",
-          },
-          Object {
-            "label": "global.filter_f_least-votes",
-            "value": "LEAST_VOTE",
-          },
-          Object {
-            "label": "global.filter_f_cheap",
-            "value": "CHEAP",
-          },
-          Object {
-            "label": "global.filter_f_expensive",
-            "value": "EXPENSIVE",
-          },
-        ]
-      }
-      placeholder=" "
-    />
+      </Field>
+    </ForwardRef>
   </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
   <Field
     component={[Function]}

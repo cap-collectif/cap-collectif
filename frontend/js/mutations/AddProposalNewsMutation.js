@@ -16,6 +16,10 @@ const mutation = graphql`
         abstract
       }
       errorCode
+      postURL
+      proposal {
+        ...ProposalPageNews_proposal @arguments(isAuthenticated: true)
+      }
     }
   }
 `;

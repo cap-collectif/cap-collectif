@@ -66,6 +66,7 @@ import FooterApp from '../js/startup/FooterApp';
 import CalendarApp from '../js/startup/CalendarApp';
 import EngagementListApp from '../js/startup/EngagementListApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
+import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
 
 const emptyFunction = () => {};
 
@@ -78,6 +79,7 @@ moment.locale(global.locale);
 
 ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
+  ProposalNewsHeaderButtonsApp,
   AccountProfileFollowingsApp,
   RegistrationAdminApp,
   ShieldApp,

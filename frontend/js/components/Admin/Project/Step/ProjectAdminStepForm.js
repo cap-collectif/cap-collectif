@@ -73,6 +73,7 @@ type Props = {|
     isTresholdEnabled?: ?boolean,
     isLimitEnabled?: ?boolean,
     allowingProgressSteps?: ?boolean,
+    allowAuthorsToAddNews?: ?boolean,
     nbVersionsToDisplay?: ?number,
     nbOpinionsToDisplay?: ?number,
     defaultStatus?: ?string,
@@ -148,6 +149,7 @@ export type FormValues = {|
   isTresholdEnabled?: ?boolean,
   isLimitEnabled?: ?boolean,
   allowingProgressSteps?: ?boolean,
+  allowAuthorsToAddNews?: ?boolean,
   nbVersionsToDisplay?: ?number,
   nbOpinionsToDisplay?: ?number,
   defaultStatus?: ?string,
@@ -463,6 +465,7 @@ export function ProjectAdminStepForm({
               votesMin={step?.votesMin || 1}
               votesLimit={step?.votesLimit || null}
               votesRanking={step?.votesRanking || false}
+              allowAuthorsToAddNews={step.allowAuthorsToAddNews || false}
               statuses={statuses}
               votable={votable}
               requirements={requirements}
@@ -482,6 +485,7 @@ export function ProjectAdminStepForm({
               votesMin={step?.votesMin || 1}
               votesLimit={step?.votesLimit || null}
               votesRanking={step?.votesRanking || false}
+              allowAuthorsToAddNews={step?.allowAuthorsToAddNews || false}
               statuses={statuses}
               votable={votable}
               requirements={requirements}
@@ -674,6 +678,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       votesLimit: step?.votesLimit || null,
       votesRanking: step?.votesRanking || false,
       voteThreshold: step?.voteThreshold || null,
+      allowAuthorsToAddNews: step?.allowAuthorsToAddNews || false,
       budget: step?.budget || null,
       isBudgetEnabled: step?.isBudgetEnabled || false,
       isLimitEnabled: step?.isLimitEnabled || false,

@@ -35,7 +35,7 @@ exports[`<ArgumentCreate /> renders correctly 1`] = `
         onClick={[Function]}
       >
         <FormattedMessage
-          id="global.publish"
+          id="global.send"
           values={Object {}}
         />
       </Button>

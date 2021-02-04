@@ -4,12 +4,14 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
@@ -65,7 +67,8 @@ class Proposal implements
     SoftDeleteable,
     DisplayableInBOInterface,
     DraftableInterface,
-    ReportableInterface
+    ReportableInterface,
+    Authorable
 {
     use AddressableTrait;
     use CommentableWithoutCounterTrait;
@@ -1514,5 +1517,33 @@ class Proposal implements
         }
 
         return $this;
+    }
+
+    public function isProposalAuthorAllowedToAddNews(): bool
+    {
+        $steps = $this->getProject()->getSteps();
+        $selectionSteps = new ArrayCollection($this->getSelectionSteps());
+        // @var ProjectAbstractStep $step
+        foreach ($steps as $pas) {
+            $step = $pas->getStep();
+
+            if (
+                $step instanceof CollectStep &&
+                $step->isAllowAuthorsToAddNews() &&
+                $step->isOpen()
+            ) {
+                return true;
+            }
+            if (
+                $step instanceof SelectionStep &&
+                $selectionSteps->contains($step) &&
+                $step->isAllowAuthorsToAddNews() &&
+                $step->isOpen()
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

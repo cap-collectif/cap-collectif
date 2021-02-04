@@ -326,6 +326,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "allowAuthorsToAddNews",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "defaultSort",
                                 "storageKey": null,
                               },
@@ -730,6 +737,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "args": null,
                                 "kind": "ScalarField",
                                 "name": "allowingProgressSteps",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "allowAuthorsToAddNews",
                                 "storageKey": null,
                               },
                               Object {
@@ -1748,7 +1762,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "56a3e9d804fa0cae8661050196076a56",
+        "cacheID": "90dadb8adf66a12a15d8aee722c08b41",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1875,6 +1889,7 @@ fragment ProjectAdminForm_project on Project {
       nbVersionsToDisplay
     }
     ... on CollectStep {
+      allowAuthorsToAddNews
       defaultSort
       mainView
       proposalForm: form {
@@ -1939,6 +1954,7 @@ fragment ProjectAdminForm_project on Project {
       defaultSort
       proposalsHidden
       allowingProgressSteps
+      allowAuthorsToAddNews
       budget
       mainView
       requirements {
@@ -2493,6 +2509,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "allowAuthorsToAddNews",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "defaultSort",
                                 "storageKey": null,
                               },
@@ -2897,6 +2920,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "args": null,
                                 "kind": "ScalarField",
                                 "name": "allowingProgressSteps",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "allowAuthorsToAddNews",
                                 "storageKey": null,
                               },
                               Object {
@@ -3915,7 +3945,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "56a3e9d804fa0cae8661050196076a56",
+        "cacheID": "90dadb8adf66a12a15d8aee722c08b41",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4042,6 +4072,7 @@ fragment ProjectAdminForm_project on Project {
       nbVersionsToDisplay
     }
     ... on CollectStep {
+      allowAuthorsToAddNews
       defaultSort
       mainView
       proposalForm: form {
@@ -4106,6 +4137,7 @@ fragment ProjectAdminForm_project on Project {
       defaultSort
       proposalsHidden
       allowingProgressSteps
+      allowAuthorsToAddNews
       budget
       mainView
       requirements {

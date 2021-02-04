@@ -11,6 +11,7 @@ InternalProposal:
         - WithFollowers
         - UniformResourceLocatable
         - UniformResourceAdminLocatable
+        - Authorable
     config:
         name: Proposal
         interfaces:
@@ -252,3 +253,5 @@ InternalProposal:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalTipsMeeeResolver", [value, args])'
             selections:
                 type: '[InternalProposalSelection!]!'
+            isProposalAuthorAllowedToAddNews:
+                type: 'Boolean!'

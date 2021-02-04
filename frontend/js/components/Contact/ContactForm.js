@@ -141,7 +141,7 @@ export class ContactForm extends React.Component<Props> {
           )}
           <SubmitButton
             id="confirm-opinion-create"
-            label={submitting ? 'global.loading' : 'global.publish'}
+            label={submitting ? 'global.loading' : 'global.send'}
             disabled={submitting}
             style={{ width: '100%' }}
             onSubmit={() => {

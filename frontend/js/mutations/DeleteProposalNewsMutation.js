@@ -11,6 +11,7 @@ const mutation = graphql`
   mutation DeleteProposalNewsMutation($input: DeleteProposalNewsInput!) {
     deleteProposalNews(input: $input) {
       postId @deleteRecord
+      proposalUrl
       errorCode
     }
   }

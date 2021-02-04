@@ -9,7 +9,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         endAt: <identity((new \DateTime('2024-01-01')))>
         voteType: 0
         defaultStatus: '@status1'
-        allowAuthorsToAddNews: true
     collectStepWithVote:
         id: collectStepWithVote
         title: Dépôt avec vote
@@ -176,6 +175,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         endAt: <identity((new \DateTime('2021-01-04 12:00:00')))>
         voteType: 0 # vote is disabled
         defaultStatus: '@statusIdfCollect1'
+        allowAuthorsToAddNews: true
     collectstepFrench:
         id: collectstepfr
         title: Collecte des propositions pour la France
@@ -210,3 +210,4 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: <stripslashes('\<p>\')>Comment participer ? <stripslashes('\</br>\')>Vous êtes cafetier <stripslashes('\:\')> suivez les instructions du formulaire pour pouvoir recevoir des dons pour votre établissement.<stripslashes('\</br>\')> Vous êtes citoyen.ne <stripslashes('\:\')> déposez un don entre 5 et 100 € pour soutenir votre ou vos cafés préféré.s<stripslashes('\</p>\')>
         startAt: <identity((new \DateTime('2020-10-16')))>
         endAt: <identity((new \DateTime('2021-10-16')))>
+        allowAuthorsToAddNews: true

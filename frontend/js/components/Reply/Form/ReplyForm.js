@@ -277,7 +277,7 @@ export class ReplyForm extends React.Component<Props> {
                   id={`${form}-submit-create-reply`}
                   bsStyle="info"
                   disabled={(!isDraft && pristine) || invalid || submitting || disabled}
-                  label={submitting ? 'global.loading' : 'global.publish'}
+                  label={submitting ? 'global.loading' : 'global.send'}
                   onSubmit={() => dispatch(changeRedux(form, 'draft', false))}
                 />
               </ButtonGroup>

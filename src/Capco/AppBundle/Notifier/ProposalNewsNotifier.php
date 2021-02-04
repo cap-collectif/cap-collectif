@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsUpdateAdminMessage;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
-use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +19,7 @@ class ProposalNewsNotifier extends BaseNotifier
 {
     private PostRepository $postRepository;
     private EntityManagerInterface $entityManager;
-    private UrlResolver $urlResolver;
+    private PostUrlResolver $urlResolver;
     private UserRepository $userRepository;
 
     public function __construct(
@@ -29,7 +29,7 @@ class ProposalNewsNotifier extends BaseNotifier
         PostRepository $postRepository,
         LocaleResolver $localeResolver,
         EntityManagerInterface $entityManager,
-        UrlResolver $urlResolver,
+        PostUrlResolver $urlResolver,
         UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
@@ -45,12 +45,13 @@ class ProposalNewsNotifier extends BaseNotifier
         $adminsSubscribedToProposalNews = $this->userRepository->findBy([
             'subscribedToProposalNews' => true,
         ]);
+
         foreach ($adminsSubscribedToProposalNews as $admin) {
             $this->mailer->createAndSendMessage(
                 ProposalNewsCreateAdminMessage::class,
                 $proposalNews,
                 [
-                    'postURL' => $this->urlResolver->getObjectUrl($proposalNews, true),
+                    'postURL' => $this->urlResolver->__invoke($proposalNews),
                 ],
                 $admin
             );
@@ -64,12 +65,13 @@ class ProposalNewsNotifier extends BaseNotifier
         $adminsSubscribedToProposalNews = $this->userRepository->findBy([
             'subscribedToProposalNews' => true,
         ]);
+
         foreach ($adminsSubscribedToProposalNews as $admin) {
             $this->mailer->createAndSendMessage(
                 ProposalNewsUpdateAdminMessage::class,
                 $proposalNews,
                 [
-                    'postURL' => $this->urlResolver->getObjectUrl($proposalNews, true),
+                    'postURL' => $this->urlResolver->__invoke($proposalNews),
                 ],
                 $admin
             );

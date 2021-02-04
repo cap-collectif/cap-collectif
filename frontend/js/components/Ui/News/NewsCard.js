@@ -11,7 +11,7 @@ import DatesInterval from '~/components/Utils/DatesInterval';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 
 type Props = {|
-  post: NewsCard_post,
+  post: ?NewsCard_post,
   withContent?: boolean,
 |};
 

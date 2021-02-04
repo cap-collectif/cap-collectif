@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Diff;
@@ -50,10 +49,10 @@ class ProjectStepPersister
     ];
 
     private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private ProjectAbstractStepRepository $pasRepository;
     private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
     private AbstractStepRepository $repository;
+    private ProjectAbstractStepRepository $pasRepository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -81,6 +80,9 @@ class ProjectStepPersister
             unset($step['id']);
             if (!$entity instanceof CollectStep && !$entity instanceof SelectionStep) {
                 unset($step['votesMin']);
+                if (isset($step['allowAuthorsToAddNews'])) {
+                    unset($step['allowAuthorsToAddNews']);
+                }
             }
             if (
                 'collect' === $step['type'] ||

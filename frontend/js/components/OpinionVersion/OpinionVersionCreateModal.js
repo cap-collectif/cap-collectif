@@ -56,7 +56,7 @@ class OpinionVersionCreateModal extends React.Component<Props> {
             {submitting ? (
               <FormattedMessage id="global.loading" />
             ) : (
-              <FormattedMessage id="global.publish" />
+              <FormattedMessage id="global.send" />
             )}
           </Button>
         </Modal.Footer>

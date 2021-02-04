@@ -24,7 +24,7 @@ type Props = {
 
 class SubmitButton extends React.Component<Props> {
   static defaultProps = {
-    label: 'global.publish',
+    label: 'global.send',
     bsStyle: 'primary',
     className: '',
     style: {},

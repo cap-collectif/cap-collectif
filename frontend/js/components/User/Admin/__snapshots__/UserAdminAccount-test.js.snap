@@ -121,6 +121,18 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
           />
         </div>
       </Field>
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="isSubscribedToProposalNews"
+        name="isSubscribedToProposalNews"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposals-actualities"
+          values={Object {}}
+        />
+      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

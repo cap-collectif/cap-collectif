@@ -2621,6 +2621,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "isProposalAuthorAllowedToAddNews",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "User",
                       "kind": "LinkedField",
                       "name": "author",
@@ -3200,6 +3207,127 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                      ],
+                    },
+                    Object {
+                      "condition": "isAuthenticated",
+                      "kind": "Condition",
+                      "passingValue": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerDidAuthor",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": Array [
+                            Object {
+                              "kind": "Variable",
+                              "name": "step",
+                              "variableName": "stepId",
+                            },
+                          ],
+                          "kind": "ScalarField",
+                          "name": "viewerHasVote",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": Array [
+                            Object {
+                              "kind": "Variable",
+                              "name": "step",
+                              "variableName": "stepId",
+                            },
+                          ],
+                          "concreteType": "ProposalVote",
+                          "kind": "LinkedField",
+                          "name": "viewerVote",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "ranking",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isPublishable",
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "published",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "notPublishedReason",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "Publishable",
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerHasReport",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerIsFollowing",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerFollowingConfiguration",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerCanDecide",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerCanAnalyse",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "viewerCanEvaluate",
                           "storageKey": null,
                         },
                       ],
@@ -4048,120 +4176,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         },
                       ],
                       "type": "Commentable",
-                    },
-                    Object {
-                      "condition": "isAuthenticated",
-                      "kind": "Condition",
-                      "passingValue": true,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": Array [
-                            Object {
-                              "kind": "Variable",
-                              "name": "step",
-                              "variableName": "stepId",
-                            },
-                          ],
-                          "kind": "ScalarField",
-                          "name": "viewerHasVote",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": Array [
-                            Object {
-                              "kind": "Variable",
-                              "name": "step",
-                              "variableName": "stepId",
-                            },
-                          ],
-                          "concreteType": "ProposalVote",
-                          "kind": "LinkedField",
-                          "name": "viewerVote",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "ranking",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "abstractKey": "__isPublishable",
-                              "kind": "InlineFragment",
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "published",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "notPublishedReason",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "type": "Publishable",
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "viewerHasReport",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "viewerIsFollowing",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "viewerFollowingConfiguration",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "viewerCanDecide",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "viewerCanAnalyse",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "viewerCanEvaluate",
-                          "storageKey": null,
-                        },
-                      ],
                     },
                     Object {
                       "abstractKey": "__isTrashable",
@@ -6928,7 +6942,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c3e9d5a90c086a99df2b25c5e89d3b9d",
+          "cacheID": "696c9f8d5701e6dccf47bed9624dd784",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7775,6 +7789,10 @@ fragment ProposalMediaResponse_medias on Media {
   url
 }
 
+fragment ProposalNewsCreateModal_proposal on Proposal {
+  id
+}
+
 fragment ProposalPageAdvancement_proposal on Proposal {
   ...ProposalDetailAdvancement_proposal
   status {
@@ -8225,7 +8243,7 @@ fragment ProposalPageMainContent_proposal_4iFR9m on Proposal {
   ...ProposalPageLocalisation_proposal
   ...ProposalPageCustomSections_proposal
   ...ProposalPageMainAside_proposal_zqPYL
-  ...ProposalPageNews_proposal
+  ...ProposalPageNews_proposal_39ngnn
   ...ProposalPageDiscussions_proposal
   ...ProposalVoteButtonWrapperFragment_proposal_Q37Wz
   ...ProposalPageComments_proposal
@@ -8251,7 +8269,7 @@ fragment ProposalPageMetadata_proposal on Proposal {
   reference
 }
 
-fragment ProposalPageNews_proposal on Proposal {
+fragment ProposalPageNews_proposal_39ngnn on Proposal {
   id
   news {
     edges {
@@ -8262,6 +8280,9 @@ fragment ProposalPageNews_proposal on Proposal {
       }
     }
   }
+  isProposalAuthorAllowedToAddNews
+  ...ProposalNewsCreateModal_proposal
+  viewerDidAuthor @include(if: $isAuthenticated)
 }
 
 fragment ProposalPageOfficialAnswer_proposal on Proposal {

@@ -402,6 +402,12 @@ type AddProposalNewsPayload {
 
   """An unsuccessful mutation will return an error message"""
   errorCode: ProposalNewsErrorCode
+
+  """the proposal attached to the news"""
+  proposal: Proposal
+
+  """the URL of proposalNews posted"""
+  postURL: URI
   clientMutationId: String
 }
 
@@ -1950,6 +1956,11 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The main view : grid, list or map"""
   mainView: String!
+
+  """
+  Whether or not authors can add news on proposals collected in this step
+  """
+  allowAuthorsToAddNews: Boolean!
 }
 
 """A color on hexadecimal format (#DDDDDD)."""
@@ -4048,6 +4059,9 @@ input DeleteProposalNewsInput {
 type DeleteProposalNewsPayload {
   """The Node ID of the proposal news."""
   postId: ID
+
+  """The url of proposal to be redirect."""
+  proposalUrl: URI
 
   """An unsuccessful mutation will return an error message"""
   errorCode: ProposalNewsErrorCode
@@ -6720,6 +6734,7 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
   ): CommentConnection!
   displayedOnBlog: Boolean!
   relatedContent: [PostRelatedContent!]!
+  viewerDidAuthor: Boolean!
 }
 
 """Available publication statuses for a post."""
@@ -7364,6 +7379,7 @@ input ProjectStepInput {
   voteThreshold: Int
   defaultSort: ProposalSort
   proposalsHidden: Boolean
+  allowAuthorsToAddNews: Boolean
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
 
@@ -7608,6 +7624,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The admin URL to this resource."""
   adminUrl: URI!
+
+  """Did the viewer author this entity."""
+  viewerDidAuthor: Boolean
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   currentVotableStep: ProposalStep
@@ -7732,6 +7751,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Return all tipsmeee related data."""
   tipsmeee: TipsMeee
+  isProposalAuthorAllowedToAddNews: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -11106,6 +11126,11 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   Only one selection step inside a project can have realisation steps, true if this one
   """
   allowingProgressSteps: Boolean!
+
+  """
+  Whether or not authors can add news on proposals selected in this step
+  """
+  allowAuthorsToAddNews: Boolean!
   proposalsHidden: Boolean!
 
   """A list of contributor associated with the consultation."""

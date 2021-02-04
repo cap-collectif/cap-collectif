@@ -20,3 +20,6 @@ InternalPost:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
             themes:
                 type: '[InternalTheme!]!'
+            viewerDidAuthor:
+                type: 'Boolean!'
+                resolve: '@=value.isAuthor(getUser())'

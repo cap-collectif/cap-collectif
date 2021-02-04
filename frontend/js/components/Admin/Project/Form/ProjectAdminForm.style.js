@@ -7,7 +7,7 @@ import { mediaQueryMobile } from '~/utils/sizes';
 export const ProjectBoxContainer: StyledComponent<
   { color?: ?string },
   {},
-  HTMLDivElement
+  HTMLDivElement,
 > = styled.div`
   border-top-color: ${({ color }) => color || '#858e95'};
 `;
@@ -120,6 +120,7 @@ export const NoStepsPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = style
 
 export const ProjectSmallFieldsContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
   > div {
     margin-right: 20px;
@@ -127,6 +128,10 @@ export const ProjectSmallFieldsContainer: StyledComponent<{}, {}, HTMLDivElement
   }
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     flex-direction: column;
+  }
+
+  .form-group {
+    width: 100%;
   }
 
   .rdt + .input-group-addon {

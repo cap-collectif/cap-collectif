@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -12,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class DeleteProposalNewsMutation implements MutationInterface
 {
@@ -22,17 +24,23 @@ class DeleteProposalNewsMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private LoggerInterface $logger;
     private Publisher $publisher;
+    private ProposalUrlResolver $proposalUrlResolver;
+    private RequestStack $requestStack;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        Publisher $publisher
+        Publisher $publisher,
+        ProposalUrlResolver $proposalUrlResolver,
+        RequestStack $requestStack
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->logger = $logger;
         $this->publisher = $publisher;
+        $this->proposalUrlResolver = $proposalUrlResolver;
+        $this->requestStack = $requestStack;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -40,7 +48,7 @@ class DeleteProposalNewsMutation implements MutationInterface
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $id = $input->offsetGet('postId');
-            $this->em->remove($proposalPost);
+
             $proposalName = $proposalPost
                 ->getProposals()
                 ->first()
@@ -54,8 +62,12 @@ class DeleteProposalNewsMutation implements MutationInterface
                 ->getAuthors()
                 ->first()
                 ->getDisplayname();
-
+            $proposalUrl = $this->proposalUrlResolver->__invoke(
+                $proposalPost->getProposals()->first(),
+                $this->requestStack
+            );
             $this->em->remove($proposalPost);
+            $this->em->flush();
             $this->publisher->publish(
                 'proposal_news.delete',
                 new Message(
@@ -68,7 +80,7 @@ class DeleteProposalNewsMutation implements MutationInterface
                 )
             );
 
-            return ['postId' => $id, 'errorCode' => null];
+            return ['postId' => $id, 'proposalUrl' => $proposalUrl, 'errorCode' => null];
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }

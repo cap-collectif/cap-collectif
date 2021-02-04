@@ -77,6 +77,7 @@ export { default as Lock } from './svg/lock.svg';
 export { default as Bell } from './svg/bell.svg';
 export { default as Stamp } from './svg/stamp.svg';
 export { default as Newspaper } from './svg/newspaper-fold.svg';
+export { default as Newspaper2 } from './svg/newspaper.svg';
 export { default as Pin2 } from './svg/pin2.svg';
 export { default as Pin3 } from './svg/pin3.svg';
 export { default as Reload } from './svg/reload.svg';

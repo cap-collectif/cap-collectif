@@ -96,7 +96,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMain
       ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageMainAside_proposal
         @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
-      ...ProposalPageNews_proposal
+      ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalPageDiscussions_proposal
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)

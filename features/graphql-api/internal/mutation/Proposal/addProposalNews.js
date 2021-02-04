@@ -18,7 +18,7 @@ const addProposalNews = /* GraphQL */ `
 
 describe('Internal|add proposal news', () => {
   const input = {
-    proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwy',
+    proposalId: toGlobalId('Proposal', 'lePetitCafe'),
     translations: [
       {
         locale: 'FR_FR',
@@ -39,7 +39,7 @@ describe('Internal|add proposal news', () => {
       addProposalNews,
       {
         input: {
-          proposalId: 'UHJvcG9zYWw6bGVQZXRpdENhZmU=',
+          proposalId: toGlobalId('Proposal', 'proposal2'),
           translations: [
             {
               locale: 'FR_FR',
@@ -61,7 +61,7 @@ describe('Internal|add proposal news', () => {
       addProposalNews,
       {
         input: {
-          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwy',
+          proposalId: toGlobalId('Proposal', 'lePetitCafe'),
           translations: [
             {
               locale: 'FR_FR',
@@ -83,7 +83,7 @@ describe('Internal|add proposal news', () => {
       addProposalNews,
       {
         input: {
-          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWw0NTQ1',
+          proposalId: toGlobalId('Proposal', 'leFauxCafé'),
           translations: [
             {
               locale: 'FR_FR',

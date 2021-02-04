@@ -82,10 +82,12 @@ import ParticipationTutorialApp from '~/startup/ParticipationTutorialApp';
 import ParticipationMotivationApp from '~/startup/ParticipationMotivationApp';
 import ToastsContainerApp from '~/startup/ToastsContainerApp';
 import DebateStepPageApp from '~/startup/DebateStepPageApp';
+import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
 
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  ProposalNewsHeaderButtonsApp,
   ToastsContainerApp,
   NavbarApp,
   LastProposalsApp,

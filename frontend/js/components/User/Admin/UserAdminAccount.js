@@ -75,15 +75,7 @@ const validate = (values: FormValues) => {
 
 type State = {
   showDeleteAccountModal: boolean,
-}
-
-type FeatureFlags = {|
-  ENABLE_SUBSCRIBE_TO_PROPOSAL_NEWS: boolean,
-|};
-
-const RelayFeatureFlags: FeatureFlags = {
-  ENABLE_SUBSCRIBE_TO_PROPOSAL_NEWS: false,
-}
+};
 
 export class UserAdminAccount extends React.Component<Props, State> {
   state = {
@@ -163,8 +155,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 </div>
               }
             />
-            {/* should be displayed when feature is delivered */}
-            {user.isAdmin && RelayFeatureFlags.ENABLE_SUBSCRIBE_TO_PROPOSAL_NEWS && (
+            {user.isAdmin && (
               <Field
                 id="isSubscribedToProposalNews"
                 name="isSubscribedToProposalNews"

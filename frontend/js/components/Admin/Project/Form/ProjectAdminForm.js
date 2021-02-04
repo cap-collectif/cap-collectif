@@ -243,6 +243,10 @@ const onSubmit = (
           votesRanking:
             s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.votesRanking : undefined,
           allowingProgressSteps: s.type === 'SelectionStep' ? s.allowingProgressSteps : undefined,
+          allowAuthorsToAddNews:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.allowAuthorsToAddNews
+              : undefined,
           nbOpinionsToDisplay: s.type === 'RankingStep' ? s.nbOpinionsToDisplay : undefined,
           nbVersionsToDisplay: s.type === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
           votable: undefined,
@@ -475,6 +479,10 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             hasOpinionsFilled:
               step.type === 'DebateStep' ? step?.debate?.opinions.totalCount === 2 : undefined,
             debate: undefined,
+            allowAuthorsToAddNews:
+              step.type === 'SelectionStep' || step.type === 'CollectStep'
+                ? step.allowAuthorsToAddNews
+                : undefined,
           }))
         : [],
       visibility: project ? project.visibility : 'ADMIN',
@@ -597,6 +605,7 @@ export default createFragmentContainer(injectIntl(container), {
           nbVersionsToDisplay
         }
         ... on CollectStep {
+          allowAuthorsToAddNews
           defaultSort
           mainView
           proposalForm: form {
@@ -657,6 +666,7 @@ export default createFragmentContainer(injectIntl(container), {
           defaultSort
           proposalsHidden
           allowingProgressSteps
+          allowAuthorsToAddNews
           budget
           mainView
           requirements {

@@ -36,6 +36,7 @@ class CollectStepFormType extends AbstractStepFormType
             ])
             ->add('defaultSort')
             ->add('defaultStatus')
+            ->add('allowAuthorsToAddNews')
             ->add('mainView', ChoiceType::class, [
                 'choices' => ViewConfiguration::ALL,
             ]);

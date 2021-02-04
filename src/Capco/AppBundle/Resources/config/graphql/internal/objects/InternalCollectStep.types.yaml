@@ -52,3 +52,6 @@ InternalCollectStep:
             mainView:
                 type: 'String!'
                 description: 'The main view : grid, list or map'
+            allowAuthorsToAddNews:
+                type: 'Boolean!'
+                description: 'Whether or not authors can add news on proposals collected in this step'

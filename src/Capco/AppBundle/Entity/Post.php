@@ -174,7 +174,9 @@ class Post implements
 
     public function getBody(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->translate($locale, $fallbackToDefault)->getBody();
+        $body = $this->translate($locale, $fallbackToDefault)->getBody();
+
+        return html_entity_decode($body, ENT_QUOTES, 'UTF-8');
     }
 
     public function setBody(?string $body = null): self

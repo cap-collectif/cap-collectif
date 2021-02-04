@@ -21,15 +21,27 @@ final class ProposalDeleteAdminMessage extends AbstractAdminMessage
             'proposalExcerpt' => self::escape($proposal->getBodyTextExcerpt()),
             'proposalUrl' => $params['proposalURL'],
             'proposalUrlBack' => $params['adminURL'],
-            'project' => self::escape($proposal->getProposalForm()->getStep()->getProject()->getTitle()),
+            'project' => self::escape(
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
         ];
     }
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [
-          'username' => self::escape($proposal->getAuthor()->getDisplayName()),
-          'project' => self::escape($proposal->getProposalForm()->getStep()->getProject()->getTitle()),
+            'username' => self::escape($proposal->getAuthor()->getDisplayName()),
+            'project' => self::escape(
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
         ];
     }
 }

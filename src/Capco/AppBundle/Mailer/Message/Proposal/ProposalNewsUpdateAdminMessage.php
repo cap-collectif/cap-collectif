@@ -9,6 +9,7 @@ final class ProposalNewsUpdateAdminMessage extends AbstractAdminMessage
 {
     public const SUBJECT = 'notification.proposal_activity.update.subject';
     public const TEMPLATE = '@CapcoMail/Proposal/notifyProposalNewsAdmin.html.twig';
+    public const FOOTER = '';
 
     public static function getMyTemplateVars(Post $post, array $params): array
     {
@@ -22,7 +23,8 @@ final class ProposalNewsUpdateAdminMessage extends AbstractAdminMessage
                     ->getDisplayName()
             ),
             'proposalName' => self::escape($proposal->getTitle()),
-            'postUrl' => $params['postURL'],
+            'baseUrl' => $params['baseURL'],
+            'postURL' => $params['postURL'],
             'projectName' => self::escape(
                 $proposal
                     ->getProposalForm()
@@ -40,7 +42,7 @@ final class ProposalNewsUpdateAdminMessage extends AbstractAdminMessage
         $proposal = $post->getProposals()->first();
 
         return [
-            'project' => self::escape(
+            'projectName' => self::escape(
                 $proposal
                     ->getProposalForm()
                     ->getStep()
@@ -48,5 +50,14 @@ final class ProposalNewsUpdateAdminMessage extends AbstractAdminMessage
                     ->getTitle()
             ),
         ];
+    }
+
+
+    public static function getMyFooterVars(
+        string $recipientEmail = '',
+        string $siteName = '',
+        string $siteURL = ''
+    ): array {
+        return [];
     }
 }

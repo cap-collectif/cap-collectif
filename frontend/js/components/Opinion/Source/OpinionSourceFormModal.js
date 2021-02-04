@@ -86,7 +86,7 @@ class OpinionSourceFormModal extends React.Component<Props> {
           />
           <SubmitButton
             id={`confirm-opinion-source-${action}`}
-            label={action === 'create' ? 'global.publish' : 'global.edit'}
+            label={action === 'create' ? 'global.send' : 'global.edit'}
             isSubmitting={submitting}
             disabled={disabled}
             onSubmit={() => {

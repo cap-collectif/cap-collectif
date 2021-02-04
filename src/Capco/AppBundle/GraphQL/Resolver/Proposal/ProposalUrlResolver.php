@@ -10,7 +10,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalUrlResolver implements ResolverInterface
 {
-    protected $router;
+    protected RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {

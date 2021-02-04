@@ -28,17 +28,15 @@
         <p>
         </p>
         {% if postURL is not null %}
-        <div style="background-color: {{ btnBg }}; width: 202px; height: 48px; font-size: 11px; font-weight: 700; color: #fff;display: flex;">
-            <a href="{{ postURL }}" style="color: {{btnText}};text-align: center;margin: auto;">{{ 'show-actuality'|trans({}, 'CapcoAppBundle', user_locale) | upper }}</a>
-        </div>
+            <div style="background-color: {{ btnBg }}; width: 202px; height: 48px; font-size: 11px; font-weight: 700; color: #fff;display: flex;">
+                <a href="{{ postURL }}" style="color: {{btnText}};text-align: center;margin: auto;">{{ 'show-actuality'|trans({}, 'CapcoAppBundle', user_locale) | upper }}</a>
+            </div>
         {% endif %}
     </div>
 {% endblock %}
 
 {% block footer_mail %}
     <div style="margin: 0; text-align: left">
-        <p style="margin: 0; text-align: left">{{ 'email-right-data-protection'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
-
         <p style="text-align: left;">
             {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
             <img src="{{ baseUrl ~ asset("capco-logo-mail.png") }}" alt="logo cap collectif"

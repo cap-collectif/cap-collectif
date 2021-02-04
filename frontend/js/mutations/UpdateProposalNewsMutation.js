@@ -11,13 +11,7 @@ const mutation = graphql`
   mutation UpdateProposalNewsMutation($input: UpdateProposalNewsInput!) {
     updateProposalNews(input: $input) {
       proposalPost {
-        id
-        title
-        translations {
-          body
-          title
-          abstract
-        }
+        ...ProposalNewsEditModal_post
       }
       errorCode
     }

@@ -23,11 +23,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PostTranslation implements Translation
 {
-    use UuidTrait;
-    use TranslationTrait;
-    use SluggableTitleTrait;
-    use NullableTextableTrait;
     use MetaDescriptionTrait;
+    use NullableTextableTrait;
+    use SluggableTitleTrait;
+    use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="abstract", type="text", nullable=true)
@@ -49,5 +49,10 @@ class PostTranslation implements Translation
         $this->abstract = $abstract;
 
         return $this;
+    }
+
+    public function getBody(): ?string
+    {
+        return html_entity_decode($this->body, ENT_QUOTES, 'UTF-8');
     }
 }

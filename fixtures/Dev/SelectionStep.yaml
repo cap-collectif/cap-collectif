@@ -424,6 +424,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         voteType: 1
         defaultStatus: '@statusIdfVote1'
         body: Franciliens, prêts à voter
+        allowAuthorsToAddNews: true
     selectionStepIdfWiners:
         id: selectionStepIdfWiners
         title: Le suivi des projets lauréats

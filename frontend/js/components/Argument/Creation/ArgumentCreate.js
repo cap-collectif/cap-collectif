@@ -147,7 +147,7 @@ export const ArgumentCreate = ({
                 dispatch(submit(form));
               }}
               bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.publish'} />
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.send'} />
             </Button>
           )}
         </form>

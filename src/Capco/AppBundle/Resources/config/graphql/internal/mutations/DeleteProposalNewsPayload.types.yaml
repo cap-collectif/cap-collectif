@@ -5,6 +5,9 @@ DeleteProposalNewsPayload:
             postId:
                 type: 'ID'
                 description: 'The Node ID of the proposal news.'
+            proposalUrl:
+                type: 'URI'
+                description: 'The url of proposal to be redirect.'
             errorCode:
                 type: 'ProposalNewsErrorCode'
                 description: 'An unsuccessful mutation will return an error message'
