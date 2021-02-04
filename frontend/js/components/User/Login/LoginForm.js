@@ -85,8 +85,7 @@ export class LoginForm extends React.Component<Props, State> {
           id="password"
           label={<FormattedMessage id="global.password" />}
           labelClassName="w-100 font-weight-normal"
-          // Prevent google from completing password when there is an error
-          autoComplete={error ? undefined : 'current-password'}
+          autoComplete="off"
           component={renderInput}
         />
         <a href="/resetting/request">

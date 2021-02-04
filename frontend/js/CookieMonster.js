@@ -257,7 +257,7 @@ class CookieMonster {
   };
 
   setCookieWithExpirationDate = (value: any, type: string, duration: number) => {
-    Cookies.set(type, value, { expires: duration });
+    Cookies.set(type, value, { expires: duration, secure: true, sameSite: "Strict"});
     return true;
   };
 

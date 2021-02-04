@@ -40,7 +40,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   />
   <Connect(UserPasswordField)
     ariaRequired={true}
-    autoComplete="new-password"
+    autoComplete="off"
     formName="registration-form"
     id="password"
     label={
@@ -228,7 +228,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   />
   <Connect(UserPasswordField)
     ariaRequired={true}
-    autoComplete="new-password"
+    autoComplete="off"
     formName="registration-form"
     id="password"
     label={
@@ -453,7 +453,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   />
   <Connect(UserPasswordField)
     ariaRequired={true}
-    autoComplete="new-password"
+    autoComplete="off"
     formName="registration-form"
     id="password"
     label={

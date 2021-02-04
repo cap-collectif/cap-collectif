@@ -186,6 +186,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
               <UserPasswordField
                 formName={form}
                 id="password"
+                autoComplete="off"
                 name="plainPassword"
                 ariaRequired
                 label={<FormattedMessage id="registration.password" />}

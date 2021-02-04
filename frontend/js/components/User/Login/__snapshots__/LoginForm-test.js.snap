@@ -22,7 +22,7 @@ exports[`<LoginForm /> renders a form with inputs and connection not restricted 
   />
   <Field
     ariaRequired={true}
-    autoComplete="current-password"
+    autoComplete="off"
     component={[Function]}
     id="password"
     label={
@@ -80,7 +80,7 @@ exports[`<LoginForm /> renders a form with inputs and connection restricted 1`] 
   />
   <Field
     ariaRequired={true}
-    autoComplete="current-password"
+    autoComplete="off"
     component={[Function]}
     id="password"
     label={

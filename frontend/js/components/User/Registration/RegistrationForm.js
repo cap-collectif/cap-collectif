@@ -150,7 +150,7 @@ export const RegistrationForm = ({
         id="password"
         name="plainPassword"
         ariaRequired
-        autoComplete="new-password"
+        autoComplete="off"
         label={<FormattedMessage id="registration.password" />}
         labelClassName="font-weight-normal"
       />

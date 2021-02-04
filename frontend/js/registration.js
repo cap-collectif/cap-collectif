@@ -28,6 +28,7 @@ import AccountProfileApp from './startup/AccountProfileApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProjectHeaderDistrictsApp from './startup/ProjectHeaderDistrictsApp';
 import ProjectHeaderAuthorsApp from './startup/ProjectHeaderAuthorsApp';
+import ProjectHeaderCounterApp from './startup/ProjectHeaderCounterApp';
 import SectionListPageApp from './startup/SectionListPageApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ShieldApp from './startup/ShieldApp';
@@ -122,6 +123,7 @@ ReactOnRails.register({
   ProposalsUserVotesPageApp,
   ShareButtonDropdownApp,
   ProjectHeaderAuthorsApp,
+  ProjectHeaderCounterApp,
   ProjectHeaderDistrictsApp,
   EditProfileApp,
   CookieManagerApp,

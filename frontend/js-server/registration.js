@@ -47,6 +47,7 @@ import CookieContentApp from '../js/startup/CookieContentApp';
 import UserAdminPageApp from '../js/startup/UserAdminPageApp';
 import ProjectRestrictedAccessAlertApp from '../js/startup/ProjectRestrictedAccessAlertApp';
 import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
+import ProjectHeaderCounterApp from '../js/startup/ProjectHeaderCounterApp';
 import ArgumentListApp from '../js/startup/ArgumentListApp';
 import VoteListApp from '../js/startup/VoteListApp';
 import EventApp from '../js/startup/EventApp';
@@ -119,6 +120,7 @@ ReactOnRails.register({
   UserAdminPageApp,
   ProjectRestrictedAccessAlertApp,
   ProjectRestrictedAccessApp,
+  ProjectHeaderCounterApp,
   QuestionnaireCreateButtonApp,
   ArgumentListApp,
   VoteListApp,

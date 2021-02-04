@@ -1,48 +1,3 @@
-{% macro contributions_popover(project) %}
-    {% apply spaceless %}
-        {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
-        {% set counters = projectContributionResolver.getTotalContributionsCountsByTypes(
-            project.id,
-            [
-                'opinion',
-                'opinionVersion',
-                'source',
-                'reply',
-                'argument'
-            ])
-        %}
-        {% set opinions = counters['opinion'] + totalProposalsCount %}
-        {% set versions = counters['opinionVersion'] %}
-        {% set arguments = counters['argument'] %}
-        {% set sources = counters['source'] %}
-        {% set replies = counters['reply'] %}
-
-        {% if opinions > 0 %}
-            {% set projectType = project.projectType is defined and project.projectType is not null
-                ? project.projectType.title
-                : null
-            %}
-            {{ 'proposal-count' | trans({'count': opinions}, 'CapcoAppBundle') }}
-            <br/>
-        {% endif %}
-
-        {% if versions > 0 %}
-            {{ 'amendment-count' | trans({'count': versions}, 'CapcoAppBundle') }}
-            </br>
-        {% endif %}
-        {% if arguments > 0 %}
-            {{ 'argument-count' | trans({'count': arguments}, 'CapcoAppBundle') }}
-            </br>
-        {% endif %}
-        {% if sources > 0 %}
-            {{ 'source-count' | trans({'count': sources}, 'CapcoAppBundle') }}
-        {% endif %}
-        {% if replies > 0 %}
-            {{ 'answer-count' | trans({'count': replies}, 'CapcoAppBundle') }}
-        {% endif %}
-    {% endapply %}
-{% endmacro %}
-
 {% import _self as render %}
 
 <div class="row">
@@ -101,6 +56,24 @@
         {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
         {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
         {% set tradKeyContributionsCount =  'project.preview.counters.contributions' %}
+        
+        {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
+        {% set counters = projectContributionResolver.getTotalContributionsCountsByTypes(
+            project.id,
+            [
+                'opinion',
+                'opinionVersion',
+                'source',
+                'reply',
+                'argument'
+            ])
+        %}
+        {% set opinionsCount = counters['opinion'] + totalProposalsCount %}
+        {% set versionsCount = counters['opinionVersion'] %}
+        {% set argumentsCount = counters['argument'] %}
+        {% set sourcesCount = counters['source'] %}
+        {% set repliesCount = counters['reply'] %}
+        
         {% if currentStep.proposalForm is defined and currentStep.proposalForm.objectType == 'establishment' %}
             {% set tradKeyContributionsCount = 'proposal.establishment.count' %}
         {% endif %}
@@ -108,13 +81,24 @@
         {% if project.hasParticipativeStep %}
             <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">
                 {% if project.isContributionsCounterDisplayable %}
-                    <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
-                        <i class="cap cap-file-edit-1"></i>
-                        <span class="value">{{ contributionsCount }}</span>
-                        <span class="excerpt category">
-                            {{ tradKeyContributionsCount| trans({'num': contributionsCount}, 'CapcoAppBundle') }}
-                        </span>
+                    <li
+                        id="contributions-counter-pill"
+                        className="contributions-counter-pill"
+                        >
+                        {{ react_render_component('ProjectHeaderCounterApp', {
+                            'props': {
+                                'project': {
+                                    'opinionsCount': opinionsCount,
+                                    'versionsCount': versionsCount,
+                                    'argumentsCount': argumentsCount,
+                                    'sourcesCount': sourcesCount,
+                                    'repliesCount': repliesCount
+                                },
+                                'contributionsCount': contributionsCount
+                            },
+                        })}}
                     </li>
+
                 {% endif %}
                 {% if votesCount > 0 and project.isVotesCounterDisplayable %}
                     <li id="votes-counter-pill">
