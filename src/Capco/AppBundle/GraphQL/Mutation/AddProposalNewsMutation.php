@@ -98,13 +98,7 @@ class AddProposalNewsMutation implements MutationInterface
 
     private function checkProjectAllowProposalNews(Proposal $proposal): void
     {
-        $step = $proposal->getProject()->getCurrentStep();
-        if (
-            !$step ||
-            ($step &&
-                (($step instanceof CollectStep || $step instanceof SelectionStep) &&
-                    !$step->isAllowAuthorsToAddNews()))
-        ) {
+        if (!$proposal->isProposalAuthorAllowedToAddNews()) {
             throw new UserError(self::PROPOSAL_DOESNT_ALLOW_NEWS);
         }
     }
