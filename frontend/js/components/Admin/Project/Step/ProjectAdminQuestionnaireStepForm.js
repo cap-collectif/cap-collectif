@@ -9,28 +9,54 @@ import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
 import environment from '~/createRelayEnvironment';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
+import {
+  type ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse,
+  type ProjectAdminQuestionnaireStepFormQuestionnairesQueryVariables,
+} from '~relay/ProjectAdminQuestionnaireStepFormQuestionnairesQuery.graphql';
 
 type Props = {|
   questionnaire?: {| label: string, value: string |},
 |};
 
 export const getAvailableQuestionnaires = graphql`
-  query ProjectAdminQuestionnaireStepFormQuestionnairesQuery {
-    availableQuestionnaires {
+  query ProjectAdminQuestionnaireStepFormQuestionnairesQuery($term: String) {
+    availableQuestionnaires(term: $term) {
       id
       title
     }
   }
 `;
 
-export const loadQuestionnaireOptions = (questionnaire: ?{| label: string, value: string |}) => {
-  return fetchQuery(environment, getAvailableQuestionnaires, {}).then(data => {
+export const loadQuestionnaireOptions = (
+  initialValue: ?{| label: string, value: string |},
+  term: ?string,
+): Promise<
+  Array<{
+    value: string,
+    label: string,
+  }>,
+> => {
+  return fetchQuery(
+    environment,
+    getAvailableQuestionnaires,
+    ({
+      term: term === '' ? null : term,
+    }: ProjectAdminQuestionnaireStepFormQuestionnairesQueryVariables),
+  ).then((data: ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse) => {
     const questionnaires = data.availableQuestionnaires.map(q => ({
       value: q.id,
       label: q.title,
     }));
-    if (questionnaire && !questionnaires.some(q => q.value === questionnaire.value))
-      questionnaires.push(questionnaire);
+
+    const isMatchingTerm = !term || (term && initialValue?.label?.includes(term));
+
+    if (
+      initialValue &&
+      !questionnaires.some(q => q.value === initialValue.value) &&
+      isMatchingTerm
+    ) {
+      questionnaires.push(initialValue);
+    }
     return questionnaires;
   });
 };
@@ -61,7 +87,7 @@ export const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
-        loadOptions={() => loadQuestionnaireOptions(questionnaire)}
+        loadOptions={(term: ?string) => loadQuestionnaireOptions(questionnaire, term)}
         clearable
       />
     </>

@@ -33,11 +33,10 @@ class QuestionnaireRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getAvailableQuestionnaires()
+    public function getAvailableQuestionnaires(?string $term = null)
     {
         $qb = $this->createQueryBuilder('q');
-        $qb
-            ->leftJoin(ProposalForm::class, 'prf', 'WITH', 'prf.evaluationForm = q.id')
+        $qb->leftJoin(ProposalForm::class, 'prf', 'WITH', 'prf.evaluationForm = q.id')
             ->leftJoin(AnalysisConfiguration::class, 'ac', 'WITH', 'ac.evaluationForm = q.id')
             ->leftJoin('q.proposalForm', 'pf')
             ->where(
@@ -50,6 +49,11 @@ class QuestionnaireRepository extends EntityRepository
                         $qb->expr()->isNull('ac.evaluationForm')
                     )
             );
+
+        if (null !== $term) {
+            $qb->where('q.title LIKE :query');
+            $qb->setParameter('query', "%{$term}%");
+        }
 
         return $qb->getQuery()->execute();
     }

@@ -283,7 +283,12 @@ InternalQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", [args])'
             availableQuestionnaires:
                 type: '[InternalQuestionnaire!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver")'
+                args:
+                    term:
+                        description: 'the term to filter questions'
+                        type: 'String'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver", [args])'
+
             projectDistricts:
                 description: 'List all the district project in the platform.'
                 type: 'ProjectDistrictConnection!'

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class AvailableQuestionnaireResolver implements ResolverInterface
@@ -14,8 +15,8 @@ class AvailableQuestionnaireResolver implements ResolverInterface
         $this->questionnaireRepository = $questionnaireRepository;
     }
 
-    public function __invoke(): array
+    public function __invoke(Argument $args): array
     {
-        return $this->questionnaireRepository->getAvailableQuestionnaires();
+        return $this->questionnaireRepository->getAvailableQuestionnaires($args['term']);
     }
 }

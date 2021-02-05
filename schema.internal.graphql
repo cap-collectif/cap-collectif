@@ -9179,7 +9179,10 @@ type Query {
 
   """TO BE REMOVED"""
   question(id: Int!): Question!
-  availableQuestionnaires: [Questionnaire!]!
+  availableQuestionnaires(
+    """the term to filter questions"""
+    term: String
+  ): [Questionnaire!]!
 
   """List all the district project in the platform."""
   projectDistricts(
