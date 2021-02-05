@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 trait ModerableTrait
@@ -21,5 +22,21 @@ trait ModerableTrait
         $this->moderationToken = $token;
 
         return $this;
+    }
+
+    public function userDidReport(?User $user = null): bool
+    {
+        foreach ($this->reports as $report) {
+            if ($report->getReporter() === $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isUserAuthor(?User $user = null): bool
+    {
+        return $user === $this->author;
     }
 }

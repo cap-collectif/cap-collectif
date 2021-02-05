@@ -27,12 +27,12 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  */
 class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface
 {
-    use UuidTrait;
-    use VotableOkTrait;
-    use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;
+    use TextableTrait;
     use TrashableTrait;
+    use UuidTrait;
+    use VotableOkTrait;
 
     public const TYPE_AGAINST = 0;
     public const TYPE_FOR = 1;
@@ -241,7 +241,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(?User $user = null): bool
+    public function userDidReport(?User $user = null): bool
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {
@@ -296,6 +296,11 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         $related = $this->getRelated();
 
         return $related ? $related->getConsultation() : null;
+    }
+
+    public function isUserAuthor(?User $user = null): bool
+    {
+        return $user === $this->Author;
     }
 
     // ************************* Lifecycle ***********************************

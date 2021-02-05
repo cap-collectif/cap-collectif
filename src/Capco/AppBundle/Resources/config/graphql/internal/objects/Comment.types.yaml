@@ -1,81 +1,81 @@
 Comment:
-  type: object
-  inherits:
-    [
-      Node,
-      Trashable,
-      Reportable,
-      PublicPublishable,
-      Contribution,
-      Commentable,
-      UniformResourceLocatable,
-      InternalPrimaryKey,
-    ]
-  config:
-    description: 'A comment'
-    interfaces:
-      - Node
-      - PublicPublishable
-      - Reportable
-      - Contribution
-      - Commentable
-      - UniformResourceLocatable
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Comment
-      kind:
-        type: 'String!'
-        description: 'The kind of contribution.'
-      body:
-        type: 'String!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", [value])'
-      createdAt:
-        type: 'DateTime!'
-      updatedAt:
-        type: 'DateTime'
-      author:
-        type: 'InternalUser'
-      parent:
-        type: 'Comment'
-      pinned:
-        type: 'Boolean!'
-      contribuable:
-        type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
-      answers:
-        type: '[Comment!]!'
-      authorName:
-        type: 'String'
-      authorEmail:
-        type: 'String'
-      authorIp:
-        type: 'IP'
-      publicationStatus:
-        type: 'CommentPublicationStatus!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
-      votes:
-        type: 'CommentVoteConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'VoteOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
-      viewerHasVote:
-        type: 'Boolean!'
-        resolve: '@=value.userHasVote(getUser())'
-      viewerVote:
-        type: 'CommentVote'
-        resolve: '@=value.userGetVote(getUser())'
-      editUrl:
-        type: 'URI'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", [value])'
-      viewerHasReport:
-        resolve: '@=value.userHasReport(getUser())'
-      commentable:
-        type: 'Commentable'
-        resolve: '@=value.getRelatedObject()'
+    type: object
+    inherits:
+        [
+            Node,
+            Trashable,
+            Reportable,
+            PublicPublishable,
+            Contribution,
+            Commentable,
+            UniformResourceLocatable,
+            InternalPrimaryKey,
+        ]
+    config:
+        description: 'A comment'
+        interfaces:
+            - Node
+            - PublicPublishable
+            - Reportable
+            - Contribution
+            - Commentable
+            - UniformResourceLocatable
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Comment
+            kind:
+                type: 'String!'
+                description: 'The kind of contribution.'
+            body:
+                type: 'String!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", [value])'
+            createdAt:
+                type: 'DateTime!'
+            updatedAt:
+                type: 'DateTime'
+            author:
+                type: 'InternalUser'
+            parent:
+                type: 'Comment'
+            pinned:
+                type: 'Boolean!'
+            contribuable:
+                type: 'Boolean!'
+                resolve: '@=value.canContribute(getUser())'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+            answers:
+                type: '[Comment!]!'
+            authorName:
+                type: 'String'
+            authorEmail:
+                type: 'String'
+            authorIp:
+                type: 'IP'
+            publicationStatus:
+                type: 'CommentPublicationStatus!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
+            votes:
+                type: 'CommentVoteConnection!'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    orderBy:
+                        type: 'VoteOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
+            viewerHasVote:
+                type: 'Boolean!'
+                resolve: '@=value.userHasVote(getUser())'
+            viewerVote:
+                type: 'CommentVote'
+                resolve: '@=value.userGetVote(getUser())'
+            editUrl:
+                type: 'URI'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", [value])'
+            viewerHasReport:
+                resolve: '@=value.userDidReport(getUser())'
+            commentable:
+                type: 'Commentable'
+                resolve: '@=value.getRelatedObject()'

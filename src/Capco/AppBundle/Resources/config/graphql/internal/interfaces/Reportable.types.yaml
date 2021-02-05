@@ -1,19 +1,24 @@
 Reportable:
-  type: interface
-  config:
-    description: 'A reportable'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
-    fields:
-      viewerHasReport:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'Boolean!'
-        description: 'Does the viewer already submitted a report ?'
-      reportings:
-        type: 'ReportingConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'The reportings related to the reportable.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", [value, args])'
-        args:
-          orderBy:
-            type: 'ReportingOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+    type: interface
+    config:
+        description: 'A reportable'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        fields:
+            viewerHasReport:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'Boolean!'
+                description: 'Does the viewer already submitted a report ?'
+            reportings:
+                type: 'ReportingConnection!'
+                argsBuilder: 'Relay::Connection'
+                description: 'The reportings related to the reportable.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", [value, args])'
+                args:
+                    orderBy:
+                        type: 'ReportingOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+            viewerCanReport:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'Boolean!'
+                description: 'Check if a user can report'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableViewerCanReportResolver", [value, getUser()])'

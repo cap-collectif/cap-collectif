@@ -30,7 +30,7 @@ InternalOpinion:
                 type: 'Boolean!'
                 description: 'true if the contribution is pinned.'
             viewerHasReport:
-                resolve: '@=value.userHasReport(getUser())'
+                resolve: '@=value.userDidReport(getUser())'
             step:
                 type: 'InternalConsultationStep!'
             viewerVote:

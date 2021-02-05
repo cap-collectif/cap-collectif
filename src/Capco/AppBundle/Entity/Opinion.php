@@ -35,17 +35,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 {
-    use UuidTrait;
-    use TrashableTrait;
-    use SluggableTitleTrait;
-    use VotableOkNokMitigeTrait;
     use AnswerableTrait;
-    use PinnableTrait;
-    use TextableTrait;
-    use ModerableTrait;
     use FollowableTrait;
+    use ModerableTrait;
+    use PinnableTrait;
     use PublishableTrait;
+    use SluggableTitleTrait;
+    use TextableTrait;
     use TimestampableTrait;
+    use TrashableTrait;
+    use UuidTrait;
+    use VotableOkNokMitigeTrait;
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',
@@ -393,7 +393,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     // ******************************* Custom methods **************************************
 
-    public function userHasReport(User $user): bool
+    public function userDidReport(?User $user = null): bool
     {
         foreach ($this->Reports as $report) {
             if ($report->getReporter() === $user) {
@@ -402,6 +402,11 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         }
 
         return false;
+    }
+
+    public function isUserAuthor(?User $user = null): bool
+    {
+        return $user === $this->Author;
     }
 
     /**

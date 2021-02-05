@@ -16,7 +16,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -30,17 +29,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 {
-    use UuidTrait;
-    use TrashableTrait;
-    use SluggableTitleTrait;
-    use TimestampableTrait;
-    use VotableOkNokMitigeTrait;
     use AnswerableTrait;
     use DiffableTrait;
-    use TextableTrait;
+    use FollowableTrait;
     use ModerableTrait;
     use PublishableTrait;
-    use FollowableTrait;
+    use SluggableTitleTrait;
+    use TextableTrait;
+    use TimestampableTrait;
+    use TrashableTrait;
+    use UuidTrait;
+    use VotableOkNokMitigeTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -273,17 +272,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     }
 
     // ******************************* Custom methods **************************************
-
-    public function userHasReport(User $user)
-    {
-        foreach ($this->reports as $report) {
-            if ($report->getReporter() === $user) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     public function getOpinionType()
     {

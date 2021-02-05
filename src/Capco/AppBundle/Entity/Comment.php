@@ -56,14 +56,14 @@ abstract class Comment implements
     CommentableInterface,
     ReportableInterface
 {
-    use VotableOkTrait;
+    use ModerableTrait;
     use PinnableTrait;
-    use UuidTrait;
+    use PublishableTrait;
     use TextableTrait;
     use TimestampableTrait;
     use TrashableTrait;
-    use PublishableTrait;
-    use ModerableTrait;
+    use UuidTrait;
+    use VotableOkTrait;
 
     public static $sortCriterias = [
         'date' => 'opinion.sort.last',
@@ -281,7 +281,7 @@ abstract class Comment implements
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(?User $user = null): bool
+    public function userDidReport(?User $user = null): bool
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {
@@ -350,6 +350,11 @@ abstract class Comment implements
         }
 
         return null;
+    }
+
+    public function isUserAuthor(?User $user = null): bool
+    {
+        return $user === $this->Author;
     }
 
     // ********************** Abstract methods **********************************

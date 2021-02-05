@@ -1,53 +1,53 @@
 InternalSource:
-  type: object
-  inherits:
-    - PreviewSource
-    - Reportable
-    - ContributionWithAuthor
-    - EditableContribution
-  config:
-    name: Source
-    description: 'A source'
-    interfaces:
-      - Reportable
-      - ContributionWithAuthor
-    fields:
-      ## Overrides from preview
-      step:
-        type: 'InternalConsultationStep!'
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      viewerHasReport:
-        resolve: '@=value.userHasReport(getUser())'
-      votes:
-        type: SourceVoteConnection
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", [value, args, getUser()])'
-      contribuable:
-        type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
-      viewerHasVote:
-        type: 'Boolean!'
-        access: "@=hasRole('ROLE_USER')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
-      viewerVote:
-        type: 'SourceVote'
-        access: "@=hasRole('ROLE_USER')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerVoteResolver", [value, getUser()])'
-      category:
-        type: SourceCategory
-      link:
-        type: 'URI!'
-        description: 'The link of the source.'
-      title:
-        type: 'String!'
-        description: 'The title of the source.'
-      body:
-        type: 'String!'
-        description: 'The content of the source.'
-      kind:
-        type: 'String!'
-        resolve: 'source'
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
+    type: object
+    inherits:
+        - PreviewSource
+        - Reportable
+        - ContributionWithAuthor
+        - EditableContribution
+    config:
+        name: Source
+        description: 'A source'
+        interfaces:
+            - Reportable
+            - ContributionWithAuthor
+        fields:
+            ## Overrides from preview
+            step:
+                type: 'InternalConsultationStep!'
+            createdAt:
+                type: 'DateTime!'
+                description: 'Identifies the date and time when the object was created.'
+            viewerHasReport:
+                resolve: '@=value.userDidReport(getUser())'
+            votes:
+                type: SourceVoteConnection
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", [value, args, getUser()])'
+            contribuable:
+                type: 'Boolean!'
+                resolve: '@=value.canContribute(getUser())'
+            viewerHasVote:
+                type: 'Boolean!'
+                access: "@=hasRole('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
+            viewerVote:
+                type: 'SourceVote'
+                access: "@=hasRole('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerVoteResolver", [value, getUser()])'
+            category:
+                type: SourceCategory
+            link:
+                type: 'URI!'
+                description: 'The link of the source.'
+            title:
+                type: 'String!'
+                description: 'The title of the source.'
+            body:
+                type: 'String!'
+                description: 'The content of the source.'
+            kind:
+                type: 'String!'
+                resolve: 'source'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'

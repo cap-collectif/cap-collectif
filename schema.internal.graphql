@@ -778,6 +778,9 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
+
   """The author of the contribution."""
   author: User!
   votes(
@@ -2005,6 +2008,9 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -3370,6 +3376,9 @@ type DebateArgument implements Node & Reportable & Trashable {
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
@@ -6289,6 +6298,9 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
+
   """Whether or not the contribution is trashed."""
   trashed: Boolean!
 
@@ -7593,6 +7605,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
 
   """Followers connection"""
   followers(
@@ -10354,6 +10369,9 @@ interface Reportable {
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
 }
 
 """A report"""
@@ -11490,6 +11508,9 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
 
   """The author of the contribution."""
   author: User!
@@ -14047,6 +14068,9 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
     last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
 
   """The arguments related to the argumentable."""
   arguments(

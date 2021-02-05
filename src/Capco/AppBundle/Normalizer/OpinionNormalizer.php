@@ -132,7 +132,7 @@ class OpinionNormalizer implements
             'anon.' === $user
                 ? null
                 : $this->voteRepository->getByObjectUser('opinion', $object, $user);
-        $data['hasUserReported'] = 'anon.' === $user ? false : $object->userHasReport($user);
+        $data['hasUserReported'] = 'anon.' === $user ? false : $object->userDidReport($user);
         if (\in_array('Opinions', $groups) && $this->toggleManager->isActive('votes_evolution')) {
             $data['history'] = [
                 'votes' => $this->voteRepository->getHistoryFor('opinion', $object),

@@ -1,47 +1,47 @@
 PreviewVersion:
-  type: object
-  inherits:
-    - Node
-    - Contribution
-    - Trashable
-    - PublicPublishable
-    - UniformResourceLocatable
-    - Timestampable
-  config:
-    name: Version
-    description: 'A version of contribution'
-    interfaces:
-      - Node
-      - Contribution
-      - PublicPublishable
-      - Trashable
-      - UniformResourceLocatable
-    fields:
-      id:
-        description: 'The ID of an object'
-        builder: 'Relay::GlobalId'
-        type: 'ID!'
-        builderConfig:
-            typeName: Version
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
-      viewerHasReport:
-        type: 'Boolean!'
-        resolve: '@=value.userHasReport(getUser())'
-      comment:
-        type: 'String'
-        description: 'Explenation.'
-      title:
-        type: 'String!'
-        description: 'The title of the contribution.'
-      body:
-        type: 'HTML!'
-        description: 'The content of the contribution.'
-      bodyText:
-        type: 'String!'
-        description: 'The content of the contribution.'
-      parent:
-        type: 'PreviewOpinion!'
-      project:
-        type: 'PreviewProject'
-        description: 'The related project.'
+    type: object
+    inherits:
+        - Node
+        - Contribution
+        - Trashable
+        - PublicPublishable
+        - UniformResourceLocatable
+        - Timestampable
+    config:
+        name: Version
+        description: 'A version of contribution'
+        interfaces:
+            - Node
+            - Contribution
+            - PublicPublishable
+            - Trashable
+            - UniformResourceLocatable
+        fields:
+            id:
+                description: 'The ID of an object'
+                builder: 'Relay::GlobalId'
+                type: 'ID!'
+                builderConfig:
+                    typeName: Version
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
+            viewerHasReport:
+                type: 'Boolean!'
+                resolve: '@=value.userDidReport(getUser())'
+            comment:
+                type: 'String'
+                description: 'Explenation.'
+            title:
+                type: 'String!'
+                description: 'The title of the contribution.'
+            body:
+                type: 'HTML!'
+                description: 'The content of the contribution.'
+            bodyText:
+                type: 'String!'
+                description: 'The content of the contribution.'
+            parent:
+                type: 'PreviewOpinion!'
+            project:
+                type: 'PreviewProject'
+                description: 'The related project.'

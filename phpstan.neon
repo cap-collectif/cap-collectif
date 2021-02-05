@@ -8,6 +8,7 @@ parameters:
     autoload_files:
         - vendor/autoload.php
     excludes_analyse:
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ModerableTrait.php
         - %currentWorkingDirectory%/src/Kernel.php
         - %currentWorkingDirectory%/config/packages/admin.yaml
         - %currentWorkingDirectory%/app/config/parameters.php

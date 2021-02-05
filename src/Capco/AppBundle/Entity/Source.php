@@ -29,12 +29,12 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  */
 class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface
 {
-    use UuidTrait;
     use ModerableTrait;
-    use VotableOkTrait;
-    use TextableTrait;
     use PublishableTrait;
+    use TextableTrait;
     use TrashableTrait;
+    use UuidTrait;
+    use VotableOkTrait;
 
     public const TYPE_FOR = 1;
     public const LINK = 0;
@@ -342,19 +342,6 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         }
 
         return null;
-    }
-
-    public function userHasReport(?User $user = null): bool
-    {
-        if (null !== $user) {
-            foreach ($this->reports as $report) {
-                if ($report->getReporter() === $user) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**

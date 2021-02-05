@@ -100,6 +100,6 @@ class CommentNormalizer implements
             return false;
         }
 
-        return $comment->userHasReport($user);
+        return $comment->userDidReport($user);
     }
 }

@@ -20,7 +20,7 @@ InternalVersion:
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
             viewerHasReport:
-                resolve: '@=value.userHasReport(getUser())'
+                resolve: '@=value.userDidReport(getUser())'
             comment:
                 type: 'String'
                 description: 'Explenation.'

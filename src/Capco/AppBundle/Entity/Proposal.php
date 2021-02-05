@@ -901,17 +901,6 @@ class Proposal implements
             $this->isCommentable();
     }
 
-    public function userHasReport(User $user): bool
-    {
-        foreach ($this->reports as $report) {
-            if ($report->getReporter() === $user) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public function getEstimation(): ?float
     {
         return $this->estimation;
