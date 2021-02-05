@@ -55,7 +55,7 @@ import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesVal
 import renderResponses from '~/components/Form/RenderResponses';
 import {
   handleVisibilityAccordingToType,
-  TRIGGER_FOR,
+  TRIGGER_FOR_IDS,
 } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import config from '~/config';
@@ -113,7 +113,6 @@ type Props = {|
   ...RelayProps,
   +intl: IntlShape,
   +themes: Array<Object>,
-  +instanceName: string,
   +dispatch: Dispatch,
   +features: FeatureToggles,
   +titleValue: ?string,
@@ -350,8 +349,8 @@ export class ProposalForm extends React.Component<Props, State> {
 
   componentDidMount() {
     window.addEventListener('beforeunload', onUnload);
-    const { responses, proposalForm, dispatch, instanceName, intl } = this.props;
-    if (TRIGGER_FOR.includes(instanceName)) {
+    const { responses, proposalForm, dispatch, intl } = this.props;
+    if (TRIGGER_FOR_IDS.includes(proposalForm.id)) {
       handleVisibilityAccordingToType(
         intl,
         dispatch,
@@ -771,7 +770,6 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     features: state.default.features,
     themes: state.default.themes,
     user: state.user.user,
-    instanceName: state.default.instanceName,
     currentStepId: state.project.currentProjectStepById,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
     asyncValidate:

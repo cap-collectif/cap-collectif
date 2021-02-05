@@ -270,7 +270,12 @@ const makeRnaQueries = (
   });
 };
 
-export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated', 'dev'];
+// See PreFillProposalFormSubscriber.php for ids
+export const TRIGGER_FOR_IDS: Array<string> = [
+  'd6b98b9b-5e3c-11ea-8fab-0242ac110004',
+  '440118f3-0a0e-11eb-b274-0242ac110004',
+  'proposalformIdf',
+];
 
 const getInvisibleQuestionIndexesAccordingToType = (
   defaultToHideQuestions: Array<number>,
@@ -305,7 +310,15 @@ const getSiretAccordingToType = (
     return null;
   }
   // $FlowFixMe Error due to response type not giving good type among severals
-  return responses[index] && responses[index].value;
+  const value: ?string = responses[index] && responses[index].value;
+  return value ? value.replace(/\s/g, '') : null;
+};
+
+const getRna = (responses: ResponsesInReduxForm, formId: string): ?string => {
+  const value: ?string =
+    // $FlowFixMe Error due to response type not giving good type among severals
+    responses[INDEX_RNA_QUESTION(formId)] && responses[INDEX_RNA_QUESTION(formId)].value;
+  return value ? value.replace(/\s/g, '') : null;
 };
 
 export const handleVisibilityAccordingToType = (
@@ -319,13 +332,13 @@ export const handleVisibilityAccordingToType = (
   // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
   const siret: ?string = getSiretAccordingToType(apiEnterpriseType, responses, formId);
   // $FlowFixMe
-  const rna: ?string =
-    // $FlowFixMe
-    responses[INDEX_RNA_QUESTION(formId)] && responses[INDEX_RNA_QUESTION(formId)].value;
+  const rna: ?string = getRna(responses, formId);
 
   const defaultToHideQuestions = BASE_QUESTIONS(formId);
   const isSiretNotValid = siret == null || (siret && !checkSiret(siret));
   const isRnaNotValid = rna == null || (rna && !checkRNA(rna));
+
+  // If initial values are invalid we hide all and we are done
   if (isSiretNotValid && isRnaNotValid) {
     // Need to hide all
     defaultToHideQuestions.forEach(questionIndex => {
@@ -340,7 +353,6 @@ export const handleVisibilityAccordingToType = (
     });
     return;
   }
-  // TODO @spyl94 fixme
   // In this case, it's a draft that has been reopened
   // only show fields according to enterprise's type in case user change is mind
   if (apiEnterpriseType) {
@@ -368,10 +380,9 @@ export const handleVisibilityAccordingToType = (
   });
 };
 
-// TODO @Vince utiliser quelque chose comme SyntheticEvent<> & { currentTarget: HTMLInputElement }
 export const triggerAutocompleteAPIEnterprise = (
   dispatch: Dispatch,
-  event: any,
+  event: SyntheticInputEvent<HTMLInputElement>,
   questions: Questions,
   intl: IntlShape,
 ) => {

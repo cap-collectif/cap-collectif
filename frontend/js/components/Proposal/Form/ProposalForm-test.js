@@ -190,7 +190,6 @@ describe('<ProposalForm />', () => {
       unstable__tipsmeee: false,
     },
     titleValue: 'Proposal title',
-    instanceName: 'dev',
     addressValue: null,
     proposal: {
       id: 'proposal1',
