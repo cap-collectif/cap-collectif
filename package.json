@@ -241,7 +241,6 @@
         "eslint-plugin-react-hooks": "^1.6.0",
         "eslint-plugin-relay": "^1.8.1",
         "exports-loader": "^1.1.0",
-        "expose-loader": "^1.0.3",
         "fancybox": "^3.0.0",
         "fetch": "github/fetch",
         "fetch-cookie": "^0.7.3",

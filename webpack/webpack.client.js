@@ -39,8 +39,6 @@ const devConf = {
       '~image': path.resolve(__dirname, '../public/image'),
       react: path.resolve('./node_modules/react'),
       'lodash-es': 'lodash',
-      jQuery:  path.resolve('./node_modules/jquery'),
-      $:  path.resolve('./node_modules/jquery'),
     },
   },
 
@@ -96,12 +94,6 @@ const devConf = {
   },
 
   plugins: [
-
-    new ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-    }),
     new CleanWebpackPlugin({
       // Simulate the removal of files
       dry: false,
@@ -169,6 +161,5 @@ const devConf = {
     ],
   },
 };
-
 
 module.exports = merge(devConf, webpackJsx, webpackFile, webpackScss);

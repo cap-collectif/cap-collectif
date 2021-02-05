@@ -6,22 +6,6 @@ function getRulesConf() {
       // We need to expose our jQuery with the $ and jQuery variable for sonata qnd others dependencies
       rules: [
         {
-          test: require.resolve("jquery"),
-          loader: "expose-loader",
-          options: {
-            exposes: [
-              {
-                globalName: "$",
-                override: true
-              },
-              {
-                globalName: "jQuery",
-                override: true
-              },
-            ],
-          },
-        },
-        {
           test: [
             // These dependencies have es6 syntax which ie11 doesn't like. See https://github.com/formatjs/react-intl/blob/master/docs/Upgrade-Guide.md#esm-build
             path.resolve('node_modules/react-intl'),
