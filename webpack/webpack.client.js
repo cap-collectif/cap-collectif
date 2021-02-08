@@ -9,6 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 
 const webpackConfig = require('./config');
 
@@ -94,6 +95,17 @@ const devConf = {
   },
 
   plugins: [
+    new MomentTimezoneDataPlugin({
+      matchZones: [
+        'America/New_York',
+        'America/Toronto',
+        'Europe/Brussels',
+        'Indian/Reunion',
+        'America/Blanc-Sablon',
+        'Europe/Paris',
+        'Etc/UTC',
+      ],
+    }),
     new CleanWebpackPlugin({
       // Simulate the removal of files
       dry: false,
