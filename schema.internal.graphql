@@ -4488,6 +4488,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
 
+  """The event admin edit url"""
+  adminUrl: URI!
+
   """A list of Users that are participating to the event."""
   participants(
     """

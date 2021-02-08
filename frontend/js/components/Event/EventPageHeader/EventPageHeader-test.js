@@ -12,6 +12,7 @@ const baseEvent = {
   isPresential: true,
   animator: null,
   title: 'Ceci est un titre',
+  adminUrl: 'https://capco.dev/admin',
   viewerDidAuthor: false,
   translations: [
     {

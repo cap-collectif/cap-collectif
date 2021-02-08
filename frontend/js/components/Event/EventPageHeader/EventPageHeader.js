@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
+import { Button } from 'react-bootstrap';
 import {
   Container,
   TitleContainer,
@@ -27,6 +28,7 @@ import type { EventPageHeader_query } from '~relay/EventPageHeader_query.graphql
 import EventLabelStatus from '~/components/Event/EventLabelStatus';
 import config from '~/config';
 import { getTranslation } from '~/services/Translation';
+import type { User } from '~/redux/modules/user';
 
 type Props = {|
   +event: EventPageHeader_event,
@@ -35,6 +37,7 @@ type Props = {|
   +hasThemeEnabled: boolean,
   +hasProposeEventEnabled: boolean,
   +link?: string,
+  +user?: User,
 |};
 
 export const EventPageHeader = ({
@@ -44,6 +47,7 @@ export const EventPageHeader = ({
   hasThemeEnabled,
   hasProposeEventEnabled,
   link,
+  user,
 }: Props) => {
   const {
     isPresential,
@@ -199,6 +203,12 @@ export const EventPageHeader = ({
             )}
           </ActionContainer>
         )}
+        {user?.isAdmin ? (
+          <Button href={event.adminUrl} className="mt-20">
+            <i className="cap cap-pencil-1" />
+            <FormattedMessage id="event.admin.edit" />
+          </Button>
+        ) : null}
       </div>
     </Container>
   );
@@ -214,6 +224,7 @@ const mapStateToProps = (state: State, props: Props) => {
     hasThemeEnabled: state.default.features.themes || false,
     hasProposeEventEnabled: state.default.features.allow_users_to_propose_events || false,
     link: translation ? translation?.link : undefined,
+    user: state.user.user,
   };
 };
 
@@ -232,6 +243,7 @@ export default createFragmentContainer(EventPageHeaderConnected, {
       id
       title
       isPresential
+      adminUrl
       translations {
         locale
         link

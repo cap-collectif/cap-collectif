@@ -15,6 +15,10 @@ InternalEvent:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Event
+            adminUrl:
+                type: 'URI!'
+                description: 'The event admin edit url'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAdminUrlResolver", [value])'
             participants:
                 type: 'ParticipantConnection!'
                 description: 'A list of Users that are participating to the event.'

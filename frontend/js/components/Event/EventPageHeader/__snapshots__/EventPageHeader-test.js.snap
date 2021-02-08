@@ -653,6 +653,7 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
               Object {
                 "$fragmentRefs": null,
                 "$refType": null,
+                "adminUrl": "https://capco.dev/admin",
                 "animator": null,
                 "author": Object {
                   "$fragmentRefs": null,
