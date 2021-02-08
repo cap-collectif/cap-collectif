@@ -7,19 +7,26 @@ import { Modal } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
-import ReportMutation from '~/mutations/ReportMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import type { Dispatch, State } from '~/types';
 import { toast } from '~ds/Toast';
 import ReportForm, { getType, formName, type Values } from '~/components/Report/ReportForm';
 import { mediaQueryMobile } from '~/utils/sizes';
+import ReportDebateArgumentMutation from '~/mutations/ReportDebateArgumentMutation';
+import type { ForOrAgainstValue } from '~relay/ArgumentCard_argument.graphql';
+
+export type ArgumentReported = {|
+  id: string,
+  debateId: string,
+  forOrAgainst: ForOrAgainstValue,
+|};
 
 type Props = {|
   ...ReduxFormFormProps,
   dispatch: Dispatch,
   intl: IntlShape,
   onClose: () => void,
-  argumentId: string,
+  argument: ArgumentReported,
   isLoading: boolean,
 |};
 
@@ -42,18 +49,20 @@ const ModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
 const onSubmit = (
   values: Values,
   dispatch: Dispatch,
-  argumentId: string,
+  argument: ArgumentReported,
   intl: IntlShape,
   onClose: () => void,
 ) => {
   const { body, status } = values;
 
-  return ReportMutation.commit({
+  return ReportDebateArgumentMutation.commit({
     input: {
-      reportableId: argumentId,
+      reportableId: argument.id,
       body,
       type: getType(status),
     },
+    debateId: argument.debateId,
+    forOrAgainst: argument.forOrAgainst,
   })
     .then(response => {
       onClose();
@@ -69,14 +78,15 @@ const onSubmit = (
       });
     })
     .catch(() => {
+      onClose();
       mutationErrorToast(intl);
     });
 };
 
-export const ModalReportArgument = ({ argumentId, onClose, dispatch, isLoading, intl }: Props) => (
+export const ModalReportArgument = ({ argument, onClose, dispatch, isLoading, intl }: Props) => (
   <ModalContainer
     animation={false}
-    show={!!argumentId}
+    show={!!argument}
     onHide={onClose}
     bsSize="large"
     aria-labelledby="modal-title">
@@ -87,7 +97,9 @@ export const ModalReportArgument = ({ argumentId, onClose, dispatch, isLoading, 
     </Modal.Header>
 
     <Modal.Body>
-      <ReportForm onSubmit={values => onSubmit(values, dispatch, argumentId, intl, onClose)} />
+      <ReportForm
+        onSubmit={(values: Values) => onSubmit(values, dispatch, argument, intl, onClose)}
+      />
     </Modal.Body>
 
     <Modal.Footer>

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalModerateArgumentMobile /> should renders correcty with argument 1`] = `
+<Modal
+  ariaLabel="global.report.submit"
+  disclosure={
+    <ForwardRef
+      color="neutral-gray.500"
+      rightIcon="MODERATE"
+    />
+  }
+>
+  <Component />
+</Modal>
+`;

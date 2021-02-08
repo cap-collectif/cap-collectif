@@ -39,6 +39,8 @@ export const ICON_NAME = {
   MORE: 'MORE',
   MODERATE: 'MODERATE',
   HYPERLINK: 'HYPERLINK',
+  CLAP_O: 'CLAP_O',
+  CLAP: 'CLAP',
 };
 
 export const ICON_SIZE = {

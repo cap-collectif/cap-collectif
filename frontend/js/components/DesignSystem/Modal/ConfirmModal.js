@@ -47,6 +47,7 @@ export const ConfirmModal = ({
           <Modal.Footer
             spacing={4}
             p={4}
+            pt={4}
             align={['stretch', 'center']}
             direction={['column', 'row']}>
             <Button
@@ -55,6 +56,7 @@ export const ConfirmModal = ({
               justifyContent={['center', 'flex-start']}
               variant="primary"
               variantColor="danger"
+              variantSize="medium"
               {...options.confirmButton.props}
               onClick={async () => {
                 try {

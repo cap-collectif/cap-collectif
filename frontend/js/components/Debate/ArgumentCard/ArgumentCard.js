@@ -2,16 +2,18 @@
 import React, { useState } from 'react';
 import { truncate } from 'lodash';
 import { createFragmentContainer, graphql } from 'react-relay';
-import moment from 'moment';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
-import type { ArgumentCard_argument } from '~relay/ArgumentCard_argument.graphql';
+import { useDisclosure } from '@liinkiing/react-hooks';
+import type {
+  ArgumentCard_argument,
+  ForOrAgainstValue,
+} from '~relay/ArgumentCard_argument.graphql';
 import type { ArgumentCard_viewer } from '~relay/ArgumentCard_viewer.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
 import Tag from '~ds/Tag/Tag';
 import Text from '~ui/Primitives/Text';
 import { LineHeight } from '~ui/Primitives/constants';
-import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentVoteMutation from '~/mutations/AddDebateArgumentVoteMutation';
@@ -19,11 +21,13 @@ import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVo
 import Button from '~ds/Button/Button';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument';
-import { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
+import ModalArgumentAuthorMenu from '~/components/Debate/Page/Arguments/ModalArgumentAuthorMenu';
+import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import Menu from '~ds/Menu/Menu';
-import ArgumentCardEdition from './ArgumentCardEdition';
-
-export type DebateOpinionStatus = 'FOR' | 'AGAINST';
+import ArgumentCardFormEdition from './ArgumentCardFormEdition';
+import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalReportArgumentMobile';
+import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
+import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
 
 type Props = {|
   ...AppBoxProps,
@@ -31,9 +35,9 @@ type Props = {|
   +argument: ArgumentCard_argument,
   +viewer: ?ArgumentCard_viewer,
   +isMobile?: boolean,
-  +setReportModalId: (id: string) => void,
+  +setArgumentReported: (argument: ArgumentReported) => void,
   +setModerateArgumentModal: (argument: ModerateArgument) => void,
-  +setDeleteModalInfo: ({ id: string, type: DebateOpinionStatus }) => void,
+  +setDeleteModalInfo: ({ id: string, type: ForOrAgainstValue }) => void,
 |};
 
 export const voteForArgument = (
@@ -73,14 +77,13 @@ export const ArgumentCard = ({
   isMobile,
   onReadMore,
   setModerateArgumentModal,
-  setReportModalId,
+  setArgumentReported,
   setDeleteModalInfo,
   ...props
 }: Props) => {
   const isViewerAdmin = viewer && viewer.isAdmin;
-  const canReport =
-    viewer && !isViewerAdmin && !argument.viewerHasReport && !argument.viewerDidAuthor;
-
+  const isAuthor = argument.viewerDidAuthor;
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
   const [isEditing, setIsEditing] = useState(false);
   const [readMore, setReadMore] = useState(false);
@@ -93,7 +96,7 @@ export const ArgumentCard = ({
             <Text maxWidth="100px" mr={2}>
               {argument.author.username}
             </Text>
-            <Tag variant={argument.type === 'FOR' ? 'green' : 'red'}>
+            <Tag variant={argument.type === 'FOR' ? 'green' : 'red'} interactive={false}>
               <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
               </Text>
@@ -101,68 +104,91 @@ export const ArgumentCard = ({
           </Flex>
 
           <Flex direction="row" align="center">
-            <Text fontSize={[1, 3]} color="neutral-gray.500">
-              {moment(argument.publishedAt)
-                .startOf('day')
-                .fromNow()}
-            </Text>
-
-            {isViewerAdmin && !argument.viewerDidAuthor && (
-              <Button
-                onClick={() =>
-                  setModerateArgumentModal({
-                    id: argument.id,
-                    state: 'PUBLISHED',
-                    debateId: argument.debate.id,
-                    forOrAgainst: argument.type,
-                  })
-                }
-                rightIcon={ICON_NAME.MODERATE}
-                color="neutral-gray.500"
-              />
-            )}
-
-            {argument.viewerDidAuthor && (
-              <>
+            {isViewerAdmin &&
+              !isAuthor &&
+              (!isMobile ? (
                 <Button
-                  disabled={isEditing}
-                  onClick={() => setIsEditing(true)}
-                  rightIcon={ICON_NAME.PENCIL}
+                  onClick={() =>
+                    setModerateArgumentModal({
+                      id: argument.id,
+                      state: 'PUBLISHED',
+                      debateId: argument.debate.id,
+                      forOrAgainst: argument.type,
+                    })
+                  }
+                  rightIcon={ICON_NAME.MODERATE}
                   color="neutral-gray.500"
                 />
-                <Button
-                  disabled={isEditing}
-                  onClick={() => setDeleteModalInfo({ id: argument.id, type: argument.type })}
-                  rightIcon={ICON_NAME.TRASH}
-                  color="neutral-gray.500"
-                />
-              </>
-            )}
+              ) : (
+                <ModalModerateArgumentMobile argument={argument} />
+              ))}
 
-            {canReport && (
-              <Menu>
-                <Menu.Button as={React.Fragment}>
+            {isAuthor &&
+              (!isMobile ? (
+                <>
+                  {!isEditing && (
+                    <Button
+                      onClick={() => setIsEditing(true)}
+                      rightIcon={ICON_NAME.PENCIL}
+                      color="neutral-gray.500"
+                      aria-label={intl.formatMessage({ id: 'global.edit' })}
+                    />
+                  )}
                   <Button
-                    rightIcon={ICON_NAME.MORE}
-                    aria-label={intl.formatMessage({ id: 'global.menu' })}
-                    color="gray.500"
+                    disabled={isEditing}
+                    onClick={() => setDeleteModalInfo({ id: argument.id, type: argument.type })}
+                    rightIcon={ICON_NAME.TRASH}
+                    color="neutral-gray.500"
+                    aria-label={intl.formatMessage({ id: 'global.delete' })}
                   />
-                </Menu.Button>
-                <Menu.List>
-                  <Menu.ListItem
-                    as={Button}
-                    onClick={() => setReportModalId(argument.id)}
-                    leftIcon={ICON_NAME.FLAG}
-                    color="blue.900">
-                    {intl.formatMessage({ id: 'global.report.submit' })}
-                  </Menu.ListItem>
-                </Menu.List>
-              </Menu>
-            )}
+                </>
+              ) : (
+                <ModalArgumentAuthorMenu argument={argument} />
+              ))}
+
+            {argument.viewerCanReport &&
+              (!isMobile ? (
+                <Menu>
+                  <Menu.Button as={React.Fragment}>
+                    <Button
+                      rightIcon={ICON_NAME.MORE}
+                      aria-label={intl.formatMessage({ id: 'global.menu' })}
+                      color="gray.500"
+                    />
+                  </Menu.Button>
+                  <Menu.List>
+                    <Menu.ListItem
+                      as={Button}
+                      onClick={() =>
+                        setArgumentReported({
+                          id: argument.id,
+                          debateId: argument.debate.id,
+                          forOrAgainst: argument.type,
+                        })
+                      }
+                      leftIcon={ICON_NAME.FLAG}
+                      color="blue.900">
+                      {intl.formatMessage({ id: 'global.report.submit' })}
+                    </Menu.ListItem>
+                  </Menu.List>
+                </Menu>
+              ) : (
+                <Button
+                  rightIcon={ICON_NAME.MORE}
+                  aria-label={intl.formatMessage({ id: 'global.menu' })}
+                  color="gray.500"
+                  onClick={onOpen}
+                />
+              ))}
           </Flex>
         </Flex>
+
         {isEditing ? (
-          <ArgumentCardEdition argument={argument} goBack={() => setIsEditing(false)} />
+          <ArgumentCardFormEdition
+            argument={argument}
+            goBack={() => setIsEditing(false)}
+            intl={intl}
+          />
         ) : (
           <Text>
             {readMore
@@ -177,37 +203,34 @@ export const ArgumentCard = ({
                     if (onReadMore) onReadMore();
                     else setReadMore(!readMore);
                   }}
-                  variant="link"
-                  variantSize="medium">
-                  <FormattedMessage id={readMore ? 'see-less' : 'capco.module.read_more'} />
+                  variant="link">
+                  <FormattedMessage id={readMore ? 'see-less' : 'global.plus'} />
                 </Button>
               </>
             )}
           </Text>
         )}
-        <Flex
-          mt={['auto', 3]}
-          align="center"
-          justify={['center', 'flex-start']}
-          flexDirection="row">
-          <LoginOverlay>
-            <ButtonQuickAction
-              onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
-              mr={1}
-              size={isMobile ? ICON_SIZE.LG : ICON_SIZE.MD}
-              icon="THUMB_UP"
-              variantColor="green"
-              label={
-                <FormattedMessage id={argument.viewerHasVote ? 'global.cancel' : 'vote.add'} />
-              }
-              iconColor={argument.viewerHasVote ? 'green.500' : 'gray.500'}
-            />
-          </LoginOverlay>
-          <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.700">
-            {argument.votes.totalCount}
-          </Text>
-        </Flex>
+
+        {!isEditing && (
+          <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
+            <LoginOverlay>
+              <Button
+                color="neutral-gray.500"
+                leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
+                onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
+                aria-label={intl.formatMessage({
+                  id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
+                })}
+              />
+            </LoginOverlay>
+            <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">
+              {argument.votes.totalCount}
+            </Text>
+          </Flex>
+        )}
       </Flex>
+
+      <ModalReportArgumentMobile show={isOpen} argument={argument} onClose={onClose} />
     </Card>
   );
 };
@@ -229,11 +252,13 @@ export default createFragmentContainer(ArgumentCard, {
         id
       }
       type
-      publishedAt
+      viewerCanReport @include(if: $isAuthenticated)
       viewerDidAuthor @include(if: $isAuthenticated)
-      viewerHasReport @include(if: $isAuthenticated)
       viewerHasVote @include(if: $isAuthenticated)
-      ...ArgumentCardEdition_argument
+      ...ArgumentCardFormEdition_argument
+      ...ModalArgumentAuthorMenu_argument
+      ...ModalReportArgumentMobile_argument @include(if: $isAuthenticated)
+      ...ModalModerateArgumentMobile_argument @include(if: $isAuthenticated)
     }
   `,
   viewer: graphql`

@@ -22,11 +22,11 @@ const defaultProps = {
       id: 'debate-123',
     },
     type: 'FOR',
-    publishedAt: '01-02-2021:19h00',
-    viewerHasVote: true,
-    viewerDidAuthor: true,
+    viewerHasVote: false,
+    viewerDidAuthor: false,
+    viewerCanReport: false,
   },
-  setReportModalId: jest.fn(),
+  setArgumentReported: jest.fn(),
   setModerateArgumentModal: jest.fn(),
   setDeleteModalInfo: jest.fn(),
   isMobile: false,
@@ -41,6 +41,12 @@ const props = {
   },
   asViewer: {
     ...defaultProps,
+    argument: {
+      ...defaultProps.argument,
+      viewerHasVote: true,
+      viewerCanReport: true,
+      viewerDidAuthor: true,
+    },
     viewer: {
       ...defaultProps.viewer,
       $refType,
@@ -49,6 +55,12 @@ const props = {
   },
   asViewerAdmin: {
     ...defaultProps,
+    argument: {
+      ...defaultProps.argument,
+      viewerCanReport: false,
+      viewerHasVote: true,
+      viewerDidAuthor: true,
+    },
     viewer: {
       ...defaultProps.viewer,
       $refType,

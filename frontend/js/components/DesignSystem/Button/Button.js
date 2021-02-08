@@ -14,8 +14,8 @@ export type ButtonProps = {|
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link',
   variantColor?: 'primary' | 'danger',
   variantSize?: 'small' | 'medium' | 'big',
-  leftIcon?: $Values<typeof ICON_NAME>,
-  rightIcon?: $Values<typeof ICON_NAME>,
+  leftIcon?: $Values<typeof ICON_NAME> | React.Element<typeof Icon>,
+  rightIcon?: $Values<typeof ICON_NAME> | React.Element<typeof Icon>,
   children?: React.Node,
   disabled?: boolean,
   alternative?: boolean,
@@ -100,13 +100,21 @@ const Button = React.forwardRef<ButtonProps, HTMLButtonElement>(
           </>
         ) : (
           <>
-            {leftIcon && (
-              <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={1} />
-            )}
+            {leftIcon &&
+              (typeof leftIcon === 'string' ? (
+                <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={1} />
+              ) : (
+                React.cloneElement(leftIcon, { marginRight: 1 })
+              ))}
+
             {children}
-            {rightIcon && (
-              <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={1} />
-            )}
+
+            {rightIcon &&
+              (typeof rightIcon === 'string' ? (
+                <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={1} />
+              ) : (
+                React.cloneElement(rightIcon, { marginLeft: 1 })
+              ))}
           </>
         )}
       </ButtonInner>

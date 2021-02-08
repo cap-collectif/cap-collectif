@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalDeleteArgumentMobile /> should renders correcty with argument 1`] = `
+<Modal
+  ariaLabel="confirm-delete-argument"
+  disclosure={
+    <ForwardRef
+      justifyContent="center"
+      leftIcon="TRASH"
+      variant="tertiary"
+      variantColor="danger"
+    >
+      global.delete
+    </ForwardRef>
+  }
+  onClose={[MockFunction]}
+>
+  <Component />
+</Modal>
+`;

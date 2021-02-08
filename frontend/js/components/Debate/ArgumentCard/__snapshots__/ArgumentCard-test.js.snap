@@ -26,6 +26,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
           Agui
         </Text>
         <Tag
+          interactive={false}
           variant="green"
         >
           <Text
@@ -45,31 +46,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
       <ForwardRef
         align="center"
         direction="row"
-      >
-        <Text
-          color="neutral-gray.500"
-          fontSize={
-            Array [
-              1,
-              3,
-            ]
-          }
-        >
-          Invalid date
-        </Text>
-        <Button
-          color="neutral-gray.500"
-          disabled={false}
-          onClick={[Function]}
-          rightIcon="PENCIL"
-        />
-        <Button
-          color="neutral-gray.500"
-          disabled={false}
-          onClick={[Function]}
-          rightIcon="TRASH"
-        />
-      </ForwardRef>
+      />
     </ForwardRef>
     <Text>
       Je suis pour le LSD dans nos cantines
@@ -78,12 +55,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
     <ForwardRef
       align="center"
       flexDirection="row"
-      justify={
-        Array [
-          "center",
-          "flex-start",
-        ]
-      }
+      justify="center"
       mt={
         Array [
           "auto",
@@ -92,24 +64,21 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
       }
     >
       <Connect(LoginOverlay)>
-        <ButtonQuickAction
-          icon="THUMB_UP"
-          iconColor="green.500"
-          label={
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
+        <Button
+          aria-label="vote.add"
+          color="neutral-gray.500"
+          leftIcon={
+            <ForwardRef
+              name="CLAP_O"
+              size="lg"
             />
           }
-          mr={1}
           onClick={[Function]}
-          size="md"
-          variantColor="green"
         />
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="neutral-gray.700"
+        color="neutral-gray.900"
         fontSize={
           Array [
             4,
@@ -127,6 +96,32 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
+  <Relay(Connect(ModalReportArgumentMobile))
+    argument={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+        },
+        "id": "argumentPour42",
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
 </Card>
 `;
 
@@ -156,6 +151,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
           Agui
         </Text>
         <Tag
+          interactive={false}
           variant="green"
         >
           <Text
@@ -175,31 +171,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
       <ForwardRef
         align="center"
         direction="row"
-      >
-        <Text
-          color="neutral-gray.500"
-          fontSize={
-            Array [
-              1,
-              3,
-            ]
-          }
-        >
-          Invalid date
-        </Text>
-        <Button
-          color="neutral-gray.500"
-          disabled={false}
-          onClick={[Function]}
-          rightIcon="PENCIL"
-        />
-        <Button
-          color="neutral-gray.500"
-          disabled={false}
-          onClick={[Function]}
-          rightIcon="TRASH"
-        />
-      </ForwardRef>
+      />
     </ForwardRef>
     <Text>
       Je suis pour le LSD dans nos cantines
@@ -208,12 +180,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
     <ForwardRef
       align="center"
       flexDirection="row"
-      justify={
-        Array [
-          "center",
-          "flex-start",
-        ]
-      }
+      justify="center"
       mt={
         Array [
           "auto",
@@ -222,24 +189,21 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
       }
     >
       <Connect(LoginOverlay)>
-        <ButtonQuickAction
-          icon="THUMB_UP"
-          iconColor="green.500"
-          label={
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
+        <Button
+          aria-label="vote.add"
+          color="neutral-gray.500"
+          leftIcon={
+            <ForwardRef
+              name="CLAP_O"
+              size="lg"
             />
           }
-          mr={1}
           onClick={[Function]}
-          size="lg"
-          variantColor="green"
         />
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="neutral-gray.700"
+        color="neutral-gray.900"
         fontSize={
           Array [
             4,
@@ -257,6 +221,32 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
+  <Relay(Connect(ModalReportArgumentMobile))
+    argument={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+        },
+        "id": "argumentPour42",
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
 </Card>
 `;
 
@@ -286,6 +276,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
           Agui
         </Text>
         <Tag
+          interactive={false}
           variant="green"
         >
           <Text
@@ -306,24 +297,14 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
         align="center"
         direction="row"
       >
-        <Text
-          color="neutral-gray.500"
-          fontSize={
-            Array [
-              1,
-              3,
-            ]
-          }
-        >
-          Invalid date
-        </Text>
         <Button
+          aria-label="global.edit"
           color="neutral-gray.500"
-          disabled={false}
           onClick={[Function]}
           rightIcon="PENCIL"
         />
         <Button
+          aria-label="global.delete"
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
@@ -338,12 +319,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
     <ForwardRef
       align="center"
       flexDirection="row"
-      justify={
-        Array [
-          "center",
-          "flex-start",
-        ]
-      }
+      justify="center"
       mt={
         Array [
           "auto",
@@ -352,24 +328,21 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
       }
     >
       <Connect(LoginOverlay)>
-        <ButtonQuickAction
-          icon="THUMB_UP"
-          iconColor="green.500"
-          label={
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
+        <Button
+          aria-label="global.cancel"
+          color="neutral-gray.500"
+          leftIcon={
+            <ForwardRef
+              name="CLAP"
+              size="lg"
             />
           }
-          mr={1}
           onClick={[Function]}
-          size="md"
-          variantColor="green"
         />
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="neutral-gray.700"
+        color="neutral-gray.900"
         fontSize={
           Array [
             4,
@@ -387,6 +360,32 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
+  <Relay(Connect(ModalReportArgumentMobile))
+    argument={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+        },
+        "id": "argumentPour42",
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": true,
+        "viewerHasVote": true,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
 </Card>
 `;
 
@@ -416,6 +415,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
           Agui
         </Text>
         <Tag
+          interactive={false}
           variant="green"
         >
           <Text
@@ -436,29 +436,51 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
         align="center"
         direction="row"
       >
-        <Text
-          color="neutral-gray.500"
-          fontSize={
-            Array [
-              1,
-              3,
-            ]
-          }
-        >
-          Invalid date
-        </Text>
         <Button
+          aria-label="global.edit"
           color="neutral-gray.500"
-          disabled={false}
           onClick={[Function]}
           rightIcon="PENCIL"
         />
         <Button
+          aria-label="global.delete"
           color="neutral-gray.500"
           disabled={false}
           onClick={[Function]}
           rightIcon="TRASH"
         />
+        <Menu>
+          <Menu.Button
+            as={Symbol(react.fragment)}
+          >
+            <Button
+              aria-label="global.menu"
+              color="gray.500"
+              rightIcon="MORE"
+            />
+          </Menu.Button>
+          <Menu.List>
+            <Menu.ListItem
+              as={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "__docgenInfo": Object {
+                    "description": "",
+                    "displayName": "Button",
+                    "methods": Array [],
+                  },
+                  "displayName": "Button",
+                  "render": [Function],
+                }
+              }
+              color="blue.900"
+              leftIcon="FLAG"
+              onClick={[Function]}
+            >
+              global.report.submit
+            </Menu.ListItem>
+          </Menu.List>
+        </Menu>
       </ForwardRef>
     </ForwardRef>
     <Text>
@@ -468,12 +490,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
     <ForwardRef
       align="center"
       flexDirection="row"
-      justify={
-        Array [
-          "center",
-          "flex-start",
-        ]
-      }
+      justify="center"
       mt={
         Array [
           "auto",
@@ -482,24 +499,21 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
       }
     >
       <Connect(LoginOverlay)>
-        <ButtonQuickAction
-          icon="THUMB_UP"
-          iconColor="green.500"
-          label={
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
+        <Button
+          aria-label="global.cancel"
+          color="neutral-gray.500"
+          leftIcon={
+            <ForwardRef
+              name="CLAP"
+              size="lg"
             />
           }
-          mr={1}
           onClick={[Function]}
-          size="md"
-          variantColor="green"
         />
       </Connect(LoginOverlay)>
       <Text
         as="span"
-        color="neutral-gray.700"
+        color="neutral-gray.900"
         fontSize={
           Array [
             4,
@@ -517,5 +531,31 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
+  <Relay(Connect(ModalReportArgumentMobile))
+    argument={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+        },
+        "id": "argumentPour42",
+        "type": "FOR",
+        "viewerCanReport": true,
+        "viewerDidAuthor": true,
+        "viewerHasVote": true,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
 </Card>
 `;

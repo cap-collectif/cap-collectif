@@ -16,6 +16,7 @@ import ModalModerateArgument, {
 import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportArgument';
 import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
 import { formatConnectionPath } from '~/shared/utils/relay';
+import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
 
 type Props = {|
   +debate: DebateStepPageArgumentsPagination_debate$key & { +id: string },
@@ -129,7 +130,7 @@ export const DebateStepPageArgumentsPagination = ({
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debate);
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
-  const [reportModalId, setReportModalId] = React.useState<?string>(null);
+  const [argumentReported, setArgumentReported] = React.useState<?ArgumentReported>(null);
   const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
     id: string,
@@ -151,7 +152,7 @@ export const DebateStepPageArgumentsPagination = ({
           <ArgumentCard
             argument={argument}
             viewer={viewer}
-            setReportModalId={setReportModalId}
+            setArgumentReported={setArgumentReported}
             setModerateArgumentModal={setModerateArgumentModal}
             setDeleteModalInfo={setDeleteModalInfo}
           />
@@ -172,8 +173,11 @@ export const DebateStepPageArgumentsPagination = ({
         />
       )}
 
-      {reportModalId && (
-        <ModalReportArgument argumentId={reportModalId} onClose={() => setReportModalId(null)} />
+      {argumentReported && (
+        <ModalReportArgument
+          argument={argumentReported}
+          onClose={() => setArgumentReported(null)}
+        />
       )}
 
       {deleteModalInfo && (

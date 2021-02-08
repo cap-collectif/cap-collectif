@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ArgumentCardEdition /> renders correcty 1`] = `
-<ArgumentCardEdition__Form
+exports[`<ArgumentCardFormEdition /> renders correcty 1`] = `
+<ArgumentCardFormEdition__Form
   id="argument-card-edition-form"
+  onSubmit={[MockFunction]}
 >
   <Field
     autoComplete="off"
@@ -12,35 +13,27 @@ exports[`<ArgumentCardEdition /> renders correcty 1`] = `
     name="body"
     type="textarea"
   />
-  <ForwardRef
+  <ButtonGroup
     justifyContent="flex-end"
     mt={2}
   >
     <Button
       color="neutral-gray.500"
-      mr={6}
       onClick={[MockFunction]}
-      type="button"
       variantSize="small"
     >
-      <FormattedMessage
-        id="global.cancel"
-        values={Object {}}
-      />
+      global.cancel
     </Button>
     <Button
       disabled={false}
       onClick={[Function]}
-      type="button"
+      type="submit"
       variant="primary"
       variantColor="primary"
-      variantSize="medium"
+      variantSize="small"
     >
-      <FormattedMessage
-        id="modifications.publish"
-        values={Object {}}
-      />
+      global.edit
     </Button>
-  </ForwardRef>
-</ArgumentCardEdition__Form>
+  </ButtonGroup>
+</ArgumentCardFormEdition__Form>
 `;

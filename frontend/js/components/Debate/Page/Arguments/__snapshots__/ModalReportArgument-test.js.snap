@@ -28,7 +28,7 @@ exports[`<ModalReportArgument /> should renders correcty with argument 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <injectIntl(ReduxForm)
+    <ReduxForm
       onSubmit={[Function]}
     />
   </ModalBody>

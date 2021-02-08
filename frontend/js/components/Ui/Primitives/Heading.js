@@ -3,6 +3,12 @@ import * as React from 'react';
 import AppBox from '~ui/Primitives/AppBox';
 import { FontWeight, LineHeight } from '~ui/Primitives/constants';
 import jsxInnerText from '~/utils/jsxInnerText';
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+
+type Props = {|
+  ...AppBoxProps,
+  +truncate?: number,
+|};
 
 export const HeadingSize: {
   Xl: 'xl',
@@ -47,27 +53,29 @@ const sizes = {
 };
 
 // typings is handled by the .d.ts file
-const Heading: any = React.forwardRef(({ children, truncate, as = 'h2', ...rest }: any, ref) => {
-  let content = children;
-  const innerText = jsxInnerText(content);
-  if (truncate && innerText.length > truncate) {
-    content = `${innerText.slice(0, truncate)}…`;
-  }
-  return (
-    <AppBox
-      ref={ref}
-      as={as}
-      fontFamily="heading"
-      fontSize={sizes[as] ? sizes[as].fontSize : 1}
-      fontWeight={sizes[as] ? sizes[as].fontWeight : FontWeight.Normal}
-      lineHeight={sizes[as] ? sizes[as].lineHeight : LineHeight.Base}
-      m={0}
-      {...(truncate ? { title: innerText } : {})}
-      {...rest}>
-      {content}
-    </AppBox>
-  );
-});
+const Heading = React.forwardRef<Props, HTMLElement>(
+  ({ children, truncate, as = 'h2', ...props }: Props, ref) => {
+    let content = children;
+    const innerText = jsxInnerText(content);
+    if (truncate && innerText.length > truncate) {
+      content = `${innerText.slice(0, truncate)}…`;
+    }
+    return (
+      <AppBox
+        ref={ref}
+        as={as}
+        fontFamily="heading"
+        fontSize={sizes[as] ? sizes[as].fontSize : 1}
+        fontWeight={sizes[as] ? sizes[as].fontWeight : FontWeight.Normal}
+        lineHeight={sizes[as] ? sizes[as].lineHeight : LineHeight.Base}
+        m={0}
+        {...(truncate && { title: innerText })}
+        {...props}>
+        {content}
+      </AppBox>
+    );
+  },
+);
 
 Heading.displayName = 'Heading';
 

@@ -1,9 +1,22 @@
-// thanks flow for the need to use fake "computed property" because
-// 'NoN StrInG liTeRAl PropERtY KeYS nOt SupPortED
-// https://github.com/facebook/flow/issues/380#issuecomment-224380551
-
 // @flow
-const colors = {
+
+type SimpleColors = {|
+  transparent: string,
+  current: string,
+  dark: string,
+
+  black: string,
+  white: string,
+|};
+
+type Colors = {|
+  ...SimpleColors,
+  [name: string]: {|
+    [tint: string | number]: string,
+  |},
+|};
+
+const colors: Colors = {
   transparent: 'transparent',
   current: 'currentColor',
   dark: '#30363D',

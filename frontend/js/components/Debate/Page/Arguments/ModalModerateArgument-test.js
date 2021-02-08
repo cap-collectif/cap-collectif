@@ -3,11 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ModalModerateArgument } from './ModalModerateArgument';
-import { intlMock, formMock } from '~/mocks';
 import { formatConnectionPath } from '~/shared/utils/relay';
 
 const defaultProps = {
-  ...formMock,
   argument: {
     id: 'argument-123',
     state: 'PUBLISHED',
@@ -15,7 +13,6 @@ const defaultProps = {
     forOrAgainst: 'FOR',
   },
   onClose: jest.fn(),
-  intl: intlMock,
   dispatch: jest.fn(),
   relayConnection: [
     formatConnectionPath(

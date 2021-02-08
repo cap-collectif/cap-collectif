@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalEditArgumentMobile /> should renders correcty with argument 1`] = `
+<Modal
+  ariaLabel="global.edit"
+  disclosure={
+    <ForwardRef
+      justifyContent="center"
+      variant="primary"
+      variantColor="primary"
+      variantSize="big"
+    >
+      global.edit
+    </ForwardRef>
+  }
+  onClose={[MockFunction]}
+>
+  <Component />
+</Modal>
+`;

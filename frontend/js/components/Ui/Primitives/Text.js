@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import AppBox from './AppBox';
 import { LineHeight } from '~ui/Primitives/constants';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';

@@ -10,6 +10,7 @@ export type ResponsiveBoolean = boolean | Array<boolean>;
 
 type CustomStyled = {|
   +uppercase?: boolean,
+  +capitalize?: boolean,
 |};
 
 type LinkProps = {|

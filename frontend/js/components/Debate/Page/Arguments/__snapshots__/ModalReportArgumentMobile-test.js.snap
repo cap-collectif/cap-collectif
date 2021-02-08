@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`] = `
+<Modal
+  ariaLabel="global.menu"
+  show={false}
+>
+  <Modal.Body
+    p={6}
+    spacing={6}
+  >
+    <Modal
+      ariaLabel="global.report.submit"
+      disclosure={
+        <ForwardRef
+          justifyContent="center"
+          variant="primary"
+          variantColor="danger"
+          variantSize="big"
+        >
+          global.report.submit
+        </ForwardRef>
+      }
+      onClose={[MockFunction]}
+    >
+      <Component />
+    </Modal>
+  </Modal.Body>
+</Modal>
+`;
+
+exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`] = `
+<Modal
+  ariaLabel="global.menu"
+  show={true}
+>
+  <Modal.Body
+    p={6}
+    spacing={6}
+  >
+    <Modal
+      ariaLabel="global.report.submit"
+      disclosure={
+        <ForwardRef
+          justifyContent="center"
+          variant="primary"
+          variantColor="danger"
+          variantSize="big"
+        >
+          global.report.submit
+        </ForwardRef>
+      }
+      onClose={[MockFunction]}
+    >
+      <Component />
+    </Modal>
+  </Modal.Body>
+</Modal>
+`;

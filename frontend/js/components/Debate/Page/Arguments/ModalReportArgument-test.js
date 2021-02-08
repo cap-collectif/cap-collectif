@@ -7,7 +7,11 @@ import { intlMock, formMock } from '~/mocks';
 
 const defaultProps = {
   ...formMock,
-  argumentId: 'argument-123',
+  argument: {
+    id: 'argument-123',
+    debateId: 'debate-123',
+    forOrAgainst: 'FOR',
+  },
   onClose: jest.fn(),
   intl: intlMock,
   dispatch: jest.fn(),

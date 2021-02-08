@@ -28,76 +28,9 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <form
-      id="form-moderate-argument"
-      onSubmit={[MockFunction]}
-    >
-      <Field
-        bold={true}
-        component={[Function]}
-        id="toggle-isVisible"
-        label={
-          <div>
-            <FormattedMessage
-              id="toggle.hide.content"
-              values={Object {}}
-            />
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  className="text-left"
-                  id="tooltip-description"
-                  placement="right"
-                >
-                  tooltip.explanation.hide.content
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <Icon
-                className="ml-5"
-                color="#acacac"
-                name="information"
-                size={12}
-              />
-            </OverlayTrigger>
-          </div>
-        }
-        name="hideContent"
-        normalize={[Function]}
-      />
-      <Field
-        component={[Function]}
-        id="reason"
-        label={
-          <div>
-            <FormattedMessage
-              id="global.moderation.reason"
-              values={Object {}}
-            />
-             
-            <span
-              className="excerpt"
-            >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
-            </span>
-          </div>
-        }
-        name="reason"
-        type="text"
-      />
-    </form>
+    <ReduxForm
+      onSubmit={[Function]}
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"

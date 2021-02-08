@@ -30,3 +30,5 @@ export { default as FLAG } from './svg/flag.svg';
 export { default as MORE } from './svg/more.svg';
 export { default as MODERATE } from './svg/moderate.svg';
 export { default as HYPERLINK } from './svg/hyperlink.svg';
+export { default as CLAP } from './svg/clap.svg';
+export { default as CLAP_O } from './svg/clap-o.svg';

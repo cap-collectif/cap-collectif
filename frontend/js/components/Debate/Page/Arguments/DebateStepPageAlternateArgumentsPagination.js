@@ -21,6 +21,7 @@ import ModalReportArgument from '~/components/Debate/Page/Arguments/ModalReportA
 import ModalDeleteArgument from '~/components/Debate/Page/Arguments/ModalDeleteArgument';
 import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument';
 import { formatConnectionPath } from '~/shared/utils/relay';
+import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
 
 type Props = {|
   +handleChange?: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
@@ -124,7 +125,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debateFragment);
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
-  const [reportModalId, setReportModalId] = React.useState<?string>(null);
+  const [argumentReported, setArgumentReported] = React.useState<?ArgumentReported>(null);
   const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
     id: string,
@@ -167,7 +168,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   isMobile
                   argument={argument}
                   viewer={viewer}
-                  setReportModalId={setReportModalId}
+                  setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
                 />
@@ -208,7 +209,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   viewer={viewer}
                   bg="neutral-gray.100"
                   mb={6}
-                  setReportModalId={setReportModalId}
+                  setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
                 />
@@ -228,12 +229,14 @@ export const DebateStepPageAlternateArgumentsPagination = ({
               'DebateStepPageAlternateArgumentsPagination_alternateArguments',
             ),
           ]}
-          isArgumentAlternate
         />
       )}
 
-      {reportModalId && (
-        <ModalReportArgument argumentId={reportModalId} onClose={() => setReportModalId(null)} />
+      {argumentReported && (
+        <ModalReportArgument
+          argument={argumentReported}
+          onClose={() => setArgumentReported(null)}
+        />
       )}
 
       {deleteModalInfo && (
