@@ -12,7 +12,7 @@
 {% set isConsultation = isConsultationType or isConsultationRoute or getConsultations %}
 {% set shouldDisplayProjectHeader = currentStep is defined and currentStep.slug is defined and isConsultation %}
 
-{% set stepsParticipation = ["app_project_show_consultation", "app_project_show_collect", "app_project_show_selection"] %}
+{% set stepsParticipation = ["app_project_show_consultation", "app_project_show_collect", "app_project_show_selection", "app_project_show_debate"] %}
 {% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') in stepsParticipation %}
 
 {% block canonical_link %}{% endblock %}

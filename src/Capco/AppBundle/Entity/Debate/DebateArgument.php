@@ -94,6 +94,15 @@ class DebateArgument implements
         $this->reports = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        if ($this->id) {
+            return $this->getBodyText();
+        }
+
+        return 'New debate argument';
+    }
+
     public function getStep(): ?DebateStep
     {
         if ($this->getDebate()) {

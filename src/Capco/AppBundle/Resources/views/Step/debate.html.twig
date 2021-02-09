@@ -5,9 +5,7 @@
 {% set getConsultations = currentStep is defined and currentStep.type is defined and currentStep.type  == 'consultation' and currentStep.consultations.count <= 1 %}
 {% set isConsultation = isConsultationType or isConsultationRoute or getConsultations %}
 {% set shouldDisplayProjectHeader = currentStep is defined and currentStep.slug is defined and isConsultation %}
-
-{% set stepsParticipation = ["app_project_show_consultation", "app_project_show_collect", "app_project_show_selection"] %}
-{% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') in stepsParticipation %}
+{% set showTrash = is_feature_enabled('project_trash') %}
 
 {% block canonical_link %}{{ url('app_project_show_debate', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -62,11 +60,22 @@
     {{ react_render_component('DebateStepPageApp',
     { 'props':
         { stepId: currentStep.id|toGlobalId('DebateStep'),
-          title: currentStep.title } 
+          title: currentStep.title }
           })
     }}
     </div>
     </section>
+
+    {% if showTrash %}
+        <section class="hidden-print">
+            {{ react_render_component('ProjectTrashButtonApp', {
+                'props': {
+                    'link': path('app_project_show_trashed', {'projectSlug': project.slug })
+                },
+            }) }}
+        </section>
+    {% endif %}
+
 {% endblock %}
 
 {% block javascripts %}

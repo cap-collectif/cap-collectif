@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Model\ReportableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -45,6 +46,8 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
     ];
 
     public static $argumentTypesLabels = [
+        ForOrAgainstType::AGAINST => 'argument.show.type.against',
+        ForOrAgainstType::FOR => 'argument.show.type.for',
         self::TYPE_FOR => 'argument.show.type.for',
         self::TYPE_AGAINST => 'argument.show.type.against',
         self::TYPE_SIMPLE => 'global.review',

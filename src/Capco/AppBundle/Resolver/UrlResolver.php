@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Theme;
@@ -123,6 +124,18 @@ class UrlResolver
             return $this->router->generate(
                 'app_blog_show',
                 ['slug' => $object->getSlug(), '_locale' => $locale],
+                $referenceType
+            );
+        }
+
+        if ($object instanceof DebateArgument && $object->getProject() && $object->getStep()) {
+            return $this->router->generate(
+                'app_project_show_debate',
+                [
+                    'projectSlug' => $object->getProject()->getSlug(),
+                    'stepSlug' => $object->getStep()->getSlug(),
+                    '_locale' => $locale
+                ],
                 $referenceType
             );
         }

@@ -84,6 +84,8 @@
                                             <span>{{ 'global.comment'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% elseif (report.proposal is not null) %}
                                             <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (report.debateArgument is not null) %}
+                                            <span>{{ 'admin.fields.reporting.debateArgument'|trans({}, 'CapcoAppBundle') }}</span>
                                         {% endif %}
                                     </td>
                                     <td class="sonata-ba-list-field sonata-ba-list-field-text">

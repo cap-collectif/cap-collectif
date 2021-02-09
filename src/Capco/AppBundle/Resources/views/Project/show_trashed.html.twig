@@ -33,8 +33,8 @@
                     {{ 'project.trash'|trans({}, 'CapcoAppBundle') }}
                 </h2>
             </div>
-            
-            {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length) %}
+
+            {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length + debateArguments|length) %}
             <div>
                 <p>
                     {{ 'project.show.trashed.text'|trans({}, 'CapcoAppBundle') }}
@@ -55,7 +55,7 @@
                     }}
 
                 {% endif %}
-                {% if opinions|length > 0 or versions|length > 0 or arguments|length > 0 or sources|length > 0 %}
+                {% if opinions|length > 0 or versions|length > 0 or arguments|length > 0 or sources|length > 0 or debateArguments|length > 0 %}
                     <div class="block  block--bordered">
                         <ul class="media-list  opinion__list">
                             {% if opinions|length > 0 %}
@@ -71,6 +71,11 @@
                             {% if arguments|length > 0 %}
                                 {% for argument in arguments %}
                                     {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels} only %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if debateArguments|length > 0 %}
+                                {% for argument in debateArguments %}
+                                    {% include 'CapcoAppBundle:Argument:blockDebateArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels } only %}
                                 {% endfor %}
                             {% endif %}
                             {% if sources|length > 0 %}

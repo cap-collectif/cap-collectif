@@ -1,0 +1,49 @@
+{% set nbVotes = debateArgumentVotesResolver.__invoke(argument).totalCount %}
+
+<li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="arg-{{ argument.id }}">
+    <div class="opinion__body  box">
+        {% if argument.Author is not null %}
+            {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': argument.Author, 'classes': '', 'link_classes': 'pull-left'} only %}
+        {% endif %}
+        <div class="opinion__data">
+            <p class="h5  opinion__user">
+                {% if is_feature_enabled('profiles') %}
+                    <a href="{{ path('capco_user_profile_show_all', {'slug': argument.author.slug}) }}">
+                        {{ argument.author.username }}
+                    </a>
+                {% else %}
+                    <span>
+                        {{ argument.author.username }}
+                    </span>
+                {% endif %}
+                {% if profile is defined %}
+                    <span class="label  label--right {% if argument.type == constant('Capco\\AppBundle\\Enum\\ForOrAgainstType::AGAINST') %}label-danger{% elseif argument.type == constant('Capco\\AppBundle\\Enum\\ForOrAgainstType::FOR') %}label-success{% endif %}">
+                        {{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}
+                    </span>
+                {% endif %}
+            </p>
+            <p class="excerpt  opinion__date">{{ argument.publishedAt | localizeddate('long', 'short', app.request.locale) }}</p>
+        </div>
+        <p class="opinion__text more" style="max-height: 115px; overflow: hidden; width: 100%">
+            {% if argument.isTrashed() %}
+                <span class="label label-default" style="position: static; margin-right: 5px">
+                    {{ 'global.is_trashed'|trans({}, 'CapcoAppBundle') }}
+                </span>
+                {% if argument.getTrashedStatus() == 'visible' %}
+                    {{ argument.body | escape | nl2br }}
+                {% elseif argument.getTrashedStatus() == 'invisible' %}
+                        {{ 'hidden-content'|trans({}, 'CapcoAppBundle') }}
+                {% endif %}
+            {% else %}
+                {{ argument.body | escape | nl2br }}
+            {% endif %}
+        </p>
+        {% if not argument.isTrashed() %}
+            <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'global.ok'|trans({}, 'CapcoAppBundle') }}</button>
+            <span class="opinion__votes-nb">{{ nbVotes }}</span>
+        {% else %}
+            <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'global.ok'|trans({}, 'CapcoAppBundle') }}</button>
+            <span class="opinion__votes-nb">{{ nbVotes }}</span>
+        {% endif %}
+    </div>
+</li>

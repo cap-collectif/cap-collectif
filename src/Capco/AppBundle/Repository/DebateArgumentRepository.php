@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -77,5 +78,25 @@ class DebateArgumentRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    /**
+     * Get all trashed or unpublished debate arguments for project.
+     */
+    public function getTrashedByProject(Project $project)
+    {
+        return $this->createQueryBuilder('da')
+            ->addSelect('debate', 'author', 'media', )
+            ->leftJoin('da.author', 'author')
+            ->leftJoin('author.media', 'media')
+            ->leftJoin('da.debate', 'debate')
+            ->leftJoin('debate.step', 'debate_step')
+            ->leftJoin('debate_step.projectAbstractStep', 'debate_step_pas')
+            ->andWhere('debate_step_pas.project = :project')
+            ->andWhere('da.trashedAt IS NOT NULL')
+            ->setParameter('project', $project)
+            ->orderBy('da.trashedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }

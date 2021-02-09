@@ -20,8 +20,11 @@ class DebateArgumentVotesResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(DebateArgument $debateArgument, Argument $args): ConnectionInterface
+    public function __invoke(DebateArgument $debateArgument, ?Argument $args = null): ConnectionInterface
     {
+        if (!$args) {
+            $args = new Argument(['first' => 0]);
+        }
         $orderBy = self::getOrderBy($args);
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $debateArgument,

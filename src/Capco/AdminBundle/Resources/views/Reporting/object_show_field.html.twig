@@ -28,6 +28,10 @@
             <a href="{{ path('admin_capco_app_proposal_edit', {'id': object.Proposal.id}) }}">
                 {{ object.Proposal.title|trans({}, 'CapcoAppBundle') }}
             </a>
+        {% elseif (object.debateArgument is not null) %}
+            <p>
+                {{ object.debateArgument.__toString|trans({}, 'CapcoAppBundle') }}
+            </p>
         {% endif %}
     </div>
 {% endblock %}

@@ -43,6 +43,7 @@ twig:
         userOpinionVersionResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionVersionResolver'
         mediaUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver'
         viewerCanSeeEvaluationsPageResolver: '@Capco\AppBundle\GraphQL\Resolver\Query\QueryViewerCanSeeEvaluationsPageResolver'
+        debateArgumentVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentVotesResolver'
     paths:
         '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
         '%kernel.project_dir%/src/Capco/AppBundle/PDF/templates': CapcoPDF

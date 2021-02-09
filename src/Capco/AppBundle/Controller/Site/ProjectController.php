@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
+use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -39,21 +40,22 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
 {
-    protected $router;
-    private $translator;
-    private $exportDir;
-    private $siteParameterResolver;
-    private $projectUrlResolver;
-    private $questionnaireExportResultsUrlResolver;
-    private $projectStatResolver;
-    private $projectRepository;
-    private $opinionRepository;
-    private $opinionVersionRepository;
-    private $argumentRepository;
-    private $sourceRepository;
-    private $postRepository;
-    private $contributionResolver;
-    private $projectHelper;
+    protected RouterInterface $router;
+    private TranslatorInterface $translator;
+    private string $exportDir;
+    private SiteParameterResolver $siteParameterResolver;
+    private ProjectUrlResolver $projectUrlResolver;
+    private QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver;
+    private ProjectStatsResolver $projectStatResolver;
+    private ProjectRepository $projectRepository;
+    private OpinionRepository $opinionRepository;
+    private OpinionVersionRepository $opinionVersionRepository;
+    private ArgumentRepository $argumentRepository;
+    private SourceRepository $sourceRepository;
+    private PostRepository $postRepository;
+    private ContributionResolver $contributionResolver;
+    private ProjectHelper $projectHelper;
+    private DebateArgumentRepository $debateArgumentRepository;
 
     public function __construct(
         TranslatorInterface $translator,
@@ -70,7 +72,8 @@ class ProjectController extends Controller
         ProjectHelper $projectHelper,
         PostRepository $postRepository,
         QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver,
-        $exportDir
+        $exportDir,
+        DebateArgumentRepository $debateArgumentRepository
     ) {
         $this->translator = $translator;
         $this->router = $router;
@@ -88,6 +91,7 @@ class ProjectController extends Controller
         $this->argumentRepository = $argumentRepository;
         $this->sourceRepository = $sourceRepository;
         $this->questionnaireExportResultsUrlResolver = $questionnaireExportResultsUrlResolver;
+        $this->debateArgumentRepository = $debateArgumentRepository;
     }
 
     /**
@@ -162,6 +166,7 @@ class ProjectController extends Controller
         $opinions = $this->opinionRepository->getTrashedByProject($project);
         $versions = $this->opinionVersionRepository->getTrashedByProject($project);
         $arguments = $this->argumentRepository->getTrashedByProject($project);
+        $debateArguments = $this->debateArgumentRepository->getTrashedByProject($project);
         $sources = $this->sourceRepository->getTrashedByProject($project);
 
         return [
@@ -169,6 +174,7 @@ class ProjectController extends Controller
             'opinions' => $opinions,
             'versions' => $versions,
             'arguments' => $arguments,
+            'debateArguments' => $debateArguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];

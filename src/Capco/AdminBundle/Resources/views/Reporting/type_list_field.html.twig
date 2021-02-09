@@ -14,6 +14,8 @@
             <span>{{ 'global.comment'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.proposal is not null) %}
             <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'CapcoAppBundle') }}</span>
+        {% elseif (object.debateArgument is not null) %}
+            <span>{{ 'admin.fields.reporting.debateArgument'|trans({}, 'CapcoAppBundle') }}</span>
         {% endif %}
     </div>
 {% endblock %}
