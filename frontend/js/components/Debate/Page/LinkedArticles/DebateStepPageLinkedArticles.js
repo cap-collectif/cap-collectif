@@ -34,10 +34,6 @@ export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slide
     }
   }
 
-  .slick-dots li button:before {
-    font-size: 20px;
-  }
-
   .slick-track {
     display: flex;
     align-items: stretch;
