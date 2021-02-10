@@ -937,7 +937,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('global.voted');
+        $this->clickProposalVoteButtonWithLabel('voted');
     }
 
     /**

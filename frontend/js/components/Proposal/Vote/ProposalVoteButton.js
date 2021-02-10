@@ -140,9 +140,9 @@ export class ProposalVoteButton extends React.Component<Props> {
 
     if (proposal.viewerHasVote) {
       if (isInterpellation) {
-        return isHovering ? 'global.cancel' : 'interpellation.support.supported';
+        return isHovering ? 'cancel' : 'interpellation.support.supported';
       }
-      return isHovering ? 'global.cancel' : 'global.voted';
+      return isHovering ? 'cancel' : 'voted';
     }
 
     if (isInterpellation) {

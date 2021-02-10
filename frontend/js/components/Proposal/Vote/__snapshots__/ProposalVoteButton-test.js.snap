@@ -46,7 +46,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
     className="cap cap-hand-like-2 mr-5"
   />
   <FormattedMessage
-    id="global.voted"
+    id="voted"
     values={Object {}}
   />
 </Button>
@@ -77,7 +77,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
     className="cap cap-hand-like-2 mr-5"
   />
   <FormattedMessage
-    id="global.cancel"
+    id="cancel"
     values={Object {}}
   />
 </Button>
@@ -108,7 +108,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering with ranki
     className="cap cap-hand-like-2 mr-5"
   />
   <FormattedMessage
-    id="global.cancel"
+    id="cancel"
     values={Object {}}
   />
 </Button>

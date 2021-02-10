@@ -130,7 +130,8 @@ Scenario: Logged in user wants to create an event
   And I fill the project filter with value 'Croissance'
   When I click on button "#confirm-event-submit"
   Then I should see "error-message-event-creation-checkbox"
-  And I trigger element "#event_authorAgreeToUsePersonalDataForEventOnly" with action "click"
+#  And I trigger element "#event_authorAgreeToUsePersonalDataForEventOnly" with action "click"
+  When I click on label for "event_authorAgreeToUsePersonalDataForEventOnly" to check custom element
   Then I should not see "error-message-event-creation-checkbox"
   When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/my-event'
@@ -153,7 +154,7 @@ Scenario: Logged in user wants to edit his refused event
   Then fill in "event_title" with "My event edited"
   When I click on button "#confirm-event-submit"
   Then I should see "error-message-event-creation-checkbox"
-  And I trigger element "#event_authorAgreeToUsePersonalDataForEventOnly" with action "click"
+  When I click on label for "event_authorAgreeToUsePersonalDataForEventOnly" to check custom element
   Then I should not see "error-message-event-creation-checkbox"
   When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/event-create-by-user-with-review-refused'
