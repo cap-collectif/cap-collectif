@@ -25,7 +25,7 @@ class OpinionVersionType extends AbstractType
             ])
             ->add('body', TextareaType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'user',
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\NotBlank(),
@@ -34,7 +34,7 @@ class OpinionVersionType extends AbstractType
             ])
             ->add('comment', TextareaType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'user',
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\NotBlank(),

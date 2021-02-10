@@ -53,12 +53,12 @@ class ProposalType extends AbstractType
             ->add('summary', TextareaType::class, [
                 'required' => false,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'user',
             ])
             ->add('body', TextareaType::class, [
                 'required' => $isDraft,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'user',
             ]);
 
         if ($this->toggleManager->isActive(Manager::themes) && $form->isUsingThemes()) {

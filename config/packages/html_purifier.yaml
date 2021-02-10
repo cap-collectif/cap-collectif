@@ -1,16 +1,13 @@
 exercise_html_purifier:
-  default:
-    Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
-  custom:
-    HTML.Allowed: 'div[style],span[style],br,b,i,u,ol[style],ul[style],li[style],a[href|style],img[src|style]'
-    HTML.BlockWrapper: 'div'
-    HTML.CoreModules:
-      - {
-          Structure: true,
-          Text: true,
-          Hypertext: true,
-          List: true,
-          NonXMLCommonAttributes: false,
-          XMLCommonAttributes: false,
-          CommonAttributes: false,
-        }
+    default_cache_serializer_path: '%kernel.root_dir%/../var/cache/htmlpurifier'
+    html_profiles:
+        user:
+            config:
+                Cache.SerializerPath: '%kernel.root_dir%/../var/cache/htmlpurifier'
+                HTML.SafeIframe: true
+                URI.SafeIframeRegexp: "#^(https?:)?//(www\\.youtube(?:-nocookie)?\\.com/embed/|player\\.vimeo\\.com/video/)#"
+        admin:
+            config:
+                Cache.SerializerPath: '%kernel.root_dir%/../var/cache/htmlpurifier'
+                HTML.SafeIframe: true
+                URI.SafeIframeRegexp: "#https?://([-÷÷\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?#"

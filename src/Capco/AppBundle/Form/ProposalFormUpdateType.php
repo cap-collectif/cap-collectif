@@ -30,35 +30,35 @@ class ProposalFormUpdateType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('titleHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('description', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('usingDescription', CheckboxType::class)
             ->add('descriptionMandatory', CheckboxType::class)
             ->add('descriptionHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('usingSummary', CheckboxType::class)
             ->add('summaryHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('usingIllustration', CheckboxType::class)
             ->add('illustrationHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('proposalInAZoneRequired', CheckboxType::class)
@@ -67,27 +67,27 @@ class ProposalFormUpdateType extends AbstractType
             ->add('themeMandatory', CheckboxType::class)
             ->add('themeHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('usingDistrict', CheckboxType::class)
             ->add('districtMandatory', CheckboxType::class)
             ->add('districtHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('usingCategories', CheckboxType::class)
             ->add('categoryMandatory', CheckboxType::class)
             ->add('categoryHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
 
             ->add('usingAddress', CheckboxType::class)
             ->add('addressHelpText', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('mapCenter', TextType::class)
             ->add('zoomMap', IntegerType::class)

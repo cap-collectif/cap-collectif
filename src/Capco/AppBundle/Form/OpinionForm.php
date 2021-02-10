@@ -23,7 +23,7 @@ class OpinionForm extends AbstractType
             ->add('body', TextareaType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'user',
             ])
             ->add('appendices', CollectionType::class, [
                 'entry_type' => AppendixType::class,

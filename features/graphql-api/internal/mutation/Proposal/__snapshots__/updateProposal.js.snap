@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal | Update proposal content update proposal body with authorized iframe. 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "<iframe class=\\"ql-video\\" frameborder=\\"0\\" src=\\"https://www.youtube.com/embed/qCNu_vJNLMQ?showinfo=0\\"></iframe>",
+    },
+  },
+}
+`;
+
+exports[`Internal | Update proposal content update proposal body with unauthorized iframe. 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "<iframe class=\\"ql-video\\" frameborder=\\"0\\"></iframe>",
+    },
+  },
+}
+`;
