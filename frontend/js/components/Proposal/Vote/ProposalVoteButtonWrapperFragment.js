@@ -116,10 +116,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
 export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
   viewer: graphql`
     fragment ProposalVoteButtonWrapperFragment_viewer on User
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!" }
-      ) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
       id
       proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {
         totalCount
@@ -129,10 +126,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
   `,
   proposal: graphql`
     fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!" }
-      ) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
       id
       estimation
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
@@ -143,7 +137,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
 
   step: graphql`
     fragment ProposalVoteButtonWrapperFragment_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       title
       votesLimit

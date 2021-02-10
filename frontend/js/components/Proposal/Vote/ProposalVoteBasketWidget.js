@@ -305,8 +305,9 @@ export default createFragmentContainer(
   withColors(connect(mapStateToProps)(ProposalVoteBasketWidget)),
   {
     step: graphql`
-      fragment ProposalVoteBasketWidget_step on ProposalStep {
-        viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+      fragment ProposalVoteBasketWidget_step on ProposalStep
+        @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
           totalCount
         }
         voteType

@@ -196,15 +196,15 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       ) {
       id
       ...ProposalVoteButtonWrapperFragment_viewer
-        @arguments(stepId: $stepId)
+        @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
         @include(if: $hasVotableStep)
     }
   `,
   step: graphql`
     fragment ProposalPageHeaderButtons_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       open
-      ...ProposalVoteButtonWrapperFragment_step
+      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,

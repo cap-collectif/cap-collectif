@@ -15,7 +15,7 @@ const mutation = graphql`
     followProposal(input: $input) {
       proposal {
         id
-        ...ProposalFollowButton_proposal
+        ...ProposalFollowButton_proposal @arguments(isAuthenticated: true)
       }
       followerEdge {
         node {

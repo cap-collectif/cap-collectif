@@ -130,7 +130,7 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalPreviewBody_proposal on Proposal
       @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
+        isAuthenticated: { type: "Boolean!" }
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {
       id

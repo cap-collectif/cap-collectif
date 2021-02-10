@@ -6290,18 +6290,42 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "creditsLeft",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "creditsSpent",
                               "storageKey": null,
                             },
                           ],
                           "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": Array [
+                                Object {
+                                  "kind": "Variable",
+                                  "name": "stepId",
+                                  "variableName": "stepId",
+                                },
+                              ],
+                              "concreteType": "ProposalVoteConnection",
+                              "kind": "LinkedField",
+                              "name": "proposalVotes",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "creditsLeft",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                     },
@@ -6381,62 +6405,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "kind": "ScalarField",
                           "name": "votesRanking",
                           "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": Array [
-                            Object {
-                              "kind": "Literal",
-                              "name": "orderBy",
-                              "value": Object {
-                                "direction": "ASC",
-                                "field": "POSITION",
-                              },
-                            },
-                          ],
-                          "concreteType": "ProposalVoteConnection",
-                          "kind": "LinkedField",
-                          "name": "viewerVotes",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "ProposalVoteEdge",
-                              "kind": "LinkedField",
-                              "name": "edges",
-                              "plural": true,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "ProposalVote",
-                                  "kind": "LinkedField",
-                                  "name": "node",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "anonymous",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": "viewerVotes(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
                         },
                         Object {
                           "alias": null,
@@ -6521,6 +6489,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "budget",
+                          "storageKey": null,
+                        },
+                        Object {
                           "condition": "isAuthenticated",
                           "kind": "Condition",
                           "passingValue": true,
@@ -6545,13 +6520,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "totalCount",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
                                   "concreteType": "ProposalVoteEdge",
                                   "kind": "LinkedField",
                                   "name": "edges",
@@ -6565,6 +6533,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "name": "node",
                                       "plural": false,
                                       "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "anonymous",
+                                          "storageKey": null,
+                                        },
                                         Object {
                                           "alias": null,
                                           "args": null,
@@ -6643,6 +6625,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "storageKey": null,
                                     },
                                   ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "totalCount",
                                   "storageKey": null,
                                 },
                               ],
@@ -6886,54 +6875,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       ],
                       "type": "ProposalStep",
                     },
-                    Object {
-                      "condition": "isAuthenticated",
-                      "kind": "Condition",
-                      "passingValue": true,
-                      "selections": Array [
-                        Object {
-                          "abstractKey": "__isProposalStep",
-                          "kind": "InlineFragment",
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": Array [
-                                Object {
-                                  "kind": "Literal",
-                                  "name": "orderBy",
-                                  "value": Object {
-                                    "direction": "ASC",
-                                    "field": "POSITION",
-                                  },
-                                },
-                              ],
-                              "concreteType": "ProposalVoteConnection",
-                              "kind": "LinkedField",
-                              "name": "viewerVotes",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "totalCount",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": "viewerVotes(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "budget",
-                              "storageKey": null,
-                            },
-                          ],
-                          "type": "ProposalStep",
-                        },
-                      ],
-                    },
                   ],
                   "storageKey": null,
                 },
@@ -6942,7 +6883,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "696c9f8d5701e6dccf47bed9624dd784",
+          "cacheID": "47d55ae3df925097dee8633ce07d3356",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8093,13 +8034,13 @@ fragment ProposalPageHeaderButtons_proposal_19sAkT on Proposal {
 fragment ProposalPageHeaderButtons_step_39ngnn on ProposalStep {
   __isProposalStep: __typename
   open
-  ...ProposalVoteButtonWrapperFragment_step
+  ...ProposalVoteButtonWrapperFragment_step_39ngnn
   ...ProposalVoteModal_step_39ngnn
 }
 
 fragment ProposalPageHeaderButtons_viewer_3VJ3TV on User {
   id
-  ...ProposalVoteButtonWrapperFragment_viewer_2r3fA4 @include(if: $hasVotableStep)
+  ...ProposalVoteButtonWrapperFragment_viewer_Q37Wz @include(if: $hasVotableStep)
 }
 
 fragment ProposalPageHeader_proposal_19sAkT on Proposal {
@@ -8174,7 +8115,7 @@ fragment ProposalPageLogic_query_2JM5Hk on Query {
     __typename
     ...ProposalPageHeader_step_39ngnn
     ...ProposalPageTabs_step
-    ...ProposalVoteBasketWidget_step @include(if: $isAuthenticated)
+    ...ProposalVoteBasketWidget_step_39ngnn
     id
   }
   proposal: node(id: $proposalId) {
@@ -8678,9 +8619,9 @@ fragment ProposalViewDecisionPanel_proposal on Proposal {
   }
 }
 
-fragment ProposalVoteBasketWidget_step on ProposalStep {
+fragment ProposalVoteBasketWidget_step_39ngnn on ProposalStep {
   __isProposalStep: __typename
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
     totalCount
   }
   voteType
@@ -8725,7 +8666,7 @@ fragment ProposalVoteButtonWrapperFragment_proposal_Q37Wz on Proposal {
   ...ProposalVoteButton_proposal_Q37Wz
 }
 
-fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
+fragment ProposalVoteButtonWrapperFragment_step_39ngnn on ProposalStep {
   __isProposalStep: __typename
   id
   title
@@ -8733,7 +8674,7 @@ fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
   voteType
   open
   votesRanking
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
     edges {
       node {
         id
@@ -8744,9 +8685,9 @@ fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
   ...VoteButtonOverlay_step
 }
 
-fragment ProposalVoteButtonWrapperFragment_viewer_2r3fA4 on User {
+fragment ProposalVoteButtonWrapperFragment_viewer_Q37Wz on User {
   id
-  proposalVotes(stepId: $stepId) {
+  proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {
     totalCount
     creditsLeft
   }

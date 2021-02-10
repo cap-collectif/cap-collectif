@@ -33,7 +33,8 @@ const mutation = graphql`
               anonymous
               proposal {
                 id
-                ...ProposalVoteButton_proposal @arguments(stepId: $stepId)
+                ...ProposalVoteButton_proposal
+                  @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
                 votes(stepId: $stepId, first: 0) @include(if: $isAuthenticated) {
                   totalPointsCount
                 }

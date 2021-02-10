@@ -10,7 +10,9 @@ import type {
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProposalVoteBasketWidget = lazy(() =>
-  import(/* webpackChunkName: "ProposalVoteBasketWidget" */ '~/components/Proposal/Vote/ProposalVoteBasketWidget'),
+  import(
+    /* webpackChunkName: "ProposalVoteBasketWidget" */ '~/components/Proposal/Vote/ProposalVoteBasketWidget'
+  ),
 );
 
 type Props = {
@@ -32,7 +34,7 @@ export default (data: Props) => (
         query={graphql`
           query ProposalVoteBasketWidgetAppQuery($stepId: ID!) {
             step: node(id: $stepId) {
-              ...ProposalVoteBasketWidget_step
+              ...ProposalVoteBasketWidget_step @arguments(isAuthenticated: true)
             }
             viewer {
               ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)

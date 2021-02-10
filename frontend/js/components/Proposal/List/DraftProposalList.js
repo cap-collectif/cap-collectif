@@ -42,7 +42,7 @@ export class DraftProposalList extends React.Component<Props> {
 export default createFragmentContainer(DraftProposalList, {
   step: graphql`
     fragment DraftProposalList_step on CollectStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       viewerProposalDrafts @include(if: $isAuthenticated) {
         edges {
           node {

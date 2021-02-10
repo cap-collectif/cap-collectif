@@ -207,10 +207,7 @@ const container = connect(mapStateToProps)(ProposalVoteButton);
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalVoteButton_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!" }
-      ) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
       id
       ...interpellationLabelHelper_proposal @relay(mask: false)
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)

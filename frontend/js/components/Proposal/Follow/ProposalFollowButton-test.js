@@ -18,7 +18,7 @@ describe('<ProposalFollowButton />', () => {
   const query = graphql`
     query ProposalFollowButtonTestQuery @relay_test_operation {
       proposal: node(id: "test-id") {
-        ...ProposalFollowButton_proposal
+        ...ProposalFollowButton_proposal @arguments(isAuthenticated: true)
       }
     }
   `;

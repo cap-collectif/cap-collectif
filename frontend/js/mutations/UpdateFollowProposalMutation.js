@@ -12,7 +12,7 @@ const mutation = graphql`
     updateFollowProposal(input: $input) {
       proposal {
         id
-        ...ProposalFollowButton_proposal
+        ...ProposalFollowButton_proposal @arguments(isAuthenticated: true)
         followers {
           totalCount
         }
