@@ -12,7 +12,7 @@ import Spinner from '~ds/Spinner/Spinner';
 export type ButtonProps = {|
   ...AppBoxProps,
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link',
-  variantColor?: 'primary' | 'danger',
+  variantColor?: 'primary' | 'danger' | 'hierarchy',
   variantSize?: 'small' | 'medium' | 'big',
   leftIcon?: $Values<typeof ICON_NAME> | React.Element<typeof Icon>,
   rightIcon?: $Values<typeof ICON_NAME> | React.Element<typeof Icon>,

@@ -50,12 +50,39 @@ storiesOf('Design system|Button/Tertiary/Danger', module)
     );
   });
 
+storiesOf('Design system|Button/Tertiary/Hierarchy', module)
+  .add('default', () => {
+    return (
+      <Button variant="tertiary" variantSize="small" variantColor="hierarchy">
+        Supprimer
+      </Button>
+    );
+  })
+  .add('disabled', () => {
+    return (
+      <Button variant="tertiary" variantSize="medium" variantColor="hierarchy" disabled>
+        Supprimer
+      </Button>
+    );
+  })
+  .add('loading', () => {
+    return (
+      <Button variant="tertiary" variantSize="medium" variantColor="hierarchy" isLoading>
+        Supprimer
+      </Button>
+    );
+  });
+
 /* # TERTIARY WITH ICON # */
 
 storiesOf('Design system|Button/Tertiary with icon/Primary', module)
   .add('default', () => {
     return (
-      <Button variant="tertiary" variantSize="small" variantColor="primary" leftIcon={ICON_NAME.ADD}>
+      <Button
+        variant="tertiary"
+        variantSize="small"
+        variantColor="primary"
+        leftIcon={ICON_NAME.ADD}>
         Ajouter
       </Button>
     );
@@ -88,7 +115,11 @@ storiesOf('Design system|Button/Tertiary with icon/Primary', module)
 storiesOf('Design system|Button/Tertiary with icon/Danger', module)
   .add('default', () => {
     return (
-      <Button variant="tertiary" variantSize="small" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
+      <Button
+        variant="tertiary"
+        variantSize="small"
+        variantColor="danger"
+        leftIcon={ICON_NAME.TRASH}>
         Supprimer
       </Button>
     );
@@ -111,6 +142,43 @@ storiesOf('Design system|Button/Tertiary with icon/Danger', module)
         variant="tertiary"
         variantSize="medium"
         variantColor="danger"
+        leftIcon={ICON_NAME.TRASH}
+        isLoading>
+        Supprimer
+      </Button>
+    );
+  });
+
+storiesOf('Design system|Button/Tertiary with icon/Hierarchy', module)
+  .add('default', () => {
+    return (
+      <Button
+        variant="tertiary"
+        variantSize="small"
+        variantColor="hierarchy"
+        leftIcon={ICON_NAME.TRASH}>
+        Supprimer
+      </Button>
+    );
+  })
+  .add('disabled', () => {
+    return (
+      <Button
+        variant="tertiary"
+        variantSize="medium"
+        variantColor="hierarchy"
+        leftIcon={ICON_NAME.TRASH}
+        disabled>
+        Supprimer
+      </Button>
+    );
+  })
+  .add('loading', () => {
+    return (
+      <Button
+        variant="tertiary"
+        variantSize="medium"
+        variantColor="hierarchy"
         leftIcon={ICON_NAME.TRASH}
         isLoading>
         Supprimer

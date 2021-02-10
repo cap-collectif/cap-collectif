@@ -300,6 +300,147 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
       },
     },
   },
+  hierarchy: {
+    primary: {
+      bg: 'gray.500',
+      color: 'gray.100',
+
+      '.icon': {
+        color: 'gray.100',
+      },
+
+      '&:hover': {
+        bg: 'gray.700',
+        color: 'gray.100',
+
+        '&:focus': {
+          boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+        },
+      },
+
+      '&:focus': {
+        boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+      },
+
+      '&:disabled': {
+        bg: 'gray.150',
+        color: 'gray.300',
+
+        '.icon': {
+          color: 'gray.300',
+        },
+      },
+
+      ...(isLoading && {
+        bg: 'gray.150',
+        color: 'gray.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'gray.300',
+        },
+      }),
+    },
+    secondary: {
+      bg: 'white',
+      color: 'gray.500',
+      border: 'button',
+      borderColor: 'gray.500',
+
+      '.icon': {
+        color: 'gray.500',
+      },
+
+      '&:hover': {
+        color: 'gray.700',
+        borderColor: 'gray.700',
+
+        '&:focus': {
+          boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+        },
+
+        '.icon': {
+          color: 'gray.700',
+        },
+      },
+
+      '&:focus': {
+        boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+      },
+
+      '&:disabled': {
+        color: 'gray.300',
+        borderColor: 'gray.300',
+
+        '.icon': {
+          color: 'gray.300',
+        },
+      },
+
+      ...(isLoading && {
+        color: 'gray.300',
+        borderColor: 'gray.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'gray.300',
+        },
+      }),
+    },
+    tertiary: {
+      bg: 'transparent',
+      color: 'gray.500',
+      p: 0,
+
+      '.icon': {
+        color: 'gray.500',
+      },
+
+      '&:hover': {
+        color: 'gray.700',
+
+        '&:focus': {
+          boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+        },
+
+        '.icon': {
+          color: 'gray.700',
+        },
+      },
+
+      '&:focus': {
+        boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+      },
+
+      '&:disabled': {
+        color: 'gray.300',
+
+        '.icon': {
+          color: 'gray.300',
+        },
+      },
+
+      ...(isLoading && {
+        color: 'gray.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'gray.300',
+        },
+      }),
+    },
+    link: {
+      ...stylesLink,
+      bg: 'transparent',
+      p: 0,
+      fontWeight: 'Normal',
+
+      '&:disabled': {
+        color: 'gray.300',
+        cursor: 'default',
+      },
+    },
+  },
 });
 
 export default styles;

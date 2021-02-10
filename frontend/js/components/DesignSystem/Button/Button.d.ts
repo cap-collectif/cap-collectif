@@ -9,7 +9,7 @@ export type ButtonProps = ComponentProps<"button"> & {
     alternative?: boolean,
     isLoading?: boolean,
     variant?: 'primary' | 'secondary' | 'tertiary' | 'link',
-    variantColor?: 'primary' | 'danger'
+    variantColor?: 'primary' | 'danger' | 'hierarchy'
 }
 
 declare const Button: PolymorphicComponent<ButtonProps>
