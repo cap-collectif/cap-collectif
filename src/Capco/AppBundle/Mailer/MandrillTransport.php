@@ -380,6 +380,9 @@ class MandrillTransport implements Swift_Transport
                 case 'soisy-sous-montmorency.fr':
                     $mandrillMessage['return_path_domain'] = 'mail.budgetparticipatif.soisy-sous-montmorency.fr';
                     break;
+                case 'canejan.fr':
+                    $mandrillMessage['return_path_domain'] = 'mail.budgetparticipatif.canejan.fr';
+                    break;
                 case 'iledefrance.fr':
                     $mandrillMessage['return_path_domain'] = 'mail.budgetparticipatif.iledefrance.fr';
                     break;
