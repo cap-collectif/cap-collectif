@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ThemeTranslation;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * PostRepository.
@@ -97,9 +99,10 @@ class PostRepository extends EntityRepository
     public function getSearchResults(
         int $nbByPage = 8,
         int $page = 1,
-        ?string $themeSlug = null,
-        ?string $projectSlug = null,
-        ?bool $displayedOnBlog = null
+        ?ThemeTranslation $themeTranslation = null,
+        ?Project $project = null,
+        ?bool $displayedOnBlog = null,
+        ?UserInterface $viewer = null
     ): Paginator {
         if ($page < 1) {
             throw new \InvalidArgumentException(
@@ -108,16 +111,47 @@ class PostRepository extends EntityRepository
         }
 
         $qb = $this->getIsPublishedQueryBuilder('p')
-            ->addSelect('a', 'm', 't', 'c', 'proposal')
+            ->addSelect('a', 'm', 't', 'c', 'proposal', 'crvg')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('t.translations', 'translation')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
+            ->leftJoin('p.projects', 'c')
+            ->leftJoin('c.authors', 'ca')
             ->leftJoin('p.proposals', 'proposal')
+            ->leftJoin('c.restrictedViewerGroups', 'crvg')
+            ->orderBy('p.publishedAt', 'DESC');
 
-            ->orderBy('p.publishedAt', 'DESC')
-            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+        if (!$viewer) {
+            $qb->andWhere(
+                $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            );
+        }
+
+        if ($viewer && !$viewer->isSuperAdmin()) {
+            $qb->andWhere(
+                $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            );
+            if (!empty($viewer->getUserGroupIds())) {
+                $qb->orWhere($qb->expr()->in('crvg.id', $viewer->getUserGroupIds()));
+                $qb->orWhere(
+                    $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_CUSTOM)
+                );
+            }
+            if ($viewer->isAdmin()) {
+                $qb->orWhere(
+                    $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+                );
+                $qb->orWhere(
+                    $qb
+                        ->expr()
+                        ->andX(
+                            $qb->expr()->in('ca.user', [$viewer->getId()]),
+                            $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_ME)
+                        )
+                );
+            }
+        }
 
         if (null !== $displayedOnBlog) {
             $qb->andWhere('p.displayedOnBlog = :displayedOnBlog')->setParameter(
@@ -126,12 +160,15 @@ class PostRepository extends EntityRepository
             );
         }
 
-        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->andWhere('translation.slug = :theme')->setParameter('theme', $themeSlug);
+        if (null !== $themeTranslation && Theme::FILTER_ALL !== $themeTranslation->getSlug()) {
+            $qb->andWhere('translation.slug = :theme')->setParameter(
+                'theme',
+                $themeTranslation->getSlug()
+            );
         }
 
-        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
-            $qb->andWhere('c.slug = :project')->setParameter('project', $projectSlug);
+        if (null !== $project && Project::FILTER_ALL !== $project->getSlug()) {
+            $qb->andWhere('c.slug = :project')->setParameter('project', $project->getSlug());
         }
 
         $query = $qb->getQuery();

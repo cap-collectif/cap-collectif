@@ -58,11 +58,13 @@ class BlogController extends Controller
                 );
             }
         } else {
+            $themeObject = $theme
+                ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme)
+                : null;
+            $projectObject = $this->get(ProjectRepository::class)->findOneBySlug($project);
             $form->setData([
-                'theme' => $theme
-                    ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme)
-                    : null,
-                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
+                'theme' => $theme ? $themeObject : null,
+                'project' => $projectObject,
             ]);
         }
 
@@ -71,9 +73,10 @@ class BlogController extends Controller
         $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
             $page,
-            $theme,
-            $project,
-            true
+            $themeObject,
+            $projectObject,
+            true,
+            $this->getUser()
         );
 
         //Avoid division by 0 in nbPage calculation

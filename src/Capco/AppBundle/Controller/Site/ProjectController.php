@@ -282,7 +282,9 @@ class ProjectController extends Controller
             $pagination,
             $page,
             null,
-            $project->getSlug()
+            $project,
+            null,
+            $this->getUser()
         );
 
         //Avoid division by 0 in nbPage calculation
