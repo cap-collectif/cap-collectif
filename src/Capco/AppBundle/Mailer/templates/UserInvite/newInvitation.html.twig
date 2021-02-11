@@ -40,10 +40,9 @@
 
 {% block footer_mail %}
     <div>
-        <p style="margin: 0;">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
-        <p style="margin: 18px 0;">{{ 'footer-promotion'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
+        <p style="margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
 
-        <p style="text-align: center;">
+        <p style="text-align: left;">
             {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
             <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
             Cap Collectif

@@ -30,17 +30,16 @@ final class ProposalAknowledgeUpdateMessage extends AbstractExternalMessage
             'confirmationUrl' => $params['confirmationURL'],
             'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
-            'homepageUrl' => $params['siteURL'],
             'typeOfMail' => 'update',
             'sendAt' => $proposal->getUpdatedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),
-            'to' => self::escape($proposal->getAuthor()->getEmail()),
             'username' => $proposal->getAuthor()->getDisplayName(),
             'timezone' => $proposal->getCreatedAt()->getTimezone(),
-            'business' => 'Cap Collectif',
-            'businessUrl' => 'https://cap-collectif.com/',
+            'organizationName' => 'Cap Collectif',
             'isTimeless' => $proposal->getStep()->isTimeless(),
             'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
+            'siteUrl' => $params['siteURL'],
         ];
     }
 }

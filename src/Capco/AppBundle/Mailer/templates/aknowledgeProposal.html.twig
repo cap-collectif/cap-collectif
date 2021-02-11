@@ -1,78 +1,85 @@
-{% extends "@CapcoMail/standardLayout.html.twig" %}
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set logo = app_logo_url() %}
+
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
 
 {% set proposalDate =  sendAt|localizeddate('long', 'none', user_locale, timezone)  %}
-
 {% set proposalHour =  sendAt|date('H', timezone) ~ 'h' ~ sendAt|date('i', timezone) %}
 
-{% set siteName = capco_site_parameter_value('global.site.fullname') %}
-
-{% block html_title %}
-    {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}
-{% endblock %}
-
-{% block header_mail %}
-    <tr>
-        <td class="resp-full-td" valign="top" style="margin:0 20px; texlign:center;">
-            <div style="text-align: center;">
-                <a class="resp-punchline" href="#" style="color:#337ab7; ot-autline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
-                    {{ siteName|raw }}
-                </a>
-                <h1 class="resp-punchline" style="color:#000000; outline:none; font-size:22px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:500; text-align:center;">
-                    {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}
-                </h1>
-                <span class="resp-punchline" style="color:#999999; outline:none; font-size:20px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
-                    {{ proposalDate }}
-                </span>
-            </div>
-        </td>
-    </tr>
-{% endblock %}
-
 {% block core_mail %}
-    <span style="color:#000;font-weight: bold">{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale)|raw }}</span>
-    <p style="color:#000;">{{ 'thank-you-for-participating-in-the-project'|trans({'{projectTitle}': projectTitle, '{projectLink}': projectLink},'CapcoAppBundle', user_locale)|raw }}</p>
-    <span style="color:#000;">
-        {% if typeOfMail == 'create' %}
-            {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink},'CapcoAppBundle', user_locale)|raw }}
-            {{ 'on-date-at-time'|trans({'{date}':proposalDate, '{heure}': proposalHour},'CapcoAppBundle', user_locale)|raw }}.
+    <div>
+        {% if logo is not null %}
+            <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ organizationName }}" />
+        {% else %}
+            <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+        {% endif %}
 
-            {% if not proposalPublished and confirmationUrl is not null %} 
-                {{ 'unpublished-contribution-help-text'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
-                <p>
-                    <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle', user_locale) }}</strong></a>
+        <div style="text-align: left;">
+            <p style="margin: 0; color: #85919D; font-weight: 700; font-size: 11px; line-height: 16px; text-transform: uppercase;">{{ proposalDate }}</p>
+            <p style="margin: 0; color: #272B30; font-weight: 600; font-size: 24px; line-height: 32px;">{{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}</p>
+        </div>
+
+        <div style="margin: 20px 0; color: #545E68; text-align: left;">
+            <span>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale)|raw }} 👋,</span>
+            <p style="margin: 0; line-height: 24px;">
+                {{ 'thank-you-for-participating-in-the-project'|trans({'{projectLink}': projectLink},'CapcoAppBundle', user_locale)|raw }}
+                <span style="font-weight: 600; color: #272B30">"{{ projectTitle }}"</span>
+            </p>
+
+            {% if typeOfMail == 'create' %}
+                <p style="margin: 0; line-height: 24px;">
+                    {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink, '{linkColor}': linkText},'CapcoAppBundle', user_locale)|raw }}
+                    <span>{{ 'on-date-at-time'|trans({'{date}':proposalDate, '{heure}': proposalHour},'CapcoAppBundle', user_locale)|raw }}.</span>
                 </p>
-            {% endif %} 
-        {% else %}
-            {{ 'you-have-modified-your-proposal'|trans({
-                '{proposalTitle}': proposalName,
-                '{proposalLink}': proposalLink,
-                '{proposalChangeDate}': proposalDate,
-                '{proposalChangeTime}' : proposalHour
-            },'CapcoAppBundle', user_locale)|raw }}
-        {% endif %}
-    </span>
 
-    <p style="color:#000;">
-        {% if isTimeless %}
-            {{ 'you-can-still-edit-or-delete-your-proposal'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
-        {% else %}
-            {{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle', user_locale) }}
-            {{ ' ' ~ 'until-date'|trans({'{date}':endAt|localizeddate('long', 'none', user_locale, timezone)},'CapcoAppBundle', user_locale) }}.
-        {% endif %}
-    </p>
-        <p style="color:#000; margin-bottom: 8px;">
-            <i>
-                {{ 'published-contribution-email'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
-            </i>
-        </p>
+                {% if not proposalPublished and confirmationUrl is not null %}
+                    <div style="margin-top: 20px;">
+                        {{ 'unpublished-contribution-help-text'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+                        <p>
+                            <a href="" style="display: inline-block;color:{{ btnText }};padding:18px 24px;border-radius:4px;background-color: {{ btnBg }};font-weight: 600;">
+                                {{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle', user_locale) }}
+                            </a>
+                        </p>
+                    </div>
+                {% endif %}
+            {% else %}
+                {{ 'you-have-modified-your-proposal'|trans({
+                    '{linkColor}': linkText,
+                    '{proposalTitle}': proposalName,
+                    '{proposalLink}': proposalLink,
+                    '{proposalChangeDate}': proposalDate,
+                    '{proposalChangeTime}' : proposalHour
+                },'CapcoAppBundle', user_locale)|raw }}
+            {% endif %}
+
+        </div>
+
+        <div style="color: #545E68; text-align: left;">
+            {% if isTimeless %}
+                {{ 'you-can-still-edit-or-delete-your-proposal'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+            {% else %}
+                <p style="margin: 0; line-height: 24px;">{{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle', user_locale) }}</p>
+            {% endif %}
+            <p style="margin: 0; line-height: 24px;">{{ 'published-contribution-email'|trans({}, 'CapcoAppBundle', user_locale)|raw }}</p>
+        </div>
+
+    </div>
 {% endblock %}
 
 {% block footer_mail %}
-    <span style="font-size:13px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#999999">
-        {{ 'notification.email.external_footer'|trans(
-            {'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': homepageUrl, '{businessUrl}': businessUrl},
-            'CapcoAppBundle',
-            user_locale
-        ) | raw }}
-    </span>
+    <div>
+        <p style="margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
+
+        <p style="text-align: left;">
+            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
+            Cap Collectif
+        </p>
+    </div>
 {% endblock %}

@@ -295,3 +295,15 @@ Scenario: User delete an news on his proposal
   And I consume "proposal_news_delete"
   Then I open mail to "admin@cap-collectif.com"
   And email should match snapshot "notifyDeleteProposalNewsAdmin.html"
+
+@rabbitmq @snapshot-email
+Scenario: User participated in a proposal
+  Given I publish in "proposal_create" with message below:
+  """
+  {
+    "proposalId": "proposal1"
+  }
+  """
+  And I consume "proposal_create"
+  Then I open mail with subject "acknowledgement-of-receipt"
+  And email should match snapshot "aknowledgeProposal.html"

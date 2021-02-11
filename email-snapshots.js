@@ -41,7 +41,7 @@ const applyTranslations = (text, locale) => {
   return new Promise((resolve, reject) => {
     text = text.replace(/&quot;/gi, '"');
     text = text.replace(/"}</gi, '"}\n<');
-    fs.readFile(`${translationsPath}messages.${locale}.xlf`, 'utf8', async (err, data) => {
+    fs.readFile(`${translationsPath}messages+intl-icu.${locale}.xlf`, 'utf8', async (err, data) => {
       const jsonObj = parser
         .parse(data)
         .xliff.file.body['trans-unit'].sort((a, b) => b.source.length - a.source.length);
