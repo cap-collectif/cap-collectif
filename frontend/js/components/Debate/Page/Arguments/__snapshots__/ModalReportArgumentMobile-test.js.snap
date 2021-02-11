@@ -3,6 +3,7 @@
 exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`] = `
 <Modal
   ariaLabel="global.menu"
+  onClose={[MockFunction]}
   show={false}
 >
   <Modal.Body
@@ -32,6 +33,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`]
 exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`] = `
 <Modal
   ariaLabel="global.menu"
+  onClose={[MockFunction]}
   show={true}
 >
   <Modal.Body

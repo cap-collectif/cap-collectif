@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
+import { useIntl, type IntlShape } from 'react-intl';
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -84,11 +84,11 @@ export const DebateStepPageVote = ({
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('green', isHover === 'AGAINST'))}
           variantSize="big"
+          aria-label={intl.formatMessage({ id: 'global.for' })}
           onClick={() =>
             voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated, viewerHasArgument)
           }>
-          <Icon name="THUMB_UP" mr="1" />
-          <FormattedMessage id="global.for" />
+          <Icon name="THUMB_UP" />
         </Button>
       </LoginOverlay>
       <LoginOverlay>
@@ -97,11 +97,11 @@ export const DebateStepPageVote = ({
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('red', isHover === 'FOR'))}
           variantSize="big"
+          aria-label={intl.formatMessage({ id: 'global.against' })}
           onClick={() =>
             voteForDebate(debateId, 'AGAINST', intl, onSuccess, isAuthenticated, viewerHasArgument)
           }>
-          <Icon name="THUMB_UP" mr="1" css={{ transform: 'rotate(180deg)' }} />
-          <FormattedMessage id="global.against" />
+          <Icon name="THUMB_DOWN" />
         </Button>
       </LoginOverlay>
     </Container>

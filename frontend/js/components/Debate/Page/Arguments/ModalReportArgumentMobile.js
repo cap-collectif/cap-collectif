@@ -167,7 +167,7 @@ export const ModalReportArgumentMobile = ({ argument, dispatch, show, onClose }:
   };
 
   return (
-    <Modal ariaLabel={intl.formatMessage({ id: 'global.menu' })} show={show}>
+    <Modal ariaLabel={intl.formatMessage({ id: 'global.menu' })} show={show} onClose={onClose}>
       <Modal.Body spacing={6} p={6}>
         <Modal
           onClose={onClose}

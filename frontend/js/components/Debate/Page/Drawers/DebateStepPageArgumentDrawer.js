@@ -2,26 +2,37 @@
 import * as React from 'react';
 import { graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import { useFragment } from 'relay-hooks';
 import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import Menu from '../../../DesignSystem/Menu/Menu';
 import Button from '~ds/Button/Button';
 import Tag from '~ds/Tag/Tag';
 import Heading from '~ui/Primitives/Heading';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
-import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
-import { ICON_SIZE } from '~ds/Icon/Icon';
+import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import { voteForArgument } from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type {
   DebateStepPageArgumentDrawer_argument,
   DebateStepPageArgumentDrawer_argument$key,
 } from '~relay/DebateStepPageArgumentDrawer_argument.graphql';
+import type {
+  DebateStepPageArgumentDrawer_viewer,
+  DebateStepPageArgumentDrawer_viewer$key,
+} from '~relay/DebateStepPageArgumentDrawer_viewer.graphql';
+import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalReportArgumentMobile';
+import ModalArgumentAuthorMenu from '~/components/Debate/Page/Arguments/ModalArgumentAuthorMenu';
+import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
 
-const FRAGMENT = graphql`
+type Props = {|
+  ...DetailDrawerProps,
+  +argument: DebateStepPageArgumentDrawer_argument$key,
+  +viewer: DebateStepPageArgumentDrawer_viewer$key,
+|};
+
+const ARGUMENT_FRAGMENT = graphql`
   fragment DebateStepPageArgumentDrawer_argument on DebateArgument
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
     id
@@ -30,78 +41,102 @@ const FRAGMENT = graphql`
     }
     type
     body
-    publishedAt
+    viewerCanReport
+    viewerDidAuthor
     viewerHasVote @include(if: $isAuthenticated)
     votes(first: 0) {
       totalCount
     }
+    ...ModalModerateArgumentMobile_argument
+    ...ModalArgumentAuthorMenu_argument
+    ...ModalReportArgumentMobile_argument
+  }
+`;
+
+const VIEWER_FRAGMENT = graphql`
+  fragment DebateStepPageArgumentDrawer_viewer on User {
+    isAdmin
   }
 `;
 
 const DebateStepPageArgumentDrawer = ({
   argument: argumentFragment,
+  viewer: viewerFragment,
   ...drawerProps
-}: {|
-  ...DetailDrawerProps,
-  +argument: DebateStepPageArgumentDrawer_argument$key,
-|}) => {
-  const argument: DebateStepPageArgumentDrawer_argument = useFragment(FRAGMENT, argumentFragment);
+}: Props) => {
+  const argument: DebateStepPageArgumentDrawer_argument = useFragment(
+    ARGUMENT_FRAGMENT,
+    argumentFragment,
+  );
+  const viewer: DebateStepPageArgumentDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const intl = useIntl();
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const isAuthor = argument.viewerDidAuthor;
+  const isViewerAdmin = viewer && viewer.isAdmin;
 
   if (!argument) return null;
 
   return (
     <DetailDrawer {...drawerProps}>
       <DetailDrawer.Header textAlign="center" justifyContent="space-between">
-        <Flex direction="column">
+        <Flex direction="column" spacing={1} flex={1}>
           <Text fontWeight="bold">{argument.author.username}</Text>
+
+          <Tag
+            variant={argument.type === 'FOR' ? 'green' : 'red'}
+            interactive={false}
+            alignSelf="center">
+            <Heading as="h5" fontWeight="700" uppercase>
+              <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
+            </Heading>
+          </Tag>
         </Flex>
-        <Menu>
-          <Menu.Button as={React.Fragment}>
-            <Button variant="tertiary">...</Button>
-          </Menu.Button>
-          <Menu.List>
-            <Menu.ListItem>
-              <Text>WIP</Text>
-            </Menu.ListItem>
-          </Menu.List>
-        </Menu>
+
+        {argument.viewerCanReport && (
+          <Button
+            rightIcon={ICON_NAME.MORE}
+            aria-label={intl.formatMessage({ id: 'global.menu' })}
+            color="gray.500"
+            onClick={onOpen}
+          />
+        )}
+
+        {isViewerAdmin && !isAuthor && <ModalModerateArgumentMobile argument={argument} />}
+
+        {isAuthor && <ModalArgumentAuthorMenu argument={argument} />}
       </DetailDrawer.Header>
+
       <DetailDrawer.Body>
-        <Flex direction="column" spacing={3}>
-          <Flex>
-            <Tag variant={argument.type === 'FOR' ? 'green' : 'red'}>
-              <Heading as="h5" fontWeight="700" uppercase>
-                <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
-              </Heading>
-            </Tag>
-            <Text ml="auto" color="neutral-gray.500">
-              {moment(argument.publishedAt)
-                .startOf('day')
-                .fromNow()}
-            </Text>
-          </Flex>
-          <Text>{argument.body}</Text>
-          <Flex align="center" justify="center">
-            <LoginOverlay>
-              <ButtonQuickAction
-                onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
-                mr={1}
-                size={ICON_SIZE.LG}
-                icon="THUMB_UP"
-                variantColor="green"
-                label={
-                  <FormattedMessage id={argument.viewerHasVote ? 'global.cancel' : 'vote.add'} />
-                }
-                iconColor={argument.viewerHasVote ? 'green.500' : 'gray.500'}
-              />
-            </LoginOverlay>
-            <Text as="span" fontSize={3} color="gray.500">
-              {argument.votes.totalCount}
-            </Text>
-          </Flex>
-        </Flex>
+        <Text>{argument.body}</Text>
       </DetailDrawer.Body>
+
+      <Flex
+        direction="row"
+        align="center"
+        justify="center"
+        position="fixed"
+        bottom={0}
+        bg="white"
+        borderTopLeftRadius="16px"
+        borderTopRightRadius="16px"
+        width="100%"
+        py={4}>
+        <LoginOverlay>
+          <Button
+            color="neutral-gray.500"
+            leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
+            onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
+            aria-label={intl.formatMessage({
+              id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
+            })}
+          />
+        </LoginOverlay>
+        <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">
+          {argument.votes.totalCount}
+        </Text>
+      </Flex>
+
+      <ModalReportArgumentMobile show={isOpen} argument={argument} onClose={onClose} />
     </DetailDrawer>
   );
 };

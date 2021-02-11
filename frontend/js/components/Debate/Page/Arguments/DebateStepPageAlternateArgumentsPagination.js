@@ -73,6 +73,7 @@ export const FRAGMENT = graphql`
 const VIEWER_FRAGMENT = graphql`
   fragment DebateStepPageAlternateArgumentsPagination_viewer on User {
     ...ArgumentCard_viewer
+    ...DebateStepPageArgumentDrawer_viewer
   }
 `;
 
@@ -159,6 +160,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                 <DebateStepPageArgumentDrawer
                   key={`drawer-${argument.id}`}
                   argument={argument}
+                  viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
                 />
@@ -198,6 +200,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                 <DebateStepPageArgumentDrawer
                   key={`drawer-${argument.id}`}
                   argument={argument}
+                  viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
                 />

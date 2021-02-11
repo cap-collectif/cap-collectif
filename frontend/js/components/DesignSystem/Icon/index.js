@@ -24,6 +24,7 @@ export { default as NEWSPAPER } from './svg/newspaper.svg';
 export { default as SPINNER } from './svg/spinner.svg';
 export { default as BELL } from './svg/bell.svg';
 export { default as THUMB_UP } from './svg/thumb-up.svg';
+export { default as THUMB_DOWN } from './svg/thumb-down.svg';
 export { default as LONG_ARROW_LEFT } from './svg/long-arrow-left.svg';
 export { default as LONG_ARROW_RIGHT } from './svg/long-arrow-right.svg';
 export { default as FLAG } from './svg/flag.svg';

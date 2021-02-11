@@ -16,12 +16,14 @@ import type {
   DebateStepPageArgumentsDrawer_debate$key,
 } from '~relay/DebateStepPageArgumentsDrawer_debate.graphql';
 import type { DebateStepPageArgumentsDrawer_viewer } from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
-import { Menu } from '~ds/Menu';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import type { RelayHookPaginationProps as PaginationProps } from '~/types';
 import { CONNECTION_NODES_PER_PAGE } from '~/components/Debate/Page/Arguments/DebateStepPageArgumentsPagination';
 import type { Filter } from '~/components/Debate/Page/Arguments/types';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
+import ListOptionGroup from '~ds/List/ListOptionGroup';
 
 const DEBATE_FRAGMENT = graphql`
   fragment DebateStepPageArgumentsDrawer_debate on Debate
@@ -87,45 +89,59 @@ const DebateStepPageArgumentsDrawer = ({
             />
           </Text>
         </Flex>
-        <Menu>
-          <Menu.Button as={React.Fragment}>
+        <Modal
+          disclosure={
             <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
               <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
             </Button>
-          </Menu.Button>
-          <Menu.List>
-            <Menu.OptionGroup
-              title={intl.formatMessage({ id: 'arguments.sort' })}
-              type="radio"
-              onChange={newFilter => {
-                setFilter(((newFilter: any): Filter));
-                const field = newFilter === 'MOST_SUPPORTED' ? 'VOTE_COUNT' : 'PUBLISHED_AT';
-                const direction = newFilter === 'MOST_SUPPORTED' ? 'DESC' : newFilter;
-                if (connection)
-                  connection.refetchConnection(CONNECTION_CONFIG, CONNECTION_NODES_PER_PAGE, null, {
-                    orderBy: { field, direction },
-                    debateId: debate?.id,
-                  });
-              }}
-              value={filter}>
-              <Menu.OptionItem value="DESC">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="project.sort.last" />
-                </Text>
-              </Menu.OptionItem>
-              <Menu.OptionItem value="ASC">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="opinion.sort.old" />
-                </Text>
-              </Menu.OptionItem>
-              <Menu.OptionItem value="MOST_SUPPORTED">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="filter.most_supported" />
-                </Text>
-              </Menu.OptionItem>
-            </Menu.OptionGroup>
-          </Menu.List>
-        </Menu>
+          }
+          ariaLabel={intl.formatMessage({ id: 'arguments.sort' })}>
+          {({ hide }) => (
+            <>
+              <Modal.Header>
+                <Heading as="h4">{intl.formatMessage({ id: 'arguments.sort' })}</Heading>
+              </Modal.Header>
+
+              <Modal.Body pb={6}>
+                <ListOptionGroup
+                  value={filter}
+                  onChange={newFilter => {
+                    setFilter(((newFilter: any): Filter));
+                    const field = newFilter === 'MOST_SUPPORTED' ? 'VOTE_COUNT' : 'PUBLISHED_AT';
+                    const direction = newFilter === 'MOST_SUPPORTED' ? 'DESC' : newFilter;
+                    if (connection)
+                      connection.refetchConnection(
+                        CONNECTION_CONFIG,
+                        CONNECTION_NODES_PER_PAGE,
+                        null,
+                        {
+                          orderBy: { field, direction },
+                          debateId: debate?.id,
+                        },
+                      );
+                    hide();
+                  }}
+                  type="radio">
+                  <ListOptionGroup.Item value="DESC">
+                    <Text>
+                      <FormattedMessage tagName={React.Fragment} id="project.sort.last" />
+                    </Text>
+                  </ListOptionGroup.Item>
+                  <ListOptionGroup.Item value="ASC">
+                    <Text>
+                      <FormattedMessage tagName={React.Fragment} id="opinion.sort.old" />
+                    </Text>
+                  </ListOptionGroup.Item>
+                  <ListOptionGroup.Item value="MOST_SUPPORTED">
+                    <Text>
+                      <FormattedMessage tagName={React.Fragment} id="filter.most_supported" />
+                    </Text>
+                  </ListOptionGroup.Item>
+                </ListOptionGroup>
+              </Modal.Body>
+            </>
+          )}
+        </Modal>
       </DetailDrawer.Header>
       <DetailDrawer.Body>
         <Flex overflow="auto" height="100%" direction="column" spacing={4}>
