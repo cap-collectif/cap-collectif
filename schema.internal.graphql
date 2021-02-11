@@ -3292,6 +3292,11 @@ type Debate implements Node {
     """Filter by a vote's type."""
     type: ForOrAgainstValue = null
 
+    """
+    (ROLE_ADMIN only) True to see only published votes, false to see only unpublished, null to see both.
+    """
+    isPublished: Boolean = null
+
     """Order by."""
     orderBy: DebateVoteOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateVoteConnection!

@@ -52,10 +52,10 @@ class DebateVoteRepository extends EntityRepository
         Debate $debate,
         int $limit,
         int $offset,
-        ?string $filterByType,
-        array $orderBy
+        array $orderBy,
+        ?array $filters = []
     ): Paginator {
-        $qb = $this->getByDebateAndTypeQB($debate, $filterByType);
+        $qb = $this->getByDebateAndFilters($debate, $filters);
 
         if (VoteOrderField::PUBLISHED_AT === $orderBy['field']) {
             $qb->addOrderBy('v.publishedAt', $orderBy['direction']);
@@ -71,22 +71,23 @@ class DebateVoteRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countByDebate(Debate $debate, ?string $filterByType = null): int
+    public function countByDebate(Debate $debate, ?array $filters = []): int
     {
-        $qb = $this->getByDebateAndTypeQB($debate, $filterByType)->select('COUNT(v)');
+        $qb = $this->getByDebateAndFilters($debate, $filters)->select('COUNT(v)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    private function getByDebateAndTypeQB(
-        Debate $debate,
-        ?string $filterByType = null
-    ): QueryBuilder {
+    private function getByDebateAndFilters(Debate $debate, ?array $filters = []): QueryBuilder
+    {
         $qb = $this->getByDebateQB($debate);
 
-        if ($filterByType && ForOrAgainstType::isValid($filterByType)) {
-            $qb->andWhere('v.type = :type')->setParameter('type', $filterByType);
+        if ($filters['type'] && ForOrAgainstType::isValid($filters['type'])) {
+            $qb->andWhere('v.type = :type')->setParameter('type', $filters['type']);
         }
+
+        $qb->andWhere('v.published = :published')
+            ->setParameter('published', $filters['isPublished'] ?? true);
 
         return $qb;
     }
@@ -94,7 +95,6 @@ class DebateVoteRepository extends EntityRepository
     private function getByDebateQB(Debate $debate): QueryBuilder
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.published = true')
             ->andWhere('v.debate = :debate')
             ->setParameter('debate', $debate);
     }

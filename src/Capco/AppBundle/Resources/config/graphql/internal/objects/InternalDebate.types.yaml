@@ -71,12 +71,16 @@ InternalDebate:
                         type: 'ForOrAgainstValue'
                         defaultValue: null
                         description: "Filter by a vote's type."
+                    isPublished:
+                        type: 'Boolean'
+                        description: '(ROLE_ADMIN only) True to see only published votes, false to see only unpublished, null to see both.'
+                        defaultValue: null
                     orderBy:
                         type: 'DebateVoteOrder'
                         description: 'Order by.'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                 type: DebateVoteConnection!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateVotesResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateVotesResolver", [value, args, getUser()])'
             viewerHasVote:
                 access: "@=hasRole('ROLE_USER')"
                 description: 'True if the viewer has upvoted the argument.'

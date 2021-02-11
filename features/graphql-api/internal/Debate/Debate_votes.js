@@ -1,9 +1,15 @@
 /* eslint-env jest */
 const DebateVotesQuery = /* GraphQL */ `
-  query DebateVotesQuery($id: ID!, $count: Int!, $cursor: String, $type: ForOrAgainstValue) {
+  query DebateVotesQuery(
+    $id: ID!
+    $count: Int!
+    $cursor: String
+    $type: ForOrAgainstValue
+    $isPublished: Boolean
+  ) {
     node(id: $id) {
       ... on Debate {
-        votes(first: $count, after: $cursor, type: $type) {
+        votes(first: $count, after: $cursor, type: $type, isPublished: $isPublished) {
           totalCount
           pageInfo {
             hasPreviousPage
@@ -18,6 +24,7 @@ const DebateVotesQuery = /* GraphQL */ `
               type
               createdAt
               publishedAt
+              published
               debate {
                 id
               }
@@ -33,16 +40,16 @@ const DebateVotesQuery = /* GraphQL */ `
 `;
 
 const DebateVotesCountersQuery = /* GraphQL */ `
-  query DebateVotesCountersQuery($id: ID!) {
+  query DebateVotesCountersQuery($id: ID!, $isPublished: Boolean) {
     node(id: $id) {
       ... on Debate {
-        allVotes: votes(first: 0) {
+        allVotes: votes(first: 0, isPublished: $isPublished) {
           totalCount
         }
-        forVotes: votes(first: 0, type: FOR) {
+        forVotes: votes(first: 0, type: FOR, isPublished: $isPublished) {
           totalCount
         }
-        againstVotes: votes(first: 0, type: AGAINST) {
+        againstVotes: votes(first: 0, type: AGAINST, isPublished: $isPublished) {
           totalCount
         }
       }
@@ -109,6 +116,34 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot();
   });
 
+  it('should not fetch unpublished votes associated to a debate when client is not an admin', async () => {
+    const response = await graphql(
+      DebateVotesQuery,
+      {
+        count: 100,
+        id: toGlobalId('Debate', 'debateCannabis'),
+        isPublished: false,
+      },
+      'internal',
+    );
+    const votes = response.node.votes.edges.map(edge => edge.node);
+    expect(votes.every(v => v.published === true)).toBe(true);
+  });
+
+  it('should fetch unpublished votes associated to a debate when client is an admin', async () => {
+    const response = await graphql(
+      DebateVotesQuery,
+      {
+        count: 100,
+        id: toGlobalId('Debate', 'debateCannabis'),
+        isPublished: false,
+      },
+      'internal_admin',
+    );
+    const votes = response.node.votes.edges.map(edge => edge.node);
+    expect(votes.every(v => v.published === false)).toBe(true);
+  });
+
   it('fetches votes counters associated to a debate', async () => {
     await expect(
       graphql(
@@ -117,6 +152,19 @@ describe('Internal|Debate.Votes connection', () => {
           id: toGlobalId('Debate', 'debateCannabis'),
         },
         'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches unpublished votes counters associated to a debate', async () => {
+    await expect(
+      graphql(
+        DebateVotesCountersQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+          isPublished: false,
+        },
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });

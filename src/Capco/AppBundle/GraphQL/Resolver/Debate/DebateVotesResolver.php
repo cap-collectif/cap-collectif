@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\DebateVoteRepository;
@@ -18,14 +19,17 @@ class DebateVotesResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(Debate $debate, Argument $args): ConnectionInterface
-    {
-        $filterByType = $args->offsetGet('type');
+    public function __invoke(
+        Debate $debate,
+        Argument $args,
+        ?User $viewer = null
+    ): ConnectionInterface {
+        $filters = self::getFilters($args, $viewer);
         $orderBy = $args->offsetGet('orderBy');
 
         $paginator = new Paginator(function (int $offset, int $limit) use (
             $debate,
-            $filterByType,
+            $filters,
             $orderBy
         ) {
             if (0 === $offset && 0 === $limit) {
@@ -33,12 +37,26 @@ class DebateVotesResolver implements ResolverInterface
             }
 
             return $this->repository
-                ->getByDebate($debate, $limit, $offset, $filterByType, $orderBy)
+                ->getByDebate($debate, $limit, $offset, $orderBy, $filters)
                 ->getIterator()
                 ->getArrayCopy();
         });
-        $totalCount = $this->repository->countByDebate($debate, $filterByType);
+        $totalCount = $this->repository->countByDebate($debate, $filters);
 
         return $paginator->auto($args, $totalCount);
+    }
+
+    public static function getFilters(Argument $args, ?User $viewer = null): array
+    {
+        $filters = [];
+        $filters['type'] = $args->offsetGet('type');
+
+        if (null === $viewer || !$viewer->isAdmin()) {
+            $filters['isPublished'] = true;
+        } else {
+            $filters['isPublished'] = $args->offsetGet('isPublished');
+        }
+
+        return $filters;
     }
 }

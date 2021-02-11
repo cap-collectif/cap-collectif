@@ -25,8 +25,12 @@ class DebateVotesResolverSpec extends ObjectBehavior
     public function it_resolve_empty_connection(DebateVoteRepository $repository, Debate $debate)
     {
         $args = new Argument(['first' => 0, 'after' => null]);
+        $filters = [
+            'type' => null,
+            'isPublished' => true,
+        ];
         $repository
-            ->countByDebate($debate, null)
+            ->countByDebate($debate, $filters)
             ->willReturn(0)
             ->shouldBeCalled();
         $this->__invoke($debate, $args)->shouldReturnEmptyConnection();
@@ -44,12 +48,22 @@ class DebateVotesResolverSpec extends ObjectBehavior
             'after' => null,
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
         ]);
+        $filters = [
+            'type' => null,
+            'isPublished' => true,
+        ];
         $repository
-            ->getByDebate($debate, 11, 0, null, ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'])
+            ->getByDebate(
+                $debate,
+                11,
+                0,
+                ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                $filters
+            )
             ->willReturn($paginator)
             ->shouldBeCalled();
         $repository
-            ->countByDebate($debate, null)
+            ->countByDebate($debate, $filters)
             ->willReturn(2)
             ->shouldBeCalled();
         $paginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
