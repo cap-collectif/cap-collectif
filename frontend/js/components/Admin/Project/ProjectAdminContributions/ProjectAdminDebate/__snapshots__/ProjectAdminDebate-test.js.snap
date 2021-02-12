@@ -71,6 +71,12 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
               },
             }
           }
+          debateStep={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
         />
       </AccordionPanel>
     </AccordionItem>
@@ -104,6 +110,12 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
               "votes": Object {
                 "totalCount": 1,
               },
+            }
+          }
+          debateStep={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
             }
           }
         />
@@ -196,6 +208,12 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
               },
             }
           }
+          debateStep={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
         />
       </AccordionPanel>
     </AccordionItem>
@@ -229,6 +247,12 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
               "votes": Object {
                 "totalCount": 1,
               },
+            }
+          }
+          debateStep={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
             }
           }
         />

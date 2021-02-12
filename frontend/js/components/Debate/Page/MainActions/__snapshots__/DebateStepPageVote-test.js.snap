@@ -26,28 +26,30 @@ exports[`<DebateStepPageVote/> renders correcty 1`] = `
   <Connect(LoginOverlay)>
     <DebateStepPageVote___StyledButton
       _css={[Function]}
-      aria-label="global.for"
+      leftIcon="THUMB_UP"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       variantSize="big"
     >
-      <Icon
-        name="THUMB_UP"
+      <FormattedMessage
+        id="global.for"
+        values={Object {}}
       />
     </DebateStepPageVote___StyledButton>
   </Connect(LoginOverlay)>
   <Connect(LoginOverlay)>
     <DebateStepPageVote___StyledButton2
       _css2={[Function]}
-      aria-label="global.against"
+      leftIcon="THUMB_DOWN"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       variantSize="big"
     >
-      <Icon
-        name="THUMB_DOWN"
+      <FormattedMessage
+        id="global.against"
+        values={Object {}}
       />
     </DebateStepPageVote___StyledButton2>
   </Connect(LoginOverlay)>

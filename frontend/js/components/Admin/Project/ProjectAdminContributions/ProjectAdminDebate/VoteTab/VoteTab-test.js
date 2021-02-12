@@ -33,11 +33,13 @@ const baseProps = {
         },
       ],
     },
-    debateVotesAgainst: {
-      totalCount: 1,
-    },
-    debateVotesFor: {
-      totalCount: 1,
+  },
+  debateStep: {
+    $refType,
+    id: 'debate-step-123',
+    timeless: false,
+    timeRange: {
+      endAt: '2030-03-10 00:00:00',
     },
   },
   relay: relayPaginationMock,
@@ -53,12 +55,6 @@ const props = {
         ...baseProps.debate.debateVotes,
         totalCount: 0,
         edges: [],
-      },
-      debateVotesAgainst: {
-        totalCount: 0,
-      },
-      debateVotesFor: {
-        totalCount: 0,
       },
     },
   },

@@ -16,6 +16,10 @@ const baseProps = {
       totalCount: 1,
     },
   },
+  debateStep: {
+    $refType,
+    $fragmentRefs,
+  },
   hasContributionsStep: false,
   baseUrl: 'index/',
 };

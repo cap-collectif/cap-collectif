@@ -1,11 +1,10 @@
 // @flow
 import React, { useState } from 'react';
-import { useIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
-import Icon from '~ds/Icon/Icon';
 import AddDebateVoteMutation from '~/mutations/AddDebateVoteMutation';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
@@ -84,11 +83,11 @@ export const DebateStepPageVote = ({
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('green', isHover === 'AGAINST'))}
           variantSize="big"
-          aria-label={intl.formatMessage({ id: 'global.for' })}
           onClick={() =>
             voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated, viewerHasArgument)
-          }>
-          <Icon name="THUMB_UP" />
+          }
+          leftIcon="THUMB_UP">
+          <FormattedMessage id="global.for" />
         </Button>
       </LoginOverlay>
       <LoginOverlay>
@@ -97,11 +96,11 @@ export const DebateStepPageVote = ({
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('red', isHover === 'FOR'))}
           variantSize="big"
-          aria-label={intl.formatMessage({ id: 'global.against' })}
           onClick={() =>
             voteForDebate(debateId, 'AGAINST', intl, onSuccess, isAuthenticated, viewerHasArgument)
-          }>
-          <Icon name="THUMB_DOWN" />
+          }
+          leftIcon="THUMB_DOWN">
+          <FormattedMessage id="global.against" />
         </Button>
       </LoginOverlay>
     </Container>

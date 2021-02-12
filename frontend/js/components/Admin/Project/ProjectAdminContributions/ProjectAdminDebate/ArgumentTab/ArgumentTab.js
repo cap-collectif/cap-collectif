@@ -9,7 +9,6 @@ import DebateArgument from '~/components/Admin/Debate/DebateArgument/DebateArgum
 import { type ArgumentTab_debate } from '~relay/ArgumentTab_debate.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Spinner from '~ds/Spinner/Spinner';
-import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import NoResultArgument from '~/components/Admin/Debate/NoResultArgument/NoResultArgument';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
 import ModalModerateArgument, {
@@ -27,29 +26,20 @@ type Props = {|
 |};
 
 export const ArgumentTab = ({ debate, relay }: Props) => {
-  const { debateArguments, argumentsFor, argumentsAgainst, allArguments } = debate;
+  const { debateArguments, allArguments } = debate;
   const listArgumentRef = React.useRef(null);
   const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
-  const { parameters } = useProjectAdminDebateContext();
   const intl = useIntl();
 
   const hasArguments = allArguments.totalCount > 0;
-  const hasArgumentForOrAgainst = argumentsFor.totalCount > 0 || argumentsAgainst.totalCount > 0;
 
   return hasArguments ? (
     <Flex direction="column">
-      {parameters.filters.argument.state === 'WAITING' && hasArgumentForOrAgainst && (
-        <Text color="gray.500" mt={4}>
-          {intl.formatMessage({ id: 'argument-waiting-user-email-confirmation' })}
-        </Text>
-      )}
-
       {debateArguments.totalCount > 0 ? (
         <AppBox
           as="ul"
           p={0}
           m={0}
-          mt={4}
           css={{ listStyle: 'none', overflow: 'auto', maxHeight: `${MAX_HEIGHT_8_ARGUMENTS}px` }}
           ref={listArgumentRef}>
           <InfiniteScroll
@@ -142,22 +132,6 @@ export default createPaginationContainer(
               ...DebateArgument_argument
             }
           }
-        }
-        argumentsFor: arguments(
-          first: 0
-          value: FOR
-          isPublished: $isPublished
-          isTrashed: $isTrashed
-        ) {
-          totalCount
-        }
-        argumentsAgainst: arguments(
-          first: 0
-          value: AGAINST
-          isPublished: $isPublished
-          isTrashed: $isTrashed
-        ) {
-          totalCount
         }
         allArguments: arguments(first: 0, isPublished: null, isTrashed: null) {
           totalCount

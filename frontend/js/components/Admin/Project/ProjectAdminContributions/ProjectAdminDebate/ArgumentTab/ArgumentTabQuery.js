@@ -1,23 +1,25 @@
 // @flow
 import * as React from 'react';
-import { useQuery, graphql } from 'relay-hooks';
-import { createFragmentContainer } from 'react-relay';
+import { useQuery } from 'relay-hooks';
+import { createFragmentContainer, graphql } from 'react-relay';
 import isEqual from 'lodash/isEqual';
 import type {
   ArgumentTabQueryResponse,
   ArgumentTabQueryVariables,
 } from '~relay/ArgumentTabQuery.graphql';
 import type { ArgumentTabQuery_debate } from '~relay/ArgumentTabQuery_debate.graphql';
+import type { ArgumentTabQuery_debateStep } from '~relay/ArgumentTabQuery_debateStep.graphql';
 import type { Query } from '~/types';
 import ArgumentTab, { ARGUMENT_PAGINATION } from './ArgumentTab';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import type { ProjectAdminDebateParameters } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import Flex from '~ui/Primitives/Layout/Flex';
-import ArgumentHeaderTab from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentHeaderTab';
+import ArgumentHeaderTab from './ArgumentHeaderTab';
 
 type Props = {|
   +debate: ArgumentTabQuery_debate,
+  +debateStep: ArgumentTabQuery_debateStep,
 |};
 
 type PropsQuery = {|
@@ -69,7 +71,7 @@ export const initialVariables = {
   isTrashed: false,
 };
 
-const ArgumentTabQuery = ({ debate }: Props) => {
+const ArgumentTabQuery = ({ debate, debateStep }: Props) => {
   const { parameters } = useProjectAdminDebateContext();
 
   const queryVariablesWithParameters = createQueryVariables(debate.id, parameters);
@@ -87,12 +89,12 @@ const ArgumentTabQuery = ({ debate }: Props) => {
     skip: !hasFilters,
   });
 
-  if (debate) {
+  if (debate && debateStep) {
     const dataDebate: any = !hasFilters ? debate : data?.debate;
 
     return (
       <Flex direction="column">
-        <ArgumentHeaderTab debate={debate} />
+        <ArgumentHeaderTab debate={debate} debateStep={debateStep} />
         {(hasFilters && data) || (!hasFilters && debate) ? (
           <ArgumentTab debate={dataDebate} />
         ) : (
@@ -124,7 +126,12 @@ export default createFragmentContainer(ArgumentTabQuery, {
           isPublished: $isPublished
           isTrashed: $isTrashed
         )
-      ...ArgumentHeaderTab_debate
+      ...ArgumentHeaderTab_debate @arguments(isPublished: $isPublished, isTrashed: $isTrashed)
+    }
+  `,
+  debateStep: graphql`
+    fragment ArgumentTabQuery_debateStep on Step {
+      ...ArgumentHeaderTab_debateStep
     }
   `,
 });

@@ -181,6 +181,7 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
       isPublishedArgument: true,
       isTrashedArgument: false,
       // DebateStep (vote)
+      isPublishedVote: true,
       countVotePagination: VOTE_PAGINATION,
       cursorVotePagination: null,
     },

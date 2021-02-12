@@ -32,12 +32,6 @@ const baseProps = {
         },
       ],
     },
-    argumentsAgainst: {
-      totalCount: 1,
-    },
-    argumentsFor: {
-      totalCount: 1,
-    },
     allArguments: {
       totalCount: 2,
     },
@@ -55,12 +49,6 @@ const props = {
         ...baseProps.debate.debateArguments,
         totalCount: 0,
         edges: [],
-      },
-      argumentsAgainst: {
-        totalCount: 0,
-      },
-      argumentsFor: {
-        totalCount: 0,
       },
       allArguments: {
         totalCount: 0,

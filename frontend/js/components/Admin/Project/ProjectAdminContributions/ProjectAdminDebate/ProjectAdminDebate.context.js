@@ -22,6 +22,9 @@ export const DEFAULT_FILTERS: Filters = {
     type: ['FOR', 'AGAINST'],
     state: 'PUBLISHED',
   },
+  vote: {
+    state: 'PUBLISHED',
+  },
 };
 
 export const ProjectAdminDebateContext = React.createContext<Context>({

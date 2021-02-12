@@ -8,7 +8,6 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
     _css="520px"
     as="ul"
     m={0}
-    mt={4}
     p={0}
   >
     <InfiniteScroll

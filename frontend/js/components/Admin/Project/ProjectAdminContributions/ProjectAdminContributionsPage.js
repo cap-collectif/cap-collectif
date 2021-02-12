@@ -39,6 +39,7 @@ export const queryContributions = graphql`
     $isPublishedArgument: Boolean!
     $isTrashedArgument: Boolean!
     # ARGUMENTS OF ProjectAdminDebate (DebateVote)
+    $isPublishedVote: Boolean!
     $countVotePagination: Int!
     $cursorVotePagination: String
   ) {
@@ -61,11 +62,13 @@ export const queryContributions = graphql`
                   argumentType: $argumentType
                   isPublishedArgument: $isPublishedArgument
                   isTrashedArgument: $isTrashedArgument
+                  isPublishedVote: $isPublishedVote
                   countVotePagination: $countVotePagination
                   cursorVotePagination: $cursorVotePagination
                 )
             }
           }
+          ...ProjectAdminDebate_debateStep
         }
         ...NoContributionsStep_project
         ...IndexContributions_project
@@ -142,6 +145,9 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
                   project?.steps.find(({ slug }) => slug === routeProps.match.params.stepSlug)
                     ?.debate
                 }
+                debateStep={project?.steps.find(
+                  ({ slug }) => slug === routeProps.match.params.stepSlug,
+                )}
                 {...routeProps}
               />
             </ProjectAdminDebateProvider>

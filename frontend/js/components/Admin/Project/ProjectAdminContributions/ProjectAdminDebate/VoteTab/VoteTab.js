@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+import moment from 'moment';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -8,10 +9,11 @@ import Text from '~ui/Primitives/Text';
 import DebateVote from '~/components/Admin/Debate/DebateVote/DebateVote';
 import type { DebateVote_vote$ref } from '~relay/DebateVote_vote.graphql';
 import type { ForOrAgainstValue, VoteTab_debate } from '~relay/VoteTab_debate.graphql';
+import type { VoteTab_debateStep } from '~relay/VoteTab_debateStep.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Spinner from '~ds/Spinner/Spinner';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
-import Button from '~ds/Button/Button';
+import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 
 export const VOTE_PAGINATION = 10;
 
@@ -30,6 +32,7 @@ type VotesForAndAgainst = {|
 
 type Props = {|
   debate: VoteTab_debate,
+  debateStep: VoteTab_debateStep,
   +relay: RelayPaginationProp,
 |};
 
@@ -56,108 +59,105 @@ const formatVotesForAndAgainst = (
     : defaultForAndAgainstVotes;
 };
 
-export const VoteTab = ({ debate, relay }: Props) => {
-  const { debateVotes, debateVotesFor, debateVotesAgainst } = debate;
+export const VoteTab = ({ debate, debateStep, relay }: Props) => {
+  const { debateVotes } = debate;
+  const { parameters } = useProjectAdminDebateContext();
   const intl = useIntl();
   const hasVotes = debateVotes.totalCount > 0;
+  const isStepFinished = !debateStep.timeless
+    ? false
+    : debateStep?.timeRange?.endAt
+    ? moment().isAfter(((debateStep.timeRange.endAt: any): string))
+    : false;
   const listVoteRef = React.useRef(null);
 
   const { FOR: votesFor, AGAINST: votesAgainst } = React.useMemo(
     () => formatVotesForAndAgainst(debateVotes),
     [debateVotes],
   );
-  const exportUrl = `/debate/${debate.id}/download/votes`;
 
   return hasVotes ? (
-    <Flex direction="column">
-      <Flex direction="row" justify="space-between" align="center" mb={4}>
-        <Text color="gray.700">
-          {intl.formatMessage(
-            { id: 'vote-count-for-and-against' },
-            { for: debateVotesFor.totalCount, against: debateVotesAgainst.totalCount },
-          )}
-        </Text>
-
-        <Button
-          variant="primary"
-          variantColor="primary"
-          variantSize="small"
-          onClick={() => {
-            window.location.href = exportUrl;
-          }}
-          aria-label={intl.formatMessage({ id: 'global.export' })}>
-          {intl.formatMessage({ id: 'global.export' })}
-        </Button>
-      </Flex>
-
-      <Flex
-        direction="column"
-        ref={listVoteRef}
-        css={{ overflow: 'auto', maxHeight: `${MAX_HEIGHT_8_VOTES}px` }}>
-        <InfiniteScroll
-          key="infinite-scroll-vote"
-          initialLoad={false}
-          pageStart={0}
-          loadMore={() => relay.loadMore(VOTE_PAGINATION)}
-          hasMore={debate.debateVotes?.pageInfo.hasNextPage}
-          loader={
-            <Flex direction="row" justify="center">
-              <Spinner size="m" />
-            </Flex>
-          }
-          getScrollParent={() => listVoteRef.current}
-          useWindow={false}>
-          <Flex direction="row" align="stretch">
-            {votesFor.length > 0 ? (
-              <AppBox
-                as="ul"
-                p={0}
-                m={0}
-                pr={7}
-                flex="1"
-                borderRight="normal"
-                borderColor="gray.200"
-                css={{ listStyle: 'none' }}>
-                {votesFor.map(vote => (
-                  <AppBox as="li" key={vote.id} mb={4}>
-                    <DebateVote vote={vote} />
-                  </AppBox>
-                ))}
-              </AppBox>
-            ) : (
-              <Flex
-                direction="column"
-                align="center"
-                flex="1"
-                textAlign="center"
-                borderRight="normal"
-                borderColor="gray.200">
-                <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
-                <Text color="gray.500" maxWidth="200px">
-                  {intl.formatMessage({ id: 'no-argument-for-published-yet' })}
-                </Text>
-              </Flex>
-            )}
-
-            {votesAgainst.length > 0 ? (
-              <AppBox as="ul" p={0} m={0} ml={7} flex="1" css={{ listStyle: 'none' }}>
-                {votesAgainst.map(vote => (
-                  <AppBox as="li" key={vote.id} mb={4}>
-                    <DebateVote vote={vote} />
-                  </AppBox>
-                ))}
-              </AppBox>
-            ) : (
-              <Flex direction="column" align="center" textAlign="center" flex="1">
-                <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
-                <Text color="gray.500" maxWidth="200px">
-                  {intl.formatMessage({ id: 'no-argument-against-published-yet' })}
-                </Text>
-              </Flex>
-            )}
+    <Flex
+      direction="column"
+      ref={listVoteRef}
+      css={{ overflow: 'auto', maxHeight: `${MAX_HEIGHT_8_VOTES}px` }}>
+      <InfiniteScroll
+        key="infinite-scroll-vote"
+        initialLoad={false}
+        pageStart={0}
+        loadMore={() => relay.loadMore(VOTE_PAGINATION)}
+        hasMore={debate.debateVotes?.pageInfo.hasNextPage}
+        loader={
+          <Flex direction="row" justify="center">
+            <Spinner size="m" />
           </Flex>
-        </InfiniteScroll>
-      </Flex>
+        }
+        getScrollParent={() => listVoteRef.current}
+        useWindow={false}>
+        <Flex direction="row" align="stretch">
+          {votesFor.length > 0 ? (
+            <AppBox
+              as="ul"
+              p={0}
+              m={0}
+              pr={7}
+              flex="1"
+              borderRight="normal"
+              borderColor="gray.200"
+              css={{ listStyle: 'none' }}>
+              {votesFor.map(vote => (
+                <AppBox as="li" key={vote.id} mb={4}>
+                  <DebateVote vote={vote} />
+                </AppBox>
+              ))}
+            </AppBox>
+          ) : (
+            <Flex
+              direction="column"
+              align="center"
+              flex="1"
+              textAlign="center"
+              borderRight="normal"
+              borderColor="gray.200">
+              <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
+              <Text color="gray.500" maxWidth="200px">
+                {intl.formatMessage({
+                  id:
+                    parameters.filters.vote.state === 'PUBLISHED'
+                      ? 'no-vote-for-published'
+                      : isStepFinished
+                      ? 'no-vote-for-non-published'
+                      : 'no-vote-for-waiting-for-published',
+                })}
+              </Text>
+            </Flex>
+          )}
+
+          {votesAgainst.length > 0 ? (
+            <AppBox as="ul" p={0} m={0} ml={7} flex="1" css={{ listStyle: 'none' }}>
+              {votesAgainst.map(vote => (
+                <AppBox as="li" key={vote.id} mb={4}>
+                  <DebateVote vote={vote} />
+                </AppBox>
+              ))}
+            </AppBox>
+          ) : (
+            <Flex direction="column" align="center" textAlign="center" flex="1">
+              <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
+              <Text color="gray.500" maxWidth="200px">
+                {intl.formatMessage({
+                  id:
+                    parameters.filters.vote.state === 'PUBLISHED'
+                      ? 'no-vote-against-published'
+                      : isStepFinished
+                      ? 'no-vote-against-non-published'
+                      : 'no-vote-against-waiting-for-published',
+                })}
+              </Text>
+            </Flex>
+          )}
+        </Flex>
+      </InfiniteScroll>
     </Flex>
   ) : (
     <Flex direction="column" spacing={6} align="center">
@@ -172,10 +172,14 @@ export default createPaginationContainer(
   {
     debate: graphql`
       fragment VoteTab_debate on Debate
-        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
+        @argumentDefinitions(
+          count: { type: "Int!" }
+          cursor: { type: "String" }
+          isPublished: { type: "Boolean!" }
+        ) {
         id
-        debateVotes: votes(first: $count, after: $cursor)
-          @connection(key: "VoteTab_debateVotes", filters: []) {
+        debateVotes: votes(first: $count, after: $cursor, isPublished: $isPublished)
+          @connection(key: "VoteTab_debateVotes", filters: ["isPublished"]) {
           totalCount
           pageInfo {
             hasNextPage
@@ -189,11 +193,14 @@ export default createPaginationContainer(
             }
           }
         }
-        debateVotesFor: votes(type: FOR) {
-          totalCount
-        }
-        debateVotesAgainst: votes(type: AGAINST) {
-          totalCount
+      }
+    `,
+    debateStep: graphql`
+      fragment VoteTab_debateStep on Step {
+        id
+        timeless
+        timeRange {
+          endAt
         }
       }
     `,
@@ -221,6 +228,7 @@ export default createPaginationContainer(
         count: number,
         cursor: ?string,
         debateId: string,
+        stepId: string,
       },
     ) {
       return {
@@ -228,12 +236,22 @@ export default createPaginationContainer(
         count,
         cursor,
         debateId: props.debate.id,
+        stepId: props.debateStep.id,
       };
     },
     query: graphql`
-      query VoteTabPaginatedQuery($debateId: ID!, $count: Int!, $cursor: String) {
+      query VoteTabPaginatedQuery(
+        $debateId: ID!
+        $stepId: ID!
+        $count: Int!
+        $cursor: String
+        $isPublished: Boolean!
+      ) {
         debate: node(id: $debateId) {
-          ...VoteTab_debate @arguments(count: $count, cursor: $cursor)
+          ...VoteTab_debate @arguments(count: $count, cursor: $cursor, isPublished: $isPublished)
+        }
+        debateStep: node(id: $stepId) {
+          ...VoteTab_debateStep
         }
       }
     `,

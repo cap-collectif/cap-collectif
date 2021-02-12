@@ -7,7 +7,8 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import Accordion from '~ds/Accordion';
-import { type ProjectAdminDebate_debate } from '~relay/ProjectAdminDebate_debate.graphql';
+import type { ProjectAdminDebate_debate } from '~relay/ProjectAdminDebate_debate.graphql';
+import type { ProjectAdminDebate_debateStep } from '~relay/ProjectAdminDebate_debateStep.graphql';
 import FaceToFace from './FaceToFace/FaceToFace';
 import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery';
 import VoteTabQuery from './VoteTab/VoteTabQuery';
@@ -17,9 +18,15 @@ type Props = {|
   hasContributionsStep: boolean,
   baseUrl: string,
   debate: ProjectAdminDebate_debate,
+  debateStep: ProjectAdminDebate_debateStep,
 |};
 
-export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Props) => {
+export const ProjectAdminDebate = ({
+  hasContributionsStep,
+  baseUrl,
+  debate,
+  debateStep,
+}: Props) => {
   const history = useHistory();
   const { allArguments, votes } = debate;
 
@@ -61,7 +68,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
           </Accordion.Button>
 
           <Accordion.Panel>
-            <ArgumentTabQuery debate={debate} />
+            <ArgumentTabQuery debate={debate} debateStep={debateStep} />
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -76,7 +83,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate }: Pr
             </Heading>
           </Accordion.Button>
           <Accordion.Panel>
-            <VoteTabQuery debate={debate} />
+            <VoteTabQuery debate={debate} debateStep={debateStep} />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
@@ -88,11 +95,14 @@ export default createFragmentContainer(ProjectAdminDebate, {
   debate: graphql`
     fragment ProjectAdminDebate_debate on Debate
       @argumentDefinitions(
+        # ARGUMENT #
         countArgumentPagination: { type: "Int!" }
         cursorArgumentPagination: { type: "String" }
         argumentType: { type: "ForOrAgainstValue", defaultValue: null }
         isPublishedArgument: { type: "Boolean!" }
         isTrashedArgument: { type: "Boolean!" }
+        # VOTE #
+        isPublishedVote: { type: "Boolean!" }
         countVotePagination: { type: "Int!" }
         cursorVotePagination: { type: "String" }
       ) {
@@ -111,7 +121,18 @@ export default createFragmentContainer(ProjectAdminDebate, {
           isPublished: $isPublishedArgument
           isTrashed: $isTrashedArgument
         )
-      ...VoteTabQuery_debate @arguments(count: $countVotePagination, cursor: $cursorVotePagination)
+      ...VoteTabQuery_debate
+        @arguments(
+          count: $countVotePagination
+          cursor: $cursorVotePagination
+          isPublished: $isPublishedVote
+        )
+    }
+  `,
+  debateStep: graphql`
+    fragment ProjectAdminDebate_debateStep on Step {
+      ...ArgumentTabQuery_debateStep
+      ...VoteTabQuery_debateStep
     }
   `,
 });
