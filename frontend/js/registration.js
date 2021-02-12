@@ -83,6 +83,7 @@ import ParticipationMotivationApp from '~/startup/ParticipationMotivationApp';
 import ToastsContainerApp from '~/startup/ToastsContainerApp';
 import DebateStepPageApp from '~/startup/DebateStepPageApp';
 import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
+import DebateCardApp from '~/startup/DebateCardApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -169,4 +170,5 @@ ReactOnRails.register({
   ImageSliderApp,
   ParticipationTutorialApp,
   ParticipationMotivationApp,
+  DebateCardApp,
 });
