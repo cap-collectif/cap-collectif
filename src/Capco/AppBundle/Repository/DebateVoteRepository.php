@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\QueryBuilder;
+use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateVote;
+use Capco\AppBundle\Enum\ForOrAgainstType;
+use Capco\AppBundle\Enum\VoteOrderField;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Enum\VoteOrderField;
-use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Enum\ForOrAgainstType;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\Debate\DebateVote;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method DebateVote|null find($id, $lockMode = null, $lockVersion = null)
@@ -48,6 +48,26 @@ class DebateVoteRepository extends EntityRepository
         }
     }
 
+    public function getUnpublishedByDebateAndUser(
+        Debate $debate,
+        User $user,
+        int $limit,
+        int $offset
+    ): Paginator {
+        $qb = $this->getUnpublishedByDebateAndUserQB($debate, $user)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
+    }
+
+    public function countUnpublishedByDebateAndUser(Debate $debate, User $user): int
+    {
+        $qb = $this->getUnpublishedByDebateAndUserQB($debate, $user)->select('COUNT(v)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getByDebate(
         Debate $debate,
         int $limit,
@@ -78,6 +98,16 @@ class DebateVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    private function getUnpublishedByDebateAndUserQB(Debate $debate, User $user): QueryBuilder
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.published = false')
+            ->andWhere('v.debate = :debate')
+            ->andWhere('v.user = :user')
+            ->setParameter('debate', $debate)
+            ->setParameter('user', $user);
+    }
+
     private function getByDebateAndFilters(Debate $debate, ?array $filters = []): QueryBuilder
     {
         $qb = $this->getByDebateQB($debate);
@@ -86,8 +116,10 @@ class DebateVoteRepository extends EntityRepository
             $qb->andWhere('v.type = :type')->setParameter('type', $filters['type']);
         }
 
-        $qb->andWhere('v.published = :published')
-            ->setParameter('published', $filters['isPublished'] ?? true);
+        $qb->andWhere('v.published = :published')->setParameter(
+            'published',
+            $filters['isPublished'] ?? true
+        );
 
         return $qb;
     }

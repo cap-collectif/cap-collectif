@@ -3328,6 +3328,28 @@ type Debate implements Node {
 
   """The url of the debate"""
   url: URI!
+
+  """The viewer's unpublished votes."""
+  viewerUnpublishedVotes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): DebateVoteConnection!
+
+  """The viewer's unpublished argument."""
+  viewerUnpublishedArgument: DebateArgument
 }
 
 """A debate argument from non expert."""

@@ -100,3 +100,14 @@ InternalDebate:
                 type: 'URI!'
                 description: 'The url of the debate'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateUrlResolver", [value])'
+            viewerUnpublishedVotes:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'DebateVoteConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerUnpublishedVotesResolver", [value, args, getUser()])'
+                description: "The viewer's unpublished votes."
+            viewerUnpublishedArgument:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'InternalDebateArgument'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerUnpublishedArgumentResolver", [value, getUser()])'
+                description: "The viewer's unpublished argument."

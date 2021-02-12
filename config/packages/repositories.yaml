@@ -538,6 +538,8 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:Debate\DebateArgument']
+        calls:
+            - setLogger: ['@logger']
 
     Capco\AppBundle\Repository\DebateVoteRepository:
         public: true

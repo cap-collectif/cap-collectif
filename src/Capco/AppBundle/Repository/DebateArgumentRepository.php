@@ -7,8 +7,10 @@ use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method DebateArgument|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +20,13 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class DebateArgumentRepository extends EntityRepository
 {
+    private LoggerInterface $logger;
+
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function getByDebate(
         Debate $debate,
         int $limit,
@@ -33,6 +42,27 @@ class DebateArgumentRepository extends EntityRepository
         }
 
         return new Paginator($qb);
+    }
+
+    public function getUnpublishedByDebateAndUser(Debate $debate, User $user): ?DebateArgument
+    {
+        $qb = $this->getByDebateQueryBuilder($debate, [
+            'isPublished' => false,
+            'isTrashed' => false,
+        ])
+            ->andWhere('argument.author = :user')
+            ->setParameter('user', $user);
+
+        try {
+            return $qb->getQuery()->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            $this->logger->critical(
+                'A user has multiple arguments on a debate. This should not happen.',
+                ['debate' => $debate, 'user' => $user]
+            );
+
+            return null;
+        }
     }
 
     public function countByDebate(Debate $debate, array $filters = []): int
@@ -54,6 +84,26 @@ class DebateArgumentRepository extends EntityRepository
             ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * Get all trashed or unpublished debate arguments for project.
+     */
+    public function getTrashedByProject(Project $project)
+    {
+        return $this->createQueryBuilder('da')
+            ->addSelect('debate', 'author', 'media')
+            ->leftJoin('da.author', 'author')
+            ->leftJoin('author.media', 'media')
+            ->leftJoin('da.debate', 'debate')
+            ->leftJoin('debate.step', 'debate_step')
+            ->leftJoin('debate_step.projectAbstractStep', 'debate_step_pas')
+            ->andWhere('debate_step_pas.project = :project')
+            ->andWhere('da.trashedAt IS NOT NULL')
+            ->setParameter('project', $project)
+            ->orderBy('da.trashedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     private function getByDebateQueryBuilder(Debate $debate, array $filters = []): QueryBuilder
@@ -78,25 +128,5 @@ class DebateArgumentRepository extends EntityRepository
         }
 
         return $qb;
-    }
-
-    /**
-     * Get all trashed or unpublished debate arguments for project.
-     */
-    public function getTrashedByProject(Project $project)
-    {
-        return $this->createQueryBuilder('da')
-            ->addSelect('debate', 'author', 'media', )
-            ->leftJoin('da.author', 'author')
-            ->leftJoin('author.media', 'media')
-            ->leftJoin('da.debate', 'debate')
-            ->leftJoin('debate.step', 'debate_step')
-            ->leftJoin('debate_step.projectAbstractStep', 'debate_step_pas')
-            ->andWhere('debate_step_pas.project = :project')
-            ->andWhere('da.trashedAt IS NOT NULL')
-            ->setParameter('project', $project)
-            ->orderBy('da.trashedAt', 'DESC')
-            ->getQuery()
-            ->getResult();
     }
 }
