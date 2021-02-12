@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Validator\Constraints\CheckMapCenter;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -89,7 +90,9 @@ class ProposalFormUpdateType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
-            ->add('mapCenter', TextType::class)
+            ->add('mapCenter', TextType::class, [
+                'constraints' => [new CheckMapCenter()],
+            ])
             ->add('zoomMap', IntegerType::class)
 
             ->add('commentable', CheckboxType::class)
