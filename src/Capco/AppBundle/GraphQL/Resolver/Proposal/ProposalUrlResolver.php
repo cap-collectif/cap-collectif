@@ -21,10 +21,12 @@ class ProposalUrlResolver implements ResolverInterface
     {
         $step = $proposal->getStep();
         if (!$step) {
+
             return '';
         }
         $project = $step->getProject();
         if (!$project) {
+
             return '';
         }
 

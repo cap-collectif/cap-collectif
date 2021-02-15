@@ -415,6 +415,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         voteType: 0
         defaultStatus: '@statusIdfAnalyse4'
         body: 'La pré-sélection est en cours ! Les votes seront ouverts le 27 mai, un peu de patience...'
+        allowAuthorsToAddNews: true
     selectionStepIdfVote:
         id: selectionStepIdfVote
         title: Vote des Franciliens

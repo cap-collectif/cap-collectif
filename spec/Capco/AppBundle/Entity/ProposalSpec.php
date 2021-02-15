@@ -3,14 +3,19 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAnalyst;
 use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Publishable;
@@ -193,5 +198,102 @@ class ProposalSpec extends ObjectBehavior
         ]);
 
         $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::IN_PROGRESS);
+    }
+
+    public function it_is_allowed_author_to_add_news_in_collect_step(
+        Project $project,
+        ProposalForm $proposalForm,
+        ProjectAbstractStep $projectAbstractStep,
+        CollectStep $collectStep
+    ) {
+        $collectStep->isAllowAuthorsToAddNews()->willReturn(true);
+        $collectStep->getProject()->willReturn($project);
+        $collectStep->isOpen()->willReturn(true);
+        $proposalForm->getStep()->willReturn($collectStep);
+
+        $this->setProposalForm($proposalForm);
+        $projectAbstractStep->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+
+        $project->addStep($projectAbstractStep)->willReturn($project);
+        $pasList = new ArrayCollection([$projectAbstractStep->getWrappedObject()]);
+
+        $project->getSteps()->willReturn($pasList);
+        $this->getProject()->shouldReturn($project);
+        $this->getSelectionSteps()->shouldReturn([]);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(true);
+
+        $collectStep->isAllowAuthorsToAddNews()->willReturn(false);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(false);
+    }
+
+    public function it_is_allowed_author_to_add_news_in_selection_step(
+        Project $project,
+        ProposalForm $proposalForm,
+        ProjectAbstractStep $projectAbstractStep,
+        ProjectAbstractStep $pasSelection1,
+        ProjectAbstractStep $pasSelection2,
+        CollectStep $collectStep,
+        SelectionStep $selectionStep,
+        Selection $selection,
+        Selection $selection2,
+        SelectionStep $selectionStep2
+    ) {
+        $project->addStep($projectAbstractStep);
+        $project->addStep($pasSelection1);
+        $collectStep->isAllowAuthorsToAddNews()->willReturn(true);
+        $collectStep->getProject()->willReturn($project);
+        $collectStep->isOpen()->willReturn(false);
+        $proposalForm->getStep()->willReturn($collectStep);
+
+        $this->setProposalForm($proposalForm);
+        $projectAbstractStep->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+
+        $project->addStep($projectAbstractStep)->willReturn($project);
+        $project->addStep($pasSelection1)->willReturn($project);
+        $project->addStep($pasSelection2)->willReturn($project);
+        $pasList = new ArrayCollection([
+            $projectAbstractStep->getWrappedObject(),
+            $pasSelection1->getWrappedObject(),
+            $pasSelection2->getWrappedObject(),
+        ]);
+
+        $project->getSteps()->willReturn($pasList);
+        $this->getProject()->shouldReturn($project);
+
+        $selectionStep->isAllowAuthorsToAddNews()->willReturn(true);
+        $selectionStep->isOpen()->willReturn(true);
+        $pasSelection1->getStep()->willReturn($selectionStep);
+        $pasSelection2->getStep()->willReturn($selectionStep2);
+        $selectionStep2->isAllowAuthorsToAddNews()->willReturn(false);
+        $selectionStep2->isOpen()->willReturn(true);
+
+        $selection->setProposal($this)->willReturn($selection);
+        $selection->getProposal()->willReturn($this);
+        $selection->getSelectionStep()->willReturn($selectionStep);
+
+        $this->addSelection($selection);
+        $this->getSelectionSteps()->shouldReturn([$selectionStep]);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(true);
+
+        $this->removeSelection($selection);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(false);
+
+        $selection2->getSelectionStep()->willReturn($selectionStep2);
+        $selection2->setProposal($this)->willReturn($selection2);
+        $selection2->getProposal()->willReturn($this);
+
+        $this->addSelection($selection2);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(false);
+
+        $selectionStep2->isAllowAuthorsToAddNews()->willReturn(true);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(true);
+
+        $selectionStep2->isOpen()->willReturn(false);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(false);
+
+        $this->addSelection($selection);
+        $this->isProposalAuthorAllowedToAddNews()->shouldReturn(true);
     }
 }

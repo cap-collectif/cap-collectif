@@ -1,17 +1,23 @@
 NotificationsConfiguration:
-  type: object
-  config:
-    description: 'A notifications configuration'
-    fields:
-      onCreate:
-        type: 'Boolean!'
-      onUpdate:
-        type: 'Boolean!'
-      onDelete:
-        type: 'Boolean!'
-      onCommentCreate:
-        type: 'Boolean!'
-      onCommentUpdate:
-        type: 'Boolean!'
-      onCommentDelete:
-        type: 'Boolean!'
+    type: object
+    config:
+        description: 'A notifications configuration'
+        fields:
+            onCreate:
+                type: 'Boolean!'
+            onUpdate:
+                type: 'Boolean!'
+            onDelete:
+                type: 'Boolean!'
+            onCommentCreate:
+                type: 'Boolean!'
+            onCommentUpdate:
+                type: 'Boolean!'
+            onCommentDelete:
+                type: 'Boolean!'
+            onProposalNewsCreate:
+                type: 'Boolean!'
+            onProposalNewsUpdate:
+                type: 'Boolean!'
+            onProposalNewsDelete:
+                type: 'Boolean!'

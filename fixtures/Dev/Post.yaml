@@ -83,3 +83,25 @@ Capco\AppBundle\Entity\Post:
         media: null
         proposals: ['@proposalIdf5']
         displayedOnBlog: false
+    post20:
+        id: post20
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@user5'
+        media: null
+        proposals: ['@lePetitCafe']
+        displayedOnBlog: false
+    post21:
+        id: post21
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@userIan'
+        media: null
+        proposals: ['@proposalIdf4']
+        displayedOnBlog: false

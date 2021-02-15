@@ -2,11 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostTranslation;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalPostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -61,13 +60,20 @@ class AddProposalNewsMutation implements MutationInterface
     public function __invoke(Arg $input, User $viewer): array
     {
         try {
+            /** @var Proposal $proposal */
             $proposal = $this->getProposal($input, $viewer);
             $this->checkProjectAllowProposalNews($proposal);
             $proposalPost = $this->createProposalPost($input, $proposal, $viewer);
-            $this->publisher->publish(
-                'proposal_news.create',
-                new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
-            );
+
+            /** @var ProposalFormNotificationConfiguration $config */
+            $config = $proposal->getProposalForm()->getNotificationsConfiguration();
+
+            if ($config->isOnProposalNewsCreate()) {
+                $this->publisher->publish(
+                    'proposal_news.create',
+                    new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
+                );
+            }
 
             return [
                 'proposalPost' => $proposalPost,

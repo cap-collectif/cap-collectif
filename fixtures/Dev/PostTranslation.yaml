@@ -87,3 +87,23 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post19'
         title: user4's Post on his own proposal
         body: 'very good that, I validate'
+    postEn20:
+        locale: en-GB
+        translatable: '@post20'
+        title: user5's Post on his own proposal
+        body: 'Thx all to help us in covid times. This helping me very much !'
+    postFr20:
+        locale: fr-FR
+        translatable: '@post20'
+        title: Remerciment
+        body: 'Merci à tous de nous aider dans des moment pareil. Ça nous aide beaucoup !'
+    postEn21:
+        locale: en-GB
+        translatable: '@post21'
+        title: First news
+        body: 'I am a journalist ! Or not.'
+    postFr21:
+        locale: fr-FR
+        translatable: '@post21'
+        title: Mon premier article
+        body: 'Je me prends trop pour un journaliste à écrire des articles'

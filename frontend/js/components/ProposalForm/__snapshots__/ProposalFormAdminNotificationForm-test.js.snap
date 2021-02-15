@@ -127,6 +127,51 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
           values={Object {}}
         />
       </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_news.notification.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_create"
+        name="onProposalNewsCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="fast.filter.skeleton.published"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_update"
+        name="onProposalNewsUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_update"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_delete"
+        name="onProposalNewsDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted"
+          values={Object {}}
+        />
+      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

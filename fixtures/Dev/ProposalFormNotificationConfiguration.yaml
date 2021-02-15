@@ -1,106 +1,126 @@
 Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration:
-  proposalFormNotificationConfiguration1:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration2:
-    onCreate: true
-    onUpdate: true
-    onDelete: false
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: false
-  proposalFormNotificationConfiguration3:
-    onCreate: true
-    onUpdate: false
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: false
-    onCommentDelete: true
-  proposalFormNotificationConfiguration4:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration5:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: false
-    onCommentUpdate: false
-    onCommentDelete: false
-  proposalFormNotificationConfiguration6:
-    onCreate: false
-    onUpdate: false
-    onDelete: false
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration7:
-    onCreate: true
-    onUpdate: true
-    onDelete: false
-    onCommentCreate: true
-    onCommentUpdate: false
-    onCommentDelete: false
-  proposalFormNotificationConfiguration8:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration9:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration10:
-    onCreate: false
-    onUpdate: false
-    onDelete: false
-    onCommentCreate: false
-    onCommentUpdate: false
-    onCommentDelete: false
-  proposalFormNotificationConfiguration11:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration12:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration13:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration14:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
-  proposalFormNotificationConfiguration15:
-    onCreate: true
-    onUpdate: true
-    onDelete: true
-    onCommentCreate: true
-    onCommentUpdate: true
-    onCommentDelete: true
+    proposalFormNotificationConfiguration1:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration2:
+        onCreate: true
+        onUpdate: true
+        onDelete: false
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: false
+    proposalFormNotificationConfiguration3:
+        onCreate: true
+        onUpdate: false
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: false
+        onCommentDelete: true
+    proposalFormNotificationConfiguration4:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration5:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: false
+        onCommentUpdate: false
+        onCommentDelete: false
+    proposalFormNotificationConfiguration6:
+        onCreate: false
+        onUpdate: false
+        onDelete: false
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration7:
+        onCreate: true
+        onUpdate: true
+        onDelete: false
+        onCommentCreate: true
+        onCommentUpdate: false
+        onCommentDelete: false
+    proposalFormNotificationConfiguration8:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration9:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration10:
+        onCreate: false
+        onUpdate: false
+        onDelete: false
+        onCommentCreate: false
+        onCommentUpdate: false
+        onCommentDelete: false
+    proposalFormNotificationConfiguration11:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration12:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration13:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration14:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfiguration15:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+    proposalFormNotificationConfigurationCafetier:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+        onProposalNewsCreate: true
+        onProposalNewsUpdate: true
+        onProposalNewsDelete: true
+    proposalFormNotificationConfigurationIDF:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+        onProposalNewsCreate: false
+        onProposalNewsUpdate: false
+        onProposalNewsDelete: false

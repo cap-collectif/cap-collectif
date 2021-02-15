@@ -139,6 +139,7 @@ export const ProposalNewsEditModal = ({
       </Modal.Body>
       <Modal.Footer>
         <Button
+          id="delete-proposal-news"
           variant="tertiary"
           variantColor="danger"
           display="inline"

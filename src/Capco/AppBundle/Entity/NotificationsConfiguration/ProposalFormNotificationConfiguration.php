@@ -41,6 +41,21 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     private $onCommentDelete = false;
 
     /**
+     * @ORM\Column(name="on_proposal_news_create", type="boolean", options={"default": false})
+     */
+    private $onProposalNewsCreate = false;
+
+    /**
+     * @ORM\Column(name="on_proposal_news_update", type="boolean", options={"default": false})
+     */
+    private $onProposalNewsUpdate = false;
+
+    /**
+     * @ORM\Column(name="on_proposal_news_delete", type="boolean", options={"default": false})
+     */
+    private $onProposalNewsDelete = false;
+
+    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="notificationsConfiguration")
      */
     private $proposalForm;
@@ -125,6 +140,42 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     public function setProposalForm(ProposalForm $proposalForm): self
     {
         $this->proposalForm = $proposalForm;
+
+        return $this;
+    }
+
+    public function isOnProposalNewsCreate(): bool
+    {
+        return $this->onProposalNewsCreate;
+    }
+
+    public function setOnProposalNewsCreate(bool $onProposalNewsCreate): self
+    {
+        $this->onProposalNewsCreate = $onProposalNewsCreate;
+
+        return $this;
+    }
+
+    public function isOnProposalNewsUpdate(): bool
+    {
+        return $this->onProposalNewsUpdate;
+    }
+
+    public function setOnProposalNewsUpdate(bool $onProposalNewsUpdate): self
+    {
+        $this->onProposalNewsUpdate = $onProposalNewsUpdate;
+
+        return $this;
+    }
+
+    public function isOnProposalNewsDelete(): bool
+    {
+        return $this->onProposalNewsDelete;
+    }
+
+    public function setOnProposalNewsDelete(bool $onProposalNewsDelete): self
+    {
+        $this->onProposalNewsDelete = $onProposalNewsDelete;
 
         return $this;
     }

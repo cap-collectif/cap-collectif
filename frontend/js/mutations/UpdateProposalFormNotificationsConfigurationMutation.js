@@ -21,6 +21,9 @@ const mutation = graphql`
           onCommentCreate
           onCommentUpdate
           onCommentDelete
+          onProposalNewsCreate
+          onProposalNewsUpdate
+          onProposalNewsDelete
         }
       }
     }

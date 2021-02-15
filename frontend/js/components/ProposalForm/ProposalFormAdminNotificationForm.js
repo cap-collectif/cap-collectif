@@ -113,6 +113,30 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               id="proposal_form_notification_comment_on_delete">
               <FormattedMessage id="global.deleted" />
             </Field>
+            <h4 style={{ fontWeight: 'bold' }}>
+              <FormattedMessage id="proposal_news.notification.label" />
+            </h4>
+            <Field
+              name="onProposalNewsCreate"
+              component={component}
+              type="checkbox"
+              id="proposal_form_notification_proposal_news_on_create">
+              <FormattedMessage id="fast.filter.skeleton.published" />
+            </Field>
+            <Field
+              name="onProposalNewsUpdate"
+              component={component}
+              type="checkbox"
+              id="proposal_form_notification_proposal_news_on_update">
+              <FormattedMessage id="proposal_form.notifications_comment.on_update" />
+            </Field>
+            <Field
+              name="onProposalNewsDelete"
+              component={component}
+              type="checkbox"
+              id="proposal_form_notification_proposal_news_on_delete">
+              <FormattedMessage id="global.deleted" />
+            </Field>
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -164,6 +188,9 @@ export default createFragmentContainer(intlContainer, {
         onCommentCreate
         onCommentUpdate
         onCommentDelete
+        onProposalNewsCreate
+        onProposalNewsUpdate
+        onProposalNewsDelete
       }
     }
   `,

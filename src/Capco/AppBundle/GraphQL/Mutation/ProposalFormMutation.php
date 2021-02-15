@@ -16,11 +16,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class ProposalFormMutation
 {
-    private $formFactory;
-    private $em;
-    private $logger;
-    private $proposalFormRepository;
-    private $questionnaireRepository;
+    private FormFactoryInterface $formFactory;
+    private EntityManagerInterface $em;
+    private LoggerInterface $logger;
+    private ProposalFormRepository $proposalFormRepository;
+    private QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         FormFactoryInterface $formFactory,

@@ -937,6 +937,7 @@ class Proposal implements
     public function getSelectionSteps(): array
     {
         $steps = [];
+        /** @var Selection $selection */
         foreach ($this->selections as $selection) {
             $steps[] = $selection->getSelectionStep();
         }
@@ -1508,10 +1509,11 @@ class Proposal implements
         return $this;
     }
 
-    public function isProposalAuthorAllowedToAddNews(): bool
+    public function isProposalAuthorAllowedToAddNews()
     {
         $steps = $this->getProject()->getSteps();
         $selectionSteps = new ArrayCollection($this->getSelectionSteps());
+
         // @var ProjectAbstractStep $step
         foreach ($steps as $pas) {
             $step = $pas->getStep();

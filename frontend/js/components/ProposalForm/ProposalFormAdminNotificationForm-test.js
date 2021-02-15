@@ -25,6 +25,9 @@ describe('<ProposalFormAdminNotificationForm />', () => {
         onCommentCreate: true,
         onCommentUpdate: true,
         onCommentDelete: true,
+        onProposalNewsCreate: true,
+        onProposalNewsUpdate: true,
+        onProposalNewsDelete: true,
       },
     },
   };

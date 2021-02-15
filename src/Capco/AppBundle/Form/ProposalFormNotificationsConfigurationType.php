@@ -19,6 +19,9 @@ class ProposalFormNotificationsConfigurationType extends AbstractType
             ->add('onCommentCreate', CheckboxType::class, ['required' => false])
             ->add('onCommentUpdate', CheckboxType::class, ['required' => false])
             ->add('onCommentDelete', CheckboxType::class, ['required' => false])
+            ->add('onProposalNewsCreate', CheckboxType::class, ['required' => false])
+            ->add('onProposalNewsUpdate', CheckboxType::class, ['required' => false])
+            ->add('onProposalNewsDelete', CheckboxType::class, ['required' => false])
         ;
     }
 

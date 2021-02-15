@@ -1454,6 +1454,27 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "name": "onCommentDelete",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "onProposalNewsCreate",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "onProposalNewsUpdate",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "onProposalNewsDelete",
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -1870,7 +1891,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "ba44474cbc93aec170ff6e27d733fc5f",
+          "cacheID": "ca1ace967e3d02dad22a0dc1a2da3b26",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2183,6 +2204,9 @@ fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
     onCommentCreate
     onCommentUpdate
     onCommentDelete
+    onProposalNewsCreate
+    onProposalNewsUpdate
+    onProposalNewsDelete
   }
 }
 

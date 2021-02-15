@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
@@ -48,16 +49,9 @@ class DeleteProposalNewsMutation implements MutationInterface
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $id = $input->offsetGet('postId');
-
-            $proposalName = $proposalPost
-                ->getProposals()
-                ->first()
-                ->getTitle();
-            $projectName = $proposalPost
-                ->getProposals()
-                ->first()
-                ->getProject()
-                ->getTitle();
+            $proposal = $proposalPost->getProposals()->first();
+            $proposalName = $proposal->getTitle();
+            $projectName = $proposal->getProject()->getTitle();
             $proposalPostAuthor = $proposalPost
                 ->getAuthors()
                 ->first()
@@ -66,19 +60,29 @@ class DeleteProposalNewsMutation implements MutationInterface
                 $proposalPost->getProposals()->first(),
                 $this->requestStack
             );
+
+            /** @var ProposalFormNotificationConfiguration $config */
+            $config = $proposalPost
+                ->getProposals()
+                ->first()
+                ->getProposalForm()
+                ->getNotificationsConfiguration();
             $this->em->remove($proposalPost);
             $this->em->flush();
-            $this->publisher->publish(
-                'proposal_news.delete',
-                new Message(
-                    json_encode([
-                        'postId' => $id,
-                        'proposalName' => $proposalName,
-                        'projectName' => $projectName,
-                        'postAuthor' => $proposalPostAuthor,
-                    ])
-                )
-            );
+
+            if ($config->isOnProposalNewsDelete()) {
+                $this->publisher->publish(
+                    'proposal_news.delete',
+                    new Message(
+                        json_encode([
+                            'postId' => $id,
+                            'proposalName' => $proposalName,
+                            'projectName' => $projectName,
+                            'postAuthor' => $proposalPostAuthor,
+                        ])
+                    )
+                );
+            }
 
             return ['postId' => $id, 'proposalUrl' => $proposalUrl, 'errorCode' => null];
         } catch (UserError $error) {

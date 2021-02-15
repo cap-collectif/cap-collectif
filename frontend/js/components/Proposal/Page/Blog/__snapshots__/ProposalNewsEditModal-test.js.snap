@@ -96,6 +96,7 @@ exports[`<ProposalNewsEditModal /> should render correctly 1`] = `
   >
     <Button
       display="inline"
+      id="delete-proposal-news"
       mr={3}
       onClick={[Function]}
       variant="tertiary"
@@ -218,6 +219,7 @@ exports[`<ProposalNewsEditModal /> should render correctly with modal open 1`] =
   >
     <Button
       display="inline"
+      id="delete-proposal-news"
       mr={3}
       onClick={[Function]}
       variant="tertiary"

@@ -6093,6 +6093,9 @@ type NotificationsConfiguration {
   onCommentCreate: Boolean!
   onCommentUpdate: Boolean!
   onCommentDelete: Boolean!
+  onProposalNewsCreate: Boolean!
+  onProposalNewsUpdate: Boolean!
+  onProposalNewsDelete: Boolean!
 }
 
 """Oauth2 SSO Configuration."""
@@ -12945,6 +12948,9 @@ input UpdateProposalFormNotificationsConfigurationInput {
   onCommentCreate: Boolean!
   onCommentUpdate: Boolean!
   onCommentDelete: Boolean!
+  onProposalNewsCreate: Boolean!
+  onProposalNewsUpdate: Boolean!
+  onProposalNewsDelete: Boolean!
   clientMutationId: String
 }
 

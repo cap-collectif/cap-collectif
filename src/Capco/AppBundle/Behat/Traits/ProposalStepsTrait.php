@@ -125,6 +125,22 @@ trait ProposalStepsTrait
         'proposalSlug' => 'installation-de-bancs-sur-la-place-de-la-mairie',
     ];
 
+    protected static $proposalNewsNotNotifiable = [
+        'projectSlug' => 'budget-participatif-idf',
+        'stepSlug' => 'collecte-des-projets-idf-privee',
+        'proposalSlug' => 'mon-projet-local-en-tant-quassociation-avec-rna',
+    ];
+    protected static $proposalNewsNotifiable = [
+        'projectSlug' => 'sauvons-nos-cafes',
+        'stepSlug' => 'soutenons-nos-bistros-et-cafes-dans-cette-periode-difficile',
+        'proposalSlug' => 'le-petit-cafe',
+    ];
+    protected static $proposalNotNewsable = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'renovation-du-gymnase',
+    ];
+
     /** @var array */
     protected $currentCollectsStep = [];
 
@@ -214,6 +230,106 @@ trait ProposalStepsTrait
     public function iGoToACommentNotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
+    }
+
+    /**
+     * @When I go to a proposal which is news notifiable
+     */
+    public function iGoToAProposalNotifiableNews()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNewsNotifiable);
+        $this->waitAndThrowOnFailure(3000, "$('#add-proposal-news').length > 0");
+    }
+
+    /**
+     * @When I go to a proposal which is not news notifiable
+     */
+    public function iGoToAProposalNotNotifiableNews()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNewsNotNotifiable);
+    }
+
+    /**
+     * @When I go to a proposal which is not newsable
+     */
+    public function iGoToAProposalNotNewsable()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNotNewsable);
+    }
+
+    /**
+     * @When I click on button to add news
+     */
+    public function iClickButtonToAddNews()
+    {
+        $this->iWaitElementToAppearOnPage('#add-proposal-news');
+        $this->navigationContext->getPage('proposal page')->clickCreateProposalNewsButton();
+        $this->iWaitTextToAppearOnPage('proposal-add-news');
+    }
+
+    /**
+     * @When I click on button to edit news
+     */
+    public function iClickButtonToEditNews()
+    {
+        $this->iWaitElementToAppearOnPage('#edit-proposal-news');
+        $this->navigationContext->getPage('proposal page')->clickEditProposalNewsButton();
+        $this->iWaitTextToAppearOnPage('proposal-edit-news');
+    }
+
+    /**
+     * @When I click on button to delete news
+     */
+    public function iClickButtonToDeleteNews()
+    {
+        $this->iWaitElementToAppearOnPage('#delete-proposal-news');
+        $this->navigationContext->getPage('proposal page')->clickDeleteProposalNewsButton();
+    }
+
+    /**
+     * @When I should not see button to add news
+     */
+    public function iShouldNotSeeButtonToAddNews()
+    {
+        $this->iWaitElementToDisappearOnPage('#add-proposal-news');
+    }
+
+    /**
+     * @When I publish my news
+     */
+    public function iClickButtonToPublishNews()
+    {
+        $this->iWaitElementToAppearOnPage('#add-proposal-news');
+        $this->navigationContext->getPage('proposal page')->clickPublishProposalNewsButton();
+        $this->iWaitElementToDisappearOnPage('#add-proposal-news');
+    }
+
+    /**
+     * @When I publish my updated news
+     */
+    public function iClickButtonToPublishUpdatedNews()
+    {
+        $this->iWaitElementToAppearOnPage('#confirm-post-edit');
+        $this->navigationContext->getPage('proposal page')->clickPublishUpdatedProposalNewsButton();
+        $this->iWaitElementToDisappearOnPage('#confirm-post-edit');
+    }
+
+    /**
+     * @When I confirm to delete my news
+     */
+    public function iClickButtonToConfirmDeleteNews()
+    {
+        $this->iWaitElementToAppearOnPage('#confirm-post-delete');
+        $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalNewsButton();
+        $this->iWaitElementToDisappearOnPage('#confirm-post-delete');
+    }
+
+    /**
+     * @When I fill proposal news body field
+     */
+    public function iFillProposalNewsBody()
+    {
+        $this->navigationContext->getPage('proposal page')->fillProposalNewsBody();
     }
 
     /**

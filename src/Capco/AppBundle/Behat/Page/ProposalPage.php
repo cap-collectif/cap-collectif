@@ -36,6 +36,13 @@ class ProposalPage extends Page
         'proposal follow minimal' => '#proposal-follow-btn-minimal',
         'proposal follow essential' => '#proposal-follow-btn-essential',
         'proposal follow all' => '#proposal-follow-btn-all',
+        'proposal create news button' => '#add-proposal-news',
+        'proposal edit news button' => '#edit-proposal-news',
+        'proposal delete news button' => '#delete-proposal-news',
+        'publish proposal news button' => '#confirm-post-create',
+        'publish updated proposal news button' => '#confirm-post-edit',
+        'confirm delete proposal news' => '#confirm-post-delete',
+        'proposal news create body field' => '#ProposalNewsForm #proposal_news_body .ql-editor',
     ];
 
     /**
@@ -119,6 +126,47 @@ class ProposalPage extends Page
     {
         $button = $this->getVoteButton();
         $button->click();
+    }
+
+    public function clickCreateProposalNewsButton()
+    {
+        $button = $this->getElement('proposal create news button');
+        $button->click();
+    }
+
+    public function clickEditProposalNewsButton()
+    {
+        $button = $this->getElement('proposal edit news button');
+        $button->click();
+    }
+
+    public function clickDeleteProposalNewsButton()
+    {
+        $button = $this->getElement('proposal delete news button');
+        $button->click();
+    }
+
+    public function clickConfirmDeleteProposalNewsButton()
+    {
+        $button = $this->getElement('confirm delete proposal news');
+        $button->click();
+    }
+
+    public function clickPublishProposalNewsButton()
+    {
+        $button = $this->getElement('publish proposal news button');
+        $button->click();
+    }
+
+    public function clickPublishUpdatedProposalNewsButton()
+    {
+        $button = $this->getElement('publish updated proposal news button');
+        $button->click();
+    }
+
+    public function fillProposalNewsBody()
+    {
+        $this->getElement('proposal news create body field')->setValue('Contenu du body');
     }
 
     public function submitCommentForm()

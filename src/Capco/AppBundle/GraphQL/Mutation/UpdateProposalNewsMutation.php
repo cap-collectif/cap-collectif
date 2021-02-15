@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostTranslation;
 use Capco\AppBundle\Form\ProposalPostType;
@@ -57,10 +58,19 @@ class UpdateProposalNewsMutation implements MutationInterface
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $proposalPost = $this->updateProposalNews($input, $proposalPost);
-            $this->publisher->publish(
-                'proposal_news.update',
-                new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
-            );
+            /** @var ProposalFormNotificationConfiguration $config */
+            $config = $proposalPost
+                ->getProposals()
+                ->first()
+                ->getProposalForm()
+                ->getNotificationsConfiguration();
+
+            if ($config->isOnProposalNewsUpdate()) {
+                $this->publisher->publish(
+                    'proposal_news.update',
+                    new Message(json_encode(['proposalNewsId' => $proposalPost->getId()]))
+                );
+            }
 
             return ['proposalPost' => $proposalPost, 'errorCode' => null];
         } catch (UserError $error) {

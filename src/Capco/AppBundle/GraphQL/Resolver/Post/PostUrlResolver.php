@@ -10,8 +10,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class PostUrlResolver implements ResolverInterface
 {
-    private $router;
-    private $logger;
+    private RouterInterface $router;
+    private LoggerInterface $logger;
 
     public function __construct(RouterInterface $router, LoggerInterface $logger)
     {

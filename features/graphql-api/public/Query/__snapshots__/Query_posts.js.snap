@@ -84,6 +84,46 @@ Object {
       ],
     },
     Object {
+      "enTitle": "user5's Post on his own proposal",
+      "frTitle": "Remerciment",
+      "id": "UG9zdDpwb3N0MjA=",
+      "title": "Remerciment",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Thx all to help us in covid times. This helping me very much !",
+          "locale": "EN_GB",
+          "title": "user5's Post on his own proposal",
+        },
+        Object {
+          "abstract": null,
+          "body": "Merci à tous de nous aider dans des moment pareil. Ça nous aide beaucoup !",
+          "locale": "FR_FR",
+          "title": "Remerciment",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "First news",
+      "frTitle": "Mon premier article",
+      "id": "UG9zdDpwb3N0MjE=",
+      "title": "Mon premier article",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "I am a journalist ! Or not.",
+          "locale": "EN_GB",
+          "title": "First news",
+        },
+        Object {
+          "abstract": null,
+          "body": "Je me prends trop pour un journaliste à écrire des articles",
+          "locale": "FR_FR",
+          "title": "Mon premier article",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

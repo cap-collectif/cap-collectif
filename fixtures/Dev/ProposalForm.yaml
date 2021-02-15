@@ -318,6 +318,7 @@ Capco\AppBundle\Entity\ProposalForm:
         description: Avec un saut conditionel et oui rien que ça.
         step: '@collectstepIdf'
         analysisConfiguration: '@analysisConfigurationIdf'
+        notificationsConfiguration: '@proposalFormNotificationConfigurationIDF'
         reference: 18
         usingThemes: false
         usingAddress: true
@@ -377,3 +378,4 @@ Capco\AppBundle\Entity\ProposalForm:
         zoomMap: 9
         mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
         addressHelpText: Précisez l'adresse de votre café
+        notificationsConfiguration: '@proposalFormNotificationConfigurationCafetier'
