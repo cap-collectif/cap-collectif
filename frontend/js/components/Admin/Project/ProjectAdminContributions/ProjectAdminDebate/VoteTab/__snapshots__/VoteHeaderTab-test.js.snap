@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VoteHeaderTab /> should render correctly 1`] = `
+<ForwardRef
+  direction="column"
+  mb={4}
+>
+  <ForwardRef
+    align="center"
+    direction="row"
+    justify="space-between"
+    mb={4}
+  >
+    <InlineSelect
+      onChange={[Function]}
+      value="PUBLISHED"
+    >
+      <InlineSelect.Choice
+        value="PUBLISHED"
+      >
+        filter.count.status.published-masculine
+      </InlineSelect.Choice>
+      <InlineSelect.Choice
+        value="WAITING"
+      >
+        filter.count.status.awaiting
+      </InlineSelect.Choice>
+    </InlineSelect>
+    <Button
+      aria-label="global.export"
+      onClick={[Function]}
+      variant="primary"
+      variantColor="primary"
+      variantSize="small"
+    >
+      global.export
+    </Button>
+  </ForwardRef>
+  <Text
+    color="gray.500"
+  >
+    vote-count-for-and-against
+  </Text>
+</ForwardRef>
+`;
+
+exports[`<VoteHeaderTab /> should render correctly when no vote 1`] = `
+<ForwardRef
+  direction="column"
+  mb={4}
+>
+  <ForwardRef
+    align="center"
+    direction="row"
+    justify="space-between"
+    mb={4}
+  >
+    <InlineSelect
+      onChange={[Function]}
+      value="PUBLISHED"
+    >
+      <InlineSelect.Choice
+        value="PUBLISHED"
+      >
+        filter.count.status.published-masculine
+      </InlineSelect.Choice>
+      <InlineSelect.Choice
+        value="WAITING"
+      >
+        filter.count.status.awaiting
+      </InlineSelect.Choice>
+    </InlineSelect>
+    <Button
+      aria-label="global.export"
+      onClick={[Function]}
+      variant="primary"
+      variantColor="primary"
+      variantSize="small"
+    >
+      global.export
+    </Button>
+  </ForwardRef>
+  <Text
+    color="gray.500"
+  >
+    vote-count-for-and-against
+  </Text>
+</ForwardRef>
+`;
+
+exports[`<VoteHeaderTab /> should render correctly with timeless date for step 1`] = `
+<ForwardRef
+  direction="column"
+  mb={4}
+>
+  <ForwardRef
+    align="center"
+    direction="row"
+    justify="space-between"
+    mb={4}
+  >
+    <InlineSelect
+      onChange={[Function]}
+      value="PUBLISHED"
+    >
+      <InlineSelect.Choice
+        value="PUBLISHED"
+      >
+        filter.count.status.published-masculine
+      </InlineSelect.Choice>
+      <InlineSelect.Choice
+        value="WAITING"
+      >
+        filter.count.status.awaiting
+      </InlineSelect.Choice>
+    </InlineSelect>
+    <Button
+      aria-label="global.export"
+      onClick={[Function]}
+      variant="primary"
+      variantColor="primary"
+      variantSize="small"
+    >
+      global.export
+    </Button>
+  </ForwardRef>
+  <Text
+    color="gray.500"
+  >
+    vote-count-for-and-against
+  </Text>
+</ForwardRef>
+`;

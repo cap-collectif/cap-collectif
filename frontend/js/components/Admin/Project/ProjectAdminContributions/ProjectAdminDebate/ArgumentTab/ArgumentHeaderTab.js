@@ -20,7 +20,7 @@ type Props = {|
   debateStep: ArgumentHeaderTab_debateStep,
 |};
 
-const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
+export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
   const { parameters, dispatch } = useProjectAdminDebateContext();
   const intl = useIntl();
   const {
@@ -32,7 +32,7 @@ const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
   } = debate;
   const exportUrl = `/debate/${debate.id}/download/arguments`;
   const hasArgumentForOrAgainst = argumentsFor.totalCount > 0 || argumentsAgainst.totalCount > 0;
-  const isStepFinished = !debateStep.timeless
+  const isStepFinished = debateStep.timeless
     ? false
     : debateStep?.timeRange?.endAt
     ? moment().isAfter(((debateStep.timeRange.endAt: any): string))

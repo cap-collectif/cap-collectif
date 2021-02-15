@@ -86,7 +86,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
 </VoteTab___StyledFlex>
 `;
 
-exports[`<VoteTab /> should render correctly when no argument 1`] = `
+exports[`<VoteTab /> should render correctly when no vote 1`] = `
 <ForwardRef
   align="center"
   direction="column"
@@ -102,4 +102,90 @@ exports[`<VoteTab /> should render correctly when no argument 1`] = `
     debate.empty.votes.section
   </Text>
 </ForwardRef>
+`;
+
+exports[`<VoteTab /> should render correctly with timeless date for step 1`] = `
+<VoteTab___StyledFlex
+  _css="500px"
+  direction="column"
+>
+  <InfiniteScroll
+    element="div"
+    getScrollParent={[Function]}
+    hasMore={false}
+    initialLoad={false}
+    isReverse={false}
+    key="infinite-scroll-vote"
+    loadMore={[Function]}
+    loader={
+      <ForwardRef
+        direction="row"
+        justify="center"
+      >
+        <ForwardRef
+          size="m"
+        />
+      </ForwardRef>
+    }
+    pageStart={0}
+    ref={null}
+    threshold={250}
+    useCapture={false}
+    useWindow={false}
+  >
+    <ForwardRef
+      align="stretch"
+      direction="row"
+    >
+      <VoteTab___StyledAppBox
+        as="ul"
+        borderColor="gray.200"
+        borderRight="normal"
+        flex="1"
+        m={0}
+        p={0}
+        pr={7}
+      >
+        <AppBox
+          as="li"
+          key="value123"
+          mb={4}
+        >
+          <Relay(DebateVote)
+            vote={
+              Object {
+                "$fragmentRefs": null,
+                "id": "value123",
+                "type": "FOR",
+              }
+            }
+          />
+        </AppBox>
+      </VoteTab___StyledAppBox>
+      <VoteTab___StyledAppBox2
+        as="ul"
+        flex="1"
+        m={0}
+        ml={7}
+        p={0}
+      >
+        <AppBox
+          as="li"
+          key="value456"
+          mb={4}
+        >
+          <Relay(DebateVote)
+            vote={
+              Object {
+                "$fragmentRefs": null,
+                "id": "value456",
+                "type": "AGAINST",
+              }
+            }
+          />
+        </AppBox>
+      </VoteTab___StyledAppBox2>
+    </ForwardRef>
+  </InfiniteScroll>
+</VoteTab___StyledFlex>
 `;

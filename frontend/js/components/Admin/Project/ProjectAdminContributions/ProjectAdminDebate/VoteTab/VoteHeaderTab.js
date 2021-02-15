@@ -17,12 +17,12 @@ type Props = {|
   debateStep: VoteHeaderTab_debateStep,
 |};
 
-const VoteHeaderTab = ({ debate, debateStep }: Props) => {
+export const VoteHeaderTab = ({ debate, debateStep }: Props) => {
   const { parameters, dispatch } = useProjectAdminDebateContext();
   const intl = useIntl();
   const { debateVotesPublished, debateVotesWaiting, debateVotesFor, debateVotesAgainst } = debate;
   const exportUrl = `/debate/${debate.id}/download/votes`;
-  const isStepFinished = !debateStep.timeless
+  const isStepFinished = debateStep.timeless
     ? false
     : debateStep?.timeRange?.endAt
     ? moment().isAfter(((debateStep.timeRange.endAt: any): string))

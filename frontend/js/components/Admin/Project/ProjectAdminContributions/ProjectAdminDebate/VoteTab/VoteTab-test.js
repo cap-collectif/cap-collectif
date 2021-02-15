@@ -58,6 +58,16 @@ const props = {
       },
     },
   },
+  timelessStep: {
+    ...baseProps,
+    debateStep: {
+      ...baseProps.debateStep,
+      timeless: true,
+      timeRange: {
+        endAt: null,
+      },
+    },
+  },
 };
 
 describe('<VoteTab />', () => {
@@ -66,8 +76,13 @@ describe('<VoteTab />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly when no argument', () => {
+  it('should render correctly when no vote', () => {
     const wrapper = shallow(<VoteTab {...props.noVote} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with timeless date for step', () => {
+    const wrapper = shallow(<VoteTab {...props.timelessStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

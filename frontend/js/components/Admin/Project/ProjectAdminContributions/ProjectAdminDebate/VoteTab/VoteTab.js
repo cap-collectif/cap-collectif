@@ -64,7 +64,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
   const { parameters } = useProjectAdminDebateContext();
   const intl = useIntl();
   const hasVotes = debateVotes.totalCount > 0;
-  const isStepFinished = !debateStep.timeless
+  const isStepFinished = debateStep.timeless
     ? false
     : debateStep?.timeRange?.endAt
     ? moment().isAfter(((debateStep.timeRange.endAt: any): string))
