@@ -3452,6 +3452,9 @@ type DebateArgument implements Node & Reportable & Trashable {
 
   """True if the viewer has upvoted the argument."""
   viewerHasVote: Boolean!
+
+  """IP of the author"""
+  ipAddress: IP
 }
 
 """Two debate arguments from non expert, one for and one against."""
@@ -3543,6 +3546,9 @@ type DebateArgumentVote implements Node & Publishable {
 
   """The debate of the vote."""
   debateArgument: DebateArgument!
+
+  """IP of the voter"""
+  ipAddress: IP
 }
 
 """A connection to a list of items."""
@@ -3771,6 +3777,9 @@ type DebateVote implements Node & Publishable {
 
   """The debate of the vote."""
   debate: Debate!
+
+  """IP of the voter"""
+  ipAddress: IP
 }
 
 """A connection to a list of items."""

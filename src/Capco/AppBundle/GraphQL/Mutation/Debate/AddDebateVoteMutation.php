@@ -55,10 +55,8 @@ class AddDebateVoteMutation implements MutationInterface
         }
 
         $type = $input->offsetGet('type');
-        $debateVote = (new DebateVote())
-            ->setDebate($debate)
-            ->setType($type)
-            ->setUser($viewer);
+        $debateVote = (new DebateVote())->setDebate($debate)->setType($type);
+        self::setAuthor($debateVote, $viewer);
 
         $previousVote = $this->repository->getOneByDebateAndUser($debate, $viewer);
         $previousVoteId = null;
@@ -96,5 +94,13 @@ class AddDebateVoteMutation implements MutationInterface
     private function generateErrorPayload(string $message): array
     {
         return ['debateVote' => null, 'previousVoteId' => null, 'errorCode' => $message];
+    }
+
+    private static function setAuthor(DebateVote $vote, User $viewer): DebateVote
+    {
+        return $vote
+            ->setUser($viewer)
+            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
+            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
     }
 }

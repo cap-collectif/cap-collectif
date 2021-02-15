@@ -238,6 +238,221 @@ Object {
 }
 `;
 
+exports[`Internal|Debate.arguments connection fetches ips of arguments and argumentVotes associated to a debate 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQxMA==",
+            "ipAddress": "43.43.43.43",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ5",
+            "ipAddress": "42.42.42.42",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAy",
+                    "ipAddress": null,
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
+                    "ipAddress": "5.5.5.5",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAw",
+                    "ipAddress": "1.1.1.1",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ4",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.arguments connection fetches ips of arguments and argumentVotes associated to a debate without rights 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAy",
+                    "ipAddress": null,
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
+                    "ipAddress": null,
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAw",
+                    "ipAddress": null,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`Internal|Debate.arguments connection sort arguments associated to a debate by their number of votes 1`] = `
 Object {
   "node": Object {

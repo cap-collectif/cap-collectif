@@ -20,12 +20,10 @@ class CreateDebateArgumentMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private GlobalIdResolver $globalIdResolver;
 
-
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver
-
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -37,7 +35,7 @@ class CreateDebateArgumentMutation implements MutationInterface
         try {
             $debate = $this->getDebateFromInput($input, $viewer);
             $debateArgument = new DebateArgument($debate);
-            $debateArgument->setAuthor($viewer);
+            self::setAuthor($debateArgument, $viewer);
             $debateArgument->setBody(strip_tags($input->offsetGet('body')));
             $debateArgument->setType($input->offsetGet('type'));
 
@@ -58,5 +56,13 @@ class CreateDebateArgumentMutation implements MutationInterface
         }
 
         return $debate;
+    }
+
+    private static function setAuthor(DebateArgument $debateArgument, User $viewer): DebateArgument
+    {
+        return $debateArgument
+            ->setAuthor($viewer)
+            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
+            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
     }
 }

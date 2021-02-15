@@ -52,3 +52,7 @@ InternalDebateArgument:
                 description: 'True if the viewer has reported the argument.'
                 type: Boolean!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", [value, getUser()])'
+            ipAddress:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'IP of the author'
+                type: 'IP'

@@ -21,6 +21,7 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:03:00'))>
         createdAt: $publishedAt
+        ipAddress: '142.042.042.042'
     debateCannabisVote4:
         id: 13003
         user: '@userJpec'

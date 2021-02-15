@@ -28,3 +28,7 @@ InternalDebateVote:
             debate:
                 type: 'InternalDebate!'
                 description: 'The debate of the vote.'
+            ipAddress:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'IP of the voter'
+                type: 'IP'

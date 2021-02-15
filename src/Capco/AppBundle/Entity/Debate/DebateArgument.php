@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
@@ -52,8 +53,9 @@ class DebateArgument implements
     Publishable,
     Authorable
 {
-    use DebatableTrait;
-    use ForAgainstTrait; //@TODO remove votesCount when entity is added to elasticsearch
+    use AuthorInformationTrait;
+    use DebatableTrait; //@TODO remove votesCount when entity is added to elasticsearch
+    use ForAgainstTrait;
     use HasAuthorTrait;
     use ModerableTrait;
     use PublishableTrait;

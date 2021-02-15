@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
@@ -17,6 +18,7 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
  */
 class DebateVote extends AbstractVote
 {
+    use AuthorInformationTrait;
     use DebatableTrait;
     use ForAgainstTrait;
 
@@ -24,7 +26,7 @@ class DebateVote extends AbstractVote
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate")
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $debate;
+    private Debate $debate;
 
     public function getRelated(): Debate
     {
@@ -38,7 +40,9 @@ class DebateVote extends AbstractVote
 
     public function getProject(): ?Project
     {
-        return $this->getDebate()->getProject();
+        return $this->getDebate()
+            ->getStep()
+            ->getProject();
     }
 
     // TODO not enable for now.

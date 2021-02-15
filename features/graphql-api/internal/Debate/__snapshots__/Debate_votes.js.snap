@@ -423,3 +423,145 @@ Object {
   },
 }
 `;
+
+exports[`Internal|Debate.Votes connection fetches votes ip associated to a debate 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNw==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNg==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMw==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMg==",
+            "ipAddress": "142.042.042.042",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMA==",
+            "ipAddress": null,
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.Votes connection fetches votes ip associated to a debate without rights 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNw==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNg==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMw==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMg==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMA==",
+            "ipAddress": null,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

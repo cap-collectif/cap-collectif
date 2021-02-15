@@ -80,6 +80,31 @@ const DebateArgumentsCountersQuery = /* GraphQL */ `
   }
 `;
 
+const DebateArgumentsIPQuery = /* GraphQL */ `
+  query DebateArgumentsQuery($id: ID!) {
+    node(id: $id) {
+      ... on Debate {
+        arguments {
+          edges {
+            node {
+              id
+              ipAddress
+              votes {
+                edges {
+                  node {
+                    id
+                    ipAddress
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('Internal|Debate.arguments connection', () => {
   it('fetches arguments associated to a debate with a cursor', async () => {
     await expect(
@@ -122,6 +147,30 @@ describe('Internal|Debate.arguments connection', () => {
           id: toGlobalId('Debate', 'debateCannabis'),
         },
         'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches ips of arguments and argumentVotes associated to a debate', async () => {
+    await expect(
+      graphql(
+        DebateArgumentsIPQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches ips of arguments and argumentVotes associated to a debate without rights', async () => {
+    await expect(
+      graphql(
+        DebateArgumentsIPQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+        },
+        'internal_user',
       ),
     ).resolves.toMatchSnapshot();
   });
