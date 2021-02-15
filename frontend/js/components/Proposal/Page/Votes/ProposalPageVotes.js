@@ -21,6 +21,11 @@ type Props = {|
   +setGlobalVotesCount: number => void,
 |};
 
+type Step = {|
+  +id: string,
+  +title: string,
+|};
+
 const ProposalPageVotesContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 100%;
   max-width: 950px;
@@ -82,7 +87,7 @@ const query = graphql`
 `;
 
 export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
-  const [selectedStep, setSelectedStep] = useState(proposal?.votableSteps[0]);
+  const [selectedStep, setSelectedStep] = useState<?Step>(proposal?.votableSteps[0]);
   const [votesCount, setVotesCount] = useState<number>(proposal?.allVotes?.totalCount || 0);
   const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null;
 
@@ -137,7 +142,8 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
             </StepSelect>
           )}
         </div>
-        <ProposalVotesByStep stepId={selectedStep.id} proposal={proposal} />
+
+        {selectedStep && <ProposalVotesByStep stepId={selectedStep.id} proposal={proposal} />}
       </ProposalPageVotesContainer>
     )
   );
