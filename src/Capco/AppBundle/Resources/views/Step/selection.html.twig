@@ -40,7 +40,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% if currentStep.proposalForm.isMapViewEnabled or currentStep.proposalForm.usingAdress %}
+    {% if currentStep.proposalForm.isMapViewEnabled or currentStep.proposalForm.usingAddress %}
         {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
     {% endif %}
     {% if currentStep.customCode is defined and currentStep.customCode != '' %}{{ currentStep.customCode | raw }}{% endif %}
