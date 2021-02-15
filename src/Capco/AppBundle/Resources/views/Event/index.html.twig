@@ -33,5 +33,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&libraries=places"></script>
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
 {% endblock %}

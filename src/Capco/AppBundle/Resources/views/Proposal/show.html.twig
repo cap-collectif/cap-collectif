@@ -44,5 +44,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+
+    {% if proposal.proposalForm.isMapViewEnabled or proposal.proposalForm.usingAdress %}
+        {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {% endif %}
 {% endblock %}
