@@ -92,10 +92,10 @@ export default createFragmentContainer(VoteHeaderTab, {
   debate: graphql`
     fragment VoteHeaderTab_debate on Debate {
       id
-      debateVotesPublished: arguments(first: 0, isPublished: true) {
+      debateVotesPublished: votes(first: 0, isPublished: true) {
         totalCount
       }
-      debateVotesWaiting: arguments(first: 0, isPublished: false) {
+      debateVotesWaiting: votes(first: 0, isPublished: false) {
         totalCount
       }
       debateVotesFor: votes(type: FOR, isPublished: true) {
