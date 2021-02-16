@@ -4,6 +4,172 @@ exports[`<VoteView /> should not render when our ouf range percentage 1`] = `""`
 
 exports[`<VoteView /> should not render when our ouf range percentage on mobile 1`] = `""`;
 
+exports[`<VoteView /> should not render when step is finished 1`] = `
+<VoteViewstyle__Container
+  key="43"
+  left={43}
+  right={57}
+>
+  <div>
+    <div>
+      <div
+        className="circle"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble"
+        key="0-green"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble"
+        key="1-green"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble"
+        key="2-green"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <div
+        className="circle red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="0-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="1-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="2-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      <span
+        className="progressBar"
+      />
+    </span>
+    <span>
+      <span
+        className="progressBar red"
+      />
+    </span>
+  </div>
+  <div>
+    <span>
+      12
+    </span>
+    <span>
+      15
+    </span>
+  </div>
+</VoteViewstyle__Container>
+`;
+
+exports[`<VoteView /> should not render when step is finished on mobile 1`] = `
+<ForwardRef
+  justify="space-between"
+  position="relative"
+  width="100%"
+>
+  <VoteView__MobileTextPercentage
+    color="green.500"
+  >
+    12
+     
+    <FormattedMessage
+      id="argument.show.type.for"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="green.500"
+    flex={43}
+    height="2px"
+    left={0}
+    position="absolute"
+    width="43%"
+  />
+  <VoteView__MobileTextPercentage
+    color="red.500"
+  >
+    15
+     
+    <FormattedMessage
+      id="argument.show.type.against"
+      tagName={Symbol(react.fragment)}
+      values={Object {}}
+    />
+  </VoteView__MobileTextPercentage>
+  <AppBox
+    bg="red.500"
+    flex={57}
+    height="2px"
+    left="43%"
+    position="absolute"
+    width="57%"
+  />
+</ForwardRef>
+`;
+
 exports[`<VoteView /> should render correctly 1`] = `
 <VoteViewstyle__Container
   key="42"

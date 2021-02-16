@@ -9,10 +9,9 @@ const defaultProps = {
   title: 'Pour ou contre le LSD dans nos cantines',
   step: {
     $refType,
+    $fragmentRefs,
     timeRange: { endAt: '2021-18-02:00:00' },
     timeless: false,
-    debate: { $fragmentRefs },
-    url: '/debatestep1',
   },
   isAuthenticated: true,
   isMobile: false,

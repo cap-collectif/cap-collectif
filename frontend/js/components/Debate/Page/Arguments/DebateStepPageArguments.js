@@ -17,7 +17,11 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
     return null;
   }
   return isMobile ? (
-    <>{step?.debate && <MobileDebateStepPageArguments debate={step.debate} viewer={viewer} />}</>
+    <>
+      {step?.debate && (
+        <MobileDebateStepPageArguments debate={step.debate} viewer={viewer} step={step} />
+      )}
+    </>
   ) : (
     // About step => $fragmentRefs is missing in DebateStepPageArguments_step
     // Would be fix if we transform DesktopDebateStepPageArguments in fragment
@@ -29,6 +33,10 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
 export default createFragmentContainer(DebateStepPageArguments, {
   step: graphql`
     fragment DebateStepPageArguments_step on DebateStep {
+      timeless
+      timeRange {
+        endAt
+      }
       noDebate: debate {
         id
         ...DebateStepPageArgumentsPagination_debate

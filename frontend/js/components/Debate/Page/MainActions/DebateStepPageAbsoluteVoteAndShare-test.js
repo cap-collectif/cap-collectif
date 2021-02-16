@@ -5,76 +5,94 @@ import { shallow } from 'enzyme';
 import { DebateStepPageAbsoluteVoteAndShare } from './DebateStepPageAbsoluteVoteAndShare';
 import { $refType, $fragmentRefs } from '~/mocks';
 
-describe('<DebateStepPageAbsoluteVoteAndShare/>', () => {
-  const debate = {
-    id: 'debate1',
+const baseProps = {
+  body: 'blabla le body',
+  title: 'blabla le title',
+  isAuthenticated: true,
+  step: {
     $refType,
-    $fragmentRefs,
-    votes: { totalCount: 5 },
-    yesVotes: { totalCount: 4 },
-  };
+    url: 'step/123',
+    debate: {
+      $fragmentRefs,
+      id: 'debate1',
+      viewerHasArgument: undefined,
+    },
+  },
+  isMobile: false,
+  showArgumentForm: true,
+  setVoteState: jest.fn(),
+  setShowArgumentForm: jest.fn(),
+  voteState: 'NONE',
+};
 
-  const props = {
-    title: 'Pour ou contre le LSD dans nos cantines',
-    body: 'Oui je suis pour',
-    isAuthenticated: true,
-    showArgumentForm: true,
-    setVoteState: jest.fn(),
-    setShowArgumentForm: jest.fn(),
-    url: '/debate1',
-    viewerHasArgument: false,
-  };
+const props = {
+  basic: baseProps,
+  onMobile: {
+    ...baseProps,
+    isMobile: true,
+  },
+  whenVoted: {
+    ...baseProps,
+    voteState: 'VOTED',
+  },
+  whenVotedMobile: {
+    ...baseProps,
+    voteState: 'VOTED',
+    isMobile: true,
+  },
+  whenArgumented: {
+    ...baseProps,
+    voteState: 'ARGUMENTED',
+    step: {
+      ...baseProps.step,
+      debate: {
+        ...baseProps.step.debate,
+        viewerHasArgument: true,
+      },
+    },
+  },
+  whenArgumentedMobile: {
+    ...baseProps,
+    voteState: 'ARGUMENTED',
+    isMobile: true,
+    step: {
+      ...baseProps.step,
+      debate: {
+        ...baseProps.step.debate,
+        viewerHasArgument: true,
+      },
+    },
+  },
+};
 
-  it('renders correcty', () => {
-    const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="NONE" debate={debate} />,
-    );
+describe('<DebateStepPageAbsoluteVoteAndShare />', () => {
+  it('renders correctly', () => {
+    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.basic} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="NONE" debate={debate} isMobile />,
-    );
+  it('renders correctly on mobile', () => {
+    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.onMobile} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when voted', () => {
-    const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="VOTED" debate={debate} />,
-    );
+  it('renders correctly when voted', () => {
+    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenVoted} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when voted on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare {...props} voteState="VOTED" debate={debate} isMobile />,
-    );
+  it('renders correctly when voted on mobile', () => {
+    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenVotedMobile} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when argumented', () => {
-    const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare
-        {...props}
-        viewerHasArgument
-        voteState="ARGUMENTED"
-        debate={debate}
-      />,
-    );
+  it('renders correctly when argumented', () => {
+    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenArgumented} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when argumented on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageAbsoluteVoteAndShare
-        {...props}
-        viewerHasArgument
-        voteState="ARGUMENTED"
-        debate={debate}
-        isMobile
-      />,
-    );
+  it('renders correctly when argumented on mobile', () => {
+    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenArgumentedMobile} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -25,7 +25,7 @@ export const VoteHeaderTab = ({ debate, debateStep }: Props) => {
   const isStepFinished = debateStep.timeless
     ? false
     : debateStep?.timeRange?.endAt
-    ? moment().isAfter(((debateStep.timeRange.endAt: any): string))
+    ? moment().isAfter(moment(debateStep.timeRange.endAt))
     : false;
 
   return (

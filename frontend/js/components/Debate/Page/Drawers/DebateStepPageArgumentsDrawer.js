@@ -15,7 +15,10 @@ import type {
   DebateStepPageArgumentsDrawer_debate,
   DebateStepPageArgumentsDrawer_debate$key,
 } from '~relay/DebateStepPageArgumentsDrawer_debate.graphql';
-import type { DebateStepPageArgumentsDrawer_viewer } from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
+import type {
+  DebateStepPageArgumentsDrawer_viewer,
+  DebateStepPageArgumentsDrawer_viewer$key,
+} from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import type { RelayHookPaginationProps as PaginationProps } from '~/types';
@@ -55,11 +58,13 @@ const VIEWER_FRAGMENT = graphql`
 const DebateStepPageArgumentsDrawer = ({
   debate: debateFragment,
   viewer: viewerFragment,
+  isStepFinished,
   ...drawerProps
 }: {|
   ...DetailDrawerProps,
   +debate: DebateStepPageArgumentsDrawer_debate$key,
-  +viewer: ?DebateStepPageArgumentsDrawer_viewer,
+  +viewer: ?DebateStepPageArgumentsDrawer_viewer$key,
+  +isStepFinished: boolean,
 |}) => {
   const intl = useIntl();
   const debate: DebateStepPageArgumentsDrawer_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
@@ -89,6 +94,7 @@ const DebateStepPageArgumentsDrawer = ({
             />
           </Text>
         </Flex>
+
         <Modal
           disclosure={
             <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
@@ -151,6 +157,7 @@ const DebateStepPageArgumentsDrawer = ({
             }}
             debate={debate}
             viewer={viewer}
+            isStepFinished={isStepFinished}
           />
         </Flex>
       </DetailDrawer.Body>

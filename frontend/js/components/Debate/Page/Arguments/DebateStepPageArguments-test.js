@@ -11,6 +11,8 @@ const defaultProps = {
     debate: { id: 'debat-cannabis', arguments: { totalCount: 7 }, $fragmentRefs },
     yesDebate: { id: 'debat-cannabis', $fragmentRefs },
     noDebate: { id: 'debat-cannabis', $fragmentRefs },
+    timeRange: { endAt: '2021-18-02:00:00' },
+    timeless: false,
   },
   viewer: {
     $refType,
@@ -32,17 +34,17 @@ const props = {
 };
 
 describe('<DebateStepPageArguments />', () => {
-  it('renders correcty', () => {
+  it('renders correctly', () => {
     const wrapper = shallow(<DebateStepPageArguments {...props.basic} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty on mobile', () => {
+  it('renders correctly on mobile', () => {
     const wrapper = shallow(<DebateStepPageArguments {...props.isMobile} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when no viewer', () => {
+  it('renders correctly when no viewer', () => {
     const wrapper = shallow(<DebateStepPageArguments {...props.noViewer} />);
     expect(wrapper).toMatchSnapshot();
   });

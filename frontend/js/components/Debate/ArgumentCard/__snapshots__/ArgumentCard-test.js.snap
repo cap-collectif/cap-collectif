@@ -63,10 +63,13 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)>
+      <Connect(LoginOverlay)
+        enabled={true}
+      >
         <Button
           aria-label="vote.add"
           color="neutral-gray.500"
+          disabled={false}
           leftIcon={
             <ForwardRef
               name="CLAP_O"
@@ -188,10 +191,13 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)>
+      <Connect(LoginOverlay)
+        enabled={true}
+      >
         <Button
           aria-label="vote.add"
           color="neutral-gray.500"
+          disabled={false}
           leftIcon={
             <ForwardRef
               name="CLAP_O"
@@ -327,10 +333,13 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)>
+      <Connect(LoginOverlay)
+        enabled={true}
+      >
         <Button
           aria-label="global.cancel"
           color="neutral-gray.500"
+          disabled={false}
           leftIcon={
             <ForwardRef
               name="CLAP"
@@ -498,10 +507,13 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)>
+      <Connect(LoginOverlay)
+        enabled={true}
+      >
         <Button
           aria-label="global.cancel"
           color="neutral-gray.500"
+          disabled={false}
           leftIcon={
             <ForwardRef
               name="CLAP"
@@ -549,6 +561,134 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
         "viewerCanReport": true,
         "viewerDidAuthor": true,
         "viewerHasVote": true,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correcty when step finished 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <ForwardRef
+    direction="column"
+    height="100%"
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      justifyContent="space-between"
+      mb={2}
+    >
+      <ForwardRef
+        alignItems="center"
+        direction="row"
+      >
+        <Text
+          maxWidth="100px"
+          mr={2}
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          variant="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </ForwardRef>
+      <ForwardRef
+        align="center"
+        direction="row"
+      />
+    </ForwardRef>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <ForwardRef
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <Connect(LoginOverlay)
+        enabled={false}
+      >
+        <Button
+          aria-label="vote.add"
+          color="neutral-gray.500"
+          disabled={true}
+          leftIcon={
+            <ForwardRef
+              name="CLAP_O"
+              size="lg"
+            />
+          }
+          onClick={[Function]}
+        />
+      </Connect(LoginOverlay)>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </ForwardRef>
+  </ForwardRef>
+  <Relay(Connect(ModalReportArgumentMobile))
+    argument={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+        },
+        "id": "argumentPour42",
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
         "votes": Object {
           "totalCount": 500,
         },

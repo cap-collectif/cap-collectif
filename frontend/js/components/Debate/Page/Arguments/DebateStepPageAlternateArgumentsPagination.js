@@ -28,6 +28,7 @@ type Props = {|
   +debate: DebateStepPageAlternateArgumentsPagination_debate$key,
   +viewer: ?DebateStepPageAlternateArgumentsPagination_viewer$key,
   +preview?: boolean,
+  +isStepFinished: boolean,
 |};
 
 export const CONNECTION_NODES_PER_PAGE = 8;
@@ -119,6 +120,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   viewer: viewerFragment,
   handleChange,
   preview = false,
+  isStepFinished,
 }: Props) => {
   const { onClose, onOpen, isOpen } = useMultipleDisclosure({});
   const [debate, paginationProps]: [
@@ -163,6 +165,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
+                  isStepFinished={isStepFinished}
                 />
                 <ArgumentCard
                   height="100%"
@@ -173,6 +176,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
+                  isStepFinished={isStepFinished}
                 />
               </React.Fragment>
             ))}
@@ -203,6 +207,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
+                  isStepFinished={isStepFinished}
                 />
                 <ArgumentCard
                   key={argument.id}
@@ -215,6 +220,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
+                  isStepFinished={isStepFinished}
                 />
               </>
             </AppBox>

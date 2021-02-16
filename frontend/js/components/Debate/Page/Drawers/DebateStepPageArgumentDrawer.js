@@ -30,6 +30,7 @@ type Props = {|
   ...DetailDrawerProps,
   +argument: DebateStepPageArgumentDrawer_argument$key,
   +viewer: DebateStepPageArgumentDrawer_viewer$key,
+  +isStepFinished: boolean,
 |};
 
 const ARGUMENT_FRAGMENT = graphql`
@@ -62,6 +63,7 @@ const VIEWER_FRAGMENT = graphql`
 const DebateStepPageArgumentDrawer = ({
   argument: argumentFragment,
   viewer: viewerFragment,
+  isStepFinished,
   ...drawerProps
 }: Props) => {
   const argument: DebateStepPageArgumentDrawer_argument = useFragment(
@@ -92,7 +94,7 @@ const DebateStepPageArgumentDrawer = ({
           </Tag>
         </Flex>
 
-        {argument.viewerCanReport && (
+        {argument.viewerCanReport && !isStepFinished && (
           <Button
             rightIcon={ICON_NAME.MORE}
             aria-label={intl.formatMessage({ id: 'global.menu' })}
@@ -103,7 +105,7 @@ const DebateStepPageArgumentDrawer = ({
 
         {isViewerAdmin && !isAuthor && <ModalModerateArgumentMobile argument={argument} />}
 
-        {isAuthor && <ModalArgumentAuthorMenu argument={argument} />}
+        {isAuthor && !isStepFinished && <ModalArgumentAuthorMenu argument={argument} />}
       </DetailDrawer.Header>
 
       <DetailDrawer.Body>
@@ -121,7 +123,7 @@ const DebateStepPageArgumentDrawer = ({
         borderTopRightRadius="16px"
         width="100%"
         py={4}>
-        <LoginOverlay>
+        <LoginOverlay enabled={!isStepFinished}>
           <Button
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -129,6 +131,7 @@ const DebateStepPageArgumentDrawer = ({
             aria-label={intl.formatMessage({
               id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
             })}
+            disabled={isStepFinished}
           />
         </LoginOverlay>
         <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">

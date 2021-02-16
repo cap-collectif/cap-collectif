@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageArguments /> renders correcty 1`] = `
+exports[`<DebateStepPageArguments /> renders correctly 1`] = `
 <Relay(DesktopDebateStepPageArguments)
   step={
     Object {
@@ -16,6 +16,10 @@ exports[`<DebateStepPageArguments /> renders correcty 1`] = `
         "$fragmentRefs": null,
         "id": "debat-cannabis",
       },
+      "timeRange": Object {
+        "endAt": "2021-18-02:00:00",
+      },
+      "timeless": false,
       "yesDebate": Object {
         "$fragmentRefs": null,
         "id": "debat-cannabis",
@@ -31,7 +35,7 @@ exports[`<DebateStepPageArguments /> renders correcty 1`] = `
 />
 `;
 
-exports[`<DebateStepPageArguments /> renders correcty on mobile 1`] = `
+exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
 <Fragment>
   <MobileDebateStepPageArguments
     debate={
@@ -41,6 +45,30 @@ exports[`<DebateStepPageArguments /> renders correcty on mobile 1`] = `
           "totalCount": 7,
         },
         "id": "debat-cannabis",
+      }
+    }
+    step={
+      Object {
+        "$refType": null,
+        "debate": Object {
+          "$fragmentRefs": null,
+          "arguments": Object {
+            "totalCount": 7,
+          },
+          "id": "debat-cannabis",
+        },
+        "noDebate": Object {
+          "$fragmentRefs": null,
+          "id": "debat-cannabis",
+        },
+        "timeRange": Object {
+          "endAt": "2021-18-02:00:00",
+        },
+        "timeless": false,
+        "yesDebate": Object {
+          "$fragmentRefs": null,
+          "id": "debat-cannabis",
+        },
       }
     }
     viewer={
@@ -53,7 +81,7 @@ exports[`<DebateStepPageArguments /> renders correcty on mobile 1`] = `
 </Fragment>
 `;
 
-exports[`<DebateStepPageArguments /> renders correcty when no viewer 1`] = `
+exports[`<DebateStepPageArguments /> renders correctly when no viewer 1`] = `
 <Relay(DesktopDebateStepPageArguments)
   step={
     Object {
@@ -69,6 +97,10 @@ exports[`<DebateStepPageArguments /> renders correcty when no viewer 1`] = `
         "$fragmentRefs": null,
         "id": "debat-cannabis",
       },
+      "timeRange": Object {
+        "endAt": "2021-18-02:00:00",
+      },
+      "timeless": false,
       "yesDebate": Object {
         "$fragmentRefs": null,
         "id": "debat-cannabis",

@@ -5,29 +5,68 @@ import { shallow } from 'enzyme';
 import { DebateStepPageVoteAndShare } from './DebateStepPageVoteAndShare';
 import { $refType, $fragmentRefs } from '~/mocks';
 
-describe('<DebateStepPageVoteAndShare/>', () => {
-  const debate = {
-    id: 'debate1',
+const baseProps = {
+  body: 'blabla le body',
+  title: 'blabla le title',
+  isAuthenticated: true,
+  step: {
+    url: 'step/123',
     $refType,
     $fragmentRefs,
-    votes: { totalCount: 5 },
-    yesVotes: { totalCount: 4 },
-  };
+    debate: {
+      id: 'debate1',
+      $fragmentRefs,
+      votes: { totalCount: 5 },
+      yesVotes: { totalCount: 4 },
+      allArguments: {
+        totalCount: 10,
+      },
+      argumentsFor: {
+        totalCount: 5,
+      },
+      argumentsAgainst: {
+        totalCount: 5,
+      },
+    },
+    timeless: false,
+    timeRange: {
+      endAt: '2030-03-10 00:00:00',
+    },
+  },
+  isMobile: false,
+};
 
-  const props = {
-    title: 'Pour ou contre le LSD dans nos cantines',
-    body: 'Oui je suis pour',
-    isAuthenticated: true,
-    url: '/debate1',
-  };
+const props = {
+  basic: baseProps,
+  onMobile: {
+    ...baseProps,
+    isMobile: true,
+  },
+  timelessStep: {
+    ...baseProps,
+    step: {
+      ...baseProps.step,
+      timeless: true,
+      timeRange: {
+        endAt: null,
+      },
+    },
+  },
+};
 
-  it('renders correcty', () => {
-    const wrapper = shallow(<DebateStepPageVoteAndShare {...props} debate={debate} />);
+describe('<DebateStepPageVoteAndShare/>', () => {
+  it('renders correctly', () => {
+    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.basic} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty on mobile', () => {
-    const wrapper = shallow(<DebateStepPageVoteAndShare {...props} debate={debate} isMobile />);
+  it('renders correctly on mobile', () => {
+    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.onMobile} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when timeless step', () => {
+    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.timelessStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

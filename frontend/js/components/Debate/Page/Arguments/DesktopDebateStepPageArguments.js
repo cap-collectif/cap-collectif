@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
+import moment from 'moment';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
 import type { DesktopDebateStepPageArguments_viewer } from '~relay/DesktopDebateStepPageArguments_viewer.graphql';
 import Heading from '~ui/Primitives/Heading';
@@ -34,6 +35,12 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
   if (!step) return null;
 
   const argumentsCount = step?.debate?.arguments?.totalCount || 0;
+  const isStepFinished = step.timeless
+    ? false
+    : step?.timeRange?.endAt
+    ? moment().isAfter(moment(step.timeRange.endAt))
+    : false;
+
   return (
     <AppBox id="DebateStepPageArguments">
       <Flex align="center" direction="row" justifyContent="space-between" mb={6}>
@@ -92,6 +99,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
           </Menu.List>
         </Menu>
       </Flex>
+
       <Flex direction="row" spacing={6}>
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
@@ -100,8 +108,10 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
             handleChange={value => {
               if (value.hasMore !== yesState?.hasMore) setYesState(value);
             }}
+            isStepFinished={isStepFinished}
           />
         </Flex>
+
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
             debate={step.noDebate}
@@ -109,6 +119,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
             handleChange={value => {
               if (value.hasMore !== noState?.hasMore) setNoState(value);
             }}
+            isStepFinished={isStepFinished}
           />
         </Flex>
       </Flex>

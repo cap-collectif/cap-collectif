@@ -67,7 +67,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
   const isStepFinished = debateStep.timeless
     ? false
     : debateStep?.timeRange?.endAt
-    ? moment().isAfter(((debateStep.timeRange.endAt: any): string))
+    ? moment().isAfter(moment(debateStep.timeRange.endAt))
     : false;
   const listVoteRef = React.useRef(null);
 

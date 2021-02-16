@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import css from '@styled-system/css';
-import type { DebateStepPageVoteAndShare_debate } from '~relay/DebateStepPageVoteAndShare_debate.graphql';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { DebateStepPageAbsoluteVoteAndShare_step } from '~relay/DebateStepPageAbsoluteVoteAndShare_step.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~/components/Ui/Primitives/AppBox';
@@ -10,7 +11,7 @@ import { type VoteState } from './DebateStepPageVoteAndShare';
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
 
 type Props = {|
-  +debate: DebateStepPageVoteAndShare_debate,
+  +step: DebateStepPageAbsoluteVoteAndShare_step,
   +isAuthenticated: boolean,
   +isMobile?: boolean,
   +body: string,
@@ -19,12 +20,10 @@ type Props = {|
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
   +setShowArgumentForm: boolean => void,
-  +viewerHasArgument: boolean,
-  +url: string,
 |};
 
 export const DebateStepPageAbsoluteVoteAndShare = ({
-  debate,
+  step,
   isMobile,
   title,
   isAuthenticated,
@@ -33,9 +32,9 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   setVoteState,
   showArgumentForm,
   setShowArgumentForm,
-  viewerHasArgument,
-  url,
 }: Props) => {
+  const { debate, url } = step;
+
   return (
     <AppBox
       p={[6, 8]}
@@ -52,7 +51,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
           ? 'none'
           : !showArgumentForm || voteState === 'NONE'
           ? 'medium'
-          : ' 0 10px 14px 0px white;',
+          : '0 10px 14px 0px white',
       })}>
       {/** I dont like this but for now we have to use the bootstrap container max-width, waiting for the DS one */}
       <AppBox className="container" css={{ padding: '0 !important' }}>
@@ -66,7 +65,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
               {title}
             </Text>
             <DebateStepPageVote
-              viewerHasArgument={viewerHasArgument}
+              viewerHasArgument={debate?.viewerHasArgument || false}
               width="unset"
               debateId={debate.id}
               isAuthenticated={isAuthenticated}
@@ -74,6 +73,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             />
           </Flex>
         )}
+
         {voteState !== 'NONE' && (
           <DebateStepPageVoteForm
             isMobile={isMobile}
@@ -92,4 +92,16 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   );
 };
 
-export default DebateStepPageAbsoluteVoteAndShare;
+export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
+  step: graphql`
+    fragment DebateStepPageAbsoluteVoteAndShare_step on DebateStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      url
+      debate {
+        id
+        viewerHasArgument @include(if: $isAuthenticated)
+        ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)
+      }
+    }
+  `,
+});

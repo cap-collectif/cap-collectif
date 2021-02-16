@@ -11,6 +11,10 @@ import Text from '~ui/Primitives/Text';
 type Props = {|
   +positivePercentage: number,
   +isMobile?: boolean,
+  +votesCount: ?{|
+    +FOR: number,
+    +AGAINST: number,
+  |},
 |};
 
 const MobileTextPercentage = styled(Text).attrs({
@@ -21,17 +25,19 @@ const MobileTextPercentage = styled(Text).attrs({
   mt: 1,
 })``;
 
-export const VoteView = ({ positivePercentage, isMobile }: Props) => {
+export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) => {
   if (positivePercentage < 0 || positivePercentage > 100) return null;
+
   const left = positivePercentage;
   const right = 100 - positivePercentage;
   const leftPercentage = `${Math.round(left * 100) / 100}%`;
   const rightPercentage = `${Math.round(right * 100) / 100}%`;
+
   if (isMobile) {
     return (
       <Flex width="100%" position="relative" justify="space-between">
         <MobileTextPercentage color="green.500">
-          {leftPercentage}&nbsp;
+          {votesCount ? votesCount.FOR : leftPercentage}&nbsp;
           <FormattedMessage id="argument.show.type.for" tagName={React.Fragment} />
         </MobileTextPercentage>
         <AppBox
@@ -43,7 +49,7 @@ export const VoteView = ({ positivePercentage, isMobile }: Props) => {
           width={leftPercentage}
         />
         <MobileTextPercentage color="red.500">
-          {rightPercentage}&nbsp;
+          {votesCount ? votesCount.AGAINST : rightPercentage}&nbsp;
           <FormattedMessage id="argument.show.type.against" tagName={React.Fragment} />
         </MobileTextPercentage>
         <AppBox
@@ -93,8 +99,8 @@ export const VoteView = ({ positivePercentage, isMobile }: Props) => {
         </span>
       </div>
       <div>
-        {left ? <span>{leftPercentage}</span> : null}
-        {right ? <span>{rightPercentage}</span> : null}
+        {left ? <span>{votesCount ? votesCount.FOR : leftPercentage}</span> : null}
+        {right ? <span>{votesCount ? votesCount.AGAINST : rightPercentage}</span> : null}
       </div>
     </Container>
   );

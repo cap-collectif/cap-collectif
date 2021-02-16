@@ -38,6 +38,7 @@ type Props = {|
   +setArgumentReported: (argument: ArgumentReported) => void,
   +setModerateArgumentModal: (argument: ModerateArgument) => void,
   +setDeleteModalInfo: ({ id: string, type: ForOrAgainstValue }) => void,
+  +isStepFinished: boolean,
 |};
 
 export const voteForArgument = (
@@ -79,6 +80,7 @@ export const ArgumentCard = ({
   setModerateArgumentModal,
   setArgumentReported,
   setDeleteModalInfo,
+  isStepFinished,
   ...props
 }: Props) => {
   const isViewerAdmin = viewer && viewer.isAdmin;
@@ -124,6 +126,7 @@ export const ArgumentCard = ({
               ))}
 
             {isAuthor &&
+              !isStepFinished &&
               (!isMobile ? (
                 <>
                   {!isEditing && (
@@ -147,6 +150,7 @@ export const ArgumentCard = ({
               ))}
 
             {argument.viewerCanReport &&
+              !isStepFinished &&
               (!isMobile ? (
                 <Menu>
                   <Menu.Button as={React.Fragment}>
@@ -213,7 +217,7 @@ export const ArgumentCard = ({
 
         {!isEditing && (
           <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
-            <LoginOverlay>
+            <LoginOverlay enabled={!isStepFinished}>
               <Button
                 color="neutral-gray.500"
                 leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -221,6 +225,7 @@ export const ArgumentCard = ({
                 aria-label={intl.formatMessage({
                   id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
                 })}
+                disabled={isStepFinished}
               />
             </LoginOverlay>
             <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">

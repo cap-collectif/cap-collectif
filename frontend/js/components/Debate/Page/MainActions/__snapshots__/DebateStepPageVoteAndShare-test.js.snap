@@ -1,29 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
+exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 <Fragment>
-  <DebateStepPageAbsoluteVoteAndShare
-    body="Oui je suis pour"
-    debate={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "debate1",
-        "votes": Object {
-          "totalCount": 5,
-        },
-        "yesVotes": Object {
-          "totalCount": 4,
-        },
-      }
-    }
+  <Relay(DebateStepPageAbsoluteVoteAndShare)
+    body="blabla le body"
     isAuthenticated={true}
+    isMobile={false}
     setShowArgumentForm={[Function]}
     setVoteState={[Function]}
     showArgumentForm={true}
-    title="Pour ou contre le LSD dans nos cantines"
-    url="/debate1"
-    viewerHasArgument={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "debate": Object {
+          "$fragmentRefs": null,
+          "allArguments": Object {
+            "totalCount": 10,
+          },
+          "argumentsAgainst": Object {
+            "totalCount": 5,
+          },
+          "argumentsFor": Object {
+            "totalCount": 5,
+          },
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        },
+        "timeRange": Object {
+          "endAt": "2030-03-10 00:00:00",
+        },
+        "timeless": false,
+        "url": "step/123",
+      }
+    }
+    title="blabla le title"
     voteState="NONE"
   />
   <ForwardRef
@@ -41,31 +57,103 @@ exports[`<DebateStepPageVoteAndShare/> renders correcty 1`] = `
 </Fragment>
 `;
 
-exports[`<DebateStepPageVoteAndShare/> renders correcty on mobile 1`] = `
+exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
 <Fragment>
-  <DebateStepPageAbsoluteVoteAndShare
-    body="Oui je suis pour"
-    debate={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "debate1",
-        "votes": Object {
-          "totalCount": 5,
-        },
-        "yesVotes": Object {
-          "totalCount": 4,
-        },
-      }
-    }
+  <Relay(DebateStepPageAbsoluteVoteAndShare)
+    body="blabla le body"
     isAuthenticated={true}
     isMobile={true}
     setShowArgumentForm={[Function]}
     setVoteState={[Function]}
     showArgumentForm={true}
-    title="Pour ou contre le LSD dans nos cantines"
-    url="/debate1"
-    viewerHasArgument={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "debate": Object {
+          "$fragmentRefs": null,
+          "allArguments": Object {
+            "totalCount": 10,
+          },
+          "argumentsAgainst": Object {
+            "totalCount": 5,
+          },
+          "argumentsFor": Object {
+            "totalCount": 5,
+          },
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        },
+        "timeRange": Object {
+          "endAt": "2030-03-10 00:00:00",
+        },
+        "timeless": false,
+        "url": "step/123",
+      }
+    }
+    title="blabla le title"
+    voteState="NONE"
+  />
+  <ForwardRef
+    align="center"
+    direction="column"
+    width="100%"
+  >
+    <DebateStepPageVote
+      debateId="debate1"
+      isAuthenticated={true}
+      onSuccess={[Function]}
+      viewerHasArgument={false}
+    />
+  </ForwardRef>
+</Fragment>
+`;
+
+exports[`<DebateStepPageVoteAndShare/> renders correctly when timeless step 1`] = `
+<Fragment>
+  <Relay(DebateStepPageAbsoluteVoteAndShare)
+    body="blabla le body"
+    isAuthenticated={true}
+    isMobile={false}
+    setShowArgumentForm={[Function]}
+    setVoteState={[Function]}
+    showArgumentForm={true}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "debate": Object {
+          "$fragmentRefs": null,
+          "allArguments": Object {
+            "totalCount": 10,
+          },
+          "argumentsAgainst": Object {
+            "totalCount": 5,
+          },
+          "argumentsFor": Object {
+            "totalCount": 5,
+          },
+          "id": "debate1",
+          "votes": Object {
+            "totalCount": 5,
+          },
+          "yesVotes": Object {
+            "totalCount": 4,
+          },
+        },
+        "timeRange": Object {
+          "endAt": null,
+        },
+        "timeless": true,
+        "url": "step/123",
+      }
+    }
+    title="blabla le title"
     voteState="NONE"
   />
   <ForwardRef

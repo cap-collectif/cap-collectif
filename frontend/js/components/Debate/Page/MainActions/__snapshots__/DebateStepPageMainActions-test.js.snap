@@ -32,15 +32,19 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
         Pour ou contre le LSD dans nos cantines
       </Heading>
       <Relay(Connect(ReduxForm))
-        debate={
-          Object {
-            "$fragmentRefs": null,
-          }
-        }
         isAuthenticated={true}
         isMobile={false}
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "timeRange": Object {
+              "endAt": "2021-18-02:00:00",
+            },
+            "timeless": false,
+          }
+        }
         title="Pour ou contre le LSD dans nos cantines"
-        url="/debatestep1"
       />
     </ForwardRef>
   </ReactPlaceholder>
@@ -79,15 +83,19 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
         Pour ou contre le LSD dans nos cantines
       </Heading>
       <Relay(Connect(ReduxForm))
-        debate={
-          Object {
-            "$fragmentRefs": null,
-          }
-        }
         isAuthenticated={true}
         isMobile={true}
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "timeRange": Object {
+              "endAt": "2021-18-02:00:00",
+            },
+            "timeless": false,
+          }
+        }
         title="Pour ou contre le LSD dans nos cantines"
-        url="/debatestep1"
       />
     </ForwardRef>
   </ReactPlaceholder>
@@ -116,15 +124,19 @@ exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`
         Pour ou contre le LSD dans nos cantines
       </Heading>
       <Relay(Connect(ReduxForm))
-        debate={
-          Object {
-            "$fragmentRefs": null,
-          }
-        }
         isAuthenticated={true}
         isMobile={false}
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "timeRange": Object {
+              "endAt": null,
+            },
+            "timeless": true,
+          }
+        }
         title="Pour ou contre le LSD dans nos cantines"
-        url="/debatestep1"
       />
     </ForwardRef>
   </ReactPlaceholder>

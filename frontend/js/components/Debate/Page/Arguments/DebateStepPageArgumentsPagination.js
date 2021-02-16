@@ -22,6 +22,7 @@ type Props = {|
   +debate: DebateStepPageArgumentsPagination_debate$key & { +id: string },
   +viewer: ?DebateStepPageArgumentsPagination_viewer$key,
   +handleChange: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
+  +isStepFinished: boolean,
 |};
 
 export const CONNECTION_NODES_PER_PAGE = 8;
@@ -124,6 +125,7 @@ export const DebateStepPageArgumentsPagination = ({
   debate,
   viewer: viewerFragment,
   handleChange,
+  isStepFinished,
 }: Props) => {
   const [argumentsQuery, paginationProps]: [
     DebateStepPageArgumentsPagination_debate,
@@ -155,6 +157,7 @@ export const DebateStepPageArgumentsPagination = ({
             setArgumentReported={setArgumentReported}
             setModerateArgumentModal={setModerateArgumentModal}
             setDeleteModalInfo={setDeleteModalInfo}
+            isStepFinished={isStepFinished}
           />
         </AppBox>
       ))}

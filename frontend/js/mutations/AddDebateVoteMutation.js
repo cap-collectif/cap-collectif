@@ -20,7 +20,11 @@ const mutation = graphql`
         notPublishedReason
         debate {
           id
-          ...DebateStepPageVoteAndShare_debate @arguments(isAuthenticated: $isAuthenticated)
+          viewerHasArgument @include(if: $isAuthenticated)
+          viewerHasVote @include(if: $isAuthenticated)
+          yesVotes: votes(type: FOR) {
+            totalCount
+          }
           votes {
             totalCount
           }

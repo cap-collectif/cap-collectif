@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
+exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
   p={
@@ -38,7 +38,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
           ]
         }
       >
-        Pour ou contre le LSD dans nos cantines
+        blabla le title
       </Text>
       <DebateStepPageVote
         debateId="debate1"
@@ -52,7 +52,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty 1`] = `
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty on mobile 1`] = `
+exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
   borderTopLeftRadius="poppin"
@@ -92,7 +92,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty on mobile 1`] = 
           ]
         }
       >
-        Pour ou contre le LSD dans nos cantines
+        blabla le title
       </Text>
       <DebateStepPageVote
         debateId="debate1"
@@ -106,7 +106,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty on mobile 1`] = 
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 1`] = `
+exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumented 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
   p={
@@ -124,32 +124,27 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
     className="container"
   >
     <Relay(DebateStepPageVoteForm)
-      body="Oui je suis pour"
+      body="blabla le body"
       debate={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
           "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
+          "viewerHasArgument": true,
         }
       }
       isAbsolute={true}
+      isMobile={false}
       setShowArgumentForm={[MockFunction]}
       setVoteState={[MockFunction]}
       showArgumentForm={true}
-      url="/debate1"
+      url="step/123"
       voteState="ARGUMENTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented on mobile 1`] = `
+exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumented on mobile 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
   borderTopLeftRadius="poppin"
@@ -169,18 +164,12 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
     className="container"
   >
     <Relay(DebateStepPageVoteForm)
-      body="Oui je suis pour"
+      body="blabla le body"
       debate={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
           "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
+          "viewerHasArgument": true,
         }
       }
       isAbsolute={true}
@@ -188,14 +177,14 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when argumented 
       setShowArgumentForm={[MockFunction]}
       setVoteState={[MockFunction]}
       showArgumentForm={true}
-      url="/debate1"
+      url="step/123"
       voteState="ARGUMENTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] = `
+exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
   p={
@@ -213,32 +202,27 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted 1`] =
     className="container"
   >
     <Relay(DebateStepPageVoteForm)
-      body="Oui je suis pour"
+      body="blabla le body"
       debate={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
           "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
+          "viewerHasArgument": undefined,
         }
       }
       isAbsolute={true}
+      isMobile={false}
       setShowArgumentForm={[MockFunction]}
       setVoteState={[MockFunction]}
       showArgumentForm={true}
-      url="/debate1"
+      url="step/123"
       voteState="VOTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted on mobile 1`] = `
+exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted on mobile 1`] = `
 <DebateStepPageAbsoluteVoteAndShare___StyledAppBox
   _css={[Function]}
   borderTopLeftRadius="poppin"
@@ -258,18 +242,12 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted on mo
     className="container"
   >
     <Relay(DebateStepPageVoteForm)
-      body="Oui je suis pour"
+      body="blabla le body"
       debate={
         Object {
           "$fragmentRefs": null,
-          "$refType": null,
           "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
+          "viewerHasArgument": undefined,
         }
       }
       isAbsolute={true}
@@ -277,7 +255,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare/> renders correcty when voted on mo
       setShowArgumentForm={[MockFunction]}
       setVoteState={[MockFunction]}
       showArgumentForm={true}
-      url="/debate1"
+      url="step/123"
       voteState="VOTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
