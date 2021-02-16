@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Vote;
 
+use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\OpinionVote;
@@ -56,6 +57,9 @@ class VoteTypeResolver implements ResolverInterface
         }
         if ($node instanceof CommentVote) {
             return $this->typeResolver->resolve('CommentVote');
+        }
+        if ($node instanceof DebateArgumentVote) {
+            return $this->typeResolver->resolve('InternalDebateArgumentVote');
         }
 
         throw new UserError('Could not resolve type of Vote.');

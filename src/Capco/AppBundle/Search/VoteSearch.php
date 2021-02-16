@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -199,7 +200,22 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        return $this->searchEntityVotes($argument->getId(), 'argument.id', $limit, $cursor);
+        return $this->searchEntityVotes($argument->getId(), 'argument.id', $limit, null, $cursor);
+    }
+
+    public function searchDebateArgumentVotes(
+        DebateArgument $debateArgument,
+        int $limit,
+        ?array $orderBy = null,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        return $this->searchEntityVotes(
+            $debateArgument->getId(),
+            'debateArgument.id',
+            $limit,
+            $orderBy,
+            $cursor
+        );
     }
 
     public function searchCommentVotes(
@@ -207,7 +223,7 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        return $this->searchEntityVotes($comment->getId(), 'comment.id', $limit, $cursor);
+        return $this->searchEntityVotes($comment->getId(), 'comment.id', $limit, null, $cursor);
     }
 
     public function searchSourceVotes(
@@ -215,13 +231,14 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        return $this->searchEntityVotes($source->getId(), 'source.id', $limit, $cursor);
+        return $this->searchEntityVotes($source->getId(), 'source.id', $limit, null, $cursor);
     }
 
     private function searchEntityVotes(
         string $entityId,
         string $entityIdTerm,
         int $limit,
+        ?array $sort = null,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
@@ -230,6 +247,11 @@ class VoteSearch extends Search
         $boolQuery->addFilter(new Term(['isAccounted' => true]));
 
         $query = new Query($boolQuery);
+        if ($sort) {
+            $this->setSortWithId($query, [
+                $this->getSortField($sort['field']) => ['order' => $sort['direction']],
+            ]);
+        }
         if ($limit) {
             $query->setSize($limit + 1);
         }

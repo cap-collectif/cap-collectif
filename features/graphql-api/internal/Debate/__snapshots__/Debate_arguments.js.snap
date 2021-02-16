@@ -6,18 +6,90 @@ Object {
     "arguments": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NzYwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDciO30=",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyU3B5bA==",
+              "id": "VXNlcjp1c2VySWFu",
             },
-            "body": "Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.",
+            "body": "Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.",
             "debate": Object {
               "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
             },
-            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
             "published": true,
-            "publishedAt": "2020-10-23 09:00:00",
+            "publishedAt": "2020-10-23 09:06:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NzAwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDYiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+            },
+            "body": "Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+            "published": true,
+            "publishedAt": "2020-10-23 09:05:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NjQwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDUiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VySnBlYw==",
+            },
+            "body": "Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+            "published": true,
+            "publishedAt": "2020-10-23 09:04:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NTgwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDQiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyVmluY2VudA==",
+            },
+            "body": "Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
+            "published": true,
+            "publishedAt": "2020-10-23 09:03:00",
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
@@ -25,22 +97,36 @@ Object {
             "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "author": Object {
-                      "id": "VXNlcjp1c2VyMQ==",
-                    },
-                    "createdAt": "2015-01-01 00:00:00",
-                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAw",
-                  },
-                },
-              ],
+              "edges": Array [],
             },
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NTIwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDMiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWd1aQ==",
+            },
+            "body": "La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            "published": true,
+            "publishedAt": "2020-10-23 09:02:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NDYwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDIiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyVGhlbw==",
@@ -83,18 +169,18 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "cursor": "YToyOntpOjA7aToxNjAzNDM2NDAwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDEiO30=",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyQWd1aQ==",
+              "id": "VXNlcjp1c2VyU3B5bA==",
             },
-            "body": "La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.",
+            "body": "Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.",
             "debate": Object {
               "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
             },
-            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
             "published": true,
-            "publishedAt": "2020-10-23 09:02:00",
+            "publishedAt": "2020-10-23 09:00:00",
             "trashed": false,
             "trashedAt": null,
             "trashedReason": null,
@@ -102,109 +188,23 @@ Object {
             "type": "FOR",
             "viewerHasVote": false,
             "votes": Object {
-              "edges": Array [],
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyVmluY2VudA==",
-            },
-            "body": "Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.",
-            "debate": Object {
-              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-            },
-            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
-            "published": true,
-            "publishedAt": "2020-10-23 09:03:00",
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "FOR",
-            "viewerHasVote": false,
-            "votes": Object {
-              "edges": Array [],
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VySnBlYw==",
-            },
-            "body": "Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).",
-            "debate": Object {
-              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-            },
-            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
-            "published": true,
-            "publishedAt": "2020-10-23 09:04:00",
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "viewerHasVote": false,
-            "votes": Object {
-              "edges": Array [],
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
-            },
-            "body": "Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.",
-            "debate": Object {
-              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-            },
-            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
-            "published": true,
-            "publishedAt": "2020-10-23 09:05:00",
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "viewerHasVote": false,
-            "votes": Object {
-              "edges": Array [],
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VySWFu",
-            },
-            "body": "Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.",
-            "debate": Object {
-              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-            },
-            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
-            "published": true,
-            "publishedAt": "2020-10-23 09:06:00",
-            "trashed": false,
-            "trashedAt": null,
-            "trashedReason": null,
-            "trashedStatus": null,
-            "type": "AGAINST",
-            "viewerHasVote": false,
-            "votes": Object {
-              "edges": Array [],
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                    "createdAt": "2015-01-01 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAw",
+                  },
+                },
+              ],
             },
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "endCursor": "YToyOntpOjA7aToxNjAzNDM2NDAwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDEiO30=",
         "hasNextPage": false,
       },
       "totalCount": 7,
@@ -459,7 +459,7 @@ Object {
     "arguments": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "cursor": "YToyOntpOjA7aToyO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDIiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyVGhlbw==",
@@ -502,7 +502,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDEiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyU3B5bA==",
@@ -536,7 +536,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDMiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWd1aQ==",
@@ -560,7 +560,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDQiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyVmluY2VudA==",
@@ -584,7 +584,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDUiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VySnBlYw==",
@@ -608,7 +608,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDYiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
@@ -632,7 +632,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "cursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDciO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VySWFu",
@@ -657,7 +657,7 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "endCursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDciO30=",
         "hasNextPage": false,
       },
       "totalCount": 7,

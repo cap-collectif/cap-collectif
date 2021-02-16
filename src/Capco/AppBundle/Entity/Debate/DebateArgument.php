@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Doctrine\Common\Collections\Collection;
@@ -54,7 +53,7 @@ class DebateArgument implements
     Authorable
 {
     use AuthorInformationTrait;
-    use DebatableTrait; //@TODO remove votesCount when entity is added to elasticsearch
+    use DebatableTrait;
     use ForAgainstTrait;
     use HasAuthorTrait;
     use ModerableTrait;
@@ -65,12 +64,6 @@ class DebateArgument implements
     use TrashableTrait;
     use UuidTrait;
     use VotableOkTrait;
-
-    /**
-     * @ORM\Column(name="votes_count", type="integer")
-     * TODO replace by call to ES.
-     */
-    protected int $votesCount = 0;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})
@@ -133,9 +126,17 @@ class DebateArgument implements
         return null;
     }
 
+    /**
+     * For ES.
+     */
+    public function getVoteType(): string
+    {
+        return $this->getType();
+    }
+
     public function isIndexable(): bool
     {
-        return false;
+        return true;
     }
 
     public static function getElasticsearchPriority(): int
@@ -150,72 +151,6 @@ class DebateArgument implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return [];
-    }
-
-    /**
-     * TODO remove this custom resetVote when votesCount is removed.
-     */
-    public function resetVotes()
-    {
-        foreach ($this->votes as $vote) {
-            $this->removeVote($vote);
-        }
-        $this->votesCount = 0;
-
-        return $this;
-    }
-
-    /**
-     * TODO remove this custom setVotes when votesCount is removed.
-     */
-    public function setVotes(Collection $votes)
-    {
-        $this->votes = $votes;
-        $this->votesCount = $votes->count();
-
-        return $this;
-    }
-
-    /**
-     * TODO remove this custom addVote when votesCount is removed.
-     */
-    public function addVote(AbstractVote $vote)
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes->add($vote);
-            ++$this->votesCount;
-        }
-
-        return $this;
-    }
-
-    /**
-     * TODO remove this custom removeVote when votesCount is removed.
-     */
-    public function removeVote(AbstractVote $vote)
-    {
-        if ($this->votes->contains($vote)) {
-            $this->votes->removeElement($vote);
-            --$this->votesCount;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @deprecated use a resolver instead
-     */
-    public function getVotesCount(): int
-    {
-        return $this->votesCount;
-    }
-
-    /**
-     * @deprecated do not use it
-     */
-    public function setVotesCount(int $votesCount)
-    {
-        return $this->votesCount = $votesCount;
+        return ['ElasticsearchDebateArgument'];
     }
 }

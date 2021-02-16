@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateArgumentVoteMutation;
@@ -22,9 +23,16 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         DebateArgumentVoteRepository $repository,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        Indexer $indexer
     ) {
-        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker, $repository);
+        $this->beConstructedWith(
+            $em,
+            $globalIdResolver,
+            $authorizationChecker,
+            $repository,
+            $indexer
+        );
     }
 
     public function it_is_initializable()
@@ -36,6 +44,7 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
+        Indexer $indexer,
         Arg $input,
         DebateArgument $debateArgument,
         User $viewer
@@ -53,6 +62,8 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         $debateArgument->addVote(Argument::type(DebateArgumentVote::class))->shouldBeCalled();
         $em->persist(Argument::type(DebateArgumentVote::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $indexer->index(DebateArgumentVote::class, Argument::any())->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(3);

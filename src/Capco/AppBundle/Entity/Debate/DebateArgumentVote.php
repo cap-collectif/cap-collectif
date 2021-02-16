@@ -22,7 +22,7 @@ class DebateArgumentVote extends AbstractVote
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="votes")
      * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $debateArgument;
+    private DebateArgument $debateArgument;
 
     public function getRelated(): DebateArgument
     {
@@ -51,14 +51,19 @@ class DebateArgumentVote extends AbstractVote
         return $this->getStep() ? $this->getStep()->getProject() : null;
     }
 
-    // TODO not enable for now.
     public function isIndexable(): bool
     {
-        return false;
+        return true;
     }
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return [];
+        return [
+            'ElasticsearchVote',
+            'ElasticsearchVoteNestedAuthor',
+            'ElasticsearchVoteNestedStep',
+            'ElasticsearchVoteNestedArgument',
+            'ElasticsearchVoteNestedDebateArgument',
+        ];
     }
 }

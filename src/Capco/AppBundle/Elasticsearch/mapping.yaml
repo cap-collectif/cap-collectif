@@ -119,6 +119,17 @@ mappings:
         argument:
             properties:
                 id: { type: keyword }
+        debateArgument:
+            type: object
+            properties:
+                id: { type: keyword }
+                voteType: { type: keyword }
+                published: { type: boolean }
+                trashed: { type: boolean }
+        debate:
+            type: object
+            properties:
+                id: { type: keyword }
         consultation: &Consultation
             properties:
                 id: { type: keyword }
@@ -276,6 +287,7 @@ mappings:
         user: *Author
         isAccounted: { type: boolean }
         value: { type: long }
+        voteType: { type: keyword }
 
         source:
             properties:

@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
-use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
+use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -13,11 +13,11 @@ class DebateArgumentVotesResolver implements ResolverInterface
 {
     public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
 
-    private DebateArgumentVoteRepository $repository;
+    private VoteSearch $voteSearch;
 
-    public function __construct(DebateArgumentVoteRepository $repository)
+    public function __construct(VoteSearch $voteSearch)
     {
-        $this->repository = $repository;
+        $this->voteSearch = $voteSearch;
     }
 
     public function __invoke(DebateArgument $debateArgument, ?Argument $args = null): ConnectionInterface
@@ -26,33 +26,40 @@ class DebateArgumentVotesResolver implements ResolverInterface
             $args = new Argument(['first' => 0]);
         }
         $orderBy = self::getOrderBy($args);
-        $paginator = new Paginator(function (int $offset, int $limit) use (
+
+        $totalCount = 0;
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $debateArgument,
+            &$totalCount,
             $orderBy
         ) {
-            if (0 === $offset && 0 === $limit) {
-                return [];
-            }
+            $response = $this->voteSearch->searchDebateArgumentVotes(
+                $debateArgument,
+                $limit,
+                $orderBy,
+                $cursor
+            );
+            $totalCount = $response->getTotalCount();
 
-            return $this->repository
-                ->getByDebateArgument($debateArgument, $limit, $offset, $orderBy)
-                ->getIterator()
-                ->getArrayCopy();
+            return $response;
         });
-        $totalCount = $this->repository->countByDebateArgument($debateArgument);
 
-        return $paginator->auto($args, $totalCount);
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
     }
 
     private static function getOrderBy(Argument $args): ?array
     {
         $orderByFields = [
-            'PUBLISHED_AT' => 'publishedAt'
+            'PUBLISHED_AT' => 'publishedAt',
         ];
         $orderBy = $args->offsetGet('orderBy');
         if ($orderBy) {
             $orderBy['field'] = $orderByFields[$orderBy['field']];
         }
+
         return $orderBy;
     }
 }

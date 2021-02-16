@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
         body: Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.
         createdAt: <(new \DateTime('2020-10-23 09:00:00'))>
         publishedAt: $createdAt
-        votesCount: 1
     debateArgument2:
         __construct: ['@debateCannabis']
         id: 'debateArgument2'
@@ -16,7 +15,6 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
         body: Les partisans de la légalisation estiment que le cannabis n’est pas plus nocif que le tabac ou l’alcool et doit être encadré de la même manière. Il pose un problème d’addiction qu’on peut contrer plus aisément en encadrant sa consommation.
         createdAt: <(new \DateTime('2020-10-23 09:01:00'))>
         publishedAt: $createdAt
-        votesCount: 2
     debateArgument3:
         __construct: ['@debateCannabis']
         id: 'debateArgument3'

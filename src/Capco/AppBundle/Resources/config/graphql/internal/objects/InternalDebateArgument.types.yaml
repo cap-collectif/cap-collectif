@@ -7,6 +7,7 @@ InternalDebateArgument:
         - Reportable
         - Timestampable
         - Authorable
+        - Contribution
     config:
         name: DebateArgument
         description: 'A debate argument from non expert.'
@@ -14,6 +15,7 @@ InternalDebateArgument:
             - Node
             - Reportable
             - Trashable
+            - Contribution
         fields:
             id:
                 description: 'The ID of an object.'
@@ -52,6 +54,10 @@ InternalDebateArgument:
                 description: 'True if the viewer has reported the argument.'
                 type: Boolean!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", [value, getUser()])'
+            url:
+                type: 'URI!'
+                description: 'The url of the debate'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateUrlResolver", [value.getDebate()])'
             ipAddress:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'IP of the author'

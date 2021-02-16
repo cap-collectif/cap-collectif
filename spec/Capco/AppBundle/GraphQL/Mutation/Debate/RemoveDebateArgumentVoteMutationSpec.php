@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateArgumentVoteMutation;
@@ -13,6 +14,7 @@ use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Prophecy\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
@@ -21,9 +23,16 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         DebateArgumentVoteRepository $repository,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        Indexer $indexer
     ) {
-        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker, $repository);
+        $this->beConstructedWith(
+            $em,
+            $globalIdResolver,
+            $authorizationChecker,
+            $repository,
+            $indexer
+        );
     }
 
     public function it_is_initializable()
@@ -36,6 +45,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         DebateArgumentVoteRepository $repository,
         AuthorizationCheckerInterface $authorizationChecker,
+        Indexer $indexer,
         Arg $input,
         DebateArgument $debateArgument,
         DebateArgumentVote $debateArgumentVote,
@@ -58,8 +68,11 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
             ->willReturn($debateArgumentVote);
 
         $debateArgument->removeVote($debateArgumentVote)->shouldBeCalled();
+
+        $indexer->remove(DebateArgumentVote::class, Argument::any())->shouldBeCalled();
         $em->remove($debateArgumentVote)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(3);

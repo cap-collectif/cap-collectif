@@ -2,19 +2,19 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentVotesResolver;
-use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
+use Capco\AppBundle\Search\VoteSearch;
 use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Overblog\GraphQLBundle\Definition\Argument;
 
 class DebateArgumentVotesResolverSpec extends ObjectBehavior
 {
-    public function let(DebateArgumentVoteRepository $repository)
+    public function let(VoteSearch $voteSearch)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($voteSearch);
     }
 
     public function it_is_initializable()
@@ -23,21 +23,34 @@ class DebateArgumentVotesResolverSpec extends ObjectBehavior
     }
 
     public function it_resolve_empty_connection(
-        DebateArgumentVoteRepository $repository,
-        DebateArgument $debateArgument
+        VoteSearch $voteSearch,
+        DebateArgument $debateArgument,
+        ElasticsearchPaginatedResult $elasticsearchPaginatedResult
     ) {
-        $args = new Argument(['first' => 0, 'after' => null]);
-        $repository
-            ->countByDebateArgument($debateArgument)
-            ->willReturn(0)
+        $args = new Argument([
+            'first' => 0,
+            'after' => null,
+            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+        ]);
+        $voteSearch
+            ->searchDebateArgumentVotes(
+                $debateArgument,
+                0,
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any(),
+            )
+            ->willReturn($elasticsearchPaginatedResult)
             ->shouldBeCalled();
+        $elasticsearchPaginatedResult->getEntities()->willReturn([]);
+        $elasticsearchPaginatedResult->getCursors()->willReturn([]);
+        $elasticsearchPaginatedResult->getTotalCount()->willReturn(0);
         $this->__invoke($debateArgument, $args)->shouldReturnEmptyConnection();
     }
 
     public function it_resolve_votes(
-        DebateArgumentVoteRepository $repository,
+        VoteSearch $voteSearch,
         DebateArgument $debateArgument,
-        Paginator $paginator,
+        ElasticsearchPaginatedResult $elasticsearchPaginatedResult,
         DebateArgumentVote $a,
         DebateArgumentVote $b
     ) {
@@ -46,15 +59,18 @@ class DebateArgumentVotesResolverSpec extends ObjectBehavior
             'after' => null,
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
         ]);
-        $repository
-            ->getByDebateArgument($debateArgument, 11, 0, ['field' => 'publishedAt', 'direction' => 'DESC'])
-            ->willReturn($paginator)
+        $voteSearch
+            ->searchDebateArgumentVotes(
+                $debateArgument,
+                11,
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any()
+            )
+            ->willReturn($elasticsearchPaginatedResult)
             ->shouldBeCalled();
-        $repository
-            ->countByDebateArgument($debateArgument)
-            ->willReturn(2)
-            ->shouldBeCalled();
-        $paginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
+        $elasticsearchPaginatedResult->getEntities()->willReturn([$a, $b]);
+        $elasticsearchPaginatedResult->getCursors()->willReturn([['a'], ['b']]);
+        $elasticsearchPaginatedResult->getTotalCount()->willReturn(2);
         $this->__invoke($debateArgument, $args)->shouldReturnConnection();
     }
 }

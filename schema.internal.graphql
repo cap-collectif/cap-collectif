@@ -3353,7 +3353,7 @@ type Debate implements Node {
 }
 
 """A debate argument from non expert."""
-type DebateArgument implements Node & Reportable & Trashable {
+type DebateArgument implements Node & Reportable & Trashable & Contribution {
   """The ID of an object."""
   id: ID!
 
@@ -3415,6 +3415,14 @@ type DebateArgument implements Node & Reportable & Trashable {
 
   """Did the viewer author this entity."""
   viewerDidAuthor: Boolean
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the debate"""
+  url: URI!
 
   """The content of the argument."""
   body: String!
@@ -3522,7 +3530,7 @@ enum DebateArgumentOrderField {
 }
 
 """A debate vote."""
-type DebateArgumentVote implements Node & Publishable {
+type DebateArgumentVote implements Node & Publishable & Vote & Contribution {
   """The ID of an object."""
   id: ID!
 
@@ -3543,6 +3551,20 @@ type DebateArgumentVote implements Node & Publishable {
 
   """The author of the vote."""
   author: User!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Returns Type of vote"""
+  kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
+  """Url of the contribution"""
+  url: URI!
 
   """The debate of the vote."""
   debateArgument: DebateArgument!

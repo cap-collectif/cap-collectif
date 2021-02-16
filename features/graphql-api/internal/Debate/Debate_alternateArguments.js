@@ -2,7 +2,7 @@
 const DebateAlternateArgumentsQuery = /* GraphQL */ `
   query DebateAlternateArgumentsQuery(
     $id: ID!
-    $orderBy: DebateArgumentOrder!
+    $orderBy: DebateArgumentOrder
     $first: Int!
     $after: String
   ) {

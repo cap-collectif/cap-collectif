@@ -3,12 +3,16 @@ InternalDebateArgumentVote:
     inherits:
         - Node
         - PublicPublishable
+        - InternalVote
+        - Contribution
     config:
         name: DebateArgumentVote
         description: 'A debate vote.'
         interfaces:
             - Node
             - PublicPublishable
+            - InternalVote
+            - Contribution
         fields:
             id:
                 description: 'The ID of an object.'

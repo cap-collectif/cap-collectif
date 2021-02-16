@@ -86,6 +86,14 @@ class DebateArgumentRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('da');
+        $qb->where('da.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * Get all trashed or unpublished debate arguments for project.
      */

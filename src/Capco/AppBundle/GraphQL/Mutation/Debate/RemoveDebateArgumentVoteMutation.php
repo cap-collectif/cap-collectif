@@ -21,8 +21,10 @@ class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutatio
             $this->checkCanParticipate($debateArgument);
             $debateArgumentVote = $this->getPreviousVote($debateArgument, $viewer);
             self::removePreviousVote($debateArgument, $debateArgumentVote);
+            $this->indexer->remove(DebateArgumentVote::class, $debateArgumentVote->getId());
             $this->em->remove($debateArgumentVote);
             $this->em->flush();
+            $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }

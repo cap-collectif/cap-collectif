@@ -2,19 +2,19 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateAlternateArgumentsResolver;
-use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\AppBundle\Search\DebateSearch;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Overblog\GraphQLBundle\Definition\Argument;
 
 class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
 {
-    public function let(DebateArgumentRepository $repository)
+    public function let(DebateSearch $debateSearch)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($debateSearch);
     }
 
     public function it_is_initializable()
@@ -22,10 +22,8 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
         $this->shouldHaveType(DebateAlternateArgumentsResolver::class);
     }
 
-    public function it_resolve_empty_connection(
-        DebateArgumentRepository $repository,
-        Debate $debate
-    ) {
+    public function it_resolve_empty_connection(DebateSearch $debateSearch, Debate $debate)
+    {
         $args = new Argument([
             'first' => 0,
             'after' => null,
@@ -35,18 +33,25 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
             'isPublished' => true,
             'isTrashed' => false,
         ];
-        $repository
-            ->countByDebate($debate, $filters)
-            ->willReturn(0)
+        $debateSearch
+            ->searchDebateArguments(
+                $debate,
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any()
+            )
+            ->willReturn(new ElasticsearchPaginatedResult([], [], 0))
             ->shouldBeCalled();
         $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection();
     }
 
     public function it_resolve_arguments(
-        DebateArgumentRepository $repository,
+        DebateSearch $debateSearch,
         Debate $debate,
-        Paginator $forPaginator,
-        Paginator $againstPaginator,
+        ElasticsearchPaginatedResult $forPaginator,
+        ElasticsearchPaginatedResult $againstPaginator,
+        ElasticsearchPaginatedResult $bothPaginator,
         DebateArgument $a,
         DebateArgument $b,
         DebateArgument $c
@@ -74,20 +79,30 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
             'field' => 'publishedAt',
             'direction' => 'DESC',
         ];
-        $repository
-            ->getByDebate($debate, 11, 0, $forFilters, $orderBy)
+        $debateSearch
+            ->searchDebateArguments($debate, 11, $orderBy, $forFilters, \Prophecy\Argument::any())
             ->willReturn($forPaginator)
             ->shouldBeCalled();
-        $repository
-            ->getByDebate($debate, 11, 0, $againstFilters, $orderBy)
+        $debateSearch
+            ->searchDebateArguments(
+                $debate,
+                11,
+                $orderBy,
+                $againstFilters,
+                \Prophecy\Argument::any()
+            )
             ->willReturn($againstPaginator)
             ->shouldBeCalled();
-        $repository
-            ->countByDebate($debate, $filters)
-            ->willReturn(3)
+        $debateSearch
+            ->searchDebateArguments($debate, 0, null, $filters, \Prophecy\Argument::any())
+            ->willReturn($bothPaginator)
             ->shouldBeCalled();
-        $forPaginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
-        $againstPaginator->getIterator()->willReturn(new \ArrayIterator([$c]));
+        $forPaginator->getEntities()->willReturn([$a, $b]);
+        $forPaginator->getTotalCount()->willReturn(2);
+        $againstPaginator->getEntities()->willReturn([$c]);
+        $againstPaginator->getTotalCount()->willReturn(1);
+        $bothPaginator->getEntities()->willReturn([$a, $b, $c]);
+        $bothPaginator->getTotalCount()->willReturn(3);
         $this->__invoke($debate, $args, null)->shouldReturnConnection();
     }
 }

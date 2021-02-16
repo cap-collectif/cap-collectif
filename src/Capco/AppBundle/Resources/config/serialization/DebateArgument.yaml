@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\Debate\DebateArgument:
+    attributes:
+        id:
+            groups: [ElasticsearchVoteNestedDebateArgument, ElasticsearchDebateArgument]
+        debate:
+            groups: [ElasticsearchDebateArgument]
+        voteType:
+            groups: [ElasticsearchDebateArgument]
+        published:
+            groups: [ElasticsearchDebateArgument]
+        publishedAt:
+            groups: [ElasticsearchDebateArgument]
+        trashed:
+            groups: [ElasticsearchDebateArgument]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchDebateArgument]
