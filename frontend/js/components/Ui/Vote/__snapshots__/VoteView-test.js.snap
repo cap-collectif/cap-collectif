@@ -269,7 +269,7 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
   </div>
   <div>
     <span>
-      0%
+      100%
     </span>
   </div>
 </VoteViewstyle__Container>
@@ -303,7 +303,7 @@ exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
   <VoteView__MobileTextPercentage
     color="red.500"
   >
-    0%
+    100%
      
     <FormattedMessage
       id="argument.show.type.against"
@@ -317,7 +317,7 @@ exports[`<VoteView /> should render correctly when 0% positive on mobile 1`] = `
     height="2px"
     left="0%"
     position="absolute"
-    width="0%"
+    width="100%"
   />
 </ForwardRef>
 `;
