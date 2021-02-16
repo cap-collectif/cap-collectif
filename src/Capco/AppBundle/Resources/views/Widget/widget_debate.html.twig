@@ -1,0 +1,23 @@
+{% extends '@CapcoApp/layout.html.twig' %}
+
+{% block mainContent %}
+
+    <h1>Je suis un super Widget</h1>
+    {# {{ react_render_component('DebateWidgetApp', {
+        'rendering': 'client_side'
+    }) }} #}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        window.locale = "{{ intl_locale() }}";
+        window.timeZone = "{{ intl_timeZone() }}";
+        window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
+        {% if is_feature_enabled('report_browers_errors_to_sentry') %}
+            window.sentryDsn = "{{ sentryDsn }}";
+        {% endif %}
+    </script>
+    {{ parent() }}
+
+{% endblock %}
+
