@@ -47,6 +47,7 @@ class DebateVotesResolverSpec extends ObjectBehavior
             'first' => 10,
             'after' => null,
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+            'isPublished' => null,
         ]);
         $filters = [
             'type' => null,

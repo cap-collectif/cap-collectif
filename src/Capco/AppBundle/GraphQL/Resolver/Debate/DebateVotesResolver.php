@@ -50,11 +50,15 @@ class DebateVotesResolver implements ResolverInterface
     {
         $filters = [];
         $filters['type'] = $args->offsetGet('type');
+        $filters['isPublished'] = null;
 
+        if ($args->offsetExists('isPublished')) {
+            $filters['isPublished'] = $args->offsetGet('isPublished');
+        }
+
+        // An anonymous user or non-admin can only access published data.
         if (null === $viewer || !$viewer->isAdmin()) {
             $filters['isPublished'] = true;
-        } else {
-            $filters['isPublished'] = $args->offsetGet('isPublished');
         }
 
         return $filters;

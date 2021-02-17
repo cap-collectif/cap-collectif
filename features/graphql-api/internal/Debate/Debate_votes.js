@@ -133,7 +133,7 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot();
   });
 
-  it('should not fetch unpublished votes associated to a debate when client is not an admin', async () => {
+  it('should not fetch unpublished only votes associated to a debate when client is not an admin', async () => {
     const response = await graphql(
       DebateVotesQuery,
       {
@@ -147,7 +147,7 @@ describe('Internal|Debate.Votes connection', () => {
     expect(votes.every(v => v.published === true)).toBe(true);
   });
 
-  it('should fetch unpublished votes associated to a debate when client is an admin', async () => {
+  it('should fetch unpublished only votes associated to a debate when client is an admin', async () => {
     const response = await graphql(
       DebateVotesQuery,
       {
@@ -161,19 +161,33 @@ describe('Internal|Debate.Votes connection', () => {
     expect(votes.every(v => v.published === false)).toBe(true);
   });
 
-  it('fetches votes counters associated to a debate', async () => {
+  it('fetches all votes counters associated to a debate when client is an admin', async () => {
     await expect(
       graphql(
         DebateVotesCountersQuery,
         {
           id: toGlobalId('Debate', 'debateCannabis'),
+          isPublished: null,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches published votes counters associated to a debate', async () => {
+    await expect(
+      graphql(
+        DebateVotesCountersQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+          isPublished: true,
         },
         'internal',
       ),
     ).resolves.toMatchSnapshot();
   });
 
-  it('fetches unpublished votes counters associated to a debate', async () => {
+  it('fetches unpublished votes counters associated to a debate when client is an admin', async () => {
     await expect(
       graphql(
         DebateVotesCountersQuery,

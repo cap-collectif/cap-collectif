@@ -116,10 +116,12 @@ class DebateVoteRepository extends EntityRepository
             $qb->andWhere('v.type = :type')->setParameter('type', $filters['type']);
         }
 
-        $qb->andWhere('v.published = :published')->setParameter(
-            'published',
-            $filters['isPublished'] ?? true
-        );
+        if (is_bool($filters['isPublished'])) {
+            $qb->andWhere('v.published = :published')->setParameter(
+                'published',
+                $filters['isPublished']
+            );
+        }
 
         return $qb;
     }

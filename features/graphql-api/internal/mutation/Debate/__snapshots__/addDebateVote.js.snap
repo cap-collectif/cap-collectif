@@ -38,7 +38,7 @@ Object {
       "debate": Object {
         "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
         "votes": Object {
-          "totalCount": 11,
+          "totalCount": 12,
         },
       },
       "id": Any<String>,
@@ -65,7 +65,7 @@ Object {
       "debate": Object {
         "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
         "votes": Object {
-          "totalCount": 11,
+          "totalCount": 12,
         },
       },
       "id": Any<String>,

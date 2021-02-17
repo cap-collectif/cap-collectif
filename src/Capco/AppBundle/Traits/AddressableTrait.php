@@ -29,6 +29,8 @@ trait AddressableTrait
             return '';
         }
 
-        return Map::decodeAddressFromJson($this->getAddress());
+        $value = Map::decodeAddressFromJson($this->getAddress());
+
+        return $value ?? '';
     }
 }

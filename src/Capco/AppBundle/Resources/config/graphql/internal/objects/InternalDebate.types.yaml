@@ -64,7 +64,7 @@ InternalDebate:
                 type: Boolean!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerHasArgumentResolver", [value, getUser()])'
             votes:
-                description: 'The votes from experts of the debate.'
+                description: 'The votes from contributors of the debate.'
                 argsBuilder: 'Relay::Connection'
                 args:
                     type:
@@ -73,11 +73,11 @@ InternalDebate:
                         description: "Filter by a vote's type."
                     isPublished:
                         type: 'Boolean'
-                        description: '(ROLE_ADMIN only) True to see only published votes, false to see only unpublished, null to see both.'
+                        description: '(ROLE_ADMIN only) `true` to see only published votes, `false` to see only unpublished, `null` to see both.'
                         defaultValue: null
                     orderBy:
                         type: 'DebateVoteOrder'
-                        description: 'Order by.'
+                        description: 'The ordering options for votes.'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                 type: DebateVoteConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateVotesResolver", [value, args, getUser()])'

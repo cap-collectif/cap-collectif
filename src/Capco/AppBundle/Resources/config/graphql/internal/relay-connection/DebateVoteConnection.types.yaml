@@ -1,6 +1,7 @@
 DebateVoteConnection:
     type: relay-connection
     config:
+        name: DebateVoteConnection
         nodeType: InternalDebateVote
         connectionFields:
             totalCount:

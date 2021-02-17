@@ -196,7 +196,39 @@ Object {
 }
 `;
 
-exports[`Internal|Debate.Votes connection fetches unpublished votes counters associated to a debate 1`] = `
+exports[`Internal|Debate.Votes connection fetches all votes counters associated to a debate when client is an admin 1`] = `
+Object {
+  "node": Object {
+    "againstVotes": Object {
+      "totalCount": 9,
+    },
+    "allVotes": Object {
+      "totalCount": 11,
+    },
+    "forVotes": Object {
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.Votes connection fetches published votes counters associated to a debate 1`] = `
+Object {
+  "node": Object {
+    "againstVotes": Object {
+      "totalCount": 8,
+    },
+    "allVotes": Object {
+      "totalCount": 10,
+    },
+    "forVotes": Object {
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.Votes connection fetches unpublished votes counters associated to a debate when client is an admin 1`] = `
 Object {
   "node": Object {
     "againstVotes": Object {
@@ -408,22 +440,6 @@ Object {
 }
 `;
 
-exports[`Internal|Debate.Votes connection fetches votes counters associated to a debate 1`] = `
-Object {
-  "node": Object {
-    "againstVotes": Object {
-      "totalCount": 8,
-    },
-    "allVotes": Object {
-      "totalCount": 10,
-    },
-    "forVotes": Object {
-      "totalCount": 2,
-    },
-  },
-}
-`;
-
 exports[`Internal|Debate.Votes connection fetches votes ip associated to a debate 1`] = `
 Object {
   "node": Object {
@@ -486,6 +502,12 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwMA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAyMA==",
             "ipAddress": null,
           },
         },

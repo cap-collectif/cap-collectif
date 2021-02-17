@@ -3271,7 +3271,7 @@ type Debate implements Node {
   """True if the viewer has created an argument."""
   viewerHasArgument: Boolean!
 
-  """The votes from experts of the debate."""
+  """The votes from contributors of the debate."""
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -3293,11 +3293,11 @@ type Debate implements Node {
     type: ForOrAgainstValue = null
 
     """
-    (ROLE_ADMIN only) True to see only published votes, false to see only unpublished, null to see both.
+    (ROLE_ADMIN only) `true` to see only published votes, `false` to see only unpublished, `null` to see both.
     """
     isPublished: Boolean = null
 
-    """Order by."""
+    """The ordering options for votes."""
     orderBy: DebateVoteOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateVoteConnection!
 
