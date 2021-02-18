@@ -41,6 +41,8 @@ Capco\UserBundle\Entity\User:
       groups: [UserDetails, UsersInfos]
     email:
       groups: [Elasticsearch]
+    isEmailConfirmed:
+      groups: [Elasticsearch]
     firstname:
       groups: [Elasticsearch]
     lastname:

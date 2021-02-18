@@ -53,6 +53,7 @@ mappings:
             index_options: offsets
             fields:
                 std: { type: text, analyzer: capco_standard }
+        isEmailConfirmed: { type: boolean }
         username: *text_analysis_highlighted
         biography: *text_analysis_highlighted
         firstname: *text_analysis_highlighted

@@ -87,7 +87,8 @@ class UserSearch extends Search
         array $orderBy,
         ?string $cursor = null,
         bool $showSuperAdmin = false,
-        bool $includeDisabled = false
+        bool $includeDisabled = false,
+        ?bool $emailConfirmed = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if (!$showSuperAdmin) {
@@ -98,6 +99,9 @@ class UserSearch extends Search
         }
         if (!$includeDisabled) {
             $boolQuery->addFilter(new Term(['enabled' => !$includeDisabled]));
+        }
+        if (null !== $emailConfirmed) {
+            $boolQuery->addFilter(new Term(['isEmailConfirmed' => $emailConfirmed]));
         }
 
         $query = new Query();

@@ -9146,6 +9146,9 @@ type Query {
 
     """Get user list with disabled users"""
     withDisabled: Boolean = false
+
+    """Filter the list by email confirmation"""
+    emailConfirmed: Boolean = null
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 

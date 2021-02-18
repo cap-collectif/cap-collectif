@@ -39,6 +39,7 @@ class QueryUsersResolver implements ResolverInterface
 
         $includeSuperAdmin = isset($args['superAdmin']) && true === $args['superAdmin'];
         $includeDisabled = isset($args['withDisabled']) && true === $args['withDisabled'];
+        $emailConfirmed = $args['emailConfirmed'];
         $orderBy = $args->offsetExists('orderBy')
             ? $args->offsetGet('orderBy')
             : ['field' => SortField::CREATED_AT, 'direction' => OrderDirection::DESC];
@@ -46,14 +47,16 @@ class QueryUsersResolver implements ResolverInterface
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $orderBy,
             $includeSuperAdmin,
-            $includeDisabled
+            $includeDisabled,
+            $emailConfirmed
         ) {
             return $this->userSearch->getAllUsers(
                 $limit,
                 $orderBy,
                 $cursor,
                 $includeSuperAdmin,
-                $includeDisabled
+                $includeDisabled,
+                $emailConfirmed
             );
         });
 

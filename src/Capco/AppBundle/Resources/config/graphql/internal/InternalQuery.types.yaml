@@ -192,6 +192,10 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: false
                         description: 'Get user list with disabled users'
+                    emailConfirmed:
+                        type: 'Boolean'
+                        defaultValue: null
+                        description: 'Filter the list by email confirmation'
                     orderBy:
                         type: 'UserOrder'
                         defaultValue:
