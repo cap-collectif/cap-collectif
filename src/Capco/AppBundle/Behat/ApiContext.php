@@ -9,7 +9,8 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
+use Coduo\PHPMatcher\PHPMatcher;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\Assert;
@@ -295,9 +296,8 @@ EOF;
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
         $body = (string) $this->response->getBody();
-        $factory = new SimpleFactory();
-        $matcher = $factory->createMatcher();
-        Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError() ?? '');
+        $matcher = new PHPMatcher();
+        Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->error() ?? '');
     }
 
     /**

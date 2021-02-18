@@ -54,10 +54,25 @@ Scenario: GraphQL client wants to generate a jitsi room for an event, but give w
   Then the JSON response should match:
   """
   {
-    "errors": {
-      "message": "You must provide a valid event",
-      "@*@": "@*@"
-    },
-    "@*@": "@*@"
+     "errors":[
+        {
+           "message":"Could not find this event.",
+           "extensions":{
+              "@*@": "@*@"
+           },
+           "locations":[
+              {
+                 "line":1,
+                 "column":57
+              }
+           ],
+           "path":[
+              "generateJitsiRoomMutation"
+           ]
+        }
+     ],
+     "data":{
+        "generateJitsiRoomMutation":null
+     }
   }
   """

@@ -294,6 +294,11 @@ franceconnect_login:
     path: /login/check-franceconnect
     options: { i18n: false }
 
+_translation_edit_in_place:
+    resource: '@TranslationBundle/Resources/config/routing_edit_in_place.yaml'
+    prefix: /admin
+    options: { i18n: false }
+
 capco_app_cms:
     path: /{url}
     defaults: {} # no default, only use for generation...

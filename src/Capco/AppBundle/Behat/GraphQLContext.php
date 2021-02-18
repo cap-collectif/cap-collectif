@@ -4,7 +4,8 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
+use Coduo\PHPMatcher\PHPMatcher;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\Assert;
 
@@ -148,9 +149,8 @@ class GraphQLContext implements Context
     public function compareWithStoredResult()
     {
         $body = $this->response;
-        $factory = new SimpleFactory();
-        $matcher = $factory->createMatcher();
-        Assert::assertNotTrue($matcher->match($body, $this->resultChecker), $matcher->getError());
+        $matcher = new PHPMatcher();
+        Assert::assertNotTrue($matcher->match($body, $this->resultChecker), $matcher->error());
     }
 
     /**
@@ -200,10 +200,10 @@ class GraphQLContext implements Context
      */
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
-        $matcher = (new SimpleFactory())->createMatcher();
+        $matcher = new PHPMatcher();
         Assert::assertTrue(
             $matcher->match($this->response, $pattern->getRaw()),
-            $matcher->getError() . ' ' . $this->response
+            $matcher->error() . ' ' . $this->response
         );
     }
 

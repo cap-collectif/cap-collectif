@@ -5,7 +5,12 @@ namespace Capco\AppBundle\Behat;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Backtrace;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
+use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\Matcher\Pattern\Expander\BacktraceBehavior;
+use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
+use Coduo\PHPMatcher\PHPMatcher;
 use LogicException;
 use PHPUnit\Framework\Assert;
 use Swarrot\SwarrotBundle\Broker\PeclFactory;
@@ -32,7 +37,7 @@ class RabbitMQContext implements KernelAwareContext
         string $producerName,
         TableNode $tableNode
     ) {
-        $matcher = (new SimpleFactory())->createMatcher();
+        $matcher = new PHPMatcher();
         $expectedMessages = $this->getExpectedMessages($tableNode);
         $queuedMessages = $this->getQueuedMessages($producerName);
 
