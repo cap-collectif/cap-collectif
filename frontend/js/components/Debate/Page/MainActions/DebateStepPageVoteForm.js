@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, useIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
 import copy from 'copy-to-clipboard';
 import css from '@styled-system/css';
@@ -35,6 +35,7 @@ type Props = {|
   +setShowArgumentForm: boolean => void,
   +isAbsolute?: boolean,
   +url?: string,
+  +viewerIsConfirmed: boolean,
 |};
 
 export const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
@@ -92,6 +93,15 @@ export const addArgumentOnDebate = (
     });
 };
 
+const bandMessage = {
+  VOTED: 'thanks-for-your-vote',
+  ARGUMENTED: 'thanks-for-debate-richer',
+  NOT_CONFIRMED: 'publish.vote.validate.account',
+  NOT_CONFIRMED_ARGUMENTED: 'publish.argument.validate.account',
+  NONE: '',
+  RESULT: '',
+};
+
 export const DebateStepPageVoteForm = ({
   debate,
   body,
@@ -102,6 +112,7 @@ export const DebateStepPageVoteForm = ({
   isAbsolute,
   url,
   isMobile,
+  viewerIsConfirmed,
 }: Props) => {
   useScript('https://platform.twitter.com/widgets.js');
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -152,27 +163,26 @@ export const DebateStepPageVoteForm = ({
               )}
               <Text textAlign="center">
                 <span role="img" aria-label="vote" css={{ fontSize: 20, marginRight: 8 }}>
-                  {voteState === 'ARGUMENTED' ? '🎉' : '🗳️'}
+                  {voteState === 'ARGUMENTED' || voteState === 'NOT_CONFIRMED_ARGUMENTED'
+                    ? '🎉'
+                    : '🗳️'}
                 </span>
-                <FormattedMessage
-                  tagName={React.Fragment}
-                  id={
-                    voteState === 'ARGUMENTED' ? 'thanks-for-debate-richer' : 'thanks-for-your-vote'
-                  }
-                />
+                {voteState !== 'NONE' && voteState !== 'RESULT' && (
+                  <FormattedHTMLMessage id={bandMessage[voteState]} />
+                )}
               </Text>
             </>
           )}
           {!isMobile && (
             <>
               <span role="img" aria-label="vote" css={{ fontSize: 36, marginRight: 8 }}>
-                {voteState === 'ARGUMENTED' ? '🎉' : '🗳️'}
+                {voteState === 'ARGUMENTED' || voteState === 'NOT_CONFIRMED_ARGUMENTED'
+                  ? '🎉'
+                  : '🗳️'}
               </span>
-              <FormattedMessage
-                id={
-                  voteState === 'ARGUMENTED' ? 'thanks-for-debate-richer' : 'thanks-for-your-vote'
-                }
-              />
+              {voteState !== 'NONE' && voteState !== 'RESULT' && (
+                <FormattedHTMLMessage id={bandMessage[voteState]} />
+              )}
               <Button
                 css={css({
                   color: 'gray.700',
@@ -263,7 +273,9 @@ export const DebateStepPageVoteForm = ({
                   variant="primary"
                   variantColor="primary"
                   variantSize="big">
-                  <FormattedMessage id="argument.publish.mine" />
+                  <FormattedMessage
+                    id={viewerIsConfirmed ? 'argument.publish.mine' : 'global.validate'}
+                  />
                 </Button>
               </Flex>
             )}

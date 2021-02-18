@@ -6,6 +6,10 @@ import type {
   DebateStepPageArgumentsPagination_debate,
   DebateStepPageArgumentsPagination_debate$key,
 } from '~relay/DebateStepPageArgumentsPagination_debate.graphql';
+import type {
+  ArgumentCard_argument$data,
+  ArgumentCard_argument$ref,
+} from '~relay/ArgumentCard_argument.graphql';
 import type { DebateStepPageArgumentsPagination_viewer$key } from '~relay/DebateStepPageArgumentsPagination_viewer.graphql';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
@@ -22,6 +26,11 @@ type Props = {|
   +debate: DebateStepPageArgumentsPagination_debate$key & { +id: string },
   +viewer: ?DebateStepPageArgumentsPagination_viewer$key,
   +handleChange: ({ ...RelayHookPaginationProps, hasMore: boolean }) => void,
+  +viewerUnpublishedArgument: ?{
+    +$data?: ArgumentCard_argument$data,
+    +$fragmentRefs: ArgumentCard_argument$ref,
+    +id: string,
+  },
   +isStepFinished: boolean,
 |};
 
@@ -125,6 +134,7 @@ export const DebateStepPageArgumentsPagination = ({
   debate,
   viewer: viewerFragment,
   handleChange,
+  viewerUnpublishedArgument,
   isStepFinished,
 }: Props) => {
   const [argumentsQuery, paginationProps]: [
@@ -149,19 +159,30 @@ export const DebateStepPageArgumentsPagination = ({
 
   return (
     <>
+      {viewerUnpublishedArgument && (
+        <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
+          <ArgumentCard
+            isStepFinished={isStepFinished}
+            argument={viewerUnpublishedArgument}
+            viewer={viewer}
+            setArgumentReported={setArgumentReported}
+            setModerateArgumentModal={setModerateArgumentModal}
+            setDeleteModalInfo={setDeleteModalInfo}
+          />
+        </AppBox>
+      )}
       {debateArguments?.map(argument => (
         <AppBox key={argument.id} marginBottom={6}>
           <ArgumentCard
+            isStepFinished={isStepFinished}
             argument={argument}
             viewer={viewer}
             setArgumentReported={setArgumentReported}
             setModerateArgumentModal={setModerateArgumentModal}
             setDeleteModalInfo={setDeleteModalInfo}
-            isStepFinished={isStepFinished}
           />
         </AppBox>
       ))}
-
       {moderateArgumentModal && (
         <ModalModerateArgument
           argument={moderateArgumentModal}
@@ -175,14 +196,12 @@ export const DebateStepPageArgumentsPagination = ({
           ]}
         />
       )}
-
       {argumentReported && (
         <ModalReportArgument
           argument={argumentReported}
           onClose={() => setArgumentReported(null)}
         />
       )}
-
       {deleteModalInfo && (
         <ModalDeleteArgument
           debateId={debate.id}

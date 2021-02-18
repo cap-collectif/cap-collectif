@@ -9,6 +9,7 @@ const baseProps = {
   body: 'blabla le body',
   title: 'blabla le title',
   isAuthenticated: true,
+  url: 'step/123',
   step: {
     url: 'step/123',
     $refType,
@@ -34,6 +35,7 @@ const baseProps = {
     },
   },
   isMobile: false,
+  viewerIsConfirmedByEmail: true,
 };
 
 const props = {

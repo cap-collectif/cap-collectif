@@ -13,7 +13,7 @@ import Text from '~ui/Primitives/Text';
 type Props = {|
   ...AppBoxProps,
   ...TippyPlacementProps,
-  +label: React.Node,
+  +label: ?React.Node,
   +truncate?: number,
   +trigger?: $ReadOnlyArray<'mouseenter' | 'focus' | 'click' | 'focusin' | 'manual'>,
   +isDisabled?: boolean,
@@ -97,6 +97,8 @@ export const Tooltip = ({
     scale.set(INITIAL_SCALE);
     opacity.set(0);
   }
+  if (!label) return children || null;
+
   return (
     <Tippy
       disabled={isDisabled}

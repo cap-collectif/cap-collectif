@@ -41,6 +41,8 @@ const commit = (variables: Variables): Promise<DeleteDebateArgumentMutationRespo
         throw new Error('Expected debate to be in the store');
       }
 
+      store.delete(argument);
+
       const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', { first: 0 });
       if (!allArgumentsProxy) return;
       const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);

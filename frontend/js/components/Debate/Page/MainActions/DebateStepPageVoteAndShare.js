@@ -22,19 +22,29 @@ type Props = {|
   +isAuthenticated: boolean,
   +body: string,
   +title: string,
+  +url: string,
+  +viewerIsConfirmedByEmail: boolean,
 |};
 
 export const formName = 'debate-argument-form';
 
-export type VoteState = 'NONE' | 'VOTED' | 'ARGUMENTED' | 'RESULT';
+export type VoteState =
+  | 'NONE'
+  | 'VOTED'
+  | 'ARGUMENTED'
+  | 'RESULT'
+  | 'NOT_CONFIRMED'
+  | 'NOT_CONFIRMED_ARGUMENTED';
 
 const getInitialState = (
   debate: $PropertyType<DebateStepPageVoteAndShare_step, 'debate'>,
   isStepFinished: boolean,
+  viewerIsConfirmedByEmail: boolean,
 ): VoteState => {
   if (debate.viewerHasVote) {
-    if (debate.viewerHasArgument) return 'ARGUMENTED';
-    return 'VOTED';
+    if (debate.viewerHasArgument)
+      return viewerIsConfirmedByEmail ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED';
+    return viewerIsConfirmedByEmail ? 'VOTED' : 'NOT_CONFIRMED';
   }
 
   if (isStepFinished) return 'RESULT';
@@ -47,16 +57,20 @@ export const DebateStepPageVoteAndShare = ({
   body,
   title,
   isMobile,
+  viewerIsConfirmedByEmail,
   step,
 }: Props) => {
   const { debate, url, timeless, timeRange } = step;
   const isStepFinished = timeless
     ? false
     : timeRange?.endAt
-      ? moment().isAfter(moment(timeRange.endAt))
+    ? moment().isAfter(moment(timeRange.endAt))
     : false;
 
-  const [voteState, setVoteState] = useState<VoteState>(getInitialState(debate, isStepFinished));
+  const [voteState, setVoteState] = useState<VoteState>(
+    getInitialState(debate, isStepFinished, viewerIsConfirmedByEmail),
+  );
+
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
   const ref = useRef();
   const isVisible = useOnScreen(ref);
@@ -75,6 +89,7 @@ export const DebateStepPageVoteAndShare = ({
           setVoteState={setVoteState}
           showArgumentForm={showArgumentForm}
           setShowArgumentForm={setShowArgumentForm}
+          viewerIsConfirmed={viewerIsConfirmedByEmail}
         />
       )}
 
@@ -125,6 +140,7 @@ export const DebateStepPageVoteAndShare = ({
 
             {voteState !== 'RESULT' && (
               <DebateStepPageVoteForm
+                viewerIsConfirmed={viewerIsConfirmedByEmail}
                 isMobile={isMobile}
                 url={url}
                 debate={debate}
@@ -145,6 +161,7 @@ export const DebateStepPageVoteAndShare = ({
 const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState) => ({
+  viewerIsConfirmedByEmail: state.user?.user?.isEmailConfirmed,
   initialValues: {
     body: '',
   },

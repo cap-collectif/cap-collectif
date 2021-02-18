@@ -108,6 +108,10 @@ type TextAlign = {|
   textAlign?: Responsive<string>,
 |};
 
+type TextOverflow = {|
+  textOverflow?: Responsive<string>,
+|};
+
 type LineHeight = {|
   lineHeight?: NumberOrString,
 |};
@@ -298,6 +302,7 @@ export type AppBoxProps = {|
   ...Position,
   ...Color,
   ...TextAlign,
+  ...TextOverflow,
   ...LineHeight,
   ...AlignItems,
   ...Flex,

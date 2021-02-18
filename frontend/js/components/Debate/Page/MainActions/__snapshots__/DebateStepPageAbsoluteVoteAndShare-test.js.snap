@@ -138,6 +138,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumente
       setVoteState={[MockFunction]}
       showArgumentForm={true}
       url="step/123"
+      viewerIsConfirmed={true}
       voteState="ARGUMENTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
@@ -178,6 +179,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumente
       setVoteState={[MockFunction]}
       showArgumentForm={true}
       url="step/123"
+      viewerIsConfirmed={true}
       voteState="ARGUMENTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
@@ -216,6 +218,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted 1`]
       setVoteState={[MockFunction]}
       showArgumentForm={true}
       url="step/123"
+      viewerIsConfirmed={true}
       voteState="VOTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
@@ -256,6 +259,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted on 
       setVoteState={[MockFunction]}
       showArgumentForm={true}
       url="step/123"
+      viewerIsConfirmed={true}
       voteState="VOTED"
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>

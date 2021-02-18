@@ -10,7 +10,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
     height="100%"
   >
     <ForwardRef
-      alignItems="center"
+      alignItems="start"
       direction="row"
       justifyContent="space-between"
       mb={2}
@@ -18,15 +18,20 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
       <ForwardRef
         alignItems="center"
         direction="row"
+        flexWrap="wrap"
       >
         <Text
-          maxWidth="100px"
+          maxWidth="100%"
+          mb="8px !important"
           mr={2}
+          overflow="hidden"
         >
           Agui
         </Text>
         <Tag
           interactive={false}
+          mb={2}
+          mr={2}
           variant="green"
         >
           <Text
@@ -113,6 +118,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
           "id": "debate-123",
         },
         "id": "argumentPour42",
+        "published": true,
         "type": "FOR",
         "viewerCanReport": false,
         "viewerDidAuthor": false,
@@ -138,7 +144,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
     height="100%"
   >
     <ForwardRef
-      alignItems="center"
+      alignItems="start"
       direction="row"
       justifyContent="space-between"
       mb={2}
@@ -146,15 +152,20 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
       <ForwardRef
         alignItems="center"
         direction="row"
+        flexWrap="wrap"
       >
         <Text
-          maxWidth="100px"
+          maxWidth="100%"
+          mb="8px !important"
           mr={2}
+          overflow="hidden"
         >
           Agui
         </Text>
         <Tag
           interactive={false}
+          mb={2}
+          mr={2}
           variant="green"
         >
           <Text
@@ -241,6 +252,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
           "id": "debate-123",
         },
         "id": "argumentPour42",
+        "published": true,
         "type": "FOR",
         "viewerCanReport": false,
         "viewerDidAuthor": false,
@@ -266,7 +278,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
     height="100%"
   >
     <ForwardRef
-      alignItems="center"
+      alignItems="start"
       direction="row"
       justifyContent="space-between"
       mb={2}
@@ -274,15 +286,20 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
       <ForwardRef
         alignItems="center"
         direction="row"
+        flexWrap="wrap"
       >
         <Text
-          maxWidth="100px"
+          maxWidth="100%"
+          mb="8px !important"
           mr={2}
+          overflow="hidden"
         >
           Agui
         </Text>
         <Tag
           interactive={false}
+          mb={2}
+          mr={2}
           variant="green"
         >
           <Text
@@ -383,6 +400,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
           "id": "debate-123",
         },
         "id": "argumentPour42",
+        "published": true,
         "type": "FOR",
         "viewerCanReport": false,
         "viewerDidAuthor": true,
@@ -408,7 +426,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
     height="100%"
   >
     <ForwardRef
-      alignItems="center"
+      alignItems="start"
       direction="row"
       justifyContent="space-between"
       mb={2}
@@ -416,15 +434,20 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
       <ForwardRef
         alignItems="center"
         direction="row"
+        flexWrap="wrap"
       >
         <Text
-          maxWidth="100px"
+          maxWidth="100%"
+          mb="8px !important"
           mr={2}
+          overflow="hidden"
         >
           Agui
         </Text>
         <Tag
           interactive={false}
+          mb={2}
+          mr={2}
           variant="green"
         >
           <Text
@@ -557,6 +580,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
           "id": "debate-123",
         },
         "id": "argumentPour42",
+        "published": true,
         "type": "FOR",
         "viewerCanReport": true,
         "viewerDidAuthor": true,
@@ -582,7 +606,7 @@ exports[`<ArgumentCard /> renders correcty when step finished 1`] = `
     height="100%"
   >
     <ForwardRef
-      alignItems="center"
+      alignItems="start"
       direction="row"
       justifyContent="space-between"
       mb={2}
@@ -590,15 +614,20 @@ exports[`<ArgumentCard /> renders correcty when step finished 1`] = `
       <ForwardRef
         alignItems="center"
         direction="row"
+        flexWrap="wrap"
       >
         <Text
-          maxWidth="100px"
+          maxWidth="100%"
+          mb="8px !important"
           mr={2}
+          overflow="hidden"
         >
           Agui
         </Text>
         <Tag
           interactive={false}
+          mb={2}
+          mr={2}
           variant="green"
         >
           <Text
@@ -685,6 +714,7 @@ exports[`<ArgumentCard /> renders correcty when step finished 1`] = `
           "id": "debate-123",
         },
         "id": "argumentPour42",
+        "published": true,
         "type": "FOR",
         "viewerCanReport": false,
         "viewerDidAuthor": false,

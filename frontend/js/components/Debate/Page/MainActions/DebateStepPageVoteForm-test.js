@@ -16,6 +16,7 @@ describe('<DebateStepPageVoteForm/>', () => {
     showArgumentForm: true,
     setVoteState: jest.fn(),
     setShowArgumentForm: jest.fn(),
+    viewerIsConfirmed: true,
   };
 
   it('renders correcty', () => {

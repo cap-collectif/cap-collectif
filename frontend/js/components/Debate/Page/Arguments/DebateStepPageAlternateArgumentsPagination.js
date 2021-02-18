@@ -44,6 +44,11 @@ export const FRAGMENT = graphql`
       isAuthenticated: { type: "Boolean!" }
     ) {
     id
+    viewerUnpublishedArgument @include(if: $isAuthenticated) {
+      id
+      ...DebateStepPageArgumentDrawer_argument @arguments(isAuthenticated: $isAuthenticated)
+      ...ArgumentCard_argument @arguments(isAuthenticated: $isAuthenticated)
+    }
     alternateArguments(first: $first, after: $cursor, orderBy: $orderBy, isTrashed: false)
       @connection(
         key: "DebateStepPageAlternateArgumentsPagination_alternateArguments"
@@ -145,6 +150,8 @@ export const DebateStepPageAlternateArgumentsPagination = ({
       .reduce((prev, current) => [...prev, current.for, current.against], [])
       .filter(Boolean) ?? [];
 
+  const viewerUnpublishedArgument = debate?.viewerUnpublishedArgument;
+
   return (
     <>
       {preview ? (
@@ -157,17 +164,41 @@ export const DebateStepPageAlternateArgumentsPagination = ({
               slidesToShow: 1,
               arrows: false,
             }}>
+            {viewerUnpublishedArgument && (
+              <React.Fragment key={viewerUnpublishedArgument.id}>
+                <DebateStepPageArgumentDrawer
+                  isStepFinished={isStepFinished}
+                  key={`drawer-${viewerUnpublishedArgument.id}`}
+                  argument={viewerUnpublishedArgument}
+                  viewer={viewer}
+                  isOpen={isOpen(`drawer-${viewerUnpublishedArgument.id}`)}
+                  onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
+                />
+                <ArgumentCard
+                  isStepFinished={isStepFinished}
+                  height="100%"
+                  onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
+                  isMobile
+                  argument={viewerUnpublishedArgument}
+                  viewer={viewer}
+                  setArgumentReported={setArgumentReported}
+                  setModerateArgumentModal={setModerateArgumentModal}
+                  setDeleteModalInfo={setDeleteModalInfo}
+                />
+              </React.Fragment>
+            )}
             {debateArguments.slice(0, MOBILE_PREVIEW_MAX_ARGUMENTS).map(argument => (
               <React.Fragment key={argument.id}>
                 <DebateStepPageArgumentDrawer
+                  isStepFinished={isStepFinished}
                   key={`drawer-${argument.id}`}
                   argument={argument}
                   viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
-                  isStepFinished={isStepFinished}
                 />
                 <ArgumentCard
+                  isStepFinished={isStepFinished}
                   height="100%"
                   onReadMore={onOpen(`drawer-${argument.id}`)}
                   isMobile
@@ -176,7 +207,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
-                  isStepFinished={isStepFinished}
                 />
               </React.Fragment>
             ))}
@@ -198,6 +228,33 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             </Flex>
           }
           useWindow={false}>
+          {viewerUnpublishedArgument && (
+            <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
+              <>
+                <DebateStepPageArgumentDrawer
+                  isStepFinished={isStepFinished}
+                  key={`drawer-${viewerUnpublishedArgument.id}`}
+                  argument={viewerUnpublishedArgument}
+                  viewer={viewer}
+                  isOpen={isOpen(`drawer-${viewerUnpublishedArgument.id}`)}
+                  onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
+                />
+                <ArgumentCard
+                  isStepFinished={isStepFinished}
+                  key={viewerUnpublishedArgument.id}
+                  onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
+                  isMobile
+                  argument={viewerUnpublishedArgument}
+                  viewer={viewer}
+                  bg="neutral-gray.100"
+                  mb={6}
+                  setArgumentReported={setArgumentReported}
+                  setModerateArgumentModal={setModerateArgumentModal}
+                  setDeleteModalInfo={setDeleteModalInfo}
+                />
+              </>
+            </AppBox>
+          )}
           {debateArguments?.map(argument => (
             <AppBox key={argument.id} marginBottom={6}>
               <>

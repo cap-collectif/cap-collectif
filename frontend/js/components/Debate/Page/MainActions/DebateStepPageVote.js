@@ -31,7 +31,15 @@ const voteForDebate = (
     .then(response => {
       if (response.addDebateVote?.errorCode) {
         mutationErrorToast(intl);
-      } else onSuccess(viewerHasArgument ? 'ARGUMENTED' : 'VOTED');
+      } else {
+        onSuccess(
+          response.addDebateVote?.debateVote?.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
+            ? 'NOT_CONFIRMED'
+            : viewerHasArgument
+            ? 'ARGUMENTED'
+            : 'VOTED',
+        );
+      }
     })
     .catch(() => {
       mutationErrorToast(intl);

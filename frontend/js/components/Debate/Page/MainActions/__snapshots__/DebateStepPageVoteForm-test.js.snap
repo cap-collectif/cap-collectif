@@ -50,10 +50,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
     >
       🗳️
     </DebateStepPageVoteForm___StyledSpan2>
-    <FormattedMessage
-      id="thanks-for-your-vote"
-      values={Object {}}
-    />
     <DebateStepPageVoteForm___StyledButton2
       _css2={[Function]}
       ml={2}
@@ -195,11 +191,6 @@ exports[`<DebateStepPageVoteForm/> renders correcty on mobile 1`] = `
       >
         🗳️
       </DebateStepPageVoteForm___StyledSpan>
-      <FormattedMessage
-        id="thanks-for-your-vote"
-        tagName={Symbol(react.fragment)}
-        values={Object {}}
-      />
     </Text>
   </ForwardRef>
   <Connect(MobilePublishArgumentModal)
@@ -271,8 +262,9 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
     >
       🎉
     </DebateStepPageVoteForm___StyledSpan2>
-    <FormattedMessage
+    <FormattedHTMLMessage
       id="thanks-for-debate-richer"
+      tagName="span"
       values={Object {}}
     />
     <DebateStepPageVoteForm___StyledButton2
@@ -457,9 +449,9 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented on mobile 1`
       >
         🎉
       </DebateStepPageVoteForm___StyledSpan>
-      <FormattedMessage
+      <FormattedHTMLMessage
         id="thanks-for-debate-richer"
-        tagName={Symbol(react.fragment)}
+        tagName="span"
         values={Object {}}
       />
     </Text>
@@ -574,8 +566,9 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
     >
       🗳️
     </DebateStepPageVoteForm___StyledSpan2>
-    <FormattedMessage
+    <FormattedHTMLMessage
       id="thanks-for-your-vote"
+      tagName="span"
       values={Object {}}
     />
     <DebateStepPageVoteForm___StyledButton2
@@ -719,9 +712,9 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted on mobile 1`] = `
       >
         🗳️
       </DebateStepPageVoteForm___StyledSpan>
-      <FormattedMessage
+      <FormattedHTMLMessage
         id="thanks-for-your-vote"
-        tagName={Symbol(react.fragment)}
+        tagName="span"
         values={Object {}}
       />
     </Text>

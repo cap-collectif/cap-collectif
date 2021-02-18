@@ -25,6 +25,7 @@ const defaultProps = {
     viewerHasVote: false,
     viewerDidAuthor: false,
     viewerCanReport: false,
+    published: true,
   },
   setArgumentReported: jest.fn(),
   setModerateArgumentModal: jest.fn(),

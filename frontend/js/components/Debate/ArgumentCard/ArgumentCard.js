@@ -28,6 +28,7 @@ import ArgumentCardFormEdition from './ArgumentCardFormEdition';
 import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalReportArgumentMobile';
 import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
 import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
+import Tooltip from '~ds/Tooltip/Tooltip';
 
 type Props = {|
   ...AppBoxProps,
@@ -93,18 +94,46 @@ export const ArgumentCard = ({
   return (
     <Card p={6} bg="white" {...props}>
       <Flex height="100%" direction="column">
-        <Flex mb={2} direction="row" justifyContent="space-between" alignItems="center">
-          <Flex direction="row" alignItems="center">
-            <Text maxWidth="100px" mr={2}>
+        <Flex mb={2} direction="row" justifyContent="space-between" alignItems="start">
+          <Flex direction="row" alignItems="center" flexWrap="wrap">
+            <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
               {argument.author.username}
             </Text>
-            <Tag variant={argument.type === 'FOR' ? 'green' : 'red'} interactive={false}>
+            <Tag
+              mb={2}
+              variant={argument.type === 'FOR' ? 'green' : 'red'}
+              interactive={false}
+              mr={2}>
               <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
               </Text>
             </Tag>
-          </Flex>
 
+            {!argument.published && (
+              <Tooltip
+                label={
+                  isStepFinished
+                    ? intl.formatMessage({ id: 'account-not-confirmed-end-step' })
+                    : null
+                }>
+                <Tag
+                  mb={2}
+                  maxWidth="none !important"
+                  variant={isStepFinished ? 'red' : 'orange'}
+                  interactive={false}
+                  icon={isStepFinished ? ICON_NAME.CIRCLE_CROSS : ICON_NAME.CLOCK}>
+                  <Text
+                    as="span"
+                    fontSize={1}
+                    lineHeight={LineHeight.SM}
+                    fontWeight="700"
+                    uppercase>
+                    <FormattedMessage id={isStepFinished ? 'post_is_not_public' : 'publish.wait'} />
+                  </Text>
+                </Tag>
+              </Tooltip>
+            )}
+          </Flex>
           <Flex direction="row" align="center">
             {isViewerAdmin &&
               !isAuthor &&
@@ -257,6 +286,7 @@ export default createFragmentContainer(ArgumentCard, {
         id
       }
       type
+      published
       viewerCanReport @include(if: $isAuthenticated)
       viewerDidAuthor @include(if: $isAuthenticated)
       viewerHasVote @include(if: $isAuthenticated)

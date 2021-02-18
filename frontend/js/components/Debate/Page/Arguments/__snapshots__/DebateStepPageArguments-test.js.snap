@@ -2,6 +2,7 @@
 
 exports[`<DebateStepPageArguments /> renders correctly 1`] = `
 <Relay(DesktopDebateStepPageArguments)
+  isStepFinished={false}
   step={
     Object {
       "$refType": null,
@@ -47,6 +48,7 @@ exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
         "id": "debat-cannabis",
       }
     }
+    isStepFinished={false}
     step={
       Object {
         "$refType": null,
@@ -83,6 +85,7 @@ exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
 
 exports[`<DebateStepPageArguments /> renders correctly when no viewer 1`] = `
 <Relay(DesktopDebateStepPageArguments)
+  isStepFinished={false}
   step={
     Object {
       "$refType": null,

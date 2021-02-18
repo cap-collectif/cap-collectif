@@ -9,6 +9,7 @@ const baseProps = {
   body: 'blabla le body',
   title: 'blabla le title',
   isAuthenticated: true,
+  viewerIsConfirmed: true,
   step: {
     $refType,
     url: 'step/123',

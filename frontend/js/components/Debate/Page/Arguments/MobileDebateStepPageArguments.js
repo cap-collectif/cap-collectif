@@ -2,7 +2,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-relay';
-import moment from 'moment';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { useFragment } from 'relay-hooks';
 import Heading from '~ui/Primitives/Heading';
@@ -25,6 +24,7 @@ type Props = {|
   +debate: MobileDebateStepPageArguments_debate$key,
   +viewer: ?MobileDebateStepPageArguments_viewer$key,
   +step: ?DebateStepPageArguments_step,
+  +isStepFinished: boolean,
 |};
 
 const DEBATE_FRAGMENT = graphql`
@@ -52,7 +52,7 @@ const VIEWER_FRAGMENT = graphql`
 export const MobileDebateStepPageArguments = ({
   debate: debateFragment,
   viewer: viewerFragment,
-  step,
+  isStepFinished,
 }: Props) => {
   const debate: MobileDebateStepPageArguments_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
   const viewer: MobileDebateStepPageArguments_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
@@ -61,12 +61,6 @@ export const MobileDebateStepPageArguments = ({
   if (!debate) return null;
 
   const argumentsCount: number = debate.arguments?.totalCount ?? 0;
-
-  const isStepFinished = step?.timeless
-    ? false
-    : step?.timeRange?.endAt
-    ? moment().isAfter(moment(step.timeRange.endAt))
-    : false;
 
   return (
     <AppBox id="DebateStepPageArguments">

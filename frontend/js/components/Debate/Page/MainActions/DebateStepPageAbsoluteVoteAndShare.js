@@ -20,6 +20,7 @@ type Props = {|
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
   +setShowArgumentForm: boolean => void,
+  +viewerIsConfirmed: boolean,
 |};
 
 export const DebateStepPageAbsoluteVoteAndShare = ({
@@ -32,6 +33,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   setVoteState,
   showArgumentForm,
   setShowArgumentForm,
+  viewerIsConfirmed,
 }: Props) => {
   const { debate, url } = step;
 
@@ -73,9 +75,9 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             />
           </Flex>
         )}
-
         {voteState !== 'NONE' && (
           <DebateStepPageVoteForm
+            viewerIsConfirmed={viewerIsConfirmed}
             isMobile={isMobile}
             isAbsolute
             url={url}

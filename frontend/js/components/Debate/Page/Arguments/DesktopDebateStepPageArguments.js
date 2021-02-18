@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
 import type { DesktopDebateStepPageArguments_viewer } from '~relay/DesktopDebateStepPageArguments_viewer.graphql';
 import Heading from '~ui/Primitives/Heading';
@@ -23,9 +22,10 @@ import type { Filter } from '~/components/Debate/Page/Arguments/types';
 type Props = {|
   +step: ?DebateStepPageArguments_step,
   +viewer: ?DesktopDebateStepPageArguments_viewer,
+  +isStepFinished: boolean,
 |};
 
-export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
+export const DesktopDebateStepPageArguments = ({ step, viewer, isStepFinished }: Props) => {
   const [filter, setFilter] = useState<Filter>('DESC');
   const [yesState, setYesState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
   const [noState, setNoState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
@@ -34,12 +34,9 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
 
   if (!step) return null;
 
+  const viewerUnpublishedArgument = step?.debate?.viewerUnpublishedArgument;
+
   const argumentsCount = step?.debate?.arguments?.totalCount || 0;
-  const isStepFinished = step.timeless
-    ? false
-    : step?.timeRange?.endAt
-    ? moment().isAfter(moment(step.timeRange.endAt))
-    : false;
 
   return (
     <AppBox id="DebateStepPageArguments">
@@ -103,23 +100,29 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
       <Flex direction="row" spacing={6}>
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
+            isStepFinished={isStepFinished}
+            viewerUnpublishedArgument={
+              viewerUnpublishedArgument?.type === 'FOR' ? viewerUnpublishedArgument : null
+            }
             debate={step.yesDebate}
             viewer={viewer}
             handleChange={value => {
               if (value.hasMore !== yesState?.hasMore) setYesState(value);
             }}
-            isStepFinished={isStepFinished}
           />
         </Flex>
 
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
+            isStepFinished={isStepFinished}
+            viewerUnpublishedArgument={
+              viewerUnpublishedArgument?.type === 'AGAINST' ? viewerUnpublishedArgument : null
+            }
             debate={step.noDebate}
             viewer={viewer}
             handleChange={value => {
               if (value.hasMore !== noState?.hasMore) setNoState(value);
             }}
-            isStepFinished={isStepFinished}
           />
         </Flex>
       </Flex>

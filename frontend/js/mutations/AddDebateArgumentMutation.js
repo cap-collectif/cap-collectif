@@ -17,7 +17,7 @@ const mutation = graphql`
   ) {
     createDebateArgument(input: $input) {
       errorCode
-      debateArgument @appendNode(connections: $connections, edgeTypeName: $edgeTypeName) {
+      debateArgument @prependNode(connections: $connections, edgeTypeName: $edgeTypeName) {
         votes(first: 0) {
           totalCount
         }
@@ -25,6 +25,8 @@ const mutation = graphql`
           id
           username
         }
+        id
+        published
         body
         type
         viewerDidAuthor
