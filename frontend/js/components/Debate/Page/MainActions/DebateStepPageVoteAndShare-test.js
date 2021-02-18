@@ -31,6 +31,7 @@ const baseProps = {
     },
     timeless: false,
     timeRange: {
+      startAt: '2030-02-10 00:00:00',
       endAt: '2030-03-10 00:00:00',
     },
   },
@@ -50,6 +51,7 @@ const props = {
       ...baseProps.step,
       timeless: true,
       timeRange: {
+        startAt: null,
         endAt: null,
       },
     },

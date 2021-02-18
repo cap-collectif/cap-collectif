@@ -39,7 +39,7 @@ type Props = {|
   +setArgumentReported: (argument: ArgumentReported) => void,
   +setModerateArgumentModal: (argument: ModerateArgument) => void,
   +setDeleteModalInfo: ({ id: string, type: ForOrAgainstValue }) => void,
-  +isStepFinished: boolean,
+  +isStepClosed: boolean,
 |};
 
 export const voteForArgument = (
@@ -81,7 +81,7 @@ export const ArgumentCard = ({
   setModerateArgumentModal,
   setArgumentReported,
   setDeleteModalInfo,
-  isStepFinished,
+  isStepClosed,
   ...props
 }: Props) => {
   const isViewerAdmin = viewer && viewer.isAdmin;
@@ -112,23 +112,21 @@ export const ArgumentCard = ({
             {!argument.published && (
               <Tooltip
                 label={
-                  isStepFinished
-                    ? intl.formatMessage({ id: 'account-not-confirmed-end-step' })
-                    : null
+                  isStepClosed ? intl.formatMessage({ id: 'account-not-confirmed-end-step' }) : null
                 }>
                 <Tag
                   mb={2}
                   maxWidth="none !important"
-                  variant={isStepFinished ? 'red' : 'orange'}
+                  variant={isStepClosed ? 'red' : 'orange'}
                   interactive={false}
-                  icon={isStepFinished ? ICON_NAME.CIRCLE_CROSS : ICON_NAME.CLOCK}>
+                  icon={isStepClosed ? ICON_NAME.CIRCLE_CROSS : ICON_NAME.CLOCK}>
                   <Text
                     as="span"
                     fontSize={1}
                     lineHeight={LineHeight.SM}
                     fontWeight="700"
                     uppercase>
-                    <FormattedMessage id={isStepFinished ? 'post_is_not_public' : 'publish.wait'} />
+                    <FormattedMessage id={isStepClosed ? 'post_is_not_public' : 'publish.wait'} />
                   </Text>
                 </Tag>
               </Tooltip>
@@ -155,7 +153,7 @@ export const ArgumentCard = ({
               ))}
 
             {isAuthor &&
-              !isStepFinished &&
+              !isStepClosed &&
               (!isMobile ? (
                 <>
                   {!isEditing && (
@@ -179,7 +177,7 @@ export const ArgumentCard = ({
               ))}
 
             {argument.viewerCanReport &&
-              !isStepFinished &&
+              !isStepClosed &&
               (!isMobile ? (
                 <Menu>
                   <Menu.Button as={React.Fragment}>
@@ -246,7 +244,7 @@ export const ArgumentCard = ({
 
         {!isEditing && (
           <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
-            <LoginOverlay enabled={!isStepFinished}>
+            <LoginOverlay enabled={!isStepClosed}>
               <Button
                 color="neutral-gray.500"
                 leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -254,7 +252,7 @@ export const ArgumentCard = ({
                 aria-label={intl.formatMessage({
                   id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
                 })}
-                disabled={isStepFinished}
+                disabled={isStepClosed}
               />
             </LoginOverlay>
             <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">

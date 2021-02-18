@@ -26,7 +26,11 @@ export const VoteHeaderTab = ({ debate, debateStep }: Props) => {
     ? false
     : debateStep?.timeRange?.endAt
     ? moment().isAfter(moment(debateStep.timeRange.endAt))
-    : false;
+    : true;
+  const isStartedAndNoEndDate = debateStep.timeless
+    ? false
+    : !debateStep?.timeRange?.endAt && moment().isAfter(moment(debateStep.timeRange.startAt));
+  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
 
   return (
     <Flex direction="column" mb={4}>
@@ -45,7 +49,7 @@ export const VoteHeaderTab = ({ debate, debateStep }: Props) => {
           <InlineSelect.Choice value="WAITING">
             {intl.formatMessage(
               {
-                id: isStepFinished
+                id: isStepClosed
                   ? 'filter.count.status.non.published'
                   : 'filter.count.status.awaiting',
               },
@@ -78,7 +82,7 @@ export const VoteHeaderTab = ({ debate, debateStep }: Props) => {
       {parameters.filters.vote.state === 'WAITING' && (
         <Text color="gray.500">
           {intl.formatMessage({
-            id: isStepFinished
+            id: isStepClosed
               ? 'votes-with-account-not-confirmed-before-end-step'
               : 'votes-waiting-user-email-confirmation',
           })}
@@ -110,6 +114,7 @@ export default createFragmentContainer(VoteHeaderTab, {
     fragment VoteHeaderTab_debateStep on Step {
       timeless
       timeRange {
+        startAt
         endAt
       }
     }

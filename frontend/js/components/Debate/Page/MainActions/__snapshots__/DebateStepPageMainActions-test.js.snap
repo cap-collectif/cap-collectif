@@ -19,7 +19,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
         variantType="badge"
       >
         <RemainingTime
-          endAt="2021-18-02:00:00"
+          endAt="2030-03-10 00:00:00"
           noStyle={true}
         />
       </Tag>
@@ -39,7 +39,8 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "timeRange": Object {
-              "endAt": "2021-18-02:00:00",
+              "endAt": "2030-03-10 00:00:00",
+              "startAt": "2030-02-10 00:00:00",
             },
             "timeless": false,
           }
@@ -70,7 +71,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
         variantType="badge"
       >
         <RemainingTime
-          endAt="2021-18-02:00:00"
+          endAt="2030-03-10 00:00:00"
           noStyle={true}
         />
       </Tag>
@@ -90,7 +91,8 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "timeRange": Object {
-              "endAt": "2021-18-02:00:00",
+              "endAt": "2030-03-10 00:00:00",
+              "startAt": "2030-02-10 00:00:00",
             },
             "timeless": false,
           }
@@ -132,6 +134,7 @@ exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`
             "$refType": null,
             "timeRange": Object {
               "endAt": null,
+              "startAt": null,
             },
             "timeless": true,
           }

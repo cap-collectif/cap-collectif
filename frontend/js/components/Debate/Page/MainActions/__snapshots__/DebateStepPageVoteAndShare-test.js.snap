@@ -34,6 +34,7 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
         },
         "timeRange": Object {
           "endAt": "2030-03-10 00:00:00",
+          "startAt": "2030-02-10 00:00:00",
         },
         "timeless": false,
         "url": "step/123",
@@ -92,6 +93,7 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
         },
         "timeRange": Object {
           "endAt": "2030-03-10 00:00:00",
+          "startAt": "2030-02-10 00:00:00",
         },
         "timeless": false,
         "url": "step/123",
@@ -150,6 +152,7 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly when timeless step 1`] 
         },
         "timeRange": Object {
           "endAt": null,
+          "startAt": null,
         },
         "timeless": true,
         "url": "step/123",

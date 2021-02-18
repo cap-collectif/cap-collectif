@@ -38,16 +38,16 @@ export type VoteState =
 
 const getInitialState = (
   debate: $PropertyType<DebateStepPageVoteAndShare_step, 'debate'>,
-  isStepFinished: boolean,
+  isStepClosed: boolean,
   viewerIsConfirmedByEmail: boolean,
 ): VoteState => {
-  if (debate.viewerHasVote) {
+  if (debate.viewerHasVote && !isStepClosed) {
     if (debate.viewerHasArgument)
       return viewerIsConfirmedByEmail ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED';
     return viewerIsConfirmedByEmail ? 'VOTED' : 'NOT_CONFIRMED';
   }
 
-  if (isStepFinished) return 'RESULT';
+  if (isStepClosed) return 'RESULT';
 
   return 'NONE';
 };
@@ -66,9 +66,13 @@ export const DebateStepPageVoteAndShare = ({
     : timeRange?.endAt
     ? moment().isAfter(moment(timeRange.endAt))
     : false;
+  const isStartedAndNoEndDate = timeless
+    ? false
+    : !timeRange?.endAt && moment().isAfter(moment(timeRange.startAt));
+  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
 
   const [voteState, setVoteState] = useState<VoteState>(
-    getInitialState(debate, isStepFinished, viewerIsConfirmedByEmail),
+    getInitialState(debate, isStepClosed, viewerIsConfirmedByEmail),
   );
 
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
@@ -78,7 +82,7 @@ export const DebateStepPageVoteAndShare = ({
 
   return (
     <>
-      {!isVisible && !isStepFinished && (
+      {!isVisible && !isStepClosed && (
         <DebateStepPageAbsoluteVoteAndShare
           isMobile={isMobile}
           title={title}
@@ -103,7 +107,7 @@ export const DebateStepPageVoteAndShare = ({
           />
         )}
 
-        {isStepFinished && (
+        {isStepClosed && (
           <AppBox textAlign="center" mb={6}>
             <Text color="neutral-gray.700">
               {intl.formatMessage({ id: 'thanks-participation-debate-ended' })}
@@ -129,7 +133,7 @@ export const DebateStepPageVoteAndShare = ({
               isMobile={isMobile}
               positivePercentage={(debate.yesVotes.totalCount / debate.votes.totalCount) * 100}
               votesCount={
-                voteState === 'RESULT'
+                isStepClosed
                   ? {
                       FOR: debate.yesVotes.totalCount,
                       AGAINST: debate.votes.totalCount - debate.yesVotes.totalCount,
@@ -138,7 +142,7 @@ export const DebateStepPageVoteAndShare = ({
               }
             />
 
-            {voteState !== 'RESULT' && (
+            {!isStepClosed && (
               <DebateStepPageVoteForm
                 viewerIsConfirmed={viewerIsConfirmedByEmail}
                 isMobile={isMobile}
@@ -181,6 +185,7 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
       url
       timeless
       timeRange {
+        startAt
         endAt
       }
       debate {

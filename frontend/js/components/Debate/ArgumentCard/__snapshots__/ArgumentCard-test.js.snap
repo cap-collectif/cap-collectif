@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ArgumentCard /> renders correcty 1`] = `
+exports[`<ArgumentCard /> renders correctly 1`] = `
 <Card
   bg="white"
   p={6}
@@ -134,7 +134,7 @@ exports[`<ArgumentCard /> renders correcty 1`] = `
 </Card>
 `;
 
-exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
+exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
 <Card
   bg="white"
   p={6}
@@ -268,7 +268,7 @@ exports[`<ArgumentCard /> renders correcty on mobile 1`] = `
 </Card>
 `;
 
-exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
+exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
 <Card
   bg="white"
   p={6}
@@ -416,7 +416,7 @@ exports[`<ArgumentCard /> renders correcty when connected as admin 1`] = `
 </Card>
 `;
 
-exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
+exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
 <Card
   bg="white"
   p={6}
@@ -596,7 +596,7 @@ exports[`<ArgumentCard /> renders correcty when connected as viewer 1`] = `
 </Card>
 `;
 
-exports[`<ArgumentCard /> renders correcty when step finished 1`] = `
+exports[`<ArgumentCard /> renders correctly when step finished 1`] = `
 <Card
   bg="white"
   p={6}

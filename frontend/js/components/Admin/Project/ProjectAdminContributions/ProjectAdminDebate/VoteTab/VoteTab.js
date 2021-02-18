@@ -69,6 +69,11 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
     : debateStep?.timeRange?.endAt
     ? moment().isAfter(moment(debateStep.timeRange.endAt))
     : false;
+  const isStartedAndNoEndDate = debateStep.timeless
+    ? false
+    : !debateStep?.timeRange?.endAt && moment().isAfter(moment(debateStep.timeRange.startAt));
+  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+
   const listVoteRef = React.useRef(null);
 
   const { FOR: votesFor, AGAINST: votesAgainst } = React.useMemo(
@@ -125,7 +130,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
                   id:
                     parameters.filters.vote.state === 'PUBLISHED'
                       ? 'no-vote-for-published'
-                      : isStepFinished
+                      : isStepClosed
                       ? 'no-vote-for-non-published'
                       : 'no-vote-for-waiting-for-published',
                 })}
@@ -149,7 +154,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
                   id:
                     parameters.filters.vote.state === 'PUBLISHED'
                       ? 'no-vote-against-published'
-                      : isStepFinished
+                      : isStepClosed
                       ? 'no-vote-against-non-published'
                       : 'no-vote-against-waiting-for-published',
                 })}
@@ -200,6 +205,7 @@ export default createPaginationContainer(
         id
         timeless
         timeRange {
+          startAt
           endAt
         }
       }

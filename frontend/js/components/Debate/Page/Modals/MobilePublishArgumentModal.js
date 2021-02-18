@@ -1,6 +1,6 @@
 // @flow
-
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Field, isInvalid, isPristine, reset } from 'redux-form';
@@ -34,6 +34,7 @@ export const MobilePublishArgumentModal = ({
   invalid,
   title,
 }: Props) => {
+  const intl = useIntl();
   const { startLoading, stopLoading, isLoading } = useLoadingMachine();
   const focusInputRef = useCallback(node => {
     if (node !== null) {
@@ -85,7 +86,7 @@ export const MobilePublishArgumentModal = ({
           width="100%"
           isLoading={isLoading}
           justifyContent="center">
-          Publier
+          {intl.formatMessage({ id: 'global.publish' })}
         </Button>
       </Modal.Footer>
     </Modal>

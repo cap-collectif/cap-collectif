@@ -32,7 +32,7 @@ const defaultProps = {
   setDeleteModalInfo: jest.fn(),
   isMobile: false,
   viewer: null,
-  isStepFinished: false,
+  isStepClosed: false,
 };
 
 const props = {
@@ -69,35 +69,35 @@ const props = {
       isAdmin: true,
     },
   },
-  whenStepFinished: {
+  whenStepClosed: {
     ...defaultProps,
-    isStepFinished: true,
+    isStepClosed: true,
   },
 };
 
 describe('<ArgumentCard />', () => {
-  it('renders correcty', () => {
+  it('renders correctly', () => {
     const wrapper = shallow(<ArgumentCard {...props.basic} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty on mobile', () => {
+  it('renders correctly on mobile', () => {
     const wrapper = shallow(<ArgumentCard {...props.isMobile} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when connected as viewer', () => {
+  it('renders correctly when connected as viewer', () => {
     const wrapper = shallow(<ArgumentCard {...props.asViewer} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when connected as admin', () => {
+  it('renders correctly when connected as admin', () => {
     const wrapper = shallow(<ArgumentCard {...props.asViewerAdmin} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty when step finished', () => {
-    const wrapper = shallow(<ArgumentCard {...props.whenStepFinished} />);
+  it('renders correctly when step finished', () => {
+    const wrapper = shallow(<ArgumentCard {...props.whenStepClosed} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

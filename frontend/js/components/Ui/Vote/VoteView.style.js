@@ -221,14 +221,14 @@ export const Container: StyledComponent<
       line-height: 24px;
       color: #2b2b2b;
 
-      > span:first-child {
+      > .for-percentage {
         text-align: right;
         margin-right: 22px;
         margin-left: -12px;
         width: ${left}%;
       }
 
-      > span::last-child {
+      > .against-percentage {
         margin-left: 5px;
         width: calc(${right}% - 10px);
       }

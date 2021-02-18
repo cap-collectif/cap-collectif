@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 import Icon from '~ds/Icon/Icon';
 import { Container } from './VoteView.style';
@@ -26,6 +26,8 @@ const MobileTextPercentage = styled(Text).attrs({
 })``;
 
 export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) => {
+  const intl = useIntl();
+
   if (positivePercentage < 0 || positivePercentage > 100) return null;
 
   const left = positivePercentage;
@@ -98,9 +100,41 @@ export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) =>
           <span className="progressBar red" />
         </span>
       </div>
+
       <div>
-        {left ? <span>{votesCount ? votesCount.FOR : leftPercentage}</span> : null}
-        {right ? <span>{votesCount ? votesCount.AGAINST : rightPercentage}</span> : null}
+        {left ? (
+          <Text as="span" color="neutral-gray.900" fontWeight="semibold" className="for-percentage">
+            {votesCount ? (
+              <Text as="span">
+                {`${votesCount.FOR} ${intl
+                  .formatMessage({ id: 'argument.show.type.for' })
+                  .toLowerCase()}`}
+              </Text>
+            ) : (
+              leftPercentage
+            )}
+          </Text>
+        ) : null}
+
+        {right ? (
+          <Text
+            as="span"
+            color="neutral-gray.900"
+            fontWeight="semibold"
+            className="against-percentage">
+            {votesCount ? (
+              <Text as="span">
+                {`${votesCount.AGAINST} ${intl
+                  .formatMessage({
+                    id: 'argument.show.type.against',
+                  })
+                  .toLowerCase()}`}
+              </Text>
+            ) : (
+              rightPercentage
+            )}
+          </Text>
+        ) : null}
       </div>
     </Container>
   );

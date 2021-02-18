@@ -35,8 +35,12 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
   const isStepFinished = debateStep.timeless
     ? false
     : debateStep?.timeRange?.endAt
-      ? moment().isAfter(moment(debateStep.timeRange.endAt))
+    ? moment().isAfter(moment(debateStep.timeRange.endAt))
     : false;
+  const isStartedAndNoEndDate = debateStep.timeless
+    ? false
+    : !debateStep?.timeRange?.endAt && moment().isAfter(moment(debateStep.timeRange.startAt));
+  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
 
   return (
     <Flex direction="column" mb={4}>
@@ -55,7 +59,7 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
           <InlineSelect.Choice value="WAITING">
             {intl.formatMessage(
               {
-                id: isStepFinished
+                id: isStepClosed
                   ? 'filter.count.status.non.published'
                   : 'filter.count.status.awaiting',
               },
@@ -115,7 +119,7 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
       {parameters.filters.argument.state === 'WAITING' && hasArgumentForOrAgainst && (
         <Text color="gray.500">
           {intl.formatMessage({
-            id: isStepFinished
+            id: isStepClosed
               ? 'arguments-with-account-not-confirmed-before-end-step'
               : 'arguments-waiting-user-email-confirmation',
           })}
@@ -161,6 +165,7 @@ export default createFragmentContainer(ArgumentHeaderTab, {
     fragment ArgumentHeaderTab_debateStep on Step {
       timeless
       timeRange {
+        startAt
         endAt
       }
     }

@@ -126,9 +126,8 @@ export const DebateStepPageVoteForm = ({
       setVoteState('ARGUMENTED');
     });
 
-  const title = intl.formatMessage({
-    id: viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against',
-  });
+  const title = viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against';
+
   return (
     <motion.div
       style={{ width: '100%' }}
@@ -285,7 +284,7 @@ export const DebateStepPageVoteForm = ({
       {showArgumentForm && isMobile && (
         <>
           <MobilePublishArgumentModal
-            title={title}
+            title={intl.formatMessage({ id: title })}
             show={showArgumentForm && isOpen}
             onClose={onClose}
             onSubmit={publishArgument}

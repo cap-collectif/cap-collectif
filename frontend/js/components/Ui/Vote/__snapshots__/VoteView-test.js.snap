@@ -113,12 +113,30 @@ exports[`<VoteView /> should not render when step is finished 1`] = `
     </span>
   </div>
   <div>
-    <span>
-      12
-    </span>
-    <span>
-      15
-    </span>
+    <Text
+      as="span"
+      className="for-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
+      <Text
+        as="span"
+      >
+        12 argument.show.type.for
+      </Text>
+    </Text>
+    <Text
+      as="span"
+      className="against-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
+      <Text
+        as="span"
+      >
+        15 argument.show.type.against
+      </Text>
+    </Text>
   </div>
 </VoteViewstyle__Container>
 `;
@@ -279,12 +297,22 @@ exports[`<VoteView /> should render correctly 1`] = `
     </span>
   </div>
   <div>
-    <span>
+    <Text
+      as="span"
+      className="for-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
       42%
-    </span>
-    <span>
+    </Text>
+    <Text
+      as="span"
+      className="against-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
       58%
-    </span>
+    </Text>
   </div>
 </VoteViewstyle__Container>
 `;
@@ -434,9 +462,14 @@ exports[`<VoteView /> should render correctly when 0% positive 1`] = `
     </span>
   </div>
   <div>
-    <span>
+    <Text
+      as="span"
+      className="against-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
       100%
-    </span>
+    </Text>
   </div>
 </VoteViewstyle__Container>
 `;
@@ -597,9 +630,14 @@ exports[`<VoteView /> should render correctly when 100% positive 1`] = `
     </span>
   </div>
   <div>
-    <span>
+    <Text
+      as="span"
+      className="for-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
       100%
-    </span>
+    </Text>
   </div>
 </VoteViewstyle__Container>
 `;

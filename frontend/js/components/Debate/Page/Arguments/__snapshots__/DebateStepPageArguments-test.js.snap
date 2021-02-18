@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageArguments /> renders correctly 1`] = `
 <Relay(DesktopDebateStepPageArguments)
-  isStepFinished={false}
+  isStepClosed={false}
   step={
     Object {
       "$refType": null,
@@ -18,7 +18,8 @@ exports[`<DebateStepPageArguments /> renders correctly 1`] = `
         "id": "debat-cannabis",
       },
       "timeRange": Object {
-        "endAt": "2021-18-02:00:00",
+        "endAt": "2030-03-10 00:00:00",
+        "startAt": "2030-02-10 00:00:00",
       },
       "timeless": false,
       "yesDebate": Object {
@@ -48,31 +49,7 @@ exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
         "id": "debat-cannabis",
       }
     }
-    isStepFinished={false}
-    step={
-      Object {
-        "$refType": null,
-        "debate": Object {
-          "$fragmentRefs": null,
-          "arguments": Object {
-            "totalCount": 7,
-          },
-          "id": "debat-cannabis",
-        },
-        "noDebate": Object {
-          "$fragmentRefs": null,
-          "id": "debat-cannabis",
-        },
-        "timeRange": Object {
-          "endAt": "2021-18-02:00:00",
-        },
-        "timeless": false,
-        "yesDebate": Object {
-          "$fragmentRefs": null,
-          "id": "debat-cannabis",
-        },
-      }
-    }
+    isStepClosed={false}
     viewer={
       Object {
         "$fragmentRefs": null,
@@ -85,7 +62,7 @@ exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
 
 exports[`<DebateStepPageArguments /> renders correctly when no viewer 1`] = `
 <Relay(DesktopDebateStepPageArguments)
-  isStepFinished={false}
+  isStepClosed={false}
   step={
     Object {
       "$refType": null,
@@ -101,7 +78,8 @@ exports[`<DebateStepPageArguments /> renders correctly when no viewer 1`] = `
         "id": "debat-cannabis",
       },
       "timeRange": Object {
-        "endAt": "2021-18-02:00:00",
+        "endAt": "2030-03-10 00:00:00",
+        "startAt": "2030-02-10 00:00:00",
       },
       "timeless": false,
       "yesDebate": Object {

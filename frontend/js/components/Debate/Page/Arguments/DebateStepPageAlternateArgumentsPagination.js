@@ -28,7 +28,7 @@ type Props = {|
   +debate: DebateStepPageAlternateArgumentsPagination_debate$key,
   +viewer: ?DebateStepPageAlternateArgumentsPagination_viewer$key,
   +preview?: boolean,
-  +isStepFinished: boolean,
+  +isStepClosed: boolean,
 |};
 
 export const CONNECTION_NODES_PER_PAGE = 8;
@@ -125,7 +125,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   viewer: viewerFragment,
   handleChange,
   preview = false,
-  isStepFinished,
+  isStepClosed,
 }: Props) => {
   const { onClose, onOpen, isOpen } = useMultipleDisclosure({});
   const [debate, paginationProps]: [
@@ -167,7 +167,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             {viewerUnpublishedArgument && (
               <React.Fragment key={viewerUnpublishedArgument.id}>
                 <DebateStepPageArgumentDrawer
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                   key={`drawer-${viewerUnpublishedArgument.id}`}
                   argument={viewerUnpublishedArgument}
                   viewer={viewer}
@@ -175,7 +175,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
                 />
                 <ArgumentCard
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                   height="100%"
                   onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
                   isMobile
@@ -190,7 +190,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             {debateArguments.slice(0, MOBILE_PREVIEW_MAX_ARGUMENTS).map(argument => (
               <React.Fragment key={argument.id}>
                 <DebateStepPageArgumentDrawer
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                   key={`drawer-${argument.id}`}
                   argument={argument}
                   viewer={viewer}
@@ -198,7 +198,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${argument.id}`)}
                 />
                 <ArgumentCard
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                   height="100%"
                   onReadMore={onOpen(`drawer-${argument.id}`)}
                   isMobile
@@ -232,7 +232,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
               <>
                 <DebateStepPageArgumentDrawer
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                   key={`drawer-${viewerUnpublishedArgument.id}`}
                   argument={viewerUnpublishedArgument}
                   viewer={viewer}
@@ -240,7 +240,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
                 />
                 <ArgumentCard
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                   key={viewerUnpublishedArgument.id}
                   onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
                   isMobile
@@ -264,7 +264,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                 />
                 <ArgumentCard
                   key={argument.id}
@@ -277,7 +277,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
-                  isStepFinished={isStepFinished}
+                  isStepClosed={isStepClosed}
                 />
               </>
             </AppBox>

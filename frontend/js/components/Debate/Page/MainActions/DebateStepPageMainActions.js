@@ -28,20 +28,24 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
   const isStepFinished = step.timeless
     ? false
     : step?.timeRange?.endAt
-      ? moment().isAfter(moment(step.timeRange.endAt))
+    ? moment().isAfter(moment(step.timeRange.endAt))
     : false;
+  const isStartedAndNoEndDate = step.timeless
+    ? false
+    : !step?.timeRange?.endAt && moment().isAfter(moment(step.timeRange.startAt));
+  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
 
   return (
     <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
       <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
         <Flex direction="column" alignItems="center" spacing={4}>
-          {isStepFinished && (
+          {isStepClosed && (
             <Tag variantType="badge" variant="neutral-gray" icon="CLOCK">
               {intl.formatMessage({ id: 'global.ended' })}
             </Tag>
           )}
 
-          {step?.timeRange?.endAt && (
+          {!isStepClosed && step?.timeRange?.endAt && (
             <Tag variantType="badge" variant="yellow" icon="CLOCK">
               <RemainingTime noStyle endAt={step?.timeRange?.endAt} />
             </Tag>
@@ -69,6 +73,7 @@ export default createFragmentContainer(DebateStepPageMainActions, {
     fragment DebateStepPageMainActions_step on DebateStep {
       timeless
       timeRange {
+        startAt
         endAt
       }
       ...DebateStepPageVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated)

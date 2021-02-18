@@ -29,8 +29,8 @@ const PopoverContent = React.forwardRef<Props, HTMLElement>(
       color="gray.900"
       borderRadius="popover"
       boxShadow="medium"
-      width="300px"
-      maxWidth="300px"
+      width="350px"
+      maxWidth="350px"
       ref={ref}
       {...props}>
       {typeof children === 'function' ? children({ closePopover }) : children}

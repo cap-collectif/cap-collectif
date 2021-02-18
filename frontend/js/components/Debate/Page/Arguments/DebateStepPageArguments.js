@@ -20,16 +20,20 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
   const isStepFinished = step?.timeless
     ? false
     : step?.timeRange?.endAt
-    ? moment().isAfter(((step.timeRange.endAt: any): string))
+    ? moment().isAfter(moment(step?.timeRange?.endAt))
     : false;
+  const isStartedAndNoEndDate = step?.timeless
+    ? false
+    : !step?.timeRange?.endAt && moment().isAfter(moment(step?.timeRange.startAt));
+  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+
   return isMobile ? (
     <>
       {step?.debate && (
         <MobileDebateStepPageArguments
           debate={step.debate}
           viewer={viewer}
-          step={step}
-          isStepFinished={isStepFinished}
+          isStepClosed={isStepClosed}
         />
       )}
     </>
@@ -37,7 +41,7 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
     // About step => $fragmentRefs is missing in DebateStepPageArguments_step
     // Would be fix if we transform DesktopDebateStepPageArguments in fragment
     // $FlowFixMe
-    <DesktopDebateStepPageArguments step={step} viewer={viewer} isStepFinished={isStepFinished} />
+    <DesktopDebateStepPageArguments step={step} viewer={viewer} isStepClosed={isStepClosed} />
   );
 };
 
@@ -46,6 +50,7 @@ export default createFragmentContainer(DebateStepPageArguments, {
     fragment DebateStepPageArguments_step on DebateStep {
       timeless
       timeRange {
+        startAt
         endAt
       }
       noDebate: debate {

@@ -10,7 +10,10 @@ const defaultProps = {
   step: {
     $refType,
     $fragmentRefs,
-    timeRange: { endAt: '2021-18-02:00:00' },
+    timeRange: {
+      startAt: '2030-02-10 00:00:00',
+      endAt: '2030-03-10 00:00:00',
+    },
     timeless: false,
   },
   isAuthenticated: true,
@@ -28,7 +31,10 @@ const props = {
     step: {
       ...defaultProps.step,
       timeless: true,
-      timeRange: { endAt: null },
+      timeRange: {
+        startAt: null,
+        endAt: null,
+      },
     },
   },
 };

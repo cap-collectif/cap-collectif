@@ -174,13 +174,17 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
                     </Popover.Body>
                     <Popover.Footer>
                       <ButtonGroup>
-                        <Button uppercase onClick={closePopover} color="gray.500" fontSize={1}>
+                        <Button
+                          onClick={closePopover}
+                          variant="secondary"
+                          variantColor="hierarchy"
+                          variantSize="small">
                           {intl.formatMessage({ id: 'cancel' })}
                         </Button>
                         <Button
-                          alternative
-                          variant="tertiary"
+                          variant="primary"
                           variantColor="danger"
+                          variantSize="small"
                           onClick={() =>
                             onDelete(
                               argument.id,

@@ -31,7 +31,7 @@ type Props = {|
     +$fragmentRefs: ArgumentCard_argument$ref,
     +id: string,
   },
-  +isStepFinished: boolean,
+  +isStepClosed: boolean,
 |};
 
 export const CONNECTION_NODES_PER_PAGE = 8;
@@ -135,7 +135,7 @@ export const DebateStepPageArgumentsPagination = ({
   viewer: viewerFragment,
   handleChange,
   viewerUnpublishedArgument,
-  isStepFinished,
+  isStepClosed,
 }: Props) => {
   const [argumentsQuery, paginationProps]: [
     DebateStepPageArgumentsPagination_debate,
@@ -162,7 +162,7 @@ export const DebateStepPageArgumentsPagination = ({
       {viewerUnpublishedArgument && (
         <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
           <ArgumentCard
-            isStepFinished={isStepFinished}
+            isStepClosed={isStepClosed}
             argument={viewerUnpublishedArgument}
             viewer={viewer}
             setArgumentReported={setArgumentReported}
@@ -174,7 +174,7 @@ export const DebateStepPageArgumentsPagination = ({
       {debateArguments?.map(argument => (
         <AppBox key={argument.id} marginBottom={6}>
           <ArgumentCard
-            isStepFinished={isStepFinished}
+            isStepClosed={isStepClosed}
             argument={argument}
             viewer={viewer}
             setArgumentReported={setArgumentReported}

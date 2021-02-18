@@ -22,10 +22,10 @@ import type { Filter } from '~/components/Debate/Page/Arguments/types';
 type Props = {|
   +step: ?DebateStepPageArguments_step,
   +viewer: ?DesktopDebateStepPageArguments_viewer,
-  +isStepFinished: boolean,
+  +isStepClosed: boolean,
 |};
 
-export const DesktopDebateStepPageArguments = ({ step, viewer, isStepFinished }: Props) => {
+export const DesktopDebateStepPageArguments = ({ step, viewer, isStepClosed }: Props) => {
   const [filter, setFilter] = useState<Filter>('DESC');
   const [yesState, setYesState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
   const [noState, setNoState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
@@ -100,7 +100,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer, isStepFinished }:
       <Flex direction="row" spacing={6}>
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
-            isStepFinished={isStepFinished}
+            isStepClosed={isStepClosed}
             viewerUnpublishedArgument={
               viewerUnpublishedArgument?.type === 'FOR' ? viewerUnpublishedArgument : null
             }
@@ -114,7 +114,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer, isStepFinished }:
 
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
-            isStepFinished={isStepFinished}
+            isStepClosed={isStepClosed}
             viewerUnpublishedArgument={
               viewerUnpublishedArgument?.type === 'AGAINST' ? viewerUnpublishedArgument : null
             }

@@ -58,13 +58,13 @@ const VIEWER_FRAGMENT = graphql`
 const DebateStepPageArgumentsDrawer = ({
   debate: debateFragment,
   viewer: viewerFragment,
-  isStepFinished,
+  isStepClosed,
   ...drawerProps
 }: {|
   ...DetailDrawerProps,
   +debate: DebateStepPageArgumentsDrawer_debate$key,
   +viewer: ?DebateStepPageArgumentsDrawer_viewer$key,
-  +isStepFinished: boolean,
+  +isStepClosed: boolean,
 |}) => {
   const intl = useIntl();
   const debate: DebateStepPageArgumentsDrawer_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
@@ -157,7 +157,7 @@ const DebateStepPageArgumentsDrawer = ({
             }}
             debate={debate}
             viewer={viewer}
-            isStepFinished={isStepFinished}
+            isStepClosed={isStepClosed}
           />
         </Flex>
       </DetailDrawer.Body>
