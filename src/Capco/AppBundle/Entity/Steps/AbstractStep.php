@@ -507,6 +507,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         return $this;
     }
 
+    public function haveAtLeastOneEvent(): bool
+    {
+        return $this->events->count() > 0;
+    }
+
     public function getEvents(): Collection
     {
         return $this->events;

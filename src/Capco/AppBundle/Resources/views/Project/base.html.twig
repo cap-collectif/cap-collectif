@@ -55,8 +55,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" id="details">
-
-                    {% if is_feature_enabled('calendar') and currentStep is defined and currentStep.type is defined %}
+                    
+                    {% if is_feature_enabled('calendar') and currentStep is defined and currentStep.type is defined and currentStep.haveAtLeastOneEvent() %}
                         {{ react_render_component('StepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'stepId': currentStep|toStepGlobalId()} }) }}
                     {% endif %}
 
