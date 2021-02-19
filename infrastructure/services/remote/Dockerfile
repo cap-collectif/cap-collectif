@@ -173,14 +173,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# NewRelic PHP Probe
-RUN wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
-    echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install newrelic-php5 -y --no-install-recommends && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
@@ -279,6 +271,17 @@ RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/
     && mkdir -p var/cache/prod \
     && chown -R capco:capco var \
     && chmod -R 777 var
+
+# Newrelic agent
+ENV NEWRELIC_VERSION=9.16.0.295
+ENV NEWRELIC_NAME=newrelic-php5-$NEWRELIC_VERSION-linux
+ENV NEWRELIC_AGENT_URL=https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/${NEWRELIC_NAME}.tar.gz
+
+RUN   curl -L $NEWRELIC_AGENT_URL | tar -C /tmp -zx && \
+  export NR_INSTALL_USE_CP_NOT_LN=1 && \
+  export NR_INSTALL_SILENT=1 && \
+  /tmp/$NEWRELIC_NAME/newrelic-install install && \
+  rm -rf /tmp/newrelic-php5-* /tmp/nrinstall*
 
 # /!\
 # /!\ Beyond this step nothing is cached /!\

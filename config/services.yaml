@@ -53,8 +53,8 @@ parameters:
     knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
     knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
     knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
-    newrelic_api_key: '%env(NEWRELIC_API_KEY)%'
-    newrelic_license_key: '%env(NEWRELIC_LICENSE_KEY)%'
+    newrelic_api_key: '%env(SYMFONY_NEWRELIC_API_KEY)%'
+    newrelic_license_key: '%env(SYMFONY_NEWRELIC_LICENSE_KEY)%'
     agent_tcp: 'tcp://127.0.0.1:10301'
     agent_unix: 'unix:///var/run/redirectionio_agent.sock'
     jitsi_jwt_key: '***REMOVED***'
@@ -123,8 +123,8 @@ parameters:
     env(SYMFONY_INSTANCE_NAME): dev
     env(SYMFONY_APP_VERSION): dev
     # NEWRELIC, see https://tech.cap-collectif.com/docs/infrastructure/newrelic.html
-    env(NEWRELIC_API_KEY): ***REMOVED***
-    env(NEWRELIC_LICENSE_KEY): ***REMOVED***
+    env(SYMFONY_NEWRELIC_API_KEY): ***REMOVED***
+    env(SYMFONY_NEWRELIC_LICENSE_KEY): ***REMOVED***
     # API KEYS FOR OCCITANIE
     env(SYMFONY_OCCITANIE_USERNAME): test
     # TODO: Delete this env var
