@@ -192,19 +192,19 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
         id
         viewerHasArgument @include(if: $isAuthenticated)
         viewerHasVote @include(if: $isAuthenticated)
-        yesVotes: votes(first: 0, type: FOR) {
+        yesVotes: votes(isPublished: true, first: 0, type: FOR) {
           totalCount
         }
-        votes(first: 0) {
+        votes(isPublished: true, first: 0) {
           totalCount
         }
-        allArguments: arguments(first: 0) {
+        allArguments: arguments(isPublished: true, first: 0) {
           totalCount
         }
-        argumentsFor: arguments(first: 0, value: FOR) {
+        argumentsFor: arguments(isPublished: true, first: 0, value: FOR) {
           totalCount
         }
-        argumentsAgainst: arguments(first: 0, value: AGAINST) {
+        argumentsAgainst: arguments(isPublished: true, first: 0, value: AGAINST) {
           totalCount
         }
         ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)

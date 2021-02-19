@@ -51,7 +51,10 @@ const commit = (
         throw new Error('Expected debate to be in the store');
       }
 
-      const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', { first: 0 });
+      const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', {
+        isPublished: true,
+        first: 0,
+      });
       if (!allArgumentsProxy) return;
       const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
       allArgumentsProxy.setValue(previousValue + 1, 'totalCount');

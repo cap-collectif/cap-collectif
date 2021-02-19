@@ -27,10 +27,10 @@ const mutation = graphql`
           viewerVote @include(if: $isAuthenticated) {
             type
           }
-          yesVotes: votes(type: FOR) {
+          yesVotes: votes(isPublished: true, type: FOR) {
             totalCount
           }
-          votes {
+          votes(isPublished: true) {
             totalCount
           }
         }
@@ -54,13 +54,17 @@ const commit = (
       const debateProxy = store.get(variables.input.debateId);
       if (!debateProxy) throw new Error('Expected debate to be in the store');
 
-      const allVotes = debateProxy.getLinkedRecord('votes', { first: 0 });
+      const allVotes = debateProxy.getLinkedRecord('votes', { isPublished: true, first: 0 });
       if (!allVotes) return;
       const previousValue = parseInt(allVotes.getValue('totalCount'), 10);
       allVotes.setValue(previousValue + 1, 'totalCount');
 
       if (variables.input.type === 'FOR') {
-        const yesVotes = debateProxy.getLinkedRecord('votes', { first: 0, type: 'FOR' });
+        const yesVotes = debateProxy.getLinkedRecord('votes', {
+          isPublished: true,
+          first: 0,
+          type: 'FOR',
+        });
         if (!yesVotes) return;
         const previousValueFor = parseInt(yesVotes.getValue('totalCount'), 10);
         yesVotes.setValue(previousValueFor + 1, 'totalCount');
