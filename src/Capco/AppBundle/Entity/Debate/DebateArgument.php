@@ -151,6 +151,6 @@ class DebateArgument implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchDebateArgument'];
+        return ['ElasticsearchDebateArgument', 'ElasticsearchDebateArgumentNestedAuthor'];
     }
 }

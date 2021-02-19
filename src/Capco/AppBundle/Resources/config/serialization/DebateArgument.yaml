@@ -2,6 +2,8 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     attributes:
         id:
             groups: [ElasticsearchVoteNestedDebateArgument, ElasticsearchDebateArgument]
+        author:
+            groups: [ElasticsearchDebateArgument]
         debate:
             groups: [ElasticsearchDebateArgument]
         voteType:

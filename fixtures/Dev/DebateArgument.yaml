@@ -56,6 +56,14 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
         body: Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.
         createdAt: <(new \DateTime('2020-10-23 09:06:00'))>
         publishedAt: $createdAt
+    debateConfinement1:
+        __construct: ['@debateConfinement']
+        id: 'debateConfinement1'
+        type: FOR
+        author: '@userTheo'
+        body: Je suis bien chez moi
+        createdAt: <(new \DateTime('2020-01-01 00:00:00'))>
+        publishedAt: $createdAt
     # Unpublished arguments
     debateArgument8:
         __construct: ['@debateCannabis']

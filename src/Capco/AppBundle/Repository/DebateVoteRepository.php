@@ -91,9 +91,26 @@ class DebateVoteRepository extends EntityRepository
         return new Paginator($qb);
     }
 
+    public function getPublishedByAuthor(User $author, int $limit, int $offset): Paginator
+    {
+        $qb = $this->getPublishedByAuthorQB($author)
+            ->addOrderBy('v.publishedAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
+    }
+
     public function countByDebate(Debate $debate, ?array $filters = []): int
     {
         $qb = $this->getByDebateAndFilters($debate, $filters)->select('COUNT(v)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countPublishedByAuthor(User $author): int
+    {
+        $qb = $this->getPublishedByAuthorQB($author)->select('COUNT(v)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -116,7 +133,7 @@ class DebateVoteRepository extends EntityRepository
             $qb->andWhere('v.type = :type')->setParameter('type', $filters['type']);
         }
 
-        if (is_bool($filters['isPublished'])) {
+        if (\is_bool($filters['isPublished'])) {
             $qb->andWhere('v.published = :published')->setParameter(
                 'published',
                 $filters['isPublished']
@@ -131,5 +148,13 @@ class DebateVoteRepository extends EntityRepository
         return $this->createQueryBuilder('v')
             ->andWhere('v.debate = :debate')
             ->setParameter('debate', $debate);
+    }
+
+    private function getPublishedByAuthorQB(User $author): QueryBuilder
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.user = :author')
+            ->andWhere('v.published = true')
+            ->setParameter('author', $author);
     }
 }

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -29,6 +30,27 @@ class DebateSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = self::createDebateArgumentsFilteredQuery($debate, $filters);
+
+        $query = new Query($boolQuery);
+        $query = $this->sortQuery($query, $orderBy);
+        if ($limit) {
+            $query->setSize($limit + 1);
+        }
+        $this->applyCursor($query, $cursor);
+
+        $response = $this->index->search($query);
+        $cursors = $this->getCursors($response);
+
+        return $this->getData($cursors, $response);
+    }
+
+    public function searchUserArguments(
+        User $user,
+        int $limit,
+        ?array $orderBy,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = self::createUserArgumentsFilteredQuery($user);
 
         $query = new Query($boolQuery);
         $query = $this->sortQuery($query, $orderBy);
@@ -94,6 +116,16 @@ class DebateSearch extends Search
                 $boolQuery->addFilter(new Term(['voteType' => $filters['value']]));
             }
         }
+
+        return $boolQuery;
+    }
+
+    private static function createUserArgumentsFilteredQuery(User $author): BoolQuery {
+        $boolQuery = new BoolQuery();
+        $boolQuery->addFilter(new Term(['objectType' => 'debateArgument']));
+        $boolQuery->addFilter(new Term(['author.id' => $author->getId()]));
+        $boolQuery->addFilter(new Term(['published' => true]));
+        $boolQuery->addFilter(new Term(['trashed' => false]));
 
         return $boolQuery;
     }

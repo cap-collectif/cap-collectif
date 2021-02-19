@@ -13729,6 +13729,47 @@ type User implements Node & UniformResourceLocatable {
     includeUnpublished: Boolean = false
   ): ArgumentConnection!
 
+  """The debate arguments created by user."""
+  debateArguments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Ordering options for contributions returned from the connection."""
+    orderBy: DebateArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): DebateArgumentConnection!
+
+  """The debate votes of the user."""
+  debateVotes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): DebateVoteConnection!
+
   """Get all projects the user has created."""
   projects(
     """

@@ -15,6 +15,7 @@ Capco\UserBundle\Entity\User:
           ElasticsearchProposalNestedProject,
           ElasticsearchProjectNestedAuthor,
           ElasticsearchEventNestedProject,
+          ElasticsearchDebateArgumentNestedAuthor,
         ]
     slug:
       groups: [Default, Elasticsearch]

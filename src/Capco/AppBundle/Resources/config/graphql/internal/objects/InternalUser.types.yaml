@@ -302,6 +302,21 @@ InternalUser:
                         type: 'Boolean'
                         description: 'Include the unpublished contributions if its true'
                         defaultValue: false
+            debateArguments:
+                type: 'DebateArgumentConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserDebateArgumentsResolver", [getUser(), value, args])'
+                description: 'The debate arguments created by user.'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    orderBy:
+                        type: 'DebateArgumentOrder'
+                        description: 'Ordering options for contributions returned from the connection.'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+            debateVotes:
+                type: 'DebateVoteConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AuthorVotesResolver", [value, args])'
+                description: 'The debate votes of the user.'
+                argsBuilder: 'Relay::Connection'
             responses:
                 type: 'InternalResponseConnection!'
             url:
