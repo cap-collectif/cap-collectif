@@ -279,10 +279,16 @@ EOF;
         'contributions_sources_votesCount' => 'source.votes.totalCount',
         //version
         'contribution_versions_id' => 'version.id',
+        'contribution_versions_author_id' => 'version.author.id',
         'contribution_versions_title' => 'version.title',
+        'contribution_versions_explanation' => 'version.comment',
         'contribution_versions_bodyText' => 'version.bodyText',
         'contribution_versions_createdAt' => 'version.createdAt',
         'contribution_versions_updatedAt' => 'version.updatedAt',
+        'contribution_versions_votesCount' => 'version.votes.totalCount',
+        'contribution_versions_votesCountOk' => 'version.votesOk.totalCount',
+        'contribution_versions_votesCountMitige' => 'version.votesMitige.totalCount',
+        'contribution_versions_votesCountNok' => 'version.votesNo.totalCount'
     ];
 
     protected static $defaultName = 'capco:export:consultation';
@@ -611,6 +617,11 @@ EOF;
     private function addContributionVotesRow($vote, $contribution): void
     {
         $this->addContributionRow('vote', $vote, 'vote.', $contribution);
+    }
+
+    private function addContributionVersionVotesRow($versionvote, $contribution): void
+    {
+        $this->addContributionRow('versionvote', $versionvote, 'vote.', $contribution);
     }
 
     private function addContributionReportingsRow($reporting): void
@@ -968,7 +979,7 @@ EOF;
                 $version,
                 'votes',
                 function ($edge) use ($version) {
-                    $this->addContributionVotesRow($edge['node'], $version);
+                    $this->addContributionVersionVotesRow($edge['node'], $version);
                 },
                 function ($pageInfo) use ($version) {
                     return $this->getOpinionVotesGraphQLQuery(
