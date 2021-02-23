@@ -7,6 +7,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "id": "VXNlcjp1c2VyMTUw",
+            "username": "user150",
+          },
+        },
+        Object {
+          "node": Object {
             "id": "VXNlcjp1c2VyMjA=",
             "username": "user20",
           },
@@ -29,14 +35,8 @@ Object {
             "username": "user17",
           },
         },
-        Object {
-          "node": Object {
-            "id": "VXNlcjp1c2VyMTY=",
-            "username": "user16",
-          },
-        },
       ],
-      "totalCount": 19,
+      "totalCount": 20,
     },
     "id": "questionnairestep1",
     "title": "Questionnaire des JO 2024",

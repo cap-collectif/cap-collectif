@@ -8,10 +8,11 @@ type Props = {
   value?: ?string | ?number,
   tagName?: string,
   className?: string,
+  raw?: boolean,
 };
 
 export const WYSIWYGRender = (props: Props) => {
-  const { value, tagName, className, truncate, ...rest } = props;
+  const { value, tagName, className, truncate, raw, ...rest } = props;
 
   // sorry for that: https://github.com/quilljs/quill/issues/1235
   if (!value || value === '<p><br /></p>') {
@@ -36,7 +37,7 @@ export const WYSIWYGRender = (props: Props) => {
       dangerouslySetInnerHTML: { __html: truncatedValue },
     });
 
-    return <div className={`${className || ''} ql-editor`}>{child}</div>;
+    return raw ? child : <div className={`${className || ''} ql-editor`}>{child}</div>;
   }
 
   return (

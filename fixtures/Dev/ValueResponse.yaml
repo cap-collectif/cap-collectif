@@ -581,3 +581,163 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority20'
         value: 4
+
+    responseTagCloud1:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud1'
+        value: Incroyable ! Tout ces sportifs la wow.
+    responseTagCloud2:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud1'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War 2: Warhammer' }
+
+    responseTagCloud3:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud2'
+        value: Oui c'est vraiment trop cool.
+    responseTagCloud4:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud2'
+        value:
+            { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Three Kingdoms ' }
+
+    responseTagCloud5:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud3'
+        value: Ca va être fou ! Des sportifs de hauts niveaux.
+    responseTagCloud6:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud3'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War Saga: Troy' }
+
+    responseTagCloud7:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud4'
+        value: C'est génial ! On va se régaler.
+    responseTagCloud8:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud4'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Warhammer' }
+
+    responseTagCloud9:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud5'
+        value: Il va y avoir du divertissement ! Et des sportifs !
+    responseTagCloud10:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud5'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Rome' }
+
+    responseTagCloud11:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud6'
+        value: Incroyable ! Tout ces sportifs la wow.
+    responseTagCloud12:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud6'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Britannia' }
+
+    responseTagCloud13:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud7'
+        value: Bof, non pas trop ça va faire du bruit !
+    responseTagCloud14:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud7'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War 3: Warhammer' }
+
+    responseTagCloud15:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud8'
+        value: Pas trop non plus, j'aime pas le sport.
+    responseTagCloud16:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud8'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': "Plus d'idées de jeux." }
+
+    responseTagCloud17:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud9'
+        value: Le sport c'est pour les femmes.
+    responseTagCloud18:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud9'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Un jeu stylé de fou.' }
+
+    responseTagCloud19:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud10'
+        value: Enfin un peu de divertissement.
+    responseTagCloud20:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud10'
+        value:
+            {
+                'labels': ['Athlétisme', 'Sports collectifs'],
+                'other': 'Bon chance Agui pour le nuage de mots. J',
+            }
+
+    responseTagCloud21:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud11'
+        value: L'autre jour j'étais à la boulangerie des sportifs, des sportifs ? Oui mec des sportifs. Jure des sportifs ? Oui oui des sportfs qui font du sport et du bruit et des phrases un peu longues pour le divertissement à Paris, cette phrase va plus vouloir rien dire mais c'est pas mal et ça régale.
+    responseTagCloud22:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud11'
+        value:
+            {
+                'labels': ['Athlétisme', 'Sports collectifs'],
+                'other': 'Bon chance Agui pour le nuage de mots. T',
+            }
+
+    responseTagCloud23:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud12'
+        value: Aller encore une autre phrase un peu longue parce que bon il faut bien tester tout les cas, comme le cas K , et le cas K des lapins c'est caca, c'est incroyable et fou non comme le lundi à Paris
+    responseTagCloud24:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud12'
+        value:
+            {
+                'labels': ['Athlétisme', 'Sports collectifs'],
+                'other': 'Bon chance Agui pour le nuage de mots. M',
+            }
+
+    responseTagCloud25:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud13'
+        value: Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?
+    responseTagCloud26:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud13'
+        value:
+            {
+                'labels': ['Athlétisme', 'Sports collectifs'],
+                'other': 'Bon chance Agui pour le nuage de mots. B',
+            }
+
+    responseTagCloud27:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud14'
+        value: D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.
+    responseTagCloud28:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud14'
+        value:
+            {
+                'labels': ['Athlétisme', 'Sports collectifs'],
+                'other': 'Bon chance Agui pour le nuage de mots. G',
+            }
+
+    responseTagCloud29:
+        question: '@simplequestion2'
+        reply: '@replyTagCloud15'
+        value: "Et une petite dernière pour la route quand même juste pour vous demandez comment vous allez ? Et la je rajoute des petits mots clés tels que : sportifs, sport, JO, athlètes, beurre de cacahuète, bruit, divertissement, sirop d'érable, une bouteille d'huile et des raviolis mais je crois que je viens de lire ma liste de course en même temps."
+    responseTagCloud30:
+        question: '@multiplequestion1'
+        reply: '@replyTagCloud15'
+        value:
+            {
+                'labels': ['Athlétisme', 'Sports collectifs'],
+                'other': 'Bon chance Agui pour le nuage de mots. !',
+            }

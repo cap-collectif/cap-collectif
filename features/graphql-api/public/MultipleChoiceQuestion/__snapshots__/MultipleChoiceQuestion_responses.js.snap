@@ -7,6 +7,26 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. !\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. J\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Un jeu stylé de fou.\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Plus d'idées de jeux.\\"}",
+          },
+        },
+        Object {
+          "node": Object {
             "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":\\"Civilization 6\\"}",
           },
         },
@@ -15,8 +35,63 @@ Object {
             "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Guild Wars 2\\"}",
           },
         },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 3: Warhammer\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Britannia\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Rome\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Warhammer\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War Saga: Troy\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Three Kingdoms \\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 2: Warhammer\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. G\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. B\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. M\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. T\\"}",
+          },
+        },
       ],
-      "totalCount": 2,
+      "totalCount": 17,
     },
   },
 }
@@ -112,12 +187,12 @@ Object {
         },
         Object {
           "node": Object {
-            "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
+            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
           },
         },
         Object {
           "node": Object {
-            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+            "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
           },
         },
       ],

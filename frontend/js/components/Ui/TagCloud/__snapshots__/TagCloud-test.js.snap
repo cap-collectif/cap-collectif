@@ -7,32 +7,60 @@ exports[`<TagCloud /> should render correctly 1`] = `
   tags={
     Array [
       Object {
-        "count": 325,
-        "value": "Amélioratioon",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 325,
+          "onClick": [Function],
+          "value": "Amélioratioon",
+        },
       },
       Object {
-        "count": 301,
-        "value": "infrastructures",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 301,
+          "onClick": [Function],
+          "value": "infrastructures",
+        },
       },
       Object {
-        "count": 300,
-        "value": "françaises",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 300,
+          "onClick": [Function],
+          "value": "françaises",
+        },
       },
       Object {
-        "count": 290,
-        "value": "outre-mer",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 290,
+          "onClick": [Function],
+          "value": "outre-mer",
+        },
       },
       Object {
-        "count": 70,
-        "value": "mise",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 70,
+          "onClick": [Function],
+          "value": "mise",
+        },
       },
       Object {
-        "count": 65,
-        "value": "Faible",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 65,
+          "onClick": [Function],
+          "value": "Faible",
+        },
       },
       Object {
-        "count": 50,
-        "value": "Niveau",
+        "marginBottom": -12,
+        "tag": Object {
+          "count": 50,
+          "onClick": [Function],
+          "value": "Niveau",
+        },
       },
     ]
   }
@@ -68,10 +96,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="Amélioratioon"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -79,17 +107,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#1A88FF",
               "display": "inline-block",
               "fontSize": "45px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           Amélioratioon
-        </span>
+        </button>
       </OverlayTrigger>
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -116,10 +148,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="infrastructures"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -127,17 +159,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#1A88FF",
               "display": "inline-block",
               "fontSize": "42px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           infrastructures
-        </span>
+        </button>
       </OverlayTrigger>
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -164,10 +200,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="françaises"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -175,17 +211,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#1A88FF",
               "display": "inline-block",
               "fontSize": "42px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           françaises
-        </span>
+        </button>
       </OverlayTrigger>
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -212,10 +252,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="outre-mer"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -223,17 +263,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#1A88FF",
               "display": "inline-block",
               "fontSize": "41px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           outre-mer
-        </span>
+        </button>
       </OverlayTrigger>
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -260,10 +304,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="mise"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -271,17 +315,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#003670",
               "display": "inline-block",
               "fontSize": "14px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           mise
-        </span>
+        </button>
       </OverlayTrigger>
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -308,10 +356,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="Faible"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -319,17 +367,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#003670",
               "display": "inline-block",
               "fontSize": "14px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           Faible
-        </span>
+        </button>
       </OverlayTrigger>
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -356,10 +408,10 @@ exports[`<TagCloud /> should render correctly 1`] = `
           ]
         }
       >
-        <span
+        <button
           key="Niveau"
           onBlur={[Function]}
-          onClick={null}
+          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
@@ -367,17 +419,21 @@ exports[`<TagCloud /> should render correctly 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
+              "background": "none",
+              "border": "none",
               "color": "#003670",
               "display": "inline-block",
               "fontSize": "12px",
               "margin": "5px",
               "marginBottom": -12,
+              "padding": 0,
               "verticalAlign": "middle",
             }
           }
+          type="button"
         >
           Niveau
-        </span>
+        </button>
       </OverlayTrigger>
     </div>
   </TagCloud__Container>

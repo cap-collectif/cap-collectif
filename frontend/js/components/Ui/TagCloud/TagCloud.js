@@ -1,13 +1,15 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { type IntlShape, useIntl } from 'react-intl';
 import styled, { type StyledComponent, css } from 'styled-components';
 
-type Tag = {| value: string, count: number |};
+type Tag = {| value: string, count: number, onClick: () => void |};
+
+const MAX_LENGTH = 25;
 
 type Props = {|
-  tags: Array<Tag>,
+  tags: Array<{| tag: Tag, marginBottom: number |}>,
   maxSize: number,
   minSize: number,
 |};
@@ -19,7 +21,7 @@ const Container: StyledComponent<{ isHover: boolean }, {}, HTMLDivElement> = sty
   ${({ isHover }) =>
     isHover &&
     css`
-      span:not(:hover) {
+      button:not(:hover) {
         opacity: 0.5;
       }
     `}
@@ -43,6 +45,9 @@ const styles = {
   margin: '5px',
   verticalAlign: 'middle',
   display: 'inline-block',
+  background: 'none',
+  border: 'none',
+  padding: 0,
 };
 
 const renderer = (tag: Tag, size: number, intl: IntlShape, setIsHover, marginBottom) => {
@@ -59,13 +64,15 @@ const renderer = (tag: Tag, size: number, intl: IntlShape, setIsHover, marginBot
           {intl.formatMessage({ id: 'appearances-count' }, { num: tag.count })}
         </Tooltip>
       }>
-      <span
+      <button
+        type="button"
         style={{ ...style, marginBottom }}
         key={tag.value}
         onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}>
-        {tag.value}
-      </span>
+        onMouseLeave={() => setIsHover(false)}
+        onClick={tag.onClick}>
+        {tag.value.length <= MAX_LENGTH ? tag.value : `${tag.value.substr(0, MAX_LENGTH)}...`}
+      </button>
     </OverlayTrigger>
   );
 };
@@ -81,24 +88,11 @@ const renderTags = (props, data, intl, setIsHover) => {
   });
 };
 
-const randomize = (tags: Array<Tag>) => {
-  const data = tags.map(tag => ({
-    tag,
-    marginBottom: -1 * Math.floor(Math.random() * 25),
-  }));
-  return data.sort(() => Math.random() - 0.5);
-};
-
 export const TagCloud = (props: Props) => {
   const { tags } = props;
   const intl = useIntl();
-  const [data, setData] = useState([]);
   const [isHover, setIsHover] = useState(false);
-  const tagsComparison = tags.map(t => t.value).join(':');
-  useEffect(() => {
-    setData(randomize(tags));
-  }, [tags, tagsComparison]);
-  return <Container isHover={isHover}>{renderTags(props, data, intl, setIsHover)}</Container>;
+  return <Container isHover={isHover}>{renderTags(props, tags, intl, setIsHover)}</Container>;
 };
 
 export default TagCloud;

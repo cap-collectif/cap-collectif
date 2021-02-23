@@ -52,6 +52,16 @@ Capco\AppBundle\Entity\Reply:
         createdAt: <(new \DateTime('2016-03-06'))>
         updatedAt: <(new \DateTime('2019-03-06'))>
         undraftAt: $publishedAt
+    # Tag cloud replies
+    replyTagCloud{1..15}:
+        id: 'tagCloudReply<current()>'
+        draft: 0
+        author: '@user150'
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2020-01-12'))>
+        createdAt: <(new \DateTime('2020-01-12'))>
+        updatedAt: <(new \DateTime('2020-02-12'))>
+        undraftAt: $publishedAt
     # Unpublished replies
     reply7:
         id: 'reply7'

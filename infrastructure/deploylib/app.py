@@ -49,7 +49,7 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
         prepare_php()
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
     rabbitmq_queues()
-    env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
+    env.service_command('php -d memory_limit=-1 bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
     if os.environ.get('CI') == 'true':
         env.service_command('chmod -R 777 /var/www/public', 'application', env.www_app, 'root')
     env.service_command('php bin/console assets:install public --symlink', 'application', env.www_app)

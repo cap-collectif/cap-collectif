@@ -4,64 +4,83 @@ exports[`<QuestionnaireAdminResultsText /> renders correctly simpleQuestion resp
 <div
   className="mb-20"
 >
-  <ListGroupFlush
-    className="border-bottom"
-    striped={true}
+  <ForwardRef>
+    <Text
+      fontWeight="600"
+      mr={2}
+      uppercase={true}
+    >
+      <FormattedMessage
+        id="see.by"
+        values={Object {}}
+      />
+    </Text>
+    <Menu>
+      <Menu.Button
+        as={Symbol(react.fragment)}
+      >
+        <QuestionnaireAdminResultsText___StyledButton
+          color="blue.500"
+          rightIcon="ARROW_DOWN_O"
+          variant="tertiary"
+        >
+          <FormattedMessage
+            id="question.display.tag_cloud"
+            values={Object {}}
+          />
+        </QuestionnaireAdminResultsText___StyledButton>
+      </Menu.Button>
+      <Menu.List>
+        <Menu.OptionGroup
+          onChange={[Function]}
+          type="radio"
+          value="tagCloud"
+        >
+          <Menu.OptionItem
+            value="tagCloud"
+          >
+            <FormattedMessage
+              id="question.display.tag_cloud"
+              values={Object {}}
+            />
+          </Menu.OptionItem>
+          <Menu.OptionItem
+            value="list"
+          >
+            <FormattedMessage
+              id="question.display.list"
+              values={Object {}}
+            />
+          </Menu.OptionItem>
+        </Menu.OptionGroup>
+      </Menu.List>
+    </Menu>
+  </ForwardRef>
+  <div
+    style={
+      Object {
+        "margin": "auto",
+        "marginTop": "20",
+        "maxWidth": 650,
+      }
+    }
   >
-    <ListGroupItem
-      bsClass="list-group-item"
-      key="8Y97"
-      listItem={false}
-    >
-      <WYSIWYGRender
-        value="<p><span class=\\"ql-size-large\\">heeey</span></p><p><strong>c'est ma réponse</strong></p>"
-      />
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      key="865497"
-      listItem={false}
-    >
-      <WYSIWYGRender
-        value="c'est ma réponse"
-      />
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      key="8697"
-      listItem={false}
-    >
-      <WYSIWYGRender
-        value="<p>c'est ma réponse</p>"
-      />
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      key="898977"
-      listItem={false}
-    >
-      <WYSIWYGRender
-        value="<p><strong>c'est ma réponse</strong></p>"
-      />
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      key="97"
-      listItem={false}
-    >
-      <WYSIWYGRender
-        value="<p>c'est une autre réponse</p>"
-      />
-    </ListGroupItem>
-    <ListGroupItem
-      bsClass="list-group-item"
-      key="89"
-      listItem={false}
-    >
-      <WYSIWYGRender
-        value="<p>c'est une sixième réponse</p>"
-      />
-    </ListGroupItem>
-  </ListGroupFlush>
+    <TagCloud
+      maxSize={45}
+      minSize={12}
+      tags={
+        Array [
+          Object {
+            "marginBottom": -12,
+            "tag": Object {
+              "count": 6,
+              "onClick": [Function],
+              "value": "reponse",
+            },
+          },
+        ]
+      }
+    />
+  </div>
 </div>
 `;

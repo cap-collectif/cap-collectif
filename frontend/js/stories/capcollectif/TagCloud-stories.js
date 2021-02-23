@@ -4,42 +4,150 @@ import { storiesOf } from '@storybook/react';
 import TagCloud from '~/components/Ui/TagCloud/TagCloud';
 
 const data = [
-  { value: 'Amélioration', count: 325 },
-  { value: 'infrastructures', count: 300 },
-  { value: 'françaises', count: 300 },
-  { value: 'outre-mer', count: 290 },
-  { value: 'mise', count: 70 },
-  { value: 'Faible', count: 65 },
-  { value: 'Niveau', count: 50 },
-  { value: 'Maire', count: 130 },
-  { value: 'action', count: 125 },
-  { value: 'problèmes', count: 55 },
-  { value: '68', count: 34 },
-  { value: 'eux', count: 30 },
-  { value: 'voie', count: 40 },
-  { value: 'famille', count: 71 },
-  { value: 'faits', count: 70 },
-  { value: 'durcir', count: 35 },
-  { value: 'non', count: 32 },
-  { value: 'élaboration', count: 28 },
-  { value: 'lui', count: 23 },
-  { value: 'terrain', count: 34 },
-  { value: 'eau', count: 50 },
-  { value: 'publique', count: 50 },
-  { value: 'gendarmerie', count: 130 },
-  { value: 'souvent', count: 40 },
-  { value: 'pouvoir', count: 120 },
-  { value: 'règles', count: 30 },
-  { value: 'ados', count: 65 },
-  { value: 'débat', count: 200 },
-  { value: 'politique', count: 255 },
-  { value: 'concertation', count: 170 },
-  { value: 'consulter', count: 70 },
-  { value: 'innover', count: 35 },
-  { value: 'sentir', count: 70 },
-  { value: 'problèmes', count: 35 },
-  { value: 'entente', count: 70 },
-  { value: 'co-construire', count: 35 },
+  {
+    tag: { value: 'Amélioration', count: 325, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'infrastructures', count: 300, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'françaises', count: 300, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'outre-mer', count: 290, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'mise', count: 70, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'Faible', count: 65, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'Niveau', count: 50, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'Maire', count: 130, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'action', count: 125, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'problèmes', count: 55, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: '68', count: 34, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'eux', count: 30, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'voie', count: 40, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'famille', count: 71, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'faits', count: 70, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'durcir', count: 35, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'non', count: 32, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'élaboration', count: 28, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'lui', count: 23, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'terrain', count: 34, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'eau', count: 50, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'publique', count: 50, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'gendarmerie', count: 130, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'souvent', count: 40, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'pouvoir', count: 120, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'règles', count: 30, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'ados', count: 65, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'débat', count: 200, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'politique', count: 255, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'concertation', count: 170, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'consulter', count: 70, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'innover', count: 35, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'sentir', count: 70, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'problèmes', count: 35, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'entente', count: 70, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
+  {
+    tag: { value: 'co-construire', count: 35, onClick: () => {} },
+    marginBottom: -1 * Math.floor(Math.random() * 25),
+  },
 ];
 
 storiesOf('Cap Collectif|TagCloud', module).add('default', () => {

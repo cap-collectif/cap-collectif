@@ -11,6 +11,12 @@ describe('<QuestionnaireAdminResultsText />', () => {
     questionId: '87970',
     simpleQuestion: {
       id: '768',
+      tagCloud: [
+        {
+          value: 'reponse',
+          occurrencesCount: 6,
+        },
+      ],
       $refType,
       responses: {
         edges: [
@@ -63,6 +69,7 @@ describe('<QuestionnaireAdminResultsText />', () => {
   };
 
   it('renders correctly simpleQuestion responses', () => {
+    global.Math.random = () => 0.5;
     const wrapper = shallow(<QuestionnaireAdminResultsText {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

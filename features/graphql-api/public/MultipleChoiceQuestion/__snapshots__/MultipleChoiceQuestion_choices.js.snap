@@ -120,7 +120,7 @@ Object {
         Object {
           "node": Object {
             "responses": Object {
-              "totalCount": 1,
+              "totalCount": 16,
             },
             "title": "Athlétisme",
           },
@@ -136,7 +136,7 @@ Object {
         Object {
           "node": Object {
             "responses": Object {
-              "totalCount": 2,
+              "totalCount": 17,
             },
             "title": "Sports collectifs",
           },
