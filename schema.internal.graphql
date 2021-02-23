@@ -620,6 +620,9 @@ type AnalysisConfiguration {
   """The date on which the related decision will become effective"""
   effectiveDate: DateTime
 
+  """Indicates whether or not a proposal decision is immediately effective"""
+  isImmediatelyEffective: Boolean!
+
   """The available favourable statuses to apply on contributions."""
   favourableStatus: ProposalStepStatus
 
@@ -1477,6 +1480,8 @@ input ChangeProposalContentInput {
 
   """The ID of tipsmeee"""
   tipsmeeeId: String
+  estimation: Int
+  likers: [ID!]
   clientMutationId: String
 }
 
@@ -11246,6 +11251,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The main view : grid, list or map"""
   mainView: String!
   defaultStatus: ProposalStepStatus
+  isAnalysisStep: Boolean!
 }
 
 input SendContactFormInput {

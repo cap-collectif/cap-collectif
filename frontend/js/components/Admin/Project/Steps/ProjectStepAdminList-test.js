@@ -12,6 +12,7 @@ const defaultStep = {
   url: 'urlTest',
   slug: 'slugTest',
   hasOpinionsFilled: false,
+  isAnalysisStep: false,
 };
 
 const defaultProps = {

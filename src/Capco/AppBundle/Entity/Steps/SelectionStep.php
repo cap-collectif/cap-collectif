@@ -241,4 +241,21 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     {
         return true;
     }
+
+    public function isAnalysisStep(): bool
+    {
+        if (
+            $this->getProposalForm()->getAnalysisConfiguration() &&
+            $this->getProposalForm()
+                ->getAnalysisConfiguration()
+                ->getAnalysisStep()
+        ) {
+            return $this ===
+                $this->getProposalForm()
+                    ->getAnalysisConfiguration()
+                    ->getAnalysisStep();
+        }
+
+        return false;
+    }
 }

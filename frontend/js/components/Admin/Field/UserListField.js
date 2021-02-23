@@ -11,6 +11,7 @@ type Props = {
   label?: React$Element<*>,
   labelClassName?: ?string,
   inputClassName?: ?string,
+  blockClassName?: ?string,
   placeholder?: ?string,
   ariaControls?: ?string,
   userListToNoSearch?: ?Array<string>,
@@ -21,6 +22,8 @@ type Props = {
   debounce?: boolean,
   authorOfEvent?: boolean,
   clearable?: boolean,
+  help?: React$Element<*>,
+  noOptionsMessage?: string,
 };
 
 const getUsersList = graphql`
@@ -118,6 +121,9 @@ export default class UserListField extends React.Component<Props> {
       selectFieldIsObject,
       debounce,
       multi,
+      help,
+      noOptionsMessage,
+      blockClassName,
     } = this.props;
 
     return (
@@ -127,6 +133,7 @@ export default class UserListField extends React.Component<Props> {
         label={label}
         labelClassName={labelClassName}
         inputClassName={inputClassName}
+        blockClassName={blockClassName}
         placeholder={placeholder}
         aria-controls={ariaControls}
         multi={multi}
@@ -140,6 +147,8 @@ export default class UserListField extends React.Component<Props> {
         component={select}
         clearable={clearable}
         loadOptions={this.loadOptions}
+        help={help}
+        noOptionsMessage={noOptionsMessage}
       />
     );
   }

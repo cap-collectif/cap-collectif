@@ -37,7 +37,7 @@ import type {
 } from '~relay/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
 import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
-import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
+import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '~/types';
 import CreateProposalMutation from '~/mutations/CreateProposalMutation';
 import { closeCreateModal, closeEditProposalModal } from '~/redux/modules/proposal';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
@@ -135,6 +135,8 @@ export type FormValues = {|
   responses: ResponsesInReduxForm,
   media?: ?any,
   draft: boolean,
+  likers: [{ value: Uuid, label: string }],
+  estimation: ?number,
 |};
 
 const onUnload = e => {

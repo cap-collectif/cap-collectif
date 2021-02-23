@@ -20,6 +20,11 @@ const mutation = graphql`
         body
         summary
         publicationStatus
+        estimation
+        likers {
+          id
+          displayName
+        }
         responses {
           question {
             id

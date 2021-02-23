@@ -13,9 +13,9 @@ import {
 import { createFragmentContainer, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { Button, ButtonToolbar, ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
+import { Button, ButtonToolbar, Glyphicon, ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
 import memoize from 'lodash/memoize';
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
 import UpdateProposalFusionMutation from '~/mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
@@ -35,8 +35,13 @@ import warnResponses from '~/utils/form/warnResponses';
 import renderResponses from '~/components/Form/RenderResponses';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
-import { styleGuideColors } from '~/utils/colors';
+import colors, { styleGuideColors } from '~/utils/colors';
 import { pxToRem } from '~/utils/styles/mixins';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Card from '~ds/Card/Card';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
+import AppBox from '~ui/Primitives/AppBox';
 
 type FormValues = {|
   media: ?{ id: Uuid },
@@ -51,6 +56,8 @@ type FormValues = {|
   category?: ?Uuid,
   district?: ?Uuid,
   address?: ?string,
+  likers: [{ value: Uuid, label: string }],
+  estimation: ?number,
 |};
 
 type RelayProps = {|
@@ -88,6 +95,50 @@ const RevisionButton = styled(Button)`
   }
 `;
 
+const NotationCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
+  h3 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: ${styleGuideColors.blue800};
+    margin: 0;
+  }
+
+  .form-fields,
+  #likers,
+  #proposal_estimation {
+    max-width: 350px;
+  }
+
+  .form-group {
+    margin: 0;
+  }
+
+  padding-top: 24px;
+  padding-bottom: 0;
+  .likers-fields {
+    margin-bottom: 24px;
+  }
+
+  label {
+    span {
+      font-weight: 400;
+      font-size: 14px;
+      color: ${styleGuideColors.gray900};
+    }
+
+    margin-top: 24px;
+    margin-bottom: 4px !important;
+  }
+
+  a {
+    text-transform: uppercase;
+    color: ${styleGuideColors.blue500};
+    line-height: 16px;
+    vertical-align: super;
+  }
+`;
+
 const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
@@ -102,10 +153,12 @@ const onSubmit = (
     category: values.category,
     district: values.district,
     draft: values.draft,
+    estimation: values.estimation,
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
     author: isAdmin && values.author ? values.author.value : undefined,
     id: proposal.id,
+    likers: values.likers.map(u => u.value),
   };
 
   return ChangeProposalContentMutation.commit({
@@ -307,256 +360,356 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
     const { showEditFusionModal } = this.state;
 
     return (
-      <div className="box box-primary container-fluid">
-        <ProposalFusionEditModal
-          onClose={() => {
-            this.setState({ showEditFusionModal: false });
-          }}
-          show={showEditFusionModal}
-          proposal={proposal}
-        />
-        {proposal.mergedIn.length > 0 && (
-          <Panel className="mt-30 mb-0 panel_flex">
-            <Panel.Heading>
-              <FormattedMessage id="grouped-into-a-new-proposal" />
-            </Panel.Heading>
-            <ListGroup fill>
-              {proposal.mergedIn.map(parent => (
-                <ListGroupItem key={parent.id}>
-                  <a href={parent.adminUrl}>{parent.title}</a>
-                  {parent.mergedFrom.length > 2 && (
-                    <Button
-                      bsStyle="danger"
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' }),
-                          )
-                        ) {
-                          UpdateProposalFusionMutation.commit({
-                            input: {
-                              proposalId: parent.id,
-                              fromProposals: parent.mergedFrom
-                                .map(child => child.id)
-                                .filter(id => id !== proposal.id),
-                            },
-                          });
-                        }
-                      }}>
-                      <FormattedMessage id="global.delete" />
-                    </Button>
-                  )}
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          </Panel>
-        )}
-        {proposal.mergedFrom.length > 0 && (
-          <Panel
-            className="mt-30 mb-0 panel_flex"
-            header={
-              <div>
-                <FormattedMessage id="initial-proposals" />
-                <ButtonToolbar>
-                  <Button
-                    bsStyle="warning"
-                    onClick={() => {
-                      this.setState({ showEditFusionModal: true });
-                    }}>
-                    <FormattedMessage id="global.edit" />
-                  </Button>
-                  <Button
-                    bsStyle="danger"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' }),
-                        )
-                      ) {
-                        UpdateProposalFusionMutation.commit({
-                          input: {
-                            proposalId: proposal.id,
-                            fromProposals: [],
-                          },
-                        });
-                      }
-                    }}>
-                    <FormattedMessage id="global.delete" />
-                  </Button>
-                </ButtonToolbar>
-              </div>
-            }>
-            <ListGroup fill>
-              {proposal.mergedFrom.map(child => (
-                <ListGroupItem key={child.id}>
-                  <a href={child.adminUrl}>{child.title}</a>
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          </Panel>
-        )}
+      <>
+        <>
+          <ProposalFusionEditModal
+            onClose={() => {
+              this.setState({ showEditFusionModal: false });
+            }}
+            show={showEditFusionModal}
+            proposal={proposal}
+          />
+          {proposal.mergedIn.length > 0 && (
+            <Panel className="mt-30 mb-0 panel_flex">
+              <Panel.Heading>
+                <FormattedMessage id="grouped-into-a-new-proposal" />
+              </Panel.Heading>
+              <ListGroup fill>
+                {proposal.mergedIn.map(parent => (
+                  <ListGroupItem key={parent.id}>
+                    <a href={parent.adminUrl}>{parent.title}</a>
+                    {parent.mergedFrom.length > 2 && (
+                      <Button
+                        bsStyle="danger"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              intl.formatMessage({
+                                id: 'are-you-sure-you-want-to-delete-this-item',
+                              }),
+                            )
+                          ) {
+                            UpdateProposalFusionMutation.commit({
+                              input: {
+                                proposalId: parent.id,
+                                fromProposals: parent.mergedFrom
+                                  .map(child => child.id)
+                                  .filter(id => id !== proposal.id),
+                              },
+                            });
+                          }
+                        }}>
+                        <FormattedMessage id="global.delete" />
+                      </Button>
+                    )}
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+              <ListGroup fill>
+                {proposal.mergedFrom.map(child => (
+                  <ListGroupItem key={child.id}>
+                    <a href={child.adminUrl}>{child.title}</a>
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+            </Panel>
+          )}
+        </>
         <form onSubmit={handleSubmit}>
-          <div className="box-header">
-            <h3 className="box-title">
-              <FormattedMessage id="global.contenu" />
-            </h3>
-            <a
-              className="pull-right link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={intl.formatMessage({ id: 'admin.help.link.proposal.body' })}>
-              <i className="fa fa-info-circle" />
-              {intl.formatMessage({ id: 'global.help' })}
-            </a>
-          </div>
-          <div className="box-content box-content__content-form">
-            <Field
-              name="title"
-              component={component}
-              type="text"
-              id="proposal_title"
-              label={<FormattedMessage id="proposal.title" />}
-            />
-            <Field
-              name="summary"
-              component={component}
-              type="textarea"
-              id="global.summary"
-              label={
-                <span>
-                  <FormattedMessage id="global.summary" />
-                  {optional}
-                </span>
-              }
-            />
-            <UserListField
-              disabled={!isAdmin}
-              id="proposal-admin-author"
-              name="author"
-              ariaControls="ProposalAdminContentForm-filter-user-listbox"
-              label={<FormattedMessage id="global.author" />}
-              labelClassName="control-label"
-              inputClassName="fake-inputClassName"
-              placeholder={intl.formatMessage({ id: 'global.author' })}
-              selectFieldIsObject
-              multi={false}
-              autoload={false}
-              clearable={false}
-            />
-            {features.themes && form.usingThemes && (
+          <div className="box box-primary container-fluide">
+            <div className="box-header">
+              <h3 className="box-title">
+                <FormattedMessage id="global.contenu" />
+              </h3>
+              <a
+                className="pull-right link"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={intl.formatMessage({ id: 'admin.help.link.proposal.body' })}>
+                <i className="fa fa-info-circle" />
+                {intl.formatMessage({ id: 'global.help' })}
+              </a>
+            </div>
+            <div className="box-content box-content__content-form">
               <Field
-                name="theme"
-                id="global.theme"
-                type="select"
+                name="title"
                 component={component}
-                label={
-                  <span>
-                    <FormattedMessage id="global.theme" />
-                    {!form.themeMandatory && optional}
-                  </span>
-                }>
-                <FormattedMessage id="proposal.select.theme">
-                  {(message: string) => <option value="">{message}</option>}
-                </FormattedMessage>
-                {themes.map(theme => (
-                  <option key={theme.id} value={theme.id}>
-                    {theme.title}
-                  </option>
-                ))}
-              </Field>
-            )}
-            {categories.length > 0 && form.usingCategories && (
-              <Field
-                id="global.category"
-                type="select"
-                name="category"
-                component={component}
-                label={
-                  <span>
-                    <FormattedMessage id="global.category" />
-                    {!form.categoryMandatory && optional}
-                  </span>
-                }>
-                <FormattedMessage id="proposal.select.category">
-                  {(message: string) => <option value="">{message}</option>}
-                </FormattedMessage>
-                {categories.map(category => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </Field>
-            )}
-            {features.districts && form.usingDistrict && form.districts.length > 0 && (
-              <Field
-                id="proposal_district"
-                type="select"
-                name="district"
-                component={component}
-                label={
-                  <span>
-                    <FormattedMessage id="proposal.district" />
-                    {!form.districtMandatory && optional}
-                  </span>
-                }>
-                <FormattedMessage id="proposal.select.district">
-                  {(message: string) => <option value="">{message}</option>}
-                </FormattedMessage>
-                {form.districts.map(district => (
-                  <option key={district.id} value={district.id}>
-                    {district.name}
-                  </option>
-                ))}
-              </Field>
-            )}
-            {form.usingAddress && (
-              <Field
-                id="proposal_address"
-                component={component}
-                type="address"
-                name="addressText"
-                formName={formName}
-                label={<FormattedMessage id="proposal_form.address" />}
-                placeholder="proposal.map.form.placeholder"
-                addressProps={{
-                  getAddress: (addressComplete: ?AddressComplete) =>
-                    change(
-                      'address',
-                      addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
-                    ),
-                }}
+                type="text"
+                id="proposal_title"
+                label={<FormattedMessage id="proposal.title" />}
               />
-            )}
-            <Field
-              id="proposal_body"
-              type="editor"
-              name="body"
-              component={component}
-              label={<FormattedMessage id="proposal.body" />}
-            />
-            <FieldArray
-              intl={intl}
-              name="responses"
-              component={renderResponses}
-              form={formName}
-              questions={form.questions}
-              change={change}
-              responses={responses}
-              memoize={memoizeAvailableQuestions}
-            />
-            <Field
-              id="proposal_media"
-              name="media"
-              component={component}
-              type="image"
-              image={proposal && proposal.media ? proposal.media.url : null}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.media" />
-                  {optional}
-                </span>
-              }
-            />
+              <Field
+                name="summary"
+                component={component}
+                type="textarea"
+                id="global.summary"
+                label={
+                  <span>
+                    <FormattedMessage id="global.summary" />
+                    {optional}
+                  </span>
+                }
+              />
+              <UserListField
+                disabled={!isAdmin}
+                id="proposal-admin-author"
+                name="author"
+                ariaControls="ProposalAdminContentForm-filter-user-listbox"
+                label={<FormattedMessage id="global.author" />}
+                labelClassName="control-label"
+                inputClassName="fake-inputClassName"
+                placeholder={intl.formatMessage({ id: 'global.author' })}
+                selectFieldIsObject
+                multi={false}
+                autoload={false}
+                clearable={false}
+              />
+              {features.themes && form.usingThemes && (
+                <Field
+                  name="theme"
+                  id="global.theme"
+                  type="select"
+                  component={component}
+                  label={
+                    <span>
+                      <FormattedMessage id="global.theme" />
+                      {!form.themeMandatory && optional}
+                    </span>
+                  }>
+                  <FormattedMessage id="proposal.select.theme">
+                    {(message: string) => <option value="">{message}</option>}
+                  </FormattedMessage>
+                  {themes.map(theme => (
+                    <option key={theme.id} value={theme.id}>
+                      {theme.title}
+                    </option>
+                  ))}
+                </Field>
+              )}
+              {categories.length > 0 && form.usingCategories && (
+                <Field
+                  id="global.category"
+                  type="select"
+                  name="category"
+                  component={component}
+                  label={
+                    <span>
+                      <FormattedMessage id="global.category" />
+                      {!form.categoryMandatory && optional}
+                    </span>
+                  }>
+                  <FormattedMessage id="proposal.select.category">
+                    {(message: string) => <option value="">{message}</option>}
+                  </FormattedMessage>
+                  {categories.map(category => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </Field>
+              )}
+              {features.districts && form.usingDistrict && form.districts.length > 0 && (
+                <Field
+                  id="proposal_district"
+                  type="select"
+                  name="district"
+                  component={component}
+                  label={
+                    <span>
+                      <FormattedMessage id="proposal.district" />
+                      {!form.districtMandatory && optional}
+                    </span>
+                  }>
+                  <FormattedMessage id="proposal.select.district">
+                    {(message: string) => <option value="">{message}</option>}
+                  </FormattedMessage>
+                  {form.districts.map(district => (
+                    <option key={district.id} value={district.id}>
+                      {district.name}
+                    </option>
+                  ))}
+                </Field>
+              )}
+              {form.usingAddress && (
+                <Field
+                  id="proposal_address"
+                  component={component}
+                  type="address"
+                  name="addressText"
+                  formName={formName}
+                  label={<FormattedMessage id="proposal_form.address" />}
+                  placeholder="proposal.map.form.placeholder"
+                  addressProps={{
+                    getAddress: (addressComplete: ?AddressComplete) =>
+                      change(
+                        'address',
+                        addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
+                      ),
+                  }}
+                />
+              )}
+              <Field
+                id="proposal_body"
+                type="editor"
+                name="body"
+                component={component}
+                label={<FormattedMessage id="proposal.body" />}
+              />
+              <FieldArray
+                intl={intl}
+                name="responses"
+                component={renderResponses}
+                form={formName}
+                questions={form.questions}
+                change={change}
+                responses={responses}
+                memoize={memoizeAvailableQuestions}
+              />
+              <Field
+                id="proposal_media"
+                name="media"
+                component={component}
+                type="image"
+                image={proposal && proposal.media ? proposal.media.url : null}
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.media" />
+                    {optional}
+                  </span>
+                }
+              />
+            </div>
+          </div>
+          <Flex spacing={24} mt={24} mb={24} direction="row">
+            <NotationCard backgroundColor="white" flex="1" px={24}>
+              <Flex spacing="9px">
+                <h3 className="box-title">
+                  <FormattedMessage id="proposal.estimation" />
+                </h3>
+                <a
+                  style={{ marginTop: 3 }}
+                  className="link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={intl.formatMessage({ id: 'admin.help.link.proposal.estimation' })}>
+                  <Icon name={ICON_NAME.information} size={14} color={colors.blue} />
+                </a>
+              </Flex>
+              <Flex
+                mt={
+                  !proposal.form.analysisConfiguration?.costEstimationEnabled ||
+                  (proposal.form.analysisConfiguration?.costEstimationEnabled &&
+                    proposal.decision?.state === 'DONE' &&
+                    proposal.form?.analysisConfiguration?.isImmediatelyEffective)
+                    ? '8px'
+                    : '24px'
+                }
+                mb="24px">
+                {!proposal.form.analysisConfiguration?.costEstimationEnabled ||
+                (proposal.form.analysisConfiguration?.costEstimationEnabled &&
+                  proposal.decision?.state === 'DONE' &&
+                  proposal.form?.analysisConfiguration?.isImmediatelyEffective) ? null : (
+                  <AppBox className="excerpt" mr={20}>
+                    <Icon name={ICON_NAME.money} size="7rem" />
+                  </AppBox>
+                )}
+                <AppBox
+                  ml={
+                    !proposal.form.analysisConfiguration?.costEstimationEnabled ||
+                    (proposal.form.analysisConfiguration?.costEstimationEnabled &&
+                      proposal.decision?.state === 'DONE' &&
+                      proposal.form?.analysisConfiguration?.isImmediatelyEffective)
+                      ? 0
+                      : 20
+                  }>
+                  <Text
+                    as="div"
+                    color={styleGuideColors.gray500}
+                    maxWidth="450px"
+                    fontSize="13px"
+                    fontWeight="normal"
+                    lineHeight="16px">
+                    <FormattedMessage
+                      id={
+                        !proposal.form.analysisConfiguration?.costEstimationEnabled ||
+                        (proposal.form.analysisConfiguration?.costEstimationEnabled &&
+                          proposal.decision?.state === 'DONE' &&
+                          proposal.form?.analysisConfiguration?.isImmediatelyEffective)
+                          ? 'estimation-help-text-2'
+                          : 'estimation-help-text'
+                      }
+                    />
+                  </Text>
+                  {!proposal.form.analysisConfiguration?.costEstimationEnabled ||
+                  (proposal.form.analysisConfiguration?.costEstimationEnabled &&
+                    proposal.decision?.state === 'DONE' &&
+                    proposal.form?.analysisConfiguration?.isImmediatelyEffective) ? (
+                    <Field
+                      name="estimation"
+                      className="mt-24 mb-24"
+                      component={component}
+                      normalize={val => parseInt(val, 10)}
+                      type="number"
+                      id="proposal_estimation"
+                      addonBefore={<Glyphicon glyph="euro" />}
+                      placeholder={intl.formatMessage({ id: 'estimation-placeholder' })}
+                      label={<FormattedMessage id="cost" />}
+                      labelClassName="mb-5"
+                    />
+                  ) : (
+                    <AppBox
+                      mt="16px"
+                      color={styleGuideColors.blue500}
+                      fontWeight="bold"
+                      fontSize="11px">
+                      <a href={`${proposal.form.adminUrl}#openAnalysisStep`}>
+                        <FormattedMessage id="link.parameters.check" />
+                      </a>
+                    </AppBox>
+                  )}
+                </AppBox>
+              </Flex>
+            </NotationCard>
+            <NotationCard backgroundColor="white" flex="1" px={24}>
+              <Flex spacing="9px">
+                <h3 className="box-title">
+                  <FormattedMessage id="admin.fields.proposal.likers" />
+                </h3>
+                <a
+                  style={{ marginTop: 3 }}
+                  className="link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={intl.formatMessage({ id: 'admin.help.link.proposal.heart' })}>
+                  <Icon name={ICON_NAME.information} size={14} color={colors.blue} />
+                </a>
+              </Flex>
+              <AppBox
+                color={styleGuideColors.gray500}
+                mt="8px"
+                maxWidth="450px"
+                fontSize="13px"
+                fontWeight="normal"
+                lineHeight="16px">
+                <FormattedMessage id="likers-helpText" />
+              </AppBox>
+              <UserListField
+                id="likers"
+                name="likers"
+                ariaControls="ProposalAdminNotationForm-filter-user-listbox"
+                label={<FormattedMessage id="admin.fields.event_registration.user" />}
+                abelClassName="mt-0 mb-5"
+                blockClassName="likers-fields"
+                autoload={false}
+                clearable={false}
+                inputClassName="fake-inputClassName"
+                placeholder={intl.formatMessage({ id: 'select-users' })}
+                multi
+                noOptionsMessage="no_result"
+              />
+            </NotationCard>
+          </Flex>
+          <>
             <ButtonToolbar className="box-content__toolbar">
               <SubmitButton
                 type="submit"
@@ -572,6 +725,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 <ProposalRevision proposal={proposal} isAdminView>
                   {openModal => (
                     <RevisionButton
+                      className="bg-white"
                       bsStyle="link"
                       id="proposal_admin_content_revision"
                       onClick={openModal}>
@@ -588,9 +742,9 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 submitting={submitting}
               />
             </ButtonToolbar>
-          </div>
+          </>
         </form>
-      </div>
+      </>
     );
   }
 }
@@ -607,6 +761,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
     proposal.form.questions,
     proposal.responses ? proposal.responses : [],
   );
+
   return {
     isAdmin: !!(
       (state.user.user && state.user.user.roles.includes('ROLE_ADMIN')) ||
@@ -645,6 +800,15 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
       media: proposal.media ? proposal.media : null,
       responses: defaultResponses,
       addressText: proposal.address ? proposal.address.formatted : null,
+      estimation: proposal.decision?.estimatedCost
+        ? proposal.decision?.estimatedCost
+        : proposal.estimation
+        ? proposal.estimation
+        : null,
+      likers: proposal.likers.map(u => ({
+        value: u.id,
+        label: u.displayName,
+      })),
     },
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
   };
@@ -658,6 +822,11 @@ export default createFragmentContainer(container, {
       ...ProposalFusionEditModal_proposal
       ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
       id
+      estimation
+      likers {
+        id
+        displayName
+      }
       mergedFrom {
         id
         adminUrl
@@ -699,8 +868,17 @@ export default createFragmentContainer(container, {
         id
         url
       }
+      decision {
+        estimatedCost
+        state
+      }
       form {
         id
+        adminUrl
+        analysisConfiguration {
+          costEstimationEnabled
+          isImmediatelyEffective
+        }
         districts {
           id
           name

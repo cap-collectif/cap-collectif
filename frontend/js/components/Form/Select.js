@@ -40,6 +40,7 @@ type Props = {
   onChange: () => void,
   labelClassName?: string,
   inputClassName?: string,
+  blockClassName?: string,
   selectFieldIsObject?: boolean,
   debounce?: boolean, // add delay in async load
   debounceMs?: number,
@@ -50,6 +51,7 @@ type Props = {
     label: string | React.Node,
     onClick: () => void,
   },
+  noOptionsMessage?: string,
 };
 
 const ClearIndicator = props => {
@@ -127,6 +129,7 @@ class renderSelect extends React.Component<Props> {
       label,
       labelClassName,
       inputClassName,
+      blockClassName = '',
       multi = false,
       disabled = false,
       autoload = false,
@@ -146,6 +149,7 @@ class renderSelect extends React.Component<Props> {
       description,
       typeForm,
       buttonAfter,
+      noOptionsMessage = 'result-not-found',
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
 
@@ -177,7 +181,10 @@ class renderSelect extends React.Component<Props> {
     }
 
     return (
-      <div className={`form-group ${this.canValidate() && error ? ' has-error' : ''}`}>
+      <div
+        className={`form-group ${blockClassName} ${
+          this.canValidate() && error ? ' has-error' : ''
+        }`}>
         {label && (
           <Label htmlFor={id} className={labelClassName || 'control-label'}>
             {label}
@@ -210,7 +217,7 @@ class renderSelect extends React.Component<Props> {
                 classNamePrefix="react-select"
                 name={name}
                 isMulti={multi}
-                noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
+                noOptionsMessage={() => <FormattedMessage id={noOptionsMessage} />}
                 loadingMessage={() => <FormattedMessage id="global.loading" />}
                 onBlur={() => onBlur()}
                 onFocus={onFocus}

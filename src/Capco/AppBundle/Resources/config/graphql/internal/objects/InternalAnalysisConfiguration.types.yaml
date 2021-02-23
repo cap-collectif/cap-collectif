@@ -24,6 +24,9 @@ InternalAnalysisConfiguration:
             effectiveDate:
                 type: 'DateTime'
                 description: 'The date on which the related decision will become effective'
+            isImmediatelyEffective:
+                type: 'Boolean!'
+                description: 'Indicates whether or not a proposal decision is immediately effective'
             favourableStatus:
                 type: 'ProposalStepStatus'
                 description: 'The available favourable statuses to apply on contributions.'

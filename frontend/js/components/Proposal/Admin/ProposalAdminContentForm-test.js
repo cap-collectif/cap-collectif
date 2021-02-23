@@ -20,6 +20,8 @@ describe('<ProposalAdminContentForm />', () => {
     category: null,
     district: null,
     address: null,
+    estimation: null,
+    likers: [{ value: '1', label: 'liker-1' }],
   };
 
   const props = {
@@ -40,6 +42,12 @@ describe('<ProposalAdminContentForm />', () => {
       summary: 'summary',
       body: 'body',
       publicationStatus: 'DRAFT',
+      estimation: 1000,
+      decision: {
+        estimatedCost: null,
+        state: 'IN_PROGRESS',
+      },
+      likers: [{ id: '1', displayName: 'liker-1' }],
       responses: [
         { question: { id: '1' }, value: 'value-1' },
         {
@@ -55,11 +63,16 @@ describe('<ProposalAdminContentForm />', () => {
       media: { id: '1', url: '' },
       form: {
         id: 'form1',
+        adminUrl: 'http://capco.dev/pfrom',
         districts: [],
         categories: [
           { id: '1', name: 'category-1' },
           { id: '2', name: 'category-2' },
         ],
+        analysisConfiguration: {
+          costEstimationEnabled: false,
+          isImmediatelyEffective: false,
+        },
         questions: [
           {
             id: '1',
@@ -117,6 +130,29 @@ describe('<ProposalAdminContentForm />', () => {
 
   it('render correctly with proposals revisions feature enabled', () => {
     const ownProps = { ...props, features: { ...props.features, proposal_revisions: true } };
+    const wrapper = shallow(<ProposalAdminContentForm {...ownProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly with estimation', () => {
+    const ownProps = {
+      ...props,
+      proposal: {
+        ...props.proposal,
+        form: {
+          ...props.proposal.form,
+          analysisConfiguration: {
+            costEstimationEnabled: true,
+            isImmediatelyEffective: true,
+          },
+        },
+        decision: {
+          estimatedCost: 10000,
+          state: 'DONE',
+        },
+      },
+    };
+
     const wrapper = shallow(<ProposalAdminContentForm {...ownProps} />);
     expect(wrapper).toMatchSnapshot();
   });

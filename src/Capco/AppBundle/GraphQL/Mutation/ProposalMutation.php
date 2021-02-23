@@ -47,8 +47,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class ProposalMutation implements ContainerAwareInterface
 {
-    use ResolverTrait;
     use ContainerAwareTrait;
+    use ResolverTrait;
 
     private LoggerInterface $logger;
     private ProposalLikersDataLoader $proposalLikersDataLoader;
@@ -476,6 +476,12 @@ class ProposalMutation implements ContainerAwareInterface
 
             throw new UserError($error);
         }
+        if (isset($values['likers'])) {
+            foreach ($values['likers'] as &$userGlobalId) {
+                $userGlobalId = GlobalIdResolver::getDecodedId($userGlobalId)['id'];
+            }
+        }
+
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
 
@@ -497,14 +503,14 @@ class ProposalMutation implements ContainerAwareInterface
         $proposalForm = $proposal->getProposalForm();
 
         if ($viewer !== $author && !$viewer->isAdmin()) {
-            $error = sprintf('You must be the author to update a proposal.');
+            $error = 'You must be the author to update a proposal.';
             $this->logger->error($error);
 
             throw new UserError($error);
         }
 
         if (!$proposal->canContribute($viewer) && !$viewer->isAdmin()) {
-            $error = sprintf('Sorry, you can\'t contribute to this proposal anymore.');
+            $error = 'Sorry, you can\'t contribute to this proposal anymore.';
             $this->logger->error($error);
 
             throw new UserError($error);
@@ -569,6 +575,10 @@ class ProposalMutation implements ContainerAwareInterface
         $this->container
             ->get('swarrot.publisher')
             ->publish($proposalQueue, new Message(json_encode($messageData)));
+
+        if (isset($values['likers'])) {
+            $this->proposalLikersDataLoader->invalidate($proposal);
+        }
 
         $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();

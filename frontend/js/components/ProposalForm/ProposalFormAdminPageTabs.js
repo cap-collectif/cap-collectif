@@ -29,6 +29,15 @@ const TABS = {
   SETTINGS: '/settings',
 };
 
+const setIntialIndex = (): number => {
+  const openModal = window.location.hash.includes('#openAnalysisStep') ? 2 : 0;
+  if (openModal > 0) {
+    const newUrl = window.location.href.replace('#openAnalysisStep', '');
+    window.history.pushState('', '', newUrl);
+  }
+  return openModal;
+};
+
 type RelayProps = {|
   proposalForm: ProposalFormAdminPageTabs_proposalForm,
   query: ProposalFormAdminPageTabs_query,
@@ -49,7 +58,7 @@ export const ProposalFormAdminPageTabs = ({
   <ProposalFormAdminPageTabsContainer id="proposal-form-admin-page">
     <MemoryRouter
       initialEntries={[...Object.values(TABS)].map(v => String(v))}
-      initialIndex={0}
+      initialIndex={setIntialIndex()}
       keyLength={Object.values(TABS).length}>
       <header>
         <div>

@@ -763,6 +763,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnalysisStep",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "RequirementConnection",
                                 "kind": "LinkedField",
                                 "name": "requirements",
@@ -1762,7 +1769,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "90dadb8adf66a12a15d8aee722c08b41",
+        "cacheID": "9156f4dcf55746eac92515003788d479",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1957,6 +1964,7 @@ fragment ProjectAdminForm_project on Project {
       allowAuthorsToAddNews
       budget
       mainView
+      isAnalysisStep
       requirements {
         reason
         edges {
@@ -2946,6 +2954,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnalysisStep",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "RequirementConnection",
                                 "kind": "LinkedField",
                                 "name": "requirements",
@@ -3945,7 +3960,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "90dadb8adf66a12a15d8aee722c08b41",
+        "cacheID": "9156f4dcf55746eac92515003788d479",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4140,6 +4155,7 @@ fragment ProjectAdminForm_project on Project {
       allowAuthorsToAddNews
       budget
       mainView
+      isAnalysisStep
       requirements {
         reason
         edges {

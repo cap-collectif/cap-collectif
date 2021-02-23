@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalAdminContentForm /> render correctly 1`] = `
-<div
-  className="box box-primary container-fluid"
->
+<Fragment>
   <Relay(Connect(ProposalFusionEditModal))
     onClose={[Function]}
     proposal={
@@ -19,10 +17,20 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         "category": Object {
           "id": "1",
         },
+        "decision": Object {
+          "estimatedCost": null,
+          "state": "IN_PROGRESS",
+        },
         "district": Object {
           "id": "1",
         },
+        "estimation": 1000,
         "form": Object {
+          "adminUrl": "http://capco.dev/pfrom",
+          "analysisConfiguration": Object {
+            "costEstimationEnabled": false,
+            "isImmediatelyEffective": false,
+          },
           "categories": Array [
             Object {
               "id": "1",
@@ -74,6 +82,12 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "usingThemes": true,
         },
         "id": "1",
+        "likers": Array [
+          Object {
+            "displayName": "liker-1",
+            "id": "1",
+          },
+        ],
         "media": Object {
           "id": "1",
           "url": "",
@@ -122,248 +136,464 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
     }
     show={false}
   />
-  <Uncontrolled(Panel)
-    className="mt-30 mb-0 panel_flex"
-    header={
-      <div>
-        <FormattedMessage
-          id="initial-proposals"
-          values={Object {}}
-        />
-        <ButtonToolbar
-          bsClass="btn-toolbar"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="warning"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.edit"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.delete"
-              values={Object {}}
-            />
-          </Button>
-        </ButtonToolbar>
-      </div>
-    }
-  >
-    <ListGroup
-      bsClass="list-group"
-      fill={true}
-    >
-      <ListGroupItem
-        bsClass="list-group-item"
-        key="1"
-        listItem={false}
-      >
-        <a
-          href="http://capco.dev/child1"
-        >
-          Child 1
-        </a>
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        key="2"
-        listItem={false}
-      >
-        <a
-          href="http://capco.dev/child2"
-        >
-          Child 2
-        </a>
-      </ListGroupItem>
-    </ListGroup>
-  </Uncontrolled(Panel)>
   <form
     onSubmit={[MockFunction]}
   >
     <div
-      className="box-header"
+      className="box box-primary container-fluide"
     >
-      <h3
-        className="box-title"
+      <div
+        className="box-header"
       >
-        <FormattedMessage
-          id="global.contenu"
-          values={Object {}}
-        />
-      </h3>
-      <a
-        className="pull-right link"
-        href="admin.help.link.proposal.body"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <i
-          className="fa fa-info-circle"
-        />
-        global.help
-      </a>
-    </div>
-    <div
-      className="box-content box-content__content-form"
-    >
-      <Field
-        component={[Function]}
-        id="proposal_title"
-        label={
+        <h3
+          className="box-title"
+        >
           <FormattedMessage
-            id="proposal.title"
+            id="global.contenu"
             values={Object {}}
           />
-        }
-        name="title"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        id="global.summary"
-        label={
-          <span>
+        </h3>
+        <a
+          className="pull-right link"
+          href="admin.help.link.proposal.body"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <i
+            className="fa fa-info-circle"
+          />
+          global.help
+        </a>
+      </div>
+      <div
+        className="box-content box-content__content-form"
+      >
+        <Field
+          component={[Function]}
+          id="proposal_title"
+          label={
             <FormattedMessage
-              id="global.summary"
+              id="proposal.title"
               values={Object {}}
             />
-            <span
-              className="excerpt"
-            >
-               
+          }
+          name="title"
+          type="text"
+        />
+        <Field
+          component={[Function]}
+          id="global.summary"
+          label={
+            <span>
               <FormattedMessage
-                id="global.optional"
+                id="global.summary"
+                values={Object {}}
+              />
+              <span
+                className="excerpt"
+              >
+                 
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </span>
+            </span>
+          }
+          name="summary"
+          type="textarea"
+        />
+        <UserListField
+          ariaControls="ProposalAdminContentForm-filter-user-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          className=""
+          clearable={false}
+          debounce={false}
+          disabled={false}
+          id="proposal-admin-author"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="global.author"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          multi={false}
+          name="author"
+          placeholder="global.author"
+          selectFieldIsObject={true}
+        />
+        <Field
+          component={[Function]}
+          id="global.category"
+          label={
+            <span>
+              <FormattedMessage
+                id="global.category"
                 values={Object {}}
               />
             </span>
-          </span>
-        }
-        name="summary"
-        type="textarea"
-      />
-      <UserListField
-        ariaControls="ProposalAdminContentForm-filter-user-listbox"
-        authorOfEvent={false}
-        autoload={false}
-        className=""
-        clearable={false}
-        debounce={false}
-        disabled={false}
-        id="proposal-admin-author"
-        inputClassName="fake-inputClassName"
-        label={
+          }
+          name="category"
+          type="select"
+        >
           <FormattedMessage
-            id="global.author"
+            id="proposal.select.category"
             values={Object {}}
-          />
-        }
-        labelClassName="control-label"
-        multi={false}
-        name="author"
-        placeholder="global.author"
-        selectFieldIsObject={true}
-      />
-      <Field
-        component={[Function]}
-        id="global.category"
-        label={
-          <span>
+          >
+            <Component />
+          </FormattedMessage>
+          <option
+            key="1"
+            value="1"
+          >
+            category-1
+          </option>
+          <option
+            key="2"
+            value="2"
+          >
+            category-2
+          </option>
+        </Field>
+        <Field
+          addressProps={
+            Object {
+              "getAddress": [Function],
+            }
+          }
+          component={[Function]}
+          formName="proposal-admin-edit"
+          id="proposal_address"
+          label={
             <FormattedMessage
-              id="global.category"
+              id="proposal_form.address"
               values={Object {}}
             />
-          </span>
-        }
-        name="category"
-        type="select"
+          }
+          name="addressText"
+          placeholder="proposal.map.form.placeholder"
+          type="address"
+        />
+        <Field
+          component={[Function]}
+          id="proposal_body"
+          label={
+            <FormattedMessage
+              id="proposal.body"
+              values={Object {}}
+            />
+          }
+          name="body"
+          type="editor"
+        />
+        <FieldArray
+          change={[MockFunction]}
+          component={[Function]}
+          form="proposal-admin-edit"
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          memoize={[Function]}
+          name="responses"
+          questions={
+            Array [
+              Object {
+                "__typename": "SimpleQuestion",
+                "alwaysJumpDestinationQuestion": null,
+                "choices": Object {
+                  "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
+                  "totalCount": 0,
+                },
+                "description": null,
+                "helpText": "Help 1",
+                "hidden": false,
+                "id": "1",
+                "isOtherAllowed": false,
+                "jumps": Array [],
+                "level": 0,
+                "number": 1,
+                "position": 0,
+                "private": false,
+                "required": true,
+                "title": "title",
+                "type": "text",
+                "validationRule": null,
+              },
+            ]
+          }
+          responses={Array []}
+        />
+        <Field
+          component={[Function]}
+          id="proposal_media"
+          image=""
+          label={
+            <span>
+              <FormattedMessage
+                id="proposal.media"
+                values={Object {}}
+              />
+              <span
+                className="excerpt"
+              >
+                 
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </span>
+            </span>
+          }
+          name="media"
+          type="image"
+        />
+      </div>
+    </div>
+    <ForwardRef
+      direction="row"
+      mb={24}
+      mt={24}
+      spacing={24}
+    >
+      <ProposalAdminContentForm__NotationCard
+        backgroundColor="white"
+        flex="1"
+        px={24}
       >
-        <FormattedMessage
-          id="proposal.select.category"
-          values={Object {}}
+        <ForwardRef
+          spacing="9px"
         >
-          <Component />
-        </FormattedMessage>
-        <option
-          key="1"
-          value="1"
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="proposal.estimation"
+              values={Object {}}
+            />
+          </h3>
+          <a
+            className="link"
+            href="admin.help.link.proposal.estimation"
+            rel="noopener noreferrer"
+            style={
+              Object {
+                "marginTop": 3,
+              }
+            }
+            target="_blank"
+          >
+            <Icon
+              color="#3b88fd"
+              name="information"
+              size={14}
+            />
+          </a>
+        </ForwardRef>
+        <ForwardRef
+          mb="24px"
+          mt="8px"
         >
-          category-1
-        </option>
-        <option
-          key="2"
-          value="2"
+          <AppBox
+            ml={0}
+          >
+            <Text
+              as="div"
+              color="#85919D"
+              fontSize="13px"
+              fontWeight="normal"
+              lineHeight="16px"
+              maxWidth="450px"
+            >
+              <FormattedMessage
+                id="estimation-help-text-2"
+                values={Object {}}
+              />
+            </Text>
+            <Field
+              addonBefore={
+                <Glyphicon
+                  bsClass="glyphicon"
+                  glyph="euro"
+                />
+              }
+              className="mt-24 mb-24"
+              component={[Function]}
+              id="proposal_estimation"
+              label={
+                <FormattedMessage
+                  id="cost"
+                  values={Object {}}
+                />
+              }
+              labelClassName="mb-5"
+              name="estimation"
+              normalize={[Function]}
+              placeholder="estimation-placeholder"
+              type="number"
+            />
+          </AppBox>
+        </ForwardRef>
+      </ProposalAdminContentForm__NotationCard>
+      <ProposalAdminContentForm__NotationCard
+        backgroundColor="white"
+        flex="1"
+        px={24}
+      >
+        <ForwardRef
+          spacing="9px"
         >
-          category-2
-        </option>
-      </Field>
-      <Field
-        addressProps={
-          Object {
-            "getAddress": [Function],
-          }
-        }
-        component={[Function]}
-        formName="proposal-admin-edit"
-        id="proposal_address"
-        label={
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="admin.fields.proposal.likers"
+              values={Object {}}
+            />
+          </h3>
+          <a
+            className="link"
+            href="admin.help.link.proposal.heart"
+            rel="noopener noreferrer"
+            style={
+              Object {
+                "marginTop": 3,
+              }
+            }
+            target="_blank"
+          >
+            <Icon
+              color="#3b88fd"
+              name="information"
+              size={14}
+            />
+          </a>
+        </ForwardRef>
+        <AppBox
+          color="#85919D"
+          fontSize="13px"
+          fontWeight="normal"
+          lineHeight="16px"
+          maxWidth="450px"
+          mt="8px"
+        >
           <FormattedMessage
-            id="proposal_form.address"
+            id="likers-helpText"
             values={Object {}}
           />
-        }
-        name="addressText"
-        placeholder="proposal.map.form.placeholder"
-        type="address"
-      />
-      <Field
-        component={[Function]}
-        id="proposal_body"
-        label={
-          <FormattedMessage
-            id="proposal.body"
-            values={Object {}}
-          />
-        }
-        name="body"
-        type="editor"
-      />
-      <FieldArray
-        change={[MockFunction]}
-        component={[Function]}
-        form="proposal-admin-edit"
-        intl={
-          Object {
-            "formatDate": [Function],
-            "formatHTMLMessage": [Function],
-            "formatMessage": [Function],
-            "formatNumber": [Function],
-            "formatPlural": [Function],
-            "formatRelative": [Function],
-            "formatTime": [Function],
-            "formats": Object {},
-            "locale": "fr-FR",
-            "messages": Object {},
-            "now": [Function],
+        </AppBox>
+        <UserListField
+          abelClassName="mt-0 mb-5"
+          ariaControls="ProposalAdminNotationForm-filter-user-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          blockClassName="likers-fields"
+          className=""
+          clearable={false}
+          debounce={false}
+          id="likers"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.event_registration.user"
+              values={Object {}}
+            />
           }
-        }
-        memoize={[Function]}
-        name="responses"
-        questions={
-          Array [
+          multi={true}
+          name="likers"
+          noOptionsMessage="no_result"
+          placeholder="select-users"
+        />
+      </ProposalAdminContentForm__NotationCard>
+    </ForwardRef>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        bsStyle="primary"
+        disabled={true}
+        id="proposal_admin_content_save"
+        label="global.save"
+        onSubmit={[Function]}
+        type="submit"
+      />
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={true}
+      />
+    </ButtonToolbar>
+  </form>
+</Fragment>
+`;
+
+exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
+<Fragment>
+  <Relay(Connect(ProposalFusionEditModal))
+    onClose={[Function]}
+    proposal={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "address": null,
+        "author": Object {
+          "displayName": "Author",
+          "id": "1",
+        },
+        "body": "body",
+        "category": Object {
+          "id": "1",
+        },
+        "decision": Object {
+          "estimatedCost": 10000,
+          "state": "DONE",
+        },
+        "district": Object {
+          "id": "1",
+        },
+        "estimation": 1000,
+        "form": Object {
+          "adminUrl": "http://capco.dev/pfrom",
+          "analysisConfiguration": Object {
+            "costEstimationEnabled": true,
+            "isImmediatelyEffective": true,
+          },
+          "categories": Array [
+            Object {
+              "id": "1",
+              "name": "category-1",
+            },
+            Object {
+              "id": "2",
+              "name": "category-2",
+            },
+          ],
+          "categoryMandatory": true,
+          "descriptionMandatory": true,
+          "districtMandatory": true,
+          "districts": Array [],
+          "id": "form1",
+          "questions": Array [
             Object {
               "__typename": "SimpleQuestion",
               "alwaysJumpDestinationQuestion": null,
@@ -389,63 +619,483 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
               "type": "text",
               "validationRule": null,
             },
-          ]
-        }
-        responses={Array []}
-      />
-      <Field
-        component={[Function]}
-        id="proposal_media"
-        image=""
-        label={
-          <span>
+          ],
+          "themeMandatory": true,
+          "usingAddress": true,
+          "usingCategories": true,
+          "usingDescription": true,
+          "usingDistrict": true,
+          "usingSummary": true,
+          "usingThemes": true,
+        },
+        "id": "1",
+        "likers": Array [
+          Object {
+            "displayName": "liker-1",
+            "id": "1",
+          },
+        ],
+        "media": Object {
+          "id": "1",
+          "url": "",
+        },
+        "mergedFrom": Array [
+          Object {
+            "adminUrl": "http://capco.dev/child1",
+            "id": "1",
+            "title": "Child 1",
+          },
+          Object {
+            "adminUrl": "http://capco.dev/child2",
+            "id": "2",
+            "title": "Child 2",
+          },
+        ],
+        "mergedIn": Array [],
+        "publicationStatus": "DRAFT",
+        "responses": Array [
+          Object {
+            "question": Object {
+              "id": "1",
+            },
+            "value": "value-1",
+          },
+          Object {
+            "medias": Array [
+              Object {
+                "id": "1",
+                "name": "media-1",
+                "size": "100",
+                "url": "",
+              },
+            ],
+            "question": Object {
+              "id": "2",
+            },
+          },
+        ],
+        "summary": "summary",
+        "theme": Object {
+          "id": "theme-1",
+        },
+        "title": "title-1",
+      }
+    }
+    show={false}
+  />
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box box-primary container-fluide"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="global.contenu"
+            values={Object {}}
+          />
+        </h3>
+        <a
+          className="pull-right link"
+          href="admin.help.link.proposal.body"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <i
+            className="fa fa-info-circle"
+          />
+          global.help
+        </a>
+      </div>
+      <div
+        className="box-content box-content__content-form"
+      >
+        <Field
+          component={[Function]}
+          id="proposal_title"
+          label={
             <FormattedMessage
-              id="proposal.media"
+              id="proposal.title"
               values={Object {}}
             />
-            <span
-              className="excerpt"
-            >
-               
+          }
+          name="title"
+          type="text"
+        />
+        <Field
+          component={[Function]}
+          id="global.summary"
+          label={
+            <span>
               <FormattedMessage
-                id="global.optional"
+                id="global.summary"
+                values={Object {}}
+              />
+              <span
+                className="excerpt"
+              >
+                 
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </span>
+            </span>
+          }
+          name="summary"
+          type="textarea"
+        />
+        <UserListField
+          ariaControls="ProposalAdminContentForm-filter-user-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          className=""
+          clearable={false}
+          debounce={false}
+          disabled={false}
+          id="proposal-admin-author"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="global.author"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          multi={false}
+          name="author"
+          placeholder="global.author"
+          selectFieldIsObject={true}
+        />
+        <Field
+          component={[Function]}
+          id="global.category"
+          label={
+            <span>
+              <FormattedMessage
+                id="global.category"
                 values={Object {}}
               />
             </span>
-          </span>
-        }
-        name="media"
-        type="image"
-      />
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-      >
-        <Connect(SubmitButton)
-          bsStyle="primary"
-          disabled={true}
-          id="proposal_admin_content_save"
-          label="global.save"
-          onSubmit={[Function]}
-          type="submit"
+          }
+          name="category"
+          type="select"
+        >
+          <FormattedMessage
+            id="proposal.select.category"
+            values={Object {}}
+          >
+            <Component />
+          </FormattedMessage>
+          <option
+            key="1"
+            value="1"
+          >
+            category-1
+          </option>
+          <option
+            key="2"
+            value="2"
+          >
+            category-2
+          </option>
+        </Field>
+        <Field
+          addressProps={
+            Object {
+              "getAddress": [Function],
+            }
+          }
+          component={[Function]}
+          formName="proposal-admin-edit"
+          id="proposal_address"
+          label={
+            <FormattedMessage
+              id="proposal_form.address"
+              values={Object {}}
+            />
+          }
+          name="addressText"
+          placeholder="proposal.map.form.placeholder"
+          type="address"
         />
-        <AlertForm
-          invalid={false}
-          submitFailed={false}
-          submitSucceeded={false}
-          submitting={false}
-          valid={true}
+        <Field
+          component={[Function]}
+          id="proposal_body"
+          label={
+            <FormattedMessage
+              id="proposal.body"
+              values={Object {}}
+            />
+          }
+          name="body"
+          type="editor"
         />
-      </ButtonToolbar>
+        <FieldArray
+          change={[MockFunction]}
+          component={[Function]}
+          form="proposal-admin-edit"
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          memoize={[Function]}
+          name="responses"
+          questions={
+            Array [
+              Object {
+                "__typename": "SimpleQuestion",
+                "alwaysJumpDestinationQuestion": null,
+                "choices": Object {
+                  "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
+                  "totalCount": 0,
+                },
+                "description": null,
+                "helpText": "Help 1",
+                "hidden": false,
+                "id": "1",
+                "isOtherAllowed": false,
+                "jumps": Array [],
+                "level": 0,
+                "number": 1,
+                "position": 0,
+                "private": false,
+                "required": true,
+                "title": "title",
+                "type": "text",
+                "validationRule": null,
+              },
+            ]
+          }
+          responses={Array []}
+        />
+        <Field
+          component={[Function]}
+          id="proposal_media"
+          image=""
+          label={
+            <span>
+              <FormattedMessage
+                id="proposal.media"
+                values={Object {}}
+              />
+              <span
+                className="excerpt"
+              >
+                 
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </span>
+            </span>
+          }
+          name="media"
+          type="image"
+        />
+      </div>
     </div>
+    <ForwardRef
+      direction="row"
+      mb={24}
+      mt={24}
+      spacing={24}
+    >
+      <ProposalAdminContentForm__NotationCard
+        backgroundColor="white"
+        flex="1"
+        px={24}
+      >
+        <ForwardRef
+          spacing="9px"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="proposal.estimation"
+              values={Object {}}
+            />
+          </h3>
+          <a
+            className="link"
+            href="admin.help.link.proposal.estimation"
+            rel="noopener noreferrer"
+            style={
+              Object {
+                "marginTop": 3,
+              }
+            }
+            target="_blank"
+          >
+            <Icon
+              color="#3b88fd"
+              name="information"
+              size={14}
+            />
+          </a>
+        </ForwardRef>
+        <ForwardRef
+          mb="24px"
+          mt="8px"
+        >
+          <AppBox
+            ml={0}
+          >
+            <Text
+              as="div"
+              color="#85919D"
+              fontSize="13px"
+              fontWeight="normal"
+              lineHeight="16px"
+              maxWidth="450px"
+            >
+              <FormattedMessage
+                id="estimation-help-text-2"
+                values={Object {}}
+              />
+            </Text>
+            <Field
+              addonBefore={
+                <Glyphicon
+                  bsClass="glyphicon"
+                  glyph="euro"
+                />
+              }
+              className="mt-24 mb-24"
+              component={[Function]}
+              id="proposal_estimation"
+              label={
+                <FormattedMessage
+                  id="cost"
+                  values={Object {}}
+                />
+              }
+              labelClassName="mb-5"
+              name="estimation"
+              normalize={[Function]}
+              placeholder="estimation-placeholder"
+              type="number"
+            />
+          </AppBox>
+        </ForwardRef>
+      </ProposalAdminContentForm__NotationCard>
+      <ProposalAdminContentForm__NotationCard
+        backgroundColor="white"
+        flex="1"
+        px={24}
+      >
+        <ForwardRef
+          spacing="9px"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="admin.fields.proposal.likers"
+              values={Object {}}
+            />
+          </h3>
+          <a
+            className="link"
+            href="admin.help.link.proposal.heart"
+            rel="noopener noreferrer"
+            style={
+              Object {
+                "marginTop": 3,
+              }
+            }
+            target="_blank"
+          >
+            <Icon
+              color="#3b88fd"
+              name="information"
+              size={14}
+            />
+          </a>
+        </ForwardRef>
+        <AppBox
+          color="#85919D"
+          fontSize="13px"
+          fontWeight="normal"
+          lineHeight="16px"
+          maxWidth="450px"
+          mt="8px"
+        >
+          <FormattedMessage
+            id="likers-helpText"
+            values={Object {}}
+          />
+        </AppBox>
+        <UserListField
+          abelClassName="mt-0 mb-5"
+          ariaControls="ProposalAdminNotationForm-filter-user-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          blockClassName="likers-fields"
+          className=""
+          clearable={false}
+          debounce={false}
+          id="likers"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.event_registration.user"
+              values={Object {}}
+            />
+          }
+          multi={true}
+          name="likers"
+          noOptionsMessage="no_result"
+          placeholder="select-users"
+        />
+      </ProposalAdminContentForm__NotationCard>
+    </ForwardRef>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        bsStyle="primary"
+        disabled={true}
+        id="proposal_admin_content_save"
+        label="global.save"
+        onSubmit={[Function]}
+        type="submit"
+      />
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={true}
+      />
+    </ButtonToolbar>
   </form>
-</div>
+</Fragment>
 `;
 
 exports[`<ProposalAdminContentForm /> render correctly with proposals revisions feature enabled 1`] = `
-<div
-  className="box box-primary container-fluid"
->
+<Fragment>
   <Relay(Connect(ProposalFusionEditModal))
     onClose={[Function]}
     proposal={
@@ -461,10 +1111,20 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         "category": Object {
           "id": "1",
         },
+        "decision": Object {
+          "estimatedCost": null,
+          "state": "IN_PROGRESS",
+        },
         "district": Object {
           "id": "1",
         },
+        "estimation": 1000,
         "form": Object {
+          "adminUrl": "http://capco.dev/pfrom",
+          "analysisConfiguration": Object {
+            "costEstimationEnabled": false,
+            "isImmediatelyEffective": false,
+          },
           "categories": Array [
             Object {
               "id": "1",
@@ -516,6 +1176,12 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "usingThemes": true,
         },
         "id": "1",
+        "likers": Array [
+          Object {
+            "displayName": "liker-1",
+            "id": "1",
+          },
+        ],
         "media": Object {
           "id": "1",
           "url": "",
@@ -564,441 +1230,548 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
     }
     show={false}
   />
-  <Uncontrolled(Panel)
-    className="mt-30 mb-0 panel_flex"
-    header={
-      <div>
-        <FormattedMessage
-          id="initial-proposals"
-          values={Object {}}
-        />
-        <ButtonToolbar
-          bsClass="btn-toolbar"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="warning"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.edit"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            disabled={false}
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.delete"
-              values={Object {}}
-            />
-          </Button>
-        </ButtonToolbar>
-      </div>
-    }
-  >
-    <ListGroup
-      bsClass="list-group"
-      fill={true}
-    >
-      <ListGroupItem
-        bsClass="list-group-item"
-        key="1"
-        listItem={false}
-      >
-        <a
-          href="http://capco.dev/child1"
-        >
-          Child 1
-        </a>
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        key="2"
-        listItem={false}
-      >
-        <a
-          href="http://capco.dev/child2"
-        >
-          Child 2
-        </a>
-      </ListGroupItem>
-    </ListGroup>
-  </Uncontrolled(Panel)>
   <form
     onSubmit={[MockFunction]}
   >
     <div
-      className="box-header"
+      className="box box-primary container-fluide"
     >
-      <h3
-        className="box-title"
+      <div
+        className="box-header"
       >
-        <FormattedMessage
-          id="global.contenu"
-          values={Object {}}
-        />
-      </h3>
-      <a
-        className="pull-right link"
-        href="admin.help.link.proposal.body"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <i
-          className="fa fa-info-circle"
-        />
-        global.help
-      </a>
-    </div>
-    <div
-      className="box-content box-content__content-form"
-    >
-      <Field
-        component={[Function]}
-        id="proposal_title"
-        label={
+        <h3
+          className="box-title"
+        >
           <FormattedMessage
-            id="proposal.title"
+            id="global.contenu"
             values={Object {}}
           />
-        }
-        name="title"
-        type="text"
-      />
-      <Field
-        component={[Function]}
-        id="global.summary"
-        label={
-          <span>
+        </h3>
+        <a
+          className="pull-right link"
+          href="admin.help.link.proposal.body"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <i
+            className="fa fa-info-circle"
+          />
+          global.help
+        </a>
+      </div>
+      <div
+        className="box-content box-content__content-form"
+      >
+        <Field
+          component={[Function]}
+          id="proposal_title"
+          label={
             <FormattedMessage
-              id="global.summary"
+              id="proposal.title"
               values={Object {}}
             />
-            <span
-              className="excerpt"
-            >
-               
+          }
+          name="title"
+          type="text"
+        />
+        <Field
+          component={[Function]}
+          id="global.summary"
+          label={
+            <span>
               <FormattedMessage
-                id="global.optional"
+                id="global.summary"
+                values={Object {}}
+              />
+              <span
+                className="excerpt"
+              >
+                 
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </span>
+            </span>
+          }
+          name="summary"
+          type="textarea"
+        />
+        <UserListField
+          ariaControls="ProposalAdminContentForm-filter-user-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          className=""
+          clearable={false}
+          debounce={false}
+          disabled={false}
+          id="proposal-admin-author"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="global.author"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          multi={false}
+          name="author"
+          placeholder="global.author"
+          selectFieldIsObject={true}
+        />
+        <Field
+          component={[Function]}
+          id="global.category"
+          label={
+            <span>
+              <FormattedMessage
+                id="global.category"
                 values={Object {}}
               />
             </span>
-          </span>
-        }
-        name="summary"
-        type="textarea"
-      />
-      <UserListField
-        ariaControls="ProposalAdminContentForm-filter-user-listbox"
-        authorOfEvent={false}
-        autoload={false}
-        className=""
-        clearable={false}
-        debounce={false}
-        disabled={false}
-        id="proposal-admin-author"
-        inputClassName="fake-inputClassName"
-        label={
-          <FormattedMessage
-            id="global.author"
-            values={Object {}}
-          />
-        }
-        labelClassName="control-label"
-        multi={false}
-        name="author"
-        placeholder="global.author"
-        selectFieldIsObject={true}
-      />
-      <Field
-        component={[Function]}
-        id="global.category"
-        label={
-          <span>
-            <FormattedMessage
-              id="global.category"
-              values={Object {}}
-            />
-          </span>
-        }
-        name="category"
-        type="select"
-      >
-        <FormattedMessage
-          id="proposal.select.category"
-          values={Object {}}
-        >
-          <Component />
-        </FormattedMessage>
-        <option
-          key="1"
-          value="1"
-        >
-          category-1
-        </option>
-        <option
-          key="2"
-          value="2"
-        >
-          category-2
-        </option>
-      </Field>
-      <Field
-        addressProps={
-          Object {
-            "getAddress": [Function],
           }
-        }
-        component={[Function]}
-        formName="proposal-admin-edit"
-        id="proposal_address"
-        label={
+          name="category"
+          type="select"
+        >
           <FormattedMessage
-            id="proposal_form.address"
+            id="proposal.select.category"
             values={Object {}}
-          />
-        }
-        name="addressText"
-        placeholder="proposal.map.form.placeholder"
-        type="address"
-      />
-      <Field
-        component={[Function]}
-        id="proposal_body"
-        label={
-          <FormattedMessage
-            id="proposal.body"
-            values={Object {}}
-          />
-        }
-        name="body"
-        type="editor"
-      />
-      <FieldArray
-        change={[MockFunction]}
-        component={[Function]}
-        form="proposal-admin-edit"
-        intl={
-          Object {
-            "formatDate": [Function],
-            "formatHTMLMessage": [Function],
-            "formatMessage": [Function],
-            "formatNumber": [Function],
-            "formatPlural": [Function],
-            "formatRelative": [Function],
-            "formatTime": [Function],
-            "formats": Object {},
-            "locale": "fr-FR",
-            "messages": Object {},
-            "now": [Function],
-          }
-        }
-        memoize={[Function]}
-        name="responses"
-        questions={
-          Array [
+          >
+            <Component />
+          </FormattedMessage>
+          <option
+            key="1"
+            value="1"
+          >
+            category-1
+          </option>
+          <option
+            key="2"
+            value="2"
+          >
+            category-2
+          </option>
+        </Field>
+        <Field
+          addressProps={
             Object {
-              "__typename": "SimpleQuestion",
-              "alwaysJumpDestinationQuestion": null,
-              "choices": Object {
-                "edges": Array [],
-                "pageInfo": Object {
-                  "hasNextPage": false,
-                },
-                "totalCount": 0,
-              },
-              "description": null,
-              "helpText": "Help 1",
-              "hidden": false,
-              "id": "1",
-              "isOtherAllowed": false,
-              "jumps": Array [],
-              "level": 0,
-              "number": 1,
-              "position": 0,
-              "private": false,
-              "required": true,
-              "title": "title",
-              "type": "text",
-              "validationRule": null,
-            },
-          ]
-        }
-        responses={Array []}
-      />
-      <Field
-        component={[Function]}
-        id="proposal_media"
-        image=""
-        label={
-          <span>
-            <FormattedMessage
-              id="proposal.media"
-              values={Object {}}
-            />
-            <span
-              className="excerpt"
-            >
-               
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
-            </span>
-          </span>
-        }
-        name="media"
-        type="image"
-      />
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-      >
-        <Connect(SubmitButton)
-          bsStyle="primary"
-          disabled={true}
-          id="proposal_admin_content_save"
-          label="global.save"
-          onSubmit={[Function]}
-          type="submit"
-        />
-        <ProposalRevision
-          isAdminView={true}
-          proposal={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "address": null,
-              "author": Object {
-                "displayName": "Author",
-                "id": "1",
-              },
-              "body": "body",
-              "category": Object {
-                "id": "1",
-              },
-              "district": Object {
-                "id": "1",
-              },
-              "form": Object {
-                "categories": Array [
-                  Object {
-                    "id": "1",
-                    "name": "category-1",
-                  },
-                  Object {
-                    "id": "2",
-                    "name": "category-2",
-                  },
-                ],
-                "categoryMandatory": true,
-                "descriptionMandatory": true,
-                "districtMandatory": true,
-                "districts": Array [],
-                "id": "form1",
-                "questions": Array [
-                  Object {
-                    "__typename": "SimpleQuestion",
-                    "alwaysJumpDestinationQuestion": null,
-                    "choices": Object {
-                      "edges": Array [],
-                      "pageInfo": Object {
-                        "hasNextPage": false,
-                      },
-                      "totalCount": 0,
-                    },
-                    "description": null,
-                    "helpText": "Help 1",
-                    "hidden": false,
-                    "id": "1",
-                    "isOtherAllowed": false,
-                    "jumps": Array [],
-                    "level": 0,
-                    "number": 1,
-                    "position": 0,
-                    "private": false,
-                    "required": true,
-                    "title": "title",
-                    "type": "text",
-                    "validationRule": null,
-                  },
-                ],
-                "themeMandatory": true,
-                "usingAddress": true,
-                "usingCategories": true,
-                "usingDescription": true,
-                "usingDistrict": true,
-                "usingSummary": true,
-                "usingThemes": true,
-              },
-              "id": "1",
-              "media": Object {
-                "id": "1",
-                "url": "",
-              },
-              "mergedFrom": Array [
-                Object {
-                  "adminUrl": "http://capco.dev/child1",
-                  "id": "1",
-                  "title": "Child 1",
-                },
-                Object {
-                  "adminUrl": "http://capco.dev/child2",
-                  "id": "2",
-                  "title": "Child 2",
-                },
-              ],
-              "mergedIn": Array [],
-              "publicationStatus": "DRAFT",
-              "responses": Array [
-                Object {
-                  "question": Object {
-                    "id": "1",
-                  },
-                  "value": "value-1",
-                },
-                Object {
-                  "medias": Array [
-                    Object {
-                      "id": "1",
-                      "name": "media-1",
-                      "size": "100",
-                      "url": "",
-                    },
-                  ],
-                  "question": Object {
-                    "id": "2",
-                  },
-                },
-              ],
-              "summary": "summary",
-              "theme": Object {
-                "id": "theme-1",
-              },
-              "title": "title-1",
+              "getAddress": [Function],
             }
           }
-        >
-          <Component />
-        </ProposalRevision>
-        <AlertForm
-          invalid={false}
-          submitFailed={false}
-          submitSucceeded={false}
-          submitting={false}
-          valid={true}
+          component={[Function]}
+          formName="proposal-admin-edit"
+          id="proposal_address"
+          label={
+            <FormattedMessage
+              id="proposal_form.address"
+              values={Object {}}
+            />
+          }
+          name="addressText"
+          placeholder="proposal.map.form.placeholder"
+          type="address"
         />
-      </ButtonToolbar>
+        <Field
+          component={[Function]}
+          id="proposal_body"
+          label={
+            <FormattedMessage
+              id="proposal.body"
+              values={Object {}}
+            />
+          }
+          name="body"
+          type="editor"
+        />
+        <FieldArray
+          change={[MockFunction]}
+          component={[Function]}
+          form="proposal-admin-edit"
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          memoize={[Function]}
+          name="responses"
+          questions={
+            Array [
+              Object {
+                "__typename": "SimpleQuestion",
+                "alwaysJumpDestinationQuestion": null,
+                "choices": Object {
+                  "edges": Array [],
+                  "pageInfo": Object {
+                    "hasNextPage": false,
+                  },
+                  "totalCount": 0,
+                },
+                "description": null,
+                "helpText": "Help 1",
+                "hidden": false,
+                "id": "1",
+                "isOtherAllowed": false,
+                "jumps": Array [],
+                "level": 0,
+                "number": 1,
+                "position": 0,
+                "private": false,
+                "required": true,
+                "title": "title",
+                "type": "text",
+                "validationRule": null,
+              },
+            ]
+          }
+          responses={Array []}
+        />
+        <Field
+          component={[Function]}
+          id="proposal_media"
+          image=""
+          label={
+            <span>
+              <FormattedMessage
+                id="proposal.media"
+                values={Object {}}
+              />
+              <span
+                className="excerpt"
+              >
+                 
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </span>
+            </span>
+          }
+          name="media"
+          type="image"
+        />
+      </div>
     </div>
+    <ForwardRef
+      direction="row"
+      mb={24}
+      mt={24}
+      spacing={24}
+    >
+      <ProposalAdminContentForm__NotationCard
+        backgroundColor="white"
+        flex="1"
+        px={24}
+      >
+        <ForwardRef
+          spacing="9px"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="proposal.estimation"
+              values={Object {}}
+            />
+          </h3>
+          <a
+            className="link"
+            href="admin.help.link.proposal.estimation"
+            rel="noopener noreferrer"
+            style={
+              Object {
+                "marginTop": 3,
+              }
+            }
+            target="_blank"
+          >
+            <Icon
+              color="#3b88fd"
+              name="information"
+              size={14}
+            />
+          </a>
+        </ForwardRef>
+        <ForwardRef
+          mb="24px"
+          mt="8px"
+        >
+          <AppBox
+            ml={0}
+          >
+            <Text
+              as="div"
+              color="#85919D"
+              fontSize="13px"
+              fontWeight="normal"
+              lineHeight="16px"
+              maxWidth="450px"
+            >
+              <FormattedMessage
+                id="estimation-help-text-2"
+                values={Object {}}
+              />
+            </Text>
+            <Field
+              addonBefore={
+                <Glyphicon
+                  bsClass="glyphicon"
+                  glyph="euro"
+                />
+              }
+              className="mt-24 mb-24"
+              component={[Function]}
+              id="proposal_estimation"
+              label={
+                <FormattedMessage
+                  id="cost"
+                  values={Object {}}
+                />
+              }
+              labelClassName="mb-5"
+              name="estimation"
+              normalize={[Function]}
+              placeholder="estimation-placeholder"
+              type="number"
+            />
+          </AppBox>
+        </ForwardRef>
+      </ProposalAdminContentForm__NotationCard>
+      <ProposalAdminContentForm__NotationCard
+        backgroundColor="white"
+        flex="1"
+        px={24}
+      >
+        <ForwardRef
+          spacing="9px"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="admin.fields.proposal.likers"
+              values={Object {}}
+            />
+          </h3>
+          <a
+            className="link"
+            href="admin.help.link.proposal.heart"
+            rel="noopener noreferrer"
+            style={
+              Object {
+                "marginTop": 3,
+              }
+            }
+            target="_blank"
+          >
+            <Icon
+              color="#3b88fd"
+              name="information"
+              size={14}
+            />
+          </a>
+        </ForwardRef>
+        <AppBox
+          color="#85919D"
+          fontSize="13px"
+          fontWeight="normal"
+          lineHeight="16px"
+          maxWidth="450px"
+          mt="8px"
+        >
+          <FormattedMessage
+            id="likers-helpText"
+            values={Object {}}
+          />
+        </AppBox>
+        <UserListField
+          abelClassName="mt-0 mb-5"
+          ariaControls="ProposalAdminNotationForm-filter-user-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          blockClassName="likers-fields"
+          className=""
+          clearable={false}
+          debounce={false}
+          id="likers"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.event_registration.user"
+              values={Object {}}
+            />
+          }
+          multi={true}
+          name="likers"
+          noOptionsMessage="no_result"
+          placeholder="select-users"
+        />
+      </ProposalAdminContentForm__NotationCard>
+    </ForwardRef>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="box-content__toolbar"
+    >
+      <Connect(SubmitButton)
+        bsStyle="primary"
+        disabled={true}
+        id="proposal_admin_content_save"
+        label="global.save"
+        onSubmit={[Function]}
+        type="submit"
+      />
+      <ProposalRevision
+        isAdminView={true}
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "address": null,
+            "author": Object {
+              "displayName": "Author",
+              "id": "1",
+            },
+            "body": "body",
+            "category": Object {
+              "id": "1",
+            },
+            "decision": Object {
+              "estimatedCost": null,
+              "state": "IN_PROGRESS",
+            },
+            "district": Object {
+              "id": "1",
+            },
+            "estimation": 1000,
+            "form": Object {
+              "adminUrl": "http://capco.dev/pfrom",
+              "analysisConfiguration": Object {
+                "costEstimationEnabled": false,
+                "isImmediatelyEffective": false,
+              },
+              "categories": Array [
+                Object {
+                  "id": "1",
+                  "name": "category-1",
+                },
+                Object {
+                  "id": "2",
+                  "name": "category-2",
+                },
+              ],
+              "categoryMandatory": true,
+              "descriptionMandatory": true,
+              "districtMandatory": true,
+              "districts": Array [],
+              "id": "form1",
+              "questions": Array [
+                Object {
+                  "__typename": "SimpleQuestion",
+                  "alwaysJumpDestinationQuestion": null,
+                  "choices": Object {
+                    "edges": Array [],
+                    "pageInfo": Object {
+                      "hasNextPage": false,
+                    },
+                    "totalCount": 0,
+                  },
+                  "description": null,
+                  "helpText": "Help 1",
+                  "hidden": false,
+                  "id": "1",
+                  "isOtherAllowed": false,
+                  "jumps": Array [],
+                  "level": 0,
+                  "number": 1,
+                  "position": 0,
+                  "private": false,
+                  "required": true,
+                  "title": "title",
+                  "type": "text",
+                  "validationRule": null,
+                },
+              ],
+              "themeMandatory": true,
+              "usingAddress": true,
+              "usingCategories": true,
+              "usingDescription": true,
+              "usingDistrict": true,
+              "usingSummary": true,
+              "usingThemes": true,
+            },
+            "id": "1",
+            "likers": Array [
+              Object {
+                "displayName": "liker-1",
+                "id": "1",
+              },
+            ],
+            "media": Object {
+              "id": "1",
+              "url": "",
+            },
+            "mergedFrom": Array [
+              Object {
+                "adminUrl": "http://capco.dev/child1",
+                "id": "1",
+                "title": "Child 1",
+              },
+              Object {
+                "adminUrl": "http://capco.dev/child2",
+                "id": "2",
+                "title": "Child 2",
+              },
+            ],
+            "mergedIn": Array [],
+            "publicationStatus": "DRAFT",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "id": "1",
+                },
+                "value": "value-1",
+              },
+              Object {
+                "medias": Array [
+                  Object {
+                    "id": "1",
+                    "name": "media-1",
+                    "size": "100",
+                    "url": "",
+                  },
+                ],
+                "question": Object {
+                  "id": "2",
+                },
+              },
+            ],
+            "summary": "summary",
+            "theme": Object {
+              "id": "theme-1",
+            },
+            "title": "title-1",
+          }
+        }
+      >
+        <Component />
+      </ProposalRevision>
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={true}
+      />
+    </ButtonToolbar>
   </form>
-</div>
+</Fragment>
 `;

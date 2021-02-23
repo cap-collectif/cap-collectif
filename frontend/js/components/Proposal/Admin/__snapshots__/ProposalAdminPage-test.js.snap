@@ -515,6 +515,45 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "adminUrl",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "AnalysisConfiguration",
+                          "kind": "LinkedField",
+                          "name": "analysisConfiguration",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "costEstimationEnabled",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isImmediatelyEffective",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "ProposalDistrict",
                           "kind": "LinkedField",
                           "name": "districts",
@@ -1717,11 +1756,36 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           ],
                           "storageKey": null,
                         },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "estimation",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "likers",
+                      "plural": true,
+                      "selections": Array [
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "adminUrl",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "displayName",
                           "storageKey": null,
                         },
                       ],
@@ -2012,8 +2076,33 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "kind": "ScalarField",
-                      "name": "estimation",
+                      "concreteType": "ProposalDecision",
+                      "kind": "LinkedField",
+                      "name": "decision",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "estimatedCost",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "state",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                     Object {
@@ -2036,31 +2125,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "title",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "User",
-                      "kind": "LinkedField",
-                      "name": "likers",
-                      "plural": true,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "displayName",
                           "storageKey": null,
                         },
                       ],
@@ -2725,7 +2789,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "5d1aaad13a719775489f2af81b898084",
+          "cacheID": "bac15e45f4dd49a6cb4ef652d63d5c1a",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2747,6 +2811,11 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
   ...ProposalFusionEditModal_proposal
   ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
   id
+  estimation
+  likers {
+    id
+    displayName
+  }
   mergedFrom {
     id
     adminUrl
@@ -2804,8 +2873,19 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
     id
     url
   }
+  decision {
+    estimatedCost
+    state
+    id
+  }
   form {
     id
+    adminUrl
+    analysisConfiguration {
+      costEstimationEnabled
+      isImmediatelyEffective
+      id
+    }
     districts {
       id
       name

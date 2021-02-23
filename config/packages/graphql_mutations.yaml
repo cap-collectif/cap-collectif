@@ -1,66 +1,66 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
-    bind:
-        Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
-        $logger: '@logger'
-        Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
-        $authorizationChecker: '@security.authorization_checker'
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+            $logger: '@logger'
+            Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
+            $authorizationChecker: '@security.authorization_checker'
 
-  _instanceof:
-    Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:
-      tags: ['overblog_graphql.mutation']
+    _instanceof:
+        Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:
+            tags: ['overblog_graphql.mutation']
 
-  Capco\AppBundle\GraphQL\Mutation\:
-    resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/*'
-    exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php, ContactFormMutation.php}'
+    Capco\AppBundle\GraphQL\Mutation\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/*'
+        exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php, ContactFormMutation.php}'
 
-  #follwoing mutations are legacy : now we make on mutation file for each mutation
-  Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
-    tags:
-      - { name: overblog_graphql.mutation, alias: 'changeProposalNotation', method: 'changeNotation',       }
-      - { name: overblog_graphql.mutation, alias: 'changeProposalEvaluers', method: 'changeEvaluers',        }
-      - { name: overblog_graphql.mutation, alias: 'changeProgressSteps', method: 'changeProgressSteps',        }
-      - { name: overblog_graphql.mutation, alias: 'changeCollectStatus', method: 'changeCollectStatus',        }
-      - { name: overblog_graphql.mutation, alias: 'changeSelectionStatus', method: 'changeSelectionStatus',        }
-      - { name: overblog_graphql.mutation, alias: 'unselectProposal', method: 'unselectProposal' }
-      - { name: overblog_graphql.mutation, alias: 'selectProposal', method: 'selectProposal' }
-      - { name: overblog_graphql.mutation, alias: 'changeProposalPublicationStatus', method: 'changePublicationStatus',        }
-      - { name: overblog_graphql.mutation, alias: 'changeProposalContent', method: 'changeContent' }
-      - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
-    autowire: true
+    #follwoing mutations are legacy : now we make on mutation file for each mutation
+    Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
+        tags:
+        - { name: overblog_graphql.mutation, alias: 'changeProposalNotation', method: 'changeNotation',       }
+        - { name: overblog_graphql.mutation, alias: 'changeProposalEvaluers', method: 'changeEvaluers',        }
+        - { name: overblog_graphql.mutation, alias: 'changeProgressSteps', method: 'changeProgressSteps',        }
+        - { name: overblog_graphql.mutation, alias: 'changeCollectStatus', method: 'changeCollectStatus',        }
+        - { name: overblog_graphql.mutation, alias: 'changeSelectionStatus', method: 'changeSelectionStatus',        }
+        - { name: overblog_graphql.mutation, alias: 'unselectProposal', method: 'unselectProposal' }
+        - { name: overblog_graphql.mutation, alias: 'selectProposal', method: 'selectProposal' }
+        - { name: overblog_graphql.mutation, alias: 'changeProposalPublicationStatus', method: 'changePublicationStatus',        }
+        - { name: overblog_graphql.mutation, alias: 'changeProposalContent', method: 'changeContent' }
+        - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
+        autowire: true
 
-  Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation:
-    tags:
-      - { name: overblog_graphql.mutation, alias: 'createProposalForm', method: 'create' }
-      - { name: overblog_graphql.mutation, alias: 'updateProposalForm', method: 'update' }
-      - { name: overblog_graphql.mutation, alias: 'updateProposalFormNotificationsConfiguration', method: 'updateNotificationsConfiguration', }
-      - { name: overblog_graphql.mutation,alias: 'setEvaluationFormInProposalForm', method: 'setEvaluationForm', }
+    Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation:
+        tags:
+        - { name: overblog_graphql.mutation, alias: 'createProposalForm', method: 'create' }
+        - { name: overblog_graphql.mutation, alias: 'updateProposalForm', method: 'update' }
+        - { name: overblog_graphql.mutation, alias: 'updateProposalFormNotificationsConfiguration', method: 'updateNotificationsConfiguration', }
+        - { name: overblog_graphql.mutation,alias: 'setEvaluationFormInProposalForm', method: 'setEvaluationForm', }
 
-  Capco\AppBundle\GraphQL\Mutation\ContactFormMutation:
-    tags:
-      - { name: overblog_graphql.mutation, alias: 'sendContactForm', method: 'send' }
-      - { name: overblog_graphql.mutation, alias: 'addContactForm', method: 'add' }
-      - { name: overblog_graphql.mutation, alias: 'removeContactForm', method: 'remove' }
-      - { name: overblog_graphql.mutation, alias: 'updateContactForm', method: 'update' }
+    Capco\AppBundle\GraphQL\Mutation\ContactFormMutation:
+        tags:
+        - { name: overblog_graphql.mutation, alias: 'sendContactForm', method: 'send' }
+        - { name: overblog_graphql.mutation, alias: 'addContactForm', method: 'add' }
+        - { name: overblog_graphql.mutation, alias: 'removeContactForm', method: 'remove' }
+        - { name: overblog_graphql.mutation, alias: 'updateContactForm', method: 'update' }
 
-  Capco\AppBundle\GraphQL\Mutation\GroupMutation:
-    tags:
-      - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }
-      - { name: overblog_graphql.mutation, alias: 'updateGroup', method: 'update' }
-      - { name: overblog_graphql.mutation, alias: 'deleteGroup', method: 'delete' }
-      - { name: overblog_graphql.mutation, alias: 'deleteUserInGroup', method: 'deleteUserInGroup' }
-      - { name: overblog_graphql.mutation, alias: 'addUsersInGroup', method: 'addUsersInGroup' }
+    Capco\AppBundle\GraphQL\Mutation\GroupMutation:
+        tags:
+        - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }
+        - { name: overblog_graphql.mutation, alias: 'updateGroup', method: 'update' }
+        - { name: overblog_graphql.mutation, alias: 'deleteGroup', method: 'delete' }
+        - { name: overblog_graphql.mutation, alias: 'deleteUserInGroup', method: 'deleteUserInGroup' }
+        - { name: overblog_graphql.mutation, alias: 'addUsersInGroup', method: 'addUsersInGroup' }
 
-  Capco\AppBundle\GraphQL\Mutation\GenerateJitsiRoomMutation:
-      arguments:
-          $baseUrl: '%router.request_context.scheme%://%router.request_context.host%'
-          $jwtKey: '%jitsi_jwt_key%'
-          $jitsiEncryptionKey: '%jitsi_encryption_key%'
-          $jitsiHexIv: '%jitsi_hex_iv%'
+    Capco\AppBundle\GraphQL\Mutation\GenerateJitsiRoomMutation:
+        arguments:
+            $baseUrl: '%router.request_context.scheme%://%router.request_context.host%'
+            $jwtKey: '%jitsi_jwt_key%'
+            $jitsiEncryptionKey: '%jitsi_encryption_key%'
+            $jitsiHexIv: '%jitsi_hex_iv%'
 
-  Capco\AppBundle\GraphQL\Mutation\ResetPasswordMutation:
-      arguments:
-          $firewallName: '%fos_user.firewall_name%'
+    Capco\AppBundle\GraphQL\Mutation\ResetPasswordMutation:
+        arguments:
+            $firewallName: '%fos_user.firewall_name%'

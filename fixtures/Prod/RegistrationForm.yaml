@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\RegistrationForm:
-  registrationForm:
-    topTextDisplayed: false
-    bottomTextDisplayed: false
+    registrationForm:
+        topTextDisplayed: false
+        bottomTextDisplayed: false

@@ -163,7 +163,10 @@ const onSubmit = (
       visibility === 'CUSTOM' ? restrictedViewerGroups.map(g => g.value) : undefined,
     opinionCanBeFollowed,
     steps: steps // I cannot type step properly given the unability to create union Input type
-      ? steps.map(({ url, ...s }: any) => ({
+      ? steps.map(({ url, ...s }: any) => {
+        delete s.isAnalysisStep;
+
+        return {
           ...s,
           isGridViewEnabled: undefined,
           isListViewEnabled: undefined,
@@ -258,7 +261,8 @@ const onSubmit = (
           debate: undefined,
           slug: undefined,
           hasOpinionsFilled: undefined,
-        }))
+        };
+      })
       : [],
     locale: locale ? locale.value : null,
   };
@@ -469,6 +473,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             isBudgetEnabled: !!step.budget,
             isLimitEnabled: !!step.votesLimit,
             isTresholdEnabled: !!step.voteThreshold,
+            isAnalysisStep: step.type === 'SelectionStep' && step.isAnalysisStep,
             defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
             ...getViewEnabled(step.type, step.proposalForm, project?.firstCollectStep?.form),
             // DebateStep
@@ -669,6 +674,7 @@ export default createFragmentContainer(injectIntl(container), {
           allowAuthorsToAddNews
           budget
           mainView
+          isAnalysisStep
           requirements {
             reason
             edges {

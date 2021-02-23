@@ -276,6 +276,11 @@ Scenario: Super Admin GraphQL client wants to update a proposal
               }
             }
           }
+          estimation
+          likers {
+            id
+            displayName
+          }
         }
       }
     }",
@@ -305,6 +310,8 @@ Scenario: Super Admin GraphQL client wants to update a proposal
             "medias": ["media1"]
           }
         ],
+        "estimation": 1000,
+        "likers": ["VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg==", "VXNlcjp1c2VyMw=="],
         "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
@@ -370,6 +377,21 @@ Scenario: Super Admin GraphQL client wants to update a proposal
                           "id":"media1"
                        }
                     ]
+                 }
+              ],
+              "estimation":1000,
+              "likers":[
+                 {
+                    "id":"VXNlcjp1c2VyMQ==",
+                    "displayName":"lbrunet"
+                 },
+                 {
+                    "id":"VXNlcjp1c2VyMg==",
+                    "displayName":"sfavot"
+                 },
+                 {
+                    "id":"VXNlcjp1c2VyMw==",
+                    "displayName":"xlacot"
                  }
               ]
            }

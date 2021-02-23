@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\ContactForm\ContactFormTranslation:
-  ContactFormTranslation1:
-    translatable: '@ContactForm1'
-    locale: 'fr-FR'
-    title: Formulaire de contact
-    body: <stripslashes('\<p></p>\')>
+    ContactFormTranslation1:
+        translatable: '@ContactForm1'
+        locale: 'fr-FR'
+        title: Formulaire de contact
+        body: <stripslashes('\<p></p>\')>

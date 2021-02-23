@@ -82,6 +82,7 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
           Object {
             "hasOpinionsFilled": false,
             "id": "1",
+            "isAnalysisStep": false,
             "slug": "slugTest",
             "title": "testStep",
             "type": "typeTest",

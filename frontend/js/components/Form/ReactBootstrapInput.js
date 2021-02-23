@@ -308,21 +308,46 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'number') {
+      if (!addonBefore && !addonAfter && !buttonBefore && !buttonAfter && !wrapperClassName) {
+        return (
+          <FormControl
+            ref={c => {
+              this.refFormControl = c;
+            }}
+            min={min}
+            max={max}
+            aria-describedby={ariaDescribedBy}
+            aria-invalid={ariaInvalid}
+            aria-required={ariaRequired}
+            type="number"
+            value={value}
+            {...props}>
+            {children}
+          </FormControl>
+        );
+      }
+
       return (
-        <FormControl
-          ref={c => {
-            this.refFormControl = c;
-          }}
-          min={min}
-          max={max}
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-          type="number"
-          value={value}
-          {...props}>
-          {children}
-        </FormControl>
+        <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)}>
+          {this.renderAddon(addonBefore)}
+          {this.renderButton(buttonBefore)}
+          <FormControl
+            ref={c => {
+              this.refFormControl = c;
+            }}
+            min={min}
+            max={max}
+            aria-describedby={ariaDescribedBy}
+            aria-invalid={ariaInvalid}
+            aria-required={ariaRequired}
+            type="number"
+            value={value}
+            {...props}>
+            {children}
+          </FormControl>
+          {this.renderButton(buttonAfter)}
+          {this.renderAddon(addonAfter)}
+        </InputGroup>
       );
     }
 
