@@ -100,10 +100,41 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               "kind": "FragmentSpread",
               "name": "ProposalPageLogic_query",
             },
+            Object {
+              "condition": "hasVotableStep",
+              "kind": "Condition",
+              "passingValue": true,
+              "selections": Array [
+                Object {
+                  "alias": "step",
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "id",
+                      "variableName": "stepId",
+                    },
+                  ],
+                  "concreteType": null,
+                  "kind": "LinkedField",
+                  "name": "node",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "id",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+            },
           ],
           "type": "Query",
         },
-        "hash": "41397eac1772f223a80c3208a7af7dcc",
+        "hash": "4eb6b1668cd9dd1379b6028f0ce91696",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -6883,7 +6914,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "47d55ae3df925097dee8633ce07d3356",
+          "cacheID": "373c6024aa417608f57a14c1907a014e",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -6897,6 +6928,10 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
   $proposalRevisionsEnabled: Boolean!
 ) {
   ...ProposalPageLogic_query_2JM5Hk
+  step: node(id: $stepId) @include(if: $hasVotableStep) {
+    __typename
+    id
+  }
 }
 
 fragment CommentAnswer_comment_39ngnn on Comment {

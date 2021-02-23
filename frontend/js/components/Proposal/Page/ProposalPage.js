@@ -63,6 +63,9 @@ export class ProposalPage extends React.Component<Props> {
                   isTipsMeeeEnabled: $isTipsMeeeEnabled
                   proposalRevisionsEnabled: $proposalRevisionsEnabled
                 )
+              step: node(id: $stepId) @include(if: $hasVotableStep) {
+                id
+              }
             }
           `}
           variables={{
@@ -85,6 +88,9 @@ export class ProposalPage extends React.Component<Props> {
             if (error) {
               console.log(error); // eslint-disable-line no-console
               return graphqlError;
+            }
+            if (props && hasVotableStep && !props.step) {
+              console.error("L'étape n'a pas pu être récupérée"); // eslint-disable-line no-console
             }
             return (
               <ProposalPageLogic

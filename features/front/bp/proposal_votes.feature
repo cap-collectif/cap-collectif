@@ -60,6 +60,12 @@ Scenario: Logged in user wants to vote and unvote for a proposal
   And the proposal should have 1 votes
   And I should not see my vote in the proposal votes list
 
+@security @elasticsearch @votes_from_proposal
+Scenario: Anonymous user wants to vote on a proposal page
+  Given I go to a proposal
+  When I click the proposal vote button
+  Then I should see a "#login-popover" element
+
 @database @elasticsearch @votes_from_proposal @rabbitmq
 Scenario: Logged in user wants to vote for a proposal anonymously
   Given I am logged in as user
