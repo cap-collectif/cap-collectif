@@ -68,7 +68,7 @@ export const voteForArgument = (
     });
 };
 
-const getTruncatedLength = (isMobile?: boolean): number => {
+export const getTruncatedLength = (isMobile?: boolean): number => {
   if (isMobile) return 210;
   return 450;
 };

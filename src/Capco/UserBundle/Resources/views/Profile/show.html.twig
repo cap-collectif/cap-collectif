@@ -30,8 +30,10 @@
     {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
     {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
+    {# TODO : votesCount should include the debateVotes #}
     {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount %}
     {% set versionCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
+    {# TODO : debateArgumentsCount #}
     {% set argumentsCount = userArgumentsResolver.getArgumentTotalCount(app.user, user) %}
     
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}

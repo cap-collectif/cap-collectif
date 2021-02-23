@@ -29,7 +29,7 @@ export const styles = {
 };
 
 const Link = React.forwardRef<Props, HTMLElement>(({ href, ...props }: Props, ref) => {
-  return <AppBox as="a" ref={ref} css={styles} {...props} />;
+  return <AppBox as="a" ref={ref} css={styles} href={href} {...props} />;
 });
 
 Link.displayName = 'Link';

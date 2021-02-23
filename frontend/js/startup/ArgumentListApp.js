@@ -6,7 +6,14 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type { ArgumentListAppQueryResponse } from '~relay/ArgumentListAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
-const ArgumentListProfile = lazy(() => import(/* webpackChunkName: "ArgumentListProfile" */ '~/components/Argument/ArgumentListProfile'));
+const ArgumentListProfile = lazy(() =>
+  import(/* webpackChunkName: "ArgumentListProfile" */ '~/components/Argument/ArgumentListProfile'),
+);
+const DebateArgumentListProfile = lazy(() =>
+  import(
+    /* webpackChunkName: "DebateArgumentListProfile" */ '~/components/Argument/DebateArgumentListProfile'
+  ),
+);
 
 export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: boolean }) => (
   <Suspense fallback={<Loader />}>
@@ -24,6 +31,8 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
             node(id: $userId) {
               ...ArgumentListProfile_argumentList
                 @arguments(count: $count, cursor: $cursor, isAuthenticated: $isAuthenticated)
+              ...DebateArgumentListProfile_debateArgumentList
+                @arguments(count: $count, cursor: $cursor, isAuthenticated: $isAuthenticated)
             }
           }
         `}
@@ -39,7 +48,12 @@ export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: 
           }
 
           if (props && props.node) {
-            return <ArgumentListProfile argumentList={props.node} />;
+            return (
+              <>
+                <ArgumentListProfile argumentList={props.node} />
+                <DebateArgumentListProfile debateArgumentList={props.node} />
+              </>
+            );
           }
           return <Loader />;
         }}

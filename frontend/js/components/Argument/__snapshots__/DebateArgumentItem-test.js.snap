@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateArgumentItem /> render correcty 1`] = `
+<AppBox
+  as="li"
+  bg="white"
+  border="card"
+  borderColor="gray.200"
+  borderRadius={6}
+  mb={6}
+  p={6}
+>
+  <ForwardRef
+    alignItems="center"
+    justifyContent="space-between"
+  >
+    <DebateArgumentItem___StyledLink
+      _css="#272B30"
+      _css2="#1A88FF"
+      fontSize={18}
+      fontWeight={600}
+      href="/debate"
+    >
+      Etape
+    </DebateArgumentItem___StyledLink>
+  </ForwardRef>
+  <ForwardRef
+    alignItems="center"
+    flexDirection="row"
+    spacing={2}
+  >
+    <Text
+      color="gray.900"
+      fontSize={14}
+      fontWeight={600}
+      pt={3}
+    >
+      <FormattedMessage
+        id="i-argumented"
+        values={Object {}}
+      />
+    </Text>
+    <Tag
+      interactive={false}
+      variant="green"
+    >
+      <FormattedMessage
+        id="argument.show.type.for"
+        values={Object {}}
+      />
+    </Tag>
+    <DebateArgumentItem___StyledText
+      color="gray.700"
+      fontSize={14}
+    >
+      <FormattedMessage
+        id="global.dates.full_day"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="short"
+              value={"2018-04-09T21:21:06.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2018-04-09T21:21:06.000Z"}
+            />,
+          }
+        }
+      />
+    </DebateArgumentItem___StyledText>
+  </ForwardRef>
+  <Text>
+    Je suis pour
+     
+  </Text>
+  <ForwardRef
+    align="center"
+    flexDirection="row"
+    justify="center"
+    mt={
+      Array [
+        "auto",
+        3,
+      ]
+    }
+  >
+    <Connect(LoginOverlay)
+      enabled={false}
+    >
+      <Button
+        aria-label="vote.add"
+        color="neutral-gray.500"
+        disabled={true}
+        leftIcon={
+          <ForwardRef
+            name="CLAP_O"
+            size="lg"
+          />
+        }
+        onClick={[Function]}
+      />
+    </Connect(LoginOverlay)>
+    <Text
+      as="span"
+      color="neutral-gray.900"
+      fontSize={
+        Array [
+          4,
+          3,
+        ]
+      }
+      ml={
+        Array [
+          1,
+          0,
+        ]
+      }
+    >
+      500
+    </Text>
+  </ForwardRef>
+</AppBox>
+`;
+
+exports[`<DebateArgumentItem /> render correcty on mobile 1`] = `
+<AppBox
+  as="li"
+  bg="white"
+  border="card"
+  borderColor="gray.200"
+  borderRadius={6}
+  mb={6}
+  p={6}
+>
+  <ForwardRef
+    alignItems="center"
+    justifyContent="space-between"
+  >
+    <DebateArgumentItem___StyledLink
+      _css="#272B30"
+      _css2="#1A88FF"
+      fontSize={18}
+      fontWeight={600}
+      href="/debate"
+    >
+      Etape
+    </DebateArgumentItem___StyledLink>
+  </ForwardRef>
+  <ForwardRef
+    alignItems="center"
+    flexDirection="row"
+    spacing={2}
+  >
+    <Text
+      color="gray.900"
+      fontSize={14}
+      fontWeight={600}
+      pt={3}
+    >
+      <FormattedMessage
+        id="i-argumented"
+        values={Object {}}
+      />
+    </Text>
+    <Tag
+      interactive={false}
+      variant="green"
+    >
+      <FormattedMessage
+        id="argument.show.type.for"
+        values={Object {}}
+      />
+    </Tag>
+    <DebateArgumentItem___StyledText
+      color="gray.700"
+      fontSize={14}
+    >
+      <FormattedMessage
+        id="global.dates.full_day"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="short"
+              value={"2018-04-09T21:21:06.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2018-04-09T21:21:06.000Z"}
+            />,
+          }
+        }
+      />
+    </DebateArgumentItem___StyledText>
+  </ForwardRef>
+  <Text>
+    Je suis pour
+     
+  </Text>
+  <ForwardRef
+    align="center"
+    flexDirection="row"
+    justify="center"
+    mt={
+      Array [
+        "auto",
+        3,
+      ]
+    }
+  >
+    <Connect(LoginOverlay)
+      enabled={false}
+    >
+      <Button
+        aria-label="vote.add"
+        color="neutral-gray.500"
+        disabled={true}
+        leftIcon={
+          <ForwardRef
+            name="CLAP_O"
+            size="lg"
+          />
+        }
+        onClick={[Function]}
+      />
+    </Connect(LoginOverlay)>
+    <Text
+      as="span"
+      color="neutral-gray.900"
+      fontSize={
+        Array [
+          4,
+          3,
+        ]
+      }
+      ml={
+        Array [
+          1,
+          0,
+        ]
+      }
+    >
+      500
+    </Text>
+  </ForwardRef>
+</AppBox>
+`;

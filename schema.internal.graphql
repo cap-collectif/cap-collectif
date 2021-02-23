@@ -3350,6 +3350,9 @@ type Debate implements Node {
 
   """The viewer's unpublished argument."""
   viewerUnpublishedArgument: DebateArgument
+
+  """The step of the debate."""
+  step: DebateStep!
 }
 
 """A debate argument from non expert."""

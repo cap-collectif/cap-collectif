@@ -111,3 +111,7 @@ InternalDebate:
                 type: 'InternalDebateArgument'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerUnpublishedArgumentResolver", [value, getUser()])'
                 description: "The viewer's unpublished argument."
+            step:
+                type: 'InternalDebateStep!'
+                description: 'The step of the debate.'
+                resolve: '@=value.getStep()'

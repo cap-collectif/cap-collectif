@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
+<AppBox
+  as="li"
+  bg="white"
+  border="card"
+  borderColor="gray.200"
+  borderRadius={6}
+  mb={6}
+  p={6}
+>
+  <DebateVoteItem___StyledLink
+    _css="#272B30"
+    _css2="#1A88FF"
+    fontSize={18}
+    fontWeight={600}
+    href="https://capco.dev/profile/lbrunet"
+  >
+    Pour ou contre
+  </DebateVoteItem___StyledLink>
+  <ForwardRef
+    alignItems="center"
+    flexDirection="row"
+    spacing={2}
+  >
+    <Text
+      color="gray.900"
+      fontSize={14}
+      fontWeight={600}
+      pt={3}
+    >
+      <FormattedMessage
+        id="i-voted"
+        values={Object {}}
+      />
+    </Text>
+    <Tag
+      interactive={false}
+      variant="red"
+    >
+      <FormattedMessage
+        id="argument.show.type.against"
+        values={Object {}}
+      />
+    </Tag>
+    <DebateVoteItem___StyledText
+      color="gray.700"
+      fontSize={14}
+    >
+      <FormattedMessage
+        id="global.dates.full_day"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="short"
+              value={"2018-04-09T21:21:06.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2018-04-09T21:21:06.000Z"}
+            />,
+          }
+        }
+      />
+    </DebateVoteItem___StyledText>
+  </ForwardRef>
+</AppBox>
+`;
+
+exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
+<AppBox
+  as="li"
+  bg="white"
+  border="card"
+  borderColor="gray.200"
+  borderRadius={6}
+  mb={6}
+  p={6}
+>
+  <DebateVoteItem___StyledLink
+    _css="#272B30"
+    _css2="#1A88FF"
+    fontSize={18}
+    fontWeight={600}
+    href="https://capco.dev/profile/lbrunet"
+  >
+    Pour ou contre
+  </DebateVoteItem___StyledLink>
+  <ForwardRef
+    alignItems="center"
+    flexDirection="row"
+    spacing={2}
+  >
+    <Text
+      color="gray.900"
+      fontSize={14}
+      fontWeight={600}
+      pt={3}
+    >
+      <FormattedMessage
+        id="i-voted"
+        values={Object {}}
+      />
+    </Text>
+    <Tag
+      interactive={false}
+      variant="green"
+    >
+      <FormattedMessage
+        id="argument.show.type.for"
+        values={Object {}}
+      />
+    </Tag>
+    <DebateVoteItem___StyledText
+      color="gray.700"
+      fontSize={14}
+    >
+      <FormattedMessage
+        id="global.dates.full_day"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="short"
+              value={"2018-04-09T21:21:06.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2018-04-09T21:21:06.000Z"}
+            />,
+          }
+        }
+      />
+    </DebateVoteItem___StyledText>
+  </ForwardRef>
+</AppBox>
+`;

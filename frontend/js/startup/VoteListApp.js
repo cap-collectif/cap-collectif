@@ -6,7 +6,13 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type { VoteListAppQueryResponse } from '~relay/VoteListAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
-const VoteListProfile = lazy(() => import(/* webpackChunkName: "VoteListProfile" */ '~/components/Vote/VoteListProfile'));
+const VoteListProfile = lazy(() =>
+  import(/* webpackChunkName: "VoteListProfile" */ '~/components/Vote/VoteListProfile'),
+);
+
+const DebateVoteListProfile = lazy(() =>
+  import(/* webpackChunkName: "DebateVoteListProfile" */ '~/components/Vote/DebateVoteListProfile'),
+);
 
 export default ({ userId }: { userId: string }) => (
   <Suspense fallback={<Loader />}>
@@ -19,6 +25,7 @@ export default ({ userId }: { userId: string }) => (
             node(id: $userId) {
               id
               ...VoteListProfile_voteList @arguments(count: $count, cursor: $cursor)
+              ...DebateVoteListProfile_debateVoteList @arguments(count: $count, cursor: $cursor)
             }
           }
         `}
@@ -34,7 +41,12 @@ export default ({ userId }: { userId: string }) => (
           }
 
           if (props && props.node) {
-            return <VoteListProfile voteList={props.node} />;
+            return (
+              <>
+                <VoteListProfile voteList={props.node} />
+                <DebateVoteListProfile debateVoteList={props.node} />
+              </>
+            );
           }
           return <Loader />;
         }}
