@@ -84,6 +84,9 @@ class DecisionSubscriber implements EventSubscriberInterface
                 $this->entityManager->persist($moveToselection);
             }
         }
+
+        $this->indexer->index(Proposal::class, $proposal->getId());
+        $this->indexer->finishBulk();
     }
 
     public function onDecisionRefused(DecisionEvent $decisionEvent): void
@@ -102,6 +105,9 @@ class DecisionSubscriber implements EventSubscriberInterface
 
         // Let's apply refused status
         $this->applyProposalStatus($proposal, $analysisStep, $refusedStatus);
+
+        $this->indexer->index(Proposal::class, $proposal->getId());
+        $this->indexer->finishBulk();
     }
 
     private function applyProposalStatus(

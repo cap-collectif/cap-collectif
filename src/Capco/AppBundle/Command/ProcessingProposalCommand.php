@@ -2,52 +2,30 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Event\DecisionEvent;
-use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Manager\AnalysisConfigurationManager;
 use Capco\AppBundle\Toggle\Manager;
-use Doctrine\Common\Util\ClassUtils;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\AppBundle\Entity\ProposalDecision;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Entity\AnalysisConfiguration;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Swarrot\Broker\Message;
 
 class ProcessingProposalCommand extends Command
 {
     public const MESSAGE_YES = 'yes';
     protected static $defaultName = 'capco:process_proposals';
-    private $analysisConfigurationRepository;
-    private $proposalRepository;
-    private $proposalDecisionRepository;
-    private $publisher;
-    private $indexer;
-    private $eventDispatcher;
-    private $toggle;
+    private AnalysisConfigurationManager $analysisConfigurationManager;
+    private AnalysisConfigurationRepository $analysisConfigurationRepository;
+    private Manager $toggle;
 
     public function __construct(
+        AnalysisConfigurationManager $analysisConfigurationManager,
         Manager $manager,
-        ProposalRepository $proposalRepository,
-        ProposalDecisionRepository $proposalDecisionRepository,
-        AnalysisConfigurationRepository $analysisConfigurationRepository,
-        Publisher $publisher,
-        EventDispatcherInterface $eventDispatcher,
-        Indexer $indexer
+        AnalysisConfigurationRepository $analysisConfigurationRepository
     ) {
+        $this->analysisConfigurationManager = $analysisConfigurationManager;
         $this->analysisConfigurationRepository = $analysisConfigurationRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->proposalDecisionRepository = $proposalDecisionRepository;
-        $this->publisher = $publisher;
-        $this->indexer = $indexer;
-        $this->eventDispatcher = $eventDispatcher;
         $this->toggle = $manager;
         parent::__construct();
     }
@@ -82,6 +60,7 @@ class ProcessingProposalCommand extends Command
         $count = 0;
         $time = $input->getOption('time');
         $shouldSendMessage = $input->getOption('message');
+        $sendMessage = self::MESSAGE_YES === $shouldSendMessage;
         $time = \DateTime::createFromFormat('Y-m-d H:i:s', $time ?: date('Y-m-d H:i:s'));
 
         // We get all analysis configurations within a two hour interval before the given time.
@@ -92,50 +71,12 @@ class ProcessingProposalCommand extends Command
         );
 
         foreach ($unprocessedAnalysisConfig as $analysisConfig) {
-            $proposalsLinkedToFormIds = $this->proposalRepository->findByProposalForm(
-                $analysisConfig->getProposalForm()
+            $count += $this->analysisConfigurationManager->processAnalysisConfiguration(
+                $analysisConfig,
+                $sendMessage
             );
-
-            if (\count($proposalsLinkedToFormIds) > 0) {
-                // ProposalDecisions are decisions made by users not necessary processed. Therefore, we take all
-                // processed ProposalDecisions to dispatch the user's choice when marked as "DONE"
-                /** @var ProposalDecision[] $proposalDecisions */
-                $proposalDecisions = $this->proposalDecisionRepository->findUserProcessedProposalByIds(
-                    $proposalsLinkedToFormIds
-                );
-                foreach ($proposalDecisions as $proposalDecision) {
-                    ++$count;
-                    $proposal = $proposalDecision->getProposal();
-                    if ($proposal) {
-                        $approved = $proposalDecision->isApproved();
-
-                        $this->eventDispatcher->dispatch(
-                            $approved
-                                ? CapcoAppBundleEvents::DECISION_APPROVED
-                                : CapcoAppBundleEvents::DECISION_REFUSED,
-                            new DecisionEvent($proposal, $proposalDecision, $analysisConfig)
-                        );
-
-                        if (self::MESSAGE_YES === $shouldSendMessage) {
-                            $this->publisher->publish(
-                                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
-                                new Message(
-                                    json_encode([
-                                        'proposalId' => $proposal->getId(),
-                                        'date' => new \DateTime(),
-                                    ])
-                                )
-                            );
-                            $this->indexer->index(
-                                ClassUtils::getClass($proposal),
-                                $proposal->getId()
-                            );
-                            $this->indexer->finishBulk();
-                        }
-                    }
-                }
-            }
         }
+
         $output->write("${count} proposals have been processed.", true);
 
         return 0;

@@ -269,7 +269,7 @@ services:
             - '%agent_tcp%'
             - '%agent_unix%'
 
-    Capco\AppBundle\Command\ProcessingProposalCommand:
+    Capco\AppBundle\Manager\AnalysisConfigurationManager:
         bind:
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 

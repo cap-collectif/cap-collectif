@@ -73,6 +73,7 @@ parameters:
     occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
     occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
     tipsmeee_api_key: '%env(SYMFONY_TIPSMEEE_API_KEY)%'
+    slack_jpec_ghost: '***REMOVED***'
     env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -134,6 +135,7 @@ parameters:
     env(SYMFONY_OCCITANIE_CLIENT_SECRET): test
     # TIPSMEEE
     env(SYMFONY_TIPSMEEE_API_KEY): ***REMOVED***
+    env(SLACK_JPEC_GHOST): ***REMOVED***
 
 nelmio_api_doc: null
 

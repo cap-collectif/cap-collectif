@@ -19,43 +19,43 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class AnalysisConfiguration implements Timestampable
 {
+    use TextableTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use TextableTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="analysisConfiguration")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $proposalForm;
+    private ProposalForm $proposalForm;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
      */
-    private $evaluationForm;
+    private ?Questionnaire $evaluationForm;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
      * @ORM\JoinColumn(name="analysis_step", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $analysisStep;
+    private ?AbstractStep $analysisStep;
 
     /**
      * @ORM\Column(type="datetime", name="effective_date", nullable=true)
      */
-    private $effectiveDate;
+    private ?\DateTimeInterface $effectiveDate = null;
 
     /**
      * @ORM\Column(type="boolean", name="cost_estimation_enabled")
      */
-    private $costEstimationEnabled = false;
+    private bool $costEstimationEnabled = false;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, name="favourable_status", onDelete="SET NULL")
      */
-    private $favourableStatus;
+    private ?Status $favourableStatus = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
@@ -64,34 +64,40 @@ class AnalysisConfiguration implements Timestampable
      *      inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $unfavourableStatuses;
+    private Collection $unfavourableStatuses;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step", nullable=true, referencedColumnName="id", onDelete="SET NULL")
      */
-    private $moveToSelectionStep;
+    private ?SelectionStep $moveToSelectionStep = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, name="selection_step_status")
      */
-    private $selectionStepStatus;
+    private ?Status $selectionStepStatus = null;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", name="updated_at")
      */
-    private $updatedAt;
+    private \DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="boolean", name="effective_date_processed")
      */
-    private $effectiveDateProcessed = false;
+    private bool $effectiveDateProcessed = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AnalysisConfigurationProcess::class, mappedBy="analysisConfiguration")
+     */
+    private Collection $processes;
 
     public function __construct()
     {
         $this->unfavourableStatuses = new ArrayCollection();
+        $this->processes = new ArrayCollection();
     }
 
     public function __clone()
@@ -104,7 +110,6 @@ class AnalysisConfiguration implements Timestampable
             $this->selectionStepStatus = null;
             $this->analysisStep = null;
             if ($this->evaluationForm) {
-                /** @var Questionnaire $clonedEvaluationForm */
                 $clonedEvaluationForm = clone $this->evaluationForm;
                 $clonedEvaluationForm
                     ->setProposalForm($this->proposalForm)
@@ -267,6 +272,33 @@ class AnalysisConfiguration implements Timestampable
     public function setEffectiveDateProcessed(bool $effectiveDateProcessed): self
     {
         $this->effectiveDateProcessed = $effectiveDateProcessed;
+
+        return $this;
+    }
+
+    public function getProcesses(): Collection
+    {
+        return $this->processes;
+    }
+
+    public function addProcess(AnalysisConfigurationProcess $process): self
+    {
+        if (!$this->processes->contains($process)) {
+            $this->processes[] = $process;
+            $process->setAnalysisConfiguration($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProcess(AnalysisConfigurationProcess $process): self
+    {
+        if ($this->processes->removeElement($process)) {
+            // set the owning side to null (unless already changed)
+            if ($process->getAnalysisConfiguration() === $this) {
+                $process->setAnalysisConfiguration(null);
+            }
+        }
 
         return $this;
     }
