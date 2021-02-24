@@ -3227,7 +3227,7 @@ type Debate implements Node {
     """
     (ROLE_ADMIN only) True to see only published arguments, false to see only unpublished, null to see both.
     """
-    isPublished: Boolean = true
+    isPublished: Boolean = null
 
     """
     (ROLE_ADMIN only) True to see only trashed arguments, false to not see trashed, null to see both.

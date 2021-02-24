@@ -42,8 +42,8 @@ const ARGUMENT_FRAGMENT = graphql`
     }
     type
     body
-    viewerCanReport
-    viewerDidAuthor
+    viewerCanReport @include(if: $isAuthenticated)
+    viewerDidAuthor @include(if: $isAuthenticated)
     viewerHasVote @include(if: $isAuthenticated)
     votes(first: 0) {
       totalCount

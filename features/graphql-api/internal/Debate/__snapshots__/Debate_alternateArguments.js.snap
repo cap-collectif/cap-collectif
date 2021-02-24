@@ -6,6 +6,58 @@ Object {
     "alternateArguments": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7TjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56WXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRGNpTzMwPSI7fQ==",
+          "node": Object {
+            "against": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+              "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntzOjM6ImZvciI7TjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56QXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFlpTzMwPSI7fQ==",
+          "node": Object {
+            "against": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+              "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntzOjM6ImZvciI7TjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk5qUXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFVpTzMwPSI7fQ==",
+          "node": Object {
+            "against": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+              "type": "AGAINST",
+              "votes": Object {
+                "totalCount": 0,
+              },
+            },
+            "for": null,
+          },
+        },
+      ],
+      "totalCount": 7,
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.alternateArguments connection fetches alternate arguments associated to a debate without a cursor 1`] = `
+Object {
+  "node": Object {
+    "alternateArguments": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTlRnd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWREUWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56WXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRGNpTzMwPSI7fQ==",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
@@ -24,6 +76,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTlRJd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRETWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56QXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFlpTzMwPSI7fQ==",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
@@ -42,6 +95,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTkRZd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRESWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk5qUXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFVpTzMwPSI7fQ==",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
@@ -60,6 +114,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTkRBd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRERWlPMzA9IjtzOjc6ImFnYWluc3QiO047fQ==",
           "node": Object {
             "against": null,
             "for": Object {
@@ -84,6 +139,7 @@ Object {
     "alternateArguments": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTkRZd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRESWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk5qUXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFVpTzMwPSI7fQ==",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
@@ -102,6 +158,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTkRBd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRERWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56QXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRFlpTzMwPSI7fQ==",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
@@ -120,6 +177,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTlRJd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWRETWlPMzA9IjtzOjc6ImFnYWluc3QiO3M6NzI6IllUb3lPbnRwT2pBN2FUb3hOakF6TkRNMk56WXdNREF3TzJrNk1UdHpPakUxT2lKa1pXSmhkR1ZCY21kMWJXVnVkRGNpTzMwPSI7fQ==",
           "node": Object {
             "against": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
@@ -138,6 +196,7 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntzOjM6ImZvciI7czo3MjoiWVRveU9udHBPakE3YVRveE5qQXpORE0yTlRnd01EQXdPMms2TVR0ek9qRTFPaUprWldKaGRHVkJjbWQxYldWdWREUWlPMzA9IjtzOjc6ImFnYWluc3QiO047fQ==",
           "node": Object {
             "against": null,
             "for": Object {

@@ -2,13 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Search\DebateSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class DebateAlternateArgumentsResolver implements ResolverInterface
 {
@@ -24,38 +26,46 @@ class DebateAlternateArgumentsResolver implements ResolverInterface
 
     public function __invoke(Debate $debate, Argument $args, ?User $viewer): ConnectionInterface
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use (
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $debate,
             $args,
             $viewer
         ) {
-            if (0 === $offset && 0 === $limit) {
-                return [];
-            }
-
+            $cursors = self::decodeCursor($cursor);
             $orderBy = DebateArgumentsResolver::getOrderBy($args);
+
             $forArguments = $this->debateSearch->searchDebateArguments(
                 $debate,
                 $limit,
                 $orderBy,
                 DebateArgumentsResolver::getFilters($args, $viewer, 'FOR'),
-                $offset
+                $cursors['for']
             );
             $againstArguments = $this->debateSearch->searchDebateArguments(
                 $debate,
                 $limit,
                 $orderBy,
                 DebateArgumentsResolver::getFilters($args, $viewer, 'AGAINST'),
-                $offset
+                $cursors['against']
             );
 
-            return self::generateAlternateArguments(
+            return self::generateResults(
                 $forArguments->getEntities(),
                 $againstArguments->getEntities()
             );
         });
 
-        $totalCount = $this->debateSearch
+        $totalCount = $this->getTotalCount($debate, $args, $viewer);
+
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
+    }
+
+    private function getTotalCount(Debate $debate, Argument $args, ?User $viewer): int
+    {
+        return $this->debateSearch
             ->searchDebateArguments(
                 $debate,
                 0,
@@ -63,30 +73,67 @@ class DebateAlternateArgumentsResolver implements ResolverInterface
                 DebateArgumentsResolver::getFilters($args, $viewer)
             )
             ->getTotalCount();
-
-        return $paginator->auto($args, $totalCount);
     }
 
-    private static function generateAlternateArguments(
+    private static function generateResults(
         array $forArguments,
         array $againstArguments
-    ): array {
+    ): ElasticsearchPaginatedResult {
         $alternateArguments = [];
+        $cursors = [];
         $i = 0;
+
         while (isset($forArguments[$i]) || isset($againstArguments[$i])) {
-            $alternateArguments[$i] = [
-                'for' => null,
-                'against' => null,
-            ];
-            if (isset($forArguments[$i])) {
-                $alternateArguments[$i]['for'] = $forArguments[$i];
+            if (!isset($forArguments[$i])) {
+                $forArguments[$i] = null;
+            } elseif (!isset($againstArguments[$i])) {
+                $againstArguments[$i] = null;
             }
-            if (isset($againstArguments[$i])) {
-                $alternateArguments[$i]['against'] = $againstArguments[$i];
-            }
+            $alternateArguments[$i] = self::generateAlternateArgument(
+                $forArguments[$i],
+                $againstArguments[$i]
+            );
+            $cursors[$i] = self::generateHalfCursors($forArguments[$i], $againstArguments[$i]);
             ++$i;
         }
 
-        return $alternateArguments;
+        return new ElasticsearchPaginatedResult($alternateArguments, $cursors);
+    }
+
+    private static function generateAlternateArgument(
+        ?DebateArgument $forArgument,
+        ?DebateArgument $againstArgument
+    ): array {
+        return [
+            'for' => $forArgument ?? null,
+            'against' => $againstArgument ?? null,
+        ];
+    }
+
+    private static function generateHalfCursors(
+        ?DebateArgument $forArgument,
+        ?DebateArgument $againstArgument
+    ): array {
+        return [
+            'for' => $forArgument ? self::encodeHalfCursor($forArgument) : null,
+            'against' => $againstArgument ? self::encodeHalfCursor($againstArgument) : null,
+        ];
+    }
+
+    private static function encodeHalfCursor(DebateArgument $argument): string
+    {
+        return base64_encode(
+            serialize([$argument->getCreatedAt()->getTimestamp() * 1000, $argument->getId()])
+        );
+    }
+
+    private static function decodeCursor(?string $cursor): array
+    {
+        return $cursor
+            ? unserialize(base64_decode($cursor))
+            : [
+                'for' => null,
+                'against' => null,
+            ];
     }
 }

@@ -56,6 +56,13 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
         DebateArgument $b,
         DebateArgument $c
     ) {
+        $a->getId()->willReturn('a');
+        $a->getCreatedAt()->willReturn(new \DateTime('2021-01-01 00:00:00'));
+        $b->getId()->willReturn('b');
+        $b->getCreatedAt()->willReturn(new \DateTime('2021-01-01 00:00:00'));
+        $c->getId()->willReturn('c');
+        $c->getCreatedAt()->willReturn(new \DateTime('2021-01-01 00:00:00'));
+
         $args = new Argument([
             'first' => 10,
             'after' => null,
