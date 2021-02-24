@@ -38,6 +38,7 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
       )}
     </>
   ) : (
+    // TODO fixme https://github.com/cap-collectif/platform/issues/12130
     // About step => $fragmentRefs is missing in DebateStepPageArguments_step
     // Would be fix if we transform DesktopDebateStepPageArguments in fragment
     // $FlowFixMe
@@ -73,7 +74,7 @@ export default createFragmentContainer(DebateStepPageArguments, {
       }
       debate {
         id
-        arguments(first: 0, isTrashed: false) {
+        arguments(first: 0, isPublished: true, isTrashed: false) {
           totalCount
         }
         viewerUnpublishedArgument @include(if: $isAuthenticated) {

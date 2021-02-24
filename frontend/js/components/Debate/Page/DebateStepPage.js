@@ -8,9 +8,9 @@ import type { DebateStepPageQueryResponse } from '~relay/DebateStepPageQuery.gra
 import DebateStepPageLogic from './DebateStepPageLogic';
 
 export type Props = {|
-  stepId: string,
-  title: string,
-  isAuthenticated: boolean,
+  +stepId: string,
+  +title: string,
+  +isAuthenticated: boolean,
 |};
 
 export class DebateStepPage extends React.Component<Props> {

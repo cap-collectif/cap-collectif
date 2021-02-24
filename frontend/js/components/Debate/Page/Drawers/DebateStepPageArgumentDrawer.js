@@ -29,7 +29,7 @@ import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/Moda
 type Props = {|
   ...DetailDrawerProps,
   +argument: DebateStepPageArgumentDrawer_argument$key,
-  +viewer: DebateStepPageArgumentDrawer_viewer$key,
+  +viewer: ?DebateStepPageArgumentDrawer_viewer$key,
   +isStepClosed: boolean,
 |};
 
@@ -70,7 +70,7 @@ const DebateStepPageArgumentDrawer = ({
     ARGUMENT_FRAGMENT,
     argumentFragment,
   );
-  const viewer: DebateStepPageArgumentDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const viewer: ?DebateStepPageArgumentDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isAuthor = argument.viewerDidAuthor;

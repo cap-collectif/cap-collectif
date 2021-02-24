@@ -10,7 +10,10 @@ import type {
   ArgumentCard_argument$data,
   ArgumentCard_argument$ref,
 } from '~relay/ArgumentCard_argument.graphql';
-import type { DebateStepPageArgumentsPagination_viewer$key } from '~relay/DebateStepPageArgumentsPagination_viewer.graphql';
+import type {
+  DebateStepPageArgumentsPagination_viewer,
+  DebateStepPageArgumentsPagination_viewer$key,
+} from '~relay/DebateStepPageArgumentsPagination_viewer.graphql';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { RelayHookPaginationProps, ConnectionMetadata } from '~/types';
@@ -46,8 +49,14 @@ const FRAGMENT = graphql`
       isAuthenticated: { type: "Boolean!" }
     ) {
     id
-    arguments(value: $value, first: $first, after: $cursor, orderBy: $orderBy, isTrashed: false)
-      @connection(key: "DebateStepPageArgumentsPagination_arguments", filters: ["value"]) {
+    arguments(
+      value: $value
+      first: $first
+      after: $cursor
+      orderBy: $orderBy
+      isPublished: true
+      isTrashed: false
+    ) @connection(key: "DebateStepPageArgumentsPagination_arguments", filters: ["value"]) {
       pageInfo {
         hasNextPage
         endCursor
@@ -141,7 +150,10 @@ export const DebateStepPageArgumentsPagination = ({
     DebateStepPageArgumentsPagination_debate,
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debate);
-  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const viewer: ?DebateStepPageArgumentsPagination_viewer = useFragment(
+    VIEWER_FRAGMENT,
+    viewerFragment,
+  );
   const [argumentReported, setArgumentReported] = React.useState<?ArgumentReported>(null);
   const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{

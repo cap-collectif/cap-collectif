@@ -37,7 +37,7 @@ def symfony_bin_deps():
     local('brew cleanup')
     local('brew doctor')
     local('brew install pkg-config')
-    local('brew install php')
+    local('brew install php@7.4')
     local('brew install composer')
     local('brew install fontconfig')
     local('brew install rabbitmq')

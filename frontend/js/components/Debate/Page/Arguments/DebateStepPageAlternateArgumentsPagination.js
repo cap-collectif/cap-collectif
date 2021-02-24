@@ -8,7 +8,10 @@ import type {
   DebateStepPageAlternateArgumentsPagination_debate,
   DebateStepPageAlternateArgumentsPagination_debate$key,
 } from '~relay/DebateStepPageAlternateArgumentsPagination_debate.graphql';
-import type { DebateStepPageAlternateArgumentsPagination_viewer$key } from '~relay/DebateStepPageAlternateArgumentsPagination_viewer.graphql';
+import type {
+  DebateStepPageAlternateArgumentsPagination_viewer,
+  DebateStepPageAlternateArgumentsPagination_viewer$key,
+} from '~relay/DebateStepPageAlternateArgumentsPagination_viewer.graphql';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import ArgumentCard from '~/components/Debate/ArgumentCard/ArgumentCard';
 import type { ConnectionMetadata, RelayHookPaginationProps } from '~/types';
@@ -132,7 +135,10 @@ export const DebateStepPageAlternateArgumentsPagination = ({
     DebateStepPageAlternateArgumentsPagination_debate,
     RelayHookPaginationProps,
   ] = usePagination(FRAGMENT, debateFragment);
-  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const viewer: ?DebateStepPageAlternateArgumentsPagination_viewer = useFragment(
+    VIEWER_FRAGMENT,
+    viewerFragment,
+  );
   const [argumentReported, setArgumentReported] = React.useState<?ArgumentReported>(null);
   const [moderateArgumentModal, setModerateArgumentModal] = React.useState<?ModerateArgument>(null);
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{

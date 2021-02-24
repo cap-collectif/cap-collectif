@@ -32,13 +32,13 @@ const DEBATE_FRAGMENT = graphql`
   fragment DebateStepPageArgumentsDrawer_debate on Debate
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
     id
-    arguments(first: 0, isTrashed: false) {
+    arguments(first: 0, isPublished: true, isTrashed: false) {
       totalCount
     }
-    forArguments: arguments(first: 0, value: FOR, isTrashed: false) {
+    forArguments: arguments(first: 0, value: FOR, isPublished: true, isTrashed: false) {
       totalCount
     }
-    againstArguments: arguments(first: 0, value: AGAINST, isTrashed: false) {
+    againstArguments: arguments(first: 0, value: AGAINST, isPublished: true, isTrashed: false) {
       totalCount
     }
     ...DebateStepPageAlternateArgumentsPagination_debate
