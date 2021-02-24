@@ -11,6 +11,7 @@ exports[`<ProposalFormCategoryPinPreview /> render correctly 1`] = `
     }
     doubleClickZoom={false}
     dragging={false}
+    gestureHandling={true}
     scrollWheelZoom={false}
     style={
       Object {

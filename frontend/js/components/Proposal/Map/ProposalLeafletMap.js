@@ -1,8 +1,11 @@
 // @flow
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { renderToString } from 'react-dom/server';
 import noop from 'lodash/noop';
 import { TileLayer, GeoJSON, Marker, withLeaflet } from 'react-leaflet';
+import { GestureHandling } from 'leaflet-gesture-handling';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -177,6 +180,10 @@ export const ProposalLeafletMap = ({
     proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng),
   );
 
+  useEffect(() => {
+    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+  }, []);
+
   if (!visible) {
     return null;
   }
@@ -221,7 +228,9 @@ export const ProposalLeafletMap = ({
         onZoomStart={() => {
           setIsMobileSliderOpen(false);
           isOnCluster = false;
-        }}>
+        }}
+        doubleClickZoom={false}
+        gestureHandling>
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
           url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}

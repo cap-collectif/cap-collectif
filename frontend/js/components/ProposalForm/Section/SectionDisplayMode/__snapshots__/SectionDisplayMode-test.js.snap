@@ -228,6 +228,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
             }
             className="map"
             doubleClickZoom={false}
+            gestureHandling={true}
             zoom={10}
             zoomControl={false}
           >

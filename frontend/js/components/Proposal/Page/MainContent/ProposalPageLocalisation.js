@@ -6,11 +6,14 @@ import { TextRow } from 'react-placeholder/lib/placeholders';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Map, Marker, TileLayer } from 'react-leaflet';
+import { GestureHandling } from 'leaflet-gesture-handling';
 import colors from '~/utils/colors';
 import config from '~/config';
 import type { MapTokens } from '~/redux/modules/user';
 import type { GlobalState } from '~/types';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 
 import type { ProposalPageLocalisation_proposal } from '~relay/ProposalPageLocalisation_proposal.graphql';
 import {
@@ -35,11 +38,15 @@ const placeholder = (
 );
 
 export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
+  React.useEffect(() => {
+    if (config.canUseDOM) {
+      L = require('leaflet'); // eslint-disable-line
+      L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+    }
+  }, []);
+
   if (!mapTokens) return null;
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
-  if (config.canUseDOM) {
-    L = require('leaflet'); // eslint-disable-line
-  }
 
   if (proposal && !(proposal?.address && config.canUseDOM)) return null;
   return (
@@ -70,7 +77,9 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
                 style={{
                   width: '100%',
                   height: 175,
-                }}>
+                }}
+                doubleClickZoom={false}
+                gestureHandling>
                 <TileLayer
                   attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
                   url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}

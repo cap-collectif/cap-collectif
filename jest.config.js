@@ -20,6 +20,7 @@ module.exports = {
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',
+    "\\.(css|less)$": "identity-obj-proxy"
   },
   coverageReporters: ['json-summary', 'lcov', 'clover', 'json'],
   modulePaths: ['<rootDir>/frontend/js/__generated__'],

@@ -22,7 +22,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         "lng": 2.3137325,
       }
     }
+    doubleClickZoom={false}
     dragging={true}
+    gestureHandling={true}
     maxZoom={18}
     onClick={[Function]}
     onZoomStart={[Function]}
@@ -237,7 +239,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         "lng": 2.3137325,
       }
     }
+    doubleClickZoom={false}
     dragging={true}
+    gestureHandling={true}
     maxZoom={18}
     onClick={[Function]}
     onZoomStart={[Function]}

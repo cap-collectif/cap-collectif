@@ -9,6 +9,8 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
   }
 >
   <Map
+    doubleClickZoom={false}
+    gestureHandling={true}
     id="event-map"
     maxZoom={18}
     preferCanvas={true}

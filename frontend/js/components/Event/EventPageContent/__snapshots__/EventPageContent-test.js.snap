@@ -46,6 +46,8 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
           123454321,
         ]
       }
+      doubleClickZoom={false}
+      gestureHandling={true}
       style={
         Object {
           "height": "300px",
@@ -215,6 +217,8 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
           123454321,
         ]
       }
+      doubleClickZoom={false}
+      gestureHandling={true}
       style={
         Object {
           "height": "300px",
@@ -490,6 +494,8 @@ exports[`<EventPageContent /> should render correctly when no registration possi
           123454321,
         ]
       }
+      doubleClickZoom={false}
+      gestureHandling={true}
       style={
         Object {
           "height": "300px",
@@ -760,6 +766,8 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
           123454321,
         ]
       }
+      doubleClickZoom={false}
+      gestureHandling={true}
       style={
         Object {
           "height": "300px",

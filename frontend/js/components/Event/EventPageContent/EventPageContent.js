@@ -5,6 +5,9 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import L from 'leaflet';
+import { GestureHandling } from 'leaflet-gesture-handling';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import Thumbnail from '~ui/Medias/Thumbnail/Thumbnail';
 import config from '~/config';
 import Fixed from '~ui/Fixed/Fixed';
@@ -46,6 +49,10 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled }: Prop
   const [showModalParticipant, setShowModalParticipant] = React.useState<boolean>(false);
   const [showModalRegister, setShowModalRegister] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -65,7 +72,9 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled }: Prop
               height: '300px',
               width: '1OO%',
               zIndex: 1,
-            }}>
+            }}
+            doubleClickZoom={false}
+            gestureHandling>
             <TileLayer
               attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
               url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
