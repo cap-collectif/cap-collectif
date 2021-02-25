@@ -132,7 +132,7 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
 export default createFragmentContainer(ArgumentHeaderTab, {
   debate: graphql`
     fragment ArgumentHeaderTab_debate on Debate
-      @argumentDefinitions(isPublished: { type: "Boolean!" }, isTrashed: { type: "Boolean!" }) {
+      @argumentDefinitions(isPublished: { type: "Boolean" }, isTrashed: { type: "Boolean!" }) {
       id
       debateArgumentsPublished: arguments(first: 0, isPublished: true, isTrashed: false) {
         totalCount
@@ -140,7 +140,7 @@ export default createFragmentContainer(ArgumentHeaderTab, {
       debateArgumentsWaiting: arguments(first: 0, isPublished: false, isTrashed: false) {
         totalCount
       }
-      debateArgumentsTrashed: arguments(first: 0, isPublished: true, isTrashed: true) {
+      debateArgumentsTrashed: arguments(first: 0, isPublished: null, isTrashed: true) {
         totalCount
       }
       argumentsFor: arguments(

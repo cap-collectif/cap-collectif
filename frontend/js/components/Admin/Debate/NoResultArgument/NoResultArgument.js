@@ -95,7 +95,7 @@ export const NoResultArgument = ({ debate }: Props) => {
 
           <Tag
             ml={3}
-            variant={parameters.filters.argument.type === 'FOR' ? 'green' : 'red'}
+            variant={parameters.filters.argument.type.includes('FOR') ? 'red' : 'green'}
             onClick={() =>
               dispatch({
                 type: 'CHANGE_ARGUMENT_TYPE',
@@ -103,10 +103,9 @@ export const NoResultArgument = ({ debate }: Props) => {
               })
             }>
             {intl.formatMessage({
-              id:
-                parameters.filters.argument.type === 'FOR'
-                  ? 'argument.show.type.for'
-                  : 'argument.show.type.against',
+              id: parameters.filters.argument.type.includes('FOR')
+                ? 'argument.show.type.against'
+                : 'argument.show.type.for',
             })}
           </Tag>
         </Flex>

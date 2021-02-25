@@ -65,17 +65,7 @@ const onDelete = (
 };
 
 export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) => {
-  const {
-    id,
-    body,
-    author,
-    trashed,
-    published,
-    publishedAt,
-    type,
-    debate,
-    trashedStatus,
-  } = argument;
+  const { id, body, author, published, publishedAt, type, debate, trashedStatus } = argument;
   const [hovering, setHovering] = React.useState<boolean>(false);
   const intl = useIntl();
   const { parameters, dispatch } = useProjectAdminDebateContext();
@@ -136,7 +126,8 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
         </Tag>
 
         {hovering &&
-          (!trashed ? (
+          (parameters.filters.argument.state === 'PUBLISHED' ||
+            parameters.filters.argument.state === 'WAITING') && (
             <Button
               leftIcon={ICON_NAME.MODERATE}
               color="gray.500"
@@ -150,58 +141,60 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
               }
               p={0}
             />
-          ) : (
-            <Popover placement="left" trigger={['click']}>
-              <Popover.Trigger>
-                <ButtonQuickAction
-                  icon={ICON_NAME.TRASH}
-                  label={<FormattedMessage id="global.delete" />}
-                  variantColor="danger"
-                />
-              </Popover.Trigger>
-              <Popover.Content>
-                {({ closePopover }) => (
-                  <React.Fragment>
-                    <Popover.Header>
-                      {intl.formatMessage({ id: 'global.removeDefinitively' })}
-                    </Popover.Header>
-                    <Popover.Body>
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'body-confirm-definitively-delete-argument',
-                        })}
-                      </Text>
-                    </Popover.Body>
-                    <Popover.Footer>
-                      <ButtonGroup>
-                        <Button
-                          onClick={closePopover}
-                          variant="secondary"
-                          variantColor="hierarchy"
-                          variantSize="small">
-                          {intl.formatMessage({ id: 'cancel' })}
-                        </Button>
-                        <Button
-                          variant="primary"
-                          variantColor="danger"
-                          variantSize="small"
-                          onClick={() =>
-                            onDelete(
-                              argument.id,
-                              argument.debate.id,
-                              intl,
-                              parameters.filters.argument,
-                            )
-                          }>
-                          {intl.formatMessage({ id: 'global.removeDefinitively' })}
-                        </Button>
-                      </ButtonGroup>
-                    </Popover.Footer>
-                  </React.Fragment>
-                )}
-              </Popover.Content>
-            </Popover>
-          ))}
+          )}
+
+        {hovering && parameters.filters.argument.state === 'TRASHED' && (
+          <Popover placement="left" trigger={['click']}>
+            <Popover.Trigger>
+              <ButtonQuickAction
+                icon={ICON_NAME.TRASH}
+                label={<FormattedMessage id="global.delete" />}
+                variantColor="danger"
+              />
+            </Popover.Trigger>
+            <Popover.Content>
+              {({ closePopover }) => (
+                <React.Fragment>
+                  <Popover.Header>
+                    {intl.formatMessage({ id: 'global.removeDefinitively' })}
+                  </Popover.Header>
+                  <Popover.Body>
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'body-confirm-definitively-delete-argument',
+                      })}
+                    </Text>
+                  </Popover.Body>
+                  <Popover.Footer>
+                    <ButtonGroup>
+                      <Button
+                        onClick={closePopover}
+                        variant="secondary"
+                        variantColor="hierarchy"
+                        variantSize="small">
+                        {intl.formatMessage({ id: 'cancel' })}
+                      </Button>
+                      <Button
+                        variant="primary"
+                        variantColor="danger"
+                        variantSize="small"
+                        onClick={() =>
+                          onDelete(
+                            argument.id,
+                            argument.debate.id,
+                            intl,
+                            parameters.filters.argument,
+                          )
+                        }>
+                        {intl.formatMessage({ id: 'global.removeDefinitively' })}
+                      </Button>
+                    </ButtonGroup>
+                  </Popover.Footer>
+                </React.Fragment>
+              )}
+            </Popover.Content>
+          </Popover>
+        )}
       </Flex>
     </Flex>
   );
@@ -213,7 +206,6 @@ export default createFragmentContainer(DebateArgument, {
       id
       body
       published
-      trashed
       publishedAt
       type
       author {

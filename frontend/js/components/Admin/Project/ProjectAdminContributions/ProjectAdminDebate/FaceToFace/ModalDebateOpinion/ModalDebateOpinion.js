@@ -131,9 +131,9 @@ const onValidate = (values: Values) => {
   const { author, title, body } = values;
   const errors = {};
 
-  if (!author) errors.author = 'proposal.constraints.title';
-  if (!title) errors.title = 'global.constraints.check';
-  if (!body || !stripHtml(body)) errors.body = 'opinion.constraints.body';
+  if (!author) errors.author = 'global.form.mandatory';
+  if (!title) errors.title = 'global.form.mandatory';
+  if (!body || !stripHtml(body)) errors.body = 'global.form.mandatory';
 
   return errors;
 };
@@ -189,7 +189,11 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
     <Modal.Footer>
       <ButtonGroup justifyContent="flex-end">
         <CloseButton onClose={onClose} label="editor.undo" />
-        <Button variant="primary" variantColor="primary" variantSize="medium" onClick={handleSubmit}>
+        <Button
+          variant="primary"
+          variantColor="primary"
+          variantSize="medium"
+          onClick={handleSubmit}>
           <FormattedMessage id={isCreating ? 'global.create' : 'global.change'} />
         </Button>
       </ButtonGroup>

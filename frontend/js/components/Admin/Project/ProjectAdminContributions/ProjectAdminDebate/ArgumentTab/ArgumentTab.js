@@ -106,7 +106,7 @@ export default createPaginationContainer(
           count: { type: "Int!" }
           cursor: { type: "String" }
           value: { type: "ForOrAgainstValue", defaultValue: null }
-          isPublished: { type: "Boolean!" }
+          isPublished: { type: "Boolean" }
           isTrashed: { type: "Boolean!" }
         ) {
         id
@@ -170,7 +170,7 @@ export default createPaginationContainer(
         $count: Int!
         $cursor: String
         $value: ForOrAgainstValue
-        $isPublished: Boolean!
+        $isPublished: Boolean
         $isTrashed: Boolean!
       ) {
         debate: node(id: $debateId) {

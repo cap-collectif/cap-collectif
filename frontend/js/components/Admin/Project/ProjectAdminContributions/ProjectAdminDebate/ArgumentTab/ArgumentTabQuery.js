@@ -36,8 +36,9 @@ const createQueryVariables = (
   cursor: null,
   value: parameters.filters.argument.type.length === 2 ? null : parameters.filters.argument.type[0],
   isPublished:
-    parameters.filters.argument.state === 'PUBLISHED' ||
-    parameters.filters.argument.state === 'TRASHED',
+    parameters.filters.argument.state === 'TRASHED'
+      ? null
+      : parameters.filters.argument.state === 'PUBLISHED',
   isTrashed: parameters.filters.argument.state === 'TRASHED',
 });
 
@@ -47,7 +48,7 @@ const queryArgument = graphql`
     $count: Int!
     $cursor: String
     $value: ForOrAgainstValue
-    $isPublished: Boolean!
+    $isPublished: Boolean
     $isTrashed: Boolean!
   ) {
     debate: node(id: $debateId) {
