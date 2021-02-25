@@ -8,7 +8,7 @@ return [
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Translation\PlatformAdapter\Loco\Bridge\Symfony\TranslationAdapterLocoBundle::class => [
-        'all' => true
+        'all' => true,
     ],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Translation\Bundle\TranslationBundle::class => ['all' => true],
@@ -28,7 +28,6 @@ return [
     Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['all' => true],
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['all' => true],
     // sonata admin
-    Sonata\CoreBundle\SonataCoreBundle::class => ['all' => true],
     Sonata\IntlBundle\SonataIntlBundle::class => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
@@ -49,8 +48,9 @@ return [
 
     // sonata media
     Sonata\MediaBundle\SonataMediaBundle::class => ['all' => true],
-
-    // project bundles
+    Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle::class => ['all' => true],
+    Sonata\Form\Bridge\Symfony\SonataFormBundle::class => ['all' => true],
+    Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true],    // project bundles
     Capco\AppBundle\CapcoAppBundle::class => ['all' => true],
     Capco\AdminBundle\CapcoAdminBundle::class => ['all' => true],
     Capco\UserBundle\CapcoUserBundle::class => ['all' => true],
@@ -63,7 +63,7 @@ return [
     JoliTypo\Bridge\Symfony\JoliTypoBundle::class => ['all' => true],
     // CKEditor
     CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle::class => [
-        'all' => true
+        'all' => true,
     ],
     Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
     Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle::class => ['all' => true],
@@ -96,5 +96,5 @@ return [
     //RedirectionIO
     RedirectionIO\Client\ProxySymfony\RedirectionIOBundle::class => ['all' => true],
 
-    \Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true]
+    Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
 ];

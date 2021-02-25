@@ -35,7 +35,7 @@ class ProposalAnalyseProcessor implements ProcessorInterface
         $this->logger = $logger;
     }
 
-    public function process(Message $message, array $options)
+    public function process(Message $message, array $options):bool
     {
         $jsonDecoded = json_decode($message->getBody(), true);
 

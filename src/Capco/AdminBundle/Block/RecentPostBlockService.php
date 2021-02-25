@@ -8,15 +8,15 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RecentPostBlockService extends AbstractAdminBlockService
 {
-    protected $postRepository;
-    protected $toggleManager;
+    protected PostRepository $postRepository;
+    protected Manager $toggleManager;
 
     public function __construct(
         $name,

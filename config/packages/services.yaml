@@ -294,3 +294,6 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+
+    Liuggio\ExcelBundle\Factory:
+        public: true

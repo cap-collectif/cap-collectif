@@ -19,17 +19,15 @@ use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrl
 
 class ProjectDownloadResolver
 {
-    protected $em;
-    protected $translator;
-    protected $urlArrayResolver;
-    protected $urlResolver;
-    protected $phpexcel;
+    protected EntityManagerInterface $em;
+    protected TranslatorInterface $translator;
+    protected UrlArrayResolver $urlArrayResolver;
+    protected MediaUrlResolver $urlResolver;
+    protected Factory $phpexcel;
     protected $headers;
     protected $data;
-    protected $withVote;
     protected $customFields;
-    protected $httpFoundExtension;
-    private $exportUrlResolver;
+    private QuestionnaireExportResultsUrlResolver $exportUrlResolver;
 
     public function __construct(
         EntityManagerInterface $em,

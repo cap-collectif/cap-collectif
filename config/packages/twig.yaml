@@ -4,7 +4,6 @@ twig:
     form_themes:
         - 'CapcoAppBundle:Form:bootstrap.html.twig'
         - 'CapcoAppBundle:Form:media_widgets.html.twig'
-        - 'SonataCoreBundle:Form:datepicker.html.twig'
         - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
     globals:
         instanceName: '%instance_name%'
@@ -44,6 +43,7 @@ twig:
         mediaUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver'
         viewerCanSeeEvaluationsPageResolver: '@Capco\AppBundle\GraphQL\Resolver\Query\QueryViewerCanSeeEvaluationsPageResolver'
         debateArgumentVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentVotesResolver'
+
     paths:
         '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
         '%kernel.project_dir%/src/Capco/AppBundle/PDF/templates': CapcoPDF
@@ -61,6 +61,16 @@ services:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Twig/*'
 
     sonata.media.twig.extension: '@Capco\AppBundle\Twig\MediaExtension'
+
+    Sonata\Doctrine\Adapter\ORM\DoctrineORMAdapter: ~
+
+    Sonata\Twig\Extension\TemplateExtension:
+        public: true
+        arguments:
+            $debug: '%kernel.debug%'
+            $modelAdapter: '@Sonata\Doctrine\Adapter\ORM\DoctrineORMAdapter'
+
+    sonata.twig.template_extension: '@Sonata\Twig\Extension\TemplateExtension'
 
     Capco\AppBundle\Twig\MediaExtension:
         public: true

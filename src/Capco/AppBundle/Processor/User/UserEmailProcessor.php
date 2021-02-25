@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserEmailProcessor implements ProcessorInterface
 {
-    private $repository;
-    private $notifier;
+    private UserRepository $repository;
+    private UserNotifier $notifier;
 
     public function __construct(UserRepository $repository, UserNotifier $notifier)
     {
@@ -18,7 +18,7 @@ class UserEmailProcessor implements ProcessorInterface
         $this->notifier = $notifier;
     }
 
-    public function process(Message $message, array $options): void
+    public function process(Message $message, array $options):bool
     {
         $json = json_decode($message->getBody(), true);
         $user = $this->repository->find($json['userId']);
@@ -27,5 +27,7 @@ class UserEmailProcessor implements ProcessorInterface
         }
 
         $this->notifier->newEmailConfirmation($user);
+
+        return true;
     }
 }

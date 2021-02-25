@@ -175,8 +175,7 @@ class SettingsController extends Controller
                 'CapcoAppBundle'
             );
         }
-        $this->get('sonata.core.flashmessage.manager')
-            ->getSession()
+        $this->get('session')
             ->getFlashBag()
             ->add('success', $message);
         $category = $this->get(FeaturesCategoryResolver::class)->findCategoryForToggle($toggle);

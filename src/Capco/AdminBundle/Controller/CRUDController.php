@@ -585,7 +585,7 @@ class CRUDController extends Controller
             );
         }
 
-        if (null === $fieldDescription->getTargetEntity()) {
+        if (null === $fieldDescription->getTargetModel()) {
             throw new \RuntimeException(sprintf('No associated entity with field "%s".', $field));
         }
 

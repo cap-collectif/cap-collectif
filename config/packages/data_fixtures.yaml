@@ -6,6 +6,9 @@ services:
   Liip\ImagineBundle\Service\FilterService:
     public: true
     autowire: true
+    arguments:
+        $webpGenerate: false
+        $webpOptions: []
 
   liip_imagine.service.filter: '@Liip\ImagineBundle\Service\FilterService'
 
