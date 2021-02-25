@@ -23,7 +23,9 @@ class JpecGhost extends AbstractSlackMessager
 
     public function generateAndSendMessage(AnalysisConfigurationProcess $process)
     {
-        return $this->send($this->generateSlackMessage($process));
+        if ("test" !== $this->env) {
+            return $this->send($this->generateSlackMessage($process));
+        }
     }
 
     protected function getHook(): string
@@ -54,6 +56,6 @@ class JpecGhost extends AbstractSlackMessager
 
     private function prefixIfNotProd(): string
     {
-        return 'prod' === $this->env ? '' : '(test) ';
+        return 'prod' === $this->env ? '' : $this->env;
     }
 }
