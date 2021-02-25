@@ -10,24 +10,8 @@ const baseProps = {
   show: true,
   mailingList: {
     $refType,
+    id: 'mailingList-123',
     name: 'Je suis une mailing list',
-    users: {
-      totalCount: 2,
-      edges: [
-        {
-          node: {
-            id: '1',
-            email: 'bruh@gmail.com',
-          },
-        },
-        {
-          node: {
-            id: '2',
-            email: 'bro@gmail.com',
-          },
-        },
-      ],
-    },
   },
 };
 
@@ -36,7 +20,7 @@ const props = {
 };
 
 describe('<ModalMembers />', () => {
-  it('should open with data', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<ModalMembers {...props.withData} />);
     expect(wrapper).toMatchSnapshot();
   });

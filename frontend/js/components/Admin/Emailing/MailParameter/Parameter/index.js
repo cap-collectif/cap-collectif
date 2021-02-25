@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
@@ -9,15 +9,10 @@ import { InstructionContainer, InfoRow, InfoMailingList, ButtonMembers } from '.
 import component from '~/components/Form/Field';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
-import ModalInternalMembers, {
-  type InternalMembers,
-  type InternalMembersFormatted,
-} from '~/components/Admin/Emailing/ModalMembers/ModalInternalMembers';
+import ModalInternalMembers from '~/components/Admin/Emailing/ModalMembers/ModalInternalMembers';
 import colors from '~/utils/colors';
 import type { Parameter_query } from '~relay/Parameter_query.graphql';
 import type { Parameter_emailingCampaign } from '~relay/Parameter_emailingCampaign.graphql';
-import type { Parameter_UsersQueryResponse } from '~relay/Parameter_UsersQuery.graphql';
-import environment from '~/createRelayEnvironment';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -27,58 +22,6 @@ type Props = {|
   disabled: boolean,
   showError: boolean,
 |};
-
-const COUNT_USERS_QUERY = graphql`
-  query Parameter_UsersQuery {
-    users {
-      edges {
-        node {
-          id
-          email
-          isEmailConfirmed
-        }
-      }
-    }
-  }
-`;
-
-const loadUsersCount = (): Promise<Parameter_UsersQueryResponse> =>
-  new Promise(async resolve => {
-    const response = await fetchQuery(environment, COUNT_USERS_QUERY, {});
-    resolve(response);
-  });
-
-const getMailingListName = (mailingInternalSelected: string, intl: IntlShape): string => {
-  switch (mailingInternalSelected) {
-    case 'REGISTERED':
-      return intl.formatMessage({ id: 'default-mailing-list-registered' });
-    case 'CONFIRMED':
-      return intl.formatMessage({ id: 'default-mailing-list-registered-confirmed' });
-    case 'NOT_CONFIRMED':
-      return intl.formatMessage({ id: 'default-mailing-list-registered-not-confirmed' });
-    default:
-      return '';
-  }
-};
-
-const getMailingInternalUsers = (
-  mailingInternalSelected: string,
-  users: InternalMembers,
-): InternalMembersFormatted => {
-  switch (mailingInternalSelected) {
-    case 'CONFIRMED':
-      return ((users.edges
-        ?.filter(Boolean)
-        .filter(edge => edge.node && edge.node.isEmailConfirmed): any): InternalMembersFormatted);
-    case 'NOT_CONFIRMED':
-      return ((users.edges
-        ?.filter(Boolean)
-        .filter(edge => edge.node && !edge.node.isEmailConfirmed): any): InternalMembersFormatted);
-    case 'REGISTERED':
-    default:
-      return ((users?.edges || []: any): InternalMembersFormatted);
-  }
-};
 
 export const getWordingMailingInternal = (mailingInternal: string, intl: IntlShape) => {
   switch (mailingInternal) {
@@ -95,28 +38,38 @@ export const getWordingMailingInternal = (mailingInternal: string, intl: IntlSha
 
 export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: Props) => {
   const { mailingList, mailingInternal } = emailingCampaign;
-  const { mailingLists } = query;
+  const { mailingLists, users, usersConfirmed, usersNotConfirmed } = query;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const hasMailingList = !!mailingList || !!mailingInternal;
   const [countUsers, setCountUsers] = React.useState<number>(0);
-  const [mailingInternalUsers, setMailingInternalUsers] = React.useState<?InternalMembersFormatted>(
-    null,
-  );
 
   React.useEffect(() => {
     if (mailingInternal) {
-      loadUsersCount().then(({ users }: Parameter_UsersQueryResponse) => {
-        const usersOfChoicesMailingInternal = getMailingInternalUsers(mailingInternal, users);
-        setCountUsers(usersOfChoicesMailingInternal?.length || 0);
-        setMailingInternalUsers(usersOfChoicesMailingInternal);
-      });
+      switch (mailingInternal) {
+        case 'CONFIRMED':
+          setCountUsers(usersConfirmed.totalCount);
+          break;
+        case 'NOT_CONFIRMED':
+          setCountUsers(usersNotConfirmed.totalCount);
+          break;
+        case 'REGISTERED':
+        default:
+          setCountUsers(users.totalCount);
+          break;
+      }
     }
 
     if (mailingList) {
-      setCountUsers(mailingList.users.totalCount);
+      setCountUsers(mailingList.mailingListUsers.totalCount);
     }
-  }, [mailingInternal, mailingList]);
+  }, [
+    mailingInternal,
+    mailingList,
+    users.totalCount,
+    usersConfirmed.totalCount,
+    usersNotConfirmed.totalCount,
+  ]);
 
   return (
     <Container disabled={disabled}>
@@ -197,12 +150,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
 
       {hasMailingList &&
         (mailingInternal ? (
-          <ModalInternalMembers
-            show={isOpen}
-            onClose={onClose}
-            mailingListName={getMailingListName(mailingInternal, intl)}
-            members={mailingInternalUsers}
-          />
+          <ModalInternalMembers show={isOpen} onClose={onClose} type={mailingInternal} />
         ) : (
           <ModalMembers show={isOpen} onClose={onClose} mailingList={mailingList} />
         ))}
@@ -218,7 +166,7 @@ export default createFragmentContainer(ParameterPage, {
         project {
           title
         }
-        users {
+        mailingListUsers: users(first: 0) {
           totalCount
         }
         ...ModalMembers_mailingList
@@ -236,6 +184,15 @@ export default createFragmentContainer(ParameterPage, {
             name
           }
         }
+      }
+      users(first: 0) {
+        totalCount
+      }
+      usersConfirmed: users(first: 0, emailConfirmed: true) {
+        totalCount
+      }
+      usersNotConfirmed: users(first: 0, emailConfirmed: false) {
+        totalCount
       }
     }
   `,

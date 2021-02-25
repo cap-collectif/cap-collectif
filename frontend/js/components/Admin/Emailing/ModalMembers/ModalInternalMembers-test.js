@@ -7,32 +7,34 @@ import { ModalInternalMembers } from './ModalInternalMembers';
 const baseProps = {
   onClose: jest.fn(),
   show: true,
-  mailingListName: 'Je suis une mailing list',
-  members: [
-    {
-      node: {
-        id: '1',
-        email: 'bruh@gmail.com',
-        isEmailConfirmed: true,
-      },
-    },
-    {
-      node: {
-        id: '2',
-        email: 'bro@gmail.com',
-        isEmailConfirmed: false,
-      },
-    },
-  ],
+  type: 'REGISTERED',
 };
 
 const props = {
-  withData: baseProps,
+  basic: baseProps,
+  confirmedUsers: {
+    ...baseProps,
+    type: 'CONFIRMED',
+  },
+  notConfirmedUsers: {
+    ...baseProps,
+    type: 'NOT_CONFIRMED',
+  },
 };
 
 describe('<ModalInternalMembers />', () => {
-  it('should open with data', () => {
-    const wrapper = shallow(<ModalInternalMembers {...props.withData} />);
+  it('should open with internal list with registered users', () => {
+    const wrapper = shallow(<ModalInternalMembers {...props.basic} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should open with internal list with confirmed users', () => {
+    const wrapper = shallow(<ModalInternalMembers {...props.confirmedUsers} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should open with internal list with not confirmed users', () => {
+    const wrapper = shallow(<ModalInternalMembers {...props.notConfirmedUsers} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

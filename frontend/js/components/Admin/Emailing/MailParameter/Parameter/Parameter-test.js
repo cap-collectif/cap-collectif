@@ -16,7 +16,7 @@ const baseProps = {
       project: {
         title: 'P&C',
       },
-      users: {
+      mailingListUsers: {
         totalCount: 3,
       },
     },
@@ -40,6 +40,15 @@ const baseProps = {
           },
         },
       ],
+    },
+    users: {
+      totalCount: 30,
+    },
+    usersConfirmed: {
+      totalCount: 15,
+    },
+    usersNotConfirmed: {
+      totalCount: 15,
     },
   },
 };

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Members /> should render correctly 1`] = `
+<Members___StyledAppBox
+  as="ul"
+  m={0}
+  p={0}
+>
+  <InfiniteScroll
+    element="div"
+    getScrollParent={[Function]}
+    hasMore={true}
+    initialLoad={false}
+    isReverse={false}
+    key="infinite-scroll-internal-members"
+    loadMore={[Function]}
+    loader={
+      <ForwardRef
+        direction="row"
+        justify="center"
+      >
+        <ForwardRef
+          size="m"
+        />
+      </ForwardRef>
+    }
+    pageStart={0}
+    ref={null}
+    threshold={250}
+    useCapture={false}
+    useWindow={false}
+  >
+    <AppBox
+      as="li"
+      key="user-123"
+      mb={3}
+    >
+      jean@cap-collectif.com
+    </AppBox>
+    <AppBox
+      as="li"
+      key="user-456"
+      mb={3}
+    >
+      jean-peut-plus@cap-collectif.com
+    </AppBox>
+  </InfiniteScroll>
+</Members___StyledAppBox>
+`;

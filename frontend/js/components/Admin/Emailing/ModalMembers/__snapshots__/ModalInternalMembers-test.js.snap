@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ModalInternalMembers /> should open with data 1`] = `
+exports[`<ModalInternalMembers /> should open with internal list with confirmed users 1`] = `
 <commonstyle__ModalContainer
   animation={false}
   aria-labelledby="modal-title"
@@ -18,25 +18,806 @@ exports[`<ModalInternalMembers /> should open with data 1`] = `
       componentClass="h4"
       id="modal-title"
     >
-      Je suis une mailing list
+      default-mailing-list-registered-confirmed
     </ModalTitle>
   </ModalHeader>
   <ModalBody
     bsClass="modal-body"
     componentClass="div"
   >
-    <ModalMembersstyle__MembersContainer>
-      <li
-        key="1"
-      >
-        bruh@gmail.com
-      </li>
-      <li
-        key="2"
-      >
-        bro@gmail.com
-      </li>
-    </ModalMembersstyle__MembersContainer>
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={
+        Object {
+          "fragment": Object {
+            "abstractKey": null,
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "count",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "cursor",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "emailConfirmed",
+              },
+            ],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "ModalInternalMembersQuery",
+            "selections": Array [
+              Object {
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "count",
+                    "variableName": "count",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "cursor",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                ],
+                "kind": "FragmentSpread",
+                "name": "InternalMembers_query",
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "7ccb51f6854042017fd6288db3f04326",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "count",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "cursor",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "emailConfirmed",
+              },
+            ],
+            "kind": "Operation",
+            "name": "ModalInternalMembersQuery",
+            "selections": Array [
+              Object {
+                "alias": "members",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "after",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "count",
+                  },
+                ],
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "users",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "kind": "LinkedField",
+                    "name": "pageInfo",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "hasNextPage",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "endCursor",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "UserEdge",
+                    "kind": "LinkedField",
+                    "name": "edges",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "node",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "email",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "cursor",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": "members",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "after",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "count",
+                  },
+                ],
+                "filters": Array [],
+                "handle": "connection",
+                "key": "InternalMembers_members",
+                "kind": "LinkedHandle",
+                "name": "users",
+              },
+            ],
+          },
+          "params": Object {
+            "cacheID": "8ef3f526ab5cabc4ba695937e708993c",
+            "id": null,
+            "metadata": Object {},
+            "name": "ModalInternalMembersQuery",
+            "operationKind": "query",
+            "text": "query ModalInternalMembersQuery(
+  $count: Int
+  $cursor: String
+  $emailConfirmed: Boolean
+) {
+  ...InternalMembers_query_HnPGj
+}
+
+fragment InternalMembers_query_HnPGj on Query {
+  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        __typename
+      }
+      cursor
+    }
+  }
+}
+",
+          },
+        }
+      }
+      render={[Function]}
+      variables={
+        Object {
+          "count": 20,
+          "emailConfirmed": true,
+        }
+      }
+    />
+  </ModalBody>
+</commonstyle__ModalContainer>
+`;
+
+exports[`<ModalInternalMembers /> should open with internal list with not confirmed users 1`] = `
+<commonstyle__ModalContainer
+  animation={false}
+  aria-labelledby="modal-title"
+  bsSize="small"
+  onHide={[MockFunction]}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="modal-title"
+    >
+      default-mailing-list-registered-not-confirmed
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={
+        Object {
+          "fragment": Object {
+            "abstractKey": null,
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "count",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "cursor",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "emailConfirmed",
+              },
+            ],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "ModalInternalMembersQuery",
+            "selections": Array [
+              Object {
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "count",
+                    "variableName": "count",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "cursor",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                ],
+                "kind": "FragmentSpread",
+                "name": "InternalMembers_query",
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "7ccb51f6854042017fd6288db3f04326",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "count",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "cursor",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "emailConfirmed",
+              },
+            ],
+            "kind": "Operation",
+            "name": "ModalInternalMembersQuery",
+            "selections": Array [
+              Object {
+                "alias": "members",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "after",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "count",
+                  },
+                ],
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "users",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "kind": "LinkedField",
+                    "name": "pageInfo",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "hasNextPage",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "endCursor",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "UserEdge",
+                    "kind": "LinkedField",
+                    "name": "edges",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "node",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "email",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "cursor",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": "members",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "after",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "count",
+                  },
+                ],
+                "filters": Array [],
+                "handle": "connection",
+                "key": "InternalMembers_members",
+                "kind": "LinkedHandle",
+                "name": "users",
+              },
+            ],
+          },
+          "params": Object {
+            "cacheID": "8ef3f526ab5cabc4ba695937e708993c",
+            "id": null,
+            "metadata": Object {},
+            "name": "ModalInternalMembersQuery",
+            "operationKind": "query",
+            "text": "query ModalInternalMembersQuery(
+  $count: Int
+  $cursor: String
+  $emailConfirmed: Boolean
+) {
+  ...InternalMembers_query_HnPGj
+}
+
+fragment InternalMembers_query_HnPGj on Query {
+  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        __typename
+      }
+      cursor
+    }
+  }
+}
+",
+          },
+        }
+      }
+      render={[Function]}
+      variables={
+        Object {
+          "count": 20,
+          "emailConfirmed": false,
+        }
+      }
+    />
+  </ModalBody>
+</commonstyle__ModalContainer>
+`;
+
+exports[`<ModalInternalMembers /> should open with internal list with registered users 1`] = `
+<commonstyle__ModalContainer
+  animation={false}
+  aria-labelledby="modal-title"
+  bsSize="small"
+  onHide={[MockFunction]}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="modal-title"
+    >
+      default-mailing-list-registered
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <ReactRelayQueryRenderer
+      environment={"RelayModernEnvironment()"}
+      query={
+        Object {
+          "fragment": Object {
+            "abstractKey": null,
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "count",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "cursor",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "emailConfirmed",
+              },
+            ],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "ModalInternalMembersQuery",
+            "selections": Array [
+              Object {
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "count",
+                    "variableName": "count",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "cursor",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                ],
+                "kind": "FragmentSpread",
+                "name": "InternalMembers_query",
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "7ccb51f6854042017fd6288db3f04326",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "count",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "cursor",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "emailConfirmed",
+              },
+            ],
+            "kind": "Operation",
+            "name": "ModalInternalMembersQuery",
+            "selections": Array [
+              Object {
+                "alias": "members",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "after",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "count",
+                  },
+                ],
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "users",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "kind": "LinkedField",
+                    "name": "pageInfo",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "hasNextPage",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "endCursor",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "UserEdge",
+                    "kind": "LinkedField",
+                    "name": "edges",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "User",
+                        "kind": "LinkedField",
+                        "name": "node",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "email",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "cursor",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": "members",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "after",
+                    "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "emailConfirmed",
+                    "variableName": "emailConfirmed",
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "first",
+                    "variableName": "count",
+                  },
+                ],
+                "filters": Array [],
+                "handle": "connection",
+                "key": "InternalMembers_members",
+                "kind": "LinkedHandle",
+                "name": "users",
+              },
+            ],
+          },
+          "params": Object {
+            "cacheID": "8ef3f526ab5cabc4ba695937e708993c",
+            "id": null,
+            "metadata": Object {},
+            "name": "ModalInternalMembersQuery",
+            "operationKind": "query",
+            "text": "query ModalInternalMembersQuery(
+  $count: Int
+  $cursor: String
+  $emailConfirmed: Boolean
+) {
+  ...InternalMembers_query_HnPGj
+}
+
+fragment InternalMembers_query_HnPGj on Query {
+  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        __typename
+      }
+      cursor
+    }
+  }
+}
+",
+          },
+        }
+      }
+      render={[Function]}
+      variables={
+        Object {
+          "count": 20,
+          "emailConfirmed": null,
+        }
+      }
+    />
   </ModalBody>
 </commonstyle__ModalContainer>
 `;

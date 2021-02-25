@@ -72,12 +72,12 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
     mailingList={
       Object {
         "$fragmentRefs": null,
+        "mailingListUsers": Object {
+          "totalCount": 3,
+        },
         "name": "Je suis une mailingList",
         "project": Object {
           "title": "P&C",
-        },
-        "users": Object {
-          "totalCount": 3,
         },
       }
     }
@@ -159,12 +159,12 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
     mailingList={
       Object {
         "$fragmentRefs": null,
+        "mailingListUsers": Object {
+          "totalCount": 3,
+        },
         "name": "Je suis une mailingList",
         "project": Object {
           "title": "P&C",
-        },
-        "users": Object {
-          "totalCount": 3,
         },
       }
     }
@@ -246,12 +246,12 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
     mailingList={
       Object {
         "$fragmentRefs": null,
+        "mailingListUsers": Object {
+          "totalCount": 3,
+        },
         "name": "Je suis une mailingList",
         "project": Object {
           "title": "P&C",
-        },
-        "users": Object {
-          "totalCount": 3,
         },
       }
     }
@@ -330,10 +330,9 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
     />
   </style__InstructionContainer>
   <ModalInternalMembers
-    mailingListName="default-mailing-list-registered-confirmed"
-    members={null}
     onClose={[Function]}
     show={false}
+    type="CONFIRMED"
   />
 </commonstyle__Container>
 `;
