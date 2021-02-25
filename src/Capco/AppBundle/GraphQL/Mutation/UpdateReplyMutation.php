@@ -21,13 +21,12 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateReplyMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $responsesFormatter;
-    private $replyRepo;
-    private $stepUrlResolver;
-    private $publisher;
-    private $questionnaireReplyNotifier;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private ResponsesFormatter $responsesFormatter;
+    private ReplyRepository $replyRepo;
+    private StepUrlResolver $stepUrlResolver;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -35,8 +34,7 @@ class UpdateReplyMutation implements MutationInterface
         ReplyRepository $replyRepo,
         ResponsesFormatter $responsesFormatter,
         StepUrlResolver $stepUrlResolver,
-        Publisher $publisher,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -44,70 +42,77 @@ class UpdateReplyMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
-        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $values = $input->getArrayCopy();
-        $replyId = GlobalId::fromGlobalId($values['replyId']);
-        /** @var Reply $reply */
-        $reply = $this->replyRepo->find($replyId['id']);
-        unset($values['replyId']);
+        $reply = $this->getReply($input, $viewer);
+        $wasDraft = $reply->isDraft();
+        $reply = $this->updateReply($reply, $input);
+        $this->em->flush();
+
+        if (self::shouldNotify($reply)) {
+            $this->notify($reply, $wasDraft);
+        }
+
+        return ['reply' => $reply];
+    }
+
+    private function notify(Reply $reply, bool $wasDraft): void
+    {
+        $this->publisher->publish(
+            'questionnaire.reply',
+            new Message(
+                json_encode([
+                    'replyId' => $reply->getId(),
+                    'state' => $wasDraft
+                        ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
+                        : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE,
+                ])
+            )
+        );
+    }
+
+    private function getReply(Argument $argument, User $viewer): Reply
+    {
+        $reply = $this->replyRepo->find(
+            GlobalId::fromGlobalId($argument->offsetGet('replyId'))['id']
+        );
 
         if (!$reply) {
             throw new UserError('Reply not found.');
         }
-        $wasDraft = $reply->isDraft();
-        $draft = false;
-        if (isset($values['draft']) && true === $values['draft']) {
-            $draft = true;
-        }
-        $reply->setPublishedAt(new \DateTime('now'));
-        $author = $reply->getAuthor();
-        if ($author !== $viewer) {
+        if ($reply->getAuthor() !== $viewer) {
             throw new UserError('You are not allowed to update this reply.');
         }
 
-        $values['responses'] = $this->responsesFormatter->format($values['responses']);
+        return $reply;
+    }
 
+    private function updateReply(Reply $reply, Argument $argument): Reply
+    {
         $form = $this->formFactory->create(ReplyType::class, $reply, []);
-        $form->submit($values, false);
+        $form->submit($this->formatValuesForForm($argument), false);
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $questionnaireReply = $reply->getQuestionnaire();
-        $isUpdated = $wasDraft && !$draft ? false : true;
+        return $reply;
+    }
 
-        $state = !$isUpdated
-            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
-            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE;
+    private function formatValuesForForm(Argument $argument): array
+    {
+        $values = $argument->getArrayCopy();
+        unset($values['replyId']);
+        $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
-        // we use the same code which the e2e test used
-        QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
-            ? $this->questionnaireReplyNotifier->onCreate($reply)
-            : $this->questionnaireReplyNotifier->onUpdate($reply);
+        return $values;
+    }
 
-        if (
-            $questionnaireReply &&
-            !$reply->isDraft() &&
-            $questionnaireReply->isNotifyResponseUpdate()
-        ) {
-            $this->publisher->publish(
-                'questionnaire.reply',
-                new Message(
-                    json_encode([
-                        'replyId' => $reply->getId(),
-                        'state' => $wasDraft
-                            ? QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
-                            : QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE
-                    ])
-                )
-            );
-        }
-        $this->em->flush();
-
-        return ['reply' => $reply];
+    private static function shouldNotify(Reply $reply): bool
+    {
+        return !$reply->isDraft() &&
+            $reply->getQuestionnaire() &&
+            $reply->getQuestionnaire()->isNotifyResponseUpdate();
     }
 }

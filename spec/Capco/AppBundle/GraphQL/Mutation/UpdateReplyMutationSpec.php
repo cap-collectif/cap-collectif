@@ -11,7 +11,6 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,8 +37,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         ReplyRepository $replyRepo,
         ResponsesFormatter $responsesFormatter,
         StepUrlResolver $stepUrlResolver,
-        Publisher $publisher,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        Publisher $publisher
     ) {
         $this->beConstructedWith(
             $em,
@@ -47,8 +45,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
             $replyRepo,
             $responsesFormatter,
             $stepUrlResolver,
-            $publisher,
-            $questionnaireReplyNotifier
+            $publisher
         );
     }
 
@@ -70,14 +67,14 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         Publisher $publisher,
         Project $project,
         ResponsesFormatter $responsesFormatter,
-        StepUrlResolver $stepUrlResolver,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier
+        StepUrlResolver $stepUrlResolver
     ) {
         $values = [];
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
 
         $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $replyRepo->find($replyId)->willReturn($reply);
@@ -109,8 +106,6 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $reply->getQuestionnaire()->willReturn($questionnaire);
 
-        $questionnaireReplyNotifier->onCreate($reply)->shouldBeCalled();
-
         $publisher
             ->publish('questionnaire.reply', \Prophecy\Argument::type(Message::class))
             ->shouldBeCalled();
@@ -130,6 +125,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['draft'] = false;
         $values['responses'] = [];
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments->offsetGet('replyId')->willReturn('UmVwbHkscmVwbHkxMA==');
 
         $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $replyRepo->find($replyId)->willReturn(null);
@@ -137,7 +133,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
 
         $this->shouldThrow(new UserError('Reply not found.'))->during('__invoke', [
             $arguments,
-            $viewer
+            $viewer,
         ]);
     }
 
@@ -154,6 +150,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['draft'] = false;
         $values['responses'] = [];
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
 
         $viewer->getId()->willReturn('user1');
         $author->getId()->willReturn('user2');
@@ -166,10 +163,9 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $replyRepo->find($replyId)->willReturn($reply);
         $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
         $em->flush()->shouldNotBeCalled();
-        $this->shouldThrow(new UserError('You are not allowed to update this reply.'))->during(
-            '__invoke',
-            [$arguments, $viewer]
-        );
+        $this->shouldThrow(
+            new UserError('You are not allowed to update this reply.')
+        )->during('__invoke', [$arguments, $viewer]);
     }
 
     public function it_throw_GraphQLException_if_form_is_not_valid(
@@ -191,6 +187,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $values['draft'] = false;
         $values['responses'] = [];
         $arguments->getArrayCopy()->willReturn($values);
+        $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
 
         $viewer->getId()->willReturn('user1');
 
