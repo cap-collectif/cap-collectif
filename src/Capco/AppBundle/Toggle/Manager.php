@@ -72,6 +72,7 @@ class Manager
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
+    public const unstable__new_project_card = 'unstable__new_project_card';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -161,6 +162,7 @@ class Manager
         self::proposal_revisions,
         self::unstable__tipsmeee,
         self::unstable__new_consultation_page,
+        self::unstable__new_project_card,
     ];
 
     protected ToggleManager $toggleManager;

@@ -99,6 +99,7 @@ export const features: FeatureToggles = {
   unstable__debate: false,
   unstable__tipsmeee: false,
   unstable__new_consultation_page: false,
+  unstable__new_project_card: false,
 };
 
 export const initialState: State = {

@@ -66,6 +66,7 @@ class FeaturesCategoryResolver
                     Manager::unstable__debate,
                     Manager::proposal_revisions,
                     Manager::unstable__new_consultation_page,
+                    Manager::unstable__new_project_card,
                 ],
             ],
         ],

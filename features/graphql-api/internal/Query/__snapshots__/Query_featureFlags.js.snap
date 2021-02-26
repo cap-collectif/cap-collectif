@@ -251,6 +251,10 @@ Object {
       "enabled": true,
       "type": "unstable__new_consultation_page",
     },
+    Object {
+      "enabled": true,
+      "type": "unstable__new_project_card",
+    },
   ],
 }
 `;

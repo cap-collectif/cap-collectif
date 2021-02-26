@@ -4886,6 +4886,9 @@ enum FeatureFlagType {
 
   """Whether or not the new consultation page is active."""
   unstable__new_consultation_page
+
+  """Whether or not the new project card is active."""
+  unstable__new_project_card
 }
 
 """Require a firstname"""
