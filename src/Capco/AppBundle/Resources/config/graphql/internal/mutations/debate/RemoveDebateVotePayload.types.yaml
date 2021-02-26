@@ -8,6 +8,9 @@ RemoveDebateVotePayload:
             deletedVoteId:
                 type: 'ID'
                 description: 'The id of the removed vote.'
+            deletedArgumentId:
+                type: 'ID'
+                description: 'The id of the removed argument.'
             errorCode:
                 type: 'RemoveDebateVoteErrorCode'
                 description: 'An unsuccessful mutation will return an error.'

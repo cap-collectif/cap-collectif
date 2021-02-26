@@ -1,14 +1,18 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../../_setup';
 
 const RemoveDebateVoteMutation = /* GraphQL */ `
   mutation RemoveDebateVoteMutation($input: RemoveDebateVoteInput!) {
     removeDebateVote(input: $input) {
       errorCode
       deletedVoteId
+      deletedArgumentId
       debate {
         id
         votes {
+          totalCount
+        }
+        arguments {
           totalCount
         }
       }

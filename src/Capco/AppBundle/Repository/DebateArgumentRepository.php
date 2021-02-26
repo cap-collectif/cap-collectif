@@ -44,6 +44,24 @@ class DebateArgumentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
+    public function getOneByDebateAndUser(Debate $debate, User $user): ?DebateArgument
+    {
+        $qb = $this->getByDebateQueryBuilder($debate, [])
+            ->andWhere('argument.author = :user')
+            ->setParameter('user', $user);
+
+        try {
+            return $qb->getQuery()->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            $this->logger->critical(
+                'A user has multiple arguments on a debate. This should not happen.',
+                ['debate' => $debate, 'user' => $user]
+            );
+
+            return null;
+        }
+    }
+
     public function getUnpublishedByDebateAndUser(Debate $debate, User $user): ?DebateArgument
     {
         $qb = $this->getByDebateQueryBuilder($debate, [
@@ -123,16 +141,20 @@ class DebateArgumentRepository extends EntityRepository
             $qb->andWhere('argument.type = :value')->setParameter('value', $filters['value']);
         }
 
-        if ($filters['isPublished']) {
-            $qb->andWhere('argument.published = true');
-        } elseif (false === $filters['isPublished']) {
-            $qb->andWhere('argument.published = false');
+        if (isset($filters['isPublished'])) {
+            if ($filters['isPublished']) {
+                $qb->andWhere('argument.published = true');
+            } elseif (false === $filters['isPublished']) {
+                $qb->andWhere('argument.published = false');
+            }
         }
 
-        if (false === $filters['isTrashed']) {
-            $qb->andWhere('argument.trashedStatus IS NULL');
-        } elseif ($filters['isTrashed']) {
-            $qb->andWhere('argument.trashedStatus IS NOT NULL');
+        if (isset($filters['isTrashed'])) {
+            if (false === $filters['isTrashed']) {
+                $qb->andWhere('argument.trashedStatus IS NULL');
+            } elseif ($filters['isTrashed']) {
+                $qb->andWhere('argument.trashedStatus IS NOT NULL');
+            }
         }
 
         return $qb;

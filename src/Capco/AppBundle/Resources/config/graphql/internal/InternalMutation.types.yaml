@@ -1068,6 +1068,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateVoteMutation", [value, getUser()])'
             removeDebateVote:
                 access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                description: 'Delete a debate vote from the current user, will also delete the debate argument, if any.'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: RemoveDebateVoteInput

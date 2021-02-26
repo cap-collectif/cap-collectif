@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class RemoveDebateVoteMutation implements MutationInterface
@@ -23,18 +24,21 @@ class RemoveDebateVoteMutation implements MutationInterface
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
-    private DebateVoteRepository $repository;
+    private DebateVoteRepository $voteRepository;
+    private DebateArgumentRepository $argumentRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        DebateVoteRepository $repository
+        DebateVoteRepository $voteRepository,
+        DebateArgumentRepository $argumentRepository
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
-        $this->repository = $repository;
+        $this->voteRepository = $voteRepository;
+        $this->argumentRepository = $argumentRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -54,7 +58,7 @@ class RemoveDebateVoteMutation implements MutationInterface
             return $this->generateErrorPayload(self::CLOSED_DEBATE);
         }
 
-        $previousVote = $this->repository->getOneByDebateAndUser($debate, $viewer);
+        $previousVote = $this->voteRepository->getOneByDebateAndUser($debate, $viewer);
 
         if (!$previousVote) {
             $this->logger->error('No vote found for `debateId` and viewer.', [
@@ -68,6 +72,15 @@ class RemoveDebateVoteMutation implements MutationInterface
         $previousVoteId = $previousVote->getId();
         $this->em->remove($previousVote);
 
+        $previousArgumentId = null;
+        $previousArgument = $this->argumentRepository->getOneByDebateAndUser($debate, $viewer);
+
+        // We also delete the debate argument of the user, if any.
+        if ($previousArgument) {
+            $previousArgumentId = $previousArgument->getId();
+            $this->em->remove($previousArgument);
+        }
+
         try {
             $this->em->flush();
         } catch (DriverException $e) {
@@ -78,13 +91,19 @@ class RemoveDebateVoteMutation implements MutationInterface
             throw new UserError('Internal error, please try again.');
         }
 
-        return $this->generateSuccessFulPayload($debate, $previousVoteId);
+        return $this->generateSuccessFulPayload($debate, $previousVoteId, $previousArgumentId);
     }
 
-    private function generateSuccessFulPayload(Debate $debate, string $id): array
-    {
+    private function generateSuccessFulPayload(
+        Debate $debate,
+        string $voteId,
+        ?string $argumentId
+    ): array {
         return [
-            'deletedVoteId' => GlobalId::toGlobalId('DebateVote', $id),
+            'deletedArgumentId' => $argumentId
+                ? GlobalId::toGlobalId('DebateArgument', $argumentId)
+                : null,
+            'deletedVoteId' => GlobalId::toGlobalId('DebateVote', $voteId),
             'debate' => $debate,
             'errorCode' => null,
         ];
@@ -92,6 +111,11 @@ class RemoveDebateVoteMutation implements MutationInterface
 
     private function generateErrorPayload(string $message): array
     {
-        return ['deletedVoteId' => null, 'debate' => null, 'errorCode' => $message];
+        return [
+            'deletedArgumentId' => null,
+            'deletedVoteId' => null,
+            'debate' => null,
+            'errorCode' => $message,
+        ];
     }
 }

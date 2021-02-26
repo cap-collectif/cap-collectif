@@ -6074,6 +6074,10 @@ type Mutation {
   updateDebateOpinion(input: UpdateDebateOpinionInput!): UpdateDebateOpinionPayload
   deleteDebateOpinion(input: DeleteDebateOpinionInput!): DeleteDebateOpinionPayload
   addDebateVote(input: AddDebateVoteInput!): AddDebateVotePayload
+
+  """
+  Delete a debate vote from the current user, will also delete the debate argument, if any.
+  """
   removeDebateVote(input: RemoveDebateVoteInput!): RemoveDebateVotePayload
   createDebateArgument(input: CreateDebateArgumentInput!): CreateDebateArgumentPayload
   updateDebateArgument(input: UpdateDebateArgumentInput!): UpdateDebateArgumentPayload
@@ -10202,6 +10206,9 @@ type RemoveDebateVotePayload {
 
   """The id of the removed vote."""
   deletedVoteId: ID
+
+  """The id of the removed argument."""
+  deletedArgumentId: ID
 
   """An unsuccessful mutation will return an error."""
   errorCode: RemoveDebateVoteErrorCode
