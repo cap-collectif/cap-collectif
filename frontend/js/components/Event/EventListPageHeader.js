@@ -114,7 +114,9 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 
-export const container = connect(mapStateToProps)(injectIntl(EventListPageHeader));
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(EventListPageHeader),
+);
 
 export default createFragmentContainer(container, {
   queryViewer: graphql`

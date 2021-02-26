@@ -213,7 +213,7 @@ const mapStateToProps = (state: State, { source }: RelayProps) => ({
     check: !source,
   },
 });
-const container = connect(mapStateToProps)(
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

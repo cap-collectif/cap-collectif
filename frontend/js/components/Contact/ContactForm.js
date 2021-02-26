@@ -175,7 +175,7 @@ const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
 
 const container = injectIntl(ContactForm);
 
-const form = connect(mapStateToProps)(
+const form = connect<any, any, _, _, _, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

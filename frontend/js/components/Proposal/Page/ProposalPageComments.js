@@ -46,7 +46,7 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 
-const container = connect(mapStateToProps)(ProposalPageComments);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageComments);
 
 export default createFragmentContainer(container, {
   proposal: graphql`

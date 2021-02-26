@@ -86,4 +86,4 @@ const mapStateToProps = (state: State) => ({
     isDirty('proposal-admin-evaluation')(state) ||
     isDirty('proposal-admin-status')(state),
 });
-export default connect(mapStateToProps)(ProposalAdminPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalAdminPage);

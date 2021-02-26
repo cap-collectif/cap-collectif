@@ -11,31 +11,41 @@ import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import type { UserAdminAccount_user } from '~relay/UserAdminAccount_user.graphql';
 import type { UserAdminAccount_viewer } from '~relay/UserAdminAccount_viewer.graphql';
+import type { UserRole } from '~relay/UpdateUserAccountMutation.graphql';
 import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRole from '../../Form/SelectUserRole';
 import DatesInterval from '../../Utils/DatesInterval';
 
-type RelayProps = {|
-  user: UserAdminAccount_user,
-  viewer: UserAdminAccount_viewer,
+type FormValues = {|
+  +roles: {
+    +labels: $ReadOnlyArray<UserRole>,
+    +other: ?string,
+  },
+  +vip: boolean,
+  +enabled: boolean,
+  +locked: boolean,
+  +newsletter: boolean,
+  +isSubscribedToProposalNews: boolean,
 |};
+type RelayProps = {|
+  +user: UserAdminAccount_user,
+  +viewer: UserAdminAccount_viewer,
+|};
+
+type AfterConnectProps = {|
+  ...RelayProps,
+  +isViewerOrAdmin: boolean,
+  +initialValues: FormValues,
+  +dispatch: Dispatch,
+|};
+
 type Props = {|
   ...ReduxFormFormProps,
-  ...RelayProps,
-  intl: IntlShape,
-  isViewerOrAdmin: boolean,
+  ...AfterConnectProps,
+  +intl: IntlShape,
 |};
 
 const formName = 'user-admin-edit-account';
-type FormValues = {
-  roles: {
-    labels: [],
-  },
-  vip: boolean,
-  enabled: boolean,
-  locked: boolean,
-  isSubscribedToProposalNews: boolean,
-};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
   const roles = values.roles.labels;
@@ -64,18 +74,19 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
     });
 };
 
-const validate = (values: FormValues) => {
+const validate = (values: ?FormValues) => {
+  console.log(values);
   const errors = {};
-  if (values.roles.labels.length === 0) {
+  if (values && values.roles && values.roles.labels.length === 0) {
     errors.roles = '1-option-minimum';
   }
 
   return errors;
 };
 
-type State = {
-  showDeleteAccountModal: boolean,
-};
+type State = {|
+  +showDeleteAccountModal: boolean,
+|};
 
 export class UserAdminAccount extends React.Component<Props, State> {
   state = {
@@ -229,7 +240,9 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
   isViewerOrAdmin: user.isViewer || viewer.isAdmin,
 });
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<AfterConnectProps, RelayProps, _, _, _, _>(mapStateToProps)(
+  injectIntl(form),
+);
 
 export default createFragmentContainer(container, {
   user: graphql`

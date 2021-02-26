@@ -108,6 +108,6 @@ const mapStateToProps = (state: State, props: Props) => ({
   showDistricts: state.default.features.districts && props.showDistricts,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProjectStatsFilters));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProjectStatsFilters));
 
 export default container;

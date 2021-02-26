@@ -39,4 +39,4 @@ const mapStateToProps = (state: State) => ({
   byPassAuth: state.default.features.sso_by_pass_auth || false,
 });
 
-export default connect(mapStateToProps)(LoginBox);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(LoginBox);

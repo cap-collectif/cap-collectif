@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap';
@@ -10,11 +10,11 @@ import ContactAdminListItem from './ContactAdminListItem';
 import ContactFormAdminAdd from './ContactFormAdminAdd';
 
 type Props = {|
-  query: ContactAdminList_query,
+  +query: ContactAdminList_query,
 |};
 
 class ContactAdminList extends React.Component<Props> {
-  renderContactsList() {
+  renderContactsList(): React.Node {
     const { query } = this.props;
     if (query.contactForms && query.contactForms.length > 0) {
       const contactForms = query.contactForms.filter(Boolean);
@@ -29,7 +29,7 @@ class ContactAdminList extends React.Component<Props> {
     return <FormattedMessage id="admin.fields.step.no_proposal_form" />;
   }
 
-  render() {
+  render(): React.Node {
     return (
       <div className="form-group">
         <h4>
@@ -48,7 +48,7 @@ class ContactAdminList extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ContactAdminList, {
+export default (createFragmentContainer(ContactAdminList, {
   query: graphql`
     fragment ContactAdminList_query on Query {
       contactForms {
@@ -57,4 +57,4 @@ export default createFragmentContainer(ContactAdminList, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof ContactAdminList>);

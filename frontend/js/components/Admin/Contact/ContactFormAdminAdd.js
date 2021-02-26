@@ -7,28 +7,22 @@ import ContactFormAdminModal from './ContactFormAdminModal';
 type Props = {||};
 
 type State = {|
-  showAddContactFormModal: boolean,
+  +showAddContactFormModal: boolean,
 |};
 
 export default class ContactFormAdminAdd extends React.Component<Props, State> {
-  state = { showAddContactFormModal: false };
+  state: State = { showAddContactFormModal: false };
 
-  closeAddModal = () => {
-    this.setState({ showAddContactFormModal: false });
-    window.location.reload();
-  };
-
-  openAddModal = () => {
-    this.setState({ showAddContactFormModal: true });
-  };
-
-  render() {
+  render(): React.Node {
     const { showAddContactFormModal } = this.state;
     return (
       <div>
         <ContactFormAdminModal
           contactForm={null}
-          onClose={this.closeAddModal}
+          onClose={(): void => {
+            this.setState({ showAddContactFormModal: false });
+            window.location.reload();
+          }}
           show={showAddContactFormModal}
         />
         <Button
@@ -36,7 +30,9 @@ export default class ContactFormAdminAdd extends React.Component<Props, State> {
           id="openAddModalButton"
           bsStyle="default"
           className="mt-10"
-          onClick={this.openAddModal}>
+          onClick={(): void => {
+            this.setState({ showAddContactFormModal: true });
+          }}>
           <FormattedMessage id="global.add" />
         </Button>
       </div>

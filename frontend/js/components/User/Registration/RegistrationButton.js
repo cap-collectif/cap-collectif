@@ -69,4 +69,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 const container = injectIntl(RegistrationButton);
 
-export default connect(mapStateToProps, mapDispatchToProps)(container);
+export default connect<any, any, _, _, _, _>(mapStateToProps, mapDispatchToProps)(container);

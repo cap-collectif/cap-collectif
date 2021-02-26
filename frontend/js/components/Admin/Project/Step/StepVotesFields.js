@@ -238,4 +238,4 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default connect(mapStateToProps)(StepVotesFields);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(StepVotesFields);

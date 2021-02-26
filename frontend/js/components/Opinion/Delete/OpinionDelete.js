@@ -114,7 +114,7 @@ const mapStateToProps = (state: GlobalState) => ({
   user: state.user.user,
 });
 
-const container = connect(mapStateToProps)(OpinionDelete);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionDelete);
 
 export default createFragmentContainer(container, {
   opinion: graphql`

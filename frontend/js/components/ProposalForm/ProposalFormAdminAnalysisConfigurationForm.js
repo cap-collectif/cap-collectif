@@ -546,7 +546,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
   };
 };
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 const intlContainer = injectIntl(container);
 
 export default createFragmentContainer(intlContainer, {

@@ -67,4 +67,6 @@ const mapStateToProps = (state: State) => ({
   mapCountry: state.default.parameters['events.map.country'],
 });
 
-export default connect(mapStateToProps)(withLeaflet(injectIntl(LeafletSearch)));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
+  withLeaflet(injectIntl(LeafletSearch)),
+);

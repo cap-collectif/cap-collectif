@@ -108,4 +108,4 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
 
-export default connect(mapStateToProps)(Footer);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(Footer);

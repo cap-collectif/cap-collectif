@@ -3,8 +3,8 @@ import React, { cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger } from 'react-bootstrap';
-import { showRegistrationModal, type ShowRegistrationModalAction } from '../../redux/modules/user';
-import type { State } from '../../types';
+import { showRegistrationModal } from '../../redux/modules/user';
+import type { Dispatch, State } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 import Popover from './Popover';
 import { loginWithOpenID } from '~/redux/modules/default';
@@ -12,28 +12,24 @@ import { loginWithOpenID } from '~/redux/modules/default';
 export type Placement = 'top' | 'bottom' | 'left' | 'right';
 
 type OwnProps = {|
-  children: $FlowFixMe,
+  +children: $FlowFixMe,
   // DefaultProps not working right now
-  enabled?: boolean,
-  placement?: Placement,
-|};
-
-type DispatchProps = {|
-  openRegistrationModal: typeof showRegistrationModal,
+  +enabled?: boolean,
+  +placement?: Placement,
 |};
 
 type StateProps = {|
-  user: ?Object,
-  isLoginOrRegistrationModalOpen: boolean,
-  showRegistrationButton: boolean,
-  loginWithMonCompteParis: boolean,
-  loginWithOpenId: boolean,
+  +user: ?Object,
+  +isLoginOrRegistrationModalOpen: boolean,
+  +showRegistrationButton: boolean,
+  +loginWithMonCompteParis: boolean,
+  +loginWithOpenId: boolean,
 |};
 
 type Props = {|
   ...OwnProps,
   ...StateProps,
-  ...DispatchProps,
+  +dispatch: Dispatch,
 |};
 
 export class LoginOverlay extends React.Component<Props> {
@@ -56,10 +52,10 @@ export class LoginOverlay extends React.Component<Props> {
       enabled,
       showRegistrationButton,
       isLoginOrRegistrationModalOpen,
-      openRegistrationModal,
       loginWithMonCompteParis,
       loginWithOpenId,
       placement,
+      dispatch,
     } = this.props;
 
     if (!enabled || user) {
@@ -73,7 +69,11 @@ export class LoginOverlay extends React.Component<Props> {
         </p>
         {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
           <p>
-            <Button onClick={openRegistrationModal} className="center-block btn-block">
+            <Button
+              onClick={() => {
+                dispatch(showRegistrationModal());
+              }}
+              className="center-block btn-block">
               <FormattedMessage id="global.registration" />
             </Button>
           </p>
@@ -98,7 +98,7 @@ export class LoginOverlay extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   user: state.user.user,
   showRegistrationButton: state.default.features.registration || false,
   isLoginOrRegistrationModalOpen:
@@ -107,11 +107,4 @@ const mapStateToProps = state => ({
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 
-const mapDispatchToProps = dispatch => ({
-  openRegistrationModal: () => dispatch(showRegistrationModal()),
-});
-
-export default connect<Props, State, ShowRegistrationModalAction, _, _>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginOverlay);
+export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(LoginOverlay);

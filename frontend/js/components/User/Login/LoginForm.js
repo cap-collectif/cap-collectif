@@ -135,4 +135,4 @@ const container = reduxForm({
   persistentSubmitErrors: true,
 })(LoginForm);
 
-export default connect(mapStateToProps)(container);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(container);

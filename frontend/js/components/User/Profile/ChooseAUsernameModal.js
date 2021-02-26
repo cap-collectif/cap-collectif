@@ -55,4 +55,4 @@ const mapStateToProps = (state: GlobalState) => ({
   pristine: isPristine(formName)(state),
 });
 
-export default connect(mapStateToProps)(ChooseAUsernameModal);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ChooseAUsernameModal);

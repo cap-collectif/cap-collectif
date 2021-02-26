@@ -2,11 +2,10 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import component from '../../Form/Field';
-import type { GlobalState, MediaFromAPI } from '../../../types';
+import type { MediaFromAPI } from '../../../types';
 import { type SiteFaviconAdminForm_siteFavicon } from '~relay/SiteFaviconAdminForm_siteFavicon.graphql';
 import ChangeSiteFaviconMutation from '../../../mutations/ChangeSiteFaviconMutation';
 import AlertForm from '../../Alert/AlertForm';
@@ -23,6 +22,7 @@ type RelayProps = {|
 type Props = {|
   ...RelayProps,
   ...ReduxFormFormProps,
+  +initialValues: FormValues,
 |};
 
 const formName = 'site-favicon-admin';
@@ -42,7 +42,7 @@ const onSubmit = async (values: FormValues) => {
   return RemoveSiteFaviconMutation.commit({ input: {} });
 };
 
-export const SiteFaviconAdminForm = (props: Props) => {
+export const SiteFaviconAdminForm = (props: Props): React.Node => {
   const {
     siteFavicon,
     handleSubmit,
@@ -92,21 +92,28 @@ export const SiteFaviconAdminForm = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: GlobalState, { siteFavicon }: Props) => ({
-  initialValues: {
-    media: siteFavicon.media,
-  },
-});
-
-const form = reduxForm({
+const form = (reduxForm({
   onSubmit,
   enableReinitialize: true,
   form: formName,
-})(SiteFaviconAdminForm);
+})(SiteFaviconAdminForm): React.AbstractComponent<{| +initialValues: FormValues, ...RelayProps |}>);
 
-const container = connect(mapStateToProps)(form);
+function injectProp(Component) {
+  return function WrapperComponent(props: RelayProps) {
+    const { siteFavicon } = props;
+    return (
+      <Component
+        {...props}
+        initialValues={{
+          media: siteFavicon.media,
+        }}
+      />
+    );
+  };
+}
+const container = (injectProp(form): React.AbstractComponent<RelayProps>);
 
-export default createFragmentContainer(container, {
+export default (createFragmentContainer(container, {
   siteFavicon: graphql`
     fragment SiteFaviconAdminForm_siteFavicon on SiteImage {
       id
@@ -117,4 +124,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof container>);

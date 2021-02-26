@@ -52,8 +52,12 @@ const TYPE_PROPOSAL_FORM = {
 
 export const formName = 'proposal-form-admin-configuration';
 
+// TODO type `FormValues`
 export const validate = (values: Object) => {
   const errors = {};
+  if (Object.keys(values).length === 0) {
+    return {};
+  }
 
   if (!values.description || values.description.length <= 2) {
     errors.description = 'admin.fields.proposal_form.errors.introduction';
@@ -77,7 +81,7 @@ export const validate = (values: Object) => {
     }
   }
 
-  if (Object.values(values.viewEnabled).filter(Boolean).length === 0) {
+  if (values.viewEnabled && Object.values(values.viewEnabled).filter(Boolean).length === 0) {
     errors.viewEnabled = 'select.display.mode';
   }
 
@@ -85,7 +89,7 @@ export const validate = (values: Object) => {
     if (values.districts.length === 0) {
       errors.districts = 'admin.fields.proposal_form.errors.districts';
     }
-    if (values.districts.length) {
+    if (values.districts && values.districts.length) {
       const districtsArrayErrors = [];
       values.districts.forEach((district: Object, districtIndex: number) => {
         const districtErrors = {};
@@ -106,7 +110,7 @@ export const validate = (values: Object) => {
     }
   }
 
-  if (values.questions.length) {
+  if (values.questions && values.questions.length) {
     const questionsArrayErrors = [];
     values.questions.forEach((question: Object, questionIndex: number) => {
       const questionErrors = {};
@@ -850,7 +854,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
   };
 };
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 const intlContainer = injectIntl(container);
 
 export default createRefetchContainer(

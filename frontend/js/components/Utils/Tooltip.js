@@ -1,16 +1,17 @@
 // @flow
 import * as React from 'react';
 import { Tooltip } from 'react-bootstrap';
-import IntlProvider from '../../startup/IntlProvider';
+// TODO https://github.com/cap-collectif/platform/issues/12148
+// We should avoid doing this.
+import Providers from '../../startup/Providers';
 
 type Props = {|
   ...React.ElementProps<typeof Tooltip>,
-  children: $FlowFixMe,
+  children: React.Node | ?string,
 |};
 
 export default ({ children, ...rest }: Props) => (
-  // $FlowFixMe we have too different intl sources, react-intl and react-intl-redux, which brings conflicts
-  <IntlProvider>
+  <Providers>
     <Tooltip {...rest}>{children}</Tooltip>
-  </IntlProvider>
+  </Providers>
 );

@@ -238,7 +238,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-const container = connect(mapStateToProps)(Post);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(Post);
 
 export default createFragmentContainer(container, {
   post: graphql`

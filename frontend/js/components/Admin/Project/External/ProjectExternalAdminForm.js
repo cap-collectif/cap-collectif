@@ -215,7 +215,7 @@ const mapStateToProps = (state, { project, formName }: Props) => ({
   isExternal: formValueSelector(formName)(state, 'isExternal') || false,
 });
 
-const connector = connect(mapStateToProps)(ProjectExternalAdminForm);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectExternalAdminForm);
 
 export default createFragmentContainer(connector, {
   project: graphql`

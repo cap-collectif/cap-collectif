@@ -62,7 +62,7 @@ export class UnpublishedArgumentListRenderer extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
-const container = connect(mapStateToProps)(UnpublishedArgumentListRenderer);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(UnpublishedArgumentListRenderer);
 
 export default createFragmentContainer(container, {
   argumentable: graphql`

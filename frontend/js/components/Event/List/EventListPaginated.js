@@ -17,18 +17,18 @@ import { changeEventSelected } from '~/redux/modules/event';
 import { bootstrapGrid } from '~/utils/sizes';
 
 type OwnProps = {|
-  query: EventListPaginated_query,
-  relay: RelayPaginationProp,
+  +query: EventListPaginated_query,
+  +relay: RelayPaginationProp,
+  +formName: string,
 |};
 
 type Props = {|
   ...OwnProps,
-  eventSelected: ?string,
-  dispatch: Dispatch,
-  features: FeatureToggles,
-  isMobileListView: boolean,
-  status: string,
-  formName: string,
+  +eventSelected: ?string,
+  +dispatch: Dispatch,
+  +features: FeatureToggles,
+  +isMobileListView: boolean,
+  +status: string,
 |};
 
 const EVENTS_PAGINATION = 100;
@@ -159,7 +159,7 @@ const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),
 });
 
-const container = connect<Props, GlobalState, _>(mapStateToProps)(EventListPaginated);
+const container = connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(EventListPaginated);
 
 export default createPaginationContainer(
   container,
@@ -240,12 +240,12 @@ export default createPaginationContainer(
     getConnectionFromProps(props: Props) {
       return props.query && props.query.events;
     },
-    getFragmentVariables(prevVars: any) {
+    getFragmentVariables(prevVars: Object) {
       return {
         ...prevVars,
       };
     },
-    getVariables(props: Props, { count, cursor }: any, fragmentVariables: any) {
+    getVariables(props: Props, { count, cursor }: Object, fragmentVariables: any) {
       return {
         ...fragmentVariables,
         count,

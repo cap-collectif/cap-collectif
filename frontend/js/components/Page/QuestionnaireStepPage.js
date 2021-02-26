@@ -5,7 +5,7 @@ import { loadQuery } from 'relay-hooks';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import environment, { graphqlError } from '~/createRelayEnvironment';
-import { type GlobalState } from '~/types';
+import { type GlobalState, type Dispatch } from '~/types';
 import { type QuestionnaireStepPageQueryResponse } from '~relay/QuestionnaireStepPageQuery.graphql';
 import { Loader } from '~/components/Ui/FeedbacksIndicators/Loader';
 import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
@@ -23,6 +23,7 @@ export type PropsNotConnected = {|
 
 type Props = {|
   ...PropsNotConnected,
+  +dispatch: Dispatch,
   +isAuthenticated: boolean,
   +enableResults: boolean,
 |};
@@ -153,4 +154,6 @@ const mapStateToProps = (state: GlobalState) => ({
   enableResults: state.default.features.new_feature_questionnaire_result || false,
 });
 
-export default connect<Props, GlobalState, _>(mapStateToProps)(QuestionnaireStepPage);
+export default connect<Props, PropsNotConnected, _, _, _, _>(mapStateToProps)(
+  QuestionnaireStepPage,
+);

@@ -131,7 +131,7 @@ const mapStateToProps = (state: GlobalState) => ({
   visibility: formValueSelector('projectAdminForm')(state, 'visibility'),
 });
 
-export const container = connect(mapStateToProps)(ProjectAccessAdminForm);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectAccessAdminForm);
 
 export default createFragmentContainer(container, {
   project: graphql`

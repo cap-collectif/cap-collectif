@@ -260,7 +260,7 @@ const mapStateToProps = (state: GlobalState) => ({
   invalid: isInvalid(formName)(state),
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProposalEditModal));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProposalEditModal));
 
 export default createFragmentContainer(container, {
   proposal: graphql`

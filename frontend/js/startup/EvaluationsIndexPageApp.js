@@ -7,9 +7,15 @@ import AlertBoxApp from '~/startup/AlertBoxApp';
 import { AnalysisProposalsProvider } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const EvaluationsIndexPage = lazy(() => import(/* webpackChunkName: "EvaluationsIndexPage" */ '~/components/Evaluation/EvaluationsIndexPage'));
+const EvaluationsIndexPage = lazy(() =>
+  import(
+    /* webpackChunkName: "EvaluationsIndexPage" */ '~/components/Evaluation/EvaluationsIndexPage'
+  ),
+);
 const AnalysisIndexPage = lazy(() =>
-  import(/* webpackChunkName: "AnalysisIndexPage" */ '~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage'),
+  import(
+    /* webpackChunkName: "AnalysisIndexPage" */ '~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage'
+  ),
 );
 
 const SwitchAnalysisAndLegacyEvaluation = ({ isLegacyAnalysis, ...props }: Object) =>
@@ -26,7 +32,7 @@ const mapStateToProps = (state: GlobalState) => ({
   isLegacyAnalysis: !state.default.features.unstable__analysis,
 });
 
-const SwitchAnalysisAndLegacyEvaluationContainer = connect(mapStateToProps)(
+const SwitchAnalysisAndLegacyEvaluationContainer = connect<any, any, _, _, _, _>(mapStateToProps)(
   SwitchAnalysisAndLegacyEvaluation,
 );
 

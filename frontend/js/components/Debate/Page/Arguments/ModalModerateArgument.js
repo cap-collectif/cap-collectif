@@ -112,4 +112,4 @@ export const ModalModerateArgument = (props: Props) => {
   );
 };
 
-export default connect()(ModalModerateArgument);
+export default connect<any, any, _, _, _, _>()(ModalModerateArgument);

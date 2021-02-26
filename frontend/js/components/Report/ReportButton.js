@@ -72,4 +72,4 @@ const mapStateToProps = (state: State, props) => ({
   reported: props.reported || state.report.elements.includes(props.id),
 });
 
-export default connect(mapStateToProps)(ReportButton);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ReportButton);

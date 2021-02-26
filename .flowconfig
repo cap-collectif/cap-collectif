@@ -97,6 +97,12 @@ suppress_type=$FlowFixMeState
 emoji=true
 module.use_strict=true
 types_first=false
+exact_by_default=false
+well_formed_exports=true
+; Here we set the list of folders migrated to new mode :
+well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Contact
+well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/SiteFavicon
+
 
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=__generated__

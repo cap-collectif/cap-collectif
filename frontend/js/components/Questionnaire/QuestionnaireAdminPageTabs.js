@@ -49,7 +49,9 @@ const mapStateToProps = (state: State) => ({
   enableResultsTab: state.default.features.new_feature_questionnaire_result,
 });
 
-const container = connect(mapStateToProps)(injectIntl(QuestionnaireAdminPageTabs));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(QuestionnaireAdminPageTabs),
+);
 
 export default createFragmentContainer(container, {
   questionnaire: graphql`

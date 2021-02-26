@@ -76,4 +76,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(SubmitButton);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(SubmitButton);

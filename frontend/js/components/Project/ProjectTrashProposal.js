@@ -90,4 +90,4 @@ const mapStateToProps = (state: State) => ({
   isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
 });
 
-export default connect(mapStateToProps)(ProjectTrashProposal);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProjectTrashProposal);

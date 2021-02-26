@@ -189,7 +189,7 @@ const formContainer = reduxForm({
   onSubmit,
 })(DissociateSsoModal);
 
-const container = connect(mapStateToProps)(formContainer);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(formContainer);
 
 export default createFragmentContainer(container, {
   viewer: graphql`

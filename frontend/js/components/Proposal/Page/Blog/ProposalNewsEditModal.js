@@ -175,7 +175,7 @@ const mapStateToProps = (state: GlobalState) => {
   };
 };
 
-const container = connect(mapStateToProps)(injectIntl(ProposalNewsEditModal));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProposalNewsEditModal));
 
 export default createFragmentContainer(container, {
   post: graphql`

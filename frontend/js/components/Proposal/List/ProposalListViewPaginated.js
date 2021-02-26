@@ -173,6 +173,8 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
   },
 );
 
-const ProposalListViewPaginatedConnected = connect(mapStateToProps)(ProposalListViewPaginatedRelay);
+const ProposalListViewPaginatedConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  ProposalListViewPaginatedRelay,
+);
 
 export default ProposalListViewPaginatedConnected;

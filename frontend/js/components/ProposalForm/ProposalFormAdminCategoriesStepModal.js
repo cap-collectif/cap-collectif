@@ -278,7 +278,9 @@ const mapStateToProps = (state: GlobalState, { member }: Props) => ({
   newCategoryImage: selector(state, `${member}.newCategoryImage`),
 });
 
-const container = connect(mapStateToProps)(ProposalFormAdminCategoriesStepModal);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(
+  ProposalFormAdminCategoriesStepModal,
+);
 
 export default createFragmentContainer(container, {
   query: graphql`

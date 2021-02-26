@@ -130,7 +130,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
     })),
   },
 });
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   proposal: graphql`

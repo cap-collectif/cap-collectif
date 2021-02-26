@@ -168,7 +168,7 @@ const mapStateToProps = (state: State) => ({
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });
 
-const container = connect(mapStateToProps)(EditProfileTabs);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(EditProfileTabs);
 
 export default createFragmentContainer(container, {
   viewer: graphql`

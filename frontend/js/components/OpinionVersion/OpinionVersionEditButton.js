@@ -28,4 +28,4 @@ class OpinionVersionEditButton extends React.Component<Props> {
   }
 }
 
-export default connect()(OpinionVersionEditButton);
+export default connect<any, any, _, _, _, _>()(OpinionVersionEditButton);

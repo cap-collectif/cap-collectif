@@ -43,6 +43,7 @@ type Props = {|
   isFrontendView: boolean,
   className?: string,
   currentLanguage: string,
+  initialValues: Object,
 |};
 
 type ReviewEventForm = {|
@@ -388,7 +389,9 @@ const mapStateToProps = (state: GlobalState, { event }: Props) => {
   };
 };
 
-export const EventFormCreatePage = connect(mapStateToProps)(injectIntl(EventFormPage));
+export const EventFormCreatePage = connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(EventFormPage),
+);
 
 export default createFragmentContainer(EventFormCreatePage, {
   query: graphql`

@@ -32,4 +32,4 @@ export const ProjectAdminRankingStepForm = () => (
   </>
 );
 
-export default connect()(ProjectAdminRankingStepForm);
+export default connect<any, any, _, _, _, _>()(ProjectAdminRankingStepForm);

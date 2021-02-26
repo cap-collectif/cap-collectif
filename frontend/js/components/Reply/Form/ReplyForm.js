@@ -330,7 +330,7 @@ const form = reduxForm({
   destroyOnUnmount: false,
 })(ReplyForm);
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 const containerWithRouter = withRouter(container);
 

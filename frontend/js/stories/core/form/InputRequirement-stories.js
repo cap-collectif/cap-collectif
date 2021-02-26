@@ -76,7 +76,7 @@ storiesOf('Core|Form/InputRequirement', module)
       },
     });
 
-    const ConnectedForm = connect(null, mapDispatchToProps)(Form);
+    const ConnectedForm = connect<any, any, _, _, _, _>(null, mapDispatchToProps)(Form);
 
     return <ConnectedForm />;
   });

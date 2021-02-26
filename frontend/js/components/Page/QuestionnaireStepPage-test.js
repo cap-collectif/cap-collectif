@@ -10,6 +10,7 @@ describe('<QuestionnaireStepPage />', () => {
     isAuthenticated: true,
     isPrivateResult: false,
     enableResults: true,
+    dispatch: jest.fn(),
   };
 
   it('renders correctly', () => {

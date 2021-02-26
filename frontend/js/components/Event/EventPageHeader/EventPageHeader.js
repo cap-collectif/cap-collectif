@@ -228,7 +228,7 @@ const mapStateToProps = (state: State, props: Props) => {
   };
 };
 
-const EventPageHeaderConnected = connect(mapStateToProps)(EventPageHeader);
+const EventPageHeaderConnected = connect<any, any, _, _, _, _>(mapStateToProps)(EventPageHeader);
 
 export default createFragmentContainer(EventPageHeaderConnected, {
   query: graphql`

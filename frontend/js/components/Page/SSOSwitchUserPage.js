@@ -54,5 +54,5 @@ export class SSOSwitchUserPage extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
-const connector = connect(mapStateToProps);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps);
 export default connector(SSOSwitchUserPage);

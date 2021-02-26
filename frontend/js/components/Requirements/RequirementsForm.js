@@ -329,7 +329,7 @@ const mapStateToProps = (state: State, { step }: Props) => ({
     : {},
 });
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   step: graphql`

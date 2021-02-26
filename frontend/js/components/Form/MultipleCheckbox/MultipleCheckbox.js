@@ -29,6 +29,8 @@ const MultipleCheckbox = ({
   typeForm,
 }: Props) => {
   const [otherChecked, setOtherChecked] = useState<boolean>(value ? !!value.other : false);
+  // TODO @Vince
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const finalValue = value ? value.labels : [];
   const otherValue = value ? value.other : null;
   const fieldName = `choices-for-field-${field.id}`;

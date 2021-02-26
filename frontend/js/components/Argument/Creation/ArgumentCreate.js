@@ -160,7 +160,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-const container = connect(mapStateToProps)(
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(
   reduxForm({
     onSubmit,
     validate,

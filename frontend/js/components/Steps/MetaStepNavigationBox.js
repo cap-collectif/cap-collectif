@@ -104,4 +104,4 @@ const mapStateToProps = (state: GlobalState) => ({
   hasNewConsultationPage: state.default.features.unstable__new_consultation_page,
 });
 
-export default connect(mapStateToProps)(MetaStepNavigationBox);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(MetaStepNavigationBox);

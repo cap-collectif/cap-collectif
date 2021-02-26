@@ -84,4 +84,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminImportEventsButton);
+export default connect<any, any, _, _, _, _>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AdminImportEventsButton);

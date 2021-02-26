@@ -70,7 +70,7 @@ const mapStateToProps = (state: State, props: { opinion: OpinionEditModal_opinio
   submitting: isSubmitting(formName)(state),
 });
 
-const connector = connect(mapStateToProps);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps);
 
 const container = connector(injectIntl(OpinionEditModal));
 

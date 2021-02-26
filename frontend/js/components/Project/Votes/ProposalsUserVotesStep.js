@@ -131,7 +131,9 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
   submitting: isSubmitting(`proposal-user-vote-form-step-${props.step.id}`)(state),
   isAuthenticated: !!state.user.user,
 });
-const container = connect(mapStateToProps)(withColors(ProposalsUserVotesStep));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(
+  withColors(ProposalsUserVotesStep),
+);
 
 export default createFragmentContainer(container, {
   step: graphql`

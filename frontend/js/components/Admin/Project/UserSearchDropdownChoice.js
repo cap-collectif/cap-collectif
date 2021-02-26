@@ -84,7 +84,7 @@ const UserSearchDropdownChoice = ({
 const mapStateToProps = (state: GlobalState) => ({
   emailNotification: state.default.parameters['admin.mail.notifications.receive_address'],
 });
-const container = connect(mapStateToProps)(UserSearchDropdownChoice);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(UserSearchDropdownChoice);
 
 export default createFragmentContainer(container, {
   user: graphql`

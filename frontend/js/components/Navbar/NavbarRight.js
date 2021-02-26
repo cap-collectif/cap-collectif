@@ -41,9 +41,17 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   render() {
-    const { user, features, vertical, intl, loginWithOpenId, currentLanguage, instanceName } = this.props;
+    const {
+      user,
+      features,
+      vertical,
+      intl,
+      loginWithOpenId,
+      currentLanguage,
+      instanceName,
+    } = this.props;
 
-    const prefix = (features.multilangue) ? `/${currentLanguage.split('-')[0]}` : '';
+    const prefix = features.multilangue ? `/${currentLanguage.split('-')[0]}` : '';
 
     return (
       <>
@@ -144,4 +152,6 @@ const mapStateToProps = (state: State) => ({
 
 const container = injectIntl(NavbarRight, { forwardRef: true });
 
-export default connect(mapStateToProps, null, null, { withRef: true })(container);
+export default connect<any, any, _, _, _, _>(mapStateToProps, null, null, { forwardRef: true })(
+  container,
+);

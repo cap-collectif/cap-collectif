@@ -91,7 +91,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     confirm: false,
   },
 });
-const connector = connect(mapStateToProps);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps);
 
 const container = connector(
   reduxForm({

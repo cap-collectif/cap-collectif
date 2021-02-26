@@ -85,7 +85,7 @@ const mapStateToProps = (state: State) => ({
   activeItems: state.project.selectedActiveItems,
 });
 
-const container = connect(mapStateToProps)(ConsultationPlanItem);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ConsultationPlanItem);
 
 export default createFragmentContainer(container, {
   section: graphql`

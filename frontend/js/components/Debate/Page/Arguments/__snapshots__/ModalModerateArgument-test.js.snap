@@ -29,7 +29,23 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
     componentClass="div"
   >
     <ReduxForm
+      destroyOnUnmount={true}
+      enableReinitialize={false}
+      forceUnregisterOnUnmount={false}
+      form="moderate-form"
+      getFormState={[Function]}
+      keepDirtyOnReinitialize={false}
       onSubmit={[Function]}
+      persistentSubmitErrors={false}
+      pure={true}
+      shouldAsyncValidate={[Function]}
+      shouldError={[Function]}
+      shouldValidate={[Function]}
+      shouldWarn={[Function]}
+      submitAsSideEffect={false}
+      touchOnBlur={true}
+      touchOnChange={false}
+      updateUnregisteredFields={false}
     />
   </ModalBody>
   <ModalFooter

@@ -107,4 +107,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-export default connect(mapStateToProps)(injectIntl(QuestionnaireAdminModalImportResponses));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(QuestionnaireAdminModalImportResponses),
+);

@@ -176,7 +176,7 @@ const form = reduxForm({
   form: formName,
 })(DebateStepPageVoteAndShare);
 
-const DebateStepPageVoteAndShareConnected = connect(mapStateToProps)(form);
+const DebateStepPageVoteAndShareConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
   step: graphql`

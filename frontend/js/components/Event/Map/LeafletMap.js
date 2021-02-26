@@ -213,4 +213,4 @@ const mapStateToProps = (state: GlobalState) => ({
   mapTokens: state.user.mapTokens,
 });
 
-export default connect(mapStateToProps)(LeafletMap);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(LeafletMap);

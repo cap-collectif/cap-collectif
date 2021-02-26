@@ -109,7 +109,7 @@ const mapStateToProps = (state: GlobalState) => ({
   viewer: state.user.user,
 });
 
-const container = connect(mapStateToProps)(UnpublishedLabel);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(UnpublishedLabel);
 
 export default createFragmentContainer(container, {
   publishable: graphql`

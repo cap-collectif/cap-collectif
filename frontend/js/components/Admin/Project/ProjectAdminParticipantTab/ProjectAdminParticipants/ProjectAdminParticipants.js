@@ -404,6 +404,8 @@ const mapStateToProps = (state: GlobalState) => ({
   hasFeatureEmail: state.default.features.unstable__emailing || false,
 });
 
-const ProjectAdminParticipantsConnected = connect(mapStateToProps)(ProjectAdminParticipantsRelay);
+const ProjectAdminParticipantsConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  ProjectAdminParticipantsRelay,
+);
 
 export default ProjectAdminParticipantsConnected;

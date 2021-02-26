@@ -3,14 +3,14 @@ import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import AlertFormSucceededMessage from './AlertFormSucceededMessage';
 
-type Props = {
+type Props = {|
   valid?: boolean,
   invalid?: boolean,
   submitting?: boolean,
   submitSucceeded?: boolean,
   submitFailed?: boolean,
-  errorMessage?: string,
-};
+  errorMessage?: ?string,
+|};
 
 export const AlertForm = ({
   valid,

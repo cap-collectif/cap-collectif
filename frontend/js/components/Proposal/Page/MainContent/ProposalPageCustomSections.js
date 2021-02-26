@@ -106,28 +106,31 @@ const mapStateToProps = (state: GlobalState) => ({
   cardColor: state.default.parameters['color.btn.primary.bg'],
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPageCustomSections), {
-  proposal: graphql`
-    fragment ProposalPageCustomSections_proposal on Proposal {
-      id
-      form {
-        questions {
-          id
-          ...responsesHelper_question @relay(mask: false)
-        }
-      }
-      responses {
-        question {
-          id
-          __typename
-          title
-          ... on SectionQuestion {
-            level
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageCustomSections),
+  {
+    proposal: graphql`
+      fragment ProposalPageCustomSections_proposal on Proposal {
+        id
+        form {
+          questions {
+            id
+            ...responsesHelper_question @relay(mask: false)
           }
         }
-        ...responsesHelper_response @relay(mask: false)
-        ...NewProposalResponse_response
+        responses {
+          question {
+            id
+            __typename
+            title
+            ... on SectionQuestion {
+              level
+            }
+          }
+          ...responsesHelper_response @relay(mask: false)
+          ...NewProposalResponse_response
+        }
       }
-    }
-  `,
-});
+    `,
+  },
+);

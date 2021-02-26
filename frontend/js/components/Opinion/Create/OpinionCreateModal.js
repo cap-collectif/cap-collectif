@@ -100,7 +100,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
   invalidRequirements: isInvalid(requirementsFormName)(state),
 });
 
-const container = connect(mapStateToProps)(injectIntl(OpinionCreateModal));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(OpinionCreateModal));
 
 export default createFragmentContainer(container, {
   section: graphql`

@@ -82,26 +82,29 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMainContent), {
-  proposal: graphql`
-    fragment ProposalPageMainContent_proposal on Proposal
-      @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
-      tipsmeeeId @include(if: $isTipsMeeeEnabled)
-      ...ProposalPageFusionInformations_proposal
-      ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
-      ...ProposalPageOfficialAnswer_proposal
-      ...ProposalPageDescription_proposal
-      ...ProposalPageLocalisation_proposal
-      ...ProposalPageCustomSections_proposal
-      ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
-      ...ProposalPageMainAside_proposal
-        @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
-      ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalPageDiscussions_proposal
-      ...ProposalVoteButtonWrapperFragment_proposal
-        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-      ...ProposalPageComments_proposal
-      ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-    }
-  `,
-});
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageMainContent),
+  {
+    proposal: graphql`
+      fragment ProposalPageMainContent_proposal on Proposal
+        @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+        tipsmeeeId @include(if: $isTipsMeeeEnabled)
+        ...ProposalPageFusionInformations_proposal
+        ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
+        ...ProposalPageOfficialAnswer_proposal
+        ...ProposalPageDescription_proposal
+        ...ProposalPageLocalisation_proposal
+        ...ProposalPageCustomSections_proposal
+        ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
+        ...ProposalPageMainAside_proposal
+          @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
+        ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
+        ...ProposalPageDiscussions_proposal
+        ...ProposalVoteButtonWrapperFragment_proposal
+          @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+        ...ProposalPageComments_proposal
+        ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
+      }
+    `,
+  },
+);

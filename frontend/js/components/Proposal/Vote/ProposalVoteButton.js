@@ -202,7 +202,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   isAuthenticated: !!state.user.user,
 });
 
-const container = connect(mapStateToProps)(ProposalVoteButton);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalVoteButton);
 
 export default createFragmentContainer(container, {
   proposal: graphql`

@@ -146,7 +146,7 @@ const mapStateToProps = (state: State) => ({
   hasProposeEventEnabled: state.default.features.allow_users_to_propose_events,
 });
 
-const EventPageContentConnected = connect(mapStateToProps)(EventPageContent);
+const EventPageContentConnected = connect<any, any, _, _, _, _>(mapStateToProps)(EventPageContent);
 
 export default createFragmentContainer(EventPageContentConnected, {
   event: graphql`

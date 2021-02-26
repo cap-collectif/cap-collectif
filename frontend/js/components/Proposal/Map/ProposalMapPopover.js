@@ -184,31 +184,34 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalMapPopover), {
-  proposal: graphql`
-    fragment ProposalMapPopover_proposal on Proposal {
-      title
-      url
-      media {
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalMapPopover),
+  {
+    proposal: graphql`
+      fragment ProposalMapPopover_proposal on Proposal {
+        title
         url
-      }
-      category {
-        name
-        icon
-        color
-        categoryImage {
-          image {
-            url
+        media {
+          url
+        }
+        category {
+          name
+          icon
+          color
+          categoryImage {
+            image {
+              url
+            }
           }
         }
+        status(step: $stepId) {
+          name
+          color
+        }
+        author {
+          ...UserLink_user
+        }
       }
-      status(step: $stepId) {
-        name
-        color
-      }
-      author {
-        ...UserLink_user
-      }
-    }
-  `,
-});
+    `,
+  },
+);

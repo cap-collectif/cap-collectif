@@ -47,7 +47,7 @@ const mapStateToProps = (state: State) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
-export default connect(mapStateToProps)(
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
   createFragmentContainer(ListSSOConfiguration, {
     ssoConfigurations: graphql`
       fragment ListSSOConfiguration_ssoConfigurations on SSOConfigurationConnection {

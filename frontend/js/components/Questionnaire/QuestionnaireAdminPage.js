@@ -74,4 +74,4 @@ const mapStateToProps = (state: GlobalState) => ({
   enableResultsTab: state.default.features.new_feature_questionnaire_result,
 });
 
-export default connect(mapStateToProps)(QuestionnaireAdminPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(QuestionnaireAdminPage);

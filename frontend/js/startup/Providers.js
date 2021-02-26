@@ -39,7 +39,6 @@ class Providers extends React.Component<Props> {
 
     return (
       <Provider store={store}>
-        {/** $FlowFixMe */}
         <IntlProvider timeZone={window.timeZone}>
           <ThemeProvider theme={theme}>
             <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>

@@ -718,7 +718,7 @@ const form = injectIntl(
   })(ProjectAdminStepForm),
 );
 
-const ProjectAdminStepFormConnected = connect(mapStateToProps)(form);
+const ProjectAdminStepFormConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(ProjectAdminStepFormConnected, {
   project: graphql`

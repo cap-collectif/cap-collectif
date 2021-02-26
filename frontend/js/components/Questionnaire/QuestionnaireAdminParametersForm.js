@@ -167,7 +167,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
   };
 };
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 const containerIntl = injectIntl(container);
 
 export default createFragmentContainer(containerIntl, {

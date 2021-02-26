@@ -53,7 +53,7 @@ export const ProposalNewsDeleteModal = ({
   );
 };
 
-const container = connect()(ProposalNewsDeleteModal);
+const container = connect<any, any, _, _, _, _>()(ProposalNewsDeleteModal);
 
 export default createFragmentContainer(container, {
   post: graphql`

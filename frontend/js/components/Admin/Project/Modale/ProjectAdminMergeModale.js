@@ -185,4 +185,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(mapDispatchToProps)(injectIntl(form));
+export default connect<any, any, _, _, _, _>(mapDispatchToProps)(injectIntl(form));

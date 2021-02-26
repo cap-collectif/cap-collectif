@@ -517,7 +517,9 @@ const mapStateToProps = (state: GlobalState, { formName }: Props) => {
   };
 };
 
-const SectionDisplayModeConnected = connect(mapStateToProps)(SectionDisplayMode);
+const SectionDisplayModeConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  SectionDisplayMode,
+);
 
 export default createFragmentContainer(SectionDisplayModeConnected, {
   proposalForm: graphql`

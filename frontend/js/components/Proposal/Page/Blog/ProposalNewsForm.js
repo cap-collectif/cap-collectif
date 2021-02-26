@@ -23,6 +23,7 @@ type RelayProps = {| post: ?ProposalNewsForm_post |};
 type Props = {|
   ...ReduxFormFormProps,
   ...RelayProps,
+  +initialValues: FormValues,
 |};
 
 const customForm: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
@@ -124,7 +125,7 @@ const mapStateToProps = (state: GlobalState, { post }: Props) => {
   };
 };
 
-export const ProposalNewsFormCreate = connect(mapStateToProps)(formContainer);
+export const ProposalNewsFormCreate = connect<any, any, _, _, _, _>(mapStateToProps)(formContainer);
 
 export default createFragmentContainer(ProposalNewsFormCreate, {
   post: graphql`

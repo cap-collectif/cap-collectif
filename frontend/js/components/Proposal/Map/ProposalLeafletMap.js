@@ -330,7 +330,7 @@ const mapStateToProps = (state: State) => ({
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
 });
 
-const container = connect(mapStateToProps)(withLeaflet(ProposalLeafletMap));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(withLeaflet(ProposalLeafletMap));
 
 export default createFragmentContainer(container, {
   proposals: graphql`

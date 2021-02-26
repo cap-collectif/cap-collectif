@@ -43,7 +43,7 @@ class NewOpinionButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(NewOpinionButton);
+const container = connect<any, any, _, _, _, _>()(NewOpinionButton);
 
 export default createFragmentContainer(container, {
   section: graphql`

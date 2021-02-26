@@ -129,7 +129,7 @@ const mapStateToProps = (state: GlobalState) => ({
   profilesToggle: state.default.features.profiles,
 });
 
-export default connect(mapStateToProps)(
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
   createFragmentContainer(ProjectHeaderAuthors, {
     project: graphql`
       fragment ProjectHeaderAuthors_project on Project {

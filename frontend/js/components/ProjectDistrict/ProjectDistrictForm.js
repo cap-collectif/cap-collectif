@@ -228,7 +228,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-export const container = connect(mapStateToProps)(form);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   district: graphql`

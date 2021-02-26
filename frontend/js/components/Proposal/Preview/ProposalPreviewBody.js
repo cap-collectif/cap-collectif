@@ -119,7 +119,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-const container = connect(mapStateToProps)(ProposalPreviewBody);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPreviewBody);
 
 export default createFragmentContainer(container, {
   viewer: graphql`

@@ -55,4 +55,4 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
 });
 
-export default connect(mapStateToProps)(DebateStepPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(DebateStepPage);

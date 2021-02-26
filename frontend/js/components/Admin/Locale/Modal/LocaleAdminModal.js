@@ -117,7 +117,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
   initialValues: getInitialValue(props),
 });
 
-const form = connect(mapStateToProps)(
+const form = connect<any, any, _, _, _, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

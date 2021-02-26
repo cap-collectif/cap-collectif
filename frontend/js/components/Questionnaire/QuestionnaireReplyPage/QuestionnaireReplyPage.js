@@ -175,7 +175,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   resetReplyForm: (replyId: string) => dispatch(reset(getFormNameUpdate(replyId))),
 });
 
-const containerConnect = connect(mapStateToProps, mapDispatchToProps)(container);
+const containerConnect = connect<any, any, _, _, _, _>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(container);
 
 export default createFragmentContainer(containerConnect, {
   questionnaire: graphql`

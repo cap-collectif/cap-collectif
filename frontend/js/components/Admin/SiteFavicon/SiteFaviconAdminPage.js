@@ -28,7 +28,7 @@ const siteFaviconAdminForm = ({
   return <Loader />;
 };
 
-export const SiteFaviconAdminPage = () => (
+export const SiteFaviconAdminPage = (): React.Node => (
   <div className="box box-primary container-fluid">
     <div className="box-header">
       <h3 className="box-title">

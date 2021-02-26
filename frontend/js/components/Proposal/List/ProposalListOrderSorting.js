@@ -90,4 +90,4 @@ const mapStateToProps = (state: State) => ({
 
 const container = injectIntl(ProposalListOrderSorting);
 
-export default connect(mapStateToProps)(container);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(container);

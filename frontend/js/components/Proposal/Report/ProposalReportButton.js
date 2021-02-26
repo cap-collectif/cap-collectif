@@ -33,7 +33,7 @@ export class ProposalReportButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(ProposalReportButton);
+const container = connect<any, any, _, _, _, _>()(ProposalReportButton);
 
 export default createFragmentContainer(container, {
   proposal: graphql`

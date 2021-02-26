@@ -52,7 +52,9 @@ const mapStateToProps = state => ({
   isAuthenticated: !!state.user.user,
 });
 
-const EmailNotConfirmedAppClientConnected = connect(mapStateToProps)(EmailNotConfirmedAppClient);
+const EmailNotConfirmedAppClientConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  EmailNotConfirmedAppClient,
+);
 
 const EmailNotConfirmedApp = () => (
   <Providers>

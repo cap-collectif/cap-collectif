@@ -263,4 +263,4 @@ const formContainer = reduxForm({
   form: formName,
 })(RedirectIoAdminPage);
 
-export default connect(mapStateToProps)(injectIntl(formContainer));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(formContainer));

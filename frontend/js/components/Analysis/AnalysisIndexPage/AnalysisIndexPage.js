@@ -240,4 +240,4 @@ const mapStateToProps = (state: GlobalState) => ({
   proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
 });
 
-export default connect(mapStateToProps)(AnalysisIndexPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(AnalysisIndexPage);

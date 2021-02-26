@@ -119,7 +119,7 @@ const mapStateToProps = (state: GlobalState) => {
   };
 };
 
-const container = connect(mapStateToProps)(EventRefetch);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(EventRefetch);
 
 export default createRefetchContainer(
   container,

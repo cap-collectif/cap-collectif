@@ -41,7 +41,7 @@ type Props = {|
   ...ReduxFormFormProps,
   ...RelayProps,
   intl: IntlShape,
-  initialValues: FormValues,
+  // initialValues: FormValues,
   hasValue: Object,
   userTypes: Array<Object>,
   features: Object,
@@ -322,7 +322,7 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
   isViewerOrSuperAdmin: user.isViewer || viewer.isSuperAdmin,
 });
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 // same as Profile.js I have to find a solution to merge both in one
 export default createFragmentContainer(container, {

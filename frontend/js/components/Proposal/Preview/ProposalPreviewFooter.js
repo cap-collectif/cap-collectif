@@ -141,42 +141,45 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPreviewFooter), {
-  step: graphql`
-    fragment ProposalPreviewFooter_step on ProposalStep {
-      voteType
-      project {
-        type {
-          title
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPreviewFooter),
+  {
+    step: graphql`
+      fragment ProposalPreviewFooter_step on ProposalStep {
+        voteType
+        project {
+          type {
+            title
+          }
+        }
+        votesRanking
+      }
+    `,
+    proposal: graphql`
+      fragment ProposalPreviewFooter_proposal on Proposal
+        @argumentDefinitions(
+          stepId: { type: "ID!" }
+          isProfileView: { type: "Boolean", defaultValue: false }
+          isTipsMeeeEnabled: { type: "Boolean!" }
+        ) {
+        id
+        form {
+          commentable
+          objectType
+          usingTipsmeee
+        }
+        tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
+          donationTotalCount
+          donationCount
+        }
+        comments: comments {
+          totalCount
+        }
+        allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
+          totalCount
+          totalPointsCount
         }
       }
-      votesRanking
-    }
-  `,
-  proposal: graphql`
-    fragment ProposalPreviewFooter_proposal on Proposal
-      @argumentDefinitions(
-        stepId: { type: "ID!" }
-        isProfileView: { type: "Boolean", defaultValue: false }
-        isTipsMeeeEnabled: { type: "Boolean!" }
-      ) {
-      id
-      form {
-        commentable
-        objectType
-        usingTipsmeee
-      }
-      tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
-        donationTotalCount
-        donationCount
-      }
-      comments: comments {
-        totalCount
-      }
-      allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
-        totalCount
-        totalPointsCount
-      }
-    }
-  `,
-});
+    `,
+  },
+);

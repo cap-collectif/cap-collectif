@@ -11,7 +11,7 @@ import ProposalStepPageHeader from './ProposalStepPageHeader';
 import StepPageHeader from '../Steps/Page/StepPageHeader/StepPageHeader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView';
-import type { FeatureToggles, State } from '../../types';
+import type { Dispatch, FeatureToggles, State } from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
@@ -25,14 +25,19 @@ type OwnProps = {|
   count: number,
 |};
 
-type Props = {|
-  ...OwnProps,
+type StateProps = {|
   filters: Object,
   order: ?string,
   terms: ?string,
   isAuthenticated: boolean,
   isTipsMeeeEnabled: boolean,
   features: FeatureToggles,
+  dispatch: Dispatch,
+|};
+
+type Props = {|
+  ...OwnProps,
+  ...StateProps,
 |};
 
 type RenderedProps = {|
@@ -251,7 +256,7 @@ const mapStateToProps = (state: State) => ({
   terms: state.proposal.terms,
   order: state.proposal.order,
   features: state.default.features,
-  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
+  isTipsMeeeEnabled: !!state.default.features.unstable__tipsmeee,
 });
 
-export default connect<Props, State, _>(mapStateToProps)(ProposalStepPage);
+export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(ProposalStepPage);

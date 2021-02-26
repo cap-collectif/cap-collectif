@@ -141,51 +141,54 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPageTabs), {
-  step: graphql`
-    fragment ProposalPageTabs_step on ProposalStep {
-      id
-    }
-  `,
-  proposal: graphql`
-    fragment ProposalPageTabs_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
-      id
-      form {
-        usingCategories
-        usingThemes
-        objectType
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageTabs),
+  {
+    step: graphql`
+      fragment ProposalPageTabs_step on ProposalStep {
+        id
       }
-      news {
-        totalCount
-        edges {
-          node {
-            id
-            title
+    `,
+    proposal: graphql`
+      fragment ProposalPageTabs_proposal on Proposal
+        @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
+        id
+        form {
+          usingCategories
+          usingThemes
+          objectType
+        }
+        news {
+          totalCount
+          edges {
+            node {
+              id
+              title
+            }
           }
         }
-      }
-      currentVotableStep {
-        id
-        voteThreshold
-        voteType
-      }
-      votableSteps {
-        id
-        title
-      }
-      allFollowers: followers(first: 0) {
-        totalCount
-      }
-      project {
-        type {
+        currentVotableStep {
+          id
+          voteThreshold
+          voteType
+        }
+        votableSteps {
+          id
           title
         }
-        opinionCanBeFollowed
+        allFollowers: followers(first: 0) {
+          totalCount
+        }
+        project {
+          type {
+            title
+          }
+          opinionCanBeFollowed
+        }
+        tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
+          donatorsCount
+        }
       }
-      tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
-        donatorsCount
-      }
-    }
-  `,
-});
+    `,
+  },
+);

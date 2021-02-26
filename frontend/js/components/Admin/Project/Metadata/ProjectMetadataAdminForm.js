@@ -253,7 +253,7 @@ const mapStateToProps = (state, { project }: Props) => ({
   },
 });
 
-export const container = connect(mapStateToProps)(ProjectMetadataAdminForm);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectMetadataAdminForm);
 
 export default createFragmentContainer(injectIntl(container), {
   project: graphql`

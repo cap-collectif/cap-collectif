@@ -123,7 +123,7 @@ export class ProposalFusionForm extends React.Component<Props> {
             id="ProposalFusionForm-fromProposals"
             multi
             ref={this.myRef}
-            withRef
+            forwardRef
             label={intl.formatMessage({ id: 'initial-proposals' })}
             autoload
             help={intl.formatMessage({ id: '2-proposals-minimum' })}
@@ -182,7 +182,7 @@ const form = reduxForm({
   onSubmit,
 })(ProposalFusionForm);
 
-const container = connect(mapStateToProps, {
+const container = connect<any, any, _, _, _, _>(mapStateToProps, {
   onProjectChange: (change: (field: string, value: any) => void),
 })(injectIntl(form));
 

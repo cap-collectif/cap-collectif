@@ -60,7 +60,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     state.proposal.showDetailLikersModal === props.proposal.id,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProposalDetailLikers));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProposalDetailLikers));
 
 export default createFragmentContainer(container, {
   proposal: graphql`

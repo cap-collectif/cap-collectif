@@ -48,7 +48,7 @@ export class RequirementsModal extends React.Component<Props> {
   }
 }
 
-const container = connect()(RequirementsModal);
+const container = connect<any, any, _, _, _, _>()(RequirementsModal);
 export default createFragmentContainer(container, {
   step: graphql`
     fragment RequirementsModal_step on ConsultationStep

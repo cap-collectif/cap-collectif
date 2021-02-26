@@ -124,7 +124,9 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-const ProjectStepAdminListConnected = connect(mapStateToProps)(ProjectStepAdminList);
+const ProjectStepAdminListConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  ProjectStepAdminList,
+);
 
 export default createFragmentContainer(ProjectStepAdminListConnected, {
   project: graphql`

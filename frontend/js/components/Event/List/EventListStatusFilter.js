@@ -161,4 +161,4 @@ const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),
 });
 
-export default connect(mapStateToProps)(EventListStatusFilter);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(EventListStatusFilter);

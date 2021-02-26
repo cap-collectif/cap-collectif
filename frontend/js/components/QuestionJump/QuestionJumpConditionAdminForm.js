@@ -144,6 +144,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-const container = connect(mapStateToProps)(QuestionJumpConditionAdminForm);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(QuestionJumpConditionAdminForm);
 
 export default injectIntl(container);

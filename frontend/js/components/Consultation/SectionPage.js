@@ -78,4 +78,4 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 
-export default connect(mapStateToProps)(SectionPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(SectionPage);

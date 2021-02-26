@@ -159,4 +159,6 @@ const mapStateToProps = (state: GlobalState) => ({
   district: selector(state, 'district'),
 });
 
-export default connect(mapStateToProps)(injectIntl(ProjectListFiltersContainer));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(ProjectListFiltersContainer),
+);

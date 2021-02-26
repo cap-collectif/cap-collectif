@@ -4,10 +4,12 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProjectDistrictAdmin = lazy(() =>
-  import(/* webpackChunkName: "ProjectDistrictAdmin" */ '~/components/ProjectDistrict/ProjectDistrictAdmin'),
+  import(
+    /* webpackChunkName: "ProjectDistrictAdmin" */ '~/components/ProjectDistrict/ProjectDistrictAdmin'
+  ),
 );
 
-type Props = {};
+type Props = {||};
 
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>

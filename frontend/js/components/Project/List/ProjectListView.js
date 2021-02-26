@@ -91,7 +91,7 @@ const mapStateToProps = (state: GlobalState) => ({
   term: state.project.term,
 });
 
-const container = connect(mapStateToProps)(ProjectListView);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectListView);
 
 export default createRefetchContainer(
   container,

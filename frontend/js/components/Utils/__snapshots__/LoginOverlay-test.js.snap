@@ -33,7 +33,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
           />
         </p>
         <p>
-          <Connect(LoginButton)
+          <UNDEFINED
             bsStyle="success"
             className="center-block btn-block"
           />

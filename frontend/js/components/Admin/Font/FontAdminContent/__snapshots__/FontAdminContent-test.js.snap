@@ -42,8 +42,26 @@ exports[`<FontAdminContent /> renders correctly 1`] = `
     }
   />
   <ReduxForm
+    destroyOnUnmount={true}
+    enableReinitialize={false}
+    forceUnregisterOnUnmount={false}
+    form="form-font"
+    getFormState={[Function]}
     handleFontLoading={[Function]}
     handleFormError={[Function]}
+    keepDirtyOnReinitialize={false}
+    onChange={[Function]}
+    onSubmit={[Function]}
+    persistentSubmitErrors={false}
+    pure={true}
+    shouldAsyncValidate={[Function]}
+    shouldError={[Function]}
+    shouldValidate={[Function]}
+    shouldWarn={[Function]}
+    submitAsSideEffect={false}
+    touchOnBlur={true}
+    touchOnChange={false}
+    updateUnregisteredFields={false}
   />
 </FontAdminContentstyle__FontAdminContentContainer>
 `;

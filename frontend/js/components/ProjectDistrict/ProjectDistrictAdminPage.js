@@ -117,7 +117,7 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
   }
 }
 
-export default connect()(
+export default connect<any, any, _, _, _, _>()(
   createFragmentContainer(ProjectDistrictAdminPage, {
     districts: graphql`
       fragment ProjectDistrictAdminPage_districts on ProjectDistrictConnection {

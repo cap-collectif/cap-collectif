@@ -158,7 +158,7 @@ const mapStateToProps = (state: GlobalState) => ({
   showModal: state.proposal.showCreateModal,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProposalCreate));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProposalCreate));
 
 export default createFragmentContainer(container, {
   proposalForm: graphql`

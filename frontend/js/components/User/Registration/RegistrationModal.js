@@ -166,7 +166,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onCloseChart: () => dispatch(hideChartModal()),
 });
 
-const RegistrationModalConnected = connect(mapStateToProps, mapDispatchToProps)(RegistrationModal);
+const RegistrationModalConnected = connect<any, any, _, _, _, _>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RegistrationModal);
 
 export default createFragmentContainer(RegistrationModalConnected, {
   query: graphql`

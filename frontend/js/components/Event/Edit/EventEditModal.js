@@ -86,7 +86,7 @@ const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-export const container = connect(mapStateToProps)(injectIntl(EventEditModal));
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(EventEditModal));
 
 export default createFragmentContainer(container, {
   query: graphql`

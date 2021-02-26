@@ -122,4 +122,4 @@ const form = reduxForm({
   initialValues: getInitialValues(),
 })(ProjectListFilters);
 
-export default connect(mapStateToProps)(form);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(form);

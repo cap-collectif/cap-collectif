@@ -81,6 +81,6 @@ export class ReplyPage extends React.Component<Props> {
   }
 }
 
-const container = connect(mapStateToProps)(ReplyPage);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ReplyPage);
 
 export default container;

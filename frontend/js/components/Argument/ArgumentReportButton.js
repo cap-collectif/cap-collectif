@@ -40,7 +40,7 @@ class ArgumentReportButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(ArgumentReportButton);
+const container = connect<any, any, _, _, _, _>()(ArgumentReportButton);
 
 export default createFragmentContainer(container, {
   argument: graphql`

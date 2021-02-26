@@ -29,11 +29,14 @@ export const ProjectMetadataAdminPage = (props: Props) => (
   </div>
 );
 
-export default createFragmentContainer(injectIntl(connect()(ProjectMetadataAdminPage)), {
-  project: graphql`
-    fragment ProjectMetadataAdminPage_project on Project {
-      id
-      ...ProjectMetadataAdminForm_project
-    }
-  `,
-});
+export default createFragmentContainer(
+  injectIntl(connect<any, any, _, _, _, _>()(ProjectMetadataAdminPage)),
+  {
+    project: graphql`
+      fragment ProjectMetadataAdminPage_project on Project {
+        id
+        ...ProjectMetadataAdminForm_project
+      }
+    `,
+  },
+);

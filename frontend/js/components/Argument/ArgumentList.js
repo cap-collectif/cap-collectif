@@ -156,7 +156,7 @@ export class ArgumentList extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
-const container = connect(mapStateToProps)(ArgumentList);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ArgumentList);
 
 export default createFragmentContainer(container, {
   argumentable: graphql`

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, type RelayFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type { RegistrationFormQuestions_registrationForm } from '~relay/RegistrationFormQuestions_registrationForm.graphql';
@@ -108,9 +108,9 @@ const mapStateToProps = (state: State, props: Props) => ({
   },
 });
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(container, {
+export default (createFragmentContainer(container, {
   registrationForm: graphql`
     fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       id
@@ -120,4 +120,4 @@ export default createFragmentContainer(container, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof container>);

@@ -83,16 +83,19 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProjectHeaderAuthorsModal), {
-  users: graphql`
-    fragment ProjectHeaderAuthorsModal_users on User @relay(plural: true) {
-      id
-      url
-      username
-      userType {
-        name
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProjectHeaderAuthorsModal),
+  {
+    users: graphql`
+      fragment ProjectHeaderAuthorsModal_users on User @relay(plural: true) {
+        id
+        url
+        username
+        userType {
+          name
+        }
+        ...UserAvatar_user
       }
-      ...UserAvatar_user
-    }
-  `,
-});
+    `,
+  },
+);

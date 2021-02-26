@@ -49,7 +49,7 @@ export const formMock: ReduxFormFormProps = {
   handleSubmit: jest.fn(),
   initialize: jest.fn(),
   initialized: true,
-  initialValues: {},
+  // initialValues: {},
   invalid: false,
   pristine: true,
   reset: jest.fn(),

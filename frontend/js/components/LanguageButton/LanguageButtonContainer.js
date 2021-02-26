@@ -56,4 +56,4 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
 
-export default connect(mapStateToProps)(LanguageButtonContainer);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(LanguageButtonContainer);

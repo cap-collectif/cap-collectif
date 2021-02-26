@@ -324,24 +324,27 @@ const mapStateToProps = (state: GlobalState) => ({
   color: state.default.parameters['color.btn.primary.bg'],
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(NewProposalResponse), {
-  response: graphql`
-    fragment NewProposalResponse_response on Response {
-      question {
-        __typename
-        ...responsesHelper_question @relay(mask: false)
-      }
-      ... on ValueResponse {
-        value
-      }
-      ... on MediaResponse {
-        medias {
-          id
-          name
-          size
-          url
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(NewProposalResponse),
+  {
+    response: graphql`
+      fragment NewProposalResponse_response on Response {
+        question {
+          __typename
+          ...responsesHelper_question @relay(mask: false)
+        }
+        ... on ValueResponse {
+          value
+        }
+        ... on MediaResponse {
+          medias {
+            id
+            name
+            size
+            url
+          }
         }
       }
-    }
-  `,
-});
+    `,
+  },
+);

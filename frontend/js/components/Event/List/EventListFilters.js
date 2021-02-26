@@ -285,7 +285,7 @@ const mapStateToProps = (state: GlobalState) => ({
   orderBy: selector(state, 'orderBy'),
 });
 
-const container = connect(mapStateToProps)(injectIntl(EventListFilters));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(EventListFilters));
 
 export default createFragmentContainer(container, {
   query: graphql`

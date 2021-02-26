@@ -581,7 +581,7 @@ const mapStateToProps = (state: State, props: Props) => {
   };
 };
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   viewer: graphql`

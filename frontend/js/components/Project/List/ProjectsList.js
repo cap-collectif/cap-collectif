@@ -131,4 +131,4 @@ const mapStateToProps = (state: GlobalState) => ({
   orderBy: state.project.orderBy || 'PUBLISHED_AT',
 });
 
-export default connect(mapStateToProps)(ProjectsList);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProjectsList);

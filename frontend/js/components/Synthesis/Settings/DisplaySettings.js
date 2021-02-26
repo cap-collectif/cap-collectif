@@ -74,7 +74,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   },
 });
 
-export default connect(mapStateToProps)(
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

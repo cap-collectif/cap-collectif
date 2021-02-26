@@ -12,4 +12,4 @@ export const ProjectAdminSynthesisStepForm = () => (
   </>
 );
 
-export default connect()(ProjectAdminSynthesisStepForm);
+export default connect<any, any, _, _, _, _>()(ProjectAdminSynthesisStepForm);

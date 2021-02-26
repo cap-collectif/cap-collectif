@@ -174,4 +174,4 @@ const mapStateToProps = (state: State) => ({
   adJs: state.default.parameters['ad-scripts-on-all-pages'],
 });
 
-export default connect(mapStateToProps)(CookieManagerModal);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(CookieManagerModal);

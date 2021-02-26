@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector = connect(
+const connector = connect<any, any, _, _, _, _>(
   mapStateToProps,
   mapDispatchToProps,
 )(ProjectExternalProjectAdminPageDeprecated);

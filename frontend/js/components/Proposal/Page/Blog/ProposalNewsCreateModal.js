@@ -128,10 +128,13 @@ const mapStateToProps = (state: GlobalState) => ({
   submitFailed: hasSubmitFailed(formName)(state),
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalNewsCreateModal), {
-  proposal: graphql`
-    fragment ProposalNewsCreateModal_proposal on Proposal {
-      id
-    }
-  `,
-});
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalNewsCreateModal),
+  {
+    proposal: graphql`
+      fragment ProposalNewsCreateModal_proposal on Proposal {
+        id
+      }
+    `,
+  },
+);

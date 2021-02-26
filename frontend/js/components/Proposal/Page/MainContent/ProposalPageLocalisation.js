@@ -106,15 +106,18 @@ const mapStateToProps = (state: GlobalState) => ({
   mapTokens: state.user.mapTokens,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLocalisation), {
-  proposal: graphql`
-    fragment ProposalPageLocalisation_proposal on Proposal {
-      id
-      address {
-        formatted
-        lat
-        lng
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageLocalisation),
+  {
+    proposal: graphql`
+      fragment ProposalPageLocalisation_proposal on Proposal {
+        id
+        address {
+          formatted
+          lat
+          lng
+        }
       }
-    }
-  `,
-});
+    `,
+  },
+);

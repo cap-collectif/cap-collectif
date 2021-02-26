@@ -190,7 +190,7 @@ const mapStateToProps = (state: GlobalState) => ({
 
 const myComponent = injectIntl(GroupAdminUsers);
 
-const container = connect(mapStateToProps)(myComponent);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(myComponent);
 
 export default createPaginationContainer(
   container,

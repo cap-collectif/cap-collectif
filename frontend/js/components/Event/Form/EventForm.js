@@ -861,7 +861,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-const container = connect(mapStateToProps)(injectIntl(formContainer));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(formContainer));
 
 export default createFragmentContainer(container, {
   query: graphql`

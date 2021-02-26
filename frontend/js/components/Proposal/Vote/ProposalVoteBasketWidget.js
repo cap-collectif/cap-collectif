@@ -302,7 +302,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 export default createFragmentContainer(
-  withColors(connect(mapStateToProps)(ProposalVoteBasketWidget)),
+  withColors(connect<any, any, _, _, _, _>(mapStateToProps)(ProposalVoteBasketWidget)),
   {
     step: graphql`
       fragment ProposalVoteBasketWidget_step on ProposalStep

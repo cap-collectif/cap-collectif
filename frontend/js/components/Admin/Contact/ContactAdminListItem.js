@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { Button, Row, Col, ListGroupItem, ButtonToolbar } from 'react-bootstrap';
 
 import Translation from '~/services/Translation';
@@ -12,13 +12,13 @@ import RemoveContactFormMutation from '~/mutations/RemoveContactFormMutation';
 import type { ContactAdminListItem_contactForm } from '~relay/ContactAdminListItem_contactForm.graphql';
 
 type Props = {|
-  contactForm: ContactAdminListItem_contactForm,
+  +contactForm: ContactAdminListItem_contactForm,
 |};
 
-type State = {
-  showRemoveContactFormModal: boolean,
-  showEditContactFormModal: boolean,
-};
+type State = {|
+  +showRemoveContactFormModal: boolean,
+  +showEditContactFormModal: boolean,
+|};
 
 const onDelete = (id: string) => {
   RemoveContactFormMutation.commit({ input: { id } });
@@ -32,34 +32,20 @@ const onDelete = (id: string) => {
 };
 
 export class ContactAdminListItem extends React.Component<Props, State> {
-  state = {
+  state: State = {
     showRemoveContactFormModal: false,
     showEditContactFormModal: false,
   };
 
-  closeRemoveModal = () => {
-    this.setState({ showRemoveContactFormModal: false });
-  };
-
-  closeEditModal = () => {
-    this.setState({ showEditContactFormModal: false });
-  };
-
-  openRemoveModal = () => {
-    this.setState({ showRemoveContactFormModal: true });
-  };
-
-  openEditModal = () => {
-    this.setState({ showEditContactFormModal: true });
-  };
-
-  render() {
+  render(): React.Node {
     const { contactForm } = this.props;
     const { showRemoveContactFormModal, showEditContactFormModal } = this.state;
     return (
       <ListGroupItem>
         <DeleteModal
-          closeDeleteModal={this.closeRemoveModal}
+          closeDeleteModal={() => {
+            this.setState({ showRemoveContactFormModal: false });
+          }}
           showDeleteModal={showRemoveContactFormModal}
           deleteElement={() => {
             onDelete(contactForm.id);
@@ -70,7 +56,9 @@ export class ContactAdminListItem extends React.Component<Props, State> {
         />
         <ContactFormAdminModal
           contactForm={contactForm}
-          onClose={this.closeEditModal}
+          onClose={() => {
+            this.setState({ showEditContactFormModal: false });
+          }}
           show={showEditContactFormModal}
         />
         <Row>
@@ -89,14 +77,18 @@ export class ContactAdminListItem extends React.Component<Props, State> {
                 id={`UpdateContact-${contactForm.id}`}
                 className="mt-5"
                 bsStyle="warning"
-                onClick={this.openEditModal}>
+                onClick={() => {
+                  this.setState({ showEditContactFormModal: true });
+                }}>
                 <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
               </Button>
               <Button
                 id={`DeleteContact-${contactForm.id}`}
                 className="mt-5"
                 bsStyle="danger"
-                onClick={this.openRemoveModal}>
+                onClick={() => {
+                  this.setState({ showRemoveContactFormModal: true });
+                }}>
                 <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
               </Button>
             </ButtonToolbar>
@@ -107,16 +99,17 @@ export class ContactAdminListItem extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(ContactAdminListItem, {
+export default (createFragmentContainer(ContactAdminListItem, {
   contactForm: graphql`
     fragment ContactAdminListItem_contactForm on ContactForm {
       id
       title
       translations {
+        # eslint-disable-next-line relay/unused-fields
         locale
         title
       }
       ...ContactFormAdminModal_contactForm
     }
   `,
-});
+}): RelayFragmentContainer<typeof ContactAdminListItem>);

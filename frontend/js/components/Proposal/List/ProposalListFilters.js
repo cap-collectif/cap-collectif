@@ -180,7 +180,7 @@ const mapStateToProps = (state: GlobalState) => ({
 
 const withIntl = injectIntl(ProposalListFilters);
 
-const container = connect(mapStateToProps)(withIntl);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(withIntl);
 
 export default createFragmentContainer(container, {
   step: graphql`

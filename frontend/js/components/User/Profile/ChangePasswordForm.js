@@ -244,4 +244,4 @@ const form = reduxForm({
   form: formName,
 })(ChangePasswordForm);
 
-export default connect()(injectIntl(form));
+export default connect<any, any, _, _, _, _>()(injectIntl(form));

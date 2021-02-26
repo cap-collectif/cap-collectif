@@ -122,52 +122,55 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview), {
-  viewer: graphql`
-    fragment ProposalPreview_viewer on User {
-      ...ProposalPreviewBody_viewer
-    }
-  `,
-  step: graphql`
-    fragment ProposalPreview_step on Step {
-      ...ProposalPreviewBody_step
-      ...ProposalPreviewFooter_step
-    }
-  `,
-  proposal: graphql`
-    fragment ProposalPreview_proposal on Proposal
-      @argumentDefinitions(
-        stepId: { type: "ID!" }
-        isAuthenticated: { type: "Boolean!" }
-        isProfileView: { type: "Boolean", defaultValue: false }
-        isTipsMeeeEnabled: { type: "Boolean!" }
-      ) {
-      id
-      media {
-        url
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPreview),
+  {
+    viewer: graphql`
+      fragment ProposalPreview_viewer on User {
+        ...ProposalPreviewBody_viewer
       }
-      author {
-        vip
+    `,
+    step: graphql`
+      fragment ProposalPreview_step on Step {
+        ...ProposalPreviewBody_step
+        ...ProposalPreviewFooter_step
       }
-      category {
-        icon
-        color
-        categoryImage {
-          id
-          image {
-            url
+    `,
+    proposal: graphql`
+      fragment ProposalPreview_proposal on Proposal
+        @argumentDefinitions(
+          stepId: { type: "ID!" }
+          isAuthenticated: { type: "Boolean!" }
+          isProfileView: { type: "Boolean", defaultValue: false }
+          isTipsMeeeEnabled: { type: "Boolean!" }
+        ) {
+        id
+        media {
+          url
+        }
+        author {
+          vip
+        }
+        category {
+          icon
+          color
+          categoryImage {
+            id
+            image {
+              url
+            }
           }
         }
+        ...ProposalPreviewFooter_proposal
+          @arguments(
+            stepId: $stepId
+            isProfileView: $isProfileView
+            isTipsMeeeEnabled: $isTipsMeeeEnabled
+          )
+        ...ProposalPreviewBody_proposal
+          @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
+        ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       }
-      ...ProposalPreviewFooter_proposal
-        @arguments(
-          stepId: $stepId
-          isProfileView: $isProfileView
-          isTipsMeeeEnabled: $isTipsMeeeEnabled
-        )
-      ...ProposalPreviewBody_proposal
-        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
-      ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
-    }
-  `,
-});
+    `,
+  },
+);

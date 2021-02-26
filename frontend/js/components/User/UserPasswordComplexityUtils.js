@@ -352,4 +352,4 @@ const mapStateToProps = (state: State, props: Props) => ({
   passwordConditions: formValueSelector(props.formName)(state, 'passwordConditions'),
 });
 
-export default connect(mapStateToProps)(UserPasswordComplexityField);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(UserPasswordComplexityField);

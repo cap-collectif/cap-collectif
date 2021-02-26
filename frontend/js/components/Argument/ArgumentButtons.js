@@ -63,7 +63,7 @@ const ArgumentButtons = ({ argument, dispatch }: Props) => {
   );
 };
 
-const container = connect()(ArgumentButtons);
+const container = connect<any, any, _, _, _, _>()(ArgumentButtons);
 export default createFragmentContainer(container, {
   argument: graphql`
     fragment ArgumentButtons_argument on Argument

@@ -73,7 +73,7 @@ const mapStateToProps = (state: GlobalState) => ({
   user: state.user.user,
 });
 
-const container = connect(mapStateToProps)(ReplyCreateFormWrapper);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ReplyCreateFormWrapper);
 
 export default createFragmentContainer(container, {
   questionnaire: graphql`

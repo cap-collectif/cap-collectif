@@ -254,4 +254,4 @@ export const ProjectAdminCollectStepForm = ({
   );
 };
 
-export default connect()(ProjectAdminCollectStepForm);
+export default connect<any, any, _, _, _, _>()(ProjectAdminCollectStepForm);

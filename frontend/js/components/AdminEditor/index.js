@@ -42,4 +42,4 @@ const mapStateToProps = (state: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps)(EditorBehindFeatureFlag);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(EditorBehindFeatureFlag);

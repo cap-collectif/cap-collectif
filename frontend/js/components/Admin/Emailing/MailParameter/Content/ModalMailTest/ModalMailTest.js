@@ -125,7 +125,7 @@ const ModalMailTestForm = reduxForm({
   form: formName,
 })(ModalMailTest);
 
-const ModalMailTestConnected = connect()(ModalMailTestForm);
+const ModalMailTestConnected = connect<any, any, _, _, _, _>()(ModalMailTestForm);
 
 export default createFragmentContainer(ModalMailTestConnected, {
   emailingCampaign: graphql`

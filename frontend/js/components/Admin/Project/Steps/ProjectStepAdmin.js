@@ -118,7 +118,7 @@ const mapStateToProps = (state: GlobalState) => ({
   hasFeatureDebate: state.default.features.unstable__debate || false,
 });
 
-const ProjectStepAdminConnected = connect(mapStateToProps)(ProjectStepAdmin);
+const ProjectStepAdminConnected = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectStepAdmin);
 
 export default createFragmentContainer(ProjectStepAdminConnected, {
   project: graphql`

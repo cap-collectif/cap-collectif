@@ -105,4 +105,4 @@ const mapStateToProps = (state: State, { formName, member }: Props) => {
   };
 };
 
-export default withPanelStyle(connect(mapStateToProps)(PanelBorderStyle));
+export default withPanelStyle(connect<any, any, _, _, _, _>(mapStateToProps)(PanelBorderStyle));

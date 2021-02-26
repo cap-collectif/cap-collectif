@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import {
+  QueryRenderer,
+  graphql,
+  createFragmentContainer,
+  type RelayFragmentContainer,
+} from 'react-relay';
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
 import type { State, Dispatch } from '~/types';
@@ -20,18 +25,32 @@ import { getTranslation } from '~/services/Translation';
 import type { ContactAdminPageQueryResponse } from '~relay/ContactAdminPageQuery.graphql';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 
+type RelayProps = {|
+  +query: ContactAdminPage_query,
+|};
+
+type StateProps = {|
+  +dispatch: Dispatch,
+  +currentLanguage: string,
+  +initialValues: Object,
+|};
+
+type AfterConnectProps = {|
+  ...RelayProps,
+  ...StateProps,
+|};
+
 export type Props = {|
   ...ReduxFormFormProps,
-  query: ContactAdminPage_query,
-  currentLanguage: string,
+  ...AfterConnectProps,
 |};
 
 const formName = 'contact-admin-form';
 
 type FormValues = {|
-  title: string,
-  description: ?string,
-  custom: CustomFormValues,
+  +title: string,
+  +description: ?string,
+  +custom: CustomFormValues,
 |};
 
 const validate = (values: FormValues) => {
@@ -78,7 +97,7 @@ const renderContactList = ({
 };
 
 export class ContactAdminPage extends React.Component<Props> {
-  render() {
+  render(): React.Node {
     const {
       invalid,
       pristine,
@@ -160,7 +179,7 @@ export class ContactAdminPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, { query }: Props) => {
+const mapStateToProps = (state: State, { query }: RelayProps) => {
   const titleTranslation = getTranslation(
     query.title ? query.title.translations : [],
     state.language.currentLanguage,
@@ -185,14 +204,18 @@ const mapStateToProps = (state: State, { query }: Props) => {
   };
 };
 
-const form = reduxForm({
+const form = (reduxForm({
   onSubmit,
   validate,
   form: formName,
   enableReinitialize: true,
-})(ContactAdminPage);
+})(ContactAdminPage): React.AbstractComponent<AfterConnectProps>);
 
-export default createFragmentContainer(connect(mapStateToProps)(form), {
+const container = (connect<AfterConnectProps, RelayProps, _, _, _, _>(mapStateToProps)(
+  form,
+): React.AbstractComponent<RelayProps>);
+
+export default (createFragmentContainer(container, {
   query: graphql`
     fragment ContactAdminPage_query on Query {
       siteImage(keyname: "contact.picto") {
@@ -217,4 +240,4 @@ export default createFragmentContainer(connect(mapStateToProps)(form), {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof container>);

@@ -136,7 +136,7 @@ const form = reduxForm({
   onSubmit,
 })(ArgumentCardFormEdition);
 
-const ArgumentCardFormEditionConnected = connect(mapStateToProps)(form);
+const ArgumentCardFormEditionConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(ArgumentCardFormEditionConnected, {
   argument: graphql`

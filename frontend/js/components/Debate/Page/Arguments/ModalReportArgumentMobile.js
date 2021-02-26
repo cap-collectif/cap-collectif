@@ -188,7 +188,9 @@ export const ModalReportArgumentMobile = ({ argument, dispatch, show, onClose }:
   );
 };
 
-const ModalReportArgumentMobileConnected = connect()(ModalReportArgumentMobile);
+const ModalReportArgumentMobileConnected = connect<any, any, _, _, _, _>()(
+  ModalReportArgumentMobile,
+);
 
 export default createFragmentContainer(ModalReportArgumentMobileConnected, {
   argument: graphql`

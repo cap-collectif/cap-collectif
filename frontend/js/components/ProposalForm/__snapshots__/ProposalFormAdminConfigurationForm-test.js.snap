@@ -707,7 +707,269 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       </h3>
     </div>
     <FieldArray
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "__docgenInfo": Object {
+            "description": "",
+            "displayName": "ProposalFormAdminQuestions",
+            "methods": Array [
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "onDragEnd",
+                "params": Array [
+                  Object {
+                    "name": "result",
+                    "type": Object {
+                      "alias": "DropResult",
+                      "name": "DropResult",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClose",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "isEmpty",
+                    "type": Object {
+                      "name": "boolean",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClickDelete",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                      "nullable": true,
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleDeleteAction",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClickEdit",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                      "nullable": true,
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleSubmit",
+                "params": Array [
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateQuestion",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateSection",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateSubSection",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCancelModal",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "renderQuestionAndSectionButton",
+                "params": Array [
+                  Object {
+                    "name": "hideSections",
+                    "type": Object {
+                      "name": "boolean",
+                    },
+                  },
+                  Object {
+                    "name": "intl",
+                    "type": Object {
+                      "alias": "IntlShape",
+                      "name": "IntlShape",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+            ],
+            "props": Object {
+              "dispatch": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "Dispatch",
+                },
+                "required": true,
+              },
+              "fields": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "signature",
+                  "raw": "{ length: number, map: Function, remove: Function }",
+                  "signature": Object {
+                    "properties": Array [
+                      Object {
+                        "key": "length",
+                        "value": Object {
+                          "name": "number",
+                          "required": true,
+                        },
+                      },
+                      Object {
+                        "key": "map",
+                        "value": Object {
+                          "name": "Function",
+                          "required": true,
+                        },
+                      },
+                      Object {
+                        "key": "remove",
+                        "value": Object {
+                          "name": "Function",
+                          "required": true,
+                        },
+                      },
+                    ],
+                  },
+                  "type": "object",
+                },
+                "required": true,
+              },
+              "formName": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "string",
+                },
+                "required": true,
+              },
+              "hideSections": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "boolean",
+                },
+                "required": true,
+              },
+              "intl": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "IntlShape",
+                },
+                "required": true,
+              },
+              "questions": Object {
+                "description": "",
+                "flowType": Object {
+                  "elements": Array [
+                    Object {
+                      "name": "Object",
+                    },
+                  ],
+                  "name": "Array",
+                  "raw": "Array<Object>",
+                },
+                "required": true,
+              },
+            },
+          },
+          "compare": null,
+          "displayName": "Connect(injectIntl(ProposalFormAdminQuestions))",
+          "type": [Function],
+        }
+      }
       formName="proposal-form-admin-configuration"
       name="questions"
     />
@@ -1473,7 +1735,269 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
       </h3>
     </div>
     <FieldArray
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "__docgenInfo": Object {
+            "description": "",
+            "displayName": "ProposalFormAdminQuestions",
+            "methods": Array [
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "onDragEnd",
+                "params": Array [
+                  Object {
+                    "name": "result",
+                    "type": Object {
+                      "alias": "DropResult",
+                      "name": "DropResult",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClose",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "isEmpty",
+                    "type": Object {
+                      "name": "boolean",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClickDelete",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                      "nullable": true,
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleDeleteAction",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClickEdit",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                      "nullable": true,
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleSubmit",
+                "params": Array [
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateQuestion",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateSection",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateSubSection",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCancelModal",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "renderQuestionAndSectionButton",
+                "params": Array [
+                  Object {
+                    "name": "hideSections",
+                    "type": Object {
+                      "name": "boolean",
+                    },
+                  },
+                  Object {
+                    "name": "intl",
+                    "type": Object {
+                      "alias": "IntlShape",
+                      "name": "IntlShape",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+            ],
+            "props": Object {
+              "dispatch": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "Dispatch",
+                },
+                "required": true,
+              },
+              "fields": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "signature",
+                  "raw": "{ length: number, map: Function, remove: Function }",
+                  "signature": Object {
+                    "properties": Array [
+                      Object {
+                        "key": "length",
+                        "value": Object {
+                          "name": "number",
+                          "required": true,
+                        },
+                      },
+                      Object {
+                        "key": "map",
+                        "value": Object {
+                          "name": "Function",
+                          "required": true,
+                        },
+                      },
+                      Object {
+                        "key": "remove",
+                        "value": Object {
+                          "name": "Function",
+                          "required": true,
+                        },
+                      },
+                    ],
+                  },
+                  "type": "object",
+                },
+                "required": true,
+              },
+              "formName": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "string",
+                },
+                "required": true,
+              },
+              "hideSections": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "boolean",
+                },
+                "required": true,
+              },
+              "intl": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "IntlShape",
+                },
+                "required": true,
+              },
+              "questions": Object {
+                "description": "",
+                "flowType": Object {
+                  "elements": Array [
+                    Object {
+                      "name": "Object",
+                    },
+                  ],
+                  "name": "Array",
+                  "raw": "Array<Object>",
+                },
+                "required": true,
+              },
+            },
+          },
+          "compare": null,
+          "displayName": "Connect(injectIntl(ProposalFormAdminQuestions))",
+          "type": [Function],
+        }
+      }
       formName="proposal-form-admin-configuration"
       name="questions"
     />
@@ -2353,7 +2877,269 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
       </h3>
     </div>
     <FieldArray
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "__docgenInfo": Object {
+            "description": "",
+            "displayName": "ProposalFormAdminQuestions",
+            "methods": Array [
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "onDragEnd",
+                "params": Array [
+                  Object {
+                    "name": "result",
+                    "type": Object {
+                      "alias": "DropResult",
+                      "name": "DropResult",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClose",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "isEmpty",
+                    "type": Object {
+                      "name": "boolean",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClickDelete",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                      "nullable": true,
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleDeleteAction",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleClickEdit",
+                "params": Array [
+                  Object {
+                    "name": "index",
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                      "nullable": true,
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleSubmit",
+                "params": Array [
+                  Object {
+                    "name": "type",
+                    "type": Object {
+                      "alias": "QuestionTypeValue",
+                      "name": "QuestionTypeValue",
+                    },
+                  },
+                  Object {
+                    "name": "level",
+                    "optional": true,
+                    "type": Object {
+                      "name": "number",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateQuestion",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateSection",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCreateSubSection",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "handleCancelModal",
+                "params": Array [],
+                "returns": null,
+              },
+              Object {
+                "docblock": null,
+                "modifiers": Array [],
+                "name": "renderQuestionAndSectionButton",
+                "params": Array [
+                  Object {
+                    "name": "hideSections",
+                    "type": Object {
+                      "name": "boolean",
+                    },
+                  },
+                  Object {
+                    "name": "intl",
+                    "type": Object {
+                      "alias": "IntlShape",
+                      "name": "IntlShape",
+                    },
+                  },
+                ],
+                "returns": null,
+              },
+            ],
+            "props": Object {
+              "dispatch": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "Dispatch",
+                },
+                "required": true,
+              },
+              "fields": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "signature",
+                  "raw": "{ length: number, map: Function, remove: Function }",
+                  "signature": Object {
+                    "properties": Array [
+                      Object {
+                        "key": "length",
+                        "value": Object {
+                          "name": "number",
+                          "required": true,
+                        },
+                      },
+                      Object {
+                        "key": "map",
+                        "value": Object {
+                          "name": "Function",
+                          "required": true,
+                        },
+                      },
+                      Object {
+                        "key": "remove",
+                        "value": Object {
+                          "name": "Function",
+                          "required": true,
+                        },
+                      },
+                    ],
+                  },
+                  "type": "object",
+                },
+                "required": true,
+              },
+              "formName": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "string",
+                },
+                "required": true,
+              },
+              "hideSections": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "boolean",
+                },
+                "required": true,
+              },
+              "intl": Object {
+                "description": "",
+                "flowType": Object {
+                  "name": "IntlShape",
+                },
+                "required": true,
+              },
+              "questions": Object {
+                "description": "",
+                "flowType": Object {
+                  "elements": Array [
+                    Object {
+                      "name": "Object",
+                    },
+                  ],
+                  "name": "Array",
+                  "raw": "Array<Object>",
+                },
+                "required": true,
+              },
+            },
+          },
+          "compare": null,
+          "displayName": "Connect(injectIntl(ProposalFormAdminQuestions))",
+          "type": [Function],
+        }
+      }
       formName="proposal-form-admin-configuration"
       name="questions"
     />

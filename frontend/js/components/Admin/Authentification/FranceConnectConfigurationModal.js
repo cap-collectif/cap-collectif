@@ -187,7 +187,7 @@ const form = reduxForm({
   form: formName,
 })(FranceConnectConfigurationModal);
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 export default createFragmentContainer(container, {
   ssoConfiguration: graphql`
     fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {

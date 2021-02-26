@@ -269,7 +269,7 @@ const mapStateToProps = (state: GlobalState) => ({
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
 });
 
-const container = connect(mapStateToProps)(ProposalPageHeader);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageHeader);
 
 export default createFragmentContainer(container, {
   viewer: graphql`

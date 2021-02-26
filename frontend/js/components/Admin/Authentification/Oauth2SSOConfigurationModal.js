@@ -338,4 +338,4 @@ const form = reduxForm({
   form: formName,
 })(Oauth2SSOConfigurationModal);
 
-export default connect(mapStateToProps)(injectIntl(form));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));

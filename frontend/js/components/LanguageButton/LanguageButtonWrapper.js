@@ -40,7 +40,7 @@ const mapStateToProps = ({ language }: State) => ({
   defaultLanguage: language.currentLanguage,
 });
 
-export const container = connect(mapStateToProps)(LanguageButtonWrapper);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(LanguageButtonWrapper);
 
 export default createFragmentContainer(container, {
   languages: graphql`

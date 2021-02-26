@@ -336,7 +336,9 @@ const formContainer = reduxForm({
   onSubmit,
 })(RegistrationForm);
 
-const RegistrationFormConnected = connect(mapStateToProps)(injectIntl(formContainer));
+const RegistrationFormConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(formContainer),
+);
 
 export default createFragmentContainer(RegistrationFormConnected, {
   query: graphql`

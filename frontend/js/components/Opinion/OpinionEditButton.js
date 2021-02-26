@@ -32,7 +32,7 @@ export class OpinionEditButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(OpinionEditButton);
+const container = connect<any, any, _, _, _, _>()(OpinionEditButton);
 
 export default createFragmentContainer(container, {
   opinion: graphql`

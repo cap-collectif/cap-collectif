@@ -166,4 +166,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
   isAuthenticated: !!state.user.user,
 });
 
-export default connect(mapStateToProps)(ConsultationPropositionBox);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ConsultationPropositionBox);

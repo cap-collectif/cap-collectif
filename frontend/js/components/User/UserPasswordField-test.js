@@ -14,6 +14,7 @@ describe('<UserPasswordField />', () => {
     divClassName: 'div',
     label: 'label',
     labelClassName: 'label-class',
+    dispatch: jest.fn(),
   };
 
   it('renders a passwordField', () => {

@@ -36,7 +36,7 @@ const mapStateToProps = (state: GlobalState) => ({
   invalid: isInvalid(accountForm)(state),
 });
 
-const container = connect(mapStateToProps)(AccountBox);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(AccountBox);
 
 export default createFragmentContainer(container, {
   viewer: graphql`

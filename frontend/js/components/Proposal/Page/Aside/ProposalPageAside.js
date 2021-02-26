@@ -136,25 +136,28 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalPageAside), {
-  proposal: graphql`
-    fragment ProposalPageAside_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
-      ...ProposalPageMetadata_proposal
-      ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
-      ...ProposalPageAdvancement_proposal
-      ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
-      currentVotableStep {
-        votesRanking
-        voteType
-        ...ProposalPageVoteThreshold_step
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalPageAside),
+  {
+    proposal: graphql`
+      fragment ProposalPageAside_proposal on Proposal
+        @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
+        ...ProposalPageMetadata_proposal
+        ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
+        ...ProposalPageAdvancement_proposal
+        ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
+        currentVotableStep {
+          votesRanking
+          voteType
+          ...ProposalPageVoteThreshold_step
+        }
+        tipsmeeeId @include(if: $isTipsMeeeEnabled)
+        form {
+          usingCategories
+          usingThemes
+          usingTipsmeee @include(if: $isTipsMeeeEnabled)
+        }
       }
-      tipsmeeeId @include(if: $isTipsMeeeEnabled)
-      form {
-        usingCategories
-        usingThemes
-        usingTipsmeee @include(if: $isTipsMeeeEnabled)
-      }
-    }
-  `,
-});
+    `,
+  },
+);

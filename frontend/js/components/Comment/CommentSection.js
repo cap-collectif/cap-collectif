@@ -69,4 +69,4 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 
-export default connect(mapStateToProps)(CommentSection);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(CommentSection);

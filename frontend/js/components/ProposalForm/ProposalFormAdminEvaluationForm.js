@@ -168,7 +168,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   hasAccessToNewAnalysis: state.default.features.unstable__analysis,
 });
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 const intlContainer = injectIntl(container);
 
 export default createFragmentContainer(intlContainer, {

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -9,10 +9,10 @@ import type { Props as ContactAdminPageProps } from './ContactAdminPage';
 type Props = {|
   ...ReduxFormFormProps,
   ...ContactAdminPageProps,
-  formName: string,
+  +formName: string,
 |};
 
-const ContactAdminForm = (props: Props) => {
+const ContactAdminForm = (props: Props): React.Element<'form'> => {
   const { formName, handleSubmit } = props;
   const optional = (
     <span className="excerpt">

@@ -102,4 +102,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   resetForm: () => dispatch(reset(formName)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MobilePublishArgumentModal);
+export default connect<any, any, _, _, _, _>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MobilePublishArgumentModal);

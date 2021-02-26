@@ -61,4 +61,4 @@ export class DeleteModal extends React.Component<Props> {
   }
 }
 
-export default connect()(DeleteModal);
+export default connect<any, any, _, _, _, _>()(DeleteModal);

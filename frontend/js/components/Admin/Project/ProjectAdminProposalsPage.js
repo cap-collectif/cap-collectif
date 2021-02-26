@@ -247,44 +247,50 @@ const mapStateToProps = (state: GlobalState) => ({
   proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminProposalsPage), {
-  query: graphql`
-    fragment ProjectAdminProposalsPage_query on Query
-      @argumentDefinitions(
-        projectId: { type: "ID!" }
-        count: { type: "Int!" }
-        proposalRevisionsEnabled: { type: "Boolean!" }
-        cursor: { type: "String" }
-        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
-        state: { type: "ProposalsState!", defaultValue: ALL }
-        category: { type: "ID", defaultValue: null }
-        district: { type: "ID", defaultValue: null }
-        theme: { type: "ID", defaultValue: null }
-        status: { type: "ID", defaultValue: null }
-        step: { type: "ID", defaultValue: null }
-        term: { type: "String", defaultValue: null }
-      ) {
-      project: node(id: $projectId) {
-        id
-        ...ProjectAdminProposals_project
-          @arguments(
-            projectId: $projectId
-            count: $count
-            proposalRevisionsEnabled: $proposalRevisionsEnabled
-            cursor: $cursor
-            orderBy: $orderBy
-            state: $state
-            category: $category
-            district: $district
-            theme: $theme
-            status: $status
-            step: $step
-            term: $term
-          )
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProjectAdminProposalsPage),
+  {
+    query: graphql`
+      fragment ProjectAdminProposalsPage_query on Query
+        @argumentDefinitions(
+          projectId: { type: "ID!" }
+          count: { type: "Int!" }
+          proposalRevisionsEnabled: { type: "Boolean!" }
+          cursor: { type: "String" }
+          orderBy: {
+            type: "ProposalOrder!"
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          }
+          state: { type: "ProposalsState!", defaultValue: ALL }
+          category: { type: "ID", defaultValue: null }
+          district: { type: "ID", defaultValue: null }
+          theme: { type: "ID", defaultValue: null }
+          status: { type: "ID", defaultValue: null }
+          step: { type: "ID", defaultValue: null }
+          term: { type: "String", defaultValue: null }
+        ) {
+        project: node(id: $projectId) {
+          id
+          ...ProjectAdminProposals_project
+            @arguments(
+              projectId: $projectId
+              count: $count
+              proposalRevisionsEnabled: $proposalRevisionsEnabled
+              cursor: $cursor
+              orderBy: $orderBy
+              state: $state
+              category: $category
+              district: $district
+              theme: $theme
+              status: $status
+              step: $step
+              term: $term
+            )
+        }
+        themes {
+          ...ProjectAdminProposals_themes
+        }
       }
-      themes {
-        ...ProjectAdminProposals_themes
-      }
-    }
-  `,
-});
+    `,
+  },
+);

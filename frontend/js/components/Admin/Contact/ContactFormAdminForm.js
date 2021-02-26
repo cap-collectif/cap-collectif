@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import { reduxForm, Field, SubmissionError, submit } from 'redux-form';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { connect, useDispatch } from 'react-redux';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { Dispatch, State } from '~/types';
 import type { ContactFormAdminForm_contactForm } from '~relay/ContactFormAdminForm_contactForm.graphql';
 
@@ -16,22 +16,47 @@ import UpdateContactFormMutation from '~/mutations/UpdateContactFormMutation';
 import AddContactFormMutation from '~/mutations/AddContactFormMutation';
 import { getTranslation, handleTranslationChange } from '~/services/Translation';
 
-type Props = {|
-  ...ReduxFormFormProps,
-  +contactForm: ?ContactFormAdminForm_contactForm,
-  +onClose?: () => void,
-  +intl: IntlShape,
-  +currentLanguage: string,
-|};
-
 type FormValues = {|
-  body: string,
-  email: string,
-  title: string,
-  confidentiality: string,
+  +body: ?string,
+  +email: ?string,
+  +title: ?string,
+  +confidentiality: string,
 |};
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+type ValidFormValues = {|
+  +body: string,
+  +email: string,
+  +title: string,
+  +confidentiality: string,
+|};
+type OwnProps = {|
+  +intl: IntlShape,
+  +onClose?: () => void,
+|};
+type RelayProps = {|
+  +contactForm: ?ContactFormAdminForm_contactForm,
+|};
+
+type BeforeConnectProps = {| ...OwnProps, ...RelayProps |};
+
+type StateProps = {|
+  +currentLanguage: string,
+  +initialValues: FormValues,
+  +form: string,
+  +dispatch: Dispatch,
+|};
+
+type AfterConnectProps = {|
+  ...BeforeConnectProps,
+  ...StateProps,
+|};
+
+type Props = {|
+  ...AfterConnectProps,
+  ...ReduxFormFormProps,
+|};
+
+const onSubmit = (values: ValidFormValues, dispatch: Dispatch, props: Props) => {
   const { contactForm, onClose } = props;
 
   const translationsData = handleTranslationChange(
@@ -115,104 +140,97 @@ const validate = ({ title, email, confidentiality }: FormValues) => {
 
 export const formName = 'ContactAdminForm';
 
-export class ContactFormAdminForm extends React.Component<Props> {
-  static defaultProps = {
-    contactForm: null,
-  };
+export const ContactFormAdminForm = ({
+  submitting,
+  contactForm,
+  form,
+  valid,
+  submitSucceeded,
+  submitFailed,
+  handleSubmit,
+  pristine,
+  invalid,
+}: Props): React.Node => {
+  const optional = (
+    <span className="excerpt">
+      {' '}
+      <FormattedMessage id="global.optional" />
+    </span>
+  );
 
-  render() {
-    const {
-      submitting,
-      contactForm,
-      form,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      handleSubmit,
-      dispatch,
-      pristine,
-      invalid,
-    } = this.props;
-    const optional = (
-      <span className="excerpt">
-        {' '}
-        <FormattedMessage id="global.optional" />
-      </span>
-    );
+  const dispatch = useDispatch<Dispatch>();
 
-    return (
-      <div id="create-reply-form">
-        {/** eslint-disable-next-line react/no-string-refs */}
-        <form id="reply-form" ref="form" onSubmit={handleSubmit}>
-          <Field
-            name="title"
-            type="text"
-            id={`${form}-contact-title`}
-            component={renderInput}
-            autoFocus
-            label={<FormattedMessage id="title" />}
-          />
-          <Field
-            id={`${form}-contact-body`}
-            type="admin-editor"
-            name="body"
-            component={renderInput}
-            label={
-              <span>
-                <FormattedMessage id="proposal.body" />
-                {optional}
-              </span>
-            }
-          />
-          <Field
-            name="email"
-            type="email"
-            id={`${form}-contact-email`}
-            help={<FormattedMessage id="global.email.format" />}
-            component={renderInput}
-            autoFocus
-            label={<FormattedMessage id="admin.mail.contact" />}
-          />
+  return (
+    <div id="create-reply-form">
+      <form id="reply-form" onSubmit={handleSubmit}>
+        <Field
+          name="title"
+          type="text"
+          id={`${form}-contact-title`}
+          component={renderInput}
+          autoFocus
+          label={<FormattedMessage id="title" />}
+        />
+        <Field
+          id={`${form}-contact-body`}
+          type="admin-editor"
+          name="body"
+          component={renderInput}
+          label={
+            <span>
+              <FormattedMessage id="proposal.body" />
+              {optional}
+            </span>
+          }
+        />
+        <Field
+          name="email"
+          type="email"
+          id={`${form}-contact-email`}
+          help={<FormattedMessage id="global.email.format" />}
+          component={renderInput}
+          autoFocus
+          label={<FormattedMessage id="admin.mail.contact" />}
+        />
 
-          <Field
-            id={`${form}-confidentiality`}
-            type="admin-editor"
-            name="confidentiality"
-            component={renderInput}
-            label={
-              <span>
-                <FormattedMessage id="confidentiality-field" />
-              </span>
-            }
-          />
+        <Field
+          id={`${form}-confidentiality`}
+          type="admin-editor"
+          name="confidentiality"
+          component={renderInput}
+          label={
+            <span>
+              <FormattedMessage id="confidentiality-field" />
+            </span>
+          }
+        />
 
-          <div className="btn-group">
-            <SubmitButton
-              id={`${form}-submit-create-contact`}
-              bsStyle="info"
-              disabled={submitting || pristine}
-              label={submitting ? 'global.loading' : 'validate'}
-              onSubmit={() => {
-                dispatch(
-                  submit(contactForm ? `Update${formName}-${contactForm.id}` : `Create${formName}`),
-                );
-              }}
-            />
-          </div>
-          <AlertForm
-            valid={valid}
-            invalid={invalid && !pristine}
-            submitSucceeded={submitSucceeded}
-            submitFailed={submitFailed}
-            submitting={submitting}
+        <div className="btn-group">
+          <SubmitButton
+            id={`${form}-submit-create-contact`}
+            bsStyle="info"
+            disabled={submitting || pristine}
+            label={submitting ? 'global.loading' : 'validate'}
+            onSubmit={() => {
+              dispatch(
+                submit(contactForm ? `Update${formName}-${contactForm.id}` : `Create${formName}`),
+              );
+            }}
           />
-        </form>
-      </div>
-    );
-  }
-}
+        </div>
+        <AlertForm
+          valid={valid}
+          invalid={invalid && !pristine}
+          submitSucceeded={submitSucceeded}
+          submitFailed={submitFailed}
+          submitting={submitting}
+        />
+      </form>
+    </div>
+  );
+};
 
-const mapStateToProps = (state: State, { contactForm, intl }: Props) => {
+const mapStateToProps = (state: State, { contactForm, intl }: BeforeConnectProps) => {
   const translation = getTranslation(
     contactForm ? contactForm.translations : [],
     state.language.currentLanguage,
@@ -233,15 +251,17 @@ const mapStateToProps = (state: State, { contactForm, intl }: Props) => {
   };
 };
 
-const form = reduxForm({
+const form: React.AbstractComponent<AfterConnectProps> = reduxForm({
   validate,
   onSubmit,
   enableReinitialize: true,
 })(ContactFormAdminForm);
 
-const container = connect(mapStateToProps)(form);
+const container = (connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
+  form,
+): React.AbstractComponent<BeforeConnectProps>);
 
-export default createFragmentContainer(injectIntl(container), {
+export default (createFragmentContainer(container, {
   contactForm: graphql`
     fragment ContactFormAdminForm_contactForm on ContactForm {
       id
@@ -254,4 +274,4 @@ export default createFragmentContainer(injectIntl(container), {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof container>);

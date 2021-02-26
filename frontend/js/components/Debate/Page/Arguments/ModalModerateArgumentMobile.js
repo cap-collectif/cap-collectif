@@ -181,7 +181,9 @@ export const ModalModerateArgumentMobile = ({ argument, dispatch }: Props) => {
   );
 };
 
-const ModalModerateArgumentMobileConnected = connect()(ModalModerateArgumentMobile);
+const ModalModerateArgumentMobileConnected = connect<any, any, _, _, _, _>()(
+  ModalModerateArgumentMobile,
+);
 
 export default createFragmentContainer(ModalModerateArgumentMobileConnected, {
   argument: graphql`

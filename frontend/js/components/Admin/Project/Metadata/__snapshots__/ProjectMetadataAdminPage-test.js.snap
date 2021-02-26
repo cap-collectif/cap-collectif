@@ -52,7 +52,6 @@ exports[`<ProjectMetadataAdminPage /> renders correctly 1`] = `
         form="formName"
         formName="form"
         handleSubmit={[MockFunction]}
-        initialValues={Object {}}
         initialize={[MockFunction]}
         initialized={true}
         intl={

@@ -124,4 +124,4 @@ const form = reduxForm({
   form: formName,
 })(QuestionnaireAdminCreateButton);
 
-export default connect()(form);
+export default connect<any, any, _, _, _, _>()(form);

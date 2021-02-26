@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import component from '../Form/Field';
 import UserPasswordComplexityUtils from './UserPasswordComplexityUtils';
-import type { FeatureToggles, State } from '../../types';
+import type { FeatureToggles, Dispatch, State } from '../../types';
 
-type Props = {|
-  +features: FeatureToggles,
+type OwnProps = {|
   +id: string,
   +formName: string,
   +name: string,
@@ -16,6 +15,12 @@ type Props = {|
   +autoComplete?: string,
   +label?: any,
   +labelClassName?: string,
+|};
+
+type Props = {|
+  ...OwnProps,
+  +features: FeatureToggles,
+  +dispatch: Dispatch,
 |};
 
 type UserPasswordFieldState = {|
@@ -101,4 +106,4 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default connect<Props, State, _>(mapStateToProps)(UserPasswordField);
+export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(UserPasswordField);

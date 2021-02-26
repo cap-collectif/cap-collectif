@@ -165,7 +165,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {
+export default createFragmentContainer(connect<any, any, _, _, _, _>(mapStateToProps)(UserAvatar), {
   user: graphql`
     fragment UserAvatar_user on User {
       url

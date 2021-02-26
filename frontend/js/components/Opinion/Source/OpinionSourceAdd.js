@@ -30,7 +30,7 @@ class OpinionSourceAdd extends React.Component<Props> {
   }
 }
 
-const container = connect()(OpinionSourceAdd);
+const container = connect<any, any, _, _, _, _>()(OpinionSourceAdd);
 export default createFragmentContainer(container, {
   sourceable: graphql`
     fragment OpinionSourceAdd_sourceable on Sourceable

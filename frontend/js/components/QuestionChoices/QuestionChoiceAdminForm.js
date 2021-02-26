@@ -215,4 +215,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-export default connect(mapStateToProps)(injectIntl(QuestionChoiceAdminForm));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(QuestionChoiceAdminForm));

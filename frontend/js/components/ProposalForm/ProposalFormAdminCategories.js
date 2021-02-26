@@ -186,7 +186,7 @@ const mapStateToProps = (state: GlobalState) => ({
   categories: selector(state, 'categories'),
   features: state.default.features,
 });
-const container = connect(mapStateToProps)(ProposalFormAdminCategories);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalFormAdminCategories);
 
 export default createFragmentContainer(injectIntl(container), {
   query: graphql`

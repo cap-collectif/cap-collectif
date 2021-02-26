@@ -155,7 +155,7 @@ const mapStateToProps = (state: State) => ({
   hasIllustrationDisplayed: state.default.features.display_pictures_in_event_list || false,
 });
 
-const Container = connect(mapStateToProps)(EventPreview);
+const Container = connect<any, any, _, _, _, _>(mapStateToProps)(EventPreview);
 
 export default createFragmentContainer(Container, {
   event: graphql`

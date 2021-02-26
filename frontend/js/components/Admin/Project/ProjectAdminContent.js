@@ -196,6 +196,8 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
     { fetchPolicy: 'store-or-network' },
   );
 
+  // TODO @Vince
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const dataPrefetchPage = {
     analysis: dataAnalysisPrefetch,
     contributions: dataContributionsPrefetch,
@@ -288,37 +290,40 @@ const mapStateToProps = (state: GlobalState) => ({
   title: formValueSelector('projectAdminForm')(state, 'title'),
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRouterWrapper), {
-  project: graphql`
-    fragment ProjectAdminContent_project on Project
-      @argumentDefinitions(projectId: { type: "ID!" }) {
-      _id
-      id
-      title
-      url
-      hasAnalysis
-      adminUrl
-      proposals {
-        totalCount
-      }
-      steps {
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProjectAdminRouterWrapper),
+  {
+    project: graphql`
+      fragment ProjectAdminContent_project on Project
+        @argumentDefinitions(projectId: { type: "ID!" }) {
+        _id
         id
-        __typename
-        slug
-      }
-      firstDebateStep {
-        id
-        slug
-      }
-      firstAnalysisStep {
+        title
+        url
+        hasAnalysis
+        adminUrl
         proposals {
           totalCount
         }
+        steps {
+          id
+          __typename
+          slug
+        }
+        firstDebateStep {
+          id
+          slug
+        }
+        firstAnalysisStep {
+          proposals {
+            totalCount
+          }
+        }
+        contributors {
+          totalCount
+        }
+        ...ProjectAdminForm_project
       }
-      contributors {
-        totalCount
-      }
-      ...ProjectAdminForm_project
-    }
-  `,
-});
+    `,
+  },
+);

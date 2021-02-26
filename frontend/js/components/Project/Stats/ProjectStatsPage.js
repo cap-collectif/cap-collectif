@@ -102,4 +102,4 @@ const mapStateToProps = (state: GlobalState, props: OwnProps) => {
   };
 };
 
-export default connect(mapStateToProps)(ProjectStatsPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProjectStatsPage);

@@ -99,4 +99,4 @@ const mapStateToProps = (state: GlobalState) => ({
   mapTokens: state.user.mapTokens,
 });
 
-export default connect(mapStateToProps)(ProposalFormCategoryPinPreview);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalFormCategoryPinPreview);

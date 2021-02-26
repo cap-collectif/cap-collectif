@@ -60,6 +60,6 @@ const mapStateToProps = (state: GlobalState) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
-const connector = connect(mapStateToProps);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps);
 
 export default connector(injectIntl(SelectUserRole));

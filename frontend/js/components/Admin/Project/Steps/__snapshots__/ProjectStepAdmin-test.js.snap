@@ -26,7 +26,13 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
           component={
             Object {
               "$$typeof": Symbol(react.forward_ref),
-              "__ComponentClass": [Function],
+              "__ComponentClass": Object {
+                "$$typeof": Symbol(react.memo),
+                "WrappedComponent": [Function],
+                "compare": null,
+                "displayName": "Connect(ProjectStepAdminList)",
+                "type": [Function],
+              },
               "displayName": "Relay(Connect(ProjectStepAdminList))",
               "render": [Function],
             }
@@ -187,7 +193,13 @@ exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
           component={
             Object {
               "$$typeof": Symbol(react.forward_ref),
-              "__ComponentClass": [Function],
+              "__ComponentClass": Object {
+                "$$typeof": Symbol(react.memo),
+                "WrappedComponent": [Function],
+                "compare": null,
+                "displayName": "Connect(ProjectStepAdminList)",
+                "type": [Function],
+              },
               "displayName": "Relay(Connect(ProjectStepAdminList))",
               "render": [Function],
             }

@@ -67,14 +67,17 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(VoteMinAlert), {
-  step: graphql`
-    fragment VoteMinAlert_step on ProposalStep {
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
-        totalCount
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(VoteMinAlert),
+  {
+    step: graphql`
+      fragment VoteMinAlert_step on ProposalStep {
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+          totalCount
+        }
+        votesMin
+        ...interpellationLabelHelper_step @relay(mask: false)
       }
-      votesMin
-      ...interpellationLabelHelper_step @relay(mask: false)
-    }
-  `,
-});
+    `,
+  },
+);

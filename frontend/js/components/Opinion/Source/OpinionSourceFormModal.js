@@ -107,7 +107,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-const container = connect(mapStateToProps)(OpinionSourceFormModal);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionSourceFormModal);
 
 export default createFragmentContainer(container, {
   source: graphql`

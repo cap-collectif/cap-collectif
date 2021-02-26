@@ -40,7 +40,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     pullRight={true}
     toggleElement={
       <span>
-        <Connect(UserAvatarDeprecated)
+        <UNDEFINED
           anchor={false}
           size={34}
           user={
@@ -163,7 +163,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     pullRight={true}
     toggleElement={
       <span>
-        <Connect(UserAvatarDeprecated)
+        <UNDEFINED
           anchor={false}
           size={34}
           user={

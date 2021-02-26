@@ -92,7 +92,9 @@ const mapStateToProps = (state: State) => ({
   pristine: isPristine(formName)(state),
 });
 
-export const container = connect(mapStateToProps)(injectIntl(EventCreateModal));
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(EventCreateModal),
+);
 
 export default createFragmentContainer(container, {
   query: graphql`

@@ -26,13 +26,17 @@ type DispatchProps = {|
   +onSubmit: () => typeof submit,
 |};
 
+type RelayProps = {|
+  query: UserInvitationPage_query,
+  colors: UserInvitationPage_colors,
+  logo: UserInvitationPage_logo,
+|};
+
 type Props = {|
   ...StateProps,
   ...DispatchProps,
   ...UserInvitationPageAppProps,
-  query: UserInvitationPage_query,
-  colors: UserInvitationPage_colors,
-  logo: UserInvitationPage_logo,
+  ...RelayProps,
 |};
 
 export const UserInvitationPage = ({
@@ -86,7 +90,7 @@ export const UserInvitationPage = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(form)(state),
   organizationName: state.default.parameters['global.site.organization_name'],
   defaultColor: {
@@ -99,7 +103,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: () => dispatch(submit(form)),
 });
 
-const UserInvitationPageConnected = connect<Props, State, _, StateProps, _, _>(
+const UserInvitationPageConnected = connect<
+  Props,
+  {| ...RelayProps, ...UserInvitationPageAppProps |},
+  _,
+  _,
+  _,
+  _,
+>(
   mapStateToProps,
   mapDispatchToProps,
 )(UserInvitationPage);

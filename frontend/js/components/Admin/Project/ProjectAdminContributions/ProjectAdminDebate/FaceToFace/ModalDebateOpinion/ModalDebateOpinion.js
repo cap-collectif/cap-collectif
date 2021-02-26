@@ -221,7 +221,9 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
   },
 });
 
-const ModalDebateOpinionConnected = connect(mapStateToProps)(injectIntl(form));
+const ModalDebateOpinionConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(form),
+);
 
 export default createFragmentContainer(ModalDebateOpinionConnected, {
   opinion: graphql`

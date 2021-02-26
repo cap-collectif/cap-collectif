@@ -66,7 +66,7 @@ const mapStateToProps = (state: GlobalState, { formName }: Props) => ({
   currentValues: formValueSelector(formName)(state, 'locales'),
 });
 
-const container = connect(mapStateToProps)(LocaleAdminSelect);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(LocaleAdminSelect);
 
 export default createFragmentContainer(container, {
   locales: graphql`

@@ -202,4 +202,4 @@ export const ProjectAdminSelectionStepForm = ({
   );
 };
 
-export default connect()(ProjectAdminSelectionStepForm);
+export default connect<any, any, _, _, _, _>()(ProjectAdminSelectionStepForm);

@@ -81,7 +81,9 @@ export function createRequirements(step: { type: string, requirements?: ?Array<R
   if (!initialRequirements.some((r: Requirement) => r.type === 'DATE_OF_BIRTH'))
     requirements.push(requirementFactory('DATE_OF_BIRTH', false, 'form.label_date_of_birth', null));
   if (!initialRequirements.some((r: Requirement) => r.type === 'POSTAL_ADDRESS'))
-    requirements.push(requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null));
+    requirements.push(
+      requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null),
+    );
   initialRequirements.forEach((requirement: Requirement) => {
     switch (requirement.type) {
       case 'FIRSTNAME':
@@ -219,4 +221,4 @@ const mapDispatchToProps = (dispatch: Dispatch, props: Props) => ({
   dispatch,
 });
 
-export default connect(null, mapDispatchToProps)(StepRequirementsList);
+export default connect<any, any, _, _, _, _>(null, mapDispatchToProps)(StepRequirementsList);

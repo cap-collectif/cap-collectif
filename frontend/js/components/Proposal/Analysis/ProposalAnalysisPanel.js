@@ -209,54 +209,57 @@ const mapStateToProps = (state: State) => ({
   user: { id: state.user.user?.id || '', displayName: state.user.user?.username || '' },
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProposalAnalysisPanel), {
-  proposal: graphql`
-    fragment ProposalAnalysisPanel_proposal on Proposal
-      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
-      id
-      ...ProposalFormSwitcher_proposal
-        @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
-      analysts {
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProposalAnalysisPanel),
+  {
+    proposal: graphql`
+      fragment ProposalAnalysisPanel_proposal on Proposal
+        @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
         id
-        displayName
-        ...ProposalAnalysisUserRow_user
-      }
-      decisionMaker {
-        id
-        displayName
-        ...ProposalAnalysisUserRow_user
-      }
-      supervisor {
-        id
-        displayName
-        ...ProposalAnalysisUserRow_user
-      }
-      analyses {
-        id
-        state
-        analyst {
+        ...ProposalFormSwitcher_proposal
+          @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
+        analysts {
           id
+          displayName
+          ...ProposalAnalysisUserRow_user
         }
-      }
-      assessment {
-        state
-        id
-        supervisor {
-          id
-        }
-      }
-      decision {
-        id
-        state
         decisionMaker {
           id
+          displayName
+          ...ProposalAnalysisUserRow_user
         }
-        isApproved
-      }
+        supervisor {
+          id
+          displayName
+          ...ProposalAnalysisUserRow_user
+        }
+        analyses {
+          id
+          state
+          analyst {
+            id
+          }
+        }
+        assessment {
+          state
+          id
+          supervisor {
+            id
+          }
+        }
+        decision {
+          id
+          state
+          decisionMaker {
+            id
+          }
+          isApproved
+        }
 
-      viewerCanDecide
-      viewerCanAnalyse
-      viewerCanEvaluate
-    }
-  `,
-});
+        viewerCanDecide
+        viewerCanAnalyse
+        viewerCanEvaluate
+      }
+    `,
+  },
+);

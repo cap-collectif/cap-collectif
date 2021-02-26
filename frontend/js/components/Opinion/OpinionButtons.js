@@ -86,7 +86,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-const container = connect(mapStateToProps)(OpinionButtons);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionButtons);
 
 export default createFragmentContainer(container, {
   opinion: graphql`

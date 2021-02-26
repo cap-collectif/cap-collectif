@@ -195,4 +195,4 @@ const mapStateToProps = (state: GlobalState) => ({
   currentLanguage: state.language.currentLanguage,
 });
 
-export default connect(mapStateToProps)(injectIntl(Editor));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(Editor));

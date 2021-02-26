@@ -93,7 +93,7 @@ class OpinionTabs extends React.Component<Props> {
     );
   };
 
-  renderFollowerBox = opinion =>
+  renderFollowerBox = (opinion: OpinionTabs_opinion) =>
     opinion.__typename === 'Opinion' ? (
       <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
     ) : opinion.__typename === 'Version' ? (
@@ -201,7 +201,7 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 
-const container = connect(mapStateToProps)(OpinionTabs);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionTabs);
 
 export default createFragmentContainer(container, {
   opinion: graphql`

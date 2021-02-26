@@ -32,7 +32,7 @@ export class CommentReportButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(CommentReportButton);
+const container = connect<any, any, _, _, _, _>()(CommentReportButton);
 export default createFragmentContainer(container, {
   comment: graphql`
     fragment CommentReportButton_comment on Comment

@@ -32,7 +32,23 @@ describe('<UserAdminAccount/>', () => {
       isSubscribedToProposalNews: true,
     };
     const wrapper = shallow(
-      <UserAdminAccount {...props1} isViewerOrAdmin viewer={viewer} user={userSubscribed} />,
+      <UserAdminAccount
+        {...props1}
+        isViewerOrAdmin
+        viewer={viewer}
+        user={userSubscribed}
+        initialValues={{
+          roles: {
+            labels: ['ROLE_USER'],
+            other: null,
+          },
+          vip: false,
+          enabled: true,
+          locked: true,
+          newsletter: true,
+          isSubscribedToProposalNews: true,
+        }}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -58,6 +74,17 @@ describe('<UserAdminAccount/>', () => {
         user={userNotSubscribed}
         viewer={viewer}
         isViewerOrAdmin={false}
+        initialValues={{
+          roles: {
+            labels: ['ROLE_USER'],
+            other: null,
+          },
+          vip: false,
+          enabled: false,
+          locked: false,
+          newsletter: false,
+          isSubscribedToProposalNews: false,
+        }}
       />,
     );
     expect(wrapper).toMatchSnapshot();

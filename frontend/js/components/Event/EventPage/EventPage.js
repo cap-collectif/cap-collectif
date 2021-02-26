@@ -63,4 +63,4 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 
-export default connect(mapStateToProps)(EventPage);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(EventPage);

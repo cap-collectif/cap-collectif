@@ -141,4 +141,4 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   };
 };
 
-export default connect(mapStateToProps)(QuestionsJumpAdminForm);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(QuestionsJumpAdminForm);

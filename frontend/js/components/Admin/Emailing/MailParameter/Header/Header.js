@@ -210,7 +210,7 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-const HeaderConnected = connect(mapStateToProps)(Header);
+const HeaderConnected = connect<any, any, _, _, _, _>(mapStateToProps)(Header);
 
 export default createFragmentContainer(HeaderConnected, {
   emailingCampaign: graphql`

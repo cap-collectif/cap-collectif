@@ -164,105 +164,109 @@ const onSubmit = (
     opinionCanBeFollowed,
     steps: steps // I cannot type step properly given the unability to create union Input type
       ? steps.map(({ url, ...s }: any) => {
-        delete s.isAnalysisStep;
+          delete s.isAnalysisStep;
 
-        return {
-          ...s,
-          isGridViewEnabled: undefined,
-          isListViewEnabled: undefined,
-          isMapViewEnabled: undefined,
-          timeless:
-            s.type === 'SelectionStep' ||
-            s.type === 'CollectStep' ||
-            s.type === 'QuestionnaireStep' ||
-            s.type === 'ConsultationStep' ||
-            s.type === 'DebateStep'
-              ? s.timeless
-              : undefined,
-          startAt:
-            s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
-          endAt: s.endAt && !s.timeless ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-          questionnaire: s.questionnaire?.value || undefined,
-          proposalForm: s.proposalForm?.value || undefined,
-          consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
-          footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
-          type: convertTypenameToConcreteStepType(s.type),
-          mainView: s.type === 'CollectStep' || s.type === 'SelectionStep' ? s.mainView : undefined,
-          requirements: s.requirements?.length ? s.requirements : [],
-          requirementsReason:
-            s.type === 'ConsultationStep' || s.type === 'CollectStep' || s.type === 'SelectionStep'
-              ? s.requirementsReason
-              : undefined,
-          proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,
-          statuses:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.statuses.filter(status => typeof status.name !== 'undefined')
-              : undefined,
-          defaultStatus:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.defaultStatus?.value || s.defaultStatus
-              : undefined,
-          private: s.type === 'CollectStep' ? s.private : undefined,
-          defaultSort:
-            s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.defaultSort : undefined,
-          votesHelpText:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.votable
-                ? s.votesHelpText
-                : null
-              : undefined,
-          voteType:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? !s.votable
-                ? 'DISABLED'
-                : s.budget && s.isBudgetEnabled
-                ? 'BUDGET'
-                : 'SIMPLE'
-              : undefined,
-          budget:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.isBudgetEnabled && s.votable
-                ? s.budget
-                : null
-              : undefined,
-          votesLimit:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.isLimitEnabled && s.votable && s.votesLimit
-                ? s.votesLimit
-                : null
-              : undefined,
-          votesMin:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.isLimitEnabled && s.votable && s.votesMin
-                ? s.votesMin
-                : null
-              : undefined,
-          voteThreshold:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.isTresholdEnabled && s.votable
-                ? s.voteThreshold
-                : null
-              : undefined,
-          votesRanking:
-            s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.votesRanking : undefined,
-          allowingProgressSteps: s.type === 'SelectionStep' ? s.allowingProgressSteps : undefined,
-          allowAuthorsToAddNews:
-            s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.allowAuthorsToAddNews
-              : undefined,
-          nbOpinionsToDisplay: s.type === 'RankingStep' ? s.nbOpinionsToDisplay : undefined,
-          nbVersionsToDisplay: s.type === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
-          votable: undefined,
-          isBudgetEnabled: undefined,
-          isTresholdEnabled: undefined,
-          isLimitEnabled: undefined,
-          // DebateStep
-          articles: s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
-          debate: undefined,
-          slug: undefined,
-          hasOpinionsFilled: undefined,
-        };
-      })
+          return {
+            ...s,
+            isGridViewEnabled: undefined,
+            isListViewEnabled: undefined,
+            isMapViewEnabled: undefined,
+            timeless:
+              s.type === 'SelectionStep' ||
+              s.type === 'CollectStep' ||
+              s.type === 'QuestionnaireStep' ||
+              s.type === 'ConsultationStep' ||
+              s.type === 'DebateStep'
+                ? s.timeless
+                : undefined,
+            startAt:
+              s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
+            endAt: s.endAt && !s.timeless ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
+            questionnaire: s.questionnaire?.value || undefined,
+            proposalForm: s.proposalForm?.value || undefined,
+            consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
+            footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
+            type: convertTypenameToConcreteStepType(s.type),
+            mainView:
+              s.type === 'CollectStep' || s.type === 'SelectionStep' ? s.mainView : undefined,
+            requirements: s.requirements?.length ? s.requirements : [],
+            requirementsReason:
+              s.type === 'ConsultationStep' ||
+              s.type === 'CollectStep' ||
+              s.type === 'SelectionStep'
+                ? s.requirementsReason
+                : undefined,
+            proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,
+            statuses:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.statuses.filter(status => typeof status.name !== 'undefined')
+                : undefined,
+            defaultStatus:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.defaultStatus?.value || s.defaultStatus
+                : undefined,
+            private: s.type === 'CollectStep' ? s.private : undefined,
+            defaultSort:
+              s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.defaultSort : undefined,
+            votesHelpText:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.votable
+                  ? s.votesHelpText
+                  : null
+                : undefined,
+            voteType:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? !s.votable
+                  ? 'DISABLED'
+                  : s.budget && s.isBudgetEnabled
+                  ? 'BUDGET'
+                  : 'SIMPLE'
+                : undefined,
+            budget:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.isBudgetEnabled && s.votable
+                  ? s.budget
+                  : null
+                : undefined,
+            votesLimit:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.isLimitEnabled && s.votable && s.votesLimit
+                  ? s.votesLimit
+                  : null
+                : undefined,
+            votesMin:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.isLimitEnabled && s.votable && s.votesMin
+                  ? s.votesMin
+                  : null
+                : undefined,
+            voteThreshold:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.isTresholdEnabled && s.votable
+                  ? s.voteThreshold
+                  : null
+                : undefined,
+            votesRanking:
+              s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.votesRanking : undefined,
+            allowingProgressSteps: s.type === 'SelectionStep' ? s.allowingProgressSteps : undefined,
+            allowAuthorsToAddNews:
+              s.type === 'SelectionStep' || s.type === 'CollectStep'
+                ? s.allowAuthorsToAddNews
+                : undefined,
+            nbOpinionsToDisplay: s.type === 'RankingStep' ? s.nbOpinionsToDisplay : undefined,
+            nbVersionsToDisplay: s.type === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
+            votable: undefined,
+            isBudgetEnabled: undefined,
+            isTresholdEnabled: undefined,
+            isLimitEnabled: undefined,
+            // DebateStep
+            articles:
+              s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
+            debate: undefined,
+            slug: undefined,
+            hasOpinionsFilled: undefined,
+          };
+        })
       : [],
     locale: locale ? locale.value : null,
   };
@@ -339,7 +343,10 @@ const onSubmit = (
   });
 };
 
-const validate = (props: FormValues) => {
+const validate = (values: FormValues) => {
+  if (Object.keys(values).length === 0) {
+    return {};
+  }
   const {
     Cover,
     title,
@@ -357,7 +364,7 @@ const validate = (props: FormValues) => {
     externalContributionsCount,
     steps,
     locale,
-  } = props;
+  } = values;
   return {
     ...validateSteps({ steps }),
     ...validateContent({
@@ -538,7 +545,7 @@ const form = reduxForm({
   enableReinitialize: true,
 })(ProjectAdminForm);
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(injectIntl(container), {
   project: graphql`

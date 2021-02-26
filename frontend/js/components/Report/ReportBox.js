@@ -76,4 +76,4 @@ const mapStateToProps = (state: State, props) => ({
   showModal: state.report.currentReportingModal === props.id,
 });
 
-export default connect(mapStateToProps)(ReportBox);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ReportBox);

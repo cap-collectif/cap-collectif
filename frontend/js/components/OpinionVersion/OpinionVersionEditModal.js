@@ -66,7 +66,7 @@ const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-const container = connect(mapStateToProps)(OpinionVersionEditModal);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionVersionEditModal);
 
 export default createFragmentContainer(container, {
   version: graphql`

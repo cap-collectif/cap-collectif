@@ -85,4 +85,4 @@ const mapStateToProps = (state: GlobalState) => ({
   articles: formValueSelector(stepFormName)(state, 'articles') || [],
 });
 
-export default connect(mapStateToProps)(StepArticle);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(StepArticle);

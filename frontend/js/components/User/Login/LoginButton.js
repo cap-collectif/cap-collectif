@@ -4,25 +4,28 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { baseUrl } from '~/config';
-import { showLoginModal, type ShowLoginModalAction } from '~/redux/modules/user';
-import type { State } from '~/types';
+import { showLoginModal } from '~/redux/modules/user';
+import type { State, Dispatch } from '~/types';
 import type { BsStyle } from '~/types/ReactBootstrap.type';
 import { loginWithOpenID as isLoginWithOpenID } from '~/redux/modules/default';
+
+type OwnProps = {|
+  bsStyle?: BsStyle,
+  className?: ?string,
+  style?: ?Object,
+|};
 
 type StateProps = {|
   loginWithMonCompteParis: boolean,
   loginWithOpenID: boolean,
   byPassLoginModal: boolean,
   disconnectOpenID: boolean,
-  openLoginModal: typeof showLoginModal,
+  openLoginModal: () => void,
 |};
 
 type Props = {|
+  ...OwnProps,
   ...StateProps,
-  // default props not working
-  bsStyle?: BsStyle,
-  className?: ?string,
-  style?: ?Object,
 |};
 
 export const LoginButton = (props: Props) => {
@@ -85,18 +88,20 @@ LoginButton.defaultProps = {
   style: {},
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   loginWithMonCompteParis: state.default.features.login_paris || false,
   loginWithOpenID: isLoginWithOpenID(state.default.ssoList),
   byPassLoginModal: state.default.features.sso_by_pass_auth || false,
   disconnectOpenID: state.default.features.disconnect_openid || false,
 });
 
-const mapDispatchToProps = dispatch => ({
-  openLoginModal: () => dispatch(showLoginModal()),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  openLoginModal: () => {
+    dispatch(showLoginModal());
+  },
 });
 
-export default connect<Props, State, ShowLoginModalAction, _, _>(
+export default connect<Props, OwnProps, _, _, _, _>(
   mapStateToProps,
   mapDispatchToProps,
 )(LoginButton);

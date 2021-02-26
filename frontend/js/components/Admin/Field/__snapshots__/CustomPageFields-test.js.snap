@@ -3,7 +3,6 @@
 exports[`<CustomPageFields /> renders correctly with disabled 1`] = `
 <FormSection
   className="custom-page-fields"
-  component="div"
   name="custom"
 >
   <Field
@@ -61,7 +60,6 @@ exports[`<CustomPageFields /> renders correctly with disabled 1`] = `
 exports[`<CustomPageFields /> renders correctly with no props 1`] = `
 <FormSection
   className="custom-page-fields"
-  component="div"
   name="custom"
 >
   <Field
@@ -107,7 +105,6 @@ exports[`<CustomPageFields /> renders correctly with no props 1`] = `
 exports[`<CustomPageFields /> renders correctly with picto 1`] = `
 <FormSection
   className="custom-page-fields"
-  component="div"
   name="custom"
 >
   <Field

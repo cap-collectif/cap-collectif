@@ -67,7 +67,7 @@ const mapStateToProps = (state: State, { argument }: RelayProps) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-const container = connect(mapStateToProps)(ArgumentEditModal);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ArgumentEditModal);
 export default createFragmentContainer(container, {
   argument: graphql`
     fragment ArgumentEditModal_argument on Argument {

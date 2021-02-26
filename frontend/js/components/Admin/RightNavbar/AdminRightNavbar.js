@@ -119,10 +119,13 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(AdminRightNavbar), {
-  query: graphql`
-    fragment AdminRightNavbar_query on Query {
-      ...UserBlockProfile_query
-    }
-  `,
-});
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(AdminRightNavbar),
+  {
+    query: graphql`
+      fragment AdminRightNavbar_query on Query {
+        ...UserBlockProfile_query
+      }
+    `,
+  },
+);

@@ -195,4 +195,4 @@ const mapStateToProps = (state: GlobalState) => {
   };
 };
 
-export default connect(mapStateToProps)(injectIntl(Navbar));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(Navbar));

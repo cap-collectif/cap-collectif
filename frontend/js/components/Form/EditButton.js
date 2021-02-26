@@ -69,4 +69,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(EditButton);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(EditButton);

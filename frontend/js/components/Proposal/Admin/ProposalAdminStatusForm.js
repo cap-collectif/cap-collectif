@@ -213,7 +213,7 @@ const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
   publicationStatus: formValueSelector(formName)(state, 'publicationStatus'),
 });
 
-const container = connect(mapStateToProps)(form);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   proposal: graphql`

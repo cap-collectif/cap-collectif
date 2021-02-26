@@ -57,7 +57,7 @@ export const EventPagePassedEventsPreview = ({ query, dispatch, formName }: Prop
     </EventPagePassedEventsPreviewContainer>
   );
 
-const container = connect()(EventPagePassedEventsPreview);
+const container = connect<any, any, _, _, _, _>()(EventPagePassedEventsPreview);
 
 export default createFragmentContainer(container, {
   query: graphql`

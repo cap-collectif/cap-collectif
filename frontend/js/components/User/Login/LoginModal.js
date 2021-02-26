@@ -70,5 +70,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps, mapDispatchToProps);
 export default connector(LoginModal);

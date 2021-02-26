@@ -27,12 +27,11 @@ type ReduxFormFormProps = {|
   destroy: () => void,
   dirty: boolean,
   dispatch: Function,
-  error: any,
+  error: ?string,
   form: string,
   handleSubmit: (eventOrSubmit: any) => void | Promise<*>,
   initialize: (data: Object) => void,
   initialized: boolean,
-  initialValues: Object,
   invalid: boolean,
   pristine: boolean,
   reset: () => void,
@@ -275,10 +274,11 @@ declare module 'redux-form' {
   declare function getValues(state: any): any;
   declare export class Field<P> extends React.Component<FieldProps<P>, void> {}
   declare export function reducer(state: any, action: Object): any;
-  declare export function reduxForm<P>(config: FormConfig):
-    (component: React.ComponentType<P>) => React.StatelessFunctionalComponent<$Diff<P, FormComponentProps>, void>
-
     
+  
+  declare export function reduxForm<P>(config: FormConfig):
+    (component: React.ComponentType<P>) => React.StatelessFunctionalComponent<$Diff<P, ReduxFormFormProps>, void>
+
     declare export var FormSection: ComponentType<{ name: string, className: string }>;
   
   

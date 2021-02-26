@@ -17,24 +17,27 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import type { Dispatch, GlobalState } from '../../types';
 import type { CommentForm_commentable } from '~relay/CommentForm_commentable.graphql';
 
-type RelayProps = {| commentable: CommentForm_commentable |};
+type RelayProps = {| +commentable: CommentForm_commentable |};
 
 type OwnProps = {|
-  isAnswer: boolean,
+  +isAnswer: boolean,
 |};
+
+type BeforeConnectProps = {| ...RelayProps, ...OwnProps |};
 
 type StateProps = {|
-  form: string,
-  comment: ?string,
-  user: ?Object,
+  +form: string,
+  +comment: ?string,
+  +user: ?Object,
+  +dispatch: Dispatch,
 |};
 
+type AfterConnectProps = {| ...RelayProps, ...OwnProps, ...StateProps |};
+
 type Props = {|
-  ...OwnProps,
-  ...RelayProps,
-  ...StateProps,
+  ...AfterConnectProps,
   ...ReduxFormFormProps,
-  intl: IntlShape,
+  +intl: IntlShape,
 |};
 
 type State = {|
@@ -262,15 +265,18 @@ export class CommentForm extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props) => ({
-  comment: formValueSelector(formName + props.commentable.id)(state, 'body'),
-  user: state.user.user,
-  form: formName + props.commentable.id,
-});
+const mapStateToProps = (state: GlobalState, props: BeforeConnectProps) => {
+  const comment: ?string = formValueSelector(formName + props.commentable.id)(state, 'body');
+  return {
+    comment,
+    user: state.user.user,
+    form: formName + props.commentable.id,
+  };
+};
 
 const container = injectIntl(CommentForm);
 
-const form = connect<Props, GlobalState, _>(mapStateToProps)(
+const form = connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

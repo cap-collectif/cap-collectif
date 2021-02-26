@@ -54,7 +54,7 @@ const OpinionSourceButtons = ({ source, sourceable, dispatch }: Props) => {
   );
 };
 
-const container = connect()(OpinionSourceButtons);
+const container = connect<any, any, _, _, _, _>()(OpinionSourceButtons);
 export default createFragmentContainer(container, {
   source: graphql`
     fragment OpinionSourceButtons_source on Source

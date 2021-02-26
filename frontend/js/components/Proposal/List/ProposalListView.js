@@ -171,7 +171,7 @@ const mapStateToProps = (state: GlobalState) => ({
   order: state.proposal.order,
 });
 
-const container = connect(mapStateToProps)(ProposalListView);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalListView);
 
 export default createRefetchContainer(
   container,

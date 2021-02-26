@@ -185,7 +185,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect<any, any, _, _, _, _>(mapStateToProps, mapDispatchToProps);
 
 export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   viewer: graphql`

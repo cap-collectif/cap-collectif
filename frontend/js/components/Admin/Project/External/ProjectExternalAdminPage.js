@@ -33,10 +33,13 @@ const mapStateToProps = state => ({
   features: state.default.features,
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(ProjectExternalAdminPage), {
-  project: graphql`
-    fragment ProjectExternalAdminPage_project on Project {
-      ...ProjectExternalAdminForm_project
-    }
-  `,
-});
+export default createFragmentContainer(
+  connect<any, any, _, _, _, _>(mapStateToProps)(ProjectExternalAdminPage),
+  {
+    project: graphql`
+      fragment ProjectExternalAdminPage_project on Project {
+        ...ProjectExternalAdminForm_project
+      }
+    `,
+  },
+);

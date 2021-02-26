@@ -61,7 +61,7 @@ const mapStateToProps = (state: State) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
-const ParticipantListConnected = connect(mapStateToProps)(ParticipantList);
+const ParticipantListConnected = connect<any, any, _, _, _, _>(mapStateToProps)(ParticipantList);
 
 export default createFragmentContainer(ParticipantListConnected, {
   event: graphql`

@@ -56,4 +56,6 @@ const mapStateToProps = (state: State) => ({
   pristine: isPristine(formName)(state),
 });
 
-export default connect(mapStateToProps)(injectIntl(GroupAdminModalImportUsers));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(
+  injectIntl(GroupAdminModalImportUsers),
+);

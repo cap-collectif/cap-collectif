@@ -43,4 +43,4 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
   }
 }
 
-export default connect()(injectIntl(GroupAdminModalAddUsers));
+export default connect<any, any, _, _, _, _>()(injectIntl(GroupAdminModalAddUsers));

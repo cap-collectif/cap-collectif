@@ -15,7 +15,9 @@ type Props = {|
   ...OpinionPageProps,
 |};
 
-const OpinionPage = lazy(() => import(/* webpackChunkName: "OpinionPage" */ '~/components/Opinion/OpinionPage'));
+const OpinionPage = lazy(() =>
+  import(/* webpackChunkName: "OpinionPage" */ '~/components/Opinion/OpinionPage'),
+);
 
 const NewOpinionPage = lazy(() => import('~/components/Opinion/New/NewOpinionPage'));
 
@@ -27,7 +29,7 @@ const OpinionPageApp = ({ hasNewConsultationPage, ...props }: Props) => {
   return hasNewConsultationPage ? <NewOpinionPage {...props} /> : <OpinionPage {...props} />;
 };
 
-const OpinionPageAppContainer = connect(mapStateToProps)(OpinionPageApp);
+const OpinionPageAppContainer = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionPageApp);
 
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>

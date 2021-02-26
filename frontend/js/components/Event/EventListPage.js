@@ -129,6 +129,6 @@ export const EventListPage = ({
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
-const container = connect(mapStateToProps)(EventListPage);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(EventListPage);
 
 export default withColors(container);

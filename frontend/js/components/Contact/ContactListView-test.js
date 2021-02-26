@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ContactsListView } from './ContactsListView';
-import { $fragmentRefs, $refType, relayRefetchMock } from '../../mocks';
+import { $fragmentRefs, $refType } from '../../mocks';
 
 describe('<ContactForm />', () => {
   const defaultContactForm = {
@@ -17,8 +17,6 @@ describe('<ContactForm />', () => {
   };
 
   const defaultProps = {
-    organizationName: 'test',
-    relay: relayRefetchMock,
     query: {
       ...defaultQuery,
     },

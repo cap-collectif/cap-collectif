@@ -177,7 +177,7 @@ const form = reduxForm({
   form: formName,
 })(ShieldAdminForm);
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   shieldAdminForm: graphql`

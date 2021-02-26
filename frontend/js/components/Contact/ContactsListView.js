@@ -6,9 +6,9 @@ import type { ContactsListView_query } from '~relay/ContactsListView_query.graph
 import ContactForm from './ContactForm';
 import CollapseGroup from '../CollapseGroup/CollapseGroup';
 
-type Props = {
-  query: ContactsListView_query,
-};
+type Props = {|
+  +query: ContactsListView_query,
+|};
 
 export class ContactsListView extends React.Component<Props> {
   render() {

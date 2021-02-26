@@ -100,7 +100,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   },
 });
 
-export default createFragmentContainer(connect(mapStateToProps)(form), {
+export default createFragmentContainer(connect<any, any, _, _, _, _>(mapStateToProps)(form), {
   query: graphql`
     fragment AdvancedSection_query on Query {
       registrationScript

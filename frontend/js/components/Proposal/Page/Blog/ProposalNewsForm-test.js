@@ -10,7 +10,12 @@ describe('<ProposalNewsForm />', () => {
     ...formMock,
     invalid: false,
     post: null,
-    initialValues: null,
+    initialValues: {
+      title: null,
+      abstract: null,
+      body: null,
+      media: null,
+    },
   };
 
   it('should render correctly', () => {

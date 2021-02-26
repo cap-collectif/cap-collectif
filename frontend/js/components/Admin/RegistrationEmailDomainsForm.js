@@ -55,7 +55,7 @@ const mapStateToProps = (state: State) => ({
   },
 });
 
-const connector = connect(mapStateToProps);
+const connector = connect<any, any,_,_,_,_>(mapStateToProps);
 export default connector(
   reduxForm({
     form: 'registration-email-domains',

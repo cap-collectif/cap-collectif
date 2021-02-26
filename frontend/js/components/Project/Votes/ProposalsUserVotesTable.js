@@ -342,7 +342,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
         .map(edge => ({ id: edge.node.id, public: !edge.node.anonymous })),
   },
 });
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   votes: graphql`

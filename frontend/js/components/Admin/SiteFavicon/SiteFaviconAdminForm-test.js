@@ -13,6 +13,9 @@ describe('<SiteFaviconAdminPage />', () => {
         id: 'siteFaviconId',
         media: null,
       },
+      initialValues: {
+        media: null,
+      },
       ...formMock,
     };
     const wrapper = shallow(<SiteFaviconAdminForm {...props} />);
@@ -24,6 +27,11 @@ describe('<SiteFaviconAdminPage />', () => {
       siteFavicon: {
         ...$refType,
         id: 'siteFaviconId',
+        url:
+          'https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',
+        name: 'Favicon',
+      },
+      initialValues: {
         media: {
           id: 'mediaId',
           url:

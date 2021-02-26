@@ -49,4 +49,4 @@ const mapStateToProps = (state: State) => ({
   isMobileListView: state.event.isMobileListView,
 });
 
-export default connect(mapStateToProps)(EventListToggleMobileViewBtn);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(EventListToggleMobileViewBtn);

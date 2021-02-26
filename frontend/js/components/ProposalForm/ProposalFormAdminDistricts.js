@@ -133,4 +133,4 @@ const mapStateToProps = (state: GlobalState) => ({
   districts: selector(state, 'districts'),
 });
 
-export default connect(mapStateToProps)(ProposalFormAdminDistricts);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalFormAdminDistricts);

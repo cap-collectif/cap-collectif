@@ -321,7 +321,7 @@ const mapStateToProps = (state: GlobalState) => ({
   currentStepId: state.project.currentProjectStepById,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProjectStepTabs));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProjectStepTabs));
 
 export default createFragmentContainer(container, {
   project: graphql`

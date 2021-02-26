@@ -35,7 +35,7 @@ class OpinionSourceReportButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(OpinionSourceReportButton);
+const container = connect<any, any, _, _, _, _>()(OpinionSourceReportButton);
 export default createFragmentContainer(container, {
   source: graphql`
     fragment OpinionSourceReportButton_source on Source

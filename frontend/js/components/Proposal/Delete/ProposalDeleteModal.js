@@ -83,7 +83,7 @@ const mapStateToProps = (state: State) => ({
   isDeleting: state.proposal.isDeleting,
   show: state.proposal.showDeleteModal,
 });
-const container = connect(mapStateToProps)(ProposalDeleteModal);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalDeleteModal);
 
 export default createFragmentContainer(container, {
   proposal: graphql`

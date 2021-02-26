@@ -188,4 +188,4 @@ const mapStateToProps = (state: GlobalState) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(SynthesisBox);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(SynthesisBox);

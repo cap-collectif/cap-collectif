@@ -222,7 +222,7 @@ const form = injectIntl(
   })(ProjectAdminFormDeprecated),
 );
 
-export const container = connect(mapStateToProps)(form);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   project: graphql`

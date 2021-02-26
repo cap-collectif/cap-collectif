@@ -62,7 +62,7 @@ const mapStateToProps = (state: State) => ({
   toggled: !!state.default.features.profiles,
 });
 
-export const container = connect(mapStateToProps)(UserLink);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(UserLink);
 
 export default createFragmentContainer(container, {
   user: graphql`
