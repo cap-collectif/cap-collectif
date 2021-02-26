@@ -89,7 +89,7 @@ class EventSearch extends Search
             $query = $this->getRandomSortedQuery($boolQuery);
         } else {
             $query = new Query($boolQuery);
-            $query->setSort($this->getSort($orderBy));
+            $query->setSort($this->getEventSort($orderBy));
         }
 
         $query
@@ -125,14 +125,14 @@ class EventSearch extends Search
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
-        $authorIds = array_map(function (Result $result) {
+        $authorIds = array_map(static function (Result $result) {
             return $result->getData()['author']['id'];
         }, $resultSet->getResults());
 
         return array_unique($authorIds);
     }
 
-    private function getSort(array $orderBy): array
+    private function getEventSort(array $orderBy): array
     {
         switch ($orderBy['field']) {
             case EventOrderField::END_AT:

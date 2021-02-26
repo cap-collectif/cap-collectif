@@ -335,6 +335,7 @@ mappings:
                 author: *Author
                 createdAt: { type: date }
                 published: { type: boolean }
+                draft: { type: boolean }
         questionnaire:
             properties:
                 id: { type: keyword }

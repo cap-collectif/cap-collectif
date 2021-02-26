@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -18,13 +19,16 @@ class ProjectVotesResolver implements ResolverInterface
 {
     protected PromiseAdapterInterface $adapter;
     private StepVotesCountResolver $stepVotesCountResolver;
+    private VoteSearch $voteSearch;
 
     public function __construct(
         StepVotesCountResolver $stepVotesCountResolver,
+        VoteSearch $voteSearch,
         PromiseAdapterInterface $adapter
     ) {
         $this->adapter = $adapter;
         $this->stepVotesCountResolver = $stepVotesCountResolver;
+        $this->voteSearch = $voteSearch;
     }
 
     public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
@@ -60,7 +64,7 @@ class ProjectVotesResolver implements ResolverInterface
     {
         $count = 0;
         if ($step instanceof ConsultationStep) {
-            $count = $step->getVotesCount();
+            $count = $this->voteSearch->searchConsultationStepVotes($step, 0)->getTotalCount();
         } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
             $promise = $this->stepVotesCountResolver
                 ->__invoke($step)

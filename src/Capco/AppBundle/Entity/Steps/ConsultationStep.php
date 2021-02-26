@@ -20,16 +20,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public const TYPE = 'consultation';
 
     /**
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    private $votesCount = 0;
-
-    /**
-     * @ORM\Column(name="contributors_count", type="integer")
-     */
-    private $contributorsCount = 0;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -39,46 +29,6 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     {
         parent::__construct();
         $this->consultations = new ArrayCollection();
-    }
-
-    /**
-     * @return int
-     */
-    public function getVotesCount()
-    {
-        return $this->votesCount;
-    }
-
-    /**
-     * @param int $votesCount
-     *
-     * @return $this
-     */
-    public function setVotesCount($votesCount)
-    {
-        $this->votesCount = $votesCount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getContributorsCount()
-    {
-        return $this->contributorsCount;
-    }
-
-    /**
-     * @param int $contributorsCount
-     *
-     * @return $this
-     */
-    public function setContributorsCount($contributorsCount)
-    {
-        $this->contributorsCount = $contributorsCount;
-
-        return $this;
     }
 
     /**

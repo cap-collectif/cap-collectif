@@ -87,7 +87,7 @@ class ProjectSearch extends Search
 
         $query = new Query($boolQuery);
 
-        $query->setSort($this->getSort($orderBy));
+        $query->setSort($this->getProjectSort($orderBy));
 
         $query
             ->setSource(['id'])
@@ -125,7 +125,7 @@ class ProjectSearch extends Search
         return $totalCount;
     }
 
-    private function getSort(array $orderBy): array
+    private function getProjectSort(array $orderBy): array
     {
         switch ($orderBy['field']) {
             case self::POPULAR:

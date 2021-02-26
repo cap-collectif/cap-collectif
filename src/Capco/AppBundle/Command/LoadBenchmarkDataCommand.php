@@ -16,29 +16,25 @@ use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
 
 class LoadBenchmarkDataCommand extends Command
 {
+    protected static $defaultName = 'capco:load-benchmark-data';
     private $manger;
     private $entityManger;
 
-    public function __construct(
-        string $name = null,
-        Manager $manager,
-        EntityManagerInterface $entityManager
-    ) {
+    public function __construct(Manager $manager, EntityManagerInterface $entityManager)
+    {
         $this->manger = $manager;
         $this->entityManger = $entityManager;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure()
     {
-        $this->setName('capco:load-benchmark-data')
-            ->setDescription('A bunch of fixtures to benchmark the application')
-            ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
-                'set the --force option to run this command'
-            );
+        $this->setDescription('A bunch of fixtures to benchmark the application')->addOption(
+            'force',
+            false,
+            InputOption::VALUE_NONE,
+            'set the --force option to run this command'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -56,7 +52,7 @@ class LoadBenchmarkDataCommand extends Command
             TimestampableListener::class,
             MediaEventSubscriber::class,
             DoctrineORMMapper::class,
-            UserListener::class
+            UserListener::class,
         ]);
 
         $this->loadFixtures($output);
@@ -83,7 +79,7 @@ class LoadBenchmarkDataCommand extends Command
         $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
         $input = new ArrayInput([
             'command' => 'hautelook_alice:doctrine:fixtures:load',
-            '--fixtures' => 'fixtures/Benchmark'
+            '--fixtures' => 'fixtures/Benchmark',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -93,7 +89,7 @@ class LoadBenchmarkDataCommand extends Command
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
-            '--force' => true
+            '--force' => true,
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -105,14 +101,14 @@ class LoadBenchmarkDataCommand extends Command
     {
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true]
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output
         );
 
         $this->runCommands(
             [
-                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true]
+                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output
         );
@@ -123,8 +119,7 @@ class LoadBenchmarkDataCommand extends Command
         $this->runCommands(
             [
                 'capco:compute:users-counters' => ['--force' => true],
-                'capco:compute:counters' => ['--force' => true],
-                'capco:compute:rankings' => []
+                'capco:compute:rankings' => [],
             ],
             $output
         );

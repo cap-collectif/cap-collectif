@@ -1,8 +1,8 @@
-InternalVoteConnection:
+PublicVoteConnection:
     type: relay-connection
     config:
         name: VoteConnection
-        nodeType: InternalVote
+        nodeType: PublicVote
         connectionFields:
             totalCount:
                 type: Int!

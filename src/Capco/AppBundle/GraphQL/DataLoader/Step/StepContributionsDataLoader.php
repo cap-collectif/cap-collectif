@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
 use Psr\Log\LoggerInterface;
 use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -33,6 +34,7 @@ class StepContributionsDataLoader extends BatchDataLoader
     protected $proposalCountResolver;
     protected $proposalCollectVoteRepository;
     protected $replyRepository;
+    private QuestionnaireRepliesResolver $questionnaireRepliesResolver;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -45,6 +47,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         ArgumentRepository $argumentRepository,
         OpinionVersionRepository $opinionVersionRepository,
         CollectStepProposalCountResolver $proposalCountResolver,
+        QuestionnaireRepliesResolver $questionnaireRepliesResolver,
         ReplyRepository $replyRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         bool $debug,
@@ -59,6 +62,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         $this->proposalCountResolver = $proposalCountResolver;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->replyRepository = $replyRepository;
+        $this->questionnaireRepliesResolver = $questionnaireRepliesResolver;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -121,7 +125,9 @@ class StepContributionsDataLoader extends BatchDataLoader
             //     $step
             // );
         } elseif ($step instanceof QuestionnaireStep) {
-            $totalCount += $step->getRepliesCount();
+            $totalCount += $this->questionnaireRepliesResolver
+                ->__invoke($step->getQuestionnaire(), new Argument(['first' => 0]))
+                ->getTotalCount();
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) {

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Search\UserSearch;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -20,15 +21,18 @@ class SelectionStepNormalizer implements
     private $router;
     private ObjectNormalizer $normalizer;
     private $votesCountDataLoader;
+    private UserSearch $userSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
-        StepVotesCountDataLoader $votesCountDataLoader
+        StepVotesCountDataLoader $votesCountDataLoader,
+        UserSearch $userSearch
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->votesCountDataLoader = $votesCountDataLoader;
+        $this->userSearch = $userSearch;
     }
 
     public function hasCacheableSupportsMethod(): bool
@@ -48,7 +52,9 @@ class SelectionStepNormalizer implements
 
             if ($object->isVotable()) {
                 $counters['votes'] = $this->votesCountDataLoader->resolve($object);
-                $counters['voters'] = $object->getContributorsCount();
+                $counters['voters'] = $this->userSearch
+                    ->getContributorByStep($object, 0)
+                    ->getTotalCount();
             }
 
             $remainingTime = $object->getRemainingTime();

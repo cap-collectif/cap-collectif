@@ -102,7 +102,7 @@ class ProposalSearch extends Search
         if ($order) {
             $query->setSort([
                 !$providedFilters['term']
-                    ? $this->getSort($order, $stepid ?? null)
+                    ? $this->getProposalSort($order, $stepid ?? null)
                     : ['_score' => ['order' => 'desc']],
                 ['id' => new \stdClass()],
             ]);
@@ -159,14 +159,21 @@ class ProposalSearch extends Search
                 $boolQuery->addFilter($term);
             }
         }
-        if (isset($providedFilters['restrictedViewerId']) && $providedFilters['restrictedViewerId']) {
+        if (
+            isset($providedFilters['restrictedViewerId']) &&
+            $providedFilters['restrictedViewerId']
+        ) {
             $terms = [
                 new Term([
-                    'proposalAnalysts.analyst.id' => ['value' => $providedFilters['restrictedViewerId']],
+                    'proposalAnalysts.analyst.id' => [
+                        'value' => $providedFilters['restrictedViewerId'],
+                    ],
                 ]),
                 new Term(['author.id' => ['value' => $providedFilters['restrictedViewerId']]]),
                 new Term(['supervisor.id' => ['value' => $providedFilters['restrictedViewerId']]]),
-                new Term(['decisionMaker.id' => ['value' => $providedFilters['restrictedViewerId']]]),
+                new Term([
+                    'decisionMaker.id' => ['value' => $providedFilters['restrictedViewerId']],
+                ]),
             ];
 
             $boolQuery->addMust((new Query\BoolQuery())->addShould($terms));
@@ -189,7 +196,10 @@ class ProposalSearch extends Search
             }
 
             if ($order) {
-                $query->setSort([$this->getSort($order, $stepid), ['id' => new \stdClass()]]);
+                $query->setSort([
+                    $this->getProposalSort($order, $stepid),
+                    ['id' => new \stdClass()],
+                ]);
             }
         }
 
@@ -324,7 +334,7 @@ class ProposalSearch extends Search
         $query = new Query($boolQuery);
 
         if ($order) {
-            $query->setSort([$this->getSort($order, null), ['id' => new \stdClass()]]);
+            $query->setSort([$this->getProposalSort($order, null), ['id' => new \stdClass()]]);
         }
 
         $this->applyCursor($query, $cursor);
@@ -453,7 +463,7 @@ class ProposalSearch extends Search
         );
     }
 
-    private function getSort(string $order, ?string $stepId): array
+    private function getProposalSort(string $order, ?string $stepId): array
     {
         switch ($order) {
             case 'old':

@@ -464,7 +464,6 @@ class ReinitCommand extends Command
         $this->runCommands(
             [
                 'capco:compute:users-counters' => ['--env' => $this->env, '--force' => true],
-                'capco:compute:counters' => ['--env' => $this->env, '--force' => true],
             ],
             $output
         );

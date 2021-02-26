@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepPointsVotesCountResolver;
+use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -23,20 +24,22 @@ class QueryVotesResolver implements ResolverInterface
     protected StepVotesCountResolver $stepVotesCountResolver;
     protected StepPointsVotesCountResolver $stepPointsVotesCountResolver;
     protected PromiseAdapterInterface $adapter;
+    private VoteSearch $voteSearch;
 
     public function __construct(
         AbstractVoteRepository $votesRepository,
         QueryProjectsResolver $projectsResolver,
         StepVotesCountResolver $stepVotesCountResolver,
         StepPointsVotesCountResolver $stepPointsVotesCountResolver,
+        VoteSearch $voteSearch,
         PromiseAdapterInterface $adapter
     ) {
         $this->votesRepository = $votesRepository;
         $this->projectsResolver = $projectsResolver;
         $this->stepVotesCountResolver = $stepVotesCountResolver;
-        $this->stepVotesCountResolver = $stepVotesCountResolver;
         $this->stepPointsVotesCountResolver = $stepPointsVotesCountResolver;
         $this->adapter = $adapter;
+        $this->voteSearch = $voteSearch;
     }
 
     public function __invoke(Argument $args): Connection
@@ -73,7 +76,7 @@ class QueryVotesResolver implements ResolverInterface
     {
         $count = 0;
         if ($step instanceof ConsultationStep) {
-            $count = $step->getVotesCount();
+            $count = $this->voteSearch->searchConsultationStepVotes($step, 0)->getTotalCount();
         } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
             $promise = $this->stepVotesCountResolver
                 ->__invoke($step, $onlyAccounted)

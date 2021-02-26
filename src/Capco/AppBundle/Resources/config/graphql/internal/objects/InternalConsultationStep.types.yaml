@@ -1,79 +1,82 @@
 InternalConsultationStep:
-  type: object
-  inherits:
-    - InternalPrimaryKey
-    - Node
-    - RequirementStep
-    - InternalStep
-  config:
-    interfaces:
-      - Node
-      - InternalStep
-      - RequirementStep
-    description: 'A consultation step'
-    name: ConsultationStep
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: ConsultationStep
-      contributors:
-        description: 'A list of contributor associated with the consultation step.'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
-        type: 'InternalUserConnection!'
-      votesCount:
-        type: 'Int'
-        description: 'The number of votes in this consultation.'
-        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
-      userHasVote:
-        type: 'Boolean!'
-        description: 'Whether the user has vote for a contribution in this consultation step.'
-        args:
-          login:
-            type: 'String!'
-            description: "The user's login (for example, an email)."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value, args])'
-      kind:
-        type: 'String!'
-        description: 'The type of step. Returns "consultation".'
-        resolve: 'consultation'
-      project:
-        type: 'InternalProject!'
-        description: 'The project'
-      contribuable:
-        type: 'Boolean!'
-        description: 'Contributions are allowed right now.'
-        resolve: '@=value.canContribute(getUser())'
-      consultations:
-        type: 'InternalConsultationConnection!'
-        description: 'Get the associated consultations of this consultation step'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
-        argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            description: Returns the first `n` elements from the list.
-            defaultValue: 100
-      consultation:
-        type: 'InternalConsultation'
-        description: "Search a consultation in this step by it's slug"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationBySlugResolver", [value, args])'
-        args:
-          slug:
-            type: 'String!'
-            description: Returns the consultation that match the given slug
-      contributions:
-        type: 'ContributionConnection'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'InternalContributionOrder'
-            description: 'Ordering options for contributions returned from the connection.'
-            defaultValue: { field: POSITION, direction: DESC }
-          includeTrashed:
-            type: 'Boolean'
-            description: 'The connection will return the trashed results too.'
-            defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args, getUser(), serv("request_stack")])'
+    type: object
+    inherits:
+        - InternalPrimaryKey
+        - Node
+        - RequirementStep
+        - InternalStep
+    config:
+        interfaces:
+            - Node
+            - InternalStep
+            - RequirementStep
+        description: 'A consultation step'
+        name: ConsultationStep
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ConsultationStep
+            contributors:
+                description: 'A list of contributor associated with the consultation step.'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+                type: 'InternalUserConnection!'
+            votesCount:
+                type: 'Int'
+                description: 'The number of votes in this consultation.'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2022-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepVotesResolver", [value, args]).totalCount'
+            votes:
+                type: 'InternalVoteConnection!'
+            userHasVote:
+                type: 'Boolean!'
+                description: 'Whether the user has vote for a contribution in this consultation step.'
+                args:
+                    login:
+                        type: 'String!'
+                        description: "The user's login (for example, an email)."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value, args])'
+            kind:
+                type: 'String!'
+                description: 'The type of step. Returns "consultation".'
+                resolve: 'consultation'
+            project:
+                type: 'InternalProject!'
+                description: 'The project'
+            contribuable:
+                type: 'Boolean!'
+                description: 'Contributions are allowed right now.'
+                resolve: '@=value.canContribute(getUser())'
+            consultations:
+                type: 'InternalConsultationConnection!'
+                description: 'Get the associated consultations of this consultation step'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    first:
+                        type: 'Int'
+                        description: Returns the first `n` elements from the list.
+                        defaultValue: 100
+            consultation:
+                type: 'InternalConsultation'
+                description: "Search a consultation in this step by it's slug"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationBySlugResolver", [value, args])'
+                args:
+                    slug:
+                        type: 'String!'
+                        description: Returns the consultation that match the given slug
+            contributions:
+                type: 'ContributionConnection'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    orderBy:
+                        type: 'InternalContributionOrder'
+                        description: 'Ordering options for contributions returned from the connection.'
+                        defaultValue: { field: POSITION, direction: DESC }
+                    includeTrashed:
+                        type: 'Boolean'
+                        description: 'The connection will return the trashed results too.'
+                        defaultValue: false
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args, getUser(), serv("request_stack")])'

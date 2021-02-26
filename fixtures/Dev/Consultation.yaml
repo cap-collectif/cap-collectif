@@ -4,26 +4,21 @@ Capco\AppBundle\Entity\Consultation:
         title: Toutes
         step: '@cstep3'
         position: 1
-        opinionCount: 0
     default:
         id: default
         title: Défaut
         step: '@cstep1'
         position: 1
-        opinionCount: 0
-        votesCount: 10
     simple:
         id: simple
         title: Simple
         step: '@cstep2'
         position: 1
-        opinionCount: 0
     causes:
         id: causes
         title: Causes
         step: '@cstep4'
         position: 1
-        opinionCount: 0
     PJL:
         id: PJL
         title: Projet de loi
@@ -31,12 +26,10 @@ Capco\AppBundle\Entity\Consultation:
         position: 1
         moderatingOnCreate: true
         moderatingOnUpdate: true
-        opinionCount: 0
     endless:
         id: endless
         title: 'Projet sans fin'
         step: '@cstep6'
-        opinionCount: 0
         position: 1
     firstConsultationMultiConsultationStep:
         id: firstConsultationMultiConsultationStep
@@ -53,19 +46,16 @@ Capco\AppBundle\Entity\Consultation:
         id: private
         title: 'Consultation in private project'
         step: '@cstep7'
-        opinionCount: 2
         position: 1
     customAccess:
         id: customAccess
         title: 'Consultation in project with custom access'
         step: '@cstep8'
-        opinionCount: 1
         position: 1
     consultationWithManyOpinions:
         id: consultationWithManyOpinions
         title: 'Consultation in project with many opinions'
         step: '@cstepOpinions'
-        opinionCount: 20
         position: 1
     consultationWithoutStep:
         id: consultationWithoutStep

@@ -1,66 +1,68 @@
 InternalConsultation:
-  type: object
-  inherits:
-    - InternalPrimaryKey
-    - PublicConsultation
-    - Node
-  config:
-    name: Consultation
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Consultation
-      description:
-        description: 'Get the associated description of the consultation'
-        type: 'HTML'
-      contributors:
-        type: 'InternalUserConnection!'
-      # Should stay an array ?
-      illustration:
-        description: 'Get the associated illustration of the consultation'
-        type: 'InternalMedia'
-      url:
-        type: 'URI!'
-        description: 'Get the url of the consultation'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", [value])'
-      sections:
-        type: '[Section]'
-        description: 'List of sections.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", [value, args])'
-      viewerOpinionsUnpublished:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'OpinionConnection'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
-        description: "The viewer's unpublished opinions."
-      contribuable:
-        type: 'Boolean!'
-        description: 'Contributions are allowed right now.'
-        resolve: '@=value.canContribute(getUser())'
-      opinionCountShownBySection:
-        type: 'Int'
-        description: 'The number of opinions shown by section.'
-      titleHelpText:
-        type: 'String'
-      descriptionHelpText:
-        type: 'String'
-        description: 'The help text description.'
-      step:
-        type: 'InternalConsultationStep!'
-        description: 'The associated consultation step in which belongs this consultation'
-      contributions:
-        type: 'ContributionConnection'
-        argsBuilder: 'Relay::Connection'
-        description: 'Retrieves all the contributions of the current consultation.'
-        args:
-          orderBy:
-            type: 'InternalContributionOrder'
-            description: 'Ordering options for contributions returned from the connection.'
-            defaultValue: { field: POSITION, direction: DESC }
-          includeTrashed:
-            type: 'Boolean'
-            description: 'The connection will return the trashed results too.'
-            defaultValue: false
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args, getUser(), serv("request_stack")])'
+    type: object
+    inherits:
+        - InternalPrimaryKey
+        - PublicConsultation
+        - Node
+    config:
+        name: Consultation
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Consultation
+            description:
+                description: 'Get the associated description of the consultation'
+                type: 'HTML'
+            contributors:
+                type: 'InternalUserConnection!'
+            # Should stay an array ?
+            illustration:
+                description: 'Get the associated illustration of the consultation'
+                type: 'InternalMedia'
+            url:
+                type: 'URI!'
+                description: 'Get the url of the consultation'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", [value])'
+            sections:
+                type: '[Section]'
+                description: 'List of sections.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", [value, args])'
+            viewerOpinionsUnpublished:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'OpinionConnection'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
+                description: "The viewer's unpublished opinions."
+            contribuable:
+                type: 'Boolean!'
+                description: 'Contributions are allowed right now.'
+                resolve: '@=value.canContribute(getUser())'
+            opinionCountShownBySection:
+                type: 'Int'
+                description: 'The number of opinions shown by section.'
+            titleHelpText:
+                type: 'String'
+            descriptionHelpText:
+                type: 'String'
+                description: 'The help text description.'
+            step:
+                type: 'InternalConsultationStep!'
+                description: 'The associated consultation step in which belongs this consultation'
+            contributions:
+                type: 'ContributionConnection'
+                argsBuilder: 'Relay::Connection'
+                description: 'Retrieves all the contributions of the current consultation.'
+                args:
+                    orderBy:
+                        type: 'InternalContributionOrder'
+                        description: 'Ordering options for contributions returned from the connection.'
+                        defaultValue: { field: POSITION, direction: DESC }
+                    includeTrashed:
+                        type: 'Boolean'
+                        description: 'The connection will return the trashed results too.'
+                        defaultValue: false
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args, getUser(), serv("request_stack")])'
+            votes:
+                type: 'InternalVoteConnection!'

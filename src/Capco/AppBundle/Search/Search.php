@@ -234,4 +234,73 @@ abstract class Search
         }
         unset($filters['trashed']);
     }
+
+    protected function getSort(string $order): array
+    {
+        switch ($order) {
+            case 'old':
+                $sortField = 'createdAt';
+                $sortOrder = 'asc';
+
+                break;
+            case 'last':
+                $sortField = 'createdAt';
+                $sortOrder = 'desc';
+
+                break;
+            case 'old-published':
+                $sortField = 'publishedAt';
+                $sortOrder = 'asc';
+
+                break;
+            case 'last-published':
+                $sortField = 'publishedAt';
+                $sortOrder = 'desc';
+
+                break;
+            case 'comments':
+                return [
+                    'commentsCount' => ['order' => 'desc'],
+                    'createdAt' => ['order' => 'desc'],
+                ];
+            case 'least-popular':
+                return [
+                    'votesCountNok' => ['order' => 'DESC'],
+                    'votesCountOk' => ['order' => 'ASC'],
+                    'createdAt' => ['order' => 'DESC'],
+                ];
+            case 'least-voted':
+                $sortField = 'votesCount';
+                $sortOrder = 'asc';
+
+                break;
+            case 'position':
+                $sortField = 'position';
+                $sortOrder = 'desc';
+
+                break;
+            case 'least-position':
+                $sortField = 'position';
+                $sortOrder = 'asc';
+
+                break;
+            case 'popular':
+                return [
+                    'votesCountOk' => ['order' => 'DESC'],
+                    'votesCountNok' => ['order' => 'ASC'],
+                    'createdAt' => ['order' => 'DESC'],
+                ];
+            case 'voted':
+                $sortField = 'votesCount';
+                $sortOrder = 'desc';
+
+                break;
+            default:
+                throw new \RuntimeException('Unknown order: ' . $order);
+
+                break;
+        }
+
+        return [$sortField => ['order' => $sortOrder]];
+    }
 }

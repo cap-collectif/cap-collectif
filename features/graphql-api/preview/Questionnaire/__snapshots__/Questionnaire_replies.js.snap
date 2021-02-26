@@ -44,10 +44,10 @@ Object {
     "replies": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MSI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+              "id": "VXNlcjp1c2VyMTUw",
               "responses": Object {
                 "edges": Array [],
               },
@@ -55,9 +55,9 @@ Object {
                 "name": "Citoyen",
               },
             },
-            "createdAt": "2016-03-01 00:00:00",
-            "id": "UmVwbHk6cmVwbHkx",
-            "publishedAt": "2016-03-01 00:00:00",
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
+            "publishedAt": "2020-01-12 00:00:00",
             "responses": Array [
               Object {
                 "question": Object {
@@ -65,7 +65,7 @@ Object {
                   "id": "UXVlc3Rpb246Mg==",
                   "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
                 },
-                "value": "Trop bien ! On va voir de supers athlètes à Paris !",
+                "value": "Incroyable ! Tout ces sportifs la wow.",
               },
               Object {
                 "question": Object {
@@ -73,7 +73,7 @@ Object {
                   "id": "UXVlc3Rpb246MTM=",
                   "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
                 },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Guild Wars 2\\"}",
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 2: Warhammer\\"}",
               },
               Object {
                 "question": Object {
@@ -140,11 +140,1619 @@ Object {
                 "value": null,
               },
             ],
-            "updatedAt": "2016-03-01 00:00:00",
+            "updatedAt": "2020-02-12 00:00:00",
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTAiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Enfin un peu de divertissement.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. J\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTEiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "L'autre jour j'étais à la boulangerie des sportifs, des sportifs ? Oui mec des sportifs. Jure des sportifs ? Oui oui des sportfs qui font du sport et du bruit et des phrases un peu longues pour le divertissement à Paris, cette phrase va plus vouloir rien dire mais c'est pas mal et ça régale.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. T\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTIiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Aller encore une autre phrase un peu longue parce que bon il faut bien tester tout les cas, comme le cas K , et le cas K des lapins c'est caca, c'est incroyable et fou non comme le lundi à Paris",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. M\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTMiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. B\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTQiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. G\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTUiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Et une petite dernière pour la route quand même juste pour vous demandez comment vous allez ? Et la je rajoute des petits mots clés tels que : sportifs, sport, JO, athlètes, beurre de cacahuète, bruit, divertissement, sirop d'érable, une bouteille d'huile et des raviolis mais je crois que je viens de lire ma liste de course en même temps.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. !\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MiI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Oui c'est vraiment trop cool.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Three Kingdoms \\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MyI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Ca va être fou ! Des sportifs de hauts niveaux.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War Saga: Troy\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "C'est génial ! On va se régaler.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Warhammer\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NSI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Il va y avoir du divertissement ! Et des sportifs !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Rome\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NiI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Incroyable ! Tout ces sportifs la wow.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Britannia\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NyI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Bof, non pas trop ça va faire du bruit !",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 3: Warhammer\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5OCI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Pas trop non plus, j'aime pas le sport.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Plus d'idées de jeux.\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5OSI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMTUw",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2020-01-12 00:00:00",
+            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
+            "publishedAt": "2020-01-12 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": "Le sport c'est pour les femmes.",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Un jeu stylé de fou.\\"}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2020-02-12 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUzMDM2NDAwMDAwO2k6MTtzOjEyOiJyZXBseVByaXZhdGUiO30=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "publishedAt": "2019-03-20 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU3MjE4ODAwMDAwO2k6MTtzOjY6InJlcGx5NiI7fQ==",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTE1",
+              "responses": Object {
+                "edges": Array [],
+              },
+              "userType": Object {
+                "name": "Citoyen",
+              },
+            },
+            "createdAt": "2016-03-06 00:00:00",
+            "id": "UmVwbHk6cmVwbHk2",
+            "publishedAt": "2016-03-06 00:00:00",
+            "responses": Array [
+              Object {
+                "question": Object {
+                  "__typename": "SimpleQuestion",
+                  "id": "UXVlc3Rpb246Mg==",
+                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTM=",
+                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MjA=",
+                  "title": "Comment trouvez-vous cette présentation ?",
+                },
+                "value": "{\\"labels\\":[\\"Incohérente\\"],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTQ=",
+                  "title": "Quel est ton athlète favori ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTU=",
+                  "title": "Nelson Monfort parle-t-il:",
+                },
+                "value": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTY=",
+                  "title": "Classez vos choix",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTg=",
+                  "title": "Choissez le meilleur logo",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246MTk=",
+                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAx",
+                  "title": "Nouvelle section 1",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "SectionQuestion",
+                  "id": "UXVlc3Rpb246MzAy",
+                  "title": "Nouvelle section 2",
+                },
+                "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MajorityQuestion",
+                  "id": "UXVlc3Rpb246MTM4NQ==",
+                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+                },
+                "value": null,
+              },
+            ],
+            "updatedAt": "2019-03-06 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjY6InJlcGx5MiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -260,115 +1868,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyNTE1",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2016-03-06 00:00:00",
-            "id": "UmVwbHk6cmVwbHk2",
-            "publishedAt": "2016-03-06 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MjA=",
-                  "title": "Comment trouvez-vous cette présentation ?",
-                },
-                "value": "{\\"labels\\":[\\"Incohérente\\"],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": "Pas assez fort (Mon sonotone est en panne)",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2019-03-06 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTAiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTA=",
@@ -468,7 +1968,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTEiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTE=",
@@ -568,7 +2068,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTIiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTI=",
@@ -668,7 +2168,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTMiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTM=",
@@ -768,7 +2268,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTQiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTQ=",
@@ -868,7 +2368,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTUiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTU=",
@@ -968,7 +2468,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTYiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTY=",
@@ -1068,7 +2568,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTciO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTc=",
@@ -1168,7 +2668,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTgiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTg=",
@@ -1268,7 +2768,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTkiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMTk=",
@@ -1368,7 +2868,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MjAiO30=",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMjA=",
@@ -1468,7 +2968,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5NiI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNg==",
@@ -1568,7 +3068,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5NyI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyNw==",
@@ -1668,7 +3168,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5OCI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyOA==",
@@ -1768,7 +3268,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5OSI7fQ==",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyOQ==",
@@ -1868,10 +3368,10 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+          "cursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
           "node": Object {
             "author": Object {
-              "id": "VXNlcjp1c2VyNQ==",
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
               "responses": Object {
                 "edges": Array [],
               },
@@ -1879,9 +3379,9 @@ Object {
                 "name": "Citoyen",
               },
             },
-            "createdAt": "2019-03-20 00:00:00",
-            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
-            "publishedAt": "2019-03-20 00:00:00",
+            "createdAt": "2016-03-01 00:00:00",
+            "id": "UmVwbHk6cmVwbHkx",
+            "publishedAt": "2016-03-01 00:00:00",
             "responses": Array [
               Object {
                 "question": Object {
@@ -1889,7 +3389,7 @@ Object {
                   "id": "UXVlc3Rpb246Mg==",
                   "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
                 },
-                "value": null,
+                "value": "Trop bien ! On va voir de supers athlètes à Paris !",
               },
               Object {
                 "question": Object {
@@ -1897,7 +3397,7 @@ Object {
                   "id": "UXVlc3Rpb246MTM=",
                   "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
                 },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
+                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Guild Wars 2\\"}",
               },
               Object {
                 "question": Object {
@@ -1964,1512 +3464,12 @@ Object {
                 "value": null,
               },
             ],
-            "updatedAt": "2019-03-20 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Incroyable ! Tout ces sportifs la wow.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 2: Warhammer\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Enfin un peu de divertissement.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. J\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "L'autre jour j'étais à la boulangerie des sportifs, des sportifs ? Oui mec des sportifs. Jure des sportifs ? Oui oui des sportfs qui font du sport et du bruit et des phrases un peu longues pour le divertissement à Paris, cette phrase va plus vouloir rien dire mais c'est pas mal et ça régale.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. T\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Aller encore une autre phrase un peu longue parce que bon il faut bien tester tout les cas, comme le cas K , et le cas K des lapins c'est caca, c'est incroyable et fou non comme le lundi à Paris",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. M\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. B\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. G\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Et une petite dernière pour la route quand même juste pour vous demandez comment vous allez ? Et la je rajoute des petits mots clés tels que : sportifs, sport, JO, athlètes, beurre de cacahuète, bruit, divertissement, sirop d'érable, une bouteille d'huile et des raviolis mais je crois que je viens de lire ma liste de course en même temps.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. !\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Oui c'est vraiment trop cool.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Three Kingdoms \\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI3",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Ca va être fou ! Des sportifs de hauts niveaux.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War Saga: Troy\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI4",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "C'est génial ! On va se régaler.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Warhammer\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI5",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Il va y avoir du divertissement ! Et des sportifs !",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Rome\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMw",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Incroyable ! Tout ces sportifs la wow.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Britannia\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMx",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Bof, non pas trop ça va faire du bruit !",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 3: Warhammer\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMy",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Pas trop non plus, j'aime pas le sport.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Plus d'idées de jeux.\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMz",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyMTUw",
-              "responses": Object {
-                "edges": Array [],
-              },
-              "userType": Object {
-                "name": "Citoyen",
-              },
-            },
-            "createdAt": "2020-01-12 00:00:00",
-            "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
-            "publishedAt": "2020-01-12 00:00:00",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "__typename": "SimpleQuestion",
-                  "id": "UXVlc3Rpb246Mg==",
-                  "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-                },
-                "value": "Le sport c'est pour les femmes.",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTM=",
-                  "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places ?",
-                },
-                "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Un jeu stylé de fou.\\"}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTQ=",
-                  "title": "Quel est ton athlète favori ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTU=",
-                  "title": "Nelson Monfort parle-t-il:",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTY=",
-                  "title": "Classez vos choix",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTg=",
-                  "title": "Choissez le meilleur logo",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MultipleChoiceQuestion",
-                  "id": "UXVlc3Rpb246MTk=",
-                  "title": "Est-ce que Martoni a encore une balle dans son chargeur ?",
-                },
-                "value": "{\\"labels\\":[],\\"other\\":null}",
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAx",
-                  "title": "Nouvelle section 1",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "SectionQuestion",
-                  "id": "UXVlc3Rpb246MzAy",
-                  "title": "Nouvelle section 2",
-                },
-                "value": null,
-              },
-              Object {
-                "question": Object {
-                  "__typename": "MajorityQuestion",
-                  "id": "UXVlc3Rpb246MTM4NQ==",
-                  "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
-                },
-                "value": null,
-              },
-            ],
-            "updatedAt": "2020-02-12 00:00:00",
+            "updatedAt": "2016-03-01 00:00:00",
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjMz",
+        "endCursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
         "hasNextPage": false,
       },
       "totalCount": 34,
@@ -3484,227 +3484,7 @@ Object {
     "replies": Object {
       "edges": Array [
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-          "node": Object {
-            "createdAt": "2016-03-01 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHkx",
-            "published": true,
-            "publishedAt": "2016-03-01 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHky",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "createdAt": "2016-03-05 00:00:00",
-            "draft": true,
-            "id": "UmVwbHk6cmVwbHk1",
-            "published": true,
-            "publishedAt": "2016-03-05 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-          "node": Object {
-            "createdAt": "2016-03-06 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHk2",
-            "published": true,
-            "publishedAt": "2016-03-06 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
-            "createdAt": "2016-03-07 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHk3",
-            "published": false,
-            "publishedAt": null,
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-          "node": Object {
-            "createdAt": "2016-03-05 00:00:00",
-            "draft": true,
-            "id": "UmVwbHk6cmVwbHk5",
-            "published": true,
-            "publishedAt": "2016-03-22 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
-          "node": Object {
-            "createdAt": "2016-03-02 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
-            "published": true,
-            "publishedAt": "2016-03-02 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
-          "node": Object {
-            "createdAt": "2019-03-20 00:00:00",
-            "draft": false,
-            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
-            "published": true,
-            "publishedAt": "2019-03-20 00:00:00",
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MSI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3714,7 +3494,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTAiO30=",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3724,7 +3504,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTEiO30=",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3734,7 +3514,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTIiO30=",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3744,7 +3524,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTMiO30=",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3754,7 +3534,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI3",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTQiO30=",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3764,7 +3544,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI4",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE1OiJ0YWdDbG91ZFJlcGx5MTUiO30=",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3774,7 +3554,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI5",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MiI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3784,7 +3564,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMw",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5MyI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3794,7 +3574,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMx",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NCI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3804,7 +3584,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMy",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NSI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3814,7 +3594,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjMz",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NiI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3824,7 +3604,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM0",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5NyI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3834,7 +3614,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM1",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5OCI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3844,7 +3624,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM2",
+          "cursor": "YToyOntpOjA7aToxNTc4NzgzNjAwMDAwO2k6MTtzOjE0OiJ0YWdDbG91ZFJlcGx5OSI7fQ==",
           "node": Object {
             "createdAt": "2020-01-12 00:00:00",
             "draft": false,
@@ -3853,9 +3633,229 @@ Object {
             "publishedAt": "2020-01-12 00:00:00",
           },
         },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUzMDM2NDAwMDAwO2k6MTtzOjEyOiJyZXBseVByaXZhdGUiO30=",
+          "node": Object {
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "published": true,
+            "publishedAt": "2019-03-20 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU3MzA1MjAwMDAwO2k6MTtzOjY6InJlcGx5NyI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-07 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk3",
+            "published": false,
+            "publishedAt": null,
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU3MjE4ODAwMDAwO2k6MTtzOjY6InJlcGx5NiI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-06 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk2",
+            "published": true,
+            "publishedAt": "2016-03-06 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU3MTMyNDAwMDAwO2k6MTtzOjY6InJlcGx5NSI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk1",
+            "published": true,
+            "publishedAt": "2016-03-05 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU3MTMyNDAwMDAwO2k6MTtzOjY6InJlcGx5OSI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk5",
+            "published": true,
+            "publishedAt": "2016-03-22 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjY6InJlcGx5MiI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHky",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTAiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTEiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTIiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTMiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTQiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTUiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTYiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTciO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTgiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MTkiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE1OiJyZXBseU1ham9yaXR5MjAiO30=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5NiI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5NyI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5OCI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2ODczMjAwMDAwO2k6MTtzOjE0OiJyZXBseU1ham9yaXR5OSI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
+          "node": Object {
+            "createdAt": "2016-03-01 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHkx",
+            "published": true,
+            "publishedAt": "2016-03-01 00:00:00",
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjM2",
+        "endCursor": "YToyOntpOjA7aToxNDU2Nzg2ODAwMDAwO2k6MTtzOjY6InJlcGx5MSI7fQ==",
         "hasNextPage": false,
       },
       "totalCount": 37,

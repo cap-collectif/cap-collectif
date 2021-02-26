@@ -2,37 +2,45 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Search\ReplySearch;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Psr\Log\LoggerInterface;
 
 class QuestionnaireRepliesResolver implements ResolverInterface
 {
-    private $replyRepository;
+    private ReplySearch $replySearch;
+    private LoggerInterface $logger;
 
-    public function __construct(ReplyRepository $replyRepository)
+    public function __construct(ReplySearch $replySearch, LoggerInterface $logger)
     {
-        $this->replyRepository = $replyRepository;
+        $this->replySearch = $replySearch;
+        $this->logger = $logger;
     }
 
     public function __invoke(
         Questionnaire $questionnaire,
         Arg $args,
         ?User $viewer = null
-    ): Connection {
+    ): ConnectionInterface {
         $includeUnpublished = false;
         $includeDraft = false;
+        $filters = [
+            'published' => !$includeUnpublished,
+            'draft' => $includeDraft,
+        ];
 
         if (
             $viewer &&
             $args->offsetExists('includeUnpublished') &&
             true === $args->offsetGet('includeUnpublished')
         ) {
-            $includeUnpublished = true;
+            unset($filters['published']);
         }
 
         if (
@@ -40,55 +48,31 @@ class QuestionnaireRepliesResolver implements ResolverInterface
             $args->offsetExists('includeDraft') &&
             true === $args->offsetGet('includeDraft')
         ) {
-            $includeDraft = true;
+            unset($filters['draft']);
         }
 
-        $totalCount = 0;
-
-        // This is for performance, but maybe no more useful…
-        if ($questionnaire->getStep()) {
-            $totalCount = $questionnaire->getStep()->getRepliesCount();
-        }
-
-        if ($includeUnpublished || $includeDraft) {
-            $totalCount = $this->calculateTotalCount(
-                $questionnaire,
-                $includeUnpublished,
-                $includeDraft
-            );
-        }
-
-        $paginator = new Paginator(function (int $offset, int $limit) use (
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $questionnaire,
-            $includeUnpublished,
-            $includeDraft
+            $filters
         ) {
-            return $this->replyRepository->findByQuestionnaire(
-                $questionnaire,
-                $offset,
-                $limit,
-                $includeUnpublished,
-                $includeDraft
-            );
+            if (!$questionnaire->getStep()) {
+                return new ElasticsearchPaginatedResult([], [], 0);
+            }
+
+            try {
+                return $this->replySearch->getRepliesByStep(
+                    $questionnaire->getStep()->getId(),
+                    $filters,
+                    $limit,
+                    $cursor
+                );
+            } catch (\RuntimeException $exception) {
+                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
+                throw new \RuntimeException('An error occured while retrieving replies.');
+            }
         });
 
-        return $paginator->auto($args, $totalCount);
-    }
-
-    public function calculatePublishedTotalCount(Questionnaire $questionnaire): int
-    {
-        return $this->replyRepository->countPublishedForQuestionnaire($questionnaire);
-    }
-
-    public function calculateTotalCount(
-        Questionnaire $questionnaire,
-        bool $includeUnpublished,
-        bool $includeDraft
-    ): int {
-        return $this->replyRepository->countForQuestionnaire(
-            $questionnaire,
-            $includeUnpublished,
-            $includeDraft
-        );
+        return $paginator->auto($args);
     }
 }

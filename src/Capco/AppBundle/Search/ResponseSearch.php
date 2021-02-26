@@ -35,9 +35,18 @@ class ResponseSearch extends Search
     ): int {
         $boolQuery = $this->getNoEmptyResultQueryBuilder($question, $withNotConfirmedUser);
         $query = new Query($boolQuery);
+        $query
+            ->setSource(['id'])
+            ->setSize(0)
+            ->setTrackTotalHits(true);
         $this->addObjectTypeFilter($query, $this->type);
+        $agg = new Terms('participants');
+        $agg->setField('reply.author.id');
+        $query->addAggregation($agg);
+        $resultSet = $this->index->search($query);
+        $aggregation = $resultSet->getAggregation('participants');
 
-        return $this->index->count($query);
+        return \count($aggregation['buckets']) + $aggregation['sum_other_doc_count'];
     }
 
     public function getResponsesByQuestion(

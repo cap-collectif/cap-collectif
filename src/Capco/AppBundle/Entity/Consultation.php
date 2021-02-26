@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Consultation implements IndexableInterface
 {
-    use UuidTrait;
     use MetaDescriptionCustomCodeTrait;
+    use UuidTrait;
 
     /**
      * @var string
@@ -108,56 +108,6 @@ class Consultation implements IndexableInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $opinions;
-
-    /**
-     * @ORM\Column(name="opinion_count", type="integer")
-     */
-    private $opinionCount = 0;
-
-    /**
-     * @ORM\Column(name="trashed_opinion_count", type="integer")
-     */
-    private $trashedOpinionCount = 0;
-
-    /**
-     * @ORM\Column(name="opinion_versions_count", type="integer")
-     */
-    private $opinionVersionsCount = 0;
-
-    /**
-     * @ORM\Column(name="trashed_opinion_versions_count", type="integer")
-     */
-    private $trashedOpinionVersionsCount = 0;
-
-    /**
-     * @ORM\Column(name="argument_count", type="integer")
-     */
-    private $argumentCount = 0;
-
-    /**
-     * @ORM\Column(name="trashed_argument_count", type="integer")
-     */
-    private $trashedArgumentCount = 0;
-
-    /**
-     * @ORM\Column(name="sources_count", type="integer")
-     */
-    private $sourcesCount = 0;
-
-    /**
-     * @ORM\Column(name="trashed_sources_count", type="integer")
-     */
-    private $trashedSourceCount = 0;
-
-    /**
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    private $votesCount = 0;
-
-    /**
-     * @ORM\Column(name="contributors_count", type="integer")
-     */
-    private $contributorsCount = 0;
 
     /**
      * @Gedmo\SortablePosition
@@ -276,11 +226,6 @@ class Consultation implements IndexableInterface
         return $this->getStep() ? $this->getStep()->canContribute($user) : false;
     }
 
-    public function getVotesCount(): int
-    {
-        return $this->votesCount;
-    }
-
     public function clearStep(): self
     {
         $this->step = null;
@@ -293,7 +238,7 @@ class Consultation implements IndexableInterface
         return $this->step;
     }
 
-    public function setStep(ConsultationStep $step = null): self
+    public function setStep(?ConsultationStep $step = null): self
     {
         $this->step = $step;
 
@@ -440,133 +385,6 @@ class Consultation implements IndexableInterface
         }
 
         return $roots;
-    }
-
-    public function getOpinionCount(): int
-    {
-        return $this->opinionCount;
-    }
-
-    public function setOpinionCount(int $opinionCount): self
-    {
-        $this->opinionCount = $opinionCount;
-
-        return $this;
-    }
-
-    public function getTrashedOpinionCount(): int
-    {
-        return $this->trashedOpinionCount;
-    }
-
-    public function setTrashedOpinionCount(int $trashedOpinionCount): self
-    {
-        $this->trashedOpinionCount = $trashedOpinionCount;
-
-        return $this;
-    }
-
-    public function getOpinionVersionsCount(): int
-    {
-        return $this->opinionVersionsCount;
-    }
-
-    public function setOpinionVersionsCount(int $opinionVersionsCount): self
-    {
-        $this->opinionVersionsCount = $opinionVersionsCount;
-
-        return $this;
-    }
-
-    public function getTrashedOpinionVersionsCount(): int
-    {
-        return $this->trashedOpinionVersionsCount;
-    }
-
-    public function setTrashedOpinionVersionsCount(int $trashedOpinionVersionsCount): self
-    {
-        $this->trashedOpinionVersionsCount = $trashedOpinionVersionsCount;
-
-        return $this;
-    }
-
-    public function getArgumentCount(): int
-    {
-        return $this->argumentCount;
-    }
-
-    public function setArgumentCount(int $argumentCount): self
-    {
-        $this->argumentCount = $argumentCount;
-
-        return $this;
-    }
-
-    public function getTrashedArgumentCount(): int
-    {
-        return $this->trashedArgumentCount;
-    }
-
-    public function setTrashedArgumentCount(int $trashedArgumentCount): self
-    {
-        $this->trashedArgumentCount = $trashedArgumentCount;
-
-        return $this;
-    }
-
-    public function getSourcesCount(): int
-    {
-        return $this->sourcesCount;
-    }
-
-    public function setSourcesCount(int $sourcesCount): self
-    {
-        $this->sourcesCount = $sourcesCount;
-
-        return $this;
-    }
-
-    public function getTrashedSourceCount(): int
-    {
-        return $this->trashedSourceCount;
-    }
-
-    public function setTrashedSourceCount(int $trashedSourceCount): self
-    {
-        $this->trashedSourceCount = $trashedSourceCount;
-
-        return $this;
-    }
-
-    public function setVotesCount(int $votesCount): self
-    {
-        $this->votesCount = $votesCount;
-
-        return $this;
-    }
-
-    public function getContributorsCount(): int
-    {
-        return $this->contributorsCount;
-    }
-
-    public function setContributorsCount(int $contributorsCount): self
-    {
-        $this->contributorsCount = $contributorsCount;
-
-        return $this;
-    }
-
-    public function getContributionsCount(): int
-    {
-        return $this->opinionCount +
-            $this->trashedOpinionCount +
-            $this->argumentCount +
-            $this->trashedArgumentCount +
-            $this->opinionVersionsCount +
-            $this->trashedOpinionVersionsCount +
-            $this->sourcesCount +
-            $this->trashedSourceCount;
     }
 
     public function isIndexable(): bool

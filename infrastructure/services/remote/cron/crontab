@@ -7,14 +7,8 @@
 # Recalculate counters that have changed at every 2nd minute.
 */2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --env=prod
 
-# Recalculate counters that have changed at every 2nd minute from 1 through 59.
-1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
-
 # Recalculate users counters from scratch at 04:00.
 0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
-
-# Recalculate counters from scratch at 05:00.
-0 5 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod
 
 # Generate exports at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod --quiet

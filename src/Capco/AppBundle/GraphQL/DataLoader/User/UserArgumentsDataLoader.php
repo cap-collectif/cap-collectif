@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
+use Capco\AppBundle\Search\ArgumentSearch;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
@@ -14,7 +14,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 
 class UserArgumentsDataLoader extends BatchDataLoader
 {
-    private $contributionSearch;
+    private ArgumentSearch $argumentSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -25,11 +25,10 @@ class UserArgumentsDataLoader extends BatchDataLoader
         bool $debug,
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
-        ContributionSearch $contributionSearch,
+        ArgumentSearch $argumentSearch,
         bool $enableCache
     ) {
-        $this->contributionSearch = $contributionSearch;
-
+        $this->argumentSearch = $argumentSearch;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -64,10 +63,7 @@ class UserArgumentsDataLoader extends BatchDataLoader
             );
         }
         $viewer = $keys[0]['viewer'];
-        $argumentPaginatedResults = $this->contributionSearch->getArgumentsByUserIds(
-            $viewer,
-            $keys
-        );
+        $argumentPaginatedResults = $this->argumentSearch->getArgumentsByUserIds($viewer, $keys);
         $connections = [];
         if (!empty($argumentPaginatedResults)) {
             foreach ($keys as $i => $key) {

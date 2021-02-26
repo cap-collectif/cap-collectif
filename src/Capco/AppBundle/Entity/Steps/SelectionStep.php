@@ -66,11 +66,6 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     private $selections;
 
     /**
-     * @ORM\Column(name="contributors_count", type="integer")
-     */
-    private $contributorsCount = 0;
-
-    /**
      * @ORM\Column(name="proposals_hidden", type="boolean", nullable=false, options={"default" = false})
      */
     private $proposalsHidden = false;
@@ -118,30 +113,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         return $this->selections;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContributorsCount()
-    {
-        return $this->contributorsCount;
-    }
-
-    /**
-     * @param mixed $contributorsCount
-     *
-     * @return $this
-     */
-    public function setContributorsCount($contributorsCount)
-    {
-        $this->contributorsCount = $contributorsCount;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefaultSort()
+    public function getDefaultSort(): string
     {
         return $this->defaultSort;
     }

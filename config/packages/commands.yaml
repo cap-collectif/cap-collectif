@@ -61,9 +61,6 @@ services:
         arguments:
             $name: 'capco:reset:default-locale'
 
-    Capco\AppBundle\Command\RecalculateCountersCommand:
-        arguments:
-            $name: 'capco:compute:counters'
     Capco\AppBundle\Command\TranslateBasicParameters:
         arguments:
             $name: 'capco:reset:translate-parameters'

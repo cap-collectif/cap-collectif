@@ -109,7 +109,7 @@ class UserSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
 
-        $query->addSort($this->getSort($orderBy));
+        $query->addSort($this->getUserSort($orderBy));
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
@@ -452,7 +452,7 @@ class UserSearch extends Search
         );
     }
 
-    private function getSort(array $orderBy): array
+    private function getUserSort(array $orderBy): array
     {
         switch ($orderBy['field']) {
             case SortField::CREATED_AT:

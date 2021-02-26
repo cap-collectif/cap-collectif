@@ -6,8 +6,10 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
@@ -232,6 +234,59 @@ class VoteSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         return $this->searchEntityVotes($source->getId(), 'source.id', $limit, null, $cursor);
+    }
+
+    public function searchConsultationVotes(
+        Consultation $consultation,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = (new BoolQuery())->addFilter(
+            new Term(['consultation.id' => $consultation->getId()])
+        );
+
+        return $this->createConsultationVotesQuery($boolQuery, $limit, $cursor);
+    }
+
+    public function searchConsultationStepVotes(
+        ConsultationStep $consultationStep,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = (new BoolQuery())->addFilter(
+            new Term(['step.id' => $consultationStep->getId()])
+        );
+
+        return $this->createConsultationVotesQuery($boolQuery, $limit, $cursor);
+    }
+
+    private function createConsultationVotesQuery(
+        BoolQuery $boolQuery,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery
+            ->addFilter(new Term(['published' => true]))
+            ->addFilter(
+                (new BoolQuery())->addShould([
+                    (new BoolQuery())->addFilter(new Exists('opinion.id')),
+                    (new BoolQuery())->addFilter(new Exists('opinionVersion.id')),
+                    (new BoolQuery())->addFilter(new Exists('argument.id')),
+                    (new BoolQuery())->addFilter(new Exists('source.id')),
+                ])
+            );
+
+        $query = new Query($boolQuery);
+
+        if ($limit) {
+            $query->setSize($limit);
+        }
+        $this->applyCursor($query, $cursor);
+        $this->addObjectTypeFilter($query, $this->type);
+        $response = $this->index->search($query);
+        $cursors = $this->getCursors($response);
+
+        return $this->getData($cursors, $response);
     }
 
     private function searchEntityVotes(

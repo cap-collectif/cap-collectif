@@ -2343,7 +2343,26 @@ type Consultation implements Node {
   ): Boolean!
 
   """The number of votes in the related step of this consultation."""
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2022-01-01 UTC.")
+
+  """The votes in the related step of this consultation."""
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): VoteConnection!
 
   """Get the associated description of the consultation"""
   description: HTML
@@ -2541,7 +2560,8 @@ type ConsultationStep implements Node & Step & RequirementStep {
   ): UserConnection!
 
   """The number of votes in this consultation."""
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2022-01-01 UTC.")
+  votes: VoteConnection!
 
   """
   Whether the user has vote for a contribution in this consultation step.
@@ -14405,6 +14425,7 @@ interface Vote {
 
 """A connection to a list of items."""
 type VoteConnection {
+  """Identifies the total count of items in the connection."""
   totalCount: Int!
 
   """Information to aid in pagination."""

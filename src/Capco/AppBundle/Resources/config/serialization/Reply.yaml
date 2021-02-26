@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\Reply:
         published:
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
         draft:
-            groups: [ElasticsearchReply]
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
         getProject:
             type: object
             serialized_name: project

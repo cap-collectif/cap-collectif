@@ -33,13 +33,6 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     private $verification = 'none';
 
     /**
-     * TODO: remove this.
-     *
-     * @ORM\Column(name="replies_count", type="integer")
-     */
-    private $repliesCount = 0;
-
-    /**
      * @var Questionnaire
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="step", cascade={"persist"})
      */
@@ -83,12 +76,6 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return true;
     }
 
-    public function getRepliesCount(): int
-    {
-        // Column in database is nullable because of single-table inheritance
-        return $this->repliesCount ?? 0;
-    }
-
     public function setVerification($verification)
     {
         $this->verification = $verification;
@@ -99,13 +86,6 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     public function getVerification()
     {
         return $this->verification;
-    }
-
-    public function setRepliesCount(int $repliesCount): self
-    {
-        $this->repliesCount = $repliesCount;
-
-        return $this;
     }
 
     /**
