@@ -3,20 +3,22 @@ import * as React from 'react';
 import { useQuery } from 'relay-hooks';
 import { createFragmentContainer, graphql } from 'react-relay';
 import isEqual from 'lodash/isEqual';
+import ReactPlaceholder from 'react-placeholder';
 import type { VoteTabQueryResponse, VoteTabQueryVariables } from '~relay/VoteTabQuery.graphql';
 import type { VoteTabQuery_debate } from '~relay/VoteTabQuery_debate.graphql';
 import type { VoteTabQuery_debateStep } from '~relay/VoteTabQuery_debateStep.graphql';
 import type { Query } from '~/types';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 import VoteTab, { VOTE_PAGINATION } from './VoteTab';
 import VoteHeaderTab from './VoteHeaderTab';
 import type { ProjectAdminDebateParameters } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import Flex from '~ui/Primitives/Layout/Flex';
+import VoteHeaderTabPlaceholder from './VoteHeaderTabPlaceholder';
+import VoteTabPlaceholder from './VoteTabPlaceholder';
 
 type Props = {|
-  +debate: VoteTabQuery_debate,
-  +debateStep: VoteTabQuery_debateStep,
+  +debate: ?VoteTabQuery_debate,
+  +debateStep: ?VoteTabQuery_debateStep,
 |};
 
 type PropsQuery = {|
@@ -61,12 +63,17 @@ export const initialVariables = {
 
 const VoteTabQuery = ({ debate, debateStep }: Props) => {
   const { parameters } = useProjectAdminDebateContext();
-  const queryVariablesWithParameters = createQueryVariables(debate.id, debateStep.id, parameters);
+  const queryVariablesWithParameters = createQueryVariables(
+    debate?.id || '',
+    debateStep?.id || '',
+    parameters,
+  );
 
   const hasFilters: boolean = !isEqual(
     {
       ...initialVariables,
-      debateId: debate.id,
+      debateId: debate?.id,
+      stepId: debateStep?.id,
     },
     queryVariablesWithParameters,
   );
@@ -76,23 +83,28 @@ const VoteTabQuery = ({ debate, debateStep }: Props) => {
     skip: !hasFilters,
   });
 
-  if (debate && debateStep) {
-    const dataDebate: any = !hasFilters ? debate : data?.debate;
-    const dataDebateStep: any = !hasFilters ? debateStep : data?.debateStep;
+  const dataDebate: any = !hasFilters ? debate : data?.debate;
+  const dataDebateStep: any = !hasFilters ? debateStep : data?.debateStep;
 
-    return (
-      <Flex direction="column">
-        <VoteHeaderTab debate={debate} debateStep={debateStep} />
-        {(hasFilters && data) || (!hasFilters && debate) ? (
+  return (
+    <Flex direction="column">
+      <ReactPlaceholder
+        ready={!!debate && !!debateStep}
+        customPlaceholder={<VoteHeaderTabPlaceholder state={parameters.filters.vote.state} />}>
+        {/* Flow doesn't understand that the component is only render when props are ready */}
+        {!!debate && !!debateStep && <VoteHeaderTab debate={debate} debateStep={debateStep} />}
+      </ReactPlaceholder>
+
+      <ReactPlaceholder
+        ready={(hasFilters && data) || (!hasFilters && debate)}
+        customPlaceholder={<VoteTabPlaceholder />}>
+        {/* Flow doesn't understand that the component is only render when props are ready */}
+        {((hasFilters && data) || (!hasFilters && debate)) && (
           <VoteTab debate={dataDebate} debateStep={dataDebateStep} />
-        ) : (
-          <Loader />
         )}
-      </Flex>
-    );
-  }
-
-  return <Loader />;
+      </ReactPlaceholder>
+    </Flex>
+  );
 };
 
 export default createFragmentContainer(VoteTabQuery, {

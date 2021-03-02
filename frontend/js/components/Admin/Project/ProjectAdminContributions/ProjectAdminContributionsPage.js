@@ -6,7 +6,6 @@ import NoContributionsStep from '~/components/Admin/Project/ProjectAdminContribu
 import IndexContributions, { getContributionsPath } from './IndexContributions/IndexContributions';
 import AppBox from '~ui/Primitives/AppBox';
 import type { ResultPreloadQuery } from '~/types';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 import { ProjectAdminDebateProvider } from './ProjectAdminDebate/ProjectAdminDebate.context';
@@ -95,13 +94,10 @@ export const queryContributions = graphql`
 const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
   const { path: baseUrl } = useRouteMatch();
+  const project = dataPreloaded?.project || null;
 
-  if (!dataPreloaded?.project) return <Loader />;
-
-  const { project } = dataPreloaded;
-
-  const collectSteps = project.steps.filter(step => step.__typename === 'CollectStep');
-  const debateSteps = project.steps.filter(step => step.__typename === 'DebateStep');
+  const collectSteps = project?.steps.filter(step => step.__typename === 'CollectStep') || [];
+  const debateSteps = project?.steps.filter(step => step.__typename === 'DebateStep') || [];
 
   const hasCollectStep = collectSteps.length > 0;
   const hasDebateStep = debateSteps.length > 0;
@@ -124,7 +120,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
         </Route>
 
         <Route path={getContributionsPath(baseUrl, 'CollectStep')}>
-          <ProjectAdminProposalsProvider firstCollectStepId={project.firstCollectStep?.id}>
+          <ProjectAdminProposalsProvider firstCollectStepId={project?.firstCollectStep?.id}>
             <ProjectAdminProposalsPage
               hasContributionsStep={hasIndex}
               projectId={projectId}
@@ -143,11 +139,12 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
                 baseUrl={baseUrl}
                 debate={
                   project?.steps.find(({ slug }) => slug === routeProps.match.params.stepSlug)
-                    ?.debate
+                    ?.debate || null
                 }
-                debateStep={project?.steps.find(
-                  ({ slug }) => slug === routeProps.match.params.stepSlug,
-                )}
+                debateStep={
+                  project?.steps.find(({ slug }) => slug === routeProps.match.params.stepSlug) ||
+                  null
+                }
                 {...routeProps}
               />
             </ProjectAdminDebateProvider>

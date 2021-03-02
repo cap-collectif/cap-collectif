@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useQuery } from 'relay-hooks';
+import ReactPlaceholder from 'react-placeholder';
 import { createFragmentContainer, graphql } from 'react-relay';
 import isEqual from 'lodash/isEqual';
 import type {
@@ -11,15 +12,16 @@ import type { ArgumentTabQuery_debate } from '~relay/ArgumentTabQuery_debate.gra
 import type { ArgumentTabQuery_debateStep } from '~relay/ArgumentTabQuery_debateStep.graphql';
 import type { Query } from '~/types';
 import ArgumentTab, { ARGUMENT_PAGINATION } from './ArgumentTab';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 import type { ProjectAdminDebateParameters } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import Flex from '~ui/Primitives/Layout/Flex';
 import ArgumentHeaderTab from './ArgumentHeaderTab';
+import ArgumentHeaderTabPlaceholder from './ArgumentHeaderTabPlaceholder';
+import ArgumentTabPlaceholder from './ArgumentTabPlaceholder';
 
 type Props = {|
-  +debate: ArgumentTabQuery_debate,
-  +debateStep: ArgumentTabQuery_debateStep,
+  +debate: ?ArgumentTabQuery_debate,
+  +debateStep: ?ArgumentTabQuery_debateStep,
 |};
 
 type PropsQuery = {|
@@ -75,12 +77,12 @@ export const initialVariables = {
 const ArgumentTabQuery = ({ debate, debateStep }: Props) => {
   const { parameters } = useProjectAdminDebateContext();
 
-  const queryVariablesWithParameters = createQueryVariables(debate.id, parameters);
+  const queryVariablesWithParameters = createQueryVariables(debate?.id || '', parameters);
 
   const hasFilters: boolean = !isEqual(
     {
       ...initialVariables,
-      debateId: debate.id,
+      debateId: debate?.id,
     },
     queryVariablesWithParameters,
   );
@@ -90,22 +92,27 @@ const ArgumentTabQuery = ({ debate, debateStep }: Props) => {
     skip: !hasFilters,
   });
 
-  if (debate && debateStep) {
-    const dataDebate: any = !hasFilters ? debate : data?.debate;
+  const dataDebate: any = !hasFilters ? debate : data?.debate;
 
-    return (
-      <Flex direction="column">
-        <ArgumentHeaderTab debate={debate} debateStep={debateStep} />
-        {(hasFilters && data) || (!hasFilters && debate) ? (
-          <ArgumentTab debate={dataDebate} />
-        ) : (
-          <Loader />
-        )}
-      </Flex>
-    );
-  }
+  return (
+    <Flex direction="column">
+      <ReactPlaceholder
+        ready={!!debate && !!debateStep}
+        customPlaceholder={
+          <ArgumentHeaderTabPlaceholder state={parameters.filters.argument.state} />
+        }>
+        {/* Flow doesn't understand that the component is only render when props are ready */}
+        {!!debate && !!debateStep && <ArgumentHeaderTab debate={debate} debateStep={debateStep} />}
+      </ReactPlaceholder>
 
-  return <Loader />;
+      <ReactPlaceholder
+        ready={(hasFilters && data) || (!hasFilters && debate)}
+        customPlaceholder={<ArgumentTabPlaceholder />}>
+        {/* Flow doesn't understand that the component is only render when props are ready */}
+        {((hasFilters && data) || (!hasFilters && debate)) && <ArgumentTab debate={dataDebate} />}
+      </ReactPlaceholder>
+    </Flex>
+  );
 };
 
 export default createFragmentContainer(ArgumentTabQuery, {

@@ -23,20 +23,25 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
         </Heading>
       </AccordionButton>
       <AccordionPanel>
-        <Relay(FaceToFace)
-          debate={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "allArguments": Object {
-                "totalCount": 3,
-              },
-              "votes": Object {
-                "totalCount": 1,
-              },
+        <ReactPlaceholder
+          customPlaceholder={<FaceToFacePlaceholder />}
+          ready={true}
+        >
+          <Relay(FaceToFace)
+            debate={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allArguments": Object {
+                  "totalCount": 3,
+                },
+                "votes": Object {
+                  "totalCount": 1,
+                },
+              }
             }
-          }
-        />
+          />
+        </ReactPlaceholder>
       </AccordionPanel>
     </AccordionItem>
     <AccordionItem
@@ -160,20 +165,25 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
         </Heading>
       </AccordionButton>
       <AccordionPanel>
-        <Relay(FaceToFace)
-          debate={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "allArguments": Object {
-                "totalCount": 3,
-              },
-              "votes": Object {
-                "totalCount": 1,
-              },
+        <ReactPlaceholder
+          customPlaceholder={<FaceToFacePlaceholder />}
+          ready={true}
+        >
+          <Relay(FaceToFace)
+            debate={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allArguments": Object {
+                  "totalCount": 3,
+                },
+                "votes": Object {
+                  "totalCount": 1,
+                },
+              }
             }
-          }
-        />
+          />
+        </ReactPlaceholder>
       </AccordionPanel>
     </AccordionItem>
     <AccordionItem

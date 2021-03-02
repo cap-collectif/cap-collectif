@@ -26,7 +26,8 @@ const DebateEmptyOpinion = ({ type }: Props) => (
       top="-1px"
       left="-1px"
       borderBottomLeftRadius={0}
-      borderTopRightRadius={0}>
+      borderTopRightRadius={0}
+      interactive={false}>
       <FormattedMessage id={type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
     </Tag>
     <Icon name={ICON_NAME.ADD} size={ICON_SIZE.XL} color="gray.300" />

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import ReactPlaceholder from 'react-placeholder';
 import { useHistory } from 'react-router-dom';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
@@ -13,12 +14,13 @@ import FaceToFace from './FaceToFace/FaceToFace';
 import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery';
 import VoteTabQuery from './VoteTab/VoteTabQuery';
 import Heading from '~ui/Primitives/Heading';
+import FaceToFacePlaceholder from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/FaceToFace/FaceToFacePlaceholder';
 
 type Props = {|
   hasContributionsStep: boolean,
   baseUrl: string,
-  debate: ProjectAdminDebate_debate,
-  debateStep: ProjectAdminDebate_debateStep,
+  debate: ?ProjectAdminDebate_debate,
+  debateStep: ?ProjectAdminDebate_debateStep,
 |};
 
 export const ProjectAdminDebate = ({
@@ -28,7 +30,6 @@ export const ProjectAdminDebate = ({
   debateStep,
 }: Props) => {
   const history = useHistory();
-  const { allArguments, votes } = debate;
 
   return (
     <Flex direction="column">
@@ -52,7 +53,10 @@ export const ProjectAdminDebate = ({
           </Accordion.Button>
 
           <Accordion.Panel>
-            <FaceToFace debate={debate} />
+            <ReactPlaceholder ready={!!debate} customPlaceholder={<FaceToFacePlaceholder />}>
+              {/* Flow doesn't understand that the component is only render when props are ready */}
+              {debate && <FaceToFace debate={debate} />}
+            </ReactPlaceholder>
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -61,7 +65,7 @@ export const ProjectAdminDebate = ({
             <Heading as="h4">
               <FormattedMessage
                 id="argument-count"
-                values={{ count: allArguments.totalCount }}
+                values={{ count: debate?.allArguments.totalCount || 0 }}
                 tagName={React.Fragment}
               />
             </Heading>
@@ -77,7 +81,7 @@ export const ProjectAdminDebate = ({
             <Heading as="h4">
               <FormattedMessage
                 id="votes-count"
-                values={{ num: votes.totalCount }}
+                values={{ num: debate?.votes.totalCount || 0 }}
                 tagName={React.Fragment}
               />
             </Heading>

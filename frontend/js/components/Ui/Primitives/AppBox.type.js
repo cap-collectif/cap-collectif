@@ -242,6 +242,7 @@ type Grid = {|
 
 type Css = {|
   css?: CSSRules | ((props: any) => Object) | Object,
+  style?: CSSRules | Object,
 |};
 
 type HTML = {|
