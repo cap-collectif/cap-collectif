@@ -2,59 +2,83 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Argumentable;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Model\Argumentable;
+use Capco\AppBundle\Search\ArgumentSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ArgumentRepository;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ArgumentableArgumentsResolver implements ResolverInterface
 {
-    private $argumentRepository;
+    private ArgumentSearch $argumentSearch;
 
-    public function __construct(ArgumentRepository $argumentRepository)
+    public function __construct(ArgumentSearch $argumentSearch)
     {
-        $this->argumentRepository = $argumentRepository;
+        $this->argumentSearch = $argumentSearch;
     }
 
     public function __invoke(Argumentable $argumentable, Argument $args): ConnectionInterface
     {
-        $type = $args->offsetGet('type');
-        $includeTrashed = $args->offsetGet('includeTrashed');
+        $filters = self::getFilters($args);
+        $orderBy = self::getOrderBy($args);
 
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $totalCount = 0;
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $argumentable,
-            $type,
-            $args,
-            $includeTrashed
+            $filters,
+            $orderBy,
+            &$totalCount
         ) {
-            $field = $args->offsetGet('orderBy')
-                ? $args->offsetGet('orderBy')['field']
-                : 'PUBLISHED_AT';
-            $direction = $args->offsetGet('orderBy')
-                ? $args->offsetGet('orderBy')['direction']
-                : 'DESC';
+            $response = $this->argumentSearch->searchArguments(
+                $argumentable,
+                $limit,
+                $orderBy,
+                $filters,
+                $cursor
+            );
+            $totalCount = $response->getTotalCount();
 
-            return $this->argumentRepository
-                ->getByContributionAndType(
-                    $argumentable,
-                    $type,
-                    $limit,
-                    $offset,
-                    $field,
-                    $direction,
-                    $includeTrashed
-                )
-                ->getIterator()
-                ->getArrayCopy();
+            return $response;
         });
-        $totalCount = $this->argumentRepository->countByContributionAndType(
-            $argumentable,
-            $type,
-            $includeTrashed
-        );
 
-        return $paginator->auto($args, $totalCount);
+        $connection = $paginator->auto($args);
+        $connection->setTotalCount($totalCount);
+
+        return $connection;
+    }
+
+    public static function getFilters(Argument $args): array
+    {
+        $filters = [];
+        if ($args->offsetExists('type')) {
+            $filters['voteType'] = $args->offsetGet('type');
+        }
+
+        $filters['isTrashed'] = false;
+        if ($args->offsetExists('includeTrashed') && $args->offsetGet('includeTrashed')) {
+            $filters['isTrashed'] = null;
+        }
+
+        return $filters;
+    }
+
+    public static function getOrderBy(Argument $args): ?array
+    {
+        $orderBy = $args->offsetGet('orderBy');
+        if (null === $orderBy) {
+            $orderBy = [
+                'field' => 'PUBLISHED_AT',
+                'direction' => 'DESC',
+            ];
+        }
+
+        $orderByFields = [
+            'PUBLISHED_AT' => 'publishedAt',
+            'VOTES' => 'votesCount',
+        ];
+        $orderBy['field'] = $orderByFields[$orderBy['field']];
+
+        return $orderBy;
     }
 }

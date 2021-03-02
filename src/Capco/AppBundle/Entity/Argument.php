@@ -322,9 +322,17 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         }
     }
 
+    // ************************* ElasticSearch ***********************************
+
     public function isIndexable(): bool
     {
         return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
+    }
+
+    //type cannot be used as field name in ES
+    public function getVoteType(): int
+    {
+        return $this->getType();
     }
 
     public static function getElasticsearchPriority(): int

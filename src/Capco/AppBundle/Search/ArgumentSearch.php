@@ -3,12 +3,16 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Model\Argumentable;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
+use Elastica\ResultSet;
 
 class ArgumentSearch extends Search
 {
@@ -77,10 +81,7 @@ class ArgumentSearch extends Search
             ];
             $this->setSortWithId($query, $order);
 
-            if ($limit) {
-                // + 1 for paginator data
-                $query->setSize($limit + 1);
-            }
+            self::applyLimit($query, $limit);
 
             $this->applyCursor($query, $cursor);
             $this->addObjectTypeFilter($query, $this->type);
@@ -92,17 +93,52 @@ class ArgumentSearch extends Search
         $results = [];
         $resultSets = $responses->getResultSets();
         foreach ($resultSets as $key => $resultSet) {
-            $results[] = new ElasticsearchPaginatedResult(
-                $this->getHydratedResultsFromResultSet($this->argumentRepository, $resultSet),
-                $this->getCursors($resultSet),
-                $resultSet->getTotalHits()
-            );
+            $results[] = $this->getData($this->getCursors($resultSet), $resultSet);
         }
 
         return $results;
     }
 
-    private function getSortField(?string $field): string
+    public function searchArguments(
+        Argumentable $argumentable,
+        int $limit,
+        ?array $orderBy,
+        ?array $filters,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $query = new Query(self::createFilteredQuery($argumentable, $filters));
+        $this->addObjectTypeFilter($query, $this->type);
+        $this->sortQuery($query, $orderBy);
+        self::applyLimit($query, $limit);
+        $this->applyCursor($query, $cursor);
+
+        $response = $this->index->search($query);
+        $cursors = $this->getCursors($response);
+
+        return $this->getData($cursors, $response);
+    }
+
+    private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
+    {
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->argumentRepository, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
+    }
+
+    private function sortQuery(Query $query, ?array $orderBy): Query
+    {
+        if ($orderBy) {
+            $this->setSortWithId($query, [
+                $orderBy['field'] => ['order' => $orderBy['direction']],
+            ]);
+        }
+
+        return $query;
+    }
+
+    private static function getSortField(?string $field): string
     {
         if (null === $field) {
             return 'createdAt';
@@ -113,5 +149,49 @@ class ArgumentSearch extends Search
             default:
                 return 'createdAt';
         }
+    }
+
+    private static function applyLimit(Query $query, int $limit): Query
+    {
+        return $query->setSize($limit + 1);
+    }
+
+    private static function createFilteredQuery(
+        Argumentable $argumentable,
+        ?array $filters
+    ): BoolQuery {
+        $boolQuery = new BoolQuery();
+        $boolQuery->addFilter(new Term(['objectType' => 'argument']));
+        $boolQuery->addFilter(self::getArgumentableFilter($argumentable));
+
+        if ($filters) {
+            if (isset($filters['isTrashed'])) {
+                $boolQuery->addFilter(new Term(['trashed' => $filters['isTrashed']]));
+            }
+            if (isset($filters['voteType'])) {
+                $boolQuery->addFilter(new Term(['voteType' => $filters['voteType']]));
+            }
+        }
+
+        return $boolQuery;
+    }
+
+    private static function getArgumentableFilter(Argumentable $argumentable): Term
+    {
+        return new Term([
+            self::getArgumentableType($argumentable) . '.id' => $argumentable->getId(),
+        ]);
+    }
+
+    private static function getArgumentableType(Argumentable $argumentable): string
+    {
+        if ($argumentable instanceof Opinion) {
+            return 'opinion';
+        }
+        if ($argumentable instanceof OpinionVersion) {
+            return 'opinionVersion';
+        }
+
+        throw new \Exception('unknown argumentable type of entity ' . $argumentable->getId());
     }
 }

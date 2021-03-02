@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Search\VoteSearch;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -17,10 +18,12 @@ class ArgumentNormalizer implements
     use SerializerAwareTrait;
 
     private ObjectNormalizer $normalizer;
+    private VoteSearch $voteSearch;
 
-    public function __construct(ObjectNormalizer $normalizer)
+    public function __construct(ObjectNormalizer $normalizer, VoteSearch $voteSearch)
     {
         $this->normalizer = $normalizer;
+        $this->voteSearch = $voteSearch;
     }
 
     public function hasCacheableSupportsMethod(): bool
@@ -30,10 +33,10 @@ class ArgumentNormalizer implements
 
     public function normalize($object, $format = null, array $context = [])
     {
-        return $this->normalizer->normalize($object, $format, $context);
-        // Let's faster our indexation
-        // We can see what's serialized using
-        // dump($data);
+        $data = $this->normalizer->normalize($object, $format, $context);
+        $data['votesCount'] = $this->voteSearch->searchArgumentVotes($object, 1)->getTotalCount();
+
+        return $data;
     }
 
     public function supportsNormalization($data, $format = null): bool
