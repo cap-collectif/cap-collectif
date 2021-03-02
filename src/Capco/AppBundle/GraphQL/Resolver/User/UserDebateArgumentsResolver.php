@@ -21,6 +21,10 @@ class UserDebateArgumentsResolver implements ResolverInterface
 
     public function __invoke(?User $viewer, User $user, ?Argument $args = null): ConnectionInterface
     {
+        if (!$args) {
+            $args = new Argument(['first' => 0]);
+        }
+
         $orderBy = DebateArgumentsResolver::getOrderBy($args);
 
         $totalCount = 0;

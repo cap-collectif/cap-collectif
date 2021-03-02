@@ -30,10 +30,9 @@
     {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
     {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
-    {# TODO : votesCount should include the debateVotes #}
-    {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount %}
+    {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount + authorVotesResolver.__invoke(user).totalCount %}
     {% set versionCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
-    {# TODO : debateArgumentsCount #}
+    {% set debateArgumentsCount = userDebateArgumentsResolver.__invoke(app.user, user).totalCount %}
     {% set argumentsCount = userArgumentsResolver.getArgumentTotalCount(app.user, user) %}
     
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
@@ -67,7 +66,7 @@
         </section>
     {% endif %}
 
-    {% if argumentsCount > 0 %}
+    {% if argumentsCount > 0 or debateArgumentsCount > 0 %}
         <section id="profile-argument" class="section--custom">
             <div class="container">
                 <h2>{{ 'global.arguments.label' | trans({}, 'CapcoAppBundle') }}</h2>

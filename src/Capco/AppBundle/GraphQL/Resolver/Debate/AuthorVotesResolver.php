@@ -18,8 +18,12 @@ class AuthorVotesResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(User $author, Argument $args): ConnectionInterface
+    public function __invoke(User $author, ?Argument $args = null): ConnectionInterface
     {
+        if (!$args) {
+            $args = new Argument(['first' => 0]);
+        }
+
         $paginator = new Paginator(function (int $offset, int $limit) use ($author) {
             if (0 === $offset && 0 === $limit) {
                 return [];

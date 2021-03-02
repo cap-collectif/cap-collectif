@@ -68,14 +68,17 @@
         {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
     {% endif %}
     {% if votesCount is not defined %}
-        {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
+        {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount + authorVotesResolver.__invoke(user).totalCount %}
     {% endif %}
     {% if opinionVersionsCount is not defined %}
         {% set opinionVersionsCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
     {% endif %}
 
     {% if argumentsCount is not defined %}
-        {% set argumentsCount = userArgumentsResolver.resolveSync(app.user, user).totalCount %}
+        {% set argumentsCount = userArgumentsResolver.getArgumentTotalCount(app.user, user) %}
+    {% endif %}
+    {% if debateArgumentsCount is not defined %}
+        {% set debateArgumentsCount = userDebateArgumentsResolver.__invoke(app.user, user).totalCount %}
     {% endif %}
 
     <div class="profile__values">
@@ -129,11 +132,11 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if argumentsCount > 0 %}
+                {% if (argumentsCount + debateArgumentsCount) > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_arguments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_arguments', {'slug': user.slug, '_locale': locale }) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'global.arguments.label'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ argumentsCount }}</p>
+                        <p class="profile__value__number">{{ argumentsCount + debateArgumentsCount }}</p>
                     </a>
                 </li>
                 {% endif %}
