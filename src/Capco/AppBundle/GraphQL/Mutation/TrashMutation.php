@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -16,11 +19,16 @@ class TrashMutation implements MutationInterface
 
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $em;
+    private Indexer $indexer;
 
-    public function __construct(GlobalIdResolver $globalIdResolver, EntityManagerInterface $em)
-    {
+    public function __construct(
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        Indexer $indexer
+    ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -29,6 +37,7 @@ class TrashMutation implements MutationInterface
             $trashable = $this->getTrashable($input, $viewer);
             self::trash($trashable, $input);
             $this->em->flush();
+            $this->reindex($trashable);
 
             return ['trashable' => $trashable];
         } catch (UserError $error) {
@@ -44,6 +53,14 @@ class TrashMutation implements MutationInterface
         }
 
         return $trashable;
+    }
+
+    private function reindex(Trashable $trashable): void
+    {
+        if ($trashable instanceof IndexableInterface) {
+            $this->indexer->index(ClassUtils::getClass($trashable), $trashable->getId());
+            $this->indexer->finishBulk();
+        }
     }
 
     private static function trash(Trashable $trashable, Arg $input): Trashable
