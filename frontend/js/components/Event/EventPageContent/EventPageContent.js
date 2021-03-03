@@ -118,7 +118,7 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled }: Prop
           </Fixed>
         ) : (
           <Fixed position={{ bottom: '0', top: 'inherit', left: '0' }} width="100%">
-            {isViewerParticipatingAtEvent ? (
+            {!isViewerParticipatingAtEvent ? (
               <ButtonSubscribe type="button" onClick={() => setShowModalRegister(true)}>
                 <FormattedMessage id="event_registration.create.register" />
               </ButtonSubscribe>
