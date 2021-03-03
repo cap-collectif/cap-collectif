@@ -26,18 +26,15 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
         onHide={() => onClose(false)}
         aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title
-            id="report-modal-title-lg"
-            children={
-              <FormattedMessage
-                id={
-                  isCreating
-                    ? 'realisation_step_modal.create.title'
-                    : 'realisation_step_modal.update.title'
-                }
-              />
-            }
-          />
+          <Modal.Title id="report-modal-title-lg">
+            <FormattedMessage
+              id={
+                isCreating
+                  ? 'realisation_step_modal.create.title'
+                  : 'realisation_step_modal.update.title'
+              }
+            />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Field

@@ -633,11 +633,9 @@ export const EventForm = ({
                   type="checkbox"
                   normalize={val => !!val}
                   component={component}
-                  disabled={isDisabled()}
-                  children={
-                    <FormattedMessage id="checkbox-event-data-transfer-warning-to-organizer" />
-                  }
-                />
+                  disabled={isDisabled()}>
+                  <FormattedMessage id="checkbox-event-data-transfer-warning-to-organizer" />
+                </Field>
               </div>
             </div>
           )}

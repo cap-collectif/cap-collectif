@@ -166,14 +166,11 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
         <ModalContainer>
           <Modal.Header closeButton>
             <div className="modal-title">
-              <Modal.Title
-                id="proposal-form-admin-question-modal-title-lg"
-                children={
-                  <FormattedMessage
-                    id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
-                  />
-                }
-              />
+              <Modal.Title id="proposal-form-admin-question-modal-title-lg">
+                <FormattedMessage
+                  id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
+                />
+              </Modal.Title>
             </div>
           </Modal.Header>
           <Modal.Body>
@@ -397,19 +394,17 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                     name={`${member}.randomQuestionChoices`}
                     type="checkbox"
                     normalize={val => !!val}
-                    children={
-                      <FormattedMessage id="admin.fields.question.random_question_choices" />
-                    }
-                    component={component}
-                  />
+                    component={component}>
+                    <FormattedMessage id="admin.fields.question.random_question_choices" />
+                  </Field>
                   <Field
                     id={`${member}.isOtherAllowed`}
                     name={`${member}.isOtherAllowed`}
                     type="checkbox"
                     normalize={val => !!val}
-                    children={<FormattedMessage id="admin.fields.question.other_allowed" />}
-                    component={component}
-                  />
+                    component={component}>
+                    <FormattedMessage id="admin.fields.question.other_allowed" />
+                  </Field>
                 </div>
               )}
               <Field
@@ -417,26 +412,26 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                 name={`${member}.required`}
                 type="checkbox"
                 normalize={val => !!val}
-                children={<FormattedMessage id="global.admin.required" />}
-                component={component}
-              />
+                component={component}>
+                <FormattedMessage id="global.admin.required" />
+              </Field>
               <Field
-                children={<FormattedMessage id="admin.fields.question.private" />}
                 id={`${member}.private`}
                 normalize={val => !!val}
                 name={`${member}.private`}
                 type="checkbox"
-                component={component}
-              />
+                component={component}>
+                <FormattedMessage id="admin.fields.question.private" />
+              </Field>
               {isSuperAdmin && (
                 <Field
-                  children={<FormattedMessage id="hidden-question" />}
                   id={`${member}.hidden`}
                   normalize={val => !!val}
                   name={`${member}.hidden`}
                   type="checkbox"
-                  component={component}
-                />
+                  component={component}>
+                  <FormattedMessage id="hidden-question" />
+                </Field>
               )}
             </div>
             {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (

@@ -266,9 +266,9 @@ export class UserAdminProfile extends React.Component<Props, State> {
               type="checkbox"
               disabled={!isViewerOrSuperAdmin}
               labelClassName="font-weight-normal"
-              children={<FormattedMessage id="user.profile.edit.profilePageIndexed" />}
-              divClassName="col-sm-8"
-            />
+              divClassName="col-sm-8">
+              <FormattedMessage id="user.profile.edit.profilePageIndexed" />
+            </Field>
             <div className="clearfix" />
             <ButtonToolbar className="box-content__toolbar">
               <Button

@@ -164,14 +164,11 @@ export class ProjectDistrictForm extends React.Component<Props> {
         <form onSubmit={this.handleOnSubmit}>
           <Modal.Header closeButton>
             <ModalHeaderContainer>
-              <Modal.Title
-                id="report-modal-title-lg"
-                children={
-                  <FormattedMessage
-                    id={isCreating ? 'district_modal.create.title' : 'district_modal.update.title'}
-                  />
-                }
-              />
+              <Modal.Title id="report-modal-title-lg">
+                <FormattedMessage
+                  id={isCreating ? 'district_modal.create.title' : 'district_modal.update.title'}
+                />
+              </Modal.Title>
               <span className="mr-5">
                 <LanguageButtonContainer />
               </span>

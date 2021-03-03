@@ -81,36 +81,6 @@ export const ProposalUserVoteItem = ({
     return intl.formatMessage({ id: 'global.anonymous' });
   };
 
-  const popoverConfirmDelete = (
-    <Popover id="popover-positioned-right">
-      <i className="cap cap-attention icon--red" />
-      <FormattedMessage
-        id={
-          isInterpellationContextFromStep(step)
-            ? 'support.confirm.delete'
-            : 'are-you-sure-you-want-to-delete-this-vote'
-        }
-      />
-      <div className="mt-10 d-flex justify-content-end">
-        <Button bsStyle="default" onClick={() => setShow(false)} className="mr-10">
-          <FormattedMessage id="global.no" />
-        </Button>
-        {onDelete && (
-          <Button
-            bsStyle="danger"
-            onClick={() => {
-              onDelete();
-              setShow(false);
-            }}
-            className="proposal-vote__delete-confirm"
-            disabled={!step.open}>
-            <FormattedMessage id="btn-delete" />
-          </Button>
-        )}
-      </div>
-    </Popover>
-  );
-
   return (
     <VoteItemContainer id={`vote-step${step.id}-proposal${proposal.id}`}>
       <Col md={colTitleWidth()} sm={12} xs={12}>
@@ -207,9 +177,35 @@ export const ProposalUserVoteItem = ({
             placement="bottom"
             target={target.current}
             rootClose
-            children={popoverConfirmDelete}
-            show={show}
-          />
+            show={show}>
+            <Popover id="popover-positioned-right">
+              <i className="cap cap-attention icon--red" />
+              <FormattedMessage
+                id={
+                  isInterpellationContextFromStep(step)
+                    ? 'support.confirm.delete'
+                    : 'are-you-sure-you-want-to-delete-this-vote'
+                }
+              />
+              <div className="mt-10 d-flex justify-content-end">
+                <Button bsStyle="default" onClick={() => setShow(false)} className="mr-10">
+                  <FormattedMessage id="global.no" />
+                </Button>
+                {onDelete && (
+                  <Button
+                    bsStyle="danger"
+                    onClick={() => {
+                      onDelete();
+                      setShow(false);
+                    }}
+                    className="proposal-vote__delete-confirm"
+                    disabled={!step.open}>
+                    <FormattedMessage id="btn-delete" />
+                  </Button>
+                )}
+              </div>
+            </Popover>
+          </Overlay>
         </Col>
       )}
     </VoteItemContainer>

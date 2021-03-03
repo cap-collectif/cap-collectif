@@ -68,9 +68,9 @@ class ArgumentForm extends React.Component<Props> {
             wrapperClassName="checkbox"
             component={component}
             id="argument-confirm"
-            name="confirm"
-            children={<FormattedMessage id="argument.edit.confirm" />}
-          />
+            name="confirm">
+            <FormattedMessage id="argument.edit.confirm" />
+          </Field>
         </div>
         <Field
           id="argument-body"

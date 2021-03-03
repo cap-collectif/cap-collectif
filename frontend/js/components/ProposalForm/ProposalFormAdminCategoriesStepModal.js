@@ -100,14 +100,11 @@ export const ProposalFormAdminCategoriesStepModal = ({
   return (
     <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
       <Modal.Header closeButton>
-        <Modal.Title
-          id="report-modal-title-lg"
-          children={
-            <FormattedMessage
-              id={!isUpdating ? 'category_modal.create.title' : 'category_modal.update.title'}
-            />
-          }
-        />
+        <Modal.Title id="report-modal-title-lg">
+          <FormattedMessage
+            id={!isUpdating ? 'category_modal.create.title' : 'category_modal.update.title'}
+          />
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Field

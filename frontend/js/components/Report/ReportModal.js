@@ -26,10 +26,9 @@ class ReportModal extends React.Component<Props> {
         onHide={() => dispatch(closeModal())}
         aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title
-            id="report-modal-title-lg"
-            children={<FormattedMessage id="global.modal.report.title" />}
-          />
+          <Modal.Title id="report-modal-title-lg">
+            <FormattedMessage id="global.modal.report.title" />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ReportForm onSubmit={onSubmit} />

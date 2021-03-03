@@ -180,9 +180,9 @@ export class ImageUpload extends React.Component<Props> {
                 className="text-center"
                 onChange={this.onToggleDelete}
                 wrapperClassName="checkbox"
-                ref={this._deleteCheckbox}
-                children={<FormattedMessage id="global.image_uploader.image.delete" />}
-              />
+                ref={this._deleteCheckbox}>
+                <FormattedMessage id="global.image_uploader.image.delete" />
+              </Input>
             )}
           </Col>
         )}

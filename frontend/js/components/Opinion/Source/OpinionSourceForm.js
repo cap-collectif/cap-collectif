@@ -150,9 +150,9 @@ class OpinionSourceForm extends React.Component<Props> {
               name="check"
               wrapperClassName="checkbox"
               id="sourceEditCheck"
-              component={renderComponent}
-              children={<FormattedMessage id="source.check" />}
-            />
+              component={renderComponent}>
+              <FormattedMessage id="source.check" />
+            </Field>
           </div>
         )}
         <Field

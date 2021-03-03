@@ -63,7 +63,7 @@ export const loadProposalOptions = (
       isMapViewEnabled: p.isMapViewEnabled,
     }));
 
-    if(proposal && !proposals.some(q => q.value === proposal.value)) proposals.push(proposal);
+    if (proposal && !proposals.some(q => q.value === proposal.value)) proposals.push(proposal);
     return proposals;
   });
 };
@@ -71,133 +71,133 @@ export const loadProposalOptions = (
 const formName = 'stepForm';
 
 export const ProjectAdminCollectStepForm = ({
-                                              votable,
-                                              requirements,
-                                              statuses,
-                                              dispatch,
-                                              isBudgetEnabled,
-                                              isTresholdEnabled,
-                                              isLimitEnabled,
-                                              proposal,
-                                              isPrivate,
-                                              stepFormName,
-                                              votesLimit,
-                                              votesMin,
-                                              votesRanking,
-                                            }: Props) => {
+  votable,
+  requirements,
+  statuses,
+  dispatch,
+  isBudgetEnabled,
+  isTresholdEnabled,
+  isLimitEnabled,
+  proposal,
+  isPrivate,
+  stepFormName,
+  votesLimit,
+  votesMin,
+  votesRanking,
+}: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
   return (
     <>
-      { renderSubSection('collect_step') }
+      {renderSubSection('collect_step')}
       <Field
         selectFieldIsObject
         debounce
         autoload
         labelClassName="control-label"
         inputClassName="fake-inputClassName"
-        component={ select }
+        component={select}
         name="proposalForm"
         id="step-proposalForm"
         placeholder=" "
-        label={ <FormattedMessage id="admin.fields.step.proposal_form"/> }
+        label={<FormattedMessage id="admin.fields.step.proposal_form" />}
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
         defaultOptions
         cacheOptions
-        loadOptions={ term => loadProposalOptions(proposal, term) }
+        loadOptions={term => loadProposalOptions(proposal, term)}
         clearable
       />
-      { renderSubSection('global.proposals') }
+      {renderSubSection('global.proposals')}
       <ProjectSmallFieldsContainer>
         <Flex flex="1" direction="row">
           <Flex flex="1" direction="row" maxWidth="230px">
             <Field
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
-              component={ select }
+              component={select}
               name="defaultSort"
               id="step-defaultSort"
               placeholder=" "
-              label={ <FormattedMessage id="admin.fields.opinion_type.default_filter"/> }
-              options={ renderSortValues(intl) }
-              clearable={ false }
+              label={<FormattedMessage id="admin.fields.opinion_type.default_filter" />}
+              options={renderSortValues(intl)}
+              clearable={false}
             />
           </Flex>
-          <Flex ml={ 2 } width="100%" maxWidth="175px" direction="column">
-            <FormattedMessage tagName="b" id="project-visibility"/>
+          <Flex ml={2} width="100%" maxWidth="175px" direction="column">
+            <FormattedMessage tagName="b" id="project-visibility" />
             <Flex>
-            <DropdownButton
-              id="js-btn-visibility-step"
-              className="mt-15"
-              title={ <FormattedMessage id={ isPrivate ? 'global-restricted' : 'public' }/> }>
-              <MenuItem
-                id="public-collect"
-                onClick={ () => {
-                  dispatch(change(formName, 'private', false));
-                } }>
-                <PrivacyInfo>
-                  <FormattedMessage id="public"/>
-                  <FormattedMessage id="everybody"/>
-                </PrivacyInfo>
-              </MenuItem>
-              <MenuItem
-                id="private-collect"
-                onClick={ () => {
-                  dispatch(change(formName, 'private', true));
-                } }>
-                <PrivacyInfo>
-                  <FormattedMessage id="global-restricted"/>
-                  <FormattedMessage id="authors-and-administrators"/>
-                </PrivacyInfo>
-              </MenuItem>
-            </DropdownButton>
-          </Flex>
+              <DropdownButton
+                id="js-btn-visibility-step"
+                className="mt-15"
+                title={<FormattedMessage id={isPrivate ? 'global-restricted' : 'public'} />}>
+                <MenuItem
+                  id="public-collect"
+                  onClick={() => {
+                    dispatch(change(formName, 'private', false));
+                  }}>
+                  <PrivacyInfo>
+                    <FormattedMessage id="public" />
+                    <FormattedMessage id="everybody" />
+                  </PrivacyInfo>
+                </MenuItem>
+                <MenuItem
+                  id="private-collect"
+                  onClick={() => {
+                    dispatch(change(formName, 'private', true));
+                  }}>
+                  <PrivacyInfo>
+                    <FormattedMessage id="global-restricted" />
+                    <FormattedMessage id="authors-and-administrators" />
+                  </PrivacyInfo>
+                </MenuItem>
+              </DropdownButton>
+            </Flex>
           </Flex>
         </Flex>
         <Flex direction="column" flex="1">
-          <Text color="gray.900" fontSize={ 14 } fontWeight={ 600 }>
-            <FormattedMessage id="proposal-news-label"/>
+          <Text color="gray.900" fontSize={14} fontWeight={600}>
+            <FormattedMessage id="proposal-news-label" />
           </Text>
-          <Text color="gray.600" mb={ 2 } mt={ 1 } lineHeight="16px" fontSize={ 11 }>
-            <FormattedMessage id="proposal-news-help-text"/>
+          <Text color="gray.600" mb={2} mt={1} lineHeight="16px" fontSize={11}>
+            <FormattedMessage id="proposal-news-help-text" />
           </Text>
           <Field
-            component={ component }
+            component={component}
             type="checkbox"
-            children={ <FormattedMessage id="allow-proposal-news"/> }
             name="allowAuthorsToAddNews"
-            id="step-allowAuthorsToAddNews"
-          />
+            id="step-allowAuthorsToAddNews">
+            <FormattedMessage id="allow-proposal-news" />
+          </Field>
         </Flex>
       </ProjectSmallFieldsContainer>
 
       <StepVotesFields
-        stepFormName={ stepFormName }
-        votable={ votable }
-        options={ {
+        stepFormName={stepFormName}
+        votable={votable}
+        options={{
           limit: votesLimit,
           min: votesMin,
           ranking: votesRanking,
-        } }
-        isBudgetEnabled={ isBudgetEnabled }
-        isTresholdEnabled={ isTresholdEnabled }
-        isLimitEnabled={ isLimitEnabled }
+        }}
+        isBudgetEnabled={isBudgetEnabled}
+        isTresholdEnabled={isTresholdEnabled}
+        isLimitEnabled={isLimitEnabled}
       />
 
-      { renderSubSection('admin.fields.step.statuses') }
+      {renderSubSection('admin.fields.step.statuses')}
       <FieldArray
         name="statuses"
-        component={ StepStatusesList }
-        formName={ formName }
-        statuses={ statuses }
+        component={StepStatusesList}
+        formName={formName}
+        statuses={statuses}
       />
       <Button
         id="js-btn-create-step"
         bsStyle="primary"
         className="btn-outline-primary box-content__toolbar mb-20"
-        onClick={ () =>
+        onClick={() =>
           dispatch(
             arrayPush(formName, 'statuses', {
               id: null,
@@ -205,34 +205,34 @@ export const ProjectAdminCollectStepForm = ({
             }),
           )
         }>
-        <i className="fa fa-plus-circle"/> <FormattedMessage id="global.add"/>
+        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </Button>
-      { statusesWithId?.length ? (
+      {statusesWithId?.length ? (
         <Field
           labelClassName="control-label"
           inputClassName="fake-inputClassName"
-          component={ select }
+          component={select}
           name="defaultStatus"
           id="step-defaultStatus"
           placeholder=" "
-          label={ <FormattedMessage id="admin.fields.step.default_status"/> }
-          options={ statusesWithId.map(s => ({label: s.name, value: s.id})) }
+          label={<FormattedMessage id="admin.fields.step.default_status" />}
+          options={statusesWithId.map(s => ({ label: s.name, value: s.id }))}
         />
       ) : (
         ''
-      ) }
-      { renderSubSection('requirements') }
+      )}
+      {renderSubSection('requirements')}
       <FieldArray
         name="requirements"
-        component={ StepRequirementsList }
-        formName={ formName }
-        requirements={ requirements }
+        component={StepRequirementsList}
+        formName={formName}
+        requirements={requirements}
       />
       <Button
         id="js-btn-create-step"
         bsStyle="primary"
         className="btn-outline-primary box-content__toolbar mb-20"
-        onClick={ () =>
+        onClick={() =>
           dispatch(
             arrayPush(formName, 'requirements', {
               uniqueId: getUId(),
@@ -241,14 +241,14 @@ export const ProjectAdminCollectStepForm = ({
             }),
           )
         }>
-        <i className="fa fa-plus-circle"/> <FormattedMessage id="global.add"/>
+        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </Button>
       <Field
         type="editor"
         name="requirementsReason"
         id="step-requirementsReason"
-        label={ <FormattedMessage id="reason-for-collection"/> }
-        component={ component }
+        label={<FormattedMessage id="reason-for-collection" />}
+        component={component}
       />
     </>
   );

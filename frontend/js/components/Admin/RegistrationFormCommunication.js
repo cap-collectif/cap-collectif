@@ -99,18 +99,18 @@ export const RegistrationFormCommunication = ({
         <Field
           type="checkbox"
           name="topTextDisplayed"
-          children={<FormattedMessage id="registration.admin.topText" />}
           component={renderInput}
-          id="display-message-above-form"
-        />
+          id="display-message-above-form">
+          <FormattedMessage id="registration.admin.topText" />
+        </Field>
         {useTopText && <Field name="topText" type="admin-editor" component={renderInput} />}
         <Field
           type="checkbox"
           name="bottomTextDisplayed"
-          children={<FormattedMessage id="registration.admin.bottomText" />}
           component={renderInput}
-          id="display-message-below-form"
-        />
+          id="display-message-below-form">
+          <FormattedMessage id="registration.admin.bottomText" />
+        </Field>
         {useBottomText && <Field name="bottomText" type="admin-editor" component={renderInput} />}
         <div className="box-content__toolbar btn-toolbar">
           <Button type="submit" disabled={submitting} className="btn btn-primary">

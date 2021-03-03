@@ -156,7 +156,6 @@ export const renderComponent = ({
   return (
     <ReactPlaceholder
       ready={false}
-      children={null}
       customPlaceholder={
         <AnalysisPageContentPlaceholder
           isIndexPage={isIndexPage}
@@ -164,8 +163,9 @@ export const renderComponent = ({
           fetchData={retry}
           selectedTab={isIndexPage ? null : parameters.filters.state}
         />
-      }
-    />
+      }>
+      {null}
+    </ReactPlaceholder>
   );
 };
 

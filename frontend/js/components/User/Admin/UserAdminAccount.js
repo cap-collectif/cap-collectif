@@ -121,27 +121,15 @@ export class UserAdminAccount extends React.Component<Props, State> {
             </h3>
           </div>
           <div className="box-content box-content__content-form">
-            <Field
-              name="vip"
-              component={component}
-              type="checkbox"
-              id="vip"
-              children={<FormattedMessage id="form.label_vip" />}
-            />
-            <Field
-              name="enabled"
-              component={component}
-              type="checkbox"
-              id="enabled"
-              children={<FormattedMessage id="form.label_enabled" />}
-            />
-            <Field
-              name="locked"
-              component={component}
-              type="checkbox"
-              id="locked"
-              children={<FormattedMessage id="form.label_locked" />}
-            />
+            <Field name="vip" component={component} type="checkbox" id="vip">
+              <FormattedMessage id="form.label_vip" />
+            </Field>
+            <Field name="enabled" component={component} type="checkbox" id="enabled">
+              <FormattedMessage id="form.label_enabled" />
+            </Field>
+            <Field name="locked" component={component} type="checkbox" id="locked">
+              <FormattedMessage id="form.label_locked" />
+            </Field>
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="form.label_real_roles" />
@@ -158,23 +146,21 @@ export class UserAdminAccount extends React.Component<Props, State> {
               name="newsletter"
               component={component}
               type="checkbox"
-              disabled={!user.isViewer}
-              children={
-                <div>
-                  <FormattedMessage id="newsletter" />{' '}
-                  <DatesInterval startAt={user.subscribedToNewsLetterAt} />
-                </div>
-              }
-            />
+              disabled={!user.isViewer}>
+              <div>
+                <FormattedMessage id="newsletter" />{' '}
+                <DatesInterval startAt={user.subscribedToNewsLetterAt} />
+              </div>
+            </Field>
             {user.isAdmin && (
               <Field
                 id="isSubscribedToProposalNews"
                 name="isSubscribedToProposalNews"
                 component={component}
                 type="checkbox"
-                disabled={!user.isViewer}
-                children={<FormattedMessage id="proposals-actualities" />}
-              />
+                disabled={!user.isViewer}>
+                <FormattedMessage id="proposals-actualities" />
+              </Field>
             )}
             <ButtonToolbar className="box-content__toolbar">
               <Button

@@ -223,29 +223,25 @@ export const RegistrationForm = ({
         component={renderComponent}
         ariaRequired
         type="checkbox"
-        labelClassName="font-weight-normal"
-        children={
-          <span>
-            {chartLinkComponent} {privacyPolicyComponent}
-          </span>
-        }
-      />
+        labelClassName="font-weight-normal">
+        <span>
+          {chartLinkComponent} {privacyPolicyComponent}
+        </span>
+      </Field>
       {addConsentInternalCommunicationField && (
         <Field
           id="consent-internal-communication"
           name="consentInternalCommunication"
           component={renderComponent}
           type="checkbox"
-          labelClassName="font-weight-normal"
-          children={
-            <FormattedMessage
-              id="receive-news-and-results-of-the-consultations"
-              values={{
-                from: internalCommunicationFrom,
-              }}
-            />
-          }
-        />
+          labelClassName="font-weight-normal">
+          <FormattedMessage
+            id="receive-news-and-results-of-the-consultations"
+            values={{
+              from: internalCommunicationFrom,
+            }}
+          />
+        </Field>
       )}
       {addConsentExternalCommunicationField && (
         <Field
@@ -253,16 +249,14 @@ export const RegistrationForm = ({
           name="consentExternalCommunication"
           component={renderComponent}
           type="checkbox"
-          labelClassName="font-weight-normal"
-          children={
-            <FormattedMessage
-              id="registration.consent_external_communication"
-              values={{
-                organization_name: organizationName,
-              }}
-            />
-          }
-        />
+          labelClassName="font-weight-normal">
+          <FormattedMessage
+            id="registration.consent_external_communication"
+            values={{
+              organization_name: organizationName,
+            }}
+          />
+        </Field>
       )}
       {addCaptchaField && (
         <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />

@@ -59,8 +59,6 @@ export class ProposalResponse extends React.PureComponent<Props> {
       response.question.__typename === 'MultipleChoiceQuestion' &&
       response.question.type !== 'select';
     const defaultEditorEmptyValue = '<p><br></p>';
-    let value = '';
-
     if (questionType === 'section') {
       return (
         <Section description={response.question.description} level={response.question.level}>
@@ -100,28 +98,32 @@ export class ProposalResponse extends React.PureComponent<Props> {
 
     switch (response.question.type) {
       case 'medias':
-        value = (
-          <div>
-            <h3 className="h3">{response.question.title}</h3>
-            {/* $FlowFixMe */}
-            <ProposalMediaResponse medias={response.medias} />
-          </div>
+        return (
+          <PrivateBox show={response.question.private} divClassName="block">
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              {/* $FlowFixMe */}
+              <ProposalMediaResponse medias={response.medias} />
+            </div>
+          </PrivateBox>
         );
-        break;
 
       case 'radio':
       case 'checkbox':
       case 'button': {
         const radioLabels = JSON.parse(response.value || '');
         if (radioLabels && !radioLabels.labels) {
-          value = (
-            <div>
-              <h3 className="h3">{response.question.title}</h3>
-              <p>{radioLabels}</p>
-            </div>
+          return (
+            <PrivateBox show={response.question.private} divClassName="block">
+              <div>
+                <h3 className="h3">{response.question.title}</h3>
+                <p>{radioLabels}</p>
+              </div>
+            </PrivateBox>
           );
-        } else {
-          value = (
+        }
+        return (
+          <PrivateBox show={response.question.private} divClassName="block">
             <div>
               <h3 className="h3">{response.question.title}</h3>
               {radioLabels && radioLabels.labels.length > 1 ? (
@@ -135,21 +137,23 @@ export class ProposalResponse extends React.PureComponent<Props> {
                 this.renderUniqueLabel(radioLabels)
               )}
             </div>
-          );
-        }
-        break;
+          </PrivateBox>
+        );
       }
       case 'ranking': {
         const radioLabels = JSON.parse(response.value || '');
         if (radioLabels && !radioLabels.labels) {
-          value = (
-            <div>
-              <h3 className="h3">{response.question.title}</h3>
-              <p>{radioLabels}</p>
-            </div>
+          return (
+            <PrivateBox show={response.question.private} divClassName="block">
+              <div>
+                <h3 className="h3">{response.question.title}</h3>
+                <p>{radioLabels}</p>
+              </div>
+            </PrivateBox>
           );
-        } else {
-          value = (
+        }
+        return (
+          <PrivateBox show={response.question.private} divClassName="block">
             <div>
               <h3 className="h3">{response.question.title}</h3>
               <ol>
@@ -157,9 +161,8 @@ export class ProposalResponse extends React.PureComponent<Props> {
                   radioLabels.labels.map((label, index) => <li key={index}>{label}</li>)}
               </ol>
             </div>
-          );
-        }
-        break;
+          </PrivateBox>
+        );
       }
 
       case 'majority': {
@@ -167,15 +170,14 @@ export class ProposalResponse extends React.PureComponent<Props> {
         const majorityResponse = ((majorities.find(
           majority => majority.value === response.value,
         ): any): MajorityProperty);
-
-        value = (
-          <div>
-            <h3 className="h3">{response.question.title}</h3>
-            <FormattedMessage id={majorityResponse.label} />
-          </div>
+        return (
+          <PrivateBox show={response.question.private} divClassName="block">
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              <FormattedMessage id={majorityResponse.label} />
+            </div>
+          </PrivateBox>
         );
-
-        break;
       }
 
       default: {
@@ -197,21 +199,20 @@ export class ProposalResponse extends React.PureComponent<Props> {
           responseValue = response.value || '';
           responseValue = <p>{responseValue}</p>;
         }
-
-        value = (
-          <div>
-            <h3 className="h3">{response.question.title}</h3>
-            {response.value && isHTML(response.value) ? (
-              <WYSIWYGRender value={response.value} />
-            ) : (
-              responseValue
-            )}
-          </div>
+        return (
+          <PrivateBox show={response.question.private} divClassName="block">
+            <div>
+              <h3 className="h3">{response.question.title}</h3>
+              {response.value && isHTML(response.value) ? (
+                <WYSIWYGRender value={response.value} />
+              ) : (
+                responseValue
+              )}
+            </div>
+          </PrivateBox>
         );
       }
     }
-
-    return <PrivateBox show={response.question.private} children={value} divClassName="block" />;
   }
 }
 

@@ -69,11 +69,11 @@ export class OpinionEditForm extends React.Component<Props> {
           type="checkbox"
           wrapperClassName="checkbox"
           name="check"
-          children={<FormattedMessage id="opinion.edit_check" />}
           component={renderInput}
           id="opinion_check"
-          divClassName="alert alert-warning edit-confirm-alert"
-        />
+          divClassName="alert alert-warning edit-confirm-alert">
+          <FormattedMessage id="opinion.edit_check" />
+        </Field>
         <Field
           name="title"
           type="text"

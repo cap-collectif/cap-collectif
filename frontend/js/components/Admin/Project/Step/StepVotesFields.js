@@ -171,7 +171,6 @@ export function StepVotesFields({
                       component={component}
                       id="step-votesRanking"
                       name="votesRanking"
-                      children={<FormattedMessage id="activate-vote-ranking" />}
                       groupClassName="m-0"
                       globalClassName="m-0"
                       labelClassName="m-0"
@@ -200,8 +199,9 @@ export function StepVotesFields({
                             setVotesMinState(1);
                           }
                         }
-                      }}
-                    />
+                      }}>
+                      <FormattedMessage id="activate-vote-ranking" />
+                    </Field>
                     <HelpBlock className="excerpt">
                       <FormattedHTMLMessage id="help-text-vote-ranking" />
                     </HelpBlock>

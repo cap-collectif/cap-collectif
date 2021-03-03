@@ -79,28 +79,28 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
             {isSuperAdmin && (
               <Field
                 name="commentable"
-                children={<FormattedMessage id="proposal_form.commentable" />}
                 component={component}
                 type="checkbox"
-                id="proposal_form_commentable"
-              />
+                id="proposal_form_commentable">
+                <FormattedMessage id="proposal_form.commentable" />
+              </Field>
             )}
             {isSuperAdmin && (
               <Field
                 name="suggestingSimilarProposals"
-                children={<FormattedMessage id="proposal_form.suggestingSimilarProposals" />}
                 component={component}
                 type="checkbox"
-                id="proposal_form_suggestingSimilarProposals"
-              />
+                id="proposal_form_suggestingSimilarProposals">
+                <FormattedMessage id="proposal_form.suggestingSimilarProposals" />
+              </Field>
             )}
             <Field
               name="costable"
-              children={<FormattedMessage id="proposal_form.costable" />}
               component={component}
               type="checkbox"
-              id="proposal_form_costable"
-            />
+              id="proposal_form_costable">
+              <FormattedMessage id="proposal_form.costable" />
+            </Field>
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}

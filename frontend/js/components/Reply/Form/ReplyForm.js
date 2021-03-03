@@ -251,9 +251,9 @@ export class ReplyForm extends React.Component<Props> {
                 helpPrint={false}
                 id={`${form}-reply-private`}
                 component={renderComponent}
-                children={<FormattedMessage id="reply.form.private" />}
-                disabled={disabled}
-              />
+                disabled={disabled}>
+                <FormattedMessage id="reply.form.private" />
+              </Field>
             </>
           )}
 

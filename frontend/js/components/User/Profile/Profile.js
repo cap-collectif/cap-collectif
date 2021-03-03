@@ -339,9 +339,9 @@ export class Profile extends Component<Props> {
                 component={component}
                 type="checkbox"
                 labelClassName="font-weight-normal"
-                children={<FormattedMessage id="user.profile.edit.profilePageIndexed" />}
-                divClassName="col-sm-8"
-              />
+                divClassName="col-sm-8">
+                <FormattedMessage id="user.profile.edit.profilePageIndexed" />
+              </Field>
             </div>
             <div className="horizontal_field_with_border_top">
               <div className="col-sm-3" />

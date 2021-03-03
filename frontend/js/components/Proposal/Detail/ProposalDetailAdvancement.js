@@ -156,31 +156,26 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
                   : displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast
                   ? green
                   : grey
-              }
-              children={
-                step.isCurrent &&
-                step.allowingProgressSteps && (
-                  <div style={{ marginLeft: 30 }}>
-                    {progressSteps.map((progressStep, i) => (
-                      <ProposalDetailAdvancementStep
-                        key={i}
-                        step={{
-                          title: progressStep.title,
-                          startAt: progressStep.startAt,
-                          endAt: progressStep.endAt ? progressStep.endAt : null,
-                          progressStep: true,
-                        }}
-                        status={progressStep.status}
-                        roundColor={progressStep.roundColor}
-                        borderColor={
-                          i + 1 === progressSteps.length ? null : progressStep.borderColor
-                        }
-                      />
-                    ))}
-                  </div>
-                )
-              }
-            />
+              }>
+              {step.isCurrent && step.allowingProgressSteps && (
+                <div style={{ marginLeft: 30 }}>
+                  {progressSteps.map((progressStep, i) => (
+                    <ProposalDetailAdvancementStep
+                      key={i}
+                      step={{
+                        title: progressStep.title,
+                        startAt: progressStep.startAt,
+                        endAt: progressStep.endAt ? progressStep.endAt : null,
+                        progressStep: true,
+                      }}
+                      status={progressStep.status}
+                      roundColor={progressStep.roundColor}
+                      borderColor={i + 1 === progressSteps.length ? null : progressStep.borderColor}
+                    />
+                  ))}
+                </div>
+              )}
+            </ProposalDetailAdvancementStep>
           );
         })}
       </>

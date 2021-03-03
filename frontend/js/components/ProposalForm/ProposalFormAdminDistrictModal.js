@@ -69,14 +69,11 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg" bsSize="large">
         <Modal.Header closeButton>
-          <Modal.Title
-            id="report-modal-title-lg"
-            children={
-              <FormattedMessage
-                id={!isCreating ? 'district_modal.create.title' : 'add.geographical.area'}
-              />
-            }
-          />
+          <Modal.Title id="report-modal-title-lg">
+            <FormattedMessage
+              id={!isCreating ? 'district_modal.create.title' : 'add.geographical.area'}
+            />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {/* $FlowFixMe Here we pass the redux form props instead of fragment */}

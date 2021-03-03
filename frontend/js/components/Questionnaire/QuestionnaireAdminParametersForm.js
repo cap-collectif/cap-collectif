@@ -64,11 +64,11 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
             </div>
             <Field
               name="acknowledgeReplies"
-              children={<FormattedMessage id="admin.fields.questionnaire.acknowledge_replies" />}
               component={component}
               type="checkbox"
-              id="questionnaire_notification"
-            />
+              id="questionnaire_notification">
+              <FormattedMessage id="admin.fields.questionnaire.acknowledge_replies" />
+            </Field>
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="global.options" />
@@ -76,18 +76,18 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
             </div>
             <Field
               name="anonymousAllowed"
-              children={<FormattedMessage id="reply-anonymously" />}
               component={component}
               type="checkbox"
-              id="questionnaire_anonymous"
-            />
+              id="questionnaire_anonymous">
+              <FormattedMessage id="reply-anonymously" />
+            </Field>
             <Field
               name="multipleRepliesAllowed"
-              children={<FormattedMessage id="answer-several-times" />}
               component={component}
               type="checkbox"
-              id="questionnaire_multiple"
-            />
+              id="questionnaire_multiple">
+              <FormattedMessage id="answer-several-times" />
+            </Field>
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="results" />

@@ -52,12 +52,9 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
         <ModalContainer>
           <Modal.Header closeButton>
             <div className="modal-title">
-              <Modal.Title
-                id="proposal-form-admin-question-modal-title-lg"
-                children={
-                  <FormattedMessage id={!isCreating ? 'global-add-answer' : 'global-edit-answer'} />
-                }
-              />
+              <Modal.Title id="proposal-form-admin-question-modal-title-lg">
+                <FormattedMessage id={!isCreating ? 'global-add-answer' : 'global-edit-answer'} />
+              </Modal.Title>
             </div>
           </Modal.Header>
           <Modal.Body>

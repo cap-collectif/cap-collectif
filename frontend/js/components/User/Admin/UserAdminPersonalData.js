@@ -130,15 +130,13 @@ export class UserAdminPersonalData extends React.Component<Props> {
               isReduxForm
               type="checkbox"
               disabled
-              divClassName="col-sm-4"
-              children={
-                <div>
-                  <FormattedMessage id="confirmed-by-email" />
-                  &nbsp;
-                  <DatesInterval startAt={user.emailConfirmationSentAt} />
-                </div>
-              }
-            />
+              divClassName="col-sm-4">
+              <div>
+                <FormattedMessage id="confirmed-by-email" />
+                &nbsp;
+                <DatesInterval startAt={user.emailConfirmationSentAt} />
+              </div>
+            </Field>
             <div className="clearfix" />
             <Field
               name="firstname"
@@ -248,9 +246,9 @@ export class UserAdminPersonalData extends React.Component<Props> {
               component={component}
               type="checkbox"
               disabled
-              children={<FormattedMessage id="form.label_phone_confirmed" />}
-              divClassName="col-sm-4"
-            />
+              divClassName="col-sm-4">
+              <FormattedMessage id="form.label_phone_confirmed" />
+            </Field>
             <div className="clearfix" />
             <ButtonToolbar className="box-content__toolbar">
               <Button

@@ -92,10 +92,9 @@ export const ProposalContactModal = ({
     aria-labelledby="ProposalFormContactModal-modal">
     <form onSubmit={handleSubmit} id={formName}>
       <Modal.Header closeButton>
-        <Modal.Title
-          id="ProposalFormContactModal-title"
-          children={<FormattedMessage id="send-message-to" values={{ messageTo: authorName }} />}
-        />
+        <Modal.Title id="ProposalFormContactModal-title">
+          <FormattedMessage id="send-message-to" values={{ messageTo: authorName }} />
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Field

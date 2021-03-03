@@ -21,13 +21,11 @@ export const LocaleAdminModalListItem = ({ locale }: Props) => {
       name={`${id}.isEnabled`}
       divClassName="pl-20"
       id={`locale-${id}-enabled`}
-      children={
-        <span className="font-weight-bold">
-          <FormattedMessage id={traductionKey} />
-        </span>
-      }
-      component={renderInput}
-    />
+      component={renderInput}>
+      <span className="font-weight-bold">
+        <FormattedMessage id={traductionKey} />
+      </span>
+    </Field>
   );
 };
 

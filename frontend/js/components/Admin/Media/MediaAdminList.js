@@ -90,7 +90,9 @@ export const MediaAdminList = ({ query, relay }: Props) => {
                   type="button"
                   className="delete ml-5"
                   onClick={() => setShowDeleteModal(true)}>
-                  <FormattedMessage id="global.delete" children={(msg: string) => <>{msg}</>} />
+                  <FormattedMessage id="global.delete">
+                    {(msg: string) => <>{msg}</>}
+                  </FormattedMessage>
                 </button>
               )}
             </S.MediaColumn>
@@ -133,10 +135,9 @@ export const MediaAdminList = ({ query, relay }: Props) => {
                               setViewedMedia(media.url);
                               setShowMediaViewModal(true);
                             }}>
-                            <FormattedMessage
-                              id="action_show"
-                              children={(msg: string) => <>{msg}</>}
-                            />
+                            <FormattedMessage id="action_show">
+                              {(msg: string) => <>{msg}</>}
+                            </FormattedMessage>
                           </button>
                           <span>|</span>
                         </>
@@ -148,10 +149,9 @@ export const MediaAdminList = ({ query, relay }: Props) => {
                           setDeletedMedia(media.id);
                           setShowDeleteModal(true);
                         }}>
-                        <FormattedMessage
-                          id="global.delete"
-                          children={(msg: string) => <>{msg}</>}
-                        />
+                        <FormattedMessage id="global.delete">
+                          {(msg: string) => <>{msg}</>}
+                        </FormattedMessage>
                       </button>
                     </div>
                   </S.MediaColumnImage>

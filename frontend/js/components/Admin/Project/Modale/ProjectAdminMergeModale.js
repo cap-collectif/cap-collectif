@@ -96,7 +96,9 @@ export const ProjectAdminMergeModale = ({
       aria-labelledby="modale-title">
       <form name={formName} onSubmit={handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title id="modale-title" children={<FormattedMessage id="proposal.add_fusion" />} />
+          <Modal.Title id="modale-title">
+            <FormattedMessage id="proposal.add_fusion" />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Field

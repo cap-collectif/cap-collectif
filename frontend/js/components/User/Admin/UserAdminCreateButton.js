@@ -199,27 +199,27 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 component={component}
                 type="checkbox"
                 label={<FormattedMessage id="admin.fields.step.group_statuses" />}
-                value="vip"
-                children={<FormattedMessage id="form.label_vip" />}
-              />
+                value="vip">
+                <FormattedMessage id="form.label_vip" />
+              </Field>
               <Field
                 id="enabled"
                 name="enabled"
                 component={component}
                 type="checkbox"
                 isOtherAllowed
-                value="enabled"
-                children={<FormattedMessage id="list.label_enabled" />}
-              />
+                value="enabled">
+                <FormattedMessage id="list.label_enabled" />
+              </Field>
               <Field
                 id="locked"
                 name="locked"
                 component={component}
                 type="checkbox"
                 value="locked"
-                isOtherAllowed
-                children={<FormattedMessage id="list.label_locked" />}
-              />
+                isOtherAllowed>
+                <FormattedMessage id="list.label_locked" />
+              </Field>
             </form>
           </Modal.Body>
           <FooterContainer>

@@ -197,18 +197,15 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
       <Modal show={show} onHide={onClose} aria-labelledby="oauth2-sso-modal-lg">
         <form onSubmit={handleSubmit} id={`${formName}`}>
           <Modal.Header closeButton>
-            <Modal.Title
-              id="oauth2-sso-modal-lg"
-              children={
-                <FormattedMessage
-                  id={
-                    isCreating
-                      ? intl.formatMessage({ id: 'add-an-open-id-authentication-method' })
-                      : intl.formatMessage({ id: 'update-an-open-id-authentication-method' })
-                  }
-                />
-              }
-            />
+            <Modal.Title id="oauth2-sso-modal-lg">
+              <FormattedMessage
+                id={
+                  isCreating
+                    ? intl.formatMessage({ id: 'add-an-open-id-authentication-method' })
+                    : intl.formatMessage({ id: 'update-an-open-id-authentication-method' })
+                }
+              />
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Field

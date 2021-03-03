@@ -88,10 +88,9 @@ const SectionQuestionAdminModal = ({
       <ModalContainer>
         <Modal.Header>
           <div className="modal-title">
-            <Modal.Title
-              id="proposal-form-admin-question-modal-title-lg"
-              children={<FormattedMessage id={!isCreating ? 'create-section' : 'modify-section'} />}
-            />
+            <Modal.Title id="proposal-form-admin-question-modal-title-lg">
+              <FormattedMessage id={!isCreating ? 'create-section' : 'modify-section'} />
+            </Modal.Title>
           </div>
         </Modal.Header>
         <Modal.Body>
@@ -116,13 +115,13 @@ const SectionQuestionAdminModal = ({
           />
           <div className="regular-weight-field">
             <Field
-              children={<FormattedMessage id="admin.fields.question.private" />}
               id={`${member}.private`}
               normalize={(val: ?boolean) => !!val}
               name={`${member}.private`}
               type="checkbox"
-              component={component}
-            />
+              component={component}>
+              <FormattedMessage id="admin.fields.question.private" />
+            </Field>
           </div>
 
           <h4 style={{ fontWeight: 'bold' }}>

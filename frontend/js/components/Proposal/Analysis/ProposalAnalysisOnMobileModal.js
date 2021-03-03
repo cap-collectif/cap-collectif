@@ -19,10 +19,9 @@ const Body: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 export const ProposalAnalysisOnMobileModal = ({ show, onClose }: Props) => (
   <Modal show={show} onHide={onClose} aria-labelledby="proposal-analysis-modal-mobile">
     <Modal.Header closeButton>
-      <Modal.Title
-        id="proposal-analysis-modal-mobile"
-        children={<FormattedMessage id="analyzing.proposal" />}
-      />
+      <Modal.Title id="proposal-analysis-modal-mobile">
+        <FormattedMessage id="analyzing.proposal" />
+      </Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Body>

@@ -121,10 +121,10 @@ export const ProjectAdminSelectionStepForm = ({
           <Field
             component={component}
             type="checkbox"
-            children={<FormattedMessage id="allow-proposal-news" />}
             name="allowAuthorsToAddNews"
-            id="step-allowAuthorsToAddNews"
-          />
+            id="step-allowAuthorsToAddNews">
+            <FormattedMessage id="allow-proposal-news" />
+          </Field>
         </Flex>
       </ProjectSmallFieldsContainer>
       <Field
