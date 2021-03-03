@@ -59,6 +59,7 @@ class User extends BaseUser implements
     protected Collection $opinionVersions;
     protected Collection $comments;
     protected Collection $arguments;
+    protected Collection $debateArguments;
     protected Collection $votes;
     protected Collection $sources;
     protected Collection $proposals;
@@ -115,6 +116,7 @@ class User extends BaseUser implements
         $this->responses = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->arguments = new ArrayCollection();
+        $this->debateArguments = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->proposals = new ArrayCollection();
@@ -307,6 +309,11 @@ class User extends BaseUser implements
         return $this->arguments;
     }
 
+    public function getDebateArguments(): Collection
+    {
+        return $this->debateArguments;
+    }
+
     public function getVotes(): Collection
     {
         return $this->votes;
@@ -417,6 +424,13 @@ class User extends BaseUser implements
     public function setArguments(Collection $arguments): self
     {
         $this->arguments = $arguments;
+
+        return $this;
+    }
+
+    public function setDebateArguments(Collection $debateArguments): self
+    {
+        $this->debateArguments = $debateArguments;
 
         return $this;
     }
@@ -606,6 +620,7 @@ class User extends BaseUser implements
             $this->getVotes(),
             $this->getComments(),
             $this->getArguments(),
+            $this->getDebateArguments(),
             $this->getSources(),
             $this->getProposals(),
             $this->getReplies(),

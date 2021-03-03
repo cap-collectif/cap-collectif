@@ -66,6 +66,12 @@ class DebateArgument implements
     use VotableOkTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="debateArguments")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    protected $author;
+
+    /**
      * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */

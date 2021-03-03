@@ -8,12 +8,12 @@ use Capco\AppBundle\Entity\Opinion;
 
 class UserSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\UserBundle\Entity\User');
     }
 
-    function it_can_return_contributions(Opinion $opinion)
+    public function it_can_return_contributions(Opinion $opinion)
     {
         $this->setVotes(new ArrayCollection());
         $this->setProposals(new ArrayCollection());
@@ -21,6 +21,7 @@ class UserSpec extends ObjectBehavior
         $this->setOpinionVersions(new ArrayCollection());
         $this->setComments(new ArrayCollection());
         $this->setArguments(new ArrayCollection());
+        $this->setDebateArguments(new ArrayCollection());
         $this->setSources(new ArrayCollection());
         $this->setReplies(new ArrayCollection());
         $this->getContributions()->shouldBeArray();

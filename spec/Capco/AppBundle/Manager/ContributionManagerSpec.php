@@ -1,9 +1,10 @@
 <?php
+
 namespace spec\Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument as Arg;
-use Doctrine\Orm\EntityManager;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -18,17 +19,17 @@ use Psr\Log\LoggerInterface;
 
 class ContributionManagerSpec extends ObjectBehavior
 {
-    function let(Indexer $indexer, LoggerInterface $logger)
+    public function let(Indexer $indexer, LoggerInterface $logger)
     {
         $this->beConstructedWith($indexer, $logger);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Manager\ContributionManager');
     }
 
-    function it_can_publish_contributions_of_a_user(
+    public function it_can_publish_contributions_of_a_user(
         User $user,
         OpinionVote $vote,
         Proposal $proposal,
@@ -36,6 +37,7 @@ class ContributionManagerSpec extends ObjectBehavior
         OpinionVersion $version,
         Comment $comment,
         Argument $argument,
+        DebateArgument $debateArgument,
         Source $source,
         Reply $reply
     ) {
@@ -54,6 +56,9 @@ class ContributionManagerSpec extends ObjectBehavior
         $argument->getStep()->willReturn(null);
         $argument->getId()->willReturn('argument1');
         $argument->setPublishedAt(Arg::any())->shouldBeCalled();
+        $debateArgument->getStep()->willReturn(null);
+        $debateArgument->getId()->willReturn('debateArgument1');
+        $debateArgument->setPublishedAt(Arg::any())->shouldBeCalled();
         $source->getStep()->willReturn(null);
         $source->getId()->willReturn('source1');
         $source->setPublishedAt(Arg::any())->shouldBeCalled();
@@ -70,6 +75,7 @@ class ContributionManagerSpec extends ObjectBehavior
                 $version,
                 $comment,
                 $argument,
+                $debateArgument,
                 $source,
                 $reply,
             ]);
@@ -77,7 +83,7 @@ class ContributionManagerSpec extends ObjectBehavior
         $this->publishContributions($user)->shouldReturn(true);
     }
 
-    function it_can_publish_contribution_of_a_user_with_nothing(User $user)
+    public function it_can_publish_contribution_of_a_user_with_nothing(User $user)
     {
         $user->getContributions()->willReturn([]);
         $this->publishContributions($user)->shouldReturn(false);
