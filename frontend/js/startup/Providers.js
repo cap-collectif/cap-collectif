@@ -3,10 +3,12 @@ import * as React from 'react';
 import { MotionConfig, AnimationFeature, ExitFeature } from 'framer-motion';
 import * as Sentry from '@sentry/browser';
 import { ThemeProvider } from 'styled-components';
+import { AnalyticsProvider } from 'use-analytics';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import { theme } from '~/styles/theme';
+import { analytics } from './analytics';
 
 if (window.sentryDsn) {
   Sentry.init({ dsn: window.sentryDsn });
@@ -41,7 +43,9 @@ class Providers extends React.Component<Props> {
       <Provider store={store}>
         <IntlProvider timeZone={window.timeZone}>
           <ThemeProvider theme={theme}>
-            <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>
+            <AnalyticsProvider instance={analytics}>
+              <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>{' '}
+            </AnalyticsProvider>
           </ThemeProvider>
         </IntlProvider>
       </Provider>

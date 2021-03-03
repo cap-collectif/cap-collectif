@@ -174,6 +174,14 @@ jest.mock('react-intl', () => {
   };
 });
 
+jest.mock('use-analytics', () => {
+  return {
+    useAnalytics: () => ({
+      track: jest.fn(),
+    }),
+  };
+});
+
 jest.mock('react-on-rails', () => {
   const ReactOnRails = {
     getStore: () => {},

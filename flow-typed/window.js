@@ -206,6 +206,13 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   btoa(decoded: string): string;
   atob(encoded: string): string;
 
+  // analytics
+  gtag(
+    command: 'config' | 'event' | 'get' | 'set' | 'consent',
+    parameters: string | Object,
+    parameters?: string | Object,
+  ): void;
+
   // hack to avoid error flow because of react-beautiful-dnd
   Element: any;
 }

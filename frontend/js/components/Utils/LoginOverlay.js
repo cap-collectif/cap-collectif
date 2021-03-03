@@ -3,8 +3,9 @@ import React, { cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger } from 'react-bootstrap';
-import { showRegistrationModal } from '../../redux/modules/user';
-import type { Dispatch, State } from '../../types';
+import { useAnalytics } from 'use-analytics';
+import { showRegistrationModal } from '~/redux/modules/user';
+import type { Dispatch, State } from '~/types';
 import LoginButton from '../User/Login/LoginButton';
 import Popover from './Popover';
 import { loginWithOpenID } from '~/redux/modules/default';
@@ -19,11 +20,11 @@ type OwnProps = {|
 |};
 
 type StateProps = {|
-  +user: ?Object,
+  +user?: ?Object,
   +isLoginOrRegistrationModalOpen: boolean,
   +showRegistrationButton: boolean,
-  +loginWithMonCompteParis: boolean,
-  +loginWithOpenId: boolean,
+  +loginWithMonCompteParis?: boolean,
+  +loginWithOpenId?: boolean,
 |};
 
 type Props = {|
@@ -32,71 +33,59 @@ type Props = {|
   +dispatch: Dispatch,
 |};
 
-export class LoginOverlay extends React.Component<Props> {
-  static displayName = 'LoginOverlay';
+export const LoginOverlay = ({
+  user = null,
+  children,
+  enabled = true,
+  showRegistrationButton,
+  isLoginOrRegistrationModalOpen = false,
+  loginWithMonCompteParis = false,
+  loginWithOpenId = false,
+  placement = 'top',
+  dispatch,
+}: Props) => {
+  const { track } = useAnalytics();
 
-  static defaultProps = {
-    user: null,
-    enabled: true,
-    isLoginOrRegistrationModalOpen: false,
-    loginWithMonCompteParis: false,
-    loginWithOpenId: false,
-    placement: 'top',
-  };
-
-  // We add Popover if user is not connected
-  render() {
-    const {
-      user,
-      children,
-      enabled,
-      showRegistrationButton,
-      isLoginOrRegistrationModalOpen,
-      loginWithMonCompteParis,
-      loginWithOpenId,
-      placement,
-      dispatch,
-    } = this.props;
-
-    if (!enabled || user) {
-      return children;
-    }
-
-    const popover = (
-      <Popover id="login-popover" title={<FormattedMessage id="vote.popover.title" />}>
-        <p>
-          <FormattedMessage id="vote.popover.body" />
-        </p>
-        {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
-          <p>
-            <Button
-              onClick={() => {
-                dispatch(showRegistrationModal());
-              }}
-              className="center-block btn-block">
-              <FormattedMessage id="global.registration" />
-            </Button>
-          </p>
-        )}
-        <p>
-          <LoginButton bsStyle="success" className="center-block btn-block" />
-        </p>
-      </Popover>
-    );
-
-    return (
-      <span>
-        <OverlayTrigger
-          trigger="click"
-          rootClose
-          placement={placement}
-          overlay={isLoginOrRegistrationModalOpen ? <span /> : popover}>
-          {cloneElement(children, { onClick: null })}
-        </OverlayTrigger>
-      </span>
-    );
+  if (!enabled || user) {
+    return children;
   }
-}
+
+  const popover = (
+    <Popover id="login-popover" title={<FormattedMessage id="vote.popover.title" />}>
+      <p>
+        <FormattedMessage id="vote.popover.body" />
+      </p>
+      {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
+        <p>
+          <Button
+            onClick={() => {
+              track('overlay_registration_click');
+              dispatch(showRegistrationModal());
+            }}
+            className="center-block btn-block">
+            <FormattedMessage id="global.registration" />
+          </Button>
+        </p>
+      )}
+      <p>
+        <LoginButton bsStyle="success" className="center-block btn-block" />
+      </p>
+    </Popover>
+  );
+
+  return (
+    <span>
+      <OverlayTrigger
+        trigger="click"
+        rootClose
+        placement={placement}
+        overlay={isLoginOrRegistrationModalOpen ? <span /> : popover}>
+        {cloneElement(children, { onClick: null })}
+      </OverlayTrigger>
+    </span>
+  );
+};
+LoginOverlay.displayName = 'LoginOverlay';
 
 const mapStateToProps = (state: State) => ({
   user: state.user.user,

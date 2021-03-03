@@ -69,7 +69,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     autoFocus={true}
     bsSize="small"
     enforceFocus={false}
-    onHide={[MockFunction]}
+    onHide={[Function]}
     show={true}
   >
     <ModalHeader
@@ -111,13 +111,13 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
         id="confirm-register"
         isSubmitting={false}
         label="global.register"
-        onSubmit={[MockFunction]}
+        onSubmit={[Function]}
       />
     </ModalFooter>
   </RegistrationModal__ModalContainer>
@@ -193,7 +193,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     autoFocus={true}
     bsSize="small"
     enforceFocus={false}
-    onHide={[MockFunction]}
+    onHide={[Function]}
     show={true}
   >
     <ModalHeader
@@ -249,13 +249,13 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
         id="confirm-register"
         isSubmitting={false}
         label="global.register"
-        onSubmit={[MockFunction]}
+        onSubmit={[Function]}
       />
     </ModalFooter>
   </RegistrationModal__ModalContainer>
@@ -331,7 +331,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     autoFocus={true}
     bsSize="small"
     enforceFocus={false}
-    onHide={[MockFunction]}
+    onHide={[Function]}
     show={false}
   >
     <ModalHeader
@@ -373,13 +373,13 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
         id="confirm-register"
         isSubmitting={false}
         label="global.register"
-        onSubmit={[MockFunction]}
+        onSubmit={[Function]}
       />
     </ModalFooter>
   </RegistrationModal__ModalContainer>
@@ -455,7 +455,7 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
     autoFocus={true}
     bsSize="small"
     enforceFocus={false}
-    onHide={[MockFunction]}
+    onHide={[Function]}
     show={true}
   >
     <ModalHeader
@@ -497,13 +497,13 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
         id="confirm-register"
         isSubmitting={false}
         label="global.register"
-        onSubmit={[MockFunction]}
+        onSubmit={[Function]}
       />
     </ModalFooter>
   </RegistrationModal__ModalContainer>
@@ -579,7 +579,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
     autoFocus={true}
     bsSize="small"
     enforceFocus={false}
-    onHide={[MockFunction]}
+    onHide={[Function]}
     show={true}
   >
     <ModalHeader
@@ -621,13 +621,13 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
         id="confirm-register"
         isSubmitting={false}
         label="global.register"
-        onSubmit={[MockFunction]}
+        onSubmit={[Function]}
       />
     </ModalFooter>
   </RegistrationModal__ModalContainer>
@@ -703,7 +703,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     autoFocus={true}
     bsSize="small"
     enforceFocus={false}
-    onHide={[MockFunction]}
+    onHide={[Function]}
     show={true}
   >
     <ModalHeader
@@ -745,13 +745,13 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
         id="confirm-register"
         isSubmitting={false}
         label="global.register"
-        onSubmit={[MockFunction]}
+        onSubmit={[Function]}
       />
     </ModalFooter>
   </RegistrationModal__ModalContainer>

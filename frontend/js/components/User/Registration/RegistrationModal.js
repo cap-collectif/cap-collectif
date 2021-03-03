@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { isSubmitting, submit } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { useAnalytics } from 'use-analytics';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm, { form } from './RegistrationForm';
@@ -85,67 +86,82 @@ export const RegistrationModal = ({
   charterBody,
   query,
   locale,
-}: Props) => (
-  <>
-    <Modal
-      animation={false}
-      show={displayChartModal}
-      autoFocus
-      onHide={onCloseChart}
-      bsSize="medium"
-      aria-labelledby="contained-modal-title-lg"
-      enforceFocus={false}>
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-lg" componentClass="h1">
-          <FormattedMessage id="charter" />
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <WYSIWYGRender value={charterBody} />
-      </Modal.Body>
-      <Modal.Footer>
-        <CloseButton label="global.close" onClose={onCloseChart} />
-      </Modal.Footer>
-    </Modal>
-    <ModalContainer
-      animation={false}
-      show={show}
-      autoFocus
-      onHide={onClose}
-      bsSize="small"
-      aria-labelledby="contained-modal-title-lg"
-      enforceFocus={false}>
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-lg" componentClass="h1">
-          <FormattedMessage id="global.register" />
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {textTop && (
-          <Alert bsStyle="info" className="text-center">
-            <WYSIWYGRender value={textTop} />
-          </Alert>
-        )}
-        <LoginSocialButtons prefix="registration." />
+}: Props) => {
+  const { track } = useAnalytics();
 
-        <RegistrationForm query={query} locale={locale} />
+  return (
+    <>
+      <Modal
+        animation={false}
+        show={displayChartModal}
+        autoFocus
+        onHide={onCloseChart}
+        bsSize="medium"
+        aria-labelledby="contained-modal-title-lg"
+        enforceFocus={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg" componentClass="h1">
+            <FormattedMessage id="charter" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <WYSIWYGRender value={charterBody} />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton label="global.close" onClose={onCloseChart} />
+        </Modal.Footer>
+      </Modal>
+      <ModalContainer
+        animation={false}
+        show={show}
+        autoFocus
+        onHide={() => {
+          track('registration_close_click');
+          onClose();
+        }}
+        bsSize="small"
+        aria-labelledby="contained-modal-title-lg"
+        enforceFocus={false}>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg" componentClass="h1">
+            <FormattedMessage id="global.register" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {textTop && (
+            <Alert bsStyle="info" className="text-center">
+              <WYSIWYGRender value={textTop} />
+            </Alert>
+          )}
+          <LoginSocialButtons prefix="registration." />
 
-        {textBottom && (
-          <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />
-        )}
-      </Modal.Body>
-      <Modal.Footer>
-        <CloseButton onClose={onClose} />
-        <SubmitButton
-          id="confirm-register"
-          label="global.register"
-          isSubmitting={submitting}
-          onSubmit={onSubmit}
-        />
-      </Modal.Footer>
-    </ModalContainer>
-  </>
-);
+          <RegistrationForm query={query} locale={locale} />
+
+          {textBottom && (
+            <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton
+            onClose={() => {
+              track('registration_close_click');
+              onClose();
+            }}
+          />
+          <SubmitButton
+            id="confirm-register"
+            label="global.register"
+            isSubmitting={submitting}
+            onSubmit={() => {
+              track('registration_submit_click');
+              onSubmit();
+            }}
+          />
+        </Modal.Footer>
+      </ModalContainer>
+    </>
+  );
+};
 
 const mapStateToProps = state => ({
   textTop: state.user.registration_form.topTextDisplayed

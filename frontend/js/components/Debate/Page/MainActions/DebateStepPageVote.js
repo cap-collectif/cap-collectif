@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
+import { useAnalytics } from 'use-analytics';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import AddDebateVoteMutation from '~/mutations/AddDebateVoteMutation';
@@ -71,6 +72,7 @@ export const DebateStepPageVote = ({
   viewerHasArgument,
   ...props
 }: Props) => {
+  const { track } = useAnalytics();
   const intl = useIntl();
   const [isHover, setIsHover] = useState<'FOR' | 'AGAINST' | false>(false);
 
@@ -91,9 +93,10 @@ export const DebateStepPageVote = ({
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('green', isHover === 'AGAINST'))}
           variantSize="big"
-          onClick={() =>
-            voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated, viewerHasArgument)
-          }
+          onClick={() => {
+            track('debate_vote_click', { type: 'FOR' });
+            voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated, viewerHasArgument);
+          }}
           leftIcon="THUMB_UP">
           <FormattedMessage id="global.for" />
         </Button>
@@ -104,9 +107,10 @@ export const DebateStepPageVote = ({
           onMouseLeave={() => setIsHover(false)}
           css={css(buttonColor('red', isHover === 'FOR'))}
           variantSize="big"
-          onClick={() =>
-            voteForDebate(debateId, 'AGAINST', intl, onSuccess, isAuthenticated, viewerHasArgument)
-          }
+          onClick={() => {
+            track('debate_vote_click', { type: 'AGAINST' });
+            voteForDebate(debateId, 'AGAINST', intl, onSuccess, isAuthenticated, viewerHasArgument);
+          }}
           leftIcon="THUMB_DOWN">
           <FormattedMessage id="global.against" />
         </Button>
