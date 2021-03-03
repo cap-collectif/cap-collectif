@@ -23,7 +23,7 @@ class DebateOpinionType extends AbstractType
             ])
             ->add('body', TextareaType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default',
+                'purify_html_profile' => 'admin',
             ])
             ->add('author', RelayNodeType::class, [
                 'class' => User::class,

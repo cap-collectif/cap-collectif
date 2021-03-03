@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|addDebateOpinion mutation Add a debate opinion with an iframe. 1`] = `
+Object {
+  "addDebateOpinion": Object {
+    "debateOpinion": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyNQ==",
+      },
+      "body": "oh allez <iframe class=\\"ql-video\\" src=\\"https://www.youtube.com/embed/NRWem9fpByg?showinfo=0\\" frameborder=\\"0\\"></iframe>",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "id": Any<String>,
+      "title": "Je suis pour",
+      "type": "FOR",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
 exports[`Internal|addDebateOpinion mutation Add a debate opinion. 1`] = `
 Object {
   "addDebateOpinion": Object {
