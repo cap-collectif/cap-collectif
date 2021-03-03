@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Debate;
 
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\Steps\DebateStep;
@@ -60,6 +61,11 @@ class Debate
         }
 
         return $step->canContribute($viewer);
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->getStep() ? $this->getStep()->getProject() : null;
     }
 
     public function getStep(): ?DebateStep
