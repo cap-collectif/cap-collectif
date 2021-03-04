@@ -3,6 +3,13 @@
 {% block mainContent %}
 
     <h1>Je suis un super Widget</h1>
+    <p>
+        {% if app.user %}
+            Coucou {{ app.user }}, je sais que c'est toi grâce au cookie !
+        {% else %}
+            On veut tout savoir sur toi, alors connecte toi stp !
+        {% endif %}
+    </p>
     {# {{ react_render_component('DebateWidgetApp', {
         'rendering': 'client_side'
     }) }} #}

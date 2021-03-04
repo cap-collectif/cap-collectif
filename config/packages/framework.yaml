@@ -25,8 +25,21 @@ framework:
     trusted_hosts: null
     session:
         handler_id: snc_redis.session.handler
+        # /!\ Uptading this is a BC /!\
+        name: PHPSESSID
+        cookie_lifetime: 1209600 # Two weeks
         cookie_httponly: true
         cookie_secure: true
+        # /!\ Uptading this is a BC /!\
+        #
+        # Setting this option to "strict" is recommended to mitigate CSRF security attacks.
+        #
+        # In order to allow iframes using "/widgets_*" to share authentification with main domain,
+        # we must use the less secure option "none". But I'm not sure we should…
+        #
+        # I couldn't do it dynamically because symfony enums does not support env variables…
+        # TODO we need to fix Symfony https://github.com/symfony/symfony/issues/22594
+        cookie_samesite: 'lax'
     fragments: null
     http_method_override: true
     translator:
