@@ -10,6 +10,9 @@ module.exports = {
     'plugin:relay/recommended',
   ],
   parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 2015,
+  },
   plugins: [
     'flowtype',
     'import',
@@ -158,6 +161,8 @@ module.exports = {
       },
     ],
     'flowtype/require-valid-file-annotation': ['error', 'always'],
+    // No large Snapshots
+    'jest/no-large-snapshots': 'warn',
   },
   settings: {
     'import/resolver': {
