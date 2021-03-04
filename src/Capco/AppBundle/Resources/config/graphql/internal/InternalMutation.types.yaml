@@ -1158,3 +1158,10 @@ InternalMutation:
                     inputType: DeleteProposalNewsInput
                     payloadType: DeleteProposalNewsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalNewsMutation", [value, getUser()])'
+            addDebateAnonymousVote:
+                access: "hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddDebateAnonymousVoteInput
+                    payloadType: AddDebateAnonymousVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateAnonymousVoteMutation", [value])'

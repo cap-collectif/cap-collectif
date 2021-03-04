@@ -1,0 +1,25 @@
+Capco\AppBundle\Entity\Debate\DebateAnonymousVote:
+    DebateAnonymousVoteFor1:
+        id: 13000
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::FOR)>
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        debate: '@debateCannabis'
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        token: jesuisunsupertokengenshinimpact1
+    DebateAnonymousVoteFor2:
+        id: 13001
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::FOR)>
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        debate: '@debateCannabis'
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        token: jesuisunsupertokengenshinimpact2
+    DebateAnonymousVoteAgainst1:
+        id: 13002
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::AGAINST)>
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        debate: '@debateCannabis'
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        token: jesuisunsupertokengenshinimpact1

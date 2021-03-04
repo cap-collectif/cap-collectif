@@ -1,0 +1,19 @@
+Capco\AppBundle\Entity\Debate\DebateAnonymousVote:
+    attributes:
+        id:
+            groups: [ElasticsearchVote]
+        createdAt:
+            groups: [ElasticsearchVote]
+        voteType:
+            groups: [ElasticsearchDebateAnonymousVote]
+        getStep:
+            type: object
+            groups: [ElasticsearchVoteNestedStep]
+            serialized_name: step
+        getProject:
+            type: object
+            groups: [ElasticsearchVoteNestedProject]
+            serialized_name: project
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchVote]

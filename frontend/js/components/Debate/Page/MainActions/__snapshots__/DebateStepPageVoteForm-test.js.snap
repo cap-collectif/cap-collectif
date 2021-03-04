@@ -62,57 +62,63 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
       />
     </DebateStepPageVoteForm___StyledButton2>
   </ForwardRef>
-  <Card
-    bg="white"
-    borderRadius="8px"
-    boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-    mt={8}
-    p={6}
-    pb={6}
-    width="100%"
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
   >
-    <DebateStepPageVoteForm__Form
-      id="debate-argument-form"
+    <DebateStepPageVoteForm___StyledCard
+      bg="white"
+      borderRadius="8px"
+      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+      mt={8}
+      p={6}
+      pb={6}
+      width="100%"
     >
-      <Field
-        autoComplete="off"
-        component={[Function]}
-        id="body"
-        minLength="1"
-        name="body"
-        placeholder="why-are-you-against"
-        type="textarea"
-      />
-      <ForwardRef
-        justifyContent="flex-end"
+      <DebateStepPageVoteForm__Form
+        id="debate-argument-form"
       >
-        <Button
-          mr={7}
-          onClick={[Function]}
-          type="button"
-          variant="link"
-          variantColor="primary"
+        <Field
+          autoComplete="off"
+          component={[Function]}
+          disabled={false}
+          id="body"
+          minLength="1"
+          name="body"
+          placeholder="why-are-you-against"
+          type="textarea"
+        />
+        <ForwardRef
+          justifyContent="flex-end"
         >
-          <FormattedMessage
-            id="global.cancel"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          onClick={[Function]}
-          type="button"
-          variant="primary"
-          variantColor="primary"
-          variantSize="big"
-        >
-          <FormattedMessage
-            id="argument.publish.mine"
-            values={Object {}}
-          />
-        </Button>
-      </ForwardRef>
-    </DebateStepPageVoteForm__Form>
-  </Card>
+          <Button
+            mr={7}
+            onClick={[Function]}
+            type="button"
+            variant="link"
+            variantColor="primary"
+          >
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            onClick={[Function]}
+            type="button"
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            <FormattedMessage
+              id="argument.publish.mine"
+              values={Object {}}
+            />
+          </Button>
+        </ForwardRef>
+      </DebateStepPageVoteForm__Form>
+    </DebateStepPageVoteForm___StyledCard>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;
 
@@ -320,57 +326,63 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
       </Button>
     </Tooltip>
   </ForwardRef>
-  <Card
-    bg="white"
-    borderRadius="8px"
-    boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-    mt={8}
-    p={6}
-    pb={6}
-    width="100%"
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
   >
-    <DebateStepPageVoteForm__Form
-      id="debate-argument-form"
+    <DebateStepPageVoteForm___StyledCard
+      bg="white"
+      borderRadius="8px"
+      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+      mt={8}
+      p={6}
+      pb={6}
+      width="100%"
     >
-      <Field
-        autoComplete="off"
-        component={[Function]}
-        id="body"
-        minLength="1"
-        name="body"
-        placeholder="why-are-you-against"
-        type="textarea"
-      />
-      <ForwardRef
-        justifyContent="flex-end"
+      <DebateStepPageVoteForm__Form
+        id="debate-argument-form"
       >
-        <Button
-          mr={7}
-          onClick={[Function]}
-          type="button"
-          variant="link"
-          variantColor="primary"
+        <Field
+          autoComplete="off"
+          component={[Function]}
+          disabled={false}
+          id="body"
+          minLength="1"
+          name="body"
+          placeholder="why-are-you-against"
+          type="textarea"
+        />
+        <ForwardRef
+          justifyContent="flex-end"
         >
-          <FormattedMessage
-            id="global.cancel"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          onClick={[Function]}
-          type="button"
-          variant="primary"
-          variantColor="primary"
-          variantSize="big"
-        >
-          <FormattedMessage
-            id="argument.publish.mine"
-            values={Object {}}
-          />
-        </Button>
-      </ForwardRef>
-    </DebateStepPageVoteForm__Form>
-  </Card>
+          <Button
+            mr={7}
+            onClick={[Function]}
+            type="button"
+            variant="link"
+            variantColor="primary"
+          >
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            onClick={[Function]}
+            type="button"
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            <FormattedMessage
+              id="argument.publish.mine"
+              values={Object {}}
+            />
+          </Button>
+        </ForwardRef>
+      </DebateStepPageVoteForm__Form>
+    </DebateStepPageVoteForm___StyledCard>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;
 
@@ -583,57 +595,63 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
       />
     </DebateStepPageVoteForm___StyledButton2>
   </ForwardRef>
-  <Card
-    bg="white"
-    borderRadius="8px"
-    boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-    mt={8}
-    p={6}
-    pb={6}
-    width="100%"
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
   >
-    <DebateStepPageVoteForm__Form
-      id="debate-argument-form"
+    <DebateStepPageVoteForm___StyledCard
+      bg="white"
+      borderRadius="8px"
+      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+      mt={8}
+      p={6}
+      pb={6}
+      width="100%"
     >
-      <Field
-        autoComplete="off"
-        component={[Function]}
-        id="body"
-        minLength="1"
-        name="body"
-        placeholder="why-are-you-against"
-        type="textarea"
-      />
-      <ForwardRef
-        justifyContent="flex-end"
+      <DebateStepPageVoteForm__Form
+        id="debate-argument-form"
       >
-        <Button
-          mr={7}
-          onClick={[Function]}
-          type="button"
-          variant="link"
-          variantColor="primary"
+        <Field
+          autoComplete="off"
+          component={[Function]}
+          disabled={false}
+          id="body"
+          minLength="1"
+          name="body"
+          placeholder="why-are-you-against"
+          type="textarea"
+        />
+        <ForwardRef
+          justifyContent="flex-end"
         >
-          <FormattedMessage
-            id="global.cancel"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          onClick={[Function]}
-          type="button"
-          variant="primary"
-          variantColor="primary"
-          variantSize="big"
-        >
-          <FormattedMessage
-            id="argument.publish.mine"
-            values={Object {}}
-          />
-        </Button>
-      </ForwardRef>
-    </DebateStepPageVoteForm__Form>
-  </Card>
+          <Button
+            mr={7}
+            onClick={[Function]}
+            type="button"
+            variant="link"
+            variantColor="primary"
+          >
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            onClick={[Function]}
+            type="button"
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            <FormattedMessage
+              id="argument.publish.mine"
+              values={Object {}}
+            />
+          </Button>
+        </ForwardRef>
+      </DebateStepPageVoteForm__Form>
+    </DebateStepPageVoteForm___StyledCard>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;
 

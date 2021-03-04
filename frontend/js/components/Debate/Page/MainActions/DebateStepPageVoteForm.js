@@ -24,6 +24,8 @@ import { type VoteState, formName } from './DebateStepPageVoteAndShare';
 import useScript from '~/utils/hooks/useScript';
 import MobilePublishArgumentModal from '~/components/Debate/Page/Modals/MobilePublishArgumentModal';
 import Text from '~ui/Primitives/Text';
+import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
+import LoginOverlay from '~/components/Utils/LoginOverlay';
 
 type Props = {|
   +debate: DebateStepPageVoteForm_debate,
@@ -98,8 +100,9 @@ const bandMessage = {
   ARGUMENTED: 'thanks-for-debate-richer',
   NOT_CONFIRMED: 'publish.vote.validate.account',
   NOT_CONFIRMED_ARGUMENTED: 'publish.argument.validate.account',
-  NONE: '',
-  RESULT: '',
+  NONE: null,
+  RESULT: null,
+  RESULT_ANONYMOUS: 'thanks-for-debate-richer',
 };
 
 export const DebateStepPageVoteForm = ({
@@ -166,9 +169,7 @@ export const DebateStepPageVoteForm = ({
                     ? '🎉'
                     : '🗳️'}
                 </span>
-                {voteState !== 'NONE' && voteState !== 'RESULT' && (
-                  <FormattedHTMLMessage id={bandMessage[voteState]} />
-                )}
+                {bandMessage[voteState] && <FormattedHTMLMessage id={bandMessage[voteState]} />}
               </Text>
             </>
           )}
@@ -179,23 +180,23 @@ export const DebateStepPageVoteForm = ({
                   ? '🎉'
                   : '🗳️'}
               </span>
-              {voteState !== 'NONE' && voteState !== 'RESULT' && (
-                <FormattedHTMLMessage id={bandMessage[voteState]} />
-              )}
-              <Button
-                css={css({
-                  color: 'gray.700',
-                  '&:hover': {
+              {bandMessage[voteState] && <FormattedHTMLMessage id={bandMessage[voteState]} />}
+              {voteState !== 'RESULT_ANONYMOUS' && (
+                <Button
+                  css={css({
                     color: 'gray.700',
-                  },
-                })}
-                ml={2}
-                variant="link"
-                onClick={() => setVoteState('NONE')}>
-                <FormattedMessage
-                  id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
-                />
-              </Button>
+                    '&:hover': {
+                      color: 'gray.700',
+                    },
+                  })}
+                  ml={2}
+                  variant="link"
+                  onClick={() => setVoteState('NONE')}>
+                  <FormattedMessage
+                    id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
+                  />
+                </Button>
+              )}
             </>
           )}
         </>
@@ -238,48 +239,58 @@ export const DebateStepPageVoteForm = ({
       )}
 
       {showArgumentForm && !isMobile && (
-        <Card
-          borderRadius="8px"
-          width="100%"
-          bg="white"
-          boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-          p={6}
-          mt={8}
-          pb={body?.length > 0 ? 6 : 2}>
-          <Form id={formName}>
-            <Field
-              name="body"
-              component={component}
-              type="textarea"
-              id="body"
-              minLength="1"
-              autoComplete="off"
-              placeholder={title}
-            />
-            {body?.length > 0 && (
-              <Flex justifyContent="flex-end">
-                <Button
-                  onClick={() => setShowArgumentForm(false)}
-                  type="button"
-                  mr={7}
-                  variant="link"
-                  variantColor="primary">
-                  <FormattedMessage id="global.cancel" />
-                </Button>
-                <Button
-                  onClick={publishArgument}
-                  type="button"
-                  variant="primary"
-                  variantColor="primary"
-                  variantSize="big">
-                  <FormattedMessage
-                    id={viewerIsConfirmed ? 'argument.publish.mine' : 'global.validate'}
-                  />
-                </Button>
-              </Flex>
-            )}
-          </Form>
-        </Card>
+        <ConditionalWrapper
+          when={voteState === 'RESULT_ANONYMOUS'}
+          wrapper={children => <LoginOverlay>{children}</LoginOverlay>}>
+          <Card
+            borderRadius="8px"
+            width="100%"
+            bg="white"
+            boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+            p={6}
+            mt={8}
+            css={{
+              '& form textarea[disabled]': {
+                backgroundColor: 'transparent !important',
+              },
+            }}
+            pb={body?.length > 0 ? 6 : 2}>
+            <Form id={formName}>
+              <Field
+                name="body"
+                disabled={voteState === 'RESULT_ANONYMOUS'}
+                component={component}
+                type="textarea"
+                id="body"
+                minLength="1"
+                autoComplete="off"
+                placeholder={title}
+              />
+              {voteState !== 'RESULT_ANONYMOUS' && body?.length > 0 && (
+                <Flex justifyContent="flex-end">
+                  <Button
+                    onClick={() => setShowArgumentForm(false)}
+                    type="button"
+                    mr={7}
+                    variant="link"
+                    variantColor="primary">
+                    <FormattedMessage id="global.cancel" />
+                  </Button>
+                  <Button
+                    onClick={publishArgument}
+                    type="button"
+                    variant="primary"
+                    variantColor="primary"
+                    variantSize="big">
+                    <FormattedMessage
+                      id={viewerIsConfirmed ? 'argument.publish.mine' : 'global.validate'}
+                    />
+                  </Button>
+                </Flex>
+              )}
+            </Form>
+          </Card>
+        </ConditionalWrapper>
       )}
       {showArgumentForm && isMobile && (
         <>

@@ -33,6 +33,7 @@ export type VoteState =
   | 'VOTED'
   | 'ARGUMENTED'
   | 'RESULT'
+  | 'RESULT_ANONYMOUS'
   | 'NOT_CONFIRMED'
   | 'NOT_CONFIRMED_ARGUMENTED';
 

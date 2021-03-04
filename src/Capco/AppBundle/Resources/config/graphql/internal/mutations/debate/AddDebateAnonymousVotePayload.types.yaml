@@ -1,0 +1,10 @@
+AddDebateAnonymousVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateAnonymousVote:
+                type: 'InternalDebateAnonymousVote'
+                description: 'The newly created anonymous vote.'
+            errorCode:
+                type: 'AddDebateAnonymousVoteErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

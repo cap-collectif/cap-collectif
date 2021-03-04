@@ -1,0 +1,32 @@
+InternalDebateAnonymousVote:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: DebateAnonymousVote
+        description: 'An anonymous debate vote.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: DebateAnonymousVote
+            createdAt:
+                type: 'DateTime!'
+                description: 'The date of the vote.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'The value of the vote.'
+            debate:
+                type: 'InternalDebate!'
+                description: 'The debate of the vote.'
+            ipAddress:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'IP of the voter'
+                type: 'IP'
+            navigator:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Navigator of the voter'
+                type: 'String'

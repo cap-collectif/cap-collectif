@@ -183,6 +183,39 @@ type AddContactFormPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addDebateAnonymousVote` mutation."""
+enum AddDebateAnonymousVoteErrorCode {
+  """No `Debate` match your `debateId`."""
+  UNKNOWN_DEBATE
+
+  """The debate is closed and be voted."""
+  CLOSED_DEBATE
+
+  """The given captcha is invalid."""
+  INVALID_CAPTCHA
+}
+
+input AddDebateAnonymousVoteInput {
+  """The Node ID of the `Debate` to vote on."""
+  debateId: ID!
+
+  """Whether the vote will be `FOR` or `AGAINST`."""
+  type: ForOrAgainstValue!
+
+  """The captcha verification."""
+  captcha: String!
+  clientMutationId: String
+}
+
+type AddDebateAnonymousVotePayload {
+  """The newly created anonymous vote."""
+  debateAnonymousVote: DebateAnonymousVote
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: AddDebateAnonymousVoteErrorCode
+  clientMutationId: String
+}
+
 """Available errors for an `addDebateArgumentVote` mutation."""
 enum AddDebateArgumentVoteErrorCode {
   """No `DebateArgument` match your id."""
@@ -3380,6 +3413,27 @@ type Debate implements Node {
   step: DebateStep!
 }
 
+"""An anonymous debate vote."""
+type DebateAnonymousVote implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """The value of the vote."""
+  type: ForOrAgainstValue!
+
+  """The debate of the vote."""
+  debate: Debate!
+
+  """IP of the voter"""
+  ipAddress: IP
+
+  """Navigator of the voter"""
+  navigator: String
+}
+
 """A debate argument from non expert."""
 type DebateArgument implements Node & Reportable & Trashable & Contribution {
   """The ID of an object."""
@@ -6091,6 +6145,7 @@ type Mutation {
   addProposalNews(input: AddProposalNewsInput!): AddProposalNewsPayload
   updateProposalNews(input: UpdateProposalNewsInput!): UpdateProposalNewsPayload
   deleteProposalNews(input: DeleteProposalNewsInput!): DeleteProposalNewsPayload
+  addDebateAnonymousVote(input: AddDebateAnonymousVoteInput!): AddDebateAnonymousVotePayload
 }
 
 """A connection to a list of items."""

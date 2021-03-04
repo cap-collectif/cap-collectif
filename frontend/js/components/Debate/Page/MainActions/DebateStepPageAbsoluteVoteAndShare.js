@@ -56,7 +56,9 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
           : '0 10px 14px 0px white',
       })}>
       {/** I dont like this but for now we have to use the bootstrap container max-width, waiting for the DS one */}
-      <AppBox className="container" css={{ padding: '0 !important' }}>
+      <AppBox
+        className="container"
+        css={{ padding: '0 !important', '& .recaptcha-message': { display: 'none' } }}>
         {voteState === 'NONE' && (
           <Flex
             direction={['column', 'row']}

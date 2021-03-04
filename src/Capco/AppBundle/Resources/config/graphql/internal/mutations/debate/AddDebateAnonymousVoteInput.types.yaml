@@ -1,0 +1,14 @@
+AddDebateAnonymousVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'Add an anonymous vote on a debate.'
+        fields:
+            debateId:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` to vote on.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'Whether the vote will be `FOR` or `AGAINST`.'
+            captcha:
+                type: 'String!'
+                description: 'The captcha verification.'

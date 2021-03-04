@@ -572,3 +572,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:Steps\RankingStep']
+
+    Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Debate\DebateAnonymousVote']

@@ -23,35 +23,31 @@ exports[`<DebateStepPageVote/> renders correcty 1`] = `
   }
   width="100%"
 >
-  <Connect(LoginOverlay)>
-    <DebateStepPageVote___StyledButton
-      _css={[Function]}
-      leftIcon="THUMB_UP"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.for"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton>
-  </Connect(LoginOverlay)>
-  <Connect(LoginOverlay)>
-    <DebateStepPageVote___StyledButton2
-      _css2={[Function]}
-      leftIcon="THUMB_DOWN"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.against"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton2>
-  </Connect(LoginOverlay)>
+  <DebateStepPageVote___StyledButton
+    _css={[Function]}
+    leftIcon="THUMB_UP"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    variantSize="big"
+  >
+    <FormattedMessage
+      id="global.for"
+      values={Object {}}
+    />
+  </DebateStepPageVote___StyledButton>
+  <DebateStepPageVote___StyledButton2
+    _css2={[Function]}
+    leftIcon="THUMB_DOWN"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    variantSize="big"
+  >
+    <FormattedMessage
+      id="global.against"
+      values={Object {}}
+    />
+  </DebateStepPageVote___StyledButton2>
 </ForwardRef(MotionComponent)>
 `;
