@@ -124,7 +124,7 @@ class StepContributionsDataLoader extends BatchDataLoader
             // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
             //     $step
             // );
-        } elseif ($step instanceof QuestionnaireStep) {
+        } elseif ($step instanceof QuestionnaireStep && $step->getQuestionnaire()) {
             $totalCount += $this->questionnaireRepliesResolver
                 ->__invoke($step->getQuestionnaire(), new Argument(['first' => 0]))
                 ->getTotalCount();

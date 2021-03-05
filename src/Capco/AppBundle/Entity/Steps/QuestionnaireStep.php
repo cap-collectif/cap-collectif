@@ -47,7 +47,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     {
         parent::__clone();
         $this->questionnaire = clone $this->questionnaire;
-        $this->questionnaire->setTitle('Copie de ' . $this->questionnaire->getTitle());
+        $this->questionnaire->setTitle('Copie de '.$this->questionnaire->getTitle());
         $this->questionnaire->setStep($this);
     }
 
@@ -88,10 +88,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return $this->verification;
     }
 
-    /**
-     * @return Questionnaire
-     */
-    public function getQuestionnaire()
+    public function getQuestionnaire(): ?Questionnaire
     {
         return $this->questionnaire;
     }
@@ -101,12 +98,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return self::VERIFICATION_SMS === $this->verification;
     }
 
-    /**
-     * @param Questionnaire $questionnaire
-     *
-     * @return QuestionnaireStep
-     */
-    public function setQuestionnaire(?Questionnaire $questionnaire = null)
+    public function setQuestionnaire(?Questionnaire $questionnaire = null): self
     {
         if ($questionnaire) {
             $questionnaire->setStep($this);
