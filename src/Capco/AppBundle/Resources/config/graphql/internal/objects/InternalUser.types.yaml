@@ -195,7 +195,7 @@ InternalUser:
                 description: 'Your localisation'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             proposalVotes:
-                type: 'ProposalVoteConnection!'
+                type: 'InternalProposalVoteConnection!'
                 argsBuilder: 'Relay::Connection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context, getUser()])'
                 args:

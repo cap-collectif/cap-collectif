@@ -76,6 +76,7 @@ overblog_graphql:
                     - PreviewSource
                     - PreviewVersion
                     - PreviewTimeRange
+                    - PreviewProposalVoteConnection
             # This is our internal schema (used by our own clients)
             internal:
                 query: InternalQuery
@@ -112,3 +113,4 @@ overblog_graphql:
                     - Locale
                     - InternalMajorityQuestion
                     - InternalTimeRange
+                    - InternalProposalVoteConnection

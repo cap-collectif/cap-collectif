@@ -113,7 +113,7 @@ InternalProposal:
                 type: 'Boolean!'
                 description: 'Identifies proposals as draft.'
             votes:
-                type: 'ProposalVoteConnection!'
+                type: 'InternalProposalVoteConnection!'
                 argsBuilder: 'Relay::Connection'
                 args:
                     orderBy:

@@ -38,7 +38,7 @@ ProposalStep:
                 description: 'If enabled, allow voters to order their votes by point'
             viewerVotes:
                 access: "@=hasRole('ROLE_USER')"
-                type: 'ProposalVoteConnection!'
+                type: 'InternalProposalVoteConnection!'
                 description: 'A list of viewer votes associated with the step.'
                 argsBuilder: 'Relay::Connection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'

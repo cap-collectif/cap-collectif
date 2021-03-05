@@ -1,13 +1,11 @@
 exercise_html_purifier:
-    default_cache_serializer_path: '%kernel.root_dir%/../var/cache/htmlpurifier'
+    default_cache_serializer_path: '%kernel.cache_dir%/htmlpurifier'
     html_profiles:
         user:
             config:
-                Cache.SerializerPath: '%kernel.root_dir%/../var/cache/htmlpurifier'
                 HTML.SafeIframe: true
                 URI.SafeIframeRegexp: "#^(https?:)?//(www\\.youtube(?:-nocookie)?\\.com/embed/|player\\.vimeo\\.com/video/)#"
         admin:
             config:
-                Cache.SerializerPath: '%kernel.root_dir%/../var/cache/htmlpurifier'
                 HTML.SafeIframe: true
                 URI.SafeIframeRegexp: "#https?://([-÷÷\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?#"
