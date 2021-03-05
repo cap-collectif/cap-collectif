@@ -1,9 +1,9 @@
 InternalStep:
     type: interface
     inherits:
+        - PreviewStep
         - Node
         - InternalTimeRangeable
-        - PreviewStep
     config:
         name: Step
         description: 'A step inside a project.'

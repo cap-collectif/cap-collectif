@@ -3787,14 +3787,14 @@ type DebateOpinionEdge {
 
 """A step with a debate."""
 type DebateStep implements Step & Node {
-  """The ID of an object."""
-  id: ID!
-
   """When the time interval begins or ends."""
   timeRange: TimeRange!
 
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object."""
+  id: ID!
 
   """The title of the step."""
   title: String!
@@ -6685,14 +6685,14 @@ enum OrderDirection {
 
 """A step inside a project."""
 type OtherStep implements Node & Step {
-  """The ID of an object"""
-  id: ID!
-
   """When the time interval begins or ends."""
   timeRange: TimeRange!
 
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object"""
+  id: ID!
 
   """The title of the step."""
   title: String!
@@ -6946,14 +6946,14 @@ type PostalAddressRequirement implements Node & Requirement {
 
 """A step inside a project."""
 type PresentationStep implements Node & Step {
-  """The ID of an object"""
-  id: ID!
-
   """When the time interval begins or ends."""
   timeRange: TimeRange!
 
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object"""
+  id: ID!
 
   """The title of the step."""
   title: String!
@@ -8648,14 +8648,14 @@ enum ProposalStatementErrorCode {
 
 """A proposal step"""
 interface ProposalStep {
-  """The ID of an object"""
-  id: ID!
-
   """When the time interval begins or ends."""
   timeRange: TimeRange!
 
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object"""
+  id: ID!
 
   """The title of the step."""
   title: String!
@@ -11867,14 +11867,14 @@ interface Sourceable {
 
 """A step inside a project."""
 interface Step {
-  """The ID of an object"""
-  id: ID!
-
   """When the time interval begins or ends."""
   timeRange: TimeRange!
 
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object"""
+  id: ID!
 
   """The title of the step."""
   title: String!
@@ -12035,14 +12035,14 @@ enum SubscriptionTypeValue {
 
 """A step inside a project."""
 type SynthesisStep implements Step & Node {
-  """The ID of an object."""
-  id: ID!
-
   """When the time interval begins or ends."""
   timeRange: TimeRange!
 
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object."""
+  id: ID!
 
   """The title of the step."""
   title: String!
