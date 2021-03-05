@@ -19,11 +19,11 @@ class DoctrineListener implements EventSubscriber
     {
         $entity = $args->getObject();
         if ($entity instanceof Publishable) {
-            $this->setPublishedStatus($entity);
+            self::setPublishedStatus($entity);
         }
     }
 
-    public function setPublishedStatus(Publishable $entity)
+    public static function setPublishedStatus(Publishable $entity)
     {
         /** @var User $author */
         $author = $entity->getAuthor();

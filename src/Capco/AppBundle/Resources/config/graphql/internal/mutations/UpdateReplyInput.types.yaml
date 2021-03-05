@@ -1,15 +1,18 @@
 UpdateReplyInput:
-  type: relay-mutation-input
-  config:
-    description: 'Update a reply'
-    fields:
-      replyId:
-        type: 'ID!'
-        description: 'The id of the reply'
-      responses:
-        type: '[ResponseInput]'
-        description: 'The responses to the questionnaire questions'
-      draft:
-        type: 'Boolean!'
-        description: 'If true will create a draft reply.'
-        defaultValue: false
+    type: relay-mutation-input
+    config:
+        description: 'Update a reply'
+        fields:
+            replyId:
+                type: 'ID!'
+                description: 'The id of the reply'
+            responses:
+                type: '[ResponseInput]'
+                description: 'The responses to the questionnaire questions'
+            private:
+                type: 'Boolean'
+                description: 'Anonymous or not.'
+            draft:
+                type: 'Boolean!'
+                description: 'If true will create a draft reply.'
+                defaultValue: false

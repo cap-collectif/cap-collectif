@@ -79,17 +79,30 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $replyRepo->find($replyId)->willReturn($reply);
 
+        $viewer
+            ->isEmailConfirmed()
+            ->shouldBeCalled()
+            ->willReturn(true);
+
         // https://github.com/phpspec/prophecy/issues/213#issuecomment-145499760
         $reply->isDraft()->willReturn(true, false);
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($viewer);
-        $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
+        $reply
+            ->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))
+            ->shouldBeCalled()
+            ->willReturn($reply);
 
         $questionnaire->isNotifyResponseUpdate()->willReturn(false);
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
+        $questionnaire->isAnonymousAllowed()->willReturn(true);
         $step->getProject()->willReturn($project);
         $endDate = new DateTime();
         $step->getEndAt()->willReturn($endDate);
+        $step
+            ->isOpen()
+            ->shouldBeCalled()
+            ->willReturn(true);
         $step->getSlug()->willReturn('questionnaire-step');
         $project->getId()->willReturn('projectQuestionnaireId');
         $project->getSlug()->willReturn('project1');
@@ -101,7 +114,9 @@ class UpdateReplyMutationSpec extends ObjectBehavior
 
         $responsesFormatter->format($values['responses'])->shouldBeCalled();
 
-        $formFactory->create(ReplyType::class, $reply, [])->willReturn($form);
+        $formFactory
+            ->create(ReplyType::class, $reply, ['anonymousAllowed' => true])
+            ->willReturn($form);
         $form->submit(['draft' => false, 'responses' => []], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $reply->getQuestionnaire()->willReturn($questionnaire);
@@ -195,10 +210,12 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $reply->isDraft()->willReturn(true, false);
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($viewer);
+        $reply->getQuestionnaire()->willReturn($questionnaire);
 
         $replyRepo->find($replyId)->willReturn($reply);
         $questionnaire->isNotifyResponseUpdate()->willReturn(false);
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
+        $questionnaire->isAnonymousAllowed()->willReturn(true);
         $step->getProject()->willReturn($project);
         $endDate = new DateTime();
         $step->getEndAt()->willReturn($endDate);
@@ -213,8 +230,10 @@ class UpdateReplyMutationSpec extends ObjectBehavior
 
         $responsesFormatter->format($values['responses'])->shouldBeCalled();
 
-        $formFactory->create(ReplyType::class, $reply, [])->willReturn($form);
-        $form->submit(['draft' => false, 'responses' => []], false)->willReturn(null);
+        $formFactory->create(ReplyType::class, $reply, ['anonymousAllowed' => true])->willReturn($form);
+        $form
+            ->submit(['draft' => false, 'responses' => []], false)
+            ->willReturn(null);
         $form->isValid()->willReturn(false);
         $form->getErrors()->willReturn([]);
         $form->all()->willReturn([]);

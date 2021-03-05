@@ -65,6 +65,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
   data.draft = values.draft;
 
+  if (questionnaire.anonymousAllowed) {
+    data.private = values.private;
+  }
+
   if (reply) {
     data.replyId = reply.id;
 
@@ -72,6 +76,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       input: {
         replyId: reply.id,
         responses: data.responses,
+        private: data.private,
         draft: typeof values.draft !== 'undefined' ? values.draft : reply.draft,
       },
     })

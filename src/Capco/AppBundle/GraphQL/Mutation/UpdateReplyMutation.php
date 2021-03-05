@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Publishable\DoctrineListener;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
@@ -48,7 +49,7 @@ class UpdateReplyMutation implements MutationInterface
     {
         $reply = $this->getReply($input, $viewer);
         $wasDraft = $reply->isDraft();
-        $reply = $this->updateReply($reply, $input);
+        $reply = $this->updateReply($reply, $input, $wasDraft);
         $this->em->flush();
 
         if (self::shouldNotify($reply)) {
@@ -89,12 +90,23 @@ class UpdateReplyMutation implements MutationInterface
         return $reply;
     }
 
-    private function updateReply(Reply $reply, Argument $argument): Reply
+    private function updateReply(Reply $reply, Argument $input, bool $wasDraft): Reply
     {
-        $form = $this->formFactory->create(ReplyType::class, $reply, []);
-        $form->submit($this->formatValuesForForm($argument), false);
+        $form = $this->formFactory->create(ReplyType::class, $reply, [
+            'anonymousAllowed' => $reply->getQuestionnaire()->isAnonymousAllowed(),
+        ]);
+        $form->submit($this->formatValuesForForm($input), false);
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
+        }
+        if (
+            $wasDraft &&
+            $reply
+                ->getQuestionnaire()
+                ->getStep()
+                ->isOpen()
+        ) {
+            DoctrineListener::setPublishedStatus($reply);
         }
 
         return $reply;

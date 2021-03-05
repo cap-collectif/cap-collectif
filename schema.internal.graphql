@@ -13279,6 +13279,9 @@ input UpdateReplyInput {
   """The responses to the questionnaire questions"""
   responses: [ResponseInput]
 
+  """Anonymous or not."""
+  private: Boolean
+
   """If true will create a draft reply."""
   draft: Boolean! = false
   clientMutationId: String
