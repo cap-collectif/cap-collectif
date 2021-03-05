@@ -16,13 +16,23 @@ import jsxInnerText from '~/utils/jsxInnerText';
 import type { AvatarProps } from '~ds/Avatar/Avatar';
 import Avatar from '~ds/Avatar/Avatar';
 
+export type TagVariant =
+  | 'blue'
+  | 'aqua'
+  | 'red'
+  | 'green'
+  | 'orange'
+  | 'yellow'
+  | 'gray'
+  | 'neutral-gray';
+
 export type Props = {|
   ...AppBoxProps,
   +icon?: $Values<typeof ICON_NAME>,
   +variantType?: 'tag' | 'badge',
   +avatar?: {| ...AvatarProps, props?: AppBoxProps |},
   +onRemove?: (e?: MouseEvent) => void,
-  +variant?: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray',
+  +variant?: TagVariant,
   +interactive?: boolean,
 |};
 

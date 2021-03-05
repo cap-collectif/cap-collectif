@@ -27,6 +27,7 @@ declare export const ICON_NAME = {
     SPINNER: 'SPINNER',
     BELL: 'BELL',
     THUMB_UP: 'THUMB_UP',
+    THUMB_UP_O: 'THUMB_UP_O',
     THUMB_DOWN: 'THUMB_DOWN',
     LONG_ARROW_LEFT: 'LONG_ARROW_LEFT',
     LONG_ARROW_RIGHT: 'LONG_ARROW_RIGHT',
@@ -34,6 +35,11 @@ declare export const ICON_NAME = {
     MORE: 'MORE',
     MODERATE: 'MODERATE',
     HYPERLINK: 'HYPERLINK',
+    BUBBLE_O: 'BUBBLE_O',
+    USER_O: 'USER_O',
+    PIN_O: 'PIN_O',
+    FOLDER_O: 'FOLDER_O',
+    BOOK_STAR_O: 'BOOK_STAR_O',
 };
 
 declare export const ICON_SIZE = {

@@ -44,3 +44,23 @@ exports[`<ProjectPreview /> should render correctly project with participative s
   </Card>
 </Col>
 `;
+
+exports[`<ProjectPreview /> should render correctly with the new card type 1`] = `
+<ForwardRef
+  mb={7}
+  ml={5}
+  mr={5}
+  mt={7}
+>
+  <Relay(Connect(ProjectCard))
+    isProjectsPage={false}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+      }
+    }
+  />
+</ForwardRef>
+`;

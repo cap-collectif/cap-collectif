@@ -1,9 +1,10 @@
 // @flow
 import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProjectsList = lazy(() => import(/* webpackChunkName: "ProjectsList" */ '~/components/Project/List/ProjectsList'));
+const ProjectsList = lazy(() =>
+  import(/* webpackChunkName: "ProjectsList" */ '~/components/Project/List/ProjectsList'),
+);
 
 type Props = {|
   limit?: number,
@@ -14,7 +15,7 @@ type Props = {|
 |};
 
 export default (props: Props) => (
-  <Suspense fallback={<Loader />}>
+  <Suspense fallback={null}>
     <Providers>
       <ProjectsList {...props} />
     </Providers>

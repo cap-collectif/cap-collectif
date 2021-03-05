@@ -21,6 +21,7 @@ type Props = {
   limit: number,
   paginate: boolean,
   relay: RelayRefetchProp,
+  isProjectsPage: boolean,
 };
 type State = {
   isRefetching: boolean,
@@ -72,12 +73,19 @@ export class ProjectListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { query, limit, paginate } = this.props;
+    const { query, limit, paginate, isProjectsPage } = this.props;
     const { isRefetching } = this.state;
     if (isRefetching) {
       return <Loader />;
     }
-    return <ProjectListViewPaginated query={query} limit={limit} paginate={paginate} />;
+    return (
+      <ProjectListViewPaginated
+        query={query}
+        limit={limit}
+        paginate={paginate}
+        isProjectsPage={isProjectsPage}
+      />
+    );
   }
 }
 

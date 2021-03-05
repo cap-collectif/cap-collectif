@@ -8,9 +8,6 @@ import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Tag from '~ds/Tag/Tag';
 import Heading from '~ui/Primitives/Heading';
-import Button from '~ds/Button/Button';
-import Icon from '~ds/Icon/Icon';
-import Text from '~ui/Primitives/Text';
 
 type Props = {|
   +title: string,
@@ -41,14 +38,6 @@ export const DebateStepPageNotYetStarted = ({ step, title }: Props) => {
         <Heading as="h2" fontWeight="400" mb={2} textAlign="center" color="gray.900">
           {title}
         </Heading>
-        <Text fontWeight="400" mb={16} textAlign="center" size="18" color="gray.700">
-          <FormattedMessage id="activate-debate-notification" />
-        </Text>
-
-        <Button variant="primary" variantColor="primary" variantSize="big" onClick={() => {}}>
-          <Icon name="CLOCK" mr="1" />
-          <FormattedMessage id="launch-mail-alert" />
-        </Button>
       </Flex>
     </AppBox>
   );

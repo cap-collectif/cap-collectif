@@ -5,9 +5,10 @@ import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { ProjectsListQueryResponse } from '~relay/ProjectsListQuery.graphql';
-import { type GlobalState } from '../../../types';
+import { type GlobalState, type FeatureToggles } from '../../../types';
 import ProjectListView from './ProjectListView';
 import { getInitialValues } from './Filters/ProjectListFilters';
+import ProjectsListPlaceholder from './ProjectsListPlaceholder';
 
 type Props = {|
   +authorId?: string,
@@ -22,6 +23,8 @@ type Props = {|
   +limit: number,
   // Should we allow pagination ?
   +paginate: boolean,
+  +isProjectsPage?: boolean,
+  +features: FeatureToggles,
 |};
 
 class ProjectsList extends React.Component<Props> {
@@ -57,15 +60,27 @@ class ProjectsList extends React.Component<Props> {
     ...ReactRelayReadyState,
     props: ?ProjectsListQueryResponse,
   }) => {
-    const { limit, paginate } = this.props;
+    const { limit, paginate, isProjectsPage, features } = this.props;
     if (error) {
       console.log(error); // eslint-disable-line no-console
       return graphqlError;
     }
+
     if (props) {
-      return <ProjectListView query={props} limit={limit} paginate={paginate} />;
+      return (
+        <ProjectListView
+          query={props}
+          limit={limit}
+          paginate={paginate}
+          isProjectsPage={isProjectsPage}
+        />
+      );
     }
-    return <Loader />;
+    return features.unstable__new_project_card ? (
+      <ProjectsListPlaceholder count={limit} />
+    ) : (
+      <Loader />
+    );
   };
 
   render() {
@@ -129,6 +144,7 @@ class ProjectsList extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   orderBy: state.project.orderBy || 'PUBLISHED_AT',
+  features: state.default.features,
 });
 
 export default connect<any, any, _, _, _, _>(mapStateToProps)(ProjectsList);

@@ -209,3 +209,7 @@ InternalProject:
                 type: '[InternalProjectAbstractStep]!'
                 description: 'list of exportable steps in the project'
                 resolve: '@=value.getExportableSteps()'
+            currentStep:
+                type: 'InternalStep'
+                description: 'The current step of the step timeline.'
+                resolve: '@=value.getCurrentStep()'

@@ -7417,6 +7417,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """list of exportable steps in the project"""
   exportableSteps: [ProjectAbstractStep]!
+
+  """The current step of the step timeline."""
+  currentStep: Step
 }
 
 """A project abstract step."""
