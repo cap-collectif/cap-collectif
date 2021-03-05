@@ -1,0 +1,11 @@
+RemainingTime:
+    type: object
+    config:
+        name: RemainingTime
+        fields:
+            days:
+                type: 'Int'
+                description: 'Number of days remaining'
+            hours:
+                type: 'Int'
+                description: 'Number of hours remaining'

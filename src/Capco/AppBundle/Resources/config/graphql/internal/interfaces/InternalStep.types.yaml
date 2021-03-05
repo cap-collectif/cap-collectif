@@ -2,7 +2,7 @@ InternalStep:
     type: interface
     inherits:
         - Node
-        - PreviewTimeRangeable
+        - InternalTimeRangeable
         - PreviewStep
     config:
         name: Step

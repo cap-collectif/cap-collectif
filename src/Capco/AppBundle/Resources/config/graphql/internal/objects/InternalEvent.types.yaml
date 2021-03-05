@@ -4,6 +4,7 @@ InternalEvent:
         - PreviewEvent
         - Commentable
         - InternalPrimaryKey
+        - InternalTimeRangeable
     config:
         description: 'An event.'
         interfaces:

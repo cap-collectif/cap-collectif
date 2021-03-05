@@ -10178,6 +10178,14 @@ type RegistrationFormTranslation {
   bottomText: String
 }
 
+type RemainingTime {
+  """Number of days remaining"""
+  days: Int
+
+  """Number of hours remaining"""
+  hours: Int
+}
+
 input RemoveArgumentVoteInput {
   """The Node ID of the argument to unvote."""
   argumentId: ID!
@@ -12156,6 +12164,30 @@ type TimeRange {
 
   """The end date of the time range"""
   endAt: DateTime
+
+  """Whether it has started"""
+  hasStarted: Boolean!
+
+  """Whether it has ended"""
+  hasEnded: Boolean!
+
+  """Get the remaining time in days/hours"""
+  remainingTime: RemainingTime
+
+  """Whether it last one day"""
+  lastOneDay: Boolean!
+
+  """Whether it is still open"""
+  isOpen: Boolean!
+
+  """Whether it is closed"""
+  isClosed: Boolean!
+
+  """Whether it occurs in the future"""
+  isFuture: Boolean!
+
+  """Whether it is timeless"""
+  isTimeless: Boolean!
 }
 
 """Object containing all tipsmee related data."""

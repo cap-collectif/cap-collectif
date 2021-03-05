@@ -10,6 +10,7 @@ use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TimeRangeableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
@@ -47,14 +48,15 @@ class Event implements
     Translatable,
     SonataTranslatableInterface
 {
-    use SoftDeleteTrait;
-    use DateHelperTrait;
     use CommentableWithoutCounterTrait;
-    use UuidTrait;
-    use TimestampableTrait;
     use CustomCodeTrait;
-    use TranslatableTrait;
+    use DateHelperTrait;
+    use SoftDeleteTrait;
     use SonataTranslatableTrait;
+    use TimeRangeableTrait;
+    use TimestampableTrait;
+    use TranslatableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
@@ -461,30 +463,6 @@ class Event implements
         return $this;
     }
 
-    public function getStartAt(): ?\DateTime
-    {
-        return $this->startAt;
-    }
-
-    public function setStartAt(?\DateTime $startAt = null): self
-    {
-        $this->startAt = $startAt;
-
-        return $this;
-    }
-
-    public function getEndAt(): ?\DateTime
-    {
-        return $this->endAt;
-    }
-
-    public function setEndAt(?\DateTime $endAt = null): self
-    {
-        $this->endAt = $endAt;
-
-        return $this;
-    }
-
     public function getRegistrations()
     {
         return $this->registrations;
@@ -525,15 +503,6 @@ class Event implements
             EventReviewStatusType::PUBLISHED === $this->getStatus();
     }
 
-    public function lastOneDay()
-    {
-        if (null === $this->endAt) {
-            return true;
-        }
-
-        return $this->isSameDate($this->startAt, $this->endAt);
-    }
-
     public function getStartYear()
     {
         return $this->getYear($this->startAt);
@@ -542,33 +511,6 @@ class Event implements
     public function getStartMonth()
     {
         return $this->getMonth($this->startAt);
-    }
-
-    public function isOpen(): bool
-    {
-        $now = new \DateTime();
-
-        if (null === $this->endAt) {
-            return $this->startAt < $now && $this->isSameDate($this->startAt, $now);
-        }
-
-        return $this->startAt < $now && $this->endAt > $now;
-    }
-
-    public function isClosed(): bool
-    {
-        $now = new \DateTime();
-
-        if (null === $this->endAt) {
-            return $this->extractDate($this->startAt) < $this->extractDate($now);
-        }
-
-        return $this->endAt < $now;
-    }
-
-    public function isFuture(): bool
-    {
-        return $this->startAt > new \DateTime();
     }
 
     // ************************** Lifecycle **************************************

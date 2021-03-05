@@ -1,0 +1,31 @@
+InternalTimeRange:
+    type: object
+    inherits:
+        - PreviewTimeRange
+    config:
+        name: TimeRange
+        fields:
+            hasStarted:
+                type: 'Boolean!'
+                description: 'Whether it has started'
+            hasEnded:
+                type: 'Boolean!'
+                description: 'Whether it has ended'
+            remainingTime:
+                type: 'RemainingTime'
+                description: 'Get the remaining time in days/hours'
+            lastOneDay:
+                type: 'Boolean!'
+                description: 'Whether it last one day'
+            isOpen:
+                type: 'Boolean!'
+                description: 'Whether it is still open'
+            isClosed:
+                type: 'Boolean!'
+                description: 'Whether it is closed'
+            isFuture:
+                type: 'Boolean!'
+                description: 'Whether it occurs in the future'
+            isTimeless:
+                type: 'Boolean!'
+                description: 'Whether it is timeless'

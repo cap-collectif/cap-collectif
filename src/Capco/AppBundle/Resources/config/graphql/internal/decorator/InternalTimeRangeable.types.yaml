@@ -1,0 +1,9 @@
+InternalTimeRangeable:
+    type: object
+    decorator: true
+    inherits:
+        - PreviewTimeRangeable
+    config:
+        fields:
+            timeRange:
+                type: 'InternalTimeRange!'

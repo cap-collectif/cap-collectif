@@ -1,14 +1,12 @@
 PreviewTimeRange:
-  type: object
-  config:
-    name: TimeRange
-    description: 'A time range that contains start date and end date.'
-    fields:
-      startAt:
-        type: 'DateTime'
-        description: 'The start date of the time range.'
-      endAt:
-        type: 'DateTime'
-        description: 'The end date of the time range'
-      # TODO https://github.com/cap-collectif/platform/issues/10963
-      # we need booleans hasStarted, hasEnded, isLive
+    type: object
+    config:
+        name: TimeRange
+        description: 'A time range that contains start date and end date.'
+        fields:
+            startAt:
+                type: 'DateTime'
+                description: 'The start date of the time range.'
+            endAt:
+                type: 'DateTime'
+                description: 'The end date of the time range'

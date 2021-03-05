@@ -75,6 +75,7 @@ overblog_graphql:
                     - PreviewArgument
                     - PreviewSource
                     - PreviewVersion
+                    - PreviewTimeRange
             # This is our internal schema (used by our own clients)
             internal:
                 query: InternalQuery
@@ -110,3 +111,4 @@ overblog_graphql:
                     - InternalOauth2SSOConfiguration
                     - Locale
                     - InternalMajorityQuestion
+                    - InternalTimeRange

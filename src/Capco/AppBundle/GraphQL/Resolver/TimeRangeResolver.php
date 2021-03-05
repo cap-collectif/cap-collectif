@@ -11,7 +11,15 @@ class TimeRangeResolver implements ResolverInterface
     {
         return [
             'startAt' => $entity->getStartAt(),
-            'endAt' => $entity->getEndAt()
+            'endAt' => $entity->getEndAt(),
+            'hasStarted' => $entity->hasStarted(),
+            'hasEnded' => $entity->hasEnded(),
+            'remainingTime' => $entity->getRemainingTime(),
+            'lastOneDay' => $entity->lastOneDay(),
+            'isOpen' => $entity->isOpen(),
+            'isClosed' => $entity->isClosed(),
+            'isFuture' => $entity->isFuture(),
+            'isTimeless' => $entity->isTimeless(),
         ];
     }
 }
