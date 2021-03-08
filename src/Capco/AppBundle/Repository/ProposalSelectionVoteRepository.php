@@ -470,10 +470,10 @@ class ProposalSelectionVoteRepository extends EntityRepository
             $data['votesBySteps'][$result['stepId']] = \count($results);
 
             if (true === $result['votesRanking'] && null !== $result['position']) {
-                if (isset($data['pointsBySteps'][$result['stepId']])) {
+                if (isset($data['pointsBySteps'][$result['stepId']], $pointsAvailable[$result['position']])) {
                     $data['pointsBySteps'][$result['stepId']] +=
                         $pointsAvailable[$result['position']];
-                } else {
+                } elseif(isset($pointsAvailable[$result['position']])) {
                     $data['pointsBySteps'][$result['stepId']] =
                         $pointsAvailable[$result['position']];
                 }
