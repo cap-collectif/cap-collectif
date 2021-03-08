@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ThemeTranslation;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
@@ -99,8 +98,8 @@ class PostRepository extends EntityRepository
     public function getSearchResults(
         int $nbByPage = 8,
         int $page = 1,
-        ?ThemeTranslation $themeTranslation = null,
-        ?Project $project = null,
+        ?string $themeTranslationSlug = null,
+        ?string $projectSlug = null,
         ?bool $displayedOnBlog = null,
         ?UserInterface $viewer = null
     ): Paginator {
@@ -124,13 +123,23 @@ class PostRepository extends EntityRepository
 
         if (!$viewer) {
             $qb->andWhere(
-                $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC),
+                        $qb->expr()->isNull('c')
+                    )
             );
         }
 
         if ($viewer && !$viewer->isSuperAdmin()) {
-            $qb->andWhere(
-                $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            $qb->orWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->eq('c.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC),
+                        $qb->expr()->isNull('c')
+                    )
             );
             if (!empty($viewer->getUserGroupIds())) {
                 $qb->orWhere($qb->expr()->in('crvg.id', $viewer->getUserGroupIds()));
@@ -160,15 +169,15 @@ class PostRepository extends EntityRepository
             );
         }
 
-        if (null !== $themeTranslation && Theme::FILTER_ALL !== $themeTranslation->getSlug()) {
+        if (null !== $themeTranslationSlug && Theme::FILTER_ALL !== $themeTranslationSlug) {
             $qb->andWhere('translation.slug = :theme')->setParameter(
                 'theme',
-                $themeTranslation->getSlug()
+                $themeTranslationSlug
             );
         }
 
-        if (null !== $project && Project::FILTER_ALL !== $project->getSlug()) {
-            $qb->andWhere('c.slug = :project')->setParameter('project', $project->getSlug());
+        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
+            $qb->andWhere('c.slug = :project')->setParameter('project', $projectSlug);
         }
 
         $query = $qb->getQuery();

@@ -282,7 +282,7 @@ class ProjectController extends Controller
             $pagination,
             $page,
             null,
-            $project,
+            $project->getSlug(),
             null,
             $this->getUser()
         );

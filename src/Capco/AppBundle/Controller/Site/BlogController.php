@@ -73,8 +73,8 @@ class BlogController extends Controller
         $posts = $this->get(PostRepository::class)->getSearchResults(
             $pagination,
             $page,
-            $themeObject,
-            $projectObject,
+            $themeObject ? $themeObject->getSlug() : Theme::FILTER_ALL,
+            $projectObject ? $projectObject->getSlug() : Project::FILTER_ALL,
             true,
             $this->getUser()
         );

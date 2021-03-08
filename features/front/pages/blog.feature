@@ -23,7 +23,7 @@ Scenario: Post can be filtered by theme
   And I wait ".media-list" to appear on current page
   And I select "Justice" from "post_search_theme"
   And I wait ".media--news" to appear on current page
-  Then I should see 5 ".media--news" elements
+  Then I should see 9 ".media--news" elements
   And I should see "Post FR 8"
   And I should not see "Post FR 2"
 
