@@ -8,6 +8,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class WidgetController extends Controller
 {
@@ -22,7 +23,7 @@ class WidgetController extends Controller
      * @Route("/widget_debate/{debateId}", name="widget_debate", options={"i18n" = false})
      * @Template("CapcoAppBundle:Widget:widget_debate.html.twig")
      */
-    public function widgetDebateAction(string $debateId)
+    public function widgetDebateAction(Request $request, string $debateId)
     {
         $viewer = $this->getUser();
         $debate = $this->globalIdResolver->resolve($debateId, $viewer);
@@ -38,10 +39,15 @@ class WidgetController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
+        $widgetBackground = $request->query->get('background');
+        $widgetAuthenticationEnabled = $request->query->getBoolean('authEnabled') || false;
+
         return [
             'debateId' => $debateId,
             'step' => $step,
             'project' => $project,
+            'widgetBackground' => $widgetBackground,
+            'widgetAuthEnabled' => $widgetAuthenticationEnabled
         ];
     }
 }

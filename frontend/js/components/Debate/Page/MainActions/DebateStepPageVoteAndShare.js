@@ -15,13 +15,13 @@ import useOnScreen from '~/utils/hooks/useOnScreen';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   +step: DebateStepPageVoteAndShare_step,
   +isMobile?: boolean,
   +isAuthenticated: boolean,
   +body: string,
-  +title: string,
   +url: string,
   +viewerIsConfirmedByEmail: boolean,
 |};
@@ -31,9 +31,9 @@ export const formName = 'debate-argument-form';
 export type VoteState =
   | 'NONE'
   | 'VOTED'
+  | 'VOTED_ANONYMOUS'
   | 'ARGUMENTED'
   | 'RESULT'
-  | 'RESULT_ANONYMOUS'
   | 'NOT_CONFIRMED'
   | 'NOT_CONFIRMED_ARGUMENTED';
 
@@ -56,7 +56,6 @@ const getInitialState = (
 export const DebateStepPageVoteAndShare = ({
   isAuthenticated,
   body,
-  title,
   isMobile,
   viewerIsConfirmedByEmail,
   step,
@@ -80,13 +79,13 @@ export const DebateStepPageVoteAndShare = ({
   const ref = useRef();
   const isVisible = useOnScreen(ref);
   const intl = useIntl();
+  const { widget } = useDebateStepPage();
 
   return (
     <>
-      {!isVisible && !isStepClosed && (
+      {!isVisible && !isStepClosed && !widget.isSource && (
         <DebateStepPageAbsoluteVoteAndShare
           isMobile={isMobile}
-          title={title}
           step={step}
           isAuthenticated={isAuthenticated}
           body={body}

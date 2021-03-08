@@ -265,6 +265,7 @@ const onSubmit = (
             debate: undefined,
             slug: undefined,
             hasOpinionsFilled: undefined,
+            widget: undefined,
           };
         })
       : [],
@@ -490,7 +491,9 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
                 : [],
             hasOpinionsFilled:
               step.type === 'DebateStep' ? step?.debate?.opinions.totalCount === 2 : undefined,
-            debate: undefined,
+            debate: {
+              id: step?.debate?.id,
+            },
             allowAuthorsToAddNews:
               step.type === 'SelectionStep' || step.type === 'CollectStep'
                 ? step.allowAuthorsToAddNews
@@ -754,6 +757,7 @@ export default createFragmentContainer(injectIntl(container), {
         }
         ... on DebateStep {
           debate {
+            id
             opinions {
               totalCount
             }

@@ -9,13 +9,13 @@ import AppBox from '~/components/Ui/Primitives/AppBox';
 import DebateStepPageVote from './DebateStepPageVote';
 import { type VoteState } from './DebateStepPageVoteAndShare';
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   +step: DebateStepPageAbsoluteVoteAndShare_step,
   +isAuthenticated: boolean,
   +isMobile?: boolean,
   +body: string,
-  +title: string,
   +voteState: VoteState,
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
@@ -26,7 +26,6 @@ type Props = {|
 export const DebateStepPageAbsoluteVoteAndShare = ({
   step,
   isMobile,
-  title,
   isAuthenticated,
   body,
   voteState,
@@ -36,6 +35,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   viewerIsConfirmed,
 }: Props) => {
   const { debate, url } = step;
+  const { title } = useDebateStepPage();
 
   return (
     <AppBox
@@ -53,7 +53,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
           ? 'none'
           : !showArgumentForm || voteState === 'NONE'
           ? 'medium'
-          : '0 10px 14px 0px white',
+          : '0 10px 14px 0 white',
       })}>
       {/** I dont like this but for now we have to use the bootstrap container max-width, waiting for the DS one */}
       <AppBox

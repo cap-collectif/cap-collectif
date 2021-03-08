@@ -6,7 +6,6 @@ import { DebateStepPageMainActions } from './DebateStepPageMainActions';
 import { $refType, $fragmentRefs } from '~/mocks';
 
 const defaultProps = {
-  title: 'Pour ou contre le LSD dans nos cantines',
   step: {
     $refType,
     $fragmentRefs,

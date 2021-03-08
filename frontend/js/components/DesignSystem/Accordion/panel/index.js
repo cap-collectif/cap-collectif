@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import Flex from '~ui/Primitives/Layout/Flex';
+import Flex, { type FlexProps } from '~ui/Primitives/Layout/Flex';
 import { AccordionItemContext } from '~ds/Accordion/item/context';
 
 type Props = {|
+  ...FlexProps,
   children: React.Node,
 |};
 

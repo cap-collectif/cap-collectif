@@ -10,15 +10,17 @@ import DebateStepPageLinkedArticles from './LinkedArticles/DebateStepPageLinkedA
 import DebateStepPageArguments from './Arguments/DebateStepPageArguments';
 import DebateStepPageNotYetStarted from './NotYetStarted/DebateStepPageNotYetStarted';
 import useIsMobile from '~/utils/hooks/useIsMobile';
+import LoginModal from '~/components/User/Login/LoginModal';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 export type Props = {|
-  query: ?DebateStepPageLogic_query,
-  title: string,
-  isAuthenticated: boolean,
+  +query: ?DebateStepPageLogic_query,
+  +isAuthenticated: boolean,
 |};
 
-export const DebateStepPageLogic = ({ query, title }: Props) => {
+export const DebateStepPageLogic = ({ query }: Props) => {
   const isMobile = useIsMobile();
+  const { widget } = useDebateStepPage();
   const step = query?.step || null;
   const viewer = query?.viewer || null;
   const startAt = query?.step?.timeRange?.startAt || null;
@@ -30,16 +32,17 @@ export const DebateStepPageLogic = ({ query, title }: Props) => {
       <Flex direction="column" spacing={8}>
         <DebateStepPageMainActions
           isMobile={isMobile}
-          title={title}
           step={step}
           isAuthenticated={!!query?.viewer}
         />
         <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
-        <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
+        {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}
         <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
+        <LoginModal />
       </Flex>
     );
-  return <DebateStepPageNotYetStarted step={step} title={title} />;
+
+  return <DebateStepPageNotYetStarted step={step} />;
 };
 
 export default createFragmentContainer(DebateStepPageLogic, {

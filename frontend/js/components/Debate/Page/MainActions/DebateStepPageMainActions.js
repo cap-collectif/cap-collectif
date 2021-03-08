@@ -12,16 +12,17 @@ import Heading from '~ui/Primitives/Heading';
 import RemainingTime from '~/components/Utils/RemainingTime';
 import DebateStepPageMainActionsPlaceholder from './DebateStepPageMainActionPlaceholder';
 import DebateStepPageVoteAndShare from './DebateStepPageVoteAndShare';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   +step: ?DebateStepPageMainActions_step,
   +isMobile: boolean,
-  +title: string,
   +isAuthenticated: boolean,
 |};
 
-export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticated }: Props) => {
+export const DebateStepPageMainActions = ({ step, isMobile, isAuthenticated }: Props) => {
   const intl = useIntl();
+  const { title } = useDebateStepPage();
 
   if (!step) return null;
 
@@ -57,7 +58,6 @@ export const DebateStepPageMainActions = ({ step, title, isMobile, isAuthenticat
           {step && (
             <DebateStepPageVoteAndShare
               isMobile={isMobile}
-              title={title}
               isAuthenticated={isAuthenticated}
               step={step}
             />

@@ -29,6 +29,7 @@ import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalR
 import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
 import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
 import Tooltip from '~ds/Tooltip/Tooltip';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   ...AppBoxProps,
@@ -88,6 +89,7 @@ export const ArgumentCard = ({
   const isAuthor = argument.viewerDidAuthor;
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
+  const { widget } = useDebateStepPage();
   const [isEditing, setIsEditing] = useState(false);
   const [readMore, setReadMore] = useState(false);
 
@@ -242,9 +244,10 @@ export const ArgumentCard = ({
           </Text>
         )}
 
-        {!isEditing && (
+        {((!isEditing && !widget.isSource) ||
+          (!isEditing && widget.isSource && widget.authEnabled)) && (
           <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
-            <LoginOverlay enabled={!isStepClosed}>
+            <LoginOverlay enabled={!isStepClosed} placement="bottom">
               <Button
                 color="neutral-gray.500"
                 leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}

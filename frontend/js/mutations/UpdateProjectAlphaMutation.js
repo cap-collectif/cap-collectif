@@ -83,6 +83,7 @@ const mutation = graphql`
           }
           ... on DebateStep {
             debate {
+              id
               opinions {
                 totalCount
               }

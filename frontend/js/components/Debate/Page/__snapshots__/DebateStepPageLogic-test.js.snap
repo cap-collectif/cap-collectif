@@ -1,12 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageLogic /> renders correcty 1`] = `
+exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`] = `
 <Relay(DebateStepPageNotYetStarted)
   step={
     Object {
       "$fragmentRefs": null,
     }
   }
-  title="Pour ou contre le LSD dans nos cantines"
+/>
+`;
+
+exports[`<DebateStepPageLogic /> should renders correctly when not authenticated 1`] = `
+<Relay(DebateStepPageNotYetStarted)
+  step={
+    Object {
+      "$fragmentRefs": null,
+    }
+  }
 />
 `;

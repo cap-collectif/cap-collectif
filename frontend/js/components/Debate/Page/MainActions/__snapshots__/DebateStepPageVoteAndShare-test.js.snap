@@ -40,7 +40,6 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
         "url": "step/123",
       }
     }
-    title="blabla le title"
     viewerIsConfirmed={true}
     voteState="NONE"
   />
@@ -99,7 +98,6 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
         "url": "step/123",
       }
     }
-    title="blabla le title"
     viewerIsConfirmed={true}
     voteState="NONE"
   />
@@ -158,7 +156,6 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly when timeless step 1`] 
         "url": "step/123",
       }
     }
-    title="blabla le title"
     viewerIsConfirmed={true}
     voteState="NONE"
   />

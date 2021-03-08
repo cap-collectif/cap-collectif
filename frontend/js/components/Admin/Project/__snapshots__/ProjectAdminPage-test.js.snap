@@ -1206,6 +1206,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
                                     "concreteType": "DebateOpinionConnection",
                                     "kind": "LinkedField",
                                     "name": "opinions",
@@ -1266,13 +1273,6 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                         "storageKey": null,
                                       },
                                     ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
                                     "storageKey": null,
                                   },
                                 ],
@@ -1769,7 +1769,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "9156f4dcf55746eac92515003788d479",
+        "cacheID": "e60c351fc68589893f1e44468068db15",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -2045,6 +2045,7 @@ fragment ProjectAdminForm_project on Project {
     }
     ... on DebateStep {
       debate {
+        id
         opinions {
           totalCount
         }
@@ -2056,7 +2057,6 @@ fragment ProjectAdminForm_project on Project {
             }
           }
         }
-        id
       }
     }
   }
@@ -3397,6 +3397,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
                                     "concreteType": "DebateOpinionConnection",
                                     "kind": "LinkedField",
                                     "name": "opinions",
@@ -3457,13 +3464,6 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                         "storageKey": null,
                                       },
                                     ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
                                     "storageKey": null,
                                   },
                                 ],
@@ -3960,7 +3960,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "9156f4dcf55746eac92515003788d479",
+        "cacheID": "e60c351fc68589893f1e44468068db15",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4236,6 +4236,7 @@ fragment ProjectAdminForm_project on Project {
     }
     ... on DebateStep {
       debate {
+        id
         opinions {
           totalCount
         }
@@ -4247,7 +4248,6 @@ fragment ProjectAdminForm_project on Project {
             }
           }
         }
-        id
       }
     }
   }

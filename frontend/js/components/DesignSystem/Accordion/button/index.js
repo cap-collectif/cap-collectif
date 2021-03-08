@@ -3,10 +3,11 @@ import * as React from 'react';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import { AccordionItemContext } from '~ds/Accordion/item/context';
-import Button from '~ds/Button/Button';
+import Button, { type ButtonProps } from '~ds/Button/Button';
 import { FontWeight } from '~ui/Primitives/constants';
 
 type Props = {|
+  ...ButtonProps,
   children: React.Node,
   disabled?: boolean,
 |};
@@ -26,7 +27,8 @@ const AccordionButton = ({ children, ...props }: Props) => {
       ref={button}
       disabled={disabled}
       onClick={toggle}
-      p={8}
+      px={8}
+      py={8}
       width="100%"
       fontWeight={FontWeight.Normal}
       color="blue.900"

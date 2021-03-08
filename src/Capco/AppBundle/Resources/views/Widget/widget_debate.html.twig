@@ -1,21 +1,30 @@
-{% extends '@CapcoApp/layout.html.twig' %}
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
 
 {% block mainContent %}
+    <style>
+        body { padding-top: 0; background-color: transparent }
+    </style>
 
-    <h1>Je suis un super Widget</h1>
-    <p>
-        {% if app.user %}
-            Coucou {{ app.user }}, je sais que c'est toi grâce au cookie !
-        {% else %}
-            On veut tout savoir sur toi, alors connecte toi stp !
-        {% endif %}
-    </p>
-    {# {{ react_render_component('DebateWidgetApp', {
-        'rendering': 'client_side'
-    }) }} #}
+    <section style="background: {{ '#' ~ widgetBackground }}; padding: 30px" id="debate-step-page-app-widget">
+        {{ react_render_component('DebateStepPageApp',
+            { 'props':
+                {
+                    stepId: step.id|toGlobalId('DebateStep'),
+                    title: step.title,
+                    fromWidget: true,
+                    authEnabled: widgetAuthEnabled,
+                }
+            })
+        }}
+    </section>
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="text/javascript">
         window.locale = "{{ intl_locale() }}";
         window.timeZone = "{{ intl_timeZone() }}";
@@ -24,7 +33,5 @@
             window.sentryDsn = "{{ sentryDsn }}";
         {% endif %}
     </script>
-    {{ parent() }}
-
 {% endblock %}
 

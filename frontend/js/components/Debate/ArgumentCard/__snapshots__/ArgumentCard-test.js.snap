@@ -70,6 +70,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
     >
       <Connect(LoginOverlay)
         enabled={true}
+        placement="bottom"
       >
         <Button
           aria-label="vote.add"
@@ -204,6 +205,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
     >
       <Connect(LoginOverlay)
         enabled={true}
+        placement="bottom"
       >
         <Button
           aria-label="vote.add"
@@ -352,6 +354,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
     >
       <Connect(LoginOverlay)
         enabled={true}
+        placement="bottom"
       >
         <Button
           aria-label="global.cancel"
@@ -532,6 +535,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
     >
       <Connect(LoginOverlay)
         enabled={true}
+        placement="bottom"
       >
         <Button
           aria-label="global.cancel"
@@ -666,6 +670,7 @@ exports[`<ArgumentCard /> renders correctly when step finished 1`] = `
     >
       <Connect(LoginOverlay)
         enabled={false}
+        placement="bottom"
       >
         <Button
           aria-label="vote.add"

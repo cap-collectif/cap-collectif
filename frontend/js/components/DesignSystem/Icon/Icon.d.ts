@@ -23,6 +23,7 @@ declare export const ICON_NAME = {
     CIRCLE_ALERT: 'CIRCLE_ALERT',
     CIRCLE_CHECK: 'CIRCLE_CHECK',
     CIRCLE_CROSS: 'CIRCLE_CROSS',
+    CHECK_O: 'CHECK_O',
     NEWSPAPER: 'NEWSPAPER',
     SPINNER: 'SPINNER',
     BELL: 'BELL',
@@ -40,6 +41,7 @@ declare export const ICON_NAME = {
     PIN_O: 'PIN_O',
     FOLDER_O: 'FOLDER_O',
     BOOK_STAR_O: 'BOOK_STAR_O',
+    PREVIEW: 'PREVIEW',
 };
 
 declare export const ICON_SIZE = {

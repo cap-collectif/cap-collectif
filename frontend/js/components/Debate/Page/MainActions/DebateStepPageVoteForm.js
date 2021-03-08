@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage, useIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
@@ -26,6 +27,8 @@ import MobilePublishArgumentModal from '~/components/Debate/Page/Modals/MobilePu
 import Text from '~ui/Primitives/Text';
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
+import type { State } from '~/types';
 
 type Props = {|
   +debate: DebateStepPageVoteForm_debate,
@@ -38,6 +41,7 @@ type Props = {|
   +isAbsolute?: boolean,
   +url?: string,
   +viewerIsConfirmed: boolean,
+  +organizationName: string,
 |};
 
 export const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
@@ -97,12 +101,12 @@ export const addArgumentOnDebate = (
 
 const bandMessage = {
   VOTED: 'thanks-for-your-vote',
+  VOTED_ANONYMOUS: 'thanks-vote-argument-on-instance',
   ARGUMENTED: 'thanks-for-debate-richer',
   NOT_CONFIRMED: 'publish.vote.validate.account',
   NOT_CONFIRMED_ARGUMENTED: 'publish.argument.validate.account',
   NONE: null,
   RESULT: null,
-  RESULT_ANONYMOUS: 'thanks-for-debate-richer',
 };
 
 export const DebateStepPageVoteForm = ({
@@ -116,10 +120,12 @@ export const DebateStepPageVoteForm = ({
   url,
   isMobile,
   viewerIsConfirmed,
+  organizationName,
 }: Props) => {
   useScript('https://platform.twitter.com/widgets.js');
   const { onOpen, onClose, isOpen } = useDisclosure();
   const intl = useIntl();
+  const { widget } = useDebateStepPage();
 
   const viewerVoteValue = debate.viewerVote?.type;
 
@@ -169,7 +175,14 @@ export const DebateStepPageVoteForm = ({
                     ? '🎉'
                     : '🗳️'}
                 </span>
-                {bandMessage[voteState] && <FormattedHTMLMessage id={bandMessage[voteState]} />}
+                {bandMessage[voteState] && (
+                  <FormattedHTMLMessage
+                    id={bandMessage[voteState]}
+                    values={
+                      voteState === 'VOTED_ANONYMOUS' ? { instance: organizationName } : undefined
+                    }
+                  />
+                )}
               </Text>
             </>
           )}
@@ -180,8 +193,15 @@ export const DebateStepPageVoteForm = ({
                   ? '🎉'
                   : '🗳️'}
               </span>
-              {bandMessage[voteState] && <FormattedHTMLMessage id={bandMessage[voteState]} />}
-              {voteState !== 'RESULT_ANONYMOUS' && (
+              {bandMessage[voteState] && (
+                <FormattedHTMLMessage
+                  id={bandMessage[voteState]}
+                  values={
+                    voteState === 'VOTED_ANONYMOUS' ? { instance: organizationName } : undefined
+                  }
+                />
+              )}
+              {voteState !== 'VOTED_ANONYMOUS' && (
                 <Button
                   css={css({
                     color: 'gray.700',
@@ -238,9 +258,10 @@ export const DebateStepPageVoteForm = ({
         </Flex>
       )}
 
-      {showArgumentForm && !isMobile && (
+      {((showArgumentForm && !isMobile && !widget.isSource) ||
+        (showArgumentForm && !isMobile && widget.isSource && widget.authEnabled)) && (
         <ConditionalWrapper
-          when={voteState === 'RESULT_ANONYMOUS'}
+          when={voteState === 'VOTED_ANONYMOUS'}
           wrapper={children => <LoginOverlay>{children}</LoginOverlay>}>
           <Card
             borderRadius="8px"
@@ -258,7 +279,7 @@ export const DebateStepPageVoteForm = ({
             <Form id={formName}>
               <Field
                 name="body"
-                disabled={voteState === 'RESULT_ANONYMOUS'}
+                disabled={voteState === 'VOTED_ANONYMOUS'}
                 component={component}
                 type="textarea"
                 id="body"
@@ -266,7 +287,7 @@ export const DebateStepPageVoteForm = ({
                 autoComplete="off"
                 placeholder={title}
               />
-              {voteState !== 'RESULT_ANONYMOUS' && body?.length > 0 && (
+              {voteState !== 'VOTED_ANONYMOUS' && body?.length > 0 && (
                 <Flex justifyContent="flex-end">
                   <Button
                     onClick={() => setShowArgumentForm(false)}
@@ -292,6 +313,22 @@ export const DebateStepPageVoteForm = ({
           </Card>
         </ConditionalWrapper>
       )}
+
+      {showArgumentForm && !isMobile && widget.isSource && !widget.authEnabled && (
+        <Flex direction="row" justify="center">
+          <Button
+            onClick={() => {
+              window.open(url, '_blank');
+            }}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+            rightIcon="PREVIEW">
+            <FormattedMessage id="continue-on-instance" values={{ instance: organizationName }} />
+          </Button>
+        </Flex>
+      )}
+
       {showArgumentForm && isMobile && (
         <>
           <MobilePublishArgumentModal
@@ -315,7 +352,15 @@ export const DebateStepPageVoteForm = ({
   );
 };
 
-export default createFragmentContainer(DebateStepPageVoteForm, {
+const mapStateToProps = (state: State) => ({
+  organizationName: state.default.parameters['global.site.organization_name'],
+});
+
+const DebateStepPageVoteFormConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  DebateStepPageVoteForm,
+);
+
+export default createFragmentContainer(DebateStepPageVoteFormConnected, {
   debate: graphql`
     fragment DebateStepPageVoteForm_debate on Debate
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

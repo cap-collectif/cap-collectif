@@ -8,16 +8,16 @@ import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Tag from '~ds/Tag/Tag';
 import Heading from '~ui/Primitives/Heading';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
-  +title: string,
   +step: ?DebateStepPageNotYetStarted_step,
 |};
 
-// WIP : Que de l'UI y'a pas l'API donc rien n'est connecté
-export const DebateStepPageNotYetStarted = ({ step, title }: Props) => {
+export const DebateStepPageNotYetStarted = ({ step }: Props) => {
   const endDate = moment(step?.timeRange?.startAt);
   const now = moment();
+  const { title } = useDebateStepPage();
 
   const daysUntil = endDate.diff(now, 'days');
   const hoursUntil = endDate.diff(now, 'hours');

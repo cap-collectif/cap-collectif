@@ -17,38 +17,43 @@ describe('<DebateStepPageVoteForm/>', () => {
     setVoteState: jest.fn(),
     setShowArgumentForm: jest.fn(),
     viewerIsConfirmed: true,
+    organizationName: 'CapCollectif',
   };
 
-  it('renders correcty', () => {
+  it('should renders correctly', () => {
     const wrapper = shallow(<DebateStepPageVoteForm {...props} voteState="NONE" debate={debate} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correcty on mobile', () => {
+  it('should renders correctly on mobile', () => {
     const wrapper = shallow(
       <DebateStepPageVoteForm {...props} voteState="NONE" debate={debate} isMobile />,
     );
     expect(wrapper).toMatchSnapshot();
   });
-  it('renders correcty when voted', () => {
+
+  it('should renders correctly when voted', () => {
     const wrapper = shallow(
       <DebateStepPageVoteForm {...props} voteState="VOTED" debate={debate} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
-  it('renders correcty when voted on mobile', () => {
+
+  it('should renders correctly when voted on mobile', () => {
     const wrapper = shallow(
       <DebateStepPageVoteForm {...props} voteState="VOTED" debate={debate} isMobile />,
     );
     expect(wrapper).toMatchSnapshot();
   });
-  it('renders correcty when argumented', () => {
+
+  it('should renders correctly when argumented', () => {
     const wrapper = shallow(
       <DebateStepPageVoteForm {...props} voteState="ARGUMENTED" debate={debate} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
-  it('renders correcty when argumented on mobile', () => {
+
+  it('should renders correctly when argumented on mobile', () => {
     const wrapper = shallow(
       <DebateStepPageVoteForm {...props} voteState="ARGUMENTED" debate={debate} isMobile />,
     );

@@ -158,7 +158,6 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
       </ProjectAdminFormstyle__ProjectBoxHeader>
       <Field
         component={[Function]}
-        icons={true}
         id="step-isEnabled"
         label={
           <FormattedMessage
@@ -438,7 +437,6 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
       </ProjectAdminFormstyle__ProjectBoxHeader>
       <Field
         component={[Function]}
-        icons={true}
         id="step-isEnabled"
         label={
           <FormattedMessage

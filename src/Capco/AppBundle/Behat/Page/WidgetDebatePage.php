@@ -16,7 +16,7 @@ class WidgetDebatePage extends Page
         if (
             !$this->getSession()->wait(
                 10000,
-                'document.body.innerHTML.search("Je suis un super Widget") > 0'
+                "window.jQuery && $('#debate-step-page-app-widget').length > 0"
             )
         ) {
             throw new \RuntimeException(

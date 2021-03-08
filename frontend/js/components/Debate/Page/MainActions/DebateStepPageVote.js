@@ -35,7 +35,7 @@ const anonymousVoteForDebate = (
       if (response.addDebateAnonymousVote?.errorCode) {
         mutationErrorToast(intl);
       } else {
-        onSuccess('RESULT_ANONYMOUS');
+        onSuccess('VOTED_ANONYMOUS');
       }
     })
     .catch(() => {

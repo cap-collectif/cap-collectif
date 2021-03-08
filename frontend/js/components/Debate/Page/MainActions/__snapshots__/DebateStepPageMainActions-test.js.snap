@@ -28,9 +28,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
         color="gray.900"
         mb={2}
         textAlign="center"
-      >
-        Pour ou contre le LSD dans nos cantines
-      </Heading>
+      />
       <Relay(Connect(ReduxForm))
         isAuthenticated={true}
         isMobile={false}
@@ -45,7 +43,6 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
             "timeless": false,
           }
         }
-        title="Pour ou contre le LSD dans nos cantines"
       />
     </ForwardRef>
   </ReactPlaceholder>
@@ -80,9 +77,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
         color="gray.900"
         mb={2}
         textAlign="center"
-      >
-        Pour ou contre le LSD dans nos cantines
-      </Heading>
+      />
       <Relay(Connect(ReduxForm))
         isAuthenticated={true}
         isMobile={true}
@@ -97,7 +92,6 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
             "timeless": false,
           }
         }
-        title="Pour ou contre le LSD dans nos cantines"
       />
     </ForwardRef>
   </ReactPlaceholder>
@@ -122,9 +116,7 @@ exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`
         color="gray.900"
         mb={2}
         textAlign="center"
-      >
-        Pour ou contre le LSD dans nos cantines
-      </Heading>
+      />
       <Relay(Connect(ReduxForm))
         isAuthenticated={true}
         isMobile={false}
@@ -139,7 +131,6 @@ exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`
             "timeless": true,
           }
         }
-        title="Pour ou contre le LSD dans nos cantines"
       />
     </ForwardRef>
   </ReactPlaceholder>

@@ -7,7 +7,6 @@ import { $refType, $fragmentRefs } from '~/mocks';
 
 const baseProps = {
   body: 'blabla le body',
-  title: 'blabla le title',
   isAuthenticated: true,
   url: 'step/123',
   step: {

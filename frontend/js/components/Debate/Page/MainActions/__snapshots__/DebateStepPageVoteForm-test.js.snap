@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
+exports[`<DebateStepPageVoteForm/> should renders correctly 1`] = `
 <ForwardRef(MotionComponent)
   animate={
     Object {
@@ -122,7 +122,7 @@ exports[`<DebateStepPageVoteForm/> renders correcty 1`] = `
 </ForwardRef(MotionComponent)>
 `;
 
-exports[`<DebateStepPageVoteForm/> renders correcty on mobile 1`] = `
+exports[`<DebateStepPageVoteForm/> should renders correctly on mobile 1`] = `
 <ForwardRef(MotionComponent)
   animate={
     Object {
@@ -218,7 +218,7 @@ exports[`<DebateStepPageVoteForm/> renders correcty on mobile 1`] = `
 </ForwardRef(MotionComponent)>
 `;
 
-exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] = `
 <ForwardRef(MotionComponent)
   animate={
     Object {
@@ -386,7 +386,7 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented 1`] = `
 </ForwardRef(MotionComponent)>
 `;
 
-exports[`<DebateStepPageVoteForm/> renders correcty when argumented on mobile 1`] = `
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
 <ForwardRef(MotionComponent)
   animate={
     Object {
@@ -528,7 +528,7 @@ exports[`<DebateStepPageVoteForm/> renders correcty when argumented on mobile 1`
 </ForwardRef(MotionComponent)>
 `;
 
-exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
 <ForwardRef(MotionComponent)
   animate={
     Object {
@@ -655,7 +655,7 @@ exports[`<DebateStepPageVoteForm/> renders correcty when voted 1`] = `
 </ForwardRef(MotionComponent)>
 `;
 
-exports[`<DebateStepPageVoteForm/> renders correcty when voted on mobile 1`] = `
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile 1`] = `
 <ForwardRef(MotionComponent)
   animate={
     Object {

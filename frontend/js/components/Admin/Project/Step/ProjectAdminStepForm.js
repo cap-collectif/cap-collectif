@@ -37,6 +37,9 @@ import type { ProposalViewMode } from '~/redux/modules/proposal';
 import StepArticle from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import type { Articles } from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
+import Accordion from '~ds/Accordion';
+import Heading from '~ui/Primitives/Heading';
+import DebateWidgetForm from '~/components/Admin/Project/Step/DebateWidgetForm/DebateWidgetForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -95,6 +98,9 @@ type Props = {|
       id: string,
       url: string,
     }>,
+    debate?: {
+      id: string,
+    },
   },
   intl: IntlShape,
   formName: string,
@@ -568,10 +574,25 @@ export function ProjectAdminStepForm({
 
           {step.type === 'DebateStep' && <StepArticle />}
 
+          {step.type === 'DebateStep' && step.debate && (
+            <Accordion>
+              <Accordion.Item id="integration-parameter">
+                <Accordion.Button px={0}>
+                  <Heading as="h4">
+                    <FormattedMessage id="integration-parameter" tagName={React.Fragment} />
+                  </Heading>
+                </Accordion.Button>
+
+                <Accordion.Panel px={0}>
+                  <DebateWidgetForm debateId={step.debate.id} />
+                </Accordion.Panel>
+              </Accordion.Item>
+            </Accordion>
+          )}
+
           {step.type !== 'DebateStep' && renderSubSection('global.publication')}
           <>
             <Field
-              icons
               component={toggle}
               name="isEnabled"
               id="step-isEnabled"
@@ -633,6 +654,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     isCreating,
     formValueSelector(stepFormName)(state, 'proposalForm'),
   );
+
   return {
     initialValues: {
       // AbstractStep
@@ -671,6 +693,13 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       nbOpinionsToDisplay: step?.nbOpinionsToDisplay || null,
       // DebateStep
       articles: step?.articles || [],
+      widget: {
+        background: '#fff',
+        border: '#fff',
+        width: '100%',
+        height: '90vh',
+        destination: null,
+      },
       // Votable Trait
       votable: step?.votable || false,
       votesHelpText: step?.votesHelpText || null,

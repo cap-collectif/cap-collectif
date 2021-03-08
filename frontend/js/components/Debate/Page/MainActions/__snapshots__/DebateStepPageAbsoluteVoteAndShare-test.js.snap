@@ -37,9 +37,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
             "left",
           ]
         }
-      >
-        blabla le title
-      </Text>
+      />
       <DebateStepPageVote
         debateId="debate1"
         isAuthenticated={true}
@@ -91,9 +89,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] 
             "left",
           ]
         }
-      >
-        blabla le title
-      </Text>
+      />
       <DebateStepPageVote
         debateId="debate1"
         isAuthenticated={true}
@@ -123,7 +119,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumente
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(DebateStepPageVoteForm)
+    <Relay(Connect(DebateStepPageVoteForm))
       body="blabla le body"
       debate={
         Object {
@@ -164,7 +160,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumente
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(DebateStepPageVoteForm)
+    <Relay(Connect(DebateStepPageVoteForm))
       body="blabla le body"
       debate={
         Object {
@@ -203,7 +199,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted 1`]
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(DebateStepPageVoteForm)
+    <Relay(Connect(DebateStepPageVoteForm))
       body="blabla le body"
       debate={
         Object {
@@ -244,7 +240,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted on 
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(DebateStepPageVoteForm)
+    <Relay(Connect(DebateStepPageVoteForm))
       body="blabla le body"
       debate={
         Object {

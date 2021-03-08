@@ -5,23 +5,33 @@ import { shallow } from 'enzyme';
 import { DebateStepPageLogic } from './DebateStepPageLogic';
 import { $refType, $fragmentRefs } from '~/mocks';
 
-describe('<DebateStepPageLogic />', () => {
-  const query = {
+const baseProps = {
+  query: {
     $refType,
     step: { $fragmentRefs },
     viewer: {
       $fragmentRefs,
     },
-  };
+  },
+  isAuthenticated: false,
+};
 
-  it('renders correcty', () => {
-    const wrapper = shallow(
-      <DebateStepPageLogic
-        isAuthenticated
-        query={query}
-        title="Pour ou contre le LSD dans nos cantines"
-      />,
-    );
+const props = {
+  basic: baseProps,
+  whenAuthenticated: {
+    ...baseProps,
+    isAuthenticated: true,
+  },
+};
+
+describe('<DebateStepPageLogic />', () => {
+  it('should renders correctly when not authenticated', () => {
+    const wrapper = shallow(<DebateStepPageLogic {...props.basic} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should renders correctly when authenticated', () => {
+    const wrapper = shallow(<DebateStepPageLogic {...props.whenAuthenticated} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

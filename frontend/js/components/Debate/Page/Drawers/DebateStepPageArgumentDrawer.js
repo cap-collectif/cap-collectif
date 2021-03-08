@@ -123,7 +123,7 @@ const DebateStepPageArgumentDrawer = ({
         borderTopRightRadius="16px"
         width="100%"
         py={4}>
-        <LoginOverlay enabled={!isStepClosed}>
+        <LoginOverlay enabled={!isStepClosed} placement="bottom">
           <Button
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
