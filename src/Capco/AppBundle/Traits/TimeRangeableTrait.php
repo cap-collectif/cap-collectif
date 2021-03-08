@@ -30,6 +30,10 @@ trait TimeRangeableTrait
 
     public function hasStarted(): bool
     {
+        if ($this->isTimeless()) {
+            return true;
+        }
+
         $now = new \DateTime('now');
 
         if (null !== $this->startAt) {
@@ -41,6 +45,10 @@ trait TimeRangeableTrait
 
     public function hasEnded(): bool
     {
+        if ($this->isTimeless()) {
+            return false;
+        }
+
         $now = new \DateTime('now');
 
         return $this->endAt ? $now >= $this->endAt : false;
