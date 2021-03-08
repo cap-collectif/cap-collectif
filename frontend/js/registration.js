@@ -84,6 +84,7 @@ import ToastsContainerApp from '~/startup/ToastsContainerApp';
 import DebateStepPageApp from '~/startup/DebateStepPageApp';
 import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
 import DebateCardApp from '~/startup/DebateCardApp';
+import WhatsNewApp from '~/startup/WhatsNewApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -171,4 +172,5 @@ ReactOnRails.register({
   ParticipationTutorialApp,
   ParticipationMotivationApp,
   DebateCardApp,
+  WhatsNewApp,
 });

@@ -68,6 +68,7 @@ import EngagementListApp from '../js/startup/EngagementListApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
 import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
 import DebateCardApp from '../js/startup/DebateCardApp';
+import WhatsNewApp from '../js/startup/WhatsNewApp';
 
 const emptyFunction = () => {};
 
@@ -143,4 +144,5 @@ ReactOnRails.register({
   EngagementListApp,
   LanguageButtonApp,
   DebateCardApp,
+  WhatsNewApp,
 });
