@@ -82,6 +82,7 @@ const mutation = graphql`
             }
           }
           ... on DebateStep {
+            isAnonymousParticipationAllowed
             debate {
               id
               opinions {

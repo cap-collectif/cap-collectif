@@ -15,15 +15,15 @@ class DebateStepFormType extends AbstractStepFormType
     {
         parent::buildForm($builder, $options);
         $builder
+            ->add('isAnonymousParticipationAllowed')
             ->add('articles', OrderedCollectionType::class, [
                 'entry_type' => DebateArticleType::class,
                 'on_update' => static function (
                     DebateArticle $itemFromDb,
                     DebateArticle $itemFromUser
                 ) {
-                    $itemFromDb
-                        ->setUrl($itemFromUser->getUrl());
-                }
+                    $itemFromDb->setUrl($itemFromUser->getUrl());
+                },
             ]);
     }
 

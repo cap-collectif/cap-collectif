@@ -94,5 +94,7 @@ ProjectStepInput:
             synthesis:
                 type: 'ID'
             # DebateStep
+            isAnonymousParticipationAllowed:
+                type: 'Boolean'
             articles:
                 type: '[DebateArticleInput]'

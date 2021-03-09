@@ -179,6 +179,8 @@ const onSubmit = (
               s.type === 'DebateStep'
                 ? s.timeless
                 : undefined,
+            isAnonymousParticipationAllowed:
+              s.type === 'DebateStep' ? s.isAnonymousParticipationAllowed : undefined,
             startAt:
               s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
             endAt: s.endAt && !s.timeless ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
@@ -756,6 +758,7 @@ export default createFragmentContainer(injectIntl(container), {
           footer
         }
         ... on DebateStep {
+          isAnonymousParticipationAllowed
           debate {
             id
             opinions {

@@ -54,6 +54,7 @@ type Props = {|
     body: string,
     isEnabled: boolean,
     timeless?: boolean,
+    isAnonymousParticipationAllowed?: boolean,
     metaDescription: ?string,
     customCode: ?string,
     questionnaire?: {| value: string, label: string |},
@@ -107,6 +108,7 @@ type Props = {|
   isCreating: boolean,
   index?: number,
   timeless: boolean,
+  isAnonymousParticipationAllowed: boolean,
   requirements?: ?Array<Requirement>,
   statuses?: ?Array<ProposalStepStatus>,
   votable?: boolean,
@@ -128,6 +130,7 @@ type DisplayMode = {
 };
 
 type DebateStepForm = {|
+  isAnonymousParticipationAllowed?: boolean,
   articles?: ?Articles,
 |};
 
@@ -351,6 +354,7 @@ export function ProjectAdminStepForm({
   intl,
   formName,
   timeless,
+  isAnonymousParticipationAllowed,
   submitting,
   dispatch,
   requirements,
@@ -432,6 +436,17 @@ export function ProjectAdminStepForm({
               )}
               {!timeless && renderDateContainer(formName, intl)}
             </>
+          )}
+          {step.type === 'DebateStep' && (
+            <Field
+              icons
+              component={toggle}
+              name="isAnonymousParticipationAllowed"
+              id="step-isAnonymousParticipationAllowed"
+              normalize={val => !!val}
+              helpText={<FormattedMessage id="allow-debate-anonymous-participation-help-text" />}
+              label={<FormattedMessage id="allow-debate-anonymous-participation" />}
+            />
           )}
 
           {step.type !== 'DebateStep' && (
@@ -574,7 +589,7 @@ export function ProjectAdminStepForm({
 
           {step.type === 'DebateStep' && <StepArticle />}
 
-          {step.type === 'DebateStep' && step.debate && (
+          {step.type === 'DebateStep' && step.debate && isAnonymousParticipationAllowed && (
             <Accordion>
               <Accordion.Item id="integration-parameter">
                 <Accordion.Button px={0}>
@@ -667,6 +682,9 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       startAt: step?.startAt || moment(),
       isEnabled: step?.isEnabled ? step.isEnabled : true,
       timeless: step?.timeless ? step.timeless : false,
+      isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed
+        ? step.isAnonymousParticipationAllowed
+        : false,
       metaDescription: step?.metaDescription ? step.metaDescription : null,
       customCode: step?.customCode ? step.customCode : null,
       requirementsReason: step?.requirementsReason || null,
@@ -732,6 +750,8 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     mainView: formValueSelector(stepFormName)(state, 'mainView') || mainView,
     votable: formValueSelector(stepFormName)(state, 'votable') || false,
     timeless: formValueSelector(stepFormName)(state, 'timeless') || false,
+    isAnonymousParticipationAllowed:
+      formValueSelector(stepFormName)(state, 'isAnonymousParticipationAllowed') || false,
     requirements: formValueSelector(stepFormName)(state, 'requirements') || [],
     statuses: formValueSelector(stepFormName)(state, 'statuses') || [],
     // "private" is a reserved word in js (will be)

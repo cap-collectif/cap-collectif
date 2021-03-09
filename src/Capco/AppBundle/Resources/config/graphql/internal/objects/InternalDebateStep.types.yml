@@ -20,3 +20,6 @@ InternalDebateStep:
       debate:
         description: 'The debate of the step.'
         type: 'InternalDebate!'
+      isAnonymousParticipationAllowed:
+        description: 'Does the debate allow anonymous users to participate?'
+        type: 'Boolean!'

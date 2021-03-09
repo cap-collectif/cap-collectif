@@ -3854,6 +3854,9 @@ type DebateStep implements Step & Node {
 
   """The debate of the step."""
   debate: Debate!
+
+  """Does the debate allow anonymous users to participate?"""
+  isAnonymousParticipationAllowed: Boolean!
 }
 
 """A debate vote."""
@@ -7565,6 +7568,7 @@ input ProjectStepInput {
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
   synthesis: ID
+  isAnonymousParticipationAllowed: Boolean
   articles: [DebateArticleInput]
 }
 

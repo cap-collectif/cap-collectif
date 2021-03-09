@@ -24,6 +24,11 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     private $debate;
 
     /**
+     * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})
+     */
+    private bool $isAnonymousParticipationAllowed = false;
+
+    /**
      * When we create a debate step, we also create a debate.
      */
     public function __construct(Debate $debate)
@@ -80,5 +85,17 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     {
         // TODO enable this for "votes" counter.
         return false;
+    }
+
+    public function isAnonymousParticipationAllowed(): bool
+    {
+        return $this->isAnonymousParticipationAllowed;
+    }
+
+    public function setIsAnonymousParticipationAllowed(bool $isAnonymousParticipationAllowed): self
+    {
+        $this->isAnonymousParticipationAllowed = $isAnonymousParticipationAllowed;
+
+        return $this;
     }
 }

@@ -1,6 +1,7 @@
 Capco\AppBundle\Entity\Steps\DebateStep:
     debateStepCannabis:
         __construct: ['@debateCannabis']
+        isAnonymousParticipationAllowed: true
         id: debateStepCannabis
         title: Pour ou contre la légalisation du Cannabis ?
         slug: pour-ou-contre-la-legalisation-du-cannabis
@@ -10,6 +11,7 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         endAt: <identity((new \DateTime('2024-10-01')))>
     debateStepOculusQuest:
         __construct: ['@debateOculusQuest']
+        isAnonymousParticipationAllowed: false
         id: debateStepOculusQuest
         title: Une entreprise doit-elle offrir un oculus quest 2 à tous les salariés pour le confinement ?
         slug: pour-ou-contre-offrir-un-oculus-quest
@@ -19,6 +21,7 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         endAt: <identity((new \DateTime('2024-10-01')))>
     debateStepConfinement:
         __construct: ['@debateConfinement']
+        isAnonymousParticipationAllowed: false
         id: debateStepConfinement
         title: Pour ou contre le reconfinement ?
         slug: pour-ou-contre-le-reconfinement

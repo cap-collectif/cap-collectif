@@ -1198,6 +1198,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnonymousParticipationAllowed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "Debate",
                                 "kind": "LinkedField",
                                 "name": "debate",
@@ -1769,7 +1776,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e60c351fc68589893f1e44468068db15",
+        "cacheID": "2610ca1fc48ec9da289ce990aa81952c",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -2044,6 +2051,7 @@ fragment ProjectAdminForm_project on Project {
       footer
     }
     ... on DebateStep {
+      isAnonymousParticipationAllowed
       debate {
         id
         opinions {
@@ -3389,6 +3397,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "isAnonymousParticipationAllowed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "Debate",
                                 "kind": "LinkedField",
                                 "name": "debate",
@@ -3960,7 +3975,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e60c351fc68589893f1e44468068db15",
+        "cacheID": "2610ca1fc48ec9da289ce990aa81952c",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4235,6 +4250,7 @@ fragment ProjectAdminForm_project on Project {
       footer
     }
     ... on DebateStep {
+      isAnonymousParticipationAllowed
       debate {
         id
         opinions {
