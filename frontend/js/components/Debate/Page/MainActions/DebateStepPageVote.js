@@ -14,6 +14,7 @@ import Captcha from '~/components/Form/Captcha';
 import Text from '~ui/Primitives/Text';
 import AddDebateAnonymousVoteMutation from '~/mutations/AddDebateAnonymousVoteMutation';
 import { SPACES_SCALES } from '~/styles/theme/base';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {|
   ...AppBoxProps,
@@ -36,6 +37,12 @@ const anonymousVoteForDebate = (
         mutationErrorToast(intl);
       } else {
         onSuccess('VOTED_ANONYMOUS');
+        if (response.addDebateAnonymousVote?.debateAnonymousVote?.token) {
+          CookieMonster.addDebateAnonymousVoteCookie(debateId, {
+            type,
+            token: response.addDebateAnonymousVote?.debateAnonymousVote?.token,
+          });
+        }
       }
     })
     .catch(() => {

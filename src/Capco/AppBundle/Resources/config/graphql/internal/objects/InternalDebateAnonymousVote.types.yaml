@@ -22,6 +22,9 @@ InternalDebateAnonymousVote:
             debate:
                 type: 'InternalDebate!'
                 description: 'The debate of the vote.'
+            token:
+                type: 'String!'
+                description: 'The token of the vote.'
             ipAddress:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'IP of the voter'

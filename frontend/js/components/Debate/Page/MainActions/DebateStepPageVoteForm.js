@@ -262,7 +262,7 @@ export const DebateStepPageVoteForm = ({
         (showArgumentForm && !isMobile && widget.isSource && widget.authEnabled)) && (
         <ConditionalWrapper
           when={voteState === 'VOTED_ANONYMOUS'}
-          wrapper={children => <LoginOverlay>{children}</LoginOverlay>}>
+          wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
           <Card
             borderRadius="8px"
             width="100%"

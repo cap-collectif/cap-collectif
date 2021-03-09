@@ -16,6 +16,7 @@ const mutation = graphql`
       debateAnonymousVote {
         id
         type
+        token
         createdAt
       }
     }

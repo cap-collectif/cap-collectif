@@ -16,6 +16,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {|
   +step: DebateStepPageVoteAndShare_step,
@@ -49,6 +50,9 @@ const getInitialState = (
   }
 
   if (isStepClosed) return 'RESULT';
+  if (CookieMonster.hasDebateAnonymousVoteCookie(debate.id)) {
+    return 'VOTED_ANONYMOUS';
+  }
 
   return 'NONE';
 };

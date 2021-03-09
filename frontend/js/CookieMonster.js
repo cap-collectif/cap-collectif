@@ -1,6 +1,10 @@
 /* eslint-disable */
 // @flow
 
+import type { ForOrAgainstValue } from '~relay/AddDebateAnonymousVoteMutation.graphql';
+
+const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes';
+
 const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid'];
 
 const FACEBOOK_COOKIE_NAMES = ['_fbp'];
@@ -22,6 +26,12 @@ const ATI_COOKIE_NAMES = [
 
 const SCROLL_VALUE_TO_CONSENT = 2000;
 
+type DebateAnonymousVoteValue = {| type: ForOrAgainstValue, token: string |};
+
+type DebateAnonymousVotesCookie = {|
+  [debateId: string]: DebateAnonymousVoteValue,
+|};
+
 class CookieMonster {
   cookieBanner: any;
   cookieConsent: any;
@@ -37,6 +47,35 @@ class CookieMonster {
     // $FlowFixMe
     window._capco_ga_cookie_value = Cookies.getJSON('_ga');
   }
+
+  getDebateAnonymousVoteCookie = (debateId: string): DebateAnonymousVoteValue | null => {
+    const votes: DebateAnonymousVotesCookie = Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)))
+      : {};
+    if (debateId in votes) return votes[debateId];
+    return null;
+  };
+
+  hasDebateAnonymousVoteCookie = (debateId: string): boolean =>
+    !!this.getDebateAnonymousVoteCookie(debateId);
+
+  addDebateAnonymousVoteCookie = (
+    debateId: string,
+    { type, token }: DebateAnonymousVoteValue,
+  ): void => {
+    const votes: DebateAnonymousVotesCookie = Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)))
+      : {};
+    votes[debateId] = {
+      type,
+      token,
+    };
+    Cookies.set(DEBATE_ANONYMOUS_VOTES_NAME, btoa(JSON.stringify(votes)), {
+      expires: 395,
+      secure: true,
+      sameSite: 'None',
+    });
+  };
 
   isDoNotTrackActive = () => {
     const doNotTrack = navigator.doNotTrack;
@@ -257,31 +296,30 @@ class CookieMonster {
   };
 
   setCookieWithExpirationDate = (value: any, type: string, duration: number) => {
-    Cookies.set(type, value, { expires: duration, secure: true, sameSite: "Strict"});
+    Cookies.set(type, value, { expires: duration, secure: true, sameSite: 'Strict' });
     return true;
   };
 
-  getTimeDifference = ({day, month} : {day?: number, month?: number}): number => {
+  getTimeDifference = ({ day, month }: { day?: number, month?: number }): number => {
     const start = new Date();
     const end = new Date();
-    if (day){
+    if (day) {
       end.setMonth(day);
     }
 
-    if (month){
+    if (month) {
       end.setMonth(month);
     }
-    return (end.getTime() - start.getTime());
+    return end.getTime() - start.getTime();
   };
 
   setLocale = (locale: string) => {
-    this.setCookieWithExpirationDate(locale, 'locale', this.getTimeDifference({month: 13}));
+    this.setCookieWithExpirationDate(locale, 'locale', this.getTimeDifference({ month: 13 }));
   };
 
   getLocale = () => {
     return Cookies.getJSON('locale');
   };
-
 }
 
 export default new CookieMonster();

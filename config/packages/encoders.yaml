@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Capco\AppBundle\Encoder\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Encoder/*'

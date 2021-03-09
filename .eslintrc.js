@@ -42,6 +42,7 @@ module.exports = {
     jQuery: true,
     __SERVER__: true,
     ReactIntlLocaleData: true,
+    Cookies: true,
     // Flow vars
     HTMLInputElement: true,
     Element: true,

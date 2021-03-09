@@ -3427,6 +3427,9 @@ type DebateAnonymousVote implements Node {
   """The debate of the vote."""
   debate: Debate!
 
+  """The token of the vote."""
+  token: String!
+
   """IP of the voter"""
   ipAddress: IP
 

@@ -40,6 +40,7 @@ global.jQuery = $;
 global.Cookies = {
   getJSON: () => '',
   set: () => '',
+  get: () => {},
 };
 
 global.Modernizr = {
