@@ -54,6 +54,7 @@ const commit = (
       const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', {
         isPublished: true,
         first: 0,
+        isTrashed: false,
       });
       if (!allArgumentsProxy) return;
       const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);

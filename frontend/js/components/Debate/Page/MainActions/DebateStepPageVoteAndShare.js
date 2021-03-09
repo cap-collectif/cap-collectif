@@ -124,19 +124,20 @@ export const DebateStepPageVoteAndShare = ({
 
         {voteState !== 'NONE' && (
           <>
-            <VoteView
-              isMobile={isMobile}
-              positivePercentage={(debate.yesVotes.totalCount / debate.votes.totalCount) * 100}
-              votesCount={
-                stepClosed
-                  ? {
-                      FOR: debate.yesVotes.totalCount,
-                      AGAINST: debate.votes.totalCount - debate.yesVotes.totalCount,
-                    }
-                  : null
-              }
-            />
-
+            {debate.votes.totalCount ? (
+              <VoteView
+                isMobile={isMobile}
+                positivePercentage={(debate.yesVotes.totalCount / debate.votes.totalCount) * 100}
+                votesCount={
+                  stepClosed
+                    ? {
+                        FOR: debate.yesVotes.totalCount,
+                        AGAINST: debate.votes.totalCount - debate.yesVotes.totalCount,
+                      }
+                    : null
+                }
+              />
+            ) : null}
             {!stepClosed && (
               <DebateStepPageVoteForm
                 viewerIsConfirmed={viewerIsConfirmedByEmail}

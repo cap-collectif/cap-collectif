@@ -226,8 +226,8 @@ export const DebateStepPageVoteForm = ({
           {url && url !== '' && (
             <iframe
               title="facebook share button"
-              src={`https://www.facebook.com/plugins/share_button.php?href=${url}&layout=button&size=small&width=81&height=20&appId`}
-              width="81"
+              src={`https://www.facebook.com/plugins/share_button.php?href=${url}&layout=button_count&size=small&width=91&height=20&appId`}
+              width="91"
               height="20"
               style={{ border: 'none', overflow: 'hidden' }}
               scrolling="no"

@@ -13,7 +13,7 @@ type Props = {|
 |};
 
 export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
-  if (step?.debate?.arguments.totalCount === 0) {
+  if (step?.debate?.arguments.totalCount === 0 && !step?.debate?.viewerUnpublishedArgument) {
     return null;
   }
 
