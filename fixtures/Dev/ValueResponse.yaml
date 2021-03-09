@@ -4,62 +4,77 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@simplequestion1'
         proposal: '@proposal1'
         value: souhaitable
+        createdAt: <(new \DateTime('2021-01-01 02:01:00'))>
     response2:
         question: '@simplequestion3'
         proposal: '@proposal1'
         value: '250 000 €'
+        createdAt: <(new \DateTime('2021-01-01 02:02:00'))>
     response3:
         question: '@simplequestion1'
         proposal: '@proposal2'
         value: souhaitable
+        createdAt: <(new \DateTime('2021-01-01 02:03:00'))>
     response4:
         question: '@simplequestion3'
         proposal: '@proposal2'
         value: 1 million !
+        createdAt: <(new \DateTime('2021-01-01 02:04:00'))>
     response5:
         question: '@simplequestion3'
         proposal: '@proposal3'
         value: réponse obligatoire
+        createdAt: <(new \DateTime('2021-01-01 02:05:00'))>
     response6:
         question: '@simplequestion3'
         proposal: '@proposal4'
         value: réponse obligatoire
+        createdAt: <(new \DateTime('2021-01-01 02:06:00'))>
     response7:
         question: '@simplequestion3'
         proposal: '@proposal5'
         value: réponse obligatoire
+        createdAt: <(new \DateTime('2021-01-01 02:07:00'))>
     response8:
         question: '@simplequestion3'
         proposal: '@proposal6'
         value: réponse obligatoire
+        createdAt: <(new \DateTime('2021-01-01 02:08:00'))>
     response9:
         question: '@simplequestion2'
         reply: '@reply1'
         value: Trop bien ! On va voir de supers athlètes à Paris !
+        createdAt: <(new \DateTime('2021-01-01 02:09:00'))>
     response10:
         question: '@multiplequestion1'
         reply: '@reply1'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Guild Wars 2' }
+        createdAt: <(new \DateTime('2021-01-01 02:10:00'))>
     response11:
         question: '@simplequestion2'
         reply: '@reply2'
         value: Youpi ! J'adore des JO
+        createdAt: <(new \DateTime('2021-01-01 02:11:00'))>
     response12:
         question: '@multiplequestion1'
         reply: '@reply2'
         value: { 'labels': ['Natation', 'Sports collectifs'], 'other': 'Civilization 6' }
+        createdAt: <(new \DateTime('2021-01-01 02:12:00'))>
     response13:
         question: '@multiplequestion2'
         reply: '@reply2'
         value: { 'labels': ['Maxime Arrouard'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:13:00'))>
     response14:
         question: '@simplequestion8'
         proposalEvaluation: '@proposalEvaluation1'
         value: Cette proposition me parait inadaptée.
+        createdAt: <(new \DateTime('2021-01-01 02:14:00'))>
     response15:
         question: '@simplequestion9'
         proposalEvaluation: '@proposalEvaluation1'
         value: Cette évaluation est effectivement utile, mais ce n'est clairement pas prioritaire.
+        createdAt: <(new \DateTime('2021-01-01 02:15:00'))>
     response16:
         question: '@multiplequestion9'
         proposalEvaluation: '@proposalEvaluation1'
@@ -68,45 +83,56 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Incohérente', 'Que de la publicité (mensongère en plus !)'],
                 'other': null,
             }
+        createdAt: <(new \DateTime('2021-01-01 02:16:00'))>
     response17:
         question: '@multiplequestion10'
         proposalEvaluation: '@proposalEvaluation1'
         value: { 'labels': ['Je dis oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:17:00'))>
     response18:
         question: '@simplequestion8'
         proposalEvaluation: '@proposalEvaluation2'
         value: Cette proposition est top.
+        createdAt: <(new \DateTime('2021-01-01 02:18:00'))>
     response19:
         question: '@simplequestion9'
         proposalEvaluation: '@proposalEvaluation2'
         value: Cette évaluation est hyper utile, à accepter.
+        createdAt: <(new \DateTime('2021-01-01 02:19:00'))>
     response20:
         question: '@multiplequestion9'
         proposalEvaluation: '@proposalEvaluation2'
         value: { 'labels': ['Incohérente'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:20:00'))>
     response21:
         question: '@multiplequestion10'
         proposalEvaluation: '@proposalEvaluation2'
         value: { 'labels': ['Je dis non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:21:00'))>
     response22:
         question: '@multiplequestion11'
         proposalEvaluation: '@proposalEvaluation2'
         value: { 'labels': ['Réalisable', 'Importante', 'Compréhensible'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:22:00'))>
     response22-bis:
         question: '@multiplequestion11'
         proposalEvaluation: '@proposalEvaluation3'
         value: { 'labels': ['Réalisable', 'Compréhensible', 'Importante'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:23:00'))>
     response23:
         question: '@multiplequestion8'
         proposalEvaluation: '@proposalEvaluation2'
         value: { 'labels': [], 'other': 'Pas la folie tout ça…' }
+        createdAt: <(new \DateTime('2021-01-01 02:24:00'))>
     response24:
         question: '@simplequestion8'
         proposalEvaluation: '@proposalEvaluation3'
         value: Proposition que ma femme approuve ... Pas moi.
+        createdAt: <(new \DateTime('2021-01-01 02:25:00'))>
     response25:
         question: '@simplequestion9'
         proposalEvaluation: '@proposalEvaluation3'
+        createdAt: <(new \DateTime('2021-01-01 02:26:00'))>
         value: Que dire de plus ?
     response26:
         question: '@multiplequestion9'
@@ -117,489 +143,608 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                     ["C'est de la diffamation !", 'Que de la publicité (mensongère en plus !)'],
                 'other': null,
             }
+        createdAt: <(new \DateTime('2021-01-01 02:27:00'))>
     response27:
         question: '@multiplequestion10'
         proposalEvaluation: '@proposalEvaluation3'
         value: { 'labels': ["J'ai rien compris"], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:28:00'))>
     response28:
         question: '@multiplequestion1'
         reply: '@reply5'
         value: { 'labels': ['Natation'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:29:00'))>
     response29:
         question: '@simplequestion6'
         value: 'Champ obligatoire inscription'
         user: '@user666'
+        createdAt: <(new \DateTime('2021-01-01 02:30:00'))>
     response30:
         question: '@simplequestion7'
         value: 'Champ non obligatoire inscription'
         user: '@user666'
+        createdAt: <(new \DateTime('2021-01-01 02:31:00'))>
     response31:
         question: '@multiplequestion5'
         value: 'Sangohan'
         user: '@user666'
+        createdAt: <(new \DateTime('2021-01-01 02:32:00'))>
     response32:
         question: '@simplequestion2'
         reply: '@reply7'
         value: Trop cool ! On va voir Tibo qui cours en slip !
+        createdAt: <(new \DateTime('2021-01-01 02:33:00'))>
     response33:
         question: '@multiplequestion3'
         reply: '@reply2'
         value: 'Assez fort (Mon sonotone est mal réglé)'
+        createdAt: <(new \DateTime('2021-01-01 02:34:00'))>
     response34:
         question: '@multiplequestion6'
         reply: '@reply2'
         value: { 'labels': ['Logo 1'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:35:00'))>
     response35:
         question: '@multiplequestion3'
         reply: '@reply6'
         value: 'Pas assez fort (Mon sonotone est en panne)'
+        createdAt: <(new \DateTime('2021-01-01 02:36:00'))>
     response36:
         question: '@multiplequestion7'
         reply: '@reply7'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:37:00'))>
     response37:
         question: '@multiplequestion8'
         reply: '@reply2'
         value: { 'labels': ['Au top'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:38:00'))>
     response38:
         question: '@multiplequestion7'
         reply: '@reply2'
         value: { 'labels': ['Il bluffe'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:39:00'))>
     response39:
         question: '@multiplequestion8'
         reply: '@reply6'
         value: { 'labels': ['Incohérente'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:40:00'))>
     response40:
         question: '@multiplequestion8'
         reply: '@reply7'
         value: { 'labels': ['Au top'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:41:00'))>
     response41:
         question: '@simplequestion14'
         reply: '@reply8'
         value: 'secret'
+        createdAt: <(new \DateTime('2021-01-01 02:42:00'))>
     response42:
         question: '@simplequestion1'
         proposal: '@proposal12'
         value: pas souhaitable
+        createdAt: <(new \DateTime('2021-01-01 02:43:00'))>
     response43:
         question: '@simplequestion3'
         proposal: '@proposal12'
         value: 3 millions !
+        createdAt: <(new \DateTime('2021-01-01 02:44:00'))>
     response44:
         question: '@simplequestion1'
         proposal: '@proposal106'
         value: souhaitable
+        createdAt: <(new \DateTime('2021-01-01 02:45:00'))>
     response45:
         question: '@simplequestion3'
         proposal: '@proposal106'
         value: '250 000 €'
+        createdAt: <(new \DateTime('2021-01-01 02:46:00'))>
     response46:
         question: '@multiplequestion7'
         proposal: '@proposal12'
         reply: '@reply2'
         value: { 'labels': ['Il bluffe'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:47:00'))>
 
     response1IdfProposal1:
         question: '@multiplequestionIdfGrandOrLocal'
         proposal: '@proposalIdf1'
         value: { 'labels': ['Renseigner la présentation de mon Grand Projet'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:47:00'))>
     response2IdfProposal1:
         question: '@multiplequestionIdfGrandProjet1'
         proposal: '@proposalIdf1'
         value: { 'labels': ['Un autre organisme privé'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:48:00'))>
     response1IdfProposal2:
         question: '@multiplequestionIdfGrandOrLocal'
         proposal: '@proposalIdf2'
         value: { 'labels': ['Déposer un Projet Local'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:49:00'))>
     response2IdfProposal2:
         question: '@multiplequestionIdfProjetLocal1'
         proposal: '@proposalIdf2'
         value: { 'labels': ['Une association'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:50:00'))>
     response3IdfProposal3:
         question: '@multiplequestionIdfProjetLocalAssociation1'
         proposal: '@proposalIdf2'
         value: { 'labels': ['J’ai un numéro SIRET'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:51:00'))>
     response1IdfProposal3:
         question: '@multiplequestionIdfGrandOrLocal'
         proposal: '@proposalIdf3'
         value: { 'labels': ['Déposer un Projet Local'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:51:00'))>
     response2IdfProposal3:
         question: '@multiplequestionIdfProjetLocal1'
         proposal: '@proposalIdf3'
         value: { 'labels': ['Une entreprise'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:52:00'))>
 
     response1IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Agui'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:52:00'))>
     response2IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Agui'
         value: 'Oui'
+        createdAt: <(new \DateTime('2021-01-01 02:53:00'))>
     response3IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Agui'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:54:00'))>
     response4IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Agui'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:55:00'))>
     response5IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Agui'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:55:00'))>
     response6IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Agui'
         value: { 'labels': ['Positif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:56:00'))>
     response7IdfProposal1EvalAgui:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Agui'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 02:57:00'))>
     response8IdfProposal1EvalAgui:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf1Agui'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 02:58:00'))>
 
     response1IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 02:59:00'))>
     response2IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: 'Non'
+        createdAt: <(new \DateTime('2021-01-01 03:00:00'))>
     response3IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:01:00'))>
     response4IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:02:00'))>
     response5IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:03:00'))>
     response6IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: { 'labels': ['Positif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:04:00'))>
     response7IdfProposal1EvalVinc:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 03:05:00'))>
     response8IdfProposal1EvalVinc:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf1Vinc'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:06:00'))>
 
     response1IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:07:00'))>
     response2IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: 'Oui'
+        createdAt: <(new \DateTime('2021-01-01 03:08:00'))>
     response3IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:09:00'))>
     response4IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 05:10:00'))>
     response5IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:10:00'))>
     response6IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: { 'labels': ['Négatif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:11:00'))>
     response7IdfProposal1EvalJpec:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 03:12:00'))>
     response8IdfProposal1EvalJpec:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf1Jpec'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:13:00'))>
 
     response1IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Omar'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:14:00'))>
     response2IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Omar'
         value: 'Oui'
+        createdAt: <(new \DateTime('2021-01-01 03:15:00'))>
     response3IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Omar'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:16:00'))>
     response4IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Omar'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:17:00'))>
     response5IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Omar'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:18:00'))>
     response6IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Omar'
+        createdAt: <(new \DateTime('2021-01-01 03:19:00'))>
         value: { 'labels': ['Négatif'], 'other': null }
     response7IdfProposal1EvalOmar:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Omar'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 05:19:00'))>
     response8IdfProposal1EvalOmar:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf1Omar'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:20:00'))>
 
     response1IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 05:20:00'))>
     response2IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: 'Oui'
+        createdAt: <(new \DateTime('2021-01-01 03:21:00'))>
     response3IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:22:00'))>
     response4IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:23:00'))>
     response5IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:24:00'))>
     response6IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: { 'labels': ['Positif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:25:00'))>
     response7IdfProposal2EvalJpec:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 03:26:00'))>
     response8IdfProposal2EvalJpec:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf2Jpec'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:27:00'))>
 
     response1IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf3Theo'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:27:00'))>
     response2IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf3Theo'
         value: 'Non'
+        createdAt: <(new \DateTime('2021-01-01 03:28:00'))>
     response3IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf3Theo'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 05:28:00'))>
     response4IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf3Theo'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:29:00'))>
     response5IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf3Theo'
+        createdAt: <(new \DateTime('2021-01-01 03:30:00'))>
         value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf3Theo'
         value: { 'labels': ['Négatif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:31:00'))>
     response7IdfProposal3EvalTheo:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf3Theo'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 03:32:00'))>
     response8IdfProposal3EvalTheo:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf3Theo'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:33:00'))>
     response1IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:34:00'))>
     response2IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: 'Oui'
+        createdAt: <(new \DateTime('2021-01-01 05:34:00'))>
     response3IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 05:35:00'))>
     response4IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:35:00'))>
     response5IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:36:00'))>
     response6IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: { 'labels': ['Négatif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:38:00'))>
     response7IdfProposal3EvalMaxime:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 03:39:00'))>
     response8IdfProposal3EvalMaxime:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf3Maxime'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:40:00'))>
     response1IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:41:00'))>
     response2IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: 'Non'
+        createdAt: <(new \DateTime('2021-01-01 03:42:00'))>
     response3IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:43:00'))>
     response4IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: { 'labels': ['Oui'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:44:00'))>
     response5IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: { 'labels': ['Non'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:45:00'))>
     response6IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: { 'labels': ['Positif'], 'other': null }
+        createdAt: <(new \DateTime('2021-01-01 03:46:00'))>
     response7IdfProposal3EvalMickael:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: "Pas d'observations, à part que c'est merveilleux."
+        createdAt: <(new \DateTime('2021-01-01 03:47:00'))>
     response8IdfProposal3EvalMickael:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: 100
+        createdAt: <(new \DateTime('2021-01-01 03:48:00'))>
     majorityDecision1Answer1:
         question: '@majorityDecision1'
         reply: '@replyExport1'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 05:48:00'))>
     majorityDecision1Answer2:
         question: '@majorityDecision1'
         reply: '@replyExport2'
         value: 1
+        createdAt: <(new \DateTime('2021-01-01 03:49:00'))>
     majorityDecision1Answer3:
         question: '@majorityDecision1'
         reply: '@replyExport3'
         value: 4
+        createdAt: <(new \DateTime('2021-01-01 05:49:00'))>
     majorityDecision1Answer4:
         question: '@majorityDecision1'
         reply: '@replyExport4'
         value: 3
+        createdAt: <(new \DateTime('2021-01-01 03:50:00'))>
     majorityDecision1Answer5:
         question: '@majorityDecision1'
         reply: '@replyExport5'
         value: 1
+        createdAt: <(new \DateTime('2021-01-01 03:51:00'))>
     majorityDecision1Answer6:
         question: '@majorityDecision1'
         reply: '@replyExport6'
         value: 5
+        createdAt: <(new \DateTime('2021-01-01 03:52:00'))>
     majorityDecision1Answer7:
         question: '@majorityDecision1'
         reply: '@replyExport7'
         value: 2
+        createdAt: <(new \DateTime('2021-01-01 05:52:00'))>
     majorityDecisionWeebAnswerVeryWell1:
         question: '@majorityDecisionWeeb'
         reply: '@reply2'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:53:00'))>
     majorityDecisionWeebAnswerVeryWell2:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority6'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:54:00'))>
     majorityDecisionWeebAnswerVeryWell3:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority7'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:55:00'))>
     majorityDecisionWeebAnswerVeryWell4:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority8'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:56:00'))>
     majorityDecisionWeebAnswerVeryWell5:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority9'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:57:00'))>
     majorityDecisionWeebAnswerVeryWell6:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority10'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:58:00'))>
     majorityDecisionWeebAnswerVeryWell7:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority11'
         value: 0
+        createdAt: <(new \DateTime('2021-01-01 03:59:00'))>
     majorityDecisionWeebAnswerWell1:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority12'
         value: 1
+        createdAt: <(new \DateTime('2021-01-01 04:00:00'))>
     majorityDecisionWeebAnswerWell2:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority13'
         value: 1
+        createdAt: <(new \DateTime('2021-01-01 04:01:00'))>
     majorityDecisionWeebAnswerWell3:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority14'
         value: 1
+        createdAt: <(new \DateTime('2021-01-01 04:02:00'))>
     majorityDecisionWeebAnswerWell4:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority15'
         value: 1
+        createdAt: <(new \DateTime('2021-01-01 04:03:00'))>
     majorityDecisionWeebAnswerPassable1:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority16'
         value: 3
+        createdAt: <(new \DateTime('2021-01-01 04:04:00'))>
     majorityDecisionWeebAnswerPassable2:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority17'
         value: 3
+        createdAt: <(new \DateTime('2021-01-01 04:04:00'))>
     majorityDecisionWeebAnswerNotPassable1:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority18'
         value: 4
+        createdAt: <(new \DateTime('2021-01-01 04:05:00'))>
     majorityDecisionWeebAnswerNotPassable2:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority19'
         value: 4
+        createdAt: <(new \DateTime('2021-01-01 05:05:00'))>
     majorityDecisionWeebAnswerNotPassable3:
         question: '@majorityDecisionWeeb'
         reply: '@replyMajority20'
         value: 4
+        createdAt: <(new \DateTime('2021-01-01 04:06:00'))>
 
     responseTagCloud1:
         question: '@simplequestion2'
         reply: '@replyTagCloud1'
         value: Incroyable ! Tout ces sportifs la wow.
+        createdAt: <(new \DateTime('2021-01-01 04:07:00'))>
     responseTagCloud2:
         question: '@multiplequestion1'
         reply: '@replyTagCloud1'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War 2: Warhammer' }
+        createdAt: <(new \DateTime('2021-01-01 04:08:00'))>
 
     responseTagCloud3:
         question: '@simplequestion2'
         reply: '@replyTagCloud2'
         value: Oui c'est vraiment trop cool.
+        createdAt: <(new \DateTime('2021-01-01 04:09:00'))>
     responseTagCloud4:
         question: '@multiplequestion1'
         reply: '@replyTagCloud2'
         value:
             { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Three Kingdoms ' }
+        createdAt: <(new \DateTime('2021-01-01 04:10:00'))>
 
     responseTagCloud5:
         question: '@simplequestion2'
@@ -609,65 +754,79 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@multiplequestion1'
         reply: '@replyTagCloud3'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War Saga: Troy' }
+        createdAt: <(new \DateTime('2021-01-01 04:11:00'))>
 
     responseTagCloud7:
         question: '@simplequestion2'
         reply: '@replyTagCloud4'
         value: C'est génial ! On va se régaler.
+        createdAt: <(new \DateTime('2021-01-01 04:12:00'))>
     responseTagCloud8:
         question: '@multiplequestion1'
         reply: '@replyTagCloud4'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Warhammer' }
+        createdAt: <(new \DateTime('2021-01-01 04:13:00'))>
 
     responseTagCloud9:
         question: '@simplequestion2'
         reply: '@replyTagCloud5'
         value: Il va y avoir du divertissement ! Et des sportifs !
+        createdAt: <(new \DateTime('2021-01-01 04:14:00'))>
     responseTagCloud10:
         question: '@multiplequestion1'
         reply: '@replyTagCloud5'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Rome' }
+        createdAt: <(new \DateTime('2021-01-01 05:14:00'))>
 
     responseTagCloud11:
         question: '@simplequestion2'
         reply: '@replyTagCloud6'
         value: Incroyable ! Tout ces sportifs la wow.
+        createdAt: <(new \DateTime('2021-01-01 04:15:00'))>
     responseTagCloud12:
         question: '@multiplequestion1'
         reply: '@replyTagCloud6'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Britannia' }
+        createdAt: <(new \DateTime('2021-01-01 04:16:00'))>
 
     responseTagCloud13:
         question: '@simplequestion2'
         reply: '@replyTagCloud7'
         value: Bof, non pas trop ça va faire du bruit !
+        createdAt: <(new \DateTime('2021-01-01 04:17:00'))>
     responseTagCloud14:
         question: '@multiplequestion1'
         reply: '@replyTagCloud7'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War 3: Warhammer' }
+        createdAt: <(new \DateTime('2021-01-01 04:17:00'))>
 
     responseTagCloud15:
         question: '@simplequestion2'
         reply: '@replyTagCloud8'
         value: Pas trop non plus, j'aime pas le sport.
+        createdAt: <(new \DateTime('2021-01-01 04:18:00'))>
     responseTagCloud16:
         question: '@multiplequestion1'
         reply: '@replyTagCloud8'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': "Plus d'idées de jeux." }
+        createdAt: <(new \DateTime('2021-01-01 05:18:00'))>
 
     responseTagCloud17:
         question: '@simplequestion2'
         reply: '@replyTagCloud9'
         value: Le sport c'est pour les femmes.
+        createdAt: <(new \DateTime('2021-01-01 04:19:00'))>
     responseTagCloud18:
         question: '@multiplequestion1'
         reply: '@replyTagCloud9'
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Un jeu stylé de fou.' }
+        createdAt: <(new \DateTime('2021-01-01 05:19:00'))>
 
     responseTagCloud19:
         question: '@simplequestion2'
         reply: '@replyTagCloud10'
         value: Enfin un peu de divertissement.
+        createdAt: <(new \DateTime('2021-01-01 04:20:00'))>
     responseTagCloud20:
         question: '@multiplequestion1'
         reply: '@replyTagCloud10'
@@ -676,11 +835,13 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Athlétisme', 'Sports collectifs'],
                 'other': 'Bon chance Agui pour le nuage de mots. J',
             }
+        createdAt: <(new \DateTime('2021-01-01 04:21:00'))>
 
     responseTagCloud21:
         question: '@simplequestion2'
         reply: '@replyTagCloud11'
         value: L'autre jour j'étais à la boulangerie des sportifs, des sportifs ? Oui mec des sportifs. Jure des sportifs ? Oui oui des sportfs qui font du sport et du bruit et des phrases un peu longues pour le divertissement à Paris, cette phrase va plus vouloir rien dire mais c'est pas mal et ça régale.
+        createdAt: <(new \DateTime('2021-01-01 04:22:00'))>
     responseTagCloud22:
         question: '@multiplequestion1'
         reply: '@replyTagCloud11'
@@ -689,11 +850,13 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Athlétisme', 'Sports collectifs'],
                 'other': 'Bon chance Agui pour le nuage de mots. T',
             }
+        createdAt: <(new \DateTime('2021-01-01 04:23:00'))>
 
     responseTagCloud23:
         question: '@simplequestion2'
         reply: '@replyTagCloud12'
         value: Aller encore une autre phrase un peu longue parce que bon il faut bien tester tout les cas, comme le cas K , et le cas K des lapins c'est caca, c'est incroyable et fou non comme le lundi à Paris
+        createdAt: <(new \DateTime('2021-01-01 04:24:00'))>
     responseTagCloud24:
         question: '@multiplequestion1'
         reply: '@replyTagCloud12'
@@ -702,11 +865,13 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Athlétisme', 'Sports collectifs'],
                 'other': 'Bon chance Agui pour le nuage de mots. M',
             }
+        createdAt: <(new \DateTime('2021-01-01 04:25:00'))>
 
     responseTagCloud25:
         question: '@simplequestion2'
         reply: '@replyTagCloud13'
         value: Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?
+        createdAt: <(new \DateTime('2021-01-01 04:26:00'))>
     responseTagCloud26:
         question: '@multiplequestion1'
         reply: '@replyTagCloud13'
@@ -715,11 +880,13 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Athlétisme', 'Sports collectifs'],
                 'other': 'Bon chance Agui pour le nuage de mots. B',
             }
+        createdAt: <(new \DateTime('2021-01-01 04:27:00'))>
 
     responseTagCloud27:
         question: '@simplequestion2'
         reply: '@replyTagCloud14'
         value: D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.
+        createdAt: <(new \DateTime('2021-01-01 04:28:00'))>
     responseTagCloud28:
         question: '@multiplequestion1'
         reply: '@replyTagCloud14'
@@ -728,11 +895,13 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Athlétisme', 'Sports collectifs'],
                 'other': 'Bon chance Agui pour le nuage de mots. G',
             }
+        createdAt: <(new \DateTime('2021-01-01 05:28:00'))>
 
     responseTagCloud29:
         question: '@simplequestion2'
         reply: '@replyTagCloud15'
         value: "Et une petite dernière pour la route quand même juste pour vous demandez comment vous allez ? Et la je rajoute des petits mots clés tels que : sportifs, sport, JO, athlètes, beurre de cacahuète, bruit, divertissement, sirop d'érable, une bouteille d'huile et des raviolis mais je crois que je viens de lire ma liste de course en même temps."
+        createdAt: <(new \DateTime('2021-01-01 04:29:00'))>
     responseTagCloud30:
         question: '@multiplequestion1'
         reply: '@replyTagCloud15'
@@ -741,3 +910,4 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
                 'labels': ['Athlétisme', 'Sports collectifs'],
                 'other': 'Bon chance Agui pour le nuage de mots. !',
             }
+        createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
