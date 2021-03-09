@@ -45,7 +45,7 @@ storiesOf('Core|Tag', module)
     const iconClassName = text('Icon', 'cap cap-marker-1-1 icon--blue', 'Props');
     const children = text(
       'Children',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Lorem ss ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       'Props',
     );
     return (
