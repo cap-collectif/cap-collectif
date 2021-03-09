@@ -22,10 +22,9 @@ import type { Filter } from '~/components/Debate/Page/Arguments/types';
 type Props = {|
   +step: ?DebateStepPageArguments_step,
   +viewer: ?DesktopDebateStepPageArguments_viewer,
-  +isStepClosed: boolean,
 |};
 
-export const DesktopDebateStepPageArguments = ({ step, viewer, isStepClosed }: Props) => {
+export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
   const [filter, setFilter] = useState<Filter>('DESC');
   const [yesState, setYesState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
   const [noState, setNoState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
@@ -100,7 +99,6 @@ export const DesktopDebateStepPageArguments = ({ step, viewer, isStepClosed }: P
       <Flex direction="row" spacing={6}>
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
-            isStepClosed={isStepClosed}
             viewerUnpublishedArgument={
               viewerUnpublishedArgument?.type === 'FOR' ? viewerUnpublishedArgument : null
             }
@@ -114,7 +112,6 @@ export const DesktopDebateStepPageArguments = ({ step, viewer, isStepClosed }: P
 
         <Flex direction="column" flex={1}>
           <DebateStepPageArgumentsPagination
-            isStepClosed={isStepClosed}
             viewerUnpublishedArgument={
               viewerUnpublishedArgument?.type === 'AGAINST' ? viewerUnpublishedArgument : null
             }

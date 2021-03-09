@@ -2,57 +2,35 @@
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 <Fragment>
-  <Relay(DebateStepPageAbsoluteVoteAndShare)
-    body="blabla le body"
-    isAuthenticated={true}
-    isMobile={false}
-    setShowArgumentForm={[Function]}
-    setVoteState={[Function]}
-    showArgumentForm={true}
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "debate": Object {
-          "$fragmentRefs": null,
-          "allArguments": Object {
-            "totalCount": 10,
-          },
-          "argumentsAgainst": Object {
-            "totalCount": 5,
-          },
-          "argumentsFor": Object {
-            "totalCount": 5,
-          },
-          "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
-        },
-        "timeRange": Object {
-          "endAt": "2030-03-10 00:00:00",
-          "startAt": "2030-02-10 00:00:00",
-        },
-        "timeless": false,
-        "url": "step/123",
-      }
-    }
-    viewerIsConfirmed={true}
-    voteState="NONE"
-  />
   <ForwardRef
     align="center"
     direction="column"
     width="100%"
   >
-    <DebateStepPageVote
-      debateId="debate1"
-      isAuthenticated={true}
-      onSuccess={[Function]}
-      viewerHasArgument={false}
+    <AppBox
+      mb={6}
+      textAlign="center"
+    >
+      <Text
+        color="neutral-gray.700"
+      >
+        thanks-participation-debate-ended
+      </Text>
+      <Text
+        color="neutral-gray.700"
+      >
+        summary-debate-participation
+      </Text>
+    </AppBox>
+    <VoteView
+      isMobile={false}
+      positivePercentage={80}
+      votesCount={
+        Object {
+          "AGAINST": 1,
+          "FOR": 4,
+        }
+      }
     />
   </ForwardRef>
 </Fragment>
@@ -60,115 +38,35 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
 <Fragment>
-  <Relay(DebateStepPageAbsoluteVoteAndShare)
-    body="blabla le body"
-    isAuthenticated={true}
-    isMobile={true}
-    setShowArgumentForm={[Function]}
-    setVoteState={[Function]}
-    showArgumentForm={true}
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "debate": Object {
-          "$fragmentRefs": null,
-          "allArguments": Object {
-            "totalCount": 10,
-          },
-          "argumentsAgainst": Object {
-            "totalCount": 5,
-          },
-          "argumentsFor": Object {
-            "totalCount": 5,
-          },
-          "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
-        },
-        "timeRange": Object {
-          "endAt": "2030-03-10 00:00:00",
-          "startAt": "2030-02-10 00:00:00",
-        },
-        "timeless": false,
-        "url": "step/123",
-      }
-    }
-    viewerIsConfirmed={true}
-    voteState="NONE"
-  />
   <ForwardRef
     align="center"
     direction="column"
     width="100%"
   >
-    <DebateStepPageVote
-      debateId="debate1"
-      isAuthenticated={true}
-      onSuccess={[Function]}
-      viewerHasArgument={false}
-    />
-  </ForwardRef>
-</Fragment>
-`;
-
-exports[`<DebateStepPageVoteAndShare/> renders correctly when timeless step 1`] = `
-<Fragment>
-  <Relay(DebateStepPageAbsoluteVoteAndShare)
-    body="blabla le body"
-    isAuthenticated={true}
-    isMobile={false}
-    setShowArgumentForm={[Function]}
-    setVoteState={[Function]}
-    showArgumentForm={true}
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "debate": Object {
-          "$fragmentRefs": null,
-          "allArguments": Object {
-            "totalCount": 10,
-          },
-          "argumentsAgainst": Object {
-            "totalCount": 5,
-          },
-          "argumentsFor": Object {
-            "totalCount": 5,
-          },
-          "id": "debate1",
-          "votes": Object {
-            "totalCount": 5,
-          },
-          "yesVotes": Object {
-            "totalCount": 4,
-          },
-        },
-        "timeRange": Object {
-          "endAt": null,
-          "startAt": null,
-        },
-        "timeless": true,
-        "url": "step/123",
+    <AppBox
+      mb={6}
+      textAlign="center"
+    >
+      <Text
+        color="neutral-gray.700"
+      >
+        thanks-participation-debate-ended
+      </Text>
+      <Text
+        color="neutral-gray.700"
+      >
+        summary-debate-participation
+      </Text>
+    </AppBox>
+    <VoteView
+      isMobile={true}
+      positivePercentage={80}
+      votesCount={
+        Object {
+          "AGAINST": 1,
+          "FOR": 4,
+        }
       }
-    }
-    viewerIsConfirmed={true}
-    voteState="NONE"
-  />
-  <ForwardRef
-    align="center"
-    direction="column"
-    width="100%"
-  >
-    <DebateStepPageVote
-      debateId="debate1"
-      isAuthenticated={true}
-      onSuccess={[Function]}
-      viewerHasArgument={false}
     />
   </ForwardRef>
 </Fragment>

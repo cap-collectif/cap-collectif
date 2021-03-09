@@ -45,6 +45,11 @@ describe('<VoteView />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly when NaN', () => {
+    const wrapper = shallow(<VoteView positivePercentage={Number.NaN} votesCount={null} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should not render when step is finished', () => {
     const wrapper = shallow(
       <VoteView positivePercentage={43} votesCount={{ FOR: 12, AGAINST: 15 }} />,

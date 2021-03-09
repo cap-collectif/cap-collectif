@@ -3,7 +3,6 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ReactPlaceholder from 'react-placeholder';
-import moment from 'moment';
 import type { DebateStepPageMainActions_step } from '~relay/DebateStepPageMainActions_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -22,31 +21,21 @@ type Props = {|
 
 export const DebateStepPageMainActions = ({ step, isMobile, isAuthenticated }: Props) => {
   const intl = useIntl();
-  const { title } = useDebateStepPage();
+  const { title, stepClosed } = useDebateStepPage();
 
   if (!step) return null;
-
-  const isStepFinished = step.timeless
-    ? false
-    : step?.timeRange?.endAt
-    ? moment().isAfter(moment(step.timeRange.endAt))
-    : false;
-  const isStartedAndNoEndDate = step.timeless
-    ? false
-    : !step?.timeRange?.endAt && moment().isAfter(moment(step.timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
 
   return (
     <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
       <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
         <Flex direction="column" alignItems="center" spacing={4}>
-          {isStepClosed && (
+          {stepClosed && (
             <Tag variantType="badge" variant="neutral-gray" icon="CLOCK">
               {intl.formatMessage({ id: 'global.ended' })}
             </Tag>
           )}
 
-          {!isStepClosed && step?.timeRange?.endAt && (
+          {!stepClosed && step?.timeRange?.endAt && (
             <Tag variantType="badge" variant="yellow" icon="CLOCK">
               <RemainingTime noStyle endAt={step?.timeRange?.endAt} />
             </Tag>
@@ -71,9 +60,7 @@ export const DebateStepPageMainActions = ({ step, isMobile, isAuthenticated }: P
 export default createFragmentContainer(DebateStepPageMainActions, {
   step: graphql`
     fragment DebateStepPageMainActions_step on DebateStep {
-      timeless
       timeRange {
-        startAt
         endAt
       }
       ...DebateStepPageVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated)

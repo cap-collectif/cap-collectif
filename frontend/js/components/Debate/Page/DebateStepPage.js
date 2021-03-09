@@ -29,6 +29,7 @@ export const DebateStepPage = ({
         isSource: fromWidget,
         authEnabled,
       },
+      stepClosed: true,
       title,
     }),
     [title, fromWidget, authEnabled],
@@ -41,6 +42,13 @@ export const DebateStepPage = ({
         query DebateStepPageQuery($stepId: ID!, $isAuthenticated: Boolean!) {
           ...DebateStepPageLogic_query
             @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+          step: node(id: $stepId) {
+            ... on Step {
+              timeRange {
+                hasEnded
+              }
+            }
+          }
         }
       `}
       variables={{
@@ -59,9 +67,14 @@ export const DebateStepPage = ({
           return graphqlError;
         }
 
+        contextValue.stepClosed =
+          typeof props?.step?.timeRange?.hasEnded === 'boolean'
+            ? props?.step?.timeRange?.hasEnded
+            : true;
+
         return (
           <DebateStepPageContext.Provider value={contextValue}>
-            <DebateStepPageLogic query={props} isAuthenticated={isAuthenticated} />
+            <DebateStepPageLogic query={props} />
           </DebateStepPageContext.Provider>
         );
       }}

@@ -22,7 +22,6 @@ import DebateStepPageArgumentsDrawer from '~/components/Debate/Page/Drawers/Deba
 type Props = {|
   +debate: MobileDebateStepPageArguments_debate$key,
   +viewer: ?MobileDebateStepPageArguments_viewer$key,
-  +isStepClosed: boolean,
 |};
 
 const DEBATE_FRAGMENT = graphql`
@@ -50,7 +49,6 @@ const VIEWER_FRAGMENT = graphql`
 export const MobileDebateStepPageArguments = ({
   debate: debateFragment,
   viewer: viewerFragment,
-  isStepClosed,
 }: Props) => {
   const debate: MobileDebateStepPageArguments_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
   const viewer: MobileDebateStepPageArguments_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
@@ -67,7 +65,6 @@ export const MobileDebateStepPageArguments = ({
         isOpen={isOpen}
         debate={debate}
         viewer={viewer}
-        isStepClosed={isStepClosed}
       />
       <Flex direction="row" justifyContent="space-between" mb={6}>
         <Heading as="h3" fontWeight="400" capitalize>
@@ -78,12 +75,7 @@ export const MobileDebateStepPageArguments = ({
         </Button>
       </Flex>
       <Flex direction="row">
-        <DebateStepPageAlternateArgumentsPagination
-          debate={debate}
-          viewer={viewer}
-          isStepClosed={isStepClosed}
-          preview
-        />
+        <DebateStepPageAlternateArgumentsPagination debate={debate} viewer={viewer} preview />
       </Flex>
     </AppBox>
   );

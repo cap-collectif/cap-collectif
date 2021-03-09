@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, formValueSelector } from 'redux-form';
-import moment from 'moment';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
@@ -40,16 +39,16 @@ export type VoteState =
 
 const getInitialState = (
   debate: $PropertyType<DebateStepPageVoteAndShare_step, 'debate'>,
-  isStepClosed: boolean,
+  stepClosed: boolean,
   viewerIsConfirmedByEmail: boolean,
 ): VoteState => {
-  if (debate.viewerHasVote && !isStepClosed) {
+  if (debate.viewerHasVote && !stepClosed) {
     if (debate.viewerHasArgument)
       return viewerIsConfirmedByEmail ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED';
     return viewerIsConfirmedByEmail ? 'VOTED' : 'NOT_CONFIRMED';
   }
 
-  if (isStepClosed) return 'RESULT';
+  if (stepClosed) return 'RESULT';
   if (CookieMonster.hasDebateAnonymousVoteCookie(debate.id)) {
     return 'VOTED_ANONYMOUS';
   }
@@ -64,19 +63,11 @@ export const DebateStepPageVoteAndShare = ({
   viewerIsConfirmedByEmail,
   step,
 }: Props) => {
-  const { debate, url, timeless, timeRange } = step;
-  const isStepFinished = timeless
-    ? false
-    : timeRange?.endAt
-    ? moment().isAfter(moment(timeRange.endAt))
-    : false;
-  const isStartedAndNoEndDate = timeless
-    ? false
-    : !timeRange?.endAt && moment().isAfter(moment(timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+  const { debate, url } = step;
+  const { stepClosed } = useDebateStepPage();
 
   const [voteState, setVoteState] = useState<VoteState>(
-    getInitialState(debate, isStepClosed, viewerIsConfirmedByEmail),
+    getInitialState(debate, stepClosed, viewerIsConfirmedByEmail),
   );
 
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
@@ -87,7 +78,7 @@ export const DebateStepPageVoteAndShare = ({
 
   return (
     <>
-      {!isVisible && !isStepClosed && !widget.isSource && (
+      {!isVisible && !stepClosed && !widget.isSource && (
         <DebateStepPageAbsoluteVoteAndShare
           isMobile={isMobile}
           step={step}
@@ -111,7 +102,7 @@ export const DebateStepPageVoteAndShare = ({
           />
         )}
 
-        {isStepClosed && (
+        {stepClosed && (
           <AppBox textAlign="center" mb={6}>
             <Text color="neutral-gray.700">
               {intl.formatMessage({ id: 'thanks-participation-debate-ended' })}
@@ -137,7 +128,7 @@ export const DebateStepPageVoteAndShare = ({
               isMobile={isMobile}
               positivePercentage={(debate.yesVotes.totalCount / debate.votes.totalCount) * 100}
               votesCount={
-                isStepClosed
+                stepClosed
                   ? {
                       FOR: debate.yesVotes.totalCount,
                       AGAINST: debate.votes.totalCount - debate.yesVotes.totalCount,
@@ -146,7 +137,7 @@ export const DebateStepPageVoteAndShare = ({
               }
             />
 
-            {!isStepClosed && (
+            {!stepClosed && (
               <DebateStepPageVoteForm
                 viewerIsConfirmed={viewerIsConfirmedByEmail}
                 isMobile={isMobile}
@@ -187,11 +178,6 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
     fragment DebateStepPageVoteAndShare_step on DebateStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       url
-      timeless
-      timeRange {
-        startAt
-        endAt
-      }
       debate {
         id
         viewerHasArgument @include(if: $isAuthenticated)

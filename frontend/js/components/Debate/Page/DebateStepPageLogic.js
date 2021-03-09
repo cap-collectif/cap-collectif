@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import moment from 'moment';
 import type { DebateStepPageLogic_query } from '~relay/DebateStepPageLogic_query.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import DebateStepPageMainActions from './MainActions/DebateStepPageMainActions';
@@ -15,7 +14,6 @@ import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.conte
 
 export type Props = {|
   +query: ?DebateStepPageLogic_query,
-  +isAuthenticated: boolean,
 |};
 
 export const DebateStepPageLogic = ({ query }: Props) => {
@@ -23,26 +21,23 @@ export const DebateStepPageLogic = ({ query }: Props) => {
   const { widget } = useDebateStepPage();
   const step = query?.step || null;
   const viewer = query?.viewer || null;
-  const startAt = query?.step?.timeRange?.startAt || null;
-  const isTimeless = query?.step?.timeless || false;
-  const isStarted = startAt != null ? moment().isAfter(startAt) : false;
+  const hasStarted = query?.step?.timeRange?.hasStarted;
 
-  if (isTimeless || isStarted || !step)
-    return (
-      <Flex direction="column" spacing={8}>
-        <DebateStepPageMainActions
-          isMobile={isMobile}
-          step={step}
-          isAuthenticated={!!query?.viewer}
-        />
-        <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
-        {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}
-        <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
-        <LoginModal />
-      </Flex>
-    );
+  if (!hasStarted && step) return <DebateStepPageNotYetStarted step={step} />;
 
-  return <DebateStepPageNotYetStarted step={step} />;
+  return (
+    <Flex direction="column" spacing={8}>
+      <DebateStepPageMainActions
+        isMobile={isMobile}
+        step={step}
+        isAuthenticated={!!query?.viewer}
+      />
+      <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
+      {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}
+      <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
+      <LoginModal />
+    </Flex>
+  );
 };
 
 export default createFragmentContainer(DebateStepPageLogic, {
@@ -53,10 +48,9 @@ export default createFragmentContainer(DebateStepPageLogic, {
         ...DebateStepPageArguments_viewer
       }
       step: node(id: $stepId) {
-        ... on DebateStep {
-          timeless
+        ... on Step {
           timeRange {
-            startAt
+            hasStarted
           }
         }
         ...DebateStepPageNotYetStarted_step

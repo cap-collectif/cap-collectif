@@ -8,19 +8,38 @@ import { $refType, $fragmentRefs } from '~/mocks';
 const baseProps = {
   query: {
     $refType,
-    step: { $fragmentRefs },
-    viewer: {
+    step: {
       $fragmentRefs,
+      timeRange: {
+        hasStarted: true,
+      },
     },
+    viewer: undefined,
   },
-  isAuthenticated: false,
 };
 
 const props = {
   basic: baseProps,
   whenAuthenticated: {
     ...baseProps,
-    isAuthenticated: true,
+    query: {
+      ...baseProps.query,
+      viewer: {
+        $fragmentRefs,
+      },
+    },
+  },
+  whenNotStarted: {
+    ...baseProps,
+    query: {
+      ...baseProps.query,
+      step: {
+        ...baseProps.query.step,
+        timeRange: {
+          hasStarted: false,
+        },
+      },
+    },
   },
 };
 
@@ -32,6 +51,11 @@ describe('<DebateStepPageLogic />', () => {
 
   it('should renders correctly when authenticated', () => {
     const wrapper = shallow(<DebateStepPageLogic {...props.whenAuthenticated} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should renders correctly when step not started', () => {
+    const wrapper = shallow(<DebateStepPageLogic {...props.whenNotStarted} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

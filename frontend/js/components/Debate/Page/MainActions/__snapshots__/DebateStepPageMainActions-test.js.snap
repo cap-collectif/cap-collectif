@@ -15,13 +15,10 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
     >
       <Tag
         icon="CLOCK"
-        variant="yellow"
+        variant="neutral-gray"
         variantType="badge"
       >
-        <RemainingTime
-          endAt="2030-03-10 00:00:00"
-          noStyle={true}
-        />
+        global.ended
       </Tag>
       <Heading
         as="h2"
@@ -38,9 +35,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
             "$refType": null,
             "timeRange": Object {
               "endAt": "2030-03-10 00:00:00",
-              "startAt": "2030-02-10 00:00:00",
             },
-            "timeless": false,
           }
         }
       />
@@ -64,13 +59,10 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
     >
       <Tag
         icon="CLOCK"
-        variant="yellow"
+        variant="neutral-gray"
         variantType="badge"
       >
-        <RemainingTime
-          endAt="2030-03-10 00:00:00"
-          noStyle={true}
-        />
+        global.ended
       </Tag>
       <Heading
         as="h2"
@@ -87,48 +79,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
             "$refType": null,
             "timeRange": Object {
               "endAt": "2030-03-10 00:00:00",
-              "startAt": "2030-02-10 00:00:00",
             },
-            "timeless": false,
-          }
-        }
-      />
-    </ForwardRef>
-  </ReactPlaceholder>
-</AppBox>
-`;
-
-exports[`<DebateStepPageMainActions/> renders correctly when step is timeless 1`] = `
-<AppBox
-  id="DebateStepPageMainActions"
->
-  <ReactPlaceholder
-    customPlaceholder={<DebateStepPageMainActionsPlaceholder />}
-    ready={true}
-  >
-    <ForwardRef
-      alignItems="center"
-      direction="column"
-      spacing={4}
-    >
-      <Heading
-        as="h2"
-        color="gray.900"
-        mb={2}
-        textAlign="center"
-      />
-      <Relay(Connect(ReduxForm))
-        isAuthenticated={true}
-        isMobile={false}
-        step={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "timeRange": Object {
-              "endAt": null,
-              "startAt": null,
-            },
-            "timeless": true,
           }
         }
       />

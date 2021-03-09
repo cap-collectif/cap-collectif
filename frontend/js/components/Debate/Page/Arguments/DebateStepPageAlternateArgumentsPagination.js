@@ -31,7 +31,6 @@ type Props = {|
   +debate: DebateStepPageAlternateArgumentsPagination_debate$key,
   +viewer: ?DebateStepPageAlternateArgumentsPagination_viewer$key,
   +preview?: boolean,
-  +isStepClosed: boolean,
 |};
 
 export const CONNECTION_NODES_PER_PAGE = 8;
@@ -128,7 +127,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   viewer: viewerFragment,
   handleChange,
   preview = false,
-  isStepClosed,
 }: Props) => {
   const { onClose, onOpen, isOpen } = useMultipleDisclosure({});
   const [debate, paginationProps]: [
@@ -173,7 +171,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             {viewerUnpublishedArgument && (
               <React.Fragment key={viewerUnpublishedArgument.id}>
                 <DebateStepPageArgumentDrawer
-                  isStepClosed={isStepClosed}
                   key={`drawer-${viewerUnpublishedArgument.id}`}
                   argument={viewerUnpublishedArgument}
                   viewer={viewer}
@@ -181,7 +178,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
                 />
                 <ArgumentCard
-                  isStepClosed={isStepClosed}
                   height="100%"
                   onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
                   isMobile
@@ -196,7 +192,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             {debateArguments.slice(0, MOBILE_PREVIEW_MAX_ARGUMENTS).map(argument => (
               <React.Fragment key={argument.id}>
                 <DebateStepPageArgumentDrawer
-                  isStepClosed={isStepClosed}
                   key={`drawer-${argument.id}`}
                   argument={argument}
                   viewer={viewer}
@@ -204,7 +199,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${argument.id}`)}
                 />
                 <ArgumentCard
-                  isStepClosed={isStepClosed}
                   height="100%"
                   onReadMore={onOpen(`drawer-${argument.id}`)}
                   isMobile
@@ -238,7 +232,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
             <AppBox key={viewerUnpublishedArgument.id} marginBottom={6}>
               <>
                 <DebateStepPageArgumentDrawer
-                  isStepClosed={isStepClosed}
                   key={`drawer-${viewerUnpublishedArgument.id}`}
                   argument={viewerUnpublishedArgument}
                   viewer={viewer}
@@ -246,7 +239,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   onClose={onClose(`drawer-${viewerUnpublishedArgument.id}`)}
                 />
                 <ArgumentCard
-                  isStepClosed={isStepClosed}
                   key={viewerUnpublishedArgument.id}
                   onReadMore={onOpen(`drawer-${viewerUnpublishedArgument.id}`)}
                   isMobile
@@ -270,7 +262,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   viewer={viewer}
                   isOpen={isOpen(`drawer-${argument.id}`)}
                   onClose={onClose(`drawer-${argument.id}`)}
-                  isStepClosed={isStepClosed}
                 />
                 <ArgumentCard
                   key={argument.id}
@@ -283,7 +274,6 @@ export const DebateStepPageAlternateArgumentsPagination = ({
                   setArgumentReported={setArgumentReported}
                   setModerateArgumentModal={setModerateArgumentModal}
                   setDeleteModalInfo={setDeleteModalInfo}
-                  isStepClosed={isStepClosed}
                 />
               </>
             </AppBox>

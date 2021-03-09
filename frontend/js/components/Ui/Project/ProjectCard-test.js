@@ -10,7 +10,7 @@ describe('<ProjectCard />', () => {
     $refType,
     id: 'project1',
     title: 'Name of my project',
-    publishedAt: '2022-03-04 22:00:00',
+    publishedAt: '2030-03-10 00:00:00',
     isExternal: false,
     externalLink: null,
     url: 'http://capco/project1',
@@ -18,7 +18,7 @@ describe('<ProjectCard />', () => {
       id: 'cstep',
       timeless: false,
       timeRange: {
-        endAt: '2022-05-02 12:04:40',
+        endAt: '2030-04-10 00:00:00',
       },
     },
     type: {

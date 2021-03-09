@@ -32,7 +32,6 @@ const defaultProps = {
   setDeleteModalInfo: jest.fn(),
   isMobile: false,
   viewer: null,
-  isStepClosed: false,
 };
 
 const props = {
@@ -69,10 +68,6 @@ const props = {
       isAdmin: true,
     },
   },
-  whenStepClosed: {
-    ...defaultProps,
-    isStepClosed: true,
-  },
 };
 
 describe('<ArgumentCard />', () => {
@@ -93,11 +88,6 @@ describe('<ArgumentCard />', () => {
 
   it('renders correctly when connected as admin', () => {
     const wrapper = shallow(<ArgumentCard {...props.asViewerAdmin} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly when step finished', () => {
-    const wrapper = shallow(<ArgumentCard {...props.whenStepClosed} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

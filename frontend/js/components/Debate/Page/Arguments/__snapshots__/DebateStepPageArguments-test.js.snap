@@ -2,7 +2,6 @@
 
 exports[`<DebateStepPageArguments /> renders correctly 1`] = `
 <Relay(DesktopDebateStepPageArguments)
-  isStepClosed={false}
   step={
     Object {
       "$refType": null,
@@ -17,11 +16,6 @@ exports[`<DebateStepPageArguments /> renders correctly 1`] = `
         "$fragmentRefs": null,
         "id": "debat-cannabis",
       },
-      "timeRange": Object {
-        "endAt": "2030-03-10 00:00:00",
-        "startAt": "2030-02-10 00:00:00",
-      },
-      "timeless": false,
       "yesDebate": Object {
         "$fragmentRefs": null,
         "id": "debat-cannabis",
@@ -49,7 +43,6 @@ exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
         "id": "debat-cannabis",
       }
     }
-    isStepClosed={false}
     viewer={
       Object {
         "$fragmentRefs": null,
@@ -62,7 +55,6 @@ exports[`<DebateStepPageArguments /> renders correctly on mobile 1`] = `
 
 exports[`<DebateStepPageArguments /> renders correctly when no viewer 1`] = `
 <Relay(DesktopDebateStepPageArguments)
-  isStepClosed={false}
   step={
     Object {
       "$refType": null,
@@ -77,11 +69,6 @@ exports[`<DebateStepPageArguments /> renders correctly when no viewer 1`] = `
         "$fragmentRefs": null,
         "id": "debat-cannabis",
       },
-      "timeRange": Object {
-        "endAt": "2030-03-10 00:00:00",
-        "startAt": "2030-02-10 00:00:00",
-      },
-      "timeless": false,
       "yesDebate": Object {
         "$fragmentRefs": null,
         "id": "debat-cannabis",

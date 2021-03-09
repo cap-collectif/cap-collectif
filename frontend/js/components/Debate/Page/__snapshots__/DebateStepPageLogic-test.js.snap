@@ -1,20 +1,127 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`] = `
-<Relay(DebateStepPageNotYetStarted)
-  step={
-    Object {
-      "$fragmentRefs": null,
+<ForwardRef
+  direction="column"
+  spacing={8}
+>
+  <Relay(DebateStepPageMainActions)
+    isAuthenticated={true}
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
     }
-  }
-/>
+  />
+  <Relay(DebateStepPageFaceToFace)
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageLinkedArticles)
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageArguments)
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
+  />
+  <Connect(LoginModal) />
+</ForwardRef>
 `;
 
 exports[`<DebateStepPageLogic /> should renders correctly when not authenticated 1`] = `
+<ForwardRef
+  direction="column"
+  spacing={8}
+>
+  <Relay(DebateStepPageMainActions)
+    isAuthenticated={false}
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageFaceToFace)
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageLinkedArticles)
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageArguments)
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+    viewer={null}
+  />
+  <Connect(LoginModal) />
+</ForwardRef>
+`;
+
+exports[`<DebateStepPageLogic /> should renders correctly when step not started 1`] = `
 <Relay(DebateStepPageNotYetStarted)
   step={
     Object {
       "$fragmentRefs": null,
+      "timeRange": Object {
+        "hasStarted": false,
+      },
     }
   }
 />

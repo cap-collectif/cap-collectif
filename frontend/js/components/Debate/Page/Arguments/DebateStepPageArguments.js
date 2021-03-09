@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
 import type { DebateStepPageArguments_viewer } from '~relay/DebateStepPageArguments_viewer.graphql';
@@ -17,43 +16,21 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
   if (step?.debate?.arguments.totalCount === 0) {
     return null;
   }
-  const isStepFinished = step?.timeless
-    ? false
-    : step?.timeRange?.endAt
-    ? moment().isAfter(moment(step?.timeRange?.endAt))
-    : false;
-  const isStartedAndNoEndDate = step?.timeless
-    ? false
-    : !step?.timeRange?.endAt && moment().isAfter(moment(step?.timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
 
   return isMobile ? (
-    <>
-      {step?.debate && (
-        <MobileDebateStepPageArguments
-          debate={step.debate}
-          viewer={viewer}
-          isStepClosed={isStepClosed}
-        />
-      )}
-    </>
+    <>{step?.debate && <MobileDebateStepPageArguments debate={step.debate} viewer={viewer} />}</>
   ) : (
     // TODO fixme https://github.com/cap-collectif/platform/issues/12130
     // About step => $fragmentRefs is missing in DebateStepPageArguments_step
     // Would be fix if we transform DesktopDebateStepPageArguments in fragment
     // $FlowFixMe
-    <DesktopDebateStepPageArguments step={step} viewer={viewer} isStepClosed={isStepClosed} />
+    <DesktopDebateStepPageArguments step={step} viewer={viewer} />
   );
 };
 
 export default createFragmentContainer(DebateStepPageArguments, {
   step: graphql`
     fragment DebateStepPageArguments_step on DebateStep {
-      timeless
-      timeRange {
-        startAt
-        endAt
-      }
       noDebate: debate {
         id
         ...DebateStepPageArgumentsPagination_debate

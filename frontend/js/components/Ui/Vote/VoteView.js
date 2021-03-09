@@ -27,11 +27,12 @@ const MobileTextPercentage = styled(Text).attrs({
 
 export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) => {
   const intl = useIntl();
+  const positivePercentageCleaned = Number.isNaN(positivePercentage) ? 0 : positivePercentage;
 
-  if (positivePercentage < 0 || positivePercentage > 100) return null;
+  if (positivePercentageCleaned < 0 || positivePercentageCleaned > 100) return null;
 
-  const left = positivePercentage;
-  const right = 100 - positivePercentage;
+  const left = positivePercentageCleaned;
+  const right = 100 - positivePercentageCleaned;
   const leftPercentage = `${Math.round(left * 100) / 100}%`;
   const rightPercentage = `${Math.round(right * 100) / 100}%`;
 
@@ -67,7 +68,7 @@ export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) =>
   }
 
   return (
-    <Container left={left} right={right} key={positivePercentage}>
+    <Container left={left} right={right} key={positivePercentageCleaned}>
       <div>
         {left > 5 ? (
           <div>

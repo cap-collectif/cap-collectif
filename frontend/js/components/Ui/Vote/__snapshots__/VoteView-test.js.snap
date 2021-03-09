@@ -688,3 +688,113 @@ exports[`<VoteView /> should render correctly when 100% positive on mobile 1`] =
   />
 </ForwardRef>
 `;
+
+exports[`<VoteView /> should render correctly when NaN 1`] = `
+<VoteViewstyle__Container
+  key="0"
+  left={0}
+  right={100}
+>
+  <div>
+    <div
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <div
+        className="circle red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="0-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="1-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="2-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="3-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="4-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+      <div
+        className="bubble reverse"
+        key="5-red"
+      >
+        <Icon
+          color="white"
+          name="THUMB_UP"
+          size="lg"
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      <span
+        className="progressBar"
+      />
+    </span>
+    <span>
+      <span
+        className="progressBar red"
+      />
+    </span>
+  </div>
+  <div>
+    <Text
+      as="span"
+      className="against-percentage"
+      color="neutral-gray.900"
+      fontWeight="semibold"
+    >
+      100%
+    </Text>
+  </div>
+</VoteViewstyle__Container>
+`;

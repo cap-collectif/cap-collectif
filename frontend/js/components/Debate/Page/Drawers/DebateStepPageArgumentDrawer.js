@@ -25,12 +25,12 @@ import type {
 import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalReportArgumentMobile';
 import ModalArgumentAuthorMenu from '~/components/Debate/Page/Arguments/ModalArgumentAuthorMenu';
 import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   ...DetailDrawerProps,
   +argument: DebateStepPageArgumentDrawer_argument$key,
   +viewer: ?DebateStepPageArgumentDrawer_viewer$key,
-  +isStepClosed: boolean,
 |};
 
 const ARGUMENT_FRAGMENT = graphql`
@@ -63,7 +63,6 @@ const VIEWER_FRAGMENT = graphql`
 const DebateStepPageArgumentDrawer = ({
   argument: argumentFragment,
   viewer: viewerFragment,
-  isStepClosed,
   ...drawerProps
 }: Props) => {
   const argument: DebateStepPageArgumentDrawer_argument = useFragment(
@@ -75,6 +74,7 @@ const DebateStepPageArgumentDrawer = ({
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isAuthor = argument.viewerDidAuthor;
   const isViewerAdmin = viewer && viewer.isAdmin;
+  const { stepClosed } = useDebateStepPage();
 
   if (!argument) return null;
 
@@ -94,7 +94,7 @@ const DebateStepPageArgumentDrawer = ({
           </Tag>
         </Flex>
 
-        {argument.viewerCanReport && !isStepClosed && (
+        {argument.viewerCanReport && !stepClosed && (
           <Button
             rightIcon={ICON_NAME.MORE}
             aria-label={intl.formatMessage({ id: 'global.menu' })}
@@ -105,7 +105,7 @@ const DebateStepPageArgumentDrawer = ({
 
         {isViewerAdmin && !isAuthor && <ModalModerateArgumentMobile argument={argument} />}
 
-        {isAuthor && !isStepClosed && <ModalArgumentAuthorMenu argument={argument} />}
+        {isAuthor && !stepClosed && <ModalArgumentAuthorMenu argument={argument} />}
       </DetailDrawer.Header>
 
       <DetailDrawer.Body>
@@ -123,7 +123,7 @@ const DebateStepPageArgumentDrawer = ({
         borderTopRightRadius="16px"
         width="100%"
         py={4}>
-        <LoginOverlay enabled={!isStepClosed} placement="bottom">
+        <LoginOverlay enabled={!stepClosed} placement="bottom">
           <Button
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -131,7 +131,7 @@ const DebateStepPageArgumentDrawer = ({
             aria-label={intl.formatMessage({
               id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
             })}
-            disabled={isStepClosed}
+            disabled={stepClosed}
           />
         </LoginOverlay>
         <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">
