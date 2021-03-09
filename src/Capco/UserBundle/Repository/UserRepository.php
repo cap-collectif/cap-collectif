@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Repository;
 
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -181,6 +182,27 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->getSingleScalarResult();
+    }
+
+    public function getConfirmedUsersWithoutVoteInDebate(Debate $debate): array
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT u
+                FROM CapcoUserBundle:User u
+                WHERE
+                    u.confirmationToken IS NULL
+                    AND 0 = (
+                        SELECT count(distinct v.id)
+                        FROM CapcoAppBundle:Debate\DebateVote v
+                        WHERE
+                            v.user = u
+                            AND v.debate= :debate
+                    )
+                '
+            )
+            ->setParameter('debate', $debate)
+            ->getResult();
     }
 
     public function findProjectSourceContributorsWithCount(Project $project): array
@@ -411,8 +433,8 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:Consultation oc WITH o.consultation = oc
           INNER JOIN CapcoAppBundle:Steps\ConsultationStep ocs WITH oc.step = :project
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc   
-          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :project   
+          LEFT JOIN CapcoAppBundle:Consultation ovoc WITH ovo.consultation = ovoc
+          INNER JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovoc.step = :project
           WHERE av.user = u AND a.published = 1 AND (
             (a.opinion IS NOT NULL AND o.published = 1)
             OR
@@ -1119,20 +1141,20 @@ class UserRepository extends EntityRepository
     public function getAssignedUsersOnProposal(Proposal $proposal, string $revisedAt)
     {
         $sql = <<<'EOF'
-    select ps.supervisor_id as "assignedUser" FROM proposal_supervisor ps 
-    LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id 
+    select ps.supervisor_id as "assignedUser" FROM proposal_supervisor ps
+    LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
     where proposal_id = :proposalId
     UNION
-    select pa.analyst_id as "assignedUser"  FROM proposal_analyst pa 
-    LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id 
+    select pa.analyst_id as "assignedUser"  FROM proposal_analyst pa
+    LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
     where proposal_id = :proposalId
     UNION
-    select pdm.decision_maker_id as "assignedUser" FROM proposal_decision_maker pdm 
-    LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id 
+    select pdm.decision_maker_id as "assignedUser" FROM proposal_decision_maker pdm
+    LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
     where proposal_id = :proposalId
     UNION
-    select pr.author_id as "assignedUser" FROM proposal_revision pr 
-    LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id 
+    select pr.author_id as "assignedUser" FROM proposal_revision pr
+    LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id
     where proposal_id = :proposalId and revised_at = :revisedAt
 EOF;
 

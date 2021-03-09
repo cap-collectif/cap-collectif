@@ -578,3 +578,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:Debate\DebateAnonymousVote']
+
+    Capco\AppBundle\Repository\Debate\DebateVoteTokenRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Debate\DebateVoteToken']

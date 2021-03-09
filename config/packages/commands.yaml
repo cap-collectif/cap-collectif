@@ -64,3 +64,7 @@ services:
     Capco\AppBundle\Command\TranslateBasicParameters:
         arguments:
             $name: 'capco:reset:translate-parameters'
+
+    Capco\AppBundle\Command\Debate\DebateInvitationCommand:
+        arguments:
+            $name: 'capco:debate:invite'

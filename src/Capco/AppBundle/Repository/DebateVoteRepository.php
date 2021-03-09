@@ -129,11 +129,11 @@ class DebateVoteRepository extends EntityRepository
     {
         $qb = $this->getByDebateQB($debate);
 
-        if ($filters['type'] && ForOrAgainstType::isValid($filters['type'])) {
+        if (isset($filters['type']) && ForOrAgainstType::isValid($filters['type'])) {
             $qb->andWhere('v.type = :type')->setParameter('type', $filters['type']);
         }
 
-        if (\is_bool($filters['isPublished'])) {
+        if (isset($filters['isPublished']) && \is_bool($filters['isPublished'])) {
             $qb->andWhere('v.published = :published')->setParameter(
                 'published',
                 $filters['isPublished']

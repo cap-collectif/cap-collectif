@@ -19,6 +19,16 @@ trait ForAgainstTrait
         return $this->type;
     }
 
+    public function isFor(): bool
+    {
+        return ForOrAgainstType::FOR === $this->getType();
+    }
+
+    public function isAgainst(): bool
+    {
+        return ForOrAgainstType::AGAINST === $this->getType();
+    }
+
     public function setType(string $type): self
     {
         ForOrAgainstType::checkIsValid($type);

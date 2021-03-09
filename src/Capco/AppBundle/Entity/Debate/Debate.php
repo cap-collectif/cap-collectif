@@ -85,6 +85,28 @@ class Debate
         return $this->opinions;
     }
 
+    public function getForOpinion(): ?DebateOpinion
+    {
+        foreach ($this->opinions as $opinion) {
+            if ($opinion->isFor()) {
+                return $opinion;
+            }
+        }
+
+        return null;
+    }
+
+    public function getAgainstOpinion(): ?DebateOpinion
+    {
+        foreach ($this->opinions as $opinion) {
+            if ($opinion->isAgainst()) {
+                return $opinion;
+            }
+        }
+
+        return null;
+    }
+
     public function addOpinion(DebateOpinion $opinion): self
     {
         if (!$this->opinions->contains($opinion)) {
