@@ -136,6 +136,9 @@ WORKDIR /usr/local/bin/
 RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
 RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 
+# Binaries
+COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
+
 # Service
 COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run

@@ -1,4 +1,5 @@
 /* eslint-env jest */
+// TODO remove writes from tests.
 import '../../_setup';
 
 const InternalQuery = /* GraphQL */ `

@@ -1,5 +1,7 @@
 /* eslint-env jest */
+// TODO remove writes from tests.
 import '../../_setup';
+
 const ProposalResponsesQuery = /* GraphQL */ `
   query ProposalResponsesQuery($id: ID!, $isAuthenticated: Boolean!) {
     viewer @include(if: $isAuthenticated) {
