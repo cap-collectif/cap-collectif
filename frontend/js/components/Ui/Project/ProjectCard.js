@@ -72,18 +72,18 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
           <Flex direction="column" justifyContent="space-between" height="100%">
             {(isProjectsPage || !isMobile) && (
               <Flex direction="row" flexWrap="wrap" color="neutral-gray.700">
+                {project.type &&
+                  formatInfo(
+                    ICON_NAME.BOOK_STAR_O,
+                    intl.formatMessage({ id: project.type.title }),
+                    project.type?.color,
+                  )}{' '}
                 {project.districts &&
                   project.districts?.totalCount > 0 &&
                   formatInfo(
                     ICON_NAME.PIN_O,
                     project.districts.edges?.map(district => district?.node?.name).join(' • ') ||
                       '',
-                  )}
-                {project.type &&
-                  formatInfo(
-                    ICON_NAME.BOOK_STAR_O,
-                    intl.formatMessage({ id: project.type.title }),
-                    project.type?.color,
                   )}
                 {project.themes &&
                   project.themes?.length > 0 &&

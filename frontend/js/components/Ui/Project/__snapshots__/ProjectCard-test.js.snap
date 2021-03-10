@@ -71,6 +71,7 @@ exports[`<ProjectCard /> should render correctly 1`] = `
               Debat
             </ProjectCardutils___StyledText>
           </ForwardRef>
+           
         </ForwardRef>
         <ForwardRef
           direction="row"
@@ -212,6 +213,7 @@ exports[`<ProjectCard /> should render correctly an external project 1`] = `
               Debat
             </ProjectCardutils___StyledText>
           </ForwardRef>
+           
         </ForwardRef>
         <ForwardRef
           direction="row"
@@ -378,6 +380,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
               Debat
             </ProjectCardutils___StyledText>
           </ForwardRef>
+           
         </ForwardRef>
         <ForwardRef
           direction="row"
@@ -534,15 +537,17 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
           >
             <Icon
               mr={1}
-              name="PIN_O"
+              name="BOOK_STAR_O"
               size="md"
             />
             <ProjectCardutils___StyledText
+              _css="#aa2233"
               as="span"
             >
-              Paris • Perpignan
+              Debat
             </ProjectCardutils___StyledText>
           </ForwardRef>
+           
           <ForwardRef
             alignItems="center"
             direction="row"
@@ -552,14 +557,13 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
           >
             <Icon
               mr={1}
-              name="BOOK_STAR_O"
+              name="PIN_O"
               size="md"
             />
             <ProjectCardutils___StyledText
-              _css="#aa2233"
               as="span"
             >
-              Debat
+              Paris • Perpignan
             </ProjectCardutils___StyledText>
           </ForwardRef>
           <ForwardRef
@@ -750,6 +754,7 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
               Debat
             </ProjectCardutils___StyledText>
           </ForwardRef>
+           
         </ForwardRef>
         <ForwardRef
           direction="row"
@@ -916,6 +921,7 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
               Debat
             </ProjectCardutils___StyledText>
           </ForwardRef>
+           
         </ForwardRef>
       </ForwardRef>
     </ForwardRef>

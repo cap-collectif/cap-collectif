@@ -8,6 +8,7 @@ import type { ProjectListViewPaginated_query } from '~relay/ProjectListViewPagin
 import ProjectPreview from '../Preview/ProjectPreview';
 import type { State, FeatureToggles } from '~/types';
 import Grid from '~ui/Primitives/Layout/Grid';
+import AppBox from '~/components/Ui/Primitives/AppBox';
 
 type Props = {
   relay: RelayPaginationProp,
@@ -49,17 +50,23 @@ export const ProjectListViewPaginated = ({
             <div className="d-flex flex-wrap">{renderPreview(query)}</div>
           )}
           {paginate && relay.hasMore() && (
-            <Button
-              className="see-more-projects-button ml-15"
-              disabled={loading}
-              onClick={() => {
-                setLoading(true);
-                relay.loadMore(limit, () => {
-                  setLoading(false);
-                });
-              }}>
-              <FormattedMessage id="see-more-projects" />
-            </Button>
+            <AppBox width="100%">
+              <Button
+                className="see-more-projects-button ml-15"
+                disabled={loading}
+                css={{
+                  margin: features.unstable__new_project_card ? 'auto' : '',
+                  display: 'block',
+                }}
+                onClick={() => {
+                  setLoading(true);
+                  relay.loadMore(limit, () => {
+                    setLoading(false);
+                  });
+                }}>
+                <FormattedMessage id="see-more-projects" />
+              </Button>
+            </AppBox>
           )}
         </div>
       );
