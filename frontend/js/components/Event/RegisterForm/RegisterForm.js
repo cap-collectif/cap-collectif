@@ -21,6 +21,7 @@ type Props = {|
   ...ReduxFormFormProps,
   user?: RegisterForm_user,
   event: RegisterForm_event,
+  onClose: () => void,
 |};
 
 type Values = {|
@@ -56,6 +57,7 @@ const onSubmit = (values, dispatch: Dispatch, props: Props) => {
             content: 'event_registration.create.register_success',
           },
         });
+        props.onClose();
       })
       .catch(() => {
         FluxDispatcher.dispatch({
@@ -88,6 +90,7 @@ const onSubmit = (values, dispatch: Dispatch, props: Props) => {
         },
       });
       props.reset();
+      props.onClose();
     })
     .catch(() => {
       FluxDispatcher.dispatch({

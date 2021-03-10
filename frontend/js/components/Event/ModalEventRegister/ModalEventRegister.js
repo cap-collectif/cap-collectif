@@ -24,7 +24,7 @@ const ModalEventRegister = ({ show, onClose, user, event }: Props) => (
     <Modal.Header closeButton />
     <Modal.Body>
       {!event.isViewerParticipatingAtEvent || !user ? (
-        <RegisterForm user={user} event={event} />
+        <RegisterForm user={user} event={event} onClose={onClose} />
       ) : (
         <UserRegister user={user} event={event} />
       )}

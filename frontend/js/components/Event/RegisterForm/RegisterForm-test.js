@@ -19,12 +19,14 @@ const user = {
 
 describe('<RegisterForm />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<RegisterForm event={event} user={user} {...formMock} />);
+    const wrapper = shallow(
+      <RegisterForm event={event} user={user} {...formMock} onClose={jest.fn()} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly when no user', () => {
-    const wrapper = shallow(<RegisterForm event={event} {...formMock} />);
+    const wrapper = shallow(<RegisterForm event={event} {...formMock} onClose={jest.fn()} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
