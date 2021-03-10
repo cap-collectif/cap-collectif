@@ -74,6 +74,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
               debateId={debate.id}
               isAuthenticated={isAuthenticated}
               onSuccess={setVoteState}
+              step={step}
             />
           </Flex>
         )}
@@ -106,6 +107,7 @@ export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
         viewerHasArgument @include(if: $isAuthenticated)
         ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)
       }
+      ...DebateStepPageVote_step
     }
   `,
 });

@@ -38,10 +38,22 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
           ]
         }
       />
-      <DebateStepPageVote
+      <Relay(DebateStepPageVote)
         debateId="debate1"
         isAuthenticated={true}
         onSuccess={[MockFunction]}
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "debate": Object {
+              "$fragmentRefs": null,
+              "id": "debate1",
+              "viewerHasArgument": undefined,
+            },
+            "url": "step/123",
+          }
+        }
         viewerHasArgument={false}
         width="unset"
       />
@@ -90,10 +102,22 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] 
           ]
         }
       />
-      <DebateStepPageVote
+      <Relay(DebateStepPageVote)
         debateId="debate1"
         isAuthenticated={true}
         onSuccess={[MockFunction]}
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "debate": Object {
+              "$fragmentRefs": null,
+              "id": "debate1",
+              "viewerHasArgument": undefined,
+            },
+            "url": "step/123",
+          }
+        }
         viewerHasArgument={false}
         width="unset"
       />

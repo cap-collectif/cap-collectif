@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageVote/> renders correcty 1`] = `
+exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 <ForwardRef(MotionComponent)
   alignItems="center"
   animate={
@@ -23,31 +23,227 @@ exports[`<DebateStepPageVote/> renders correcty 1`] = `
   }
   width="100%"
 >
-  <DebateStepPageVote___StyledButton
-    _css={[Function]}
-    leftIcon="THUMB_UP"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    variantSize="big"
+  <ConditionalWrapper
+    when={true}
+    wrapper={[Function]}
   >
-    <FormattedMessage
-      id="global.for"
-      values={Object {}}
-    />
-  </DebateStepPageVote___StyledButton>
-  <DebateStepPageVote___StyledButton2
-    _css2={[Function]}
-    leftIcon="THUMB_DOWN"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    variantSize="big"
+    <DebateStepPageVote___StyledButton
+      _css={[Function]}
+      leftIcon="THUMB_UP"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.for"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton>
+  </ConditionalWrapper>
+  <ConditionalWrapper
+    when={true}
+    wrapper={[Function]}
   >
-    <FormattedMessage
-      id="global.against"
-      values={Object {}}
-    />
-  </DebateStepPageVote___StyledButton2>
+    <DebateStepPageVote___StyledButton2
+      _css2={[Function]}
+      leftIcon="THUMB_DOWN"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.against"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton2>
+  </ConditionalWrapper>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
+<ForwardRef(MotionComponent)
+  alignItems="center"
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  direction="row"
+  initial={
+    Object {
+      "opacity": 0,
+    }
+  }
+  justifyContent="center"
+  spacing={6}
+  transition={
+    Object {
+      "duration": 0.5,
+    }
+  }
+  width="100%"
+>
+  <ConditionalWrapper
+    when={true}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVote___StyledButton
+      _css={[Function]}
+      leftIcon="THUMB_UP"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.for"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton>
+  </ConditionalWrapper>
+  <ConditionalWrapper
+    when={true}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVote___StyledButton2
+      _css2={[Function]}
+      leftIcon="THUMB_DOWN"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.against"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton2>
+  </ConditionalWrapper>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
+<ForwardRef(MotionComponent)
+  alignItems="center"
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  direction="row"
+  initial={
+    Object {
+      "opacity": 0,
+    }
+  }
+  justifyContent="center"
+  spacing={6}
+  transition={
+    Object {
+      "duration": 0.5,
+    }
+  }
+  width="100%"
+>
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVote___StyledButton
+      _css={[Function]}
+      leftIcon="THUMB_UP"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.for"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton>
+  </ConditionalWrapper>
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVote___StyledButton2
+      _css2={[Function]}
+      leftIcon="THUMB_DOWN"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.against"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton2>
+  </ConditionalWrapper>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVote/> should renders correctly with viewer argument 1`] = `
+<ForwardRef(MotionComponent)
+  alignItems="center"
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  direction="row"
+  initial={
+    Object {
+      "opacity": 0,
+    }
+  }
+  justifyContent="center"
+  spacing={6}
+  transition={
+    Object {
+      "duration": 0.5,
+    }
+  }
+  width="100%"
+>
+  <ConditionalWrapper
+    when={true}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVote___StyledButton
+      _css={[Function]}
+      leftIcon="THUMB_UP"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.for"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton>
+  </ConditionalWrapper>
+  <ConditionalWrapper
+    when={true}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVote___StyledButton2
+      _css2={[Function]}
+      leftIcon="THUMB_DOWN"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      variantSize="big"
+    >
+      <FormattedMessage
+        id="global.against"
+        values={Object {}}
+      />
+    </DebateStepPageVote___StyledButton2>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;

@@ -1,4 +1,6 @@
 // @flow
+import config from '~/config';
+
 class LocalStorageService {
   defaultCacheTime: number;
 
@@ -7,7 +9,7 @@ class LocalStorageService {
   }
 
   isValid(key: string, cacheTime: any) {
-    if (typeof localStorage === 'undefined') {
+    if (config.isIframe || typeof localStorage === 'undefined') {
       return false;
     }
 
@@ -21,7 +23,7 @@ class LocalStorageService {
   }
 
   get(key: string) {
-    if (typeof localStorage === 'undefined') {
+    if (config.isIframe || typeof localStorage === 'undefined') {
       return null;
     }
 
@@ -31,7 +33,7 @@ class LocalStorageService {
   }
 
   set(key: string, data: any) {
-    if (typeof localStorage === 'undefined') {
+    if (config.isIframe || typeof localStorage === 'undefined') {
       return;
     }
     const cache = {
@@ -42,7 +44,7 @@ class LocalStorageService {
   }
 
   remove(key: string) {
-    if (typeof localStorage === 'undefined') {
+    if (config.isIframe || typeof localStorage === 'undefined') {
       return;
     }
     localStorage.removeItem(key);

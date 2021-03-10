@@ -11,6 +11,7 @@ const baseProps = {
   viewerIsConfirmed: true,
   step: {
     $refType,
+    $fragmentRefs,
     url: 'step/123',
     debate: {
       $fragmentRefs,

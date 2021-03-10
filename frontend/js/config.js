@@ -30,4 +30,5 @@ export default {
       window.navigator.userAgent,
     )
   ),
+  isIframe: window.self !== window.top,
 };

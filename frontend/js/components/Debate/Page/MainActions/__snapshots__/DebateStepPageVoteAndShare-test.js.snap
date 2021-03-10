@@ -71,3 +71,75 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
   </ForwardRef>
 </Fragment>
 `;
+
+exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous participation allowed 1`] = `
+<Fragment>
+  <ForwardRef
+    align="center"
+    direction="column"
+    width="100%"
+  >
+    <AppBox
+      mb={6}
+      textAlign="center"
+    >
+      <Text
+        color="neutral-gray.700"
+      >
+        thanks-participation-debate-ended
+      </Text>
+      <Text
+        color="neutral-gray.700"
+      >
+        summary-debate-participation
+      </Text>
+    </AppBox>
+    <VoteView
+      isMobile={false}
+      positivePercentage={80}
+      votesCount={
+        Object {
+          "AGAINST": 1,
+          "FOR": 4,
+        }
+      }
+    />
+  </ForwardRef>
+</Fragment>
+`;
+
+exports[`<DebateStepPageVoteAndShare/> renders correctly when viewer not confirmed 1`] = `
+<Fragment>
+  <ForwardRef
+    align="center"
+    direction="column"
+    width="100%"
+  >
+    <AppBox
+      mb={6}
+      textAlign="center"
+    >
+      <Text
+        color="neutral-gray.700"
+      >
+        thanks-participation-debate-ended
+      </Text>
+      <Text
+        color="neutral-gray.700"
+      >
+        summary-debate-participation
+      </Text>
+    </AppBox>
+    <VoteView
+      isMobile={false}
+      positivePercentage={80}
+      votesCount={
+        Object {
+          "AGAINST": 1,
+          "FOR": 4,
+        }
+      }
+    />
+  </ForwardRef>
+</Fragment>
+`;

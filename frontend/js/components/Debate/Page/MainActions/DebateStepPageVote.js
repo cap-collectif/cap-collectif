@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import { useAnalytics } from 'use-analytics';
@@ -15,6 +16,9 @@ import Text from '~ui/Primitives/Text';
 import AddDebateAnonymousVoteMutation from '~/mutations/AddDebateAnonymousVoteMutation';
 import { SPACES_SCALES } from '~/styles/theme/base';
 import CookieMonster from '~/CookieMonster';
+import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
+import LoginOverlay from '~/components/Utils/LoginOverlay';
+import type { DebateStepPageVote_step } from '~relay/DebateStepPageVote_step.graphql';
 
 type Props = {|
   ...AppBoxProps,
@@ -22,6 +26,7 @@ type Props = {|
   +isAuthenticated: boolean,
   +onSuccess: VoteState => void,
   +viewerHasArgument: boolean,
+  +step: DebateStepPageVote_step,
 |};
 
 const anonymousVoteForDebate = (
@@ -96,6 +101,7 @@ const buttonColor = (styleColor: string, disabled: boolean) => ({
 const Container = motion.custom(Flex);
 
 export const DebateStepPageVote = ({
+  step,
   debateId,
   isAuthenticated,
   onSuccess,
@@ -119,6 +125,7 @@ export const DebateStepPageVote = ({
       anonymousVoteForDebate(debateId, captcha.value, captcha.voteType, intl, onSuccess);
     }
   }, [debateId, captcha.value, captcha.voteType, intl, onSuccess]);
+
   return (
     <Container
       transition={{ duration: 0.5 }}
@@ -132,47 +139,64 @@ export const DebateStepPageVote = ({
       {...props}>
       {!captcha.visible && (
         <>
-          <Button
-            onMouseEnter={() => setIsHover('FOR')}
-            onMouseLeave={() => setIsHover(false)}
-            css={css(buttonColor('green', isHover === 'AGAINST'))}
-            variantSize="big"
-            onClick={() => {
-              if (isAuthenticated) {
-                track('debate_vote_click', { type: 'FOR' });
-                voteForDebate(debateId, 'FOR', intl, onSuccess, isAuthenticated, viewerHasArgument);
-              } else {
-                setCaptcha(c => ({ ...c, visible: true, voteType: 'FOR' }));
-              }
-            }}
-            leftIcon="THUMB_UP">
-            <FormattedMessage id="global.for" />
-          </Button>
-          <Button
-            onMouseEnter={() => setIsHover('AGAINST')}
-            onMouseLeave={() => setIsHover(false)}
-            css={css(buttonColor('red', isHover === 'FOR'))}
-            variantSize="big"
-            onClick={() => {
-              if (isAuthenticated) {
-                track('debate_vote_click', { type: 'AGAINST' });
-                voteForDebate(
-                  debateId,
-                  'AGAINST',
-                  intl,
-                  onSuccess,
-                  isAuthenticated,
-                  viewerHasArgument,
-                );
-              } else {
-                setCaptcha(c => ({ ...c, visible: true, voteType: 'AGAINST' }));
-              }
-            }}
-            leftIcon="THUMB_DOWN">
-            <FormattedMessage id="global.against" />
-          </Button>
+          <ConditionalWrapper
+            when={!step.isAnonymousParticipationAllowed}
+            wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
+            <Button
+              onMouseEnter={() => setIsHover('FOR')}
+              onMouseLeave={() => setIsHover(false)}
+              css={css(buttonColor('green', isHover === 'AGAINST'))}
+              variantSize="big"
+              onClick={() => {
+                if (isAuthenticated) {
+                  track('debate_vote_click', { type: 'FOR' });
+                  voteForDebate(
+                    debateId,
+                    'FOR',
+                    intl,
+                    onSuccess,
+                    isAuthenticated,
+                    viewerHasArgument,
+                  );
+                } else {
+                  setCaptcha(c => ({ ...c, visible: true, voteType: 'FOR' }));
+                }
+              }}
+              leftIcon="THUMB_UP">
+              <FormattedMessage id="global.for" />
+            </Button>
+          </ConditionalWrapper>
+
+          <ConditionalWrapper
+            when={!step.isAnonymousParticipationAllowed}
+            wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
+            <Button
+              onMouseEnter={() => setIsHover('AGAINST')}
+              onMouseLeave={() => setIsHover(false)}
+              css={css(buttonColor('red', isHover === 'FOR'))}
+              variantSize="big"
+              onClick={() => {
+                if (isAuthenticated) {
+                  track('debate_vote_click', { type: 'AGAINST' });
+                  voteForDebate(
+                    debateId,
+                    'AGAINST',
+                    intl,
+                    onSuccess,
+                    isAuthenticated,
+                    viewerHasArgument,
+                  );
+                } else {
+                  setCaptcha(c => ({ ...c, visible: true, voteType: 'AGAINST' }));
+                }
+              }}
+              leftIcon="THUMB_DOWN">
+              <FormattedMessage id="global.against" />
+            </Button>
+          </ConditionalWrapper>
         </>
       )}
+
       {captcha.visible && (
         <Flex direction="column" align="center">
           <Text
@@ -194,4 +218,10 @@ export const DebateStepPageVote = ({
   );
 };
 
-export default DebateStepPageVote;
+export default createFragmentContainer(DebateStepPageVote, {
+  step: graphql`
+    fragment DebateStepPageVote_step on DebateStep {
+      isAnonymousParticipationAllowed
+    }
+  `,
+});

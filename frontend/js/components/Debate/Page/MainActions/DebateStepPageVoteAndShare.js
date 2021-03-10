@@ -41,6 +41,7 @@ const getInitialState = (
   debate: $PropertyType<DebateStepPageVoteAndShare_step, 'debate'>,
   stepClosed: boolean,
   viewerIsConfirmedByEmail: boolean,
+  isAnonymousVoteAllowed: boolean,
 ): VoteState => {
   if (debate.viewerHasVote && !stepClosed) {
     if (debate.viewerHasArgument)
@@ -49,7 +50,7 @@ const getInitialState = (
   }
 
   if (stepClosed) return 'RESULT';
-  if (CookieMonster.hasDebateAnonymousVoteCookie(debate.id)) {
+  if (isAnonymousVoteAllowed && CookieMonster.hasDebateAnonymousVoteCookie(debate.id)) {
     return 'VOTED_ANONYMOUS';
   }
 
@@ -63,11 +64,11 @@ export const DebateStepPageVoteAndShare = ({
   viewerIsConfirmedByEmail,
   step,
 }: Props) => {
-  const { debate, url } = step;
+  const { debate, url, isAnonymousParticipationAllowed } = step;
   const { stepClosed } = useDebateStepPage();
 
   const [voteState, setVoteState] = useState<VoteState>(
-    getInitialState(debate, stepClosed, viewerIsConfirmedByEmail),
+    getInitialState(debate, stepClosed, viewerIsConfirmedByEmail, isAnonymousParticipationAllowed),
   );
 
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
@@ -95,6 +96,7 @@ export const DebateStepPageVoteAndShare = ({
       <Flex width="100%" direction="column" align="center" ref={ref}>
         {voteState === 'NONE' && (
           <DebateStepPageVote
+            step={step}
             debateId={debate.id}
             isAuthenticated={isAuthenticated}
             viewerHasArgument={debate.viewerHasArgument || false}
@@ -179,6 +181,7 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
     fragment DebateStepPageVoteAndShare_step on DebateStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       url
+      isAnonymousParticipationAllowed
       debate {
         id
         viewerHasArgument @include(if: $isAuthenticated)
@@ -200,6 +203,7 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
         }
         ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)
       }
+      ...DebateStepPageVote_step
       ...DebateStepPageAbsoluteVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,

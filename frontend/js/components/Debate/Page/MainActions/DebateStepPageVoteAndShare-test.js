@@ -13,6 +13,7 @@ const baseProps = {
     url: 'step/123',
     $refType,
     $fragmentRefs,
+    isAnonymousParticipationAllowed: false,
     debate: {
       id: 'debate1',
       $fragmentRefs,
@@ -39,6 +40,17 @@ const props = {
     ...baseProps,
     isMobile: true,
   },
+  viewerNotConfirmed: {
+    ...baseProps,
+    viewerIsConfirmedByEmail: false,
+  },
+  isAnonymousParticipationAllowed: {
+    ...baseProps,
+    step: {
+      ...baseProps.step,
+      isAnonymousParticipationAllowed: true,
+    },
+  },
 };
 
 describe('<DebateStepPageVoteAndShare/>', () => {
@@ -49,6 +61,18 @@ describe('<DebateStepPageVoteAndShare/>', () => {
 
   it('renders correctly on mobile', () => {
     const wrapper = shallow(<DebateStepPageVoteAndShare {...props.onMobile} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when viewer not confirmed', () => {
+    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.viewerNotConfirmed} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when anonymous participation allowed', () => {
+    const wrapper = shallow(
+      <DebateStepPageVoteAndShare {...props.isAnonymousParticipationAllowed} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
