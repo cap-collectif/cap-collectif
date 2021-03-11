@@ -1,0 +1,13 @@
+RemoveDebateAnonymousVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debate:
+                type: 'InternalDebate'
+                description: 'The debate that had the anonymous vote.'
+            deletedDebateAnonymousVoteId:
+                type: 'ID'
+                description: 'The id of the vote that has just been removed.'
+            errorCode:
+                type: 'RemoveDebateAnonymousVoteErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

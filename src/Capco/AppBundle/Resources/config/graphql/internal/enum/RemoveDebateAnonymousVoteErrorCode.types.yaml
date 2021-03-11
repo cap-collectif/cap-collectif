@@ -1,0 +1,18 @@
+RemoveDebateAnonymousVoteErrorCode:
+    type: enum
+    config:
+        name: RemoveDebateAnonymousVoteErrorCode
+        description: 'Available errors for a `removeDebateAnonymousVote` mutation.'
+        values:
+            UNKNOWN_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation::UNKNOWN_DEBATE")'
+                description: 'No `Debate` match your id.'
+            CLOSED_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation::CLOSED_DEBATE")'
+                description: 'The debate is closed and removing a vote cannot be done.'
+            INVALID_HASH:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation::INVALID_HASH")'
+                description: 'The given hash is not valid.'
+            NOT_VOTED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation::NOT_VOTED")'
+                description: 'The user has not voted.'

@@ -333,19 +333,23 @@ export const DebateStepPageVoteForm = ({
         <>
           <MobilePublishArgumentModal
             title={intl.formatMessage({ id: title })}
-            show={showArgumentForm && isOpen}
+            show={showArgumentForm && voteState !== 'VOTED_ANONYMOUS' && isOpen}
             onClose={onClose}
             onSubmit={publishArgument}
           />
-          <Button
-            mt={3}
-            onClick={onOpen}
-            justifyContent="center"
-            variant="primary"
-            variantSize="big"
-            width="100%">
-            {intl.formatMessage({ id: 'publish-argument' })}
-          </Button>
+          <ConditionalWrapper
+            when={voteState === 'VOTED_ANONYMOUS'}
+            wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
+            <Button
+              mt={3}
+              onClick={onOpen}
+              justifyContent="center"
+              variant="primary"
+              variantSize="big"
+              width="100%">
+              {intl.formatMessage({ id: 'publish-argument' })}
+            </Button>
+          </ConditionalWrapper>
         </>
       )}
     </motion.div>

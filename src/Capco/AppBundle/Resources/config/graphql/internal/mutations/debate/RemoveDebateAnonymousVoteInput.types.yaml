@@ -1,0 +1,11 @@
+RemoveDebateAnonymousVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'Remove an anonymous vote on a debate.'
+        fields:
+            debateId:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` to remove the vote on.'
+            hash:
+                type: 'String!'
+                description: 'The cookie hash needed to remove the anonymous debate vote.'

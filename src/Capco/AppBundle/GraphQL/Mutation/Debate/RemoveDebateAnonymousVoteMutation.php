@@ -3,9 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Encoder\DebateAnonymousVoteHashEncoder;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
-use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
-use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
+use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousVoteHashConstraint;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
@@ -16,33 +18,37 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddDebateAnonymousVoteMutation implements MutationInterface
+class RemoveDebateAnonymousVoteMutation implements MutationInterface
 {
     public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
-    public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
+    public const INVALID_HASH = 'INVALID_HASH';
+    public const NOT_VOTED = 'NOT_VOTED';
 
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
     private ValidatorInterface $validator;
-    private TokenGeneratorInterface $tokenGenerator;
     private Indexer $indexer;
+    private DebateAnonymousVoteHashEncoder $encoder;
+    private DebateAnonymousVoteRepository $repository;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
+        DebateAnonymousVoteRepository $repository,
         ValidatorInterface $validator,
-        TokenGeneratorInterface $tokenGenerator,
+        DebateAnonymousVoteHashEncoder $encoder,
+        GlobalIdResolver $globalIdResolver,
         Indexer $indexer
     ) {
         $this->em = $em;
         $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
         $this->validator = $validator;
-        $this->tokenGenerator = $tokenGenerator;
         $this->indexer = $indexer;
+        $this->encoder = $encoder;
+        $this->repository = $repository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Arg $input): array
@@ -56,31 +62,30 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
             return $this->generateErrorPayload(self::UNKNOWN_DEBATE);
         }
 
-        if (!$debate->getStep()->isOpen()) {
+        if (!$debate->getStep() || !$debate->getStep()->isOpen()) {
             $this->logger->error('The debate is not open.', ['id' => $debateId]);
 
             return $this->generateErrorPayload(self::CLOSED_DEBATE);
         }
 
-        $captcha = $input->offsetGet('captcha');
-        $errors = $this->validator->validate($captcha, [new ReCaptchaConstraint()]);
+        $hash = $input->offsetGet('hash');
+        $errors = $this->validator->validate($hash, [new CheckDebateAnonymousVoteHashConstraint()]);
         if (\count($errors) > 0) {
-            return $this->generateErrorPayload(self::INVALID_CAPTCHA);
+            return $this->generateErrorPayload(self::INVALID_HASH);
+        }
+        $decoded = $this->encoder->decode($hash);
+        $vote = $this->repository->findOneBy([
+            'token' => $decoded->getToken(),
+            'type' => $decoded->getType(),
+        ]);
+        if (!$vote) {
+            return $this->generateErrorPayload(self::NOT_VOTED);
         }
 
-        $type = $input->offsetGet('type');
-        $debateAnonymousVote = (new DebateAnonymousVote())
-            ->setToken($this->tokenGenerator->generateToken())
-            ->setDebate($debate)
-            ->setType($type)
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
-            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
-
-        $this->em->persist($debateAnonymousVote);
-
         try {
+            $this->indexer->remove(DebateAnonymousVote::class, $vote->getId());
+            $this->em->remove($vote);
             $this->em->flush();
-            $this->indexer->index(DebateAnonymousVote::class, $debateAnonymousVote->getId());
             $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(
@@ -90,19 +95,27 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
             throw new UserError('Internal error, please try again.');
         }
 
-        return $this->generateSuccessFulPayload($debateAnonymousVote);
+        return $this->generateSuccessFulPayload($vote);
     }
 
     private function generateSuccessFulPayload(DebateAnonymousVote $vote): array
     {
         return [
-            'debateAnonymousVote' => $vote,
+            'debate' => $vote->getDebate(),
+            'deletedDebateAnonymousVoteId' => GlobalId::toGlobalId(
+                'DebateAnonymousVote',
+                $vote->getId()
+            ),
             'errorCode' => null,
         ];
     }
 
     private function generateErrorPayload(string $message): array
     {
-        return ['debateAnonymousVote' => null, 'errorCode' => $message];
+        return [
+            'debate' => null,
+            'deletedDebateAnonymousVoteId' => null,
+            'errorCode' => $message,
+        ];
     }
 }

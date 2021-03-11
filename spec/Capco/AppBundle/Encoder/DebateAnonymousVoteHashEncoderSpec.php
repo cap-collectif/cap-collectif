@@ -2,15 +2,15 @@
 
 namespace spec\Capco\AppBundle\Encoder;
 
-use Capco\AppBundle\Encoder\DebateAnonymousVoteTokenEncoder;
+use Capco\AppBundle\Encoder\DebateAnonymousVoteHashEncoder;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use PhpSpec\ObjectBehavior;
 
-class DebateAnonymousVoteTokenEncoderSpec extends ObjectBehavior
+class DebateAnonymousVoteHashEncoderSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType(DebateAnonymousVoteTokenEncoder::class);
+        $this->shouldHaveType(DebateAnonymousVoteHashEncoder::class);
     }
 
     public function it_should_correctly_encode_anonymous_vote(DebateAnonymousVote $vote)

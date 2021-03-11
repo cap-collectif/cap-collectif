@@ -205,16 +205,21 @@ exports[`<DebateStepPageVoteForm/> should renders correctly on mobile 1`] = `
     show={false}
     title="why-are-you-against"
   />
-  <Button
-    justifyContent="center"
-    mt={3}
-    onClick={[Function]}
-    variant="primary"
-    variantSize="big"
-    width="100%"
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
   >
-    publish-argument
-  </Button>
+    <Button
+      justifyContent="center"
+      mt={3}
+      onClick={[Function]}
+      variant="primary"
+      variantSize="big"
+      width="100%"
+    >
+      publish-argument
+    </Button>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;
 
@@ -515,16 +520,21 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
     show={false}
     title="why-are-you-against"
   />
-  <Button
-    justifyContent="center"
-    mt={3}
-    onClick={[Function]}
-    variant="primary"
-    variantSize="big"
-    width="100%"
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
   >
-    publish-argument
-  </Button>
+    <Button
+      justifyContent="center"
+      mt={3}
+      onClick={[Function]}
+      variant="primary"
+      variantSize="big"
+      width="100%"
+    >
+      publish-argument
+    </Button>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;
 
@@ -743,15 +753,20 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
     show={false}
     title="why-are-you-against"
   />
-  <Button
-    justifyContent="center"
-    mt={3}
-    onClick={[Function]}
-    variant="primary"
-    variantSize="big"
-    width="100%"
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
   >
-    publish-argument
-  </Button>
+    <Button
+      justifyContent="center"
+      mt={3}
+      onClick={[Function]}
+      variant="primary"
+      variantSize="big"
+      width="100%"
+    >
+      publish-argument
+    </Button>
+  </ConditionalWrapper>
 </ForwardRef(MotionComponent)>
 `;

@@ -6152,6 +6152,7 @@ type Mutation {
   updateProposalNews(input: UpdateProposalNewsInput!): UpdateProposalNewsPayload
   deleteProposalNews(input: DeleteProposalNewsInput!): DeleteProposalNewsPayload
   addDebateAnonymousVote(input: AddDebateAnonymousVoteInput!): AddDebateAnonymousVotePayload
+  removeDebateAnonymousVote(input: RemoveDebateAnonymousVoteInput!): RemoveDebateAnonymousVotePayload
 }
 
 """A connection to a list of items."""
@@ -10228,6 +10229,42 @@ input RemoveContactFormInput {
 type RemoveContactFormPayload {
   """Id of the deleted contact form."""
   deletedContactFormId: ID!
+  clientMutationId: String
+}
+
+"""Available errors for a `removeDebateAnonymousVote` mutation."""
+enum RemoveDebateAnonymousVoteErrorCode {
+  """No `Debate` match your id."""
+  UNKNOWN_DEBATE
+
+  """The debate is closed and removing a vote cannot be done."""
+  CLOSED_DEBATE
+
+  """The given hash is not valid."""
+  INVALID_HASH
+
+  """The user has not voted."""
+  NOT_VOTED
+}
+
+input RemoveDebateAnonymousVoteInput {
+  """The Node ID of the `Debate` to remove the vote on."""
+  debateId: ID!
+
+  """The cookie hash needed to remove the anonymous debate vote."""
+  hash: String!
+  clientMutationId: String
+}
+
+type RemoveDebateAnonymousVotePayload {
+  """The debate that had the anonymous vote."""
+  debate: Debate
+
+  """The id of the vote that has just been removed."""
+  deletedDebateAnonymousVoteId: ID
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: RemoveDebateAnonymousVoteErrorCode
   clientMutationId: String
 }
 

@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Capco\AppBundle\DTO;
-
 
 use Capco\AppBundle\Enum\ForOrAgainstType;
 
-class DebateAnonymousVoteEncoderData
+class DebateAnonymousVoteHashData
 {
     private string $type;
 
@@ -15,16 +13,16 @@ class DebateAnonymousVoteEncoderData
     private function __construct(string $type, string $token)
     {
         ForOrAgainstType::checkIsValid($type);
-        $this->type= $type;
+        $this->type = $type;
         $this->token = $token;
     }
 
     public static function fromHash(string $hash): self
     {
         $decoded = base64_decode($hash);
-        list($type, $token) = explode(':', $decoded);
+        $data = explode(':', $decoded);
 
-        return new self($type, $token);
+        return new self($data[0], $data[1] ?? '');
     }
 
     public function getToken(): string
@@ -36,5 +34,4 @@ class DebateAnonymousVoteEncoderData
     {
         return $this->type;
     }
-
 }

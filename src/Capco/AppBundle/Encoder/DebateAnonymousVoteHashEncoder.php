@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Encoder;
 
-use Capco\AppBundle\DTO\DebateAnonymousVoteEncoderData;
+use Capco\AppBundle\DTO\DebateAnonymousVoteHashData;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 
-class DebateAnonymousVoteTokenEncoder
+class DebateAnonymousVoteHashEncoder
 {
     public function encode(DebateAnonymousVote $vote): string
     {
         return base64_encode(sprintf('%s:%s', $vote->getType(), $vote->getToken()));
     }
 
-    public function decode(string $hash): DebateAnonymousVoteEncoderData
+    public function decode(string $hash): DebateAnonymousVoteHashData
     {
-        return DebateAnonymousVoteEncoderData::fromHash($hash);
+        return DebateAnonymousVoteHashData::fromHash($hash);
     }
 }

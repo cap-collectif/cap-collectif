@@ -1165,3 +1165,10 @@ InternalMutation:
                     inputType: AddDebateAnonymousVoteInput
                     payloadType: AddDebateAnonymousVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateAnonymousVoteMutation", [value])'
+            removeDebateAnonymousVote:
+                access: "hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RemoveDebateAnonymousVoteInput
+                    payloadType: RemoveDebateAnonymousVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation", [value])'
