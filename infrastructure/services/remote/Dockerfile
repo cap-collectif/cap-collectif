@@ -188,7 +188,7 @@ COPY infrastructure/services/remote/rabbitmq/run               /etc/service/rabb
 #COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
 COPY infrastructure/services/remote/supervisord/run            /etc/service/supervisord/run
 COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-fpm/run
-# COPY infrastructure/services/remote/redirectionio/run          /etc/service/redirectionio/run
+COPY infrastructure/services/remote/redirectionio/run          /etc/service/redirectionio/run
 
 # Configuration
 COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
@@ -230,9 +230,8 @@ RUN mkdir -p /var/www \
     && find /etc/service/ -name "run" -exec chmod +x {} \;
 #RedirectionIO
 WORKDIR /usr/local/bin/
-# Remove this comments when redirectionio is back online.
-# RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
-# RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
+RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
+RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 WORKDIR /var/www
 
 # NodeJS and Yarn
