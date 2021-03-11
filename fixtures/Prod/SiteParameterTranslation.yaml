@@ -107,3 +107,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
     value: Contact
     translatable: '@SiteParameterContactTitle'
     locale: 'fr-FR'
+  SiteParameterShieldTextFR:
+      translatable: '@SiteParameterShieldText'
+      locale: 'fr-FR'
+      value: ''

@@ -22,11 +22,11 @@ class UpdateShieldAdminFormMutation implements MutationInterface
     public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
     public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
 
-    private $siteImageRepository;
-    private $mediaRepository;
-    private $em;
-    private $toggleManager;
-    private $siteParameterRepository;
+    private SiteImageRepository $siteImageRepository;
+    private MediaRepository $mediaRepository;
+    private EntityManagerInterface $em;
+    private Manager $toggleManager;
+    private SiteParameterRepository $siteParameterRepository;
     private RedisCache $cache;
 
     public function __construct(
