@@ -6,5 +6,6 @@ then
     exec /usr/bin/redis-server /etc/redis/redis.conf --loglevel warning
 else
     echo "[$(date -u)][REDIS] Using external server !"
+    sleep 9999
     exit 0
 fi

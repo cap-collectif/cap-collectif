@@ -7,5 +7,6 @@ then
     exec su capco -c "/etc/elasticsearch/bin/elasticsearch -Elogger.level=WARN"
 else
     echo "[$(date -u)][ELASTICSEARCH] Using external server !"
+    sleep 99999
     exit 0
 fi

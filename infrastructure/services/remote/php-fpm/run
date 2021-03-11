@@ -30,22 +30,37 @@ do
     timeout=$(( $timeout + 1 ))
 done
 
-echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-while ! (rabbitmqctl status > /dev/null)
-do
-    sleep $timeout
-    timeout=$(( $timeout + 1 ))
-done
+timeout=1;
+if [[ -z "${SYMFONY_RABBITMQ_HOST}" || $SYMFONY_RABBITMQ_HOST == "127.0.0.1" ]]
+then
+    echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
+    while ! (rabbitmqctl status > /dev/null)
+    do
+        sleep $timeout
+        timeout=$(( $timeout + 1 ))
+    done
 
-# When we have fresh instance, capco vhost is not created
-if rabbitmqctl list_vhosts | grep -q ${SYMFONY_RABBITMQ_VHOST:-capco}; then
+    # When we have fresh instance, capco vhost is not created
+    if rabbitmqctl list_vhosts | grep -q ${SYMFONY_RABBITMQ_VHOST:-capco}; then
+        echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
+        gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco}  --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
+        echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
+    else
+        echo "[$(date -u)][PHP-FPM] Creating RabbitMQ vhost schema..."
+        gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco} --erase-vhost --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
+        echo "[$(date -u)][PHP-FPM] RabbitMQ vhost created!"
+    fi
+else
+    echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ External Server..."
+    while ! (nc -zv ${SYMFONY_RABBITMQ_HOST} ${SYMFONY_RABBITMQ_PORT:-5672} > /dev/null)
+    do
+        sleep $timeout
+        timeout=$(( $timeout + 1 ))
+    done
+
     echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
     gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco}  --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
     echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
-else
-    echo "[$(date -u)][PHP-FPM] Creating RabbitMQ vhost schema..."
-    gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco} --erase-vhost --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
-    echo "[$(date -u)][PHP-FPM] RabbitMQ vhost created!"
 fi
 
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."

@@ -21,5 +21,6 @@ then
     exec mysqld_safe --slow-query-log
 else
     echo "[$(date -u)][MYSQL] Using external server !"
+    sleep 99999
     exit 0
 fi

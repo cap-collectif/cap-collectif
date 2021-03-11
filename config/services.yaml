@@ -7,6 +7,7 @@ parameters:
     database_password: '%env(SYMFONY_DATABASE_PASSWORD)%'
     database_version: '%env(SYMFONY_DATABASE_VERSION)%'
     rabbitmq_host: '%env(SYMFONY_RABBITMQ_HOST)%'
+    rabbitmq_port: '%env(SYMFONY_RABBITMQ_PORT)%'
     rabbitmq_nodename: '%env(SYMFONY_RABBITMQ_NODENAME)%'
     rabbitmq_vhost: '%env(SYMFONY_RABBITMQ_VHOST)%'
     rabbitmq_login: '%env(SYMFONY_RABBITMQ_LOGIN)%'
@@ -115,6 +116,7 @@ parameters:
     env(SYMFONY_TWILIO_NUMBER): ***REMOVED***
     env(SYMFONY_DISABLE_MAIL_DELIVERY): false
     env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
+    env(SYMFONY_RABBITMQ_PORT): 5672
     env(SYMFONY_RABBITMQ_NODENAME): rabbit
     env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
     env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***

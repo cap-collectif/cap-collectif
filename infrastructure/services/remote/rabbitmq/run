@@ -10,5 +10,6 @@ then
     exec rabbitmq-server
 else
     echo "[$(date -u)][RABBITMQ] Using external server !"
+    sleep 99999
     exit 0
 fi
