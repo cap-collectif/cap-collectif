@@ -17,7 +17,7 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 class DebateArgumentVote extends AbstractVote
 {
     use AuthorInformationTrait;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="votes")
      * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
@@ -58,12 +58,8 @@ class DebateArgumentVote extends AbstractVote
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return [
-            'ElasticsearchVote',
-            'ElasticsearchVoteNestedAuthor',
-            'ElasticsearchVoteNestedStep',
-            'ElasticsearchVoteNestedArgument',
+        return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchVoteNestedDebateArgument',
-        ];
+        ]);
     }
 }

@@ -1041,7 +1041,8 @@ class Project implements IndexableInterface
             if (
                 $step instanceof ConsultationStep ||
                 $step instanceof SelectionStep ||
-                $step instanceof CollectStep
+                $step instanceof CollectStep ||
+                $step instanceof DebateStep
             ) {
                 if ($step->isVotable()) {
                     return true;
@@ -1059,7 +1060,8 @@ class Project implements IndexableInterface
             if (
                 $step instanceof ConsultationStep ||
                 $step instanceof QuestionnaireStep ||
-                $step instanceof CollectStep
+                $step instanceof CollectStep ||
+                $step instanceof DebateStep
             ) {
                 return true;
             }
@@ -1080,7 +1082,8 @@ class Project implements IndexableInterface
             if (
                 $step instanceof CollectStep ||
                 $step instanceof ConsultationStep ||
-                $step instanceof QuestionnaireStep
+                $step instanceof QuestionnaireStep ||
+                $step instanceof DebateStep
             ) {
                 return true;
             }
@@ -1257,7 +1260,7 @@ class Project implements IndexableInterface
             }
         }
 
-        return array_filter(array_unique($decisionMakers, SORT_REGULAR));
+        return array_filter(array_unique($decisionMakers, \SORT_REGULAR));
     }
 
     /**

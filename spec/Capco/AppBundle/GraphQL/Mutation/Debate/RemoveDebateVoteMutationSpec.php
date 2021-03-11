@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
@@ -24,14 +25,16 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $voteRepository,
-        DebateArgumentRepository $argumentRepository
+        DebateArgumentRepository $argumentRepository,
+        Indexer $indexer
     ) {
         $this->beConstructedWith(
             $em,
             $logger,
             $globalIdResolver,
             $voteRepository,
-            $argumentRepository
+            $argumentRepository,
+            $indexer
         );
     }
 
@@ -48,7 +51,8 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
         Debate $debate,
         User $viewer,
         DebateVoteRepository $voteRepository,
-        DebateArgumentRepository $argumentRepository
+        DebateArgumentRepository $argumentRepository,
+        Indexer $indexer
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
@@ -62,7 +66,9 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
         $argumentRepository->getOneByDebateAndUser($debate, $viewer)->willReturn(null);
 
         $em->remove($debateVote)->shouldBeCalled();
+        $indexer->remove(DebateVote::class, '456')->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(4);
@@ -81,7 +87,8 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
         User $viewer,
         DebateVoteRepository $voteRepository,
         DebateArgumentRepository $argumentRepository,
-        DebateArgument $debateArgument
+        DebateArgument $debateArgument,
+        Indexer $indexer
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
@@ -98,6 +105,9 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
         $em->remove($debateArgument)->shouldBeCalled();
         $em->remove($debateVote)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $indexer->remove(DebateArgument::class, '789')->shouldBeCalled();
+        $indexer->remove(DebateVote::class, '456')->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(4);

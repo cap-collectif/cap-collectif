@@ -96,7 +96,7 @@ describe('Internal|Debate.Votes connection', () => {
         {
           count: 5,
           id: toGlobalId('Debate', 'debateCannabis'),
-          cursor: toGlobalId('arrayconnection', '4'),
+          cursor: 'YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwNCI7fQ==',
         },
         'internal',
       ),

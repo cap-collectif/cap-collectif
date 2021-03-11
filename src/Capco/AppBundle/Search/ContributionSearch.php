@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
@@ -32,6 +33,7 @@ class ContributionSearch extends Search
         ContributionType::OPINION => Opinion::class,
         ContributionType::OPINIONVERSION => OpinionVersion::class,
         ContributionType::ARGUMENT => Argument::class,
+        ContributionType::DEBATEARGUMENT => DebateArgument::class,
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
@@ -164,6 +166,7 @@ class ContributionSearch extends Search
         $query = $this->createSortedQuery($order, $boolQuery, $seed);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
+        $query->setSource(['id', 'objectType']);
         $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         if (0 === $limit && null === $cursor) {
@@ -196,7 +199,7 @@ class ContributionSearch extends Search
         $this->applyContributionsFilters($boolQuery, null, true, $includeTrashed);
         $query = $this->createSortedQuery($order, $boolQuery, $seed);
         $this->applyCursor($query, $cursor);
-        $query->setSize($limit);
+        $query->setSource(['id', 'objectType'])->setSize($limit);
         $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         if (0 === $limit && null === $cursor) {
@@ -242,6 +245,7 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $query->setTrackTotalHits(true);
+        $query->setSource(['id', 'objectType']);
         $response = $this->index->search($query);
 
         if (0 === $limit && null === $cursor) {
@@ -401,6 +405,7 @@ class ContributionSearch extends Search
             Opinion::getElasticsearchTypeName(),
             OpinionVersion::getElasticsearchTypeName(),
             Argument::getElasticsearchTypeName(),
+            DebateArgument::getElasticsearchTypeName(),
             Source::getElasticsearchTypeName(),
             Proposal::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName(),
@@ -438,6 +443,7 @@ class ContributionSearch extends Search
                 Opinion::getElasticsearchTypeName(),
                 OpinionVersion::getElasticsearchTypeName(),
                 Argument::getElasticsearchTypeName(),
+                DebateArgument::getElasticsearchTypeName(),
                 Source::getElasticsearchTypeName(),
                 Proposal::getElasticsearchTypeName(),
                 Reply::getElasticsearchTypeName(),
@@ -450,6 +456,7 @@ class ContributionSearch extends Search
                 Opinion::getElasticsearchTypeName(),
                 OpinionVersion::getElasticsearchTypeName(),
                 Argument::getElasticsearchTypeName(),
+                DebateArgument::getElasticsearchTypeName(),
                 Source::getElasticsearchTypeName(),
                 Proposal::getElasticsearchTypeName(),
                 Reply::getElasticsearchTypeName(),

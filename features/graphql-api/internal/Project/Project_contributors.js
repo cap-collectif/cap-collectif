@@ -134,6 +134,19 @@ describe('Internal.projects.contributors', () => {
     expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyV2VsY29tYXR0aWM=');
   });
 
+  it('fetches contributors on debate project', async () => {
+    await expect(
+      graphql(
+        ProjectContributorsQuery,
+        {
+          projectId: toGlobalId('Project', 'projectCannabis'),
+          first: 5,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
   it('cannot fetch contributors that match email if user not admin', async () => {
     const response = await graphql(
       ProjectContributorsQuery,

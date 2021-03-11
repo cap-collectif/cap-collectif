@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Debate\DebateVote;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,19 +29,22 @@ class RemoveDebateVoteMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private DebateVoteRepository $voteRepository;
     private DebateArgumentRepository $argumentRepository;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $voteRepository,
-        DebateArgumentRepository $argumentRepository
+        DebateArgumentRepository $argumentRepository,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->voteRepository = $voteRepository;
         $this->argumentRepository = $argumentRepository;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -71,6 +77,7 @@ class RemoveDebateVoteMutation implements MutationInterface
 
         $previousVoteId = $previousVote->getId();
         $this->em->remove($previousVote);
+        $this->indexer->remove(DebateVote::class, $previousVoteId);
 
         $previousArgumentId = null;
         $previousArgument = $this->argumentRepository->getOneByDebateAndUser($debate, $viewer);
@@ -79,10 +86,12 @@ class RemoveDebateVoteMutation implements MutationInterface
         if ($previousArgument) {
             $previousArgumentId = $previousArgument->getId();
             $this->em->remove($previousArgument);
+            $this->indexer->remove(DebateArgument::class, $previousArgumentId);
         }
 
         try {
             $this->em->flush();
+            $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()

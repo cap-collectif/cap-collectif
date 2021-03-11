@@ -6,13 +6,22 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
             groups: [ElasticsearchDebateArgument]
         debate:
             groups: [ElasticsearchDebateArgument]
-        voteType:
+        getStep:
+            serialized_name: step
+            groups: [ElasticsearchDebateArgumentNestedStep]
+        getProject:
+            serialized_name: project
+            groups: [ElasticsearchDebateArgumentNestedProject]
+        type:
+            serialized_name: voteType
             groups: [ElasticsearchDebateArgument]
         published:
             groups: [ElasticsearchDebateArgument]
         publishedAt:
             groups: [ElasticsearchDebateArgument]
         trashed:
+            groups: [ElasticsearchDebateArgument]
+        trashedAt:
             groups: [ElasticsearchDebateArgument]
         elasticsearchTypeName:
             serialized_name: objectType

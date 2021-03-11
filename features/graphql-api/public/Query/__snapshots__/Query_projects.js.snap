@@ -28,17 +28,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 9,
           },
           "contributionsCount": 0,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 15,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
           "title": "Débat sur le cannabis",
           "votes": Object {
-            "totalCount": 0,
+            "totalCount": 13,
           },
         },
       },
@@ -254,17 +254,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 9,
           },
           "contributionsCount": 0,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 15,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
           "title": "Débat sur le cannabis",
           "votes": Object {
-            "totalCount": 0,
+            "totalCount": 13,
           },
         },
       },

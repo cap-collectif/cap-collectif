@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -25,17 +26,20 @@ class AbstractDebateArgumentMutation
     protected GlobalIdResolver $globalIdResolver;
     protected DebateArgumentRepository $repository;
     protected AuthorizationCheckerInterface $authorizationChecker;
+    protected Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         DebateArgumentRepository $repository,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->repository = $repository;
         $this->authorizationChecker = $authorizationChecker;
+        $this->indexer = $indexer;
     }
 
     protected function getDebateFromInput(Arg $input, User $viewer): Debate

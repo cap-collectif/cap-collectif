@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Enum;
 
+use GraphQL\Error\UserError;
+
 class ForOrAgainstType
 {
     public const AGAINST = 'AGAINST';
@@ -22,7 +24,7 @@ class ForOrAgainstType
     public static function checkIsValid(string $value): void
     {
         if (!self::isValid($value)) {
-            throw new \Exception("either FOR or AGAINST, not ${value}");
+            throw new UserError("either FOR or AGAINST, not ${value}");
         }
     }
 }

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.project counters fetches participations counters by project 1`] = `
+Object {
+  "project": Object {
+    "contributions": Object {
+      "totalCount": 9,
+    },
+    "contributors": Object {
+      "totalCount": 15,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+    "votes": Object {
+      "totalCount": 13,
+    },
+  },
+}
+`;

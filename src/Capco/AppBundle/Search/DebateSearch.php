@@ -34,10 +34,10 @@ class DebateSearch extends Search
         $query = new Query($boolQuery);
         $query = $this->sortQuery($query, $orderBy);
         if ($limit) {
-            $query->setSize($limit + 1);
+            $query->setSize($limit);
         }
         $this->applyCursor($query, $cursor);
-
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -120,7 +120,8 @@ class DebateSearch extends Search
         return $boolQuery;
     }
 
-    private static function createUserArgumentsFilteredQuery(User $author): BoolQuery {
+    private static function createUserArgumentsFilteredQuery(User $author): BoolQuery
+    {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(new Term(['objectType' => 'debateArgument']));
         $boolQuery->addFilter(new Term(['author.id' => $author->getId()]));

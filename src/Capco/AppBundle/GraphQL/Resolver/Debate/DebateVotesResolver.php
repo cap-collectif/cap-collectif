@@ -2,21 +2,26 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Enum\ForOrAgainstType;
+use Capco\AppBundle\Search\VoteSearch;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\Repository\DebateVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Psr\Log\LoggerInterface;
 
 class DebateVotesResolver implements ResolverInterface
 {
-    private DebateVoteRepository $repository;
+    private VoteSearch $voteSearch;
+    private LoggerInterface $logger;
 
-    public function __construct(DebateVoteRepository $repository)
+    public function __construct(VoteSearch $voteSearch, LoggerInterface $logger)
     {
-        $this->repository = $repository;
+        $this->voteSearch = $voteSearch;
+        $this->logger = $logger;
     }
 
     public function __invoke(
@@ -24,41 +29,47 @@ class DebateVotesResolver implements ResolverInterface
         Argument $args,
         ?User $viewer = null
     ): ConnectionInterface {
-        $filters = self::getFilters($args, $viewer);
+        $filters = $this->getFilters($args, $viewer);
         $orderBy = $args->offsetGet('orderBy');
-
-        $paginator = new Paginator(function (int $offset, int $limit) use (
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $debate,
             $filters,
             $orderBy
         ) {
-            if (0 === $offset && 0 === $limit) {
-                return [];
-            }
-
-            return $this->repository
-                ->getByDebate($debate, $limit, $offset, $orderBy, $filters)
-                ->getIterator()
-                ->getArrayCopy();
+            return $this->voteSearch->searchDebateVote(
+                $debate,
+                $filters,
+                $limit,
+                $orderBy,
+                $cursor
+            );
         });
-        $totalCount = $this->repository->countByDebate($debate, $filters);
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args);
     }
 
-    public static function getFilters(Argument $args, ?User $viewer = null): array
+    private function getFilters(Argument $args, ?User $viewer = null): array
     {
         $filters = [];
-        $filters['type'] = $args->offsetGet('type');
-        $filters['isPublished'] = null;
+        if (null !== $args->offsetGet('type')) {
+            try {
+                $type = $args->offsetGet('type');
+                ForOrAgainstType::checkIsValid($type);
+                $filters['voteType'] = $type;
+            } catch (UserError $exception) {
+                $this->logger->error(__METHOD__ . $exception->getMessage());
+
+                throw $exception;
+            }
+        }
 
         if ($args->offsetExists('isPublished')) {
-            $filters['isPublished'] = $args->offsetGet('isPublished');
+            $filters['published'] = $args->offsetGet('isPublished');
         }
 
         // An anonymous user or non-admin can only access published data.
         if (null === $viewer || !$viewer->isAdmin()) {
-            $filters['isPublished'] = true;
+            $filters['published'] = true;
         }
 
         return $filters;

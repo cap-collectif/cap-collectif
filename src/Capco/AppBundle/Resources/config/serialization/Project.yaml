@@ -9,6 +9,7 @@ Capco\AppBundle\Entity\Project:
                     ElasticsearchVoteNestedProject,
                     ElasticsearchCommentNestedProject,
                     ElasticsearchArgumentNestedProject,
+                    ElasticsearchDebateArgumentNestedProject,
                     ElasticsearchSourceNestedProject,
                     ElasticsearchOpinionNestedProject,
                     ElasticsearchVersionNestedProject,
@@ -23,6 +24,7 @@ Capco\AppBundle\Entity\Project:
                 [
                     ElasticsearchProjectNestedAuthor,
                     ElasticsearchArgumentNestedProject,
+                    ElasticsearchDebateArgumentNestedProject,
                     ElasticsearchSourceNestedProject,
                     ElasticsearchOpinionNestedProject,
                     ElasticsearchVersionNestedProject,
@@ -38,6 +40,7 @@ Capco\AppBundle\Entity\Project:
                     ElasticsearchVoteNestedProject,
                     ElasticsearchCommentNestedProject,
                     ElasticsearchArgumentNestedProject,
+                    ElasticsearchDebateArgumentNestedProject,
                     ElasticsearchSourceNestedProject,
                     ElasticsearchOpinionNestedProject,
                     ElasticsearchVersionNestedProject,

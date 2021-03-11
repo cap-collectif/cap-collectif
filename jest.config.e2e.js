@@ -7,4 +7,5 @@ module.exports = {
     '.*': 'babel-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/jest-setup.e2e.js'],
+  globalSetup: '<rootDir>/jest-setup-global.e2e.js',
 };

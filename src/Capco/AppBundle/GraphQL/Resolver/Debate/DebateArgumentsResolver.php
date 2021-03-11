@@ -28,29 +28,21 @@ class DebateArgumentsResolver implements ResolverInterface
         $filters = self::getFilters($args, $viewer);
         $orderBy = self::getOrderBy($args);
 
-        $totalCount = 0;
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $debate,
             $filters,
-            $orderBy,
-            &$totalCount
+            $orderBy
         ) {
-            $response = $this->debateSearch->searchDebateArguments(
+            return $this->debateSearch->searchDebateArguments(
                 $debate,
                 $limit,
                 $orderBy,
                 $filters,
                 $cursor
             );
-            $totalCount = $response->getTotalCount();
-
-            return $response;
         });
 
-        $connection = $paginator->auto($args);
-        $connection->setTotalCount($totalCount);
-
-        return $connection;
+        return $paginator->auto($args);
     }
 
     public static function getFilters(Argument $args, ?User $viewer, ?string $value = null): array
@@ -85,7 +77,7 @@ class DebateArgumentsResolver implements ResolverInterface
         if (null === $orderBy) {
             $orderBy = [
                 'field' => 'PUBLISHED_AT',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ];
         }
 

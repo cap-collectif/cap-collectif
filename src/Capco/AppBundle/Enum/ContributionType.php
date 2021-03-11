@@ -8,6 +8,7 @@ final class ContributionType implements EnumType
     public const OPINIONVERSION = 'OPINIONVERSION';
     public const COMMENT = 'COMMENT';
     public const ARGUMENT = 'ARGUMENT';
+    public const DEBATEARGUMENT = 'DEBATEARGUMENT';
     public const SOURCE = 'SOURCE';
     public const PROPOSAL = 'PROPOSAL';
     public const REPLY = 'REPLY';
@@ -25,10 +26,11 @@ final class ContributionType implements EnumType
             self::OPINIONVERSION,
             self::COMMENT,
             self::ARGUMENT,
+            self::DEBATEARGUMENT,
             self::SOURCE,
             self::PROPOSAL,
             self::REPLY,
-            self::VOTE
+            self::VOTE,
         ];
     }
 

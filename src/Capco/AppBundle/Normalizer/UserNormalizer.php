@@ -33,6 +33,7 @@ class UserNormalizer implements
         'ElasticsearchEventNestedAuthor',
         'ElasticsearchReplyNestedProject',
         'ElasticsearchArgumentNestedProject',
+        'ElasticsearchDebateArgumentNestedProject',
         'ElasticsearchSourceNestedProject',
         'ElasticsearchOpinionNestedProject',
         'ElasticsearchVersionNestedProject',

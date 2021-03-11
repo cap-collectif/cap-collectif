@@ -146,6 +146,84 @@ Object {
 }
 `;
 
+exports[`Internal.projects.contributors fetches contributors on debate project 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "contributions": Object {
+              "totalCount": 6,
+            },
+            "id": "VXNlcjp1c2VySWFu",
+            "userType": null,
+            "vip": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "contributions": Object {
+              "totalCount": 1,
+            },
+            "id": "VXNlcjp1c2VyVmluY2VudA==",
+            "userType": null,
+            "vip": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "contributions": Object {
+              "totalCount": 0,
+            },
+            "id": "VXNlcjp1c2VyTWlja2FlbA==",
+            "userType": null,
+            "vip": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "contributions": Object {
+              "totalCount": 1,
+            },
+            "id": "VXNlcjp1c2VyQWd1aQ==",
+            "userType": null,
+            "vip": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "contributions": Object {
+              "totalCount": 3,
+            },
+            "id": "VXNlcjp1c2VySnBlYw==",
+            "userType": null,
+            "vip": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+      ],
+      "totalCount": 15,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+  },
+}
+`;
+
 exports[`Internal.projects.contributors fetches contributors sorted by their activities asc 1`] = `
 Object {
   "project": Object {

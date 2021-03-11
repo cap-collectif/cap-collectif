@@ -1,7 +1,13 @@
 Capco\AppBundle\Entity\Debate\Debate:
     attributes:
         id:
-            groups: [ElasticsearchNestedDebate, ElasticsearchDebate, ElasticsearchDebateArgument]
+            groups:
+                [
+                    ElasticsearchNestedDebate,
+                    ElasticsearchDebate,
+                    ElasticsearchDebateArgument,
+                    ElasticsearchVoteNestedDebate,
+                ]
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchDebate]

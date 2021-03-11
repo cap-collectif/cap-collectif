@@ -132,14 +132,6 @@ class DebateArgument implements
         return null;
     }
 
-    /**
-     * For ES.
-     */
-    public function getVoteType(): string
-    {
-        return $this->getType();
-    }
-
     public function isIndexable(): bool
     {
         return true;
@@ -157,6 +149,11 @@ class DebateArgument implements
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchDebateArgument', 'ElasticsearchDebateArgumentNestedAuthor'];
+        return [
+            'ElasticsearchDebateArgument',
+            'ElasticsearchDebateArgumentNestedAuthor',
+            'ElasticsearchDebateArgumentNestedProject',
+            'ElasticsearchDebateArgumentNestedStep',
+        ];
     }
 }

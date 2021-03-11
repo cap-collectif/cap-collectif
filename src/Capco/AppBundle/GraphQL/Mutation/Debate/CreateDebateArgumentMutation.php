@@ -22,7 +22,9 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             $debateArgument->setType($input->offsetGet('type'));
 
             $this->em->persist($debateArgument);
-            $this->em->flush($debateArgument);
+            $this->indexer->index(DebateArgument::class, $debateArgument->getId());
+            $this->em->flush();
+            $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }

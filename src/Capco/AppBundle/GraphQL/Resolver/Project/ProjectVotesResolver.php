@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Search\VoteSearch;
@@ -65,7 +66,11 @@ class ProjectVotesResolver implements ResolverInterface
         $count = 0;
         if ($step instanceof ConsultationStep) {
             $count = $this->voteSearch->searchConsultationStepVotes($step, 0)->getTotalCount();
-        } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
+        } elseif (
+            $step instanceof SelectionStep ||
+            $step instanceof CollectStep ||
+            $step instanceof DebateStep
+        ) {
             $promise = $this->stepVotesCountResolver
                 ->__invoke($step)
                 ->then(function ($value) use (&$count) {

@@ -200,6 +200,7 @@ abstract class AbstractVote implements
             'ElasticsearchVoteNestedStep',
             'ElasticsearchVoteNestedArgument',
             'ElasticsearchVoteNestedDebateArgument',
+            'ElasticsearchVoteNestedDebate',
         ];
     }
 }

@@ -92,6 +92,7 @@ class ProjectNormalizer implements
             \in_array('ElasticsearchVoteNestedProject', $groups, true) ||
             \in_array('ElasticsearchCommentNestedProject', $groups, true) ||
             \in_array('ElasticsearchArgumentNestedProject', $groups, true) ||
+            \in_array('ElasticsearchDebateArgumentNestedProject', $groups, true) ||
             \in_array('ElasticsearchSourceNestedProject', $groups, true) ||
             \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
             \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||

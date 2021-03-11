@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Untrash try to untrash argument not trashed 1`] = `
+Object {
+  "untrash": Object {
+    "errorCode": "NOT_TRASHED",
+    "trashable": null,
+  },
+}
+`;
+
+exports[`Internal|Untrash try to untrash non trashable entity 1`] = `
+Object {
+  "untrash": Object {
+    "errorCode": "TRASHABLE_NOT_FOUND",
+    "trashable": null,
+  },
+}
+`;
+
+exports[`Internal|Untrash untrash argument 1`] = `
+Object {
+  "untrash": Object {
+    "errorCode": "NOT_TRASHED",
+    "trashable": null,
+  },
+}
+`;

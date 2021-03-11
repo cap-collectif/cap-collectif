@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Doctrine\DBAL\Driver\DriverException;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Doctrine\DBAL\Driver\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -24,17 +25,20 @@ class AddDebateVoteMutation implements MutationInterface
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
     private DebateVoteRepository $repository;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        DebateVoteRepository $repository
+        DebateVoteRepository $repository,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->repository = $repository;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -64,11 +68,14 @@ class AddDebateVoteMutation implements MutationInterface
             $previousVoteId = $previousVote->getId();
             $this->em->remove($previousVote);
             $this->em->flush();
+            $this->indexer->remove(DebateVote::class, $previousVoteId);
         }
         $this->em->persist($debateVote);
 
         try {
             $this->em->flush();
+            $this->indexer->index(DebateVote::class, $debateVote->getId());
+            $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()

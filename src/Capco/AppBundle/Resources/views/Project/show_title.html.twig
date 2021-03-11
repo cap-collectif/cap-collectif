@@ -55,8 +55,8 @@
         {% set contributionsCount = projectContributionResolver.__invoke(project).totalCount %}
         {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
         {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
-        {% set tradKeyContributionsCount =  'project.preview.counters.contributions' %}
-        
+        {% set tradKeyContributionsCount = 'project.preview.counters.contributions' %}
+
         {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}
         {% set counters = projectContributionResolver.getTotalContributionsCountsByTypes(
             project.id,
@@ -65,12 +65,13 @@
                 'opinionVersion',
                 'source',
                 'reply',
-                'argument'
+                'argument',
+                'debateArgument'
             ])
         %}
         {% set opinionsCount = counters['opinion'] + totalProposalsCount %}
         {% set versionsCount = counters['opinionVersion'] %}
-        {% set argumentsCount = counters['argument'] %}
+        {% set argumentsCount = counters['argument'] + counters['debateArgument'] %}
         {% set sourcesCount = counters['source'] %}
         {% set repliesCount = counters['reply'] %}
         

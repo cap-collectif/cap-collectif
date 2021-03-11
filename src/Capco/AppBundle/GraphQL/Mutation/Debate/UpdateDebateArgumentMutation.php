@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -17,7 +18,9 @@ class UpdateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             $this->checkUpdateRightsOnArgument($debateArgument);
             $debateArgument->setBody(strip_tags($input->offsetGet('body')));
 
-            $this->em->flush($debateArgument);
+            $this->em->flush();
+            $this->indexer->index(DebateArgument::class, $debateArgument->getId());
+            $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }

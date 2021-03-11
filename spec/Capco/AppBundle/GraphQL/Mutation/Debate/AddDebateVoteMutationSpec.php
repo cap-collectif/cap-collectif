@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -22,9 +23,10 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        DebateVoteRepository $repository
+        DebateVoteRepository $repository,
+        Indexer $indexer
     ) {
-        $this->beConstructedWith($em, $logger, $globalIdResolver, $repository);
+        $this->beConstructedWith($em, $logger, $globalIdResolver, $repository, $indexer);
     }
 
     public function it_is_initializable()
@@ -36,6 +38,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $repository,
+        Indexer $indexer,
         Arg $input,
         Debate $debate,
         User $viewer
@@ -70,6 +73,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         Debate $debate,
         DebateVoteRepository $repository,
         DebateVote $debateVote,
+        Indexer $indexer,
         User $viewer
     ) {
         $debateId = '123';

@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\Debate\DebateVote:
+    attributes:
+        type:
+            serialized_name: voteType
+            groups: [ElasticsearchVote]
+        debate:
+            groups: [ElasticsearchVoteNestedDebate]

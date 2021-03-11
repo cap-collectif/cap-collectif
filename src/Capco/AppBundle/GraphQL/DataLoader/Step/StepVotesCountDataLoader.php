@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Search\VoteSearch;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -18,6 +20,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
 {
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private VoteSearch $voteSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -25,6 +28,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        VoteSearch $voteSearch,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -34,6 +38,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->voteSearch = $voteSearch;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -78,6 +83,10 @@ class StepVotesCountDataLoader extends BatchDataLoader
                 $step,
                 $onlyAccounted
             );
+        }
+
+        if ($step instanceof DebateStep) {
+            return $this->voteSearch->countProjectVotes($step->getProject(), [], 0);
         }
 
         throw new \RuntimeException('Access denied');

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -19,7 +20,9 @@ class DeleteDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             $debateArgument = $this->getArgument($input, $viewer);
             $this->checkDeleteRightsOnArgument($debateArgument);
             $this->em->remove($debateArgument);
+            $this->indexer->remove(DebateArgument::class, $debateArgument->getId());
             $this->em->flush();
+            $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }

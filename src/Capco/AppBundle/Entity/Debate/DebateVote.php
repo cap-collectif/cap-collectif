@@ -45,14 +45,8 @@ class DebateVote extends AbstractVote
             ->getProject();
     }
 
-    // TODO not enable for now.
     public function isIndexable(): bool
     {
-        return false;
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return [];
+        return true;
     }
 }

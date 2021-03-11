@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
@@ -202,7 +203,14 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        return $this->searchEntityVotes($argument->getId(), 'argument.id', $limit, null, $cursor);
+        return $this->searchEntityVotes(
+            $argument->getId(),
+            'argument.id',
+            $limit,
+            [],
+            null,
+            $cursor
+        );
     }
 
     public function searchDebateArgumentVotes(
@@ -215,9 +223,44 @@ class VoteSearch extends Search
             $debateArgument->getId(),
             'debateArgument.id',
             $limit,
+            [],
             $orderBy,
             $cursor
         );
+    }
+
+    public function searchDebateVote(
+        Debate $debate,
+        array $filters,
+        int $limit,
+        ?array $orderBy = null,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        return $this->searchEntityVotes(
+            $debate->getId(),
+            'debate.id',
+            $limit,
+            $filters,
+            $orderBy,
+            $cursor
+        );
+    }
+
+    public function countProjectVotes(
+        Project $project,
+        array $filters,
+        int $limit,
+        ?array $orderBy = null,
+        ?string $cursor = null
+    ): int {
+        return $this->searchEntityVotes(
+            $project->getId(),
+            'project.id',
+            $limit,
+            $filters,
+            $orderBy,
+            $cursor
+        )->getTotalCount();
     }
 
     public function searchCommentVotes(
@@ -225,7 +268,7 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        return $this->searchEntityVotes($comment->getId(), 'comment.id', $limit, null, $cursor);
+        return $this->searchEntityVotes($comment->getId(), 'comment.id', $limit, [], null, $cursor);
     }
 
     public function searchSourceVotes(
@@ -233,7 +276,7 @@ class VoteSearch extends Search
         int $limit,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        return $this->searchEntityVotes($source->getId(), 'source.id', $limit, null, $cursor);
+        return $this->searchEntityVotes($source->getId(), 'source.id', $limit, [], null, $cursor);
     }
 
     public function searchConsultationVotes(
@@ -293,13 +336,23 @@ class VoteSearch extends Search
         string $entityId,
         string $entityIdTerm,
         int $limit,
+        array $filters = [],
         ?array $sort = null,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(new Term([$entityIdTerm => $entityId]));
-        $boolQuery->addFilter(new Term(['published' => true]));
         $boolQuery->addFilter(new Term(['isAccounted' => true]));
+
+        if (!empty($filters)) {
+            foreach ($filters as $key => $value) {
+                if (null !== $key && null !== $value) {
+                    $boolQuery->addFilter(new Term([$key => $value]));
+                }
+            }
+        } else {
+            $boolQuery->addFilter(new Term(['published' => true]));
+        }
 
         $query = new Query($boolQuery);
         if ($sort) {
@@ -307,18 +360,17 @@ class VoteSearch extends Search
                 $this->getSortField($sort['field']) => ['order' => $sort['direction']],
             ]);
         }
-        if ($limit) {
-            $query->setSize($limit + 1);
-        }
+
+        $query->setTrackTotalHits(true);
         $this->applyCursor($query, $cursor);
-
-        $searchQuery = $this->index->createSearch($query);
         $this->addObjectTypeFilter($query, $this->type);
-        $searchQuery->setQuery($query);
-
-        $this->addObjectTypeFilter($query, $this->type);
+        $query->setSource(['id']);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
+
+        if (0 === $limit && null === $cursor) {
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
+        }
 
         return $this->getData($cursors, $response);
     }

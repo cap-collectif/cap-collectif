@@ -404,7 +404,7 @@ class UserSearch extends Search
         ]);
 
         $this->applyCursor($query, $cursor);
-        $query->setSource(['id'])->setSize($limit);
+        $query->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
