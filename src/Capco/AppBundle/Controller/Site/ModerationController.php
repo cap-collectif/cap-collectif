@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Psr\Log\LoggerInterface;
@@ -23,8 +24,11 @@ class ModerationController extends Controller
     private TranslatorInterface $translator;
     private Publisher $publisher;
 
-    public function __construct(LoggerInterface $logger, TranslatorInterface $translator, Publisher $publisher)
-    {
+    public function __construct(
+        LoggerInterface $logger,
+        TranslatorInterface $translator,
+        Publisher $publisher
+    ) {
         $this->logger = $logger;
         $this->translator = $translator;
         $this->publisher = $publisher;
@@ -71,14 +75,10 @@ class ModerationController extends Controller
 
         $this->get('doctrine.orm.default_entity_manager')->flush();
 
-        $trashedMessage = '';
         if ($contribution instanceof Opinion) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::OPINION_TRASH,
                 new Message(json_encode(['opinionId' => $contribution->getId()]))
-            );
-            $trashedMessage = $this->translator->trans(
-                'the-proposal-has-been-successfully-moved-to-the-trash'
             );
         }
 
@@ -87,21 +87,24 @@ class ModerationController extends Controller
                 CapcoAppBundleMessagesTypes::ARGUMENT_TRASH,
                 new Message(json_encode(['argumentId' => $contribution->getId()]))
             );
-            $trashedMessage = $this->translator->trans(
-                'the-argument-has-been-successfully-moved-to-the-trash'
-            );
-        }
-
-        if ($contribution instanceof OpinionVersion) {
-            $trashedMessage = $this->translator->trans(
-                'the-proposal-has-been-successfully-moved-to-the-trash'
-            );
         }
 
         // We create a session for flashBag
         $flashBag = $this->get('session')->getFlashBag();
-        $flashBag->add('success', $trashedMessage);
+        $flashBag->add('success', $this->getTrashMessage($contribution));
 
         return $this->redirect($redirectUrl);
+    }
+
+    private function getTrashMessage($contribution): string
+    {
+        $trashMessageKey = '';
+        if ($contribution instanceof Opinion || $contribution instanceof OpinionVersion) {
+            $trashMessageKey = 'the-proposal-has-been-successfully-moved-to-the-trash';
+        } elseif ($contribution instanceof Argument || $contribution instanceof DebateArgument) {
+            $trashMessageKey = 'the-argument-has-been-successfully-moved-to-the-trash';
+        }
+
+        return $this->translator->trans($trashMessageKey);
     }
 }

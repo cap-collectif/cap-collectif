@@ -410,44 +410,26 @@ class GlobalIdResolver
 
     public function resolveByModerationToken(string $token): ModerableInterface
     {
-        $node = $this->container->get(OpinionRepository::class)->findOneByModerationToken($token);
+        $moderableRepositories = [
+            OpinionRepository::class,
+            OpinionVersionRepository::class,
+            ArgumentRepository::class,
+            CommentRepository::class,
+            ProposalRepository::class,
+            SourceRepository::class,
+            DebateArgumentRepository::class,
+        ];
 
-        if (!$node) {
-            $node = $this->container
-                ->get(OpinionVersionRepository::class)
-                ->findOneByModerationToken($token);
+        foreach ($moderableRepositories as $repository) {
+            $node = $this->container->get($repository)->findOneByModerationToken($token);
+            if ($node) {
+                return $node;
+            }
         }
 
-        if (!$node) {
-            $node = $this->container
-                ->get(ArgumentRepository::class)
-                ->findOneByModerationToken($token);
-        }
+        $this->logger->warning(__METHOD__ . ' : Unknown moderation_token: ' . $token);
 
-        if (!$node) {
-            $node = $this->container
-                ->get(CommentRepository::class)
-                ->findOneByModerationToken($token);
-        }
-
-        if (!$node) {
-            $node = $this->container
-                ->get(ProposalRepository::class)
-                ->findOneByModerationToken($token);
-        }
-        if (!$node) {
-            $node = $this->container
-                ->get(SourceRepository::class)
-                ->findOneByModerationToken($token);
-        }
-
-        if (!$node) {
-            $this->logger->warning(__METHOD__ . ' : Unknown moderation_token: ' . $token);
-
-            throw new NotFoundHttpException();
-        }
-
-        return $node;
+        throw new NotFoundHttpException();
     }
 
     private function viewerCanSee($node, ?User $user, bool $skipVerification): bool
