@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\FranceConnect;
 
-use Capco\AppBundle\Helper\EnvHelper;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,21 +20,10 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
     {
         // https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#glossary
-        $extraParameters = array_merge(
-            [
-                'nonce' => $this->generateNonce(),
-            ],
-            $extraParameters
-        );
-
-        if ('dev' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
-            $extraParameters = array_merge(
-                [
-                    'acr_values' => 'eidas1',
-                ],
-                $extraParameters
-            );
-        }
+        $extraParameters = array_merge($extraParameters, [
+            'nonce' => $this->generateNonce(),
+            'acr_values' => 'eidas1',
+        ]);
 
         return parent::getAuthorizationUrl($redirectUri, $extraParameters);
     }
@@ -54,7 +42,8 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 
         $resolver
             ->setDefaults([
-                'scope' => 'openid email identite_pivot',
+                'scope' =>
+                    'openid given_name family_name gender preferred_username birthdate birthcountry birthplace email address phone profile identite_pivot birth',
             ])
             ->setRequired('logout_url');
     }

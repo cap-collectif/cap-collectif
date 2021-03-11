@@ -113,7 +113,11 @@ export const onSubmit = (
         throw new SubmissionError({ _error: 'global.error.server.form' });
       });
   }
-  if (input.email && input.passwordConfirm) {
+  if (
+    input.email &&
+    ((input.passwordConfirm && props.viewer.hasPassword) ||
+      (props.viewer.isFranceConnectAccount && !props.viewer.hasPassword))
+  ) {
     return UpdateProfileAccountEmailMutation.commit({ input })
       .then(response => {
         if (!response.updateProfileAccountEmail || !response.updateProfileAccountEmail.viewer) {
@@ -174,6 +178,11 @@ const AccountContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .account-form-hint {
     padding-left: 15px;
     padding-bottom: 10px;
+
+    span:nth-child(2) {
+      margin-left: 4px;
+    }
+
     font-size: 14px;
     color: ${colors.gray};
   }
@@ -335,6 +344,14 @@ export const AccountForm = ({
     );
   };
 
+  const emailDisabled = () => {
+    if (viewer.isFranceConnectAccount) {
+      return false;
+    }
+
+    return !viewer.hasPassword;
+  };
+
   const footer = (
     <div className="pl-15">
       <FooterContainer>
@@ -342,7 +359,7 @@ export const AccountForm = ({
           <Button
             id="edit-account-profile-button"
             onClick={() => {
-              if (initialValues.email === newEmail) {
+              if (initialValues.email === newEmail || emailDisabled() === false) {
                 dispatch(submit(formName));
               } else {
                 setConfirmPasswordModal(true);
@@ -373,6 +390,22 @@ export const AccountForm = ({
     </div>
   );
 
+  const signMethod = () => {
+    if (features.login_franceconnect && !features.login_facebook && !features.login_gplus) {
+      return 'Sign-in-method-fc';
+    }
+    if (!features.login_franceconnect && features.login_facebook && features.login_gplus) {
+      return 'Sign-in-method-fb-gp';
+    }
+    if (!features.login_franceconnect && !features.login_facebook && features.login_gplus) {
+      return 'Sign-in-method-gp';
+    }
+    if (!features.login_franceconnect && features.login_facebook && !features.login_gplus) {
+      return 'Sign-in-method-fb';
+    }
+    return 'Sign-in-method';
+  };
+
   return (
     <>
       {!loginWithOpenId && (
@@ -386,12 +419,14 @@ export const AccountForm = ({
                 type="email"
                 component={renderComponent}
                 name="email"
-                disabled={!viewer.hasPassword || viewer.isFranceConnectAccount}
+                disabled={emailDisabled()}
                 id="account__email"
                 divClassName="col-sm-6"
               />
               <span className="account-form-hint">
-                {viewer.isFranceConnectAccount && <FormattedMessage id="data-from-FranceConnect" />}
+                {viewer.isFranceConnectAccount ? (
+                  <FormattedMessage id="data-from-FranceConnect" />
+                ) : null}
                 <FormattedMessage id="account.your_email_is_not_public" />
               </span>
               {_renderLanguageSection()}
@@ -432,116 +467,118 @@ export const AccountForm = ({
               </div>
             </AccountContainer>
           </form>
-          <SsoGroup>
-            <span className="font-weight-bold">
-              <FormattedMessage id="Sign-in-option" />
-            </span>
-            <span className="clearfix sign-in-method">
-              <FormattedMessage id="Sign-in-method" />
-            </span>
-            <ListGroup className="mt-10">
-              {features.login_franceconnect && (
-                <ListGroupItem className="bgc-fa h-70">
-                  <SsoDiv>
-                    <SsoIcon type="franceConnect">
-                      <SocialIcon className="loginIcon" name="franceConnectIcon" />
-                    </SsoIcon>
-                    <span>
-                      <b>FranceConnect</b>
-                      <br />
-                      {viewer.isFranceConnectAccount ? (
-                        <a
-                          href="https://fcp.integ01.dev-franceconnect.fr/traces/"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          <FormattedMessage id="fc-archive-connection" />
-                        </a>
+          {features.login_franceconnect || features.login_facebook || features.login_gplus ? (
+            <SsoGroup>
+              <span className="font-weight-bold">
+                <FormattedMessage id="Sign-in-option" />
+              </span>
+              <span className="clearfix sign-in-method">
+                <FormattedMessage id={signMethod()} />
+              </span>
+              <ListGroup className="mt-10">
+                {features.login_franceconnect && (
+                  <ListGroupItem className="bgc-fa h-70">
+                    <SsoDiv>
+                      <SsoIcon type="franceConnect">
+                        <SocialIcon className="loginIcon" name="franceConnectIcon" />
+                      </SsoIcon>
+                      <span>
+                        <b>FranceConnect</b>
+                        <br />
+                        {viewer.isFranceConnectAccount ? (
+                          <a
+                            href="https://fcp.integ01.dev-franceconnect.fr/traces/"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <FormattedMessage id="fc-archive-connection" />
+                          </a>
+                        ) : (
+                          <a
+                            href="https://franceconnect.gouv.fr/"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            Qu’est-ce-que FranceConnect ?
+                          </a>
+                        )}
+                      </span>
+                    </SsoDiv>
+                    <>
+                      {!viewer.isFranceConnectAccount ? (
+                        <AssociateLink
+                          bcd="rgba(3, 136, 204, 0.08)"
+                          color="rgb(0, 140, 214)"
+                          href={getButtonLinkForType(
+                            'franceConnect',
+                            `${window && window.location.origin + window.location.pathname}`,
+                          )}
+                          title="franceConnect">
+                          <FormattedMessage id="global-link" />
+                        </AssociateLink>
                       ) : (
-                        <a
-                          href="https://franceconnect.gouv.fr/"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          Qu’est-ce-que FranceConnect ?
-                        </a>
+                        <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
                       )}
-                    </span>
-                  </SsoDiv>
-                  <>
-                    {!viewer.isFranceConnectAccount ? (
-                      <AssociateLink
-                        bcd="rgba(3, 136, 204, 0.08)"
-                        color="rgb(0, 140, 214)"
-                        href={getButtonLinkForType(
-                          'franceConnect',
-                          `${window && window.location.origin + window.location.pathname}`,
-                        )}
-                        title="franceConnect">
-                        <FormattedMessage id="global-link" />
-                      </AssociateLink>
-                    ) : (
-                      <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
-                    )}
-                  </>
-                </ListGroupItem>
-              )}
-              {features.login_facebook && (
-                <ListGroupItem className="bgc-fa h-70">
-                  <SsoDiv>
-                    <SsoIcon type="fb">
-                      <SocialIcon className="loginIcon" name="facebookF" />
-                    </SsoIcon>
-                    <span>
-                      <b>Facebook</b>
-                    </span>
-                  </SsoDiv>
-                  <>
-                    {!viewer.facebookId ? (
-                      <AssociateLink
-                        bcd="rgba(3, 136, 204, 0.08)"
-                        color="rgb(0, 140, 214)"
-                        href={getButtonLinkForType(
-                          'facebook',
-                          `${window && window.location.origin + window.location.pathname}`,
-                        )}
-                        title="facebook">
-                        <FormattedMessage id="global-link" />
-                      </AssociateLink>
-                    ) : (
-                      <>{dissociate('FACEBOOK', 'Facebook')}</>
-                    )}
-                  </>
-                </ListGroupItem>
-              )}
-              {features.login_gplus && (
-                <ListGroupItem className="bgc-fa h-70">
-                  <SsoDiv>
-                    <SsoIcon type="google">
-                      <SocialIcon className="loginIcon" name="googleColored" />
-                    </SsoIcon>
-                    <span>
-                      <b>Google</b>
-                    </span>
-                  </SsoDiv>
-                  <>
-                    {!viewer.googleId ? (
-                      <AssociateLink
-                        bcd="rgba(3, 136, 204, 0.08)"
-                        color="rgb(0, 140, 214)"
-                        href={getButtonLinkForType(
-                          'google',
-                          `${window && window.location.origin + window.location.pathname}`,
-                        )}
-                        title="google">
-                        <FormattedMessage id="global-link" />
-                      </AssociateLink>
-                    ) : (
-                      <>{dissociate('GOOGLE', 'Google')}</>
-                    )}
-                  </>
-                </ListGroupItem>
-              )}
-            </ListGroup>
-          </SsoGroup>
+                    </>
+                  </ListGroupItem>
+                )}
+                {features.login_facebook && (
+                  <ListGroupItem className="bgc-fa h-70">
+                    <SsoDiv>
+                      <SsoIcon type="fb">
+                        <SocialIcon className="loginIcon" name="facebookF" />
+                      </SsoIcon>
+                      <span>
+                        <b>Facebook</b>
+                      </span>
+                    </SsoDiv>
+                    <>
+                      {!viewer.facebookId ? (
+                        <AssociateLink
+                          bcd="rgba(3, 136, 204, 0.08)"
+                          color="rgb(0, 140, 214)"
+                          href={getButtonLinkForType(
+                            'facebook',
+                            `${window && window.location.origin + window.location.pathname}`,
+                          )}
+                          title="facebook">
+                          <FormattedMessage id="global-link" />
+                        </AssociateLink>
+                      ) : (
+                        <>{dissociate('FACEBOOK', 'Facebook')}</>
+                      )}
+                    </>
+                  </ListGroupItem>
+                )}
+                {features.login_gplus && (
+                  <ListGroupItem className="bgc-fa h-70">
+                    <SsoDiv>
+                      <SsoIcon type="google">
+                        <SocialIcon className="loginIcon" name="googleColored" />
+                      </SsoIcon>
+                      <span>
+                        <b>Google</b>
+                      </span>
+                    </SsoDiv>
+                    <>
+                      {!viewer.googleId ? (
+                        <AssociateLink
+                          bcd="rgba(3, 136, 204, 0.08)"
+                          color="rgb(0, 140, 214)"
+                          href={getButtonLinkForType(
+                            'google',
+                            `${window && window.location.origin + window.location.pathname}`,
+                          )}
+                          title="google">
+                          <FormattedMessage id="global-link" />
+                        </AssociateLink>
+                      ) : (
+                        <>{dissociate('GOOGLE', 'Google')}</>
+                      )}
+                    </>
+                  </ListGroupItem>
+                )}
+              </ListGroup>
+            </SsoGroup>
+          ) : null}
         </Panel.Body>
       )}
       <Panel.Footer>{footer}</Panel.Footer>

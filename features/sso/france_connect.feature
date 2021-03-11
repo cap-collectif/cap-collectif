@@ -16,7 +16,7 @@ Background:
 
 Scenario: Display France Connect login screen
   Given I open login modal
-  When I follow "franceConnect"
+  When I follow "FranceConnect"
   Then I should see the France Connect login screen
 
 @database
@@ -35,7 +35,7 @@ Scenario: Authenticated France Connect user can access his profile
   When I visited "edit profile page"
   And I click the "#account-tabs-tab-account" element
   And I wait "fc-archive-connection" to appear on current page in "body"
-  And The field "#account__email" should be disabled
+  And The field "#account__email" should be enabled
   When I click the "#account-tabs-tab-personal-data" element
   And I wait "#personal-data-form-firstname" to appear on current page
   And The fields gender, lastname, firstname and birthdate, birthplace are not updatable

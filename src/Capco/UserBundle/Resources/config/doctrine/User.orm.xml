@@ -181,7 +181,7 @@
         <field name="confirmedAccountAt" column="confirmed_account_at" type="datetime" nullable="true" />
         <field name="consentExternalCommunication" column="consent_external_communication" type="boolean" nullable="false" />
         <field name="consentInternalCommunication" column="consent_internal_communication" type="boolean" nullable="false" />
-        <field name="birthPlace" unique="true" column="birth_place" type="string" length="255" nullable="true" />
+        <field name="birthPlace" column="birth_place" type="string" length="255" nullable="true" />
     </entity>
 
 </doctrine-mapping>

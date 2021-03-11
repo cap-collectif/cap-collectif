@@ -233,6 +233,9 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $user->setOpenId(null);
         $user->setOpenIdAccessToken(null);
 
+        $user->setFranceConnectId(null);
+        $user->setFranceConnectAccessToken(null);
+
         $user->setAddress(null);
         $user->setAddress2(null);
         $user->setZipCode(null);

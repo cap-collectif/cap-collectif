@@ -22,7 +22,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         'authorizationUrl' => '/api/v1/authorize',
         'accessTokenUrl' => '/api/v1/token',
         'userInfoUrl' => '/api/v1/userinfo',
-        'logoutUrl' => '/api/v1/logout'
+        'logoutUrl' => '/api/v1/logout',
     ];
 
     /**

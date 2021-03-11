@@ -10,9 +10,9 @@ use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterfa
 
 class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
 {
-    protected $toggleManager;
-    protected $samlAuthenticator;
-    protected $parisAuthenticator;
+    protected Manager $toggleManager;
+    protected ?SamlAuthenticator $samlAuthenticator;
+    protected MonCompteParisAuthenticator $parisAuthenticator;
 
     public function __construct(
         Manager $toggleManager,

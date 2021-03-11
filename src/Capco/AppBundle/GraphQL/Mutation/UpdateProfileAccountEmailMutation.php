@@ -56,7 +56,10 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
         $newEmailToConfirm = $arguments['email'];
         $password = $arguments['passwordConfirm'];
         $encoder = $this->encoderFactory->getEncoder($viewer);
-        if (!$encoder->isPasswordValid($viewer->getPassword(), $password, $viewer->getSalt())) {
+        if (
+            $viewer->hasPassword() &&
+            !$encoder->isPasswordValid($viewer->getPassword(), $password, $viewer->getSalt())
+        ) {
             return ['error' => UpdateUserEmailErrorCode::SPECIFY_PASSWORD];
         }
 

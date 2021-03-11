@@ -1100,14 +1100,17 @@ class UserRepository extends EntityRepository
         return array_map(fn(array $row) => $row['email'], $results);
     }
 
-    public function findByEmailOrAccessToken(string $email, string $accessToken): ?User
-    {
+    public function findByEmailOrAccessToken(
+        string $email,
+        string $accessToken,
+        string $accessId
+    ): ?User {
         $qb = $this->createQueryBuilder('u');
 
         return $qb
             ->select('u')
-            ->where('u.email = :email')
             ->orWhere('u.email = :email')
+            ->orWhere('u.franceConnectId = :accessId')
             ->orWhere('u.franceConnectAccessToken = :accessToken')
             ->orWhere('u.facebook_access_token = :accessToken')
             ->orWhere('u.google_access_token = :accessToken')
@@ -1115,6 +1118,7 @@ class UserRepository extends EntityRepository
             ->orWhere('u.twitter_access_token = :accessToken')
             ->setParameter('email', $email)
             ->setParameter('accessToken', $accessToken)
+            ->setParameter('accessId', $accessId)
             ->getQuery()
             ->getOneOrNullResult();
     }

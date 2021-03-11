@@ -260,7 +260,15 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="password"
         >
-          <Connect(injectIntl(ReduxForm)) />
+          <Relay(Connect(injectIntl(ReduxForm)))
+            viewer={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "hasPassword": true,
+              }
+            }
+          />
         </TabPane>
         <TabPane
           bsClass="tab-pane"

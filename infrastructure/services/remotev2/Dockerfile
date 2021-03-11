@@ -63,7 +63,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.4-zip \
         php7.4-xml \
         php-sqlite3\
-        php-amqp \
+        php7.4-amqp \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

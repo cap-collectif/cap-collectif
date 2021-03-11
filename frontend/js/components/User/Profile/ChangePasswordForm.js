@@ -2,24 +2,33 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
-import type { Dispatch } from '../../../types';
+import type { Dispatch, FeatureToggles, State } from '../../../types';
 import {
   asyncPasswordValidate,
   CHANGE_PASSWORD_FORM_NAME as formName,
 } from '../UserPasswordComplexityUtils';
 import UserPasswordField from '../UserPasswordField';
 import config from '../../../config';
+import type { ChangePasswordForm_viewer } from '~relay/ChangePasswordForm_viewer.graphql';
+import AppBox from '~ui/Primitives/AppBox';
+
+type StateProps = {|
+  +features: FeatureToggles,
+|};
 
 type Props = {|
+  ...StateProps,
   ...ReduxFormFormProps,
-  intl: IntlShape,
-  dispatch: Dispatch,
+  +viewer: ChangePasswordForm_viewer,
+  +intl: IntlShape,
+  +dispatch: Dispatch,
 |};
 
 type FormValues = {|
@@ -90,7 +99,16 @@ const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
 
 export class ChangePasswordForm extends Component<Props> {
   render() {
-    const { invalid, valid, submitSucceeded, handleSubmit, submitting, error } = this.props;
+    const {
+      invalid,
+      valid,
+      submitSucceeded,
+      handleSubmit,
+      submitting,
+      error,
+      features,
+      viewer,
+    } = this.props;
 
     const header = (
       <div className="panel-heading profile-header">
@@ -119,6 +137,19 @@ export class ChangePasswordForm extends Component<Props> {
           <Panel.Body>
             <Container>
               <div className="flex-column">
+                {features.login_franceconnect && viewer.isFranceConnectAccount ? (
+                  <AppBox
+                    borderRadius={4}
+                    borderColor="blue.200"
+                    borderStyle="solid"
+                    borderWidth="1px"
+                    padding={4}
+                    backgroundColor="blue.100"
+                    mb={6}
+                    color="blue.900">
+                    <FormattedMessage id="mdp-fc" />
+                  </AppBox>
+                ) : null}
                 <div className="no-border horizontal_field_with_border_top">
                   <label className="col-sm-3 control-label" htmlFor="password-form-current">
                     <FormattedMessage id="form.current_password" />
@@ -244,4 +275,18 @@ const form = reduxForm({
   form: formName,
 })(ChangePasswordForm);
 
-export default connect<any, any, _, _, _, _>()(injectIntl(form));
+const mapStateToProps = (state: State) => {
+  return {
+    features: state.default.features,
+  };
+};
+
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
+
+export default createFragmentContainer(container, {
+  viewer: graphql`
+    fragment ChangePasswordForm_viewer on User {
+      isFranceConnectAccount
+    }
+  `,
+});

@@ -21,6 +21,7 @@ export { default as AddCircle } from './svg/add-circle.svg';
 export { default as SmallCaps } from './svg/small-caps.svg';
 export { default as AskBubble } from './svg/ask-bubble.svg';
 export { default as FranceConnect } from './svg/france-connect.svg';
+export { default as FranceConnectHover } from './svg/franceconnect-bouton-hover.svg';
 export { default as FranceConnectIcon } from './svg/france-connect-icon.svg';
 export { default as RadioButton } from './svg/radioButton.svg';
 export { default as RadioButtonChecked } from './svg/radioButtonChecked.svg';

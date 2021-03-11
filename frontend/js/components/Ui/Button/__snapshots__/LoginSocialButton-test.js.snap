@@ -24,10 +24,23 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
 
 exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
 <div>
+  <AppBox
+    fontSize={2}
+    mt={1}
+    textAlign="center"
+  >
+    <FormattedMessage
+      id="fc-title"
+      tagName="p"
+      values={Object {}}
+    />
+  </AppBox>
   <LoginSocialButton__FranceConnectButton>
     <a
       href="/login/franceconnect?_destination=http://localhost/"
-      title="franceConnect"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      title="FranceConnect"
     >
       <SocialIcon
         className="loginIcon"
@@ -44,6 +57,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
         values={Object {}}
       />
     </a>
+    <hr />
   </LoginSocialButton__FranceConnectLink>
 </div>
 `;

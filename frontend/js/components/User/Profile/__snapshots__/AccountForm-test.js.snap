@@ -55,27 +55,6 @@ exports[`<AccountForm /> should render a form 1`] = `
         </div>
       </AccountForm__AccountContainer>
     </form>
-    <AccountForm__SsoGroup>
-      <span
-        className="font-weight-bold"
-      >
-        <FormattedMessage
-          id="Sign-in-option"
-          values={Object {}}
-        />
-      </span>
-      <span
-        className="clearfix sign-in-method"
-      >
-        <FormattedMessage
-          id="Sign-in-method"
-          values={Object {}}
-        />
-      </span>
-      <ListGroup
-        className="mt-10"
-      />
-    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -191,27 +170,6 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
         </div>
       </AccountForm__AccountContainer>
     </form>
-    <AccountForm__SsoGroup>
-      <span
-        className="font-weight-bold"
-      >
-        <FormattedMessage
-          id="Sign-in-option"
-          values={Object {}}
-        />
-      </span>
-      <span
-        className="clearfix sign-in-method"
-      >
-        <FormattedMessage
-          id="Sign-in-method"
-          values={Object {}}
-        />
-      </span>
-      <ListGroup
-        className="mt-10"
-      />
-    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -327,27 +285,6 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
         </div>
       </AccountForm__AccountContainer>
     </form>
-    <AccountForm__SsoGroup>
-      <span
-        className="font-weight-bold"
-      >
-        <FormattedMessage
-          id="Sign-in-option"
-          values={Object {}}
-        />
-      </span>
-      <span
-        className="clearfix sign-in-method"
-      >
-        <FormattedMessage
-          id="Sign-in-method"
-          values={Object {}}
-        />
-      </span>
-      <ListGroup
-        className="mt-10"
-      />
-    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -430,7 +367,7 @@ exports[`<AccountForm /> should render a form with associated account 1`] = `
         </label>
         <Field
           component={[Function]}
-          disabled={true}
+          disabled={false}
           divClassName="col-sm-6"
           id="account__email"
           name="email"
@@ -467,27 +404,6 @@ exports[`<AccountForm /> should render a form with associated account 1`] = `
         </div>
       </AccountForm__AccountContainer>
     </form>
-    <AccountForm__SsoGroup>
-      <span
-        className="font-weight-bold"
-      >
-        <FormattedMessage
-          id="Sign-in-option"
-          values={Object {}}
-        />
-      </span>
-      <span
-        className="clearfix sign-in-method"
-      >
-        <FormattedMessage
-          id="Sign-in-method"
-          values={Object {}}
-        />
-      </span>
-      <ListGroup
-        className="mt-10"
-      />
-    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -603,27 +519,6 @@ exports[`<AccountForm /> should render a form with information about new email 1
         </div>
       </AccountForm__AccountContainer>
     </form>
-    <AccountForm__SsoGroup>
-      <span
-        className="font-weight-bold"
-      >
-        <FormattedMessage
-          id="Sign-in-option"
-          values={Object {}}
-        />
-      </span>
-      <span
-        className="clearfix sign-in-method"
-      >
-        <FormattedMessage
-          id="Sign-in-method"
-          values={Object {}}
-        />
-      </span>
-      <ListGroup
-        className="mt-10"
-      />
-    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"

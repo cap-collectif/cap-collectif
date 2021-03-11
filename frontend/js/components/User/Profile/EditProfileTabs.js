@@ -146,7 +146,9 @@ export class EditProfileTabs extends Component<Props> {
               </Tab.Pane>
               {viewer.hasPassword && (
                 <Tab.Pane eventKey="password">
-                  {!features.login_paris && !loginWithOpenId && <ChangePasswordForm />}
+                  {!features.login_paris && !loginWithOpenId && (
+                    <ChangePasswordForm viewer={viewer} />
+                  )}
                 </Tab.Pane>
               )}
               <Tab.Pane eventKey="notifications">
@@ -182,6 +184,7 @@ export default createFragmentContainer(container, {
       ...ChangeUsername_viewer
       ...AccountBox_viewer
       ...UserLink_user
+      ...ChangePasswordForm_viewer
     }
   `,
 });

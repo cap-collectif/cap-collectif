@@ -25,6 +25,7 @@ export const ICON_NAME = {
   smallCaps: 'smallCaps',
   textStyle: 'textStyle',
   franceConnect: 'franceConnect',
+  franceConnectHover: 'franceConnectHover',
   franceConnectIcon: 'franceConnectIcon',
   radioButton: 'radioButton',
   radioButtonChecked: 'radioButton--checked',
@@ -261,6 +262,8 @@ const getIcon = name => {
       return <Icons.AskBubble />;
     case 'franceConnect':
       return <Icons.FranceConnect />;
+    case 'franceConnectHover':
+      return <Icons.FranceConnectHover />;
     case 'franceConnectIcon':
       return <Icons.FranceConnectIcon />;
     case 'radioButton':

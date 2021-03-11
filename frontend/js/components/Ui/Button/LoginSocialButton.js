@@ -5,6 +5,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import tinycolor from 'tinycolor2';
 import { baseUrl } from '~/config';
 import SocialIcon from '../Icons/SocialIcon';
+import AppBox from '~ui/Primitives/AppBox';
 
 type LoginSocialButtonType = 'facebook' | 'google' | 'openId' | 'franceConnect' | 'saml';
 
@@ -17,10 +18,7 @@ type Props = {|
 |};
 
 type State = {
-  labelColor: string,
-  buttonColor: string,
-  link: string,
-  content: string,
+  +isHover: boolean,
 };
 
 const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
@@ -163,9 +161,13 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
 
 const FranceConnectLink: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 8px;
-  margin-left: 42px;
   color: #00acc1;
   font-size: 13px;
+  text-align: center;
+  hr {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 `;
 
 const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -174,7 +176,9 @@ const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-
+  a[title] {
+    text-transform: uppercase;
+  }
   .loginIcon {
     & > svg {
       height: 45px;
@@ -194,8 +198,13 @@ const GrandLyonConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.d
 `;
 
 export default class LoginSocialButton extends React.Component<Props, State> {
+  state = {
+    isHover: false,
+  };
+
   render() {
     const { type, switchUserMode, text, labelColor, buttonColor } = this.props;
+    const { isHover } = this.state;
     const redirectUri = switchUserMode
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;
@@ -214,15 +223,27 @@ export default class LoginSocialButton extends React.Component<Props, State> {
       <div>
         {type === 'franceConnect' ? (
           <>
+            <AppBox textAlign="center" mt={1} fontSize={2}>
+              <FormattedMessage tagName="p" id="fc-title" />
+            </AppBox>
             <FranceConnectButton>
-              <a href={getButtonLinkForType(type, redirectUri)} title={type}>
-                <SocialIcon className="loginIcon" name={type} />
+              <a
+                href={getButtonLinkForType(type, redirectUri)}
+                title="FranceConnect"
+                onMouseEnter={() => this.setState({ isHover: true })}
+                onMouseLeave={() => this.setState({ isHover: false })}>
+                {isHover ? (
+                  <SocialIcon className="loginIcon" name={`${type}Hover`} />
+                ) : (
+                  <SocialIcon className="loginIcon" name={type} />
+                )}
               </a>
             </FranceConnectButton>
             <FranceConnectLink>
               <a href="https://franceconnect.gouv.fr/">
                 <FormattedMessage id="what-is-fc" />
               </a>
+              <hr />
             </FranceConnectLink>
           </>
         ) : (

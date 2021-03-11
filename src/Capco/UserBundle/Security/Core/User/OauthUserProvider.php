@@ -51,7 +51,8 @@ class OauthUserProvider extends FOSUBUserProvider
             null !==
             ($previousUser = $this->userRepository->findByEmailOrAccessToken(
                 $email,
-                $response->getAccessToken()
+                $response->getAccessToken(),
+                $response->getUsername()
             ))
         ) {
             $previousUser->{$setterId}(null);
@@ -73,7 +74,8 @@ class OauthUserProvider extends FOSUBUserProvider
         // because, accounts created with FranceConnect can change their email
         $user = $this->userRepository->findByEmailOrAccessToken(
             $email,
-            $response->getAccessToken()
+            $response->getAccessToken(),
+            $response->getUsername()
         );
         $isNewUser = false;
         if (null === $user) {
