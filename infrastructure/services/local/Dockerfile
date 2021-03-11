@@ -133,8 +133,9 @@ RUN groupadd --gid=1000 capco && \
 
 #RedirectionIO
 WORKDIR /usr/local/bin/
-RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
-RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
+# Remove this comments when redirectionio is back online.
+# RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
+# RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 
 # Binaries
 COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
@@ -146,7 +147,7 @@ COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
-COPY redirectionio/run          /etc/service/redirectionio/run
+# COPY redirectionio/run          /etc/service/redirectionio/run
 # COPY nodejs/run                 /etc/service/nodejs/run
 
 # Configuration
