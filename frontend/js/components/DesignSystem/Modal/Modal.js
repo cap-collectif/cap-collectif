@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { Dialog, DialogDisclosure, useDialogState } from 'reakit/Dialog';
 import { AnimatePresence, m as motion } from 'framer-motion';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import AppBox from '~ui/Primitives/AppBox';
 import { ease, LAYOUT_TRANSITION_SPRING } from '~/utils/motion';
 import ModalHeader from '~ds/Modal/ModalHeader';
@@ -16,7 +17,6 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import invariant from '~/utils/invariant';
 
 type RenderProps = (props: Context) => React.Node;
-
 export type ModalProps = {|
   ...AppBoxProps,
   +hideOnClickOutside?: boolean,
@@ -32,7 +32,6 @@ export type ModalProps = {|
   +onOpen?: () => void,
   +onClose?: () => void,
 |};
-
 const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   position: 'fixed',
   left: 0,
@@ -46,7 +45,6 @@ const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   flexDirection: 'column',
   alignItems: 'center',
 })``;
-
 const ModalInner = styled(motion.custom(AppBox)).attrs(props => ({
   display: 'flex',
   bg: 'white',
@@ -59,7 +57,6 @@ const ModalInner = styled(motion.custom(AppBox)).attrs(props => ({
   borderBottomRightRadius: [0, 'modal'],
   ...props,
 }))``;
-
 type ProviderProps = {| +children: React$Node, +context: Context |};
 const Provider = React.memo<ProviderProps>(
   ({ context, children }: ProviderProps) => (
@@ -67,9 +64,7 @@ const Provider = React.memo<ProviderProps>(
   ),
   (prev, current) => prev.context === current.context,
 );
-
 const TRANSITION_DURATION = 0.2;
-
 const Modal = ({
   children,
   disclosure,
@@ -91,9 +86,13 @@ const Modal = ({
     "You should either have a controlled Modal by using `show` props, or use the `disclosure` prop which will handle it's state internally, but you cannot use both or nothing.",
   );
   const firstMount = useRef(true);
-  const dialog = useDialogState({ animated: TRANSITION_DURATION * 1000, visible: show });
+  const dialog = useDialogState({
+    animated: TRANSITION_DURATION * 1000,
+    visible: show,
+  });
   const isMobile = useIsMobile();
   const $container = useRef<?HTMLElement>();
+  const $scrollBox = useRef<?HTMLElement>();
   const context = useMemo(
     () => ({
       hide: dialog.hide,
@@ -104,6 +103,19 @@ const Modal = ({
     }),
     [dialog, hideCloseButton],
   );
+  useEffect(() => {
+    const scrollContainer = $scrollBox.current;
+    if (dialog.visible) {
+      if (preventBodyScroll) {
+        disableBodyScroll(scrollContainer);
+      }
+    }
+    return () => {
+      if (scrollContainer && preventBodyScroll) {
+        enableBodyScroll(scrollContainer);
+      }
+    };
+  }, [dialog.visible, preventBodyScroll]);
   useEffect(() => {
     if (dialog.visible) {
       if (onOpen) {
@@ -157,6 +169,7 @@ const Modal = ({
                 overflow={scrollBehavior === 'inside' ? 'overlay' : undefined}
                 initial={{ opacity: 0, y: isMobile ? 20 : -20 }}
                 animate={{ opacity: 1, y: 0 }}
+                ref={$scrollBox}
                 transition={{
                   opacity: { duration: TRANSITION_DURATION, ease },
                   y: LAYOUT_TRANSITION_SPRING,
@@ -172,11 +185,8 @@ const Modal = ({
     </Provider>
   );
 };
-
 Modal.displayName = 'Modal';
-
 Modal.Header = ModalHeader;
 Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
-
 export default Modal;

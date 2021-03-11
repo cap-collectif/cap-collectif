@@ -23,6 +23,7 @@ type Props = {|
   +title: string,
   +onClose: () => void,
   +onSubmit: () => Promise<void>,
+  +viewerIsConfirmedByEmail: boolean,
 |};
 
 export const MobilePublishArgumentModal = ({
@@ -33,6 +34,7 @@ export const MobilePublishArgumentModal = ({
   pristine,
   invalid,
   title,
+  viewerIsConfirmedByEmail,
 }: Props) => {
   const intl = useIntl();
   const { startLoading, stopLoading, isLoading } = useLoadingMachine();
@@ -86,7 +88,9 @@ export const MobilePublishArgumentModal = ({
           width="100%"
           isLoading={isLoading}
           justifyContent="center">
-          {intl.formatMessage({ id: 'global.publish' })}
+          {intl.formatMessage({
+            id: viewerIsConfirmedByEmail ? 'global.publish' : 'global.validate',
+          })}
         </Button>
       </Modal.Footer>
     </Modal>
@@ -96,6 +100,7 @@ export const MobilePublishArgumentModal = ({
 const mapStateToProps = (state: GlobalState) => ({
   pristine: isPristine(formName)(state),
   invalid: isInvalid(formName)(state),
+  viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

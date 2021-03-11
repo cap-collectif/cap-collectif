@@ -72,11 +72,11 @@ const DebateStepPageArgumentDrawer = ({
   const viewer: ?DebateStepPageArgumentDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
-  const isAuthor = argument.viewerDidAuthor;
   const isViewerAdmin = viewer && viewer.isAdmin;
   const { stepClosed } = useDebateStepPage();
 
   if (!argument) return null;
+  const isAuthor = argument.viewerDidAuthor;
 
   return (
     <DetailDrawer {...drawerProps}>

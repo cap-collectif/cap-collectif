@@ -132,7 +132,7 @@ export const DebateStepPageVoteForm = ({
   const publishArgument = () =>
     addArgumentOnDebate(debate.id, body, viewerVoteValue, intl, () => {
       setShowArgumentForm(false);
-      setVoteState('ARGUMENTED');
+      setVoteState(viewerIsConfirmed ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED');
     });
 
   const title = viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against';
