@@ -158,13 +158,13 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterLoginTop:
     keyname: login.text.top
     category: pages.login
-    value: '<p>Je suis un texte</p>'
+    value: 'Je suis un texte'
     position: 250
     type: 1
   SiteParameterLoginBottom:
     keyname: login.text.bottom
     category: pages.login
-    value: '<p>Et moi aussi</p>'
+    value: 'Et moi aussi'
     position: 251
     type: 1
   SiteParameterEventTitle:
@@ -351,3 +351,18 @@ Capco\AppBundle\Entity\SiteParameter:
     value: FR
     position: 0
     type: 0
+  SiteParameterCookies:
+    keyname: cookies-list
+    category: pages.cookies
+    position: 3
+    type: 1
+  SiteParameterPrivacy:
+    keyname: privacy-policy
+    category: pages.privacy
+    position: 4
+    type: 1
+  SiteParameterLegal:
+    keyname: legal-mentions
+    category: pages.legal
+    position: 5
+    type: 1

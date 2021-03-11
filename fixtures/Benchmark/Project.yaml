@@ -3,20 +3,20 @@ Capco\AppBundle\Entity\Project:
     id: project1
     title: project-1
     slug: project-1
-    authors: ['@voter1']
+    authors: ['@pa1']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
   project2:
     id: project2
     title: project-2
     slug: project-2
-    authors: ['@voter1']
+    authors: ['@pa2']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
   project3:
     id: project3
     title: project-proposals
     slug: project-proposals
-    authors: ['@voter1']
+    authors: ['@pa3']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2

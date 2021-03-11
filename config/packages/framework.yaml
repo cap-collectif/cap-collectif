@@ -47,3 +47,7 @@ framework:
             - '%kernel.project_dir%/translations'
     profiler:
         only_exceptions: false
+    http_client:
+        scoped_clients:
+            tipsmeee.client:
+                base_uri: 'https://api-stage.tipsmeee.com/'

@@ -6,10 +6,8 @@ Capco\AppBundle\Entity\Proposal:
     body: <text(300)>
     author: '@voter<numberBetween(1, 1000)>'
     proposalForm: '@proposalForm1'
-    theme: '@theme<numberBetween(1, 2)>'
     status: '@status<numberBetween(1, 2)>'
     category: '@pCategory<numberBetween(1, 4)>'
-    # likers: ['@voter<numberBetween(1, 100)>']
     publishedAt: <(new \DateTime())>
     createdAt: <(new \DateTime())>
     reference: <current()>

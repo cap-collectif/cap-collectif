@@ -7,4 +7,4 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+10 days')>
-    body: <p><text(1000)></p>
+    body: <text(1000)>

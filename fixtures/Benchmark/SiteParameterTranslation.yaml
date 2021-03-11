@@ -6,6 +6,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterHomePageJumbotronBodyFR:
     translatable: '@SiteParameterHomePageJumbotronBody'
     locale: 'fr-FR'
+    value: 'sd'
   SiteParameterHomePageJumbotronButtonFR:
     value: Participer
     translatable: '@SiteParameterHomePageJumbotronButton'
@@ -33,6 +34,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterProjectsContentBodyFR:
     translatable: '@SiteParameterProjectsContentBody'
     locale: 'fr-FR'
+    value: 'sd'
   SiteParameterThemesJumbotronTitleFR:
     value: Thèmes
     translatable: '@SiteParameterThemesJumbotronTitle'
@@ -48,6 +50,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterContactJumbotronBodyFR:
     translatable: '@SiteParameterContactJumbotronBody'
     locale: 'fr-FR'
+    value: 'sd'
   SiteParameterContactContentBodyFR:
     value: <stripslashes('\<p>Une remarque, un avis à partager, ou une demande d\’informations supplémentaires ? Nous vous invitons à compléter le formulaire ci-dessous. Nous nous engageons à vous répondre dans les meilleurs délais.</p>\')>
     translatable: '@SiteParameterContactContentBody'
@@ -59,14 +62,15 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterContactContentPhoneFR:
     translatable: '@SiteParameterContactContentPhone'
     locale: 'fr-FR'
-  SiteParameterHomePageJumbotronBody7FR:
-    value: la charte
-    translatable: '@SiteParameterHomePageJumbotronBody7'
-    locale: 'fr-FR'
-  SiteParameterHomePageJumbotronBody8FR:
-    value: /pages/charte
-    translatable: '@SiteParameterHomePageJumbotronBody8'
-    locale: 'fr-FR'
+    value: ''
+#   SiteParameterHomePageJumbotronBody7FR:
+#     value: la charte
+#     translatable: '@SiteParameterHomePageJumbotronBody7'
+#     locale: 'fr-FR'
+#   SiteParameterHomePageJumbotronBody8FR:
+#     value: /pages/charte
+#     translatable: '@SiteParameterHomePageJumbotronBody8'
+#     locale: 'fr-FR'
   SiteParameterSitenameFR:
     value: Projet participatif
     translatable: '@SiteParameterSitename'
@@ -86,6 +90,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterBlogDescriptionFR:
     translatable: '@SiteParameterBlogDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterLoginTopFR:
     translatable: '@SiteParameterLoginTop'
     locale: 'fr-FR'
@@ -101,9 +106,11 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterEventContentPageFR:
     translatable: '@SiteParameterEventContentPage'
     locale: 'fr-FR'
+    value: ''
   SiteParameterMembersJumbotronBodyFR:
     translatable: '@SiteParameterMembersJumbotronBody'
     locale: 'fr-FR'
+    value: ''
   SiteParameterMembersJumbotronTitleFR:
     value: Liste des inscrits
     translatable: '@SiteParameterMembersJumbotronTitle'
@@ -111,6 +118,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterMembersContentBodyFR:
     translatable: '@SiteParameterMembersContentBody'
     locale: 'fr-FR'
+    value: ''
   SiteParameterEmailSenderNameFR:
     value: 'Cap Collectif'
     translatable: '@SiteParameterEmailSenderName'
@@ -122,27 +130,35 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
   SiteParameterShieldTextFR:
     translatable: '@SiteParameterShieldText'
     locale: 'fr-FR'
+    value: ''
   SiteParameterMetaDescriptionFR:
     translatable: '@SiteParameterMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterEventMetaDescriptionFR:
     translatable: '@SiteParameterEventMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterBlogMetaDescriptionFR:
     translatable: '@SiteParameterBlogMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterThemesMetaDescriptionFR:
     translatable: '@SiteParameterThemesMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterProjectsMetaDescriptionFR:
     translatable: '@SiteParameterProjectsMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterMembersMetaDescriptionFR:
     translatable: '@SiteParameterMembersMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterContactMetaDescriptionFR:
     translatable: '@SiteParameterContactMetaDescription'
     locale: 'fr-FR'
+    value: ''
   SiteParameterCharterContentFR:
     value: <stripslashes("\<p>Toute personne peut s\’exprimer librement sur la plateforme sous réserve de respecter la présente charte.</p> <p>En m\’inscrivant sur la plateforme\:\<ul>\<li>J\’adhère à la démarche de participation\:\je cherche à améliorer les idées, projets, propositions formulées, en donnant mon avis, et propose moi-même de nouvelles solutions ;</li>\<li>J\’atteste de ma pleine et entière adhésion aux valeurs et aux règles du débat démocratique.</li>\</ul>\</p>\<p>En conséquence, je m\’engage en tant que participant\:\<ul>\<li>À ne publier aucune information volontairement erronée, tronquée, ou hors sujet ;</li>\<li>À reconnaître à chacun le droit d\’avoir une opinion différente de la mienne et à la respecter ;</li>\<li>À n\’exprimer, diffuser, ou partager aucun contenu offensant ou contraire à la loi ;</li>\<li>À signaler aux modérateurs tous les contenus en infraction avec la présente Charte.</li>\</ul>\</p>\<p>\Les contributions dont le comportement est contraire à cette Charte sont susceptibles d\’être modérées ou supprimées sans préavis. L\’équipe de modération se réserve donc le droit de supprimer\:\<ul>\<li>\Les messages à vocation publicitaire, promotionnelle ou commerciale ;</li>\<li>\Les contributions prosélytes (politique, sectaire, religieuse, sexuelle, etc.) - sont considérées comme prosélytes les contributions qui invitent à un acte de mobilisation (signer une pétition, participer à une manifestation, etc.) ou qui ont pour vocation de susciter l\'adhésion ;\</li>\<li>\Les contributions portant atteinte à autrui, c\'est-à-dire attaquant une personne ou un groupe de personnes en raison de leurs caractéristiques propres ;</li>\<li>\Les contributions dont le propos est injurieux, grossier, diffamatoire, irrespectueux, agressif, violent, raciste,xénophobe,homophobe, ou faisant l\’apologie des crimes de guerre ;\</li>\<li>\Les contributions renvoyant des sites internet ou des contenus dont la teneur ne respecterait pas la présente charte.</li>\</ul>\</p>\<p>Chaque personne peut contribuer tant qu\’elle s\’engage à respecter au préalable les règles de la Charte. En cas de violation grave ou répétée de la Charte, l\’utilisateur est passible de voir son compte suspendu ou supprimé. </p>\")>
     translatable: '@SiteParameterCharterContent'

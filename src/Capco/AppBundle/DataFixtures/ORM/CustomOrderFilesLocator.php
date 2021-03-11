@@ -50,8 +50,10 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/MenuItemTranslation.yaml',
             $this->fixturesDir . 'Benchmark/FooterSocialNetwork.yaml',
             $this->fixturesDir . 'Benchmark/Theme.yaml',
+            $this->fixturesDir . 'Benchmark/ThemeTranslation.yaml',
             $this->fixturesDir . 'Benchmark/OpinionType.yaml',
             $this->fixturesDir . 'Benchmark/Project.yaml',
+            $this->fixturesDir . 'Benchmark/ProjectAuthor.yaml',
             $this->fixturesDir . 'Benchmark/ConsultationStep.yaml',
             $this->fixturesDir . 'Benchmark/Consultation.yaml',
             $this->fixturesDir . 'Benchmark/CollectStep.yaml',
@@ -63,13 +65,11 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/QuestionnaireStep.yaml',
             $this->fixturesDir . 'Benchmark/ProjectAbstractStep.yaml',
             $this->fixturesDir . 'Benchmark/Opinion.yaml',
-            $this->fixturesDir . 'Benchmark/SourceCategory.yaml',
-            $this->fixturesDir . 'Benchmark/SourceCategoryTranslation.yaml',
-            $this->fixturesDir . 'Benchmark/Source.yaml',
             $this->fixturesDir . 'Benchmark/Argument.yaml',
             $this->fixturesDir . 'Benchmark/ProposalForm.yaml',
             $this->fixturesDir . 'Benchmark/ProposalFormNotificationConfiguration.yaml',
             $this->fixturesDir . 'Benchmark/ProposalDistrict.yaml',
+            $this->fixturesDir . 'Benchmark/DistrictTranslation.yaml',
             $this->fixturesDir . 'Benchmark/Questionnaire.yaml',
             $this->fixturesDir . 'Benchmark/QuestionChoice.yaml',
             $this->fixturesDir . 'Benchmark/MultipleChoiceQuestion.yaml',
@@ -87,7 +87,6 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/HighlightedContent.yaml',
             $this->fixturesDir . 'Benchmark/Event.yaml',
             $this->fixturesDir . 'Benchmark/EventTranslation.yaml',
-            $this->fixturesDir . 'Benchmark/OfficialResponse.yaml',
         ];
     }
 

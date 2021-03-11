@@ -1,8 +1,9 @@
 Capco\AppBundle\Entity\Questionnaire:
   questionnaire1:
+    id: questionnaire1
     title: questionnaire-1
     slug: questionnaire-1
-    description: <p><text(100)></p>
+    description: <text(100)>
     step: '@questionnaireStep1'
     multipleRepliesAllowed: true
     anonymousAllowed: true
