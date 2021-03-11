@@ -150,11 +150,11 @@ type MaxWidth = {|
 |};
 
 type BorderRadius = {|
-  borderRadius?: NumberOrString,
-  borderTopRightRadius?: NumberOrString,
-  borderTopLeftRadius?: NumberOrString,
-  borderBottomLeftRadius?: NumberOrString,
-  borderBottomRightRadius?: NumberOrString,
+  borderRadius?: Responsive<NumberOrString>,
+  borderTopRightRadius?: Responsive<NumberOrString>,
+  borderTopLeftRadius?: Responsive<NumberOrString>,
+  borderBottomLeftRadius?: Responsive<NumberOrString>,
+  borderBottomRightRadius?: Responsive<NumberOrString>,
 |};
 
 type BorderWidth = {|
