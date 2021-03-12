@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210311105052 extends AbstractMigration
+final class Version20210312095725 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ final class Version20210311105052 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE step ADD debate_type ENUM(\'WYSIWYG\', \'FACE_TO_FACE\') DEFAULT \'FACE_TO_FACE\', ADD debate_content LONGTEXT DEFAULT NULL'
+            'ALTER TABLE step ADD debate_type ENUM(\'WYSIWYG\', \'FACE_TO_FACE\')  DEFAULT \'FACE_TO_FACE\', ADD debate_content LONGTEXT DEFAULT NULL'
         );
     }
 
