@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Debate.contributors connection fetches debate step contributors 1`] = `
+Object {
+  "node": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aTozO2k6MTtpOjE0MjUyMDQwMDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyU3B5bA==",
+            "username": "spyl",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToyO2k6MTtpOjE1ODM3NDI2MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VySWFu",
+            "username": "Ian apprenti DevOps",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToyO2k6MTtpOjE1NzUyNzU0MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyVmluY2VudA==",
+            "username": "Vince",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToyO2k6MTtpOjE1NjgwMTQyMDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWd1aQ==",
+            "username": "Agui",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToyO2k6MTtpOjE1NjMxNzU4MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VySnBlYw==",
+            "username": "Jpec",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToyO2k6MTtpOjE1NTk1NDcwMDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyVGhlbw==",
+            "username": "Théo QP",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE1NzI4NTYyMDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyTWlja2FlbA==",
+            "username": "Dev null",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE1Mzk3NjE0MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyT21hcg==",
+            "username": "Omar <3 Rem",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE1MzU5NTk4MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VySmVhbg==",
+            "username": "Juan",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE1MTQ5ODMwMjAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyTWF4aW1l",
+            "username": "mauriau",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE1MTQ5ODMwMjAwMDA7fQ==",
+        "hasNextPage": true,
+        "startCursor": "YToyOntpOjA7aTozO2k6MTtpOjE0MjUyMDQwMDAwMDA7fQ==",
+      },
+      "totalCount": 15,
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.contributors connection fetches debate step contributors with cursor 1`] = `
+Object {
+  "node": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE0ODMyMjc3ODAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyNDM=",
+            "username": "user43",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE0ODMyMjc3MjAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyNDI=",
+            "username": "user42",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjE3MTkzMjEwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+            "username": "Max de la QA",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjA0OTg4MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "username": "user",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjAwNjY4MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyMQ==",
+            "username": "lbrunet",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjAwNjY4MDAwMDA7fQ==",
+        "hasNextPage": false,
+        "startCursor": "YToyOntpOjA7aToxO2k6MTtpOjE0ODMyMjc3ODAwMDA7fQ==",
+      },
+      "totalCount": 15,
+    },
+  },
+}
+`;

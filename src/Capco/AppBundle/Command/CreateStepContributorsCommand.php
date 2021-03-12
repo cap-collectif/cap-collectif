@@ -226,17 +226,17 @@ class CreateStepContributorsCommand extends BaseExportCommand
             ... on CollectStep {
               contributors(first: 50 ${userCursor}) {
                 edges {
-                  cursor   
+                  cursor
                   node {
                     ${USER_FRAGMENT}
-                  }              
+                  }
                 }
                 totalCount
                 pageInfo {
                   startCursor
                   endCursor
                   hasNextPage
-                }                
+                }
               }
             }
             ... on SelectionStep {
@@ -245,14 +245,14 @@ class CreateStepContributorsCommand extends BaseExportCommand
                   cursor
                   node {
                     ${USER_FRAGMENT}
-                  }               
+                  }
                 }
                 totalCount
                 pageInfo {
                   startCursor
                   endCursor
                   hasNextPage
-                }                
+                }
               }
             }
             ... on QuestionnaireStep {
@@ -261,14 +261,30 @@ class CreateStepContributorsCommand extends BaseExportCommand
                   cursor
                   node {
                     ${USER_FRAGMENT}
-                  }     
+                  }
                 }
                 totalCount
                 pageInfo {
                   startCursor
                   endCursor
                   hasNextPage
-                }                
+                }
+              }
+            }
+            ... on DebateStep {
+              contributors(first: 50 ${userCursor}) {
+                edges {
+                  cursor
+                  node {
+                    ${USER_FRAGMENT}
+                  }
+                }
+                totalCount
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
               }
             }
           }

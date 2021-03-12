@@ -20,6 +20,11 @@ InternalDebateStep:
       debate:
         description: 'The debate of the step.'
         type: 'InternalDebate!'
+      contributors:
+        type: 'InternalUserConnection!'
+        description: 'A list of contributor associated with the step.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
       debateType:
         description: 'the type of the debate'
         type: 'DebateType!'

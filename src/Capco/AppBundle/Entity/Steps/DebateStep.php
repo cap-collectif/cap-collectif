@@ -90,8 +90,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
 
     public function isParticipative(): bool
     {
-        // TODO enable this for step exports.
-        return false;
+        return true;
     }
 
     public function isVotable(): bool
