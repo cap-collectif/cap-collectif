@@ -52,6 +52,16 @@ const props = {
       ...defaultProps.viewer,
       $refType,
       isAdmin: false,
+      isEmailConfirmed: true,
+    },
+  },
+  asViewerNotConfirmed: {
+    ...defaultProps,
+    viewer: {
+      ...defaultProps.viewer,
+      $refType,
+      isAdmin: false,
+      isEmailConfirmed: false,
     },
   },
   asViewerAdmin: {
@@ -66,6 +76,7 @@ const props = {
       ...defaultProps.viewer,
       $refType,
       isAdmin: true,
+      isEmailConfirmed: true,
     },
   },
 };
@@ -83,6 +94,11 @@ describe('<ArgumentCard />', () => {
 
   it('renders correctly when connected as viewer', () => {
     const wrapper = shallow(<ArgumentCard {...props.asViewer} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when connected as viewer not confirmed', () => {
+    const wrapper = shallow(<ArgumentCard {...props.asViewerNotConfirmed} />);
     expect(wrapper).toMatchSnapshot();
   });
 

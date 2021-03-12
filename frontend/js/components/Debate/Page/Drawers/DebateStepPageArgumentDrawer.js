@@ -127,7 +127,9 @@ const DebateStepPageArgumentDrawer = ({
           <Button
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
-            onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
+            onClick={() =>
+              voteForArgument(argument.id, argument.viewerHasVote, intl, argument.votes.totalCount)
+            }
             aria-label={intl.formatMessage({
               id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
             })}

@@ -7,12 +7,19 @@ import type {
   RemoveDebateArgumentVoteMutationResponse,
 } from '~relay/RemoveDebateArgumentVoteMutation.graphql';
 
+type OptimisticVariables = {|
+  +countVotes: number,
+|};
+
 const mutation = graphql`
   mutation RemoveDebateArgumentVoteMutation($input: RemoveDebateArgumentVoteInput!) {
     removeDebateArgumentVote(input: $input) {
       errorCode
       debateArgument {
-        ...ArgumentCard_argument @arguments(isAuthenticated: true)
+        viewerHasVote
+        votes(first: 0) {
+          totalCount
+        }
       }
     }
   }
@@ -20,10 +27,23 @@ const mutation = graphql`
 
 const commit = (
   variables: RemoveDebateArgumentVoteMutationVariables,
+  optimisticVariables: OptimisticVariables,
 ): Promise<RemoveDebateArgumentVoteMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticResponse: {
+      removeDebateArgumentVote: {
+        errorCode: null,
+        debateArgument: {
+          id: variables.input.debateArgumentId,
+          viewerHasVote: false,
+          votes: {
+            totalCount: optimisticVariables.countVotes - 1,
+          },
+        },
+      },
+    },
   });
 
 export default { commit };

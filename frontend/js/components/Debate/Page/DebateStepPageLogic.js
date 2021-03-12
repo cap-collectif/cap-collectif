@@ -31,15 +31,13 @@ export const DebateStepPageLogic = ({ query }: Props) => {
   return (
     <Flex direction="column" spacing={8}>
       <DebateStepPageMainActions isMobile={isMobile} step={step} />
-      <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
       {showContent && <WYSIWYGRender value={step?.debateContent || ''} />}
       {showFaceToFace && (
         <>
           <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
-          <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
+          {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}
         </>
       )}
-      {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}
       <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
       <LoginModal />
     </Flex>

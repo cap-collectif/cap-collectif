@@ -72,18 +72,23 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
         enabled={false}
         placement="bottom"
       >
-        <Button
-          aria-label="vote.add"
-          color="neutral-gray.500"
-          disabled={true}
-          leftIcon={
-            <ForwardRef
-              name="CLAP_O"
-              size="lg"
-            />
-          }
-          onClick={[Function]}
-        />
+        <ConditionalWrapper
+          when={false}
+          wrapper={[Function]}
+        >
+          <Button
+            aria-label="vote.add"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <ForwardRef
+                name="CLAP_O"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+          />
+        </ConditionalWrapper>
       </Connect(LoginOverlay)>
       <Text
         as="span"
@@ -207,18 +212,23 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
         enabled={false}
         placement="bottom"
       >
-        <Button
-          aria-label="vote.add"
-          color="neutral-gray.500"
-          disabled={true}
-          leftIcon={
-            <ForwardRef
-              name="CLAP_O"
-              size="lg"
-            />
-          }
-          onClick={[Function]}
-        />
+        <ConditionalWrapper
+          when={false}
+          wrapper={[Function]}
+        >
+          <Button
+            aria-label="vote.add"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <ForwardRef
+                name="CLAP_O"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+          />
+        </ConditionalWrapper>
       </Connect(LoginOverlay)>
       <Text
         as="span"
@@ -342,18 +352,23 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
         enabled={false}
         placement="bottom"
       >
-        <Button
-          aria-label="global.cancel"
-          color="neutral-gray.500"
-          disabled={true}
-          leftIcon={
-            <ForwardRef
-              name="CLAP"
-              size="lg"
-            />
-          }
-          onClick={[Function]}
-        />
+        <ConditionalWrapper
+          when={false}
+          wrapper={[Function]}
+        >
+          <Button
+            aria-label="global.cancel"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <ForwardRef
+                name="CLAP"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+          />
+        </ConditionalWrapper>
       </Connect(LoginOverlay)>
       <Text
         as="span"
@@ -477,18 +492,23 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         enabled={false}
         placement="bottom"
       >
-        <Button
-          aria-label="global.cancel"
-          color="neutral-gray.500"
-          disabled={true}
-          leftIcon={
-            <ForwardRef
-              name="CLAP"
-              size="lg"
-            />
-          }
-          onClick={[Function]}
-        />
+        <ConditionalWrapper
+          when={false}
+          wrapper={[Function]}
+        >
+          <Button
+            aria-label="global.cancel"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <ForwardRef
+                name="CLAP"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+          />
+        </ConditionalWrapper>
       </Connect(LoginOverlay)>
       <Text
         as="span"
@@ -529,6 +549,146 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         "viewerCanReport": true,
         "viewerDidAuthor": true,
         "viewerHasVote": true,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correctly when connected as viewer not confirmed 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <ForwardRef
+    direction="column"
+    height="100%"
+  >
+    <ForwardRef
+      alignItems="start"
+      direction="row"
+      justifyContent="space-between"
+      mb={2}
+    >
+      <ForwardRef
+        alignItems="center"
+        direction="row"
+        flexWrap="wrap"
+      >
+        <Text
+          maxWidth="100%"
+          mb="8px !important"
+          mr={2}
+          overflow="hidden"
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          mb={2}
+          mr={2}
+          variant="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </ForwardRef>
+      <ForwardRef
+        align="center"
+        direction="row"
+      />
+    </ForwardRef>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <ForwardRef
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <Connect(LoginOverlay)
+        enabled={false}
+        placement="bottom"
+      >
+        <ConditionalWrapper
+          when={true}
+          wrapper={[Function]}
+        >
+          <Button
+            aria-label="vote.add"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <ForwardRef
+                name="CLAP_O"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+          />
+        </ConditionalWrapper>
+      </Connect(LoginOverlay)>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </ForwardRef>
+  </ForwardRef>
+  <Relay(Connect(ModalReportArgumentMobile))
+    argument={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+        },
+        "id": "argumentPour42",
+        "published": true,
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
         "votes": Object {
           "totalCount": 500,
         },

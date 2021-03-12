@@ -7,12 +7,19 @@ import type {
   AddDebateArgumentVoteMutationResponse,
 } from '~relay/AddDebateArgumentVoteMutation.graphql';
 
+type OptimisticVariables = {|
+  +countVotes: number,
+|};
+
 const mutation = graphql`
   mutation AddDebateArgumentVoteMutation($input: AddDebateArgumentVoteInput!) {
     addDebateArgumentVote(input: $input) {
       errorCode
       debateArgument {
-        ...ArgumentCard_argument @arguments(isAuthenticated: true)
+        viewerHasVote
+        votes(first: 0) {
+          totalCount
+        }
       }
     }
   }
@@ -20,10 +27,23 @@ const mutation = graphql`
 
 const commit = (
   variables: AddDebateArgumentVoteMutationVariables,
+  optimisticVariables: OptimisticVariables,
 ): Promise<AddDebateArgumentVoteMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticResponse: {
+      addDebateArgumentVote: {
+        errorCode: null,
+        debateArgument: {
+          id: variables.input.debateArgumentId,
+          viewerHasVote: true,
+          votes: {
+            totalCount: optimisticVariables.countVotes + 1,
+          },
+        },
+      },
+    },
   });
 
 export default { commit };

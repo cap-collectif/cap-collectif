@@ -30,6 +30,8 @@ import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/Moda
 import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
+import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {|
   ...AppBoxProps,
@@ -46,9 +48,10 @@ export const voteForArgument = (
   debateArgumentId: string,
   viewerHasVote: ?boolean,
   intl: IntlShape,
+  countVotes: number,
 ) => {
-  if (viewerHasVote)
-    return RemoveDebateArgumentVoteMutation.commit({ input: { debateArgumentId } })
+  if (viewerHasVote) {
+    return RemoveDebateArgumentVoteMutation.commit({ input: { debateArgumentId } }, { countVotes })
       .then(response => {
         if (response.removeDebateArgumentVote?.errorCode) {
           mutationErrorToast(intl);
@@ -57,7 +60,9 @@ export const voteForArgument = (
       .catch(() => {
         mutationErrorToast(intl);
       });
-  return AddDebateArgumentVoteMutation.commit({ input: { debateArgumentId } })
+  }
+
+  return AddDebateArgumentVoteMutation.commit({ input: { debateArgumentId } }, { countVotes })
     .then(response => {
       if (response.addDebateArgumentVote?.errorCode) {
         mutationErrorToast(intl);
@@ -246,15 +251,30 @@ export const ArgumentCard = ({
           (!isEditing && widget.isSource && widget.authEnabled)) && (
           <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
             <LoginOverlay enabled={!stepClosed} placement="bottom">
-              <Button
-                color="neutral-gray.500"
-                leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
-                onClick={() => voteForArgument(argument.id, argument.viewerHasVote, intl)}
-                aria-label={intl.formatMessage({
-                  id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
-                })}
-                disabled={stepClosed}
-              />
+              <ConditionalWrapper
+                when={(viewer && !viewer?.isEmailConfirmed) || false}
+                wrapper={children => (
+                  <Tooltip label={intl.formatMessage({ id: 'confirm-account-to-interact' })}>
+                    <AppBox>{children}</AppBox>
+                  </Tooltip>
+                )}>
+                <Button
+                  color="neutral-gray.500"
+                  leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
+                  onClick={() =>
+                    voteForArgument(
+                      argument.id,
+                      argument.viewerHasVote,
+                      intl,
+                      argument.votes.totalCount,
+                    )
+                  }
+                  aria-label={intl.formatMessage({
+                    id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
+                  })}
+                  disabled={stepClosed || (viewer && !viewer?.isEmailConfirmed) || false}
+                />
+              </ConditionalWrapper>
             </LoginOverlay>
             <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">
               {argument.votes.totalCount}
@@ -298,6 +318,7 @@ export default createFragmentContainer(ArgumentCard, {
   viewer: graphql`
     fragment ArgumentCard_viewer on User {
       isAdmin
+      isEmailConfirmed
     }
   `,
 });

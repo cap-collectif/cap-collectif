@@ -151,7 +151,14 @@ export const DebateArgumentItem = ({ debateArgument, isMobile, setDeleteModalInf
             <Button
               color="neutral-gray.500"
               leftIcon={<Icon name={debateArgument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
-              onClick={() => voteForArgument(debateArgument.id, debateArgument.viewerHasVote, intl)}
+              onClick={() =>
+                voteForArgument(
+                  debateArgument.id,
+                  debateArgument.viewerHasVote,
+                  intl,
+                  debateArgument.votes.totalCount,
+                )
+              }
               aria-label={intl.formatMessage({
                 id: debateArgument.viewerHasVote ? 'global.cancel' : 'vote.add',
               })}
