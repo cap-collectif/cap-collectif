@@ -3855,8 +3855,24 @@ type DebateStep implements Step & Node {
   """The debate of the step."""
   debate: Debate!
 
+  """the type of the debate"""
+  debateType: DebateType!
+
+  """the content of the debate"""
+  debateContent: HTML
+
   """Does the debate allow anonymous users to participate?"""
   isAnonymousParticipationAllowed: Boolean!
+}
+
+enum DebateType {
+  """
+  add a wysiwyg to allow the author to add additional content to the debate
+  """
+  WYSIWYG
+
+  """remove the wysiwyg to only let the face to face debate"""
+  FACE_TO_FACE
 }
 
 """A debate vote."""
@@ -7571,6 +7587,8 @@ input ProjectStepInput {
   synthesis: ID
   isAnonymousParticipationAllowed: Boolean
   articles: [DebateArticleInput]
+  debateType: DebateType
+  debateContent: String
 }
 
 """Label of a Project."""

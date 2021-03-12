@@ -13,6 +13,7 @@ const defaultStep = {
   slug: 'slugTest',
   hasOpinionsFilled: false,
   isAnalysisStep: false,
+  debateType: 'FACE_TO_FACE',
 };
 
 const defaultProps = {

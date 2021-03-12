@@ -9,6 +9,7 @@ import DebateStepPageLinkedArticles from './LinkedArticles/DebateStepPageLinkedA
 import DebateStepPageArguments from './Arguments/DebateStepPageArguments';
 import DebateStepPageNotYetStarted from './NotYetStarted/DebateStepPageNotYetStarted';
 import useIsMobile from '~/utils/hooks/useIsMobile';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import LoginModal from '~/components/User/Login/LoginModal';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
@@ -21,6 +22,8 @@ export const DebateStepPageLogic = ({ query }: Props) => {
   const { widget } = useDebateStepPage();
   const step = query?.step || null;
   const viewer = query?.viewer || null;
+  const showContent = query?.step?.debateType === 'WYSIWYG' && query?.step?.debateContent !== '';
+  const showFaceToFace = query?.step?.debateType === 'FACE_TO_FACE';
   const hasStarted = query?.step?.timeRange?.hasStarted;
 
   if (!hasStarted && step) return <DebateStepPageNotYetStarted step={step} />;
@@ -32,7 +35,13 @@ export const DebateStepPageLogic = ({ query }: Props) => {
         step={step}
         isAuthenticated={!!query?.viewer}
       />
-      <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
+      {showContent && <WYSIWYGRender value={step?.debateContent || ''} />}
+      {showFaceToFace && (
+        <>
+          <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
+          <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />
+        </>
+      )}
       {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}
       <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
       <LoginModal />
@@ -52,6 +61,10 @@ export default createFragmentContainer(DebateStepPageLogic, {
           timeRange {
             hasStarted
           }
+        }
+        ... on DebateStep {
+          debateType
+          debateContent
         }
         ...DebateStepPageNotYetStarted_step
         ...DebateStepPageArguments_step

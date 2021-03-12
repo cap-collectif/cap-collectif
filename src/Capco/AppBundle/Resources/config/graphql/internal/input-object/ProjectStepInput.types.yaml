@@ -98,3 +98,7 @@ ProjectStepInput:
                 type: 'Boolean'
             articles:
                 type: '[DebateArticleInput]'
+            debateType:
+                type: 'DebateType'
+            debateContent:
+                type: 'String'

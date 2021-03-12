@@ -97,6 +97,8 @@ const mutation = graphql`
                 }
               }
             }
+            debateType
+            debateContent
           }
           ... on QuestionnaireStep {
             questionnaire {

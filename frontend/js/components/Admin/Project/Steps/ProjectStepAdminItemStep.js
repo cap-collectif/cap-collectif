@@ -65,38 +65,41 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
             {step.type && <FormattedMessage id={getWordingStep(step.type)} />}
           </span>
 
-          {step.type === 'DebateStep' && step.slug && !step.hasOpinionsFilled && (
-            <>
-              <br />
-              <Flex
-                direction="row"
-                bg="blue.100"
-                py={1}
-                px={2}
-                align="center"
-                borderRadius="normal"
-                border="normal"
-                borderColor="blue.150"
-                spacing={2}
-                marginTop={2}>
-                <Icon name={ICON_NAME.CIRCLE_INFO} color="blue.500" size={ICON_SIZE.SM} />
+          {step.type === 'DebateStep' &&
+            step.slug &&
+            !step.hasOpinionsFilled &&
+            step.debateType === 'FACE_TO_FACE' && (
+              <>
+                <br />
+                <Flex
+                  direction="row"
+                  bg="blue.100"
+                  py={1}
+                  px={2}
+                  align="center"
+                  borderRadius="normal"
+                  border="normal"
+                  borderColor="blue.150"
+                  spacing={2}
+                  marginTop={2}>
+                  <Icon name={ICON_NAME.CIRCLE_INFO} color="blue.500" size={ICON_SIZE.SM} />
 
-                <Text color="blue.800">
-                  <FormattedHTMLMessage
-                    id="finalize.face.to.face.configuration"
-                    values={{
-                      link: getContributionsPath(
-                        getProjectAdminPath(project._id, 'CONTRIBUTIONS'),
-                        'DebateStep',
-                        step.id || '',
-                        step.slug,
-                      ),
-                    }}
-                  />
-                </Text>
-              </Flex>
-            </>
-          )}
+                  <Text color="blue.800">
+                    <FormattedHTMLMessage
+                      id="finalize.face.to.face.configuration"
+                      values={{
+                        link: getContributionsPath(
+                          getProjectAdminPath(project._id, 'CONTRIBUTIONS'),
+                          'DebateStep',
+                          step.id || '',
+                          step.slug,
+                        ),
+                      }}
+                    />
+                  </Text>
+                </Flex>
+              </>
+            )}
         </ItemQuestionWrapper>
       </Col>
 

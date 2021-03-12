@@ -37,6 +37,7 @@ import type { ProposalViewMode } from '~/redux/modules/proposal';
 import StepArticle from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import type { Articles } from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
+import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql';
 import Accordion from '~ds/Accordion';
 import Heading from '~ui/Primitives/Heading';
 import DebateWidgetForm from '~/components/Admin/Project/Step/DebateWidgetForm/DebateWidgetForm';
@@ -102,6 +103,8 @@ type Props = {|
     debate?: {
       id: string,
     },
+    debateType?: DebateType,
+    debateContent?: string,
   },
   intl: IntlShape,
   formName: string,
@@ -121,6 +124,7 @@ type Props = {|
   isMapViewEnabled: boolean,
   project: ProjectAdminStepForm_project,
   mainView: ?ProposalViewMode,
+  debateType?: DebateType,
 |};
 
 type DisplayMode = {
@@ -369,6 +373,7 @@ export function ProjectAdminStepForm({
   isMapViewEnabled,
   mainView,
   isCreating,
+  debateType,
 }: Props) {
   const canSetDisplayMode =
     (step.type === 'SelectionStep' || step.type === 'CollectStep') &&
@@ -387,6 +392,41 @@ export function ProjectAdminStepForm({
       <Modal.Body>
         <FormContainer onSubmit={handleSubmit} id={form}>
           {step.type !== 'DebateStep' && renderSubSection('global.general')}
+
+          {step.type !== 'DebateStep' && (
+            <Field
+              type="text"
+              name="title"
+              id="step-title"
+              label={<FormattedMessage id="global.title" />}
+              component={renderComponent}
+            />
+          )}
+
+          {step.type === 'DebateStep' && (
+            <>
+              <p className="mb-20">
+                <FormattedMessage id="debate.type.question" />
+              </p>
+              <Field
+                type="radio"
+                name="debateType"
+                id="step-debate-type-face-to-face"
+                component={renderComponent}
+                value="FACE_TO_FACE">
+                <FormattedMessage id="debate.type.face-to-face" />
+              </Field>
+
+              <Field
+                type="radio"
+                name="debateType"
+                id="step-debate-type-wysiwyg"
+                component={renderComponent}
+                value="WYSIWYG">
+                <FormattedMessage id="debate.type.advanced" />
+              </Field>
+            </>
+          )}
 
           <Field
             type="text"
@@ -414,6 +454,18 @@ export function ProjectAdminStepForm({
               id="step-question"
               label={<FormattedMessage id="debate.question" />}
               placeholder="placeholderText.debat.questionLabel"
+              component={renderComponent}
+              value={step?.debateContent}
+            />
+          )}
+
+          {debateType === 'WYSIWYG' && (
+            <Field
+              type="admin-editor"
+              name="debateContent"
+              id="step-debate-content"
+              label={<FormattedMessage id="debate.content" />}
+              placeholder={<FormattedMessage id="debate.content" />}
               component={renderComponent}
             />
           )}
@@ -587,7 +639,7 @@ export function ProjectAdminStepForm({
             </ViewsContainer>
           )}
 
-          {step.type === 'DebateStep' && <StepArticle />}
+          {step.type === 'DebateStep' && debateType === 'FACE_TO_FACE' && <StepArticle />}
 
           {step.type === 'DebateStep' && step.debate && isAnonymousParticipationAllowed && (
             <Accordion>
@@ -669,7 +721,6 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     isCreating,
     formValueSelector(stepFormName)(state, 'proposalForm'),
   );
-
   return {
     initialValues: {
       // AbstractStep
@@ -692,6 +743,9 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       isListViewEnabled,
       isMapViewEnabled,
       mainView,
+      // DebateStep
+      debateType: step.type === 'DebateStep' ? step?.debateType || 'FACE_TO_FACE' : undefined,
+      debateContent: step.type === 'DebateStep' ? step?.debateContent : undefined,
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
@@ -756,6 +810,8 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     statuses: formValueSelector(stepFormName)(state, 'statuses') || [],
     // "private" is a reserved word in js (will be)
     isPrivate: formValueSelector(stepFormName)(state, 'private') || false,
+    // DebateStep
+    debateType: formValueSelector(stepFormName)(state, 'debateType') || 'FACE_TO_FACE',
   };
 };
 

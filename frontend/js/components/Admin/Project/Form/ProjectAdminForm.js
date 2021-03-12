@@ -293,20 +293,25 @@ const onSubmit = (
             step => step.type === 'DebateStep',
           );
 
-          toast({
-            variant: 'info',
-            content: props.intl.formatHTMLMessage(
-              { id: 'face.to.face.debate.configuration' },
-              {
-                link: getContributionsPath(
-                  getProjectAdminPath(data.updateAlphaProject?.project?._id || '', 'CONTRIBUTIONS'),
-                  'DebateStep',
-                  lastDebateStepAdded?.id || '',
-                  lastDebateStepAdded?.slug,
-                ),
-              },
-            ),
-          });
+          if (lastDebateStepAdded?.debateType === 'FACE_TO_FACE') {
+            toast({
+              variant: 'info',
+              content: props.intl.formatHTMLMessage(
+                { id: 'face.to.face.debate.configuration' },
+                {
+                  link: getContributionsPath(
+                    getProjectAdminPath(
+                      data.updateAlphaProject?.project?._id || '',
+                      'CONTRIBUTIONS',
+                    ),
+                    'DebateStep',
+                    lastDebateStepAdded?.id || '',
+                    lastDebateStepAdded?.slug,
+                  ),
+                },
+              ),
+            });
+          }
         }
       }
     });
@@ -773,6 +778,8 @@ export default createFragmentContainer(injectIntl(container), {
               }
             }
           }
+          debateType
+          debateContent
         }
       }
       visibility

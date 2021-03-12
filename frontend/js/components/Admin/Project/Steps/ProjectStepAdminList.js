@@ -15,6 +15,7 @@ import {
 } from 'react-beautiful-dnd';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { formValueSelector, arrayMove } from 'redux-form';
+import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql';
 import colors from '~/utils/colors';
 import type { GlobalState, Dispatch } from '~/types';
 import ProjectStepAdminItem from './ProjectStepAdminItem';
@@ -27,6 +28,7 @@ export type Step = {|
   +type: ?string,
   +url: ?string,
   +slug: ?string,
+  +debateType: DebateType,
   +hasOpinionsFilled: ?boolean,
   +isAnalysisStep: boolean,
 |};

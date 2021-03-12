@@ -20,6 +20,18 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
       </ProjectAdminFormstyle__ProjectBoxHeader>
       <Field
         component={[Function]}
+        id="step-title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
         id="step-label"
         label={
           <FormattedMessage
@@ -297,6 +309,18 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
           />
         </h5>
       </ProjectAdminFormstyle__ProjectBoxHeader>
+      <Field
+        component={[Function]}
+        id="step-title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
       <Field
         component={[Function]}
         id="step-label"

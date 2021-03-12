@@ -169,6 +169,8 @@ const BASE_DEBATE_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape DebateStep",
   label: 'DebateStep',
+  debateType: 'FACE_TO_FACE',
+  debateContent: '',
 };
 
 const BASE_PRESENTATION_STEP = {

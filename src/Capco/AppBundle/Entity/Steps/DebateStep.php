@@ -5,9 +5,11 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Enum\DebateType;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateStepRepository")
@@ -27,6 +29,17 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
      * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})
      */
     private bool $isAnonymousParticipationAllowed = false;
+
+    /**
+     * @ORM\Column(name="debate_type", columnDefinition="ENUM('WYSIWYG', 'FACE_TO_FACE')", options={"default":"FACE_TO_FACE"})
+     * @Assert\Choice(choices = {"WYSIWYG", "FACE_TO_FACE"})
+     */
+    private string $debateType = DebateType::FACE_TO_FACE;
+
+    /**
+     * @ORM\Column(name="debate_content", type="text", nullable=true)
+     */
+    private ?string $debateContent;
 
     /**
      * When we create a debate step, we also create a debate.
@@ -94,6 +107,30 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     public function setIsAnonymousParticipationAllowed(bool $isAnonymousParticipationAllowed): self
     {
         $this->isAnonymousParticipationAllowed = $isAnonymousParticipationAllowed;
+
+        return $this;
+    }
+
+    public function getDebateType(): string
+    {
+        return $this->debateType;
+    }
+
+    public function setDebateType(string $debateType): self
+    {
+        $this->debateType = $debateType;
+
+        return $this;
+    }
+
+    public function getDebateContent(): ?string
+    {
+        return $this->debateContent;
+    }
+
+    public function setDebateContent(?string $debateContent): self
+    {
+        $this->debateContent = $debateContent;
 
         return $this;
     }

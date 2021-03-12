@@ -1285,6 +1285,20 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 ],
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "debateType",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "debateContent",
+                                "storageKey": null,
+                              },
                             ],
                             "type": "DebateStep",
                           },
@@ -1776,7 +1790,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "2610ca1fc48ec9da289ce990aa81952c",
+        "cacheID": "dee88f7352786683ac2f394bf882c5b7",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -2066,6 +2080,8 @@ fragment ProjectAdminForm_project on Project {
           }
         }
       }
+      debateType
+      debateContent
     }
   }
   visibility
@@ -3484,6 +3500,20 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 ],
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "debateType",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "debateContent",
+                                "storageKey": null,
+                              },
                             ],
                             "type": "DebateStep",
                           },
@@ -3975,7 +4005,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "2610ca1fc48ec9da289ce990aa81952c",
+        "cacheID": "dee88f7352786683ac2f394bf882c5b7",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4265,6 +4295,8 @@ fragment ProjectAdminForm_project on Project {
           }
         }
       }
+      debateType
+      debateContent
     }
   }
   visibility
