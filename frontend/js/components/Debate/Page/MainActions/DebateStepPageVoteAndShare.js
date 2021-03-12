@@ -129,6 +129,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, viewerIsConfirmedByEmail,
                 setVoteState={setVoteState}
                 showArgumentForm={showArgumentForm}
                 setShowArgumentForm={setShowArgumentForm}
+                widgetLocation={widget.location}
                 intl={intl}
               />
             )}

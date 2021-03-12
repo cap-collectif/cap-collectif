@@ -9,3 +9,7 @@ AddDebateVoteInput:
             type:
                 type: 'ForOrAgainstValue!'
                 description: 'Whether the vote will be `FOR` or `AGAINST`.'
+            widgetOriginURI:
+                type: 'URI'
+                defaultValue: null
+                description: "The URL of widget from which the debate's vote was added, if any."

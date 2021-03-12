@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
+use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
@@ -53,6 +54,7 @@ class DebateArgument implements
     Authorable
 {
     use AuthorInformationTrait;
+    use ContributionOriginTrait;
     use DebatableTrait;
     use ForAgainstTrait;
     use HasAuthorTrait;

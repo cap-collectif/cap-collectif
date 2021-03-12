@@ -45,6 +45,10 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
+        $input
+            ->offsetGet('widgetOriginURI')
+            ->shouldBeCalled()
+            ->willReturn(null);
         $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
@@ -78,6 +82,10 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
+        $input
+            ->offsetGet('widgetOriginURI')
+            ->shouldBeCalled()
+            ->willReturn(null);
         $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
@@ -107,6 +115,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
+        $input->offsetGet('widgetOriginURI')->willReturn(null);
         $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
@@ -132,6 +141,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
+        $input->offsetGet('widgetOriginURI')->willReturn(null);
         $globalIdResolver->resolve($debateId, $viewer)->willReturn(null);
 
         $payload = $this->__invoke($input, $viewer);
@@ -152,6 +162,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
+        $input->offsetGet('widgetOriginURI')->willReturn(null);
         $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);

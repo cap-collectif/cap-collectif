@@ -164,6 +164,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumente
       url="step/123"
       viewerIsConfirmed={true}
       voteState="ARGUMENTED"
+      widgetLocation={null}
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
@@ -215,6 +216,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted 1`]
       url="step/123"
       viewerIsConfirmed={true}
       voteState="VOTED"
+      widgetLocation={null}
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
@@ -268,6 +270,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted on 
       url="step/123"
       viewerIsConfirmed={true}
       voteState="VOTED"
+      widgetLocation={null}
     />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>

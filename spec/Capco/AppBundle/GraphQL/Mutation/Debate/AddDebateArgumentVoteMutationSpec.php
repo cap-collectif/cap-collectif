@@ -51,6 +51,10 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+        $input
+            ->offsetGet('widgetOriginURI')
+            ->shouldBeCalled()
+            ->willReturn(null);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->setVotes(new ArrayCollection());
         $debateArgument->isPublished()->willReturn(true);
@@ -80,6 +84,7 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'wrongId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+        $input->offsetGet('widgetOriginURI')->willReturn(null);
         $globalIdResolver->resolve($id, $viewer)->willReturn(null);
 
         $this->__invoke($input, $viewer)->shouldBe([
@@ -98,6 +103,7 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+        $input->offsetGet('widgetOriginURI')->willReturn(null);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->isPublished()->willReturn(true);
 

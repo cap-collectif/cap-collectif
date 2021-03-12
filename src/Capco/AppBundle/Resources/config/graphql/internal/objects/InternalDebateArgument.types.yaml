@@ -62,3 +62,11 @@ InternalDebateArgument:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'IP of the author'
                 type: 'IP'
+            origin:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The origin of a debate's argument"
+                type: 'ContributionOrigin!'
+            widgetOriginUrl:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The URL of widget from which the debate's argument was added, if any."
+                type: 'URI'

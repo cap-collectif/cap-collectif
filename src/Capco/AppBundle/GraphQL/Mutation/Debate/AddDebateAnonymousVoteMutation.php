@@ -75,6 +75,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
             ->setType($type)
             ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
             ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+        self::setOrigin($debateAnonymousVote, $input);
 
         $this->em->persist($debateAnonymousVote);
 
@@ -104,5 +105,15 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
     private function generateErrorPayload(string $message): array
     {
         return ['debateAnonymousVote' => null, 'errorCode' => $message];
+    }
+
+    private static function setOrigin(DebateAnonymousVote $vote, Arg $input): DebateAnonymousVote
+    {
+        $widgetOriginURI = $input->offsetGet('widgetOriginURI');
+        if ($widgetOriginURI) {
+            $vote->setWidgetOriginUrl($widgetOriginURI);
+        }
+
+        return $vote;
     }
 }

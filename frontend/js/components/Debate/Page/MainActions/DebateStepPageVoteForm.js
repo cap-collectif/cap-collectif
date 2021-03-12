@@ -58,6 +58,7 @@ type Props = {|
   +url?: string,
   +viewerIsConfirmed: boolean,
   +organizationName: string,
+  +widgetLocation: ?string,
   +intl: IntlShape,
   +viewer: Viewer,
 |};
@@ -91,6 +92,7 @@ export const addArgumentOnDebate = (
   debate: string,
   body: string,
   type?: 'FOR' | 'AGAINST',
+  widgetLocation: ?string,
   intl: IntlShape,
   onSuccess: () => void,
   onError: () => void,
@@ -114,7 +116,7 @@ export const addArgumentOnDebate = (
 
   return AddDebateArgumentMutation.commit(
     {
-      input: { debate, body, type },
+      input: { debate, body, type, widgetOriginURI: widgetLocation },
       connections,
       edgeTypeName: 'DebateArgumentEdge',
     },
@@ -186,12 +188,20 @@ const bandMessage = {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { body } = values;
-  const { debate, intl, setShowArgumentForm, setVoteState, viewerIsConfirmed } = props;
+  const {
+    debate,
+    intl,
+    setShowArgumentForm,
+    setVoteState,
+    viewerIsConfirmed,
+    widgetLocation,
+  } = props;
 
   return addArgumentOnDebate(
     debate.id,
     body,
     debate.viewerVote?.type,
+    widgetLocation,
     intl,
     () => {
       setShowArgumentForm(false);

@@ -12,3 +12,7 @@ CreateDebateArgumentInput:
             type:
                 type: 'ForOrAgainstValue!'
                 description: 'Whether the argument will be `FOR` or `AGAINST`.'
+            widgetOriginURI:
+                type: 'URI'
+                defaultValue: null
+                description: "The URL of widget from which the debate argument's vote was added, if any."

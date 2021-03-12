@@ -581,3 +581,84 @@ Object {
   },
 }
 `;
+
+exports[`Internal|Debate.Votes connection fetches votes origin 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMA==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMQ==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMg==",
+            "origin": "MAIL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwMw==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNA==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNg==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNw==",
+            "origin": "WIDGET",
+            "widgetOriginUrl": "www.lemonde.fr",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOA==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOQ==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

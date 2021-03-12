@@ -1,0 +1,14 @@
+ContributionOrigin:
+    type: enum
+    config:
+        description: 'The origin of a contribution'
+        values:
+            INTERNAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrigin::INTERNAL")'
+                description: 'Created on the platform'
+            WIDGET:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrigin::WIDGET")'
+                description: 'Created through a widget'
+            MAIL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrigin::MAIL")'
+                description: 'Created through email'

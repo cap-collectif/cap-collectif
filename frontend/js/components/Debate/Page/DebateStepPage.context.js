@@ -7,6 +7,7 @@ export type Context = {|
   +widget: {|
     +isSource: boolean,
     +authEnabled: boolean,
+    +location: ?string,
   |},
 |};
 
@@ -16,6 +17,7 @@ export const DebateStepPageContext = React.createContext<Context>({
   widget: {
     isSource: false,
     authEnabled: false,
+    location: null,
   },
 });
 

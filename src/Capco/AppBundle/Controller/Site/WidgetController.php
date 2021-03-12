@@ -27,8 +27,13 @@ class WidgetController extends Controller
     {
         $viewer = $this->getUser();
         $debate = $this->globalIdResolver->resolve($debateId, $viewer);
-        
-        if (!$debate || !($debate instanceof Debate) || !$debate->getStep() || !$debate->getProject()) {
+
+        if (
+            !$debate ||
+            !($debate instanceof Debate) ||
+            !$debate->getStep() ||
+            !$debate->getProject()
+        ) {
             throw $this->createNotFoundException();
         }
 
@@ -41,13 +46,15 @@ class WidgetController extends Controller
 
         $widgetBackground = $request->query->get('background');
         $widgetAuthenticationEnabled = $request->query->getBoolean('authEnabled') || false;
+        $destination = $request->query->get('destination') ?? 'unknown';
 
         return [
             'debateId' => $debateId,
             'step' => $step,
             'project' => $project,
             'widgetBackground' => $widgetBackground,
-            'widgetAuthEnabled' => $widgetAuthenticationEnabled
+            'widgetAuthEnabled' => $widgetAuthenticationEnabled,
+            'widgetLocation' => $destination,
         ];
     }
 }

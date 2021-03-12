@@ -28,6 +28,17 @@ const AddDebateVoteMutation = /* GraphQL */ `
   }
 `;
 
+const AddDebateVoteAndGetOriginMutation = /* GraphQL */ `
+  mutation AddDebateVoteMutation($input: AddDebateVoteInput!) {
+    addDebateVote(input: $input) {
+      debateVote {
+        origin
+        widgetOriginUrl
+      }
+    }
+  }
+`;
+
 describe('Internal|addDebateVote mutation', () => {
   it('Add and update a debate vote.', async () => {
     const response = await graphql(
@@ -99,5 +110,28 @@ describe('Internal|addDebateVote mutation', () => {
 
     // The vote must not be published.
     expect(response.addDebateVote.debateVote.published).toBe(false);
+  });
+
+  it('Add a vote by widget.', async () => {
+    const response = await graphql(
+      AddDebateVoteAndGetOriginMutation,
+      {
+        input: {
+          debateId: toGlobalId('Debate', 'debateCannabis'),
+          type: 'FOR',
+          widgetOriginURI: 'www.lejournaldesdebats.fr',
+        },
+      },
+      'internal_admin',
+    );
+
+    expect(response).toMatchSnapshot({
+      addDebateVote: {
+        debateVote: {
+          origin: 'WIDGET',
+          widgetOriginUrl: 'www.lejournaldesdebats.fr',
+        },
+      },
+    });
   });
 });

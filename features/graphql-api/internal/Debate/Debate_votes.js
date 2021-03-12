@@ -74,6 +74,24 @@ const DebateVoteIPQuery = /* GraphQL */ `
   }
 `;
 
+const DebateVoteOriginQuery = /* GraphQL */ `
+  query DebateVoteIPQuery($id: ID!) {
+    node(id: $id) {
+      ... on Debate {
+        votes {
+          edges {
+            node {
+              id
+              origin
+              widgetOriginUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('Internal|Debate.Votes connection', () => {
   it('fetches 5 first votes associated to a debate with a cursor', async () => {
     await expect(
@@ -217,6 +235,19 @@ describe('Internal|Debate.Votes connection', () => {
     await expect(
       graphql(
         DebateVoteIPQuery,
+        {
+          id: toGlobalId('Debate', 'debateCannabis'),
+          cursor: null,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches votes origin', async () => {
+    await expect(
+      graphql(
+        DebateVoteOriginQuery,
         {
           id: toGlobalId('Debate', 'debateCannabis'),
           cursor: null,

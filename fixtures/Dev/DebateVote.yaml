@@ -22,6 +22,8 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         publishedAt: <(new \DateTime('2015-01-01 09:03:00'))>
         createdAt: $publishedAt
         ipAddress: '142.042.042.042'
+        __calls:
+            - setMailOrigin: []
     debateCannabisVote4:
         id: 13003
         user: '@userJpec'
@@ -57,6 +59,8 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:08:00'))>
         createdAt: $publishedAt
+        __calls:
+            - setWidgetOriginUrl: ['www.lemonde.fr']
     debateCannabisVote9:
         id: 13008
         user: '@userAgui'

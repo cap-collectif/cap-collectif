@@ -46,7 +46,8 @@ class TokenManager
             ->setCreatedAt(new \DateTime())
             ->setDebate($voteToken->getDebate())
             ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null)
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null);
+            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
+            ->setMailOrigin();
         $this->em->persist($vote);
 
         return $vote;

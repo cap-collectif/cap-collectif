@@ -16,7 +16,7 @@ Object {
     "debate": Object {
       "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
       "votes": Object {
-        "totalCount": 10,
+        "totalCount": 11,
       },
     },
     "deletedDebateAnonymousVoteId": "RGViYXRlQW5vbnltb3VzVm90ZTo=",

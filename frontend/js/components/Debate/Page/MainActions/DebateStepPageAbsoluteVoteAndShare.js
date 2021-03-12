@@ -32,7 +32,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   viewerIsConfirmed,
 }: Props) => {
   const { debate, url } = step;
-  const { title } = useDebateStepPage();
+  const { title, widget } = useDebateStepPage();
   const intl = useIntl();
 
   return (
@@ -80,6 +80,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             setVoteState={setVoteState}
             showArgumentForm={showArgumentForm}
             setShowArgumentForm={setShowArgumentForm}
+            widgetLocation={widget.location}
             intl={intl}
           />
         )}

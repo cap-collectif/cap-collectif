@@ -32,3 +32,11 @@ InternalDebateVote:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'IP of the voter'
                 type: 'IP'
+            origin:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The origin of a debate's vote"
+                type: 'ContributionOrigin!'
+            widgetOriginUrl:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The URL of widget from which the debate's vote was added, if any."
+                type: 'URI'

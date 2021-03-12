@@ -22,6 +22,7 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
             $this->checkCanParticipate($debateArgument);
             $this->checkNoPreviousVote($debateArgument, $viewer);
             $debateArgumentVote = self::createNewVote($debateArgument, $viewer);
+            self::setOrigin($debateArgumentVote, $input);
             $this->em->persist($debateArgumentVote);
 
             try {
@@ -65,6 +66,16 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
         $vote->setDebateArgument($debateArgument);
         $vote->setUser($viewer);
         $debateArgument->addVote($vote);
+
+        return $vote;
+    }
+
+    private static function setOrigin(DebateArgumentVote $vote, Arg $input): DebateArgumentVote
+    {
+        $widgetOriginURI = $input->offsetGet('widgetOriginURI');
+        if ($widgetOriginURI) {
+            $vote->setWidgetOriginUrl($widgetOriginURI);
+        }
 
         return $vote;
     }

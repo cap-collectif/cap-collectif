@@ -21,6 +21,7 @@ import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import type { DebateStepPageVote_step } from '~relay/DebateStepPageVote_step.graphql';
 import type { GlobalState } from '~/types';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   ...AppBoxProps,
@@ -34,10 +35,13 @@ const anonymousVoteForDebate = (
   debateId: string,
   captcha: string,
   type: 'FOR' | 'AGAINST',
+  widgetLocation: ?string,
   intl: IntlShape,
   setVoteState: (state: VoteState) => void,
 ) => {
-  return AddDebateAnonymousVoteMutation.commit({ input: { debateId, type, captcha } })
+  return AddDebateAnonymousVoteMutation.commit({
+    input: { debateId, type, captcha, widgetOriginURI: widgetLocation },
+  })
     .then(response => {
       if (response.addDebateAnonymousVote?.errorCode) {
         mutationErrorToast(intl);
@@ -59,6 +63,7 @@ const anonymousVoteForDebate = (
 const voteForDebate = (
   debateId: string,
   type: 'FOR' | 'AGAINST',
+  widgetLocation: ?string,
   intl: IntlShape,
   setVoteState: VoteState => void,
   isAuthenticated: boolean,
@@ -69,7 +74,7 @@ const voteForDebate = (
   setVoteState(optimisticVoteState);
 
   return AddDebateVoteMutation.commit(
-    { input: { debateId, type }, isAuthenticated },
+    { input: { debateId, type, widgetOriginURI: widgetLocation }, isAuthenticated },
     optimisticData,
   )
     .then(response => {
@@ -119,6 +124,7 @@ export const DebateStepPageVote = ({
 }: Props) => {
   const { track } = useAnalytics();
   const intl = useIntl();
+  const { widget } = useDebateStepPage();
   const [isHover, setIsHover] = useState<'FOR' | 'AGAINST' | false>(false);
   const [captcha, setCaptcha] = useState<{
     visible: boolean,
@@ -131,9 +137,9 @@ export const DebateStepPageVote = ({
   });
   useEffect(() => {
     if (captcha.value) {
-      anonymousVoteForDebate(step.debate.id, captcha.value, captcha.voteType, intl, setVoteState);
+      anonymousVoteForDebate(step.debate.id, captcha.value, captcha.voteType, widget.location, intl, setVoteState);
     }
-  }, [step.debate.id, captcha.value, captcha.voteType, intl, setVoteState]);
+  }, [step.debate.id, captcha.value, captcha.voteType, widget.location, intl, setVoteState]);
 
   const optimisticData: OptimisticResponse = {
     yesVotes: step.debate.yesVotes.totalCount,
@@ -168,6 +174,7 @@ export const DebateStepPageVote = ({
                   voteForDebate(
                     step.debate.id,
                     'FOR',
+                    widget.location,
                     intl,
                     setVoteState,
                     isAuthenticated,
@@ -196,6 +203,7 @@ export const DebateStepPageVote = ({
                   voteForDebate(
                     step.debate.id,
                     'AGAINST',
+                    widget.location,
                     intl,
                     setVoteState,
                     isAuthenticated,

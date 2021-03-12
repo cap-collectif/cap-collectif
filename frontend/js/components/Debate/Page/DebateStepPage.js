@@ -14,6 +14,7 @@ export type Props = {|
   +isAuthenticated: boolean,
   +fromWidget: boolean,
   +authEnabled: boolean,
+  +widgetLocation: string,
 |};
 
 export const DebateStepPage = ({
@@ -22,17 +23,19 @@ export const DebateStepPage = ({
   isAuthenticated,
   fromWidget,
   authEnabled,
+  widgetLocation,
 }: Props) => {
   const contextValue = React.useMemo(
     () => ({
       widget: {
         isSource: fromWidget,
         authEnabled,
+        location: widgetLocation,
       },
       stepClosed: true,
       title,
     }),
-    [title, fromWidget, authEnabled],
+    [title, fromWidget, authEnabled, widgetLocation],
   );
 
   return (

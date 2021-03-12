@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Traits\AuthorInformationTrait;
+use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\AbstractVote;
@@ -17,6 +18,7 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 class DebateArgumentVote extends AbstractVote
 {
     use AuthorInformationTrait;
+    use ContributionOriginTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="votes")

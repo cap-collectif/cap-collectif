@@ -18,6 +18,7 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             $this->checkCreateRights($debate, $viewer);
             $debateArgument = new DebateArgument($debate);
             self::setAuthor($debateArgument, $viewer);
+            self::setOrigin($debateArgument, $input);
             $debateArgument->setBody(strip_tags($input->offsetGet('body')));
             $debateArgument->setType($input->offsetGet('type'));
 
@@ -38,5 +39,15 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             ->setAuthor($viewer)
             ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
             ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+    }
+
+    private static function setOrigin(DebateArgument $argument, Arg $input): DebateArgument
+    {
+        $widgetOriginURI = $input->offsetGet('widgetOriginURI');
+        if ($widgetOriginURI) {
+            $argument->setWidgetOriginUrl($widgetOriginURI);
+        }
+
+        return $argument;
     }
 }

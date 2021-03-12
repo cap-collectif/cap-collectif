@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
+use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
 use Capco\AppBundle\Traits\IdTrait;
@@ -20,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 class DebateAnonymousVote implements IndexableInterface
 {
     use AuthorInformationTrait;
+    use ContributionOriginTrait;
     use DebatableTrait;
     use ForAgainstTrait;
     use IdTrait;

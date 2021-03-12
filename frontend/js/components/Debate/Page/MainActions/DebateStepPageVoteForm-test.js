@@ -27,6 +27,7 @@ describe('<DebateStepPageVoteForm/>', () => {
     setShowArgumentForm: jest.fn(),
     viewerIsConfirmed: true,
     organizationName: 'CapCollectif',
+    widgetLocation: null,
     viewer,
   };
 

@@ -33,3 +33,11 @@ InternalDebateAnonymousVote:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'Navigator of the voter'
                 type: 'String'
+            origin:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The origin of a debate argument's vote"
+                type: 'ContributionOrigin!'
+            widgetOriginUrl:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The URL of widget from which the debate argument's vote was added, if any."
+                type: 'URI'

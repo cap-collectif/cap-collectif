@@ -23,3 +23,23 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousVote:
         debate: '@debateCannabis'
         createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
         token: jesuisunsupertokengenshinimpact1
+    DebateAnonymousVoteAgainst2:
+        id: 13003
+        ipAddress: '3.3.3.3'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::AGAINST)>
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        debate: '@debateCannabis'
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        token: debateAnonymousVoteToken13003
+        __calls:
+            - setWidgetOriginUrl: ['www.figaro.fr']
+    DebateAnonymousVoteFor3:
+        id: 13004
+        ipAddress: '4.4.4.4'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::FOR)>
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        debate: '@debateCannabis'
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        token: debateAnonymousVoteToken13004
+        __calls:
+            - setWidgetOriginUrl: ['www.liberation.fr']

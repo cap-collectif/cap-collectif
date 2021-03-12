@@ -61,6 +61,7 @@ class AddDebateVoteMutation implements MutationInterface
         $type = $input->offsetGet('type');
         $debateVote = (new DebateVote())->setDebate($debate)->setType($type);
         self::setAuthor($debateVote, $viewer);
+        self::setOrigin($debateVote, $input);
 
         $previousVote = $this->repository->getOneByDebateAndUser($debate, $viewer);
         $previousVoteId = null;
@@ -109,5 +110,15 @@ class AddDebateVoteMutation implements MutationInterface
             ->setUser($viewer)
             ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
             ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+    }
+
+    private static function setOrigin(DebateVote $vote, Arg $input): DebateVote
+    {
+        $widgetOriginURI = $input->offsetGet('widgetOriginURI');
+        if ($widgetOriginURI) {
+            $vote->setWidgetOriginUrl($widgetOriginURI);
+        }
+
+        return $vote;
     }
 }

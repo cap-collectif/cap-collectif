@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|addDebateVote mutation Add a vote by widget. 1`] = `
+Object {
+  "addDebateVote": Object {
+    "debateVote": Object {
+      "origin": "WIDGET",
+      "widgetOriginUrl": "www.lejournaldesdebats.fr",
+    },
+  },
+}
+`;
+
 exports[`Internal|addDebateVote mutation Add an unpublished debate vote. 1`] = `
 Object {
   "addDebateVote": Object {

@@ -6,3 +6,7 @@ AddDebateArgumentVoteInput:
             debateArgumentId:
                 type: 'ID!'
                 description: 'The id of the `DebateArgument` to vote for.'
+            widgetOriginURI:
+                type: 'URI'
+                defaultValue: null
+                description: "The URL of widget from which the debate's argument was added, if any."
