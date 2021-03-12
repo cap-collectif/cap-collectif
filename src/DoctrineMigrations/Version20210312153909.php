@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210310113909 extends AbstractMigration implements ContainerAwareInterface
+final class Version20210312153909 extends AbstractMigration implements ContainerAwareInterface
 {
     private ?ContainerInterface $container;
 
@@ -46,7 +46,9 @@ final class Version20210310113909 extends AbstractMigration implements Container
             "SELECT spt.id FROM Capco\\AppBundle\\Entity\\SiteParameterTranslation spt WHERE spt.translatable = :translatable"
         );
         $query->setParameter(':translatable', $translationId);
-        if($query->getOneOrNullResult() === null) {
+        $result = $query->getArrayResult();
+
+        if(count($result) === 0) {
             $this->connection->insert(
                 'site_parameter_translation',
                 [
