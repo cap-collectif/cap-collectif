@@ -6,8 +6,6 @@ import { DebateStepPageVoteAndShare } from './DebateStepPageVoteAndShare';
 import { $refType, $fragmentRefs } from '~/mocks';
 
 const baseProps = {
-  body: 'blabla le body',
-  isAuthenticated: true,
   url: 'step/123',
   step: {
     url: 'step/123',

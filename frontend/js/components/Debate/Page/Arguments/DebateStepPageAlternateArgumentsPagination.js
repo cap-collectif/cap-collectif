@@ -51,7 +51,13 @@ export const FRAGMENT = graphql`
       ...DebateStepPageArgumentDrawer_argument @arguments(isAuthenticated: $isAuthenticated)
       ...ArgumentCard_argument @arguments(isAuthenticated: $isAuthenticated)
     }
-    alternateArguments(first: $first, after: $cursor, orderBy: $orderBy, isTrashed: false)
+    alternateArguments(
+      first: $first
+      after: $cursor
+      orderBy: $orderBy
+      isTrashed: false
+      isPublished: true
+    )
       @connection(
         key: "DebateStepPageAlternateArgumentsPagination_alternateArguments"
         filters: []
@@ -147,6 +153,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   if (handleChange) handleChange({ ...paginationProps, hasMore: paginationProps.hasMore() });
 
   if (!debateFragment || !debate) return null;
+
   const debateArguments =
     debate?.alternateArguments.edges
       ?.filter(Boolean)

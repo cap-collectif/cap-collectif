@@ -1,20 +1,22 @@
 // @flow
 import * as React from 'react';
-import { useIntl, type IntlShape } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { useIntl, FormattedMessage } from 'react-intl';
+import noop from 'lodash/noop';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
-import type { ModalDeleteArgumentMobile_argument } from '~relay/ModalDeleteArgumentMobile_argument.graphql';
+import type { ModalDeleteVoteMobile_debate } from '~relay/ModalDeleteVoteMobile_debate.graphql';
 import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
-import { ICON_NAME } from '~ds/Icon/Icon';
-import { formatConnectionPath } from '~/shared/utils/relay';
-import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
 import Heading from '~ui/Primitives/Heading';
 
+import RemoveDebateVoteAlternateArgumentMutation from '~/mutations/RemoveDebateVoteAlternateArgumentMutation';
+import type { VoteState } from '~/components/Debate/Page/MainActions/DebateStepPageVoteAndShare';
+
 type Props = {|
-  argument: ModalDeleteArgumentMobile_argument,
-  hidePreviousModal: () => void,
+  debate: ModalDeleteVoteMobile_debate,
+  setVoteState: VoteState => void,
+  setShowArgumentForm: boolean => void,
 |};
 
 const STATE = {
@@ -23,29 +25,21 @@ const STATE = {
   ERROR: 'ERROR',
 };
 
-const deleteArgument = (
-  argument: ModalDeleteArgumentMobile_argument,
-  intl: IntlShape,
+const deleteVoteFromViewer = (
+  debateId: string,
+  setVoteState: VoteState => void,
+  setShowArgumentForm: boolean => void,
   setModalState: (state: $Values<typeof STATE>) => void,
   setErrorCount: (count: number) => void,
   errorCount: number,
 ) => {
-  const connections = [
-    formatConnectionPath(
-      ['client', argument.debate.id],
-      'DebateStepPageAlternateArgumentsPagination_alternateArguments',
-    ),
-  ];
-
-  return DeleteDebateArgumentMutation.commit({
+  return RemoveDebateVoteAlternateArgumentMutation.commit({
     input: {
-      id: argument.id,
+      debateId,
     },
-    connections,
-    debateId: argument.debate.id,
   })
     .then(response => {
-      if (response.deleteDebateArgument?.errorCode) {
+      if (response.removeDebateVote?.errorCode) {
         setModalState(STATE.ERROR);
         setErrorCount(errorCount + 1);
       } else {
@@ -59,24 +53,36 @@ const deleteArgument = (
     });
 };
 
-export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props) => {
+export const ModalDeleteVoteMobile = ({ debate, setVoteState, setShowArgumentForm }: Props) => {
   const intl = useIntl();
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.CHOICES);
   const [errorCount, setErrorCount] = React.useState<number>(0);
+  const viewerVoteValue = debate.viewerVote?.type;
 
   const getModalContent = (state: $Values<typeof STATE>, hideModal) => {
     switch (state) {
       case 'CHOICES':
         return (
           <>
-            <Modal.Header>
-              <Heading as="h4">{intl.formatMessage({ id: 'confirm-delete-argument' })}</Heading>
+            <Modal.Header textAlign="center">
+              <Heading as="h4">{intl.formatMessage({ id: 'confirm-delete-vote' })}</Heading>
             </Modal.Header>
 
             <Modal.Body pb={6}>
+              <Text color="neutral-gray.700" mb={4} textAlign="center">
+                {intl.formatMessage({ id: 'argument-associated-vote-also-deleted' })}
+              </Text>
+
               <Button
                 onClick={() =>
-                  deleteArgument(argument, intl, setModalState, setErrorCount, errorCount)
+                  deleteVoteFromViewer(
+                    debate.id,
+                    setVoteState,
+                    setShowArgumentForm,
+                    setModalState,
+                    setErrorCount,
+                    errorCount,
+                  )
                 }
                 variant="primary"
                 variantColor="danger"
@@ -103,8 +109,8 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
               <Text aria-hidden role="img" mb={1} fontWeight={FontWeight.Semibold}>
                 ✅
               </Text>
-              <Text textAlign="center" width="50%">
-                {intl.formatMessage({ id: 'alert.success.delete.argument' })}
+              <Text textAlign="center" width="70%">
+                {intl.formatMessage({ id: 'alert.success.delete.argument.and.vote' })}
               </Text>
             </Modal.Body>
           </>
@@ -137,7 +143,14 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
                   width="100%"
                   justifyContent="center"
                   onClick={() =>
-                    deleteArgument(argument, intl, setModalState, setErrorCount, errorCount)
+                    deleteVoteFromViewer(
+                      debate.id,
+                      setVoteState,
+                      setShowArgumentForm,
+                      setModalState,
+                      setErrorCount,
+                      errorCount,
+                    )
                   }>
                   {intl.formatMessage({ id: 'global.delete' })}
                 </Button>
@@ -156,31 +169,35 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
     }
   };
 
+  const onDeleteSuccess = () => {
+    setVoteState('NONE');
+    setShowArgumentForm(true);
+  };
+
   return (
     <Modal
       disclosure={
-        <Button
-          justifyContent="center"
-          variant="tertiary"
-          variantColor="danger"
-          leftIcon={ICON_NAME.TRASH}>
-          {intl.formatMessage({ id: 'global.delete' })}
+        <Button color="gray.700" ml={[0, 2]} mb={[3, 0]} variant="link">
+          <FormattedMessage
+            id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
+          />
         </Button>
       }
-      onClose={hidePreviousModal}
-      ariaLabel={intl.formatMessage({ id: 'confirm-delete-argument' })}>
+      ariaLabel={intl.formatMessage({ id: 'confirm-delete-argument' })}
+      onClose={modalState === STATE.SUCCESS ? onDeleteSuccess : noop}>
       {({ hide }) => getModalContent(modalState, hide)}
     </Modal>
   );
 };
 
-export default createFragmentContainer(ModalDeleteArgumentMobile, {
-  argument: graphql`
-    fragment ModalDeleteArgumentMobile_argument on DebateArgument {
+export default (createFragmentContainer(ModalDeleteVoteMobile, {
+  debate: graphql`
+    fragment ModalDeleteVoteMobile_debate on Debate
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
-      debate {
-        id
+      viewerVote @include(if: $isAuthenticated) {
+        type
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof ModalDeleteVoteMobile>);

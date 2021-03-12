@@ -133,7 +133,7 @@ export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props) 
                   {intl.formatMessage({ id: 'modifications.publish' })}
                 </Button>
               ) : (
-                <Button variant="tertiary" variantColor="primary" onClick={hideModal}>
+                <Button variant="tertiary" variantColor="hierarchy" onClick={hideModal}>
                   {intl.formatMessage({ id: 'back.to.arguments' })}
                 </Button>
               )}

@@ -13,7 +13,6 @@ const defaultProps = {
       endAt: '2030-03-10 00:00:00',
     },
   },
-  isAuthenticated: true,
   isMobile: false,
 };
 

@@ -6,7 +6,17 @@ exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`]
   spacing={8}
 >
   <Relay(DebateStepPageMainActions)
-    isAuthenticated={true}
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageFaceToFace)
     isMobile={false}
     step={
       Object {
@@ -54,7 +64,17 @@ exports[`<DebateStepPageLogic /> should renders correctly when not authenticated
   spacing={8}
 >
   <Relay(DebateStepPageMainActions)
-    isAuthenticated={false}
+    isMobile={false}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "timeRange": Object {
+          "hasStarted": true,
+        },
+      }
+    }
+  />
+  <Relay(DebateStepPageFaceToFace)
     isMobile={false}
     step={
       Object {

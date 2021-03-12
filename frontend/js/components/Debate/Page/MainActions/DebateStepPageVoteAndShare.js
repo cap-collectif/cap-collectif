@@ -1,7 +1,6 @@
 // @flow
 import React, { useState, useRef } from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
@@ -20,13 +19,9 @@ import CookieMonster from '~/CookieMonster';
 type Props = {|
   +step: DebateStepPageVoteAndShare_step,
   +isMobile?: boolean,
-  +isAuthenticated: boolean,
-  +body: string,
   +url: string,
   +viewerIsConfirmedByEmail: boolean,
 |};
-
-export const formName = 'debate-argument-form';
 
 export type VoteState =
   | 'NONE'
@@ -57,15 +52,10 @@ const getInitialState = (
   return 'NONE';
 };
 
-export const DebateStepPageVoteAndShare = ({
-  isAuthenticated,
-  body,
-  isMobile,
-  viewerIsConfirmedByEmail,
-  step,
-}: Props) => {
+export const DebateStepPageVoteAndShare = ({ isMobile, viewerIsConfirmedByEmail, step }: Props) => {
   const { debate, url, isAnonymousParticipationAllowed } = step;
   const { stepClosed } = useDebateStepPage();
+  const intl = useIntl();
 
   const [voteState, setVoteState] = useState<VoteState>(
     getInitialState(debate, stepClosed, viewerIsConfirmedByEmail, isAnonymousParticipationAllowed),
@@ -74,7 +64,6 @@ export const DebateStepPageVoteAndShare = ({
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
   const ref = useRef();
   const isVisible = useOnScreen(ref);
-  const intl = useIntl();
   const { widget } = useDebateStepPage();
 
   return (
@@ -83,8 +72,6 @@ export const DebateStepPageVoteAndShare = ({
         <DebateStepPageAbsoluteVoteAndShare
           isMobile={isMobile}
           step={step}
-          isAuthenticated={isAuthenticated}
-          body={body}
           voteState={voteState}
           setVoteState={setVoteState}
           showArgumentForm={showArgumentForm}
@@ -94,15 +81,7 @@ export const DebateStepPageVoteAndShare = ({
       )}
 
       <Flex width="100%" direction="column" align="center" ref={ref}>
-        {voteState === 'NONE' && (
-          <DebateStepPageVote
-            step={step}
-            debateId={debate.id}
-            isAuthenticated={isAuthenticated}
-            viewerHasArgument={debate.viewerHasArgument || false}
-            onSuccess={setVoteState}
-          />
-        )}
+        {voteState === 'NONE' && <DebateStepPageVote step={step} setVoteState={setVoteState} />}
 
         {stepClosed && (
           <AppBox textAlign="center" mb={6}>
@@ -146,11 +125,11 @@ export const DebateStepPageVoteAndShare = ({
                 isMobile={isMobile}
                 url={url}
                 debate={debate}
-                body={body}
                 voteState={voteState}
                 setVoteState={setVoteState}
                 showArgumentForm={showArgumentForm}
                 setShowArgumentForm={setShowArgumentForm}
+                intl={intl}
               />
             )}
           </>
@@ -160,23 +139,15 @@ export const DebateStepPageVoteAndShare = ({
   );
 };
 
-const selector = formValueSelector(formName);
-
 const mapStateToProps = (state: GlobalState) => ({
   viewerIsConfirmedByEmail: state.user?.user?.isEmailConfirmed,
-  initialValues: {
-    body: '',
-  },
-  body: selector(state, 'body'),
 });
 
-const form = reduxForm({
-  form: formName,
-})(DebateStepPageVoteAndShare);
+const DebateStepPageVoteAndShareConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  DebateStepPageVoteAndShare,
+);
 
-const DebateStepPageVoteAndShareConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
-
-export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
+export default (createFragmentContainer(DebateStepPageVoteAndShareConnected, {
   step: graphql`
     fragment DebateStepPageVoteAndShare_step on DebateStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
@@ -192,7 +163,7 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
         votes(isPublished: true, first: 0) {
           totalCount
         }
-        allArguments: arguments(isPublished: true, first: 0) {
+        allArguments: arguments(isPublished: true, first: 0, isTrashed: false) {
           totalCount
         }
         argumentsFor: arguments(isPublished: true, first: 0, value: FOR) {
@@ -207,4 +178,4 @@ export default createFragmentContainer(DebateStepPageVoteAndShareConnected, {
       ...DebateStepPageAbsoluteVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageVoteAndShareConnected>);

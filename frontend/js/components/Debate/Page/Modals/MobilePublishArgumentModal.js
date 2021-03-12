@@ -3,16 +3,15 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
-import { Field, isInvalid, isPristine, reset } from 'redux-form';
+import { Field, isInvalid, isPristine } from 'redux-form';
 import { connect } from 'react-redux';
-import { formName } from '~/components/Debate/Page/MainActions/DebateStepPageVoteAndShare';
+import { formName } from '~/components/Debate/Page/MainActions/DebateStepPageVoteForm';
 import component from '~/components/Form/Field';
 import Button from '~ds/Button/Button';
-import type { Dispatch, GlobalState } from '~/types';
+import type { GlobalState } from '~/types';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 
 type ReduxProps = {|
-  +resetForm: () => void,
   +pristine: boolean,
   +invalid: boolean,
 |};
@@ -29,7 +28,6 @@ type Props = {|
 export const MobilePublishArgumentModal = ({
   show,
   onClose,
-  resetForm,
   onSubmit,
   pristine,
   invalid,
@@ -48,7 +46,6 @@ export const MobilePublishArgumentModal = ({
   }, []);
   const handleClose = () => {
     if (isLoading) return;
-    resetForm();
     if (onClose) {
       onClose();
     }
@@ -103,11 +100,4 @@ const mapStateToProps = (state: GlobalState) => ({
   viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  resetForm: () => dispatch(reset(formName)),
-});
-
-export default connect<any, any, _, _, _, _>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MobilePublishArgumentModal);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(MobilePublishArgumentModal);

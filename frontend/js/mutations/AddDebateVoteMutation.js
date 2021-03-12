@@ -1,7 +1,5 @@
 // @flow
 import { graphql } from 'react-relay';
-// eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
 import environment from '~/createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -9,17 +7,20 @@ import type {
   AddDebateVoteMutationResponse,
 } from '~relay/AddDebateVoteMutation.graphql';
 
+export type OptimisticResponse = {|
+  yesVotes: number,
+  votes: number,
+  viewerConfirmed: boolean,
+|};
+
 const mutation = graphql`
   mutation AddDebateVoteMutation($input: AddDebateVoteInput!, $isAuthenticated: Boolean!) {
     addDebateVote(input: $input) {
       errorCode
-      previousVoteId
       debateVote {
         id
+        type
         published
-        publishedAt
-        publishableUntil
-        notPublishedReason
         debate {
           id
           viewerHasArgument @include(if: $isAuthenticated)
@@ -27,17 +28,12 @@ const mutation = graphql`
           viewerVote @include(if: $isAuthenticated) {
             type
           }
-          yesVotes: votes(isPublished: true, type: FOR) {
+          yesVotes: votes(isPublished: true, type: FOR, first: 0) {
             totalCount
           }
-          votes(isPublished: true) {
+          votes(isPublished: true, first: 0) {
             totalCount
           }
-        }
-        type
-        createdAt
-        author {
-          id
         }
       }
     }
@@ -46,29 +42,40 @@ const mutation = graphql`
 
 const commit = (
   variables: AddDebateVoteMutationVariables,
+  optimisticResponse: OptimisticResponse,
 ): Promise<AddDebateVoteMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
-    updater: (store: RecordSourceSelectorProxy) => {
-      const debateProxy = store.get(variables.input.debateId);
-      if (!debateProxy) throw new Error('Expected debate to be in the store');
-
-      const allVotes = debateProxy.getLinkedRecord('votes', { isPublished: true, first: 0 });
-      if (!allVotes) return;
-      const previousValue = parseInt(allVotes.getValue('totalCount'), 10);
-      allVotes.setValue(previousValue + 1, 'totalCount');
-
-      if (variables.input.type === 'FOR') {
-        const yesVotes = debateProxy.getLinkedRecord('votes', {
-          isPublished: true,
-          first: 0,
-          type: 'FOR',
-        });
-        if (!yesVotes) return;
-        const previousValueFor = parseInt(yesVotes.getValue('totalCount'), 10);
-        yesVotes.setValue(previousValueFor + 1, 'totalCount');
-      }
+    optimisticResponse: {
+      addDebateVote: {
+        errorCode: null,
+        debateVote: {
+          id: new Date().toISOString(),
+          type: variables.input.type,
+          published: optimisticResponse.viewerConfirmed,
+          debate: {
+            id: variables.input.debateId,
+            viewerHasArgument: false,
+            viewerHasVote: variables.isAuthenticated,
+            viewerVote: {
+              id: new Date().toISOString(),
+              type: variables.input.type,
+            },
+            yesVotes: {
+              totalCount:
+                variables.input.type === 'FOR' && optimisticResponse.viewerConfirmed
+                  ? optimisticResponse.yesVotes + 1
+                  : optimisticResponse.yesVotes,
+            },
+            votes: {
+              totalCount: optimisticResponse.viewerConfirmed
+                ? optimisticResponse.votes + 1
+                : optimisticResponse.votes,
+            },
+          },
+        },
+      },
     },
   });
 

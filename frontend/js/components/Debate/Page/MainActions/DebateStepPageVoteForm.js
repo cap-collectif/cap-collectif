@@ -1,15 +1,17 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage, FormattedHTMLMessage, useIntl, type IntlShape } from 'react-intl';
-import { Field } from 'redux-form';
+import { FormattedMessage, FormattedHTMLMessage, type IntlShape } from 'react-intl';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
-import css from '@styled-system/css';
 import { m as motion } from 'framer-motion';
 import styled, { type StyledComponent } from 'styled-components';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
+import type {
+  DebateStepPageVoteForm_debate,
+  ForOrAgainstValue,
+} from '~relay/DebateStepPageVoteForm_debate.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import Icon from '~ds/Icon/Icon';
@@ -21,16 +23,30 @@ import component from '~/components/Form/Field';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentMutation from '~/mutations/AddDebateArgumentMutation';
 import { formatConnectionPath } from '~/shared/utils/relay';
-import { type VoteState, formName } from './DebateStepPageVoteAndShare';
+import { type VoteState } from './DebateStepPageVoteAndShare';
 import useScript from '~/utils/hooks/useScript';
 import MobilePublishArgumentModal from '~/components/Debate/Page/Modals/MobilePublishArgumentModal';
 import Text from '~ui/Primitives/Text';
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
-import type { State } from '~/types';
+import Popover from '~ds/Popover';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import RemoveDebateVoteMutation from '~/mutations/RemoveDebateVoteMutation';
+import { toast } from '~ds/Toast';
+import type { Dispatch, GlobalState } from '~/types';
+import ModalDeleteVoteMobile from '~/components/Debate/Page/Modals/ModalDeleteVoteMobile';
+
+export const formName = 'debate-argument-form';
+
+type Viewer = {|
+  id: string,
+  username: string,
+  isEmailConfirmed: boolean,
+|};
 
 type Props = {|
+  ...ReduxFormFormProps,
   +debate: DebateStepPageVoteForm_debate,
   +body: string,
   +voteState: VoteState,
@@ -42,6 +58,12 @@ type Props = {|
   +url?: string,
   +viewerIsConfirmed: boolean,
   +organizationName: string,
+  +intl: IntlShape,
+  +viewer: Viewer,
+|};
+
+type FormValues = {|
+  +body: string,
 |};
 
 export const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
@@ -71,6 +93,12 @@ export const addArgumentOnDebate = (
   type?: 'FOR' | 'AGAINST',
   intl: IntlShape,
   onSuccess: () => void,
+  onError: () => void,
+  author: {
+    id: $PropertyType<Viewer, 'id'>,
+    username: $PropertyType<Viewer, 'username'>,
+    isEmailConfirmed: $PropertyType<Viewer, 'isEmailConfirmed'>,
+  },
 ) => {
   if (!type) return;
   const connections = [
@@ -79,20 +107,67 @@ export const addArgumentOnDebate = (
       'DebateStepPageArgumentsPagination_arguments',
       `(value:"${type}")`,
     ),
-    formatConnectionPath(
-      ['client', debate],
-      'DebateStepPageAlternateArgumentsPagination_alternateArguments',
-    ),
   ];
-  return AddDebateArgumentMutation.commit({
-    input: { debate, body, type },
-    connections,
-    edgeTypeName: 'DebateArgumentConnection',
-  })
+
+  // For optimistic response
+  onSuccess();
+
+  return AddDebateArgumentMutation.commit(
+    {
+      input: { debate, body, type },
+      connections,
+      edgeTypeName: 'DebateArgumentEdge',
+    },
+    {
+      id: author.id,
+      username: author.username,
+      isEmailConfirmed: author.isEmailConfirmed,
+    },
+  )
     .then(response => {
       if (response.createDebateArgument?.errorCode) {
         mutationErrorToast(intl);
-      } else onSuccess();
+        onError();
+      }
+    })
+    .catch(() => {
+      mutationErrorToast(intl);
+      onError();
+    });
+};
+
+const deleteVoteFromViewer = (
+  debateId: string,
+  type: 'FOR' | 'AGAINST',
+  setVoteState: VoteState => void,
+  setShowArgumentForm: boolean => void,
+  intl: IntlShape,
+) => {
+  const connections = [
+    formatConnectionPath(
+      ['client', debateId],
+      'DebateStepPageArgumentsPagination_arguments',
+      `(value:"${type}")`,
+    ),
+  ];
+
+  return RemoveDebateVoteMutation.commit({
+    input: {
+      debateId,
+    },
+    connections,
+  })
+    .then(response => {
+      if (response.removeDebateVote?.errorCode) {
+        mutationErrorToast(intl);
+      } else {
+        toast({
+          variant: 'success',
+          content: intl.formatHTMLMessage({ id: 'argument.vote.remove_success' }),
+        });
+        setVoteState('NONE');
+        setShowArgumentForm(true);
+      }
     })
     .catch(() => {
       mutationErrorToast(intl);
@@ -109,6 +184,31 @@ const bandMessage = {
   RESULT: null,
 };
 
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  const { body } = values;
+  const { debate, intl, setShowArgumentForm, setVoteState, viewerIsConfirmed } = props;
+
+  return addArgumentOnDebate(
+    debate.id,
+    body,
+    debate.viewerVote?.type,
+    intl,
+    () => {
+      setShowArgumentForm(false);
+      setVoteState(viewerIsConfirmed ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED');
+    },
+    () => {
+      setShowArgumentForm(true);
+      setVoteState('VOTED');
+    },
+    {
+      id: props.viewer?.id,
+      username: props.viewer?.username,
+      isEmailConfirmed: props.viewer?.isEmailConfirmed,
+    },
+  );
+};
+
 export const DebateStepPageVoteForm = ({
   debate,
   body,
@@ -120,20 +220,15 @@ export const DebateStepPageVoteForm = ({
   url,
   isMobile,
   viewerIsConfirmed,
+  handleSubmit,
   organizationName,
+  intl,
 }: Props) => {
   useScript('https://platform.twitter.com/widgets.js');
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const intl = useIntl();
   const { widget } = useDebateStepPage();
 
-  const viewerVoteValue = debate.viewerVote?.type;
-
-  const publishArgument = () =>
-    addArgumentOnDebate(debate.id, body, viewerVoteValue, intl, () => {
-      setShowArgumentForm(false);
-      setVoteState(viewerIsConfirmed ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED');
-    });
+  const viewerVoteValue = ((debate.viewerVote?.type: any): ForOrAgainstValue);
 
   const title = viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against';
 
@@ -153,21 +248,11 @@ export const DebateStepPageVoteForm = ({
           {isMobile && (
             <>
               {!isAbsolute && (
-                <Button
-                  css={css({
-                    color: 'gray.700',
-                    '&:hover': {
-                      color: 'gray.700',
-                    },
-                  })}
-                  ml={[0, 2]}
-                  mb={[3, 0]}
-                  variant="link"
-                  onClick={() => setVoteState('NONE')}>
-                  <FormattedMessage
-                    id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
-                  />
-                </Button>
+                <ModalDeleteVoteMobile
+                  debate={debate}
+                  setShowArgumentForm={setShowArgumentForm}
+                  setVoteState={setVoteState}
+                />
               )}
               <Text textAlign="center">
                 <span role="img" aria-label="vote" css={{ fontSize: 20, marginRight: 8 }}>
@@ -186,6 +271,7 @@ export const DebateStepPageVoteForm = ({
               </Text>
             </>
           )}
+
           {!isMobile && (
             <>
               <span role="img" aria-label="vote" css={{ fontSize: 36, marginRight: 8 }}>
@@ -193,6 +279,7 @@ export const DebateStepPageVoteForm = ({
                   ? '🎉'
                   : '🗳️'}
               </span>
+
               {bandMessage[voteState] && (
                 <FormattedHTMLMessage
                   id={bandMessage[voteState]}
@@ -201,26 +288,65 @@ export const DebateStepPageVoteForm = ({
                   }
                 />
               )}
+
               {voteState !== 'VOTED_ANONYMOUS' && (
-                <Button
-                  css={css({
-                    color: 'gray.700',
-                    '&:hover': {
-                      color: 'gray.700',
-                    },
-                  })}
-                  ml={2}
-                  variant="link"
-                  onClick={() => setVoteState('NONE')}>
-                  <FormattedMessage
-                    id={viewerVoteValue === 'FOR' ? 'edit.vote.for' : 'edit.vote.against'}
-                  />
-                </Button>
+                <Popover placement="right" trigger={['click']}>
+                  <Popover.Trigger>
+                    <Button color="gray.700" ml={2} variant="link">
+                      <FormattedMessage
+                        id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
+                      />
+                    </Button>
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    {({ closePopover }) => (
+                      <React.Fragment>
+                        <Popover.Header>
+                          {intl.formatMessage({ id: 'vote-delete-confirmation' })}
+                        </Popover.Header>
+                        <Popover.Body>
+                          <Text>
+                            {intl.formatMessage({
+                              id: 'delete-argument-associate-to-vote',
+                            })}
+                          </Text>
+                        </Popover.Body>
+                        <Popover.Footer>
+                          <ButtonGroup>
+                            <Button
+                              onClick={closePopover}
+                              variant="secondary"
+                              variantColor="hierarchy"
+                              variantSize="small">
+                              {intl.formatMessage({ id: 'cancel' })}
+                            </Button>
+                            <Button
+                              variant="primary"
+                              variantColor="danger"
+                              variantSize="small"
+                              onClick={() =>
+                                deleteVoteFromViewer(
+                                  debate.id,
+                                  viewerVoteValue,
+                                  setVoteState,
+                                  setShowArgumentForm,
+                                  intl,
+                                )
+                              }>
+                              {intl.formatMessage({ id: 'delete-vote' })}
+                            </Button>
+                          </ButtonGroup>
+                        </Popover.Footer>
+                      </React.Fragment>
+                    )}
+                  </Popover.Content>
+                </Popover>
               )}
             </>
           )}
         </>
       </Flex>
+
       {voteState === 'ARGUMENTED' && (
         <Flex mt={3} flexDirection="row" spacing={2} justify="center">
           {url && url !== '' && (
@@ -232,8 +358,8 @@ export const DebateStepPageVoteForm = ({
               style={{ border: 'none', overflow: 'hidden' }}
               scrolling="no"
               frameBorder="0"
-              allowFullScreen="true"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowFullScreen
             />
           )}
           <a
@@ -276,7 +402,7 @@ export const DebateStepPageVoteForm = ({
               },
             }}
             pb={body?.length > 0 ? 6 : 2}>
-            <Form id={formName}>
+            <Form id={formName} onSubmit={handleSubmit}>
               <Field
                 name="body"
                 disabled={voteState === 'VOTED_ANONYMOUS'}
@@ -291,18 +417,12 @@ export const DebateStepPageVoteForm = ({
                 <Flex justifyContent="flex-end">
                   <Button
                     onClick={() => setShowArgumentForm(false)}
-                    type="button"
                     mr={7}
                     variant="link"
                     variantColor="primary">
                     <FormattedMessage id="global.cancel" />
                   </Button>
-                  <Button
-                    onClick={publishArgument}
-                    type="button"
-                    variant="primary"
-                    variantColor="primary"
-                    variantSize="big">
+                  <Button type="submit" variant="primary" variantColor="primary" variantSize="big">
                     <FormattedMessage
                       id={viewerIsConfirmed ? 'argument.publish.mine' : 'global.validate'}
                     />
@@ -335,7 +455,7 @@ export const DebateStepPageVoteForm = ({
             title={intl.formatMessage({ id: title })}
             show={showArgumentForm && voteState !== 'VOTED_ANONYMOUS' && isOpen}
             onClose={onClose}
-            onSubmit={publishArgument}
+            onSubmit={handleSubmit}
           />
           <ConditionalWrapper
             when={voteState === 'VOTED_ANONYMOUS'}
@@ -356,13 +476,23 @@ export const DebateStepPageVoteForm = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
+const selector = formValueSelector(formName);
+
+const mapStateToProps = (state: GlobalState) => ({
+  initialValues: {
+    body: '',
+  },
+  viewer: state.user.user,
+  body: selector(state, 'body'),
   organizationName: state.default.parameters['global.site.organization_name'],
 });
 
-const DebateStepPageVoteFormConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
-  DebateStepPageVoteForm,
-);
+const form = reduxForm({
+  form: formName,
+  onSubmit,
+})(DebateStepPageVoteForm);
+
+const DebateStepPageVoteFormConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(DebateStepPageVoteFormConnected, {
   debate: graphql`
@@ -372,6 +502,7 @@ export default createFragmentContainer(DebateStepPageVoteFormConnected, {
       viewerVote @include(if: $isAuthenticated) {
         type
       }
+      ...ModalDeleteVoteMobile_debate @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

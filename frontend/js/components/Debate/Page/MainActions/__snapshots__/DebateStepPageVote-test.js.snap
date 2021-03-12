@@ -186,7 +186,7 @@ exports[`<DebateStepPageVote/> should renders correctly with anonymous participa
 </ForwardRef(MotionComponent)>
 `;
 
-exports[`<DebateStepPageVote/> should renders correctly with viewer argument 1`] = `
+exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 <ForwardRef(MotionComponent)
   alignItems="center"
   animate={

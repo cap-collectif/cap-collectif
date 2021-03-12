@@ -1,13 +1,14 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { connect } from 'react-redux';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import { useAnalytics } from 'use-analytics';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
-import AddDebateVoteMutation from '~/mutations/AddDebateVoteMutation';
+import AddDebateVoteMutation, { type OptimisticResponse } from '~/mutations/AddDebateVoteMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { type VoteState } from './DebateStepPageVoteAndShare';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
@@ -19,13 +20,13 @@ import CookieMonster from '~/CookieMonster';
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import type { DebateStepPageVote_step } from '~relay/DebateStepPageVote_step.graphql';
+import type { GlobalState } from '~/types';
 
 type Props = {|
   ...AppBoxProps,
-  +debateId: string,
   +isAuthenticated: boolean,
-  +onSuccess: VoteState => void,
-  +viewerHasArgument: boolean,
+  +setVoteState: VoteState => void,
+  +isEmailConfirmed: boolean,
   +step: DebateStepPageVote_step,
 |};
 
@@ -34,14 +35,14 @@ const anonymousVoteForDebate = (
   captcha: string,
   type: 'FOR' | 'AGAINST',
   intl: IntlShape,
-  onSuccess: (state: VoteState) => void,
+  setVoteState: (state: VoteState) => void,
 ) => {
   return AddDebateAnonymousVoteMutation.commit({ input: { debateId, type, captcha } })
     .then(response => {
       if (response.addDebateAnonymousVote?.errorCode) {
         mutationErrorToast(intl);
       } else {
-        onSuccess('VOTED_ANONYMOUS');
+        setVoteState('VOTED_ANONYMOUS');
         if (response.addDebateAnonymousVote?.debateAnonymousVote?.token) {
           CookieMonster.addDebateAnonymousVoteCookie(debateId, {
             type,
@@ -59,26 +60,35 @@ const voteForDebate = (
   debateId: string,
   type: 'FOR' | 'AGAINST',
   intl: IntlShape,
-  onSuccess: VoteState => void,
+  setVoteState: VoteState => void,
   isAuthenticated: boolean,
-  viewerHasArgument: boolean,
+  optimisticData: OptimisticResponse,
 ) => {
-  return AddDebateVoteMutation.commit({ input: { debateId, type }, isAuthenticated })
+  // For optimistic response
+  const optimisticVoteState = optimisticData.viewerConfirmed ? 'VOTED' : 'NOT_CONFIRMED';
+  setVoteState(optimisticVoteState);
+
+  return AddDebateVoteMutation.commit(
+    { input: { debateId, type }, isAuthenticated },
+    optimisticData,
+  )
     .then(response => {
       if (response.addDebateVote?.errorCode) {
         mutationErrorToast(intl);
+        setVoteState('NONE');
       } else {
-        onSuccess(
-          response.addDebateVote?.debateVote?.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
-            ? 'NOT_CONFIRMED'
-            : viewerHasArgument
-            ? 'ARGUMENTED'
-            : 'VOTED',
-        );
+        const realVoteState = response.addDebateVote?.debateVote?.published
+          ? 'VOTED'
+          : 'NOT_CONFIRMED';
+
+        if (optimisticVoteState !== realVoteState) {
+          setVoteState(realVoteState);
+        }
       }
     })
     .catch(() => {
       mutationErrorToast(intl);
+      setVoteState('NONE');
     });
 };
 
@@ -102,10 +112,9 @@ const Container = motion.custom(Flex);
 
 export const DebateStepPageVote = ({
   step,
-  debateId,
   isAuthenticated,
-  onSuccess,
-  viewerHasArgument,
+  setVoteState,
+  isEmailConfirmed,
   ...props
 }: Props) => {
   const { track } = useAnalytics();
@@ -122,9 +131,15 @@ export const DebateStepPageVote = ({
   });
   useEffect(() => {
     if (captcha.value) {
-      anonymousVoteForDebate(debateId, captcha.value, captcha.voteType, intl, onSuccess);
+      anonymousVoteForDebate(step.debate.id, captcha.value, captcha.voteType, intl, setVoteState);
     }
-  }, [debateId, captcha.value, captcha.voteType, intl, onSuccess]);
+  }, [step.debate.id, captcha.value, captcha.voteType, intl, setVoteState]);
+
+  const optimisticData: OptimisticResponse = {
+    yesVotes: step.debate.yesVotes.totalCount,
+    votes: step.debate.votes.totalCount,
+    viewerConfirmed: isEmailConfirmed,
+  };
 
   return (
     <Container
@@ -151,12 +166,12 @@ export const DebateStepPageVote = ({
                 if (isAuthenticated) {
                   track('debate_vote_click', { type: 'FOR' });
                   voteForDebate(
-                    debateId,
+                    step.debate.id,
                     'FOR',
                     intl,
-                    onSuccess,
+                    setVoteState,
                     isAuthenticated,
-                    viewerHasArgument,
+                    optimisticData,
                   );
                 } else {
                   setCaptcha(c => ({ ...c, visible: true, voteType: 'FOR' }));
@@ -179,12 +194,12 @@ export const DebateStepPageVote = ({
                 if (isAuthenticated) {
                   track('debate_vote_click', { type: 'AGAINST' });
                   voteForDebate(
-                    debateId,
+                    step.debate.id,
                     'AGAINST',
                     intl,
-                    onSuccess,
+                    setVoteState,
                     isAuthenticated,
-                    viewerHasArgument,
+                    optimisticData,
                   );
                 } else {
                   setCaptcha(c => ({ ...c, visible: true, voteType: 'AGAINST' }));
@@ -218,10 +233,28 @@ export const DebateStepPageVote = ({
   );
 };
 
-export default createFragmentContainer(DebateStepPageVote, {
+const mapStateToProps = (state: GlobalState) => ({
+  isEmailConfirmed: state.user.user?.isEmailConfirmed || false,
+  isAuthenticated: !!state.user.user,
+});
+
+const DebateStepPageVoteConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
+  DebateStepPageVote,
+);
+
+export default (createFragmentContainer(DebateStepPageVoteConnected, {
   step: graphql`
     fragment DebateStepPageVote_step on DebateStep {
       isAnonymousParticipationAllowed
+      debate {
+        id
+        yesVotes: votes(isPublished: true, first: 0, type: FOR) {
+          totalCount
+        }
+        votes(isPublished: true, first: 0) {
+          totalCount
+        }
+      }
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageVoteConnected>);

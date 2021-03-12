@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import css from '@styled-system/css';
+import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { DebateStepPageAbsoluteVoteAndShare_step } from '~relay/DebateStepPageAbsoluteVoteAndShare_step.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -13,9 +14,7 @@ import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.conte
 
 type Props = {|
   +step: DebateStepPageAbsoluteVoteAndShare_step,
-  +isAuthenticated: boolean,
   +isMobile?: boolean,
-  +body: string,
   +voteState: VoteState,
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
@@ -26,8 +25,6 @@ type Props = {|
 export const DebateStepPageAbsoluteVoteAndShare = ({
   step,
   isMobile,
-  isAuthenticated,
-  body,
   voteState,
   setVoteState,
   showArgumentForm,
@@ -36,6 +33,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
 }: Props) => {
   const { debate, url } = step;
   const { title } = useDebateStepPage();
+  const intl = useIntl();
 
   return (
     <AppBox
@@ -68,14 +66,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>
               {title}
             </Text>
-            <DebateStepPageVote
-              viewerHasArgument={debate?.viewerHasArgument || false}
-              width="unset"
-              debateId={debate.id}
-              isAuthenticated={isAuthenticated}
-              onSuccess={setVoteState}
-              step={step}
-            />
+            <DebateStepPageVote width="unset" setVoteState={setVoteState} step={step} />
           </Flex>
         )}
         {voteState !== 'NONE' && (
@@ -85,11 +76,11 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             isAbsolute
             url={url}
             debate={debate}
-            body={body}
             voteState={voteState}
             setVoteState={setVoteState}
             showArgumentForm={showArgumentForm}
             setShowArgumentForm={setShowArgumentForm}
+            intl={intl}
           />
         )}
       </AppBox>
@@ -103,8 +94,6 @@ export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       url
       debate {
-        id
-        viewerHasArgument @include(if: $isAuthenticated)
         ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)
       }
       ...DebateStepPageVote_step

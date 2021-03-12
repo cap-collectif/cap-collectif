@@ -6,14 +6,22 @@ import { DebateStepPageVote } from './DebateStepPageVote';
 import { $refType } from '~/mocks';
 
 const baseProps = {
-  debateId: 'debate-123',
   step: {
     $refType,
     isAnonymousParticipationAllowed: false,
+    debate: {
+      id: 'debate-123',
+      yesVotes: {
+        totalCount: 12,
+      },
+      votes: {
+        totalCount: 20,
+      },
+    },
   },
+  isEmailConfirmed: true,
   isAuthenticated: true,
-  viewerHasArgument: false,
-  onSuccess: jest.fn(),
+  setVoteState: jest.fn(),
 };
 
 const props = {
@@ -21,10 +29,11 @@ const props = {
   notAuthenticated: {
     ...baseProps,
     isAuthenticated: false,
+    isEmailConfirmed: false,
   },
-  withViewerArgument: {
+  withEmailNotConfirmed: {
     ...baseProps,
-    viewerHasArgument: true,
+    isEmailConfirmed: false,
   },
   anonymousParticipationAllowed: {
     ...baseProps,
@@ -46,8 +55,8 @@ describe('<DebateStepPageVote/>', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should renders correctly with viewer argument', () => {
-    const wrapper = shallow(<DebateStepPageVote {...props.withViewerArgument} />);
+  it('should renders correctly with email not confirmed argument', () => {
+    const wrapper = shallow(<DebateStepPageVote {...props.withEmailNotConfirmed} />);
     expect(wrapper).toMatchSnapshot();
   });
 

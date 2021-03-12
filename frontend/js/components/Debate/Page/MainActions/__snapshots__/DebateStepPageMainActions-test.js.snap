@@ -26,8 +26,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
         mb={2}
         textAlign="center"
       />
-      <Relay(Connect(ReduxForm))
-        isAuthenticated={true}
+      <Relay(Connect(DebateStepPageVoteAndShare))
         isMobile={false}
         step={
           Object {
@@ -70,8 +69,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
         mb={2}
         textAlign="center"
       />
-      <Relay(Connect(ReduxForm))
-        isAuthenticated={true}
+      <Relay(Connect(DebateStepPageVoteAndShare))
         isMobile={true}
         step={
           Object {

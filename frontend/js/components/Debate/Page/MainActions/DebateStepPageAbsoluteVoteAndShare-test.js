@@ -6,8 +6,6 @@ import { DebateStepPageAbsoluteVoteAndShare } from './DebateStepPageAbsoluteVote
 import { $refType, $fragmentRefs } from '~/mocks';
 
 const baseProps = {
-  body: 'blabla le body',
-  isAuthenticated: true,
   viewerIsConfirmed: true,
   step: {
     $refType,
@@ -15,8 +13,6 @@ const baseProps = {
     url: 'step/123',
     debate: {
       $fragmentRefs,
-      id: 'debate1',
-      viewerHasArgument: undefined,
     },
   },
   isMobile: false,
@@ -41,28 +37,10 @@ const props = {
     voteState: 'VOTED',
     isMobile: true,
   },
-  whenArgumented: {
-    ...baseProps,
-    voteState: 'ARGUMENTED',
-    step: {
-      ...baseProps.step,
-      debate: {
-        ...baseProps.step.debate,
-        viewerHasArgument: true,
-      },
-    },
-  },
   whenArgumentedMobile: {
     ...baseProps,
     voteState: 'ARGUMENTED',
     isMobile: true,
-    step: {
-      ...baseProps.step,
-      debate: {
-        ...baseProps.step.debate,
-        viewerHasArgument: true,
-      },
-    },
   },
 };
 
@@ -84,11 +62,6 @@ describe('<DebateStepPageAbsoluteVoteAndShare />', () => {
 
   it('renders correctly when voted on mobile', () => {
     const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenVotedMobile} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly when argumented', () => {
-    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenArgumented} />);
     expect(wrapper).toMatchSnapshot();
   });
 

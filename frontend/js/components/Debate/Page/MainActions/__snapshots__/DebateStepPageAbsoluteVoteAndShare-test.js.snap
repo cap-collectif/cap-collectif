@@ -38,23 +38,18 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
           ]
         }
       />
-      <Relay(DebateStepPageVote)
-        debateId="debate1"
-        isAuthenticated={true}
-        onSuccess={[MockFunction]}
+      <Relay(Connect(DebateStepPageVote))
+        setVoteState={[MockFunction]}
         step={
           Object {
             "$fragmentRefs": null,
             "$refType": null,
             "debate": Object {
               "$fragmentRefs": null,
-              "id": "debate1",
-              "viewerHasArgument": undefined,
             },
             "url": "step/123",
           }
         }
-        viewerHasArgument={false}
         width="unset"
       />
     </ForwardRef>
@@ -102,65 +97,21 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] 
           ]
         }
       />
-      <Relay(DebateStepPageVote)
-        debateId="debate1"
-        isAuthenticated={true}
-        onSuccess={[MockFunction]}
+      <Relay(Connect(DebateStepPageVote))
+        setVoteState={[MockFunction]}
         step={
           Object {
             "$fragmentRefs": null,
             "$refType": null,
             "debate": Object {
               "$fragmentRefs": null,
-              "id": "debate1",
-              "viewerHasArgument": undefined,
             },
             "url": "step/123",
           }
         }
-        viewerHasArgument={false}
         width="unset"
       />
     </ForwardRef>
-  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
-</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
-`;
-
-exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumented 1`] = `
-<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
-  _css={[Function]}
-  p={
-    Array [
-      6,
-      8,
-    ]
-  }
-  position="fixed"
-  top={50}
-  width="100%"
-  zIndex={999}
->
-  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
-    className="container"
-  >
-    <Relay(Connect(DebateStepPageVoteForm))
-      body="blabla le body"
-      debate={
-        Object {
-          "$fragmentRefs": null,
-          "id": "debate1",
-          "viewerHasArgument": true,
-        }
-      }
-      isAbsolute={true}
-      isMobile={false}
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
-      showArgumentForm={true}
-      url="step/123"
-      viewerIsConfirmed={true}
-      voteState="ARGUMENTED"
-    />
   </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
 </DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
 `;
@@ -184,13 +135,25 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumente
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(Connect(DebateStepPageVoteForm))
-      body="blabla le body"
+    <Relay(Connect(ReduxForm))
       debate={
         Object {
           "$fragmentRefs": null,
-          "id": "debate1",
-          "viewerHasArgument": true,
+        }
+      }
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
         }
       }
       isAbsolute={true}
@@ -223,13 +186,25 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted 1`]
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(Connect(DebateStepPageVoteForm))
-      body="blabla le body"
+    <Relay(Connect(ReduxForm))
       debate={
         Object {
           "$fragmentRefs": null,
-          "id": "debate1",
-          "viewerHasArgument": undefined,
+        }
+      }
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
         }
       }
       isAbsolute={true}
@@ -264,13 +239,25 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted on 
   <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
     className="container"
   >
-    <Relay(Connect(DebateStepPageVoteForm))
-      body="blabla le body"
+    <Relay(Connect(ReduxForm))
       debate={
         Object {
           "$fragmentRefs": null,
-          "id": "debate1",
-          "viewerHasArgument": undefined,
+        }
+      }
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
         }
       }
       isAbsolute={true}

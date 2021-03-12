@@ -30,11 +30,8 @@ export const DebateStepPageLogic = ({ query }: Props) => {
 
   return (
     <Flex direction="column" spacing={8}>
-      <DebateStepPageMainActions
-        isMobile={isMobile}
-        step={step}
-        isAuthenticated={!!query?.viewer}
-      />
+      <DebateStepPageMainActions isMobile={isMobile} step={step} />
+      <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
       {showContent && <WYSIWYGRender value={step?.debateContent || ''} />}
       {showFaceToFace && (
         <>
