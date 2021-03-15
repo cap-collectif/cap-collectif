@@ -88,7 +88,7 @@ exports[`<VoteHeaderTab /> should render correctly when no vote 1`] = `
 </ForwardRef>
 `;
 
-exports[`<VoteHeaderTab /> should render correctly with timeless date for step 1`] = `
+exports[`<VoteHeaderTab /> should render correctly when step closed 1`] = `
 <ForwardRef
   direction="column"
   mb={4}
@@ -111,7 +111,7 @@ exports[`<VoteHeaderTab /> should render correctly with timeless date for step 1
       <InlineSelect.Choice
         value="WAITING"
       >
-        filter.count.status.awaiting
+        filter.count.status.non.published
       </InlineSelect.Choice>
     </InlineSelect>
     <Button

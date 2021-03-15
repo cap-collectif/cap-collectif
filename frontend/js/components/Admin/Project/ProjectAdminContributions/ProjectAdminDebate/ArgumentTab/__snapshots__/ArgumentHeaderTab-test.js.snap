@@ -28,7 +28,7 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
       <InlineSelect.Choice
         value="TRASHED"
       >
-        filter.count.status.trash
+        global.trash
       </InlineSelect.Choice>
     </InlineSelect>
     <ForwardRef
@@ -122,7 +122,7 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
       <InlineSelect.Choice
         value="TRASHED"
       >
-        filter.count.status.trash
+        global.trash
       </InlineSelect.Choice>
     </InlineSelect>
     <ForwardRef
@@ -188,7 +188,7 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
 </ForwardRef>
 `;
 
-exports[`<ArgumentHeaderTab /> should render correctly with timeless date for step 1`] = `
+exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
 <ForwardRef
   direction="column"
   mb={4}
@@ -211,12 +211,12 @@ exports[`<ArgumentHeaderTab /> should render correctly with timeless date for st
       <InlineSelect.Choice
         value="WAITING"
       >
-        filter.count.status.awaiting
+        filter.count.status.non.published
       </InlineSelect.Choice>
       <InlineSelect.Choice
         value="TRASHED"
       >
-        filter.count.status.trash
+        global.trash
       </InlineSelect.Choice>
     </InlineSelect>
     <ForwardRef

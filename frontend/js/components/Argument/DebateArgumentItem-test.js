@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { DebateArgumentItem } from './DebateArgumentItem';
-import { $refType, $fragmentRefs } from '../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<DebateArgumentItem />', () => {
   const defaultProps = {
@@ -20,10 +20,8 @@ describe('<DebateArgumentItem />', () => {
         id: 'debate-123',
         url: '/debate',
         step: {
-          timeless: false,
           timeRange: {
-            endAt: '2018-06-09T23:21:06+0200',
-            startAt: '2018-04-09T23:21:06+0200',
+            hasEnded: false,
           },
           id: 'step',
           title: 'Etape',
@@ -37,15 +35,41 @@ describe('<DebateArgumentItem />', () => {
     isMobile: false,
   };
 
-  it('render correcty', () => {
-    const wrapper = shallow(<DebateArgumentItem {...defaultProps} />);
+  const props = {
+    basic: defaultProps,
+    onMobile: {
+      ...defaultProps,
+      isMobile: true,
+    },
+    stepClosed: {
+      ...defaultProps,
+      debateArgument: {
+        ...defaultProps.debateArgument,
+        debate: {
+          ...defaultProps.debateArgument.debate,
+          step: {
+            ...defaultProps.debateArgument.debate.step,
+            timeRange: {
+              hasEnded: true,
+            },
+          },
+        },
+      },
+    },
+  };
 
+  it('render correctly', () => {
+    const wrapper = shallow(<DebateArgumentItem {...props.basic} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('render correcty on mobile', () => {
-    const wrapper = shallow(<DebateArgumentItem {...defaultProps} isMobile />);
+  it('render correctly on mobile', () => {
+    const wrapper = shallow(<DebateArgumentItem {...props.onMobile} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 
+  it('render correctly when step closed', () => {
+    const wrapper = shallow(<DebateArgumentItem {...props.stepClosed} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

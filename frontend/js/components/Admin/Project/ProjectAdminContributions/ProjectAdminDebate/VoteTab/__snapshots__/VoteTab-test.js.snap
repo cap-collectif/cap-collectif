@@ -104,7 +104,7 @@ exports[`<VoteTab /> should render correctly when no vote 1`] = `
 </ForwardRef>
 `;
 
-exports[`<VoteTab /> should render correctly with timeless date for step 1`] = `
+exports[`<VoteTab /> should render correctly when step closed 1`] = `
 <VoteTab___StyledFlex
   _css="500px"
   direction="column"

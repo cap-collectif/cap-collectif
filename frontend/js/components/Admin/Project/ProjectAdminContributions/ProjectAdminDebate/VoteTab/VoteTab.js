@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import moment from 'moment';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -64,15 +63,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
   const { parameters } = useProjectAdminDebateContext();
   const intl = useIntl();
   const hasVotes = debateVotes.totalCount > 0;
-  const isStepFinished = debateStep.timeless
-    ? false
-    : debateStep?.timeRange?.endAt
-    ? moment().isAfter(moment(debateStep.timeRange.endAt))
-    : false;
-  const isStartedAndNoEndDate = debateStep.timeless
-    ? false
-    : !debateStep?.timeRange?.endAt && moment().isAfter(moment(debateStep.timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+  const isStepClosed = debateStep?.timeRange?.hasEnded;
 
   const listVoteRef = React.useRef(null);
 
@@ -203,10 +194,8 @@ export default createPaginationContainer(
     debateStep: graphql`
       fragment VoteTab_debateStep on Step {
         id
-        timeless
         timeRange {
-          startAt
-          endAt
+          hasEnded
         }
       }
     `,

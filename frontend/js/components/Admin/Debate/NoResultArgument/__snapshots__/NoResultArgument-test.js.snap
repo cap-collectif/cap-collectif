@@ -55,7 +55,7 @@ exports[`<NoResultArgument /> should render correctly when no argument 1`] = `
     fontWeight="normal"
     maxWidth="400px"
   >
-    arguments-waiting-email-confirmation-display
+    arguments-published-by-user-confirmed-display
   </Text>
 </ForwardRef>
 `;

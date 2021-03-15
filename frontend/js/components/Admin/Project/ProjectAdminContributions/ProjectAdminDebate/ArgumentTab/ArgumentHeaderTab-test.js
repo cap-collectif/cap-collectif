@@ -15,9 +15,6 @@ const baseProps = {
     debateArgumentsWaiting: {
       totalCount: 2,
     },
-    debateArgumentsTrashed: {
-      totalCount: 2,
-    },
     argumentsFor: {
       totalCount: 4,
     },
@@ -27,10 +24,8 @@ const baseProps = {
   },
   debateStep: {
     $refType,
-    timeless: false,
     timeRange: {
-      startAt: '2030-02-10 00:00:00',
-      endAt: '2030-03-10 00:00:00',
+      hasEnded: false,
     },
   },
 };
@@ -47,9 +42,6 @@ const props = {
       debateArgumentsWaiting: {
         totalCount: 0,
       },
-      debateArgumentsTrashed: {
-        totalCount: 0,
-      },
       argumentsFor: {
         totalCount: 0,
       },
@@ -58,14 +50,12 @@ const props = {
       },
     },
   },
-  timelessStep: {
+  stepClosed: {
     ...baseProps,
     debateStep: {
       ...baseProps.debateStep,
-      timeless: true,
       timeRange: {
-        startAt: null,
-        endAt: null,
+        hasEnded: true,
       },
     },
   },
@@ -82,8 +72,8 @@ describe('<ArgumentHeaderTab />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly with timeless date for step', () => {
-    const wrapper = shallow(<ArgumentHeaderTab {...props.timelessStep} />);
+  it('should render correctly with step closed', () => {
+    const wrapper = shallow(<ArgumentHeaderTab {...props.stepClosed} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import moment from 'moment';
 import InlineSelect from '~ds/InlineSelect';
 import type { VoteState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -22,15 +21,7 @@ export const VoteHeaderTab = ({ debate, debateStep }: Props) => {
   const intl = useIntl();
   const { debateVotesPublished, debateVotesWaiting, debateVotesFor, debateVotesAgainst } = debate;
   const exportUrl = `/debate/${debate.id}/download/votes`;
-  const isStepFinished = debateStep.timeless
-    ? false
-    : debateStep?.timeRange?.endAt
-    ? moment().isAfter(moment(debateStep.timeRange.endAt))
-    : true;
-  const isStartedAndNoEndDate = debateStep.timeless
-    ? false
-    : !debateStep?.timeRange?.endAt && moment().isAfter(moment(debateStep.timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+  const isStepClosed = debateStep?.timeRange?.hasEnded;
 
   return (
     <Flex direction="column" mb={4}>
@@ -112,10 +103,8 @@ export default createFragmentContainer(VoteHeaderTab, {
   `,
   debateStep: graphql`
     fragment VoteHeaderTab_debateStep on Step {
-      timeless
       timeRange {
-        startAt
-        endAt
+        hasEnded
       }
     }
   `,

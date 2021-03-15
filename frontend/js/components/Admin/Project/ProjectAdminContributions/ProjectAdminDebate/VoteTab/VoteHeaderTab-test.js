@@ -24,10 +24,8 @@ const baseProps = {
   },
   debateStep: {
     $refType,
-    timeless: false,
     timeRange: {
-      startAt: '2030-02-10 00:00:00',
-      endAt: '2030-03-10 00:00:00',
+      hasEnded: false,
     },
   },
 };
@@ -52,14 +50,12 @@ const props = {
       },
     },
   },
-  timelessStep: {
+  stepClosed: {
     ...baseProps,
     debateStep: {
       ...baseProps.debateStep,
-      timeless: true,
       timeRange: {
-        startAt: null,
-        endAt: null,
+        hasEnded: true,
       },
     },
   },
@@ -76,8 +72,8 @@ describe('<VoteHeaderTab />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly with timeless date for step', () => {
-    const wrapper = shallow(<VoteHeaderTab {...props.timelessStep} />);
+  it('should render correctly when step closed', () => {
+    const wrapper = shallow(<VoteHeaderTab {...props.stepClosed} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

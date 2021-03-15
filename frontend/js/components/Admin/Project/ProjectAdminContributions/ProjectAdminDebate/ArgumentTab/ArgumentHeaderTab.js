@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import moment from 'moment';
 import { graphql, createFragmentContainer } from 'react-relay';
 import InlineSelect from '~ds/InlineSelect';
 import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer';
@@ -26,21 +25,12 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
   const {
     debateArgumentsPublished,
     debateArgumentsWaiting,
-    debateArgumentsTrashed,
     argumentsFor,
     argumentsAgainst,
   } = debate;
   const exportUrl = `/debate/${debate.id}/download/arguments`;
   const hasArgumentForOrAgainst = argumentsFor.totalCount > 0 || argumentsAgainst.totalCount > 0;
-  const isStepFinished = debateStep.timeless
-    ? false
-    : debateStep?.timeRange?.endAt
-    ? moment().isAfter(moment(debateStep.timeRange.endAt))
-    : false;
-  const isStartedAndNoEndDate = debateStep.timeless
-    ? false
-    : !debateStep?.timeRange?.endAt && moment().isAfter(moment(debateStep.timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+  const isStepClosed = debateStep?.timeRange?.hasEnded;
 
   return (
     <Flex direction="column" mb={4}>
@@ -67,10 +57,7 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
             )}
           </InlineSelect.Choice>
           <InlineSelect.Choice value="TRASHED">
-            {intl.formatMessage(
-              { id: 'filter.count.status.trash' },
-              { num: debateArgumentsTrashed.totalCount },
-            )}
+            {intl.formatMessage({ id: 'global.trash' })}
           </InlineSelect.Choice>
         </InlineSelect>
 
@@ -140,9 +127,6 @@ export default createFragmentContainer(ArgumentHeaderTab, {
       debateArgumentsWaiting: arguments(first: 0, isPublished: false, isTrashed: false) {
         totalCount
       }
-      debateArgumentsTrashed: arguments(first: 0, isPublished: null, isTrashed: true) {
-        totalCount
-      }
       argumentsFor: arguments(
         first: 0
         value: FOR
@@ -163,10 +147,8 @@ export default createFragmentContainer(ArgumentHeaderTab, {
   `,
   debateStep: graphql`
     fragment ArgumentHeaderTab_debateStep on Step {
-      timeless
       timeRange {
-        startAt
-        endAt
+        hasEnded
       }
     }
   `,

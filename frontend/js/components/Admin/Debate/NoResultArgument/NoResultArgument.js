@@ -39,7 +39,7 @@ const getWordingTitle = (
 ) => {
   if (state === 'PUBLISHED') {
     if (!hasArgumentForOrAgainst)
-      return intl.formatMessage({ id: 'arguments-waiting-email-confirmation-display' });
+      return intl.formatMessage({ id: 'arguments-published-by-user-confirmed-display' });
     if (type.includes('AGAINST'))
       return intl.formatMessage({ id: 'no-argument-against-published' });
     if (type.includes('FOR')) return intl.formatMessage({ id: 'no-argument-for-published' });

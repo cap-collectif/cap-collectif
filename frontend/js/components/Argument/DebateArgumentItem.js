@@ -31,16 +31,7 @@ export const DebateArgumentItem = ({ debateArgument, isMobile, setDeleteModalInf
 
   const { step } = debateArgument.debate;
   const isAuthor = debateArgument.viewerDidAuthor;
-
-  const isStepFinished = step.timeless
-    ? false
-    : step?.timeRange?.endAt
-    ? moment().isAfter(moment(step.timeRange.endAt))
-    : false;
-  const isStartedAndNoEndDate = step.timeless
-    ? false
-    : !step?.timeRange?.endAt && moment().isAfter(moment(step.timeRange.startAt));
-  const isStepClosed = isStepFinished || isStartedAndNoEndDate;
+  const isStepClosed = step?.timeRange?.hasEnded;
 
   return (
     <AppBox as="li" p={6} borderRadius={6} border="card" borderColor="gray.200" mb={6} bg="white">
@@ -193,10 +184,8 @@ export default createFragmentContainer(DebateArgumentItem, {
         id
         url
         step {
-          timeless
           timeRange {
-            endAt
-            startAt
+            hasEnded
           }
           id
           title
