@@ -84,12 +84,21 @@ trait TimeRangeableTrait
         return false;
     }
 
-    public function isOpen(): bool
+    public function isOpen(?\DateTime $now = null): bool
     {
-        $now = new \DateTime();
+        if (null === $now) {
+            $now = new \DateTime();
+        }
 
-        if (null !== $this->startAt && null !== $this->endAt) {
-            return $this->startAt < $now && $this->endAt > $now;
+        if ($this->startAt) {
+            if ($this->startAt > $now) {
+                return false;
+            }
+            if ($this->endAt && $this->endAt < $now) {
+                return false;
+            }
+
+            return true;
         }
 
         if ($this->isTimeless()) {
@@ -99,9 +108,11 @@ trait TimeRangeableTrait
         return false;
     }
 
-    public function isClosed(): bool
+    public function isClosed(?\DateTime $now = null): bool
     {
-        $now = new \DateTime();
+        if (null === $now) {
+            $now = new \DateTime();
+        }
 
         if (null === $this->startAt && null === $this->endAt) {
             return !$this->isTimeless();
@@ -118,9 +129,11 @@ trait TimeRangeableTrait
         return false;
     }
 
-    public function isFuture(): bool
+    public function isFuture(?\DateTime $now = null): bool
     {
-        $now = new \DateTime();
+        if (null === $now) {
+            $now = new \DateTime();
+        }
 
         if (null === $this->startAt) {
             return null !== $this->endAt && $this->endAt > $now;
