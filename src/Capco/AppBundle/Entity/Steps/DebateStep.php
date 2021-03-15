@@ -31,7 +31,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     private bool $isAnonymousParticipationAllowed = false;
 
     /**
-     * @ORM\Column(name="debate_type", columnDefinition="ENUM('WYSIWYG', 'FACE_TO_FACE')", options={"default":"FACE_TO_FACE"})
+     * @ORM\Column(name="debate_type", type="string", options={"default":"FACE_TO_FACE"})
      * @Assert\Choice(choices = {"WYSIWYG", "FACE_TO_FACE"})
      */
     private string $debateType = DebateType::FACE_TO_FACE;
