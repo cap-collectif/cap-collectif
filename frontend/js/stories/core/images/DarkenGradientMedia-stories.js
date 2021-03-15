@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, text } from 'storybook-addon-knobs';
 import DarkenGradientMedia from '../../../components/Ui/Medias/DarkenGradientMedia';
 
-storiesOf('Core|Images/DarkenGradientMedia', module).add(
+storiesOf('Core/Images/DarkenGradientMedia', module).add(
   'default',
   () => {
     const width = text('Width', '600px');

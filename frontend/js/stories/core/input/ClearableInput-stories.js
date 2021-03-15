@@ -7,7 +7,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 const noop = () => {};
 
-storiesOf('Core|Input/Clearable Input', module)
+storiesOf('Core/Input/Clearable Input', module)
   .add('default', () => {
     return (
       <Row>

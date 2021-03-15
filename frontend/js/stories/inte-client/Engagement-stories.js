@@ -25,7 +25,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|Engagement/List', module).add(
+storiesOf('Inté client/Engagement/List', module).add(
   'Default',
   () => (
     <EngagementList
@@ -40,7 +40,7 @@ storiesOf('Inté client|Engagement/List', module).add(
   },
 );
 
-storiesOf('Inté client|Engagement/Item', module).add('Default', () => (
+storiesOf('Inté client/Engagement/Item', module).add('Default', () => (
   <EngagementItem
     icon="https://image.flaticon.com/icons/png/512/114/114245.png"
     description="Pomme"

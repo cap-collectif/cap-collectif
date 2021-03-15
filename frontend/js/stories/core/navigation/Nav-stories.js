@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean } from 'storybook-addon-knobs';
 import { NavContainer, NavItem, Count } from '~/components/Admin/Project/ProjectAdminContent.style';
 
-storiesOf('Core|Navigation/Nav', module)
+storiesOf('Core/Navigation/Nav', module)
   .add('NavItem', () => (
     <NavContainer>
       <NavItem active={boolean('active', true)}>

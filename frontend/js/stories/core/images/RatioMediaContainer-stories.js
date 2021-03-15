@@ -5,7 +5,7 @@ import { number, text } from 'storybook-addon-knobs';
 
 import RatioMediaContainer from '../../../components/Ui/Medias/RatioMediaContainer';
 
-storiesOf('Core|Images/RatioMediaContainer', module).add(
+storiesOf('Core/Images/RatioMediaContainer', module).add(
   'default',
   () => {
     const url = text('Url', 'https://source.unsplash.com/collection/1353633');

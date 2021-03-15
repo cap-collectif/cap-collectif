@@ -31,7 +31,7 @@ const IconContainer = styled.li`
   }
 `;
 
-storiesOf('Core|Icons/Icon', module)
+storiesOf('Core/Icons/Icon', module)
   .add('default', () => <Icon name="link" size={80} color="red" />)
   .add('rounded', () => (
     <IconRounded size={80} color="rgba(240, 0, 0, .7)">
@@ -39,7 +39,7 @@ storiesOf('Core|Icons/Icon', module)
     </IconRounded>
   ));
 
-storiesOf('Core|Icons/Icon', module).add('All', () => {
+storiesOf('Core/Icons/Icon', module).add('All', () => {
   return (
     <Container>
       {Object.keys(ALL_ICONS).map(name => (

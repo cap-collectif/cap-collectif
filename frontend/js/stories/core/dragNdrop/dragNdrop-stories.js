@@ -12,7 +12,7 @@ const data = {
   fruitsChoice: ['Cerise', 'Kaki', 'Banane'],
 };
 
-storiesOf('Core|DragnDrop', module).add('default', () => {
+storiesOf('Core/DragnDrop', module).add('default', () => {
   const dataFruits = text('Content', data);
 
   return (
@@ -28,7 +28,7 @@ storiesOf('Core|DragnDrop', module).add('default', () => {
   );
 });
 
-storiesOf('Core|DragnDrop', module).add('empty list', () => {
+storiesOf('Core/DragnDrop', module).add('empty list', () => {
   const dataFruits = text('Content', data);
   const { listFruits } = dataFruits;
 
@@ -43,7 +43,7 @@ storiesOf('Core|DragnDrop', module).add('empty list', () => {
   );
 });
 
-storiesOf('Core|DragnDrop', module).add('list with position', () => {
+storiesOf('Core/DragnDrop', module).add('list with position', () => {
   const dataFruits = text('Content', data);
   const { listFruits } = dataFruits;
 
@@ -58,7 +58,7 @@ storiesOf('Core|DragnDrop', module).add('list with position', () => {
   );
 });
 
-storiesOf('Core|DragnDrop', module).add('list with title', () => {
+storiesOf('Core/DragnDrop', module).add('list with title', () => {
   const dataFruits = text('Content', data);
   const { listFruits } = dataFruits;
 
@@ -75,7 +75,7 @@ storiesOf('Core|DragnDrop', module).add('list with title', () => {
   );
 });
 
-storiesOf('Core|DragnDrop', module).add('multiple list', () => {
+storiesOf('Core/DragnDrop', module).add('multiple list', () => {
   const dataFruits = text('Content', data);
   const { listFruits, fruitsChoice } = dataFruits;
 

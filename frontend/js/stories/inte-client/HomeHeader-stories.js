@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { text, object } from 'storybook-addon-knobs';
 import HomeHeader from '~/components/InteClient/HomeHeader/HomeHeader';
 
-storiesOf('Inté client|HomeHeader', module).add(
+storiesOf('Inté client/HomeHeader', module).add(
   'Default',
   () => {
     const title = text(

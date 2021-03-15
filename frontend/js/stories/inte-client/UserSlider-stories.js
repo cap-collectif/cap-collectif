@@ -86,7 +86,7 @@ const settingsSlider = object('settings slider', {
   variableWidth: false,
 });
 
-storiesOf('Inté client|UserSlider/List', module).add(
+storiesOf('Inté client/UserSlider/List', module).add(
   'Default',
   () => (
     <UserSlider
@@ -102,7 +102,7 @@ storiesOf('Inté client|UserSlider/List', module).add(
   },
 );
 
-storiesOf('Inté client|UserSlider/Item', module).add('Default', () => (
+storiesOf('Inté client/UserSlider/Item', module).add('Default', () => (
   <UserSlide
     name="Jean-Dominique Sénard"
     job={{ fr: 'PDG/CEO - Renault-Nissan', en: 'Yes' }}

@@ -189,7 +189,7 @@ const OpinionList = ({ section, opinions }) => (
   </Card>
 );
 
-storiesOf('Cap Collectif|OpinionList', module)
+storiesOf('Cap Collectif/OpinionList', module)
   .add('default case', () => {
     const section = {
       contribuable: boolean('Contribuable', true, 'Section'),

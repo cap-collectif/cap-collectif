@@ -38,7 +38,7 @@ const colors = [
   { hex: '#1D8293', description: 'Utilisée pour ...', variable: '$info-color' },
 ];
 
-storiesOf('Design|Colors', module).add(
+storiesOf('Design/Colors', module).add(
   'Colors',
   () =>
     colors.map(color => (

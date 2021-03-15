@@ -38,7 +38,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|ConsultationStep/List', module).add(
+storiesOf('Inté client/ConsultationStep/List', module).add(
   'Default',
   () => (
     <ConsultationStepList
@@ -54,7 +54,7 @@ storiesOf('Inté client|ConsultationStep/List', module).add(
   },
 );
 
-storiesOf('Inté client|ConsultationStep/Item', module).add('Default', () => (
+storiesOf('Inté client/ConsultationStep/Item', module).add('Default', () => (
   <ConsultationStepItem
     number="1"
     title={{

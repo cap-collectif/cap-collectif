@@ -15,7 +15,7 @@ const StorybookWrapper: StyledComponent<{ height?: string }, {}, HTMLDivElement>
 const newItems = items.slice(0);
 newItems.splice(5, 0, itemWithChildren);
 
-storiesOf('Core|Navigation/TabsBar', module)
+storiesOf('Core/Navigation/TabsBar', module)
   .add('default case', () => (
     <StorybookWrapper>
       <TabsBar items={newItems} />

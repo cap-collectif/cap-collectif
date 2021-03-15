@@ -106,7 +106,7 @@ const info = {
   },
 };
 
-storiesOf('Cap Collectif|ProposalMapPopover', module)
+storiesOf('Cap Collectif/ProposalMapPopover', module)
   .add(
     'default case',
     () => {

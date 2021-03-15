@@ -11,7 +11,7 @@ const inputs = [
   'La proposition de loi co-construite avec vous sera <span>déposée à l’ordre du jour de l’Assemblée nationale</span> en février 2021',
 ];
 
-storiesOf('Inté client|ParticipationMotivation', module).add(
+storiesOf('Inté client/ParticipationMotivation', module).add(
   'Default',
   () => (
     <ParticipationMotivation

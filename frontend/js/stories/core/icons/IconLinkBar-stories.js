@@ -7,7 +7,7 @@ import ProfileNeutralIcon from '../../../components/Ui/Icons/ProfileNeutralIcon'
 import PowerButtonIcon from '../../../components/Ui/Icons/PowerButtonIcon';
 import EarthIcon from '../../../components/Ui/Icons/EarthIcon';
 
-storiesOf('Core|Icons/IconLinkBar', module)
+storiesOf('Core/Icons/IconLinkBar', module)
   .add('default', () => (
     <IconLinkBar color="#333333" message="navbar.profile" url="/profile">
       <ProfileNeutralIcon color="#333333" />

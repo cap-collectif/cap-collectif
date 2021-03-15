@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import TagsList from '../../../components/Ui/List/TagsList';
 import Tag from '../../../components/Ui/Labels/Tag';
 
-storiesOf('Core|List/TagsList', module).add('default', () => (
+storiesOf('Core/List/TagsList', module).add('default', () => (
   <TagsList>
     <Tag size="22px" className="ellipsis" icon="cap cap-tag-1-1 icon--blue">
       Justice

@@ -15,7 +15,7 @@ const sizeOption = {
   Normal: 'normal',
 };
 
-storiesOf('Core|Avatar', module)
+storiesOf('Core/Avatar', module)
   .add(
     'Avatar',
     () => {

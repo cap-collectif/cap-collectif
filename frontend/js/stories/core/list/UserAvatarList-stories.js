@@ -9,7 +9,7 @@ import { author } from '../../mocks/users';
 
 const usersMockGenerator = nb => new Array(nb).fill(author);
 
-storiesOf('Core|List/UserAvatarList', module)
+storiesOf('Core/List/UserAvatarList', module)
   .add('default case', () => {
     const users = usersMockGenerator(4);
     const max = number('Max display', 5);

@@ -119,7 +119,7 @@ export const EventPreview = ({ type = TYPE_EVENT.PHYSICAL, replay }: Props) => {
   );
 };
 
-storiesOf('Cap Collectif|EventPreview', module)
+storiesOf('Cap Collectif/EventPreview', module)
   .add('default', () => (
     <div style={{ maxWidth: 600 }}>
       <EventPreview event={eventProps} type={TYPE_EVENT.PHYSICAL} />

@@ -150,7 +150,7 @@ const data = [
   },
 ];
 
-storiesOf('Cap Collectif|TagCloud', module).add('default', () => {
+storiesOf('Cap Collectif/TagCloud', module).add('default', () => {
   return (
     <div style={{ margin: 'auto', maxWidth: 650 }}>
       <TagCloud minSize={12} maxSize={45} tags={data} />

@@ -11,7 +11,7 @@ const bsSizeOptions = {
   XSmall: 'xsmall',
 };
 
-storiesOf('Core|Buttons/ButtonGroup', module).add(
+storiesOf('Core/Buttons/ButtonGroup', module).add(
   'default',
   () => {
     const bsSize = select('BsSize', bsSizeOptions, null);

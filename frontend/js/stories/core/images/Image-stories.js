@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { text } from 'storybook-addon-knobs';
 import Image from '../../../components/Ui/Medias/Image';
 
-storiesOf('Core|Images/Image', module).add(
+storiesOf('Core/Images/Image', module).add(
   'default',
   () => {
     const src = text('Src', 'https://source.unsplash.com/collection/181462');

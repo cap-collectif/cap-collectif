@@ -354,7 +354,7 @@ const OpinionBox = ({ section, opinion }) => (
   </div>
 );
 
-storiesOf('Cap Collectif|OpinionBox', module)
+storiesOf('Cap Collectif/OpinionBox', module)
   .add('default case', () => {
     const section = {
       title: text('Title', 'Proposition', 'Section'),

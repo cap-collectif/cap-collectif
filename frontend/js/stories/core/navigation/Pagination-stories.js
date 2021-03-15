@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { number, boolean } from 'storybook-addon-knobs';
 import Pagination from '../../../components/Utils/Pagination';
 
-storiesOf('Core|Navigation/Pagination', module).add(
+storiesOf('Core/Navigation/Pagination', module).add(
   'default',
   () => {
     const nbPages = number('Number of pages', 10);

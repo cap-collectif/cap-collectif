@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import MetricsBox from '../../components/Ui/Metrics/MetricsBox';
 
-storiesOf('Cap Collectif | MetricsBox', module)
+storiesOf('Cap Collectif/ MetricsBox', module)
   .add('default case', () => {
     return (
       <MetricsBox color="white" totalCount={50} icon="cap-folder-2" label="global.project.label" />

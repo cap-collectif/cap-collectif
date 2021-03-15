@@ -21,9 +21,17 @@ const props = {
   },
   defaultLanguage: 'fr-FR',
   localeChoiceTranslations: [
-    {code: 'de-DE', message: "Möchten Sie die Seite in Ihrer Sprache anzeigen?", label: 'Weiter'},
-    {code: 'en-GB', message: "Do you want to consult the website in your language?", label: 'Continue'},
-    {code: 'fr-FR', message: "Voulez-vous consulter le site dans votre langue ?", label: 'Continuer'},
+    { code: 'de-DE', message: 'Möchten Sie die Seite in Ihrer Sprache anzeigen?', label: 'Weiter' },
+    {
+      code: 'en-GB',
+      message: 'Do you want to consult the website in your language?',
+      label: 'Continue',
+    },
+    {
+      code: 'fr-FR',
+      message: 'Voulez-vous consulter le site dans votre langue ?',
+      label: 'Continuer',
+    },
   ],
   languageList: [
     { translationKey: 'french', code: 'fr-FR' },
@@ -33,6 +41,6 @@ const props = {
   ],
 };
 
-storiesOf('Cap Collectif|ChangeLanguageOnWebsiteHeader', module).add('default', () => {
+storiesOf('Cap Collectif/ChangeLanguageOnWebsiteHeader', module).add('default', () => {
   return <ChangeLanguageOnWebsiteHeader {...props} />;
 });

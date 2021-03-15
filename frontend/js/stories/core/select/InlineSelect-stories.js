@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import InlineSelect from '~ui/InlineSelect';
 
-storiesOf('Core|Select/InlineSelect', module)
+storiesOf('Core/Select/InlineSelect', module)
   .add('default', () => {
     return (
       <InlineSelect>

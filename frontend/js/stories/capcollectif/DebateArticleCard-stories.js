@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
 import Grid from '~ui/Primitives/Layout/Grid';
 
-storiesOf('Cap Collectif | DebateArticleCard', module)
+storiesOf('Cap Collectif/ DebateArticleCard', module)
   .add('default', () => {
     return (
       <DebateArticleCard

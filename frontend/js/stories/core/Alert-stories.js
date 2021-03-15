@@ -13,7 +13,7 @@ const bsStyleOptions = {
 
 const doFunction = () => {};
 
-storiesOf('Core|Alert', module).add('default', () => {
+storiesOf('Core/Alert', module).add('default', () => {
   const bsStyle = select('Style', bsStyleOptions, 'info');
   const content = text('Content', 'My content');
   const onDismiss = boolean('onDismiss', true);

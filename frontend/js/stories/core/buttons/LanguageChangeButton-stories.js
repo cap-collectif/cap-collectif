@@ -6,7 +6,7 @@ import { boolean } from 'storybook-addon-knobs';
 import { LanguageButton } from '~/components/LanguageButton/LanguageButton';
 import { $refType, $fragmentRefs } from '../../mocks/relay';
 
-storiesOf('Core|Buttons/LanguageButton', module).add('default', () => {
+storiesOf('Core/Buttons/LanguageButton', module).add('default', () => {
   const props = {
     onChange: () => {},
     defaultLanguage: 'Français',

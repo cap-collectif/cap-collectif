@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { Button, Nav } from 'react-bootstrap';
 import StackedNav from '../../../components/Ui/Nav/StackedNav';
 
-storiesOf('Core|Navigation/StackedNav', module).add(
+storiesOf('Core/Navigation/StackedNav', module).add(
   'default',
   () => (
     <StackedNav>

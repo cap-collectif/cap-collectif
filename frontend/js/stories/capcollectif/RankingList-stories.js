@@ -71,10 +71,10 @@ const RankingListWithChoices = () => (
   </RankingListContainer>
 );
 
-storiesOf('Cap Collectif|RankingList', module).add('default', () => {
+storiesOf('Cap Collectif/RankingList', module).add('default', () => {
   return <RankingList />;
 });
 
-storiesOf('Cap Collectif|RankingList', module).add('with choices', () => {
+storiesOf('Cap Collectif/RankingList', module).add('with choices', () => {
   return <RankingListWithChoices />;
 });

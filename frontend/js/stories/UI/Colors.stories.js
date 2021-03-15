@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { storiesOf } from '@storybook/react';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Grid from '~ui/Primitives/Layout/Grid';
 import baseTheme from '~/styles/theme/base';
@@ -16,7 +15,11 @@ type ColorCode = {
 type Colors = Array<[ColorName, ColorCode]>;
 type ColorsNotFormatted = Array<[ColorName, ColorCode | string]>;
 
-storiesOf('Design system|Colors', module).add('default', () => {
+export default {
+  title: 'Design system/Colors',
+  argTypes: {},
+};
+const Template = () => {
   const colorsList = ((Object.entries(baseTheme.colors): any): ColorsNotFormatted);
 
   const colors = ((colorsList.filter(
@@ -49,4 +52,8 @@ storiesOf('Design system|Colors', module).add('default', () => {
       ))}
     </Flex>
   );
-});
+};
+
+export const main = Template.bind({});
+main.storyName = 'Default';
+main.args = {};

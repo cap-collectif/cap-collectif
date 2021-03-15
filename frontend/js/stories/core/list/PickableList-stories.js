@@ -74,7 +74,7 @@ const PickableListOutputExample = () => {
   return <pre>{JSON.stringify(context, null, 2)}</pre>;
 };
 
-storiesOf('Core|List/PickableList', module)
+storiesOf('Core/List/PickableList', module)
   .add(
     'default',
     () => {

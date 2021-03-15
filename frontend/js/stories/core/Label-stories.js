@@ -14,7 +14,7 @@ const bsStyleOptions = {
   Default: 'default',
 };
 
-storiesOf('Core|Label', module)
+storiesOf('Core/Label', module)
   .add('Bootstrap Label', () => {
     const bsStyle = select('BsStyle', bsStyleOptions, 'default');
     const content = text('Content', 'Content of label');

@@ -35,7 +35,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|ParticipationTutorial', module).add(
+storiesOf('Inté client/ParticipationTutorial', module).add(
   'Default',
   () => <ParticipationTutorial instructions={arrayObject('instructions', inputs)} />,
   {

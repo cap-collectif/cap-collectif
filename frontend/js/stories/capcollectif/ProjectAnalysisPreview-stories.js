@@ -80,6 +80,6 @@ const ProjectAnalysisPreview = ({ project }: Props) => {
   );
 };
 
-storiesOf('Cap Collectif|ProjectAnalysisPreview', module).add('default', () => {
+storiesOf('Cap Collectif/ProjectAnalysisPreview', module).add('default', () => {
   return <ProjectAnalysisPreview project={dataProject} />;
 });

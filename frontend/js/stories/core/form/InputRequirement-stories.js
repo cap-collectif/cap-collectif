@@ -11,7 +11,7 @@ import CircleColor from '../../../components/Ui/CircleColor/CircleColor';
 import { colors } from './CircleColor-stories';
 import type { Dispatch } from '../../../types';
 
-storiesOf('Core|Form/InputRequirement', module)
+storiesOf('Core/Form/InputRequirement', module)
   .add('default', () => (
     <form>
       <InputRequirement placeholder="Your text here" onChange={() => {}} onDelete={() => {}} />

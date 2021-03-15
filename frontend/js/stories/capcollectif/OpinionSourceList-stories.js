@@ -177,7 +177,7 @@ const OpinionSourceList = ({ section, opinionSources, isProfile }) => (
   </div>
 );
 
-storiesOf('Cap Collectif|OpinionSourceList', module)
+storiesOf('Cap Collectif/OpinionSourceList', module)
   .add('default case', () => {
     const section = {
       addSourceEnable: boolean('Add source enabled', true, 'Section'),

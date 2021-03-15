@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import Select from '../../../components/Ui/Form/Select/Select';
 import SelectOption from '../../../components/Ui/Form/Select/SelectOption';
 
-storiesOf('Core|Form/Select', module).add(
+storiesOf('Core/Form/Select', module).add(
   'Select',
   () => {
     const label = text('Label', 'status');

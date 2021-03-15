@@ -105,7 +105,7 @@ const ProjectEventPreview = ({ event, type, replay }: Props) => {
   );
 };
 
-storiesOf('Cap Collectif|ProjectEventPreview', module)
+storiesOf('Cap Collectif/ProjectEventPreview', module)
   .add('default', () => (
     <div style={{ maxWidth: 600 }}>
       <ProjectEventPreview event={eventProps} type={TYPE_EVENT.PHYSICAL} />

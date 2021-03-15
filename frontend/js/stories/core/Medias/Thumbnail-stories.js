@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Thumbnail from '~ui/Medias/Thumbnail/Thumbnail';
 
-storiesOf('Core|Medias/Thumbnail', module)
+storiesOf('Core/Medias/Thumbnail', module)
   .add('default', () => {
     return <Thumbnail width="500px" height="500px" image="https://via.placeholder.com/1000x1000" />;
   })

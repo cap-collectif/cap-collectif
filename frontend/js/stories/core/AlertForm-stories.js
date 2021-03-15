@@ -4,7 +4,7 @@ import { boolean, text } from 'storybook-addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { AlertForm } from '../../components/Alert/AlertForm';
 
-storiesOf('Core|Form/AlertForm', module).add('default', () => {
+storiesOf('Core/Form/AlertForm', module).add('default', () => {
   const valid = boolean('Valid', true);
   const invalid = boolean('Invalid', false);
   const submitSucceeded = boolean('SubmitSucceeded', true);

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import InlineList from '../../../components/Ui/List/InlineList';
 
-storiesOf('Core|List/InlineList', module).add('default', () => (
+storiesOf('Core/List/InlineList', module).add('default', () => (
   <InlineList>
     <li>Projet 1</li>
     <li>Projet 2</li>
@@ -11,7 +11,7 @@ storiesOf('Core|List/InlineList', module).add('default', () => (
   </InlineList>
 ));
 
-storiesOf('Core|List/InlineList', module).add('with separator', () => (
+storiesOf('Core/List/InlineList', module).add('with separator', () => (
   <InlineList separator="•">
     <li>5 projets</li>
     <li>

@@ -117,7 +117,7 @@ const IconContainer = styled.div`
 
 const FontasticIcon = ({ glyph }: { glyph: string }) => <i className={`cap ${glyph}`} />;
 
-storiesOf('Design|Iconography', module).add(
+storiesOf('Design/Iconography', module).add(
   'Fontastic icons [deprecated]',
   () => (
     <Container>

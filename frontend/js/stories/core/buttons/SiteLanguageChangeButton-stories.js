@@ -15,7 +15,7 @@ const props = {
   ],
 };
 
-storiesOf('Core|Buttons/SiteLanguageChangeButton', module)
+storiesOf('Core/Buttons/SiteLanguageChangeButton', module)
   .add('default', () => {
     return <SiteLanguageChangeButton {...props} />;
   })

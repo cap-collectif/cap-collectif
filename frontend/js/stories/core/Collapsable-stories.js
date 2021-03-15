@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Collapsable from '~ui/Collapsable';
 import DropdownSelect from '~ui/DropdownSelect';
 
-storiesOf('Core|Collapsable', module)
+storiesOf('Core/Collapsable', module)
   .add('default', () => {
     return (
       <Collapsable>

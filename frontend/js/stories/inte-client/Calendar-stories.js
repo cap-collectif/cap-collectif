@@ -23,7 +23,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|Calendar', module)
+storiesOf('Inté client/Calendar', module)
   .add(
     'Default',
     () => (

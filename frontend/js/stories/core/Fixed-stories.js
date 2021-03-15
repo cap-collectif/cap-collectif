@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Fixed from '~ui/Fixed/Fixed';
 
-storiesOf('Core|Fixed', module).add('default', () => {
+storiesOf('Core/Fixed', module).add('default', () => {
   return (
     <div style={{ border: '1px solid red', height: 800 }}>
       <Fixed position={{ top: '180px', left: '60%' }} width="300px">

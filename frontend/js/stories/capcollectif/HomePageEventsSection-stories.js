@@ -55,6 +55,6 @@ const HomePageEvents = () => (
   </EventContainer>
 );
 
-storiesOf('Cap Collectif|HomePageEventsSection', module).add('default', () => (
+storiesOf('Cap Collectif/HomePageEventsSection', module).add('default', () => (
   <HomePageEvents events={eventsMock} />
 ));

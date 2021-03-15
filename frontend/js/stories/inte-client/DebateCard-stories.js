@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { text } from 'storybook-addon-knobs';
 import DebateCard from '~/components/InteClient/DebateCard/DebateCard';
 
-storiesOf('Inté client|DebateCard', module)
+storiesOf('Inté client/DebateCard', module)
   .add(
     'Default',
     () => (

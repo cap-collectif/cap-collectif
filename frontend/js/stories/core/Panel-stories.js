@@ -15,7 +15,7 @@ const panelStyleOptions = {
   Null: '',
 };
 
-storiesOf('Core|Panel', module).add(
+storiesOf('Core/Panel', module).add(
   'Panel',
   () => {
     const titleComponent = text('Title component', 'h3');

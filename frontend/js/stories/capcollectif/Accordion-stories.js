@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { arrayObject, color, text } from 'storybook-addon-knobs';
 import Accordion from '../../components/Ui/Accordion/Accordion';
 
-storiesOf('Cap Collectif|Accordion', module)
+storiesOf('Cap Collectif/Accordion', module)
   .add(
     '3 inputs',
     () => {

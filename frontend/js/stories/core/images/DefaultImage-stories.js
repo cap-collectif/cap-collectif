@@ -5,7 +5,7 @@ import { text } from 'storybook-addon-knobs';
 import DefaultImage from '../../../components/Ui/Medias/DefaultImage';
 import ProjectIcon from '../../../components/Ui/Icons/ProjectIcon';
 
-storiesOf('Core|Images/DefaultImage', module).add(
+storiesOf('Core/Images/DefaultImage', module).add(
   'default',
   () => {
     const width = text('Width', '100%');

@@ -21,7 +21,7 @@ const bsSizeOptions = {
   XSmall: 'xsmall',
 };
 
-storiesOf('Core|Buttons/Button', module).add('default', () => {
+storiesOf('Core/Buttons/Button', module).add('default', () => {
   const content = text('Content', 'My button');
   const bsStyle = select('BsStyle', bsStyleOptions, 'primary');
   const bsSize = select('BsSize', bsSizeOptions, null);

@@ -50,7 +50,7 @@ UserVoteList.defaultProps = {
   max: 5,
 };
 
-storiesOf('Cap Collectif|UserVoteList', module)
+storiesOf('Cap Collectif/UserVoteList', module)
   .add('default case', () => {
     const votes = votesMockGenerator(4);
     const max = number('Max display', 5);

@@ -10,7 +10,7 @@ const bsSizeOptions = {
   Null: 'null',
 };
 
-storiesOf('Layout|Modal', module).add(
+storiesOf('Layout/Modal', module).add(
   'default',
   () => {
     const bsSize = select('BsSize', bsSizeOptions, 'small');

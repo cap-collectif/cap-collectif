@@ -6,7 +6,7 @@ import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap';
 import Tag from '../../components/Ui/Labels/Tag';
 import InlineList from '../../components/Ui/List/InlineList';
 
-storiesOf('Core|Tag', module)
+storiesOf('Core/Tag', module)
   .add('default', () => {
     const children = text('Children', 'Label', 'Props');
     return <Tag id="example">{children}</Tag>;

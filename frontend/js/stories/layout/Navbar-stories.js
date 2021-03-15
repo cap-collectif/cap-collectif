@@ -102,7 +102,7 @@ const ContentRight = ({
 
 const ContentRightWithIntl = injectIntl(ContentRight);
 
-storiesOf('Layout|MainNavbar', module)
+storiesOf('Layout/MainNavbar', module)
   .add('with 2 items', () => {
     const siteName = text('site name', 'Cap-Collectif');
     const home = 'https://cap-collectif.com/';
@@ -120,10 +120,21 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar home={home} logo={logo} items={[items[0], items[1]]} siteName={siteName}
-                localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
-                currentRouteName="app_homepage" currentRouteParams={[]} preferredLanguage="fr-FR" languageList={[]}
-                currentLanguage="fr-FR" isMultilangueEnabled />
+        <Navbar
+          home={home}
+          logo={logo}
+          items={[items[0], items[1]]}
+          siteName={siteName}
+          localeChoiceTranslations={[
+            { code: 'de-DE', message: 'Ich bin französe', label: 'Weiter' },
+          ]}
+          currentRouteName="app_homepage"
+          currentRouteParams={[]}
+          preferredLanguage="fr-FR"
+          languageList={[]}
+          currentLanguage="fr-FR"
+          isMultilangueEnabled
+        />
       </ThemeProvider>
     );
   })
@@ -144,10 +155,21 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar home={home} logo={logo} items={items} currentRouteName="app_homepage" currentRouteParams={[]}
-                localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
-                siteName={siteName} preferredLanguage="en-GB" currentLanguage="fr-FR" languageList={[]}
-                 isMultilangueEnabled />
+        <Navbar
+          home={home}
+          logo={logo}
+          items={items}
+          currentRouteName="app_homepage"
+          currentRouteParams={[]}
+          localeChoiceTranslations={[
+            { code: 'de-DE', message: 'Ich bin französe', label: 'Weiter' },
+          ]}
+          siteName={siteName}
+          preferredLanguage="en-GB"
+          currentLanguage="fr-FR"
+          languageList={[]}
+          isMultilangueEnabled
+        />
       </ThemeProvider>
     );
   })
@@ -171,10 +193,21 @@ storiesOf('Layout|MainNavbar', module)
 
     return (
       <ThemeProvider theme={theme}>
-        <Navbar home={home} logo={logo} items={newItems} siteName={siteName} currentRouteName="app_homepage" isMultilangueEnabled
-                currentLanguage="es-ES" currentRouteParams={[]} preferredLanguage="fr-FR"
-                localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
-                languageList={[]} />
+        <Navbar
+          home={home}
+          logo={logo}
+          items={newItems}
+          siteName={siteName}
+          currentRouteName="app_homepage"
+          isMultilangueEnabled
+          currentLanguage="es-ES"
+          currentRouteParams={[]}
+          preferredLanguage="fr-FR"
+          localeChoiceTranslations={[
+            { code: 'de-DE', message: 'Ich bin französe', label: 'Weiter' },
+          ]}
+          languageList={[]}
+        />
       </ThemeProvider>
     );
   })
@@ -212,7 +245,9 @@ storiesOf('Layout|MainNavbar', module)
           currentLanguage="fr-FR"
           isMultilangueEnabled
           languageList={[]}
-          localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
+          localeChoiceTranslations={[
+            { code: 'de-DE', message: 'Ich bin französe', label: 'Weiter' },
+          ]}
         />
       </ThemeProvider>
     );
@@ -255,7 +290,9 @@ storiesOf('Layout|MainNavbar', module)
           currentLanguage="en-GB"
           isMultilangueEnabled
           languageList={[]}
-          localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
+          localeChoiceTranslations={[
+            { code: 'de-DE', message: 'Ich bin französe', label: 'Weiter' },
+          ]}
         />
       </ThemeProvider>
     );
@@ -298,8 +335,13 @@ storiesOf('Layout|MainNavbar', module)
           preferredLanguage="fr-FR"
           currentLanguage="fr-FR"
           isMultilangueEnabled={false}
-          localeChoiceTranslations={[{code: 'de-DE', message: "Ich bin französe", label: 'Weiter'}]}
-          languageList={[{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }]}
+          localeChoiceTranslations={[
+            { code: 'de-DE', message: 'Ich bin französe', label: 'Weiter' },
+          ]}
+          languageList={[
+            { translationKey: 'french', code: 'fr-FR' },
+            { translationKey: 'english', code: 'en-GB' },
+          ]}
         />
       </ThemeProvider>
     );

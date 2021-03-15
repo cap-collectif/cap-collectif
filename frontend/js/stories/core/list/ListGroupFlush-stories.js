@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { ListGroupItem } from 'react-bootstrap';
 import ListGroupFlush from '../../../components/Ui/List/ListGroupFlush';
 
-storiesOf('Core|List/ListGroupFlush', module).add('default', () => (
+storiesOf('Core/List/ListGroupFlush', module).add('default', () => (
   <ListGroupFlush>
     <ListGroupItem>Paragraph 1</ListGroupItem>
     <ListGroupItem>Paragraph 2</ListGroupItem>

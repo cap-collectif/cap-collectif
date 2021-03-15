@@ -16,7 +16,7 @@ const ShareButtonDropDown = ({ type }: { type: Object }) => (
   </ShareButton>
 );
 
-storiesOf('Core|Buttons/ShareButton', module)
+storiesOf('Core/Buttons/ShareButton', module)
   .add('default', () => {
     const type = {
       size: '',

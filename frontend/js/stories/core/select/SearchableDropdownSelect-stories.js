@@ -40,7 +40,7 @@ const promiseOptions = inputValue =>
     resolve(json.results);
   });
 
-storiesOf('Core|Select/SearchableDropdownSelect', module)
+storiesOf('Core/Select/SearchableDropdownSelect', module)
   .add('default', () => {
     return (
       <SearchableDropdownSelect

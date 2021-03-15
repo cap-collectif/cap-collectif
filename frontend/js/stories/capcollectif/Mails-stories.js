@@ -28,7 +28,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 images.map((image, i) => {
   return (
     !(i % 2) &&
-    storiesOf('Cap Collectif|Mails', module).add(
+    storiesOf('Cap Collectif/Mails', module).add(
       image.substring(image.indexOf('a/') + 2, image.indexOf('.html')),
       () => (
         <Container>

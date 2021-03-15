@@ -167,7 +167,7 @@ const typos = [
   },
 ];
 
-storiesOf('Design|Typography', module).add(
+storiesOf('Design/Typography', module).add(
   'Typography',
   () => (
     <div>

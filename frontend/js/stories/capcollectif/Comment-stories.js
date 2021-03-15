@@ -212,7 +212,7 @@ Comment.defaultProps = {
   useBodyColor: true,
 };
 
-storiesOf('Cap Collectif|Comment', module)
+storiesOf('Cap Collectif/Comment', module)
   .add('default case', () => {
     return <Comment item={commentMock} />;
   })

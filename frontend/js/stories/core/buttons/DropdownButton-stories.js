@@ -21,7 +21,7 @@ const bsSizeOptions = {
   XSmall: 'xsmall',
 };
 
-storiesOf('Core|Buttons/DropdownButton', module).add('default', () => {
+storiesOf('Core/Buttons/DropdownButton', module).add('default', () => {
   const bsSize = select('BsSize', bsSizeOptions, null);
   const bsStyle = select('BsStyle', bsStyleOptions, 'primary');
   const title = text('Title', 'My title');

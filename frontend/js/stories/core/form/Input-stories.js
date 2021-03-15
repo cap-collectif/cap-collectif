@@ -16,15 +16,15 @@ import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajorit
 
 /* ------ INPUT ------ */
 
-storiesOf('Core|Form/Input', module).add('Default', () => {
+storiesOf('Core/Form/Input', module).add('Default', () => {
   return <Input type="text" id="1" name="test" value="Hello world" />;
 });
 
-storiesOf('Core|Form/Input', module).add('Disabled', () => {
+storiesOf('Core/Form/Input', module).add('Disabled', () => {
   return <Input type="text" id="1" name="test" value="Hello world" disabled />;
 });
 
-storiesOf('Core|Form/Input', module).add('Number', () => {
+storiesOf('Core/Form/Input', module).add('Number', () => {
   return <Input type="number" id="1" name="test" value={12} />;
 });
 
@@ -32,21 +32,21 @@ storiesOf('Core|Form/Input', module).add('Number', () => {
 
 /* ------ CHECKBOX ------ */
 
-storiesOf('Core|Form/Checkbox', module).add('Default', () => {
+storiesOf('Core/Form/Checkbox', module).add('Default', () => {
   return <Checkbox label="Je ne suis pas checked" id="1" name="test" value="test1" />;
 });
 
-storiesOf('Core|Form/Checkbox', module).add('Checked', () => {
+storiesOf('Core/Form/Checkbox', module).add('Checked', () => {
   return <Checkbox label="Je suis checked" id="2" name="test" value="test2" checked />;
 });
 
-storiesOf('Core|Form/Checkbox', module).add('With image', () => {
+storiesOf('Core/Form/Checkbox', module).add('With image', () => {
   return (
     <Checkbox id="1" name="test" image="https://source.unsplash.com/random/300x200" value="test1" />
   );
 });
 
-storiesOf('Core|Form/Checkbox', module).add('With image checked', () => {
+storiesOf('Core/Form/Checkbox', module).add('With image checked', () => {
   return (
     <Checkbox
       id="1"
@@ -62,21 +62,21 @@ storiesOf('Core|Form/Checkbox', module).add('With image checked', () => {
 
 /* ------ RADIO ------ */
 
-storiesOf('Core|Form/Radio', module).add('Default', () => {
+storiesOf('Core/Form/Radio', module).add('Default', () => {
   return <Radio label="Je ne suis pas checked" id="1" name="test" value="test1" />;
 });
 
-storiesOf('Core|Form/Radio', module).add('Checked', () => {
+storiesOf('Core/Form/Radio', module).add('Checked', () => {
   return <Radio label="Je suis checked" id="2" name="test" value="test2" checked />;
 });
 
-storiesOf('Core|Form/Radio', module).add('With image', () => {
+storiesOf('Core/Form/Radio', module).add('With image', () => {
   return (
     <Radio id="1" name="test" image="https://source.unsplash.com/random/300x200" value="test1" />
   );
 });
 
-storiesOf('Core|Form/Radio', module).add('With image checked', () => {
+storiesOf('Core/Form/Radio', module).add('With image checked', () => {
   return (
     <Radio
       id="1"
@@ -92,7 +92,7 @@ storiesOf('Core|Form/Radio', module).add('With image checked', () => {
 
 /* ------ RADIO BUTTON ------ */
 
-storiesOf('Core|Form/RadioButton', module).add('Default', () => {
+storiesOf('Core/Form/RadioButton', module).add('Default', () => {
   return (
     <Radio
       label="Je ne suis pas checked"
@@ -105,7 +105,7 @@ storiesOf('Core|Form/RadioButton', module).add('Default', () => {
   );
 });
 
-storiesOf('Core|Form/RadioButton', module).add('Checked', () => {
+storiesOf('Core/Form/RadioButton', module).add('Checked', () => {
   return (
     <Radio
       label="Je suis checked"
@@ -123,11 +123,11 @@ storiesOf('Core|Form/RadioButton', module).add('Checked', () => {
 
 /* ------ TEXTAREA ------ */
 
-storiesOf('Core|Form/TextArea', module).add('Default', () => {
+storiesOf('Core/Form/TextArea', module).add('Default', () => {
   return <TextArea id="1" name="test" />;
 });
 
-storiesOf('Core|Form/TextArea', module).add('Disabled', () => {
+storiesOf('Core/Form/TextArea', module).add('Disabled', () => {
   return <TextArea id="1" name="test" disabled />;
 });
 
@@ -135,7 +135,7 @@ storiesOf('Core|Form/TextArea', module).add('Disabled', () => {
 
 /* ------ DROPZONE ------ */
 
-storiesOf('Core|Form/Dropzone', module).add('Default', () => {
+storiesOf('Core/Form/Dropzone', module).add('Default', () => {
   return (
     <Dropzone
       value={null}
@@ -153,13 +153,13 @@ storiesOf('Core|Form/Dropzone', module).add('Default', () => {
 
 /* ------ TOGGLE ------ */
 
-storiesOf('Core|Form/Toggle', module).add('Default', () => {
+storiesOf('Core/Form/Toggle', module).add('Default', () => {
   return (
     <Toggle id="1" name="test" value="test1" label="Toggler" helpText="Je suis un text d'aide" />
   );
 });
 
-storiesOf('Core|Form/Toggle', module).add('Checked', () => {
+storiesOf('Core/Form/Toggle', module).add('Checked', () => {
   return (
     <Toggle
       id="2"
@@ -173,7 +173,7 @@ storiesOf('Core|Form/Toggle', module).add('Checked', () => {
   );
 });
 
-storiesOf('Core|Form/Toggle', module).add('Disabled', () => {
+storiesOf('Core/Form/Toggle', module).add('Disabled', () => {
   return (
     <Toggle
       id="3"
@@ -190,11 +190,11 @@ storiesOf('Core|Form/Toggle', module).add('Disabled', () => {
 
 /* ------ COLOR PICKER ------ */
 
-storiesOf('Core|Form/ColorPicker', module).add('Default', () => {
+storiesOf('Core/Form/ColorPicker', module).add('Default', () => {
   return <ColorPickerInput onChange={() => {}} placeholder="#ABCDEF" />;
 });
 
-storiesOf('Core|Form/ColorPicker', module).add('With value', () => {
+storiesOf('Core/Form/ColorPicker', module).add('With value', () => {
   return <ColorPickerInput onChange={() => {}} value="#ABCDEF" />;
 });
 
@@ -202,7 +202,7 @@ storiesOf('Core|Form/ColorPicker', module).add('With value', () => {
 
 /* ------ MAJORITY ------ */
 
-storiesOf('Core|Form/Majority', module).add('Default', () => {
+storiesOf('Core/Form/Majority', module).add('Default', () => {
   const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
   return (
     <div style={{ display: 'flex' }}>
@@ -219,7 +219,7 @@ storiesOf('Core|Form/Majority', module).add('Default', () => {
   );
 });
 
-storiesOf('Core|Form/Majority', module).add('Disabled', () => {
+storiesOf('Core/Form/Majority', module).add('Disabled', () => {
   const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
   return (
     <div style={{ display: 'flex' }}>
@@ -237,7 +237,7 @@ storiesOf('Core|Form/Majority', module).add('Disabled', () => {
   );
 });
 
-storiesOf('Core|Form/Majority', module).add('As preview', () => {
+storiesOf('Core/Form/Majority', module).add('As preview', () => {
   const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
   return (
     <div style={{ display: 'flex' }}>
@@ -255,7 +255,7 @@ storiesOf('Core|Form/Majority', module).add('As preview', () => {
   );
 });
 
-storiesOf('Core|Form/Majority', module).add('With selected one', () => {
+storiesOf('Core/Form/Majority', module).add('With selected one', () => {
   const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
   return (
     <div style={{ display: 'flex' }}>
@@ -274,7 +274,7 @@ storiesOf('Core|Form/Majority', module).add('With selected one', () => {
   );
 });
 
-storiesOf('Core|Form/MultipleMajority', module).add('With custom choices', () => {
+storiesOf('Core/Form/MultipleMajority', module).add('With custom choices', () => {
   const choices: MajorityProperty[] = [
     {
       color: 'red',
@@ -308,7 +308,7 @@ storiesOf('Core|Form/MultipleMajority', module).add('With custom choices', () =>
   );
 });
 
-storiesOf('Core|Form/MultipleMajority', module).add('With disabled colors', () => {
+storiesOf('Core/Form/MultipleMajority', module).add('With disabled colors', () => {
   return (
     <div style={{ display: 'flex' }}>
       <MultipleMajority enableBars disableColors />

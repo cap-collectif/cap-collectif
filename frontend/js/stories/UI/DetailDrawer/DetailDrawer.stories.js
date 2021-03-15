@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { storiesOf } from '@storybook/react';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -8,7 +7,9 @@ import Button from '~ds/Button/Button';
 import Text from '~ui/Primitives/Text';
 import Menu from '~ds/Menu/Menu';
 
-storiesOf('Design system|DetailDrawer', module).add('default', () => {
+export default { title: 'Design system/DetailDrawer', component: DetailDrawer };
+
+const Template = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Flex>
@@ -33,4 +34,7 @@ storiesOf('Design system|DetailDrawer', module).add('default', () => {
       </DetailDrawer>
     </Flex>
   );
-});
+};
+
+export const main = Template.bind({});
+main.storyName = 'Default';

@@ -82,7 +82,7 @@ const FollowersList = ({ withHeader, hasMore, isLoading, followers }) => (
   </div>
 );
 
-storiesOf('Cap Collectif|FollowersList', module)
+storiesOf('Cap Collectif/FollowersList', module)
   .add('default case', () => {
     const section = {
       withHeader: boolean('with header', true, 'Section'),

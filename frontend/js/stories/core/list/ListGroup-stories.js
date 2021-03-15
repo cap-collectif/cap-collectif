@@ -17,7 +17,7 @@ const author = {
   isViewer: false,
 };
 
-storiesOf('Core|List/ListGroup', module).add('default', () => (
+storiesOf('Core/List/ListGroup', module).add('default', () => (
   <ListGroup>
     <ListGroupItem>Paragraph</ListGroupItem>
     <ListGroupItem className="d-flex justify-content-between align-items-center">

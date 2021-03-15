@@ -11,7 +11,7 @@ export const colors: Array<Color> = [
   { label: 'Black with a long name to test padding lol', hexValue: '#000', name: 'SUCCESS' },
 ];
 
-storiesOf('Core|Form/CircleColor', module).add('CircleColor', () => {
+storiesOf('Core/Form/CircleColor', module).add('CircleColor', () => {
   const editable = boolean('editable', true);
 
   return (

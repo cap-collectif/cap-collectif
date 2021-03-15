@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { text } from 'storybook-addon-knobs';
 import Title, { TYPE } from '~/components/Ui/Title/Title';
 
-storiesOf('Core|Title', module).add('default', () => {
+storiesOf('Core/Title', module).add('default', () => {
   const myTitle = text('Content', 'Ceci est un titre');
 
   return (

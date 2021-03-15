@@ -17,7 +17,7 @@ const video = {
   },
 };
 
-storiesOf('Core|Medias', module).add(
+storiesOf('Core/Medias', module).add(
   'Video',
   () => {
     return (

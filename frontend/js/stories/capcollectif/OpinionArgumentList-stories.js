@@ -222,7 +222,7 @@ const argumentTypes = {
   simple: 'SIMPLE',
 };
 
-storiesOf('Cap Collectif|OpinionArgumentList', module)
+storiesOf('Cap Collectif/OpinionArgumentList', module)
   .add('default case', () => {
     const section = {
       paginationEnable: boolean('Pagination enabled', true, 'Section'),

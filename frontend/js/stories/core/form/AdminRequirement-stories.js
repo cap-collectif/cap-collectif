@@ -93,7 +93,7 @@ const DraggableMember = ({ id, placeholder, draggableId }: DragglableMemberProps
   );
 };
 
-storiesOf('Core|Form/AdminRequirement', module).add('AdminRequirement', () => (
+storiesOf('Core/Form/AdminRequirement', module).add('AdminRequirement', () => (
   <form>
     <ListGroup>
       <Row>

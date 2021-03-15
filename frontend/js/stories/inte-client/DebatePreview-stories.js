@@ -53,7 +53,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|DebatePreview/List', module).add(
+storiesOf('Inté client/DebatePreview/List', module).add(
   'Default',
   () => <DebatePreviewList debates={arrayObject('debates', inputs)} lang={text('lang', 'fr')} />,
   {
@@ -63,7 +63,7 @@ storiesOf('Inté client|DebatePreview/List', module).add(
   },
 );
 
-storiesOf('Inté client|DebatePreview/Item', module).add('Default', () => (
+storiesOf('Inté client/DebatePreview/Item', module).add('Default', () => (
   <DebatePreviewItem
     title={{
       fr: "Comment dépasser la recherche de profit à court terme de l'entreprise ?",

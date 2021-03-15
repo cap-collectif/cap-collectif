@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean } from 'storybook-addon-knobs';
 import Table from '../../components/Ui/Table/Table';
 
-storiesOf('Core|Tables', module).add(
+storiesOf('Core/Tables', module).add(
   'Table',
   () => {
     const tableLayoutFixed = boolean('TableLayoutFixed', false);

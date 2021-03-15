@@ -119,7 +119,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|ProposalPreview/List', module).add(
+storiesOf('Inté client/ProposalPreview/List', module).add(
   'Default',
   () => (
     <ProposalPreviewList proposals={arrayObject('proposals', inputs)} lang={text('lang', 'fr')} />
@@ -131,7 +131,7 @@ storiesOf('Inté client|ProposalPreview/List', module).add(
   },
 );
 
-storiesOf('Inté client|ProposalPreview/Item', module).add('Default', () => (
+storiesOf('Inté client/ProposalPreview/Item', module).add('Default', () => (
   <ProposalPreviewItem
     content={{
       fr:

@@ -38,7 +38,7 @@ const inputs = [
   },
 ];
 
-storiesOf('Inté client|GlobalStep/List', module).add(
+storiesOf('Inté client/GlobalStep/List', module).add(
   'Default',
   () => <GlobalStepList steps={arrayObject('steps', inputs)} lang={text('lang', 'fr')} />,
   {
@@ -48,7 +48,7 @@ storiesOf('Inté client|GlobalStep/List', module).add(
   },
 );
 
-storiesOf('Inté client|GlobalStep/Item', module).add('Default', () => (
+storiesOf('Inté client/GlobalStep/Item', module).add('Default', () => (
   <GlobalStepItem
     title={{ fr: '1 Débattez', en: '1 Debate' }}
     subtitle={{ fr: 'avec 50 dirigeant(e)s européens', en: 'with many european leaders' }}

@@ -63,7 +63,7 @@ const settingsSlider = object('settingsSlider', {
   centerPadding: '60px',
 });
 
-storiesOf('Inté client|ImageSlider', module).add(
+storiesOf('Inté client/ImageSlider', module).add(
   'Default',
   () => <ImageSlider images={arrayObject('images', inputs)} settingsSlider={settingsSlider} />,
   {

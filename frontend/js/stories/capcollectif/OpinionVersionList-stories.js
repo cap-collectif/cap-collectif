@@ -196,7 +196,7 @@ const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
   </Panel>
 );
 
-storiesOf('Cap Collectif|OpinionVersionList', module)
+storiesOf('Cap Collectif/OpinionVersionList', module)
   .add('default case', () => {
     const section = {
       paginationEnable: boolean('Pagination enabled', true, 'Section'),

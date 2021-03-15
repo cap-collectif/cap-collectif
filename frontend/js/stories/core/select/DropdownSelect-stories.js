@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import DropdownSelect from '~ui/DropdownSelect';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
-storiesOf('Core|Select/DropdownSelect', module)
+storiesOf('Core/Select/DropdownSelect', module)
   .add('default', () => {
     return (
       <DropdownSelect title="Trier par">

@@ -18,7 +18,7 @@ const classNameOptions = {
   Null: null,
 };
 
-storiesOf('Core|ProgressBar', module).add('default', () => {
+storiesOf('Core/ProgressBar', module).add('default', () => {
   const now = number('Now', 100);
   const className = select('ClassName', classNameOptions, null);
   const label = text('Label', 'My label');
