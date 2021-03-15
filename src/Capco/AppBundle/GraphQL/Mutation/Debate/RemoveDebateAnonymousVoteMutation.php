@@ -83,9 +83,9 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
         }
 
         try {
-            $this->indexer->remove(DebateAnonymousVote::class, $vote->getId());
             $this->em->remove($vote);
             $this->em->flush();
+            $this->indexer->remove(DebateAnonymousVote::class, $vote->getId());
             $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(

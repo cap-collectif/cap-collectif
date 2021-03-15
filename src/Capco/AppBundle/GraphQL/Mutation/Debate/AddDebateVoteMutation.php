@@ -69,12 +69,14 @@ class AddDebateVoteMutation implements MutationInterface
             $previousVoteId = $previousVote->getId();
             $this->em->remove($previousVote);
             $this->em->flush();
-            $this->indexer->remove(DebateVote::class, $previousVoteId);
         }
         $this->em->persist($debateVote);
 
         try {
             $this->em->flush();
+            if ($previousVoteId) {
+                $this->indexer->remove(DebateVote::class, $previousVoteId);
+            }
             $this->indexer->index(DebateVote::class, $debateVote->getId());
             $this->indexer->finishBulk();
         } catch (DriverException $e) {

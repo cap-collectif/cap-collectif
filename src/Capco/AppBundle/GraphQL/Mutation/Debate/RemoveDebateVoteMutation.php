@@ -76,9 +76,6 @@ class RemoveDebateVoteMutation implements MutationInterface
         }
 
         $previousVoteId = $previousVote->getId();
-        $this->em->remove($previousVote);
-        $this->indexer->remove(DebateVote::class, $previousVoteId);
-
         $previousArgumentId = null;
         $previousArgument = $this->argumentRepository->getOneByDebateAndUser($debate, $viewer);
 
@@ -86,11 +83,15 @@ class RemoveDebateVoteMutation implements MutationInterface
         if ($previousArgument) {
             $previousArgumentId = $previousArgument->getId();
             $this->em->remove($previousArgument);
-            $this->indexer->remove(DebateArgument::class, $previousArgumentId);
         }
 
         try {
+            $this->em->remove($previousVote);
             $this->em->flush();
+            if ($previousArgumentId) {
+                $this->indexer->remove(DebateArgument::class, $previousArgumentId);
+            }
+            $this->indexer->remove(DebateVote::class, $previousVoteId);
             $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(

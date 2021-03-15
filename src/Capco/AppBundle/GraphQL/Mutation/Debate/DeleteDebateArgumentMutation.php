@@ -20,8 +20,8 @@ class DeleteDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             $debateArgument = $this->getArgument($input, $viewer);
             $this->checkDeleteRightsOnArgument($debateArgument);
             $this->em->remove($debateArgument);
-            $this->indexer->remove(DebateArgument::class, $debateArgument->getId());
             $this->em->flush();
+            $this->indexer->remove(DebateArgument::class, $debateArgument->getId());
             $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
