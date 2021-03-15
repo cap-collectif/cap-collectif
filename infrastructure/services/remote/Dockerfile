@@ -192,6 +192,8 @@ COPY infrastructure/services/remote/redirectionio/run          /etc/service/redi
 
 # Configuration
 COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
+COPY infrastructure/services/remote/nginx/fastcgi_forward.conf     /etc/nginx/fastcgi_forward.conf
+COPY infrastructure/services/remote/nginx/default_headers.conf     /etc/nginx/default_headers.conf
 COPY infrastructure/services/remote/nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.4/fpm/conf.d/capco.ini
 COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.4/cli/conf.d/capco.ini

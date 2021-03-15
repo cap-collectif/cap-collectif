@@ -154,6 +154,10 @@ COPY nginx/ssl/capco.crt            /etc/ssl/certs/capco.crt
 COPY nginx/ssl/capco.key            /etc/ssl/private/capco.key
 COPY nginx/ssl/capco.pem            /etc/ssl/certs/capco.pem
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
+COPY nginx/proxy.conf               /etc/nginx/proxy.conf
+COPY nginx/fastcgi.conf             /etc/nginx/fastcgi.conf
+COPY nginx/default_headers.conf     /etc/nginx/default_headers.conf
+COPY nginx/fastcgi_forward.conf     /etc/nginx/fastcgi_forward.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini              /etc/php/7.4/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini              /etc/php/7.4/cli/conf.d/capco.ini

@@ -15,8 +15,9 @@ Scenario: Public API
     "
   }
   """
-  Then request header "Access-Control-Allow-Origin" contains "*"
-  And request header "Access-Control-Allow-Methods" contains "POST, OPTIONS"
+  Then response header "Access-Control-Allow-Origin" contains "*"
+  And response header "Access-Control-Allow-Methods" contains "OPTIONS, POST"
+  And response header "Content-Security-Policy" contains "default-src 'none'"
   And I send a public GraphQL POST request with origin "*" :
   """
   {
@@ -50,8 +51,9 @@ Scenario: Internal API
     "
   }
   """
-  Then request header "Access-Control-Allow-Origin" contains "https://capco.dev"
-  And request header "Access-Control-Allow-Methods" contains "POST, OPTIONS"
+  Then response header "Access-Control-Allow-Origin" contains "https://capco.dev"
+  And response header "Access-Control-Allow-Methods" contains "OPTIONS, POST"
+  And response header "Content-Security-Policy" contains "default-src 'none'"
   And I send an internal GraphQL POST request with origin "https://capco.dev" :
   """
   {

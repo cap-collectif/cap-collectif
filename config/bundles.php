@@ -87,8 +87,6 @@ return [
     Infinite\FormBundle\InfiniteFormBundle::class => ['all' => true],
     Overblog\DataLoaderBundle\OverblogDataLoaderBundle::class => ['all' => true],
     Overblog\GraphiQLBundle\OverblogGraphiQLBundle::class => ['all' => true],
-    // CORS
-    Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     // NewRelic
     Ekino\NewRelicBundle\EkinoNewRelicBundle::class => ['all' => true],
     JMS\I18nRoutingBundle\JMSI18nRoutingBundle::class => ['all' => true],

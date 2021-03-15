@@ -128,7 +128,7 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Then request header :header contains :value
+     * @Then response header :header contains :value
      */
     public function headerContainsValue(string $header, string $value)
     {
@@ -245,12 +245,6 @@ class GraphQLContext implements Context
             'Accept' => $accept,
             'Origin' => $origin,
         ];
-
-        if ('OPTIONS' === $method) {
-            // See https://github.com/nelmio/NelmioCorsBundle/issues/21#issuecomment-418023782
-            $headers['Access-Control-Request-Method'] = 'POST';
-            $headers['Access-Control-Request-Headers'] = 'test';
-        }
 
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
