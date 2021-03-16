@@ -9,4 +9,4 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <text(1000)>
     voteType: 1
-    votesHelpText: <text(1000)>
+    votesHelpText: <text(200)>
