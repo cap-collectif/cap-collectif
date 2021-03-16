@@ -28,6 +28,17 @@ describe('<ContactAdminForm />', () => {
           },
         ],
       },
+      metadescription: {
+        translations: [
+          {
+            locale: 'FR',
+            value: 'meta description',
+          },
+        ],
+      },
+      customCode: {
+        value: '<code>',
+      },
       siteImage: {
         id: 'image1',
         media: {

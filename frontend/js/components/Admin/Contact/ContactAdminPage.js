@@ -189,16 +189,23 @@ const mapStateToProps = (state: State, { query }: RelayProps) => {
     query.content ? query.content.translations : [],
     state.language.currentLanguage,
   );
-
+  const metaDescriptionTranslation = getTranslation(
+    query.metadescription ? query.metadescription.translations : [],
+    state.language.currentLanguage,
+  );
   return {
     currentLanguage: state.language.currentLanguage,
     initialValues: {
       title: titleTranslation ? titleTranslation.value : null,
       description: contentTranslation ? contentTranslation.value : null,
       custom: {
-        metadescription: state.default.parameters['contact.metadescription'],
+        metadescription: metaDescriptionTranslation
+          ? metaDescriptionTranslation.value
+          : state.default.parameters['contact.metadescription'],
         picto: query.siteImage ? query.siteImage.media : '',
-        customcode: state.default.parameters['contact.customcode'],
+        customcode: query.customCode
+          ? query.customCode.value
+          : state.default.parameters['contact.customcode'],
       },
     },
   };
@@ -233,6 +240,15 @@ export default (createFragmentContainer(container, {
         }
       }
       content: siteParameter(keyname: "contact.content.body") {
+        translations {
+          value
+          locale
+        }
+      }
+      customCode: siteParameter(keyname: "contact.customCode") {
+        value
+      }
+      metadescription: siteParameter(keyname: "contact.metadescription") {
         translations {
           value
           locale

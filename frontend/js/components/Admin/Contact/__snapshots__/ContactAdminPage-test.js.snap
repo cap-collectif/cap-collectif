@@ -95,6 +95,17 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
                 },
               ],
             },
+            "customCode": Object {
+              "value": "<code>",
+            },
+            "metadescription": Object {
+              "translations": Array [
+                Object {
+                  "locale": "FR",
+                  "value": "meta description",
+                },
+              ],
+            },
             "siteImage": Object {
               "id": "image1",
               "media": Object {
