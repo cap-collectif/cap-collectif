@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineORMMapper;
 use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
+use Capco\AppBundle\Sluggable\SluggableListener;
 
 class LoadBenchmarkDataCommand extends Command
 {
@@ -53,87 +54,26 @@ class LoadBenchmarkDataCommand extends Command
             MediaEventSubscriber::class,
             DoctrineORMMapper::class,
             UserListener::class,
+            SluggableListener::class,
         ]);
 
         $this->loadFixtures($output);
 
         $output->writeln('<info>Database loaded !</info>');
 
-        $this->loadToggles($output);
-
-        $this->entityManger->clear();
-
-        $this->populateElasticsearch($output);
-
-        $this->entityManger->clear();
-
-        $this->recalculateCounters($output);
-
-        $output->writeln('Load benchmark data completed');
-
         return 0;
     }
 
     protected function loadFixtures(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
+        $command = $this->getApplication()->find('hautelook:fixtures:load');
         $input = new ArrayInput([
-            'command' => 'hautelook_alice:doctrine:fixtures:load',
-            '--fixtures' => 'fixtures/Benchmark',
+            '-e' => 'benchmark',
+            '--append' => true,
+            '--no-bundles' => true,
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
-    }
-
-    protected function loadToggles(OutputInterface $output)
-    {
-        $command = $this->getApplication()->find('capco:reset-feature-flags');
-        $input = new ArrayInput([
-            '--force' => true,
-        ]);
-        $input->setInteractive(false);
-        $command->run($input, $output);
-
-        $this->manger->deactivate('shield_mode');
-    }
-
-    protected function populateElasticsearch(OutputInterface $output)
-    {
-        $this->runCommands(
-            [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
-            ],
-            $output
-        );
-
-        $this->runCommands(
-            [
-                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
-            ],
-            $output
-        );
-    }
-
-    protected function recalculateCounters(OutputInterface $output)
-    {
-        $this->runCommands(
-            [
-                'capco:compute:users-counters' => ['--force' => true],
-                'capco:compute:rankings' => [],
-            ],
-            $output
-        );
-    }
-
-    private function runCommands(array $commands, $output)
-    {
-        foreach ($commands as $key => $value) {
-            $input = new ArrayInput($value);
-            $input->setInteractive(false);
-            $this->getApplication()
-                ->find($key)
-                ->run($input, $output);
-        }
     }
 
     private function disableListeners(OutputInterface $output, array $whitelist): void

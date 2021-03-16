@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Debate\DebateArgumentVote:
+    debateArgumentVote{1..500}:
+        id: <(9113300 + $current)>
+        user: '@voter<current()>'
+        ipAddress: '1.1.1.1'
+        debateArgument: '@debateArgument<numberBetween(1,500)>'
+        publishedAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        createdAt: $publishedAt

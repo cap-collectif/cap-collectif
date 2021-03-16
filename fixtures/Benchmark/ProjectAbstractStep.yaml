@@ -19,3 +19,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@selectionstep1'
     project: '@project3'
     position: 2
+  pasDebate1:
+    id: pasDebate1
+    step: '@debateStepCannabis'
+    project: '@projectDebate'
+    position: 2

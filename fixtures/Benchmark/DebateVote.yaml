@@ -1,0 +1,22 @@
+Capco\AppBundle\Entity\Debate\DebateVote:
+    debateVote{1..500}:
+        id: <(1113300 + $current)>
+        user: '@voter<current()>'
+        debate: '@debateCannabis'
+        type: FOR
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt
+    debateVote{501..1000}:
+        id: <(1213300 + $current)>
+        user: '@voter<current()>'
+        debate: '@debateCannabis'
+        type: AGAINST
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt
+    debateVoteUser{1..500}:
+        id: <(1513300 + $current)>
+        user: '@user<current()>'
+        debate: '@debateCannabis'
+        type: FOR
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt

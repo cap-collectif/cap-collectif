@@ -51,6 +51,16 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/FooterSocialNetwork.yaml',
             $this->fixturesDir . 'Benchmark/Theme.yaml',
             $this->fixturesDir . 'Benchmark/ThemeTranslation.yaml',
+
+            // Debate application.
+            $this->fixturesDir . 'Benchmark/Debate.yaml',
+            $this->fixturesDir . 'Benchmark/DebateVote.yaml',
+            $this->fixturesDir . 'Benchmark/DebateOpinion.yaml',
+            $this->fixturesDir . 'Benchmark/DebateArgument.yaml',
+            $this->fixturesDir . 'Benchmark/DebateArgumentVote.yaml',
+            $this->fixturesDir . 'Benchmark/DebateAnonymousVote.yaml',
+            $this->fixturesDir . 'Benchmark/DebateStep.yaml',
+
             $this->fixturesDir . 'Benchmark/OpinionType.yaml',
             $this->fixturesDir . 'Benchmark/Project.yaml',
             $this->fixturesDir . 'Benchmark/ProjectAuthor.yaml',

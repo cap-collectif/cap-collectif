@@ -3,3 +3,4 @@ Capco\AppBundle\Entity\Consultation:
     id: typeDefault
     title: Défaut
     step: '@cstep1'
+    slug: c-default

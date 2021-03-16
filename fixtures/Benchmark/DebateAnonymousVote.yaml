@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Debate\DebateAnonymousVote:
+    debateAnonymousVote{1..15000}:
+        id: <(11113300 + $current)>
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::FOR)>
+        debate: '@debateCannabis'
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        token: jesuisunsupertoken<current()>

@@ -20,3 +20,10 @@ Capco\AppBundle\Entity\Project:
     authors: ['@pa3']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
+  projectDebate:
+    id: projectDebate
+    title: Projet Débat
+    slug: project-debate
+    authors: ['@pa4']
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2

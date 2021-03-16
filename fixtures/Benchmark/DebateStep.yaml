@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\Steps\DebateStep:
+    debateStepCannabis:
+        __construct: ['@debateCannabis']
+        isAnonymousParticipationAllowed: true
+        id: debateStepCannabis
+        title: Pour ou contre la légalisation du Cannabis ?
+        slug: pour-ou-contre-la-legalisation-du-cannabis
+        label: Débat
+        body: null
+        startAt: <identity((new \DateTime('2020-10-01')))>
+        endAt: <identity((new \DateTime('2024-10-01')))>
