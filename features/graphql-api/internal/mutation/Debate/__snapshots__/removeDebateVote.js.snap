@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|RemoveDebateVote mutation Remove a debate vote. 1`] = `
+Object {
+  "removeDebateVote": Object {
+    "debate": Object {
+      "arguments": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            },
+          },
+        ],
+        "totalCount": 6,
+      },
+      "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      "votes": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwMQ==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwMg==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwMw==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwNA==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwNg==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwNw==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwOA==",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGViYXRlVm90ZToxMzAwOQ==",
+            },
+          },
+        ],
+        "totalCount": 9,
+      },
+    },
+    "deletedArgumentId": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+    "deletedVoteId": "RGViYXRlVm90ZToxMzAwMA==",
+    "errorCode": null,
+  },
+}
+`;
