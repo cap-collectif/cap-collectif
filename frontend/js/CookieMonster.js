@@ -56,6 +56,17 @@ class CookieMonster {
     return null;
   };
 
+  getHashedDebateAnonymousVoteCookie = (debateId: string): string | null => {
+    const votes: DebateAnonymousVotesCookie = Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)))
+      : {};
+    if (debateId in votes) {
+      const vote: DebateAnonymousVoteValue = votes[debateId];
+      return btoa(`${vote.type}:${vote.token}`);
+    }
+    return null;
+  };
+
   hasDebateAnonymousVoteCookie = (debateId: string): boolean =>
     !!this.getDebateAnonymousVoteCookie(debateId);
 
@@ -70,6 +81,20 @@ class CookieMonster {
       type,
       token,
     };
+    Cookies.set(DEBATE_ANONYMOUS_VOTES_NAME, btoa(JSON.stringify(votes)), {
+      expires: 395,
+      secure: true,
+      sameSite: 'None',
+    });
+  };
+
+  removeDebateAnonymousVoteCookie = (debateId: string): void => {
+    const votes: DebateAnonymousVotesCookie = Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_VOTES_NAME)))
+      : {};
+    if (debateId in votes) {
+      delete votes[debateId];
+    }
     Cookies.set(DEBATE_ANONYMOUS_VOTES_NAME, btoa(JSON.stringify(votes)), {
       expires: 395,
       secure: true,

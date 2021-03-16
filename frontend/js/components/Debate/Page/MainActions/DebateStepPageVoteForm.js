@@ -8,10 +8,7 @@ import copy from 'copy-to-clipboard';
 import { m as motion } from 'framer-motion';
 import styled, { type StyledComponent } from 'styled-components';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import type {
-  DebateStepPageVoteForm_debate,
-  ForOrAgainstValue,
-} from '~relay/DebateStepPageVoteForm_debate.graphql';
+import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import Icon from '~ds/Icon/Icon';
@@ -36,6 +33,8 @@ import RemoveDebateVoteMutation from '~/mutations/RemoveDebateVoteMutation';
 import { toast } from '~ds/Toast';
 import type { Dispatch, GlobalState } from '~/types';
 import ModalDeleteVoteMobile from '~/components/Debate/Page/Modals/ModalDeleteVoteMobile';
+import RemoveDebateAnonymousVoteMutation from '~/mutations/RemoveDebateAnonymousVoteMutation';
+import CookieMonster from '~/CookieMonster';
 
 export const formName = 'debate-argument-form';
 
@@ -135,6 +134,38 @@ export const addArgumentOnDebate = (
     .catch(() => {
       mutationErrorToast(intl);
       onError();
+    });
+};
+
+const deleteAnonymousVoteFromViewer = (
+  debateId: string,
+  setVoteState: VoteState => void,
+  setShowArgumentForm: boolean => void,
+  intl: IntlShape,
+) => {
+  const hash = CookieMonster.getHashedDebateAnonymousVoteCookie(debateId);
+  if (!hash) return;
+  return RemoveDebateAnonymousVoteMutation.commit({
+    input: {
+      debateId,
+      hash,
+    },
+  })
+    .then(response => {
+      if (response.removeDebateAnonymousVote?.errorCode) {
+        mutationErrorToast(intl);
+      } else {
+        toast({
+          variant: 'success',
+          content: intl.formatHTMLMessage({ id: 'vote.delete_success' }),
+        });
+        CookieMonster.removeDebateAnonymousVoteCookie(debateId);
+        setVoteState('NONE');
+        setShowArgumentForm(true);
+      }
+    })
+    .catch(() => {
+      mutationErrorToast(intl);
     });
 };
 
@@ -240,8 +271,10 @@ export const DebateStepPageVoteForm = ({
   useScript('https://platform.twitter.com/widgets.js');
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { widget } = useDebateStepPage();
-
-  const viewerVoteValue = ((debate.viewerVote?.type: any): ForOrAgainstValue);
+  const viewerVoteValue =
+    voteState === 'VOTED_ANONYMOUS'
+      ? CookieMonster.getDebateAnonymousVoteCookie(debate.id)?.type ?? 'AGAINST'
+      : debate.viewerVote?.type ?? 'AGAINST';
 
   const title = viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against';
 
@@ -272,16 +305,25 @@ export const DebateStepPageVoteForm = ({
                     color="gray.700"
                     ml={2}
                     variant="link"
-                    onClick={() =>
-                      deleteVoteFromViewer(
-                        debate.id,
-                        viewerVoteValue,
-                        debate?.viewerHasArgument || false,
-                        setVoteState,
-                        setShowArgumentForm,
-                        intl,
-                      )
-                    }>
+                    onClick={() => {
+                      if (voteState !== 'VOTED_ANONYMOUS') {
+                        deleteVoteFromViewer(
+                          debate.id,
+                          viewerVoteValue,
+                          debate?.viewerHasArgument || false,
+                          setVoteState,
+                          setShowArgumentForm,
+                          intl,
+                        );
+                      } else {
+                        deleteAnonymousVoteFromViewer(
+                          debate.id,
+                          setVoteState,
+                          setShowArgumentForm,
+                          intl,
+                        );
+                      }
+                    }}>
                     <FormattedMessage
                       id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
                     />
@@ -376,22 +418,30 @@ export const DebateStepPageVoteForm = ({
                   </Popover.Content>
                 </Popover>
               )}
-
-              {voteState !== 'VOTED_ANONYMOUS' && !debate.viewerHasArgument && (
+              {(voteState === 'VOTED_ANONYMOUS' || !debate.viewerHasArgument) && (
                 <Button
                   color="gray.700"
                   ml={2}
                   variant="link"
-                  onClick={() =>
-                    deleteVoteFromViewer(
-                      debate.id,
-                      viewerVoteValue,
-                      debate?.viewerHasArgument || false,
-                      setVoteState,
-                      setShowArgumentForm,
-                      intl,
-                    )
-                  }>
+                  onClick={() => {
+                    if (voteState === 'VOTED_ANONYMOUS') {
+                      deleteAnonymousVoteFromViewer(
+                        debate.id,
+                        setVoteState,
+                        setShowArgumentForm,
+                        intl,
+                      );
+                    } else {
+                      deleteVoteFromViewer(
+                        debate.id,
+                        viewerVoteValue,
+                        debate?.viewerHasArgument || false,
+                        setVoteState,
+                        setShowArgumentForm,
+                        intl,
+                      );
+                    }
+                  }}>
                   <FormattedMessage
                     id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
                   />

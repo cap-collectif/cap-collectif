@@ -47,13 +47,13 @@ const anonymousVoteForDebate = (
       if (response.addDebateAnonymousVote?.errorCode) {
         mutationErrorToast(intl);
       } else {
-        setVoteState('VOTED_ANONYMOUS');
         if (response.addDebateAnonymousVote?.debateAnonymousVote?.token) {
           CookieMonster.addDebateAnonymousVoteCookie(debateId, {
             type,
             token: response.addDebateAnonymousVote?.debateAnonymousVote?.token,
           });
         }
+        setVoteState('VOTED_ANONYMOUS');
       }
     })
     .catch(() => {
