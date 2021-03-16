@@ -32,7 +32,7 @@ export const DebateStepPageLogic = ({ query }: Props) => {
     <Flex direction="column" spacing={8}>
       <DebateStepPageMainActions isMobile={isMobile} step={step} />
       {showContent && <WYSIWYGRender value={step?.debateContent || ''} />}
-      {showFaceToFace && (
+      {(showFaceToFace || !step) && (
         <>
           <DebateStepPageFaceToFace isMobile={isMobile} step={step} />
           {!widget.isSource && <DebateStepPageLinkedArticles isMobile={isMobile} step={step} />}

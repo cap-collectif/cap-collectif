@@ -29,6 +29,7 @@ type Props = {|
   +setVoteState: VoteState => void,
   +isEmailConfirmed: boolean,
   +step: DebateStepPageVote_step,
+  +top?: boolean,
 |};
 
 const anonymousVoteForDebate = (
@@ -120,6 +121,7 @@ export const DebateStepPageVote = ({
   isAuthenticated,
   setVoteState,
   isEmailConfirmed,
+  top,
   ...props
 }: Props) => {
   const { track } = useAnalytics();
@@ -137,7 +139,14 @@ export const DebateStepPageVote = ({
   });
   useEffect(() => {
     if (captcha.value) {
-      anonymousVoteForDebate(step.debate.id, captcha.value, captcha.voteType, widget.location, intl, setVoteState);
+      anonymousVoteForDebate(
+        step.debate.id,
+        captcha.value,
+        captcha.voteType,
+        widget.location,
+        intl,
+        setVoteState,
+      );
     }
   }, [step.debate.id, captcha.value, captcha.voteType, widget.location, intl, setVoteState]);
 
@@ -162,7 +171,9 @@ export const DebateStepPageVote = ({
         <>
           <ConditionalWrapper
             when={!step.isAnonymousParticipationAllowed}
-            wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
+            wrapper={children => (
+              <LoginOverlay placement={top ? 'top' : 'bottom'}>{children}</LoginOverlay>
+            )}>
             <Button
               onMouseEnter={() => setIsHover('FOR')}
               onMouseLeave={() => setIsHover(false)}
@@ -191,7 +202,9 @@ export const DebateStepPageVote = ({
 
           <ConditionalWrapper
             when={!step.isAnonymousParticipationAllowed}
-            wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
+            wrapper={children => (
+              <LoginOverlay placement={top ? 'top' : 'bottom'}>{children}</LoginOverlay>
+            )}>
             <Button
               onMouseEnter={() => setIsHover('AGAINST')}
               onMouseLeave={() => setIsHover(false)}

@@ -66,7 +66,12 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>
               {title}
             </Text>
-            <DebateStepPageVote width="unset" setVoteState={setVoteState} step={step} />
+            <DebateStepPageVote
+              width="unset"
+              setVoteState={setVoteState}
+              step={step}
+              top={isMobile}
+            />
           </Flex>
         )}
         {voteState !== 'NONE' && (

@@ -25,7 +25,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
     .filter(Boolean);
   const forOpinion = opinions?.find(o => o.type === 'FOR');
   const againstOpinion = opinions?.find(o => o.type === 'AGAINST');
-  if (!forOpinion || !againstOpinion) {
+  if (debate && (!forOpinion || !againstOpinion)) {
     return null;
   }
   const hasMore =

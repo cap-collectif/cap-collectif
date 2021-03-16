@@ -469,7 +469,9 @@ export const DebateStepPageVoteForm = ({
           />
           <ConditionalWrapper
             when={voteState === 'VOTED_ANONYMOUS'}
-            wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
+            wrapper={children => (
+              <LoginOverlay placement={isAbsolute ? 'top' : 'bottom'}>{children}</LoginOverlay>
+            )}>
             <Button
               mt={3}
               onClick={onOpen}

@@ -22,8 +22,6 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props) => {
   const intl = useIntl();
   const { title, stepClosed } = useDebateStepPage();
 
-  if (!step) return null;
-
   return (
     <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
       <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>

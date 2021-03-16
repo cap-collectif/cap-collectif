@@ -50,6 +50,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
             "url": "step/123",
           }
         }
+        top={false}
         width="unset"
       />
     </ForwardRef>
@@ -109,6 +110,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] 
             "url": "step/123",
           }
         }
+        top={true}
         width="unset"
       />
     </ForwardRef>
