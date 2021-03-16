@@ -49,6 +49,7 @@ export const voteForArgument = (
   viewerHasVote: ?boolean,
   intl: IntlShape,
   countVotes: number,
+  widgetLocation: ?string,
 ) => {
   if (viewerHasVote) {
     return RemoveDebateArgumentVoteMutation.commit({ input: { debateArgumentId } }, { countVotes })
@@ -62,7 +63,10 @@ export const voteForArgument = (
       });
   }
 
-  return AddDebateArgumentVoteMutation.commit({ input: { debateArgumentId } }, { countVotes })
+  return AddDebateArgumentVoteMutation.commit(
+    { input: { debateArgumentId, widgetOriginURI: widgetLocation } },
+    { countVotes },
+  )
     .then(response => {
       if (response.addDebateArgumentVote?.errorCode) {
         mutationErrorToast(intl);
@@ -267,6 +271,7 @@ export const ArgumentCard = ({
                       argument.viewerHasVote,
                       intl,
                       argument.votes.totalCount,
+                      widget.location,
                     )
                   }
                   aria-label={intl.formatMessage({

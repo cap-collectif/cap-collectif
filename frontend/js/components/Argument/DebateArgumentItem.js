@@ -17,6 +17,7 @@ import Icon from '~ds/Icon/Icon';
 import { voteForArgument, getTruncatedLength } from '~/components/Debate/ArgumentCard/ArgumentCard';
 import ArgumentCardFormEdition from '~/components/Debate/ArgumentCard/ArgumentCardFormEdition';
 import ModalArgumentAuthorMenu from '~/components/Debate/Page/Arguments/ModalArgumentAuthorMenu';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   +debateArgument: DebateArgumentItem_debateArgument,
@@ -28,6 +29,7 @@ export const DebateArgumentItem = ({ debateArgument, isMobile, setDeleteModalInf
   const [isEditing, setIsEditing] = useState(false);
   const [readMore, setReadMore] = useState(false);
   const intl = useIntl();
+  const { widget } = useDebateStepPage();
 
   const { step } = debateArgument.debate;
   const isAuthor = debateArgument.viewerDidAuthor;
@@ -148,6 +150,7 @@ export const DebateArgumentItem = ({ debateArgument, isMobile, setDeleteModalInf
                   debateArgument.viewerHasVote,
                   intl,
                   debateArgument.votes.totalCount,
+                  widget.location,
                 )
               }
               aria-label={intl.formatMessage({

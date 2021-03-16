@@ -73,7 +73,7 @@ const DebateStepPageArgumentDrawer = ({
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isViewerAdmin = viewer && viewer.isAdmin;
-  const { stepClosed } = useDebateStepPage();
+  const { widget, stepClosed } = useDebateStepPage();
 
   if (!argument) return null;
   const isAuthor = argument.viewerDidAuthor;
@@ -128,7 +128,13 @@ const DebateStepPageArgumentDrawer = ({
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
             onClick={() =>
-              voteForArgument(argument.id, argument.viewerHasVote, intl, argument.votes.totalCount)
+              voteForArgument(
+                argument.id,
+                argument.viewerHasVote,
+                intl,
+                argument.votes.totalCount,
+                widget.location,
+              )
             }
             aria-label={intl.formatMessage({
               id: argument.viewerHasVote ? 'global.cancel' : 'vote.add',
