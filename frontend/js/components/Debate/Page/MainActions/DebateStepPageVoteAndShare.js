@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { AnimatePresence } from "framer-motion"
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
 import VoteView from '~/components/Ui/Vote/VoteView';
 import DebateStepPageVote from './DebateStepPageVote';
@@ -81,8 +82,9 @@ export const DebateStepPageVoteAndShare = ({ isMobile, viewerIsConfirmedByEmail,
       )}
 
       <Flex width="100%" direction="column" align="center" ref={ref}>
-        {voteState === 'NONE' && <DebateStepPageVote step={step} setVoteState={setVoteState} />}
-
+        <AnimatePresence>
+          {voteState === 'NONE' && <DebateStepPageVote step={step} setVoteState={setVoteState} />}
+        </AnimatePresence>
         {stepClosed && (
           <AppBox textAlign="center" mb={6}>
             <Text color="neutral-gray.700">
