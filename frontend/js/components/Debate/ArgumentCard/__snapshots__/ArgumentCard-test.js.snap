@@ -68,13 +68,13 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)
-        enabled={false}
-        placement="bottom"
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
       >
-        <ConditionalWrapper
-          when={false}
-          wrapper={[Function]}
+        <Connect(LoginOverlay)
+          enabled={false}
+          placement="bottom"
         >
           <Button
             aria-label="vote.add"
@@ -88,8 +88,8 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
             }
             onClick={[Function]}
           />
-        </ConditionalWrapper>
-      </Connect(LoginOverlay)>
+        </Connect(LoginOverlay)>
+      </ConditionalWrapper>
       <Text
         as="span"
         color="neutral-gray.900"
@@ -208,13 +208,13 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)
-        enabled={false}
-        placement="bottom"
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
       >
-        <ConditionalWrapper
-          when={false}
-          wrapper={[Function]}
+        <Connect(LoginOverlay)
+          enabled={false}
+          placement="bottom"
         >
           <Button
             aria-label="vote.add"
@@ -228,8 +228,8 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
             }
             onClick={[Function]}
           />
-        </ConditionalWrapper>
-      </Connect(LoginOverlay)>
+        </Connect(LoginOverlay)>
+      </ConditionalWrapper>
       <Text
         as="span"
         color="neutral-gray.900"
@@ -348,13 +348,13 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)
-        enabled={false}
-        placement="bottom"
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
       >
-        <ConditionalWrapper
-          when={false}
-          wrapper={[Function]}
+        <Connect(LoginOverlay)
+          enabled={false}
+          placement="bottom"
         >
           <Button
             aria-label="global.cancel"
@@ -368,8 +368,8 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
             }
             onClick={[Function]}
           />
-        </ConditionalWrapper>
-      </Connect(LoginOverlay)>
+        </Connect(LoginOverlay)>
+      </ConditionalWrapper>
       <Text
         as="span"
         color="neutral-gray.900"
@@ -488,13 +488,13 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         ]
       }
     >
-      <Connect(LoginOverlay)
-        enabled={false}
-        placement="bottom"
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
       >
-        <ConditionalWrapper
-          when={false}
-          wrapper={[Function]}
+        <Connect(LoginOverlay)
+          enabled={false}
+          placement="bottom"
         >
           <Button
             aria-label="global.cancel"
@@ -508,8 +508,8 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
             }
             onClick={[Function]}
           />
-        </ConditionalWrapper>
-      </Connect(LoginOverlay)>
+        </Connect(LoginOverlay)>
+      </ConditionalWrapper>
       <Text
         as="span"
         color="neutral-gray.900"
@@ -628,13 +628,13 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
         ]
       }
     >
-      <Connect(LoginOverlay)
-        enabled={false}
-        placement="bottom"
+      <ConditionalWrapper
+        when={true}
+        wrapper={[Function]}
       >
-        <ConditionalWrapper
-          when={true}
-          wrapper={[Function]}
+        <Connect(LoginOverlay)
+          enabled={false}
+          placement="bottom"
         >
           <Button
             aria-label="vote.add"
@@ -648,8 +648,8 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
             }
             onClick={[Function]}
           />
-        </ConditionalWrapper>
-      </Connect(LoginOverlay)>
+        </Connect(LoginOverlay)>
+      </ConditionalWrapper>
       <Text
         as="span"
         color="neutral-gray.900"

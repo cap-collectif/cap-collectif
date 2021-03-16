@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import cn from 'classnames';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
@@ -21,7 +22,7 @@ export class RemainingTime extends React.Component<Props> {
 
     let timeLeft = (
       <span>
-        <span className={!noStyle && 'excerpt_dark'}>{daysLeft}</span>{' '}
+        <span className={cn({ excerpt_dark: !noStyle })}>{daysLeft}</span>{' '}
         <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
       </span>
     );

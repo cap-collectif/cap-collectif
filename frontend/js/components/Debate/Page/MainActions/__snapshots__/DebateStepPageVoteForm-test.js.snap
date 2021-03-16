@@ -50,30 +50,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly 1`] = `
     >
       🗳️
     </DebateStepPageVoteForm___StyledSpan2>
-    <Popover
-      placement="right"
-      trigger={
-        Array [
-          "click",
-        ]
-      }
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
     >
-      <Popover.Trigger>
-        <Button
-          color="gray.700"
-          ml={2}
-          variant="link"
-        >
-          <FormattedMessage
-            id="delete.vote.against"
-            values={Object {}}
-          />
-        </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Component />
-      </Popover.Content>
-    </Popover>
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
   </ForwardRef>
   <ConditionalWrapper
     when={false}
@@ -178,17 +165,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly on mobile 1`] = `
     }
     justifyContent="center"
   >
-    <Relay(ModalDeleteVoteMobile)
-      debate={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "debate1",
-        }
-      }
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
-    />
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
+    >
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
     <Text
       textAlign="center"
     >
@@ -279,30 +266,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       tagName="span"
       values={Object {}}
     />
-    <Popover
-      placement="right"
-      trigger={
-        Array [
-          "click",
-        ]
-      }
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
     >
-      <Popover.Trigger>
-        <Button
-          color="gray.700"
-          ml={2}
-          variant="link"
-        >
-          <FormattedMessage
-            id="delete.vote.against"
-            values={Object {}}
-          />
-        </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Component />
-      </Popover.Content>
-    </Popover>
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
   </ForwardRef>
   <ForwardRef
     flexDirection="row"
@@ -448,17 +422,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
     }
     justifyContent="center"
   >
-    <Relay(ModalDeleteVoteMobile)
-      debate={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "debate1",
-        }
-      }
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
-    />
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
+    >
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
     <Text
       textAlign="center"
     >
@@ -595,30 +569,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
       tagName="span"
       values={Object {}}
     />
-    <Popover
-      placement="right"
-      trigger={
-        Array [
-          "click",
-        ]
-      }
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
     >
-      <Popover.Trigger>
-        <Button
-          color="gray.700"
-          ml={2}
-          variant="link"
-        >
-          <FormattedMessage
-            id="delete.vote.against"
-            values={Object {}}
-          />
-        </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Component />
-      </Popover.Content>
-    </Popover>
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
   </ForwardRef>
   <ConditionalWrapper
     when={false}
@@ -723,17 +684,238 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
     }
     justifyContent="center"
   >
-    <Relay(ModalDeleteVoteMobile)
-      debate={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "debate1",
-        }
-      }
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
+    >
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
+    <Text
+      textAlign="center"
+    >
+      <DebateStepPageVoteForm___StyledSpan
+        aria-label="vote"
+        role="img"
+      >
+        🗳️
+      </DebateStepPageVoteForm___StyledSpan>
+      <FormattedHTMLMessage
+        id="thanks-for-your-vote"
+        tagName="span"
+        values={Object {}}
+      />
+    </Text>
+  </ForwardRef>
+  <Connect(MobilePublishArgumentModal)
+    onClose={[Function]}
+    onSubmit={[MockFunction]}
+    show={false}
+    title="why-are-you-against"
+  />
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
+  >
+    <Button
+      justifyContent="center"
+      mt={3}
+      onClick={[Function]}
+      variant="primary"
+      variantSize="big"
+      width="100%"
+    >
+      publish-argument
+    </Button>
+  </ConditionalWrapper>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted without argument 1`] = `
+<ForwardRef(MotionComponent)
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  exit={
+    Object {
+      "opacity": 0,
+    }
+  }
+  initial={
+    Object {
+      "opacity": 0,
+    }
+  }
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  transition={
+    Object {
+      "delay": 0.75,
+      "duration": 0.5,
+    }
+  }
+>
+  <ForwardRef
+    alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
+    justifyContent="center"
+  >
+    <DebateStepPageVoteForm___StyledSpan2
+      aria-label="vote"
+      role="img"
+    >
+      🗳️
+    </DebateStepPageVoteForm___StyledSpan2>
+    <FormattedHTMLMessage
+      id="thanks-for-your-vote"
+      tagName="span"
+      values={Object {}}
     />
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
+    >
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
+  </ForwardRef>
+  <ConditionalWrapper
+    when={false}
+    wrapper={[Function]}
+  >
+    <DebateStepPageVoteForm___StyledCard
+      bg="white"
+      borderRadius="8px"
+      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+      mt={8}
+      p={6}
+      pb={6}
+      width="100%"
+    >
+      <DebateStepPageVoteForm__Form
+        id="debate-argument-form"
+        onSubmit={[MockFunction]}
+      >
+        <Field
+          autoComplete="off"
+          component={[Function]}
+          disabled={false}
+          id="body"
+          minLength="1"
+          name="body"
+          placeholder="why-are-you-against"
+          type="textarea"
+        />
+        <ForwardRef
+          justifyContent="flex-end"
+        >
+          <Button
+            mr={7}
+            onClick={[Function]}
+            variant="link"
+            variantColor="primary"
+          >
+            <FormattedMessage
+              id="global.cancel"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            <FormattedMessage
+              id="argument.publish.mine"
+              values={Object {}}
+            />
+          </Button>
+        </ForwardRef>
+      </DebateStepPageVoteForm__Form>
+    </DebateStepPageVoteForm___StyledCard>
+  </ConditionalWrapper>
+</ForwardRef(MotionComponent)>
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted without argument on mobile 1`] = `
+<ForwardRef(MotionComponent)
+  animate={
+    Object {
+      "opacity": 1,
+    }
+  }
+  exit={
+    Object {
+      "opacity": 0,
+    }
+  }
+  initial={
+    Object {
+      "opacity": 1,
+    }
+  }
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  transition={
+    Object {
+      "delay": 0.75,
+      "duration": 0.5,
+    }
+  }
+>
+  <ForwardRef
+    alignItems="center"
+    direction={
+      Array [
+        "column",
+        "row",
+      ]
+    }
+    fontWeight={
+      Array [
+        500,
+      ]
+    }
+    justifyContent="center"
+  >
+    <Button
+      color="gray.700"
+      ml={2}
+      onClick={[Function]}
+      variant="link"
+    >
+      <FormattedMessage
+        id="delete.vote.against"
+        values={Object {}}
+      />
+    </Button>
     <Text
       textAlign="center"
     >

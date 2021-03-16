@@ -141,6 +141,7 @@ export const addArgumentOnDebate = (
 const deleteVoteFromViewer = (
   debateId: string,
   type: 'FOR' | 'AGAINST',
+  viewerHasArgument: boolean,
   setVoteState: VoteState => void,
   setShowArgumentForm: boolean => void,
   intl: IntlShape,
@@ -165,7 +166,9 @@ const deleteVoteFromViewer = (
       } else {
         toast({
           variant: 'success',
-          content: intl.formatHTMLMessage({ id: 'argument.vote.remove_success' }),
+          content: intl.formatHTMLMessage({
+            id: viewerHasArgument ? 'argument.vote.remove_success' : 'vote.delete_success',
+          }),
         });
         setVoteState('NONE');
         setShowArgumentForm(true);
@@ -257,13 +260,33 @@ export const DebateStepPageVoteForm = ({
         <>
           {isMobile && (
             <>
-              {!isAbsolute && (
-                <ModalDeleteVoteMobile
-                  debate={debate}
-                  setShowArgumentForm={setShowArgumentForm}
-                  setVoteState={setVoteState}
-                />
-              )}
+              {!isAbsolute &&
+                (debate.viewerHasArgument ? (
+                  <ModalDeleteVoteMobile
+                    debate={debate}
+                    setShowArgumentForm={setShowArgumentForm}
+                    setVoteState={setVoteState}
+                  />
+                ) : (
+                  <Button
+                    color="gray.700"
+                    ml={2}
+                    variant="link"
+                    onClick={() =>
+                      deleteVoteFromViewer(
+                        debate.id,
+                        viewerVoteValue,
+                        debate?.viewerHasArgument || false,
+                        setVoteState,
+                        setShowArgumentForm,
+                        intl,
+                      )
+                    }>
+                    <FormattedMessage
+                      id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
+                    />
+                  </Button>
+                ))}
               <Text textAlign="center">
                 <span role="img" aria-label="vote" css={{ fontSize: 20, marginRight: 8 }}>
                   {voteState === 'ARGUMENTED' || voteState === 'NOT_CONFIRMED_ARGUMENTED'
@@ -299,7 +322,7 @@ export const DebateStepPageVoteForm = ({
                 />
               )}
 
-              {voteState !== 'VOTED_ANONYMOUS' && (
+              {voteState !== 'VOTED_ANONYMOUS' && debate.viewerHasArgument && (
                 <Popover placement="right" trigger={['click']}>
                   <Popover.Trigger>
                     <Button color="gray.700" ml={2} variant="link">
@@ -338,6 +361,7 @@ export const DebateStepPageVoteForm = ({
                                 deleteVoteFromViewer(
                                   debate.id,
                                   viewerVoteValue,
+                                  debate?.viewerHasArgument || false,
                                   setVoteState,
                                   setShowArgumentForm,
                                   intl,
@@ -351,6 +375,27 @@ export const DebateStepPageVoteForm = ({
                     )}
                   </Popover.Content>
                 </Popover>
+              )}
+
+              {voteState !== 'VOTED_ANONYMOUS' && !debate.viewerHasArgument && (
+                <Button
+                  color="gray.700"
+                  ml={2}
+                  variant="link"
+                  onClick={() =>
+                    deleteVoteFromViewer(
+                      debate.id,
+                      viewerVoteValue,
+                      debate?.viewerHasArgument || false,
+                      setVoteState,
+                      setShowArgumentForm,
+                      intl,
+                    )
+                  }>
+                  <FormattedMessage
+                    id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
+                  />
+                </Button>
               )}
             </>
           )}
@@ -514,6 +559,7 @@ export default createFragmentContainer(DebateStepPageVoteFormConnected, {
       viewerVote @include(if: $isAuthenticated) {
         type
       }
+      viewerHasArgument @include(if: $isAuthenticated)
       ...ModalDeleteVoteMobile_debate @arguments(isAuthenticated: $isAuthenticated)
     }
   `,

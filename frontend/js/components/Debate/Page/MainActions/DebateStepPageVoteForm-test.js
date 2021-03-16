@@ -54,6 +54,30 @@ describe('<DebateStepPageVoteForm/>', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should renders correctly when voted without argument', () => {
+    const wrapper = shallow(
+      <DebateStepPageVoteForm
+        {...props}
+        voteState="VOTED"
+        debate={{ ...debate, viewerHasArgument: false }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should renders correctly when voted without argument on mobile', () => {
+    const wrapper = shallow(
+      <DebateStepPageVoteForm
+        {...props}
+        voteState="VOTED"
+        debate={{ ...debate, viewerHasArgument: false }}
+        isMobile
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should renders correctly when argumented', () => {
     const wrapper = shallow(
       <DebateStepPageVoteForm {...props} voteState="ARGUMENTED" debate={debate} />,

@@ -250,14 +250,14 @@ export const ArgumentCard = ({
         {((!isEditing && !widget.isSource) ||
           (!isEditing && widget.isSource && widget.authEnabled)) && (
           <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
-            <LoginOverlay enabled={!stepClosed} placement="bottom">
-              <ConditionalWrapper
-                when={(viewer && !viewer?.isEmailConfirmed) || false}
-                wrapper={children => (
-                  <Tooltip label={intl.formatMessage({ id: 'confirm-account-to-interact' })}>
-                    <AppBox>{children}</AppBox>
-                  </Tooltip>
-                )}>
+            <ConditionalWrapper
+              when={(viewer && !viewer?.isEmailConfirmed) || false}
+              wrapper={children => (
+                <Tooltip label={intl.formatMessage({ id: 'confirm-account-to-interact' })}>
+                  <AppBox>{children}</AppBox>
+                </Tooltip>
+              )}>
+              <LoginOverlay enabled={!stepClosed} placement="bottom">
                 <Button
                   color="neutral-gray.500"
                   leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -274,8 +274,8 @@ export const ArgumentCard = ({
                   })}
                   disabled={stepClosed || (viewer && !viewer?.isEmailConfirmed) || false}
                 />
-              </ConditionalWrapper>
-            </LoginOverlay>
+              </LoginOverlay>
+            </ConditionalWrapper>
             <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">
               {argument.votes.totalCount}
             </Text>
