@@ -13,7 +13,7 @@ exports[`<ModalEditArgumentMobile /> should renders correcty with argument 1`] =
       global.edit
     </ForwardRef>
   }
-  onClose={[MockFunction]}
+  onClose={[Function]}
 >
   <Component />
 </Modal>

@@ -9,6 +9,7 @@ exports[`<ModalModerateArgumentMobile /> should renders correcty with argument 1
       rightIcon="MODERATE"
     />
   }
+  onClose={[Function]}
 >
   <Component />
 </Modal>

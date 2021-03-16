@@ -13,7 +13,7 @@ exports[`<ModalDeleteArgumentMobile /> should renders correcty with argument 1`]
       global.delete
     </ForwardRef>
   }
-  onClose={[MockFunction]}
+  onClose={[Function]}
 >
   <Component />
 </Modal>

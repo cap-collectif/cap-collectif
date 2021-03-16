@@ -55,6 +55,12 @@ export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props) 
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const [valuesSaved, setValuesSaved] = React.useState<?FormValues>(null);
 
+  const resetState = () => {
+    setModalState(STATE.FORM);
+    setErrorCount(0);
+    setValuesSaved(null);
+  };
+
   const getModalContent = (state: $Values<typeof STATE>, hideModal: () => void) => {
     switch (state) {
       case 'FORM':
@@ -149,7 +155,10 @@ export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props) 
 
   return (
     <Modal
-      onClose={hidePreviousModal}
+      onClose={() => {
+        resetState();
+        hidePreviousModal();
+      }}
       disclosure={
         <Button variant="primary" variantColor="primary" variantSize="big" justifyContent="center">
           {intl.formatMessage({ id: 'global.edit' })}

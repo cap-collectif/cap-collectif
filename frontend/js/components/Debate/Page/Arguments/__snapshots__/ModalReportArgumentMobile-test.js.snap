@@ -22,7 +22,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`]
           global.report.submit
         </ForwardRef>
       }
-      onClose={[MockFunction]}
+      onClose={[Function]}
     >
       <Component />
     </Modal>
@@ -52,7 +52,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
           global.report.submit
         </ForwardRef>
       }
-      onClose={[MockFunction]}
+      onClose={[Function]}
     >
       <Component />
     </Modal>

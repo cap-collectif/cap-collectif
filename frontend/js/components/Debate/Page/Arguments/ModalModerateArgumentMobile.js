@@ -63,6 +63,11 @@ export const ModalModerateArgumentMobile = ({ argument, dispatch }: Props) => {
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const [valuesSaved, setValuesSaved] = React.useState<?Values>(null);
 
+  const resetState = () => {
+    setModalState(STATE.FORM);
+    setErrorCount(0);
+  };
+
   const getModalContent = (state: $Values<typeof STATE>, hideModalChoice: () => void) => {
     switch (state) {
       case 'FORM':
@@ -175,7 +180,8 @@ export const ModalModerateArgumentMobile = ({ argument, dispatch }: Props) => {
   return (
     <Modal
       disclosure={<Button rightIcon={ICON_NAME.MODERATE} color="neutral-gray.500" />}
-      ariaLabel={intl.formatMessage({ id: 'global.report.submit' })}>
+      ariaLabel={intl.formatMessage({ id: 'global.report.submit' })}
+      onClose={resetState}>
       {({ hide }) => getModalContent(modalState, hide)}
     </Modal>
   );

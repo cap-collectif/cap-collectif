@@ -65,6 +65,12 @@ export const ModalReportArgumentMobile = ({ argument, dispatch, show, onClose }:
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const [valuesSaved, setValuesSaved] = React.useState<?Values>(null);
 
+  const resetState = () => {
+    setModalState(STATE.FORM);
+    setErrorCount(0);
+    setValuesSaved(null);
+  };
+
   const getModalContent = (state: $Values<typeof STATE>, hideModalChoice: () => void) => {
     switch (state) {
       case 'FORM':
@@ -170,7 +176,10 @@ export const ModalReportArgumentMobile = ({ argument, dispatch, show, onClose }:
     <Modal ariaLabel={intl.formatMessage({ id: 'global.menu' })} show={show} onClose={onClose}>
       <Modal.Body spacing={6} p={6}>
         <Modal
-          onClose={onClose}
+          onClose={() => {
+            resetState();
+            onClose();
+          }}
           disclosure={
             <Button
               variant="primary"

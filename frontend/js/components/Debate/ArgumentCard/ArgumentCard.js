@@ -309,8 +309,8 @@ export default createFragmentContainer(ArgumentCard, {
       viewerCanReport @include(if: $isAuthenticated)
       viewerDidAuthor @include(if: $isAuthenticated)
       viewerHasVote @include(if: $isAuthenticated)
-      ...ArgumentCardFormEdition_argument
-      ...ModalArgumentAuthorMenu_argument
+      ...ArgumentCardFormEdition_argument @include(if: $isAuthenticated)
+      ...ModalArgumentAuthorMenu_argument @include(if: $isAuthenticated)
       ...ModalReportArgumentMobile_argument @include(if: $isAuthenticated)
       ...ModalModerateArgumentMobile_argument @include(if: $isAuthenticated)
     }

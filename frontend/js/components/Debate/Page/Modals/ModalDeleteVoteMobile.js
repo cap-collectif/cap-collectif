@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import noop from 'lodash/noop';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
@@ -58,6 +57,11 @@ export const ModalDeleteVoteMobile = ({ debate, setVoteState, setShowArgumentFor
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.CHOICES);
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const viewerVoteValue = debate.viewerVote?.type;
+
+  const resetState = () => {
+    setModalState(STATE.CHOICES);
+    setErrorCount(0);
+  };
 
   const getModalContent = (state: $Values<typeof STATE>, hideModal) => {
     switch (state) {
@@ -184,7 +188,10 @@ export const ModalDeleteVoteMobile = ({ debate, setVoteState, setShowArgumentFor
         </Button>
       }
       ariaLabel={intl.formatMessage({ id: 'confirm-delete-argument' })}
-      onClose={modalState === STATE.SUCCESS ? onDeleteSuccess : noop}>
+      onClose={() => {
+        resetState();
+        if (modalState === STATE.SUCCESS) onDeleteSuccess();
+      }}>
       {({ hide }) => getModalContent(modalState, hide)}
     </Modal>
   );

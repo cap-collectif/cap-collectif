@@ -48,9 +48,9 @@ const ARGUMENT_FRAGMENT = graphql`
     votes(first: 0) {
       totalCount
     }
-    ...ModalModerateArgumentMobile_argument
-    ...ModalArgumentAuthorMenu_argument
-    ...ModalReportArgumentMobile_argument
+    ...ModalModerateArgumentMobile_argument @include(if: $isAuthenticated)
+    ...ModalArgumentAuthorMenu_argument @include(if: $isAuthenticated)
+    ...ModalReportArgumentMobile_argument @include(if: $isAuthenticated)
   }
 `;
 

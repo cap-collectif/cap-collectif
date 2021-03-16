@@ -64,6 +64,11 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.CHOICES);
   const [errorCount, setErrorCount] = React.useState<number>(0);
 
+  const resetState = () => {
+    setModalState(STATE.CHOICES);
+    setErrorCount(0);
+  };
+
   const getModalContent = (state: $Values<typeof STATE>, hideModal) => {
     switch (state) {
       case 'CHOICES':
@@ -167,7 +172,10 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
           {intl.formatMessage({ id: 'global.delete' })}
         </Button>
       }
-      onClose={hidePreviousModal}
+      onClose={() => {
+        resetState();
+        hidePreviousModal();
+      }}
       ariaLabel={intl.formatMessage({ id: 'confirm-delete-argument' })}>
       {({ hide }) => getModalContent(modalState, hide)}
     </Modal>
