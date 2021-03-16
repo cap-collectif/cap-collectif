@@ -131,3 +131,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2020-09-01'))>
         user: '@userSpyl'
         project: '@projectConfinement'
+    pa34:
+        createdAt: <(new \DateTime('2020-09-01'))>
+        user: '@userSpyl'
+        project: '@projectWysiwyg'

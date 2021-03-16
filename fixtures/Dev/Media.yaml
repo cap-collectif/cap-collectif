@@ -392,3 +392,27 @@ Capco\MediaBundle\Entity\Media:
         name: imageCafetier
         category: '@MediaCategory1'
         providerReference: cafetier.png
+    imageCereale:
+        id: 'imageCereale'
+        binaryContent: cereale.png
+        name: imageCereale
+        category: '@MediaCategory1'
+        providerReference: cereale.png
+    imageOculus:
+        id: 'imageOculus'
+        binaryContent: oculus.jpg
+        name: imageOculus
+        category: '@MediaCategory1'
+        providerReference: oculus.jpg
+    imageConfinement:
+        id: 'imageConfinement'
+        binaryContent: confinement.jpg
+        name: imageConfinement
+        category: '@MediaCategory1'
+        providerReference: confinement.jpg
+    imageCannabis:
+        id: 'imageCannabis'
+        binaryContent: cannabis.jpg
+        name: imageCannabis
+        category: '@MediaCategory1'
+        providerReference: cannabis.jpg

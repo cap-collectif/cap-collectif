@@ -374,3 +374,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@debateStepConfinement'
         project: '@projectConfinement'
         position: 1
+    pasWysiwyg1:
+        id: pasWysiwyg1
+        step: '@debateStepWysiwyg'
+        project: '@projectWysiwyg'
+        position: 1

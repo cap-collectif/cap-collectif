@@ -5,3 +5,5 @@ Capco\AppBundle\Entity\Debate\Debate:
         id: debateOculusQuest
     debateConfinement:
         id: debateConfinement
+    debateWysiwyg:
+        id: debateWysiwyg

@@ -12,7 +12,7 @@ Scenario: Project can be sorted by published date
   And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
   And I select "opinion.sort.last" from "project-sorting"
   And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MQ==']" to appear on current page
-  Then "Projet vide" should be before "Budget Participatif Rennes" for selector ".project-preview .card__title a"
+  Then "Projet vide" should be before "Projet de loi Renseignement" for selector ".project-preview .card__title a"
 
 @elasticsearch
 Scenario: Project can be sorted by contributions number
@@ -106,7 +106,7 @@ Scenario: Project can be filtered by status
   Then I should see 16 ".project-preview" elements
   And I select "step.status.closed" from react "#project-status"
   And I wait ".project-preview" to appear on current page
-  Then I should see 4 ".project-preview" elements
+  Then I should see 6 ".project-preview" elements
   And I select "ongoing-and-future" from react "#project-status"
   Then I should see 1 ".project-preview" elements
 

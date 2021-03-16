@@ -319,6 +319,7 @@ Capco\AppBundle\Entity\Project:
         id: 'projectCannabis'
         title: Débat sur le cannabis
         projectType: '@projectType9'
+        Cover: '@imageCannabis'
         createdAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
@@ -336,6 +337,7 @@ Capco\AppBundle\Entity\Project:
         id: 'projectOculusQuest'
         title: Débat sur l'Oculus Quest
         projectType: '@projectType9'
+        Cover: '@imageOculus'
         createdAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 12:00:00')))>
@@ -344,6 +346,16 @@ Capco\AppBundle\Entity\Project:
         id: 'projectConfinement'
         title: Débat du mois
         projectType: '@projectType9'
+        Cover: '@imageConfinement'
+        createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        visibility: 2
+    projectWysiwyg:
+        id: 'projectWysiwyg'
+        title: Débat Wysiwyg
+        projectType: '@projectType9'
+        Cover: '@imageCereale'
         createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>

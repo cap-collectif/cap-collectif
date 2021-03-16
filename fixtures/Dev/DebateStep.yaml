@@ -29,3 +29,15 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         body: null
         startAt: <identity((new \DateTime('2020-01-01')))>
         endAt: <identity((new \DateTime('2020-10-01')))>
+    debateStepWysiwyg:
+        __construct: ['@debateWysiwyg']
+        isAnonymousParticipationAllowed: false
+        id: debateStepWysiwyg
+        title: le lait avant les céréales ?
+        slug: le-lait-avant-les-céréales ?
+        label: Le lait avant les céréales ? ?
+        body: null
+        startAt: <identity((new \DateTime('2020-01-01')))>
+        endAt: <identity((new \DateTime('2020-10-01')))>
+        debateType: WYSIWYG
+        debateContent: 'Avant ou après ???'
