@@ -22,9 +22,9 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Elastica\Index;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
+use Doctrine\Persistence\Mapping\ClassMetadataFactory;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class IndexerSpec extends ObjectBehavior

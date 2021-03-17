@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Gedmo\Sluggable\SluggableListener as Base;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Doctrine\Common\EventArgs;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 use Gedmo\Sluggable\Handler\SlugHandlerWithUniqueCallbackInterface;
 
@@ -545,9 +545,6 @@ class SluggableListener extends Base
         return $preferredSlug;
     }
 
-    /**
-     * @param \Doctrine\Common\Persistence\ObjectManager $om
-     */
     private function manageFiltersBeforeGeneration(ObjectManager $om)
     {
         $collection = $this->getFilterCollectionFromObjectManager($om);
@@ -566,9 +563,6 @@ class SluggableListener extends Base
         }
     }
 
-    /**
-     * @param \Doctrine\Common\Persistence\ObjectManager $om
-     */
     private function manageFiltersAfterGeneration(ObjectManager $om)
     {
         $collection = $this->getFilterCollectionFromObjectManager($om);
@@ -583,8 +577,6 @@ class SluggableListener extends Base
 
     /**
      * Retrieves a FilterCollection instance from the given ObjectManager.
-     *
-     * @param \Doctrine\Common\Persistence\ObjectManager $om
      *
      * @throws \Gedmo\Exception\InvalidArgumentException
      *

@@ -63,6 +63,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:00:57'))>
         publishedAt: <(new \DateTime('2017-02-01 00:00:57'))>
         private: false
+        position: 0
     exportSelectionVote:
         id: 1058
         proposal: '@selectionExportProposals133'
@@ -71,6 +72,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:00:58'))>
         publishedAt: $createdAt
         private: false
+        position: 0
     exportSelectionVote1:
         id: 1059
         proposal: '@selectionExportProposals134'
@@ -79,6 +81,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:00:59'))>
         publishedAt: $createdAt
         private: false
+        position: 1
     exportSelectionVote2:
         id: 1060
         proposal: '@selectionExportProposals135'
@@ -87,6 +90,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
         publishedAt: $createdAt
         private: false
+        position: 2
     exportSelectionVote3:
         id: 1061
         proposal: '@selectionExportProposals136'
@@ -95,6 +99,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:01:01'))>
         publishedAt: $createdAt
         private: false
+        position: 1
     proposalSelectionVote57:
         id: 1062
         proposal: '@proposal26'

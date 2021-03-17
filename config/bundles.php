@@ -37,7 +37,7 @@ return [
     Sonata\TranslationBundle\SonataTranslationBundle::class => ['all' => true],
     Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class => ['all' => true],
     // sonata user admin
-    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
+//    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
     Sonata\UserBundle\SonataUserBundle::class => ['all' => true],
     // HTTPlug

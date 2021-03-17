@@ -16,7 +16,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Common\Collections\ArrayCollection;
 

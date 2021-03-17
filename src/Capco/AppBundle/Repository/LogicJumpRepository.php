@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\LogicJump;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
 
 /**
  * @method LogicJump|null find($id, $lockMode = null, $lockVersion = null)

@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Proposal;
-use Doctrine\Common\Persistence\Proxy;
+use Doctrine\Common\Proxy\Proxy;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\EventComment;

@@ -11,7 +11,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Sonata\EasyExtendsBundle\Mapper\DoctrineORMMapper;
 use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
 use Capco\AppBundle\Sluggable\SluggableListener;
 
@@ -52,7 +51,7 @@ class LoadBenchmarkDataCommand extends Command
         $this->disableListeners($output, [
             TimestampableListener::class,
             MediaEventSubscriber::class,
-            DoctrineORMMapper::class,
+//            DoctrineORMMapper::class,
             UserListener::class,
             SluggableListener::class,
         ]);

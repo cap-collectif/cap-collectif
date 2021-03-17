@@ -3,7 +3,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
 
 /**
  * @method MultipleChoiceQuestionLogicJumpCondition|null find($id, $lockMode = null, $lockVersion = null)

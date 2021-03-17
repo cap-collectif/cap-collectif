@@ -15,7 +15,7 @@ use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -32,8 +32,8 @@ use Doctrine\Common\Util\ClassUtils;
  */
 class ElasticsearchDoctrineListener implements EventSubscriber
 {
-    private $logger;
-    private $elasticsearchRabbitMQListener;
+    private LoggerInterface $logger;
+    private ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener;
 
     public function __construct(
         ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener,
