@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { usePreloadedQuery, graphql } from 'relay-hooks';
+import ReactPlaceholder from 'react-placeholder';
 import NoContributionsStep from '~/components/Admin/Project/ProjectAdminContributions/NoContributions/NoContributionsStep';
 import IndexContributions, { getContributionsPath } from './IndexContributions/IndexContributions';
 import AppBox from '~ui/Primitives/AppBox';
@@ -10,6 +11,7 @@ import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminPr
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 import { ProjectAdminDebateProvider } from './ProjectAdminDebate/ProjectAdminDebate.context';
 import ProjectAdminDebate from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate';
+import ContributionsPlaceholder from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/ContributionsPlaceholder';
 
 type Props = {|
   +dataPrefetch: ResultPreloadQuery,
@@ -112,11 +114,13 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
     <AppBox m={5}>
       <Switch>
         <Route exact path={baseUrl}>
-          {!hasAtLeastOneContributionsStep ? (
-            <NoContributionsStep project={project} />
-          ) : (
-            <IndexContributions project={project} />
-          )}
+          <ReactPlaceholder ready={!!project} customPlaceholder={<ContributionsPlaceholder />}>
+            {!hasAtLeastOneContributionsStep ? (
+              <NoContributionsStep project={project} />
+            ) : (
+              <IndexContributions project={project} />
+            )}
+          </ReactPlaceholder>
         </Route>
 
         <Route path={getContributionsPath(baseUrl, 'CollectStep')}>

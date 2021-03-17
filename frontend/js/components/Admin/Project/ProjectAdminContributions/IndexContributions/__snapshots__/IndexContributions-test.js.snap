@@ -3,37 +3,54 @@
 exports[`<IndexContributions /> should render correctly 1`] = `
 <ForwardRef
   direction="column"
-  spacing={4}
 >
-  <Link
-    key="123"
-    to="/mock/url/proposals?step=123"
+  <Heading
+    as="h4"
+    color="blue.900"
+    mb={2}
   >
-    <Relay(ContributionStep)
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "__typename": "CollectStep",
-          "id": "123",
-          "slug": "jesuisunslug1",
-        }
-      }
-    />
-  </Link>
-  <Link
-    key="789"
-    to="/mock/url/debate/jesuisunslug3"
+    select-a-step
+  </Heading>
+  <Text
+    color="gray.500"
+    mb={8}
   >
-    <Relay(ContributionStep)
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "__typename": "DebateStep",
-          "id": "789",
-          "slug": "jesuisunslug3",
+    consult-all-contrib-on-step
+  </Text>
+  <ForwardRef
+    direction="column"
+    spacing={4}
+  >
+    <Link
+      key="123"
+      to="/mock/url/proposals?step=123"
+    >
+      <Relay(ContributionStep)
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "CollectStep",
+            "id": "123",
+            "slug": "jesuisunslug1",
+          }
         }
-      }
-    />
-  </Link>
+      />
+    </Link>
+    <Link
+      key="789"
+      to="/mock/url/debate/jesuisunslug3"
+    >
+      <Relay(ContributionStep)
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "DebateStep",
+            "id": "789",
+            "slug": "jesuisunslug3",
+          }
+        }
+      />
+    </Link>
+  </ForwardRef>
 </ForwardRef>
 `;
