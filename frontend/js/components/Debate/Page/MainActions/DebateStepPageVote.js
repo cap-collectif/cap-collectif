@@ -75,7 +75,7 @@ const voteForDebate = (
   setVoteState(optimisticVoteState);
 
   return AddDebateVoteMutation.commit(
-    { input: { debateId, type, widgetOriginURI: widgetLocation }, isAuthenticated },
+    { input: { debateId, type, widgetOriginURI: widgetLocation } },
     optimisticData,
   )
     .then(response => {

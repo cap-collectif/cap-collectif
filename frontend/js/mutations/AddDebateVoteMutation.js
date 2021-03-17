@@ -8,13 +8,13 @@ import type {
 } from '~relay/AddDebateVoteMutation.graphql';
 
 export type OptimisticResponse = {|
-  yesVotes: number,
-  votes: number,
-  viewerConfirmed: boolean,
+  +yesVotes: number,
+  +votes: number,
+  +viewerConfirmed: boolean,
 |};
 
 const mutation = graphql`
-  mutation AddDebateVoteMutation($input: AddDebateVoteInput!, $isAuthenticated: Boolean!) {
+  mutation AddDebateVoteMutation($input: AddDebateVoteInput!) {
     addDebateVote(input: $input) {
       errorCode
       debateVote {
@@ -23,9 +23,9 @@ const mutation = graphql`
         published
         debate {
           id
-          viewerHasArgument @include(if: $isAuthenticated)
-          viewerHasVote @include(if: $isAuthenticated)
-          viewerVote @include(if: $isAuthenticated) {
+          viewerHasArgument
+          viewerHasVote
+          viewerVote {
             type
           }
           yesVotes: votes(isPublished: true, type: FOR, first: 0) {
@@ -57,7 +57,7 @@ const commit = (
           debate: {
             id: variables.input.debateId,
             viewerHasArgument: false,
-            viewerHasVote: variables.isAuthenticated,
+            viewerHasVote: true,
             viewerVote: {
               id: new Date().toISOString(),
               type: variables.input.type,
