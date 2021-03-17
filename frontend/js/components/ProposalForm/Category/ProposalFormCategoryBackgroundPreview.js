@@ -85,7 +85,7 @@ export const ProposalFormCategoryBackgroundPreview = ({
   icon,
   customCategoryImage,
 }: Props) => {
-  const { width }: { width: number } = useResize();
+  const { width } = useResize();
 
   return (
     <Container hasTitle={!!name}>

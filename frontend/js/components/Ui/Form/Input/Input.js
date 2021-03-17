@@ -8,7 +8,7 @@ import { BASE_INPUT } from '~/utils/styles/variables';
 
 export type Props = {|
   ...CommonPropsInput,
-  type: 'text' | 'number',
+  +type: 'text' | 'number' | 'email',
 |};
 
 const InputContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({

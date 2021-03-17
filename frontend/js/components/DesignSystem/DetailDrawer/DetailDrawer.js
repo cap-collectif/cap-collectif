@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useEffect } from 'react';
+import noop from 'lodash/noop';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useKeyboardShortcuts } from '@liinkiing/react-hooks';
@@ -42,7 +43,7 @@ const DetailDrawerInner = styled(motion.custom(AppBox)).attrs({
   flexDirection: 'column',
 })``;
 
-const DetailDrawer = ({ isOpen, onClose, children }: Props) => {
+const DetailDrawer = ({ isOpen, onClose = noop, children }: Props) => {
   useEffect(() => {
     if (!window.document.body) return;
     if (isOpen === true) {

@@ -94,7 +94,7 @@ export const ProposalPageLogic = ({
   image,
   showVotesWidget,
 }: Props) => {
-  const { width, height }: { width: number, height: number } = useResize();
+  const { width, height } = useResize();
   const [tabKey, setTabKey] = useState('content');
   const isMobile = width < bootstrapGrid.smMax;
   const scrollY: number = useScrollYPosition();

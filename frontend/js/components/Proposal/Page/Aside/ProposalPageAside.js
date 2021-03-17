@@ -83,7 +83,7 @@ export const ProposalPageAside = ({
   hasVotableStep,
   isAuthenticated,
 }: Props) => {
-  const { height }: { height: number } = useResize();
+  const { height } = useResize();
   const asideRef = useRef(null);
   const currentVotableStep = proposal?.currentVotableStep;
   const scrollY: number = useScrollYPosition();
