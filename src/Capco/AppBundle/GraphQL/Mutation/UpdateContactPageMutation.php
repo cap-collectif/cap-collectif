@@ -6,6 +6,7 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Twig\SiteParameterRuntime;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -29,19 +30,22 @@ class UpdateContactPageMutation implements MutationInterface
         'customcode' => self::CONTACT_PAGE_CODE_KEYNAME,
     ];
 
-    private $siteParameterRepository;
-    private $imageRepository;
-    private $em;
-    private $cache;
-    private $mediaRepository;
+    private SiteParameterRepository $siteParameterRepository;
+    private SiteImageRepository $imageRepository;
+    private EntityManagerInterface $em;
+    private RedisCache $cache;
+    private MediaRepository $mediaRepository;
+    private SiteParameterResolver $resolver;
 
     public function __construct(
         SiteParameterRepository $siteParameterRepository,
         EntityManagerInterface $em,
         RedisCache $cache,
         MediaRepository $mediaRepository,
-        SiteImageRepository $imageRepository
+        SiteImageRepository $imageRepository,
+        SiteParameterResolver $resolver
     ) {
+        $this->resolver = $resolver;
         $this->em = $em;
         $this->cache = $cache;
         $this->imageRepository = $imageRepository;
@@ -77,7 +81,10 @@ class UpdateContactPageMutation implements MutationInterface
 
         $this->em->flush();
         foreach ($updated as $dbKey) {
-            $this->cache->deleteItem(SiteParameterRuntime::CACHE_KEY . $dbKey);
+            $data = $this->resolver->getValue($dbKey);
+            $cachedItem = $this->cache->getItem(SiteParameterRuntime::CACHE_KEY . $dbKey);
+            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
+            $this->cache->save($cachedItem);
         }
 
         return $return;
