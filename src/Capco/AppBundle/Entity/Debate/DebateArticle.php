@@ -15,8 +15,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class DebateArticle
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"url"})
@@ -61,9 +61,9 @@ class DebateArticle
 
     /**
      * @ORM\ManyToOne(targetEntity=Debate::class, inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $debate;
+    private ?Debate $debate;
 
     public function getUrl(): ?string
     {
@@ -79,7 +79,7 @@ class DebateArticle
 
     public function hasBeenCrawled(): bool
     {
-        return $this->publishedAt !== null;
+        return null !== $this->publishedAt;
     }
 
     public function getOrigin(): ?string
