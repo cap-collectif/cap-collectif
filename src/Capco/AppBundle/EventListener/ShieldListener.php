@@ -31,7 +31,6 @@ class ShieldListener
 
         // API documentation
         'graphiql_endpoint',
-        'nelmio_api_doc_index',
 
         // Internal API and file upload
         // for custom fields at registration

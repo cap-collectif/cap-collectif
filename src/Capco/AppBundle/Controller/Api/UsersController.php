@@ -16,7 +16,6 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -113,13 +112,6 @@ class UsersController extends AbstractFOSRestController
 
     /**
      * Create a user.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create a user.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *  }
      * )
      *
      * @Post("/users")

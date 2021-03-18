@@ -139,7 +139,6 @@ parameters:
     env(SYMFONY_TIPSMEEE_API_KEY): ***REMOVED***
     env(SLACK_JPEC_GHOST): ***REMOVED***
 
-nelmio_api_doc: null
 
 sensio_framework_extra:
     router:      { annotations: true } # Deprecated; use routing annotations of Symfony core instead

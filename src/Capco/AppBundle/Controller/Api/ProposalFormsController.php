@@ -6,21 +6,12 @@ use Capco\AppBundle\Entity\ProposalForm;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class ProposalFormsController extends AbstractFOSRestController
 {
     /**
      * Get a proposal form.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get a proposal form",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion is not found",
-     *  }
      * )
      *
      * @Get("/proposal_forms/{id}")
