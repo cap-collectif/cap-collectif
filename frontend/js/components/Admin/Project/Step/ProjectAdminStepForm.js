@@ -393,16 +393,6 @@ export function ProjectAdminStepForm({
         <FormContainer onSubmit={handleSubmit} id={form}>
           {step.type !== 'DebateStep' && renderSubSection('global.general')}
 
-          {step.type !== 'DebateStep' && (
-            <Field
-              type="text"
-              name="title"
-              id="step-title"
-              label={<FormattedMessage id="global.title" />}
-              component={renderComponent}
-            />
-          )}
-
           {step.type === 'DebateStep' && (
             <>
               <p className="mb-20">
