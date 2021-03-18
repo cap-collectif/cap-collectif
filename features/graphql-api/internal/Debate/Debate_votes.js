@@ -28,8 +28,10 @@ const DebateVotesQuery = /* GraphQL */ `
               debate {
                 id
               }
-              author {
-                id
+              ... on DebateVote {
+                author {
+                  id
+                }
               }
             }
           }

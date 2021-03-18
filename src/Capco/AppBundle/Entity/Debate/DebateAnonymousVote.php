@@ -10,8 +10,8 @@ use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,8 +24,8 @@ class DebateAnonymousVote implements IndexableInterface
     use ContributionOriginTrait;
     use DebatableTrait;
     use ForAgainstTrait;
-    use IdTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate")
@@ -76,6 +76,7 @@ class DebateAnonymousVote implements IndexableInterface
     {
         return [
             'ElasticsearchVote',
+            'ElasticsearchVoteNestedDebate',
             'ElasticsearchDebateAnonymousVote',
             'ElasticsearchVoteNestedProject',
             'ElasticsearchVoteNestedStep',
@@ -93,5 +94,15 @@ class DebateAnonymousVote implements IndexableInterface
     public function getVoteType(): string
     {
         return $this->getType();
+    }
+
+    public function isPublished(): bool
+    {
+        return true;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->getCreatedAt();
     }
 }

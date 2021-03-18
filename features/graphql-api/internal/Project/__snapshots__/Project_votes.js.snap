@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.project.votes Retrieve project anonymous votes total count 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+    "votes": Object {
+      "totalCount": 5,
+    },
+  },
+}
+`;
+
+exports[`Internal.project.votes Retrieve project non anonymous votes total count 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+    "votes": Object {
+      "totalCount": 13,
+    },
+  },
+}
+`;
+
+exports[`Internal.project.votes Retrieve project votes total count 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+    "votes": Object {
+      "totalCount": 18,
+    },
+  },
+}
+`;

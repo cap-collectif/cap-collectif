@@ -35,6 +35,11 @@ InternalProject:
                         description: 'Search contributor by his email, username, lastname'
             votes:
                 type: 'InternalVoteConnection!'
+                args:
+                    anonymous:
+                        type: 'Boolean'
+                        defaultValue: null
+                        description: 'Wether it retrieves anonymous votes or not.'
             steps:
                 args:
                     orderBy:

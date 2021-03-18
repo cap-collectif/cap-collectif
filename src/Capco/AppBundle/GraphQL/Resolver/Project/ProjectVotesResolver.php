@@ -37,7 +37,8 @@ class ProjectVotesResolver implements ResolverInterface
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
-        $totalCount = $this->countProjectVotes($project);
+
+        $totalCount = $this->countProjectVotes($project, $args->offsetGet('anonymous'));
 
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];
@@ -46,7 +47,7 @@ class ProjectVotesResolver implements ResolverInterface
         return $paginator->auto($args, $totalCount);
     }
 
-    public function countProjectVotes(Project $project): int
+    public function countProjectVotes(Project $project, ?bool $anonymous = null): int
     {
         if ($project->isExternal()) {
             return $project->getExternalVotesCount() ?? 0;
@@ -55,13 +56,13 @@ class ProjectVotesResolver implements ResolverInterface
         $totalCount = 0;
 
         foreach ($project->getSteps() as $pas) {
-            $totalCount += $this->countStepVotes($pas->getStep());
+            $totalCount += $this->countStepVotes($pas->getStep(), $anonymous);
         }
 
         return $totalCount;
     }
 
-    public function countStepVotes(AbstractStep $step): int
+    public function countStepVotes(AbstractStep $step, ?bool $anonymous): int
     {
         $count = 0;
         if ($step instanceof ConsultationStep) {
@@ -72,7 +73,7 @@ class ProjectVotesResolver implements ResolverInterface
             $step instanceof DebateStep
         ) {
             $promise = $this->stepVotesCountResolver
-                ->__invoke($step)
+                ->__invoke($step, true, $anonymous)
                 ->then(function ($value) use (&$count) {
                     $count += $value;
                 });

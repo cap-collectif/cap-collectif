@@ -49,7 +49,7 @@ abstract class Search
             return sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
         }
 
-        return random_int(0, PHP_INT_MAX);
+        return random_int(0, \PHP_INT_MAX);
     }
 
     public function getHydratedResults(EntityRepository $repository, array $ids): array
@@ -57,6 +57,47 @@ abstract class Search
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         $results = $repository->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        usort($results, static function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $results;
+    }
+
+    public function getHydratedResultsFromRepositories(array $repositories, ResultSet $set): array
+    {
+        $informations = array_map(
+            static fn(Result $result) => [
+                'id' => $result->getDocument()->get('id'),
+                'objectType' => $result->getDocument()->get('objectType'),
+            ],
+            $set->getResults()
+        );
+        $ids = array_map(static fn(array $information) => $information['id'], $informations);
+
+        $types = array_unique(
+            array_map(static fn(array $information) => $information['objectType'], $informations)
+        );
+        $map = [];
+        foreach ($types as $type) {
+            $typeInformations = array_filter(
+                $informations,
+                static fn(array $information) => $information['objectType'] === $type
+            );
+            $typeIds = array_map(
+                static fn(array $information) => $information['id'],
+                $typeInformations
+            );
+            $map[$type] = $typeIds;
+        }
+        // We can't use findById because we would lost the correct order given by ES
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        $results = [];
+        foreach ($map as $objectType => $objectIds) {
+            array_push($results, ...$repositories[$objectType]->hydrateFromIds($objectIds));
+        }
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         usort($results, static function ($a, $b) use ($ids) {

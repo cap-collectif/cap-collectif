@@ -16,10 +16,10 @@ Object {
     "debate": Object {
       "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
       "votes": Object {
-        "totalCount": 10,
+        "totalCount": 14,
       },
     },
-    "deletedDebateAnonymousVoteId": "RGViYXRlQW5vbnltb3VzVm90ZTo=",
+    "deletedDebateAnonymousVoteId": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
     "errorCode": null,
   },
 }

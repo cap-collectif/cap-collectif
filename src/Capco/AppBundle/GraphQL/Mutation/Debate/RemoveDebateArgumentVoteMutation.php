@@ -8,6 +8,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements
     MutationInterface
@@ -20,6 +21,7 @@ class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutatio
             $debateArgument = $this->getDebateArgument($input, $viewer);
             $this->checkCanParticipate($debateArgument);
             $debateArgumentVote = $this->getPreviousVote($debateArgument, $viewer);
+            $debateArgumentVoteId = GlobalId::toGlobalId('DebateArgumentVote', $debateArgumentVote->getId());
             self::removePreviousVote($debateArgument, $debateArgumentVote);
             $this->indexer->remove(DebateArgumentVote::class, $debateArgumentVote->getId());
             $this->em->remove($debateArgumentVote);
@@ -31,7 +33,7 @@ class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutatio
 
         return [
             'debateArgument' => $debateArgument,
-            'deletedDebateArgumentVoteId' => $debateArgumentVote->getId(),
+            'deletedDebateArgumentVoteId' => $debateArgumentVoteId,
             'errorCode' => null,
         ];
     }

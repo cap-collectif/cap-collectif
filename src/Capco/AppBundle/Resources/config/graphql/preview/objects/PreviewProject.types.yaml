@@ -9,7 +9,7 @@ PreviewProject:
                 description: 'A list of votes associated with the project.'
                 type: 'PreviewVoteConnection!'
                 argsBuilder: 'Relay::Connection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value, args])'
             contributors:
                 type: 'PreviewUserConnection!'
                 description: 'A list of contributors associated with the project.'

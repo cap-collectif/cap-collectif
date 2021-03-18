@@ -3,17 +3,19 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Repository\ArgumentVoteRepository;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
@@ -21,6 +23,7 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
+use Elastica\Query\Terms as QueryTerms;
 use Elastica\Result;
 use Elastica\ResultSet;
 use GraphQL\Error\UserError;
@@ -29,18 +32,18 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class VoteSearch extends Search
 {
     private AbstractVoteRepository $abstractVoteRepository;
-    private ArgumentVoteRepository $argumentVoteRepository;
+    private DebateAnonymousVoteRepository $debateAnonymousVoteRepository;
 
     public function __construct(
         Index $index,
         AbstractVoteRepository $abstractVoteRepository,
-        ArgumentVoteRepository $argumentVoteRepository
+        DebateAnonymousVoteRepository $debateAnonymousVoteRepository
     ) {
         parent::__construct($index);
         $this->type = 'vote';
         $this->index = $index;
         $this->abstractVoteRepository = $abstractVoteRepository;
-        $this->argumentVoteRepository = $argumentVoteRepository;
+        $this->debateAnonymousVoteRepository = $debateAnonymousVoteRepository;
     }
 
     public function getVotesByAuthorViewerCanSee(
@@ -236,13 +239,16 @@ class VoteSearch extends Search
         ?array $orderBy = null,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
+        $terms = ['objectType' => ['debateAnonymousVote', 'vote']];
+
         return $this->searchEntityVotes(
             $debate->getId(),
             'debate.id',
             $limit,
             $filters,
             $orderBy,
-            $cursor
+            $cursor,
+            $terms
         );
     }
 
@@ -253,13 +259,20 @@ class VoteSearch extends Search
         ?array $orderBy = null,
         ?string $cursor = null
     ): int {
+        $terms = ['objectType' => ['vote', 'debateAnonymousVote']];
+        if (isset($filters['anonymous']) && null !== $filters['anonymous']) {
+            $terms['objectType'] = $filters['anonymous'] ? ['debateAnonymousVote'] : ['vote'];
+        }
+        unset($filters['anonymous']);
+
         return $this->searchEntityVotes(
             $project->getId(),
             'project.id',
             $limit,
             $filters,
             $orderBy,
-            $cursor
+            $cursor,
+            $terms
         )->getTotalCount();
     }
 
@@ -338,11 +351,27 @@ class VoteSearch extends Search
         int $limit,
         array $filters = [],
         ?array $sort = null,
-        ?string $cursor = null
+        ?string $cursor = null,
+        ?array $terms = []
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(new Term([$entityIdTerm => $entityId]));
-        $boolQuery->addFilter(new Term(['isAccounted' => true]));
+        $boolQuery->addFilter(
+            (new BoolQuery())->addShould([
+                (new BoolQuery())
+                    ->addFilter(new Exists('isAccounted'))
+                    ->addFilter(new Term(['isAccounted' => true])),
+                (new BoolQuery())->addMustNot(new Exists('isAccounted')),
+            ])
+        );
+
+        if (!empty($terms)) {
+            foreach ($terms as $key => $value) {
+                if (null !== $key && null !== $value) {
+                    $boolQuery->addFilter(new QueryTerms($key, $value));
+                }
+            }
+        }
 
         if (!empty($filters)) {
             foreach ($filters as $key => $value) {
@@ -363,8 +392,10 @@ class VoteSearch extends Search
 
         $query->setTrackTotalHits(true);
         $this->applyCursor($query, $cursor);
-        $this->addObjectTypeFilter($query, $this->type);
-        $query->setSource(['id']);
+        if (!isset($terms['objectType'])) {
+            $this->addObjectTypeFilter($query, $this->type);
+        }
+        $query->setSource(['id', 'objectType']);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 
@@ -426,7 +457,13 @@ class VoteSearch extends Search
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
         return new ElasticsearchPaginatedResult(
-            $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $response),
+            $this->getHydratedResultsFromRepositories(
+                [
+                    AbstractVote::getElasticsearchTypeName() => $this->abstractVoteRepository,
+                    DebateAnonymousVote::getElasticsearchTypeName() => $this->debateAnonymousVoteRepository,
+                ],
+                $response
+            ),
             $cursors,
             $response->getTotalHits()
         );

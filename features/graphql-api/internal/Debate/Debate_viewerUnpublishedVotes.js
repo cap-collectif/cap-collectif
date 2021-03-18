@@ -6,8 +6,10 @@ const DebateViewerUnpublishedVotesQuery = /* GraphQL */ `
         viewerUnpublishedVotes(first: 10) {
           edges {
             node {
-              author {
-                email
+              ... on DebateVote {
+                author {
+                  email
+                }
               }
               published
             }

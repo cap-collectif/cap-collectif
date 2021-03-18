@@ -2,7 +2,11 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousVote:
     attributes:
         id:
             groups: [ElasticsearchVote]
-        createdAt:
+        debate:
+            groups: [ElasticsearchVoteNestedDebate]
+        published:
+            groups: [ElasticsearchVote]
+        publishedAt:
             groups: [ElasticsearchVote]
         voteType:
             groups: [ElasticsearchDebateAnonymousVote]

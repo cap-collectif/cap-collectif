@@ -69,6 +69,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $decoded->getToken()->willReturn($token);
         $encoder->decode($hash)->willReturn($decoded);
         $debateStep->isOpen()->willReturn(true);
+        $debate->getId()->willReturn($id);
         $debate->getStep()->willReturn($debateStep);
         $anonymousVote->getDebate()->willReturn($debate);
         $anonymousVote->getId()->willReturn($id);

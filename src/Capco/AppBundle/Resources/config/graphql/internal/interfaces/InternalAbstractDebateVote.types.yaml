@@ -1,0 +1,36 @@
+InternalAbstractDebateVote:
+    type: interface
+    inherits:
+        - Node
+    config:
+        name: AbstractDebateVote
+        description: 'An abstract debate vote.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AbstractDebateVoteTypeResolver", [value])'
+        fields:
+            createdAt:
+                type: 'DateTime!'
+                description: 'The date of the vote.'
+            published:
+                type: 'Boolean!'
+                description: 'Whether or not the vote is published.'
+            publishedAt:
+                type: 'DateTime'
+                description: 'The date when the vote was published at.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'The value of the vote.'
+            debate:
+                type: 'InternalDebate!'
+                description: 'The debate of the vote.'
+            ipAddress:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'IP of the voter'
+                type: 'IP'
+            origin:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The origin of a debate's vote"
+                type: 'ContributionOrigin!'
+            widgetOriginUrl:
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: "The URL of widget from which the debate's vote was added, if any."
+                type: 'URI'

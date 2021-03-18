@@ -376,13 +376,15 @@ class ExportDebateCommand extends BaseExportCommand
           node {
             publishedAt
             type
-            author {
-              id
-              username
-              isEmailConfirmed
-              email
-              userType {
-                name
+            ...on DebateVote {
+              author {
+                id
+                username
+                isEmailConfirmed
+                email
+                userType {
+                  name
+                }
               }
             }
           }

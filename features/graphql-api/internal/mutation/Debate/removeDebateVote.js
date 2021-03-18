@@ -41,7 +41,6 @@ describe('Internal|RemoveDebateVote mutation', () => {
       },
       'internal_spylou',
     );
-    // TODO: Skipping test until we find a solution concerning the ES snapshot
     expect(response).toMatchSnapshot();
   });
 });

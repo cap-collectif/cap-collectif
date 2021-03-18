@@ -22,7 +22,7 @@ Object {
       "debate": Object {
         "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
         "votes": Object {
-          "totalCount": 11,
+          "totalCount": 16,
         },
       },
       "id": Any<String>,
@@ -49,7 +49,7 @@ Object {
       "debate": Object {
         "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
         "votes": Object {
-          "totalCount": 12,
+          "totalCount": 17,
         },
       },
       "id": Any<String>,
@@ -76,7 +76,7 @@ Object {
       "debate": Object {
         "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
         "votes": Object {
-          "totalCount": 12,
+          "totalCount": 17,
         },
       },
       "id": Any<String>,

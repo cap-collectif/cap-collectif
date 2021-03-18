@@ -2,7 +2,7 @@
 import * as React from 'react';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { type DebateVote_vote } from '~relay/DebateVote_vote.graphql';
@@ -14,19 +14,28 @@ type Props = {|
 |};
 
 export const DebateVote = ({ vote }: Props) => {
-  const { type, author, createdAt } = vote;
-  const userName: ?string =
-    author.firstname && author.lastname ? `${author.firstname} ${author.lastname}` : null;
+  const intl = useIntl();
+  const { __typename, type, createdAt } = vote;
+  const fullName: ?string =
+    __typename === 'DebateAnonymousVote'
+      ? intl.formatMessage({ id: 'debate-anonymous-participation' })
+      : vote.author?.firstname && vote.author?.lastname
+      ? `${vote.author.firstname} ${vote.author.lastname}`
+      : null;
+  const username =
+    __typename === 'DebateAnonymousVote'
+      ? intl.formatMessage({ id: 'global.anonymous' })
+      : vote.author?.username;
 
   return (
     <Flex direction="row" align="center" justify="space-between">
       <Flex direction="column" mr={4}>
         <Text color="blue.900" truncate={60}>
-          {author.username}
+          {username}
         </Text>
 
         <InlineList separator="•" color="gray.600">
-          {userName && <Text truncate={50}>{userName}</Text>}
+          {fullName && <Text truncate={50}>{fullName}</Text>}
 
           <Text>
             <FormattedMessage
@@ -58,13 +67,16 @@ export const DebateVote = ({ vote }: Props) => {
 
 export default createFragmentContainer(DebateVote, {
   vote: graphql`
-    fragment DebateVote_vote on DebateVote {
+    fragment DebateVote_vote on AbstractDebateVote {
+      __typename
       type
       createdAt
-      author {
-        username
-        firstname
-        lastname
+      ... on DebateVote {
+        author {
+          username
+          firstname
+          lastname
+        }
       }
     }
   `,

@@ -99,6 +99,36 @@ enum APIEnterpriseType {
   PUB_ORGA
 }
 
+"""An abstract debate vote."""
+interface AbstractDebateVote {
+  """The ID of an object"""
+  id: ID!
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """Whether or not the vote is published."""
+  published: Boolean!
+
+  """The date when the vote was published at."""
+  publishedAt: DateTime
+
+  """The value of the vote."""
+  type: ForOrAgainstValue!
+
+  """The debate of the vote."""
+  debate: Debate!
+
+  """IP of the voter"""
+  ipAddress: IP
+
+  """The origin of a debate's vote"""
+  origin: ContributionOrigin!
+
+  """The URL of widget from which the debate's vote was added, if any."""
+  widgetOriginUrl: URI
+}
+
 input AddArgumentInput {
   """The Argumentable ID to argue."""
   argumentableId: ID!
@@ -3440,12 +3470,18 @@ type Debate implements Node {
 }
 
 """An anonymous debate vote."""
-type DebateAnonymousVote implements Node {
+type DebateAnonymousVote implements Node & AbstractDebateVote {
   """The ID of an object."""
   id: ID!
 
   """The date of the vote."""
   createdAt: DateTime!
+
+  """Whether or not the vote is published."""
+  published: Boolean!
+
+  """The date when the vote was published at."""
+  publishedAt: DateTime
 
   """The value of the vote."""
   type: ForOrAgainstValue!
@@ -3453,14 +3489,8 @@ type DebateAnonymousVote implements Node {
   """The debate of the vote."""
   debate: Debate!
 
-  """The token of the vote."""
-  token: String!
-
   """IP of the voter"""
   ipAddress: IP
-
-  """Navigator of the voter"""
-  navigator: String
 
   """The origin of a debate argument's vote"""
   origin: ContributionOrigin!
@@ -3469,6 +3499,12 @@ type DebateAnonymousVote implements Node {
   The URL of widget from which the debate argument's vote was added, if any.
   """
   widgetOriginUrl: URI
+
+  """The token of the vote."""
+  token: String!
+
+  """Navigator of the voter"""
+  navigator: String
 }
 
 """A debate argument from non expert."""
@@ -3943,27 +3979,18 @@ enum DebateType {
 }
 
 """A debate vote."""
-type DebateVote implements Node & Publishable {
+type DebateVote implements Node & AbstractDebateVote & Publishable {
   """The ID of an object."""
   id: ID!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
 
   """The date of the vote."""
   createdAt: DateTime!
 
-  """The author of the vote."""
-  author: User!
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
 
   """The value of the vote."""
   type: ForOrAgainstValue!
@@ -3979,6 +4006,15 @@ type DebateVote implements Node & Publishable {
 
   """The URL of widget from which the debate's vote was added, if any."""
   widgetOriginUrl: URI
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """The author of the vote."""
+  author: User!
 }
 
 """A connection to a list of items."""
@@ -3995,7 +4031,7 @@ type DebateVoteConnection {
 """An edge in a connection."""
 type DebateVoteEdge {
   """The item at the end of the edge."""
-  node: DebateVote
+  node: AbstractDebateVote
 
   """A cursor for use in pagination."""
   cursor: String!
@@ -7159,6 +7195,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Wether it retrieves anonymous votes or not."""
+    anonymous: Boolean = null
   ): VoteConnection!
 
   """A list of contributors associated with the project."""

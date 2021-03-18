@@ -6,93 +6,78 @@ Object {
     "votes": Object {
       "edges": Array [
         Object {
-          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMCI7fQ==",
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjI3OiJkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDEiO30=",
           "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyU3B5bA==",
-            },
-            "createdAt": "2015-01-01 09:01:00",
+            "createdAt": "2015-01-01 00:00:00",
             "debate": Object {
               "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
             },
-            "id": "RGViYXRlVm90ZToxMzAwMA==",
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
             "published": true,
-            "publishedAt": "2015-01-01 09:01:00",
+            "publishedAt": "2015-01-01 00:00:00",
             "type": "AGAINST",
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMSI7fQ==",
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjI3OiJkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDIiO30=",
           "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VySWFu",
-            },
-            "createdAt": "2015-01-01 09:02:00",
+            "createdAt": "2015-01-01 00:00:00",
             "debate": Object {
               "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
             },
-            "id": "RGViYXRlVm90ZToxMzAwMQ==",
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDI=",
             "published": true,
-            "publishedAt": "2015-01-01 09:02:00",
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "AGAINST",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMSI7fQ==",
+          "node": Object {
+            "createdAt": "2015-01-01 00:00:00",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMQ==",
+            "published": true,
+            "publishedAt": "2015-01-01 00:00:00",
             "type": "FOR",
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMiI7fQ==",
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMiI7fQ==",
           "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyTWlja2FlbA==",
-            },
-            "createdAt": "2015-01-01 09:03:00",
+            "createdAt": "2015-01-01 00:00:00",
             "debate": Object {
               "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
             },
-            "id": "RGViYXRlVm90ZToxMzAwMg==",
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMg==",
             "published": true,
-            "publishedAt": "2015-01-01 09:03:00",
-            "type": "AGAINST",
-          },
-        },
-        Object {
-          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMyI7fQ==",
-          "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VySnBlYw==",
-            },
-            "createdAt": "2015-01-01 09:04:00",
-            "debate": Object {
-              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-            },
-            "id": "RGViYXRlVm90ZToxMzAwMw==",
-            "published": true,
-            "publishedAt": "2015-01-01 09:04:00",
+            "publishedAt": "2015-01-01 00:00:00",
             "type": "FOR",
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwNCI7fQ==",
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMyI7fQ==",
           "node": Object {
-            "author": Object {
-              "id": "VXNlcjp1c2VyVGhlbw==",
-            },
-            "createdAt": "2015-01-01 09:05:00",
+            "createdAt": "2015-01-01 00:00:00",
             "debate": Object {
               "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
             },
-            "id": "RGViYXRlVm90ZToxMzAwNA==",
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMw==",
             "published": true,
-            "publishedAt": "2015-01-01 09:05:00",
-            "type": "AGAINST",
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "FOR",
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwNCI7fQ==",
+        "endCursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMyI7fQ==",
         "hasNextPage": true,
         "hasPreviousPage": false,
-        "startCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMCI7fQ==",
+        "startCursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjI3OiJkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDEiO30=",
       },
-      "totalCount": 10,
+      "totalCount": 15,
     },
   },
 }
@@ -190,7 +175,7 @@ Object {
         "hasPreviousPage": false,
         "startCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwNSI7fQ==",
       },
-      "totalCount": 10,
+      "totalCount": 15,
     },
   },
 }
@@ -200,13 +185,13 @@ exports[`Internal|Debate.Votes connection fetches all votes counters associated 
 Object {
   "node": Object {
     "againstVotes": Object {
-      "totalCount": 9,
-    },
-    "allVotes": Object {
       "totalCount": 11,
     },
+    "allVotes": Object {
+      "totalCount": 16,
+    },
     "forVotes": Object {
-      "totalCount": 2,
+      "totalCount": 5,
     },
   },
 }
@@ -216,13 +201,13 @@ exports[`Internal|Debate.Votes connection fetches published votes counters assoc
 Object {
   "node": Object {
     "againstVotes": Object {
-      "totalCount": 8,
-    },
-    "allVotes": Object {
       "totalCount": 10,
     },
+    "allVotes": Object {
+      "totalCount": 15,
+    },
     "forVotes": Object {
-      "totalCount": 2,
+      "totalCount": 5,
     },
   },
 }
@@ -249,6 +234,45 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMSI7fQ==",
+          "node": Object {
+            "createdAt": "2015-01-01 00:00:00",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMQ==",
+            "published": true,
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "FOR",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMiI7fQ==",
+          "node": Object {
+            "createdAt": "2015-01-01 00:00:00",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMg==",
+            "published": true,
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "FOR",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMyI7fQ==",
+          "node": Object {
+            "createdAt": "2015-01-01 00:00:00",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMw==",
+            "published": true,
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "FOR",
+          },
+        },
         Object {
           "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMSI7fQ==",
           "node": Object {
@@ -286,9 +310,9 @@ Object {
         "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMyI7fQ==",
         "hasNextPage": false,
         "hasPreviousPage": false,
-        "startCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMSI7fQ==",
+        "startCursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjIzOiJkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMSI7fQ==",
       },
-      "totalCount": 2,
+      "totalCount": 5,
     },
   },
 }
@@ -299,6 +323,32 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjI3OiJkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDEiO30=",
+          "node": Object {
+            "createdAt": "2015-01-01 00:00:00",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
+            "published": true,
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "AGAINST",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjI3OiJkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDIiO30=",
+          "node": Object {
+            "createdAt": "2015-01-01 00:00:00",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDI=",
+            "published": true,
+            "publishedAt": "2015-01-01 00:00:00",
+            "type": "AGAINST",
+          },
+        },
         Object {
           "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMCI7fQ==",
           "node": Object {
@@ -432,9 +482,9 @@ Object {
         "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwOSI7fQ==",
         "hasNextPage": false,
         "hasPreviousPage": false,
-        "startCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czo1OiIxMzAwMCI7fQ==",
+        "startCursor": "YToyOntpOjA7aToxNDIwMDY2ODAwMDAwO2k6MTtzOjI3OiJkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDEiO30=",
       },
-      "totalCount": 8,
+      "totalCount": 10,
     },
   },
 }
@@ -445,6 +495,36 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
+            "ipAddress": "1.1.1.1",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDI=",
+            "ipAddress": "3.3.3.3",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMQ==",
+            "ipAddress": "1.1.1.1",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMg==",
+            "ipAddress": "1.1.1.1",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMw==",
+            "ipAddress": "4.4.4.4",
+          },
+        },
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwMA==",
@@ -475,36 +555,6 @@ Object {
             "ipAddress": null,
           },
         },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNQ==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNg==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNw==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwOA==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwOQ==",
-            "ipAddress": null,
-          },
-        },
       ],
     },
   },
@@ -516,6 +566,36 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDI=",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMg==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMw==",
+            "ipAddress": null,
+          },
+        },
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwMA==",
@@ -546,36 +626,6 @@ Object {
             "ipAddress": null,
           },
         },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNQ==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNg==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNw==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwOA==",
-            "ipAddress": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwOQ==",
-            "ipAddress": null,
-          },
-        },
       ],
     },
   },
@@ -587,6 +637,41 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDI=",
+            "origin": "WIDGET",
+            "widgetOriginUrl": "www.figaro.fr",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMQ==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMg==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMw==",
+            "origin": "WIDGET",
+            "widgetOriginUrl": "www.liberation.fr",
+          },
+        },
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwMA==",
@@ -618,41 +703,6 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwNA==",
-            "origin": "INTERNAL",
-            "widgetOriginUrl": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNQ==",
-            "origin": "INTERNAL",
-            "widgetOriginUrl": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNg==",
-            "origin": "INTERNAL",
-            "widgetOriginUrl": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwNw==",
-            "origin": "WIDGET",
-            "widgetOriginUrl": "www.lemonde.fr",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwOA==",
-            "origin": "INTERNAL",
-            "widgetOriginUrl": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlVm90ZToxMzAwOQ==",
             "origin": "INTERNAL",
             "widgetOriginUrl": null,
           },

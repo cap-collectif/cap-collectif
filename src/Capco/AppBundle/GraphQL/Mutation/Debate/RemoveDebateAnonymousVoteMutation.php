@@ -81,11 +81,12 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
         if (!$vote) {
             return $this->generateErrorPayload(self::NOT_VOTED);
         }
+        $voteId = $vote->getId();
 
         try {
             $this->em->remove($vote);
             $this->em->flush();
-            $this->indexer->remove(DebateAnonymousVote::class, $vote->getId());
+            $this->indexer->remove(DebateAnonymousVote::class, $voteId);
             $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(
@@ -95,16 +96,16 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
             throw new UserError('Internal error, please try again.');
         }
 
-        return $this->generateSuccessFulPayload($vote);
+        return $this->generateSuccessFulPayload($vote, $voteId);
     }
 
-    private function generateSuccessFulPayload(DebateAnonymousVote $vote): array
+    private function generateSuccessFulPayload(DebateAnonymousVote $vote, string $voteId): array
     {
         return [
             'debate' => $vote->getDebate(),
             'deletedDebateAnonymousVoteId' => GlobalId::toGlobalId(
                 'DebateAnonymousVote',
-                $vote->getId()
+                $voteId
             ),
             'errorCode' => null,
         ];

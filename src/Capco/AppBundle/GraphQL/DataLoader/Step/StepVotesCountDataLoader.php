@@ -63,13 +63,13 @@ class StepVotesCountDataLoader extends BatchDataLoader
         $connections = [];
 
         foreach ($keys as $key) {
-            $connections[] = $this->resolve($key['step'], $key['onlyAccounted'] ?? true);
+            $connections[] = $this->resolve($key['step'], $key['onlyAccounted'], $key['anonymous']);
         }
 
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    public function resolve(AbstractStep $step, bool $onlyAccounted): int
+    public function resolve(AbstractStep $step, bool $onlyAccounted, ?bool $anonymous = null): int
     {
         if ($step instanceof CollectStep) {
             return $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
@@ -86,7 +86,11 @@ class StepVotesCountDataLoader extends BatchDataLoader
         }
 
         if ($step instanceof DebateStep) {
-            return $this->voteSearch->countProjectVotes($step->getProject(), [], 0);
+            return $this->voteSearch->countProjectVotes(
+                $step->getProject(),
+                compact('anonymous'),
+                0
+            );
         }
 
         throw new \RuntimeException('Access denied');
@@ -102,6 +106,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
         return [
             'stepId' => $key['step']->getId(),
             'onlyAccounted' => $key['onlyAccounted'],
+            'anonymous' => $key['anonymous'],
         ];
     }
 }
