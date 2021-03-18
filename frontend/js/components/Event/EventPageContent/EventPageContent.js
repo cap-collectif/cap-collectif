@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import L from 'leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
@@ -30,9 +30,10 @@ type Props = {|
   +event: EventPageContent_event,
   +viewer?: ?EventPageContent_viewer,
   +hasProposeEventEnabled: boolean,
+  intl: IntlShape,
 |};
 
-export const EventPageContent = ({ event, viewer, hasProposeEventEnabled }: Props) => {
+export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }: Props) => {
   const {
     participants,
     commentable,
@@ -123,7 +124,7 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled }: Prop
                 <FormattedMessage id="event_registration.create.register" />
               </ButtonSubscribe>
             ) : (
-              <ButtonUnsubscribe type="button" onClick={() => unsubscribe(event.id)}>
+              <ButtonUnsubscribe type="button" onClick={() => unsubscribe(event.id, intl)}>
                 <FormattedMessage id="event_registration.unsubscribe" />
               </ButtonUnsubscribe>
             )}

@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EventPageContent } from './EventPageContent';
-import { $fragmentRefs, $refType } from '~/mocks';
+import { $fragmentRefs, $refType, intlMock } from '~/mocks';
 
 const basePresentialEvent = {
   $fragmentRefs,
@@ -67,6 +67,7 @@ describe('<EventPageContent />', () => {
         hasProposeEventEnabled={false}
         event={presentialEvent.basic}
         viewer={user}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -78,6 +79,7 @@ describe('<EventPageContent />', () => {
         hasProposeEventEnabled={false}
         event={presentialEvent.noCommentable}
         viewer={user}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -89,6 +91,7 @@ describe('<EventPageContent />', () => {
         hasProposeEventEnabled={false}
         event={presentialEvent.noRegistrationPossible}
         viewer={user}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -100,6 +103,7 @@ describe('<EventPageContent />', () => {
         hasProposeEventEnabled={false}
         event={presentialEvent.noGoogleAddress}
         viewer={user}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -111,6 +115,7 @@ describe('<EventPageContent />', () => {
         hasProposeEventEnabled
         event={presentialEvent.withModerationMotive}
         viewer={user}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -122,6 +127,7 @@ describe('<EventPageContent />', () => {
         hasProposeEventEnabled={false}
         event={presentialEvent.remote}
         viewer={user}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();

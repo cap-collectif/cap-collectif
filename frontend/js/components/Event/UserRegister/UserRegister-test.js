@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { UserRegister } from './UserRegister';
-import { $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs, intlMock } from '~/mocks';
 
 const event = {
   $refType,
@@ -18,7 +18,7 @@ const user = {
 
 describe('<UserRegister />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<UserRegister event={event} user={user} />);
+    const wrapper = shallow(<UserRegister event={event} user={user} intl={intlMock} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

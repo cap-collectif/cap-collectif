@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Field, reduxForm, submit } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
 import component from '~/components/Form/Field';
 import UserAvatar from '~/components/User/UserAvatar';
 import type { RegisterForm_user } from '~relay/RegisterForm_user.graphql';
@@ -12,8 +12,7 @@ import SubmitButton from '~/components/Form/SubmitButton';
 import { FormContainer, UserInfo } from './RegisterForm.style';
 import SubscribeToEventAsRegisteredMutation from '~/mutations/SubscribeToEventAsRegisteredMutation';
 import SubscribeToEventAsNonRegisteredMutation from '~/mutations/SubscribeToEventAsNonRegisteredMutation';
-import FluxDispatcher from '~/dispatchers/AppDispatcher';
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
+import { toast } from '~ds/Toast';
 
 const formName = 'RegisterFormEvent';
 
@@ -22,6 +21,7 @@ type Props = {|
   user?: RegisterForm_user,
   event: RegisterForm_event,
   onClose: () => void,
+  intl: IntlShape,
 |};
 
 type Values = {|
@@ -50,22 +50,17 @@ const onSubmit = (values, dispatch: Dispatch, props: Props) => {
       isAuthenticated: true,
     })
       .then(() => {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.SUCCESS,
-            content: 'event_registration.create.register_success',
-          },
+        toast({
+          variant: 'success',
+          content: props.intl.formatHTMLMessage({
+            id: 'event_registration.create.register_success',
+          }),
         });
-        props.onClose();
       })
       .catch(() => {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
+        toast({
+          variant: 'danger',
+          content: props.intl.formatHTMLMessage({ id: 'global.error.server.form' }),
         });
       });
   }
@@ -82,23 +77,20 @@ const onSubmit = (values, dispatch: Dispatch, props: Props) => {
     isAuthenticated: false,
   })
     .then(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          content: 'event_registration.create.register_success',
-        },
-      });
-      props.reset();
-      props.onClose();
+      const { onClose } = props
+        toast({
+          variant: 'success',
+          content: props.intl.formatHTMLMessage({id: 'event_registration.create.register_success'}),
+        });
+        props.reset();
+        if(onClose){
+          onClose();
+        }
     })
     .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
+      toast({
+        variant: 'danger',
+        content: props.intl.formatHTMLMessage({ id: 'global.error.server.form' }),
       });
     });
 };
@@ -170,7 +162,7 @@ const form = reduxForm({
   form: formName,
 })(RegisterForm);
 
-export default createFragmentContainer(form, {
+export default createFragmentContainer(injectIntl(form), {
   user: graphql`
     fragment RegisterForm_user on User {
       username
