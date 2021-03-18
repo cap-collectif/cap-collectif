@@ -210,15 +210,15 @@ const deleteVoteFromViewer = (
     });
 };
 
-const bandMessage = {
+const bandMessage = (fromWidget: boolean) => ({
   VOTED: 'thanks-for-your-vote',
-  VOTED_ANONYMOUS: 'thanks-vote-argument-on-instance',
+  VOTED_ANONYMOUS: fromWidget ? 'thanks-vote-argument-on-instance' : 'thanks-for-your-vote',
   ARGUMENTED: 'thanks-for-debate-richer',
   NOT_CONFIRMED: 'publish.vote.validate.account',
   NOT_CONFIRMED_ARGUMENTED: 'publish.argument.validate.account',
   NONE: null,
   RESULT: null,
-};
+});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { body } = values;
@@ -335,9 +335,9 @@ export const DebateStepPageVoteForm = ({
                     ? '🎉'
                     : '🗳️'}
                 </span>
-                {bandMessage[voteState] && (
+                {bandMessage(widget.isSource)[voteState] && (
                   <FormattedHTMLMessage
-                    id={bandMessage[voteState]}
+                    id={bandMessage(widget.isSource)[voteState]}
                     values={
                       voteState === 'VOTED_ANONYMOUS' ? { instance: organizationName } : undefined
                     }
@@ -355,9 +355,9 @@ export const DebateStepPageVoteForm = ({
                   : '🗳️'}
               </span>
 
-              {bandMessage[voteState] && (
+              {bandMessage(widget.isSource)[voteState] && (
                 <FormattedHTMLMessage
-                  id={bandMessage[voteState]}
+                  id={bandMessage(widget.isSource)[voteState]}
                   values={
                     voteState === 'VOTED_ANONYMOUS' ? { instance: organizationName } : undefined
                   }
