@@ -30,6 +30,7 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
       flex="1"
       position="relative"
       overflow="hidden"
+      maxHeight="400px"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}>
       <Tag
@@ -68,16 +69,16 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
         </Flex>
       )}
 
-      <Flex direction="column" px={6} pt={10} pb={6}>
+      <Flex direction="column" px={6} pt={10} pb={6} maxHeight="100%">
         <Flex direction="row" spacing={2} mb={4} align="center">
           <NewUserAvatar user={author} size="md" border="2px solid" borderColor="yellow.500" />
           <Text fontSize={3} color="gray.500">
             {author.username}
           </Text>
         </Flex>
-        <Flex direction="column" spacing={2}>
+        <Flex direction="column" spacing={2} maxHeight="100%" overflow="hidden">
           <Text fontWeight="600">{title}</Text>
-          <WYSIWYGRender value={body} truncate={340} />
+          <WYSIWYGRender value={body} />
         </Flex>
       </Flex>
     </Card>

@@ -4,6 +4,7 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
 <Card
   bg="white"
   flex="1"
+  maxHeight="400px"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   overflow="hidden"
@@ -24,6 +25,7 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
   </DebateOpinion___StyledTag>
   <ForwardRef
     direction="column"
+    maxHeight="100%"
     pb={6}
     pt={10}
     px={6}
@@ -54,6 +56,8 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
     </ForwardRef>
     <ForwardRef
       direction="column"
+      maxHeight="100%"
+      overflow="hidden"
       spacing={2}
     >
       <Text
@@ -62,7 +66,6 @@ exports[`<DebateOpinion /> should render correctly 1`] = `
         Thats my opinion
       </Text>
       <WYSIWYGRender
-        truncate={340}
         value="Thats it"
       />
     </ForwardRef>

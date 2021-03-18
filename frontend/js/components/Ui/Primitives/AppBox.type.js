@@ -146,7 +146,11 @@ type Flex = {|
 |};
 
 type MaxWidth = {|
-  maxWidth?: NumberOrString,
+  maxWidth?: Responsive<NumberOrString>,
+|};
+
+type MaxHeight = {|
+  maxHeight?: Responsive<NumberOrString>,
 |};
 
 type BorderRadius = {|
@@ -308,6 +312,7 @@ export type AppBoxProps = {|
   ...AlignItems,
   ...Flex,
   ...MaxWidth,
+  ...MaxHeight,
   ...BorderRadius,
   ...BorderWidth,
   ...Border,

@@ -15,6 +15,7 @@ import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import Button from '~ds/Button/Button';
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
 import NewUserAvatar from '~/components/User/NewUserAvatar';
+import AppBox from '~ui/Primitives/AppBox';
 
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
@@ -27,7 +28,14 @@ type Props = {|
 export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
-    <Card p={0} bg="white" flex="1">
+    <Card
+      p={0}
+      bg="white"
+      flex="1" // we have to manually set a max height in px for the transition to work
+      maxHeight={!readMore ? '400px' : '2000px'}
+      overflow="hidden"
+      css={{ transition: 'max-height 0.5s ease-out' }}
+      position="relative">
       <Tag
         variant={opinion.type === 'FOR' ? 'green' : 'red'}
         borderBottomLeftRadius={0}
@@ -40,6 +48,18 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
           <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
         </Text>
       </Tag>
+      {!readMore && (
+        <AppBox
+          width="100%"
+          height={12}
+          bottom={0}
+          css={css({
+            position: 'absolute',
+            background:
+              'linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%)',
+          })}
+        />
+      )}
       <Flex direction="column" m={6} mt={10}>
         <Flex direction="row" spacing={6} mb={5} alignItems="center">
           <NewUserAvatar
@@ -64,16 +84,23 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
             {opinion.title}
           </Heading>
           <Text>
-            <WYSIWYGRender
-              /**  Should be 500in desktop BUT html-truncate has issues truncating  the HTML content.
-              Maybe it's the embedded youtube video, idk. This require further processing
-               */
-              truncate={isMobile ? 80 : !readMore ? 80 : 0}
-              value={opinion.body}
-            />
+            <WYSIWYGRender value={opinion.body} />
           </Text>
           {isMobile && (
-            <Button onClick={onOpen} variant="link" variantSize="medium" alignSelf="center">
+            <Button
+              onClick={onOpen}
+              variant="link"
+              variantSize="medium"
+              alignSelf="center"
+              position="absolute"
+              bottom="0"
+              left="0"
+              width="100%"
+              height={10}
+              display="block"
+              css={css({
+                background: 'linear-gradient(to bottom, rgba(255,255,255,0.1) 5%, white 25%)',
+              })}>
               <FormattedMessage id="capco.module.read_more" />
             </Button>
           )}
