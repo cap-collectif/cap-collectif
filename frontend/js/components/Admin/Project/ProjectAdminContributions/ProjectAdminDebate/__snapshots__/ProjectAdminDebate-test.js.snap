@@ -23,9 +23,9 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
         </Heading>
       </AccordionButton>
       <AccordionPanel>
-        <ReactPlaceholder
-          customPlaceholder={<FaceToFacePlaceholder />}
-          ready={true}
+        <Skeleton
+          isLoaded={true}
+          placeholder={<FaceToFacePlaceholder />}
         >
           <Relay(FaceToFace)
             debate={
@@ -41,7 +41,7 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
               }
             }
           />
-        </ReactPlaceholder>
+        </Skeleton>
       </AccordionPanel>
     </AccordionItem>
     <AccordionItem
@@ -165,9 +165,9 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
         </Heading>
       </AccordionButton>
       <AccordionPanel>
-        <ReactPlaceholder
-          customPlaceholder={<FaceToFacePlaceholder />}
-          ready={true}
+        <Skeleton
+          isLoaded={true}
+          placeholder={<FaceToFacePlaceholder />}
         >
           <Relay(FaceToFace)
             debate={
@@ -183,7 +183,7 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
               }
             }
           />
-        </ReactPlaceholder>
+        </Skeleton>
       </AccordionPanel>
     </AccordionItem>
     <AccordionItem

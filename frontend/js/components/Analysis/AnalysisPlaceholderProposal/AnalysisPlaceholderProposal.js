@@ -1,39 +1,33 @@
 // @flow
 import * as React from 'react';
-import { TextRow } from 'react-placeholder/lib/placeholders';
-import colors from '~/utils/colors';
 import AnalysisPlaceholderProposalContainer from '~/components/Analysis/AnalysisProposal/AnalysisProposal.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import {
-  TagContainer,
-  ListRowMeta,
-  HeaderInformations,
-  InformationsContainer,
-} from './AnalysisPlaceholderProposal.style';
+import Skeleton from '~ds/Skeleton';
+import Flex from '~ui/Primitives/Layout/Flex';
 
-type Props = {
-  children: React.Node,
-};
+type Props = {|
+  +children: React.Node,
+|};
 
-const AnalysisPlaceholderProposal = ({ children }: Props) => (
-  <AnalysisPlaceholderProposalContainer>
-    <InformationsContainer>
-      <HeaderInformations>
-        <TextRow color="#3b88fd" />
-        <TextRow color={colors.borderColor} />
-      </HeaderInformations>
+const AnalysisPlaceholderProposal = ({ children }: Props): React.Node => (
+  <AnalysisPlaceholderProposalContainer asPlaceholder>
+    <Flex direction="column" width="50%" maxWidth="50%">
+      <Flex direction="column">
+        <Skeleton.Text bg="blue.200" size="sm" mb={3} width="200px" />
+        <Skeleton.Text size="sm" width="350px" />
+      </Flex>
 
-      <ListRowMeta>
-        <TagContainer>
+      <Flex direction="row" align="center" mt={2} spacing={2}>
+        <Flex direction="row" align="center" width="30%">
           <Icon name={ICON_NAME.pin} size={12} />
-          <TextRow color={colors.borderColor} />
-        </TagContainer>
-        <TagContainer>
+          <Skeleton.Text size="sm" ml={2} width="100%" />
+        </Flex>
+        <Flex direction="row" align="center" width="30%">
           <Icon name={ICON_NAME.tag} size={12} />
-          <TextRow color={colors.borderColor} />
-        </TagContainer>
-      </ListRowMeta>
-    </InformationsContainer>
+          <Skeleton.Text size="sm" ml={2} width="100%" />
+        </Flex>
+      </Flex>
+    </Flex>
 
     {children}
   </AnalysisPlaceholderProposalContainer>

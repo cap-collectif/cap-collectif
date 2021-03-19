@@ -7,7 +7,7 @@ import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 export type SkeletonTextProps = {|
   ...AppBoxProps,
-  size: 'sm' | 'md' | 'lg',
+  size?: 'sm' | 'md' | 'lg',
 |};
 
 const SkeletonTextInner: StyledComponent<{}, {}, any> = styled(AppBox)(

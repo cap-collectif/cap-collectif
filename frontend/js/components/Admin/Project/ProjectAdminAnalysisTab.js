@@ -2,7 +2,6 @@
 import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks';
-import ReactPlaceholder from 'react-placeholder';
 import { connect } from 'react-redux';
 import type { ResultPreloadQuery, Query, GlobalState } from '~/types';
 import type {
@@ -24,6 +23,7 @@ import type {
   ProposalOrderField,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
 import { ORDER_BY } from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
+import Skeleton from '~ds/Skeleton';
 
 type ReduxProps = {|
   +proposalRevisionsEnabled: boolean,
@@ -164,7 +164,7 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEna
     proposalRevisionsEnabled,
   );
   const hasFilters: boolean = !isEqual(
-    { projectId, ...initialVariables },
+    { projectId, proposalRevisionsEnabled, ...initialVariables },
     queryVariablesWithParameters,
   );
 
@@ -176,27 +176,23 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEna
     },
   );
 
-  if (
-    (!hasFilters && dataPreloaded && dataPreloaded.project) ||
-    (hasFilters && data && data.project)
-  ) {
-    const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
-    const defaultUsers: any =
-      dataPreloaded && !hasFilters ? dataPreloaded.defaultUsers : data.defaultUsers;
-    const themes: any = dataPreloaded && !hasFilters ? dataPreloaded.themes : data.themes;
-
-    return (
-      <PickableList.Provider>
-        <ProjectAdminAnalysis project={project} defaultUsers={defaultUsers} themes={themes} />
-      </PickableList.Provider>
-    );
-  }
-
   return (
-    <ReactPlaceholder
-      ready={false}
-      customPlaceholder={<ProjectAdminAnalysisPlaceholder hasError={!!error} fetchData={retry} />}
-    />
+    <Skeleton
+      isLoaded={
+        (!hasFilters && !!dataPreloaded && !!dataPreloaded.project) ||
+        (hasFilters && !data && !!data.project)
+      }
+      placeholder={<ProjectAdminAnalysisPlaceholder hasError={!!error} fetchData={retry} />}>
+      <PickableList.Provider>
+        <ProjectAdminAnalysis
+          project={dataPreloaded && !hasFilters ? dataPreloaded.project : data?.project}
+          defaultUsers={
+            dataPreloaded && !hasFilters ? dataPreloaded.defaultUsers : data?.defaultUsers
+          }
+          themes={dataPreloaded && !hasFilters ? dataPreloaded.themes : data?.themes}
+        />
+      </PickableList.Provider>
+    </Skeleton>
   );
 };
 

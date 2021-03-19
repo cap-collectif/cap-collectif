@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import ReactPlaceholder from 'react-placeholder';
 import type { DebateStepPageFaceToFace_step } from '~relay/DebateStepPageFaceToFace_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Heading from '~ui/Primitives/Heading';
@@ -10,6 +9,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionPlaceholder';
 import DebateOpinion from '~/components/Debate/Opinion/DebateOpinion';
 import Button from '~ds/Button/Button';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   +step: ?DebateStepPageFaceToFace_step,
@@ -36,9 +36,10 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
       <Heading as="h3" fontWeight="400" mb={6}>
         <FormattedMessage id="the.face-to-face" />
       </Heading>
-      <ReactPlaceholder
-        ready={!!step}
-        customPlaceholder={
+
+      <Skeleton
+        isLoaded={!!step}
+        placeholder={
           <Flex direction={['column', 'row']} spacing={4}>
             <DebateOpinionPlaceholder debateOpinionStatus="FOR" />
             <DebateOpinionPlaceholder debateOpinionStatus="AGAINST" />
@@ -67,7 +68,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
             )}
           </>
         ) : null}
-      </ReactPlaceholder>
+      </Skeleton>
     </AppBox>
   );
 };

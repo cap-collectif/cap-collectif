@@ -7,7 +7,7 @@ export default {
   component: SkeletonText,
   argTypes: {
     size: {
-      control: { type: 'select', required: true, options: ['sm', 'md', 'lg'] },
+      control: { type: 'select', options: ['sm', 'md', 'lg'] },
       defaultValue: 'md',
     },
   },

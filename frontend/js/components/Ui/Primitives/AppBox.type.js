@@ -298,6 +298,8 @@ type Accessibility = {|
 
 type ZIndex = {| +zIndex?: number |};
 
+type Opacity = {| +opacity?: Responsive<NumberOrString> |};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -339,4 +341,5 @@ export type AppBoxProps = {|
   ...Accessibility,
   ...ZIndex,
   ...LinkProps,
+  ...Opacity,
 |};

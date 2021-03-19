@@ -2,20 +2,16 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import ProjectAnalysisPreviewPlaceholder from '~/components/Project/Preview/ProjectAnlysisPreviewPlaceholder/ProjectAnalysisPreviewPlaceholder';
-import AnalysisPageContainerPlaceholder from './AnalysisPageContainerPlaceholder';
 import AnalysisPlaceholderDashboard, {
   TYPE_DASHBOARD,
 } from '~/components/Analysis/AnalysisPlaceholderdDashboard/AnalysisPlaceholderDashboard';
 import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery';
 import colors from '~/utils/colors';
 import type { StateValues } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
-
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import Skeleton from '~ds/Skeleton';
+import Flex from '~ui/Primitives/Layout/Flex';
+import AppBox from '~ui/Primitives/AppBox';
 
 const Header: StyledComponent<{ hasMarge: boolean }, {}, HTMLElement> = styled.header`
   display: flex;
@@ -27,18 +23,6 @@ const Header: StyledComponent<{ hasMarge: boolean }, {}, HTMLElement> = styled.h
     font-weight: bold;
     color: #000;
     margin: 0 0 20px 0;
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .tabs {
-    display: flex;
-    flex-direction: row;
-    opacity: 0.5;
   }
 
   span {
@@ -79,10 +63,10 @@ const renderHeader = (intl: IntlShape, isIndexPage?: boolean, selectedTab: ?stri
   if (!isIndexPage && selectedTab) {
     return (
       <>
-        <TextRow color={colors.borderColor} style={{ width: 250, height: 30, marginBottom: 30 }} />
+        <Skeleton.Text height="30px" width="250px" mb={7} />
 
-        <div className="header">
-          <div className="tabs">
+        <Flex direction="row" align="center" justify="space-between">
+          <Flex direction="row" opacity={0.5}>
             <Tab selected={selectedTab === 'TODO'}>
               {intl.formatMessage({ id: 'front.fast.filter.skeleton.to-do' })}
             </Tab>
@@ -92,10 +76,10 @@ const renderHeader = (intl: IntlShape, isIndexPage?: boolean, selectedTab: ?stri
             <Tab selected={selectedTab === 'ALL'}>
               {intl.formatMessage({ id: 'front.fast.filter.skeleton.all' })}
             </Tab>
-          </div>
+          </Flex>
 
-          <TextRow color={colors.borderColor} style={{ width: 250, height: 30 }} />
-        </div>
+          <Skeleton.Text height="30px" width="250px" />
+        </Flex>
       </>
     );
   }
@@ -112,10 +96,10 @@ const AnalysisPageContentPlaceholder = ({
   const intl = useIntl();
 
   return (
-    <AnalysisPageContainerPlaceholder>
+    <AppBox p="80px">
       <Header hasMarge={!isIndexPage}>{renderHeader(intl, isIndexPage, selectedTab)}</Header>
-      <Container>{renderContent({ isIndexPage, fetchData, hasError })}</Container>
-    </AnalysisPageContainerPlaceholder>
+      <Flex direction="column">{renderContent({ isIndexPage, fetchData, hasError })}</Flex>
+    </AppBox>
   );
 };
 

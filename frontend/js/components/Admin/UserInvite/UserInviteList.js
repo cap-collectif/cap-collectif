@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { usePagination } from 'relay-hooks';
-import ReactPlaceholder from 'react-placeholder';
 import { FormattedMessage } from 'react-intl';
 import * as S from '~/components/Admin/UserInvite/UserInviteAdminPage.style';
 import PickableList from '~ui/List/PickableList';
@@ -16,6 +15,7 @@ import PickableListPlaceholder from '~ui/List/PickableList/placeholder';
 import UserInviteListRow from '~/components/Admin/UserInvite/UserInviteListRow';
 import UserInviteListHeader from '~/components/Admin/UserInvite/UserInviteListHeader';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   ...RelayProps,
@@ -27,7 +27,7 @@ export const UserInviteList = ({ query: queryFragment }: Props) => {
   const invitations = query?.userInvitations.edges.map(edge => edge.node) ?? [];
   const hasInvitations = invitations.length > 0;
   return (
-    <ReactPlaceholder ready={!!query} customPlaceholder={<PickableListPlaceholder />}>
+    <Skeleton isLoaded={!!query} placeholder={<PickableListPlaceholder />}>
       <PickableList.Provider>
         <S.UserInviteList
           isLoading={isLoading}
@@ -59,7 +59,7 @@ export const UserInviteList = ({ query: queryFragment }: Props) => {
           </PickableList.Body>
         </S.UserInviteList>
       </PickableList.Provider>
-    </ReactPlaceholder>
+    </Skeleton>
   );
 };
 

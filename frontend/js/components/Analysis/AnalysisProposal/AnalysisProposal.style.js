@@ -5,12 +5,12 @@ import colors from '~/utils/colors';
 import Tag from '~ui/Labels/Tag';
 
 export const AnalysisProposalContainer: StyledComponent<
-  { hasSelection?: boolean },
+  { asPlaceholder?: boolean },
   {},
   typeof PickableList.Row,
 > = styled(PickableList.Row)`
   &:hover {
-    background: ${colors.paleGrey};
+    background: ${props => (props?.asPlaceholder ? 'white' : colors.paleGrey)};
   }
 
   & > .pickableList-row-content {

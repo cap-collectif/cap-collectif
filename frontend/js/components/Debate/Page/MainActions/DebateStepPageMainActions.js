@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
-import ReactPlaceholder from 'react-placeholder';
 import type { DebateStepPageMainActions_step } from '~relay/DebateStepPageMainActions_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -12,6 +11,7 @@ import RemainingTime from '~/components/Utils/RemainingTime';
 import DebateStepPageMainActionsPlaceholder from './DebateStepPageMainActionPlaceholder';
 import DebateStepPageVoteAndShare from './DebateStepPageVoteAndShare';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   +step: ?DebateStepPageMainActions_step,
@@ -24,7 +24,7 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props) => {
 
   return (
     <AppBox id={step ? 'DebateStepPageMainActions' : 'DebateStepPageMainActionsLoading'}>
-      <ReactPlaceholder ready={!!step} customPlaceholder={<DebateStepPageMainActionsPlaceholder />}>
+      <Skeleton isLoaded={!!step} placeholder={<DebateStepPageMainActionsPlaceholder />}>
         <Flex direction="column" alignItems="center" spacing={4}>
           {stepClosed && (
             <Tag variantType="badge" variant="neutral-gray" icon="CLOCK">
@@ -43,7 +43,7 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props) => {
           </Heading>
           {step && <DebateStepPageVoteAndShare isMobile={isMobile} step={step} />}
         </Flex>
-      </ReactPlaceholder>
+      </Skeleton>
     </AppBox>
   );
 };

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import type { CampaignsStateValues } from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign.reducer';
 import {
   Header,
@@ -14,7 +13,7 @@ import {
 import PickableList from '~ui/List/PickableList';
 import Collapsable from '~ui/Collapsable';
 import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery';
-import colors from '~/utils/colors';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   hasError: boolean,
@@ -43,8 +42,8 @@ const DashboardCampaignPlaceholder = ({ selectedTab, fetchData, hasError }: Prop
           </Tab>
         </div>
         <div>
-          <TextRow color="#fff" style={{ width: 100, height: 30, marginRight: 15 }} />
-          <TextRow color="#fff" style={{ width: 250, height: 30 }} />
+          <Skeleton.Text size="lg" width="100px" bg="white" mr={4} />
+          <Skeleton.Text size="lg" width="250px" bg="white" />
         </div>
       </Header>
 
@@ -64,18 +63,9 @@ const DashboardCampaignPlaceholder = ({ selectedTab, fetchData, hasError }: Prop
             ) : (
               new Array(5).fill(null).map((value, idx) => (
                 <Item key={idx}>
-                  <TextRow
-                    color={colors.borderColor}
-                    style={{ width: 250, height: 15, marginBottom: 0, marginTop: 0 }}
-                  />
-                  <TextRow
-                    color={colors.borderColor}
-                    style={{ width: 100, height: 15, marginBottom: 8, marginTop: 8 }}
-                  />
-                  <TextRow
-                    color={colors.borderColor}
-                    style={{ width: 200, height: 15, marginBottom: 0, marginTop: 0 }}
-                  />
+                  <Skeleton.Text size="md" width="250px" />
+                  <Skeleton.Text size="md" width="100px" my={2} />
+                  <Skeleton.Text size="md" width="200px" />
                 </Item>
               ))
             )}

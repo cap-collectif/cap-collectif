@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '~/createRelayEnvironment';
 import type {
@@ -20,6 +19,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Tag from '~ds/Tag/Tag';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
+import Skeleton from '~ds/Skeleton';
 
 const listMailingList = ({
   error,
@@ -29,19 +29,14 @@ const listMailingList = ({
   ...ReactRelayReadyState,
   props: ?EmailingListPageQueryResponse,
 }) => {
-  if (props) {
-    return (
+  return (
+    <Skeleton
+      isLoaded={!!props}
+      placeholder={<DashboardMailingListPlaceholder hasError={!!error} fetchData={retry} />}>
       <PickableList.Provider>
         <DashboardMailingList query={props} />
       </PickableList.Provider>
-    );
-  }
-
-  return (
-    <ReactPlaceholder
-      ready={false}
-      customPlaceholder={<DashboardMailingListPlaceholder hasError={!!error} fetchData={retry} />}
-    />
+    </Skeleton>
   );
 };
 

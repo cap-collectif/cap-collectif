@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import ReactPlaceholder from 'react-placeholder';
 import { useHistory } from 'react-router-dom';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
@@ -15,6 +14,7 @@ import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery';
 import VoteTabQuery from './VoteTab/VoteTabQuery';
 import Heading from '~ui/Primitives/Heading';
 import FaceToFacePlaceholder from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/FaceToFace/FaceToFacePlaceholder';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   hasContributionsStep: boolean,
@@ -53,10 +53,9 @@ export const ProjectAdminDebate = ({
           </Accordion.Button>
 
           <Accordion.Panel>
-            <ReactPlaceholder ready={!!debate} customPlaceholder={<FaceToFacePlaceholder />}>
-              {/* Flow doesn't understand that the component is only render when props are ready */}
-              {debate && <FaceToFace debate={debate} />}
-            </ReactPlaceholder>
+            <Skeleton isLoaded={!!debate} placeholder={<FaceToFacePlaceholder />}>
+              {debate ? <FaceToFace debate={debate} /> : null}
+            </Skeleton>
           </Accordion.Panel>
         </Accordion.Item>
 

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
-import ReactPlaceholder from 'react-placeholder';
 import { FormattedMessage } from 'react-intl';
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
@@ -12,11 +11,12 @@ import type { DebateStepPageLinkedArticles_step } from '~relay/DebateStepPageLin
 import AppBox from '~ui/Primitives/AppBox';
 import Heading from '~ui/Primitives/Heading';
 import Flex from '~ui/Primitives/Layout/Flex';
-import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionPlaceholder';
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
 import Button from '~ds/Button/Button';
 import DebateStepPageLinkedArticlesDrawer from '~/components/Debate/Page/Drawers/DebateStepPageLinkedArticlesDrawer';
 import { DATE_SHORT_LOCALIZED_FORMAT } from '~/shared/date';
+import Skeleton from '~ds/Skeleton';
+import DebateArticlePlaceholder from './DebateArticlePlaceholder';
 
 type Props = {|
   +step: ?DebateStepPageLinkedArticles_step,
@@ -63,12 +63,13 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
           </Button>
         )}
       </Flex>
-      <ReactPlaceholder
-        ready={!!step}
-        customPlaceholder={
+      <Skeleton
+        isLoaded={!!step}
+        placeholder={
           <Flex direction={['column', 'row']} spacing={4}>
-            <DebateOpinionPlaceholder debateOpinionStatus="FOR" />
-            <DebateOpinionPlaceholder debateOpinionStatus="AGAINST" />
+            <DebateArticlePlaceholder />
+            <DebateArticlePlaceholder />
+            <DebateArticlePlaceholder />
           </Flex>
         }>
         {articles && articles.length > 0 && (
@@ -121,7 +122,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
               ))}
           </StyledSlider>
         )}
-      </ReactPlaceholder>
+      </Skeleton>
     </AppBox>
   );
 };

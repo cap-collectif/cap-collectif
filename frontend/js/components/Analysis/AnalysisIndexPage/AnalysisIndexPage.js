@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '~/createRelayEnvironment';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
@@ -25,6 +24,7 @@ import type {
   ProposalOrderField,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
 import type { AnalysisProjectPageProposalsPaginatedQueryVariables } from '~relay/AnalysisProjectPageProposalsPaginatedQuery.graphql';
+import Skeleton from '~ds/Skeleton';
 
 const getSortField = (sortType: SortValues): ProposalOrderField => {
   switch (sortType) {
@@ -90,82 +90,79 @@ export const renderComponent = ({
   parameters: AnalysisProjectPageParameters,
   language: string,
 }) => {
-  if (props) {
-    const { viewerAssignedProjectsToAnalyse: projects, themes, defaultUsers } = props;
-    const languageUrl: string = language.split('-')[0];
-    const allPaths = Object.values(PATHS).map(v => String(v));
+  const languageUrl: string = language.split('-')[0];
+  const allPaths: string[] = Object.values(PATHS).map(v => String(v));
+  const hasError: boolean = !!error || (!!props && !props?.viewerAssignedProjectsToAnalyse);
 
-    /**
-     * Why the Redirect from="/evaluations" ?
-     * We have to force the language in url to be sure of the basename for the url
-     */
-    if (projects && projects.length > 0) {
-      return (
-        <Router basename={`/${languageUrl}${BASE_URL_ANALYSIS}`}>
-          <ScrollToTop />
+  const projects = props?.viewerAssignedProjectsToAnalyse || [];
+  const themes = props?.themes || null;
+  const defaultUsers = props?.defaultUsers || null;
 
-          <Route
-            exact
-            path={allPaths}
-            component={routeProps => (
-              <AnalysisHeader countProject={projects.length} {...routeProps} />
-            )}
-          />
-
-          <Switch>
-            <Redirect from="/evaluations" to="/" exact strict />
-
-            <Redirect
-              from={`${BASE_URL_ANALYSIS}${PATHS.PROJECT}`}
-              to={PATHS.PROJECT}
-              exact
-              strict
-            />
-
-            <Route exact path={PATHS.INDEX}>
-              {projects.length === 1 ? (
-                <Redirect to={`/project/${projects[0].slug}`} />
-              ) : (
-                <AnalysisListProjectPage projects={projects} />
-              )}
-            </Route>
-
-            <Route
-              exact
-              path={PATHS.PROJECT}
-              component={routeProps => (
-                <AnalysisProjectPage
-                  defaultUsers={defaultUsers}
-                  project={projects.find(
-                    ({ slug }) => slug === routeProps.match.params.projectSlug,
-                  )}
-                  themes={themes}
-                  {...routeProps}
-                />
-              )}
-            />
-          </Switch>
-        </Router>
-      );
-    }
-  }
-
-  const hasError = !!error || (!!props && !props?.viewerAssignedProjectsToAnalyse);
-  const isIndexPage = !window.location.pathname.includes('project');
-
+  /**
+   * Why the Redirect from="/evaluations" ?
+   * We have to force the language in url to be sure of the basename for the url
+   */
   return (
-    <ReactPlaceholder
-      ready={false}
-      customPlaceholder={
-        <AnalysisPageContentPlaceholder
-          isIndexPage={isIndexPage}
-          hasError={hasError}
-          fetchData={retry}
-          selectedTab={isIndexPage ? null : parameters.filters.state}
+    <Router basename={`/${languageUrl}${BASE_URL_ANALYSIS}`}>
+      <ScrollToTop />
+
+      <Route
+        exact
+        path={allPaths}
+        component={routeProps => (
+          <AnalysisHeader countProject={projects.length || 0} {...routeProps} />
+        )}
+      />
+
+      <Switch>
+        <Redirect from="/evaluations" to="/" exact strict />
+
+        <Redirect from={`${BASE_URL_ANALYSIS}${PATHS.PROJECT}`} to={PATHS.PROJECT} exact strict />
+
+        <Route exact path={PATHS.INDEX}>
+          {projects.length === 1 ? (
+            <Redirect to={`/project/${projects[0].slug}`} />
+          ) : (
+            <Skeleton
+              isLoaded={projects && projects.length > 0}
+              placeholder={
+                <AnalysisPageContentPlaceholder
+                  isIndexPage
+                  hasError={hasError}
+                  fetchData={retry}
+                  selectedTab={null}
+                />
+              }>
+              <AnalysisListProjectPage projects={projects} />
+            </Skeleton>
+          )}
+        </Route>
+
+        <Route
+          exact
+          path={PATHS.PROJECT}
+          component={routeProps => (
+            <Skeleton
+              isLoaded={projects && projects.length > 0}
+              placeholder={
+                <AnalysisPageContentPlaceholder
+                  isIndexPage={false}
+                  hasError={hasError}
+                  fetchData={retry}
+                  selectedTab={parameters.filters.state}
+                />
+              }>
+              <AnalysisProjectPage
+                defaultUsers={defaultUsers}
+                project={projects.find(({ slug }) => slug === routeProps.match.params.projectSlug)}
+                themes={themes}
+                {...routeProps}
+              />
+            </Skeleton>
+          )}
         />
-      }>
-      {null}
-    </ReactPlaceholder>
+      </Switch>
+    </Router>
   );
 };
 

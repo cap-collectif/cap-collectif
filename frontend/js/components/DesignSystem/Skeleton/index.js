@@ -6,14 +6,14 @@ import SkeletonText from '~ds/Skeleton/text';
 import SkeletonCircle from '~ds/Skeleton/circle';
 
 export type SkeletonProps = {|
-  +isLoaded: boolean,
+  +isLoaded: ?boolean,
   +children: React.Node,
   +placeholder: React.Node,
   +animate?: boolean,
 |};
 
 const Skeleton = ({
-  isLoaded,
+  isLoaded = false,
   children,
   animate = true,
   placeholder,
@@ -29,7 +29,7 @@ const Skeleton = ({
       </motion.div>
     ) : animate ? (
       <motion.div
-        animate={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
         transition={{ duration: 1, repeatType: 'reverse', repeat: Infinity }}>
         {placeholder}
       </motion.div>

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { useQuery } from 'relay-hooks';
-import ReactPlaceholder from 'react-placeholder';
 import { createFragmentContainer, graphql } from 'react-relay';
 import isEqual from 'lodash/isEqual';
 import type {
@@ -18,6 +17,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import ArgumentHeaderTab from './ArgumentHeaderTab';
 import ArgumentHeaderTabPlaceholder from './ArgumentHeaderTabPlaceholder';
 import ArgumentTabPlaceholder from './ArgumentTabPlaceholder';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   +debate: ?ArgumentTabQuery_debate,
@@ -96,21 +96,18 @@ const ArgumentTabQuery = ({ debate, debateStep }: Props) => {
 
   return (
     <Flex direction="column">
-      <ReactPlaceholder
-        ready={!!debate && !!debateStep}
-        customPlaceholder={
-          <ArgumentHeaderTabPlaceholder state={parameters.filters.argument.state} />
-        }>
+      <Skeleton
+        isLoaded={!!debate && !!debateStep}
+        placeholder={<ArgumentHeaderTabPlaceholder state={parameters.filters.argument.state} />}>
         {/* Flow doesn't understand that the component is only render when props are ready */}
         {!!debate && !!debateStep && <ArgumentHeaderTab debate={debate} debateStep={debateStep} />}
-      </ReactPlaceholder>
+      </Skeleton>
 
-      <ReactPlaceholder
-        ready={(hasFilters && data) || (!hasFilters && debate)}
-        customPlaceholder={<ArgumentTabPlaceholder />}>
-        {/* Flow doesn't understand that the component is only render when props are ready */}
-        {((hasFilters && data) || (!hasFilters && debate)) && <ArgumentTab debate={dataDebate} />}
-      </ReactPlaceholder>
+      <Skeleton
+        isLoaded={(hasFilters && !!data) || (!hasFilters && !!debate)}
+        placeholder={<ArgumentTabPlaceholder />}>
+        <ArgumentTab debate={dataDebate} />
+      </Skeleton>
     </Flex>
   );
 };

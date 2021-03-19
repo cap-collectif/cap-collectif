@@ -75,15 +75,17 @@ const AnalysisPlaceholderDashboard = ({ type, fetchData, hasError }: Props) => {
           {hasError ? (
             <ErrorQuery retry={fetchData} />
           ) : (
-            new Array(10).fill(null).map((value, idx) =>
-              isParticipant ? (
-                <AnalysisPlaceholderParticipant rowKey={idx} key={idx} />
-              ) : (
-                <AnalysisPlaceholderProposal rowKey={idx} key={idx}>
-                  {renderContentProposal(type)}
-                </AnalysisPlaceholderProposal>
-              ),
-            )
+            new Array(10)
+              .fill(null)
+              .map((value, idx) =>
+                isParticipant ? (
+                  <AnalysisPlaceholderParticipant rowKey={idx} key={idx} />
+                ) : (
+                  <AnalysisPlaceholderProposal key={idx}>
+                    {renderContentProposal(type)}
+                  </AnalysisPlaceholderProposal>
+                ),
+              )
           )}
         </ContentContainer>
       </PickableList.Body>

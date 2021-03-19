@@ -4,9 +4,9 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
 <AppBox
   id="DebateStepPageMainActions"
 >
-  <ReactPlaceholder
-    customPlaceholder={<DebateStepPageMainActionsPlaceholder />}
-    ready={true}
+  <Skeleton
+    isLoaded={true}
+    placeholder={<DebateStepPageMainActionsPlaceholder />}
   >
     <ForwardRef
       alignItems="center"
@@ -39,7 +39,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
         }
       />
     </ForwardRef>
-  </ReactPlaceholder>
+  </Skeleton>
 </AppBox>
 `;
 
@@ -47,9 +47,9 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
 <AppBox
   id="DebateStepPageMainActions"
 >
-  <ReactPlaceholder
-    customPlaceholder={<DebateStepPageMainActionsPlaceholder />}
-    ready={true}
+  <Skeleton
+    isLoaded={true}
+    placeholder={<DebateStepPageMainActionsPlaceholder />}
   >
     <ForwardRef
       alignItems="center"
@@ -82,6 +82,6 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
         }
       />
     </ForwardRef>
-  </ReactPlaceholder>
+  </Skeleton>
 </AppBox>
 `;

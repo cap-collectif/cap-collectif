@@ -3,7 +3,6 @@ import * as React from 'react';
 import { useQuery } from 'relay-hooks';
 import { createFragmentContainer, graphql } from 'react-relay';
 import isEqual from 'lodash/isEqual';
-import ReactPlaceholder from 'react-placeholder';
 import type { VoteTabQueryResponse, VoteTabQueryVariables } from '~relay/VoteTabQuery.graphql';
 import type { VoteTabQuery_debate } from '~relay/VoteTabQuery_debate.graphql';
 import type { VoteTabQuery_debateStep } from '~relay/VoteTabQuery_debateStep.graphql';
@@ -15,6 +14,7 @@ import { useProjectAdminDebateContext } from '~/components/Admin/Project/Project
 import Flex from '~ui/Primitives/Layout/Flex';
 import VoteHeaderTabPlaceholder from './VoteHeaderTabPlaceholder';
 import VoteTabPlaceholder from './VoteTabPlaceholder';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   +debate: ?VoteTabQuery_debate,
@@ -88,21 +88,18 @@ const VoteTabQuery = ({ debate, debateStep }: Props) => {
 
   return (
     <Flex direction="column">
-      <ReactPlaceholder
-        ready={!!debate && !!debateStep}
-        customPlaceholder={<VoteHeaderTabPlaceholder state={parameters.filters.vote.state} />}>
+      <Skeleton
+        isLoaded={!!debate && !!debateStep}
+        placeholder={<VoteHeaderTabPlaceholder state={parameters.filters.vote.state} />}>
         {/* Flow doesn't understand that the component is only render when props are ready */}
         {!!debate && !!debateStep && <VoteHeaderTab debate={debate} debateStep={debateStep} />}
-      </ReactPlaceholder>
+      </Skeleton>
 
-      <ReactPlaceholder
-        ready={(hasFilters && data) || (!hasFilters && debate)}
-        customPlaceholder={<VoteTabPlaceholder />}>
-        {/* Flow doesn't understand that the component is only render when props are ready */}
-        {((hasFilters && data) || (!hasFilters && debate)) && (
-          <VoteTab debate={dataDebate} debateStep={dataDebateStep} />
-        )}
-      </ReactPlaceholder>
+      <Skeleton
+        isLoaded={(hasFilters && !!data) || (!hasFilters && !!debate)}
+        placeholder={<VoteTabPlaceholder />}>
+        <VoteTab debate={dataDebate} debateStep={dataDebateStep} />
+      </Skeleton>
     </Flex>
   );
 };

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
-import ReactPlaceholder from 'react-placeholder';
 import environment from '~/createRelayEnvironment';
 import { Container, Header, Content } from './EmailingCampaignPage.style';
 import DashboardCampaign from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign';
@@ -16,6 +15,7 @@ import Tag from '~ds/Tag/Tag';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import { createQueryVariables } from './utils';
+import Skeleton from '~ds/Skeleton';
 
 const listCampaign = ({
   error,
@@ -27,25 +27,20 @@ const listCampaign = ({
   props: ?EmailingCampaignPageQueryResponse,
   parameters: DashboardParameters,
 }) => {
-  if (props) {
-    return (
-      <PickableList.Provider>
-        <DashboardCampaign query={props} />
-      </PickableList.Provider>
-    );
-  }
-
   return (
-    <ReactPlaceholder
-      ready={false}
-      customPlaceholder={
+    <Skeleton
+      isLoaded={!!props}
+      placeholder={
         <DashboardCampaignPlaceholder
           hasError={!!error}
           fetchData={retry}
           selectedTab={parameters.filters.state}
         />
-      }
-    />
+      }>
+      <PickableList.Provider>
+        <DashboardCampaign query={props} />
+      </PickableList.Provider>
+    </Skeleton>
   );
 };
 

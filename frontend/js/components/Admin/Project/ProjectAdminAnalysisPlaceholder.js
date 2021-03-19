@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import styled, { type StyledComponent } from 'styled-components';
 import AnalysisPlaceholderDashboard, {
   TYPE_DASHBOARD,
 } from '~/components/Analysis/AnalysisPlaceholderdDashboard/AnalysisPlaceholderDashboard';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   hasError: boolean,
@@ -31,10 +31,10 @@ const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
 const ProjectAdminAnalysisPlaceholder = ({ hasError, fetchData }: Props) => (
   <>
     <Header>
-      <TextRow color="#fff" style={{ width: 450, height: 15 }} />
+      <Skeleton.Text size="sm" bg="white" width="450px" />
       <div>
-        <TextRow color="#fff" style={{ width: 100, height: 30, marginRight: 15 }} />
-        <TextRow color="#fff" style={{ width: 250, height: 30 }} />
+        <Skeleton.Text bg="white" width="100px" height={7} mr={4} />
+        <Skeleton.Text bg="white" width="250px" height={7} mr={4} />
       </div>
     </Header>
     <AnalysisPlaceholderDashboard

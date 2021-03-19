@@ -1,41 +1,30 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
-import { RoundShape } from 'react-placeholder/lib/placeholders';
-import colors from '~/utils/colors';
-import { Avatar, AvatarContainer, ProgressState } from '../AnalysisPlaceholderDashboard.style';
-import { blink } from '~/utils/styles/keyframes';
-
-export const ContentAnalysisContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  animation: ${blink} 0.6s linear infinite alternate;
-`;
+import Flex from '~ui/Primitives/Layout/Flex';
+import AppBox from '~ui/Primitives/AppBox';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {
   isAdmin?: boolean,
 };
 
+const Avatar = () => (
+  <AppBox position="relative" p={1}>
+    <Skeleton.Circle size={6} />
+    <Skeleton.Circle position="absolute" right={0} bottom={1} size={2} bg="gray.500" />
+  </AppBox>
+);
+
 const Content = ({ isAdmin }: Props) => (
-  <ContentAnalysisContainer>
-    {isAdmin && <ProgressState color={colors.borderColor} />}
-    <AvatarContainer>
-      <Avatar>
-        <RoundShape color={colors.borderColor} />
-        <RoundShape color={colors.secondGray} />
-      </Avatar>
-      <Avatar>
-        <RoundShape color={colors.borderColor} />
-        <RoundShape color={colors.secondGray} />
-      </Avatar>
-      <Avatar>
-        <RoundShape color={colors.borderColor} />
-        <RoundShape color={colors.secondGray} />
-      </Avatar>
-    </AvatarContainer>
-  </ContentAnalysisContainer>
+  <Flex direction="row" align="center" justify="flex-end">
+    {isAdmin && <Skeleton.Text size="lg" width="60px" borderRadius="20px" mr={7} />}
+
+    <Flex direction="row" spacing={8}>
+      <Avatar />
+      <Avatar />
+      <Avatar />
+    </Flex>
+  </Flex>
 );
 
 export default Content;

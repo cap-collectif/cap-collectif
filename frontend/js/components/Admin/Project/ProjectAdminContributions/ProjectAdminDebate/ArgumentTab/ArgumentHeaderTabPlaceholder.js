@@ -29,7 +29,7 @@ const ArgumentHeaderTabPlaceholder = ({ state }: Props) => {
           )}
         </InlineSelect.Choice>
         <InlineSelect.Choice value="TRASHED">
-          {intl.formatMessage({ id: 'filter.count.status.trash' }, { num: 0 })}
+          {intl.formatMessage({ id: 'global.trash' })}
         </InlineSelect.Choice>
       </InlineSelect>
 
