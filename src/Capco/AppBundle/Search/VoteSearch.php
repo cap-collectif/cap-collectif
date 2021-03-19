@@ -397,6 +397,7 @@ class VoteSearch extends Search
             $this->addObjectTypeFilter($query, $this->type);
         }
         $query->setSource(['id', 'objectType']);
+        $query->setSize($limit);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
 

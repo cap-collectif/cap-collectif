@@ -555,6 +555,42 @@ Object {
             "ipAddress": null,
           },
         },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNg==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNw==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAyMA==",
+            "ipAddress": null,
+          },
+        },
       ],
     },
   },
@@ -623,6 +659,36 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwNA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNg==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNw==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOA==",
+            "ipAddress": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOQ==",
             "ipAddress": null,
           },
         },
@@ -703,6 +769,48 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlVm90ZToxMzAwNA==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNQ==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNg==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNw==",
+            "origin": "WIDGET",
+            "widgetOriginUrl": "www.lemonde.fr",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOA==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwOQ==",
+            "origin": "INTERNAL",
+            "widgetOriginUrl": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAyMA==",
             "origin": "INTERNAL",
             "widgetOriginUrl": null,
           },
