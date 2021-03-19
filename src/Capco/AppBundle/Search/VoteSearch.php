@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
@@ -252,8 +253,8 @@ class VoteSearch extends Search
         );
     }
 
-    public function countProjectVotes(
-        Project $project,
+    public function countStepVotes(
+        AbstractStep $step,
         array $filters,
         int $limit,
         ?array $orderBy = null,
@@ -266,8 +267,8 @@ class VoteSearch extends Search
         unset($filters['anonymous']);
 
         return $this->searchEntityVotes(
-            $project->getId(),
-            'project.id',
+            $step->getId(),
+            'step.id',
             $limit,
             $filters,
             $orderBy,

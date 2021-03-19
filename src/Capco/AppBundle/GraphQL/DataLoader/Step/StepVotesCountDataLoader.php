@@ -86,11 +86,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
         }
 
         if ($step instanceof DebateStep) {
-            return $this->voteSearch->countProjectVotes(
-                $step->getProject(),
-                compact('anonymous'),
-                0
-            );
+            return $this->voteSearch->countStepVotes($step, compact('anonymous'), 0);
         }
 
         throw new \RuntimeException('Access denied');

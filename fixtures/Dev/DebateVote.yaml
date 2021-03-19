@@ -90,3 +90,17 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         type: AGAINST
         publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
+    debateMultiVote{7..11}:
+        id: <(14000 + $current)>
+        user: '@user<current()>'
+        debate: '@debateMulti1'
+        type: AGAINST
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt
+    debateMultiVote{12..22}:
+        id: <(14500 + $current)>
+        user: '@user<current()>'
+        debate: '@debateMulti2'
+        type: FOR
+        publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
+        createdAt: $publishedAt

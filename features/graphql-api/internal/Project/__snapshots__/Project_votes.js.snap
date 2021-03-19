@@ -32,3 +32,14 @@ Object {
   },
 }
 `;
+
+exports[`Internal.project.votes Retrieve project votes total count with multiple debates 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
+    "votes": Object {
+      "totalCount": 16,
+    },
+  },
+}
+`;

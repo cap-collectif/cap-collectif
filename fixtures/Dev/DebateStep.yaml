@@ -41,3 +41,23 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         endAt: <identity((new \DateTime('2020-10-01')))>
         debateType: WYSIWYG
         debateContent: 'Avant ou après ???'
+    debateStepMulti1:
+        __construct: ['@debateMulti1']
+        isAnonymousParticipationAllowed: true
+        id: debateStepMulti1
+        title: Pourquoi la vie ?
+        slug: pourquoi-la-vie
+        label: Pourquoi la vie ?
+        body: null
+        startAt: <identity((new \DateTime('2020-01-01')))>
+        endAt: <identity((new \DateTime('2020-10-01')))>
+    debateStepMulti2:
+        __construct: ['@debateMulti2']
+        isAnonymousParticipationAllowed: true
+        id: debateStepMulti2
+        title: Pourquoi la mort ?
+        slug: pourquoi-la-mort
+        label: Pourquoi la mort ?
+        body: null
+        startAt: <identity((new \DateTime('2020-01-01')))>
+        endAt: <identity((new \DateTime('2020-10-01')))>

@@ -7,3 +7,7 @@ Capco\AppBundle\Entity\Debate\Debate:
         id: debateConfinement
     debateWysiwyg:
         id: debateWysiwyg
+    debateMulti1:
+        id: debateMuti1
+    debateMulti2:
+        id: debateMulti2

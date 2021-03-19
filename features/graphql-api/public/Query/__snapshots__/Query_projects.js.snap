@@ -68,6 +68,26 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 16,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
+          "title": "Débats sur la vie",
+          "votes": Object {
+            "totalCount": 16,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 16,
           },
           "contributionsCount": 16,
@@ -82,32 +102,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 11,
-          },
-          "contributionsCount": 11,
-          "contributors": Object {
-            "totalCount": 2,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference45.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
-          "title": "Solidarité Covid-19",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 34,
+    "totalCount": 35,
   },
 }
 `;
@@ -207,7 +207,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 31,
+    "totalCount": 32,
   },
 }
 `;
@@ -300,17 +300,19 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
             "totalCount": 16,
           },
-          "contributionsCount": 16,
-          "contributors": Object {
-            "totalCount": 4,
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
           },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
-          "title": "Projet pour consolider les exports",
+          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
+          "title": "Débats sur la vie",
           "votes": Object {
-            "totalCount": 5,
+            "totalCount": 16,
           },
         },
       },
@@ -319,7 +321,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 31,
+    "totalCount": 32,
   },
 }
 `;

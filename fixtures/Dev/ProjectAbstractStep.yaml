@@ -379,3 +379,13 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@debateStepWysiwyg'
         project: '@projectWysiwyg'
         position: 1
+    pasMultiDebate1:
+        id: pasMultiDebate1
+        step: '@debateStepMulti1'
+        project: '@projectMultiDebate'
+        position: 1
+    pasMultiDebate2:
+        id: pasMultiDebate2
+        step: '@debateStepMulti2'
+        project: '@projectMultiDebate'
+        position: 2

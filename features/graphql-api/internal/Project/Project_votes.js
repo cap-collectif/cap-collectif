@@ -51,4 +51,17 @@ describe('Internal.project.votes', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+
+  it('Retrieve project votes total count with multiple debates', async () => {
+    await expect(
+      graphql(
+        ProjectVotesQuery,
+        {
+          projectId: toGlobalId('Project', 'projectMultiDebate'),
+          anonymous: false,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });
