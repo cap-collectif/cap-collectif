@@ -32,8 +32,8 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
         $locale = $request ? $request->getLocale() : $defaultLocale;
         /** @var CacheItemInterface $cachedItem */
         $cachedItem = $this->cache->getItem(self::getCacheKey($key, $locale));
-
-        if (!$cachedItem->isHit()) {
+        // sometimes, the cache failed, the item is hited but value is null. So, in this case we force to get the value
+        if (!$cachedItem->isHit() || ($cachedItem->isHit() && !$cachedItem->get())) {
             $data = $this->resolver->getValue($key, $locale);
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
             $this->cache->save($cachedItem);
