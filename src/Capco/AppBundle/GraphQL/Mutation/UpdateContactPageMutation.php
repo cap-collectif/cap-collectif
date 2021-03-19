@@ -14,6 +14,7 @@ use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Cache\CacheItemInterface;
 
 class UpdateContactPageMutation implements MutationInterface
 {
@@ -36,6 +37,7 @@ class UpdateContactPageMutation implements MutationInterface
     private RedisCache $cache;
     private MediaRepository $mediaRepository;
     private SiteParameterResolver $resolver;
+    private string $locale;
 
     public function __construct(
         SiteParameterRepository $siteParameterRepository,
@@ -43,7 +45,8 @@ class UpdateContactPageMutation implements MutationInterface
         RedisCache $cache,
         MediaRepository $mediaRepository,
         SiteImageRepository $imageRepository,
-        SiteParameterResolver $resolver
+        SiteParameterResolver $resolver,
+        string $locale
     ) {
         $this->resolver = $resolver;
         $this->em = $em;
@@ -51,6 +54,7 @@ class UpdateContactPageMutation implements MutationInterface
         $this->imageRepository = $imageRepository;
         $this->mediaRepository = $mediaRepository;
         $this->siteParameterRepository = $siteParameterRepository;
+        $this->locale = $locale;
     }
 
     public function __invoke(Argument $args): array
@@ -81,8 +85,10 @@ class UpdateContactPageMutation implements MutationInterface
 
         $this->em->flush();
         foreach ($updated as $dbKey) {
-            $data = $this->resolver->getValue($dbKey);
-            $cachedItem = $this->cache->getItem(SiteParameterRuntime::CACHE_KEY . $dbKey);
+            $this->cache->delete(SiteParameterRuntime::getCacheKey($dbKey, $this->locale));
+            $data = $this->resolver->getValue($dbKey , $this->locale);
+            /** @var CacheItemInterface $cachedItem */
+            $cachedItem = $this->cache->getItem(SiteParameterRuntime::getCacheKey($dbKey, $this->locale));
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
             $this->cache->save($cachedItem);
         }

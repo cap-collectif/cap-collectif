@@ -11,7 +11,7 @@ class RedisCache extends RedisAdapter
     public const ONE_HOUR = 3600;
     public const ONE_DAY = 50400;
 
-    private $client;
+    private ClientInterface $client;
 
     public function __construct(
         ClientInterface $redisClient,

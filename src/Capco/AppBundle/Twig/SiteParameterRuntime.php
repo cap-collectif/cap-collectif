@@ -31,7 +31,7 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
         $defaultLocale = $this->resolver->getDefaultLocale();
         $locale = $request ? $request->getLocale() : $defaultLocale;
         /** @var CacheItemInterface $cachedItem */
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY . $key . $locale);
+        $cachedItem = $this->cache->getItem(self::getCacheKey($key, $locale));
 
         if (!$cachedItem->isHit()) {
             $data = $this->resolver->getValue($key, $locale);
@@ -40,5 +40,10 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
         }
 
         return $cachedItem->get();
+    }
+
+    public static function getCacheKey(string $key, string $locale): string
+    {
+        return self::CACHE_KEY . $key . $locale;
     }
 }
