@@ -180,7 +180,7 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEna
     <Skeleton
       isLoaded={
         (!hasFilters && !!dataPreloaded && !!dataPreloaded.project) ||
-        (hasFilters && !data && !!data.project)
+        (hasFilters && !!data && !!data.project)
       }
       placeholder={<ProjectAdminAnalysisPlaceholder hasError={!!error} fetchData={retry} />}>
       <PickableList.Provider>
