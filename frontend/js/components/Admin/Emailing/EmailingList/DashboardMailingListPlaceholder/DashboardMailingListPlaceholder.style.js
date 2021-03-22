@@ -9,10 +9,6 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
   justify-content: flex-end;
   align-items: center;
   margin: 1rem 2rem;
-
-  .text-row {
-    margin-top: 0 !important;
-  }
 `;
 
 export const PickableHeader: StyledComponent<{}, {}, typeof PickableList.Header> = styled(

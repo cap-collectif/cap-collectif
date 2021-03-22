@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import ReactPlaceholder from 'react-placeholder';
-import { RoundShape, TextRow } from 'react-placeholder/lib/placeholders';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { connect } from 'react-redux';
@@ -18,6 +16,9 @@ import UserAvatar from '~/components/User/UserAvatar';
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
+import Skeleton from '~ds/Skeleton';
+import Flex from '~ui/Primitives/Layout/Flex';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {
   title: string,
@@ -104,10 +105,6 @@ const Informations: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     color: ${colors.darkText};
     word-break: break-word;
   }
-
-  h1 + div {
-    display: flex;
-  }
 `;
 
 const About: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -156,14 +153,15 @@ const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-const avatarPlaceholder = (
-  <div style={{ display: 'flex' }}>
-    <RoundShape color={colors.borderColor} style={{ width: 45, height: 45 }} />
-    <div style={{ marginLeft: 15 }}>
-      <TextRow color={colors.borderColor} style={{ width: 115, height: 15, marginTop: 5 }} />
-      <TextRow color={colors.borderColor} style={{ width: 200, height: 12, marginTop: 10 }} />
-    </div>
-  </div>
+const AvatarPlaceholder = () => (
+  <Flex direction="row" align="center">
+    <Skeleton.Circle mb={1} size="45px" />
+
+    <AppBox ml={4}>
+      <Skeleton.Text size="sm" mb={2} width="115px" />
+      <Skeleton.Text size="sm" width="200px" />
+    </AppBox>
+  </Flex>
 );
 
 export const ProposalPageHeader = ({
@@ -231,11 +229,8 @@ export const ProposalPageHeader = ({
         )}
         <Informations>
           <h1>{title}</h1>
-          <ReactPlaceholder
-            showLoadingAnimation
-            customPlaceholder={avatarPlaceholder}
-            ready={proposal !== null}>
-            <div>
+          <Skeleton placeholder={<AvatarPlaceholder />} isLoaded={proposal !== null}>
+            <Flex direction="row">
               <UserAvatar user={proposal?.author} />
               <About>
                 <div>{proposal?.author.username}</div>
@@ -249,8 +244,8 @@ export const ProposalPageHeader = ({
                   )}
                 </div>
               </About>
-            </div>
-          </ReactPlaceholder>
+            </Flex>
+          </Skeleton>
         </Informations>
         <ProposalPageHeaderButtons
           proposal={proposal}

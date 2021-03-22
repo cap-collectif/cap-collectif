@@ -3,7 +3,6 @@ import * as React from 'react';
 import { useQuery, graphql } from 'relay-hooks';
 import { createFragmentContainer } from 'react-relay';
 import isEqual from 'lodash/isEqual';
-import ReactPlaceholder from 'react-placeholder';
 import { connect } from 'react-redux';
 import type {
   ProjectAdminProposalsPageQueryResponse,
@@ -19,6 +18,7 @@ import ProjectAdminProposals, {
 } from '~/components/Admin/Project/ProjectAdminProposals';
 import { useProjectAdminProposalsContext } from './ProjectAdminPage.context';
 import ProjectAdminProposalsPlaceholder from './ProjectAdminProposalsPlaceholder';
+import Skeleton from '~ds/Skeleton';
 
 type ReduxProps = {|
   +proposalRevisionsEnabled: boolean,
@@ -215,31 +215,23 @@ const ProjectAdminProposalsPage = ({
     },
   );
 
-  if ((!hasFilters && dataPreloaded) || (hasFilters && data)) {
-    const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
-    const themes: any = dataPreloaded && !hasFilters ? dataPreloaded.themes : data.themes;
-
-    return (
-      <ProjectAdminProposals
-        project={project}
-        themes={themes}
-        hasContributionsStep={hasContributionsStep}
-        baseUrl={baseUrl}
-      />
-    );
-  }
-
   return (
-    <ReactPlaceholder
-      ready={false}
-      customPlaceholder={
+    <Skeleton
+      isLoaded={(!hasFilters && !!dataPreloaded) || (hasFilters && !!data)}
+      placeholder={
         <ProjectAdminProposalsPlaceholder
           hasError={!!error}
           fetchData={retry}
           selectedTab={parameters.filters.state}
         />
-      }
-    />
+      }>
+      <ProjectAdminProposals
+        project={dataPreloaded && !hasFilters ? dataPreloaded.project : data?.project}
+        themes={dataPreloaded && !hasFilters ? dataPreloaded.themes : data?.themes}
+        hasContributionsStep={hasContributionsStep}
+        baseUrl={baseUrl}
+      />
+    </Skeleton>
   );
 };
 

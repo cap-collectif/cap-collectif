@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import ReactPlaceholder from 'react-placeholder';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Map, Marker, TileLayer } from 'react-leaflet';
@@ -22,6 +20,8 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
+import Skeleton from '~ds/Skeleton';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {
   proposal: ProposalPageLocalisation_proposal,
@@ -30,11 +30,11 @@ type Props = {
 
 let L;
 
-const placeholder = (
-  <div style={{ marginLeft: 15 }}>
-    <TextRow color={colors.borderColor} style={{ width: '100%', height: 12, marginTop: 5 }} />
-    <TextRow color={colors.borderColor} style={{ width: '100%', height: 130, marginTop: 15 }} />
-  </div>
+const Placeholder = () => (
+  <AppBox ml={4}>
+    <Skeleton.Text width="100%" size="sm" mb={4} />
+    <Skeleton.Text width="100%" height="130px" />
+  </AppBox>
 );
 
 export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
@@ -56,15 +56,10 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
           <CategoryCircledIcon>
             <Icon name={ICON_NAME.pin} size={20} color={colors.secondaryGray} />
           </CategoryCircledIcon>
-          <h3>
-            <FormattedMessage id="form.label_neighborhood" />
-          </h3>
+          <FormattedMessage id="form.label_neighborhood" tagName="h3" />
         </CategoryTitle>
-        <ReactPlaceholder
-          showLoadingAnimation
-          customPlaceholder={placeholder}
-          ready={proposal !== null}>
-          {proposal?.address && config.canUseDOM && (
+        <Skeleton placeholder={<Placeholder />} isLoaded={proposal !== null}>
+          {proposal?.address && config.canUseDOM ? (
             <div className="proposal-map__block">
               <p>{proposal?.address.formatted}</p>
               <Map
@@ -95,8 +90,8 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
                 />
               </Map>
             </div>
-          )}
-        </ReactPlaceholder>
+          ) : null}
+        </Skeleton>
       </CategoryContainer>
     </Card>
   );

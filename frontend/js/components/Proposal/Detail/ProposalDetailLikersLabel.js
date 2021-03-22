@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Tag from '~/components/Ui/Labels/Tag';
 import type { ProposalDetailLikersLabel_proposal } from '~relay/ProposalDetailLikersLabel_proposal.graphql';
 import { MetadataPlaceHolder } from '~/components/Proposal/Page/Aside/ProposalPageMetadata.placeholder';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {
   proposal: ProposalDetailLikersLabel_proposal,
@@ -25,21 +26,23 @@ export class ProposalDetailLikersLabel extends React.Component<Props> {
 
     if (newDesign && (!proposal || proposal?.likers.length > 0)) {
       return (
-        <MetadataPlaceHolder ready={!!proposal}>
-          <span
-            style={{ fontSize: 16 }}
-            onClick={onClick}
-            onKeyDown={onClick}
-            role="button"
-            tabIndex="0">
-            <FormattedMessage
-              id="proposal.likers.count"
-              values={{
-                num: proposal?.likers.length,
-              }}
-            />
-          </span>
-        </MetadataPlaceHolder>
+        <AppBox ml="25px">
+          <MetadataPlaceHolder ready={!!proposal}>
+            <span
+              style={{ fontSize: 16 }}
+              onClick={onClick}
+              onKeyDown={onClick}
+              role="button"
+              tabIndex="0">
+              <FormattedMessage
+                id="proposal.likers.count"
+                values={{
+                  num: proposal?.likers.length,
+                }}
+              />
+            </span>
+          </MetadataPlaceHolder>
+        </AppBox>
       );
     }
 

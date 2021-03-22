@@ -2,7 +2,6 @@
 import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks';
-import ReactPlaceholder from 'react-placeholder';
 import type { ResultPreloadQuery, Query } from '~/types';
 import type {
   ProjectAdminParticipantTabQueryResponse,
@@ -15,6 +14,7 @@ import ProjectAdminParticipants, {
 import { useProjectAdminParticipantsContext } from './ProjectAdminParticipant.context';
 import PickableList from '~ui/List/PickableList';
 import ProjectAdminParticipantsPlaceholder from './ProjectAdminParticipantsPlaceholder';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   +projectId: string,
@@ -100,26 +100,19 @@ const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
     },
   );
 
-  if (
-    (!hasFilters && dataPreloaded && dataPreloaded.project) ||
-    (hasFilters && data && data.project)
-  ) {
-    const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
-
-    return (
-      <PickableList.Provider>
-        <ProjectAdminParticipants project={project} />
-      </PickableList.Provider>
-    );
-  }
-
   return (
-    <ReactPlaceholder
-      ready={false}
-      customPlaceholder={
-        <ProjectAdminParticipantsPlaceholder hasError={!!error} fetchData={retry} />
+    <Skeleton
+      isLoaded={
+        (!hasFilters && !!dataPreloaded && !!dataPreloaded.project) ||
+        (hasFilters && !!data && !!data.project)
       }
-    />
+      placeholder={<ProjectAdminParticipantsPlaceholder hasError={!!error} fetchData={retry} />}>
+      <PickableList.Provider>
+        <ProjectAdminParticipants
+          project={dataPreloaded && !hasFilters ? dataPreloaded.project : data?.project}
+        />
+      </PickableList.Provider>
+    </Skeleton>
   );
 };
 

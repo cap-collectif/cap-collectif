@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import ReactPlaceholder from 'react-placeholder';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
@@ -15,16 +13,18 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
+import AppBox from '~ui/Primitives/AppBox';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {
   proposal: ?ProposalPageDescription_proposal,
 };
 
-const placeholder = (
-  <div style={{ marginLeft: 15 }}>
-    <TextRow color={colors.borderColor} style={{ width: '100%', height: 12, marginTop: 5 }} />
-    <TextRow color={colors.borderColor} style={{ width: '50%', height: 12, marginTop: 15 }} />
-  </div>
+const Placeholder = () => (
+  <AppBox ml={4}>
+    <Skeleton.Text size="sm" width="100%" mb={4} />
+    <Skeleton.Text size="sm" width="50%" />
+  </AppBox>
 );
 
 export const ProposalPageDescription = ({ proposal }: Props) => {
@@ -36,17 +36,17 @@ export const ProposalPageDescription = ({ proposal }: Props) => {
           <CategoryCircledIcon paddingLeft={10}>
             <Icon name={ICON_NAME.fileText} size={20} color={colors.secondaryGray} />
           </CategoryCircledIcon>
-          <h3>
-            <FormattedMessage id="global.description" />
-          </h3>
+          <FormattedMessage id="global.description" tagName="h3" />
         </CategoryTitle>
-        {proposal?.summary && <><p style={{ fontWeight: 600 }}>{proposal?.summary}</p><br/></>}
-        <ReactPlaceholder
-          showLoadingAnimation
-          customPlaceholder={placeholder}
-          ready={proposal !== null}>
+        {proposal?.summary && (
+          <>
+            <p style={{ fontWeight: 600 }}>{proposal?.summary}</p>
+            <br />
+          </>
+        )}
+        <Skeleton placeholder={<Placeholder />} isLoaded={proposal !== null}>
           <WYSIWYGRender value={proposal?.body} />
-        </ReactPlaceholder>
+        </Skeleton>
       </CategoryContainer>
     </Card>
   );

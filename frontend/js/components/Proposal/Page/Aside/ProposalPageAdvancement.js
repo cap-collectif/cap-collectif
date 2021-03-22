@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import ReactPlaceholder from 'react-placeholder';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import ProposalDetailAdvancement, { type Step } from '../../Detail/ProposalDetailAdvancement';
 import type { ProposalPageAdvancement_proposal } from '~relay/ProposalPageAdvancement_proposal.graphql';
 import { Card } from '~/components/Proposal/Page/ProposalPage.style';
+import AppBox from '~ui/Primitives/AppBox';
+import Skeleton from '~ds/Skeleton';
 
 type Props = { proposal: ProposalPageAdvancement_proposal };
 
@@ -50,14 +50,14 @@ const AdvancementStepPlaceholderContainer: StyledComponent<
 const AdvancementStepPlaceholder = ({ isLast }: { isLast?: boolean }) => (
   <AdvancementStepPlaceholderContainer isLast={isLast}>
     <div />
-    <div style={{ marginLeft: 15 }}>
-      <TextRow color={colors.borderColor} style={{ width: 115, height: 15, marginTop: 0 }} />
-      <TextRow color={colors.borderColor} style={{ width: 150, height: 12, marginTop: 10 }} />
-    </div>
+    <AppBox ml={4}>
+      <Skeleton.Text size="sm" width="115px" mb={3} />
+      <Skeleton.Text height="12px" width="150px" />
+    </AppBox>
   </AdvancementStepPlaceholderContainer>
 );
 
-const advancementPlaceholder = (
+const AdvancementsPlaceholder = () => (
   <div>
     <AdvancementStepPlaceholder />
     <AdvancementStepPlaceholder />
@@ -95,15 +95,9 @@ export const ProposalPageAdvancement = ({ proposal }: Props) => {
     <Card id="ProposalPageAdvancement">
       <ProposalDetailAdvancementContainer>
         <FormattedMessage tagName="h4" id="proposal.detail.advancement" />
-        {proposal ? (
+        <Skeleton placeholder={<AdvancementsPlaceholder />} isLoaded={!!proposal}>
           <ProposalDetailAdvancement proposal={proposal} displayedSteps={displayedSteps} />
-        ) : (
-          <ReactPlaceholder
-            showLoadingAnimation
-            customPlaceholder={advancementPlaceholder}
-            ready={false}
-          />
-        )}
+        </Skeleton>
       </ProposalDetailAdvancementContainer>
     </Card>
   );

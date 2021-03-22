@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { RectShape } from 'react-placeholder/lib/placeholders';
 import Flex from '~ui/Primitives/Layout/Flex';
-import AppBox from '~ui/Primitives/AppBox';
 import Heading from '~ui/Primitives/Heading';
 import Text from '~ui/Primitives/Text';
+import Skeleton from '~ds/Skeleton';
 
 const randomWidth = () => Math.floor(Math.random() * 30) + 10;
 
@@ -19,26 +18,11 @@ const Step = () => {
       spacing={4}
       borderRadius="placeholder"
       align="center">
-      <AppBox
-        as={RectShape}
-        bg="gray.150"
-        borderRadius="placeholder"
-        style={{ width: '56px', height: '56px', marginRight: 0 }}
-      />
+      <Skeleton.Text width="56px" height="56px" />
 
       <Flex direction="column" spacing={2} flex={1}>
-        <AppBox
-          as={RectShape}
-          bg="gray.150"
-          borderRadius="placeholder"
-          style={{ width: `${randomWidth()}%`, height: '24px', marginRight: 0 }}
-        />
-        <AppBox
-          as={RectShape}
-          bg="gray.150"
-          borderRadius="placeholder"
-          style={{ width: `${randomWidth()}%`, height: '16px', marginRight: 0 }}
-        />
+        <Skeleton.Text width={`${randomWidth()}%`} size="lg" />
+        <Skeleton.Text width={`${randomWidth()}%`} size="sm" />
       </Flex>
     </Flex>
   );

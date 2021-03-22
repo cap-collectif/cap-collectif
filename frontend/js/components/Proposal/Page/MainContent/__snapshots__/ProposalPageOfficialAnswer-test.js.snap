@@ -47,45 +47,15 @@ exports[`<ProposalPageOfficialAnswer /> should render correctly 1`] = `
         year="numeric"
       />
     </ProposalPageOfficialAnswer__DecidorAvatarList>
-    <ReactPlaceholder
-      customPlaceholder={
-        <div
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
-        >
-          <TextRow
-            color="#e3e3e3"
-            style={
-              Object {
-                "height": 12,
-                "marginTop": 5,
-                "width": "100%",
-              }
-            }
-          />
-          <TextRow
-            color="#e3e3e3"
-            style={
-              Object {
-                "height": 12,
-                "marginTop": 15,
-                "width": "50%",
-              }
-            }
-          />
-        </div>
-      }
-      ready={true}
-      showLoadingAnimation={true}
+    <Skeleton
+      isLoaded={true}
+      placeholder={<Placeholder />}
     >
       <Connect(BodyText)
         maxLines={8}
         text="GG mec c accepté"
       />
-    </ReactPlaceholder>
+    </Skeleton>
   </ProposalPagestyle__CategoryContainer>
 </ProposalPagestyle__Card>
 `;

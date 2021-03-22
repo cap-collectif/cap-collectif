@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent, css } from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedNumber } from 'react-intl';
 import colors from '~/utils/colors';
@@ -9,6 +9,7 @@ import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_
 import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { MetadataPlaceHolder } from './ProposalPageMetadata.placeholder';
+import AppBox from '~ui/Primitives/AppBox';
 
 const ProposalPageMetadataContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 20px;
@@ -29,19 +30,6 @@ const Element: StyledComponent<{ iconOnly?: boolean }, {}, HTMLDivElement> = sty
   display: flex;
   font-size: 16px;
   color: ${colors.darkText};
-  ${({ iconOnly }) =>
-    iconOnly &&
-    css`
-      margin-left: 5px;
-
-      span {
-        margin-left: 5px;
-      }
-
-      div {
-        margin-left: 15px !important;
-      }
-    `}
 `;
 
 type Props = {
@@ -78,9 +66,12 @@ export const MetadataRow = ({
       paddingTop={categoryPaddingTop}>
       <Icon name={name} size={size} color={color} />
     </CategoryCircledIcon>
-    <MetadataPlaceHolder ready={ready}>
-      <span>{content}</span>
-    </MetadataPlaceHolder>
+
+    <AppBox ml="15px">
+      <MetadataPlaceHolder ready={ready}>
+        <span>{content}</span>
+      </MetadataPlaceHolder>
+    </AppBox>
   </Element>
 );
 

@@ -7,13 +7,10 @@ import ContentAnalysis from './Analysis/Content';
 import HeaderContribution from './Contribution/Header';
 import ContentContribution from './Contribution/Content';
 import HeaderParticipant from './Participant/Header';
-import {
-  PickableContainer,
-  PickableHeader,
-  ContentContainer,
-} from './AnalysisPlaceholderDashboard.style';
+import { PickableContainer, PickableHeader } from './AnalysisPlaceholderDashboard.style';
 import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery';
 import AnalysisPlaceholderParticipant from '~/components/Analysis/AnalysisPlaceholderParticipant/AnalysisPlaceholderParticipant';
+import AppBox from '~ui/Primitives/AppBox';
 
 export const TYPE_DASHBOARD: {
   BO_CONTRIBUTION: 'BO_CONTRIBUTION',
@@ -71,7 +68,7 @@ const AnalysisPlaceholderDashboard = ({ type, fetchData, hasError }: Props) => {
       </PickableHeader>
 
       <PickableList.Body>
-        <ContentContainer>
+        <AppBox bg="white">
           {hasError ? (
             <ErrorQuery retry={fetchData} />
           ) : (
@@ -87,7 +84,7 @@ const AnalysisPlaceholderDashboard = ({ type, fetchData, hasError }: Props) => {
                 ),
               )
           )}
-        </ContentContainer>
+        </AppBox>
       </PickableList.Body>
     </PickableContainer>
   );

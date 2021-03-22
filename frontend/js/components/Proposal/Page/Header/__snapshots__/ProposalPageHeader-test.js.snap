@@ -32,58 +32,13 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
       <h1>
         Titre
       </h1>
-      <ReactPlaceholder
-        customPlaceholder={
-          <div
-            style={
-              Object {
-                "display": "flex",
-              }
-            }
-          >
-            <RoundShape
-              color="#e3e3e3"
-              style={
-                Object {
-                  "height": 45,
-                  "width": 45,
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "marginLeft": 15,
-                }
-              }
-            >
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 15,
-                    "marginTop": 5,
-                    "width": 115,
-                  }
-                }
-              />
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 12,
-                    "marginTop": 10,
-                    "width": 200,
-                  }
-                }
-              />
-            </div>
-          </div>
-        }
-        ready={true}
-        showLoadingAnimation={true}
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
       >
-        <div>
+        <ForwardRef
+          direction="row"
+        >
           <Relay(Connect(UserAvatar))
             user={
               Object {
@@ -114,8 +69,8 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
               </span>
             </div>
           </ProposalPageHeader__About>
-        </div>
-      </ReactPlaceholder>
+        </ForwardRef>
+      </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
       hasVotableStep={true}
@@ -181,58 +136,13 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       <h1>
         Titre
       </h1>
-      <ReactPlaceholder
-        customPlaceholder={
-          <div
-            style={
-              Object {
-                "display": "flex",
-              }
-            }
-          >
-            <RoundShape
-              color="#e3e3e3"
-              style={
-                Object {
-                  "height": 45,
-                  "width": 45,
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "marginLeft": 15,
-                }
-              }
-            >
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 15,
-                    "marginTop": 5,
-                    "width": 115,
-                  }
-                }
-              />
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 12,
-                    "marginTop": 10,
-                    "width": 200,
-                  }
-                }
-              />
-            </div>
-          </div>
-        }
-        ready={true}
-        showLoadingAnimation={true}
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
       >
-        <div>
+        <ForwardRef
+          direction="row"
+        >
           <Relay(Connect(UserAvatar))
             user={
               Object {
@@ -263,8 +173,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               </span>
             </div>
           </ProposalPageHeader__About>
-        </div>
-      </ReactPlaceholder>
+        </ForwardRef>
+      </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
       hasVotableStep={true}
@@ -354,58 +264,13 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       <h1>
         Titre
       </h1>
-      <ReactPlaceholder
-        customPlaceholder={
-          <div
-            style={
-              Object {
-                "display": "flex",
-              }
-            }
-          >
-            <RoundShape
-              color="#e3e3e3"
-              style={
-                Object {
-                  "height": 45,
-                  "width": 45,
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "marginLeft": 15,
-                }
-              }
-            >
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 15,
-                    "marginTop": 5,
-                    "width": 115,
-                  }
-                }
-              />
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 12,
-                    "marginTop": 10,
-                    "width": 200,
-                  }
-                }
-              />
-            </div>
-          </div>
-        }
-        ready={true}
-        showLoadingAnimation={true}
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
       >
-        <div>
+        <ForwardRef
+          direction="row"
+        >
           <Relay(Connect(UserAvatar))
             user={
               Object {
@@ -436,8 +301,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               </span>
             </div>
           </ProposalPageHeader__About>
-        </div>
-      </ReactPlaceholder>
+        </ForwardRef>
+      </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
       hasVotableStep={true}
@@ -517,58 +382,13 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
       <h1>
         Titre
       </h1>
-      <ReactPlaceholder
-        customPlaceholder={
-          <div
-            style={
-              Object {
-                "display": "flex",
-              }
-            }
-          >
-            <RoundShape
-              color="#e3e3e3"
-              style={
-                Object {
-                  "height": 45,
-                  "width": 45,
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "marginLeft": 15,
-                }
-              }
-            >
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 15,
-                    "marginTop": 5,
-                    "width": 115,
-                  }
-                }
-              />
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 12,
-                    "marginTop": 10,
-                    "width": 200,
-                  }
-                }
-              />
-            </div>
-          </div>
-        }
-        ready={true}
-        showLoadingAnimation={true}
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
       >
-        <div>
+        <ForwardRef
+          direction="row"
+        >
           <Relay(Connect(UserAvatar))
             user={
               Object {
@@ -599,8 +419,8 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
               </span>
             </div>
           </ProposalPageHeader__About>
-        </div>
-      </ReactPlaceholder>
+        </ForwardRef>
+      </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
       hasVotableStep={true}
@@ -670,58 +490,13 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
       <h1>
         Titre
       </h1>
-      <ReactPlaceholder
-        customPlaceholder={
-          <div
-            style={
-              Object {
-                "display": "flex",
-              }
-            }
-          >
-            <RoundShape
-              color="#e3e3e3"
-              style={
-                Object {
-                  "height": 45,
-                  "width": 45,
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "marginLeft": 15,
-                }
-              }
-            >
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 15,
-                    "marginTop": 5,
-                    "width": 115,
-                  }
-                }
-              />
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 12,
-                    "marginTop": 10,
-                    "width": 200,
-                  }
-                }
-              />
-            </div>
-          </div>
-        }
-        ready={true}
-        showLoadingAnimation={true}
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
       >
-        <div>
+        <ForwardRef
+          direction="row"
+        >
           <Relay(Connect(UserAvatar))
             user={
               Object {
@@ -752,8 +527,8 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
               </span>
             </div>
           </ProposalPageHeader__About>
-        </div>
-      </ReactPlaceholder>
+        </ForwardRef>
+      </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
       hasVotableStep={true}
@@ -823,58 +598,13 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
       <h1>
         Titre
       </h1>
-      <ReactPlaceholder
-        customPlaceholder={
-          <div
-            style={
-              Object {
-                "display": "flex",
-              }
-            }
-          >
-            <RoundShape
-              color="#e3e3e3"
-              style={
-                Object {
-                  "height": 45,
-                  "width": 45,
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "marginLeft": 15,
-                }
-              }
-            >
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 15,
-                    "marginTop": 5,
-                    "width": 115,
-                  }
-                }
-              />
-              <TextRow
-                color="#e3e3e3"
-                style={
-                  Object {
-                    "height": 12,
-                    "marginTop": 10,
-                    "width": 200,
-                  }
-                }
-              />
-            </div>
-          </div>
-        }
-        ready={true}
-        showLoadingAnimation={true}
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
       >
-        <div>
+        <ForwardRef
+          direction="row"
+        >
           <Relay(Connect(UserAvatar))
             user={
               Object {
@@ -905,8 +635,8 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
               </span>
             </div>
           </ProposalPageHeader__About>
-        </div>
-      </ReactPlaceholder>
+        </ForwardRef>
+      </Skeleton>
     </ProposalPageHeader__Informations>
     <Relay(Connect(ProposalPageHeaderButtons))
       hasVotableStep={true}

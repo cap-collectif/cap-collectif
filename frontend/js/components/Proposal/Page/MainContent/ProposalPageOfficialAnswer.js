@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import ReactPlaceholder from 'react-placeholder';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
@@ -20,6 +18,8 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
+import Skeleton from '~ds/Skeleton';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {
   proposal: ?ProposalPageOfficialAnswer_proposal,
@@ -66,11 +66,11 @@ const DecidorDefaultAvatar: StyledComponent<{}, {}, typeof DefaultAvatar> = styl
   border-radius: 20px;
 `;
 
-const placeholder = (
-  <div style={{ marginLeft: 15 }}>
-    <TextRow color={colors.borderColor} style={{ width: '100%', height: 12, marginTop: 5 }} />
-    <TextRow color={colors.borderColor} style={{ width: '50%', height: 12, marginTop: 15 }} />
-  </div>
+const Placeholder = () => (
+  <AppBox ml={4}>
+    <Skeleton.Text width="100%" size="sm" mb={4} />
+    <Skeleton.Text width="50%" size="sm" />
+  </AppBox>
 );
 
 export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
@@ -129,12 +129,9 @@ export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
             minute="numeric"
           />
         </DecidorAvatarList>
-        <ReactPlaceholder
-          showLoadingAnimation
-          customPlaceholder={placeholder}
-          ready={proposal !== null}>
+        <Skeleton placeholder={<Placeholder />} isLoaded={proposal !== null}>
           {proposal && <BodyText maxLines={8} text={proposal.officialResponse?.body} />}
-        </ReactPlaceholder>
+        </Skeleton>
       </CategoryContainer>
     </Card>
   );

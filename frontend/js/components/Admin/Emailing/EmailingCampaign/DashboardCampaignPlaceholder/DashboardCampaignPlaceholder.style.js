@@ -23,10 +23,6 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
   span {
     margin-right: 10px;
   }
-
-  .text-row {
-    margin-top: 0 !important;
-  }
 `;
 
 export const Tab: StyledComponent<{ selected: boolean }, {}, HTMLSpanElement> = styled.span`

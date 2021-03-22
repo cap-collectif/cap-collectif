@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import styled, { type StyledComponent } from 'styled-components';
 import AnalysisPlaceholderDashboard, {
   TYPE_DASHBOARD,
 } from '~/components/Analysis/AnalysisPlaceholderdDashboard/AnalysisPlaceholderDashboard';
 import type { ProposalsStateValues } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import colors from '~/utils/colors';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   hasError: boolean,
@@ -33,10 +33,6 @@ const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
 
   span {
     margin-right: 10px;
-  }
-
-  .text-row {
-    margin-top: 0 !important;
   }
 `;
 
@@ -66,8 +62,8 @@ const ProjectAdminProposalsPlaceholder = ({ hasError, fetchData, selectedTab }: 
           </Tab>
         </div>
         <div>
-          <TextRow color="#fff" style={{ width: 100, height: 30, marginRight: 15 }} />
-          <TextRow color="#fff" style={{ width: 250, height: 30 }} />
+          <Skeleton.Text bg="white" width="100px" height="30px" mr={4} />
+          <Skeleton.Text bg="white" width="250px" height="30px" />
         </div>
       </Header>
       <AnalysisPlaceholderDashboard

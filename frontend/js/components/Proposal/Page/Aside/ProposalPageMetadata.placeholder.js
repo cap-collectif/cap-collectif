@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import ReactPlaceholder from 'react-placeholder';
-import colors from '~/utils/colors';
+import Skeleton from '~ds/Skeleton';
 
 export const MetadataPlaceHolder = ({
   ready,
@@ -9,18 +8,8 @@ export const MetadataPlaceHolder = ({
 }: {
   ready: boolean,
   children: React.Node,
-}) => (
-  <ReactPlaceholder
-    type="textRow"
-    style={{
-      marginTop: 3,
-      marginLeft: 10,
-      width: 150,
-      height: 12,
-    }}
-    showLoadingAnimation
-    color={colors.borderColor}
-    ready={ready}>
+}): React.Node => (
+  <Skeleton isLoaded={ready} placeholder={<Skeleton.Text size="sm" width="150px" />}>
     {children}
-  </ReactPlaceholder>
+  </Skeleton>
 );

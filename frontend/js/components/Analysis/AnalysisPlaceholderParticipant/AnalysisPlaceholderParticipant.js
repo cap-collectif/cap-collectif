@@ -1,42 +1,44 @@
 // @flow
 import * as React from 'react';
-import { RoundShape, TextRow } from 'react-placeholder/lib/placeholders';
 import colors from '~/utils/colors';
 import { Container } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant/ProjectAdminParticipant.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import {
-  TagContainer,
-  ListRowMeta,
-  InformationsContainer,
-} from './AnalysisPlaceholderParticipant.style';
+import Skeleton from '~ds/Skeleton';
+import Flex from '~ui/Primitives/Layout/Flex';
+
+const TagContainer = ({ children }: { children: React.Node }) => (
+  <Flex direction="row" align="center" mr={3}>
+    {children}
+  </Flex>
+);
 
 const AnalysisPlaceholderParticipant = () => (
   <Container isSelectable={false}>
-    <InformationsContainer>
-      <TextRow color={colors.borderColor} style={{ width: 150, height: 20, marginTop: 0 }} />
-      <TextRow color={colors.borderColor} style={{ width: 250 }} />
+    <Flex direction="column">
+      <Skeleton.Text width="150px" mb={2} size="md" />
+      <Skeleton.Text width="250px" size="sm" />
 
-      <ListRowMeta>
+      <Flex direction="row" align="center" mt={3}>
         <TagContainer>
           <Icon name={ICON_NAME.singleManFilled} size={12} color={colors.darkGray} />
-          <TextRow color={colors.borderColor} style={{ width: 50 }} />
+          <Skeleton.Text width="50px" size="sm" ml={2} />
         </TagContainer>
         <TagContainer>
           <Icon name={ICON_NAME.paperPlane} size={12} color={colors.darkGray} />
-          <TextRow color={colors.borderColor} style={{ width: 150 }} />
+          <Skeleton.Text width="150px" size="sm" ml={2} />
         </TagContainer>
         <TagContainer>
           <Icon name={ICON_NAME.like} size={12} color={colors.darkGray} />
-          <TextRow color={colors.borderColor} style={{ width: 50 }} />
+          <Skeleton.Text width="50px" size="sm" ml={2} />
         </TagContainer>
         <TagContainer>
           <Icon name={ICON_NAME.messageBubbleFilled} size={12} color={colors.darkGray} />
-          <TextRow color={colors.borderColor} style={{ width: 50 }} />
+          <Skeleton.Text width="50px" size="sm" ml={2} />
         </TagContainer>
-      </ListRowMeta>
-    </InformationsContainer>
+      </Flex>
+    </Flex>
 
-    <RoundShape color={colors.borderColor} style={{ width: 50, height: 50 }} />
+    <Skeleton.Circle size="50px" />
   </Container>
 );
 

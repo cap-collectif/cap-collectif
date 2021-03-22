@@ -22,10 +22,6 @@ const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
     display: flex;
     flex-direction: row;
   }
-
-  .text-row {
-    margin-top: 0 !important;
-  }
 `;
 
 const ProjectAdminAnalysisPlaceholder = ({ hasError, fetchData }: Props) => (

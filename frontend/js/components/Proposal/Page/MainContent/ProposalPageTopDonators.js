@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
 import { useFragment } from 'relay-hooks';
-import ReactPlaceholder from 'react-placeholder';
-import { TextRow } from 'react-placeholder/lib/placeholders';
 import { graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
@@ -15,6 +13,7 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {
   proposal: ?ProposalPageTopDonators_proposal$key,
@@ -40,12 +39,6 @@ const FRAGMENT = graphql`
     }
   }
 `;
-
-const placeholder = (
-  <div style={{ marginLeft: 15 }}>
-    <TextRow color={colors.borderColor} style={{ width: '100%', height: 130, marginTop: 15 }} />
-  </div>
-);
 
 export const ProposalPageTopDonators = ({ proposal: proposalFragment }: Props) => {
   const proposal = useFragment(FRAGMENT, proposalFragment);
@@ -81,10 +74,9 @@ export const ProposalPageTopDonators = ({ proposal: proposalFragment }: Props) =
             <FormattedMessage id="top-donators" />
           </h3>
         </CategoryTitle>
-        <ReactPlaceholder
-          showLoadingAnimation
-          customPlaceholder={placeholder}
-          ready={proposal !== null}>
+        <Skeleton
+          placeholder={<Skeleton.Text width="100%" height="130px" mt={4} ml={4} />}
+          isLoaded={proposal !== null}>
           {proposal?.tipsmeee && proposal.tipsmeee.topDonators.length > 0 && (
             <div>
               <ul>
@@ -99,7 +91,7 @@ export const ProposalPageTopDonators = ({ proposal: proposalFragment }: Props) =
               </ul>
             </div>
           )}
-        </ReactPlaceholder>
+        </Skeleton>
       </CategoryContainer>
     </Card>
   );

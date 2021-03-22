@@ -12,88 +12,93 @@ exports[`<ProposalPageAdvancement /> should render correctly 1`] = `
       tagName="h4"
       values={Object {}}
     />
-    <Relay(ProposalDetailAdvancement)
-      displayedSteps={
-        Array [
-          Object {
-            "__typename": "CollectStep",
-            "enabled": true,
-            "id": "1",
-            "isCurrent": false,
-            "isFuture": false,
-            "isPast": true,
-            "isSelected": true,
-            "timeRange": Object {
-              "endAt": "endAt",
-              "startAt": "startAt",
-            },
-            "timeless": false,
-            "title": "Collecte 1",
-          },
-          Object {
-            "__typename": "CollectStep",
-            "enabled": true,
-            "id": "2",
-            "isCurrent": true,
-            "isFuture": false,
-            "isPast": false,
-            "isSelected": true,
-            "timeRange": Object {
-              "endAt": "endAt",
-              "startAt": "startAt",
-            },
-            "timeless": false,
-            "title": "Collecte 2",
-          },
-        ]
-      }
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "progressSteps": Array [],
-          "project": Object {
-            "id": "4",
-            "steps": Array [
-              Object {
-                "__typename": "CollectStep",
-                "enabled": true,
-                "id": "1",
-                "timeRange": Object {
-                  "endAt": "endAt",
-                  "startAt": "startAt",
-                },
-                "timeless": false,
-                "title": "Collecte 1",
+    <Skeleton
+      isLoaded={true}
+      placeholder={<AdvancementsPlaceholder />}
+    >
+      <Relay(ProposalDetailAdvancement)
+        displayedSteps={
+          Array [
+            Object {
+              "__typename": "CollectStep",
+              "enabled": true,
+              "id": "1",
+              "isCurrent": false,
+              "isFuture": false,
+              "isPast": true,
+              "isSelected": true,
+              "timeRange": Object {
+                "endAt": "endAt",
+                "startAt": "startAt",
               },
-              Object {
-                "__typename": "CollectStep",
-                "enabled": true,
-                "id": "2",
-                "timeRange": Object {
-                  "endAt": "endAt",
-                  "startAt": "startAt",
+              "timeless": false,
+              "title": "Collecte 1",
+            },
+            Object {
+              "__typename": "CollectStep",
+              "enabled": true,
+              "id": "2",
+              "isCurrent": true,
+              "isFuture": false,
+              "isPast": false,
+              "isSelected": true,
+              "timeRange": Object {
+                "endAt": "endAt",
+                "startAt": "startAt",
+              },
+              "timeless": false,
+              "title": "Collecte 2",
+            },
+          ]
+        }
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "progressSteps": Array [],
+            "project": Object {
+              "id": "4",
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "enabled": true,
+                  "id": "1",
+                  "timeRange": Object {
+                    "endAt": "endAt",
+                    "startAt": "startAt",
+                  },
+                  "timeless": false,
+                  "title": "Collecte 1",
                 },
-                "timeless": false,
-                "title": "Collecte 2",
+                Object {
+                  "__typename": "CollectStep",
+                  "enabled": true,
+                  "id": "2",
+                  "timeRange": Object {
+                    "endAt": "endAt",
+                    "startAt": "startAt",
+                  },
+                  "timeless": false,
+                  "title": "Collecte 2",
+                },
+              ],
+            },
+            "selections": Array [
+              Object {
+                "status": Object {
+                  "color": "INFO",
+                  "name": "En cours",
+                },
+                "step": Object {
+                  "id": "2",
+                },
               },
             ],
-          },
-          "selections": Array [
-            Object {
-              "status": Object {
-                "color": "INFO",
-                "name": "En cours",
-              },
-              "step": Object {
-                "id": "2",
-              },
-            },
-          ],
-          "status": null,
+            "status": null,
+          }
         }
-      }
-    />
+      />
+    </Skeleton>
   </ProposalPageAdvancement__ProposalDetailAdvancementContainer>
 </ProposalPagestyle__Card>
 `;

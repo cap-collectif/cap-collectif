@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { usePreloadedQuery, graphql } from 'relay-hooks';
-import ReactPlaceholder from 'react-placeholder';
 import NoContributionsStep from '~/components/Admin/Project/ProjectAdminContributions/NoContributions/NoContributionsStep';
 import IndexContributions, { getContributionsPath } from './IndexContributions/IndexContributions';
 import AppBox from '~ui/Primitives/AppBox';
@@ -12,6 +11,7 @@ import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/Projec
 import { ProjectAdminDebateProvider } from './ProjectAdminDebate/ProjectAdminDebate.context';
 import ProjectAdminDebate from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate';
 import ContributionsPlaceholder from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/ContributionsPlaceholder';
+import Skeleton from '~ds/Skeleton';
 
 type Props = {|
   +dataPrefetch: ResultPreloadQuery,
@@ -114,13 +114,13 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
     <AppBox m={5}>
       <Switch>
         <Route exact path={baseUrl}>
-          <ReactPlaceholder ready={!!project} customPlaceholder={<ContributionsPlaceholder />}>
+          <Skeleton isLoaded={!!project} placeholder={<ContributionsPlaceholder />}>
             {!hasAtLeastOneContributionsStep ? (
               <NoContributionsStep project={project} />
             ) : (
               <IndexContributions project={project} />
             )}
-          </ReactPlaceholder>
+          </Skeleton>
         </Route>
 
         <Route path={getContributionsPath(baseUrl, 'CollectStep')}>
