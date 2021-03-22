@@ -288,12 +288,5 @@ services:
 
     Capco\AppBundle\Mailer\EmailingCampaignSender: ~
 
-    Capco\AppBundle\Crawler\:
-        resource: '%kernel.project_dir%/src/Capco/AppBundle/Crawler/*'
-        exclude: '%kernel.project_dir%/src/Capco/AppBundle/Crawler/BaseCrawler.php'
-        autowire: true
-        autoconfigure: true
-        public: false
-
     Liuggio\ExcelBundle\Factory:
         public: true

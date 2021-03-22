@@ -75,6 +75,8 @@ parameters:
     occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
     tipsmeee_api_key: '%env(SYMFONY_TIPSMEEE_API_KEY)%'
     slack_jpec_ghost: '***REMOVED***'
+    panther_url: '%env(SYMFONY_PANTHER_URL)%'
+    panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
     env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -138,11 +140,12 @@ parameters:
     # TIPSMEEE
     env(SYMFONY_TIPSMEEE_API_KEY): ***REMOVED***
     env(SLACK_JPEC_GHOST): ***REMOVED***
-
+    env(SYMFONY_PANTHER_URL): '***REMOVED***'
+    env(SYMFONY_PANTHER_TOKEN): '***REMOVED***'
 
 sensio_framework_extra:
-    router:      { annotations: true } # Deprecated; use routing annotations of Symfony core instead
-    request:     { converters: true, auto_convert: true }
-    view:        { annotations: true }
-    cache:       { annotations: true }
-    security:    { annotations: true }
+    router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
+    request: { converters: true, auto_convert: true }
+    view: { annotations: true }
+    cache: { annotations: true }
+    security: { annotations: true }

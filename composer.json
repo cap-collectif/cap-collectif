@@ -201,9 +201,7 @@
         "doctrine/cache": "^1.10",
         "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/maker-bundle": "^1.20",
-        "symfony/http-client": "~4.4.18",
-        "fabpot/goutte": "^4.0",
-        "symfony/panther": "^0.8.0"
+        "symfony/http-client": "~4.4.18"
     },
     "require-dev": {
         "behat/behat": "^3.3",
