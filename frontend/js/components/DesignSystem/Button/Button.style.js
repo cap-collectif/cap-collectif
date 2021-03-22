@@ -432,8 +432,21 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
     link: {
       ...stylesLink,
       bg: 'transparent',
+      color: 'gray.500',
       p: 0,
       fontWeight: 'Normal',
+
+      '&:hover': {
+        color: 'gray.700',
+
+        '&:focus': {
+          boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+        },
+      },
+
+      '&:focus': {
+        boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
+      },
 
       '&:disabled': {
         color: 'gray.300',

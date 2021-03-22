@@ -51,10 +51,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly 1`] = `
       🗳️
     </DebateStepPageVoteForm___StyledSpan2>
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -166,10 +166,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly on mobile 1`] = `
     justifyContent="center"
   >
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -267,10 +267,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       values={Object {}}
     />
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -423,10 +423,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
     justifyContent="center"
   >
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -570,10 +570,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
       values={Object {}}
     />
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -685,10 +685,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
     justifyContent="center"
   >
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -791,10 +791,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted without a
       values={Object {}}
     />
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"
@@ -906,10 +906,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted without a
     justifyContent="center"
   >
     <Button
-      color="gray.700"
       ml={2}
       onClick={[Function]}
       variant="link"
+      variantColor="hierarchy"
     >
       <FormattedMessage
         id="delete.vote.against"

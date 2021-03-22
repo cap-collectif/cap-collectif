@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence } from 'framer-motion';
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
 import VoteView from '~/components/Ui/Vote/VoteView';
 import DebateStepPageVote from './DebateStepPageVote';

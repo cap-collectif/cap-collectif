@@ -6,7 +6,6 @@ export type Context = {|
   +stepClosed: boolean,
   +widget: {|
     +isSource: boolean,
-    +authEnabled: boolean,
     +location: ?string,
   |},
 |};
@@ -16,7 +15,6 @@ export const DebateStepPageContext = React.createContext<Context>({
   stepClosed: true,
   widget: {
     isSource: false,
-    authEnabled: false,
     location: null,
   },
 });

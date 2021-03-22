@@ -302,9 +302,9 @@ export const DebateStepPageVoteForm = ({
                   />
                 ) : (
                   <Button
-                    color="gray.700"
                     ml={2}
                     variant="link"
+                    variantColor="hierarchy"
                     onClick={() => {
                       if (voteState !== 'VOTED_ANONYMOUS') {
                         deleteVoteFromViewer(
@@ -367,7 +367,7 @@ export const DebateStepPageVoteForm = ({
               {voteState !== 'VOTED_ANONYMOUS' && debate.viewerHasArgument && (
                 <Popover placement="right" trigger={['click']}>
                   <Popover.Trigger>
-                    <Button color="gray.700" ml={2} variant="link">
+                    <Button ml={2} variant="link" variantColor="hierarchy">
                       <FormattedMessage
                         id={viewerVoteValue === 'FOR' ? 'delete.vote.for' : 'delete.vote.against'}
                       />
@@ -420,9 +420,9 @@ export const DebateStepPageVoteForm = ({
               )}
               {(voteState === 'VOTED_ANONYMOUS' || !debate.viewerHasArgument) && (
                 <Button
-                  color="gray.700"
                   ml={2}
                   variant="link"
+                  variantColor="hierarchy"
                   onClick={() => {
                     if (voteState === 'VOTED_ANONYMOUS') {
                       deleteAnonymousVoteFromViewer(
@@ -489,8 +489,7 @@ export const DebateStepPageVoteForm = ({
         </Flex>
       )}
 
-      {((showArgumentForm && !isMobile && !widget.isSource) ||
-        (showArgumentForm && !isMobile && widget.isSource && widget.authEnabled)) && (
+      {showArgumentForm && !isMobile && !widget.isSource && (
         <ConditionalWrapper
           when={voteState === 'VOTED_ANONYMOUS'}
           wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
@@ -539,8 +538,8 @@ export const DebateStepPageVoteForm = ({
         </ConditionalWrapper>
       )}
 
-      {showArgumentForm && !isMobile && widget.isSource && !widget.authEnabled && (
-        <Flex direction="row" justify="center">
+      {showArgumentForm && widget.isSource && (
+        <Flex direction="row" justify="center" mt={4}>
           <Button
             onClick={() => {
               window.open(url, '_blank');
@@ -554,7 +553,7 @@ export const DebateStepPageVoteForm = ({
         </Flex>
       )}
 
-      {showArgumentForm && isMobile && (
+      {showArgumentForm && isMobile && !widget.isSource && (
         <>
           <MobilePublishArgumentModal
             title={intl.formatMessage({ id: title })}

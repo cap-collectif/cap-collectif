@@ -251,8 +251,7 @@ export const ArgumentCard = ({
           </Text>
         )}
 
-        {((!isEditing && !widget.isSource) ||
-          (!isEditing && widget.isSource && widget.authEnabled)) && (
+        {!isEditing && (
           <Flex mt={['auto', 3]} align="center" justify="center" flexDirection="row">
             <ConditionalWrapper
               when={(viewer && !viewer?.isEmailConfirmed) || false}
