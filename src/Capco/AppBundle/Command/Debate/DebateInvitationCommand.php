@@ -11,6 +11,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -22,6 +23,7 @@ class DebateInvitationCommand extends Command
     public const ARG_DEBATE = 'debate';
     public const OPT_REMINDER = 'reminder';
     public const OPT_TIME = 'time';
+    public const OPT_BATCH = 'batch';
 
     private EntityManagerInterface $em;
     private UserRepository $userRepository;
@@ -62,6 +64,13 @@ class DebateInvitationCommand extends Command
                 InputOption::VALUE_NONE,
                 'the email shall be sent as a reminder'
             )
+            ->addOption(
+                self::OPT_BATCH,
+                'b',
+                InputOption::VALUE_OPTIONAL,
+                'the amount of email to launch between each save',
+                10
+            )
             ->setDescription('Send an email to all confirmed users who has not voted in debate');
     }
 
@@ -70,32 +79,52 @@ class DebateInvitationCommand extends Command
         $debate = $this->getDebate($input);
         $users = $this->userRepository->getConfirmedUsersWithoutVoteInDebate($debate);
         $isReminder = $input->getOption(self::OPT_REMINDER);
+        $progressBar = new ProgressBar($output, \count($users));
 
-        $voteTokens = [];
+        $counter = 0;
         foreach ($users as $user) {
-            $voteToken = $this->getOrCreateVoteToken($user, $debate);
-            $voteTokens[] = $voteToken;
+            $voteToken = $this->getVoteToken($user, $debate);
+            if ($isReminder || null === $voteToken) {
+                $this->sendInvitation($user, $debate, $voteToken, $isReminder);
+                ++$counter;
+                if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
+                    $this->em->flush();
+                }
+            }
+            $progressBar->advance();
         }
         $this->em->flush();
+        $progressBar->finish();
 
-        foreach ($voteTokens as $voteToken) {
-            $this->debateNotifier->sendDebateInvitation($voteToken, $isReminder);
-        }
-
-        $output->writeln(\count($users) . ' email sent to invite to debate ' . $debate->getId());
+        $output->writeln($counter . ' email sent to invite to debate ' . $debate->getId());
 
         return 0;
     }
 
-    private function getOrCreateVoteToken(User $user, Debate $debate): DebateVoteToken
-    {
-        $token = $this->voteTokenRepository->getUserDebateToken($user, $debate);
+    private function sendInvitation(
+        User $user,
+        Debate $debate,
+        ?DebateVoteToken $token,
+        bool $isReminder
+    ): void {
         if (null === $token) {
-            $token = new DebateVoteToken($user, $debate);
-            $this->em->persist($token);
+            $token = $this->createVoteToken($user, $debate);
         }
 
+        $this->debateNotifier->sendDebateInvitation($token, $isReminder);
+    }
+
+    private function createVoteToken(User $user, Debate $debate): DebateVoteToken
+    {
+        $token = new DebateVoteToken($user, $debate);
+        $this->em->persist($token);
+
         return $token;
+    }
+
+    private function getVoteToken(User $user, Debate $debate): ?DebateVoteToken
+    {
+        return $this->voteTokenRepository->getUserDebateToken($user, $debate);
     }
 
     private function getDebate(InputInterface $input): Debate
