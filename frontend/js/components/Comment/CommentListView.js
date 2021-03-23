@@ -5,6 +5,7 @@ import type { CommentListView_commentable } from '~relay/CommentListView_comment
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentListViewPaginated from './CommentListViewPaginated';
 import scrollToAnchor from '../../services/ScrollToAnchor';
+import type { CommentListViewRefetchQueryVariables } from '~relay/CommentListViewRefetchQuery.graphql';
 
 export type CommentOrderBy = 'last' | 'old' | 'popular';
 
@@ -50,16 +51,17 @@ export class CommentListView extends React.Component<Props, State> {
     this.setState({ isRefetching: true });
     const { order, commentable, isAuthenticated, relay } = this.props;
 
-    const refetchVariables = () => ({
-      orderBy: {
-        field: order === 'popular' ? 'POPULARITY' : 'PUBLISHED_AT',
-        direction: order === 'last' || order === 'popular' ? 'DESC' : 'ASC',
-      },
-      cursor: null,
-      commentableId: commentable.id,
-      isAuthenticated,
-      count: 100,
-    });
+    const refetchVariables = () =>
+      ({
+        orderBy: {
+          field: order === 'popular' ? 'POPULARITY' : 'PUBLISHED_AT',
+          direction: order === 'last' || order === 'popular' ? 'DESC' : 'ASC',
+        },
+        cursor: null,
+        commentableId: commentable.id,
+        isAuthenticated,
+        count: 100,
+      }: CommentListViewRefetchQueryVariables);
 
     relay.refetch(
       refetchVariables,

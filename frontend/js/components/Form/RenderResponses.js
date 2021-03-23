@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Field, type FieldArrayProps } from 'redux-form';
 import isEqual from 'lodash/isEqual';
 import type { IntlShape } from 'react-intl';
-import { fetchQuery } from 'react-relay';
+import { fetchQuery_DEPRECATED } from 'react-relay';
 import { TYPE_FORM, QUESTION_TYPE_WITH_JUMP } from '~/constants/FormConstants';
 import type {
   Question,
@@ -196,7 +196,7 @@ const RenderResponses = ({
               if (!('choices' in field)) return null;
               const loadOptions = (term: string) =>
                 new Promise(async resolve => {
-                  const response = await fetchQuery(
+                  const response = await fetchQuery_DEPRECATED(
                     environment,
                     MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY,
                     {

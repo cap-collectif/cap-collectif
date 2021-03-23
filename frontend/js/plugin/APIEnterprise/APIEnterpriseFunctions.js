@@ -1,5 +1,5 @@
 // @flow
-import { commitLocalUpdate, fetchQuery } from 'react-relay';
+import { commitLocalUpdate, fetchQuery_DEPRECATED } from 'react-relay';
 import { type IntlShape } from 'react-intl';
 import { checkRNA, checkSiret } from '~/services/Validator';
 import environment from '~/createRelayEnvironment';
@@ -158,7 +158,7 @@ const makeSiretQueries = (
   const params = { type: apiEnterpriseType, siret };
 
   const promiseMainInfo = new Promise(resolve => {
-    fetchQuery(environment, autocompleteFromSiret, params).then(res => {
+    fetchQuery_DEPRECATED(environment, autocompleteFromSiret, params).then(res => {
       dispatchValuesToForm(
         intl,
         dispatch,
@@ -174,39 +174,33 @@ const makeSiretQueries = (
 
   const promiseDocInfo = new Promise(resolve => {
     if (apiEnterpriseType === API_ENTERPRISE_ASSOC) {
-      fetchQuery(environment, fetchAPIDocuments, { id: siret, type: apiEnterpriseType }).then(
-        doc => {
-          dispatchValuesToForm(
-            intl,
-            dispatch,
-            doc,
-            API_ENTERPRISE_ASSOC_DOC,
-            questions,
-            onlyVisibility,
-            formId,
-          );
-          resolve(getMatchingObject(doc, API_ENTERPRISE_ASSOC_DOC));
-        },
-      );
+      fetchQuery_DEPRECATED(environment, fetchAPIDocuments, {
+        id: siret,
+        type: apiEnterpriseType,
+      }).then(doc => {
+        dispatchValuesToForm(
+          intl,
+          dispatch,
+          doc,
+          API_ENTERPRISE_ASSOC_DOC,
+          questions,
+          onlyVisibility,
+          formId,
+        );
+        resolve(getMatchingObject(doc, API_ENTERPRISE_ASSOC_DOC));
+      });
     } else {
       const docQueryType =
         apiEnterpriseType === API_ENTERPRISE_ENTER
           ? API_ENTERPRISE_DOC_ENTER
           : API_ENTERPRISE_DOC_PUB_ORGA;
-      fetchQuery(environment, fetchAPIDocuments, { id: siret, type: apiEnterpriseType }).then(
-        doc => {
-          dispatchValuesToForm(
-            intl,
-            dispatch,
-            doc,
-            docQueryType,
-            questions,
-            onlyVisibility,
-            formId,
-          );
-          resolve(getMatchingObject(doc, docQueryType));
-        },
-      );
+      fetchQuery_DEPRECATED(environment, fetchAPIDocuments, {
+        id: siret,
+        type: apiEnterpriseType,
+      }).then(doc => {
+        dispatchValuesToForm(intl, dispatch, doc, docQueryType, questions, onlyVisibility, formId);
+        resolve(getMatchingObject(doc, docQueryType));
+      });
     }
   });
 
@@ -230,7 +224,7 @@ const makeRnaQueries = (
   formId: string,
 ) => {
   const promiseMainInfo = new Promise(resolve => {
-    fetchQuery(environment, autocompleteFromId, { id }).then(res => {
+    fetchQuery_DEPRECATED(environment, autocompleteFromId, { id }).then(res => {
       dispatchValuesToForm(
         intl,
         dispatch,
@@ -245,18 +239,20 @@ const makeRnaQueries = (
   });
 
   const promiseDocInfo = new Promise(resolve => {
-    fetchQuery(environment, fetchAPIDocuments, { id, type: API_ENTERPRISE_ASSOC }).then(res => {
-      dispatchValuesToForm(
-        intl,
-        dispatch,
-        res,
-        API_ENTERPRISE_ASSOC_DOC_RNA,
-        questions,
-        onlyVisibility,
-        formId,
-      );
-      resolve(getMatchingObject(res, API_ENTERPRISE_ASSOC_DOC_RNA));
-    });
+    fetchQuery_DEPRECATED(environment, fetchAPIDocuments, { id, type: API_ENTERPRISE_ASSOC }).then(
+      res => {
+        dispatchValuesToForm(
+          intl,
+          dispatch,
+          res,
+          API_ENTERPRISE_ASSOC_DOC_RNA,
+          questions,
+          onlyVisibility,
+          formId,
+        );
+        resolve(getMatchingObject(res, API_ENTERPRISE_ASSOC_DOC_RNA));
+      },
+    );
   });
 
   Promise.all([promiseMainInfo, promiseDocInfo]).then(values => {

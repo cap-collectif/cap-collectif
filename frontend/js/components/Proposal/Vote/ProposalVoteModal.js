@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
-import { ConnectionHandler, fetchQuery } from 'relay-runtime';
+import { ConnectionHandler, fetchQuery_DEPRECATED } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
 import { submit, isPristine, isInvalid } from 'redux-form';
 import { connect } from 'react-redux';
@@ -295,7 +295,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             disabled={step.requirements.totalCount > 0 ? invalid : false}
             onSubmit={() => {
               dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
-              fetchQuery(environment, refetchViewer, {
+              fetchQuery_DEPRECATED(environment, refetchViewer, {
                 stepId: step.id,
                 isAuthenticated,
               });

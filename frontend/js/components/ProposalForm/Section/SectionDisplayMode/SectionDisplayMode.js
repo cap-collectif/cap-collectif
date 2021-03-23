@@ -3,12 +3,12 @@ import * as React from 'react';
 import { change, Field, getFormSyncErrors, formValueSelector } from 'redux-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { Panel } from 'react-bootstrap';
 import L from 'leaflet';
-import { GestureHandling } from "leaflet-gesture-handling";
-import "leaflet/dist/leaflet.css";
-import "leaflet-gesture-handling/dist/leaflet-gesture-handling.css";
+import { GestureHandling } from 'leaflet-gesture-handling';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { Map, Marker, TileLayer, ZoomControl } from 'react-leaflet';
 import type { Dispatch, GlobalState } from '~/types';
 import viewChoice from './ViewChoice/ViewChoice';
@@ -156,7 +156,7 @@ export const loadLocationUser = (
   +json: string,
 |}> =>
   new Promise(async resolve => {
-    const response: SectionDisplayMode_GeoCodeQueryQueryResponse = await fetchQuery(
+    const response: SectionDisplayMode_GeoCodeQueryQueryResponse = await fetchQuery_DEPRECATED(
       environment,
       USER_LOCATION_QUERY,
       {
@@ -309,8 +309,8 @@ export const SectionDisplayMode = ({
   }, [addressSelected, setPosition]);
 
   React.useEffect(() => {
-    L.Map.addInitHook("addHandler", "gestureHandling", GestureHandling);
-  }, [])
+    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+  }, []);
 
   return (
     <Panel id="display-mode">
@@ -446,8 +446,7 @@ export const SectionDisplayMode = ({
                   zoom={zoom || 10}
                   zoomControl={false}
                   doubleClickZoom={false}
-                  gestureHandling
-                >
+                  gestureHandling>
                   <TileLayer
                     attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
                     url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}

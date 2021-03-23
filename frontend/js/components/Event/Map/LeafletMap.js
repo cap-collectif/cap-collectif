@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
-import { fetchQuery, graphql } from 'relay-runtime';
+import { fetchQuery_DEPRECATED, graphql } from 'relay-runtime';
 import { FormattedMessage } from 'react-intl';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import L from 'leaflet';
@@ -100,11 +100,13 @@ export class LeafletMap extends Component<Props, State> {
       typeof currentEvent !== 'undefined' ||
       (currentEvent && currentEvent.id) !== currentMarkerId
     ) {
-      fetchQuery(environment, eventMapPreviewQuery, { id: currentMarkerId }).then(data => {
-        // add it in local cache
-        this.eventsViewed[data.node.id] = data.node;
-        this.setState({ currentEvent: data.node });
-      });
+      fetchQuery_DEPRECATED(environment, eventMapPreviewQuery, { id: currentMarkerId }).then(
+        data => {
+          // add it in local cache
+          this.eventsViewed[data.node.id] = data.node;
+          this.setState({ currentEvent: data.node });
+        },
+      );
     }
   };
 

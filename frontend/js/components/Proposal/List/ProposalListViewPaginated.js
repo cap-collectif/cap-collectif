@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
 import cn from 'classnames';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPaginated_step.graphql';
@@ -12,7 +11,6 @@ import ProposalList from './ProposalList';
 import type { ProposalViewMode } from '~/redux/modules/proposal';
 import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap';
 import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
-import type { State } from '~/types';
 
 type Props = {
   relay: RelayPaginationProp,
@@ -80,10 +78,6 @@ const ProposalListViewPaginated = ({
     </div>
   );
 };
-
-const mapStateToProps = (state: State) => ({
-  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
-});
 
 const ProposalListViewPaginatedRelay = createPaginationContainer(
   ProposalListViewPaginated,
@@ -173,8 +167,4 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
   },
 );
 
-const ProposalListViewPaginatedConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
-  ProposalListViewPaginatedRelay,
-);
-
-export default ProposalListViewPaginatedConnected;
+export default ProposalListViewPaginatedRelay;

@@ -12,7 +12,7 @@ import {
   FieldArray,
   formValueSelector,
 } from 'redux-form';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import {
@@ -318,7 +318,7 @@ export class ProposalForm extends React.Component<Props, State> {
   loadTitleSuggestions = debounce((title: string) => {
     const { proposal: currentProposal, proposalForm } = this.props;
     this.setState({ isLoadingTitleSuggestions: true });
-    fetchQuery(
+    fetchQuery_DEPRECATED(
       environment,
       searchProposalsQuery,
       ({
@@ -384,7 +384,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
   retrieveDistrictForLocation = (location: LatLng) => {
     const { proposalForm, dispatch } = this.props;
-    fetchQuery(
+    fetchQuery_DEPRECATED(
       environment,
       getAvailableDistrictsQuery,
       ({

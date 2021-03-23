@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
@@ -36,7 +36,7 @@ export const loadQuestionnaireOptions = (
     label: string,
   }>,
 > => {
-  return fetchQuery(
+  return fetchQuery_DEPRECATED(
     environment,
     getAvailableQuestionnaires,
     ({

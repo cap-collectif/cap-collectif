@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { OverlayTrigger, ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { change, formValueSelector, getFormAsyncErrors } from 'redux-form';
 import { connect } from 'react-redux';
 import CheckCircle from '../Ui/Icons/CheckCircle';
@@ -170,7 +170,7 @@ export const asyncPasswordValidate = (
   };
 
   return new Promise((resolve, reject) => {
-    fetchQuery(environment, getPasswordComplexityScore, credentialValues).then(res => {
+    fetchQuery_DEPRECATED(environment, getPasswordComplexityScore, credentialValues).then(res => {
       dispatch(
         change(
           formName,

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field, startSubmit, stopSubmit } from 'redux-form';
-import { fetchQuery } from 'relay-runtime';
+import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import component from '../Form/Field';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
@@ -142,7 +142,7 @@ export const onChange = (
           }).then(() => {
             dispatch(stopSubmit(formName));
             if (props.stepId) {
-              fetchQuery(environment, refetchViewer, {
+              fetchQuery_DEPRECATED(environment, refetchViewer, {
                 stepId: props.stepId,
                 isAuthenticated: props.isAuthenticated,
               });
@@ -179,7 +179,7 @@ export const onChange = (
         UpdateProfilePersonalDataMutation.commit({ input }).then(() => {
           dispatch(stopSubmit(formName));
           if (props.stepId) {
-            fetchQuery(environment, refetchViewer, {
+            fetchQuery_DEPRECATED(environment, refetchViewer, {
               stepId: props.stepId,
               isAuthenticated: props.isAuthenticated,
             });

@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { type ProjectMetadataAdminForm_project } from '~relay/ProjectMetadataAdminForm_project.graphql';
@@ -104,7 +104,7 @@ export const validate = ({ publishedAt }: FormValues) => {
 const formName = 'project-metadata-admin-form';
 
 export const loadThemeOptions = (search: ?string) => {
-  return fetchQuery(environment, getThemeOptions, {
+  return fetchQuery_DEPRECATED(environment, getThemeOptions, {
     title: search,
   }).then(data => {
     return data.themes.map(u => ({
@@ -115,7 +115,7 @@ export const loadThemeOptions = (search: ?string) => {
 };
 
 export const loadDistrictOptions = (search: ?string) => {
-  return fetchQuery(environment, getDistrictList, {
+  return fetchQuery_DEPRECATED(environment, getDistrictList, {
     name: search,
   }).then(data => {
     return (

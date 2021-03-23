@@ -45,6 +45,7 @@ type RenderedProps = {|
   count: number,
   isAuthenticated: boolean,
   features: FeatureToggles,
+  isTipsMeeeEnabled: boolean,
 |};
 
 const parseGeoJson = (district: { +geojson: string, +id: string }) => {
@@ -61,7 +62,7 @@ const parseGeoJson = (district: { +geojson: string, +id: string }) => {
 };
 
 export const ProposalStepPageRendered = (props: RenderedProps) => {
-  const { viewer, isAuthenticated, features, step, count } = props;
+  const { isTipsMeeeEnabled, viewer, isAuthenticated, features, step, count } = props;
   const [displayMode, setDisplayMode] = React.useState(step?.mainView);
 
   React.useEffect(() => {
@@ -99,6 +100,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
       <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
       <ProposalListView
         displayMap={features.display_map}
+        isTipsMeeeEnabled={isTipsMeeeEnabled}
         geoJsons={geoJsons}
         step={step}
         count={count}
@@ -235,6 +237,7 @@ export class ProposalStepPage extends React.Component<Props> {
                   count={count}
                   isAuthenticated={isAuthenticated}
                   features={features}
+                  isTipsMeeeEnabled={isTipsMeeeEnabled}
                 />
               );
             }

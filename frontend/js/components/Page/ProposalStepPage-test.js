@@ -10,6 +10,7 @@ describe('<ProposalStepPage />', () => {
   const props = {
     count: 10,
     isAuthenticated: true,
+    isTipsMeeeEnabled: false,
     features: { ...features, display_map: true },
     step: {
       defaultSort: 'random',

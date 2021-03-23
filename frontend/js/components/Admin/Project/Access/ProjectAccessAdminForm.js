@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-import { createFragmentContainer, graphql, fetchQuery } from 'react-relay';
+import { createFragmentContainer, graphql, fetchQuery_DEPRECATED } from 'react-relay';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import renderComponent from '~/components/Form/Field';
 import type { GlobalState } from '~/types';
@@ -43,7 +43,7 @@ export const getGroups = graphql`
 `;
 
 export const loadGroupOptions = (initialGroups: ?Array<{| label: string, value: string |}>) => {
-  return fetchQuery(environment, getGroups, {}).then(data => {
+  return fetchQuery_DEPRECATED(environment, getGroups, {}).then(data => {
     const groups = data.groups.map(c => ({
       value: c.id,
       label: c.title,

@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { fetchQuery } from 'relay-runtime';
+import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
@@ -124,7 +124,7 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
                   key={index}
                   onSelect={() => {
                     setSelectedStep(votableStep);
-                    fetchQuery(
+                    fetchQuery_DEPRECATED(
                       environment,
                       query,
                       ({

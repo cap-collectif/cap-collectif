@@ -7,6 +7,7 @@ import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetc
 import EventListProfileRefetchContainer from './EventListProfileRefetch.style';
 import Input from '~/components/Form/Input';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import type { EventListProfileRefetchQueryVariables } from '~relay/EventListProfileRefetchQuery.graphql';
 
 type Props = {
   user: EventListProfileRefetch_user,
@@ -40,7 +41,7 @@ export const getOrderBy = (order: $Values<typeof ORDER_TYPE>) =>
 export const EventListProfileRefetch = ({ relay, user }: Props) => {
   const _refetch = (order: $Values<typeof ORDER_TYPE>) => {
     const orderBy = getOrderBy(order);
-    relay.refetch({ orderBy }, null);
+    relay.refetch(({ userId: user.id, orderBy }: EventListProfileRefetchQueryVariables), null);
   };
 
   const onChangeHandler = (e: Event) => {
@@ -88,8 +89,8 @@ export default createRefetchContainer(
     user: graphql`
       fragment EventListProfileRefetch_user on User
         @argumentDefinitions(orderBy: { type: "EventOrder" }) {
+        id
         events(first: 100, orderBy: $orderBy) {
-          totalCount
           edges {
             node {
               id

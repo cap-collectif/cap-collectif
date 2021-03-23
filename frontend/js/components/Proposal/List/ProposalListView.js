@@ -10,6 +10,7 @@ import ProposalListViewPaginated from './ProposalListViewPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
 import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
+import type { ProposalListViewRefetchQueryVariables } from '~relay/ProposalListViewRefetchQuery.graphql';
 
 type Filters = {|
   categories?: string,
@@ -86,6 +87,7 @@ type Props = {
   displayMap: boolean,
   displayMode: ProposalViewMode,
   count: number,
+  isTipsMeeeEnabled: boolean,
 };
 type State = {
   isRefetching: boolean,
@@ -108,15 +110,17 @@ export class ProposalListView extends React.Component<Props, State> {
 
   _refetch = () => {
     this.setState({ isRefetching: true, hasRefetchError: false });
-    const { filters, order, step, term, relay, viewer } = this.props;
+    const { isTipsMeeeEnabled, filters, order, step, term, relay, viewer } = this.props;
 
-    const refetchVariables = fragmentVariables => ({
-      ...queryVariables(filters, order),
-      stepId: step.id,
-      isAuthenticated: !!viewer,
-      count: fragmentVariables.count,
-      term: term || null,
-    });
+    const refetchVariables = fragmentVariables =>
+      ({
+        ...queryVariables(filters, order),
+        stepId: step.id,
+        isAuthenticated: !!viewer,
+        count: fragmentVariables.count,
+        isTipsMeeeEnabled,
+        term: term || null,
+      }: ProposalListViewRefetchQueryVariables);
 
     relay.refetch(
       refetchVariables,
@@ -140,6 +144,7 @@ export class ProposalListView extends React.Component<Props, State> {
       viewer,
       displayMode,
       count,
+      isTipsMeeeEnabled,
     } = this.props;
     const { hasRefetchError, isRefetching } = this.state;
 
@@ -154,6 +159,7 @@ export class ProposalListView extends React.Component<Props, State> {
     return (
       <ProposalListViewPaginated
         displayMap={displayMap}
+        isTipsMeeeEnabled={isTipsMeeeEnabled}
         geoJsons={geoJsons}
         defaultMapOptions={defaultMapOptions}
         count={count}

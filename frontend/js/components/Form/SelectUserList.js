@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Field } from 'redux-form';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import select from './Select';
 import environment from '../../createRelayEnvironment';
 
@@ -38,7 +38,7 @@ export class SelectUserList extends React.Component<Props> {
     const { fieldName, multi, id, clearable, disabled, label, userList } = this.props;
 
     const retrieveUsersList = (usersIds: ?Array<?string>, terms: ?string) =>
-      fetchQuery(environment, userListQuery, {
+      fetchQuery_DEPRECATED(environment, userListQuery, {
         notInIds: usersIds,
         displayName: terms,
       }).then(data => ({

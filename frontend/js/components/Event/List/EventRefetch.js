@@ -11,6 +11,7 @@ import type { GlobalState } from '../../../types';
 import type { EventRefetch_query } from '~relay/EventRefetch_query.graphql';
 import type { EventOrder } from '~relay/HomePageEventsQuery.graphql';
 import { getOrderBy, ORDER_TYPE } from '../Profile/EventListProfileRefetch';
+import type { EventRefetchRefetchQueryVariables } from '~relay/EventRefetchRefetchQuery.graphql';
 
 type Props = {|
   +search: ?string,
@@ -40,24 +41,25 @@ export class EventRefetch extends React.Component<Props, State> {
   _refetch = debounce(() => {
     const { relay, search, project, theme, author, status, isRegistrable, userType } = this.props;
     this.setState({ isRefetching: true });
-    const refetchVariables = fragmentVariables => ({
-      count: fragmentVariables.count,
-      cursor: null,
-      search: search || null,
-      theme: theme || null,
-      project: project || null,
-      userType: userType || null,
-      isFuture: status === 'all' ? null : status === 'ongoing-and-future',
-      author: author && author.value ? author.value : null,
-      isRegistrable:
-        isRegistrable === 'all' || typeof isRegistrable === 'undefined'
-          ? null
-          : isRegistrable === 'yes',
-      orderBy:
-        status === 'finished' || status === 'all'
-          ? getOrderBy(ORDER_TYPE.OLD)
-          : getOrderBy(ORDER_TYPE.LAST),
-    });
+    const refetchVariables = fragmentVariables =>
+      ({
+        count: fragmentVariables.count,
+        cursor: null,
+        search: search || null,
+        theme: theme || null,
+        project: project || null,
+        userType: userType || null,
+        isFuture: status === 'all' ? null : status === 'ongoing-and-future',
+        author: author && author.value ? author.value : null,
+        isRegistrable:
+          isRegistrable === 'all' || typeof isRegistrable === 'undefined'
+            ? null
+            : isRegistrable === 'yes',
+        orderBy:
+          status === 'finished' || status === 'all'
+            ? getOrderBy(ORDER_TYPE.OLD)
+            : getOrderBy(ORDER_TYPE.LAST),
+      }: EventRefetchRefetchQueryVariables);
 
     relay.refetch(
       refetchVariables,

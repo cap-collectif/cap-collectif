@@ -3,7 +3,7 @@
 import React from 'react';
 import { Field, FieldArray, arrayPush, change } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import environment from '~/createRelayEnvironment';
@@ -52,7 +52,7 @@ export const loadProposalOptions = (
   proposal: ?{| label: string, value: string |},
   term: ?string,
 ) => {
-  return fetchQuery(environment, getAvailableProposals, {
+  return fetchQuery_DEPRECATED(environment, getAvailableProposals, {
     term: term === '' ? null : term,
   }).then(data => {
     const proposals = data.availableProposalForms.map(p => ({

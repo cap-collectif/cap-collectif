@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createPaginationContainer, fetchQuery, graphql } from 'react-relay';
+import { createPaginationContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import type { GlobalState, Uuid } from '~/types';
@@ -78,7 +78,7 @@ const USER_SEARCH_QUERY = graphql`
 
 export const loadOptions = (terms: string): Promise<$ReadOnlyArray<any>> =>
   new Promise(async resolve => {
-    const response = await fetchQuery(environment, USER_SEARCH_QUERY, {
+    const response = await fetchQuery_DEPRECATED(environment, USER_SEARCH_QUERY, {
       terms,
     });
     resolve(response.results);

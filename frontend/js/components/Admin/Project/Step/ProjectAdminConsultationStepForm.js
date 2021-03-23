@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { Field, FieldArray, arrayPush } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -32,7 +32,7 @@ export const loadConsultationOptions = (
   initialConsultations: ?Array<{| label: string, value: string |}>,
   term: ?string,
 ) => {
-  return fetchQuery(environment, getAvailableConsultations, {
+  return fetchQuery_DEPRECATED(environment, getAvailableConsultations, {
     term: term === '' ? null : term,
   }).then(data => {
     const consultations = data.availableConsultations.map(c => ({

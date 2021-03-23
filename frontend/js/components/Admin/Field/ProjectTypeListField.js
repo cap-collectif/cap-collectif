@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 
 import select from '../../Form/Select';
 import environment from '../../../createRelayEnvironment';
@@ -52,7 +52,7 @@ class ProjectTypeListField extends React.Component<Props, State> {
   state = { projectTypes: [] };
 
   componentDidMount() {
-    fetchQuery(environment, getProjectTypeList, {}).then(data => {
+    fetchQuery_DEPRECATED(environment, getProjectTypeList, {}).then(data => {
       this.setState({ projectTypes: data.projectTypes });
     });
   }

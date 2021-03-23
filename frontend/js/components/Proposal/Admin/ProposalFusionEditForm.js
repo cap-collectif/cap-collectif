@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { fetchQuery } from 'relay-runtime';
+import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
@@ -94,7 +94,7 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           component={select}
           clearable={false}
           loadOptions={(input: string) =>
-            fetchQuery(environment, query, { term: input, stepId }).then(res =>
+            fetchQuery_DEPRECATED(environment, query, { term: input, stepId }).then(res =>
               res.step.proposals.edges
                 .map(edge => ({
                   value: edge.node.id,

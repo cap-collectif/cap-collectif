@@ -5,7 +5,7 @@ import type { LogEvent } from 'relay-runtime';
 const transactionsMap = {};
 
 const relayTransactionLogger = (event: LogEvent) => {
-  if (event.name === 'execute.start') {
+  if (event.name === 'network.start') {
     const { transactionID, variables } = event;
     const { name } = event.params;
 
@@ -13,7 +13,7 @@ const relayTransactionLogger = (event: LogEvent) => {
     transactionsMap[transactionID] = { idName, name, variables };
 
     console.time(idName);
-  } else if (event.name === 'execute.error') {
+  } else if (event.name === 'network.error') {
     const { transactionID, error } = event;
     const { idName, name, variables } = transactionsMap[transactionID];
 
@@ -25,7 +25,7 @@ const relayTransactionLogger = (event: LogEvent) => {
       console.log('Error:', error);
     }
     console.groupEnd();
-  } else if (event.name === 'execute.next') {
+  } else if (event.name === 'network.next') {
     const { transactionID, response } = event;
     const { idName, name, variables } = transactionsMap[transactionID];
 

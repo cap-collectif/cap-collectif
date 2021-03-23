@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Field } from 'redux-form';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import renderComponent from '~/components/Form/Field';
 import { type ProjectPublishAdminForm_project } from '~relay/ProjectPublishAdminForm_project.graphql';
@@ -40,7 +40,7 @@ const getLocaleOptions = graphql`
 `;
 
 export const loadLocaleOptions = (search: ?string) => {
-  return fetchQuery(environment, getLocaleOptions, {
+  return fetchQuery_DEPRECATED(environment, getLocaleOptions, {
     title: search,
   }).then(data => {
     return data.availableLocales.map(u => ({

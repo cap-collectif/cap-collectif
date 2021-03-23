@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import { useInput } from '@liinkiing/react-hooks';
 import { Button, Modal } from 'react-bootstrap';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Input from '~ui/Form/Input/Input';
 import environment from '~/createRelayEnvironment';
@@ -42,7 +42,7 @@ export const UserInviteByEmailStepChooseUsers = ({ onCloseButtonClick }: Props) 
   const searchUsers = useCallback(
     (displayName: string) => {
       startLoading();
-      return fetchQuery(environment, USER_SEARCH_QUERY, {
+      return fetchQuery_DEPRECATED(environment, USER_SEARCH_QUERY, {
         displayName,
       }).then(results => {
         stopLoading();

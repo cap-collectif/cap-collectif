@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { fetchQuery } from 'relay-runtime';
+import { fetchQuery_DEPRECATED } from 'relay-runtime';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertForm from '../../Alert/AlertForm';
 import ChangeProposalEvaluersMutation from '../../../mutations/ChangeProposalEvaluersMutation';
@@ -50,7 +50,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    fetchQuery(environment, evaluersQuery, {})
+    fetchQuery_DEPRECATED(environment, evaluersQuery, {})
       .then(response =>
         response.groups.map(group => ({
           value: group.id,

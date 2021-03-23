@@ -20,6 +20,7 @@ import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFo
 import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm';
 import SectionDisplayMode from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
+import type { ProposalFormAdminConfigurationFormRefetchQueryVariables } from '~relay/ProposalFormAdminConfigurationFormRefetchQuery.graphql';
 
 type RelayProps = {|
   +proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
@@ -386,8 +387,13 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         throw new Error('Mutation "updateProposalForm" failed.');
       }
       if (response.updateProposalForm) {
-        const refetchVariables = () => ({});
-        props.relay.refetch(refetchVariables, null, () => {}, { force: true });
+        props.relay.refetch(
+          // $FlowFixMe
+          ({}: ProposalFormAdminConfigurationFormRefetchQueryVariables),
+          null,
+          () => {},
+          { force: true },
+        );
       }
     })
     .catch(response => {

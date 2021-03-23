@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { fetchQuery, graphql } from 'relay-runtime';
+import { fetchQuery_DEPRECATED, graphql } from 'relay-runtime';
 import { createFragmentContainer } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Field, SubmissionError, reduxForm, formValueSelector, change } from 'redux-form';
@@ -131,7 +131,7 @@ export class ProposalFusionForm extends React.Component<Props> {
             component={select}
             filterOption={option => option && option.data.stepId === currentCollectStep.id}
             loadOptions={input =>
-              fetchQuery(environment, autocompleteQuery, {
+              fetchQuery_DEPRECATED(environment, autocompleteQuery, {
                 term: input,
                 stepId: currentCollectStep.id,
               }).then(res => {

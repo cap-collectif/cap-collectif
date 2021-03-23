@@ -8,10 +8,14 @@ import type { GlobalState } from '../../../types';
 import type { ProjectListView_query } from '~relay/ProjectListView_query.graphql';
 import ProjectListViewPaginated from './ProjectListViewPaginated';
 import { selector } from './Filters/ProjectListFilters';
+import type {
+  ProjectListViewRefetchQueryVariables,
+  ProjectOrderField,
+} from '~relay/ProjectListViewRefetchQuery.graphql';
 
 type Props = {
   query: ProjectListView_query,
-  orderBy: ?string,
+  orderBy: ProjectOrderField,
   author: ?string,
   type: ?string,
   theme: ?string,
@@ -48,19 +52,19 @@ export class ProjectListView extends React.Component<Props, State> {
   }
 
   _refetch = () => {
-    const { district, limit, theme, relay, term, orderBy, author, status, type } = this.props;
+    const { district, theme, relay, term, orderBy, author, status, type } = this.props;
     this.setState({ isRefetching: true });
 
-    const refetchVariables = () => ({
-      orderBy: { field: orderBy, direction: 'DESC' },
-      author,
-      type,
-      district,
-      theme,
-      limit,
-      term,
-      status,
-    });
+    const refetchVariables = () =>
+      ({
+        orderBy: { field: orderBy, direction: 'DESC' },
+        author,
+        type,
+        district,
+        theme,
+        term,
+        status,
+      }: ProjectListViewRefetchQueryVariables);
 
     relay.refetch(
       refetchVariables,

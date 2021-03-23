@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import select from '../../Form/Select';
 import environment from '../../../createRelayEnvironment';
@@ -90,14 +90,14 @@ export default class UserListField extends React.Component<Props> {
     const { userListToNoSearch, authorOfEvent } = this.props;
     const retrieveUsersList = (usersIds: ?Array<string>, terms: ?string) => {
       if (usersIds) {
-        return fetchQuery(environment, getUsersListWithoutIds, {
+        return fetchQuery_DEPRECATED(environment, getUsersListWithoutIds, {
           notInIds: usersIds,
           displayName: terms,
           authorOfEventOnly: authorOfEvent,
         }).then(data => formatUsersData(data.userSearch));
       }
 
-      return fetchQuery(environment, getUsersList, {
+      return fetchQuery_DEPRECATED(environment, getUsersList, {
         displayName: terms,
         authorOfEventOnly: authorOfEvent,
       }).then(data => formatUsersData(data.userSearch));

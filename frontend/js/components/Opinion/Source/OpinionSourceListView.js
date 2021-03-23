@@ -4,6 +4,7 @@ import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-re
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import OpinionSourceListViewPaginated from './OpinionSourceListViewPaginated';
 import type { OpinionSourceListView_sourceable } from '~relay/OpinionSourceListView_sourceable.graphql';
+import type { OpinionSourceListViewRefetchQueryVariables } from '~relay/OpinionSourceListViewRefetchQuery.graphql';
 
 export type OpinionSourceOrder = 'old' | 'last' | 'popular';
 
@@ -43,12 +44,14 @@ export class OpinionSourceListView extends React.Component<Props, State> {
       field,
     };
 
-    const refetchVariables = fragmentVariables => ({
-      sourceableId: sourceable.id,
-      count: fragmentVariables.count,
-      cursor: null,
-      orderBy,
-    });
+    const refetchVariables = fragmentVariables =>
+      ({
+        sourceableId: sourceable.id,
+        count: fragmentVariables.count,
+        isAuthenticated: fragmentVariables.isAuthenticated,
+        cursor: null,
+        orderBy,
+      }: OpinionSourceListViewRefetchQueryVariables);
 
     relay.refetch(
       refetchVariables,

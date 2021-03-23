@@ -3,7 +3,7 @@ import * as React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { fetchQuery, graphql } from 'react-relay';
+import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 
 import ProjectListFilters, { selector } from './ProjectListFilters';
 import ProjectListFilterOrder from './ProjectListFilterOrder';
@@ -82,7 +82,9 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    fetchQuery(environment, getAvailableProjectResources, { onlyUsedByProjects: true }).then(
+    fetchQuery_DEPRECATED(environment, getAvailableProjectResources, {
+      onlyUsedByProjects: true,
+    }).then(
       ({
         projectTypes,
         projectAuthors,
