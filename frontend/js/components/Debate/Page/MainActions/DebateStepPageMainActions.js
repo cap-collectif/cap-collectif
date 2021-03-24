@@ -50,11 +50,13 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props) => {
 
 export default (createFragmentContainer(DebateStepPageMainActions, {
   step: graphql`
-    fragment DebateStepPageMainActions_step on DebateStep {
+    fragment DebateStepPageMainActions_step on DebateStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       timeRange {
         endAt
       }
-      ...DebateStepPageVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated)
+      ...DebateStepPageVoteAndShare_step
+        @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
     }
   `,
 }): RelayFragmentContainer<typeof DebateStepPageMainActions>);

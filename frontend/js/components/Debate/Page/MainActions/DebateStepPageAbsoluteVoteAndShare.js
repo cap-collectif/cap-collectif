@@ -97,12 +97,13 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
 export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
   step: graphql`
     fragment DebateStepPageAbsoluteVoteAndShare_step on DebateStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       url
       debate {
-        ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)
+        ...DebateStepPageVoteForm_debate
+          @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
       }
-      ...DebateStepPageVote_step
+      ...DebateStepPageVote_step @arguments(isMobile: $isMobile)
     }
   `,
 });

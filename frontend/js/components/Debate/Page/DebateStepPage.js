@@ -5,8 +5,10 @@ import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { State } from '~/types';
 import type { DebateStepPageQueryResponse } from '~relay/DebateStepPageQuery.graphql';
+import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql';
 import DebateStepPageLogic from './DebateStepPageLogic';
 import { DebateStepPageContext } from './DebateStepPage.context';
+import useIsMobile from '~/utils/hooks/useIsMobile';
 
 export type Props = {|
   +stepId: string,
@@ -14,6 +16,7 @@ export type Props = {|
   +isAuthenticated: boolean,
   +fromWidget: boolean,
   +widgetLocation: string,
+  +debateType: DebateType,
 |};
 
 export const DebateStepPage = ({
@@ -22,7 +25,9 @@ export const DebateStepPage = ({
   isAuthenticated,
   fromWidget,
   widgetLocation,
+  debateType,
 }: Props) => {
+  const isMobile = useIsMobile();
   const contextValue = React.useMemo(
     () => ({
       widget: {
@@ -34,14 +39,25 @@ export const DebateStepPage = ({
     }),
     [title, fromWidget, widgetLocation],
   );
+  const isDebateFaceToFace = debateType === 'FACE_TO_FACE';
 
   return (
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query DebateStepPageQuery($stepId: ID!, $isAuthenticated: Boolean!) {
+        query DebateStepPageQuery(
+          $stepId: ID!
+          $isAuthenticated: Boolean!
+          $isMobile: Boolean!
+          $isDebateFaceToFace: Boolean!
+        ) {
           ...DebateStepPageLogic_query
-            @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+            @arguments(
+              stepId: $stepId
+              isAuthenticated: $isAuthenticated
+              isMobile: $isMobile
+              isDebateFaceToFace: $isDebateFaceToFace
+            )
           step: node(id: $stepId) {
             ... on Step {
               timeRange {
@@ -54,6 +70,8 @@ export const DebateStepPage = ({
       variables={{
         stepId,
         isAuthenticated,
+        isMobile,
+        isDebateFaceToFace,
       }}
       render={({
         error,

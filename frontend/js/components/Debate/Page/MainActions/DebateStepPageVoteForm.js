@@ -607,13 +607,15 @@ const DebateStepPageVoteFormConnected = connect<any, any, _, _, _, _>(mapStateTo
 export default createFragmentContainer(DebateStepPageVoteFormConnected, {
   debate: graphql`
     fragment DebateStepPageVoteForm_debate on Debate
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       id
       viewerVote @include(if: $isAuthenticated) {
         type
       }
       viewerHasArgument @include(if: $isAuthenticated)
-      ...ModalDeleteVoteMobile_debate @arguments(isAuthenticated: $isAuthenticated)
+      ...ModalDeleteVoteMobile_debate
+        @arguments(isAuthenticated: $isAuthenticated)
+        @include(if: $isMobile)
     }
   `,
 });

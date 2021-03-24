@@ -171,7 +171,7 @@ const DebateStepPageVoteAndShareConnected = connect<any, any, _, _, _, _>(mapSta
 export default (createFragmentContainer(DebateStepPageVoteAndShareConnected, {
   step: graphql`
     fragment DebateStepPageVoteAndShare_step on DebateStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       url
       isAnonymousParticipationAllowed
       debate {
@@ -193,10 +193,12 @@ export default (createFragmentContainer(DebateStepPageVoteAndShareConnected, {
         argumentsAgainst: arguments(isPublished: true, first: 0, value: AGAINST) {
           totalCount
         }
-        ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated)
+        ...DebateStepPageVoteForm_debate
+          @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
       }
-      ...DebateStepPageVote_step
-      ...DebateStepPageAbsoluteVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated)
+      ...DebateStepPageVote_step @arguments(isMobile: $isMobile)
+      ...DebateStepPageAbsoluteVoteAndShare_step
+        @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
     }
   `,
 }): RelayFragmentContainer<typeof DebateStepPageVoteAndShareConnected>);

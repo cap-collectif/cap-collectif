@@ -2,8 +2,9 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import { createFragmentContainer, graphql } from 'react-relay';
 import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
-import type { DebateStepPageLinkedArticles_step } from '~relay/DebateStepPageLinkedArticles_step.graphql';
+import type { DebateStepPageLinkedArticlesDrawer_step } from '~relay/DebateStepPageLinkedArticlesDrawer_step.graphql';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Heading from '~ui/Primitives/Heading';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -15,13 +16,15 @@ const DebateStepPageLinkedArticlesDrawer = ({
   ...drawerProps
 }: {|
   ...DetailDrawerProps,
-  +step: DebateStepPageLinkedArticles_step,
+  +step: DebateStepPageLinkedArticlesDrawer_step,
 |}) => {
   const articles =
-    step.debate.articles?.edges
+    step?.debate?.articles?.edges
       ?.filter(Boolean)
       .map(edge => edge.node)
       .filter(Boolean) ?? [];
+  if (!articles || articles.length === 0) return null;
+
   return (
     <DetailDrawer {...drawerProps}>
       <DetailDrawer.Header display="grid" gridTemplateColumns="1fr 10fr 1fr" textAlign="center">
@@ -51,4 +54,24 @@ const DebateStepPageLinkedArticlesDrawer = ({
   );
 };
 
-export default DebateStepPageLinkedArticlesDrawer;
+export default createFragmentContainer(DebateStepPageLinkedArticlesDrawer, {
+  step: graphql`
+    fragment DebateStepPageLinkedArticlesDrawer_step on DebateStep {
+      id
+      debate {
+        articles {
+          edges {
+            node {
+              id
+              url
+              coverUrl
+              title
+              publishedAt
+              origin
+            }
+          }
+        }
+      }
+    }
+  `,
+});

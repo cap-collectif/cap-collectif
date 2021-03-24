@@ -30,7 +30,8 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
 
 export default createFragmentContainer(DebateStepPageArguments, {
   step: graphql`
-    fragment DebateStepPageArguments_step on DebateStep {
+    fragment DebateStepPageArguments_step on DebateStep
+      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       noDebate: debate {
         id
         ...DebateStepPageArgumentsPagination_debate
@@ -59,14 +60,16 @@ export default createFragmentContainer(DebateStepPageArguments, {
           id
           ...ArgumentCard_argument @arguments(isAuthenticated: $isAuthenticated)
         }
-        ...MobileDebateStepPageArguments_debate @arguments(isAuthenticated: $isAuthenticated)
+        ...MobileDebateStepPageArguments_debate
+          @arguments(isAuthenticated: $isAuthenticated)
+          @include(if: $isMobile)
       }
     }
   `,
   viewer: graphql`
     fragment DebateStepPageArguments_viewer on User {
-      ...MobileDebateStepPageArguments_viewer
-      ...DesktopDebateStepPageArguments_viewer
+      ...MobileDebateStepPageArguments_viewer @include(if: $isMobile)
+      ...DesktopDebateStepPageArguments_viewer @skip(if: $isMobile)
     }
   `,
 });

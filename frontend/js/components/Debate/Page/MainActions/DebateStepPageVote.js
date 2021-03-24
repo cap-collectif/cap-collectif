@@ -266,7 +266,8 @@ const DebateStepPageVoteConnected = connect<any, any, _, _, _, _>(mapStateToProp
 
 export default (createFragmentContainer(DebateStepPageVoteConnected, {
   step: graphql`
-    fragment DebateStepPageVote_step on DebateStep {
+    fragment DebateStepPageVote_step on DebateStep
+      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       isAnonymousParticipationAllowed
       debate {
         id

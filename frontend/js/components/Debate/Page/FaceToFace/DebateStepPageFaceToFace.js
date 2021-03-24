@@ -75,12 +75,13 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
 
 export default createFragmentContainer(DebateStepPageFaceToFace, {
   step: graphql`
-    fragment DebateStepPageFaceToFace_step on DebateStep {
+    fragment DebateStepPageFaceToFace_step on DebateStep
+      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       debate {
         opinions {
           edges {
             node {
-              ...DebateOpinion_opinion
+              ...DebateOpinion_opinion @arguments(isMobile: $isMobile)
               type
               body
             }

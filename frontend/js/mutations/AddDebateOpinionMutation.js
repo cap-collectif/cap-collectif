@@ -16,7 +16,7 @@ const mutation = graphql`
     addDebateOpinion(input: $input) {
       errorCode
       debateOpinion @appendNode(connections: $connections, edgeTypeName: $edgeTypeName) {
-        ...DebateOpinion_opinion
+        ...DebateOpinion_debateOpinion
       }
     }
   }

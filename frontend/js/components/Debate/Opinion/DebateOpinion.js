@@ -115,8 +115,9 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
 
 export default createFragmentContainer(DebateOpinion, {
   opinion: graphql`
-    fragment DebateOpinion_opinion on DebateOpinion {
-      ...DebateStepPageOpinionDrawer_opinion
+    fragment DebateOpinion_opinion on DebateOpinion
+      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+      ...DebateStepPageOpinionDrawer_opinion @include(if: $isMobile)
       title
       body
       author {

@@ -47,7 +47,12 @@ export const DebateStepPageLogic = ({ query }: Props) => {
 export default createFragmentContainer(DebateStepPageLogic, {
   query: graphql`
     fragment DebateStepPageLogic_query on Query
-      @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(
+        stepId: { type: "ID!" }
+        isAuthenticated: { type: "Boolean!" }
+        isMobile: { type: "Boolean!" }
+        isDebateFaceToFace: { type: "Boolean!" }
+      ) {
       viewer @include(if: $isAuthenticated) {
         ...DebateStepPageArguments_viewer
       }
@@ -62,10 +67,13 @@ export default createFragmentContainer(DebateStepPageLogic, {
           debateContent
         }
         ...DebateStepPageNotYetStarted_step
-        ...DebateStepPageArguments_step
+        ...DebateStepPageArguments_step @arguments(isMobile: $isMobile)
         ...DebateStepPageMainActions_step
+          @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
         ...DebateStepPageFaceToFace_step
-        ...DebateStepPageLinkedArticles_step
+          @arguments(isMobile: $isMobile)
+          @include(if: $isDebateFaceToFace)
+        ...DebateStepPageLinkedArticles_step @arguments(isMobile: $isMobile)
       }
     }
   `,

@@ -12,7 +12,7 @@ const mutation = graphql`
     updateDebateOpinion(input: $input) {
       errorCode
       debateOpinion {
-        ...DebateOpinion_opinion
+        ...DebateOpinion_debateOpinion
       }
     }
   }

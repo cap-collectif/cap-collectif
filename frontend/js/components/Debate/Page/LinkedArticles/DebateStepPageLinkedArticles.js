@@ -48,9 +48,10 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
     .map(edge => edge.node)
     .filter(Boolean);
   if (!articles || articles.length === 0) return null;
+
   return (
     <AppBox id={step ? 'DebateStepPageLinkedArticles' : 'DebateStepPageLinkedArticlesLoading'}>
-      {step && step.debate && isMobile && (
+      {step && isMobile && (
         <DebateStepPageLinkedArticlesDrawer onClose={onClose} isOpen={isOpen} step={step} />
       )}
       <Flex mb={6}>
@@ -129,7 +130,8 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
 
 export default createFragmentContainer(DebateStepPageLinkedArticles, {
   step: graphql`
-    fragment DebateStepPageLinkedArticles_step on DebateStep {
+    fragment DebateStepPageLinkedArticles_step on DebateStep
+      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       id
       debate {
         articles {
@@ -145,6 +147,7 @@ export default createFragmentContainer(DebateStepPageLinkedArticles, {
           }
         }
       }
+      ...DebateStepPageLinkedArticlesDrawer_step @include(if: $isMobile)
     }
   `,
 });
