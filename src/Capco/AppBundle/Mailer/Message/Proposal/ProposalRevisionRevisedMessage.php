@@ -55,9 +55,6 @@ class ProposalRevisionRevisedMessage extends AbstractExternalMessage
             ->findOneByKeyname('color.btn.text')
             ->getValue();
         $proposalURL = $container->get(UrlResolver::class)->getObjectUrl($revision->getProposal());
-        $usersToSendNotification = $container
-            ->get(UserRepository::class)
-            ->getAssignedUsersOnProposal($revision->getProposal());
 
         return [
             'proposal' => $revision->getProposal(),

@@ -12,7 +12,8 @@ Scenario: An expired invitation should redirect to homepage
 
 @database
 Scenario: A user which has been invited should be able to register
-  When I go to "/invitation?token=oniiiichaaan"
+  When I visited "invitation page" with:
+    | token | oniiiichaaan |
   And I wait "#registration-form-responses0" to appear on current page
   And I fill in the following:
     | username             | RemChanDaiSki             |
@@ -33,7 +34,8 @@ Scenario: A user which has been invited should be able to register
 @database
 Scenario: A user which has been invited should be able to register even with shield mode
   Given feature "shield_mode" is enabled
-  When I go to "/invitation?token=oniiiichaaan"
+  When I visited "invitation page" with:
+    | token | oniiiichaaan |
   And I wait "#registration-form-responses0" to appear on current page
   And I fill in the following:
     | username             | RemChanDaiSki             |
@@ -54,7 +56,8 @@ Scenario: A user which has been invited should be able to register even with shi
 @database
 Scenario: A user which has been invited should be able to register even when registration is disabled
   Given I disable feature "registration"
-  When I go to "/invitation?token=oniiiichaaan"
+  When I visited "invitation page" with:
+    | token | oniiiichaaan |
   And I wait "#registration-form-responses0" to appear on current page
   And I fill in the following:
     | username             | RemChanDaiSki             |

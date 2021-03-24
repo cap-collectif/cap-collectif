@@ -302,6 +302,13 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                               "name": "logoutUrl",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "allowedData",
+                              "storageKey": null,
+                            },
                           ],
                           "type": "FranceConnectSSOConfiguration",
                         },
@@ -317,7 +324,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "fbd4627fb7db07bbc1753aace78a1c5b",
+          "cacheID": "69f2552c95a8fa487d8da3cd3b4e41ab",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -346,6 +353,7 @@ fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOCon
   environment
   redirectUri
   logoutUrl
+  allowedData
 }
 
 fragment ListCustomSSO_ssoConfigurations on SSOConfigurationConnection {

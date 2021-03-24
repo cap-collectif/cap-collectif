@@ -1101,9 +1101,9 @@ class UserRepository extends EntityRepository
     }
 
     public function findByEmailOrAccessToken(
-        string $email,
-        string $accessToken,
-        string $accessId
+        string $email = '',
+        string $accessToken = '',
+        string $accessId = ''
     ): ?User {
         $qb = $this->createQueryBuilder('u');
 

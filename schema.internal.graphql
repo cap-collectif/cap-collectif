@@ -5197,6 +5197,33 @@ enum ForOrAgainstValue {
   FOR
 }
 
+"""Many possible values"""
+enum FranceConnectAllowedData {
+  """Fields firstname"""
+  given_name
+
+  """Fields lastname"""
+  family_name
+
+  """Fields birth date"""
+  birthdate
+
+  """Fields birth place"""
+  birthplace
+
+  """Fields birth country"""
+  birthcountry
+
+  """Fields gender"""
+  gender
+
+  """Fields email"""
+  email
+
+  """Fields username"""
+  preferred_username
+}
+
 """France Connect SSO Configuration."""
 type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
   """The ID of an object."""
@@ -5240,6 +5267,9 @@ type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
 
   """Redirect URI callback."""
   redirectUri: URI!
+
+  """Unattended DataChoice as array."""
+  allowedData: [FranceConnectAllowedData!]!
 }
 
 """3 possible values"""
@@ -12848,6 +12878,14 @@ input UpdateFranceConnectSSOConfigurationInput {
 
   """Environment mode."""
   environment: SSOEnvironment!
+  given_name: Boolean!
+  family_name: Boolean!
+  birthdate: Boolean!
+  birthplace: Boolean!
+  birthcountry: Boolean!
+  gender: Boolean!
+  email: Boolean!
+  preferred_username: Boolean!
   clientMutationId: String
 }
 

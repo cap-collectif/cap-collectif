@@ -1,0 +1,29 @@
+FranceConnectAllowedData:
+    type: enum
+    config:
+        description: 'Many possible values'
+        values:
+            given_name:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::GIVEN_NAME")'
+                description: 'Fields firstname'
+            family_name:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::FAMILY_NAME")'
+                description: 'Fields lastname'
+            birthdate:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::BIRTHDATE")'
+                description: 'Fields birth date'
+            birthplace:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::BIRTHPLACE")'
+                description: 'Fields birth place'
+            birthcountry:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::BIRTHCOUNTRY")'
+                description: 'Fields birth country'
+            gender:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::GENDER")'
+                description: 'Fields gender'
+            email:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::EMAIL")'
+                description: 'Fields email'
+            preferred_username:
+                value: '@=constant("Capco\\AppBundle\\Enum\\FranceConnectAllowedData::PREFERRED_USERNAME")'
+                description: 'Fields username'

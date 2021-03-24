@@ -41,6 +41,26 @@ class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
             FranceConnectSSOConfigurationFormType::class,
             $fcConfiguration
         );
+        $values['allowedData'] = [
+            'given_name' => $values['given_name'],
+            'family_name' => $values['family_name'],
+            'birthdate' => $values['birthdate'],
+            'gender' => $values['gender'],
+            'birthplace' => $values['birthplace'],
+            'birthcountry' => $values['birthcountry'],
+            'email' => $values['email'],
+            'preferred_username' => $values['preferred_username'],
+        ];
+        unset(
+            $values['given_name'],
+            $values['family_name'],
+            $values['birthdate'],
+            $values['gender'],
+            $values['birthcountry'],
+            $values['email'],
+            $values['preferred_username'],
+            $values['birthplace']
+        );
         $form->submit($values, false);
 
         if (!$form->isValid()) {

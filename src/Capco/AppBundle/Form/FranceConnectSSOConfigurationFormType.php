@@ -20,11 +20,11 @@ class FranceConnectSSOConfigurationFormType extends AbstractType
     {
         $builder
             ->add('name', PurifiedTextType::class, [
-                'strip_tags' => true
+                'strip_tags' => true,
             ])
             ->add('enabled', CheckboxType::class)
             ->add('environment', ChoiceType::class, [
-                'choices' => [EnumSSOEnvironmentType::TESTING, EnumSSOEnvironmentType::PRODUCTION]
+                'choices' => [EnumSSOEnvironmentType::TESTING, EnumSSOEnvironmentType::PRODUCTION],
             ])
             ->add('clientId', PurifiedTextType::class, ['strip_tags' => true])
             ->add('secret', PurifiedTextType::class, ['strip_tags' => true])
@@ -33,7 +33,8 @@ class FranceConnectSSOConfigurationFormType extends AbstractType
             ->add('authorizationUrl', UrlType::class)
             ->add('clientId', PurifiedTextType::class, ['strip_tags' => true])
             ->add('secret', PurifiedTextType::class, ['strip_tags' => true])
-            ->add('logoutUrl', UrlType::class);
+            ->add('logoutUrl', UrlType::class)
+            ->add('allowedData');
 
         // This listener's goal is to set complete right URL based on environment sent from request.
         $builder->addEventListener(FormEvents::PRE_SUBMIT, static function (FormEvent $event) {
@@ -56,7 +57,7 @@ class FranceConnectSSOConfigurationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => FranceConnectSSOConfiguration::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }

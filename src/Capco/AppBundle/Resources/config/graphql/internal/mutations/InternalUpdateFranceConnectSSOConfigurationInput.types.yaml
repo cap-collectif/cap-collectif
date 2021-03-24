@@ -13,3 +13,19 @@ InternalUpdateFranceConnectSSOConfigurationInput:
             environment:
                 type: 'SSOEnvironment!'
                 description: 'Environment mode.'
+            given_name:
+                type: 'Boolean!'
+            family_name:
+                type: 'Boolean!'
+            birthdate:
+                type: 'Boolean!'
+            birthplace:
+                type: 'Boolean!'
+            birthcountry:
+                type: 'Boolean!'
+            gender:
+                type: 'Boolean!'
+            email:
+                type: 'Boolean!'
+            preferred_username:
+                type: 'Boolean!'

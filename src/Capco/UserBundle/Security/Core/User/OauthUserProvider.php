@@ -4,7 +4,7 @@ namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
-use Capco\UserBundle\FranceConnect\FranceConnectMapper;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Util\ClassUtils;
@@ -19,6 +19,7 @@ class OauthUserProvider extends FOSUBUserProvider
     private Indexer $indexer;
     private UserRepository $userRepository;
     private GroupMutation $groupMutation;
+    private FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -26,12 +27,14 @@ class OauthUserProvider extends FOSUBUserProvider
         OpenIDExtraMapper $extraMapper,
         Indexer $indexer,
         array $properties,
-        GroupMutation $groupMutation
+        GroupMutation $groupMutation,
+        FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
         $this->indexer = $indexer;
         $this->groupMutation = $groupMutation;
+        $this->franceConnectSSOConfigurationRepository = $franceConnectSSOConfigurationRepository;
 
         parent::__construct($userManager, $properties);
     }
@@ -42,9 +45,9 @@ class OauthUserProvider extends FOSUBUserProvider
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($service);
-        $setterId = 'openid' === $service ? $setter : $setter . 'Id';
-        $setterToken = $setter . 'AccessToken';
+        $setter = 'set'.ucfirst($service);
+        $setterId = 'openid' === $service ? $setter : $setter.'Id';
+        $setterToken = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
         if (
@@ -68,9 +71,9 @@ class OauthUserProvider extends FOSUBUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
-        $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
+        $email = $response->getEmail() ?: 'twitter_'.$response->getUsername();
         $username =
-            $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
+            $response->getNickname() ?: $response->getFirstName().' '.$response->getLastName();
         // because, accounts created with FranceConnect can change their email
         $user = $this->userRepository->findByEmailOrAccessToken(
             $email,
@@ -87,15 +90,17 @@ class OauthUserProvider extends FOSUBUserProvider
         }
 
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set' . ucfirst($service);
-        $setterId = 'openid' === $service ? $setter : $setter . 'Id';
-        $setterToken = $setter . 'AccessToken';
+        $setter = 'set'.ucfirst($service);
+        $setterId = 'openid' === $service ? $setter : $setter.'Id';
+        $setterToken = $setter.'AccessToken';
 
         if ('openid' === $service && $isNewUser) {
             $this->extraMapper->map($user, $response);
         } elseif ('franceconnect' === $service && ($isNewUser || !$user->getFranceConnectId())) {
+            $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
+
             // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
-            FranceConnectMapper::map($user, $response);
+            $user = $this->map($user, $response, $fcConfig->getAllowedData());
         }
 
         $user->{$setterId}($response->getUsername());
@@ -121,4 +126,58 @@ class OauthUserProvider extends FOSUBUserProvider
 
         return $key;
     }
+
+    /**
+     * https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#identite-pivot.
+     */
+    public function map(
+        UserInterface $user,
+        UserResponseInterface $userResponse,
+        array $allowedData
+    ): UserInterface {
+        $userInfoData = $userResponse->getData();
+        $firstName = ucfirst(strtolower($userInfoData['given_name']));
+        if ($allowedData['given_name']) {
+            $user->setFirstName($firstName);
+        }
+        if ($allowedData['family_name']) {
+            $user->setLastName($userInfoData['family_name']);
+        }
+
+        if ($allowedData['birthdate']) {
+            $birthday = \DateTime::createFromFormat('Y-m-d', $userInfoData['birthdate']) ?: null;
+            if ($birthday) {
+                $birthday->setTime(0, 0);
+            }
+            $user->setDateOfBirth($birthday);
+        }
+        if ($allowedData['birthplace']) {
+            if (isset($userInfoData['birthplace'])) {
+                $user->setBirthPlace($userInfoData['birthplace']);
+            }
+        }
+        if ($allowedData['gender']) {
+            $gender = 'o';
+
+            if ('female' === $userInfoData['gender']) {
+                $gender = 'f';
+            }
+            if ('male' === $userInfoData['gender']) {
+                $gender = 'm';
+            }
+            $user->setGender($gender);
+        }
+        if ($allowedData['email']) {
+            $user->setEmail($userInfoData['email']);
+        }
+
+        if ($allowedData['preferred_username'] && !empty($userInfoData['preferred_username'])) {
+            $user->setUsername($userInfoData['preferred_username']);
+        } else {
+            $user->setUsername($userInfoData['family_name'].' '.$firstName);
+        }
+
+        return $user;
+    }
+
 }

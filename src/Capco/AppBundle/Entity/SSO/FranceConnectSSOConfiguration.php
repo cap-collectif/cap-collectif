@@ -15,7 +15,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
 {
     public const ENDPOINTS = [
         EnumSSOEnvironmentType::TESTING => 'https://fcp.integ01.dev-franceconnect.fr',
-        EnumSSOEnvironmentType::PRODUCTION => 'https://app.franceconnect.gouv.fr'
+        EnumSSOEnvironmentType::PRODUCTION => 'https://app.franceconnect.gouv.fr',
     ];
 
     public const ROUTES = [
@@ -54,6 +54,81 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
      * @ORM\Column(name="logout_url", type="text", nullable=true)
      */
     protected $logoutUrl = '/api/v1/logout';
+
+    /**
+     * @ORM\Column(name="allowed_data", type="array", nullable=false)
+     */
+    protected array $allowedData = [
+        'given_name' => true,
+        'family_name' => true,
+        'birthdate' => false,
+        'gender' => false,
+        'birthplace' => false,
+        'birthcountry' => false,
+        'email' => true,
+        'preferred_username' => false,
+    ];
+
+    public function getAllowedData(): array
+    {
+        return $this->allowedData;
+    }
+
+    public function setGivenName(bool $givenName): self
+    {
+        $this->allowedData['given_name'] = $givenName;
+
+        return $this;
+    }
+
+    public function setFamilyName(bool $familyName): self
+    {
+        $this->allowedData['family_name'] = $familyName;
+
+        return $this;
+    }
+
+    public function setBirthDate(bool $birthDate): self
+    {
+        $this->allowedData['birthdate'] = $birthDate;
+
+        return $this;
+    }
+
+    public function setBirthCountry(bool $birthCountry): self
+    {
+        $this->allowedData['birthcountry'] = $birthCountry;
+
+        return $this;
+    }
+
+    public function setBirthPlace(bool $birthPlace): self
+    {
+        $this->allowedData['birthplace'] = $birthPlace;
+
+        return $this;
+    }
+
+    public function setEmail(bool $email): self
+    {
+        $this->allowedData['email'] = $email;
+
+        return $this;
+    }
+
+    public function setPreferredUsername(bool $preferredUsername): self
+    {
+        $this->allowedData['preferred_username'] = $preferredUsername;
+
+        return $this;
+    }
+
+    public function setAllowedData(array $allowedData): self
+    {
+        $this->allowedData = $allowedData;
+
+        return $this;
+    }
 
     public function getClientId(): ?string
     {

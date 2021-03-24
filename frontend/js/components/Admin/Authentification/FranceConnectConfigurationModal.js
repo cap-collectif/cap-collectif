@@ -5,7 +5,7 @@ import { Button, Modal, ToggleButton } from 'react-bootstrap';
 import { change, Field, reduxForm, SubmissionError } from 'redux-form';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-
+import Toggle from '../../Form/Toggle';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
@@ -22,6 +22,14 @@ type FormValues = {|
   secret: string,
   redirectUri: Uri,
   logoutUrl: Uri,
+  given_name: boolean,
+  family_name: boolean,
+  birthdate: boolean,
+  birthplace: boolean,
+  birthcountry: boolean,
+  gender: boolean,
+  email: boolean,
+  preferred_username: boolean,
 |};
 
 type Props = {|
@@ -36,11 +44,36 @@ type Props = {|
 const formName = 'france-connect-configuration-form';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { environment, secret, clientId } = values;
+  const {
+    environment,
+    secret,
+    clientId,
+    given_name,
+    family_name,
+    birthdate,
+    gender,
+    birthplace,
+    birthcountry,
+    email,
+    preferred_username,
+  } = values;
+
   const { onClose } = props;
 
   return UpdateFranceConnectConfigurationMutation.commit({
-    input: { environment, clientId, secret },
+    input: {
+      environment,
+      clientId,
+      secret,
+      given_name,
+      family_name,
+      birthdate,
+      gender,
+      birthplace,
+      birthcountry,
+      email,
+      preferred_username,
+    },
   })
     .then(() => {
       if (onClose) {
@@ -151,6 +184,57 @@ export const FranceConnectConfigurationModal = ({
           component={component}
           label={<FormattedMessage id="logout-url" />}
         />
+        <label>
+          <FormattedMessage id="fc-allowed-fields" />
+        </label>
+        <Field
+          id={`${formName}_given_name`}
+          name="given_name"
+          component={Toggle}
+          label={<FormattedMessage id="form.label_firstname" />}
+        />
+        <Field
+          id={`${formName}_family_name`}
+          name="family_name"
+          component={Toggle}
+          label={<FormattedMessage id="form.label_lastname" />}
+        />
+        <Field
+          id={`${formName}_birthdate`}
+          name="birthdate"
+          component={Toggle}
+          label={<FormattedMessage id="form.label_date_of_birth" />}
+        />
+        <Field
+          id={`${formName}_birthplace`}
+          name="birthplace"
+          component={Toggle}
+          label={<FormattedMessage id="birthPlace" />}
+        />
+        <Field
+          id={`${formName}_birthcountry`}
+          name="birthcountry"
+          component={Toggle}
+          label={<FormattedMessage id="birth-country" />}
+        />
+        <Field
+          id={`${formName}_gender`}
+          name="gender"
+          component={Toggle}
+          label={<FormattedMessage id="form.label_gender" />}
+        />
+        <Field
+          id={`${formName}_email`}
+          name="email"
+          component={Toggle}
+          label={<FormattedMessage id="filter.label_email" />}
+        />
+        <Field
+          id={`${formName}_preferred_username`}
+          name="preferred_username"
+          component={Toggle}
+          label={<FormattedMessage id="list.label_username" />}
+        />
       </Modal.Body>
       <Modal.Footer>
         <AlertForm
@@ -174,8 +258,19 @@ export const FranceConnectConfigurationModal = ({
 );
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
+  const data = props.ssoConfiguration.allowedData;
   return {
-    initialValues: { ...props.ssoConfiguration },
+    initialValues: {
+      ...props.ssoConfiguration,
+      given_name: data.includes('given_name'),
+      family_name: data.includes('family_name'),
+      birthdate: data.includes('birthdate'),
+      birthplace: data.includes('birthplace'),
+      birthcountry: data.includes('birthcountry'),
+      gender: data.includes('gender'),
+      email: data.includes('email'),
+      preferred_username: data.includes('preferred_username'),
+    },
   };
 };
 
@@ -196,6 +291,7 @@ export default createFragmentContainer(container, {
       environment
       redirectUri
       logoutUrl
+      allowedData
     }
   `,
 });

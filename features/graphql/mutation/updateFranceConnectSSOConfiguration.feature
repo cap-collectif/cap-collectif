@@ -17,6 +17,7 @@ Scenario: Admin wants to update France Connect configuration
           accessTokenUrl
           userInfoUrl
           logoutUrl
+          allowedData
         }
       }
     }",
@@ -24,7 +25,15 @@ Scenario: Admin wants to update France Connect configuration
       "input": {
         "environment": "TESTING",
         "clientId": "account",
-        "secret": "***REMOVED***"
+        "secret": "***REMOVED***",
+        "given_name": true,
+        "family_name": true,
+        "birthdate": true,
+        "birthplace": false,
+        "birthcountry": false,
+        "gender": true,
+        "email": true,
+        "preferred_username": false
       }
     }
   }
@@ -32,18 +41,25 @@ Scenario: Admin wants to update France Connect configuration
   Then the JSON response should match:
   """
   {
-    "data": {
-      "updateFranceConnectSSOConfiguration": {
-        "fcConfiguration": {
-          "clientId": "account",
-          "secret": "***REMOVED***",
-          "authorizationUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize",
-          "accessTokenUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
-          "userInfoUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
-          "logoutUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
-          "environment": "TESTING"
-         }
-       }
+     "data":{
+        "updateFranceConnectSSOConfiguration":{
+           "fcConfiguration":{
+              "environment":"TESTING",
+              "clientId":"account",
+              "secret":"***REMOVED***",
+              "authorizationUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/authorize",
+              "accessTokenUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/token",
+              "userInfoUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/userinfo",
+              "logoutUrl":"https:\/\/fcp.integ01.dev-franceconnect.fr\/api\/v1\/logout",
+              "allowedData":[
+                 "given_name",
+                 "family_name",
+                 "birthdate",
+                 "gender",
+                 "email"
+              ]
+           }
+        }
      }
   }
   """
@@ -64,6 +80,7 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
           accessTokenUrl
           userInfoUrl
           logoutUrl
+          allowedData
         }
       }
     }",
@@ -71,7 +88,15 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
       "input": {
         "environment": "PRODUCTION",
         "clientId": "account",
-        "secret": "***REMOVED***"
+        "secret": "***REMOVED***",
+        "given_name": true,
+        "family_name": true,
+        "birthdate": true,
+        "birthplace": false,
+        "birthcountry": false,
+        "gender": true,
+        "email": true,
+        "preferred_username": false
       }
     }
   }
@@ -88,7 +113,14 @@ Scenario: Admin wants to update France Connect configuration and turn it to prod
           "accessTokenUrl": "https://app.franceconnect.gouv.fr/api/v1/token",
           "userInfoUrl": "https://app.franceconnect.gouv.fr/api/v1/userinfo",
           "logoutUrl": "https://app.franceconnect.gouv.fr/api/v1/logout",
-          "environment": "PRODUCTION"
+          "environment": "PRODUCTION",
+          "allowedData":[
+             "given_name",
+             "family_name",
+             "birthdate",
+             "gender",
+             "email"
+          ]
          }
        }
      }
