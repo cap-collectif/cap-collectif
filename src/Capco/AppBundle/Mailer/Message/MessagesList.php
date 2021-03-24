@@ -31,7 +31,6 @@ final class MessagesList
         'proposal_news_update' => ProposalNewsUpdateAdminMessage::class,
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::class,
     ];
-
     public const TEMPLATE_LIST = [
         'event_create_admin' => '@CapcoMail/Admin/notifyAdminOfNewEvent.html.twig',
         'event_edit_admin' => '@CapcoMail/Admin/notifyAdminOfEditedEvent.html.twig',

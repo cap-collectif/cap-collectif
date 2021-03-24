@@ -22,7 +22,7 @@ class DebateInvitationCommand extends Command
     public const NAME = 'capco:debate:invite';
     public const ARG_DEBATE = 'debate';
     public const OPT_REMINDER = 'reminder';
-    public const OPT_TIME = 'time';
+    public const OPT_TEST_TOKEN = 'test-token';
     public const OPT_BATCH = 'batch';
 
     private EntityManagerInterface $em;
@@ -50,14 +50,8 @@ class DebateInvitationCommand extends Command
     protected function configure()
     {
         $this->setName(self::NAME)
+            ->setDescription('Send an email to all confirmed users who has not voted in debate')
             ->addArgument(self::ARG_DEBATE, InputArgument::REQUIRED, 'the id of the debate')
-            ->addOption(
-                self::OPT_TIME,
-                null,
-                InputOption::VALUE_OPTIONAL,
-                '/!\ Should be used for CI only /!\ .The relative time you want to send email.',
-                'now'
-            )
             ->addOption(
                 self::OPT_REMINDER,
                 'r',
@@ -71,7 +65,13 @@ class DebateInvitationCommand extends Command
                 'the amount of email to launch between each save',
                 10
             )
-            ->setDescription('Send an email to all confirmed users who has not voted in debate');
+            ->addOption(
+                self::OPT_TEST_TOKEN,
+                null,
+                InputOption::VALUE_NONE,
+                '/!\ Should be used for CI only /!\ .To generate non-randomized tokens.'
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -85,7 +85,7 @@ class DebateInvitationCommand extends Command
         foreach ($users as $user) {
             $voteToken = $this->getVoteToken($user, $debate);
             if ($isReminder || null === $voteToken) {
-                $this->sendInvitation($user, $debate, $voteToken, $isReminder);
+                $this->sendInvitation($user, $debate, $voteToken, $isReminder, $input->getOption(self::OPT_TEST_TOKEN));
                 ++$counter;
                 if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
                     $this->em->flush();
@@ -96,7 +96,7 @@ class DebateInvitationCommand extends Command
         $this->em->flush();
         $progressBar->finish();
 
-        $output->writeln($counter . ' email sent to invite to debate ' . $debate->getId());
+        $output->writeln("\n$counter email(s) sent to invite to debate " . $debate->getId());
 
         return 0;
     }
@@ -105,18 +105,21 @@ class DebateInvitationCommand extends Command
         User $user,
         Debate $debate,
         ?DebateVoteToken $token,
-        bool $isReminder
+        bool $isReminder,
+        bool $fixedToken = false
     ): void {
         if (null === $token) {
-            $token = $this->createVoteToken($user, $debate);
+            $token = $this->createVoteToken($user, $debate, $fixedToken);
         }
 
         $this->debateNotifier->sendDebateInvitation($token, $isReminder);
     }
 
-    private function createVoteToken(User $user, Debate $debate): DebateVoteToken
+    private function createVoteToken(User $user, Debate $debate,bool $fixedToken = false): DebateVoteToken
     {
-        $token = new DebateVoteToken($user, $debate);
+        $testToken = $fixedToken ? $debate->getId()."-".$user->getId() : null;
+
+        $token = new DebateVoteToken($user, $debate, $testToken);
         $this->em->persist($token);
 
         return $token;

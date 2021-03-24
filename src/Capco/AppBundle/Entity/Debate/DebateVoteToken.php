@@ -41,11 +41,11 @@ class DebateVoteToken
      */
     private Debate $debate;
 
-    public function __construct(User $user, Debate $debate)
+    public function __construct(User $user, Debate $debate, ?string $token)
     {
         $this->user = $user;
         $this->debate = $debate;
-        $this->token = bin2hex(random_bytes(self::TOKEN_LENGTH));
+        $this->token = $token ?? self::generateToken();
     }
 
     public function getUser(): User
@@ -61,5 +61,10 @@ class DebateVoteToken
     public function getToken(): string
     {
         return $this->token;
+    }
+
+    private static function generateToken(): string
+    {
+        return bin2hex(random_bytes(self::TOKEN_LENGTH));
     }
 }
