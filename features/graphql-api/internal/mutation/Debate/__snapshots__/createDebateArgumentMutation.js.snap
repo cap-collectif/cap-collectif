@@ -42,6 +42,15 @@ Object {
 }
 `;
 
+exports[`Internal|CreateDebateArgument try to create argument but already done 1`] = `
+Object {
+  "createDebateArgument": Object {
+    "debateArgument": null,
+    "errorCode": "ALREADY_HAS_ARGUMENT",
+  },
+}
+`;
+
 exports[`Internal|CreateDebateArgument try to create argument with wrong debate id 1`] = `
 Object {
   "createDebateArgument": Object {

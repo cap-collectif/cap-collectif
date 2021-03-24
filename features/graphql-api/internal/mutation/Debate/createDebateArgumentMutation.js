@@ -38,6 +38,7 @@ describe('Internal|CreateDebateArgument', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+
   it('create argument', async () => {
     await expect(
       graphql(
@@ -66,6 +67,22 @@ describe('Internal|CreateDebateArgument', () => {
           },
         },
         'internal_not_confirmed',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('try to create argument but already done', async () => {
+    await expect(
+      graphql(
+        CreateDebateArgumentMutation,
+        {
+          input: {
+            debate: toGlobalId('Debate', 'debateCannabis'),
+            body: "j'ai encore un truc à dire",
+            type: 'FOR',
+          },
+        },
+        'internal_spylou',
       ),
     ).resolves.toMatchSnapshot();
   });

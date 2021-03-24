@@ -2947,6 +2947,9 @@ type CreateAlphaProjectPayload {
 enum CreateDebateArgumentErrorCode {
   """No `Debate` match your id."""
   UNKNOWN_DEBATE
+
+  """User has already created an argument."""
+  ALREADY_HAS_ARGUMENT
 }
 
 input CreateDebateArgumentInput {
