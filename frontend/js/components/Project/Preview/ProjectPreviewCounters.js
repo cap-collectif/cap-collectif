@@ -47,7 +47,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
           )}
           {showCounters && project.isParticipantsCounterDisplayable && (
             <ProjectPreviewCounter
-              value={project.contributors.totalCount + project.contributors.anonymousCount}
+              value={project.contributors.totalCount + project.anonymousVotes.totalCount}
               label="project.preview.counters.contributors"
               showZero
               icon="cap-user-2-1"
@@ -85,9 +85,11 @@ export default createFragmentContainer(ProjectPreviewCounters, {
       isParticipantsCounterDisplayable
       contributors {
         totalCount
-        anonymousCount
       }
       votes {
+        totalCount
+      }
+      anonymousVotes: votes(anonymous: true) {
         totalCount
       }
       contributions {

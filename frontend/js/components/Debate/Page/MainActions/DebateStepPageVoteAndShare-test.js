@@ -30,6 +30,7 @@ const baseProps = {
   },
   isMobile: false,
   viewerIsConfirmedByEmail: true,
+  isAuthenticated: true,
 };
 
 const props = {
@@ -48,6 +49,8 @@ const props = {
       ...baseProps.step,
       isAnonymousParticipationAllowed: true,
     },
+    isAuthenticated: false,
+    viewerIsConfirmedByEmail: false,
   },
 };
 

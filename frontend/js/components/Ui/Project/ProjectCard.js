@@ -109,7 +109,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                   ICON_NAME.USER_O,
                   project.isExternal
                     ? project.externalParticipantsCount || 0
-                    : project.contributors.totalCount,
+                    : project.contributors.totalCount + project.anonymousVotes.totalCount,
                 )}
               </Flex>
             )}
@@ -147,6 +147,9 @@ export default createFragmentContainer(
         externalLink
         url
         votes {
+          totalCount
+        }
+        anonymousVotes: votes(anonymous: true) {
           totalCount
         }
         contributions {

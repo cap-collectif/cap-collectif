@@ -131,7 +131,7 @@ exports[`<ProjectCard /> should render correctly 1`] = `
               fontSize={14}
             >
               <FormattedNumber
-                number={5}
+                number={17}
               />
             </Text>
           </ForwardRef>
@@ -440,7 +440,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
               fontSize={14}
             >
               <FormattedNumber
-                number={5}
+                number={17}
               />
             </Text>
           </ForwardRef>
@@ -643,7 +643,7 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
               fontSize={14}
             >
               <FormattedNumber
-                number={5}
+                number={17}
               />
             </Text>
           </ForwardRef>
@@ -814,7 +814,7 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
               fontSize={14}
             >
               <FormattedNumber
-                number={5}
+                number={17}
               />
             </Text>
           </ForwardRef>

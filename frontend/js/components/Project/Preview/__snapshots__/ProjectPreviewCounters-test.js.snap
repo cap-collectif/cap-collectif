@@ -21,7 +21,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={54}
+      value={66}
     />
     <Tag
       icon="cap cap-marker-1-1"
@@ -33,11 +33,13 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           Object {
             "$fragmentRefs": null,
             "$refType": null,
+            "anonymousVotes": Object {
+              "totalCount": 12,
+            },
             "contributions": Object {
               "totalCount": 89,
             },
             "contributors": Object {
-              "anonymousCount": 0,
               "totalCount": 54,
             },
             "districts": Object {
@@ -92,11 +94,13 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
           "contributions": Object {
             "totalCount": 89,
           },
           "contributors": Object {
-            "anonymousCount": 0,
             "totalCount": 54,
           },
           "districts": Object {
@@ -169,7 +173,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={50}
+      value={60}
     />
     <Relay(ProjectRestrictedAccessFragment)
       icon="cap-lock-2-1"
@@ -177,11 +181,13 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
           "contributions": Object {
             "totalCount": 71,
           },
           "contributors": Object {
-            "anonymousCount": 2,
             "totalCount": 48,
           },
           "districts": Object {

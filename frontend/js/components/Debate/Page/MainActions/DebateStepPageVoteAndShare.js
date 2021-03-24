@@ -22,6 +22,7 @@ type Props = {|
   +isMobile?: boolean,
   +url: string,
   +viewerIsConfirmedByEmail: boolean,
+  +isAuthenticated: boolean,
 |};
 
 export type VoteState =
@@ -38,6 +39,7 @@ const getInitialState = (
   stepClosed: boolean,
   viewerIsConfirmedByEmail: boolean,
   isAnonymousVoteAllowed: boolean,
+  isAuthenticated: boolean,
 ): VoteState => {
   if (debate.viewerHasVote && !stepClosed) {
     if (debate.viewerHasArgument)
@@ -46,20 +48,35 @@ const getInitialState = (
   }
 
   if (stepClosed) return 'RESULT';
-  if (isAnonymousVoteAllowed && CookieMonster.hasDebateAnonymousVoteCookie(debate.id)) {
+  if (
+    isAnonymousVoteAllowed &&
+    CookieMonster.hasDebateAnonymousVoteCookie(debate.id) &&
+    !isAuthenticated
+  ) {
     return 'VOTED_ANONYMOUS';
   }
 
   return 'NONE';
 };
 
-export const DebateStepPageVoteAndShare = ({ isMobile, viewerIsConfirmedByEmail, step }: Props) => {
+export const DebateStepPageVoteAndShare = ({
+  isMobile,
+  viewerIsConfirmedByEmail,
+  step,
+  isAuthenticated,
+}: Props) => {
   const { debate, url, isAnonymousParticipationAllowed } = step;
   const { stepClosed } = useDebateStepPage();
   const intl = useIntl();
 
   const [voteState, setVoteState] = useState<VoteState>(
-    getInitialState(debate, stepClosed, viewerIsConfirmedByEmail, isAnonymousParticipationAllowed),
+    getInitialState(
+      debate,
+      stepClosed,
+      viewerIsConfirmedByEmail,
+      isAnonymousParticipationAllowed,
+      isAuthenticated,
+    ),
   );
 
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
@@ -144,6 +161,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, viewerIsConfirmedByEmail,
 
 const mapStateToProps = (state: GlobalState) => ({
   viewerIsConfirmedByEmail: state.user?.user?.isEmailConfirmed,
+  isAuthenticated: !!state.user.user,
 });
 
 const DebateStepPageVoteAndShareConnected = connect<any, any, _, _, _, _>(mapStateToProps)(

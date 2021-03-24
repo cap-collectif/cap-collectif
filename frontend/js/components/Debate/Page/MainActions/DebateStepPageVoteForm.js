@@ -66,7 +66,9 @@ type FormValues = {|
   +body: string,
 |};
 
-export const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
+export const Form: StyledComponent<{ disabled: boolean }, {}, HTMLFormElement> = styled.form`
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'auto')};
+
   .form-group {
     margin: 0;
   }
@@ -506,16 +508,18 @@ export const DebateStepPageVoteForm = ({
               },
             }}
             pb={body?.length > 0 ? 6 : 2}>
-            <Form id={formName} onSubmit={handleSubmit}>
+            <Form id={formName} onSubmit={handleSubmit} disabled={voteState === 'VOTED_ANONYMOUS'}>
               <Field
                 name="body"
-                disabled={voteState === 'VOTED_ANONYMOUS'}
                 component={component}
                 type="textarea"
                 id="body"
                 minLength="1"
                 autoComplete="off"
                 placeholder={title}
+                style={{
+                  pointerEvents: voteState === 'VOTED_ANONYMOUS' ? 'none' : 'auto',
+                }}
               />
               {voteState !== 'VOTED_ANONYMOUS' && body?.length > 0 && (
                 <Flex justifyContent="flex-end">

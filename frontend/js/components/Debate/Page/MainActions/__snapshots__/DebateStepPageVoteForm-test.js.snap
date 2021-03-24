@@ -76,17 +76,22 @@ exports[`<DebateStepPageVoteForm/> should renders correctly 1`] = `
       width="100%"
     >
       <DebateStepPageVoteForm__Form
+        disabled={false}
         id="debate-argument-form"
         onSubmit={[MockFunction]}
       >
         <Field
           autoComplete="off"
           component={[Function]}
-          disabled={false}
           id="body"
           minLength="1"
           name="body"
           placeholder="why-are-you-against"
+          style={
+            Object {
+              "pointerEvents": "auto",
+            }
+          }
           type="textarea"
         />
         <ForwardRef
@@ -333,17 +338,22 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       width="100%"
     >
       <DebateStepPageVoteForm__Form
+        disabled={false}
         id="debate-argument-form"
         onSubmit={[MockFunction]}
       >
         <Field
           autoComplete="off"
           component={[Function]}
-          disabled={false}
           id="body"
           minLength="1"
           name="body"
           placeholder="why-are-you-against"
+          style={
+            Object {
+              "pointerEvents": "auto",
+            }
+          }
           type="textarea"
         />
         <ForwardRef
@@ -595,17 +605,22 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
       width="100%"
     >
       <DebateStepPageVoteForm__Form
+        disabled={false}
         id="debate-argument-form"
         onSubmit={[MockFunction]}
       >
         <Field
           autoComplete="off"
           component={[Function]}
-          disabled={false}
           id="body"
           minLength="1"
           name="body"
           placeholder="why-are-you-against"
+          style={
+            Object {
+              "pointerEvents": "auto",
+            }
+          }
           type="textarea"
         />
         <ForwardRef
@@ -816,17 +831,22 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted without a
       width="100%"
     >
       <DebateStepPageVoteForm__Form
+        disabled={false}
         id="debate-argument-form"
         onSubmit={[MockFunction]}
       >
         <Field
           autoComplete="off"
           component={[Function]}
-          disabled={false}
           id="body"
           minLength="1"
           name="body"
           placeholder="why-are-you-against"
+          style={
+            Object {
+              "pointerEvents": "auto",
+            }
+          }
           type="textarea"
         />
         <ForwardRef

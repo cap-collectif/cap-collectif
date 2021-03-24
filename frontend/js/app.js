@@ -83,6 +83,14 @@ if (!global.fetch) {
 if (!Modernizr.intl) {
   require('./browserUpdate');
 }
+
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+if (isSafari) {
+  // polyfill for IntersectionObserver
+  require('intersection-observer');
+}
+
 global.cookieMonster = require('./CookieMonster').default;
 
 // react-intl@3.x polyfills for iNtErNeT eXpLoReR 11

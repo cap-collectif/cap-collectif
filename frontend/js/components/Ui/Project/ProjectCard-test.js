@@ -32,6 +32,9 @@ describe('<ProjectCard />', () => {
     votes: {
       totalCount: 32,
     },
+    anonymousVotes: {
+      totalCount: 12,
+    },
     contributions: {
       totalCount: 10,
     },
