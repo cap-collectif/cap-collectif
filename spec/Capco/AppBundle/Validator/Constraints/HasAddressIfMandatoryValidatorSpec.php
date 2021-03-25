@@ -264,4 +264,67 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $this->initialize($context);
         $this->validate($proposal, $constraint);
     }
+
+    public function it_should_validate_even_on_multi_polygon(
+        ExecutionContextInterface $context,
+        HasAddressIfMandatory $constraint,
+        Proposal $proposal,
+        ProposalForm $proposalForm,
+        ProposalDistrict $district,
+        ConstraintViolationBuilderInterface $builder
+    ) {
+        $district->getGeojson()->willReturn('{
+            "type":"Feature",
+            "geometry":{
+                "type":"MultiPolygon",
+                "coordinates":[
+                    [
+                        [
+                            [0, 0],
+                            [0, 10],
+                            [10, 10],
+                            [10, 0],
+                            [0, 0]
+                        ],
+                        [
+                            [20, 20],
+                            [20, 30],
+                            [30, 30],
+                            [30, 20],
+                            [20, 20]
+                        ]
+                    ]
+                ]
+            }
+        }');
+
+        $proposalForm
+            ->getUsingAddress()
+            ->willReturn(true)
+            ->shouldBeCalled();
+        $proposalForm
+            ->isProposalInAZoneRequired()
+            ->willReturn(true)
+            ->shouldBeCalled();
+        $proposalForm
+            ->getDistricts()
+            ->willReturn([$district])
+            ->shouldBeCalled();
+
+        $proposal
+            ->getProposalForm()
+            ->willReturn($proposalForm)
+            ->shouldBeCalled();
+
+        $proposal
+            ->getAddress()
+            ->willReturn('[{"geometry": { "location": {"lat": 25, "lng": 25 }}}]')
+            ->shouldBeCalled();
+
+        $builder->addViolation()->shouldNotBeCalled();
+        $context->buildViolation()->shouldNotBeCalled();
+
+        $this->initialize($context);
+        $this->validate($proposal, $constraint);
+    }
 }
