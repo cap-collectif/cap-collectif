@@ -280,6 +280,10 @@ services:
     Overblog\PromiseAdapter\PromiseAdapterInterface:
         alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
 
+    Capco\AppBundle\Command\RemindUserAccountConfirmationCommand:
+        bind:
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+
     Symfony\Component\Cache\Adapter\ApcuAdapter:
         public: true
 

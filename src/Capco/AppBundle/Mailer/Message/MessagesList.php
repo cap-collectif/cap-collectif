@@ -14,6 +14,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalNewsUpdateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionRevisedMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
+use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 
 final class MessagesList
 {
@@ -30,6 +31,7 @@ final class MessagesList
         'proposal_news_create' => ProposalNewsCreateAdminMessage::class,
         'proposal_news_update' => ProposalNewsUpdateAdminMessage::class,
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::class,
+        'user_account_confirmation_reminder_message' => UserAccountConfirmationReminderMessage::class
     ];
     public const TEMPLATE_LIST = [
         'event_create_admin' => '@CapcoMail/Admin/notifyAdminOfNewEvent.html.twig',
@@ -44,5 +46,6 @@ final class MessagesList
         'proposal_news_create' => ProposalNewsCreateAdminMessage::TEMPLATE,
         'proposal_news_update' => ProposalNewsUpdateAdminMessage::TEMPLATE,
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::TEMPLATE,
+        'user_account_confirmation_reminder_message' => UserAccountConfirmationReminderMessage::TEMPLATE
     ];
 }

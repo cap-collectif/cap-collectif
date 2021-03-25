@@ -21,7 +21,23 @@ final class UserAccountConfirmationReminderMessage extends AbstractExternalMessa
             'username' => $user->getUsername(),
             'emailAddress' => $user->getEmail(),
             'siteName' => $params['siteName'],
-            'confirmationUrl' => $params['confirmationURL']
+            'confirmationUrl' => $params['confirmationURL'],
+            'organizationName' => 'Cap Collectif',
+            'siteUrl' => $params['siteURL'],
+        ];
+    }
+
+    public static function mockData()
+    {
+        return [
+            'username' => 'capcoUser',
+            'siteName' => 'Capco',
+            'emailAddress' => 'dev@cap-collectif.com',
+            'confirmationUrl' => '/confirm',
+            'user_locale' => 'fr_FR',
+            'baseUrl' => 'capco.dev',
+            'organizationName' => 'Capco',
+            'siteUrl' => 'capco.dev',
         ];
     }
 }

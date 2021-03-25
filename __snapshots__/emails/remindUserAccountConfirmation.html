@@ -51,21 +51,21 @@
 
             @font-face {
                 font-family: "OpenSans";
-                src: url("https://capco.dev//fonts/openSans/OpenSans-Regular.ttf?v1") format("truetype");
+                src: url("/fonts/openSans/OpenSans-Regular.ttf?v1") format("truetype");
                 font-weight: normal;
                 font-style: normal;
             }
 
             @font-face {
                 font-family: "OpenSans";
-                src: url("https://capco.dev//fonts/openSans/OpenSans-SemiBold.ttf?v1") format("truetype");
+                src: url("/fonts/openSans/OpenSans-SemiBold.ttf?v1") format("truetype");
                 font-weight: 600;
                 font-style: normal;
             }
 
             @font-face {
                 font-family: "OpenSans";
-                src: url("https://capco.dev//fonts/openSans/OpenSans-Bold.ttf?v1") format("truetype");
+                src: url("/fonts/openSans/OpenSans-Bold.ttf?v1") format("truetype");
                 font-weight: bold;
                 font-style: normal;
             }
@@ -80,19 +80,32 @@
                                                             <tr style="margin-top: 20px">
                         <td class="resp-full-td-center" valign="top" style="font-family: 'OpenSans', helvetica, arial, sans-serif; font-size: 15px">
                                 <div>
-                    <img style="margin-bottom: 20px;" src="https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png" alt="logo "/>
+                    <img style="margin-bottom: 20px;" src="https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png" alt="logo Cap Collectif" />
         
-        <h1 style="font-size: 24px; font-weight: 600; margin: 0 0 25px 0">
-            notification.proposal_activity.delete.subject {&quot;{projectName}&quot;:&quot;Le projet de la pluie et du beau temps&quot;}
-        </h1>
-
-        <p style="margin: 0;line-height: 22px;">
-            global-hello 👋,<br/>
-            notification.proposal_activity.delete.body {&quot;{proposalName}&quot;:&quot;Il fait beau dehors&quot;,&quot;postAuthor&quot;:&quot;Senku&quot;}
-        </p>
-        <p>
-        </p>
+        <div style="text-align: left;">
+            <p style="margin: 0; color: #272B30; font-weight: 600; line-height: 32px; font-size: 24px">
+                email.reminder.confirm.address
+            </p>
+            <div style="margin: 10px 0 0 0; color: #272B30; font-weight: 400; font-size: 14px; line-height: 24px;">
+                <p>
+                    <span>hello-username {"{username}":"johnsmith"} 👋,</span>
+                    <br>
+                    <span>
+                        you-have-not-yet-confirmed-your-email-address-on-the-site {&quot;{emailAddress}&quot;:&quot;john.smith@england.uk&quot;,&quot;{siteName}&quot;:&quot;Cap-Collectif&quot;}
+                    </span>
+                </p>
+                <p style="margin: 20px 0 0 0;">
+                    user.register.confirmation_message.please_validate
+                </p>
             </div>
+            <p>
+                <a href="" style="display: inline-block;color:#ffffff;padding:18px 24px;border-radius:4px;background-color: #00acc1;font-weight: 600;">
+                    user.register.confirmation_message.validate
+                </a>
+            </p>
+        </div>
+
+    </div>
                         </td>
                     </tr>
                 </table>
@@ -106,11 +119,12 @@
                 <table id="footer-mail" style="width: 100%; font-size: 13px;"  class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="resp-full-td" style="text-align: center;font-family: 'OpenSans', helvetica, arial, sans-serif;">
-                                <div style="margin: 0; text-align: left">
+                                <div>
+        <p style="margin: 0; text-align: left">email.notification.footer.mail-send-by {"{siteName}":"Cap-Collectif","{siteUrl}":"https:\/\/capco.dev\/"}</p>
+
         <p style="text-align: left;">
             email.propulsed.by
-            <img src="https://capco.dev//capco-logo-mail.png?v1" alt="logo cap collectif"
-                 style="width: 15px;height: 15px;margin: 0 2px 0 4px;"/>
+            <img src="/capco-logo-mail.png?v1" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
             Cap Collectif
         </p>
     </div>
@@ -123,3 +137,4 @@
 </div>
 </body>
 </html>
+notification.email.external_footer {"{to}":"john.smith@england.uk","{sitename}":"Cap-Collectif","{siteUrl}":"https:\/\/capco.dev\/","{businessUrl}":"https:\/\/cap-collectif.com","{business}":"Cap Collectif"}

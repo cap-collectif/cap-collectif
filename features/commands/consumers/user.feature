@@ -48,3 +48,15 @@ Scenario: Email should be sent to the user with locale who change his email
   And I consume "user_email"
   And I open mail with subject "email.notification.email.change.subject"
   Then email should match snapshot 'confirmEmailChangeEnglish.html'
+
+@database @rabbitmq @snapshot-email
+Scenario: Email should be sent to the user to remind him to confirm his email
+  Given I publish in "user_email_reminder" with message below:
+  """
+  {
+    "userId": "user522"
+  }
+  """
+  And I consume "user_email_reminder"
+  And I open mail with subject "email.alert_expire_user.subject"
+  Then email should match snapshot 'remindUserAccountConfirmation.html'
