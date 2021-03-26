@@ -100,7 +100,9 @@ const ArgumentTabQuery = ({ debate, debateStep }: Props) => {
         isLoaded={!!debate && !!debateStep}
         placeholder={<ArgumentHeaderTabPlaceholder state={parameters.filters.argument.state} />}>
         {/* Flow doesn't understand that the component is only render when props are ready */}
-        {!!debate && !!debateStep && <ArgumentHeaderTab debate={debate} debateStep={debateStep} />}
+        {!!debate && !!debateStep && debate.totalArguments.totalCount > 0 && (
+          <ArgumentHeaderTab debate={debate} debateStep={debateStep} />
+        )}
       </Skeleton>
 
       <Skeleton
@@ -123,6 +125,9 @@ export default createFragmentContainer(ArgumentTabQuery, {
         isTrashed: { type: "Boolean!" }
       ) {
       id
+      totalArguments: arguments(first: 0, isPublished: null, isTrashed: null) {
+        totalCount
+      }
       ...ArgumentTab_debate
         @arguments(
           count: $count
