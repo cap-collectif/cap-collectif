@@ -33,9 +33,8 @@ export const VoteView = ({ positivePercentage, isMobile, votesCount }: Props) =>
 
   const left = positivePercentageCleaned;
   const right = 100 - positivePercentageCleaned;
-  const leftPercentage = `${Math.round(left * 100) / 100}%`;
-  const rightPercentage = `${Math.round(right * 100) / 100}%`;
-
+  const leftPercentage = `${left > right ? Math.round(left) : 100 - Math.round(right)}%`;
+  const rightPercentage = `${left > right ? 100 - Math.round(left) : Math.round(right)}%`;
   if (isMobile) {
     return (
       <Flex width="100%" position="relative" justify="space-between">
