@@ -808,25 +808,25 @@ class Project implements IndexableInterface
 
     public function getFirstAnalysisStep(): ?AbstractStep
     {
-        $collectStep = $this->getFirstCollectStep();
-
-        if (!$collectStep) {
-            return null;
+        foreach ($this->getSteps() as $step) {
+            if (
+                $step->getStep() &&
+                $step->getStep()->isCollectStep() &&
+                $step->getStep()->getProposalForm() &&
+                $step
+                    ->getStep()
+                    ->getProposalForm()
+                    ->getAnalysisConfiguration()
+            ) {
+                return $step
+                    ->getStep()
+                    ->getProposalForm()
+                    ->getAnalysisConfiguration()
+                    ->getAnalysisStep();
+            }
         }
 
-        $proposalForm = $collectStep->getProposalForm();
-
-        if (!$proposalForm) {
-            return null;
-        }
-
-        $analysisConfig = $proposalForm->getAnalysisConfiguration();
-
-        if (!$analysisConfig) {
-            return null;
-        }
-
-        return $analysisConfig->getAnalysisStep();
+        return null;
     }
 
     public function getExportableSteps()
