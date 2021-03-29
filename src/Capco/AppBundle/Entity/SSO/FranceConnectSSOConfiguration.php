@@ -123,7 +123,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         return $this;
     }
 
-    public function setAllowedData(array $allowedData): self
+    public function setAllowedData(array $allowedData = []): self
     {
         $this->allowedData = $allowedData;
 
