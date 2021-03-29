@@ -187,6 +187,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/DebateArgumentVote.yaml',
             $this->fixturesDir . 'Dev/DebateAnonymousVote.yaml',
             $this->fixturesDir . 'Dev/DebateStep.yaml',
+            $this->fixturesDir . 'Dev/DebateVoteToken.yaml',
 
             $this->fixturesDir . 'Dev/ConsultationStep.yaml',
             $this->fixturesDir . 'Dev/Consultation.yaml',

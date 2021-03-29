@@ -58,7 +58,7 @@ class TokenManager
         if (!ForOrAgainstType::isValid($value)) {
             $this->logger->info("invalid value ${value} used to vote on debate");
 
-            throw new \Exception("invalid value ${value}"); //todo clé de trad
+            throw new \Exception("invalid value ${value}");
         }
     }
 
@@ -75,7 +75,7 @@ class TokenManager
                             ->getTitle()
                 );
 
-                throw new \Exception('already-voted'); //todo clé de trad
+                throw new \Exception('global.already_voted');
             }
         }
     }
@@ -86,7 +86,7 @@ class TokenManager
         if (null === $voteToken) {
             $this->logger->info("invalid token ${token} used to vote on debate");
 
-            throw new \Exception('invalid-token'); //todo clé de trad
+            throw new \Exception('invalid-token');
         }
 
         return $voteToken;

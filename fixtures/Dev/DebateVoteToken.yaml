@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Debate\DebateVoteToken:
+    debateVoteToken1:
+        __construct: ['@user1', '@debateCannabis', 'debateVoteToken1']
+    debateVoteTokenAlreadyUsed:
+        __construct: ['@userMickael', '@debateCannabis', 'debateVoteTokenAlreadyUsed']
