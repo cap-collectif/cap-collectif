@@ -69,6 +69,22 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         'preferred_username' => false,
     ];
 
+    public function __construct()
+    {
+        $allowedData = [
+            'given_name' => true,
+            'family_name' => true,
+            'birthdate' => false,
+            'gender' => false,
+            'birthplace' => false,
+            'birthcountry' => false,
+            'email' => true,
+            'preferred_username' => false,
+        ];
+
+        $this->setAllowedData($allowedData);
+    }
+
     public function getAllowedData(): array
     {
         return $this->allowedData;
