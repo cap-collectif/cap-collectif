@@ -63,7 +63,7 @@ const DebateStepPageArgumentsDrawer = ({
   ...DetailDrawerProps,
   +debate: DebateStepPageArgumentsDrawer_debate$key,
   +viewer: ?DebateStepPageArgumentsDrawer_viewer$key,
-|}) => {
+|}): React.Node => {
   const intl = useIntl();
   const debate: DebateStepPageArgumentsDrawer_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
   const viewer: DebateStepPageArgumentsDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);

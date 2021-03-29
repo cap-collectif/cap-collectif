@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import * as React from 'react';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { DebateStepPageLogic_query } from '~relay/DebateStepPageLogic_query.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import DebateStepPageMainActions from './MainActions/DebateStepPageMainActions';
@@ -17,7 +17,7 @@ export type Props = {|
   +query: ?DebateStepPageLogic_query,
 |};
 
-export const DebateStepPageLogic = ({ query }: Props) => {
+export const DebateStepPageLogic = ({ query }: Props): React.Node => {
   const isMobile = useIsMobile();
   const { widget } = useDebateStepPage();
   const step = query?.step || null;
@@ -44,7 +44,7 @@ export const DebateStepPageLogic = ({ query }: Props) => {
   );
 };
 
-export default createFragmentContainer(DebateStepPageLogic, {
+export default (createFragmentContainer(DebateStepPageLogic, {
   query: graphql`
     fragment DebateStepPageLogic_query on Query
       @argumentDefinitions(
@@ -77,4 +77,4 @@ export default createFragmentContainer(DebateStepPageLogic, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageLogic>);

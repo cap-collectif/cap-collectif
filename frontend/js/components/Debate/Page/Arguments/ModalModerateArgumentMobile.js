@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { submit } from 'redux-form';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { useDispatch } from 'react-redux';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
@@ -17,7 +17,6 @@ import type { Dispatch } from '~/types';
 
 type Props = {|
   argument: ModalModerateArgumentMobile_argument,
-  dispatch: Dispatch,
 |};
 
 const STATE = {
@@ -57,8 +56,9 @@ const trashAlternateArgument = (
     });
 };
 
-export const ModalModerateArgumentMobile = ({ argument, dispatch }: Props) => {
+export const ModalModerateArgumentMobile = ({ argument }: Props): React.Node => {
   const intl = useIntl();
+  const dispatch = useDispatch<Dispatch>();
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.FORM);
   const [errorCount, setErrorCount] = React.useState<number>(0);
   const [valuesSaved, setValuesSaved] = React.useState<?Values>(null);
@@ -187,11 +187,7 @@ export const ModalModerateArgumentMobile = ({ argument, dispatch }: Props) => {
   );
 };
 
-const ModalModerateArgumentMobileConnected = connect<any, any, _, _, _, _>()(
-  ModalModerateArgumentMobile,
-);
-
-export default createFragmentContainer(ModalModerateArgumentMobileConnected, {
+export default (createFragmentContainer(ModalModerateArgumentMobile, {
   argument: graphql`
     fragment ModalModerateArgumentMobile_argument on DebateArgument {
       id
@@ -201,4 +197,4 @@ export default createFragmentContainer(ModalModerateArgumentMobileConnected, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof ModalModerateArgumentMobile>);

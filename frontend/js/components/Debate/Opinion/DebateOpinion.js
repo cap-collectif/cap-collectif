@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import css from '@styled-system/css';
 import { useDisclosure } from '@liinkiing/react-hooks';
@@ -25,7 +25,7 @@ type Props = {|
   +readMore: boolean,
 |};
 
-export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
+export const DebateOpinion = ({ opinion, isMobile, readMore }: Props): React.Node => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Card
@@ -113,7 +113,7 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props) => {
   );
 };
 
-export default createFragmentContainer(DebateOpinion, {
+export default (createFragmentContainer(DebateOpinion, {
   opinion: graphql`
     fragment DebateOpinion_opinion on DebateOpinion
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
@@ -128,4 +128,4 @@ export default createFragmentContainer(DebateOpinion, {
       type
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateOpinion>);

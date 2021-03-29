@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import moment from 'moment';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import type { DebateStepPageNotYetStarted_step } from '~relay/DebateStepPageNotYetStarted_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
@@ -14,7 +14,7 @@ type Props = {|
   +step: ?DebateStepPageNotYetStarted_step,
 |};
 
-export const DebateStepPageNotYetStarted = ({ step }: Props) => {
+export const DebateStepPageNotYetStarted = ({ step }: Props): React.Node => {
   const endDate = moment(step?.timeRange?.startAt);
   const now = moment();
   const { title } = useDebateStepPage();
@@ -43,7 +43,7 @@ export const DebateStepPageNotYetStarted = ({ step }: Props) => {
   );
 };
 
-export default createFragmentContainer(DebateStepPageNotYetStarted, {
+export default (createFragmentContainer(DebateStepPageNotYetStarted, {
   step: graphql`
     fragment DebateStepPageNotYetStarted_step on DebateStep {
       timeRange {
@@ -51,4 +51,4 @@ export default createFragmentContainer(DebateStepPageNotYetStarted, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageNotYetStarted>);

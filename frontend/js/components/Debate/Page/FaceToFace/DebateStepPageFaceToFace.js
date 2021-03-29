@@ -1,6 +1,6 @@
 // @flow
-import React, { useState } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import React, { useState, type Node } from 'react';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import type { DebateStepPageFaceToFace_step } from '~relay/DebateStepPageFaceToFace_step.graphql';
 import AppBox from '~ui/Primitives/AppBox';
@@ -16,7 +16,7 @@ type Props = {|
   +isMobile: boolean,
 |};
 
-export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
+export const DebateStepPageFaceToFace = ({ step, isMobile }: Props): Node => {
   const [readMore, setReadMore] = useState(false);
   const debate = step?.debate;
   const opinions = debate?.opinions?.edges
@@ -73,7 +73,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props) => {
   );
 };
 
-export default createFragmentContainer(DebateStepPageFaceToFace, {
+export default (createFragmentContainer(DebateStepPageFaceToFace, {
   step: graphql`
     fragment DebateStepPageFaceToFace_step on DebateStep
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
@@ -90,4 +90,4 @@ export default createFragmentContainer(DebateStepPageFaceToFace, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageFaceToFace>);

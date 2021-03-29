@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-relay';
 import { useDisclosure } from '@liinkiing/react-hooks';
@@ -49,7 +49,7 @@ const VIEWER_FRAGMENT = graphql`
 export const MobileDebateStepPageArguments = ({
   debate: debateFragment,
   viewer: viewerFragment,
-}: Props) => {
+}: Props): React.Node => {
   const debate: MobileDebateStepPageArguments_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
   const viewer: MobileDebateStepPageArguments_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const { isOpen, onClose, onOpen } = useDisclosure();

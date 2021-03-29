@@ -52,7 +52,11 @@ const deleteVoteFromViewer = (
     });
 };
 
-export const ModalDeleteVoteMobile = ({ debate, setVoteState, setShowArgumentForm }: Props) => {
+export const ModalDeleteVoteMobile = ({
+  debate,
+  setVoteState,
+  setShowArgumentForm,
+}: Props): React.Node => {
   const intl = useIntl();
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.CHOICES);
   const [errorCount, setErrorCount] = React.useState<number>(0);

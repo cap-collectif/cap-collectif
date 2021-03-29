@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
 import type { DebateStepPageLinkedArticlesDrawer_step } from '~relay/DebateStepPageLinkedArticlesDrawer_step.graphql';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
@@ -17,7 +17,7 @@ const DebateStepPageLinkedArticlesDrawer = ({
 }: {|
   ...DetailDrawerProps,
   +step: DebateStepPageLinkedArticlesDrawer_step,
-|}) => {
+|}): React.Node => {
   const articles =
     step?.debate?.articles?.edges
       ?.filter(Boolean)
@@ -54,7 +54,7 @@ const DebateStepPageLinkedArticlesDrawer = ({
   );
 };
 
-export default createFragmentContainer(DebateStepPageLinkedArticlesDrawer, {
+export default (createFragmentContainer(DebateStepPageLinkedArticlesDrawer, {
   step: graphql`
     fragment DebateStepPageLinkedArticlesDrawer_step on DebateStep {
       id
@@ -74,4 +74,4 @@ export default createFragmentContainer(DebateStepPageLinkedArticlesDrawer, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageLinkedArticlesDrawer>);

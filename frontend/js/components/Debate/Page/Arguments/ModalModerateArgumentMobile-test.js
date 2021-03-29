@@ -1,9 +1,10 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
-import { ModalModerateArgumentMobile } from './ModalModerateArgumentMobile';
+import { render } from 'enzyme';
+import MockProviders from '~/testUtils';
 import { $refType } from '~/mocks';
+import { ModalModerateArgumentMobile } from './ModalModerateArgumentMobile';
 
 const defaultProps = {
   argument: {
@@ -14,16 +15,28 @@ const defaultProps = {
       id: 'debate-123',
     },
   },
-  dispatch: jest.fn(),
 };
 
 const props = {
   basic: defaultProps,
 };
 
+jest.mock('react-dom', () => ({
+  ...jest.requireActual('react-dom'),
+  createPortal: jest.fn(element => {
+    return element;
+  }),
+}));
+
+global.Math.random = () => 0.5;
+
 describe('<ModalModerateArgumentMobile />', () => {
   it('should renders correcty with argument', () => {
-    const wrapper = shallow(<ModalModerateArgumentMobile {...props.basic} />);
+    const wrapper = render(
+      <MockProviders store={{}}>
+        <ModalModerateArgumentMobile {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

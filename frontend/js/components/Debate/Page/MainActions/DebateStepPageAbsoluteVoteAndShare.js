@@ -1,8 +1,8 @@
 // @flow
-import React from 'react';
+import React, { type Node } from 'react';
 import css from '@styled-system/css';
 import { useIntl } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { DebateStepPageAbsoluteVoteAndShare_step } from '~relay/DebateStepPageAbsoluteVoteAndShare_step.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
@@ -30,7 +30,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   showArgumentForm,
   setShowArgumentForm,
   viewerIsConfirmed,
-}: Props) => {
+}: Props): Node => {
   const { debate, url } = step;
   const { title, widget } = useDebateStepPage();
   const intl = useIntl();
@@ -94,7 +94,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   );
 };
 
-export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
+export default (createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
   step: graphql`
     fragment DebateStepPageAbsoluteVoteAndShare_step on DebateStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
@@ -106,4 +106,4 @@ export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
       ...DebateStepPageVote_step @arguments(isMobile: $isMobile)
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageAbsoluteVoteAndShare>);

@@ -1,7 +1,7 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, type Node } from 'react';
 import { truncate } from 'lodash';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type {
@@ -50,7 +50,7 @@ export const voteForArgument = (
   intl: IntlShape,
   countVotes: number,
   widgetLocation: ?string,
-) => {
+): Promise<void> => {
   if (viewerHasVote) {
     return RemoveDebateArgumentVoteMutation.commit({ input: { debateArgumentId } }, { countVotes })
       .then(response => {
@@ -91,7 +91,7 @@ export const ArgumentCard = ({
   setArgumentReported,
   setDeleteModalInfo,
   ...props
-}: Props) => {
+}: Props): Node => {
   const isViewerAdmin = viewer && viewer.isAdmin;
   const isAuthor = argument.viewerDidAuthor;
   const { isOpen, onOpen, onClose } = useDisclosure(false);
@@ -292,7 +292,7 @@ export const ArgumentCard = ({
   );
 };
 
-export default createFragmentContainer(ArgumentCard, {
+export default (createFragmentContainer(ArgumentCard, {
   argument: graphql`
     fragment ArgumentCard_argument on DebateArgument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
@@ -325,4 +325,4 @@ export default createFragmentContainer(ArgumentCard, {
       isEmailConfirmed
     }
   `,
-});
+}): RelayFragmentContainer<typeof ArgumentCard>);

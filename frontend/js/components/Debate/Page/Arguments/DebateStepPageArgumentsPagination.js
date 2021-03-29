@@ -80,7 +80,13 @@ const getVariables = (
   props: {| id: string |},
   { count, cursor }: ConnectionMetadata,
   fragmentVariables: { orderBy: { field: string, direction: string }, isAuthenticated: boolean },
-) => {
+): {|
+  cursor: ?string,
+  first: ?string,
+  isAuthenticated: boolean,
+  debateId: string,
+  orderBy: { field: string, direction: string },
+|} => {
   return {
     first: count,
     cursor,
@@ -92,6 +98,7 @@ const getVariables = (
 
 export const CONNECTION_CONFIG_YES = {
   getVariables,
+  // $FlowFixMe We need to wait for relay 11
   query: graphql`
     query DebateStepPageArgumentsPaginationRefetchYesQuery(
       $debateId: ID!
@@ -116,6 +123,7 @@ export const CONNECTION_CONFIG_YES = {
 
 export const CONNECTION_CONFIG_NO = {
   getVariables,
+  // $FlowFixMe We need to wait for relay 11
   query: graphql`
     query DebateStepPageArgumentsPaginationRefetchNoQuery(
       $debateId: ID!
@@ -143,7 +151,7 @@ export const DebateStepPageArgumentsPagination = ({
   viewer: viewerFragment,
   handleChange,
   viewerUnpublishedArgument,
-}: Props) => {
+}: Props): React.Node => {
   const [argumentsQuery, paginationProps]: [
     DebateStepPageArgumentsPagination_debate,
     RelayHookPaginationProps,

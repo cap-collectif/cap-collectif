@@ -10,7 +10,7 @@ export type Context = {|
   |},
 |};
 
-export const DebateStepPageContext = React.createContext<Context>({
+export const DebateStepPageContext: React.Context<Context> = React.createContext<Context>({
   title: '',
   stepClosed: true,
   widget: {

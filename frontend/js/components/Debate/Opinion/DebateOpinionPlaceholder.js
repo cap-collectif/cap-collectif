@@ -15,7 +15,7 @@ type Props = {|
   +debateOpinionStatus: DebateOpinionStatus,
 |};
 
-export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props) => (
+export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props): React.Node => (
   <Card p={0} bg="white" width="100%">
     <Tag
       variant={debateOpinionStatus === 'FOR' ? 'green' : 'red'}

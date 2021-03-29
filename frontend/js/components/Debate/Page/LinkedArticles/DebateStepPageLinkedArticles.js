@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import type { StyledComponent } from 'styled-components';
@@ -40,7 +40,7 @@ export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slide
   }
 `;
 
-export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
+export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.Node => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const debate = step?.debate;
   const articles = debate?.articles?.edges
@@ -128,7 +128,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props) => {
   );
 };
 
-export default createFragmentContainer(DebateStepPageLinkedArticles, {
+export default (createFragmentContainer(DebateStepPageLinkedArticles, {
   step: graphql`
     fragment DebateStepPageLinkedArticles_step on DebateStep
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
@@ -150,4 +150,4 @@ export default createFragmentContainer(DebateStepPageLinkedArticles, {
       ...DebateStepPageLinkedArticlesDrawer_step @include(if: $isMobile)
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageLinkedArticles>);

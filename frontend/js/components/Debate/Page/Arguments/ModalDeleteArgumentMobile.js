@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useIntl, type IntlShape } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
 import type { ModalDeleteArgumentMobile_argument } from '~relay/ModalDeleteArgumentMobile_argument.graphql';
@@ -59,7 +59,7 @@ const deleteArgument = (
     });
 };
 
-export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props) => {
+export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props): React.Node => {
   const intl = useIntl();
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.CHOICES);
   const [errorCount, setErrorCount] = React.useState<number>(0);
@@ -182,7 +182,7 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
   );
 };
 
-export default createFragmentContainer(ModalDeleteArgumentMobile, {
+export default (createFragmentContainer(ModalDeleteArgumentMobile, {
   argument: graphql`
     fragment ModalDeleteArgumentMobile_argument on DebateArgument {
       id
@@ -191,4 +191,4 @@ export default createFragmentContainer(ModalDeleteArgumentMobile, {
       }
     }
   `,
-});
+}): RelayFragmentContainer<typeof ModalDeleteArgumentMobile>);

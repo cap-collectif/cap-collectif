@@ -102,6 +102,7 @@ well_formed_exports=true
 ; Here we set the list of folders migrated to new mode :
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Contact
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/SiteFavicon
+well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Debate
 
 
 module.system.node.resolve_dirname=node_modules

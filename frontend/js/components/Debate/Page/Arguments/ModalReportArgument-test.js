@@ -1,21 +1,17 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
+import MockProviders from '~/testUtils';
 import { ModalReportArgument } from './ModalReportArgument';
-import { intlMock, formMock } from '~/mocks';
 
 const defaultProps = {
-  ...formMock,
   argument: {
     id: 'argument-123',
     debateId: 'debate-123',
     forOrAgainst: 'FOR',
   },
   onClose: jest.fn(),
-  intl: intlMock,
-  dispatch: jest.fn(),
-  isLoading: false,
 };
 
 const props = {
@@ -24,7 +20,11 @@ const props = {
 
 describe('<ModalReportArgument />', () => {
   it('should renders correcty with argument', () => {
-    const wrapper = shallow(<ModalReportArgument {...props.basic} />);
+    const wrapper = render(
+      <MockProviders store={{}}>
+        <ModalReportArgument {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

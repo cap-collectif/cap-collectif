@@ -110,7 +110,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
-  <Relay(Connect(ModalReportArgumentMobile))
+  <Relay(ModalReportArgumentMobile)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -250,7 +250,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
-  <Relay(Connect(ModalReportArgumentMobile))
+  <Relay(ModalReportArgumentMobile)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -390,7 +390,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
-  <Relay(Connect(ModalReportArgumentMobile))
+  <Relay(ModalReportArgumentMobile)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -530,7 +530,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
       </Text>
     </ForwardRef>
   </ForwardRef>
-  <Relay(Connect(ModalReportArgumentMobile))
+  <Relay(ModalReportArgumentMobile)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -670,7 +670,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
       </Text>
     </ForwardRef>
   </ForwardRef>
-  <Relay(Connect(ModalReportArgumentMobile))
+  <Relay(ModalReportArgumentMobile)
     argument={
       Object {
         "$fragmentRefs": null,

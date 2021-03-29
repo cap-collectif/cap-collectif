@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
@@ -49,7 +49,7 @@ const editArgument = (
     });
 };
 
-export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props) => {
+export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props): React.Node => {
   const intl = useIntl();
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.FORM);
   const [errorCount, setErrorCount] = React.useState<number>(0);
@@ -170,11 +170,11 @@ export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props) 
   );
 };
 
-export default createFragmentContainer(ModalEditArgumentMobile, {
+export default (createFragmentContainer(ModalEditArgumentMobile, {
   argument: graphql`
     fragment ModalEditArgumentMobile_argument on DebateArgument {
       id
       ...ArgumentCardFormEdition_argument
     }
   `,
-});
+}): RelayFragmentContainer<typeof ModalEditArgumentMobile>);

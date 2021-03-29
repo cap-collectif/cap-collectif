@@ -1,6 +1,6 @@
 // @flow
-import React, { useState } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import React, { useState, type Node } from 'react';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
 import type { DesktopDebateStepPageArguments_viewer } from '~relay/DesktopDebateStepPageArguments_viewer.graphql';
@@ -24,7 +24,7 @@ type Props = {|
   +viewer: ?DesktopDebateStepPageArguments_viewer,
 |};
 
-export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
+export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node => {
   const [filter, setFilter] = useState<Filter>('DESC');
   const [yesState, setYesState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
   const [noState, setNoState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
@@ -140,10 +140,10 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props) => {
   );
 };
 
-export default createFragmentContainer(DesktopDebateStepPageArguments, {
+export default (createFragmentContainer(DesktopDebateStepPageArguments, {
   viewer: graphql`
     fragment DesktopDebateStepPageArguments_viewer on User {
       ...DebateStepPageArgumentsPagination_viewer
     }
   `,
-});
+}): RelayFragmentContainer<typeof DesktopDebateStepPageArguments>);

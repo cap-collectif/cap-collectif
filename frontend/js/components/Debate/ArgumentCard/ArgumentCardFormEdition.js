@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import * as React from 'react';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { type IntlShape } from 'react-intl';
 import { reduxForm, Field, formValueSelector, submit } from 'redux-form';
 import { connect } from 'react-redux';
@@ -20,17 +20,33 @@ export type FormValues = {|
   body: string,
 |};
 
-type Props = {|
-  ...ReduxFormFormProps,
-  +intl: IntlShape,
-  +argument: ArgumentCardFormEdition_argument,
-  +goBack: () => void,
+type StateProps = {|
+  +dispatch: Dispatch,
   +body: string,
+  +initialValues: FormValues,
+|};
+
+type OwnProps = {|
+  +intl: IntlShape,
+  +goBack: () => void,
   +isMobile?: boolean,
   +onSuccess?: () => void,
   +onError?: () => void,
   +getValues?: (values: FormValues) => void,
-  +dispatch: Dispatch,
+|};
+
+type RelayProps = {| +argument: ArgumentCardFormEdition_argument |};
+
+type BeforeConnectProps = {| ...OwnProps, ...RelayProps |};
+
+type AfterConnectProps = {|
+  ...BeforeConnectProps,
+  ...StateProps,
+|};
+
+type Props = {|
+  ...AfterConnectProps,
+  ...ReduxFormFormProps,
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
@@ -79,70 +95,74 @@ export const ArgumentCardFormEdition = ({
   handleSubmit,
   intl,
   dispatch,
-}: Props) => (
-  <Form id={formName} onSubmit={handleSubmit}>
-    <Field
-      name="body"
-      component={component}
-      type="textarea"
-      id="body"
-      minLength="1"
-      autoComplete="off"
-    />
+}: Props): React.Node => {
+  return (
+    <Form id={formName} onSubmit={handleSubmit}>
+      <Field
+        name="body"
+        component={component}
+        type="textarea"
+        id="body"
+        minLength="1"
+        autoComplete="off"
+      />
 
-    {isMobile ? (
-      <Button
-        type="submit"
-        variant="primary"
-        variantColor="primary"
-        variantSize="big"
-        disabled={body.length < 2}
-        onClick={() => dispatch(submit(formName))}
-        mt={2}
-        width="100%"
-        justifyContent="center">
-        {intl.formatMessage({ id: 'modifications.publish' })}
-      </Button>
-    ) : (
-      <ButtonGroup justifyContent="flex-end" mt={2}>
-        <Button color="neutral-gray.500" onClick={goBack} variantSize="small">
-          {intl.formatMessage({ id: 'global.cancel' })}
-        </Button>
+      {isMobile ? (
         <Button
           type="submit"
-          onClick={() => dispatch(submit(formName))}
           variant="primary"
           variantColor="primary"
-          variantSize="small"
-          disabled={body.length < 2}>
-          {intl.formatMessage({ id: 'global.edit' })}
+          variantSize="big"
+          disabled={body.length < 2}
+          onClick={() => dispatch(submit(formName))}
+          mt={2}
+          width="100%"
+          justifyContent="center">
+          {intl.formatMessage({ id: 'modifications.publish' })}
         </Button>
-      </ButtonGroup>
-    )}
-  </Form>
-);
+      ) : (
+        <ButtonGroup justifyContent="flex-end" mt={2}>
+          <Button color="neutral-gray.500" onClick={goBack} variantSize="small">
+            {intl.formatMessage({ id: 'global.cancel' })}
+          </Button>
+          <Button
+            type="submit"
+            onClick={() => dispatch(submit(formName))}
+            variant="primary"
+            variantColor="primary"
+            variantSize="small"
+            disabled={body.length < 2}>
+            {intl.formatMessage({ id: 'global.edit' })}
+          </Button>
+        </ButtonGroup>
+      )}
+    </Form>
+  );
+};
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, { argument }: Props) => ({
+const mapStateToProps = (state: GlobalState, { argument }: BeforeConnectProps) => ({
   initialValues: {
-    body: argument.body || '',
+    body: argument.body,
   },
   body: selector(state, 'body') || '',
 });
 
-const form = reduxForm({
+const form: React.AbstractComponent<AfterConnectProps> = reduxForm({
   form: formName,
   onSubmit,
 })(ArgumentCardFormEdition);
 
-const ArgumentCardFormEditionConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
+const container = (connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
+  form,
+): React.AbstractComponent<BeforeConnectProps>);
 
-export default createFragmentContainer(ArgumentCardFormEditionConnected, {
+export default (createFragmentContainer(container, {
   argument: graphql`
     fragment ArgumentCardFormEdition_argument on DebateArgument {
       id
       body
     }
   `,
-});
+}): RelayFragmentContainer<typeof container>);

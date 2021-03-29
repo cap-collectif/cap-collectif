@@ -1,269 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
-<ForwardRef(MotionComponent)
-  alignItems="center"
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  direction="row"
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  justifyContent="center"
-  spacing={6}
-  transition={
-    Object {
-      "duration": 0.5,
-    }
-  }
-  width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  style="opacity:0"
 >
-  <ConditionalWrapper
-    when={true}
-    wrapper={[Function]}
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    type="button"
   >
-    <DebateStepPageVote___StyledButton
-      _css={[Function]}
-      leftIcon="THUMB_UP"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.for"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton>
-  </ConditionalWrapper>
-  <ConditionalWrapper
-    when={true}
-    wrapper={[Function]}
+    <iconmock
+      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+    />
+    global.for
+  </button>
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    type="button"
   >
-    <DebateStepPageVote___StyledButton2
-      _css2={[Function]}
-      leftIcon="THUMB_DOWN"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.against"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton2>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+    <iconmock
+      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+    />
+    global.against
+  </button>
+</div>
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
-<ForwardRef(MotionComponent)
-  alignItems="center"
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  direction="row"
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  justifyContent="center"
-  spacing={6}
-  transition={
-    Object {
-      "duration": 0.5,
-    }
-  }
-  width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  style="opacity:0"
 >
-  <ConditionalWrapper
-    when={true}
-    wrapper={[Function]}
-  >
-    <DebateStepPageVote___StyledButton
-      _css={[Function]}
-      leftIcon="THUMB_UP"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
+  <span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+      type="button"
     >
-      <FormattedMessage
-        id="global.for"
-        values={Object {}}
+      <iconmock
+        class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
       />
-    </DebateStepPageVote___StyledButton>
-  </ConditionalWrapper>
-  <ConditionalWrapper
-    when={true}
-    wrapper={[Function]}
-  >
-    <DebateStepPageVote___StyledButton2
-      _css2={[Function]}
-      leftIcon="THUMB_DOWN"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
+      global.for
+    </button>
+  </span>
+  <span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+      type="button"
     >
-      <FormattedMessage
-        id="global.against"
-        values={Object {}}
+      <iconmock
+        class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
       />
-    </DebateStepPageVote___StyledButton2>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+      global.against
+    </button>
+  </span>
+</div>
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
-<ForwardRef(MotionComponent)
-  alignItems="center"
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  direction="row"
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  justifyContent="center"
-  spacing={6}
-  transition={
-    Object {
-      "duration": 0.5,
-    }
-  }
-  width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  style="opacity:0"
 >
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    type="button"
   >
-    <DebateStepPageVote___StyledButton
-      _css={[Function]}
-      leftIcon="THUMB_UP"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.for"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton>
-  </ConditionalWrapper>
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
+    <iconmock
+      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+    />
+    global.for
+  </button>
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    type="button"
   >
-    <DebateStepPageVote___StyledButton2
-      _css2={[Function]}
-      leftIcon="THUMB_DOWN"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.against"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton2>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+    <iconmock
+      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+    />
+    global.against
+  </button>
+</div>
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
-<ForwardRef(MotionComponent)
-  alignItems="center"
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  direction="row"
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  justifyContent="center"
-  spacing={6}
-  transition={
-    Object {
-      "duration": 0.5,
-    }
-  }
-  width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  style="opacity:0"
 >
-  <ConditionalWrapper
-    when={true}
-    wrapper={[Function]}
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    type="button"
   >
-    <DebateStepPageVote___StyledButton
-      _css={[Function]}
-      leftIcon="THUMB_UP"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.for"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton>
-  </ConditionalWrapper>
-  <ConditionalWrapper
-    when={true}
-    wrapper={[Function]}
+    <iconmock
+      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+    />
+    global.for
+  </button>
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    type="button"
   >
-    <DebateStepPageVote___StyledButton2
-      _css2={[Function]}
-      leftIcon="THUMB_DOWN"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      variantSize="big"
-    >
-      <FormattedMessage
-        id="global.against"
-        values={Object {}}
-      />
-    </DebateStepPageVote___StyledButton2>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+    <iconmock
+      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+    />
+    global.against
+  </button>
+</div>
 `;

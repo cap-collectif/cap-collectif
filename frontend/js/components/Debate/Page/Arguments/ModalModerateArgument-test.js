@@ -1,7 +1,8 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
+import MockProviders from '~/testUtils';
 import { ModalModerateArgument } from './ModalModerateArgument';
 import { formatConnectionPath } from '~/shared/utils/relay';
 
@@ -13,7 +14,6 @@ const defaultProps = {
     forOrAgainst: 'FOR',
   },
   onClose: jest.fn(),
-  dispatch: jest.fn(),
   relayConnection: [
     formatConnectionPath(
       ['client', 'debate-123'],
@@ -27,9 +27,20 @@ const props = {
   basic: defaultProps,
 };
 
+jest.mock('react-dom', () => ({
+  ...jest.requireActual('react-dom'),
+  createPortal: jest.fn(element => {
+    return element;
+  }),
+}));
+
 describe('<ModalModerateArgument />', () => {
   it('should renders correcty with argument', () => {
-    const wrapper = shallow(<ModalModerateArgument {...props.basic} />);
+    const wrapper = render(
+      <MockProviders store={{}}>
+        <ModalModerateArgument {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

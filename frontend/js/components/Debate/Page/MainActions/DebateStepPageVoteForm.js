@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import * as React from 'react';
+import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage, type IntlShape } from 'react-intl';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -39,15 +39,16 @@ import CookieMonster from '~/CookieMonster';
 export const formName = 'debate-argument-form';
 
 type Viewer = {|
-  id: string,
-  username: string,
-  isEmailConfirmed: boolean,
+  +id: string,
+  +username: string,
+  +isEmailConfirmed: boolean,
 |};
 
-type Props = {|
-  ...ReduxFormFormProps,
-  +debate: DebateStepPageVoteForm_debate,
+type FormValues = {|
   +body: string,
+|};
+
+type OwnProps = {|
   +voteState: VoteState,
   +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
@@ -56,14 +57,31 @@ type Props = {|
   +isAbsolute?: boolean,
   +url?: string,
   +viewerIsConfirmed: boolean,
-  +organizationName: string,
   +widgetLocation: ?string,
   +intl: IntlShape,
-  +viewer: Viewer,
+|};
+type RelayProps = {|
+  +debate: DebateStepPageVoteForm_debate,
 |};
 
-type FormValues = {|
+type BeforeConnectProps = {| ...OwnProps, ...RelayProps |};
+
+type StateProps = {|
+  +initialValues: FormValues,
+  +dispatch: Dispatch,
   +body: string,
+  +organizationName: string,
+  +viewer: Viewer | null,
+|};
+
+type AfterConnectProps = {|
+  ...BeforeConnectProps,
+  ...StateProps,
+|};
+
+type Props = {|
+  ...AfterConnectProps,
+  ...ReduxFormFormProps,
 |};
 
 export const Form: StyledComponent<{ disabled: boolean }, {}, HTMLFormElement> = styled.form`
@@ -102,7 +120,7 @@ export const addArgumentOnDebate = (
     username: $PropertyType<Viewer, 'username'>,
     isEmailConfirmed: $PropertyType<Viewer, 'isEmailConfirmed'>,
   },
-) => {
+): void | Promise<void> => {
   if (!type) return;
   const connections = [
     formatConnectionPath(
@@ -248,9 +266,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       setVoteState('VOTED');
     },
     {
-      id: props.viewer?.id,
-      username: props.viewer?.username,
-      isEmailConfirmed: props.viewer?.isEmailConfirmed,
+      id: props.viewer?.id || '',
+      username: props.viewer?.username || '',
+      isEmailConfirmed: props.viewer?.isEmailConfirmed || false,
     },
   );
 };
@@ -269,7 +287,7 @@ export const DebateStepPageVoteForm = ({
   handleSubmit,
   organizationName,
   intl,
-}: Props) => {
+}: Props): React.Node => {
   useScript('https://platform.twitter.com/widgets.js');
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { widget } = useDebateStepPage();
@@ -592,7 +610,13 @@ const mapStateToProps = (state: GlobalState) => ({
   initialValues: {
     body: '',
   },
-  viewer: state.user.user,
+  viewer: state.user.user
+    ? {
+        id: state.user.user.id,
+        username: state.user.user.username,
+        isEmailConfirmed: state.user.user.isEmailConfirmed,
+      }
+    : null,
   body: selector(state, 'body'),
   organizationName: state.default.parameters['global.site.organization_name'],
 });
@@ -602,9 +626,11 @@ const form = reduxForm({
   onSubmit,
 })(DebateStepPageVoteForm);
 
-const DebateStepPageVoteFormConnected = connect<any, any, _, _, _, _>(mapStateToProps)(form);
+const container = (connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
+  form,
+): React.AbstractComponent<BeforeConnectProps>);
 
-export default createFragmentContainer(DebateStepPageVoteFormConnected, {
+export default (createFragmentContainer(container, {
   debate: graphql`
     fragment DebateStepPageVoteForm_debate on Debate
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
@@ -618,4 +644,4 @@ export default createFragmentContainer(DebateStepPageVoteFormConnected, {
         @include(if: $isMobile)
     }
   `,
-});
+}): RelayFragmentContainer<typeof container>);

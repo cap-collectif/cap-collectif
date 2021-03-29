@@ -1,7 +1,7 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, type Node } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
@@ -25,9 +25,7 @@ import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.conte
 
 type Props = {|
   ...AppBoxProps,
-  +isAuthenticated: boolean,
   +setVoteState: VoteState => void,
-  +isEmailConfirmed: boolean,
   +step: DebateStepPageVote_step,
   +top?: boolean,
 |};
@@ -116,14 +114,11 @@ const buttonColor = (styleColor: string, disabled: boolean) => ({
 
 const Container = motion.custom(Flex);
 
-export const DebateStepPageVote = ({
-  step,
-  isAuthenticated,
-  setVoteState,
-  isEmailConfirmed,
-  top,
-  ...props
-}: Props) => {
+export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props): Node => {
+  const isEmailConfirmed: boolean = useSelector(
+    (state: GlobalState) => state.user?.user?.isEmailConfirmed || false,
+  );
+  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user);
   const { track } = useAnalytics();
   const intl = useIntl();
   const { widget } = useDebateStepPage();
@@ -255,16 +250,7 @@ export const DebateStepPageVote = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  isEmailConfirmed: state.user.user?.isEmailConfirmed || false,
-  isAuthenticated: !!state.user.user,
-});
-
-const DebateStepPageVoteConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
-  DebateStepPageVote,
-);
-
-export default (createFragmentContainer(DebateStepPageVoteConnected, {
+export default (createFragmentContainer(DebateStepPageVote, {
   step: graphql`
     fragment DebateStepPageVote_step on DebateStep
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
@@ -280,4 +266,4 @@ export default (createFragmentContainer(DebateStepPageVoteConnected, {
       }
     }
   `,
-}): RelayFragmentContainer<typeof DebateStepPageVoteConnected>);
+}): RelayFragmentContainer<typeof DebateStepPageVote>);

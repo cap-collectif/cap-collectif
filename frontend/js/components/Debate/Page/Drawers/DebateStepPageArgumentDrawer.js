@@ -64,7 +64,7 @@ const DebateStepPageArgumentDrawer = ({
   argument: argumentFragment,
   viewer: viewerFragment,
   ...drawerProps
-}: Props) => {
+}: Props): React.Node => {
   const argument: DebateStepPageArgumentDrawer_argument = useFragment(
     ARGUMENT_FRAGMENT,
     argumentFragment,

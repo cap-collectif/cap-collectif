@@ -36,7 +36,7 @@ const DebateStepPageOpinionDrawer = ({
 }: {|
   ...DetailDrawerProps,
   opinion: DebateStepPageOpinionDrawer_opinion$key,
-|}) => {
+|}): React.Node => {
   const opinion: DebateStepPageOpinionDrawer_opinion = useFragment(FRAGMENT, opinionFragment);
 
   return (

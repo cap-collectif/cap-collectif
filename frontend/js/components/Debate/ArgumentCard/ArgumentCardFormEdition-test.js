@@ -18,6 +18,7 @@ const baseProps = {
   onSuccess: jest.fn(),
   onError: jest.fn(),
   getValues: jest.fn(),
+  initialValues: { body: 'Oui' },
 };
 
 const props = {

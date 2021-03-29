@@ -4,25 +4,29 @@ import { useIntl } from 'react-intl';
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Field, isInvalid, isPristine } from 'redux-form';
-import { connect } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import { formName } from '~/components/Debate/Page/MainActions/DebateStepPageVoteForm';
 import component from '~/components/Form/Field';
 import Button from '~ds/Button/Button';
-import type { GlobalState } from '~/types';
+import type { GlobalState, Dispatch } from '~/types';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 
-type ReduxProps = {|
-  +pristine: boolean,
-  +invalid: boolean,
-|};
-
-type Props = {|
-  ...ReduxProps,
+type BeforeConnectProps = {|
   +show: boolean,
   +title: string,
   +onClose: () => void,
-  +onSubmit: () => Promise<void>,
-  +viewerIsConfirmedByEmail: boolean,
+  +onSubmit: () => void | Promise<any>,
+|};
+
+type StateProps = {|
+  +pristine: boolean,
+  +invalid: boolean,
+  +dispatch: Dispatch,
+|};
+
+type Props = {|
+  ...BeforeConnectProps,
+  ...StateProps,
 |};
 
 export const MobilePublishArgumentModal = ({
@@ -32,8 +36,10 @@ export const MobilePublishArgumentModal = ({
   pristine,
   invalid,
   title,
-  viewerIsConfirmedByEmail,
-}: Props) => {
+}: Props): React.Node => {
+  const viewerIsConfirmedByEmail: boolean = useSelector(
+    (state: GlobalState) => state.user?.user?.isEmailConfirmed || false,
+  );
   const intl = useIntl();
   const { startLoading, stopLoading, isLoading } = useLoadingMachine();
   const focusInputRef = useCallback(node => {
@@ -97,7 +103,8 @@ export const MobilePublishArgumentModal = ({
 const mapStateToProps = (state: GlobalState) => ({
   pristine: isPristine(formName)(state),
   invalid: isInvalid(formName)(state),
-  viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
 });
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(MobilePublishArgumentModal);
+export default (connect<Props, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
+  MobilePublishArgumentModal,
+): React.AbstractComponent<BeforeConnectProps>);

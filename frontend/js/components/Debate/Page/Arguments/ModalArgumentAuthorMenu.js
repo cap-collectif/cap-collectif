@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
@@ -13,7 +13,7 @@ type Props = {|
   argument: ModalArgumentAuthorMenu_argument,
 |};
 
-const ModalArgumentAuthorMenu = ({ argument }: Props) => {
+const ModalArgumentAuthorMenu = ({ argument }: Props): React.Node => {
   const intl = useIntl();
 
   return (
@@ -36,11 +36,11 @@ const ModalArgumentAuthorMenu = ({ argument }: Props) => {
   );
 };
 
-export default createFragmentContainer(ModalArgumentAuthorMenu, {
+export default (createFragmentContainer(ModalArgumentAuthorMenu, {
   argument: graphql`
     fragment ModalArgumentAuthorMenu_argument on DebateArgument {
       ...ModalEditArgumentMobile_argument
       ...ModalDeleteArgumentMobile_argument
     }
   `,
-});
+}): RelayFragmentContainer<typeof ModalArgumentAuthorMenu>);

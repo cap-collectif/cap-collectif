@@ -1,12 +1,12 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
 import { DebateStepPageVoteAndShare } from './DebateStepPageVoteAndShare';
 import { $refType, $fragmentRefs } from '~/mocks';
+import MockProviders from '~/testUtils';
 
 const baseProps = {
-  url: 'step/123',
   step: {
     url: 'step/123',
     $refType,
@@ -29,8 +29,6 @@ const baseProps = {
     },
   },
   isMobile: false,
-  viewerIsConfirmedByEmail: true,
-  isAuthenticated: true,
 };
 
 const props = {
@@ -41,7 +39,6 @@ const props = {
   },
   viewerNotConfirmed: {
     ...baseProps,
-    viewerIsConfirmedByEmail: false,
   },
   isAnonymousParticipationAllowed: {
     ...baseProps,
@@ -49,30 +46,45 @@ const props = {
       ...baseProps.step,
       isAnonymousParticipationAllowed: true,
     },
-    isAuthenticated: false,
-    viewerIsConfirmedByEmail: false,
   },
 };
 
+const normalUser = { user: { isEmailConfirmed: true } };
+const nonConfirmedUser = { user: { isEmailConfirmed: false } };
+
 describe('<DebateStepPageVoteAndShare/>', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.basic} />);
+    const wrapper = render(
+      <MockProviders store={{ user: normalUser }}>
+        <DebateStepPageVoteAndShare {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly on mobile', () => {
-    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.onMobile} />);
+    const wrapper = render(
+      <MockProviders store={{ user: normalUser }}>
+        <DebateStepPageVoteAndShare {...props.onMobile} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when viewer not confirmed', () => {
-    const wrapper = shallow(<DebateStepPageVoteAndShare {...props.viewerNotConfirmed} />);
+    const wrapper = render(
+      <MockProviders store={{ user: nonConfirmedUser }}>
+        <DebateStepPageVoteAndShare {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when anonymous participation allowed', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteAndShare {...props.isAnonymousParticipationAllowed} />,
+    const wrapper = render(
+      <MockProviders store={{ user: { user: null } }}>
+        <DebateStepPageVoteAndShare {...props.isAnonymousParticipationAllowed} />
+      </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();
   });

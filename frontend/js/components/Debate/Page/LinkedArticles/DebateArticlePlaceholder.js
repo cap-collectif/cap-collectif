@@ -5,7 +5,7 @@ import Card from '~ds/Card/Card';
 import Skeleton from '~ds/Skeleton';
 import AppBox from '~ui/Primitives/AppBox';
 
-const DebateArticleCard = () => (
+const DebateArticleCard = (): React.Node => (
   <Card bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" flex={1}>
     <AppBox width="100%" bg="gray.150" height="135px" />
 

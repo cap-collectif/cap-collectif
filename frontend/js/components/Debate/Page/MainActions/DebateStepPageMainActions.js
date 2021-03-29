@@ -18,7 +18,7 @@ type Props = {|
   +isMobile: boolean,
 |};
 
-export const DebateStepPageMainActions = ({ step, isMobile }: Props) => {
+export const DebateStepPageMainActions = ({ step, isMobile }: Props): React.Node => {
   const intl = useIntl();
   const { title, stepClosed } = useDebateStepPage();
 

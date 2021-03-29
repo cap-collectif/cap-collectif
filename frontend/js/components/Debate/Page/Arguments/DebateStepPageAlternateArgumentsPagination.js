@@ -37,6 +37,7 @@ export const CONNECTION_NODES_PER_PAGE = 8;
 
 const MOBILE_PREVIEW_MAX_ARGUMENTS = 4;
 
+// $FlowFixMe We need to wait for relay 11
 export const FRAGMENT = graphql`
   fragment DebateStepPageAlternateArgumentsPagination_debate on Debate
     @argumentDefinitions(
@@ -95,7 +96,13 @@ const getVariables = (
   props: {| id: string |},
   { count, cursor }: ConnectionMetadata,
   fragmentVariables: { orderBy: { field: string, direction: string }, isAuthenticated: boolean },
-) => {
+): {|
+  +cursor: ?string,
+  +first: ?string,
+  +isAuthenticated: boolean,
+  +debateId: string,
+  +orderBy: { field: string, direction: string },
+|} => {
   return {
     first: count,
     cursor,
@@ -107,6 +114,7 @@ const getVariables = (
 
 export const CONNECTION_CONFIG = {
   getVariables,
+  // $FlowFixMe We need to wait for relay 11
   query: graphql`
     query DebateStepPageAlternateArgumentsPaginationRefetchYesQuery(
       $debateId: ID!
@@ -133,7 +141,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   viewer: viewerFragment,
   handleChange,
   preview = false,
-}: Props) => {
+}: Props): React.Node => {
   const { onClose, onOpen, isOpen } = useMultipleDisclosure({});
   const [debate, paginationProps]: [
     DebateStepPageAlternateArgumentsPagination_debate,

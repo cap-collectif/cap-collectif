@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { State } from '~/types';
@@ -13,7 +13,6 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 export type Props = {|
   +stepId: string,
   +title: string,
-  +isAuthenticated: boolean,
   +fromWidget: boolean,
   +widgetLocation: string,
   +debateType: DebateType,
@@ -22,12 +21,14 @@ export type Props = {|
 export const DebateStepPage = ({
   stepId,
   title,
-  isAuthenticated,
   fromWidget,
   widgetLocation,
   debateType,
-}: Props) => {
+}: Props): React.Node => {
   const isMobile = useIsMobile();
+
+  const isAuthenticated = useSelector((state: State) => state.user.user !== null);
+
   const contextValue = React.useMemo(
     () => ({
       widget: {
@@ -100,8 +101,4 @@ export const DebateStepPage = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  isAuthenticated: state.user.user !== null,
-});
-
-export default connect<any, any, _, _, _, _>(mapStateToProps)(DebateStepPage);
+export default DebateStepPage;

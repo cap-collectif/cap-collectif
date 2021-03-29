@@ -29,6 +29,9 @@ describe('<DebateStepPageVoteForm/>', () => {
     organizationName: 'CapCollectif',
     widgetLocation: null,
     viewer,
+    initialValues: {
+      body: '',
+    },
   };
 
   it('should renders correctly', () => {

@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import * as React from 'react';
+import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { DebateStepPageArguments_step } from '~relay/DebateStepPageArguments_step.graphql';
 import type { DebateStepPageArguments_viewer } from '~relay/DebateStepPageArguments_viewer.graphql';
 import MobileDebateStepPageArguments from '~/components/Debate/Page/Arguments/MobileDebateStepPageArguments';
@@ -12,7 +12,7 @@ type Props = {|
   +isMobile?: boolean,
 |};
 
-export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
+export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props): React.Node => {
   if (step?.debate?.arguments.totalCount === 0 && !step?.debate?.viewerUnpublishedArgument) {
     return null;
   }
@@ -28,7 +28,7 @@ export const DebateStepPageArguments = ({ step, viewer, isMobile }: Props) => {
   );
 };
 
-export default createFragmentContainer(DebateStepPageArguments, {
+export default (createFragmentContainer(DebateStepPageArguments, {
   step: graphql`
     fragment DebateStepPageArguments_step on DebateStep
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
@@ -72,4 +72,4 @@ export default createFragmentContainer(DebateStepPageArguments, {
       ...DesktopDebateStepPageArguments_viewer @skip(if: $isMobile)
     }
   `,
-});
+}): RelayFragmentContainer<typeof DebateStepPageArguments>);

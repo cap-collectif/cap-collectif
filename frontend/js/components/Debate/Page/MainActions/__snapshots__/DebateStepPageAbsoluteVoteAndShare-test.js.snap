@@ -38,7 +38,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
           ]
         }
       />
-      <Relay(Connect(DebateStepPageVote))
+      <Relay(DebateStepPageVote)
         setVoteState={[MockFunction]}
         step={
           Object {
@@ -98,7 +98,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] 
           ]
         }
       />
-      <Relay(Connect(DebateStepPageVote))
+      <Relay(DebateStepPageVote)
         setVoteState={[MockFunction]}
         step={
           Object {

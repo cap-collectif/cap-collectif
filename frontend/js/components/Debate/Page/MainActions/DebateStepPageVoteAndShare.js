@@ -1,8 +1,8 @@
 // @flow
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, type Node } from 'react';
 import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
 import VoteView from '~/components/Ui/Vote/VoteView';
@@ -20,9 +20,6 @@ import CookieMonster from '~/CookieMonster';
 type Props = {|
   +step: DebateStepPageVoteAndShare_step,
   +isMobile?: boolean,
-  +url: string,
-  +viewerIsConfirmedByEmail: boolean,
-  +isAuthenticated: boolean,
 |};
 
 export type VoteState =
@@ -59,14 +56,14 @@ const getInitialState = (
   return 'NONE';
 };
 
-export const DebateStepPageVoteAndShare = ({
-  isMobile,
-  viewerIsConfirmedByEmail,
-  step,
-  isAuthenticated,
-}: Props) => {
+export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
   const { debate, url, isAnonymousParticipationAllowed } = step;
   const { stepClosed } = useDebateStepPage();
+  const viewerIsConfirmedByEmail: boolean = useSelector(
+    (state: GlobalState) => state.user?.user?.isEmailConfirmed || false,
+  );
+  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user);
+
   const intl = useIntl();
 
   const [voteState, setVoteState] = useState<VoteState>(
@@ -159,16 +156,7 @@ export const DebateStepPageVoteAndShare = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState) => ({
-  viewerIsConfirmedByEmail: state.user?.user?.isEmailConfirmed,
-  isAuthenticated: !!state.user.user,
-});
-
-const DebateStepPageVoteAndShareConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
-  DebateStepPageVoteAndShare,
-);
-
-export default (createFragmentContainer(DebateStepPageVoteAndShareConnected, {
+export default (createFragmentContainer(DebateStepPageVoteAndShare, {
   step: graphql`
     fragment DebateStepPageVoteAndShare_step on DebateStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
@@ -201,4 +189,4 @@ export default (createFragmentContainer(DebateStepPageVoteAndShareConnected, {
         @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
     }
   `,
-}): RelayFragmentContainer<typeof DebateStepPageVoteAndShareConnected>);
+}): RelayFragmentContainer<typeof DebateStepPageVoteAndShare>);

@@ -1,149 +1,426 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
-<Fragment>
-  <ForwardRef
-    align="center"
-    direction="column"
-    width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+>
+  <div
+    class="sc-bdnylx gCzbeZ"
   >
-    <AnimatePresence />
-    <AppBox
-      mb={6}
-      textAlign="center"
+    <p
+      class="sc-bdnylx kWTGsb"
     >
-      <Text
-        color="neutral-gray.700"
+      thanks-participation-debate-ended
+    </p>
+    <p
+      class="sc-bdnylx kWTGsb"
+    >
+      summary-debate-participation
+    </p>
+  </div>
+  <div
+    class="VoteViewstyle__Container-sc-19ueiv-0 buCCKP"
+  >
+    <div>
+      <div>
+        <div
+          class="circle"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+      </div>
+      <div
+        style="opacity:1"
       >
-        thanks-participation-debate-ended
-      </Text>
-      <Text
-        color="neutral-gray.700"
+        <div
+          class="circle red"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble reverse"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble reverse"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <span>
+        <span
+          class="progressBar"
+        />
+      </span>
+      <span>
+        <span
+          class="progressBar red"
+        />
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdnylx jvBvci for-percentage"
       >
-        summary-debate-participation
-      </Text>
-    </AppBox>
-    <VoteView
-      isMobile={false}
-      positivePercentage={80}
-      votesCount={
-        Object {
-          "AGAINST": 1,
-          "FOR": 4,
-        }
-      }
-    />
-  </ForwardRef>
-</Fragment>
+        <span
+          class="sc-bdnylx fNJNWw"
+        >
+          4 argument.show.type.for
+        </span>
+      </span>
+      <span
+        class="sc-bdnylx jvBvci against-percentage"
+      >
+        <span
+          class="sc-bdnylx fNJNWw"
+        >
+          1 argument.show.type.against
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
-<Fragment>
-  <ForwardRef
-    align="center"
-    direction="column"
-    width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+>
+  <div
+    class="sc-bdnylx gCzbeZ"
   >
-    <AnimatePresence />
-    <AppBox
-      mb={6}
-      textAlign="center"
+    <p
+      class="sc-bdnylx kWTGsb"
     >
-      <Text
-        color="neutral-gray.700"
-      >
-        thanks-participation-debate-ended
-      </Text>
-      <Text
-        color="neutral-gray.700"
-      >
-        summary-debate-participation
-      </Text>
-    </AppBox>
-    <VoteView
-      isMobile={true}
-      positivePercentage={80}
-      votesCount={
-        Object {
-          "AGAINST": 1,
-          "FOR": 4,
-        }
-      }
+      thanks-participation-debate-ended
+    </p>
+    <p
+      class="sc-bdnylx kWTGsb"
+    >
+      summary-debate-participation
+    </p>
+  </div>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eOUAwS"
+  >
+    <p
+      class="sc-bdnylx dOuLKN VoteView__MobileTextPercentage-jlxcbx-0"
+    >
+      4 argument.show.type.for
+    </p>
+    <div
+      class="sc-bdnylx gGPbFB"
     />
-  </ForwardRef>
-</Fragment>
+    <p
+      class="sc-bdnylx jwehgT VoteView__MobileTextPercentage-jlxcbx-0"
+    >
+      1 argument.show.type.against
+    </p>
+    <div
+      class="sc-bdnylx hCXCVS"
+    />
+  </div>
+</div>
 `;
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous participation allowed 1`] = `
-<Fragment>
-  <ForwardRef
-    align="center"
-    direction="column"
-    width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+>
+  <div
+    class="sc-bdnylx gCzbeZ"
   >
-    <AnimatePresence />
-    <AppBox
-      mb={6}
-      textAlign="center"
+    <p
+      class="sc-bdnylx kWTGsb"
     >
-      <Text
-        color="neutral-gray.700"
+      thanks-participation-debate-ended
+    </p>
+    <p
+      class="sc-bdnylx kWTGsb"
+    >
+      summary-debate-participation
+    </p>
+  </div>
+  <div
+    class="VoteViewstyle__Container-sc-19ueiv-0 buCCKP"
+  >
+    <div>
+      <div>
+        <div
+          class="circle"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+      </div>
+      <div
+        style="opacity:1"
       >
-        thanks-participation-debate-ended
-      </Text>
-      <Text
-        color="neutral-gray.700"
+        <div
+          class="circle red"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble reverse"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble reverse"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <span>
+        <span
+          class="progressBar"
+        />
+      </span>
+      <span>
+        <span
+          class="progressBar red"
+        />
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdnylx jvBvci for-percentage"
       >
-        summary-debate-participation
-      </Text>
-    </AppBox>
-    <VoteView
-      isMobile={false}
-      positivePercentage={80}
-      votesCount={
-        Object {
-          "AGAINST": 1,
-          "FOR": 4,
-        }
-      }
-    />
-  </ForwardRef>
-</Fragment>
+        <span
+          class="sc-bdnylx fNJNWw"
+        >
+          4 argument.show.type.for
+        </span>
+      </span>
+      <span
+        class="sc-bdnylx jvBvci against-percentage"
+      >
+        <span
+          class="sc-bdnylx fNJNWw"
+        >
+          1 argument.show.type.against
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly when viewer not confirmed 1`] = `
-<Fragment>
-  <ForwardRef
-    align="center"
-    direction="column"
-    width="100%"
+<div
+  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+>
+  <div
+    class="sc-bdnylx gCzbeZ"
   >
-    <AnimatePresence />
-    <AppBox
-      mb={6}
-      textAlign="center"
+    <p
+      class="sc-bdnylx kWTGsb"
     >
-      <Text
-        color="neutral-gray.700"
+      thanks-participation-debate-ended
+    </p>
+    <p
+      class="sc-bdnylx kWTGsb"
+    >
+      summary-debate-participation
+    </p>
+  </div>
+  <div
+    class="VoteViewstyle__Container-sc-19ueiv-0 buCCKP"
+  >
+    <div>
+      <div>
+        <div
+          class="circle"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+      </div>
+      <div
+        style="opacity:1"
       >
-        thanks-participation-debate-ended
-      </Text>
-      <Text
-        color="neutral-gray.700"
+        <div
+          class="circle red"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble reverse"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+        <div
+          class="bubble reverse"
+        >
+          <iconmock
+            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 gHWuCc fYtUti KA-deO icon"
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <span>
+        <span
+          class="progressBar"
+        />
+      </span>
+      <span>
+        <span
+          class="progressBar red"
+        />
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdnylx jvBvci for-percentage"
       >
-        summary-debate-participation
-      </Text>
-    </AppBox>
-    <VoteView
-      isMobile={false}
-      positivePercentage={80}
-      votesCount={
-        Object {
-          "AGAINST": 1,
-          "FOR": 4,
-        }
-      }
-    />
-  </ForwardRef>
-</Fragment>
+        <span
+          class="sc-bdnylx fNJNWw"
+        >
+          4 argument.show.type.for
+        </span>
+      </span>
+      <span
+        class="sc-bdnylx jvBvci against-percentage"
+      >
+        <span
+          class="sc-bdnylx fNJNWw"
+        >
+          1 argument.show.type.against
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
 `;

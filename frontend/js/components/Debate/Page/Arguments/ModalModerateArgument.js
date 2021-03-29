@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { submit } from 'redux-form';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import CloseButton from '~/components/Form/CloseButton';
@@ -22,7 +22,6 @@ export type ModerateArgument = {|
 |};
 
 type Props = {|
-  dispatch: Dispatch,
   onClose: () => void,
   argument: ModerateArgument,
   relayConnection: string[],
@@ -79,9 +78,10 @@ const onSubmit = (values: Values, props: Props, intl: IntlShape) => {
     });
 };
 
-export const ModalModerateArgument = (props: Props) => {
-  const { argument, onClose, dispatch } = props;
+export const ModalModerateArgument = (props: Props): React.Node => {
+  const { argument, onClose } = props;
   const intl = useIntl();
+  const dispatch = useDispatch<Dispatch>();
 
   return (
     <ModalContainer
@@ -112,4 +112,4 @@ export const ModalModerateArgument = (props: Props) => {
   );
 };
 
-export default connect<any, any, _, _, _, _>()(ModalModerateArgument);
+export default ModalModerateArgument;

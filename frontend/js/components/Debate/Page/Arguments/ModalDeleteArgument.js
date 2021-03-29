@@ -74,7 +74,7 @@ const onSubmit = (
     });
 };
 
-export const ModalDeleteArgument = ({ argumentInfo, debateId, onClose }: Props) => {
+export const ModalDeleteArgument = ({ argumentInfo, debateId, onClose }: Props): React.Node => {
   const intl = useIntl();
   return (
     <ModalContainer
