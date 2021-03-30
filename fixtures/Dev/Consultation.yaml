@@ -31,14 +31,14 @@ Capco\AppBundle\Entity\Consultation:
         title: 'Projet sans fin'
         step: '@cstep6'
         position: 1
-    firstConsultationMultiConsultationStep:
-        id: firstConsultationMultiConsultationStep
+    1stConsultationMultiConsultationStep:
+        id: 1stConsultationMultiConsultationStep
         title: 'Première consultation'
         step: '@multiCstep1'
         position: 1
         description: Regardez comme je suis une cheba
-    secondConsultationMultiConsultationStep:
-        id: secondConsultationMultiConsultationStep
+    2ndConsultationMultiConsultationStep:
+        id: 2ndConsultationMultiConsultationStep
         title: 'Deuxième consultation'
         step: '@multiCstep1'
         position: 2

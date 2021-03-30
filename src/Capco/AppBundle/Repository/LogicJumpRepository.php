@@ -1,10 +1,9 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\LogicJump;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
 
 /**
  * @method LogicJump|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,5 +13,4 @@ use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
  */
 class LogicJumpRepository extends EntityRepository
 {
-
 }

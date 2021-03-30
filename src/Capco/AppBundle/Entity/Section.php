@@ -18,83 +18,83 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Section implements Translatable, SonataTranslatableInterface
 {
-    use UuidTrait;
     use SonataTranslatableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     public static $fieldsForType = [
         'highlight' => [
             'title' => true,
             'teaser' => false,
             'body' => false,
-            'nbObjects' => false
+            'nbObjects' => false,
         ],
         'introduction' => [
             'title' => true,
             'teaser' => true,
             'body' => true,
-            'nbObjects' => false
+            'nbObjects' => false,
         ],
         'videos' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true
+            'nbObjects' => true,
         ],
         'projects' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true
+            'nbObjects' => true,
         ],
         'themes' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true
+            'nbObjects' => true,
         ],
         'news' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true
+            'nbObjects' => true,
         ],
         'events' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true
+            'nbObjects' => true,
         ],
         'newsletter' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => false
+            'nbObjects' => false,
         ],
         'social-networks' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => false
+            'nbObjects' => false,
         ],
         'proposals' => [
             'title' => true,
             'teaser' => true,
             'body' => false,
-            'nbObjects' => true
+            'nbObjects' => true,
         ],
         'custom' => [
             'title' => true,
             'teaser' => true,
             'body' => true,
-            'nbObjects' => false
+            'nbObjects' => false,
         ],
         'metrics' => [
             'title' => true,
             'teaser' => true,
             'body' => true,
-            'nbObjects' => false
-        ]
+            'nbObjects' => false,
+        ],
     ];
 
     /**
@@ -128,17 +128,17 @@ class Section implements Translatable, SonataTranslatableInterface
     private $enabled;
 
     /**
-     * @ORM\Column(name="metrics_to_display_basics", type="boolean")
+     * @ORM\Column(name="metrics_to_display_basics", type="boolean", options={"default": false})
      */
     private $metricsToDisplayBasics = false;
 
     /**
-     * @ORM\Column(name="metrics_to_display_events", type="boolean")
+     * @ORM\Column(name="metrics_to_display_events", type="boolean", options={"default": false})
      */
     private $metricsToDisplayEvents = false;
 
     /**
-     * @ORM\Column(name="metrics_to_display_projects", type="boolean")
+     * @ORM\Column(name="metrics_to_display_projects", type="boolean", options={"default": false})
      */
     private $metricsToDisplayProjects = false;
 

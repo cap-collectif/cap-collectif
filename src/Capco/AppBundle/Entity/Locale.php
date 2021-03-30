@@ -25,17 +25,17 @@ class Locale
     private $code;
 
     /**
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": false})
      */
     private $enabled = false;
 
     /**
-     * @ORM\Column(name="is_published", type="boolean")
+     * @ORM\Column(name="is_published", type="boolean", options={"default": false})
      */
     private $published = false;
 
     /**
-     * @ORM\Column(name="is_default", type="boolean")
+     * @ORM\Column(name="is_default", type="boolean", options={"default": false})
      */
     private $default = false;
 

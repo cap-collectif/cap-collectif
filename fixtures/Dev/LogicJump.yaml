@@ -2,156 +2,156 @@ Capco\AppBundle\Entity\LogicJump:
     logicjump1:
         id: logicjump1
         position: 1
-        origin: '@multiplequestionFavoriteFleuve'
-        destination: '@multiplequestionHapGange'
+        origin: '@xQuestionFavoriteFleuve'
+        destination: '@xQuestionHapGange'
         conditions: ['@ljconditionFleuveHapLg1', '@ljconditionFleuveGange']
     logicjump2:
         id: logicjump2
         position: 2
-        origin: '@multiplequestionFavoriteFleuve'
-        destination: '@multiplequestionHapCreation'
+        origin: '@xQuestionFavoriteFleuve'
+        destination: '@xQuestionHapCreation'
         conditions: ['@ljconditionFleuveHap']
     logicjump3:
         id: logicjump3
         position: 3
-        origin: '@multiplequestionFavoriteFleuve'
-        destination: '@multiplequestionNoelFete'
+        origin: '@xQuestionFavoriteFleuve'
+        destination: '@xQuestionNoelFete'
         conditions: ['@ljconditionNoel']
     logicjump4:
         id: logicjump4
         position: 4
-        origin: '@multiplequestionMarvelOrDc'
-        destination: '@multiplequestionMarvelIronManLike'
+        origin: '@xQuestionMarvelOrDc'
+        destination: '@xQuestionMarvelIronManLike'
         conditions: ['@ljconditionMarvel']
     logicjump5:
         id: logicjump5
         position: 5
-        origin: '@multiplequestionMarvelOrDc'
-        destination: '@multiplequestionDcSupermanLike'
+        origin: '@xQuestionMarvelOrDc'
+        destination: '@xQuestionDcSupermanLike'
         conditions: ['@ljconditionDc']
     logicjump10:
         id: logicjump10
         position: 10
-        origin: '@multiplequestionIsHapGood'
-        destination: '@multiplequestionHapNotGoodHowDareYou'
+        origin: '@xQuestionIsHapGood'
+        destination: '@xQuestionHapNotGoodHowDareYou'
         conditions: ['@ljconditionHapGood']
     logicjump12:
         id: logicjump12
         position: 12
-        origin: '@ljMultipleQuestionRadio'
-        destination: '@ljMultipleQuestionSelect'
+        origin: '@ljxQuestionRadio'
+        destination: '@ljxQuestionSelect'
         conditions: ['@ljconditionRadio']
     logicjump13:
         id: logicjump13
         position: 13
-        origin: '@ljMultipleQuestionSelect'
-        destination: '@ljMultipleQuestionButton'
+        origin: '@ljxQuestionSelect'
+        destination: '@ljxQuestionButton'
         conditions: ['@ljconditionSelect']
     logicjump14:
         id: logicjump14
         position: 14
-        origin: '@ljMultipleQuestionButton'
-        destination: '@ljMultipleQuestionCheckbox'
+        origin: '@ljxQuestionButton'
+        destination: '@ljxQuestionCheckbox'
         conditions: ['@ljconditionButton']
     logicjump15:
         id: logicjump15
         position: 15
-        origin: '@ljMultipleQuestionCheckbox'
-        destination: '@ljMultipleQuestionRanking'
+        origin: '@ljxQuestionCheckbox'
+        destination: '@ljxQuestionRanking'
         conditions: ['@ljconditionCheckbox']
     logicjump1ProposalForm15:
         id: logicjump1ProposalForm15
         position: 1
-        origin: '@multiplequestionFavoriteFleuveProposalForm15'
-        destination: '@multiplequestionHapGangeProposalForm15'
+        origin: '@xQuestionFavoriteFleuveProposalForm15'
+        destination: '@xQuestionHapGangeProposalForm15'
         conditions: ['@ljconditionFleuveHapProposalForm15', '@ljconditionFleuveGangeProposalForm15']
     logicjump2ProposalForm15:
         id: logicjump2ProposalForm15
         position: 2
-        origin: '@multiplequestionFavoriteFleuveProposalForm15'
-        destination: '@multiplequestionHapCreationProposalForm15'
+        origin: '@xQuestionFavoriteFleuveProposalForm15'
+        destination: '@xQuestionHapCreationProposalForm15'
         conditions: ['@ljconditionFleuveHapProposalForm15']
     logicjump3ProposalForm15:
         id: logicjump3ProposalForm15
         position: 3
-        origin: '@multiplequestionFavoriteFleuveProposalForm15'
-        destination: '@multiplequestionNoelFeteProposalForm15'
+        origin: '@xQuestionFavoriteFleuveProposalForm15'
+        destination: '@xQuestionNoelFeteProposalForm15'
         conditions: ['@ljconditionNoelProposalForm15']
     logicjump4ProposalForm15:
         id: logicjump4ProposalForm15
         position: 4
-        origin: '@multiplequestionMarvelOrDcProposalForm15'
-        destination: '@multiplequestionMarvelIronManLikeProposalForm15'
+        origin: '@xQuestionMarvelOrDcProposalForm15'
+        destination: '@xQuestionMarvelIronManLikeProposalForm15'
         conditions: ['@ljconditionMarvelProposalForm15']
     logicjump5ProposalForm15:
         id: logicjump5ProposalForm15
         position: 5
-        origin: '@multiplequestionMarvelOrDcProposalForm15'
-        destination: '@multiplequestionDcSupermanLikeProposalForm15'
+        origin: '@xQuestionMarvelOrDcProposalForm15'
+        destination: '@xQuestionDcSupermanLikePForm15'
         conditions: ['@ljconditionDcProposalForm15']
     logicjump10ProposalForm15:
         id: logicjump10ProposalForm15
         position: 10
-        origin: '@multiplequestionIsHapGoodProposalForm15'
-        destination: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
+        origin: '@xQuestionIsHapGoodProposalForm15'
+        destination: '@xQuestionHapNotGoodProposalForm15'
         conditions: ['@ljconditionHapGoodProposalForm15']
     logicjumpIdfGrandProjet:
         id: logicjumpIdfGrandProjet
         position: 1
-        origin: '@multiplequestionIdfGrandOrLocal'
+        origin: '@xQuestionIdfGrandOrLocal'
         destination: '@sectionIdfGrandProjet'
         conditions: ['@ljcIdfProjectGrand']
     logicjumpIdfProjetLocal:
         id: logicjumpIdfProjetLocal
         position: 2
-        origin: '@multiplequestionIdfGrandOrLocal'
+        origin: '@xQuestionIdfGrandOrLocal'
         destination: '@sectionIdfProjectLocal'
         conditions: ['@ljcIdfProjectLocal']
     logicjumpLocalAssociation:
         id: logicjumpLocalAssociation
         position: 1
-        origin: '@multiplequestionIdfProjetLocal1'
-        destination: '@multiplequestionIdfProjetLocalAssociation1'
+        origin: '@xQuestionIdfProjetLocal1'
+        destination: '@xQuestionIdfProjetLocalAssociation1'
         conditions: ['@ljcIdfProjectLocalAssociation']
     logicjumpLocalAssociationWithSiret:
         id: logicjumpLocalAssociationWithSiret
         position: 1
-        origin: '@multiplequestionIdfProjetLocalAssociation1'
+        origin: '@xQuestionIdfProjetLocalAssociation1'
         destination: '@simplequestionIdfProjetLocalAssociationSiret1'
         conditions: ['@ljcIdfProjectLocalAssociationSiret']
-    logicjumpLocalAssociationWithoutSiret:
-        id: logicjumpLocalAssociationWithoutSiret
+    logicjumpLocalAssociatWithoutSiret:
+        id: logicjumpLocalAssociatWithoutSiret
         position: 2
-        origin: '@multiplequestionIdfProjetLocalAssociation1'
-        destination: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+        origin: '@xQuestionIdfProjetLocalAssociation1'
+        destination: '@xQuestionIdfPLocalAssocWithoutSiret1'
         conditions: ['@ljcIdfProjectLocalAssociationWithoutSiret']
     logicjumpLocalAssociationYesRna:
         id: logicjumpLocalAssociationYesRna
         position: 1
-        origin: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+        origin: '@xQuestionIdfPLocalAssocWithoutSiret1'
         destination: '@simplequestionIdfProjetLocalAssociationRna1'
         conditions: ['@ljcIdfProjectLocalAssociationRna']
     logicjumpLocalAssociationNoRna:
         id: logicjumpLocalAssociationNoRna
         position: 2
-        origin: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+        origin: '@xQuestionIdfPLocalAssocWithoutSiret1'
         destination: '@simplequestionIdfProjetLocalAssociationNoRna1'
-        conditions: ['@ljcIdfProjectLocalAssociationWithoutRna']
+        conditions: ['@ljcIdfProjectLocalAssocWithoutRna']
     logicjumpLocalEntreprise:
         id: logicjumpLocalEntreprise
         position: 2
-        origin: '@multiplequestionIdfProjetLocal1'
+        origin: '@xQuestionIdfProjetLocal1'
         destination: '@simplequestionIdfProjetLocalEntreprise1'
         conditions: ['@ljcIdfProjectLocalEntreprise']
     logicjumpLocalOrgPriv:
         id: logicjumpLocalOrgPriv
         position: 3
-        origin: '@multiplequestionIdfProjetLocal1'
+        origin: '@xQuestionIdfProjetLocal1'
         destination: '@simplequestionIdfProjetLocalEntreprise1'
         conditions: ['@ljcIdfProjectLocalOrgPriv']
     logicjumpLocalOrgPublic:
         id: logicjumpLocalOrgPublic
         position: 4
-        origin: '@multiplequestionIdfProjetLocal1'
+        origin: '@xQuestionIdfProjetLocal1'
         destination: '@simplequestionIdfProjetLocalOrgPublic1'
         conditions: ['@ljcIdfProjectLocalOrgPublic']

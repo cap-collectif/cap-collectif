@@ -16,16 +16,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationController extends Controller
 {
-    private $userManager;
-    private $loginManager;
-    private $router;
-    private $contributionManager;
-    private $session;
-    private $userRepo;
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
+    private UserManager $userManager;
+    private LoginManagerInterface $loginManager;
+    private RouterInterface $router;
+    private ContributionManager $contributionManager;
+    private SessionInterface $session;
+    private UserRepository $userRepo;
+    private TranslatorInterface $translator;
 
     public function __construct(
         UserManager $userManager,

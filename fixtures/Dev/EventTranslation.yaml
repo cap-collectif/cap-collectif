@@ -120,7 +120,7 @@ Capco\AppBundle\Entity\EventTranslation:
         slug: event-deleted
         body: deleted event
     event19_en:
-        id: 'eventCreateByAUserReviewApprovedEn_en'
+        id: 'eventCreateByUserReviewApprovedEn_en'
         locale: 'en-GB'
         translatable: '@event19'
         title: event created By english user with review approved
@@ -151,7 +151,7 @@ Capco\AppBundle\Entity\EventTranslation:
         title: evenement refusé, sans commentaire
         body: je suis refusé sans commentaire
     event23_fr:
-        id: 'eventCreateByAUserReviewApprovedEn_fr'
+        id: 'eventCreateByUserReviewApprovedEn_fr'
         locale: 'fr-FR'
         translatable: '@event19'
         title: evenement créer par un utilisateur anglais avec review approved

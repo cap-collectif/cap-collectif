@@ -17,12 +17,12 @@ use Capco\AppBundle\Traits\TranslatableTrait;
  */
 class SourceCategory implements SonataTranslatableInterface, Translatable
 {
-    use UuidTrait;
     use SonataTranslatableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     /**
-     * @ORM\Column(name="isEnabled", type="boolean")
+     * @ORM\Column(name="isEnabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 

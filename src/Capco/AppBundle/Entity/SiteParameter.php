@@ -18,9 +18,9 @@ use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
  */
 class SiteParameter implements SonataTranslatableInterface, Translatable
 {
-    use UuidTrait;
-    use TranslatableTrait;
     use SonataTranslatableTrait;
+    use TranslatableTrait;
+    use UuidTrait;
     public const NOT_TRANSLATABLE = [
         'homepage.jumbotron.margin',
         'projects.pagination',
@@ -105,12 +105,12 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
     private $updatedAt;
 
     /**
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 
     /**
-     * @ORM\Column(name="is_social_network_description", type="boolean", nullable=false)
+     * @ORM\Column(name="is_social_network_description", type="boolean", nullable=false, options={"default": false})
      */
     private $isSocialNetworkDescription = false;
 

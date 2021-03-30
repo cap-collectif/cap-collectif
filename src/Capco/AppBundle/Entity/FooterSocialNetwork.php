@@ -15,8 +15,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class FooterSocialNetwork
 {
-    use PositionableTrait;
     use IdTrait;
+    use PositionableTrait;
 
     public static $socialIcons = [
         'Site externe' => 'link-1',
@@ -59,7 +59,7 @@ class FooterSocialNetwork
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 

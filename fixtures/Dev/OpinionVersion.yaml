@@ -56,7 +56,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     title: Version non publiée n°<current()>
     createdAt: <((new \DateTime('2016-04-01 00:00:00'))->modify("+ $current days"))>
     body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
-    author: '@user_not_confirmed_with_contributions'
+    author: '@userNotConfirmedWithContributions'
     parent: '@opinion57'
   version16:
     id: 'version16'

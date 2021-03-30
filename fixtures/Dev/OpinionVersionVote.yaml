@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\OpinionVersionVote:
     id: 700051
     opinionVersion: '@version11'
     value: 0
-    user: '@user_not_confirmed_with_contributions'
+    user: '@userNotConfirmedWithContributions'
     publishedAt: <(new \DateTime('2016-01-01'))>
     updatedAt: <(new \DateTime('2016-01-01'))>
     createdAt: <(new \DateTime('2016-01-01'))>

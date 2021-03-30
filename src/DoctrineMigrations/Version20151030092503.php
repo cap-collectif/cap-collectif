@@ -50,7 +50,7 @@ class Version20151030092503 extends AbstractMigration
         );
 
         foreach ($articles as $a) {
-            $this->connection->executeUpdate(
+            $this->connection->executeStatement(
                 '
                 UPDATE synthesis_element
                 SET archived = 1, published = 1

@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Font
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -29,12 +29,12 @@ class Font
     private $isCustom = true;
 
     /**
-     * @ORM\Column(name="use_as_heading", type="boolean")
+     * @ORM\Column(name="use_as_heading", type="boolean", options={"default": false})
      */
     private $useAsHeading = false;
 
     /**
-     * @ORM\Column(name="use_as_body", type="boolean")
+     * @ORM\Column(name="use_as_body", type="boolean", options={"default": false})
      */
     private $useAsBody = false;
 

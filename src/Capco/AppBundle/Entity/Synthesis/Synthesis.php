@@ -19,7 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Synthesis
 {
-    use UuidTrait, SoftDeleteTrait;
+    use SoftDeleteTrait;
+    use UuidTrait;
     const SOURCE_TYPE_NONE = 'none';
     const SOURCE_TYPE_CONSULTATION = 'global.consultation';
 
@@ -29,12 +30,12 @@ class Synthesis
     ];
 
     /**
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean", options={"default": false})
      */
     private $enabled = false;
 
     /**
-     * @ORM\Column(name="editable", type="boolean")
+     * @ORM\Column(name="editable", type="boolean", options={"default": true})
      */
     private $editable = true;
 

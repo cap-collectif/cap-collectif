@@ -483,7 +483,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getProposalForm()
+    public function getProposalForm(): ?ProposalForm
     {
         return $this->proposalForm;
     }

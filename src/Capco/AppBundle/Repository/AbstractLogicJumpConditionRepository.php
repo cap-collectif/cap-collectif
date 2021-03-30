@@ -1,9 +1,10 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method AbstractLogicJumpCondition|null find($id, $lockMode = null, $lockVersion = null)
@@ -13,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
  */
 class AbstractLogicJumpConditionRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, AbstractLogicJumpCondition::class);
     }

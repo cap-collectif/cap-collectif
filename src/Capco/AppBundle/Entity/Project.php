@@ -177,7 +177,7 @@ class Project implements IndexableInterface
     /**
      * TODO: no more used, delete me.
      *
-     * @ORM\Column(name="include_author_in_ranking", type="boolean")
+     * @ORM\Column(name="include_author_in_ranking", type="boolean", options={"default": false})
      */
     private $includeAuthorInRanking = false;
 
@@ -226,7 +226,7 @@ class Project implements IndexableInterface
     private $coverFilterOpacityPercent = self::DEFAULT_COVER_FILTER_OPACITY;
 
     /**
-     * @ORM\Column(name="is_external", type="boolean")
+     * @ORM\Column(name="is_external", type="boolean", options={"default": false})
      */
     private $isExternal = false;
 

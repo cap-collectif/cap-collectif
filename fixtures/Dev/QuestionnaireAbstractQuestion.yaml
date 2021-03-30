@@ -13,15 +13,15 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaq4:
         questionnaire: '@questionnaire1'
-        question: '@multiplequestion1'
+        question: '@xQuestion1'
         position: 2
     qaq5:
         questionnaire: '@questionnaire1'
-        question: '@multiplequestion2'
+        question: '@xQuestion2'
         position: 3
     qaq6:
         questionnaire: '@questionnaire1'
-        question: '@multiplequestion3'
+        question: '@xQuestion3'
         position: 4
     qaq7:
         questionnaire: '@questionnaire2'
@@ -33,7 +33,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaq9:
         questionnaire: '@questionnaire1'
-        question: '@multiplequestion4'
+        question: '@xQuestion4'
         position: 5
     qaq10:
         proposalForm: '@proposalform1'
@@ -53,15 +53,15 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 2
     qaq14:
         registrationForm: '@registrationForm'
-        question: '@multiplequestion5'
+        question: '@xQuestion5'
         position: 4
     qaq15:
         questionnaire: '@questionnaire1'
-        question: '@multiplequestion6'
+        question: '@xQuestion6'
         position: 6
     qaq16:
         questionnaire: '@questionnaire1'
-        question: '@multiplequestion7'
+        question: '@xQuestion7'
         position: 7
     qaq17:
         questionnaire: '@questionnaire4'
@@ -73,7 +73,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 2
     qaq19:
         questionnaire: '@questionnaire4'
-        question: '@multiplequestion8'
+        question: '@xQuestion8'
         position: 3
     qaq20:
         questionnaire: '@questionnaire5'
@@ -81,103 +81,103 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaq21:
         questionnaire: '@questionnaire4'
-        question: '@multiplequestion9'
+        question: '@xQuestion9'
         position: 4
     qaq22:
         questionnaire: '@questionnaire4'
-        question: '@multiplequestion10'
+        question: '@xQuestion10'
         position: 5
     qaq23:
         questionnaire: '@questionnaire4'
-        question: '@multiplequestion11'
+        question: '@xQuestion11'
         position: 6
     qaq24:
         questionnaire: '@questionnaire4'
-        question: '@multiplequestionReactVue'
+        question: '@xQuestionReactVue'
         position: 7
     qaq45:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionHapNoel'
+        question: '@xQuestionHapNoel'
         position: 1
     qaq25:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionFavoriteFleuve'
+        question: '@xQuestionFavoriteFleuve'
         position: 2
     qaq26:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionHapGange'
+        question: '@xQuestionHapGange'
         position: 3
     qaq27:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionHapCreation'
+        question: '@xQuestionHapCreation'
         position: 4
     qaq28:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionIsHapGood'
+        question: '@xQuestionIsHapGood'
         position: 5
     qaq29:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionHapNotGoodHowDareYou'
+        question: '@xQuestionHapNotGoodHowDareYou'
         position: 6
     qaq30:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionNoelFete'
+        question: '@xQuestionNoelFete'
         position: 7
     qaq31:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionNoelHatColor'
+        question: '@xQuestionNoelHatColor'
         position: 8
     qaq32:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionMarvelOrDc'
+        question: '@xQuestionMarvelOrDc'
         position: 9
     qaq33:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionDcSupermanLike'
+        question: '@xQuestionDcSupermanLike'
         position: 10
     qaq34:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionDcBatmanLike'
+        question: '@xQuestionDcBatmanLike'
         position: 11
     qaq35:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionDcSupergirlLike'
+        question: '@xQuestionDcSupergirlLike'
         position: 12
     qaq36:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionMarvelIronManLike'
+        question: '@xQuestionMarvelIronManLike'
         position: 13
     qaq37:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionMarvelLukeCageLike'
+        question: '@xQuestionMarvelLukeCageLike'
         position: 14
     qaq38:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionMarvelThorLike'
+        question: '@xQuestionMarvelThorLike'
         position: 15
     qaq39:
         questionnaire: '@questionnaireWithJumps'
-        question: '@multiplequestionEndConditionel'
+        question: '@xQuestionEndConditionel'
         position: 16
     qaq40:
         questionnaire: '@questionnaireWithJumps2'
-        question: '@ljMultipleQuestionRadio'
+        question: '@ljxQuestionRadio'
         position: 1
     qaq41:
         questionnaire: '@questionnaireWithJumps2'
-        question: '@ljMultipleQuestionSelect'
+        question: '@ljxQuestionSelect'
         position: 2
     qaq42:
         questionnaire: '@questionnaireWithJumps2'
-        question: '@ljMultipleQuestionButton'
+        question: '@ljxQuestionButton'
         position: 3
     qaq43:
         questionnaire: '@questionnaireWithJumps2'
-        question: '@ljMultipleQuestionCheckbox'
+        question: '@ljxQuestionCheckbox'
         position: 4
     qaq44:
         questionnaire: '@questionnaireWithJumps2'
-        question: '@ljMultipleQuestionRanking'
+        question: '@ljxQuestionRanking'
         position: 5
     qaq46:
         questionnaire: '@questionnaire1'
@@ -205,71 +205,71 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaq52:
         proposalForm: '@proposalform13'
-        question: '@multiplequestion12'
+        question: '@xQuestion12'
         position: 2
     proposalForm15Qaq1:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionHapNoelProposalForm15'
+        question: '@xQuestionHapNoelProposalForm15'
         position: 3
     proposalForm15Qaq2:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionFavoriteFleuveProposalForm15'
+        question: '@xQuestionFavoriteFleuveProposalForm15'
         position: 4
     proposalForm15Qaq3:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionHapGangeProposalForm15'
+        question: '@xQuestionHapGangeProposalForm15'
         position: 5
     proposalForm15Qaq4:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionHapCreationProposalForm15'
+        question: '@xQuestionHapCreationProposalForm15'
         position: 6
     proposalForm15Qaq5:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionIsHapGoodProposalForm15'
+        question: '@xQuestionIsHapGoodProposalForm15'
         position: 7
     proposalForm15Qaq6:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionHapNotGoodHowDareYouProposalForm15'
+        question: '@xQuestionHapNotGoodProposalForm15'
         position: 8
     proposalForm15Qaq7:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionNoelFeteProposalForm15'
+        question: '@xQuestionNoelFeteProposalForm15'
         position: 9
     proposalForm15Qaq8:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionNoelHatColorProposalForm15'
+        question: '@xQuestionNoelHatColorProposalForm15'
         position: 10
     proposalForm15Qaq9:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionMarvelOrDcProposalForm15'
+        question: '@xQuestionMarvelOrDcProposalForm15'
         position: 11
     proposalForm15Qaq10:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionDcSupermanLikeProposalForm15'
+        question: '@xQuestionDcSupermanLikePForm15'
         position: 12
     proposalForm15Qaq11:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionDcBatmanLikeProposalForm15'
+        question: '@xQuestionDcBatmanLikeProposalForm15'
         position: 13
     proposalForm15Qaq12:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionDcSupergirlLikeProposalForm15'
+        question: '@xQuestionDcSupergirlLikePF15'
         position: 14
     proposalForm15Qaq13:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionMarvelIronManLikeProposalForm15'
+        question: '@xQuestionMarvelIronManLikeProposalForm15'
         position: 15
     proposalForm15Qaq14:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionMarvelLukeCageLikeProposalForm15'
+        question: '@xQuestionMarvelLukeCageLikePF15'
         position: 16
     proposalForm15Qaq15:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionMarvelThorLikeProposalForm15'
+        question: '@xQuestionMarvelThorLikePF15'
         position: 17
     proposalForm15Qaq16:
         proposalForm: '@proposalform15'
-        question: '@multiplequestionEndConditionelProposalForm15'
+        question: '@xQuestionEndConditionProposalForm15'
         position: 18
     qaq53:
         questionnaire: '@questionnaire10'
@@ -277,7 +277,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaq54:
         questionnaire: '@questionnaire10'
-        question: '@multiplequestion13'
+        question: '@xQuestion13'
         position: 2
     qaq55:
         proposalForm: '@proposalform2'
@@ -297,11 +297,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 5
     qaq59:
         questionnaire: '@questionnaire5'
-        question: '@multiplequestion16'
+        question: '@xQuestion16'
         position: 2
     qaq60:
         questionnaire: '@questionnaireLotChoices'
-        question: '@multiplequestionWithLotOfChoices'
+        question: '@xQuestionWithLotOfChoices'
         position: 2
     qaq61:
         questionnaire: '@questionnaire11'
@@ -309,7 +309,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaq62:
         questionnaire: '@questionnaire11'
-        question: '@multiplequestion17'
+        question: '@xQuestion17'
         position: 2
     qaqIdf0:
         proposalForm: '@proposalformIdf'
@@ -317,7 +317,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaqIdf1:
         proposalForm: '@proposalformIdf'
-        question: '@multiplequestionIdfGrandOrLocal'
+        question: '@xQuestionIdfGrandOrLocal'
         position: 2
     qaqIdfGrandProject:
         proposalForm: '@proposalformIdf'
@@ -353,11 +353,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 10
     qaqIdfGrandProjectPorteur3:
         proposalForm: '@proposalformIdf'
-        question: '@multiplequestionIdfGrandProjet1'
+        question: '@xQuestionIdfGrandProjet1'
         position: 11
     qaqIdfGrandProjectPorteur4:
         proposalForm: '@proposalformIdf'
-        question: '@simplequestionIdfGrandProjectPorteur2'
+        question: '@sQuestionIdfGrandProjectPorteur2'
         position: 12
     qaqIdfProjectLocal:
         proposalForm: '@proposalformIdf'
@@ -401,11 +401,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 29
     qaqIdfProjectLocalPorteur2:
         proposalForm: '@proposalformIdf'
-        question: '@multiplequestionIdfProjetLocal1'
+        question: '@xQuestionIdfProjetLocal1'
         position: 30
     qaqIdfProjectLocalPorteur3:
         proposalForm: '@proposalformIdf'
-        question: '@multiplequestionIdfProjetLocalAssociation1'
+        question: '@xQuestionIdfProjetLocalAssociation1'
         position: 31
     qaqIdfProjectLocalPorteur4:
         proposalForm: '@proposalformIdf'
@@ -449,7 +449,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 41
     qaqIdfProjectLocalPorteur18:
         proposalForm: '@proposalformIdf'
-        question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
+        question: '@xQuestionIdfPLocalAssocWithoutSiret1'
         position: 42
     qaqIdfProjectLocalPorteur19:
         proposalForm: '@proposalformIdf'
@@ -597,7 +597,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 1
     qaqEvalIdf2:
         questionnaire: '@questionnaireEvaluationIdf'
-        question: '@multiplequestionEvalIdf1'
+        question: '@xQuestionEvalIdf1'
         position: 2
     qaqEvalIdf3:
         questionnaire: '@questionnaireEvaluationIdf'
@@ -605,23 +605,23 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 3
     qaqEvalIdf4:
         questionnaire: '@questionnaireEvaluationIdf'
-        question: '@multiplequestionEvalIdf2'
+        question: '@xQuestionEvalIdf2'
         position: 4
     qaqEvalIdf5:
         questionnaire: '@questionnaireEvaluationIdf'
-        question: '@multiplequestionEvalIdf3'
+        question: '@xQuestionEvalIdf3'
         position: 5
     qaqEvalIdf6:
         questionnaire: '@questionnaireEvaluationIdf'
-        question: '@multiplequestionEvalIdf4'
+        question: '@xQuestionEvalIdf4'
         position: 6
     qaqEvalIdf7:
         questionnaire: '@questionnaireEvaluationIdf'
-        question: '@multiplequestionEvalIdf5'
+        question: '@xQuestionEvalIdf5'
         position: 7
     qaqEvalIdf8:
         questionnaire: '@questionnaireEvaluationIdf'
-        question: '@multiplequestionEvalIdf6'
+        question: '@xQuestionEvalIdf6'
         position: 8
     qaqEvalIdf9:
         questionnaire: '@questionnaireEvaluationIdf'
@@ -673,17 +673,17 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         position: 4
     qaqFood5:
         questionnaire: '@questionnaireFood'
-        question: '@multiplequestionFoodGrape'
+        question: '@xQuestionFoodGrape'
         position: 5
     qaqFood6:
         questionnaire: '@questionnaireFood'
-        question: '@multiplequestionFoodMcdoBk'
+        question: '@xQuestionFoodMcdoBk'
         position: 6
     qaqFood7:
         questionnaire: '@questionnaireFood'
-        question: '@multiplequestionFoodNoIdea'
+        question: '@xQuestionFoodNoIdea'
         position: 7
     qaqFood8:
         questionnaire: '@questionnaireFood'
-        question: '@multiplequestionFoodApple'
+        question: '@xQuestionFoodApple'
         position: 8

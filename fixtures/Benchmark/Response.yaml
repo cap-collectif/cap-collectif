@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Responses\ValueResponse:
   response{1..100}:
     id: 'valueResponse<current()>'
-    question: '@multiplequestion1'
+    question: '@xQuestion1'
     reply: '@reply<current()>'
     value:
       {

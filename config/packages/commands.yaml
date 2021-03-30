@@ -68,3 +68,11 @@ services:
     Capco\AppBundle\Command\Debate\DebateInvitationCommand:
         arguments:
             $name: 'capco:debate:invite'
+
+    Capco\AppBundle\Command\FixMalformedResponsesCommand:
+        arguments:
+            $name: 'capco:fix:malformed-responses'
+
+    Capco\AppBundle\Command\RecalculateSynthesesCountersCommand:
+        arguments:
+            $name: 'capco:syntheses:counters'

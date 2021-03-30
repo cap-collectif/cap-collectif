@@ -19,11 +19,11 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class AddEventsMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $userRepo;
-    private $themeRepo;
-    private $localeRepository;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private UserRepository $userRepo;
+    private ThemeRepository $themeRepo;
+    private LocaleRepository $localeRepository;
 
     public function __construct(
         EntityManagerInterface $em,

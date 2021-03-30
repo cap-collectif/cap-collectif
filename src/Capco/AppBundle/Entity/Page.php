@@ -19,11 +19,11 @@ use Capco\AppBundle\Model\SonataTranslatableInterface;
  */
 class Page implements SonataTranslatableInterface, Translatable
 {
-    use UuidTrait;
     use CustomCodeTrait;
-    use TimestampableTrait;
     use SonataTranslatableTrait;
+    use TimestampableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
@@ -37,7 +37,7 @@ class Page implements SonataTranslatableInterface, Translatable
     private $updatedAt;
 
     /**
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 

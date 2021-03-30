@@ -80,7 +80,7 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         id: 13020
         debate: '@debateCannabis'
         type: AGAINST
-        user: '@user_not_confirmed_with_contributions'
+        user: '@userNotConfirmedWithContributions'
         createdAt: <(new \DateTime('2015-01-01 09:11:00'))>
     # Confinement
     debateConfinementVote{6..200}:

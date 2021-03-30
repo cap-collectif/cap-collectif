@@ -21,11 +21,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Theme implements IndexableInterface, Translatable, SonataTranslatableInterface
 {
-    use UuidTrait;
     use CustomCodeTrait;
-    use TimestampableTrait;
     use SonataTranslatableTrait;
+    use TimestampableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
@@ -36,17 +36,17 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     public static $statuses = [
         'closed' => self::STATUS_CLOSED,
         'opened' => self::STATUS_OPENED,
-        'future' => self::STATUS_FUTURE
+        'future' => self::STATUS_FUTURE,
     ];
 
     public static $statusesLabels = [
         'theme.show.status.closed' => self::STATUS_CLOSED,
         'theme.show.status.opened' => self::STATUS_OPENED,
-        'theme.show.status.future' => self::STATUS_FUTURE
+        'theme.show.status.future' => self::STATUS_FUTURE,
     ];
 
     /**
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 

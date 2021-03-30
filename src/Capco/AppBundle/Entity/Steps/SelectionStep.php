@@ -71,7 +71,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     private $proposalsHidden = false;
 
     /**
-     * @ORM\Column(name="allowing_progess_steps", type="boolean")
+     * @ORM\Column(name="allowing_progess_steps", type="boolean", options={"default": false})
      */
     private $allowingProgressSteps = false;
 

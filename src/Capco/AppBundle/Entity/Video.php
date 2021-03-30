@@ -26,9 +26,7 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
     use TranslatableTrait;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 

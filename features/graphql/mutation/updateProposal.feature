@@ -527,7 +527,7 @@ Scenario: Admin GraphQL client wants to update a and published a draft proposal
 @database
 Scenario: GraphQL client try to update a and published a draft proposal
   Given features themes, districts are enabled
-  And I am logged in to graphql as user_not_confirmed_with_contributions
+  And I am logged in to graphql as userNotConfirmedWithContributions
   And I send a GraphQL POST request:
   """
   {

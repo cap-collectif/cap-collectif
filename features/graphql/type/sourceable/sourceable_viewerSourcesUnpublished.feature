@@ -3,7 +3,7 @@ Feature: Unpublished sources of an sourceable
 
 @read-only
 Scenario: User wants to get sources for an opinion
-  Given I am logged in to graphql as user_not_confirmed_with_contributions
+  Given I am logged in to graphql as userNotConfirmedWithContributions
   And I send a GraphQL POST request:
   """
   {

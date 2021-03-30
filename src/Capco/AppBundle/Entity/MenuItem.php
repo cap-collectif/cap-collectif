@@ -27,7 +27,7 @@ class MenuItem implements Translatable, SonataTranslatableInterface
 
     public static $menuLabels = [
         self::TYPE_HEADER => 'menu.type.header',
-        self::TYPE_FOOTER => 'global.footer'
+        self::TYPE_FOOTER => 'global.footer',
     ];
 
     /**
@@ -38,25 +38,19 @@ class MenuItem implements Translatable, SonataTranslatableInterface
     private $Page;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
-    private $isEnabled = true;
+    private bool $isEnabled = true;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_deletable", type="boolean")
+     * @ORM\Column(name="is_deletable", type="boolean", options={"default": true})
      */
-    private $isDeletable = true;
+    private bool $isDeletable = true;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_fully_modifiable", type="boolean")
+     * @ORM\Column(name="is_fully_modifiable", type="boolean", options={"default": true})
      */
-    private $isFullyModifiable = true;
+    private bool $isFullyModifiable = true;
 
     /**
      * @var int

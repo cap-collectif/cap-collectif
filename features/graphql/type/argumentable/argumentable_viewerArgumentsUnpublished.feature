@@ -3,7 +3,7 @@ Feature: Unpublished arguments of an argumentable
 
 @read-only
 Scenario: User wants to get arguments for an opinion
-  Given I am logged in to graphql as user_not_confirmed_with_contributions
+  Given I am logged in to graphql as userNotConfirmedWithContributions
   And I send a GraphQL POST request:
   """
   {

@@ -1,4 +1,4 @@
-@consumers
+@consumers @userArchive
 Feature: User archive consumer
 
 @rabbitmq @export @database

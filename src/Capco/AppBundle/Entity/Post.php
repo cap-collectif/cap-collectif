@@ -39,7 +39,7 @@ class Post implements
     use UuidTrait;
 
     /**
-     * @ORM\Column(name="is_published", type="boolean")
+     * @ORM\Column(name="is_published", type="boolean", options={"default": false})
      */
     private $isPublished = false;
 
@@ -176,7 +176,7 @@ class Post implements
     {
         $body = $this->translate($locale, $fallbackToDefault)->getBody();
 
-        return html_entity_decode($body, ENT_QUOTES, 'UTF-8');
+        return html_entity_decode($body, \ENT_QUOTES, 'UTF-8');
     }
 
     public function setBody(?string $body = null): self

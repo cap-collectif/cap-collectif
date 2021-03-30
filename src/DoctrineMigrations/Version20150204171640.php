@@ -21,13 +21,13 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $blogMenuItemId = $this->connection->fetchColumn(
+        $blogMenuItemId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
             ['link' => 'blog', 'deletable' => false]
         );
 
         if (!$blogMenuItemId) {
-            $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
+            $menuId = $this->connection->fetchOne('SELECT id FROM menu WHERE type = 1');
 
             if (!$menuId) {
                 $this->connection->insert('menu', ['type' => 1]);

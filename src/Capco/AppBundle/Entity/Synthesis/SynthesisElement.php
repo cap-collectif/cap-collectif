@@ -22,7 +22,7 @@ class SynthesisElement
     use UuidTrait;
 
     /**
-     * @ORM\Column(name="published", type="boolean")
+     * @ORM\Column(name="published", type="boolean", options={"default": false})
      * @Gedmo\Versioned
      */
     private $published = false;
@@ -49,7 +49,7 @@ class SynthesisElement
     private $deletedAt;
 
     /**
-     * @ORM\Column(name="archived", type="boolean")
+     * @ORM\Column(name="archived", type="boolean", options={"default": false})
      * @Gedmo\Versioned
      */
     private $archived = false;
@@ -74,7 +74,7 @@ class SynthesisElement
      * @ORM\JoinColumn(name="original_division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Gedmo\Versioned
      */
-    private $originalDivision = null;
+    private $originalDivision;
 
     /**
      * @var
@@ -82,7 +82,7 @@ class SynthesisElement
      * @ORM\JoinColumn(name="division_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Gedmo\Versioned
      */
-    private $division = null;
+    private $division;
 
     /**
      * @Gedmo\TreeLevel
@@ -103,7 +103,7 @@ class SynthesisElement
      * @Gedmo\Versioned
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $parent = null;
+    private $parent;
 
     /**
      * @var
@@ -220,32 +220,32 @@ class SynthesisElement
      *
      * @ORM\Column(name="linked_data_class", type="string", length=255, nullable=true)
      */
-    private $linkedDataClass = null;
+    private $linkedDataClass;
 
     /**
      * @var string
      *
      * @ORM\Column(name="linked_data_id", type="string", length=255, nullable=true)
      */
-    private $linkedDataId = null;
+    private $linkedDataId;
 
     /**
      * @ORM\Column(name="linked_data_last_update", type="datetime", nullable=true)
      */
-    private $linkedDataLastUpdate = null;
+    private $linkedDataLastUpdate;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="linked_data_creation", type="datetime", nullable=true)
      */
-    private $linkedDataCreation = null;
+    private $linkedDataCreation;
 
     /**
      * @var string
      *
      * @ORM\Column(name="linked_data_url", type="text", nullable=true)
      */
-    private $linkedDataUrl = null;
+    private $linkedDataUrl;
 
     public function __construct()
     {
@@ -263,9 +263,6 @@ class SynthesisElement
         return $this->synthesis;
     }
 
-    /**
-     * @param Synthesis $synthesis
-     */
     public function setSynthesis(Synthesis $synthesis)
     {
         $this->synthesis = $synthesis;
@@ -327,7 +324,7 @@ class SynthesisElement
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTime $deletedAt = null): self
+    public function setDeletedAt(?\DateTime $deletedAt = null): self
     {
         $this->deletedAt = $deletedAt;
 
@@ -439,9 +436,6 @@ class SynthesisElement
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title)
     {
         // QuickFix: | is used as a separator so we can not use it
@@ -791,7 +785,7 @@ class SynthesisElement
 
     public function getDecodedBody()
     {
-        return $this->body ? html_entity_decode($this->body, ENT_QUOTES) : null;
+        return $this->body ? html_entity_decode($this->body, \ENT_QUOTES) : null;
     }
 
     public function getChildrenCount()

@@ -19,7 +19,7 @@ class Version20150320170501 extends AbstractMigration implements ContainerAwareI
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -50,7 +50,7 @@ class Version20150320170501 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema): void
     {
-        $this->connection->executeUpdate('UPDATE idea_vote SET confirmed = ?', [true]);
+        $this->connection->executeStatement('UPDATE idea_vote SET confirmed = ?', [true]);
     }
 
     public function preDown(Schema $schema): void

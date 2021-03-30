@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Diff;
@@ -75,7 +76,6 @@ class ProjectStepPersister
         $userSteps = new ArrayCollection($steps);
         foreach ($userSteps as $i => $step) {
             list($type, $entity) = $this->getFormEntity($step);
-
             $form = $this->formFactory->create($type, $entity);
             unset($step['id']);
             if (!$entity instanceof CollectStep && !$entity instanceof SelectionStep) {

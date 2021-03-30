@@ -23,7 +23,7 @@ class OfficialResponse
     use UuidTrait;
 
     /**
-     * @ORM\Column(name="is_published", type="boolean")
+     * @ORM\Column(name="is_published", type="boolean", options={"default": false})
      */
     private bool $isPublished = false;
 

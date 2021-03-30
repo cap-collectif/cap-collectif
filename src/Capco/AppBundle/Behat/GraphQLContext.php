@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\PHPMatcher;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\Assert;
@@ -53,13 +52,13 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @When I am logged in to graphql as user_not_confirmed_with_contributions
+     * @When I am logged in to graphql as userNotConfirmedWithContributions
      */
     public function iAmLoggedInToGraphQLAsUserNotConfirmedWithContributions()
     {
         $this->createAuthenticatedClient(
-            'user_not_confirmed_with_contributions@test.com',
-            'user_not_confirmed_with_contributions'
+            'userNotConfirmedWithContributions@test.com',
+            'userNotConfirmedWithContributions'
         );
     }
 

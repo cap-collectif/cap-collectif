@@ -111,8 +111,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: true
         type: 0 # text
-        alwaysJumpDestinationQuestion: '@multiplequestionIdfGrandProjet1'
-    simplequestionIdfGrandProjectPorteur2:
+        alwaysJumpDestinationQuestion: '@xQuestionIdfGrandProjet1'
+    sQuestionIdfGrandProjectPorteur2:
         id: 1331
         title: Raison sociale du porteur de projet
         required: true

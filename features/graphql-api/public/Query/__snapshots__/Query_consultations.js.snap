@@ -4,6 +4,32 @@ exports[`Internal|Query.consultations fetches all consultations 1`] = `
 Object {
   "consultations": Array [
     Object {
+      "contribuable": true,
+      "id": "Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
+      "sections": Array [
+        Object {
+          "title": "Première section dans la première consultation",
+        },
+        Object {
+          "title": "Deuxième section dans la première consultation",
+        },
+      ],
+      "title": "Première consultation",
+    },
+    Object {
+      "contribuable": true,
+      "id": "Q29uc3VsdGF0aW9uOjJuZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
+      "sections": Array [
+        Object {
+          "title": "Première section dans la deuxième consultation",
+        },
+        Object {
+          "title": "Deuxième section dans la deuxième consultation",
+        },
+      ],
+      "title": "Deuxième consultation",
+    },
+    Object {
       "contribuable": false,
       "id": "Q29uc3VsdGF0aW9uOmFsbA==",
       "sections": Array [
@@ -92,19 +118,6 @@ Object {
     },
     Object {
       "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOmZpcnN0Q29uc3VsdGF0aW9uTXVsdGlDb25zdWx0YXRpb25TdA==",
-      "sections": Array [
-        Object {
-          "title": "Première section dans la première consultation",
-        },
-        Object {
-          "title": "Deuxième section dans la première consultation",
-        },
-      ],
-      "title": "Première consultation",
-    },
-    Object {
-      "contribuable": true,
       "id": "Q29uc3VsdGF0aW9uOm11bHRpQ29uc3VsdDE=",
       "sections": Array [
         Object {
@@ -148,19 +161,6 @@ Object {
         },
       ],
       "title": "Consultation in private project",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOnNlY29uZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uUw==",
-      "sections": Array [
-        Object {
-          "title": "Première section dans la deuxième consultation",
-        },
-        Object {
-          "title": "Deuxième section dans la deuxième consultation",
-        },
-      ],
-      "title": "Deuxième consultation",
     },
     Object {
       "contribuable": false,

@@ -31,18 +31,18 @@ class OpinionType
         'global.orange' => 'orange',
         'opinion_type.colors.bluedark' => 'bluedark',
         'opinion_type.colors.white' => 'white',
-        'opinion_type.colors.default' => 'default'
+        'opinion_type.colors.default' => 'default',
     ];
 
     public static $voteWidgetLabels = [
         'global.none' => self::VOTE_WIDGET_DISABLED,
-        'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH
+        'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH,
     ];
 
     public static $commentSystemLabels = [
         'opinion_type.comment_system.disabled' => self::COMMENT_SYSTEM_DISABLED,
         'opinion_type.comment_system.ok' => self::COMMENT_SYSTEM_OK,
-        'opinion_type.comment_system.both' => self::COMMENT_SYSTEM_BOTH
+        'opinion_type.comment_system.both' => self::COMMENT_SYSTEM_BOTH,
     ];
 
     /**
@@ -157,19 +157,19 @@ class OpinionType
     /**
      * @var bool
      *
-     * @ORM\Column(name="versionable", type="boolean")
+     * @ORM\Column(name="versionable", type="boolean", options={"default": false})
      */
     private $versionable = false;
 
     /**
-     * @ORM\Column(name="linkable", type="boolean")
+     * @ORM\Column(name="linkable", type="boolean", options={"default": false})
      */
     private $linkable = false;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="sourceable", type="boolean")
+     * @ORM\Column(name="sourceable", type="boolean", options={"default": true})
      */
     private $sourceable = true;
 
@@ -554,7 +554,7 @@ class OpinionType
         return $this->parent;
     }
 
-    public function setParent(self $parent = null)
+    public function setParent(?self $parent = null)
     {
         $this->parent = $parent;
 

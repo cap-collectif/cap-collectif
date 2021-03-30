@@ -3,7 +3,7 @@ Feature: Versions of an opinion
 
 @read-only
 Scenario: Anonymous wants to get viewerVersionsUnpublished for an opinion
-  Given I am logged in to graphql as user_not_confirmed_with_contributions
+  Given I am logged in to graphql as userNotConfirmedWithContributions
   And I send a GraphQL POST request:
   """
   {

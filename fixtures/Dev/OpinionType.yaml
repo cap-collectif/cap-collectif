@@ -223,38 +223,38 @@ Capco\AppBundle\Entity\OpinionType:
         versionable: true
         sourceable: false
         consultation: '@endless'
-    opinionTypeFirstInFirstConsultationMultiConsultation:
-        id: opinionTypeFirstInFirstConsultationMultiConsultation
+    opinionType1stIn1stMultiConsultation:
+        id: opinionType1stIn1stMultiConsultation
         title: Première section dans la première consultation
         position: 1
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultation: '@firstConsultationMultiConsultationStep'
-    opinionTypeSecondInFirstConsultationMultiConsultation:
-        id: opinionTypeSecondInFirstConsultationMultiConsultation
+        consultation: '@1stConsultationMultiConsultationStep'
+    opinionType2ndIn1stMultiConsultation:
+        id: opinionType2ndIn1stMultiConsultation
         title: Deuxième section dans la première consultation
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultation: '@firstConsultationMultiConsultationStep'
-    opinionTypeFirstInSecondConsultationMultiConsultation:
-        id: opinionTypeFirstInSecondConsultationMultiConsultation
+        consultation: '@1stConsultationMultiConsultationStep'
+    opinionType1stIn2ndMultiConsultation:
+        id: opinionType1stIn2ndMultiConsultation
         title: Première section dans la deuxième consultation
         position: 1
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultation: '@secondConsultationMultiConsultationStep'
-    opinionTypeSecondInSecondConsultationMultiConsultation:
-        id: opinionTypeSecondInSecondConsultationMultiConsultation
+        consultation: '@2ndConsultationMultiConsultationStep'
+    opinionTyp2ndIn2ndMultiConsultation:
+        id: opinionTyp2ndIn2ndMultiConsultation
         title: Deuxième section dans la deuxième consultation
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
-        consultation: '@secondConsultationMultiConsultationStep'
+        consultation: '@2ndConsultationMultiConsultationStep'
     opinionTypePrivate:
         id: 'opinionTypePrivate'
         title: La section

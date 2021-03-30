@@ -14,10 +14,10 @@ class Version20151028153736 extends AbstractMigration
     {
         $articlesPath = [
             'Article 1 - Open data par défaut (obligation de diffuser en ligne les principaux documents et données des organismes publics)-d05d62dd-7415-11e5-9ed9-fa163eea5cb7',
-            'Article 23 - Développement des usages numériques dans les territoires-d3726c3f-7415-11e5-9ed9-fa163eea5cb7'
+            'Article 23 - Développement des usages numériques dans les territoires-d3726c3f-7415-11e5-9ed9-fa163eea5cb7',
         ];
         foreach ($articlesPath as $ap) {
-            $this->connection->executeUpdate(
+            $this->connection->executeStatement(
                 '
                 UPDATE synthesis_element
                 SET published = 1, archived = 1

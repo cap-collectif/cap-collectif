@@ -9,9 +9,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RecalculateSynthesesCountersCommand extends Command
 {
-    private $em;
+    private EntityManagerInterface $em;
 
-    public function __construct(?string $name = null, EntityManagerInterface $entityManager)
+    public function __construct(?string $name, EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
         parent::__construct($name);
@@ -19,7 +19,7 @@ class RecalculateSynthesesCountersCommand extends Command
 
     protected function configure()
     {
-        $this->setName('capco:syntheses:counters')->setDescription(
+        $this->setDescription(
             'Recalculate the syntheses counters'
         );
     }
@@ -71,7 +71,7 @@ class RecalculateSynthesesCountersCommand extends Command
             if ($el['level'] > 0 && $el['parent'] && isset($elements[$el['parent']])) {
                 $elements[$el['id']]['parentCount'] = $elements[$el['parent']]['count'];
                 $elements[$el['id']]['parentVotesScore'] = $elements[$el['parent']]['votesScore'];
-                $this->em->getConnection()->executeUpdate(
+                $this->em->getConnection()->executeStatement(
                     '
                     UPDATE synthesis_element se
                     SET published_children_count = ?, published_parent_children_count = ?, children_score = ?, parent_children_score = ?
@@ -82,11 +82,11 @@ class RecalculateSynthesesCountersCommand extends Command
                         $elements[$el['id']]['parentCount'],
                         $score,
                         $elements[$el['id']]['parentVotesScore'],
-                        $el['id']
+                        $el['id'],
                     ]
                 );
             } else {
-                $this->em->getConnection()->executeUpdate(
+                $this->em->getConnection()->executeStatement(
                     '
                     UPDATE synthesis_element se
                     SET published_children_count = ?, children_score = ?

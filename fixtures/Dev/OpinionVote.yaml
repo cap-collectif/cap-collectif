@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\OpinionVote:
     id: 51
     Opinion: '@opinion59'
     value: 0
-    user: '@user_not_confirmed_with_contributions'
+    user: '@userNotConfirmedWithContributions'
     publishedAt: <(new \DateTime('2015-03-01 00:00:06'))>
     createdAt: <(new \DateTime('2015-03-01 00:00:06'))>
     updatedAt: <(new \DateTime('2016-03-01 00:00:06'))>

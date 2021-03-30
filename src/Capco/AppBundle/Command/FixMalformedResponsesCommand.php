@@ -10,11 +10,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FixMalformedResponsesCommand extends Command
 {
-    private $manager;
-    private $abstractResponseRepository;
+    private EntityManagerInterface $manager;
+    private AbstractResponseRepository $abstractResponseRepository;
 
     public function __construct(
-        string $name = null,
+        ?string $name,
         EntityManagerInterface $manager,
         AbstractResponseRepository $abstractResponseRepository
     ) {
@@ -26,7 +26,7 @@ class FixMalformedResponsesCommand extends Command
 
     protected function configure()
     {
-        $this->setName('capco:fix:malformed-responses')->setDescription(
+        $this->setDescription(
             'Fix malformed questionnaire responses.'
         );
     }
@@ -48,9 +48,9 @@ class FixMalformedResponsesCommand extends Command
                 }
                 $this->manager
                     ->getConnection()
-                    ->executeUpdate('UPDATE response SET value = ? where id = ?', [
+                    ->executeStatement('UPDATE response SET value = ? where id = ?', [
                         $value,
-                        $response['id']
+                        $response['id'],
                     ]);
             }
         }

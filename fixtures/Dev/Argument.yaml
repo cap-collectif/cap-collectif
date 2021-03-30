@@ -50,7 +50,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument<current()>'
     Opinion: '@opinion3'
     type: 0
-    Author: '@user_not_confirmed_with_contributions'
+    Author: '@userNotConfirmedWithContributions'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current days"))>
     updatedAt: <(new \DateTime('2017-01-01'))>
@@ -59,7 +59,7 @@ Capco\AppBundle\Entity\Argument:
     id: 'argument100'
     Opinion: '@opinion3'
     type: 1
-    Author: '@user_not_confirmed_with_contributions'
+    Author: '@userNotConfirmedWithContributions'
     body: <stripslashes('\<p>\')>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.<stripslashes('\</p>\')>
     createdAt: <(new \DateTime('2019-01-01 22:00:00'))>
     updatedAt: <(new \DateTime('2019-02-01 22:00:00'))>

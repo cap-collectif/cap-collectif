@@ -19,7 +19,7 @@ Scenario: Logged in admin wants to add a new event
   Then fill in "event_title" with "test"
   And I fill the authors field with name 'adminpro'
   And I fill the address field
-  Then I should see "user187"
+  Then I should see "user188"
   And I fill in "event_body" with "My body"
   And I fill date field "#event_input_startAt" with value '2030-08-17 12:13:14'
   And I attach the file "/var/www/features/files/image.jpg" to "event_media_field"

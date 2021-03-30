@@ -220,14 +220,14 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 1 hours"))>
 
-    user_not_confirmed_with_contributions:
-        id: 'user_not_confirmed_with_contributions'
-        username: user_not_confirmed_with_contributions
-        firstname: user_not_confirmed_with_contributions
-        lastname: user_not_confirmed_with_contributions
-        email: user_not_confirmed_with_contributions@test.com
+    userNotConfirmedWithContributions:
+        id: 'userNotConfirmedWithContributions'
+        username: userNotConfirmedWithContributions
+        firstname: userNotConfirmedWithContributions
+        lastname: userNotConfirmedWithContributions
+        email: userNotConfirmedWithContributions@test.com
         userType: '@UserType1'
-        plainPassword: user_not_confirmed_with_contributions
+        plainPassword: userNotConfirmedWithContributions
         roles:
             - 'ROLE_USER'
         media: null

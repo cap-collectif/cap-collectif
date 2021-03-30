@@ -17,8 +17,8 @@ describe('Internal|Debate.viewerUnpublishedArgument', () => {
     id: toGlobalId('Debate', 'debateCannabis'),
   };
   const notConfirmedUserClient = {
-    email: 'user_not_confirmed_with_contributions@test.com',
-    password: 'user_not_confirmed_with_contributions',
+    email: 'userNotConfirmedWithContributions@test.com',
+    password: 'userNotConfirmedWithContributions',
   };
 
   it('should return null when the user is anonymous', async () => {

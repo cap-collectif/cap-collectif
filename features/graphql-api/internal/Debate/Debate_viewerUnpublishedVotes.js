@@ -37,8 +37,8 @@ describe('Internal|Debate.viewerUnpublishedVotes', () => {
     id: toGlobalId('Debate', 'debateCannabis'),
   };
   const notConfirmedUserClient = {
-    email: 'user_not_confirmed_with_contributions@test.com',
-    password: 'user_not_confirmed_with_contributions',
+    email: 'userNotConfirmedWithContributions@test.com',
+    password: 'userNotConfirmedWithContributions',
   };
 
   it('should return null when the user is anonymous', async () => {
@@ -57,7 +57,7 @@ describe('Internal|Debate.viewerUnpublishedVotes', () => {
     expect(votes.every(vote => vote.author.email === notConfirmedUserClient.email)).toBe(true);
   });
 
-  it('should return the correct unpublished votes count for user_not_confirmed_with_contributions', async () => {
+  it('should return the correct unpublished votes count for userNotConfirmedWithContributions', async () => {
     await expect(
       graphql(CountDebateViewerUnpublishedVotesQuery, variables, notConfirmedUserClient),
     ).resolves.toMatchSnapshot();

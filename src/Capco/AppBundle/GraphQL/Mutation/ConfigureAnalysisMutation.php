@@ -154,7 +154,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setMoveToSelectionStep($moveToSelectionStep)
             ->setSelectionStepStatus($chosenSelectionStepStatus)
             ->setCostEstimationEnabled($costEstimationEnabled)
-            ->setBody($body);
+            ->setBody($body ?? '');
 
         try {
             $this->entityManager->persist($analysisConfiguration);

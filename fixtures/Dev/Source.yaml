@@ -124,7 +124,7 @@ Capco\AppBundle\Entity\Source:
     title: Source non publiée n°<current()>
     body: blablablabla-blablablabla
     link: http://www.bing.com
-    author: '@user_not_confirmed_with_contributions'
+    author: '@userNotConfirmedWithContributions'
     opinion: '@opinion3'
     category: '@sourcecategory2'
   source41:
@@ -184,7 +184,7 @@ Capco\AppBundle\Entity\Source:
     link: http://ourplanet.com
   source{46..50}:
     id: 'source<current()>'
-    title: Je suis une source d'une opinion dans une consultation de l'étape de multi consultation. Regardez Overlord.
+    title: Je suis une source d'une opinion dans une consultation de l'étape de multi consult.
     body: (pour de vrai, regardez le)
     author: '@user4'
     opinion: '@opinionMultiConsultationSecondInFirstSection96'
@@ -195,7 +195,7 @@ Capco\AppBundle\Entity\Source:
     link: https://myanimelist.net/anime/29803/Overlord
   source51:
     id: 'source51'
-    title: Je suis une source d'une opinion dans une consultation de l'étape de multi consultation. Regardez Tensei shitara Slime Datta Ken.
+    title: Je suis une source d'une opinion dans une consultation de l'étape de multi consult. Regardez
     body: (pour de vrai, regardez le)
     author: '@user4'
     opinion: '@opinionMultiConsultationSecondInFirstSection97'

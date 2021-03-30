@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
   validationRule2:
     __factory: { create: ['min', 2] }
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
-  multiplequestion1:
+  xQuestion1:
     id: 13
     title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
     helpText: Plusieurs choix sont possibles
@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     randomQuestionChoices: false
     otherAllowed: true
     validationRule: '@validationRule1'
-  multiplequestion2:
+  xQuestion2:
     id: 14
     title: Quel est ton athlète favori ?
     helpText: Un seul choix possible
@@ -21,14 +21,14 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 3 # radio
     randomQuestionChoices: true
     otherAllowed: true
-  multiplequestion3:
+  xQuestion3:
     id: 15
     title: 'Nelson Monfort parle-t-il:'
     helpText: Merci de répondre sincèrement
     required: false
     type: 4 # select
     randomQuestionChoices: true
-  multiplequestion4:
+  xQuestion4:
     id: 16
     title: Classez vos choix
     helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
@@ -36,31 +36,31 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 6
     randomQuestionChoices: false
     validationRule: '@validationRule2'
-  multiplequestion5:
+  xQuestion5:
     id: 17
     title: Sangohan / Vegeta ?
     required: true
     type: 4 # select
     randomQuestionChoices: true
-  multiplequestion6:
+  xQuestion6:
     id: 18
     title: Choissez le meilleur logo
     required: false
     type: 3
     randomQuestionChoices: false
-  multiplequestion7:
+  xQuestion7:
     id: 19
     title: Est-ce que Martoni a encore une balle dans son chargeur ?
     required: false
     type: 8
     randomQuestionChoices: false
-  multiplequestion8:
+  xQuestion8:
     id: 20
     title: Comment trouvez-vous cette présentation ?
     required: false
     type: 8
     randomQuestionChoices: false
-  multiplequestion9:
+  xQuestion9:
     id: 21
     title: Quelle définition pour cette proposition ?
     helpText: Vous pouvez sélectionner bien évidemment plusieurs valeurs.
@@ -68,7 +68,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     otherAllowed: true
     type: 5
     randomQuestionChoices: false
-  multiplequestion10:
+  xQuestion10:
     id: 22
     title: En résumé
     helpText: Une seule réponse valable ici, faites le bon choix !
@@ -76,301 +76,301 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     otherAllowed: true
     type: 3
     randomQuestionChoices: false
-  multiplequestion11:
+  xQuestion11:
     id: 23
     title: Classez vos choix
     helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     required: false
     type: 6
     randomQuestionChoices: false
-  multiplequestionHapNoel:
+  xQuestionHapNoel:
     id: 24
     title: Hap ou Noel ?
     required: false
     type: 4 # select
-  multiplequestionHapCreation:
+  xQuestionHapCreation:
     id: 25
     title: Par qui Hap a t-il été créé ?
-    alwaysJumpDestinationQuestion: '@multiplequestionIsHapGood'
+    alwaysJumpDestinationQuestion: '@xQuestionIsHapGood'
     type: 4 # select
-  multiplequestionIsHapGood:
+  xQuestionIsHapGood:
     id: 26
     title: Hap est-il un homme bon ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
     type: 4 # select
-  multiplequestionNoelFete:
+  xQuestionNoelFete:
     id: 27
     title: Noel a t-il un rapport avec la fête de Noël ?
-    alwaysJumpDestinationQuestion: '@multiplequestionNoelHatColor'
+    alwaysJumpDestinationQuestion: '@xQuestionNoelHatColor'
     type: 4 # select
-  multiplequestionNoelHatColor:
+  xQuestionNoelHatColor:
     id: 28
     title: De quelle couleur est le chapeau de Noël ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
     type: 4 # select
-  multiplequestionMarvelOrDc:
+  xQuestionMarvelOrDc:
     id: 31
     title: Plutôt Marvel ou DC ?
     type: 4 # select
-  multiplequestionDcSupermanLike:
+  xQuestionDcSupermanLike:
     id: 32
     title: T'aimes bien Superman ?
-    alwaysJumpDestinationQuestion: '@multiplequestionDcBatmanLike'
+    alwaysJumpDestinationQuestion: '@xQuestionDcBatmanLike'
     type: 4 # select
-  multiplequestionDcBatmanLike:
+  xQuestionDcBatmanLike:
     id: 33
     title: T'aimes bien Batman ?
-    alwaysJumpDestinationQuestion: '@multiplequestionDcSupergirlLike'
+    alwaysJumpDestinationQuestion: '@xQuestionDcSupergirlLike'
     type: 4 # select
-  multiplequestionDcSupergirlLike:
+  xQuestionDcSupergirlLike:
     id: 34
     title: T'aimes bien Supergirl ?
-    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionel'
+    alwaysJumpDestinationQuestion: '@xQuestionEndConditionel'
     type: 4 # select
-  multiplequestionMarvelIronManLike:
+  xQuestionMarvelIronManLike:
     id: 35
     title: T'aimes bien Iron Man ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelLukeCageLike'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelLukeCageLike'
     type: 4 # select
-  multiplequestionMarvelLukeCageLike:
+  xQuestionMarvelLukeCageLike:
     id: 36
     title: T'aimes bien Luke Cage ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelThorLike'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelThorLike'
     type: 4 # select
-  multiplequestionMarvelThorLike:
+  xQuestionMarvelThorLike:
     id: 37
     title: T'aimes bien Thor ?
-    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionel'
+    alwaysJumpDestinationQuestion: '@xQuestionEndConditionel'
     type: 4 # select
-  multiplequestionEndConditionel:
+  xQuestionEndConditionel:
     id: 38
     title: C'est la fin mais j'affiche quand même des choix
     type: 4 # select
-  multiplequestionHapNotGoodHowDareYou:
+  xQuestionHapNotGoodHowDareYou:
     id: 39
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDc'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
     type: 4 # select
-  ljMultipleQuestionRadio:
+  ljxQuestionRadio:
     id: 40
     title: Ceci est-il une question de type Radio ?
     type: 3
-  ljMultipleQuestionSelect:
+  ljxQuestionSelect:
     id: 41
     title: Ceci est-il une question de type Select ?
     type: 4 # select
-  ljMultipleQuestionButton:
+  ljxQuestionButton:
     id: 42
     title: Ceci est-il une question de type Boutton ?
     type: 8
-  ljMultipleQuestionCheckbox:
+  ljxQuestionCheckbox:
     id: 43
     title: Ceci est-il une question de type Checkbox ?
     type: 5
-  ljMultipleQuestionRanking:
+  ljxQuestionRanking:
     id: 44
     title: Ceci est-il une question de type Classement ?
     type: 6
-  multiplequestionFavoriteFleuve:
+  xQuestionFavoriteFleuve:
     id: 45
     title: Votre fleuve préféré
     required: false
     type: 4 # select
-  multiplequestionHapGange:
+  xQuestionHapGange:
     id: 46
     title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
     required: false
-    alwaysJumpDestinationQuestion: '@multiplequestionHapCreation'
+    alwaysJumpDestinationQuestion: '@xQuestionHapCreation'
     type: 4 # select
-  multiplequestionReactVue:
+  xQuestionReactVue:
     id: 47
     title: Who is the best ?
     required: false
     type: 4 # select
-  multiplequestion12:
+  xQuestion12:
     id: 48
     title: Question Multiple?
     required: false
     type: 3 # radio
-  multiplequestion13:
+  xQuestion13:
     id: 49
     title: J'ai plusieurs choix?
     required: false
     type: 3 # radio
-  multiplequestionHapNoelProposalForm15:
+  xQuestionHapNoelProposalForm15:
     id: 2415
     title: Hap ou Noel ?
     required: false
     type: 4 # select
-  multiplequestionFavoriteFleuveProposalForm15:
+  xQuestionFavoriteFleuveProposalForm15:
     id: 4515
     title: Votre fleuve préféré
     required: false
     type: 4 # select
-  multiplequestionHapGangeProposalForm15:
+  xQuestionHapGangeProposalForm15:
     id: 4615
     title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
     required: false
-    alwaysJumpDestinationQuestion: '@multiplequestionHapCreationProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionHapCreationProposalForm15'
     type: 4 # select
-  multiplequestionHapCreationProposalForm15:
+  xQuestionHapCreationProposalForm15:
     id: 2515
     title: Par qui Hap a t-il été créé ?
-    alwaysJumpDestinationQuestion: '@multiplequestionIsHapGoodProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionIsHapGoodProposalForm15'
     type: 4 # select
-  multiplequestionIsHapGoodProposalForm15:
+  xQuestionIsHapGoodProposalForm15:
     id: 2615
     title: Hap est-il un homme bon ?
     type: 4 # select
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
-  multiplequestionNoelFeteProposalForm15:
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
+  xQuestionNoelFeteProposalForm15:
     id: 2715
     title: Noel a t-il un rapport avec la fête de Noël ?
-    alwaysJumpDestinationQuestion: '@multiplequestionNoelHatColorProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionNoelHatColorProposalForm15'
     type: 4 # select
-  multiplequestionNoelHatColorProposalForm15:
+  xQuestionNoelHatColorProposalForm15:
     id: 2815
     title: De quelle couleur est le chapeau de Noël ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
     type: 4 # select
-  multiplequestionMarvelOrDcProposalForm15:
+  xQuestionMarvelOrDcProposalForm15:
     id: 3115
     title: Plutôt Marvel ou DC ?
     type: 4 # select
-  multiplequestionDcSupermanLikeProposalForm15:
+  xQuestionDcSupermanLikePForm15:
     id: 3215
     title: T'aimes bien Superman ?
-    alwaysJumpDestinationQuestion: '@multiplequestionDcBatmanLikeProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionDcBatmanLikeProposalForm15'
     type: 4 # select
-  multiplequestionDcBatmanLikeProposalForm15:
+  xQuestionDcBatmanLikeProposalForm15:
     id: 3315
     title: T'aimes bien Batman ?
-    alwaysJumpDestinationQuestion: '@multiplequestionDcSupergirlLikeProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionDcSupergirlLikePF15'
     type: 4 # select
-  multiplequestionDcSupergirlLikeProposalForm15:
+  xQuestionDcSupergirlLikePF15:
     id: 3415
     title: T'aimes bien Supergirl ?
-    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionelProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionEndConditionProposalForm15'
     type: 4 # select
-  multiplequestionMarvelIronManLikeProposalForm15:
+  xQuestionMarvelIronManLikeProposalForm15:
     id: 3515
     title: T'aimes bien Iron Man ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelLukeCageLikeProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelLukeCageLikePF15'
     type: 4 # select
-  multiplequestionMarvelLukeCageLikeProposalForm15:
+  xQuestionMarvelLukeCageLikePF15:
     id: 3615
     title: T'aimes bien Luke Cage ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelThorLikeProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelThorLikePF15'
     type: 4 # select
-  multiplequestionMarvelThorLikeProposalForm15:
+  xQuestionMarvelThorLikePF15:
     id: 3715
     title: T'aimes bien Thor ?
-    alwaysJumpDestinationQuestion: '@multiplequestionEndConditionelProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionEndConditionProposalForm15'
     type: 4 # select
-  multiplequestionEndConditionelProposalForm15:
+  xQuestionEndConditionProposalForm15:
     id: 3815
     title: C'est la fin mais j'affiche quand même des choix
     type: 4 # select
-  multiplequestionHapNotGoodHowDareYouProposalForm15:
+  xQuestionHapNotGoodProposalForm15:
     id: 3915
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
-    alwaysJumpDestinationQuestion: '@multiplequestionMarvelOrDcProposalForm15'
+    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
     type: 4 # select
-  multiplequestion16:
+  xQuestion16:
     id: 3916
     title: Classez vos choix
     helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     required: false
     type: 6
     randomQuestionChoices: true
-  multiplequestionWithLotOfChoices:
+  xQuestionWithLotOfChoices:
     id: 3917
     title: Choisissez votre choix préféré
     required: true
     type: 4
-  multiplequestionIdfGrandOrLocal:
+  xQuestionIdfGrandOrLocal:
     id: 3918
     title: 'Je souhaite...'
     required: true
     private: true
     type: 3 # radio
-  multiplequestionIdfGrandProjet1:
+  xQuestionIdfGrandProjet1:
     id: 3919
     title: 'Je suis...'
     private: true
     required: true
     type: 3 # radio
-    alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectPorteur2'
-  multiplequestionIdfProjetLocal1:
+    alwaysJumpDestinationQuestion: '@sQuestionIdfGrandProjectPorteur2'
+  xQuestionIdfProjetLocal1:
     id: 3920
     title: 'Je suis...'
     private: true
     required: true
     type: 3 # radio
-  multiplequestionIdfProjetLocalAssociation1:
+  xQuestionIdfProjetLocalAssociation1:
     id: 3921
     title: Avez-vous un numéro SIRET ? (Pour les associations)
     private: true
     required: true
     type: 3 # radio
-  multiplequestionIdfProjetLocalAssociationWithoutSiret1:
+  xQuestionIdfPLocalAssocWithoutSiret1:
     id: 3922
     title: Avez-vous un numéro RNA (ou WALDEC pour les associations créées avant 2010)
     private: true
     required: true
     type: 3 # radio
-  multiplequestion17:
+  xQuestion17:
     id: 3923
     title: J'ai plusieurs choix leu?
     required: false
     type: 3 # radio
-  multiplequestionEvalIdf1:
+  xQuestionEvalIdf1:
     id: 3924
     title: Existence juridique du candidat avérée
     required: false
     type: 3 # radio
-  multiplequestionEvalIdf2:
+  xQuestionEvalIdf2:
     id: 3925
     title: Le projet répond à l’intérêt général et a une visée collective
     required: false
     type: 4 # select
-  multiplequestionEvalIdf3:
+  xQuestionEvalIdf3:
     id: 3926
     title: Le projet ne correspond pas à une action de lobbying à visée commerciale ou à une action à visée politique
     required: false
     type: 5 # checkbox
-  multiplequestionEvalIdf4:
+  xQuestionEvalIdf4:
     id: 3927
     title: Les dépenses estimées par le porteur de projet sont-elles justifiées ?
     required: false
     type: 3 # button
-  multiplequestionEvalIdf5:
+  xQuestionEvalIdf5:
     id: 3928
     title: Le projet est-il concret et rapidement réalisable (démarrage dans l’année et durée de réalisation envisagée compatible avec le projet décrit)
     required: false
     type: 5 # button
-  multiplequestionEvalIdf6:
+  xQuestionEvalIdf6:
     id: 3929
     title: Avis sur la faisabilité technique, juridique et financière du projet
     required: false
     type: 8 # button
   # FOOD PROJECT
-  multiplequestionFoodGrape:
+  xQuestionFoodGrape:
     id: 3930
     title: T'es plus raisin noir ou vert ?
     required: true
     type: 3 # radio
-  multiplequestionFoodMcdoBk:
+  xQuestionFoodMcdoBk:
     id: 3931
     title: Team mcdo ou BK ?
     required: true
     type: 4 # select
-  multiplequestionFoodNoIdea:
+  xQuestionFoodNoIdea:
     id: 3932
     title: Coches ce que tu veux
     required: true
     type: 5 # checkbox
-  multiplequestionFoodApple:
+  xQuestionFoodApple:
     id: 3933
     title: Quel type de pomme es-tu ?
     required: true

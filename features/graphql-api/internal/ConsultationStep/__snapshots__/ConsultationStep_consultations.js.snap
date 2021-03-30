@@ -19,7 +19,7 @@ exports[`Internal|Query step.consultation fetches the correct first consultation
 Object {
   "step": Object {
     "consultation": Object {
-      "id": "Q29uc3VsdGF0aW9uOmZpcnN0Q29uc3VsdGF0aW9uTXVsdGlDb25zdWx0YXRpb25TdA==",
+      "id": "Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
       "title": "Première consultation",
       "url": "https://capco.test/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/premiere-consultation",
     },
@@ -31,7 +31,7 @@ exports[`Internal|Query step.consultation fetches the correct second consultatio
 Object {
   "step": Object {
     "consultation": Object {
-      "id": "Q29uc3VsdGF0aW9uOnNlY29uZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uUw==",
+      "id": "Q29uc3VsdGF0aW9uOjJuZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
       "title": "Deuxième consultation",
       "url": "https://capco.test/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
     },
@@ -46,14 +46,14 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "Q29uc3VsdGF0aW9uOmZpcnN0Q29uc3VsdGF0aW9uTXVsdGlDb25zdWx0YXRpb25TdA==",
+            "id": "Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
             "title": "Première consultation",
             "url": "https://capco.test/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/premiere-consultation",
           },
         },
         Object {
           "node": Object {
-            "id": "Q29uc3VsdGF0aW9uOnNlY29uZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uUw==",
+            "id": "Q29uc3VsdGF0aW9uOjJuZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
             "title": "Deuxième consultation",
             "url": "https://capco.test/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation",
           },

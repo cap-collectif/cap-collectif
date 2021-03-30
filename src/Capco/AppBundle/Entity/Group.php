@@ -17,10 +17,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Group
 {
-    use UuidTrait;
-    use TimestampableTrait;
-    use SluggableTitleTrait;
     use BlameableTrait;
+    use SluggableTitleTrait;
+    use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
@@ -49,7 +49,7 @@ class Group
     private $userGroups;
 
     /**
-     * @ORM\Column(type="boolean", name="is_deletable")
+     * @ORM\Column(type="boolean", name="is_deletable", options={"default": true})
      */
     private bool $isDeletable = true;
 

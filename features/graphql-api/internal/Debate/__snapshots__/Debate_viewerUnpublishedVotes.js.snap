@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|Debate.viewerUnpublishedVotes should return the correct unpublished votes count for user_not_confirmed_with_contributions 1`] = `
+exports[`Internal|Debate.viewerUnpublishedVotes should return the correct unpublished votes count for userNotConfirmedWithContributions 1`] = `
 Object {
   "debate": Object {
     "viewerUnpublishedVotes": Object {

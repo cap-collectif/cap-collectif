@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\Questions\SectionQuestion:
     title: Informations sur le porteur de projet
     type: 10
     level: 1
-    alwaysJumpDestinationQuestion: '@multiplequestionIdfProjetLocal1'
+    alwaysJumpDestinationQuestion: '@xQuestionIdfProjetLocal1'
   sectionIdfInfoProjectLocal:
     id: 307
     title: Informations complémentaires sur mon projet

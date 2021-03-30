@@ -206,12 +206,12 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     private $notificationsConfiguration;
 
     /**
-     * @ORM\Column(name="using_address", nullable=false, type="boolean")
+     * @ORM\Column(name="using_address", nullable=false, type="boolean", options={"default": false})
      */
     private $usingAddress = false;
 
     /**
-     * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean")
+     * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean", options={"default": false})
      */
     private $proposalInAZoneRequired = false;
 

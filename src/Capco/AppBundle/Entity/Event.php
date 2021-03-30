@@ -65,7 +65,7 @@ class Event implements
     private $updatedAt;
 
     /**
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": false})
      */
     private $enabled = false;
 
@@ -693,6 +693,12 @@ class Event implements
             'defaultLocale',
             'translations',
             'newTranslations',
+            'guestListEnabled',
+            'isPresential',
+            'isRecordingPublished',
+            'adminAuthorizeDataTransfer',
+            'commentable',
+            'createdAt',
         ];
 
         foreach ($this as $key => $value) {
@@ -702,6 +708,7 @@ class Event implements
         }
 
         $this->enabled = false;
+        $this->commentable = false;
     }
 
     /** ======== Elasticsearch methods ========== */

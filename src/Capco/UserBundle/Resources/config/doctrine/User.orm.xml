@@ -51,7 +51,7 @@
         <field name="google_access_token" column="google_access_token" type="string" length="255" nullable="true" />
 
         <field name="openId" column="openid_id" type="string" length="255" nullable="true" />
-        <field name="openIdAccessToken" column="openid_access_token" type="string" length="255" nullable="true" />
+        <field name="openIdAccessToken" column="openid_access_token" type="text" nullable="true" />
 
         <field name="franceConnectId" column="france_connect_id" type="string" length="255" nullable="true" />
         <field name="franceConnectAccessToken" column="france_connect_access_token" type="string" length="255" nullable="true" />

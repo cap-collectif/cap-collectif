@@ -29,10 +29,10 @@ abstract class AbstractDistrict implements
     Translatable,
     SonataTranslatableInterface
 {
-    use UuidTrait;
-    use TimestampableTrait;
     use SonataTranslatableTrait;
+    use TimestampableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="geojson", type="json", nullable=true)
@@ -45,7 +45,7 @@ abstract class AbstractDistrict implements
     private $geojsonStyle;
 
     /**
-     * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
+     * @ORM\Column(name="display_on_map", nullable=false, type="boolean", options={"default": true})
      */
     private $displayedOnMap = true;
 
@@ -77,7 +77,7 @@ abstract class AbstractDistrict implements
         return $this->geojson;
     }
 
-    public function setGeojson(string $geojson = null): self
+    public function setGeojson(?string $geojson = null): self
     {
         $this->geojson = $geojson;
 
@@ -89,7 +89,7 @@ abstract class AbstractDistrict implements
         return $this->geojsonStyle;
     }
 
-    public function setGeojsonStyle(string $geojsonStyle = null): self
+    public function setGeojsonStyle(?string $geojsonStyle = null): self
     {
         $this->geojsonStyle = $geojsonStyle;
 

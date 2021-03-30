@@ -26,7 +26,7 @@ class SiteColor
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_enabled", type="boolean")
+     * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
      */
     private $isEnabled = true;
 

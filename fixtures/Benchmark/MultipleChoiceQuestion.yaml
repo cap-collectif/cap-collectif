@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
     __factory: { create: [min, 2] }
 
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
-  multiplequestion1:
+  xQuestion1:
     id: 1664
     title: Classez vos choix
     slug: classez-vos-choix

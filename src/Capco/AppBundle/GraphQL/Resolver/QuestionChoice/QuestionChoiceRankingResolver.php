@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
 use Capco\AppBundle\Entity\QuestionChoice;
@@ -7,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QuestionChoiceRankingResolver implements ResolverInterface
 {
-    private $responseRepository;
+    private AbstractResponseRepository $responseRepository;
 
     public function __construct(AbstractResponseRepository $responseRepository)
     {
@@ -47,10 +48,7 @@ class QuestionChoiceRankingResolver implements ResolverInterface
         }
 
         usort($rankingArray, function ($a, $b) {
-            return (
-                $a['position'] <=>
-                $b['position']
-            );
+            return $a['position'] <=> $b['position'];
         });
 
         return $rankingArray;
