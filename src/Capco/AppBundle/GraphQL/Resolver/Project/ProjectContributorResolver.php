@@ -50,7 +50,6 @@ class ProjectContributorResolver implements ResolverInterface
                 ],
             ]);
         }
-
         if (!$project->isExternal()) {
             $providedFilters = [];
             list(
@@ -113,7 +112,6 @@ class ProjectContributorResolver implements ResolverInterface
         }
 
         $anonymousCount = 0;
-
         foreach ($project->getRealSteps() as $step) {
             if ($step instanceof CollectStep) {
                 $anonymousCount += $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep(

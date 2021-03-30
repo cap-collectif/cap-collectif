@@ -55,7 +55,7 @@
         {% set anonymousVotesCount = projectVotesResolver.countProjectVotes(project, true) %}
         {% set contributionsCount = projectContributionResolver.__invoke(project).totalCount %}
         {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
-        {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount + anonymousVotesCount %}
+        {% set contributorsCount = contributorsConnection.totalCount + anonymousVotesCount %}
         {% set tradKeyContributionsCount = 'project.preview.counters.contributions' %}
 
         {% set totalProposalsCount = projectProposalsResolver.resolveSync(project).totalCount %}

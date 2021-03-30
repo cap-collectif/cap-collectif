@@ -65,13 +65,23 @@ class ProjectVotesResolver implements ResolverInterface
     public function countStepVotes(AbstractStep $step, ?bool $anonymous): int
     {
         $count = 0;
-        if ($step instanceof ConsultationStep) {
-            $count = $this->voteSearch->searchConsultationStepVotes($step, 0)->getTotalCount();
-        } elseif (
-            $step instanceof SelectionStep ||
-            $step instanceof CollectStep ||
-            $step instanceof DebateStep
-        ) {
+        if (false === $anonymous || null === $anonymous) {
+            if ($step instanceof ConsultationStep) {
+                $count = $this->voteSearch->searchConsultationStepVotes($step, 0)->getTotalCount();
+            } elseif (
+                $step instanceof SelectionStep ||
+                $step instanceof CollectStep ||
+                $step instanceof DebateStep
+            ) {
+                $promise = $this->stepVotesCountResolver
+                    ->__invoke($step, true, $anonymous)
+                    ->then(function ($value) use (&$count) {
+                        $count += $value;
+                    });
+
+                $this->adapter->await($promise);
+            }
+        } elseif ($step instanceof DebateStep && true === $anonymous) {
             $promise = $this->stepVotesCountResolver
                 ->__invoke($step, true, $anonymous)
                 ->then(function ($value) use (&$count) {

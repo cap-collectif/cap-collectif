@@ -21,7 +21,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
-      value={66}
+      value={60}
     />
     <Tag
       icon="cap cap-marker-1-1"
@@ -40,7 +40,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
               "totalCount": 89,
             },
             "contributors": Object {
-              "totalCount": 54,
+              "totalCount": 48,
             },
             "districts": Object {
               "edges": Array [
@@ -101,7 +101,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
             "totalCount": 89,
           },
           "contributors": Object {
-            "totalCount": 54,
+            "totalCount": 48,
           },
           "districts": Object {
             "edges": Array [
