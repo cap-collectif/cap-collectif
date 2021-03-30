@@ -35,3 +35,39 @@ Capco\AppBundle\Entity\ProjectType:
         title: global.debate
         slug: debate
         color: '#7ED6DF'
+    projectType10:
+        title: voting
+        slug: voting
+        color: '#999999'
+    projectType11:
+        title: project.types.questionAnswer
+        slug: question-answer
+        color: '#999999'
+    projectType12:
+        title: project.types.participatoryFunding
+        slug: participatory-funding
+        color: '#5bc0de'
+    projectType13:
+        title: project.types.mutualHelp
+        slug: mutual-help
+        color: '#999999'
+    projectType14:
+        title: project.types.concertation
+        slug: concertation
+        color: '#999999'
+    projectType15:
+        title: project.types.inquiry
+        slug: inquiry
+        color: '#337ab7'
+    projectType16:
+        title: project.types.callForApplications
+        slug: call-for-applications
+        color: '#999999'
+    projectType17:
+        title: project.types.quizz
+        slug: quizz
+        color: '#999999'
+    projectType18:
+        title: project.types.testimony
+        slug: testimony
+        color: '#999999'
