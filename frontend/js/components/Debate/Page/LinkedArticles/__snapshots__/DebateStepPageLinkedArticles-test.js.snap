@@ -1,0 +1,354 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
+<AppBox
+  id="DebateStepPageLinkedArticles"
+>
+  <ForwardRef
+    mb={6}
+  >
+    <Heading
+      as="h3"
+      fontWeight="400"
+    >
+      <FormattedMessage
+        id="related.articles"
+        values={Object {}}
+      />
+    </Heading>
+  </ForwardRef>
+  <Skeleton
+    isLoaded={true}
+    placeholder={
+      <ForwardRef
+        direction={
+          Array [
+            "column",
+            "row",
+          ]
+        }
+        spacing={4}
+      >
+        <DebateArticleCard />
+        <DebateArticleCard />
+        <DebateArticleCard />
+      </ForwardRef>
+    }
+  >
+    <DebateStepPageLinkedArticles__StyledSlider
+      arrows={false}
+      dots={true}
+      infinite={false}
+      responsive={
+        Array [
+          Object {
+            "breakpoint": 1200,
+            "settings": Object {
+              "slidesToShow": 2,
+            },
+          },
+          Object {
+            "breakpoint": 600,
+            "settings": Object {
+              "slidesToShow": 1,
+            },
+          },
+        ]
+      }
+      slidesToScroll={1}
+      slidesToShow={3}
+    >
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lemonde.fr/pour-ou-contre-omar"
+        key="article1"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration="omar-au-jaccuzi.jpec"
+          publishedAt="Invalid date"
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar, oui ou non ?
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin>
+            Poitou Charentes
+          </DebateArticleCard.Origin>
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lexpress.fr/omar-un-sujet-polarisant"
+        key="article2"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration="omar-au-ski.jpec"
+          publishedAt="Invalid date"
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar, tout le monde en parle
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin>
+            Meurthe et Mozelle
+          </DebateArticleCard.Origin>
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lefigaro.fr/omar-ma-tuer"
+        key="article4"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration={null}
+          publishedAt={null}
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar ma tuer
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin />
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lecanarddechainé.fr/omar-le-bg"
+        key="article5"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration="omar-a-la-plage.jpec"
+          publishedAt="10 oct. 2010"
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar, yen a marre
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin />
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+    </DebateStepPageLinkedArticles__StyledSlider>
+  </Skeleton>
+</AppBox>
+`;
+
+exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`] = `
+<AppBox
+  id="DebateStepPageLinkedArticles"
+>
+  <Relay(DebateStepPageLinkedArticlesDrawer)
+    isOpen={false}
+    onClose={[Function]}
+    step={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "debate": Object {
+          "articles": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "coverUrl": "omar-au-jaccuzi.jpec",
+                  "id": "article1",
+                  "origin": "Poitou Charentes",
+                  "publishedAt": "2020-20-04:04:05:32",
+                  "title": "Omar, oui ou non ?",
+                  "url": "lemonde.fr/pour-ou-contre-omar",
+                },
+              },
+              Object {
+                "node": Object {
+                  "coverUrl": "omar-au-ski.jpec",
+                  "id": "article2",
+                  "origin": "Meurthe et Mozelle",
+                  "publishedAt": "2020-13-05:02:17:30",
+                  "title": "Omar, tout le monde en parle",
+                  "url": "lexpress.fr/omar-un-sujet-polarisant",
+                },
+              },
+              Object {
+                "node": Object {
+                  "coverUrl": null,
+                  "id": "article4",
+                  "origin": null,
+                  "publishedAt": null,
+                  "title": "Omar ma tuer",
+                  "url": "lefigaro.fr/omar-ma-tuer",
+                },
+              },
+              Object {
+                "node": Object {
+                  "coverUrl": "omar-a-la-plage.jpec",
+                  "id": "article5",
+                  "origin": null,
+                  "publishedAt": "2010-10-10:01:01:21",
+                  "title": "Omar, yen a marre",
+                  "url": "lecanarddechainé.fr/omar-le-bg",
+                },
+              },
+            ],
+          },
+        },
+        "id": "stepId",
+      }
+    }
+  />
+  <ForwardRef
+    mb={6}
+  >
+    <Heading
+      as="h3"
+      fontWeight="400"
+    >
+      <FormattedMessage
+        id="related.articles"
+        values={Object {}}
+      />
+    </Heading>
+    <Button
+      ml="auto"
+      onClick={[Function]}
+      variant="link"
+    >
+      <FormattedMessage
+        id="global.show_all"
+        values={Object {}}
+      />
+    </Button>
+  </ForwardRef>
+  <Skeleton
+    isLoaded={true}
+    placeholder={
+      <ForwardRef
+        direction={
+          Array [
+            "column",
+            "row",
+          ]
+        }
+        spacing={4}
+      >
+        <DebateArticleCard />
+        <DebateArticleCard />
+        <DebateArticleCard />
+      </ForwardRef>
+    }
+  >
+    <DebateStepPageLinkedArticles__StyledSlider
+      arrows={false}
+      dots={true}
+      infinite={false}
+      responsive={
+        Array [
+          Object {
+            "breakpoint": 1200,
+            "settings": Object {
+              "slidesToShow": 2,
+            },
+          },
+          Object {
+            "breakpoint": 600,
+            "settings": Object {
+              "slidesToShow": 1,
+            },
+          },
+        ]
+      }
+      slidesToScroll={1}
+      slidesToShow={3}
+    >
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lemonde.fr/pour-ou-contre-omar"
+        key="article1"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration="omar-au-jaccuzi.jpec"
+          publishedAt="Invalid date"
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar, oui ou non ?
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin>
+            Poitou Charentes
+          </DebateArticleCard.Origin>
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lexpress.fr/omar-un-sujet-polarisant"
+        key="article2"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration="omar-au-ski.jpec"
+          publishedAt="Invalid date"
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar, tout le monde en parle
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin>
+            Meurthe et Mozelle
+          </DebateArticleCard.Origin>
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lefigaro.fr/omar-ma-tuer"
+        key="article4"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration={null}
+          publishedAt={null}
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar ma tuer
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin />
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+      <DebateStepPageLinkedArticles___StyledAppBox
+        as="a"
+        height="100%"
+        href="lecanarddechainé.fr/omar-le-bg"
+        key="article5"
+      >
+        <DebateArticleCard
+          height="100%"
+          illustration="omar-a-la-plage.jpec"
+          publishedAt="10 oct. 2010"
+        >
+          <DebateArticleCard.Title
+            truncate={54}
+          >
+            Omar, yen a marre
+          </DebateArticleCard.Title>
+          <DebateArticleCard.Origin />
+        </DebateArticleCard>
+      </DebateStepPageLinkedArticles___StyledAppBox>
+    </DebateStepPageLinkedArticles__StyledSlider>
+  </Skeleton>
+</AppBox>
+`;

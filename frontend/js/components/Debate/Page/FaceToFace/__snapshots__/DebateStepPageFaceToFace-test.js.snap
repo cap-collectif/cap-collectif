@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageFaceToFace /> should renders correctly 1`] = `
+<AppBox
+  id="DebateStepPageFaceToFace"
+>
+  <Heading
+    as="h3"
+    fontWeight="400"
+    mb={6}
+  >
+    <FormattedMessage
+      id="the.face-to-face"
+      values={Object {}}
+    />
+  </Heading>
+  <Skeleton
+    isLoaded={true}
+    placeholder={
+      <ForwardRef
+        direction={
+          Array [
+            "column",
+            "row",
+          ]
+        }
+        spacing={4}
+      >
+        <DebateOpinionPlaceholder
+          debateOpinionStatus="FOR"
+        />
+        <DebateOpinionPlaceholder
+          debateOpinionStatus="AGAINST"
+        />
+      </ForwardRef>
+    }
+  >
+    <ForwardRef
+      direction={
+        Array [
+          "column",
+          "row",
+        ]
+      }
+      spacing={6}
+    >
+      <Relay(DebateOpinion)
+        isMobile={false}
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "body": "Oui",
+            "type": "FOR",
+          }
+        }
+        readMore={false}
+      />
+      <Relay(DebateOpinion)
+        isMobile={false}
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "body": "Non",
+            "type": "AGAINST",
+          }
+        }
+        readMore={false}
+      />
+    </ForwardRef>
+  </Skeleton>
+</AppBox>
+`;
+
+exports[`<DebateStepPageFaceToFace /> should renders correctly on mobile 1`] = `
+<AppBox
+  id="DebateStepPageFaceToFace"
+>
+  <Heading
+    as="h3"
+    fontWeight="400"
+    mb={6}
+  >
+    <FormattedMessage
+      id="the.face-to-face"
+      values={Object {}}
+    />
+  </Heading>
+  <Skeleton
+    isLoaded={true}
+    placeholder={
+      <ForwardRef
+        direction={
+          Array [
+            "column",
+            "row",
+          ]
+        }
+        spacing={4}
+      >
+        <DebateOpinionPlaceholder
+          debateOpinionStatus="FOR"
+        />
+        <DebateOpinionPlaceholder
+          debateOpinionStatus="AGAINST"
+        />
+      </ForwardRef>
+    }
+  >
+    <ForwardRef
+      direction={
+        Array [
+          "column",
+          "row",
+        ]
+      }
+      spacing={6}
+    >
+      <Relay(DebateOpinion)
+        isMobile={true}
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "body": "Oui",
+            "type": "FOR",
+          }
+        }
+        readMore={false}
+      />
+      <Relay(DebateOpinion)
+        isMobile={true}
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "body": "Non",
+            "type": "AGAINST",
+          }
+        }
+        readMore={false}
+      />
+    </ForwardRef>
+  </Skeleton>
+</AppBox>
+`;
+
+exports[`<DebateStepPageFaceToFace /> should renders correctly when not loaded 1`] = `
+<AppBox
+  id="DebateStepPageFaceToFaceLoading"
+>
+  <Heading
+    as="h3"
+    fontWeight="400"
+    mb={6}
+  >
+    <FormattedMessage
+      id="the.face-to-face"
+      values={Object {}}
+    />
+  </Heading>
+  <Skeleton
+    isLoaded={false}
+    placeholder={
+      <ForwardRef
+        direction={
+          Array [
+            "column",
+            "row",
+          ]
+        }
+        spacing={4}
+      >
+        <DebateOpinionPlaceholder
+          debateOpinionStatus="FOR"
+        />
+        <DebateOpinionPlaceholder
+          debateOpinionStatus="AGAINST"
+        />
+      </ForwardRef>
+    }
+  />
+</AppBox>
+`;

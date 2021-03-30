@@ -13,7 +13,7 @@ type Props = {|
   argument: ModalArgumentAuthorMenu_argument,
 |};
 
-const ModalArgumentAuthorMenu = ({ argument }: Props): React.Node => {
+export const ModalArgumentAuthorMenu = ({ argument }: Props): React.Node => {
   const intl = useIntl();
 
   return (

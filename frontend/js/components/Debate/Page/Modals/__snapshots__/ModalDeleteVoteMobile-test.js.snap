@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalDeleteVoteMobile /> should renders correctly 1`] = `
+<Modal
+  ariaLabel="confirm-delete-argument"
+  disclosure={
+    <ForwardRef
+      color="gray.700"
+      mb={
+        Array [
+          3,
+          0,
+        ]
+      }
+      ml={
+        Array [
+          0,
+          2,
+        ]
+      }
+      variant="link"
+    >
+      <FormattedMessage
+        id="delete.vote.for"
+        values={Object {}}
+      />
+    </ForwardRef>
+  }
+  onClose={[Function]}
+>
+  <Component />
+</Modal>
+`;

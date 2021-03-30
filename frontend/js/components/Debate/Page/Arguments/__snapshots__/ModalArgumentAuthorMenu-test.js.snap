@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalArgumentAuthorMenu /> should renders correcty 1`] = `
+<Modal
+  ariaLabel="global.menu"
+  disclosure={
+    <ForwardRef
+      aria-label="global.menu"
+      color="gray.500"
+      rightIcon="MORE"
+    />
+  }
+>
+  <Component />
+</Modal>
+`;

@@ -1,0 +1,337 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateOpinion /> should renders correctly 1`] = `
+<DebateOpinion___StyledCard
+  bg="white"
+  flex="1"
+  maxHeight="400px"
+  overflow="hidden"
+  p={0}
+  position="relative"
+>
+  <DebateOpinion___StyledTag
+    _css={[Function]}
+    borderBottomLeftRadius={0}
+    borderTopLeftRadius={0}
+    borderTopRightRadius={0}
+    variant="green"
+  >
+    <Text
+      as="span"
+      fontSize={1}
+      fontWeight="700"
+      lineHeight="sm"
+      uppercase={true}
+    >
+      <FormattedMessage
+        id="opinion.for"
+        values={Object {}}
+      />
+    </Text>
+  </DebateOpinion___StyledTag>
+  <DebateOpinion___StyledAppBox
+    _css2={[Function]}
+    bottom={0}
+    height={12}
+    width="100%"
+  />
+  <ForwardRef
+    direction="column"
+    m={6}
+    mt={10}
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      mb={5}
+      spacing={6}
+    >
+      <Relay(NewUserAvatar)
+        alignSelf="flex-start"
+        border="2px solid"
+        borderColor="yellow.500"
+        color="yellow.500"
+        size="xl"
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "biography": "Jsuis né dans les favela au brésil",
+            "username": "Agui le penseur",
+          }
+        }
+      />
+      <ForwardRef
+        direction="column"
+      >
+        <Text
+          fontSize={3}
+          fontWeight="600"
+        >
+          Agui le penseur
+        </Text>
+        <Text
+          color="neutral-gray.700"
+          fontSize={3}
+          lineHeight="19px"
+        >
+          Jsuis né dans les favela au brésil
+        </Text>
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      spacing={3}
+    >
+      <Heading
+        as="h4"
+        fontWeight="600"
+      >
+        Opinion
+      </Heading>
+      <Text>
+        <WYSIWYGRender
+          value="Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+    Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
+    Contre-sens (ah), ma chérie, tu es à contre-sens
+    Puta, où tu étais quand j'mettais des sept euros d'essence (hein)"
+        />
+      </Text>
+    </ForwardRef>
+  </ForwardRef>
+</DebateOpinion___StyledCard>
+`;
+
+exports[`<DebateOpinion /> should renders correctly on mobile 1`] = `
+<DebateOpinion___StyledCard
+  bg="white"
+  flex="1"
+  maxHeight="400px"
+  overflow="hidden"
+  p={0}
+  position="relative"
+>
+  <DebateOpinion___StyledTag
+    _css={[Function]}
+    borderBottomLeftRadius={0}
+    borderTopLeftRadius={0}
+    borderTopRightRadius={0}
+    variant="green"
+  >
+    <Text
+      as="span"
+      fontSize={1}
+      fontWeight="700"
+      lineHeight="sm"
+      uppercase={true}
+    >
+      <FormattedMessage
+        id="opinion.for"
+        values={Object {}}
+      />
+    </Text>
+  </DebateOpinion___StyledTag>
+  <DebateOpinion___StyledAppBox
+    _css2={[Function]}
+    bottom={0}
+    height={12}
+    width="100%"
+  />
+  <ForwardRef
+    direction="column"
+    m={6}
+    mt={10}
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      mb={5}
+      spacing={6}
+    >
+      <Relay(NewUserAvatar)
+        alignSelf="flex-start"
+        border="2px solid"
+        borderColor="yellow.500"
+        color="yellow.500"
+        size="xl"
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "biography": "Jsuis né dans les favela au brésil",
+            "username": "Agui le penseur",
+          }
+        }
+      />
+      <ForwardRef
+        direction="column"
+      >
+        <Text
+          fontSize={3}
+          fontWeight="600"
+        >
+          Agui le penseur
+        </Text>
+        <Text
+          color="neutral-gray.700"
+          fontSize={3}
+          lineHeight="19px"
+        >
+          Jsuis né dans les favela au brésil
+        </Text>
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      spacing={3}
+    >
+      <Heading
+        as="h4"
+        fontWeight="600"
+      >
+        Opinion
+      </Heading>
+      <Text>
+        <WYSIWYGRender
+          value="Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+    Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
+    Contre-sens (ah), ma chérie, tu es à contre-sens
+    Puta, où tu étais quand j'mettais des sept euros d'essence (hein)"
+        />
+      </Text>
+      <DebateOpinion___StyledButton
+        _css3={[Function]}
+        alignSelf="center"
+        bottom="0"
+        display="block"
+        height={10}
+        left="0"
+        onClick={[Function]}
+        position="absolute"
+        variant="link"
+        variantSize="medium"
+        width="100%"
+      >
+        <FormattedMessage
+          id="capco.module.read_more"
+          values={Object {}}
+        />
+      </DebateOpinion___StyledButton>
+    </ForwardRef>
+  </ForwardRef>
+  <DebateStepPageOpinionDrawer
+    isOpen={false}
+    onClose={[Function]}
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "$fragmentRefs": null,
+          "biography": "Jsuis né dans les favela au brésil",
+          "username": "Agui le penseur",
+        },
+        "body": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+    Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
+    Contre-sens (ah), ma chérie, tu es à contre-sens
+    Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+        "title": "Opinion",
+        "type": "FOR",
+      }
+    }
+  />
+</DebateOpinion___StyledCard>
+`;
+
+exports[`<DebateOpinion /> should renders correctly with readMore 1`] = `
+<DebateOpinion___StyledCard
+  bg="white"
+  flex="1"
+  maxHeight="2000px"
+  overflow="hidden"
+  p={0}
+  position="relative"
+>
+  <DebateOpinion___StyledTag
+    _css={[Function]}
+    borderBottomLeftRadius={0}
+    borderTopLeftRadius={0}
+    borderTopRightRadius={0}
+    variant="green"
+  >
+    <Text
+      as="span"
+      fontSize={1}
+      fontWeight="700"
+      lineHeight="sm"
+      uppercase={true}
+    >
+      <FormattedMessage
+        id="opinion.for"
+        values={Object {}}
+      />
+    </Text>
+  </DebateOpinion___StyledTag>
+  <ForwardRef
+    direction="column"
+    m={6}
+    mt={10}
+  >
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      mb={5}
+      spacing={6}
+    >
+      <Relay(NewUserAvatar)
+        alignSelf="flex-start"
+        border="2px solid"
+        borderColor="yellow.500"
+        color="yellow.500"
+        size="xl"
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "biography": "Jsuis né dans les favela au brésil",
+            "username": "Agui le penseur",
+          }
+        }
+      />
+      <ForwardRef
+        direction="column"
+      >
+        <Text
+          fontSize={3}
+          fontWeight="600"
+        >
+          Agui le penseur
+        </Text>
+        <Text
+          color="neutral-gray.700"
+          fontSize={3}
+          lineHeight="19px"
+        >
+          Jsuis né dans les favela au brésil
+        </Text>
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      spacing={3}
+    >
+      <Heading
+        as="h4"
+        fontWeight="600"
+      >
+        Opinion
+      </Heading>
+      <Text>
+        <WYSIWYGRender
+          value="Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+    Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
+    Contre-sens (ah), ma chérie, tu es à contre-sens
+    Puta, où tu étais quand j'mettais des sept euros d'essence (hein)"
+        />
+      </Text>
+    </ForwardRef>
+  </ForwardRef>
+</DebateOpinion___StyledCard>
+`;
