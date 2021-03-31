@@ -28,35 +28,19 @@ trait SummarizableTrait
             return null;
         }
 
-        if (
-            $proposalForm->getUsingSummary() &&
-            $proposalForm->getUsingDescription() &&
-            $proposalForm->getDescriptionMandatory()
-        ) {
+        if ($proposalForm->getUsingSummary()) {
+            if ($proposalForm->getUsingDescription()) {
+                return $this->summary ?? $this->getBodyTextExcerpt(140);
+            }
+
+            return $this->summary;
+        }
+
+        if ($proposalForm->getUsingDescription()) {
             return $this->getBodyTextExcerpt(140);
         }
 
-        if (
-            $proposalForm->getUsingSummary() &&
-            $proposalForm->getUsingDescription() &&
-            !$proposalForm->getDescriptionMandatory()
-        ) {
-            return $this->summary ?? $this->getBodyTextExcerpt(140);
-        }
-
-        if (!$proposalForm->getUsingSummary() && !$proposalForm->getUsingDescription()) {
-            return null;
-        }
-
-        if ($proposalForm->getUsingSummary() && !$proposalForm->getUsingDescription()) {
-            return $this->summary ? $this->summary : null;
-        }
-
-        if (!$proposalForm->getUsingSummary() && $proposalForm->getUsingDescription()) {
-            return $this->getBodyTextExcerpt(140);
-        }
-
-        return $this->summary ?? $this->getBodyTextExcerpt(140);
+        return null;
     }
 
     public function getSummaryOrBodyExcerpt(): ?string

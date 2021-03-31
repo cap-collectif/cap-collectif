@@ -296,4 +296,37 @@ class ProposalSpec extends ObjectBehavior
         $this->addSelection($selection);
         $this->isProposalAuthorAllowedToAddNews()->shouldReturn(true);
     }
+
+    public function it_should_correctly_return_the_summary_or_body_based_on_form(ProposalForm $form)
+    {
+        $form->getUsingDescription()->willReturn(false);
+        $form->getUsingSummary()->willReturn(false);
+
+        $this->setBody('Je suis le body');
+        $this->setSummary('Je suis le résumé');
+
+        $this->setProposalForm($form);
+
+        $this->getProposalSummaryOrBodyExcerpt()->shouldBe(null);
+
+        $form->getUsingDescription()->willReturn(true);
+        $form->getUsingSummary()->willReturn(false);
+
+        $this->getProposalSummaryOrBodyExcerpt()->shouldBe('Je suis le body');
+
+        $form->getUsingDescription()->willReturn(true);
+        $form->getUsingSummary()->willReturn(true);
+
+        $this->getProposalSummaryOrBodyExcerpt()->shouldBe('Je suis le résumé');
+
+        $form->getUsingDescription()->willReturn(false);
+        $form->getUsingSummary()->willReturn(true);
+
+        $this->getProposalSummaryOrBodyExcerpt()->shouldBe('Je suis le résumé');
+
+        $form->getUsingDescription()->willReturn(false);
+        $form->getUsingSummary()->willReturn(false);
+
+        $this->getProposalSummaryOrBodyExcerpt()->shouldBe(null);
+    }
 }
