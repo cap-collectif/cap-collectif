@@ -177,8 +177,13 @@ class CookieMonster {
     this.hideBanner();
   };
 
-  doNotConsiderFullConsent = () => {
+  doNotConsiderFullConsent = (fromBanner:boolean = false) => {
     Cookies.set('hasFullConsent', false, { expires: 395 });
+    if(fromBanner) {
+      this.setCookie(false, 'adCookieConsentValue');
+      this.setCookie(false, 'analyticConsentValue');
+    }
+
     this.hideBanner();
   };
 

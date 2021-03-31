@@ -1,7 +1,9 @@
 /* ===============================================================
    CNIL
 ================================================================*/
-
+#cookie-consent {
+    border-radius: 4px;
+}
 .cookie-banner, #cookieChoiceInfo {
     display: none;
     position: fixed;
@@ -11,21 +13,23 @@
     background-color: $dark;
     color: $white;
     z-index: 1000;
-
+    font-size: 14px;
     &.active {
-        display: block;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
     }
 
   #cookie-more-button {
     background-color: $dark;
     color: $white;
-    text-decoration: underline;
   }
 
   #cookie-consent {
     background-color: $white;
     color: $dark;
     text-decoration: none;
+    padding: 12px 16px;
   }
 }
 
@@ -40,7 +44,9 @@
     z-index: 1000;
 
     &.active {
-        display: block;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
     }
 
     .cookie-dialog {
