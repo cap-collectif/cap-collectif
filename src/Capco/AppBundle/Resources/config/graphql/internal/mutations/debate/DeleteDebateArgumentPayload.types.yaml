@@ -8,3 +8,6 @@ DeleteDebateArgumentPayload:
             errorCode:
                 type: 'DeleteDebateArgumentErrorCode'
                 description: 'An unsuccessful mutation will return an error.'
+            debate:
+                type: 'InternalDebate'
+                description: 'The deleted argument associated debate.'

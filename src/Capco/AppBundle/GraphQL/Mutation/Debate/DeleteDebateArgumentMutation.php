@@ -18,15 +18,19 @@ class DeleteDebateArgumentMutation extends AbstractDebateArgumentMutation implem
     {
         try {
             $debateArgument = $this->getArgument($input, $viewer);
+            $debateArgumentId = $debateArgument->getId();
             $this->checkDeleteRightsOnArgument($debateArgument);
             $this->em->remove($debateArgument);
             $this->em->flush();
-            $this->indexer->remove(DebateArgument::class, $debateArgument->getId());
+            $this->indexer->remove(DebateArgument::class, $debateArgumentId);
             $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }
 
-        return ['deletedDebateArgumentId' => $input->offsetGet('id')];
+        return [
+            'deletedDebateArgumentId' => $input->offsetGet('id'),
+            'debate' => $debateArgument->getDebate(),
+        ];
     }
 }

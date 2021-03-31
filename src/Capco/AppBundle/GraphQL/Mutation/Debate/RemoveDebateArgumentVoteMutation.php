@@ -21,11 +21,17 @@ class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutatio
             $debateArgument = $this->getDebateArgument($input, $viewer);
             $this->checkCanParticipate($debateArgument);
             $debateArgumentVote = $this->getPreviousVote($debateArgument, $viewer);
-            $debateArgumentVoteId = GlobalId::toGlobalId('DebateArgumentVote', $debateArgumentVote->getId());
+            $debateArgumentVoteId = GlobalId::toGlobalId(
+                'DebateArgumentVote',
+                $debateArgumentVote->getId()
+            );
             self::removePreviousVote($debateArgument, $debateArgumentVote);
-            $this->indexer->remove(DebateArgumentVote::class, $debateArgumentVote->getId());
             $this->em->remove($debateArgumentVote);
             $this->em->flush();
+            $this->indexer->remove(
+                DebateArgumentVote::class,
+                GlobalId::fromGlobalId($debateArgumentVoteId)['id']
+            );
             $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];

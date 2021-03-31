@@ -4159,6 +4159,9 @@ type DeleteDebateArgumentPayload {
 
   """An unsuccessful mutation will return an error."""
   errorCode: DeleteDebateArgumentErrorCode
+
+  """The deleted argument associated debate."""
+  debate: Debate
   clientMutationId: String
 }
 
