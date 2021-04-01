@@ -334,14 +334,16 @@ class VoteSearch extends Search
             );
 
         $query = new Query($boolQuery);
-
-        if ($limit) {
-            $query->setSize($limit);
-        }
+        $query->setSize($limit);
         $this->applyCursor($query, $cursor);
         $this->addObjectTypeFilter($query, $this->type);
+        $query->setTrackTotalHits(true);
         $response = $this->index->search($query);
         $cursors = $this->getCursors($response);
+
+        if (0 === $limit && null === $cursor) {
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
+        }
 
         return $this->getData($cursors, $response);
     }
