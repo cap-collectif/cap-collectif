@@ -12,19 +12,19 @@ trait RequirementTrait
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Requirement", mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
-    protected $requirements;
+    protected Collection $requirements;
 
     /**
-     * @ORM\Column(name="requirements_reason", type="string", nullable=true)
+     * @ORM\Column(name="requirements_reason", type="text", nullable=true)
      */
-    private $requirementsReason;
+    private ?string $requirementsReason = null;
 
     public function getRequirementsReason(): ?string
     {
         return $this->requirementsReason;
     }
 
-    public function setRequirementsReason(string $requirementsReason = null): self
+    public function setRequirementsReason(?string $requirementsReason = null): self
     {
         $this->requirementsReason = $requirementsReason;
 
