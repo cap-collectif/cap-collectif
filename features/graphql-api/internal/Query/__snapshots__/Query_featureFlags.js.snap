@@ -255,6 +255,10 @@ Object {
       "enabled": true,
       "type": "unstable__new_project_card",
     },
+    Object {
+      "enabled": false,
+      "type": "export_legacy_users",
+    },
   ],
 }
 `;

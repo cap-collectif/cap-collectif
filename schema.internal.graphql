@@ -5080,6 +5080,9 @@ enum FeatureFlagType {
 
   """Whether or not the new project card is active."""
   unstable__new_project_card
+
+  """Secret export of users."""
+  export_legacy_users
 }
 
 """Require a firstname"""

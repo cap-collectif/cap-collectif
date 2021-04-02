@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -22,6 +23,15 @@ class UserAdmin extends BaseAdmin
         ];
 
         return $actions;
+    }
+
+    public function getTemplate($name)
+    {
+        if ('list' === $name) {
+            return 'CapcoAdminBundle:User:list.html.twig';
+        }
+
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     public function getExportFormats()
@@ -61,6 +71,8 @@ class UserAdmin extends BaseAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'edit', 'export']);
+        $collection->add('exportLegacyUsers', 'export_legacy_users');
+
+        $collection->clearExcept(['batch', 'list', 'edit', 'export', 'exportLegacyUsers']);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Toggle;
 
+use Qandidate\Toggle\Context;
 use Qandidate\Toggle\ContextFactory;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleManager;
@@ -73,6 +74,7 @@ class Manager
     public const unstable__tipsmeee = 'unstable__tipsmeee';
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
     public const unstable__new_project_card = 'unstable__new_project_card';
+    public const export_legacy_users = 'export_legacy_users';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -163,11 +165,12 @@ class Manager
         self::unstable__tipsmeee,
         self::unstable__new_consultation_page,
         self::unstable__new_project_card,
+        self::export_legacy_users,
     ];
 
     protected ToggleManager $toggleManager;
 
-    protected $context;
+    protected Context $context;
 
     protected array $knownValues = [];
 

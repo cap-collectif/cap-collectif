@@ -6,9 +6,12 @@ services:
     volumes:
       - ../../:/var/www
       - /etc/localtime:/etc/localtime:ro
+      - /tmp:/tmp
 
   database:
     image: circleci/mariadb:10.1
+    volumes:
+      - /tmp:/tmp
 
   redis:
     image: circleci/redis:3

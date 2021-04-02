@@ -39,11 +39,11 @@ final class ProjectAdmin extends CapcoAdmin
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
 
     protected $formOptions = ['cascade_validation' => true];
-    private $tokenStorage;
-    private $indexer;
-    private $projectDistrictRepository;
-    private $entityManager;
-    private $manager;
+    private TokenStorageInterface $tokenStorage;
+    private Indexer $indexer;
+    private ProjectDistrictRepository $projectDistrictRepository;
+    private EntityManagerInterface $entityManager;
+    private Manager $manager;
 
     public function __construct(
         string $code,

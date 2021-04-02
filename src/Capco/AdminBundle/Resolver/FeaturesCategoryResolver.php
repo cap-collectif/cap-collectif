@@ -45,6 +45,7 @@ class FeaturesCategoryResolver
                     Manager::remind_user_account_confirmation,
                     Manager::server_side_rendering,
                     Manager::export,
+                    Manager::export_legacy_users,
                     Manager::indexation,
                     Manager::new_feature_questionnaire_result,
                     Manager::display_pictures_in_event_list,

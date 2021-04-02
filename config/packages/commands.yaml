@@ -7,6 +7,7 @@ services:
             $projectRootDir: '%kernel.project_dir%'
             Predis\ClientInterface: '@snc_redis.default'
             $logger: '@logger'
+            $env: '%kernel.environment%'
 
     Capco\AppBundle\Command\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
@@ -55,7 +56,6 @@ services:
     Capco\AppBundle\Command\ResetFeatureFlagsCommand:
         arguments:
             $name: 'capco:reset-feature-flags'
-            $env: '%kernel.environment%'
 
     Capco\AppBundle\Command\ResetDefaultLocaleCommand:
         arguments:

@@ -34,8 +34,7 @@ class AbstractVoteRepository extends EntityRepository
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('v');
-        $qb
-            ->select('count(DISTINCT v)')
+        $qb->select('count(DISTINCT v)')
             ->andWhere('v.user = :author')
             ->setParameter('author', $user);
 
@@ -112,8 +111,7 @@ class AbstractVoteRepository extends EntityRepository
             ->andWhere('v.published = true')
             ->addOrderBy('v.createdAt', 'ASC');
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
-            $qb
-                ->addOrderBy('v.updatedAt', 'ASC')
+            $qb->addOrderBy('v.updatedAt', 'ASC')
                 ->addSelect('v.updatedAt', 'v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->setParameter('object', $object);
@@ -181,8 +179,7 @@ class AbstractVoteRepository extends EntityRepository
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
             ->andWhere('v.published = true');
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
-            $qb
-                ->addSelect('v.value')
+            $qb->addSelect('v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->andWhere('v.user = :user')
                 ->setParameter('user', $user)
@@ -272,7 +269,7 @@ class AbstractVoteRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->getConnection()
-            ->query($sql)
+            ->executeQuery($sql)
             ->fetchAll()[0]['result'];
     }
 

@@ -134,3 +134,6 @@ InternalFeatureFlagType:
             unstable__new_project_card:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_project_card")'
                 description: 'Whether or not the new project card is active.'
+            export_legacy_users:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::export_legacy_users")'
+                description: 'Secret export of users.'

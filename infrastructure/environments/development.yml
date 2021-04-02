@@ -21,6 +21,7 @@ services:
       PHP_XDEBUG_ENABLED: 0
     volumes:
       - ../../:/var/www
+      - /tmp:/tmp
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/bin/docker
       - /etc/localtime:/etc/localtime:ro
@@ -28,6 +29,8 @@ services:
   database:
     ports:
       - '3306:3306'
+    volumes:
+      - /tmp:/tmp
 
   elasticsearch:
     build: ../services/elasticsearch
