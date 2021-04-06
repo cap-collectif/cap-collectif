@@ -52,6 +52,9 @@ class ShieldListener
         'fos_user_resetting_reset',
         'fos_user_resetting_send_email',
         'fos_user_resetting_check_email',
+
+        //vote by mail
+        'capco_app_debate_vote_by_token',
     ];
     protected $manager;
     protected $tokenStorage;

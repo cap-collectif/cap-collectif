@@ -8,6 +8,7 @@ use FOS\UserBundle\Security\LoginManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DebateVoteController extends AbstractController
 {
@@ -18,7 +19,8 @@ class DebateVoteController extends AbstractController
         TokenManager $tokenManager,
         Request $request,
         DebateUrlResolver $debateUrlResolver,
-        LoginManagerInterface $loginManager
+        LoginManagerInterface $loginManager,
+        TranslatorInterface $translator
     ) {
         $forOrAgainst = $request->get('value') ?? '';
         $token = $request->get('token') ?? '';
@@ -26,13 +28,16 @@ class DebateVoteController extends AbstractController
         try {
             $debateVote = $tokenManager->consumeVoteToken($token, $forOrAgainst);
         } catch (\Exception $exception) {
-            $this->addFlash('danger', $exception->getMessage());
+            $this->addFlash(
+                'danger',
+                $translator->trans($exception->getMessage(), [], 'CapcoAppBundle')
+            );
 
             return $this->redirectToRoute('app_homepage');
         }
 
         $response = $this->redirect($debateUrlResolver->__invoke($debateVote->getDebate()));
-        $this->addFlash('success', 'vote.add_success');
+        $this->addFlash('success', $translator->trans('vote.add_success', [], 'CapcoAppBundle'));
         if (null === $this->getUser()) {
             $loginManager->loginUser('main', $debateVote->getUser(), $response);
         }
