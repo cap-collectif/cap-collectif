@@ -53,7 +53,7 @@ class RecalculateUsersCountersCommand extends Command
     protected function executeOnlyChangesFromLastRun(string $dql, bool $native = false): void
     {
         if ($this->ids && \count($this->ids) > 0) {
-            $dql .= ' where u.id in (:ids)';
+            $dql .= ' where fos_user.id in (:ids)';
 
             if ($native) {
                 $ids = implode(',', $this->ids);
