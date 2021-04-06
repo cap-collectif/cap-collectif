@@ -17,6 +17,7 @@ import DebateStepPageLinkedArticlesDrawer from '~/components/Debate/Page/Drawers
 import { DATE_SHORT_LOCALIZED_FORMAT } from '~/shared/date';
 import Skeleton from '~ds/Skeleton';
 import DebateArticlePlaceholder from './DebateArticlePlaceholder';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 
 type Props = {|
   +step: ?DebateStepPageLinkedArticles_step,
@@ -37,6 +38,28 @@ export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slide
   .slick-track {
     display: flex;
     align-items: stretch;
+  }
+  .slick-arrow {
+    background: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    opacity: 50%;
+    padding: 3px 4px;
+  }
+  .slick-next {
+    padding: 4px 8px;
+  }
+  .slick-prev {
+    padding: 4px;
+    padding-right: 6px;
+  }
+  .slick-next:before,
+  .slick-prev:before {
+    content: '';
+  }
+  .slick-dots li button:before {
+    font-size: 10px;
   }
 `;
 
@@ -80,7 +103,17 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
               dots: true,
               slidesToScroll: 1,
               slidesToShow: 3,
-              arrows: false,
+              arrows: true,
+              nextArrow: (
+                <Button className="slick-arrow slick-next">
+                  <Icon name={ICON_NAME.ARROW_RIGHT} size={ICON_SIZE.SM} color="white" />
+                </Button>
+              ),
+              prevArrow: (
+                <Button className="slick-arrow slick-prev">
+                  <Icon name={ICON_NAME.ARROW_LEFT} size={ICON_SIZE.SM} color="white" />
+                </Button>
+              ),
               responsive: [
                 {
                   breakpoint: 1200,
@@ -92,6 +125,7 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
                   breakpoint: 600,
                   settings: {
                     slidesToShow: 1,
+                    arrows: false,
                   },
                 },
               ],

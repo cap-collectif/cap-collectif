@@ -36,9 +36,31 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
     }
   >
     <DebateStepPageLinkedArticles__StyledSlider
-      arrows={false}
+      arrows={true}
       dots={true}
       infinite={false}
+      nextArrow={
+        <ForwardRef
+          className="slick-arrow slick-next"
+        >
+          <ForwardRef
+            color="white"
+            name="ARROW_RIGHT"
+            size="sm"
+          />
+        </ForwardRef>
+      }
+      prevArrow={
+        <ForwardRef
+          className="slick-arrow slick-prev"
+        >
+          <ForwardRef
+            color="white"
+            name="ARROW_LEFT"
+            size="sm"
+          />
+        </ForwardRef>
+      }
       responsive={
         Array [
           Object {
@@ -50,6 +72,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
           Object {
             "breakpoint": 600,
             "settings": Object {
+              "arrows": false,
               "slidesToShow": 1,
             },
           },
@@ -246,9 +269,31 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
     }
   >
     <DebateStepPageLinkedArticles__StyledSlider
-      arrows={false}
+      arrows={true}
       dots={true}
       infinite={false}
+      nextArrow={
+        <ForwardRef
+          className="slick-arrow slick-next"
+        >
+          <ForwardRef
+            color="white"
+            name="ARROW_RIGHT"
+            size="sm"
+          />
+        </ForwardRef>
+      }
+      prevArrow={
+        <ForwardRef
+          className="slick-arrow slick-prev"
+        >
+          <ForwardRef
+            color="white"
+            name="ARROW_LEFT"
+            size="sm"
+          />
+        </ForwardRef>
+      }
       responsive={
         Array [
           Object {
@@ -260,6 +305,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
           Object {
             "breakpoint": 600,
             "settings": Object {
+              "arrows": false,
               "slidesToShow": 1,
             },
           },

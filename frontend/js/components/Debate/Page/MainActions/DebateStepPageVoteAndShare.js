@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'r
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
+import { useScrollYPosition } from 'react-use-scroll-position';
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql';
 import VoteView from '~/components/Ui/Vote/VoteView';
 import DebateStepPageVote from './DebateStepPageVote';
@@ -62,6 +63,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
   const viewerIsConfirmedByEmail: boolean = useSelector(
     (state: GlobalState) => state.user?.user?.isEmailConfirmed || false,
   );
+  const scrollY: number = useScrollYPosition();
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user);
 
   const intl = useIntl();
@@ -83,7 +85,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
 
   return (
     <>
-      {!isVisible && !stepClosed && !widget.isSource && (
+      {!isVisible && !stepClosed && !widget.isSource && scrollY > 300 && (
         <DebateStepPageAbsoluteVoteAndShare
           isMobile={isMobile}
           step={step}

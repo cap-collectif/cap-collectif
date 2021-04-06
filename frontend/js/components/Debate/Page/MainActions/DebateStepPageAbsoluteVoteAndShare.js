@@ -48,7 +48,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
         marginTop: '0 !important',
         background: 'white',
         boxShadow: isMobile
-          ? 'none'
+          ? 'medium'
           : !showArgumentForm || voteState === 'NONE'
           ? 'medium'
           : '0 10px 14px 0 white',
