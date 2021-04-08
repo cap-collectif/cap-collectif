@@ -446,8 +446,14 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   "storageKey": null,
                                 },
                                 Object {
-                                  "alias": null,
-                                  "args": null,
+                                  "alias": "allComments",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "first",
+                                      "value": 0,
+                                    },
+                                  ],
                                   "concreteType": "CommentConnection",
                                   "kind": "LinkedField",
                                   "name": "comments",
@@ -457,11 +463,11 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "totalCount",
+                                      "name": "totalCountWithAnswers",
                                       "storageKey": null,
                                     },
                                   ],
-                                  "storageKey": null,
+                                  "storageKey": "comments(first:0)",
                                 },
                                 Object {
                                   "alias": null,
@@ -851,7 +857,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "a6d0d64ad12453cdd31d8f8875805471",
+          "cacheID": "2a9fba87aa3fe79d80bcca3e9f78c735",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -961,8 +967,8 @@ fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
     donationTotalCount
     donationCount
   }
-  comments {
-    totalCount
+  allComments: comments(first: 0) {
+    totalCountWithAnswers
   }
 }
 

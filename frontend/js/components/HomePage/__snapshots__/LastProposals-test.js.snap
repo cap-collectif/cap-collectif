@@ -371,8 +371,14 @@ exports[`<LastProposals /> should render correctly 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
+                      "alias": "allComments",
+                      "args": Array [
+                        Object {
+                          "kind": "Literal",
+                          "name": "first",
+                          "value": 0,
+                        },
+                      ],
                       "concreteType": "CommentConnection",
                       "kind": "LinkedField",
                       "name": "comments",
@@ -382,11 +388,11 @@ exports[`<LastProposals /> should render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "totalCount",
+                          "name": "totalCountWithAnswers",
                           "storageKey": null,
                         },
                       ],
-                      "storageKey": null,
+                      "storageKey": "comments(first:0)",
                     },
                     Object {
                       "alias": null,
@@ -666,7 +672,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "048b344d0be88bffa46e02333f792165",
+          "cacheID": "2b03be4ef6696bd788a1924788546af5",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -774,8 +780,8 @@ fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
     donationTotalCount
     donationCount
   }
-  comments {
-    totalCount
+  allComments: comments(first: 0) {
+    totalCountWithAnswers
   }
 }
 

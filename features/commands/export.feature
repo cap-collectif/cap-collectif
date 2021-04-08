@@ -84,6 +84,7 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
   And the command exit code should be 0
   Then the archive for user "userAdmin" should be deleted
 
+@database @randomly-failing
 Scenario: Admin wants to export users
   Given I run a command "capco:export:users" with parameters:
     | --delimiter |,|

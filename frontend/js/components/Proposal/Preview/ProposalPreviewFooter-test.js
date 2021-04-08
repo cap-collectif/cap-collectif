@@ -37,7 +37,7 @@ describe('<ProposalPreviewFooter />', () => {
       objectType: 'PROPOSAL',
       usingTipsmeee: false,
     },
-    comments: { totalCount: 3 },
+    allComments: { totalCountWithAnswers: 13 },
     allVotesOnStep: {
       totalCount: 42,
       totalPointsCount: 192,

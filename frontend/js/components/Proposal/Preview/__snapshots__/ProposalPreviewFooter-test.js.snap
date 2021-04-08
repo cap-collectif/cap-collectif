@@ -8,14 +8,14 @@ exports[`<ProposalPreviewFooter /> should render a footer with comments counters
     <div
       className="card__counters__value"
     >
-      3
+      13
     </div>
     <FormattedMessage
       id="comment.count_no_nb"
       tagName="div"
       values={
         Object {
-          "count": 3,
+          "count": 13,
         }
       }
     />
@@ -73,14 +73,14 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
     <div
       className="card__counters__value"
     >
-      3
+      13
     </div>
     <FormattedMessage
       id="comment.count_no_nb"
       tagName="div"
       values={
         Object {
-          "count": 3,
+          "count": 13,
         }
       }
     />
