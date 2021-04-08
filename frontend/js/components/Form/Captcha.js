@@ -1,6 +1,14 @@
 // @flow
 import * as React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import config from '~/config';
+
+/**
+ * Allow Google ReCaptcha to work in test mode
+ * see https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
+ */
+const CAPTCHA_TEST_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+const CAPTCHA_PROD_KEY = '6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC';
 
 type Props = {
   onChange: (response: string) => void,
@@ -33,7 +41,7 @@ export class Captcha extends React.PureComponent<Props> {
           this.captcha = c;
         }}
         style={{ transform: 'scale(0.85)', transformOrigin: '0 0', ...style }}
-        sitekey="6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC"
+        sitekey={config.isTest ? CAPTCHA_TEST_KEY : CAPTCHA_PROD_KEY}
         onChange={onChange}
       />
     );

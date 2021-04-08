@@ -1,0 +1,14 @@
+{
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "fixturesFolder": "./fixtures",
+  "integrationFolder": "./integration",
+  "pluginsFile": "./plugins/index.ts",
+  "screenshotsFolder": "./screenshots",
+  "videosFolder": "./videos",
+  "supportFile": "./support/index.ts",
+  "baseUrl": "https://capco.test",
+  "viewportWidth": 1280,
+  "viewportHeight": 1000,
+  "chromeWebSecurity": false,
+  "retries": 2
+}

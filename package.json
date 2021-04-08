@@ -45,7 +45,10 @@
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js",
         "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re",
-        "postinstall": "patch-package"
+        "postinstall": "patch-package",
+        "cy:open": "yarn --cwd cypress cy:open",
+        "cy:run": "yarn --cwd cypress cy:run",
+        "cy:run:cy": "yarn --cwd cypress cy:run:ci"
     },
     "workspaces": [
         "packages/*"

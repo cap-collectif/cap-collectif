@@ -1,0 +1,72 @@
+{
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".d.ts"]
+      },
+      "alias": {
+        "map": [
+          ["~e2e-pages", "./pages"],
+          ["~e2e", "."],
+          ["~", "../frontend/js"]
+        ]
+      }
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "no-console": "off",
+    "spaced-comment": "off",
+    "flowtype/require-valid-file-annotation": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/camelcase": "off",
+    "prettier/prettier": "error",
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "none",
+          "requireLast": false
+        },
+        "singleline": {
+          "requireLast": false
+        }
+      }
+    ],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array-simple"
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "overrides": []
+}

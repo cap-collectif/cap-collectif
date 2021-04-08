@@ -1,0 +1,4 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+[*.ts]
+indent_size = 2

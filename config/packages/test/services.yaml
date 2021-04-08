@@ -11,6 +11,9 @@ qandidate_toggle:
 # We disable translation except for routes
 parameters:
     webfactory_icu_translation.translator: Capco\AppBundle\Translator\NoTranslator
+    # Allow Google ReCaptcha to work in test mode
+    # see https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
+    env(SYMFONY_RECAPTCHA_PRIVATE_KEY): 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 
 monolog:
     handlers:
