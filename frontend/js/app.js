@@ -12,6 +12,13 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
+// When chunk is not loaded
+window.addEventListener('error', e => {
+  if (/Loading chunk [\d]+ failed/.test(e.message)) {
+    window.location.reload(true);
+  }
+});
+
 /* ## MOMENT ## */
 
 // Use window.locale to set the current locale data

@@ -65,33 +65,29 @@ const devConf = {
       path.join(webpackConfig.assetsDir, 'js/fancybox/jquery.fancybox.css'),
     ],
 
-    // Common file for JS/CSS
-    app: [
-      // Let style.scss at the bottom, it overrides some rules
+    // Common file for JS
+    app: path.join(webpackConfig.frontendDir, 'js/app.js'),
+
+    admin: path.join(webpackConfig.frontendDir, 'js/registrationAdmin.js'),
+    front: [
+      path.join(webpackConfig.frontendDir, 'js/registration.js'),
       path.join(webpackConfig.srcDir, 'Resources/scss/style.scss'),
     ],
 
-    admin: [
-      // Let app.js here, to let moment set the globally locale
-      path.join(webpackConfig.frontendDir, 'js/app.js'),
-      path.join(webpackConfig.frontendDir, 'js/registrationAdmin.js'),
-    ],
-
-    front: [
-      // Let app.js here, to let moment set the globally locale
-      path.join(webpackConfig.frontendDir, 'js/app.js'),
-      path.join(webpackConfig.frontendDir, 'js/registration.js'),
-    ],
-
-    // TODO: include rules for print.css with a media query and merge it with app.css
     // We separate print.css because it is needed only in the printed pages
-    print: [path.join(webpackConfig.srcDir, 'Resources/scss/print.scss')],
+    print: path.join(webpackConfig.srcDir, 'Resources/scss/print.scss'),
 
     // Same as print but for backoffice
     'style-admin': [
       path.join(webpackConfig.srcDir, 'Resources/scss/style-admin.scss'),
       path.join(webpackConfig.nodeModulesDir, 'jquery-minicolors/jquery.minicolors.css'),
     ],
+  },
+
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
   },
 
   plugins: [
@@ -162,16 +158,6 @@ const devConf = {
       ],
     }),
   ],
-  module: {
-    rules: [
-      // Disable require.ensure as it's not a standard language feature.
-      {
-        parser: { requireEnsure: false },
-      },
-      // Process application JS with Babel.
-      // The preset includes JSX, Flow, and some ESnext features.
-    ],
-  },
 };
 
 module.exports = merge(devConf, webpackJsx, webpackFile, webpackScss);

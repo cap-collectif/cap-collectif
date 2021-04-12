@@ -134,7 +134,7 @@
     },
     "bundlewatch": [
         {
-            "path": "./public/css/app.css",
+            "path": "./public/css/front.css",
             "maxSize": "60 kB"
         },
         {
@@ -143,15 +143,19 @@
         },
         {
             "path": "./public/js/admin.js",
-            "maxSize": "950 KB"
+            "maxSize": "100 KB"
         },
         {
             "path": "./public/js/front.js",
-            "maxSize": "1.1 MB"
+            "maxSize": "300 KB"
+        },
+        {
+            "path": "./public/js/commons.js",
+            "maxSize": "800 KB"
         },
         {
             "path": "./public/js/app.js",
-            "maxSize": "1 KB"
+            "maxSize": "100 KB"
         },
         {
             "path": "./public/js/vendor.js",
@@ -284,7 +288,7 @@
         "lodash": "^4.17.20",
         "mailcheck": "^1.1.1",
         "mem": "^4.0.0",
-        "mini-css-extract-plugin": "^0.9.0",
+        "mini-css-extract-plugin": "^1.4.0",
         "moment": "^2.27.0",
         "moment-locales-webpack-plugin": "^1.2.0",
         "moment-timezone": "^0.5.31",
@@ -306,7 +310,7 @@
         "react-app-polyfill": "^1.0.6",
         "react-async-script": "^1.0.1",
         "react-axe": "^3.0.2",
-        "react-beautiful-dnd": "https://github.com/cap-collectif/react-beautiful-dnd/tarball/feature-isCombineOnly",
+        "react-beautiful-dnd": "https://github.com/cap-collectif/react-beautiful-dnd/tarball/runtime-update",
         "react-bootstrap": "^0.32.1",
         "react-color": "^2.18.1",
         "react-copy-to-clipboard": "^5.0.2",
@@ -369,15 +373,15 @@
         "stylelint-config-styled-components": "^0.1.1",
         "stylelint-processor-styled-components": "^1.9.0",
         "tar": "^4.4.8",
-        "terser-webpack-plugin": "^1.2.3",
+        "terser-webpack-plugin": "^5.1.1",
         "tinycolor2": "^1.4.2",
         "uglifyjs-3-webpack-plugin": "^1.2.4",
         "url-search-params-polyfill": "^8.1.0",
         "use-analytics": "^0.0.5",
         "vscode-apollo-relay": "^1.5.1",
-        "webpack": "^4.43.0",
-        "webpack-bundle-analyzer": "^3.8.0",
-        "webpack-cli": "^3.3.0",
+        "webpack": "^5.28.0",
+        "webpack-bundle-analyzer": "^4.4.0",
+        "webpack-cli": "^4.5.0",
         "webpack-merge": "^5.0.9"
     },
     "version": "1.3.2",

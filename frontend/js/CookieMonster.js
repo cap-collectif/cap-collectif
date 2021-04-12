@@ -1,6 +1,5 @@
 /* eslint-disable */
 // @flow
-
 import type { ForOrAgainstValue } from '~relay/AddDebateAnonymousVoteMutation.graphql';
 
 const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes';
@@ -107,17 +106,22 @@ class CookieMonster {
     return doNotTrack === 'yes' || doNotTrack === '1';
   };
 
+  checkCookieHtmlElement = () => {
+    if (this.cookieBanner === null && document.getElementById('cookie-banner') !== null) {
+      this.cookieBanner = document.getElementById('cookie-banner');
+    }
+
+    if (this.cookieConsent === null && document.getElementById('cookie-consent') !== null) {
+      this.cookieConsent = document.getElementById('cookie-consent');
+    }
+  };
+
   processCookieConsent = () => {
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
     const adsConsent = Cookies.getJSON('adCookieConsentValue');
 
-    if (this.cookieBanner === null && document.getElementById('cookie-banner') !== null) {
-      this.cookieBanner = document.getElementById('cookie-banner');
-    }
-    if (this.cookieConsent === null && document.getElementById('cookie-consent') !== null) {
-      this.cookieConsent = document.getElementById('cookie-consent');
-    }
+    this.checkCookieHtmlElement();
 
     if (consentCookie === true) {
       this.executeAnalyticScript();
@@ -161,6 +165,7 @@ class CookieMonster {
   };
 
   hideBanner = () => {
+    this.checkCookieHtmlElement();
     this.cookieBanner.className = this.cookieBanner.className.replace('active', '').trim();
   };
 
