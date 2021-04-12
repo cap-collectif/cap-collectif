@@ -120,28 +120,8 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
               />
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
-              id="global.synthesis"
-              key="4"
-              onClick={[Function]}
-            >
-              <FormattedMessage
-                id="global.synthesis"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.ranking"
-              key="5"
-              onClick={[Function]}
-            >
-              <FormattedMessage
-                id="global.ranking"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
               id="global.questionnaire"
-              key="6"
+              key="4"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -151,7 +131,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.custom.feminine"
-              key="7"
+              key="5"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -297,28 +277,8 @@ exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
               />
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
-              id="global.synthesis"
-              key="5"
-              onClick={[Function]}
-            >
-              <FormattedMessage
-                id="global.synthesis"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
-              id="global.ranking"
-              key="6"
-              onClick={[Function]}
-            >
-              <FormattedMessage
-                id="global.ranking"
-                values={Object {}}
-              />
-            </ProjectAdminFormstyle__StepMenuItem>
-            <ProjectAdminFormstyle__StepMenuItem
               id="global.questionnaire"
-              key="7"
+              key="5"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -328,7 +288,7 @@ exports[`<ProjectStepAdmin /> renders correctly without feature debate 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.custom.feminine"
-              key="8"
+              key="6"
               onClick={[Function]}
             >
               <FormattedMessage

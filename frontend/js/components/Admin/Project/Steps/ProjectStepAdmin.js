@@ -94,17 +94,19 @@ export const ProjectStepAdmin = ({ form, project, hasFeatureDebate }: Props) => 
                     <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
                   </>
                 }>
-                {stepTypes.map((st, idx) => (
-                  <StepMenuItem
-                    key={idx}
-                    id={st.label}
-                    onClick={() => {
-                      setStepType(st.value);
-                      displayAddStepModal(true);
-                    }}>
-                    <FormattedMessage id={st.label} />
-                  </StepMenuItem>
-                ))}
+                {stepTypes
+                  .filter(st => st.value !== 'RankingStep' && st.value !== 'SynthesisStep')
+                  .map((st, idx) => (
+                    <StepMenuItem
+                      key={idx}
+                      id={st.label}
+                      onClick={() => {
+                        setStepType(st.value);
+                        displayAddStepModal(true);
+                      }}>
+                      <FormattedMessage id={st.label} />
+                    </StepMenuItem>
+                  ))}
               </StepCreateButton>
             </ButtonToolbar>
           </div>
