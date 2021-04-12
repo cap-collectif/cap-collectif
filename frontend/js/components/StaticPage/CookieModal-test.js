@@ -5,17 +5,8 @@ import { shallow } from 'enzyme';
 import { CookieModal } from './CookieModal';
 
 describe('<CookieModal />', () => {
-  const props = {
-    separator: '',
-  };
-  it('should render correctly open', () => {
-    const wrapper = shallow(<CookieModal {...props} />);
-    wrapper.setState({ open: true });
-    expect(wrapper).toMatchSnapshot();
-  });
-  it('should render correctly close', () => {
-    const wrapper = shallow(<CookieModal {...props} />);
-    wrapper.setState({ open: false });
+  it('should render correctly', () => {
+    const wrapper = shallow(<CookieModal />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { Alert, Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { isSubmitting, submit } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -88,6 +88,7 @@ export const RegistrationModal = ({
   locale,
 }: Props) => {
   const { track } = useAnalytics();
+  const intl = useIntl();
 
   return (
     <>
@@ -99,7 +100,7 @@ export const RegistrationModal = ({
         bsSize="medium"
         aria-labelledby="contained-modal-title-lg"
         enforceFocus={false}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
           <Modal.Title id="contained-modal-title-lg" componentClass="h1">
             <FormattedMessage id="charter" />
           </Modal.Title>
@@ -122,7 +123,7 @@ export const RegistrationModal = ({
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
         enforceFocus={false}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
           <Modal.Title id="contained-modal-title-lg" componentClass="h1">
             <FormattedMessage id="global.register" />
           </Modal.Title>

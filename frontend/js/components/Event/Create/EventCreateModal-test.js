@@ -1,15 +1,13 @@
 // @flow
 /* eslint-env jest */
-
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EventCreateModal } from './EventCreateModal';
-import { intlMock, $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<EventCreateModal />', () => {
   it('it renders correctly', () => {
     const props = {
-      intl: intlMock,
       show: false,
       invalid: true,
       submitting: false,

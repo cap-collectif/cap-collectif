@@ -32,7 +32,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -75,7 +75,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -156,7 +156,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -199,7 +199,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -294,7 +294,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -337,7 +337,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -418,7 +418,7 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -461,7 +461,7 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -542,7 +542,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -585,7 +585,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -666,7 +666,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -709,7 +709,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"

@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import CreateGroupMutation from '../../mutations/CreateGroupMutation';
@@ -13,10 +14,6 @@ export type Props = {|
   submit: Function,
   submitting: boolean,
 |};
-
-type ComponentState = {
-  showModal: boolean,
-};
 
 type FormValues = Object;
 
@@ -39,66 +36,44 @@ const onSubmit = (values: FormValues) =>
     }
   });
 
-export class GroupCreateButton extends React.Component<Props, ComponentState> {
-  constructor(props: Props) {
-    super(props);
+export const GroupCreateButton = ({ submitting, submit }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const intl = useIntl();
 
-    this.state = {
-      showModal: false,
-    };
-  }
-
-  render() {
-    const { submitting, submit } = this.props;
-    const { showModal } = this.state;
-
-    return (
-      <div>
-        <Button
-          id="add-group"
-          bsStyle="default"
-          style={{ marginTop: 10 }}
-          onClick={() => {
-            this.setState({ showModal: true });
-          }}>
-          <FormattedMessage id="global.add" />
-        </Button>
-        <Modal
-          animation={false}
-          show={showModal}
-          onHide={() => {
-            this.setState({ showModal: false });
-          }}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="group.create.title" />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <GroupForm />
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton
-              onClose={() => {
-                this.setState({ showModal: false });
-              }}
-            />
-            <SubmitButton
-              id="confirm-group-create"
-              label="global.add"
-              isSubmitting={submitting}
-              onSubmit={() => {
-                submit(formName);
-              }}
-            />
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Button id="add-group" bsStyle="default" style={{ marginTop: 10 }} onClick={onOpen}>
+        <FormattedMessage id="global.add" />
+      </Button>
+      <Modal
+        animation={false}
+        show={isOpen}
+        onHide={onClose}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage id="group.create.title" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <GroupForm />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton onClose={onClose} />
+          <SubmitButton
+            id="confirm-group-create"
+            label="global.add"
+            isSubmitting={submitting}
+            onSubmit={() => {
+              submit(formName);
+            }}
+          />
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 export default reduxForm({
   onSubmit,

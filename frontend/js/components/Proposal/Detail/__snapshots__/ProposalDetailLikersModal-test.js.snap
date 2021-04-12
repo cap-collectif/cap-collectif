@@ -29,7 +29,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
-    closeLabel="Close"
+    closeLabel="close.modal"
   >
     <ModalTitle
       bsClass="modal-title"
@@ -116,7 +116,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
-    closeLabel="Close"
+    closeLabel="close.modal"
   >
     <ModalTitle
       bsClass="modal-title"

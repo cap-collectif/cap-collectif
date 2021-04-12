@@ -30,7 +30,7 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
-    closeLabel="Close"
+    closeLabel="close.modal"
   >
     <ModalTitle
       bsClass="modal-title"

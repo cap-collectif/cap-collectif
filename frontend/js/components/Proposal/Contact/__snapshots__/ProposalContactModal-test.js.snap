@@ -34,7 +34,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"

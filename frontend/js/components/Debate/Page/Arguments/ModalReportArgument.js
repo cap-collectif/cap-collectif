@@ -94,7 +94,7 @@ export const ModalReportArgument = ({ argument, onClose, id }: Props): React.Nod
       onHide={onClose}
       bsSize="large"
       aria-labelledby="modal-title">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
         <Modal.Title id="modal-title">
           <FormattedMessage id="moderate-argument" />
         </Modal.Title>

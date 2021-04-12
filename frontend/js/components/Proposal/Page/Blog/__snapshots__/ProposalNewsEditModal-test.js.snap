@@ -31,7 +31,7 @@ exports[`<ProposalNewsEditModal /> should render correctly 1`] = `
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
-    closeLabel="Close"
+    closeLabel="close.modal"
   >
     <ModalTitle
       bsClass="modal-title"
@@ -154,7 +154,7 @@ exports[`<ProposalNewsEditModal /> should render correctly with modal open 1`] =
   <ModalHeader
     bsClass="modal-header"
     closeButton={true}
-    closeLabel="Close"
+    closeLabel="close.modal"
   >
     <ModalTitle
       bsClass="modal-title"

@@ -1,16 +1,15 @@
 // @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { isInvalid, isSubmitting, isPristine, submit } from 'redux-form';
-import type { IntlShape } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { formName } from '../Form/EventForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import type { State, Dispatch } from '../../../types';
+import type { State, Dispatch } from '~/types';
 import type { EventCreateModal_query } from '~relay/EventCreateModal_query.graphql';
 import type { EventCreateModal_event } from '~relay/EventCreateModal_event.graphql';
 import colors from '../../../utils/colors';
@@ -23,7 +22,6 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
-  intl: IntlShape,
   show: boolean,
   submitting: boolean,
   pristine: boolean,
@@ -56,35 +54,39 @@ export const EventCreateModal = ({
   event,
   handleClose,
   dispatch,
-}: Props) => (
-  <Modal
-    animation={false}
-    show={show}
-    onHide={handleClose}
-    bsSize="large"
-    aria-labelledby="contained-modal-title-lg">
-    <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-lg">
-        <FormattedMessage id="event-proposal" />
-      </Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <EventFormInModal query={query} event={event} isFrontendView />
-    </Modal.Body>
-    <Modal.Footer>
-      <CloseButton onClose={handleClose} />
-      <SubmitButton
-        label="global.submit"
-        id="confirm-event-submit"
-        disabled={pristine || submitting}
-        isSubmitting={submitting}
-        onSubmit={() => {
-          dispatch(submit(formName));
-        }}
-      />
-    </Modal.Footer>
-  </Modal>
-);
+}: Props) => {
+  const intl = useIntl();
+
+  return (
+    <Modal
+      animation={false}
+      show={show}
+      onHide={handleClose}
+      bsSize="large"
+      aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+        <Modal.Title id="contained-modal-title-lg">
+          <FormattedMessage id="event-proposal" />
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <EventFormInModal query={query} event={event} isFrontendView />
+      </Modal.Body>
+      <Modal.Footer>
+        <CloseButton onClose={handleClose} />
+        <SubmitButton
+          label="global.submit"
+          id="confirm-event-submit"
+          disabled={pristine || submitting}
+          isSubmitting={submitting}
+          onSubmit={() => {
+            dispatch(submit(formName));
+          }}
+        />
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   invalid: isInvalid(formName)(state),
@@ -92,9 +94,7 @@ const mapStateToProps = (state: State) => ({
   pristine: isPristine(formName)(state),
 });
 
-export const container = connect<any, any, _, _, _, _>(mapStateToProps)(
-  injectIntl(EventCreateModal),
-);
+export const container = connect<any, any, _, _, _, _>(mapStateToProps)(EventCreateModal);
 
 export default createFragmentContainer(container, {
   query: graphql`

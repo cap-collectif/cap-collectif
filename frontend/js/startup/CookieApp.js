@@ -5,6 +5,6 @@ import CookieModal from '../components/StaticPage/CookieModal';
 
 export default (props: Object) => (
   <Providers>
-      <CookieModal {...props} />
-    </Providers>
+    <CookieModal {...props} />
+  </Providers>
 );

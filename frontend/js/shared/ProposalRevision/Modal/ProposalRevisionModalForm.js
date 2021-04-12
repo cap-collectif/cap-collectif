@@ -145,7 +145,7 @@ const ProposalRevisionModalForm = ({
     <Modal show={show} onHide={onClose}>
       {showAvailableRevisions && (
         <>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
             <Modal.Title className="font-weight-600">
               {intl.formatMessage({ id: 'modal.review.request' })}
             </Modal.Title>
@@ -202,7 +202,7 @@ const ProposalRevisionModalForm = ({
             e.preventDefault();
             handleSubmit(e);
           }}>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
             <Modal.Title className="font-weight-600">
               {intl.formatMessage({ id: 'modal.review.request' })}
             </Modal.Title>

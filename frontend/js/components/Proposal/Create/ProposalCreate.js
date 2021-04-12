@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
@@ -18,7 +18,6 @@ import { mediaQueryMobile } from '~/utils/sizes';
 import AlertForm from '~/components/Alert/AlertForm';
 
 type Props = {
-  intl: IntlShape,
   proposalForm: ProposalCreate_proposalForm,
   showModal: boolean,
   submitting: boolean,
@@ -53,103 +52,97 @@ const ModalProposalFormFooter: StyledComponent<{}, {}, typeof Modal.Footer> = st
   }
 `;
 
-export class ProposalCreate extends React.Component<Props> {
-  render() {
-    const {
-      intl,
-      proposalForm,
-      showModal,
-      pristine,
-      submitting,
-      dispatch,
-      projectType,
-      invalid,
-    } = this.props;
+export const ProposalCreate = ({
+  proposalForm,
+  showModal,
+  pristine,
+  submitting,
+  dispatch,
+  projectType,
+  invalid,
+}: Props) => {
+  const intl = useIntl();
+  const modalTitleTradKey =
+    proposalForm.objectType === 'PROPOSAL'
+      ? getProposalLabelByType(projectType, 'add')
+      : proposalForm.objectType === 'ESTABLISHMENT'
+      ? 'proposal.add-establishment'
+      : 'submit-a-question';
 
-    const modalTitleTradKey =
-      proposalForm.objectType === 'PROPOSAL'
-        ? getProposalLabelByType(projectType, 'add')
-        : proposalForm.objectType === 'ESTABLISHMENT'
-        ? 'proposal.add-establishment'
-        : 'submit-a-question';
+  return (
+    <div>
+      <ProposalCreateButton
+        proposalForm={proposalForm}
+        projectType={projectType}
+        disabled={!proposalForm.contribuable}
+        handleClick={() => dispatch(openCreateModal())}
+      />
+      <ModalProposalCreateContainer
+        animation={false}
+        show={showModal}
+        dialogClassName="custom-modal-dialog"
+        onHide={() => {
+          if (
+            // eslint-disable-next-line no-alert
+            window.confirm(
+              intl.formatMessage({
+                id: getProposalLabelByType(projectType, 'confirm_close_modal'),
+              }),
+            )
+          ) {
+            dispatch(closeCreateModal());
+          }
+        }}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage id={modalTitleTradKey} tagName="b" />
+          </Modal.Title>
+        </Modal.Header>
 
-    return (
-      <div>
-        <ProposalCreateButton
-          proposalForm={proposalForm}
-          projectType={projectType}
-          disabled={!proposalForm.contribuable}
-          handleClick={() => dispatch(openCreateModal())}
-        />
-        <ModalProposalCreateContainer
-          animation={false}
-          show={showModal}
-          dialogClassName="custom-modal-dialog"
-          onHide={() => {
-            if (
-              // eslint-disable-next-line no-alert
-              window.confirm(
-                intl.formatMessage({
-                  id: getProposalLabelByType(projectType, 'confirm_close_modal'),
-                }),
-              )
-            ) {
-              dispatch(closeCreateModal());
+        <Modal.Body>
+          <ProposalForm proposalForm={proposalForm} proposal={null} />
+        </Modal.Body>
+
+        <ModalProposalFormFooter>
+          <AlertForm invalid={invalid && !pristine} />
+          <CloseButton onClose={() => dispatch(closeCreateModal())} />
+          <SubmitButton
+            id="confirm-proposal-create-as-draft"
+            isSubmitting={submitting}
+            disabled={pristine}
+            onSubmit={() => {
+              dispatch(change(formName, 'draft', true));
+              setTimeout(() => {
+                // TODO find a better way
+                // We need to wait validation values to be updated with 'draft'
+                dispatch(submit(formName));
+              }, 200);
+            }}
+            label="global.save_as_draft"
+          />
+          <SubmitButton
+            label={
+              proposalForm.objectType === 'ESTABLISHMENT' ? 'submit-establishment' : 'global.submit'
             }
-          }}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id={modalTitleTradKey} tagName="b" />
-            </Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <ProposalForm proposalForm={proposalForm} proposal={null} />
-          </Modal.Body>
-
-          <ModalProposalFormFooter>
-            <AlertForm invalid={invalid && !pristine} />
-            <CloseButton onClose={() => dispatch(closeCreateModal())} />
-            <SubmitButton
-              id="confirm-proposal-create-as-draft"
-              isSubmitting={submitting}
-              disabled={pristine}
-              onSubmit={() => {
-                dispatch(change(formName, 'draft', true));
-                setTimeout(() => {
-                  // TODO find a better way
-                  // We need to wait validation values to be updated with 'draft'
-                  dispatch(submit(formName));
-                }, 200);
-              }}
-              label="global.save_as_draft"
-            />
-            <SubmitButton
-              label={
-                proposalForm.objectType === 'ESTABLISHMENT'
-                  ? 'submit-establishment'
-                  : 'global.submit'
-              }
-              id="confirm-proposal-create"
-              isSubmitting={submitting}
-              disabled={pristine}
-              onSubmit={() => {
-                dispatch(change(formName, 'draft', false));
-                setTimeout(() => {
-                  // TODO find a better way
-                  // We need to wait validation values to be updated with 'draft'
-                  dispatch(submit(formName));
-                }, 200);
-              }}
-            />
-          </ModalProposalFormFooter>
-        </ModalProposalCreateContainer>
-      </div>
-    );
-  }
-}
+            id="confirm-proposal-create"
+            isSubmitting={submitting}
+            disabled={pristine}
+            onSubmit={() => {
+              dispatch(change(formName, 'draft', false));
+              setTimeout(() => {
+                // TODO find a better way
+                // We need to wait validation values to be updated with 'draft'
+                dispatch(submit(formName));
+              }, 200);
+            }}
+          />
+        </ModalProposalFormFooter>
+      </ModalProposalCreateContainer>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
@@ -158,7 +151,7 @@ const mapStateToProps = (state: GlobalState) => ({
   showModal: state.proposal.showCreateModal,
 });
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProposalCreate));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalCreate);
 
 export default createFragmentContainer(container, {
   proposalForm: graphql`

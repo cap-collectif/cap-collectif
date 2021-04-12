@@ -20,52 +20,47 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
-export class OpinionEditModal extends React.Component<Props & { intl: IntlShape }> {
-  render() {
-    const { dispatch, submitting, show, opinion, intl } = this.props;
-    return (
-      <Modal
-        animation={false}
-        show={show}
-        onHide={() => {
-          if (
-            // eslint-disable-next-line no-alert
-            window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
-          ) {
-            dispatch(closeOpinionEditModal());
-          }
+export const OpinionEditModal = ({ dispatch, submitting, show, opinion, intl }: Props) => (
+  <Modal
+    animation={false}
+    show={show}
+    onHide={() => {
+      if (
+        // eslint-disable-next-line no-alert
+        window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
+      ) {
+        dispatch(closeOpinionEditModal());
+      }
+    }}
+    bsSize="large"
+    aria-labelledby="contained-modal-title-lg">
+    <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+      <Modal.Title id="contained-modal-title-lg">
+        <FormattedMessage id="global.edit" />
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <OpinionEditForm opinion={opinion} />
+    </Modal.Body>
+    <Modal.Footer>
+      <CloseButton
+        onClose={() => {
+          dispatch(closeOpinionEditModal());
         }}
-        bsSize="large"
-        aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="global.edit" />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <OpinionEditForm opinion={opinion} />
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton
-            onClose={() => {
-              dispatch(closeOpinionEditModal());
-            }}
-          />
-          <SubmitButton
-            label="global.edit"
-            id="confirm-opinion-update"
-            isSubmitting={submitting}
-            onSubmit={() => {
-              dispatch(submit(formName));
-            }}
-          />
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-}
+      />
+      <SubmitButton
+        label="global.edit"
+        id="confirm-opinion-update"
+        isSubmitting={submitting}
+        onSubmit={() => {
+          dispatch(submit(formName));
+        }}
+      />
+    </Modal.Footer>
+  </Modal>
+);
 
-const mapStateToProps = (state: State, props: { opinion: OpinionEditModal_opinion }) => ({
+const mapStateToProps = (state: State, props: Props) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
 });

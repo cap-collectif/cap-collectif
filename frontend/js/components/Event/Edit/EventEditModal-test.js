@@ -1,15 +1,13 @@
 // @flow
 /* eslint-env jest */
-
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EventEditModal } from './EventEditModal';
-import { intlMock, $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<EventEditModal />', () => {
   it('it renders correctly', () => {
     const props = {
-      intl: intlMock,
       show: false,
       submitting: false,
       pristine: false,
@@ -32,7 +30,6 @@ describe('<EventEditModal />', () => {
   });
   it('it renders correctly with participants', () => {
     const props = {
-      intl: intlMock,
       show: false,
       submitting: false,
       pristine: false,

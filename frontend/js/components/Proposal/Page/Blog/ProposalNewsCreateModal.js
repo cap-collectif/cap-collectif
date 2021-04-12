@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import {
@@ -49,6 +49,7 @@ export const ProposalNewsCreateModal = ({
   proposal,
   currentLanguage,
 }: Props) => {
+  const intl = useIntl();
   const onSubmit = (values: FormValues) => {
     const translationsData = handleTranslationChange(
       [],
@@ -86,7 +87,7 @@ export const ProposalNewsCreateModal = ({
       onHide={() => displayModal(false)}
       animation={false}
       dialogClassName="modal--update">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
         <Modal.Title className="font-weight-bold">
           <FormattedMessage id="proposal-add-news" />
         </Modal.Title>

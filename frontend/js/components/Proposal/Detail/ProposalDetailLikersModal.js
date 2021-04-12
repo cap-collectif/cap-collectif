@@ -33,7 +33,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
 
     return (
       <Modal show={show} onHide={this.handleHide}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
           <Modal.Title>
             <FormattedMessage
               id="proposal.likers.count"

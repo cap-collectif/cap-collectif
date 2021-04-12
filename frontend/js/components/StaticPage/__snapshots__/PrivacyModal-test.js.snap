@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PrivacyModal /> should render correctly close 1`] = `
+exports[`<PrivacyModal /> should render correctly 1`] = `
 <div
   className="privacy-policy"
 >
   <div>
-    <FormattedMessage
-      id="and-the"
-      values={Object {}}
-    />
      
     <Button
       active={false}
@@ -23,7 +19,7 @@ exports[`<PrivacyModal /> should render correctly close 1`] = `
       variant="link"
     >
       <FormattedMessage
-        id="confidentialite.title"
+        id="Thats my title"
         values={Object {}}
       />
     </Button>
@@ -61,7 +57,7 @@ exports[`<PrivacyModal /> should render correctly close 1`] = `
       bsClass="modal-header"
       className="privacy-policy"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -83,7 +79,7 @@ exports[`<PrivacyModal /> should render correctly close 1`] = `
         className="content"
         dangerouslySetInnerHTML={
           Object {
-            "__html": "<p>Privacy content</p>",
+            "__html": "My privacy content",
           }
         }
       />
@@ -103,11 +99,15 @@ exports[`<PrivacyModal /> should render correctly close 1`] = `
 </div>
 `;
 
-exports[`<PrivacyModal /> should render correctly open 1`] = `
+exports[`<PrivacyModal /> should render correctly with link key work 1`] = `
 <div
   className="privacy-policy"
 >
   <div>
+    <FormattedMessage
+      id="Thats the link keyword"
+      values={Object {}}
+    />
      
     <Button
       active={false}
@@ -122,7 +122,7 @@ exports[`<PrivacyModal /> should render correctly open 1`] = `
       variant="link"
     >
       <FormattedMessage
-        id="new-title"
+        id="Thats my title"
         values={Object {}}
       />
     </Button>
@@ -160,7 +160,7 @@ exports[`<PrivacyModal /> should render correctly open 1`] = `
       bsClass="modal-header"
       className="privacy-policy"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -182,7 +182,7 @@ exports[`<PrivacyModal /> should render correctly open 1`] = `
         className="content"
         dangerouslySetInnerHTML={
           Object {
-            "__html": "<p>Privacy content</p>",
+            "__html": "My privacy content",
           }
         }
       />

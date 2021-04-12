@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../../Form/SubmitButton';
@@ -22,6 +22,7 @@ export const ProposalNewsDeleteModal = ({
   onSubmit,
   displayDeleteModal,
 }: Props) => {
+  const intl = useIntl();
   if (!post) return null;
   return (
     <Modal
@@ -30,7 +31,7 @@ export const ProposalNewsDeleteModal = ({
       onHide={() => displayDeleteModal(false)}
       bsSize="large"
       aria-labelledby="contained-modal-title-lg">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
         <Modal.Title id="contained-modal-title-lg" className="uppercase">
           <FormattedMessage tagName="b" id="global.removeActuality" />
         </Modal.Title>

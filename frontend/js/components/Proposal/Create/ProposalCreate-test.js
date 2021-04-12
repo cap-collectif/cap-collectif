@@ -3,10 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalCreate } from './ProposalCreate';
-import { $refType, $fragmentRefs, intlMock } from '~/mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 const defaultProps = {
-  intl: intlMock,
   proposalForm: {
     $fragmentRefs,
     $refType,

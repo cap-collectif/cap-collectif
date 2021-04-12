@@ -2,10 +2,9 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { isInvalid, submit, isSubmitting } from 'redux-form';
-import type { IntlShape } from 'react-intl';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -22,77 +21,74 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
-  intl: IntlShape,
-  show: boolean,
-  submitting: boolean,
-  dispatch: Dispatch,
-  invalidRequirements: boolean,
+  +show: boolean,
+  +submitting: boolean,
+  +dispatch: Dispatch,
+  +invalidRequirements: boolean,
 |};
 
-export class OpinionCreateModal extends React.Component<Props> {
-  render() {
-    const {
-      section,
-      consultation,
-      submitting,
-      dispatch,
-      show,
-      intl,
-      invalidRequirements,
-    } = this.props;
-    return (
-      <Modal
-        animation={false}
-        show={show}
-        onHide={() => {
-          if (
-            // eslint-disable-next-line no-alert
-            window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
-          ) {
+export const OpinionCreateModal = ({
+  section,
+  consultation,
+  submitting,
+  dispatch,
+  show,
+  invalidRequirements,
+}: Props) => {
+  const intl = useIntl();
+
+  return (
+    <Modal
+      animation={false}
+      show={show}
+      onHide={() => {
+        if (
+          // eslint-disable-next-line no-alert
+          window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
+        ) {
+          dispatch(closeOpinionCreateModal());
+        }
+      }}
+      bsSize="large"
+      aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+        <Modal.Title id="contained-modal-title-lg">
+          <FormattedMessage id="opinion.add_new" />
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="modal-top bg-info">
+          <p>
+            <FormattedMessage id="opinion.add_new_infos" />
+          </p>
+        </div>
+        {consultation && (
+          <OpinionCreateForm
+            section={section}
+            consultationStep={consultation.step}
+            consultation={consultation}
+          />
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <CloseButton
+          onClose={() => {
             dispatch(closeOpinionCreateModal());
-          }
-        }}
-        bsSize="large"
-        aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="opinion.add_new" />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="modal-top bg-info">
-            <p>
-              <FormattedMessage id="opinion.add_new_infos" />
-            </p>
-          </div>
-          {consultation && (
-            <OpinionCreateForm
-              section={section}
-              consultationStep={consultation.step}
-              consultation={consultation}
-            />
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton
-            onClose={() => {
-              dispatch(closeOpinionCreateModal());
-            }}
-          />
-          <SubmitButton
-            label="global.create"
-            id="confirm-opinion-create"
-            disabled={invalidRequirements}
-            isSubmitting={submitting}
-            onSubmit={() => {
-              dispatch(submit(formName));
-            }}
-          />
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-}
+          }}
+        />
+        <SubmitButton
+          label="global.create"
+          id="confirm-opinion-create"
+          disabled={invalidRequirements}
+          isSubmitting={submitting}
+          onSubmit={() => {
+            dispatch(submit(formName));
+          }}
+        />
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   show: state.opinion.showOpinionCreateModal === props.section.id,
@@ -100,7 +96,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
   invalidRequirements: isInvalid(requirementsFormName)(state),
 });
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(OpinionCreateModal));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionCreateModal);
 
 export default createFragmentContainer(container, {
   section: graphql`

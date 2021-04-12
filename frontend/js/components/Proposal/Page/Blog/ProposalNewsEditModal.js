@@ -116,7 +116,7 @@ export const ProposalNewsEditModal = ({
       animation={false}
       className={show ? `overflow-hidden` : null}
       dialogClassName="modal--update">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
         <Modal.Title className="font-weight-bold">
           <FormattedMessage id="proposal-edit-news" />
         </Modal.Title>

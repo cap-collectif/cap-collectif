@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CookieModal /> should render correctly close 1`] = `
+exports[`<CookieModal /> should render correctly 1`] = `
 <div
   className="cookie-policy"
 >
@@ -56,7 +56,7 @@ exports[`<CookieModal /> should render correctly close 1`] = `
       bsClass="modal-header"
       className="cookie-policy"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -74,102 +74,7 @@ exports[`<CookieModal /> should render correctly close 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <div>
-        <Connect(CookieContent) />
-      </div>
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      className="cookie-policy"
-      componentClass="div"
-    >
-      <CloseButton
-        buttonId="cookies-cancel"
-        label="global.cancel"
-        onClose={[Function]}
-      />
-    </ModalFooter>
-  </Modal>
-</div>
-`;
-
-exports[`<CookieModal /> should render correctly open 1`] = `
-<div
-  className="cookie-policy"
->
-  <div>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="link"
-      className="p-0"
-      disabled={false}
-      id="cookies-management"
-      name="cookies"
-      onClick={[Function]}
-      variant="link"
-    >
-      <FormattedMessage
-        id="cookies"
-        values={Object {}}
-      />
-    </Button>
-  </div>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="large"
-    className="cookie-policy"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    id="cookies-modal"
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      className="cookie-policy"
-      closeButton={true}
-      closeLabel="Close"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        className="cookie-policy"
-        componentClass="h4"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="cookies"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <div>
-        <Connect(CookieContent) />
-      </div>
+      <Connect(CookieContent) />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"

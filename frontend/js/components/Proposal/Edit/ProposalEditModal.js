@@ -149,7 +149,7 @@ export class ProposalEditModal extends React.Component<Props> {
         aria-labelledby="contained-modal-title-lg">
         {isRevisionExpired ? (
           <>
-            <Modal.Header closeButton />
+            <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })} />
             <Modal.Body>
               <span className="d-b emoji-container" role="img" aria-label="Crying Face">
                 😓
@@ -160,7 +160,7 @@ export class ProposalEditModal extends React.Component<Props> {
           </>
         ) : (
           <>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
               <Modal.Title id="contained-modal-title-lg">
                 <b>
                   <FormattedMessage

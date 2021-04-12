@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
@@ -18,66 +18,65 @@ type Props = {
   dispatch: Dispatch,
 };
 
-export class ProposalDeleteModal extends React.Component<Props> {
-  render() {
-    const { proposal, show, isDeleting, dispatch } = this.props;
-    if (!proposal) return null;
-    return (
-      <div>
-        <Modal
-          animation={false}
-          show={show}
-          onHide={() => {
-            dispatch(closeDeleteProposalModal());
-          }}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage
-                id={
-                  isInterpellationContextFromProposal(proposal)
-                    ? 'interpellation.removeMessage'
-                    : 'global.removeMessage'
-                }
-              />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>
-              <FormattedHTMLMessage
-                id={
-                  isInterpellationContextFromProposal(proposal)
-                    ? 'interpellation.delete.confirm'
-                    : 'proposal.delete.confirm'
-                }
-                values={{
-                  title: proposal.title,
-                }}
-              />
-            </p>
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton
-              onClose={() => {
-                dispatch(closeDeleteProposalModal());
+export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch }: Props) => {
+  const intl = useIntl();
+
+  if (!proposal) return null;
+  return (
+    <div>
+      <Modal
+        animation={false}
+        show={show}
+        onHide={() => {
+          dispatch(closeDeleteProposalModal());
+        }}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage
+              id={
+                isInterpellationContextFromProposal(proposal)
+                  ? 'interpellation.removeMessage'
+                  : 'global.removeMessage'
+              }
+            />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            <FormattedHTMLMessage
+              id={
+                isInterpellationContextFromProposal(proposal)
+                  ? 'interpellation.delete.confirm'
+                  : 'proposal.delete.confirm'
+              }
+              values={{
+                title: proposal.title,
               }}
             />
-            <SubmitButton
-              id="confirm-proposal-delete"
-              isSubmitting={isDeleting}
-              onSubmit={() => {
-                deleteProposal(proposal.id, dispatch);
-              }}
-              label="global.removeDefinitively"
-              bsStyle="danger"
-            />
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-}
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton
+            onClose={() => {
+              dispatch(closeDeleteProposalModal());
+            }}
+          />
+          <SubmitButton
+            id="confirm-proposal-delete"
+            isSubmitting={isDeleting}
+            onSubmit={() => {
+              deleteProposal(proposal.id, dispatch);
+            }}
+            label="global.removeDefinitively"
+            bsStyle="danger"
+          />
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   isDeleting: state.proposal.isDeleting,

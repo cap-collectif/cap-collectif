@@ -27,7 +27,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -112,7 +112,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"
@@ -197,7 +197,7 @@ exports[`<ProposalCreate /> should render correctly with error 1`] = `
     <ModalHeader
       bsClass="modal-header"
       closeButton={true}
-      closeLabel="Close"
+      closeLabel="close.modal"
     >
       <ModalTitle
         bsClass="modal-title"

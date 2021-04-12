@@ -1,104 +1,84 @@
 // @flow
 import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import { Button, Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import UserBox from '../../User/UserBox';
 import type { OpinionVotesModal_opinion } from '~relay/OpinionVotesModal_opinion.graphql';
 
-type Props = {
-  opinion: OpinionVotesModal_opinion,
-  relay: RelayPaginationProp,
+type Props = {|
+  +opinion: OpinionVotesModal_opinion,
+  +relay: RelayPaginationProp,
+|};
+
+const OpinionVotesModal = ({ relay, opinion }: Props) => {
+  const intl = useIntl();
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const moreVotes =
+    opinion.moreVotes && opinion.moreVotes.totalCount > 5
+      ? opinion.moreVotes.totalCount - 5
+      : false;
+
+  return moreVotes ? (
+    <div>
+      <Button
+        bsStyle="link"
+        id="opinion-votes-show-all"
+        onClick={onOpen}
+        className="opinion__votes__more__link text-center">
+        {`+${moreVotes >= 100 ? '99' : moreVotes}`}
+      </Button>
+      <Modal
+        animation={false}
+        show={isOpen}
+        onHide={onClose}
+        bsSize="large"
+        className="opinion__votes__more__modal"
+        aria-labelledby="opinion-votes-more-title">
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+          <Modal.Title id="opinion-votes-more-title">
+            <FormattedMessage id="opinion.votes.modal.title" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            {opinion &&
+              opinion.moreVotes &&
+              opinion.moreVotes.edges &&
+              opinion.moreVotes.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map(vote => vote.author)
+                .filter(Boolean)
+                .map((author, index) => (
+                  <UserBox key={index} user={author} className="opinion__votes__userbox" />
+                ))}
+          </Row>
+          {relay.hasMore() && (
+            <Button
+              disabled={loading}
+              onClick={() => {
+                setLoading(true);
+                relay.loadMore(100, () => {
+                  setLoading(false);
+                });
+              }}>
+              <FormattedMessage id="global.more" />
+            </Button>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton onClose={onClose} label="global.close" />
+        </Modal.Footer>
+      </Modal>
+    </div>
+  ) : null;
 };
-
-type State = {
-  showModal: boolean,
-  loading: boolean,
-};
-
-class OpinionVotesModal extends React.Component<Props, State> {
-  state = {
-    showModal: false,
-    loading: false,
-  };
-
-  show = () => {
-    this.setState({ showModal: true });
-  };
-
-  close = () => {
-    this.setState({ showModal: false });
-  };
-
-  render() {
-    const { relay, opinion } = this.props;
-    const { loading, showModal } = this.state;
-    const moreVotes =
-      opinion.moreVotes && opinion.moreVotes.totalCount > 5
-        ? opinion.moreVotes.totalCount - 5
-        : false;
-    if (!moreVotes) {
-      return null;
-    }
-
-    return (
-      <span>
-        <Button
-          bsStyle="link"
-          id="opinion-votes-show-all"
-          onClick={this.show}
-          className="opinion__votes__more__link text-center">
-          {`+${moreVotes >= 100 ? '99' : moreVotes}`}
-        </Button>
-        <Modal
-          animation={false}
-          show={showModal}
-          onHide={this.close}
-          bsSize="large"
-          className="opinion__votes__more__modal"
-          aria-labelledby="opinion-votes-more-title">
-          <Modal.Header closeButton>
-            <Modal.Title id="opinion-votes-more-title">
-              <FormattedMessage id="opinion.votes.modal.title" />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Row>
-              {opinion &&
-                opinion.moreVotes &&
-                opinion.moreVotes.edges &&
-                opinion.moreVotes.edges
-                  .filter(Boolean)
-                  .map(edge => edge.node)
-                  .filter(Boolean)
-                  .map(vote => vote.author)
-                  .filter(Boolean)
-                  .map((author, index) => (
-                    <UserBox key={index} user={author} className="opinion__votes__userbox" />
-                  ))}
-            </Row>
-            {relay.hasMore() && (
-              <Button
-                disabled={loading}
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(100, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton onClose={this.close} label="global.close" />
-          </Modal.Footer>
-        </Modal>
-      </span>
-    );
-  }
-}
 
 export default createPaginationContainer(
   OpinionVotesModal,

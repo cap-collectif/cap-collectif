@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { isSubmitting, isInvalid, isPristine, submit } from 'redux-form';
@@ -22,47 +22,55 @@ export type Props = {|
   query: ProposalFusionForm_query,
 |};
 
-export class ProposalCreateFusionButton extends React.Component<Props> {
-  render() {
-    const { showModal, invalid, pristine, submitting, open, close, submitForm, query } = this.props;
-    return (
-      <div>
-        <Button
-          id="add-proposal-fusion"
-          bsStyle="default"
-          style={{ marginTop: 10 }}
-          onClick={() => open()}>
-          <FormattedMessage id="proposal.add_fusion" />
-        </Button>
-        <Modal
-          animation={false}
-          show={showModal}
-          onHide={() => close()}
-          bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="proposal.add_fusion" />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ProposalFusionForm query={query} />
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton onClose={() => close()} />
-            <SubmitButton
-              id="confirm-proposal-merge-create"
-              label="create-a-new-proposal"
-              isSubmitting={submitting}
-              disabled={invalid || pristine}
-              onSubmit={() => submitForm()}
-            />
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-}
+export const ProposalCreateFusionButton = ({
+  showModal,
+  invalid,
+  pristine,
+  submitting,
+  open,
+  close,
+  submitForm,
+  query,
+}: Props) => {
+  const intl = useIntl();
+
+  return (
+    <div>
+      <Button
+        id="add-proposal-fusion"
+        bsStyle="default"
+        style={{ marginTop: 10 }}
+        onClick={() => open()}>
+        <FormattedMessage id="proposal.add_fusion" />
+      </Button>
+      <Modal
+        animation={false}
+        show={showModal}
+        onHide={() => close()}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage id="proposal.add_fusion" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ProposalFusionForm query={query} />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton onClose={() => close()} />
+          <SubmitButton
+            id="confirm-proposal-merge-create"
+            label="create-a-new-proposal"
+            isSubmitting={submitting}
+            disabled={invalid || pristine}
+            onSubmit={() => submitForm()}
+          />
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   showModal: state.proposal.isCreatingFusion,

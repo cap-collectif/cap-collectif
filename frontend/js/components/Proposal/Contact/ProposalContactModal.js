@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
 import component from '~/components/Form/Field';
@@ -82,63 +82,67 @@ export const ProposalContactModal = ({
   pristine,
   reset,
   authorName,
-}: Props) => (
-  <Modal
-    show={show}
-    onHide={() => {
-      onClose();
-      reset();
-    }}
-    aria-labelledby="ProposalFormContactModal-modal">
-    <form onSubmit={handleSubmit} id={formName}>
-      <Modal.Header closeButton>
-        <Modal.Title id="ProposalFormContactModal-title">
-          <FormattedMessage id="send-message-to" values={{ messageTo: authorName }} />
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Field
-          label={<FormattedMessage id="your-name" />}
-          id="ProposalFormContactModal-senderName"
-          name="senderName"
-          type="text"
-          component={component}
-        />
-        <Field
-          label={<FormattedMessage id="your-email-address" />}
-          id="ProposalFormContactModal-replyEmail"
-          name="replyEmail"
-          type="email"
-          component={component}
-        />
-        <Field
-          label={<FormattedMessage id="contact.your-message" />}
-          id="ProposalFormContactModal-message"
-          name="message"
-          type="textarea"
-          rows={4}
-          component={component}
-        />
-        <Field id="captcha" component={component} name="captcha" type="captcha" />
-      </Modal.Body>
-      <Modal.Footer>
-        <CloseButton
-          onClose={() => {
-            onClose();
-            reset();
-          }}
-        />
-        <SubmitButton
-          id="ProposalFormContactModal-submit"
-          label="global.validate"
-          isSubmitting={submitting}
-          disabled={invalid || submitting || pristine}
-          onSubmit={onSubmit}
-        />
-      </Modal.Footer>
-    </form>
-  </Modal>
-);
+}: Props) => {
+  const intl = useIntl();
+
+  return (
+    <Modal
+      show={show}
+      onHide={() => {
+        onClose();
+        reset();
+      }}
+      aria-labelledby="ProposalFormContactModal-modal">
+      <form onSubmit={handleSubmit} id={formName}>
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
+          <Modal.Title id="ProposalFormContactModal-title">
+            <FormattedMessage id="send-message-to" values={{ messageTo: authorName }} />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Field
+            label={<FormattedMessage id="your-name" />}
+            id="ProposalFormContactModal-senderName"
+            name="senderName"
+            type="text"
+            component={component}
+          />
+          <Field
+            label={<FormattedMessage id="your-email-address" />}
+            id="ProposalFormContactModal-replyEmail"
+            name="replyEmail"
+            type="email"
+            component={component}
+          />
+          <Field
+            label={<FormattedMessage id="contact.your-message" />}
+            id="ProposalFormContactModal-message"
+            name="message"
+            type="textarea"
+            rows={4}
+            component={component}
+          />
+          <Field id="captcha" component={component} name="captcha" type="captcha" />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton
+            onClose={() => {
+              onClose();
+              reset();
+            }}
+          />
+          <SubmitButton
+            id="ProposalFormContactModal-submit"
+            label="global.validate"
+            isSubmitting={submitting}
+            disabled={invalid || submitting || pristine}
+            onSubmit={onSubmit}
+          />
+        </Modal.Footer>
+      </form>
+    </Modal>
+  );
+};
 
 const mapStateToProps = (state: State, { proposalId }: Props) => ({
   form: formName,

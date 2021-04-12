@@ -3,11 +3,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateModal } from './OpinionCreateModal';
-import { intlMock, $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<OpinionCreateModal />', () => {
   const defaultProps = {
-    intl: intlMock,
     show: true,
     consultation: {
       $refType,

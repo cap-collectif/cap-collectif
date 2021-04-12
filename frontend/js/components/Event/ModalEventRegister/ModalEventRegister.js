@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
+import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import RegisterForm from '~/components/Event/RegisterForm/RegisterForm';
 import type { ModalEventRegister_user } from '~relay/ModalEventRegister_user.graphql';
@@ -14,23 +15,27 @@ type Props = {|
   event: ModalEventRegister_event,
 |};
 
-const ModalEventRegister = ({ show, onClose, user, event }: Props) => (
-  <Modal
-    animation={false}
-    show={show}
-    onHide={onClose}
-    bsSize="large"
-    aria-labelledby="contained-modal-title-lg">
-    <Modal.Header closeButton />
-    <Modal.Body>
-      {!event.isViewerParticipatingAtEvent || !user ? (
-        <RegisterForm user={user} event={event} onClose={onClose} />
-      ) : (
-        <UserRegister user={user} event={event} />
-      )}
-    </Modal.Body>
-  </Modal>
-);
+const ModalEventRegister = ({ show, onClose, user, event }: Props) => {
+  const intl = useIntl();
+
+  return (
+    <Modal
+      animation={false}
+      show={show}
+      onHide={onClose}
+      bsSize="large"
+      aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })} />
+      <Modal.Body>
+        {!event.isViewerParticipatingAtEvent || !user ? (
+          <RegisterForm user={user} event={event} onClose={onClose} />
+        ) : (
+          <UserRegister user={user} event={event} />
+        )}
+      </Modal.Body>
+    </Modal>
+  );
+}
 
 export default createFragmentContainer(ModalEventRegister, {
   event: graphql`

@@ -13,14 +13,8 @@ describe('<CookieManagerModal />', () => {
     isLink: true,
     withListSeparator: true,
   };
-  it('should render correctly open', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<CookieManagerModal {...props} />);
-    wrapper.setState({ open: true });
-    expect(wrapper).toMatchSnapshot();
-  });
-  it('should render correctly close', () => {
-    const wrapper = shallow(<CookieManagerModal {...props} />);
-    wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });
 });

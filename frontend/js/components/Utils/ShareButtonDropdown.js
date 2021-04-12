@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useDisclosure } from '@liinkiing/react-hooks';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import type { GlobalState } from '~/types';
@@ -20,56 +21,22 @@ type Props = {|
   disabled?: boolean,
 |};
 
-type State = {|
-  show: boolean,
-|};
+const ShareButtonDropdown = ({
+  id = 'share-button',
+  title = '',
+  className = '',
+  url,
+  enabled,
+  bsSize,
+  outline,
+  grey,
+  disabled,
+}: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const intl = useIntl();
+  const getEncodedUrl = () => encodeURIComponent(url);
 
-class ShareButtonDropdown extends React.Component<Props, State> {
-  static defaultProps = {
-    id: 'share-button',
-    className: '',
-    title: '',
-  };
-
-  state = {
-    show: false,
-  };
-
-  getEncodedUrl = () => {
-    const { url } = this.props;
-    return encodeURIComponent(url);
-  };
-
-  mail = () => {
-    const { title, url } = this.props;
-    window.open(`mailto:?subject=${title}&body=${url}`);
-  };
-
-  facebook = () => {
-    const { title } = this.props;
-    this.openSharer(
-      `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${title}`,
-      'Facebook',
-    );
-  };
-
-  twitter = () => {
-    const { title } = this.props;
-    this.openSharer(
-      `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${title}`,
-      'Twitter',
-    );
-  };
-
-  linkedin = () => {
-    const { title } = this.props;
-    this.openSharer(
-      `https://www.linkedin.com/shareArticle?mini=true&url=${this.getEncodedUrl()}&text=${title}`,
-      'Linkedin',
-    );
-  };
-
-  openSharer = (href: string, name: string) => {
+  const openSharer = (href: string, name: string) => {
     const height = 500;
     const width = 700;
     const top = window.screen.height / 2 - height / 2;
@@ -81,28 +48,33 @@ class ShareButtonDropdown extends React.Component<Props, State> {
     );
   };
 
-  showModal = () => {
-    this.setState({
-      show: true,
-    });
+  const mail = () => {
+    window.open(`mailto:?subject=${title}&body=${url}`);
   };
 
-  hideModal = () => {
-    this.setState({
-      show: false,
-    });
+  const facebook = () => {
+    openSharer(`http://www.facebook.com/sharer.php?u=${getEncodedUrl()}&t=${title}`, 'Facebook');
   };
 
-  renderModal = () => {
-    const { title, url } = this.props;
-    const { show } = this.state;
+  const twitter = () => {
+    openSharer(`https://twitter.com/share?url=${getEncodedUrl()}&text=${title}`, 'Twitter');
+  };
+
+  const linkedin = () => {
+    openSharer(
+      `https://www.linkedin.com/shareArticle?mini=true&url=${getEncodedUrl()}&text=${title}`,
+      'Linkedin',
+    );
+  };
+
+  const renderModal = () => {
     return (
       <Modal
-        show={show}
-        onHide={this.hideModal}
+        show={isOpen}
+        onHide={onClose}
         animation={false}
         dialogClassName="modal--custom modal--share-link">
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
           <Modal.Title>
             <FormattedMessage id="share.link" />
           </Modal.Title>
@@ -117,29 +89,23 @@ class ShareButtonDropdown extends React.Component<Props, State> {
     );
   };
 
-  render() {
-    const { enabled, id, className, bsSize, outline, grey, disabled } = this.props;
-    if (!enabled) {
-      return null;
-    }
-    return (
-      <ShareButton
-        id={id}
-        bsSize={bsSize}
-        className={className}
-        outline={outline}
-        grey={grey}
-        disabled={disabled}>
-        <ShareButtonAction action="mail" onSelect={this.mail} />
-        <ShareButtonAction action="facebook" onSelect={this.facebook} />
-        <ShareButtonAction action="twitter" onSelect={this.twitter} />
-        <ShareButtonAction action="linkedin" onSelect={this.linkedin} />
-        <ShareButtonAction action="link" onSelect={this.showModal} />
-        {this.renderModal()}
-      </ShareButton>
-    );
-  }
-}
+  return enabled ? (
+    <ShareButton
+      id={id}
+      bsSize={bsSize}
+      className={className}
+      outline={outline}
+      grey={grey}
+      disabled={disabled}>
+      <ShareButtonAction action="mail" onSelect={mail} />
+      <ShareButtonAction action="facebook" onSelect={facebook} />
+      <ShareButtonAction action="twitter" onSelect={twitter} />
+      <ShareButtonAction action="linkedin" onSelect={linkedin} />
+      <ShareButtonAction action="link" onSelect={onOpen} />
+      {renderModal()}
+    </ShareButton>
+  ) : null;
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
