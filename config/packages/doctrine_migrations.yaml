@@ -1,13 +1,24 @@
+#    https://github.com/doctrine/DoctrineMigrationsBundle/blob/3.0.x/UPGRADE.md
 doctrine_migrations:
-    dir_name: '%kernel.project_dir%/src/DoctrineMigrations'
-    namespace: Application\Migrations
-    table_name: 'migration_versions'
-    column_name: 'version'
-    column_length: 14
-    executed_at_column_name: 'executed_at'
-    name: 'Application Migrations'
-    # available in version >= 1.2. Possible values: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+    migrations_paths:
+        'Application\Migrations': '%kernel.project_dir%/src/DoctrineMigrations'
+
+    connection: default
+
+    storage:
+        table_storage:
+            table_name: 'migration_versions'
+            version_column_name: 'version'
+            version_column_length: 191
+            executed_at_column_name: 'executed_at'
+
     organize_migrations: false
-    # available in version >= 1.3. Path to your custom migrations template
+
     custom_template: ~
+
     all_or_nothing: false
+
+    check_database_platform: true
+
+    services:
+        'Doctrine\Migrations\Version\MigrationFactory': 'Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator'

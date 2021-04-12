@@ -250,4 +250,26 @@ class OpinionTypeAdmin extends AbstractAdmin
 
         return $qb->getQuery();
     }
+
+    public function create($object)
+    {
+        $this->prePersist($object);
+        foreach ($this->getExtensions() as $extension) {
+            $extension->prePersist($this, $object);
+        }
+        $result = $this->getModelManager()->create($object);
+        // BC compatibility
+        if (null !== $result) {
+            $object = $result;
+        }
+
+        $this->postPersist($object);
+        foreach ($this->getExtensions() as $extension) {
+            $extension->postPersist($this, $object);
+        }
+
+        $this->createObjectSecurity($object);
+
+        return $object;
+    }
 }

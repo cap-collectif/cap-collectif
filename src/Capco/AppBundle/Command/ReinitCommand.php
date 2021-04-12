@@ -297,6 +297,7 @@ class ReinitCommand extends Command
         $this->runCommands(
             [
                 'doctrine:database:create' => [],
+                'doctrine:migration:sync-metadata-storage' => [],
             ],
             $output
         );

@@ -101,6 +101,7 @@ else
     curl -XDELETE http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200/_all > /dev/null 2>&1
     echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."
     gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
+    gosu capco php bin/console doctrine:migrations:sync-metadata-storage --env=prod --no-interaction --quiet
     chmod -R 777 var/ && chown -R capco:capco var/
     gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction --quiet
     chmod -R 777 var/ && chown -R capco:capco var/

@@ -26,13 +26,11 @@ class Version20170105143100 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $query = $this->connection->executeQuery(
+        $this->connection->executeQuery(
             '
             DELETE s FROM selection s LEFT JOIN proposal p ON p.id = s.proposal_id WHERE p.deletedAt IS NOT NULL
         '
         );
-
-        $query->execute();
     }
 
     public function down(Schema $schema): void

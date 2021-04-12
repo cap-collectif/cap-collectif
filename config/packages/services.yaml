@@ -294,3 +294,13 @@ services:
 
     Liuggio\ExcelBundle\Factory:
         public: true
+
+    Doctrine\Migrations\Version\DbalMigrationFactory: ~
+
+    Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator:
+        decorates: Doctrine\Migrations\Version\DbalMigrationFactory
+        arguments:
+            [
+                '@Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator.inner',
+                '@service_container',
+            ]

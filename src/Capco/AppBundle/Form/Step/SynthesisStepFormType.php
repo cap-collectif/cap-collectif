@@ -16,6 +16,7 @@ class SynthesisStepFormType extends AbstractStepFormType
         $builder->add('synthesis', RelayNodeType::class, [
             'class' => Synthesis::class
         ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -27,7 +27,7 @@ class LogicJumpType extends AbstractType
                 'entry_type' => LogicJumpConditionType::class,
                 'delete_empty' => static function (?AbstractLogicJumpCondition $condition = null) {
                     return null === $condition || null === $condition->getOperator();
-                }
+                },
             ]);
     }
 

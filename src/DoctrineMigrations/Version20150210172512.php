@@ -109,7 +109,8 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
                 'position' => 2,
                 'type' => $parameterTypes['javascript'],
                 'created_at' => $date,
-                'updated_at' => $date
+                'updated_at' => $date,
+                'is_enabled' => true
             ]);
         }
     }

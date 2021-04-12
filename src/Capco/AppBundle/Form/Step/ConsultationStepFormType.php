@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form\Step;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Form\Type\RelayNodeType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -19,7 +20,7 @@ class ConsultationStepFormType extends AbstractStepFormType
             'by_reference' => false,
             'multiple' => true,
             'class' => Consultation::class,
-            'choice_label' => 'id'
+            'choice_label' => 'id',
         ]);
         $builder->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event) {
             $normalizedConsultations = $event
@@ -50,7 +51,7 @@ class ConsultationStepFormType extends AbstractStepFormType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => ConsultationStep::class
+            'data_class' => ConsultationStep::class,
         ]);
     }
 }

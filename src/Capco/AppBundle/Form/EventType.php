@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,16 +42,13 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',
             ])
-
             ->add('enabled', CheckboxType::class)
-
             ->add('guestListEnabled', CheckboxType::class)
             ->add('link', UrlType::class)
             ->add('media', EntityType::class, [
                 'class' => Media::class,
             ])
             ->add('metaDescription', TextType::class)
-
             ->add('commentable')
             ->add('link')
             ->add('addressJson', TextType::class)

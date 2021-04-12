@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Valid;
