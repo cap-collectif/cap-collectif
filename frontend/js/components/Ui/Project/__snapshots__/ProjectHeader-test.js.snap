@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeader /> should render correctly 1`] = `
+<AppBox
+  display="flex"
+  flexDirection="column"
+  maxWidth="100%"
+>
+  <Cover>
+    <Content>
+      <Authors>
+        <Avatar
+          name="Mikasa Estucasa"
+          src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
+        />
+        <Avatar
+          name="Dan Abramov"
+          src="https://bit.ly/dan-abramov"
+        />
+        <Avatar
+          name="John Mark"
+        />
+        <Avatar
+          name="Dan Abramov"
+          src="https://bit.ly/dan-abramov"
+        />
+        <Avatar
+          name="Dan Abramov"
+          src="https://bit.ly/dan-abramov"
+        />
+        <Avatar
+          name="Dan Abramov"
+          src="https://bit.ly/dan-abramov"
+        />
+        <Avatar
+          name="Dan Abramov"
+          src="https://bit.ly/dan-abramov"
+        />
+        <Avatar
+          name="Dan Abramov"
+          src="https://bit.ly/dan-abramov"
+        />
+      </Authors>
+      <Title>
+        Projet de loi pour une République numérique
+      </Title>
+      <Blocks>
+        <Block
+          content={8488}
+          title="Contributions"
+        />
+        <Block
+          content={136}
+          title="Jours restants"
+        />
+        <Block
+          content={147529}
+          title="Votes"
+        />
+        <Block
+          content={21472}
+          title="Participants"
+        />
+      </Blocks>
+      <Info>
+        <Location
+          content="Nantes"
+        />
+        <Location
+          content="Bellevue Chantenay Sainte-Anne"
+        />
+        <Theme
+          content="Projet de loi, consentement, seuil d’âge, mineur"
+        />
+      </Info>
+      <Socials>
+        <Social
+          href="#"
+          name="FACEBOOK"
+        />
+        <Social
+          href="#"
+          name="TWITTER"
+        />
+        <Social
+          href="#"
+          name="LINK"
+        />
+      </Socials>
+    </Content>
+    <CoverImage
+      alt="Cover Image"
+      src="/cover.jpg"
+    />
+  </Cover>
+  <Frise>
+    <Steps
+      modalTitle="Etapes de Consultation"
+    >
+      <Step
+        content="terminé"
+        state="FINISHED"
+        title="Dépots de projets"
+        tooltipLabel="Terminé"
+      />
+      <Step
+        content="30 jours restants"
+        state="FINISHED"
+        title="Le vote des projets"
+        tooltipLabel="Test tooltip"
+      />
+      <Step
+        content="30 jours restants"
+        state="FINISHED"
+        title="Le vote des projets"
+        tooltipLabel="Test tooltip"
+      />
+      <Step
+        content="30 jours restants"
+        state="ACTIVE"
+        title="Consultation"
+        tooltipLabel="30 jours restants"
+      >
+        <Progress
+          progress={50}
+        />
+      </Step>
+      <Step
+        content="30 jours restants"
+        state="WAITING"
+        title="Le vote des projets"
+        tooltipLabel="Test tooltip"
+      />
+      <Step
+        content="30 jours restants"
+        state="WAITING"
+        title="Le vote des projets"
+        tooltipLabel="Test tooltip"
+      />
+      <Step
+        content="30 jours restants"
+        state="WAITING"
+        title="Le vote des projets"
+        tooltipLabel="Test tooltip"
+      />
+    </Steps>
+  </Frise>
+</AppBox>
+`;

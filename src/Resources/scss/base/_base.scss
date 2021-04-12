@@ -239,7 +239,9 @@ svg.avatar-group {
 }
 
 .storybook-container {
-    margin: 0 35px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 
     code {
         background-color: black;

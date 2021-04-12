@@ -42,6 +42,11 @@ declare export const ICON_NAME = {
     FOLDER_O: 'FOLDER_O',
     BOOK_STAR_O: 'BOOK_STAR_O',
     PREVIEW: 'PREVIEW',
+    FACEBOOK: 'FACEBOOK',
+    ENVELOPE: 'ENVELOPE',
+    LINK: 'LINK',
+    LINKEDIN: 'LINKEDIN',
+    TWITTER: 'TWITTER',
 };
 
 declare export const ICON_SIZE = {

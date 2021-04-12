@@ -37,6 +37,7 @@ const colors: Colors = {
     '900': '#272B30',
   },
   'neutral-gray': {
+    '50': '#FAFAFA',
     '100': '#F8F8F8',
     '150': '#EBEBEB',
     '200': '#DEDEDE',
