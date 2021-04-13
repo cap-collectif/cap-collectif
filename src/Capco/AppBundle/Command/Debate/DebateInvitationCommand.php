@@ -83,12 +83,18 @@ class DebateInvitationCommand extends Command
 
         $counter = 0;
         foreach ($users as $user) {
-            $voteToken = $this->getVoteToken($user, $debate);
-            if ($isReminder || null === $voteToken) {
-                $this->sendInvitation($user, $debate, $voteToken, $isReminder, $input->getOption(self::OPT_TEST_TOKEN));
-                ++$counter;
-                if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
-                    $this->em->flush();
+            if ($user->getEmail()) {
+                try {
+                    $voteToken = $this->getVoteToken($user, $debate);
+                    if (null === $voteToken || ($isReminder && $voteToken->isValid())) {
+                        $this->sendInvitation($user, $debate, $voteToken, $isReminder, $input->getOption(self::OPT_TEST_TOKEN));
+                        ++$counter;
+                        if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
+                            $this->em->flush();
+                        }
+                    }
+                } catch (\Exception $exception) {
+                    $output->writeln("<error>DebateInvitationCommand error : ".$user->getEmail()." => ".$exception->getMessage()."</error>");
                 }
             }
             $progressBar->advance();
@@ -127,7 +133,7 @@ class DebateInvitationCommand extends Command
 
     private function getVoteToken(User $user, Debate $debate): ?DebateVoteToken
     {
-        return $this->voteTokenRepository->getUserDebateToken($user, $debate);
+        return $this->voteTokenRepository->getUnusedUserDebateToken($user, $debate);
     }
 
     private function getDebate(InputInterface $input): Debate

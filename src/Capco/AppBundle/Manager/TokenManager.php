@@ -12,26 +12,22 @@ use Psr\Log\LoggerInterface;
 class TokenManager
 {
     private EntityManagerInterface $em;
-    private DebateVoteTokenRepository $voteTokenRepository;
     private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,
-        DebateVoteTokenRepository $voteTokenRepository,
         LoggerInterface $logger
     ) {
         $this->em = $em;
-        $this->voteTokenRepository = $voteTokenRepository;
         $this->logger = $logger;
     }
 
-    public function consumeVoteToken(string $token, string $value): DebateVote
+    public function consumeVoteToken(DebateVoteToken $voteToken, string $value): DebateVote
     {
         $this->checkValue($value);
-        $voteToken = $this->getVoteToken($token);
         $this->checkUserHasNotVoted($voteToken);
         $debateVote = $this->createDebateVote($voteToken, $value);
-        $this->em->remove($voteToken);
+        $voteToken->setConsumptionDate(new \DateTime());
         $this->em->flush();
 
         return $debateVote;
@@ -58,7 +54,7 @@ class TokenManager
         if (!ForOrAgainstType::isValid($value)) {
             $this->logger->info("invalid value ${value} used to vote on debate");
 
-            throw new \Exception("invalid value ${value}");
+            throw new \RuntimeException("invalid value ${value}");
         }
     }
 
@@ -75,20 +71,8 @@ class TokenManager
                             ->getTitle()
                 );
 
-                throw new \Exception('global.already_voted');
+                throw new \RuntimeException('global.already_voted');
             }
         }
-    }
-
-    private function getVoteToken(string $token): DebateVoteToken
-    {
-        $voteToken = $this->voteTokenRepository->find($token);
-        if (null === $voteToken) {
-            $this->logger->info("invalid token ${token} used to vote on debate");
-
-            throw new \Exception('invalid-token');
-        }
-
-        return $voteToken;
     }
 }

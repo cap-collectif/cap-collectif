@@ -15,11 +15,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class DebateVoteTokenRepository extends EntityRepository
 {
-    public function getUserDebateToken(User $user, Debate $debate): ?DebateVoteToken
+    public function getUnusedUserDebateToken(User $user, Debate $debate): ?DebateVoteToken
     {
         return $this->findOneBy([
             'user' => $user,
             'debate' => $debate,
+            'consumptionDate' => null
         ]);
     }
 }

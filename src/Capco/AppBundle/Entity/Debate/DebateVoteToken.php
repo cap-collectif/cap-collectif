@@ -41,6 +41,11 @@ class DebateVoteToken
      */
     private Debate $debate;
 
+    /**
+     * @ORM\Column(type="datetime", name="consumption_date", nullable=true)
+     */
+    private ?\DateTime $consumptionDate = null;
+
     public function __construct(User $user, Debate $debate, ?string $token)
     {
         $this->user = $user;
@@ -61,6 +66,22 @@ class DebateVoteToken
     public function getToken(): string
     {
         return $this->token;
+    }
+
+    public function isValid(): bool
+    {
+        return (null === $this->getConsumptionDate());
+    }
+
+    public function getConsumptionDate(): ?\DateTime
+    {
+        return $this->consumptionDate;
+    }
+
+    public function setConsumptionDate(?\DateTime $consumptionDate): DebateVoteToken
+    {
+        $this->consumptionDate = $consumptionDate;
+        return $this;
     }
 
     private static function generateToken(): string
