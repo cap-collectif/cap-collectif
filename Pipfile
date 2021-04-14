@@ -10,6 +10,3 @@ pyaml = ">=4.2b1"
 Fabric = "2.6"
 paramiko = "*"
 pycodestyle = "*"
-
-[requires]
-python_version = "3.6"

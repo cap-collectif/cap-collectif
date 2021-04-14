@@ -27,6 +27,12 @@ def clear_fixtures(ctx):
 
 
 @task
+def compile_graphql(ctx):
+    environments.local()
+    qa.compile_graphql()
+
+
+@task
 def graphql_schemas(ctx, checkSame=False):
     environments.local()
     qa.graphql_schemas(checkSame)

@@ -33,6 +33,12 @@ def phpspec(desc='false'):
             'application', Config.www_app)
 
 
+def compile_graphql():
+    "Compile GraphQL PHP code"
+    run('php -d memory_limit=-1 bin/console graphql:compile --no-debug')
+    run('composer dump-autoload')
+
+
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"
     for schema in ['public', 'preview', 'internal']:
