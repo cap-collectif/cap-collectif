@@ -1,7 +1,8 @@
-from fabric.api import env
-from fabric.colors import cyan
-from fabric.operations import local, settings
-from task import task
+from fabric import Config, Connection
+from infrastructure.deploylib.environments import command
+from invoke import run
+
+import os
 
 capcobot = {
     'user': 'capco',
@@ -9,36 +10,37 @@ capcobot = {
     'pass': 'elephpant-can-fly',
 }
 
+color_cyan = '\033[96m'
+color_white = '\033[0m'
+
 
 # Usage:
 #
-# Runn tests: fab local.qa.phpspec
+# Run tests: fab local.qa.phpspec
 #
 # Create a new spec from existing class :
 # fab local.qa.phpspec:desc=Capco/AppBundle/GraphQL/Resolver/Questionnaire/QuestionnaireExportResultsUrlResolver
 #
-@task(environments=['local'])
-def phpspec(desc=False):
+def phpspec(desc='false'):
     "Run PHP Unit Tests"
-    if desc:
-        local(
+    if desc != 'false':
+        command(
             'php -d pcov.enabled=1 -d pcov.directory=. -d pcov.exclude="~vendor~" -d memory_limit=-1 bin/phpspec describe ' + desc,
-            'application', env.www_app)
+            'application', Config.www_app)
     else:
-        local(
+        command(
             'php -d pcov.enabled=1 -d pcov.directory=. -d pcov.exclude="~vendor~" -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage',
-            'application', env.www_app)
+            'application', Config.www_app)
 
 
-@task(environments=['local', 'ci'])
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"
     for schema in ['public', 'preview', 'internal']:
-        env.service_command(
+        command(
             'bin/console graphql:dump-schema --env dev --schema ' + schema + ' --no-debug --file schema.' + schema + '.graphql --format graphql',
-            'application', env.www_app)
+            'application', Config.www_app)
     if checkSame:
-        local(
+        command(
             'if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',
             capture=False, shell='/bin/bash')
 
@@ -51,10 +53,9 @@ def graphql_schemas(checkSame=False):
 # Generate only snapshots, you are working on (@dev tag) :
 # fab local.qa.snapshots:tags=dev
 #
-@task(environments=['local'])
 def snapshots(tags='false'):
     "Generate all snapshots"
-    env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
+    command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', Config.www_app)
     # You can run these commands individually.
     export_commands = [
         'capco:export:users --updateSnapshot --delimiter "," --env test',
@@ -78,76 +79,69 @@ def snapshots(tags='false'):
         'xls',
     ]
 
-    print
-    cyan('/!\ Your database must be up to date, to generate accurate snapshots !')
+    print(color_cyan + '/!\ Your database must be up to date, to generate accurate snapshots !' + color_white)
 
     if tags == 'false':
-        print
-        cyan('Deleting email snapshots...')
-        local('rm -rf __snapshots__/emails/*')
+        print(color_cyan + 'Deleting email snapshots...' + color_white)
+        os.system('rm -rf __snapshots__/emails/*')
     for suite in ['api', 'e2e', 'commands']:
-        env.service_command('UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' +
-                            ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'], 'application',
-                            env.www_app)
-    print
-    cyan('Successfully generated emails snapshots !')
+        command(
+            'UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'],
+            'application',
+            Config.www_app)
+    print(color_cyan + 'Successfully generated emails snapshots !' + color_white)
 
     if tags == 'false':
-        print
-        cyan('Running user RGPD archive commands...')
-        for command in user_archives_commands:
-            env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
-        print
-        cyan('Successfully generated user RGPD archive snapshots !')
+        print(color_cyan + 'Running user RGPD archive commands...' + color_white)
+        for user_archives_command in user_archives_commands:
+            command('bin/console ' + user_archives_command + ' --env test --no-debug', 'application', Config.www_app)
+        print(color_cyan + 'Successfully generated user RGPD archive snapshots !' + color_white)
 
-    env.service_command('bin/console capco:toggle:enable export --env test --no-debug', 'application', env.www_app)
+    command('bin/console capco:toggle:enable export --env test --no-debug', 'application', Config.www_app)
 
     if tags == 'false':
-        print
-        cyan('Deleting exports snapshots...')
+        print(color_cyan + 'Deleting exports snapshots...' + color_white)
         for extension in extensions:
-            env.service_command('rm -rf __snapshots__/exports/*.' + extension, 'application', env.www_app, 'root')
+            command('rm -rf __snapshots__/exports/*.' + extension, 'application', Config.www_app, 'root')
 
-        print
-        cyan('Running export commands...')
-        for command in export_commands:
-            env.service_command('bin/console ' + command + ' --quiet --no-debug', 'application', env.www_app)
+        print(color_cyan + 'Running export commands...' + color_white)
+        for export_command in export_commands:
+            command('bin/console ' + export_command + ' --quiet --no-debug', 'application', Config.www_app)
 
-    print
-    cyan('Successfully generated snapshots !')
+    print(color_cyan + 'Successfully generated snapshots !' + color_white)
 
 
-@task(environments=['local', 'ci'])
 def restore_db():
-    env.service_command('mysql -h database -u root symfony < var/db.backup', 'application', env.www_app, "capco", False)
+    command('mysql -h database -u root symfony < var/db.backup', 'application', Config.www_app, "capco", False)
 
 
-@task(environments=['local', 'ci'])
 def save_db():
-    env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app, "capco", False)
+    command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', Config.www_app, "capco", False)
 
-@task(environments=['local', 'ci'])
+
 def purge_rabbitmq():
-    env.service_command('rabbitmqadmin purge queue name=elasticsearch_indexation --vhost="capco"', 'application', env.www_app, "capco", False)
+    command('rabbitmqadmin purge queue name=elasticsearch_indexation --vhost="capco"', 'application', Config.www_app, "capco", False)
 
-@task(environments=['local', 'ci'])
+
 def save_es_snapshot():
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
+    instance = Connection(Connection.host)
+    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
+    instance.local('docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
+    instance.local('docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
 
-@task(environments=['local', 'ci'])
+
 def restore_es_snapshot():
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false}"')
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
-    local('eval "$(docker-machine env dinghy)" && docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
+    instance = Connection(Connection.host)
+    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
+    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false}"')
+    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
+    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
 
-@task(environments=['local', 'ci'])
-def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):
+
+def behat(fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
     "Run Gherkin Tests"
-    env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
-    if profile:
+    command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', Config.www_app)
+    if profile != 'false':
         profiles = [profile]
     else:
         profiles = ['api', 'commands', 'e2e']
@@ -155,65 +149,43 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
     php_option = ''
     env_option = '--format=junit --out=./coverage --format=pretty --out=std'
 
-
     for job in profiles:
-        command = ('php ' + php_option + ' -d memory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[
+        commandToExecute = ('php ' + php_option + ' -d memory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[
             timer != 'false'] + ' -p ' + job + ('', '  --suite=' + suite)[suite != 'false'] + ('', '  --tags=' + tags)[
-                       tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
-        env.service_command(command, 'application', env.www_app, 'root')
+            tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
+        command(commandToExecute, 'application', Config.www_app, 'root')
 
 
-@task(environments=['local'])
-def view(firefox=False):
-    if env.dinghy:
-        local('echo "secret" | open vnc://`docker-machine ip dinghy`')
+def view(firefox='false'):
+    if Config.dinghy:
+        run('echo "secret" | open vnc://`docker-machine ip dinghy`')
     else:
-        if firefox:
-            local('echo "secret" | nohup vncviewer localhost:5901 &')
+        if firefox != 'false':
+            run('echo "secret" | nohup vncviewer localhost:5901 &')
         else:
-            local('echo "secret" | nohup vncviewer localhost:5900 &')
+            run('echo "secret" | nohup vncviewer localhost:5900 &')
 
 
-@task(environments=['local'])
 def clear_fixtures():
-    local(
+    run(
         'docker ps -a | awk \'{ print $1,$2 }\' | grep capco/fixtures | awk \'{print $1 }\' | xargs -I {} docker rm -f {}')
 
 
-@task(environments=['local'])
 def kill_database_container():
-    with settings(warn_only=True):
-        local('docker ps -a | grep databasefixtures | awk \'{print $1}\' | xargs -I {} docker kill {}')
+    run('docker ps -a | grep databasefixtures | awk \'{print $1}\' | xargs -I {} docker kill {}', warn=True)
 
 
-@task(environments=['local'])
-def save_fixtures_image(tag='latest', publish='false'):
-    "Publish a new fixtures image"
-    env.service_command('php bin/console capco:reinit --force --no-toggles', 'application', env.www_app)
-    env.service_command(
-        'mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application',
-        env.www_app, 'root')
-    local('docker build -t capco/fixtures:latest infrastructure/services/databasefixtures')
-    if publish != 'false':
-        local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
-        local('docker push capco/fixtures')
-
-
-@task(environments=['local'])
 def blackfire_curl(url):
     "Blackfire curl"
-    if env.dinghy:
-        local('eval "$(docker-machine env dinghy)" && docker exec -i capco_application_1 blackfire curl '
-        + url+ '--insecure --env="Capco.Dev"')
+    if Config.dinghy:
+        run('eval "$(docker-machine env dinghy)" && docker exec -i capco_application_1 blackfire curl ' + url + '--insecure --env="Capco.Dev"')
     else:
-        local('eval docker exec -u root -i capco_application_1 blackfire curl ' + url+ '--insecure')
+        run('eval docker exec -u root -i capco_application_1 blackfire curl ' + url + '--insecure')
 
 
-@task(environments=['local'])
 def blackfire_run(cli):
     "Blackfire run"
-    if env.dinghy:
-        local('eval "$(docker-machine env dinghy)" && docker exec -u root -i capco_application_1 blackfire run ' + cli +
-         ' --env="Cap Collectif / Capco.Dev"')
+    if Config.dinghy:
+        run('eval "$(docker-machine env dinghy)" && docker exec -u root -i capco_application_1 blackfire run ' + cli + ' --env="Cap Collectif / Capco.Dev"')
     else:
-        local('eval docker exec -u root -i capco_application_1 blackfire run ' + cli)
+        run('eval docker exec -u root -i capco_application_1 blackfire run ' + cli)

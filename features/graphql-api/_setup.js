@@ -7,13 +7,13 @@ const env = process.env.CI ? 'ci' : 'local';
 afterAll(async () => {
   console.log('Purging RabbitMQ…');
   console.time('purge_mq');
-  await exec('fab ' + env + '.qa.purge_rabbitmq');
+  await exec('fab ' + env + '.qa.purge-rabbitmq');
   console.log('Successfully purged RabbitMQ !');
   console.timeEnd('purge_mq');
 
   console.log('Restoring database…');
   console.time('restore_db');
-  const { stderrDb } = await exec('fab ' + env + '.qa.restore_db');
+  const { stderrDb } = await exec('fab ' + env + '.qa.restore-db');
 
   if (stderrDb) {
     console.error(`error: ${stderrDb}`);
@@ -23,7 +23,7 @@ afterAll(async () => {
 
   console.log('Restoring ElasticSearch snapshot…');
   console.time('restore_es');
-  const { stderrEs } = await exec('fab ' + env + '.qa.restore_es_snapshot');
+  const { stderrEs } = await exec('fab ' + env + '.qa.restore-es-snapshot');
   if (stderrEs) {
     console.error(`error: ${stderrEs}`);
   }

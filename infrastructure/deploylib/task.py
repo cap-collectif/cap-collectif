@@ -4,11 +4,13 @@ import environments
 
 from fabric import tasks
 from fabric import state
-from fabric.task_utils import _Dict
 from functools import wraps
-from fabric.api import env
+from fabric import Config, Connection
 
-state.env.new_style_tasks = True
+
+# from https://github.com/fabric/fabric/blob/1.14/fabric/task_utils.py, but i dont know why
+class _Dict(dict):
+    pass
 
 
 def task(*args, **kwargs):
@@ -39,7 +41,7 @@ def wrapenv(envconfig, function, task_name):
     @wraps(function)
     def envfunc(*args, **kwargs):
         envconfig()
-        env.current_task_name = task_name
+        Config.current_task_name = task_name
         function(*args, **kwargs)
 
     return envfunc

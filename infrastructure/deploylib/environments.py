@@ -1,8 +1,8 @@
-from fabric.api import env, cd
 from functools import wraps
-from fabric.operations import local as lrun, run, settings
 from sys import platform as _platform
 from yaml import load, dump
+from fabric import Config, Connection
+from invoke import run
 
 import os
 
@@ -12,7 +12,7 @@ environments = {}
 def environnment(config):
     @wraps(config)
     def inner():
-        env.environment = config.__name__
+        Config.environment = config.__name__
         return config()
     environments[config.__name__] = inner
     return inner
@@ -20,12 +20,11 @@ def environnment(config):
 
 @environnment
 def ci():
-    env.host_string = 'docker@localhost'
-    env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
-    env.run = lrun
-    env.local = True
-    env.directory = env.root_dir
-    env.ci = True
+    Connection.host = 'docker@localhost'
+    Config.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
+    Config.local = True
+    Config.directory = Config.root_dir
+    Config.ci = True
 
 
 @environnment
@@ -33,86 +32,84 @@ def local():
     if _platform == "linux" or _platform == "linux2":
         locallinux()
     elif _platform == "darwin":
-        with settings(warn_only=True):
-            result = lrun('which dinghy')
-            if result.succeeded:
-                print "Using dinghy"
-                localmac_dinghy()
-            else:
-                print "Dinghy not found !"
-    env.host_string = 'docker@localhost'
-    env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
-    env.shell = "/bin/sh -c"
-    env.directory = env.root_dir
+        result = run('which dinghy', warn=True)
+        if result.ok:
+            print("Using dinghy")
+            localmac_dinghy()
+        else:
+            print("Dinghy not found !")
+    Connection.host = 'docker@localhost'
+    Config.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
+    Config.shell = "/bin/sh -c"
+    Config.directory = Config.root_dir
 
 
 def localmac_dinghy():
-    env.run = lrun
-    env.local = True
-    env.host_string = 'docker@192.168.99.100'
-    env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
-    env.dinghy = True
-    env.local_ip = lrun('dinghy ip', capture=True).stdout.decode('utf-8')
+    Config.local = True
+    Connection.host = 'docker@192.168.99.100'
+    Config.dinghy = True
+    Config.local_ip = run('dinghy ip', hide=True, warn=True).stdout
 
 
 def locallinux():
-    env.run = lrun
-    env.local = True
-    env.local_ip = '127.0.0.1'
+    Config.local = True
+    Config.local_ip = '127.0.0.1'
 
 
 def ssh_into(service, user='capco'):
-    if env.docker_machine:
-        env.run('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, env.project_name, service))
-    elif env.dinghy:
-        env.run('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, env.project_name, service))
-    elif env.lxc:
-        print "Disabled in lxc environment."
+    if Config.docker_machine:
+        os.system('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+    elif Config.dinghy:
+        os.system('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+    elif Config.lxc:
+        print("Disabled in lxc environment.")
     else:
-        env.run('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, env.project_name, service))
+        os.system('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
 
 
-def command(command_name, service, directory=".", user="capco", interactive=True):
-    if env.lxc:
-        env.run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
-    elif env.docker_machine:
-        env.run('eval "$(docker-machine env capco)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], env.project_name, service, directory, user, command_name))
-    elif env.dinghy:
-        env.run('eval "$(docker-machine env dinghy)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], env.project_name, service, directory, user, command_name))
+def command(command_name, service, directory=".", user="capco", interactive=False):
+    if Config.lxc:
+        os.system('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (Config.project_name, service, directory, user, command_name))
+    elif Config.docker_machine:
+        os.system('eval "$(docker-machine env capco)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
+    elif Config.dinghy:
+        os.system('eval "$(docker-machine env dinghy)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
     else:
-        env.run('docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], env.project_name, service, directory, user, command_name))
+        os.system('docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
 
 
 def compose_run(command_name, service, directory=".", user="root", no_deps=False):
     if no_deps:
-        env.compose('run --no-deps -u %s %s /bin/bash -c "cd %s && /bin/bash -c \\"%s\\""' % (user, service, directory, command_name))
+        compose('run --no-deps -u %s %s /bin/bash -c "cd %s && /bin/bash -c \\"%s\\""' % (user, service, directory, command_name))
     else:
-        env.compose('run -u %s %s /bin/bash -c "cd %s && %s"' % (user, service, directory, command_name))
+        compose('run -u %s %s /bin/bash -c "cd %s && %s"' % (user, service, directory, command_name))
 
 
+# TODO replace os.system by subprocess.run in python3
 def compose(command_name):
     merge_infra_files()
-    with cd(env.directory):
-        if env.docker_machine:
-            env.run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
-        elif env.dinghy:
-            env.run('eval "$(docker-machine env dinghy)" && docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
-        else:
-            env.run('docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
+    os.chdir(Config.directory)
+    if Config.docker_machine:
+        os.system('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+    elif Config.dinghy:
+        os.system('eval "$(docker-machine env dinghy)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+    else:
+        os.system('docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
 
 
 def pull(revision, directory, remote='origin'):
-    with cd(directory):
-        env.run('git remote update')
-        env.run('git checkout %s/%s' % (remote, revision))
-        env.run('git rev-parse --short HEAD > VERSION')
+    with os.chdir(directory):
+        instance = Connection(Connection.host)
+        instance.local('git remote update')
+        instance.local('git checkout %s/%s' % (remote, revision))
+        instance.local('git rev-parse --short HEAD > VERSION')
 
 
 def merge_infra_files():
     output = None
 
-    for file in env.compose_files:
-        stream = open(env.root_dir + '/' + file, 'r')
+    for file in Config.compose_files:
+        stream = open(Config.root_dir + '/' + file, 'r')
 
         if output is None:
             output = load(stream)
@@ -121,17 +118,18 @@ def merge_infra_files():
 
         stream.close()
 
-    outputStream = open(env.root_dir + '/' + env.temporary_file, 'w')
+    outputStream = open(Config.root_dir + '/' + Config.temporary_file, 'w')
     dump(output, outputStream)
     outputStream.close()
 
-    if not env.local:
-        put(env.root_dir + '/' + env.temporary_file, env.directory + '/' + env.temporary_file)
+    if not Config.local:
+        c = Connection(Connection.host)
+        c.put(Config.root_dir + '/' + Config.temporary_file, Config.directory + '/' + Config.temporary_file)
 
 
 def merge(user, default):
     if isinstance(user, dict) and isinstance(default, dict):
-        for k, v in default.iteritems():
+        for k, v in default.items():
             if k not in user:
                 user[k] = v
             else:
@@ -139,21 +137,16 @@ def merge(user, default):
     return user
 
 
-env.directory = '/home/capco'
-env.docker = True
-env.service_command = command
-env.compose = compose
-env.compose_run = compose_run
-env.ci = False
-env.project_name = 'capco'
-env.www_app = '/var/www/'
-env.ssh_into = ssh_into
-env.pull = pull
-env.local = False
-env.dinghy = False
-env.docker_machine = False
-env.build_at_up = True
-env.lxc = False
-env.root_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../..')
-env.compose_files = []
-env.temporary_file = 'infrastructure/environments/current.yml'
+Config.directory = '/home/capco'
+Config.docker = True
+Config.ci = False
+Config.project_name = 'capco'
+Config.www_app = '/var/www/'
+Config.local = False
+Config.dinghy = False
+Config.docker_machine = False
+Config.build_at_up = True
+Config.lxc = False
+Config.root_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../..')
+Config.compose_files = []
+Config.temporary_file = 'infrastructure/environments/current.yml'

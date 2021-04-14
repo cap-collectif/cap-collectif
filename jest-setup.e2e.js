@@ -68,13 +68,13 @@ const authenticatedInternalRequest = (username, password, query, variables) => {
 
 global.enableFeatureFlag = async name => {
   console.log(`Enabling feature flag "${name}"...`);
-  await exec(`fab ${env}.app.toggle_enable:toggle=${name},environment=test`);
+  await exec(`fab ${env}.app.toggle-enable --toggle=${name} --environment=test`);
   console.log(`Successfully enabled "${name}"`);
 };
 
 global.disableFeatureFlag = async name => {
   console.log(`Disabling feature flag "${name}"...`);
-  await exec(`fab ${env}.app.toggle_disable:toggle=${name},environment=test`);
+  await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=test`);
   console.log(`Successfully disabled "${name}"`);
 };
 

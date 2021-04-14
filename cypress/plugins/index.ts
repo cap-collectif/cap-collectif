@@ -67,13 +67,13 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     'db:restore': async () => {
       console.log('Purging RabbitMQ…')
       console.time('purge_mq')
-      await exec(`fab ${env}.qa.purge_rabbitmq`)
+      await exec(`fab ${env}.qa.purge-rabbitmq`)
       console.log('Successfully purged RabbitMQ !')
       console.timeEnd('purge_mq')
 
       console.log('Restoring database…')
       console.time('restore_db')
-      const { stderr: stderrDb } = await exec(`fab ${env}.qa.restore_db`)
+      const { stderr: stderrDb } = await exec(`fab ${env}.qa.restore-db`)
 
       if (stderrDb) {
         console.error(`error: ${stderrDb}`)
@@ -83,7 +83,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       console.log('Restoring ElasticSearch snapshot…')
       console.time('restore_es')
-      const { stderr: stderrEs } = await exec(`fab ${env}.qa.restore_es_snapshot`)
+      const { stderr: stderrEs } = await exec(`fab ${env}.qa.restore-es-snapshot`)
       if (stderrEs) {
         console.error(`error: ${stderrEs}`)
       }
@@ -96,7 +96,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
   on('before:run', async () => {
     console.log('Saving database…')
     console.time('save_db')
-    const { stderr: stderrDb } = await exec(`fab ${env}.qa.save_db`)
+    const { stderr: stderrDb } = await exec(`fab ${env}.qa.save-db`)
 
     if (stderrDb) {
       console.error(`error: ${stderrDb}`)
@@ -106,7 +106,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
     console.log('Writing ElasticSearch snapshot…')
     console.time('save_es')
-    const { stderr: stderrEs } = await exec(`fab ${env}.qa.save_es_snapshot`)
+    const { stderr: stderrEs } = await exec(`fab ${env}.qa.save-es-snapshot`)
 
     if (stderrEs) {
       console.error(`error: ${stderrEs}`)
