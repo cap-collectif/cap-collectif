@@ -1,0 +1,14 @@
+InternalHomePageProjectsSectionAdminTranslationInput:
+    type: relay-mutation-input
+    config:
+        name: HomePageProjectsSectionAdminTranslationInput
+        fields:
+            title:
+                type: 'String!'
+                description: 'The title of the section'
+            teaser:
+                type: 'String'
+                description: 'The subtitle of the section'
+            locale:
+                type: 'String!'
+                description: 'the locale of the translation'

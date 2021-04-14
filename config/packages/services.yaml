@@ -9,6 +9,10 @@ services:
             $samlIdp: '%simplesamlphp.sp%'
             $logger: '@logger'
 
+    Capco\AppBundle\EventListener\ToggleSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
     Capco\AppBundle\EventListener\AuthenticationHandler:

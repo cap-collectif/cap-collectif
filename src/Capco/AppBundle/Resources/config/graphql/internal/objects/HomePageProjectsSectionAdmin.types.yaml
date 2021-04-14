@@ -1,0 +1,29 @@
+HomePageProjectsSectionAdmin:
+    type: object
+    config:
+        description: 'Section projects page in admin'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: HomePageProjectsSectionAdmin
+            title:
+                type: 'String!'
+                description: 'The title of the section'
+            teaser:
+                type: 'String'
+                description: 'The subtitle of the section'
+            position:
+                type: 'Int!'
+                description: 'The position of the section in the homepage'
+            displayMode:
+                type: 'HomePageProjectsSectionAdminDisplayMode!'
+                description: 'How to display the proposals'
+            nbObjects:
+                type: 'Int!'
+                description: 'Number of objects to display'
+            enabled:
+                type: 'Boolean!'
+                description: 'Whether it is published or not'
+

@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\Toggle;
 
+use Capco\AppBundle\Event\ToggleFeatureEvent;
 use Qandidate\Toggle\Context;
 use Qandidate\Toggle\ContextFactory;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleManager;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Manager
 {
@@ -174,10 +176,16 @@ class Manager
 
     protected array $knownValues = [];
 
-    public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
-    {
+    private EventDispatcherInterface $dispatcher;
+
+    public function __construct(
+        ToggleManager $toggleManager,
+        ContextFactory $contextFactory,
+        EventDispatcherInterface $dispatcher
+    ) {
         $this->toggleManager = $toggleManager;
         $this->context = $contextFactory->createContext();
+        $this->dispatcher = $dispatcher;
     }
 
     public function exists(string $name): bool
@@ -187,7 +195,9 @@ class Manager
 
     public function activate(string $name): void
     {
-        $this->toggleManager->add($this->createToggle($name, Toggle::ALWAYS_ACTIVE));
+        $toggle = $this->createToggle($name, Toggle::ALWAYS_ACTIVE);
+        $this->dispatchEvent($toggle);
+        $this->toggleManager->add($toggle);
     }
 
     public function activateAll(): void
@@ -213,6 +223,8 @@ class Manager
 
     public function deactivate(string $name): void
     {
+        $toggle = $this->createToggle($name, Toggle::INACTIVE);
+        $this->dispatchEvent($toggle);
         $this->toggleManager->add($this->createToggle($name, Toggle::INACTIVE));
     }
 
@@ -283,6 +295,12 @@ class Manager
     public function getToggleManager(): ToggleManager
     {
         return $this->toggleManager;
+    }
+
+    public function dispatchEvent(Toggle $toggle)
+    {
+        $event = new ToggleFeatureEvent($toggle);
+        $this->dispatcher->dispatch($event::NAME, $event);
     }
 
     private function createToggle(string $name, int $status, array $conditions = []): Toggle

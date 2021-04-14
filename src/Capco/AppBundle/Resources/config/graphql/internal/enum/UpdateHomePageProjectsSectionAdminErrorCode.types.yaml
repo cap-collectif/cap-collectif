@@ -1,0 +1,9 @@
+UpdateHomePageProjectsSectionAdminErrorCode:
+    type: enum
+    config:
+        name: UpdateHomePageProjectsSectionAdminErrorCode
+        description: 'Available errors for an `updateHomePageProjectsSectionAdmin` mutation.'
+        values:
+            TOO_MANY_PROJECTS:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionAdminMutation::TOO_MANY_PROJECTS")'
+                description: 'Limit of projects that can be dispayed in the homepage'

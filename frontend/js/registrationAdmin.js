@@ -38,6 +38,7 @@ import EmailingListPageApp from '~/startup/EmailingListPageApp';
 import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp';
 import EmailingMailParameterPageApp from '~/startup/EmailingMailParameterPageApp';
 import ToastsContainerApp from '~/startup/ToastsContainerApp';
+import HomePageProjectsSectionAdminApp from "~/startup/HomePageProjectsSectionAdminApp";
 
 ReactOnRails.registerStore({ appStore });
 
@@ -74,6 +75,7 @@ ReactOnRails.register({
   RedirectIoAdminPageApp,
   LanguageButtonApp,
   UserInviteAdminPageApp,
+  HomePageProjectsSectionAdminApp,
   MediaAdminPageApp,
   EmailingListPageApp,
   EmailingCampaignPageApp,

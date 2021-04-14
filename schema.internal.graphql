@@ -5407,6 +5407,54 @@ type GroupEdge {
 """A string containing HTML code."""
 scalar HTML
 
+"""Section projects page in admin"""
+type HomePageProjectsSectionAdmin {
+  """The ID of an object."""
+  id: ID!
+
+  """The title of the section"""
+  title: String!
+
+  """The subtitle of the section"""
+  teaser: String
+
+  """The position of the section in the homepage"""
+  position: Int!
+
+  """How to display the proposals"""
+  displayMode: HomePageProjectsSectionAdminDisplayMode!
+
+  """Number of objects to display"""
+  nbObjects: Int!
+
+  """Whether it is published or not"""
+  enabled: Boolean!
+}
+
+enum HomePageProjectsSectionAdminDisplayMode {
+  """
+  display the most recents projects in the projects section of the homepage
+  """
+  MOST_RECENT
+
+  """
+  allow the admin to choose which projects to display in the projects section of the homepage
+  """
+  CUSTOM
+}
+
+input HomePageProjectsSectionAdminTranslationInput {
+  """The title of the section"""
+  title: String!
+
+  """The subtitle of the section"""
+  teaser: String
+
+  """the locale of the translation"""
+  locale: String!
+  clientMutationId: String
+}
+
 """A string containing an IP address."""
 scalar IP
 
@@ -6326,6 +6374,9 @@ type Mutation {
   deleteProposalNews(input: DeleteProposalNewsInput!): DeleteProposalNewsPayload
   addDebateAnonymousVote(input: AddDebateAnonymousVoteInput!): AddDebateAnonymousVotePayload
   removeDebateAnonymousVote(input: RemoveDebateAnonymousVoteInput!): RemoveDebateAnonymousVotePayload
+
+  """Edit projects section in admin"""
+  updateHomePageProjectsSectionAdmin(input: UpdateHomePageProjectsSectionAdminInput!): UpdateHomePageProjectsSectionAdminPayload
 }
 
 """A connection to a list of items."""
@@ -9805,6 +9856,9 @@ type Query {
 
   """Get the options for creating a category within a proposal form"""
   proposalCategoryOptions: ProposalCategoryOptions!
+
+  """Get HomePageProjectsSectionAdmin"""
+  homePageProjectsSectionAdmin: HomePageProjectsSectionAdmin
 }
 
 """Fetches an object given its ID"""
@@ -12931,6 +12985,39 @@ input UpdateGroupInput {
 
 type UpdateGroupPayload {
   group: Group!
+  clientMutationId: String
+}
+
+"""
+Available errors for an `updateHomePageProjectsSectionAdmin` mutation.
+"""
+enum UpdateHomePageProjectsSectionAdminErrorCode {
+  """Limit of projects that can be dispayed in the homepage"""
+  TOO_MANY_PROJECTS
+}
+
+input UpdateHomePageProjectsSectionAdminInput {
+  """The position of the section in the homepage"""
+  position: Int!
+
+  """How to display the projects"""
+  displayMode: HomePageProjectsSectionAdminDisplayMode!
+
+  """Number of objects to display"""
+  nbObjects: Int!
+
+  """Whether it is published or not"""
+  enabled: Boolean!
+  translations: [HomePageProjectsSectionAdminTranslationInput!]
+  clientMutationId: String
+}
+
+type UpdateHomePageProjectsSectionAdminPayload {
+  """the updated homePageProjectsSectionAdmin"""
+  homePageProjectsSectionAdmin: HomePageProjectsSectionAdmin
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: UpdateHomePageProjectsSectionAdminErrorCode
   clientMutationId: String
 }
 

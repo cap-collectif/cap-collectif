@@ -505,3 +505,8 @@ InternalQuery:
                 description: 'Get the options for creating a category within a proposal form'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ProposalCategoryOptionsResolver")'
+            homePageProjectsSectionAdmin:
+                type: 'HomePageProjectsSectionAdmin'
+                description: 'Get HomePageProjectsSectionAdmin'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsSectionAdminResolver", [args])'
