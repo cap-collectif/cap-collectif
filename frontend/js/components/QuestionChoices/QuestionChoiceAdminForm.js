@@ -9,6 +9,15 @@ import { Button, ButtonToolbar, Col, ListGroup, ListGroupItem, Row } from 'react
 import QuestionChoiceAdminModal from './QuestionChoiceAdminModal';
 import type { Dispatch, GlobalState } from '~/types';
 import QuestionnaireAdminModalImportResponses from '~/components/Questionnaire/QuestionnaireAdminModalImportResponses';
+import Popover from '~ds/Popover';
+import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
+import { ICON_NAME } from '~ds/Icon/Icon';
+import Text from '~ui/Primitives/Text';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import DsButton from '~ds/Button/Button';
+import type { Jump } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm';
+import type { Questions } from '~/components/Form/Form.type';
+import { formatParams } from '../Question/useDeletePopoverMessage';
 
 type QuestionChoices = $ReadOnlyArray<{|
   +id: string,
@@ -18,15 +27,39 @@ type QuestionChoices = $ReadOnlyArray<{|
   +image: ?Object,
 |}>;
 
+type QuestionChoicesWithJumps = $ReadOnlyArray<{|
+  +id: string,
+  +title: string,
+  +description: ?string,
+  +color: ?string,
+  +image: ?Object,
+  +destinations?: Array<{
+    jumpId: string,
+    title: string,
+  }>,
+  +textParams?: {
+    id: string,
+    values: {
+      question: string,
+      question2?: string,
+    },
+  },
+|}>;
+
+type Jumps = $ReadOnlyArray<Jump>;
+
 type Props = {|
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   choices: QuestionChoices,
+  jumps: Jumps,
   formName: string,
   oldMember: string,
   type: string,
   intl: IntlShape,
   importedResponses: Object,
+  questions: Questions,
+  currentQuestionId: string,
 |};
 
 type State = {|
@@ -36,6 +69,7 @@ type State = {|
   showModal: boolean,
   showAll: boolean,
   isCreating: boolean,
+  choicesWithJump: QuestionChoicesWithJumps,
 |};
 
 export class QuestionChoiceAdminForm extends React.Component<Props, State> {
@@ -46,7 +80,50 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
     showModal: false,
     showAll: false,
     isCreating: false,
+    choicesWithJump: [],
   };
+
+  componentDidMount() {
+    const { jumps, choices } = this.props;
+
+    if (!jumps) {
+      return;
+    }
+
+    this.setState(() => {
+      // get all the choiceId as key and an array of associated jumps
+      const choicesDestinations = {};
+      jumps.forEach(j => {
+        j.conditions.forEach(condition => {
+          const { id } = condition.value;
+          if (!choicesDestinations[id]) {
+            choicesDestinations[id] = [{ jumpId: j.id, title: j.destination.title }];
+          } else {
+            choicesDestinations[id] = [
+              ...choicesDestinations[id],
+              { jumpId: j.id, title: j.destination.title },
+            ];
+          }
+        });
+      });
+
+      // loop through choices received from props to add additionnal data computed above if the choice is related to one or multiple jumps
+      const choicesWithJump = choices.map(choice => {
+        let choiceWithJumps = null;
+        if (choicesDestinations[choice.id]) {
+          const text = [...choicesDestinations[choice.id]].map(({ title }) => `"${title}"`);
+          choiceWithJumps = {
+            ...choice,
+            destinations: [...choicesDestinations[choice.id]],
+            textParams: formatParams(text, 'admin.choice.delete.confirmation.jump.body'),
+          };
+        }
+        return choiceWithJumps || choice;
+      });
+
+      return { choicesWithJump };
+    });
+  }
 
   handleClose = (index: number) => {
     const { fields, choices } = this.props;
@@ -58,6 +135,44 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
 
   handleSubmit = () => {
     this.setState({ editIndex: 0, showQuestionChoiceModal: false });
+  };
+
+  onDelete = (choiceId: string, index: number) => {
+    const { choicesWithJump } = this.state;
+    const choiceIndex = choicesWithJump.findIndex(c => c.id === choiceId);
+    const choice = choicesWithJump[choiceIndex];
+
+    if (!choice) return;
+
+    const { dispatch, formName, questions, currentQuestionId, fields } = this.props;
+
+    const questionIndex = questions.findIndex(q => q.id === currentQuestionId);
+    const jumpIds = choice?.destinations?.map(({ jumpId }) => jumpId);
+
+    const { jumps } = questions[questionIndex];
+    let jumpsCount = jumps.length;
+    const remainingJumps = jumps.filter(j => !jumpIds?.includes(j.id));
+    this.setState({
+      choicesWithJump: choicesWithJump.filter(c => c.id !== choiceId),
+    });
+    jumpsCount -= jumpsCount - remainingJumps.length;
+    dispatch(change(formName, `questions.${questionIndex}.jumps`, remainingJumps));
+
+    if (jumpsCount === 0) {
+      dispatch(change(formName, `questions.${questionIndex}.alwaysJumpDestinationQuestion`, null));
+    }
+
+    // update questions "destinationJumps" related to this deleted choice
+    questions.forEach(question => {
+      const idx = questions.findIndex(q => q.id === question.id);
+      const { destinationJumps } = question;
+      const updatedDestinationJumps = destinationJumps.filter(dj => !jumpIds?.includes(dj.id));
+      if (destinationJumps.length !== updatedDestinationJumps.length) {
+        dispatch(change(formName, `questions.${idx}.destinationJumps`, updatedDestinationJumps));
+      }
+    });
+
+    fields.remove(index);
   };
 
   render() {
@@ -78,6 +193,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
       editMember,
       showQuestionChoiceModal,
       isCreating,
+      choicesWithJump,
     } = this.state;
     const MAX_FIELDS_DISPLAYED = 10;
     return (
@@ -142,22 +258,73 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
                         }}>
                         <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                       </Button>
-                      <Button
-                        bsStyle="danger"
-                        id="remove-choice"
-                        className="btn--outline"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              intl.formatMessage({ id: 'responses.alert.delete' }),
-                              intl.formatMessage({ id: 'responses.alert.delete.bodyText' }),
-                            )
-                          ) {
-                            fields.remove(index);
-                          }
-                        }}>
-                        <i className="fa fa-trash" />
-                      </Button>
+                      {choicesWithJump?.[index]?.destinations &&
+                      choicesWithJump[index].destinations.length > 0 ? (
+                        <Popover placement="left" trigger={['click']} useArrow>
+                          <Popover.Trigger>
+                            <ButtonQuickAction
+                              icon={ICON_NAME.TRASH}
+                              label={<FormattedMessage id="global.delete" />}
+                              variantColor="danger"
+                            />
+                          </Popover.Trigger>
+                          <Popover.Content>
+                            {({ closePopover }) => (
+                              <React.Fragment>
+                                <Popover.Header>
+                                  <FormattedMessage id="admin.choice.delete.confirmation.header">
+                                    {(text: string) => <p css={{ fontWeight: 600 }}>{text}</p>}
+                                  </FormattedMessage>
+                                </Popover.Header>
+                                <Popover.Body>
+                                  <Text>
+                                    {choicesWithJump[index].textParams && (
+                                      <FormattedMessage {...choicesWithJump[index].textParams} />
+                                    )}
+                                  </Text>
+                                </Popover.Body>
+                                <Popover.Footer>
+                                  <ButtonGroup>
+                                    <DsButton
+                                      uppercase
+                                      onClick={closePopover}
+                                      color="gray.500"
+                                      fontSize={1}>
+                                      {intl.formatMessage({ id: 'cancel' })}
+                                    </DsButton>
+                                    <DsButton
+                                      alternative
+                                      variant="tertiary"
+                                      variantColor="danger"
+                                      onClick={() => {
+                                        this.onDelete(choices[index].id, index);
+                                        return closePopover?.();
+                                      }}>
+                                      {intl.formatMessage({ id: 'global.removeDefinitively' })}
+                                    </DsButton>
+                                  </ButtonGroup>
+                                </Popover.Footer>
+                              </React.Fragment>
+                            )}
+                          </Popover.Content>
+                        </Popover>
+                      ) : (
+                        <ButtonQuickAction
+                          icon={ICON_NAME.TRASH}
+                          label={<FormattedMessage id="global.delete" />}
+                          variantColor="danger"
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                intl.formatMessage({ id: 'responses.alert.delete' }),
+                                intl.formatMessage({ id: 'responses.alert.delete.bodyText' }),
+                              )
+                            ) {
+                              fields.remove(index);
+                            }
+                          }}
+                        />
+                      )}
                     </ButtonToolbar>
                   </Col>
                 </Row>
@@ -212,6 +379,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   return {
     importedResponses: selector(state, `${props.oldMember}.importedResponses`),
     choices: selector(state, `${props.oldMember}.choices`),
+    jumps: selector(state, `${props.oldMember}.jumps`),
+    questions: selector(state, 'questions'),
   };
 };
 

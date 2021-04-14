@@ -60,6 +60,10 @@ InternalQuestion:
                         type: 'JumpsOrder'
                         defaultValue: { field: POSITION, direction: ASC }
                         description: 'Ordering options for question jumps.'
+            destinationJumps:
+                description: 'The jumps of which this question is the destination'
+                type: '[LogicJump!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\DestinationJumpsResolver", [value, args])'
             alwaysJumpDestinationQuestion:
                 description: 'The destination of the always jump (the else case) of this question.'
                 type: 'InternalQuestion'

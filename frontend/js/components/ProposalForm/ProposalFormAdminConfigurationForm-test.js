@@ -79,6 +79,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
         position: 1,
         alwaysJumpDestinationQuestion: null,
         jumps: [],
+        destinationJumps: [],
         rangeMin: null,
         rangeMax: null,
       },
@@ -128,6 +129,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       position: 1,
       alwaysJumpDestinationQuestion: null,
       jumps: [],
+      destinationJumps: []
     };
 
     const ppForm = {
@@ -169,6 +171,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           position: 1,
           alwaysJumpDestinationQuestion: null,
           jumps: [],
+          destinationJumps: [],
           isRangeBetween: true,
           rangeMin: 10,
           rangeMax: 0,
@@ -188,6 +191,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           position: 2,
           alwaysJumpDestinationQuestion: null,
           jumps: [],
+          destinationJumps: [],
           isRangeBetween: true,
           rangeMin: 0,
           rangeMax: 0,
@@ -207,6 +211,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           position: 2,
           alwaysJumpDestinationQuestion: null,
           jumps: [],
+          destinationJumps: [],
           isRangeBetween: true,
           rangeMin: 1000,
           rangeMax: null,
@@ -226,6 +231,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           position: 2,
           alwaysJumpDestinationQuestion: null,
           jumps: [],
+          destinationJumps: [],
           isRangeBetween: true,
           rangeMin: null,
           rangeMax: 10000,

@@ -25,7 +25,7 @@ export const QuestionJumpConditionsAdminForm = ({
   formName,
   currentJump,
 }: Props) => {
-  const currentQuestion = questions.find(question => question.id === currentJump.origin.id);
+  const currentQuestion = questions.find(question => question.id === currentJump?.origin.id);
   const isMultipleChoiceQuestion =
     currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion';
   const firstMultipleChoiceQuestion = questions.find(
@@ -43,7 +43,7 @@ export const QuestionJumpConditionsAdminForm = ({
 
     return {
       question: {
-        id: currentJump.origin.id,
+        id: currentJump?.origin.id,
       },
       value,
       operator: 'IS',

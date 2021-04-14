@@ -25,6 +25,7 @@ describe('<ProposalPageEvaluation />', () => {
             helpText: null,
             alwaysJumpDestinationQuestion: null,
             jumps: [],
+            destinationJumps: [],
             description: null,
             type: 'text',
             isOtherAllowed: false,

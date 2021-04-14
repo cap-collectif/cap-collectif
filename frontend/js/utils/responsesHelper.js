@@ -101,6 +101,15 @@ const QuestionAdminFragment = {
           }
         }
       }
+      
+      destinationJumps {
+        id
+        origin {
+          id
+          title
+        }
+      }
+      
       alwaysJumpDestinationQuestion {
         id
         title
@@ -185,6 +194,13 @@ const QuestionFragment = {
               title
             }
           }
+        }
+      }
+      destinationJumps {
+        id
+        origin {
+          id
+          title
         }
       }
       alwaysJumpDestinationQuestion {

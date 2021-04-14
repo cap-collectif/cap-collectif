@@ -319,6 +319,56 @@ exports[`<Navbar /> should render correctly 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
+                            "concreteType": "LogicJump",
+                            "kind": "LinkedField",
+                            "name": "destinationJumps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "origin",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": null,
                             "kind": "LinkedField",
                             "name": "alwaysJumpDestinationQuestion",
@@ -597,7 +647,7 @@ exports[`<Navbar /> should render correctly 1`] = `
                 ],
               },
               "params": Object {
-                "cacheID": "c465ac0681e68da5c6f82436d5fbbf83",
+                "cacheID": "1194d79ace34af3067cde8b34ed7cc79",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -651,6 +701,14 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
           id
           title
         }
+      }
+    }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
       }
     }
     alwaysJumpDestinationQuestion {
@@ -740,6 +798,14 @@ fragment RegistrationForm_query on Query {
             id
             title
           }
+        }
+      }
+      destinationJumps {
+        id
+        origin {
+          __typename
+          id
+          title
         }
       }
       alwaysJumpDestinationQuestion {
@@ -1192,6 +1258,56 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
+                            "concreteType": "LogicJump",
+                            "kind": "LinkedField",
+                            "name": "destinationJumps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "origin",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": null,
                             "kind": "LinkedField",
                             "name": "alwaysJumpDestinationQuestion",
@@ -1470,7 +1586,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                 ],
               },
               "params": Object {
-                "cacheID": "c465ac0681e68da5c6f82436d5fbbf83",
+                "cacheID": "1194d79ace34af3067cde8b34ed7cc79",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -1524,6 +1640,14 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
           id
           title
         }
+      }
+    }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
       }
     }
     alwaysJumpDestinationQuestion {
@@ -1613,6 +1737,14 @@ fragment RegistrationForm_query on Query {
             id
             title
           }
+        }
+      }
+      destinationJumps {
+        id
+        origin {
+          __typename
+          id
+          title
         }
       }
       alwaysJumpDestinationQuestion {

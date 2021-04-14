@@ -37,6 +37,7 @@ type Props = {|
   intl: IntlShape,
   isSuperAdmin: boolean,
   enableMajorityQuestion: boolean,
+  questionsIds: $ReadOnlyArray<string>,
   ...ParentProps,
 |};
 
@@ -119,10 +120,17 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
 
   // Redux-form does not allow multiple value change at once, therefore the iteration
   resetQuestion = (): boolean => {
-    const { formName, member, dispatch } = this.props;
+    const { formName, member, dispatch, questionsIds } = this.props;
     const { initialQuestionValues } = this.state;
+
     for (const [key, value] of Object.entries(initialQuestionValues)) {
-      dispatch(change(formName, `${member}.${key}`, value));
+      if (key === 'jumps' && typeof value === 'object' && Array.isArray(value)) {
+        // prevents re-adding a jump related to a deleted question
+        const jumps = value.filter(jump => questionsIds.includes(jump.destination.id));
+        dispatch(change(formName, `${member}.${key}`, jumps));
+      } else {
+        dispatch(change(formName, `${member}.${key}`, value));
+      }
     }
     return Object.keys(initialQuestionValues).length <= 2;
   };
@@ -351,6 +359,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                   formName={formName}
                   oldMember={member}
                   type={type}
+                  currentQuestionId={currentQuestion.id}
                 />
               </div>
             )}

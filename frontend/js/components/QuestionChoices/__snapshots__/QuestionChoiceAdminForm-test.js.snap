@@ -145,8 +145,15 @@ exports[`<ProposalUserVoteItem /> should render correctly modal to import file o
             Array [
               [Function],
             ],
+            Array [
+              [Function],
+            ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -276,4 +283,356 @@ exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = 
     />
   </Button>
 </div>
+`;
+
+exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <QuestionAdmin__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#aaaaaa",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
+      <Icon
+        name="askBubble"
+        size={20}
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper
+      ellipsis={true}
+    >
+      <strong>
+        Question Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.multiple_multiple"
+          values={Object {}}
+        />
+      </span>
+    </QuestionAdmin__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <QuestionAdmin__ActionIconWrapper>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="action-icons pull-right"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn-edit-item"
+          disabled={false}
+          id="js-btn-edit-0"
+          onClick={[Function]}
+        >
+          <Icon
+            color="rgb(3, 136, 204)"
+            name="pen"
+            size={16}
+          />
+        </Button>
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
+          onClick={[Function]}
+          variantColor="danger"
+        />
+      </ButtonToolbar>
+    </QuestionAdmin__ActionIconWrapper>
+  </Col>
+</Row>
+`;
+
+exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <QuestionAdmin__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#aaaaaa",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
+      <Icon
+        name="askBubble"
+        size={20}
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper
+      ellipsis={true}
+    >
+      <strong>
+        Question Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="gender.other"
+          values={Object {}}
+        />
+      </span>
+    </QuestionAdmin__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <QuestionAdmin__ActionIconWrapper>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="action-icons pull-right"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn-edit-item"
+          disabled={false}
+          id="js-btn-edit-0"
+          onClick={[Function]}
+        >
+          <Icon
+            color="rgb(3, 136, 204)"
+            name="pen"
+            size={16}
+          />
+        </Button>
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
+          onClick={[Function]}
+          variantColor="danger"
+        />
+      </ButtonToolbar>
+    </QuestionAdmin__ActionIconWrapper>
+  </Col>
+</Row>
+`;
+
+exports[`<QuestionAdmin /> render correctly a section 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <QuestionAdmin__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#aaaaaa",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
+      <Icon
+        name="textStyle"
+        size={20}
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper
+      ellipsis={true}
+    >
+      <strong>
+        Section Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.section"
+          values={Object {}}
+        />
+      </span>
+    </QuestionAdmin__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <QuestionAdmin__ActionIconWrapper>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="action-icons pull-right"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn-edit-item"
+          disabled={false}
+          id="js-btn-edit-0"
+          onClick={[Function]}
+        >
+          <Icon
+            color="rgb(3, 136, 204)"
+            name="pen"
+            size={16}
+          />
+        </Button>
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
+          onClick={[Function]}
+          variantColor="danger"
+        />
+      </ButtonToolbar>
+    </QuestionAdmin__ActionIconWrapper>
+  </Col>
+</Row>
+`;
+
+exports[`<QuestionAdmin /> render correctly a text question 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <QuestionAdmin__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#aaaaaa",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
+      <Icon
+        name="askBubble"
+        size={20}
+      />
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper
+      ellipsis={true}
+    >
+      <strong>
+        Question Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.free"
+          values={Object {}}
+        />
+      </span>
+    </QuestionAdmin__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <QuestionAdmin__ActionIconWrapper>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="action-icons pull-right"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn-edit-item"
+          disabled={false}
+          id="js-btn-edit-0"
+          onClick={[Function]}
+        >
+          <Icon
+            color="rgb(3, 136, 204)"
+            name="pen"
+            size={16}
+          />
+        </Button>
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
+          onClick={[Function]}
+          variantColor="danger"
+        />
+      </ButtonToolbar>
+    </QuestionAdmin__ActionIconWrapper>
+  </Col>
+</Row>
 `;

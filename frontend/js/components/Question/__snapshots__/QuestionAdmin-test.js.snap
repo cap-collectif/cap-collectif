@@ -62,7 +62,7 @@ exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
           bsStyle="default"
           className="btn-edit-item"
           disabled={false}
-          id="js-btn-edit-1"
+          id="js-btn-edit-0"
           onClick={[Function]}
         >
           <Icon
@@ -71,22 +71,17 @@ exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
             size={16}
           />
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          className="btn-del-item"
-          disabled={false}
-          id="js-btn-delete-1"
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
           onClick={[Function]}
-        >
-          <Icon
-            color="rgb(220, 53, 69)"
-            name="trash"
-            size={16}
-          />
-        </Button>
+          variantColor="danger"
+        />
       </ButtonToolbar>
     </QuestionAdmin__ActionIconWrapper>
   </Col>
@@ -155,7 +150,7 @@ exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
           bsStyle="default"
           className="btn-edit-item"
           disabled={false}
-          id="js-btn-edit-1"
+          id="js-btn-edit-0"
           onClick={[Function]}
         >
           <Icon
@@ -164,22 +159,17 @@ exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
             size={16}
           />
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          className="btn-del-item"
-          disabled={false}
-          id="js-btn-delete-1"
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
           onClick={[Function]}
-        >
-          <Icon
-            color="rgb(220, 53, 69)"
-            name="trash"
-            size={16}
-          />
-        </Button>
+          variantColor="danger"
+        />
       </ButtonToolbar>
     </QuestionAdmin__ActionIconWrapper>
   </Col>
@@ -248,7 +238,7 @@ exports[`<QuestionAdmin /> render correctly a section 1`] = `
           bsStyle="default"
           className="btn-edit-item"
           disabled={false}
-          id="js-btn-edit-1"
+          id="js-btn-edit-0"
           onClick={[Function]}
         >
           <Icon
@@ -257,22 +247,17 @@ exports[`<QuestionAdmin /> render correctly a section 1`] = `
             size={16}
           />
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          className="btn-del-item"
-          disabled={false}
-          id="js-btn-delete-1"
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
           onClick={[Function]}
-        >
-          <Icon
-            color="rgb(220, 53, 69)"
-            name="trash"
-            size={16}
-          />
-        </Button>
+          variantColor="danger"
+        />
       </ButtonToolbar>
     </QuestionAdmin__ActionIconWrapper>
   </Col>
@@ -341,7 +326,7 @@ exports[`<QuestionAdmin /> render correctly a text question 1`] = `
           bsStyle="default"
           className="btn-edit-item"
           disabled={false}
-          id="js-btn-edit-1"
+          id="js-btn-edit-0"
           onClick={[Function]}
         >
           <Icon
@@ -350,22 +335,17 @@ exports[`<QuestionAdmin /> render correctly a text question 1`] = `
             size={16}
           />
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          className="btn-del-item"
-          disabled={false}
-          id="js-btn-delete-1"
+        <ButtonQuickAction
+          icon="TRASH"
+          label={
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          }
           onClick={[Function]}
-        >
-          <Icon
-            color="rgb(220, 53, 69)"
-            name="trash"
-            size={16}
-          />
-        </Button>
+          variantColor="danger"
+        />
       </ButtonToolbar>
     </QuestionAdmin__ActionIconWrapper>
   </Col>

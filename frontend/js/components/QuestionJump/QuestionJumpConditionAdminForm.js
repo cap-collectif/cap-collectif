@@ -51,9 +51,11 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
     if (question) {
       return question.choices
         ? // $FlowFixMe we need to refacto the responseHelper.js file and its 1131 lines
-          question.choices.map<any>((choice, index) => (
-            <OptionItem questionChoice={choice} index={index} />
-          ))
+          question?.choices
+            // $FlowFixMe
+            .filter(choice => choice?.id !== undefined) // filter unsaved choice to prevent the user from creating jumps with a choice without an id
+            // $FlowFixMe
+            .map<any>((choice, index) => <OptionItem questionChoice={choice} index={index} />)
         : null;
     }
 

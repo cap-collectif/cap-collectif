@@ -27,9 +27,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractQuestion implements DisplayableInBOInterface
 {
-    use TimestampableTrait;
-    use SluggableUpdatableTitleTrait;
     use IdTrait;
+    use SluggableUpdatableTitleTrait;
+    use TimestampableTrait;
 
     public const QUESTION_TYPE_SIMPLE_TEXT = 0;
     public const QUESTION_TYPE_MULTILINE_TEXT = 1;

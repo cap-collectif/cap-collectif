@@ -180,6 +180,11 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     });
   };
 
+  handleDeleteQuestionRow = (index: number) => {
+    const { fields } = this.props;
+    fields.remove(index);
+  };
+
   handleDeleteAction = () => {
     const { deleteIndex, flashMessages, deleteType, level } = this.state;
     const { fields } = this.props;
@@ -380,7 +385,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   };
 
   render() {
-    const { fields, questions, formName, hideSections, intl } = this.props;
+    const { fields, questions, formName, hideSections, intl, dispatch } = this.props;
     const {
       editIndex,
       showDeleteModal,
@@ -444,6 +449,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               member={member}
                               show={index === editIndex}
                               formName={formName}
+                              questionsIds={questions.map(q => q.id)}
                             />
                             <SectionQuestionAdminModal
                               show={index === editIndexSection}
@@ -474,11 +480,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               formName={formName}
                             />
                             <QuestionAdmin
-                              question={questions[index]}
                               provided={provided}
                               handleClickEdit={this.handleClickEdit}
                               handleClickDelete={this.handleClickDelete}
+                              handleDeleteQuestionRow={this.handleDeleteQuestionRow}
                               index={index}
+                              dispatch={dispatch}
+                              formName={formName}
+                              questions={questions}
                             />
                           </DraggableContainer>
                         </DraggableWrapper>

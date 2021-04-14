@@ -18,9 +18,9 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class QuestionChoice implements IndexableInterface
 {
-    use UuidTrait;
-    use TitleTrait;
     use PositionableTrait;
+    use TitleTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)

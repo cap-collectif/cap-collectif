@@ -79,6 +79,14 @@ export type Jump = {|
   +conditions: $ReadOnlyArray<ConditionalJumpCondition>,
 |};
 
+export type DestinationJump = {|
+  +id: string,
+  +origin: {|
+    +id: string,
+    +title: string,
+  |}
+|};
+
 export type QuestionChoice = {|
   +id: string,
   +title: string,
@@ -109,6 +117,7 @@ export type Question = {|
     +number: number,
   |},
   +jumps: $ReadOnlyArray<Jump>,
+  +destinationJumps: $ReadOnlyArray<DestinationJump>,
   +description: ?string,
   +type: QuestionType,
   +isOtherAllowed?: boolean,

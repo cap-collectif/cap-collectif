@@ -324,6 +324,56 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "concreteType": "LogicJump",
+                      "kind": "LinkedField",
+                      "name": "destinationJumps",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "origin",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": null,
                       "kind": "LinkedField",
                       "name": "alwaysJumpDestinationQuestion",
@@ -655,7 +705,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "acea4be23cb2eb8ce91a5f8d5d12bd23",
+          "cacheID": "202aee1eb20d956e464a963112e71aed",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -726,6 +776,14 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
           id
           title
         }
+      }
+    }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
       }
     }
     alwaysJumpDestinationQuestion {
@@ -1232,6 +1290,56 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                           Object {
                             "alias": null,
                             "args": null,
+                            "concreteType": "LogicJump",
+                            "kind": "LinkedField",
+                            "name": "destinationJumps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "origin",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": null,
                             "kind": "LinkedField",
                             "name": "alwaysJumpDestinationQuestion",
@@ -1563,7 +1671,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                 ],
               },
               "params": Object {
-                "cacheID": "acea4be23cb2eb8ce91a5f8d5d12bd23",
+                "cacheID": "202aee1eb20d956e464a963112e71aed",
                 "id": null,
                 "metadata": Object {},
                 "name": "RegistrationAdminPageQuery",
@@ -1634,6 +1742,14 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
           id
           title
         }
+      }
+    }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
       }
     }
     alwaysJumpDestinationQuestion {
@@ -2104,6 +2220,56 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                     Object {
                       "alias": null,
                       "args": null,
+                      "concreteType": "LogicJump",
+                      "kind": "LinkedField",
+                      "name": "destinationJumps",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "origin",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": null,
                       "kind": "LinkedField",
                       "name": "alwaysJumpDestinationQuestion",
@@ -2435,7 +2601,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
           ],
         },
         "params": Object {
-          "cacheID": "acea4be23cb2eb8ce91a5f8d5d12bd23",
+          "cacheID": "202aee1eb20d956e464a963112e71aed",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -2506,6 +2672,14 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
           id
           title
         }
+      }
+    }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
       }
     }
     alwaysJumpDestinationQuestion {

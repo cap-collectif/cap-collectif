@@ -15,8 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class LogicJump
 {
-    use UuidTrait;
     use PositionableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="jumps")

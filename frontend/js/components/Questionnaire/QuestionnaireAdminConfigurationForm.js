@@ -27,12 +27,12 @@ type Props = {|
 export type Jump = {|
   +id?: string,
   +origin: {
-    id: number,
-    title: string,
+    id: string,
+    title?: string,
   },
   +destination: {
-    id: number,
-    title: string,
+    id: string,
+    title?: string,
   },
   +conditions: Object,
 |};

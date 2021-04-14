@@ -46,6 +46,7 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         number: undefined,
         position: undefined,
         choices: undefined,
+        destinationJumps: undefined,
       },
     };
     if (

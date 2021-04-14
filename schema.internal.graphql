@@ -5738,6 +5738,9 @@ type MajorityQuestion implements Question & Node {
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
   ): [LogicJump!]!
 
+  """The jumps of which this question is the destination"""
+  destinationJumps: [LogicJump!]!
+
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
 
@@ -5943,6 +5946,9 @@ type MediaQuestion implements Question & Node {
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
   ): [LogicJump!]!
 
+  """The jumps of which this question is the destination"""
+  destinationJumps: [LogicJump!]!
+
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
 
@@ -6033,6 +6039,9 @@ type MultipleChoiceQuestion implements Question & Node {
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
   ): [LogicJump!]!
+
+  """The jumps of which this question is the destination"""
+  destinationJumps: [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
@@ -9870,6 +9879,9 @@ interface Question {
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
   ): [LogicJump!]!
 
+  """The jumps of which this question is the destination"""
+  destinationJumps: [LogicJump!]!
+
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
 
@@ -11268,6 +11280,9 @@ type SectionQuestion implements Question & Node {
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
   ): [LogicJump!]!
 
+  """The jumps of which this question is the destination"""
+  destinationJumps: [LogicJump!]!
+
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
 
@@ -11744,6 +11759,9 @@ type SimpleQuestion implements Question & Node {
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
   ): [LogicJump!]!
+
+  """The jumps of which this question is the destination"""
+  destinationJumps: [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question

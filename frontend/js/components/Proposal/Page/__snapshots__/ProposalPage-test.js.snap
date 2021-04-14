@@ -1037,6 +1037,56 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
+                              "concreteType": "LogicJump",
+                              "kind": "LinkedField",
+                              "name": "destinationJumps",
+                              "plural": true,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": null,
+                                  "kind": "LinkedField",
+                                  "name": "origin",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "__typename",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "title",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
                               "concreteType": null,
                               "kind": "LinkedField",
                               "name": "alwaysJumpDestinationQuestion",
@@ -2181,6 +2231,56 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 },
                               ],
                               "storageKey": "jumps(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "LogicJump",
+                              "kind": "LinkedField",
+                              "name": "destinationJumps",
+                              "plural": true,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": null,
+                                  "kind": "LinkedField",
+                                  "name": "origin",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "__typename",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "title",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
                             },
                             Object {
                               "alias": null,
@@ -4691,6 +4791,56 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
+                                          "concreteType": "LogicJump",
+                                          "kind": "LinkedField",
+                                          "name": "destinationJumps",
+                                          "plural": true,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "concreteType": null,
+                                              "kind": "LinkedField",
+                                              "name": "origin",
+                                              "plural": false,
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "__typename",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "id",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "title",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
                                           "concreteType": null,
                                           "kind": "LinkedField",
                                           "name": "alwaysJumpDestinationQuestion",
@@ -5345,6 +5495,56 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                         },
                                       ],
                                       "storageKey": "jumps(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "LogicJump",
+                                      "kind": "LinkedField",
+                                      "name": "destinationJumps",
+                                      "plural": true,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "concreteType": null,
+                                          "kind": "LinkedField",
+                                          "name": "origin",
+                                          "plural": false,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "__typename",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "title",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
                                     },
                                     Object {
                                       "alias": null,
@@ -6914,7 +7114,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "373c6024aa417608f57a14c1907a014e",
+          "cacheID": "80c935321a3acacf6460961451273ec8",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7143,6 +7343,14 @@ fragment NewProposalResponse_response on Response {
         }
       }
     }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
+      }
+    }
     alwaysJumpDestinationQuestion {
       __typename
       id
@@ -7288,6 +7496,14 @@ fragment ProposalAnalysisFormPanel_proposal_2uwUKI on Proposal {
                 id
                 title
               }
+            }
+          }
+          destinationJumps {
+            id
+            origin {
+              __typename
+              id
+              title
             }
           }
           alwaysJumpDestinationQuestion {
@@ -7647,6 +7863,14 @@ fragment ProposalForm_proposalForm on ProposalForm {
         }
       }
     }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
+      }
+    }
     alwaysJumpDestinationQuestion {
       __typename
       id
@@ -7906,6 +8130,14 @@ fragment ProposalPageCustomSections_proposal on Proposal {
             id
             title
           }
+        }
+      }
+      destinationJumps {
+        id
+        origin {
+          __typename
+          id
+          title
         }
       }
       alwaysJumpDestinationQuestion {
@@ -8436,6 +8668,14 @@ fragment ProposalResponse_response on Response {
           id
           title
         }
+      }
+    }
+    destinationJumps {
+      id
+      origin {
+        __typename
+        id
+        title
       }
     }
     alwaysJumpDestinationQuestion {
