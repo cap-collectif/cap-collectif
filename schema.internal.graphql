@@ -3508,6 +3508,9 @@ type DebateAnonymousVote implements Node & AbstractDebateVote {
 
   """Navigator of the voter"""
   navigator: String
+
+  """The formatted geolocalization informations."""
+  geoip: FormattedGeolocalization
 }
 
 """A debate argument from non expert."""
@@ -3627,6 +3630,9 @@ type DebateArgument implements Node & Reportable & Trashable & Contribution {
 
   """The URL of widget from which the debate's argument was added, if any."""
   widgetOriginUrl: URI
+
+  """The formatted geolocalization informations."""
+  geoip: FormattedGeolocalization
 }
 
 """Two debate arguments from non expert, one for and one against."""
@@ -4018,6 +4024,9 @@ type DebateVote implements Node & AbstractDebateVote & Publishable {
 
   """The author of the vote."""
   author: User!
+
+  """The formatted geolocalization informations."""
+  geoip: FormattedGeolocalization
 }
 
 """A connection to a list of items."""
@@ -5204,6 +5213,18 @@ enum ForOrAgainstValue {
 
   """A for value"""
   FOR
+}
+
+"""Geolocalization formatted informations."""
+type FormattedGeolocalization {
+  """The author country name."""
+  countryName: String
+
+  """The author region name."""
+  regionName: String
+
+  """The author city name."""
+  cityName: String
 }
 
 """Many possible values"""

@@ -339,6 +339,8 @@ mappings:
         questionnaire:
             properties:
                 id: { type: keyword }
+        ipAddress:
+            type: ip
 
         #
         # This allow ous to monitore the usage of our API.

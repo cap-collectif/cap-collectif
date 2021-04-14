@@ -33,6 +33,11 @@ class ExportDebateCommand extends BaseExportCommand
         'argument_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'argument_author_email' => 'author.email',
         'argument_author_userType_name' => 'author.userType.name',
+        'argument_author_zipCode' => 'author.zipCode',
+
+        'argument_geoip_country_name' => 'geoip.countryName',
+        'argument_geoip_region_name' => 'geoip.regionName',
+        'argument_geoip_city_name' => 'geoip.cityName',
 
         'argument_content' => 'body',
         'argument_type' => 'type',
@@ -45,7 +50,12 @@ class ExportDebateCommand extends BaseExportCommand
         'vote_publishedAt' => 'publishedAt',
         'vote_type' => 'type',
 
+        'vote_geoip_country_name' => 'geoip.countryName',
+        'vote_geoip_region_name' => 'geoip.regionName',
+        'vote_geoip_city_name' => 'geoip.cityName',
+
         'vote_author_id' => 'author.id',
+        'vote_author_zipCode' => 'author.zipCode',
         'vote_author_username' => 'author.username',
         'vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'vote_author_email' => 'author.email',
@@ -350,11 +360,17 @@ class ExportDebateCommand extends BaseExportCommand
             updatedAt
             trashedAt
             trashedReason
+            geoip {
+              countryName
+              regionName
+              cityName
+            }
             author {
               id
               username
               isEmailConfirmed
               email
+              zipCode
               userType {
                 name
               }
@@ -376,9 +392,22 @@ class ExportDebateCommand extends BaseExportCommand
           node {
             publishedAt
             type
+            ...on DebateAnonymousVote {
+              geoip {
+                countryName
+                regionName
+                cityName
+              }
+            }
             ...on DebateVote {
+              geoip {
+                countryName
+                regionName
+                cityName
+              }
               author {
                 id
+                zipCode
                 username
                 isEmailConfirmed
                 email

@@ -10,6 +10,7 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
+use Elastica\Result;
 use Elastica\ResultSet;
 
 class DebateSearch extends Search
@@ -91,8 +92,25 @@ class DebateSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
+        $hydratedResults = $this->getHydratedResultsFromResultSet(
+            $this->debateArgumentRepository,
+            $response
+        );
+
+        $informations = array_map(
+            static fn(Result $result) => [
+                'id' => $result->getDocument()->get('id'),
+                'objectType' => $result->getDocument()->get('objectType'),
+                'geoip' => $result->getDocument()->has('geoip')
+                    ? $result->getDocument()->get('geoip')
+                    : null,
+            ],
+            $response->getResults()
+        );
+        $this->addGeoIpData($hydratedResults, $informations);
+
         return new ElasticsearchPaginatedResult(
-            $this->getHydratedResultsFromResultSet($this->debateArgumentRepository, $response),
+            $hydratedResults,
             $cursors,
             $response->getTotalHits()
         );

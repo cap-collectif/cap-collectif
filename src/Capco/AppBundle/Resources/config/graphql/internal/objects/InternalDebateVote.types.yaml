@@ -21,3 +21,7 @@ InternalDebateVote:
                 type: 'InternalUser!'
                 description: 'The author of the vote.'
                 resolve: '@=value.getUser()'
+            geoip:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                type: 'FormattedGeolocalization'
+                description: 'The formatted geolocalization informations.'

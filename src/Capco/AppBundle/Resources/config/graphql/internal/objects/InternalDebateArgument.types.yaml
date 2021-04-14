@@ -70,3 +70,7 @@ InternalDebateArgument:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: "The URL of widget from which the debate's argument was added, if any."
                 type: 'URI'
+            geoip:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                type: 'FormattedGeolocalization'
+                description: 'The formatted geolocalization informations.'

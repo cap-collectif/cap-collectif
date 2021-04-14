@@ -18,6 +18,8 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousVote:
             type: object
             groups: [ElasticsearchVoteNestedProject]
             serialized_name: project
+        ipAddress:
+            groups: [ElasticsearchVote]
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchVote]

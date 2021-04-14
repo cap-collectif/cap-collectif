@@ -1,0 +1,14 @@
+FormattedGeolocalization:
+    type: object
+    config:
+        description: 'Geolocalization formatted informations.'
+        fields:
+            countryName:
+                type: 'String'
+                description: 'The author country name.'
+            regionName:
+                type: 'String'
+                description: 'The author region name.'
+            cityName:
+                type: 'String'
+                description: 'The author city name.'

@@ -5,3 +5,5 @@ Capco\AppBundle\Entity\Debate\DebateVote:
             groups: [ElasticsearchVote]
         debate:
             groups: [ElasticsearchVoteNestedDebate]
+        ipAddress:
+            groups: [ElasticsearchVote]

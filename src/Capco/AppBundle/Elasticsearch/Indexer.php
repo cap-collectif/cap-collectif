@@ -174,6 +174,7 @@ class Indexer
     {
         if (\count($this->currentInsertBulk) > 0) {
             $bulk = new Bulk($this->client);
+            $bulk->setRequestParam('pipeline', 'geoip');
             $bulk->addDocuments($this->currentInsertBulk);
             $response = $bulk->send();
             if ($response->hasError()) {
@@ -313,7 +314,7 @@ class Indexer
                 ->select('count(a)')
                 ->getQuery()
                 ->getSingleScalarResult();
-            $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
+            $output->writeln(\PHP_EOL . "<info> Indexing ${count} ${class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();
         }

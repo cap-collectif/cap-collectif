@@ -72,6 +72,9 @@ abstract class Search
             static fn(Result $result) => [
                 'id' => $result->getDocument()->get('id'),
                 'objectType' => $result->getDocument()->get('objectType'),
+                'geoip' => $result->getDocument()->has('geoip')
+                    ? $result->getDocument()->get('geoip')
+                    : null,
             ],
             $set->getResults()
         );
@@ -104,7 +107,28 @@ abstract class Search
             return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
         });
 
+        $this->addGeoIpData($results, $informations);
+
         return $results;
+    }
+
+    protected function addGeoIpData(array $results, array $informations): void
+    {
+        $informationsWithIdAsKey = [];
+        foreach ($informations as $information) {
+            $informationsWithIdAsKey[$information['id']] = $information['geoip'];
+        }
+        foreach ($results as $result) {
+            if (!empty($informationsWithIdAsKey[$result->getId()])) {
+                $result->geoip = [
+                    'countryName' =>
+                        $informationsWithIdAsKey[$result->getId()]['country_name'] ?? null,
+                    'regionName' =>
+                        $informationsWithIdAsKey[$result->getId()]['region_name'] ?? null,
+                    'cityName' => $informationsWithIdAsKey[$result->getId()]['city_name'] ?? null,
+                ];
+            }
+        }
     }
 
     /**

@@ -264,7 +264,7 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
-            "ipAddress": null,
+            "ipAddress": "190.221.216.103",
             "votes": Object {
               "edges": Array [],
             },
@@ -273,7 +273,7 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
-            "ipAddress": null,
+            "ipAddress": "240.35.158.144",
             "votes": Object {
               "edges": Array [],
             },
@@ -282,7 +282,7 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
-            "ipAddress": null,
+            "ipAddress": "63.221.86.226",
             "votes": Object {
               "edges": Array [],
             },
@@ -291,7 +291,7 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
-            "ipAddress": null,
+            "ipAddress": "149.72.26.181",
             "votes": Object {
               "edges": Array [],
             },
@@ -300,7 +300,7 @@ Object {
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
-            "ipAddress": null,
+            "ipAddress": "179.148.86.50",
             "votes": Object {
               "edges": Array [],
             },

@@ -34,6 +34,30 @@ class CreateIndexCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $newIndex = $this->indexManager->createIndex();
+        $newPipeline = $newIndex->getClient()->request('_ingest/pipeline/geoip', 'PUT', [
+            'description' => 'Add geoip info',
+            'processors' => [
+                [
+                    'geoip' => [
+                        'field' => 'ipAddress',
+                        'ignore_missing' => true,
+                        'target_field' => 'geoip',
+                        'properties' => [
+                            'continent_name',
+                            'country_name',
+                            'region_name',
+                            'city_name',
+                            'region_iso_code',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+        if ($newPipeline->getError()) {
+            $output->writeln(['An error occured when creating pipeline.']);
+        } else {
+            $output->writeln(['Pipeline <info>geoip</info> has been added.']);
+        }
         $this->indexManager->slowDownRefresh($newIndex);
 
         $output->writeln([sprintf('Index <info>%s</info> created.', $newIndex->getName())]);

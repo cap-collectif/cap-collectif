@@ -23,6 +23,8 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
             groups: [ElasticsearchDebateArgument]
         trashedAt:
             groups: [ElasticsearchDebateArgument]
+        ipAddress:
+            groups: [ElasticsearchDebateArgument]
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchDebateArgument]

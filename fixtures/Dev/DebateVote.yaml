@@ -4,12 +4,14 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         id: 13000
         user: '@userSpyl'
         debate: '@debateCannabis'
+        ipAddress: 224.81.166.189
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:01:00'))>
         createdAt: $publishedAt
     debateCannabisVote2:
         id: 13001
         user: '@userIan'
+        ipAddress: 30.79.219.230
         debate: '@debateCannabis'
         type: FOR
         publishedAt: <(new \DateTime('2015-01-01 09:02:00'))>
@@ -21,12 +23,13 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:03:00'))>
         createdAt: $publishedAt
-        ipAddress: '142.042.042.042'
+        ipAddress: '142.42.42.42'
         __calls:
             - setMailOrigin: []
     debateCannabisVote4:
         id: 13003
         user: '@userJpec'
+        ipAddress: 11.225.9.235
         debate: '@debateCannabis'
         type: FOR
         publishedAt: <(new \DateTime('2015-01-01 09:04:00'))>
@@ -34,6 +37,7 @@ Capco\AppBundle\Entity\Debate\DebateVote:
     debateCannabisVote5:
         id: 13004
         user: '@userTheo'
+        ipAddress: 255.235.209.212
         debate: '@debateCannabis'
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:05:00'))>

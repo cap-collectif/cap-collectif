@@ -18,6 +18,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument3:
         __construct: ['@debateCannabis']
         id: 'debateArgument3'
+        ipAddress: 179.148.86.50
         type: FOR
         author: '@userAgui'
         body: La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.
@@ -26,6 +27,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument4:
         __construct: ['@debateCannabis']
         id: 'debateArgument4'
+        ipAddress: 149.72.26.181
         type: FOR
         author: '@userVincent'
         body: Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.
@@ -34,6 +36,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument5:
         __construct: ['@debateCannabis']
         id: 'debateArgument5'
+        ipAddress: 63.221.86.226
         type: AGAINST
         author: '@userJpec'
         body: Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).
@@ -43,6 +46,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument6:
         __construct: ['@debateCannabis']
         id: 'debateArgument6'
+        ipAddress: 240.35.158.144
         type: AGAINST
         author: '@userMaximeQA'
         body: Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.
@@ -51,6 +55,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateArgument7:
         __construct: ['@debateCannabis']
         id: 'debateArgument7'
+        ipAddress: 190.221.216.103
         type: AGAINST
         author: '@userIan'
         body: Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.
