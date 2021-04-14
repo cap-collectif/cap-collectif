@@ -20,10 +20,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
+    public const FILENAME = 'legacyUsers.csv';
 
     private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
     private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
-    public const FILENAME = 'legacyUsers.csv';
     protected ConnectionTraversor $connectionTraversor;
     protected Executor $executor;
     protected string $projectRootDir;
@@ -67,7 +67,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
 
-        'contributionsCount' => 'contributionsCount',
+        'contributions.totalCount' => 'contributionsCount',
         'opinions.totalCount' => 'opinionsCount',
         'opinionVotesCount' => 'opinionVotesCount',
         'opinionVersions.totalCount' => 'opinionVersionsCount',
@@ -76,11 +76,8 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         'argumentVotesCount' => 'argumentVotesCount',
         'proposals.totalCount' => 'proposalsCount',
         'proposalVotesCount' => 'proposalVotesCount',
-        'commentVotes.totalCount' => 'commentVotesCount',
         'sources.totalCount' => 'sourcesCount',
         'replies.totalCount' => 'repliesCount',
-        'comments.totalCount' => 'commentsCount',
-        'projects.totalCount' => 'projectsCount',
         'deletedAccountAt' => 'deletedAccountAt',
     ];
 
@@ -131,7 +128,9 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
             ])
             ->toArray();
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
-        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, self::FILENAME));
+        $this->writer->openToFile(
+            sprintf('%s/public/export/%s', $this->projectRootDir, self::FILENAME)
+        );
         $this->customQuestions = $this->generateSheetHeaderQuestions();
 
         $header = $this->generateSheetHeader();
@@ -282,7 +281,9 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         googleId
         facebookId
         samlId
-        contributionsCount
+        contributions {
+            totalCount
+        }
         opinionVotesCount
         arguments(includeTrashed: true) {
             totalCount
@@ -295,22 +296,13 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
             totalCount
         }
         proposalVotesCount
-        commentVotes {
-            totalCount
-        }
         sources {
             totalCount
         }
         replies {
             totalCount
         }
-        projects {
-            totalCount
-        }
         opinions {
-            totalCount
-        }
-        comments {
             totalCount
         }
         deletedAccountAt
