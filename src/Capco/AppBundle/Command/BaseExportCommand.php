@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class BaseExportCommand extends Command
 {
     protected $snapshot;
-    protected $exportUtils;
+    protected ExportUtils $exportUtils;
 
     public function __construct(ExportUtils $exportUtils)
     {

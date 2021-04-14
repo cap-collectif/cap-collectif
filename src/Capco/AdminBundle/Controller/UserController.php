@@ -58,7 +58,8 @@ class UserController extends CRUDController
         }
 
         if (!file_exists($absolutePath)) {
-            $this->export();
+            CreateCsvFromUsersCommand::export($this->get(LocaleRepository::class)->getDefaultCode(), $this->get('doctrine')
+                ->getConnection());
         }
 
         $contentType = 'text/csv';
@@ -116,24 +117,5 @@ class UserController extends CRUDController
         $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
-    }
-
-    private function export()
-    {
-        if (file_exists('/tmp/users.csv')) {
-            Process::fromShellCommandline('rm -rf ' . '/tmp/users.csv')->mustRun();
-        }
-
-        $defaultLocale = $this->get(LocaleRepository::class)->getDefaultCode();
-        $sql = sprintf(CreateCsvFromUsersCommand::SQL_QUERY,"%SUPER%", $defaultLocale);
-        if (!file_exists('/tmp/users.csv')) {
-            $this->get('doctrine')
-                ->getConnection()
-                ->executeQuery($sql);
-        }
-
-        Process::fromShellCommandline(
-            'mv /tmp/users.csv /var/www/public/export/users.csv'
-        )->mustRun();
     }
 }

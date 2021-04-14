@@ -8,8 +8,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
+use Doctrine\DBAL\Connection;
 
 class CreateCsvFromUsersCommand extends BaseExportCommand
 {
@@ -41,10 +43,10 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     const SQL_QUERY = <<<EOF
         select * from (
         (select 'id', 'username', 'email', 'createdAt', 'updatedAt','lastLogin' , 'enabled','confirmedAccountAt' ,'locked', 'gender', 'firstname', 'lastname','dateOfBirth', 'websiteUrl' ,'biography',  'address','deletedAccountAt' , 'facebookId' , 'status', 'internalComm' , 'externalComm') 
-        UNION  (select DISTINCT(u.id), IFNULL(u.username, 'N/A') as username, u.email, u.created_at as createdAt, IFNULL(u.updated_at, 'N/A') as updatedAt, IFNULL(u.last_login, 'N/A') as lastLogin,
-         IF(u.enabled = 0 , 'No', 'YES') as enabled, IFNULL(u.confirmed_account_at, 'N/A') as confirmedAccountAt, 
-         IF(u.locked = 0 , 'No', 'YES') as locked,IFNULL(u.gender, 'N/A') as gender, IFNULL(u.firstname, 'N/A') as firstname, IFNULL(u.lastname, 'N/A') as lastname, IFNULL(u.date_of_birth, 'N/A') as dateOfBirth, IFNULL(u.website_url, 'N/A') as websiteUrl, IFNULL(u.biography, 'N/A'), IFNULL(u.address, 'N/A'), IFNULL(u.deleted_account_at, 'N/A') as deletedAccountAt, IFNULL(u.facebook_id, 'N/A') as facebookId, IFNULL(utt.name, 'N/A'), IF(u.consent_internal_communication = 0 , 'No', 'YES') as internalComm, IF(u.consent_external_communication = 0 , 'No', 'YES') as externalComm from fos_user u left join user_type ut on u.user_type_id = ut.id left join user_type_translation utt on utt.translatable_id  = ut.id WHERE  u.roles not like "%s" AND (utt.locale = "%s" OR utt.locale IS NULL) ORDER BY u.created_at )
-        ) a INTO OUTFILE '/tmp/users.csv' FIELDS ENCLOSED BY '"' TERMINATED BY ',' ESCAPED BY '"' LINES TERMINATED BY '\r\n';
+        UNION  (select DISTINCT(u.id), IFNULL(u.username, '') as username, u.email, u.created_at as createdAt, IFNULL(u.updated_at, '') as updatedAt, IFNULL(u.last_login, '') as lastLogin,
+         IF(u.enabled = 0 , 'NO', 'YES') as enabled, IFNULL(u.confirmed_account_at, '') as confirmedAccountAt,
+         IF(u.locked = 0 , 'NO', 'YES') as locked,IFNULL(u.gender, '') as gender, IFNULL(u.firstname, '') as firstname, IFNULL(u.lastname, '') as lastname, IFNULL(u.date_of_birth, '') as dateOfBirth, IFNULL(u.website_url, '') as websiteUrl, IFNULL(u.biography, ''), IFNULL(u.address, ''), IFNULL(u.deleted_account_at, '') as deletedAccountAt, IFNULL(u.facebook_id, '') as facebookId, IFNULL(utt.name, ''), IF(u.consent_internal_communication = 0 , 'NO', 'YES') as internalComm, IF(u.consent_external_communication = 0 , 'NO', 'YES') as externalComm from fos_user u left join user_type ut on u.user_type_id = ut.id left join user_type_translation utt on utt.translatable_id  = ut.id WHERE  u.roles not like "%s" AND (utt.locale = "%s" OR utt.locale IS NULL) ORDER BY u.created_at )
+        ) a INTO OUTFILE '/tmp/users.csv' FIELDS ENCLOSED BY '"' TERMINATED BY '%s' ESCAPED BY '"' LINES TERMINATED BY '\r\n';
     EOF;
 
     protected function configure(): void
@@ -53,6 +55,12 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $this->configureSnapshot();
         $this->setName('capco:export:users')->setDescription(
             'Create csv file from users data'
+        );
+        $this->addOption(
+            'updateSnapshot',
+            'u',
+            InputOption::VALUE_NONE,
+            '/!\ Dev only. This will re-generate snapshot artifacts for current RGPD archive.'
         );
     }
 
@@ -63,24 +71,24 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
             return 1;
         }
+        $delimiter = $input->getOption('delimiter');
 
-        $this->export();
+        self::export($this->localeRepository->getDefaultCode(), $this->em->getConnection(), $delimiter);
 
         $this->executeSnapshot($input, $output, 'users.csv');
 
         return 0;
     }
 
-    private function export():void
+    public static function export(string $defaultLocale, Connection $em, string $delimiter = ';'): void
     {
         if (file_exists('/tmp/users.csv')) {
-            (Process::fromShellCommandline('rm -rf ' . '/tmp/users.csv'))->mustRun();
+            (Process::fromShellCommandline('rm -rf '.'/tmp/users.csv'))->mustRun();
         }
 
-        $defaultLocale = $this->localeRepository->getDefaultCode();
-        $sql = sprintf(self::SQL_QUERY,"%SUPER%", $defaultLocale);
+        $sql = sprintf(self::SQL_QUERY, "%SUPER%", $defaultLocale, $delimiter);
         if (!file_exists('/tmp/users.csv')) {
-            $this->em->getConnection()->executeQuery($sql);
+            $em->executeQuery($sql);
         }
 
         (Process::fromShellCommandline("mv /tmp/users.csv /var/www/public/export/users.csv"))->mustRun();
