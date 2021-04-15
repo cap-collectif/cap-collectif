@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Utils\Text;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait TitleTrait
@@ -17,7 +17,7 @@ trait TitleTrait
 
     public function getTitle(): ?string
     {
-        return $this->title ?? '';
+        return Text::htmlToString($this->title ?? '');
     }
 
     public function setTitle(?string $title = null): self

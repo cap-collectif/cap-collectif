@@ -8,6 +8,7 @@ use Box\Spout\Reader\CSV\Reader;
 use Box\Spout\Reader\CSV\RowIterator;
 use Box\Spout\Reader\CSV\Sheet;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
@@ -45,23 +46,23 @@ class ImportProposalsFromCsvCommand extends Command
 
     protected static $defaultName = 'capco:import:proposals-from-csv';
 
-    private $filePath;
-    private $delimiter;
-    private $proposalForm;
-    private $questionsMap;
-    private $newUsersMap;
-    private $questionsHeader = [];
+    private ?string $filePath;
+    private ?string $delimiter;
+    private ?ProposalForm $proposalForm;
+    private ?array $questionsMap;
+    private array $newUsersMap;
+    private array $questionsHeader = [];
 
-    private $om;
-    private $mediaManager;
-    private $districtRepository;
-    private $proposalCategoryRepository;
-    private $proposalFormRepository;
-    private $statusRepository;
-    private $userRepository;
-    private $fosUserManager;
-    private $map;
-    private $headers;
+    private EntityManagerInterface $om;
+    private MediaManager $mediaManager;
+    private ProposalDistrictRepository $districtRepository;
+    private ProposalCategoryRepository $proposalCategoryRepository;
+    private ProposalFormRepository $proposalFormRepository;
+    private StatusRepository $statusRepository;
+    private UserRepository $userRepository;
+    private UserManagerInterface $fosUserManager;
+    private Map $map;
+    private array $headers;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -107,7 +108,7 @@ class ImportProposalsFromCsvCommand extends Command
             )
             ->addOption(
                 'illustrations',
-                'i',
+                'il',
                 InputOption::VALUE_NONE,
                 'Does the csv has illustrations path ?'
             )
@@ -188,7 +189,7 @@ class ImportProposalsFromCsvCommand extends Command
                 ]);
 
                 if (!$author) {
-                    if (filter_var($row[$this->headers['author']], FILTER_VALIDATE_EMAIL)) {
+                    if (filter_var($row[$this->headers['author']], \FILTER_VALIDATE_EMAIL)) {
                         $output->writeln(
                             '<error>Could not find user for "' .
                                 $row[$this->headers['author']] .
@@ -249,7 +250,7 @@ class ImportProposalsFromCsvCommand extends Command
                     $proposal->setSummary(Text::escapeHtml($row[$this->headers['summary']]));
                 }
 
-                $proposal->setBody(Text::escapeHtml($row[$this->headers['body']]));
+                $proposal->setBody(nl2br($row[$this->headers['body']]));
 
                 if ($input->hasOption('illustrations')) {
                     try {
@@ -314,7 +315,7 @@ class ImportProposalsFromCsvCommand extends Command
         $user = $this->fosUserManager->createUser();
         $user->setUsername($username);
         $user->setEmail(
-            filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL)
+            filter_var($username . '@fake-email-cap-collectif.com', \FILTER_SANITIZE_EMAIL)
         );
         $user->setPlainPassword('ykWc+ud(4vza2|');
         $user->setEnabled(true);
