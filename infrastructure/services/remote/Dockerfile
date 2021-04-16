@@ -59,12 +59,12 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.4-json \
         php7.4-mysql \
         php7.4-opcache \
+        php7.4-sqlite3 \
         php7.4-redis \
         php7.4-xsl \
         php7.4-zip \
         php7.4-xml \
         php7.4-amqp \
-        php-sqlite3\
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
