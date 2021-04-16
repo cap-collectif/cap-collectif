@@ -42,7 +42,6 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
   </li>
   <li>
     <Connect(CookieManagerModal)
-      bannerTrad="Quand je suis stressé je range les cookies dans une boite c'est comme ça"
       isLink={true}
       separator="|"
     />

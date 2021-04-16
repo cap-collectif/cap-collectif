@@ -149,15 +149,12 @@ const FooterLinksRender = ({
           </a>
         </li>
       )}
-      {cookiesText && (
-        <li ref={handleItemWidth}>
-          <CookieManagerModal
-            bannerTrad={cookiesText}
-            isLink
-            separator={legals.cookies || legals.privacy || legals.legal ? '|' : ''}
-          />
-        </li>
-      )}
+      <li ref={handleItemWidth}>
+        <CookieManagerModal
+          isLink
+          separator={legals.cookies || legals.privacy || legals.legal ? '|' : ''}
+        />
+      </li>
       {links.map((link: FooterLink, index: number) =>
         index < overflowIndex - activeNumber ? (
           <li key={link.name} ref={handleItemWidth}>

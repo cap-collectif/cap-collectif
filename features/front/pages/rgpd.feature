@@ -113,8 +113,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
   And I should not see "#changeLanguageProposalContainer"
 
 @international
-Scenario: An anonymous goes to a page not in his default language and should see banner. Then, after his choice, all
-  pages not in his locale should show the banner
+Scenario: An anonymous goes to a page not in his default language and should see banner. Then, after his choice, all  pages not in his locale should show the banner
   Given feature "multilangue" is enabled
   Given I go to "/de/"
   And I should not see a cookie named "locale"
