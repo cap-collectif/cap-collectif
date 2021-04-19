@@ -179,7 +179,9 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
             }
         }
 
-        throw new \Exception('No proposalForm found for this selection step');
+        throw new \RuntimeException(
+            $this->getId() . ' : no proposalForm found for this selection step'
+        );
     }
 
     public function getProposals()
