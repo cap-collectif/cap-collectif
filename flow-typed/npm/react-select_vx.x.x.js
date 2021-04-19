@@ -94,15 +94,15 @@ declare module 'react-select/gulpfile' {
   declare module.exports: any;
 }
 
-declare module 'react-select/lib/Async' {
+declare module 'react-select/async' {
   declare module.exports: any;
 }
 
-declare module 'react-select/lib/AsyncCreatable' {
+declare module 'react-select/async-creatable' {
   declare module.exports: any;
 }
 
-declare module 'react-select/lib/Creatable' {
+declare module 'react-select/creatable' {
   declare module.exports: any;
 }
 

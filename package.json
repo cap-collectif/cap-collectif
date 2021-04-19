@@ -335,7 +335,7 @@
         "react-relay": "^11.0.0",
         "react-router-bootstrap": "rr-v3",
         "react-router-dom": "5.1.2",
-        "react-select": "^2.4.2",
+        "react-select": "^4.3.0",
         "react-simple-code-editor": "^0.10.0",
         "react-slick": "0.26.1",
         "react-test-renderer": "^16.13.1",

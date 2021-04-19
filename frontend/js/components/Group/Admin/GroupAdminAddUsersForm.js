@@ -24,6 +24,16 @@ type FormValues = {
 
 export const formName = 'group-users-add';
 
+const validate = (values: FormValues) => {
+  const errors = {};
+
+  if (!values.users || values.users.length === 0) {
+    errors.users = 'global.form.mandatory';
+  }
+
+  return errors;
+};
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, reset }) => {
   const users = [];
 
@@ -85,6 +95,7 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
 
 const form = reduxForm({
   onSubmit,
+  validate,
   form: formName,
   destroyOnUnmount: false,
 })(GroupAdminAddUsersForm);
