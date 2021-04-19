@@ -46,3 +46,7 @@ export { default as FACEBOOK } from './svg/facebook.svg';
 export { default as LINK } from './svg/link.svg';
 export { default as LINKEDIN } from './svg/linkedin.svg';
 export { default as TWITTER } from './svg/twitter.svg';
+export { default as FILE_O } from './svg/file-o.svg';
+export { default as COG_O } from './svg/cog-o.svg';
+export { default as PENCIL_O } from './svg/pencil-o.svg';
+export { default as ENVELOPE_O } from './svg/envelope-o.svg';

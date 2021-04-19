@@ -1,14 +1,19 @@
 // @flow
 import * as React from 'react';
 import AppBox from '~ui/Primitives/AppBox';
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import { AccordionContext } from '~ds/Accordion/context';
 import { AccordionItemContext } from './context';
 import AccordionButton from '~ds/Accordion/button';
 import AccordionPanel from '~ds/Accordion/panel';
+import SidebarButton from '~/components/Admin/Sidebar/SidebarButton';
 
 type Props = {|
+  ...AppBoxProps,
   children: React.ChildrenArray<
-    React.Element<typeof AccordionButton> | React.Element<typeof AccordionPanel>,
+    | React.Element<typeof AccordionButton>
+    | React.Element<typeof AccordionPanel>
+    | React.Element<typeof SidebarButton>,
   >,
   id: string,
   disabled?: boolean,

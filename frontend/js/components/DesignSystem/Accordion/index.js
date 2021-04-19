@@ -9,7 +9,7 @@ import type { FlexProps } from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   ...FlexProps,
-  children: React.ChildrenArray<React.Element<typeof AccordionItem>>,
+  children: React.ChildrenArray<React.Element<typeof AccordionItem> | null>,
   allowMultiple?: boolean,
   defaultAccordion?: string | string[],
 |};

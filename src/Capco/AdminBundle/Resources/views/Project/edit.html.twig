@@ -15,3 +15,14 @@
         }	
     }) }}
 {% endblock %}
+{% block stylesheets %}
+    {# Sonata css #}
+    {{ parent() }}
+
+    <style>
+    .content-admin {
+        position: absolute;
+        right: 0px;
+    }
+    </style>
+{% endblock %}

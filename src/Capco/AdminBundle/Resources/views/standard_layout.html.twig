@@ -1,107 +1,120 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
-{% block sonata_top_nav_menu %}
-    {% include '@CapcoApp/redux_store.html.twig' %}
-    {% set localesData = [] %}
-    {% if is_feature_enabled('multilangue') %}
-        {% set locales = availableLocales() %}
-        {% for locale in locales %}
-            {% set localesData = localesData|merge([{ 'locale': locale.code,  'path': path('sonata.translation.locale', {'locale': locale.code})}]) %}
-        {% endfor %}
-    {% endif %}
-    {{ react_render_component('ToastsContainerApp', {
-        'rendering': 'client_side'
-    }) }}
-   <div class="navbar-custom-menu">
-    {{ react_render_component('AdminRightNavbarApp', {
-        'props': {
-            'localesData': localesData,
-            'currentLocale': app.request.locale,
-            }
-        })
-    }}
-{% endblock %}
+{% block sonata_header %}
+    <div style="width: 100%;">
+    <header class="main-header">
+        {% block sonata_header_noscript_warning %}
+            <noscript>
+                <div class="noscript-warning">
+                    {{ 'noscript_warning'|trans({}, 'SonataAdminBundle') }}
+                </div>
+            </noscript>
+        {% endblock %}
+        {% block sonata_nav %}
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="navbar-left">
+                    {% block sonata_breadcrumb %}
+                        <div class="hidden-xs">
+                            {% if _breadcrumb is not empty or action is defined %}
+                                <ol class="nav navbar-top-links breadcrumb">
+                                    {% if _breadcrumb is empty %}
+                                        {% if action is defined %}
+                                            {% for menu in breadcrumbs_builder.breadcrumbs(admin, action) %}
+                                                {%- set translation_domain = menu.extra('translation_domain', 'messages') -%}
+                                                {# We use method accessor instead of ".label" since `menu` implements `ArrayAccess` and could have a property called "label". #}
+                                                {%- set label = menu.getLabel() -%}
+                                                {%- if translation_domain is not same as(false) -%}
+                                                    {%- set label = label|trans(menu.extra('translation_params', {}), translation_domain) -%}
+                                                {%- endif -%}
+                                                {% if not loop.last %}
+                                                    <li>
+                                                        {% if menu.uri is not empty %}
+                                                            <a href="{{ menu.uri }}">
+                                                                {% if menu.extra('safe_label', true) %}
+                                                                    {{- label|raw -}}
+                                                                {% else %}
+                                                                    {{- label|u.truncate(100, '...') -}}
+                                                                {% endif %}
+                                                            </a>
+                                                        {% else %}
+                                                            <span>{{ label|u.truncate(100, '...') }}</span>
+                                                        {% endif %}
+                                                    </li>
+                                                {% else %}
+                                                    <li class="active"><span>{{ label|u.truncate(100, '...') }}</span></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ _breadcrumb|raw }}
+                                    {% endif %}
+                                </ol>
+                            {% endif %}
+                        </div>
+                    {% endblock sonata_breadcrumb %}
+                </div>
+                {% block sonata_top_nav_menu %}
+                    {% include '@CapcoApp/redux_store.html.twig' %}
+                    {% set localesData = [] %}
+                    {% if is_feature_enabled('multilangue') %}
+                        {% set locales = availableLocales() %}
+                        {% for locale in locales %}
+                            {% set localesData = localesData|merge([{ 'locale': locale.code,  'path': path('sonata.translation.locale', {'locale': locale.code})}]) %}
+                        {% endfor %}
+                    {% endif %}
+                    {{ react_render_component('ToastsContainerApp', {
+                        'rendering': 'client_side'
+                    }) }}
+                    <div class="navbar-custom-menu">
+                        {{ react_render_component('AdminRightNavbarApp', {
+                            'props': {
+                                'localesData': localesData,
+                                'currentLocale': app.request.locale,
+                                }
+                            })
+                        }}
+                    </div>
+                {% endblock %}
+            </nav>
+        {% endblock sonata_nav %}
+    </header>
+    <div class="content-admin">
+                {% block sonata_page_content %}
+                    <section class="content-header">
 
-{% block sonata_sidebar_search %}
-    {% if sonata_admin.adminPool.getOption('search') %}
-        <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
-            <div class="input-group custom-search-form">
-                <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control"
-                       placeholder="{{ 'global.menu.search'|trans({}, 'SonataAdminBundle') }}">
-                <span class="input-group-btn">
-                <button class="btn btn-flat" id="sonata-search-submit" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-                </span>
-            </div>
-        </form>
-    {% endif %}
-{% endblock sonata_sidebar_search %}
+                        {% block sonata_page_content_header %}
+                            {% block sonata_page_content_nav %}
+                                {% if _navbar_title is not empty
+                                  or _tab_menu is not empty
+                                  or _actions is not empty
+                                  or _list_filters_actions is not empty
+                                 %}
+                                    <nav class="navbar navbar-default" role="navigation">
+                                        <div class="container-fluid">
+                                            {% block tab_menu_navbar_header %}
+                                                {% if _navbar_title is not empty %}
+                                                    <div class="navbar-header">
+                                                        <a class="navbar-brand" href="#">{{ _navbar_title|raw }}</a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endblock %}
 
-{% block meta_tags %}
-    {{ parent() }}
-    {% include 'CapcoAppBundle::favicon.html.twig' %}
-{% endblock %}
+                                            <div class="navbar-collapse">
+                                                {% if _tab_menu is not empty %}
+                                                    <div class="navbar-left">
+                                                        {{ _tab_menu|raw }}
+                                                    </div>
+                                                {% endif %}
 
-{% block stylesheets %}
-    {# Sonata css #}
-    {{ parent() }}
+                                                {% if admin is defined and action is defined and action == 'list' and admin.listModes|length > 1 %}
+                                                    <div class="nav navbar-right btn-group">
+                                                        {% for mode, settings in admin.listModes %}
+                                                            <a href="{{ admin.generateUrl('list', app.request.query.all|merge({_list_mode: mode})) }}" class="btn btn-default navbar-btn btn-sm{% if admin.getListMode() == mode %} active{% endif %}"><i class="{{ settings.class }}"></i></a>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
 
-    <style>
-        @font-face {
-            font-family: 'cap-collectif';
-            font-weight: normal;
-            font-style: normal;
-            src: url("{{ asset('fonts/cap-collectif.eot') }}");
-            src: url("{{ asset('fonts/cap-collectif.eot#iefix') }}") format('embedded-opentype'),
-            url("{{ asset('fonts/cap-collectif.woff') }}") format('woff'),
-            url("{{ asset('fonts/cap-collectif.ttf') }}") format('truetype'),
-            url("{{ asset('fonts/cap-collectif.svg#cap-collectif') }}") format('svg');
-        }
-    </style>
-
-    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
-{% endblock %}
-
-{% block javascripts %}
-    {% if is_feature_enabled('app_news') %}
-        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
-    {% endif %}
-    <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
-
-    <script type="text/javascript">
-      window.CKEDITOR_BASEPATH = '/js/ckeditor/';
-      window.locale = "{{ intl_locale() }}";
-      window.sentryDsn = "{{ sentryDsn }}";
-    </script>
-
-    <script src="{{ asset('js/jquery.minicolors.js') }}"></script>
-    <script src="{{ asset('js/commons.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/vendor.js') }}"></script>
-    {% if app.environment == 'test' %}
-        <script>
-          window.intl_messages = {};
-        </script>
-    {% else %}
-        <script src="{{ asset('js/'~intl_locale()~'.js') }}"></script>
-    {% endif %}
-    <script src="{{ asset('js/admin.js') }}"></script>
-    {# Sonata javascript #}
-    {{ parent() }}
-
-    <script type="text/javascript">
-      $(window).on('load', function() {
-        $('.minicolors-input').minicolors({
-          theme: 'bootstrap',
-        });
-      });
-    </script>
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
-{% endblock %}
-
-{% block sonata_admin_content_actions_wrappers %}
+                                               {% block sonata_admin_content_actions_wrappers %}
     {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.hasSubject == false %}
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -170,6 +183,164 @@
         </ul>
     {% endif %}
 {% endblock sonata_admin_content_actions_wrappers %}
+
+                                                {% if _list_filters_actions is not empty %}
+                                                    {{ _list_filters_actions|raw }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </nav>
+                                {% endif %}
+                            {% endblock sonata_page_content_nav %}
+                        {% endblock sonata_page_content_header %}
+                    </section>
+
+                    <section class="content">
+                        {% block sonata_admin_content %}
+
+                            {% block notice %}
+                                {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
+                            {% endblock notice %}
+
+                            {% if _preview is not empty %}
+                                <div class="sonata-ba-preview">{{ _preview|raw }}</div>
+                            {% endif %}
+
+                            {% if _content is not empty %}
+                                <div class="sonata-ba-content">{{ _content|raw }}</div>
+                            {% endif %}
+
+                            {% if _show is not empty %}
+                                <div class="sonata-ba-show">{{ _show|raw }}</div>
+                            {% endif %}
+
+                            {% if _form is not empty %}
+                                <div class="sonata-ba-form">{{ _form|raw }}</div>
+                            {% endif %}
+
+                            {% if _list_filters is not empty %}
+                                <div class="row">
+                                    {{ _list_filters|raw }}
+                                </div>
+                            {% endif %}
+
+                            {% if _list_table is not empty %}
+                                <div class="row">
+                                    {{ _list_table|raw }}
+                                </div>
+                            {% endif %}
+                        {% endblock sonata_admin_content %}
+                    </section>
+                {% endblock sonata_page_content %}
+            </div></div>
+        {% endblock sonata_header %}
+
+
+ {% block sonata_wrapper %}{% block sonata_left_side %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{ react_render_component('SidebarApp', {
+        'props': {'appVersion': app_version}
+        })
+    }}
+{% endblock sonata_left_side %}
+{% endblock sonata_wrapper %}
+
+
+{% block sonata_sidebar_search %}
+    {% if sonata_admin.adminPool.getOption('search') %}
+        <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
+            <div class="input-group custom-search-form">
+                <input type="text" name="q" id="sonata-search" value="{{ app.request.get('q') }}" class="form-control"
+                       placeholder="{{ 'global.menu.search'|trans({}, 'SonataAdminBundle') }}">
+                <span class="input-group-btn">
+                <button class="btn btn-flat" id="sonata-search-submit" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                </span>
+            </div>
+        </form>
+    {% endif %}
+{% endblock sonata_sidebar_search %}
+
+{% block meta_tags %}
+    {{ parent() }}
+    {% include 'CapcoAppBundle::favicon.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {# Sonata css #}
+    {{ parent() }}
+
+    <style>
+        @font-face {
+            font-family: 'cap-collectif';
+            font-weight: normal;
+            font-style: normal;
+            src: url("{{ asset('fonts/cap-collectif.eot') }}");
+            src: url("{{ asset('fonts/cap-collectif.eot#iefix') }}") format('embedded-opentype'),
+            url("{{ asset('fonts/cap-collectif.woff') }}") format('woff'),
+            url("{{ asset('fonts/cap-collectif.ttf') }}") format('truetype'),
+            url("{{ asset('fonts/cap-collectif.svg#cap-collectif') }}") format('svg');
+        }
+        .wrapper {display: flex;
+    flex-direction: row-reverse;justify-content: flex-end;
+    overflow-x: unset !important;
+    overflow-y: unset !important;
+    }
+    .content-admin {
+    width: calc(100vw - 224px);min-height: 100vh;background-color: #ecf0f5;    padding-top: 54px;height: 100%;}
+    .main-header .navbar {
+    min-height: 56px;
+}.main-header {
+    height: 56px;
+}
+div[class*='Sidebar___StyledAccordion']::-webkit-scrollbar {
+    display: none;
+}
+    </style>
+
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {% if is_feature_enabled('app_news') %}
+        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
+    {% endif %}
+    <script src="{{ asset('bundles/sonatacore/vendor/jquery/dist/jquery.min.js') }}"></script>
+
+    <script type="text/javascript">
+      window.CKEDITOR_BASEPATH = '/js/ckeditor/';
+      window.locale = "{{ intl_locale() }}";
+      window.sentryDsn = "{{ sentryDsn }}";
+    </script>
+
+    <script src="{{ asset('js/jquery.minicolors.js') }}"></script>
+    <script src="{{ asset('js/commons.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    {% if app.environment == 'test' %}
+        <script>
+          window.intl_messages = {};
+        </script>
+    {% else %}
+        <script src="{{ asset('js/'~intl_locale()~'.js') }}"></script>
+    {% endif %}
+    <script src="{{ asset('js/admin.js') }}"></script>
+    {# Sonata javascript #}
+    {{ parent() }}
+
+    <script type="text/javascript">
+      $(window).on('load', function() {
+        $('.minicolors-input').minicolors({
+          theme: 'bootstrap',
+        });
+      });
+    </script>
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+{% endblock %}
+
+
 
 {% block logo %}
     {% if admin_pool is defined %}

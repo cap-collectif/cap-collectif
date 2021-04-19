@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SidebarButton /> renders correctly 1`] = `
+<SidebarButton___StyledButton
+  _css="#BEC4CB"
+  bg="gray.900"
+  borderRadius="0"
+  color="gray.500"
+  disabled={false}
+  fontWeight="normal"
+  justifyContent="center"
+  onClick={[Function]}
+  pb={3}
+  pl={3}
+  pr={3}
+  pt={3}
+  width="100%"
+>
+  <ForwardRef
+    alignItems="center"
+    direction="row"
+  >
+    <Icon
+      marginRight={0}
+      name="ENVELOPE_O"
+      size="md"
+    />
+  </ForwardRef>
+</SidebarButton___StyledButton>
+`;
+
+exports[`<SidebarButton /> renders correctly open 1`] = `
+<SidebarButton___StyledButton
+  _css="#BEC4CB"
+  bg="gray.900"
+  borderRadius="0"
+  color="gray.500"
+  disabled={false}
+  fontWeight="normal"
+  justifyContent="space-between"
+  onClick={[Function]}
+  pb={3}
+  pl={3}
+  pr={5}
+  pt={3}
+  width="100%"
+>
+  <ForwardRef
+    alignItems="center"
+    direction="row"
+  >
+    <Icon
+      marginRight={1}
+      name="ENVELOPE_O"
+      size="md"
+    />
+    <SidebarButton___StyledText
+      fontSize={14}
+    >
+      MAIL
+    </SidebarButton___StyledText>
+  </ForwardRef>
+  <Icon
+    marginLeft={1}
+    name="ARROW_DOWN"
+    size="sm"
+  />
+</SidebarButton___StyledButton>
+`;

@@ -10,6 +10,7 @@ import AppBox from '~ui/Primitives/AppBox';
 export const ICON_NAME = {
   TRASH: 'TRASH',
   PENCIL: 'PENCIL',
+  PENCIL_O: 'PENCIL_O',
   USER: 'USER',
   CLOCK_O: 'CLOCK_O',
   CLOCK: 'CLOCK',
@@ -55,6 +56,9 @@ export const ICON_NAME = {
   LINK: 'LINK',
   LINKEDIN: 'LINKEDIN',
   TWITTER: 'TWITTER',
+  FILE_O: 'FILE_O',
+  COG_O: 'COG_O',
+  ENVELOPE_O: 'ENVELOPE_O',
 };
 
 export const ICON_SIZE = {

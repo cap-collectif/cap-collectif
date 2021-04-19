@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SidebarLink /> renders correctly 1`] = `
+<SidebarLink___StyledLink
+  _css="#BEC4CB"
+  _css2="#FAFCFF"
+  _css3="#FAFCFF"
+  fontSize={13}
+  href="/réglages"
+  p={1}
+  position="relative"
+  width="120%"
+>
+  Réglages
+</SidebarLink___StyledLink>
+`;

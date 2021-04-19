@@ -103,6 +103,7 @@ well_formed_exports=true
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Contact
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/SiteFavicon
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Debate
+well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Sidebar
 
 
 module.system.node.resolve_dirname=node_modules

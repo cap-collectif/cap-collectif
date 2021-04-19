@@ -4,6 +4,7 @@ import { ComponentProps } from 'react';
 declare export const ICON_NAME = {
     TRASH: 'TRASH',
     PENCIL: 'PENCIL',
+    PENCIL_O: 'PENCIL_O',
     USER: 'USER',
     CLOCK_O: 'CLOCK_O',
     CLOCK: 'CLOCK',
@@ -47,6 +48,9 @@ declare export const ICON_NAME = {
     LINK: 'LINK',
     LINKEDIN: 'LINKEDIN',
     TWITTER: 'TWITTER',
+    FILE_O: 'FILE_O',
+    COG_O: 'COG_O',
+    ENVELOPE_O: 'ENVELOPE_O'
 };
 
 declare export const ICON_SIZE = {
