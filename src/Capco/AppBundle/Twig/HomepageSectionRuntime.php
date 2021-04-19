@@ -105,6 +105,19 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         );
     }
 
+    public function getCustomProjects(
+        ?Section $section = null
+    ): string {
+        $user = ($token = $this->tokenStorage->getToken()) ? $token->getUser() : null;
+        $count = $this->projectRepository->countPublished($user);
+        $projectsCount = $section->getSectionProjects()->count();
+
+        return $this->twig->render(
+            'CapcoAppBundle:Homepage:listCustomProjects.html.twig',
+            compact('count', 'section', 'projectsCount')
+        );
+    }
+
     public function getLastThemes(
         ?int $max = null,
         ?int $offset = null,

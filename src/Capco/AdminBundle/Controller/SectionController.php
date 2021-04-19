@@ -101,7 +101,10 @@ class SectionController extends PositionableController
         }
 
         if ($existingObject->getType() === 'projects') {
-            return $this->renderWithExtraParams('CapcoAdminBundle:Section:edit_projects.html.twig');
+            return $this->renderWithExtraParams('CapcoAdminBundle:Section:edit_projects.html.twig', [
+                'action' => 'edit',
+                'object' => $existingObject,
+            ]);
         }
 
         $this->checkParentChildAssociation($request, $existingObject);

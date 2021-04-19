@@ -6,9 +6,11 @@ import { ThemeProvider } from 'styled-components';
 import { AnalyticsProvider } from 'use-analytics';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
+import { RelayEnvironmentProvider } from 'react-relay';
 import IntlProvider from './IntlProvider';
 import { theme } from '~/styles/theme';
 import { analytics } from './analytics';
+import environment from '../createRelayEnvironment';
 
 if (window.sentryDsn) {
   Sentry.init({ dsn: window.sentryDsn });
@@ -42,11 +44,13 @@ class Providers extends React.Component<Props> {
     return (
       <Provider store={store}>
         <IntlProvider timeZone={window.timeZone}>
-          <ThemeProvider theme={theme}>
-            <AnalyticsProvider instance={analytics}>
-              <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>{' '}
-            </AnalyticsProvider>
-          </ThemeProvider>
+          <RelayEnvironmentProvider environment={environment}>
+            <ThemeProvider theme={theme}>
+              <AnalyticsProvider instance={analytics}>
+                <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>{' '}
+              </AnalyticsProvider>
+            </ThemeProvider>
+          </RelayEnvironmentProvider>
         </IntlProvider>
       </Provider>
     );

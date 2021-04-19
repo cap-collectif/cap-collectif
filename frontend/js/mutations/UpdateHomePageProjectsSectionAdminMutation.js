@@ -5,11 +5,12 @@ import environnement from '~/createRelayEnvironment';
 import type {
   UpdateHomePageProjectsSectionAdminMutationResponse as Response,
   UpdateHomePageProjectsSectionAdminMutationVariables,
-} from "~relay/UpdateHomePageProjectsSectionAdminMutation.graphql";
-
+} from '~relay/UpdateHomePageProjectsSectionAdminMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateHomePageProjectsSectionAdminMutation($input: UpdateHomePageProjectsSectionAdminInput!) {
+  mutation UpdateHomePageProjectsSectionAdminMutation(
+    $input: UpdateHomePageProjectsSectionAdminInput!
+  ) {
     updateHomePageProjectsSectionAdmin(input: $input) {
       errorCode
       homePageProjectsSectionAdmin {
@@ -19,12 +20,21 @@ const mutation = graphql`
         displayMode
         nbObjects
         enabled
+        projects {
+          edges {
+            node {
+              title
+            }
+          }
+        }
       }
     }
   }
 `;
 
-const commit = (variables: UpdateHomePageProjectsSectionAdminMutationVariables): Promise<Response> =>
+const commit = (
+  variables: UpdateHomePageProjectsSectionAdminMutationVariables,
+): Promise<Response> =>
   commitMutation(environnement, {
     mutation,
     variables,

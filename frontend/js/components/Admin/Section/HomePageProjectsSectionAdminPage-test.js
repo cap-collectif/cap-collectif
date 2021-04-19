@@ -6,7 +6,9 @@ import { HomePageProjectsSectionAdminPage } from './HomePageProjectsSectionAdmin
 import { $fragmentRefs, intlMock, formMock, $refType } from '~/mocks';
 
 const props = {
-  projectsFragments: $fragmentRefs,
+  paginatedProjectsFragmentRef: $fragmentRefs,
+  allProjectsFragmentRef: $fragmentRefs,
+  homePageProjectsSectionAdminFragmentRef: $fragmentRefs,
   displayMode: 'MOST_RECENT',
   homePageProjectsSectionAdmin: {
     id: 'SG9tZVBhZ2VQcm9qZWN0c1NlY3Rpb25BZG1pbjpzZWN0aW9uUHJvamVjdHM=',
@@ -16,6 +18,9 @@ const props = {
     displayMode: 'MOST_RECENT',
     enabled: true,
     nbObjects: 4,
+    projects: {
+      edges: [],
+    },
     $refType,
   },
   currentLanguage: 'fr-FR',

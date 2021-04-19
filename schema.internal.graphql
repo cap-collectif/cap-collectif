@@ -5450,6 +5450,7 @@ type HomePageProjectsSectionAdmin {
 
   """Whether it is published or not"""
   enabled: Boolean!
+  projects: ProjectConnection!
 }
 
 enum HomePageProjectsSectionAdminDisplayMode {
@@ -13030,6 +13031,7 @@ input UpdateHomePageProjectsSectionAdminInput {
   """Whether it is published or not"""
   enabled: Boolean!
   translations: [HomePageProjectsSectionAdminTranslationInput!]
+  projects: [ID!]!
   clientMutationId: String
 }
 

@@ -26,4 +26,6 @@ HomePageProjectsSectionAdmin:
             enabled:
                 type: 'Boolean!'
                 description: 'Whether it is published or not'
-
+            projects:
+                type: 'InternalProjectConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\HomePageProjectsSectionAdmin\\HomePageProjectsSectionAdminProjectsResolver", [value])'

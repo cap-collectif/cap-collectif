@@ -56,6 +56,7 @@ export const ICON_NAME = {
   LINK: 'LINK',
   LINKEDIN: 'LINKEDIN',
   TWITTER: 'TWITTER',
+  DRAG: 'DRAG',
   FILE_O: 'FILE_O',
   COG_O: 'COG_O',
   ENVELOPE_O: 'ENVELOPE_O',

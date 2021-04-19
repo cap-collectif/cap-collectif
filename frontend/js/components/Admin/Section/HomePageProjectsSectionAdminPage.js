@@ -22,16 +22,21 @@ import HomePageProjectsSectionAdminPageDisplayMostRecent from '~/components/Admi
 import { handleTranslationChange } from '~/services/Translation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import Text from '~ui/Primitives/Text';
+import HomePageProjectsSectionAdminPageDisplayCustom from '~/components/Admin/Section/HomePageProjectsSectionAdminPageDisplayCustom';
+import type { HomePageProjectsSectionAdminPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionAdminPageDisplayCustom_query.graphql';
+import type { HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin$key } from '~relay/HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin.graphql';
 
 const formName = 'section-proposal-admin-form';
 
 type Props = {|
-  +projectsFragments: HomePageProjectsSectionAdminPageDisplayMostRecent_query$key,
   +displayMode: HomePageProjectsSectionAdminDisplayMode,
   +homePageProjectsSectionAdmin: HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin,
   +currentLanguage: string,
   +maxProjectsDisplay: number,
   +intl: IntlShape,
+  +paginatedProjectsFragmentRef: HomePageProjectsSectionAdminPageDisplayMostRecent_query$key,
+  +allProjectsFragmentRef: HomePageProjectsSectionAdminPageDisplayCustom_query$key,
+  +homePageProjectsSectionAdminFragmentRef: HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin$key,
   ...ReduxFormFormProps,
 |};
 
@@ -42,13 +47,21 @@ type FormValues = {|
   +position: string,
   +teaser: string,
   +title: string,
+  +projects: $ReadOnlyArray<string>,
 |};
+
+const TEASER_MAX = 200;
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch, { maxProjectsDisplay }: Props) => {
   return new Promise((resolve, reject) => {
     if (parseInt(values.nbObjects, 10) > maxProjectsDisplay) {
       const error = {};
       error.nbObjects = { id: 'n-maximum', values: { n: maxProjectsDisplay } };
+      return reject(error);
+    }
+    if (values.teaser.length > TEASER_MAX) {
+      const error = {};
+      error.teaser = { id: 'characters-maximum', values: { quantité: TEASER_MAX } };
       return reject(error);
     }
     return resolve();
@@ -60,7 +73,7 @@ const onSubmit = async (
   dispatch: Dispatch,
   { currentLanguage, intl }: Props,
 ) => {
-  const { title, teaser, position, nbObjects } = values;
+  const { title, teaser, position, nbObjects, projects } = values;
 
   const translationsData = handleTranslationChange(
     [],
@@ -78,6 +91,7 @@ const onSubmit = async (
     nbObjects: parseInt(nbObjects, 10),
     enabled: values.enabled === 'published',
     translations: translationsData,
+    projects,
   };
 
   try {
@@ -106,10 +120,12 @@ const onSubmit = async (
 export const HomePageProjectsSectionAdminPage = ({
   handleSubmit,
   homePageProjectsSectionAdmin,
-  projectsFragments,
   displayMode,
   maxProjectsDisplay,
   intl,
+  paginatedProjectsFragmentRef,
+  allProjectsFragmentRef,
+  homePageProjectsSectionAdminFragmentRef,
 }: Props) => {
   return (
     <form method="POST" onSubmit={handleSubmit}>
@@ -178,9 +194,18 @@ export const HomePageProjectsSectionAdminPage = ({
 
           {displayMode === 'MOST_RECENT' && (
             <HomePageProjectsSectionAdminPageDisplayMostRecent
-              projectsFragments={projectsFragments}
+              paginatedProjectsFragmentRef={paginatedProjectsFragmentRef}
               homePageProjectsSectionAdmin={homePageProjectsSectionAdmin}
               maxProjectsDisplay={maxProjectsDisplay}
+            />
+          )}
+
+          {displayMode === 'CUSTOM' && (
+            <HomePageProjectsSectionAdminPageDisplayCustom
+              allProjectsFragmentRef={allProjectsFragmentRef}
+              homePageProjectsSectionAdminFragmentRef={homePageProjectsSectionAdminFragmentRef}
+              maxProjectsDisplay={maxProjectsDisplay}
+              formName={formName}
             />
           )}
         </S.SectionInner>
@@ -217,7 +242,7 @@ export const HomePageProjectsSectionAdminPage = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState, { homePageProjectsSectionAdmin }) => {
+const mapStateToProps = (state: GlobalState, { homePageProjectsSectionAdmin }: Props) => {
   if (homePageProjectsSectionAdmin) {
     const {
       title,
@@ -226,7 +251,9 @@ const mapStateToProps = (state: GlobalState, { homePageProjectsSectionAdmin }) =
       displayMode,
       nbObjects,
       enabled,
+      projects,
     } = homePageProjectsSectionAdmin;
+
     const initialValues = {
       title,
       teaser,
@@ -234,6 +261,7 @@ const mapStateToProps = (state: GlobalState, { homePageProjectsSectionAdmin }) =
       displayMode,
       nbObjects,
       enabled: enabled === true ? 'published' : 'unpublished',
+      projects: projects?.edges?.map(edge => edge?.node?.id),
     };
     return {
       initialValues,
@@ -249,7 +277,7 @@ const form = injectIntl(
     form: formName,
     onSubmit,
     asyncValidate,
-    asyncChangeFields: ['nbObjects'],
+    asyncChangeFields: ['nbObjects', 'teaser'],
   })(HomePageProjectsSectionAdminPage),
 );
 
@@ -267,6 +295,13 @@ const fragmentContainer = createFragmentContainer(HomePageProjectsSectionAdminPa
       displayMode
       enabled
       nbObjects
+      projects {
+        edges {
+          node {
+            id
+          }
+        }
+      }
     }
   `,
 });

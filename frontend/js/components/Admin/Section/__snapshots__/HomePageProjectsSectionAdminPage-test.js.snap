@@ -102,12 +102,15 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
             "id": "SG9tZVBhZ2VQcm9qZWN0c1NlY3Rpb25BZG1pbjpzZWN0aW9uUHJvamVjdHM=",
             "nbObjects": 4,
             "position": 3,
+            "projects": Object {
+              "edges": Array [],
+            },
             "teaser": "sous titre",
             "title": "titre",
           }
         }
         maxProjectsDisplay={9}
-        projectsFragments={null}
+        paginatedProjectsFragmentRef={null}
       />
     </HomePageProjectsSectionAdminPagestyle__SectionInner>
   </HomePageProjectsSectionAdminPagestyle__SectionContainer>

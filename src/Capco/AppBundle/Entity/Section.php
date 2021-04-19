@@ -9,6 +9,8 @@ use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -168,9 +170,15 @@ class Section implements Translatable, SonataTranslatableInterface
      */
     private $associatedFeatures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SectionProject::class, mappedBy="section", cascade="persist", orphanRemoval=true)
+     */
+    private $sectionProjects;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
+        $this->sectionProjects = new ArrayCollection();
     }
 
     public function __toString()
@@ -344,6 +352,38 @@ class Section implements Translatable, SonataTranslatableInterface
     {
         return $this->displayMode;
     }
+
+
+    /**
+     * @return Collection|SectionProject[]
+     */
+    public function getSectionProjects(): Collection
+    {
+        return $this->sectionProjects;
+    }
+
+    public function addSectionProject(SectionProject $sectionProject): self
+    {
+        if (!$this->sectionProjects->contains($sectionProject)) {
+            $this->sectionProjects[] = $sectionProject;
+            $sectionProject->setSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSectionProject(SectionProject $sectionProject): self
+    {
+        if ($this->sectionProjects->removeElement($sectionProject)) {
+            // set the owning side to null (unless already changed)
+            if ($sectionProject->getSection() === $this) {
+                $sectionProject->setSection(null);
+            }
+        }
+
+        return $this;
+    }
+
 
     // ************************* Custom methods ***********************************
 

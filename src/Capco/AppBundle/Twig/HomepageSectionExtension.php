@@ -26,6 +26,11 @@ class HomepageSectionExtension extends AbstractExtension
                 ['is_safe' => ['html']]
             ),
             new TwigFunction(
+                'get_custom_projects',
+                [HomepageSectionRuntime::class, 'getCustomProjects'],
+                ['is_safe' => ['html']]
+            ),
+            new TwigFunction(
                 'get_last_themes',
                 [HomepageSectionRuntime::class, 'getLastThemes'],
                 ['is_safe' => ['html']]

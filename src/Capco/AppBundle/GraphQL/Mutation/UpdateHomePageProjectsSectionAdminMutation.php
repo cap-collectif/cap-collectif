@@ -11,7 +11,6 @@ use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -40,9 +39,26 @@ class UpdateHomePageProjectsSectionAdminMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
-        list($nbObjects) = [$args->offsetGet('nbObjects')];
+        /**
+         * @var $section Section
+         */
+        $section = $this->sectionRepository->findOneBy(['type' => 'projects']);
+
+        list($nbObjects, $projects) = [$args->offsetGet('nbObjects'), $args->offsetGet('projects')];
 
         $arguments = $args->getArrayCopy();
+
+        $sectionProjectsFormInput = [];
+        foreach ($projects as $index => $projectId) {
+            $sectionProjectsFormInput[] = [
+                'section' => $section->getId(),
+                'project' => $projectId,
+                'position' => $index,
+            ];
+        }
+
+        unset($arguments['projects']);
+        $arguments['sectionProjects'] = $sectionProjectsFormInput;
         LocaleUtils::indexTranslations($arguments);
 
         $maxProjectsDisplay =
@@ -52,10 +68,6 @@ class UpdateHomePageProjectsSectionAdminMutation implements MutationInterface
             return ['homePageProjectsSectionAdmin' => null, 'errorCode' => self::TOO_MANY_PROJECTS];
         }
 
-        /**
-         * @var $section Section
-         */
-        $section = $this->sectionRepository->findOneBy(["type" => "projects"]);
         $form = $this->formFactory->create(SectionType::class, $section);
 
         $form->submit($arguments, false);

@@ -17,3 +17,5 @@ UpdateHomePageProjectsSectionAdminInput:
                 description: 'Whether it is published or not'
             translations:
                 type: '[InternalHomePageProjectsSectionAdminTranslationInput!]'
+            projects:
+                type: '[ID!]!'

@@ -2,6 +2,7 @@
 import ReactOnRails from 'react-on-rails';
 
 import ProjectsListApp from './startup/ProjectsListAppClient';
+import CustomProjectsListApp from './startup/CustomProjectsListApp';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
@@ -103,6 +104,7 @@ ReactOnRails.register({
   PresentationStepEventsApp,
   ProjectListPageApp,
   ProjectsListApp,
+  CustomProjectsListApp,
   ProposalStepPageApp,
   EmailNotConfirmedApp,
   SectionPageApp,

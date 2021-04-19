@@ -41,6 +41,7 @@ export { default as PIN_O } from './svg/pin-o.svg';
 export { default as FOLDER_O } from './svg/folder-o.svg';
 export { default as BOOK_STAR_O } from './svg/book-star-o.svg';
 export { default as PREVIEW } from './svg/preview.svg';
+export { default as DRAG } from './svg/drag.svg';
 export { default as ENVELOPE } from './svg/envelope.svg';
 export { default as FACEBOOK } from './svg/facebook.svg';
 export { default as LINK } from './svg/link.svg';

@@ -12,8 +12,11 @@ const query = graphql`
   query HomePageProjectsSectionAdminAppQuery($first: Int!, $cursor: String) {
     homePageProjectsSectionAdmin {
       ...HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin
+      ...HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin
     }
-    ...HomePageProjectsSectionAdminPageDisplayMostRecent_query @arguments(first: $first, cursor: $cursor)
+    ...HomePageProjectsSectionAdminPageDisplayMostRecent_query
+      @arguments(first: $first, cursor: $cursor)
+    ...HomePageProjectsSectionAdminPageDisplayCustom_query
   }
 `;
 
@@ -38,7 +41,14 @@ export default () => (
             return graphqlError;
           }
           if (props && props?.homePageProjectsSectionAdmin) {
-            return <HomePageProjectsSectionAdminPage {...props} projectsFragments={props} />;
+            return (
+              <HomePageProjectsSectionAdminPage
+                {...props}
+                paginatedProjectsFragmentRef={props}
+                allProjectsFragmentRef={props}
+                homePageProjectsSectionAdminFragmentRef={props?.homePageProjectsSectionAdmin}
+              />
+            );
           }
           return <Loader />;
         }}
