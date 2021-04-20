@@ -289,7 +289,7 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this;
     }
 
-    public function isEnabled(): bool
+    public function isEnabled(): ?bool
     {
         return $this->enabled;
     }
