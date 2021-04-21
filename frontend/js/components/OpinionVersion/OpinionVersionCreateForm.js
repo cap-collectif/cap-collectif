@@ -50,7 +50,7 @@ const validate = ({ body, title, comment }: FormValues, props: Props) => {
   if (body === props.initialValues.body) {
     errors.body = 'opinion.version.body_error';
   }
-  if (title.length < 2) {
+  if (title && title.length < 2) {
     errors.title = 'global.required';
   }
   if (comment) {
