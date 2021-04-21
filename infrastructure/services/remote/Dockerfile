@@ -268,6 +268,8 @@ COPY templates /var/www/templates
 COPY config /var/www/config
 COPY fixtures /var/www/fixtures
 
+RUN mkdir -m 755 -p /tmp/phpstan/cache/PHPStan/
+
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
     && chown -R capco:capco . \

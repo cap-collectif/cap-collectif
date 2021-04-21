@@ -84,7 +84,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             ];
         }
 
-        $sirenSitu = json_encode($enterprise, JSON_UNESCAPED_UNICODE);
+        $sirenSitu = json_encode($enterprise, \JSON_UNESCAPED_UNICODE);
 
         $sirenSituPDF = $this->pdfGenerator->jsonToPdf(
             $sirenSitu,
@@ -142,6 +142,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         }
 
         // return $basicInfo;
+        return [];
     }
 
     public static function getSiren(string $siret)

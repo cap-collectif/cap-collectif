@@ -53,6 +53,8 @@ final class MajorityVoteTypeEnum implements EnumType
         if ($value === (string) self::REJECTED) {
             return 'global-reject';
         }
+
+        return '';
     }
 
     public static function toString(string $value): string
@@ -75,5 +77,7 @@ final class MajorityVoteTypeEnum implements EnumType
         if ($value === (string) self::REJECTED) {
             return 'REJECTED';
         }
+
+        return '';
     }
 }

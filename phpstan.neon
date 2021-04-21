@@ -1,12 +1,17 @@
 includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
-    - vendor/phpstan/phpstan/conf/config.level1.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
 
 parameters:
+    level: 1
     checkClassCaseSensitivity: true
     checkThisOnly: true
-    autoload_files:
-        - vendor/autoload.php
+    parallel:
+        jobSize: 20
+        maximumNumberOfProcesses: 16
+        minimumNumberOfJobsPerProcess: 2
+        processTimeout: 300.0
     excludes_analyse:
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ModerableTrait.php
         - %currentWorkingDirectory%/src/Kernel.php

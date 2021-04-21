@@ -33,11 +33,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
 
     public function __invoke(Arg $args): array
     {
-        $dgfip = null;
-        $acoss = null;
-        $greffe = null;
-        $kbis = null;
-        $documentAsso = null;
         $basePath = sprintf('%s/public/export/', $this->rootDir);
         $id = $args->offsetGet('id');
         $type = $args->offsetGet('type');
@@ -151,7 +146,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe);
             $greffe =
                 isset($greffe) && \is_array($greffe)
-                    ? json_encode($greffe, JSON_UNESCAPED_UNICODE)
+                    ? json_encode($greffe, \JSON_UNESCAPED_UNICODE)
                     : null;
 
             $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis", 'kbisPdf');
@@ -170,6 +165,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
 
             return $docs;
         }
+
+        return $docs;
     }
 
     public static function getCacheKey(string $id, string $type): string
