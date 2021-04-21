@@ -69,7 +69,7 @@ const renderMetaStepNavigation = ({
       const { step } = props;
       return (
         <MetaStepNavigationBoxInner>
-          <MetaStepNavigation step={step} />;
+          <MetaStepNavigation step={step} />
         </MetaStepNavigationBoxInner>
       );
     }
