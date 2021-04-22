@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Panel, Label } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
@@ -9,6 +9,8 @@ import { closeOpinionVersionCreateModal } from '../../redux/modules/opinion';
 import OpinionVersionCreateForm, { formName } from './OpinionVersionCreateForm';
 import type { State } from '../../types';
 import type { OpinionVersionCreateModal_opinion } from '~relay/OpinionVersionCreateModal_opinion.graphql';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import RequirementsForm from '~/components/Requirements/RequirementsForm';
 
 type Props = {
   show: boolean,
@@ -19,6 +21,9 @@ type Props = {
 
 const OpinionVersionCreateModal = ({ dispatch, opinion, submitting, show }: Props) => {
   const intl = useIntl();
+  const disabled =
+    opinion.step.requirements && !opinion.step.requirements.viewerMeetsTheRequirements;
+
   const onClose = () => {
     dispatch(closeOpinionVersionCreateModal());
   };
@@ -39,6 +44,24 @@ const OpinionVersionCreateModal = ({ dispatch, opinion, submitting, show }: Prop
         <div className="modal-top bg-info">
           <FormattedMessage id="opinion.add_new_version_infos" tagName="p" />
         </div>
+        {opinion.step && opinion.step.requirements.totalCount > 0 && (
+          <Panel id="required-conditions" bsStyle="primary">
+            <Panel.Heading>
+              <FormattedMessage id="requirements" />{' '}
+              {opinion.step.requirements.viewerMeetsTheRequirements && (
+                <Label bsStyle="primary">
+                  <FormattedMessage id="filled" />
+                </Label>
+              )}
+            </Panel.Heading>
+            {!opinion.step.requirements.viewerMeetsTheRequirements && (
+              <Panel.Body>
+                <WYSIWYGRender value={opinion.step.requirements.reason} />
+                <RequirementsForm step={opinion.step} stepId={opinion.step.id} />
+              </Panel.Body>
+            )}
+          </Panel>
+        )}
         <OpinionVersionCreateForm opinion={opinion} />
       </Modal.Body>
       <Modal.Footer>
@@ -46,7 +69,7 @@ const OpinionVersionCreateModal = ({ dispatch, opinion, submitting, show }: Prop
           <FormattedMessage id="global.cancel" />
         </Button>
         <Button
-          disabled={submitting}
+          disabled={submitting || disabled}
           onClick={() => {
             dispatch(submit(formName));
           }}
@@ -72,6 +95,16 @@ export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionVersionCreateModal_opinion on Opinion {
       ...OpinionVersionCreateForm_opinion
+      step {
+        id
+        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
+
+        requirements {
+          viewerMeetsTheRequirements @include(if: $isAuthenticated)
+          reason
+          totalCount
+        }
+      }
     }
   `,
 });
