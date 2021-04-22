@@ -9,7 +9,15 @@ type Props = {| +text: string, +url: string |};
 
 export const SidebarLink = ({ text, url }: Props): React.Node => {
   const intl = useIntl();
-  const active = window.location.href.includes(url);
+  const active =
+    window.location.href.includes(url) ||
+    window.location.href.includes(url.slice(0, -4)) ||
+    (window.location.href.includes('/admin/capco/app/reporting') && url === '/admin/reporting') ||
+    (window.location.href.includes('/admin/alpha/project/') &&
+      url === '/admin/capco/app/project/list') ||
+    (window.location.href.includes('/admin/capco/app/sitecolor/') &&
+      url === '/admin/settings/settings.appearance/list');
+
   return (
     <Link
       p={1}
