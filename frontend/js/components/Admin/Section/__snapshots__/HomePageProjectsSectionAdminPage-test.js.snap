@@ -144,6 +144,7 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
     </div>
   </HomePageProjectsSectionAdminPagestyle__SectionContainer>
   <Button
+    isLoading={false}
     type="submit"
     variant="primary"
     variantSize="big"

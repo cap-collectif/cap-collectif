@@ -126,6 +126,7 @@ export const HomePageProjectsSectionAdminPage = ({
   paginatedProjectsFragmentRef,
   allProjectsFragmentRef,
   homePageProjectsSectionAdminFragmentRef,
+  submitting,
 }: Props) => {
   return (
     <form method="POST" onSubmit={handleSubmit}>
@@ -235,7 +236,7 @@ export const HomePageProjectsSectionAdminPage = ({
         </div>
       </S.SectionContainer>
 
-      <Button variant="primary" variantSize="big" type="submit">
+      <Button variant="primary" variantSize="big" type="submit" isLoading={submitting}>
         {intl.formatMessage({ id: 'global.save' })}
       </Button>
     </form>
