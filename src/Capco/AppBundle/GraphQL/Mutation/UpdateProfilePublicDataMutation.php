@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 {
-    private $toggleManager;
+    private Manager $toggleManager;
 
     public function __construct(
         EntityManagerInterface $em,

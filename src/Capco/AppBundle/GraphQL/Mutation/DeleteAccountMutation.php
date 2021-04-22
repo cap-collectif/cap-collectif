@@ -20,11 +20,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Doctrine\UserManager;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Psr\Log\LoggerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountMutation extends BaseDeleteUserMutation
@@ -50,7 +52,9 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         ReportingRepository $reportingRepository,
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
-        MailingListRepository $mailingListRepository
+        MailingListRepository $mailingListRepository,
+        FormFactoryInterface $formFactory,
+        LoggerInterface $logger
     ) {
         parent::__construct(
             $em,
@@ -70,7 +74,9 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $reportingRepository,
             $eventRepository,
             $highlightedContentRepository,
-            $mailingListRepository
+            $mailingListRepository,
+            $logger,
+            $formFactory
         );
         $this->userRepository = $userRepository;
     }

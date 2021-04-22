@@ -29,8 +29,13 @@ use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Form\Type\ProfileFormType;
+use Capco\UserBundle\Form\Type\UserMedia;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
+use Psr\Log\LoggerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
@@ -54,6 +59,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected EventRepository $eventRepository;
     protected HighlightedContentRepository $highlightedContentRepository;
     protected MailingListRepository $mailingListRepository;
+    protected LoggerInterface $logger;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -73,7 +80,9 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         ReportingRepository $reportingRepository,
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
-        MailingListRepository $mailingListRepository
+        MailingListRepository $mailingListRepository,
+        LoggerInterface $logger,
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -92,6 +101,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->eventRepository = $eventRepository;
         $this->highlightedContentRepository = $highlightedContentRepository;
         $this->mailingListRepository = $mailingListRepository;
+        $this->logger = $logger;
+        $this->formFactory = $formFactory;
     }
 
     public function softDelete(User $user): void
@@ -112,7 +123,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 $contribution->setSummary(null);
             }
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $this->removeObjectMedia($contribution);
+                try {
+                    $this->removeObjectMedia($contribution);
+                } catch (\Exception $e) {
+                    $this->logger->error(__METHOD__.' : '.$e->getMessage());
+                }
             }
             if ($contribution instanceof Proposal) {
                 $this->deleteResponsesContent($contribution, 'deleted-content-by-author');
@@ -163,7 +178,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
             }
 
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $this->removeObjectMedia($contribution);
+                try {
+                    $this->removeObjectMedia($contribution);
+                } catch (\Exception $e) {
+                    $this->logger->error(__METHOD__.' : '.$e->getMessage());
+                }
             }
         }
 
@@ -190,9 +209,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     public function anonymizeUser(User $user): void
     {
-        $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
-            'email' => $user->getEmail(),
-        ]);
+        $newsletter = $this->newsletterSubscriptionRepository->findOneBy(
+            [
+                'email' => $user->getEmail(),
+            ]
+        );
         $userGroups = $this->groupRepository->findBy(['user' => $user]);
 
         if ($newsletter) {
@@ -252,7 +273,27 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $user->setTimezone(null);
         $user->setLocked(true);
         if ($user->getMedia()) {
-            $this->removeObjectMedia($user);
+            try {
+                $this->removeObjectMedia($user);
+            } catch (\Exception $e) {
+                $this->logger->error(__METHOD__.' : '.$e->getMessage());
+                $form = $this->formFactory->create(
+                    UserMedia::class,
+                    $user,
+                    [
+                        'csrf_protection' => false,
+                    ]
+                );
+                $form->submit(['media' => $user->getMedia()], false);
+
+                if (!$form->isValid()) {
+                    $this->logger->error(__METHOD__.(string)$form->getErrors(true, false));
+
+                    throw new \Exception('Can\'t delete user profile image !');
+                }
+
+                $this->em->flush();
+            }
         }
 
         $contributions = $user->getContributions();
@@ -295,20 +336,16 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function shallContributionBeDeleted(User $user, $contribution): bool
     {
-        if ($contribution instanceof AbstractVote) {
-            if ($contribution instanceof CommentVote) {
-                $toDeleteList[] = $contribution;
-            } elseif (
-                method_exists($contribution->getRelated(), 'getStep') &&
-                $contribution->getRelated() &&
-                $contribution->getRelated()->getStep() &&
-                $contribution
-                    ->getRelated()
-                    ->getStep()
-                    ->canContribute($user)
-            ) {
-                return true;
-            }
+        if ($contribution instanceof AbstractVote &&
+            method_exists($contribution->getRelated(), 'getStep') &&
+            $contribution->getRelated() &&
+            $contribution->getRelated()->getStep() &&
+            $contribution
+                ->getRelated()
+                ->getStep()
+                ->canContribute($user)
+        ) {
+            return true;
         } elseif ($contribution instanceof Comment) {
             if (!$this->commentRepository->findOneBy(['parent' => $contribution->getId()])) {
                 return true;

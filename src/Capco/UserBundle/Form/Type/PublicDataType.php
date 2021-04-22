@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PublicDataType extends AbstractType
 {
-    private $toggleManager;
+    private Manager $toggleManager;
 
     public function __construct(Manager $toggleManager)
     {

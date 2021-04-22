@@ -26,12 +26,12 @@ use Sonata\MediaBundle\Provider\ImageProvider;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 {
     private UserRepository $userRepository;
-    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -53,7 +53,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         ReportingRepository $reportingRepository,
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
-        MailingListRepository $mailingListRepository
+        MailingListRepository $mailingListRepository,
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct(
             $em,
@@ -73,10 +74,11 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $reportingRepository,
             $eventRepository,
             $highlightedContentRepository,
-            $mailingListRepository
+            $mailingListRepository,
+            $logger,
+            $formFactory
         );
         $this->userRepository = $userRepository;
-        $this->logger = $logger;
     }
 
     public function __invoke(Arg $input, User $viewer): array
