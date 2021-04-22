@@ -125,10 +125,10 @@ class Section implements Translatable, SonataTranslatableInterface
     private $nbObjects;
 
     /**
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean", nullable=false, options={"default" = false})
      * @Assert\NotNull()
      */
-    private $enabled;
+    private $enabled = false;
 
     /**
      * @ORM\Column(name="metrics_to_display_basics", type="boolean", options={"default": false})
@@ -289,7 +289,7 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this;
     }
 
-    public function isEnabled(): ?bool
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
