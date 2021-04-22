@@ -98,7 +98,6 @@ type Font = {|
 
 type Color = {|
   color?: Responsive<string>,
-  /** background */
   bg?: Responsive<string>,
   backgroundColor?: Responsive<string>,
 |};
@@ -114,10 +113,6 @@ type TextOverflow = {|
 
 type LineHeight = {|
   lineHeight?: NumberOrString,
-|};
-
-type AlignItems = {|
-  alignItems?: Responsive<string>,
 |};
 
 type Justify = {|
@@ -300,6 +295,10 @@ type ZIndex = {| +zIndex?: number |};
 
 type Opacity = {| +opacity?: Responsive<NumberOrString> |};
 
+type Clip = {| +clip?: string |};
+
+type WhiteSpace = {| +whiteSpace?: string |};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -311,7 +310,6 @@ export type AppBoxProps = {|
   ...TextAlign,
   ...TextOverflow,
   ...LineHeight,
-  ...AlignItems,
   ...Flex,
   ...MaxWidth,
   ...MaxHeight,
@@ -342,4 +340,6 @@ export type AppBoxProps = {|
   ...ZIndex,
   ...LinkProps,
   ...Opacity,
+  ...Clip,
+  ...WhiteSpace,
 |};

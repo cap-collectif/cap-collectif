@@ -2,11 +2,10 @@
 /* @flow */
 import React from 'react';
 import { render } from 'enzyme';
-import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl-redux';
+import { ThemeProvider } from 'styled-components';
 import { Editor } from './Editor';
-import appStore from '../../stores/AppStore';
 import { intlMock } from '../../mocks';
+import { theme } from '~/styles/theme';
 
 describe('<Editor />', () => {
   const defaultProps = {
@@ -21,14 +20,9 @@ describe('<Editor />', () => {
   };
 
   it('should render correctly with defaultProps', () => {
-    const wrapper = render(
-      // $FlowFixMe
-      <Provider store={appStore({})}>
-        <IntlProvider>
-          <Editor {...defaultProps} />
-        </IntlProvider>
-      </Provider>,
-    );
+    const wrapper = render(<ThemeProvider theme={theme}>
+      <Editor {...defaultProps} />
+    </ThemeProvider>);
     expect(wrapper).toMatchSnapshot();
   });
 });

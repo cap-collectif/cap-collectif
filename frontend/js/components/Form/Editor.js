@@ -77,6 +77,11 @@ export class Editor extends React.Component<Props, State> {
     Quill.register(size, true);
     const options = {
       modules: {
+        keyboard: {
+          bindings: {
+            tab: false,
+          },
+        },
         toolbar: {
           container: this.toolbarRef.current,
         },
@@ -178,7 +183,7 @@ export class Editor extends React.Component<Props, State> {
     return (
       <Container id={id} className={classNames(classes)} hasCounter={withCharacterCounter}>
         <div ref={this.toolbarRef}>
-          <QuillToolbar />
+          <QuillToolbar onFocus={() => this.quill.focus()} />
         </div>
         <div ref={this.editorRef} />
         {withCharacterCounter && maxLength && (
