@@ -1,106 +1,13 @@
 /* @flow */
 import * as React from 'react';
-import styled, { ThemeProvider, type StyledComponent } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { boolean, text } from 'storybook-addon-knobs';
-import { injectIntl } from 'react-intl';
-import { Button } from 'react-bootstrap';
-
-import { UserAvatarDeprecated } from '../../components/User/UserAvatarDeprecated';
 import Navbar from '../../components/Navbar/Navbar';
-import { TabsItemContainer, TabsLink, TabsDivider } from '../../components/Ui/TabsBar/styles';
-import TabsBarDropdown from '../../components/Ui/TabsBar/TabsBarDropdown';
-
 import { items, itemWithChildren } from '../mocks/navbarItems';
 import { author as userMock } from '../mocks/users';
-import type { FeatureToggles } from '../../types';
 import { features as defaultFeatures } from '../../redux/modules/default';
-
-const ButtonsContainer: StyledComponent<{ vertical?: boolean }, {}, HTMLDivElement> = styled.div`
-  padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
-`;
-
-const ContentRight = ({
-  intl,
-  user,
-  features,
-  vertical,
-}: {
-  intl: Object,
-  user: Object,
-  features: FeatureToggles,
-  vertical?: boolean,
-}) => (
-  <>
-    {features.search && (
-      <TabsItemContainer vertical={vertical} as="div" role="search" aria-label="Rechercher">
-        <TabsLink id="global.menu.search" eventKey={1} href="/search">
-          <i className="cap cap-magnifier" />
-          <span className="visible-xs-inline ml-5">Rechercher</span>
-        </TabsLink>
-      </TabsItemContainer>
-    )}
-    {user ? (
-      <TabsBarDropdown
-        pullRight
-        eventKey={3}
-        intl={intl}
-        vertical={vertical}
-        id="navbar-username"
-        toggleElement={
-          <span>
-            <UserAvatarDeprecated user={user} size={34} anchor={false} />
-            <span className="ml-5">{user.username}</span>
-          </span>
-        }>
-        {user.isAdmin ? (
-          <TabsLink eventKey={3.1} href="/admin">
-            <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
-            Administration
-          </TabsLink>
-        ) : null}
-        {features.profiles ? (
-          <TabsLink eventKey={3.2} href={`/profile/${user.uniqueId}`}>
-            <i className="cap cap-id-8 mr-10" aria-hidden="true" />
-            Mon profil
-          </TabsLink>
-        ) : null}
-        {user.isEvaluerOnLegacyTool ? (
-          <TabsLink eventKey={3.3} href="/evaluations">
-            <i className="cap cap-edit-write mr-10" aria-hidden="true" />
-            Mes analyses
-          </TabsLink>
-        ) : null}
-        <TabsLink eventKey={3.4} href="/profile/edit-profile">
-          <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
-          Paramètres
-        </TabsLink>
-        <TabsDivider aria-hidden="true" />
-        <TabsLink key={3.6} eventKey={3.6} id="logout-button" onClick={() => {}}>
-          <i className="cap cap-power-1 mr-10" aria-hidden="true" />
-          Déconnexion
-        </TabsLink>
-      </TabsBarDropdown>
-    ) : (
-      <ButtonsContainer vertical={vertical}>
-        <Button
-          onClick={() => {}}
-          aria-label="Ouvrir la modale d'inscription"
-          className="btn--registration navbar-btn">
-          Inscription
-        </Button>{' '}
-        <Button
-          onClick={() => {}}
-          aria-label="Ouvrir la modale d'inscription"
-          className="btn--connection navbar-btn btn-darkest-gray">
-          Connexion
-        </Button>
-      </ButtonsContainer>
-    )}
-  </>
-);
-
-const ContentRightWithIntl = injectIntl(ContentRight);
+import { NavbarRight } from '~/components/Navbar/NavbarRight';
 
 storiesOf('Layout/MainNavbar', module)
   .add('with 2 items', () => {
@@ -228,7 +135,13 @@ storiesOf('Layout/MainNavbar', module)
     };
 
     const contentRight = (
-      <ContentRightWithIntl user={null} features={{ ...defaultFeatures, search: withSearch }} />
+      <NavbarRight
+        user={null}
+        features={{ ...defaultFeatures, search: withSearch }}
+        instanceName="Cap collectif"
+        currentLanguage="fr-fr"
+        loginWithOpenId={false}
+      />
     );
 
     return (
@@ -270,9 +183,12 @@ storiesOf('Layout/MainNavbar', module)
     };
 
     const contentRight = (
-      <ContentRightWithIntl
+      <NavbarRight
         user={userMock}
         features={{ ...defaultFeatures, search: withSearch, profiles: true }}
+        instanceName="Cap collectif"
+        currentLanguage="fr-fr"
+        loginWithOpenId={false}
       />
     );
 
@@ -316,9 +232,12 @@ storiesOf('Layout/MainNavbar', module)
     };
 
     const contentRight = (
-      <ContentRightWithIntl
+      <NavbarRight
         user={userMock}
         features={{ ...defaultFeatures, search: withSearch, profiles: true }}
+        instanceName="Cap collectif"
+        currentLanguage="fr-fr"
+        loginWithOpenId={false}
       />
     );
 

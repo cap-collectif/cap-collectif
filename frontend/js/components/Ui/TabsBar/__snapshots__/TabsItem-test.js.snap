@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TabsItem /> should render 1`] = `""`;
+exports[`<TabsItem /> should render 1`] = `
+<styles__TabsLink
+  active={false}
+  className=""
+  href="/pages/comment-%C3%A7a-marche"
+  id="tabs-navbar-link-6"
+  title={null}
+>
+  Comment ça marche
+</styles__TabsLink>
+`;

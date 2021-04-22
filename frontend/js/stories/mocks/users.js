@@ -2,15 +2,26 @@
 
 export const author = {
   id: 'user1',
+  uniqueId: 'user-unique',
   username: 'admin',
   media: {
     url: 'https://source.unsplash.com/random/150x150',
   },
-  _links: {},
+  _links: {
+    profile: '/profile/toto',
+  },
   vip: false,
   isViewer: false,
   isAdmin: true,
   isEvaluerOnLegacyTool: true,
+  isEvaluerOnNewTool: true,
+  isPhoneConfirmed: true,
+  roles: ['le boss', 'president'],
+  phone: '0670660550',
+  newEmailToConfirm: 'toto@gmail.com',
+  isEmailConfirmed: true,
+  email: 'toto@gmail.com',
+  displayName: 'Toto le boss',
 };
 
 export const followers = [

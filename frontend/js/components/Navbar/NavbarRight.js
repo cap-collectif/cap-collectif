@@ -1,147 +1,149 @@
 /* @flow */
-import React from 'react';
-import styled from 'styled-components';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-
-import TabsBarDropdown from '../Ui/TabsBar/TabsBarDropdown';
-import { TabsItemContainer, TabsLink, TabsDivider } from '../Ui/TabsBar/styles';
+import { useIntl } from 'react-intl';
+import { Menu, MenuItem, MenuButton, MenuSeparator, useMenuState } from 'reakit/Menu';
+import { TabsItemContainer, TabsLink } from '../Ui/TabsBar/styles';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
-import type { State, FeatureToggles } from '../../types';
-import type { User } from '../../redux/modules/user';
+import type { State, FeatureToggles } from '~/types';
+import type { User } from '~/redux/modules/user';
 import { loginWithOpenID } from '~/redux/modules/default';
-
-const ButtonsContainer = styled.div`
-  padding: ${props => (props.vertical ? '10px 15px' : '0 15px')};
-`;
+import * as S from '~ui/TabsBar/styles';
+import AppBox from '~ui/Primitives/AppBox';
+import useIsMobile from '~/utils/hooks/useIsMobile';
 
 type Props = {|
-  currentLanguage: string,
-  intl: IntlShape,
-  user?: ?User,
-  features: FeatureToggles,
-  vertical: boolean,
-  eventKey?: number | string,
-  ariaLabel?: string,
-  loginWithOpenId: boolean,
-  instanceName: string,
+  +currentLanguage: string,
+  +user: ?User,
+  +features: FeatureToggles,
+  +loginWithOpenId: boolean,
+  +instanceName: string,
 |};
 
-export class NavbarRight extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-    vertical: false,
-  };
-
-  logout = () => {
+export const NavbarRight = ({
+  user = null,
+  features,
+  loginWithOpenId,
+  currentLanguage,
+  instanceName,
+}: Props) => {
+  const intl = useIntl();
+  const prefix = features.multilangue ? `/${currentLanguage.split('-')[0]}` : '';
+  const menu = useMenuState({ baseId: 'user-profile' });
+  const logout = () => {
     // We redirect to /logout page to invalidate session on the server
     window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
   };
+  const isMobile = useIsMobile();
 
-  render() {
-    const {
-      user,
-      features,
-      vertical,
-      intl,
-      loginWithOpenId,
-      currentLanguage,
-      instanceName,
-    } = this.props;
+  return (
+    <>
+      {features.search && (
+        <TabsItemContainer
+          as="div"
+          role="search"
+          aria-label={intl.formatMessage({ id: 'search.title' })}>
+          <TabsLink id="global.menu.search" href="/search">
+            <i className="cap cap-magnifier" aria-hidden />{' '}
+            <span className="visible-xs-inline ml-5">
+              {intl.formatMessage({ id: 'global.menu.search' })}
+            </span>
+          </TabsLink>
+        </TabsItemContainer>
+      )}
 
-    const prefix = features.multilangue ? `/${currentLanguage.split('-')[0]}` : '';
+      {user ? (
+        <>
+          <MenuButton
+            {...menu}
+            as={S.DropdownToggle}
+            aria-label={intl.formatMessage(
+              { id: 'user.account.menu' },
+              { username: user.username },
+            )}>
+            <UserAvatarDeprecated user={user} size={34} anchor={false} />
+            <AppBox as="span" ml={2}>
+              {user.username}
+            </AppBox>
+            <span className="caret" />
+          </MenuButton>
 
-    return (
-      <>
-        {features.search && (
-          <TabsItemContainer
-            vertical={vertical}
-            as="div"
-            role="search"
-            aria-label={intl.formatMessage({ id: 'search.title' })}>
-            <TabsLink id="global.menu.search" eventKey={1} href="/search">
-              <i className="cap cap-magnifier" />{' '}
-              <span className="visible-xs-inline ml-5">
-                <FormattedMessage id="global.menu.search" />
-              </span>
-            </TabsLink>
-          </TabsItemContainer>
-        )}
-        {user ? (
-          <TabsBarDropdown
-            pullRight
-            intl={intl}
-            eventKey={3}
-            vertical={vertical}
-            id="navbar-username"
+          <Menu
+            {...menu}
+            unstable_popoverStyles={isMobile ? null : menu.unstable_popoverStyles}
+            as={S.DropdownMenu}
+            hideOnClickOutside
             aria-label={intl.formatMessage(
               { id: 'user.account.menu' },
               { username: user.username },
             )}
-            toggleElement={
-              <span>
-                <UserAvatarDeprecated user={user} size={34} anchor={false} />
-                <span className="ml-5">{user.username}</span>
-              </span>
-            }>
-            {user.isAdmin ? (
-              <TabsLink eventKey={3.1} href="/admin/">
+            id="navbar-username">
+            {user.isAdmin && (
+              <MenuItem {...menu} href="/admin/" as={S.TabsLink}>
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
-                <FormattedMessage id="global.administration" />
-              </TabsLink>
-            ) : null}
+                {intl.formatMessage({ id: 'global.administration' })}
+              </MenuItem>
+            )}
+
             {/** TODO: Some SSO users want a profile page, some don't we should add an option, for now let's go with a custom fix */}
-            {features.profiles && (!loginWithOpenId || instanceName === 'idf-bp-dedicated') ? (
-              <TabsLink eventKey={3.2} href={`${prefix}/profile/${user.uniqueId}`}>
+            {features.profiles && (!loginWithOpenId || instanceName === 'idf-bp-dedicated') && (
+              <MenuItem {...menu} as={S.TabsLink} href={`${prefix}/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
-                <FormattedMessage id="user.my.profile" />
-              </TabsLink>
-            ) : null}
-            {!features.profiles && loginWithOpenId ? (
-              <TabsLink
-                eventKey={3.3}
+                {intl.formatMessage({ id: 'user.my.profile' })}
+              </MenuItem>
+            )}
+
+            {!features.profiles && loginWithOpenId && (
+              <MenuItem
+                {...menu}
+                as={S.TabsLink}
                 href={`/sso/profile?referrer=${window.location.href}`}
                 target="_blank"
                 rel="noopener">
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
-                <FormattedMessage id="user.my.profile" />
+                {intl.formatMessage({ id: 'user.my.profile' })}
                 <i className="cap cap-external-link ml-10" aria-hidden="true" />
-              </TabsLink>
-            ) : null}
-            {user.isEvaluerOnLegacyTool || user.isEvaluerOnNewTool ? (
-              <TabsLink eventKey={3.4} href="/evaluations">
+              </MenuItem>
+            )}
+
+            {(user.isEvaluerOnLegacyTool || user.isEvaluerOnNewTool) && (
+              <MenuItem {...menu} as={S.TabsLink} href="/evaluations">
                 <i className="cap cap-edit-write mr-10" aria-hidden="true" />
-                <FormattedMessage id="evaluations.index.page_title" />
-              </TabsLink>
-            ) : null}
-            <TabsLink eventKey={3.5} href={`${prefix}/profile/edit-profile`}>
+                {intl.formatMessage({ id: 'evaluations.index.page_title' })}
+              </MenuItem>
+            )}
+
+            <MenuItem {...menu} as={S.TabsLink} href={`${prefix}/profile/edit-profile`}>
               <i className="cap cap-setting-adjustment mr-10" aria-hidden="true" />
-              <FormattedMessage id="global.params" />
-            </TabsLink>
-            {features.disconnect_openid ? (
-              <TabsLink eventKey={3.6} href="/logout?ssoSwitchUser=true">
+              {intl.formatMessage({ id: 'global.params' })}
+            </MenuItem>
+
+            {features.disconnect_openid && (
+              <MenuItem {...menu} as={S.TabsLink} href="/logout?ssoSwitchUser=true">
                 <i className="cap cap-refresh mr-10" aria-hidden="true" />
-                <FormattedMessage id="change-user" />
-              </TabsLink>
-            ) : null}
-            <TabsDivider aria-hidden="true" />
-            <TabsLink type="button" eventKey={3.7} id="logout-button" onClick={this.logout}>
+                {intl.formatMessage({ id: 'change-user' })}
+              </MenuItem>
+            )}
+
+            <MenuSeparator {...menu} as={S.Separator} />
+
+            <MenuItem {...menu} as={S.TabsLink} id="logout-button" onClick={logout}>
               <i className="cap cap-power-1 mr-10" aria-hidden="true" />
-              <FormattedMessage id="global.logout" />
-            </TabsLink>
-          </TabsBarDropdown>
-        ) : (
-          <ButtonsContainer vertical={vertical}>
-            <RegistrationButton className="navbar-btn" />{' '}
-            <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
-          </ButtonsContainer>
-        )}
-      </>
-    );
-  }
-}
+              {intl.formatMessage({ id: 'global.logout' })}
+            </MenuItem>
+          </Menu>
+        </>
+      ) : (
+        <AppBox px={4}>
+          <RegistrationButton className="navbar-btn" />{' '}
+          <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
+        </AppBox>
+      )}
+    </>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
@@ -150,8 +152,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 
-const container = injectIntl(NavbarRight, { forwardRef: true });
-
-export default connect<any, any, _, _, _, _>(mapStateToProps, null, null, { forwardRef: true })(
-  container,
-);
+export default connect<any, any, _, _, _, _>(mapStateToProps)(NavbarRight);

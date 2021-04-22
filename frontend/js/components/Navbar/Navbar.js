@@ -1,6 +1,6 @@
 /* @flow */
-import React, { useState, useRef, type Element } from 'react';
-import { injectIntl, type IntlShape } from 'react-intl';
+import React, { useState, useRef, type Node } from 'react';
+import { useIntl } from 'react-intl';
 import { graphql, QueryRenderer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
@@ -18,6 +18,8 @@ import { useEventListener } from '~/utils/hooks/useEventListener';
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { NavbarQueryResponse } from '~relay/NavbarQuery.graphql';
+import type { Item } from './Navbar.type';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type LanguageProps = {|
   currentRouteParams: [],
@@ -30,11 +32,10 @@ type LanguageProps = {|
 
 export type Props = {|
   home: string,
-  intl: IntlShape,
   logo?: ?string,
-  items: Array<Object>,
+  items: Item[],
   siteName: ?string,
-  contentRight?: Element<Object>,
+  contentRight: Node,
   isMultilangueEnabled: boolean,
   isAuthenticated: boolean,
   ...LanguageProps,
@@ -52,7 +53,6 @@ export const Navbar = ({
   home,
   logo,
   items,
-  intl,
   siteName,
   contentRight,
   languageList,
@@ -64,11 +64,12 @@ export const Navbar = ({
   localeChoiceTranslations,
   isAuthenticated,
   ...rest
-}: Props) => {
-  const [expanded, setExpanded] = useState(false);
-  const [desktop, setDesktop] = useState(true);
-  const [logoLoaded, setLogoLoaded] = useState(false);
-  const [isLocaleHeaderVisible, setLocaleHeaderVisible] = useState(true);
+}: Props): Node => {
+  const intl = useIntl();
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const [desktop, setDesktop] = useState<boolean>(true);
+  const [logoLoaded, setLogoLoaded] = useState<boolean>(false);
+  const [isLocaleHeaderVisible, setLocaleHeaderVisible] = useState<boolean>(true);
   const ref = useRef();
   const [rect] = useBoundingRect(ref);
 
@@ -160,22 +161,24 @@ export const Navbar = ({
                   )}
                 </S.NavigationHeader>
                 <NavbarToggle onClick={setAriaExpanded} expanded={expanded} />
+
                 {desktop && logoLoaded && (
                   <S.NavigationContentDesktop>
                     {items.length > 0 && <TabsBar items={items} />}
-                    {contentRight && (
-                      <S.NavigationContentRight>{contentRight}</S.NavigationContentRight>
-                    )}
+
+                    <Flex direction="row" pl={4} height="100%" flex="0 0 auto">
+                      {contentRight}
+                    </Flex>
                   </S.NavigationContentDesktop>
                 )}
+
                 {expanded && (
                   <S.NavigationContentMobile>
-                    {items.length > 0 && <TabsBar items={items} vertical />}
-                    {contentRight && (
-                      <S.NavigationContentRight vertical>
-                        {React.cloneElement(contentRight, { vertical: true })}
-                      </S.NavigationContentRight>
-                    )}
+                    {items.length > 0 && <TabsBar items={items} />}
+
+                    <Flex direction="column" height="100%" flex="0 0 auto" width="100%">
+                      {contentRight}
+                    </Flex>
                   </S.NavigationContentMobile>
                 )}
               </S.NavigationContainer>
@@ -187,12 +190,10 @@ export const Navbar = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState) => {
-  return {
-    isLocaleHeaderVisible: state.user.showLocaleHeader || true,
-    isMultilangueEnabled: state.default.features.multilangue,
-    isAuthenticated: !!state.user.user,
-  };
-};
+const mapStateToProps = (state: GlobalState) => ({
+  isLocaleHeaderVisible: state.user.showLocaleHeader || true,
+  isMultilangueEnabled: state.default.features.multilangue,
+  isAuthenticated: !!state.user.user,
+});
 
-export default connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(Navbar));
+export default connect<any, any, _, _, _, _>(mapStateToProps)(Navbar);

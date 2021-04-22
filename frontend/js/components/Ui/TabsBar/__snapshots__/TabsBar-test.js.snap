@@ -1,39 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TabsBar /> should render 1`] = `
-<styles__TabsBarContainer
-  show={true}
-  vertical={false}
->
+exports[`<TabsBar /> should render correctly 1`] = `
+<styles__TabsBarContainer>
   <styles__TabsItemContainer
-    vertical={false}
+    className="tabsbar-item-wrapper"
+    key="0"
   >
-    <TabsBarDropdown
-      id="tabsbar-dropdown-see-more"
-      intl={
+    <TabsItem
+      item={
         Object {
-          "formatDate": [Function],
-          "formatHTMLMessage": [Function],
-          "formatMessage": [Function],
-          "formatNumber": [Function],
-          "formatPlural": [Function],
-          "formatRelative": [Function],
-          "formatTime": [Function],
-          "formats": Object {},
-          "locale": "fr-FR",
-          "messages": Object {},
-          "now": [Function],
+          "active": false,
+          "children": Array [],
+          "hasEnabledFeature": true,
+          "id": 6,
+          "link": "/pages/comment-%C3%A7a-marche",
+          "title": "Comment ça marche",
         }
       }
+    />
+  </styles__TabsItemContainer>
+  <styles__TabsItemContainer
+    className="tabsbar-item-wrapper"
+    key="1"
+  >
+    <TabsItem
+      item={
+        Object {
+          "active": false,
+          "children": Array [
+            Object {
+              "active": false,
+              "children": Array [],
+              "hasEnabledFeature": true,
+              "id": 8,
+              "link": "/contact",
+              "title": "Contact",
+            },
+            Object {
+              "active": false,
+              "children": Array [],
+              "hasEnabledFeature": true,
+              "id": 3,
+              "link": "/members",
+              "title": "Liste des inscrits",
+            },
+          ],
+          "hasEnabledFeature": true,
+          "id": 7,
+          "link": "/pages/comment-%C3%A7a-marche",
+          "title": "Comment ça marche",
+        }
+      }
+    />
+  </styles__TabsItemContainer>
+  <styles__TabsItemContainer>
+    <TabsBarDropdown
       item={
         Object {
           "children": Array [],
+          "id": "see-more",
           "title": "global.navbar.see_more",
         }
       }
-      pullRight={false}
-      toggleElement="global.navbar.see_more"
-      vertical={false}
     />
   </styles__TabsItemContainer>
 </styles__TabsBarContainer>

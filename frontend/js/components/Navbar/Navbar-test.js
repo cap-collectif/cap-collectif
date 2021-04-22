@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Navbar } from './Navbar';
-import { intlMock } from '~/mocks';
 
 const defaultProps = {
   home: 'https://capco.dev/en/',
@@ -24,7 +23,6 @@ const defaultProps = {
     },
   ],
   currentLanguage: 'fr-FR',
-  intl: intlMock,
   logo: 'Navbar-logo.png',
   items: [],
   siteName: 'cap-collectif.com',

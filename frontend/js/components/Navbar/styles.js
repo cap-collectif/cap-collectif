@@ -1,5 +1,5 @@
 /* @flow */
-import styled, { css, type StyledComponent } from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import colors from '../../utils/colors';
 
 type Props = {
@@ -124,23 +124,4 @@ export const NavigationContentMobile: StyledComponent<
   @media (min-width: 768px) {
     display: none;
   }
-`;
-
-export const verticalContentRightMixin = css`
-  padding-left: 0;
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const NavigationContentRight: StyledComponent<
-  { vertical?: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding-left: 15px;
-  flex: 0 0 auto;
-  height: 100%;
-  ${props => props.vertical && verticalContentRightMixin}
 `;

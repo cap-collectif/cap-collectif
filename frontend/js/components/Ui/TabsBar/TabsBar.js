@@ -1,68 +1,58 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-
 import TabsItem from './TabsItem';
 import TabsBarDropdown from './TabsBarDropdown';
-
 import * as S from './styles';
-import useShowMore from '../../../utils/hooks/useShowMore';
+import useShowMore from '~/utils/hooks/useShowMore';
+import useIsMobile from '~/utils/hooks/useIsMobile';
+import type { Item } from '~/components/Navbar/Navbar.type';
 
 type Props = {|
-  items: Array<Object>,
-  vertical?: boolean,
+  items: Item[],
 |};
 
-const TabsBar = ({ items, vertical }: Props) => {
+const TabsBar = ({ items }: Props) => {
   const intl = useIntl();
+  const isMobile = useIsMobile();
+
   const [
     containerRef,
     seeMoreRef,
     handleItemWidth,
     overflowIndex,
     shouldDisplaySeeMore,
-  ] = useShowMore(!vertical, items.length);
+  ] = useShowMore(!isMobile, items.length);
 
   const renderSeeMore = () => {
     const overflowedItems = items.filter((item, index) => index >= overflowIndex);
     const seeMoreItem = {
+      id: 'see-more',
       title: intl.formatMessage({ id: 'global.navbar.see_more' }),
       children: overflowedItems,
     };
 
     return (
       // $FlowFixMe ref on a styled component
-      <S.TabsItemContainer vertical={vertical} ref={seeMoreRef}>
-        <TabsBarDropdown
-          item={seeMoreItem}
-          id="tabsbar-dropdown-see-more"
-          toggleElement={intl.formatMessage({ id: 'global.navbar.see_more' })}
-          intl={intl}
-        />
+      <S.TabsItemContainer ref={seeMoreRef}>
+        <TabsBarDropdown item={seeMoreItem} />
       </S.TabsItemContainer>
     );
   };
 
   return (
     // $FlowFixMe ref on a styled component
-    <S.TabsBarContainer show vertical={vertical} ref={containerRef}>
+    <S.TabsBarContainer ref={containerRef}>
       {items.map((item, index) => {
         return index < overflowIndex ? (
-          <S.TabsItemContainer
-            key={index}
-            vertical={vertical}
-            ref={handleItemWidth}
-            className="tabsbar-item-wrapper">
-            <TabsItem key={index} item={item} intl={intl} vertical={vertical} />
+          <S.TabsItemContainer key={index} ref={handleItemWidth} className="tabsbar-item-wrapper">
+            <TabsItem item={item} />
           </S.TabsItemContainer>
         ) : null;
       })}
       {shouldDisplaySeeMore && renderSeeMore()}
     </S.TabsBarContainer>
   );
-};
-TabsBar.defaultProps = {
-  vertical: false,
 };
 
 export default TabsBar;
