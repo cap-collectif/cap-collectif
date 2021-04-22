@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { ModalDeleteArgument } from './ModalDeleteArgument';
 
 const props = {
-  argumentInfo: { id: 'argument-123', type: 'FOR' },
+  argumentInfo: { id: 'argument-123', type: 'FOR', debateUrl: '/debate123' },
   onClose: jest.fn(),
   debateId: 'debate123',
 };

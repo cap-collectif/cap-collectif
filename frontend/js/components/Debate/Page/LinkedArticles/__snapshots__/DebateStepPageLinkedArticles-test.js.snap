@@ -86,6 +86,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
         height="100%"
         href="lemonde.fr/pour-ou-contre-omar"
         key="article1"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -107,6 +108,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
         height="100%"
         href="lexpress.fr/omar-un-sujet-polarisant"
         key="article2"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -128,6 +130,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
         height="100%"
         href="lefigaro.fr/omar-ma-tuer"
         key="article4"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -147,6 +150,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
         height="100%"
         href="lecanarddechainé.fr/omar-le-bg"
         key="article5"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -222,6 +226,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
               },
             ],
           },
+          "url": "/debate",
         },
         "id": "stepId",
       }
@@ -319,6 +324,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
         height="100%"
         href="lemonde.fr/pour-ou-contre-omar"
         key="article1"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -340,6 +346,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
         height="100%"
         href="lexpress.fr/omar-un-sujet-polarisant"
         key="article2"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -361,6 +368,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
         height="100%"
         href="lefigaro.fr/omar-ma-tuer"
         key="article4"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"
@@ -380,6 +388,7 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
         height="100%"
         href="lecanarddechainé.fr/omar-le-bg"
         key="article5"
+        onClick={[Function]}
       >
         <DebateArticleCard
           height="100%"

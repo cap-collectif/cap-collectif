@@ -6,6 +6,7 @@ import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
 import { m as motion } from 'framer-motion';
+import { useAnalytics } from 'use-analytics';
 import styled, { type StyledComponent } from 'styled-components';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
@@ -289,6 +290,7 @@ export const DebateStepPageVoteForm = ({
   intl,
 }: Props): React.Node => {
   useScript('https://platform.twitter.com/widgets.js');
+  const { track } = useAnalytics();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { widget } = useDebateStepPage();
   const viewerVoteValue =
@@ -419,7 +421,11 @@ export const DebateStepPageVoteForm = ({
                               variant="primary"
                               variantColor="danger"
                               variantSize="small"
-                              onClick={() =>
+                              onClick={() => {
+                                track('debate_vote_delete', {
+                                  type: viewerVoteValue,
+                                  url: debate.url,
+                                });
                                 deleteVoteFromViewer(
                                   debate.id,
                                   viewerVoteValue,
@@ -427,8 +433,8 @@ export const DebateStepPageVoteForm = ({
                                   setVoteState,
                                   setShowArgumentForm,
                                   intl,
-                                )
-                              }>
+                                );
+                              }}>
                               {intl.formatMessage({ id: 'delete-vote' })}
                             </Button>
                           </ButtonGroup>
@@ -452,6 +458,10 @@ export const DebateStepPageVoteForm = ({
                         intl,
                       );
                     } else {
+                      track('debate_vote_delete', {
+                        type: viewerVoteValue,
+                        url: debate.url,
+                      });
                       deleteVoteFromViewer(
                         debate.id,
                         viewerVoteValue,
@@ -501,7 +511,13 @@ export const DebateStepPageVoteForm = ({
               height={5}
               p="4px 8px"
               fontSize={11}
-              onClick={() => copy(url)}>
+              onClick={() => {
+                track('debate_share_btn_click', {
+                  from: 'url',
+                  url: debate.url,
+                });
+                copy(url);
+              }}>
               <Icon name="HYPERLINK" mr="1" size="sm" />
               <FormattedMessage id="global.link" />
             </Button>
@@ -548,7 +564,16 @@ export const DebateStepPageVoteForm = ({
                     variantColor="primary">
                     <FormattedMessage id="global.cancel" />
                   </Button>
-                  <Button type="submit" variant="primary" variantColor="primary" variantSize="big">
+                  <Button
+                    onClick={() => {
+                      track('debate_argument_publish', {
+                        url: debate.url,
+                      });
+                    }}
+                    type="submit"
+                    variant="primary"
+                    variantColor="primary"
+                    variantSize="big">
                     <FormattedMessage
                       id={viewerIsConfirmed ? 'argument.publish.mine' : 'global.validate'}
                     />
@@ -578,6 +603,7 @@ export const DebateStepPageVoteForm = ({
       {showArgumentForm && isMobile && !widget.isSource && (
         <>
           <MobilePublishArgumentModal
+            debateUrl={debate.url}
             title={intl.formatMessage({ id: title })}
             show={showArgumentForm && voteState !== 'VOTED_ANONYMOUS' && isOpen}
             onClose={onClose}
@@ -635,6 +661,7 @@ export default (createFragmentContainer(container, {
     fragment DebateStepPageVoteForm_debate on Debate
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, isMobile: { type: "Boolean!" }) {
       id
+      url
       viewerVote @include(if: $isAuthenticated) {
         type
       }

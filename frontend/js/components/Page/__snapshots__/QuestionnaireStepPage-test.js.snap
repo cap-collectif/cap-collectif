@@ -185,6 +185,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "storageKey": null,
                       },
                       Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                      Object {
                         "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
@@ -207,13 +214,6 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                             "args": null,
                             "kind": "ScalarField",
                             "name": "state",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
                             "storageKey": null,
                           },
                           Object {
@@ -1381,7 +1381,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "38c1036daf0799e7760137b1c15a162a",
+        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1528,6 +1528,10 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   type
+  step {
+    id
+    title
+  }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
     edges {
@@ -1894,6 +1898,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         "storageKey": null,
                       },
                       Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                      Object {
                         "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
@@ -1916,13 +1927,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                             "args": null,
                             "kind": "ScalarField",
                             "name": "state",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
                             "storageKey": null,
                           },
                           Object {
@@ -3090,7 +3094,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "38c1036daf0799e7760137b1c15a162a",
+        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -3237,6 +3241,10 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   type
+  step {
+    id
+    title
+  }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
     edges {
@@ -3603,6 +3611,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         "storageKey": null,
                       },
                       Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                      Object {
                         "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
@@ -3625,13 +3640,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                             "args": null,
                             "kind": "ScalarField",
                             "name": "state",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
                             "storageKey": null,
                           },
                           Object {
@@ -4799,7 +4807,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "38c1036daf0799e7760137b1c15a162a",
+        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4946,6 +4954,10 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   type
+  step {
+    id
+    title
+  }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
     edges {
@@ -5312,6 +5324,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "storageKey": null,
                       },
                       Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                      Object {
                         "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
@@ -5334,13 +5353,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                             "args": null,
                             "kind": "ScalarField",
                             "name": "state",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
                             "storageKey": null,
                           },
                           Object {
@@ -6508,7 +6520,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "38c1036daf0799e7760137b1c15a162a",
+        "cacheID": "cfe56b3cfa8a24bcb6f388785d61beec",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -6655,6 +6667,10 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   type
+  step {
+    id
+    title
+  }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
     edges {

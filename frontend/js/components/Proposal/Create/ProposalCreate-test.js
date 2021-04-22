@@ -12,6 +12,13 @@ const defaultProps = {
     contribuable: true,
     id: '2',
     objectType: 'PROPOSAL',
+    step: {
+      title: 'step1',
+      url: '/step1',
+      project: {
+        title: 'project1',
+      },
+    },
   },
   showModal: true,
   submitting: true,

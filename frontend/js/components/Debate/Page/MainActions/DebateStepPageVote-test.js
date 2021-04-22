@@ -11,6 +11,7 @@ const baseProps = {
     $refType,
     isAnonymousParticipationAllowed: false,
     debate: {
+      url: '/debate123',
       id: 'debate-123',
       yesVotes: {
         totalCount: 12,

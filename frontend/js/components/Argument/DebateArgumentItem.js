@@ -22,7 +22,7 @@ import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.conte
 type Props = {|
   +debateArgument: DebateArgumentItem_debateArgument,
   +isMobile?: boolean,
-  +setDeleteModalInfo: ({ id: string, type: 'FOR' | 'AGAINST' }) => void,
+  +setDeleteModalInfo: ({ id: string, type: 'FOR' | 'AGAINST', debateUrl: string }) => void,
 |};
 
 export const DebateArgumentItem = ({ debateArgument, isMobile, setDeleteModalInfo }: Props) => {
@@ -65,7 +65,11 @@ export const DebateArgumentItem = ({ debateArgument, isMobile, setDeleteModalInf
               <Button
                 disabled={isEditing}
                 onClick={() =>
-                  setDeleteModalInfo({ id: debateArgument.id, type: debateArgument.type })
+                  setDeleteModalInfo({
+                    id: debateArgument.id,
+                    type: debateArgument.type,
+                    debateUrl: debateArgument.debate.url,
+                  })
                 }
                 rightIcon="TRASH"
                 color="neutral-gray.500"

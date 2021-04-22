@@ -13,6 +13,13 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
         "contribuable": true,
         "id": "2",
         "objectType": "PROPOSAL",
+        "step": Object {
+          "project": Object {
+            "title": "project1",
+          },
+          "title": "step1",
+          "url": "/step1",
+        },
       }
     }
   />
@@ -54,6 +61,13 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
             "contribuable": true,
             "id": "2",
             "objectType": "PROPOSAL",
+            "step": Object {
+              "project": Object {
+                "title": "project1",
+              },
+              "title": "step1",
+              "url": "/step1",
+            },
           }
         }
       />
@@ -98,6 +112,13 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
         "contribuable": true,
         "id": "2",
         "objectType": "QUESTION",
+        "step": Object {
+          "project": Object {
+            "title": "project1",
+          },
+          "title": "step1",
+          "url": "/step1",
+        },
       }
     }
   />
@@ -139,6 +160,13 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
             "contribuable": true,
             "id": "2",
             "objectType": "QUESTION",
+            "step": Object {
+              "project": Object {
+                "title": "project1",
+              },
+              "title": "step1",
+              "url": "/step1",
+            },
           }
         }
       />
@@ -183,6 +211,13 @@ exports[`<ProposalCreate /> should render correctly with error 1`] = `
         "contribuable": true,
         "id": "2",
         "objectType": "PROPOSAL",
+        "step": Object {
+          "project": Object {
+            "title": "project1",
+          },
+          "title": "step1",
+          "url": "/step1",
+        },
       }
     }
   />
@@ -224,6 +259,13 @@ exports[`<ProposalCreate /> should render correctly with error 1`] = `
             "contribuable": true,
             "id": "2",
             "objectType": "PROPOSAL",
+            "step": Object {
+              "project": Object {
+                "title": "project1",
+              },
+              "title": "step1",
+              "url": "/step1",
+            },
           }
         }
       />

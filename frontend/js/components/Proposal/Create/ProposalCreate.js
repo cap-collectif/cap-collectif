@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
+import { useAnalytics } from 'use-analytics';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { isSubmitting, change, submit, isPristine, isInvalid } from 'redux-form';
@@ -61,6 +62,7 @@ export const ProposalCreate = ({
   projectType,
   invalid,
 }: Props) => {
+  const { track } = useAnalytics();
   const intl = useIntl();
   const modalTitleTradKey =
     proposalForm.objectType === 'PROPOSAL'
@@ -113,6 +115,11 @@ export const ProposalCreate = ({
             isSubmitting={submitting}
             disabled={pristine}
             onSubmit={() => {
+              track('submit_draft_proposal_click', {
+                step_title: proposalForm.step?.title || '',
+                step_url: proposalForm.step?.url || '',
+                project_title: proposalForm.step?.project?.title || '',
+              });
               dispatch(change(formName, 'draft', true));
               setTimeout(() => {
                 // TODO find a better way
@@ -130,6 +137,11 @@ export const ProposalCreate = ({
             isSubmitting={submitting}
             disabled={pristine}
             onSubmit={() => {
+              track('submit_proposal_click', {
+                step_title: proposalForm.step?.title || '',
+                step_url: proposalForm.step?.url || '',
+                project_title: proposalForm.step?.project?.title || '',
+              });
               dispatch(change(formName, 'draft', false));
               setTimeout(() => {
                 // TODO find a better way
@@ -159,6 +171,13 @@ export default createFragmentContainer(container, {
       id
       contribuable
       objectType
+      step {
+        title
+        url
+        project {
+          title
+        }
+      }
       ...ProposalForm_proposalForm
       ...ProposalCreateButton_proposalForm
     }

@@ -177,7 +177,7 @@ export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props)
               variantSize="big"
               onClick={() => {
                 if (isAuthenticated) {
-                  track('debate_vote_click', { type: 'FOR' });
+                  track('debate_vote_click', { type: 'FOR', url: step.debate.url });
                   voteForDebate(
                     step.debate.id,
                     'FOR',
@@ -208,7 +208,7 @@ export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props)
               variantSize="big"
               onClick={() => {
                 if (isAuthenticated) {
-                  track('debate_vote_click', { type: 'AGAINST' });
+                  track('debate_vote_click', { type: 'AGAINST', url: step.debate.url });
                   voteForDebate(
                     step.debate.id,
                     'AGAINST',
@@ -256,6 +256,7 @@ export default (createFragmentContainer(DebateStepPageVote, {
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       isAnonymousParticipationAllowed
       debate {
+        url
         id
         yesVotes: votes(isPublished: true, first: 0, type: FOR) {
           totalCount

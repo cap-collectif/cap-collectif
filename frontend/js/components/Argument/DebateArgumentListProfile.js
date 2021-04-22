@@ -25,6 +25,7 @@ export const DebateArgumentListProfile = ({ debateArgumentList, relay }: Props) 
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
     id: string,
     type: 'FOR' | 'AGAINST',
+    debateUrl: string,
   }>(null);
 
   const handleLoadMore = () => {

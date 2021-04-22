@@ -156,6 +156,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
   const [deleteModalInfo, setDeleteModalInfo] = React.useState<?{
     id: string,
     type: 'FOR' | 'AGAINST',
+    debateUrl: string,
   }>(null);
 
   if (handleChange) handleChange({ ...paginationProps, hasMore: paginationProps.hasMore() });

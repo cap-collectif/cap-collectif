@@ -20,6 +20,7 @@ const defaultProps = {
     },
     debate: {
       id: 'debate-123',
+      url: '/debate123',
     },
     type: 'FOR',
     viewerHasVote: false,

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { type IntlShape, useIntl } from 'react-intl';
+import { useAnalytics } from 'use-analytics';
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { toast } from '~ds/Toast';
@@ -11,7 +12,7 @@ import DeleteModal from '~/components/Modal/DeleteModal';
 
 type Props = {|
   onClose: () => void,
-  argumentInfo: { id: string, type: 'FOR' | 'AGAINST' },
+  argumentInfo: { id: string, type: 'FOR' | 'AGAINST', debateUrl: string },
   debateId: string,
 |};
 
@@ -32,7 +33,7 @@ const ModalContainer: StyledComponent<{}, {}, typeof DeleteModal> = styled(Delet
 `;
 
 const onSubmit = (
-  argumentInfo: { id: string, type: 'FOR' | 'AGAINST' },
+  argumentInfo: { id: string, type: 'FOR' | 'AGAINST', debateUrl: string },
   debateId: string,
   intl: IntlShape,
   onClose: () => void,
@@ -76,11 +77,16 @@ const onSubmit = (
 
 export const ModalDeleteArgument = ({ argumentInfo, debateId, onClose }: Props): React.Node => {
   const intl = useIntl();
+  const { track } = useAnalytics();
+
   return (
     <ModalContainer
       closeDeleteModal={onClose}
       showDeleteModal={!!argumentInfo}
       deleteElement={() => {
+        track('debate_argument_delete', {
+          url: argumentInfo.debateUrl,
+        });
         onSubmit(argumentInfo, debateId, intl, onClose);
       }}
       deleteModalTitle="argument.delete.subtitle"

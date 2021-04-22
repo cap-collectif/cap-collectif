@@ -23,6 +23,13 @@ class Providers extends React.Component<Props> {
     const store = ReactOnRails.getStore('appStore');
     const { children } = this.props;
 
+    analytics.ready(() => {
+      const state = store.getState();
+      if (state && state.user && state.user.user) {
+        analytics.identify(state.user.user.id);
+      }
+    });
+
     if (window.sentryDsn) {
       Sentry.configureScope(scope => {
         scope.setTag('request_locale', window.locale);

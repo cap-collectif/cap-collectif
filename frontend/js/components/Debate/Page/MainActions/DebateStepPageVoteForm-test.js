@@ -10,6 +10,7 @@ describe('<DebateStepPageVoteForm/>', () => {
     $fragmentRefs,
     id: 'debate1',
     $refType,
+    url: '/debate',
   };
 
   const viewer = {

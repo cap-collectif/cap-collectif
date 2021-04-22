@@ -12,6 +12,7 @@ const baseProps = {
     $fragmentRefs,
     $refType,
     debate: {
+      url: '/debate',
       articles: {
         edges: [
           {

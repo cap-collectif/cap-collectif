@@ -331,6 +331,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
+          step: { id: 'step1', title: 'Step 1' },
           questions: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
           ...questionnaireProps,
         }}
@@ -345,6 +346,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
+          step: { id: 'step1', title: 'Step 1' },
           questions: [
             requiredText,
             facultativeCheckbox,
@@ -365,6 +367,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
+          step: { id: 'step1', title: 'Step 1' },
           questions: [requiredText, requiredRadio, facultativeRanking],
           ...questionnaireProps,
         }}
@@ -378,7 +381,11 @@ describe('<ReplyForm />', () => {
   it('should render correctly with only required fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        questionnaire={{ questions: [requiredText, requiredRadio], ...questionnaireProps }}
+        questionnaire={{
+          step: { id: 'step1', title: 'Step 1' },
+          questions: [requiredText, requiredRadio],
+          ...questionnaireProps,
+        }}
         reply={null}
         {...props}
       />,
@@ -390,6 +397,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
+          step: { id: 'step1', title: 'Step 1' },
           questions: [facultativeCheckbox, facultativeSelect, facultativeRanking],
           ...questionnaireProps,
         }}
@@ -404,6 +412,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{
+          step: { id: 'step1', title: 'Step 1' },
           questions: [facultativeCheckbox, facultativeSelectWithLotOfChoices, facultativeRanking],
           ...questionnaireProps,
         }}

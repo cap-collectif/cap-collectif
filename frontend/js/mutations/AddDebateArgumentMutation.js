@@ -32,6 +32,10 @@ const mutation = graphql`
           id
           username
         }
+        debate {
+          url
+          id
+        }
         id
         published
         body

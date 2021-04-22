@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
+import { useAnalytics } from 'use-analytics';
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Field, isInvalid, isPristine } from 'redux-form';
@@ -16,6 +17,7 @@ type BeforeConnectProps = {|
   +title: string,
   +onClose: () => void,
   +onSubmit: () => void | Promise<any>,
+  +debateUrl: string,
 |};
 
 type StateProps = {|
@@ -36,10 +38,12 @@ export const MobilePublishArgumentModal = ({
   pristine,
   invalid,
   title,
+  debateUrl,
 }: Props): React.Node => {
   const viewerIsConfirmedByEmail: boolean = useSelector(
     (state: GlobalState) => state.user?.user?.isEmailConfirmed || false,
   );
+  const { track } = useAnalytics();
   const intl = useIntl();
   const { startLoading, stopLoading, isLoading } = useLoadingMachine();
   const focusInputRef = useCallback(node => {
@@ -78,6 +82,9 @@ export const MobilePublishArgumentModal = ({
         <Button
           disabled={isLoading || invalid || pristine}
           onClick={async () => {
+            track('debate_argument_publish', {
+              url: debateUrl,
+            });
             try {
               startLoading();
               await onSubmit();

@@ -212,6 +212,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
     parameters: string | Object,
     parameters?: string | Object,
   ): void;
+  __capco_gtagId?: ?string;
 
   // hack to avoid error flow because of react-beautiful-dnd
   Element: any;

@@ -32,6 +32,7 @@ import validateResponses from '~/utils/form/validateResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import renderResponses from '~/components/Form/RenderResponses';
+import { analytics } from '~/startup/analytics';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -272,7 +273,12 @@ export class ReplyForm extends React.Component<Props> {
                     disabled={pristine || submitting || disabled}
                     bsStyle="primary"
                     label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                    onSubmit={() => dispatch(changeRedux(form, 'draft', true))}
+                    onSubmit={() => {
+                      analytics.track('submit_draft_reply_click', {
+                        stepName: questionnaire.step?.title || '',
+                      });
+                      dispatch(changeRedux(form, 'draft', true));
+                    }}
                   />
                 </ButtonGroup>
               )}
@@ -283,7 +289,12 @@ export class ReplyForm extends React.Component<Props> {
                   bsStyle="info"
                   disabled={(!isDraft && pristine) || invalid || submitting || disabled}
                   label={submitting ? 'global.loading' : 'global.send'}
-                  onSubmit={() => dispatch(changeRedux(form, 'draft', false))}
+                  onSubmit={() => {
+                    analytics.track('submit_reply_click', {
+                      stepName: questionnaire.step?.title || '',
+                    });
+                    dispatch(changeRedux(form, 'draft', false));
+                  }}
                 />
               </ButtonGroup>
             </div>
@@ -362,6 +373,10 @@ export default createFragmentContainer(containerWithRouter, {
       phoneConfirmationRequired
       contribuable
       type
+      step {
+        id
+        title
+      }
       viewerReplies @include(if: $isAuthenticated) {
         totalCount
         edges {

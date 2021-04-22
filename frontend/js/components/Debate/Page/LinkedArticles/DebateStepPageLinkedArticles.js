@@ -3,6 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+import { useAnalytics } from 'use-analytics';
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
 import Slider from 'react-slick';
@@ -64,6 +65,7 @@ export const StyledSlider: StyledComponent<{}, {}, typeof Slider> = styled(Slide
 `;
 
 export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.Node => {
+  const { track } = useAnalytics();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const debate = step?.debate;
   const articles = debate?.articles?.edges
@@ -141,7 +143,13 @@ export const DebateStepPageLinkedArticles = ({ step, isMobile }: Props): React.N
                     '-webkit-user-drag': 'none',
                   }}
                   href={article.url}
-                  key={article.id}>
+                  key={article.id}
+                  onClick={() => {
+                    track('debate_article_click', {
+                      article_url: article.url,
+                      url: step?.debate.url || '',
+                    });
+                  }}>
                   <DebateArticleCard
                     height="100%"
                     illustration={article.coverUrl}
@@ -168,6 +176,7 @@ export default (createFragmentContainer(DebateStepPageLinkedArticles, {
       @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       id
       debate {
+        url
         articles {
           edges {
             node {

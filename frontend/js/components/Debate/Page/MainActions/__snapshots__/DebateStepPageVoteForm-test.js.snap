@@ -109,6 +109,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly 1`] = `
             />
           </Button>
           <Button
+            onClick={[Function]}
             type="submit"
             variant="primary"
             variantColor="primary"
@@ -193,6 +194,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly on mobile 1`] = `
     </Text>
   </ForwardRef>
   <Connect(MobilePublishArgumentModal)
+    debateUrl="/debate"
     onClose={[Function]}
     onSubmit={[MockFunction]}
     show={false}
@@ -371,6 +373,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
             />
           </Button>
           <Button
+            onClick={[Function]}
             type="submit"
             variant="primary"
             variantColor="primary"
@@ -501,6 +504,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
     </Tooltip>
   </ForwardRef>
   <Connect(MobilePublishArgumentModal)
+    debateUrl="/debate"
     onClose={[Function]}
     onSubmit={[MockFunction]}
     show={false}
@@ -638,6 +642,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
             />
           </Button>
           <Button
+            onClick={[Function]}
             type="submit"
             variant="primary"
             variantColor="primary"
@@ -727,6 +732,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
     </Text>
   </ForwardRef>
   <Connect(MobilePublishArgumentModal)
+    debateUrl="/debate"
     onClose={[Function]}
     onSubmit={[MockFunction]}
     show={false}
@@ -864,6 +870,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted without a
             />
           </Button>
           <Button
+            onClick={[Function]}
             type="submit"
             variant="primary"
             variantColor="primary"
@@ -953,6 +960,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted without a
     </Text>
   </ForwardRef>
   <Connect(MobilePublishArgumentModal)
+    debateUrl="/debate"
     onClose={[Function]}
     onSubmit={[MockFunction]}
     show={false}

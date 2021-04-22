@@ -41,7 +41,7 @@ type Props = {|
   +isMobile?: boolean,
   +setArgumentReported: (argument: ArgumentReported) => void,
   +setModerateArgumentModal: (argument: ModerateArgument) => void,
-  +setDeleteModalInfo: ({ id: string, type: ForOrAgainstValue }) => void,
+  +setDeleteModalInfo: ({ id: string, type: ForOrAgainstValue, debateUrl: string }) => void,
 |};
 
 export const voteForArgument = (
@@ -99,7 +99,6 @@ export const ArgumentCard = ({
   const { widget, stepClosed } = useDebateStepPage();
   const [isEditing, setIsEditing] = useState(false);
   const [readMore, setReadMore] = useState(false);
-
   return (
     <Card p={6} bg="white" {...props}>
       <Flex height="100%" direction="column">
@@ -175,7 +174,13 @@ export const ArgumentCard = ({
                   )}
                   <Button
                     disabled={isEditing}
-                    onClick={() => setDeleteModalInfo({ id: argument.id, type: argument.type })}
+                    onClick={() =>
+                      setDeleteModalInfo({
+                        id: argument.id,
+                        type: argument.type,
+                        debateUrl: argument.debate.url,
+                      })
+                    }
                     rightIcon={ICON_NAME.TRASH}
                     color="neutral-gray.500"
                     aria-label={intl.formatMessage({ id: 'global.delete' })}
@@ -307,6 +312,7 @@ export default (createFragmentContainer(ArgumentCard, {
       }
       debate {
         id
+        url
       }
       type
       published
