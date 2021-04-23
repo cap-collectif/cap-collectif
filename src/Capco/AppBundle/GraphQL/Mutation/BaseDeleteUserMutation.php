@@ -284,7 +284,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                         'csrf_protection' => false,
                     ]
                 );
-                $form->submit(['media' => $user->getMedia()], false);
+                // we force to delete media, so fill an empty field
+                $form->submit(['media' => null], false);
 
                 if (!$form->isValid()) {
                     $this->logger->error(__METHOD__.(string)$form->getErrors(true, false));
