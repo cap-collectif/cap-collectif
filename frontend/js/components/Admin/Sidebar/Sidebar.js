@@ -164,7 +164,7 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
               />
               <SidebarLink text="admin.label.theme" url="/admin/capco/app/theme/list" />
               <SidebarLink text="admin.label.post" url="/admin/capco/app/post/list" />
-              {features.allow_users_to_propose_events && (
+              {features.calendar && (
                 <SidebarLink text="admin.label.events" url="/admin/capco/app/event/list" />
               )}
               <SidebarLink text="admin.label.video" url="/admin/capco/app/video/list" />
