@@ -30,6 +30,8 @@ const MetaStepNavigationBoxInner: StyledComponent<{}, {}, HTMLDivElement> = styl
   min-height: ${META_STEP_NAVIGATION_HEIGHT}px;
   padding: 30px;
   display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   justify-content: space-between;
   align-items: center;
   margin: auto;

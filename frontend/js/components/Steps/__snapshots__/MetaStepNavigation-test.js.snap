@@ -45,34 +45,40 @@ exports[`<MetaStepNavigation /> should render correctly for a ConsultationStep 1
 `;
 
 exports[`<MetaStepNavigationBackButton /> should render correctly for a ConsultationStep 1`] = `
-<Button
-  active={false}
-  block={false}
-  bsClass="btn"
-  bsStyle="default"
-  disabled={false}
-  href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation"
-  id="back-to-list-button"
->
-  <MetaStepNavigation__BackIcon />
-   
-  <MetaStepNavigation__BackMessage>
-    <FormattedMessage
-      id="consultations-list"
-      values={Object {}}
-    />
-  </MetaStepNavigation__BackMessage>
-</Button>
+<div>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation"
+    id="back-to-list-button"
+  >
+    <MetaStepNavigation__BackIcon />
+     
+    <MetaStepNavigation__BackMessage>
+      <FormattedMessage
+        id="consultations-list"
+        values={Object {}}
+      />
+    </MetaStepNavigation__BackMessage>
+  </Button>
+</div>
 `;
 
 exports[`<MetaStepNavigationShare /> should render correctly for a ConsultationStep 1`] = `
-<MetaStepNavigation__ShareButtonDropdownInner>
-  <Connect(ShareButtonDropdown)
-    id="share-button"
-    title="Deuxième consultation"
-    url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
-  />
-</MetaStepNavigation__ShareButtonDropdownInner>
+<AppBox
+  textAlign="right"
+>
+  <MetaStepNavigation__ShareButtonDropdownInner>
+    <Connect(ShareButtonDropdown)
+      id="share-button"
+      title="Deuxième consultation"
+      url="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/deuxieme-consultation"
+    />
+  </MetaStepNavigation__ShareButtonDropdownInner>
+</AppBox>
 `;
 
 exports[`<MetaStepNavigationTitle /> should render correctly for a ConsultationStep 1`] = `

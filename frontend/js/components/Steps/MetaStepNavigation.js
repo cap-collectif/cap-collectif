@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import { breakpoint } from '../../utils/mixins';
 import type { MetaStepNavigation_step } from '~relay/MetaStepNavigation_step.graphql';
+import AppBox from '~ui/Primitives/AppBox';
 
 type RelayProps = {|
   +step: MetaStepNavigation_step,
@@ -53,13 +54,15 @@ export const MetaStepNavigationBackButton = ({ step }: { step: MetaStepNavigatio
   switch (step.__typename) {
     case 'ConsultationStep':
       return (
-        <Button id={BACK_TO_LIST_BUTTON_ID} href={step.url}>
-          <BackIcon />
-          &nbsp;
-          <BackMessage>
-            <FormattedMessage id="consultations-list" />
-          </BackMessage>
-        </Button>
+        <div>
+          <Button id={BACK_TO_LIST_BUTTON_ID} href={step.url}>
+            <BackIcon />
+            &nbsp;
+            <BackMessage>
+              <FormattedMessage id="consultations-list" />
+            </BackMessage>
+          </Button>
+        </div>
       );
     default:
       return null;
@@ -83,13 +86,15 @@ export const MetaStepNavigationShare = ({ step }: { step: MetaStepNavigation_ste
   switch (step.__typename) {
     case 'ConsultationStep':
       return step.consultation ? (
-        <ShareButtonDropdownInner>
-          <ShareButtonDropdown
-            id={SHARE_BUTTON_ID}
-            url={step.consultation.url}
-            title={step.consultation.title}
-          />
-        </ShareButtonDropdownInner>
+        <AppBox textAlign="right">
+          <ShareButtonDropdownInner>
+            <ShareButtonDropdown
+              id={SHARE_BUTTON_ID}
+              url={step.consultation.url}
+              title={step.consultation.title}
+            />
+          </ShareButtonDropdownInner>
+        </AppBox>
       ) : null;
     default:
       return null;
