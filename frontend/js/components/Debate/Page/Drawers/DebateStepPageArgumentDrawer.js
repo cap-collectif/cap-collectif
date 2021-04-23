@@ -1,10 +1,8 @@
 // @flow
 import * as React from 'react';
-import { graphql } from 'react-relay';
+import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import { useFragment } from 'relay-hooks';
-import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
@@ -14,21 +12,16 @@ import Heading from '~ui/Primitives/Heading';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import { voteForArgument } from '~/components/Debate/ArgumentCard/ArgumentCard';
-import type {
-  DebateStepPageArgumentDrawer_argument,
-  DebateStepPageArgumentDrawer_argument$key,
-} from '~relay/DebateStepPageArgumentDrawer_argument.graphql';
-import type {
-  DebateStepPageArgumentDrawer_viewer,
-  DebateStepPageArgumentDrawer_viewer$key,
-} from '~relay/DebateStepPageArgumentDrawer_viewer.graphql';
+import type { DebateStepPageArgumentDrawer_argument$key } from '~relay/DebateStepPageArgumentDrawer_argument.graphql';
+import type { DebateStepPageArgumentDrawer_viewer$key } from '~relay/DebateStepPageArgumentDrawer_viewer.graphql';
 import ModalReportArgumentMobile from '~/components/Debate/Page/Arguments/ModalReportArgumentMobile';
 import ModalArgumentAuthorMenu from '~/components/Debate/Page/Arguments/ModalArgumentAuthorMenu';
 import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/ModalModerateArgumentMobile';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
-  ...DetailDrawerProps,
+  +isOpen: boolean,
+  +onClose?: () => void,
   +argument: DebateStepPageArgumentDrawer_argument$key,
   +viewer: ?DebateStepPageArgumentDrawer_viewer$key,
 |};
@@ -65,17 +58,13 @@ const DebateStepPageArgumentDrawer = ({
   viewer: viewerFragment,
   ...drawerProps
 }: Props): React.Node => {
-  const argument: DebateStepPageArgumentDrawer_argument = useFragment(
-    ARGUMENT_FRAGMENT,
-    argumentFragment,
-  );
-  const viewer: ?DebateStepPageArgumentDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const argument = useFragment(ARGUMENT_FRAGMENT, argumentFragment);
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isViewerAdmin = viewer && viewer.isAdmin;
   const { widget, stepClosed } = useDebateStepPage();
 
-  if (!argument) return null;
   const isAuthor = argument.viewerDidAuthor;
 
   return (

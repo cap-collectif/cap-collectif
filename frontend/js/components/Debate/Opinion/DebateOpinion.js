@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
+import { useFragment, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import css from '@styled-system/css';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import type { DebateOpinion_opinion } from '~relay/DebateOpinion_opinion.graphql';
+import type { DebateOpinion_opinion$key } from '~relay/DebateOpinion_opinion.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Card from '~ds/Card/Card';
 import Tag from '~ds/Tag/Tag';
@@ -17,16 +17,34 @@ import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/Debate
 import NewUserAvatar from '~/components/User/NewUserAvatar';
 import AppBox from '~ui/Primitives/AppBox';
 
+// TODO remove this and import from relay
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
 
 type Props = {|
-  +opinion: DebateOpinion_opinion,
-  +isMobile: boolean,
-  +readMore: boolean,
+  +isMobile?: boolean,
+  +readMore?: boolean,
+  +opinion: DebateOpinion_opinion$key,
 |};
 
-export const DebateOpinion = ({ opinion, isMobile, readMore }: Props): React.Node => {
+const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props): React.Node => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const opinion = useFragment(
+    graphql`
+      fragment DebateOpinion_opinion on DebateOpinion
+        @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+        ...DebateStepPageOpinionDrawer_opinion @include(if: $isMobile)
+        title
+        body
+        author {
+          ...NewUserAvatar_user
+          username
+          biography
+        }
+        type
+      }
+    `,
+    props.opinion,
+  );
   return (
     <Card
       p={0}
@@ -113,19 +131,4 @@ export const DebateOpinion = ({ opinion, isMobile, readMore }: Props): React.Nod
   );
 };
 
-export default (createFragmentContainer(DebateOpinion, {
-  opinion: graphql`
-    fragment DebateOpinion_opinion on DebateOpinion
-      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
-      ...DebateStepPageOpinionDrawer_opinion @include(if: $isMobile)
-      title
-      body
-      author {
-        ...NewUserAvatar_user
-        username
-        biography
-      }
-      type
-    }
-  `,
-}): RelayFragmentContainer<typeof DebateOpinion>);
+export default DebateOpinion;

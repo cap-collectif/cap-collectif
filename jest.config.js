@@ -20,9 +20,9 @@ module.exports = {
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',
-    "\\.(css|less)$": "identity-obj-proxy"
+    '\\.(css|less)$': 'identity-obj-proxy',
   },
-  coverageReporters: ['json-summary', 'lcov', 'clover', 'json'],
+  coverageReporters: ['text', 'json-summary', 'lcov', 'clover', 'json'],
   modulePaths: ['<rootDir>/frontend/js/__generated__'],
   // TODO remove startups, only to speed up on CI
   roots: ['<rootDir>/frontend/js'],

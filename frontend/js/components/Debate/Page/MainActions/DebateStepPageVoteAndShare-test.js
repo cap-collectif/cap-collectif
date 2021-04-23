@@ -4,7 +4,7 @@ import * as React from 'react';
 import { render } from 'enzyme';
 import { DebateStepPageVoteAndShare } from './DebateStepPageVoteAndShare';
 import { $refType, $fragmentRefs } from '~/mocks';
-import MockProviders from '~/testUtils';
+import { MockProviders } from '~/testUtils';
 
 const baseProps = {
   step: {

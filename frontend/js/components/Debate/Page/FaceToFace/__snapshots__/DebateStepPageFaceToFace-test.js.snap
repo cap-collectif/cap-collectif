@@ -44,7 +44,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly 1`] = `
       }
       spacing={6}
     >
-      <Relay(DebateOpinion)
+      <DebateOpinion
         isMobile={false}
         opinion={
           Object {
@@ -55,7 +55,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly 1`] = `
         }
         readMore={false}
       />
-      <Relay(DebateOpinion)
+      <DebateOpinion
         isMobile={false}
         opinion={
           Object {
@@ -115,7 +115,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly on mobile 1`] = `
       }
       spacing={6}
     >
-      <Relay(DebateOpinion)
+      <DebateOpinion
         isMobile={true}
         opinion={
           Object {
@@ -126,7 +126,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly on mobile 1`] = `
         }
         readMore={false}
       />
-      <Relay(DebateOpinion)
+      <DebateOpinion
         isMobile={true}
         opinion={
           Object {

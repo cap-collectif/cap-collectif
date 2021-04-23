@@ -1,24 +1,16 @@
 // @flow
 import * as React from 'react';
-import { graphql } from 'react-relay';
-import { useFragment } from 'relay-hooks';
+import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useState } from 'react';
-import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import DebateStepPageAlternateArgumentsPagination, {
   CONNECTION_CONFIG,
 } from '~/components/Debate/Page/Arguments/DebateStepPageAlternateArgumentsPagination';
-import type {
-  DebateStepPageArgumentsDrawer_debate,
-  DebateStepPageArgumentsDrawer_debate$key,
-} from '~relay/DebateStepPageArgumentsDrawer_debate.graphql';
-import type {
-  DebateStepPageArgumentsDrawer_viewer,
-  DebateStepPageArgumentsDrawer_viewer$key,
-} from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
+import type { DebateStepPageArgumentsDrawer_debate$key } from '~relay/DebateStepPageArgumentsDrawer_debate.graphql';
+import type { DebateStepPageArgumentsDrawer_viewer$key } from '~relay/DebateStepPageArgumentsDrawer_viewer.graphql';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import type { RelayHookPaginationProps as PaginationProps } from '~/types';
@@ -55,18 +47,21 @@ const VIEWER_FRAGMENT = graphql`
   }
 `;
 
+type Props = {|
+  +isOpen: boolean,
+  +onClose?: () => void,
+  +debate: DebateStepPageArgumentsDrawer_debate$key,
+  +viewer: ?DebateStepPageArgumentsDrawer_viewer$key,
+|};
+
 const DebateStepPageArgumentsDrawer = ({
   debate: debateFragment,
   viewer: viewerFragment,
   ...drawerProps
-}: {|
-  ...DetailDrawerProps,
-  +debate: DebateStepPageArgumentsDrawer_debate$key,
-  +viewer: ?DebateStepPageArgumentsDrawer_viewer$key,
-|}): React.Node => {
+}: Props): React.Node => {
   const intl = useIntl();
-  const debate: DebateStepPageArgumentsDrawer_debate = useFragment(DEBATE_FRAGMENT, debateFragment);
-  const viewer: DebateStepPageArgumentsDrawer_viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const debate = useFragment(DEBATE_FRAGMENT, debateFragment);
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
   const [filter, setFilter] = useState<Filter>('DESC');
   const [connection, setConnection] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
 

@@ -51,6 +51,7 @@ module.exports = {
     toGlobalId: true,
   },
   rules: {
+    'react/destructuring-assignment': 'off',
     // TODO
     'react/no-unescaped-entities': 'warn',
     // TODO restore this

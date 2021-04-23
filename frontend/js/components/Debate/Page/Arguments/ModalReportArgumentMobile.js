@@ -15,9 +15,9 @@ import { FontWeight } from '~ui/Primitives/constants';
 import ReportDebateArgumentMutation from '~/mutations/ReportDebateArgumentMutation';
 
 type Props = {|
-  argument: ModalReportArgumentMobile_argument,
-  show: boolean,
-  onClose: () => void,
+  +argument: ModalReportArgumentMobile_argument,
+  +show: boolean,
+  +onClose: () => void,
 |};
 
 const STATE = {

@@ -135,7 +135,6 @@ const Modal = ({
       dialog.hide();
     }
   }, [dialog, show]);
-  // eslint-disable-next-line react/destructuring-assignment
   const aria = ariaLabel ?? props['aria-label'] ?? undefined;
   return (
     <Provider context={context}>

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
+<div
+  className="sc-bdnylx"
+  id="DebateStepPageNotYetStarted"
+>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iXOGtN eEzioL"
+  >
+    <div
+      className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf hbhIdg jxKYEO"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      title=""
+    >
+      <IconMock
+        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+      />
+      <p
+        className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+      >
+        count.daysUntil {"count":725}
+      </p>
+    </div>
+    <h2
+      className="sc-bdnylx eEtCQU"
+    >
+      
+    </h2>
+  </div>
+</div>
+`;

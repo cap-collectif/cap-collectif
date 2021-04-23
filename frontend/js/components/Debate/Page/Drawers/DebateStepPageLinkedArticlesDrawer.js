@@ -3,7 +3,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
-import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
 import type { DebateStepPageLinkedArticlesDrawer_step } from '~relay/DebateStepPageLinkedArticlesDrawer_step.graphql';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Heading from '~ui/Primitives/Heading';
@@ -11,13 +10,13 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import DebateArticleCard from '~ui/DebateArticle/DebateArticleCard';
 import { DATE_SHORT_LOCALIZED_FORMAT } from '~/shared/date';
 
-const DebateStepPageLinkedArticlesDrawer = ({
-  step,
-  ...drawerProps
-}: {|
-  ...DetailDrawerProps,
+type Props = {|
+  +isOpen: boolean,
+  +onClose?: () => void,
   +step: DebateStepPageLinkedArticlesDrawer_step,
-|}): React.Node => {
+|};
+
+const DebateStepPageLinkedArticlesDrawer = ({ step, ...drawerProps }: Props): React.Node => {
   const articles =
     step?.debate?.articles?.edges
       ?.filter(Boolean)

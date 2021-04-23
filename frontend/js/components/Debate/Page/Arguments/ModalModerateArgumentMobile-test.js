@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { render } from 'enzyme';
-import MockProviders from '~/testUtils';
+import { MockProviders } from '~/testUtils';
 import { $refType } from '~/mocks';
 import { ModalModerateArgumentMobile } from './ModalModerateArgumentMobile';
 

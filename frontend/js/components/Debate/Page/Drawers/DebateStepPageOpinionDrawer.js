@@ -1,43 +1,42 @@
 // @flow
 import * as React from 'react';
-import { graphql } from 'react-relay';
+import { graphql, useFragment } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { useFragment } from 'relay-hooks';
-import type { Props as DetailDrawerProps } from '~ds/DetailDrawer/DetailDrawer';
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import Tag from '~ds/Tag/Tag';
 import Heading from '~ui/Primitives/Heading';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
-import type {
-  DebateStepPageOpinionDrawer_opinion,
-  DebateStepPageOpinionDrawer_opinion$key,
-} from '~relay/DebateStepPageOpinionDrawer_opinion.graphql';
+import type { DebateStepPageOpinionDrawer_opinion$key } from '~relay/DebateStepPageOpinionDrawer_opinion.graphql';
 import NewUserAvatar from '~/components/User/NewUserAvatar';
 import Icon, { ICON_SIZE } from '~ds/Icon/Icon';
 
-const FRAGMENT = graphql`
-  fragment DebateStepPageOpinionDrawer_opinion on DebateOpinion {
-    title
-    body
-    author {
-      ...NewUserAvatar_user
-      username
-      biography
-    }
-    type
-  }
-`;
+type Props = {|
+  +isOpen: boolean,
+  +onClose?: () => void,
+  +opinion: DebateStepPageOpinionDrawer_opinion$key,
+|};
 
 const DebateStepPageOpinionDrawer = ({
   opinion: opinionFragment,
   ...drawerProps
-}: {|
-  ...DetailDrawerProps,
-  opinion: DebateStepPageOpinionDrawer_opinion$key,
-|}): React.Node => {
-  const opinion: DebateStepPageOpinionDrawer_opinion = useFragment(FRAGMENT, opinionFragment);
+}: Props): React.Node => {
+  const opinion = useFragment(
+    graphql`
+      fragment DebateStepPageOpinionDrawer_opinion on DebateOpinion {
+        title
+        body
+        author {
+          ...NewUserAvatar_user
+          username
+          biography
+        }
+        type
+      }
+    `,
+    opinionFragment,
+  );
 
   return (
     <DetailDrawer {...drawerProps}>

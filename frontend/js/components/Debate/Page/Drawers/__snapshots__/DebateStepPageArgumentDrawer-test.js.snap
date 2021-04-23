@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
+<div
+  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  style={
+    Object {
+      "opacity": 0,
+      "transform": "translateX(100vw) translateZ(0)",
+    }
+  }
+>
+  <div
+    className="sc-bdnylx lhzlXY"
+  >
+    <IconMock
+      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      onClick={[MockFunction]}
+    />
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm glBRts"
+    >
+      <p
+        className="sc-bdnylx fOqqJY"
+      >
+        Agui le penseur
+      </p>
+      <div
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF jwqAYk jxKYEO"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        title=""
+      >
+        <p
+          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+        >
+          <h5
+            className="sc-bdnylx QGwHw"
+          >
+            global.for
+          </h5>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-bdnylx blraWc"
+    onClose={[MockFunction]}
+  >
+    <p
+      className="sc-bdnylx fNJNWw"
+    >
+      coucou
+    </p>
+  </div>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bxbtuz"
+    onClose={[MockFunction]}
+  >
+    <button
+      aria-label="vote.add"
+      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      <IconMock
+        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+      />
+    </button>
+    <span
+      className="sc-bdnylx kuntTJ"
+    >
+      10
+    </span>
+  </div>
+  <div
+    aria-label="global.menu"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />
+</div>
+`;
+
+exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has vote 1`] = `
+<div
+  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  style={
+    Object {
+      "opacity": 0,
+      "transform": "translateX(100vw) translateZ(0)",
+    }
+  }
+>
+  <div
+    className="sc-bdnylx lhzlXY"
+  >
+    <IconMock
+      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      onClick={[MockFunction]}
+    />
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm glBRts"
+    >
+      <p
+        className="sc-bdnylx fOqqJY"
+      >
+        Agui le penseur
+      </p>
+      <div
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF jwqAYk jxKYEO"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        title=""
+      >
+        <p
+          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+        >
+          <h5
+            className="sc-bdnylx QGwHw"
+          >
+            global.for
+          </h5>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-bdnylx blraWc"
+    onClose={[MockFunction]}
+  >
+    <p
+      className="sc-bdnylx fNJNWw"
+    >
+      coucou
+    </p>
+  </div>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bxbtuz"
+    onClose={[MockFunction]}
+  >
+    <button
+      aria-label="vote.add"
+      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      <IconMock
+        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+      />
+    </button>
+    <span
+      className="sc-bdnylx kuntTJ"
+    >
+      10
+    </span>
+  </div>
+  <div
+    aria-label="global.menu"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />
+</div>
+`;
+
+exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is the author 1`] = `
+<div
+  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  style={
+    Object {
+      "opacity": 0,
+      "transform": "translateX(100vw) translateZ(0)",
+    }
+  }
+>
+  <div
+    className="sc-bdnylx lhzlXY"
+  >
+    <IconMock
+      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      onClick={[MockFunction]}
+    />
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm glBRts"
+    >
+      <p
+        className="sc-bdnylx fOqqJY"
+      >
+        Agui le penseur
+      </p>
+      <div
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF jwqAYk jxKYEO"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        title=""
+      >
+        <p
+          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+        >
+          <h5
+            className="sc-bdnylx QGwHw"
+          >
+            global.for
+          </h5>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-bdnylx blraWc"
+    onClose={[MockFunction]}
+  >
+    <p
+      className="sc-bdnylx fNJNWw"
+    >
+      coucou
+    </p>
+  </div>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bxbtuz"
+    onClose={[MockFunction]}
+  >
+    <button
+      aria-label="vote.add"
+      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      <IconMock
+        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+      />
+    </button>
+    <span
+      className="sc-bdnylx kuntTJ"
+    >
+      10
+    </span>
+  </div>
+  <div
+    aria-label="global.menu"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />
+</div>
+`;

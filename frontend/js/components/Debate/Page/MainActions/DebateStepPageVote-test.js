@@ -4,7 +4,7 @@ import * as React from 'react';
 import { render } from 'enzyme';
 import { DebateStepPageVote } from './DebateStepPageVote';
 import { $refType } from '~/mocks';
-import MockProviders from '~/testUtils';
+import { MockProviders } from '~/testUtils';
 
 const baseProps = {
   step: {
