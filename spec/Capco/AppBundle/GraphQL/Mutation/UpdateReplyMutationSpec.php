@@ -15,7 +15,6 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
-use Nette\Utils\DateTime;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
@@ -97,7 +96,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
         $questionnaire->isAnonymousAllowed()->willReturn(true);
         $step->getProject()->willReturn($project);
-        $endDate = new DateTime();
+        $endDate = new \DateTime();
         $step->getEndAt()->willReturn($endDate);
         $step
             ->isOpen()
@@ -217,7 +216,7 @@ class UpdateReplyMutationSpec extends ObjectBehavior
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
         $questionnaire->isAnonymousAllowed()->willReturn(true);
         $step->getProject()->willReturn($project);
-        $endDate = new DateTime();
+        $endDate = new \DateTime();
         $step->getEndAt()->willReturn($endDate);
         $step->getSlug()->willReturn('questionnaire-step');
         $project->getId()->willReturn('projectQuestionnaireId');

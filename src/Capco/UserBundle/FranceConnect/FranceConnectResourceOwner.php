@@ -42,9 +42,16 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 
         $resolver
             ->setDefaults([
-                'scope' =>
-                    'openid given_name family_name gender preferred_username birthdate birthcountry birthplace email address phone profile identite_pivot birth',
+                'scope' => $this->getScope(),
             ])
             ->setRequired('logout_url');
+    }
+
+    public function getScope(): string
+    {
+        $allowedData = $this->optionsModifier->getAllowedData();
+        $scope =  array_merge(['openid'], $allowedData);
+
+        return implode(' ', $scope);
     }
 }

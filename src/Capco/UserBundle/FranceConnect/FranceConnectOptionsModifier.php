@@ -28,6 +28,13 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
         $this->toggleManager = $toggleManager;
     }
 
+    public function getAllowedData(): array
+    {
+        $fc = $this->repository->find('franceConnect');
+
+        return array_keys(array_filter($fc->getAllowedData()));
+    }
+
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array
     {
         if (!$this->toggleManager->isActive('login_franceconnect')) {

@@ -13,9 +13,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $repository;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private FranceConnectSSOConfigurationRepository $repository;
 
     public function __construct(
         EntityManagerInterface $em,
