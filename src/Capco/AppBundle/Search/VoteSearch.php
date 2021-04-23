@@ -573,7 +573,6 @@ class VoteSearch extends Search
         foreach ($conditions as $condition) {
             $boolQuery->addFilter($condition);
         }
-        $boolQuery->addMustNot(new Exists('comment'));
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 

@@ -416,7 +416,7 @@ Object {
             },
             "vip": true,
             "votes": Object {
-              "totalCount": 0,
+              "totalCount": 1,
             },
           },
         },

@@ -26,7 +26,7 @@ InternalProposalVote:
             author:
                 type: 'InternalUser'
                 description: 'The author of the contribution. If null, the vote is anonymous.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVoteAuthorResolver", [value, context])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVoteAuthorResolver", [value, getUser() ,context])'
             kind:
                 type: 'String!'
                 description: "Returns 'proposalVote'."
