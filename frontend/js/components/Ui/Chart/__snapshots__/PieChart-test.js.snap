@@ -109,17 +109,17 @@ exports[`<PieChart /> renders PieChart 1`] = `
         stroke="none"
       >
         <Cell
-          aria-labelledby="ok"
+          aria-label="aria-piechart-label-vote"
           fill="#fff"
           key="0"
         />
         <Cell
-          aria-labelledby="mixed"
+          aria-label="aria-piechart-label-vote"
           fill="#000"
           key="1"
         />
         <Cell
-          aria-labelledby="not ok"
+          aria-label="aria-piechart-label-vote"
           fill="#F9F9F9"
           key="2"
         />
@@ -239,17 +239,17 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
         stroke="none"
       >
         <Cell
-          aria-labelledby="ok"
+          aria-label="aria-piechart-label-vote"
           fill="#fff"
           key="0"
         />
         <Cell
-          aria-labelledby="mixed"
+          aria-label="aria-piechart-label-vote"
           fill="#000"
           key="1"
         />
         <Cell
-          aria-labelledby="not ok"
+          aria-label="aria-piechart-label-vote"
           fill="#F9F9F9"
           key="2"
         />
