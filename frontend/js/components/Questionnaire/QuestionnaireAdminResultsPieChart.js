@@ -14,6 +14,7 @@ import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsPieChart_multipleChoiceQuestion,
   intl: IntlShape,
+  innerRef: (ref: ?React.Ref<any>) => void
 };
 
 type State = {
@@ -79,7 +80,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
   };
 
   render() {
-    const { multipleChoiceQuestion, intl } = this.props;
+    const { multipleChoiceQuestion, intl, innerRef } = this.props;
     const { windowWidth } = this.state;
 
     const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
@@ -91,7 +92,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
             className="pie-chart__container mb-20"
             style={{ height: this.getHeight(data.length) }}>
             <ResponsiveContainer>
-              <PieChart>
+              <PieChart ref={innerRef}>
                 {windowWidth && windowWidth < 992 ? (
                   <Legend verticalAlign="bottom" />
                 ) : (

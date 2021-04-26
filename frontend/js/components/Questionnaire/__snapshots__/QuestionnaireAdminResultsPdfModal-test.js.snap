@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireAdminResultsPdfModal /> renders correctly 1`] = `
+<Fragment>
+  <Modal
+    ariaLabel="export pdf"
+    hideOnEsc={true}
+    onClose={[MockFunction]}
+    preventBodyScroll={true}
+    scrollBehavior="inside"
+    show={true}
+    width="313px"
+  >
+    <Modal.Header>
+      <Heading>
+        <FormattedMessage
+          id="global.export"
+          values={Object {}}
+        />
+      </Heading>
+    </Modal.Header>
+    <Modal.Body>
+      <QuestionnaireAdminResultsPdfModalBody
+        error={false}
+        loading={false}
+        retryCount={0}
+      />
+    </Modal.Body>
+    <Modal.Footer
+      as="div"
+    >
+      <ForwardRef
+        align="center"
+        justify="center"
+        width="100%"
+      >
+        <QuestionnaireAdminResultsPdfModalButton
+          error={false}
+          loading={false}
+          onClose={[MockFunction]}
+          retryCount={0}
+          setLoading={[Function]}
+          setRetryCount={[Function]}
+        />
+      </ForwardRef>
+    </Modal.Footer>
+  </Modal>
+</Fragment>
+`;

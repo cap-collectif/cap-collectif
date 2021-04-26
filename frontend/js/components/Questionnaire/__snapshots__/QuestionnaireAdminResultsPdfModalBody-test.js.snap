@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireAdminResultsPdfModalBody /> renders correctly 1`] = `
+<FormattedMessage
+  id="data.exported.to.pdf"
+  values={Object {}}
+/>
+`;
+
+exports[`<QuestionnaireAdminResultsPdfModalBody /> renders correctly when error 1`] = `
+<FormattedMessage
+  id="sorry.export.failed"
+  values={Object {}}
+/>
+`;
+
+exports[`<QuestionnaireAdminResultsPdfModalBody /> renders correctly when loading 1`] = `
+<FormattedMessage
+  id="this.may.take.a.few.moments"
+  values={Object {}}
+/>
+`;
+
+exports[`<QuestionnaireAdminResultsPdfModalBody /> renders correctly when retryCount exceed limit 1`] = `
+<FormattedMessage
+  id="sorry.export.failed.try.later"
+  values={Object {}}
+/>
+`;

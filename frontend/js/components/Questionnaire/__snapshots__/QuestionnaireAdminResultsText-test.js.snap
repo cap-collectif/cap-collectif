@@ -65,7 +65,7 @@ exports[`<QuestionnaireAdminResultsText /> renders correctly simpleQuestion resp
       }
     }
   >
-    <TagCloud
+    <ForwardRef
       maxSize={45}
       minSize={12}
       tags={

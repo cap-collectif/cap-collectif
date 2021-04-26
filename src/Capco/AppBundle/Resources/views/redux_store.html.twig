@@ -12,6 +12,7 @@
         'themes': themes_list(),
         'images': {
             'avatar': media_public_url(null|capco_default_avatar, 'default_avatar'),
+            'logoUrl': media_public_url(capco_site_image_media('image.logo'), 'default_logo')
         },
         'features': features_list(),
         'userTypes': user_type_list()|default([]),

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo } from 'react';
+import React, {useState, useMemo} from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
@@ -21,7 +21,7 @@ type Props = {
   simpleQuestion: QuestionnaireAdminResultsText_simpleQuestion,
 };
 
-export const QuestionnaireAdminResultsText = ({ relay, simpleQuestion }: Props) => {
+export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement>(({ relay, simpleQuestion }: Props, ref) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [responseSearchTag, setResponseSearchTag] = useState<?{| value: string, count: number |}>(
     null,
@@ -119,7 +119,7 @@ export const QuestionnaireAdminResultsText = ({ relay, simpleQuestion }: Props) 
           </div>
         ) : (
           <div style={{ margin: 'auto', maxWidth: 650, marginTop: '20' }}>
-            <TagCloud tags={tags} minSize={12} maxSize={45} />
+            <TagCloud tags={tags} minSize={12} maxSize={45} ref={ref} />
           </div>
         )}
         {responseSearchTag && (
@@ -137,7 +137,7 @@ export const QuestionnaireAdminResultsText = ({ relay, simpleQuestion }: Props) 
   }
 
   return null;
-};
+});
 
 export default createPaginationContainer(
   QuestionnaireAdminResultsText,

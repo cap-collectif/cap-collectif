@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireAdminResultsPdfModalButton /> renders correctly 1`] = `
+<Button
+  disabled={false}
+  onClick={[MockFunction]}
+  variant="primary"
+  variantSize="medium"
+  width="265px"
+>
+  <ForwardRef
+    align="center"
+    justify="center"
+    width="100%"
+  >
+    <FormattedMessage
+      id="global.close"
+      values={Object {}}
+    />
+  </ForwardRef>
+</Button>
+`;
+
+exports[`<QuestionnaireAdminResultsPdfModalButton /> renders correctly when error 1`] = `
+<Button
+  disabled={false}
+  onClick={[Function]}
+  variant="primary"
+  variantSize="medium"
+  width="265px"
+>
+  <ForwardRef
+    align="center"
+    justify="center"
+    width="100%"
+  >
+    <FormattedMessage
+      id="retry"
+      values={Object {}}
+    />
+  </ForwardRef>
+</Button>
+`;
+
+exports[`<QuestionnaireAdminResultsPdfModalButton /> renders correctly when error and retryCount exceeds limit 1`] = `
+<Button
+  disabled={false}
+  onClick={[MockFunction]}
+  variant="primary"
+  variantSize="medium"
+  width="265px"
+>
+  <ForwardRef
+    align="center"
+    justify="center"
+    width="100%"
+  >
+    <FormattedMessage
+      id="global.close"
+      values={Object {}}
+    />
+  </ForwardRef>
+</Button>
+`;
+
+exports[`<QuestionnaireAdminResultsPdfModalButton /> renders correctly when loading 1`] = `
+<Button
+  disabled={true}
+  onClick={[MockFunction]}
+  variant="primary"
+  variantSize="medium"
+  width="265px"
+>
+  <ForwardRef
+    align="center"
+    justify="center"
+    width="100%"
+  >
+    <ForwardRef
+      alignItems="center"
+      mr={4}
+    >
+      <Loader
+        color="#333333"
+        inline={true}
+        show={true}
+        size={25}
+      />
+    </ForwardRef>
+    <FormattedMessage
+      id="pdf.file.creation"
+      values={Object {}}
+    />
+  </ForwardRef>
+</Button>
+`;

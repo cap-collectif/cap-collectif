@@ -40,20 +40,22 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
           "_callbacks": Array [],
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
-            "_currentlyRenderingComponent": null,
             "_didScheduleRenderPhaseUpdate": false,
             "_dispatcher": Object {
               "readContext": [Function],
               "useCallback": [Function],
               "useContext": [Function],
               "useDebugValue": [Function],
+              "useDeferredValue": [Function],
               "useEffect": [Function],
               "useImperativeHandle": [Function],
               "useLayoutEffect": [Function],
               "useMemo": [Function],
               "useReducer": [Function],
               "useRef": [Function],
+              "useResponder": [Function],
               "useState": [Function],
+              "useTransition": [Function],
             },
             "_element": <EventListStatusFilter
               screen="desktop"
@@ -65,7 +67,6 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
             "_isReRender": false,
             "_newState": null,
             "_numberOfReRenders": 0,
-            "_previousComponentIdentity": null,
             "_renderPhaseUpdates": null,
             "_rendered": <div
               className="position-relative"
@@ -236,20 +237,22 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
           "_callbacks": Array [],
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
-            "_currentlyRenderingComponent": null,
             "_didScheduleRenderPhaseUpdate": false,
             "_dispatcher": Object {
               "readContext": [Function],
               "useCallback": [Function],
               "useContext": [Function],
               "useDebugValue": [Function],
+              "useDeferredValue": [Function],
               "useEffect": [Function],
               "useImperativeHandle": [Function],
               "useLayoutEffect": [Function],
               "useMemo": [Function],
               "useReducer": [Function],
               "useRef": [Function],
+              "useResponder": [Function],
               "useState": [Function],
+              "useTransition": [Function],
             },
             "_element": <EventListStatusFilter
               status="finished"
@@ -260,7 +263,6 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
             "_isReRender": false,
             "_newState": null,
             "_numberOfReRenders": 0,
-            "_previousComponentIdentity": null,
             "_renderPhaseUpdates": null,
             "_rendered": <div
               className="position-relative"
@@ -428,20 +430,22 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
           "_callbacks": Array [],
           "_renderer": ReactShallowRenderer {
             "_context": Object {},
-            "_currentlyRenderingComponent": null,
             "_didScheduleRenderPhaseUpdate": false,
             "_dispatcher": Object {
               "readContext": [Function],
               "useCallback": [Function],
               "useContext": [Function],
               "useDebugValue": [Function],
+              "useDeferredValue": [Function],
               "useEffect": [Function],
               "useImperativeHandle": [Function],
               "useLayoutEffect": [Function],
               "useMemo": [Function],
               "useReducer": [Function],
               "useRef": [Function],
+              "useResponder": [Function],
               "useState": [Function],
+              "useTransition": [Function],
             },
             "_element": <EventListStatusFilter
               screen="mobile"
@@ -453,7 +457,6 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
             "_isReRender": false,
             "_newState": null,
             "_numberOfReRenders": 0,
-            "_previousComponentIdentity": null,
             "_renderPhaseUpdates": null,
             "_rendered": <div
               className="position-relative"

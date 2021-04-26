@@ -8,6 +8,8 @@ import ResponsiveContainer from 'recharts/es6/component/ResponsiveContainer';
 import LabelList from 'recharts/es6/component/LabelList';
 import XAxis from 'recharts/es6/cartesian/XAxis';
 import YAxis from 'recharts/es6/cartesian/YAxis';
+import styled from 'styled-components';
+import type { StyledComponent } from 'styled-components';
 import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
 import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion';
 
@@ -15,7 +17,12 @@ type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsBarChart_multipleChoiceQuestion,
   backgroundColor: string,
   intl: IntlShape,
+  innerRef: (ref: ?React.Ref<typeof ResponsiveContainer>) => void,
 };
+
+const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  width: 768px;
+`;
 
 export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
   getYAxisWidth = (data: Array<Object>): number => {
@@ -34,28 +41,32 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
   };
 
   render() {
-    const { multipleChoiceQuestion, backgroundColor, intl } = this.props;
-
+    const { multipleChoiceQuestion, backgroundColor, intl, innerRef } = this.props;
     const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
     const containerHeight = data.length * 75;
 
     return (
-      <ResponsiveContainer height={containerHeight}>
-        <BarChart data={data} layout="vertical" margin={{ top: 15, right: 5, bottom: 15, left: 5 }}>
-          <XAxis type="number" allowDecimals={false} tickLine={false} />
-          <YAxis
-            dataKey="name"
-            type="category"
-            tickLine={false}
-            width={this.getYAxisWidth(data)}
-          />{' '}
-          <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
-            {' '}
-            <LabelList dataKey="value" position="right" />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+      <Container>
+        <ResponsiveContainer height={containerHeight} ref={innerRef}>
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ top: 15, right: 5, bottom: 15, left: 5 }}>
+            <XAxis type="number" allowDecimals={false} tickLine={false} />
+            <YAxis
+              dataKey="name"
+              type="category"
+              tickLine={false}
+              width={this.getYAxisWidth(data)}
+            />{' '}
+            <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
+              {' '}
+              <LabelList dataKey="value" position="right" />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </Container>
     );
   }
 }

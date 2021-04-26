@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TagCloud /> should render correctly 1`] = `
-<TagCloud
+<ForwardRef
   maxSize={45}
   minSize={12}
   tags={
@@ -69,7 +69,7 @@ exports[`<TagCloud /> should render correctly 1`] = `
     isHover={false}
   >
     <div
-      className="TagCloud__Container-sc-1pikt4p-0 kUEcLw"
+      className="TagCloud__Container-sc-1pikt4p-0 cKCEn"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -437,5 +437,5 @@ exports[`<TagCloud /> should render correctly 1`] = `
       </OverlayTrigger>
     </div>
   </TagCloud__Container>
-</TagCloud>
+</ForwardRef>
 `;

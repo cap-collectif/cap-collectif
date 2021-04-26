@@ -2,6 +2,7 @@
 
 exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
 <Suspense
+  eventId="eventGlobalId1"
   fallback={
     <Loader
       color="#333333"
@@ -10,6 +11,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
       size={40}
     />
   }
+  isAuthenticated={false}
 >
   <Providers>
     <ReactRelayQueryRenderer

@@ -1,259 +1,261 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnaireAdminResultMajority /> renders correctly 1`] = `
-<QuestionnaireAdminResultMajoritystyle__Container
-  active={true}
-  isMobile={false}
->
-  <QuestionnaireAdminResultMajoritystyle__GraphContainer>
-    <div
-      className="median-mention"
-    >
-      <FormattedMessage
-        id="median-mention"
-        values={Object {}}
-      />
-       
-      <FormattedMessage
-        id="global-passable"
-        values={Object {}}
-      />
-    </div>
-    <QuestionnaireAdminResultMajoritystyle__ColorRow
-      className="color-row"
-    >
+<QuestionnaireAdminResultMajority__Wrapper>
+  <QuestionnaireAdminResultMajoritystyle__Container
+    active={true}
+    isMobile={false}
+  >
+    <QuestionnaireAdminResultMajoritystyle__GraphContainer>
       <div
-        className="median-indicator"
-      />
-      <div
-        className="answer-option"
-        key="0"
-        style={
-          Object {
-            "backgroundColor": "#33691e",
-            "flexBasis": "16.67%",
-          }
-        }
-      />
-      <div
-        className="answer-option"
-        key="1"
-        style={
-          Object {
-            "backgroundColor": "#43a047",
-            "flexBasis": "16.67%",
-          }
-        }
-      />
-      <div
-        className="answer-option"
-        key="2"
-        style={
-          Object {
-            "backgroundColor": "#ffc107",
-            "flexBasis": "16.67%",
-          }
-        }
-      />
-      <div
-        className="answer-option"
-        key="3"
-        style={
-          Object {
-            "backgroundColor": "#ff9800",
-            "flexBasis": "16.67%",
-          }
-        }
-      />
-      <div
-        className="answer-option"
-        key="4"
-        style={
-          Object {
-            "backgroundColor": "#b71c1c",
-            "flexBasis": "16.67%",
-          }
-        }
-      />
-      <div
-        className="answer-option"
-        key="5"
-        style={
-          Object {
-            "backgroundColor": "#212121",
-            "flexBasis": "16.67%",
-          }
-        }
-      />
-    </QuestionnaireAdminResultMajoritystyle__ColorRow>
-  </QuestionnaireAdminResultMajoritystyle__GraphContainer>
-  <QuestionnaireAdminResultMajoritystyle__ResponseContainer>
-    <div
-      className="response-number-container"
-    >
-      <FormattedMessage
-        id="answer-number"
-        values={Object {}}
-      />
-    </div>
-    <div
-      className="line-level"
-      key="0"
-      style={
-        Object {
-          "color": "#33691e",
-        }
-      }
-    >
-      <div
-        className="main-info-line"
+        className="median-mention"
       >
-        <span>
-          5
-        </span>
-         
         <FormattedMessage
-          id="very-well"
+          id="median-mention"
           values={Object {}}
         />
-         
-      </div>
-      <span>
-        16.67%
-      </span>
-    </div>
-    <div
-      className="line-level"
-      key="1"
-      style={
-        Object {
-          "color": "#43a047",
-        }
-      }
-    >
-      <div
-        className="main-info-line"
-      >
-        <span>
-          5
-        </span>
-         
-        <FormattedMessage
-          id="global-well"
-          values={Object {}}
-        />
-         
-      </div>
-      <span>
-        16.67%
-      </span>
-    </div>
-    <div
-      className="line-level"
-      key="2"
-      style={
-        Object {
-          "color": "#ffc107",
-        }
-      }
-    >
-      <div
-        className="main-info-line"
-      >
-        <span>
-          5
-        </span>
-         
-        <FormattedMessage
-          id="global-well-enough"
-          values={Object {}}
-        />
-         
-      </div>
-      <span>
-        16.67%
-      </span>
-    </div>
-    <div
-      className="line-level"
-      key="3"
-      style={
-        Object {
-          "color": "#ff9800",
-        }
-      }
-    >
-      <div
-        className="main-info-line"
-      >
-        <span>
-          5
-        </span>
          
         <FormattedMessage
           id="global-passable"
           values={Object {}}
         />
-         
       </div>
-      <span>
-        16.67%
-      </span>
-    </div>
-    <div
-      className="line-level"
-      key="4"
-      style={
-        Object {
-          "color": "#b71c1c",
-        }
-      }
-    >
-      <div
-        className="main-info-line"
+      <QuestionnaireAdminResultMajoritystyle__ColorRow
+        className="color-row"
       >
-        <span>
-          5
-        </span>
-         
+        <div
+          className="median-indicator"
+        />
+        <div
+          className="answer-option"
+          key="0"
+          style={
+            Object {
+              "backgroundColor": "#33691e",
+              "flexBasis": "16.67%",
+            }
+          }
+        />
+        <div
+          className="answer-option"
+          key="1"
+          style={
+            Object {
+              "backgroundColor": "#43a047",
+              "flexBasis": "16.67%",
+            }
+          }
+        />
+        <div
+          className="answer-option"
+          key="2"
+          style={
+            Object {
+              "backgroundColor": "#ffc107",
+              "flexBasis": "16.67%",
+            }
+          }
+        />
+        <div
+          className="answer-option"
+          key="3"
+          style={
+            Object {
+              "backgroundColor": "#ff9800",
+              "flexBasis": "16.67%",
+            }
+          }
+        />
+        <div
+          className="answer-option"
+          key="4"
+          style={
+            Object {
+              "backgroundColor": "#b71c1c",
+              "flexBasis": "16.67%",
+            }
+          }
+        />
+        <div
+          className="answer-option"
+          key="5"
+          style={
+            Object {
+              "backgroundColor": "#212121",
+              "flexBasis": "16.67%",
+            }
+          }
+        />
+      </QuestionnaireAdminResultMajoritystyle__ColorRow>
+    </QuestionnaireAdminResultMajoritystyle__GraphContainer>
+    <QuestionnaireAdminResultMajoritystyle__ResponseContainer>
+      <div
+        className="response-number-container"
+      >
         <FormattedMessage
-          id="global-not-passable"
+          id="answer-number"
           values={Object {}}
         />
-         
       </div>
-      <span>
-        16.67%
-      </span>
-    </div>
-    <div
-      className="line-level"
-      key="5"
-      style={
-        Object {
-          "color": "#212121",
-        }
-      }
-    >
       <div
-        className="main-info-line"
+        className="line-level"
+        key="0"
+        style={
+          Object {
+            "color": "#33691e",
+          }
+        }
       >
+        <div
+          className="main-info-line"
+        >
+          <span>
+            5
+          </span>
+           
+          <FormattedMessage
+            id="very-well"
+            values={Object {}}
+          />
+           
+        </div>
         <span>
-          5
+          16.67%
         </span>
-         
-        <FormattedMessage
-          id="global-reject"
-          values={Object {}}
-        />
-         
       </div>
-      <span>
-        16.67%
-      </span>
-    </div>
-  </QuestionnaireAdminResultMajoritystyle__ResponseContainer>
-</QuestionnaireAdminResultMajoritystyle__Container>
+      <div
+        className="line-level"
+        key="1"
+        style={
+          Object {
+            "color": "#43a047",
+          }
+        }
+      >
+        <div
+          className="main-info-line"
+        >
+          <span>
+            5
+          </span>
+           
+          <FormattedMessage
+            id="global-well"
+            values={Object {}}
+          />
+           
+        </div>
+        <span>
+          16.67%
+        </span>
+      </div>
+      <div
+        className="line-level"
+        key="2"
+        style={
+          Object {
+            "color": "#ffc107",
+          }
+        }
+      >
+        <div
+          className="main-info-line"
+        >
+          <span>
+            5
+          </span>
+           
+          <FormattedMessage
+            id="global-well-enough"
+            values={Object {}}
+          />
+           
+        </div>
+        <span>
+          16.67%
+        </span>
+      </div>
+      <div
+        className="line-level"
+        key="3"
+        style={
+          Object {
+            "color": "#ff9800",
+          }
+        }
+      >
+        <div
+          className="main-info-line"
+        >
+          <span>
+            5
+          </span>
+           
+          <FormattedMessage
+            id="global-passable"
+            values={Object {}}
+          />
+           
+        </div>
+        <span>
+          16.67%
+        </span>
+      </div>
+      <div
+        className="line-level"
+        key="4"
+        style={
+          Object {
+            "color": "#b71c1c",
+          }
+        }
+      >
+        <div
+          className="main-info-line"
+        >
+          <span>
+            5
+          </span>
+           
+          <FormattedMessage
+            id="global-not-passable"
+            values={Object {}}
+          />
+           
+        </div>
+        <span>
+          16.67%
+        </span>
+      </div>
+      <div
+        className="line-level"
+        key="5"
+        style={
+          Object {
+            "color": "#212121",
+          }
+        }
+      >
+        <div
+          className="main-info-line"
+        >
+          <span>
+            5
+          </span>
+           
+          <FormattedMessage
+            id="global-reject"
+            values={Object {}}
+          />
+           
+        </div>
+        <span>
+          16.67%
+        </span>
+      </div>
+    </QuestionnaireAdminResultMajoritystyle__ResponseContainer>
+  </QuestionnaireAdminResultMajoritystyle__Container>
+</QuestionnaireAdminResultMajority__Wrapper>
 `;
 
 exports[`<QuestionnaireAdminResultMajority /> renders correctly when 0 vote 1`] = `""`;

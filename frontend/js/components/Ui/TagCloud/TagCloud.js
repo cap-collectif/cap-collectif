@@ -18,6 +18,7 @@ const Container: StyledComponent<{ isHover: boolean }, {}, HTMLDivElement> = sty
   text-align: center;
   font-family: OpenSans, helvetica, arial, sans-serif;
   font-weight: 600;
+  padding: 25px;
   ${({ isHover }) =>
     isHover &&
     css`
@@ -88,11 +89,11 @@ const renderTags = (props, data, intl, setIsHover) => {
   });
 };
 
-export const TagCloud = (props: Props) => {
+export const TagCloud = React.forwardRef<Props, HTMLElement>((props: Props, ref) => {
   const { tags } = props;
   const intl = useIntl();
   const [isHover, setIsHover] = useState(false);
-  return <Container isHover={isHover}>{renderTags(props, tags, intl, setIsHover)}</Container>;
-};
+  return <Container isHover={isHover} ref={ref}>{renderTags(props, tags, intl, setIsHover)}</Container>;
+});
 
 export default TagCloud;

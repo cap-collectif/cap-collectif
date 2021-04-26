@@ -8,6 +8,7 @@ import { intlMock, $refType } from '../../mocks';
 describe('<QuestionnaireAdminResultsPieChart />', () => {
   const otherAllowed = {
     intl: intlMock,
+    innerRef: jest.fn(),
     multipleChoiceQuestion: {
       $refType,
       isOtherAllowed: true,
@@ -48,6 +49,7 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
 
   const otherNotAllowed = {
     intl: intlMock,
+    innerRef: jest.fn(),
     multipleChoiceQuestion: {
       $refType,
       isOtherAllowed: false,

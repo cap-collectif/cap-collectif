@@ -34,6 +34,7 @@ export type State = {|
   +themes: Array<Object>,
   +images: ?{
     +avatar: string,
+    +logoUrl: string,
   },
   +instanceName: string,
   +features: Exact<FeatureToggles>,

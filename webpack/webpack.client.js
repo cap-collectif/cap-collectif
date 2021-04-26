@@ -41,6 +41,10 @@ const devConf = {
       react: path.resolve('./node_modules/react'),
       'lodash-es': 'lodash',
     },
+    fallback: {
+      "stream": require.resolve("stream-browserify"),
+      "zlib": require.resolve("browserify-zlib"),
+    }
   },
 
   entry: {
@@ -156,6 +160,10 @@ const devConf = {
           to: path.resolve(__dirname, '../public/js/'),
         },
       ],
+    }),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: 'process/browser',
     }),
   ],
 };

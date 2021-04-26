@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import styled from "styled-components";
 import Table from '../Ui/Table/Table';
 import type { QuestionnaireAdminResultsRanking_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsRanking_multipleChoiceQuestion.graphql';
 import QuestionnaireAdminResultsRankingLine from './QuestionnaireAdminResultsRankingLine';
@@ -10,52 +11,60 @@ type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsRanking_multipleChoiceQuestion,
 };
 
-export const QuestionnaireAdminResultsRanking = ({ multipleChoiceQuestion }: Props) => {
-  const choicesNumber = multipleChoiceQuestion.choices?.totalCount || 0;
+const Container = styled.div`
+  width: 768px;
+`
 
-  const getHead = () => {
-    const tableHead = [];
+export const QuestionnaireAdminResultsRanking = React.forwardRef<Props, HTMLElement>(
+  ({ multipleChoiceQuestion }: Props, ref) => {
+    const choicesNumber = multipleChoiceQuestion.choices?.totalCount || 0;
 
-    tableHead.push(
-      <th key={0}>
-        <FormattedMessage id="global.ranking" />
-      </th>,
-    );
+    const getHead = () => {
+      const tableHead = [];
 
-    for (let i = 1; i <= choicesNumber; i++) {
       tableHead.push(
-        <th key={i}>
-          <FormattedMessage id="ordinal-number" values={{ num: i }} />
+        <th key={0}>
+          <FormattedMessage id="global.ranking" />
         </th>,
       );
-    }
 
-    return tableHead;
-  };
+      for (let i = 1; i <= choicesNumber; i++) {
+        tableHead.push(
+          <th key={i}>
+            <FormattedMessage id="ordinal-number" values={{ num: i }} />
+          </th>,
+        );
+      }
 
-  return (
-    <Table hover>
-      <thead>
-        <tr>{getHead()}</tr>
-      </thead>
-      <tbody>
-        {multipleChoiceQuestion.choices &&
-          multipleChoiceQuestion.choices.edges &&
-          multipleChoiceQuestion.choices.edges
-            .filter(Boolean)
-            .map(edge => edge.node)
-            .filter(Boolean)
-            .map(choice => (
-              <QuestionnaireAdminResultsRankingLine
-                key={choice.id}
-                choice={choice}
-                choicesNumber={choicesNumber}
-              />
-            ))}
-      </tbody>
-    </Table>
-  );
-};
+      return tableHead;
+    };
+
+    return (
+      <Container ref={ref}>
+        <Table hover>
+          <thead>
+            <tr>{getHead()}</tr>
+          </thead>
+          <tbody>
+            {multipleChoiceQuestion.choices &&
+              multipleChoiceQuestion.choices.edges &&
+              multipleChoiceQuestion.choices.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map(choice => (
+                  <QuestionnaireAdminResultsRankingLine
+                    key={choice.id}
+                    choice={choice}
+                    choicesNumber={choicesNumber}
+                  />
+                ))}
+          </tbody>
+        </Table>
+      </Container>
+    );
+  },
+);
 
 export default createFragmentContainer(QuestionnaireAdminResultsRanking, {
   multipleChoiceQuestion: graphql`

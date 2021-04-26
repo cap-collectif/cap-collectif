@@ -9,6 +9,7 @@ describe('<QuestionnaireAdminResultsBarChart />', () => {
   const otherAllowed = {
     backgroundColor: '#128085',
     intl: intlMock,
+    innerRef: jest.fn(),
     multipleChoiceQuestion: {
       $refType,
       isOtherAllowed: true,
@@ -35,6 +36,7 @@ describe('<QuestionnaireAdminResultsBarChart />', () => {
   const otherNotAllowed = {
     backgroundColor: '#128085',
     intl: intlMock,
+    innerRef: jest.fn(),
     multipleChoiceQuestion: {
       $refType,
       isOtherAllowed: false,

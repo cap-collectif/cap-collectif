@@ -37,6 +37,7 @@ const MenuListItemInner = styled(Flex).attrs(props => ({
 
 const MenuListItem = ({ disabled, children, ...props }: Props) => {
   const { closeOnSelect } = useMenu();
+
   return (
     <HeadlessMenu.Item closeOnSelect={closeOnSelect} disabled={disabled}>
       {({ active }) => (

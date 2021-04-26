@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart';
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
@@ -12,13 +12,30 @@ import type { QuestionnaireAdminResults_questionnaire } from '~relay/Questionnai
 import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
 import PrivateBox from '../Ui/Boxes/PrivateBox';
+import type { GlobalState } from '~/types';
+import QuestionnaireAdminResultsExportMenu from '~/components/Questionnaire/QuestionnaireAdminResultsExportMenu';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   questionnaire: QuestionnaireAdminResults_questionnaire,
   backgroundColor: string,
+  logoUrl: string,
 |};
 
+export type ChartsUrl = $ReadOnlyArray<{|
+  +questionId?: string,
+  +url?: string,
+|}>;
+
+export type ChartsRef = Array<{|
+  +id: string,
+  +ref: any
+|}>
+
 export class QuestionnaireAdminResults extends React.Component<Props> {
+  
+  chartsRef: ChartsRef = [];
+
   getFormattedResults = (question: Object) => {
     const { backgroundColor } = this.props;
 
@@ -28,11 +45,25 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
     // majority is also a simple question let it here :)
     if (question.type === 'majority') {
-      return <QuestionnaireAdminResultMajority majorityQuestion={question} />;
+      return (
+        <QuestionnaireAdminResultMajority
+          majorityQuestion={question}
+          ref={el => {
+            this.chartsRef.push({id: question.id, ref: el})
+          }}
+        />
+      );
     }
 
     if (question.__typename === 'SimpleQuestion') {
-      return <QuestionnaireAdminResultsText simpleQuestion={question} />;
+      return (
+        <QuestionnaireAdminResultsText
+          simpleQuestion={question}
+          ref={el => {
+            this.chartsRef.push({id: question.id, ref: el})
+          }}
+        />
+      );
     }
 
     if (question.__typename === 'MediaQuestion') {
@@ -52,6 +83,9 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
         <QuestionnaireAdminResultsBarChart
           multipleChoiceQuestion={question}
           backgroundColor={backgroundColor}
+          innerRef={el => {
+            this.chartsRef.push({id: question.id, ref: el})
+          }}
         />
       );
     }
@@ -61,65 +95,81 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
         <QuestionnaireAdminResultsPieChart
           multipleChoiceQuestion={question}
           backgroundColor={backgroundColor}
+          innerRef={el => {
+            this.chartsRef.push({id: question.id, ref: el})
+          }}
         />
       );
     }
 
     if (question.type === 'ranking') {
-      return <QuestionnaireAdminResultsRanking multipleChoiceQuestion={question} />;
+      return (
+        <QuestionnaireAdminResultsRanking
+          multipleChoiceQuestion={question}
+          ref={el => {
+           this.chartsRef.push({id: question.id, ref: el})
+          }}
+        />
+      );
     }
 
     return null;
   };
 
   render() {
-    const { questionnaire } = this.props;
+    const { questionnaire, logoUrl } = this.props;
     const questions = questionnaire.questions.filter(q => q.type !== 'section');
 
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-25">
-          <Button bsStyle="primary" className="pull-right" href={questionnaire.exportResultsUrl}>
-            <FormattedMessage id="global.export" />
-          </Button>
           {questionnaire.questions && questions.length > 0 ? (
             questions.map((question, key) => (
               <div key={key}>
                 <PrivateBox show={question.private} message="admin.fields.question.private">
-                  <p>
-                    <b>
-                      {key + 1}. {question.title}
-                    </b>
-                    <br />
-                    <span className="excerpt">
-                      {question.participants && question.participants.totalCount !== 0 ? (
-                        <FormattedMessage
-                          id="global.counters.contributors"
-                          values={{ num: question.participants.totalCount }}
-                        />
-                      ) : (
-                        <FormattedMessage id="no-answer" />
-                      )}
-                      {question.participants &&
-                        question.allResponses &&
-                        question.allResponses.totalCount !== 0 && (
-                          <React.Fragment>
-                            {' '}
-                            /{' '}
-                            <FormattedMessage
-                              id="count-answers"
-                              values={{ num: question.allResponses.totalCount }}
-                            />
-                          </React.Fragment>
-                        )}
+                  <Flex justifyContent="space-between" className="mr-40">
+                    <p>
+                      <b>
+                        {key + 1}. {question.title}
+                      </b>
                       <br />
-                      {question.required && (
-                        <b>
-                          <FormattedMessage id="mandatory-question" />
-                        </b>
-                      )}
-                    </span>
-                  </p>
+                      <span className="excerpt">
+                        {question.participants && question.participants.totalCount !== 0 ? (
+                          <FormattedMessage
+                            id="global.counters.contributors"
+                            values={{ num: question.participants.totalCount }}
+                          />
+                        ) : (
+                          <FormattedMessage id="no-answer" />
+                        )}
+                        {question.participants &&
+                          question.allResponses &&
+                          question.allResponses.totalCount !== 0 && (
+                            <React.Fragment>
+                              {' '}
+                              /{' '}
+                              <FormattedMessage
+                                id="count-answers"
+                                values={{ num: question.allResponses.totalCount }}
+                              />
+                            </React.Fragment>
+                          )}
+                        <br />
+                        {question.required && (
+                          <b>
+                            <FormattedMessage id="mandatory-question" />
+                          </b>
+                        )}
+                      </span>
+                    </p>
+                    {key === 0 && (
+                      <QuestionnaireAdminResultsExportMenu
+                        questionnaire={questionnaire}
+                        chartsRef={this.chartsRef}
+                        logoUrl={logoUrl}
+                      />
+                    )}
+                  </Flex>
                   {this.getFormattedResults(question)}
                 </PrivateBox>
               </div>
@@ -137,11 +187,12 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
 const container = withColors(QuestionnaireAdminResults);
 
-export default createFragmentContainer(container, {
+const fragmentContainer = createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
-      exportResultsUrl
+      ...QuestionnaireAdminResultsExportMenu_questionnaire
       questions {
+        id
         __typename
         title
         type
@@ -163,3 +214,9 @@ export default createFragmentContainer(container, {
     }
   `,
 });
+
+const mapStateToProps = (state: GlobalState) => ({
+  logoUrl: state.default?.images?.logoUrl,
+});
+
+export default connect<any, any, _, _, _, _>(mapStateToProps)(fragmentContainer);

@@ -9,10 +9,11 @@ describe('<QuestionnaireAdminResults />', () => {
   const allTypeOfQuestions = {
     questionnaire: {
       $refType,
-      exportResultsUrl: 'http://capco.dev/questionnaire/id1/download',
+      $fragmentRefs,
       questions: [
         {
           $fragmentRefs,
+          id: '1',
           title: 'question type select',
           type: 'select',
           __typename: 'MultipleChoiceQuestion',
@@ -23,6 +24,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '2',
           title: 'question type radio',
           type: 'radio',
           __typename: 'MultipleChoiceQuestion',
@@ -33,6 +35,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '3',
           title: 'question type checkbox',
           type: 'checkbox',
           __typename: 'MultipleChoiceQuestion',
@@ -43,6 +46,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '4',
           title: 'section',
           type: 'section',
           __typename: 'SectionQuestion',
@@ -53,6 +57,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '5',
           title: 'question type button',
           type: 'button',
           __typename: 'MultipleChoiceQuestion',
@@ -63,6 +68,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '6',
           title: 'question type ranking',
           type: 'ranking',
           __typename: 'MultipleChoiceQuestion',
@@ -73,6 +79,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '7',
           title: 'question type text',
           type: 'text',
           __typename: 'SimpleQuestion',
@@ -83,6 +90,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '8',
           title: 'question type number',
           type: 'number',
           __typename: 'SimpleQuestion',
@@ -93,6 +101,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
         {
           $fragmentRefs,
+          id: '9',
           title: 'question type number',
           type: 'medias',
           __typename: 'MediaQuestion',
@@ -103,24 +112,27 @@ describe('<QuestionnaireAdminResults />', () => {
         },
       ],
     },
+    logoUrl: '/logo',
     backgroundColor: '#897897',
   };
 
   const withoutQuestions = {
     questionnaire: {
+      $fragmentRefs,
       $refType,
-      exportResultsUrl: 'http://capco.dev/questionnaire/id1/download',
       questions: [],
     },
+    logoUrl: '/logo',
     backgroundColor: '#897897',
   };
 
   const withoutParticipants = {
     questionnaire: {
       $refType,
-      exportResultsUrl: 'http://capco.dev/questionnaire/id1/download',
+      $fragmentRefs,
       questions: [
         {
+          id: '1',
           $fragmentRefs,
           title: 'question type select',
           type: 'select',
@@ -132,6 +144,7 @@ describe('<QuestionnaireAdminResults />', () => {
         },
       ],
     },
+    logoUrl: '/logo',
     backgroundColor: '#897897',
   };
 

@@ -3,6 +3,8 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { useResize } from '@liinkiing/react-hooks';
+import styled from "styled-components";
+import type {StyledComponent} from "styled-components";
 import { type QuestionnaireAdminResultMajority_majorityQuestion } from '~relay/QuestionnaireAdminResultMajority_majorityQuestion.graphql';
 import { bootstrapGrid } from '~/utils/sizes';
 import { COLORS } from '~ui/Form/Input/Majority/Majority';
@@ -16,6 +18,10 @@ import {
 type Props = {
   majorityQuestion: QuestionnaireAdminResultMajority_majorityQuestion,
 };
+
+const Wrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  width: 768px
+`
 
 export const medianCalculator = (
   question: QuestionnaireAdminResultMajority_majorityQuestion,
@@ -65,7 +71,7 @@ export const medianCalculator = (
   return -1;
 };
 
-export const QuestionnaireAdminResultMajority = ({ majorityQuestion }: Props) => {
+export const QuestionnaireAdminResultMajority = React.forwardRef<Props, HTMLElement>(({ majorityQuestion }: Props, ref) => {
   const resultVoteMajority = majorityQuestion?.responsesByChoice.map(majorityType => ({
     ...COLORS[majorityType.choice],
     count: majorityType.count,
@@ -79,42 +85,44 @@ export const QuestionnaireAdminResultMajority = ({ majorityQuestion }: Props) =>
   if (!majorityQuestion || majorityQuestion.totalVotesCount === 0) return null;
 
   return (
-    <Container active isMobile={isMobile}>
-      <GraphContainer>
-        <div className="median-mention">
-          <FormattedMessage id="median-mention" />{' '}
-          <FormattedMessage id={resultVoteMajority[median].label} />
-        </div>
-
-        <ColorRow className="color-row">
-          <div className="median-indicator" />
-          {resultVoteMajority.map((majorityType, idx) => (
-            <div
-              key={idx}
-              style={{ flexBasis: majorityType.percentage, backgroundColor: majorityType.color }}
-              className="answer-option"
-            />
-          ))}
-        </ColorRow>
-      </GraphContainer>
-
-      <ResponseContainer>
-        <div className="response-number-container">
-          <FormattedMessage id="answer-number" />
-        </div>
-
-        {resultVoteMajority.map((majorityType, idx) => (
-          <div key={idx} style={{ color: majorityType.color }} className="line-level">
-            <div className="main-info-line">
-              <span>{majorityType.count}</span> <FormattedMessage id={majorityType.label} />{' '}
-            </div>
-            <span>{majorityType.percentage}</span>
+    <Wrapper ref={ref}>
+      <Container active isMobile={isMobile}>
+        <GraphContainer>
+          <div className="median-mention">
+            <FormattedMessage id="median-mention" />{' '}
+            <FormattedMessage id={resultVoteMajority[median].label} />
           </div>
-        ))}
-      </ResponseContainer>
-    </Container>
+
+          <ColorRow className="color-row">
+            <div className="median-indicator" />
+            {resultVoteMajority.map((majorityType, idx) => (
+              <div
+                key={idx}
+                style={{ flexBasis: majorityType.percentage, backgroundColor: majorityType.color }}
+                className="answer-option"
+              />
+            ))}
+          </ColorRow>
+        </GraphContainer>
+
+        <ResponseContainer>
+          <div className="response-number-container">
+            <FormattedMessage id="answer-number" />
+          </div>
+
+          {resultVoteMajority.map((majorityType, idx) => (
+            <div key={idx} style={{ color: majorityType.color }} className="line-level">
+              <div className="main-info-line">
+                <span>{majorityType.count}</span> <FormattedMessage id={majorityType.label} />{' '}
+              </div>
+              <span>{majorityType.percentage}</span>
+            </div>
+          ))}
+        </ResponseContainer>
+      </Container>
+    </Wrapper>
   );
-};
+});
 
 export default createFragmentContainer(QuestionnaireAdminResultMajority, {
   majorityQuestion: graphql`

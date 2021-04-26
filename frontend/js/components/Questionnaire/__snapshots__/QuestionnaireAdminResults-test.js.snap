@@ -7,20 +7,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
   <div
     className="box-content mt-25"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="pull-right"
-      disabled={false}
-      href="http://capco.dev/questionnaire/id1/download"
-    >
-      <FormattedMessage
-        id="global.export"
-        values={Object {}}
-      />
-    </Button>
     <div
       key="0"
     >
@@ -29,40 +15,193 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            1
-            . 
-            question type select
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 7,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 14,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              1
+              . 
+              question type select
+            </b>
             <br />
-          </span>
-        </p>
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 7,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 14,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+          <Relay(QuestionnaireAdminResultsExportMenu)
+            chartsRef={Array []}
+            logoUrl="/logo"
+            questionnaire={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "questions": Array [
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MultipleChoiceQuestion",
+                    "allResponses": Object {
+                      "totalCount": 14,
+                    },
+                    "id": "1",
+                    "participants": Object {
+                      "totalCount": 7,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type select",
+                    "type": "select",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MultipleChoiceQuestion",
+                    "allResponses": Object {
+                      "totalCount": 98,
+                    },
+                    "id": "2",
+                    "participants": Object {
+                      "totalCount": 98,
+                    },
+                    "private": false,
+                    "required": true,
+                    "title": "question type radio",
+                    "type": "radio",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MultipleChoiceQuestion",
+                    "allResponses": Object {
+                      "totalCount": 48,
+                    },
+                    "id": "3",
+                    "participants": Object {
+                      "totalCount": 45,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type checkbox",
+                    "type": "checkbox",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "SectionQuestion",
+                    "allResponses": Object {
+                      "totalCount": 4,
+                    },
+                    "id": "4",
+                    "participants": Object {
+                      "totalCount": 2,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "section",
+                    "type": "section",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MultipleChoiceQuestion",
+                    "allResponses": Object {
+                      "totalCount": 43,
+                    },
+                    "id": "5",
+                    "participants": Object {
+                      "totalCount": 43,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type button",
+                    "type": "button",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MultipleChoiceQuestion",
+                    "allResponses": Object {
+                      "totalCount": 0,
+                    },
+                    "id": "6",
+                    "participants": Object {
+                      "totalCount": 38,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type ranking",
+                    "type": "ranking",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "SimpleQuestion",
+                    "allResponses": Object {
+                      "totalCount": 4,
+                    },
+                    "id": "7",
+                    "participants": Object {
+                      "totalCount": 4,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type text",
+                    "type": "text",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "SimpleQuestion",
+                    "allResponses": Object {
+                      "totalCount": 89,
+                    },
+                    "id": "8",
+                    "participants": Object {
+                      "totalCount": 89,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type number",
+                    "type": "number",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MediaQuestion",
+                    "allResponses": Object {
+                      "totalCount": 9,
+                    },
+                    "id": "9",
+                    "participants": Object {
+                      "totalCount": 9,
+                    },
+                    "private": false,
+                    "required": false,
+                    "title": "question type number",
+                    "type": "medias",
+                  },
+                ],
+              }
+            }
+          />
+        </ForwardRef>
         <Relay(injectIntl(QuestionnaireAdminResultsPieChart))
           backgroundColor="#897897"
+          innerRef={[Function]}
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
@@ -70,6 +209,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 14,
               },
+              "id": "1",
               "participants": Object {
                 "totalCount": 7,
               },
@@ -90,46 +230,52 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            2
-            . 
-            question type radio
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 98,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 98,
-                }
-              }
-            />
-            <br />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
             <b>
-              <FormattedMessage
-                id="mandatory-question"
-                values={Object {}}
-              />
+              2
+              . 
+              question type radio
             </b>
-          </span>
-        </p>
+            <br />
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 98,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 98,
+                  }
+                }
+              />
+              <br />
+              <b>
+                <FormattedMessage
+                  id="mandatory-question"
+                  values={Object {}}
+                />
+              </b>
+            </span>
+          </p>
+        </ForwardRef>
         <Relay(injectIntl(QuestionnaireAdminResultsPieChart))
           backgroundColor="#897897"
+          innerRef={[Function]}
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
@@ -137,6 +283,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 98,
               },
+              "id": "2",
               "participants": Object {
                 "totalCount": 98,
               },
@@ -157,40 +304,46 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            3
-            . 
-            question type checkbox
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 45,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 48,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              3
+              . 
+              question type checkbox
+            </b>
             <br />
-          </span>
-        </p>
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 45,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 48,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+        </ForwardRef>
         <Relay(injectIntl(QuestionnaireAdminResultsBarChart))
           backgroundColor="#897897"
+          innerRef={[Function]}
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
@@ -198,6 +351,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 48,
               },
+              "id": "3",
               "participants": Object {
                 "totalCount": 45,
               },
@@ -218,40 +372,46 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            4
-            . 
-            question type button
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 43,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 43,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              4
+              . 
+              question type button
+            </b>
             <br />
-          </span>
-        </p>
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 43,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 43,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+        </ForwardRef>
         <Relay(injectIntl(QuestionnaireAdminResultsPieChart))
           backgroundColor="#897897"
+          innerRef={[Function]}
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
@@ -259,6 +419,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 43,
               },
+              "id": "5",
               "participants": Object {
                 "totalCount": 43,
               },
@@ -279,28 +440,33 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            5
-            . 
-            question type ranking
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 38,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              5
+              . 
+              question type ranking
+            </b>
             <br />
-          </span>
-        </p>
-        <Relay(QuestionnaireAdminResultsRanking)
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 38,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+        </ForwardRef>
+        <Relay(Component)
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
@@ -308,6 +474,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 0,
               },
+              "id": "6",
               "participants": Object {
                 "totalCount": 38,
               },
@@ -328,39 +495,44 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            6
-            . 
-            question type text
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              6
+              . 
+              question type text
+            </b>
             <br />
-          </span>
-        </p>
-        <Relay(QuestionnaireAdminResultsText)
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 4,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 4,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+        </ForwardRef>
+        <Relay(Component)
           simpleQuestion={
             Object {
               "$fragmentRefs": null,
@@ -368,6 +540,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 4,
               },
+              "id": "7",
               "participants": Object {
                 "totalCount": 4,
               },
@@ -388,39 +561,44 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            7
-            . 
-            question type number
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 89,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 89,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              7
+              . 
+              question type number
+            </b>
             <br />
-          </span>
-        </p>
-        <Relay(QuestionnaireAdminResultsText)
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 89,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 89,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+        </ForwardRef>
+        <Relay(Component)
           simpleQuestion={
             Object {
               "$fragmentRefs": null,
@@ -428,6 +606,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 89,
               },
+              "id": "8",
               "participants": Object {
                 "totalCount": 89,
               },
@@ -448,38 +627,43 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
         message="admin.fields.question.private"
         show={false}
       >
-        <p>
-          <b>
-            8
-            . 
-            question type number
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="global.counters.contributors"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
-             
-            /
-             
-            <FormattedMessage
-              id="count-answers"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              8
+              . 
+              question type number
+            </b>
             <br />
-          </span>
-        </p>
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.counters.contributors"
+                values={
+                  Object {
+                    "num": 9,
+                  }
+                }
+              />
+               
+              /
+               
+              <FormattedMessage
+                id="count-answers"
+                values={
+                  Object {
+                    "num": 9,
+                  }
+                }
+              />
+              <br />
+            </span>
+          </p>
+        </ForwardRef>
         <Relay(QuestionnaireAdminResultsMedia)
           mediaQuestion={
             Object {
@@ -488,6 +672,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               "allResponses": Object {
                 "totalCount": 9,
               },
+              "id": "9",
               "participants": Object {
                 "totalCount": 9,
               },
@@ -511,20 +696,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly with private question &
   <div
     className="box-content mt-25"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="pull-right"
-      disabled={false}
-      href="http://capco.dev/questionnaire/id1/download"
-    >
-      <FormattedMessage
-        id="global.export"
-        values={Object {}}
-      />
-    </Button>
     <div
       key="0"
     >
@@ -533,23 +704,55 @@ exports[`<QuestionnaireAdminResults /> renders correctly with private question &
         message="admin.fields.question.private"
         show={true}
       >
-        <p>
-          <b>
-            1
-            . 
-            question type select
-          </b>
-          <br />
-          <span
-            className="excerpt"
-          >
-            <FormattedMessage
-              id="no-answer"
-              values={Object {}}
-            />
+        <ForwardRef
+          className="mr-40"
+          justifyContent="space-between"
+        >
+          <p>
+            <b>
+              1
+              . 
+              question type select
+            </b>
             <br />
-          </span>
-        </p>
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="no-answer"
+                values={Object {}}
+              />
+              <br />
+            </span>
+          </p>
+          <Relay(QuestionnaireAdminResultsExportMenu)
+            chartsRef={Array []}
+            logoUrl="/logo"
+            questionnaire={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "questions": Array [
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "MultipleChoiceQuestion",
+                    "allResponses": Object {
+                      "totalCount": 0,
+                    },
+                    "id": "1",
+                    "participants": Object {
+                      "totalCount": 0,
+                    },
+                    "private": true,
+                    "required": false,
+                    "title": "question type select",
+                    "type": "select",
+                  },
+                ],
+              }
+            }
+          />
+        </ForwardRef>
       </PrivateBox>
     </div>
   </div>
@@ -563,20 +766,6 @@ exports[`<QuestionnaireAdminResults /> renders correctly without questions 1`] =
   <div
     className="box-content mt-25"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="pull-right"
-      disabled={false}
-      href="http://capco.dev/questionnaire/id1/download"
-    >
-      <FormattedMessage
-        id="global.export"
-        values={Object {}}
-      />
-    </Button>
     <div>
       <FormattedMessage
         id="no-question"

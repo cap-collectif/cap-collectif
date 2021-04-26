@@ -1,110 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnaireAdminResultsRanking /> renders correctly 1`] = `
-<Table
-  hover={true}
->
-  <thead>
-    <tr>
-      <th
-        key="0"
-      >
-        <FormattedMessage
-          id="global.ranking"
-          values={Object {}}
-        />
-      </th>
-      <th
-        key="1"
-      >
-        <FormattedMessage
-          id="ordinal-number"
-          values={
-            Object {
-              "num": 1,
+<QuestionnaireAdminResultsRanking__Container>
+  <Table
+    hover={true}
+  >
+    <thead>
+      <tr>
+        <th
+          key="0"
+        >
+          <FormattedMessage
+            id="global.ranking"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="1"
+        >
+          <FormattedMessage
+            id="ordinal-number"
+            values={
+              Object {
+                "num": 1,
+              }
             }
-          }
-        />
-      </th>
-      <th
-        key="2"
-      >
-        <FormattedMessage
-          id="ordinal-number"
-          values={
-            Object {
-              "num": 2,
+          />
+        </th>
+        <th
+          key="2"
+        >
+          <FormattedMessage
+            id="ordinal-number"
+            values={
+              Object {
+                "num": 2,
+              }
             }
-          }
-        />
-      </th>
-      <th
-        key="3"
-      >
-        <FormattedMessage
-          id="ordinal-number"
-          values={
-            Object {
-              "num": 3,
+          />
+        </th>
+        <th
+          key="3"
+        >
+          <FormattedMessage
+            id="ordinal-number"
+            values={
+              Object {
+                "num": 3,
+              }
             }
-          }
-        />
-      </th>
-      <th
-        key="4"
-      >
-        <FormattedMessage
-          id="ordinal-number"
-          values={
-            Object {
-              "num": 4,
+          />
+        </th>
+        <th
+          key="4"
+        >
+          <FormattedMessage
+            id="ordinal-number"
+            values={
+              Object {
+                "num": 4,
+              }
             }
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <Relay(QuestionnaireAdminResultsRankingLine)
+        choice={
+          Object {
+            "$fragmentRefs": null,
+            "id": "choix1",
           }
-        />
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <Relay(QuestionnaireAdminResultsRankingLine)
-      choice={
-        Object {
-          "$fragmentRefs": null,
-          "id": "choix1",
         }
-      }
-      choicesNumber={4}
-      key="choix1"
-    />
-    <Relay(QuestionnaireAdminResultsRankingLine)
-      choice={
-        Object {
-          "$fragmentRefs": null,
-          "id": "choix2",
+        choicesNumber={4}
+        key="choix1"
+      />
+      <Relay(QuestionnaireAdminResultsRankingLine)
+        choice={
+          Object {
+            "$fragmentRefs": null,
+            "id": "choix2",
+          }
         }
-      }
-      choicesNumber={4}
-      key="choix2"
-    />
-    <Relay(QuestionnaireAdminResultsRankingLine)
-      choice={
-        Object {
-          "$fragmentRefs": null,
-          "id": "choix3",
+        choicesNumber={4}
+        key="choix2"
+      />
+      <Relay(QuestionnaireAdminResultsRankingLine)
+        choice={
+          Object {
+            "$fragmentRefs": null,
+            "id": "choix3",
+          }
         }
-      }
-      choicesNumber={4}
-      key="choix3"
-    />
-    <Relay(QuestionnaireAdminResultsRankingLine)
-      choice={
-        Object {
-          "$fragmentRefs": null,
-          "id": "choix4",
+        choicesNumber={4}
+        key="choix3"
+      />
+      <Relay(QuestionnaireAdminResultsRankingLine)
+        choice={
+          Object {
+            "$fragmentRefs": null,
+            "id": "choix4",
+          }
         }
-      }
-      choicesNumber={4}
-      key="choix4"
-    />
-  </tbody>
-</Table>
+        choicesNumber={4}
+        key="choix4"
+      />
+    </tbody>
+  </Table>
+</QuestionnaireAdminResultsRanking__Container>
 `;
