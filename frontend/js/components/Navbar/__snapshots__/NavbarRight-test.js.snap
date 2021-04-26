@@ -44,7 +44,11 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "componentId": "styles__DropdownToggle-sc-11246z7-5",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}&:hover,&:focus{color:",
+            [Function],
+            ";background-color:",
+            [Function],
+            ";}",
           ],
           "staticRulesId": "",
         },
@@ -203,8 +207,10 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         "attrs": Array [
           Object {
             "align": "center",
-            "bg": "white",
+            "boxShadow": "rgb(0 0 0 / 18%) 0px 6px 12px",
             "direction": "column",
+            "fontSize": "14px",
+            "overflow": "hidden",
             "py": 1,
           },
         ],
@@ -214,7 +220,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "componentId": "styles__DropdownMenu-sc-11246z7-6",
           "isStatic": false,
           "rules": Array [
-            "border-radius:0 0 4px 4px;&:hover,&:focus{outline:none;}a{width:100%;font-weight:400;padding:3px 20px;}@media (max-width:",
+            "border-radius:0 0 4px 4px;background-color:",
+            [Function],
+            ";&:hover,&:focus{outline:none;}a{width:100%;font-weight:400;padding:3px 20px;}@media (max-width:",
             "767px",
             "){a{text-align:left;}}",
           ],
@@ -977,7 +985,11 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "componentId": "styles__DropdownToggle-sc-11246z7-5",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}",
+            ".caret{margin-left:5px;}&:hover,&:focus{color:",
+            [Function],
+            ";background-color:",
+            [Function],
+            ";}",
           ],
           "staticRulesId": "",
         },
@@ -1136,8 +1148,10 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         "attrs": Array [
           Object {
             "align": "center",
-            "bg": "white",
+            "boxShadow": "rgb(0 0 0 / 18%) 0px 6px 12px",
             "direction": "column",
+            "fontSize": "14px",
+            "overflow": "hidden",
             "py": 1,
           },
         ],
@@ -1147,7 +1161,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "componentId": "styles__DropdownMenu-sc-11246z7-6",
           "isStatic": false,
           "rules": Array [
-            "border-radius:0 0 4px 4px;&:hover,&:focus{outline:none;}a{width:100%;font-weight:400;padding:3px 20px;}@media (max-width:",
+            "border-radius:0 0 4px 4px;background-color:",
+            [Function],
+            ";&:hover,&:focus{outline:none;}a{width:100%;font-weight:400;padding:3px 20px;}@media (max-width:",
             "767px",
             "){a{text-align:left;}}",
           ],

@@ -117,15 +117,24 @@ export const DropdownToggle: StyledComponent<{}, {}, typeof Flex> = styled(Flex)
   .caret {
     margin-left: 5px;
   }
+
+  &:hover,
+  &:focus {
+    color: ${props => props.theme.mainNavbarTextHover};
+    background-color: ${props => props.theme.mainNavbarBgActive};
+  }
 `;
 
 export const DropdownMenu: StyledComponent<{}, {}, typeof Flex> = styled(Flex).attrs({
   direction: 'column',
   align: 'center',
-  bg: 'white',
   py: 1,
+  boxShadow: 'rgb(0 0 0 / 18%) 0px 6px 12px',
+  fontSize: '14px',
+  overflow: 'hidden',
 })`
   border-radius: 0 0 4px 4px;
+  background-color: ${props => props.theme.mainNavbarBg};
 
   &:hover,
   &:focus {
