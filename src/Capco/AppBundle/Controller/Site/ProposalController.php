@@ -91,6 +91,7 @@ class ProposalController extends Controller
         }
 
         $votableStep = $this->get(ProposalCurrentVotableStepDataLoader::class)->resolve($proposal);
+        $currentVotableStep = $votableStep ? : null;
         $currentVotableStepId = $votableStep ? $votableStep->getId() : null;
 
         if ($votableStep && \in_array($votableStep->getType(), ['collect', 'selection'])) {
@@ -104,6 +105,7 @@ class ProposalController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'currentVotableStepId' => $currentVotableStepId,
+            'currentVotableStep' => $votableStep,
             'proposal' => $proposal,
             'referer' => $refererUri,
         ];

@@ -232,4 +232,21 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 
         return false;
     }
+
+    public function useAddressOrMap(): bool
+    {
+        if ($this->getProposalForm() && $this->getProposalForm()->isMapViewEnabled()) {
+            return true;
+        }
+        if ($this->getProposalForm() && $this->getProposalForm()->getUsingAddress()) {
+            return true;
+        }
+        foreach ($this->getRequirements() as $requirement) {
+            if ('POSTAL_ADDRESS' === $requirement->getType()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -435,4 +435,10 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 
         return $this;
     }
+
+    //used in twig to add googlemaps js file
+    public function useAddressOrMap(): bool
+    {
+        return false;
+    }
 }
