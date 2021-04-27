@@ -1,11 +1,17 @@
 // @flow
 import * as React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
+import { connect } from 'react-redux';
 import type { AuthentificationAdminPageQueryResponse } from '~relay/AuthentificationAdminPageQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import SSOByPassAuthForm from './SSOByPassAuthForm';
 import AuthentificationAdminPageContent from './AuthentificationAdminPageContent';
+import type { FeatureToggles, State as GlobalState } from '~/types';
+
+type Props = {|
+  features: FeatureToggles,
+|};
 
 const component = ({
   error,
@@ -28,25 +34,32 @@ const component = ({
   return <Loader />;
 };
 
-export const AuthentificationAdminPage = () => (
+export const AuthentificationAdminPage = ({ features }: Props) => (
   <>
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query AuthentificationAdminPageQuery {
+        query AuthentificationAdminPageQuery($isFranceConnectEnable: Boolean!) {
           shieldAdminForm {
             ...AuthentificationAdminPageContent_shieldAdminForm
           }
           ssoConfigurations {
             ...AuthentificationAdminPageContent_ssoConfigurations
+              @arguments(isFranceConnectEnable: $isFranceConnectEnable)
           }
         }
       `}
-      variables={{}}
+      variables={{
+        isFranceConnectEnable: features.login_franceconnect,
+      }}
       render={component}
     />
     <SSOByPassAuthForm />
   </>
 );
 
-export default AuthentificationAdminPage;
+const mapStateToProps = (state: GlobalState) => ({
+  features: state.default.features,
+});
+
+export default connect<any, any, _, _, _, _>(mapStateToProps)(AuthentificationAdminPage);

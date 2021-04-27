@@ -8,7 +8,13 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
       Object {
         "fragment": Object {
           "abstractKey": null,
-          "argumentDefinitions": Array [],
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFranceConnectEnable",
+            },
+          ],
           "kind": "Fragment",
           "metadata": null,
           "name": "AuthentificationAdminPageQuery",
@@ -38,7 +44,13 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
-                  "args": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "isFranceConnectEnable",
+                      "variableName": "isFranceConnectEnable",
+                    },
+                  ],
                   "kind": "FragmentSpread",
                   "name": "AuthentificationAdminPageContent_ssoConfigurations",
                 },
@@ -48,10 +60,16 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "6516368b10fa432876db9f095abb927c",
+        "hash": "ddaabcacecd6b262e824c1b1e18f097b",
         "kind": "Request",
         "operation": Object {
-          "argumentDefinitions": Array [],
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFranceConnectEnable",
+            },
+          ],
           "kind": "Operation",
           "name": "AuthentificationAdminPageQuery",
           "selections": Array [
@@ -264,53 +282,60 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                           "type": "Oauth2SSOConfiguration",
                         },
                         Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
+                          "condition": "isFranceConnectEnable",
+                          "kind": "Condition",
+                          "passingValue": true,
                           "selections": Array [
                             Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "clientId",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "secret",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "environment",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "redirectUri",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "logoutUrl",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "allowedData",
-                              "storageKey": null,
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "clientId",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "secret",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "environment",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "redirectUri",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "logoutUrl",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "allowedData",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "FranceConnectSSOConfiguration",
                             },
                           ],
-                          "type": "FranceConnectSSOConfiguration",
                         },
                       ],
                       "storageKey": null,
@@ -324,17 +349,19 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "69f2552c95a8fa487d8da3cd3b4e41ab",
+          "cacheID": "7a3facf6ff00d7ae9dcc50cebad43b2f",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
           "operationKind": "query",
-          "text": "query AuthentificationAdminPageQuery {
+          "text": "query AuthentificationAdminPageQuery(
+  $isFranceConnectEnable: Boolean!
+) {
   shieldAdminForm {
     ...AuthentificationAdminPageContent_shieldAdminForm
   }
   ssoConfigurations {
-    ...AuthentificationAdminPageContent_ssoConfigurations
+    ...AuthentificationAdminPageContent_ssoConfigurations_3mRfkE
   }
 }
 
@@ -342,8 +369,8 @@ fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
   ...ShieldAdminForm_shieldAdminForm
 }
 
-fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection {
-  ...ListSSOConfiguration_ssoConfigurations
+fragment AuthentificationAdminPageContent_ssoConfigurations_3mRfkE on SSOConfigurationConnection {
+  ...ListSSOConfiguration_ssoConfigurations_3mRfkE
 }
 
 fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
@@ -366,21 +393,21 @@ fragment ListCustomSSO_ssoConfigurations on SSOConfigurationConnection {
   }
 }
 
-fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
+fragment ListPublicSSO_ssoConfigurations_3mRfkE on SSOConfigurationConnection {
   edges {
     node {
       __typename
       __isSSOConfiguration: __typename
       id
       enabled
-      ...FranceConnectConfigurationModal_ssoConfiguration
+      ...FranceConnectConfigurationModal_ssoConfiguration @include(if: $isFranceConnectEnable)
     }
   }
 }
 
-fragment ListSSOConfiguration_ssoConfigurations on SSOConfigurationConnection {
+fragment ListSSOConfiguration_ssoConfigurations_3mRfkE on SSOConfigurationConnection {
   ...ListCustomSSO_ssoConfigurations
-  ...ListPublicSSO_ssoConfigurations
+  ...ListPublicSSO_ssoConfigurations_3mRfkE
 }
 
 fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
@@ -425,7 +452,473 @@ fragment ShieldAdminForm_shieldAdminForm on ShieldAdminForm {
       }
     }
     render={[Function]}
-    variables={Object {}}
+    variables={
+      Object {
+        "isFranceConnectEnable": false,
+      }
+    }
+  />
+  <Connect(SSOByPassAuthForm) />
+</Fragment>
+`;
+
+exports[`<AuthentificationAdminPage /> renders correctly FC enabled 1`] = `
+<Fragment>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={
+      Object {
+        "fragment": Object {
+          "abstractKey": null,
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFranceConnectEnable",
+            },
+          ],
+          "kind": "Fragment",
+          "metadata": null,
+          "name": "AuthentificationAdminPageQuery",
+          "selections": Array [
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "ShieldAdminForm",
+              "kind": "LinkedField",
+              "name": "shieldAdminForm",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "AuthentificationAdminPageContent_shieldAdminForm",
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "SSOConfigurationConnection",
+              "kind": "LinkedField",
+              "name": "ssoConfigurations",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "isFranceConnectEnable",
+                      "variableName": "isFranceConnectEnable",
+                    },
+                  ],
+                  "kind": "FragmentSpread",
+                  "name": "AuthentificationAdminPageContent_ssoConfigurations",
+                },
+              ],
+              "storageKey": null,
+            },
+          ],
+          "type": "Query",
+        },
+        "hash": "ddaabcacecd6b262e824c1b1e18f097b",
+        "kind": "Request",
+        "operation": Object {
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFranceConnectEnable",
+            },
+          ],
+          "kind": "Operation",
+          "name": "AuthentificationAdminPageQuery",
+          "selections": Array [
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "ShieldAdminForm",
+              "kind": "LinkedField",
+              "name": "shieldAdminForm",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "shieldMode",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "ShieldAdminFormTranslation",
+                  "kind": "LinkedField",
+                  "name": "translations",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "locale",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "introduction",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "Media",
+                  "kind": "LinkedField",
+                  "name": "media",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "id",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "name",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "SSOConfigurationConnection",
+              "kind": "LinkedField",
+              "name": "ssoConfigurations",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "SSOConfigurationEdge",
+                  "kind": "LinkedField",
+                  "name": "edges",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": null,
+                      "kind": "LinkedField",
+                      "name": "node",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "abstractKey": "__isSSOConfiguration",
+                          "kind": "TypeDiscriminator",
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "enabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "clientId",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "secret",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "authorizationUrl",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "accessTokenUrl",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "userInfoUrl",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "logoutUrl",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "redirectUri",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "profileUrl",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "buttonColor",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "labelColor",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "Oauth2SSOConfiguration",
+                        },
+                        Object {
+                          "condition": "isFranceConnectEnable",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "clientId",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "secret",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "environment",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "redirectUri",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "logoutUrl",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "allowedData",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "FranceConnectSSOConfiguration",
+                            },
+                          ],
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+          ],
+        },
+        "params": Object {
+          "cacheID": "7a3facf6ff00d7ae9dcc50cebad43b2f",
+          "id": null,
+          "metadata": Object {},
+          "name": "AuthentificationAdminPageQuery",
+          "operationKind": "query",
+          "text": "query AuthentificationAdminPageQuery(
+  $isFranceConnectEnable: Boolean!
+) {
+  shieldAdminForm {
+    ...AuthentificationAdminPageContent_shieldAdminForm
+  }
+  ssoConfigurations {
+    ...AuthentificationAdminPageContent_ssoConfigurations_3mRfkE
+  }
+}
+
+fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
+  ...ShieldAdminForm_shieldAdminForm
+}
+
+fragment AuthentificationAdminPageContent_ssoConfigurations_3mRfkE on SSOConfigurationConnection {
+  ...ListSSOConfiguration_ssoConfigurations_3mRfkE
+}
+
+fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
+  id
+  clientId
+  secret
+  environment
+  redirectUri
+  logoutUrl
+  allowedData
+}
+
+fragment ListCustomSSO_ssoConfigurations on SSOConfigurationConnection {
+  edges {
+    node {
+      __typename
+      ...SSOConfigurationItem_configuration
+      id
+    }
+  }
+}
+
+fragment ListPublicSSO_ssoConfigurations_3mRfkE on SSOConfigurationConnection {
+  edges {
+    node {
+      __typename
+      __isSSOConfiguration: __typename
+      id
+      enabled
+      ...FranceConnectConfigurationModal_ssoConfiguration @include(if: $isFranceConnectEnable)
+    }
+  }
+}
+
+fragment ListSSOConfiguration_ssoConfigurations_3mRfkE on SSOConfigurationConnection {
+  ...ListCustomSSO_ssoConfigurations
+  ...ListPublicSSO_ssoConfigurations_3mRfkE
+}
+
+fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
+  id
+  enabled
+  name
+  clientId
+  secret
+  authorizationUrl
+  accessTokenUrl
+  userInfoUrl
+  logoutUrl
+  redirectUri
+  profileUrl
+  buttonColor
+  labelColor
+  __typename
+}
+
+fragment SSOConfigurationItem_configuration on SSOConfiguration {
+  __isSSOConfiguration: __typename
+  __typename
+  ... on Oauth2SSOConfiguration {
+    ...Oauth2SSOConfigurationItem_configuration
+  }
+}
+
+fragment ShieldAdminForm_shieldAdminForm on ShieldAdminForm {
+  shieldMode
+  translations {
+    locale
+    introduction
+  }
+  media {
+    id
+    url
+    name
+  }
+}
+",
+        },
+      }
+    }
+    render={[Function]}
+    variables={
+      Object {
+        "isFranceConnectEnable": true,
+      }
+    }
   />
   <Connect(SSOByPassAuthForm) />
 </Fragment>

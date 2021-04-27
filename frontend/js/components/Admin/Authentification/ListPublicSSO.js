@@ -145,7 +145,8 @@ export default connect<any, any, _, _, _, _>(
 )(
   createFragmentContainer(ListPublicSSO, {
     ssoConfigurations: graphql`
-      fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
+      fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection
+        @argumentDefinitions(isFranceConnectEnable: { type: "Boolean!" }) {
         edges {
           node {
             ... on SSOConfiguration {
@@ -153,6 +154,7 @@ export default connect<any, any, _, _, _, _>(
               id
               enabled
               ...FranceConnectConfigurationModal_ssoConfiguration
+                @include(if: $isFranceConnectEnable)
             }
           }
         }

@@ -17,6 +17,7 @@ class FranceConnectOptionsModifierSpec extends ObjectBehavior
         FranceConnectSSOConfiguration $fc
     ) {
         $this->beConstructedWith($repository, $redisCache, $toggleManager);
+        $toggleManager->isActive('login_franceconnect')->willReturn(true);
         $repository->find('franceConnect')->willReturn($fc);
         $data = [
             'given_name' => true,
@@ -32,5 +33,17 @@ class FranceConnectOptionsModifierSpec extends ObjectBehavior
         $fc->getAllowedData()->willReturn($data);
 
         $this->getAllowedData()->shouldReturn(['given_name', 'family_name', 'email']);
+    }
+
+    public function it_didnt_get_allowed_data(
+        FranceConnectSSOConfigurationRepository $repository,
+        RedisCache $redisCache,
+        Manager $toggleManager,
+        FranceConnectSSOConfiguration $fc
+    ) {
+        $this->beConstructedWith($repository, $redisCache, $toggleManager);
+        $toggleManager->isActive('login_franceconnect')->willReturn(false);
+
+        $this->getAllowedData()->shouldReturn([]);
     }
 }

@@ -50,9 +50,10 @@ const mapStateToProps = (state: State) => ({
 export default connect<any, any, _, _, _, _>(mapStateToProps)(
   createFragmentContainer(ListSSOConfiguration, {
     ssoConfigurations: graphql`
-      fragment ListSSOConfiguration_ssoConfigurations on SSOConfigurationConnection {
+      fragment ListSSOConfiguration_ssoConfigurations on SSOConfigurationConnection
+        @argumentDefinitions(isFranceConnectEnable: { type: "Boolean!" }) {
         ...ListCustomSSO_ssoConfigurations
-        ...ListPublicSSO_ssoConfigurations
+        ...ListPublicSSO_ssoConfigurations @arguments(isFranceConnectEnable: $isFranceConnectEnable)
       }
     `,
   }),
