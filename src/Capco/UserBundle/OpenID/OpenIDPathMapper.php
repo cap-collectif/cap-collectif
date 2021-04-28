@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\OpenID;
 
+use Capco\UserBundle\OpenID\Mapping\CarpentrasMapping;
 use Capco\UserBundle\OpenID\Mapping\DecathlonMapping;
 use Capco\UserBundle\OpenID\Mapping\DevOpenIDMapping;
 use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
@@ -37,6 +38,10 @@ class OpenIDPathMapper
             case 'grand-lyon':
             case 'grand-lyon-preprod':
                 $this->instanceMapper = new GrandLyonMapping();
+
+                break;
+            case 'carpentras':
+                $this->instanceMapper = new CarpentrasMapping();
 
                 break;
             default:

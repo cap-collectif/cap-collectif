@@ -28,11 +28,27 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         parent::configureOptions($resolver);
 
-        $resolver
-            ->setDefaults([
-                'scope' => 'openid email profile'
-            ])
-            ->setRequired('logout_url');
+        $defaultScope = 'openid email profile';
+
+        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        switch ($instanceName) {
+            case 'carpentras':
+                $resolver->setDefaults([
+                    'state'  => null,
+                    'csrf' => true,               
+                    'scope' => 'openid email family_name given_name'
+                ])
+                ->setRequired('logout_url');
+                break;
+            default:
+                $resolver
+                    ->setDefaults([
+                        'scope' => $defaultScope
+                    ])
+                    ->setRequired('logout_url');
+                break;
+        }
+
     }
 
     protected function doGetTokenRequest($url, array $parameters = [])
