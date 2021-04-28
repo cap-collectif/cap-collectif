@@ -1354,6 +1354,20 @@ Object {
           "title": "On vous présente Agui, l’ami du BP",
         },
       },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
+      "hasNextPage": false,
+    },
+    "totalCount": 13,
+  },
+}
+`;
+
+exports[`Preview|Query.events connection fetches only passed events with a cursor 1`] = `
+Object {
+  "events": Object {
+    "edges": Array [
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
@@ -1367,20 +1381,6 @@ Object {
           "title": "Evenement animé par l'utilisateur User",
         },
       },
-    ],
-    "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEz",
-      "hasNextPage": false,
-    },
-    "totalCount": 14,
-  },
-}
-`;
-
-exports[`Preview|Query.events connection fetches only passed events with a cursor 1`] = `
-Object {
-  "events": Object {
-    "edges": Array [
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
@@ -1456,10 +1456,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": false,
     },
-    "totalCount": 6,
+    "totalCount": 7,
   },
 }
 `;

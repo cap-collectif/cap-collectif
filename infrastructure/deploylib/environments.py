@@ -58,24 +58,24 @@ def locallinux():
 
 def ssh_into(service, user='capco'):
     if Config.docker_machine:
-        os.system('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+        run('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
     elif Config.dinghy:
-        os.system('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+        run('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
     elif Config.lxc:
         print("Disabled in lxc environment.")
     else:
-        os.system('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+        run('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
 
 
 def command(command_name, service, directory=".", user="capco", interactive=False):
     if Config.lxc:
-        os.system('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (Config.project_name, service, directory, user, command_name))
+        return run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (Config.project_name, service, directory, user, command_name))
     elif Config.docker_machine:
-        os.system('eval "$(docker-machine env capco)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
+        return run('eval "$(docker-machine env capco)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
     elif Config.dinghy:
-        os.system('eval "$(docker-machine env dinghy)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
+        return run('eval "$(docker-machine env dinghy)" && docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
     else:
-        os.system('docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
+        return run('docker exec -t %s %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (("", "-i")[interactive], Config.project_name, service, directory, user, command_name))
 
 
 def compose_run(command_name, service, directory=".", user="root", no_deps=False):
@@ -85,16 +85,15 @@ def compose_run(command_name, service, directory=".", user="root", no_deps=False
         compose('run -u %s %s /bin/bash -c "cd %s && %s"' % (user, service, directory, command_name))
 
 
-# TODO replace os.system by subprocess.run in python3
 def compose(command_name):
     merge_infra_files()
     os.chdir(Config.directory)
     if Config.docker_machine:
-        os.system('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+        run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
     elif Config.dinghy:
-        os.system('eval "$(docker-machine env dinghy)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+        run('eval "$(docker-machine env dinghy)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
     else:
-        os.system('docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+        run('docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
 
 
 def pull(revision, directory, remote='origin'):
