@@ -51,3 +51,4 @@ export { default as FILE_O } from './svg/file-o.svg';
 export { default as COG_O } from './svg/cog-o.svg';
 export { default as PENCIL_O } from './svg/pencil-o.svg';
 export { default as ENVELOPE_O } from './svg/envelope-o.svg';
+export { default as LOCK } from './svg/lock.svg';

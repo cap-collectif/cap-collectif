@@ -49,6 +49,10 @@ describe('<ProjectCard />', () => {
     externalParticipantsCount: null,
     externalContributionsCount: null,
     externalVotesCount: null,
+    visibility: 'PUBLIC',
+    isVotesCounterDisplayable: true,
+    isContributionsCounterDisplayable: true,
+    isParticipantsCounterDisplayable: true,
   };
 
   const projectWithoutCover = {

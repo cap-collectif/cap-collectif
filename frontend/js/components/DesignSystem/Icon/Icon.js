@@ -60,6 +60,7 @@ export const ICON_NAME = {
   FILE_O: 'FILE_O',
   COG_O: 'COG_O',
   ENVELOPE_O: 'ENVELOPE_O',
+  LOCK: 'LOCK',
 };
 
 export const ICON_SIZE = {

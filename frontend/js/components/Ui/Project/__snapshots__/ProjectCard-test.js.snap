@@ -309,8 +309,8 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
       pt="66.66%"
       width="100%"
     />
-    <ProjectCardutils___StyledTag
-      _css2={[Function]}
+    <ProjectCardutils___StyledFlex
+      _css3={[Function]}
       left={
         Array [
           2,
@@ -323,17 +323,21 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
           4,
         ]
       }
-      variant="green"
     >
-      <Text
-        as="span"
-        fontSize={1}
-        fontWeight="700"
-        lineHeight="sm"
+      <Tag
+        mr={1}
+        variant="aqua"
       >
-        global.new
-      </Text>
-    </ProjectCardutils___StyledTag>
+        <Text
+          as="span"
+          fontSize={1}
+          fontWeight="700"
+          lineHeight="sm"
+        >
+          step.status.future
+        </Text>
+      </Tag>
+    </ProjectCardutils___StyledFlex>
     <ForwardRef
       bg="white"
       direction="column"
@@ -476,8 +480,8 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
       pt="66.66%"
       width="100%"
     />
-    <ProjectCardutils___StyledTag
-      _css2={[Function]}
+    <ProjectCardutils___StyledFlex
+      _css3={[Function]}
       left={
         Array [
           2,
@@ -490,17 +494,21 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
           4,
         ]
       }
-      variant="green"
     >
-      <Text
-        as="span"
-        fontSize={1}
-        fontWeight="700"
-        lineHeight="sm"
+      <Tag
+        mr={1}
+        variant="aqua"
       >
-        global.new
-      </Text>
-    </ProjectCardutils___StyledTag>
+        <Text
+          as="span"
+          fontSize={1}
+          fontWeight="700"
+          lineHeight="sm"
+        >
+          step.status.future
+        </Text>
+      </Tag>
+    </ProjectCardutils___StyledFlex>
     <ForwardRef
       bg="white"
       direction="column"
@@ -683,8 +691,8 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
         isNewCard={true}
       />
     </ProjectCard___StyledAppBox2>
-    <ProjectCardutils___StyledTag
-      _css2={[Function]}
+    <ProjectCardutils___StyledFlex
+      _css3={[Function]}
       left={
         Array [
           2,
@@ -697,17 +705,21 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
           4,
         ]
       }
-      variant="green"
     >
-      <Text
-        as="span"
-        fontSize={1}
-        fontWeight="700"
-        lineHeight="sm"
+      <Tag
+        mr={1}
+        variant="aqua"
       >
-        global.new
-      </Text>
-    </ProjectCardutils___StyledTag>
+        <Text
+          as="span"
+          fontSize={1}
+          fontWeight="700"
+          lineHeight="sm"
+        >
+          step.status.future
+        </Text>
+      </Tag>
+    </ProjectCardutils___StyledFlex>
     <ForwardRef
       bg="white"
       direction="column"
@@ -850,8 +862,8 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
       pt="66.66%"
       width="100%"
     />
-    <ProjectCardutils___StyledTag
-      _css2={[Function]}
+    <ProjectCardutils___StyledFlex
+      _css3={[Function]}
       left={
         Array [
           2,
@@ -864,17 +876,21 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
           4,
         ]
       }
-      variant="green"
     >
-      <Text
-        as="span"
-        fontSize={1}
-        fontWeight="700"
-        lineHeight="sm"
+      <Tag
+        mr={1}
+        variant="aqua"
       >
-        global.new
-      </Text>
-    </ProjectCardutils___StyledTag>
+        <Text
+          as="span"
+          fontSize={1}
+          fontWeight="700"
+          lineHeight="sm"
+        >
+          step.status.future
+        </Text>
+      </Tag>
+    </ProjectCardutils___StyledFlex>
     <ForwardRef
       bg="white"
       direction="column"

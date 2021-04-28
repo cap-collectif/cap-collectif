@@ -56,7 +56,8 @@ declare export const ICON_NAME = {
     TWITTER: 'TWITTER',
     FILE_O: 'FILE_O',
     COG_O: 'COG_O',
-    ENVELOPE_O: 'ENVELOPE_O'
+    ENVELOPE_O: 'ENVELOPE_O',
+    LOCK: 'LOCK'
 };
 
 declare export const ICON_SIZE = {

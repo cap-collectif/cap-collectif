@@ -28,6 +28,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
   const isMobile = useIsMobile();
 
   const showCounters = project.hasParticipativeStep || project.isExternal;
+
   return (
     <AppBox
       as="a"
@@ -58,7 +59,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
         >
           {!project.cover?.url && <DefaultProjectImage isNewCard />}
         </AppBox>
-        {isProjectsPage && renderTag(project, intl)}
+        {renderTag(project, intl, isProjectsPage)}
         <Flex direction="column" m={4} bg="white" flex={1} overflow="hidden">
           <Heading
             truncate={100}
@@ -95,22 +96,30 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
             )}
             {showCounters && (
               <Flex direction="row" spacing={8} mt={4}>
-                {formatCounter(
-                  ICON_NAME.THUMB_UP_O,
-                  project.isExternal ? project.externalVotesCount || 0 : project.votes.totalCount,
-                )}
-                {formatCounter(
-                  ICON_NAME.BUBBLE_O,
-                  project.isExternal
-                    ? project.externalContributionsCount || 0
-                    : project.contributions.totalCount,
-                )}
-                {formatCounter(
-                  ICON_NAME.USER_O,
-                  project.isExternal
-                    ? project.externalParticipantsCount || 0
-                    : project.contributors.totalCount + project.anonymousVotes.totalCount,
-                )}
+                {(project.isVotesCounterDisplayable &&
+                  ((project.isExternal && project.externalVotesCount) ||
+                    project.votes.totalCount) &&
+                  formatCounter(
+                    ICON_NAME.THUMB_UP_O,
+                    project.isExternal ? project.externalVotesCount || 0 : project.votes.totalCount,
+                  )) ||
+                  null}
+                {(project.isContributionsCounterDisplayable &&
+                  formatCounter(
+                    ICON_NAME.BUBBLE_O,
+                    project.isExternal
+                      ? project.externalContributionsCount || 0
+                      : project.contributions.totalCount,
+                  )) ||
+                  null}
+                {(project.isParticipantsCounterDisplayable &&
+                  formatCounter(
+                    ICON_NAME.USER_O,
+                    project.isExternal
+                      ? project.externalParticipantsCount || 0
+                      : project.contributors.totalCount + project.anonymousVotes.totalCount,
+                  )) ||
+                  null}
               </Flex>
             )}
           </Flex>
@@ -146,6 +155,9 @@ export default createFragmentContainer(
         isExternal
         externalLink
         url
+        isVotesCounterDisplayable
+        isContributionsCounterDisplayable
+        isParticipantsCounterDisplayable
         votes {
           totalCount
         }
@@ -170,6 +182,7 @@ export default createFragmentContainer(
             }
           }
         }
+        visibility
         publishedAt
         currentStep {
           id

@@ -4,7 +4,7 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
 <Fragment
   key="6"
 >
-  <Memo([object Object])
+  <Memo(ForwardRef(MenuButton))
     animated={false}
     animating={false}
     as={
@@ -144,7 +144,7 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
     <span
       className="caret"
     />
-  </Memo([object Object])>
+  </Memo(ForwardRef(MenuButton))>
   <ForwardRef(Menu)
     animated={false}
     animating={false}
@@ -291,7 +291,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
 <Fragment
   key="6"
 >
-  <Memo([object Object])
+  <Memo(ForwardRef(MenuButton))
     animated={false}
     animating={false}
     as={
@@ -431,7 +431,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
     <span
       className="caret"
     />
-  </Memo([object Object])>
+  </Memo(ForwardRef(MenuButton))>
   <ForwardRef(Menu)
     animated={false}
     animating={false}
@@ -571,7 +571,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
     visible={false}
     wrap={false}
   >
-    <Memo([object Object])
+    <Memo(ForwardRef(MenuItem))
       active={false}
       animated={false}
       animating={false}
@@ -695,8 +695,8 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
       wrap={false}
     >
       Contact
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
       active={false}
       animated={false}
       animating={false}
@@ -820,7 +820,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
       wrap={false}
     >
       Liste des inscrits
-    </Memo([object Object])>
+    </Memo(ForwardRef(MenuItem))>
   </ForwardRef(Menu)>
 </Fragment>
 `;

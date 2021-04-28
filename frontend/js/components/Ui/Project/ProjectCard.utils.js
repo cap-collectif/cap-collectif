@@ -31,43 +31,86 @@ export const formatInfo = (iconName: string, text: string, color?: string) => (
   </Flex>
 );
 
-export const renderTag = (project: ProjectCard_project, intl: IntlShape) => {
-  const tag = (variant: TagVariant, message: string) => (
+export const renderTag = (
+  project: ProjectCard_project,
+  intl: IntlShape,
+  isProjectsPage: boolean,
+) => {
+  const restrictedTag = () => (
     <Tag
-      top={[2, 4]}
-      left={[2, 4]}
-      variant={variant}
+      variant="neutral-gray"
       css={css({
-        position: 'absolute',
+        p: { lineHeight: 1 },
       })}>
-      <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700">
-        {message}
-      </Text>
+      <Icon name="LOCK" size={ICON_SIZE.SM} color="gray.700" />
     </Tag>
   );
 
+  const tag = (variant: TagVariant, message: string, isRestricted?: boolean) => (
+    <Flex
+      top={[2, 4]}
+      left={[2, 4]}
+      css={css({
+        position: 'absolute',
+      })}>
+      <Tag variant={variant} mr={1}>
+        <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700">
+          {message}
+        </Text>
+      </Tag>
+      {isRestricted && restrictedTag()}
+    </Flex>
+  );
+  const isRestricted = project.visibility !== 'PUBLIC';
   const now = moment();
-  if (now.diff(moment(project.publishedAt), 'hours') < 48)
-    return tag('green', intl.formatMessage({ id: 'global.new' }));
+  const publishedTime = now.diff(moment(project.publishedAt), 'hours');
+  if (publishedTime < 0 && isProjectsPage)
+    return tag('aqua', intl.formatMessage({ id: 'step.status.future' }), isRestricted);
+
   if (!project.currentStep) return null;
 
-  const isStepFinished = project.currentStep.timeless
-    ? false
-    : project.currentStep.timeRange?.endAt
-    ? now.isAfter(moment(project.currentStep.timeRange.endAt))
+  const isStepFinished = project.currentStep
+    ? project.currentStep.timeless
+      ? false
+      : project.currentStep.timeRange?.endAt
+      ? now.isAfter(moment(project.currentStep.timeRange.endAt))
+      : false
     : false;
 
-  if (isStepFinished) return tag('neutral-gray', intl.formatMessage({ id: 'global.ended' }));
+  if (isStepFinished && isProjectsPage)
+    return tag('neutral-gray', intl.formatMessage({ id: 'global.ended' }), isRestricted);
   const hoursLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'hours');
-  if (hoursLeft > -48)
+  if (hoursLeft > -48 && isProjectsPage && project.currentStep)
     return tag(
       'red',
       `${-hoursLeft} ${intl.formatMessage({ id: 'count.hoursLeft' }, { count: -hoursLeft })}`,
+      isRestricted,
     );
   const daysLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'days');
-  if (daysLeft > -7)
+  if (daysLeft > -7 && isProjectsPage && project.currentStep)
     return tag(
       'orange',
       `${-daysLeft} ${intl.formatMessage({ id: 'count.daysLeft' }, { count: -daysLeft })}`,
+      isRestricted,
+    );
+  if (publishedTime < 48 && isProjectsPage)
+    return tag('green', intl.formatMessage({ id: 'global.new' }), isRestricted);
+  if (
+    (isRestricted &&
+      !isStepFinished &&
+      !(daysLeft > -7) &&
+      !(hoursLeft > -48) &&
+      !(publishedTime < 48)) ||
+    (isRestricted && !isProjectsPage)
+  )
+    return (
+      <Flex
+        top={[2, 4]}
+        left={[2, 4]}
+        css={css({
+          position: 'absolute',
+        })}>
+        {restrictedTag()}
+      </Flex>
     );
 };

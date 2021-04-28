@@ -18,7 +18,7 @@ exports[`<NavbarRight /> should render correctly 1`] = `
 
 exports[`<NavbarRight /> should render when authenticated 1`] = `
 <Fragment>
-  <Memo([object Object])
+  <Memo(ForwardRef(MenuButton))
     animated={false}
     animating={false}
     aria-label="user.account.menu"
@@ -192,7 +192,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     <span
       className="caret"
     />
-  </Memo([object Object])>
+  </Memo(ForwardRef(MenuButton))>
   <ForwardRef(Menu)
     animated={false}
     animating={false}
@@ -332,7 +332,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     visible={false}
     wrap={false}
   >
-    <Memo([object Object])
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -458,8 +458,8 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         className="cap-setting-gears-1 mr-10"
       />
       global.administration
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -585,8 +585,8 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         className="cap cap-edit-write mr-10"
       />
       evaluations.index.page_title
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -712,8 +712,8 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         className="cap cap-setting-adjustment mr-10"
       />
       global.params
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuSeparator))
       animated={false}
       animating={false}
       as={
@@ -825,7 +825,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
       visible={false}
       wrap={false}
     />
-    <Memo([object Object])
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -952,14 +952,14 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
         className="cap cap-power-1 mr-10"
       />
       global.logout
-    </Memo([object Object])>
+    </Memo(ForwardRef(MenuItem))>
   </ForwardRef(Menu)>
 </Fragment>
 `;
 
 exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = `
 <Fragment>
-  <Memo([object Object])
+  <Memo(ForwardRef(MenuButton))
     animated={false}
     animating={false}
     aria-label="user.account.menu"
@@ -1133,7 +1133,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     <span
       className="caret"
     />
-  </Memo([object Object])>
+  </Memo(ForwardRef(MenuButton))>
   <ForwardRef(Menu)
     animated={false}
     animating={false}
@@ -1273,7 +1273,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     visible={false}
     wrap={false}
   >
-    <Memo([object Object])
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -1399,8 +1399,8 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         className="cap-setting-gears-1 mr-10"
       />
       global.administration
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -1526,8 +1526,8 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         className="cap cap-id-8 mr-10"
       />
       user.my.profile
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -1653,8 +1653,8 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         className="cap cap-edit-write mr-10"
       />
       evaluations.index.page_title
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -1780,8 +1780,8 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         className="cap cap-setting-adjustment mr-10"
       />
       global.params
-    </Memo([object Object])>
-    <Memo([object Object])
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuSeparator))
       animated={false}
       animating={false}
       as={
@@ -1893,7 +1893,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
       visible={false}
       wrap={false}
     />
-    <Memo([object Object])
+    <Memo(ForwardRef(MenuItem))
       animated={false}
       animating={false}
       as={
@@ -2020,7 +2020,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
         className="cap cap-power-1 mr-10"
       />
       global.logout
-    </Memo([object Object])>
+    </Memo(ForwardRef(MenuItem))>
   </ForwardRef(Menu)>
 </Fragment>
 `;
