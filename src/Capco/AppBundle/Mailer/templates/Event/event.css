@@ -1,0 +1,36 @@
+@media only screen and (max-width:480px) {
+    .email__test {
+        text-align: left !important;
+        padding: 12px 32px !important;
+        display: flex !important;
+        width: 200px!important;
+    }
+    .email__show_event {
+        width: auto !important;
+    }
+    .email__show_url {
+        text-align: center;
+        color: #D92B6F;
+    }
+    .email__show_url a{
+        color: #D92B6F !important;
+    }
+}
+@media only screen and (min-width:481px) {
+    .email__test {
+        text-align: center !important;
+        padding: 24px 44px !important;
+        width: 100px !important;
+        display: flex !important;
+    }
+    .email__show_event {
+        width: 200px !important;
+    }
+    .email__show_url a{
+        color: #D92B6F !important;
+    }
+}
+
+.email__contact_admin a {
+    color: #D92B6F !important;
+}

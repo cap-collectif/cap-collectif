@@ -31,21 +31,23 @@ final class MessagesList
         'proposal_news_create' => ProposalNewsCreateAdminMessage::class,
         'proposal_news_update' => ProposalNewsUpdateAdminMessage::class,
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::class,
-        'user_account_confirmation_reminder_message' => UserAccountConfirmationReminderMessage::class
+        'user_account_confirmation_reminder_message' =>
+            UserAccountConfirmationReminderMessage::class,
     ];
     public const TEMPLATE_LIST = [
-        'event_create_admin' => '@CapcoMail/Admin/notifyAdminOfNewEvent.html.twig',
-        'event_edit_admin' => '@CapcoMail/Admin/notifyAdminOfEditedEvent.html.twig',
-        'event_delete_admin' => '@CapcoMail/Admin/notifyAdminOfDeletedEvent.html.twig',
-        'event_delete' => '@CapcoMail/notifyParticipantOfDeletedEvent.html.twig',
+        'event_create_admin' => EventCreateAdminMessage::TEMPLATE,
+        'event_edit_admin' => EventEditAdminMessage::TEMPLATE,
+        'event_delete_admin' => EventDeleteAdminMessage::TEMPLATE,
+        'event_delete' => EventDeleteMessage::TEMPLATE,
         'event_review_approved' => '@CapcoMail/Event/notifyUserReviewedEvent.html.twig',
-        'event_review_refused' => '@CapcoMail/Event/notifyUserReviewedEvent.html.twig',
+        'event_review_refused' => EventReviewRefusedMessage::TEMPLATE,
         'proposal_update_status' =>
             '@CapcoMail/Proposal/notifyProposalAuthorStatusChange.html.twig',
         'proposal_revision' => '@CapcoMail/notifyProposalRevision.html.twig',
         'proposal_news_create' => ProposalNewsCreateAdminMessage::TEMPLATE,
         'proposal_news_update' => ProposalNewsUpdateAdminMessage::TEMPLATE,
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::TEMPLATE,
-        'user_account_confirmation_reminder_message' => UserAccountConfirmationReminderMessage::TEMPLATE
+        'user_account_confirmation_reminder_message' =>
+            UserAccountConfirmationReminderMessage::TEMPLATE,
     ];
 }

@@ -1,37 +1,57 @@
-{% extends "@CapcoMail/notifyEventLayout.html.twig" %}
-{% block email_body %}
-            <div>
-                <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
-                    <p style="font-weight: bold">
-                        {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle', user_locale) | raw }}
-                    </p>
-                    <p>
-                        {% if eventStatus == constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED') %}
-                            {{ 'event-refused-by-admin'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
-                        {% else %}
-                            {{ 'your-event-has-been-approved-by-administrator'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
-                        {% endif %}
-                    </p>
-                    {% if eventStatus == constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED') %}
-                        <span style="color: rgb(51, 51, 51);font-family: OpenSans-Semibold;font-size: 16px;font-weight: 600;">
-                            {{ 'proposal.show.trashed.reason'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
-                        </span>
-                            <span style="color: rgb(112, 112, 112);font-family: OpenSans;font-size: 16px;">{{ eventRefusedReason|trans({}, 'CapcoAppBundle', user_locale) | raw }}
-                        </span>
-                        {% if eventComment %}
-                            <p style="background: rgb(255, 243, 205);border-radius: 4px;border: 1px solid rgb(255, 238, 186);color: rgb(134, 100, 4);font-family: OpenSans;font-size: 16px;padding: 20px;margin-bottom: 15px ">
-                                {{ eventComment }}
-                            </p>
-                        {% endif %}
-                    {% endif %}
-                    <p>
-                        <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 8px 18px;font-size: 14px;" href="{{ eventUrl }}" target="_blank" rel="noopener">
-                            {{ 'link_action_show'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
-                        </a>
-                    </p>
-                    {% if eventStatus == constant('Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED') %}
-                        {{ 'for-more-information-contact-the-administrator'|trans({'{notificationEmail}': adminEmail }, 'CapcoAppBundle', user_locale) | raw }}
-                    {% endif %}
-                </div>
-            </div>
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set logo = app_logo_url() %}
+
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+{% block style_mail %}
+    {{ parent() }}
+    {{ include("@CapcoMail/Event/event.css") }}
 {% endblock %}
+{% block core_mail %}
+    <div>
+        {% if logo is not null %}
+            <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ siteName }}"/>
+        {% else %}
+            <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt=""/>
+        {% endif %}
+
+        <h1 style="font-size: 24px; font-weight: 600; margin: 0 0 25px 0;text-align: left">
+            {{ 'your-event-is-approved'|trans({}, 'CapcoAppBundle', user_locale) }}
+        </h1>
+        <div>
+            <p style="line-height: 24px;text-align: left;color: #545E68;font-size: 14px;">
+                {{ 'mail-greeting-username'|trans({'username': username }, 'CapcoAppBundle', user_locale) | raw }}<br/>
+                {{ 'your-event-has-been-approved-by-administrator_new'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
+            </p>
+
+            <div class="email__show_event"
+                 style="height: 48px;background-color: #D92B6F; border-radius: 4px;font-size: 14px; color: #fff;display: flex;">
+                <a href="{{ eventUrl }}" target="_blank" rel="noopener" style="color: {{btnText}};text-align: center;margin: auto;">
+                    {{ 'consult-event'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                </a>
+            </div>
+            <div class="email__show_url" style="margin-top: 8px;">
+                <a href="{{ eventUrl }}">{{ eventURLExcerpt }} </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block footer_mail %}
+        <div style="margin: 0; text-align: left">
+            <p style="margin: 0; text-align: center">{{ 'email-rgpd-data-protect'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
+
+            <p style="text-align: center;">
+                {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                <img src="{{ baseUrl ~ asset("capco-logo-mail.png") }}" alt="logo cap collectif"
+                     style="width: 15px;height: 15px;margin: 0 2px 0 4px;"/>
+                Cap Collectif
+            </p>
+        </div>
+    {% endblock %}
+

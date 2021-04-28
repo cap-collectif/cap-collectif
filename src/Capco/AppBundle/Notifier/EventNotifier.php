@@ -44,17 +44,27 @@ class EventNotifier extends BaseNotifier
 
     public function onCreate(Event $event): bool
     {
+        $url = $this->eventUrlResolver->__invoke($event, true);
+        $urlExcerpt = substr($url, 0, 21);
+        $urlExcerpt .= '…';
+
         return $this->mailer->createAndSendMessage(EventCreateAdminMessage::class, $event, [
-            'eventURL' => $this->eventUrlResolver->__invoke($event, true),
+            'eventURL' => $url,
             'username' => 'admin',
+            'eventURLExcerpt' => $urlExcerpt,
         ]);
     }
 
     public function onUpdate(Event $event): bool
     {
+        $url = $this->eventUrlResolver->__invoke($event, true);
+        $urlExcerpt = substr($url, 0, 21);
+        $urlExcerpt .= '…';
+
         return $this->mailer->createAndSendMessage(EventEditAdminMessage::class, $event, [
-            'eventURL' => $this->eventUrlResolver->__invoke($event, true),
+            'eventURL' => $url,
             'username' => 'admin',
+            'eventURLExcerpt' => $urlExcerpt,
         ]);
     }
 
@@ -113,12 +123,13 @@ class EventNotifier extends BaseNotifier
             throw new \RuntimeException('Event review cant be empty');
         }
         $url = $this->eventUrlResolver->__invoke($event);
-
+        $urlExcerpt = substr($url, 0, 21);
+        $urlExcerpt .= '…';
         if (EventReviewStatusType::APPROVED === $event->getReview()->getStatus()) {
             return $this->mailer->createAndSendMessage(
                 EventReviewApprovedMessage::class,
                 $event,
-                ['eventURL' => $url],
+                ['eventURL' => $url, 'eventURLExcerpt' => $urlExcerpt],
                 $event->getAuthor()
             );
         }
@@ -126,7 +137,7 @@ class EventNotifier extends BaseNotifier
         return $this->mailer->createAndSendMessage(
             EventReviewRefusedMessage::class,
             $event,
-            ['eventURL' => $url],
+            ['eventURL' => $url, 'eventURLExcerpt' => $urlExcerpt],
             $event->getAuthor()
         );
     }

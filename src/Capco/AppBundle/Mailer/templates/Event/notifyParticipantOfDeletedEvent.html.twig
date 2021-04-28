@@ -18,14 +18,15 @@
     {% endif %}
 
     <h1 style="font-size: 24px; font-weight: 600; margin: 0 0 25px 0;text-align: left">
-        {{ 'deleting-event'|trans({}, 'CapcoAppBundle', user_locale) }}
+        {{ 'event-is-canceled'|trans({}, 'CapcoAppBundle', user_locale) }}
     </h1>
 
     <p style="line-height: 24px;text-align: left;color: #545E68;font-size: 14px;">
         {{ 'mail-greeting-username'|trans({'username': username }, 'CapcoAppBundle', user_locale) | raw }}<br/>
-        {{ 'event-deleted-by-author'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
+        {{ 'event-canceled-by-author'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
     </p>
-{% endblock %}
+</div>
+    {% endblock %}
 
     {% block footer_mail %}
         <div style="margin: 0; text-align: left">
@@ -39,4 +40,3 @@
             </p>
         </div>
     {% endblock %}
-

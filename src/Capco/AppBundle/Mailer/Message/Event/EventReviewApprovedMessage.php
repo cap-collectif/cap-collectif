@@ -6,10 +6,12 @@ use Capco\AppBundle\DBAL\Enum\EventReviewRefusedReasonType;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
+use Capco\AppBundle\Traits\EventMockDataTrait;
 
 class EventReviewApprovedMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'event-approved';
+    use EventMockDataTrait;
+    public const SUBJECT = 'event-approved-new';
     public const TEMPLATE = '@CapcoMail/Event/notifyUserReviewedEvent.html.twig';
     public const FOOTER = '';
 
@@ -18,6 +20,7 @@ class EventReviewApprovedMessage extends AbstractExternalMessage
         $var = [
             'eventTitle' => self::escape($event->getTitle()),
             'eventUrl' => $params['eventURL'],
+            'eventURLExcerpt' => $params['eventURLExcerpt'],
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],
@@ -46,7 +49,10 @@ class EventReviewApprovedMessage extends AbstractExternalMessage
 
     public static function getMySubjectVars(Event $event, array $params): array
     {
-        return ['{eventTitle}' => self::escape($event->getTitle())];
+        return [
+            '{eventTitle}' => self::escape($event->getTitle()),
+            '{PlateformName}' => $params['siteName'],
+        ];
     }
 
     public static function getMyFooterVars(
