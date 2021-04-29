@@ -10,6 +10,12 @@ swiftmailer:
     mandrill:
       transport: mandrill
       disable_delivery: '%disable_mail_delivery%'
+    mailjet:
+        transport: mailjet
+        disable_delivery: '%disable_mail_delivery%'
+    api:
+      transport: api
+      disable_delivery: '%disable_mail_delivery%'
 
 services:
     _defaults:

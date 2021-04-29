@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Mailer;
+namespace Capco\AppBundle\Mailer\Transport;
 
 use Mandrill;
 
@@ -18,7 +18,7 @@ use \Swift_MimePart;
  *
  * Updated to add `return_path_domain` support
  */
-class MandrillTransport implements Swift_Transport
+class MandrillTransport
 {
 
     /**
@@ -55,35 +55,6 @@ class MandrillTransport implements Swift_Transport
         $this->apiKey = null;
         $this->async = null;
         $this->subAccount = null;
-    }
-
-    /**
-     * Not used
-     */
-    public function isStarted()
-    {
-        return false;
-    }
-
-    /**
-     * Not used
-     */
-    public function start()
-    {
-    }
-
-    /**
-     * Not used
-     */
-    public function stop()
-    {
-    }
-
-    /**
-     * Not used
-     */
-    public function ping()
-    {
     }
 
     /**
@@ -158,15 +129,9 @@ class MandrillTransport implements Swift_Transport
      * @param null $failedRecipients
      * @return int Number of messages sent
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
+    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null, Swift_Events_SendEvent $event = null)
     {
         $this->resultApi = null;
-        if ($event = $this->dispatcher->createSendEvent($this, $message)) {
-            $this->dispatcher->dispatchEvent($event, 'beforeSendPerformed');
-            if ($event->bubbleCancelled()) {
-                return 0;
-            }
-        }
 
         $sendCount = 0;
 

@@ -202,9 +202,21 @@ services:
             $samlIdp: '%simplesamlphp.sp%'
 
     swiftmailer.mailer.transport.mandrill:
-        class: Capco\AppBundle\Mailer\MandrillTransport
+        class: Capco\AppBundle\Mailer\Transport\MandrillTransport
         arguments:
             - '@swiftmailer.mailer.mandrill.transport.eventdispatcher'
+
+    swiftmailer.mailer.transport.mailjet:
+        class: Capco\AppBundle\Mailer\Transport\MailjetTransport
+        arguments:
+            - '@swiftmailer.mailer.mailjet.transport.eventdispatcher'
+
+    swiftmailer.mailer.transport.api:
+        class: Capco\AppBundle\Mailer\Transport\Transport
+        arguments:
+            - '@swiftmailer.mailer.transport.mandrill'
+            - '@swiftmailer.mailer.transport.mailjet'
+            - '@swiftmailer.mailer.api.transport.eventdispatcher'
 
     Capco\AppBundle\Font\FontProcessor:
         public: true

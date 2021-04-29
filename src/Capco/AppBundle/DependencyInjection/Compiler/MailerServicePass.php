@@ -10,22 +10,30 @@ class MailerServicePass implements CompilerPassInterface
     /**
      * You can modify the container here before it is dumped to PHP code.
      *
-     * @param ContainerBuilder $container
      *
      * @api
      */
     public function process(ContainerBuilder $container)
     {
-        $transportDefinition = $container->getDefinition('swiftmailer.mailer.transport.mandrill');
-        $transportDefinition->addMethodCall('setApiKey', [$container->getParameter('mandrill_api_key')]);
-        $transportDefinition->addMethodCall('setAsync', [false]);
+        $transportDefinition = $container->getDefinition('swiftmailer.mailer.transport.api');
+        $transportDefinition->addMethodCall('setMandrillApiKey', [
+            $container->getParameter('mandrill_api_key'),
+        ]);
+        $transportDefinition->addMethodCall('setMandrillAsync', [false]);
+        $transportDefinition->addMethodCall('setMailjetPublicKey', [
+            $container->getParameter('mailjet_public_key'),
+        ]);
+        $transportDefinition->addMethodCall('setMailjetPrivateKey', [
+            $container->getParameter('mailjet_private_key'),
+        ]);
 
-        $container->setAlias('mandrill', 'swiftmailer.mailer.transport.mandrill');
-
-        // Let's use mandrill if we are in production, and not on a custom smtp server
-        if ($container->getParameter('kernel.environment') === 'prod' && getenv('SYMFONY_PRODUCTION_SMTP_MAILER') != true) {
-            $container->setAlias('mailer', 'swiftmailer.mailer.mandrill')->setPublic(true);
-            $container->setAlias('Swift_Mailer', 'swiftmailer.mailer.mandrill')->setPublic(true);
+        // Let's use api mailer (mandrill or mailjet) if we are in production, and not on a custom smtp server
+        if (
+            'prod' === $container->getParameter('kernel.environment') &&
+            true != getenv('SYMFONY_PRODUCTION_SMTP_MAILER')
+        ) {
+            $container->setAlias('mailer', 'swiftmailer.mailer.api')->setPublic(true);
+            $container->setAlias('Swift_Mailer', 'swiftmailer.mailer.api')->setPublic(true);
         }
     }
 }
