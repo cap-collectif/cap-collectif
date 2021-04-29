@@ -508,5 +508,4 @@ InternalQuery:
             homePageProjectsSectionAdmin:
                 type: 'HomePageProjectsSectionAdmin'
                 description: 'Get HomePageProjectsSectionAdmin'
-                access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsSectionAdminResolver", [args])'
