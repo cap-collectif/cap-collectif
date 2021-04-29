@@ -3,7 +3,7 @@ doctrine_migrations:
     migrations_paths:
         'Application\Migrations': '%kernel.project_dir%/src/DoctrineMigrations'
 
-    connection: default
+    em: default
 
     storage:
         table_storage:
