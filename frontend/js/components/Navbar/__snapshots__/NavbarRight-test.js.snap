@@ -44,7 +44,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "componentId": "styles__DropdownToggle-sc-11246z7-5",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}&:hover,&:focus{color:",
+            ".caret{margin-left:5px;}",
+            [Function],
+            " &:hover,&:focus{color:",
             [Function],
             ";background-color:",
             [Function],
@@ -75,6 +77,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
     first={[Function]}
     groups={Array []}
     hide={[Function]}
+    isOpen={false}
     items={Array []}
     last={[Function]}
     loop={false}
@@ -985,7 +988,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "componentId": "styles__DropdownToggle-sc-11246z7-5",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}&:hover,&:focus{color:",
+            ".caret{margin-left:5px;}",
+            [Function],
+            " &:hover,&:focus{color:",
             [Function],
             ";background-color:",
             [Function],
@@ -1016,6 +1021,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
     first={[Function]}
     groups={Array []}
     hide={[Function]}
+    isOpen={false}
     items={Array []}
     last={[Function]}
     loop={false}

@@ -42,7 +42,11 @@ const TabsBarDropdown = ({ item }: Props): React.Node => {
 
   return (
     <React.Fragment key={id}>
-      <MenuButton {...menu} id={`tabsbar-item-${item.id}`} as={S.DropdownToggle}>
+      <MenuButton
+        {...menu}
+        id={`tabsbar-item-${item.id}`}
+        as={S.DropdownToggle}
+        isOpen={menu.visible}>
         {title}
 
         <span className="caret" />

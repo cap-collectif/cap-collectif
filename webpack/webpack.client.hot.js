@@ -16,7 +16,7 @@ const watchConf = merge(
     watchOptions: {
       poll: 1000,
       // we need to ignore this directory to prevent infinite build loop
-      ignored: [path.resolve('public/fonts'), path.resolve('assets')],
+      ignored: [path.resolve('public/fonts'), path.resolve('assets'), path.resolve('packages')],
     },
   },
   webpackClient,

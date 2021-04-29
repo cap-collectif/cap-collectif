@@ -107,7 +107,9 @@ export const Separator: StyledComponent<{}, {}, HTMLHRElement> = styled.hr`
   width: 100%;
 `;
 
-export const DropdownToggle: StyledComponent<{}, {}, typeof Flex> = styled(Flex).attrs({
+export const DropdownToggle: StyledComponent<{ isOpen: boolean }, {}, typeof Flex> = styled(
+  Flex,
+).attrs({
   direction: 'row',
   align: 'center',
   px: 4,
@@ -117,6 +119,13 @@ export const DropdownToggle: StyledComponent<{}, {}, typeof Flex> = styled(Flex)
   .caret {
     margin-left: 5px;
   }
+
+  ${props =>
+    props.isOpen &&
+    css`
+      color: ${props.theme.mainNavbarTextHover};
+      background-color: ${props.theme.mainNavbarBgActive};
+    `}
 
   &:hover,
   &:focus {

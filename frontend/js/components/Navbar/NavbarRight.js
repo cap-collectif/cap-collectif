@@ -59,6 +59,7 @@ export const NavbarRight = ({
           <MenuButton
             {...menu}
             as={S.DropdownToggle}
+            isOpen={menu.visible}
             aria-label={intl.formatMessage(
               { id: 'user.account.menu' },
               { username: user.username },

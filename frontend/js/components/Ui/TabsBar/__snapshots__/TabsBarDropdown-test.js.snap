@@ -29,7 +29,9 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
           "componentId": "styles__DropdownToggle-sc-11246z7-5",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}&:hover,&:focus{color:",
+            ".caret{margin-left:5px;}",
+            [Function],
+            " &:hover,&:focus{color:",
             [Function],
             ";background-color:",
             [Function],
@@ -61,6 +63,7 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
     groups={Array []}
     hide={[Function]}
     id="tabsbar-item-6"
+    isOpen={false}
     items={Array []}
     last={[Function]}
     loop={false}
@@ -316,7 +319,9 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           "componentId": "styles__DropdownToggle-sc-11246z7-5",
           "isStatic": false,
           "rules": Array [
-            ".caret{margin-left:5px;}&:hover,&:focus{color:",
+            ".caret{margin-left:5px;}",
+            [Function],
+            " &:hover,&:focus{color:",
             [Function],
             ";background-color:",
             [Function],
@@ -348,6 +353,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
     groups={Array []}
     hide={[Function]}
     id="tabsbar-item-6"
+    isOpen={false}
     items={Array []}
     last={[Function]}
     loop={false}
