@@ -45,7 +45,7 @@ type FormValues = {|
   +enabled: string,
   +nbObjects: string,
   +position: string,
-  +teaser: string,
+  +teaser: ?string,
   +title: string,
   +projects: $ReadOnlyArray<string>,
 |};
@@ -59,7 +59,7 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { maxProjectsDisp
       error.nbObjects = { id: 'n-maximum', values: { n: maxProjectsDisplay } };
       return reject(error);
     }
-    if (values.teaser.length > TEASER_MAX) {
+    if (values?.teaser && values.teaser.length > TEASER_MAX) {
       const error = {};
       error.teaser = { id: 'characters-maximum', values: { quantité: TEASER_MAX } };
       return reject(error);

@@ -129,6 +129,9 @@ function HomePageProjectsSectionAdminPageDisplayCustom({
     multiValueRemove: () => {
       return { display: 'none' };
     },
+    clearIndicator: () => {
+      return { display: 'none' };
+    },
   };
 
   useEffect(() => {
