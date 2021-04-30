@@ -58,13 +58,13 @@ def locallinux():
 
 def ssh_into(service, user='capco'):
     if Config.docker_machine:
-        run('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+        os.system('eval "$(docker-machine env capco)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
     elif Config.dinghy:
-        run('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+        os.system('eval "$(docker-machine env dinghy)" && docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
     elif Config.lxc:
-        print("Disabled in lxc environment.")
+        os.system("Disabled in lxc environment.")
     else:
-        run('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
+        os.system('docker exec -t -i -u %s %s_%s_1 /bin/bash' % (user, Config.project_name, service))
 
 
 def command(command_name, service, directory=".", user="capco", interactive=False):
