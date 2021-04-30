@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsPageViews:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsPageViews
+        description: Represent the page views for a platform

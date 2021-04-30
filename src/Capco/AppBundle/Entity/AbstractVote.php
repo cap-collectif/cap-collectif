@@ -183,7 +183,7 @@ abstract class AbstractVote implements
 
     public static function getElasticsearchPriority(): int
     {
-        return 6;
+        return 7;
     }
 
     public static function getElasticsearchTypeName(): string

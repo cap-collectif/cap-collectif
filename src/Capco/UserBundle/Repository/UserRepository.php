@@ -44,6 +44,19 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function hydrateFromIdsOrdered(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->addSelect('media', 'userType')
+            ->leftJoin('u.media', 'media')
+            ->leftJoin('u.userType', 'userType')
+            ->addOrderBy("FIELD(u.id, :ids)")
+            ->where('u.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findAuthorsByProjectId(string $projectId)
     {
         $qb = $this->createQueryBuilder('u')

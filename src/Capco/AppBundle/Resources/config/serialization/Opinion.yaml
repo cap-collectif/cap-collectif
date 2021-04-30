@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\Opinion:
                     ElasticsearchVoteNestedOpinion,
                     ElasticsearchArgumentNestedOpinion,
                     ElasticsearchSourceNestedOpinion,
+                    ElasticsearchFollowerNestedOpinion,
                 ]
         title:
             groups: [Opinions, OpinionVersions, OpinionLinkPreviews, ElasticsearchOpinion]

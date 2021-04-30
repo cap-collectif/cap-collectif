@@ -39,7 +39,13 @@ class OpinionVersionNormalizer implements
 
     public function normalize($object, $format = null, array $context = [])
     {
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
+
+        if (\in_array('ElasticsearchFollowerNestedOpinion', $groups, true)) {
+            return $data;
+        }
 
         // We calculate the votes counts directly with ES instead of the symfony command (capco:compute:counters)
         $voteCountOk = 0;

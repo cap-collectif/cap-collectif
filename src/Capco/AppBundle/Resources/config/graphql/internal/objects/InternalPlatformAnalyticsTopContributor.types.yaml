@@ -1,0 +1,17 @@
+InternalPlatformAnalyticsTopContributor:
+    type: object
+    config:
+        name: PlatformAnalyticsTopContributor
+        description: Represent a top contributor with it's contributions for a platform
+        fields:
+            user:
+                type: "InternalUser!"
+                description: "The contributor."
+            contributions:
+                type: "[InternalPlatformAnalyticsContributorContribution!]!"
+                resolve: '@=value.getContributions(args["first"])'
+                description: "The associated contributions of the contributor."
+                args:
+                    first:
+                        type: 'Int'
+                        defaultValue: 2

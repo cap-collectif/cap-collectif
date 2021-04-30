@@ -118,3 +118,10 @@ services:
         arguments:
             $cachePrefix: UserArgumentsDataLoader
             $cacheTtl: 120
+
+    Capco\AppBundle\GraphQL\DataLoader\Query\QueryAnalyticsDataLoader:
+        public: true
+        arguments:
+            $cachePrefix: QueryAnalyticsDataLoader
+            $cacheTtl: 600
+            $enableCache: true

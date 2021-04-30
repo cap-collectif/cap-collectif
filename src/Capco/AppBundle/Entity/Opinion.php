@@ -534,7 +534,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 11;
+        return 12;
     }
 
     public static function getElasticsearchTypeName(): string
@@ -551,6 +551,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
             'ElasticsearchOpinionNestedConsultation',
             'ElasticsearchOpinionNestedStep',
             'ElasticsearchOpinionNestedOpinionType',
+            'ElasticsearchFollowerNestedOpinion',
         ];
     }
 }

@@ -185,6 +185,14 @@ services:
         arguments:
             $apiKey: '%tipsmeee_api_key%'
 
+    Capco\AppBundle\Client\CloudflareElasticClient:
+        autowire: true
+        arguments:
+            $hostname: '%router.request_context.host%'
+            $username: '%cloudflare_elastic_username%'
+            $password: '%cloudflare_elastic_password%'
+            $clientId: '%cloudflare_elastic_id%'
+
     Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface: '@security.authentication.trust_resolver'
 
     Sonata\AdminBundle\Templating\TemplateRegistry:

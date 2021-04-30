@@ -79,6 +79,9 @@ parameters:
     slack_jpec_ghost: '***REMOVED***'
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
     panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
+    cloudflare_elastic_username: '%env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME)%'
+    cloudflare_elastic_password: '%env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD)%'
+    cloudflare_elastic_id: '%env(SYMFONY_CLOUDFLARE_ELASTIC_ID)%'
     env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -146,6 +149,10 @@ parameters:
     env(SLACK_JPEC_GHOST): ***REMOVED***
     env(SYMFONY_PANTHER_URL): '***REMOVED***'
     env(SYMFONY_PANTHER_TOKEN): '***REMOVED***'
+    # CLOUDFLARE ELASTIC CLOUD
+    env(SYMFONY_CLOUDFLARE_ELASTIC_ID): '***REMOVED***'
+    env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME): 'elastic'
+    env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD): '***REMOVED***'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead

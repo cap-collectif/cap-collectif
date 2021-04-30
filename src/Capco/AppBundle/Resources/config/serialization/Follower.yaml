@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\Follower:
+    attributes:
+        id:
+            groups: [ElasticsearchFollower]
+        followedAt:
+            groups: [ElasticsearchFollower]
+        user:
+            groups: [ElasticsearchFollowerNestedAuthor]
+        proposal:
+            groups: [ElasticsearchNestedProposal]
+        opinion:
+            groups: [ElasticsearchFollowerNestedOpinion]
+        opinionVersion:
+            groups: [ElasticsearchFollowerNestedVersion]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchFollower]

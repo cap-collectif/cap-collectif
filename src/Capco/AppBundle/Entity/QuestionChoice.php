@@ -145,6 +145,6 @@ class QuestionChoice implements IndexableInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 16;
+        return 17;
     }
 }

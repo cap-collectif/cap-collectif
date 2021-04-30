@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsVotes:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsVotes
+        description: Represent the votes analytics for a platform

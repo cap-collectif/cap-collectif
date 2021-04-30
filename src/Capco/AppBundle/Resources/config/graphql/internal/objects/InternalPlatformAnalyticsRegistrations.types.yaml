@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsRegistrations:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsRegistrations
+        description: Represent the registrations analytics for a platform

@@ -1,0 +1,9 @@
+InternalAggregatable:
+    type: object
+    decorator: true
+    config:
+        fields:
+            totalCount:
+                type: 'Int!'
+            values:
+                type: '[InternalAggregatedResult!]!'

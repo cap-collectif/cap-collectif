@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsVisitors:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsVisitors
+        description: Represent the visitors analytics for a platform

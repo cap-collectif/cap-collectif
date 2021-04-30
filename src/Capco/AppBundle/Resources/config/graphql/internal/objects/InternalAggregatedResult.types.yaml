@@ -1,0 +1,12 @@
+InternalAggregatedResult:
+    type: object
+    config:
+        name: AggregatedResult
+        description: Represent an aggregrated result that should be displayed in a chart
+        fields:
+            key:
+                type: 'String!'
+                description: 'A unique key that distinguish one result from another'
+            totalCount:
+                type: 'Int!'
+                description: 'How many objects are associated to the key'

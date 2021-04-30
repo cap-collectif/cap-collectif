@@ -1,0 +1,47 @@
+InternalPlatformAnalytics:
+    type: object
+    config:
+        name: PlatformAnalytics
+        description: Represent a set of analytics for a platform
+        fields:
+            registrations:
+                type: 'InternalPlatformAnalyticsRegistrations!'
+                description: 'Get the registrations analytics of the platform.'
+            votes:
+                type: 'InternalPlatformAnalyticsVotes!'
+                description: 'Get the votes analytics of the platform.'
+            comments:
+                type: 'InternalPlatformAnalyticsComments!'
+                description: 'Get the comments analytics of the platform.'
+            contributions:
+                type: 'InternalPlatformAnalyticsContributions!'
+                description: 'Get the contributions analytics of the platform.'
+            followers:
+                type: 'InternalPlatformAnalyticsFollowers!'
+                description: 'Get the followers analytics of the platform.'
+            visitors:
+                type: 'InternalPlatformAnalyticsVisitors!'
+                description: 'Get the visitors analytics of the platform.'
+            pageViews:
+                type: 'InternalPlatformAnalyticsPageViews!'
+                description: 'Get the page views analytics of the platform.'
+            trafficSources:
+                type: 'InternalPlatformAnalyticsTrafficSources!'
+                description: 'Get the traffic sources analytics of the platform.'
+            mostVisitedPages:
+                type: 'InternalPlatformAnalyticsMostVisitedPages!'
+                description: 'Get the most visited pages analytics of the platform.'
+            contributors:
+                type: 'InternalPlatformAnalyticsContributors!'
+                description: 'Get the contributors analytics of the platform.'
+            topContributors:
+                resolve: '@=value["topContributors"].getContributors(args["first"])'
+                description: 'Get the top contributors analytics of the platform.'
+                type: '[InternalPlatformAnalyticsTopContributor!]!'
+                args:
+                    first:
+                        type: 'Int'
+                        defaultValue: 4
+            mostUsedProposalCategories:
+                type: 'InternalPlatformAnalyticsMostUsedProposalCategories!'
+                description: 'Get the most used proposal categories analytics of the platform.'

@@ -1,59 +1,60 @@
 Capco\AppBundle\Entity\OpinionVersion:
-  attributes:
-    id:
-      type: string
-      groups:
-        [
-          ElasticsearchVersion,
-          ElasticsearchNestedVersion,
-          ElasticsearchArgumentNestedVersion,
-          ElasticsearchSourceNestedVersion,
-          ElasticsearchVoteNestedVersion
-        ]
-    author:
-      groups: [ElasticsearchVersionNestedAuthor]
-    title:
-      groups: [ElasticsearchVersion]
-    body:
-      groups: [Elasticsearch]
-    createdAt:
-      groups: [ElasticsearchVersion]
-    publishedAt:
-      groups: [ElasticsearchVersion]
-    published:
-      groups:
-        [
-          ElasticsearchVersion,
-          ElasticsearchNestedVersion,
-          ElasticsearchArgumentNestedVersion,
-          ElasticsearchSourceNestedVersion,
-          ElasticsearchVoteNestedVersion
-        ]
-    trashedAt:
-      groups:
-        [
-          ElasticsearchVersion,
-          ElasticsearchNestedVersion,
-          ElasticsearchArgumentNestedVersion,
-          ElasticsearchSourceNestedVersion,
-          ElasticsearchVoteNestedVersion
-        ]
-    getStep:
-      type: object
-      serialized_name: step
-      groups: [ElasticsearchVersionNestedStep]
-    getProject:
-      type: object
-      serialized_name: project
-      groups: [ElasticsearchVersionNestedProject]
-    getConsultation:
-      type: object
-      serialized_name: consultation
-      groups: [ElasticsearchVersionNestedConsultation]
-    getParent:
-      type: object
-      serialized_name: opinion
-      groups: [ElasticsearchVersion]
-    elasticsearchTypeName:
-      serialized_name: objectType
-      groups: [ElasticsearchVersion]
+    attributes:
+        id:
+            type: string
+            groups:
+                [
+                    ElasticsearchVersion,
+                    ElasticsearchNestedVersion,
+                    ElasticsearchArgumentNestedVersion,
+                    ElasticsearchSourceNestedVersion,
+                    ElasticsearchVoteNestedVersion,
+                    ElasticsearchFollowerNestedVersion,
+                ]
+        author:
+            groups: [ElasticsearchVersionNestedAuthor]
+        title:
+            groups: [ElasticsearchVersion]
+        body:
+            groups: [Elasticsearch]
+        createdAt:
+            groups: [ElasticsearchVersion]
+        publishedAt:
+            groups: [ElasticsearchVersion]
+        published:
+            groups:
+                [
+                    ElasticsearchVersion,
+                    ElasticsearchNestedVersion,
+                    ElasticsearchArgumentNestedVersion,
+                    ElasticsearchSourceNestedVersion,
+                    ElasticsearchVoteNestedVersion,
+                ]
+        trashedAt:
+            groups:
+                [
+                    ElasticsearchVersion,
+                    ElasticsearchNestedVersion,
+                    ElasticsearchArgumentNestedVersion,
+                    ElasticsearchSourceNestedVersion,
+                    ElasticsearchVoteNestedVersion,
+                ]
+        getStep:
+            type: object
+            serialized_name: step
+            groups: [ElasticsearchVersionNestedStep]
+        getProject:
+            type: object
+            serialized_name: project
+            groups: [ElasticsearchVersionNestedProject]
+        getConsultation:
+            type: object
+            serialized_name: consultation
+            groups: [ElasticsearchVersionNestedConsultation]
+        getParent:
+            type: object
+            serialized_name: opinion
+            groups: [ElasticsearchVersion]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchVersion]

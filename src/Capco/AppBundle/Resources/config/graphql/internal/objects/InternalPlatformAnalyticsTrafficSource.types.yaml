@@ -1,0 +1,12 @@
+InternalPlatformAnalyticsTrafficSource:
+    type: object
+    config:
+        name: PlatformAnalyticsTrafficSource
+        description: Represent a traffic source
+        fields:
+            type:
+                type: "InternalPlatformAnalyticsTrafficSourceType!"
+                description: "The related traffic source type."
+            totalCount:
+                type: "Int!"
+                description: "The total count of this traffic source."

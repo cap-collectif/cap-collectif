@@ -648,6 +648,15 @@ type AddVersionPayload {
   clientMutationId: String
 }
 
+"""Represent an aggregrated result that should be displayed in a chart"""
+type AggregatedResult {
+  """A unique key that distinguish one result from another"""
+  key: String!
+
+  """How many objects are associated to the key"""
+  totalCount: Int!
+}
+
 input AnalyseProposalAnalysisInput {
   """The id of the proposal to analyse."""
   proposalId: ID!
@@ -7080,6 +7089,198 @@ type PhoneRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+"""Represent a set of analytics for a platform"""
+type PlatformAnalytics {
+  """Get the registrations analytics of the platform."""
+  registrations: PlatformAnalyticsRegistrations!
+
+  """Get the votes analytics of the platform."""
+  votes: PlatformAnalyticsVotes!
+
+  """Get the comments analytics of the platform."""
+  comments: PlatformAnalyticsComments!
+
+  """Get the contributions analytics of the platform."""
+  contributions: PlatformAnalyticsContributions!
+
+  """Get the followers analytics of the platform."""
+  followers: PlatformAnalyticsFollowers!
+
+  """Get the visitors analytics of the platform."""
+  visitors: PlatformAnalyticsVisitors!
+
+  """Get the page views analytics of the platform."""
+  pageViews: PlatformAnalyticsPageViews!
+
+  """Get the traffic sources analytics of the platform."""
+  trafficSources: PlatformAnalyticsTrafficSources!
+
+  """Get the most visited pages analytics of the platform."""
+  mostVisitedPages: PlatformAnalyticsMostVisitedPages!
+
+  """Get the contributors analytics of the platform."""
+  contributors: PlatformAnalyticsContributors!
+
+  """Get the top contributors analytics of the platform."""
+  topContributors(first: Int = 4): [PlatformAnalyticsTopContributor!]!
+
+  """Get the most used proposal categories analytics of the platform."""
+  mostUsedProposalCategories: PlatformAnalyticsMostUsedProposalCategories!
+}
+
+"""Represent the comments analytics for a platform"""
+type PlatformAnalyticsComments {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent the contributions analytics for a platform"""
+type PlatformAnalyticsContributions {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent a contribution made by a contributor"""
+type PlatformAnalyticsContributorContribution {
+  """The related contribution type"""
+  type: PlatformAnalyticsContributorContributionType!
+
+  """The total count of the contribution type."""
+  totalCount: Int!
+}
+
+"""Represent a type of a contributor contribution"""
+enum PlatformAnalyticsContributorContributionType {
+  """The contribution is a reply"""
+  REPLY
+
+  """The contribution is a proposal"""
+  PROPOSAL
+
+  """The contribution is a comment"""
+  COMMENT
+
+  """The contribution is an opinion"""
+  OPINION
+
+  """The contribution is an opinion version"""
+  OPINION_VERSION
+
+  """The contribution is an argument"""
+  ARGUMENT
+
+  """The contribution is a debate argument"""
+  DEBATE_ARGUMENT
+
+  """The contribution is a source"""
+  SOURCE
+}
+
+"""Represent the contributors for a platform"""
+type PlatformAnalyticsContributors {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent the followers analytics for a platform"""
+type PlatformAnalyticsFollowers {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent the most used proposal categories for a platform"""
+type PlatformAnalyticsMostUsedProposalCategories {
+  """The total count of the most used proposal categories."""
+  totalCount: Int!
+
+  """The most used proposal categories with their total count."""
+  values: [PlatformAnalyticsMostUsedProposalCategory!]!
+}
+
+"""Represent a proposal category and how much it has been used"""
+type PlatformAnalyticsMostUsedProposalCategory {
+  """The related category."""
+  category: ProposalCategory!
+
+  """How much this category has been used."""
+  totalCount: Int!
+}
+
+"""Represent the most visited pages for a platform"""
+type PlatformAnalyticsMostVisitedPages {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent the page views for a platform"""
+type PlatformAnalyticsPageViews {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent the registrations analytics for a platform"""
+type PlatformAnalyticsRegistrations {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent a top contributor with it's contributions for a platform"""
+type PlatformAnalyticsTopContributor {
+  """The contributor."""
+  user: User!
+
+  """The associated contributions of the contributor."""
+  contributions(first: Int = 2): [PlatformAnalyticsContributorContribution!]!
+}
+
+"""Represent a traffic source"""
+type PlatformAnalyticsTrafficSource {
+  """The related traffic source type."""
+  type: PlatformAnalyticsTrafficSourceType!
+
+  """The total count of this traffic source."""
+  totalCount: Int!
+}
+
+"""Represent a type of a traffic source"""
+enum PlatformAnalyticsTrafficSourceType {
+  """The traffic source came from a search engine"""
+  SEARCH_ENGINE
+
+  """The traffic source came from a direct link"""
+  DIRECT
+
+  """The traffic source came from an external link"""
+  EXTERNAL_LINK
+
+  """The traffic source came from a social network"""
+  SOCIAL_NETWORK
+
+  """The traffic source came from an email"""
+  EMAIL
+}
+
+"""Represent the different traffic sources for a platform"""
+type PlatformAnalyticsTrafficSources {
+  """The total count of all the traffic sources combined."""
+  totalCount: Int!
+
+  """The available traffic sources with their total count."""
+  sources: [PlatformAnalyticsTrafficSource!]!
+}
+
+"""Represent the visitors analytics for a platform"""
+type PlatformAnalyticsVisitors {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
+"""Represent the votes analytics for a platform"""
+type PlatformAnalyticsVotes {
+  totalCount: Int!
+  values: [AggregatedResult!]!
+}
+
 """A commentable"""
 type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocatable & Commentable {
   """The ID of an object"""
@@ -9881,6 +10082,14 @@ type Query {
 
   """Get HomePageProjectsSectionAdmin"""
   homePageProjectsSectionAdmin: HomePageProjectsSectionAdmin
+
+  """Return the platform analytics"""
+  analytics(filter: QueryAnalyticsFilter!): PlatformAnalytics!
+}
+
+input QueryAnalyticsFilter {
+  startAt: DateTime!
+  endAt: DateTime!
 }
 
 """Fetches an object given its ID"""

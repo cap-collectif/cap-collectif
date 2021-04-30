@@ -1,0 +1,9 @@
+InternalQueryAnalyticsFilter:
+    type: input-object
+    config:
+        name: QueryAnalyticsFilter
+        fields:
+            startAt:
+                type: DateTime!
+            endAt:
+                type: DateTime!

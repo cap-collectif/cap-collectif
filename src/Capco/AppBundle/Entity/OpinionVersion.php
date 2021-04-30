@@ -323,7 +323,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 7;
+        return 8;
     }
 
     public static function getElasticsearchTypeName(): string
@@ -340,6 +340,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
             'ElasticsearchVersionNestedConsultation',
             'ElasticsearchVersionNestedStep',
             'ElasticsearchVoteNestedVersion',
+            'ElasticsearchFollowerNestedVersion',
         ];
     }
 }

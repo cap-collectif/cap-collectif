@@ -342,6 +342,8 @@ mappings:
         ipAddress:
             type: ip
 
+        followedAt: { type: date }
+
         #
         # This allow ous to monitore the usage of our API.
         #

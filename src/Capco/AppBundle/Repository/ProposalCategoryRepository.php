@@ -6,6 +6,17 @@ use Doctrine\ORM\EntityRepository;
 
 class ProposalCategoryRepository extends EntityRepository
 {
+    public function hydrateFromIdsOrdered(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('pc');
+        $qb
+            ->addOrderBy("FIELD(pc.id, :ids)")
+            ->where('pc.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getCategoriesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
         $qb = $this->createQueryBuilder('c')

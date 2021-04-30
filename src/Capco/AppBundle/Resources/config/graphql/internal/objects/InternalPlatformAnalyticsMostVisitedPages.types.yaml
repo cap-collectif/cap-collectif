@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsMostVisitedPages:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsMostVisitedPages
+        description: Represent the most visited pages for a platform

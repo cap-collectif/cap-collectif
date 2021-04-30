@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsContributors:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsContributors
+        description: Represent the contributors for a platform

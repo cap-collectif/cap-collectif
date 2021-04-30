@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FollowerRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Follower
+class Follower implements IndexableInterface
 {
     use UuidTrait;
 
@@ -157,7 +158,7 @@ class Follower
         return $this;
     }
 
-    public function getOpinionVersion(): OpinionVersion
+    public function getOpinionVersion(): ?OpinionVersion
     {
         return $this->opinionVersion;
     }
@@ -175,5 +176,31 @@ class Follower
         }
 
         return $this;
+    }
+
+    public function isIndexable(): bool
+    {
+        return true;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'follower';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return [
+            'ElasticsearchFollower',
+            'ElasticsearchFollowerNestedAuthor',
+            'ElasticsearchFollowerNestedProposal',
+            'ElasticsearchFollowerNestedOpinion',
+            'ElasticsearchFollowerNestedVersion',
+        ];
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 5;
     }
 }

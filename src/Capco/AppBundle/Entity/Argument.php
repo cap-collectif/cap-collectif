@@ -337,7 +337,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
 
     public static function getElasticsearchPriority(): int
     {
-        return 9;
+        return 10;
     }
 
     public static function getElasticsearchTypeName(): string

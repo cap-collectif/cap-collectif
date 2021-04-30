@@ -25,6 +25,7 @@ class UserNormalizer implements
         'ElasticsearchSourceNestedAuthor',
         'ElasticsearchOpinionNestedAuthor',
         'ElasticsearchVersionNestedAuthor',
+        'ElasticsearchFollowerNestedAuthor',
         'ElasticsearchReplyNestedAuthor',
         'ElasticsearchVoteNestedAuthor',
         'ElasticsearchProposalNestedAuthor',

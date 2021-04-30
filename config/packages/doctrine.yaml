@@ -31,6 +31,8 @@ doctrine:
                 DATE: Capco\AppBundle\DQL\DateFunction
             numeric_functions:
                 RAND: Capco\AppBundle\DQL\RandFunction
+            string_functions:
+                FIELD: Capco\AppBundle\DQL\FieldFunction
         mappings:
             tree:
                 type: annotation

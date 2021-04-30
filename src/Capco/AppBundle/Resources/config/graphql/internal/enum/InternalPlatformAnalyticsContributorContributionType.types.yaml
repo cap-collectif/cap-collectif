@@ -1,0 +1,30 @@
+InternalPlatformAnalyticsContributorContributionType:
+    type: enum
+    config:
+        name: PlatformAnalyticsContributorContributionType
+        description: 'Represent a type of a contributor contribution'
+        values:
+            REPLY:
+                value: "reply"
+                description: "The contribution is a reply"
+            PROPOSAL:
+                value: "proposal"
+                description: "The contribution is a proposal"
+            COMMENT:
+                value: "comment"
+                description: "The contribution is a comment"
+            OPINION:
+                value: "opinion"
+                description: "The contribution is an opinion"
+            OPINION_VERSION:
+                value: "opinionVersion"
+                description: "The contribution is an opinion version"
+            ARGUMENT:
+                value: "argument"
+                description: "The contribution is an argument"
+            DEBATE_ARGUMENT:
+                value: "debateArgument"
+                description: "The contribution is a debate argument"
+            SOURCE:
+                value: "source"
+                description: "The contribution is a source"

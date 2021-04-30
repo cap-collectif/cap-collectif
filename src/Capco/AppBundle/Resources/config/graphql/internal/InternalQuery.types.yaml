@@ -509,3 +509,11 @@ InternalQuery:
                 type: 'HomePageProjectsSectionAdmin'
                 description: 'Get HomePageProjectsSectionAdmin'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsSectionAdminResolver", [args])'
+            analytics:
+                type: 'InternalPlatformAnalytics!'
+                description: 'Return the platform analytics'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\AnalyticsResolver", [args])'
+                args:
+                    filter:
+                        type: 'InternalQueryAnalyticsFilter!'

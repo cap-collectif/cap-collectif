@@ -185,7 +185,7 @@ abstract class AbstractResponse implements IndexableInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 15;
+        return 16;
     }
 
     public function isIndexable(): bool

@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsFollowers:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsFollowers
+        description: Represent the followers analytics for a platform

@@ -1,0 +1,12 @@
+InternalPlatformAnalyticsContributorContribution:
+    type: object
+    config:
+        name: PlatformAnalyticsContributorContribution
+        description: Represent a contribution made by a contributor
+        fields:
+            type:
+                type: "InternalPlatformAnalyticsContributorContributionType!"
+                description: "The related contribution type"
+            totalCount:
+                type: "Int!"
+                description: "The total count of the contribution type."

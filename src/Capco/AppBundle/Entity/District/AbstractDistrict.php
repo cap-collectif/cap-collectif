@@ -156,7 +156,7 @@ abstract class AbstractDistrict implements
 
     public static function getElasticsearchPriority(): int
     {
-        return 5;
+        return 6;
     }
 
     public static function getElasticsearchTypeName(): string

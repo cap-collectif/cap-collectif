@@ -62,7 +62,8 @@ class OpinionNormalizer implements
         if (
             \in_array('ElasticsearchArgumentNestedOpinion', $groups, true) ||
             \in_array('ElasticsearchVoteNestedOpinion', $groups, true) ||
-            \in_array('ElasticsearchSourceNestedOpinion', $groups, true)
+            \in_array('ElasticsearchSourceNestedOpinion', $groups, true) ||
+            \in_array('ElasticsearchFollowerNestedOpinion', $groups, true)
         ) {
             return $data;
         }
