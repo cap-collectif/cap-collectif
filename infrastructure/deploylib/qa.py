@@ -159,6 +159,7 @@ def behat(fast_failure='true', profile='false', suite='false', tags='false', tim
         commandToExecute = ('php ' + php_option + ' -d memory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[
             timer != 'false'] + ' -p ' + job + ('', '  --suite=' + suite)[suite != 'false'] + ('', '  --tags=' + tags)[
             tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
+        command(commandToExecute, 'application', Config.www_app, 'root')
 
 
 def view(firefox='false'):
