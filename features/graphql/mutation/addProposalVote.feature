@@ -205,7 +205,7 @@ Scenario: Logged in API client wants to vote for a proposal anonymously
             id
           }
           author {
-            id
+            _id
           }
         }
       }
@@ -229,7 +229,9 @@ Scenario: Logged in API client wants to vote for a proposal anonymously
           "proposal": {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
           },
-          "author": null
+          "author": {
+            "_id": "user5"
+          }
         }
       }
     }
