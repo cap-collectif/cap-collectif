@@ -36,7 +36,9 @@ const prodConf = {
           },
         },
         extractComments: false,
-        parallel: 8,
+        // Explicitly set the number of CPUs to use.
+        // https://webpack.js.org/plugins/terser-webpack-plugin/#parallel
+        parallel: 2,
       }),
     ],
 
