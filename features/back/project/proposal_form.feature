@@ -113,7 +113,7 @@ Scenario: Logged in admin wants to duplicate a proposal form
 Scenario: Logged in admin wants to delete the first question on unattached form
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalform13"
-  And I click on a proposal form button "first question delete"
+  And I click on button "#js-btn-trash-0"
   And I click on a proposal form button "delete modale button"
   Then I save current admin proposal form "content"
   And I wait ".alert__form_succeeded-message" to appear on current page

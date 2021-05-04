@@ -79,7 +79,10 @@ Scenario: Logged in user wants to vote for a proposal anonymously
   And I wait "#global-alert-box" to appear on current page
   And I should see "vote.add_success" in the "#global-alert-box" element
   And the proposal should have 2 votes
-  And I should see my anonymous vote in the proposal votes list
+  And I am logged in as user_not_confirmed
+  And I go to a proposal
+  And the proposal should have 2 votes
+  And I should not see my vote in the proposal votes list
 
 @security @votes_from_proposal
 Scenario: Logged in user wants to vote when he has not enough credits left

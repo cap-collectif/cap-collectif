@@ -73,6 +73,7 @@ exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
         </Button>
         <ButtonQuickAction
           icon="TRASH"
+          id="js-btn-trash-0"
           label={
             <FormattedMessage
               id="global.delete"
@@ -161,6 +162,7 @@ exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
         </Button>
         <ButtonQuickAction
           icon="TRASH"
+          id="js-btn-trash-0"
           label={
             <FormattedMessage
               id="global.delete"
@@ -249,6 +251,7 @@ exports[`<QuestionAdmin /> render correctly a section 1`] = `
         </Button>
         <ButtonQuickAction
           icon="TRASH"
+          id="js-btn-trash-0"
           label={
             <FormattedMessage
               id="global.delete"
@@ -337,6 +340,7 @@ exports[`<QuestionAdmin /> render correctly a text question 1`] = `
         </Button>
         <ButtonQuickAction
           icon="TRASH"
+          id="js-btn-trash-0"
           label={
             <FormattedMessage
               id="global.delete"

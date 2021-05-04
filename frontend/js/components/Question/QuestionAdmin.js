@@ -213,6 +213,7 @@ export const QuestionAdmin = ({
               <Popover placement="left" trigger={['click']} useArrow>
                 <Popover.Trigger>
                   <ButtonQuickAction
+                    id={`js-btn-trash-${index}`}
                     icon={DS_ICON_NAME.TRASH}
                     label={<FormattedMessage id="global.delete" />}
                     variantColor="danger"
@@ -279,6 +280,7 @@ export const QuestionAdmin = ({
               </Popover>
             ) : (
               <ButtonQuickAction
+                id={`js-btn-trash-${index}`}
                 icon={DS_ICON_NAME.TRASH}
                 label={<FormattedMessage id="global.delete" />}
                 variantColor="danger"
