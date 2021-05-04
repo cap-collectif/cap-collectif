@@ -60,6 +60,7 @@ export const NavbarRight = ({
             {...menu}
             as={S.DropdownToggle}
             isOpen={menu.visible}
+            id="navbar-username"
             aria-label={intl.formatMessage(
               { id: 'user.account.menu' },
               { username: user.username },
@@ -79,8 +80,7 @@ export const NavbarRight = ({
             aria-label={intl.formatMessage(
               { id: 'user.account.menu' },
               { username: user.username },
-            )}
-            id="navbar-username">
+            )}>
             {user.isAdmin && (
               <MenuItem {...menu} href="/admin/" as={S.TabsLink}>
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
