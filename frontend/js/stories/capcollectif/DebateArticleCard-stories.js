@@ -22,9 +22,9 @@ storiesOf('Cap Collectif/ DebateArticleCard', module)
     return (
       <DebateArticleCard maxWidth={365} illustration="https://picsum.photos/536/354">
         <DebateArticleCard.Title>
-          Que pèse vraiment le marché du cannabis en France ? Non vraiment répondez moi j'en sais
+          {`Que pèse vraiment le marché du cannabis en France ? Non vraiment répondez moi j'en sais
           rien, à part que SnK c'est incroyable et que Mikasa es tu casa. Avouez j'ai dead ça chakal
-          en catchana baby tu dead ça.
+          en catchana baby tu dead ça.`}
         </DebateArticleCard.Title>
       </DebateArticleCard>
     );

@@ -24,7 +24,7 @@ export const HeadingSize: {
   Xs: 'xs',
 };
 
-const sizes = {
+export const headingStyles = {
   h1: {
     fontSize: 7,
     fontWeight: FontWeight.Semibold,
@@ -65,9 +65,9 @@ const Heading = React.forwardRef<Props, HTMLElement>(
         ref={ref}
         as={as}
         fontFamily="heading"
-        fontSize={sizes[as] ? sizes[as].fontSize : 1}
-        fontWeight={sizes[as] ? sizes[as].fontWeight : FontWeight.Normal}
-        lineHeight={sizes[as] ? sizes[as].lineHeight : LineHeight.Base}
+        fontSize={headingStyles[as] ? headingStyles[as].fontSize : 1}
+        fontWeight={headingStyles[as] ? headingStyles[as].fontWeight : FontWeight.Normal}
+        lineHeight={headingStyles[as] ? headingStyles[as].lineHeight : LineHeight.Base}
         m={0}
         {...(truncate && { title: innerText })}
         {...props}>

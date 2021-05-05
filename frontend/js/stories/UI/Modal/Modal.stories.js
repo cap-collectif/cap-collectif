@@ -42,12 +42,12 @@ const Template = (args: any) => (
           <b>Genshin Impact</b> est un jeu vidéo de type <em>action-RPG</em> développé par miHoYo
         </Text>
         <Text mt={2}>
-          Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
-          vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
-          un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
-          dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
-          l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
-          rencontre lors de son périple, chacun ayant une personnalité unique et des capacités
+          {`Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
+            vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
+            un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
+            dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
+            l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
+            rencontre lors de son périple, chacun ayant une personnalité unique et des capacités`}
         </Text>
       </Modal.Body>
       <Modal.Footer spacing={2}>
@@ -111,54 +111,28 @@ const LongTemplate = (args: any) => (
               à Genshin Impact.
             </Text>
             <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
+              {`Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
+            vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
+            un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
+            dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
+            l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
+            rencontre lors de son périple, chacun ayant une personnalité unique et des capacités`}
             </Text>
             <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
+              {`Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
+            vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
+            un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
+            dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
+            l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
+            rencontre lors de son périple, chacun ayant une personnalité unique et des capacités`}
             </Text>
             <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
-            </Text>
-            <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
-            </Text>
-            <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
+              {`Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
+            vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
+            un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
+            dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
+            l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
+            rencontre lors de son périple, chacun ayant une personnalité unique et des capacités`}
             </Text>
           </Modal.Body>
           <Modal.Footer spacing={2}>

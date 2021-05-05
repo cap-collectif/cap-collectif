@@ -8,6 +8,7 @@ import Heading from '~ui/Primitives/Heading';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import ConfirmModal from '~ds/Modal/ConfirmModal';
 import { wait } from '~/utils/wait';
+import { toast } from '~ds/Toast';
 
 export default {
   title: 'Design system/ConfirmModal',
@@ -34,24 +35,28 @@ const Template = () => (
               miHoYo
             </Text>
             <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
+              {`Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
+            vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
+            un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
+            dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
+            l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
+            rencontre lors de son périple, chacun ayant une personnalité unique et des capacités`}
             </Text>
           </Modal.Body>
           <Modal.Footer>
             <ConfirmModal
               onConfirm={() => {
-                console.log('onConfirm');
+                toast({
+                  variant: 'success',
+                  content: 'onConfirm',
+                });
                 hide();
               }}
               onCancel={() => {
-                console.log('onCancel');
+                toast({
+                  variant: 'success',
+                  content: 'onCancel',
+                });
               }}
               options={{
                 cancelButton: {
@@ -110,21 +115,22 @@ const PromiseTemplate = () => (
               miHoYo
             </Text>
             <Text mt={2}>
-              Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se
-              sont vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de
-              contrôler un des sept éléments. Le joueur commence son aventure en tant que Voyageur
-              ou Voyageuse dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au
-              cours de l'aventure, le joueur a la possibilité de contrôler plusieurs autres
-              personnages qu'il rencontre lors de son périple, chacun ayant une personnalité unique
-              et des capacités spéciales, alors qu'ils entreprennent des quêtes pour comprendre la
-              vérité sur les dieux primordiaux de ce monde
+              {`Dans un monde fantastique nommé Teyvat, certains individus choisis par les dieux se sont
+            vu attribuer un Œil Divin — une gemme qui confère à son porteur la capacité de contrôler
+            un des sept éléments. Le joueur commence son aventure en tant que Voyageur ou Voyageuse
+            dont l'origine est inconnue, à la recherche d'un(e) proche disparu(e). Au cours de
+            l'aventure, le joueur a la possibilité de contrôler plusieurs autres personnages qu'il
+            rencontre lors de son périple, chacun ayant une personnalité unique et des capacités`}
             </Text>
           </Modal.Body>
           <Modal.Footer>
             <ConfirmModal
               onConfirm={async () => {
                 await wait(1000);
-                console.log('onConfirm');
+                toast({
+                  variant: 'success',
+                  content: 'onConfirm',
+                });
                 hide();
               }}
               options={{

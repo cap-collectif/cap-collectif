@@ -240,8 +240,7 @@ svg.avatar-group {
 
 .storybook-container {
     margin: 0;
-    display: flex;
-    justify-content: center;
+    font-family: "OpenSans", Helvetica, sans-serif;
 
     code {
         background-color: black;
@@ -251,35 +250,6 @@ svg.avatar-group {
 
     code .token.plain-text {
         color: white;
-    }
-
-    th, td {
-        font-family: "OpenSans", sans-serif;
-    }
-
-    table {
-        border-spacing: 0;
-        padding: 2rem 0;
-        font-size: 14px;
-        border-radius: 4px;
-        width: 100%;
-    }
-
-    thead {
-        background-color: $page-bgc;
-    }
-
-    th {
-        text-transform: capitalize;
-    }
-
-    th, td {
-        padding: 10px;
-        border-color: $border-color;
-    }
-
-    thead {
-        border: none;
     }
 
     pre button {

@@ -42,6 +42,7 @@ const borderRadius: { [string]: number } = {
   popover: 8,
   poppin: 8,
   placeholder: 4,
+  table: 8,
 };
 
 export const boxShadow: { [string]: string } = {

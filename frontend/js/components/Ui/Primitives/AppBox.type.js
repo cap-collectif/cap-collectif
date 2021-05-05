@@ -282,13 +282,10 @@ type Input = {|
   +checked?: boolean,
 |};
 
-type TabIndex = {|
-  +tabIndex?: number,
-|};
-
 type Accessibility = {|
   +'aria-hidden'?: boolean,
   +'aria-label'?: string,
+  +tabIndex?: number,
 |};
 
 type ZIndex = {| +zIndex?: number |};
@@ -298,6 +295,10 @@ type Opacity = {| +opacity?: Responsive<NumberOrString> |};
 type Clip = {| +clip?: string |};
 
 type WhiteSpace = {| +whiteSpace?: string |};
+
+type Table = {|
+  +colSpan?: string,
+|};
 
 export type AppBoxProps = {|
   ...Width,
@@ -335,11 +336,11 @@ export type AppBoxProps = {|
   ...As,
   ...Input,
   ...CustomStyled,
-  ...TabIndex,
   ...Accessibility,
   ...ZIndex,
   ...LinkProps,
   ...Opacity,
   ...Clip,
   ...WhiteSpace,
+  ...Table,
 |};

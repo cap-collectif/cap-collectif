@@ -19,14 +19,7 @@ describe('isAsync', () => {
   });
 
   it('should return false when the given function is not async', () => {
-    const arrowFn = isAsync(() => {
-      console.log('hello darkness my old friend');
-    });
+    const arrowFn = isAsync(() => true);
     expect(arrowFn).toBe(false);
-
-    const fn = isAsync(function() {
-      console.log('hello darkness my old friend');
-    });
-    expect(fn).toBe(false);
   });
 });
