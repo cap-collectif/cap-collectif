@@ -218,7 +218,7 @@ Capco\AppBundle\Entity\Event:
     eventRemoteUserAnimator:
         id: eventRemoteUserAnimator
         # Make sure to have a future date here, for CI
-        startAt: <identity((new \DateTime('2021-04-28')))>
+        startAt: <identity((new \DateTime('2022-04-28')))>
         author: '@userAgui'
         createdAt: <identity((new \DateTime('2015-04-14')))>
         isPresential: false

@@ -256,7 +256,7 @@ class UserContext extends DefaultContext
     public function iCanAccessAdminInNavbar()
     {
         $this->navigationContext->getPage('HomePage')->openUserDropdown();
-        $selector = '#main-navbar nav div div ul li';
+        $selector = '#user-profile-1';
         $this->waitAndThrowOnFailure(3000, "$('" . $selector . "').length > 0");
         $this->assertElementContainsText($selector, 'global.administration');
     }
