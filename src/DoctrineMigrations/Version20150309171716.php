@@ -42,13 +42,13 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
 
         $menuItemId = $this->connection->fetchColumn(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'events', 'deletable' => false]
+            ['link' => 'events', 'deletable' => 0]
         );
 
         if (!$menuItemId) {
             $menuItemId = $this->connection->fetchColumn(
                 'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-                ['link' => 'event', 'deletable' => false]
+                ['link' => 'event', 'deletable' => 0]
             );
         }
 
@@ -67,9 +67,9 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
                 'menu_id' => $menuId,
                 'title' => 'Évènements',
                 'link' => 'events',
-                'is_enabled' => true,
-                'is_deletable' => false,
-                'isFullyModifiable' => false,
+                'is_enabled' => 1,
+                'is_deletable' => 0,
+                'isFullyModifiable' => 0,
                 'position' => 3,
                 'created_at' => $formattedDate,
                 'updated_at' => $formattedDate,

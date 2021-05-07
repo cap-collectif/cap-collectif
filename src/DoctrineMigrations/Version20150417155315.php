@@ -27,7 +27,7 @@ class Version20150417155315 extends AbstractMigration
                 'position' => 24,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.main_menu.text_active',
@@ -36,7 +36,7 @@ class Version20150417155315 extends AbstractMigration
                 'position' => 25,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.main_menu.bg',
@@ -45,7 +45,7 @@ class Version20150417155315 extends AbstractMigration
                 'position' => 26,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.main_menu.bg_active',
@@ -54,7 +54,7 @@ class Version20150417155315 extends AbstractMigration
                 'position' => 27,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ]
         ];
 

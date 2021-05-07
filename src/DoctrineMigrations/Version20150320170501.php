@@ -55,6 +55,6 @@ class Version20150320170501 extends AbstractMigration implements ContainerAwareI
 
     public function preDown(Schema $schema): void
     {
-        $this->connection->delete('idea_vote', ['confirmed' => false]);
+        $this->connection->delete('idea_vote', ['confirmed' => 0]);
     }
 }

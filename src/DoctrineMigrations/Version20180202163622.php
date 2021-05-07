@@ -15,7 +15,7 @@ class Version20180202163622 extends AbstractMigration
         'category' => 'pages.homepage',
         'value' => '',
         'position' => 101,
-        'is_social_network_description' => true,
+        'is_social_network_description' => 1,
         'type' => 0
     ];
 

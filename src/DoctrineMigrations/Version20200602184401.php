@@ -19,9 +19,9 @@ final class Version20200602184401 extends AbstractMigration implements Container
         [
             'name' => 'Open Sans',
             'family_name' => 'Open Sans, Arial, sans-serif',
-            'is_custom' => false,
-            'use_as_heading' => false,
-            'use_as_body' => false
+            'is_custom' => 0,
+            'use_as_heading' => 0,
+            'use_as_body' => 0
         ],
     ];
     private $generator;

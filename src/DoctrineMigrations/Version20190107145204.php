@@ -14,6 +14,8 @@ final class Version20190107145204 extends AbstractMigration
 {
     public function postUp(Schema $schema): void
     {
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
+
         if (
             !$this->connection->fetchAssoc(
                 "SELECT id FROM site_image WHERE site_image.keyname = 'favicon'"
@@ -22,8 +24,11 @@ final class Version20190107145204 extends AbstractMigration
             $this->connection->insert('site_image', [
                 'keyname' => 'favicon',
                 'category' => 'global',
-                'is_enabled' => true,
+                'is_enabled' => 1,
                 'position' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'is_social_network_thumbnail' => 0
             ]);
         }
     }

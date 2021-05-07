@@ -12,30 +12,44 @@ class Version20150831162737 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
+
         $colors = [
             [
                 'keyname' => 'color.btn.ghost.bg',
                 'category' => 'settings.appearance',
                 'value' => '#ffffff',
-                'position' => 17
+                'position' => 17,
+                'is_enabled' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
             ],
             [
                 'keyname' => 'color.btn.ghost.text',
                 'category' => 'settings.appearance',
                 'value' => '#1abc9c',
-                'position' => 17
+                'position' => 17,
+                'is_enabled' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
             ],
             [
                 'keyname' => 'color.home.bg',
                 'category' => 'pages.homepage',
                 'value' => '#16a085',
-                'position' => '1'
+                'position' => '1',
+                'is_enabled' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
             ],
             [
                 'keyname' => 'color.home.title',
                 'category' => 'pages.homepage',
                 'value' => '#ffffff',
-                'position' => 1
+                'position' => 1,
+                'is_enabled' => 1,
+                'created_at' => $date,
+                'updated_at' => $date,
             ]
         ];
 

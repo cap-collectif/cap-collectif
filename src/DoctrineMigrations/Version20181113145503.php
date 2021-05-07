@@ -23,7 +23,7 @@ final class Version20181113145503 extends AbstractMigration
         $this->connection->insert('menu_item', [
             'title' => 'Développeurs',
             'link' => 'developer',
-            'is_enabled' => false,
+            'is_enabled' => 0,
             'is_deletable' => 0,
             'associated_features' => 'developer_documentation',
             'is_fully_modifiable' => 0,

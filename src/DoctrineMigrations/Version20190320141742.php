@@ -64,9 +64,10 @@ final class Version20190320141742 extends AbstractMigration implements Container
                 'value' => 'Contact',
                 'created_at' => $date,
                 'updated_at' => $date,
-                'is_enabled' => true,
+                'is_enabled' => 1,
                 'type' => SiteParameter::TYPE_SIMPLE_TEXT,
                 'category' => 'pages.contact',
+                'position' => 2,
             ]);
         }
 

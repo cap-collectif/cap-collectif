@@ -16,7 +16,7 @@ class Version20150918093902 extends AbstractMigration
         $newColor = [
             'keyname' => 'color.user.vip.bg',
             'value' => '',
-            'is_enabled' => true,
+            'is_enabled' => 1,
             'position' => 28,
             'category' => 'settings.appearance',
             'created_at' => $date,

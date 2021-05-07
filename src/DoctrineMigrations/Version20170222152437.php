@@ -16,13 +16,17 @@ class Version20170222152437 extends AbstractMigration
             'mysql' != $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
 
         $this->connection->insert('site_parameter', [
             'keyname' => 'homepage.meta_description',
             'category' => 'pages.homepage',
             'value' => '',
             'position' => 101,
-            'type' => 0
+            'type' => 0,
+            'updated_at' => $date,
+            'created_at' => $date,
+            'is_enabled' => 1
         ]);
     }
 

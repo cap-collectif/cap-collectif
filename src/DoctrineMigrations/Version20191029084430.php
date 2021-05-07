@@ -42,7 +42,7 @@ final class Version20191029084430 extends AbstractMigration implements Container
         foreach ($medias as $media) {
             $categoryImage = [
                 'id' => $this->generator->generate($this->em, null),
-                'is_default' => true,
+                'is_default' => 1,
                 'image_id' => $media['id'],
                 'updated_at' => $now->format('Y-m-d H:i:s'),
                 'created_at' => $now->format('Y-m-d H:i:s')

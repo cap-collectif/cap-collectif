@@ -39,7 +39,7 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
 
         $themeMIId = $this->connection->fetchColumn(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'themes', 'deletable' => false]
+            ['link' => 'themes', 'deletable' => 0]
         );
 
         if (!$themeMIId) {
@@ -55,9 +55,9 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
             $this->connection->insert('menu_item', [
                 'title' => 'Thèmes',
                 'link' => 'themes',
-                'is_enabled' => true,
-                'is_deletable' => false,
-                'isFullyModifiable' => false,
+                'is_enabled' => 1,
+                'is_deletable' => 0,
+                'isFullyModifiable' => 0,
                 'position' => 2,
                 'parent_id' => null,
                 'menu_id' => $headerId,
@@ -69,7 +69,7 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
         $this->connection->update(
             'menu_item',
             ['associated_features' => 'themes'],
-            ['link' => 'themes', 'is_deletable' => false]
+            ['link' => 'themes', 'is_deletable' => 0]
         );
     }
 
@@ -82,7 +82,7 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
     {
         $themeMIId = $this->connection->fetchColumn(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'themes', 'deletable' => false]
+            ['link' => 'themes', 'deletable' => 0]
         );
 
         if (null !== $themeMIId) {

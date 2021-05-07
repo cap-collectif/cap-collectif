@@ -34,7 +34,7 @@ timeout=1;
 if [[ -z "${SYMFONY_RABBITMQ_HOST}" || $SYMFONY_RABBITMQ_HOST == "127.0.0.1" ]]
 then
     echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-    while ! (rabbitmqctl status > /dev/null)
+    while ! (rabbitmqctl cluster_status > /dev/null)
     do
         sleep $timeout
         timeout=$(( $timeout + 1 ))

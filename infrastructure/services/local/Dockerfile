@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 # Install basic
 RUN apt-get update && \
@@ -11,6 +11,7 @@ RUN apt-get update && \
         libmagickwand-dev \
         locales \
         pkg-config \
+        software-properties-common \
         runit \
         wget \
         libicu-dev \
@@ -23,7 +24,7 @@ RUN apt-get update && \
 # Install php
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
         php-apcu \
@@ -64,40 +65,50 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 # Install blackfire PHP Probe
-RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
-    echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
-    apt-get update && \
-    apt-get install -y --allow-unauthenticated blackfire-agent blackfire-php && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/*
+#RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+#    && architecture=$(case $(uname -m) in i386 | i686 | x86) echo "i386" ;; x86_64 | amd64) echo "amd64" ;; aarch64 | arm64 | armv8) echo "arm64" ;; *) echo "amd64" ;; esac) \
+#    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/$architecture/$version \
+#    && mkdir -p /tmp/blackfire \
+#    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
+#    && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so \
+#    && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini \
+#    && rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz
+#
+#COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
+#COPY blackfire/blackfire-agent.ini /etc/php/7.4/fpm/conf.d/90-blackfire-agent.ini
+#COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.ini
+#COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
+#COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
 
-RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
-    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
-    && mkdir -p /tmp/blackfire \
-    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
-    && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so
+# Install RabbitMQ
+RUN apt update -y && apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
+    tee /etc/apt/sources.list.d/rabbitmq.list <<EOF
 
-COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
-COPY blackfire/blackfire-agent.ini /etc/php/7.4/fpm/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
+## Team RabbitMQ's main signing key
+RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA" && \
+    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"  && \
+    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F6609E60DC62814E" && \
+    add-apt-repository 'deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu/ bionic main' && \
+    add-apt-repository 'deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main'
 
- # Install rabbitmq
-ENV LANG C.UTF-8
-ENV RABBITMQ_VERSION_DEB=3.6.16-2
-RUN echo 'deb https://dl.bintray.com/rabbitmq/debian stretch main erlang-20.x' | tee /etc/apt/sources.list.d/bintray.rabbitmq.list && \
-    wget -O- https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server=$RABBITMQ_VERSION_DEB && \
-    rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management
+## Install Erlang packages
+RUN apt-get update -y && \
+    apt-get install -y libssl1.1 erlang-base \
+        erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets \
+        erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \
+        erlang-runtime-tools erlang-snmp erlang-ssl \
+        erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl
+
+## Install rabbitmq-server and its dependencies
+RUN apt-get install rabbitmq-server -y --fix-missing
+
+RUN    rabbitmq-plugins enable rabbitmq_management
 
 # Install nginx, mysql client and redis client
 RUN apt-get update && \
     apt-get install -y -qq \
         sqlite \
-        mysql-client \
+        mariadb-client \
         redis-server \
         nginx \
     && \
@@ -107,14 +118,12 @@ RUN apt-get update && \
 
 # Install varnish
 RUN apt-get update -y && \
-	    apt-get install -y build-essential automake libtool curl git python-docutils && \
-	    curl -s https://packagecloud.io/install/repositories/varnishcache/varnish60/script.deb.sh | bash && \
+	    apt-get install -y build-essential automake libtool curl git python-docutils
+
+RUN curl https://packagecloud.io/install/repositories/varnishcache/varnish66/script.deb.sh | /bin/bash && \
 	    apt-get install -y varnish-dev && \
-	    git clone https://github.com/varnish/varnish-modules.git /tmp/vm && \
+        git clone -b 0.18.0 https://github.com/varnish/varnish-modules.git /tmp/vm && \
 	    cd /tmp/vm && \
-	    # Varnish dev team are currently working on a new version for varnish-modules on master branch.
-        # This commit is a reference to before the starting of varnish dev team's work.
-        git checkout 0d555b627333cd9190a40870f380ace5664f6d0d && \
 	    ./bootstrap && \
 	    ./configure && \
 	    make && \
@@ -144,7 +153,7 @@ COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
-COPY blackfire/run              /etc/service/blackfire/run
+# COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 COPY redirectionio/run          /etc/service/redirectionio/run
 # COPY nodejs/run                 /etc/service/nodejs/run

@@ -41,7 +41,11 @@ class Version20170228175653 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-        $this->connection->insert('registration_form', []);
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
+
+        $this->connection->insert('registration_form', [
+            'id' => '1'
+        ]);
     }
 
     public function down(Schema $schema): void

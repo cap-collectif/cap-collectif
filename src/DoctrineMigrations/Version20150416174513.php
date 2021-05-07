@@ -47,9 +47,9 @@ class Version20150416174513 extends AbstractMigration
             'title' => 'Liste des inscrits',
             'position' => 2,
             'link' => 'members',
-            'is_deletable' => false,
-            'is_fully_modifiable' => false,
-            'is_enabled' => true,
+            'is_deletable' => 0,
+            'is_fully_modifiable' => 0,
+            'is_enabled' => 1,
             'updated_at' => $date,
             'created_at' => $date,
             'associated_features' => 'members_list'
@@ -65,7 +65,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 2,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'members.jumbotron.body',
@@ -75,7 +75,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 1,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'members.jumbotron.title',
@@ -85,7 +85,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 0,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'members.content.body',
@@ -95,7 +95,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 1,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => true
+                'is_enabled' => 1
             ]
         ];
 

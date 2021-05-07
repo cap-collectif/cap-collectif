@@ -9,7 +9,7 @@ services:
       - /tmp:/tmp
 
   database:
-    image: circleci/mariadb:10.1
+    image: circleci/mariadb:10.3
     volumes:
       - /tmp:/tmp
 

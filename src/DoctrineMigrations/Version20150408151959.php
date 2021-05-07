@@ -40,11 +40,14 @@ class Version20150408151959 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
         $this->connection->insert('section', [
             'position' => 1,
             'type' => 'highlight',
             'title' => 'A la une',
-            'enabled' => true
+            'enabled' => 1,
+            'created_at' => $date,
+            'updated_at' => $date,
         ]);
     }
 

@@ -28,12 +28,12 @@ class Version20170830143518 extends AbstractMigration
                     'title' => $answer['title'],
                     'body' => $answer['body'],
                     'slug' => $slugify->slugify($answer['title']),
-                    'is_published' => true,
+                    'is_published' => 1,
                     'published_at' => $answer['created_at'],
                     'created_at' => $answer['created_at'],
                     'updated_at' => $answer['updated_at'],
-                    'is_commentable' => true,
-                    'dislayed_on_blog' => false
+                    'is_commentable' => 1,
+                    'dislayed_on_blog' => 0
                 ];
                 $this->connection->insert('blog_post', $news);
                 $postId = $this->connection->lastInsertId();

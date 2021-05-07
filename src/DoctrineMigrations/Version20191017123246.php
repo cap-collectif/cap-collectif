@@ -105,9 +105,10 @@ final class Version20191017123246 extends AbstractMigration implements Container
                 'content_type' => mime_content_type($absoluteFilePath),
                 'content_size' => $file->getSize(),
                 'context' => 'default',
-                'enabled' => true,
+                'enabled' => 1,
                 'updated_at' => $now->format('Y-m-d H:i:s'),
-                'created_at' => $now->format('Y-m-d H:i:s')
+                'created_at' => $now->format('Y-m-d H:i:s'),
+                'provider_status' => 1
             ];
 
             $this->connection->insert('media__media', $media);

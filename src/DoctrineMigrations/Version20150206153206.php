@@ -59,7 +59,7 @@ class Version20150206153206 extends AbstractMigration implements ContainerAwareI
         if (null != $siteImage) {
             $this->connection->update(
                 'site_image',
-                ['is_enabled' => true],
+                ['is_enabled' => 1],
                 ['id' => $siteImage['id']]
             );
         }

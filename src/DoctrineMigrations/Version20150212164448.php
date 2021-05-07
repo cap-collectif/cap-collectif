@@ -36,7 +36,7 @@ class Version20150212164448 extends AbstractMigration implements ContainerAwareI
     {
         $ideasMIId = $this->connection->fetchColumn(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'ideas', 'deletable' => false]
+            ['link' => 'ideas', 'deletable' => 0]
         );
 
         if (null !== $ideasMIId) {
@@ -60,7 +60,7 @@ class Version20150212164448 extends AbstractMigration implements ContainerAwareI
     {
         $ideasMIId = $this->connection->fetchColumn(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'ideas', 'deletable' => false]
+            ['link' => 'ideas', 'deletable' => 0]
         );
 
         if (null !== $ideasMIId) {

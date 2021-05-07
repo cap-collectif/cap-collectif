@@ -20,7 +20,8 @@ class Version20160209010739 extends AbstractMigration
                 'value' => '#F6F6F6',
                 'position' => 29,
                 'updated_at' => $date,
-                'created_at' => $date
+                'created_at' => $date,
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.votes_bar.text',
@@ -28,7 +29,8 @@ class Version20160209010739 extends AbstractMigration
                 'value' => '#777777',
                 'position' => 30,
                 'updated_at' => $date,
-                'created_at' => $date
+                'created_at' => $date,
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.votes_bar.border',
@@ -36,7 +38,8 @@ class Version20160209010739 extends AbstractMigration
                 'value' => '#E7E7E7',
                 'position' => 31,
                 'updated_at' => $date,
-                'created_at' => $date
+                'created_at' => $date,
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.votes_bar.btn.bg',
@@ -44,7 +47,8 @@ class Version20160209010739 extends AbstractMigration
                 'value' => '#FFFFFF',
                 'position' => 32,
                 'updated_at' => $date,
-                'created_at' => $date
+                'created_at' => $date,
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'color.votes_bar.btn.text',
@@ -52,7 +56,8 @@ class Version20160209010739 extends AbstractMigration
                 'value' => '#000000',
                 'position' => 33,
                 'updated_at' => $date,
-                'created_at' => $date
+                'created_at' => $date,
+                'is_enabled' => 1
             ]
         ];
 

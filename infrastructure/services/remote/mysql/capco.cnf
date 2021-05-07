@@ -12,7 +12,7 @@ user                           = mysql
 default-storage-engine         = InnoDB
 socket                         = /var/lib/mysql/mysql.sock
 pid-file                       = /var/lib/mysql/mysql.pid
-skip-name-resolve
+skip-grant-tables
 
 # MyISAM #
 key-buffer-size                = 32M
@@ -42,7 +42,6 @@ table-definition-cache         = 1024
 table-open-cache               = 2048
 
 # INNODB #
-innodb-flush-method            = O_DIRECT
 innodb-log-files-in-group      = 2
 innodb-log-file-size           = 64M
 innodb-flush-log-at-trx-commit = 1

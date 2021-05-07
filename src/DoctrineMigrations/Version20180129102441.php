@@ -29,10 +29,10 @@ class Version20180129102441 extends AbstractMigration
             'keyname' => 'image.picto',
             'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime())->format('Y-m-d H:i:s'),
-            'is_enabled' => true,
+            'is_enabled' => 1,
             'position' => 3,
             'category' => 'pages.homepage',
-            'is_social_network_thumbnail' => false
+            'is_social_network_thumbnail' => 0
         ]);
         $this->write('-> Reverted "image.picto" into site_image parameter.');
     }

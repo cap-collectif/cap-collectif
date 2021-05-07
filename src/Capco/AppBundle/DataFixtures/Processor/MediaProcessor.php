@@ -18,10 +18,10 @@ use Symfony\Component\Console\Helper\ProgressBar;
  */
 class MediaProcessor implements ProcessorInterface
 {
-    private $referenceMap = [];
-    private $em;
-    private $filterService;
-    private $projectDir;
+    private array $referenceMap = [];
+    private EntityManagerInterface $em;
+    private FilterService $filterService;
+    private string $projectDir;
 
     /* TODO: Please investigate why this is slow since SF4. */
     const ENABLE_PROCESSOR = true;
@@ -67,6 +67,7 @@ class MediaProcessor implements ProcessorInterface
                 !empty($newProviderReference) &&
                 $newProviderReference !== $object->getProviderReference()
             ) {
+
                 (Process::fromShellCommandline(
                     'mv /var/www/public/media/default/0001/01/' .
                         $object->getProviderReference() .
@@ -79,15 +80,18 @@ class MediaProcessor implements ProcessorInterface
 
                 // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation
                 $imgFormats = ['default_logo', 'default_avatar', 'default_project'];
+                $notNeededExtensions = ['pdf', 'svg'];
                 foreach ($imgFormats as $format) {
-                    // Will generate cache file
-                    if (!strpos($newProviderReference, '.pdf')) {
+                    $extension = pathinfo($newProviderReference)['extension'];
+                    if (!in_array($extension, $notNeededExtensions, true)) {
+                        // Will generate cache file
                         $this->filterService->getUrlOfFilteredImage(
                             'default/0001/01/' . $newProviderReference,
                             $format
                         );
                     }
                 }
+
                 // Flush new provider reference
                 $this->em->flush();
             }

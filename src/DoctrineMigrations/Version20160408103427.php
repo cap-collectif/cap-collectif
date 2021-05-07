@@ -94,8 +94,8 @@ class Version20160408103427 extends AbstractMigration
                 [
                     'question_type' => 'simple',
                     'type' => $question['questionType'],
-                    'other_allowed' => false,
-                    'random_question_choices' => false
+                    'other_allowed' => 0,
+                    'random_question_choices' => 0
                 ],
                 ['id' => $question['id']]
             );

@@ -221,9 +221,9 @@ final class Version20201203122444 extends AbstractMigration implements Container
     {
         $blogPostData = [
             'id' => $this->generator->generate($this->em, null),
-            'dislayed_on_blog' => false,
+            'dislayed_on_blog' => 0,
             'comments_count' => 0,
-            'is_commentable' => false,
+            'is_commentable' => 0,
             'is_published' => $officialResponseData['is_published'],
             'published_at' => $officialResponseData['is_published'] ? $officialResponseData['created_at'] : null,
             'updated_at' => $officialResponseData['updated_at'],

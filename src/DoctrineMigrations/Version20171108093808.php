@@ -20,7 +20,7 @@ class Version20171108093808 extends AbstractMigration
             'value' => '',
             'created_at' => $created,
             'updated_at' => $created,
-            'is_enabled' => true,
+            'is_enabled' => 1,
             'position' => 2,
             'type' => 0,
             'category' => 'settings.global'

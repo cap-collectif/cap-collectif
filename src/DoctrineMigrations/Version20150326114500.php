@@ -69,7 +69,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.body.bg',
                 'title' => 'Fond du site',
-                'is_enabled' => true,
+                'is_enabled' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
                 'value' => '#ffffff',
@@ -78,7 +78,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.body.text',
                 'title' => 'Texte du site',
-                'is_enabled' => true,
+                'is_enabled' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
                 'value' => '#333333',

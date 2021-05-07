@@ -90,7 +90,7 @@ parameters:
     env(SYMFONY_DATABASE_NAME): symfony
     env(SYMFONY_DATABASE_USER): root
     env(SYMFONY_DATABASE_PASSWORD): null
-    env(SYMFONY_DATABASE_VERSION): mariadb-10.1.40
+    env(SYMFONY_DATABASE_VERSION): mariadb-10.3.27
     env(SYMFONY_RABBITMQ_LOGIN): guest
     env(SYMFONY_RABBITMQ_PASSWORD): guest
     env(SYMFONY_RABBITMQ_VHOST): capco

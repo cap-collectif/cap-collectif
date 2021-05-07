@@ -23,7 +23,7 @@ class Version20170208093425 extends AbstractMigration
 
         if (0 === $parameter->rowCount()) {
             $this->addSql(
-                "INSERT INTO `site_parameter` (`keyname`, `value`, `created_at`, `is_enabled`, `position`, `type`, `category`) VALUES ('homepage.jumbotron.margin', '0', NOW(), 1, 0, 9, 'pages.homepage')"
+                "INSERT INTO `site_parameter` (`keyname`, `value`, `created_at`,`updated_at`, `is_enabled`, `position`, `type`, `category`) VALUES ('homepage.jumbotron.margin', '0', NOW(),NOW(), 1, 0, 9, 'pages.homepage')"
             );
         }
     }

@@ -42,7 +42,7 @@ services:
 
   database:
     container_name: capco_database_1
-    image: mariadb:10.1
+    image: mariadb:10.3
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
 

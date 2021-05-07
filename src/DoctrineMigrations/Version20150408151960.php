@@ -43,15 +43,18 @@ class Version20150408151960 extends AbstractMigration implements ContainerAwareI
             $this->connection->insert('menu', ['type' => 2]);
             $menuId = $this->connection->lastInsertId();
         }
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
 
         $this->connection->insert('menu_item', [
             'menu_id' => $menuId,
             'title' => 'Confidentialité',
             'position' => 5,
             'link' => 'confidentialite',
-            'is_deletable' => false,
-            'isFullyModifiable' => false,
-            'is_enabled' => true
+            'is_deletable' => 0,
+            'isFullyModifiable' => 0,
+            'is_enabled' => 1,
+            'created_at' => $date,
+            'updated_at' => $date,
         ]);
     }
 

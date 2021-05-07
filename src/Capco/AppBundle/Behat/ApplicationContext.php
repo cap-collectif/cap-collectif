@@ -71,6 +71,7 @@ class ApplicationContext extends UserContext
     use AdminShieldTrait;
     use AdminTrait;
     use CommentStepsTrait;
+    use DebateTrait;
     use ExportDatasUserTrait;
     use LocaleTrait;
     use NotificationsStepTrait;
@@ -83,7 +84,6 @@ class ApplicationContext extends UserContext
     use SharingStepsTrait;
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
-    use DebateTrait;
     use UserProfileTrait;
 
     protected $cookieConsented;
@@ -106,10 +106,7 @@ class ApplicationContext extends UserContext
 
         // This tag make sure queues are empty at the begining of a test
         if ($scenario->hasTag('rabbitmq')) {
-            $messagesTypes = $this->getParameter('swarrot.messages_types');
-            foreach ($messagesTypes as $messageType) {
-                $this->queues[] = $messageType['routing_key'];
-            }
+            // This will purge RabbitMQ queues (using `--erase-vhost`)
             $jobs[] = Process::fromShellCommandline(
                 'php bin/rabbit vhost:mapping:create --password=' .
                     $this->getParameter('rabbitmq_password') .
@@ -121,7 +118,6 @@ class ApplicationContext extends UserContext
                     $this->getParameter('rabbitmq_host') .
                     ' --erase-vhost config/rabbitmq.yaml'
             );
-            $this->purgeRabbitMqQueues();
         }
 
         // This tag is useful when you analyze the medias folder (e.g: counting number of files)
@@ -135,7 +131,7 @@ class ApplicationContext extends UserContext
         }
 
         foreach ($jobs as $job) {
-            echo $job->getCommandLine() . PHP_EOL;
+            echo $job->getCommandLine() . \PHP_EOL;
             $job->mustRun();
         }
 
@@ -147,9 +143,9 @@ class ApplicationContext extends UserContext
         try {
             $this->snapshot->deleteSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME);
         } catch (\Elastica\Exception\ResponseException $e) {
-            echo 'No ElasticSearch snapshot detected.' . PHP_EOL;
+            echo 'No ElasticSearch snapshot detected.' . \PHP_EOL;
         }
-        echo 'Writing ElasticSearch snapshot.' . PHP_EOL;
+        echo 'Writing ElasticSearch snapshot.' . \PHP_EOL;
         // We pass true as string because of php casting true to 1 and this is not authorized in ES 7.
         $this->snapshot->createSnapshot(
             REPOSITORY_NAME,
@@ -163,20 +159,12 @@ class ApplicationContext extends UserContext
     /**
      * @AfterScenario
      */
-    public function resetRabbitMq()
-    {
-        $this->purgeRabbitMqQueues();
-    }
-
-    /**
-     * @AfterScenario
-     */
     public function resetExports(AfterScenarioScope $scope)
     {
         if ($scope->getScenario()->hasTag('export')) {
             $job = Process::fromShellCommandline('rm -rf public/export/*');
-            echo $job->getCommandLine() . PHP_EOL;
-            echo 'Clearing exports...' . PHP_EOL;
+            echo $job->getCommandLine() . \PHP_EOL;
+            echo 'Clearing exports...' . \PHP_EOL;
             $job->mustRun();
         }
     }
@@ -191,11 +179,11 @@ class ApplicationContext extends UserContext
             $job = Process::fromShellCommandline(
                 'mysql -h database -u root symfony < var/db.backup'
             );
-            echo $job->getCommandLine() . PHP_EOL;
+            echo $job->getCommandLine() . \PHP_EOL;
             $job->mustRun();
         }
 
-        echo 'Restoring ElasticSearch snapshot.' . PHP_EOL;
+        echo 'Restoring ElasticSearch snapshot.' . \PHP_EOL;
         /** @var IndexBuilder $indexManager */
         $indexManager = $this->getService(IndexBuilder::class);
         $indexManager->getLiveSearchIndex()->close();
@@ -337,7 +325,7 @@ class ApplicationContext extends UserContext
             $driver->evaluateScript('window.sessionStorage.clear();');
             $driver->evaluateScript('window.localStorage.clear();');
         } catch (\Exception $e) {
-            echo 'Failed to clear localStorage !' . PHP_EOL;
+            echo 'Failed to clear localStorage !' . \PHP_EOL;
         }
 
         $this->closeWindows($scope);
@@ -352,8 +340,8 @@ class ApplicationContext extends UserContext
         $resultCode = $suiteScope->getTestResult()->getResultCode();
 
         $job = Process::fromShellCommandline('redis-cli -h redis FLUSHALL');
-        echo $job->getCommandLine() . PHP_EOL;
-        echo 'Reset feature flag...' . PHP_EOL;
+        echo $job->getCommandLine() . \PHP_EOL;
+        echo 'Reset feature flag...' . \PHP_EOL;
         $job->mustRun();
 
         if ($notifier = NotifierFactory::create()) {
@@ -1564,20 +1552,6 @@ class ApplicationContext extends UserContext
     {
         if ($this->currentPage) {
             return $this->navigationContext->getPage($this->currentPage);
-        }
-    }
-
-    private function purgeRabbitMqQueues()
-    {
-        try {
-            $swarrot = $this->getContainer()->get('swarrot.factory.default');
-            foreach ($this->queues as $queue) {
-                if ($q = $swarrot->getQueue($queue, 'rabbitmq')) {
-                    $q->purge();
-                }
-            }
-        } catch (\Exception $exception) {
-            echo $exception->getMessage();
         }
     }
 

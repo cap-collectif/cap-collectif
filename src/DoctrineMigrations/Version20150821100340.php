@@ -21,7 +21,7 @@ class Version20150821100340 extends AbstractMigration
         foreach ($keys as $key) {
             $this->connection->update(
                 'site_parameter',
-                ['is_enabled' => true],
+                ['is_enabled' => 1],
                 ['keyname' => $key]
             );
         }

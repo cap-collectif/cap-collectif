@@ -12,9 +12,14 @@ class Version20150817124710 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
+        $date = (new \DateTime())->format('Y-m-d H:i:s');
+
         $updated = ['keyname' => 'admin.mail.notifications.receive_address', 'position' => 1];
         $this->connection->update('site_parameter', $updated, [
-            'keyname' => 'admin.mail.notifications'
+            'keyname' => 'admin.mail.notifications',
+            'created_at' => $date,
+            'updated_at' => $date,
+            'is_enabled' => 1
         ]);
 
         $parameters = [
@@ -23,14 +28,20 @@ class Version20150817124710 extends AbstractMigration
                 'category' => 'settings.notifications',
                 'value' => 'Cap Collectif',
                 'position' => 2,
-                'type' => 0
+                'type' => 0,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'is_enabled' => 1
             ],
             [
                 'keyname' => 'admin.mail.notifications.send_address',
                 'category' => 'settings.notifications',
                 'value' => 'assistance@cap-collectif.com',
                 'position' => 3,
-                'type' => 4
+                'type' => 4,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'is_enabled' => 1
             ]
         ];
         foreach ($parameters as $values) {

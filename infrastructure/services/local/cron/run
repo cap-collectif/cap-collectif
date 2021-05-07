@@ -17,4 +17,5 @@ done
 echo "Installing crontab..."
 crontab /etc/cron.d/crontab
 
+echo "[CRON] Crontab installed"
 exec cron -f

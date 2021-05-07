@@ -1,6 +1,6 @@
 FROM node:11-slim AS node
 
-FROM debian:stretch AS base
+FROM debian:buster AS base
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
@@ -41,7 +41,7 @@ ENV LANG C.UTF-8
 # Install php7
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
         php-apcu \
@@ -96,7 +96,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 
 # Install nginx
 RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
-    echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list && \
+    echo "deb http://nginx.org/packages/mainline/debian/ buster nginx" > /etc/apt/sources.list.d/nginx.list && \
     apt-get update && \
     apt-get install -y -qq --no-install-recommends \
         nginx \
@@ -105,10 +105,7 @@ RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install redis
-RUN echo "deb http://packages.dotdeb.org stretch all" > /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list.d/dotdeb.list && \
-    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
-    apt-get update && \
+RUN apt-get update -y && \
     apt-get install -y -qq --no-install-recommends \
         redis-server \
     && \
@@ -118,11 +115,6 @@ RUN echo "deb http://packages.dotdeb.org stretch all" > /etc/apt/sources.list.d/
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
-
-# Install java
-RUN apt-get update && apt-get install -y openjdk-8-jdk-headless net-tools && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Install ES
 ENV ES_VERSION_PACKAGE 7.0.0-linux-x86_64
@@ -134,34 +126,43 @@ RUN cd / && \
     mv /elasticsearch-$ES_VERSION /etc/elasticsearch
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
-# Install rabbitmq
-# ENV RABBITMQ_VERSION_DEB=3.6.6-1
-RUN echo 'deb https://dl.bintray.com/rabbitmq-erlang/debian stretch main erlang-20.x' | tee /etc/apt/sources.list.d/bintray.erlang.list && \
-    wget -O- https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
-    rm -rf /var/lib/apt/lists/* && \
+# Install RabbitMQ
+RUN apt update -y && apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
+    tee /etc/apt/sources.list.d/rabbitmq.list <<EOF
+
+## Team RabbitMQ's main signing key
+RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA" && \
+    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"  && \
+    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F6609E60DC62814E" && \
+    add-apt-repository 'deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu/ bionic main' && \
+    add-apt-repository 'deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main'
+
+## Install Erlang packages
+RUN apt-get update -y && \
+    apt-get install -y libssl1.1 erlang-base \
+        erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets \
+        erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \
+        erlang-runtime-tools erlang-snmp erlang-ssl \
+        erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl
+
+## Install rabbitmq-server and its dependencies
+RUN apt-get install rabbitmq-server -y --fix-missing && \
     rabbitmq-plugins enable rabbitmq_management
 
 # Install mariadb
 RUN set -x \
-    && apt-key adv --recv-keys --no-tty --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
-    && add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.1/debian stretch main' \
-    && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install varnish
 RUN apt-get update -y && \
-	    apt-get install -y build-essential automake libtool curl git python-docutils && \
-	    curl -s https://packagecloud.io/install/repositories/varnishcache/varnish60/script.deb.sh | bash && \
+	    apt-get install -y build-essential automake libtool curl git python-docutils
+
+RUN curl https://packagecloud.io/install/repositories/varnishcache/varnish66/script.deb.sh | /bin/bash && \
 	    apt-get install -y varnish-dev && \
-	    git clone https://github.com/varnish/varnish-modules.git /tmp/vm && \
+        git clone -b 0.18.0 https://github.com/varnish/varnish-modules.git /tmp/vm && \
 	    cd /tmp/vm && \
-	    # Varnish dev team are currently working on a new version for varnish-modules on master branch.
-	    # This commit is a reference to before the starting of varnish dev team's work.
-	    git checkout 0d555b627333cd9190a40870f380ace5664f6d0d && \
 	    ./bootstrap && \
 	    ./configure && \
 	    make && \

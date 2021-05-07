@@ -46,7 +46,8 @@ class Version20180525135721 extends AbstractMigration
             'category' => 'settings.global',
             'type' => $parameterTypes['javascript'],
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
+            'is_enabled' => 0
         ]);
         $this->connection->insert('site_parameter', [
             'keyname' => 'ad-scripts-on-all-pages',
@@ -56,7 +57,9 @@ class Version20180525135721 extends AbstractMigration
             'category' => 'settings.global',
             'type' => $parameterTypes['javascript'],
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
+            'is_enabled' => 0
+
         ]);
     }
 

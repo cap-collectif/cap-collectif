@@ -20,7 +20,7 @@ class Version20180103154719 extends AbstractMigration
 
         $this->addSql('ALTER TABLE site_image ADD is_social_network_thumbnail TINYINT(1) NOT NULL');
         $this->addSql(
-            'ALTER TABLE site_parameter ADD is_social_network_description TINYINT(1) NOT NULL'
+            'ALTER TABLE site_parameter ADD is_social_network_description TINYINT(1) DEFAULT 0'
         );
         $this->addSql('ALTER TABLE project ADD meta_description VARCHAR(160) DEFAULT NULL');
         $this->addSql('ALTER TABLE theme ADD meta_description VARCHAR(160) DEFAULT NULL');

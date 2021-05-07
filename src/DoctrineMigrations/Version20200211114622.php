@@ -45,9 +45,10 @@ final class Version20200211114622 extends AbstractMigration implements Container
             'value' => 'FR',
             'created_at' => $date,
             'updated_at' => $date,
-            'is_enabled' => true,
+            'is_enabled' => 1,
             'type' => SiteParameter::TYPE_SIMPLE_TEXT,
-            'category' => 'pages.events'
+            'category' => 'pages.events',
+            'position' => 2
         ]);
     }
 

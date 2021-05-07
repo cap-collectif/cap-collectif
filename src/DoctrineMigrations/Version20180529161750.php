@@ -29,6 +29,7 @@ class Version20180529161750 extends AbstractMigration
             'category' => 'settings.appearance',
             'created_at' => $date,
             'updated_at' => $date,
+            'is_enabled' => 1,
             'value' => '#e3e3e3',
             'position' => 34
         ]);

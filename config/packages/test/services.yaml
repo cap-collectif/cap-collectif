@@ -31,8 +31,6 @@ services:
         autoconfigure: true
         public: true
 
-    capco.swarrot.factory.pecl: '@swarrot.factory.pecl'
-
     # We disable captcha validation
     Capco\AppBundle\Validator\Constraints\ReCaptchaValidator:
         autowire: true

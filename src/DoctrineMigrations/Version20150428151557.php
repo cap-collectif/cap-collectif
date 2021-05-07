@@ -22,7 +22,7 @@ class Version20150428151557 extends AbstractMigration
         $this->connection->update(
             'menu_item',
             ['menu_id' => $menu],
-            ['link' => 'members', 'is_deletable' => false]
+            ['link' => 'members', 'is_deletable' => 0]
         );
     }
 

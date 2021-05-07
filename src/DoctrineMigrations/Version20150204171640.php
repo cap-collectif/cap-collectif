@@ -23,7 +23,7 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
     {
         $blogMenuItemId = $this->connection->fetchOne(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'blog', 'deletable' => false]
+            ['link' => 'blog', 'deletable' => 0]
         );
 
         if (!$blogMenuItemId) {
@@ -38,7 +38,7 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
             $this->connection->insert('menu_item', [
                 'title' => 'Actualités',
                 'link' => 'blog',
-                'is_enabled' => true,
+                'is_enabled' => 1,
                 'is_deletable' => 0,
                 'isFullyModifiable' => 0,
                 'position' => 2,
@@ -59,7 +59,7 @@ class Version20150204171640 extends AbstractMigration implements ContainerAwareI
     {
         $blogMenuItemId = $this->connection->fetchColumn(
             'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
-            ['link' => 'blog', 'deletable' => false]
+            ['link' => 'blog', 'deletable' => 0]
         );
 
         if (null !== $blogMenuItemId) {

@@ -2,19 +2,16 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Coduo\PHPMatcher\Backtrace;
-use Coduo\PHPMatcher\Factory\MatcherFactory;
-use Coduo\PHPMatcher\Matcher;
-use Coduo\PHPMatcher\Matcher\Pattern\Expander\BacktraceBehavior;
-use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
-use Coduo\PHPMatcher\PHPMatcher;
 use LogicException;
 use PHPUnit\Framework\Assert;
-use Swarrot\SwarrotBundle\Broker\PeclFactory;
+use Coduo\PHPMatcher\PHPMatcher;
+use Behat\Gherkin\Node\TableNode;
+use Behat\Gherkin\Node\PyStringNode;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Swarrot\Broker\MessageProvider\MessageProviderInterface;
+use Swarrot\Broker\MessagePublisher\MessagePublisherInterface;
+use Swarrot\Broker\Message;
 
 class RabbitMQContext implements KernelAwareContext
 {
@@ -55,7 +52,7 @@ class RabbitMQContext implements KernelAwareContext
                             sprintf(
                                 'Message mismatch. Unknown property : "%s" %s%s',
                                 $key,
-                                PHP_EOL,
+                                \PHP_EOL,
                                 json_encode($queuedMessages)
                             )
                         );
@@ -64,7 +61,7 @@ class RabbitMQContext implements KernelAwareContext
                         throw new LogicException(
                             sprintf(
                                 'Message mismatch. Queue contains:%s%s',
-                                PHP_EOL,
+                                \PHP_EOL,
                                 json_encode($queuedMessages)
                             )
                         );
@@ -151,8 +148,9 @@ class RabbitMQContext implements KernelAwareContext
     public function iPublishInQueueWithMessage(string $queueName, PyStringNode $string)
     {
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $swarrot = $this->getSwarrot();
-        $swarrot->getExchange('capco_direct_exchange', 'rabbitmq')->publish($string, $queueName);
+
+        $mp = $this->getSwarrotMessagePublisher();
+        $mp->publish(new Message($string), $queueName);
     }
 
     private function getExpectedMessages(TableNode $tableNode): array
@@ -167,35 +165,37 @@ class RabbitMQContext implements KernelAwareContext
 
     private function getQueuedMessages(string $producerName): array
     {
-        $channel = $this->getQueue($producerName);
+        $channel = $this->getSwarrotMessageProvider($producerName);
 
         $queuedMessages = [];
         do {
             $message = $channel->get();
-            if (!$message instanceof \AMQPEnvelope) {
+            if (!$message instanceof Message) {
                 break;
             }
 
             $queuedMessages[] = $this->replaceDynamicValues($message->getBody());
-
-            if (0 === $message->getHeader('message_count')) {
-                break;
-            }
         } while (true);
 
         return $queuedMessages;
     }
 
-    private function getQueue(string $producerName): \AMQPQueue
-    {
-        return $this->getSwarrot()->getQueue($producerName, 'rabbitmq');
-    }
-
-    private function getSwarrot(): PeclFactory
+    private function getSwarrotMessageProvider(string $name): MessageProviderInterface
     {
         $container = $this->kernel->getContainer();
 
-        return $container->get('capco.swarrot.factory.pecl');
+        $factory = $container->get('swarrot.factory.default');
+
+        return $factory->getMessageProvider($name, 'rabbitmq');
+    }
+
+    private function getSwarrotMessagePublisher(): MessagePublisherInterface
+    {
+        $container = $this->kernel->getContainer();
+
+        $factory = $container->get('swarrot.factory.default');
+
+        return $factory->getMessagePublisher('capco_direct_exchange', 'rabbitmq');
     }
 
     private function replaceDynamicValues(string $data): string
@@ -203,7 +203,7 @@ class RabbitMQContext implements KernelAwareContext
         return preg_replace(
             [
                 '/\b(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\+(\d{2}):(\d{2})\b/',
-                '#:\d{10}(,|})#'
+                '#:\d{10}(,|})#',
             ],
             ['ISO8601_TIMESTAMP', ':"UNIX_TIMESTAMP"$1'],
             $data
