@@ -139,9 +139,7 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
       }),
     },
     link: {
-      ...stylesLink,
-      bg: 'transparent',
-      p: 0,
+      ...stylesLink.primary,
       fontWeight: 'Normal',
 
       '&:disabled': {
@@ -276,23 +274,8 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
       }),
     },
     link: {
-      ...stylesLink,
-      bg: 'transparent',
-      color: 'red.500',
-      p: 0,
+      ...stylesLink.danger,
       fontWeight: 'Normal',
-
-      '&:hover': {
-        color: 'red.700',
-
-        '&:focus': {
-          boxShadow: `0 0 2px 2px ${colors.red['300']}`,
-        },
-      },
-
-      '&:focus': {
-        boxShadow: `0 0 2px 2px ${colors.red['300']}`,
-      },
 
       '&:disabled': {
         color: 'red.300',
@@ -430,23 +413,8 @@ const styles = (isLoading?: boolean, alternative?: boolean) => ({
       }),
     },
     link: {
-      ...stylesLink,
-      bg: 'transparent',
-      color: 'gray.500',
-      p: 0,
+      ...stylesLink.hierarchy,
       fontWeight: 'Normal',
-
-      '&:hover': {
-        color: 'gray.700',
-
-        '&:focus': {
-          boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
-        },
-      },
-
-      '&:focus': {
-        boxShadow: `0 0 2px 2px ${colors.gray['300']}`,
-      },
 
       '&:disabled': {
         color: 'gray.300',

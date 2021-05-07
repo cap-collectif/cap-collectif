@@ -39,6 +39,7 @@ const ActionBar = ({ children, ...props }: Props) => {
             bg="gray.100"
             borderBottom="normal"
             borderColor="gray.150"
+            color="gray.900"
             {...props}>
             <Text>
               {intl.formatMessage(

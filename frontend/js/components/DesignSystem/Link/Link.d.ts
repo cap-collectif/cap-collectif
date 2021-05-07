@@ -1,6 +1,11 @@
-import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
 import { ComponentProps } from 'react';
+import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
 
-declare const Link: PolymorphicComponent<ComponentProps<HTMLAnchorElement>>
+type Props = ComponentProps<"a"> & {
+    readonly href: string,
+    readonly truncate?: number
+}
+
+declare const Link: PolymorphicComponent<Props>
 
 export default Link;

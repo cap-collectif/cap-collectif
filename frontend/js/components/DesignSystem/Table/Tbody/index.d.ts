@@ -3,7 +3,7 @@ import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox';
 import Tr from '../Tr';
 
 type Props = {
-    readonly children: Tr[],
+    readonly children: Tr[] | null,
     readonly onScrollToBottom?: () => void,
     readonly useInfiniteScroll?: boolean,
     readonly hasMore?: boolean,

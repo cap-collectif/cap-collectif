@@ -48,71 +48,87 @@ const TagInner = styled(AppBox).attrs({
   alignItems: 'center',
 })(
   // $FlowFixMe flow types are wrong, it can also be a function which take the props and return an object
-  ({ variantType }) => {
+  ({ variantType, interactive }) => {
     return variant({
       variants: {
         blue: {
           bg: 'blue.150',
           '--current-shadow-color': colors.blue[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'blue.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'blue.200' : undefined,
+              }
+            : {},
           color: 'blue.800',
         },
         aqua: {
           bg: 'aqua.150',
           '--current-shadow-color': colors.aqua[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'aqua.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'aqua.200' : undefined,
+              }
+            : {},
           color: 'aqua.800',
         },
         red: {
           bg: 'red.150',
           '--current-shadow-color': colors.red[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'red.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'red.200' : undefined,
+              }
+            : {},
           color: 'red.800',
         },
         green: {
           bg: 'green.150',
           '--current-shadow-color': colors.green[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'green.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'green.200' : undefined,
+              }
+            : {},
           color: 'green.800',
         },
         orange: {
           bg: 'orange.150',
           '--current-shadow-color': colors.orange[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'orange.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'orange.200' : undefined,
+              }
+            : {},
           color: 'orange.800',
         },
         yellow: {
           bg: 'yellow.150',
           '--current-shadow-color': colors.yellow[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'yellow.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'yellow.200' : undefined,
+              }
+            : {},
           color: 'yellow.800',
         },
         gray: {
           bg: 'gray.150',
           '--current-shadow-color': colors.gray[200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'gray.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'gray.200' : undefined,
+              }
+            : {},
           color: 'gray.800',
         },
         'neutral-gray': {
           bg: 'neutral-gray.150',
           '--current-shadow-color': colors['neutral-gray'][200],
-          '&:hover': {
-            bg: variantType === 'tag' ? 'neutral-gray.200' : undefined,
-          },
+          '&:hover': interactive
+            ? {
+                bg: variantType === 'tag' ? 'neutral-gray.200' : undefined,
+              }
+            : {},
           color: 'neutral-gray.800',
         },
       },

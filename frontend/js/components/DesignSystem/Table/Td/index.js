@@ -10,7 +10,7 @@ type TdProps = {|
   ...AppBoxProps,
   isNumeric?: boolean,
   noPlaceholder?: boolean,
-  children: string | React.Node,
+  children: ?string | ?React.Node,
 |};
 
 const Td = ({ isNumeric, noPlaceholder, children, ...props }: TdProps): React.Node => {

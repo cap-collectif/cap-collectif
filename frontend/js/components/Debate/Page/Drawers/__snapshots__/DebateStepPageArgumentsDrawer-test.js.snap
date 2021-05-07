@@ -93,7 +93,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc cmtSvf jxKYEO"
+                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc gddsJf jxKYEO"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
@@ -110,7 +110,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh cmtSvf jxKYEO"
+                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh gddsJf jxKYEO"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
@@ -248,7 +248,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc cmtSvf jxKYEO"
+                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc gddsJf jxKYEO"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
@@ -265,7 +265,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh cmtSvf jxKYEO"
+                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh gddsJf jxKYEO"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
@@ -403,7 +403,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc cmtSvf jxKYEO"
+                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc gddsJf jxKYEO"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
@@ -420,7 +420,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh cmtSvf jxKYEO"
+                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh gddsJf jxKYEO"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}

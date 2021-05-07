@@ -11,7 +11,7 @@ import Spinner from '~ds/Spinner/Spinner';
 
 type TbodyProps = {|
   ...AppBoxProps,
-  +children: React.ChildrenArray<React.Element<typeof Tr>>,
+  +children: ?React.ChildrenArray<React.Element<typeof Tr>>,
   +onScrollToBottom?: () => void,
   +useInfiniteScroll?: boolean,
   +hasMore?: boolean,
@@ -27,7 +27,7 @@ const TableLoader = () => (
 );
 
 const TableBody = React.forwardRef<AppBoxProps, HTMLElement>((props: AppBoxProps, ref) => (
-  <AppBox as="tbody" bg="white" key="table-tbody" ref={ref} {...props} />
+  <AppBox as="tbody" bg="white" key="table-tbody" color="gray.900" ref={ref} {...props} />
 ));
 
 const Tbody = ({
@@ -41,12 +41,14 @@ const Tbody = ({
   const { rows, selectedRows, dispatch } = useTable();
 
   React.useEffect(() => {
-    const rowIds = React.Children.toArray(children)
-      .filter(c => 'rowId' in c.props)
-      .map(c => String(c.props.rowId));
+    if (children) {
+      const rowIds = React.Children.toArray(children)
+        .filter(c => 'rowId' in c.props)
+        .map(c => String(c.props.rowId));
 
-    if (!isEqual(rowIds, Object.keys(rows))) {
-      dispatch({ type: 'INITIALIZE_ROWS', payload: { rowIds, selectedRows } });
+      if (!isEqual(rowIds, Object.keys(rows))) {
+        dispatch({ type: 'INITIALIZE_ROWS', payload: { rowIds, selectedRows } });
+      }
     }
   }, [children, selectedRows, rows, dispatch]);
 

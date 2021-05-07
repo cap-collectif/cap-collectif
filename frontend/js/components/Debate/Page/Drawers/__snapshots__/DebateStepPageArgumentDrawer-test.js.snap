@@ -26,7 +26,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF jwqAYk jxKYEO"
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF gJWoeF jxKYEO"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
@@ -122,7 +122,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF jwqAYk jxKYEO"
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF gJWoeF jxKYEO"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
@@ -218,7 +218,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF jwqAYk jxKYEO"
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF gJWoeF jxKYEO"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}

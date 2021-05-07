@@ -8,6 +8,7 @@ type Props = {
     readonly inHead?: boolean,
     readonly children: Th[] | Td[],
     readonly checkboxLabel?: string,
+    readonly verticalAlign?: 'top' | 'middle' | 'bottom',
 }
 
 declare const Tr: PolymorphicComponent<Props>;
