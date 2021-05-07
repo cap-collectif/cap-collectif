@@ -3,6 +3,7 @@
 exports[`<ProposalListFilters /> should render correctly 1`] = `
 <div
   className="mb-15 mt-30"
+  id="proposal-list-filter"
 >
   <Row
     bsClass="row"
@@ -78,6 +79,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
 exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
 <div
   className="mb-15 mt-30"
+  id="proposal-list-filter"
 >
   <Row
     bsClass="row"

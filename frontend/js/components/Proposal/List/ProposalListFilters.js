@@ -110,7 +110,7 @@ export class ProposalListFilters extends React.Component<Props> {
     const showMapButton = form?.usingAddress && !step.private && !!features.display_map;
 
     return (
-      <div className="mb-15 mt-30">
+      <div className="mb-15 mt-30" id="proposal-list-filter">
         <Row>
           <ProposalListToggleViewBtn
             step={step}

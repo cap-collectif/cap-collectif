@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalStepPageHeader /> renders with interpellation context in collect step 1`] = `
-<Fragment>
+<div
+  id="proposal-step-page-header"
+>
   <h3
     className="h3 d-ib mb-15"
   >
@@ -41,11 +43,13 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
       }
     />
   </span>
-</Fragment>
+</div>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with interpellation context in selection step 1`] = `
-<Fragment>
+<div
+  id="proposal-step-page-header"
+>
   <h3
     className="h3 d-ib mb-15"
   >
@@ -58,11 +62,13 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in selec
       }
     />
   </h3>
-</Fragment>
+</div>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with proposal context in collect step 1`] = `
-<Fragment>
+<div
+  id="proposal-step-page-header"
+>
   <h3
     className="h3 d-ib mb-15"
   >
@@ -102,11 +108,13 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
       }
     />
   </span>
-</Fragment>
+</div>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with proposal context in selection step 1`] = `
-<Fragment>
+<div
+  id="proposal-step-page-header"
+>
   <h3
     className="h3 d-ib mb-15"
   >
@@ -119,11 +127,13 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in selection s
       }
     />
   </h3>
-</Fragment>
+</div>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with question context in selection step 1`] = `
-<Fragment>
+<div
+  id="proposal-step-page-header"
+>
   <h3
     className="h3 d-ib mb-15"
   >
@@ -136,5 +146,5 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
       }
     />
   </h3>
-</Fragment>
+</div>
 `;

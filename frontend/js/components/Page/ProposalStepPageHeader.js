@@ -37,7 +37,7 @@ export const ProposalStepPageHeader = ({ step }: Props) => {
     : 'count-questions';
 
   return (
-    <React.Fragment>
+    <div id="proposal-step-page-header">
       <h3 className="h3 d-ib mb-15">
         {total !== queryCount ? (
           <FormattedMessage
@@ -76,7 +76,7 @@ export const ProposalStepPageHeader = ({ step }: Props) => {
           <ProposalCreate proposalForm={step.form} projectType={projectType} />
         </span>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
