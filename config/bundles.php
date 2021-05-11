@@ -1,6 +1,7 @@
 <?php
 
 return [
+    Sonata\Exporter\Bridge\Symfony\SonataExporterBundle::class => ['all' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true],
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
@@ -37,7 +38,7 @@ return [
     Sonata\TranslationBundle\SonataTranslationBundle::class => ['all' => true],
     Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class => ['all' => true],
     // sonata user admin
-//    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
+    //    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
     Sonata\UserBundle\SonataUserBundle::class => ['all' => true],
     // HTTPlug
@@ -50,7 +51,7 @@ return [
     Sonata\MediaBundle\SonataMediaBundle::class => ['all' => true],
     Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle::class => ['all' => true],
     Sonata\Form\Bridge\Symfony\SonataFormBundle::class => ['all' => true],
-    Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true],    // project bundles
+    Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true], // project bundles
     Capco\AppBundle\CapcoAppBundle::class => ['all' => true],
     Capco\AdminBundle\CapcoAdminBundle::class => ['all' => true],
     Capco\UserBundle\CapcoUserBundle::class => ['all' => true],

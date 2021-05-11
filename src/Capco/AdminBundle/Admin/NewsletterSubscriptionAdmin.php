@@ -22,6 +22,11 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
         return ['newsletter'];
     }
 
+    public function getExportFormats()
+    {
+        return ['csv'];
+    }
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
