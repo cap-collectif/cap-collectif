@@ -3,3 +3,6 @@ sonata_exporter:
         default_writers:
             - csv
             - xls
+    writers:
+        csv:
+            delimiter: ;
