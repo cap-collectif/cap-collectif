@@ -7,6 +7,7 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -52,6 +53,9 @@ final class Version20210312153909 extends AbstractMigration implements Container
             $this->connection->insert(
                 'site_parameter_translation',
                 [
+                    'id' => (new UuidGenerator())->generate(
+                        $this->container->get('doctrine')->getManager(), null
+                    ),
                     'translatable_id' => $translationId,
                     'locale' => 'fr-FR',
                     'value' => '',
