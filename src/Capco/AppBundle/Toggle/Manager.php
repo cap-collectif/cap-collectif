@@ -77,6 +77,7 @@ class Manager
     public const unstable__new_consultation_page = 'unstable__new_consultation_page';
     public const unstable__new_project_card = 'unstable__new_project_card';
     public const export_legacy_users = 'export_legacy_users';
+    public const import_proposals = 'import_proposals';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -168,6 +169,7 @@ class Manager
         self::unstable__new_consultation_page,
         self::unstable__new_project_card,
         self::export_legacy_users,
+        self::import_proposals,
     ];
 
     protected ToggleManager $toggleManager;

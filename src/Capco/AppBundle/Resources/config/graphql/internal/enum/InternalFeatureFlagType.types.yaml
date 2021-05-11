@@ -137,3 +137,6 @@ InternalFeatureFlagType:
             export_legacy_users:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::export_legacy_users")'
                 description: 'Secret export of users.'
+            import_proposals:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::import_proposals")'
+                description: 'Whether or not admin can mass import proposals in BO.'

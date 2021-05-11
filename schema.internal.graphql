@@ -5101,6 +5101,9 @@ enum FeatureFlagType {
 
   """Secret export of users."""
   export_legacy_users
+
+  """Whether or not admin can mass import proposals in BO."""
+  import_proposals
 }
 
 """Require a firstname"""

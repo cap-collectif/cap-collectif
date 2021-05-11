@@ -259,6 +259,10 @@ Object {
       "enabled": false,
       "type": "export_legacy_users",
     },
+    Object {
+      "enabled": false,
+      "type": "import_proposals",
+    },
   ],
 }
 `;
