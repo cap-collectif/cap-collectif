@@ -15,9 +15,9 @@ export const SectionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled(
   input[type='number'] {
     width: 55px;
   }
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button {  
-     opacity: 1;
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    opacity: 1;
   }
   h1 {
     font-size: 18px;

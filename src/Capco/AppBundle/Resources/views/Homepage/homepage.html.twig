@@ -75,7 +75,7 @@
             {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} only %}
         {% elseif section.type == 'videos' %}
             {{ get_last_videos(section.nbObjects, 0, section) }}
-        {% elseif section.type == 'projects' and section.displayMode == constant("Capco\\AppBundle\\Enum\\HomePageProjectsSectionAdminDisplayMode::CUSTOM") %}
+        {% elseif section.type == 'projects' and section.displayMode == constant("Capco\\AppBundle\\Enum\\HomePageProjectsSectionConfigurationDisplayMode::CUSTOM") %}
             {{ get_custom_projects(section) }}
         {% elseif section.type == 'projects' %}
             {{ get_last_projects(section.nbObjects, 0, section) }}

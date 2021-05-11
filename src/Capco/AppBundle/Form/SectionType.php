@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Section;
-use Capco\AppBundle\Enum\HomePageProjectsSectionAdminDisplayMode;
+use Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -37,15 +37,17 @@ class SectionType extends AbstractType
             ])
             ->add('displayMode', ChoiceType::class, [
                 'choices' => [
-                    HomePageProjectsSectionAdminDisplayMode::MOST_RECENT => HomePageProjectsSectionAdminDisplayMode::MOST_RECENT,
-                    HomePageProjectsSectionAdminDisplayMode::CUSTOM => HomePageProjectsSectionAdminDisplayMode::CUSTOM,
+                    HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT =>
+                        HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT,
+                    HomePageProjectsSectionConfigurationDisplayMode::CUSTOM =>
+                        HomePageProjectsSectionConfigurationDisplayMode::CUSTOM,
                 ],
             ])
             ->add('sectionProjects', CollectionType::class, [
                 'entry_type' => SectionProjectType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false
+                'by_reference' => false,
             ]);
     }
 

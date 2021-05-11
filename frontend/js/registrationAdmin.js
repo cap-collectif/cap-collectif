@@ -38,7 +38,7 @@ import EmailingListPageApp from '~/startup/EmailingListPageApp';
 import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp';
 import EmailingMailParameterPageApp from '~/startup/EmailingMailParameterPageApp';
 import ToastsContainerApp from '~/startup/ToastsContainerApp';
-import HomePageProjectsSectionAdminApp from '~/startup/HomePageProjectsSectionAdminApp';
+import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsSectionConfigurationApp';
 import SidebarApp from '~/startup/SidebarApp';
 
 ReactOnRails.registerStore({ appStore });
@@ -76,7 +76,7 @@ ReactOnRails.register({
   RedirectIoAdminPageApp,
   LanguageButtonApp,
   UserInviteAdminPageApp,
-  HomePageProjectsSectionAdminApp,
+  HomePageProjectsSectionConfigurationApp,
   MediaAdminPageApp,
   EmailingListPageApp,
   EmailingCampaignPageApp,

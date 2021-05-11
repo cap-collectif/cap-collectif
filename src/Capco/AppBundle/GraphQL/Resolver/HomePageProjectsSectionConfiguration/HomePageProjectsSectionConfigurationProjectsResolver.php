@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\HomePageProjectsSectionAdmin;
+namespace Capco\AppBundle\GraphQL\Resolver\HomePageProjectsSectionConfiguration;
 
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class HomePageProjectsSectionAdminProjectsResolver implements ResolverInterface
+class HomePageProjectsSectionConfigurationProjectsResolver implements ResolverInterface
 {
     private $logger;
     private $projectRepository;

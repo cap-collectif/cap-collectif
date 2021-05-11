@@ -7,6 +7,7 @@ import Loader from '~ui/FeedbacksIndicators/Loader';
 import CustomProjectListView from './CustomProjectListView';
 import ProjectsListPlaceholder from '~/components/Project/List/ProjectsListPlaceholder';
 import type { FeatureToggles, GlobalState } from '~/types';
+import type { CustomProjectListQueryResponse } from '~relay/CustomProjectListQuery.graphql';
 
 type Props = {|
   +projectsCount: number,
@@ -15,7 +16,7 @@ type Props = {|
 
 const query = graphql`
   query CustomProjectListQuery($count: Int, $cursor: String) {
-    homePageProjectsSectionAdmin {
+    homePageProjectsSectionConfiguration {
       projects {
         edges {
           node {
@@ -37,14 +38,21 @@ const CustomProjectList = ({ projectsCount, features }: Props) => {
         count: projectsCount,
         cursor: null,
       }}
-      render={({ error, props }) => {
+      render={({
+        error,
+        props,
+      }: {
+        ...ReactRelayReadyState,
+        props: ?CustomProjectListQueryResponse,
+      }) => {
         if (error) {
           return graphqlError;
         }
-        if (props?.homePageProjectsSectionAdmin) {
+        if (!props) return null;
+        if (props && props.homePageProjectsSectionConfiguration) {
           return (
             <CustomProjectListView
-              homePageProjectsSectionAdmin={props.homePageProjectsSectionAdmin}
+              homePageProjectsSectionConfiguration={props.homePageProjectsSectionConfiguration}
               features={features}
             />
           );

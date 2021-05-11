@@ -5,43 +5,43 @@ import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { IntlShape } from 'react-intl';
 import { injectIntl } from 'react-intl';
-import * as S from './HomePageProjectsSectionAdminPage.style';
+import * as S from './HomePageProjectsSectionConfigurationPage.style';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch, GlobalState } from '~/types';
 import Button from '~ds/Button/Button';
-import UpdateHomePageProjectsSectionAdminMutation from '~/mutations/UpdateHomePageProjectsSectionAdminMutation';
-import type { HomePageProjectsSectionAdminPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionAdminPageDisplayMostRecent_query.graphql';
+import UpdateHomePageProjectsSectionConfigurationMutation from '~/mutations/UpdateHomePageProjectsSectionConfigurationMutation';
+import type { HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Icon from '~ds/Icon/Icon';
 import { toast } from '~ds/Toast';
 import type {
-  HomePageProjectsSectionAdminDisplayMode,
-  HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin,
-} from '~relay/HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin.graphql';
-import HomePageProjectsSectionAdminPageDisplayMostRecent from '~/components/Admin/Section/HomePageProjectsSectionAdminPageDisplayMostRecent';
+  HomePageProjectsSectionConfigurationDisplayMode,
+  HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration,
+} from '~relay/HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration.graphql';
+import HomePageProjectsSectionConfigurationPageDisplayMostRecent from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayMostRecent';
 import { handleTranslationChange } from '~/services/Translation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import Text from '~ui/Primitives/Text';
-import HomePageProjectsSectionAdminPageDisplayCustom from '~/components/Admin/Section/HomePageProjectsSectionAdminPageDisplayCustom';
-import type { HomePageProjectsSectionAdminPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionAdminPageDisplayCustom_query.graphql';
-import type { HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin$key } from '~relay/HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin.graphql';
+import HomePageProjectsSectionConfigurationPageDisplayCustom from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom';
+import type { HomePageProjectsSectionConfigurationPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_query.graphql';
+import type { HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration.graphql';
 
 const formName = 'section-proposal-admin-form';
 
 type Props = {|
-  +displayMode: HomePageProjectsSectionAdminDisplayMode,
-  +homePageProjectsSectionAdmin: HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin,
+  +displayMode: HomePageProjectsSectionConfigurationDisplayMode,
+  +homePageProjectsSectionConfiguration: HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration,
   +currentLanguage: string,
   +maxProjectsDisplay: number,
   +intl: IntlShape,
-  +paginatedProjectsFragmentRef: HomePageProjectsSectionAdminPageDisplayMostRecent_query$key,
-  +allProjectsFragmentRef: HomePageProjectsSectionAdminPageDisplayCustom_query$key,
-  +homePageProjectsSectionAdminFragmentRef: HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin$key,
+  +paginatedProjectsFragmentRef: HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key,
+  +allProjectsFragmentRef: HomePageProjectsSectionConfigurationPageDisplayCustom_query$key,
+  +homePageProjectsSectionConfigurationFragmentRef: HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key,
   ...ReduxFormFormProps,
 |};
 
 type FormValues = {|
-  +displayMode: HomePageProjectsSectionAdminDisplayMode,
+  +displayMode: HomePageProjectsSectionConfigurationDisplayMode,
   +enabled: string,
   +nbObjects: string,
   +position: string,
@@ -96,11 +96,11 @@ const onSubmit = async (
 
   try {
     const {
-      updateHomePageProjectsSectionAdmin,
-    } = await UpdateHomePageProjectsSectionAdminMutation.commit({
+      updateHomePageProjectsSectionConfiguration,
+    } = await UpdateHomePageProjectsSectionConfigurationMutation.commit({
       input,
     });
-    const errorCode = updateHomePageProjectsSectionAdmin?.errorCode;
+    const errorCode = updateHomePageProjectsSectionConfiguration?.errorCode;
     if (errorCode === 'TOO_MANY_PROJECTS') {
       toast({
         variant: 'danger',
@@ -117,15 +117,15 @@ const onSubmit = async (
   }
 };
 
-export const HomePageProjectsSectionAdminPage = ({
+export const HomePageProjectsSectionConfigurationPage = ({
   handleSubmit,
-  homePageProjectsSectionAdmin,
+  homePageProjectsSectionConfiguration,
   displayMode,
   maxProjectsDisplay,
   intl,
   paginatedProjectsFragmentRef,
   allProjectsFragmentRef,
-  homePageProjectsSectionAdminFragmentRef,
+  homePageProjectsSectionConfigurationFragmentRef,
   submitting,
 }: Props) => {
   return (
@@ -194,17 +194,19 @@ export const HomePageProjectsSectionAdminPage = ({
           </div>
 
           {displayMode === 'MOST_RECENT' && (
-            <HomePageProjectsSectionAdminPageDisplayMostRecent
+            <HomePageProjectsSectionConfigurationPageDisplayMostRecent
               paginatedProjectsFragmentRef={paginatedProjectsFragmentRef}
-              homePageProjectsSectionAdmin={homePageProjectsSectionAdmin}
+              homePageProjectsSectionConfiguration={homePageProjectsSectionConfiguration}
               maxProjectsDisplay={maxProjectsDisplay}
             />
           )}
 
           {displayMode === 'CUSTOM' && (
-            <HomePageProjectsSectionAdminPageDisplayCustom
+            <HomePageProjectsSectionConfigurationPageDisplayCustom
               allProjectsFragmentRef={allProjectsFragmentRef}
-              homePageProjectsSectionAdminFragmentRef={homePageProjectsSectionAdminFragmentRef}
+              homePageProjectsSectionConfigurationFragmentRef={
+                homePageProjectsSectionConfigurationFragmentRef
+              }
               maxProjectsDisplay={maxProjectsDisplay}
               formName={formName}
             />
@@ -243,8 +245,8 @@ export const HomePageProjectsSectionAdminPage = ({
   );
 };
 
-const mapStateToProps = (state: GlobalState, { homePageProjectsSectionAdmin }: Props) => {
-  if (homePageProjectsSectionAdmin) {
+const mapStateToProps = (state: GlobalState, { homePageProjectsSectionConfiguration }: Props) => {
+  if (homePageProjectsSectionConfiguration) {
     const {
       title,
       teaser,
@@ -253,7 +255,7 @@ const mapStateToProps = (state: GlobalState, { homePageProjectsSectionAdmin }: P
       nbObjects,
       enabled,
       projects,
-    } = homePageProjectsSectionAdmin;
+    } = homePageProjectsSectionConfiguration;
 
     const initialValues = {
       title,
@@ -279,32 +281,35 @@ const form = injectIntl(
     onSubmit,
     asyncValidate,
     asyncChangeFields: ['nbObjects', 'teaser'],
-  })(HomePageProjectsSectionAdminPage),
+  })(HomePageProjectsSectionConfigurationPage),
 );
 
-const HomePageProjectsSectionAdminPageConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
-  form,
-);
+const HomePageProjectsSectionConfigurationPageConnected = connect<any, any, _, _, _, _>(
+  mapStateToProps,
+)(form);
 
-const fragmentContainer = createFragmentContainer(HomePageProjectsSectionAdminPageConnected, {
-  homePageProjectsSectionAdmin: graphql`
-    fragment HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin on HomePageProjectsSectionAdmin {
-      id
-      title
-      position
-      teaser
-      displayMode
-      enabled
-      nbObjects
-      projects {
-        edges {
-          node {
-            id
+const fragmentContainer = createFragmentContainer(
+  HomePageProjectsSectionConfigurationPageConnected,
+  {
+    homePageProjectsSectionConfiguration: graphql`
+      fragment HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration on HomePageProjectsSectionConfiguration {
+        id
+        title
+        position
+        teaser
+        displayMode
+        enabled
+        nbObjects
+        projects {
+          edges {
+            node {
+              id
+            }
           }
         }
       }
-    }
-  `,
-});
+    `,
+  },
+);
 
 export default fragmentContainer;

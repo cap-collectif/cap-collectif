@@ -14,7 +14,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UpdateHomePageProjectsSectionAdminMutation implements MutationInterface
+class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInterface
 {
     public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
     private EntityManagerInterface $em;
@@ -65,7 +65,10 @@ class UpdateHomePageProjectsSectionAdminMutation implements MutationInterface
             true === $this->manager->isActive(Manager::unstable__new_project_card) ? 9 : 8;
 
         if ($nbObjects > $maxProjectsDisplay) {
-            return ['homePageProjectsSectionAdmin' => null, 'errorCode' => self::TOO_MANY_PROJECTS];
+            return [
+                'homePageProjectsSectionConfiguration' => null,
+                'errorCode' => self::TOO_MANY_PROJECTS,
+            ];
         }
 
         $form = $this->formFactory->create(SectionType::class, $section);
@@ -81,6 +84,6 @@ class UpdateHomePageProjectsSectionAdminMutation implements MutationInterface
         $this->em->persist($section);
         $this->em->flush();
 
-        return ['homePageProjectsSectionAdmin' => $section, 'errorCode' => null];
+        return ['homePageProjectsSectionConfiguration' => $section, 'errorCode' => null];
     }
 }

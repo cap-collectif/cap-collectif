@@ -4,10 +4,10 @@ import Grid from '~ui/Primitives/Layout/Grid';
 import ProjectPreview from '~/components/Project/Preview/ProjectPreview';
 import type { FeatureToggles } from '~/types';
 import type { ProjectPreview_project$ref } from '~relay/ProjectPreview_project.graphql';
-import Flex from "~ui/Primitives/Layout/Flex";
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
-  +homePageProjectsSectionAdmin: ?{|
+  +homePageProjectsSectionConfiguration: ?{|
     +projects: {|
       +edges: ?$ReadOnlyArray<?{|
         +node: {|
@@ -19,25 +19,25 @@ type Props = {|
   +features: FeatureToggles,
 |};
 
-const renderPreview = homePageProjectsSectionAdmin => {
-  if (!homePageProjectsSectionAdmin) {
+const renderPreview = homePageProjectsSectionConfiguration => {
+  if (!homePageProjectsSectionConfiguration) {
     return;
   }
-  return homePageProjectsSectionAdmin?.projects?.edges?.map((edge, index) => {
+  return homePageProjectsSectionConfiguration?.projects?.edges?.map((edge, index) => {
     const project = edge?.node;
     return <ProjectPreview key={index} project={project} isProjectsPage={false} />;
   });
 };
 
-const CustomProjectListView = ({ homePageProjectsSectionAdmin, features }: Props) => {
+const CustomProjectListView = ({ homePageProjectsSectionConfiguration, features }: Props) => {
   return (
     <>
       {features.unstable__new_project_card ? (
         <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
-          {renderPreview(homePageProjectsSectionAdmin)}
+          {renderPreview(homePageProjectsSectionConfiguration)}
         </Grid>
       ) : (
-        <Flex wrap="wrap">{renderPreview(homePageProjectsSectionAdmin)}</Flex>
+        <Flex wrap="wrap">{renderPreview(homePageProjectsSectionConfiguration)}</Flex>
       )}
     </>
   );

@@ -9,9 +9,9 @@ import { useIntl } from 'react-intl';
 import DraggableProjectCard from './DraggableProjectCard';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
-import type { HomePageProjectsSectionAdminPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionAdminPageDisplayCustom_query.graphql';
+import type { HomePageProjectsSectionConfigurationPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_query.graphql';
 import { reorder } from '~/utils/dragNdrop';
-import type { HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin$key } from '~relay/HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin.graphql';
+import type { HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration.graphql';
 
 const cardPlaceholder = (
   <svg width="747" height="89" viewBox="0 0 747 89" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@ const cardPlaceholder = (
 );
 
 const allProjectsFragment = graphql`
-  fragment HomePageProjectsSectionAdminPageDisplayCustom_query on Query {
+  fragment HomePageProjectsSectionConfigurationPageDisplayCustom_query on Query {
     allProjects: projects(onlyPublic: true) {
       edges {
         node {
@@ -39,8 +39,8 @@ const allProjectsFragment = graphql`
   }
 `;
 
-const homePageProjectsSectionAdminFragment = graphql`
-  fragment HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin on HomePageProjectsSectionAdmin {
+const homePageProjectsSectionConfigurationFragment = graphql`
+  fragment HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration on HomePageProjectsSectionConfiguration {
     projectsData: projects {
       edges {
         node {
@@ -56,8 +56,8 @@ const homePageProjectsSectionAdminFragment = graphql`
 `;
 
 type Props = {|
-  +allProjectsFragmentRef: HomePageProjectsSectionAdminPageDisplayCustom_query$key,
-  +homePageProjectsSectionAdminFragmentRef: HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin$key,
+  +allProjectsFragmentRef: HomePageProjectsSectionConfigurationPageDisplayCustom_query$key,
+  +homePageProjectsSectionConfigurationFragmentRef: HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key,
   +formName: string,
   +maxProjectsDisplay: number,
 |};
@@ -73,17 +73,17 @@ export type Project = {|
 
 export type Projects = Array<Project>;
 
-function HomePageProjectsSectionAdminPageDisplayCustom({
+function HomePageProjectsSectionConfigurationPageDisplayCustom({
   allProjectsFragmentRef,
-  homePageProjectsSectionAdminFragmentRef,
+  homePageProjectsSectionConfigurationFragmentRef,
   formName,
   maxProjectsDisplay,
 }: Props) {
   const { allProjects } = useFragment(allProjectsFragment, allProjectsFragmentRef);
 
   const { projectsData } = useFragment(
-    homePageProjectsSectionAdminFragment,
-    homePageProjectsSectionAdminFragmentRef,
+    homePageProjectsSectionConfigurationFragment,
+    homePageProjectsSectionConfigurationFragmentRef,
   );
 
   const options = allProjects?.edges?.map(edge => {
@@ -210,4 +210,4 @@ function HomePageProjectsSectionAdminPageDisplayCustom({
   );
 }
 
-export default HomePageProjectsSectionAdminPageDisplayCustom;
+export default HomePageProjectsSectionConfigurationPageDisplayCustom;

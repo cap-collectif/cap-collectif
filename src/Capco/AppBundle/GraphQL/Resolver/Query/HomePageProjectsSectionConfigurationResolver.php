@@ -7,7 +7,7 @@ use Capco\AppBundle\Repository\SectionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class HomePageProjectsSectionAdminResolver implements ResolverInterface
+class HomePageProjectsSectionConfigurationResolver implements ResolverInterface
 {
     private SectionRepository $sectionRepository;
 

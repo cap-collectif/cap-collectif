@@ -1,7 +1,7 @@
-InternalHomePageProjectsSectionAdminTranslationInput:
+InternalHomePageProjectsSectionConfigurationTranslationInput:
     type: relay-mutation-input
     config:
-        name: HomePageProjectsSectionAdminTranslationInput
+        name: HomePageProjectsSectionConfigurationTranslationInput
         fields:
             title:
                 type: 'String!'

@@ -5,15 +5,15 @@ import { graphql, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import renderComponent from '~/components/Form/Field';
 import AppBox from '~ui/Primitives/AppBox';
-import * as S from '~/components/Admin/Section/HomePageProjectsSectionAdminPage.style';
+import * as S from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPage.style';
 import Flex from '~ui/Primitives/Layout/Flex';
-import type { HomePageProjectsSectionAdminPageDisplayMostRecentQuery } from '~relay/HomePageProjectsSectionAdminPageDisplayMostRecentQuery.graphql';
-import type { HomePageProjectsSectionAdminPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionAdminPageDisplayMostRecent_query.graphql';
-import type { HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin } from '~relay/HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin.graphql';
+import type { HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery.graphql';
+import type { HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql';
+import type { HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration } from '~relay/HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration.graphql';
 
 type Props = {|
-  +paginatedProjectsFragmentRef: HomePageProjectsSectionAdminPageDisplayMostRecent_query$key,
-  +homePageProjectsSectionAdmin: HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin,
+  +paginatedProjectsFragmentRef: HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key,
+  +homePageProjectsSectionConfiguration: HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration,
   +maxProjectsDisplay: number,
 |};
 
@@ -37,23 +37,25 @@ const imagePlaceholder = (
 );
 
 // TODO @spyl94 test this component
-export const HomePageProjectsSectionAdminPageDisplayMostRecent = ({
+export const HomePageProjectsSectionConfigurationPageDisplayMostRecent = ({
   paginatedProjectsFragmentRef,
-  homePageProjectsSectionAdmin,
+  homePageProjectsSectionConfiguration,
   maxProjectsDisplay,
 }: Props) => {
   const intl = useIntl();
 
   const { data: projectsData, refetch } = usePaginationFragment<
-    HomePageProjectsSectionAdminPageDisplayMostRecentQuery,
+    HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery,
     _,
   >(
     graphql`
-      fragment HomePageProjectsSectionAdminPageDisplayMostRecent_query on Query
-        @refetchable(queryName: "HomePageProjectsSectionAdminPageDisplayMostRecentQuery")
+      fragment HomePageProjectsSectionConfigurationPageDisplayMostRecent_query on Query
+        @refetchable(queryName: "HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery")
         @argumentDefinitions(first: { type: "Int", defaultValue: 3 }, cursor: { type: "String" }) {
         paginatedProjects: projects(first: $first, after: $cursor)
-          @connection(key: "HomePageProjectsSectionAdminPageDisplayMostRecent_paginatedProjects") {
+          @connection(
+            key: "HomePageProjectsSectionConfigurationPageDisplayMostRecent_paginatedProjects"
+          ) {
           edges {
             node {
               id
@@ -70,8 +72,8 @@ export const HomePageProjectsSectionAdminPageDisplayMostRecent = ({
   );
 
   useEffect(() => {
-    refetch({ first: homePageProjectsSectionAdmin.nbObjects });
-  }, [homePageProjectsSectionAdmin.nbObjects, refetch]);
+    refetch({ first: homePageProjectsSectionConfiguration.nbObjects });
+  }, [homePageProjectsSectionConfiguration.nbObjects, refetch]);
 
   return (
     <>
@@ -110,4 +112,4 @@ export const HomePageProjectsSectionAdminPageDisplayMostRecent = ({
   );
 };
 
-export default HomePageProjectsSectionAdminPageDisplayMostRecent;
+export default HomePageProjectsSectionConfigurationPageDisplayMostRecent;

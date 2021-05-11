@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import * as S from './HomePageProjectsSectionAdminPage.style';
+import * as S from './HomePageProjectsSectionConfigurationPage.style';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import type { Project } from '~/components/Admin/Section/HomePageProjectsSectionAdminPageDisplayCustom';
+import type { Project } from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom';
 import Icon from '~ds/Icon/Icon';
 
 type Props = {|

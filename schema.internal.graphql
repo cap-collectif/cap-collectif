@@ -5438,7 +5438,7 @@ type GroupEdge {
 scalar HTML
 
 """Section projects page in admin"""
-type HomePageProjectsSectionAdmin {
+type HomePageProjectsSectionConfiguration {
   """The ID of an object."""
   id: ID!
 
@@ -5452,7 +5452,7 @@ type HomePageProjectsSectionAdmin {
   position: Int!
 
   """How to display the proposals"""
-  displayMode: HomePageProjectsSectionAdminDisplayMode!
+  displayMode: HomePageProjectsSectionConfigurationDisplayMode!
 
   """Number of objects to display"""
   nbObjects: Int!
@@ -5462,7 +5462,7 @@ type HomePageProjectsSectionAdmin {
   projects: ProjectConnection!
 }
 
-enum HomePageProjectsSectionAdminDisplayMode {
+enum HomePageProjectsSectionConfigurationDisplayMode {
   """
   display the most recents projects in the projects section of the homepage
   """
@@ -5474,7 +5474,7 @@ enum HomePageProjectsSectionAdminDisplayMode {
   CUSTOM
 }
 
-input HomePageProjectsSectionAdminTranslationInput {
+input HomePageProjectsSectionConfigurationTranslationInput {
   """The title of the section"""
   title: String!
 
@@ -6407,7 +6407,7 @@ type Mutation {
   removeDebateAnonymousVote(input: RemoveDebateAnonymousVoteInput!): RemoveDebateAnonymousVotePayload
 
   """Edit projects section in admin"""
-  updateHomePageProjectsSectionAdmin(input: UpdateHomePageProjectsSectionAdminInput!): UpdateHomePageProjectsSectionAdminPayload
+  updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
 }
 
 """A connection to a list of items."""
@@ -10080,8 +10080,8 @@ type Query {
   """Get the options for creating a category within a proposal form"""
   proposalCategoryOptions: ProposalCategoryOptions!
 
-  """Get HomePageProjectsSectionAdmin"""
-  homePageProjectsSectionAdmin: HomePageProjectsSectionAdmin
+  """Get HomePageProjectsSectionConfiguration"""
+  homePageProjectsSectionConfiguration: HomePageProjectsSectionConfiguration!
 
   """Return the platform analytics"""
   analytics(filter: QueryAnalyticsFilter!): PlatformAnalytics!
@@ -13220,36 +13220,36 @@ type UpdateGroupPayload {
 }
 
 """
-Available errors for an `updateHomePageProjectsSectionAdmin` mutation.
+Available errors for an `updateHomePageProjectsSectionConfiguration` mutation.
 """
-enum UpdateHomePageProjectsSectionAdminErrorCode {
+enum UpdateHomePageProjectsSectionConfigurationErrorCode {
   """Limit of projects that can be dispayed in the homepage"""
   TOO_MANY_PROJECTS
 }
 
-input UpdateHomePageProjectsSectionAdminInput {
+input UpdateHomePageProjectsSectionConfigurationInput {
   """The position of the section in the homepage"""
   position: Int!
 
   """How to display the projects"""
-  displayMode: HomePageProjectsSectionAdminDisplayMode!
+  displayMode: HomePageProjectsSectionConfigurationDisplayMode!
 
   """Number of objects to display"""
   nbObjects: Int!
 
   """Whether it is published or not"""
   enabled: Boolean!
-  translations: [HomePageProjectsSectionAdminTranslationInput!]
+  translations: [HomePageProjectsSectionConfigurationTranslationInput!]
   projects: [ID!]!
   clientMutationId: String
 }
 
-type UpdateHomePageProjectsSectionAdminPayload {
-  """the updated homePageProjectsSectionAdmin"""
-  homePageProjectsSectionAdmin: HomePageProjectsSectionAdmin
+type UpdateHomePageProjectsSectionConfigurationPayload {
+  """the updated homePageProjectsSectionConfiguration"""
+  homePageProjectsSectionConfiguration: HomePageProjectsSectionConfiguration
 
   """An unsuccessful mutation will return an error."""
-  errorCode: UpdateHomePageProjectsSectionAdminErrorCode
+  errorCode: UpdateHomePageProjectsSectionConfigurationErrorCode
   clientMutationId: String
 }
 

@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Enum\HomePageProjectsSectionAdminDisplayMode;
+use Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
@@ -145,13 +145,12 @@ class Section implements Translatable, SonataTranslatableInterface
      */
     private $metricsToDisplayProjects = false;
 
-
     /**
      * @ORM\Column(name="display_mode", type="string", options={"default":"MOST_RECENT"})
      * @Assert\Choice(choices = {"MOST_RECENT", "CUSTOM"})
      * Used when type = 'projects', set how the projects are displayed in the section
      */
-    private $displayMode = HomePageProjectsSectionAdminDisplayMode::MOST_RECENT;
+    private $displayMode = HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -345,6 +344,7 @@ class Section implements Translatable, SonataTranslatableInterface
     public function setDisplayMode(string $displayMode): self
     {
         $this->displayMode = $displayMode;
+
         return $this;
     }
 
@@ -352,7 +352,6 @@ class Section implements Translatable, SonataTranslatableInterface
     {
         return $this->displayMode;
     }
-
 
     /**
      * @return Collection|SectionProject[]
@@ -383,7 +382,6 @@ class Section implements Translatable, SonataTranslatableInterface
 
         return $this;
     }
-
 
     // ************************* Custom methods ***********************************
 

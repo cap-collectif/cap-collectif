@@ -111,6 +111,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @Given I am logged out
+     */
+    public function iAmLoggedOut()
+    {
+        $this->resetClient();
+    }
+
+    /**
      * @When /^I send a GraphQL request:$/
      */
     public function iSendAraphQLQuery(PyStringNode $query)

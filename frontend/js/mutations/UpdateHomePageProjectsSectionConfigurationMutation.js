@@ -3,17 +3,17 @@ import { graphql } from 'react-relay';
 import commitMutation from './commitMutation';
 import environnement from '~/createRelayEnvironment';
 import type {
-  UpdateHomePageProjectsSectionAdminMutationResponse as Response,
-  UpdateHomePageProjectsSectionAdminMutationVariables,
-} from '~relay/UpdateHomePageProjectsSectionAdminMutation.graphql';
+  UpdateHomePageProjectsSectionConfigurationMutationResponse as Response,
+  UpdateHomePageProjectsSectionConfigurationMutationVariables,
+} from '~relay/UpdateHomePageProjectsSectionConfigurationMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateHomePageProjectsSectionAdminMutation(
-    $input: UpdateHomePageProjectsSectionAdminInput!
+  mutation UpdateHomePageProjectsSectionConfigurationMutation(
+    $input: UpdateHomePageProjectsSectionConfigurationInput!
   ) {
-    updateHomePageProjectsSectionAdmin(input: $input) {
+    updateHomePageProjectsSectionConfiguration(input: $input) {
       errorCode
-      homePageProjectsSectionAdmin {
+      homePageProjectsSectionConfiguration {
         title
         teaser
         position
@@ -33,7 +33,7 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: UpdateHomePageProjectsSectionAdminMutationVariables,
+  variables: UpdateHomePageProjectsSectionConfigurationMutationVariables,
 ): Promise<Response> =>
   commitMutation(environnement, {
     mutation,

@@ -1,13 +1,13 @@
-UpdateHomePageProjectsSectionAdminInput:
+UpdateHomePageProjectsSectionConfigurationInput:
     type: relay-mutation-input
     config:
-        description: 'Input of updateHomePageProjectsSectionAdmin mutation'
+        description: 'Input of updateHomePageProjectsSectionConfiguration mutation'
         fields:
             position:
                 type: 'Int!'
                 description: 'The position of the section in the homepage'
             displayMode:
-                type: 'HomePageProjectsSectionAdminDisplayMode!'
+                type: 'HomePageProjectsSectionConfigurationDisplayMode!'
                 description: 'How to display the projects'
             nbObjects:
                 type: 'Int!'
@@ -16,6 +16,6 @@ UpdateHomePageProjectsSectionAdminInput:
                 type: 'Boolean!'
                 description: 'Whether it is published or not'
             translations:
-                type: '[InternalHomePageProjectsSectionAdminTranslationInput!]'
+                type: '[InternalHomePageProjectsSectionConfigurationTranslationInput!]'
             projects:
                 type: '[ID!]!'

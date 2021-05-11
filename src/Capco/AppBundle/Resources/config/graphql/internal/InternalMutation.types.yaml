@@ -1172,12 +1172,12 @@ InternalMutation:
                     inputType: RemoveDebateAnonymousVoteInput
                     payloadType: RemoveDebateAnonymousVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation", [value])'
-            # HomePageProjectsSectionAdmin
-            updateHomePageProjectsSectionAdmin:
+            # HomePageProjectsSectionConfiguration
+            updateHomePageProjectsSectionConfiguration:
                 description: 'Edit projects section in admin'
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: UpdateHomePageProjectsSectionAdminInput
-                    payloadType: UpdateHomePageProjectsSectionAdminPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionAdminMutation", [value])'
+                    inputType: UpdateHomePageProjectsSectionConfigurationInput
+                    payloadType: UpdateHomePageProjectsSectionConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation", [value])'

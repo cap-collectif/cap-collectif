@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
+exports[`<HomePageProjectsSectionConfigurationPage /> renders correctly 1`] = `
 <form
   method="POST"
   onSubmit={[MockFunction]}
 >
-  <HomePageProjectsSectionAdminPagestyle__SectionContainer>
+  <HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
     <h1>
       global.general
     </h1>
-    <HomePageProjectsSectionAdminPagestyle__SectionInner>
+    <HomePageProjectsSectionConfigurationPagestyle__SectionInner>
       <Field
         component={[Function]}
         id="title"
@@ -34,9 +34,9 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
         name="position"
         type="number"
       />
-    </HomePageProjectsSectionAdminPagestyle__SectionInner>
-  </HomePageProjectsSectionAdminPagestyle__SectionContainer>
-  <HomePageProjectsSectionAdminPagestyle__SectionContainer>
+    </HomePageProjectsSectionConfigurationPagestyle__SectionInner>
+  </HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+  <HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
     <ForwardRef
       alignItems="center"
       direction="row"
@@ -45,7 +45,7 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
       <h1>
         section-admin-display-settings
       </h1>
-      <HomePageProjectsSectionAdminPagestyle__PreviewLink
+      <HomePageProjectsSectionConfigurationPagestyle__PreviewLink
         alignItems="center"
         direction="row"
         mb={24}
@@ -61,9 +61,9 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
         >
           global.preview
         </a>
-      </HomePageProjectsSectionAdminPagestyle__PreviewLink>
+      </HomePageProjectsSectionConfigurationPagestyle__PreviewLink>
     </ForwardRef>
-    <HomePageProjectsSectionAdminPagestyle__SectionInner>
+    <HomePageProjectsSectionConfigurationPagestyle__SectionInner>
       <div>
         <Text
           mb={4}
@@ -93,8 +93,8 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
           </span>
         </Field>
       </div>
-      <HomePageProjectsSectionAdminPageDisplayMostRecent
-        homePageProjectsSectionAdmin={
+      <HomePageProjectsSectionConfigurationPageDisplayMostRecent
+        homePageProjectsSectionConfiguration={
           Object {
             "$refType": null,
             "displayMode": "MOST_RECENT",
@@ -112,9 +112,9 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
         maxProjectsDisplay={9}
         paginatedProjectsFragmentRef={null}
       />
-    </HomePageProjectsSectionAdminPagestyle__SectionInner>
-  </HomePageProjectsSectionAdminPagestyle__SectionContainer>
-  <HomePageProjectsSectionAdminPagestyle__SectionContainer>
+    </HomePageProjectsSectionConfigurationPagestyle__SectionInner>
+  </HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+  <HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
     <h1>
       global.publication
     </h1>
@@ -142,7 +142,7 @@ exports[`<HomePageProjectsSectionAdminPage /> renders correctly 1`] = `
         </span>
       </Field>
     </div>
-  </HomePageProjectsSectionAdminPagestyle__SectionContainer>
+  </HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
   <Button
     isLoading={false}
     type="submit"

@@ -1,0 +1,11 @@
+UpdateHomePageProjectsSectionConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of updateHomePageProjectsSectionConfiguration mutation'
+        fields:
+            homePageProjectsSectionConfiguration:
+                type: 'HomePageProjectsSectionConfiguration'
+                description: 'the updated homePageProjectsSectionConfiguration'
+            errorCode:
+                type: 'UpdateHomePageProjectsSectionConfigurationErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

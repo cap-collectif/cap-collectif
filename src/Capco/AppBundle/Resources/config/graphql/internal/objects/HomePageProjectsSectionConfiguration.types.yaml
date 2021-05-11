@@ -1,4 +1,4 @@
-HomePageProjectsSectionAdmin:
+HomePageProjectsSectionConfiguration:
     type: object
     config:
         description: 'Section projects page in admin'
@@ -7,7 +7,7 @@ HomePageProjectsSectionAdmin:
                 description: 'The ID of an object.'
                 builder: 'Relay::GlobalId'
                 builderConfig:
-                    typeName: HomePageProjectsSectionAdmin
+                    typeName: HomePageProjectsSectionConfiguration
             title:
                 type: 'String!'
                 description: 'The title of the section'
@@ -18,7 +18,7 @@ HomePageProjectsSectionAdmin:
                 type: 'Int!'
                 description: 'The position of the section in the homepage'
             displayMode:
-                type: 'HomePageProjectsSectionAdminDisplayMode!'
+                type: 'HomePageProjectsSectionConfigurationDisplayMode!'
                 description: 'How to display the proposals'
             nbObjects:
                 type: 'Int!'
@@ -28,4 +28,4 @@ HomePageProjectsSectionAdmin:
                 description: 'Whether it is published or not'
             projects:
                 type: 'InternalProjectConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\HomePageProjectsSectionAdmin\\HomePageProjectsSectionAdminProjectsResolver", [value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\HomePageProjectsSectionConfiguration\\HomePageProjectsSectionConfigurationProjectsResolver", [value])'

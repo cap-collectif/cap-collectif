@@ -4,19 +4,19 @@ import { RelayEnvironmentProvider } from 'relay-hooks';
 import { graphql, QueryRenderer } from 'react-relay';
 import AlertBoxApp from '~/startup/AlertBoxApp';
 import environment, { graphqlError } from '~/createRelayEnvironment';
-import HomePageProjectsSectionAdminPage from '~/components/Admin/Section/HomePageProjectsSectionAdminPage';
+import HomePageProjectsSectionConfigurationPage from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPage';
 import Loader from '~ui/FeedbacksIndicators/Loader';
-import type { HomePageProjectsSectionAdminAppQueryResponse } from '~relay/HomePageProjectsSectionAdminAppQuery.graphql';
+import type { HomePageProjectsSectionConfigurationAppQueryResponse } from '~relay/HomePageProjectsSectionConfigurationAppQuery.graphql';
 
 const query = graphql`
-  query HomePageProjectsSectionAdminAppQuery($first: Int!, $cursor: String) {
-    homePageProjectsSectionAdmin {
-      ...HomePageProjectsSectionAdminPage_homePageProjectsSectionAdmin
-      ...HomePageProjectsSectionAdminPageDisplayCustom_homePageProjectsSectionAdmin
+  query HomePageProjectsSectionConfigurationAppQuery($first: Int!, $cursor: String) {
+    homePageProjectsSectionConfiguration {
+      ...HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration
+      ...HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration
     }
-    ...HomePageProjectsSectionAdminPageDisplayMostRecent_query
+    ...HomePageProjectsSectionConfigurationPageDisplayMostRecent_query
       @arguments(first: $first, cursor: $cursor)
-    ...HomePageProjectsSectionAdminPageDisplayCustom_query
+    ...HomePageProjectsSectionConfigurationPageDisplayCustom_query
   }
 `;
 
@@ -35,18 +35,20 @@ export default () => (
           props,
         }: {
           ...ReactRelayReadyState,
-          props: ?HomePageProjectsSectionAdminAppQueryResponse,
+          props: ?HomePageProjectsSectionConfigurationAppQueryResponse,
         }) => {
           if (error) {
             return graphqlError;
           }
-          if (props && props?.homePageProjectsSectionAdmin) {
+          if (props && props?.homePageProjectsSectionConfiguration) {
             return (
-              <HomePageProjectsSectionAdminPage
+              <HomePageProjectsSectionConfigurationPage
                 {...props}
                 paginatedProjectsFragmentRef={props}
                 allProjectsFragmentRef={props}
-                homePageProjectsSectionAdminFragmentRef={props?.homePageProjectsSectionAdmin}
+                homePageProjectsSectionConfigurationFragmentRef={
+                  props?.homePageProjectsSectionConfiguration
+                }
               />
             );
           }
