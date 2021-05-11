@@ -92,10 +92,10 @@ class RecalculateUsersCountersCommand extends Command
         );
 
         $this->compute(
-            'UPDATE fos_user u set u.proposal_votes_count =
+            'UPDATE fos_user set fos_user.proposal_votes_count =
           IFNULL((SELECT count(pv.id) from votes pv
           INNER JOIN proposal p ON pv.proposal_id = p.id
-          WHERE pv.voter_id = u.id AND pv.published = 1 AND pv.private = 0 AND p.published = 1 AND p.is_draft = 0 AND p.trashed_at IS NULL AND p.deleted_at IS NULL
+          WHERE pv.voter_id = fos_user.id AND pv.published = 1 AND pv.private = 0 AND p.published = 1 AND p.is_draft = 0 AND p.trashed_at IS NULL AND p.deleted_at IS NULL
           GROUP BY pv.voter_id
         ),0)',
             true
