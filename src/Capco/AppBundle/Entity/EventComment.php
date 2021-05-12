@@ -55,7 +55,7 @@ class EventComment extends Comment
         return 'eventComment';
     }
 
-    public function setRelatedObject($object)
+    public function setRelatedObject($object): self
     {
         return $this->setEvent($object);
     }

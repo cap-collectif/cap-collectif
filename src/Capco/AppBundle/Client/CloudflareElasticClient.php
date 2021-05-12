@@ -16,7 +16,6 @@ use Psr\Log\LoggerInterface;
 
 class CloudflareElasticClient
 {
-    private LoggerInterface $logger;
     private Client $esClient;
     private string $hostname;
     private string $index;
@@ -28,46 +27,36 @@ class CloudflareElasticClient
         string $username,
         string $password
     ) {
-        $this->logger = $logger;
         $this->hostname = $hostname;
-        $this->index = 'cloudflare-*';
-
-        $cloudUrl = explode('$', base64_decode(explode(':', $clientId)[1]));
-        $formattedUrl = $cloudUrl[1] . '.' . $cloudUrl[0];
-        $this->esClient = new Client(
-            [
-                'host' => $formattedUrl,
-                'port' => '9243',
-                'username' => $username,
-                'password' => $password,
-                'transport' => 'https',
-            ],
-            null,
-            $this->logger
-        );
+        $this->esClient = $this->createEsClient($clientId, $username, $password, $logger);
     }
 
     public function getTrafficSourcesAnalyticsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): ResultSet {
         $multisearchQuery = new Search($this->esClient);
         $multisearchQuery->addSearches([
             PlatformAnalyticsTrafficSourceType::SEARCH_ENGINE => $this->createSearchEngineEntriesQuery(
                 $start,
-                $end
+                $end,
+                $projectSlug
             ),
             PlatformAnalyticsTrafficSourceType::SOCIAL_NETWORK => $this->createSocialNetworksEntriesQuery(
                 $start,
-                $end
+                $end,
+                $projectSlug
             ),
             PlatformAnalyticsTrafficSourceType::DIRECT => $this->createDirectEntriesQuery(
                 $start,
-                $end
+                $end,
+                $projectSlug
             ),
             PlatformAnalyticsTrafficSourceType::EXTERNAL_LINK => $this->createExternalEntriesQuery(
                 $start,
-                $end
+                $end,
+                $projectSlug
             ),
         ]);
 
@@ -76,13 +65,14 @@ class CloudflareElasticClient
 
     public function getExternalAnalyticsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): ResultSet {
         $multisearchQuery = new Search($this->esClient);
         $multisearchQuery->addSearches([
-            'visitors' => $this->createUniqueVisitorsQuery($start, $end),
-            'pageViews' => $this->createPageViewsQuery($start, $end),
-            'mostVisitedPages' => $this->createMostVisitedPagesQuery($start, $end),
+            'visitors' => $this->createUniqueVisitorsQuery($start, $end, $projectSlug),
+            'pageViews' => $this->createPageViewsQuery($start, $end, $projectSlug),
+            'mostVisitedPages' => $this->createMostVisitedPagesQuery($start, $end, $projectSlug),
         ]);
 
         return $multisearchQuery->search();
@@ -90,11 +80,12 @@ class CloudflareElasticClient
 
     private function createUniqueVisitorsQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
-            ->addFilter(new Query\MatchPhrase('ClientRequestURI', '*/project/*'))
+            ->addMustNot($this->getClientRequestURIFilters())
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname))
             ->addFilter(
                 new Range('@timestamp', [
@@ -103,7 +94,7 @@ class CloudflareElasticClient
                 ])
             );
 
-        $query = new Query($boolQuery);
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
@@ -119,7 +110,8 @@ class CloudflareElasticClient
 
     private function createPageViewsQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -131,7 +123,8 @@ class CloudflareElasticClient
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             );
-        $query = new Query($boolQuery);
+
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
@@ -142,7 +135,8 @@ class CloudflareElasticClient
 
     private function createMostVisitedPagesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -155,7 +149,8 @@ class CloudflareElasticClient
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname))
             ->addFilter(new Query\Regexp('ClientRequestURI', $this->hostname . '/*'))
             ->addMustNot($this->getClientRequestURIFilters());
-        $query = new Query($boolQuery);
+
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
@@ -171,17 +166,16 @@ class CloudflareElasticClient
 
     private function createSearchEngineEntriesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
-                (new Query\BoolQuery())->addShould([
-                    new Query\Regexp(
-                        'ClientRequestReferer.keyword',
-                        '(http|https)(://|://www.)(bing|qwant|google|ecosia|duckduckgo).*'
-                    ),
-                ])
+                new Query\Regexp(
+                    'ClientRequestReferer.keyword',
+                    '(http|https)(://|://www.)(bing|qwant|google|ecosia|duckduckgo).*'
+                )
             )
             ->addFilter(
                 new Range('@timestamp', [
@@ -189,9 +183,10 @@ class CloudflareElasticClient
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname));
+            ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname))
+            ->addMustNot($this->getClientRequestURIFilters());
 
-        $query = new Query($boolQuery);
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
             ->addAggregation((new Cardinality('search_engine_entries'))->setField('ClientIP.ip'))
             ->setSize(0)
@@ -202,7 +197,8 @@ class CloudflareElasticClient
 
     private function createSocialNetworksEntriesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -220,7 +216,7 @@ class CloudflareElasticClient
             )
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname));
 
-        $query = new Query($boolQuery);
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
 
         return $this->esClient->getIndex($this->index)->createSearch($query);
@@ -228,7 +224,8 @@ class CloudflareElasticClient
 
     private function createDirectEntriesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -246,7 +243,7 @@ class CloudflareElasticClient
                 )
             );
 
-        $query = new Query($boolQuery);
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
 
         return $this->esClient->getIndex($this->index)->createSearch($query);
@@ -254,7 +251,8 @@ class CloudflareElasticClient
 
     private function createExternalEntriesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -272,16 +270,33 @@ class CloudflareElasticClient
                             'ClientRequestReferer.keyword',
                             '(http|https)(://|://www.)(instagram|linkedin|twitter|facebook).(fr|com|uk|ca).*'
                         ),
+                        new Query\Regexp(
+                            'ClientRequestReferer.keyword',
+                            '(http|https)(://|://www.)(bing|qwant|google|ecosia|duckduckgo).*'
+                        ),
                     ],
                     $this->getClientRequestURIFilters()
                 )
             )
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname));
 
-        $query = new Query($boolQuery);
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
 
         return $this->esClient->getIndex($this->index)->createSearch($query);
+    }
+
+    private function filterClientRequestURIByProject(
+        Query\BoolQuery $boolQuery,
+        ?string $projectSlug = null
+    ): Query\BoolQuery {
+        if ($projectSlug) {
+            $boolQuery->addFilter(
+                new Query\MatchPhrase('ClientRequestURI', '/project/' . $projectSlug)
+            );
+        }
+
+        return $boolQuery;
     }
 
     private function getClientRequestURIFilters(): array
@@ -293,5 +308,28 @@ class CloudflareElasticClient
             new Query\Regexp('ClientRequestURI', '*/admin/*'),
             new Query\Regexp('ClientRequestURI', '*/media/*'),
         ];
+    }
+
+    private function createEsClient(
+        string $clientId,
+        string $username,
+        string $password,
+        LoggerInterface $logger
+    ): Client {
+        $this->index = 'cloudflare-*';
+        $cloudUrl = explode('$', base64_decode(explode(':', $clientId)[1]));
+        $formattedUrl = $cloudUrl[1] . '.' . $cloudUrl[0];
+
+        return new Client(
+            [
+                'host' => $formattedUrl,
+                'port' => '9243',
+                'username' => $username,
+                'password' => $password,
+                'transport' => 'https',
+            ],
+            null,
+            $logger
+        );
     }
 }

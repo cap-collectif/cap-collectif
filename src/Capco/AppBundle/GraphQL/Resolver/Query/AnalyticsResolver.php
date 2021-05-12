@@ -23,6 +23,7 @@ class AnalyticsResolver implements ResolverInterface
         return $this->loader->load([
             'startAt' => $filter['startAt'],
             'endAt' => $filter['endAt'],
+            'projectId' => $filter['projectId'],
         ]);
     }
 }

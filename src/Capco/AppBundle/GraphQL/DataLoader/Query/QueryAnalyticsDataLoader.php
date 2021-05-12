@@ -17,9 +17,13 @@ use Capco\AppBundle\DTO\Analytics\AnalyticsVisitors;
 use Capco\AppBundle\DTO\Analytics\AnalyticsVotes;
 use Capco\AppBundle\Elasticsearch\AnalyticsTopContributors;
 use Capco\AppBundle\Elasticsearch\AnalyticsMostUsedProposalCategories;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\AnalyticsSearch;
 use DateTimeInterface;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -30,9 +34,11 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     private CloudflareElasticClient $cloudflareElasticClient;
     private AnalyticsTopContributors $analyticsTopContributors;
     private AnalyticsMostUsedProposalCategories $analyticsMostUsedProposalCategories;
+    private ProjectRepository $projectRepository;
 
     public function __construct(
         AnalyticsSearch $analyticsSearch,
+        ProjectRepository $projectRepository,
         CloudflareElasticClient $cloudflareElasticClient,
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
@@ -50,6 +56,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         $this->cloudflareElasticClient = $cloudflareElasticClient;
         $this->analyticsTopContributors = $analyticsTopContributors;
         $this->analyticsMostUsedProposalCategories = $analyticsMostUsedProposalCategories;
+        $this->projectRepository = $projectRepository;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -72,14 +79,30 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     public function all(array $keys)
     {
         $filters = $keys[0];
-        list($start, $end) = [$filters['startAt'], $filters['endAt']];
+        list($start, $end, $projectId) = [
+            $filters['startAt'],
+            $filters['endAt'],
+            GlobalId::fromGlobalId($filters['projectId'])['id'],
+        ];
+        $projectSlug = null;
+        if ($projectId) {
+            /** @var $project Project */
+            if (!($project = $this->projectRepository->find($projectId))) {
+                throw new UserError('This project id doest not exist.');
+            }
+            $projectSlug = $project->getSlug();
+        }
         $internalSets = $this->analyticsSearch
-            ->getInternalAnalyticsResultSet($start, $end)
+            ->getInternalAnalyticsResultSet($start, $end, $projectId)
             ->getResultSets();
         $externalSets = $this->cloudflareElasticClient
-            ->getExternalAnalyticsResultSet($start, $end)
+            ->getExternalAnalyticsResultSet($start, $end, $projectSlug)
             ->getResultSets();
-        $trafficSources = $this->cloudflareElasticClient->getTrafficSourcesAnalyticsResultSet($start, $end);
+        $trafficSources = $this->cloudflareElasticClient->getTrafficSourcesAnalyticsResultSet(
+            $start,
+            $end,
+            $projectSlug
+        );
 
         $result = [
             'registrations' => AnalyticsRegistrations::fromEs($internalSets['registrations']),
@@ -88,11 +111,17 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
             'contributions' => AnalyticsContributions::fromEs($internalSets['contributions']),
             'followers' => AnalyticsFollowers::fromEs($internalSets['followers']),
             'contributors' => AnalyticsContributors::fromEs($internalSets['contributors']),
-            'topContributors' => $this->analyticsTopContributors->fromEs($internalSets['topContributors']),
+            'topContributors' => $this->analyticsTopContributors->fromEs(
+                $internalSets['topContributors']
+            ),
             'visitors' => AnalyticsVisitors::fromEs($externalSets['visitors']),
             'pageViews' => AnalyticsPageViews::fromEs($externalSets['pageViews']),
-            'mostVisitedPages' => AnalyticsMostVisitedPages::fromEs($externalSets['mostVisitedPages']),
-            'mostUsedProposalCategories' => $this->analyticsMostUsedProposalCategories->fromEs($internalSets['mostUsedProposalCategories']),
+            'mostVisitedPages' => AnalyticsMostVisitedPages::fromEs(
+                $externalSets['mostVisitedPages']
+            ),
+            'mostUsedProposalCategories' => $this->analyticsMostUsedProposalCategories->fromEs(
+                $internalSets['mostUsedProposalCategories']
+            ),
             'trafficSources' => AnalyticsTrafficSources::fromEs($trafficSources),
         ];
 
@@ -104,6 +133,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         return [
             'startAt' => $key['startAt']->format(DateTimeInterface::ATOM),
             'endAt' => $key['endAt']->format(DateTimeInterface::ATOM),
+            'projectId' => $key['projectId'],
         ];
     }
 }

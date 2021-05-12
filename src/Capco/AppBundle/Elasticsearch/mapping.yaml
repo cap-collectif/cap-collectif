@@ -138,10 +138,12 @@ mappings:
             properties:
                 id: { type: keyword }
                 published: { type: boolean }
+                project: *Project
                 trashedAt: { type: date }
         opinionVersion:
             properties:
                 id: { type: keyword }
+                project: *Project
                 published: { type: boolean }
                 trashedAt: { type: date }
         title: *text_analysis_highlighted

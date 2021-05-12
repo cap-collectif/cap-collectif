@@ -193,9 +193,12 @@ class Follower implements IndexableInterface
         return [
             'ElasticsearchFollower',
             'ElasticsearchFollowerNestedAuthor',
-            'ElasticsearchFollowerNestedProposal',
+            'ElasticsearchNestedProposal',
             'ElasticsearchFollowerNestedOpinion',
             'ElasticsearchFollowerNestedVersion',
+            'ElasticsearchProposalNestedProject',
+            'ElasticsearchVersionNestedProject',
+            'ElasticsearchOpinionNestedProject',
         ];
     }
 

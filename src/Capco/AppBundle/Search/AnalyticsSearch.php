@@ -36,21 +36,23 @@ class AnalyticsSearch
 
     public function getInternalAnalyticsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Multi\ResultSet {
         $multiSearchQuery = new Search($this->getClient());
 
         $multiSearchQuery->addSearches([
             'registrations' => $this->createUserRegistrationsQuery($start, $end),
-            'contributors' => $this->createContributorsQuery($start, $end),
-            'votes' => $this->createVotesQuery($start, $end),
-            'comments' => $this->createCommentsQuery($start, $end),
-            'contributions' => $this->createContributionsQuery($start, $end),
-            'followers' => $this->createFollowersQuery($start, $end),
-            'topContributors' => $this->createTopContributorsQuery($start, $end),
+            'contributors' => $this->createContributorsQuery($start, $end, $projectId),
+            'votes' => $this->createVotesQuery($start, $end, $projectId),
+            'comments' => $this->createCommentsQuery($start, $end, $projectId),
+            'contributions' => $this->createContributionsQuery($start, $end, $projectId),
+            'followers' => $this->createFollowersQuery($start, $end, $projectId),
+            'topContributors' => $this->createTopContributorsQuery($start, $end, $projectId),
             'mostUsedProposalCategories' => $this->createMostUsedProposalCategoriesQuery(
                 $start,
-                $end
+                $end,
+                $projectId
             ),
         ]);
 
@@ -64,51 +66,60 @@ class AnalyticsSearch
         return $this->createUserRegistrationsQuery($start, $end)->search();
     }
 
-    public function getVotesResultSet(DateTimeInterface $start, DateTimeInterface $end): ResultSet
-    {
-        return $this->createVotesQuery($start, $end)->search();
+    public function getVotesResultSet(
+        DateTimeInterface $start,
+        DateTimeInterface $end,
+        ?string $projectId = null
+    ): ResultSet {
+        return $this->createVotesQuery($start, $end, $projectId)->search();
     }
 
     public function getCommentsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): ResultSet {
-        return $this->createCommentsQuery($start, $end)->search();
+        return $this->createCommentsQuery($start, $end, $projectId)->search();
     }
 
     public function getContributionsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): ResultSet {
-        return $this->createContributionsQuery($start, $end)->search();
+        return $this->createContributionsQuery($start, $end, $projectId)->search();
     }
 
     public function getFollowersResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): ResultSet {
-        return $this->createFollowersQuery($start, $end)->search();
+        return $this->createFollowersQuery($start, $end, $projectId)->search();
     }
 
     public function getMostActiveContributorsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): ResultSet {
-        return $this->createTopContributorsQuery($start, $end)->search();
+        return $this->createTopContributorsQuery($start, $end, $projectId)->search();
     }
 
     public function getMostUsedProposalCategoriesResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): ResultSet {
-        return $this->createMostUsedProposalCategoriesQuery($start, $end)->search();
+        return $this->createMostUsedProposalCategoriesQuery($start, $end, $projectId)->search();
     }
 
     public function getParticipantsResultSet(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): ResultSet {
-        return $this->createContributorsQuery($start, $end)->search();
+        return $this->createContributorsQuery($start, $end, $projectId)->search();
     }
 
     private function getClient(): Client
@@ -120,45 +131,146 @@ class AnalyticsSearch
         DateTimeInterface $start,
         DateTimeInterface $end
     ): \Elastica\Search {
-        return $this->createAggregatedQuery(['user'], 'registrations', $start, $end);
+        $boolQuery = new BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Terms('objectType', ['user']))
+            ->addFilter(
+                new Range('createdAt', [
+                    'gte' => $start->format(DateTimeInterface::ATOM),
+                    'lte' => $end->format(DateTimeInterface::ATOM),
+                ])
+            )
+            ->addFilter(new Query\Term(['enabled' => true]));
+
+        $query = new Query($boolQuery);
+        $query
+            ->setTrackTotalHits(true)
+            ->setSize(0)
+            ->addAggregation(new DateHistogram('registrations', 'createdAt', 'month'));
+
+        return $this->index->createSearch($query);
     }
 
     private function createVotesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
-        return $this->createAggregatedQuery(['vote', 'debateAnonymousVote'], 'votes', $start, $end);
+        $boolQuery = new BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Terms('objectType', ['vote', 'debateAnonymousVote']))
+            ->addFilter(
+                new Range('createdAt', [
+                    'gte' => $start->format(DateTimeInterface::ATOM),
+                    'lte' => $end->format(DateTimeInterface::ATOM),
+                ])
+            )
+            ->addFilter(new Query\Term(['published' => true]));
+
+        if ($projectId) {
+            $boolQuery->addFilter(new Query\Term(['published' => true]));
+        }
+
+        $query = new Query($boolQuery);
+        $query
+            ->setTrackTotalHits(true)
+            ->setSize(0)
+            ->addAggregation(new DateHistogram('votes', 'createdAt', 'month'));
+
+        return $this->index->createSearch($query);
     }
 
     private function createCommentsQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
-        return $this->createAggregatedQuery(['comment'], 'comments', $start, $end);
+        $boolQuery = new BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Terms('objectType', ['comment']))
+            ->addFilter(
+                new Range('createdAt', [
+                    'gte' => $start->format(DateTimeInterface::ATOM),
+                    'lte' => $end->format(DateTimeInterface::ATOM),
+                ])
+            )
+            ->addFilter(new Query\Term(['published' => true]));
+
+        if ($projectId) {
+            $boolQuery->addFilter(
+                (new BoolQuery())->addShould([
+                    (new BoolQuery())
+                        ->addMustNot(new Query\Exists('project'))
+                        ->addFilter(new Query\Term(['event.projects.id' => $projectId])),
+                    (new BoolQuery())
+                        ->addMustNot(new Query\Exists('project'))
+                        ->addFilter(new Query\Term(['proposal.project.id' => $projectId])),
+                ])
+            );
+        }
+
+        $query = new Query($boolQuery);
+        $query
+            ->setTrackTotalHits(true)
+            ->setSize(0)
+            ->addAggregation(new DateHistogram('comments', 'createdAt', 'month'));
+
+        return $this->index->createSearch($query);
     }
 
     private function createContributionsQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
         return $this->createAggregatedQuery(
             self::CONTRIBUTION_TYPES,
             'contributions',
             $start,
-            $end
+            $end,
+            $projectId
         );
     }
 
     private function createFollowersQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
-        return $this->createAggregatedQuery(['follower'], 'followers', $start, $end, 'followedAt');
+        $boolQuery = new BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Terms('objectType', ['follower']))
+            ->addFilter(
+                new Range('followedAt', [
+                    'gte' => $start->format(DateTimeInterface::ATOM),
+                    'lte' => $end->format(DateTimeInterface::ATOM),
+                ])
+            )
+            ->addFilter(new Query\Term(['published' => true]));
+
+        if ($projectId) {
+            $boolQuery->addFilter(
+                (new BoolQuery())->addShould([
+                    new Query\Term(['opinion.project.id' => $projectId]),
+                    new Query\Term(['opinionVersion.project.id' => $projectId]),
+                    new Query\Term(['proposal.project.id' => $projectId]),
+                ])
+            );
+        }
+
+        $query = new Query($boolQuery);
+        $query
+            ->setTrackTotalHits(true)
+            ->setSize(0)
+            ->addAggregation(new DateHistogram('followers', 'followedAt', 'month'));
+
+        return $this->index->createSearch($query);
     }
 
     private function createTopContributorsQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(new Query\Term(['published' => true]))->addFilter(
@@ -167,7 +279,12 @@ class AnalyticsSearch
                 'lte' => $end->format(DateTimeInterface::ATOM),
             ])
         );
+        if ($projectId) {
+            $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+        }
+
         $this->addContributionsFilters($boolQuery);
+        $this->addProjectFilters($boolQuery, $projectId);
         $query = new Query($boolQuery);
         $query
             ->addAggregation(
@@ -191,6 +308,7 @@ class AnalyticsSearch
         string $aggregationName,
         DateTimeInterface $start,
         DateTimeInterface $end,
+        ?string $projectId = null,
         string $aggregatedField = 'createdAt',
         string $interval = 'month'
     ): \Elastica\Search {
@@ -205,6 +323,8 @@ class AnalyticsSearch
             )
             ->addFilter(new Query\Term(['published' => true]));
 
+        $this->addProjectFilters($boolQuery, $projectId);
+
         $query = new Query($boolQuery);
         $query
             ->setTrackTotalHits(true)
@@ -216,7 +336,8 @@ class AnalyticsSearch
 
     private function createMostUsedProposalCategoriesQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -228,6 +349,10 @@ class AnalyticsSearch
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]));
+
+        if ($projectId) {
+            $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+        }
 
         $query = new Query($boolQuery);
         $query
@@ -245,7 +370,8 @@ class AnalyticsSearch
 
     private function createContributorsQuery(
         DateTimeInterface $start,
-        DateTimeInterface $end
+        DateTimeInterface $end,
+        ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
@@ -257,6 +383,8 @@ class AnalyticsSearch
             )
             ->addFilter(new Query\Term(['published' => true]));
         $this->addContributionsAndVotesFilters($boolQuery);
+
+        $this->addProjectFilters($boolQuery, $projectId);
 
         $query = new Query($boolQuery);
         $query
@@ -286,8 +414,32 @@ class AnalyticsSearch
     private function addContributionsAndVotesFilters(BoolQuery $boolQuery): BoolQuery
     {
         $boolQuery->addFilter(
-            new Query\Terms('objectType', array_merge(self::CONTRIBUTION_TYPES, ['vote']))
+            new Query\Terms(
+                'objectType',
+                array_merge(self::CONTRIBUTION_TYPES, ['vote', 'debateAnonymousVote'])
+            )
         );
+
+        return $boolQuery;
+    }
+
+    private function addProjectFilters(BoolQuery $boolQuery, ?string $projectId = null): BoolQuery
+    {
+        if ($projectId) {
+            $boolQuery->addFilter(
+                (new BoolQuery())->addShould([
+                    (new BoolQuery())
+                        ->addMustNot(new Query\Exists('project'))
+                        ->addFilter(new Query\Term(['event.projects.id' => $projectId])),
+                    (new BoolQuery())
+                        ->addMustNot(new Query\Exists('project'))
+                        ->addFilter(new Query\Term(['proposal.project.id' => $projectId])),
+                    (new BoolQuery())
+                        ->addFilter(new Query\Exists('project'))
+                        ->addFilter(new Query\Term(['project.id' => $projectId])),
+                ])
+            );
+        }
 
         return $boolQuery;
     }

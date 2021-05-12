@@ -8,7 +8,6 @@ Capco\AppBundle\Entity\Proposal:
                     ElasticsearchProposal,
                     ElasticsearchNestedProposal,
                     ElasticsearchVoteNestedProposal,
-                    ElasticsearchFollowerNestedProposal,
                 ]
         title:
             serialized_name: proposalTitle

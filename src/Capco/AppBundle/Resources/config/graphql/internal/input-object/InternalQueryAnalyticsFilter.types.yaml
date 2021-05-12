@@ -7,3 +7,6 @@ InternalQueryAnalyticsFilter:
                 type: DateTime!
             endAt:
                 type: DateTime!
+            projectId:
+                type: ID
+                defaultValue: null

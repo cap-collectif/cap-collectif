@@ -10093,6 +10093,7 @@ type Query {
 input QueryAnalyticsFilter {
   startAt: DateTime!
   endAt: DateTime!
+  projectId: ID = null
 }
 
 """Fetches an object given its ID"""
