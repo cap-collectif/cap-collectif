@@ -6,11 +6,12 @@ import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'r
 import { m as motion } from 'framer-motion';
 import css from '@styled-system/css';
 import { useAnalytics } from 'use-analytics';
+import { useActor } from '@xstate/react';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import AddDebateVoteMutation, { type OptimisticResponse } from '~/mutations/AddDebateVoteMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
-import { type VoteState } from './DebateStepPageVoteAndShare';
+import { MachineContext, type VoteAction, type VoteState } from './DebateStepPageStateMachine';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import Captcha from '~/components/Form/Captcha';
 import Text from '~ui/Primitives/Text';
@@ -25,7 +26,6 @@ import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.conte
 
 type Props = {|
   ...AppBoxProps,
-  +setVoteState: VoteState => void,
   +step: DebateStepPageVote_step,
   +top?: boolean,
 |};
@@ -36,7 +36,7 @@ const anonymousVoteForDebate = (
   type: 'FOR' | 'AGAINST',
   widgetLocation: ?string,
   intl: IntlShape,
-  setVoteState: (state: VoteState) => void,
+  send: (state: VoteAction) => void,
 ) => {
   return AddDebateAnonymousVoteMutation.commit({
     input: { debateId, type, captcha, widgetOriginURI: widgetLocation },
@@ -51,7 +51,7 @@ const anonymousVoteForDebate = (
             token: response.addDebateAnonymousVote?.debateAnonymousVote?.token,
           });
         }
-        setVoteState('VOTED_ANONYMOUS');
+        send('VOTE');
       }
     })
     .catch(() => {
@@ -64,13 +64,12 @@ const voteForDebate = (
   type: 'FOR' | 'AGAINST',
   widgetLocation: ?string,
   intl: IntlShape,
-  setVoteState: VoteState => void,
+  send: (state: VoteAction) => void,
   isAuthenticated: boolean,
   optimisticData: OptimisticResponse,
 ) => {
   // For optimistic response
-  const optimisticVoteState = optimisticData.viewerConfirmed ? 'VOTED' : 'NOT_CONFIRMED';
-  setVoteState(optimisticVoteState);
+  send('VOTE');
 
   return AddDebateVoteMutation.commit(
     { input: { debateId, type, widgetOriginURI: widgetLocation } },
@@ -79,20 +78,12 @@ const voteForDebate = (
     .then(response => {
       if (response.addDebateVote?.errorCode) {
         mutationErrorToast(intl);
-        setVoteState('NONE');
-      } else {
-        const realVoteState = response.addDebateVote?.debateVote?.published
-          ? 'VOTED'
-          : 'NOT_CONFIRMED';
-
-        if (optimisticVoteState !== realVoteState) {
-          setVoteState(realVoteState);
-        }
+        send('DELETE_VOTE');
       }
     })
     .catch(() => {
       mutationErrorToast(intl);
-      setVoteState('NONE');
+      send('DELETE_VOTE');
     });
 };
 
@@ -114,7 +105,7 @@ const buttonColor = (styleColor: string, disabled: boolean) => ({
 
 const Container = motion.custom(Flex);
 
-export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props): Node => {
+export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
   const isEmailConfirmed: boolean = useSelector(
     (state: GlobalState) => state.user?.user?.isEmailConfirmed || false,
   );
@@ -132,6 +123,9 @@ export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props)
     value: null,
     voteType: 'AGAINST',
   });
+  const machine = React.useContext(MachineContext);
+  const [, send] = useActor<{ value: VoteState }, VoteAction>(machine);
+
   useEffect(() => {
     if (captcha.value) {
       anonymousVoteForDebate(
@@ -140,10 +134,10 @@ export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props)
         captcha.voteType,
         widget.location,
         intl,
-        setVoteState,
+        send,
       );
     }
-  }, [step.debate.id, captcha.value, captcha.voteType, widget.location, intl, setVoteState]);
+  }, [step.debate.id, captcha.value, captcha.voteType, widget.location, intl, send]);
 
   const optimisticData: OptimisticResponse = {
     yesVotes: step.debate.yesVotes.totalCount,
@@ -183,7 +177,7 @@ export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props)
                     'FOR',
                     widget.location,
                     intl,
-                    setVoteState,
+                    send,
                     isAuthenticated,
                     optimisticData,
                   );
@@ -214,7 +208,7 @@ export const DebateStepPageVote = ({ step, setVoteState, top, ...props }: Props)
                     'AGAINST',
                     widget.location,
                     intl,
-                    setVoteState,
+                    send,
                     isAuthenticated,
                     optimisticData,
                   );

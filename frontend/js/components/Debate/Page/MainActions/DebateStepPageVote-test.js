@@ -21,8 +21,6 @@ const baseProps = {
       },
     },
   },
-
-  setVoteState: jest.fn(),
 };
 
 const props = {

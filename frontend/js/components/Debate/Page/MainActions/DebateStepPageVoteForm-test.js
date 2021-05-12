@@ -1,9 +1,13 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
+import { reduxForm } from 'redux-form';
+import * as hooks from '@xstate/react/lib/useActor';
 import { DebateStepPageVoteForm } from './DebateStepPageVoteForm';
 import { $refType, $fragmentRefs, formMock, intlMock } from '~/mocks';
+import MockProviders from '~/testUtils';
+import { MachineContext } from './DebateStepPageStateMachine';
 
 describe('<DebateStepPageVoteForm/>', () => {
   const debate = {
@@ -24,74 +28,69 @@ describe('<DebateStepPageVoteForm/>', () => {
     intl: intlMock,
     body: 'Oui je suis pour',
     showArgumentForm: true,
-    setVoteState: jest.fn(),
     setShowArgumentForm: jest.fn(),
     viewerIsConfirmed: true,
     organizationName: 'CapCollectif',
     widgetLocation: null,
     viewer,
+    send: jest.fn(),
     initialValues: {
       body: '',
     },
   };
 
-  it('should renders correctly', () => {
-    const wrapper = shallow(<DebateStepPageVoteForm {...props} voteState="NONE" debate={debate} />);
-    expect(wrapper).toMatchSnapshot();
-  });
+  const Machine = { value: {} };
+  const DebateStepPageVoteFormDecorated = reduxForm({ form: 'testForm' })(DebateStepPageVoteForm);
 
-  it('should renders correctly on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm {...props} voteState="NONE" debate={debate} isMobile />,
+  const renderComponent = (isMobile: boolean) => {
+    const wrapper = render(
+      <MockProviders store={{}}>
+        <MachineContext.Provider value={{ ...Machine }}>
+          <DebateStepPageVoteFormDecorated {...props} debate={debate} isMobile={isMobile} />
+        </MachineContext.Provider>
+      </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();
-  });
+  };
+
   it('should renders correctly when voted', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm {...props} voteState="VOTED" debate={debate} />,
-    );
-    expect(wrapper).toMatchSnapshot();
+    jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'voted' }, jest.fn()]);
+    renderComponent(false);
   });
   it('should renders correctly when voted on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm {...props} voteState="VOTED" debate={debate} isMobile />,
-    );
-    expect(wrapper).toMatchSnapshot();
+    jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'voted' }, jest.fn()]);
+    renderComponent(true);
   });
-
-  it('should renders correctly when voted without argument', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm
-        {...props}
-        voteState="VOTED"
-        debate={{ ...debate, viewerHasArgument: false }}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should renders correctly when voted without argument on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm
-        {...props}
-        voteState="VOTED"
-        debate={{ ...debate, viewerHasArgument: false }}
-        isMobile
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should renders correctly when argumented', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm {...props} voteState="ARGUMENTED" debate={debate} />,
-    );
-    expect(wrapper).toMatchSnapshot();
+    jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'argumented' }, jest.fn()]);
+    renderComponent(false);
   });
   it('should renders correctly when argumented on mobile', () => {
-    const wrapper = shallow(
-      <DebateStepPageVoteForm {...props} voteState="ARGUMENTED" debate={debate} isMobile />,
-    );
-    expect(wrapper).toMatchSnapshot();
+    jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'argumented' }, jest.fn()]);
+    renderComponent(true);
+  });
+  it('should renders correctly when voted anonymously', () => {
+    jest
+      .spyOn(hooks, 'useActor')
+      .mockImplementation(() => [{ value: 'voted_anonymous' }, jest.fn()]);
+    renderComponent(false);
+  });
+  it('should renders correctly when voted anonymously on mobile', () => {
+    jest
+      .spyOn(hooks, 'useActor')
+      .mockImplementation(() => [{ value: 'voted_anonymous' }, jest.fn()]);
+    renderComponent(true);
+  });
+  it('should renders correctly when argumented not confirmed', () => {
+    jest
+      .spyOn(hooks, 'useActor')
+      .mockImplementation(() => [{ value: 'argumented_not_confirmed' }, jest.fn()]);
+    renderComponent(false);
+  });
+  it('should renders correctly when argumented not confirmed on mobile', () => {
+    jest
+      .spyOn(hooks, 'useActor')
+      .mockImplementation(() => [{ value: 'argumented_not_confirmed' }, jest.fn()]);
+    renderComponent(true);
   });
 });

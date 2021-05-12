@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
+import { useActor } from '@xstate/react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import Button from '~ds/Button/Button';
 import Modal from '~ds/Modal/Modal';
@@ -8,13 +9,15 @@ import type { ModalDeleteVoteMobile_debate } from '~relay/ModalDeleteVoteMobile_
 import Text from '~ui/Primitives/Text';
 import { FontWeight } from '~ui/Primitives/constants';
 import Heading from '~ui/Primitives/Heading';
-
 import RemoveDebateVoteAlternateArgumentMutation from '~/mutations/RemoveDebateVoteAlternateArgumentMutation';
-import type { VoteState } from '~/components/Debate/Page/MainActions/DebateStepPageVoteAndShare';
+import {
+  MachineContext,
+  type VoteAction,
+  type VoteState,
+} from '~/components/Debate/Page/MainActions/DebateStepPageStateMachine';
 
 type Props = {|
   debate: ModalDeleteVoteMobile_debate,
-  setVoteState: VoteState => void,
   setShowArgumentForm: boolean => void,
 |};
 
@@ -26,7 +29,7 @@ const STATE = {
 
 const deleteVoteFromViewer = (
   debateId: string,
-  setVoteState: VoteState => void,
+  send: (state: VoteAction) => void,
   setShowArgumentForm: boolean => void,
   setModalState: (state: $Values<typeof STATE>) => void,
   setErrorCount: (count: number) => void,
@@ -52,11 +55,7 @@ const deleteVoteFromViewer = (
     });
 };
 
-export const ModalDeleteVoteMobile = ({
-  debate,
-  setVoteState,
-  setShowArgumentForm,
-}: Props): React.Node => {
+export const ModalDeleteVoteMobile = ({ debate, setShowArgumentForm }: Props): React.Node => {
   const intl = useIntl();
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>(STATE.CHOICES);
   const [errorCount, setErrorCount] = React.useState<number>(0);
@@ -66,7 +65,8 @@ export const ModalDeleteVoteMobile = ({
     setModalState(STATE.CHOICES);
     setErrorCount(0);
   };
-
+  const machine = React.useContext(MachineContext);
+  const [, send] = useActor<{ value: VoteState }, VoteAction>(machine);
   const getModalContent = (state: $Values<typeof STATE>, hideModal) => {
     switch (state) {
       case 'CHOICES':
@@ -85,7 +85,7 @@ export const ModalDeleteVoteMobile = ({
                 onClick={() =>
                   deleteVoteFromViewer(
                     debate.id,
-                    setVoteState,
+                    send,
                     setShowArgumentForm,
                     setModalState,
                     setErrorCount,
@@ -153,7 +153,7 @@ export const ModalDeleteVoteMobile = ({
                   onClick={() =>
                     deleteVoteFromViewer(
                       debate.id,
-                      setVoteState,
+                      send,
                       setShowArgumentForm,
                       setModalState,
                       setErrorCount,
@@ -178,7 +178,7 @@ export const ModalDeleteVoteMobile = ({
   };
 
   const onDeleteSuccess = () => {
-    setVoteState('NONE');
+    send('DELETE_VOTE');
     setShowArgumentForm(true);
   };
 

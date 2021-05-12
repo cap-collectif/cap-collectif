@@ -1,7 +1,8 @@
 // @flow
-import React, { useState, useRef, type Node } from 'react';
+import React, { useState, useRef, useEffect, type Node } from 'react';
 import { graphql, createFragmentContainer, type RelayFragmentContainer } from 'react-relay';
 import { useIntl } from 'react-intl';
+import { useMachine } from '@xstate/react';
 import { useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import { useScrollYPosition } from 'react-use-scroll-position';
@@ -16,46 +17,17 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
-import CookieMonster from '~/CookieMonster';
+import {
+  debateStateMachine,
+  getInitialState,
+  MachineContext,
+  type VoteState,
+} from './DebateStepPageStateMachine';
 
 type Props = {|
   +step: DebateStepPageVoteAndShare_step,
   +isMobile?: boolean,
 |};
-
-export type VoteState =
-  | 'NONE'
-  | 'VOTED'
-  | 'VOTED_ANONYMOUS'
-  | 'ARGUMENTED'
-  | 'RESULT'
-  | 'NOT_CONFIRMED'
-  | 'NOT_CONFIRMED_ARGUMENTED';
-
-const getInitialState = (
-  debate: $PropertyType<DebateStepPageVoteAndShare_step, 'debate'>,
-  stepClosed: boolean,
-  viewerIsConfirmedByEmail: boolean,
-  isAnonymousVoteAllowed: boolean,
-  isAuthenticated: boolean,
-): VoteState => {
-  if (debate.viewerHasVote && !stepClosed) {
-    if (debate.viewerHasArgument)
-      return viewerIsConfirmedByEmail ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED';
-    return viewerIsConfirmedByEmail ? 'VOTED' : 'NOT_CONFIRMED';
-  }
-
-  if (stepClosed) return 'RESULT';
-  if (
-    isAnonymousVoteAllowed &&
-    CookieMonster.hasDebateAnonymousVoteCookie(debate.id) &&
-    !isAuthenticated
-  ) {
-    return 'VOTED_ANONYMOUS';
-  }
-
-  return 'NONE';
-};
 
 export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
   const { debate, url, isAnonymousParticipationAllowed } = step;
@@ -68,29 +40,31 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
 
   const intl = useIntl();
 
-  const [voteState, setVoteState] = useState<VoteState>(
-    getInitialState(
-      debate,
-      stepClosed,
-      viewerIsConfirmedByEmail,
-      isAnonymousParticipationAllowed,
-      isAuthenticated,
-    ),
-  );
+  const [current, send, service] = useMachine(debateStateMachine);
+  const { value }: { value: VoteState } = current;
+  useEffect(() => {
+    send(
+      getInitialState(
+        debate,
+        stepClosed,
+        viewerIsConfirmedByEmail,
+        isAnonymousParticipationAllowed,
+        isAuthenticated,
+      ),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
   const ref = useRef();
   const isVisible = useOnScreen(ref);
   const { widget } = useDebateStepPage();
-
   return (
-    <>
-      {!isVisible && !stepClosed && !widget.isSource && scrollY > 300 && (
+    <MachineContext.Provider value={service}>
+      {value !== 'idle' && !isVisible && !stepClosed && !widget.isSource && scrollY > 300 && (
         <DebateStepPageAbsoluteVoteAndShare
           isMobile={isMobile}
           step={step}
-          voteState={voteState}
-          setVoteState={setVoteState}
           showArgumentForm={showArgumentForm}
           setShowArgumentForm={setShowArgumentForm}
           viewerIsConfirmed={viewerIsConfirmedByEmail}
@@ -99,7 +73,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
 
       <Flex width="100%" direction="column" align="center" ref={ref}>
         <AnimatePresence>
-          {voteState === 'NONE' && <DebateStepPageVote step={step} setVoteState={setVoteState} />}
+          {value.includes('none') && <DebateStepPageVote step={step} />}
         </AnimatePresence>
         {stepClosed && (
           <AppBox textAlign="center" mb={6}>
@@ -121,7 +95,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
           </AppBox>
         )}
 
-        {voteState !== 'NONE' && (
+        {value !== 'idle' && !value.includes('none') && (
           <>
             {debate.votes.totalCount ? (
               <VoteView
@@ -143,18 +117,17 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
                 isMobile={isMobile}
                 url={url}
                 debate={debate}
-                voteState={voteState}
-                setVoteState={setVoteState}
                 showArgumentForm={showArgumentForm}
                 setShowArgumentForm={setShowArgumentForm}
                 widgetLocation={widget.location}
                 intl={intl}
+                send={send}
               />
             )}
           </>
         )}
       </Flex>
-    </>
+    </MachineContext.Provider>
   );
 };
 

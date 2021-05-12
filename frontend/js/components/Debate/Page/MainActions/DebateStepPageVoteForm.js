@@ -8,6 +8,7 @@ import copy from 'copy-to-clipboard';
 import { m as motion } from 'framer-motion';
 import { useAnalytics } from 'use-analytics';
 import styled, { type StyledComponent } from 'styled-components';
+import { useActor } from '@xstate/react';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
@@ -21,7 +22,6 @@ import component from '~/components/Form/Field';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import AddDebateArgumentMutation from '~/mutations/AddDebateArgumentMutation';
 import { formatConnectionPath } from '~/shared/utils/relay';
-import { type VoteState } from './DebateStepPageVoteAndShare';
 import useScript from '~/utils/hooks/useScript';
 import MobilePublishArgumentModal from '~/components/Debate/Page/Modals/MobilePublishArgumentModal';
 import Text from '~ui/Primitives/Text';
@@ -36,6 +36,7 @@ import type { Dispatch, GlobalState } from '~/types';
 import ModalDeleteVoteMobile from '~/components/Debate/Page/Modals/ModalDeleteVoteMobile';
 import RemoveDebateAnonymousVoteMutation from '~/mutations/RemoveDebateAnonymousVoteMutation';
 import CookieMonster from '~/CookieMonster';
+import { MachineContext, type VoteAction, type VoteState } from './DebateStepPageStateMachine';
 
 export const formName = 'debate-argument-form';
 
@@ -50,8 +51,6 @@ type FormValues = {|
 |};
 
 type OwnProps = {|
-  +voteState: VoteState,
-  +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
   +isMobile?: boolean,
   +setShowArgumentForm: boolean => void,
@@ -60,6 +59,7 @@ type OwnProps = {|
   +viewerIsConfirmed: boolean,
   +widgetLocation: ?string,
   +intl: IntlShape,
+  +send: VoteAction => void,
 |};
 type RelayProps = {|
   +debate: DebateStepPageVoteForm_debate,
@@ -160,7 +160,7 @@ export const addArgumentOnDebate = (
 
 const deleteAnonymousVoteFromViewer = (
   debateId: string,
-  setVoteState: VoteState => void,
+  send: (state: VoteAction) => void,
   setShowArgumentForm: boolean => void,
   intl: IntlShape,
 ) => {
@@ -181,7 +181,7 @@ const deleteAnonymousVoteFromViewer = (
           content: intl.formatHTMLMessage({ id: 'vote.delete_success' }),
         });
         CookieMonster.removeDebateAnonymousVoteCookie(debateId);
-        setVoteState('NONE');
+        send('DELETE_VOTE');
         setShowArgumentForm(true);
       }
     })
@@ -194,7 +194,7 @@ const deleteVoteFromViewer = (
   debateId: string,
   type: 'FOR' | 'AGAINST',
   viewerHasArgument: boolean,
-  setVoteState: VoteState => void,
+  send: (state: VoteAction) => void,
   setShowArgumentForm: boolean => void,
   intl: IntlShape,
 ) => {
@@ -222,7 +222,7 @@ const deleteVoteFromViewer = (
             id: viewerHasArgument ? 'argument.vote.remove_success' : 'vote.delete_success',
           }),
         });
-        setVoteState('NONE');
+        send('DELETE_VOTE');
         setShowArgumentForm(true);
       }
     })
@@ -232,25 +232,21 @@ const deleteVoteFromViewer = (
 };
 
 const bandMessage = (fromWidget: boolean) => ({
-  VOTED: 'thanks-for-your-vote',
-  VOTED_ANONYMOUS: fromWidget ? 'thanks-vote-argument-on-instance' : 'thanks-for-your-vote',
-  ARGUMENTED: 'thanks-for-debate-richer',
-  NOT_CONFIRMED: 'publish.vote.validate.account',
-  NOT_CONFIRMED_ARGUMENTED: 'publish.argument.validate.account',
-  NONE: null,
-  RESULT: null,
+  voted: 'thanks-for-your-vote',
+  voted_anonymous: fromWidget ? 'thanks-vote-argument-on-instance' : 'thanks-for-your-vote',
+  argumented: 'thanks-for-debate-richer',
+  voted_not_confirmed: 'publish.vote.validate.account',
+  argumented_not_confirmed: 'publish.argument.validate.account',
+  none: null,
+  none_not_confirmed: null,
+  none_anonymous: null,
+  result: null,
+  idle: null,
 });
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { body } = values;
-  const {
-    debate,
-    intl,
-    setShowArgumentForm,
-    setVoteState,
-    viewerIsConfirmed,
-    widgetLocation,
-  } = props;
+  const { debate, intl, setShowArgumentForm, widgetLocation, send } = props;
 
   return addArgumentOnDebate(
     debate.id,
@@ -260,11 +256,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     intl,
     () => {
       setShowArgumentForm(false);
-      setVoteState(viewerIsConfirmed ? 'ARGUMENTED' : 'NOT_CONFIRMED_ARGUMENTED');
+      send('ARGUMENT');
     },
     () => {
       setShowArgumentForm(true);
-      setVoteState('VOTED');
+      send('VOTE');
     },
     {
       id: props.viewer?.id || '',
@@ -277,8 +273,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 export const DebateStepPageVoteForm = ({
   debate,
   body,
-  voteState,
-  setVoteState,
   showArgumentForm,
   setShowArgumentForm,
   isAbsolute,
@@ -293,13 +287,15 @@ export const DebateStepPageVoteForm = ({
   const { track } = useAnalytics();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const { widget } = useDebateStepPage();
+  const machine = React.useContext(MachineContext);
+  const [current, send] = useActor<{ value: VoteState }, VoteAction>(machine);
+  const { value } = current;
   const viewerVoteValue =
-    voteState === 'VOTED_ANONYMOUS'
+    value === 'voted_anonymous'
       ? CookieMonster.getDebateAnonymousVoteCookie(debate.id)?.type ?? 'AGAINST'
       : debate.viewerVote?.type ?? 'AGAINST';
 
   const title = viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against';
-
   return (
     <motion.div
       style={{ width: '100%' }}
@@ -320,7 +316,6 @@ export const DebateStepPageVoteForm = ({
                   <ModalDeleteVoteMobile
                     debate={debate}
                     setShowArgumentForm={setShowArgumentForm}
-                    setVoteState={setVoteState}
                   />
                 ) : (
                   <Button
@@ -328,22 +323,17 @@ export const DebateStepPageVoteForm = ({
                     variant="link"
                     variantColor="hierarchy"
                     onClick={() => {
-                      if (voteState !== 'VOTED_ANONYMOUS') {
+                      if (value !== 'voted_anonymous') {
                         deleteVoteFromViewer(
                           debate.id,
                           viewerVoteValue,
                           debate?.viewerHasArgument || false,
-                          setVoteState,
+                          send,
                           setShowArgumentForm,
                           intl,
                         );
                       } else {
-                        deleteAnonymousVoteFromViewer(
-                          debate.id,
-                          setVoteState,
-                          setShowArgumentForm,
-                          intl,
-                        );
+                        deleteAnonymousVoteFromViewer(debate.id, send, setShowArgumentForm, intl);
                       }
                     }}>
                     <FormattedMessage
@@ -353,15 +343,13 @@ export const DebateStepPageVoteForm = ({
                 ))}
               <Text textAlign="center">
                 <span role="img" aria-label="vote" css={{ fontSize: 20, marginRight: 8 }}>
-                  {voteState === 'ARGUMENTED' || voteState === 'NOT_CONFIRMED_ARGUMENTED'
-                    ? '🎉'
-                    : '🗳️'}
+                  {value === 'argumented' || value === 'argumented_not_confirmed' ? '🎉' : '🗳️'}
                 </span>
-                {bandMessage(widget.isSource)[voteState] && (
+                {bandMessage(widget.isSource)[value] && (
                   <FormattedHTMLMessage
-                    id={bandMessage(widget.isSource)[voteState]}
+                    id={bandMessage(widget.isSource)[value]}
                     values={
-                      voteState === 'VOTED_ANONYMOUS' ? { instance: organizationName } : undefined
+                      value === 'voted_anonymous' ? { instance: organizationName } : undefined
                     }
                   />
                 )}
@@ -372,21 +360,17 @@ export const DebateStepPageVoteForm = ({
           {!isMobile && (
             <>
               <span role="img" aria-label="vote" css={{ fontSize: 36, marginRight: 8 }}>
-                {voteState === 'ARGUMENTED' || voteState === 'NOT_CONFIRMED_ARGUMENTED'
-                  ? '🎉'
-                  : '🗳️'}
+                {value === 'argumented' || value === 'argumented_not_confirmed' ? '🎉' : '🗳️'}
               </span>
 
-              {bandMessage(widget.isSource)[voteState] && (
+              {bandMessage(widget.isSource)[value] && (
                 <FormattedHTMLMessage
-                  id={bandMessage(widget.isSource)[voteState]}
-                  values={
-                    voteState === 'VOTED_ANONYMOUS' ? { instance: organizationName } : undefined
-                  }
+                  id={bandMessage(widget.isSource)[value]}
+                  values={value === 'voted_anonymous' ? { instance: organizationName } : undefined}
                 />
               )}
 
-              {voteState !== 'VOTED_ANONYMOUS' && debate.viewerHasArgument && (
+              {value !== 'voted_anonymous' && debate.viewerHasArgument && (
                 <Popover placement="right" trigger={['click']}>
                   <Popover.Trigger>
                     <Button ml={2} variant="link" variantColor="hierarchy">
@@ -430,7 +414,7 @@ export const DebateStepPageVoteForm = ({
                                   debate.id,
                                   viewerVoteValue,
                                   debate?.viewerHasArgument || false,
-                                  setVoteState,
+                                  send,
                                   setShowArgumentForm,
                                   intl,
                                 );
@@ -444,19 +428,14 @@ export const DebateStepPageVoteForm = ({
                   </Popover.Content>
                 </Popover>
               )}
-              {(voteState === 'VOTED_ANONYMOUS' || !debate.viewerHasArgument) && (
+              {(value === 'voted_anonymous' || !debate.viewerHasArgument) && (
                 <Button
                   ml={2}
                   variant="link"
                   variantColor="hierarchy"
                   onClick={() => {
-                    if (voteState === 'VOTED_ANONYMOUS') {
-                      deleteAnonymousVoteFromViewer(
-                        debate.id,
-                        setVoteState,
-                        setShowArgumentForm,
-                        intl,
-                      );
+                    if (value === 'voted_anonymous') {
+                      deleteAnonymousVoteFromViewer(debate.id, send, setShowArgumentForm, intl);
                     } else {
                       track('debate_vote_delete', {
                         type: viewerVoteValue,
@@ -466,7 +445,7 @@ export const DebateStepPageVoteForm = ({
                         debate.id,
                         viewerVoteValue,
                         debate?.viewerHasArgument || false,
-                        setVoteState,
+                        send,
                         setShowArgumentForm,
                         intl,
                       );
@@ -482,7 +461,7 @@ export const DebateStepPageVoteForm = ({
         </>
       </Flex>
 
-      {voteState === 'ARGUMENTED' && (
+      {value === 'argumented' && (
         <Flex mt={3} flexDirection="row" spacing={2} justify="center">
           {url && url !== '' && (
             <iframe
@@ -527,7 +506,7 @@ export const DebateStepPageVoteForm = ({
 
       {showArgumentForm && !isMobile && !widget.isSource && (
         <ConditionalWrapper
-          when={voteState === 'VOTED_ANONYMOUS'}
+          when={value === 'voted_anonymous'}
           wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
           <Card
             borderRadius="8px"
@@ -542,7 +521,7 @@ export const DebateStepPageVoteForm = ({
               },
             }}
             pb={body?.length > 0 ? 6 : 2}>
-            <Form id={formName} onSubmit={handleSubmit} disabled={voteState === 'VOTED_ANONYMOUS'}>
+            <Form id={formName} onSubmit={handleSubmit} disabled={value === 'voted_anonymous'}>
               <Field
                 name="body"
                 component={component}
@@ -552,10 +531,10 @@ export const DebateStepPageVoteForm = ({
                 autoComplete="off"
                 placeholder={title}
                 style={{
-                  pointerEvents: voteState === 'VOTED_ANONYMOUS' ? 'none' : 'auto',
+                  pointerEvents: value === 'voted_anonymous' ? 'none' : 'auto',
                 }}
               />
-              {voteState !== 'VOTED_ANONYMOUS' && body?.length > 0 && (
+              {value !== 'voted_anonymous' && body?.length > 0 && (
                 <Flex justifyContent="flex-end">
                   <Button
                     onClick={() => setShowArgumentForm(false)}
@@ -605,12 +584,12 @@ export const DebateStepPageVoteForm = ({
           <MobilePublishArgumentModal
             debateUrl={debate.url}
             title={intl.formatMessage({ id: title })}
-            show={showArgumentForm && voteState !== 'VOTED_ANONYMOUS' && isOpen}
+            show={showArgumentForm && value !== 'voted_anonymous' && isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
           />
           <ConditionalWrapper
-            when={voteState === 'VOTED_ANONYMOUS'}
+            when={value === 'voted_anonymous'}
             wrapper={children => (
               <LoginOverlay placement={isAbsolute ? 'top' : 'bottom'}>{children}</LoginOverlay>
             )}>

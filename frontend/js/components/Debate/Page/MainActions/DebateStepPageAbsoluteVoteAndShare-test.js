@@ -1,72 +1,140 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
-import { DebateStepPageAbsoluteVoteAndShare } from './DebateStepPageAbsoluteVoteAndShare';
-import { $refType, $fragmentRefs } from '~/mocks';
-
-const baseProps = {
-  viewerIsConfirmed: true,
-  step: {
-    $refType,
-    $fragmentRefs,
-    url: 'step/123',
-    debate: {
-      $fragmentRefs,
-    },
-  },
-  isMobile: false,
-  showArgumentForm: true,
-  setVoteState: jest.fn(),
-  setShowArgumentForm: jest.fn(),
-  voteState: 'NONE',
-};
-
-const props = {
-  basic: baseProps,
-  onMobile: {
-    ...baseProps,
-    isMobile: true,
-  },
-  whenVoted: {
-    ...baseProps,
-    voteState: 'VOTED',
-  },
-  whenVotedMobile: {
-    ...baseProps,
-    voteState: 'VOTED',
-    isMobile: true,
-  },
-  whenArgumentedMobile: {
-    ...baseProps,
-    voteState: 'ARGUMENTED',
-    isMobile: true,
-  },
-};
+import ReactTestRenderer from 'react-test-renderer';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
+import * as hooks from '@xstate/react/lib/useActor';
+import DebateStepPageAbsoluteVoteAndShare from './DebateStepPageAbsoluteVoteAndShare';
+import type { DebateStepPageAbsoluteVoteAndShareTestQuery } from '~relay/DebateStepPageAbsoluteVoteAndShareTestQuery.graphql';
+import {
+  MockProviders,
+  RelaySuspensFragmentTest,
+  addsSupportForPortals,
+  clearSupportForPortals,
+} from '~/testUtils';
+import { MachineContext } from './DebateStepPageStateMachine';
 
 describe('<DebateStepPageAbsoluteVoteAndShare />', () => {
-  it('renders correctly', () => {
-    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.basic} />);
-    expect(wrapper).toMatchSnapshot();
+  let environment;
+  let testComponentTree;
+  let MobileTestComponent;
+  let DesktopTestComponent;
+
+  const query = graphql`
+    query DebateStepPageAbsoluteVoteAndShareTestQuery(
+      $id: ID = "<default>"
+      $isMobile: Boolean!
+      $isAuthenticated: Boolean!
+    ) @relay_test_operation {
+      step: node(id: $id) {
+        ...DebateStepPageAbsoluteVoteAndShare_step
+          @arguments(isMobile: $isMobile, isAuthenticated: $isAuthenticated)
+      }
+    }
+  `;
+
+  const defaultMockResolvers = {
+    DebateStep: () => ({
+      url: '/debate/pour-ou-contre',
+    }),
+  };
+
+  const Machine = { value: {} };
+
+  afterEach(() => {
+    clearSupportForPortals();
   });
 
-  it('renders correctly on mobile', () => {
-    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.onMobile} />);
-    expect(wrapper).toMatchSnapshot();
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    const desktopVariables = { isMobile: false, isAuthenticated: true };
+    const mobileVariables = { isMobile: true, isAuthenticated: true };
+    const TestRenderer = ({ componentProps, queryVariables }) => {
+      const data = useLazyLoadQuery<DebateStepPageAbsoluteVoteAndShareTestQuery>(
+        query,
+        queryVariables,
+      );
+      if (!data.step) return null;
+      return (
+        <DebateStepPageAbsoluteVoteAndShare
+          step={data.step}
+          {...componentProps}
+          viewerIsConfirmed
+          setShowArgumentForm={jest.fn()}
+        />
+      );
+    };
+    MobileTestComponent = componentProps => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <MockProviders store={{}}>
+          <MachineContext.Provider value={{ ...Machine }}>
+            <TestRenderer
+              componentProps={componentProps}
+              queryVariables={mobileVariables}
+              showArgumentForm
+            />
+          </MachineContext.Provider>
+        </MockProviders>
+      </RelaySuspensFragmentTest>
+    );
+    DesktopTestComponent = componentProps => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <MockProviders store={{}}>
+          <MachineContext.Provider value={{ ...Machine }}>
+            <TestRenderer componentProps={componentProps} queryVariables={desktopVariables} />
+          </MachineContext.Provider>
+        </MockProviders>
+      </RelaySuspensFragmentTest>
+    );
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
   });
 
-  it('renders correctly when voted', () => {
-    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenVoted} />);
-    expect(wrapper).toMatchSnapshot();
+  describe('when the query is on desktop', () => {
+    it('renders correctly', () => {
+      jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'none' }, jest.fn()]);
+      testComponentTree = ReactTestRenderer.create(
+        <DesktopTestComponent showArgumentForm={false} />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
+    it('renders correctly when voted', () => {
+      jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'voted' }, jest.fn()]);
+      testComponentTree = ReactTestRenderer.create(<DesktopTestComponent showArgumentForm />);
+      expect(testComponentTree).toMatchSnapshot();
+    });
+    it('renders correctly when argumented', () => {
+      jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'argumented' }, jest.fn()]);
+      testComponentTree = ReactTestRenderer.create(
+        <DesktopTestComponent showArgumentForm={false} />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
   });
-
-  it('renders correctly when voted on mobile', () => {
-    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenVotedMobile} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly when argumented on mobile', () => {
-    const wrapper = shallow(<DebateStepPageAbsoluteVoteAndShare {...props.whenArgumentedMobile} />);
-    expect(wrapper).toMatchSnapshot();
+  describe('when the query is on mobile', () => {
+    it('renders correctly', () => {
+      jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'none' }, jest.fn()]);
+      testComponentTree = ReactTestRenderer.create(
+        <MobileTestComponent isMobile showArgumentForm={false} />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
+    it('renders correctly when voted', () => {
+      jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'voted' }, jest.fn()]);
+      testComponentTree = ReactTestRenderer.create(
+        <MobileTestComponent isMobile showArgumentForm />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
+    it('renders correctly when argumented', () => {
+      jest.spyOn(hooks, 'useActor').mockImplementation(() => [{ value: 'argumented' }, jest.fn()]);
+      testComponentTree = ReactTestRenderer.create(
+        <MobileTestComponent showArgumentForm={false} />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
   });
 });

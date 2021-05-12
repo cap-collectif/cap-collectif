@@ -13,7 +13,6 @@ const props = {
       type: 'FOR',
     },
   },
-  setVoteState: jest.fn(),
   setShowArgumentForm: jest.fn(),
 };
 

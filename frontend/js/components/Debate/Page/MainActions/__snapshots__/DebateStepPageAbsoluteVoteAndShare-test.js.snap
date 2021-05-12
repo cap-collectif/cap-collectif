@@ -1,279 +1,469 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly 1`] = `
-<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
-  _css={[Function]}
-  p={
-    Array [
-      6,
-      8,
-    ]
-  }
-  position="fixed"
-  top={50}
-  width="100%"
-  zIndex={999}
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly 1`] = `
+<div
+  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw eSUepw"
 >
-  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
-    className="container"
+  <div
+    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
   >
-    <ForwardRef
-      alignItems="center"
-      direction={
-        Array [
-          "column",
-          "row",
-        ]
-      }
-      justifyContent="center"
-      spacing={4}
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cihlnc crVXXX"
     >
-      <Text
-        color="gray.900"
-        fontSize={4}
-        textAlign={
-          Array [
-            "center",
-            "left",
-          ]
-        }
-      />
-      <Relay(DebateStepPageVote)
-        setVoteState={[MockFunction]}
-        step={
+      <p
+        className="sc-bdnylx dCXhMr"
+      >
+        
+      </p>
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lmAIgj dzUdRG"
+        style={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "debate": Object {
-              "$fragmentRefs": null,
-            },
-            "url": "step/123",
+            "opacity": 0,
           }
         }
-        top={false}
-        width="unset"
-      />
-    </ForwardRef>
-  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
-</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+      >
+        <span>
+          <button
+            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <IconMock
+              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            />
+            global.for
+          </button>
+        </span>
+        <span>
+          <button
+            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <IconMock
+              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            />
+            global.against
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly on mobile 1`] = `
-<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
-  _css={[Function]}
-  borderTopLeftRadius="poppin"
-  borderTopRightRadius="poppin"
-  bottom={0}
-  p={
-    Array [
-      6,
-      8,
-    ]
-  }
-  position="fixed"
-  width="100%"
-  zIndex={999}
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when argumented 1`] = `
+<div
+  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw eSUepw"
 >
-  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
-    className="container"
+  <div
+    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
   >
-    <ForwardRef
-      alignItems="center"
-      direction={
-        Array [
-          "column",
-          "row",
-        ]
-      }
-      justifyContent="center"
-      spacing={4}
-    >
-      <Text
-        color="gray.900"
-        fontSize={4}
-        textAlign={
-          Array [
-            "center",
-            "left",
-          ]
+    <div
+      style={
+        Object {
+          "width": "100%",
         }
-      />
-      <Relay(DebateStepPageVote)
-        setVoteState={[MockFunction]}
-        step={
+      }
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+      >
+        <span
+          aria-label="vote"
+          className="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+          role="img"
+        >
+          🎉
+        </span>
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "thanks-for-debate-richer",
+            }
+          }
+        />
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+          onClick={[Function]}
+          type="button"
+        >
+          delete.vote.against
+        </button>
+      </div>
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
+      >
+        <iframe
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen={true}
+          frameBorder="0"
+          height="20"
+          scrolling="no"
+          src="https://www.facebook.com/plugins/share_button.php?href=/debate/pour-ou-contre&layout=button_count&size=small&width=91&height=20&appId"
+          style={
+            Object {
+              "border": "none",
+              "overflow": "hidden",
+            }
+          }
+          title="facebook share button"
+          width="91"
+        />
+        <a
+          className="twitter-share-button"
+          data-show-count="false"
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        >
+          Tweet
+        </a>
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+          />
+          global.link
+        </button>
+        <div
+          className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+          style={
+            Object {
+              "opacity": 0,
+              "transform": "scale(0.8) translateZ(0)",
+            }
+          }
+        >
+          <p
+            className="sc-bdnylx hIgmxG"
+            title="copied-link"
+          >
+            copied-link
+          </p>
+          <div
+            className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+            data-popper-arrow={true}
+            id="arrow"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when voted 1`] = `
+<div
+  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw gBGgFy"
+>
+  <div
+    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+  >
+    <div
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+      >
+        <span
+          aria-label="vote"
+          className="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+          role="img"
+        >
+          🗳️
+        </span>
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "thanks-for-your-vote",
+            }
+          }
+        />
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+          onClick={[Function]}
+          type="button"
+        >
+          delete.vote.against
+        </button>
+      </div>
+      <div
+        className="sc-bdnylx dJHjFW DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+      >
+        <form
+          className="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+          disabled={false}
+          id="debate-argument-form"
+          onSubmit={[Function]}
+        >
+          <div
+            className="form-group"
+          >
+            <textarea
+              aria-describedby="body-error "
+              aria-invalid={false}
+              autoComplete="off"
+              autoFocus={false}
+              className="form-control"
+              id="body"
+              minLength="1"
+              name="body"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onDragStart={[Function]}
+              onDrop={[Function]}
+              onFocus={[Function]}
+              placeholder="why-are-you-against"
+              style={
+                Object {
+                  "pointerEvents": "auto",
+                }
+              }
+              type="textarea"
+              value=""
+              warnings={null}
+            />
+            <div
+              className="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly 1`] = `
+<div
+  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 fpYjMC eSUepw"
+>
+  <div
+    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+  >
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cihlnc crVXXX"
+    >
+      <p
+        className="sc-bdnylx dCXhMr"
+      >
+        
+      </p>
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lmAIgj dzUdRG"
+        style={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "debate": Object {
-              "$fragmentRefs": null,
-            },
-            "url": "step/123",
+            "opacity": 0,
           }
         }
-        top={true}
-        width="unset"
-      />
-    </ForwardRef>
-  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
-</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+      >
+        <span>
+          <button
+            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <IconMock
+              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            />
+            global.for
+          </button>
+        </span>
+        <span>
+          <button
+            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            type="button"
+          >
+            <IconMock
+              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            />
+            global.against
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when argumented on mobile 1`] = `
-<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
-  _css={[Function]}
-  borderTopLeftRadius="poppin"
-  borderTopRightRadius="poppin"
-  bottom={0}
-  p={
-    Array [
-      6,
-      8,
-    ]
-  }
-  position="fixed"
-  width="100%"
-  zIndex={999}
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when argumented 1`] = `
+<div
+  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw eSUepw"
 >
-  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
-    className="container"
+  <div
+    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
   >
-    <Relay(Connect(ReduxForm))
-      debate={
+    <div
+      style={
         Object {
-          "$fragmentRefs": null,
+          "width": "100%",
         }
       }
-      intl={
-        Object {
-          "formatDate": [Function],
-          "formatHTMLMessage": [Function],
-          "formatMessage": [Function],
-          "formatNumber": [Function],
-          "formatPlural": [Function],
-          "formatRelative": [Function],
-          "formatTime": [Function],
-          "formats": Object {},
-          "locale": "fr-FR",
-          "messages": Object {},
-          "now": [Function],
-        }
-      }
-      isAbsolute={true}
-      isMobile={true}
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
-      showArgumentForm={true}
-      url="step/123"
-      viewerIsConfirmed={true}
-      voteState="ARGUMENTED"
-      widgetLocation={null}
-    />
-  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
-</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+      >
+        <span
+          aria-label="vote"
+          className="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+          role="img"
+        >
+          🎉
+        </span>
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "thanks-for-debate-richer",
+            }
+          }
+        />
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+          onClick={[Function]}
+          type="button"
+        >
+          delete.vote.against
+        </button>
+      </div>
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
+      >
+        <iframe
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen={true}
+          frameBorder="0"
+          height="20"
+          scrolling="no"
+          src="https://www.facebook.com/plugins/share_button.php?href=/debate/pour-ou-contre&layout=button_count&size=small&width=91&height=20&appId"
+          style={
+            Object {
+              "border": "none",
+              "overflow": "hidden",
+            }
+          }
+          title="facebook share button"
+          width="91"
+        />
+        <a
+          className="twitter-share-button"
+          data-show-count="false"
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        >
+          Tweet
+        </a>
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+          />
+          global.link
+        </button>
+        <div
+          className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+          style={
+            Object {
+              "opacity": 0,
+              "transform": "scale(0.8) translateZ(0)",
+            }
+          }
+        >
+          <p
+            className="sc-bdnylx hIgmxG"
+            title="copied-link"
+          >
+            copied-link
+          </p>
+          <div
+            className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+            data-popper-arrow={true}
+            id="arrow"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted 1`] = `
-<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
-  _css={[Function]}
-  p={
-    Array [
-      6,
-      8,
-    ]
-  }
-  position="fixed"
-  top={50}
-  width="100%"
-  zIndex={999}
+exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when voted 1`] = `
+<div
+  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 fpYjMC eSUepw"
 >
-  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
-    className="container"
+  <div
+    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
   >
-    <Relay(Connect(ReduxForm))
-      debate={
+    <div
+      style={
         Object {
-          "$fragmentRefs": null,
+          "width": "100%",
         }
       }
-      intl={
-        Object {
-          "formatDate": [Function],
-          "formatHTMLMessage": [Function],
-          "formatMessage": [Function],
-          "formatNumber": [Function],
-          "formatPlural": [Function],
-          "formatRelative": [Function],
-          "formatTime": [Function],
-          "formats": Object {},
-          "locale": "fr-FR",
-          "messages": Object {},
-          "now": [Function],
-        }
-      }
-      isAbsolute={true}
-      isMobile={false}
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
-      showArgumentForm={true}
-      url="step/123"
-      viewerIsConfirmed={true}
-      voteState="VOTED"
-      widgetLocation={null}
-    />
-  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
-</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
-`;
-
-exports[`<DebateStepPageAbsoluteVoteAndShare /> renders correctly when voted on mobile 1`] = `
-<DebateStepPageAbsoluteVoteAndShare___StyledAppBox
-  _css={[Function]}
-  borderTopLeftRadius="poppin"
-  borderTopRightRadius="poppin"
-  bottom={0}
-  p={
-    Array [
-      6,
-      8,
-    ]
-  }
-  position="fixed"
-  width="100%"
-  zIndex={999}
->
-  <DebateStepPageAbsoluteVoteAndShare___StyledAppBox2
-    className="container"
-  >
-    <Relay(Connect(ReduxForm))
-      debate={
-        Object {
-          "$fragmentRefs": null,
-        }
-      }
-      intl={
-        Object {
-          "formatDate": [Function],
-          "formatHTMLMessage": [Function],
-          "formatMessage": [Function],
-          "formatNumber": [Function],
-          "formatPlural": [Function],
-          "formatRelative": [Function],
-          "formatTime": [Function],
-          "formats": Object {},
-          "locale": "fr-FR",
-          "messages": Object {},
-          "now": [Function],
-        }
-      }
-      isAbsolute={true}
-      isMobile={true}
-      setShowArgumentForm={[MockFunction]}
-      setVoteState={[MockFunction]}
-      showArgumentForm={true}
-      url="step/123"
-      viewerIsConfirmed={true}
-      voteState="VOTED"
-      widgetLocation={null}
-    />
-  </DebateStepPageAbsoluteVoteAndShare___StyledAppBox2>
-</DebateStepPageAbsoluteVoteAndShare___StyledAppBox>
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+      >
+        <p
+          className="sc-bdnylx dzpbOH"
+        >
+          <span
+            aria-label="vote"
+            className="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+            role="img"
+          >
+            🗳️
+          </span>
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "thanks-for-your-vote",
+              }
+            }
+          />
+        </p>
+      </div>
+      <button
+        className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+        onClick={[Function]}
+        type="button"
+      >
+        publish-argument
+      </button>
+    </div>
+  </div>
+</div>
 `;

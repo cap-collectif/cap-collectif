@@ -1,985 +1,526 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DebateStepPageVoteForm/> should renders correctly 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
->
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
-  >
-    <DebateStepPageVoteForm___StyledSpan2
-      aria-label="vote"
-      role="img"
-    >
-      🗳️
-    </DebateStepPageVoteForm___StyledSpan2>
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
-    >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-  </ForwardRef>
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
-  >
-    <DebateStepPageVoteForm___StyledCard
-      bg="white"
-      borderRadius="8px"
-      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-      mt={8}
-      p={6}
-      pb={6}
-      width="100%"
-    >
-      <DebateStepPageVoteForm__Form
-        disabled={false}
-        id="debate-argument-form"
-        onSubmit={[MockFunction]}
-      >
-        <Field
-          autoComplete="off"
-          component={[Function]}
-          id="body"
-          minLength="1"
-          name="body"
-          placeholder="why-are-you-against"
-          style={
-            Object {
-              "pointerEvents": "auto",
-            }
-          }
-          type="textarea"
-        />
-        <ForwardRef
-          justifyContent="flex-end"
-        >
-          <Button
-            mr={7}
-            onClick={[Function]}
-            variant="link"
-            variantColor="primary"
-          >
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="submit"
-            variant="primary"
-            variantColor="primary"
-            variantSize="big"
-          >
-            <FormattedMessage
-              id="argument.publish.mine"
-              values={Object {}}
-            />
-          </Button>
-        </ForwardRef>
-      </DebateStepPageVoteForm__Form>
-    </DebateStepPageVoteForm___StyledCard>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly on mobile 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 1,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
->
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
-  >
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
-    >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-    <Text
-      textAlign="center"
-    >
-      <DebateStepPageVoteForm___StyledSpan
-        aria-label="vote"
-        role="img"
-      >
-        🗳️
-      </DebateStepPageVoteForm___StyledSpan>
-    </Text>
-  </ForwardRef>
-  <Connect(MobilePublishArgumentModal)
-    debateUrl="/debate"
-    onClose={[Function]}
-    onSubmit={[MockFunction]}
-    show={false}
-    title="why-are-you-against"
-  />
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
-  >
-    <Button
-      justifyContent="center"
-      mt={3}
-      onClick={[Function]}
-      variant="primary"
-      variantSize="big"
-      width="100%"
-    >
-      publish-argument
-    </Button>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
-`;
-
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
+<div
+  style="width:100%;opacity:0"
 >
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
   >
-    <DebateStepPageVoteForm___StyledSpan2
+    <span
       aria-label="vote"
+      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
       role="img"
     >
       🎉
-    </DebateStepPageVoteForm___StyledSpan2>
-    <FormattedHTMLMessage
-      id="thanks-for-debate-richer"
-      tagName="span"
-      values={Object {}}
-    />
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
+    </span>
+    <span>
+      thanks-for-debate-richer
+    </span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
     >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-  </ForwardRef>
-  <ForwardRef
-    flexDirection="row"
-    justify="center"
-    mt={3}
-    spacing={2}
+      delete.vote.against
+    </button>
+  </div>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
   >
     <a
-      className="twitter-share-button"
+      class="twitter-share-button"
       data-show-count="false"
       href="https://twitter.com/share?ref_src=twsrc%5Etfw"
     >
       Tweet
     </a>
-    <Tooltip
-      label="copied-link"
-      trigger={
-        Array [
-          "click",
-        ]
-      }
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+      type="button"
     >
-      <Button
-        backgroundColor="gray.500"
-        color="white"
-        fontSize={11}
-        height={5}
-        onClick={[Function]}
-        p="4px 8px"
-      >
-        <Icon
-          mr="1"
-          name="HYPERLINK"
-          size="sm"
-        />
-        <FormattedMessage
-          id="global.link"
-          values={Object {}}
-        />
-      </Button>
-    </Tooltip>
-  </ForwardRef>
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
+      <iconmock
+        class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+      />
+      global.link
+    </button>
+  </div>
+  <div
+    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
   >
-    <DebateStepPageVoteForm___StyledCard
-      bg="white"
-      borderRadius="8px"
-      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-      mt={8}
-      p={6}
-      pb={6}
-      width="100%"
+    <form
+      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      id="debate-argument-form"
     >
-      <DebateStepPageVoteForm__Form
-        disabled={false}
-        id="debate-argument-form"
-        onSubmit={[MockFunction]}
+      <div
+        class="form-group"
       >
-        <Field
-          autoComplete="off"
-          component={[Function]}
+        <textarea
+          aria-describedby="body-error "
+          aria-invalid="false"
+          autocomplete="off"
+          class="form-control"
           id="body"
-          minLength="1"
+          minlength="1"
           name="body"
           placeholder="why-are-you-against"
-          style={
-            Object {
-              "pointerEvents": "auto",
-            }
-          }
+          style="pointer-events:auto"
           type="textarea"
         />
-        <ForwardRef
-          justifyContent="flex-end"
+        <div
+          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
         >
-          <Button
-            mr={7}
-            onClick={[Function]}
-            variant="link"
-            variantColor="primary"
-          >
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="submit"
-            variant="primary"
-            variantColor="primary"
-            variantSize="big"
-          >
-            <FormattedMessage
-              id="argument.publish.mine"
-              values={Object {}}
-            />
-          </Button>
-        </ForwardRef>
-      </DebateStepPageVoteForm__Form>
-    </DebateStepPageVoteForm___StyledCard>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      </div>
+      <div
+        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+      >
+        <button
+          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          type="button"
+        >
+          global.cancel
+        </button>
+        <button
+          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU haoEhH"
+          type="submit"
+        >
+          argument.publish.mine
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 `;
 
-exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 1,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed 1`] = `
+<div
+  style="width:100%;opacity:0"
 >
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
   >
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
+    <span
+      aria-label="vote"
+      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+      role="img"
     >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-    <Text
-      textAlign="center"
+      🎉
+    </span>
+    <span>
+      publish.argument.validate.account
+    </span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
     >
-      <DebateStepPageVoteForm___StyledSpan
+      delete.vote.against
+    </button>
+  </div>
+  <div
+    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+  >
+    <form
+      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      id="debate-argument-form"
+    >
+      <div
+        class="form-group"
+      >
+        <textarea
+          aria-describedby="body-error "
+          aria-invalid="false"
+          autocomplete="off"
+          class="form-control"
+          id="body"
+          minlength="1"
+          name="body"
+          placeholder="why-are-you-against"
+          style="pointer-events:auto"
+          type="textarea"
+        />
+        <div
+          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+        >
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      </div>
+      <div
+        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+      >
+        <button
+          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          type="button"
+        >
+          global.cancel
+        </button>
+        <button
+          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU haoEhH"
+          type="submit"
+        >
+          argument.publish.mine
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed on mobile 1`] = `
+<div
+  style="width:100%;opacity:1"
+>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+  >
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
+    >
+      delete.vote.against
+    </button>
+    <p
+      class="sc-bdnylx dzpbOH"
+    >
+      <span
         aria-label="vote"
+        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
         role="img"
       >
         🎉
-      </DebateStepPageVoteForm___StyledSpan>
-      <FormattedHTMLMessage
-        id="thanks-for-debate-richer"
-        tagName="span"
-        values={Object {}}
-      />
-    </Text>
-  </ForwardRef>
-  <ForwardRef
-    flexDirection="row"
-    justify="center"
-    mt={3}
-    spacing={2}
+      </span>
+      <span>
+        publish.argument.validate.account
+      </span>
+    </p>
+  </div>
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    type="button"
+  >
+    publish-argument
+  </button>
+</div>
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
+<div
+  style="width:100%;opacity:1"
+>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+  >
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
+    >
+      delete.vote.against
+    </button>
+    <p
+      class="sc-bdnylx dzpbOH"
+    >
+      <span
+        aria-label="vote"
+        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+        role="img"
+      >
+        🎉
+      </span>
+      <span>
+        thanks-for-debate-richer
+      </span>
+    </p>
+  </div>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
   >
     <a
-      className="twitter-share-button"
+      class="twitter-share-button"
       data-show-count="false"
       href="https://twitter.com/share?ref_src=twsrc%5Etfw"
     >
       Tweet
     </a>
-    <Tooltip
-      label="copied-link"
-      trigger={
-        Array [
-          "click",
-        ]
-      }
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+      type="button"
     >
-      <Button
-        backgroundColor="gray.500"
-        color="white"
-        fontSize={11}
-        height={5}
-        onClick={[Function]}
-        p="4px 8px"
-      >
-        <Icon
-          mr="1"
-          name="HYPERLINK"
-          size="sm"
-        />
-        <FormattedMessage
-          id="global.link"
-          values={Object {}}
-        />
-      </Button>
-    </Tooltip>
-  </ForwardRef>
-  <Connect(MobilePublishArgumentModal)
-    debateUrl="/debate"
-    onClose={[Function]}
-    onSubmit={[MockFunction]}
-    show={false}
-    title="why-are-you-against"
-  />
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
+      <iconmock
+        class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+      />
+      global.link
+    </button>
+  </div>
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    type="button"
   >
-    <Button
-      justifyContent="center"
-      mt={3}
-      onClick={[Function]}
-      variant="primary"
-      variantSize="big"
-      width="100%"
-    >
-      publish-argument
-    </Button>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+    publish-argument
+  </button>
+</div>
 `;
 
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
+<div
+  style="width:100%;opacity:0"
 >
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
   >
-    <DebateStepPageVoteForm___StyledSpan2
+    <span
       aria-label="vote"
+      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
       role="img"
     >
       🗳️
-    </DebateStepPageVoteForm___StyledSpan2>
-    <FormattedHTMLMessage
-      id="thanks-for-your-vote"
-      tagName="span"
-      values={Object {}}
-    />
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
+    </span>
+    <span>
+      thanks-for-your-vote
+    </span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
     >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-  </ForwardRef>
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
+      delete.vote.against
+    </button>
+  </div>
+  <div
+    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
   >
-    <DebateStepPageVoteForm___StyledCard
-      bg="white"
-      borderRadius="8px"
-      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-      mt={8}
-      p={6}
-      pb={6}
-      width="100%"
+    <form
+      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      id="debate-argument-form"
     >
-      <DebateStepPageVoteForm__Form
-        disabled={false}
-        id="debate-argument-form"
-        onSubmit={[MockFunction]}
+      <div
+        class="form-group"
       >
-        <Field
-          autoComplete="off"
-          component={[Function]}
+        <textarea
+          aria-describedby="body-error "
+          aria-invalid="false"
+          autocomplete="off"
+          class="form-control"
           id="body"
-          minLength="1"
+          minlength="1"
           name="body"
           placeholder="why-are-you-against"
-          style={
-            Object {
-              "pointerEvents": "auto",
-            }
-          }
+          style="pointer-events:auto"
           type="textarea"
         />
-        <ForwardRef
-          justifyContent="flex-end"
+        <div
+          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
         >
-          <Button
-            mr={7}
-            onClick={[Function]}
-            variant="link"
-            variantColor="primary"
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      </div>
+      <div
+        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+      >
+        <button
+          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          type="button"
+        >
+          global.cancel
+        </button>
+        <button
+          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU haoEhH"
+          type="submit"
+        >
+          argument.publish.mine
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously 1`] = `
+<div
+  style="width:100%;opacity:0"
+>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+  >
+    <span
+      aria-label="vote"
+      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+      role="img"
+    >
+      🗳️
+    </span>
+    <span>
+      thanks-for-your-vote {"instance":"CapCollectif"}
+    </span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
+    >
+      delete.vote.against
+    </button>
+  </div>
+  <span>
+    <div
+      class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+    >
+      <form
+        class="DebateStepPageVoteForm__Form-sc-89or92-0 gpNHGt"
+        disabled=""
+        id="debate-argument-form"
+      >
+        <div
+          class="form-group"
+        >
+          <textarea
+            aria-describedby="body-error "
+            aria-invalid="false"
+            autocomplete="off"
+            class="form-control"
+            id="body"
+            minlength="1"
+            name="body"
+            placeholder="why-are-you-against"
+            style="pointer-events:none"
+            type="textarea"
+          />
+          <div
+            class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
           >
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="submit"
-            variant="primary"
-            variantColor="primary"
-            variantSize="big"
-          >
-            <FormattedMessage
-              id="argument.publish.mine"
-              values={Object {}}
-            />
-          </Button>
-        </ForwardRef>
-      </DebateStepPageVoteForm__Form>
-    </DebateStepPageVoteForm___StyledCard>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+      </form>
+    </div>
+  </span>
+</div>
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously on mobile 1`] = `
+<div
+  style="width:100%;opacity:1"
+>
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+  >
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
+    >
+      delete.vote.against
+    </button>
+    <p
+      class="sc-bdnylx dzpbOH"
+    >
+      <span
+        aria-label="vote"
+        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+        role="img"
+      >
+        🗳️
+      </span>
+      <span>
+        thanks-for-your-vote {"instance":"CapCollectif"}
+      </span>
+    </p>
+  </div>
+  <span>
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+      type="button"
+    >
+      publish-argument
+    </button>
+  </span>
+</div>
 `;
 
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 1,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
+<div
+  style="width:100%;opacity:1"
 >
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
+  <div
+    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
   >
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
+    <button
+      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      type="button"
     >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-    <Text
-      textAlign="center"
+      delete.vote.against
+    </button>
+    <p
+      class="sc-bdnylx dzpbOH"
     >
-      <DebateStepPageVoteForm___StyledSpan
+      <span
         aria-label="vote"
+        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
         role="img"
       >
         🗳️
-      </DebateStepPageVoteForm___StyledSpan>
-      <FormattedHTMLMessage
-        id="thanks-for-your-vote"
-        tagName="span"
-        values={Object {}}
-      />
-    </Text>
-  </ForwardRef>
-  <Connect(MobilePublishArgumentModal)
-    debateUrl="/debate"
-    onClose={[Function]}
-    onSubmit={[MockFunction]}
-    show={false}
-    title="why-are-you-against"
-  />
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
+      </span>
+      <span>
+        thanks-for-your-vote
+      </span>
+    </p>
+  </div>
+  <button
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    type="button"
   >
-    <Button
-      justifyContent="center"
-      mt={3}
-      onClick={[Function]}
-      variant="primary"
-      variantSize="big"
-      width="100%"
-    >
-      publish-argument
-    </Button>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when voted without argument 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 0,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
->
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
-  >
-    <DebateStepPageVoteForm___StyledSpan2
-      aria-label="vote"
-      role="img"
-    >
-      🗳️
-    </DebateStepPageVoteForm___StyledSpan2>
-    <FormattedHTMLMessage
-      id="thanks-for-your-vote"
-      tagName="span"
-      values={Object {}}
-    />
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
-    >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-  </ForwardRef>
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
-  >
-    <DebateStepPageVoteForm___StyledCard
-      bg="white"
-      borderRadius="8px"
-      boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-      mt={8}
-      p={6}
-      pb={6}
-      width="100%"
-    >
-      <DebateStepPageVoteForm__Form
-        disabled={false}
-        id="debate-argument-form"
-        onSubmit={[MockFunction]}
-      >
-        <Field
-          autoComplete="off"
-          component={[Function]}
-          id="body"
-          minLength="1"
-          name="body"
-          placeholder="why-are-you-against"
-          style={
-            Object {
-              "pointerEvents": "auto",
-            }
-          }
-          type="textarea"
-        />
-        <ForwardRef
-          justifyContent="flex-end"
-        >
-          <Button
-            mr={7}
-            onClick={[Function]}
-            variant="link"
-            variantColor="primary"
-          >
-            <FormattedMessage
-              id="global.cancel"
-              values={Object {}}
-            />
-          </Button>
-          <Button
-            onClick={[Function]}
-            type="submit"
-            variant="primary"
-            variantColor="primary"
-            variantSize="big"
-          >
-            <FormattedMessage
-              id="argument.publish.mine"
-              values={Object {}}
-            />
-          </Button>
-        </ForwardRef>
-      </DebateStepPageVoteForm__Form>
-    </DebateStepPageVoteForm___StyledCard>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when voted without argument on mobile 1`] = `
-<ForwardRef(MotionComponent)
-  animate={
-    Object {
-      "opacity": 1,
-    }
-  }
-  exit={
-    Object {
-      "opacity": 0,
-    }
-  }
-  initial={
-    Object {
-      "opacity": 1,
-    }
-  }
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  transition={
-    Object {
-      "delay": 0.75,
-      "duration": 0.5,
-    }
-  }
->
-  <ForwardRef
-    alignItems="center"
-    direction={
-      Array [
-        "column",
-        "row",
-      ]
-    }
-    fontWeight={
-      Array [
-        500,
-      ]
-    }
-    justifyContent="center"
-  >
-    <Button
-      ml={2}
-      onClick={[Function]}
-      variant="link"
-      variantColor="hierarchy"
-    >
-      <FormattedMessage
-        id="delete.vote.against"
-        values={Object {}}
-      />
-    </Button>
-    <Text
-      textAlign="center"
-    >
-      <DebateStepPageVoteForm___StyledSpan
-        aria-label="vote"
-        role="img"
-      >
-        🗳️
-      </DebateStepPageVoteForm___StyledSpan>
-      <FormattedHTMLMessage
-        id="thanks-for-your-vote"
-        tagName="span"
-        values={Object {}}
-      />
-    </Text>
-  </ForwardRef>
-  <Connect(MobilePublishArgumentModal)
-    debateUrl="/debate"
-    onClose={[Function]}
-    onSubmit={[MockFunction]}
-    show={false}
-    title="why-are-you-against"
-  />
-  <ConditionalWrapper
-    when={false}
-    wrapper={[Function]}
-  >
-    <Button
-      justifyContent="center"
-      mt={3}
-      onClick={[Function]}
-      variant="primary"
-      variantSize="big"
-      width="100%"
-    >
-      publish-argument
-    </Button>
-  </ConditionalWrapper>
-</ForwardRef(MotionComponent)>
+    publish-argument
+  </button>
+</div>
 `;

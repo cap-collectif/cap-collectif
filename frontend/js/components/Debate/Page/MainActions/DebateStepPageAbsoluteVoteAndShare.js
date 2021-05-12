@@ -2,21 +2,20 @@
 import React, { type Node } from 'react';
 import css from '@styled-system/css';
 import { useIntl } from 'react-intl';
+import { useActor } from '@xstate/react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { DebateStepPageAbsoluteVoteAndShare_step } from '~relay/DebateStepPageAbsoluteVoteAndShare_step.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import DebateStepPageVote from './DebateStepPageVote';
-import { type VoteState } from './DebateStepPageVoteAndShare';
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
+import { MachineContext, type VoteState, type VoteAction } from './DebateStepPageStateMachine';
 
 type Props = {|
   +step: DebateStepPageAbsoluteVoteAndShare_step,
   +isMobile?: boolean,
-  +voteState: VoteState,
-  +setVoteState: VoteState => void,
   +showArgumentForm: boolean,
   +setShowArgumentForm: boolean => void,
   +viewerIsConfirmed: boolean,
@@ -25,8 +24,6 @@ type Props = {|
 export const DebateStepPageAbsoluteVoteAndShare = ({
   step,
   isMobile,
-  voteState,
-  setVoteState,
   showArgumentForm,
   setShowArgumentForm,
   viewerIsConfirmed,
@@ -34,6 +31,9 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
   const { debate, url } = step;
   const { title, widget } = useDebateStepPage();
   const intl = useIntl();
+  const machine = React.useContext(MachineContext);
+  const [current, send] = useActor<{ value: VoteState }, VoteAction>(machine);
+  const { value } = current;
 
   return (
     <AppBox
@@ -49,7 +49,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
         background: 'white',
         boxShadow: isMobile
           ? 'medium'
-          : !showArgumentForm || voteState === 'NONE'
+          : !showArgumentForm || value.includes('none')
           ? 'medium'
           : '0 10px 14px 0 white',
       })}>
@@ -57,7 +57,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       <AppBox
         className="container"
         css={{ padding: '0 !important', '& .recaptcha-message': { display: 'none' } }}>
-        {voteState === 'NONE' && (
+        {value.includes('none') && (
           <Flex
             direction={['column', 'row']}
             spacing={4}
@@ -66,27 +66,21 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>
               {title}
             </Text>
-            <DebateStepPageVote
-              width="unset"
-              setVoteState={setVoteState}
-              step={step}
-              top={isMobile}
-            />
+            <DebateStepPageVote width="unset" step={step} top={isMobile} />
           </Flex>
         )}
-        {voteState !== 'NONE' && (
+        {!value.includes('none') && (
           <DebateStepPageVoteForm
             viewerIsConfirmed={viewerIsConfirmed}
             isMobile={isMobile}
             isAbsolute
             url={url}
             debate={debate}
-            voteState={voteState}
-            setVoteState={setVoteState}
             showArgumentForm={showArgumentForm}
             setShowArgumentForm={setShowArgumentForm}
             widgetLocation={widget.location}
             intl={intl}
+            send={send}
           />
         )}
       </AppBox>
