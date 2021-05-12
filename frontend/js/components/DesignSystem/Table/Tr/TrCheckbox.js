@@ -31,7 +31,7 @@ const TrCheckbox = ({ rowId, inHead, checkboxLabel }: TrCheckboxProps): React.No
   }, [hasIndeterminateState, hasAllRowsChecked]);
 
   return inHead ? (
-    <Th width="45px">
+    <Th width="45px" noPlaceholder>
       <VisuallyHidden>
         <label htmlFor="allRows">{intl.formatMessage({ id: 'select-all-lines' })}</label>
       </VisuallyHidden>

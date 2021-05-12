@@ -7,6 +7,7 @@ import Menu from '../../../components/DesignSystem/Menu/Menu';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
+import TablePlaceholder, { type TablePlaceholderProps } from '~ds/Table/placeholder';
 
 export default {
   title: 'Design system/Table',
@@ -144,19 +145,13 @@ Selectable.args = {
 };
 Selectable.storyName = 'selectable';
 
-export const Loading = Template.bind({});
-Loading.args = {
+const TemplatePlaceholder = (args: TablePlaceholderProps) => <TablePlaceholder {...args} />;
+
+export const Placeholder = TemplatePlaceholder.bind({});
+
+Placeholder.args = {
+  rowsCount: 5,
+  columnsCount: 5,
   selectable: true,
-  isLoading: true,
-  actionBar: (
-    <ButtonGroup>
-      <Button variant="secondary" variantColor="primary" variantSize="small">
-        Add
-      </Button>
-      <Button variant="secondary" variantColor="danger" variantSize="small">
-        Delete
-      </Button>
-    </ButtonGroup>
-  ),
 };
-Loading.storyName = 'loading';
+Placeholder.storyName = 'loading';

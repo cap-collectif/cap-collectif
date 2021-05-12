@@ -10,7 +10,7 @@ import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {|
   ...FlexProps,
-  +children?: React.Node,
+  +children?: React.Node | (({ selectedRows: string[] }) => React.Node),
 |};
 
 // Need wrapper for animation 'cause of https://github.com/framer/motion/issues/368#issuecomment-782098174
@@ -47,7 +47,7 @@ const ActionBar = ({ children, ...props }: Props) => {
                 { num: selectedRows.length },
               )}
             </Text>
-            {children}
+            {typeof children === 'function' ? children({ selectedRows }) : children}
           </Flex>
         </ActionBarWrapper>
       )}
