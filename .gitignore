@@ -40,6 +40,7 @@ infrastructure/services/databasefixtures/dump.sql
 
 *.log
 .eslintcache
+.stylelintcache
 
 # Node
 **/node_modules/

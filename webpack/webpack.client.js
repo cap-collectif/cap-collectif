@@ -2,7 +2,6 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const { ProvidePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -42,9 +41,13 @@ const devConf = {
       'lodash-es': 'lodash',
     },
     fallback: {
-      "stream": require.resolve("stream-browserify"),
-      "zlib": require.resolve("browserify-zlib"),
-    }
+      stream: require.resolve('stream-browserify'),
+      zlib: require.resolve('browserify-zlib'),
+    },
+  },
+
+  cache: {
+    type: 'filesystem',
   },
 
   entry: {
