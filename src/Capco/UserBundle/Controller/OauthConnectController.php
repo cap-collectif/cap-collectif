@@ -153,6 +153,7 @@ class OauthConnectController extends ConnectController
                 $this->authUtils->getResourceOwnerCheckPath($service)
             );
             $resourceOwner = $this->authUtils->getResourceOwner($service);
+
             $authorizationUrl = $resourceOwner->getAuthorizationUrl($redirectUrl, []);
         } catch (\RuntimeException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e);

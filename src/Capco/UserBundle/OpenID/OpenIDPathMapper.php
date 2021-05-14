@@ -5,6 +5,7 @@ namespace Capco\UserBundle\OpenID;
 use Capco\UserBundle\OpenID\Mapping\CarpentrasMapping;
 use Capco\UserBundle\OpenID\Mapping\DecathlonMapping;
 use Capco\UserBundle\OpenID\Mapping\DevOpenIDMapping;
+use Capco\UserBundle\OpenID\Mapping\EdfMapping;
 use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
 use Capco\UserBundle\OpenID\Mapping\MappingInterface;
 use Capco\UserBundle\OpenID\Mapping\NantesMapping;
@@ -17,6 +18,11 @@ class OpenIDPathMapper
     public function __construct(string $instance)
     {
         switch ($instance) {
+            case 'parlons-energie':
+            case 'pe':
+                $this->instanceMapper = new EdfMapping();
+
+                break;
             case 'occitanie':
                 $this->instanceMapper = new OccitanieMapping();
 
