@@ -60,6 +60,8 @@ export const EventPageHeader = ({
     themes,
     viewerDidAuthor,
     author,
+    commentable,
+    guestListEnabled,
   } = event;
 
   const speaker = animator ?? author;
@@ -174,16 +176,25 @@ export const EventPageHeader = ({
           </div>
         </InfoContainer>
 
-        <InfoLineContainer>
-          <div>
-            <span className="number">{comments.totalCount}</span>
-            <FormattedMessage id="comment.dynamic" values={{ num: comments.totalCount }} />
-          </div>
-          <div>
-            <span className="number">{participants.totalCount}</span>
-            <FormattedMessage id="registered.dynamic" values={{ num: participants.totalCount }} />
-          </div>
-        </InfoLineContainer>
+        {(commentable || guestListEnabled) && (
+          <InfoLineContainer>
+            {commentable && (
+              <div>
+                <span className="number">{comments.totalCount}</span>
+                <FormattedMessage id="comment.dynamic" values={{ num: comments.totalCount }} />
+              </div>
+            )}
+            {guestListEnabled && (
+              <div>
+                <span className="number">{participants.totalCount}</span>
+                <FormattedMessage
+                  id="registered.dynamic"
+                  values={{ num: participants.totalCount }}
+                />
+              </div>
+            )}
+          </InfoLineContainer>
+        )}
 
         {(link || (viewerDidAuthor && hasProposeEventEnabled)) && (
           <ActionContainer>
@@ -244,6 +255,8 @@ export default createFragmentContainer(EventPageHeaderConnected, {
       title
       isPresential
       adminUrl
+      commentable
+      guestListEnabled
       translations {
         locale
         link

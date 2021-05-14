@@ -8,6 +8,8 @@ import { $fragmentRefs, $refType } from '~/mocks';
 const baseEvent = {
   $fragmentRefs,
   $refType,
+  commentable: true,
+  guestListEnabled: true,
   id: '123454321',
   isPresential: true,
   animator: null,
@@ -139,6 +141,45 @@ describe('<EventPageHeader />', () => {
         query={query}
         hasProfileEnabled
         hasThemeEnabled={false}
+        hasProposeEventEnabled
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render without comments count when not commentable', () => {
+    const wrapper = shallow(
+      <EventPageHeader
+        event={{ ...event.basic, commentable: false }}
+        query={query}
+        hasProfileEnabled
+        hasThemeEnabled
+        hasProposeEventEnabled
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render without guest count when guest list is disabled', () => {
+    const wrapper = shallow(
+      <EventPageHeader
+        event={{ ...event.basic, guestListEnabled: false }}
+        query={query}
+        hasProfileEnabled
+        hasThemeEnabled
+        hasProposeEventEnabled
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render without guest count and comments count when guest list is disabled and event is not commentable', () => {
+    const wrapper = shallow(
+      <EventPageHeader
+        event={{ ...event.basic, guestListEnabled: false, commentable: false }}
+        query={query}
+        hasProfileEnabled
+        hasThemeEnabled
         hasProposeEventEnabled
       />,
     );
