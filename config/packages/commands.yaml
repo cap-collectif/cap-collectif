@@ -76,3 +76,7 @@ services:
     Capco\AppBundle\Command\RecalculateSynthesesCountersCommand:
         arguments:
             $name: 'capco:syntheses:counters'
+
+    Capco\AppBundle\Command\CreateIDFUsersFromCsvCommand:
+        arguments:
+            $name: 'capco:import:idf-users'

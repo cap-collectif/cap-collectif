@@ -81,7 +81,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         'deletedAccountAt' => 'deletedAccountAt',
     ];
 
-    private $customQuestions;
+    private ?array $customQuestions;
     private Manager $toggleManager;
 
     public function __construct(
