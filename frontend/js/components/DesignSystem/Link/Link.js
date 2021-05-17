@@ -10,6 +10,7 @@ import jsxInnerText from '~/utils/jsxInnerText';
 export type LinkProps = {|
   ...AppBoxProps,
   href: string,
+  target?: string,
   variant?: 'primary' | 'danger' | 'hierarchy',
   truncate?: number,
 |};

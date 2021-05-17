@@ -13,8 +13,8 @@ import type { ProjectAdminDebateParameters } from '~/components/Admin/Project/Pr
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
 import Flex from '~ui/Primitives/Layout/Flex';
 import VoteHeaderTabPlaceholder from './VoteHeaderTabPlaceholder';
-import VoteTabPlaceholder from './VoteTabPlaceholder';
 import Skeleton from '~ds/Skeleton';
+import TablePlaceholder from '~ds/Table/placeholder';
 
 type Props = {|
   +debate: ?VoteTabQuery_debate,
@@ -35,7 +35,8 @@ const createQueryVariables = (
   stepId,
   count: VOTE_PAGINATION,
   cursor: null,
-  isPublished: parameters.filters.vote.state === 'PUBLISHED',
+  isPublished:
+    parameters.filters.vote.state === 'ALL' ? null : parameters.filters.vote.state === 'PUBLISHED',
 });
 
 const queryVote = graphql`
@@ -44,7 +45,7 @@ const queryVote = graphql`
     $stepId: ID!
     $count: Int!
     $cursor: String
-    $isPublished: Boolean!
+    $isPublished: Boolean
   ) {
     debate: node(id: $debateId) {
       ...VoteTab_debate @arguments(count: $count, cursor: $cursor, isPublished: $isPublished)
@@ -58,7 +59,7 @@ const queryVote = graphql`
 export const initialVariables = {
   count: VOTE_PAGINATION,
   cursor: null,
-  isPublished: true,
+  isPublished: null,
 };
 
 const VoteTabQuery = ({ debate, debateStep }: Props) => {
@@ -97,7 +98,7 @@ const VoteTabQuery = ({ debate, debateStep }: Props) => {
 
       <Skeleton
         isLoaded={(hasFilters && !!data) || (!hasFilters && !!debate)}
-        placeholder={<VoteTabPlaceholder />}>
+        placeholder={<TablePlaceholder rowsCount={5} columnsCount={4} />}>
         <VoteTab debate={dataDebate} debateStep={dataDebateStep} />
       </Skeleton>
     </Flex>
@@ -110,7 +111,7 @@ export default createFragmentContainer(VoteTabQuery, {
       @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
-        isPublished: { type: "Boolean!" }
+        isPublished: { type: "Boolean" }
       ) {
       id
       ...VoteHeaderTab_debate

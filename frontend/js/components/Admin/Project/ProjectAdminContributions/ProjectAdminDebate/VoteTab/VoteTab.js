@@ -1,33 +1,20 @@
 // @flow
 import * as React from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
+import moment from 'moment';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import { useIntl } from 'react-intl';
+import { useIntl, type IntlShape } from 'react-intl';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import DebateVote from '~/components/Admin/Debate/DebateVote/DebateVote';
-import type { DebateVote_vote$ref } from '~relay/DebateVote_vote.graphql';
-import type { ForOrAgainstValue, VoteTab_debate } from '~relay/VoteTab_debate.graphql';
+import type { ContributionOrigin, VoteTab_debate } from '~relay/VoteTab_debate.graphql';
 import type { VoteTab_debateStep } from '~relay/VoteTab_debateStep.graphql';
-import AppBox from '~ui/Primitives/AppBox';
-import Spinner from '~ds/Spinner/Spinner';
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon';
-import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context';
+import Table from '~ds/Table';
+import Link from '~ds/Link/Link';
+import Tag from '~ds/Tag/Tag';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
 
 export const VOTE_PAGINATION = 10;
-
-const MAX_HEIGHT_8_VOTES = 500;
-
-type Vote = {|
-  +id: string,
-  +type: ForOrAgainstValue,
-  +$fragmentRefs: DebateVote_vote$ref,
-|};
-
-type VotesForAndAgainst = {|
-  FOR: Vote[],
-  AGAINST: Vote[],
-|};
 
 type Props = {|
   debate: VoteTab_debate,
@@ -35,126 +22,115 @@ type Props = {|
   +relay: RelayPaginationProp,
 |};
 
-const formatVotesForAndAgainst = (
-  debateVotes: $PropertyType<VoteTab_debate, 'debateVotes'>,
-): VotesForAndAgainst => {
-  const defaultForAndAgainstVotes = { FOR: [], AGAINST: [] };
-
-  if (debateVotes.totalCount === 0) {
-    return defaultForAndAgainstVotes;
-  }
-
-  return debateVotes?.edges
-    ? debateVotes.edges
-        .filter(Boolean)
-        .map(edge => edge && edge.node)
-        .reduce(
-          (acc, vote) => ({
-            FOR: vote?.type === 'FOR' ? [...acc.FOR, vote] : acc.FOR,
-            AGAINST: vote?.type === 'AGAINST' ? [...acc.AGAINST, vote] : acc.AGAINST,
-          }),
-          defaultForAndAgainstVotes,
-        )
-    : defaultForAndAgainstVotes;
+const getWordingOrigin = (origin: ContributionOrigin, intl: IntlShape): string => {
+  if (origin === 'INTERNAL') return intl.formatMessage({ id: 'global.application' });
+  if (origin === 'WIDGET') return intl.formatMessage({ id: 'global.widget' });
+  if (origin === 'MAIL') return intl.formatMessage({ id: 'share.mail' });
+  return '';
 };
 
 export const VoteTab = ({ debate, debateStep, relay }: Props) => {
   const { debateVotes } = debate;
-  const { parameters } = useProjectAdminDebateContext();
   const intl = useIntl();
   const hasVotes = debateVotes.totalCount > 0;
   const isStepClosed = debateStep?.timeRange?.hasEnded;
 
-  const listVoteRef = React.useRef(null);
-
-  const { FOR: votesFor, AGAINST: votesAgainst } = React.useMemo(
-    () => formatVotesForAndAgainst(debateVotes),
-    [debateVotes],
-  );
-
   return hasVotes ? (
-    <Flex
-      direction="column"
-      ref={listVoteRef}
-      css={{ overflow: 'auto', maxHeight: `${MAX_HEIGHT_8_VOTES}px` }}>
-      <InfiniteScroll
-        key="infinite-scroll-vote"
-        initialLoad={false}
-        pageStart={0}
-        loadMore={() => relay.loadMore(VOTE_PAGINATION)}
-        hasMore={debate.debateVotes?.pageInfo.hasNextPage}
-        loader={
-          <Flex direction="row" justify="center">
-            <Spinner size="m" />
-          </Flex>
-        }
-        getScrollParent={() => listVoteRef.current}
-        useWindow={false}>
-        <Flex direction="row" align="stretch">
-          {votesFor.length > 0 ? (
-            <AppBox
-              as="ul"
-              p={0}
-              m={0}
-              pr={7}
-              flex="1"
-              borderRight="normal"
-              borderColor="gray.200"
-              css={{ listStyle: 'none' }}>
-              {votesFor.map(vote => (
-                <AppBox as="li" key={vote.id} mb={4}>
-                  <DebateVote vote={vote} />
-                </AppBox>
-              ))}
-            </AppBox>
-          ) : (
-            <Flex
-              direction="column"
-              align="center"
-              flex="1"
-              textAlign="center"
-              borderRight="normal"
-              borderColor="gray.200">
-              <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
-              <Text color="gray.500" maxWidth="200px">
-                {intl.formatMessage({
-                  id:
-                    parameters.filters.vote.state === 'PUBLISHED'
-                      ? 'no-vote-for-published'
-                      : isStepClosed
-                      ? 'no-vote-for-non-published'
-                      : 'no-vote-for-waiting-for-published',
-                })}
-              </Text>
-            </Flex>
-          )}
+    <Table>
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th>{intl.formatMessage({ id: 'admin.fields.comment_vote.voter' })}</Table.Th>
+          <Table.Th>{intl.formatMessage({ id: 'global.source' })}</Table.Th>
+          <Table.Th>{intl.formatMessage({ id: 'vote.type' })}</Table.Th>
+          <Table.Th>{intl.formatMessage({ id: 'global.publication' })}</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
 
-          {votesAgainst.length > 0 ? (
-            <AppBox as="ul" p={0} m={0} ml={7} flex="1" css={{ listStyle: 'none' }}>
-              {votesAgainst.map(vote => (
-                <AppBox as="li" key={vote.id} mb={4}>
-                  <DebateVote vote={vote} />
-                </AppBox>
-              ))}
-            </AppBox>
-          ) : (
-            <Flex direction="column" align="center" textAlign="center" flex="1">
-              <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="sm" />
-              <Text color="gray.500" maxWidth="200px">
-                {intl.formatMessage({
-                  id:
-                    parameters.filters.vote.state === 'PUBLISHED'
-                      ? 'no-vote-against-published'
-                      : isStepClosed
-                      ? 'no-vote-against-non-published'
-                      : 'no-vote-against-waiting-for-published',
-                })}
-              </Text>
-            </Flex>
-          )}
-        </Flex>
-      </InfiniteScroll>
-    </Flex>
+      <Table.Tbody
+        useInfiniteScroll={hasVotes}
+        onScrollToBottom={() => {
+          relay.loadMore(VOTE_PAGINATION);
+        }}
+        hasMore={debate.debateVotes?.pageInfo.hasNextPage}>
+        {debateVotes?.edges
+          ?.filter(Boolean)
+          .map(edge => edge && edge.node)
+          .filter(Boolean)
+          .map(vote => (
+            <Table.Tr key={vote.id} rowId={vote.id} verticalAlign="top">
+              <Table.Td>
+                {vote.author
+                  ? vote.author.username
+                  : intl.formatMessage({ id: 'global.anonymous' })}
+              </Table.Td>
+
+              <Table.Td>
+                <Text>{getWordingOrigin(vote.origin, intl)}</Text>
+                {vote.origin === 'INTERNAL' && (
+                  <Link href={debate.url} variant="hierarchy" truncate={50} target="_blank">
+                    {debate.url}
+                  </Link>
+                )}
+                {vote.origin === 'WIDGET' && vote.widgetOriginUrl && (
+                  <Link
+                    href={vote.widgetOriginUrl}
+                    variant="hierarchy"
+                    truncate={50}
+                    target="_blank">
+                    {vote.widgetOriginUrl}
+                  </Link>
+                )}
+                {(vote.origin === 'MAIL' ||
+                  (vote.origin === 'WIDGET' && !vote.widgetOriginUrl)) && (
+                  <Text color="gray.500">-</Text>
+                )}
+              </Table.Td>
+
+              <Table.Td>
+                <Tag variant={vote.type === 'FOR' ? 'green' : 'red'} interactive={false}>
+                  {intl.formatMessage({
+                    id:
+                      vote.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against',
+                  })}
+                </Tag>
+              </Table.Td>
+
+              <Table.Td>
+                <ConditionalWrapper
+                  when={!vote.published}
+                  wrapper={children => (
+                    <Tooltip
+                      label={intl.formatMessage({
+                        id: isStepClosed
+                          ? 'account-not-confirmed-before-end-stop'
+                          : 'waiting-for-user-email-confirmation',
+                      })}>
+                      {children}
+                    </Tooltip>
+                  )}>
+                  <Text display="inline-block">
+                    {vote.published
+                      ? intl.formatMessage({ id: 'global.published' })
+                      : intl.formatMessage({
+                          id: isStepClosed ? 'global.no.published' : 'waiting',
+                        })}
+                  </Text>
+                </ConditionalWrapper>
+
+                <Text color="gray.500">
+                  {intl.formatDate(moment(vote.published ? vote.publishedAt : vote.createdAt), {
+                    day: 'numeric',
+                    month: 'numeric',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })}
+                </Text>
+              </Table.Td>
+            </Table.Tr>
+          ))}
+      </Table.Tbody>
+    </Table>
   ) : (
     <Flex direction="column" spacing={6} align="center">
       <SpotIcon name={SPOT_ICON_NAME.RATING_CLICK} size="lg" />
@@ -171,9 +147,10 @@ export default createPaginationContainer(
         @argumentDefinitions(
           count: { type: "Int!" }
           cursor: { type: "String" }
-          isPublished: { type: "Boolean!" }
+          isPublished: { type: "Boolean" }
         ) {
         id
+        url
         debateVotes: votes(first: $count, after: $cursor, isPublished: $isPublished)
           @connection(key: "VoteTab_debateVotes", filters: ["isPublished"]) {
           totalCount
@@ -185,7 +162,16 @@ export default createPaginationContainer(
             node {
               id
               type
-              ...DebateVote_vote
+              published
+              publishedAt
+              createdAt
+              origin
+              widgetOriginUrl
+              ... on DebateVote {
+                author {
+                  username
+                }
+              }
             }
           }
         }
@@ -212,9 +198,7 @@ export default createPaginationContainer(
       return props.debate && props.debate.debateVotes;
     },
     getFragmentVariables(prevVars) {
-      return {
-        ...prevVars,
-      };
+      return prevVars;
     },
     getVariables(
       props: Props,
@@ -240,7 +224,7 @@ export default createPaginationContainer(
         $stepId: ID!
         $count: Int!
         $cursor: String
-        $isPublished: Boolean!
+        $isPublished: Boolean
       ) {
         debate: node(id: $debateId) {
           ...VoteTab_debate @arguments(count: $count, cursor: $cursor, isPublished: $isPublished)

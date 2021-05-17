@@ -40,7 +40,7 @@ export const queryContributions = graphql`
     $isPublishedArgument: Boolean!
     $isTrashedArgument: Boolean!
     # ARGUMENTS OF ProjectAdminDebate (DebateVote)
-    $isPublishedVote: Boolean!
+    $isPublishedVote: Boolean
     $countVotePagination: Int!
     $cursorVotePagination: String
   ) {

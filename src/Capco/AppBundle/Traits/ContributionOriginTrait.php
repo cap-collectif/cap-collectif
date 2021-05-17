@@ -47,8 +47,11 @@ trait ContributionOriginTrait
 
     public function setWidgetOriginUrl(string $url): self
     {
-        $this->widgetOriginUrl = $url;
         $this->externalOrigin = ContributionOrigin::WIDGET;
+
+        if ('unknown' !== $url) {
+            $this->widgetOriginUrl = $url;
+        }
 
         return $this;
     }

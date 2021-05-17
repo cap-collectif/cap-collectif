@@ -23,7 +23,7 @@ export const DEFAULT_FILTERS: Filters = {
     state: 'PUBLISHED',
   },
   vote: {
-    state: 'PUBLISHED',
+    state: 'ALL',
   },
 };
 

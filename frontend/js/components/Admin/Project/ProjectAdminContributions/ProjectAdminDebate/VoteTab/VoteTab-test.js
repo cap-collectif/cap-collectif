@@ -3,11 +3,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { VoteTab } from './VoteTab';
-import { $fragmentRefs, $refType, relayPaginationMock } from '~/mocks';
+import { $refType, relayPaginationMock } from '~/mocks';
 
 const baseProps = {
   debate: {
     id: 'debate123',
+    url: 'https://debate123.com',
     $refType,
     debateVotes: {
       totalCount: 2,
@@ -20,7 +21,14 @@ const baseProps = {
           node: {
             id: 'value123',
             type: 'FOR',
-            $fragmentRefs,
+            published: true,
+            publishedAt: '2050-03-01 12:00:00',
+            createdAt: '2050-03-01 12:00:00',
+            origin: 'INTERNAL',
+            widgetOriginUrl: null,
+            author: {
+              username: 'vince-123',
+            },
           },
         },
         {
@@ -28,7 +36,53 @@ const baseProps = {
           node: {
             id: 'value456',
             type: 'AGAINST',
-            $fragmentRefs,
+            published: true,
+            publishedAt: '2050-03-01 12:00:00',
+            createdAt: '2050-03-01 12:00:00',
+            origin: 'INTERNAL',
+            widgetOriginUrl: null,
+            author: {
+              username: 'vince-123',
+            },
+          },
+        },
+        {
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==3',
+          node: {
+            id: 'value789',
+            type: 'AGAINST',
+            published: false,
+            publishedAt: null,
+            createdAt: '2050-03-01 12:00:00',
+            origin: 'INTERNAL',
+            widgetOriginUrl: null,
+          },
+        },
+        {
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==4',
+          node: {
+            id: 'value987',
+            type: 'AGAINST',
+            published: true,
+            publishedAt: '2050-03-01 12:00:00',
+            createdAt: '2050-03-01 12:00:00',
+            origin: 'MAIL',
+            widgetOriginUrl: null,
+            author: {
+              username: 'vince-123',
+            },
+          },
+        },
+        {
+          cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==5',
+          node: {
+            id: 'value654',
+            type: 'FOR',
+            published: true,
+            publishedAt: '2050-03-01 12:00:00',
+            createdAt: '2050-03-01 12:00:00',
+            origin: 'WIDGET',
+            widgetOriginUrl: 'https://fr.reactjs.org/docs/fragments.html',
           },
         },
       ],

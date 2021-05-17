@@ -2,132 +2,117 @@
 
 exports[`<VoteHeaderTab /> should render correctly 1`] = `
 <ForwardRef
-  direction="column"
+  align="center"
+  direction="row"
+  justify="space-between"
   mb={4}
 >
-  <ForwardRef
-    align="center"
-    direction="row"
-    justify="space-between"
-    mb={4}
+  <InlineSelect
+    onChange={[Function]}
+    value="ALL"
   >
-    <InlineSelect
-      onChange={[Function]}
+    <InlineSelect.Choice
+      value="ALL"
+    >
+      filter.count.status.all.masculine
+    </InlineSelect.Choice>
+    <InlineSelect.Choice
       value="PUBLISHED"
     >
-      <InlineSelect.Choice
-        value="PUBLISHED"
-      >
-        filter.count.status.published-masculine
-      </InlineSelect.Choice>
-      <InlineSelect.Choice
-        value="WAITING"
-      >
-        filter.count.status.awaiting
-      </InlineSelect.Choice>
-    </InlineSelect>
-    <Button
-      aria-label="global.export"
-      onClick={[Function]}
-      variant="primary"
-      variantColor="primary"
-      variantSize="small"
+      filter.count.status.published-masculine
+    </InlineSelect.Choice>
+    <InlineSelect.Choice
+      value="WAITING"
     >
-      global.export
-    </Button>
-  </ForwardRef>
-  <Text
-    color="gray.500"
+      filter.count.status.awaiting
+    </InlineSelect.Choice>
+  </InlineSelect>
+  <Button
+    aria-label="global.export"
+    onClick={[Function]}
+    variant="primary"
+    variantColor="primary"
+    variantSize="small"
   >
-    vote-count-for-and-against
-  </Text>
+    global.export
+  </Button>
 </ForwardRef>
 `;
 
 exports[`<VoteHeaderTab /> should render correctly when no vote 1`] = `
 <ForwardRef
-  direction="column"
+  align="center"
+  direction="row"
+  justify="space-between"
   mb={4}
 >
-  <ForwardRef
-    align="center"
-    direction="row"
-    justify="space-between"
-    mb={4}
+  <InlineSelect
+    onChange={[Function]}
+    value="ALL"
   >
-    <InlineSelect
-      onChange={[Function]}
+    <InlineSelect.Choice
+      value="ALL"
+    >
+      filter.count.status.all.masculine
+    </InlineSelect.Choice>
+    <InlineSelect.Choice
       value="PUBLISHED"
     >
-      <InlineSelect.Choice
-        value="PUBLISHED"
-      >
-        filter.count.status.published-masculine
-      </InlineSelect.Choice>
-      <InlineSelect.Choice
-        value="WAITING"
-      >
-        filter.count.status.awaiting
-      </InlineSelect.Choice>
-    </InlineSelect>
-    <Button
-      aria-label="global.export"
-      onClick={[Function]}
-      variant="primary"
-      variantColor="primary"
-      variantSize="small"
+      filter.count.status.published-masculine
+    </InlineSelect.Choice>
+    <InlineSelect.Choice
+      value="WAITING"
     >
-      global.export
-    </Button>
-  </ForwardRef>
-  <Text
-    color="gray.500"
+      filter.count.status.awaiting
+    </InlineSelect.Choice>
+  </InlineSelect>
+  <Button
+    aria-label="global.export"
+    onClick={[Function]}
+    variant="primary"
+    variantColor="primary"
+    variantSize="small"
   >
-    vote-count-for-and-against
-  </Text>
+    global.export
+  </Button>
 </ForwardRef>
 `;
 
 exports[`<VoteHeaderTab /> should render correctly when step closed 1`] = `
 <ForwardRef
-  direction="column"
+  align="center"
+  direction="row"
+  justify="space-between"
   mb={4}
 >
-  <ForwardRef
-    align="center"
-    direction="row"
-    justify="space-between"
-    mb={4}
+  <InlineSelect
+    onChange={[Function]}
+    value="ALL"
   >
-    <InlineSelect
-      onChange={[Function]}
+    <InlineSelect.Choice
+      value="ALL"
+    >
+      filter.count.status.all.masculine
+    </InlineSelect.Choice>
+    <InlineSelect.Choice
       value="PUBLISHED"
     >
-      <InlineSelect.Choice
-        value="PUBLISHED"
-      >
-        filter.count.status.published-masculine
-      </InlineSelect.Choice>
-      <InlineSelect.Choice
-        value="WAITING"
-      >
-        filter.count.status.non.published
-      </InlineSelect.Choice>
-    </InlineSelect>
-    <Button
-      aria-label="global.export"
-      onClick={[Function]}
-      variant="primary"
-      variantColor="primary"
-      variantSize="small"
+      filter.count.status.published-masculine
+    </InlineSelect.Choice>
+    <InlineSelect.Choice
+      value="WAITING"
     >
-      global.export
-    </Button>
-  </ForwardRef>
-  <Text
-    color="gray.500"
+      filter.count.status.non.published
+    </InlineSelect.Choice>
+  </InlineSelect>
+  <Button
+    aria-label="global.export"
+    onClick={[Function]}
+    variant="primary"
+    variantColor="primary"
+    variantSize="small"
   >
-    vote-count-for-and-against
-  </Text>
+    global.export
+  </Button>
 </ForwardRef>
 `;

@@ -3,7 +3,12 @@ import * as React from 'react';
 import Table, { type TableProps } from './index';
 
 export type TablePlaceholderProps = {|
-  ...TableProps,
+  ...$Diff<
+    TableProps,
+    {
+      children: *,
+    },
+  >,
   rowsCount: number,
   columnsCount: number,
 |};

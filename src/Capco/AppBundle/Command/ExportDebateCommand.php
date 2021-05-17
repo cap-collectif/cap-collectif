@@ -54,6 +54,8 @@ class ExportDebateCommand extends BaseExportCommand
         'vote_geoip_region_name' => 'geoip.regionName',
         'vote_geoip_city_name' => 'geoip.cityName',
 
+        'vote_source' => 'vote_source',
+
         'vote_author_id' => 'author.id',
         'vote_author_zipCode' => 'author.zipCode',
         'vote_author_username' => 'author.username',
@@ -257,13 +259,16 @@ class ExportDebateCommand extends BaseExportCommand
         return self::getShortenedFilename("debate-${debateId}-${type}");
     }
 
-    private static function getRowCellValue(array $argument, string $treePath)
+    private static function getRowCellValue(array $data, string $treePath)
     {
+        if ('vote_source' === $treePath) {
+            return self::getRowCellValueVoteOrigin($data);
+        }
         $treePathParts = explode('.', $treePath);
         if (1 === \count($treePathParts)) {
-            return $argument[$treePath] ?? '';
+            return $data[$treePath] ?? '';
         }
-        $value = $argument;
+        $value = $data;
         foreach ($treePathParts as $treePathPart) {
             if (!$value || !\array_key_exists($treePathPart, $value)) {
                 return '';
@@ -272,6 +277,17 @@ class ExportDebateCommand extends BaseExportCommand
         }
 
         return $value ?? '';
+    }
+
+    private static function getRowCellValueVoteOrigin(array $data): string
+    {
+        if ('WIDGET' === $data['origin'] && $data['widgetOriginUrl']) {
+            return 'WIDGET : ' . $data['widgetOriginUrl'];
+        } elseif ('INTERNAL' === $data['origin']) {
+            return 'APPLICATION';
+        }
+
+        return $data['origin'];
     }
 
     private function getDebateIds(InputInterface $input): array
@@ -305,7 +321,6 @@ class ExportDebateCommand extends BaseExportCommand
                     'variables' => [],
                 ])
                 ->toArray();
-
             if (isset($data['errors']) && !empty($data['errors'])) {
                 throw new \RuntimeException($data['errors'][0]['message']);
             }
@@ -392,6 +407,8 @@ class ExportDebateCommand extends BaseExportCommand
           node {
             publishedAt
             type
+            origin
+            widgetOriginUrl
             ...on DebateAnonymousVote {
               geoip {
                 countryName

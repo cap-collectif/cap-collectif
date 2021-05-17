@@ -9,16 +9,13 @@ const baseProps = {
   debate: {
     id: 'debate123',
     $refType,
+    allDebateVote: {
+      totalCount: 4,
+    },
     debateVotesPublished: {
       totalCount: 2,
     },
     debateVotesWaiting: {
-      totalCount: 2,
-    },
-    debateVotesFor: {
-      totalCount: 2,
-    },
-    debateVotesAgainst: {
       totalCount: 2,
     },
   },
@@ -36,16 +33,13 @@ const props = {
     ...baseProps,
     debate: {
       ...baseProps.debate,
+      allDebateVote: {
+        totalCount: 0,
+      },
       debateVotesPublished: {
         totalCount: 0,
       },
       debateVotesWaiting: {
-        totalCount: 0,
-      },
-      debateVotesFor: {
-        totalCount: 0,
-      },
-      debateVotesAgainst: {
         totalCount: 0,
       },
     },

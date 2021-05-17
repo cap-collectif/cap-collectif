@@ -23,11 +23,11 @@ InternalDebateAnonymousVote:
                 description: 'Navigator of the voter'
                 type: 'String'
             origin:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 description: "The origin of a debate argument's vote"
                 type: 'ContributionOrigin!'
             widgetOriginUrl:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 description: "The URL of widget from which the debate argument's vote was added, if any."
                 type: 'URI'
             geoip:
