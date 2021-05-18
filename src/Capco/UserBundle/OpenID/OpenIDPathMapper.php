@@ -18,7 +18,7 @@ class OpenIDPathMapper
     public function __construct(string $instance)
     {
         switch ($instance) {
-            case 'parlons-energie':
+            case 'parlons-energies':
             case 'pe':
                 $this->instanceMapper = new EdfMapping();
 

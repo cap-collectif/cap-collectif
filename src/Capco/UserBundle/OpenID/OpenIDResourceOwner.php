@@ -30,7 +30,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         switch ($this->instanceName) {
             case 'pe':
-            case 'parlons-energie':
+            case 'parlons-energies':
                 $extraParameters = array_merge($extraParameters, [
                     'acr_values' => 'sesameEDF',
                 ]);
@@ -62,7 +62,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
                 break;
             case 'pe':
-            case 'parlons-energie':
+            case 'parlons-energies':
                 $resolver
                     ->setDefaults([
                         'scope' => 'openid email givenName',
@@ -90,7 +90,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
         switch ($this->instanceName) {
             case 'pe':
-            case 'parlons-energie':
+            case 'parlons-energies':
                 // Cf "use_authorization_to_get_token" option
                 $headers['Authorization'] =
                     'Basic ' .
