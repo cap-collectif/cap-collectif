@@ -9,7 +9,7 @@ use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 
 class DiffGenerator
 {
-    protected $diffService;
+    protected HtmlDiffService $diffService;
 
     public function __construct(HtmlDiffService $diffService)
     {

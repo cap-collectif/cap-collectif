@@ -17,4 +17,4 @@ Scenario: Anonymous user wants to filter votes stats
 Scenario: Anonymous user wants to see all districts
   Given I go to a project stats page
   When I click the show all districts stats button
-  Then I should see 38 districts stats
+  Then I should see 40 districts stats

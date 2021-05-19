@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryThemesResolver implements ResolverInterface
 {
-    private $repository;
+    private ThemeRepository $repository;
 
     public function __construct(ThemeRepository $repository)
     {

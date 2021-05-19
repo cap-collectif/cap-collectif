@@ -379,3 +379,23 @@ Capco\AppBundle\Entity\ProposalForm:
         mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
         addressHelpText: Précisez l'adresse de votre café
         notificationsConfiguration: '@proposalFormNotificationConfigurationCafetier'
+    proposalformIdfBP3:
+        id: proposalformIdfBP3
+        title: Formulaire du budget participatif 3 de l'Idf
+        description: Whesh le BP3 c'est le feu
+        step: '@collectstepIdf3'
+        usingThemes: true
+        usingAddress: true
+        usingDistrict: true
+        usingDescription: true
+        usingIllustration: true
+        usingCategories: true
+        usingSummary: true
+        districtMandatory: true
+        themeMandatory: false
+        descriptionMandatory: true
+        categoryMandatory: true
+        zoomMap: 9
+        mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
+        reference: 22
+        addressHelpText: Précisez l'adresse principale où sera mis en oeuvre votre projet

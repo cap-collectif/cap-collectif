@@ -12,10 +12,12 @@ trait SnapshotCommandTrait
     private function executeSnapshot(
         InputInterface &$input,
         OutputInterface &$output,
-        string $id
+        string $id,
+        bool $import = false,
+        bool $customPath = false
     ): void {
         if (true === $input->getOption('updateSnapshot')) {
-            self::updateSnapshot($id);
+            self::updateSnapshot($id, $import, $customPath);
             $output->writeln('<info>Snapshot has been written !</info>');
         }
     }
@@ -30,15 +32,25 @@ trait SnapshotCommandTrait
         );
     }
 
-    private function updateSnapshot(string $id): void
-    {
+    private function updateSnapshot(
+        string $id,
+        bool $import = false,
+        bool $customPath = false
+    ): void {
         $generatedDirectory = $this->projectRootDir . "/public/export/${id}";
-        $gitDirectory = $this->projectRootDir . "/__snapshots__/exports/${id}";
+        $gitDirectory = $import
+            ? $this->projectRootDir . "/__snapshots__/imports/${id}"
+            : $this->projectRootDir . "/__snapshots__/exports/${id}";
 
-        (Process::fromShellCommandline('rm -rf ' . $gitDirectory))->mustRun();
+        if ($customPath) {
+            $generatedDirectory = "/tmp/${id}";
+        }
 
-        chmod($generatedDirectory, 0755);
+        Process::fromShellCommandline('rm -rf ' . $gitDirectory)->mustRun();
+        if (!$customPath) {
+            chmod($generatedDirectory, 0755);
+        }
 
-        (Process::fromShellCommandline("mv ${generatedDirectory} ${gitDirectory}"))->mustRun();
+        Process::fromShellCommandline("mv ${generatedDirectory} ${gitDirectory}")->mustRun();
     }
 }

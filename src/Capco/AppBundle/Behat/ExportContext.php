@@ -80,11 +80,14 @@ class ExportContext implements KernelAwareContext
      */
     public function exportedStepContributorsFilesShouldMatch()
     {
-        $steps = $this->kernel->getContainer()->get(AbstractStepRepository::class)->findAll();
+        $steps = $this->kernel
+            ->getContainer()
+            ->get(AbstractStepRepository::class)
+            ->findAll();
         foreach ($steps as $step) {
             if ($step->isParticipative()) {
                 $fileName = CreateStepContributorsCommand::getFilename($step);
-                echo 'Checking ' . $fileName . ' snapshot…' . PHP_EOL ;
+                echo 'Checking ' . $fileName . ' snapshot…' . \PHP_EOL;
                 $this->exportedFileTypeFileWithNameShouldLooksLikeItsSnapshot('csv', $fileName);
             }
         }
@@ -101,6 +104,21 @@ class ExportContext implements KernelAwareContext
 
         $realPath = $this->getExportDir() . "/${name}";
         $snapshotPath = $this->getSnapshotsDir() . "/${name}";
+
+        $this->compareFileWithSnapshot($realPath, $snapshotPath);
+    }
+
+    /**
+     * @Then /^exported "([^"]*)" model file with name "([^"]*)" should match its snapshot$/
+     */
+    public function exportedModelFileShouldLooksLikeItsSnapshot(
+        string $fileType,
+        string $name
+    ): void {
+        $this->setConfigParameter('readerType', $fileType);
+
+        $realPath = "/tmp/${name}";
+        $snapshotPath = $this->getKernel()->getRootDir() . '/../__snapshots__/imports' . "/${name}";
 
         $this->compareFileWithSnapshot($realPath, $snapshotPath);
     }

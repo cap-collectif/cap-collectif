@@ -77,4 +77,11 @@ final class Text
     {
         return \is_bool($value) ? $value : str_replace("\n", ' ', $value);
     }
+
+    public static function isJSON(string $value): bool
+    {
+        return \is_array(json_decode($value, true)) && \JSON_ERROR_NONE == json_last_error()
+            ? true
+            : false;
+    }
 }

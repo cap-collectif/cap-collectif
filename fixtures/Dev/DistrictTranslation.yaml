@@ -130,6 +130,17 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
         id: proposalDistrictIdf2
         locale: fr-FR
         name: Val de marne (94)
+    # doublon pour le BP 3 IDF
+    proposalDistrictIdf3:
+        translatable: '@districtIdf3'
+        id: proposalDistrictIdf3
+        locale: fr-FR
+        name: Toute la région (IDF BP3)
+    proposalDistrictIdf4:
+        translatable: '@districtIdf4'
+        id: proposalDistrictIdf4
+        locale: fr-FR
+        name: Val de marne (94) (IDF BP3)
 
     proposalDistrictParis1:
         translatable: '@paris1'

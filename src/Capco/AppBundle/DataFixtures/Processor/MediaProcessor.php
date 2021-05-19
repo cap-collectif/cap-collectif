@@ -10,7 +10,6 @@ use Sonata\ClassificationBundle\Model\ContextInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Process\Process;
 use Liip\ImagineBundle\Service\FilterService;
-use Symfony\Component\Console\Helper\ProgressBar;
 
 /**
  * This processor generate our medias with liip, to display in development
@@ -101,7 +100,7 @@ class MediaProcessor implements ProcessorInterface
     protected function resolveProviderName(Media $media): string
     {
         return \in_array(
-            pathinfo($media->getBinaryContent(), PATHINFO_EXTENSION),
+            pathinfo($media->getBinaryContent(), \PATHINFO_EXTENSION),
             ['png', 'jpeg', 'jpg', 'bmp', 'gif', 'tiff'],
             true
         )

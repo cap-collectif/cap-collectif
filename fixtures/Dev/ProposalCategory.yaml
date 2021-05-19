@@ -87,3 +87,28 @@ Capco\AppBundle\Entity\ProposalCategory:
         color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
         name: Auto diagnostique
         form: '@proposalformCorona'
+    pCategoryBp3Idf1:
+        id: pCategoryBp3Idf1
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
+        name: Espaces verts et biodiversité
+        form: '@proposalformIdfBP3'
+    pCategoryBp3Idf2:
+        id: pCategoryBp3Idf2
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
+        name: Propreté, prévention et gestion des déchets, économie circulaire
+        form: '@proposalformIdfBP3'
+    pCategoryBp3Idf3:
+        id: pCategoryBp3Idf3
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
+        name: Santé environnementale
+        form: '@proposalformIdfBP3'
+    pCategoryBp3Idf4:
+        id: pCategoryBp3Idf4
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
+        name: Vélo et mobilités propres
+        form: '@proposalformIdfBP3'
+    pCategoryBp3Idf5:
+        id: pCategoryBp3Idf5
+        color: <(Capco\AppBundle\Enum\AvailableProposalCategoryColor::COLOR_616161)>
+        name: Énergies renouvelables et efficacité énergétique
+        form: '@proposalformIdfBP3'

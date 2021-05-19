@@ -58,7 +58,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="default_status_id", nullable=true, onDelete="SET NULL")
      */
-    private $defaultStatus;
+    private ?Status $defaultStatus;
 
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
@@ -84,7 +84,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         }
     }
 
-    public function getDefaultStatus()
+    public function getDefaultStatus(): ?Status
     {
         return $this->defaultStatus;
     }

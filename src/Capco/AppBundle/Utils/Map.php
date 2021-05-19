@@ -13,7 +13,7 @@ final class Map
         $this->apiServerKey = $apiSeverKey;
     }
 
-    public function getFormattedAddress($address)
+    public function getFormattedAddress(string $address)
     {
         $updatedAddress = null;
 

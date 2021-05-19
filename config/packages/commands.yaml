@@ -80,3 +80,8 @@ services:
     Capco\AppBundle\Command\CreateIDFUsersFromCsvCommand:
         arguments:
             $name: 'capco:import:idf-users'
+
+    Capco\AppBundle\Command\ImportIDFProposalsFromCsvCommand:
+        arguments:
+            $env: '%kernel.environment%'
+            $name: 'capco:import:idf-proposals'

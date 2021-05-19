@@ -8,6 +8,26 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 2,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/cereale.png",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
+          "title": "Débat Wysiwyg",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 0,
           },
           "contributionsCount": 0,
@@ -25,7 +45,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -45,7 +65,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 9,
@@ -65,7 +85,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -84,30 +104,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 16,
-          },
-          "contributionsCount": 16,
-          "contributors": Object {
-            "totalCount": 4,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
-          "title": "Projet pour consolider les exports",
-          "votes": Object {
-            "totalCount": 5,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 35,
+    "totalCount": 36,
   },
 }
 `;
@@ -207,7 +209,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 32,
+    "totalCount": 33,
   },
 }
 `;
@@ -218,6 +220,26 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 196,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 196,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
+          "title": "Débat du mois",
+          "votes": Object {
+            "totalCount": 530,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -237,7 +259,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -257,7 +279,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -277,7 +299,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 9,
@@ -296,32 +318,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 16,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
-          "title": "Débats sur la vie",
-          "votes": Object {
-            "totalCount": 16,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 32,
+    "totalCount": 33,
   },
 }
 `;
@@ -330,6 +332,16 @@ exports[`Preview|Query.projects connection fetches the public projects with a sp
 Object {
   "projects": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "authors": Array [
+            Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+          ],
+          "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
+        },
+      },
       Object {
         "node": Object {
           "authors": Array [
@@ -370,18 +382,8 @@ Object {
           "id": "UHJvamVjdDpwcm9qZWN0SWRm",
         },
       },
-      Object {
-        "node": Object {
-          "authors": Array [
-            Object {
-              "id": "VXNlcjp1c2VyQWRtaW4=",
-            },
-          ],
-          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-        },
-      },
     ],
-    "totalCount": 19,
+    "totalCount": 20,
   },
 }
 `;

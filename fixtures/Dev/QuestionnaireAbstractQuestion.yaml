@@ -687,3 +687,15 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaireFood'
         question: '@xQuestionFoodApple'
         position: 8
+    qaqBP3Idf0:
+        proposalForm: '@proposalformIdfBP3'
+        question: '@simpleQuestionBP3Idf1'
+        position: 1
+    qaqBP3Idf1:
+        proposalForm: '@proposalformIdfBP3'
+        question: '@simpleQuestionBP3Idf2'
+        position: 2
+    qaqBP3Idf2:
+        proposalForm: '@proposalformIdfBP3'
+        question: '@simpleQuestionBP3Idf3'
+        position: 3

@@ -115,3 +115,23 @@ Scenario: Admin wants to import idf users from a CSV
   Then the command exit code should be 0
   And I should see "3 users successfully created." in output
   And I should see "Skipping 1 duplicated email(s)." in output
+
+Scenario: Admin wants to import a IDF BP
+  Given I run "capco:import:idf-proposals-from-csv /var/www/__snapshots__/imports/proposals_idf_bp3.csv proposalformIdfBP3 -d ,"
+  Then the command exit code should be 0
+  And I should see "1 proposals successfully created." in output
+
+Scenario: Admin wants to generate csv model type to import proposals
+  Given I run "capco:import-proposals:generate-header-csv proposalformIdfBP3 -d ,"
+  And exported "csv" model file with name "Formulaire_du_budget_participatif_3_de_l_Idf.csv" should match its snapshot
+  Then the command exit code should be 0
+
+Scenario: Admin wants to generate csv model type to import proposals
+  Given I run "capco:import-proposals:generate-header-csv proposalForm1 -d ,"
+  And exported "csv" model file with name "Collecte_des_propositions_pour_le_budget_2016_de_la_Ville_de_Rennes.csv" should match its snapshot
+  Then the command exit code should be 0
+
+Scenario: Admin wants to generate csv model type to import proposals
+  Given I run "capco:import-proposals:generate-header-csv proposalformCafetier -d ,"
+  And exported "csv" model file with name "Formulaire_du_financement_participatif_des_cafetiers.csv" should match its snapshot
+  Then the command exit code should be 0

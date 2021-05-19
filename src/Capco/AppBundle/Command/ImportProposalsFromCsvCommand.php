@@ -31,7 +31,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportProposalsFromCsvCommand extends Command
 {
-    private const HEADERS = [
+    protected const HEADERS = [
         'name',
         'author',
         'district_name',
@@ -46,23 +46,23 @@ class ImportProposalsFromCsvCommand extends Command
 
     protected static $defaultName = 'capco:import:proposals-from-csv';
 
-    private ?string $filePath;
-    private ?string $delimiter;
-    private ?ProposalForm $proposalForm;
-    private ?array $questionsMap;
-    private array $newUsersMap;
-    private array $questionsHeader = [];
+    protected ?string $filePath;
+    protected ?string $delimiter;
+    protected ?ProposalForm $proposalForm;
+    protected ?array $questionsMap;
+    protected array $newUsersMap;
+    protected array $customFields = [];
 
-    private EntityManagerInterface $om;
-    private MediaManager $mediaManager;
-    private ProposalDistrictRepository $districtRepository;
-    private ProposalCategoryRepository $proposalCategoryRepository;
-    private ProposalFormRepository $proposalFormRepository;
-    private StatusRepository $statusRepository;
-    private UserRepository $userRepository;
-    private UserManagerInterface $fosUserManager;
-    private Map $map;
-    private array $headers;
+    protected EntityManagerInterface $om;
+    protected MediaManager $mediaManager;
+    protected ProposalDistrictRepository $districtRepository;
+    protected ProposalCategoryRepository $proposalCategoryRepository;
+    protected ProposalFormRepository $proposalFormRepository;
+    protected StatusRepository $statusRepository;
+    protected UserRepository $userRepository;
+    protected UserManagerInterface $fosUserManager;
+    protected Map $map;
+    protected array $headers;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -274,8 +274,8 @@ class ImportProposalsFromCsvCommand extends Command
                     }
                 }
 
-                if (\count($this->questionsHeader) > 0) {
-                    foreach ($this->questionsHeader as $questionTitle) {
+                if (\count($this->customFields) > 0) {
+                    foreach ($this->customFields as $questionTitle) {
                         $reponse = (new ValueResponse())
                             ->setQuestion($this->questionsMap[$questionTitle])
                             ->setValue($row[$this->headers[$questionTitle]] ?? '');
@@ -327,9 +327,7 @@ class ImportProposalsFromCsvCommand extends Command
     protected function isValidRow(array $row, OutputInterface $output): bool
     {
         $hasError = false;
-        if (
-            \count(array_values($row)) < \count(array_merge(self::HEADERS, $this->questionsHeader))
-        ) {
+        if (\count(array_values($row)) < \count(array_merge(self::HEADERS, $this->customFields))) {
             $hasError = true;
         }
 
@@ -347,10 +345,10 @@ class ImportProposalsFromCsvCommand extends Command
 
     protected function isValidHeaders(OutputInterface $output): bool
     {
-        if (\count($this->questionsHeader) > 0) {
+        if (\count($this->customFields) > 0) {
             $found = false;
             foreach ($this->proposalForm->getRealQuestions() as $question) {
-                if (\in_array($question->getTitle(), $this->questionsHeader, true)) {
+                if (\in_array($question->getTitle(), $this->customFields, true)) {
                     $found = true;
                     $this->questionsMap[$question->getTitle()] = $question;
                 }
@@ -384,11 +382,11 @@ class ImportProposalsFromCsvCommand extends Command
             /** @var Row $row */
             foreach ($rows as $row) {
                 $a = $row->toArray();
-                $this->questionsHeader = array_values(array_diff($a, self::HEADERS));
+                $this->customFields = array_values(array_diff($a, $this::HEADERS));
 
                 break;
             }
-            $this->headers = array_flip(array_merge(self::HEADERS, $this->questionsHeader));
+            $this->headers = array_flip(array_merge($this::HEADERS, $this->customFields));
 
             return $sheet->getRowIterator();
         }

@@ -369,3 +369,11 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         visibility: 2
+    projectIdf3:
+        id: 'projectIdf3'
+        title: Budget Participatif IdF 3
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
+        updatedAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
+        publishedAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
+        visibility: 2

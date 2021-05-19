@@ -5,8 +5,10 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Traits\ReferenceTrait;
@@ -898,6 +900,11 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->usingIllustration;
     }
 
+    public function isUsingIllustration(): bool
+    {
+        return $this->usingIllustration;
+    }
+
     public function setUsingIllustration(bool $usingIllustration): self
     {
         $this->usingIllustration = $usingIllustration;
@@ -1005,6 +1012,62 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         $this->usingTipsmeee = $usingTipsmeee;
 
         return $this;
+    }
+
+    public function getFieldsUsed(): array
+    {
+        $fields = ['title', 'author'];
+        if ($this->usingAddress) {
+            $fields = array_merge($fields, ['address']);
+        }
+        if ($this->usingCategories) {
+            $fields = array_merge($fields, ['category']);
+        }
+        if ($this->usingThemes) {
+            $fields = array_merge($fields, ['theme']);
+        }
+        if ($this->usingDistrict) {
+            $fields = array_merge($fields, ['district']);
+        }
+        if ($this->usingTipsmeee) {
+            $fields = array_merge($fields, ['tipsmeee']);
+        }
+        if ($this->usingIllustration) {
+            $fields = array_merge($fields, ['media_url']);
+        }
+        if ($this->usingDescription) {
+            $fields = array_merge($fields, ['body']);
+        }
+        if ($this->usingSummary) {
+            $fields = array_merge($fields, ['summary']);
+        }
+        if (
+            $this->getAnalysisConfiguration() &&
+            $this->getAnalysisConfiguration()->isCostEstimationEnabled()
+        ) {
+            $fields = array_merge($fields, ['estimation']);
+        }
+
+        return $fields;
+    }
+
+    public function getCustomFields(): array
+    {
+        $fields = [];
+        /** @var AbstractQuestion $question */
+        foreach ($this->getRealQuestions() as $question) {
+            if (!\in_array($question->getTitle(), $fields) && $question instanceof SimpleQuestion) {
+                $fields = array_merge($fields, [$question->getTitle()]);
+            }
+        }
+
+        return $fields;
+    }
+
+    public function isUsingEstimation(): bool
+    {
+        return $this->getAnalysisConfiguration() &&
+            $this->getAnalysisConfiguration()->isCostEstimationEnabled();
     }
 
     private function getCloneQuestionReference(

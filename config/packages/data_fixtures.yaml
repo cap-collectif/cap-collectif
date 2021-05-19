@@ -1,20 +1,20 @@
 services:
-  _defaults:
-    autoconfigure: true
-    autowire: true
+    _defaults:
+        autoconfigure: true
+        autowire: true
 
-  Liip\ImagineBundle\Service\FilterService:
-    public: true
-    autowire: true
-    arguments:
-        $webpGenerate: false
-        $webpOptions: []
+    Liip\ImagineBundle\Service\FilterService:
+        public: true
+        autowire: true
+        arguments:
+            $webpGenerate: false
+            $webpOptions: []
 
-  liip_imagine.service.filter: '@Liip\ImagineBundle\Service\FilterService'
+    liip_imagine.service.filter: '@Liip\ImagineBundle\Service\FilterService'
 
-  Capco\AppBundle\DataFixtures\Processor\ProgressBarProcessor: ~
+    Capco\AppBundle\DataFixtures\Processor\ProgressBarProcessor: ~
 
-  Capco\AppBundle\DataFixtures\Processor\MediaProcessor:
-    arguments:
-      $filterService: '@Liip\ImagineBundle\Service\FilterService'
-      $projectDir: '%kernel.project_dir%'
+    Capco\AppBundle\DataFixtures\Processor\MediaProcessor:
+        arguments:
+            $filterService: '@Liip\ImagineBundle\Service\FilterService'
+            $projectDir: '%kernel.project_dir%'

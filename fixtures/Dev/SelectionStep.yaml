@@ -447,3 +447,32 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         defaultStatus: '@statusIdfWinner1'
         body: Attrapez les tous
         votesRanking: true
+    selectionStepIdf3Analyse:
+        id: selectionStepIdf3Analyse
+        title: Etudes des projets
+        label: Etudes des projets
+        startAt: <identity((new \DateTime('2021-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 0
+        defaultStatus: '@statusIdfAnalyse4'
+        body: 'La pré-sélection est en cours ! Les votes seront ouverts le 27 juin, un peu de patience...'
+        allowAuthorsToAddNews: true
+    selectionStepIdf3Vote:
+        id: selectionStepIdf3Vote
+        title: Vote des Franciliens
+        label: Vote des Franciliens
+        startAt: <identity((new \DateTime('2021-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 1
+        defaultStatus: '@statusIdfVote1'
+        body: Franciliens, prêts à voter
+        allowAuthorsToAddNews: true
+    selectionStepIdf3Winners:
+        id: selectionStepId3fWinners
+        title: Le suivi des projets lauréats
+        label: Le suivi des projets lauréats
+        startAt: <identity((new \DateTime('2021-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 0
+        defaultStatus: '@statusIdfWinner1'
+        body: Gardez un oeil sur les projets !

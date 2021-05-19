@@ -156,7 +156,7 @@ class AnalysisConfiguration implements Timestampable
         return $this;
     }
 
-    public function getEffectiveDate(): ?\DateTime
+    public function getEffectiveDate(): ?\DateTimeInterface
     {
         return $this->effectiveDate;
     }

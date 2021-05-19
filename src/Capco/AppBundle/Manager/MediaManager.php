@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaManager
 {
-    protected $mediaManager;
+    protected SonataMediaManager $mediaManager;
 
     public function __construct(SonataMediaManager $mediaManager)
     {
@@ -55,13 +55,20 @@ class MediaManager
         return $media;
     }
 
-    public function createImageFromPath(string $path, string $context = 'default')
-    {
+    public function createImageFromPath(
+        string $path,
+        ?string $mediaName,
+        string $context = 'default'
+    ): Media {
+        /** @var Media $media */
         $media = $this->mediaManager->create();
         $media->setProviderName('sonata.media.provider.image');
         $media->setBinaryContent($path);
         $media->setContext($context);
         $media->setEnabled(true);
+        $media->setName($mediaName);
+        $media->setProviderReference($mediaName);
+
         $this->mediaManager->save($media);
 
         return $media;

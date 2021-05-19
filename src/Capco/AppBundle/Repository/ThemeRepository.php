@@ -35,12 +35,21 @@ class ThemeRepository extends EntityRepository
     public function findWithTitle(?string $term = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb
-            ->leftJoin('t.translations', 'translation')
+        $qb->leftJoin('t.translations', 'translation')
             ->andWhere('translation.title LIKE :term')
             ->setParameter('term', '%' . $term . '%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findOneWithTitle(?string $term = null): ?Theme
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->leftJoin('t.translations', 'translation')
+            ->andWhere('translation.title = :term')
+            ->setParameter('term', $term);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getSearchResultsWithCounters(
@@ -85,8 +94,11 @@ class ThemeRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getThemesWithProposalsCountForStep(CollectStep $step, ?string $locale = 'fr-FR', $limit = null)
-    {
+    public function getThemesWithProposalsCountForStep(
+        CollectStep $step,
+        ?string $locale = 'fr-FR',
+        $limit = null
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->leftJoin('t.translations', 'translation')
             ->select('translation.title as name')

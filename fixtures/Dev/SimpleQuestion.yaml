@@ -453,3 +453,43 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         type: 9 # number
     # END FOOD PROJECT
+    simpleQuestionBP3Idf1:
+        id: 1391
+        title: No Mes Démarches
+        type: 9 # number
+    simpleQuestionBP3Idf2:
+        id: 1392
+        title: No IRIS
+        type: 0 # text
+    simpleQuestionBP3Idf3:
+        id: 1393
+        title: Raison sociale
+        type: 0 # text
+    simpleQuestionBP3Idf4:
+        id: 1394
+        title: Ligne adr 1 - Demandeur
+        type: 0 # text
+    simpleQuestionBP3Idf5:
+        id: 1395
+        title: Ligne adr 2 - Demandeur
+        type: 0 # text
+    simpleQuestionBP3Idf6:
+        id: 1396
+        title: Ligne adr 3 - Demandeur
+        type: 0 # text
+    simpleQuestionBP3Idf7:
+        id: 1397
+        title: Ligne adr 4 - Demandeur
+        type: 0 # text
+    simpleQuestionBP3Idf8:
+        id: 1398
+        title: Ligne adr code postal - Demandeur
+        type: 0 # text
+    simpleQuestionBP3Idf9:
+        id: 1399
+        title: Ligne adr localité - Demandeur
+        type: 0 # text
+    simpleQuestionBP3Idf10:
+        id: 1400
+        title: Type de porteur de projet
+        type: 0 # text

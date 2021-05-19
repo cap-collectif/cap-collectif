@@ -428,7 +428,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public function canContribute($viewer = null): bool
     {
-        return $this->isActive() && $this->getStep()->canContribute($viewer);
+        return $this->isActive() && $this->getStep() && $this->getStep()->canContribute($viewer);
     }
 
     public function isActive(): bool
@@ -438,7 +438,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public function canBeDeleted($viewer = null): bool
     {
-        return $this->isActive() && $this->getStep()->isActive($viewer);
+        return $this->isActive() && $this->getStep() && $this->getStep()->isActive($viewer);
     }
 
     public function getSortedAppendices()

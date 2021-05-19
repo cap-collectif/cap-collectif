@@ -211,3 +211,10 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         startAt: <identity((new \DateTime('2020-10-16')))>
         endAt: <identity((new \DateTime('2021-10-16')))>
         allowAuthorsToAddNews: true
+    collectstepIdf3:
+        id: collectstepIdf3
+        title: Collecte des projets Idf BRP 3
+        label: Dépôt des projets
+        body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
+        startAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
+        endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>

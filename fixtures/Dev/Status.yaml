@@ -145,3 +145,11 @@ Capco\AppBundle\Entity\Status:
         color: success
         createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
         updatedAt: $createdAt
+    statusIdfCollect3:
+        id: statusIdfCollect3
+        name: Nouveau projet
+        position: 1
+        step: '@collectstepIdf3'
+        color: info
+        createdAt: <identity((new \DateTime('2021-01-01 00:00:01')))>
+        updatedAt: $createdAt
