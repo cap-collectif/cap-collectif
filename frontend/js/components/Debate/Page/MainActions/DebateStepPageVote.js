@@ -45,10 +45,10 @@ const anonymousVoteForDebate = (
       if (response.addDebateAnonymousVote?.errorCode) {
         mutationErrorToast(intl);
       } else {
-        if (response.addDebateAnonymousVote?.debateAnonymousVote?.token) {
+        if (response.addDebateAnonymousVote?.token) {
           CookieMonster.addDebateAnonymousVoteCookie(debateId, {
             type,
-            token: response.addDebateAnonymousVote?.debateAnonymousVote?.token,
+            token: response.addDebateAnonymousVote.token,
           });
         }
         send('VOTE');

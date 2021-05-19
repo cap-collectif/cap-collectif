@@ -15,9 +15,6 @@ InternalDebateAnonymousVote:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: DebateAnonymousVote
-            token:
-                type: 'String!'
-                description: 'The token of the vote.'
             navigator:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'Navigator of the voter'

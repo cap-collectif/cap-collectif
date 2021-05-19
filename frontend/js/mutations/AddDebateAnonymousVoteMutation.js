@@ -13,10 +13,10 @@ const mutation = graphql`
   mutation AddDebateAnonymousVoteMutation($input: AddDebateAnonymousVoteInput!) {
     addDebateAnonymousVote(input: $input) {
       errorCode
+      token
       debateAnonymousVote {
         id
         type
-        token
         createdAt
       }
     }

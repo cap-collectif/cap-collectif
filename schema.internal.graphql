@@ -241,6 +241,9 @@ input AddDebateAnonymousVoteInput {
 }
 
 type AddDebateAnonymousVotePayload {
+  """The token of the newly created anonymous vote."""
+  token: String!
+
   """The newly created anonymous vote."""
   debateAnonymousVote: DebateAnonymousVote
 
@@ -3511,9 +3514,6 @@ type DebateAnonymousVote implements Node & AbstractDebateVote {
   The URL of widget from which the debate argument's vote was added, if any.
   """
   widgetOriginUrl: URI
-
-  """The token of the vote."""
-  token: String!
 
   """Navigator of the voter"""
   navigator: String

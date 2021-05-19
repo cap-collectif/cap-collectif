@@ -97,6 +97,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
     private function generateSuccessFulPayload(DebateAnonymousVote $vote): array
     {
         return [
+            'token' => $vote->getToken(),
             'debateAnonymousVote' => $vote,
             'errorCode' => null,
         ];

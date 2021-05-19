@@ -2,6 +2,9 @@ AddDebateAnonymousVotePayload:
     type: relay-mutation-payload
     config:
         fields:
+            token:
+                type: 'String!'
+                description: 'The token of the newly created anonymous vote.'
             debateAnonymousVote:
                 type: 'InternalDebateAnonymousVote'
                 description: 'The newly created anonymous vote.'
