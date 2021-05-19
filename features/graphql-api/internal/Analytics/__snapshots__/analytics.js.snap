@@ -1,0 +1,1949 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Analytics fetches analytics data 1`] = `
+Object {
+  "analytics": Object {
+    "comments": Object {
+      "values": Array [
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 57,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 12,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 50,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 26,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 63,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 12,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 20,
+        },
+      ],
+    },
+    "contributions": Object {
+      "values": Array [
+        Object {
+          "key": "2014-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2015-01-01T00:00:00.000Z",
+          "totalCount": 34,
+        },
+        Object {
+          "key": "2015-02-01T00:00:00.000Z",
+          "totalCount": 29,
+        },
+        Object {
+          "key": "2015-03-01T00:00:00.000Z",
+          "totalCount": 31,
+        },
+        Object {
+          "key": "2015-04-01T00:00:00.000Z",
+          "totalCount": 32,
+        },
+        Object {
+          "key": "2015-05-01T00:00:00.000Z",
+          "totalCount": 31,
+        },
+        Object {
+          "key": "2015-06-01T00:00:00.000Z",
+          "totalCount": 30,
+        },
+        Object {
+          "key": "2015-07-01T00:00:00.000Z",
+          "totalCount": 19,
+        },
+        Object {
+          "key": "2015-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 42,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 25,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 5,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 82,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 54,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 42,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 30,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 11,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 58,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 72,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 137,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 17,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 20,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 72,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 42,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 69,
+        },
+        Object {
+          "key": "2019-05-01T00:00:00.000Z",
+          "totalCount": 5,
+        },
+        Object {
+          "key": "2019-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 31,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 5,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 21,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 24,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 9,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-06-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "2020-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-08-01T00:00:00.000Z",
+          "totalCount": 5,
+        },
+        Object {
+          "key": "2020-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-11-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+      ],
+    },
+    "followers": Object {
+      "values": Array [],
+    },
+    "registrations": Object {
+      "values": Array [
+        Object {
+          "key": "2014-12-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2015-01-01T00:00:00.000Z",
+          "totalCount": 24,
+        },
+        Object {
+          "key": "2015-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-03-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2015-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 54,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 141,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-06-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-07-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+      ],
+    },
+    "trafficSources": Object {
+      "sources": Array [
+        Object {
+          "totalCount": 1,
+          "type": "SEARCH_ENGINE",
+        },
+        Object {
+          "totalCount": 1,
+          "type": "SOCIAL_NETWORK",
+        },
+        Object {
+          "totalCount": 1,
+          "type": "DIRECT",
+        },
+        Object {
+          "totalCount": 1,
+          "type": "EXTERNAL_LINK",
+        },
+      ],
+    },
+    "visitors": Object {
+      "values": Array [
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-11-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+      ],
+    },
+    "votes": Object {
+      "values": Array [
+        Object {
+          "key": "2014-12-01T00:00:00.000Z",
+          "totalCount": 109,
+        },
+        Object {
+          "key": "2015-01-01T00:00:00.000Z",
+          "totalCount": 70,
+        },
+        Object {
+          "key": "2015-02-01T00:00:00.000Z",
+          "totalCount": 73,
+        },
+        Object {
+          "key": "2015-03-01T00:00:00.000Z",
+          "totalCount": 21,
+        },
+        Object {
+          "key": "2015-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 107,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 6,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 4,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 4,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 120,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 106,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 93,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 69,
+        },
+        Object {
+          "key": "2020-05-01T00:00:00.000Z",
+          "totalCount": 62,
+        },
+        Object {
+          "key": "2020-06-01T00:00:00.000Z",
+          "totalCount": 60,
+        },
+        Object {
+          "key": "2020-07-01T00:00:00.000Z",
+          "totalCount": 36,
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Analytics fetches analytics data by project 1`] = `
+Object {
+  "analytics": Object {
+    "comments": Object {
+      "values": Array [
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 31,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 50,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 20,
+        },
+      ],
+    },
+    "contributions": Object {
+      "values": Array [
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 39,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 34,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 42,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 30,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 11,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 50,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 20,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 31,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 19,
+        },
+      ],
+    },
+    "followers": Object {
+      "values": Array [],
+    },
+    "registrations": Object {
+      "values": Array [
+        Object {
+          "key": "2014-12-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2015-01-01T00:00:00.000Z",
+          "totalCount": 24,
+        },
+        Object {
+          "key": "2015-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-03-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2015-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 54,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 141,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-06-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-07-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+      ],
+    },
+    "trafficSources": Object {
+      "sources": Array [
+        Object {
+          "totalCount": 0,
+          "type": "SEARCH_ENGINE",
+        },
+        Object {
+          "totalCount": 1,
+          "type": "SOCIAL_NETWORK",
+        },
+        Object {
+          "totalCount": 0,
+          "type": "DIRECT",
+        },
+        Object {
+          "totalCount": 1,
+          "type": "EXTERNAL_LINK",
+        },
+      ],
+    },
+    "visitors": Object {
+      "values": Array [
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-11-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+      ],
+    },
+    "votes": Object {
+      "values": Array [
+        Object {
+          "key": "2014-12-01T00:00:00.000Z",
+          "totalCount": 109,
+        },
+        Object {
+          "key": "2015-01-01T00:00:00.000Z",
+          "totalCount": 70,
+        },
+        Object {
+          "key": "2015-02-01T00:00:00.000Z",
+          "totalCount": 73,
+        },
+        Object {
+          "key": "2015-03-01T00:00:00.000Z",
+          "totalCount": 21,
+        },
+        Object {
+          "key": "2015-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2015-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2016-01-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2016-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2016-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-01-01T00:00:00.000Z",
+          "totalCount": 107,
+        },
+        Object {
+          "key": "2017-02-01T00:00:00.000Z",
+          "totalCount": 6,
+        },
+        Object {
+          "key": "2017-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2017-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 4,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 4,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 120,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 106,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 93,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 69,
+        },
+        Object {
+          "key": "2020-05-01T00:00:00.000Z",
+          "totalCount": 62,
+        },
+        Object {
+          "key": "2020-06-01T00:00:00.000Z",
+          "totalCount": 60,
+        },
+        Object {
+          "key": "2020-07-01T00:00:00.000Z",
+          "totalCount": 36,
+        },
+      ],
+    },
+  },
+}
+`;

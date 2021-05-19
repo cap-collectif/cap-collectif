@@ -80,8 +80,8 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     {
         $filters = $keys[0];
         list($start, $end, $projectId) = [
-            $filters['startAt'],
-            $filters['endAt'],
+            new \DateTime($filters['startAt']),
+            new \DateTime($filters['endAt']),
             GlobalId::fromGlobalId($filters['projectId'])['id'],
         ];
         $projectSlug = null;
@@ -131,8 +131,8 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     protected function serializeKey($key): array
     {
         return [
-            'startAt' => $key['startAt']->format(DateTimeInterface::ATOM),
-            'endAt' => $key['endAt']->format(DateTimeInterface::ATOM),
+            'startAt' => (new \DateTime($key['startAt']))->format(DateTimeInterface::ATOM),
+            'endAt' => (new \DateTime($key['startAt']))->format(DateTimeInterface::ATOM),
             'projectId' => $key['projectId'],
         ];
     }

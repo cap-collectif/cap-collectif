@@ -12,7 +12,7 @@ class DateTimeType
         return $value->format('Y-m-d H:i:s');
     }
 
-    public static function parseValue(string $value = null)
+    public static function parseValue(?string $value = null)
     {
         if (!$value) {
             return null;

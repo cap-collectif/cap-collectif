@@ -494,10 +494,16 @@ class ReinitCommand extends Command
             ],
             $output
         );
-
         $event = $this->stopwatch->stop('populate');
         $output->writeln(
             'Populate Elasticsearch duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
+
+        $this->runCommands(
+            [
+                'capco:es:create-analytics-test-index' => ['--quiet' => true, '--no-debug' => true],
+            ],
+            $output
         );
     }
 

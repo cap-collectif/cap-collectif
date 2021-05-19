@@ -192,6 +192,8 @@ services:
             $username: '%cloudflare_elastic_username%'
             $password: '%cloudflare_elastic_password%'
             $clientId: '%cloudflare_elastic_id%'
+            $environment: '%kernel.environment%'
+            $elasticsearchHost: '%elasticsearch_host%'
 
     Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface: '@security.authentication.trust_resolver'
 

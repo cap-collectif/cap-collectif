@@ -17,6 +17,10 @@ services:
         arguments:
             $kernelRootDir: '%kernel.root_dir%'
 
+    Capco\AppBundle\Command\Elasticsearch\CreateAnalyticsTestIndexCommand:
+        arguments:
+            $name: 'capco:es:create-analytics-test-index'
+
     Capco\AppBundle\Command\GenerateMapProviderPublicToken:
         arguments:
             $mapboxSecretKey: '%mapbox_secret_key%'

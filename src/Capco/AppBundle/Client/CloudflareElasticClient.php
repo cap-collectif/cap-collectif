@@ -25,10 +25,19 @@ class CloudflareElasticClient
         string $hostname,
         string $clientId,
         string $username,
-        string $password
+        string $password,
+        string $environment,
+        string $elasticsearchHost
     ) {
         $this->hostname = $hostname;
-        $this->esClient = $this->createEsClient($clientId, $username, $password, $logger);
+        $this->esClient = $this->createEsClient(
+            $clientId,
+            $username,
+            $password,
+            $environment,
+            $elasticsearchHost,
+            $logger
+        );
     }
 
     public function getTrafficSourcesAnalyticsResultSet(
@@ -314,19 +323,22 @@ class CloudflareElasticClient
         string $clientId,
         string $username,
         string $password,
+        string $environment,
+        string $elasticsearchHost,
         LoggerInterface $logger
     ): Client {
-        $this->index = 'cloudflare-*';
+        $devOrTest = \in_array($environment, ['dev', 'test'], true);
+        $this->index = $devOrTest ? 'analytics_test' : 'cloudflare-*';
         $cloudUrl = explode('$', base64_decode(explode(':', $clientId)[1]));
         $formattedUrl = $cloudUrl[1] . '.' . $cloudUrl[0];
 
         return new Client(
             [
-                'host' => $formattedUrl,
-                'port' => '9243',
+                'host' => $devOrTest ? $elasticsearchHost : $formattedUrl,
+                'port' => $devOrTest ? '9200' : '9243',
                 'username' => $username,
                 'password' => $password,
-                'transport' => 'https',
+                'transport' => $devOrTest ? 'http' : 'https',
             ],
             null,
             $logger

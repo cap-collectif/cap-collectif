@@ -130,19 +130,16 @@ def purge_rabbitmq():
 
 
 def save_es_snapshot():
-    instance = Connection(Connection.host)
-    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
-    instance.local('docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
-    instance.local('docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
 
 
 def restore_es_snapshot():
-    instance = Connection(Connection.host)
-    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
-    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false}"')
-    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
-    instance.local('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
-
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false}"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
+    run('eval "$(docker-machine env dinghy)" ; docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
 
 def behat(fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
     "Run Gherkin Tests"
