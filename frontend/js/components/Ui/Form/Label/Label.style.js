@@ -13,7 +13,7 @@ const LabelContainer: StyledComponent<
   font-weight: normal;
   margin: 0;
   font-size: ${({ typeForm }) => (isQuestionnaire(typeForm) ? '16px' : '14px')};
-  cursor: pointer;
+  cursor: ${({ type }) => type !== 'label' && 'pointer'};
   margin-bottom: 10px !important; /* override conflicting sonata global css rules which have a greater css selector weight, so !important is relevant here */
 
   & > .icon {

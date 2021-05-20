@@ -232,7 +232,11 @@ const RenderSelect = ({
   return (
     <div className={`form-group ${blockClassName} ${canValidate && error ? ' has-error' : ''}`}>
       {label && (
-        <Label htmlFor={id} className={labelClassName || 'control-label'} id={`label-select-${id}`}>
+        <Label
+          htmlFor={id}
+          className={labelClassName || 'control-label'}
+          id={`label-select-${id}`}
+          type="label">
           {label}
         </Label>
       )}

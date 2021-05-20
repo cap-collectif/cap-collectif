@@ -5,7 +5,7 @@ import { TYPE_FORM } from '~/constants/FormConstants';
 
 type Props = {|
   children?: React.Node,
-  type?: 'radio' | 'checkbox' | 'radioButton',
+  type?: 'radio' | 'checkbox' | 'radioButton' | 'label',
   hasImage?: boolean,
   isChecked?: boolean,
   htmlFor?: string,
