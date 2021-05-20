@@ -78,7 +78,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
     if (!proposal.viewerIsFollowing) {
       return (
         <LoginOverlay>
-          <Button
+          <button
+            type="button"
             className="btn btn-default proposal__button__follow"
             onClick={() =>
               FollowProposalMutation.commit({
@@ -93,7 +94,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
             id={`proposal-follow-btn-${proposal.id}`}>
             <i className="cap cap-rss mr-5" />
             <FormattedMessage id="follow" />
-          </Button>
+          </button>
         </LoginOverlay>
       );
     }

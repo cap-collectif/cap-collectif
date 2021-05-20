@@ -1,27 +1,45 @@
 // @flow
-import React, { cloneElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import * as React from 'react';
+import { useIntl } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
+import { usePopoverState, Popover, PopoverDisclosure, PopoverArrow } from 'reakit/Popover';
 import { connect } from 'react-redux';
-import { Button, OverlayTrigger } from 'react-bootstrap';
 import { useAnalytics } from 'use-analytics';
 import { showRegistrationModal } from '~/redux/modules/user';
 import type { Dispatch, State } from '~/types';
+import Button from '~ds/Button/Button';
 import LoginButton from '../User/Login/LoginButton';
-import Popover from './Popover';
 import { loginWithOpenID } from '~/redux/modules/default';
+import AppBox from '~ui/Primitives/AppBox';
+import Text from '~ui/Primitives/Text';
+import Flex from '~ui/Primitives/Layout/Flex';
+import VisuallyHidden from '~ds/VisuallyHidden/VisuallyHidden';
 
-export type Placement = 'top' | 'bottom' | 'left' | 'right';
+export type Placement =
+  | 'auto-start'
+  | 'auto'
+  | 'auto-end'
+  | 'top-start'
+  | 'top'
+  | 'top-end'
+  | 'right-start'
+  | 'right'
+  | 'right-end'
+  | 'bottom-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'left-end'
+  | 'left'
+  | 'left-start';
 
 type OwnProps = {|
-  +children: $FlowFixMe,
-  // DefaultProps not working right now
+  +children: any,
   +enabled?: boolean,
   +placement?: Placement,
 |};
 
 type StateProps = {|
-  +user?: ?Object,
-  +isLoginOrRegistrationModalOpen: boolean,
+  +isAuthenticated: boolean,
   +showRegistrationButton: boolean,
   +loginWithMonCompteParis?: boolean,
   +loginWithOpenId?: boolean,
@@ -33,65 +51,107 @@ type Props = {|
   +dispatch: Dispatch,
 |};
 
+const PopoverContainer: StyledComponent<{}, {}, HTMLDivElement> = styled(AppBox).attrs({
+  maxWidth: '280px',
+  zIndex: 100,
+})`
+  outline: none;
+`;
+
+const ButtonRegistration: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  margin: 10px 0 0 0;
+`;
+
+const Arrow: StyledComponent<{ position: Placement }, {}, HTMLDivElement> = styled(AppBox)`
+  .stroke {
+    fill: none;
+  }
+
+  .fill {
+    fill: ${props => (props.position === 'bottom' ? '#f7f7f7' : 'white')};
+  }
+`;
+
+// There is !important css because there is specific styles on pages that break the component display
+
 export const LoginOverlay = ({
-  user = null,
+  isAuthenticated,
   children,
   enabled = true,
   showRegistrationButton,
-  isLoginOrRegistrationModalOpen = false,
   loginWithMonCompteParis = false,
   loginWithOpenId = false,
-  placement = 'top',
+  placement = 'auto',
   dispatch,
 }: Props) => {
   const { track } = useAnalytics();
+  const popover = usePopoverState({ baseId: 'popover-overlay', placement });
+  const intl = useIntl();
 
-  if (!enabled || user) {
-    return children;
-  }
-
-  const popover = (
-    <Popover id="login-popover" title={<FormattedMessage id="vote.popover.title" />}>
-      <p>
-        <FormattedMessage id="vote.popover.body" />
-      </p>
-      {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
-        <p>
-          <Button
-            onClick={() => {
-              track('overlay_registration_click');
-              dispatch(showRegistrationModal());
-            }}
-            className="center-block btn-block">
-            <FormattedMessage id="global.registration" />
-          </Button>
-        </p>
-      )}
-      <p>
-        <LoginButton bsStyle="success" className="center-block btn-block" />
-      </p>
-    </Popover>
-  );
+  if (!enabled || isAuthenticated) return children;
 
   return (
-    <span>
-      <OverlayTrigger
-        trigger="click"
-        rootClose
-        placement={placement}
-        overlay={isLoginOrRegistrationModalOpen ? <span /> : popover}>
-        {cloneElement(children, { onClick: null })}
-      </OverlayTrigger>
-    </span>
+    <>
+      <PopoverDisclosure {...popover} ref={children.ref} {...children.props} onClick={null}>
+        {disclosureProps => React.cloneElement(children, disclosureProps)}
+      </PopoverDisclosure>
+
+      <Popover
+        {...popover}
+        tabIndex={0}
+        aria-label={intl.formatMessage({ id: 'vote.popover.title' })}
+        as={PopoverContainer}
+        id="login-popover"
+        borderRadius="popover"
+        boxShadow="0 5px 10px rgb(0 0 0 / 20%)">
+        <PopoverArrow {...popover} as={Arrow} position={popover.placement} />
+
+        <AppBox overflow="hidden" borderRadius="popover" bg="white" color="black">
+          <Text
+            py="8px !important"
+            px={3}
+            bg="#f7f7f7"
+            borderBottom="normal"
+            borderColor="#ebebeb"
+            fontSize={3}
+            mb="0 !important"
+            textAlign="left !important">
+            {intl.formatMessage({ id: 'vote.popover.title' })}
+          </Text>
+
+          <Flex px={3} py="10px" direction="column" spacing="10px">
+            <Text fontSize={3} pb="0 !important" textAlign="left !important" mb="0 !important">
+              {intl.formatMessage({ id: 'vote.popover.body' })}
+            </Text>
+
+            <VisuallyHidden>
+              <Button onClick={popover.hide}>{intl.formatMessage({ id: 'global.close' })}</Button>
+            </VisuallyHidden>
+
+            {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
+              <ButtonRegistration
+                type="button"
+                onClick={() => {
+                  track('overlay_registration_click');
+                  dispatch(showRegistrationModal());
+                }}
+                className="center-block btn-block btn btn-default">
+                {intl.formatMessage({ id: 'global.registration' })}
+              </ButtonRegistration>
+            )}
+            <LoginButton bsStyle="success" className="center-block btn-block login-button" />
+          </Flex>
+        </AppBox>
+      </Popover>
+    </>
   );
 };
+
 LoginOverlay.displayName = 'LoginOverlay';
 
 const mapStateToProps = (state: State) => ({
-  user: state.user.user,
+  isAuthenticated: !!state.user.user,
   showRegistrationButton: state.default.features.registration || false,
-  isLoginOrRegistrationModalOpen:
-    state.user.showLoginModal || state.user.showRegistrationModal || false,
   loginWithMonCompteParis: state.default.features.login_paris || false,
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
 });

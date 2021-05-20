@@ -4,16 +4,27 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { LoginOverlay } from './LoginOverlay';
 
+jest.mock('reakit/Popover', () => ({
+  ...jest.requireActual('reakit/Popover'),
+  usePopoverState: () => ({
+    ...jest.requireActual('reakit/Popover').usePopoverState({ baseId: 'mock' }),
+    unstable_popoverStyles: {
+      left: '100%',
+      position: 'fixed',
+      top: '100%',
+    },
+  }),
+}));
+
 describe('<LoginOverlay />', () => {
   const props = {
-    isLoginOrRegistrationModalOpen: false,
     showRegistrationButton: false,
     dispatch: jest.fn(),
   };
 
   it('renders children if not enabled', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled={false} showRegistrationButton {...props}>
+      <LoginOverlay enabled={false} isAuthenticated showRegistrationButton {...props}>
         <div className="foo" />
       </LoginOverlay>,
     );
@@ -22,7 +33,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders children if user is logged', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled user={{}} showRegistrationButton {...props}>
+      <LoginOverlay enabled isAuthenticated showRegistrationButton {...props}>
         <div className="foo" />
       </LoginOverlay>,
     );
@@ -31,7 +42,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders popover if user is not logged', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled user={null} showRegistrationButton {...props}>
+      <LoginOverlay enabled isAuthenticated={false} showRegistrationButton {...props}>
         <div className="foo" />
       </LoginOverlay>,
     );

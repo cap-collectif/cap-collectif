@@ -399,53 +399,123 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
       delete.vote.against
     </button>
   </div>
-  <span>
-    <div
-      class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+  <div
+    aria-controls="popover-overlay"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+    type="button"
+  >
+    <form
+      class="DebateStepPageVoteForm__Form-sc-89or92-0 gpNHGt"
+      disabled=""
+      id="debate-argument-form"
     >
-      <form
-        class="DebateStepPageVoteForm__Form-sc-89or92-0 gpNHGt"
-        disabled=""
-        id="debate-argument-form"
+      <div
+        class="form-group"
       >
+        <textarea
+          aria-describedby="body-error "
+          aria-invalid="false"
+          autocomplete="off"
+          class="form-control"
+          id="body"
+          minlength="1"
+          name="body"
+          placeholder="why-are-you-against"
+          style="pointer-events:none"
+          type="textarea"
+        />
         <div
-          class="form-group"
+          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
         >
-          <textarea
-            aria-describedby="body-error "
-            aria-invalid="false"
-            autocomplete="off"
-            class="form-control"
-            id="body"
-            minlength="1"
-            name="body"
-            placeholder="why-are-you-against"
-            style="pointer-events:none"
-            type="textarea"
-          />
-          <div
-            class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
-          >
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
         </div>
-      </form>
+      </div>
+    </form>
+  </div>
+  <div
+    aria-label="vote.popover.title"
+    class="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+    data-dialog="true"
+    hidden=""
+    id="login-popover"
+    role="dialog"
+    style="display:none;position:fixed;left:100%;top:100%"
+    tabindex="0"
+  >
+    <div
+      class="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+      style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
+    >
+      <svg
+        style="transform:rotateZ(360deg)"
+        viewBox="0 0 30 30"
+      >
+        <path
+          class="stroke"
+          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+        />
+        <path
+          class="fill"
+          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+        />
+      </svg>
     </div>
-  </span>
+    <div
+      class="sc-bdnylx eWkbGr"
+    >
+      <p
+        class="sc-bdnylx YLtjJ"
+      >
+        vote.popover.title
+      </p>
+      <div
+        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+      >
+        <p
+          class="sc-bdnylx jEhuac"
+        >
+          vote.popover.body
+        </p>
+        <span
+          class="sc-bdnylx bgIGJQ"
+          clip="rect(0px, 0px, 0px, 0px)"
+        >
+          <button
+            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+            type="button"
+          >
+            global.close
+          </button>
+        </span>
+        <span>
+          <button
+            aria-label="open.connection_modal"
+            class="center-block btn-block login-button btn btn-success"
+            destination="http://localhost"
+            type="button"
+          >
+            global.login
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -477,14 +547,83 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
       </span>
     </p>
   </div>
-  <span>
-    <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
-      type="button"
+  <button
+    aria-controls="popover-overlay"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    type="button"
+  >
+    publish-argument
+  </button>
+  <div
+    aria-label="vote.popover.title"
+    class="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+    data-dialog="true"
+    hidden=""
+    id="login-popover"
+    role="dialog"
+    style="display:none;position:fixed;left:100%;top:100%"
+    tabindex="0"
+  >
+    <div
+      class="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+      style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
-      publish-argument
-    </button>
-  </span>
+      <svg
+        style="transform:rotateZ(360deg)"
+        viewBox="0 0 30 30"
+      >
+        <path
+          class="stroke"
+          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+        />
+        <path
+          class="fill"
+          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+        />
+      </svg>
+    </div>
+    <div
+      class="sc-bdnylx eWkbGr"
+    >
+      <p
+        class="sc-bdnylx YLtjJ"
+      >
+        vote.popover.title
+      </p>
+      <div
+        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+      >
+        <p
+          class="sc-bdnylx jEhuac"
+        >
+          vote.popover.body
+        </p>
+        <span
+          class="sc-bdnylx bgIGJQ"
+          clip="rect(0px, 0px, 0px, 0px)"
+        >
+          <button
+            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+            type="button"
+          >
+            global.close
+          </button>
+        </span>
+        <span>
+          <button
+            aria-label="open.connection_modal"
+            class="center-block btn-block login-button btn btn-success"
+            destination="http://localhost"
+            type="button"
+          >
+            global.login
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 

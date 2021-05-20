@@ -17,7 +17,7 @@ describe('<ArgumentVoteButton />', () => {
     const argument = {
       $refType,
       id: 'argument1',
-      author: { slug: 'author', isViewer: true },
+      author: { isViewer: true },
       contribuable: true,
       viewerHasVote: false,
       viewerVote: null,
@@ -30,7 +30,7 @@ describe('<ArgumentVoteButton />', () => {
     const argument = {
       $refType,
       id: 'argument1',
-      author: { slug: 'author', isViewer: false },
+      author: { isViewer: false },
       contribuable: true,
       viewerHasVote: false,
       viewerVote: null,
@@ -44,7 +44,7 @@ describe('<ArgumentVoteButton />', () => {
     const argument = {
       $refType,
       id: 'argument1',
-      author: { slug: 'author', isViewer: false },
+      author: { isViewer: false },
       contribuable: true,
       viewerHasVote: true,
       viewerVote: { id: 'vote1', $fragmentRefs },

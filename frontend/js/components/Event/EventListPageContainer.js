@@ -29,7 +29,7 @@ const EventFiltersContainer: StyledComponent<{}, {}, typeof ColorBox> = styled(C
   margin: 25px 0 30px;
   position: sticky;
   top: 50px;
-  z-index: 1010;
+  z-index: 50;
   .event-search-group .form-group {
     margin-bottom: 0;
   }

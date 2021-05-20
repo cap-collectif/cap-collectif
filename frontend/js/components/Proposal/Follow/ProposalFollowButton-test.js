@@ -1,51 +1,40 @@
 // @flow
 /* eslint-env jest */
-import { graphql } from 'react-relay';
-import ProposalFollowButton from './ProposalFollowButton';
+import * as React from 'react';
+import { shallow } from 'enzyme';
+import { ProposalFollowButton } from './ProposalFollowButton';
+import { $refType } from '~/mocks';
 
 describe('<ProposalFollowButton />', () => {
   const proposalViewIsFollowing = {
+    $refType,
     id: 'proposal1',
     viewerIsFollowing: true,
     viewerFollowingConfiguration: 'MINIMAL',
   };
   const proposalViewIsNotFollowing = {
+    $refType,
     id: 'proposal1',
     viewerIsFollowing: false,
     viewerFollowingConfiguration: null,
   };
 
-  const query = graphql`
-    query ProposalFollowButtonTestQuery @relay_test_operation {
-      proposal: node(id: "test-id") {
-        ...ProposalFollowButton_proposal @arguments(isAuthenticated: true)
-      }
-    }
-  `;
-
   it('should render a button to unfollow a proposal when viewer is following.', () => {
-    expect(
-      global.renderWithRelay(ProposalFollowButton, {
-        query,
-        spec: {
-          Proposal() {
-            return proposalViewIsFollowing;
-          },
-        },
-      }),
-    ).toMatchSnapshot();
+    const wrapper = shallow(
+      <ProposalFollowButton proposal={proposalViewIsFollowing} isAuthenticated />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a button to follow a proposal when viewer is not following.', () => {
-    expect(
-      global.renderWithRelay(ProposalFollowButton, {
-        query,
-        spec: {
-          Proposal() {
-            return proposalViewIsNotFollowing;
-          },
-        },
-      }),
-    ).toMatchSnapshot();
+    const wrapper = shallow(
+      <ProposalFollowButton proposal={proposalViewIsNotFollowing} isAuthenticated />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when not authenticated', () => {
+    const wrapper = shallow(<ProposalFollowButton proposal={null} isAuthenticated={false} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });

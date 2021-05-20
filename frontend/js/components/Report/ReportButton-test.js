@@ -15,20 +15,19 @@ describe('<ReportButton />', () => {
   it('renders clickable button', () => {
     const button = shallow(<ReportButton {...defaultProps} />)
       .find('Connect(LoginOverlay)')
-      .find('Button');
+      .find('button');
     expect(button.prop('id')).toEqual('report-opinion-1-button');
     expect(button.prop('onClick')).toBeDefined();
-    expect(button.prop('bsSize')).toEqual('medium');
+    expect(button.prop('className')).toEqual('btn btn-default btn-md');
     expect(button.prop('style')).toEqual({});
-    expect(button.prop('active')).toEqual(false);
   });
 
   it('renders a reported button', () => {
     const button = shallow(<ReportButton {...defaultProps} reported />)
       .find('Connect(LoginOverlay)')
-      .find('Button');
+      .find('button');
     expect(button).toHaveLength(1);
-    expect(button.prop('onClick')).toEqual(null);
-    expect(button.prop('active')).toEqual(true);
+    expect(button.prop('disabled')).toEqual(true);
+    expect(button.prop('className')).toEqual('btn btn-default btn-md active');
   });
 });

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'react-bootstrap';
+import cn from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import RemoveArgumentVoteMutation from '../../../mutations/RemoveArgumentVoteMutation';
@@ -21,7 +21,7 @@ type State = {
 };
 
 export class ArgumentVoteButton extends React.Component<Props, State> {
-  target: null | Button;
+  target: null | HTMLButtonElement;
 
   state = { showModal: false };
 
@@ -91,24 +91,25 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
     const { step } = argument;
     const { showModal } = this.state;
     return (
-      <div>
+      <>
         {step && (
           <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
+
         <LoginOverlay>
-          <Button
+          <button
+            type="button"
             ref={button => {
               this.target = button;
             }}
             disabled={!argument.contribuable || argument.author.isViewer}
-            bsStyle={argument.viewerHasVote ? 'danger' : 'success'}
-            className={`argument__btn--vote${argument.viewerHasVote ? '' : ' btn--outline'}`}
-            bsSize="xsmall"
-            onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
+            onClick={argument.viewerHasVote ? this.deleteVote : this.vote}
+            className={cn('btn btn-xs argument__btn--vote', {
+              'btn--outline btn-success': !argument.viewerHasVote,
+              'btn-danger': argument.viewerHasVote,
+            })}>
             {argument.viewerHasVote ? (
-              <span>
-                <FormattedMessage id="global.cancel" />
-              </span>
+              <FormattedMessage id="global.cancel" tagName="span" />
             ) : (
               <span>
                 <i className="cap cap-hand-like-2" /> <FormattedMessage id="global.ok" />
@@ -118,9 +119,9 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
               target={() => ReactDOM.findDOMNode(this.target)}
               publishable={argument.viewerVote || null}
             />
-          </Button>
+          </button>
         </LoginOverlay>
-      </div>
+      </>
     );
   }
 }
@@ -131,15 +132,12 @@ export default createFragmentContainer(ArgumentVoteButton, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
-        slug
         isViewer @include(if: $isAuthenticated)
       }
       step {
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)
         }
-        ...RequirementsForm_step @arguments(isAuthenticated: $isAuthenticated)
-
         ...RequirementsModal_step @arguments(isAuthenticated: $isAuthenticated)
       }
       contribuable

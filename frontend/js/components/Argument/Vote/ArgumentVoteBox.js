@@ -12,12 +12,12 @@ export class ArgumentVoteBox extends React.Component<Props> {
   render() {
     const { argument } = this.props;
     return (
-      <span>
+      <>
         <form className="opinion__votes-button">
           <ArgumentVoteButton argument={argument} />
         </form>
         <span className="opinion__votes-nb">{argument.votes.totalCount}</span>
-      </span>
+      </>
     );
   }
 }

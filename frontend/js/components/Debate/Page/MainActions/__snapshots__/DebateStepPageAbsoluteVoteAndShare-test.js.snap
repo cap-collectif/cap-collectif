@@ -23,34 +23,240 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           }
         }
       >
-        <span>
-          <button
-            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            type="button"
+        <button
+          aria-controls="popover-overlay"
+          aria-expanded={false}
+          aria-haspopup="dialog"
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+          />
+          global.for
+        </button>
+        <div
+          aria-label="vote.popover.title"
+          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          data-dialog={true}
+          hidden={true}
+          id="login-popover"
+          onAnimationEnd={[Function]}
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onTransitionEnd={[Function]}
+          role="dialog"
+          style={
+            Object {
+              "display": "none",
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+            style={
+              Object {
+                "bottom": "100%",
+                "fontSize": 30,
+                "height": "1em",
+                "pointerEvents": "none",
+                "width": "1em",
+              }
+            }
           >
-            <IconMock
-              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
-            />
-            global.for
-          </button>
-        </span>
-        <span>
-          <button
-            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            type="button"
+            <svg
+              style={
+                Object {
+                  "transform": "rotateZ(360deg)",
+                }
+              }
+              viewBox="0 0 30 30"
+            >
+              <path
+                className="stroke"
+                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+              />
+              <path
+                className="fill"
+                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+              />
+            </svg>
+          </div>
+          <div
+            className="sc-bdnylx eWkbGr"
           >
-            <IconMock
-              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
-            />
-            global.against
-          </button>
-        </span>
+            <p
+              className="sc-bdnylx YLtjJ"
+            >
+              vote.popover.title
+            </p>
+            <div
+              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+            >
+              <p
+                className="sc-bdnylx jEhuac"
+              >
+                vote.popover.body
+              </p>
+              <span
+                className="sc-bdnylx bgIGJQ"
+                clip="rect(0px, 0px, 0px, 0px)"
+              >
+                <button
+                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.close
+                </button>
+              </span>
+              <span
+                style={Object {}}
+              >
+                <button
+                  aria-label="open.connection_modal"
+                  className="center-block btn-block login-button btn btn-success"
+                  destination="http://localhost"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.login
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-controls="popover-overlay"
+          aria-expanded={false}
+          aria-haspopup="dialog"
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+          />
+          global.against
+        </button>
+        <div
+          aria-label="vote.popover.title"
+          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          data-dialog={true}
+          hidden={true}
+          id="login-popover"
+          onAnimationEnd={[Function]}
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onTransitionEnd={[Function]}
+          role="dialog"
+          style={
+            Object {
+              "display": "none",
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+            style={
+              Object {
+                "bottom": "100%",
+                "fontSize": 30,
+                "height": "1em",
+                "pointerEvents": "none",
+                "width": "1em",
+              }
+            }
+          >
+            <svg
+              style={
+                Object {
+                  "transform": "rotateZ(360deg)",
+                }
+              }
+              viewBox="0 0 30 30"
+            >
+              <path
+                className="stroke"
+                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+              />
+              <path
+                className="fill"
+                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+              />
+            </svg>
+          </div>
+          <div
+            className="sc-bdnylx eWkbGr"
+          >
+            <p
+              className="sc-bdnylx YLtjJ"
+            >
+              vote.popover.title
+            </p>
+            <div
+              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+            >
+              <p
+                className="sc-bdnylx jEhuac"
+              >
+                vote.popover.body
+              </p>
+              <span
+                className="sc-bdnylx bgIGJQ"
+                clip="rect(0px, 0px, 0px, 0px)"
+              >
+                <button
+                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.close
+                </button>
+              </span>
+              <span
+                style={Object {}}
+              >
+                <button
+                  aria-label="open.connection_modal"
+                  className="center-block btn-block login-button btn btn-success"
+                  destination="http://localhost"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.login
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -284,34 +490,240 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           }
         }
       >
-        <span>
-          <button
-            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            type="button"
+        <button
+          aria-controls="popover-overlay"
+          aria-expanded={false}
+          aria-haspopup="dialog"
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+          />
+          global.for
+        </button>
+        <div
+          aria-label="vote.popover.title"
+          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          data-dialog={true}
+          hidden={true}
+          id="login-popover"
+          onAnimationEnd={[Function]}
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onTransitionEnd={[Function]}
+          role="dialog"
+          style={
+            Object {
+              "display": "none",
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 hvAiyy khTqzW"
+            style={
+              Object {
+                "fontSize": 30,
+                "height": "1em",
+                "pointerEvents": "none",
+                "top": "100%",
+                "width": "1em",
+              }
+            }
           >
-            <IconMock
-              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
-            />
-            global.for
-          </button>
-        </span>
-        <span>
-          <button
-            className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            type="button"
+            <svg
+              style={
+                Object {
+                  "transform": "rotateZ(180deg)",
+                }
+              }
+              viewBox="0 0 30 30"
+            >
+              <path
+                className="stroke"
+                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+              />
+              <path
+                className="fill"
+                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+              />
+            </svg>
+          </div>
+          <div
+            className="sc-bdnylx eWkbGr"
           >
-            <IconMock
-              className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
-            />
-            global.against
-          </button>
-        </span>
+            <p
+              className="sc-bdnylx YLtjJ"
+            >
+              vote.popover.title
+            </p>
+            <div
+              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+            >
+              <p
+                className="sc-bdnylx jEhuac"
+              >
+                vote.popover.body
+              </p>
+              <span
+                className="sc-bdnylx bgIGJQ"
+                clip="rect(0px, 0px, 0px, 0px)"
+              >
+                <button
+                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.close
+                </button>
+              </span>
+              <span
+                style={Object {}}
+              >
+                <button
+                  aria-label="open.connection_modal"
+                  className="center-block btn-block login-button btn btn-success"
+                  destination="http://localhost"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.login
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-controls="popover-overlay"
+          aria-expanded={false}
+          aria-haspopup="dialog"
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+          />
+          global.against
+        </button>
+        <div
+          aria-label="vote.popover.title"
+          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          data-dialog={true}
+          hidden={true}
+          id="login-popover"
+          onAnimationEnd={[Function]}
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onTransitionEnd={[Function]}
+          role="dialog"
+          style={
+            Object {
+              "display": "none",
+              "left": "100%",
+              "position": "fixed",
+              "top": "100%",
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 hvAiyy khTqzW"
+            style={
+              Object {
+                "fontSize": 30,
+                "height": "1em",
+                "pointerEvents": "none",
+                "top": "100%",
+                "width": "1em",
+              }
+            }
+          >
+            <svg
+              style={
+                Object {
+                  "transform": "rotateZ(180deg)",
+                }
+              }
+              viewBox="0 0 30 30"
+            >
+              <path
+                className="stroke"
+                d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+              />
+              <path
+                className="fill"
+                d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+              />
+            </svg>
+          </div>
+          <div
+            className="sc-bdnylx eWkbGr"
+          >
+            <p
+              className="sc-bdnylx YLtjJ"
+            >
+              vote.popover.title
+            </p>
+            <div
+              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+            >
+              <p
+                className="sc-bdnylx jEhuac"
+              >
+                vote.popover.body
+              </p>
+              <span
+                className="sc-bdnylx bgIGJQ"
+                clip="rect(0px, 0px, 0px, 0px)"
+              >
+                <button
+                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.close
+                </button>
+              </span>
+              <span
+                style={Object {}}
+              >
+                <button
+                  aria-label="open.connection_modal"
+                  className="center-block btn-block login-button btn btn-success"
+                  destination="http://localhost"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  global.login
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

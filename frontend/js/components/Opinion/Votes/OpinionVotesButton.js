@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
@@ -194,15 +194,14 @@ export class OpinionVotesButton extends React.Component<Props, State> {
           />
         )}
         <LoginOverlay>
-          <Button
+          <button
+            type="button"
+            style={style}
+            className={cn(`btn btn-${data.style} btn--outline`, { active: !!active })}
+            onClick={this.voteAction}
             ref={button => {
               this.target = button;
             }}
-            style={style}
-            bsStyle={data.style}
-            className="btn--outline"
-            onClick={this.voteAction}
-            active={!!active}
             aria-label={intl.formatMessage({
               id: active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`,
             })}
@@ -214,7 +213,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
               />
             )}
             <i className={data.icon} /> <FormattedMessage id={`vote.${data.str}`} />
-          </Button>
+          </button>
         </LoginOverlay>
       </div>
     );

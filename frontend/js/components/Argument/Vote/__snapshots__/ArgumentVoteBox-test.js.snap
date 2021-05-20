@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArgumentVoteBox /> renders correctly 1`] = `
-<span>
+<Fragment>
   <form
     className="opinion__votes-button"
   >
@@ -22,5 +22,5 @@ exports[`<ArgumentVoteBox /> renders correctly 1`] = `
   >
     5
   </span>
-</span>
+</Fragment>
 `;

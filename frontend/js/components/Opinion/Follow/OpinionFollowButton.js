@@ -10,7 +10,6 @@ import {
   ListGroup,
   ListGroupItem,
   Radio,
-  Button,
   OverlayTrigger,
 } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -66,8 +65,9 @@ export class OpinionFollowButton extends React.Component<Props, State> {
     if (!opinion.viewerIsFollowing && opinion.id) {
       return (
         <LoginOverlay>
-          <Button
-            className="btn btn--default opinion__button__follow mr-5"
+          <button
+            type="button"
+            className="btn btn-default opinion__button__follow mr-5"
             onClick={() =>
               opinion.id &&
               FollowOpinionMutation.commit({
@@ -77,7 +77,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
             id={`opinion-follow-btn-${opinion.id}`}>
             <i className="cap cap-rss" />
             <FormattedMessage id="follow" />
-          </Button>
+          </button>
         </LoginOverlay>
       );
     }

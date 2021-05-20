@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'react-bootstrap';
+import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import AddSourceVoteMutation from '../../../mutations/AddSourceVoteMutation';
@@ -23,7 +23,7 @@ type State = {
 export class OpinionSourceVoteButton extends React.Component<Props, State> {
   state = { showModal: false };
 
-  target: null | Button;
+  target: null | HTMLButtonElement;
 
   openModal = () => {
     this.setState({ showModal: true });
@@ -58,15 +58,17 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
           <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
         <LoginOverlay>
-          <Button
+          <button
+            type="button"
             ref={button => {
               this.target = button;
             }}
             disabled={disabled}
-            bsStyle={source.viewerHasVote ? 'danger' : 'success'}
-            className={`source__btn--vote${source.viewerHasVote ? '' : ' btn--outline'}`}
-            bsSize="xsmall"
-            onClick={this.onClick}>
+            onClick={this.onClick}
+            className={cn('btn source__btn--vote btn-xs', {
+              'btn--outline btn-success': !source.viewerHasVote,
+              'btn-danger': source.viewerHasVote,
+            })}>
             {source.viewerHasVote ? (
               <FormattedMessage id="global.cancel" />
             ) : (
@@ -78,7 +80,7 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
               target={() => ReactDOM.findDOMNode(this.target)}
               publishable={source.viewerVote || null}
             />
-          </Button>
+          </button>
         </LoginOverlay>
       </div>
     );

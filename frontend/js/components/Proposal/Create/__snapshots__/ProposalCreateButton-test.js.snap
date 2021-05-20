@@ -2,14 +2,12 @@
 
 exports[`<ProposalCreateButton /> should render correctly 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
+  <button
+    className="btn btn-primary"
     disabled={false}
     id="add-proposal"
     onClick={[MockFunction]}
+    type="button"
   >
     <i
       className="cap cap-add-1"
@@ -18,20 +16,18 @@ exports[`<ProposalCreateButton /> should render correctly 1`] = `
       id="proposal.add"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;
 
 exports[`<ProposalCreateButton /> should render correctly as Interpellation 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
+  <button
+    className="btn btn-primary"
     disabled={false}
     id="add-proposal"
     onClick={[MockFunction]}
+    type="button"
   >
     <i
       className="cap cap-add-1"
@@ -40,20 +36,18 @@ exports[`<ProposalCreateButton /> should render correctly as Interpellation 1`] 
       id="interpellation.add"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;
 
 exports[`<ProposalCreateButton /> should render correctly as Question 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
+  <button
+    className="btn btn-primary"
     disabled={false}
     id="add-proposal"
     onClick={[MockFunction]}
+    type="button"
   >
     <i
       className="cap cap-add-1"
@@ -62,20 +56,18 @@ exports[`<ProposalCreateButton /> should render correctly as Question 1`] = `
       id="submit-a-question"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;
 
 exports[`<ProposalCreateButton /> should render correctly as tipsmeee 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
+  <button
+    className="btn btn-primary"
     disabled={false}
     id="add-proposal"
     onClick={[MockFunction]}
+    type="button"
   >
     <i
       className="cap cap-add-1"
@@ -84,20 +76,18 @@ exports[`<ProposalCreateButton /> should render correctly as tipsmeee 1`] = `
       id="proposal.add"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;
 
 exports[`<ProposalCreateButton /> should render correctly when disabled 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
+  <button
+    className="btn btn-primary"
     disabled={true}
     id="add-proposal"
     onClick={null}
+    type="button"
   >
     <i
       className="cap cap-add-1"
@@ -106,6 +96,6 @@ exports[`<ProposalCreateButton /> should render correctly when disabled 1`] = `
       id="proposal.add"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;

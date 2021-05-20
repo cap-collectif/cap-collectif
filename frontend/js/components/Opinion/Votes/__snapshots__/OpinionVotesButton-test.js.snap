@@ -25,16 +25,13 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
     }
   />
   <Connect(LoginOverlay)>
-    <Button
-      active={false}
+    <button
       aria-label="vote.aria_label.ok"
-      block={false}
-      bsClass="btn"
-      bsStyle="success"
-      className="btn--outline"
+      className="btn btn-success btn--outline"
       disabled={false}
       onClick={[Function]}
       style={Object {}}
+      type="button"
     >
       <i
         className="cap cap-hand-like-2-1"
@@ -44,7 +41,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
         id="vote.ok"
         values={Object {}}
       />
-    </Button>
+    </button>
   </Connect(LoginOverlay)>
 </div>
 `;
@@ -66,16 +63,13 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
     }
   />
   <Connect(LoginOverlay)>
-    <Button
-      active={false}
+    <button
       aria-label="vote.aria_label.nok"
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      className="btn--outline"
+      className="btn btn-danger btn--outline"
       disabled={false}
       onClick={[Function]}
       style={Object {}}
+      type="button"
     >
       <i
         className="cap cap-hand-unlike-2-1"
@@ -85,7 +79,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
         id="vote.nok"
         values={Object {}}
       />
-    </Button>
+    </button>
   </Connect(LoginOverlay)>
 </div>
 `;
@@ -105,16 +99,13 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
     }
   />
   <Connect(LoginOverlay)>
-    <Button
-      active={false}
+    <button
       aria-label="vote.aria_label.mitige"
-      block={false}
-      bsClass="btn"
-      bsStyle="warning"
-      className="btn--outline"
+      className="btn btn-warning btn--outline"
       disabled={false}
       onClick={[Function]}
       style={Object {}}
+      type="button"
     >
       <i
         className="cap cap-hand-like-2-1 icon-rotate"
@@ -124,7 +115,7 @@ exports[`<OpinionVotesButton /> should render an orange button when value is 0 a
         id="vote.mitige"
         values={Object {}}
       />
-    </Button>
+    </button>
   </Connect(LoginOverlay)>
 </div>
 `;

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
+import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import LoginOverlay from '../Utils/LoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
 import { openOpinionCreateModal } from '../../redux/modules/opinion';
@@ -18,30 +18,28 @@ type Props = {|
   +dispatch: Dispatch,
 |};
 
-class NewOpinionButton extends React.Component<Props> {
-  render() {
-    const { dispatch, label, consultation, section, className } = this.props;
-    const disabled = !consultation.contribuable;
-    return (
-      <React.Fragment>
-        <LoginOverlay>
-          <Button
-            bsStyle="primary"
-            disabled={disabled}
-            id={`btn-add--${section.slug}`}
-            className={className}
-            onClick={() => {
-              dispatch(openOpinionCreateModal(section.id));
-            }}>
-            <i className="cap cap-add-1" />
-            <span className="hidden-xs">{label}</span>
-          </Button>
-        </LoginOverlay>
-        <OpinionCreateModal section={section} consultation={consultation} />
-      </React.Fragment>
-    );
-  }
-}
+const NewOpinionButton = ({ dispatch, label, consultation, section, className }: Props) => {
+  const disabled = !consultation.contribuable;
+
+  return (
+    <React.Fragment>
+      <LoginOverlay>
+        <button
+          type="button"
+          disabled={disabled}
+          id={`btn-add--${section.slug}`}
+          className={cn('btn btn-primary', className)}
+          onClick={() => {
+            dispatch(openOpinionCreateModal(section.id));
+          }}>
+          <i className="cap cap-add-1" />
+          <span className="hidden-xs">{label}</span>
+        </button>
+      </LoginOverlay>
+      <OpinionCreateModal section={section} consultation={consultation} />
+    </React.Fragment>
+  );
+};
 
 const container = connect<any, any, _, _, _, _>()(NewOpinionButton);
 

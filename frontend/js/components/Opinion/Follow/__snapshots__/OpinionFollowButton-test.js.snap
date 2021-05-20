@@ -2,15 +2,11 @@
 
 exports[`<OpinionFollowButton /> should render a button to follow a opinion 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    className="btn btn--default opinion__button__follow mr-5"
-    disabled={false}
+  <button
+    className="btn btn-default opinion__button__follow mr-5"
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}
+    type="button"
   >
     <i
       className="cap cap-rss"
@@ -19,21 +15,17 @@ exports[`<OpinionFollowButton /> should render a button to follow a opinion 1`] 
       id="follow"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;
 
 exports[`<OpinionFollowButton /> should render a button to follow a opinion and user is not connected 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    className="btn btn--default opinion__button__follow mr-5"
-    disabled={false}
+  <button
+    className="btn btn-default opinion__button__follow mr-5"
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}
+    type="button"
   >
     <i
       className="cap cap-rss"
@@ -42,7 +34,7 @@ exports[`<OpinionFollowButton /> should render a button to follow a opinion and 
       id="follow"
       values={Object {}}
     />
-  </Button>
+  </button>
 </Connect(LoginOverlay)>
 `;
 

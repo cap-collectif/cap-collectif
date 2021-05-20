@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import type { ProposalCreateButton_proposalForm } from '~relay/ProposalCreateButton_proposalForm.graphql';
@@ -25,14 +24,15 @@ export class ProposalCreateButton extends React.Component<Props> {
         : 'submit-a-question';
     return (
       <LoginOverlay>
-        <Button
+        <button
+          type="button"
           id="add-proposal"
+          className="btn btn-primary"
           disabled={disabled}
-          bsStyle="primary"
           onClick={disabled ? null : handleClick}>
           <i className="cap cap-add-1" />
           <FormattedMessage id={buttonTradKey} />
-        </Button>
+        </button>
       </LoginOverlay>
     );
   }

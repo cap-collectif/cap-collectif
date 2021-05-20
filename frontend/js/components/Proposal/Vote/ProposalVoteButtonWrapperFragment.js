@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'react-bootstrap';
+import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
@@ -52,14 +52,14 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
     if (!viewer || !proposal) {
       return (
         <LoginOverlay>
-          <Button
-            disabled={disabled || false}
+          <button
+            type="button"
+            disabled={disabled}
             id={id}
-            bsStyle="success"
-            className={`${className} mr-10`}>
+            className={cn('btn btn-success mr-10', className)}>
             <i className="cap cap-hand-like-2 mr-5" />
             <FormattedMessage id={voteButtonLabel} />
-          </Button>
+          </button>
         </LoginOverlay>
       );
     }

@@ -13,41 +13,299 @@ exports[`<LoginOverlay /> renders children if user is logged 1`] = `
 `;
 
 exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
-<span>
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <_default
-        id="login-popover"
-        title={
-          <FormattedMessage
-            id="vote.popover.title"
-            values={Object {}}
-          />
-        }
-      >
-        <p>
-          <FormattedMessage
-            id="vote.popover.body"
-            values={Object {}}
-          />
-        </p>
-        <p>
-          <UNDEFINED
-            bsStyle="success"
-            className="center-block btn-block"
-          />
-        </p>
-      </_default>
+<Fragment>
+  <Memo(ForwardRef(PopoverDisclosure))
+    animated={false}
+    animating={false}
+    baseId="mock"
+    className="foo"
+    hide={[Function]}
+    modal={false}
+    onClick={null}
+    place={[Function]}
+    placement="bottom"
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setModal={[Function]}
+    setVisible={[Function]}
+    show={[Function]}
+    stopAnimation={[Function]}
+    toggle={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
     }
-    placement="top"
-    rootClose={true}
-    trigger="click"
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_originalPlacement="bottom"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_update={[Function]}
+    visible={false}
   >
-    <div
-      className="foo"
-      onClick={null}
+    <Component />
+  </Memo(ForwardRef(PopoverDisclosure))>
+  <ForwardRef(Popover)
+    animated={false}
+    animating={false}
+    aria-label="vote.popover.title"
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [
+          Object {
+            "maxWidth": "280px",
+            "zIndex": 100,
+          },
+        ],
+        "componentStyle": e {
+          "baseHash": -792256484,
+          "baseStyle": e {
+            "baseHash": -594304118,
+            "baseStyle": undefined,
+            "componentId": "sc-bdnylx",
+            "isStatic": false,
+            "rules": Array [
+              [Function],
+              [Function],
+            ],
+            "staticRulesId": "",
+          },
+          "componentId": "LoginOverlay__PopoverContainer-c0lhnx-0",
+          "isStatic": false,
+          "rules": Array [
+            "outline:none;",
+          ],
+          "staticRulesId": "",
+        },
+        "displayName": "LoginOverlay__PopoverContainer",
+        "foldedComponentIds": Array [
+          "sc-bdnylx",
+        ],
+        "render": [Function],
+        "shouldForwardProp": [Function],
+        "styledComponentId": "LoginOverlay__PopoverContainer-c0lhnx-0",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    baseId="mock"
+    borderRadius="popover"
+    boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+    hide={[Function]}
+    id="login-popover"
+    modal={false}
+    place={[Function]}
+    placement="bottom"
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setModal={[Function]}
+    setVisible={[Function]}
+    show={[Function]}
+    stopAnimation={[Function]}
+    tabIndex={0}
+    toggle={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_originalPlacement="bottom"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_update={[Function]}
+    visible={false}
+  >
+    <Memo(ForwardRef(PopoverArrow))
+      animated={false}
+      animating={false}
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": e {
+            "baseHash": 942267553,
+            "baseStyle": e {
+              "baseHash": -594304118,
+              "baseStyle": undefined,
+              "componentId": "sc-bdnylx",
+              "isStatic": false,
+              "rules": Array [
+                [Function],
+                [Function],
+              ],
+              "staticRulesId": "",
+            },
+            "componentId": "LoginOverlay__Arrow-c0lhnx-2",
+            "isStatic": false,
+            "rules": Array [
+              ".stroke{fill:none;}.fill{fill:",
+              [Function],
+              ";}",
+            ],
+            "staticRulesId": "",
+          },
+          "displayName": "LoginOverlay__Arrow",
+          "foldedComponentIds": Array [
+            "sc-bdnylx",
+          ],
+          "render": [Function],
+          "shouldForwardProp": [Function],
+          "styledComponentId": "LoginOverlay__Arrow-c0lhnx-2",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      baseId="mock"
+      hide={[Function]}
+      modal={false}
+      place={[Function]}
+      placement="bottom"
+      position="bottom"
+      setAnimated={[Function]}
+      setBaseId={[Function]}
+      setModal={[Function]}
+      setVisible={[Function]}
+      show={[Function]}
+      stopAnimation={[Function]}
+      toggle={[Function]}
+      unstable_arrowRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_arrowStyles={Object {}}
+      unstable_disclosureRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_idCountRef={
+        Object {
+          "current": 0,
+        }
+      }
+      unstable_originalPlacement="bottom"
+      unstable_popoverRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_popoverStyles={
+        Object {
+          "left": "100%",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      unstable_referenceRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_update={[Function]}
+      visible={false}
     />
-  </OverlayTrigger>
-</span>
+    <AppBox
+      bg="white"
+      borderRadius="popover"
+      color="black"
+      overflow="hidden"
+    >
+      <Text
+        bg="#f7f7f7"
+        borderBottom="normal"
+        borderColor="#ebebeb"
+        fontSize={3}
+        mb="0 !important"
+        px={3}
+        py="8px !important"
+        textAlign="left !important"
+      >
+        vote.popover.title
+      </Text>
+      <ForwardRef
+        direction="column"
+        px={3}
+        py="10px"
+        spacing="10px"
+      >
+        <Text
+          fontSize={3}
+          mb="0 !important"
+          pb="0 !important"
+          textAlign="left !important"
+        >
+          vote.popover.body
+        </Text>
+        <VisuallyHidden>
+          <Button
+            onClick={[Function]}
+          >
+            global.close
+          </Button>
+        </VisuallyHidden>
+        <Connect(LoginButton)
+          bsStyle="success"
+          className="center-block btn-block login-button"
+        />
+      </ForwardRef>
+    </AppBox>
+  </ForwardRef(Popover)>
+</Fragment>
 `;

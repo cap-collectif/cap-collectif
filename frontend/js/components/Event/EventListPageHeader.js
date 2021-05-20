@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -79,24 +78,23 @@ export const EventListPageHeader = ({
                     show={showModal}
                     handleClose={() => setShowModal(false)}
                   />
-                  <LoginOverlay placement="bottom">
-                    <Button
-                      id="btn-create-event"
+                  <LoginOverlay>
+                    <button
                       type="submit"
-                      bsStyle="default"
-                      className="mt-5"
+                      id="btn-create-event"
                       onClick={() => {
                         if (queryViewer?.viewer?.isAdmin) {
                           window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/create`;
                         } else {
                           setShowModal(true);
                         }
-                      }}>
+                      }}
+                      className="btn btn-default mt-5">
                       <i className="cap cap-add-1" />
                       <span className="hidden-xs ml-5">
                         {intl.formatMessage({ id: 'event-proposal' })}
                       </span>
-                    </Button>
+                    </button>
                   </LoginOverlay>
                 </div>
               )}

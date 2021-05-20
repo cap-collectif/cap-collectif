@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import cn from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -56,17 +56,16 @@ class SubmitButton extends React.Component<Props> {
     } = this.props;
     return (
       <LoginOverlay enabled={loginOverlay}>
-        <Button
-          id={id}
+        <button
           type="submit"
+          id={id}
           disabled={isSubmitting || disabled}
           onClick={this.onClick}
-          bsStyle={bsStyle}
-          className={className}
+          className={cn(`btn btn-${bsStyle}`, className)}
           style={style}>
           {children}
           <FormattedMessage id={isSubmitting ? 'global.loading' : label} />
-        </Button>
+        </button>
       </LoginOverlay>
     );
   }
