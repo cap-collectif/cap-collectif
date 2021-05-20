@@ -199,7 +199,7 @@ export const ModalReportArgumentMobile = ({ argument, show, onClose }: Props): R
 
 export default (createFragmentContainer(ModalReportArgumentMobile, {
   argument: graphql`
-    fragment ModalReportArgumentMobile_argument on DebateArgument {
+    fragment ModalReportArgumentMobile_argument on AbstractDebateArgument {
       id
       type
       debate {

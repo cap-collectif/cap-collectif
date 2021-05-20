@@ -1,0 +1,21 @@
+InternalDebateAnonymousArgument:
+    type: object
+    inherits:
+        - InternalAbstractDebateArgument
+        - Authorable
+    config:
+        name: DebateAnonymousArgument
+        description: 'A debate argument from anonymous.'
+        interfaces:
+            - Node
+            - InternalAbstractDebateArgument
+            - Trashable
+            - Contribution
+        fields:
+            email:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                type: Email!
+                description: 'Email'
+            username:
+                type: String
+                description: 'Username (not mandatory)'

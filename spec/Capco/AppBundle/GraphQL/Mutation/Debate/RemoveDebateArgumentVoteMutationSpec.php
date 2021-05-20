@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateArgumentVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
@@ -21,17 +22,18 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
 {
     public function let(
         DebateArgumentVoteRepository $repository,
+        DebateAnonymousArgumentVoteRepository $anonymousRepository,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $em,
             $globalIdResolver,
             $authorizationChecker,
             $repository,
+            $anonymousRepository,
             $indexer
         );
     }
@@ -51,8 +53,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         DebateArgument $debateArgument,
         DebateArgumentVote $debateArgumentVote,
         User $viewer
-    )
-    {
+    ) {
         $debateArgumentId = 'debateArgumentId';
         $debateArgumentVoteId = 'debateArgumentVoteId';
         $input->offsetGet('debateArgumentId')->willReturn($debateArgumentId);
@@ -80,15 +81,16 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         $payload->shouldHaveCount(3);
         $payload['errorCode']->shouldBe(null);
         $payload['debateArgument']->shouldBe($debateArgument);
-        $payload['deletedDebateArgumentVoteId']->shouldBe("RGViYXRlQXJndW1lbnRWb3RlOmRlYmF0ZUFyZ3VtZW50Vm90ZUlk");
+        $payload['deletedDebateArgumentVoteId']->shouldBe(
+            'RGViYXRlQXJndW1lbnRWb3RlOmRlYmF0ZUFyZ3VtZW50Vm90ZUlk'
+        );
     }
 
     public function it_fails_on_invalid_id(
         GlobalIdResolver $globalIdResolver,
         Arg $input,
         User $viewer
-    )
-    {
+    ) {
         $id = 'wrongId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn(null);
@@ -102,8 +104,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         Arg $input,
         DebateArgument $debateArgument,
         User $viewer
-    )
-    {
+    ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
@@ -123,8 +124,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
         Arg $input,
         DebateArgument $debateArgument,
         User $viewer
-    )
-    {
+    ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);

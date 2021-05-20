@@ -2,15 +2,16 @@
 
 namespace spec\Capco\AppBundle\Encoder;
 
-use Capco\AppBundle\Encoder\DebateAnonymousVoteHashEncoder;
+use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use PhpSpec\ObjectBehavior;
 
-class DebateAnonymousVoteHashEncoderSpec extends ObjectBehavior
+class DebateAnonymousParticipationHashEncoderSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType(DebateAnonymousVoteHashEncoder::class);
+        $this->shouldHaveType(DebateAnonymousParticipationHashEncoder::class);
     }
 
     public function it_should_correctly_encode_anonymous_vote(DebateAnonymousVote $vote)
@@ -18,6 +19,13 @@ class DebateAnonymousVoteHashEncoderSpec extends ObjectBehavior
         $vote->getType()->willReturn('FOR');
         $vote->getToken()->willReturn('supertoken');
         $this->encode($vote)->shouldBe('Rk9SOnN1cGVydG9rZW4=');
+    }
+
+    public function it_should_correctly_encode_anonymous_argument(DebateAnonymousArgument $argument)
+    {
+        $argument->getType()->willReturn('FOR');
+        $argument->getToken()->willReturn('supertoken');
+        $this->encode($argument)->shouldBe('Rk9SOnN1cGVydG9rZW4=');
     }
 
     public function it_should_correctly_decode_hash()

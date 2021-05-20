@@ -4,6 +4,9 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use Elastica\Index;
@@ -16,11 +19,16 @@ use Elastica\ResultSet;
 class DebateSearch extends Search
 {
     private DebateArgumentRepository $debateArgumentRepository;
+    private DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
 
-    public function __construct(Index $index, DebateArgumentRepository $debateArgumentRepository)
-    {
+    public function __construct(
+        Index $index,
+        DebateArgumentRepository $debateArgumentRepository,
+        DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository
+    ) {
         parent::__construct($index);
         $this->debateArgumentRepository = $debateArgumentRepository;
+        $this->debateAnonymousArgumentRepository = $debateAnonymousArgumentRepository;
     }
 
     public function searchDebateArguments(
@@ -92,8 +100,11 @@ class DebateSearch extends Search
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
     {
-        $hydratedResults = $this->getHydratedResultsFromResultSet(
-            $this->debateArgumentRepository,
+        $hydratedResults = $this->getHydratedResultsFromRepositories(
+            [
+                DebateArgument::getElasticsearchTypeName() => $this->debateArgumentRepository,
+                DebateAnonymousArgument::getElasticsearchTypeName() => $this->debateAnonymousArgumentRepository
+            ],
             $response
         );
 
@@ -121,7 +132,9 @@ class DebateSearch extends Search
         ?array $filters
     ): BoolQuery {
         $boolQuery = new BoolQuery();
-        $boolQuery->addFilter(new Term(['objectType' => 'debateArgument']));
+        $boolQuery->addFilter(
+            new Query\Terms('objectType', ['debateArgument', 'debateAnonymousArgument'])
+        );
         $boolQuery->addFilter(new Term(['debate.id' => $debate->getId()]));
         if ($filters) {
             if (isset($filters['isPublished'])) {

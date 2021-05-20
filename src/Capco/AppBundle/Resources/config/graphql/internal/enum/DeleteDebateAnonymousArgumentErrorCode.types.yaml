@@ -1,0 +1,18 @@
+DeleteDebateAnonymousArgumentErrorCode:
+    type: enum
+    config:
+        name: DeleteDebateAnonymousArgumentErrorCode
+        description: 'Available errors for an `deleteDebateAnonymousArgument` mutation.'
+        values:
+            UNKNOWN_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation::UNKNOWN_DEBATE")'
+                description: 'No `Debate` match your `id`.'
+            CLOSED_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation::CLOSED_DEBATE")'
+                description: 'The debate is closed and removing an argument cannot be done.'
+            INVALID_HASH:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation::INVALID_HASH")'
+                description: 'The given hash is not valid.'
+            UNKNOWN_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation::UNKNOWN_DEBATE_ARGUMENT")'
+                description: 'The user has no argument on this debate.'

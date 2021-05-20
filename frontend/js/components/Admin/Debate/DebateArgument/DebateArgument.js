@@ -86,7 +86,7 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
         </Text>
 
         <InlineList separator="•" color="gray.600">
-          <Text>{author.username}</Text>
+          <Text>{author?.username ?? intl.formatMessage({ id: 'global.anonymous' })}</Text>
 
           {published && (
             <Text>

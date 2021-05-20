@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
@@ -27,7 +30,10 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
 
             try {
                 $this->em->flush();
-                $this->indexer->index(DebateArgumentVote::class, $debateArgumentVote->getId());
+                $this->indexer->index(
+                    \get_class($debateArgumentVote),
+                    $debateArgumentVote->getId()
+                );
                 $this->indexer->finishBulk();
             } catch (UniqueConstraintViolationException $e) {
                 return [
@@ -51,18 +57,27 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
         ];
     }
 
-    private function checkNoPreviousVote(DebateArgument $debateArgument, User $viewer): void
-    {
-        if (null !== $this->repository->getOneByDebateArgumentAndUser($debateArgument, $viewer)) {
+    private function checkNoPreviousVote(
+        DebateArgumentInterface $debateArgument,
+        User $viewer
+    ): void {
+        $repo =
+            $debateArgument instanceof DebateArgument
+                ? $this->repository
+                : $this->anonymousRepository;
+        if (null !== $repo->getOneByDebateArgumentAndUser($debateArgument, $viewer)) {
             throw new UserError(self::ALREADY_VOTED);
         }
     }
 
     private static function createNewVote(
-        DebateArgument $debateArgument,
+        DebateArgumentInterface $debateArgument,
         User $viewer
-    ): DebateArgumentVote {
-        $vote = new DebateArgumentVote();
+    ): AbstractVote {
+        $vote =
+            $debateArgument instanceof DebateArgument
+                ? new DebateArgumentVote()
+                : new DebateAnonymousArgumentVote();
         $vote->setDebateArgument($debateArgument);
         $vote->setUser($viewer);
         $debateArgument->addVote($vote);
@@ -70,7 +85,7 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
         return $vote;
     }
 
-    private static function setOrigin(DebateArgumentVote $vote, Arg $input): DebateArgumentVote
+    private static function setOrigin(AbstractVote $vote, Arg $input): AbstractVote
     {
         $widgetOriginURI = $input->offsetGet('widgetOriginURI');
         if ($widgetOriginURI) {

@@ -2,16 +2,16 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use Capco\AppBundle\DTO\DebateAnonymousVoteHashData;
+use Capco\AppBundle\DTO\DebateAnonymousParticipationHashData;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Encoder\DebateAnonymousVoteHashEncoder;
+use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateAnonymousVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
-use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousVoteHashConstraint;
+use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -25,7 +25,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         DebateAnonymousVoteRepository $repository,
         ValidatorInterface $validator,
-        DebateAnonymousVoteHashEncoder $encoder,
+        DebateAnonymousParticipationHashEncoder $encoder,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer
     ) {
@@ -53,8 +53,8 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         DebateAnonymousVote $anonymousVote,
         DebateAnonymousVoteRepository $repository,
         Debate $debate,
-        DebateAnonymousVoteHashEncoder $encoder,
-        DebateAnonymousVoteHashData $decoded,
+        DebateAnonymousParticipationHashEncoder $encoder,
+        DebateAnonymousParticipationHashData $decoded,
         ValidatorInterface $validator
     ) {
         $id = '123';
@@ -87,7 +87,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
             ->willReturn($debate)
             ->shouldBeCalled();
         $validator
-            ->validate($hash, [new CheckDebateAnonymousVoteHashConstraint()])
+            ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn([])
             ->shouldBeCalled();
         $em->remove($anonymousVote)->shouldBeCalled();
@@ -119,8 +119,8 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         Debate $debate,
         DebateStep $debateStep,
         DebateAnonymousVoteRepository $repository,
-        DebateAnonymousVoteHashEncoder $encoder,
-        DebateAnonymousVoteHashData $decoded,
+        DebateAnonymousParticipationHashEncoder $encoder,
+        DebateAnonymousParticipationHashData $decoded,
         ValidatorInterface $validator
     ) {
         $id = '123';
@@ -137,7 +137,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $debate->getStep()->willReturn($debateStep);
         $globalIdResolver->resolve($id, null)->willReturn($debate);
         $validator
-            ->validate($hash, [new CheckDebateAnonymousVoteHashConstraint()])
+            ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn([])
             ->shouldBeCalled();
         $repository
@@ -160,8 +160,8 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         Debate $debate,
         DebateStep $debateStep,
         DebateAnonymousVoteRepository $repository,
-        DebateAnonymousVoteHashEncoder $encoder,
-        DebateAnonymousVoteHashData $decoded,
+        DebateAnonymousParticipationHashEncoder $encoder,
+        DebateAnonymousParticipationHashData $decoded,
         ValidatorInterface $validator
     ) {
         $id = '123';
@@ -178,7 +178,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $debate->getStep()->willReturn($debateStep);
         $globalIdResolver->resolve($id, null)->willReturn($debate);
         $validator
-            ->validate($hash, [new CheckDebateAnonymousVoteHashConstraint()])
+            ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn(['invalid-debate-anonymous-hash'])
             ->shouldBeCalled();
         $repository

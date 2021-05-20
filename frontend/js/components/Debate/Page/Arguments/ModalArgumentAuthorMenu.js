@@ -38,7 +38,7 @@ export const ModalArgumentAuthorMenu = ({ argument }: Props): React.Node => {
 
 export default (createFragmentContainer(ModalArgumentAuthorMenu, {
   argument: graphql`
-    fragment ModalArgumentAuthorMenu_argument on DebateArgument {
+    fragment ModalArgumentAuthorMenu_argument on AbstractDebateArgument {
       ...ModalEditArgumentMobile_argument
       ...ModalDeleteArgumentMobile_argument
     }

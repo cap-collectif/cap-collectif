@@ -9,7 +9,7 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -218,7 +218,7 @@ class VoteSearch extends Search
     }
 
     public function searchDebateArgumentVotes(
-        DebateArgument $debateArgument,
+        DebateArgumentInterface $debateArgument,
         int $limit,
         ?array $orderBy = null,
         ?string $cursor = null

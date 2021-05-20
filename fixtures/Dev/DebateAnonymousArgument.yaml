@@ -1,0 +1,23 @@
+Capco\AppBundle\Entity\Debate\DebateAnonymousArgument:
+    DebateAnonymousArgumentFor1:
+        __construct: ['@debateCannabis']
+        id: DebateAnonymousArgumentFor1
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::FOR)>
+        body: 'Freedom for da ganja man'
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        createdAt: <(new \DateTime('2021-05-01 00:00:00'))>
+        publishedAt: <(new \DateTime('2021-05-01 01:00:00'))>
+        token: jesuisletokendudebateanonymousargumentfor1
+        email: 'kevin94@hotmail.com'
+        username: 'rasta94'
+    DebateAnonymousArgumentAgainst1:
+        __construct: ['@debateCannabis']
+        id: DebateAnonymousArgumentAgainst1
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::AGAINST)>
+        body: 'Encore un truc de jeunes'
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        createdAt: <(new \DateTime('2021-05-01 00:00:00'))>
+        token: jesuisletokendudebateanonymousargumentagainst1
+        email: 'jeannine1957@laposte.fr'

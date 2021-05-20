@@ -1,0 +1,13 @@
+CreateDebateAnonymousArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateArgument:
+                type: 'InternalDebateAnonymousArgument'
+                description: 'The argument that had just been created.'
+            errorCode:
+                type: 'CreateDebateAnonymousArgumentErrorCode'
+                description: 'An unsuccessful mutation will return an error.'
+            token:
+                type: 'String!'
+                description: 'The token of the argument.'

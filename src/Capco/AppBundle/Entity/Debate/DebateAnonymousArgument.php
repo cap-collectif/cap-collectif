@@ -1,0 +1,177 @@
+<?php
+
+namespace Capco\AppBundle\Entity\Debate;
+
+use Capco\AppBundle\Entity\Interfaces\AnonymousParticipationInterface;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
+use Capco\AppBundle\Traits\AuthorInformationTrait;
+use Capco\AppBundle\Traits\ContributionOriginTrait;
+use Capco\AppBundle\Traits\DebatableTrait;
+use Capco\AppBundle\Traits\ForAgainstTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\ReportableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TokenTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity(repositoryClass=DebateAnonymousArgumentRepository::class)
+ * @ORM\Table(name="debate_anonymous_argument")
+ */
+class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParticipationInterface
+{
+    use AuthorInformationTrait;
+    use ContributionOriginTrait;
+
+    use DebatableTrait;
+    use ForAgainstTrait;
+    use ModerableTrait;
+    use PublishableTrait;
+    use ReportableTrait;
+
+    use TextableTrait;
+    use TimestampableTrait;
+    use TokenTrait;
+
+    use TrashableTrait;
+    use UuidTrait;
+    use VotableOkTrait;
+
+    /**
+     * @Gedmo\Timestampable(on="change", field={"body"})
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private \DateTime $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="debateAnonymousArgument", cascade={"persist", "remove"})
+     */
+    private Collection $reports;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="anonymousArguments")
+     * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     */
+    private Debate $debate;
+
+    /**
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
+     */
+    private ?string $username = null;
+
+    /**
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @Assert\Email()
+     */
+    private string $email;
+
+    public function __construct(Debate $debate)
+    {
+        $this->debate = $debate;
+        $this->votes = new ArrayCollection();
+        $this->reports = new ArrayCollection();
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getStep(): ?DebateStep
+    {
+        if ($this->getDebate()) {
+            return $this->getDebate()->getStep();
+        }
+
+        return null;
+    }
+
+    public function getKind(): string
+    {
+        return 'debateArgument';
+    }
+
+    public function getRelated(): Debate
+    {
+        return $this->debate;
+    }
+
+    public function getProject(): ?Project
+    {
+        if ($this->getStep()) {
+            return $this->getStep()->getProject();
+        }
+
+        return null;
+    }
+
+    public function isUserAuthor(?User $user = null): bool
+    {
+        return false;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return null;
+    }
+
+    public function setAuthor(User $user)
+    {
+        return $this;
+    }
+
+
+
+    /** ES */
+    public function isIndexable(): bool
+    {
+        return true;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'debateAnonymousArgument';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['ElasticsearchDebateArgument'];
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 9;
+    }
+}

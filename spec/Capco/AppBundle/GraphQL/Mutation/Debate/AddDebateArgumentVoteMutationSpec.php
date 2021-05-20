@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateArgumentVoteMutation;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
@@ -21,6 +22,7 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
 {
     public function let(
         DebateArgumentVoteRepository $repository,
+        DebateAnonymousArgumentVoteRepository $anonymousRepository,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
         GlobalIdResolver $globalIdResolver,
@@ -31,6 +33,7 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
             $globalIdResolver,
             $authorizationChecker,
             $repository,
+            $anonymousRepository,
             $indexer
         );
     }

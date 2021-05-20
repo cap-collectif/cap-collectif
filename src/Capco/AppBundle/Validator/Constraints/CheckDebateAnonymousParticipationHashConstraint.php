@@ -7,12 +7,12 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class CheckDebateAnonymousVoteHashConstraint extends Constraint
+class CheckDebateAnonymousParticipationHashConstraint extends Constraint
 {
     public $message = 'invalid-debate-anonymous-hash';
 
     public function validatedBy()
     {
-        return CheckDebateAnonymousVoteHashValidator::class;
+        return CheckDebateAnonymousParticipationHashValidator::class;
     }
 }

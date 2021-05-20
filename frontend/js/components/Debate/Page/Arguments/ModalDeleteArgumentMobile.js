@@ -184,7 +184,7 @@ export const ModalDeleteArgumentMobile = ({ argument, hidePreviousModal }: Props
 
 export default (createFragmentContainer(ModalDeleteArgumentMobile, {
   argument: graphql`
-    fragment ModalDeleteArgumentMobile_argument on DebateArgument {
+    fragment ModalDeleteArgumentMobile_argument on AbstractDebateArgument {
       id
       debate {
         id

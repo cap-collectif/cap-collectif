@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -103,6 +104,9 @@ class ConsultationTypeResolver implements ResolverInterface
         }
         if ($data instanceof DebateArgument) {
             return $this->typeResolver->resolve('InternalDebateArgument');
+        }
+        if ($data instanceof DebateAnonymousArgument) {
+            return $this->typeResolver->resolve('InternalDebateAnonymousArgument');
         }
 
         throw new UserError('Could not resolve type of Contribution.');

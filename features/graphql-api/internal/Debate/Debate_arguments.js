@@ -20,8 +20,13 @@ const DebateArgumentsQuery = /* GraphQL */ `
             node {
               id
               body
-              author {
-                id
+              ... on DebateArgument {
+                author {
+                  id
+                }
+              }
+              ... on DebateAnonymousArgument {
+                username
               }
               debate {
                 id

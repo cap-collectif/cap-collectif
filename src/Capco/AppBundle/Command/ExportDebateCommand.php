@@ -29,9 +29,9 @@ class ExportDebateCommand extends BaseExportCommand
         'argument_trashedReason' => 'trashedReason',
 
         'argument_author_id' => 'author.id',
-        'argument_author_username' => 'author.username',
+        'argument_author_username' => 'argument_author_username',
         'argument_author_isEmailConfirmed' => 'author.isEmailConfirmed',
-        'argument_author_email' => 'author.email',
+        'argument_author_email' => 'argument_author_email',
         'argument_author_userType_name' => 'author.userType.name',
         'argument_author_zipCode' => 'author.zipCode',
 
@@ -264,6 +264,16 @@ class ExportDebateCommand extends BaseExportCommand
         if ('vote_source' === $treePath) {
             return self::getRowCellValueVoteOrigin($data);
         }
+        if ('argument_author_username' === $treePath) {
+            return isset($data['username']) && null !== $data['username']
+                ? $data['username']
+                : $data['author']['username'];
+        }
+        if ('argument_author_email' === $treePath) {
+            return isset($data['email']) && null !== $data['email']
+                ? $data['email']
+                : $data['author']['email'];
+        }
         $treePathParts = explode('.', $treePath);
         if (1 === \count($treePathParts)) {
             return $data[$treePath] ?? '';
@@ -283,7 +293,8 @@ class ExportDebateCommand extends BaseExportCommand
     {
         if ('WIDGET' === $data['origin'] && $data['widgetOriginUrl']) {
             return 'WIDGET : ' . $data['widgetOriginUrl'];
-        } elseif ('INTERNAL' === $data['origin']) {
+        }
+        if ('INTERNAL' === $data['origin']) {
             return 'APPLICATION';
         }
 
@@ -380,15 +391,21 @@ class ExportDebateCommand extends BaseExportCommand
               regionName
               cityName
             }
-            author {
-              id
-              username
-              isEmailConfirmed
-              email
-              zipCode
-              userType {
-                name
+            ... on DebateArgument {
+              author {
+                id
+                username
+                isEmailConfirmed
+                email
+                zipCode
+                userType {
+                  name
+                }
               }
+            }
+            ... on DebateAnonymousArgument {
+                username
+                email
             }
             body
             type

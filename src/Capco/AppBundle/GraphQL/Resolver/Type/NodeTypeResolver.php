@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -280,6 +281,10 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof DebateArgument) {
             return $this->typeResolver->resolve('InternalDebateArgument');
+        }
+
+        if ($node instanceof DebateAnonymousArgument) {
+            return $this->typeResolver->resolve('InternalDebateAnonymousArgument');
         }
 
         if ($node instanceof DebateArticle) {

@@ -26,12 +26,17 @@ class Debate
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Debate\DebateOpinion", mappedBy="debate",  cascade={"remove"}, orphanRemoval=true)
      */
-    protected $opinions;
+    protected Collection $opinions;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", mappedBy="debate",  cascade={"remove"}, orphanRemoval=true)
      */
-    protected $arguments;
+    protected Collection $arguments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Debate\DebateAnonymousArgument", mappedBy="debate",  cascade={"remove"}, orphanRemoval=true)
+     */
+    protected Collection $anonymousArguments;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\DebateStep", inversedBy="debate", cascade={"persist"})
@@ -48,6 +53,7 @@ class Debate
     {
         $this->opinions = new ArrayCollection();
         $this->arguments = new ArrayCollection();
+        $this->anonymousArguments = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
 
@@ -140,6 +146,27 @@ class Debate
     public function removeArgument(DebateArgument $argument): self
     {
         $this->arguments->removeElement($argument);
+
+        return $this;
+    }
+
+    public function getAnonymousArguments(): Collection
+    {
+        return $this->anonymousArguments;
+    }
+
+    public function addAnonymousArgument(DebateAnonymousArgument $argument): self
+    {
+        if (!$this->anonymousArguments->contains($argument)) {
+            $this->anonymousArguments[] = $argument;
+        }
+
+        return $this;
+    }
+
+    public function removeAnonymousArgument(DebateAnonymousArgument $argument): self
+    {
+        $this->anonymousArguments->removeElement($argument);
 
         return $this;
     }

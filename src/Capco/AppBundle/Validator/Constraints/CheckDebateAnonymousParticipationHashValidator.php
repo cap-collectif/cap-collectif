@@ -2,27 +2,27 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Encoder\DebateAnonymousVoteHashEncoder;
+use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-class CheckDebateAnonymousVoteHashValidator extends ConstraintValidator
+class CheckDebateAnonymousParticipationHashValidator extends ConstraintValidator
 {
-    private DebateAnonymousVoteHashEncoder $encoder;
+    private DebateAnonymousParticipationHashEncoder $encoder;
 
-    public function __construct(DebateAnonymousVoteHashEncoder $encoder)
+    public function __construct(DebateAnonymousParticipationHashEncoder $encoder)
     {
         $this->encoder = $encoder;
     }
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof CheckDebateAnonymousVoteHashConstraint) {
+        if (!$constraint instanceof CheckDebateAnonymousParticipationHashConstraint) {
             throw new UnexpectedTypeException(
                 $constraint,
-                CheckDebateAnonymousVoteHashConstraint::class
+                CheckDebateAnonymousParticipationHashConstraint::class
             );
         }
 

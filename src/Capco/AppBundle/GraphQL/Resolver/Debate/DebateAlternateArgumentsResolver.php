@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Search\DebateSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -101,8 +101,8 @@ class DebateAlternateArgumentsResolver implements ResolverInterface
     }
 
     private static function generateAlternateArgument(
-        ?DebateArgument $forArgument,
-        ?DebateArgument $againstArgument
+        ?DebateArgumentInterface $forArgument,
+        ?DebateArgumentInterface $againstArgument
     ): array {
         return [
             'for' => $forArgument ?? null,
@@ -111,8 +111,8 @@ class DebateAlternateArgumentsResolver implements ResolverInterface
     }
 
     private static function generateHalfCursors(
-        ?DebateArgument $forArgument,
-        ?DebateArgument $againstArgument
+        ?DebateArgumentInterface $forArgument,
+        ?DebateArgumentInterface $againstArgument
     ): array {
         return [
             'for' => $forArgument ? self::encodeHalfCursor($forArgument) : null,
@@ -120,7 +120,7 @@ class DebateAlternateArgumentsResolver implements ResolverInterface
         ];
     }
 
-    private static function encodeHalfCursor(DebateArgument $argument): string
+    private static function encodeHalfCursor(DebateArgumentInterface $argument): string
     {
         return base64_encode(
             serialize([$argument->getCreatedAt()->getTimestamp() * 1000, $argument->getId()])

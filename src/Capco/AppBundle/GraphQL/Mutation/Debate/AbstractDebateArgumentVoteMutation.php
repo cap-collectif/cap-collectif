@@ -3,7 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
@@ -19,6 +20,7 @@ abstract class AbstractDebateArgumentVoteMutation
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
     protected DebateArgumentVoteRepository $repository;
+    protected DebateAnonymousArgumentVoteRepository $anonymousRepository;
     protected EntityManagerInterface $em;
     protected AuthorizationCheckerInterface $authorizationChecker;
     protected Indexer $indexer;
@@ -29,29 +31,34 @@ abstract class AbstractDebateArgumentVoteMutation
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
         DebateArgumentVoteRepository $repository,
+        DebateAnonymousArgumentVoteRepository $anonymousRepository,
         Indexer $indexer
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->authorizationChecker = $authorizationChecker;
         $this->repository = $repository;
+        $this->anonymousRepository = $anonymousRepository;
         $this->indexer = $indexer;
     }
 
-    protected function getDebateArgument(Arg $input, User $viewer): DebateArgument
+    protected function getDebateArgument(Arg $input, User $viewer): DebateArgumentInterface
     {
         $debateArgument = $this->globalIdResolver->resolve(
             $input->offsetGet('debateArgumentId'),
             $viewer
         );
-        if (!($debateArgument instanceof DebateArgument) || !$debateArgument->isPublished()) {
+        if (
+            !($debateArgument instanceof DebateArgumentInterface) ||
+            !$debateArgument->isPublished()
+        ) {
             throw new UserError(self::UNKNOWN_DEBATE_ARGUMENT);
         }
 
         return $debateArgument;
     }
 
-    protected function checkCanParticipate(DebateArgument $debateArgument): void
+    protected function checkCanParticipate(DebateArgumentInterface $debateArgument): void
     {
         if (
             !$this->authorizationChecker->isGranted(

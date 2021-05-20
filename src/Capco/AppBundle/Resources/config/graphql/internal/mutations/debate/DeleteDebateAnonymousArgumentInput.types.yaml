@@ -1,0 +1,11 @@
+DeleteDebateAnonymousArgumentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete an anonymous argument on a debate.'
+        fields:
+            debate:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` to remove the argument on.'
+            hash:
+                type: 'String!'
+                description: 'The cookie hash needed to remove anonymous argument.'

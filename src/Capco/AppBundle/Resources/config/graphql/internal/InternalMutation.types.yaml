@@ -1095,6 +1095,20 @@ InternalMutation:
                     inputType: DeleteDebateArgumentInput
                     payloadType: DeleteDebateArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateArgumentMutation", [value, getUser()])'
+            createDebateAnonymousArgument:
+                access: "@=hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateDebateAnonymousArgumentInput
+                    payloadType: CreateDebateAnonymousArgumentPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateAnonymousArgumentMutation", [value])'
+            deleteDebateAnonymousArgument:
+                access: "@=hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteDebateAnonymousArgumentInput
+                    payloadType: DeleteDebateAnonymousArgumentPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation", [value])'
             addDebateArgumentVote:
                 access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'

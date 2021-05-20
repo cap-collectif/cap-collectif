@@ -160,7 +160,7 @@ const container = (connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(ma
 
 export default (createFragmentContainer(container, {
   argument: graphql`
-    fragment ArgumentCardFormEdition_argument on DebateArgument {
+    fragment ArgumentCardFormEdition_argument on AbstractDebateArgument {
       id
       body
     }

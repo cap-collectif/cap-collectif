@@ -2,9 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\OfficialResponse;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
@@ -150,6 +152,24 @@ class GlobalIdResolverSpec extends ObjectBehavior
     ) {
         $repository->find('debateArgument1')->willReturn($argument);
         $container->get(DebateArgumentRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('DebateArgument', 'debateArgument1');
+
+        $this->resolve($globalId, null)->shouldReturn($argument);
+    }
+
+    public function it_can_resolve_a_debate_anonymous_argument(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        DebateArgumentRepository $repository,
+        DebateAnonymousArgumentRepository $anonymousRepository,
+        DebateAnonymousArgument $argument
+    ) {
+        $repository->find('debateArgument1')->willReturn(null);
+        $anonymousRepository->find('debateArgument1')->willReturn($argument);
+        $container->get(DebateArgumentRepository::class)->willReturn($repository);
+        $container->get(DebateAnonymousArgumentRepository::class)->willReturn($anonymousRepository);
         $this->beConstructedWith($container, $logger, $entityManager);
         $globalId = GlobalId::toGlobalId('DebateArgument', 'debateArgument1');
 

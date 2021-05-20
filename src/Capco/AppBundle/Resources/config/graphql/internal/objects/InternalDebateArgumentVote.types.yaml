@@ -26,7 +26,7 @@ InternalDebateArgumentVote:
                 type: 'InternalUser!'
                 description: 'The author of the vote.'
             debateArgument:
-                type: 'InternalDebateArgument!'
+                type: 'InternalAbstractDebateArgument!'
                 description: 'The debate of the vote.'
             ipAddress:
                 access: "@=hasRole('ROLE_ADMIN')"

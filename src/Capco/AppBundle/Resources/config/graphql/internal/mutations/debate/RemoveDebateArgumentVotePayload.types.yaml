@@ -3,7 +3,7 @@ RemoveDebateArgumentVotePayload:
     config:
         fields:
             debateArgument:
-                type: 'InternalDebateArgument'
+                type: 'InternalAbstractDebateArgument'
                 description: 'The argument that had just been upvoted.'
             deletedDebateArgumentVoteId:
                 type: 'ID'

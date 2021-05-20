@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote:
+    debateAnonymousArgumentVote1:
+        id: 12801
+        user: '@user1'
+        ipAddress: '1.1.1.1'
+        debateArgument: '@DebateAnonymousArgumentFor1'
+        publishedAt: <(new \DateTime('2021-05-02 00:00:00'))>
+        createdAt: $publishedAt

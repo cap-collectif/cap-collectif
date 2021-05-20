@@ -189,7 +189,7 @@ export const ModalModerateArgumentMobile = ({ argument }: Props): React.Node => 
 
 export default (createFragmentContainer(ModalModerateArgumentMobile, {
   argument: graphql`
-    fragment ModalModerateArgumentMobile_argument on DebateArgument {
+    fragment ModalModerateArgumentMobile_argument on AbstractDebateArgument {
       id
       type
       debate {

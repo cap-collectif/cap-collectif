@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Model\ReportableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -21,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Reporting implements CreatableInterface
 {
     use IdTrait;
-    use TextableTrait;
     use ReportingStatus;
+    use TextableTrait;
 
     /**
      * @ORM\Column(name="status", type="integer")
@@ -83,6 +84,12 @@ class Reporting implements CreatableInterface
      * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?DebateArgument $debateArgument = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateAnonymousArgument", inversedBy="reports")
+     * @ORM\JoinColumn(name="debate_anonymous_argument_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private ?DebateAnonymousArgument $debateAnonymousArgument = null;
 
     /**
      * @ORM\Column(name="is_archived", type="boolean", nullable=false)
@@ -246,6 +253,19 @@ class Reporting implements CreatableInterface
     {
         $this->debateArgument = $debateArgument;
         $debateArgument->addReport($this);
+
+        return $this;
+    }
+
+    public function getDebateAnonymousArgument(): ?DebateAnonymousArgument
+    {
+        return $this->debateAnonymousArgument;
+    }
+
+    public function setDebateAnonymousArgument(
+        ?DebateAnonymousArgument $debateAnonymousArgument
+    ): self {
+        $this->debateAnonymousArgument = $debateAnonymousArgument;
 
         return $this;
     }

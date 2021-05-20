@@ -70,15 +70,16 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
  * @ORM\DiscriminatorMap({
- *      "comment"           = "CommentVote",
- *      "opinion"           = "OpinionVote",
- *      "opinionVersion"    = "OpinionVersionVote",
- *      "argument"          = "ArgumentVote",
- *      "source"            = "SourceVote",
- *      "proposalSelection" = "ProposalSelectionVote",
- *      "proposalCollect"   = "ProposalCollectVote",
- *      "debate"   = "Capco\AppBundle\Entity\Debate\DebateVote",
- *      "debateArgument"   = "Capco\AppBundle\Entity\Debate\DebateArgumentVote",
+ *      "comment"                   = "CommentVote",
+ *      "opinion"                   = "OpinionVote",
+ *      "opinionVersion"            = "OpinionVersionVote",
+ *      "argument"                  = "ArgumentVote",
+ *      "source"                    = "SourceVote",
+ *      "proposalSelection"         = "ProposalSelectionVote",
+ *      "proposalCollect"           = "ProposalCollectVote",
+ *      "debate"                    = "Capco\AppBundle\Entity\Debate\DebateVote",
+ *      "debateArgument"            = "Capco\AppBundle\Entity\Debate\DebateArgumentVote",
+ *      "debateAnonymousArgument"   = "Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote",
  * })
  */
 abstract class AbstractVote implements

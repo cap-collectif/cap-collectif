@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
@@ -159,6 +160,11 @@ class GlobalIdResolver
                     break;
                 case 'DebateArgument':
                     $node = $this->container->get(DebateArgumentRepository::class)->find($uuid);
+                    if (!$node) {
+                        $node = $this->container
+                            ->get(DebateAnonymousArgumentRepository::class)
+                            ->find($uuid);
+                    }
 
                     break;
                 case 'DebateArticle':

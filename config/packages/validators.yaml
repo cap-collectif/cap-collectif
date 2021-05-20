@@ -90,9 +90,9 @@ services:
     Capco\AppBundle\Validator\Constraints\CheckMapCenterValidator:
         tags:
             - { name: validator.constraint_validator, alias: map_center.validator }
-    Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousVoteHashValidator:
+    Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashValidator:
         tags:
             - {
                   name: validator.constraint_validator,
-                  alias: check_debate_anonymous_vote_hash.validator,
+                  alias: check_debate_anonymous_participation_hash.validator,
               }

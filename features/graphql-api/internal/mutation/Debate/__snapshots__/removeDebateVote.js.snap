@@ -8,6 +8,11 @@ Object {
         "edges": Array [
           Object {
             "node": Object {
+              "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+            },
+          },
+          Object {
+            "node": Object {
               "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
             },
           },
@@ -37,7 +42,7 @@ Object {
             },
           },
         ],
-        "totalCount": 6,
+        "totalCount": 7,
       },
       "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
       "votes": Object {

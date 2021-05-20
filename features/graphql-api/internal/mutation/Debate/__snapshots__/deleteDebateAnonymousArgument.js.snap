@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DeleteDebateAnonymousArgument mutation should error when the given hash is valid. 1`] = `
+Object {
+  "deleteDebateAnonymousArgument": Object {
+    "debate": null,
+    "deletedDebateAnonymousArgumentId": null,
+    "errorCode": "INVALID_HASH",
+  },
+}
+`;
+
+exports[`Internal|DeleteDebateAnonymousArgument mutation should successfully delete an existing anonymous argument when the given hash is valid. 1`] = `
+Object {
+  "deleteDebateAnonymousArgument": Object {
+    "debate": Object {
+      "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+    },
+    "deletedDebateAnonymousArgumentId": "DebateAnonymousArgumentFor1",
+    "errorCode": null,
+  },
+}
+`;

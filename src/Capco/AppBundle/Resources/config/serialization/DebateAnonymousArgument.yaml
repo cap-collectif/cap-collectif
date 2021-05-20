@@ -1,0 +1,28 @@
+Capco\AppBundle\Entity\Debate\DebateAnonymousArgument:
+    attributes:
+        id:
+            groups: [ElasticsearchVoteNestedDebateArgument, ElasticsearchDebateArgument]
+        debate:
+            groups: [ElasticsearchDebateArgument]
+        getStep:
+            serialized_name: step
+            groups: [ElasticsearchDebateArgumentNestedStep]
+        getProject:
+            serialized_name: project
+            groups: [ElasticsearchDebateArgumentNestedProject]
+        type:
+            serialized_name: voteType
+            groups: [ElasticsearchDebateArgument]
+        published:
+            groups: [ElasticsearchDebateArgument]
+        publishedAt:
+            groups: [ElasticsearchDebateArgument]
+        trashed:
+            groups: [ElasticsearchDebateArgument]
+        trashedAt:
+            groups: [ElasticsearchDebateArgument]
+        ipAddress:
+            groups: [ElasticsearchDebateArgument]
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchDebateArgument]

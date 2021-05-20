@@ -1,0 +1,13 @@
+DeleteDebateAnonymousArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedDebateAnonymousArgumentId:
+                description: 'The id that had just been deleted.'
+                type: 'ID'
+            errorCode:
+                type: 'DeleteDebateAnonymousArgumentErrorCode'
+                description: 'An unsuccessful mutation will return an error.'
+            debate:
+                type: 'InternalDebate'
+                description: 'The deleted argument associated debate.'

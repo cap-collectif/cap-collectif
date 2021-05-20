@@ -590,3 +590,15 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:ExternalServiceConfiguration']
+
+    Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Debate\DebateAnonymousArgument']
+
+    Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Debate\DebateAnonymousArgumentVote']

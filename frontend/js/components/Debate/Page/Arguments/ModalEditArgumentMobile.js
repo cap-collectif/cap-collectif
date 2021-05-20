@@ -172,7 +172,7 @@ export const ModalEditArgumentMobile = ({ argument, hidePreviousModal }: Props):
 
 export default (createFragmentContainer(ModalEditArgumentMobile, {
   argument: graphql`
-    fragment ModalEditArgumentMobile_argument on DebateArgument {
+    fragment ModalEditArgumentMobile_argument on AbstractDebateArgument {
       id
       ...ArgumentCardFormEdition_argument
     }

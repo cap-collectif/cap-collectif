@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\AnonymousParticipationInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
@@ -11,6 +12,7 @@ use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TokenTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,13 +20,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=DebateAnonymousVoteRepository::class)
  * @ORM\Table(name="debate_anonymous_vote")
  */
-class DebateAnonymousVote implements IndexableInterface
+class DebateAnonymousVote implements IndexableInterface, AnonymousParticipationInterface
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;
     use DebatableTrait;
     use ForAgainstTrait;
     use TimestampableTrait;
+    use TokenTrait;
     use UuidTrait;
 
     /**
@@ -32,23 +35,6 @@ class DebateAnonymousVote implements IndexableInterface
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Debate $debate;
-
-    /**
-     * @ORM\Column(type="string", nullable=false, length=255)
-     */
-    private string $token;
-
-    public function getToken(): ?string
-    {
-        return $this->token;
-    }
-
-    public function setToken(string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
-    }
 
     public function getStep(): ?DebateStep
     {

@@ -6,6 +6,38 @@ Object {
     "arguments": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntpOjA7aToxNjE5ODIzNjAwMDAwO2k6MTtzOjI3OiJEZWJhdGVBbm9ueW1vdXNBcmd1bWVudEZvcjEiO30=",
+          "node": Object {
+            "body": "Freedom for da ganja man",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+            "published": true,
+            "publishedAt": "2021-05-01 01:00:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "username": "rasta94",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                    "createdAt": "2021-05-02 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyODAx",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxNjAzNDM2NzYwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDciO30=",
           "node": Object {
             "author": Object {
@@ -207,7 +239,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNjAzNDM2NDAwMDAwO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDEiO30=",
         "hasNextPage": false,
       },
-      "totalCount": 7,
+      "totalCount": 8,
     },
   },
 }
@@ -217,22 +249,22 @@ exports[`Internal|Debate.arguments connection fetches counters associated to a d
 Object {
   "node": Object {
     "againstArguments": Object {
-      "totalCount": 4,
+      "totalCount": 5,
     },
     "allArguments": Object {
-      "totalCount": 10,
+      "totalCount": 12,
     },
     "forArguments": Object {
-      "totalCount": 6,
+      "totalCount": 7,
     },
     "publishedArguments": Object {
-      "totalCount": 7,
+      "totalCount": 8,
     },
     "trashedArguments": Object {
       "totalCount": 2,
     },
     "unpublishedArguments": Object {
-      "totalCount": 1,
+      "totalCount": 2,
     },
   },
 }
@@ -243,6 +275,22 @@ Object {
   "node": Object {
     "arguments": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+            "ipAddress": "1.1.1.1",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyODAx",
+                    "ipAddress": "1.1.1.1",
+                  },
+                },
+              ],
+            },
+          },
+        },
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQxMA==",
@@ -346,6 +394,15 @@ Object {
         },
         Object {
           "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRBZ2FpbnN0MQ==",
+            "ipAddress": "1.1.1.1",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ4",
             "ipAddress": null,
             "votes": Object {
@@ -364,6 +421,22 @@ Object {
   "node": Object {
     "arguments": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+            "ipAddress": null,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyODAx",
+                    "ipAddress": null,
+                  },
+                },
+              ],
+            },
+          },
+        },
         Object {
           "node": Object {
             "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
@@ -655,12 +728,44 @@ Object {
             },
           },
         },
+        Object {
+          "cursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czoyNzoiRGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3IxIjt9",
+          "node": Object {
+            "body": "Freedom for da ganja man",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+            "published": true,
+            "publishedAt": "2021-05-01 01:00:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "username": "rasta94",
+            "viewerHasVote": false,
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                    "createdAt": "2021-05-02 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyODAx",
+                  },
+                },
+              ],
+            },
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aTowO2k6MTtzOjE1OiJkZWJhdGVBcmd1bWVudDciO30=",
+        "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7czoyNzoiRGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3IxIjt9",
         "hasNextPage": false,
       },
-      "totalCount": 7,
+      "totalCount": 8,
     },
   },
 }

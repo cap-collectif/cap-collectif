@@ -99,6 +99,122 @@ enum APIEnterpriseType {
   PUB_ORGA
 }
 
+"""An abstract debate argument."""
+interface AbstractDebateArgument {
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """True if the viewer has reported the argument."""
+  viewerHasReport: Boolean!
+
+  """The reportings related to the reportable."""
+  reportings(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the debate"""
+  url: URI!
+
+  """The content of the argument."""
+  body: String!
+
+  """The debate related to the argument."""
+  debate: Debate!
+
+  """Whether the argument is for or against."""
+  type: ForOrAgainstValue!
+
+  """IP of the author"""
+  ipAddress: IP
+
+  """The origin of a debate's argument"""
+  origin: ContributionOrigin!
+
+  """The URL of widget from which the debate's argument was added, if any."""
+  widgetOriginUrl: URI
+
+  """The formatted geolocalization informations."""
+  geoip: FormattedGeolocalization
+
+  """True if the viewer has upvoted the argument."""
+  viewerHasVote: Boolean!
+
+  """The upvotes on the argument."""
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Order by."""
+    orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): DebateArgumentVoteConnection!
+}
+
 """An abstract debate vote."""
 interface AbstractDebateVote {
   """The ID of an object"""
@@ -275,7 +391,7 @@ input AddDebateArgumentVoteInput {
 
 type AddDebateArgumentVotePayload {
   """The argument that had just been upvoted."""
-  debateArgument: DebateArgument
+  debateArgument: AbstractDebateArgument
 
   """The vote just added."""
   debateArgumentVote: DebateArgumentVote
@@ -2955,6 +3071,56 @@ type CreateAlphaProjectPayload {
   clientMutationId: String
 }
 
+"""Available errors for a `createDebateAnonymousArgument` mutation."""
+enum CreateDebateAnonymousArgumentErrorCode {
+  """No `Debate` match your id."""
+  UNKNOWN_DEBATE
+
+  """There already is an argument with that email."""
+  ALREADY_HAS_ARGUMENT
+
+  """Invalid captcha given."""
+  INVALID_CAPTCHA
+}
+
+input CreateDebateAnonymousArgumentInput {
+  """The id of the `Debate` where the argument belongs."""
+  debate: ID!
+
+  """The body value of the argument."""
+  body: String!
+
+  """Whether the argument will be `FOR` or `AGAINST`."""
+  type: ForOrAgainstValue!
+
+  """
+  The URL of widget from which the debate argument's vote was added, if any.
+  """
+  widgetOriginURI: URI = null
+
+  """The email of the author"""
+  email: Email! = 
+
+  """The username of the author if no account"""
+  username: String = null
+
+  """The captcha verification."""
+  captcha: String!
+  clientMutationId: String
+}
+
+type CreateDebateAnonymousArgumentPayload {
+  """The argument that had just been created."""
+  debateArgument: DebateAnonymousArgument
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: CreateDebateAnonymousArgumentErrorCode
+
+  """The token of the argument."""
+  token: String!
+  clientMutationId: String
+}
+
 """Available errors for an `createDebateArgument` mutation."""
 enum CreateDebateArgumentErrorCode {
   """No `Debate` match your id."""
@@ -3484,46 +3650,8 @@ type Debate implements Node {
   step: DebateStep!
 }
 
-"""An anonymous debate vote."""
-type DebateAnonymousVote implements Node & AbstractDebateVote {
-  """The ID of an object."""
-  id: ID!
-
-  """The date of the vote."""
-  createdAt: DateTime!
-
-  """Whether or not the vote is published."""
-  published: Boolean!
-
-  """The date when the vote was published at."""
-  publishedAt: DateTime
-
-  """The value of the vote."""
-  type: ForOrAgainstValue!
-
-  """The debate of the vote."""
-  debate: Debate!
-
-  """IP of the voter"""
-  ipAddress: IP
-
-  """The origin of a debate argument's vote"""
-  origin: ContributionOrigin!
-
-  """
-  The URL of widget from which the debate argument's vote was added, if any.
-  """
-  widgetOriginUrl: URI
-
-  """Navigator of the voter"""
-  navigator: String
-
-  """The formatted geolocalization informations."""
-  geoip: FormattedGeolocalization
-}
-
-"""A debate argument from non expert."""
-type DebateArgument implements Node & Reportable & Trashable & Contribution {
+"""A debate argument from anonymous."""
+type DebateAnonymousArgument implements Node & AbstractDebateArgument & Trashable & Contribution {
   """The ID of an object."""
   id: ID!
 
@@ -3583,9 +3711,6 @@ type DebateArgument implements Node & Reportable & Trashable & Contribution {
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  """Did the viewer author this entity."""
-  viewerDidAuthor: Boolean
-
   """
   Return the related contribution if the contribution is related to another.
   """
@@ -3597,14 +3722,26 @@ type DebateArgument implements Node & Reportable & Trashable & Contribution {
   """The content of the argument."""
   body: String!
 
-  """The non-expert giving his argument."""
-  author: User!
-
   """The debate related to the argument."""
   debate: Debate!
 
   """Whether the argument is for or against."""
   type: ForOrAgainstValue!
+
+  """IP of the author"""
+  ipAddress: IP
+
+  """The origin of a debate's argument"""
+  origin: ContributionOrigin!
+
+  """The URL of widget from which the debate's argument was added, if any."""
+  widgetOriginUrl: URI
+
+  """The formatted geolocalization informations."""
+  geoip: FormattedGeolocalization
+
+  """True if the viewer has upvoted the argument."""
+  viewerHasVote: Boolean!
 
   """The upvotes on the argument."""
   votes(
@@ -3628,8 +3765,131 @@ type DebateArgument implements Node & Reportable & Trashable & Contribution {
     orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateArgumentVoteConnection!
 
-  """True if the viewer has upvoted the argument."""
-  viewerHasVote: Boolean!
+  """Did the viewer author this entity."""
+  viewerDidAuthor: Boolean
+
+  """Email"""
+  email: Email!
+
+  """Username (not mandatory)"""
+  username: String
+}
+
+"""An anonymous debate vote."""
+type DebateAnonymousVote implements Node & AbstractDebateVote {
+  """The ID of an object."""
+  id: ID!
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """Whether or not the vote is published."""
+  published: Boolean!
+
+  """The date when the vote was published at."""
+  publishedAt: DateTime
+
+  """The value of the vote."""
+  type: ForOrAgainstValue!
+
+  """The debate of the vote."""
+  debate: Debate!
+
+  """IP of the voter"""
+  ipAddress: IP
+
+  """The origin of a debate argument's vote"""
+  origin: ContributionOrigin!
+
+  """
+  The URL of widget from which the debate argument's vote was added, if any.
+  """
+  widgetOriginUrl: URI
+
+  """Navigator of the voter"""
+  navigator: String
+
+  """The formatted geolocalization informations."""
+  geoip: FormattedGeolocalization
+}
+
+"""A debate argument from non expert."""
+type DebateArgument implements Node & AbstractDebateArgument & Trashable & Contribution {
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """True if the viewer has reported the argument."""
+  viewerHasReport: Boolean!
+
+  """The reportings related to the reportable."""
+  reportings(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the debate"""
+  url: URI!
+
+  """The content of the argument."""
+  body: String!
+
+  """The debate related to the argument."""
+  debate: Debate!
+
+  """Whether the argument is for or against."""
+  type: ForOrAgainstValue!
 
   """IP of the author"""
   ipAddress: IP
@@ -3642,15 +3902,46 @@ type DebateArgument implements Node & Reportable & Trashable & Contribution {
 
   """The formatted geolocalization informations."""
   geoip: FormattedGeolocalization
+
+  """True if the viewer has upvoted the argument."""
+  viewerHasVote: Boolean!
+
+  """The upvotes on the argument."""
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Order by."""
+    orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): DebateArgumentVoteConnection!
+
+  """Did the viewer author this entity."""
+  viewerDidAuthor: Boolean
+
+  """The non-expert giving his argument."""
+  author: User!
 }
 
 """Two debate arguments from non expert, one for and one against."""
 type DebateArgumentAlternate {
   """The FOR argument."""
-  for: DebateArgument
+  for: AbstractDebateArgument
 
   """The AGAINST argument."""
-  against: DebateArgument
+  against: AbstractDebateArgument
 }
 
 """A connection to a list of items."""
@@ -3687,7 +3978,7 @@ type DebateArgumentConnection {
 """An edge in a connection."""
 type DebateArgumentEdge {
   """The item at the end of the edge."""
-  node: DebateArgument!
+  node: AbstractDebateArgument!
 
   """A cursor for use in pagination."""
   cursor: String!
@@ -3746,7 +4037,7 @@ type DebateArgumentVote implements Node & Publishable & Vote & Contribution {
   url: URI!
 
   """The debate of the vote."""
-  debateArgument: DebateArgument!
+  debateArgument: AbstractDebateArgument!
 
   """IP of the voter"""
   ipAddress: IP
@@ -4153,6 +4444,42 @@ type DeleteCommentPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError]
+  clientMutationId: String
+}
+
+"""Available errors for an `deleteDebateAnonymousArgument` mutation."""
+enum DeleteDebateAnonymousArgumentErrorCode {
+  """No `Debate` match your `id`."""
+  UNKNOWN_DEBATE
+
+  """The debate is closed and removing an argument cannot be done."""
+  CLOSED_DEBATE
+
+  """The given hash is not valid."""
+  INVALID_HASH
+
+  """The user has no argument on this debate."""
+  UNKNOWN_DEBATE_ARGUMENT
+}
+
+input DeleteDebateAnonymousArgumentInput {
+  """The Node ID of the `Debate` to remove the argument on."""
+  debate: ID!
+
+  """The cookie hash needed to remove anonymous argument."""
+  hash: String!
+  clientMutationId: String
+}
+
+type DeleteDebateAnonymousArgumentPayload {
+  """The id that had just been deleted."""
+  deletedDebateAnonymousArgumentId: ID
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: DeleteDebateAnonymousArgumentErrorCode
+
+  """The deleted argument associated debate."""
+  debate: Debate
   clientMutationId: String
 }
 
@@ -6397,6 +6724,8 @@ type Mutation {
   createDebateArgument(input: CreateDebateArgumentInput!): CreateDebateArgumentPayload
   updateDebateArgument(input: UpdateDebateArgumentInput!): UpdateDebateArgumentPayload
   deleteDebateArgument(input: DeleteDebateArgumentInput!): DeleteDebateArgumentPayload
+  createDebateAnonymousArgument(input: CreateDebateAnonymousArgumentInput!): CreateDebateAnonymousArgumentPayload
+  deleteDebateAnonymousArgument(input: DeleteDebateAnonymousArgumentInput!): DeleteDebateAnonymousArgumentPayload
   addDebateArgumentVote(input: AddDebateArgumentVoteInput!): AddDebateArgumentVotePayload
   removeDebateArgumentVote(input: RemoveDebateArgumentVoteInput!): RemoveDebateArgumentVotePayload
   askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
@@ -10758,7 +11087,7 @@ input RemoveDebateArgumentVoteInput {
 
 type RemoveDebateArgumentVotePayload {
   """The argument that had just been upvoted."""
-  debateArgument: DebateArgument
+  debateArgument: AbstractDebateArgument
 
   """The id of the vote just removed."""
   deletedDebateArgumentVoteId: ID

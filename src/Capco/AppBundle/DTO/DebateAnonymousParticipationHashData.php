@@ -4,7 +4,7 @@ namespace Capco\AppBundle\DTO;
 
 use Capco\AppBundle\Enum\ForOrAgainstType;
 
-class DebateAnonymousVoteHashData
+class DebateAnonymousParticipationHashData
 {
     private string $type;
 

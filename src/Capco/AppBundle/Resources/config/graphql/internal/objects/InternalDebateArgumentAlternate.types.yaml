@@ -6,7 +6,7 @@ InternalDebateArgumentAlternate:
         fields:
             for:
                 description: 'The FOR argument.'
-                type: InternalDebateArgument
+                type: InternalAbstractDebateArgument
             against:
                 description: 'The AGAINST argument.'
-                type: InternalDebateArgument
+                type: InternalAbstractDebateArgument

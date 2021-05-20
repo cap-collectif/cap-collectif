@@ -105,7 +105,7 @@ export const ArgumentCard = ({
         <Flex mb={2} direction="row" justifyContent="space-between" alignItems="start">
           <Flex direction="row" alignItems="center" flexWrap="wrap">
             <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
-              {argument.author.username}
+              {argument.author?.username ?? intl.formatMessage({ id: 'global.anonymous' })}
             </Text>
             <Tag
               mb={2}
@@ -299,16 +299,19 @@ export const ArgumentCard = ({
 
 export default (createFragmentContainer(ArgumentCard, {
   argument: graphql`
-    fragment ArgumentCard_argument on DebateArgument
+    fragment ArgumentCard_argument on AbstractDebateArgument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       body
       votes(first: 0) {
         totalCount
       }
-      author {
-        id
-        username
+      ... on DebateArgument {
+        author {
+          id
+          username
+        }
+        viewerDidAuthor @include(if: $isAuthenticated)
       }
       debate {
         id
@@ -317,7 +320,6 @@ export default (createFragmentContainer(ArgumentCard, {
       type
       published
       viewerCanReport @include(if: $isAuthenticated)
-      viewerDidAuthor @include(if: $isAuthenticated)
       viewerHasVote @include(if: $isAuthenticated)
       ...ArgumentCardFormEdition_argument @include(if: $isAuthenticated)
       ...ModalArgumentAuthorMenu_argument @include(if: $isAuthenticated)

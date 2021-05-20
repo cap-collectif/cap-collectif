@@ -29,6 +29,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
                     ElasticsearchProposalNestedStep,
                     ElasticsearchArgumentNestedStep,
                     ElasticsearchDebateArgumentNestedStep,
+                    ElasticsearchDebateAnonymousArgumentNestedStep,
                 ]
         title:
             groups: [Steps]

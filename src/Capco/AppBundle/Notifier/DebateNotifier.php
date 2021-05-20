@@ -3,17 +3,20 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Entity\Debate\DebateVoteToken;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Debate\DebateArgumentConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\Debate\DebateLaunch;
 use Capco\AppBundle\Mailer\Message\Debate\DebateReminder;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -67,6 +70,24 @@ class DebateNotifier extends BaseNotifier
             ],
             $voteToken->getUser()
         );
+    }
+
+    public function sendArgumentConfirmation(DebateAnonymousArgument $argument): void
+    {
+        $this->mailer->createAndSendMessage(
+            DebateArgumentConfirmationMessage::class,
+            $argument,
+            [
+                'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
+                "confirmationUrl" => $this->router->generate(
+                    "capco_app_debate_publish_argument",
+                    ["token" => $argument->getToken()],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                )
+            ],
+            (new User())->setEmail($argument->getEmail())
+        );
+
     }
 
     private function getParticipantsCount(Debate $debate): int

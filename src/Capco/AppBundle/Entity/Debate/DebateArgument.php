@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
-use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +11,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Publishable;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\HasAuthorTrait;
@@ -24,7 +23,6 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Index;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
@@ -46,12 +44,7 @@ use Capco\AppBundle\Entity\Interfaces\Authorable;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  */
-class DebateArgument implements
-    Contribution,
-    VotableInterface,
-    ReportableInterface,
-    Publishable,
-    Authorable
+class DebateArgument implements DebateArgumentInterface, Publishable
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;

@@ -48,6 +48,13 @@ Object {
           },
         },
         Object {
+          "cursor": "YToyOntpOjA7aToyO2k6MTtpOjE0MjAwNjY4MDAwMDA7fQ==",
+          "node": Object {
+            "id": "VXNlcjp1c2VyMQ==",
+            "username": "lbrunet",
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE1NzI4NTYyMDAwMDA7fQ==",
           "node": Object {
             "id": "VXNlcjp1c2VyTWlja2FlbA==",
@@ -68,16 +75,9 @@ Object {
             "username": "Juan",
           },
         },
-        Object {
-          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE1MTQ5ODMwMjAwMDA7fQ==",
-          "node": Object {
-            "id": "VXNlcjp1c2VyTWF4aW1l",
-            "username": "mauriau",
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE1MTQ5ODMwMjAwMDA7fQ==",
+        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE1MzU5NTk4MDAwMDA7fQ==",
         "hasNextPage": true,
         "startCursor": "YToyOntpOjA7aTozO2k6MTtpOjE0MjUyMDQwMDAwMDA7fQ==",
       },
@@ -120,16 +120,9 @@ Object {
             "username": "user",
           },
         },
-        Object {
-          "cursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjAwNjY4MDAwMDA7fQ==",
-          "node": Object {
-            "id": "VXNlcjp1c2VyMQ==",
-            "username": "lbrunet",
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjAwNjY4MDAwMDA7fQ==",
+        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE0MjA0OTg4MDAwMDA7fQ==",
         "hasNextPage": false,
         "startCursor": "YToyOntpOjA7aToxO2k6MTtpOjE0ODMyMjc3ODAwMDA7fQ==",
       },

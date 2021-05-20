@@ -1,76 +1,17 @@
 InternalDebateArgument:
     type: object
     inherits:
-        - Node
-        - Trashable
-        - PublicPublishable
-        - Reportable
-        - Timestampable
+        - InternalAbstractDebateArgument
         - Authorable
-        - Contribution
     config:
         name: DebateArgument
         description: 'A debate argument from non expert.'
         interfaces:
             - Node
-            - Reportable
+            - InternalAbstractDebateArgument
             - Trashable
             - Contribution
         fields:
-            id:
-                description: 'The ID of an object.'
-                builder: 'Relay::GlobalId'
-                builderConfig:
-                    typeName: DebateArgument
-            body:
-                description: 'The content of the argument.'
-                type: String!
             author:
                 description: 'The non-expert giving his argument.'
                 type: InternalUser!
-            debate:
-                type: InternalDebate!
-                description: 'The debate related to the argument.'
-            type:
-                type: 'ForOrAgainstValue!'
-                description: 'Whether the argument is for or against.'
-            votes:
-                description: 'The upvotes on the argument.'
-                argsBuilder: 'Relay::Connection'
-                args:
-                    orderBy:
-                        type: 'DebateArgumentVoteOrder'
-                        description: 'Order by.'
-                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
-                type: DebateArgumentVoteConnection!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentVotesResolver", [value, args])'
-            viewerHasVote:
-                access: "@=hasRole('ROLE_USER')"
-                description: 'True if the viewer has upvoted the argument.'
-                type: Boolean!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasVoteResolver", [value, getUser()])'
-            viewerHasReport:
-                access: "@=hasRole('ROLE_USER')"
-                description: 'True if the viewer has reported the argument.'
-                type: Boolean!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", [value, getUser()])'
-            url:
-                type: 'URI!'
-                description: 'The url of the debate'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateUrlResolver", [value.getDebate()])'
-            ipAddress:
-                access: "@=hasRole('ROLE_ADMIN')"
-                description: 'IP of the author'
-                type: 'IP'
-            origin:
-                access: "@=hasRole('ROLE_ADMIN')"
-                description: "The origin of a debate's argument"
-                type: 'ContributionOrigin!'
-            widgetOriginUrl:
-                access: "@=hasRole('ROLE_ADMIN')"
-                description: "The URL of widget from which the debate's argument was added, if any."
-                type: 'URI'
-            geoip:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-                type: 'FormattedGeolocalization'
-                description: 'The formatted geolocalization informations.'

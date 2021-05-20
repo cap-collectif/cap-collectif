@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -20,8 +20,10 @@ class DebateArgumentVotesResolver implements ResolverInterface
         $this->voteSearch = $voteSearch;
     }
 
-    public function __invoke(DebateArgument $debateArgument, ?Argument $args = null): ConnectionInterface
-    {
+    public function __invoke(
+        DebateArgumentInterface $debateArgument,
+        ?Argument $args = null
+    ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }

@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Security;
 
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -15,8 +17,14 @@ class DebateArgumentVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        return \in_array($attribute, [self::UPDATE, self::DELETE, self::PARTICIPATE]) &&
-            $subject instanceof DebateArgument;
+        if ($subject instanceof DebateArgument) {
+            return \in_array($attribute, [self::UPDATE, self::DELETE, self::PARTICIPATE]);
+        }
+        if ($subject instanceof DebateAnonymousArgument) {
+            return \in_array($attribute, [self::PARTICIPATE]);
+        }
+
+        return false;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -49,8 +57,10 @@ class DebateArgumentVoter extends Voter
         return $viewer->isAdmin() || $debateArgument->getAuthor() === $viewer;
     }
 
-    private static function canParticipate(DebateArgument $debateArgument, User $viewer): bool
-    {
+    private static function canParticipate(
+        DebateArgumentInterface $debateArgument,
+        User $viewer
+    ): bool {
         return $debateArgument->getDebate()->viewerCanParticipate($viewer);
     }
 }

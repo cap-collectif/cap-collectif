@@ -71,7 +71,9 @@ const DebateStepPageArgumentDrawer = ({
     <DetailDrawer {...drawerProps}>
       <DetailDrawer.Header textAlign="center" justifyContent="space-between">
         <Flex direction="column" spacing={1} flex={1}>
-          <Text fontWeight="bold">{argument.author.username}</Text>
+          <Text fontWeight="bold">
+            {argument.author?.username ?? intl.formatMessage({ id: 'global.anonymous' })}
+          </Text>
 
           <Tag
             variant={argument.type === 'FOR' ? 'green' : 'red'}

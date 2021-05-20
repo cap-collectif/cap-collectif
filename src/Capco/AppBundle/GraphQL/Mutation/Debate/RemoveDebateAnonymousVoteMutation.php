@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Encoder\DebateAnonymousVoteHashEncoder;
+use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
-use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousVoteHashConstraint;
+use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +29,7 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
     private LoggerInterface $logger;
     private ValidatorInterface $validator;
     private Indexer $indexer;
-    private DebateAnonymousVoteHashEncoder $encoder;
+    private DebateAnonymousParticipationHashEncoder $encoder;
     private DebateAnonymousVoteRepository $repository;
     private GlobalIdResolver $globalIdResolver;
 
@@ -38,7 +38,7 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
         LoggerInterface $logger,
         DebateAnonymousVoteRepository $repository,
         ValidatorInterface $validator,
-        DebateAnonymousVoteHashEncoder $encoder,
+        DebateAnonymousParticipationHashEncoder $encoder,
         GlobalIdResolver $globalIdResolver,
         Indexer $indexer
     ) {
@@ -69,7 +69,9 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
         }
 
         $hash = $input->offsetGet('hash');
-        $errors = $this->validator->validate($hash, [new CheckDebateAnonymousVoteHashConstraint()]);
+        $errors = $this->validator->validate($hash, [
+            new CheckDebateAnonymousParticipationHashConstraint(),
+        ]);
         if (\count($errors) > 0) {
             return $this->generateErrorPayload(self::INVALID_HASH);
         }
@@ -103,10 +105,7 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
     {
         return [
             'debate' => $vote->getDebate(),
-            'deletedDebateAnonymousVoteId' => GlobalId::toGlobalId(
-                'DebateAnonymousVote',
-                $voteId
-            ),
+            'deletedDebateAnonymousVoteId' => GlobalId::toGlobalId('DebateAnonymousVote', $voteId),
             'errorCode' => null,
         ];
     }
