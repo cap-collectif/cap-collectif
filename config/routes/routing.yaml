@@ -65,14 +65,6 @@ capco_api_projects:
         _format: json
     options: { i18n: false }
 
-capco_api_comments:
-    resource: '@CapcoAppBundle/Controller/Api/CommentsController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
 capco_api_medias:
     resource: '@CapcoAppBundle/Controller/Api/MediasController.php'
     type: annotation

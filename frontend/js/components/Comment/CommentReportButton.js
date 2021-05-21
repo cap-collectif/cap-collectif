@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import {graphql, createFragmentContainer} from 'react-relay';
 import { connect } from 'react-redux';
-import { submitCommentReport, type ReportData } from '../../redux/modules/report';
+import { submitCommentReport, type ReportData } from '~/redux/modules/report';
 import ReportBox from '../Report/ReportBox';
 import type { CommentReportButton_comment } from '~relay/CommentReportButton_comment.graphql';
-import type { Dispatch } from '../../types';
+import type { Dispatch } from '~/types';
 
 type Props = {|
   +dispatch: Dispatch,

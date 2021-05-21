@@ -1,8 +1,10 @@
 // @flow
-import type { Exact, Action, Dispatch, Uuid } from '../../types';
-import { UPDATE_ALERT } from '../../constants/AlertConstants';
+import type { Exact, Action, Dispatch, Uuid } from '~/types';
+import { UPDATE_ALERT } from '~/constants/AlertConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
+import ReportMutation from '~/mutations/ReportMutation';
+import { getType } from '~/components/Report/ReportForm';
 
 export type State = {
   +currentReportingModal: ?number | ?string,
@@ -69,6 +71,16 @@ const addReported = (): AddReportedAction => ({
   type: 'report/ADD_REPORTED',
 });
 
+const onSuccess = (dispatch, successMessage) => {
+  dispatch(addReported());
+  dispatch(stopLoading());
+  dispatch(closeModal());
+  FluxDispatcher.dispatch({
+    actionType: UPDATE_ALERT,
+    alert: { bsStyle: 'success', content: successMessage },
+  });
+};
+
 const submitReport = (
   url: string,
   data: ReportData,
@@ -79,13 +91,7 @@ const submitReport = (
   return new Promise((resolve, reject) => {
     Fetcher.post(url, data)
       .then(() => {
-        dispatch(addReported());
-        dispatch(stopLoading());
-        dispatch(closeModal());
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: successMessage },
-        });
+        onSuccess(dispatch, successMessage);
         resolve();
       })
       .catch(() => {
@@ -129,8 +135,17 @@ export const submitOpinionReport = (opinion: Object, data: ReportData, dispatch:
     'alert.success.report.proposal',
   );
 
-export const submitCommentReport = (commentId: string, data: ReportData, dispatch: Dispatch) =>
-  submitReport(`/comments/${commentId}/reports`, data, dispatch, 'alert.success.report.comment');
+export const submitCommentReport = (commentId: string, report: ReportData, dispatch: Dispatch) => {
+  ReportMutation.commit({
+    input: {
+      reportableId: commentId,
+      type: getType(report.status.toString()),
+      body: report.body,
+    },
+  }).then(() => {
+    onSuccess(dispatch, 'alert.success.report.comment');
+  });
+};
 
 export const submitProposalReport = (proposal: Object, data: ReportData, dispatch: Dispatch) =>
   submitReport(

@@ -71,9 +71,6 @@ services:
     Capco\AppBundle\Controller\Site\DeveloperController:
         public: true
 
-    Capco\AppBundle\Controller\Api\CommentsController:
-        public: true
-
     Capco\AppBundle\Controller\Site\SSOController: null
 
     Capco\AppBundle\Controller\Site\HomepageController:
