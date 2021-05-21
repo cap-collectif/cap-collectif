@@ -53,7 +53,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly 1`] = `
             "type": "FOR",
           }
         }
-        readMore={false}
+        readMore={true}
       />
       <DebateOpinion
         isMobile={false}
@@ -64,7 +64,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly 1`] = `
             "type": "AGAINST",
           }
         }
-        readMore={false}
+        readMore={true}
       />
     </ForwardRef>
   </Skeleton>
@@ -124,7 +124,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly on mobile 1`] = `
             "type": "FOR",
           }
         }
-        readMore={false}
+        readMore={true}
       />
       <DebateOpinion
         isMobile={true}
@@ -135,7 +135,7 @@ exports[`<DebateStepPageFaceToFace /> should renders correctly on mobile 1`] = `
             "type": "AGAINST",
           }
         }
-        readMore={false}
+        readMore={true}
       />
     </ForwardRef>
   </Skeleton>

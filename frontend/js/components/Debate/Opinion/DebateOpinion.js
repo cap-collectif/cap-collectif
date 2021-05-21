@@ -16,6 +16,7 @@ import Button from '~ds/Button/Button';
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer';
 import NewUserAvatar from '~/components/User/NewUserAvatar';
 import AppBox from '~ui/Primitives/AppBox';
+import colors from '~/styles/modules/colors';
 
 // TODO remove this and import from relay
 export type DebateOpinionStatus = 'FOR' | 'AGAINST';
@@ -61,6 +62,10 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
         borderTopRightRadius={0}
         css={css({
           position: 'absolute',
+          '&:hover': {
+            cursor: 'default',
+            background: colors[opinion.type === 'FOR' ? 'green' : 'red'][150],
+          },
         })}>
         <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
           <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />

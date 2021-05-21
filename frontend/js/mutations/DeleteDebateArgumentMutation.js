@@ -19,6 +19,9 @@ const mutation = graphql`
     deleteDebateArgument(input: $input) {
       errorCode
       deletedDebateArgumentId @deleteEdge(connections: $connections)
+      debate {
+        viewerHasArgument
+      }
     }
   }
 `;
@@ -43,7 +46,11 @@ const commit = (variables: Variables): Promise<DeleteDebateArgumentMutationRespo
 
       store.delete(argument);
 
-      const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', { first: 0 });
+      const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', {
+        first: 0,
+        isPublished: true,
+        isTrashed: false,
+      });
       if (!allArgumentsProxy) return;
       const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
       allArgumentsProxy.setValue(previousValue - 1, 'totalCount');

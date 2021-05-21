@@ -48,8 +48,16 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props): Node => {
         {forOpinion && againstOpinion ? (
           <>
             <Flex direction={['column', 'row']} spacing={6}>
-              <DebateOpinion isMobile={isMobile} opinion={forOpinion} readMore={readMore} />
-              <DebateOpinion isMobile={isMobile} opinion={againstOpinion} readMore={readMore} />
+              <DebateOpinion
+                isMobile={isMobile}
+                opinion={forOpinion}
+                readMore={readMore || !hasMore}
+              />
+              <DebateOpinion
+                isMobile={isMobile}
+                opinion={againstOpinion}
+                readMore={readMore || !hasMore}
+              />
             </Flex>
             {hasMore && (
               <Button

@@ -5,7 +5,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
   className="sc-bdnylx dsPyrQ DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 VwtAL"
+    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -94,7 +94,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
   className="sc-bdnylx dsPyrQ DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 VwtAL"
+    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -183,7 +183,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
   className="sc-bdnylx dSMDDu DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 VwtAL"
+    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -269,7 +269,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
   className="sc-bdnylx dsPyrQ DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 VwtAL"
+    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -365,7 +365,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
   className="sc-bdnylx dSMDDu DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 VwtAL"
+    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
