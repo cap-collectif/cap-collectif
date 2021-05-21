@@ -111,6 +111,7 @@ const firstTest = {
     isExternal: false,
     steps: [defaultClosedStep, openStep2, openStep1, defaultFutureStep],
     url: 'http://capco/show-link',
+    archived: false,
   },
 };
 
@@ -151,6 +152,7 @@ const secondTest = {
       },
       defaultFutureStep,
     ],
+    archived: false,
   },
 };
 
@@ -164,6 +166,7 @@ const thirdTest = {
     externalLink: null,
     url: 'http://capco/show-link',
     steps: [futureStep1, futureStep2],
+    archived: false,
   },
 };
 
@@ -177,6 +180,7 @@ const fourthTest = {
     externalLink: 'http://test.com',
     url: 'http://capco/show-link',
     steps: [closedStepComplete1, closedStepComplete2],
+    archived: false,
   },
   hasSecondTitle: true,
 };
@@ -191,6 +195,7 @@ const fifthTest = {
     externalLink: 'http://test.com',
     url: 'http://capco/show-link',
     steps: [defaultClosedStep, openStep2, openStep1, defaultFutureStep],
+    archived: false,
   },
 };
 
@@ -204,6 +209,21 @@ const sixthTest = {
     externalLink: 'http://test.com',
     url: 'http://capco/show-link',
     steps: [closedStepComplete1, closedStepComplete2, futureStep1],
+    archived: false,
+  },
+};
+
+const archivedProjectProps = {
+  project: {
+    $refType,
+    $fragmentRefs,
+    id: '1',
+    title: 'Name of my project',
+    isExternal: true,
+    externalLink: 'http://test.com',
+    url: 'http://capco/show-link',
+    steps: [],
+    archived: true,
   },
 };
 
@@ -235,6 +255,11 @@ describe('<ProjectPreviewBody />', () => {
 
   it('should render correctly project preview body & elements for closed step which remains a current step', () => {
     const wrapper = shallow(<ProjectPreviewBody {...sixthTest} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly project preview body & elements when project is archived', () => {
+    const wrapper = shallow(<ProjectPreviewBody {...archivedProjectProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

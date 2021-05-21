@@ -49,11 +49,17 @@ describe('<ProjectCard />', () => {
     externalParticipantsCount: null,
     externalContributionsCount: null,
     externalVotesCount: null,
+    archived: false,
     visibility: 'PUBLIC',
     isVotesCounterDisplayable: true,
     isContributionsCounterDisplayable: true,
     isParticipantsCounterDisplayable: true,
   };
+
+  const archivedProject = {
+    ...project,
+    archived: true
+  }
 
   const projectWithoutCover = {
     ...project,
@@ -124,6 +130,13 @@ describe('<ProjectCard />', () => {
   it('should render correctly an external project', () => {
     const wrapper = shallow(
       <ProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} project={externalProject} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly an archived project', () => {
+    const wrapper = shallow(
+      <ProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} project={archivedProject} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

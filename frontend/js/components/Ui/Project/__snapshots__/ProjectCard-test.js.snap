@@ -20,6 +20,7 @@ exports[`<ProjectCard /> should render correctly 1`] = `
   >
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
+      _css2={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -142,6 +143,178 @@ exports[`<ProjectCard /> should render correctly 1`] = `
 </ProjectCard___StyledAppBox>
 `;
 
+exports[`<ProjectCard /> should render correctly an archived project 1`] = `
+<ProjectCard___StyledAppBox
+  as="a"
+  display="grid"
+  height="100%"
+  href="http://capco/project1"
+  width="100%"
+>
+  <Card
+    bg="white"
+    border="unset"
+    boxShadow="small"
+    display="flex"
+    flexDirection="column"
+    overflow="hidden"
+    p={0}
+    position="relative"
+  >
+    <ProjectCard___StyledAppBox2
+      _css="url(/cover.jpg)"
+      _css2="grayscale(1)"
+      overflow="hidden"
+      position="relative"
+      pt="66.66%"
+      width="100%"
+    />
+    <ProjectCardutils___StyledFlex
+      _css3={[Function]}
+      left={
+        Array [
+          2,
+          4,
+        ]
+      }
+      top={
+        Array [
+          2,
+          4,
+        ]
+      }
+    >
+      <Tag
+        mr={1}
+        variant="neutral-gray"
+      >
+        <Text
+          as="span"
+          fontSize={1}
+          fontWeight="700"
+          lineHeight="sm"
+        >
+          global-archived
+        </Text>
+      </Tag>
+    </ProjectCardutils___StyledFlex>
+    <ForwardRef
+      bg="white"
+      direction="column"
+      flex={1}
+      m={4}
+      overflow="hidden"
+    >
+      <Heading
+        as="h4"
+        color="gray.500"
+        fontWeight="semibold"
+        lineHeight="base"
+        mb={4}
+        truncate={100}
+      >
+        Name of my project
+      </Heading>
+      <ForwardRef
+        direction="column"
+        height="100%"
+        justifyContent="space-between"
+      >
+        <ForwardRef
+          color="neutral-gray.700"
+          direction="row"
+          flexWrap="wrap"
+        >
+          <ForwardRef
+            alignItems="center"
+            direction="row"
+            maxWidth="100%"
+            mb={2}
+            mr={2}
+          >
+            <Icon
+              mr={1}
+              name="BOOK_STAR_O"
+              size="md"
+            />
+            <ProjectCardutils___StyledText
+              _css="#ABABAB"
+              as="span"
+            >
+              Debat
+            </ProjectCardutils___StyledText>
+          </ForwardRef>
+           
+        </ForwardRef>
+        <ForwardRef
+          direction="row"
+          mt={4}
+          spacing={8}
+        >
+          <ForwardRef
+            alignItems="center"
+            direction="row"
+          >
+            <Icon
+              color="gray.500"
+              mr={1}
+              name="THUMB_UP_O"
+              size="md"
+            />
+            <Text
+              color="gray.500"
+              fontSize={14}
+            >
+              <FormattedNumber
+                number={32}
+              />
+            </Text>
+          </ForwardRef>
+          <ForwardRef
+            alignItems="center"
+            direction="row"
+          >
+            <Icon
+              color="gray.500"
+              mr={1}
+              name="BUBBLE_O"
+              size="md"
+            />
+            <Text
+              color="gray.500"
+              fontSize={14}
+            >
+              <FormattedNumber
+                number={10}
+              />
+            </Text>
+          </ForwardRef>
+          <ForwardRef
+            alignItems="center"
+            direction="row"
+          >
+            <Icon
+              color="gray.500"
+              mr={1}
+              name="USER_O"
+              size="md"
+            />
+            <Text
+              color="gray.500"
+              fontSize={14}
+            >
+              <FormattedNumber
+                number={17}
+              />
+            </Text>
+          </ForwardRef>
+        </ForwardRef>
+      </ForwardRef>
+    </ForwardRef>
+  </Card>
+</ProjectCard___StyledAppBox>
+`;
+
 exports[`<ProjectCard /> should render correctly an external project 1`] = `
 <ProjectCard___StyledAppBox
   as="a"
@@ -162,6 +335,7 @@ exports[`<ProjectCard /> should render correctly an external project 1`] = `
   >
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
+      _css2={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -304,6 +478,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
   >
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
+      _css2={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -475,6 +650,7 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
   >
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
+      _css2={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -682,6 +858,7 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
   >
     <ProjectCard___StyledAppBox2
       _css="#e5e5e5"
+      _css2={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -857,6 +1034,7 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
   >
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
+      _css2={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"

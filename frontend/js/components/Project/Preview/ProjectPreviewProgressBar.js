@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Progress } from '../../Ui/FeedbacksIndicators/Progress';
+import { Progress } from '~ui/FeedbacksIndicators/Progress';
 import type { ProjectPreviewProgressBar_project } from '~relay/ProjectPreviewProgressBar_project.graphql';
 import type {
   StepState,
@@ -25,18 +25,23 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     }
   };
 
-  getClass = (state: StepState) => {
+  getClass = (state: StepState, archived: boolean) => {
     const { isCurrentStep } = this.props;
 
+    if ((state === 'CLOSED' && !isCurrentStep) || archived) {
+      return 'progress-bar_grey';
+    }
     if (state === 'FUTURE') {
       return 'progress-bar_empty';
     }
-    if (state === 'CLOSED' && !isCurrentStep) {
-      return 'progress-bar_grey';
-    }
   };
 
-  getLabel = (step: ProjectPreviewProgressBar_actualStep) => {
+  getLabel = (step: ProjectPreviewProgressBar_actualStep, archived: boolean) => {
+
+    if (archived) {
+      return <FormattedMessage id="global-archived" />;
+    }
+
     const { isCurrentStep } = this.props;
 
     if (step.timeless === true) {
@@ -53,10 +58,11 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     }
   };
 
-  getWidth = (step: ProjectPreviewProgressBar_actualStep) => {
+  getWidth = (step: ProjectPreviewProgressBar_actualStep, archived: boolean) => {
     const { isCurrentStep } = this.props;
 
     if (
+      archived ||
       (step.state === 'CLOSED' && !isCurrentStep) ||
       step.state === 'FUTURE' ||
       step.timeless === true
@@ -78,10 +84,10 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
       return (
         <Progress>
           <ProgressBar
-            className={this.getClass(actualStep.state)}
+            className={this.getClass(actualStep.state, project.archived)}
             bsStyle={this.getStyle(actualStep.state)}
-            now={this.getWidth(actualStep)}
-            label={this.getLabel(actualStep)}
+            now={this.getWidth(actualStep, project.archived)}
+            label={this.getLabel(actualStep, project.archived)}
           />
         </Progress>
       );
@@ -96,6 +102,7 @@ export default createFragmentContainer(ProjectPreviewProgressBar, {
       steps {
         id
       }
+      archived
     }
   `,
   actualStep: graphql`

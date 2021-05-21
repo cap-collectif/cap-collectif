@@ -245,6 +245,11 @@ class Project implements IndexableInterface
      */
     private $externalVotesCount;
 
+    /**
+     * @ORM\Column(name="archived", type="boolean", nullable=false, options={"default" = false})
+     */
+    private bool $archived = false;
+
     public function __construct()
     {
         $this->restrictedViewerGroups = new ArrayCollection();
@@ -1290,5 +1295,20 @@ class Project implements IndexableInterface
 
         return \in_array($this->getVisibility(), $viewerVisibility) &&
             $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @return Project
+     */
+    public function setArchived(bool $archived): self
+    {
+        $this->archived = $archived;
+
+        return $this;
     }
 }

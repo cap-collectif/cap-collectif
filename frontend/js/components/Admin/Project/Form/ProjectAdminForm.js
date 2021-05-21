@@ -136,6 +136,7 @@ const onSubmit = (
     steps,
     locale,
     restrictedViewerGroups,
+    archived
   }: FormValues,
   dispatch: Dispatch,
   props: Props,
@@ -272,6 +273,7 @@ const onSubmit = (
         })
       : [],
     locale: locale ? locale.value : null,
+    archived
   };
 
   if (props.project) {
@@ -372,6 +374,7 @@ const validate = (values: FormValues) => {
     externalContributionsCount,
     steps,
     locale,
+    archived
   } = values;
   return {
     ...validateSteps({ steps }),
@@ -392,7 +395,7 @@ const validate = (values: FormValues) => {
       externalParticipantsCount,
       externalContributionsCount,
     }),
-    ...validatePublish({ publishedAt, locale }),
+    ...validatePublish({ publishedAt, locale, archived }),
   };
 };
 
@@ -466,6 +469,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
   return {
     features: state.default.features,
     initialValues: {
+      archived: project?.archived,
       authors: project ? project.authors : [],
       title: project ? project.title : null,
       projectType: project && project.type ? project.type.id : null,
@@ -563,6 +567,7 @@ export default createFragmentContainer(injectIntl(container), {
       id
       title
       metaDescription
+      archived
       authors {
         value: id
         label: username

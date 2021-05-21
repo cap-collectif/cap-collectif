@@ -2,8 +2,10 @@
 
 exports[`<ProjectPreviewCounter /> should not render without value 1`] = `""`;
 
-exports[`<ProjectPreviewCounter /> should render correctly with value 1`] = `
-<Tag>
+exports[`<ProjectPreviewCounter /> should render correctly when project is archived 1`] = `
+<ProjectPreviewCounter__StyledTag
+  archived={true}
+>
   32
    
   <FormattedMessage
@@ -14,11 +16,29 @@ exports[`<ProjectPreviewCounter /> should render correctly with value 1`] = `
       }
     }
   />
-</Tag>
+</ProjectPreviewCounter__StyledTag>
+`;
+
+exports[`<ProjectPreviewCounter /> should render correctly with value 1`] = `
+<ProjectPreviewCounter__StyledTag
+  archived={false}
+>
+  32
+   
+  <FormattedMessage
+    id="test"
+    values={
+      Object {
+        "num": "32",
+      }
+    }
+  />
+</ProjectPreviewCounter__StyledTag>
 `;
 
 exports[`<ProjectPreviewCounter /> should render render an icon with icon value 1`] = `
-<Tag
+<ProjectPreviewCounter__StyledTag
+  archived={false}
   icon="cap cap-icon"
 >
   1
@@ -31,11 +51,13 @@ exports[`<ProjectPreviewCounter /> should render render an icon with icon value 
       }
     }
   />
-</Tag>
+</ProjectPreviewCounter__StyledTag>
 `;
 
 exports[`<ProjectPreviewCounter /> should render with showZero = true 1`] = `
-<Tag>
+<ProjectPreviewCounter__StyledTag
+  archived={false}
+>
   0
    
   <FormattedMessage
@@ -46,5 +68,5 @@ exports[`<ProjectPreviewCounter /> should render with showZero = true 1`] = `
       }
     }
   />
-</Tag>
+</ProjectPreviewCounter__StyledTag>
 `;

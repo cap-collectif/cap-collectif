@@ -3062,6 +3062,9 @@ input CreateAlphaProjectInput {
 
   """Groups id."""
   restrictedViewerGroups: [ID!]
+
+  """if it is archived"""
+  archived: Boolean!
   clientMutationId: String
 }
 
@@ -8209,6 +8212,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The current step of the step timeline."""
   currentStep: Step
+
+  """if it is archived"""
+  archived: Boolean!
 }
 
 """A project abstract step."""
@@ -13298,6 +13304,9 @@ input UpdateAlphaProjectInput {
 
   """Groups id."""
   restrictedViewerGroups: [ID!]
+
+  """if it is archived"""
+  archived: Boolean!
   clientMutationId: String
   projectId: ID!
 }

@@ -10,22 +10,33 @@ import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import { LineHeight } from '~ui/Primitives/constants';
 import Tag, { type TagVariant } from '~ds/Tag/Tag';
 import FormattedNumber from '~/components/Utils/FormattedNumber';
+import colors from '~/styles/modules/colors';
 
-export const formatCounter = (iconName: string, count: number) => (
+export const formatCounter = (iconName: string, count: number, archived: boolean) => (
   <Flex direction="row" alignItems="center">
-    <Icon name={ICON_NAME[iconName]} size={ICON_SIZE.MD} color="gray.700" mr={1} />
-    <Text fontSize={14} color="gray.900">
+    <Icon
+      name={ICON_NAME[iconName]}
+      size={ICON_SIZE.MD}
+      color={archived ? 'gray.500' : 'gray.700'}
+      mr={1}
+    />
+    <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'}>
       <FormattedNumber number={count} />
     </Text>
   </Flex>
 );
 
-export const formatInfo = (iconName: string, text: string, color?: string) => (
+export const formatInfo = (iconName: string, text: string, archived: boolean, color?: string) => (
   <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
     <Icon name={ICON_NAME[iconName]} size={ICON_SIZE.MD} mr={1} />
     <Text
       as="span"
-      css={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color }}>
+      css={{
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        color: archived ? colors['neutral-gray']['400'] : color,
+      }}>
       {text}
     </Text>
   </Flex>
@@ -61,6 +72,9 @@ export const renderTag = (
       {isRestricted && restrictedTag()}
     </Flex>
   );
+
+  if (project.archived) return tag('neutral-gray', intl.formatMessage({ id: 'global-archived' }));
+
   const isRestricted = project.visibility !== 'PUBLIC';
   const now = moment();
   const publishedTime = now.diff(moment(project.publishedAt), 'hours');

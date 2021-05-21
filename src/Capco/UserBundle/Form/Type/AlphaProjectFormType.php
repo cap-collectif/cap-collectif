@@ -14,6 +14,7 @@ use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -86,7 +87,8 @@ class AlphaProjectFormType extends AbstractType
                 'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('visibility')
-            ->add('opinionCanBeFollowed');
+            ->add('opinionCanBeFollowed')
+            ->add('archived', CheckboxType::class);
 
         $builder->addEventSubscriber(new ProjectDistrictsFieldSubscriber($this->persister));
 

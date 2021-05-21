@@ -15,8 +15,16 @@ const props = {
     externalContributionsCount: 234,
     externalVotesCount: 534,
     externalParticipantsCount: 54,
+    archived: false
   },
 };
+
+const archivedProjectProps = {
+  project: {
+    ...props.project,
+    archived: true
+  }
+}
 
 const propsWithoutCounter = {
   project: {
@@ -27,6 +35,7 @@ const propsWithoutCounter = {
     externalContributionsCount: 234,
     externalVotesCount: null,
     externalParticipantsCount: 0,
+    archived: false
   },
 };
 
@@ -38,6 +47,11 @@ describe('<ProjectPreviewProgressBar />', () => {
 
   it('should render correctly an external project without counter of votes but with participants', () => {
     const wrapper = shallow(<ProjectPreviewExternalCounters {...propsWithoutCounter} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly an archived external project', () => {
+    const wrapper = shallow(<ProjectPreviewExternalCounters {...archivedProjectProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

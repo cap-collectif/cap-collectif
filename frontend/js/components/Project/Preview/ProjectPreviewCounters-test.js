@@ -27,8 +27,16 @@ const props = {
     type: {
       title: 'project.types.interpellation',
     },
+    archived: false
   },
 };
+
+const archivedProjectProps = {
+  project: {
+    ...props.project,
+    archived: true
+  }
+}
 
 const propsWithDistricts = {
   project: {
@@ -57,6 +65,7 @@ const propsWithDistricts = {
     type: {
       title: 'global.consultation',
     },
+    archived: false
   },
 };
 
@@ -67,6 +76,10 @@ describe('<ProjectPreviewCounters />', () => {
   });
   it('should render correctly counters with districts', () => {
     const wrapper = shallow(<ProjectPreviewCounters {...propsWithDistricts} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly counters when project is archived', () => {
+    const wrapper = shallow(<ProjectPreviewCounters {...archivedProjectProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

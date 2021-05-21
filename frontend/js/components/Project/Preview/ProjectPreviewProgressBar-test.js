@@ -15,8 +15,17 @@ const props = {
       { id: 'closed step' },
       { id: 'future step' },
     ],
+    archived: false
   },
 };
+
+const archivedProjectProps = {
+  ...props,
+  project: {
+    ...props.project,
+    archived: true
+  }
+}
 
 const openStep = {
   actualStep: {
@@ -83,6 +92,10 @@ describe('<ProjectPreviewProgressBar />', () => {
   });
   it('should render correctly progress bar for closed step which remains a current step', () => {
     const wrapper = shallow(<ProjectPreviewProgressBar {...props} {...closedAndCurrentStep} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly progress bar for archived project', () => {
+    const wrapper = shallow(<ProjectPreviewProgressBar {...archivedProjectProps} {...openStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

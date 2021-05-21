@@ -292,6 +292,7 @@ Scenario: GraphQL client wants to update project with empty group in custom view
                 }
               }
             }
+            archived
           }
         }
       }",
@@ -315,7 +316,8 @@ Scenario: GraphQL client wants to update project with empty group in custom view
           "steps": [],
           "districts": [],
           "projectId": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
-          "restrictedViewerGroups": []
+          "restrictedViewerGroups": [],
+          "archived": false
         }
       }
     }
@@ -368,6 +370,7 @@ Scenario: GraphQL client wants to update project with votesMin greater than vote
                 votesLimit
               }
             }
+            archived
           }
         }
       }",
@@ -417,7 +420,8 @@ Scenario: GraphQL client wants to update project with votesMin greater than vote
             ],
             "districts":[
 
-            ]
+            ],
+            "archived": false
          }
       }
     }
@@ -470,6 +474,7 @@ Scenario: GraphQL client wants to update project with votesMin below 1
                 votesLimit
               }
             }
+            archived
           }
         }
       }",
@@ -519,7 +524,8 @@ Scenario: GraphQL client wants to update project with votesMin below 1
             ],
             "districts":[
 
-            ]
+            ],
+            "archived": false
          }
       }
     }

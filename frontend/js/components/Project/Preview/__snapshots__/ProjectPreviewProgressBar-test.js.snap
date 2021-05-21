@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for archived project 1`] = `
+<Progress>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    bsStyle="success"
+    className="progress-bar_grey"
+    isChild={false}
+    label={
+      <FormattedMessage
+        id="global-archived"
+        values={Object {}}
+      />
+    }
+    max={100}
+    min={0}
+    now={100}
+    srOnly={false}
+    striped={false}
+  />
+</Progress>
+`;
+
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for closed step 1`] = `
 <Progress>
   <ProgressBar

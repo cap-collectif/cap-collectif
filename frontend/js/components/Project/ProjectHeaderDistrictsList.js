@@ -4,6 +4,7 @@ import { Modal, Button, ListGroupItem } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
+import colors from '~/styles/modules/colors';
 
 import InlineList from '../Ui/List/InlineList';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
@@ -23,6 +24,7 @@ const DistrictsButton = styled(Button)`
   font-size: ${props => props.fontSize}px;
   padding: 0;
   vertical-align: baseline;
+  color: ${props => props.archived ? `${colors['neutral-gray']['500']} !important` : null}
 `;
 
 export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
@@ -59,7 +61,9 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
             fontSize={fontSize}
             bsStyle="link"
             onClick={this.handleShow}
-            className="p-0 project-districts__modal-link">
+            className="p-0 project-districts__modal-link"
+            archived={project.archived}
+          >
             {project.districts.edges[0]?.node?.name}{' '}
             <FormattedMessage
               id="and-count-other-areas"
@@ -104,6 +108,7 @@ export default createFragmentContainer(ProjectHeaderDistrictsList, {
           }
         }
       }
+      archived
     }
   `,
 });

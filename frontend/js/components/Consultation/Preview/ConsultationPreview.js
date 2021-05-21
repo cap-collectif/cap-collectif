@@ -52,18 +52,21 @@ export const ConsultationPreviewBody = ({
             label="project.preview.counters.contributions"
             showZero
             icon="cap-baloon-1"
+            archived={false}
           />
           <ProjectPreviewCounter
             value={votesCount || 0}
             label="project.preview.counters.votes"
             icon="cap-hand-like-2-1"
             showZero
+            archived={false}
           />
           <ProjectPreviewCounter
             value={(contributors && contributors.totalCount) || 0}
             label="project.preview.counters.contributors"
             showZero
             icon="cap-user-2-1"
+            archived={false}
           />
         </TagsList>
       </div>

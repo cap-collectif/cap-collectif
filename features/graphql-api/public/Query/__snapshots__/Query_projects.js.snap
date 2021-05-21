@@ -8,6 +8,26 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 196,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 196,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
+          "title": "Débat du mois",
+          "votes": Object {
+            "totalCount": 530,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 2,
           },
           "contributionsCount": 0,
@@ -25,7 +45,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -45,7 +65,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -65,7 +85,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 9,
@@ -84,32 +104,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 16,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
-          "title": "Débats sur la vie",
-          "votes": Object {
-            "totalCount": 16,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 36,
+    "totalCount": 37,
   },
 }
 `;
@@ -209,7 +209,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 33,
+    "totalCount": 34,
   },
 }
 `;
@@ -220,6 +220,26 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/archived.jpeg",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=",
+          "title": "Projet Archivé",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
             "totalCount": 196,
@@ -239,7 +259,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -259,7 +279,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -279,7 +299,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -298,32 +318,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 9,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 15,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
-          "title": "Débat sur le cannabis",
-          "votes": Object {
-            "totalCount": 19,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 33,
+    "totalCount": 34,
   },
 }
 `;

@@ -1401,6 +1401,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "archived",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "User",
                         "kind": "LinkedField",
                         "name": "authors",
@@ -1790,7 +1797,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "dee88f7352786683ac2f394bf882c5b7",
+        "cacheID": "1e8bee97f9a285a6a1ca51c69839433b",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1846,6 +1853,7 @@ fragment ProjectAdminForm_project on Project {
   id
   title
   metaDescription
+  archived
   authors {
     value: id
     label: username
@@ -2182,6 +2190,7 @@ fragment ProjectPublishAdminForm_project on Project {
     id
   }
   url
+  archived
 }
 
 fragment ProjectStepAdminItemStep_project on Project {
@@ -3616,6 +3625,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "archived",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "User",
                         "kind": "LinkedField",
                         "name": "authors",
@@ -4005,7 +4021,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "dee88f7352786683ac2f394bf882c5b7",
+        "cacheID": "1e8bee97f9a285a6a1ca51c69839433b",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -4061,6 +4077,7 @@ fragment ProjectAdminForm_project on Project {
   id
   title
   metaDescription
+  archived
   authors {
     value: id
     label: username
@@ -4397,6 +4414,7 @@ fragment ProjectPublishAdminForm_project on Project {
     id
   }
   url
+  archived
 }
 
 fragment ProjectStepAdminItemStep_project on Project {

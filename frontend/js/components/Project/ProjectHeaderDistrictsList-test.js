@@ -19,8 +19,17 @@ const props = {
         { node: { name: 'zone 3' } },
       ],
     },
+    archived: false
   },
 };
+
+const propsArchived = {
+  ...props,
+  project: {
+    ...props.project,
+    archived: true
+  }
+}
 
 const propsWithMoreDistricts = {
   breakingNumber: 3,
@@ -37,6 +46,7 @@ const propsWithMoreDistricts = {
         { node: { name: 'zone 5' } },
       ],
     },
+    archived: false
   },
 };
 
@@ -53,6 +63,12 @@ describe('<ProjectHeaderDistrictsList />', () => {
 
   it('should render correctly with the display of modal', () => {
     const wrapper = shallow(<ProjectHeaderDistrictsList {...propsWithMoreDistricts} />);
+    wrapper.setState({ show: true });
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when project is archived', () => {
+    const wrapper = shallow(<ProjectHeaderDistrictsList {...propsArchived} />);
     wrapper.setState({ show: true });
     expect(wrapper).toMatchSnapshot();
   });

@@ -70,18 +70,21 @@ exports[`<ConsultationPreviewBody /> should render correctly with a given consul
   >
     <TagsList>
       <ProjectPreviewCounter
+        archived={false}
         icon="cap-baloon-1"
         label="project.preview.counters.contributions"
         showZero={true}
         value={12}
       />
       <ProjectPreviewCounter
+        archived={false}
         icon="cap-hand-like-2-1"
         label="project.preview.counters.votes"
         showZero={true}
         value={0}
       />
       <ProjectPreviewCounter
+        archived={false}
         icon="cap-user-2-1"
         label="project.preview.counters.contributors"
         showZero={true}

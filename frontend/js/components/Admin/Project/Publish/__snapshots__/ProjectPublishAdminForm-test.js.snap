@@ -50,6 +50,23 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
           target="blank"
         />
       </ProjectAdminFormstyle__PermalinkWrapper>
+      <ForwardRef
+        alignItems="baseline"
+        justifyItems="center"
+      >
+        <Field
+          component={[Function]}
+          id="project-is-archived"
+          name="archived"
+          type="checkbox"
+        />
+        <Text>
+          <FormattedMessage
+            id="archive.project"
+            values={Object {}}
+          />
+        </Text>
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
@@ -132,6 +149,23 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
           /sku
         </a>
       </ProjectAdminFormstyle__PermalinkWrapper>
+      <ForwardRef
+        alignItems="baseline"
+        justifyItems="center"
+      >
+        <Field
+          component={[Function]}
+          id="project-is-archived"
+          name="archived"
+          type="checkbox"
+        />
+        <Text>
+          <FormattedMessage
+            id="archive.project"
+            values={Object {}}
+          />
+        </Text>
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
@@ -214,6 +248,23 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
           /sku
         </a>
       </ProjectAdminFormstyle__PermalinkWrapper>
+      <ForwardRef
+        alignItems="baseline"
+        justifyItems="center"
+      >
+        <Field
+          component={[Function]}
+          id="project-is-archived"
+          name="archived"
+          type="checkbox"
+        />
+        <Text>
+          <FormattedMessage
+            id="archive.project"
+            values={Object {}}
+          />
+        </Text>
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
@@ -269,6 +320,23 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
           target="blank"
         />
       </ProjectAdminFormstyle__PermalinkWrapper>
+      <ForwardRef
+        alignItems="baseline"
+        justifyItems="center"
+      >
+        <Field
+          component={[Function]}
+          id="project-is-archived"
+          name="archived"
+          type="checkbox"
+        />
+        <Text>
+          <FormattedMessage
+            id="archive.project"
+            values={Object {}}
+          />
+        </Text>
+      </ForwardRef>
     </div>
   </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>

@@ -218,3 +218,7 @@ InternalProject:
                 type: 'InternalStep'
                 description: 'The current step of the step timeline.'
                 resolve: '@=value.getCurrentStep()'
+            archived:
+                type: 'Boolean!'
+                description: 'if it is archived'
+                resolve: '@=value.isArchived()'

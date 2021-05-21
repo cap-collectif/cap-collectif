@@ -45,6 +45,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
                 value={project.externalContributionsCount}
                 label="project.preview.counters.contributions"
                 icon="cap-baloon-1"
+                archived={project.archived}
               />
             )}
           {project.externalVotesCount !== null && project.externalVotesCount !== undefined && (
@@ -53,6 +54,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
               value={project.externalVotesCount}
               label="project.preview.counters.votes"
               icon="cap-hand-like-2-1"
+              archived={project.archived}
             />
           )}
           {project.externalParticipantsCount !== null &&
@@ -62,6 +64,7 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
                 value={project.externalParticipantsCount}
                 label="project.preview.counters.contributors"
                 icon="cap-user-2-1"
+                archived={project.archived}
               />
             )}
 
@@ -80,6 +83,7 @@ export default createFragmentContainer(ProjectPreviewExternalCounters, {
       externalParticipantsCount
       externalContributionsCount
       externalVotesCount
+      archived
       ...ProjectRestrictedAccessFragment_project
     }
   `,

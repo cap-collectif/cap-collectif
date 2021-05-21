@@ -12,3 +12,5 @@ exports[`<ProjectPreview /> should render correctly project type 1`] = `
 `;
 
 exports[`<ProjectPreview /> should render correctly project with null type 1`] = `""`;
+
+exports[`<ProjectPreview /> should render correctly when project is archived 1`] = `""`;

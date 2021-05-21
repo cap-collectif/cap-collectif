@@ -167,6 +167,7 @@ const BASE_PROJECT = {
   opinionCanBeFollowed: true,
   steps: [],
   districts: [],
+  archived: false,
 };
 
 const BASE_SELECTION_STEP = {

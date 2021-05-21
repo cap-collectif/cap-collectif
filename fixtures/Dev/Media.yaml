@@ -416,3 +416,9 @@ Capco\MediaBundle\Entity\Media:
         name: imageCannabis
         category: '@MediaCategory1'
         providerReference: cannabis.jpg
+    imageArchived:
+        id: 'imageArchived'
+        binaryContent: archived.jpeg
+        name: imageArchived
+        category: '@MediaCategory1'
+        providerReference: archived.jpeg

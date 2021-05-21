@@ -36,6 +36,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
               label={contributionsLabel}
               showZero
               icon="cap-baloon-1"
+              archived={project.archived}
             />
           )}
           {showCounters && project.isVotesCounterDisplayable && (
@@ -43,6 +44,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
               value={project.votes.totalCount}
               label={votesLabel}
               icon="cap-hand-like-2-1"
+              archived={project.archived}
             />
           )}
           {showCounters && project.isParticipantsCounterDisplayable && (
@@ -51,11 +53,12 @@ export class ProjectPreviewCounters extends React.Component<Props> {
               label="project.preview.counters.contributors"
               showZero
               icon="cap-user-2-1"
+              archived={project.archived}
             />
           )}
           {project.districts && project.districts.totalCount > 0 && (
             <Tag icon="cap cap-marker-1-1">
-              <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1} />
+              <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1}/>
             </Tag>
           )}
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
@@ -69,6 +72,7 @@ export default createFragmentContainer(ProjectPreviewCounters, {
   project: graphql`
     fragment ProjectPreviewCounters_project on Project {
       id
+      archived
       districts {
         totalCount
         edges {

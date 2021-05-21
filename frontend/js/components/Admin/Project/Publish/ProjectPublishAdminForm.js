@@ -14,6 +14,8 @@ import {
   PermalinkWrapper,
   ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
 
 export type FormValues = {|
   publishedAt: string,
@@ -21,6 +23,7 @@ export type FormValues = {|
     label: string,
     value: string,
   |},
+  archived: boolean,
 |};
 
 type Props = {|
@@ -104,6 +107,17 @@ export const ProjectPublishAdminForm = ({ project, features }: Props) => (
             {project?.url}
           </a>
         </PermalinkWrapper>
+        <Flex justifyItems="center" alignItems="baseline">
+          <Field
+            id="project-is-archived"
+            type="checkbox"
+            name="archived"
+            component={renderComponent}
+          />
+          <Text>
+            <FormattedMessage id="archive.project" />
+          </Text>
+        </Flex>
       </div>
     </ProjectBoxContainer>
   </div>
@@ -118,6 +132,7 @@ export default createFragmentContainer(ProjectPublishAdminForm, {
         label: traductionKey
       }
       url
+      archived
     }
   `,
 });

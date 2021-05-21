@@ -1,23 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProjectPreviewCounters /> should render correctly counters when project is archived 1`] = `
+<div
+  className="mt-10"
+>
+  <TagsList>
+    <ProjectPreviewCounter
+      archived={true}
+      icon="cap-baloon-1"
+      label="project.preview.counters.interpellations"
+      showZero={true}
+      value={71}
+    />
+    <ProjectPreviewCounter
+      archived={true}
+      icon="cap-hand-like-2-1"
+      label="project.preview.counters.supports"
+      showZero={false}
+      value={48}
+    />
+    <ProjectPreviewCounter
+      archived={true}
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={60}
+    />
+    <Relay(ProjectRestrictedAccessFragment)
+      icon="cap-lock-2-1"
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
+          "archived": true,
+          "contributions": Object {
+            "totalCount": 71,
+          },
+          "contributors": Object {
+            "totalCount": 48,
+          },
+          "districts": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "hasParticipativeStep": true,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "isContributionsCounterDisplayable": true,
+          "isExternal": false,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "project.types.interpellation",
+          },
+          "votes": Object {
+            "totalCount": 48,
+          },
+        }
+      }
+    />
+  </TagsList>
+</div>
+`;
+
 exports[`<ProjectPreviewCounters /> should render correctly counters with districts 1`] = `
 <div
   className="mt-10"
 >
   <TagsList>
     <ProjectPreviewCounter
+      archived={false}
       icon="cap-baloon-1"
       label="project.preview.counters.contributions"
       showZero={true}
       value={89}
     />
     <ProjectPreviewCounter
+      archived={false}
       icon="cap-hand-like-2-1"
       label="project.preview.counters.votes"
       showZero={false}
       value={54}
     />
     <ProjectPreviewCounter
+      archived={false}
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
@@ -36,6 +104,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
             "anonymousVotes": Object {
               "totalCount": 12,
             },
+            "archived": false,
             "contributions": Object {
               "totalCount": 89,
             },
@@ -97,6 +166,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
           "anonymousVotes": Object {
             "totalCount": 12,
           },
+          "archived": false,
           "contributions": Object {
             "totalCount": 89,
           },
@@ -158,18 +228,21 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
 >
   <TagsList>
     <ProjectPreviewCounter
+      archived={false}
       icon="cap-baloon-1"
       label="project.preview.counters.interpellations"
       showZero={true}
       value={71}
     />
     <ProjectPreviewCounter
+      archived={false}
       icon="cap-hand-like-2-1"
       label="project.preview.counters.supports"
       showZero={false}
       value={48}
     />
     <ProjectPreviewCounter
+      archived={false}
       icon="cap-user-2-1"
       label="project.preview.counters.contributors"
       showZero={true}
@@ -184,6 +257,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
           "anonymousVotes": Object {
             "totalCount": 12,
           },
+          "archived": false,
           "contributions": Object {
             "totalCount": 71,
           },

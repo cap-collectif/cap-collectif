@@ -150,6 +150,13 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "archived",
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Project",
                 },
@@ -159,7 +166,7 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "92d3bdae71bc0640ee8faaf107888612",
+          "cacheID": "34342158177b1341e42c9a7587aeb9fc",
           "id": null,
           "metadata": Object {},
           "name": "ProjectHeaderDistrictsQuery",
@@ -184,6 +191,7 @@ fragment ProjectHeaderDistrictsList_project on Project {
       }
     }
   }
+  archived
 }
 ",
         },

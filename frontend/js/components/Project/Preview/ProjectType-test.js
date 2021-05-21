@@ -10,6 +10,7 @@ const defaultProps = {
   project: {
     $refType,
     type: null,
+    archived: false,
   },
 };
 
@@ -17,6 +18,14 @@ const projectWithType = {
   project: {
     $refType,
     type: { title: 'presentation', color: '#337ab7' },
+    archived: false,
+  },
+};
+
+const archivedProjectProps = {
+  project: {
+    ...defaultProps.project,
+    archived: true,
   },
 };
 
@@ -28,6 +37,11 @@ describe('<ProjectPreview />', () => {
 
   it('should render correctly project with null type', () => {
     const wrapper = shallow(<ProjectType {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when project is archived', () => {
+    const wrapper = shallow(<ProjectType {...archivedProjectProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

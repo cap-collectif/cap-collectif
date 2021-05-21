@@ -143,6 +143,7 @@ const BASE_PROJECT = {
   districts: [],
   coverFilterOpacityPercent: 60,
   headerType: 'FULL_WIDTH',
+  archived: false,
 };
 
 const BASE_SELECTION_STEP = {

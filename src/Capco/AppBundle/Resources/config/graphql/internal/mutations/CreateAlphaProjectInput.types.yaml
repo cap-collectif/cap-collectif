@@ -62,3 +62,6 @@ CreateAlphaProjectInput:
             restrictedViewerGroups:
                 type: '[ID!]'
                 description: 'Groups id.'
+            archived:
+                type: 'Boolean!'
+                description: 'if it is archived'

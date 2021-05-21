@@ -369,6 +369,16 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
         visibility: 2
+    projectArchived:
+        id: 'projectArchived'
+        title: Projet Archivé
+        projectType: '@projectType9'
+        Cover: '@imageArchived'
+        createdAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        updatedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        publishedAt: <identity((new \DateTime('2020-06-19 13:00:00')))>
+        visibility: 2
+        archived: true
     projectIdf3:
         id: 'projectIdf3'
         title: Budget Participatif IdF 3

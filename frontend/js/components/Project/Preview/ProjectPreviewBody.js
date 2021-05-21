@@ -5,6 +5,8 @@ import Truncate from 'react-truncate';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
+import colors from '~/styles/modules/colors';
 import RemainingTime from '../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
@@ -76,7 +78,10 @@ const getActualStep = (project: ProjectPreviewBody_project) => {
 };
 
 export class ProjectPreviewBody extends React.Component<Props> {
-  getAction = (step: Step) => {
+  getAction = (step: Step, archived: boolean) => {
+
+    if (archived) return null;
+
     const { project } = this.props;
 
     const isCurrentStep = getCurrentStep(project);
@@ -126,11 +131,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const link = project.externalLink || project.url;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
+    const Title = styled(Truncate)`
+      color: ${props => props.archived ? colors['neutral-gray']['500'] : '#00acc1'}
+    `
     return (
       <OverlayTrigger placement="top" overlay={tooltip}>
         <a href={link} target={project.isExternal && project.externalLink ? 'blank' : ''}>
           <div style={{ width: '98%' }}>
-            <Truncate lines={3}>{project.title}</Truncate>
+            <Title lines={3} archived={project.archived} >{project.title}</Title>
           </div>
         </a>
       </OverlayTrigger>
@@ -178,12 +186,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
           />
         )}
         <div className="small excerpt">
-          {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
+          {actualStep && this.getAction(actualStep, project.archived)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.state === 'OPENED' &&
             !actualStep.timeless &&
             actualStep.timeRange.endAt &&
-            this.actualStepIsParticipative() && (
+            this.actualStepIsParticipative() &&
+            !project.archived &&
+            (
               <RemainingTime endAt={actualStep.timeRange.endAt} />
             )}
         </div>
@@ -215,6 +225,7 @@ export default createFragmentContainer(ProjectPreviewBody, {
           votable
         }
       }
+      archived
       ...ProjectPreviewProgressBar_project
       ...ProjectPreviewCounters_project
       ...ProjectPreviewExternalCounters_project

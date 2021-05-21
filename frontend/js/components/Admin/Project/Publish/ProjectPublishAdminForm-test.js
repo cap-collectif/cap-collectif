@@ -37,6 +37,7 @@ describe('<ProjectPublishAdminForm />', () => {
         url: '/sku',
         publishedAt: '18/08/1998',
         locale: null,
+        archived: false
       },
       features,
     };
@@ -57,6 +58,7 @@ describe('<ProjectPublishAdminForm />', () => {
           value: 'locale-en-GB',
           label: 'french',
         },
+        archived: false,
       },
       features,
     };

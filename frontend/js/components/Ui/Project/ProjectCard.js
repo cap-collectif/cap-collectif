@@ -52,6 +52,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
           css={{
             background: project.cover?.url ? `url(${project.cover?.url})` : backgroundColor,
             backgroundSize: 'cover',
+            filter: project.archived ? 'grayscale(1)' : null,
           }}
           position="relative"
           width="100%"
@@ -66,7 +67,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
             as="h4"
             fontWeight={FontWeight.Semibold}
             mb={4}
-            color="gray.900"
+            color={project.archived ? 'gray.500' : 'gray.900'}
             lineHeight={LineHeight.Base}>
             {project.title}
           </Heading>
@@ -77,6 +78,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                   formatInfo(
                     ICON_NAME.BOOK_STAR_O,
                     intl.formatMessage({ id: project.type.title }),
+                    project.archived,
                     project.type?.color,
                   )}{' '}
                 {project.districts &&
@@ -85,12 +87,14 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                     ICON_NAME.PIN_O,
                     project.districts.edges?.map(district => district?.node?.name).join(' • ') ||
                       '',
+                    project.archived,
                   )}
                 {project.themes &&
                   project.themes?.length > 0 &&
                   formatInfo(
                     ICON_NAME.FOLDER_O,
                     project.themes?.map(({ title }) => title).join(', ') || '',
+                    project.archived,
                   )}
               </Flex>
             )}
@@ -102,6 +106,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                   formatCounter(
                     ICON_NAME.THUMB_UP_O,
                     project.isExternal ? project.externalVotesCount || 0 : project.votes.totalCount,
+                    project.archived,
                   )) ||
                   null}
                 {(project.isContributionsCounterDisplayable &&
@@ -110,6 +115,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                     project.isExternal
                       ? project.externalContributionsCount || 0
                       : project.contributions.totalCount,
+                    project.archived,
                   )) ||
                   null}
                 {(project.isParticipantsCounterDisplayable &&
@@ -118,6 +124,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                     project.isExternal
                       ? project.externalParticipantsCount || 0
                       : project.contributors.totalCount + project.anonymousVotes.totalCount,
+                    project.archived,
                   )) ||
                   null}
               </Flex>
@@ -158,6 +165,7 @@ export default createFragmentContainer(
         isVotesCounterDisplayable
         isContributionsCounterDisplayable
         isParticipantsCounterDisplayable
+        archived
         votes {
           totalCount
         }
