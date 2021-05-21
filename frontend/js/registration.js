@@ -17,7 +17,6 @@ import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
 // import SynthesisEditBoxApp from './startup/SynthesisEditBoxApp'; // It returns null ?
 import ProposalPageApp from './startup/ProposalPageApp';
 import QuestionnaireStepPageApp from './startup/QuestionnaireStepPageApp';
-import ProjectStatsPageApp from './startup/ProjectStatsPageApp';
 import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
@@ -120,7 +119,6 @@ ReactOnRails.register({
   // SynthesisEditBoxApp,
   ProposalPageApp,
   QuestionnaireStepPageApp,
-  ProjectStatsPageApp,
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
   ConsultationPageApp,

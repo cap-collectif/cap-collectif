@@ -16,7 +16,6 @@ import OpinionPageApp from '../js/startup/OpinionPageApp';
 import CommentSectionApp from '../js/startup/CommentSectionApp';
 import ProposalPageApp from '../js/startup/ProposalPageApp';
 import QuestionnaireStepPageApp from '../js/startup/QuestionnaireStepPageApp';
-import ProjectStatsPageApp from '../js/startup/ProjectStatsPageApp';
 import ProposalVoteBasketWidgetApp from '../js/startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from '../js/startup/AlertBoxApp';
 import ConsultationPageApp from '../js/startup/ConsultationPageApp';
@@ -103,7 +102,6 @@ ReactOnRails.register({
   SynthesisEditBoxApp,
   ProposalPageApp,
   QuestionnaireStepPageApp,
-  ProjectStatsPageApp,
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
   ConsultationPageApp,

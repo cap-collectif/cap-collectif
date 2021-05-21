@@ -126,24 +126,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/stats", name="app_project_show_stats")
-     * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_stats.html.twig")
-     */
-    public function showStatsAction(Project $project)
-    {
-        $serializer = $this->get('serializer');
-
-        $steps = $this->projectStatResolver->getStepsWithStatsForProject($project);
-        $props = $serializer->serialize(
-            ['projectId' => $project->getId(), 'steps' => $steps],
-            'json'
-        );
-
-        return ['project' => $project, 'props' => $props, 'currentStep' => 'stats_step'];
-    }
-
-    /**
      * @Route("/projects/{projectSlug}/trashed", name="app_project_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Route("/consultations/{projectSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
