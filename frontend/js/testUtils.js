@@ -12,6 +12,14 @@ export const mockRandomValues = () => {
   global.Math.random = () => 0.5;
 };
 
+export const mockUrl = (url: string) => {
+  // https://stackoverflow.com/questions/54021037/how-to-mock-window-location-href-with-jest-vuejs
+  // $FlowFixMe assign new URL(...) to window.location because property location is not writable
+  delete window.location;
+  // $FlowFixMe assign new URL(...) to window.location because property location is not writable
+  window.location = new URL(url);
+};
+
 export const addsSupportForPortals = () => {
   // See: https://github.com/facebook/react/issues/11565
   // $FlowFixMe

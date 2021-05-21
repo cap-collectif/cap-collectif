@@ -2,24 +2,17 @@
 
 namespace spec\Capco\UserBundle\Security\Core\User;
 
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
-use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
-use Capco\UserBundle\Doctrine\UserManager;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\FranceConnect\FranceConnectMapper;
-use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
-use Capco\UserBundle\MonCompteParis\OpenAmClient;
-use Capco\UserBundle\OpenID\OpenIDExtraMapper;
-use Capco\UserBundle\Repository\UserRepository;
-use Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider;
-use Capco\UserBundle\Security\Core\User\OauthUserProvider;
-use FOS\UserBundle\Model\UserManagerInterface;
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\UserBundle\OpenID\OpenIDExtraMapper;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Capco\UserBundle\Repository\UserRepository;
+use Capco\UserBundle\OpenID\OpenIDResourceOwner;
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
+use Capco\UserBundle\Security\Core\User\OauthUserProvider;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 
 class OauthUserProviderSpec extends ObjectBehavior
 {
@@ -36,13 +29,159 @@ class OauthUserProviderSpec extends ObjectBehavior
         GroupMutation $groupMutation,
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository
     ) {
-        $this->beConstructedWith($userManager, $userRepository, $extraMapper, $indexer, [], $groupMutation, $franceConnectSSOConfigurationRepository);
+        $this->beConstructedWith(
+            $userManager,
+            $userRepository,
+            $extraMapper,
+            $indexer,
+            [],
+            $groupMutation,
+            $franceConnectSSOConfigurationRepository
+        );
     }
 
-    public function it_map(
+    public function it_load_new_openid_user(
         UserResponseInterface $response,
+        UserRepository $userRepository,
+        OpenIDResourceOwner $ressourceOwner,
+        UserManagerInterface $userManager,
+        User $user,
+        OpenIDExtraMapper $extraMapper
+    ) {
+        $this->generateGenericOpenIdResponse($response, $ressourceOwner);
+
+        // We try to find a user that match the criterias, but could not find one.
+        $userRepository
+            ->findByEmailOrAccessTokenOrUsername(
+                'openid_user@test.com',
+                'openid_access_token',
+                'openid_id'
+            )
+            ->willReturn(null);
+
+        $userManager
+            ->createUser()
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user->getId()->willReturn('<some uuid>');
+
+        // Here we assert right values are set for the user.
+        $user
+            ->setOpenId('openid_id')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setOpenIdAccessToken('openid_access_token')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setUsername('openid_user')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEmail('openid_user@test.com')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEnabled(true)
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $extraMapper->map($user, $response)->shouldBeCalled();
+
+        // We flush the new values.
+        $userManager->updateUser($user)->shouldBeCalled();
+
+        $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
+    public function it_load_existing_openid_user(
+        UserResponseInterface $response,
+        UserRepository $userRepository,
+        OpenIDResourceOwner $ressourceOwner,
+        UserManagerInterface $userManager,
         User $user
     ) {
+        $this->generateGenericOpenIdResponse($response, $ressourceOwner);
+
+        // We disable refresh user informations at every login
+        $ressourceOwner->isRefreshingUserInformationsAtEveryLogin()->willReturn(false);
+
+        // We try to find a user that match the criterias, and find one.
+        $userRepository
+            ->findByEmailOrAccessTokenOrUsername(
+                'openid_user@test.com',
+                'openid_access_token',
+                'openid_id'
+            )
+            ->willReturn($user);
+        $user->getId()->willReturn('<some uuid>');
+
+        // Here we assert right values are set for the user.
+        $user
+            ->setOpenId('openid_id')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setOpenIdAccessToken('openid_access_token')
+            ->shouldBeCalled()
+            ->willReturn($user);
+
+        // We flush the new values.
+        $userManager->updateUser($user)->shouldBeCalled();
+
+        $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
+    public function it_load_existing_openid_user_and_update_values(
+        UserResponseInterface $response,
+        UserRepository $userRepository,
+        OpenIDResourceOwner $ressourceOwner,
+        UserManagerInterface $userManager,
+        User $user,
+        OpenIDExtraMapper $extraMapper
+    ) {
+        $this->generateGenericOpenIdResponse($response, $ressourceOwner);
+
+        // We enable refresh user informations at every login
+        $ressourceOwner->isRefreshingUserInformationsAtEveryLogin()->willReturn(true);
+
+        // We try to find a user that match the criterias, and find one.
+        $userRepository
+            ->findByEmailOrAccessTokenOrUsername(
+                'openid_user@test.com',
+                'openid_access_token',
+                'openid_id'
+            )
+            ->willReturn($user);
+        $user->getId()->willReturn('<some uuid>');
+
+        // Here we assert right values are set for the user.
+        $user
+            ->setOpenId('openid_id')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setOpenIdAccessToken('openid_access_token')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setUsername('openid_user')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $user
+            ->setEmail('openid_user@test.com')
+            ->shouldBeCalled()
+            ->willReturn($user);
+        $extraMapper->map($user, $response)->shouldBeCalled();
+
+        // We flush the new values.
+        $userManager->updateUser($user)->shouldBeCalled();
+
+        $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
+    public function it_map(UserResponseInterface $response, User $user)
+    {
         $data = [];
         $data['given_name'] = 'toto';
         $data['family_name'] = 'ala';
@@ -72,13 +211,15 @@ class OauthUserProviderSpec extends ObjectBehavior
             'preferred_username' => false,
         ];
 
-        $this->map($user->getWrappedObject(), $response->getWrappedObject(), $allowedData)->shouldReturn($user);
+        $this->map(
+            $user->getWrappedObject(),
+            $response->getWrappedObject(),
+            $allowedData
+        )->shouldReturn($user);
     }
 
-    public function it_map_with_username(
-        UserResponseInterface $response,
-        User $user
-    ) {
+    public function it_map_with_username(UserResponseInterface $response, User $user)
+    {
         $data = [];
         $data['given_name'] = 'toto';
         $data['family_name'] = 'ala';
@@ -110,7 +251,22 @@ class OauthUserProviderSpec extends ObjectBehavior
             'preferred_username' => true,
         ];
 
-        $this->map($user->getWrappedObject(), $response->getWrappedObject(), $allowedData)->shouldReturn($user);
+        $this->map(
+            $user->getWrappedObject(),
+            $response->getWrappedObject(),
+            $allowedData
+        )->shouldReturn($user);
     }
 
+    private function generateGenericOpenIdResponse(
+        UserResponseInterface $response,
+        OpenIDResourceOwner $ressourceOwner
+    ) {
+        $ressourceOwner->getName()->willReturn('openid');
+        $response->getEmail()->willReturn('openid_user@test.com');
+        $response->getNickname()->willReturn('openid_user');
+        $response->getAccessToken()->willReturn('openid_access_token');
+        $response->getUsername()->willReturn('openid_id');
+        $response->getResourceOwner()->willReturn($ressourceOwner);
+    }
 }

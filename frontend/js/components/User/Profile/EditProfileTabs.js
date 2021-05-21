@@ -14,12 +14,13 @@ import { type EditProfileTabs_viewer } from '~relay/EditProfileTabs_viewer.graph
 import UserAvatar from '../UserAvatar';
 import UserLink from '../UserLink';
 import ChangePasswordForm from './ChangePasswordForm';
-import PersonalData from './PersonalData';
+import PersonalData, { occitanieUrl } from './PersonalData';
 import Profile from './Profile';
 import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
 import { loginWithOpenID } from '~/redux/modules/default';
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
+import config from '~/config';
 
 type Props = {|
   +features: FeatureToggles,
@@ -28,7 +29,9 @@ type Props = {|
   +viewer: EditProfileTabs_viewer,
 |};
 
-export const getHashKey = (hash: string) => {
+type TabKey = 'profile' | 'account' | 'personal-data' | 'password' | 'notifications' | 'followings';
+
+export const getHashKey = (hash: string): TabKey => {
   if (hash.indexOf('profile') !== -1) {
     return 'profile';
   }
@@ -50,20 +53,30 @@ export const getHashKey = (hash: string) => {
   return 'account';
 };
 
-export class EditProfileTabs extends Component<Props> {
-  getDefaultKey() {
-    const hash = typeof window !== 'undefined' ? window.location.hash : null;
-    if (hash) {
-      return getHashKey(hash);
-    }
-    return 'profile';
+const getDefaultActiveKey = (viewerSsoAllowToUpdateUsername: boolean): TabKey => {
+  const hash = config.canUseDOM ? window.location.hash : null;
+  if (hash) {
+    return getHashKey(hash);
   }
-
+  if (!viewerSsoAllowToUpdateUsername) {
+    return 'account';
+  }
+  return 'profile';
+};
+export class EditProfileTabs extends Component<Props> {
   render() {
     const { viewer, features, loginWithOpenId, languageList } = this.props;
 
+    // TODO this will be added to API, one day.
+    const viewerSsoAllowToUpdateUsername = window.location.hostname !== occitanieUrl;
+    // TODO this will be added to API, one day.
+    const viewerSsoAllowToUpdatePassword =
+      !features.login_paris && !loginWithOpenId && viewer.hasPassword;
+
     return (
-      <Tab.Container id="account-tabs" defaultActiveKey={this.getDefaultKey()}>
+      <Tab.Container
+        id="account-tabs"
+        defaultActiveKey={getDefaultActiveKey(viewerSsoAllowToUpdateUsername)}>
         <Row className="clearfix">
           <Col sm={4} md={3}>
             <Panel id="panel-account">
@@ -79,12 +92,14 @@ export class EditProfileTabs extends Component<Props> {
               </Panel.Heading>
               <ListGroup>
                 <Nav bsStyle="pills" stacked>
-                  <NavItem eventKey="profile" href="#profile">
-                    <ListGroupItem>
-                      <span className="icon cap-id-8" />
-                      <FormattedMessage id="user.profile.title" />
-                    </ListGroupItem>
-                  </NavItem>
+                  {viewerSsoAllowToUpdateUsername && (
+                    <NavItem eventKey="profile" href="#profile">
+                      <ListGroupItem>
+                        <span className="icon cap-id-8" />
+                        <FormattedMessage id="user.profile.title" />
+                      </ListGroupItem>
+                    </NavItem>
+                  )}
                   {!features.login_paris && (
                     <NavItem eventKey="account" href="#account">
                       <ListGroupItem>
@@ -99,7 +114,7 @@ export class EditProfileTabs extends Component<Props> {
                       <FormattedMessage id="data" />
                     </ListGroupItem>
                   </NavItem>
-                  {!features.login_paris && !loginWithOpenId && viewer.hasPassword && (
+                  {viewerSsoAllowToUpdatePassword && (
                     <NavItem eventKey="password" href="#password">
                       <ListGroupItem>
                         <span className="icon cap-key-1" />

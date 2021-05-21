@@ -24,6 +24,7 @@ class OpenIDPathMapper
 
                 break;
             case 'occitanie':
+            case 'occitanie-dedicated':
                 $this->instanceMapper = new OccitanieMapping();
 
                 break;

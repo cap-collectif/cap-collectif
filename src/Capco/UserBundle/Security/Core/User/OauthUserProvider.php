@@ -2,16 +2,16 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
-use Capco\UserBundle\OpenID\OpenIDExtraMapper;
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Util\ClassUtils;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Capco\UserBundle\Repository\UserRepository;
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
+use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 
 class OauthUserProvider extends FOSUBUserProvider
 {
@@ -45,14 +45,14 @@ class OauthUserProvider extends FOSUBUserProvider
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setterId = 'openid' === $service ? $setter : $setter.'Id';
-        $setterToken = $setter.'AccessToken';
+        $setter = 'set' . ucfirst($service);
+        $setterId = 'openid' === $service ? $setter : $setter . 'Id';
+        $setterToken = $setter . 'AccessToken';
 
         //we "disconnect" previously connected users
         if (
             null !==
-            ($previousUser = $this->userRepository->findByEmailOrAccessToken(
+            ($previousUser = $this->userRepository->findByEmailOrAccessTokenOrUsername(
                 $email,
                 $response->getAccessToken(),
                 $response->getUsername()
@@ -69,13 +69,14 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->userManager->updateUser($user);
     }
 
+    // TODO we need a unit test on France Connect behavior
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
-        $email = $response->getEmail() ?: 'twitter_'.$response->getUsername();
+        $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
         $username =
-            $response->getNickname() ?: $response->getFirstName().' '.$response->getLastName();
+            $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         // because, accounts created with FranceConnect can change their email
-        $user = $this->userRepository->findByEmailOrAccessToken(
+        $user = $this->userRepository->findByEmailOrAccessTokenOrUsername(
             $email,
             $response->getAccessToken(),
             $response->getUsername()
@@ -89,14 +90,23 @@ class OauthUserProvider extends FOSUBUserProvider
             $user->setEnabled(true);
         }
 
-        $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setterId = 'openid' === $service ? $setter : $setter.'Id';
-        $setterToken = $setter.'AccessToken';
+        $ressourceOwner = $response->getResourceOwner();
 
-        if ('openid' === $service && $isNewUser) {
-            $this->extraMapper->map($user, $response);
-        } elseif ('franceconnect' === $service && ($isNewUser || !$user->getFranceConnectId())) {
+        $serviceName = $ressourceOwner->getName();
+        $setter = 'set' . ucfirst($serviceName);
+        $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
+        $setterToken = $setter . 'AccessToken';
+
+        if ('openid' === $serviceName) {
+            $needMapping =
+                $isNewUser || $ressourceOwner->isRefreshingUserInformationsAtEveryLogin();
+            if ($needMapping) {
+                $user->setUsername($username);
+                $user->setEmail($email);
+                $this->extraMapper->map($user, $response);
+            }
+        }
+        if ('franceconnect' === $serviceName && ($isNewUser || !$user->getFranceConnectId())) {
             $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
 
             // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
@@ -111,20 +121,9 @@ class OauthUserProvider extends FOSUBUserProvider
             $this->indexer->finishBulk();
         }
         $this->groupMutation->createAndAddUserInGroup($user, 'SSO');
+        $this->groupMutation->createAndAddUserInGroup($user, 'SSO ' . $serviceName);
 
         return $user;
-    }
-
-    protected function randomString(int $length): string
-    {
-        $key = '';
-        $keys = array_merge(range(0, 9), range('a', 'Z'));
-
-        for ($i = 0; $i < $length; ++$i) {
-            $key .= $keys[array_rand($keys)];
-        }
-
-        return $key;
     }
 
     /**
@@ -174,10 +173,9 @@ class OauthUserProvider extends FOSUBUserProvider
         if ($allowedData['preferred_username'] && !empty($userInfoData['preferred_username'])) {
             $user->setUsername($userInfoData['preferred_username']);
         } else {
-            $user->setUsername($userInfoData['family_name'].' '.$firstName);
+            $user->setUsername($userInfoData['family_name'] . ' ' . $firstName);
         }
 
         return $user;
     }
-
 }

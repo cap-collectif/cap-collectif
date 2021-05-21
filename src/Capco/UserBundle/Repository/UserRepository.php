@@ -50,7 +50,7 @@ class UserRepository extends EntityRepository
         $qb->addSelect('media', 'userType')
             ->leftJoin('u.media', 'media')
             ->leftJoin('u.userType', 'userType')
-            ->addOrderBy("FIELD(u.id, :ids)")
+            ->addOrderBy('FIELD(u.id, :ids)')
             ->where('u.id IN (:ids)')
             ->setParameter('ids', $ids);
 
@@ -1113,7 +1113,7 @@ class UserRepository extends EntityRepository
         return array_map(fn(array $row) => $row['email'], $results);
     }
 
-    public function findByEmailOrAccessToken(
+    public function findByEmailOrAccessTokenOrUsername(
         string $email = '',
         string $accessToken = '',
         string $accessId = ''

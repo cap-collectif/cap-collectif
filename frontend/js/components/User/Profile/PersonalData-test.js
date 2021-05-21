@@ -4,6 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { PersonalData } from './PersonalData';
 import { intlMock, formMock, $fragmentRefs, $refType } from '../../../mocks';
+import { mockUrl } from '~/testUtils';
 
 describe('<PersonalData />', () => {
   const viewer1 = {
@@ -156,6 +157,10 @@ describe('<PersonalData />', () => {
     isFranceConnectAccount: false,
   };
 
+  afterEach(() => {
+    mockUrl('http://localhost');
+  });
+
   it('should render with full user', () => {
     const wrapper = shallow(<PersonalData {...props1} viewer={viewer1} />);
     wrapper.setState({
@@ -181,13 +186,7 @@ describe('<PersonalData />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render with personal data not editable', () => {
-    // https://stackoverflow.com/questions/54021037/how-to-mock-window-location-href-with-jest-vuejs
-    // $FlowFixMe assign new URL(...) to window.location because property location is not writable
-    delete window.location;
-    const url = 'https://jeparticipe.laregioncitoyenne.fr/fr/profile/edit-profile#personal-data';
-    // $FlowFixMe assign new URL(...) to window.location because property location is not writable
-    window.location = new URL(url);
-    expect(window.location.href).toEqual(url);
+    mockUrl('https://jeparticipe.laregioncitoyenne.fr/fr/profile/edit-profile#personal-data');
     expect(window.location.hostname).toEqual('jeparticipe.laregioncitoyenne.fr');
     const wrapper = shallow(<PersonalData {...props3} viewer={viewer3} />);
     wrapper.setState({

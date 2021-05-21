@@ -15,6 +15,44 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
     private $instanceName;
 
+    // TODO: please save this configuration in BO instead.
+    public function isRefreshingUserInformationsAtEveryLogin(): bool
+    {
+        switch ($this->getInstanceName()) {
+            case 'occitanie':
+            case 'occitanie-dedicated':
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    // TODO: please save this configuration in BO instead.
+    public function isUsingAuthorizationHeaderToGetAccessToken(): bool
+    {
+        switch ($this->getInstanceName()) {
+            case 'pe':
+            case 'parlons-energies':
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    // TODO: please save this configuration in BO instead.
+    public function getScope(): string
+    {
+        switch ($this->getInstanceName()) {
+            case 'carpentras':
+                return 'openid email family_name given_name';
+            case 'pe':
+            case 'parlons-energies':
+                return 'openid email givenName';
+            default:
+                return 'openid email profile';
+        }
+    }
+
     public function getUserInformation(
         array $accessToken,
         array $extraParameters = []
@@ -28,7 +66,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
     {
-        switch ($this->instanceName) {
+        switch ($this->getInstanceName()) {
             case 'pe':
             case 'parlons-energies':
                 $extraParameters = array_merge($extraParameters, [
@@ -46,17 +84,15 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     protected function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
+        $scope = $this->getScope();
 
-        $defaultScope = 'openid email profile';
-        $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-
-        switch ($this->instanceName) {
+        switch ($this->getInstanceName()) {
             case 'carpentras':
                 $resolver
                     ->setDefaults([
                         'state' => null,
                         'csrf' => true,
-                        'scope' => 'openid email family_name given_name',
+                        'scope' => $scope,
                     ])
                     ->setRequired('logout_url');
 
@@ -65,7 +101,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             case 'parlons-energies':
                 $resolver
                     ->setDefaults([
-                        'scope' => 'openid email givenName',
+                        'scope' => $scope,
                         'state' => null,
                         'csrf' => true,
                         'nonce' => $this->generateNonce(),
@@ -76,7 +112,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             default:
                 $resolver
                     ->setDefaults([
-                        'scope' => $defaultScope,
+                        'scope' => $scope,
                     ])
                     ->setRequired('logout_url');
 
@@ -88,29 +124,29 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         $headers = [];
 
-        switch ($this->instanceName) {
-            case 'pe':
-            case 'parlons-energies':
-                // Cf "use_authorization_to_get_token" option
-                $headers['Authorization'] =
-                    'Basic ' .
-                    base64_encode(
-                        $this->options['client_id'] . ':' . $this->options['client_secret']
-                    );
-                unset($parameters['client_id'], $parameters['client_secret']);
-
-                break;
-            default:
-                // TODO after hwi update, we will need to set this :
-                // $parameters['client_id'] = $this->options['client_id'];
-                // $parameters['client_secret'] = $this->options['client_secret'];
-                break;
+        if ($this->isUsingAuthorizationHeaderToGetAccessToken()) {
+            $headers['Authorization'] =
+                'Basic ' .
+                base64_encode($this->options['client_id'] . ':' . $this->options['client_secret']);
+            unset($parameters['client_id'], $parameters['client_secret']);
         }
+        // TODO after hwi update, we will need to set this :
+        // $parameters['client_id'] = $this->options['client_id'];
+        // $parameters['client_secret'] = $this->options['client_secret'];
 
         return $this->httpRequest(
             $url,
             http_build_query($parameters, null, '&', \PHP_QUERY_RFC3986),
             $headers
         );
+    }
+
+    private function getInstanceName(): string
+    {
+        if (!$this->instanceName) {
+            $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        }
+
+        return $this->instanceName;
     }
 }

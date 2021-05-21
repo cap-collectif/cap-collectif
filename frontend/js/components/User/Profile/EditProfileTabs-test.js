@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { EditProfileTabs, getHashKey } from './EditProfileTabs';
 import { features } from '../../../redux/modules/default';
 import { $fragmentRefs, $refType } from '../../../mocks';
+import { mockUrl } from '~/testUtils';
 
 describe('<EditProfileTabs />', () => {
   const globalProps = {
@@ -47,8 +48,22 @@ describe('<EditProfileTabs />', () => {
     loginWithOpenId: true,
   };
 
+  afterEach(() => {
+    mockUrl('http://localhost');
+  });
   it('should render all tabs', () => {
     const wrapper = shallow(<EditProfileTabs {...propsWithoutParis} {...globalProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("should not render profile tab, if sso doesn't allow to update username", () => {
+    mockUrl('https://jeparticipe.laregioncitoyenne.fr/fr/profile/edit-profile');
+    const wrapper = shallow(<EditProfileTabs {...propsWithoutParis} {...globalProps} />);
+
+    expect(window.location.hostname).toEqual('jeparticipe.laregioncitoyenne.fr');
+    expect(wrapper.find('[href="#profile"]').length).toEqual(0);
+    expect(wrapper.find({ defaultActiveKey: 'account' }).length).toEqual(1);
+
     expect(wrapper).toMatchSnapshot();
   });
 
