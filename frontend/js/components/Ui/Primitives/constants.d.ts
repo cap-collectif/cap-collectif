@@ -41,7 +41,6 @@ declare const Spacing: {
 }
 
 export {
-    FontSize,
     FontWeight,
     LineHeight,
     LetterSpacing,

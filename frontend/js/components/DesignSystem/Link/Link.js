@@ -96,7 +96,7 @@ const Link = React.forwardRef<LinkProps, HTMLElement>(
     }
 
     return (
-      <LinkInner as="a" ref={ref} href={href} variant={variantType} {...props}>
+      <LinkInner as="a" ref={ref} href={href} variant={variantType} {...(truncate && { title: innerText })} {...props}>
         {content}
       </LinkInner>
     );

@@ -8,10 +8,15 @@ export default {
   title: 'Design system/Accordion',
   component: Accordion,
   argTypes: {
-    defaultAccordion: { control: { type: 'text' }, description: 'Accordion item Id' },
+    defaultAccordion: {
+      control: {
+        type: 'text',
+      },
+      description: 'Accordion open by default',
+    },
     allowMultiple: {
       control: { type: 'boolean' },
-      description: 'true or false',
+      description: 'Allow to open multiple accordion at the same time',
       defaultValue: 'false',
     },
   },
