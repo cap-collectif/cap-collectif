@@ -10423,6 +10423,10 @@ type Query {
 
   """Return the platform analytics"""
   analytics(filter: QueryAnalyticsFilter!): PlatformAnalytics!
+  isEmailAlreadyTaken(
+    """Email to check."""
+    email: Email!
+  ): Boolean!
 }
 
 input QueryAnalyticsFilter {

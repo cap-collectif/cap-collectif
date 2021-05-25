@@ -517,3 +517,10 @@ InternalQuery:
                 args:
                     filter:
                         type: 'InternalQueryAnalyticsFilter!'
+            isEmailAlreadyTaken:
+                type: 'Boolean!'
+                args:
+                    email:
+                        type: 'Email!'
+                        description: 'Email to check.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\IsEmailAlreadyTakenResolver", [args])'
