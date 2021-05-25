@@ -26,10 +26,11 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
 
             $this->saveAndIndex($debateArgument);
             $this->debateNotifier->sendArgumentConfirmation($debateArgument);
+            $token = $debateArgument->getToken();
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];
         }
 
-        return compact('debateArgument');
+        return compact('debateArgument', 'token');
     }
 }
