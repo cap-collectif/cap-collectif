@@ -41,6 +41,7 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
       }
       reverseStackOrder={false}
       stackOffset="none"
+      syncMethod="index"
     >
       <XAxis
         allowDataOverflow={false}
@@ -113,8 +114,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
         legendType="rect"
         maxBarSize={30}
         minPointSize={0}
-        onAnimationEnd={[Function]}
-        onAnimationStart={[Function]}
         xAxisId={0}
         yAxisId={0}
       >
@@ -167,6 +166,7 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
       }
       reverseStackOrder={false}
       stackOffset="none"
+      syncMethod="index"
     >
       <XAxis
         allowDataOverflow={false}
@@ -239,8 +239,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
         legendType="rect"
         maxBarSize={30}
         minPointSize={0}
-        onAnimationEnd={[Function]}
-        onAnimationStart={[Function]}
         xAxisId={0}
         yAxisId={0}
       >

@@ -40,6 +40,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
           reverseStackOrder={false}
           stackOffset="none"
           startAngle={0}
+          syncMethod="index"
         >
           <Legend
             align="right"
@@ -210,6 +211,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
           reverseStackOrder={false}
           stackOffset="none"
           startAngle={0}
+          syncMethod="index"
         >
           <Legend
             align="right"

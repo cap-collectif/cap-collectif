@@ -29,11 +29,10 @@ export type ChartsUrl = $ReadOnlyArray<{|
 
 export type ChartsRef = Array<{|
   +id: string,
-  +ref: any
-|}>
+  +ref: any,
+|}>;
 
 export class QuestionnaireAdminResults extends React.Component<Props> {
-  
   chartsRef: ChartsRef = [];
 
   getFormattedResults = (question: Object) => {
@@ -49,7 +48,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
         <QuestionnaireAdminResultMajority
           majorityQuestion={question}
           ref={el => {
-            this.chartsRef.push({id: question.id, ref: el})
+            this.chartsRef.push({ id: question.id, ref: el });
           }}
         />
       );
@@ -60,7 +59,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
         <QuestionnaireAdminResultsText
           simpleQuestion={question}
           ref={el => {
-            this.chartsRef.push({id: question.id, ref: el})
+            this.chartsRef.push({ id: question.id, ref: el });
           }}
         />
       );
@@ -84,7 +83,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
           multipleChoiceQuestion={question}
           backgroundColor={backgroundColor}
           innerRef={el => {
-            this.chartsRef.push({id: question.id, ref: el})
+            this.chartsRef.push({ id: question.id, ref: el });
           }}
         />
       );
@@ -96,7 +95,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
           multipleChoiceQuestion={question}
           backgroundColor={backgroundColor}
           innerRef={el => {
-            this.chartsRef.push({id: question.id, ref: el})
+            this.chartsRef.push({ id: question.id, ref: el });
           }}
         />
       );
@@ -107,7 +106,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
         <QuestionnaireAdminResultsRanking
           multipleChoiceQuestion={question}
           ref={el => {
-           this.chartsRef.push({id: question.id, ref: el})
+            this.chartsRef.push({ id: question.id, ref: el });
           }}
         />
       );

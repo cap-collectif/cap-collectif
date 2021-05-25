@@ -2,15 +2,15 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import {useDisclosure} from "@liinkiing/react-hooks";
+import { useDisclosure } from '@liinkiing/react-hooks';
 import Menu from '../DesignSystem/Menu/Menu';
 import Button from '~ds/Button/Button';
 import { ICON_NAME } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import type { QuestionnaireAdminResultsExportMenu_questionnaire } from '~relay/QuestionnaireAdminResultsExportMenu_questionnaire.graphql';
 import type { QuestionTypeValue } from '~relay/QuestionnaireAdminResults_questionnaire.graphql';
-import QuestionnaireAdminResultsPdfModal from "~/components/Questionnaire/QuestionnaireAdminResultsPdfModal";
-import type {ChartsRef} from "~/components/Questionnaire/QuestionnaireAdminResults";
+import QuestionnaireAdminResultsPdfModal from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModal';
+import type { ChartsRef } from '~/components/Questionnaire/QuestionnaireAdminResults';
 
 export type Translations = {|
   +attendee: string,
@@ -57,11 +57,10 @@ type Props = {|
 |};
 
 const QuestionnaireAdminResultsExportMenu = ({ questionnaire, logoUrl, chartsRef }: Props) => {
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const uniqueChartsRef = [...new Map(chartsRef.map(item =>
-    [item.id, item])).values()
+  const uniqueChartsRef = [
+    ...new Map(chartsRef.filter(item => item.ref).map(item => [item.id, item])).values(),
   ];
 
   return (
@@ -83,26 +82,23 @@ const QuestionnaireAdminResultsExportMenu = ({ questionnaire, logoUrl, chartsRef
             onClick={() => {
               setTimeout(() => {
                 onOpen();
-              }, 100)
-            }}
-          >
+              }, 100);
+            }}>
             <Text width="100%" height="100%">
               <FormattedMessage id="pdf-file" />
             </Text>
           </Menu.ListItem>
         </Menu.List>
       </Menu>
-      {
-        isOpen && (
-          <QuestionnaireAdminResultsPdfModal
-            onClose={onClose}
-            show={isOpen}
-            questionnaire={questionnaire}
-            logoUrl={logoUrl}
-            chartsRef={uniqueChartsRef}
-          />
-        )
-      }
+      {isOpen && (
+        <QuestionnaireAdminResultsPdfModal
+          onClose={onClose}
+          show={isOpen}
+          questionnaire={questionnaire}
+          logoUrl={logoUrl}
+          chartsRef={uniqueChartsRef}
+        />
+      )}
     </>
   );
 };

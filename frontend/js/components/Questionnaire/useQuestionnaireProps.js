@@ -1,16 +1,19 @@
 // @flow
-import {useIntl} from "react-intl";
-import {useEffect, useState} from "react";
-import moment from 'moment'
-import html2canvas from 'html2canvas'
-import type {ChartsRef, ChartsUrl} from "~/components/Questionnaire/QuestionnaireAdminResults";
-import type {QuestionnaireAdminResultsExportMenu_questionnaire} from "~relay/QuestionnaireAdminResultsExportMenu_questionnaire.graphql";
+import { useIntl, type IntlShape } from 'react-intl';
+import { useEffect, useState } from 'react';
+import moment from 'moment';
+import html2canvas from 'html2canvas';
+import type { ChartsRef, ChartsUrl } from '~/components/Questionnaire/QuestionnaireAdminResults';
+import type { QuestionnaireAdminResultsExportMenu_questionnaire } from '~relay/QuestionnaireAdminResultsExportMenu_questionnaire.graphql';
 import type {
   QuestionsType,
-  Translations
-} from "~/components/Questionnaire/QuestionnaireAdminResultsExportMenu";
+  Translations,
+} from '~/components/Questionnaire/QuestionnaireAdminResultsExportMenu';
 
-const generateTranslations = (questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire, intl): Translations => {
+const generateTranslations = (
+  questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire,
+  intl: IntlShape,
+): Translations => {
   const { anonymousAllowed, multipleRepliesAllowed, participants, step } = questionnaire;
 
   const isTimeless = step?.timeRange?.isTimeless;
@@ -57,13 +60,19 @@ const generateChartUrls = async (chartsRef: ChartsRef) => {
     if (ref instanceof Element) {
       return ref;
     }
+
+    // when it's a responsive container (recharts)
+    if (ref && ref.containerRef) {
+      return ref.containerRef.current;
+    }
+
     // when it is a recharts element
     return ref?.container;
   };
 
-  const chartUrlsPromises = chartsRef.map(async ({id, ref}) => {
+  const chartUrlsPromises = chartsRef.map(async ({ id, ref }) => {
     const element = getDomElement(ref);
-    const canvas = await html2canvas(element, {logging: false});
+    const canvas = await html2canvas(element, { logging: false });
     return {
       questionId: id,
       url: canvas.toDataURL(),
@@ -73,7 +82,11 @@ const generateChartUrls = async (chartsRef: ChartsRef) => {
   return Promise.all(chartUrlsPromises);
 };
 
-const generateQuestions = (chartUrls: ChartsUrl, questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire, intl): QuestionsType => {
+const generateQuestions = (
+  chartUrls: ChartsUrl,
+  questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire,
+  intl: IntlShape,
+): QuestionsType => {
   return questionnaire.questions.map(question => {
     const image = chartUrls?.find(img => img.questionId === question.id);
     if (image) {
@@ -96,15 +109,16 @@ const generateQuestions = (chartUrls: ChartsUrl, questionnaire: QuestionnaireAdm
   });
 };
 
-export const useQuestionnaireProps = (questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire , chartsRef: ChartsRef) => {
-
+export const useQuestionnaireProps = (
+  questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire,
+  chartsRef: ChartsRef,
+) => {
   const intl = useIntl();
 
   const [translations, setTranslations] = useState<?Translations>(null);
   const [questions, setQuestions] = useState<?QuestionsType>(null);
 
   useEffect(() => {
-
     // the timeout allows the modal to load before doing all the computing
     const timeoutId = setTimeout(() => {
       const generateData = async () => {
@@ -113,17 +127,12 @@ export const useQuestionnaireProps = (questionnaire: QuestionnaireAdminResultsEx
         const q = generateQuestions(chartsUrl, questionnaire, intl);
         setTranslations(t);
         setQuestions(q);
-      }
+      };
       generateData();
-    }, 200)
+    }, 200);
 
-    return () => clearTimeout(timeoutId)
+    return () => clearTimeout(timeoutId);
+  }, [intl, questionnaire, chartsRef]);
 
-  }, [intl, questionnaire, chartsRef])
-
-  return {translations, questions}
-}
-
-
-
-
+  return { translations, questions };
+};

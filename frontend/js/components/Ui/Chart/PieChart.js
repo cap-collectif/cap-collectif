@@ -1,11 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import Chart from 'recharts/es6/chart/PieChart';
-import ResponsiveContainer from 'recharts/es6/component/ResponsiveContainer';
-import Cell from 'recharts/es6/component/Cell';
-import Pie from 'recharts/es6/polar/Pie';
-import Tooltip from 'recharts/es6/component/Tooltip';
+import { PieChart as PieChartRechart, Cell, Pie, Tooltip, ResponsiveContainer } from 'recharts';
 import { useIntl } from 'react-intl';
 import defaultColors from '~/utils/colors';
 import config from '~/config';
@@ -96,7 +92,7 @@ export const PieChart = ({
   return (
     <ContentWrapper width={width} height={height}>
       <ResponsiveContainer>
-        <Chart>
+        <PieChartRechart>
           <Tooltip content={renderTooltip} />
           <Pie
             data={data}
@@ -120,7 +116,7 @@ export const PieChart = ({
               />
             ))}{' '}
           </Pie>
-        </Chart>
+        </PieChartRechart>
       </ResponsiveContainer>
     </ContentWrapper>
   );

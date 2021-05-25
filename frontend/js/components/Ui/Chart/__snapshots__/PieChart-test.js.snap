@@ -30,6 +30,7 @@ exports[`<PieChart /> renders PieChart 1`] = `
       reverseStackOrder={false}
       stackOffset="none"
       startAngle={0}
+      syncMethod="index"
     >
       <Tooltip
         active={false}
@@ -57,6 +58,7 @@ exports[`<PieChart /> renders PieChart 1`] = `
         labelStyle={Object {}}
         offset={10}
         separator=" : "
+        trigger="hover"
         useTranslate3d={false}
         viewBox={
           Object {
@@ -160,6 +162,7 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
       reverseStackOrder={false}
       stackOffset="none"
       startAngle={0}
+      syncMethod="index"
     >
       <Tooltip
         active={false}
@@ -187,6 +190,7 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
         labelStyle={Object {}}
         offset={10}
         separator=" : "
+        trigger="hover"
         useTranslate3d={false}
         viewBox={
           Object {
