@@ -15,10 +15,26 @@ sonata_admin:
         add_block: CapcoAdminBundle:Core:add_block.html.twig
     dashboard:
         blocks:
-            - { position: left, type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation] }, }
-            - { position: right, type: Capco\AdminBundle\Block\HelpBlockService, settings: { title: admin.label.help_block }, }
-            - { position: right, type: Capco\AdminBundle\Block\RecentContributionsBlockService, settings: { number: 5, title: admin.label.recent_contributions }, }
-            - { position: left, type: Capco\AdminBundle\Block\RecentPostBlockService, settings: { number: 7, title: admin.label.recent_posts, toggle: 'blog' }, }
+            - {
+                  position: left,
+                  type: sonata.admin.block.admin_list,
+                  settings: { groups: [admin.group.moderation] },
+              }
+            - {
+                  position: right,
+                  type: Capco\AdminBundle\Block\HelpBlockService,
+                  settings: { title: admin.label.help_block },
+              }
+            - {
+                  position: right,
+                  type: Capco\AdminBundle\Block\RecentContributionsBlockService,
+                  settings: { number: 5, title: admin.label.recent_contributions },
+              }
+            - {
+                  position: left,
+                  type: Capco\AdminBundle\Block\RecentPostBlockService,
+                  settings: { number: 7, title: admin.label.recent_posts, toggle: 'blog' },
+              }
         groups:
             admin.group.moderation:
                 items:
@@ -74,6 +90,9 @@ sonata_admin:
                 items:
                     - Capco\AdminBundle\Admin\EmailingCampaignAdmin
                     - Capco\AdminBundle\Admin\EmailingListAdmin
+            admin.group.analytics:
+                items:
+                    - Capco\AdminBundle\Admin\AnalyticsAdmin
 
 sonata_block:
     default_contexts: [cms]

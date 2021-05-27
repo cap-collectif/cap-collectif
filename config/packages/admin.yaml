@@ -1007,3 +1007,8 @@ services:
             ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-invite-users-label }
+
+    Capco\AdminBundle\Admin\AnalyticsAdmin:
+        arguments: [~, ~, Capco\AdminBundle\Controller\AnalyticsController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin-menu-analytics }
