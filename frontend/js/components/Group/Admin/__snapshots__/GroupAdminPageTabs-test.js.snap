@@ -11,8 +11,14 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="admin.fields.group.number_users"
     >
-      <Relay(Connect(injectIntl(GroupAdminUsers)))
+      <Connect(GroupAdminUsers)
         group={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
+        pendingInvitationFragmentRef={
           Object {
             "$fragmentRefs": null,
             "$refType": null,

@@ -1,46 +1,62 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import {FormattedMessage, useIntl} from 'react-intl';
+import {graphql, usePaginationFragment} from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { Button, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hasSubmitFailed, hasSubmitSucceeded, isInvalid, isSubmitting, isValid } from 'redux-form';
-import type { GroupAdminUsers_group } from '~relay/GroupAdminUsers_group.graphql';
+import type { GroupAdminUsers_group$key } from '~relay/GroupAdminUsers_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
 import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 import GroupAdminModalImportUsers from './GroupAdminModalImportUsers';
-import type { GlobalState } from '../../../types';
+import type { GlobalState } from '~/types';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import GroupAdminPendingInvitationsList from "~/components/Group/Admin/GroupAdminPendingInvitationsList";
+import type {GroupAdminPendingInvitationsList_group$key} from "~relay/GroupAdminPendingInvitationsList_group.graphql";
 
 type Props = {|
   ...ReduxFormFormProps,
-  relay: RelayPaginationProp,
-  group: GroupAdminUsers_group,
+  group: GroupAdminUsers_group$key,
+  pendingInvitationFragmentRef: GroupAdminPendingInvitationsList_group$key,
   userIsDeleted: boolean,
   userIsNotDeleted: boolean,
-  intl: IntlShape,
-|};
-
-type State = {|
-  showAddUsersModal: boolean,
-  showImportUsersModal: boolean,
-  loading: boolean,
 |};
 
 export const formName = 'group-admin-users';
 
-export class GroupAdminUsers extends React.Component<Props, State> {
-  state = {
-    showAddUsersModal: false,
-    showImportUsersModal: false,
-    loading: false,
-  };
+const FRAGMENT = graphql`
+      fragment GroupAdminUsers_group on Group
+        @argumentDefinitions(countUsers: {type: "Int!"}, cursorUsers: {type: "String"}) 
+        @refetchable(queryName: "GroupAdminUsersGroup")
+        {
+          id
+          title
+          users(first: $countUsers, after: $cursorUsers) 
+          @connection(key: "GroupAdminUsers_users") {
+            edges {
+              node {
+                id
+                ...GroupAdminUsersListGroupItem_user
+              }
+            }
+          }
+        }
+    `
 
-  getAlertForm() {
+
+export const GroupAdminUsers = ({group: groupFragmentRef, pendingInvitationFragmentRef, ...props}: Props) => {
+
+  const intl = useIntl();
+  const [showAddUsersModal, setShowAddUsersModal] = React.useState(false);
+  const [showImportUsersModal, setShowImportUsersModal] = React.useState(false);
+
+  const { data: group, hasNext, loadNext, isLoadingNext } = usePaginationFragment(FRAGMENT, groupFragmentRef);
+
+  const getAlertForm = () => {
     const {
       valid,
       invalid,
@@ -49,7 +65,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
       submitFailed,
       userIsDeleted,
       userIsNotDeleted,
-    } = this.props;
+    } = props;
 
     if (userIsDeleted) {
       return (
@@ -82,100 +98,83 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     );
   }
 
-  handleLoadMore = () => {
-    const { relay } = this.props;
-    this.setState({ loading: true });
-    relay.loadMore(100, () => {
-      this.setState({ loading: false });
-    });
+  const handleClose = () => {
+    setShowAddUsersModal(false);
+    setShowImportUsersModal(false);
   };
 
-  openCreateModal = () => {
-    this.setState({ showAddUsersModal: true });
-  };
 
-  openImportModal = () => {
-    this.setState({ showImportUsersModal: true });
-  };
-
-  handleClose = () => {
-    this.setState({ showAddUsersModal: false, showImportUsersModal: false });
-  };
-
-  render() {
-    const { group, intl, relay } = this.props;
-    const { showAddUsersModal, showImportUsersModal, loading } = this.state;
-    return (
-      <div className="box box-primary container-fluid">
-        <div className="box-header  pl-0">
-          <h3 className="box-title">
-            <FormattedMessage id="admin.fields.group.number_users" />
-          </h3>
-          <a
-            className="pull-right link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={intl.formatMessage({ id: 'admin.help.addGroup.link' })}>
-            <i className="fa fa-info-circle" /> Aide
-          </a>
-        </div>
-        <div className="box-content">
-          <ButtonToolbar>
-            <Button bsStyle="success" onClick={this.openCreateModal}>
-              <i className="fa fa-plus-circle" /> <FormattedMessage id="group-admin-add-members" />
-            </Button>
-            <Button bsStyle="success" onClick={this.openImportModal}>
-              <i className="fa fa-upload" />{' '}
-              <FormattedMessage id="group-admin-add-members-via-file" />
-            </Button>
-          </ButtonToolbar>
-          {this.getAlertForm()}
-          <GroupAdminModalAddUsers
-            show={showAddUsersModal}
-            onClose={this.handleClose}
-            group={group}
-          />
-          {/* $FlowFixMe please use mapDispatchToProps */}
-          <GroupAdminModalImportUsers
-            show={showImportUsersModal}
-            onClose={this.handleClose}
-            group={group}
-          />
-          {group.users.edges ? (
-            <ListGroup className="mt-15">
-              {group.users.edges
-                .map(edge => edge && edge.node)
-                // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
-                .filter(Boolean)
-                .map(user => (
-                  <GroupAdminUsersListGroupItem
-                    key={user.id}
-                    user={user}
-                    groupId={group.id}
-                    groupTitle={group.title}
-                  />
-                ))}
-            </ListGroup>
-          ) : (
-            <div className="mb-15">
-              <FormattedMessage id="group.admin.no_users" />
-            </div>
-          )}
-          {relay.hasMore() && (
-            <ListGroupItem style={{ textAlign: 'center' }}>
-              {loading ? (
-                <Loader />
-              ) : (
-                <Button bsStyle="link" onClick={this.handleLoadMore}>
-                  <FormattedMessage id="global.more" />
-                </Button>
-              )}
-            </ListGroupItem>
-          )}
-        </div>
+  return (
+    <div className="box box-primary container-fluid">
+      <div className="box-header  pl-0">
+        <h3 className="box-title">
+          <FormattedMessage id="admin.fields.group.number_users" />
+        </h3>
+        <a
+          className="pull-right link"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={intl.formatMessage({ id: 'admin.help.addGroup.link' })}>
+          <i className="fa fa-info-circle" /> Aide
+        </a>
       </div>
-    );
-  }
+      <div className="box-content">
+        <ButtonToolbar>
+          <Button bsStyle="success" onClick={() => setShowAddUsersModal(true)}>
+            <i className="fa fa-plus-circle" /> <FormattedMessage id="group-admin-add-members" />
+          </Button>
+          <Button bsStyle="success" onClick={() => setShowImportUsersModal(true)}>
+            <i className="fa fa-upload" />{' '}
+            <FormattedMessage id="group-admin-add-members-via-file" />
+          </Button>
+        </ButtonToolbar>
+        {getAlertForm()}
+        <GroupAdminModalAddUsers
+          show={showAddUsersModal}
+          onClose={handleClose}
+          group={group}
+        />
+        {/* $FlowFixMe please use mapDispatchToProps */}
+        <GroupAdminModalImportUsers
+          show={showImportUsersModal}
+          onClose={handleClose}
+          group={group}
+        />
+        {group.users.edges ? (
+          <ListGroup className="mt-15">
+            {group.users.edges
+              .map(edge => edge && edge.node)
+              // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
+              .filter(Boolean)
+              .map(user => (
+                <GroupAdminUsersListGroupItem
+                  key={user.id}
+                  user={user}
+                  groupId={group.id}
+                  groupTitle={group.title}
+                />
+              ))}
+          </ListGroup>
+        ) : (
+          <div className="mb-15">
+            <FormattedMessage id="group.admin.no_users" />
+          </div>
+        )}
+        {hasNext && (
+          <ListGroupItem style={{ textAlign: 'center' }}>
+            {isLoadingNext ? (
+              <Loader />
+            ) : (
+              <Button bsStyle="link" onClick={() => loadNext(100)}>
+                <FormattedMessage id="global.more" />
+              </Button>
+            )}
+          </ListGroupItem>
+        )}
+        <GroupAdminPendingInvitationsList pendingInvitationFragmentRef={pendingInvitationFragmentRef} />
+      </div>
+    </div>
+  );
 }
 
 const mapStateToProps = (state: GlobalState) => ({
@@ -188,61 +187,6 @@ const mapStateToProps = (state: GlobalState) => ({
   userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed,
 });
 
-const myComponent = injectIntl(GroupAdminUsers);
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(GroupAdminUsers);
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(myComponent);
-
-export default createPaginationContainer(
-  container,
-  {
-    group: graphql`
-      fragment GroupAdminUsers_group on Group
-        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
-        id
-        title
-        users(first: $count, after: $cursor) @connection(key: "GroupAdminUsers_users") {
-          edges {
-            node {
-              id
-              ...GroupAdminUsersListGroupItem_user
-            }
-          }
-          pageInfo {
-            hasPreviousPage
-            hasNextPage
-            startCursor
-            endCursor
-          }
-        }
-      }
-    `,
-  },
-  {
-    direction: 'forward',
-    // $FlowFixMe redux-form
-    getConnectionFromProps(props: Props) {
-      return props.group && props.group.users;
-    },
-    getFragmentVariables(prevVars) {
-      return {
-        ...prevVars,
-      };
-    },
-    getVariables(props: Props, { count, cursor }, fragmentVariables) {
-      return {
-        ...fragmentVariables,
-        count,
-        cursor,
-        groupId: props.group.id,
-      };
-    },
-    query: graphql`
-      query GroupAdminUsersQuery($groupId: ID!, $cursor: String, $count: Int!) {
-        group: node(id: $groupId) {
-          id
-          ...GroupAdminUsers_group @arguments(count: $count, cursor: $cursor)
-        }
-      }
-    `,
-  },
-);
+export default container;

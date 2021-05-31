@@ -13,3 +13,6 @@ InviteUsersInput:
             isAdmin:
                 type: 'Boolean!'
                 description: 'Does the newly invited users will be administrators?'
+            groups:
+                type: '[ID]!'
+                description: 'Users will be invited to join these groups'

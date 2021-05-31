@@ -1,113 +1,131 @@
 // @flow
 
 import * as React from 'react';
-import { useMemo, useState } from 'react';
-import { Button, InputGroup, Modal } from 'react-bootstrap';
+import { useState } from 'react';
+import { InputGroup } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
+import Select from 'react-select';
+import { useFragment, graphql } from 'react-relay';
 import { useUserInviteModalContext } from '~/components/Admin/UserInvite/Modal/UserInviteModal.context';
-import Checkbox from '~ui/Form/Input/Checkbox/Checkbox';
-import InviteUserMutation, { INVITE_USERS_MAX_RESULTS } from '~/mutations/InviteUserMutation';
-import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
-import FluxDispatcher from '~/dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '~/constants/AlertConstants';
+import Radio from '~ui/Form/Input/Radio/Radio';
+import type { UserInviteModalStepChooseRole_query$key } from '~relay/UserInviteModalStepChooseRole_query.graphql';
+import Modal from '~ds/Modal/Modal';
+import Button from '~ds/Button/Button';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import Heading from '~ui/Primitives/Heading';
+import Text from '~ui/Primitives/Text';
+import Flex from '~ui/Primitives/Layout/Flex';
+import AppBox from '~ui/Primitives/AppBox';
+import { ModalBody } from '../UserInviteAdminPage.style';
 
 type Props = {|
-  +onSubmitSucces?: () => void,
+  +queryFragment: UserInviteModalStepChooseRole_query$key,
 |};
 
-export const UserInviteModalStepChooseRole = ({ onSubmitSucces }: Props) => {
+const FRAGMENT = graphql`
+  fragment UserInviteModalStepChooseRole_query on Query {
+    groupsData: groups {
+      id
+      title
+    }
+  }
+`;
+
+export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.Node => {
   const { dispatch, emails } = useUserInviteModalContext();
-  const hasManyEmails = useMemo(() => emails.length > 1, [emails]);
   const [isAdmin, setIsAdmin] = useState(false);
-  const { stopLoading, isLoading, startLoading } = useLoadingMachine();
+  const [groups, setGroups] = useState([]);
+  const [options, setOptions] = useState([]);
   const intl = useIntl();
+
+  const { groupsData } = useFragment(FRAGMENT, queryFragment);
+
+  React.useEffect(() => {
+    if (!groupsData) return;
+    const optionsData = groupsData.map(({ id, title }) => {
+      return { value: id, label: title };
+    });
+    setOptions(optionsData);
+  }, [groupsData, setOptions]);
+
+  const onGroupChange = items => {
+    setGroups(
+      items.map(({ value, label }) => {
+        return {
+          id: value,
+          label,
+        };
+      }),
+    );
+  };
+
   return (
-    <form
-      onSubmit={async e => {
-        try {
-          e.preventDefault();
-          const input = {
-            maxResults: INVITE_USERS_MAX_RESULTS,
-            emails,
-            isAdmin,
-          };
-          startLoading();
-          await InviteUserMutation.commit({
-            input,
-          });
-          stopLoading();
-          FluxDispatcher.dispatch({
-            actionType: UPDATE_ALERT,
-            alert: {
-              bsStyle: 'success',
-              content: hasManyEmails
-                ? intl.formatMessage({ id: 'email-will-be-sent-to-many-users' })
-                : intl.formatMessage(
-                    {
-                      id: 'email-will-be-sent-to-user',
-                    },
-                    { email: emails[0] },
-                  ),
-            },
-          });
-          // eslint is not up to date because this normally don't cause eslint to trigger an error
-          // eslint-disable-next-line no-unused-expressions
-          onSubmitSucces?.();
-        } catch {
-          stopLoading();
-          FluxDispatcher.dispatch({
-            actionType: UPDATE_ALERT,
-            alert: {
-              bsStyle: 'warning',
-              content: 'global.failure',
-            },
-          });
-        }
-      }}>
-      <Modal.Header closeButton>
-        <Modal.Title>
-          {hasManyEmails
-            ? intl.formatMessage({ id: 'invite-many-emails' }, { count: emails.length })
-            : intl.formatMessage({ id: 'invite-one-email' }, { email: emails[0] })}
-        </Modal.Title>
+    <>
+      <Modal.Header pb={6}>
+        <Heading>{intl.formatMessage({ id: 'invitations.options' })}</Heading>
       </Modal.Header>
-      <Modal.Body>
-        <FormattedMessage id="choose-a-role" tagName="p" />
+      <ModalBody>
+        <AppBox mb={4}>
+          <FormattedMessage id="global.role" tagName="p" />
+          <InputGroup>
+            <Radio
+              label={intl.formatMessage({ id: 'roles.user' })}
+              id="user"
+              value="user"
+              name="role"
+              checked={!isAdmin}
+              onChange={() => {
+                setIsAdmin(false);
+              }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <Radio
+              label={intl.formatMessage({ id: 'roles.admin' })}
+              id="admin"
+              value="admin"
+              name="role"
+              checked={isAdmin}
+              onChange={() => {
+                setIsAdmin(true);
+              }}
+            />
+          </InputGroup>
+        </AppBox>
         <InputGroup>
-          <Checkbox
-            label={intl.formatMessage({ id: 'roles.user' })}
-            id="user"
-            value="user"
-            name="roles[]"
-            checked
-          />
+          <Flex mb={2}>
+            <Text color="gray.900" mr={2}>
+              {intl.formatMessage({ id: 'admin.label.group' })}
+            </Text>
+            <Text color="gray.400">{intl.formatMessage({ id: 'global.optional' })}</Text>
+          </Flex>
+          <AppBox maxWidth="552px">
+            <Select options={options} isMulti onChange={onGroupChange} />
+          </AppBox>
         </InputGroup>
-        <InputGroup>
-          <Checkbox
-            label={intl.formatMessage({ id: 'roles.admin' })}
-            id="admin"
-            value="admin"
-            name="roles[]"
-            checked={isAdmin}
-            onChange={() => {
-              setIsAdmin(v => !v);
-            }}
-          />
-        </InputGroup>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={() => {
-            dispatch({ type: 'GOTO_CHOOSE_USERS_STEP' });
-          }}>
-          {intl.formatMessage({ id: 'global.back' })}
-        </Button>
-        <Button disabled={isLoading} variant="primary" type="submit">
-          {intl.formatMessage({ id: 'global.validate' })}
-        </Button>
+      </ModalBody>
+      <Modal.Footer as="div" pt={6}>
+        <ButtonGroup>
+          <Button
+            variant="tertiary"
+            variantSize="big"
+            variantColor="hierarchy"
+            onClick={() => {
+              dispatch({ type: 'GOTO_CHOOSE_USERS_STEP' });
+            }}>
+            {intl.formatMessage({ id: 'global.back' })}
+          </Button>
+          <Button
+            variant="primary"
+            variantSize="big"
+            onClick={() =>
+              dispatch({ type: 'GOTO_SENDING_CONFIRMATION', payload: { emails, isAdmin, groups } })
+            }>
+            {intl.formatMessage({ id: 'global.next' })}
+          </Button>
+        </ButtonGroup>
       </Modal.Footer>
-    </form>
+    </>
   );
 };
 

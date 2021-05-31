@@ -15,17 +15,12 @@ describe('<GroupAdminModalAddUsers />', () => {
       id: 'group4',
       title: 'Comité de suvi',
       users: {
-        pageInfo: {
-          hasPreviousPage: false,
-          hasNextPage: false,
-          startCursor: '1',
-          endCursor: '2',
-        },
         edges: [],
       },
     },
     intl: intlMock,
   };
+
 
   it('render correctly', () => {
     const wrapper = shallow(<GroupAdminModalAddUsers {...props} />);

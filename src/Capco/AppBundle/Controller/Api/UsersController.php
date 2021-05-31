@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
+use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
@@ -121,7 +123,8 @@ class UsersController extends AbstractFOSRestController
         Request $request,
         UserInviteRepository $userInviteRepository,
         EntityManagerInterface $em,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        GroupRepository $groupRepository
     ) {
         $submittedData = $request->request->all();
         $invitationToken = $submittedData['invitationToken'] ?? '';
@@ -147,6 +150,13 @@ class UsersController extends AbstractFOSRestController
 
         /** @var User $user */
         $user = $this->userManager->createUser();
+
+        if($invitation) {
+            foreach ($invitation->getGroups() as $group) {
+                $userGroup = (new UserGroup())->setGroup($group)->setUser($user);
+                $em->persist($userGroup);
+            }
+        }
 
         if ($this->toggleManager->isActive('multilangue')) {
             if (isset($submittedData['locale']) && $submittedData['locale']) {

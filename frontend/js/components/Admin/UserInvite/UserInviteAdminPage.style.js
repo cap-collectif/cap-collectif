@@ -1,14 +1,19 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import PickableList from '~ui/List/PickableList';
+import Modal from '~ds/Modal/Modal';
+import AppBox from "~ui/Primitives/AppBox";
 
 export const UserInviteAdminPageContainer: StyledComponent<
   {},
   {},
-  HTMLDivElement
-> = styled.div.attrs({
-  className: 'user-invite-admin-page box box-primary container-fluid',
+  HTMLDivElement,
+> = styled(AppBox).attrs({
+  className: 'user-invite-admin-page container-fluid',
+  borderRadius: 'adminSection',
+  pb: 6
 })`
+  background: white;
+  min-height: 84vh;
   .box-header {
     margin: 30px 0 15px 0;
     padding: 0;
@@ -21,8 +26,8 @@ export const UserInviteAdminPageContainer: StyledComponent<
   }
 `;
 
-export const UserInviteList: StyledComponent<{}, {}, typeof PickableList> = styled(PickableList)`
-  p {
-    margin-bottom: 0;
-  }
+export const ModalBody: StyledComponent<{}, {}, typeof Modal.Body> = styled(Modal.Body)`
+  border-top: 1px solid #dadee1;
+  border-bottom: 1px solid #dadee1;
+  overflow-wrap: break-word;
 `;

@@ -1,7 +1,8 @@
 // @flow
-import { graphql } from 'relay-hooks';
+import { graphql } from 'react-relay';
+// eslint-disable-next-line import/no-unresolved
+import type {GraphQLTaggedNode} from "relay-runtime/query/GraphQLTag";
 import type { UserInviteList_query } from '~relay/UserInviteList_query.graphql';
-import type { ConnectionMetadata } from '~/types';
 
 export type RelayProps = {|
   +query: UserInviteList_query,
@@ -12,9 +13,11 @@ export type Arguments = {|
   +cursor?: string,
 |};
 
-export const FRAGMENT = graphql`
+export const FRAGMENT: GraphQLTaggedNode = graphql`
   fragment UserInviteList_query on Query
-    @argumentDefinitions(first: { type: "Int", defaultValue: 50 }, cursor: { type: "String" }) {
+    @argumentDefinitions(first: { type: "Int", defaultValue: 50 }, cursor: { type: "String" }) 
+    @refetchable(queryName: "UserInviteListQuery")
+    {
     userInvitations(first: $first, after: $cursor)
       @connection(key: "UserInviteList_userInvitations") {
       pageInfo {
@@ -25,25 +28,20 @@ export const FRAGMENT = graphql`
         cursor
         node {
           id
-          ...UserInviteListRow_invitation
+          email
+          isAdmin
+          status
+          groups {
+            edges {
+              node {
+                title
+              }
+            }
+          }
         }
       }
     }
   }
 `;
 
-export const CONNECTION_NODES_PER_PAGE = 50;
-
-export const CONNECTION_CONFIG = {
-  getVariables(props: RelayProps, { count, cursor }: ConnectionMetadata) {
-    return {
-      first: count,
-      cursor,
-    };
-  },
-  query: graphql`
-    query UserInviteListPaginationQuery($first: Int!, $cursor: String) {
-      ...UserInviteList_query @arguments(first: $first, cursor: $cursor)
-    }
-  `,
-};
+export const CONNECTION_NODES_PER_PAGE: number = 50;

@@ -1,0 +1,11 @@
+UserInviteStatus:
+  type: enum
+  config:
+    description: 'The invitation status'
+    values:
+      PENDING:
+        value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::PENDING")'
+        description: 'If the invitation is pending'
+      EXPIRED:
+        value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::EXPIRED")'
+        description: 'If the invitation is expired'

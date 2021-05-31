@@ -5749,6 +5749,25 @@ type Group implements Node {
   ): UserConnection!
   createdAt: DateTime!
   updatedAt: DateTime
+
+  """Get all userInvite who are still pending"""
+  pendingInvitations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): UserInviteConnection!
 }
 
 """A connection to a list of items."""
@@ -5836,6 +5855,9 @@ input InviteUsersInput {
 
   """Does the newly invited users will be administrators?"""
   isAdmin: Boolean!
+
+  """Users will be invited to join these groups"""
+  groups: [ID]!
   clientMutationId: String
 }
 
@@ -15024,6 +15046,12 @@ type UserInvite {
 
   """Will the invited user be an admin?"""
   isAdmin: Boolean!
+
+  """The invitation status"""
+  status: UserInviteStatus!
+
+  """The groups associated to the invite"""
+  groups: GroupConnection!
 }
 
 """A connection to a list of items."""
@@ -15044,6 +15072,15 @@ type UserInviteEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""The invitation status"""
+enum UserInviteStatus {
+  """If the invitation is pending"""
+  PENDING
+
+  """If the invitation is expired"""
+  EXPIRED
 }
 
 """A user's notifications configuration"""

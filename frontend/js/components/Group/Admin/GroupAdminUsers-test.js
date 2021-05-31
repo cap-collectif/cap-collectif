@@ -1,38 +1,29 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import ReactTestRenderer from 'react-test-renderer';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import {createMockEnvironment, MockPayloadGenerator} from "relay-test-utils";
 import { GroupAdminUsers } from './GroupAdminUsers';
-import { $refType, $fragmentRefs, intlMock, formMock, relayPaginationMock } from '../../../mocks';
+import {
+  RelaySuspensFragmentTest,
+  addsSupportForPortals,
+  clearSupportForPortals,
+} from '~/testUtils';
+import type {GroupAdminUsersTestQuery} from "~relay/GroupAdminUsersTestQuery.graphql";
+import {formMock} from "~/mocks";
+
 
 describe('<GroupAdminUsers />', () => {
-  const props = {
-    ...formMock,
-    intl: intlMock,
-    relay: relayPaginationMock,
+
+  let environment;
+  let testComponentTree;
+  let TestComponent;
+
+  const defaultProps = {
     dispatch: jest.fn(),
-    group: {
-      $refType,
-      id: 'group4',
-      title: 'Comité de suvi',
-      users: {
-        edges: [
-          {
-            node: {
-              id: 'id1',
-              $fragmentRefs,
-            },
-          },
-        ],
-        pageInfo: {
-          hasPreviousPage: false,
-          hasNextPage: true,
-          startCursor: '1',
-          endCursor: '3',
-        },
-      },
-    },
-  };
+    ...formMock,
+  }
 
   const SuccessDeleteUser = {
     valid: false,
@@ -66,23 +57,78 @@ describe('<GroupAdminUsers />', () => {
     submitSucceeded: false,
   };
 
+
+  const defaultMockResolvers = {
+    Group: () => ({
+      id: 'group4',
+      title: 'Comité de suvi',
+      users: {
+        edges: [
+          {
+            node: {
+              id: 'id1',
+            },
+          }
+        ],
+        pageInfo: {
+          hasPreviousPage: false,
+          hasNextPage: true,
+          startCursor: '1',
+          endCursor: '3',
+        },
+      }
+    })
+  }
+
+  const query = graphql`
+    query GroupAdminUsersTestQuery($id: ID = "<default>", $countUsers: Int, $cursorUsers: String, $countInvitations: Int, $cursorInvitations: String) @relay_test_operation {
+      group: node(id: $id) {
+        ...GroupAdminUsers_group @arguments(cursorUsers: $cursorUsers, countUsers: $countUsers)
+        ...GroupAdminPendingInvitationsList_group @arguments(countInvitations: $countInvitations, cursorInvitations: $cursorInvitations)
+      }
+    }
+  `
+
+  afterEach(() => {
+    clearSupportForPortals();
+  });
+
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    const TestRenderer = props => {
+      const data = useLazyLoadQuery<GroupAdminUsersTestQuery>(query, {});
+      if (!data.group) return null;
+      return <GroupAdminUsers group={data.group} pendingInvitationFragmentRef={data.group} {...props} />;
+    };
+    TestComponent = props => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
+    );
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+  });
+
   it('render correctly group admin user with confirmation notification when deleting a user', () => {
-    const wrapper = shallow(<GroupAdminUsers {...props} {...SuccessDeleteUser} />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...SuccessDeleteUser} />);
+    expect(testComponentTree).toMatchSnapshot();
   });
 
   it('render correctly group admin user with error notification when deleting a user', () => {
-    const wrapper = shallow(<GroupAdminUsers {...props} {...FailDeleteUser} />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...FailDeleteUser} />);
+    expect(testComponentTree).toMatchSnapshot();
   });
 
   it('render correctly group admin user with confirmation notification when adding a user', () => {
-    const wrapper = shallow(<GroupAdminUsers {...props} {...SuccessAddUser} />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...SuccessAddUser} />);
+    expect(testComponentTree).toMatchSnapshot();
   });
 
   it('render correctly group admin user with error notification when adding a user', () => {
-    const wrapper = shallow(<GroupAdminUsers {...props} {...FailAddUser} />);
-    expect(wrapper).toMatchSnapshot();
+    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...FailAddUser} />);
+    expect(testComponentTree).toMatchSnapshot();
   });
+
 });

@@ -17,13 +17,33 @@ const mutation = graphql`
       newInvitations {
         cursor
         node {
-          ...UserInviteListRow_invitation
+          id
+          email
+          isAdmin
+          status
+          groups {
+            edges {
+              node {
+                title
+              }
+            }
+          }
         }
       }
       updatedInvitations {
         cursor
         node {
-          ...UserInviteListRow_invitation
+          id
+          email
+          isAdmin
+          status
+          groups {
+            edges {
+              node {
+                title
+              }
+            }
+          }
         }
       }
     }
@@ -40,7 +60,7 @@ const commit = (variables: InviteUserMutationVariables): Promise<Response> =>
       if (!invitations) return;
       const newInvitations = store.getRootField('inviteUsers').getLinkedRecords('newInvitations');
       newInvitations.forEach(invitation => {
-        ConnectionHandler.insertEdgeAfter(invitations, invitation);
+        ConnectionHandler.insertEdgeBefore(invitations, invitation);
       });
       if (newInvitations.length > CONNECTION_NODES_PER_PAGE) {
         const endCursor = window.btoa(`arrayconnection:${INVITE_USERS_MAX_RESULTS - 1}`);

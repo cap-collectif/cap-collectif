@@ -24,3 +24,8 @@ Group:
         type: 'DateTime!'
       updatedAt:
         type: 'DateTime'
+      pendingInvitations:
+        type: 'UserInviteConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all userInvite who are still pending'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupPendingInvitationsResolver", [value, args])'

@@ -16,7 +16,7 @@ export class GroupAdminPageTabs extends Component<Props> {
       <div className="col-xs-12">
         <Tabs id="group-admin-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'admin.fields.group.number_users' })}>
-            <GroupAdminUsers group={group} />
+            <GroupAdminUsers group={group} pendingInvitationFragmentRef={group} />
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'global.params' })}>
             <GroupAdminParameters group={group} />
@@ -32,8 +32,9 @@ const container = injectIntl(GroupAdminPageTabs);
 export default createFragmentContainer(container, {
   group: graphql`
     fragment GroupAdminPageTabs_group on Group
-      @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
-      ...GroupAdminUsers_group @arguments(cursor: $cursor, count: $count)
+      @argumentDefinitions(countInvitations: {type: "Int!"}, cursorInvitations: {type: "String"}, countUsers: {type: "Int!"}, cursorUsers: {type: "String"}) {
+      ...GroupAdminUsers_group @arguments(cursorUsers: $cursorUsers, countUsers: $countUsers)
+      ...GroupAdminPendingInvitationsList_group @arguments(countInvitations: $countInvitations, cursorInvitations: $cursorInvitations)
       ...GroupAdminParameters_group
     }
   `,

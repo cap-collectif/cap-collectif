@@ -254,7 +254,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
     questions: undefined,
     charte: undefined,
     passwordConditions: undefined,
-    passwordComplexityScore: undefined,
+    passwordComplexityScore: undefined
   };
   if (values.questions && values.questions.length > 0) {
     form.responses = formatSubmitResponses(values.responses, values.questions);

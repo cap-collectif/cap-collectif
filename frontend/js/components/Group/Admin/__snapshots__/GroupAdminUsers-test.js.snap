@@ -10,10 +10,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     <h3
       className="box-title"
     >
-      <FormattedMessage
-        id="admin.fields.group.number_users"
-        values={Object {}}
-      />
+      admin.fields.group.number_users
     </h3>
     <a
       className="pull-right link"
@@ -30,121 +27,139 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
   <div
     className="box-content"
   >
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <div
+      className="btn-toolbar"
+      role="toolbar"
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-plus-circle"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members"
-          values={Object {}}
-        />
-      </Button>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+        group-admin-add-members
+      </button>
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-upload"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members-via-file"
-          values={Object {}}
-        />
-      </Button>
-    </ButtonToolbar>
-    <AlertForm
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={true}
-      submitting={false}
-      valid={true}
-    />
-    <Connect(injectIntl(GroupAdminModalAddUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <Connect(injectIntl(GroupAdminModalImportUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <ListGroup
-      bsClass="list-group"
-      className="mt-15"
+        group-admin-add-members-via-file
+      </button>
+    </div>
+    <div
+      className="d-ib"
     >
-      <Relay(Connect(GroupAdminUsersListGroupItem))
-        groupId="group4"
-        groupTitle="Comité de suvi"
-        key="id1"
-        user={
-          Object {
-            "$fragmentRefs": null,
-            "id": "id1",
-          }
+      <div
+        className="alert__form_succeeded-message"
+      >
+        <i
+          className="cap cap-android-checkmark-circle"
+        />
+         
+        global.saved
+      </div>
+    </div>
+    <div
+      className="mt-15 list-group"
+    >
+      <span
+        className="list-group-item"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-xs-3"
+          >
+            <img
+              alt="<mock-value-for-field-\\"displayName\\">"
+              className="img-circle mr-15"
+              src="<mock-value-for-field-\\"url\\">"
+            />
+            &lt;mock-value-for-field-"displayName"&gt;
+          </div>
+          <div
+            className="pull-right col-xs-4"
+          >
+            <a
+              className="pull-right mt-5 btn btn-danger"
+              href="#"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+            >
+              <i
+                className="fa fa-trash"
+              />
+               
+              global.delete
+            </a>
+          </div>
+          <div
+            className="col-xs-12"
+          >
+            <p
+              className="mt-10"
+            >
+              &lt;mock-value-for-field-"email"&gt;
+              <span>
+                 | 
+                &lt;mock-value-for-field-"phone"&gt;
+              </span>
+            </p>
+            <p>
+              &lt;mock-value-for-field-"biography"&gt;
+            </p>
+          </div>
+        </div>
+      </span>
+    </div>
+    <span
+      className="list-group-item"
+      style={
+        Object {
+          "textAlign": "center",
         }
-      />
-    </ListGroup>
+      }
+    >
+      <button
+        className="btn btn-link"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        global.more
+      </button>
+    </span>
+    <h3
+      className="box-title"
+    >
+      invitation.pending
+    </h3>
+    <div
+      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+    >
+      <p
+        className="sc-bkbjAj dFIPdD"
+      >
+        &lt;mock-value-for-field-"email"&gt;
+      </p>
+      <p
+        className="sc-bkbjAj klnAWo"
+      >
+        roles.user
+      </p>
+    </div>
   </div>
 </div>
 `;
@@ -159,10 +174,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     <h3
       className="box-title"
     >
-      <FormattedMessage
-        id="admin.fields.group.number_users"
-        values={Object {}}
-      />
+      admin.fields.group.number_users
     </h3>
     <a
       className="pull-right link"
@@ -179,119 +191,139 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
   <div
     className="box-content"
   >
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <div
+      className="btn-toolbar"
+      role="toolbar"
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-plus-circle"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members"
-          values={Object {}}
-        />
-      </Button>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+        group-admin-add-members
+      </button>
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-upload"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members-via-file"
-          values={Object {}}
-        />
-      </Button>
-    </ButtonToolbar>
+        group-admin-add-members-via-file
+      </button>
+    </div>
     <div
       className="d-ib"
     >
-      <AlertFormSucceededMessage />
+      <div
+        className="alert__form_succeeded-message"
+      >
+        <i
+          className="cap cap-android-checkmark-circle"
+        />
+         
+        global.saved
+      </div>
     </div>
-    <Connect(injectIntl(GroupAdminModalAddUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <Connect(injectIntl(GroupAdminModalImportUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <ListGroup
-      bsClass="list-group"
-      className="mt-15"
+    <div
+      className="mt-15 list-group"
     >
-      <Relay(Connect(GroupAdminUsersListGroupItem))
-        groupId="group4"
-        groupTitle="Comité de suvi"
-        key="id1"
-        user={
-          Object {
-            "$fragmentRefs": null,
-            "id": "id1",
-          }
+      <span
+        className="list-group-item"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-xs-3"
+          >
+            <img
+              alt="<mock-value-for-field-\\"displayName\\">"
+              className="img-circle mr-15"
+              src="<mock-value-for-field-\\"url\\">"
+            />
+            &lt;mock-value-for-field-"displayName"&gt;
+          </div>
+          <div
+            className="pull-right col-xs-4"
+          >
+            <a
+              className="pull-right mt-5 btn btn-danger"
+              href="#"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+            >
+              <i
+                className="fa fa-trash"
+              />
+               
+              global.delete
+            </a>
+          </div>
+          <div
+            className="col-xs-12"
+          >
+            <p
+              className="mt-10"
+            >
+              &lt;mock-value-for-field-"email"&gt;
+              <span>
+                 | 
+                &lt;mock-value-for-field-"phone"&gt;
+              </span>
+            </p>
+            <p>
+              &lt;mock-value-for-field-"biography"&gt;
+            </p>
+          </div>
+        </div>
+      </span>
+    </div>
+    <span
+      className="list-group-item"
+      style={
+        Object {
+          "textAlign": "center",
         }
-      />
-    </ListGroup>
+      }
+    >
+      <button
+        className="btn btn-link"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        global.more
+      </button>
+    </span>
+    <h3
+      className="box-title"
+    >
+      invitation.pending
+    </h3>
+    <div
+      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+    >
+      <p
+        className="sc-bkbjAj dFIPdD"
+      >
+        &lt;mock-value-for-field-"email"&gt;
+      </p>
+      <p
+        className="sc-bkbjAj klnAWo"
+      >
+        roles.user
+      </p>
+    </div>
   </div>
 </div>
 `;
@@ -306,10 +338,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     <h3
       className="box-title"
     >
-      <FormattedMessage
-        id="admin.fields.group.number_users"
-        values={Object {}}
-      />
+      admin.fields.group.number_users
     </h3>
     <a
       className="pull-right link"
@@ -326,121 +355,145 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
   <div
     className="box-content"
   >
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <div
+      className="btn-toolbar"
+      role="toolbar"
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-plus-circle"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members"
-          values={Object {}}
-        />
-      </Button>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+        group-admin-add-members
+      </button>
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-upload"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members-via-file"
-          values={Object {}}
-        />
-      </Button>
-    </ButtonToolbar>
-    <AlertForm
-      invalid={false}
-      submitFailed={true}
-      submitSucceeded={false}
-      submitting={false}
-      valid={false}
-    />
-    <Connect(injectIntl(GroupAdminModalAddUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <Connect(injectIntl(GroupAdminModalImportUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <ListGroup
-      bsClass="list-group"
-      className="mt-15"
+        group-admin-add-members-via-file
+      </button>
+    </div>
+    <div
+      className="d-ib"
     >
-      <Relay(Connect(GroupAdminUsersListGroupItem))
-        groupId="group4"
-        groupTitle="Comité de suvi"
-        key="id1"
-        user={
-          Object {
-            "$fragmentRefs": null,
-            "id": "id1",
+      <div
+        className="alert__form_server-failed-message"
+      >
+        <i
+          className="cap cap-ios-close-outline"
+        />
+         
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "global.error.server.form",
+            }
           }
+        />
+      </div>
+    </div>
+    <div
+      className="mt-15 list-group"
+    >
+      <span
+        className="list-group-item"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-xs-3"
+          >
+            <img
+              alt="<mock-value-for-field-\\"displayName\\">"
+              className="img-circle mr-15"
+              src="<mock-value-for-field-\\"url\\">"
+            />
+            &lt;mock-value-for-field-"displayName"&gt;
+          </div>
+          <div
+            className="pull-right col-xs-4"
+          >
+            <a
+              className="pull-right mt-5 btn btn-danger"
+              href="#"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+            >
+              <i
+                className="fa fa-trash"
+              />
+               
+              global.delete
+            </a>
+          </div>
+          <div
+            className="col-xs-12"
+          >
+            <p
+              className="mt-10"
+            >
+              &lt;mock-value-for-field-"email"&gt;
+              <span>
+                 | 
+                &lt;mock-value-for-field-"phone"&gt;
+              </span>
+            </p>
+            <p>
+              &lt;mock-value-for-field-"biography"&gt;
+            </p>
+          </div>
+        </div>
+      </span>
+    </div>
+    <span
+      className="list-group-item"
+      style={
+        Object {
+          "textAlign": "center",
         }
-      />
-    </ListGroup>
+      }
+    >
+      <button
+        className="btn btn-link"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        global.more
+      </button>
+    </span>
+    <h3
+      className="box-title"
+    >
+      invitation.pending
+    </h3>
+    <div
+      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+    >
+      <p
+        className="sc-bkbjAj dFIPdD"
+      >
+        &lt;mock-value-for-field-"email"&gt;
+      </p>
+      <p
+        className="sc-bkbjAj klnAWo"
+      >
+        roles.user
+      </p>
+    </div>
   </div>
 </div>
 `;
@@ -455,10 +508,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     <h3
       className="box-title"
     >
-      <FormattedMessage
-        id="admin.fields.group.number_users"
-        values={Object {}}
-      />
+      admin.fields.group.number_users
     </h3>
     <a
       className="pull-right link"
@@ -475,121 +525,145 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
   <div
     className="box-content"
   >
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <div
+      className="btn-toolbar"
+      role="toolbar"
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-plus-circle"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members"
-          values={Object {}}
-        />
-      </Button>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="success"
+        group-admin-add-members
+      </button>
+      <button
+        className="btn btn-success"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <i
           className="fa fa-upload"
         />
          
-        <FormattedMessage
-          id="group-admin-add-members-via-file"
-          values={Object {}}
-        />
-      </Button>
-    </ButtonToolbar>
-    <AlertForm
-      invalid={false}
-      submitFailed={true}
-      submitSucceeded={false}
-      submitting={false}
-      valid={false}
-    />
-    <Connect(injectIntl(GroupAdminModalAddUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <Connect(injectIntl(GroupAdminModalImportUsers))
-      group={
-        Object {
-          "$refType": null,
-          "id": "group4",
-          "title": "Comité de suvi",
-          "users": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "$fragmentRefs": null,
-                  "id": "id1",
-                },
-              },
-            ],
-            "pageInfo": Object {
-              "endCursor": "3",
-              "hasNextPage": true,
-              "hasPreviousPage": false,
-              "startCursor": "1",
-            },
-          },
-        }
-      }
-      onClose={[Function]}
-      show={false}
-    />
-    <ListGroup
-      bsClass="list-group"
-      className="mt-15"
+        group-admin-add-members-via-file
+      </button>
+    </div>
+    <div
+      className="d-ib"
     >
-      <Relay(Connect(GroupAdminUsersListGroupItem))
-        groupId="group4"
-        groupTitle="Comité de suvi"
-        key="id1"
-        user={
-          Object {
-            "$fragmentRefs": null,
-            "id": "id1",
+      <div
+        className="alert__form_server-failed-message"
+      >
+        <i
+          className="cap cap-ios-close-outline"
+        />
+         
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "global.error.server.form",
+            }
           }
+        />
+      </div>
+    </div>
+    <div
+      className="mt-15 list-group"
+    >
+      <span
+        className="list-group-item"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-xs-3"
+          >
+            <img
+              alt="<mock-value-for-field-\\"displayName\\">"
+              className="img-circle mr-15"
+              src="<mock-value-for-field-\\"url\\">"
+            />
+            &lt;mock-value-for-field-"displayName"&gt;
+          </div>
+          <div
+            className="pull-right col-xs-4"
+          >
+            <a
+              className="pull-right mt-5 btn btn-danger"
+              href="#"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+            >
+              <i
+                className="fa fa-trash"
+              />
+               
+              global.delete
+            </a>
+          </div>
+          <div
+            className="col-xs-12"
+          >
+            <p
+              className="mt-10"
+            >
+              &lt;mock-value-for-field-"email"&gt;
+              <span>
+                 | 
+                &lt;mock-value-for-field-"phone"&gt;
+              </span>
+            </p>
+            <p>
+              &lt;mock-value-for-field-"biography"&gt;
+            </p>
+          </div>
+        </div>
+      </span>
+    </div>
+    <span
+      className="list-group-item"
+      style={
+        Object {
+          "textAlign": "center",
         }
-      />
-    </ListGroup>
+      }
+    >
+      <button
+        className="btn btn-link"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        global.more
+      </button>
+    </span>
+    <h3
+      className="box-title"
+    >
+      invitation.pending
+    </h3>
+    <div
+      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+    >
+      <p
+        className="sc-bkbjAj dFIPdD"
+      >
+        &lt;mock-value-for-field-"email"&gt;
+      </p>
+      <p
+        className="sc-bkbjAj klnAWo"
+      >
+        roles.user
+      </p>
+    </div>
   </div>
 </div>
 `;

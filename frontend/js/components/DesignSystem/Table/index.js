@@ -15,7 +15,7 @@ import { createReducer, type Action, type State } from './reducer';
 export type TableProps = {|
   ...AppBoxProps,
   +children: React.ChildrenArray<React.Element<typeof Thead> | React.Element<typeof Tbody>>,
-  +actionBar?: React.Node,
+  +actionBar?: React.Node | (({ selectedRows: string[] }) => React.Node),
   +selectable?: boolean,
   +isLoading?: boolean,
 |};
@@ -66,8 +66,10 @@ const Table = ({ children, actionBar, selectable, isLoading, ...props }: TablePr
         direction="column"
         width="100%"
         borderRadius="table"
-        boxShadow="small"
-        overflow="hidden">
+        overflow="hidden"
+        border="normal"
+        borderColor="gray.150"
+      >
         <ActionBar>{actionBar}</ActionBar>
 
         <AppBox as="table" {...props}>
@@ -80,7 +82,8 @@ const Table = ({ children, actionBar, selectable, isLoading, ...props }: TablePr
         borderRadius="table"
         overflow="hidden"
         width="100%"
-        boxShadow="small"
+        border="normal"
+        borderColor="gray.150"
         {...props}>
         {children}
       </AppBox>

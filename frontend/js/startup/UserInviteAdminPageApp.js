@@ -9,6 +9,7 @@ import { CONNECTION_NODES_PER_PAGE } from '~/components/Admin/UserInvite/UserInv
 const query = graphql`
   query UserInviteAdminPageAppQuery($first: Int!, $cursor: String) {
     ...UserInviteList_query @arguments(first: $first, cursor: $cursor)
+    ...UserInviteModalStepChooseRole_query
   }
 `;
 

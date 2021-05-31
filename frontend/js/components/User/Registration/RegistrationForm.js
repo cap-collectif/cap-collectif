@@ -1,4 +1,4 @@
-// @flow
+ // @flow
 import * as React from 'react';
 import memoize from 'lodash/memoize';
 import { graphql, createFragmentContainer } from 'react-relay';

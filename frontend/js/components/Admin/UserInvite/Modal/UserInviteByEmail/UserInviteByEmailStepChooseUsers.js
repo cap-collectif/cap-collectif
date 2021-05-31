@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { useCallback } from 'react';
 import { useInput } from '@liinkiing/react-hooks';
-import { Button, Modal } from 'react-bootstrap';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Input from '~ui/Form/Input/Input';
@@ -11,6 +10,11 @@ import environment from '~/createRelayEnvironment';
 import { isEmail } from '~/services/Validator';
 import { useUserInviteModalContext } from '~/components/Admin/UserInvite/Modal/UserInviteModal.context';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
+import Modal from '~ds/Modal/Modal';
+import Button from '~ds/Button/Button';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import Heading from '~ui/Primitives/Heading';
+import { ModalBody } from '~/components/Admin/UserInvite/UserInviteAdminPage.style';
 
 const USER_SEARCH_QUERY = graphql`
   query UserInviteByEmailStepChooseUsersQuery($displayName: String!) {
@@ -22,10 +26,10 @@ const USER_SEARCH_QUERY = graphql`
 `;
 
 type Props = {|
-  +onCloseButtonClick?: () => void,
+  +onClose: () => void,
 |};
 
-export const UserInviteByEmailStepChooseUsers = ({ onCloseButtonClick }: Props) => {
+export const UserInviteByEmailStepChooseUsers = ({ onClose }: Props): React.Node => {
   const { dispatch } = useUserInviteModalContext();
   const intl = useIntl();
   const [email] = useInput('');
@@ -66,15 +70,11 @@ export const UserInviteByEmailStepChooseUsers = ({ onCloseButtonClick }: Props) 
     }
   };
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault();
-        onSubmit();
-      }}>
-      <Modal.Header closeButton>
-        <Modal.Title>{intl.formatMessage({ id: 'invite-a-user' })}</Modal.Title>
+    <>
+      <Modal.Header pb={6}>
+        <Heading>{intl.formatMessage({ id: 'invite-a-user' })}</Heading>
       </Modal.Header>
-      <Modal.Body>
+      <ModalBody>
         <Input
           id="email"
           required
@@ -85,16 +85,23 @@ export const UserInviteByEmailStepChooseUsers = ({ onCloseButtonClick }: Props) 
           name="email"
         />
         {hasError && <p className="mt-10">{errorMessage}</p>}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onCloseButtonClick}>
-          {intl.formatMessage({ id: 'global.close' })}
-        </Button>
-        <Button disabled={!isValid} variant="primary" type="submit">
-          {intl.formatMessage({ id: 'global.next' })}
-        </Button>
+      </ModalBody>
+      <Modal.Footer as="div" pt={6}>
+        <ButtonGroup>
+          <Button variant="tertiary" onClick={onClose} variantSize="big" variantColor="hierarchy">
+            {intl.formatMessage({ id: 'global.close' })}
+          </Button>
+          <Button
+            disabled={!isValid}
+            variant="primary"
+            variantSize="big"
+            onClick={onSubmit}
+            isLoading={isLoading}>
+            {intl.formatMessage({ id: 'global.next' })}
+          </Button>
+        </ButtonGroup>
       </Modal.Footer>
-    </form>
+    </>
   );
 };
 

@@ -4,8 +4,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -21,31 +23,39 @@ class InviteUsersMutation implements MutationInterface
     private EntityManagerInterface $em;
     private UserInviteRepository $userInviteRepository;
     private UserRepository $userRepository;
+    private GroupRepository $groupRepository;
 
     public function __construct(
         TokenGeneratorInterface $tokenGenerator,
         EntityManagerInterface $em,
         UserInviteRepository $userInviteRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        GroupRepository $groupRepository
     ) {
         $this->tokenGenerator = $tokenGenerator;
         $this->em = $em;
         $this->userInviteRepository = $userInviteRepository;
         $this->userRepository = $userRepository;
+        $this->groupRepository = $groupRepository;
     }
 
     public function __invoke(Argument $args): array
     {
-        list($emails, $isAdmin, $maxResults) = [
+        list($emails, $isAdmin, $maxResults, $groupIds) = [
             array_filter($args->offsetGet('emails')),
             $args->offsetGet('isAdmin'),
             $args->offsetGet('maxResults'),
+            $args->offsetGet('groups'),
         ];
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);
         $toUpdateEmails = [];
         $newInvitations = [];
+
+        $groupEntities = array_map(function($groupId){
+            return $this->groupRepository->find($groupId);
+        }, $groupIds);
 
         $insertions = 0;
         foreach ($emails as $email) {
@@ -61,7 +71,13 @@ class InviteUsersMutation implements MutationInterface
                 ->setEmail($email)
                 ->setIsAdmin($isAdmin)
                 ->setToken($this->tokenGenerator->generateToken())
-                ->setExpiresAt((new \DateTimeImmutable())->modify(self::EXPIRES_AT_PERIOD));
+                ->setExpiresAt((new \DateTimeImmutable())->modify(self::EXPIRES_AT_PERIOD))
+            ;
+
+            foreach ($groupEntities as $groupEntity) {
+                $invitation->addGroup($groupEntity);
+            }
+
             $newInvitations[] = $invitation;
             $this->em->persist($invitation);
             ++$insertions;
@@ -75,18 +91,14 @@ class InviteUsersMutation implements MutationInterface
         $this->em->clear();
 
         if (\count($toUpdateEmails) > 0) {
-            $entity = UserInvite::class;
-            $this->em
-                ->createQuery(
-                    <<<DQL
-UPDATE ${entity} ui SET ui.expiresAt = :expiration, ui.isAdmin = :isAdmin WHERE ui.email IN (:emails)
-DQL
-                )
-                ->execute([
-                    'expiration' => new \DateTimeImmutable(self::EXPIRES_AT_PERIOD),
-                    'emails' => $toUpdateEmails,
-                    'isAdmin' => $isAdmin,
-                ]);
+            foreach ($toUpdateEmails as $email) {
+                /** * @var $userInvite UserInvite  */
+                $userInvite = $this->userInviteRepository->findOneBy(['email' => $email]);
+                $userInvite->setExpiresAt(new \DateTimeImmutable(self::EXPIRES_AT_PERIOD));
+                $userInvite->setIsAdmin($isAdmin);
+                $userInvite->setGroups(new ArrayCollection($groupEntities));
+                $this->em->persist($userInvite);
+            }
         }
 
         $offset = 0;

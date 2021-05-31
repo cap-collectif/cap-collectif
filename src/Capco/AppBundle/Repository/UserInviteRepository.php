@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserInvite;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -20,7 +21,7 @@ class UserInviteRepository extends EntityRepository
     public function findPaginated(?int $limit, ?int $offset): array
     {
         return $this->getPaginated($limit, $offset)
-            ->addOrderBy('ui.createdAt')
+            ->addOrderBy('ui.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
@@ -73,6 +74,17 @@ class UserInviteRepository extends EntityRepository
             ])
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function getPendingInvitations(?int $limit, ?int $offset, Group $group): array
+    {
+        return $this->getPaginated($limit, $offset)
+            ->innerJoin('ui.groups', 'g')
+            ->where('g = :group')
+            ->setParameter('group', $group)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     private function getPaginated(?int $limit, ?int $offset): QueryBuilder

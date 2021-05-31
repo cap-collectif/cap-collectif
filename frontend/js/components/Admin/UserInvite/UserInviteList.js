@@ -1,64 +1,113 @@
 // @flow
 import * as React from 'react';
-import { usePagination } from 'relay-hooks';
-import { FormattedMessage } from 'react-intl';
-import * as S from '~/components/Admin/UserInvite/UserInviteAdminPage.style';
-import PickableList from '~ui/List/PickableList';
+import { usePaginationFragment } from 'react-relay';
+import { useIntl } from 'react-intl';
 import {
-  CONNECTION_CONFIG,
   CONNECTION_NODES_PER_PAGE,
   FRAGMENT,
-  type RelayProps,
 } from '~/components/Admin/UserInvite/UserInviteList.relay';
-import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader';
-import PickableListPlaceholder from '~ui/List/PickableList/placeholder';
-import UserInviteListRow from '~/components/Admin/UserInvite/UserInviteListRow';
-import UserInviteListHeader from '~/components/Admin/UserInvite/UserInviteListHeader';
-import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 import Skeleton from '~ds/Skeleton';
+import Table from '~ds/Table';
+import Button from '~ds/Button/Button';
+import CancelUserInvitationsMutation from '~/mutations/CancelUserInvitationsMutation';
+import { toast } from '~ds/Toast';
+import TablePlaceholder from '~ds/Table/placeholder';
+import type {UserInviteList_query$key, UserInviteStatus} from "~relay/UserInviteList_query.graphql";
+import ButtonGroup from "~ds/ButtonGroup/ButtonGroup";
+import ButtonQuickAction from "~ds/ButtonQuickAction/ButtonQuickAction";
+import Tag from "~ds/Tag/Tag";
 
 type Props = {|
-  ...RelayProps,
+  query: UserInviteList_query$key,
 |};
 
-export const UserInviteList = ({ query: queryFragment }: Props) => {
-  const [query, { hasMore, loadMore }] = usePagination(FRAGMENT, queryFragment);
-  const { startLoading, stopLoading, isLoading } = useLoadingMachine();
-  const invitations = query?.userInvitations.edges.map(edge => edge.node) ?? [];
+const StatusTag = ({status}: {status: ?UserInviteStatus}) => {
+  const intl = useIntl();
+  if (status === 'PENDING') return <Tag variant="orange">{intl.formatMessage({id: 'waiting'})}</Tag>
+  if (status === 'EXPIRED') return <Tag variant="red">{intl.formatMessage({id: 'global.expired.feminine'})}</Tag>
+  return null
+}
+
+export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
+  const intl = useIntl();
+  const { data, hasNext, loadNext } = usePaginationFragment(FRAGMENT, queryFragment);
+  const invitations = data?.userInvitations?.edges?.map(edge => edge?.node).filter(Boolean) ?? [];
   const hasInvitations = invitations.length > 0;
+
+  const groupsText = (userInvite): string => {
+    return userInvite?.groups?.edges && userInvite?.groups?.edges?.length > 0
+      ? userInvite?.groups?.edges
+        ?.map((edge) => edge?.node?.title)
+        ?.filter(Boolean)
+        ?.reduce((acc, title) => `${acc} / ${title}`)
+      : '-'
+  }
+
+  const cancelInvite = async invitationsIds => {
+    try {
+      await CancelUserInvitationsMutation.commit({
+        input: {
+          invitationsIds,
+        },
+      });
+    } catch (e) {
+      toast({
+        variant: 'danger',
+        content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
+      });
+    }
+  };
+
   return (
-    <Skeleton isLoaded={!!query} placeholder={<PickableListPlaceholder />}>
-      <PickableList.Provider>
-        <S.UserInviteList
-          isLoading={isLoading}
+    <Skeleton isLoaded={!!data} placeholder={<TablePlaceholder columnsCount={5} rowsCount={5} />}>
+      <Table
+        selectable
+        isLoading={!hasInvitations}
+        actionBar={({ selectedRows }) => (
+          <Button
+            variantSize="small"
+            variant="secondary"
+            variantColor="danger"
+            onClick={() => cancelInvite(selectedRows)}>
+            {intl.formatMessage({ id: 'global.remove' })}
+          </Button>
+        )}>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th noPlaceholder>{intl.formatMessage({ id: 'global.invitations' })}</Table.Th>
+            <Table.Th noPlaceholder>{intl.formatMessage({ id: 'global.role' })}</Table.Th>
+            <Table.Th noPlaceholder>{intl.formatMessage({ id: 'admin.label.group' })}</Table.Th>
+            <Table.Th noPlaceholder>{intl.formatMessage({ id: 'admin.fields.step.group_statuses' })}</Table.Th>
+            <Table.Th noPlaceholder> </Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody
           useInfiniteScroll
           onScrollToBottom={() => {
-            loadMore(CONNECTION_CONFIG, CONNECTION_NODES_PER_PAGE, error => {
-              console.error(error);
-            });
+            loadNext(CONNECTION_NODES_PER_PAGE)
           }}
-          hasMore={hasMore()}
-          loader={<AnalysisProposalListLoader key="loader" />}>
-          <PickableList.Header isSelectable={hasInvitations}>
-            <UserInviteListHeader onStartLoading={startLoading} onStopLoading={stopLoading} />
-          </PickableList.Header>
-          <PickableList.Body>
-            {hasInvitations ? (
-              invitations.map(invitation => (
-                <UserInviteListRow
-                  key={invitation.id}
-                  rowId={invitation.id}
-                  invitation={invitation}
-                />
-              ))
-            ) : (
-              <PickableList.Row isSelectable={false}>
-                <FormattedMessage tagName="p" id="no_result" />
-              </PickableList.Row>
-            )}
-          </PickableList.Body>
-        </S.UserInviteList>
-      </PickableList.Provider>
+          hasMore={hasNext}>
+          {invitations.map((userInvite) => (
+            <Table.Tr key={userInvite?.id} rowId={userInvite?.id} checkboxLabel={userInvite?.email}>
+              <Table.Td>{userInvite?.email}</Table.Td>
+              <Table.Td>
+                {userInvite?.isAdmin
+                  ? intl.formatMessage({ id: 'roles.admin' })
+                  : intl.formatMessage({ id: 'roles.user' })}
+              </Table.Td>
+              <Table.Td>{groupsText(userInvite)}</Table.Td>
+              <Table.Td>
+                 <StatusTag status={userInvite?.status} />
+              </Table.Td>
+              <Table.Td>
+                <ButtonGroup>
+                  <ButtonQuickAction icon="TRASH" label="delete" variantColor="danger" onClick={() => cancelInvite([userInvite?.id])}/>
+                </ButtonGroup>
+              </Table.Td>
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
+      </Table>
     </Skeleton>
   );
 };

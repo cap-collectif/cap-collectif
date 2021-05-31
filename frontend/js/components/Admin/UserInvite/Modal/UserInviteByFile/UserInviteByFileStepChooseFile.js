@@ -3,13 +3,17 @@
 import * as React from 'react';
 import { useState } from 'react';
 import type { DropzoneFile } from 'react-dropzone';
-import { Button, Modal } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { CsvDropZoneInput } from '~/components/Utils/CsvDropZoneInput';
 import { csvToArray } from '~/utils/csvToArray';
 import { useUserInviteModalContext } from '~/components/Admin/UserInvite/Modal/UserInviteModal.context';
 import { isEmail } from '~/services/Validator';
 import useBoolean from '~/utils/hooks/useBoolean';
+import Heading from '~ui/Primitives/Heading';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import Modal from '~ds/Modal/Modal';
+import Button from '~ds/Button/Button';
+import { ModalBody } from '~/components/Admin/UserInvite/UserInviteAdminPage.style';
 
 type Props = {|
   +onCloseButtonClick?: () => void,
@@ -28,7 +32,7 @@ const getInputFromFile = (content: string): EmailInput => {
   };
 };
 
-export const UserInviteByFileStepChooseFile = ({ onCloseButtonClick }: Props) => {
+export const UserInviteByFileStepChooseFile = ({ onCloseButtonClick }: Props): React.Node => {
   const { dispatch } = useUserInviteModalContext();
   const intl = useIntl();
   const [showMoreError, toggleShowMoreError] = useBoolean();
@@ -44,15 +48,11 @@ export const UserInviteByFileStepChooseFile = ({ onCloseButtonClick }: Props) =>
     dispatch({ type: 'GOTO_ROLE_STEP', payload: emails.importedUsers });
   };
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault();
-        onSubmit();
-      }}>
-      <Modal.Header closeButton>
-        <Modal.Title>{intl.formatMessage({ id: 'invite-via-file' })}</Modal.Title>
+    <>
+      <Modal.Header pb={6}>
+        <Heading>{intl.formatMessage({ id: 'invite-via-file' })}</Heading>
       </Modal.Header>
-      <Modal.Body>
+      <ModalBody>
         <CsvDropZoneInput
           input={{
             name: 'emails',
@@ -79,16 +79,22 @@ export const UserInviteByFileStepChooseFile = ({ onCloseButtonClick }: Props) =>
           disabled={false}
           currentFile={file}
         />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onCloseButtonClick}>
-          {intl.formatMessage({ id: 'global.close' })}
-        </Button>
-        <Button disabled={!isValid} variant="primary" type="submit">
-          {intl.formatMessage({ id: 'global.next' })}
-        </Button>
+      </ModalBody>
+      <Modal.Footer as="div" pt={6}>
+        <ButtonGroup>
+          <Button
+            variant="tertiary"
+            onClick={onCloseButtonClick}
+            variantSize="big"
+            variantColor="hierarchy">
+            {intl.formatMessage({ id: 'global.close' })}
+          </Button>
+          <Button disabled={!isValid} variant="primary" variantSize="big" onClick={onSubmit}>
+            {intl.formatMessage({ id: 'global.next' })}
+          </Button>
+        </ButtonGroup>
       </Modal.Footer>
-    </form>
+    </>
   );
 };
 

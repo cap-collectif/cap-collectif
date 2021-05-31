@@ -14,12 +14,22 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "count",
+              "name": "countInvitations",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "cursor",
+              "name": "countUsers",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "cursorInvitations",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "cursorUsers",
             },
             Object {
               "defaultValue": null,
@@ -49,13 +59,23 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                   "args": Array [
                     Object {
                       "kind": "Variable",
-                      "name": "count",
-                      "variableName": "count",
+                      "name": "countInvitations",
+                      "variableName": "countInvitations",
                     },
                     Object {
                       "kind": "Variable",
-                      "name": "cursor",
-                      "variableName": "cursor",
+                      "name": "countUsers",
+                      "variableName": "countUsers",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "cursorInvitations",
+                      "variableName": "cursorInvitations",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "cursorUsers",
+                      "variableName": "cursorUsers",
                     },
                   ],
                   "kind": "FragmentSpread",
@@ -72,7 +92,7 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "afde48a34b9e7dacfc77ed5fd1341f72",
+        "hash": "2f35bb61efe8d6f8cb9accc392f2ceab",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -84,12 +104,22 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "count",
+              "name": "countUsers",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "cursor",
+              "name": "cursorUsers",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "countInvitations",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "cursorInvitations",
             },
           ],
           "kind": "Operation",
@@ -140,12 +170,12 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                         Object {
                           "kind": "Variable",
                           "name": "after",
-                          "variableName": "cursor",
+                          "variableName": "cursorUsers",
                         },
                         Object {
                           "kind": "Variable",
                           "name": "first",
-                          "variableName": "count",
+                          "variableName": "countUsers",
                         },
                       ],
                       "concreteType": "UserConnection",
@@ -267,7 +297,7 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "hasPreviousPage",
+                              "name": "endCursor",
                               "storageKey": null,
                             },
                             Object {
@@ -275,20 +305,6 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "hasNextPage",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "startCursor",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "endCursor",
                               "storageKey": null,
                             },
                           ],
@@ -303,12 +319,12 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                         Object {
                           "kind": "Variable",
                           "name": "after",
-                          "variableName": "cursor",
+                          "variableName": "cursorUsers",
                         },
                         Object {
                           "kind": "Variable",
                           "name": "first",
-                          "variableName": "count",
+                          "variableName": "countUsers",
                         },
                       ],
                       "filters": null,
@@ -316,6 +332,130 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                       "key": "GroupAdminUsers_users",
                       "kind": "LinkedHandle",
                       "name": "users",
+                    },
+                    Object {
+                      "alias": null,
+                      "args": Array [
+                        Object {
+                          "kind": "Variable",
+                          "name": "after",
+                          "variableName": "cursorInvitations",
+                        },
+                        Object {
+                          "kind": "Variable",
+                          "name": "first",
+                          "variableName": "countInvitations",
+                        },
+                      ],
+                      "concreteType": "UserInviteConnection",
+                      "kind": "LinkedField",
+                      "name": "pendingInvitations",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "UserInviteEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "UserInvite",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "email",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isAdmin",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "__typename",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "cursor",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "PageInfo",
+                          "kind": "LinkedField",
+                          "name": "pageInfo",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "endCursor",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "hasNextPage",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": Array [
+                        Object {
+                          "kind": "Variable",
+                          "name": "after",
+                          "variableName": "cursorInvitations",
+                        },
+                        Object {
+                          "kind": "Variable",
+                          "name": "first",
+                          "variableName": "countInvitations",
+                        },
+                      ],
+                      "filters": null,
+                      "handle": "connection",
+                      "key": "GroupAdminPendingInvitationsList_pendingInvitations",
+                      "kind": "LinkedHandle",
+                      "name": "pendingInvitations",
                     },
                     Object {
                       "alias": null,
@@ -333,26 +473,29 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "bdd3784cec0cf58e476afbb76fefa83d",
+          "cacheID": "36a37d3e8da9e596633b86926fddebfe",
           "id": null,
           "metadata": Object {},
           "name": "GroupAdminPageQuery",
           "operationKind": "query",
           "text": "query GroupAdminPageQuery(
   $id: ID!
-  $count: Int!
-  $cursor: String
+  $countUsers: Int!
+  $cursorUsers: String
+  $countInvitations: Int!
+  $cursorInvitations: String
 ) {
   group: node(id: $id) {
     __typename
-    ...GroupAdminPageTabs_group_1G22uz
+    ...GroupAdminPageTabs_group_20BAdC
     ...GroupAdminParameters_group
     id
   }
 }
 
-fragment GroupAdminPageTabs_group_1G22uz on Group {
-  ...GroupAdminUsers_group_1G22uz
+fragment GroupAdminPageTabs_group_20BAdC on Group {
+  ...GroupAdminUsers_group_k27UV
+  ...GroupAdminPendingInvitationsList_group_CYQFO
   ...GroupAdminParameters_group
 }
 
@@ -360,6 +503,25 @@ fragment GroupAdminParameters_group on Group {
   id
   title
   description
+}
+
+fragment GroupAdminPendingInvitationsList_group_CYQFO on Group {
+  pendingInvitations(first: $countInvitations, after: $cursorInvitations) {
+    edges {
+      node {
+        email
+        isAdmin
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+  id
 }
 
 fragment GroupAdminUsersListGroupItem_user on User {
@@ -374,10 +536,10 @@ fragment GroupAdminUsersListGroupItem_user on User {
   }
 }
 
-fragment GroupAdminUsers_group_1G22uz on Group {
+fragment GroupAdminUsers_group_k27UV on Group {
   id
   title
-  users(first: $count, after: $cursor) {
+  users(first: $countUsers, after: $cursorUsers) {
     edges {
       node {
         id
@@ -387,10 +549,8 @@ fragment GroupAdminUsers_group_1G22uz on Group {
       cursor
     }
     pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
       endCursor
+      hasNextPage
     }
   }
 }
@@ -401,8 +561,10 @@ fragment GroupAdminUsers_group_1G22uz on Group {
     render={[Function]}
     variables={
       Object {
-        "count": 100,
-        "cursor": null,
+        "countInvitations": 50,
+        "countUsers": 100,
+        "cursorInvitations": null,
+        "cursorUsers": null,
         "id": "group4",
       }
     }

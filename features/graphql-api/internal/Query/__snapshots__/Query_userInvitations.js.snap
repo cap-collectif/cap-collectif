@@ -6,13 +6,6 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
-          "email": "rem@chan.com",
-          "id": "VXNlckludml0ZTpyZW1JbnZpdGF0aW9u",
-          "isAdmin": true,
-        },
-      },
-      Object {
-        "node": Object {
           "email": "sad@expired.com",
           "id": "VXNlckludml0ZTpleHBpcmVkSW52aXRhdGlvbg==",
           "isAdmin": false,
@@ -23,6 +16,13 @@ Object {
           "email": "ram@chan.com",
           "id": "VXNlckludml0ZTpyYW1JbnZpdGF0aW9u",
           "isAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
+          "email": "rem@chan.com",
+          "id": "VXNlckludml0ZTpyZW1JbnZpdGF0aW9u",
+          "isAdmin": true,
         },
       },
     ],

@@ -53,12 +53,18 @@ class Group
      */
     private bool $isDeletable = true;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=UserInvite::class, mappedBy="groups")
+     */
+    private $userInvites;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
         $this->evaluating = new ArrayCollection();
         $this->projectsVisibleByTheGroup = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->userInvites = new ArrayCollection();
     }
 
     public function __toString()
@@ -167,6 +173,33 @@ class Group
     public function setIsDeletable(bool $isDeletable): self
     {
         $this->isDeletable = $isDeletable;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserInvite[]
+     */
+    public function getUserInvites(): Collection
+    {
+        return $this->userInvites;
+    }
+
+    public function addUserInvite(UserInvite $userInvite): self
+    {
+        if (!$this->userInvites->contains($userInvite)) {
+            $this->userInvites[] = $userInvite;
+            $userInvite->addGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserInvite(UserInvite $userInvite): self
+    {
+        if ($this->userInvites->removeElement($userInvite)) {
+            $userInvite->removeGroup($this);
+        }
 
         return $this;
     }

@@ -17,3 +17,11 @@ UserInvite:
             isAdmin:
                 type: 'Boolean!'
                 description: 'Will the invited user be an admin?'
+            status:
+                type: 'UserInviteStatus!'
+                description: 'The invitation status'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserInvite\\UserInviteStatusResolver", [value])'
+            groups:
+                type: 'GroupConnection!'
+                description: 'The groups associated to the invite'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserInvite\\UserInviteGroupsResolver", [value])'
