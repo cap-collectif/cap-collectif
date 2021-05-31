@@ -1,5 +1,4 @@
 // @flow
-import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 import type {
   Exact,
@@ -124,14 +123,6 @@ export const toggleFeatureSucceeded = (
   feature,
   enabled,
 });
-
-export const updateRegistrationCommunicationForm = (values: Object) =>
-  Fetcher.put('/registration_form', values).then(
-    () => {},
-    () => {
-      throw new SubmissionError({ _error: 'Un problème est survenu' });
-    },
-  );
 
 export const toggleFeature = (
   dispatch: Dispatch,

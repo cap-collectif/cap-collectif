@@ -8,6 +8,8 @@ import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutation';
+import type { RegisterEmailDomainsInput } from '~relay/RegisterEmailDomainsMutation.graphql';
 
 export const accountForm = 'accountForm';
 
@@ -182,9 +184,11 @@ export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({
   type: 'CANCEL_EMAIL_CHANGE',
 });
 
-export const setRegistrationEmailDomains = (values: {
-  domains: Array<{ value: string }>,
-}): Promise<*> => Fetcher.put('/registration_form', values);
+export const setRegistrationEmailDomains = (values: RegisterEmailDomainsInput): Promise<*> => {
+  return RegisterEmailDomainsMutation.commit({
+    input: values,
+  });
+};
 
 export const login = (
   data: { username: string, password: string, displayCaptcha: boolean, captcha?: ?string },

@@ -18,7 +18,6 @@ use FOS\RestBundle\Controller\Annotations\Delete;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\UserBundle\Form\Type\AdminConfigureRegistrationType;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -191,34 +190,6 @@ class FeaturesController extends AbstractFOSRestController
         $em->flush();
 
         return $question;
-    }
-
-    /**
-     * @Put("/registration_form")
-     * @View(statusCode=204, serializerGroups={})
-     */
-    public function putRegistrationFormAction(Request $request)
-    {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        $registrationForm = $this->registrationFormRepository->findCurrent();
-
-        $form = $this->createForm(AdminConfigureRegistrationType::class, $registrationForm);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        $this->get('doctrine')
-            ->getManager()
-            ->flush();
-
-        // $cacheManager = $this->get('fos_http_cache.cache_manager');
-        // $cacheManager->invalidateRoute('app_homepage')->flush();
     }
 
     /**

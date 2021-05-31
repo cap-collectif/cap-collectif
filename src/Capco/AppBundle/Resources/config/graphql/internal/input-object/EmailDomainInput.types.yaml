@@ -1,0 +1,8 @@
+EmailDomainInput:
+    type: input-object
+    config:
+        name: EmailDomainInput
+        fields:
+            value:
+                type: 'String!'
+                description: 'The email domain value'

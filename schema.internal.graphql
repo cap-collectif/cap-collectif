@@ -4877,6 +4877,11 @@ type EmailDomain implements Node {
   registrationForm: RegistrationForm
 }
 
+input EmailDomainInput {
+  """The email domain value"""
+  value: String!
+}
+
 """An emailing campaign"""
 type EmailingCampaign implements Node {
   """uuid of the emailing campaign"""
@@ -6743,6 +6748,9 @@ type Mutation {
 
   """Edit projects section in admin"""
   updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
+
+  """Register email domains"""
+  registerEmailDomains(input: RegisterEmailDomainsInput!): RegisterEmailDomainsPayload
 }
 
 """A connection to a list of items."""
@@ -10938,6 +10946,18 @@ type RankingStep implements Node & Step {
   ): EventConnection!
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
+}
+
+input RegisterEmailDomainsInput {
+  """the domains"""
+  domains: [EmailDomainInput!]
+  clientMutationId: String
+}
+
+type RegisterEmailDomainsPayload {
+  """the added domains"""
+  domains: [EmailDomain!]
+  clientMutationId: String
 }
 
 """Fetches an object given its ID"""

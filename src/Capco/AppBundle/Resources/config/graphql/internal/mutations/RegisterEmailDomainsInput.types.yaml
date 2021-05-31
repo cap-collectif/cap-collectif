@@ -1,0 +1,8 @@
+RegisterEmailDomainsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of RegisterEmailDomains mutation'
+        fields:
+            domains:
+                type: '[EmailDomainInput!]'
+                description: 'the domains'

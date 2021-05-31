@@ -1,0 +1,8 @@
+RegisterEmailDomainsPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of registerEmailDomains mutation'
+        fields:
+            domains:
+                type: '[InternalEmailDomain!]'
+                description: 'the added domains'
