@@ -238,25 +238,6 @@ svg.avatar-group {
     padding-top: 0;
 }
 
-.storybook-container {
-    margin: 0;
-    font-family: "OpenSans", Helvetica, sans-serif;
-
-    code {
-        background-color: black;
-        color: $dark-text;
-        font-weight: 300;
-    }
-
-    code .token.plain-text {
-        color: white;
-    }
-
-    pre button {
-        line-height: 16px;
-    }
-}
-
 /* =============================== Comment ================================ */
 
 .highlighted-comment {
