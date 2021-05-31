@@ -75,7 +75,6 @@ export default createFragmentContainer(container, {
     fragment OpinionSourceButtons_sourceable on Sourceable
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...OpinionSourceFormModal_sourceable @arguments(isAuthenticated: $isAuthenticated)
-      ...OpinionSourceReportButton_sourceable
     }
   `,
 });

@@ -1402,24 +1402,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "Opinion",
-                            "kind": "LinkedField",
-                            "name": "parent",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
                             "kind": "ScalarField",
                             "name": "title",
                             "storageKey": null,
@@ -1489,7 +1471,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                             "storageKey": null,
                           },
                         ],
-                        "type": "Version",
+                        "type": "Opinion",
                       },
                       Object {
                         "abstractKey": null,
@@ -1567,7 +1549,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                             "storageKey": null,
                           },
                         ],
-                        "type": "Opinion",
+                        "type": "Version",
                       },
                     ],
                     "type": "Sourceable",
@@ -1578,7 +1560,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "b0f4b63b4f4525bf192ecb1962755890",
+            "cacheID": "e8de61a1f6a4ea8695f525a96926e34b",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1656,7 +1638,6 @@ fragment OpinionSourceButtons_source_39ngnn on Source {
 fragment OpinionSourceButtons_sourceable_39ngnn on Sourceable {
   __isSourceable: __typename
   ...OpinionSourceFormModal_sourceable_39ngnn
-  ...OpinionSourceReportButton_sourceable
 }
 
 fragment OpinionSourceContent_source on Source {
@@ -1744,16 +1725,6 @@ fragment OpinionSourceReportButton_source_39ngnn on Source {
     id
   }
   viewerHasReport @include(if: $isAuthenticated)
-}
-
-fragment OpinionSourceReportButton_sourceable on Sourceable {
-  __isSourceable: __typename
-  id
-  ... on Version {
-    parent {
-      id
-    }
-  }
 }
 
 fragment OpinionSourceTitle_source on Source {

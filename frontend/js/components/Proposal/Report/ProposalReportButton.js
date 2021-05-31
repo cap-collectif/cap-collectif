@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../../Report/ReportBox';
-import { submitProposalReport } from '../../../redux/modules/report';
+import { submitReport } from '~/redux/modules/report';
 import type { ProposalReportButton_proposal } from '~relay/ProposalReportButton_proposal.graphql';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 export class ProposalReportButton extends React.Component<Props> {
   handleReport = (data: Object) => {
     const { proposal, dispatch } = this.props;
-    return submitProposalReport(proposal, data, dispatch);
+    return submitReport(proposal.id, data, dispatch, 'alert.success.report.proposal');
   };
 
   render() {

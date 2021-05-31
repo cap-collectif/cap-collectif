@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import {graphql, createFragmentContainer} from 'react-relay';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { submitCommentReport, type ReportData } from '~/redux/modules/report';
+import { submitReport, type ReportData } from '~/redux/modules/report';
 import ReportBox from '../Report/ReportBox';
 import type { CommentReportButton_comment } from '~relay/CommentReportButton_comment.graphql';
 import type { Dispatch } from '~/types';
@@ -15,7 +15,7 @@ type Props = {|
 export class CommentReportButton extends React.Component<Props> {
   handleReport = (data: ReportData) => {
     const { comment, dispatch } = this.props;
-    return submitCommentReport(comment.id, data, dispatch);
+    return submitReport(comment.id, data, dispatch, 'alert.success.report.comment');
   };
 
   render() {

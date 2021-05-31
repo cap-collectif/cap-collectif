@@ -2,22 +2,18 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Notifier\ReportNotifier;
 use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityNotFoundException;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Form\ReportingType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -62,7 +58,6 @@ class OpinionsController extends AbstractFOSRestController
     }
 
     /**
-     *
      * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
      * @Entity("project", options={"mapping": {"projectId": "id"}})
      * @Entity("type", options={"mapping": {"typeId": "id"}})
@@ -196,80 +191,5 @@ class OpinionsController extends AbstractFOSRestController
         $em->remove($opinion);
         $em->flush();
         $this->redisStorageHelper->recomputeUserCounters($viewer);
-    }
-
-    /**
-     * @Post("/opinions/{opinionId}/reports")
-     * @View(statusCode=201, serializerGroups={"Default"})
-     */
-    public function postOpinionReportAction(Request $request, string $opinionId)
-    {
-        /** @var User $viewer */
-        $viewer = $this->getUser();
-        /** @var Opinion $opinion */
-        $opinion = $this->globalIdResolver->resolve($opinionId, $viewer);
-        if (!$viewer || 'anon.' === $viewer || $viewer === $opinion->getAuthor()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        $report = (new Reporting())->setReporter($viewer)->setOpinion($opinion);
-        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        $this->getDoctrine()
-            ->getManager()
-            ->persist($report);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-        $this->reportNotifier->onCreate($report);
-
-        return $report;
-    }
-
-    /**
-     * @Post("/opinions/{opinionId}/versions/{versionId}/reports")
-     * @View(statusCode=201, serializerGroups={"Default"})
-     */
-    public function postOpinionVersionReportAction(
-        Request $request,
-        string $opinionId,
-        string $versionId
-    ) {
-        $viewer = $this->getUser();
-        $opinionId = GlobalId::fromGlobalId($opinionId)['id'];
-        $opinion = $this->opinionRepository->find($opinionId);
-        if (!$opinion) {
-            throw new EntityNotFoundException(
-                `This opinion with id '${opinionId}' does not exist.`
-            );
-        }
-        /** @var OpinionVersion $version */
-        $version = $this->globalIdResolver->resolve($versionId, $viewer);
-        if (!$viewer || 'anon.' === $viewer || $viewer === $version->getAuthor()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        $report = (new Reporting())->setReporter($viewer)->setOpinionVersion($version);
-        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        $this->getDoctrine()
-            ->getManager()
-            ->persist($report);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-        $this->reportNotifier->onCreate($report);
-
-        return $report;
     }
 }

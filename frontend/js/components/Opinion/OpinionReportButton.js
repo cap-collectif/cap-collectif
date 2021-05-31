@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { submitOpinionReport } from '../../redux/modules/report';
+import { submitReport } from '~/redux/modules/report';
 import ReportBox from '../Report/ReportBox';
 import type { OpinionReportButton_opinion } from '~relay/OpinionReportButton_opinion.graphql';
 
@@ -14,7 +14,9 @@ type Props = {
 class OpinionReportButton extends React.Component<Props> {
   handleReport = (data: Object) => {
     const { opinion, dispatch } = this.props;
-    return submitOpinionReport(opinion, data, dispatch);
+    if (opinion.id) {
+      return submitReport(opinion.id, data, dispatch, 'alert.success.report.proposal');
+    }
   };
 
   render() {

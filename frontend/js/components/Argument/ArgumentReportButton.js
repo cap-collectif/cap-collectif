@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../Report/ReportBox';
-import { submitArgumentReport } from '../../redux/modules/report';
+import { submitReport } from '~/redux/modules/report';
 import type { ArgumentReportButton_argument } from '~relay/ArgumentReportButton_argument.graphql';
-import type { Dispatch } from '../../types';
+import type { Dispatch } from '~/types';
 
 type OwnProps = {|
   argument: ArgumentReportButton_argument,
@@ -22,7 +22,7 @@ class ArgumentReportButton extends React.Component<Props> {
     if (!argument.related) {
       return;
     }
-    return submitArgumentReport(argument.related, argument.id, data, dispatch);
+    return submitReport(argument.id, data, dispatch, 'alert.success.report.argument');
   };
 
   render() {
