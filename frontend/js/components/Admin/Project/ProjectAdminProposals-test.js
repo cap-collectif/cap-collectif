@@ -6,6 +6,7 @@ import { ProjectAdminProposals } from './ProjectAdminProposals';
 import { $refType, $fragmentRefs, relayPaginationMock } from '~/mocks';
 import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal';
 import 'core-js';
+import { features } from '~/redux/modules/default';
 
 const DEFAULT_MERGED_PROPOSALS_PROJECT = {
   id: 'UHJvamVjdDpwcm9dzdqZWN0Ng==',
@@ -862,6 +863,7 @@ describe('<ProjectAdminProposals />', () => {
       ...DEFAULT_PROJECT,
     },
     themes,
+    features,
     baseUrl: 'jesuislurldebase',
     hasContributionsStep: true,
   };
@@ -881,6 +883,10 @@ describe('<ProjectAdminProposals />', () => {
     },
     noProposals: {
       ...defaultProps,
+      features: {
+        ...features,
+        import_proposals: true,
+      },
       project: {
         ...defaultProps.project,
         proposals: {

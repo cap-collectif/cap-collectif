@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql';
@@ -21,7 +22,7 @@ import type {
   ProposalsStepValues,
   SortValues,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
-import type { Uuid } from '~/types';
+import type { FeatureToggles, State, Uuid } from '~/types';
 import InlineSelect from '~ui/InlineSelect';
 import {
   getAllFormattedChoicesForProject,
@@ -62,16 +63,19 @@ import AnalysisFilterTheme, {
   type ThemeFilter,
 } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
-import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
+import ImportButton from '~/components/Admin/Project/ImportButton/ImportButton';
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 import Button from '~ds/Button/Button';
+import Flex from '~ui/Primitives/Layout/Flex';
+import NewExportButton from '~/components/Admin/Project/ExportButton/NewExportButton';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
 const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 
 type Props = {|
+  +features: FeatureToggles,
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
   +themes: ProjectAdminProposals_themes,
@@ -546,6 +550,7 @@ export const ProjectAdminProposals = ({
   relay,
   baseUrl,
   hasContributionsStep,
+  features,
 }: Props) => {
   const { parameters, dispatch, status } = useProjectAdminProposalsContext();
   const intl = useIntl();
@@ -574,18 +579,59 @@ export const ProjectAdminProposals = ({
 
   return (
     <PickableList.Provider>
-      {hasContributionsStep && baseUrl && (
-        <Button
-          variant="tertiary"
-          onClick={() => history.push(baseUrl)}
-          leftIcon={ICON_NAME_DS.LONG_ARROW_LEFT}
-          size="small"
-          mb={8}>
-          <FormattedMessage id="global.steps" />
-        </Button>
-      )}
-
       <AnalysisPickableListContainer>
+        {hasContributionsStep && baseUrl && (
+          <Button
+            variant="tertiary"
+            onClick={() => history.push(baseUrl)}
+            leftIcon={ICON_NAME_DS.LONG_ARROW_LEFT}
+            size="small"
+            mb={4}>
+            <FormattedMessage id="global.steps" />
+          </Button>
+        )}
+        <Flex justify="space-between">
+          <div>
+            <ClearableInput
+              id="search"
+              name="search"
+              type="text"
+              icon={<i className="cap cap-magnifier" />}
+              disabled={!hasProposals}
+              onClear={() => {
+                if (parameters.filters.term !== null) {
+                  dispatch({ type: 'CLEAR_TERM' });
+                }
+              }}
+              initialValue={parameters.filters.term}
+              onSubmit={term => {
+                if (term === '' && parameters.filters.term !== null) {
+                  dispatch({ type: 'CLEAR_TERM' });
+                } else if (term !== '' && parameters.filters.term !== term) {
+                  dispatch({ type: 'SEARCH_TERM', payload: term });
+                }
+              }}
+              placeholder={intl.formatMessage({ id: 'global.menu.search' })}
+            />
+          </div>
+          <div>
+            {features.import_proposals && <ImportButton />}
+            <NewExportButton
+              disabled={!hasProposals}
+              onChange={(stepSlug: string | string[]) => {
+                if (typeof stepSlug === 'string') {
+                  window.open(
+                    `/projects/${project.slug}/step/${stepSlug ?? ''}/download`,
+                    '_blank',
+                  );
+                }
+              }}
+              exportableSteps={project.exportableSteps}
+              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+            />
+          </div>
+        </Flex>
+
         <S.ProjectAdminProposalsHeader>
           <div>
             <InlineSelect
@@ -621,55 +667,6 @@ export const ProjectAdminProposals = ({
                 />
               </InlineSelect.Choice>
             </InlineSelect>
-          </div>
-
-          <div>
-            <ExportButton
-              hasMarginRight
-              disabled={!hasProposals}
-              onChange={stepSlug => {
-                window.open(`/projects/${project.slug}/step/${stepSlug ?? ''}/download`, '_blank');
-              }}
-              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif">
-              {project.exportableSteps.filter(Boolean).map(({ position, step }) => (
-                <DropdownSelect.Choice key={step.id} value={step.slug}>
-                  <strong className="bold-content">
-                    <FormattedMessage id="admin.label.step" />
-                    {`${position ?? 0} ${step.title}`}
-                  </strong>
-                  {` - `}
-                  <FormattedMessage
-                    id={
-                      step.__typename === 'QuestionnaireStep'
-                        ? 'list-of-answers'
-                        : 'list-of-contributions'
-                    }
-                  />
-                </DropdownSelect.Choice>
-              ))}
-            </ExportButton>
-
-            <ClearableInput
-              id="search"
-              name="search"
-              type="text"
-              icon={<i className="cap cap-magnifier" />}
-              disabled={!hasProposals}
-              onClear={() => {
-                if (parameters.filters.term !== null) {
-                  dispatch({ type: 'CLEAR_TERM' });
-                }
-              }}
-              initialValue={parameters.filters.term}
-              onSubmit={term => {
-                if (term === '' && parameters.filters.term !== null) {
-                  dispatch({ type: 'CLEAR_TERM' });
-                } else if (term !== '' && parameters.filters.term !== term) {
-                  dispatch({ type: 'SEARCH_TERM', payload: term });
-                }
-              }}
-              placeholder={intl.formatMessage({ id: 'global.menu.search' })}
-            />
           </div>
         </S.ProjectAdminProposalsHeader>
 
@@ -755,7 +752,11 @@ export const ProjectAdminProposals = ({
   );
 };
 
-export default createPaginationContainer(
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+});
+
+const container = createPaginationContainer(
   ProjectAdminProposals,
   {
     project: graphql`
@@ -986,3 +987,5 @@ export default createPaginationContainer(
     `,
   },
 );
+
+export default connect<any, any, _, _, _, _>(mapStateToProps)(container);

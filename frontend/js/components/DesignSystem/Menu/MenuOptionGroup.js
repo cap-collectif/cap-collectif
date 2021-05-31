@@ -10,12 +10,14 @@ import Text from '~ui/Primitives/Text';
 type Props = {|
   ...AppBoxProps,
   +type: 'checkbox' | 'radio',
-  +title?: string,
+  +title?: React.Node | string,
+  +titleBackgroundColor?: string,
   +value?: string | string[],
   +onChange?: (newValue: string | string[]) => void,
+  +uppercase?: boolean
 |};
 
-const MenuOptionGroup = ({ children, title, value, onChange, type, ...props }: Props) => {
+const MenuOptionGroup = ({children, title, value, onChange, type, titleBackgroundColor, uppercase = true, ...props}: Props) => {
   const context = useMemo<Context>(
     () => ({
       onChange,
@@ -24,35 +26,37 @@ const MenuOptionGroup = ({ children, title, value, onChange, type, ...props }: P
     }),
     [onChange, value, type],
   );
+
   return (
-    <MenuOptionGroupContext.Provider value={context}>
+    <MenuOptionGroupContext.Provider value={ context }>
       <AppBox
-        css={css({
+        css={ css({
           pointerEvents: 'all',
           '&:first-of-type .menu__option__group--title': {
             borderTop: 'none',
           },
-        })}
+        }) }
         role="group"
-        {...props}>
-        {title && (
+        { ...props }>
+        { title && (
           <Text
             className="menu__option__group--title"
             color="gray.900"
+            backgroundColor={ titleBackgroundColor }
             lineHeight="sm"
-            fontSize={1}
+            fontSize={ 1 }
             fontWeight="semibold"
-            px={3}
-            py={2}
+            px={ 3 }
+            py={ 2 }
             bg="gray.100"
             borderBottom="normal"
             borderTop="normal"
             borderColor="gray.300"
-            uppercase>
-            {title}
+            uppercase={uppercase}>
+            { title }
           </Text>
-        )}
-        {children}
+        ) }
+        { children }
       </AppBox>
     </MenuOptionGroupContext.Provider>
   );

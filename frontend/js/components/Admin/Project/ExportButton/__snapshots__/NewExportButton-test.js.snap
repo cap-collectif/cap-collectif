@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NewExportButton/> render correctly 1`] = `
+<Menu
+  placement="bottom-start"
+>
+  <Menu.Button
+    as={Symbol(react.fragment)}
+  >
+    <Button
+      disabled={false}
+      rightIcon="ARROW_DOWN_O"
+      variant="primary"
+      variantSize="small"
+    >
+      global.export
+    </Button>
+  </Menu.Button>
+  <Menu.List
+    maxWidth={300}
+    mt={0}
+  >
+    <Menu.OptionGroup
+      onChange={[MockFunction]}
+      title={
+        <ForwardRef
+          direction="row"
+          justify="space-between"
+        >
+          pop.over.label.export.data-set
+          <ForwardRef(ExportButtonstyle__ButtonInformation)
+            href="http://help.com"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon
+              color="#acacac"
+              name="information"
+              size={16}
+              title="label.export.by.step"
+            />
+          </ForwardRef(ExportButtonstyle__ButtonInformation)>
+        </ForwardRef>
+      }
+      titleBackgroundColor="#ecf0f5"
+      type="radio"
+      uppercase={false}
+    >
+      <NewExportButton__CustomOptionItem
+        className="excerpt"
+        fontSize={12}
+        key="stepId1"
+        value="/dépot"
+      >
+        <Text>
+          <strong
+            className="bold-content"
+          >
+            admin.label.step
+             1 étape de dépot
+          </strong>
+           - 
+          list-of-contributions
+        </Text>
+      </NewExportButton__CustomOptionItem>
+      <NewExportButton__CustomOptionItem
+        className="excerpt"
+        fontSize={12}
+        key="stepId2"
+        value="/select"
+      >
+        <Text>
+          <strong
+            className="bold-content"
+          >
+            admin.label.step
+             2 étape de sélection
+          </strong>
+           - 
+          list-of-contributions
+        </Text>
+      </NewExportButton__CustomOptionItem>
+    </Menu.OptionGroup>
+  </Menu.List>
+</Menu>
+`;
+
+exports[`<NewExportButton/> render disabled 1`] = `
+<Menu
+  placement="bottom-start"
+>
+  <Menu.Button
+    as={Symbol(react.fragment)}
+  >
+    <Button
+      disabled={true}
+      rightIcon="ARROW_DOWN_O"
+      variant="primary"
+      variantSize="small"
+    >
+      global.export
+    </Button>
+  </Menu.Button>
+  <Menu.List
+    maxWidth={300}
+    mt={0}
+  >
+    <Menu.OptionGroup
+      onChange={[MockFunction]}
+      title={
+        <ForwardRef
+          direction="row"
+          justify="space-between"
+        >
+          pop.over.label.export.data-set
+          <ForwardRef(ExportButtonstyle__ButtonInformation)
+            href="http://help.com"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon
+              color="#acacac"
+              name="information"
+              size={16}
+              title="label.export.by.step"
+            />
+          </ForwardRef(ExportButtonstyle__ButtonInformation)>
+        </ForwardRef>
+      }
+      titleBackgroundColor="#ecf0f5"
+      type="radio"
+      uppercase={false}
+    >
+      <NewExportButton__CustomOptionItem
+        className="excerpt"
+        fontSize={12}
+        key="stepId1"
+        value="/dépot"
+      >
+        <Text>
+          <strong
+            className="bold-content"
+          >
+            admin.label.step
+             1 étape de dépot
+          </strong>
+           - 
+          list-of-contributions
+        </Text>
+      </NewExportButton__CustomOptionItem>
+      <NewExportButton__CustomOptionItem
+        className="excerpt"
+        fontSize={12}
+        key="stepId2"
+        value="/select"
+      >
+        <Text>
+          <strong
+            className="bold-content"
+          >
+            admin.label.step
+             2 étape de sélection
+          </strong>
+           - 
+          list-of-contributions
+        </Text>
+      </NewExportButton__CustomOptionItem>
+    </Menu.OptionGroup>
+  </Menu.List>
+</Menu>
+`;
