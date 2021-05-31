@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Repository\ReplyRepository;
-use Elastica\Aggregation\Terms;
+use Elastica\Aggregation\Cardinality;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -60,12 +60,12 @@ class ReplySearch extends Search
             ->setSize(0)
             ->setTrackTotalHits(true);
 
-        $agg = new Terms('participants');
+        $agg = new Cardinality('participants');
         $agg->setField('author.id');
         $query->addAggregation($agg);
         $resultSet = $this->index->search($query);
         $aggregation = $resultSet->getAggregation('participants');
 
-        return \count($aggregation['buckets']) + $aggregation['sum_other_doc_count'];
+        return $aggregation['value'];
     }
 }

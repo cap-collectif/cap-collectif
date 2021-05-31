@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Query;
@@ -40,13 +41,13 @@ class ResponseSearch extends Search
             ->setSize(0)
             ->setTrackTotalHits(true);
         $this->addObjectTypeFilter($query, $this->type);
-        $agg = new Terms('participants');
+        $agg = new Cardinality('participants');
         $agg->setField('reply.author.id');
         $query->addAggregation($agg);
         $resultSet = $this->index->search($query);
         $aggregation = $resultSet->getAggregation('participants');
 
-        return \count($aggregation['buckets']) + $aggregation['sum_other_doc_count'];
+        return $aggregation['value'];
     }
 
     public function getResponsesByQuestion(
