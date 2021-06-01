@@ -1,5 +1,7 @@
 // @flow
+import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
+import ToggleFeatureMutation from '~/mutations/ToggleFeatureMutation';
 import type {
   Exact,
   Action,
@@ -124,17 +126,27 @@ export const toggleFeatureSucceeded = (
   enabled,
 });
 
-export const toggleFeature = (
+export const updateRegistrationCommunicationForm = (values: Object) =>
+  Fetcher.put('/registration_form', values).then(
+    () => {},
+    () => {
+      throw new SubmissionError({ _error: 'Un problème est survenu' });
+    },
+  );
+
+export const toggleFeature = async (
   dispatch: Dispatch,
   feature: FeatureToggle,
   enabled: boolean,
-): Promise<*> =>
-  Fetcher.put(`/toggles/${feature}`, { enabled }).then(
-    () => {
-      dispatch(toggleFeatureSucceeded(feature, enabled));
+): Promise<*> => {
+  await ToggleFeatureMutation.commit({
+    input: {
+      type: feature,
+      enabled,
     },
-    () => {},
-  );
+  });
+  dispatch(toggleFeatureSucceeded(feature, enabled));
+};
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {

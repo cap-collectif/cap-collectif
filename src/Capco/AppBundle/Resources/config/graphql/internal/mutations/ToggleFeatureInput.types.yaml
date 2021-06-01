@@ -1,0 +1,10 @@
+ToggleFeatureInput:
+    type: relay-mutation-input
+    config:
+        description: 'Toggle a feature'
+        fields:
+            type:
+                type: 'InternalFeatureFlagType!'
+                description: 'The type of the feature'
+            enabled:
+                type: 'Boolean!'

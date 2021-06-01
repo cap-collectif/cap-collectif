@@ -6771,6 +6771,9 @@ type Mutation {
   """Edit projects section in admin"""
   updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
 
+  """Toggle a feature"""
+  toggleFeature(input: ToggleFeatureInput!): ToggleFeaturePayload
+
   """Register email domains"""
   registerEmailDomains(input: RegisterEmailDomainsInput!): RegisterEmailDomainsPayload
 }
@@ -13107,6 +13110,18 @@ type TipsMeee {
     """The first n top donators."""
     first: Int = 100
   ): [ProposalTopDonator!]!
+}
+
+input ToggleFeatureInput {
+  """The type of the feature"""
+  type: FeatureFlagType!
+  enabled: Boolean!
+  clientMutationId: String
+}
+
+type ToggleFeaturePayload {
+  featureFlag: FeatureFlag
+  clientMutationId: String
 }
 
 input ToggleSSOConfigurationStatusInput {

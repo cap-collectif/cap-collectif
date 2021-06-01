@@ -1195,6 +1195,15 @@ InternalMutation:
                     inputType: UpdateHomePageProjectsSectionConfigurationInput
                     payloadType: UpdateHomePageProjectsSectionConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation", [value])'
+            # Toggle Feature
+            toggleFeature:
+                description: 'Toggle a feature'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ToggleFeatureInput
+                    payloadType: ToggleFeaturePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ToggleFeatureMutation", [value, getUser()])'
             registerEmailDomains:
                 description: 'Register email domains'
                 access: "@=hasRole('ROLE_ADMIN')"

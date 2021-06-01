@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Form\ApiToggleType;
 use Capco\AppBundle\Form\ApiQuestionType;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,36 +35,6 @@ class FeaturesController extends AbstractFOSRestController
         $this->registrationFormRepository = $registrationFormRepository;
         $this->toggleManager = $toggleManager;
         $this->questionRepository = $questionRepository;
-    }
-
-    /**
-     * @Put("/toggles/{feature}")
-     * @View(statusCode=204, serializerGroups={})
-     */
-    public function putFeatureFlagsAction(Request $request, string $feature)
-    {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        if (!$this->toggleManager->exists($feature)) {
-            throw $this->createNotFoundException(
-                sprintf('The feature "%s" doesn\'t exists.', $feature)
-            );
-        }
-        $form = $this->createForm(ApiToggleType::class);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        if ($form->getData()['enabled']) {
-            $this->toggleManager->activate($feature);
-        } else {
-            $this->toggleManager->deactivate($feature);
-        }
     }
 
     /**

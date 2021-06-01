@@ -1,0 +1,6 @@
+ToggleFeaturePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            featureFlag:
+                type: 'InternalFeatureFlag'
