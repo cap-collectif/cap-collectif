@@ -1,11 +1,6 @@
 // @flow
 import moment from 'moment';
 import ReactOnRails from 'react-on-rails';
-// $FlowFixMe we don't cover synthesis with flow
-import SynthesisViewBoxApp from '../js/startup/SynthesisViewBoxApp';
-// $FlowFixMe we don't cover synthesis with flow
-import SynthesisEditBoxApp from '../js/startup/SynthesisEditBoxApp';
-
 import ProjectsListApp from '../js/startup/ProjectsListAppClient';
 import ProposalStepPageApp from '../js/startup/ProposalStepPageApp';
 import NavbarApp from '../js/startup/NavbarAppClient';
@@ -98,8 +93,6 @@ ReactOnRails.register({
   ProjectTrashButtonApp,
   OpinionPageApp,
   CommentSectionApp,
-  SynthesisViewBoxApp,
-  SynthesisEditBoxApp,
   ProposalPageApp,
   QuestionnaireStepPageApp,
   ProposalVoteBasketWidgetApp,

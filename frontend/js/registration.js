@@ -12,9 +12,6 @@ import CarouselApp from './startup/CarouselApp';
 import MetricsApp from './startup/MetricsApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
-// $FlowFixMe we don't cover Synthesis
-import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
-// import SynthesisEditBoxApp from './startup/SynthesisEditBoxApp'; // It returns null ?
 import ProposalPageApp from './startup/ProposalPageApp';
 import QuestionnaireStepPageApp from './startup/QuestionnaireStepPageApp';
 import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
@@ -115,8 +112,6 @@ ReactOnRails.register({
   EvaluationsIndexPageApp,
   OpinionPageApp,
   CommentSectionApp,
-  SynthesisViewBoxApp,
-  // SynthesisEditBoxApp,
   ProposalPageApp,
   QuestionnaireStepPageApp,
   ProposalVoteBasketWidgetApp,

@@ -49,14 +49,6 @@ capco_api_toggles:
         _format: json
     options: { i18n: false }
 
-capco_api_synthesis:
-    resource: '@CapcoAppBundle/Controller/Api/SynthesisController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
 capco_api_projects:
     resource: '@CapcoAppBundle/Controller/Api/ProjectsController.php'
     type: annotation
