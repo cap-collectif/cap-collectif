@@ -140,3 +140,6 @@ InternalFeatureFlagType:
             import_proposals:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::import_proposals")'
                 description: 'Whether or not admin can mass import proposals in BO.'
+            unstable__analytics_page:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__analytics_page")'
+                description: 'Whether or not the analytics page is visible in BO.'

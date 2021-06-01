@@ -263,6 +263,10 @@ Object {
       "enabled": false,
       "type": "import_proposals",
     },
+    Object {
+      "enabled": false,
+      "type": "unstable__analytics_page",
+    },
   ],
 }
 `;

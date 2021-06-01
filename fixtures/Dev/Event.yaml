@@ -206,7 +206,7 @@ Capco\AppBundle\Entity\Event:
     eventRemote:
         id: eventRemote
         # Make sure to have a future date here, for CI
-        startAt: <identity((new \DateTime('2021-05-28')))>
+        startAt: <identity((new \DateTime('2024-05-28')))>
         author: '@userAgui'
         createdAt: <identity((new \DateTime('2015-04-14')))>
         isPresential: false

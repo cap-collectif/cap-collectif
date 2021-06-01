@@ -76,6 +76,13 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
+          "review": null,
+          "title": "On vous présente Agui, l’ami du BP",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "review": Object {
             "comment": null,
@@ -107,13 +114,6 @@ Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
           "review": null,
           "title": "Evenement animé par l'utilisateur User",
-        },
-      },
-      Object {
-        "node": Object {
-          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
-          "review": null,
-          "title": "On vous présente Agui, l’ami du BP",
         },
       },
       Object {

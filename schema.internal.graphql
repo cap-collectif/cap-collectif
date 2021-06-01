@@ -5439,6 +5439,9 @@ enum FeatureFlagType {
 
   """Whether or not admin can mass import proposals in BO."""
   import_proposals
+
+  """Whether or not the analytics page is visible in BO."""
+  unstable__analytics_page
 }
 
 """Require a firstname"""

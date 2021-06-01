@@ -232,31 +232,6 @@ exports[`<Sidebar /> renders correctly 1`] = `
           />
         </button>
       </div>
-      <div
-        class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
-        id="analytics"
-      >
-        <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
-          type="button"
-        >
-          <div
-            class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
-          >
-            <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
-            />
-            <p
-              class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
-            >
-              admin.group.analytics
-            </p>
-          </div>
-          <iconmock
-            class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
-          />
-        </button>
-      </div>
     </div>
     <span
       class="sc-bdnylx gMVuOh"

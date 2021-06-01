@@ -327,12 +327,18 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
               </SidebarAccordionPanel>
             </SidebarAccordionItem>
           ) : null}
-          <SidebarAccordionItem id="analytics">
-            <SidebarButton icon={ICON_NAME.FOLDER_O} text="admin.group.analytics" isOpen={isOpen} />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              <SidebarLink text="admin.label.analytics" url="/admin/capco/analytics/list" />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
+          {features.unstable__analytics_page ? (
+            <SidebarAccordionItem id="analytics">
+              <SidebarButton
+                icon={ICON_NAME.FOLDER_O}
+                text="admin.group.analytics"
+                isOpen={isOpen}
+              />
+              <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
+                <SidebarLink text="admin.label.analytics" url="/admin/capco/analytics/list" />
+              </SidebarAccordionPanel>
+            </SidebarAccordionItem>
+          ) : null}
         </Accordion>
         {isOpen && (
           <Text
