@@ -209,7 +209,10 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
-        $listMapper->addIdentifier('title', null, ['label' => 'global.title']);
+        $listMapper->addIdentifier('title', null, [
+            'label' => 'global.title',
+            'template' => 'CapcoAdminBundle:Project:title_list_field.html.twig',
+        ]);
         if ($this->manager->isActive('themes')) {
             $listMapper->add('themes', null, ['label' => 'global.themes']);
         }

@@ -68,7 +68,7 @@ const onSubmit = (
   }
   return CreateProjectMutation.commit({ input }).then(data => {
     if (data.createProject && data.createProject.project) {
-      window.location.href = data.createProject.project.adminUrl;
+      window.location.href = data.createProject.project.adminAlphaUrl;
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'all.data.saved' },

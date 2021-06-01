@@ -1,0 +1,9 @@
+{% set route = field_description.options.route.name|default(null) %}
+
+<td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}"
+objectId="{{ admin.id(object) }}"{% if field_description.options.row_align is defined %} style="text-align:{{ field_description.options.row_align }}"{% endif %}>
+    <a class="sonata-link-identifier" href="{{ path('capco_admin_alpha_project_edit', {'id': admin.id(object) }) }}">
+    {{ value }}
+    </a>
+</td>
+
