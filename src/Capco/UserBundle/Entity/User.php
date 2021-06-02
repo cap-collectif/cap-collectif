@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -24,6 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class User extends BaseUser implements
     SynthesisUserInterface,
+    ProjectOwner,
     EquatableInterface,
     IndexableInterface
 {

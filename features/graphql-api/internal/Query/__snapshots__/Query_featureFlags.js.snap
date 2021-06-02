@@ -267,6 +267,10 @@ Object {
       "enabled": false,
       "type": "unstable__analytics_page",
     },
+    Object {
+      "enabled": true,
+      "type": "unstable_project_admin",
+    },
   ],
 }
 `;

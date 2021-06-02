@@ -70,6 +70,7 @@ class FeaturesCategoryResolver
                     Manager::unstable__new_project_card,
                     Manager::import_proposals,
                     Manager::unstable__analytics_page,
+                    Manager::unstable_project_admin,
                 ],
             ],
         ],

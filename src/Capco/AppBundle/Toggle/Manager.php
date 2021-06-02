@@ -79,6 +79,7 @@ class Manager
     public const export_legacy_users = 'export_legacy_users';
     public const import_proposals = 'import_proposals';
     public const unstable__analytics_page = 'unstable__analytics_page';
+    public const unstable_project_admin = 'unstable_project_admin';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -172,6 +173,7 @@ class Manager
         self::export_legacy_users,
         self::import_proposals,
         self::unstable__analytics_page,
+        self::unstable_project_admin,
     ];
 
     protected ToggleManager $toggleManager;

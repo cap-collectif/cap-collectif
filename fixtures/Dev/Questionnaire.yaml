@@ -128,3 +128,13 @@ Capco\AppBundle\Entity\Questionnaire:
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
         privateResult: false
+    questionnaireProjectWithOwner:
+        id: questionnaireProjectWithOwner
+        title: Est-ce que les administrateurs de projet sont utiles?
+        description: Vraiment, je me demande
+        step: '@questionnaireStepProjectWithOwner'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true

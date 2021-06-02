@@ -966,3 +966,72 @@ Capco\AppBundle\Entity\QuestionChoice:
         color: '#FF7400'
         position: 4
         question: '@xQuestionFoodApple'
+    questionnaireProjetOwnerRaisinQuestionChoice1:
+        id: 'qpoRaisinQuestionChoice1'
+        title: 'Noir'
+        position: 1
+        question: '@questionnaireProjectOwnerQuestionFoodGrape'
+    questionnaireProjetOwnerRaisinQuestionChoice2:
+        id: 'qpoRaisinQuestionChoice2'
+        title: 'Vert'
+        position: 2
+        question: '@questionnaireProjectOwnerQuestionFoodGrape'
+    questionnaireProjetOwnerMcdoBkQuestionChoice1:
+        id: 'qpoMcdoBkQuestionChoice1'
+        title: 'Mcdo'
+        position: 1
+        question: '@xQuestionFoodMcdoBk'
+    questionnaireProjetOwnerMcdoBkQuestionChoice2:
+        id: 'qpoMcdoBkQuestionChoice2'
+        title: 'Bk'
+        position: 2
+        question: '@questionnaireProjectOwnerQuestionFoodMcdoBk'
+    questionnaireProjetOwnerMcdoBkQuestionChoice3:
+        id: 'qpoMcdoBkQuestionChoice3'
+        title: 'Kfc'
+        position: 3
+        question: '@questionnaireProjectOwnerQuestionFoodMcdoBk'
+    questionnaireProjetOwnerNoIdeaQuestionChoice1:
+        id: 'qpoNoIdeaQuestionChoice1'
+        title: 'Bk'
+        position: 1
+        question: '@questionnaireProjectOwnerQuestionFoodNoIdea'
+    questionnaireProjetOwnerNoIdeaQuestionChoice2:
+        id: 'qpoNoIdeaQuestionChoice2'
+        title: 'Kfc'
+        position: 2
+        question: '@questionnaireProjectOwnerQuestionFoodNoIdea'
+    questionnaireProjetOwnerNoIdeaQuestionChoice3:
+        id: 'qpoNoIdeaQuestionChoice3'
+        title: 'Mcdo'
+        position: 3
+        question: '@questionnaireProjectOwnerQuestionFoodNoIdea'
+    questionnaireProjetOwnerNoIdeaQuestionChoice4:
+        id: 'qpoNoIdeaQuestionChoice4'
+        title: 'Flunch'
+        position: 4
+        question: '@questionnaireProjectOwnerQuestionFoodNoIdea'
+    questionnaireProjetOwnerAppleQuestionChoice1:
+        id: 'qpoAppleQuestionChoice1'
+        title: 'Gala'
+        color: '#FF4D00'
+        position: 1
+        question: '@questionnaireProjectOwnerQuestionFoodApple'
+    questionnaireProjetOwnerAppleQuestionChoice2:
+        id: 'qpoAppleQuestionChoice2'
+        title: 'Golden'
+        color: '#EDDB00'
+        position: 2
+        question: '@questionnaireProjectOwnerQuestionFoodApple'
+    questionnaireProjetOwnerAppleQuestionChoice3:
+        id: 'qpoAppleQuestionChoice3'
+        title: 'Granny smith'
+        color: '#3AD400'
+        position: 3
+        question: '@questionnaireProjectOwnerQuestionFoodApple'
+    questionnaireProjetOwnerAppleQuestionChoice4:
+        id: 'qpoAppleQuestionChoice4'
+        title: 'Pink lady'
+        color: '#FF7400'
+        position: 4
+        question: '@questionnaireProjectOwnerQuestionFoodApple'

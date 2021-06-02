@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Enum\ProjectAffiliation;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
@@ -99,8 +100,10 @@ class ProjectRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder
-    {
+    public function getProjectsViewerCanSeeQueryBuilder(
+        $viewer = null,
+        ?array $affiliations = []
+    ): QueryBuilder {
         $visibility = $this->getVisibilityForViewer($viewer);
 
         $qb = $this->createQueryBuilder('p')
@@ -141,18 +144,22 @@ class ProjectRepository extends EntityRepository
         return $qb;
     }
 
-    public function getByUserPublicPaginated(User $user, int $offset, int $limit): Paginator
-    {
-        $query = $this->getUserProjectPublicQueryBuilder($user);
+    public function getByUserPublicPaginated(
+        User $user,
+        int $offset,
+        int $limit,
+        ?array $affiliations = []
+    ): Paginator {
+        $query = $this->getUserProjectPublicQueryBuilder($user, $affiliations);
         $query->addSelect('u');
         $query->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($query);
     }
 
-    public function countPublicPublished(User $user): int
+    public function countPublicPublished(User $user, ?array $affiliations = []): int
     {
-        $query = $this->getUserProjectPublicQueryBuilder($user);
+        $query = $this->getUserProjectPublicQueryBuilder($user, $affiliations);
 
         $query->select('COUNT(DISTINCT(p.id))');
 
@@ -345,12 +352,22 @@ class ProjectRepository extends EntityRepository
             ->getResult();
     }
 
-    private function getUserProjectPublicQueryBuilder(User $user): QueryBuilder
-    {
-        return $this->getProjectsViewerCanSeeQueryBuilder($user)
-            ->innerJoin('authors.user', 'u', Expr\Join::WITH, 'u = :user')
-            ->andWhere('p.visibility = :visibility')
+    private function getUserProjectPublicQueryBuilder(
+        User $user,
+        ?array $affiliations = []
+    ): QueryBuilder {
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($user, $affiliations);
+        if ($affiliations && \in_array(ProjectAffiliation::OWNER, $affiliations, true)) {
+            $qb->innerJoin('authors.user', 'u');
+            $qb->andWhere('p.owner = :user');
+        } else {
+            $qb->innerJoin('authors.user', 'u', Expr\Join::WITH, 'u = :user');
+        }
+
+        $qb->andWhere('p.visibility = :visibility')
             ->setParameter('user', $user)
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+
+        return $qb;
     }
 }

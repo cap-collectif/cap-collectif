@@ -129,6 +129,9 @@ Scenario: GraphQL client wants to list sections
               "id":"opinionTypeFirstInMultiForExport"
            },
            {
+              "id":"opinionTypeFirstInPo"
+           },
+           {
               "id":"opinionTypeManyOptions"
            },
            {
@@ -136,6 +139,9 @@ Scenario: GraphQL client wants to list sections
            },
            {
               "id":"opinionTypeSecondInMultiForExport"
+           },
+           {
+              "id": "opinionTypeSecondInPo"
            }
         ]
      }

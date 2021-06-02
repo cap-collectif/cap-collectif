@@ -26,14 +26,15 @@ class UserProjectsResolver implements ResolverInterface
     {
         if (!$args) {
             $args = new Argument([
-                'first' => 0
+                'first' => 0,
             ]);
         }
+        $affiliations = $args['affiliations'];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($user, $affiliations) {
             try {
                 $arguments = $this->projectRepository
-                    ->getByUserPublicPaginated($user, $offset, $limit)
+                    ->getByUserPublicPaginated($user, $offset, $limit, $affiliations)
                     ->getIterator()
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {
@@ -45,7 +46,7 @@ class UserProjectsResolver implements ResolverInterface
             return $arguments;
         });
 
-        $totalCount = $this->projectRepository->countPublicPublished($user);
+        $totalCount = $this->projectRepository->countPublicPublished($user, $affiliations);
 
         return $paginator->auto($args, $totalCount);
     }

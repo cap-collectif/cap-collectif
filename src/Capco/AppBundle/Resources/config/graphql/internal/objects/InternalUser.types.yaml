@@ -3,9 +3,12 @@ InternalUser:
     inherits:
         - PreviewUser
         - InternalPrimaryKey
+        - InternalProjectOwner
     config:
         description: "A user is an individual's account."
         name: User
+        interfaces:
+            - InternalProjectOwner
         fields:
             adminUrl:
                 type: 'URI!'
@@ -321,11 +324,6 @@ InternalUser:
                 type: 'InternalResponseConnection!'
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
-            projects:
-                type: 'InternalProjectConnection!'
-                description: 'Get all projects the user has created.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
-                argsBuilder: 'Relay::Connection'
             isAdmin:
                 type: 'Boolean!'
             isSuperAdmin:

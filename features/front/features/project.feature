@@ -82,7 +82,7 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I wait ".project-preview" to appear on current page
   And I select "argument.sort.popularity" from "project-sorting"
   And I wait ".project-preview" to appear on current page
-  Then I should see 7 ".project-preview" elements
+  Then I should see 8 ".project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Croissance, innovation, disruption"

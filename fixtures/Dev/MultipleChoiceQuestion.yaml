@@ -1,378 +1,398 @@
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
-  validationRule1:
-    __factory: { create: ['equal', 3] }
-  validationRule2:
-    __factory: { create: ['min', 2] }
+    validationRule1:
+        __factory: { create: ['equal', 3] }
+    validationRule2:
+        __factory: { create: ['min', 2] }
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
-  xQuestion1:
-    id: 13
-    title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
-    helpText: Plusieurs choix sont possibles
-    required: true
-    type: 5 # checkbox
-    randomQuestionChoices: false
-    otherAllowed: true
-    validationRule: '@validationRule1'
-  xQuestion2:
-    id: 14
-    title: Quel est ton athlète favori ?
-    helpText: Un seul choix possible
-    required: false
-    type: 3 # radio
-    randomQuestionChoices: true
-    otherAllowed: true
-  xQuestion3:
-    id: 15
-    title: 'Nelson Monfort parle-t-il:'
-    helpText: Merci de répondre sincèrement
-    required: false
-    type: 4 # select
-    randomQuestionChoices: true
-  xQuestion4:
-    id: 16
-    title: Classez vos choix
-    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
-    required: false
-    type: 6
-    randomQuestionChoices: false
-    validationRule: '@validationRule2'
-  xQuestion5:
-    id: 17
-    title: Sangohan / Vegeta ?
-    required: true
-    type: 4 # select
-    randomQuestionChoices: true
-  xQuestion6:
-    id: 18
-    title: Choissez le meilleur logo
-    required: false
-    type: 3
-    randomQuestionChoices: false
-  xQuestion7:
-    id: 19
-    title: Est-ce que Martoni a encore une balle dans son chargeur ?
-    required: false
-    type: 8
-    randomQuestionChoices: false
-  xQuestion8:
-    id: 20
-    title: Comment trouvez-vous cette présentation ?
-    required: false
-    type: 8
-    randomQuestionChoices: false
-  xQuestion9:
-    id: 21
-    title: Quelle définition pour cette proposition ?
-    helpText: Vous pouvez sélectionner bien évidemment plusieurs valeurs.
-    required: true
-    otherAllowed: true
-    type: 5
-    randomQuestionChoices: false
-  xQuestion10:
-    id: 22
-    title: En résumé
-    helpText: Une seule réponse valable ici, faites le bon choix !
-    required: false
-    otherAllowed: true
-    type: 3
-    randomQuestionChoices: false
-  xQuestion11:
-    id: 23
-    title: Classez vos choix
-    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
-    required: false
-    type: 6
-    randomQuestionChoices: false
-  xQuestionHapNoel:
-    id: 24
-    title: Hap ou Noel ?
-    required: false
-    type: 4 # select
-  xQuestionHapCreation:
-    id: 25
-    title: Par qui Hap a t-il été créé ?
-    alwaysJumpDestinationQuestion: '@xQuestionIsHapGood'
-    type: 4 # select
-  xQuestionIsHapGood:
-    id: 26
-    title: Hap est-il un homme bon ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
-    type: 4 # select
-  xQuestionNoelFete:
-    id: 27
-    title: Noel a t-il un rapport avec la fête de Noël ?
-    alwaysJumpDestinationQuestion: '@xQuestionNoelHatColor'
-    type: 4 # select
-  xQuestionNoelHatColor:
-    id: 28
-    title: De quelle couleur est le chapeau de Noël ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
-    type: 4 # select
-  xQuestionMarvelOrDc:
-    id: 31
-    title: Plutôt Marvel ou DC ?
-    type: 4 # select
-  xQuestionDcSupermanLike:
-    id: 32
-    title: T'aimes bien Superman ?
-    alwaysJumpDestinationQuestion: '@xQuestionDcBatmanLike'
-    type: 4 # select
-  xQuestionDcBatmanLike:
-    id: 33
-    title: T'aimes bien Batman ?
-    alwaysJumpDestinationQuestion: '@xQuestionDcSupergirlLike'
-    type: 4 # select
-  xQuestionDcSupergirlLike:
-    id: 34
-    title: T'aimes bien Supergirl ?
-    alwaysJumpDestinationQuestion: '@xQuestionEndConditionel'
-    type: 4 # select
-  xQuestionMarvelIronManLike:
-    id: 35
-    title: T'aimes bien Iron Man ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelLukeCageLike'
-    type: 4 # select
-  xQuestionMarvelLukeCageLike:
-    id: 36
-    title: T'aimes bien Luke Cage ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelThorLike'
-    type: 4 # select
-  xQuestionMarvelThorLike:
-    id: 37
-    title: T'aimes bien Thor ?
-    alwaysJumpDestinationQuestion: '@xQuestionEndConditionel'
-    type: 4 # select
-  xQuestionEndConditionel:
-    id: 38
-    title: C'est la fin mais j'affiche quand même des choix
-    type: 4 # select
-  xQuestionHapNotGoodHowDareYou:
-    id: 39
-    title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
-    type: 4 # select
-  ljxQuestionRadio:
-    id: 40
-    title: Ceci est-il une question de type Radio ?
-    type: 3
-  ljxQuestionSelect:
-    id: 41
-    title: Ceci est-il une question de type Select ?
-    type: 4 # select
-  ljxQuestionButton:
-    id: 42
-    title: Ceci est-il une question de type Boutton ?
-    type: 8
-  ljxQuestionCheckbox:
-    id: 43
-    title: Ceci est-il une question de type Checkbox ?
-    type: 5
-  ljxQuestionRanking:
-    id: 44
-    title: Ceci est-il une question de type Classement ?
-    type: 6
-  xQuestionFavoriteFleuve:
-    id: 45
-    title: Votre fleuve préféré
-    required: false
-    type: 4 # select
-  xQuestionHapGange:
-    id: 46
-    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
-    required: false
-    alwaysJumpDestinationQuestion: '@xQuestionHapCreation'
-    type: 4 # select
-  xQuestionReactVue:
-    id: 47
-    title: Who is the best ?
-    required: false
-    type: 4 # select
-  xQuestion12:
-    id: 48
-    title: Question Multiple?
-    required: false
-    type: 3 # radio
-  xQuestion13:
-    id: 49
-    title: J'ai plusieurs choix?
-    required: false
-    type: 3 # radio
-  xQuestionHapNoelProposalForm15:
-    id: 2415
-    title: Hap ou Noel ?
-    required: false
-    type: 4 # select
-  xQuestionFavoriteFleuveProposalForm15:
-    id: 4515
-    title: Votre fleuve préféré
-    required: false
-    type: 4 # select
-  xQuestionHapGangeProposalForm15:
-    id: 4615
-    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
-    required: false
-    alwaysJumpDestinationQuestion: '@xQuestionHapCreationProposalForm15'
-    type: 4 # select
-  xQuestionHapCreationProposalForm15:
-    id: 2515
-    title: Par qui Hap a t-il été créé ?
-    alwaysJumpDestinationQuestion: '@xQuestionIsHapGoodProposalForm15'
-    type: 4 # select
-  xQuestionIsHapGoodProposalForm15:
-    id: 2615
-    title: Hap est-il un homme bon ?
-    type: 4 # select
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
-  xQuestionNoelFeteProposalForm15:
-    id: 2715
-    title: Noel a t-il un rapport avec la fête de Noël ?
-    alwaysJumpDestinationQuestion: '@xQuestionNoelHatColorProposalForm15'
-    type: 4 # select
-  xQuestionNoelHatColorProposalForm15:
-    id: 2815
-    title: De quelle couleur est le chapeau de Noël ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
-    type: 4 # select
-  xQuestionMarvelOrDcProposalForm15:
-    id: 3115
-    title: Plutôt Marvel ou DC ?
-    type: 4 # select
-  xQuestionDcSupermanLikePForm15:
-    id: 3215
-    title: T'aimes bien Superman ?
-    alwaysJumpDestinationQuestion: '@xQuestionDcBatmanLikeProposalForm15'
-    type: 4 # select
-  xQuestionDcBatmanLikeProposalForm15:
-    id: 3315
-    title: T'aimes bien Batman ?
-    alwaysJumpDestinationQuestion: '@xQuestionDcSupergirlLikePF15'
-    type: 4 # select
-  xQuestionDcSupergirlLikePF15:
-    id: 3415
-    title: T'aimes bien Supergirl ?
-    alwaysJumpDestinationQuestion: '@xQuestionEndConditionProposalForm15'
-    type: 4 # select
-  xQuestionMarvelIronManLikeProposalForm15:
-    id: 3515
-    title: T'aimes bien Iron Man ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelLukeCageLikePF15'
-    type: 4 # select
-  xQuestionMarvelLukeCageLikePF15:
-    id: 3615
-    title: T'aimes bien Luke Cage ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelThorLikePF15'
-    type: 4 # select
-  xQuestionMarvelThorLikePF15:
-    id: 3715
-    title: T'aimes bien Thor ?
-    alwaysJumpDestinationQuestion: '@xQuestionEndConditionProposalForm15'
-    type: 4 # select
-  xQuestionEndConditionProposalForm15:
-    id: 3815
-    title: C'est la fin mais j'affiche quand même des choix
-    type: 4 # select
-  xQuestionHapNotGoodProposalForm15:
-    id: 3915
-    title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
-    alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
-    type: 4 # select
-  xQuestion16:
-    id: 3916
-    title: Classez vos choix
-    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
-    required: false
-    type: 6
-    randomQuestionChoices: true
-  xQuestionWithLotOfChoices:
-    id: 3917
-    title: Choisissez votre choix préféré
-    required: true
-    type: 4
-  xQuestionIdfGrandOrLocal:
-    id: 3918
-    title: 'Je souhaite...'
-    required: true
-    private: true
-    type: 3 # radio
-  xQuestionIdfGrandProjet1:
-    id: 3919
-    title: 'Je suis...'
-    private: true
-    required: true
-    type: 3 # radio
-    alwaysJumpDestinationQuestion: '@sQuestionIdfGrandProjectPorteur2'
-  xQuestionIdfProjetLocal1:
-    id: 3920
-    title: 'Je suis...'
-    private: true
-    required: true
-    type: 3 # radio
-  xQuestionIdfProjetLocalAssociation1:
-    id: 3921
-    title: Avez-vous un numéro SIRET ? (Pour les associations)
-    private: true
-    required: true
-    type: 3 # radio
-  xQuestionIdfPLocalAssocWithoutSiret1:
-    id: 3922
-    title: Avez-vous un numéro RNA (ou WALDEC pour les associations créées avant 2010)
-    private: true
-    required: true
-    type: 3 # radio
-  xQuestion17:
-    id: 3923
-    title: J'ai plusieurs choix leu?
-    required: false
-    type: 3 # radio
-  xQuestionEvalIdf1:
-    id: 3924
-    title: Existence juridique du candidat avérée
-    required: false
-    type: 3 # radio
-  xQuestionEvalIdf2:
-    id: 3925
-    title: Le projet répond à l’intérêt général et a une visée collective
-    required: false
-    type: 4 # select
-  xQuestionEvalIdf3:
-    id: 3926
-    title: Le projet ne correspond pas à une action de lobbying à visée commerciale ou à une action à visée politique
-    required: false
-    type: 5 # checkbox
-  xQuestionEvalIdf4:
-    id: 3927
-    title: Les dépenses estimées par le porteur de projet sont-elles justifiées ?
-    required: false
-    type: 3 # button
-  xQuestionEvalIdf5:
-    id: 3928
-    title: Le projet est-il concret et rapidement réalisable (démarrage dans l’année et durée de réalisation envisagée compatible avec le projet décrit)
-    required: false
-    type: 5 # button
-  xQuestionEvalIdf6:
-    id: 3929
-    title: Avis sur la faisabilité technique, juridique et financière du projet
-    required: false
-    type: 8 # button
-  # FOOD PROJECT
-  xQuestionFoodGrape:
-    id: 3930
-    title: T'es plus raisin noir ou vert ?
-    required: true
-    type: 3 # radio
-  xQuestionFoodMcdoBk:
-    id: 3931
-    title: Team mcdo ou BK ?
-    required: true
-    type: 4 # select
-  xQuestionFoodNoIdea:
-    id: 3932
-    title: Coches ce que tu veux
-    required: true
-    type: 5 # checkbox
-  xQuestionFoodApple:
-    id: 3933
-    title: Quel type de pomme es-tu ?
-    required: true
-    type: 8 # button
-  # END FOOD PROJECT
+    xQuestion1:
+        id: 13
+        title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
+        helpText: Plusieurs choix sont possibles
+        required: true
+        type: 5 # checkbox
+        randomQuestionChoices: false
+        otherAllowed: true
+        validationRule: '@validationRule1'
+    xQuestion2:
+        id: 14
+        title: Quel est ton athlète favori ?
+        helpText: Un seul choix possible
+        required: false
+        type: 3 # radio
+        randomQuestionChoices: true
+        otherAllowed: true
+    xQuestion3:
+        id: 15
+        title: 'Nelson Monfort parle-t-il:'
+        helpText: Merci de répondre sincèrement
+        required: false
+        type: 4 # select
+        randomQuestionChoices: true
+    xQuestion4:
+        id: 16
+        title: Classez vos choix
+        helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+        required: false
+        type: 6
+        randomQuestionChoices: false
+        validationRule: '@validationRule2'
+    xQuestion5:
+        id: 17
+        title: Sangohan / Vegeta ?
+        required: true
+        type: 4 # select
+        randomQuestionChoices: true
+    xQuestion6:
+        id: 18
+        title: Choissez le meilleur logo
+        required: false
+        type: 3
+        randomQuestionChoices: false
+    xQuestion7:
+        id: 19
+        title: Est-ce que Martoni a encore une balle dans son chargeur ?
+        required: false
+        type: 8
+        randomQuestionChoices: false
+    xQuestion8:
+        id: 20
+        title: Comment trouvez-vous cette présentation ?
+        required: false
+        type: 8
+        randomQuestionChoices: false
+    xQuestion9:
+        id: 21
+        title: Quelle définition pour cette proposition ?
+        helpText: Vous pouvez sélectionner bien évidemment plusieurs valeurs.
+        required: true
+        otherAllowed: true
+        type: 5
+        randomQuestionChoices: false
+    xQuestion10:
+        id: 22
+        title: En résumé
+        helpText: Une seule réponse valable ici, faites le bon choix !
+        required: false
+        otherAllowed: true
+        type: 3
+        randomQuestionChoices: false
+    xQuestion11:
+        id: 23
+        title: Classez vos choix
+        helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+        required: false
+        type: 6
+        randomQuestionChoices: false
+    xQuestionHapNoel:
+        id: 24
+        title: Hap ou Noel ?
+        required: false
+        type: 4 # select
+    xQuestionHapCreation:
+        id: 25
+        title: Par qui Hap a t-il été créé ?
+        alwaysJumpDestinationQuestion: '@xQuestionIsHapGood'
+        type: 4 # select
+    xQuestionIsHapGood:
+        id: 26
+        title: Hap est-il un homme bon ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
+        type: 4 # select
+    xQuestionNoelFete:
+        id: 27
+        title: Noel a t-il un rapport avec la fête de Noël ?
+        alwaysJumpDestinationQuestion: '@xQuestionNoelHatColor'
+        type: 4 # select
+    xQuestionNoelHatColor:
+        id: 28
+        title: De quelle couleur est le chapeau de Noël ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
+        type: 4 # select
+    xQuestionMarvelOrDc:
+        id: 31
+        title: Plutôt Marvel ou DC ?
+        type: 4 # select
+    xQuestionDcSupermanLike:
+        id: 32
+        title: T'aimes bien Superman ?
+        alwaysJumpDestinationQuestion: '@xQuestionDcBatmanLike'
+        type: 4 # select
+    xQuestionDcBatmanLike:
+        id: 33
+        title: T'aimes bien Batman ?
+        alwaysJumpDestinationQuestion: '@xQuestionDcSupergirlLike'
+        type: 4 # select
+    xQuestionDcSupergirlLike:
+        id: 34
+        title: T'aimes bien Supergirl ?
+        alwaysJumpDestinationQuestion: '@xQuestionEndConditionel'
+        type: 4 # select
+    xQuestionMarvelIronManLike:
+        id: 35
+        title: T'aimes bien Iron Man ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelLukeCageLike'
+        type: 4 # select
+    xQuestionMarvelLukeCageLike:
+        id: 36
+        title: T'aimes bien Luke Cage ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelThorLike'
+        type: 4 # select
+    xQuestionMarvelThorLike:
+        id: 37
+        title: T'aimes bien Thor ?
+        alwaysJumpDestinationQuestion: '@xQuestionEndConditionel'
+        type: 4 # select
+    xQuestionEndConditionel:
+        id: 38
+        title: C'est la fin mais j'affiche quand même des choix
+        type: 4 # select
+    xQuestionHapNotGoodHowDareYou:
+        id: 39
+        title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDc'
+        type: 4 # select
+    ljxQuestionRadio:
+        id: 40
+        title: Ceci est-il une question de type Radio ?
+        type: 3
+    ljxQuestionSelect:
+        id: 41
+        title: Ceci est-il une question de type Select ?
+        type: 4 # select
+    ljxQuestionButton:
+        id: 42
+        title: Ceci est-il une question de type Boutton ?
+        type: 8
+    ljxQuestionCheckbox:
+        id: 43
+        title: Ceci est-il une question de type Checkbox ?
+        type: 5
+    ljxQuestionRanking:
+        id: 44
+        title: Ceci est-il une question de type Classement ?
+        type: 6
+    xQuestionFavoriteFleuve:
+        id: 45
+        title: Votre fleuve préféré
+        required: false
+        type: 4 # select
+    xQuestionHapGange:
+        id: 46
+        title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
+        required: false
+        alwaysJumpDestinationQuestion: '@xQuestionHapCreation'
+        type: 4 # select
+    xQuestionReactVue:
+        id: 47
+        title: Who is the best ?
+        required: false
+        type: 4 # select
+    xQuestion12:
+        id: 48
+        title: Question Multiple?
+        required: false
+        type: 3 # radio
+    xQuestion13:
+        id: 49
+        title: J'ai plusieurs choix?
+        required: false
+        type: 3 # radio
+    xQuestionHapNoelProposalForm15:
+        id: 2415
+        title: Hap ou Noel ?
+        required: false
+        type: 4 # select
+    xQuestionFavoriteFleuveProposalForm15:
+        id: 4515
+        title: Votre fleuve préféré
+        required: false
+        type: 4 # select
+    xQuestionHapGangeProposalForm15:
+        id: 4615
+        title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
+        required: false
+        alwaysJumpDestinationQuestion: '@xQuestionHapCreationProposalForm15'
+        type: 4 # select
+    xQuestionHapCreationProposalForm15:
+        id: 2515
+        title: Par qui Hap a t-il été créé ?
+        alwaysJumpDestinationQuestion: '@xQuestionIsHapGoodProposalForm15'
+        type: 4 # select
+    xQuestionIsHapGoodProposalForm15:
+        id: 2615
+        title: Hap est-il un homme bon ?
+        type: 4 # select
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
+    xQuestionNoelFeteProposalForm15:
+        id: 2715
+        title: Noel a t-il un rapport avec la fête de Noël ?
+        alwaysJumpDestinationQuestion: '@xQuestionNoelHatColorProposalForm15'
+        type: 4 # select
+    xQuestionNoelHatColorProposalForm15:
+        id: 2815
+        title: De quelle couleur est le chapeau de Noël ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
+        type: 4 # select
+    xQuestionMarvelOrDcProposalForm15:
+        id: 3115
+        title: Plutôt Marvel ou DC ?
+        type: 4 # select
+    xQuestionDcSupermanLikePForm15:
+        id: 3215
+        title: T'aimes bien Superman ?
+        alwaysJumpDestinationQuestion: '@xQuestionDcBatmanLikeProposalForm15'
+        type: 4 # select
+    xQuestionDcBatmanLikeProposalForm15:
+        id: 3315
+        title: T'aimes bien Batman ?
+        alwaysJumpDestinationQuestion: '@xQuestionDcSupergirlLikePF15'
+        type: 4 # select
+    xQuestionDcSupergirlLikePF15:
+        id: 3415
+        title: T'aimes bien Supergirl ?
+        alwaysJumpDestinationQuestion: '@xQuestionEndConditionProposalForm15'
+        type: 4 # select
+    xQuestionMarvelIronManLikeProposalForm15:
+        id: 3515
+        title: T'aimes bien Iron Man ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelLukeCageLikePF15'
+        type: 4 # select
+    xQuestionMarvelLukeCageLikePF15:
+        id: 3615
+        title: T'aimes bien Luke Cage ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelThorLikePF15'
+        type: 4 # select
+    xQuestionMarvelThorLikePF15:
+        id: 3715
+        title: T'aimes bien Thor ?
+        alwaysJumpDestinationQuestion: '@xQuestionEndConditionProposalForm15'
+        type: 4 # select
+    xQuestionEndConditionProposalForm15:
+        id: 3815
+        title: C'est la fin mais j'affiche quand même des choix
+        type: 4 # select
+    xQuestionHapNotGoodProposalForm15:
+        id: 3915
+        title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
+        alwaysJumpDestinationQuestion: '@xQuestionMarvelOrDcProposalForm15'
+        type: 4 # select
+    xQuestion16:
+        id: 3916
+        title: Classez vos choix
+        helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+        required: false
+        type: 6
+        randomQuestionChoices: true
+    xQuestionWithLotOfChoices:
+        id: 3917
+        title: Choisissez votre choix préféré
+        required: true
+        type: 4
+    xQuestionIdfGrandOrLocal:
+        id: 3918
+        title: 'Je souhaite...'
+        required: true
+        private: true
+        type: 3 # radio
+    xQuestionIdfGrandProjet1:
+        id: 3919
+        title: 'Je suis...'
+        private: true
+        required: true
+        type: 3 # radio
+        alwaysJumpDestinationQuestion: '@sQuestionIdfGrandProjectPorteur2'
+    xQuestionIdfProjetLocal1:
+        id: 3920
+        title: 'Je suis...'
+        private: true
+        required: true
+        type: 3 # radio
+    xQuestionIdfProjetLocalAssociation1:
+        id: 3921
+        title: Avez-vous un numéro SIRET ? (Pour les associations)
+        private: true
+        required: true
+        type: 3 # radio
+    xQuestionIdfPLocalAssocWithoutSiret1:
+        id: 3922
+        title: Avez-vous un numéro RNA (ou WALDEC pour les associations créées avant 2010)
+        private: true
+        required: true
+        type: 3 # radio
+    xQuestion17:
+        id: 3923
+        title: J'ai plusieurs choix leu?
+        required: false
+        type: 3 # radio
+    xQuestionEvalIdf1:
+        id: 3924
+        title: Existence juridique du candidat avérée
+        required: false
+        type: 3 # radio
+    xQuestionEvalIdf2:
+        id: 3925
+        title: Le projet répond à l’intérêt général et a une visée collective
+        required: false
+        type: 4 # select
+    xQuestionEvalIdf3:
+        id: 3926
+        title: Le projet ne correspond pas à une action de lobbying à visée commerciale ou à une action à visée politique
+        required: false
+        type: 5 # checkbox
+    xQuestionEvalIdf4:
+        id: 3927
+        title: Les dépenses estimées par le porteur de projet sont-elles justifiées ?
+        required: false
+        type: 3 # button
+    xQuestionEvalIdf5:
+        id: 3928
+        title: Le projet est-il concret et rapidement réalisable (démarrage dans l’année et durée de réalisation envisagée compatible avec le projet décrit)
+        required: false
+        type: 5 # button
+    xQuestionEvalIdf6:
+        id: 3929
+        title: Avis sur la faisabilité technique, juridique et financière du projet
+        required: false
+        type: 8 # button
+    # FOOD PROJECT
+    xQuestionFoodGrape:
+        id: 3930
+        title: T'es plus raisin noir ou vert ?
+        required: true
+        type: 3 # radio
+    xQuestionFoodMcdoBk:
+        id: 3931
+        title: Team mcdo ou BK ?
+        required: true
+        type: 4 # select
+    xQuestionFoodNoIdea:
+        id: 3932
+        title: Coches ce que tu veux
+        required: true
+        type: 5 # checkbox
+    xQuestionFoodApple:
+        id: 3933
+        title: Quel type de pomme es-tu ?
+        required: true
+        type: 8 # button
+    # END FOOD PROJECT
+    questionnaireProjectOwnerQuestionFoodGrape:
+        id: 3940
+        title: T'es plus raisin noir ou vert ?
+        required: true
+        type: 3 # radio
+    questionnaireProjectOwnerQuestionFoodMcdoBk:
+        id: 3941
+        title: Team mcdo ou BK ?
+        required: true
+        type: 4 # select
+    questionnaireProjectOwnerQuestionFoodNoIdea:
+        id: 3942
+        title: Coches ce que tu veux
+        required: true
+        type: 5 # checkbox
+    questionnaireProjectOwnerQuestionFoodApple:
+        id: 3943
+        title: Quel type de pomme es-tu ?
+        required: true
+        type: 8 # button

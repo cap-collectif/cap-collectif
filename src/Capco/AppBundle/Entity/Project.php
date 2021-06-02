@@ -250,6 +250,11 @@ class Project implements IndexableInterface
      */
     private bool $archived = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->restrictedViewerGroups = new ArrayCollection();
@@ -1308,6 +1313,18 @@ class Project implements IndexableInterface
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

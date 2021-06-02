@@ -143,3 +143,6 @@ InternalFeatureFlagType:
             unstable__analytics_page:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__analytics_page")'
                 description: 'Whether or not the analytics page is visible in BO.'
+            unstable_project_admin:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable_project_admin")'
+                description: 'Whether or not admin can use the project administrator feature.'

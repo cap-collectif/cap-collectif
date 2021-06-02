@@ -222,3 +222,6 @@ InternalProject:
                 type: 'Boolean!'
                 description: 'if it is archived'
                 resolve: '@=value.isArchived()'
+            owner:
+                type: 'InternalProjectOwner'
+                description: 'The owner of the project.'

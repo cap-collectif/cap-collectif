@@ -409,3 +409,23 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@selectionStepIdf3Winners'
         project: '@projectIdf3'
         position: 4
+    pasWithOwner1:
+        id: pasWithOwner1
+        step: '@pstepProjectWithOwner'
+        project: '@projectWithOwner'
+        position: 1
+    pasWithOwner2:
+        id: pasWithOwner2
+        step: '@cstepProjectOwner'
+        project: '@projectWithOwner'
+        position: 2
+    pasWithOwner3:
+        id: pasWithOwner3
+        step: '@collectStepProjectWithOwner'
+        project: '@projectWithOwner'
+        position: 3
+    pasWithOwner4:
+        id: pasWithOwner4
+        step: '@questionnaireStepProjectWithOwner'
+        project: '@projectWithOwner'
+        position: 4

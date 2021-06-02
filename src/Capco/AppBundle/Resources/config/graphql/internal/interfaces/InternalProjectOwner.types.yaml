@@ -1,0 +1,22 @@
+InternalProjectOwner:
+    type: interface
+    config:
+        name: ProjectOwner
+        description: 'Represent an owner of a project.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProjectOwnerTypeResolver", [value])'
+        fields:
+            id:
+                type: 'ID!'
+            username:
+                type: 'String'
+            projects:
+                type: 'InternalProjectConnection!'
+                description: 'Get all projects that the user owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    affiliations:
+                        type: '[InternalProjectAffiliation!]'
+                        description: |
+                            Array of viewer's affiliation options for projects returned from the connection.
+                            For example, OWNER will include only projects that the current viewer owns.

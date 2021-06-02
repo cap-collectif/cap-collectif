@@ -66,6 +66,19 @@ Object {
     },
     Object {
       "contribuable": true,
+      "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvblByb2plY3RXaXRoT3duZXI=",
+      "sections": Array [
+        Object {
+          "title": "Première section",
+        },
+        Object {
+          "title": "Deuxième section",
+        },
+      ],
+      "title": "Consultation dans un projet qui a un administrateur de projet",
+    },
+    Object {
+      "contribuable": true,
       "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhNYW55T3BpbmlvbnM=",
       "sections": Array [
         Object {

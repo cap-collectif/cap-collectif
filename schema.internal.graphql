@@ -5442,6 +5442,9 @@ enum FeatureFlagType {
 
   """Whether or not the analytics page is visible in BO."""
   unstable__analytics_page
+
+  """Whether or not admin can use the project administrator feature."""
+  unstable_project_admin
 }
 
 """Require a firstname"""
@@ -8251,6 +8254,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """if it is archived"""
   archived: Boolean!
+
+  """The owner of the project."""
+  owner: ProjectOwner
 }
 
 """A project abstract step."""
@@ -8263,6 +8269,12 @@ type ProjectAbstractStep {
 
   """The step's position"""
   position: Int
+}
+
+"""The affiliation of a user to a project"""
+enum ProjectAffiliation {
+  """Projects that are owned by the authenticated user."""
+  OWNER
 }
 
 """A connection to a list of items."""
@@ -8347,6 +8359,38 @@ enum ProjectOrderField {
 
   """Allows ordering a list of projects by when they were published."""
   PUBLISHED_AT
+}
+
+"""Represent an owner of a project."""
+interface ProjectOwner {
+  id: ID!
+  username: String
+
+  """Get all projects that the user owns."""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """
+    Array of viewer's affiliation options for projects returned from the connection.
+    For example, OWNER will include only projects that the current viewer owns.
+    
+    """
+    affiliations: [ProjectAffiliation!]
+  ): ProjectConnection!
 }
 
 input ProjectStepInput {
@@ -14328,7 +14372,7 @@ enum UpdateUserEmailErrorCode {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable {
+type User implements Node & UniformResourceLocatable & ProjectOwner {
   """The ID of an object."""
   id: ID!
 
@@ -14401,6 +14445,32 @@ type User implements Node & UniformResourceLocatable {
 
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
+
+  """Get all projects that the user owns."""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """
+    Array of viewer's affiliation options for projects returned from the connection.
+    For example, OWNER will include only projects that the current viewer owns.
+    
+    """
+    affiliations: [ProjectAffiliation!]
+  ): ProjectConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!
@@ -14865,25 +14935,6 @@ type User implements Node & UniformResourceLocatable {
     """Returns the last `n` elements from the list."""
     last: Int
   ): DebateVoteConnection!
-
-  """Get all projects the user has created."""
-  projects(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-  ): ProjectConnection!
   isAdmin: Boolean!
   isSuperAdmin: Boolean!
 
@@ -15127,10 +15178,13 @@ enum UserOrderField {
   ACTIVITY
 }
 
-"""3 possible values"""
+"""4 possible values"""
 enum UserRole {
   """Represents a user."""
   ROLE_USER
+
+  """Represents a project admin."""
+  ROLE_PROJECT_ADMIN
 
   """Represents an administrator."""
   ROLE_ADMIN

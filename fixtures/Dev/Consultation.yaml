@@ -75,3 +75,8 @@ Capco\AppBundle\Entity\Consultation:
         title: 'Consultation in project with multi consult second part'
         step: '@multiCstepExport'
         position: 2
+    consultationProjectWithOwner:
+        id: consultationProjectWithOwner
+        title: 'Consultation dans un projet qui a un administrateur de projet'
+        step: '@cstepProjectOwner'
+        position: 1

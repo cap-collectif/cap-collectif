@@ -302,3 +302,19 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
         isEnabled: true
         consultation: '@multiConsult2'
+    opinionTypeFirstInConsultationWithProjectOwner:
+        id: opinionTypeFirstInPo
+        title: Première section
+        position: 1
+        color: orange
+        defaultFilter: votes
+        isEnabled: true
+        consultation: '@consultationProjectWithOwner'
+    opinionTypeSecondInConsultationWithProjectOwner:
+        id: opinionTypeSecondInPo
+        title: Deuxième section
+        position: 2
+        color: orange
+        defaultFilter: votes
+        isEnabled: true
+        consultation: '@consultationProjectWithOwner'

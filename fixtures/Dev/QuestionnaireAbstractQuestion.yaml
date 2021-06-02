@@ -699,3 +699,19 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         proposalForm: '@proposalformIdfBP3'
         question: '@simpleQuestionBP3Idf3'
         position: 3
+    qaqProjectOwnerFood1:
+        questionnaire: '@questionnaireProjectWithOwner'
+        question: '@questionnaireProjectOwnerQuestionFoodGrape'
+        position: 1
+    qaqProjectOwnerFood2:
+        questionnaire: '@questionnaireProjectWithOwner'
+        question: '@questionnaireProjectOwnerQuestionFoodMcdoBk'
+        position: 2
+    qaqProjectOwnerFood3:
+        questionnaire: '@questionnaireProjectWithOwner'
+        question: '@questionnaireProjectOwnerQuestionFoodNoIdea'
+        position: 3
+    qaqProjectOwnerFood4:
+        questionnaire: '@questionnaireProjectWithOwner'
+        question: '@questionnaireProjectOwnerQuestionFoodApple'
+        position: 4
