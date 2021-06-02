@@ -364,7 +364,7 @@
         "relay-hooks": "3.7",
         "relay-runtime": "^11.0.0",
         "relay-test-utils": "^11.0.0",
-        "sass-loader": "^11.1.1",
+        "sass-loader": "10.2",
         "slick-carousel": "1.8.1",
         "stickyfilljs": "^2.1.0",
         "storybook-addon-intl": "^2.4.1",
