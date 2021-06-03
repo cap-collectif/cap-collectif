@@ -92,7 +92,7 @@ export const onSubmit = (
     passwordConfirm: values.passwordConfirm || '',
   };
 
-  if (values.email === props.initialValues.email) {
+  if (values.email === props.initialValues.email && props.features.multilangue) {
     return UpdateProfileAccountLocaleMutation.commit({ input: localeInput })
       .then((localeResponse: LocaleResponse) => {
         if (
@@ -127,7 +127,8 @@ export const onSubmit = (
           localeInput.locale !== null &&
           typeof localeInput.locale !== 'undefined' &&
           localeInput.locale !== props.initialValues.locale &&
-          typeof props.initialValues.language !== 'undefined'
+          typeof props.initialValues.language !== 'undefined' &&
+          props.features.multilangue
         ) {
           return UpdateProfileAccountLocaleMutation.commit({ input: localeInput })
             .then((localeResponse: LocaleResponse) => {
@@ -359,7 +360,7 @@ export const AccountForm = ({
           <Button
             id="edit-account-profile-button"
             onClick={() => {
-              if (initialValues.email === newEmail || emailDisabled() === false) {
+              if (initialValues.email === newEmail || emailDisabled() === true) {
                 dispatch(submit(formName));
               } else {
                 setConfirmPasswordModal(true);
