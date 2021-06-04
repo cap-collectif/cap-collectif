@@ -203,6 +203,8 @@ EOF;
         'proposal_category_name' => 'category.name',
         'proposal_theme_title' => 'theme.title',
         'proposal_formattedAddress' => 'address.formatted',
+        'proposal_address_lat' => 'address.lat',
+        'proposal_address_lng' => 'address.lng',
         'proposal_district_name' => 'district.name',
         'proposal_illustration' => 'media.url',
         'proposal_summary' => 'summary',
@@ -1535,7 +1537,7 @@ ${COMMENT_VOTE_INFOS}
         edges {
           cursor
           node {
-            id  
+            id
             reference
             id
             title
@@ -1566,6 +1568,8 @@ ${COMMENT_VOTE_INFOS}
             }
             address {
               formatted
+              lat
+              lng
             }
             district {
               name (locale: FR_FR)
@@ -1714,8 +1718,8 @@ ${COMMENT_VOTE_INFOS}
                   }
                 }
               }
-            
-            
+
+
             responses {
               ... on ValueResponse {
                 question {
