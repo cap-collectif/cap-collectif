@@ -12,7 +12,7 @@ class Transport implements \Swift_Transport
     private MandrillTransport $mandrillTransport;
     private MailjetTransport $mailjetTransport;
     private \Swift_Events_EventDispatcher $dispatcher;
-    private ExternalServiceConfiguration $configuration;
+    private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
 
     public function __construct(
         MandrillTransport $mandrillTransport,
@@ -23,7 +23,7 @@ class Transport implements \Swift_Transport
         $this->mandrillTransport = $mandrillTransport;
         $this->mailjetTransport = $mailjetTransport;
         $this->dispatcher = $dispatcher;
-        $this->configuration = $externalServiceConfigurationRepository->findOneByType('mailer');
+        $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
     }
 
     /**
@@ -103,13 +103,19 @@ class Transport implements \Swift_Transport
 
     private function getTransport()
     {
-        if ('mailjet' === $this->configuration->getValue()) {
+        $configuration = $this->getConfiguration();
+        if ('mailjet' === $configuration->getValue()) {
             return $this->mailjetTransport;
         }
-        if ('mandrill' === $this->configuration->getValue()) {
+        if ('mandrill' === $configuration->getValue()) {
             return $this->mandrillTransport;
         }
 
-        throw new \Exception('unknown mailer value : ' . $this->configuration->getValue());
+        throw new \Exception('unknown mailer value : ' . $configuration->getValue());
+    }
+
+    private function getConfiguration(): ?ExternalServiceConfiguration
+    {
+        return $this->externalServiceConfigurationRepository->findOneByType('mailer');
     }
 }
