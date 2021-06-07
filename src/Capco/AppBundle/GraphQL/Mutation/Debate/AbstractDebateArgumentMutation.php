@@ -3,14 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Notifier\DebateNotifier;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
-use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
+use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -27,7 +29,6 @@ class AbstractDebateArgumentMutation
     public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';
     public const NOT_ARGUMENT_AUTHOR = 'NOT_ARGUMENT_AUTHOR';
     public const ALREADY_HAS_ARGUMENT = 'ALREADY_HAS_ARGUMENT';
-    public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
     public const INVALID_HASH = 'INVALID_HASH';
 
     protected EntityManagerInterface $em;
@@ -89,7 +90,6 @@ class AbstractDebateArgumentMutation
                 throw new UserError(self::ALREADY_HAS_ARGUMENT);
             }
         } else {
-            $this->validateCaptcha($input);
             if ($this->anonymousRepository->findOneByEmail($input->offsetGet('email'))) {
                 throw new UserError(self::ALREADY_HAS_ARGUMENT);
             }
@@ -110,22 +110,35 @@ class AbstractDebateArgumentMutation
         }
     }
 
-    protected function validateCaptcha(Arg $input): void
-    {
-        return;
-        $captcha = $input->offsetGet('captcha');
-        if (
-            null === $captcha ||
-            0 < $this->validator->validate($captcha, [new ReCaptchaConstraint()])->count()
-        ) {
-            throw new UserError(self::INVALID_CAPTCHA);
-        }
-    }
-
     protected static function checkDebateIsOpen(Debate $debate): void
     {
         if (!($debate->getStep() && $debate->getStep()->isOpen())) {
             throw new UserError(self::CLOSED_DEBATE);
+        }
+    }
+
+    protected function getArgumentFromHash(Arg $input): DebateAnonymousArgument
+    {
+        $hash = $input->offsetGet('hash');
+        $this->checkHash($hash);
+        $argument = $this->anonymousRepository->findOneByHashData(
+            (new DebateAnonymousParticipationHashEncoder())->decode($hash)
+        );
+        if (!$argument) {
+            throw new UserError(self::UNKNOWN_DEBATE_ARGUMENT);
+        }
+
+        return $argument;
+    }
+
+    private function checkHash(string $hash): void
+    {
+        if (
+            $this->validator
+                ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
+                ->count() > 0
+        ) {
+            throw new UserError(self::INVALID_HASH);
         }
     }
 }

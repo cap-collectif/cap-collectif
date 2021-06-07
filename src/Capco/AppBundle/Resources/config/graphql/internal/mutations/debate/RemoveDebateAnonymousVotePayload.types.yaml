@@ -8,6 +8,9 @@ RemoveDebateAnonymousVotePayload:
             deletedDebateAnonymousVoteId:
                 type: 'ID'
                 description: 'The id of the vote that has just been removed.'
+            deletedDebateAnonymousArgumentId:
+                type: 'ID'
+                description: 'The id of the argument removed, if any.'
             errorCode:
                 type: 'RemoveDebateAnonymousVoteErrorCode'
                 description: 'An unsuccessful mutation will return an error.'

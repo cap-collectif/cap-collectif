@@ -6,10 +6,12 @@ use Capco\AppBundle\DTO\DebateAnonymousParticipationHashData;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateAnonymousVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +26,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         LoggerInterface $logger,
         DebateAnonymousVoteRepository $repository,
+        DebateAnonymousArgumentRepository $argumentRepository,
         ValidatorInterface $validator,
         DebateAnonymousParticipationHashEncoder $encoder,
         GlobalIdResolver $globalIdResolver,
@@ -33,6 +36,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
             $em,
             $logger,
             $repository,
+            $argumentRepository,
             $validator,
             $encoder,
             $globalIdResolver,
@@ -65,6 +69,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
 
         $input->offsetGet('debateId')->willReturn($id);
         $input->offsetGet('hash')->willReturn($hash);
+        $input->offsetGet('argumentHash')->willReturn(null);
         $decoded->getType()->willReturn($type);
         $decoded->getToken()->willReturn($token);
         $encoder->decode($hash)->willReturn($decoded);
@@ -94,10 +99,85 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $em->flush()->shouldBeCalled();
 
         $payload = $this->__invoke($input);
-        $payload->shouldHaveCount(3);
+        $payload->shouldHaveCount(4);
         $payload['errorCode']->shouldBe(null);
         $payload['debate']->shouldBe($debate);
         $payload['deletedDebateAnonymousVoteId']->shouldBe('RGViYXRlQW5vbnltb3VzVm90ZToxMjM=');
+        $payload['deletedDebateAnonymousArgumentId']->shouldBe(null);
+    }
+
+    public function it_delete_a_vote_and_argument_when_given_argument_hash(
+        EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
+        Arg $input,
+        DebateStep $debateStep,
+        DebateAnonymousVote $anonymousVote,
+        DebateAnonymousArgument $anonymousArgument,
+        DebateAnonymousVoteRepository $repository,
+        DebateAnonymousArgumentRepository $argumentRepository,
+        Debate $debate,
+        DebateAnonymousParticipationHashEncoder $encoder,
+        DebateAnonymousParticipationHashData $decoded,
+        DebateAnonymousParticipationHashData $decodedArgument,
+        ValidatorInterface $validator
+    ) {
+        $id = '123';
+        $argumentId = '456';
+        $token = 'jesuisunsupertokengenshinimpact1';
+        $type = 'AGAINST';
+        $hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ==';
+        $argumentHash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+
+        $input->offsetGet('debateId')->willReturn($id);
+        $input->offsetGet('hash')->willReturn($hash);
+        $input->offsetGet('argumentHash')->willReturn($argumentHash);
+        $decoded->getType()->willReturn($type);
+        $decoded->getToken()->willReturn($token);
+        $decodedArgument->getType()->willReturn($type);
+        $decodedArgument->getToken()->willReturn($token);
+        $encoder->decode($hash)->willReturn($decoded);
+        $encoder->decode($argumentHash)->willReturn($decodedArgument);
+        $debateStep->isOpen()->willReturn(true);
+        $debate->getId()->willReturn($id);
+        $debate->getStep()->willReturn($debateStep);
+        $anonymousVote->getDebate()->willReturn($debate);
+        $anonymousVote->getId()->willReturn($id);
+        $anonymousVote->getToken()->willReturn($token);
+        $anonymousVote->getType()->willReturn($type);
+        $anonymousArgument->getDebate()->willReturn($debate);
+        $anonymousArgument->getId()->willReturn($argumentId);
+        $anonymousArgument->getToken()->willReturn($token);
+        $anonymousArgument->getType()->willReturn($type);
+        $repository
+            ->findOneBy([
+                'token' => $decoded->getWrappedObject()->getToken(),
+                'type' => $decoded->getWrappedObject()->getType(),
+            ])
+            ->willReturn($anonymousVote);
+        $argumentRepository->findOneByHashData($decodedArgument)->willReturn($anonymousArgument);
+
+        $globalIdResolver
+            ->resolve($id, null)
+            ->willReturn($debate)
+            ->shouldBeCalled();
+        $validator
+            ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
+            ->willReturn([])
+            ->shouldBeCalled();
+        $validator
+            ->validate($argumentHash, [new CheckDebateAnonymousParticipationHashConstraint()])
+            ->willReturn([])
+            ->shouldBeCalled();
+        $em->remove($anonymousVote)->shouldBeCalled();
+        $em->remove($anonymousArgument)->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        $payload = $this->__invoke($input);
+        $payload->shouldHaveCount(4);
+        $payload['errorCode']->shouldBe(null);
+        $payload['debate']->shouldBe($debate);
+        $payload['deletedDebateAnonymousVoteId']->shouldBe('RGViYXRlQW5vbnltb3VzVm90ZToxMjM=');
+        $payload['deletedDebateAnonymousArgumentId']->shouldNotBeNull();
     }
 
     public function it_errors_on_invalid_id(GlobalIdResolver $globalIdResolver, Arg $input)

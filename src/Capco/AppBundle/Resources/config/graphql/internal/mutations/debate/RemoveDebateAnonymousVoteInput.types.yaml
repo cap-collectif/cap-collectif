@@ -9,3 +9,6 @@ RemoveDebateAnonymousVoteInput:
             hash:
                 type: 'String!'
                 description: 'The cookie hash needed to remove the anonymous debate vote.'
+            argumentHash:
+                type: 'String'
+                description: 'The cookie hash needed to remove the anonymous debate argument, if any.'

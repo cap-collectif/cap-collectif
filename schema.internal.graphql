@@ -3081,9 +3081,6 @@ enum CreateDebateAnonymousArgumentErrorCode {
 
   """There already is an argument with that email."""
   ALREADY_HAS_ARGUMENT
-
-  """Invalid captcha given."""
-  INVALID_CAPTCHA
 }
 
 input CreateDebateAnonymousArgumentInput {
@@ -3106,9 +3103,6 @@ input CreateDebateAnonymousArgumentInput {
 
   """The username of the author if no account"""
   username: String = null
-
-  """The captcha verification."""
-  captcha: String!
   clientMutationId: String
 }
 
@@ -6762,6 +6756,7 @@ type Mutation {
   deleteDebateArgument(input: DeleteDebateArgumentInput!): DeleteDebateArgumentPayload
   createDebateAnonymousArgument(input: CreateDebateAnonymousArgumentInput!): CreateDebateAnonymousArgumentPayload
   deleteDebateAnonymousArgument(input: DeleteDebateAnonymousArgumentInput!): DeleteDebateAnonymousArgumentPayload
+  sendConfirmationEmailDebateAnonymousArgument(input: SendConfirmationEmailDebateAnonymousArgumentInput!): SendConfirmationEmailDebateAnonymousArgumentPayload
   addDebateArgumentVote(input: AddDebateArgumentVoteInput!): AddDebateArgumentVotePayload
   removeDebateArgumentVote(input: RemoveDebateArgumentVoteInput!): RemoveDebateArgumentVotePayload
   askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
@@ -11154,6 +11149,11 @@ input RemoveDebateAnonymousVoteInput {
 
   """The cookie hash needed to remove the anonymous debate vote."""
   hash: String!
+
+  """
+  The cookie hash needed to remove the anonymous debate argument, if any.
+  """
+  argumentHash: String
   clientMutationId: String
 }
 
@@ -11163,6 +11163,9 @@ type RemoveDebateAnonymousVotePayload {
 
   """The id of the vote that has just been removed."""
   deletedDebateAnonymousVoteId: ID
+
+  """The id of the argument removed, if any."""
+  deletedDebateAnonymousArgumentId: ID
 
   """An unsuccessful mutation will return an error."""
   errorCode: RemoveDebateAnonymousVoteErrorCode
@@ -12296,6 +12299,44 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   mainView: String!
   defaultStatus: ProposalStepStatus
   isAnalysisStep: Boolean!
+}
+
+"""
+Available errors for an `sendConfirmationEmailDebateAnonymousArgument` mutation.
+"""
+enum SendConfirmationEmailDebateAnonymousArgumentErrorCode {
+  """No `Debate` match your `id`."""
+  UNKNOWN_DEBATE
+
+  """The debate is closed and arguments cannot be published any more."""
+  CLOSED_DEBATE
+
+  """The given hash is not valid."""
+  INVALID_HASH
+
+  """The user has no argument on this debate."""
+  UNKNOWN_DEBATE_ARGUMENT
+
+  """The argument has already been published."""
+  ALREADY_PUBLISHED_ARGUMENT
+}
+
+input SendConfirmationEmailDebateAnonymousArgumentInput {
+  """The Node ID of the `Debate` to where the argument is."""
+  debate: ID!
+
+  """The cookie hash needed to identify anonymous argument."""
+  hash: String!
+  clientMutationId: String
+}
+
+type SendConfirmationEmailDebateAnonymousArgumentPayload {
+  """The argument to be confirmed."""
+  debateArgument: DebateAnonymousArgument
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: SendConfirmationEmailDebateAnonymousArgumentErrorCode
+  clientMutationId: String
 }
 
 input SendContactFormInput {

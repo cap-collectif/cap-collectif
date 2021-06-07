@@ -12,6 +12,7 @@ const RemoveDebateAnonymousVoteMutation = /* GraphQL */ `
     removeDebateAnonymousVote(input: $input) {
       errorCode
       deletedDebateAnonymousVoteId
+      deletedDebateAnonymousArgumentId
       debate {
         id
         votes {
@@ -38,13 +39,29 @@ describe('Internal|RemoveDebateAnonymousVote mutation', () => {
     );
     expect(response).toMatchSnapshot();
   });
-  it('should error when the given hash is valid.', async () => {
+  it('should error when the given hash is invalid.', async () => {
     const response = await graphql(
       RemoveDebateAnonymousVoteMutation,
       {
         input: {
           debateId: toGlobalId('Debate', 'debateCannabis'),
           hash: 'YOLO:invalid',
+        },
+      },
+      'internal',
+    );
+    expect(response).toMatchSnapshot();
+  });
+  it('should remove an existing anonymous vote and an argument', async () => {
+    const hash = 'Rk9SOmRlYmF0ZUFub255bW91c1ZvdGVUb2tlbjEzMDA0';
+    const argumentHash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+    const response = await graphql(
+      RemoveDebateAnonymousVoteMutation,
+      {
+        input: {
+          debateId: toGlobalId('Debate', 'debateCannabis'),
+          hash,
+          argumentHash,
         },
       },
       'internal',

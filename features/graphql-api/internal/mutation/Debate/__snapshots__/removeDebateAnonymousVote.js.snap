@@ -1,11 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|RemoveDebateAnonymousVote mutation should error when the given hash is valid. 1`] = `
+exports[`Internal|RemoveDebateAnonymousVote mutation should error when the given hash is invalid. 1`] = `
 Object {
   "removeDebateAnonymousVote": Object {
     "debate": null,
+    "deletedDebateAnonymousArgumentId": null,
     "deletedDebateAnonymousVoteId": null,
     "errorCode": "INVALID_HASH",
+  },
+}
+`;
+
+exports[`Internal|RemoveDebateAnonymousVote mutation should remove an existing anonymous vote and an argument 1`] = `
+Object {
+  "removeDebateAnonymousVote": Object {
+    "debate": Object {
+      "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      "votes": Object {
+        "totalCount": 13,
+      },
+    },
+    "deletedDebateAnonymousArgumentId": "RGViYXRlQW5vbnltb3VzQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRGb3Ix",
+    "deletedDebateAnonymousVoteId": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlRm9yMw==",
+    "errorCode": null,
   },
 }
 `;
@@ -19,6 +36,7 @@ Object {
         "totalCount": 14,
       },
     },
+    "deletedDebateAnonymousArgumentId": null,
     "deletedDebateAnonymousVoteId": "RGViYXRlQW5vbnltb3VzVm90ZTpkZWJhdGVBbm9ueW1vdXNWb3RlQWdhaW5zdDE=",
     "errorCode": null,
   },

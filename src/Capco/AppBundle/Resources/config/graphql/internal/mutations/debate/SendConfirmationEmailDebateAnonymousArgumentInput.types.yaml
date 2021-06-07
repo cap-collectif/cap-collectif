@@ -1,0 +1,11 @@
+SendConfirmationEmailDebateAnonymousArgumentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Send again the confirmation email for an anonymous argument.'
+        fields:
+            debate:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` to where the argument is.'
+            hash:
+                type: 'String!'
+                description: 'The cookie hash needed to identify anonymous argument.'

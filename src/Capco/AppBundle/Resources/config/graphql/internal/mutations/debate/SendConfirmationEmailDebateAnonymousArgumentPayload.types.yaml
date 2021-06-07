@@ -1,0 +1,10 @@
+SendConfirmationEmailDebateAnonymousArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateArgument:
+                type: 'InternalDebateAnonymousArgument'
+                description: 'The argument to be confirmed.'
+            errorCode:
+                type: 'SendConfirmationEmailDebateAnonymousArgumentErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

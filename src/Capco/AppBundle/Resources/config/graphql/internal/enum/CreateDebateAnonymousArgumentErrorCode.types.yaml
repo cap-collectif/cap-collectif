@@ -10,6 +10,3 @@ CreateDebateAnonymousArgumentErrorCode:
             ALREADY_HAS_ARGUMENT:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateArgumentMutation::ALREADY_HAS_ARGUMENT")'
                 description: 'There already is an argument with that email.'
-            INVALID_CAPTCHA:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateArgumentMutation::INVALID_CAPTCHA")'
-                description: 'Invalid captcha given.'

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SendConfirmationEmailDebateAnonymousArgument mutation should error when argument is already published. 1`] = `
+Object {
+  "sendConfirmationEmailDebateAnonymousArgument": Object {
+    "debateArgument": null,
+    "errorCode": "ALREADY_PUBLISHED_ARGUMENT",
+  },
+}
+`;
+
+exports[`Internal|SendConfirmationEmailDebateAnonymousArgument mutation should error when the debate is closed. 1`] = `
+Object {
+  "sendConfirmationEmailDebateAnonymousArgument": Object {
+    "debateArgument": null,
+    "errorCode": "CLOSED_DEBATE",
+  },
+}
+`;
+
+exports[`Internal|SendConfirmationEmailDebateAnonymousArgument mutation should error when the debate is unknown. 1`] = `
+Object {
+  "sendConfirmationEmailDebateAnonymousArgument": Object {
+    "debateArgument": null,
+    "errorCode": "UNKNOWN_DEBATE",
+  },
+}
+`;
+
+exports[`Internal|SendConfirmationEmailDebateAnonymousArgument mutation should error when the given hash is invalid. 1`] = `
+Object {
+  "sendConfirmationEmailDebateAnonymousArgument": Object {
+    "debateArgument": null,
+    "errorCode": "INVALID_HASH",
+  },
+}
+`;
+
+exports[`Internal|SendConfirmationEmailDebateAnonymousArgument mutation should successfully send again confirmation email. 1`] = `
+Object {
+  "sendConfirmationEmailDebateAnonymousArgument": Object {
+    "debateArgument": Object {
+      "id": "RGViYXRlQXJndW1lbnQ6RGViYXRlQW5vbnltb3VzQXJndW1lbnRBZ2FpbnN0MQ==",
+    },
+    "errorCode": null,
+  },
+}
+`;

@@ -1109,6 +1109,13 @@ InternalMutation:
                     inputType: DeleteDebateAnonymousArgumentInput
                     payloadType: DeleteDebateAnonymousArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateAnonymousArgumentMutation", [value])'
+            sendConfirmationEmailDebateAnonymousArgument:
+                access: "@=hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SendConfirmationEmailDebateAnonymousArgumentInput
+                    payloadType: SendConfirmationEmailDebateAnonymousArgumentPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation", [value])'
             addDebateArgumentVote:
                 access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'

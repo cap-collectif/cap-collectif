@@ -1,0 +1,21 @@
+SendConfirmationEmailDebateAnonymousArgumentErrorCode:
+    type: enum
+    config:
+        name: SendConfirmationEmailDebateAnonymousArgumentErrorCode
+        description: 'Available errors for an `sendConfirmationEmailDebateAnonymousArgument` mutation.'
+        values:
+            UNKNOWN_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation::UNKNOWN_DEBATE")'
+                description: 'No `Debate` match your `id`.'
+            CLOSED_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation::CLOSED_DEBATE")'
+                description: 'The debate is closed and arguments cannot be published any more.'
+            INVALID_HASH:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation::INVALID_HASH")'
+                description: 'The given hash is not valid.'
+            UNKNOWN_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation::UNKNOWN_DEBATE_ARGUMENT")'
+                description: 'The user has no argument on this debate.'
+            ALREADY_PUBLISHED_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\SendConfirmationEmailDebateAnonymousArgumentMutation::ALREADY_PUBLISHED_ARGUMENT")'
+                description: 'The argument has already been published.'
