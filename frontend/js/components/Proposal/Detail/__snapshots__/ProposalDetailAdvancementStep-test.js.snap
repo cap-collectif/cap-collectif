@@ -42,7 +42,19 @@ exports[`<ProposalDetailAdvancementStep /> can render a step with status 1`] = `
         className="excerpt small"
       >
         <span>
-          5 sept. 2017 - 17 sept. 2017
+          <FormattedDate
+            day="numeric"
+            month="short"
+            value={"2017-09-05T13:48:55.000Z"}
+            year="numeric"
+          />
+           -
+          <FormattedDate
+            day="numeric"
+            month="short"
+            value={"2017-09-16T23:08:01.000Z"}
+            year="numeric"
+          />
         </span>
       </div>
       <Label
@@ -105,7 +117,19 @@ exports[`<ProposalDetailAdvancementStep /> can render a step without status 1`] 
         className="excerpt small"
       >
         <span>
-          5 sept. 2017 - 17 sept. 2017
+          <FormattedDate
+            day="numeric"
+            month="short"
+            value={"2017-09-05T13:48:55.000Z"}
+            year="numeric"
+          />
+           -
+          <FormattedDate
+            day="numeric"
+            month="short"
+            value={"2017-09-16T23:08:01.000Z"}
+            year="numeric"
+          />
         </span>
       </div>
     </div>

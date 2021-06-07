@@ -2,7 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Label } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 
 type Props = {
   step: Object,
@@ -21,9 +21,24 @@ class ProposalDetailAdvancementStep extends React.Component<Props> {
     }
 
     if (!step.endAt) {
-      return moment(step.startAt).format('ll');
+      return (
+        <FormattedDate
+          value={moment(step.startAt)}
+          day="numeric"
+          month="short"
+          year="numeric"
+          hour="numeric"
+          minute="numeric"
+        />
+      );
     }
-    return `${moment(step.startAt).format('ll')} - ${moment(step.endAt).format('ll')}`;
+
+    return (
+      <>
+        <FormattedDate value={moment(step.startAt)} day="numeric" month="short" year="numeric" /> -
+        <FormattedDate value={moment(step.endAt)} day="numeric" month="short" year="numeric" />
+      </>
+    );
   };
 
   render() {

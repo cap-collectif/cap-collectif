@@ -140,7 +140,11 @@ const ProposalRevisionModalForm = ({
   const [showAvailableRevisions, toggleAvailableRevisions] = useToggle(
     () => proposal.revisions.totalCount > 0,
   );
-
+  if (global.locale) {
+    moment.locale(global.locale.split('-')[0]);
+  } else {
+    moment.locale('fr');
+  }
   return (
     <Modal show={show} onHide={onClose}>
       {showAvailableRevisions && (

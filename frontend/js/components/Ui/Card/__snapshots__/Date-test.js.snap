@@ -15,7 +15,14 @@ exports[`<Date /> should render correctly 1`] = `
   <span
     className="date"
   >
-    10 mars 2030 00:00
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2030-03-09T23:00:00.000Z"}
+      year="numeric"
+    />
   </span>
 </Date__Container>
 `;
@@ -35,7 +42,14 @@ exports[`<Date /> should render correctly with other date 1`] = `
   <span
     className="date"
   >
-    15 juin 2032 00:00
+    <FormattedDate
+      day="numeric"
+      hour="numeric"
+      minute="numeric"
+      month="long"
+      value={"2032-06-14T22:00:00.000Z"}
+      year="numeric"
+    />
   </span>
 </Date__Container>
 `;

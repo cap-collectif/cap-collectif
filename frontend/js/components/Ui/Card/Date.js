@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { FormattedMessage, FormattedDate } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import moment from 'moment';
 import colors from '~/utils/colors';
@@ -25,15 +26,25 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
 
 const Date = ({ date, children }: Props) => {
   const isToday = moment(date).isSame(moment(), 'day');
-
   return (
     <Container>
       <IconRounded size={18} color={colors.darkGray}>
         <Icon name={ICON_NAME.calendar} size={10} color="#fff" />
       </IconRounded>
-
-      <span className="date">{isToday ? moment(date).calendar() : moment(date).format('LLL')}</span>
-
+      <span className="date">
+        {isToday ? (
+          <FormattedMessage id="today" />
+        ) : (
+          <FormattedDate
+            value={moment(date)}
+            day="numeric"
+            month="long"
+            year="numeric"
+            hour="numeric"
+            minute="numeric"
+          />
+        )}
+      </span>
       {children}
     </Container>
   );

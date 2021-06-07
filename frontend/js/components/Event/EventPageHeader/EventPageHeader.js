@@ -65,7 +65,8 @@ export const EventPageHeader = ({
   } = event;
 
   const speaker = animator ?? author;
-
+  const locale = global && global.locale ? global.locale.split('-')[0] : '';
+  moment.locale(locale);
   return (
     <Container>
       <div className="event-header-info">
