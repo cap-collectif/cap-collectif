@@ -18,7 +18,7 @@ use \Swift_MimePart;
  *
  * Updated to add `return_path_domain` support
  */
-class MandrillTransport
+class MandrillTransport implements Swift_Transport
 {
 
     /**
@@ -56,6 +56,29 @@ class MandrillTransport
         $this->async = null;
         $this->subAccount = null;
     }
+
+    /**
+     * Not used
+     */
+    public function isStarted()
+    {
+        return false;
+    }
+
+    /**
+     * Not used
+     */
+    public function start() {}
+
+    /**
+     * Not used
+     */
+    public function stop() {}
+
+    /**
+     * Not used
+     */
+    public function ping() {}
 
     /**
      * @param string $apiKey

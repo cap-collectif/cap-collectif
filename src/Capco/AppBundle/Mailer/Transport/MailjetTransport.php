@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Mailer\Transport;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
-class MailjetTransport
+class MailjetTransport implements \Swift_Transport
 {
     const API_URL = 'https://api.mailjet.com/v3.1/send';
 
@@ -17,6 +17,29 @@ class MailjetTransport
     {
         $this->dispatcher = $dispatcher;
     }
+
+    /**
+     * Not used
+     */
+    public function isStarted()
+    {
+        return false;
+    }
+
+    /**
+     * Not used
+     */
+    public function start() {}
+
+    /**
+     * Not used
+     */
+    public function stop() {}
+
+    /**
+     * Not used
+     */
+    public function ping() {}
 
     public function send(
         \Swift_Mime_SimpleMessage $message,
