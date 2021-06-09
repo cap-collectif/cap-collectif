@@ -2,14 +2,13 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
 use Capco\AppBundle\Locale\DefaultLocaleCodeDataloader;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\PageRepository;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -17,7 +16,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class LocaleController extends AbstractFOSRestController
+class LocaleController extends AbstractController
 {
     private LocaleRepository $localeRepository;
     private PageRepository $pageRepository;
