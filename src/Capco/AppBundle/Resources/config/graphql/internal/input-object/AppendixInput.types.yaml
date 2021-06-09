@@ -1,0 +1,10 @@
+AppendixInput:
+    type: input-object
+    config:
+        description: 'A contribution'
+        fields:
+            body:
+                type: 'HTML'
+                description: 'Identifies the body of the contribution.'
+            appendixType:
+                type: 'ID'

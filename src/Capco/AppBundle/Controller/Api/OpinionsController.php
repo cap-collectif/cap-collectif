@@ -135,43 +135,6 @@ class OpinionsController extends AbstractFOSRestController
     }
 
     /**
-     * @Put("/opinions/{id}")
-     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
-     */
-    public function putOpinionAction(Request $request, string $id)
-    {
-        /** @var User $viewer */
-        $viewer = $this->getUser();
-        $opinion = $this->opinionRepository->getOne(GlobalId::fromGlobalId($id)['id']);
-        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        if (!$opinion->canContribute($this->getUser())) {
-            throw new BadRequestHttpException('Uncontribuable opinion.');
-        }
-
-        $form = $this->createForm(OpinionForm::class, $opinion);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        $opinion->resetVotes();
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::OPINION_UPDATE,
-            new Message(json_encode(['opinionId' => $opinion->getId()]))
-        );
-
-        return $opinion;
-    }
-
-    /**
      * Delete an opinion.
      *
      * @Delete("/opinions/{opinionId}")

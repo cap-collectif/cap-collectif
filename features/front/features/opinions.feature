@@ -97,7 +97,7 @@ Scenario: Author of an opinion lose their votes when updating it
   And I press "confirm-opinion-update"
   And I wait "confirm-opinion-update" to disappear on current page
   And I wait 1 seconds
-  Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
+  Then I should be redirected to "/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
   And I wait "#OpinionBox" to appear on current page
   And I should see 'global.votes {"num":0}'
 

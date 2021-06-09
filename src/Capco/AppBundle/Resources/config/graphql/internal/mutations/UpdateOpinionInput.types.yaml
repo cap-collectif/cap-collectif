@@ -1,0 +1,17 @@
+UpdateOpinionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of UpdateOpinion mutation'
+        fields:
+            opinionId:
+                type: 'ID!'
+                description: 'the id of the opinion to update'
+            title:
+                type: 'String!'
+                description: 'the opinion title'
+            body:
+                type: 'String!'
+                description: 'the opinion body'
+            appendices:
+                type: '[AppendixInput]!'
+                description: 'the opinion appendices'

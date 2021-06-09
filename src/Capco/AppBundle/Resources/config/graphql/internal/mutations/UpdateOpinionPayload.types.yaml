@@ -1,0 +1,11 @@
+UpdateOpinionPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of UpdateOpinion mutation'
+        fields:
+            opinion:
+                type: 'InternalOpinion'
+                description: 'the updated opinion'
+            errorCode:
+                type: 'UpdateOpinionErrorCode'
+                description: 'available errors if mutation fails'

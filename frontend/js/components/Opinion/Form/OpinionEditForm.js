@@ -2,14 +2,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import Fetcher, { json } from '../../../services/Fetcher';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import renderInput from '../../Form/Field';
-import { closeOpinionEditModal } from '../../../redux/modules/opinion';
+import { closeOpinionEditModal } from '~/redux/modules/opinion';
 import type { OpinionEditForm_opinion } from '~relay/OpinionEditForm_opinion.graphql';
-import { isHTML } from '../../../utils/isHtml';
+import { isHTML } from '~/utils/isHtml';
+import UpdateOpinionMutation from '~/mutations/UpdateOpinionMutation';
 
 type RelayProps = {|
   opinion: OpinionEditForm_opinion,
@@ -40,17 +40,29 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
       appendixType: opinion.appendices.filter(a => a.appendixType.title === key)[0].appendixType.id,
       body: data[key],
     }));
-  const form = {
-    title: data.title,
-    body: data.body,
-    appendices,
-  };
-  return Fetcher.put(`/opinions/${opinion.id}`, form)
-    .then(json)
-    .then(opinionUpdated => {
+
+  UpdateOpinionMutation.commit({
+    input: {
+      opinionId: opinion.id,
+      title: data.title,
+      body: data.body,
+      appendices,
+    },
+  }).then(response => {
+    const errorCode = response?.updateOpinion?.errorCode;
+    const url = response?.updateOpinion?.opinion?.url;
+    if (url) {
       dispatch(closeOpinionEditModal());
-      window.location.href = opinionUpdated._links.show;
-    });
+      window.location.href = url;
+    }
+
+    switch (errorCode) {
+      case null:
+        return;
+      default:
+        throw new SubmissionError({ _error: 'global.error.server.form' });
+    }
+  });
 };
 
 type Props = {|

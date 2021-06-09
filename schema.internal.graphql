@@ -875,6 +875,13 @@ type Appendix {
   appendixType: AppendixType!
 }
 
+"""A contribution"""
+input AppendixInput {
+  """Identifies the body of the contribution."""
+  body: HTML
+  appendixType: ID
+}
+
 """An AppendixType"""
 type AppendixType {
   title: String!
@@ -6777,6 +6784,9 @@ type Mutation {
 
   """Register email domains"""
   registerEmailDomains(input: RegisterEmailDomainsInput!): RegisterEmailDomainsPayload
+
+  """Update Opinion"""
+  updateOpinion(input: UpdateOpinionInput!): UpdateOpinionPayload
 }
 
 """A connection to a list of items."""
@@ -13847,6 +13857,42 @@ type UpdateOfficialResponsePayload {
 
   """The error, if any."""
   error: UpdateOfficialResponseErrorCode
+  clientMutationId: String
+}
+
+"""Available errors on opinion update"""
+enum UpdateOpinionErrorCode {
+  """the user is not authorized to edit this opinion"""
+  NOT_AUTHORIZED
+
+  """the opinion is not contribuable"""
+  OPINION_NOT_CONTRIBUABLE
+
+  """the form is invalid"""
+  INVALID_FORM
+}
+
+input UpdateOpinionInput {
+  """the id of the opinion to update"""
+  opinionId: ID!
+
+  """the opinion title"""
+  title: String!
+
+  """the opinion body"""
+  body: String!
+
+  """the opinion appendices"""
+  appendices: [AppendixInput]!
+  clientMutationId: String
+}
+
+type UpdateOpinionPayload {
+  """the updated opinion"""
+  opinion: Opinion
+
+  """available errors if mutation fails"""
+  errorCode: UpdateOpinionErrorCode
   clientMutationId: String
 }
 

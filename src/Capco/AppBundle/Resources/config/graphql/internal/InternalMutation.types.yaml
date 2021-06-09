@@ -1219,3 +1219,11 @@ InternalMutation:
                     inputType: RegisterEmailDomainsInput
                     payloadType: RegisterEmailDomainsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterEmailDomainsMutation", [value, getUser()])'
+            updateOpinion:
+                description: 'Update Opinion'
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateOpinionInput
+                    payloadType: UpdateOpinionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOpinionMutation", [value, getUser()])'
