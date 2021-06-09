@@ -8,18 +8,18 @@ use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\FontRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\View;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class FontsController extends AbstractFOSRestController
+class FontsController extends AbstractController
 {
     private const MESSAGE_INVALID_FONT_FORMAT = 'Invalid font format.';
     private const ALLOWED_MIMETYPES_FONTS = [
@@ -64,11 +64,10 @@ class FontsController extends AbstractFOSRestController
     }
 
     /**
-     * @Post("/upload/fonts")
+     * @Route("/upload/fonts", name="upload_fonts", options={"i18n" = false})
      * @IsGranted({"ROLE_ADMIN"})
-     * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postFontAction(Request $request)
+    public function postFontAction(Request $request): JsonResponse
     {
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('file');
@@ -123,7 +122,7 @@ class FontsController extends AbstractFOSRestController
                 throw new \LogicException('Could not get last uploaded font');
             }
 
-            return [
+            return $this->json([
                 'id' => GlobalId::toGlobalId('Font', $lastUploadedFont->getId()),
                 'isCustom' => $lastUploadedFont->isCustom(),
                 'url' => $lastUploadedFont->getFile()
@@ -132,7 +131,7 @@ class FontsController extends AbstractFOSRestController
                 'name' => $lastUploadedFont->getName(),
                 'useAsHeading' => $lastUploadedFont->getUseAsHeading(),
                 'useAsBody' => $lastUploadedFont->getUseAsBody()
-            ];
+            ]);
         }
 
         return $this->json([
