@@ -255,3 +255,21 @@ InternalProposal:
                 type: '[InternalProposalSelection!]!'
             isProposalAuthorAllowedToAddNews:
                 type: 'Boolean!'
+            webPageUrl:
+                type: 'URI'
+                description:
+            facebookUrl:
+                type: 'URI'
+                description: 'link of Facebook page'
+            twitterUrl:
+                type: 'URI'
+                description: 'link of Twitter page'
+            instagramUrl:
+                type: 'URI'
+                description: 'link of Instagram page'
+            linkedInUrl:
+                type: 'URI'
+                description: 'link of LinkedIn profile'
+            youtubeUrl:
+                type: 'URI'
+                description: 'link of Youtube channel'

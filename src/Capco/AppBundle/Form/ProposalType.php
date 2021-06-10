@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\EventListener\PreFillProposalFormSubscriber;
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver;
@@ -20,9 +21,9 @@ use Symfony\Component\Validator\Constraints\Valid;
 class ProposalType extends AbstractType
 {
     protected Manager $toggleManager;
-    private $cache;
-    private $autoCompleteDocQueryResolver;
-    private $autoCompleteFromSiretQueryResolver;
+    private RedisCache $cache;
+    private AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver;
+    private AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver;
 
     public function __construct(
         RedisCache $cache,
@@ -39,6 +40,7 @@ class ProposalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $isDraft = $builder->getData()->isDraft();
+        /** @var ?ProposalForm $form */
         $form = $options['proposalForm'];
         if (!$form) {
             throw new \Exception('A proposal form is needed to create or update a proposal.');

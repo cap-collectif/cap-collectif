@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\UsingSocialNetworksTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -45,6 +46,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     use ReferenceTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
+    use UsingSocialNetworksTrait;
     use UuidTrait;
 
     /**

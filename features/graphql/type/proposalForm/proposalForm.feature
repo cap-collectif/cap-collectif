@@ -161,3 +161,36 @@ Scenario: GraphQL client wants to get proposalform configuration
     }
   }
   """
+
+Scenario: GraphQL client wants to get proposalform configuration
+  Given I am logged in to graphql as user
+  When I send a GraphQL request:
+  """
+  {
+    proposalForm: node(id: "proposalformIdfBP3") {
+      ... on ProposalForm {
+        isUsingWebPage
+        isUsingTwitter
+        isUsingFacebook
+        isUsingInstagram
+        isUsingYoutube
+        isUsingLinkedIn
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "proposalForm": {
+        "isUsingWebPage": true,
+        "isUsingTwitter": true,
+        "isUsingFacebook": true,
+        "isUsingInstagram": true,
+        "isUsingYoutube": true,
+        "isUsingLinkedIn": true
+      }
+    }
+  }
+  """

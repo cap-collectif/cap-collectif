@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|create proposal create proposal 1`] = `
+Object {
+  "createProposal": Object {
+    "proposal": Object {
+      "facebookUrl": null,
+      "tipsmeeeId": "A956Ibs5Z",
+      "twitterUrl": null,
+      "webPageUrl": null,
+    },
+  },
+}
+`;
+
+exports[`Internal|create proposal create proposal with social networks 1`] = `
+Object {
+  "createProposal": Object {
+    "proposal": Object {
+      "facebookUrl": "https://www.facebook.com/JVCArmy/",
+      "tipsmeeeId": null,
+      "twitterUrl": "https://twitter.com/bestof_1825",
+      "webPageUrl": "http://cap-collectif.com",
+    },
+  },
+}
+`;

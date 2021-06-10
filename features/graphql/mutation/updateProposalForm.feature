@@ -69,6 +69,12 @@ Scenario: GraphQL client wants to update a proposal form
                 title
                 type
               }
+              isUsingWebPage,
+              isUsingFacebook,
+              isUsingTwitter,
+              isUsingInstagram,
+              isUsingLinkedIn,
+              isUsingYoutube
             }
           }
         }",
@@ -146,7 +152,13 @@ Scenario: GraphQL client wants to update a proposal form
             "translations":[{"locale":"fr-FR","name":"autre district"}]
           }
         ],
-        "questions": []
+        "questions": [],
+        "usingWebPage":true,
+        "usingFacebook":true,
+        "usingTwitter":true,
+        "usingInstagram":true,
+        "usingLinkedIn":true,
+        "usingYoutube": true
       }
     }
   }
@@ -269,7 +281,13 @@ Scenario: GraphQL client wants to update a proposal form
                   "displayedOnMap":true
                }
             ],
-            "questions": []
+            "questions": [],
+            "isUsingWebPage":true,
+            "isUsingFacebook":true,
+            "isUsingTwitter":true,
+            "isUsingInstagram":true,
+            "isUsingLinkedIn":true,
+            "isUsingYoutube":true
          }
       }
    }

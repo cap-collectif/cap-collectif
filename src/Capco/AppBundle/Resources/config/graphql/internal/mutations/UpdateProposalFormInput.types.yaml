@@ -93,3 +93,21 @@ UpdateProposalFormInput:
             tipsmeeeHelpText:
                 type: 'String'
                 description: 'Proposal form help text for tipsmeee field'
+            usingWebPage:
+                type: 'Boolean'
+                description: 'Can proposal contain web site url'
+            usingFacebook:
+                type: 'Boolean'
+                description: 'Can proposal contain facebook url'
+            usingTwitter:
+                type: 'Boolean'
+                description: 'Can proposal contain twitter url'
+            usingInstagram:
+                type: 'Boolean'
+                description: 'Can proposal contain instagram url'
+            usingYoutube:
+                type: 'Boolean'
+                description: 'Can proposal contain youtube url'
+            usingLinkedIn:
+                type: 'Boolean'
+                description: 'Can proposal contain linkedin url'

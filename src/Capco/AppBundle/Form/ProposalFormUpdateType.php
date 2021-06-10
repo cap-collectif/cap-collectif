@@ -148,6 +148,13 @@ class ProposalFormUpdateType extends AbstractType
                     'purify_html_profile' => 'default',
                 ]);
         }
+        $builder
+            ->add('usingWebPage', CheckboxType::class)
+            ->add('usingFacebook', CheckboxType::class)
+            ->add('usingTwitter', CheckboxType::class)
+            ->add('usingLinkedIn', CheckboxType::class)
+            ->add('usingInstagram', CheckboxType::class)
+            ->add('usingYoutube', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

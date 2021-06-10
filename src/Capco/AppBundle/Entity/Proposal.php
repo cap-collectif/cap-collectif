@@ -33,6 +33,7 @@ use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\SocialNetworksValueTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -86,6 +87,7 @@ class Proposal implements
     use TimestampableTrait;
     use TrashableTrait;
     use UuidTrait;
+    use SocialNetworksValueTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -319,6 +321,11 @@ class Proposal implements
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\OfficialResponse", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $officialResponse;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSocialNetworks", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private ?ProposalSocialNetworks $proposalSocialNetworks;
 
     public function __construct()
     {
@@ -1536,5 +1543,17 @@ class Proposal implements
         }
 
         return false;
+    }
+
+    public function getProposalSocialNetworks(): ?ProposalSocialNetworks
+    {
+        return $this->proposalSocialNetworks;
+    }
+
+    public function setProposalSocialNetworks(?ProposalSocialNetworks $proposalSocialNetworks): self
+    {
+        $this->proposalSocialNetworks = $proposalSocialNetworks;
+
+        return $this;
     }
 }

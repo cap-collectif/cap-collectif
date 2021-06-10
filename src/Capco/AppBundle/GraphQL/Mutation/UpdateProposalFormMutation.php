@@ -82,7 +82,6 @@ class UpdateProposalFormMutation implements MutationInterface
 
         /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepo->find($id);
-
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%s"', $id));
         }

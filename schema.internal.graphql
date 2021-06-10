@@ -1689,6 +1689,24 @@ input ChangeProposalContentInput {
   tipsmeeeId: String
   estimation: Int
   likers: [ID!]
+
+  """The web page URL"""
+  webPageUrl: URI
+
+  """The facebook URL"""
+  facebookUrl: URI
+
+  """The twitter URL"""
+  twitterUrl: URI
+
+  """The instagram URL"""
+  instagramUrl: URI
+
+  """The youtube URL"""
+  youtubeUrl: URI
+
+  """The linkedIn URL"""
+  linkedInUrl: URI
   clientMutationId: String
 }
 
@@ -3362,6 +3380,24 @@ input CreateProposalInput {
 
   """The ID of tipsmeee"""
   tipsmeeeId: String
+
+  """The web page URL"""
+  webPageUrl: URI
+
+  """The facebook URL"""
+  facebookUrl: URI
+
+  """The twitter URL"""
+  twitterUrl: URI
+
+  """The instagram URL"""
+  instagramUrl: URI
+
+  """The youtube URL"""
+  youtubeUrl: URI
+
+  """The linkedIn URL"""
+  linkedInUrl: URI
   clientMutationId: String
 }
 
@@ -8807,6 +8843,22 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Return all tipsmeee related data."""
   tipsmeee: TipsMeee
   isProposalAuthorAllowedToAddNews: Boolean!
+  webPageUrl: URI
+
+  """link of Facebook page"""
+  facebookUrl: URI
+
+  """link of Twitter page"""
+  twitterUrl: URI
+
+  """link of Instagram page"""
+  instagramUrl: URI
+
+  """link of LinkedIn profile"""
+  linkedInUrl: URI
+
+  """link of Youtube channel"""
+  youtubeUrl: URI
 }
 
 """The affiliation of a user to a proposal"""
@@ -9289,6 +9341,27 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """The help text for tipsmeee."""
   tipsmeeeHelpText: String
+
+  """Proposal form using web page field"""
+  isUsingWebPage: Boolean!
+
+  """Proposal form using Twitter field"""
+  isUsingTwitter: Boolean!
+
+  """Proposal form using Facebook field"""
+  isUsingFacebook: Boolean!
+
+  """Proposal form using Instagram field"""
+  isUsingInstagram: Boolean!
+
+  """Proposal form using Youtube field"""
+  isUsingYoutube: Boolean!
+
+  """Proposal form using LinkedIn field"""
+  isUsingLinkedIn: Boolean!
+
+  """Proposal form using any social networks field"""
+  isUsingAnySocialNetworks: Boolean!
 }
 
 """Value of a proposal sorting"""
@@ -14195,6 +14268,24 @@ input UpdateProposalFormInput {
 
   """Proposal form help text for tipsmeee field"""
   tipsmeeeHelpText: String
+
+  """Can proposal contain web site url"""
+  usingWebPage: Boolean
+
+  """Can proposal contain facebook url"""
+  usingFacebook: Boolean
+
+  """Can proposal contain twitter url"""
+  usingTwitter: Boolean
+
+  """Can proposal contain instagram url"""
+  usingInstagram: Boolean
+
+  """Can proposal contain youtube url"""
+  usingYoutube: Boolean
+
+  """Can proposal contain linkedin url"""
+  usingLinkedIn: Boolean
   clientMutationId: String
 }
 

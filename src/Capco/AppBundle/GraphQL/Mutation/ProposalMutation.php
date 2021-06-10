@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalRevision;
+use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalPublicationStatus;
@@ -428,12 +429,15 @@ class ProposalMutation implements ContainerAwareInterface
             $proposal->setStatus($defaultStatus);
         }
 
+        $this->hydrateSocialNetworks($values, $proposal, $proposalForm, true);
+
         $form = $this->formFactory->create(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
         $this->logger->info('createProposal: ' . json_encode($values, true));
+
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -521,6 +525,7 @@ class ProposalMutation implements ContainerAwareInterface
         $this->shouldBeDraft($proposal, $author, $values, $wasDraft, $draft);
 
         $values = $this->fixValues($values, $proposalForm);
+        $this->hydrateSocialNetworks($values, $proposal, $proposalForm);
 
         /** @var Form $form */
         $form = $this->formFactory->create(ProposalAdminType::class, $proposal, [
@@ -584,6 +589,58 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];
+    }
+
+    private function hydrateSocialNetworks(
+        &$argument,
+        Proposal $proposal,
+        ProposalForm $proposalForm,
+        bool $create = false
+    ) {
+        if ($create) {
+            $socialNetworks = new ProposalSocialNetworks();
+            $socialNetworks->setProposal($proposal);
+            $proposal->setProposalSocialNetworks($socialNetworks);
+        } else {
+            $socialNetworks = $proposal->getProposalSocialNetworks();
+        }
+
+        if ($proposalForm->isUsingWebPage() && $argument['webPageUrl']) {
+            $socialNetworks->setWebPageUrl($argument['webPageUrl']);
+        }
+        if ($proposalForm->isUsingFacebook() && $argument['facebookUrl']) {
+            $socialNetworks->setFacebookUrl($argument['facebookUrl']);
+        }
+        if ($proposalForm->isUsingTwitter() && $argument['twitterUrl']) {
+            $socialNetworks->setTwitterUrl($argument['twitterUrl']);
+        }
+        if ($proposalForm->isUsingInstagram() && isset($argument['instagramUrl'])) {
+            $socialNetworks->setInstagramUrl($argument['instagramUrl']);
+        }
+        if ($proposalForm->isUsingLinkedIn() && isset($argument['linkedInUrl'])) {
+            $socialNetworks->setLinkedInUrl($argument['linkedInUrl']);
+        }
+        if ($proposalForm->isUsingYoutube() && isset($argument['youtubeUrl'])) {
+            $socialNetworks->setYoutubeUrl($argument['youtubeUrl']);
+        }
+        if (isset($argument['webPageUrl'])) {
+            unset($argument['webPageUrl']);
+        }
+        if (isset($argument['facebookUrl'])) {
+            unset($argument['facebookUrl']);
+        }
+        if (isset($argument['twitterUrl'])) {
+            unset($argument['twitterUrl']);
+        }
+        if (isset($argument['instagramUrl'])) {
+            unset($argument['instagramUrl']);
+        }
+        if (isset($argument['linkedInUrl'])) {
+            unset($argument['linkedInUrl']);
+        }
+        if (isset($argument['youtubeUrl'])) {
+            unset($argument['youtubeUrl']);
+        }
     }
 
     private function fixValues(array $values, ProposalForm $proposalForm)

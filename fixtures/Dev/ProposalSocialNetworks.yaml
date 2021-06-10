@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\ProposalSocialNetworks:
+    proposalSocialNetworks1:
+        proposal: '@propositionAvecDesRs'
+        webPageUrl: 'https://www.iledefrance.fr/'
+        twitterUrl: 'https://twitter.com/iledefrance'
+        instagramUrl: 'https://www.instagram.com/iledefrance/'
+        linkedInUrl: 'https://www.linkedin.com/company/region-ile-de-france'
+        facebookUrl: 'https://www.facebook.com/RegionIledeFrance'
+        youtubeUrl: 'https://www.youtube.com/RegionIledeFrance'

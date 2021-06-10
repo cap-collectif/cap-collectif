@@ -8,6 +8,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalRevision;
+use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
@@ -75,6 +76,7 @@ class ProposalMutationSpec extends ObjectBehavior
         Container $container,
         GlobalIdResolver $globalIdResolver,
         Manager $manager,
+        ProposalSocialNetworks $proposalSocialNetworks,
         $wasDraft = true
     ) {
         $this->setContainer($container);
@@ -108,6 +110,16 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getRevisions()->willReturn(new ArrayCollection());
         $proposal->getProposalForm()->willReturn($proposalForm);
         $proposal->getUpdatedAt()->willReturn(new \DateTime());
+
+        $proposalForm->isUsingFacebook()->willReturn(false);
+        $proposalForm->isUsingInstagram()->willReturn(false);
+        $proposalForm->isUsingWebPage()->willReturn(false);
+        $proposalForm->isUsingTwitter()->willReturn(false);
+        $proposalForm->isUsingYoutube()->willReturn(false);
+        $proposalForm->isUsingLinkedIn()->willReturn(false);
+
+        $proposalSocialNetworks->getProposal()->willReturn($proposal);
+        $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
 
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
 
@@ -165,6 +177,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalRevision $proposalRevision2,
         ProposalRevision $proposalRevision3,
         ProposalRevision $proposalRevision4,
+        ProposalSocialNetworks $proposalSocialNetworks,
         Manager $manager,
         $wasDraft = false
     ) {
@@ -236,6 +249,16 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getRevisions()->willReturn(new ArrayCollection());
         $proposal->getProposalForm()->willReturn($proposalForm);
         $proposal->getUpdatedAt()->willReturn(new \DateTime());
+
+        $proposalForm->isUsingFacebook()->willReturn(false);
+        $proposalForm->isUsingInstagram()->willReturn(false);
+        $proposalForm->isUsingWebPage()->willReturn(false);
+        $proposalForm->isUsingTwitter()->willReturn(false);
+        $proposalForm->isUsingYoutube()->willReturn(false);
+        $proposalForm->isUsingLinkedIn()->willReturn(false);
+
+        $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
+        $proposalSocialNetworks->getProposal()->willReturn($proposal);
 
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
 

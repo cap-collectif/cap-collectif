@@ -6,6 +6,9 @@ const UpdateProposalMutation = /* GraphQL */ `
     changeProposalContent(input: $input) {
       proposal {
         body
+        webPageUrl
+        facebookUrl
+        twitterUrl
       }
     }
   }
@@ -38,6 +41,21 @@ describe('Internal | Update proposal content', () => {
         },
       },
       'internal_admin',
+    );
+    expect(updateProposal).toMatchSnapshot();
+  });
+  it('update proposal with rs', async () => {
+    const updateProposal = await graphql(
+      UpdateProposalMutation,
+      {
+        input: {
+          id: toGlobalId('Proposal', 'propositionAvecDesRs'),
+          webPageUrl: 'http://cap-collectif.com',
+          facebookUrl: 'https://www.facebook.com/capco/',
+          twitterUrl: 'https://twitter.com/karate_kid22',
+        },
+      },
+      'internal_user',
     );
     expect(updateProposal).toMatchSnapshot();
   });

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
+use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\EventListener\DebateArticleListener;
@@ -415,6 +416,7 @@ class ReinitCommand extends Command
             ProposalAnalysis::class,
             ProposalAssessment::class,
             ProposalDecision::class,
+            ProposalSocialNetworks::class,
         ];
 
         $classesProd = [Context::class];
