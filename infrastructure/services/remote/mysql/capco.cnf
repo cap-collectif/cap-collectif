@@ -13,6 +13,7 @@ default-storage-engine         = InnoDB
 socket                         = /var/lib/mysql/mysql.sock
 pid-file                       = /var/lib/mysql/mysql.pid
 skip-grant-tables
+innodb_strict_mode             = 0;
 
 # MyISAM #
 key-buffer-size                = 32M
