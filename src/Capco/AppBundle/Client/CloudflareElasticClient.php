@@ -156,7 +156,6 @@ class CloudflareElasticClient
                 ])
             )
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname))
-            ->addFilter(new Query\Regexp('ClientRequestURI', $this->hostname . '/*'))
             ->addMustNot($this->getClientRequestURIFilters());
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));

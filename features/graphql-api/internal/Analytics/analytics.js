@@ -45,6 +45,31 @@ const AnalyticsQuery = /* GraphQL */ `
           type
         }
       }
+      mostVisitedPages {
+        values {
+          key
+          totalCount
+        }
+      }
+      contributors {
+        values {
+          key
+          totalCount
+        }
+      }
+      topContributors {
+        user {
+          id
+        }
+      }
+      mostUsedProposalCategories {
+        values {
+          category {
+            id
+          }
+          totalCount
+        }
+      }
     }
   }
 `;
