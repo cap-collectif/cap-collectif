@@ -1382,6 +1382,12 @@ input BorderStyleInput {
   size: Int
 }
 
+type CancelEmailChangePayload {
+  """if it succeeded"""
+  success: Boolean
+  clientMutationId: String
+}
+
 """Available errors when canceling a planned campaign"""
 enum CancelEmailingCampaignErrorCode {
   """No campaign match your id"""
@@ -6815,6 +6821,12 @@ type Mutation {
   """Edit projects section in admin"""
   updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
 
+  """Cancel email change"""
+  cancelEmailChange: CancelEmailChangePayload
+
+  """Re-send email confirmation"""
+  resendEmailConfirmation: ResendEmailConfirmationPayload
+
   """Toggle a feature"""
   toggleFeature(input: ToggleFeatureInput!): ToggleFeaturePayload
 
@@ -11742,6 +11754,21 @@ enum RequirementType {
 
   """The requirement is a postal address"""
   POSTAL_ADDRESS
+}
+
+"""Available errors on resendEmailConfirmationMutation"""
+enum ResendEmailConfirmationErrorCode {
+  """The email is already confirmed"""
+  EMAIL_ALREADY_CONFIRMED
+
+  """The email has already been sent recently"""
+  EMAIL_RECENTLY_SENT
+}
+
+type ResendEmailConfirmationPayload {
+  """An unsuccessful mutation will return an error."""
+  errorCode: ResendEmailConfirmationErrorCode
+  clientMutationId: String
 }
 
 input ResetPasswordInput {

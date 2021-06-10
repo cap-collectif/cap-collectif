@@ -1202,6 +1202,16 @@ InternalMutation:
                     inputType: UpdateHomePageProjectsSectionConfigurationInput
                     payloadType: UpdateHomePageProjectsSectionConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation", [value])'
+            cancelEmailChange:
+                description: 'Cancel email change'
+                access: '@=hasRole("ROLE_USER")'
+                type: CancelEmailChangePayload
+                resolve: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CancelEmailChangeMutation", [getUser()])'
+            resendEmailConfirmation:
+                description: 'Re-send email confirmation'
+                access: '@=hasRole("ROLE_USER")'
+                type: ResendEmailConfirmationPayload
+                resolve: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ResendEmailConfirmationMutation", [getUser()])'
             # Toggle Feature
             toggleFeature:
                 description: 'Toggle a feature'

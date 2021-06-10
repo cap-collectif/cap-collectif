@@ -8,6 +8,8 @@ import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import CancelEmailChangeMutation from '~/mutations/CancelEmailChangeMutation';
+import ResendEmailConfirmationMutation from '~/mutations/ResendEmailConfirmationMutation';
 import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutation';
 import type { RegisterEmailDomainsInput } from '~relay/RegisterEmailDomainsMutation.graphql';
 
@@ -322,11 +324,10 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
     });
 };
 
-export const cancelEmailChange = (dispatch: Dispatch, previousEmail: string): void => {
-  Fetcher.post('/account/cancel_email_change').then(() => {
-    dispatch(cancelEmailChangeSucceed());
-    dispatch(change(accountForm, 'email', previousEmail));
-  });
+export const cancelEmailChange = async (dispatch: Dispatch, previousEmail: string): Promise<*> => {
+  await CancelEmailChangeMutation.commit();
+  dispatch(cancelEmailChangeSucceed());
+  dispatch(change(accountForm, 'email', previousEmail));
 };
 
 const sendEmail = () => {
@@ -336,10 +337,11 @@ const sendEmail = () => {
   });
 };
 
-export const resendConfirmation = (): void => {
-  Fetcher.post('/account/resend_confirmation_email')
-    .then(sendEmail)
-    .catch(sendEmail);
+export const resendConfirmation = async (): Promise<*> => {
+  const { resendEmailConfirmation } = await ResendEmailConfirmationMutation.commit();
+  if (!resendEmailConfirmation?.errorCode) {
+    sendEmail();
+  }
 };
 
 export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDeletionSuccessfulAction => ({

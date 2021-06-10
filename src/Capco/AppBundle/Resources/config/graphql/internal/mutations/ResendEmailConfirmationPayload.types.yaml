@@ -1,0 +1,8 @@
+ResendEmailConfirmationPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of resendEmailConfirmation mutation'
+        fields:
+            errorCode:
+                type: ResendEmailConfirmationErrorCode
+                description: 'An unsuccessful mutation will return an error.'

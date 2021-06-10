@@ -19,7 +19,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
@@ -27,10 +26,8 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -214,71 +211,5 @@ class UsersController extends AbstractFOSRestController
         $this->userManager->updateUser($user);
 
         return $user;
-    }
-
-    /**
-     * @Post("/account/cancel_email_change")
-     * @View(statusCode=200, serializerGroups={})
-     */
-    public function cancelEmailChangeAction()
-    {
-        $user = $this->getUser();
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        $user->setNewEmailToConfirm(null);
-        $user->setNewEmailConfirmationToken(null);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-    }
-
-    /**
-     * @Post("/account/resend_confirmation_email", defaults={"_feature_flags" = "registration"})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postResendEmailConfirmationAction()
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
-        if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
-            $this->logger->warning('Already confirmed.');
-
-            return new JsonResponse(['message' => 'Already confirmed.', 'code' => 400], 400);
-        }
-
-        // security against mass click email resend
-        if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
-            $this->logger->warning('Email already sent less than a minute ago.');
-
-            return new JsonResponse(
-                ['message' => 'Email already sent less than a minute ago.', 'code' => 400],
-                400
-            );
-        }
-
-        if ($user->getNewEmailToConfirm()) {
-            $this->publisher->publish(
-                'user.email',
-                new Message(
-                    json_encode([
-                        'userId' => $user->getId(),
-                    ])
-                )
-            );
-        } else {
-            $this->notifier->sendConfirmationEmailMessage($user);
-        }
-
-        $user->setEmailConfirmationSentAt(new \DateTime());
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
     }
 }
