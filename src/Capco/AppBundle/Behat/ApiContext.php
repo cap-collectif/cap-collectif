@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
-use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\PHPMatcher;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
@@ -23,7 +22,7 @@ class ApiContext extends ApplicationContext
      */
     public $client;
 
-    /** @var ResponseInterface $response */
+    /** @var ResponseInterface */
     public $response;
 
     /**
@@ -160,9 +159,9 @@ EOF;
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
-            'exceptions' => false
+            'exceptions' => false,
         ]);
     }
 
@@ -176,9 +175,9 @@ EOF;
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
-                'Content-Type' => 'application/xml'
+                'Content-Type' => 'application/xml',
             ],
-            'exceptions' => false
+            'exceptions' => false,
         ]);
     }
 
@@ -193,7 +192,7 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => $table->getHash(),
             'exceptions' => false,
-            'headers' => []
+            'headers' => [],
         ]);
     }
 
@@ -209,8 +208,8 @@ EOF;
             'json' => json_decode($string->getRaw(), true),
             'exceptions' => false,
             'headers' => [
-                'Content-Type' => 'application/json'
-            ]
+                'Content-Type' => 'application/json',
+            ],
         ]);
     }
 
@@ -248,18 +247,40 @@ EOF;
         $body[] = [
             'name' => 'responses.2.value.0',
             'contents' => fopen('/var/www/features/files/document.pdf', 'r'),
-            'filename' => 'document.pdf'
+            'filename' => 'document.pdf',
         ];
         $body[] = [
             'name' => 'media',
             'contents' => fopen('/var/www/features/files/image.jpg', 'r'),
-            'filename' => 'image.jpg'
+            'filename' => 'image.jpg',
         ];
 
         $this->response = $this->client->request($method, $url, [
             'headers' => [],
-            'multipart' => $body
+            'multipart' => $body,
         ]);
+    }
+
+    /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with attached file$/
+     */
+    public function iUploadFile(string $method, string $url)
+    {
+        $body = [];
+        $body[] = [
+            'name' => 'file',
+            'contents' => fopen('/var/www/features/files/image.jpg', 'r'),
+            'filename' => 'image.jpg',
+        ];
+        $this->uploadFile($method, $url, $body);
+    }
+
+    /**
+     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" without attached file$/
+     */
+    public function iUploadWithoutFile(string $method, string $url)
+    {
+        $this->uploadFile($method, $url, []);
     }
 
     /**
@@ -387,10 +408,10 @@ EOF;
             $element->setNotation($values['notation']);
         }
         if (isset($values['published'])) {
-            $element->setPublished(filter_var($values['published'], FILTER_VALIDATE_BOOLEAN));
+            $element->setPublished(filter_var($values['published'], \FILTER_VALIDATE_BOOLEAN));
         }
         if (isset($values['archived'])) {
-            $element->setArchived(filter_var($values['archived'], FILTER_VALIDATE_BOOLEAN));
+            $element->setArchived(filter_var($values['archived'], \FILTER_VALIDATE_BOOLEAN));
         }
 
         // Set id
@@ -520,9 +541,17 @@ EOF;
         $response = $this->client->request('POST', '/login_check', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ],
-            'json' => ['username' => $username, 'password' => $password]
+            'json' => ['username' => $username, 'password' => $password],
+        ]);
+    }
+
+    private function uploadFile($method, $url, $body)
+    {
+        $this->response = $this->client->request($method, $url, [
+            'headers' => [],
+            'multipart' => $body,
         ]);
     }
 
@@ -532,7 +561,7 @@ EOF;
             'base_uri' => 'https://capco.test/',
             'cert' => '/etc/ssl/certs/capco.pem',
             'verify' => false,
-            'cookies' => true
+            'cookies' => true,
         ]);
     }
 
@@ -543,8 +572,8 @@ EOF;
             'exceptions' => false,
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
-            ]
+                'Accept' => 'application/json',
+            ],
         ]);
     }
 
