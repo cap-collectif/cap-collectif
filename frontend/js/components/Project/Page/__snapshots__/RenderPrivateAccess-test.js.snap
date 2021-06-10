@@ -21,14 +21,48 @@ exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
     ]
   }
 >
-  <Tag
+  <RenderPrivateAccess__StyledTag
+    archived={false}
     icon="cap cap-lock-2 mr-1"
   >
     <FormattedMessage
       id="restrictedaccess"
       values={Object {}}
     />
-  </Tag>
+  </RenderPrivateAccess__StyledTag>
+</OverlayTrigger>
+`;
+
+exports[`<RenderPrivateAccess /> should render correctly for archived project 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <_default
+      id="tooltip"
+    >
+      <FormattedMessage
+        id="global.draft.only_visible_by_you"
+        values={Object {}}
+      />
+    </_default>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <RenderPrivateAccess__StyledTag
+    archived={true}
+    icon="cap cap-lock-2 mr-1"
+  >
+    <FormattedMessage
+      id="restrictedaccess"
+      values={Object {}}
+    />
+  </RenderPrivateAccess__StyledTag>
 </OverlayTrigger>
 `;
 
@@ -53,13 +87,14 @@ exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
     ]
   }
 >
-  <Tag
+  <RenderPrivateAccess__StyledTag
+    archived={false}
     icon="cap cap-lock-1 mr-1"
   >
     <FormattedMessage
       id="restrictedaccess"
       values={Object {}}
     />
-  </Tag>
+  </RenderPrivateAccess__StyledTag>
 </OverlayTrigger>
 `;

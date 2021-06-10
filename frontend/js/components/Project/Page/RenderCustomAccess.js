@@ -3,10 +3,12 @@ import React from 'react';
 import { OverlayTrigger } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
+import styled from 'styled-components';
 import UserGroupModal from './UserGroupModal';
 import Tag from '../../Ui/Labels/Tag';
 import Tooltip from '../../Utils/Tooltip';
 import type { RenderCustomAccess_project } from '~relay/RenderCustomAccess_project.graphql';
+import colors from '~/styles/modules/colors';
 
 type Props = {
   project: RenderCustomAccess_project,
@@ -15,6 +17,11 @@ type Props = {
 type State = {
   showModal: boolean,
 };
+
+const StyledTag = styled(Tag)`
+  color: ${props => (props.archived ? `${colors['neutral-gray']['500']}` : 'inherit')};
+  background: none;
+`;
 
 export class RenderCustomAccess extends React.Component<Props, State> {
   state = {
@@ -52,11 +59,11 @@ export class RenderCustomAccess extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
-        <Tag as="button" icon={`cap ${lock} mr-1`} onClick={this.showModal}>
+        <StyledTag icon={`cap ${lock} mr-1`} onClick={this.showModal} archived={project?.archived}>
           <OverlayTrigger placement="top" overlay={tooltip}>
             <FormattedMessage id="restrictedaccess" />
           </OverlayTrigger>
-        </Tag>
+        </StyledTag>
         <div>
           <UserGroupModal project={project} show={showModal} handleClose={this.hideModal} />
         </div>
@@ -71,6 +78,7 @@ export default createFragmentContainer(RenderCustomAccess, {
       restrictedViewers(first: $count, after: $cursor) {
         totalUserCount
       }
+      archived
       ...UserGroupModal_project @arguments(count: $count, cursor: $cursor)
     }
   `,

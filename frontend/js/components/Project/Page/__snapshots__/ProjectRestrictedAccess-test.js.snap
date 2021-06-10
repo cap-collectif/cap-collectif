@@ -428,6 +428,13 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
                       "kind": "LinkedHandle",
                       "name": "restrictedViewers",
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "archived",
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Project",
                 },
@@ -437,7 +444,7 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "1dde0cf3647839eebd5f1cfea3c10724",
+          "cacheID": "2990117d1cd75a1e3bd270f3ae62a532",
           "id": null,
           "metadata": Object {},
           "name": "ProjectRestrictedAccessQuery",
@@ -466,11 +473,13 @@ fragment RenderCustomAccess_project on Project {
   restrictedViewers(first: $count, after: $cursor) {
     totalUserCount
   }
+  archived
   ...UserGroupModal_project_1G22uz
 }
 
 fragment RenderPrivateAccess_project on Project {
   visibility
+  archived
 }
 
 fragment UserAvatar_user on User {

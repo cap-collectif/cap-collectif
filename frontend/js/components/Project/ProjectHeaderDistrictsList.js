@@ -24,7 +24,11 @@ const DistrictsButton = styled(Button)`
   font-size: ${props => props.fontSize}px;
   padding: 0;
   vertical-align: baseline;
-  color: ${props => props.archived ? `${colors['neutral-gray']['500']} !important` : null}
+  color: ${props => (props.archived ? `${colors['neutral-gray']['500']} !important` : null)};
+`;
+
+const InlineListLi = styled.li`
+  color: ${props => (props.archived ? `${colors['neutral-gray']['500']}` : 'inherit')};
 `;
 
 export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
@@ -49,7 +53,9 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
         return (
           <InlineList className="d-i" separator="•">
             {project.districts.edges.map((district, key) => (
-              <li key={key}>{district?.node?.name}</li>
+              <InlineListLi archived={project.archived} key={key}>
+                {district?.node?.name}
+              </InlineListLi>
             ))}
           </InlineList>
         );
@@ -62,8 +68,7 @@ export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
             bsStyle="link"
             onClick={this.handleShow}
             className="p-0 project-districts__modal-link"
-            archived={project.archived}
-          >
+            archived={project.archived}>
             {project.districts.edges[0]?.node?.name}{' '}
             <FormattedMessage
               id="and-count-other-areas"

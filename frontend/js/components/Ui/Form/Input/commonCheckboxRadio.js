@@ -48,6 +48,7 @@ export const sharedStyleCheckboxRadio = (
   label {
     margin: 0;
     display: flex;
+    align-items: center;
     ${hasImage &&
       `
         flex-direction: column;

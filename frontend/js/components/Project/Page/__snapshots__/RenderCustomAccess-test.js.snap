@@ -2,8 +2,8 @@
 
 exports[`<RenderCustomAccess /> should render correctly 1`] = `
 <Fragment>
-  <Tag
-    as="button"
+  <RenderCustomAccess__StyledTag
+    archived={false}
     icon="cap cap-lock-2 mr-1"
     onClick={[Function]}
   >
@@ -36,7 +36,7 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
         values={Object {}}
       />
     </OverlayTrigger>
-  </Tag>
+  </RenderCustomAccess__StyledTag>
   <div>
     <Relay(injectIntl(UserGroupModal))
       handleClose={[Function]}
@@ -44,6 +44,63 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "archived": false,
+          "restrictedViewers": Object {
+            "totalUserCount": 15,
+          },
+        }
+      }
+      show={false}
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`<RenderCustomAccess /> should render correctly with archived project 1`] = `
+<Fragment>
+  <RenderCustomAccess__StyledTag
+    archived={true}
+    icon="cap cap-lock-2 mr-1"
+    onClick={[Function]}
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <_default
+          id="tooltip"
+        >
+          <FormattedMessage
+            id="only-visible-by"
+            values={
+              Object {
+                "num": 15,
+              }
+            }
+          />
+        </_default>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
+    >
+      <FormattedMessage
+        id="restrictedaccess"
+        values={Object {}}
+      />
+    </OverlayTrigger>
+  </RenderCustomAccess__StyledTag>
+  <div>
+    <Relay(injectIntl(UserGroupModal))
+      handleClose={[Function]}
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "archived": true,
           "restrictedViewers": Object {
             "totalUserCount": 15,
           },
