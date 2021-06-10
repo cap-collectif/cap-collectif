@@ -1,11 +1,9 @@
 // @flow
-import { takeEvery, select } from 'redux-saga/effects';
-import LocalStorageService from '../../services/LocalStorageService';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation';
-import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
+import type { Exact, Dispatch, Uuid, Action } from '../../types';
 import {
   isInterpellationContextFromStep,
   isInterpellationContextFromProposal,
@@ -244,38 +242,6 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
     });
 };
 
-export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
-  const { filter, value } = action;
-  const state: GlobalState = yield select();
-  const filters = { ...state.proposal.filters, [filter]: value };
-  const filtersByStep: { [id: Uuid]: Object } =
-    LocalStorageService.get('proposal.filtersByStep') || {};
-  if (state.project.currentProjectStepById) {
-    filtersByStep[state.project.currentProjectStepById] = filters;
-  }
-  LocalStorageService.set('proposal.filtersByStep', filtersByStep);
-}
-
-export function* storeTermsInLocalStorage(action: ChangeTermAction): Generator<*, *, *> {
-  const { terms } = action;
-  const state: GlobalState = yield select();
-  const termsByStep: { [id: Uuid]: string } = LocalStorageService.get('proposal.termsByStep') || {};
-  if (state.project.currentProjectStepById) {
-    termsByStep[state.project.currentProjectStepById] = terms;
-  }
-  LocalStorageService.set('proposal.termsByStep', termsByStep);
-}
-
-export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<*, *, *> {
-  const { order } = action;
-  const state: GlobalState = yield select();
-  const orderByStep: { [id: Uuid]: string } = LocalStorageService.get('proposal.orderByStep') || {};
-  if (state.project.currentProjectStepById) {
-    orderByStep[state.project.currentProjectStepById] = order;
-  }
-  LocalStorageService.set('proposal.orderByStep', orderByStep);
-}
-
 export type ProposalAction =
   | OpenCreateModalAction
   | ChangeFilterAction
@@ -309,14 +275,6 @@ export type ProposalAction =
       posts: Array<Object>,
       proposalId: Uuid,
     };
-
-export function* saga(): Generator<*, *, *> {
-  yield [
-    takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
-    takeEvery('proposal/CHANGE_TERMS', storeTermsInLocalStorage),
-    takeEvery('proposal/CHANGE_ORDER', storeOrderInLocalStorage),
-  ];
-}
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {

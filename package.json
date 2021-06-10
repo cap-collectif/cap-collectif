@@ -355,7 +355,6 @@
         "redux": "^4.0.4",
         "redux-form": "^8.3.7",
         "redux-form-storybook": "^1.0.2",
-        "redux-saga": "^1.0.3",
         "regenerator-runtime": "^0.13.1",
         "relay-compiler": "^11.0.0",
         "relay-compiler-language-js-flow-uncommented": "^2.0.0",

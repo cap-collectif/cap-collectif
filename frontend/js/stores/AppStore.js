@@ -1,6 +1,5 @@
 // @flow
-import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { compose, createStore, combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { intlReducer } from 'react-intl-redux';
 import LocalStorageService from '~/services/LocalStorageService';
@@ -8,7 +7,6 @@ import { reducer as reportReducer } from '~/redux/modules/report';
 import { reducer as projectReducer } from '~/redux/modules/project';
 import {
   reducer as proposalReducer,
-  saga as proposalSaga,
   initialState as proposalInitialState,
 } from '~/redux/modules/proposal';
 import { reducer as opinionReducer } from '~/redux/modules/opinion';
@@ -104,8 +102,6 @@ export default function configureStore(initialState: GlobalState): Store {
     }
   }
 
-  const sagaMiddleware = createSagaMiddleware();
-
   const reducers = {
     intl: intlReducer,
     default: defaultReducer,
@@ -140,14 +136,11 @@ export default function configureStore(initialState: GlobalState): Store {
     reducer,
     initialState,
     compose(
-      applyMiddleware(sagaMiddleware),
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
         : f => f,
     ),
   );
-
-  sagaMiddleware.run(proposalSaga);
 
   return store;
 }
