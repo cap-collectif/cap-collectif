@@ -759,7 +759,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud7:
         question: '@simplequestion2'
         reply: '@replyTagCloud4'
-        value: C'est génial ! On va se régaler.
+        value: C'est génial ! On va se régaler. mais
         createdAt: <(new \DateTime('2021-01-01 04:12:00'))>
     responseTagCloud8:
         question: '@xQuestion1'
@@ -770,7 +770,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud9:
         question: '@simplequestion2'
         reply: '@replyTagCloud5'
-        value: Il va y avoir du divertissement ! Et des sportifs !
+        value: Il va y avoir du divertissement ! Et des sportifs ou !
         createdAt: <(new \DateTime('2021-01-01 04:14:00'))>
     responseTagCloud10:
         question: '@xQuestion1'
@@ -781,7 +781,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud11:
         question: '@simplequestion2'
         reply: '@replyTagCloud6'
-        value: Incroyable ! Tout ces sportifs la wow.
+        value: Incroyable ! Tout ces sportifs la wow. est
         createdAt: <(new \DateTime('2021-01-01 04:15:00'))>
     responseTagCloud12:
         question: '@xQuestion1'
@@ -792,7 +792,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud13:
         question: '@simplequestion2'
         reply: '@replyTagCloud7'
-        value: Bof, non pas trop ça va faire du bruit !
+        value: Bof, non pas trop ça va faire du bruit Donc !
         createdAt: <(new \DateTime('2021-01-01 04:17:00'))>
     responseTagCloud14:
         question: '@xQuestion1'
@@ -803,7 +803,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud15:
         question: '@simplequestion2'
         reply: '@replyTagCloud8'
-        value: Pas trop non plus, j'aime pas le sport.
+        value: Pas trop non plus, j'aime pas le sport. or
         createdAt: <(new \DateTime('2021-01-01 04:18:00'))>
     responseTagCloud16:
         question: '@xQuestion1'
@@ -814,7 +814,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud17:
         question: '@simplequestion2'
         reply: '@replyTagCloud9'
-        value: Le sport c'est pour les femmes.
+        value: ***REMOVED***
         createdAt: <(new \DateTime('2021-01-01 04:19:00'))>
     responseTagCloud18:
         question: '@xQuestion1'
@@ -825,7 +825,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud19:
         question: '@simplequestion2'
         reply: '@replyTagCloud10'
-        value: Enfin un peu de divertissement.
+        value: Enfin un peu de divertissement. Car le divertissement c'est bien à la maison.
         createdAt: <(new \DateTime('2021-01-01 04:20:00'))>
     responseTagCloud20:
         question: '@xQuestion1'

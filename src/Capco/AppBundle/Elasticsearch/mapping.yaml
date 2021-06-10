@@ -35,8 +35,10 @@ settings:
                     ['lowercase', 'icu_folding', 'french_elision', 'french_stop', 'french_stemmer']
                 char_filter: ['html_strip']
             tag_cloud:
+                type: stop
                 tokenizer: standard
-                filter: ['lowercase', 'icu_folding', 'french_stop', 'french_elision']
+                stopwords: _french_
+                filter: ['lowercase', 'icu_folding', 'french_elision']
                 char_filter: ['html_strip']
 
 # Only map the fields we need to search on.
