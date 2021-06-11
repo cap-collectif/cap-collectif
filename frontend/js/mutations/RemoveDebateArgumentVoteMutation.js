@@ -16,6 +16,7 @@ const mutation = graphql`
     removeDebateArgumentVote(input: $input) {
       errorCode
       debateArgument {
+        id
         viewerHasVote
         votes(first: 0) {
           totalCount
@@ -36,6 +37,7 @@ const commit = (
       removeDebateArgumentVote: {
         errorCode: null,
         debateArgument: {
+          __typename: 'DebateArgument',
           id: variables.input.debateArgumentId,
           viewerHasVote: false,
           votes: {
