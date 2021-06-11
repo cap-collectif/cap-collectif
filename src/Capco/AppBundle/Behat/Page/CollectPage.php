@@ -27,7 +27,7 @@ class CollectPage extends Page
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button',
         'restricted-access' => '#restricted-access',
-        'restricted-access-link' => '#restricted-access > button',
+        'restricted-access-link' => '#restricted-access > span > span',
         'restricted-group-link' => ' > button',
     ];
 
