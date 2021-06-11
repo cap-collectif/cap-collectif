@@ -5,13 +5,14 @@ import { LineHeight } from '~ui/Primitives/constants';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import jsxInnerText from '~/utils/jsxInnerText';
 
-type Props = {|
+export type TextProps = {|
   ...AppBoxProps,
   +truncate?: number,
 |};
+
 // typings is handled by the .d.ts file
-const Text = React.forwardRef<Props, HTMLElement>(
-  ({ truncate, children, ...props }: Props, ref) => {
+const Text = React.forwardRef<TextProps, HTMLElement>(
+  ({ truncate, children, ...props }: TextProps, ref) => {
     let content = children;
     const innerText = jsxInnerText(content);
     if (truncate && innerText.length > truncate) {

@@ -3,6 +3,15 @@
 {% block sonata_breadcrumb %}
 {% endblock %}
 
+{% block sonata_page_content %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{
+        react_render_component('DashboardPageApp', {
+            'rendering': 'client_side'
+        })
+    }}
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
 {% endblock %}

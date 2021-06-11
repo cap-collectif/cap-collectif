@@ -3,7 +3,7 @@ import { AppBoxProps } from '../../Primitives/AppBox';
 
 type Data = {
     readonly date: string,
-    readonly value: string,
+    readonly value: number,
 };
 
 declare const LineChart: FC<AppBoxProps & {

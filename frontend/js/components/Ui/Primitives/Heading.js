@@ -49,6 +49,7 @@ export const headingStyles = {
     fontSize: 1,
     fontWeight: FontWeight.Normal,
     lineHeight: LineHeight.SM,
+    uppercase: true,
   },
 };
 

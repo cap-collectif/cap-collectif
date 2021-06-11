@@ -1,3 +1,4 @@
+
 [version]
 0.137.0
 
@@ -103,6 +104,7 @@ well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/SiteFav
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Debate
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Sidebar
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/UserInvite
+well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Dashboard
 
 
 module.system.node.resolve_dirname=node_modules

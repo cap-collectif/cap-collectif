@@ -15,7 +15,7 @@ export type ActiveTab = {|
 export type TabProps = {|
   ...LineChartProps,
   +id: string,
-  +count: string,
+  +count: number,
   +active?: boolean,
   +selectTab?: (activeTab: ActiveTab) => void,
 |};
@@ -27,8 +27,11 @@ const Tab = ({ id, label, count, active, data, selectTab }: TabProps) => (
     onClick={() => (selectTab ? selectTab({ id, label, data }) : null)}
     bg="transparent"
     border="none"
+    borderRight="1px solid"
+    borderColor="gray.150"
     p={0}
-    m={0}>
+    m={0}
+    flex={1}>
     <Flex
       id={id}
       direction="column"
@@ -39,7 +42,7 @@ const Tab = ({ id, label, count, active, data, selectTab }: TabProps) => (
       borderBottom={active ? 'none' : 'normal'}
       borderRight={active ? 'normal' : 'none'}
       borderColor="gray.150">
-      <Text color="blue.900" fontSize={3}>
+      <Text color="blue.900" fontSize={3} capitalize>
         {label}
       </Text>
       <Text color="blue.800" {...headingStyles.h3}>

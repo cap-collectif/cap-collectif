@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { PieChart as PieChartRecharts, Pie, Cell, ResponsiveContainer } from 'recharts';
 import Flex, { type FlexProps } from '~ui/Primitives/Layout/Flex';
 import Label from '../Label';
@@ -10,12 +9,11 @@ import colors from '~/styles/modules/colors';
 type Percentage = {|
   +id: string,
   +label: string,
-  +value: string,
+  +value: number,
 |};
 
 type PercentageFormatted = {|
   ...Percentage,
-  +value: number,
   +color: string,
 |};
 
@@ -33,20 +31,21 @@ const percentageColors: string[] = [
 
 const PieChart = ({ percentages, ...props }: PieChartProps) => {
   const [hovered, setHovered] = React.useState<?string>(null);
-  const intl = useIntl();
 
   const displayPercentages: PercentageFormatted[] = percentages
     .slice(0, percentageColors.length)
-    .map((p, idx) => ({ ...p, color: percentageColors[idx], value: parseInt(p.value,10) }));
-  const otherPercentages: PercentageFormatted = percentages.slice(percentageColors.length, percentages.length).reduce(
-    (acc, percentage) => ({
-      id: 'other',
-      label: 'global.plural.other',
-      color: colors.red['500'],
-      value: acc.value ? parseInt(acc.value, 10) + parseInt(percentage.value, 10) : parseInt(percentage.value, 10),
-    }),
-    { id: 'other', label: 'global.plural.other', color: colors.red['500'], value: 0 },
-  );
+    .map((p, idx) => ({ ...p, color: percentageColors[idx] }));
+  const otherPercentages: PercentageFormatted = percentages
+    .slice(percentageColors.length, percentages.length)
+    .reduce(
+      (acc, percentage) => ({
+        id: 'other',
+        label: 'global.plural.other',
+        color: colors.red['500'],
+        value: acc.value ? acc.value + percentage.value : percentage.value,
+      }),
+      { id: 'other', label: 'global.plural.other', color: colors.red['500'], value: 0 },
+    );
 
   const percentagesFormatted = React.useMemo(
     () =>
@@ -66,7 +65,7 @@ const PieChart = ({ percentages, ...props }: PieChartProps) => {
             state={hovered === null || hovered === percentage.id ? 'idle' : 'hidden'}
             onMouseOver={() => setHovered(percentage.id)}
             onMouseOut={() => setHovered(null)}>
-            {`${intl.formatMessage({ id: percentage.label })} (${percentage.value}%)`}
+            {`${percentage.label} (${percentage.value}%)`}
           </Label>
         ))}
       </Flex>

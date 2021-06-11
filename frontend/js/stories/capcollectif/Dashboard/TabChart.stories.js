@@ -14,58 +14,58 @@ const Template = (args: TabsChartProps) => (
       data={[
         {
           date: '7 sept',
-          value: '2400',
+          value: 2400,
         },
         {
           date: '9 sept',
-          value: '1398',
+          value: 1398,
         },
         {
           date: '13 sept',
-          value: '9800',
+          value: 9800,
         },
       ]}
       id="vote"
       label="votes"
-      count="24"
+      count={13598}
     />
     <TabsChart.Tab
       data={[
         {
           date: '7 nov',
-          value: '10000',
+          value: 10000,
         },
         {
           date: '9 nov',
-          value: '15000',
+          value: 15000,
         },
         {
           date: '13 nov',
-          value: '20000',
+          value: 20000,
         },
       ]}
       id="contribution"
       label="contributions"
-      count="12"
+      count={45000}
     />
     <TabsChart.Tab
       data={[
         {
           date: '7 dec',
-          value: '1234',
+          value: 1234,
         },
         {
           date: '9 dec',
-          value: '4567',
+          value: 4567,
         },
         {
           date: '13 dec',
-          value: '8912',
+          value: 8912,
         },
       ]}
       id="commentaire"
       label="commentaires"
-      count="50"
+      count={14713}
     />
   </TabsChart>
 );

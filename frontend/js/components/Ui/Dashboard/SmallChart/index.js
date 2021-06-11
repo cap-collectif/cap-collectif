@@ -18,8 +18,9 @@ const SmallChart = ({ label, count, ...props }: SmallChartProps) => (
     p={6}
     border="normal"
     borderColor="gray.150"
-    borderRadius="normal">
-    <Flex direction="column" flex={1}>
+    borderRadius="normal"
+    bg="white">
+    <Flex direction="column" mr={3}>
       <Text color="blue.800" mb={2} {...headingStyles.h4}>
         {label}
       </Text>
@@ -28,7 +29,7 @@ const SmallChart = ({ label, count, ...props }: SmallChartProps) => (
       </Text>
     </Flex>
 
-    <LineChart label={label} flex={1} {...props} />
+    <LineChart label={label} width="120px" {...props} />
   </Flex>
 );
 

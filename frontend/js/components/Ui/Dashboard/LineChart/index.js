@@ -17,7 +17,7 @@ import { formatBigNumber } from '~/utils/bigNumberFormatter';
 
 type Data = {|
   +date: string,
-  +value: string,
+  +value: number,
 |};
 
 export type LineChartProps = {|
@@ -29,7 +29,7 @@ export type LineChartProps = {|
 |};
 
 const renderTooltip = ({ payload }, label: string) =>
-  payload[0] ? (
+  payload && payload[0] ? (
     <AppBox bg="blue.800" borderRadius="normal" p={1}>
       <Text color="blue.200">{payload[0].payload.date}</Text>
       <Text color="white">{`${formatBigNumber(payload[0].value)} ${label}`}</Text>
