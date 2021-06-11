@@ -62,16 +62,6 @@ unnecessary-optional-chain=off
 .*/codemod/*
 .*/benchmarks/*
 
-
-; ignore synthesis
-.*/SynthesisElementActions.js
-.*/SynthesisDisplayRules.js
-.*/SynthesisViewBoxApp.js
-.*/SynthesisEditBoxApp.js
-.*/SynthesisActions.js
-.*/SynthesisStore.js
-.*/SynthesisBox.js
-
 ; ignore WYSIWYG files (because we uninstall draft-js & his friends, its too heavy)
 .*/AdminEditor/WysiwygEditor.js
 
