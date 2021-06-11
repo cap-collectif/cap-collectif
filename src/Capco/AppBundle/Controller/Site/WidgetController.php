@@ -21,7 +21,6 @@ class WidgetController extends Controller
 
     /**
      * @Route("/widget_debate/{debateId}", name="widget_debate", options={"i18n" = false})
-     * @Template("CapcoAppBundle:Widget:widget_debate.html.twig")
      */
     public function widgetDebateAction(Request $request, string $debateId)
     {
@@ -40,21 +39,21 @@ class WidgetController extends Controller
         $step = $debate->getStep();
         $project = $debate->getProject();
 
-        if (!$project->canDisplay($viewer)) {
-            throw new ProjectAccessDeniedException();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->render('@CapcoApp/Widget/widget_403.html.twig');
         }
 
         $widgetBackground = $request->query->get('background');
         $widgetAuthenticationEnabled = $request->query->getBoolean('authEnabled') || false;
         $destination = $request->query->get('destination') ?? 'unknown';
 
-        return [
+        return $this->render('@CapcoApp/Widget/widget_debate.html.twig', [
             'debateId' => $debateId,
             'step' => $step,
             'project' => $project,
             'widgetBackground' => $widgetBackground,
             'widgetAuthEnabled' => $widgetAuthenticationEnabled,
             'widgetLocation' => $destination,
-        ];
+        ]);
     }
 }

@@ -82,6 +82,7 @@ import DebateStepPageApp from '~/startup/DebateStepPageApp';
 import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
 import DebateCardApp from '~/startup/DebateCardApp';
 import WhatsNewApp from '~/startup/WhatsNewApp';
+import DebateWidgetAccessDeniedApp from '~/startup/DebateWidgetAccessDeniedApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -152,6 +153,7 @@ ReactOnRails.register({
   UserInvitationPageApp,
   ResetPasswordApp,
   DebateStepPageApp,
+  DebateWidgetAccessDeniedApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

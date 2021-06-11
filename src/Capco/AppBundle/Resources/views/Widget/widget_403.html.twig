@@ -1,0 +1,28 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block mainContent %}
+    <style>
+        body { padding-top: 0; background-color: transparent }
+    </style>
+
+    <section id="debate-step-page-app-widget">
+        {{ react_render_component('DebateWidgetAccessDeniedApp') }}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+      window.locale = "{{ intl_locale() }}";
+      window.timeZone = "{{ intl_timeZone() }}";
+      window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
+      {% if is_feature_enabled('report_browers_errors_to_sentry') %}
+      window.sentryDsn = "{{ sentryDsn }}";
+      {% endif %}
+    </script>
+{% endblock %}
+
