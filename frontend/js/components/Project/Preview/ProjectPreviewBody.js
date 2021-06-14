@@ -79,7 +79,6 @@ const getActualStep = (project: ProjectPreviewBody_project) => {
 
 export class ProjectPreviewBody extends React.Component<Props> {
   getAction = (step: Step, archived: boolean) => {
-
     if (archived) return null;
 
     const { project } = this.props;
@@ -132,13 +131,15 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
     const Title = styled(Truncate)`
-      color: ${props => props.archived ? colors['neutral-gray']['500'] : '#00acc1'}
-    `
+      color: ${props => (props.archived ? colors['neutral-gray']['500'] : 'inherit')};
+    `;
     return (
       <OverlayTrigger placement="top" overlay={tooltip}>
         <a href={link} target={project.isExternal && project.externalLink ? 'blank' : ''}>
           <div style={{ width: '98%' }}>
-            <Title lines={3} archived={project.archived} >{project.title}</Title>
+            <Title lines={3} archived={project.archived}>
+              {project.title}
+            </Title>
           </div>
         </a>
       </OverlayTrigger>
@@ -186,16 +187,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
           />
         )}
         <div className="small excerpt">
-          {actualStep && this.getAction(actualStep, project.archived)} {actualStep && this.getStartDate(actualStep)}{' '}
+          {actualStep && this.getAction(actualStep, project.archived)}{' '}
+          {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.state === 'OPENED' &&
             !actualStep.timeless &&
             actualStep.timeRange.endAt &&
             this.actualStepIsParticipative() &&
-            !project.archived &&
-            (
-              <RemainingTime endAt={actualStep.timeRange.endAt} />
-            )}
+            !project.archived && <RemainingTime endAt={actualStep.timeRange.endAt} />}
         </div>
       </Card.Body>
     );
