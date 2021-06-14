@@ -73,25 +73,6 @@ const UserArgumentPaginationAfterQuery = /* GraphQL */ `
   }
 `;
 
-const UserArgumentPaginationBeforeQuery = /* GraphQL */ `
-  query UserArgumentPaginationQuery($count: Int!, $cursor: String) {
-    node(id: "VXNlcjp1c2VyMQ==") {
-      ... on User {
-        id
-        arguments(first: $count, before: $cursor) {
-          edges {
-            node {
-              id
-              kind
-            }
-          }
-          totalCount
-        }
-      }
-    }
-  }
-`;
-
 describe('User.arguments connection', () => {
   it("fetches a user's arguments", async () => {
     await Promise.all(
@@ -128,28 +109,6 @@ describe('User.arguments connection pagination', () => {
             'internal',
           ),
         ).resolves.toMatchSnapshot('user1:after:' + cursor);
-      }),
-    );
-  });
-});
-
-describe('User.arguments connection pagination', () => {
-  it("should paginate correctly before a user's arguments", async () => {
-    await Promise.all(
-      [
-        'YToyOntpOjA7aToxNDU2Nzk0MDAwMDAwO2k6MTtzOjExOiJhcmd1bWVudDIxMSI7fQ==',
-        'YToyOntpOjA7aToxNDI3NDk3MjAwMDAwO2k6MTtzOjEwOiJhcmd1bWVudDg2Ijt9',
-      ].map(async cursor => {
-        await expect(
-          graphql(
-            UserArgumentPaginationBeforeQuery,
-            {
-              count: 5,
-              cursor: cursor,
-            },
-            'internal',
-          ),
-        ).resolves.toMatchSnapshot('user1:before:' + cursor);
       }),
     );
   });

@@ -42,7 +42,7 @@ InternalProposal:
                 deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This field belongs to our legacy evaluation tool.", description: "Field `evaluers` will be removed.", supersededBy: "TODO"})'
             news:
                 type: 'NewsConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNewsResolver", [value, args])'
                 args:
                     orderBy:
@@ -53,7 +53,7 @@ InternalProposal:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalOfficialResponseResolver", [value, getUser()])'
             reportings:
                 type: 'ReportingConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", [value, args])'
                 args:
                     orderBy:
@@ -114,7 +114,7 @@ InternalProposal:
                 description: 'Identifies proposals as draft.'
             votes:
                 type: 'InternalProposalVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'InternalProposalVoteOrder'
@@ -144,7 +144,7 @@ InternalProposal:
                 resolve: '@=value.getParentConnections()'
             followers:
                 type: 'InternalUserConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'FollowerOrder'
@@ -229,7 +229,7 @@ InternalProposal:
                 resolve: '@=value.getGlobalProgressStatus()'
             revisions:
                 type: 'ProposalRevisionConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_USER') and hasFeatureFlag('proposal_revisions')"
                 description: "The proposal's related revision in pending state."
                 args:

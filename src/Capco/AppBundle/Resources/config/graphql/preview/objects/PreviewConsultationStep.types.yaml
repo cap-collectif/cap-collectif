@@ -20,7 +20,7 @@ PreviewConsultationStep:
             #   description: 'The related consultation of this step.'
             contributors:
                 description: 'A list of contributor associated with the consultation step.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
                 type: 'PreviewUserConnection!'
             votesCount:
@@ -31,7 +31,7 @@ PreviewConsultationStep:
             votes:
                 type: 'PreviewVoteConnection!'
                 description: 'The votes in this consultation.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepVotesResolver", [value, args]).totalCount'
             userHasVote:
                 type: 'Boolean!'

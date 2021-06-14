@@ -182,7 +182,7 @@ InternalQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", [args, getUser()])'
             users:
                 type: 'InternalUserConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     superAdmin:
                         type: 'Boolean'
@@ -296,7 +296,7 @@ InternalQuery:
             projectDistricts:
                 description: 'List all the district project in the platform.'
                 type: 'ProjectDistrictConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     name:
                         type: 'String'
@@ -306,7 +306,7 @@ InternalQuery:
             allContributors:
                 description: 'List all the contributors in the platform.'
                 type: 'InternalUserConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
             allContributions:
                 description: 'Return the number of contributions in the platform.'
@@ -315,7 +315,7 @@ InternalQuery:
             votes:
                 description: 'List all the votes in the platform.'
                 type: 'InternalVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     onlyAccounted:
                         type: 'Boolean'
@@ -329,7 +329,7 @@ InternalQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'
             ssoConfigurations:
                 type: 'InternalSSOConfigurationConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'List all SSO Configurations.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'
@@ -343,7 +343,7 @@ InternalQuery:
                         description: 'Filter by contributor of section.'
             medias:
                 type: 'MediaConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'List all medias'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\MediaQueryResolver", [args])'
@@ -456,7 +456,7 @@ InternalQuery:
                 type: 'UserInviteConnection!'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserInvitationsResolver", [args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     first:
                         type: 'Int'
@@ -474,7 +474,7 @@ InternalQuery:
                 description: 'Get all mailing lists'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListResolver", [args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     term:
                         type: 'String'
@@ -484,7 +484,7 @@ InternalQuery:
                 description: 'Get all emailing campaigns'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EmailingCampaign\\EmailingCampaignResolver", [args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     status:
                         type: 'EmailingCampaignStatusFilter'

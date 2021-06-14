@@ -25,7 +25,7 @@ InternalArgument:
                 description: 'The type.'
             votes:
                 type: 'ArgumentVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentVotesResolver", [value, args])'
             body:
                 type: 'String!'

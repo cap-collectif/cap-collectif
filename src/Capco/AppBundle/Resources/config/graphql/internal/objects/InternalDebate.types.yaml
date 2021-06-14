@@ -15,12 +15,12 @@ InternalDebate:
                     typeName: Debate
             opinions:
                 description: 'The opinions from experts of the debate.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 type: InternalDebateOpinionConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateOpinionsResolver", [value, args])'
             alternateArguments:
                 description: 'The arguments from non-experts of the debate, in alternate way.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     isPublished:
                         type: 'Boolean'
@@ -38,7 +38,7 @@ InternalDebate:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateAlternateArgumentsResolver", [value, args, getUser()])'
             arguments:
                 description: 'The arguments from non-experts of the debate.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     value:
                         type: 'ForOrAgainstValue'
@@ -65,7 +65,7 @@ InternalDebate:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerHasArgumentResolver", [value, getUser()])'
             votes:
                 description: 'The votes from contributors of the debate.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     type:
                         type: 'ForOrAgainstValue'
@@ -93,7 +93,7 @@ InternalDebate:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerVoteResolver", [value, getUser()])'
             articles:
                 description: 'The associated articles of the debate.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 type: DebateArticleConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArticlesResolver", [value, args])'
             url:
@@ -103,7 +103,7 @@ InternalDebate:
             viewerUnpublishedVotes:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'DebateVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateViewerUnpublishedVotesResolver", [value, args, getUser()])'
                 description: "The viewer's unpublished votes."
             viewerUnpublishedArgument:

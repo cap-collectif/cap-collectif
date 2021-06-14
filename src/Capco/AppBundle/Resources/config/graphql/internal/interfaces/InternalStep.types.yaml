@@ -43,7 +43,7 @@ InternalStep:
             events:
                 description: 'Events linked to the step'
                 type: 'InternalEventConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'PreviewEventOrder!'

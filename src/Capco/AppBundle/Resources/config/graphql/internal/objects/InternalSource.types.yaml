@@ -22,7 +22,7 @@ InternalSource:
                 resolve: '@=value.userDidReport(getUser())'
             votes:
                 type: SourceVoteConnection
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", [value, args, getUser()])'
             contribuable:
                 type: 'Boolean!'

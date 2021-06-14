@@ -28,7 +28,7 @@ InternalVersion:
                 type: 'InternalConsultationStep!'
             votes:
                 type: 'YesNoPairedVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
                 args:
                     orderBy:

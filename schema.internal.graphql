@@ -140,14 +140,6 @@ interface AbstractDebateArgument {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -201,14 +193,6 @@ interface AbstractDebateArgument {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Order by."""
     orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
@@ -977,14 +961,6 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -1001,14 +977,6 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ArgumentVoteConnection!
 
   """The kind of contribution (argument)."""
@@ -1139,14 +1107,6 @@ interface Argumentable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """If provided, returns the arguments of this particular type."""
@@ -1165,14 +1125,6 @@ interface Argumentable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """If provided, returns the arguments of this particular type."""
     type: ArgumentValue
@@ -1977,14 +1929,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -1997,14 +1941,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     If non-null, filters proposals with the given trashed status (eg: visible, not visible).
@@ -2083,14 +2019,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection
 
   """The requirements to vote on this step."""
@@ -2102,14 +2030,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): RequirementConnection!
   project: Project
 
@@ -2143,14 +2063,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
@@ -2166,14 +2078,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
   viewerProposalDrafts(
     """
@@ -2183,14 +2087,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection!
 
   """The main view : grid, list or map"""
@@ -2234,14 +2130,6 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -2277,14 +2165,6 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
@@ -2313,14 +2193,6 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: VoteOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentVoteConnection!
   viewerHasVote: Boolean!
@@ -2454,14 +2326,6 @@ interface Commentable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 }
@@ -2555,14 +2419,6 @@ type Consultation implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """
@@ -2585,14 +2441,6 @@ type Consultation implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): VoteConnection!
 
   """Get the associated description of the consultation"""
@@ -2616,14 +2464,6 @@ type Consultation implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): OpinionConnection
 
   """Contributions are allowed right now."""
@@ -2648,14 +2488,6 @@ type Consultation implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Ordering options for contributions returned from the connection."""
     orderBy: ContributionOrder = {field: POSITION, direction: DESC}
@@ -2702,14 +2534,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): RequirementConnection!
 
   """When the time interval begins or ends."""
@@ -2760,14 +2584,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -2780,14 +2596,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """The number of votes in this consultation."""
@@ -2817,14 +2625,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ConsultationConnection!
 
   """Search a consultation in this step by it's slug"""
@@ -2840,14 +2640,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Ordering options for contributions returned from the connection."""
     orderBy: ContributionOrder = {field: POSITION, direction: DESC}
@@ -3532,14 +3324,6 @@ type Debate implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): DebateOpinionConnection!
 
   """The arguments from non-experts of the debate, in alternate way."""
@@ -3551,14 +3335,6 @@ type Debate implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     (ROLE_ADMIN only) True to see only published arguments, false to see only unpublished, null to see both.
@@ -3583,14 +3359,6 @@ type Debate implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Filter by an argument's stand."""
     value: ForOrAgainstValue = null
@@ -3622,14 +3390,6 @@ type Debate implements Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Filter by a vote's type."""
     type: ForOrAgainstValue = null
 
@@ -3657,14 +3417,6 @@ type Debate implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): DebateArticleConnection!
 
   """The url of the debate"""
@@ -3679,14 +3431,6 @@ type Debate implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): DebateVoteConnection!
 
   """The viewer's unpublished argument."""
@@ -3737,14 +3481,6 @@ type DebateAnonymousArgument implements Node & AbstractDebateArgument & Trashabl
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -3798,14 +3534,6 @@ type DebateAnonymousArgument implements Node & AbstractDebateArgument & Trashabl
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Order by."""
     orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
@@ -3900,14 +3628,6 @@ type DebateArgument implements Node & AbstractDebateArgument & Trashable & Contr
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -3961,14 +3681,6 @@ type DebateArgument implements Node & AbstractDebateArgument & Trashable & Contr
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Order by."""
     orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
@@ -4280,14 +3992,6 @@ type DebateStep implements Step & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -4303,14 +4007,6 @@ type DebateStep implements Step & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """the type of the debate"""
@@ -5147,14 +4843,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
@@ -5173,14 +4861,6 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ParticipantConnection!
   themes: [Theme!]!
   projects: [Project!]!
@@ -5787,14 +5467,6 @@ type Group implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -5808,14 +5480,6 @@ type Group implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserInviteConnection!
 }
 
@@ -6090,14 +5754,6 @@ type MailingList implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """the project from which the list has been built, if any"""
@@ -6172,14 +5828,6 @@ type MajorityQuestion implements Question & Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
 
@@ -6207,14 +5855,6 @@ type MajorityQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
@@ -6380,14 +6020,6 @@ type MediaQuestion implements Question & Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
 
@@ -6415,14 +6047,6 @@ type MediaQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
@@ -6474,14 +6098,6 @@ type MultipleChoiceQuestion implements Question & Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
 
@@ -6509,14 +6125,6 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
@@ -6547,14 +6155,6 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ResponseConnection!
   choices(
     """
@@ -6564,14 +6164,6 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 9999
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """The searched term in multiple question choices."""
     term: String
@@ -7034,14 +6626,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """If provided, returns the arguments of this particular type."""
@@ -7061,14 +6645,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """If provided, returns the arguments of this particular type."""
     type: ArgumentValue
   ): ArgumentConnection
@@ -7083,14 +6659,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
   ): SourceConnection!
 
@@ -7105,14 +6673,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): SourceConnection!
 
   """The available sources categories of to the sourceable."""
@@ -7130,14 +6690,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -7168,14 +6720,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
   ): FollowerConnection
 
@@ -7198,14 +6742,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """Filters vote by value"""
@@ -7221,14 +6757,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: VersionOrder = {field: PUBLISHED_AT, direction: DESC}
   ): VersionConnection!
 
@@ -7241,14 +6769,6 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: VersionOrder = {field: PUBLISHED_AT, direction: DESC}
   ): VersionConnection!
 
@@ -7425,14 +6945,6 @@ type OtherStep implements Node & Step {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 }
@@ -7769,14 +7281,6 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
   displayedOnBlog: Boolean!
@@ -7878,14 +7382,6 @@ type PresentationStep implements Node & Step {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 }
@@ -7937,14 +7433,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Wether it retrieves anonymous votes or not."""
     anonymous: Boolean = null
   ): VoteConnection!
@@ -7958,14 +7446,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Ordering options for contributors returning from the connection."""
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
@@ -7996,14 +7476,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Filter contributions by a specific type."""
     type: ContributionType
     orderBy: ContributionOrder = {field: CREATED_AT, direction: DESC}
@@ -8033,14 +7505,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     If non-null, filters proposals with the given trashed status (eg: visible, not visible).
@@ -8124,14 +7588,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection
 
   """Expose Primary Key, do not use it, except for testing purpose."""
@@ -8178,14 +7634,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): GroupConnection
 
   """Linking table with position for district"""
@@ -8197,14 +7645,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProjectDistrictConnection
 
   """The comments related to the project."""
@@ -8216,14 +7656,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """The connection will return only the trashed results."""
     onlyTrashed: Boolean = false
@@ -8266,14 +7698,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     term: String
     theme: ID
     district: ID
@@ -8428,14 +7852,6 @@ interface ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     Array of viewer's affiliation options for projects returned from the connection.
@@ -8607,14 +8023,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """The ordering options for votes."""
     orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
 
@@ -8660,14 +8068,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
@@ -8683,14 +8083,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -8706,14 +8098,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Ordering options for followers returning from the connection"""
     orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
@@ -8742,14 +8126,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: DESC}
   ): NewsConnection!
   officialResponse: OfficialResponse
@@ -8833,14 +8209,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """If null, get revisions in done and pending state"""
     state: ProposalRevisionState = null
@@ -9172,14 +8540,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
     first: Int = 100
 
     """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
-    """
     If non-null, filters proposals with the given trashed status (eg: visible, not visible).
     """
     trashedStatus: ProposalTrashedStatus = NOT_TRASHED
@@ -9256,14 +8616,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection
 
   """The URL to this resource."""
@@ -9667,14 +9019,6 @@ interface ProposalStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -9687,14 +9031,6 @@ interface ProposalStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     If non-null, filters proposals with the given trashed status (eg: visible, not visible).
@@ -9773,14 +9109,6 @@ interface ProposalStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection
 
   """The requirements to vote on this step."""
@@ -9792,14 +9120,6 @@ interface ProposalStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): RequirementConnection!
   project: Project
 
@@ -9833,14 +9153,6 @@ interface ProposalStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
@@ -10076,14 +9388,6 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Ordering options for projects returning from the connection."""
     orderBy: ProjectOrder = {direction: DESC, field: PUBLISHED_AT}
 
@@ -10132,14 +9436,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Ordering options for events returning from the connection."""
     orderBy: EventOrder = {field: START_AT, direction: DESC}
@@ -10193,14 +9489,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Remove super admin from export."""
     superAdmin: Boolean = false
@@ -10337,14 +9625,6 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Filter by name."""
     name: String = null
   ): ProjectDistrictConnection!
@@ -10358,14 +9638,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """Return the number of contributions in the platform."""
@@ -10380,14 +9652,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get only accounted votes."""
     onlyAccounted: Boolean = true
@@ -10405,14 +9669,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): SSOConfigurationConnection!
 
   """List all sections."""
@@ -10430,14 +9686,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Search by term."""
     term: String
@@ -10519,14 +9767,6 @@ type Query {
     """
     after: String
     first: Int = 50
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserInviteConnection!
 
   """List all site colors."""
@@ -10545,14 +9785,6 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """If provided, filter lists by name"""
     term: String
   ): MailingListConnection!
@@ -10566,14 +9798,6 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """optional filter by status"""
     status: EmailingCampaignStatusFilter
@@ -10623,14 +9847,6 @@ interface Question {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
 
@@ -10658,14 +9874,6 @@ interface Question {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
@@ -10704,14 +9912,6 @@ type QuestionChoice implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ResponseConnection!
   description: String
 
@@ -10768,14 +9968,6 @@ type QuestionChoiceRanking {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ResponseConnection!
 }
 
@@ -10856,14 +10048,6 @@ type Questionnaire implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """The list of questions of the questionnaire."""
@@ -10878,14 +10062,6 @@ type Questionnaire implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """(ROLE_ADMIN only) Select also unpublished replies."""
     includeUnpublished: Boolean = false
@@ -10912,14 +10088,6 @@ type Questionnaire implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ReplyConnection
   acknowledgeReplies: Boolean!
 
@@ -10999,14 +10167,6 @@ type QuestionnaireStep implements Node & Step {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   footer: String
@@ -11020,14 +10180,6 @@ type QuestionnaireStep implements Node & Step {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """A questionnaire associated with the step."""
@@ -11096,14 +10248,6 @@ type RankingStep implements Node & Step {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   nbOpinionsToDisplay: Int
@@ -11573,14 +10717,6 @@ interface Reportable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -11724,14 +10860,6 @@ interface RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): RequirementConnection!
 }
 
@@ -11962,14 +11090,6 @@ type Section implements Node & UniformResourceLocatable {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Ordering options for contributions returned from the connection."""
     orderBy: ContributionOrder
 
@@ -12003,14 +11123,6 @@ type Section implements Node & UniformResourceLocatable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Filter by author of opinion."""
     author: ID
@@ -12059,14 +11171,6 @@ type SectionQuestion implements Question & Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
 
@@ -12094,14 +11198,6 @@ type SectionQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
@@ -12196,14 +11292,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -12216,14 +11304,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     If non-null, filters proposals with the given trashed status (eg: visible, not visible).
@@ -12302,14 +11382,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection
 
   """The requirements to vote on this step."""
@@ -12321,14 +11393,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): RequirementConnection!
   project: Project
 
@@ -12362,14 +11426,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
@@ -12395,14 +11451,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): UserConnection!
 
   """The main view : grid, list or map"""
@@ -12577,14 +11625,6 @@ type SimpleQuestion implements Question & Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
 
@@ -12612,14 +11652,6 @@ type SimpleQuestion implements Question & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
@@ -12772,14 +11804,6 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -12797,14 +11821,6 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): SourceVoteConnection
   viewerVote: SourceVote
   category: SourceCategory
@@ -12931,14 +11947,6 @@ interface Sourceable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
   ): SourceConnection!
 
@@ -12953,14 +11961,6 @@ interface Sourceable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): SourceConnection!
 
   """The available sources categories of to the sourceable."""
@@ -13020,14 +12020,6 @@ interface Step {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 }
@@ -13188,14 +12180,6 @@ type SynthesisStep implements Step & Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -14626,14 +13610,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ResponseConnection!
 
   """The user's personal email."""
@@ -14660,14 +13636,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """
     Array of viewer's affiliation options for projects returned from the connection.
@@ -14744,14 +13712,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): SourceConnection!
 
   """Get the count of votes made by the user"""
@@ -14767,14 +13727,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection!
   proposalVotesCount: Int!
 
@@ -14787,14 +13739,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): CommentVoteConnection!
 
   """
@@ -14811,14 +13755,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ReplyConnection!
 
   """Get all comments of the user."""
@@ -14830,14 +13766,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): CommentConnection!
 
   """Whether or not this user consent external communication."""
@@ -14853,14 +13781,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 32
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Ordering options for followers returning from the connection"""
     orderBy: String
   ): ProposalConnection!
@@ -14875,14 +13795,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Ordering options for followers returning from the connection"""
     orderBy: String
   ): OpinionConnection!
@@ -14896,14 +13808,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): OpinionConnection!
 
   """Total of contributions count"""
@@ -14922,14 +13826,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
     stepId: ID
 
@@ -14950,14 +13846,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """The id of the contribuable entity (Project, Step)"""
     contribuableId: ID
 
@@ -14974,14 +13862,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): GroupConnection!
 
   """Get all reports the user has done."""
@@ -14993,14 +13873,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ReportConnection!
 
   """Get all events the user has created."""
@@ -15012,14 +13884,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: EventOrder = {field: START_AT, direction: DESC}
   ): EventConnection!
 
@@ -15032,14 +13896,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Ordering options for contributions returned from the connection."""
     orderBy: ContributionOrder = {field: CREATED_AT, direction: DESC}
@@ -15082,14 +13938,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Ordering options for contributions returned from the connection."""
     orderBy: ContributionOrder = {field: CREATED_AT, direction: DESC}
 
@@ -15110,14 +13958,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """Ordering options for contributions returned from the connection."""
     orderBy: DebateArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateArgumentConnection!
@@ -15131,14 +13971,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): DebateVoteConnection!
   isAdmin: Boolean!
   isSuperAdmin: Boolean!
@@ -15152,14 +13984,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
 
     """Email of the user"""
     email: String
@@ -15179,14 +14003,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): VersionConnection!
 
   """The event in awaiting or refused status of user."""
@@ -15198,14 +14014,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): EventConnection
 
   """Get proposals assigned to the supervisor."""
@@ -15217,14 +14025,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): ProposalConnection
 
   """Locale chosen by the user"""
@@ -15495,14 +14295,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
   ): SourceConnection!
 
@@ -15517,14 +14309,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
   ): SourceConnection!
 
   """The available sources categories of to the sourceable."""
@@ -15539,14 +14323,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
@@ -15562,14 +14338,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """If provided, returns the arguments of this particular type."""
@@ -15589,14 +14357,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-
     """If provided, returns the arguments of this particular type."""
     type: ArgumentValue
   ): ArgumentConnection
@@ -15613,14 +14373,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
   ): FollowerConnection
 
@@ -15637,14 +14389,6 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
     orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """Filters vote by value"""

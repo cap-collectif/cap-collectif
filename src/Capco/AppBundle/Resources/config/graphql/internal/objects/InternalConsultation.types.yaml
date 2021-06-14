@@ -32,7 +32,7 @@ InternalConsultation:
             viewerOpinionsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'OpinionConnection'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
                 description: "The viewer's unpublished opinions."
             contribuable:
@@ -52,7 +52,7 @@ InternalConsultation:
                 description: 'The associated consultation step in which belongs this consultation'
             contributions:
                 type: 'ContributionConnection'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Retrieves all the contributions of the current consultation.'
                 args:
                     orderBy:

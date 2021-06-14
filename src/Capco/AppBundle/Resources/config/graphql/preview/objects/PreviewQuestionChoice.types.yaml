@@ -1,20 +1,20 @@
 PreviewQuestionChoice:
-  type: object
-  config:
-    name: QuestionChoice
-    description: 'A possible choice of a question.'
-    fields:
-      id:
-        type: 'ID!'
-        builder: 'Relay::GlobalId'
-        description: 'The ID of an object.'
-        builderConfig:
-          typeName: QuestionChoice
-      title:
-        type: 'String!'
-        description: 'Identifies the question choice title.'
-      responses:
-        type: 'PreviewResponseConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", [value, args])'
-        description: 'Identifies the responses of the question choice.'
+    type: object
+    config:
+        name: QuestionChoice
+        description: 'A possible choice of a question.'
+        fields:
+            id:
+                type: 'ID!'
+                builder: 'Relay::GlobalId'
+                description: 'The ID of an object.'
+                builderConfig:
+                    typeName: QuestionChoice
+            title:
+                type: 'String!'
+                description: 'Identifies the question choice title.'
+            responses:
+                type: 'PreviewResponseConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", [value, args])'
+                description: 'Identifies the responses of the question choice.'

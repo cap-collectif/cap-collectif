@@ -1,27 +1,27 @@
 PreviewWithProposals:
-  type: object
-  decorator: true
-  config:
-    fields:
-      proposals:
-        type: 'PreviewProposalConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'A list of proposals associated to the object.'
-        args:
-          trashedStatus:
-            type: 'ProposalTrashedStatus'
-            description: 'If non-null, filters proposals with the given trashed status (eg: visible, not visible).'
-            defaultValue: 'NOT_TRASHED'
-          author:
-            type: 'ID'
-            description: 'ID of a User to filter by. If non-null, only proposals authored by this user will be returned.'
-          orderBy:
-            # TODO we can change to an array to allow multiple orderBy (first by comment, then by votes if equal)
-            # but this is not a BC thanks to the GraphQL spec
-            type: 'PreviewProposalOrder'
-            description: 'Ordering options for proposals returned from the connection.'
-            defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
-          includeDraft:
-            type: 'Boolean'
-            description: '(ROLE_ADMIN only) Select also draft proposals.'
-            defaultValue: false
+    type: object
+    decorator: true
+    config:
+        fields:
+            proposals:
+                type: 'PreviewProposalConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'A list of proposals associated to the object.'
+                args:
+                    trashedStatus:
+                        type: 'ProposalTrashedStatus'
+                        description: 'If non-null, filters proposals with the given trashed status (eg: visible, not visible).'
+                        defaultValue: 'NOT_TRASHED'
+                    author:
+                        type: 'ID'
+                        description: 'ID of a User to filter by. If non-null, only proposals authored by this user will be returned.'
+                    orderBy:
+                        # TODO we can change to an array to allow multiple orderBy (first by comment, then by votes if equal)
+                        # but this is not a BC thanks to the GraphQL spec
+                        type: 'PreviewProposalOrder'
+                        description: 'Ordering options for proposals returned from the connection.'
+                        defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
+                    includeDraft:
+                        type: 'Boolean'
+                        description: '(ROLE_ADMIN only) Select also draft proposals.'
+                        defaultValue: false

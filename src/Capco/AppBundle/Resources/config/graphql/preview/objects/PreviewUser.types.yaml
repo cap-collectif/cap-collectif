@@ -1,35 +1,35 @@
 PreviewUser:
-  type: object
-  inherits:
-    - PublicUser
-  config:
-    description: "A user is an individual's account."
-    name: User
-    fields:
-      userType:
-        type: 'UserType'
-        description: 'The type of the person.'
-      # This is currently a connection
-      # But in Proposal and Reply we use a simple array
-      # We must find what's the best.
-      responses:
-        type: 'PreviewResponseConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value,getUser(),context])'
-        description: 'The responses answered by user.'
-        argsBuilder: 'Relay::Connection'
-      email:
-        type: 'Email'
-        description: "The user's personal email."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailResolver", [value])'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-      consentInternalCommunication:
-        type: 'Boolean'
-        description: 'Whether or not this user consent internal communication.'
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-      avatarUrl:
-        type: 'URI'
-        description: "The user's public avatar URL."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAvatarUrlResolver", [value])'
-      enabled:
-        type: 'Boolean!'
-        description: 'Whether or not this user has a confirmed account.'
+    type: object
+    inherits:
+        - PublicUser
+    config:
+        description: "A user is an individual's account."
+        name: User
+        fields:
+            userType:
+                type: 'UserType'
+                description: 'The type of the person.'
+            # This is currently a connection
+            # But in Proposal and Reply we use a simple array
+            # We must find what's the best.
+            responses:
+                type: 'PreviewResponseConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value,getUser(),context])'
+                description: 'The responses answered by user.'
+                argsBuilder: 'Relay::ForwardConnection'
+            email:
+                type: 'Email'
+                description: "The user's personal email."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailResolver", [value])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            consentInternalCommunication:
+                type: 'Boolean'
+                description: 'Whether or not this user consent internal communication.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            avatarUrl:
+                type: 'URI'
+                description: "The user's public avatar URL."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAvatarUrlResolver", [value])'
+            enabled:
+                type: 'Boolean!'
+                description: 'Whether or not this user has a confirmed account.'

@@ -18,12 +18,12 @@ InternalMultipleChoiceQuestion:
             # TODO we can probably design this better
             otherResponses:
                 type: 'InternalResponseConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
                 description: 'Responses of the `other` question choice.'
             choices:
                 type: 'InternalQuestionChoiceConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args, getUser(), serv("request_stack")])'
                 args:
                     first:

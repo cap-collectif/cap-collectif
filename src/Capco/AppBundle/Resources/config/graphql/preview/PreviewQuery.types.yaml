@@ -11,7 +11,7 @@ PreviewQuery:
             projects:
                 type: 'PreviewProjectConnection!'
                 description: 'Lookup projects.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'PreviewProjectOrder'
@@ -20,7 +20,7 @@ PreviewQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProjectsResolver", [args, getUser(), serv("request_stack"), info])'
             events:
                 type: 'PreviewEventConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Lookup events.'
                 args:
                     orderBy:
@@ -33,6 +33,6 @@ PreviewQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args, info, serv("request_stack")])'
             users:
                 type: 'PreviewUserConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Lookup users.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUsersResolver", [args, info])'

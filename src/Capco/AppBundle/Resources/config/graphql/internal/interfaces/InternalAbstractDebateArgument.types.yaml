@@ -58,7 +58,7 @@ InternalAbstractDebateArgument:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", [value, getUser()])'
             votes:
                 description: 'The upvotes on the argument.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'DebateArgumentVoteOrder'

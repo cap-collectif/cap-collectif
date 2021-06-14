@@ -120,7 +120,7 @@ InternalUser:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             sources:
                 type: 'SourceConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all sources of the user'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
             opinionVotesCount:
@@ -131,14 +131,14 @@ InternalUser:
                 type: 'Int!'
             proposals:
                 type: 'InternalProposalConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all proposals of the user.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value, args, context, info])'
             proposalVotesCount:
                 type: 'Int!'
             commentVotes:
                 type: 'CommentVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comment votes of the user.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentVotesResolver", [value, args])'
             contributionsToDeleteCount:
@@ -147,12 +147,12 @@ InternalUser:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", [value])'
             replies:
                 type: 'InternalReplyConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'A list of replies associated to the user.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [getUser(), value, args, context])'
             comments:
                 type: 'CommentConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comments of the user.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args, context])'
             consentExternalCommunication:
@@ -164,7 +164,7 @@ InternalUser:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
                 description: 'Array of proposals followed by current user.'
                 argsBuilder:
-                    builder: 'Relay::Connection'
+                    builder: 'Relay::ForwardConnection'
                     config:
                         defaultLimit: 32
                 args:
@@ -175,7 +175,7 @@ InternalUser:
                 type: 'OpinionConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", [value, args])'
                 description: 'Array of opinions followed by current user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'String'
@@ -184,7 +184,7 @@ InternalUser:
                 type: 'OpinionConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, getUser(), args])'
                 description: 'Array of opinions by current user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
             contributionsCount:
                 type: 'Int!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'
@@ -199,7 +199,7 @@ InternalUser:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             proposalVotes:
                 type: 'InternalProposalVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context, getUser()])'
                 args:
                     orderBy:
@@ -217,7 +217,7 @@ InternalUser:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
             votes:
                 type: 'InternalVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all votes of the user.'
                 args:
                     contribuableId:
@@ -230,17 +230,17 @@ InternalUser:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
             groups:
                 type: 'GroupConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all groups where the user is.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserGroupsResolver", [value, args])'
             reports:
                 type: 'ReportConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all reports the user has done.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
             events:
                 type: 'InternalEventConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all events the user has created.'
                 args:
                     orderBy:
@@ -249,7 +249,7 @@ InternalUser:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
             contributions:
                 type: 'ContributionConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'InternalContributionOrder'
@@ -291,7 +291,7 @@ InternalUser:
                 type: 'ArgumentConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArgumentsResolver", [getUser(), value, args, context])'
                 description: 'The arguments created by user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'InternalContributionOrder'
@@ -309,7 +309,7 @@ InternalUser:
                 type: 'DebateArgumentConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserDebateArgumentsResolver", [getUser(), value, args])'
                 description: 'The debate arguments created by user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'DebateArgumentOrder'
@@ -319,7 +319,7 @@ InternalUser:
                 type: 'DebateVoteConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AuthorVotesResolver", [value, args])'
                 description: 'The debate votes of the user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
             responses:
                 type: 'InternalResponseConnection!'
             url:
@@ -329,7 +329,7 @@ InternalUser:
             isSuperAdmin:
                 type: 'Boolean!'
             connectionAttempt:
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 type: 'UserConnectionAttemptConnection'
                 description: 'Get any connection attempt'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [value, args, getUser(), context])'
@@ -344,15 +344,15 @@ InternalUser:
                 type: 'VersionConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVersionResolver", [getUser(), value, args])'
                 description: 'The opinion version created by user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
             awaitingOrRefusedEvents:
                 type: 'InternalEventConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerAwaitingOrRefusedEventResolver", [getUser(), value, args])'
                 description: 'The event in awaiting or refused status of user.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
             supervisedProposals:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 type: 'InternalProposalConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", [getUser(), args])'
                 description: 'Get proposals assigned to the supervisor.'

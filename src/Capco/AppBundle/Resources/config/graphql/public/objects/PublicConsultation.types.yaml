@@ -19,7 +19,7 @@ PublicConsultation:
             contributors:
                 type: 'PublicUserConnection!'
                 description: 'A list of contributor associated with the consultation.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributorsResolver", [value, args])'
             userHasVote:
                 type: 'Boolean!'
@@ -37,5 +37,5 @@ PublicConsultation:
             votes:
                 type: 'PublicVoteConnection!'
                 description: 'The votes in the related step of this consultation.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationVotesResolver", [value, args])'

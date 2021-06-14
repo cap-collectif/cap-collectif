@@ -40,7 +40,7 @@ ProposalStep:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalVoteConnection!'
                 description: 'A list of viewer votes associated with the step.'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
                 args:
                     orderBy:

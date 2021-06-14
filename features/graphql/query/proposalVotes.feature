@@ -73,7 +73,7 @@ Scenario: User wants to paginate votes on proposals
   And I send a GraphQL POST request:
   """
   {
-    "query": "query ProposalStepProposalsQuery($id: ID!, $count: Int!, $before: String, $after: String) {
+    "query": "query ProposalStepProposalsQuery($id: ID!, $count: Int!, $after: String) {
       node(id: $id) {
         ... on ProposalStep {
           id
@@ -87,7 +87,7 @@ Scenario: User wants to paginate votes on proposals
               cursor
               node {
                 id
-                votes(first: $count, before: $before, after: $after) {
+                votes(first: $count, after: $after) {
                   pageInfo {
                     startCursor
                     hasNextPage
@@ -215,11 +215,11 @@ Scenario: User wants to paginate votes on proposals with after cursor
   And I send a GraphQL POST request:
   """
   {
-    "query": "query ProposalStepProposalsQuery($id: ID!, $count: Int!, $before: String, $after: String) {
+    "query": "query ProposalStepProposalsQuery($id: ID!, $count: Int!, $after: String) {
       node(id: $id) {
         ... on Proposal {
           id
-          votes(first: $count, orderBy: {field: PUBLISHED_AT, direction: DESC}, before: $before, after: $after) {
+          votes(first: $count, orderBy: {field: PUBLISHED_AT, direction: DESC}, after: $after) {
             pageInfo {
               startCursor
               hasNextPage
@@ -294,7 +294,7 @@ Scenario: User wants to paginate votes on proposals with more votes than 10
   And I send a GraphQL POST request:
   """
   {
-    "query": "query ProposalStepProposalsQuery($id: ID!, $count: Int!, $before: String, $after: String) {
+    "query": "query ProposalStepProposalsQuery($id: ID!, $count: Int!, $after: String) {
       node(id: $id) {
         ... on ProposalStep {
           id
@@ -308,7 +308,7 @@ Scenario: User wants to paginate votes on proposals with more votes than 10
               cursor
               node {
                 id
-                votes(first: $count, before: $before, after: $after) {
+                votes(first: $count, after: $after) {
                   pageInfo {
                     startCursor
                     hasNextPage

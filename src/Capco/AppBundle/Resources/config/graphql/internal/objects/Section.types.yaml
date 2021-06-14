@@ -1,95 +1,95 @@
 Section:
-  type: object
-  inherits:
-    - UniformResourceLocatable
-  config:
-    description: 'A section'
-    interfaces:
-      - Node
-      - UniformResourceLocatable
-    fields:
-      id:
-        type: 'ID!'
-        description: 'The id of the section.'
-      consultation:
-        type: 'InternalConsultation'
-        description: 'Get the associated consultation of this section'
-      slug:
-        type: 'String!'
-        description: 'The slug of the section.'
-      title:
-        type: 'String!'
-        description: 'The title of the section.'
-      color:
-        type: 'String!'
-        description: 'The color of the section.'
-      subtitle:
-        type: 'String'
-        description: 'The subtitle of the section.'
-      description:
-        type: 'HTML'
-        description: 'The description of the section.'
-      contributionsCount:
-        type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value, getUser()])'
-      contributionConnection:
-        type: 'ContributionConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'InternalContributionOrder'
-            description: 'Ordering options for contributions returned from the connection.'
-          trashed:
-            type: 'Boolean'
-            description: 'The connection will return the trashed results too.'
-            defaultValue: false
-          step:
-            type: 'ID'
-            description: 'The connection will return the results where consultation.step = step'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args, getUser()])'
-      appendixTypes:
-        type: '[SectionAppendixType]'
-        description: 'Array of appendix types (possibly empty).'
-      sections:
-        type: '[Section]'
-        description: 'Array of subsections (possibly empty).'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionSectionResolver", [value, args])'
-      voteWidgetType:
-        type: 'Int!'
-      commentSystem:
-        type: 'Int!'
-      contribuable:
-        type: 'Boolean!'
-      versionable:
-        type: 'Boolean!'
-      sourceable:
-        type: 'Boolean!'
-      linkable:
-        type: 'Boolean!'
-      votesHelpText:
-        type: 'String'
-      votesThreshold:
-        type: 'Int'
-      votesThresholdHelpText:
-        type: 'String'
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionUrlResolver", [value])'
-      defaultOrderBy:
-        type: 'SectionOrderBy'
-        resolve: '@=value.getDefaultFilter()'
-      opinions:
-        type: 'OpinionConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args, getUser(), serv("request_stack")])'
-        argsBuilder: 'Relay::Connection'
-        args:
-          author:
-            type: 'ID'
-            description: 'Filter by author of opinion.'
-          orderBy:
-            type: 'InternalOpinionOrder'
-            description: 'Ordering options for followers returning from the connection'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          includeTrashed:
-            type: 'Boolean'
-            description: 'Include trashed opinion or not'
-            defaultValue: false
+    type: object
+    inherits:
+        - UniformResourceLocatable
+    config:
+        description: 'A section'
+        interfaces:
+            - Node
+            - UniformResourceLocatable
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the section.'
+            consultation:
+                type: 'InternalConsultation'
+                description: 'Get the associated consultation of this section'
+            slug:
+                type: 'String!'
+                description: 'The slug of the section.'
+            title:
+                type: 'String!'
+                description: 'The title of the section.'
+            color:
+                type: 'String!'
+                description: 'The color of the section.'
+            subtitle:
+                type: 'String'
+                description: 'The subtitle of the section.'
+            description:
+                type: 'HTML'
+                description: 'The description of the section.'
+            contributionsCount:
+                type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value, getUser()])'
+            contributionConnection:
+                type: 'ContributionConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'InternalContributionOrder'
+                        description: 'Ordering options for contributions returned from the connection.'
+                    trashed:
+                        type: 'Boolean'
+                        description: 'The connection will return the trashed results too.'
+                        defaultValue: false
+                    step:
+                        type: 'ID'
+                        description: 'The connection will return the results where consultation.step = step'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args, getUser()])'
+            appendixTypes:
+                type: '[SectionAppendixType]'
+                description: 'Array of appendix types (possibly empty).'
+            sections:
+                type: '[Section]'
+                description: 'Array of subsections (possibly empty).'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionSectionResolver", [value, args])'
+            voteWidgetType:
+                type: 'Int!'
+            commentSystem:
+                type: 'Int!'
+            contribuable:
+                type: 'Boolean!'
+            versionable:
+                type: 'Boolean!'
+            sourceable:
+                type: 'Boolean!'
+            linkable:
+                type: 'Boolean!'
+            votesHelpText:
+                type: 'String'
+            votesThreshold:
+                type: 'Int'
+            votesThresholdHelpText:
+                type: 'String'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionUrlResolver", [value])'
+            defaultOrderBy:
+                type: 'SectionOrderBy'
+                resolve: '@=value.getDefaultFilter()'
+            opinions:
+                type: 'OpinionConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args, getUser(), serv("request_stack")])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    author:
+                        type: 'ID'
+                        description: 'Filter by author of opinion.'
+                    orderBy:
+                        type: 'InternalOpinionOrder'
+                        description: 'Ordering options for followers returning from the connection'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                    includeTrashed:
+                        type: 'Boolean'
+                        description: 'Include trashed opinion or not'
+                        defaultValue: false

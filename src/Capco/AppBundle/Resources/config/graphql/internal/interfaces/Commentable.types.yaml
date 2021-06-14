@@ -1,17 +1,17 @@
 Commentable:
-  type: interface
-  inherits:
-    - Node
-  config:
-    description: 'A commentable'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableTypeResolver", [value])'
-    fields:
-      comments:
-        description: 'The comments related to the commentable.'
-        type: 'CommentConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", [value, args, getUser()])'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'CommentOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+    type: interface
+    inherits:
+        - Node
+    config:
+        description: 'A commentable'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableTypeResolver", [value])'
+        fields:
+            comments:
+                description: 'The comments related to the commentable.'
+                type: 'CommentConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", [value, args, getUser()])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'CommentOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }

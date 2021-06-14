@@ -1,20 +1,20 @@
 PreviewQuestion:
-  type: interface
-  config:
-    name: Question
-    description: 'All custom forms are build using questions.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Question
-      title:
-        type: 'String!'
-        description: 'Identifies the question title.'
-      responses:
-        type: 'PreviewResponseConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args, getUser()])'
-        description: 'Return responses on this questions.'
+    type: interface
+    config:
+        name: Question
+        description: 'All custom forms are build using questions.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Question
+            title:
+                type: 'String!'
+                description: 'Identifies the question title.'
+            responses:
+                type: 'PreviewResponseConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args, getUser()])'
+                description: 'Return responses on this questions.'

@@ -20,7 +20,7 @@ MailingList:
                 type: 'InternalUserConnection!'
                 description: 'users in the mailing list'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListUsersConnection", [value, args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
             project:
                 type: 'InternalProject'
                 description: 'the project from which the list has been built, if any'

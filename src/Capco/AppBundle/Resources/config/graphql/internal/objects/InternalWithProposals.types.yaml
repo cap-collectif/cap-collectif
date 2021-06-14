@@ -54,5 +54,5 @@ InternalWithProposals:
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'The viewer unpublished proposals (only visible by viewer).'

@@ -59,7 +59,7 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
 `;
 
 const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
-  query ProposalStepProposalsQuery($id: ID!, $count: Int!, $before: String, $after: String) {
+  query ProposalStepProposalsQuery($id: ID!, $count: Int!, $after: String) {
     node(id: $id) {
       ... on ProposalStep {
         proposals {
@@ -72,7 +72,7 @@ const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
             cursor
             node {
               id
-              comments(first: $count, before: $before, after: $after) {
+              comments(first: $count, after: $after) {
                 pageInfo {
                   startCursor
                   hasNextPage
@@ -308,56 +308,6 @@ describe('Internal|ProposalStep.proposals connection', () => {
           {
             count: 5,
             after: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
-            id: toGlobalId('SelectionStep', 'selectionstep1'),
-          },
-          'internal',
-        ),
-      ).resolves.toMatchSnapshot();
-    },
-  );
-
-  it('fetches published proposals associated to a SelectionStep with paginated commentables before cursor with exact count', async () => {
-    await expect(
-      graphql(
-        ProposalStepProposalsCommentableQuery,
-        {
-          count: 3,
-          before: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
-          id: toGlobalId('SelectionStep', 'selectionstep1'),
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
-  it(
-    'fetches published proposals associated to a SelectionStep with paginated commentables before cursor with more ' +
-      'commentables than count',
-    async () => {
-      await expect(
-        graphql(
-          ProposalStepProposalsCommentableQuery,
-          {
-            count: 5,
-            before: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
-            id: toGlobalId('SelectionStep', 'selectionstep1'),
-          },
-          'internal',
-        ),
-      ).resolves.toMatchSnapshot();
-    },
-  );
-
-  it(
-    'fetches published proposals associated to a SelectionStep with paginated commentables before cursor with less ' +
-      'commentables than count',
-    async () => {
-      await expect(
-        graphql(
-          ProposalStepProposalsCommentableQuery,
-          {
-            count: 1,
-            before: 'Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx',
             id: toGlobalId('SelectionStep', 'selectionstep1'),
           },
           'internal',

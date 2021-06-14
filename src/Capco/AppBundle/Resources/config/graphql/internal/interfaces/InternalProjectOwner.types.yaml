@@ -13,7 +13,7 @@ InternalProjectOwner:
                 type: 'InternalProjectConnection!'
                 description: 'Get all projects that the user owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProjectsResolver", [value, args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     affiliations:
                         type: '[InternalProjectAffiliation!]'

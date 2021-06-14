@@ -57,7 +57,7 @@ PreviewProposal:
             votes:
                 description: 'List of votes of the proposal.'
                 type: 'PreviewProposalVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
                 args:
                     orderBy:

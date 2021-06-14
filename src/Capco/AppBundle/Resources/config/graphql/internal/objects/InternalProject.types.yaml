@@ -107,19 +107,19 @@ InternalProject:
                 description: 'State of activation of Opinion subscription.'
             restrictedViewers:
                 type: 'GroupConnection'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
                 description: 'Viewers that can access the project, null otherwise.'
             districts:
                 type: 'ProjectDistrictConnection'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictResolver", [value, args])'
                 description: 'Linking table with position for district'
             comments:
                 description: 'The comments related to the project.'
                 type: 'CommentConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCommentsResolver", [value, args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     onlyTrashed:
                         type: 'Boolean'
@@ -169,7 +169,7 @@ InternalProject:
             viewerAssignedProposals:
                 type: 'InternalProposalConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectViewerAssignedProposalsResolver", [value, args, getUser()])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all assigned proposals of the viewer.'
                 access: "@=hasRole('ROLE_USER')"
                 args:

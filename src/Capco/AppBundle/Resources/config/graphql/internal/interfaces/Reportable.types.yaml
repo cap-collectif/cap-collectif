@@ -10,7 +10,7 @@ Reportable:
                 description: 'Does the viewer already submitted a report ?'
             reportings:
                 type: 'ReportingConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 description: 'The reportings related to the reportable.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", [value, args])'
                 args:

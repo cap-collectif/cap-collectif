@@ -1,16 +1,16 @@
 PreviewMultipleChoiceQuestion:
-  type: object
-  inherits:
-    - PreviewQuestion
-  config:
-    name: MultipleChoiceQuestion
-    interfaces:
-      - PreviewQuestion
-      - Node
-    description: 'A question with multiple choices available.'
-    fields:
-      choices:
-        type: 'PreviewQuestionChoiceConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args, getUser(), serv("request_stack")])'
-        description: 'The question available choices.'
+    type: object
+    inherits:
+        - PreviewQuestion
+    config:
+        name: MultipleChoiceQuestion
+        interfaces:
+            - PreviewQuestion
+            - Node
+        description: 'A question with multiple choices available.'
+        fields:
+            choices:
+                type: 'PreviewQuestionChoiceConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args, getUser(), serv("request_stack")])'
+                description: 'The question available choices.'

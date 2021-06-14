@@ -40,7 +40,7 @@ InternalOpinion:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
             votes:
                 type: 'YesNoPairedVoteConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
                 args:
                     orderBy:
@@ -60,7 +60,7 @@ InternalOpinion:
                 description: 'Identifies the body of the contribution rendered to text.'
             versions:
                 type: 'VersionConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args, getUser(), serv("request_stack"), context])'
                 description: 'The versions related to the contribution.'
                 args:
@@ -70,7 +70,7 @@ InternalOpinion:
             viewerVersionsUnpublished:
                 access: '@=hasRole("ROLE_USER")'
                 type: 'VersionConnection!'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVersionsUnpublishedResolver", [value, args, getUser()])'
                 description: 'The viewer versions related to the contribution.'
                 args:
@@ -97,7 +97,7 @@ InternalOpinion:
             followers:
                 type: 'FollowerConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", [value, args])'
-                argsBuilder: 'Relay::Connection'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
                         type: 'FollowerOrder'

@@ -1,31 +1,31 @@
 Group:
-  type: object
-  inherits:
-    - Node
-  config:
-    interfaces:
-      - Node
-    description: 'A group of User'
-    fields:
-      id:
-        description: 'The id of the group.'
-      title:
-        type: 'String'
-        description: 'Identifies the group name.'
-      description:
-        type: 'String'
-        description: 'Identifies the description of the group.'
-      users:
-        type: 'InternalUserConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'Get all users of the group.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupUsersResolver", [value, args])'
-      createdAt:
-        type: 'DateTime!'
-      updatedAt:
-        type: 'DateTime'
-      pendingInvitations:
-        type: 'UserInviteConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'Get all userInvite who are still pending'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupPendingInvitationsResolver", [value, args])'
+    type: object
+    inherits:
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'A group of User'
+        fields:
+            id:
+                description: 'The id of the group.'
+            title:
+                type: 'String'
+                description: 'Identifies the group name.'
+            description:
+                type: 'String'
+                description: 'Identifies the description of the group.'
+            users:
+                type: 'InternalUserConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'Get all users of the group.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupUsersResolver", [value, args])'
+            createdAt:
+                type: 'DateTime!'
+            updatedAt:
+                type: 'DateTime'
+            pendingInvitations:
+                type: 'UserInviteConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'Get all userInvite who are still pending'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupPendingInvitationsResolver", [value, args])'
