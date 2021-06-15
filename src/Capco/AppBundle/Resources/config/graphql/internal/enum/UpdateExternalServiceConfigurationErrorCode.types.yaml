@@ -1,0 +1,9 @@
+UpdateExternalServiceConfigurationErrorCode:
+    type: enum
+    config:
+        name: UpdateExternalServiceConfigurationErrorCode
+        description: 'Available errors on update of external services configurations.'
+        values:
+            INVALID_VALUE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateExternalServiceConfigurationMutation::INVALID_VALUE")'
+                description: 'The given value is not valid for the selected type.'

@@ -1,0 +1,8 @@
+ExternalServiceConfigurationType:
+    type: enum
+    config:
+        description: 'possible types for ExternalServiceConfiguration.'
+        values:
+            MAILER:
+                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TYPE_MAILER")'
+                description: 'Choice of the external mailer client : mandrill or mailjet.'

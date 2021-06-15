@@ -1,0 +1,11 @@
+ExternalServiceConfiguration:
+    type: object
+    config:
+        description: 'A configuration of an external service used by platform'
+        fields:
+            type:
+                type: 'ExternalServiceConfigurationType!'
+                description: 'type of the configuration.'
+            value:
+                type: 'String!'
+                description: 'value of the configuration.'

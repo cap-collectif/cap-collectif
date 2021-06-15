@@ -11,14 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ExternalServiceConfiguration
 {
-    public const TYPES = [
-        'mailer'
-    ];
+    public const TYPE_MAILER = 'mailer';
+
+    public const TYPES = [self::TYPE_MAILER];
     public const AVAILABLE_VALUES = [
-        'mailer' => [
-            'mandrill',
-            'mailjet'
-        ]
+        self::TYPE_MAILER => ['mandrill', 'mailjet'],
     ];
 
     /**
@@ -59,8 +56,8 @@ class ExternalServiceConfiguration
 
     private static function checkType(string $type): void
     {
-        if (!in_array($type, self::TYPES)) {
-            throw new \Exception('Invalid ExternalServiceConfiguration.type : '.$type);
+        if (!\in_array($type, self::TYPES)) {
+            throw new \Exception('Invalid ExternalServiceConfiguration.type : ' . $type);
         }
     }
 }

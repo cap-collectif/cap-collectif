@@ -524,3 +524,11 @@ InternalQuery:
                         type: 'Email!'
                         description: 'Email to check.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\IsEmailAlreadyTakenResolver", [args])'
+            externalServiceConfiguration:
+                type: 'ExternalServiceConfiguration!'
+                args:
+                    type:
+                        type: 'ExternalServiceConfigurationType!'
+                        description: 'The type of configuration asked'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ExternalServiceConfigurationResolver", [args])'
+                access: "@=hasRole('ROLE_ADMIN')"

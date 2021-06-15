@@ -1237,3 +1237,11 @@ InternalMutation:
                     inputType: UpdateOpinionInput
                     payloadType: UpdateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOpinionMutation", [value, getUser()])'
+            updateExternalServiceConfiguration:
+                description: 'Update an external service configuration.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateExternalServiceConfigurationInput
+                    payloadType: UpdateExternalServiceConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateExternalServiceConfigurationMutation", [value])'

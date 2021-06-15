@@ -5077,6 +5077,21 @@ input EventTranslationInput {
   metaDescription: String
 }
 
+"""A configuration of an external service used by platform"""
+type ExternalServiceConfiguration {
+  """type of the configuration."""
+  type: ExternalServiceConfigurationType!
+
+  """value of the configuration."""
+  value: String!
+}
+
+"""possible types for ExternalServiceConfiguration."""
+enum ExternalServiceConfigurationType {
+  """Choice of the external mailer client : mandrill or mailjet."""
+  MAILER
+}
+
 """A feature flag."""
 type FeatureFlag {
   type: FeatureFlagType!
@@ -6427,6 +6442,9 @@ type Mutation {
 
   """Update Opinion"""
   updateOpinion(input: UpdateOpinionInput!): UpdateOpinionPayload
+
+  """Update an external service configuration."""
+  updateExternalServiceConfiguration(input: UpdateExternalServiceConfigurationInput!): UpdateExternalServiceConfigurationPayload
 }
 
 """A connection to a list of items."""
@@ -9821,6 +9839,10 @@ type Query {
     """Email to check."""
     email: Email!
   ): Boolean!
+  externalServiceConfiguration(
+    """The type of configuration asked"""
+    type: ExternalServiceConfigurationType!
+  ): ExternalServiceConfiguration!
 }
 
 input QueryAnalyticsFilter {
@@ -12735,6 +12757,27 @@ type UpdateEmailingCampaignPayload {
 
   """The error code, if any"""
   error: UpdateEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
+"""Available errors on update of external services configurations."""
+enum UpdateExternalServiceConfigurationErrorCode {
+  """The given value is not valid for the selected type."""
+  INVALID_VALUE
+}
+
+input UpdateExternalServiceConfigurationInput {
+  """The configuration to update"""
+  type: ExternalServiceConfigurationType!
+
+  """The new value of the configuration."""
+  value: String!
+  clientMutationId: String
+}
+
+type UpdateExternalServiceConfigurationPayload {
+  externalServiceConfiguration: ExternalServiceConfiguration!
+  error: UpdateExternalServiceConfigurationErrorCode
   clientMutationId: String
 }
 

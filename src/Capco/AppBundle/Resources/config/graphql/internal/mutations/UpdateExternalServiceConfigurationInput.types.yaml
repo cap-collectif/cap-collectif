@@ -1,0 +1,11 @@
+UpdateExternalServiceConfigurationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of UpdateExternalServiceConfiguration mutation.'
+        fields:
+            type:
+                type: 'ExternalServiceConfigurationType!'
+                description: 'The configuration to update'
+            value:
+                type: 'String!'
+                description: 'The new value of the configuration.'

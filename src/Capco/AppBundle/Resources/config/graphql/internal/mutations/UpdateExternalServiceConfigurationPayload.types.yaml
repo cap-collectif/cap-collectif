@@ -1,0 +1,8 @@
+UpdateExternalServiceConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            externalServiceConfiguration:
+                type: 'ExternalServiceConfiguration!'
+            error:
+                type: 'UpdateExternalServiceConfigurationErrorCode'
