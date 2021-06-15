@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -18,18 +17,22 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { translateContent } from '~/utils/ContentTranslator';
 import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
-import type { GlobalState } from '~/types';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
-type Props = {|
-  participant: ProjectAdminParticipant_participant,
-  rowId: string,
-  selected: boolean,
-  hasFeatureEmail: boolean,
+export type OwnProps = {|
+  +rowId: string,
+  +selected: boolean,
 |};
 
-const ProjectAdminParticipant = ({ participant, selected, hasFeatureEmail }: Props) => {
+type Props = {|
+  +participant: ProjectAdminParticipant_participant,
+  ...OwnProps,
+|};
+
+const ProjectAdminParticipant = ({ participant, selected }: Props) => {
   const intl = useIntl();
   const { dispatch } = useProjectAdminParticipantsContext();
+  const hasFeatureEmail = useFeatureFlag('unstable__emailing');
 
   const {
     id,
@@ -160,12 +163,4 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
   `,
 });
 
-const mapStateToProps = (state: GlobalState) => ({
-  hasFeatureEmail: state.default.features.unstable__emailing || false,
-});
-
-const ProjectAdminParticipantConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
-  ProjectAdminParticipantRelay,
-);
-
-export default ProjectAdminParticipantConnected;
+export default ProjectAdminParticipantRelay;

@@ -311,8 +311,7 @@ div[class*='Sidebar___StyledAccordion']::-webkit-scrollbar {
 
     <script type="text/javascript">
       window.CKEDITOR_BASEPATH = '/js/ckeditor/';
-      window.locale = "{{ intl_locale() }}";
-      window.sentryDsn = "{{ sentryDsn }}";
+      {% include '@CapcoApp/window.js.twig' %}
     </script>
 
     <script src="{{ asset('js/jquery.minicolors.js') }}"></script>

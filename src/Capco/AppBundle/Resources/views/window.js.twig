@@ -1,0 +1,7 @@
+window.locale = "{{ intl_locale() }}";
+window.timeZone = "{{ intl_timeZone() }}";
+window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
+window._capco_featureFlags = {{ features_flags_for_relay()|json_encode()|raw }};
+{% if is_feature_enabled('report_browers_errors_to_sentry') %}
+    window.sentryDsn = "{{ sentryDsn }}";
+{% endif %}

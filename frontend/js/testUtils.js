@@ -7,9 +7,23 @@ import { IntlProvider } from 'react-intl-redux';
 import { RelayEnvironmentProvider } from 'react-relay';
 import { theme } from '~/styles/theme';
 import appStore from '~/stores/AppStore';
+import type { FeatureFlagType } from '~relay/useFeatureFlagQuery.graphql';
 
 export const mockRandomValues = () => {
   global.Math.random = () => 0.5;
+};
+
+export const enableFeatureFlags = (flags: [FeatureFlagType]) => {
+  global.mockFeatureFlag.mockImplementation((flag: FeatureFlagType) => {
+    if (flags.includes(flag)) {
+      return true;
+    }
+    return false;
+  });
+};
+
+export const disableFeatureFlags = () => {
+  global.mockFeatureFlag.mockImplementation(() => false);
 };
 
 export const mockUrl = (url: string) => {

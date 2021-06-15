@@ -44,7 +44,7 @@ declare type ReactRelayReadyState = {
 
 type ReactRelayUploadableMap = { [key: string]: Uploadable };
 
-type ReactRelayVariables = { [name: string]: $FlowFixMe };
+type ReactRelayVariables = { +[name: string]: $FlowFixMe };
 
 /**
 * Settings for how a query response may be cached.

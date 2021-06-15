@@ -43,8 +43,10 @@ class CookieMonster {
     }
     this.cookieBanner = document.getElementById('cookie-banner');
     this.cookieConsent = document.getElementById('cookie-consent');
-    // $FlowFixMe
-    window._capco_ga_cookie_value = Cookies.getJSON('_ga');
+    if (typeof window._capco_ga_cookie_value === 'undefined') {
+      // $FlowFixMe
+      window._capco_ga_cookie_value = Cookies.getJSON('_ga');
+    }
   }
 
   getDebateAnonymousVoteCookie = (debateId: string): DebateAnonymousVoteValue | null => {
@@ -182,9 +184,9 @@ class CookieMonster {
     this.hideBanner();
   };
 
-  doNotConsiderFullConsent = (fromBanner:boolean = false) => {
+  doNotConsiderFullConsent = (fromBanner: boolean = false) => {
     Cookies.set('hasFullConsent', false, { expires: 395 });
-    if(fromBanner) {
+    if (fromBanner) {
       this.setCookie(false, 'adCookieConsentValue');
       this.setCookie(false, 'analyticConsentValue');
     }

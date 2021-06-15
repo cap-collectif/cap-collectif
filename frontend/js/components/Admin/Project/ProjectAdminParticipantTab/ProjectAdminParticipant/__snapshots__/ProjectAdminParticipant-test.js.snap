@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminParticipant /> should render a non-selectable list when "unstable__emailing" is disabled 1`] = `
+<div
+  className="styles__Container-sc-15na44m-0 hCfngK ProjectAdminParticipantstyle__Container-sc-1wntknm-0 dcafUF pickableList-row"
+>
+  <div
+    className="styles__ChildWrapper-sc-15na44m-1 pickableList-row-content"
+    selected={false}
+  >
+    <div
+      className="ProjectAdminParticipantstyle__ParticipantInfo-sc-1wntknm-3 hehJeF"
+    >
+      <div
+        className="ProjectAdminParticipantstyle__UsernameContainer-sc-1wntknm-1 eflRem"
+      >
+        <a
+          href="<mock-value-for-field-\\"adminUrl\\">"
+        >
+          &lt;mock-value-for-field-"username"&gt;
+        </a>
+      </div>
+      <div
+        className="ProjectAdminParticipantstyle__NameContainer-sc-1wntknm-2 dkcpDl"
+      >
+        <span>
+          &lt;mock-value-for-field-"firstname"&gt; &lt;mock-value-for-field-"lastname"&gt;
+        </span>
+        <span
+          className="separator"
+        >
+          •
+        </span>
+        active.on.date {"date":"2 avr. 2021"}
+      </div>
+      <ul
+        className="InlineList__Container-ls8m82-0 bmOLgO inline-list"
+      >
+        <li>
+          <button
+            onClick={[Function]}
+            type="button"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              fill="#707070"
+              height={12}
+              style={
+                Object {
+                  "flexShrink": "0",
+                  "verticalAlign": "middle",
+                }
+              }
+              width={12}
+            />
+            <span>
+              &lt;mock-value-for-field-"name"&gt;
+            </span>
+          </button>
+        </li>
+        <li>
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            fill="#707070"
+            height={12}
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+            width={12}
+          />
+          <span>
+            &lt;mock-value-for-field-"email"&gt;
+          </span>
+        </li>
+        <li>
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            fill="#707070"
+            height={12}
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+            width={12}
+          />
+          global.votes {"num":42}
+        </li>
+        <li>
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            fill="#707070"
+            height={12}
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+            width={12}
+          />
+          synthesis.common.elements.nb {"num":42}
+        </li>
+      </ul>
+    </div>
+    <span
+      className="UserAvatar__UserAvatarContainer-sc-1ma83n-1 iZViPY"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      style={Object {}}
+    >
+      <img
+        alt="<mock-value-for-field-\\"username\\">"
+        className="img-circle object-cover user-avatar mr-10 "
+        src="<mock-value-for-field-\\"url\\">"
+        style={
+          Object {
+            "height": "42px",
+            "width": "42px",
+          }
+        }
+      />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<ProjectAdminParticipant /> should render a selectable list when "unstable__emailing" is enabled 1`] = `
+<div
+  className="styles__Container-sc-15na44m-0 hCfngK ProjectAdminParticipantstyle__Container-sc-1wntknm-0 dcafUF pickableList-row"
+>
+  <input
+    checked={false}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <div
+    className="styles__ChildWrapper-sc-15na44m-1 pickableList-row-content"
+    selected={false}
+  >
+    <div
+      className="ProjectAdminParticipantstyle__ParticipantInfo-sc-1wntknm-3 hehJeF"
+    >
+      <div
+        className="ProjectAdminParticipantstyle__UsernameContainer-sc-1wntknm-1 eflRem"
+      >
+        <a
+          href="<mock-value-for-field-\\"adminUrl\\">"
+        >
+          &lt;mock-value-for-field-"username"&gt;
+        </a>
+      </div>
+      <div
+        className="ProjectAdminParticipantstyle__NameContainer-sc-1wntknm-2 dkcpDl"
+      >
+        <span>
+          &lt;mock-value-for-field-"firstname"&gt; &lt;mock-value-for-field-"lastname"&gt;
+        </span>
+        <span
+          className="separator"
+        >
+          •
+        </span>
+        active.on.date {"date":"2 avr. 2021"}
+      </div>
+      <ul
+        className="InlineList__Container-ls8m82-0 bmOLgO inline-list"
+      >
+        <li>
+          <button
+            onClick={[Function]}
+            type="button"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              fill="#707070"
+              height={12}
+              style={
+                Object {
+                  "flexShrink": "0",
+                  "verticalAlign": "middle",
+                }
+              }
+              width={12}
+            />
+            <span>
+              &lt;mock-value-for-field-"name"&gt;
+            </span>
+          </button>
+        </li>
+        <li>
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            fill="#707070"
+            height={12}
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+            width={12}
+          />
+          <span>
+            &lt;mock-value-for-field-"email"&gt;
+          </span>
+        </li>
+        <li>
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            fill="#707070"
+            height={12}
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+            width={12}
+          />
+          global.votes {"num":42}
+        </li>
+        <li>
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            fill="#707070"
+            height={12}
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+            width={12}
+          />
+          synthesis.common.elements.nb {"num":42}
+        </li>
+      </ul>
+    </div>
+    <span
+      className="UserAvatar__UserAvatarContainer-sc-1ma83n-1 iZViPY"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      style={Object {}}
+    >
+      <img
+        alt="<mock-value-for-field-\\"username\\">"
+        className="img-circle object-cover user-avatar mr-10 "
+        src="<mock-value-for-field-\\"url\\">"
+        style={
+          Object {
+            "height": "42px",
+            "width": "42px",
+          }
+        }
+      />
+    </span>
+  </div>
+</div>
+`;

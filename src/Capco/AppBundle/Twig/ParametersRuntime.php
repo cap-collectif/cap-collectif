@@ -59,6 +59,16 @@ class ParametersRuntime implements RuntimeExtensionInterface
         return $this->manager->all();
     }
 
+    public function getFeaturesFlagsForRelay(): array
+    {
+        $flags = $this->manager->all();
+        $formattedFlags = array_map(function ($key) use ($flags) {
+            return ['type' => $key, 'enabled' => $flags[$key]];
+        }, array_keys($flags));
+
+        return $formattedFlags;
+    }
+
     public function getSiteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();
