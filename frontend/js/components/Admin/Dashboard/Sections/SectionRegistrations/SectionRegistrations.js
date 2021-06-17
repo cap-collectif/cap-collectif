@@ -44,7 +44,8 @@ const SectionRegistrations = ({ registrations: registrationsFragment }: Props): 
           '& > div': {
             height: '100%',
           },
-        })}>
+        })}
+        flex={1}>
         <SmallChart
           count={registrations.totalCount}
           label={intl.formatMessage(

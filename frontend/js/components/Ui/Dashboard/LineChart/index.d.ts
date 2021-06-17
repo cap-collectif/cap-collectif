@@ -9,6 +9,7 @@ type Data = {
 declare const LineChart: FC<AppBoxProps & {
     readonly withGrid?: boolean,
     readonly withAxis?: boolean,
+    readonly withTooltip?: boolean,
     readonly data: Data,
     readonly label: string,
 }>

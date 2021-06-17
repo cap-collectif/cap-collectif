@@ -25,6 +25,14 @@ const InfoMessageInner: StyledComponent<{}, {}, any> = styled(Flex)(
           color: 'blue.900',
         },
       },
+      infoGray: {
+        borderColor: 'gray.200',
+        bg: 'gray.100',
+
+        '& .info-message-title, & .info-message-content': {
+          color: 'gray.900',
+        },
+      },
       danger: {
         borderColor: 'red.200',
         bg: 'red.100',
@@ -56,12 +64,12 @@ const InfoMessageInner: StyledComponent<{}, {}, any> = styled(Flex)(
 const InfoMessage = ({ children, variant, ...props }: InfoMessageProps) => {
   const titleChild = React.Children.toArray(children).find(child => {
     if (React.isValidElement(child)) {
-      return child.type.name === INFO_MESSAGE_TITLE_NAME;
+      return child.type.displayName === INFO_MESSAGE_TITLE_NAME;
     }
   });
   const contentChild = React.Children.toArray(children).find(child => {
     if (React.isValidElement(child)) {
-      return child.type.name === INFO_MESSAGE_CONTENT_NAME;
+      return child.type.displayName === INFO_MESSAGE_CONTENT_NAME;
     }
   });
 

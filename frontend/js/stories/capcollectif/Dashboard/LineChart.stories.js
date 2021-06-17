@@ -14,6 +14,10 @@ export default {
       control: { type: 'boolean', required: false },
       description: 'Display axis',
     },
+    withTooltip: {
+      control: { type: 'boolean', required: false },
+      description: 'Display tooltip on graph',
+    },
     label: {
       control: { type: 'text', required: true },
       description: 'Define the subject of chart',

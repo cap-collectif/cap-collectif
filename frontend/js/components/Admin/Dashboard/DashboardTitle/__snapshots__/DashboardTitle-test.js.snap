@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardTitle /> <TestDashboardTitle /> should render correctly 1`] = `
+<div
+  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 ixbuAQ"
+>
+  <p
+    className="sc-bdnylx hVwkzH"
+  >
+    dashboard-platform
+  </p>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bPbIam gqZsEv"
+  >
+    <p
+      className="sc-bdnylx fNJNWw"
+    >
+      <span
+        className="sc-bdnylx iRaWyl"
+      >
+        10
+      </span>
+      global.project-dynamic
+    </p>
+    <p
+      className="sc-bdnylx fNJNWw"
+    >
+      <span
+        className="sc-bdnylx jA-dhDL"
+      >
+        5
+      </span>
+      global.in-progress
+    </p>
+    <p
+      className="sc-bdnylx fNJNWw"
+    >
+      <span
+        className="sc-bdnylx dtwjrQ"
+      >
+        5
+      </span>
+      global.done-dynamic
+    </p>
+  </div>
+</div>
+`;

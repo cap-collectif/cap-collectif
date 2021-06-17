@@ -2,27 +2,63 @@
 import * as React from 'react';
 import { useQueryLoader } from 'react-relay';
 import moment from 'moment';
+import isEqual from 'lodash/isEqual';
 import DashboardPage, { DashboardPageQuery } from './DashboardPage';
 import Spinner from '~ds/Spinner/Spinner';
+import {
+  DashboardPageContext,
+  useDashboard,
+  type Filters,
+  type FilterType,
+} from './DashboardPage.context';
+
+const DashboardPageQueryContainer = (): React.Node => {
+  const [filters, setFilters] = React.useState<Filters>({
+    startAt: moment('2014-11-08T17:44:56.144').format('MM/DD/YYYY'),
+    endAt: moment().format('MM/DD/YYYY'),
+    projectId: 'ALL',
+  });
+  const contextValue = React.useMemo(
+    () => ({
+      filters,
+      setFilters: (key: FilterType, value: string) =>
+        setFilters(currentFilters => {
+          const filtersUpdated = { ...currentFilters };
+          filtersUpdated[key] = value;
+          return filtersUpdated;
+        }),
+    }),
+    [filters, setFilters],
+  );
+
+  return (
+    <DashboardPageContext.Provider value={contextValue}>
+      <DashboardPageQueryRender />
+    </DashboardPageContext.Provider>
+  );
+};
 
 const DashboardPageQueryRender = (): React.Node => {
   const [queryReference, loadQuery] = useQueryLoader(DashboardPageQuery);
+  const { filters } = useDashboard();
+  const prevFilters = React.useRef();
 
   React.useEffect(() => {
-    if (!queryReference) {
+    if (!queryReference || !isEqual(prevFilters.current, filters)) {
       loadQuery({
         filter: {
-          startAt: moment('2000-11-08T17:44:56.144'),
-          endAt: moment().add(7, 'y'),
-          projectId: null,
+          startAt: filters.startAt,
+          endAt: filters.endAt,
+          projectId: filters.projectId === 'ALL' ? null : filters.projectId,
         },
       });
+      prevFilters.current = filters;
     }
-  }, [loadQuery, queryReference]);
+  }, [filters, loadQuery, queryReference]);
 
   if (!queryReference) return <Spinner />;
 
   return <DashboardPage queryReference={queryReference} />;
 };
 
-export default DashboardPageQueryRender;
+export default DashboardPageQueryContainer;

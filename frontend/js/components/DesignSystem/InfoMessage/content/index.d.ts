@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Text } from '../../Ui/Primitives/Text';
+import { AppBoxProps } from "../../Ui/Primitives/AppBox";
 
-declare const InfoMessageContent: FC<Text>;
+declare const InfoMessageContent: FC<AppBoxProps>;
 
 export default InfoMessageContent;

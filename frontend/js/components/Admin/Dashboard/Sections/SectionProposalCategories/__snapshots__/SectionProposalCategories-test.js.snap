@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionProposalCategories /> <TestSectionProposalCategories /> should render correctly with registrations 1`] = `
+<div
+  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fpkGpz lvJOm"
+>
+  <p
+    className="sc-bdnylx fnSuYt"
+  >
+    categories-most-use-proposal
+  </p>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+  >
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm bgDJln"
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kEvuYU hmLkpw"
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        title="Environment"
+      >
+        <div
+          className="sc-bdnylx gLGRoa"
+        />
+        <p
+          className="sc-bdnylx dbMpeV"
+        >
+          Environment (4%)
+        </p>
+      </div>
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kEvuYU hmLkpw"
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        title="Justice"
+      >
+        <div
+          className="sc-bdnylx fOVeYY"
+        />
+        <p
+          className="sc-bdnylx dbMpeV"
+        >
+          Justice (2%)
+        </p>
+      </div>
+    </div>
+    <div
+      className="sc-bdnylx inwnda"
+    >
+      <div
+        className="recharts-responsive-container"
+        style={
+          Object {
+            "height": "100%",
+            "maxHeight": undefined,
+            "minHeight": undefined,
+            "minWidth": undefined,
+            "width": "100%",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

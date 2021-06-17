@@ -50,7 +50,7 @@ const TrafficChart = ({ percentages, ...props }: TrafficChartProps) => {
 
   return (
     <Flex direction="column" spacing={7} {...props}>
-      <Flex direction="row" justify="space-between" wrap="wrap">
+      <Flex direction="row" justify="space-between" wrap="wrap" align="flex-start">
         {trafficsFormatted.map((traffic, i) => (
           <Label
             key={traffic.id}

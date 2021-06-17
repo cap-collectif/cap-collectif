@@ -80,7 +80,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-g"
+    id="id-1"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -176,7 +176,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-g"
+    id="id-1"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}
@@ -272,7 +272,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
     aria-modal={true}
     data-dialog={true}
     hidden={true}
-    id="id-g"
+    id="id-1"
     onAnimationEnd={[Function]}
     onBlur={[Function]}
     onKeyDown={[Function]}

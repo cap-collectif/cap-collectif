@@ -52,8 +52,11 @@ const ModalSectionPageViews = ({
         <ProjectPeriod />
 
         <InfoMessage variant="info">
+          <InfoMessage.Title>
+            {intl.formatMessage({ id: 'additional-information' })}
+          </InfoMessage.Title>
           <InfoMessage.Content>
-            {intl.formatMessage({ id: 'definition-visitor-word' })}
+            {intl.formatMessage({ id: 'definition-page-views-word' })}
           </InfoMessage.Content>
         </InfoMessage>
 

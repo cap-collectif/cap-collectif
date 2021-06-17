@@ -69,7 +69,7 @@ const Contributor = ({ contributor: contributorFragment }: Props): React.Node =>
       </Text>
 
       {contributions.map(contribution => (
-        <Text color="gray.900" key={contribution.type} capitalize>
+        <Text color="gray.900" key={contribution.type} fontSize={1} capitalize>
           {getContributionWording(contribution.type, intl, contribution.totalCount)}
         </Text>
       ))}

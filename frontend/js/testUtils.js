@@ -3,6 +3,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
+import { Provider as ReakitProvider } from 'reakit';
 import { IntlProvider } from 'react-intl-redux';
 import { RelayEnvironmentProvider } from 'react-relay';
 import { theme } from '~/styles/theme';
@@ -53,7 +54,9 @@ export const MockProviders = ({ children, store = {} }: Props) => {
   return (
     <Provider store={appStore(store)}>
       <IntlProvider>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <ReakitProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </ReakitProvider>
       </IntlProvider>
     </Provider>
   );

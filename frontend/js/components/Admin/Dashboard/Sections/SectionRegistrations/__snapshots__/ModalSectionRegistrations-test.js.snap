@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalSectionRegistrations /> <TestModalSectionRegistrations /> should render correctly with contributors 1`] = `
+<div
+  aria-label="global.registration.dynamic"
+  aria-modal={true}
+  data-dialog={true}
+  hidden={false}
+  id="id-1"
+  onAnimationEnd={[Function]}
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  onTransitionEnd={[Function]}
+  role="dialog"
+  tabIndex={-1}
+>
+  <div
+    className="sc-bdnylx dCrSrw Modal__ModalContainerInner-sc-11juq2l-0"
+    onClick={[Function]}
+    style={
+      Object {
+        "opacity": 0,
+      }
+    }
+  >
+    <div
+      className="sc-bdnylx hDMLix Modal__ModalInner-sc-11juq2l-1"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateY(-20px) translateZ(0)",
+        }
+      }
+    >
+      <header
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gwSffl"
+      >
+        <div
+          className="sc-bdnylx ModalHeader___StyledAppBox-sc-1yfwqjx-0 inwnda hSCmWF"
+        >
+          <h4
+            className="sc-bdnylx jhYwke"
+          >
+            110
+             
+            global.registration.dynamic
+          </h4>
+        </div>
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 kjpljQ gQREUn"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jxagfU jSXedj KA-deO icon"
+          />
+        </button>
+      </header>
+      <main
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gcGteT icVUjK"
+      >
+        <p
+          className="sc-bdnylx ihLXaw"
+        >
+          period-on-project-from-to
+        </p>
+        <div
+          className="sc-bdnylx bDYDFF"
+        >
+          <div
+            className="recharts-responsive-container"
+            style={
+              Object {
+                "height": "100%",
+                "maxHeight": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

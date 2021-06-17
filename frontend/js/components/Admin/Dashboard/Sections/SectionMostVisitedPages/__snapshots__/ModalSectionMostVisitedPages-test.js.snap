@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalSectionMostVisitedPages /> <TestModalSectionMostVisitedPages /> should render correctly with most visited pages 1`] = `
+<div
+  aria-label="most-visited-pages"
+  aria-modal={true}
+  data-dialog={true}
+  hidden={false}
+  id="id-1"
+  onAnimationEnd={[Function]}
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  onTransitionEnd={[Function]}
+  role="dialog"
+  tabIndex={-1}
+>
+  <div
+    className="sc-bdnylx dCrSrw Modal__ModalContainerInner-sc-11juq2l-0"
+    onClick={[Function]}
+    style={
+      Object {
+        "opacity": 0,
+      }
+    }
+  >
+    <div
+      className="sc-bdnylx hDMLix Modal__ModalInner-sc-11juq2l-1"
+      id="modal-section-contributors"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateY(-20px) translateZ(0)",
+        }
+      }
+    >
+      <header
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gwSffl"
+      >
+        <div
+          className="sc-bdnylx ModalHeader___StyledAppBox-sc-1yfwqjx-0 inwnda hSCmWF"
+        >
+          <h4
+            className="sc-bdnylx jhYwke"
+          >
+            most-visited-pages
+          </h4>
+        </div>
+        <button
+          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 kjpljQ gQREUn"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jxagfU jSXedj KA-deO icon"
+          />
+        </button>
+      </header>
+      <main
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gcGteT icVUjK"
+      >
+        <div
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN glBRts"
+        >
+          <div
+            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+          >
+            <p
+              className="sc-bdnylx dbMpeV"
+              title="2014-12-01T00:00:00.000Z"
+            >
+              2014-12-01T00:00:00.000Z
+            </p>
+            <p
+              className="sc-bdnylx flhlcS"
+            >
+              50
+            </p>
+          </div>
+          <div
+            className="sc-bdnylx ivgGPR"
+          >
+            <div
+              className="sc-bdnylx iznDD"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN glBRts"
+        >
+          <div
+            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+          >
+            <p
+              className="sc-bdnylx dbMpeV"
+              title="2015-01-01T00:00:00.000Z"
+            >
+              2015-01-01T00:00:00.000Z
+            </p>
+            <p
+              className="sc-bdnylx flhlcS"
+            >
+              60
+            </p>
+          </div>
+          <div
+            className="sc-bdnylx ivgGPR"
+          >
+            <div
+              className="sc-bdnylx hkPfgz"
+            />
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

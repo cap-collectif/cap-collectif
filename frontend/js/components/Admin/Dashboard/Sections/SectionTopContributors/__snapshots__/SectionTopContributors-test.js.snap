@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionTopContributors /> <TestSectionTopContributors /> should render correctly with top contributors 1`] = `
+<div
+  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cobHxM lvJOm"
+>
+  <p
+    className="sc-bdnylx fnSuYt"
+  >
+    most-active-contributors
+  </p>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+  >
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iXOGtN glBRts"
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hMbyDD Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        style={
+          Object {
+            "background": "#842d86",
+            "color": "#fff",
+          }
+        }
+      >
+        <img
+          alt="Vince"
+          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          src="<mock-value-for-field-\\"url\\">"
+          title="Vince"
+        />
+      </div>
+      <p
+        className="sc-bdnylx gsQGvO"
+      >
+        Vince
+      </p>
+      <p
+        className="sc-bdnylx jeCfVS"
+      >
+        count-proposal
+      </p>
+    </div>
+  </div>
+</div>
+`;

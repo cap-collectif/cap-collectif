@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import Section from '~ui/Dashboard/Section';
 import TabsChart from '~ui/Dashboard/TabsChart';
 import type { SectionParticipations_analytics$key } from '~relay/SectionParticipations_analytics.graphql';
-import formatValues from './formatValues';
+import formatValues from '../formatValues';
 
 type Props = {|
   +analytics: SectionParticipations_analytics$key,

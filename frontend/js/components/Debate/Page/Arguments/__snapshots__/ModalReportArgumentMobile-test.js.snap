@@ -6,7 +6,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`]
   aria-modal="true"
   data-dialog="true"
   hidden=""
-  id="id-g"
+  id="id-1"
   role="dialog"
   style="display:none"
   tabindex="-1"
@@ -18,7 +18,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
   aria-label="global.menu"
   aria-modal="true"
   data-dialog="true"
-  id="id-g"
+  id="id-1"
   role="dialog"
   tabindex="-1"
 >
@@ -34,7 +34,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
         class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gcGteT lvJOm"
       >
         <button
-          aria-controls="id-g"
+          aria-controls="id-2"
           aria-expanded="false"
           aria-haspopup="dialog"
           class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTHfeU ecJjSS"
@@ -47,7 +47,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
           aria-modal="true"
           data-dialog="true"
           hidden=""
-          id="id-g"
+          id="id-2"
           role="dialog"
           style="display:none"
           tabindex="-1"

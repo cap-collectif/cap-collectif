@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { PieChart as PieChartRecharts, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { useIntl } from 'react-intl';
 import Flex, { type FlexProps } from '~ui/Primitives/Layout/Flex';
 import Label from '../Label';
 import AppBox from '~ui/Primitives/AppBox';
@@ -30,6 +31,7 @@ const percentageColors: string[] = [
 ];
 
 const PieChart = ({ percentages, ...props }: PieChartProps) => {
+  const intl = useIntl();
   const [hovered, setHovered] = React.useState<?string>(null);
 
   const displayPercentages: PercentageFormatted[] = percentages
@@ -64,8 +66,19 @@ const PieChart = ({ percentages, ...props }: PieChartProps) => {
             circleColor={percentage.color}
             state={hovered === null || hovered === percentage.id ? 'idle' : 'hidden'}
             onMouseOver={() => setHovered(percentage.id)}
-            onMouseOut={() => setHovered(null)}>
-            {`${percentage.label} (${percentage.value}%)`}
+            onMouseOut={() => setHovered(null)}
+            title={
+              percentage.id === 'other'
+                ? intl.formatMessage({ id: percentage.label })
+                : percentage.label
+            }>
+            {`${
+              percentage.id === 'other'
+                ? intl.formatMessage({ id: percentage.label })
+                : percentage.label.length > 40
+                ? `${percentage.label.slice(0, 40)}...`
+                : percentage.label
+            } (${percentage.value}%)`}
           </Label>
         ))}
       </Flex>

@@ -24,6 +24,7 @@ export type LineChartProps = {|
   ...AppBoxProps,
   +withGrid?: boolean,
   +withAxis?: boolean,
+  +withTooltip?: boolean,
   +data: Data[],
   +label: string,
 |};
@@ -41,6 +42,7 @@ const LineChart = ({
   label,
   withGrid = false,
   withAxis = false,
+  withTooltip = true,
   ...props
 }: LineChartProps) => {
   return (
@@ -65,11 +67,13 @@ const LineChart = ({
             dot={false}
             activeDot={false}
           />
-          <Tooltip
-            content={tooltipData => renderTooltip(tooltipData, label)}
-            offset={5}
-            cursor={{ stroke: colors.gray['300'], strokeWidth: 2 }}
-          />
+          {withTooltip && (
+            <Tooltip
+              content={tooltipData => renderTooltip(tooltipData, label)}
+              offset={5}
+              cursor={{ stroke: colors.gray['300'], strokeWidth: 2 }}
+            />
+          )}
         </LineChartRecharts>
       </ResponsiveContainer>
     </AppBox>

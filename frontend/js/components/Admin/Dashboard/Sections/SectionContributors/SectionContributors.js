@@ -44,7 +44,8 @@ const SectionContributors = ({ contributors: contributorsFragment }: Props): Rea
           '& > div': {
             height: '100%',
           },
-        })}>
+        })}
+        flex={1}>
         <SmallChart
           count={contributors.totalCount}
           label={intl.formatMessage(

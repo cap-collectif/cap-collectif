@@ -38,6 +38,7 @@ const ModalSectionContributors = ({
     <Modal
       show={show}
       onClose={onClose}
+      id="modal-section-contributors"
       ariaLabel={intl.formatMessage(
         { id: 'global.contributor.dynamic' },
         { num: contributors.totalCount },
@@ -55,8 +56,11 @@ const ModalSectionContributors = ({
         <ProjectPeriod />
 
         <InfoMessage variant="info">
+          <InfoMessage.Title>
+            {intl.formatMessage({ id: 'additional-information' })}
+          </InfoMessage.Title>
           <InfoMessage.Content>
-            {intl.formatMessage({ id: 'definition-visitor-word' })}
+            {intl.formatMessage({ id: 'definition-participant-word' })}
           </InfoMessage.Content>
         </InfoMessage>
 

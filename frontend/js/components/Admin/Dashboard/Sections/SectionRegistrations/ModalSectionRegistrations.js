@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl';
 import Modal from '~ds/Modal/Modal';
 import Heading from '~ui/Primitives/Heading';
 import type { ModalSectionRegistrations_registrations$key } from '~relay/ModalSectionRegistrations_registrations.graphql';
-import InfoMessage from '~ds/InfoMessage/InfoMessage';
 import LineChart from '~ui/Dashboard/LineChart';
 import formatValues from '~/components/Admin/Dashboard/Sections/formatValues';
 import ProjectPeriod from '~/components/Admin/Dashboard/Sections/ProjectPeriod';
@@ -53,12 +52,6 @@ const ModalSectionRegistrations = ({
       </Modal.Header>
       <Modal.Body spacing={5}>
         <ProjectPeriod />
-
-        <InfoMessage variant="info">
-          <InfoMessage.Content>
-            {intl.formatMessage({ id: 'definition-visitor-word' })}
-          </InfoMessage.Content>
-        </InfoMessage>
 
         <LineChart
           data={formatValues(registrations.values, intl)}

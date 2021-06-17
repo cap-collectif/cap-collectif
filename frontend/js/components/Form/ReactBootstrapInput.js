@@ -129,6 +129,7 @@ export type ParentProps = {|
   responseColorsDisabled?: boolean,
   isValidDate?: (current: moment) => boolean,
   withCharacterCounter?: boolean,
+  dateFormat?: string,
 |};
 
 type Props = {|
@@ -210,6 +211,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     responseColorsDisabled,
     isValidDate,
     withCharacterCounter,
+    dateFormat,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -381,6 +383,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
+          dateFormat={dateFormat}
         />
       );
     }

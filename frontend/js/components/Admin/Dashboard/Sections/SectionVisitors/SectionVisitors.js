@@ -44,7 +44,8 @@ const SectionVisitors = ({ visitors: visitorsFragment }: Props): React.Node => {
           '& > div': {
             height: '100%',
           },
-        })}>
+        })}
+        flex={1}>
         <SmallChart
           count={visitors.totalCount}
           label={intl.formatMessage({ id: 'global.visitor.dynamic' }, { num: visitors.totalCount })}

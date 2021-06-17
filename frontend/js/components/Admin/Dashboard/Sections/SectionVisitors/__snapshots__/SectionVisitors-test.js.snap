@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionVisitors /> <TestSectionVisitors /> should render correctly with contributors 1`] = `
+Array [
+  <button
+    className="sc-bdnylx SectionVisitors___StyledAppBox-sc-9hb7zz-0 jBboRH hybPgc"
+    onClick={[Function]}
+    type="button"
+  >
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gRDXmN"
+    >
+      <div
+        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dqCgLg"
+      >
+        <p
+          className="sc-bdnylx eOgPhB"
+        >
+          global.visitor.dynamic
+        </p>
+        <p
+          className="sc-bdnylx eEMnqn"
+        >
+          110
+        </p>
+      </div>
+      <div
+        className="sc-bdnylx keezSv"
+      >
+        <div
+          className="recharts-responsive-container"
+          style={
+            Object {
+              "height": "100%",
+              "maxHeight": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "width": "100%",
+            }
+          }
+        />
+      </div>
+    </div>
+  </button>,
+  <div
+    aria-label="global.visitor.dynamic"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;

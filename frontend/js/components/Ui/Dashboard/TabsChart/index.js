@@ -31,7 +31,9 @@ const TabsChart = ({ children }: TabsChartProps) => {
 
   return (
     <Flex direction="column" spacing={8}>
-      <Flex direction="row">{tabsChildren}</Flex>
+      <Flex direction="row" overflow="auto">
+        {tabsChildren}
+      </Flex>
       <LineChart height="250px" withAxis withGrid {...activeTab} />
     </Flex>
   );

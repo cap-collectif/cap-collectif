@@ -29,7 +29,7 @@ const SmallChart = ({ label, count, ...props }: SmallChartProps) => (
       </Text>
     </Flex>
 
-    <LineChart label={label} width="120px" {...props} />
+    <LineChart label={label} flex={1} withTooltip={false} {...props} />
   </Flex>
 );
 

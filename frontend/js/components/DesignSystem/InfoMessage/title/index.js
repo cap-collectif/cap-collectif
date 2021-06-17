@@ -3,10 +3,10 @@ import * as React from 'react';
 import cn from 'classnames';
 import Flex, { type FlexProps } from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
-import { headingStyles } from '~ui/Primitives/Heading';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
+import { FontWeight } from '~ui/Primitives/constants';
 
-export const INFO_MESSAGE_TITLE_NAME: 'InfoMessageTitle' = 'InfoMessageTitle';
+export const INFO_MESSAGE_TITLE_NAME: 'InfoMessage.Title' = 'InfoMessage.Title';
 
 type Variant = 'info' | 'infoGray' | 'danger' | 'success' | 'warning';
 type VariantIcon = {|
@@ -57,14 +57,19 @@ const InfoMessageTitle = ({
   withIcon,
   ...props
 }: InfoMessageTitleProps) => (
-  <Flex direction="row" spacing={2} className={cn('info-message-title', className)} {...props}>
+  <Flex
+    direction="row"
+    spacing={2}
+    className={cn('info-message-title', className)}
+    align="center"
+    {...props}>
     {withIcon && variant && getIcon(variant)}
-    <Text color="gray.900" {...headingStyles.h4}>
+    <Text fontSize={1} fontWeight={FontWeight.Semibold}>
       {children}
     </Text>
   </Flex>
 );
 
-InfoMessageTitle.displayName = 'InfoMessage.Title';
+InfoMessageTitle.displayName = INFO_MESSAGE_TITLE_NAME;
 
 export default InfoMessageTitle;

@@ -44,7 +44,8 @@ const SectionPageViews = ({ pageViews: pageViewsFragment }: Props): React.Node =
           '& > div': {
             height: '100%',
           },
-        })}>
+        })}
+        flex={1}>
         <SmallChart
           count={pageViews.totalCount}
           label={intl.formatMessage(

@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionParticipations /> <TestSectionParticipations /> should render correctly with participations data 1`] = `
+<div
+  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jwmtxj lvJOm"
+>
+  <p
+    className="sc-bdnylx fnSuYt"
+  >
+    methods-of-participation
+  </p>
+  <div
+    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN hgJQQt"
+  >
+    <div
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fMjMDD"
+    >
+      <button
+        className="sc-bdnylx ePyufy"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jGDVOz"
+          id="vote"
+        >
+          <p
+            className="sc-bdnylx hhMOMR"
+          >
+            vote-plural
+          </p>
+          <p
+            className="sc-bdnylx eEMnqn"
+          >
+            50
+          </p>
+        </div>
+      </button>
+      <button
+        className="sc-bdnylx ePyufy"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gWEYXv"
+          id="comment"
+        >
+          <p
+            className="sc-bdnylx hhMOMR"
+          >
+            comment.dynamic
+          </p>
+          <p
+            className="sc-bdnylx eEMnqn"
+          >
+            10
+          </p>
+        </div>
+      </button>
+      <button
+        className="sc-bdnylx ePyufy"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gWEYXv"
+          id="contribution"
+        >
+          <p
+            className="sc-bdnylx hhMOMR"
+          >
+            contribution-plural
+          </p>
+          <p
+            className="sc-bdnylx eEMnqn"
+          >
+            30
+          </p>
+        </div>
+      </button>
+      <button
+        className="sc-bdnylx ePyufy"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gWEYXv"
+          id="follower"
+        >
+          <p
+            className="sc-bdnylx hhMOMR"
+          >
+            subscription.dynamic
+          </p>
+          <p
+            className="sc-bdnylx eEMnqn"
+          >
+            50
+          </p>
+        </div>
+      </button>
+    </div>
+    <div
+      className="sc-bdnylx ieIFwr"
+      id="vote"
+    >
+      <div
+        className="recharts-responsive-container"
+        style={
+          Object {
+            "height": "100%",
+            "maxHeight": undefined,
+            "minHeight": undefined,
+            "minWidth": undefined,
+            "width": "100%",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

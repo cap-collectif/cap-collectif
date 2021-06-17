@@ -48,6 +48,9 @@ const ModalSectionVisitors = ({ show, onClose, visitors: visitorsFragment }: Pro
         <ProjectPeriod />
 
         <InfoMessage variant="info">
+          <InfoMessage.Title>
+            {intl.formatMessage({ id: 'additional-information' })}
+          </InfoMessage.Title>
           <InfoMessage.Content>
             {intl.formatMessage({ id: 'definition-visitor-word' })}
           </InfoMessage.Content>

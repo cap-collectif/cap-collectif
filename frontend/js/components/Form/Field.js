@@ -97,6 +97,7 @@ type Props = {|
   responseColorsDisabled?: boolean,
   isValidDate?: (current: moment) => boolean,
   withCharacterCounter?: boolean,
+  dateFormat?: string,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -153,6 +154,7 @@ class Field extends React.Component<Props> {
       isValidDate,
       timeConstraints,
       withCharacterCounter,
+      dateFormat,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -229,6 +231,7 @@ class Field extends React.Component<Props> {
         isValidDate={isValidDate}
         timeConstraints={timeConstraints}
         withCharacterCounter={withCharacterCounter}
+        dateFormat={dateFormat}
         {...input}>
         {children}
       </Input>

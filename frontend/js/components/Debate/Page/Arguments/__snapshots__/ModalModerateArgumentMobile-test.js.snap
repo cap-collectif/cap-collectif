@@ -3,7 +3,7 @@
 exports[`<ModalModerateArgumentMobile /> should renders correcty with argument 1`] = `
 Array [
   <button
-    aria-controls="id-g"
+    aria-controls="id-1"
     aria-expanded="false"
     aria-haspopup="dialog"
     class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
@@ -18,7 +18,7 @@ Array [
     aria-modal="true"
     data-dialog="true"
     hidden=""
-    id="id-g"
+    id="id-1"
     role="dialog"
     style="display:none"
     tabindex="-1"

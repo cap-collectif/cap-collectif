@@ -49,6 +49,7 @@ type Props = {
   dateTimeInputProps?: DateTimeInputProps,
   timeConstraints?: TimeConstraintsProps,
   isValidDate?: (current: moment) => boolean,
+  dateFormat?: string,
 };
 
 const BasicDateTime: StyledComponent<{}, {}, typeof BaseDateTime> = styled(BaseDateTime)`
@@ -65,7 +66,7 @@ class DateTime extends React.Component<Props> {
   };
 
   render() {
-    const { onChange, dateTimeInputProps, isValidDate, timeConstraints } = this.props;
+    const { onChange, dateTimeInputProps, isValidDate, timeConstraints, dateFormat } = this.props;
 
     return (
       <BasicDateTime
@@ -77,7 +78,7 @@ class DateTime extends React.Component<Props> {
         inputProps={dateTimeInputProps}
         onChange={value => {
           if (value._isAMomentObject) {
-            onChange(value.format('YYYY-MM-DD HH:mm:ss'));
+            onChange(value.format(dateFormat || 'YYYY-MM-DD HH:mm:ss'));
           }
         }}
       />
