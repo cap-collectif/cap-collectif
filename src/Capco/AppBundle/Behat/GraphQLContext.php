@@ -52,6 +52,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When I am logged in to graphql as user_without_phone
+     */
+    public function iAmLoggedInToGraphQLAsUserWithoutPhone()
+    {
+        $this->createAuthenticatedClient('user_without_phone@test.com', 'user_without_phone');
+    }
+
+    /**
      * @When I am logged in to graphql as userNotConfirmedWithContributions
      */
     public function iAmLoggedInToGraphQLAsUserNotConfirmedWithContributions()

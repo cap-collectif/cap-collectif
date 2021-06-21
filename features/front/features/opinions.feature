@@ -13,7 +13,7 @@ Scenario: Can create an opinion of contribuable type in opened project
     | opinion_title | Titre                           |
     | opinion_body  | Description de ma proposition   |
   And I press "confirm-opinion-create"
-  Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
+  Then I should be redirected to "/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
 
 Scenario: Can't create an opinion of non-contribuable type in opened project
   Given I am logged in as user

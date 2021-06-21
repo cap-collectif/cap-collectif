@@ -4,15 +4,15 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Alert, Panel, Label } from 'react-bootstrap';
 import { reduxForm, Field, clearSubmitErrors, SubmissionError } from 'redux-form';
-import Fetcher, { json } from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
-import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
-import type { Dispatch } from '../../../types';
+import { closeOpinionCreateModal } from '~/redux/modules/opinion';
+import type { Dispatch } from '~/types';
 import type { OpinionCreateForm_section } from '~relay/OpinionCreateForm_section.graphql';
 import type { OpinionCreateForm_consultationStep } from '~relay/OpinionCreateForm_consultationStep.graphql';
 import RequirementsForm from '../../Requirements/RequirementsForm';
 import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql';
+import CreateOpinionMutation from '~/mutations/CreateOpinionMutation';
 
 type RelayProps = {|
   section: OpinionCreateForm_section,
@@ -35,26 +35,33 @@ const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
         .map(type => ({ appendixType: type.id, body: data[type.title] }))
     : [];
   const { project } = consultationStep;
-  const form = {
-    title: data.title,
-    body: data.body,
-    appendices,
-  };
-  return Fetcher.post(
-    `/projects/${project._id}/steps/${consultationStep.id}/opinion_types/${section.id}/opinions`,
-    form,
-  )
-    .then(json)
-    .then((opinion: Object) => {
+
+  CreateOpinionMutation.commit({
+    input: {
+      projectId: project._id,
+      stepId: consultationStep.id,
+      opinionTypeId: section.id,
+      title: data.title,
+      body: data.body,
+      appendices,
+    },
+  }).then(response => {
+    const errorCode = response?.createOpinion?.errorCode;
+    const url = response?.createOpinion?.opinion?.url;
+    if (url) {
       dispatch(closeOpinionCreateModal());
-      window.location.href = opinion._links.show;
-    })
-    .catch((res: Object) => {
-      if (res && res.response && res.response.message === 'You contributed too many times.') {
+      window.location.href = url;
+    }
+
+    switch (errorCode) {
+      case null:
+        return;
+      case 'CONTRIBUTED_TOO_MANY_TIMES':
         throw new SubmissionError({ _error: 'publication-limit-reached' });
-      }
-      throw new SubmissionError({ _error: 'global.error.server.form' });
-    });
+      default:
+        throw new SubmissionError({ _error: 'global.error.server.form' });
+    }
+  });
 };
 
 const validate = ({ title, body }: FormValues) => {

@@ -3074,6 +3074,63 @@ type CreateOauth2SSOConfigurationPayload {
   clientMutationId: String
 }
 
+"""Available errors on opinion creation"""
+enum CreateOpinionErrorCode {
+  """this opinionType is not enabled"""
+  OPINION_TYPE_NOT_ENABLED
+
+  """the step is unknown"""
+  UNKNOWN_STEP
+
+  """the step is not contribuable"""
+  STEP_NOT_CONTRIBUABLE
+
+  """the viewer does not meet requirements"""
+  REQUIREMENTS_NOT_MET
+
+  """the viewer contributed too many times"""
+  CONTRIBUTED_TOO_MANY_TIMES
+
+  """the form is invalid"""
+  INVALID_FORM
+
+  """this opinionType is not found"""
+  OPINION_TYPE_NOT_FOUND
+
+  """this project is not found"""
+  PROJECT_NOT_FOUND
+}
+
+input CreateOpinionInput {
+  """the project id"""
+  projectId: ID!
+
+  """the step id"""
+  stepId: ID!
+
+  """the opinionType id"""
+  opinionTypeId: ID!
+
+  """the opinion title"""
+  title: String!
+
+  """the opinion body"""
+  body: String!
+
+  """the opinion appendices"""
+  appendices: [AppendixInput]!
+  clientMutationId: String
+}
+
+type CreateOpinionPayload {
+  """the created opinion"""
+  opinion: Opinion
+
+  """available errors if mutation fails"""
+  errorCode: CreateOpinionErrorCode
+  clientMutationId: String
+}
+
 input CreateProjectDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean = false
@@ -6439,6 +6496,9 @@ type Mutation {
 
   """Register email domains"""
   registerEmailDomains(input: RegisterEmailDomainsInput!): RegisterEmailDomainsPayload
+
+  """Create new Opinion"""
+  createOpinion(input: CreateOpinionInput!): CreateOpinionPayload
 
   """Update Opinion"""
   updateOpinion(input: UpdateOpinionInput!): UpdateOpinionPayload

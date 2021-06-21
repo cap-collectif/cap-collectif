@@ -1,0 +1,23 @@
+CreateOpinionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of CreateOpinion mutation'
+        fields:
+            projectId:
+                type: 'ID!'
+                description: 'the project id'
+            stepId:
+                type: 'ID!'
+                description: 'the step id'
+            opinionTypeId:
+                type: 'ID!'
+                description: 'the opinionType id'
+            title:
+                type: 'String!'
+                description: 'the opinion title'
+            body:
+                type: 'String!'
+                description: 'the opinion body'
+            appendices:
+                type: '[AppendixInput]!'
+                description: 'the opinion appendices'
