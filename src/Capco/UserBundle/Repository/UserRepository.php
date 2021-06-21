@@ -1122,13 +1122,29 @@ class UserRepository extends EntityRepository
 
         return $qb
             ->select('u')
+            ->where(
+                $qb
+                    ->expr()
+                    ->orX()
+                    ->add(
+                        $qb
+                            ->expr()
+                            ->orx(
+                                $qb->expr()->eq('u.franceConnectId', ':accessId'),
+                                $qb->expr()->eq('u.franceConnectAccessToken', ':accessToken'),
+                                $qb->expr()->eq('u.facebook_access_token', ':accessToken'),
+                                $qb->expr()->eq('u.facebook_id', ':accessId'),
+                                $qb->expr()->eq('u.google_access_token', ':accessToken'),
+                                $qb->expr()->eq('u.google_id', ':accessId'),
+                                $qb->expr()->eq('u.openIdAccessToken', ':accessToken'),
+                                $qb->expr()->eq('u.openId', ':accessId'),
+                                $qb->expr()->eq('u.twitter_access_token', ':accessToken'),
+                                $qb->expr()->eq('u.twitter_id', ':accessId')
+                            )
+                    )
+            )
+            // WARNING email condition should be less priority
             ->orWhere('u.email = :email')
-            ->orWhere('u.franceConnectId = :accessId')
-            ->orWhere('u.franceConnectAccessToken = :accessToken')
-            ->orWhere('u.facebook_access_token = :accessToken')
-            ->orWhere('u.google_access_token = :accessToken')
-            ->orWhere('u.openIdAccessToken = :accessToken')
-            ->orWhere('u.twitter_access_token = :accessToken')
             ->setParameter('email', $email)
             ->setParameter('accessToken', $accessToken)
             ->setParameter('accessId', $accessId)
