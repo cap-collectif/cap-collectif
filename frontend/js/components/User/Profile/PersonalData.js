@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Alert, Well, Panel, Button, OverlayTrigger } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import styled, { type StyledComponent } from 'styled-components';
 import {
   reduxForm,
   Field,
@@ -178,6 +179,23 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
   return true;
 };
 
+const PersonnalDataContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  .alert-info {
+    display: flex;
+    .cap-information {
+      font-size: 26px;
+    }
+  }
+  #capco_horizontal_form {
+    .form-group {
+      margin-bottom: 5px;
+    }
+  }
+  #project-participation-collected-data {
+    display: flex;
+  }
+`;
+
 type PersonalDataState = {
   year: ?number,
   month: ?number,
@@ -279,7 +297,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     );
 
     return (
-      <div id="personal-data">
+      <PersonnalDataContainer id="personal-data">
         {!hasData(viewer, currentValues) && (
           <Alert bsStyle="info">
             <span className="cap-information col-sm-1 col-md-1" />
@@ -359,7 +377,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
-                              className="col-sm-6 excerpt mb-5 text-right"
+                              className="col-sm-6 excerpt mb-10 text-right"
                               style={{ marginLeft: 28 }}>
                               <FormattedMessage id={getSsoTradKey()} />
                             </div>
@@ -403,7 +421,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
-                              className="col-sm-6 excerpt mb-5 text-right"
+                              className="col-sm-6 excerpt mb-10 text-right"
                               style={{ marginLeft: 28 }}>
                               <FormattedMessage id={getSsoTradKey()} />
                             </div>
@@ -446,7 +464,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
-                              className="col-sm-6 excerpt mb-5 text-right"
+                              className="col-sm-6 excerpt mb-10 text-right"
                               style={{ marginLeft: 28 }}>
                               <FormattedMessage id={getSsoTradKey()} />
                             </div>
@@ -492,7 +510,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
-                              className="col-sm-6 excerpt mb-5 text-right"
+                              className="col-sm-6 excerpt mb-10 text-right"
                               style={{ marginLeft: 28 }}>
                               <FormattedMessage id={getSsoTradKey()} />
                             </div>
@@ -535,7 +553,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                           {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
-                              className="col-sm-6 excerpt mb-5 text-right"
+                              className="col-sm-6 excerpt mb-10 text-right"
                               style={{ marginLeft: 28 }}>
                               <FormattedMessage id={getSsoTradKey()} />
                             </div>
@@ -580,13 +598,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                   divClassName="col-sm-7"
                                 />
                               </div>
-                            </div>
-                          )}
-                          {isSsoFcOrOccitanie(false) && (
-                            <div
-                              className="col-sm-6 excerpt mb-5 text-right"
-                              style={{ marginLeft: 28 }}>
-                              <FormattedMessage id={getSsoTradKey()} />
+                              {isSsoFcOrOccitanie(false) && (
+                                <div
+                                  className="col-sm-6 excerpt mb-10 text-right"
+                                  style={{ marginLeft: 28 }}>
+                                  <FormattedMessage id={getSsoTradKey()} />
+                                </div>
+                              )}
                             </div>
                           )}
                           {currentValues.address2 !== null && (
@@ -606,13 +624,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                   divClassName="col-sm-7"
                                 />
                               </div>
-                            </div>
-                          )}
-                          {isSsoFcOrOccitanie(false) && (
-                            <div
-                              className="col-sm-6 excerpt mb-5 text-right"
-                              style={{ marginLeft: 28 }}>
-                              <FormattedMessage id={getSsoTradKey()} />
+                              {isSsoFcOrOccitanie(false) && (
+                                <div
+                                  className="col-sm-6 excerpt mb-10 text-right"
+                                  style={{ marginLeft: 28 }}>
+                                  <FormattedMessage id={getSsoTradKey()} />
+                                </div>
+                              )}
                             </div>
                           )}
                           {currentValues.city !== null && (
@@ -632,15 +650,16 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                   divClassName="col-sm-7"
                                 />
                               </div>
+                              {isSsoFcOrOccitanie(false) && (
+                                <div
+                                  className="col-sm-6 excerpt mb-10 text-right"
+                                  style={{ marginLeft: 28 }}>
+                                  <FormattedMessage id={getSsoTradKey()} />
+                                </div>
+                              )}
                             </div>
                           )}
-                          {isSsoFcOrOccitanie(false) && (
-                            <div
-                              className="col-sm-6 excerpt mb-5 text-right"
-                              style={{ marginLeft: 28 }}>
-                              <FormattedMessage id={getSsoTradKey()} />
-                            </div>
-                          )}
+
                           {currentValues.zipCode !== null && (
                             <div className="personal-data-address">
                               <label
@@ -658,13 +677,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                   divClassName="col-sm-4"
                                 />
                               </div>
-                            </div>
-                          )}
-                          {isSsoFcOrOccitanie(false) && (
-                            <div
-                              className="col-sm-6 excerpt mb-5 text-right"
-                              style={{ marginLeft: 28 }}>
-                              <FormattedMessage id={getSsoTradKey()} />
+                              {isSsoFcOrOccitanie(false) && (
+                                <div
+                                  className="col-sm-6 excerpt mb-10 text-right"
+                                  style={{ marginLeft: 28 }}>
+                                  <FormattedMessage id={getSsoTradKey()} />
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
@@ -706,7 +725,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             )}
                             {isSsoFcOrOccitanie(false) && (
                               <div
-                                className="col-sm-6 excerpt mb-5 text-right"
+                                className="col-sm-6 excerpt mb-10 text-right"
                                 style={{ marginLeft: 28 }}>
                                 <FormattedMessage id={getSsoTradKey()} />
                               </div>
@@ -812,7 +831,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             </div>
           </Panel.Body>
         </Panel>
-      </div>
+      </PersonnalDataContainer>
     );
   }
 }
