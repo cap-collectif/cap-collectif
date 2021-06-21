@@ -128,218 +128,240 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
             </svg>
           </Button>
         </Flex>
-        <Accordion
-          spacing={0}
+
+        <Flex
+          direction="column"
           height="calc(100% - 105px)"
-          defaultAccordion={defaultAccordion}
           css={{
             overflowY: 'scroll',
             msOverflowStyle: 'none',
             scrollbarWidth: 'none',
           }}>
-          <SidebarAccordionItem id="contributions">
-            <SidebarButton icon={ICON_NAME.PENCIL_O} text="global.contribution" isOpen={isOpen} />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              {features.reporting && (
-                <SidebarLink text="admin.label.reporting" url="/admin/reporting" />
-              )}
-              <SidebarLink text="admin.label.proposal" url="/admin/capco/app/proposal/list" />
-              <SidebarLink text="admin.label.opinion" url="/admin/capco/app/opinion/list" />
-              <SidebarLink text="admin.label.reply" url="/admin/capco/app/reply/list" />
-              <SidebarLink
-                text="admin.label.opinion_version"
-                url="/admin/capco/app/opinionversion/list"
-              />
-              <SidebarLink text="admin.label.argument" url="/admin/capco/app/argument/list" />
-              <SidebarLink text="admin.label.source" url="/admin/capco/app/source/list" />
-              <SidebarLink text="admin.label.comment" url="/admin/capco/app/comment/list" />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
-          <SidebarAccordionItem id="contenus">
-            <SidebarButton icon={ICON_NAME.FOLDER_O} text="admin.group.content" isOpen={isOpen} />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              <SidebarLink
-                text="admin.label.highlighted"
-                url="/admin/capco/app/highlightedcontent/list"
-              />
-              <SidebarLink text="admin.label.theme" url="/admin/capco/app/theme/list" />
-              <SidebarLink text="admin.label.post" url="/admin/capco/app/post/list" />
-              {features.calendar && (
-                <SidebarLink text="admin.label.events" url="/admin/capco/app/event/list" />
-              )}
-              <SidebarLink text="admin.label.video" url="/admin/capco/app/video/list" />
-              <SidebarLink text="admin.label.page" url="/admin/capco/app/page/list" />
-              <SidebarLink text="media" url="/admin/capco/media/media/list" />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
-          <SidebarAccordionItem id="projets">
-            <SidebarButton
-              icon={ICON_NAME.BOOK_STAR_O}
-              text="admin.group.project"
-              isOpen={isOpen}
-            />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              <SidebarLink text="admin.label.project" url="/admin/capco/app/project/list" />
-              <SidebarLink text="admin.label.appendix" url="/admin/capco/app/appendixtype/list" />
-              <SidebarLink text="admin.label.category" url="/admin/capco/app/sourcecategory/list" />
-              <SidebarLink
-                text="admin.label.consultation"
-                url="/admin/capco/app/consultation/list"
-              />
-              <SidebarLink
-                text="admin.label.proposal_form"
-                url="/admin/capco/app/proposalform/list"
-              />
-              <SidebarLink
-                text="admin.label.questionnaire"
-                url="/admin/capco/app/questionnaire/list"
-              />
-              <SidebarLink text="admin.label.pages.types" url="/admin/capco/app/projecttype/list" />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
-          <SidebarAccordionItem id="utilisateurs">
-            <SidebarButton icon={ICON_NAME.USER_O} text="sonata.admin.group.user" isOpen={isOpen} />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              <SidebarLink text="global.select_user.type" url="/admin/capco/user/user/list" />
-              <SidebarLink
-                text="admin-menu-invite-users-label"
-                url="/admin/capco/user/invite/list"
-              />
-              <SidebarLink text="admin.label.group" url="/admin/capco/app/group/list" />
-              <SidebarLink text="admin.label.user_type" url="/admin/capco/user/usertype/list" />
-              <SidebarLink
-                text="admin.label.newsletter_subscription"
-                url="/admin/capco/app/newslettersubscription/list"
-              />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
-          <SidebarAccordionItem id="reglages">
-            <SidebarButton icon={ICON_NAME.COG_O} text="admin.group.parameters" isOpen={isOpen} />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              <SidebarLink text="admin.label.menu_item" url="/admin/capco/app/menuitem/list" />
-              <SidebarLink
-                text="admin.label.social_network"
-                url="/admin/capco/app/socialnetwork/list"
-              />
-              <SidebarLink
-                text="admin.label.footer_social_network"
-                url="/admin/capco/app/footersocialnetwork/list"
-              />
-              <SidebarLink
-                text="admin.label.project_district"
-                url="/admin/capco/app/district-projectdistrict/list"
-              />
-              <SidebarLink text="admin.fields.proposal_form.map" url="/admin/map/list" />
-              {features.multilangue && (
-                <SidebarLink text="global-languages" url="/admin/locale/list" />
-              )}
-              <SidebarLink text="custom-url" url="/admin/redirect/list" />
-              <SidebarLink text="website-icon" url="/admin/favicon/list" />
-              <SidebarLink text="global-typeface" url="/admin/font/list" />
-              <SidebarLink
-                text="admin.label.settings.global"
-                url="/admin/settings/settings.global/list"
-              />
-              <SidebarLink
-                text="admin.label.settings.performance"
-                url="/admin/settings/settings.performance/list"
-              />
-              <SidebarLink
-                text="admin.label.settings.modules"
-                url="/admin/settings/settings.modules/list"
-              />
-              <SidebarLink
-                text="admin.label.settings.notifications"
-                url="/admin/settings/settings.notifications/list"
-              />
-              <SidebarLink
-                text="admin.label.settings.appearance"
-                url="/admin/settings/settings.appearance/list"
-              />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
-          <SidebarAccordionItem id="pages">
-            <SidebarButton icon={ICON_NAME.FILE_O} text="admin.group.pages" isOpen={isOpen} />
-            <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-              <SidebarLink text="admin.label.section" url="/admin/capco/app/section/list" />
-              <SidebarLink text="admin.label.pages.contact" url="/admin/contact/list" />
-              <SidebarLink
-                text="admin.label.pages.homepage"
-                url="/admin/settings/pages.homepage/list"
-              />
-              <SidebarLink text="admin.label.pages.blog" url="/admin/settings/pages.blog/list" />
-              <SidebarLink
-                text="admin.label.pages.events"
-                url="/admin/settings/pages.events/list"
-              />
-              <SidebarLink
-                text="admin.label.pages.themes"
-                url="/admin/settings/pages.themes/list"
-              />
-              <SidebarLink
-                text="admin.label.pages.projects"
-                url="/admin/settings/pages.projects/list"
-              />
-              <SidebarLink
-                text="admin.label.pages.registration"
-                url="/admin/settings/pages.registration/list"
-              />
-              {features.members_list && (
+          <Accordion spacing={0} defaultAccordion={defaultAccordion}>
+            <SidebarAccordionItem id="contributions">
+              <SidebarButton icon={ICON_NAME.PENCIL_O} text="global.contribution" isOpen={isOpen} />
+              <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
+                {features.reporting && (
+                  <SidebarLink text="admin.label.reporting" href="/admin/reporting" />
+                )}
+                <SidebarLink text="admin.label.proposal" href="/admin/capco/app/proposal/list" />
+                <SidebarLink text="admin.label.opinion" href="/admin/capco/app/opinion/list" />
+                <SidebarLink text="admin.label.reply" href="/admin/capco/app/reply/list" />
                 <SidebarLink
-                  text="admin.label.pages.members"
-                  url="/admin/settings/pages.members/list"
+                  text="admin.label.opinion_version"
+                  href="/admin/capco/app/opinionversion/list"
                 />
-              )}
-              <SidebarLink text="admin.label.pages.login" url="/admin/settings/pages.login/list" />
-              <SidebarLink
-                text="admin.label.pages.footer"
-                url="/admin/settings/pages.footer/list"
-              />
-              <SidebarLink
-                text="admin.label.pages.cookies"
-                url="/admin/settings/pages.cookies/list"
-              />
-              <SidebarLink
-                text="admin.label.pages.privacy"
-                url="/admin/settings/pages.privacy/list"
-              />
-              <SidebarLink text="admin.label.pages.legal" url="/admin/settings/pages.legal/list" />
-              <SidebarLink
-                text="admin.label.pages.charter"
-                url="/admin/settings/pages.charter/list"
-              />
-              <SidebarLink
-                text="admin.label.pages.shield"
-                url="/admin/settings/pages.shield/list"
-              />
-            </SidebarAccordionPanel>
-          </SidebarAccordionItem>
-          {features.unstable__emailing ? (
-            <SidebarAccordionItem id="emailing">
+                <SidebarLink text="admin.label.argument" href="/admin/capco/app/argument/list" />
+                <SidebarLink text="admin.label.source" href="/admin/capco/app/source/list" />
+                <SidebarLink text="admin.label.comment" href="/admin/capco/app/comment/list" />
+              </SidebarAccordionPanel>
+            </SidebarAccordionItem>
+            <SidebarAccordionItem id="contenus">
+              <SidebarButton icon={ICON_NAME.FOLDER_O} text="admin.group.content" isOpen={isOpen} />
+              <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
+                <SidebarLink
+                  text="admin.label.highlighted"
+                  href="/admin/capco/app/highlightedcontent/list"
+                />
+                <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
+                <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
+                {features.calendar && (
+                  <SidebarLink text="admin.label.events" href="/admin/capco/app/event/list" />
+                )}
+                <SidebarLink text="admin.label.video" href="/admin/capco/app/video/list" />
+                <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />
+                <SidebarLink text="media" href="/admin/capco/media/media/list" />
+              </SidebarAccordionPanel>
+            </SidebarAccordionItem>
+            <SidebarAccordionItem id="projets">
               <SidebarButton
-                icon={ICON_NAME.ENVELOPE_O}
-                text="admin.group.emailing"
+                icon={ICON_NAME.BOOK_STAR_O}
+                text="admin.group.project"
                 isOpen={isOpen}
               />
               <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                <SidebarLink text="admin-menu-campaign-list" url="/admin/mailingCampaign/list" />
-                <SidebarLink text="admin-menu-emailing-list" url="/admin/mailingList/list" />
+                <SidebarLink text="admin.label.project" href="/admin/capco/app/project/list" />
+                <SidebarLink
+                  text="admin.label.appendix"
+                  href="/admin/capco/app/appendixtype/list"
+                />
+                <SidebarLink
+                  text="admin.label.category"
+                  href="/admin/capco/app/sourcecategory/list"
+                />
+                <SidebarLink
+                  text="admin.label.consultation"
+                  href="/admin/capco/app/consultation/list"
+                />
+                <SidebarLink
+                  text="admin.label.proposal_form"
+                  href="/admin/capco/app/proposalform/list"
+                />
+                <SidebarLink
+                  text="admin.label.questionnaire"
+                  href="/admin/capco/app/questionnaire/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.types"
+                  href="/admin/capco/app/projecttype/list"
+                />
               </SidebarAccordionPanel>
             </SidebarAccordionItem>
-          ) : null}
-          {features.unstable__analytics_page ? (
-            <SidebarAccordionItem id="analytics">
+            <SidebarAccordionItem id="utilisateurs">
               <SidebarButton
-                icon={ICON_NAME.FOLDER_O}
-                text="admin.group.analytics"
+                icon={ICON_NAME.USER_O}
+                text="sonata.admin.group.user"
                 isOpen={isOpen}
               />
               <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                <SidebarLink text="admin.label.analytics" url="/admin/capco/analytics/list" />
+                <SidebarLink text="global.select_user.type" href="/admin/capco/user/user/list" />
+                <SidebarLink
+                  text="admin-menu-invite-users-label"
+                  href="/admin/capco/user/invite/list"
+                />
+                <SidebarLink text="admin.label.group" href="/admin/capco/app/group/list" />
+                <SidebarLink text="admin.label.user_type" href="/admin/capco/user/usertype/list" />
+                <SidebarLink
+                  text="admin.label.newsletter_subscription"
+                  href="/admin/capco/app/newslettersubscription/list"
+                />
               </SidebarAccordionPanel>
             </SidebarAccordionItem>
-          ) : null}
-        </Accordion>
+            <SidebarAccordionItem id="reglages">
+              <SidebarButton icon={ICON_NAME.COG_O} text="admin.group.parameters" isOpen={isOpen} />
+              <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
+                <SidebarLink text="admin.label.menu_item" href="/admin/capco/app/menuitem/list" />
+                <SidebarLink
+                  text="admin.label.social_network"
+                  href="/admin/capco/app/socialnetwork/list"
+                />
+                <SidebarLink
+                  text="admin.label.footer_social_network"
+                  href="/admin/capco/app/footersocialnetwork/list"
+                />
+                <SidebarLink
+                  text="admin.label.project_district"
+                  href="/admin/capco/app/district-projectdistrict/list"
+                />
+                <SidebarLink text="admin.fields.proposal_form.map" href="/admin/map/list" />
+                {features.multilangue && (
+                  <SidebarLink text="global-languages" href="/admin/locale/list" />
+                )}
+                <SidebarLink text="custom-url" href="/admin/redirect/list" />
+                <SidebarLink text="website-icon" href="/admin/favicon/list" />
+                <SidebarLink text="global-typeface" href="/admin/font/list" />
+                <SidebarLink
+                  text="admin.label.settings.global"
+                  href="/admin/settings/settings.global/list"
+                />
+                <SidebarLink
+                  text="admin.label.settings.performance"
+                  href="/admin/settings/settings.performance/list"
+                />
+                <SidebarLink
+                  text="admin.label.settings.modules"
+                  href="/admin/settings/settings.modules/list"
+                />
+                <SidebarLink
+                  text="admin.label.settings.notifications"
+                  href="/admin/settings/settings.notifications/list"
+                />
+                <SidebarLink
+                  text="admin.label.settings.appearance"
+                  href="/admin/settings/settings.appearance/list"
+                />
+              </SidebarAccordionPanel>
+            </SidebarAccordionItem>
+            <SidebarAccordionItem id="pages">
+              <SidebarButton icon={ICON_NAME.FILE_O} text="admin.group.pages" isOpen={isOpen} />
+              <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
+                <SidebarLink text="admin.label.section" href="/admin/capco/app/section/list" />
+                <SidebarLink text="admin.label.pages.contact" href="/admin/contact/list" />
+                <SidebarLink
+                  text="admin.label.pages.homepage"
+                  href="/admin/settings/pages.homepage/list"
+                />
+                <SidebarLink text="admin.label.pages.blog" href="/admin/settings/pages.blog/list" />
+                <SidebarLink
+                  text="admin.label.pages.events"
+                  href="/admin/settings/pages.events/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.themes"
+                  href="/admin/settings/pages.themes/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.projects"
+                  href="/admin/settings/pages.projects/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.registration"
+                  href="/admin/settings/pages.registration/list"
+                />
+                {features.members_list && (
+                  <SidebarLink
+                    text="admin.label.pages.members"
+                    href="/admin/settings/pages.members/list"
+                  />
+                )}
+                <SidebarLink
+                  text="admin.label.pages.login"
+                  href="/admin/settings/pages.login/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.footer"
+                  href="/admin/settings/pages.footer/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.cookies"
+                  href="/admin/settings/pages.cookies/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.privacy"
+                  href="/admin/settings/pages.privacy/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.legal"
+                  href="/admin/settings/pages.legal/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.charter"
+                  href="/admin/settings/pages.charter/list"
+                />
+                <SidebarLink
+                  text="admin.label.pages.shield"
+                  href="/admin/settings/pages.shield/list"
+                />
+              </SidebarAccordionPanel>
+            </SidebarAccordionItem>
+            {features.unstable__emailing ? (
+              <SidebarAccordionItem id="emailing">
+                <SidebarButton
+                  icon={ICON_NAME.ENVELOPE_O}
+                  text="admin.group.emailing"
+                  isOpen={isOpen}
+                />
+                <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
+                  <SidebarLink text="admin-menu-campaign-list" href="/admin/mailingCampaign/list" />
+                  <SidebarLink text="admin-menu-emailing-list" href="/admin/mailingList/list" />
+                </SidebarAccordionPanel>
+              </SidebarAccordionItem>
+            ) : null}
+          </Accordion>
+
+          {features.unstable__analytics_page && (
+            <SidebarLink
+              text="admin.label.analytics"
+              href="/admin/capco/analytics/list"
+              icon="PIE_CHART"
+              fontSize={3}
+              p={3}
+              width="100%"
+              beta
+            />
+          )}
+        </Flex>
+
         {isOpen && (
           <Text
             as="span"

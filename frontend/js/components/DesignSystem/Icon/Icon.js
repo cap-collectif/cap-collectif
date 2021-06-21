@@ -63,6 +63,7 @@ export const ICON_NAME = {
   ENVELOPE_O: 'ENVELOPE_O',
   LOCK: 'LOCK',
   PRINT: 'PRINT',
+  PIE_CHART: 'PIE_CHART',
 };
 
 export const ICON_SIZE = {

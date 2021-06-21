@@ -6,7 +6,7 @@ import { SidebarLink } from './SidebarLink';
 
 describe('<SidebarLink />', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<SidebarLink text="Réglages" url="/réglages" />);
+    const wrapper = shallow(<SidebarLink text="Réglages" href="/réglages" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

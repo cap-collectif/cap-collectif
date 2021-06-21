@@ -5,12 +5,24 @@ exports[`<SidebarLink /> renders correctly 1`] = `
   _css="#BEC4CB"
   _css2="#FAFCFF"
   _css3="#FAFCFF"
+  alignItems="center"
+  display="flex"
+  flexDirection="row"
   fontSize={13}
   href="/réglages"
+  justifyContent="space-between"
   p={1}
-  position="relative"
   width="120%"
 >
-  Réglages
+  <AppBox
+    position="relative"
+  >
+    <Text
+      as="span"
+      verticalAlign="middle"
+    >
+      Réglages
+    </Text>
+  </AppBox>
 </SidebarLink___StyledLink>
 `;

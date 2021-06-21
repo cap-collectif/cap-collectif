@@ -54,3 +54,4 @@ export { default as ENVELOPE_O } from './svg/envelope-o.svg';
 export { default as LOCK } from './svg/lock.svg';
 export { default as DOWNLOAD } from './svg/download-bottom.svg';
 export { default as PRINT } from './svg/print.svg';
+export { default as PIE_CHART } from './svg/pie-chart.svg';

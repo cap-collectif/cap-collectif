@@ -59,7 +59,8 @@ declare export const ICON_NAME = {
     COG_O: 'COG_O',
     ENVELOPE_O: 'ENVELOPE_O',
     LOCK: 'LOCK',
-    PRINT: 'PRINT'
+    PRINT: 'PRINT',
+    PIE_CHART: 'PIE_CHART'
 };
 
 declare export const ICON_SIZE = {

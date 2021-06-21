@@ -20,10 +20,10 @@ const FRAGMENT = graphql`
   }
 `;
 
-const formatSources = sources =>
+const formatSources = (sources, totalCount) =>
   sources.map(source => ({
     id: source.type,
-    percentage: source.totalCount,
+    percentage: parseInt(((source.totalCount / totalCount) * 100).toFixed(2), 10),
   }));
 
 const SectionTraffic = ({ traffic: trafficFragment }: Props): React.Node => {
@@ -32,7 +32,7 @@ const SectionTraffic = ({ traffic: trafficFragment }: Props): React.Node => {
 
   return (
     <Section label={intl.formatMessage({ id: 'traffic-source' })} flex={1}>
-      <TrafficChart percentages={formatSources(traffic.sources)} />
+      <TrafficChart percentages={formatSources(traffic.sources, traffic.totalCount)} />
     </Section>
   );
 };

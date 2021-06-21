@@ -11,24 +11,35 @@ import {
   type Filters,
   type FilterType,
 } from './DashboardPage.context';
+import { getFieldsFromUrl, updateQueryUrl } from '~/shared/utils/getFieldsFromUrl';
+
+const DEFAULT_FILTERS = {
+  startAt: moment('2014-11-08T17:44:56.144').format('MM/DD/YYYY'),
+  endAt: moment().format('MM/DD/YYYY'),
+  projectId: 'ALL',
+};
 
 const DashboardPageQueryContainer = (): React.Node => {
-  const [filters, setFilters] = React.useState<Filters>({
-    startAt: moment('2014-11-08T17:44:56.144').format('MM/DD/YYYY'),
-    endAt: moment().format('MM/DD/YYYY'),
-    projectId: 'ALL',
+  const url = React.useMemo(() => new URL(window.location.href), []);
+  const filtersFromUrl = getFieldsFromUrl<Filters>(url, {
+    default: DEFAULT_FILTERS,
+    whitelist: ['startAt', 'endAt'],
   });
+
+  const [filters, setFilters] = React.useState<Filters>(filtersFromUrl);
   const contextValue = React.useMemo(
     () => ({
       filters,
-      setFilters: (key: FilterType, value: string) =>
+      setFilters: (key: FilterType, value: string) => {
         setFilters(currentFilters => {
           const filtersUpdated = { ...currentFilters };
           filtersUpdated[key] = value;
           return filtersUpdated;
-        }),
+        });
+        updateQueryUrl(url, key, { value });
+      },
     }),
-    [filters, setFilters],
+    [filters, url],
   );
 
   return (
