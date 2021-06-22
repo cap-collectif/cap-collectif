@@ -1202,6 +1202,14 @@ InternalMutation:
                     inputType: UpdateHomePageProjectsSectionConfigurationInput
                     payloadType: UpdateHomePageProjectsSectionConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation", [value])'
+            register:
+                description: 'User registration'
+                access: "hasFeatureFlag('registration')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RegisterInput
+                    payloadType: RegisterPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation", [value])'
             cancelEmailChange:
                 description: 'Cancel email change'
                 access: '@=hasRole("ROLE_USER")'

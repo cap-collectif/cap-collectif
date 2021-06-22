@@ -1,0 +1,11 @@
+RegisterPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of register mutation'
+        fields:
+            user:
+                type: 'InternalUser'
+                description: 'The newly created user'
+            errorsCode:
+                type: '[RegisterErrorCode]'
+                description: 'Errors if mutation fails'

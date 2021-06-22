@@ -287,8 +287,7 @@ const mapStateToProps = (state: State, props: Props) => {
       questions: props.query ? questions : [],
       responses: props.query ? formatInitialResponsesValues(questions, []) : [],
       email: props.email,
-      invitationToken: props.invitationToken,
-      postRegistrationScript: props.query ? props.query.registrationScript : '',
+      invitationToken: props.invitationToken
     },
   };
 };

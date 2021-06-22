@@ -1,0 +1,38 @@
+RegisterInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of register mutation'
+        fields:
+            email:
+                type: 'Email!'
+                description: 'The user email'
+            username:
+                type: 'String!'
+                description: 'The user username'
+            plainPassword:
+                type: 'String!'
+                description: 'The user plainpassword'
+            captcha:
+                type: 'String'
+                description: 'The captcha to validate the registration'
+            consentInternalCommunication:
+                type: 'Boolean'
+                description: 'Whether or not the user accept to register to the internal communication newsletter'
+            consentExternalCommunication:
+                type: 'Boolean'
+                description: 'Whether or not the user accept to register to the external communication newsletter'
+            invitationToken:
+                type: 'String'
+                description: 'When the user is invited, represents the token attached to the registration link'
+            locale:
+                type: 'String'
+                description: 'The user locale'
+            responses:
+                type: '[ResponseInput]!'
+                description: 'List of responses of optionnal questions set by the admin'
+            userType:
+                type: 'String'
+                description: 'The user userType'
+            zipcode:
+                type: 'String'
+                description: 'The user zipcode'

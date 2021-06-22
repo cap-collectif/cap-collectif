@@ -1,0 +1,33 @@
+RegisterErrorCode:
+    type: enum
+    config:
+        name: RegisterErrorCode
+        description: 'Available errors on register mutations.'
+        values:
+            EMAIL_ALREADY_USED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::EMAIL_ALREADY_USED")'
+                description: 'The email is already registered'
+            EMAIL_DOMAIN_NOT_AUTHORIZED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::EMAIL_DOMAIN_NOT_AUTHORIZED")'
+                description: 'The email domain is not authorized'
+            CAPTCHA_INVALID:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::CAPTCHA_INVALID")'
+                description: 'The captcha is invalid'
+            REGISTER_FEATURE_NOT_ENABLED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::REGISTER_FEATURE_NOT_ENABLED")'
+                description: 'The register feature is not enabled'
+            USERNAME_BLANK:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::USERNAME_BLANK")'
+                description: 'The username is blank'
+            EMAIL_BLANK:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::EMAIL_BLANK")'
+                description: 'The email is blank'
+            PASSWORD_BLANK:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::PASSWORD_BLANK")'
+                description: 'The password is blank'
+            EMAIL_THROWABLE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::EMAIL_THROWABLE")'
+                description: 'The email is throwable'
+            NO_EXTRA_FIELDS:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\RegisterMutation::NO_EXTRA_FIELDS")'
+                description: 'The form should not contain extra fields'

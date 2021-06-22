@@ -1,6 +1,5 @@
 // @flow
 import { change, SubmissionError } from 'redux-form';
-import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
@@ -8,6 +7,8 @@ import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import RegisterMutation from '~/mutations/RegisterMutation';
+import type { RegisterMutationResponse } from '~relay/RegisterMutation.graphql';
 import CancelEmailChangeMutation from '~/mutations/CancelEmailChangeMutation';
 import ResendEmailConfirmationMutation from '~/mutations/ResendEmailConfirmationMutation';
 import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutation';
@@ -250,7 +251,11 @@ export const login = (
     });
 };
 
-export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, query }: Props) => {
+export const register = async (
+  values: Object,
+  dispatch: Dispatch,
+  { shieldEnabled, query }: Props,
+) => {
   const form = {
     ...values,
     questions: undefined,
@@ -261,67 +266,63 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
   if (values.questions && values.questions.length > 0) {
     form.responses = formatSubmitResponses(values.responses, values.questions);
   }
-  return Fetcher.post('/users', form)
-    .then(() => {
-      if (shieldEnabled && !form.invitationToken) {
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'success',
-            content: 'please-check-your-inbox',
-            values: { emailAddress: values.email },
-          },
-        });
-      } else {
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.add.user' },
-        });
 
-        const adCookie = !(
-          typeof CookieMonster.adCookieConsentValue() === 'undefined' ||
-          CookieMonster.adCookieConsentValue() === false
-        );
+  const response: RegisterMutationResponse = await RegisterMutation.commit({
+    input: form,
+  });
 
-        if (adCookie) {
-          // $FlowFixMe call to window function not currently well typed
-          window.App.dangerouslyExecuteHtml(query.registrationScript);
-        }
-
-        login(
-          { username: values.email, password: values.plainPassword, displayCaptcha: false },
-          dispatch,
-          { restrictConnection: false },
-        );
+  if (response.register?.errorsCode) {
+    if (typeof window.grecaptcha !== 'undefined') {
+      window.grecaptcha.reset();
+      dispatch(change('registration-form', 'captcha', null));
+    }
+    let errors = {};
+    response.register.errorsCode.forEach(errorCode => {
+      if (errorCode === 'CAPTCHA_INVALID') {
+        errors = { ...errors, captcha: 'registration.constraints.captcha.invalid' };
       }
-      dispatch(closeRegistrationModal());
-    })
-    .catch(error => {
-      const { response } = error;
-      const errors: Object = { _error: 'Registration failed !' };
-      if (typeof window.grecaptcha !== 'undefined') {
-        window.grecaptcha.reset();
-        dispatch(change('registration-form', 'captcha', null));
+      if (errorCode === 'EMAIL_ALREADY_USED') {
+        errors = { ...errors, email: 'registration.constraints.email.already_used' };
       }
-      if (response.errors) {
-        const { children } = response.errors;
-        if (children.email.errors && children.email.errors.length > 0) {
-          children.email.errors.map(string => {
-            if (string === 'already_used_email') {
-              errors.email = 'registration.constraints.email.already_used';
-            } else if (string === 'check_email.domain') {
-              errors.email = 'registration.constraints.email.not_authorized';
-            } else {
-              errors.email = `registration.constraints.${string}`;
-            }
-          });
-        }
-        if (children.captcha.errors && children.captcha.errors.length > 0) {
-          errors.captcha = 'registration.constraints.captcha.invalid';
-        }
-        throw new SubmissionError(errors);
+      if (errorCode === 'EMAIL_DOMAIN_NOT_AUTHORIZED') {
+        errors = { ...errors, email: 'registration.constraints.email.not_authorized' };
       }
     });
+    throw new SubmissionError(errors);
+  }
+
+  if (shieldEnabled && !form.invitationToken) {
+    FluxDispatcher.dispatch({
+      actionType: 'UPDATE_ALERT',
+      alert: {
+        bsStyle: 'success',
+        content: 'please-check-your-inbox',
+        values: { emailAddress: values.email },
+      },
+    });
+  } else {
+    FluxDispatcher.dispatch({
+      actionType: 'UPDATE_ALERT',
+      alert: { bsStyle: 'success', content: 'alert.success.add.user' },
+    });
+
+    const adCookie = !(
+      typeof CookieMonster.adCookieConsentValue() === 'undefined' ||
+      CookieMonster.adCookieConsentValue() === false
+    );
+
+    if (adCookie) {
+      // $FlowFixMe call to window function not currently well typed
+      window.App.dangerouslyExecuteHtml(query.registrationScript);
+    }
+
+    await login(
+      { username: values.email, password: values.plainPassword, displayCaptcha: false },
+      dispatch,
+      { restrictConnection: false },
+    );
+  }
+  dispatch(closeRegistrationModal());
 };
 
 export const cancelEmailChange = async (dispatch: Dispatch, previousEmail: string): Promise<*> => {

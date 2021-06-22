@@ -6485,6 +6485,9 @@ type Mutation {
   """Edit projects section in admin"""
   updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
 
+  """User registration"""
+  register(input: RegisterInput!): RegisterPayload
+
   """Cancel email change"""
   cancelEmailChange: CancelEmailChangePayload
 
@@ -10350,6 +10353,87 @@ input RegisterEmailDomainsInput {
 type RegisterEmailDomainsPayload {
   """the added domains"""
   domains: [EmailDomain!]
+  clientMutationId: String
+}
+
+"""Available errors on register mutations."""
+enum RegisterErrorCode {
+  """The email is already registered"""
+  EMAIL_ALREADY_USED
+
+  """The email domain is not authorized"""
+  EMAIL_DOMAIN_NOT_AUTHORIZED
+
+  """The captcha is invalid"""
+  CAPTCHA_INVALID
+
+  """The register feature is not enabled"""
+  REGISTER_FEATURE_NOT_ENABLED
+
+  """The username is blank"""
+  USERNAME_BLANK
+
+  """The email is blank"""
+  EMAIL_BLANK
+
+  """The password is blank"""
+  PASSWORD_BLANK
+
+  """The email is throwable"""
+  EMAIL_THROWABLE
+
+  """The form should not contain extra fields"""
+  NO_EXTRA_FIELDS
+}
+
+input RegisterInput {
+  """The user email"""
+  email: Email!
+
+  """The user username"""
+  username: String!
+
+  """The user plainpassword"""
+  plainPassword: String!
+
+  """The captcha to validate the registration"""
+  captcha: String
+
+  """
+  Whether or not the user accept to register to the internal communication newsletter
+  """
+  consentInternalCommunication: Boolean
+
+  """
+  Whether or not the user accept to register to the external communication newsletter
+  """
+  consentExternalCommunication: Boolean
+
+  """
+  When the user is invited, represents the token attached to the registration link
+  """
+  invitationToken: String
+
+  """The user locale"""
+  locale: String
+
+  """List of responses of optionnal questions set by the admin"""
+  responses: [ResponseInput]!
+
+  """The user userType"""
+  userType: String
+
+  """The user zipcode"""
+  zipcode: String
+  clientMutationId: String
+}
+
+type RegisterPayload {
+  """The newly created user"""
+  user: User
+
+  """Errors if mutation fails"""
+  errorsCode: [RegisterErrorCode]
   clientMutationId: String
 }
 
