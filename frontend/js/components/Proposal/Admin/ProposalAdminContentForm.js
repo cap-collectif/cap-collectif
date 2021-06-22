@@ -16,6 +16,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar, Glyphicon, ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
 import memoize from 'lodash/memoize';
 import styled, { type StyledComponent } from 'styled-components';
+import { isUrl } from '~/services/Validator';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
 import UpdateProposalFusionMutation from '~/mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
@@ -42,6 +43,7 @@ import Card from '~ds/Card/Card';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
+import Heading from '~ui/Primitives/Heading';
 
 type FormValues = {|
   media: ?{ id: Uuid },
@@ -58,6 +60,12 @@ type FormValues = {|
   address?: ?string,
   likers: [{ value: Uuid, label: string }],
   estimation: ?number,
+  webPageUrl: ?string,
+  facebookUrl: ?string,
+  twitterUrl: ?string,
+  instagramUrl: ?string,
+  linkedInUrl: ?string,
+  youtubeUrl: ?string,
 |};
 
 type RelayProps = {|
@@ -95,15 +103,22 @@ const RevisionButton = styled(Button)`
   }
 `;
 
-const NotationCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
-  h3 {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    color: ${styleGuideColors.blue800};
-    margin: 0;
+const ExternaLinksCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
+  .form-group {
+    max-width: 400px;
+    margin-top: 24px;
   }
 
+  label {
+    span {
+      font-weight: 400;
+      font-size: 14px;
+      color: ${styleGuideColors.gray900};
+    }
+  }
+`;
+
+const NotationCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
   .form-fields,
   #likers,
   #proposal_estimation {
@@ -159,7 +174,34 @@ const onSubmit = (
     author: isAdmin && values.author ? values.author.value : undefined,
     id: proposal.id,
     likers: values.likers.map(u => u.value),
+    webPageUrl: '',
+    facebookUrl: '',
+    twitterUrl: '',
+    instagramUrl: '',
+    linkedInUrl: '',
+    youtubeUrl: '',
   };
+
+  if (proposal && proposal.form.isUsingAnySocialNetworks) {
+    if (values.webPageUrl) {
+      input.webPageUrl = values.webPageUrl;
+    }
+    if (values.facebookUrl) {
+      input.facebookUrl = values.facebookUrl;
+    }
+    if (values.twitterUrl) {
+      input.twitterUrl = values.twitterUrl;
+    }
+    if (values.instagramUrl) {
+      input.instagramUrl = values.instagramUrl;
+    }
+    if (values.linkedInUrl) {
+      input.linkedInUrl = values.linkedInUrl;
+    }
+    if (values.youtubeUrl) {
+      input.youtubeUrl = values.youtubeUrl;
+    }
+  }
 
   return ChangeProposalContentMutation.commit({
     input,
@@ -269,6 +311,58 @@ export const validateProposalContent = (
       values.summary.length > 140
         ? 'proposal.constraints.summary'
         : 'proposal.constraints.min.summary';
+  }
+  if (proposalForm.isUsingAnySocialNetworks) {
+    if (values.webPageUrl && !isUrl(values.webPageUrl)) {
+      errors.webPageUrl = 'error-webPage-url';
+    }
+
+    if (
+      values.facebookUrl &&
+      (values.facebookUrl.indexOf('facebook.com') === -1 || !isUrl(values.facebookUrl))
+    ) {
+      errors.facebookUrl = {
+        id: 'error-invalid-facebook-url',
+      };
+    }
+
+    if (
+      values.twitterUrl &&
+      (values.twitterUrl.indexOf('twitter.com') === -1 || !isUrl(values.twitterUrl))
+    ) {
+      errors.twitterUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'Twitter' },
+      };
+    }
+
+    if (
+      values.instagramUrl &&
+      (values.instagramUrl.indexOf('instagram.com') === -1 || !isUrl(values.instagramUrl))
+    ) {
+      errors.instagramUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'Instagram' },
+      };
+    }
+
+    if (
+      values.linkedInUrl &&
+      (values.linkedInUrl.indexOf('linkedin.com') === -1 || !isUrl(values.linkedInUrl))
+    ) {
+      errors.linkedInUrl = {
+        id: 'error-invalid-socialNetwork-url',
+        values: { SocialNetworkName: 'LinkedIn' },
+      };
+    }
+    if (
+      values.youtubeUrl &&
+      (values.youtubeUrl.indexOf('youtube.com') === -1 || !isUrl(values.youtubeUrl))
+    ) {
+      errors.youtubeUrl = {
+        id: 'error-invalid-youtube-url',
+      };
+    }
   }
 
   const responsesError = validateResponses(
@@ -580,12 +674,91 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               />
             </div>
           </div>
+          {/* on each field check if proposalForm use the field */}
+          {proposal.form.isUsingAnySocialNetworks && (
+            <ExternaLinksCard paddingY={8} mt={6} backgroundColor={styleGuideColors.white}>
+              <Heading
+                as="h3"
+                color={styleGuideColors.blue800}
+                fontWeight="600"
+                fontSize="18px"
+                lineHeight="24px">
+                <FormattedMessage id="external-links" />
+              </Heading>
+              {proposal.form.usingWebPage && (
+                <Field
+                  id="proposal_wep_page"
+                  name="webPageUrl"
+                  placeholder={intl.formatMessage({ id: 'your-url' })}
+                  component={component}
+                  type="text"
+                  label={<FormattedMessage id="form.label_website" />}
+                />
+              )}
+              {proposal.form.usingTwitter && (
+                <Field
+                  id="proposal_twitter"
+                  name="twitterUrl"
+                  component={component}
+                  type="text"
+                  label={<FormattedMessage id="share.twitter" />}
+                  placeholder="twitter.com"
+                />
+              )}
+              {proposal.form.usingFacebook && (
+                <Field
+                  id="proposal_facebook"
+                  name="facebookUrl"
+                  component={component}
+                  type="text"
+                  label={<FormattedMessage id="share.facebook" />}
+                  placeholder="facebook.com"
+                />
+              )}
+              {proposal.form.usingInstagram && (
+                <Field
+                  id="proposal_instagram"
+                  name="instagramUrl"
+                  component={component}
+                  type="text"
+                  label={<FormattedMessage id="instagram" />}
+                  placeholder="instagram.com"
+                />
+              )}
+              {proposal.form.usingLinkedIn && (
+                <Field
+                  id="proposal_linkedin"
+                  name="linkedInUrl"
+                  component={component}
+                  type="text"
+                  label={<FormattedMessage id="share.linkedin" />}
+                  placeholder="linkedin.com"
+                />
+              )}
+              {proposal.form.usingYoutube && (
+                <Field
+                  id="proposal_youtube"
+                  name="youtubeUrl"
+                  component={component}
+                  type="text"
+                  label={<FormattedMessage id="youtube" />}
+                  placeholder="youtube.com"
+                />
+              )}
+            </ExternaLinksCard>
+          )}
           <Flex spacing={24} mt={24} mb={24} direction="row">
             <NotationCard backgroundColor="white" flex="1" px={24}>
               <Flex spacing="9px">
-                <h3 className="box-title">
+                <Text
+                  as="h3"
+                  color={styleGuideColors.blue800}
+                  fontWeight="600"
+                  fontSize="18px"
+                  lineHeight="24px"
+                  margin="0">
                   <FormattedMessage id="proposal.estimation" />
-                </h3>
+                </Text>
                 <a
                   style={{ marginTop: 3 }}
                   className="link"
@@ -672,9 +845,15 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
             </NotationCard>
             <NotationCard backgroundColor="white" flex="1" px={24}>
               <Flex spacing="9px">
-                <h3 className="box-title">
+                <Text
+                  as="h3"
+                  color={styleGuideColors.blue800}
+                  fontWeight="600"
+                  fontSize="18px"
+                  lineHeight="24px"
+                  margin="0">
                   <FormattedMessage id="admin.fields.proposal.likers" />
-                </h3>
+                </Text>
                 <a
                   style={{ marginTop: 3 }}
                   className="link"
@@ -809,6 +988,12 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
         value: u.id,
         label: u.displayName,
       })),
+      webPageUrl: proposal.webPageUrl ? proposal.webPageUrl : null,
+      facebookUrl: proposal.facebookUrl ? proposal.facebookUrl : null,
+      twitterUrl: proposal.twitterUrl ? proposal.twitterUrl : null,
+      instagramUrl: proposal.instagramUrl ? proposal.instagramUrl : null,
+      linkedInUrl: proposal.linkedInUrl ? proposal.linkedInUrl : null,
+      youtubeUrl: proposal.youtubeUrl ? proposal.youtubeUrl : null,
     },
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
   };
@@ -856,6 +1041,12 @@ export default createFragmentContainer(container, {
       title
       body
       summary
+      twitterUrl
+      webPageUrl
+      facebookUrl
+      instagramUrl
+      linkedInUrl
+      youtubeUrl
       address {
         json
         formatted
@@ -901,6 +1092,13 @@ export default createFragmentContainer(container, {
         usingCategories
         categoryMandatory
         usingAddress
+        usingFacebook
+        usingWebPage
+        usingTwitter
+        usingInstagram
+        usingYoutube
+        usingLinkedIn
+        isUsingAnySocialNetworks
       }
     }
   `,

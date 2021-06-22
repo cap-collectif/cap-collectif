@@ -15,6 +15,7 @@ const proposal = {
     $fragmentRefs,
   },
   tipsmeeeId: null,
+  isUsingAnySocialNetworks: true,
   form: {
     usingCategories: true,
     usingThemes: false,
@@ -69,7 +70,11 @@ describe('<ProposalPageAside />', () => {
       <ProposalPageAside
         proposal={{
           ...proposal,
-          form: { usingCategories: true, usingThemes: true, usingTipsmeee: true },
+          form: {
+            usingCategories: true,
+            usingThemes: true,
+            usingTipsmeee: true,
+          },
           tipsmeeeId: 'aTipsmeCode',
         }}
         {...props}

@@ -22,6 +22,12 @@ describe('<ProposalAdminContentForm />', () => {
     address: null,
     estimation: null,
     likers: [{ value: '1', label: 'liker-1' }],
+    facebookUrl: 'https://facebook.com',
+    webPageUrl: '',
+    twitterUrl: 'https://twitter.com',
+    instagramUrl: 'https://instagram.com',
+    linkedInUrl: 'https://linkedin.com',
+    youtubeUrl: '',
   };
 
   const props = {
@@ -61,6 +67,12 @@ describe('<ProposalAdminContentForm />', () => {
         { id: '2', title: 'Child 2', adminUrl: 'http://capco.dev/child2' },
       ],
       media: { id: '1', url: '' },
+      facebookUrl: 'https://facebook.com',
+      webPageUrl: '',
+      twitterUrl: 'https://twitter.com',
+      instagramUrl: 'https://instagram.com',
+      linkedInUrl: 'https://linkedin.com',
+      youtubeUrl: '',
       form: {
         id: 'form1',
         adminUrl: 'http://capco.dev/pfrom',
@@ -111,6 +123,13 @@ describe('<ProposalAdminContentForm />', () => {
         usingCategories: true,
         categoryMandatory: true,
         usingAddress: true,
+        usingFacebook: true,
+        usingWebPage: true,
+        usingTwitter: true,
+        usingInstagram: true,
+        usingYoutube: true,
+        usingLinkedIn: true,
+        isUsingAnySocialNetworks: true,
       },
       author: {
         id: '1',

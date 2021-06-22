@@ -321,6 +321,102 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     name="media"
     type="image"
   />
+  <ProposalForm__ExternaLinks
+    backgroundColor="#ffffff"
+    paddingY={8}
+  >
+    <Text
+      as="h3"
+      color="#272B30"
+      fontSize="14px"
+      fontWeight="600"
+      lineHeight="24px"
+      mb={6}
+    >
+      <FormattedMessage
+        id="your-external-links"
+        values={Object {}}
+      />
+    </Text>
+    <Field
+      component={[Function]}
+      id="proposal_wep_page"
+      label={
+        <FormattedMessage
+          id="form.label_website"
+          values={Object {}}
+        />
+      }
+      name="webPageUrl"
+      placeholder="your-url"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_twitter"
+      label={
+        <FormattedMessage
+          id="share.twitter"
+          values={Object {}}
+        />
+      }
+      name="twitterUrl"
+      placeholder="twitter.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_facebook"
+      label={
+        <FormattedMessage
+          id="share.facebook"
+          values={Object {}}
+        />
+      }
+      name="facebookUrl"
+      placeholder="facebook.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_instagram"
+      label={
+        <FormattedMessage
+          id="instagram"
+          values={Object {}}
+        />
+      }
+      name="instagramUrl"
+      placeholder="instagram.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_linkedin"
+      label={
+        <FormattedMessage
+          id="share.linkedin"
+          values={Object {}}
+        />
+      }
+      name="linkedInUrl"
+      placeholder="linkedin.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_youtube"
+      label={
+        <FormattedMessage
+          id="youtube"
+          values={Object {}}
+        />
+      }
+      name="youtubeUrl"
+      placeholder="youtube.com"
+      type="text"
+    />
+  </ProposalForm__ExternaLinks>
   <FormattedHTMLMessage
     id="configure-my-tipsmeee"
     tagName="p"
@@ -710,6 +806,102 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     name="media"
     type="image"
   />
+  <ProposalForm__ExternaLinks
+    backgroundColor="#ffffff"
+    paddingY={8}
+  >
+    <Text
+      as="h3"
+      color="#272B30"
+      fontSize="14px"
+      fontWeight="600"
+      lineHeight="24px"
+      mb={6}
+    >
+      <FormattedMessage
+        id="your-external-links"
+        values={Object {}}
+      />
+    </Text>
+    <Field
+      component={[Function]}
+      id="proposal_wep_page"
+      label={
+        <FormattedMessage
+          id="form.label_website"
+          values={Object {}}
+        />
+      }
+      name="webPageUrl"
+      placeholder="your-url"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_twitter"
+      label={
+        <FormattedMessage
+          id="share.twitter"
+          values={Object {}}
+        />
+      }
+      name="twitterUrl"
+      placeholder="twitter.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_facebook"
+      label={
+        <FormattedMessage
+          id="share.facebook"
+          values={Object {}}
+        />
+      }
+      name="facebookUrl"
+      placeholder="facebook.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_instagram"
+      label={
+        <FormattedMessage
+          id="instagram"
+          values={Object {}}
+        />
+      }
+      name="instagramUrl"
+      placeholder="instagram.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_linkedin"
+      label={
+        <FormattedMessage
+          id="share.linkedin"
+          values={Object {}}
+        />
+      }
+      name="linkedInUrl"
+      placeholder="linkedin.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_youtube"
+      label={
+        <FormattedMessage
+          id="youtube"
+          values={Object {}}
+        />
+      }
+      name="youtubeUrl"
+      placeholder="youtube.com"
+      type="text"
+    />
+  </ProposalForm__ExternaLinks>
 </form>
 `;
 
@@ -1034,6 +1226,102 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     name="media"
     type="image"
   />
+  <ProposalForm__ExternaLinks
+    backgroundColor="#ffffff"
+    paddingY={8}
+  >
+    <Text
+      as="h3"
+      color="#272B30"
+      fontSize="14px"
+      fontWeight="600"
+      lineHeight="24px"
+      mb={6}
+    >
+      <FormattedMessage
+        id="your-external-links"
+        values={Object {}}
+      />
+    </Text>
+    <Field
+      component={[Function]}
+      id="proposal_wep_page"
+      label={
+        <FormattedMessage
+          id="form.label_website"
+          values={Object {}}
+        />
+      }
+      name="webPageUrl"
+      placeholder="your-url"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_twitter"
+      label={
+        <FormattedMessage
+          id="share.twitter"
+          values={Object {}}
+        />
+      }
+      name="twitterUrl"
+      placeholder="twitter.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_facebook"
+      label={
+        <FormattedMessage
+          id="share.facebook"
+          values={Object {}}
+        />
+      }
+      name="facebookUrl"
+      placeholder="facebook.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_instagram"
+      label={
+        <FormattedMessage
+          id="instagram"
+          values={Object {}}
+        />
+      }
+      name="instagramUrl"
+      placeholder="instagram.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_linkedin"
+      label={
+        <FormattedMessage
+          id="share.linkedin"
+          values={Object {}}
+        />
+      }
+      name="linkedInUrl"
+      placeholder="linkedin.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_youtube"
+      label={
+        <FormattedMessage
+          id="youtube"
+          values={Object {}}
+        />
+      }
+      name="youtubeUrl"
+      placeholder="youtube.com"
+      type="text"
+    />
+  </ProposalForm__ExternaLinks>
 </form>
 `;
 
@@ -1358,6 +1646,102 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     name="media"
     type="image"
   />
+  <ProposalForm__ExternaLinks
+    backgroundColor="#ffffff"
+    paddingY={8}
+  >
+    <Text
+      as="h3"
+      color="#272B30"
+      fontSize="14px"
+      fontWeight="600"
+      lineHeight="24px"
+      mb={6}
+    >
+      <FormattedMessage
+        id="your-external-links"
+        values={Object {}}
+      />
+    </Text>
+    <Field
+      component={[Function]}
+      id="proposal_wep_page"
+      label={
+        <FormattedMessage
+          id="form.label_website"
+          values={Object {}}
+        />
+      }
+      name="webPageUrl"
+      placeholder="your-url"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_twitter"
+      label={
+        <FormattedMessage
+          id="share.twitter"
+          values={Object {}}
+        />
+      }
+      name="twitterUrl"
+      placeholder="twitter.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_facebook"
+      label={
+        <FormattedMessage
+          id="share.facebook"
+          values={Object {}}
+        />
+      }
+      name="facebookUrl"
+      placeholder="facebook.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_instagram"
+      label={
+        <FormattedMessage
+          id="instagram"
+          values={Object {}}
+        />
+      }
+      name="instagramUrl"
+      placeholder="instagram.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_linkedin"
+      label={
+        <FormattedMessage
+          id="share.linkedin"
+          values={Object {}}
+        />
+      }
+      name="linkedInUrl"
+      placeholder="linkedin.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_youtube"
+      label={
+        <FormattedMessage
+          id="youtube"
+          values={Object {}}
+        />
+      }
+      name="youtubeUrl"
+      placeholder="youtube.com"
+      type="text"
+    />
+  </ProposalForm__ExternaLinks>
 </form>
 `;
 
@@ -1682,5 +2066,101 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     name="media"
     type="image"
   />
+  <ProposalForm__ExternaLinks
+    backgroundColor="#ffffff"
+    paddingY={8}
+  >
+    <Text
+      as="h3"
+      color="#272B30"
+      fontSize="14px"
+      fontWeight="600"
+      lineHeight="24px"
+      mb={6}
+    >
+      <FormattedMessage
+        id="your-external-links"
+        values={Object {}}
+      />
+    </Text>
+    <Field
+      component={[Function]}
+      id="proposal_wep_page"
+      label={
+        <FormattedMessage
+          id="form.label_website"
+          values={Object {}}
+        />
+      }
+      name="webPageUrl"
+      placeholder="your-url"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_twitter"
+      label={
+        <FormattedMessage
+          id="share.twitter"
+          values={Object {}}
+        />
+      }
+      name="twitterUrl"
+      placeholder="twitter.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_facebook"
+      label={
+        <FormattedMessage
+          id="share.facebook"
+          values={Object {}}
+        />
+      }
+      name="facebookUrl"
+      placeholder="facebook.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_instagram"
+      label={
+        <FormattedMessage
+          id="instagram"
+          values={Object {}}
+        />
+      }
+      name="instagramUrl"
+      placeholder="instagram.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_linkedin"
+      label={
+        <FormattedMessage
+          id="share.linkedin"
+          values={Object {}}
+        />
+      }
+      name="linkedInUrl"
+      placeholder="linkedin.com"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_youtube"
+      label={
+        <FormattedMessage
+          id="youtube"
+          values={Object {}}
+        />
+      }
+      name="youtubeUrl"
+      placeholder="youtube.com"
+      type="text"
+    />
+  </ProposalForm__ExternaLinks>
 </form>
 `;

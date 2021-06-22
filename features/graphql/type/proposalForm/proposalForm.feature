@@ -169,12 +169,12 @@ Scenario: GraphQL client wants to get proposalform configuration
   {
     proposalForm: node(id: "proposalformIdfBP3") {
       ... on ProposalForm {
-        isUsingWebPage
-        isUsingTwitter
-        isUsingFacebook
-        isUsingInstagram
-        isUsingYoutube
-        isUsingLinkedIn
+        usingWebPage
+        usingTwitter
+        usingFacebook
+        usingInstagram
+        usingYoutube
+        usingLinkedIn
       }
     }
   }
@@ -184,12 +184,12 @@ Scenario: GraphQL client wants to get proposalform configuration
   {
     "data": {
       "proposalForm": {
-        "isUsingWebPage": true,
-        "isUsingTwitter": true,
-        "isUsingFacebook": true,
-        "isUsingInstagram": true,
-        "isUsingYoutube": true,
-        "isUsingLinkedIn": true
+        "usingWebPage": true,
+        "usingTwitter": true,
+        "usingFacebook": true,
+        "usingInstagram": true,
+        "usingYoutube": true,
+        "usingLinkedIn": true
       }
     }
   }

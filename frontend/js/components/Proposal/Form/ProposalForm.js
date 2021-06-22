@@ -59,6 +59,7 @@ import {
 } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import config from '~/config';
+import Text from '~ui/Primitives/Text';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -137,6 +138,12 @@ export type FormValues = {|
   draft: boolean,
   likers: [{ value: Uuid, label: string }],
   estimation: ?number,
+  twitterUrl?: ?string,
+  facebookUrl?: ?string,
+  youtubeUrl?: ?string,
+  webPageUrl?: ?string,
+  instagramUrl?: ?string,
+  linkedInUrl?: ?string,
 |};
 
 const onUnload = e => {
@@ -145,6 +152,21 @@ const onUnload = e => {
 };
 
 const memoizeAvailableQuestions: any = memoize(() => {});
+
+export const ExternaLinks: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  .form-group {
+    max-width: 400px;
+    margin-bottom: 24px;
+  }
+
+  label {
+    span {
+      font-weight: 400;
+      font-size: 14px;
+      color: ${styleGuideColors.gray900};
+    }
+  }
+`;
 
 const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 24px;
@@ -171,6 +193,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     draft: values.draft,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
+    twitterUrl: values.twitterUrl,
+    facebookUrl: values.facebookUrl,
+    youtubeUrl: values.youtubeUrl,
+    webPageUrl: values.webPageUrl,
+    instagramUrl: values.instagramUrl,
+    linkedInUrl: values.linkedInUrl,
   };
 
   if (!proposalForm.step) {
@@ -699,7 +727,79 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.illustrationHelpText}
           />
         )}
-
+        {proposalForm.isUsingAnySocialNetworks && (
+          <ExternaLinks paddingY={8} backgroundColor={styleGuideColors.white}>
+            <Text
+              as="h3"
+              fontWeight="600"
+              fontSize="14px"
+              lineHeight="24px"
+              mb={6}
+              color={styleGuideColors.gray900}>
+              <FormattedMessage id="your-external-links" />
+            </Text>
+            {proposalForm.usingWebPage && (
+              <Field
+                id="proposal_wep_page"
+                name="webPageUrl"
+                placeholder={intl.formatMessage({ id: 'your-url' })}
+                component={component}
+                type="text"
+                label={<FormattedMessage id="form.label_website" />}
+              />
+            )}
+            {proposalForm.usingTwitter && (
+              <Field
+                id="proposal_twitter"
+                name="twitterUrl"
+                component={component}
+                type="text"
+                label={<FormattedMessage id="share.twitter" />}
+                placeholder="twitter.com"
+              />
+            )}
+            {proposalForm.usingFacebook && (
+              <Field
+                id="proposal_facebook"
+                name="facebookUrl"
+                component={component}
+                type="text"
+                label={<FormattedMessage id="share.facebook" />}
+                placeholder="facebook.com"
+              />
+            )}
+            {proposalForm.usingInstagram && (
+              <Field
+                id="proposal_instagram"
+                name="instagramUrl"
+                component={component}
+                type="text"
+                label={<FormattedMessage id="instagram" />}
+                placeholder="instagram.com"
+              />
+            )}
+            {proposalForm.usingLinkedIn && (
+              <Field
+                id="proposal_linkedin"
+                name="linkedInUrl"
+                component={component}
+                type="text"
+                label={<FormattedMessage id="share.linkedin" />}
+                placeholder="linkedin.com"
+              />
+            )}
+            {proposalForm.usingYoutube && (
+              <Field
+                id="proposal_youtube"
+                name="youtubeUrl"
+                component={component}
+                type="text"
+                label={<FormattedMessage id="youtube" />}
+                placeholder="youtube.com"
+              />
+            )}
+          </ExternaLinks>
+        )}
         {features.unstable__tipsmeee && proposalForm.usingTipsmeee && (
           <>
             <FormattedHTMLMessage id="configure-my-tipsmeee" tagName="p" />
@@ -765,6 +865,12 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
       addressText: proposal && proposal.address ? proposal.address.formatted : '',
       address: (proposal && proposal.address && proposal.address.json) || undefined,
       responses: defaultResponses,
+      twitterUrl: proposal ? proposal.twitterUrl : null,
+      facebookUrl: proposal ? proposal.facebookUrl : null,
+      youtubeUrl: proposal ? proposal.youtubeUrl : null,
+      webPageUrl: proposal ? proposal.webPageUrl : null,
+      instagramUrl: proposal ? proposal.instagramUrl : null,
+      linkedInUrl: proposal ? proposal.linkedInUrl : null,
     },
     titleValue: selector(state, 'title'),
     tipsmeeeIdDisabled: proposal && proposal.tipsmeeeId,
@@ -827,6 +933,12 @@ export default createFragmentContainer(container, {
         url
       }
       tipsmeeeId @include(if: $isTipsMeeeEnabled)
+      twitterUrl
+      facebookUrl
+      youtubeUrl
+      webPageUrl
+      instagramUrl
+      linkedInUrl
     }
   `,
   proposalForm: graphql`
@@ -876,6 +988,13 @@ export default createFragmentContainer(container, {
       usingIllustration
       usingTipsmeee
       tipsmeeeHelpText
+      usingFacebook
+      usingWebPage
+      usingTwitter
+      usingInstagram
+      usingYoutube
+      usingLinkedIn
+      isUsingAnySocialNetworks
     }
   `,
 });

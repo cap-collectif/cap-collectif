@@ -88,6 +88,13 @@ describe('<ProposalForm />', () => {
     proposalInAZoneRequired: true,
     usingTipsmeee: false,
     tipsmeeeHelpText: null,
+    usingFacebook: true,
+    usingWebPage: true,
+    usingTwitter: true,
+    usingInstagram: true,
+    usingYoutube: true,
+    usingLinkedIn: true,
+    isUsingAnySocialNetworks: true,
   };
   const proposalForm = {
     id: 'proposalForm1',
@@ -170,6 +177,13 @@ describe('<ProposalForm />', () => {
     descriptionHelpText: 'Description help',
     addressHelpText: 'Address help',
     proposalInAZoneRequired: true,
+    usingFacebook: true,
+    usingWebPage: true,
+    usingTwitter: true,
+    usingInstagram: true,
+    usingYoutube: true,
+    usingLinkedIn: true,
+    isUsingAnySocialNetworks: true,
   };
 
   const props = {
@@ -218,6 +232,12 @@ describe('<ProposalForm />', () => {
         size: '50',
         name: 'paul.jpg',
       },
+      twitterUrl: 'http://twitter.com',
+      facebookUrl: 'http://facebook.com',
+      youtubeUrl: 'http://youtube.com',
+      webPageUrl: 'http://cap-collectif.com',
+      instagramUrl: 'http://instagram.com',
+      linkedInUrl: 'http://linkedin.com',
       $refType,
     },
   };

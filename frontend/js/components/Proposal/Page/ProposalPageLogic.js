@@ -181,7 +181,16 @@ export const ProposalPageLogic = ({
               )}
             </Tab.Pane>
             <Tab.Pane eventKey="blog">
-              <ProposalPageBlog proposal={proposal} />
+              <ProposalPageBody className="d-flex">
+                <ProposalPageBlog proposal={proposal} />
+                <ProposalPageAside
+                  proposal={proposal}
+                  isAnalysing={(proposal && isAnalysing && hasAnalysis) || isMobile}
+                  hasVotableStep={hasVotableStep}
+                  isAuthenticated={isAuthenticated}
+                  isActualityTab
+                />
+              </ProposalPageBody>
             </Tab.Pane>
             <Tab.Pane eventKey="followers">
               <ProposalPageFollowers proposal={proposal} pageAdmin={false} />

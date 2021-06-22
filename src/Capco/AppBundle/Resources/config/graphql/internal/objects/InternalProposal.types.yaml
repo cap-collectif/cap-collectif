@@ -273,3 +273,6 @@ InternalProposal:
             youtubeUrl:
                 type: 'URI'
                 description: 'link of Youtube channel'
+            isUsingAnySocialNetworks:
+                type: 'Boolean!'
+                description: 'true if proposal got any social network value and proposal form using any social networks'

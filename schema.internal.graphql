@@ -8317,6 +8317,11 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """link of Youtube channel"""
   youtubeUrl: URI
+
+  """
+  true if proposal got any social network value and proposal form using any social networks
+  """
+  isUsingAnySocialNetworks: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -8785,22 +8790,22 @@ type ProposalForm implements Node & UniformResourceLocatable {
   tipsmeeeHelpText: String
 
   """Proposal form using web page field"""
-  isUsingWebPage: Boolean!
+  usingWebPage: Boolean!
 
   """Proposal form using Twitter field"""
-  isUsingTwitter: Boolean!
+  usingTwitter: Boolean!
 
   """Proposal form using Facebook field"""
-  isUsingFacebook: Boolean!
+  usingFacebook: Boolean!
 
   """Proposal form using Instagram field"""
-  isUsingInstagram: Boolean!
+  usingInstagram: Boolean!
 
   """Proposal form using Youtube field"""
-  isUsingYoutube: Boolean!
+  usingYoutube: Boolean!
 
   """Proposal form using LinkedIn field"""
-  isUsingLinkedIn: Boolean!
+  usingLinkedIn: Boolean!
 
   """Proposal form using any social networks field"""
   isUsingAnySocialNetworks: Boolean!
@@ -13384,22 +13389,22 @@ input UpdateProposalFormInput {
   tipsmeeeHelpText: String
 
   """Can proposal contain web site url"""
-  usingWebPage: Boolean
+  usingWebPage: Boolean! = false
 
   """Can proposal contain facebook url"""
-  usingFacebook: Boolean
+  usingFacebook: Boolean! = false
 
   """Can proposal contain twitter url"""
-  usingTwitter: Boolean
+  usingTwitter: Boolean! = false
 
   """Can proposal contain instagram url"""
-  usingInstagram: Boolean
+  usingInstagram: Boolean! = false
 
   """Can proposal contain youtube url"""
-  usingYoutube: Boolean
+  usingYoutube: Boolean! = false
 
   """Can proposal contain linkedin url"""
-  usingLinkedIn: Boolean
+  usingLinkedIn: Boolean! = false
   clientMutationId: String
 }
 

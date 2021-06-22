@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 import { Panel, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form';
@@ -21,6 +22,11 @@ import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/Pro
 import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm';
 import SectionDisplayMode from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
 import type { ProposalFormAdminConfigurationFormRefetchQueryVariables } from '~relay/ProposalFormAdminConfigurationFormRefetchQuery.graphql';
+import AppBox from '~ui/Primitives/AppBox';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
+import { styleGuideColors } from '~/utils/colors';
+import Heading from '~ui/Primitives/Heading';
 
 type RelayProps = {|
   +proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
@@ -284,6 +290,14 @@ const headerPanelUsingIllustration = (
     <div className="clearfix" />
   </div>
 );
+
+const ExternaLinksFlex: StyledComponent<{}, {}, typeof Flex> = styled(Flex)`
+  .form-group {
+    max-width: 400px;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+`;
 
 const getCategoryImage = (
   category: {
@@ -736,7 +750,6 @@ export const ProposalFormAdminConfigurationForm = ({
             </Panel.Collapse>
           </Panel>
         )}
-
         {query.viewer.isSuperAdmin && (
           <Field
             id="proposal_form_canContact_field"
@@ -747,40 +760,121 @@ export const ProposalFormAdminConfigurationForm = ({
           />
         )}
       </div>
-      <div className="box box-primary container-fluid mt-10">
-        <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
-          </h3>
+
+      <Flex
+        backgroundColor={styleGuideColors.white}
+        mt={4}
+        direction="column"
+        paddingY={8}
+        paddingX={7}>
+        <AppBox>
+          <Heading
+            as="h3"
+            fontWeight="600"
+            fontSize="18px"
+            lineHeight="24px"
+            color={styleGuideColors.blue800}>
+            <FormattedMessage id="external-links" />
+          </Heading>
+          <Text mt={2} color={styleGuideColors.gray500} fontSize="13px" lineHeight="16px" mb={8}>
+            <FormattedMessage id="authorize-external-links" />
+          </Text>
+        </AppBox>
+        <ExternaLinksFlex direction="column" alignContent="baseline" justifyItems="baseline">
+          <Field
+            name="usingWebPage"
+            component={component}
+            type="checkbox"
+            id="proposal_form_web_page"
+            className="mb-0 mt-0">
+            <Text>
+              <FormattedMessage id="form.label_website" />
+            </Text>
+          </Field>
+          <Field
+            name="usingTwitter"
+            component={component}
+            type="checkbox"
+            id="proposal_form_twitter">
+            <Text>
+              <FormattedMessage id="share.twitter" />
+            </Text>
+          </Field>
+          <Field
+            name="usingFacebook"
+            component={component}
+            type="checkbox"
+            id="proposal_form_facebook">
+            <Text>
+              <FormattedMessage id="share.facebook" />
+            </Text>
+          </Field>
+          <Field
+            name="usingInstagram"
+            component={component}
+            type="checkbox"
+            id="proposal_form_instagram">
+            <Text>
+              <FormattedMessage id="instagram" />
+            </Text>
+          </Field>
+          <Field
+            name="usingLinkedIn"
+            component={component}
+            type="checkbox"
+            id="proposal_form_linkedin">
+            <Text>
+              <FormattedMessage id="share.linkedin" />
+            </Text>
+          </Field>
+          <Field
+            name="usingYoutube"
+            component={component}
+            type="checkbox"
+            id="proposal_form_youtubr">
+            <Text>
+              <FormattedMessage id="youtube" />
+            </Text>
+          </Field>
+        </ExternaLinksFlex>
+      </Flex>
+
+      <AppBox mt={6}>
+        <div className="box box-primary container-fluid">
+          <div className="box-header">
+            <h3 className="box-title">
+              <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
+            </h3>
+          </div>
+          <FieldArray name="questions" component={ProposalFormAdminQuestions} formName={formName} />
+          <Field
+            name="allowAknowledge"
+            component={component}
+            type="checkbox"
+            id="proposal_form_allow_aknowledge">
+            <FormattedMessage id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor" />
+          </Field>
+          <ButtonToolbar className="box-content__toolbar">
+            <Button
+              disabled={invalid || pristine || submitting}
+              type="submit"
+              bsStyle="primary"
+              id="proposal-form-admin-content-save">
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+            </Button>
+            <Button bsStyle="danger" disabled>
+              <FormattedMessage id="global.delete" />
+            </Button>
+            <AlertForm
+              valid={valid}
+              invalid={invalid}
+              submitSucceeded={submitSucceeded}
+              submitFailed={submitFailed}
+              submitting={submitting}
+            />
+          </ButtonToolbar>
         </div>
-        <FieldArray name="questions" component={ProposalFormAdminQuestions} formName={formName} />
-        <Field
-          name="allowAknowledge"
-          component={component}
-          type="checkbox"
-          id="proposal_form_allow_aknowledge">
-          <FormattedMessage id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor" />
-        </Field>
-        <ButtonToolbar className="box-content__toolbar">
-          <Button
-            disabled={invalid || pristine || submitting}
-            type="submit"
-            bsStyle="primary"
-            id="proposal-form-admin-content-save">
-            <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-          </Button>
-          <Button bsStyle="danger" disabled>
-            <FormattedMessage id="global.delete" />
-          </Button>
-          <AlertForm
-            valid={valid}
-            invalid={invalid}
-            submitSucceeded={submitSucceeded}
-            submitFailed={submitFailed}
-            submitting={submitting}
-          />
-        </ButtonToolbar>
-      </div>
+      </AppBox>
     </form>
   );
 };
@@ -844,6 +938,12 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
         isGridViewEnabled: props.proposalForm.isGridViewEnabled,
         isListViewEnabled: props.proposalForm.isListViewEnabled,
       },
+      usingFacebook: props.proposalForm ? props.proposalForm.usingFacebook : null,
+      usingWebPage: props.proposalForm ? props.proposalForm.usingWebPage : null,
+      usingTwitter: props.proposalForm ? props.proposalForm.usingTwitter : null,
+      usingInstagram: props.proposalForm ? props.proposalForm.usingInstagram : null,
+      usingYoutube: props.proposalForm ? props.proposalForm.usingYoutube : null,
+      usingLinkedIn: props.proposalForm ? props.proposalForm.usingLinkedIn : null,
     },
     usingAddress: selector(state, 'usingAddress'),
     usingCategories: selector(state, 'usingCategories'),
@@ -854,6 +954,12 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     usingSummary: selector(state, 'usingSummary'),
     usingIllustration: selector(state, 'usingIllustration'),
     objectType: selector(state, 'objectType'),
+    usingFacebook: selector(state, 'usingFacebook'),
+    usingWebPage: selector(state, 'usingWebPage'),
+    usingTwitter: selector(state, 'usingTwitter'),
+    usingInstagram: selector(state, 'usingInstagram'),
+    usingYoutube: selector(state, 'usingYoutube'),
+    usingLinkedIn: selector(state, 'usingLinkedIn'),
     features: state.default.features,
     defaultLanguage: state.language.currentLanguage,
     isMapViewEnabled: selector(state, 'viewEnabled')?.isMapViewEnabled,
@@ -904,6 +1010,12 @@ export default createRefetchContainer(
         tipsmeeeHelpText
         allowAknowledge
         objectType
+        usingFacebook
+        usingWebPage
+        usingTwitter
+        usingInstagram
+        usingYoutube
+        usingLinkedIn
         districts {
           id
           translations {

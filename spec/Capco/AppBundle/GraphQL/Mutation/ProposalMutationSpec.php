@@ -298,4 +298,41 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
     }
+
+    public function it_hydrate_social_networks(
+        Proposal $proposal,
+        ProposalForm $proposalForm,
+        ProposalSocialNetworks $proposalSocialNetworks
+    ) {
+        $create = false;
+        $values = [];
+
+        $proposalSocialNetworks->getWebPageUrl()->willReturn('test');
+        $proposalForm->isUsingWebPage()->willReturn(true);
+        $proposalForm->isUsingFacebook()->willReturn(false);
+        $proposalForm->isUsingTwitter()->willReturn(true);
+        $proposalForm->isUsingInstagram()->willReturn(true);
+        $proposalForm->isUsingLinkedIn()->willReturn(true);
+        $proposalForm->isUsingYoutube()->willReturn(true);
+        $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
+        $proposalSocialNetworks->getProposal()->willReturn($proposal);
+        $values['otherField'] = 'value';
+        $values['webPageUrl'] = null;
+        $values['facebookUrl'] = 'facebookUrl';
+        $values['twitterUrl'] = 'twitterUrl';
+        $values['instagramUrl'] = 'instagramUrl';
+        $values['linkedInUrl'] = 'linkedInUrl';
+        $values['youtubeUrl'] = 'youtubeUrl';
+
+        $proposalSocialNetworks->setWebPageUrl(null)->shouldBeCalled();
+        $proposalSocialNetworks->setFacebookUrl('facebookUrl')->shouldNotBeCalled();
+        $proposalSocialNetworks->setTwitterUrl('twitterUrl')->shouldBeCalled();
+        $proposalSocialNetworks->setInstagramUrl('instagramUrl')->shouldBeCalled();
+        $proposalSocialNetworks->setLinkedInUrl('linkedInUrl')->shouldBeCalled();
+        $proposalSocialNetworks->setYoutubeUrl('youtubeUrl')->shouldBeCalled();
+
+        $this->hydrateSocialNetworks($values, $proposal, $proposalForm, $create)->shouldReturn([
+            'otherField' => 'value',
+        ]);
+    }
 }

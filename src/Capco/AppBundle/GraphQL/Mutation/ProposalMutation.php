@@ -429,8 +429,7 @@ class ProposalMutation implements ContainerAwareInterface
             $proposal->setStatus($defaultStatus);
         }
 
-        $this->hydrateSocialNetworks($values, $proposal, $proposalForm, true);
-
+        $values = $this->hydrateSocialNetworks($values, $proposal, $proposalForm, true);
         $form = $this->formFactory->create(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
@@ -525,7 +524,7 @@ class ProposalMutation implements ContainerAwareInterface
         $this->shouldBeDraft($proposal, $author, $values, $wasDraft, $draft);
 
         $values = $this->fixValues($values, $proposalForm);
-        $this->hydrateSocialNetworks($values, $proposal, $proposalForm);
+        $values = $this->hydrateSocialNetworks($values, $proposal, $proposalForm);
 
         /** @var Form $form */
         $form = $this->formFactory->create(ProposalAdminType::class, $proposal, [
@@ -591,8 +590,8 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    private function hydrateSocialNetworks(
-        &$argument,
+    public function hydrateSocialNetworks(
+        array $values,
         Proposal $proposal,
         ProposalForm $proposalForm,
         bool $create = false
@@ -605,42 +604,35 @@ class ProposalMutation implements ContainerAwareInterface
             $socialNetworks = $proposal->getProposalSocialNetworks();
         }
 
-        if ($proposalForm->isUsingWebPage() && $argument['webPageUrl']) {
-            $socialNetworks->setWebPageUrl($argument['webPageUrl']);
+        if ($proposalForm->isUsingWebPage()) {
+            $socialNetworks->setWebPageUrl($values['webPageUrl']);
         }
-        if ($proposalForm->isUsingFacebook() && $argument['facebookUrl']) {
-            $socialNetworks->setFacebookUrl($argument['facebookUrl']);
+        if ($proposalForm->isUsingFacebook()) {
+            $socialNetworks->setFacebookUrl($values['facebookUrl']);
         }
-        if ($proposalForm->isUsingTwitter() && $argument['twitterUrl']) {
-            $socialNetworks->setTwitterUrl($argument['twitterUrl']);
+        if ($proposalForm->isUsingTwitter()) {
+            $socialNetworks->setTwitterUrl($values['twitterUrl']);
         }
-        if ($proposalForm->isUsingInstagram() && isset($argument['instagramUrl'])) {
-            $socialNetworks->setInstagramUrl($argument['instagramUrl']);
+        if ($proposalForm->isUsingInstagram()) {
+            $socialNetworks->setInstagramUrl($values['instagramUrl']);
         }
-        if ($proposalForm->isUsingLinkedIn() && isset($argument['linkedInUrl'])) {
-            $socialNetworks->setLinkedInUrl($argument['linkedInUrl']);
+        if ($proposalForm->isUsingLinkedIn()) {
+            $socialNetworks->setLinkedInUrl($values['linkedInUrl']);
         }
-        if ($proposalForm->isUsingYoutube() && isset($argument['youtubeUrl'])) {
-            $socialNetworks->setYoutubeUrl($argument['youtubeUrl']);
+        if ($proposalForm->isUsingYoutube()) {
+            $socialNetworks->setYoutubeUrl($values['youtubeUrl']);
         }
-        if (isset($argument['webPageUrl'])) {
-            unset($argument['webPageUrl']);
-        }
-        if (isset($argument['facebookUrl'])) {
-            unset($argument['facebookUrl']);
-        }
-        if (isset($argument['twitterUrl'])) {
-            unset($argument['twitterUrl']);
-        }
-        if (isset($argument['instagramUrl'])) {
-            unset($argument['instagramUrl']);
-        }
-        if (isset($argument['linkedInUrl'])) {
-            unset($argument['linkedInUrl']);
-        }
-        if (isset($argument['youtubeUrl'])) {
-            unset($argument['youtubeUrl']);
-        }
+
+        unset(
+            $values['webPageUrl'],
+            $values['facebookUrl'],
+            $values['twitterUrl'],
+            $values['instagramUrl'],
+            $values['linkedInUrl'],
+            $values['youtubeUrl']
+        );
+
+        return $values;
     }
 
     private function fixValues(array $values, ProposalForm $proposalForm)

@@ -1254,6 +1254,55 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingFacebook",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingWebPage",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingTwitter",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingInstagram",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingYoutube",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingLinkedIn",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isUsingAnySocialNetworks",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "EvaluationForm",
                           "kind": "LinkedField",
                           "name": "evaluationForm",
@@ -2014,6 +2063,48 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                       "args": null,
                       "kind": "ScalarField",
                       "name": "summary",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "twitterUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "webPageUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "facebookUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "instagramUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "linkedInUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "youtubeUrl",
                       "storageKey": null,
                     },
                     Object {
@@ -2889,7 +2980,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "4fbcfb90b40d4b08658da192a99bd1c0",
+          "cacheID": "3bd96ae2f87c8402d9bf61914ceb6543",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2945,6 +3036,12 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
   title
   body
   summary
+  twitterUrl
+  webPageUrl
+  facebookUrl
+  instagramUrl
+  linkedInUrl
+  youtubeUrl
   address {
     json
     formatted
@@ -3095,6 +3192,13 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
     usingCategories
     categoryMandatory
     usingAddress
+    usingFacebook
+    usingWebPage
+    usingTwitter
+    usingInstagram
+    usingYoutube
+    usingLinkedIn
+    isUsingAnySocialNetworks
   }
 }
 

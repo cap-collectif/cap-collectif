@@ -10,6 +10,7 @@ import type { ProposalPageMainAside_proposal } from '~relay/ProposalPageMainAsid
 import { type GlobalState, type FeatureToggles } from '~/types';
 import { bootstrapGrid } from '~/utils/sizes';
 import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
+import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks';
 
 type Props = {
   proposal: ProposalPageMainAside_proposal,
@@ -75,6 +76,9 @@ export const ProposalPageMainAside = ({ proposal, features, display }: Props) =>
       {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
         <ProposalTipsMeeeAside proposal={proposal} />
       )}
+      {proposal && proposal.isUsingAnySocialNetworks && (
+        <ProposalSocialNetworkLinks proposal={proposal} />
+      )}
     </Container>
   );
 };
@@ -94,6 +98,8 @@ export default createFragmentContainer(
         ...ProposalPageAdvancement_proposal
         ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
         ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
+        ...ProposalSocialNetworkLinks_proposal
+        isUsingAnySocialNetworks
         currentVotableStep {
           votesRanking
           voteType

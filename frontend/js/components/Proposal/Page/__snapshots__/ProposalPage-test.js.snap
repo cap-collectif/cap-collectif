@@ -769,6 +769,48 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "usingFacebook",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingWebPage",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingTwitter",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingInstagram",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingYoutube",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingLinkedIn",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "usingCategories",
                           "storageKey": null,
                         },
@@ -1689,6 +1731,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "name": "tipsmeeeHelpText",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isUsingAnySocialNetworks",
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -1740,6 +1789,55 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "kind": "TypeDiscriminator",
                         },
                       ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "twitterUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "webPageUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "facebookUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "instagramUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "linkedInUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "youtubeUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isUsingAnySocialNetworks",
                       "storageKey": null,
                     },
                     Object {
@@ -7114,7 +7212,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "80c935321a3acacf6460961451273ec8",
+          "cacheID": "e0c5f5bd665868729ad01b09abd2f138",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7931,6 +8029,13 @@ fragment ProposalForm_proposalForm on ProposalForm {
   usingIllustration
   usingTipsmeee
   tipsmeeeHelpText
+  usingFacebook
+  usingWebPage
+  usingTwitter
+  usingInstagram
+  usingYoutube
+  usingLinkedIn
+  isUsingAnySocialNetworks
 }
 
 fragment ProposalForm_proposal_4iFR9m on Proposal {
@@ -7980,6 +8085,12 @@ fragment ProposalForm_proposal_4iFR9m on Proposal {
     url
   }
   tipsmeeeId @include(if: $isTipsMeeeEnabled)
+  twitterUrl
+  facebookUrl
+  youtubeUrl
+  webPageUrl
+  instagramUrl
+  linkedInUrl
 }
 
 fragment ProposalMediaResponse_medias on Media {
@@ -8053,6 +8164,8 @@ fragment ProposalPageAside_proposal_zqPYL on Proposal {
     ...ProposalPageVoteThreshold_step
     id
   }
+  ...ProposalSocialNetworkLinks_proposal
+  isUsingAnySocialNetworks
   form {
     usingCategories
     usingThemes
@@ -8425,6 +8538,8 @@ fragment ProposalPageMainAside_proposal_zqPYL on Proposal {
   ...ProposalPageAdvancement_proposal
   ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
   ...ProposalPageVoteThreshold_proposal_2r3fA4
+  ...ProposalSocialNetworkLinks_proposal
+  isUsingAnySocialNetworks
   currentVotableStep {
     __typename
     votesRanking
@@ -8774,6 +8889,24 @@ fragment ProposalRevisionPanel_proposal on Proposal {
 
 fragment ProposalRevision_proposal on Proposal {
   ...ProposalRevisionModalForm_proposal
+}
+
+fragment ProposalSocialNetworkLinks_proposal on Proposal {
+  twitterUrl
+  webPageUrl
+  facebookUrl
+  instagramUrl
+  linkedInUrl
+  youtubeUrl
+  form {
+    usingFacebook
+    usingWebPage
+    usingTwitter
+    usingInstagram
+    usingYoutube
+    usingLinkedIn
+    id
+  }
 }
 
 fragment ProposalTipsMeeeAside_proposal on Proposal {

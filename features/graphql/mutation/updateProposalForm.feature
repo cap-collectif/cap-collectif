@@ -69,12 +69,12 @@ Scenario: GraphQL client wants to update a proposal form
                 title
                 type
               }
-              isUsingWebPage,
-              isUsingFacebook,
-              isUsingTwitter,
-              isUsingInstagram,
-              isUsingLinkedIn,
-              isUsingYoutube
+              usingWebPage,
+              usingFacebook,
+              usingTwitter,
+              usingInstagram,
+              usingLinkedIn,
+              usingYoutube
             }
           }
         }",
@@ -282,12 +282,12 @@ Scenario: GraphQL client wants to update a proposal form
                }
             ],
             "questions": [],
-            "isUsingWebPage":true,
-            "isUsingFacebook":true,
-            "isUsingTwitter":true,
-            "isUsingInstagram":true,
-            "isUsingLinkedIn":true,
-            "isUsingYoutube":true
+            "usingWebPage":true,
+            "usingFacebook":true,
+            "usingTwitter":true,
+            "usingInstagram":true,
+            "usingLinkedIn":true,
+            "usingYoutube":true
          }
       }
    }

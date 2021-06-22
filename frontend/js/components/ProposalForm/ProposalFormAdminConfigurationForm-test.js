@@ -84,6 +84,12 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
         rangeMax: null,
       },
     ],
+    usingFacebook: true,
+    usingWebPage: true,
+    usingTwitter: true,
+    usingInstagram: true,
+    usingYoutube: true,
+    usingLinkedIn: true,
   };
 
   const props = {
@@ -129,7 +135,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       position: 1,
       alwaysJumpDestinationQuestion: null,
       jumps: [],
-      destinationJumps: []
+      destinationJumps: [],
     };
 
     const ppForm = {

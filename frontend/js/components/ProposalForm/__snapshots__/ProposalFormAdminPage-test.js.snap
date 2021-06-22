@@ -639,6 +639,48 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "usingFacebook",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "usingWebPage",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "usingTwitter",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "usingInstagram",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "usingYoutube",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "usingLinkedIn",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "ProposalDistrict",
                       "kind": "LinkedField",
                       "name": "districts",
@@ -1941,7 +1983,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3920081f3605e425885c2c103368cbe9",
+          "cacheID": "695f202d57e2616aff6691791493e1b3",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2103,6 +2145,12 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
   tipsmeeeHelpText
   allowAknowledge
   objectType
+  usingFacebook
+  usingWebPage
+  usingTwitter
+  usingInstagram
+  usingYoutube
+  usingLinkedIn
   districts {
     id
     translations {

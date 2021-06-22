@@ -9,6 +9,7 @@ import type { FeatureToggles, GlobalState } from '~/types';
 import type { ProposalPageAside_proposal } from '~relay/ProposalPageAside_proposal.graphql';
 import ProposalPageMetadata from '~/components/Proposal/Page/Aside/ProposalPageMetadata';
 import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/ProposalPageVoteThreshold';
+import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks';
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement';
 import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
 
@@ -22,6 +23,7 @@ type Props = {
   features: FeatureToggles,
   isAnalysing: boolean,
   isAuthenticated: boolean,
+  isActualityTab?: boolean,
 };
 
 const Aside: StyledComponent<
@@ -82,6 +84,7 @@ export const ProposalPageAside = ({
   isAnalysing,
   hasVotableStep,
   isAuthenticated,
+  isActualityTab = false,
 }: Props) => {
   const { height } = useResize();
   const asideRef = useRef(null);
@@ -109,23 +112,32 @@ export const ProposalPageAside = ({
       isTipsmeee={tipsmeeeWithCode}
       id="ProposalPageAside">
       <div ref={asideRef}>
-        <ProposalPageMetadata
-          proposal={proposal}
-          showDistricts={features.districts || false}
-          showCategories={proposal?.form?.usingCategories}
-          showNullEstimation={!!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')}
-          showThemes={(features.themes || false) && proposal?.form?.usingThemes}
-        />
-        <ProposalPageAdvancement proposal={proposal} />
-        {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
-          <ProposalTipsMeeeAside proposal={proposal} />
+        {!isActualityTab && (
+          <>
+            <ProposalPageMetadata
+              proposal={proposal}
+              showDistricts={features.districts || false}
+              showCategories={proposal?.form?.usingCategories}
+              showNullEstimation={
+                !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
+              }
+              showThemes={(features.themes || false) && proposal?.form?.usingThemes}
+            />
+            <ProposalPageAdvancement proposal={proposal} />
+            {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
+              <ProposalTipsMeeeAside proposal={proposal} />
+            )}
+            {currentVotableStep !== null && typeof currentVotableStep !== 'undefined' && (
+              <ProposalPageVoteThreshold
+                proposal={proposal}
+                step={currentVotableStep}
+                showPoints={(currentVotableStep && currentVotableStep.votesRanking) || false}
+              />
+            )}
+          </>
         )}
-        {currentVotableStep !== null && typeof currentVotableStep !== 'undefined' && (
-          <ProposalPageVoteThreshold
-            proposal={proposal}
-            step={currentVotableStep}
-            showPoints={(currentVotableStep && currentVotableStep.votesRanking) || false}
-          />
+        {proposal && proposal.isUsingAnySocialNetworks && (
+          <ProposalSocialNetworkLinks proposal={proposal} />
         )}
       </div>
     </Aside>
@@ -151,7 +163,9 @@ export default createFragmentContainer(
           voteType
           ...ProposalPageVoteThreshold_step
         }
+        ...ProposalSocialNetworkLinks_proposal
         tipsmeeeId @include(if: $isTipsMeeeEnabled)
+        isUsingAnySocialNetworks
         form {
           usingCategories
           usingThemes

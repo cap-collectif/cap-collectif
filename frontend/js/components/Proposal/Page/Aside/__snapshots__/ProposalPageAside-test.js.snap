@@ -26,6 +26,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -49,6 +50,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -68,6 +70,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -77,6 +80,26 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
           "$fragmentRefs": null,
           "voteType": "SIMPLE",
           "votesRanking": true,
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalSocialNetworkLinks))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+            "usingTipsmeee": false,
+          },
+          "isUsingAnySocialNetworks": true,
+          "tipsmeeeId": null,
         }
       }
     />
@@ -110,6 +133,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -133,6 +157,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -152,6 +177,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -161,6 +187,26 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
           "$fragmentRefs": null,
           "voteType": "SIMPLE",
           "votesRanking": true,
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalSocialNetworkLinks))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+            "usingTipsmeee": false,
+          },
+          "isUsingAnySocialNetworks": true,
+          "tipsmeeeId": null,
         }
       }
     />
@@ -194,6 +240,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
             "usingThemes": true,
             "usingTipsmeee": true,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": "aTipsmeCode",
         }
       }
@@ -217,6 +264,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
             "usingThemes": true,
             "usingTipsmeee": true,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": "aTipsmeCode",
         }
       }
@@ -236,6 +284,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
             "usingThemes": true,
             "usingTipsmeee": true,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": "aTipsmeCode",
         }
       }
@@ -255,6 +304,7 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
             "usingThemes": true,
             "usingTipsmeee": true,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": "aTipsmeCode",
         }
       }
@@ -264,6 +314,26 @@ exports[`<ProposalPageAside /> should render correctly with tipsmeee 1`] = `
           "$fragmentRefs": null,
           "voteType": "SIMPLE",
           "votesRanking": true,
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalSocialNetworkLinks))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": true,
+            "usingTipsmeee": true,
+          },
+          "isUsingAnySocialNetworks": true,
+          "tipsmeeeId": "aTipsmeCode",
         }
       }
     />
@@ -297,6 +367,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -320,6 +391,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -339,6 +411,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             "usingThemes": false,
             "usingTipsmeee": false,
           },
+          "isUsingAnySocialNetworks": true,
           "tipsmeeeId": null,
         }
       }
@@ -348,6 +421,26 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
           "$fragmentRefs": null,
           "voteType": "SIMPLE",
           "votesRanking": true,
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalSocialNetworkLinks))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+            "usingTipsmeee": false,
+          },
+          "isUsingAnySocialNetworks": true,
+          "tipsmeeeId": null,
         }
       }
     />

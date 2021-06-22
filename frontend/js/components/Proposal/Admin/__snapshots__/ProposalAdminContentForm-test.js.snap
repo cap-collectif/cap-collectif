@@ -25,6 +25,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "id": "1",
         },
         "estimation": 1000,
+        "facebookUrl": "https://facebook.com",
         "form": Object {
           "adminUrl": "http://capco.dev/pfrom",
           "analysisConfiguration": Object {
@@ -46,6 +47,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "districtMandatory": true,
           "districts": Array [],
           "id": "form1",
+          "isUsingAnySocialNetworks": true,
           "questions": Array [
             Object {
               "__typename": "SimpleQuestion",
@@ -79,16 +81,24 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "usingCategories": true,
           "usingDescription": true,
           "usingDistrict": true,
+          "usingFacebook": true,
+          "usingInstagram": true,
+          "usingLinkedIn": true,
           "usingSummary": true,
           "usingThemes": true,
+          "usingTwitter": true,
+          "usingWebPage": true,
+          "usingYoutube": true,
         },
         "id": "1",
+        "instagramUrl": "https://instagram.com",
         "likers": Array [
           Object {
             "displayName": "liker-1",
             "id": "1",
           },
         ],
+        "linkedInUrl": "https://linkedin.com",
         "media": Object {
           "id": "1",
           "url": "",
@@ -133,6 +143,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "id": "theme-1",
         },
         "title": "title-1",
+        "twitterUrl": "https://twitter.com",
+        "webPageUrl": "",
+        "youtubeUrl": "",
       }
     }
     show={false}
@@ -369,6 +382,102 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         />
       </div>
     </div>
+    <ProposalAdminContentForm__ExternaLinksCard
+      backgroundColor="#ffffff"
+      mt={6}
+      paddingY={8}
+    >
+      <Heading
+        as="h3"
+        color="#003670"
+        fontSize="18px"
+        fontWeight="600"
+        lineHeight="24px"
+      >
+        <FormattedMessage
+          id="external-links"
+          values={Object {}}
+        />
+      </Heading>
+      <Field
+        component={[Function]}
+        id="proposal_wep_page"
+        label={
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        }
+        name="webPageUrl"
+        placeholder="your-url"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_twitter"
+        label={
+          <FormattedMessage
+            id="share.twitter"
+            values={Object {}}
+          />
+        }
+        name="twitterUrl"
+        placeholder="twitter.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_facebook"
+        label={
+          <FormattedMessage
+            id="share.facebook"
+            values={Object {}}
+          />
+        }
+        name="facebookUrl"
+        placeholder="facebook.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_instagram"
+        label={
+          <FormattedMessage
+            id="instagram"
+            values={Object {}}
+          />
+        }
+        name="instagramUrl"
+        placeholder="instagram.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_linkedin"
+        label={
+          <FormattedMessage
+            id="share.linkedin"
+            values={Object {}}
+          />
+        }
+        name="linkedInUrl"
+        placeholder="linkedin.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_youtube"
+        label={
+          <FormattedMessage
+            id="youtube"
+            values={Object {}}
+          />
+        }
+        name="youtubeUrl"
+        placeholder="youtube.com"
+        type="text"
+      />
+    </ProposalAdminContentForm__ExternaLinksCard>
     <ForwardRef
       direction="row"
       mb={24}
@@ -383,14 +492,19 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         <ForwardRef
           spacing="9px"
         >
-          <h3
-            className="box-title"
+          <Text
+            as="h3"
+            color="#003670"
+            fontSize="18px"
+            fontWeight="600"
+            lineHeight="24px"
+            margin="0"
           >
             <FormattedMessage
               id="proposal.estimation"
               values={Object {}}
             />
-          </h3>
+          </Text>
           <a
             className="link"
             href="admin.help.link.proposal.estimation"
@@ -462,14 +576,19 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         <ForwardRef
           spacing="9px"
         >
-          <h3
-            className="box-title"
+          <Text
+            as="h3"
+            color="#003670"
+            fontSize="18px"
+            fontWeight="600"
+            lineHeight="24px"
+            margin="0"
           >
             <FormattedMessage
               id="admin.fields.proposal.likers"
               values={Object {}}
             />
-          </h3>
+          </Text>
           <a
             className="link"
             href="admin.help.link.proposal.heart"
@@ -574,6 +693,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           "id": "1",
         },
         "estimation": 1000,
+        "facebookUrl": "https://facebook.com",
         "form": Object {
           "adminUrl": "http://capco.dev/pfrom",
           "analysisConfiguration": Object {
@@ -595,6 +715,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           "districtMandatory": true,
           "districts": Array [],
           "id": "form1",
+          "isUsingAnySocialNetworks": true,
           "questions": Array [
             Object {
               "__typename": "SimpleQuestion",
@@ -628,16 +749,24 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           "usingCategories": true,
           "usingDescription": true,
           "usingDistrict": true,
+          "usingFacebook": true,
+          "usingInstagram": true,
+          "usingLinkedIn": true,
           "usingSummary": true,
           "usingThemes": true,
+          "usingTwitter": true,
+          "usingWebPage": true,
+          "usingYoutube": true,
         },
         "id": "1",
+        "instagramUrl": "https://instagram.com",
         "likers": Array [
           Object {
             "displayName": "liker-1",
             "id": "1",
           },
         ],
+        "linkedInUrl": "https://linkedin.com",
         "media": Object {
           "id": "1",
           "url": "",
@@ -682,6 +811,9 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           "id": "theme-1",
         },
         "title": "title-1",
+        "twitterUrl": "https://twitter.com",
+        "webPageUrl": "",
+        "youtubeUrl": "",
       }
     }
     show={false}
@@ -918,6 +1050,102 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
         />
       </div>
     </div>
+    <ProposalAdminContentForm__ExternaLinksCard
+      backgroundColor="#ffffff"
+      mt={6}
+      paddingY={8}
+    >
+      <Heading
+        as="h3"
+        color="#003670"
+        fontSize="18px"
+        fontWeight="600"
+        lineHeight="24px"
+      >
+        <FormattedMessage
+          id="external-links"
+          values={Object {}}
+        />
+      </Heading>
+      <Field
+        component={[Function]}
+        id="proposal_wep_page"
+        label={
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        }
+        name="webPageUrl"
+        placeholder="your-url"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_twitter"
+        label={
+          <FormattedMessage
+            id="share.twitter"
+            values={Object {}}
+          />
+        }
+        name="twitterUrl"
+        placeholder="twitter.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_facebook"
+        label={
+          <FormattedMessage
+            id="share.facebook"
+            values={Object {}}
+          />
+        }
+        name="facebookUrl"
+        placeholder="facebook.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_instagram"
+        label={
+          <FormattedMessage
+            id="instagram"
+            values={Object {}}
+          />
+        }
+        name="instagramUrl"
+        placeholder="instagram.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_linkedin"
+        label={
+          <FormattedMessage
+            id="share.linkedin"
+            values={Object {}}
+          />
+        }
+        name="linkedInUrl"
+        placeholder="linkedin.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_youtube"
+        label={
+          <FormattedMessage
+            id="youtube"
+            values={Object {}}
+          />
+        }
+        name="youtubeUrl"
+        placeholder="youtube.com"
+        type="text"
+      />
+    </ProposalAdminContentForm__ExternaLinksCard>
     <ForwardRef
       direction="row"
       mb={24}
@@ -932,14 +1160,19 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
         <ForwardRef
           spacing="9px"
         >
-          <h3
-            className="box-title"
+          <Text
+            as="h3"
+            color="#003670"
+            fontSize="18px"
+            fontWeight="600"
+            lineHeight="24px"
+            margin="0"
           >
             <FormattedMessage
               id="proposal.estimation"
               values={Object {}}
             />
-          </h3>
+          </Text>
           <a
             className="link"
             href="admin.help.link.proposal.estimation"
@@ -1011,14 +1244,19 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
         <ForwardRef
           spacing="9px"
         >
-          <h3
-            className="box-title"
+          <Text
+            as="h3"
+            color="#003670"
+            fontSize="18px"
+            fontWeight="600"
+            lineHeight="24px"
+            margin="0"
           >
             <FormattedMessage
               id="admin.fields.proposal.likers"
               values={Object {}}
             />
-          </h3>
+          </Text>
           <a
             className="link"
             href="admin.help.link.proposal.heart"
@@ -1123,6 +1361,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "id": "1",
         },
         "estimation": 1000,
+        "facebookUrl": "https://facebook.com",
         "form": Object {
           "adminUrl": "http://capco.dev/pfrom",
           "analysisConfiguration": Object {
@@ -1144,6 +1383,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "districtMandatory": true,
           "districts": Array [],
           "id": "form1",
+          "isUsingAnySocialNetworks": true,
           "questions": Array [
             Object {
               "__typename": "SimpleQuestion",
@@ -1177,16 +1417,24 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "usingCategories": true,
           "usingDescription": true,
           "usingDistrict": true,
+          "usingFacebook": true,
+          "usingInstagram": true,
+          "usingLinkedIn": true,
           "usingSummary": true,
           "usingThemes": true,
+          "usingTwitter": true,
+          "usingWebPage": true,
+          "usingYoutube": true,
         },
         "id": "1",
+        "instagramUrl": "https://instagram.com",
         "likers": Array [
           Object {
             "displayName": "liker-1",
             "id": "1",
           },
         ],
+        "linkedInUrl": "https://linkedin.com",
         "media": Object {
           "id": "1",
           "url": "",
@@ -1231,6 +1479,9 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "id": "theme-1",
         },
         "title": "title-1",
+        "twitterUrl": "https://twitter.com",
+        "webPageUrl": "",
+        "youtubeUrl": "",
       }
     }
     show={false}
@@ -1467,6 +1718,102 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         />
       </div>
     </div>
+    <ProposalAdminContentForm__ExternaLinksCard
+      backgroundColor="#ffffff"
+      mt={6}
+      paddingY={8}
+    >
+      <Heading
+        as="h3"
+        color="#003670"
+        fontSize="18px"
+        fontWeight="600"
+        lineHeight="24px"
+      >
+        <FormattedMessage
+          id="external-links"
+          values={Object {}}
+        />
+      </Heading>
+      <Field
+        component={[Function]}
+        id="proposal_wep_page"
+        label={
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        }
+        name="webPageUrl"
+        placeholder="your-url"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_twitter"
+        label={
+          <FormattedMessage
+            id="share.twitter"
+            values={Object {}}
+          />
+        }
+        name="twitterUrl"
+        placeholder="twitter.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_facebook"
+        label={
+          <FormattedMessage
+            id="share.facebook"
+            values={Object {}}
+          />
+        }
+        name="facebookUrl"
+        placeholder="facebook.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_instagram"
+        label={
+          <FormattedMessage
+            id="instagram"
+            values={Object {}}
+          />
+        }
+        name="instagramUrl"
+        placeholder="instagram.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_linkedin"
+        label={
+          <FormattedMessage
+            id="share.linkedin"
+            values={Object {}}
+          />
+        }
+        name="linkedInUrl"
+        placeholder="linkedin.com"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_youtube"
+        label={
+          <FormattedMessage
+            id="youtube"
+            values={Object {}}
+          />
+        }
+        name="youtubeUrl"
+        placeholder="youtube.com"
+        type="text"
+      />
+    </ProposalAdminContentForm__ExternaLinksCard>
     <ForwardRef
       direction="row"
       mb={24}
@@ -1481,14 +1828,19 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         <ForwardRef
           spacing="9px"
         >
-          <h3
-            className="box-title"
+          <Text
+            as="h3"
+            color="#003670"
+            fontSize="18px"
+            fontWeight="600"
+            lineHeight="24px"
+            margin="0"
           >
             <FormattedMessage
               id="proposal.estimation"
               values={Object {}}
             />
-          </h3>
+          </Text>
           <a
             className="link"
             href="admin.help.link.proposal.estimation"
@@ -1560,14 +1912,19 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         <ForwardRef
           spacing="9px"
         >
-          <h3
-            className="box-title"
+          <Text
+            as="h3"
+            color="#003670"
+            fontSize="18px"
+            fontWeight="600"
+            lineHeight="24px"
+            margin="0"
           >
             <FormattedMessage
               id="admin.fields.proposal.likers"
               values={Object {}}
             />
-          </h3>
+          </Text>
           <a
             className="link"
             href="admin.help.link.proposal.heart"
@@ -1658,6 +2015,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
               "id": "1",
             },
             "estimation": 1000,
+            "facebookUrl": "https://facebook.com",
             "form": Object {
               "adminUrl": "http://capco.dev/pfrom",
               "analysisConfiguration": Object {
@@ -1679,6 +2037,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
               "districtMandatory": true,
               "districts": Array [],
               "id": "form1",
+              "isUsingAnySocialNetworks": true,
               "questions": Array [
                 Object {
                   "__typename": "SimpleQuestion",
@@ -1712,16 +2071,24 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
               "usingCategories": true,
               "usingDescription": true,
               "usingDistrict": true,
+              "usingFacebook": true,
+              "usingInstagram": true,
+              "usingLinkedIn": true,
               "usingSummary": true,
               "usingThemes": true,
+              "usingTwitter": true,
+              "usingWebPage": true,
+              "usingYoutube": true,
             },
             "id": "1",
+            "instagramUrl": "https://instagram.com",
             "likers": Array [
               Object {
                 "displayName": "liker-1",
                 "id": "1",
               },
             ],
+            "linkedInUrl": "https://linkedin.com",
             "media": Object {
               "id": "1",
               "url": "",
@@ -1766,6 +2133,9 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
               "id": "theme-1",
             },
             "title": "title-1",
+            "twitterUrl": "https://twitter.com",
+            "webPageUrl": "",
+            "youtubeUrl": "",
           }
         }
       >

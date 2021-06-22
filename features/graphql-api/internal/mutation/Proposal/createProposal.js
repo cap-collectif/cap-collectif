@@ -46,6 +46,9 @@ describe('Internal|create proposal', () => {
       webPageUrl: 'http://cap-collectif.com',
       facebookUrl: 'https://www.facebook.com/JVCArmy/',
       twitterUrl: 'https://twitter.com/bestof_1825',
+      instagramUrl: null,
+      youtubeUrl: null,
+      linkedInUrl: null,
     };
     // expect.assertions(1);
     const response = await graphql(createProposal, { input }, 'internal_user');

@@ -202,6 +202,12 @@ export const ICON_NAME = {
   thinArrowUp: 'thin-arrow-up',
   thinArrowDown: 'thin-arrow-down',
   money: 'money',
+  rsFacebook: 'rs-facebook',
+  rsInstagram: 'rs-instagram',
+  rsLinkedin: 'rs-linkedin',
+  rsTwitter: 'rs-twitter',
+  rsWebPage: 'rs-webpage',
+  rsYoutube: 'rs-youtube',
 };
 
 type Props = {|
@@ -614,6 +620,18 @@ const getIcon = name => {
       return <Icons.ThinArrowDown />;
     case 'money':
       return <Icons.Money />;
+    case 'rs-facebook':
+      return <Icons.RsFacebook />;
+    case 'rs-instagram':
+      return <Icons.RsInstagram />;
+    case 'rs-linkedin':
+      return <Icons.RsLinkedin />;
+    case 'rs-twitter':
+      return <Icons.RsTwitter />;
+    case 'rs-webpage':
+      return <Icons.RsWebPage />;
+    case 'rs-youtube':
+      return <Icons.RsYoutube />;
     default:
       return <div />;
   }
