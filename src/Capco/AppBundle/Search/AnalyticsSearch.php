@@ -168,7 +168,11 @@ class AnalyticsSearch
             ->addFilter(new Query\Term(['published' => true]));
 
         if ($projectId) {
-            $boolQuery->addFilter(new Query\Term(['published' => true]));
+            $boolQuery->addFilter(
+                new Query\Term([
+                    'project.id' => ['value' => $projectId],
+                ])
+            );
         }
 
         $query = new Query($boolQuery);

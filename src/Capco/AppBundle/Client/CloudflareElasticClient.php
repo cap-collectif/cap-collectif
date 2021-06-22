@@ -166,7 +166,7 @@ class CloudflareElasticClient
                 (new Terms('most_seen_pages'))
                     ->setField('ClientRequestURI.keyword')
                     ->setOrder('_count', 'desc')
-                    ->setSize(3)
+                    ->setSize(10)
             );
 
         return $this->esClient->getIndex($this->index)->createSearch($query);
@@ -311,10 +311,11 @@ class CloudflareElasticClient
     {
         return [
             new Query\Regexp('ClientRequestURI', '*/js/*'),
-            new Query\Regexp('ClientRequestURI', '*/graphql/*'),
+            new Query\Regexp('ClientRequestURI', '/graphql/*'),
             new Query\Regexp('ClientRequestURI', '*/css/*'),
             new Query\Regexp('ClientRequestURI', '*/admin/*'),
             new Query\Regexp('ClientRequestURI', '*/media/*'),
+            new Query\Regexp('ClientRequestURI', '/fonts/*'),
         ];
     }
 

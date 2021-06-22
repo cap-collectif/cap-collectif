@@ -758,6 +758,26 @@ Object {
           "key": "/project/debat-sur-le-cannabis",
           "totalCount": 3,
         },
+        Object {
+          "key": "/project/project-analyse",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "/",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "/blog/post-fr-1",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "/contact",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "/themes",
+          "totalCount": 1,
+        },
       ],
     },
     "registrations": Object {
@@ -2885,20 +2905,16 @@ Object {
     "votes": Object {
       "values": Array [
         Object {
-          "key": "2014-12-01T00:00:00.000Z",
-          "totalCount": 109,
-        },
-        Object {
           "key": "2015-01-01T00:00:00.000Z",
-          "totalCount": 70,
+          "totalCount": 28,
         },
         Object {
           "key": "2015-02-01T00:00:00.000Z",
-          "totalCount": 73,
+          "totalCount": 1,
         },
         Object {
           "key": "2015-03-01T00:00:00.000Z",
-          "totalCount": 21,
+          "totalCount": 0,
         },
         Object {
           "key": "2015-04-01T00:00:00.000Z",
@@ -2934,11 +2950,11 @@ Object {
         },
         Object {
           "key": "2015-12-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 0,
         },
         Object {
           "key": "2016-01-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 0,
         },
         Object {
           "key": "2016-02-01T00:00:00.000Z",
@@ -2986,175 +3002,7 @@ Object {
         },
         Object {
           "key": "2017-01-01T00:00:00.000Z",
-          "totalCount": 107,
-        },
-        Object {
-          "key": "2017-02-01T00:00:00.000Z",
-          "totalCount": 6,
-        },
-        Object {
-          "key": "2017-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-03-01T00:00:00.000Z",
-          "totalCount": 4,
-        },
-        Object {
-          "key": "2018-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-02-01T00:00:00.000Z",
-          "totalCount": 3,
-        },
-        Object {
-          "key": "2019-03-01T00:00:00.000Z",
-          "totalCount": 4,
-        },
-        Object {
-          "key": "2019-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-01-01T00:00:00.000Z",
-          "totalCount": 120,
-        },
-        Object {
-          "key": "2020-02-01T00:00:00.000Z",
-          "totalCount": 106,
-        },
-        Object {
-          "key": "2020-03-01T00:00:00.000Z",
-          "totalCount": 93,
-        },
-        Object {
-          "key": "2020-04-01T00:00:00.000Z",
-          "totalCount": 69,
-        },
-        Object {
-          "key": "2020-05-01T00:00:00.000Z",
-          "totalCount": 62,
-        },
-        Object {
-          "key": "2020-06-01T00:00:00.000Z",
-          "totalCount": 60,
-        },
-        Object {
-          "key": "2020-07-01T00:00:00.000Z",
-          "totalCount": 36,
+          "totalCount": 48,
         },
       ],
     },
