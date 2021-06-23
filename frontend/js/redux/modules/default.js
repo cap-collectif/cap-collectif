@@ -104,6 +104,7 @@ export const features: FeatureToggles = {
   unstable__new_project_card: false,
   import_proposals: false,
   unstable__analytics_page: false,
+  http_redirects: false,
 };
 
 export const initialState: State = {

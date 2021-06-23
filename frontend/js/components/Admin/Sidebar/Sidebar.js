@@ -247,7 +247,9 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                 {features.multilangue && (
                   <SidebarLink text="global-languages" href="/admin/locale/list" />
                 )}
-                <SidebarLink text="custom-url" href="/admin/redirect/list" />
+                {features.http_redirects && (
+                  <SidebarLink text="custom-url" href="/admin/redirect/list" />
+                )}
                 <SidebarLink text="website-icon" href="/admin/favicon/list" />
                 <SidebarLink text="global-typeface" href="/admin/font/list" />
                 <SidebarLink
