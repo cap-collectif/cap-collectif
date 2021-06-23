@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
@@ -26,14 +26,24 @@ const FRAGMENT = graphql`
   }
 `;
 
-type Props = {|
+type ReduxProps = {|
+  +startAt: string,
+  +endAt: string,
+|};
+
+type ComponentProps = {|
   +query: DashboardFilters_query$key,
   +defaultFilters: Filters,
 |};
 
+type Props = {|
+  ...ReduxProps,
+  ...ComponentProps,
+|};
+
 export const formName = 'form-filters-dashboard';
 
-const DashboardFilters = ({ query: queryFragment }: Props): React.Node => {
+const DashboardFilters = ({ query: queryFragment, startAt, endAt }: Props): React.Node => {
   const query = useFragment(FRAGMENT, queryFragment);
   const intl = useIntl();
   const { setFilters } = useDashboard();
@@ -84,7 +94,12 @@ const DashboardFilters = ({ query: queryFragment }: Props): React.Node => {
             onChange={(e: SyntheticInputEvent<HTMLInputElement>, value: string) =>
               setFilters('startAt', value)
             }
-            dateFormat="MM/DD/YYYY"
+            dateProps={{
+              closeOnSelect: true,
+              dateFormat: 'MM/DD/YYYY',
+              timeFormat: false,
+              initialViewDate: startAt,
+            }}
             disableValidation
           />
           <Text>{intl.formatMessage({ id: 'global.to' })}</Text>
@@ -97,8 +112,14 @@ const DashboardFilters = ({ query: queryFragment }: Props): React.Node => {
             onChange={(e: SyntheticInputEvent<HTMLInputElement>, value: string) =>
               setFilters('endAt', value)
             }
-            dateFormat="MM/DD/YYYY"
+            dateProps={{
+              closeOnSelect: true,
+              dateFormat: 'MM/DD/YYYY',
+              timeFormat: false,
+              initialViewDate: endAt,
+            }}
             disableValidation
+            closeOnSelect
           />
         </Flex>
       </Flex>
@@ -116,8 +137,10 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
     endAt: props.defaultFilters.endAt,
     project: props.defaultFilters.projectId,
   },
+  startAt: formValueSelector(formName)(state, 'startAt'),
+  endAt: formValueSelector(formName)(state, 'endAt'),
 });
 
 export default (connect<any, any, _, _, _, _>(mapStateToProps)(
   DashboardFiltersForm,
-): React.AbstractComponent<Props>);
+): React.AbstractComponent<ComponentProps>);

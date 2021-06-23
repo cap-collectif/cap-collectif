@@ -6,7 +6,11 @@ import cx from 'classnames';
 import moment from 'moment';
 import { FormGroup, FormControl, InputGroup, Thumbnail, OverlayTrigger } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
-import DateTime, { type DateTimeInputProps, type TimeConstraintsProps } from './DateTime';
+import DateTime, {
+  type DateProps,
+  type DateTimeInputProps,
+  type TimeConstraintsProps,
+} from './DateTime';
 import Editor from './Editor';
 import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
@@ -129,7 +133,7 @@ export type ParentProps = {|
   responseColorsDisabled?: boolean,
   isValidDate?: (current: moment) => boolean,
   withCharacterCounter?: boolean,
-  dateFormat?: string,
+  dateProps?: DateProps,
 |};
 
 type Props = {|
@@ -211,7 +215,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     responseColorsDisabled,
     isValidDate,
     withCharacterCounter,
-    dateFormat,
+    dateProps,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -375,6 +379,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (type === 'datetime') {
       formControl = (
         <DateTime
+          {...dateProps}
           value={value}
           dateTimeInputProps={dateTimeInputProps}
           timeConstraints={timeConstraints}
@@ -383,7 +388,6 @@ class ReactBootstrapInput extends React.Component<Props> {
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
-          dateFormat={dateFormat}
         />
       );
     }

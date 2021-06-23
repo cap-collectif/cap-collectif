@@ -23,11 +23,11 @@ const FRAGMENT = graphql`
   }
 `;
 
-const formatCategories = values =>
+const formatCategories = (values, totalCount) =>
   values.map(value => ({
     id: value.category.id,
     label: value.category.name,
-    value: value.totalCount,
+    value: parseInt(((value.totalCount / totalCount) * 100).toFixed(2), 10),
   }));
 
 const SectionProposalCategories = ({ categories: categoriesFragment }: Props): React.Node => {
@@ -36,7 +36,7 @@ const SectionProposalCategories = ({ categories: categoriesFragment }: Props): R
 
   return (
     <Section label={intl.formatMessage({ id: 'categories-most-use-proposal' })} flex={1}>
-      <PieChart percentages={formatCategories(categories.values)} />
+      <PieChart percentages={formatCategories(categories.values, categories.totalCount)} />
     </Section>
   );
 };

@@ -5,12 +5,19 @@ import styled, { type StyledComponent } from 'styled-components';
 import moment from 'moment';
 
 export type DateTimeInputProps = {|
-  placeholder?: string,
-  disabled?: boolean,
-  required?: boolean,
-  name?: string,
-  className?: string,
-  id?: string,
+  +placeholder?: string,
+  +disabled?: boolean,
+  +required?: boolean,
+  +name?: string,
+  +className?: string,
+  +id?: string,
+|};
+
+export type DateProps = {|
+  +closeOnSelect?: boolean,
+  +dateFormat?: string,
+  +timeFormat?: string | boolean,
+  +initialViewDate?: string,
 |};
 
 export type TimeConstraintsProps = {|
@@ -44,12 +51,12 @@ export const DEFAULT_TIME_CONSTRAINTS = {
 };
 
 type Props = {
+  ...DateProps,
   value?: any,
   onChange: Function,
   dateTimeInputProps?: DateTimeInputProps,
   timeConstraints?: TimeConstraintsProps,
   isValidDate?: (current: moment) => boolean,
-  dateFormat?: string,
 };
 
 const BasicDateTime: StyledComponent<{}, {}, typeof BaseDateTime> = styled(BaseDateTime)`
@@ -66,16 +73,27 @@ class DateTime extends React.Component<Props> {
   };
 
   render() {
-    const { onChange, dateTimeInputProps, isValidDate, timeConstraints, dateFormat } = this.props;
+    const {
+      onChange,
+      dateTimeInputProps,
+      isValidDate,
+      timeConstraints,
+      dateFormat,
+      closeOnSelect,
+      initialViewDate,
+      timeFormat,
+    } = this.props;
 
     return (
       <BasicDateTime
         {...this.props}
         dateFormat="YYYY-MM-DD"
-        timeFormat="HH:mm:ss"
+        timeFormat={timeFormat ?? 'HH:mm:ss'}
         isValidDate={current => (isValidDate ? isValidDate(current) : true)}
         timeConstraints={timeConstraints}
         inputProps={dateTimeInputProps}
+        closeOnSelect={closeOnSelect}
+        viewDate={initialViewDate ? new Date(initialViewDate) : undefined}
         onChange={value => {
           if (value._isAMomentObject) {
             onChange(value.format(dateFormat || 'YYYY-MM-DD HH:mm:ss'));

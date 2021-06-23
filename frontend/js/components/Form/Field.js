@@ -6,7 +6,11 @@ import Input from './Input';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 import type { AddressProps } from '~/components/Form/Address/Address.type';
-import type { DateTimeInputProps, TimeConstraintsProps } from '~/components/Form/DateTime';
+import type {
+  DateTimeInputProps,
+  TimeConstraintsProps,
+  DateProps,
+} from '~/components/Form/DateTime';
 
 type Props = {|
   meta: {
@@ -97,7 +101,7 @@ type Props = {|
   responseColorsDisabled?: boolean,
   isValidDate?: (current: moment) => boolean,
   withCharacterCounter?: boolean,
-  dateFormat?: string,
+  dateProps?: DateProps,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -154,7 +158,7 @@ class Field extends React.Component<Props> {
       isValidDate,
       timeConstraints,
       withCharacterCounter,
-      dateFormat,
+      dateProps,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -231,7 +235,7 @@ class Field extends React.Component<Props> {
         isValidDate={isValidDate}
         timeConstraints={timeConstraints}
         withCharacterCounter={withCharacterCounter}
-        dateFormat={dateFormat}
+        dateProps={dateProps}
         {...input}>
         {children}
       </Input>

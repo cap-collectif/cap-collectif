@@ -34,10 +34,12 @@ const PieChart = ({ percentages, ...props }: PieChartProps) => {
   const intl = useIntl();
   const [hovered, setHovered] = React.useState<?string>(null);
 
-  const displayPercentages: PercentageFormatted[] = percentages
+  const percentagesSorted = percentages.sort((p1, p2) => (p1.value > p2.value ? -1 : 1));
+
+  const displayPercentages: PercentageFormatted[] = percentagesSorted
     .slice(0, percentageColors.length)
     .map((p, idx) => ({ ...p, color: percentageColors[idx] }));
-  const otherPercentages: PercentageFormatted = percentages
+  const otherPercentages: PercentageFormatted = percentagesSorted
     .slice(percentageColors.length, percentages.length)
     .reduce(
       (acc, percentage) => ({

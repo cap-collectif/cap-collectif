@@ -22,12 +22,12 @@ exports[`<SectionProposalCategories /> <TestSectionProposalCategories /> should 
         title="Environment"
       >
         <div
-          className="sc-bdnylx gLGRoa"
+          className="sc-bdnylx fOVeYY"
         />
         <p
           className="sc-bdnylx dbMpeV"
         >
-          Environment (4%)
+          Environment (66%)
         </p>
       </div>
       <div
@@ -37,12 +37,12 @@ exports[`<SectionProposalCategories /> <TestSectionProposalCategories /> should 
         title="Justice"
       >
         <div
-          className="sc-bdnylx fOVeYY"
+          className="sc-bdnylx gLGRoa"
         />
         <p
           className="sc-bdnylx dbMpeV"
         >
-          Justice (2%)
+          Justice (33%)
         </p>
       </div>
     </div>

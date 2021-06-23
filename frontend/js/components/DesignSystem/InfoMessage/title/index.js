@@ -64,7 +64,7 @@ const InfoMessageTitle = ({
     align="center"
     {...props}>
     {withIcon && variant && getIcon(variant)}
-    <Text fontSize={1} fontWeight={FontWeight.Semibold}>
+    <Text fontSize={1} fontWeight={FontWeight.Semibold} lineHeight="sm">
       {children}
     </Text>
   </Flex>
