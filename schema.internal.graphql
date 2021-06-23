@@ -5826,6 +5826,9 @@ type MailingList implements Node {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Filter the list by consent to internal communication"""
+    consentInternalCommunicationOnly: Boolean = false
   ): UserConnection!
 
   """the project from which the list has been built, if any"""
@@ -9584,6 +9587,9 @@ type Query {
 
     """Filter the list by email confirmation"""
     emailConfirmed: Boolean = null
+
+    """Filter the list by consent to internal communication"""
+    consentInternalCommunication: Boolean = null
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 

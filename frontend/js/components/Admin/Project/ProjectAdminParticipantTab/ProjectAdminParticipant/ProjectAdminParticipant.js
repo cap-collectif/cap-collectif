@@ -14,7 +14,7 @@ import {
 import UserAvatar from '~/components/User/UserAvatar';
 import InlineList from '~ui/List/InlineList';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import colors from '~/utils/colors';
+import colors, { styleGuideColors } from '~/utils/colors';
 import { translateContent } from '~/utils/ContentTranslator';
 import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
@@ -47,6 +47,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     contributions,
     userType,
     isEmailConfirmed,
+    consentInternalCommunication,
   } = participant;
 
   const hasCompleteName = !!firstname && !!lastname;
@@ -79,6 +80,18 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
                 </Tooltip>
               }>
               <Icon name={ICON_NAME.verified} size={14} />
+            </OverlayTrigger>
+          )}
+
+          {hasFeatureEmail && consentInternalCommunication && (
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip id="tooltip-consent-to-email">
+                  {intl.formatMessage({ id: 'has-consent-to-internal-email' }, { num: 1 })}
+                </Tooltip>
+              }>
+              <Icon name={ICON_NAME.mail} size={14} color={styleGuideColors.gray500} />
             </OverlayTrigger>
           )}
         </UsernameContainer>
@@ -148,6 +161,7 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
       email
       vip
       isEmailConfirmed
+      consentInternalCommunication
       userType {
         id
         name

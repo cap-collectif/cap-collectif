@@ -7,12 +7,14 @@ import { useDisclosure } from '@liinkiing/react-hooks';
 import { Container } from '../common.style';
 import { InstructionContainer, InfoRow, InfoMailingList, ButtonMembers } from './style';
 import component from '~/components/Form/Field';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 import ModalInternalMembers from '~/components/Admin/Emailing/ModalMembers/ModalInternalMembers';
-import colors from '~/utils/colors';
 import type { Parameter_query } from '~relay/Parameter_query.graphql';
 import type { Parameter_emailingCampaign } from '~relay/Parameter_emailingCampaign.graphql';
+import Text from '~ui/Primitives/Text';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -38,30 +40,45 @@ export const getWordingMailingInternal = (mailingInternal: string, intl: IntlSha
 
 export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: Props) => {
   const { mailingList, mailingInternal } = emailingCampaign;
-  const { mailingLists, users, usersConfirmed, usersNotConfirmed } = query;
+  const {
+    mailingLists,
+    users,
+    usersConfirmed,
+    usersNotConfirmed,
+    usersRefusing,
+    usersConfirmedRefusing,
+    usersNotConfirmedRefusing,
+  } = query;
   const intl = useIntl();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const hasMailingList = !!mailingList || !!mailingInternal;
   const [countUsers, setCountUsers] = React.useState<number>(0);
+  const [countUsersRefusing, setCountUsersRefusing] = React.useState<number>(0);
 
   React.useEffect(() => {
     if (mailingInternal) {
       switch (mailingInternal) {
         case 'CONFIRMED':
           setCountUsers(usersConfirmed.totalCount);
+          setCountUsersRefusing(usersConfirmedRefusing.totalCount);
           break;
         case 'NOT_CONFIRMED':
           setCountUsers(usersNotConfirmed.totalCount);
+          setCountUsersRefusing(usersNotConfirmedRefusing.totalCount);
           break;
         case 'REGISTERED':
         default:
           setCountUsers(users.totalCount);
+          setCountUsersRefusing(usersRefusing.totalCount);
           break;
       }
     }
 
     if (mailingList) {
       setCountUsers(mailingList.mailingListUsers.totalCount);
+      setCountUsersRefusing(
+        mailingList.mailingListUsers.totalCount - mailingList.mailingListUsersConsenting.totalCount,
+      );
     }
   }, [
     mailingInternal,
@@ -69,6 +86,9 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
     users.totalCount,
     usersConfirmed.totalCount,
     usersNotConfirmed.totalCount,
+    usersRefusing.totalCount,
+    usersConfirmedRefusing.totalCount,
+    usersNotConfirmedRefusing.totalCount,
   ]);
 
   return (
@@ -115,21 +135,33 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       {hasMailingList && countUsers > 0 && (
         <InfoMailingList>
           <InfoRow>
-            <Icon name={ICON_NAME.newUser} size={13} color={colors.darkText} />
-            <p>
-              <span>{countUsers}</span>{' '}
-              <FormattedMessage id="global.members" values={{ num: countUsers }} />
-            </p>
+            <Flex>
+              <Icon name={ICON_NAME.USER_O} size="md" color="gray.500" />
+              <Text as="span">
+                {countUsers - countUsersRefusing}{' '}
+                <FormattedMessage
+                  id="global.members"
+                  values={{ num: countUsers - countUsersRefusing }}
+                />{' '}
+              </Text>
+              <Tooltip
+                label={intl.formatMessage(
+                  { id: 'has-consent-to-internal-email' },
+                  { num: countUsers - countUsersRefusing },
+                )}>
+                <Icon name={ICON_NAME.CIRCLE_INFO} size="md" color="blue.500" />
+              </Tooltip>
 
-            {mailingList?.project && (
-              <p>
-                <Icon name={ICON_NAME.favoriteBook} size={16} color={colors.darkText} />
-                <span>{mailingList.project.title}</span>
-              </p>
-            )}
+              {mailingList?.project && (
+                <>
+                  <Icon name={ICON_NAME.BOOK_STAR_O} size="md" color="gray.900" />
+                  <Text as="span">{mailingList.project.title}</Text>
+                </>
+              )}
+            </Flex>
           </InfoRow>
 
-          {countUsers > 0 && (
+          {countUsers > 0 && countUsers > countUsersRefusing && (
             <ButtonMembers type="button" onClick={onOpen}>
               {intl.formatMessage({ id: 'consult-members' })}
             </ButtonMembers>
@@ -169,6 +201,9 @@ export default createFragmentContainer(ParameterPage, {
         mailingListUsers: users(first: 0) {
           totalCount
         }
+        mailingListUsersConsenting: users(first: 0, consentInternalCommunicationOnly: true) {
+          totalCount
+        }
         ...ModalMembers_mailingList
       }
       mailingInternal
@@ -188,10 +223,27 @@ export default createFragmentContainer(ParameterPage, {
       users(first: 0) {
         totalCount
       }
+      usersRefusing: users(first: 0, consentInternalCommunication: false) {
+        totalCount
+      }
       usersConfirmed: users(first: 0, emailConfirmed: true) {
         totalCount
       }
+      usersConfirmedRefusing: users(
+        first: 0
+        emailConfirmed: true
+        consentInternalCommunication: false
+      ) {
+        totalCount
+      }
       usersNotConfirmed: users(first: 0, emailConfirmed: false) {
+        totalCount
+      }
+      usersNotConfirmedRefusing: users(
+        first: 0
+        emailConfirmed: false
+        consentInternalCommunication: false
+      ) {
         totalCount
       }
     }

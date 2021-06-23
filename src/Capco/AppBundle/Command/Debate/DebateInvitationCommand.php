@@ -82,8 +82,9 @@ class DebateInvitationCommand extends Command
         $progressBar = new ProgressBar($output, \count($users));
 
         $counter = 0;
+        /** @var User $user */
         foreach ($users as $user) {
-            if ($user->getEmail()) {
+            if ($user->getEmail() && $user->isConsentInternalCommunication()) {
                 try {
                     $voteToken = $this->getVoteToken($user, $debate);
                     if (null === $voteToken || ($isReminder && $voteToken->isValid())) {

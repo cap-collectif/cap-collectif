@@ -2,10 +2,13 @@
 
 namespace Capco\AppBundle\Mailer;
 
+use Capco\AppBundle\Entity\ActionToken;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\MessageRecipient;
+use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -14,6 +17,7 @@ class MailerService extends MailerFactory
 {
     protected \Swift_Mailer $mailer;
     protected Environment $templating;
+    protected TokenManager $tokenManager;
     protected array $failedRecipients;
 
     public function __construct(
@@ -21,11 +25,13 @@ class MailerService extends MailerFactory
         Environment $templating,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
-        RouterInterface $router
+        RouterInterface $router,
+        TokenManager $tokenManager
     ) {
         parent::__construct($translator, $siteParams, $router);
         $this->mailer = $mailer;
         $this->templating = $templating;
+        $this->tokenManager = $tokenManager;
         $this->failedRecipients = [];
     }
 
@@ -37,6 +43,9 @@ class MailerService extends MailerFactory
         ?string $recipientEmail = null,
         ?string $replyTo = null
     ): bool {
+        if ($recipient && $recipient->getId()) {
+            $params['unsubscribeUrl'] = $this->getUnsubscribeUrl($recipient);
+        }
         $params['locale'] =
             $recipient && $recipient->getLocale()
                 ? $recipient->getLocale()
@@ -181,5 +190,14 @@ class MailerService extends MailerFactory
     private function isTwigTemplate(string $template): bool
     {
         return strpos($template, '.twig');
+    }
+
+    private function getUnsubscribeUrl(User $recipient): string
+    {
+        return $this->router->generate(
+            'capco_app_action_token',
+            ['token' =>$this->tokenManager->getOrCreateActionToken($recipient, ActionToken::UNSUBSCRIBE)->getToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 }

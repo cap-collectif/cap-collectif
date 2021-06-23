@@ -72,6 +72,7 @@ class DebateLaunch extends AbstractExternalMessage
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],
             'participantsCount' => $params['participantsCount'],
+            'unsubscribeUrl' => $params['unsubscribeUrl']
         ];
     }
 }

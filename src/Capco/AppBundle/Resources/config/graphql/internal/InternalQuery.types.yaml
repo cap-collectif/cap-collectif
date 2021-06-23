@@ -196,6 +196,10 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: null
                         description: 'Filter the list by email confirmation'
+                    consentInternalCommunication:
+                        type: 'Boolean'
+                        defaultValue: null
+                        description: 'Filter the list by consent to internal communication'
                     orderBy:
                         type: 'UserOrder'
                         defaultValue:

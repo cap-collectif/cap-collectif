@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import colors from '~/utils/colors';
+import colors from '~/styles/modules/colors';
 
 export const HeaderContainer: StyledComponent<{}, {}, HTMLElement> = styled.header`
   display: flex;
@@ -14,10 +14,14 @@ export const ButtonSendMail: StyledComponent<{}, {}, HTMLButtonElement> = styled
   margin: 0;
   background: none;
   border: none;
-  color: ${colors.darkGray};
+  color: ${colors.gray[800]};
   font-weight: bold;
 
   .icon {
     margin-right: 4px;
+  }
+
+  &:disabled {
+    color: ${colors.gray[300]};
   }
 `;

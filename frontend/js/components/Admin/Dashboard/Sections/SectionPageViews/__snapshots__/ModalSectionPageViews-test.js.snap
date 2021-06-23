@@ -71,7 +71,7 @@ exports[`<ModalSectionPageViews /> <TestModalSectionPageViews /> should render c
             className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB hmLkpw info-message-title"
           >
             <p
-              className="sc-bdnylx dIvYFu"
+              className="sc-bdnylx cMBgDJ"
             >
               additional-information
             </p>

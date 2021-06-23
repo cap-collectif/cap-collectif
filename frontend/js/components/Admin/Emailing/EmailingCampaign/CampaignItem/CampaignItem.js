@@ -4,10 +4,10 @@ import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useIntl } from 'react-intl';
 import { Container, Circle, InfoRow } from './CampaignItem.style';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import { type CampaignItem_campaign } from '~relay/CampaignItem_campaign.graphql';
-import colors from '~/utils/colors';
 import { getWordingMailingInternal } from '~/components/Admin/Emailing/MailParameter/Parameter';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   campaign: CampaignItem_campaign,
@@ -73,11 +73,13 @@ export const CampaignItem = ({ campaign, selected }: Props) => {
       </InfoRow>
 
       {(mailingList || mailingInternal) && (
-        <p>
-          <Icon name={ICON_NAME.newUser} size={15} color={colors.secondaryGray} />
-          {mailingList && mailingList.name}
-          {mailingInternal && getWordingMailingInternal(mailingInternal, intl)}
-        </p>
+        <Flex direction="row" align="center">
+          <Icon name={ICON_NAME.USER_O} size="md" color="gray.500" />
+          <span>
+            {mailingList && mailingList.name}
+            {mailingInternal && getWordingMailingInternal(mailingInternal, intl)}
+          </span>
+        </Flex>
       )}
     </Container>
   );

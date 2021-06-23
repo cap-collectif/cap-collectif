@@ -74,12 +74,14 @@ class MailingList
         return $this->users;
     }
 
-    public function getUsersWithValidEmail(): Collection
+    public function getUsersWithValidEmail(bool $consentInternalOnly = false): Collection
     {
         $usersWithValidEmail = new ArrayCollection();
         foreach ($this->users as $user) {
             if ($user->getEmail()) {
-                $usersWithValidEmail->add($user);
+                if (!$consentInternalOnly || $user->isConsentInternalCommunication()) {
+                    $usersWithValidEmail->add($user);
+                }
             }
         }
 
@@ -158,7 +160,7 @@ class MailingList
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): MailingList
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 

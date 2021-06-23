@@ -3,12 +3,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Field, reduxForm, formValueSelector, submit } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
 import component from '~/components/Form/Field';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import type { Dispatch, GlobalState } from '~/types';
 import { Container, InfoContainer, ButtonSave } from './ModalCreateMailingList.style';
 import CreateMailingListMutation from '~/mutations/CreateMailingListMutation';
@@ -16,6 +16,12 @@ import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import type { ModalCreateMailingList_project } from '~relay/ModalCreateMailingList_project.graphql';
 import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation';
+import colors from '~/styles/modules/colors';
+import Text from '~ui/Primitives/Text';
+import InfoMessage from '~ds/InfoMessage/InfoMessage';
+import Link from '~ds/Link/Link';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 const formName = 'form-create-mailing-list';
 
@@ -24,6 +30,7 @@ type Props = {|
   show: boolean,
   onClose: () => void,
   members: string[],
+  refusingCount: number,
   project: ModalCreateMailingList_project,
   mailingListName: string,
   dispatch: Dispatch,
@@ -136,63 +143,99 @@ const ModalCreateMailingList = ({
   show,
   onClose,
   members,
+  refusingCount,
   project,
   dispatch,
   mailingListName,
   pristine,
-}: Props) => (
-  <Container
-    animation={false}
-    show={show}
-    onHide={onClose}
-    bsSize="large"
-    aria-labelledby="modal-title">
-    <Modal.Header closeButton>
-      <Modal.Title id="modal-title">
-        <FormattedMessage id="create-mailing-list" />
-      </Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <form>
-        <Field
-          type="text"
-          name="mailingListName"
-          label={<FormattedMessage id="title-list" />}
-          component={component}
-          id="mailing-list-name"
-        />
+}: Props) => {
+  const intl = useIntl();
 
-        <InfoContainer>
-          <Icon name={ICON_NAME.newUser} size={14} color="#000" />
-          <p>
-            <span className="count-members">{members.length}</span>
-            <FormattedMessage id="global.members" values={{ num: members.length }} />
-          </p>
-          <span className="project-title">{` - « ${project.title} »`}</span>
-        </InfoContainer>
-      </form>
-    </Modal.Body>
+  return (
+    <Container
+      animation={false}
+      show={show}
+      onHide={onClose}
+      bsSize="large"
+      aria-labelledby="modal-title">
+      <Modal.Header closeButton>
+        <Modal.Title id="modal-title">
+          <FormattedMessage id="create-mailing-list" />
+        </Modal.Title>
+      </Modal.Header>
 
-    <Modal.Footer>
-      <ButtonSave
-        type="button"
-        onClick={() => createMailingList(project.id, members, mailingListName, onClose)}
-        disabled={pristine}>
-        <FormattedMessage id="global.save" />
-      </ButtonSave>
+      <Modal.Body>
+        <form>
+          <Field
+            type="text"
+            name="mailingListName"
+            label={<FormattedMessage id="title-list" />}
+            component={component}
+            id="mailing-list-name"
+          />
 
-      <div>
-        <CloseButton onClose={onClose} label="editor.undo" />
-        <SubmitButton
-          label="global.continue"
-          onSubmit={() => dispatch(submit(formName))}
-          bsStyle="primary"
-          disabled={pristine}
-        />
-      </div>
-    </Modal.Footer>
-  </Container>
-);
+          <InfoContainer>
+            <Icon name={ICON_NAME.USER_O} size="md" color="gray.500" mr={1} />
+            <Text>
+              <span className="count-members">{members.length - refusingCount}</span>
+              <FormattedMessage
+                id="global.members"
+                values={{ num: members.length - refusingCount }}
+              />
+            </Text>
+            <Tooltip
+              label={intl.formatMessage(
+                { id: 'has-consent-to-internal-email' },
+                { num: members.length - refusingCount },
+              )}>
+              <Flex ml={1}>
+                <Icon name={ICON_NAME.CIRCLE_INFO} size="md" color="blue.500" />
+              </Flex>
+            </Tooltip>
+            <Text as="span" className="project-title">
+              {` - « ${project.title} »`}
+            </Text>
+          </InfoContainer>
+        </form>
+        <InfoMessage variant="warning" mt={4}>
+          <InfoMessage.Title>
+            {intl.formatMessage({ id: 'rgpd.external.unsubscribe' })}
+          </InfoMessage.Title>
+          <InfoMessage.Content>
+            <Text as="span" style={{ fontSize: '1.0rem' }}>
+              {intl.formatMessage({ id: 'rgpd.external.unsubscribe.message' })}
+            </Text>
+            <Link
+              href="https://aide.cap-collectif.com/article/121-exporter-les-donnees-utilisateurs"
+              target="_blank"
+              style={{ color: colors.orange[900] }}>
+              {intl.formatMessage({ id: 'learn.more' })}
+            </Link>
+          </InfoMessage.Content>
+        </InfoMessage>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <ButtonSave
+          type="button"
+          onClick={() => createMailingList(project.id, members, mailingListName, onClose)}
+          disabled={pristine}>
+          <FormattedMessage id="global.save" />
+        </ButtonSave>
+
+        <div>
+          <CloseButton onClose={onClose} label="editor.undo" />
+          <SubmitButton
+            label="global.continue"
+            onSubmit={() => dispatch(submit(formName))}
+            bsStyle="primary"
+            disabled={pristine}
+          />
+        </div>
+      </Modal.Footer>
+    </Container>
+  );
+};
 
 const form = reduxForm({
   onSubmit,

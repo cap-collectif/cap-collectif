@@ -9,7 +9,11 @@ const baseProps = {
   mailingList: {
     $refType,
     id: 'mailingList-123',
+    allMembers: {
+      totalCount: 2,
+    },
     members: {
+      totalCount: 2,
       pageInfo: {
         hasNextPage: true,
       },

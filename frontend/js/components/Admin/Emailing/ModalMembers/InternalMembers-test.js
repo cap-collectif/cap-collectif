@@ -8,6 +8,9 @@ import { $refType, relayPaginationMock } from '~/mocks';
 const baseProps = {
   query: {
     $refType,
+    refusingMembers: {
+      totalCount: 0,
+    },
     members: {
       pageInfo: {
         hasNextPage: true,

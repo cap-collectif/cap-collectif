@@ -3,10 +3,12 @@ import * as React from 'react';
 import type { RelayPaginationProp } from 'react-relay';
 import InfiniteScroll from 'react-infinite-scroller';
 import { createPaginationContainer, graphql } from 'react-relay';
+import { useIntl } from 'react-intl';
 import type { InternalMembers_query } from '~relay/InternalMembers_query.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Spinner from '~ds/Spinner/Spinner';
+import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
 export const USERS_PAGINATION = 20;
 
@@ -17,6 +19,7 @@ type Props = {|
 
 export const InternalMembers = ({ query, relay }: Props) => {
   const listMembersRef = React.useRef(null);
+  const intl = useIntl();
 
   return (
     <AppBox
@@ -25,6 +28,19 @@ export const InternalMembers = ({ query, relay }: Props) => {
       m={0}
       css={{ listStyle: 'none', overflow: 'auto', maxHeight: '300px' }}
       ref={listMembersRef}>
+      {query.refusingMembers.totalCount > 0 && (
+        <InfoMessage variant="info" mb={6}>
+          <InfoMessage.Title>
+            {intl.formatMessage(
+              { id: 'mailingList-refusing-members-count' },
+              { num: query.refusingMembers.totalCount },
+            )}
+          </InfoMessage.Title>
+          <InfoMessage.Content>
+            {intl.formatMessage({ id: 'mailingList-refusing-members' })}
+          </InfoMessage.Content>
+        </InfoMessage>
+      )}
       <InfiniteScroll
         key="infinite-scroll-internal-members"
         initialLoad={false}
@@ -62,8 +78,15 @@ export default createPaginationContainer(
           cursor: { type: "String" }
           emailConfirmed: { type: "Boolean" }
         ) {
-        members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed)
-          @connection(key: "InternalMembers_members", filters: []) {
+        refusingMembers: users(consentInternalCommunication: false) {
+          totalCount
+        }
+        members: users(
+          first: $count
+          after: $cursor
+          emailConfirmed: $emailConfirmed
+          consentInternalCommunication: true
+        ) @connection(key: "InternalMembers_members", filters: []) {
           pageInfo {
             hasNextPage
           }

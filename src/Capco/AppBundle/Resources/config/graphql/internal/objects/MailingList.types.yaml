@@ -21,6 +21,11 @@ MailingList:
                 description: 'users in the mailing list'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListUsersConnection", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    consentInternalCommunicationOnly:
+                        type: Boolean
+                        defaultValue: false
+                        description: 'Filter the list by consent to internal communication'
             project:
                 type: 'InternalProject'
                 description: 'the project from which the list has been built, if any'

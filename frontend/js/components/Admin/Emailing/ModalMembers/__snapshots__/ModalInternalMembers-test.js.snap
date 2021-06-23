@@ -100,12 +100,41 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
             "name": "ModalInternalMembersQuery",
             "selections": Array [
               Object {
+                "alias": "refusingMembers",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": false,
+                  },
+                ],
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "users",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "users(consentInternalCommunication:false)",
+              },
+              Object {
                 "alias": "members",
                 "args": Array [
                   Object {
                     "kind": "Variable",
                     "name": "after",
                     "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": true,
                   },
                   Object {
                     "kind": "Variable",
@@ -210,6 +239,11 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
                     "variableName": "cursor",
                   },
                   Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": true,
+                  },
+                  Object {
                     "kind": "Variable",
                     "name": "emailConfirmed",
                     "variableName": "emailConfirmed",
@@ -229,7 +263,7 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
             ],
           },
           "params": Object {
-            "cacheID": "8ef3f526ab5cabc4ba695937e708993c",
+            "cacheID": "11f6654c7074d2a44e8a8ccf309990dc",
             "id": null,
             "metadata": Object {},
             "name": "ModalInternalMembersQuery",
@@ -243,7 +277,10 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
 }
 
 fragment InternalMembers_query_HnPGj on Query {
-  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed) {
+  refusingMembers: users(consentInternalCommunication: false) {
+    totalCount
+  }
+  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true) {
     pageInfo {
       hasNextPage
       endCursor
@@ -374,12 +411,41 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
             "name": "ModalInternalMembersQuery",
             "selections": Array [
               Object {
+                "alias": "refusingMembers",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": false,
+                  },
+                ],
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "users",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "users(consentInternalCommunication:false)",
+              },
+              Object {
                 "alias": "members",
                 "args": Array [
                   Object {
                     "kind": "Variable",
                     "name": "after",
                     "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": true,
                   },
                   Object {
                     "kind": "Variable",
@@ -484,6 +550,11 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
                     "variableName": "cursor",
                   },
                   Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": true,
+                  },
+                  Object {
                     "kind": "Variable",
                     "name": "emailConfirmed",
                     "variableName": "emailConfirmed",
@@ -503,7 +574,7 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
             ],
           },
           "params": Object {
-            "cacheID": "8ef3f526ab5cabc4ba695937e708993c",
+            "cacheID": "11f6654c7074d2a44e8a8ccf309990dc",
             "id": null,
             "metadata": Object {},
             "name": "ModalInternalMembersQuery",
@@ -517,7 +588,10 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
 }
 
 fragment InternalMembers_query_HnPGj on Query {
-  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed) {
+  refusingMembers: users(consentInternalCommunication: false) {
+    totalCount
+  }
+  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true) {
     pageInfo {
       hasNextPage
       endCursor
@@ -648,12 +722,41 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
             "name": "ModalInternalMembersQuery",
             "selections": Array [
               Object {
+                "alias": "refusingMembers",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": false,
+                  },
+                ],
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "users",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "users(consentInternalCommunication:false)",
+              },
+              Object {
                 "alias": "members",
                 "args": Array [
                   Object {
                     "kind": "Variable",
                     "name": "after",
                     "variableName": "cursor",
+                  },
+                  Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": true,
                   },
                   Object {
                     "kind": "Variable",
@@ -758,6 +861,11 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
                     "variableName": "cursor",
                   },
                   Object {
+                    "kind": "Literal",
+                    "name": "consentInternalCommunication",
+                    "value": true,
+                  },
+                  Object {
                     "kind": "Variable",
                     "name": "emailConfirmed",
                     "variableName": "emailConfirmed",
@@ -777,7 +885,7 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
             ],
           },
           "params": Object {
-            "cacheID": "8ef3f526ab5cabc4ba695937e708993c",
+            "cacheID": "11f6654c7074d2a44e8a8ccf309990dc",
             "id": null,
             "metadata": Object {},
             "name": "ModalInternalMembersQuery",
@@ -791,7 +899,10 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
 }
 
 fragment InternalMembers_query_HnPGj on Query {
-  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed) {
+  refusingMembers: users(consentInternalCommunication: false) {
+    totalCount
+  }
+  members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true) {
     pageInfo {
       hasNextPage
       endCursor

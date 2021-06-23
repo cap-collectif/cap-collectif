@@ -151,12 +151,41 @@ exports[`<ModalMembers /> should render correctly 1`] = `
                     "kind": "InlineFragment",
                     "selections": Array [
                       Object {
+                        "alias": "allMembers",
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "consentInternalCommunicationOnly",
+                            "value": false,
+                          },
+                        ],
+                        "concreteType": "UserConnection",
+                        "kind": "LinkedField",
+                        "name": "users",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "users(consentInternalCommunicationOnly:false)",
+                      },
+                      Object {
                         "alias": "members",
                         "args": Array [
                           Object {
                             "kind": "Variable",
                             "name": "after",
                             "variableName": "cursor",
+                          },
+                          Object {
+                            "kind": "Literal",
+                            "name": "consentInternalCommunicationOnly",
+                            "value": true,
                           },
                           Object {
                             "kind": "Variable",
@@ -169,6 +198,13 @@ exports[`<ModalMembers /> should render correctly 1`] = `
                         "name": "users",
                         "plural": false,
                         "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
                           Object {
                             "alias": null,
                             "args": null,
@@ -256,6 +292,11 @@ exports[`<ModalMembers /> should render correctly 1`] = `
                             "variableName": "cursor",
                           },
                           Object {
+                            "kind": "Literal",
+                            "name": "consentInternalCommunicationOnly",
+                            "value": true,
+                          },
+                          Object {
                             "kind": "Variable",
                             "name": "first",
                             "variableName": "count",
@@ -276,7 +317,7 @@ exports[`<ModalMembers /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "b897493f833c7f5c1ba07ae0c3f104f1",
+            "cacheID": "de85fc81295d9fda38c6d4a55bd1d471",
             "id": null,
             "metadata": Object {},
             "name": "ModalMembersQuery",
@@ -297,7 +338,11 @@ exports[`<ModalMembers /> should render correctly 1`] = `
 
 fragment Members_mailingList_1G22uz on MailingList {
   id
-  members: users(first: $count, after: $cursor) {
+  allMembers: users(consentInternalCommunicationOnly: false) {
+    totalCount
+  }
+  members: users(first: $count, after: $cursor, consentInternalCommunicationOnly: true) {
+    totalCount
     pageInfo {
       hasNextPage
       endCursor

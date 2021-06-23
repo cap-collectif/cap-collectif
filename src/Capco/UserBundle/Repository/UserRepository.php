@@ -1157,10 +1157,16 @@ class UserRepository extends EntityRepository
         return $this->findByRole('ROLE_ADMIN');
     }
 
-    public function getFromInternalList(string $internalList): array
-    {
+    public function getFromInternalList(
+        string $internalList,
+        bool $includeUnsubscribed = false
+    ): array {
         $qb = $this->createQueryBuilder('u');
         $qb->select('u')->where('u.email IS NOT NULL');
+
+        if (!$includeUnsubscribed) {
+            $qb->andWhere('u.consent_internal_communication = 1');
+        }
 
         if (EmailingCampaignInternalList::CONFIRMED === $internalList) {
             $qb->andWhere('u.confirmationToken IS NULL');

@@ -253,7 +253,7 @@
 
 
             <div>
-                <p style="margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
+                <p style="margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by.with-unsubscribe'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,'{unsubscribeUrl}': unsubscribeUrl}, 'CapcoAppBundle', user_locale) | raw }}</p>
                 <p style="text-align: left;">
                     {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
 

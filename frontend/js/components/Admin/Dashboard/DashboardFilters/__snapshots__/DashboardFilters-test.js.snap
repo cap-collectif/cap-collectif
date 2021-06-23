@@ -358,7 +358,7 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
                     </tr>
                     <tr>
                       <td
-                        className="rdtDay rdtToday"
+                        className="rdtDay"
                         data-value={22}
                         onClick={[Function]}
                       >
@@ -730,7 +730,7 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
                         21
                       </td>
                       <td
-                        className="rdtDay rdtToday"
+                        className="rdtDay"
                         data-value={22}
                         onClick={[Function]}
                       >

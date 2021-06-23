@@ -19,10 +19,6 @@ export const Container: StyledComponent<
     color: ${colors.silverChalice};
     margin-bottom: 5px;
   }
-
-  .icon {
-    margin-right: 5px;
-  }
 `;
 
 export const ButtonMembers: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
@@ -34,13 +30,4 @@ export const ButtonMembers: StyledComponent<{}, {}, HTMLButtonElement> = styled.
   font-weight: bold;
   text-align: left;
   line-height: 1;
-`;
-
-export const InfoMembers: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  align-items: center;
-
-  p {
-    margin: 0;
-  }
 `;

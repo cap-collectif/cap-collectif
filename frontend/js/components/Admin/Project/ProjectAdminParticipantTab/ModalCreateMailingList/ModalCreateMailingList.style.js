@@ -27,10 +27,6 @@ export const InfoContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
   flex-direction: row;
   align-items: center;
 
-  .icon {
-    margin-right: 4px;
-  }
-
   p {
     margin: 0;
   }

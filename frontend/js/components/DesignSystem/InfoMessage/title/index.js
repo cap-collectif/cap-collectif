@@ -50,6 +50,23 @@ const getIcon = (variant: Variant) => {
   return <Icon {...variantIcon[variant]} size="sm" />;
 };
 
+const getColor = (variant?: Variant): string => {
+  switch (variant) {
+    case 'info':
+      return 'blue.900';
+    case 'infoGray':
+      return 'gray.900';
+    case 'danger':
+      return 'red.900';
+    case 'success':
+      return 'green.900';
+    case 'warning':
+      return 'orange.900';
+    default:
+      throw Error;
+  }
+};
+
 const InfoMessageTitle = ({
   children,
   className,
@@ -64,7 +81,7 @@ const InfoMessageTitle = ({
     align="center"
     {...props}>
     {withIcon && variant && getIcon(variant)}
-    <Text fontSize={1} fontWeight={FontWeight.Semibold} lineHeight="sm">
+    <Text color={getColor(variant)} fontSize={1} fontWeight={FontWeight.Semibold} lineHeight="sm">
       {children}
     </Text>
   </Flex>

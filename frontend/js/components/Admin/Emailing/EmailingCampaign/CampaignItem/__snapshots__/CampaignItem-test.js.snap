@@ -36,14 +36,19 @@ exports[`<CampaignItem /> should renders correctly 1`] = `
       </span>
     </p>
   </CampaignItemstyle__InfoRow>
-  <p>
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
     <Icon
-      color="#6c757d"
-      name="new-user"
-      size={15}
+      color="gray.500"
+      name="USER_O"
+      size="md"
     />
-    Je suis une mailing list
-  </p>
+    <span>
+      Je suis une mailing list
+    </span>
+  </ForwardRef>
 </CampaignItemstyle__Container>
 `;
 
@@ -112,14 +117,19 @@ exports[`<CampaignItem /> should renders correctly when no send at 1`] = `
       </span>
     </p>
   </CampaignItemstyle__InfoRow>
-  <p>
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
     <Icon
-      color="#6c757d"
-      name="new-user"
-      size={15}
+      color="gray.500"
+      name="USER_O"
+      size="md"
     />
-    Je suis une mailing list
-  </p>
+    <span>
+      Je suis une mailing list
+    </span>
+  </ForwardRef>
 </CampaignItemstyle__Container>
 `;
 
@@ -159,14 +169,19 @@ exports[`<CampaignItem /> should renders correctly when selected 1`] = `
       </span>
     </p>
   </CampaignItemstyle__InfoRow>
-  <p>
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
     <Icon
-      color="#6c757d"
-      name="new-user"
-      size={15}
+      color="gray.500"
+      name="USER_O"
+      size="md"
     />
-    Je suis une mailing list
-  </p>
+    <span>
+      Je suis une mailing list
+    </span>
+  </ForwardRef>
 </CampaignItemstyle__Container>
 `;
 
@@ -206,13 +221,18 @@ exports[`<CampaignItem /> should renders correctly with mailing list internal 1`
       </span>
     </p>
   </CampaignItemstyle__InfoRow>
-  <p>
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
     <Icon
-      color="#6c757d"
-      name="new-user"
-      size={15}
+      color="gray.500"
+      name="USER_O"
+      size="md"
     />
-    default-mailing-list-registered
-  </p>
+    <span>
+      default-mailing-list-registered
+    </span>
+  </ForwardRef>
 </CampaignItemstyle__Container>
 `;

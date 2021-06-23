@@ -32,9 +32,18 @@ class EmailingCampaignPreviewResolver implements ResolverInterface
     public function __invoke($campaign): string
     {
         return $this->twig->render(EmailingCampaignMessage::TEMPLATE, [
-            'baseUrl' => $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'siteUrl' => $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'baseUrl' => $this->router->generate(
+                'app_homepage',
+                [],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
+            'siteUrl' => $this->router->generate(
+                'app_homepage',
+                [],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
             'siteName' => $this->siteParams->getValue('global.site.fullname'),
+            'unsubscribeUrl' => '#',
             'user_locale' => '',
             'content' => self::getContentFromData($campaign),
         ]);

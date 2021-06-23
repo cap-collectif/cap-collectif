@@ -16,25 +16,48 @@ exports[`<MailingListItem /> should renders correctly 1`] = `
   >
     Je suis un titre de projet
   </p>
-  <MailingListItemstyle__InfoMembers>
-    <Icon
-      color="#6c757d"
-      name="new-user"
-      size={13}
-    />
-    <p>
-      2
-       
-      <FormattedMessage
-        id="global.members"
-        values={
-          Object {
-            "num": 2,
-          }
-        }
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
+    <ForwardRef>
+      <Icon
+        color="gray.500"
+        mr={1}
+        name="USER_O"
+        size="md"
       />
-    </p>
-  </MailingListItemstyle__InfoMembers>
+      <Text
+        as="span"
+        mr={1}
+      >
+        1
+      </Text>
+      <Text>
+        <FormattedMessage
+          id="global.members"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </Text>
+    </ForwardRef>
+    <Tooltip
+      label="has-consent-to-internal-email"
+    >
+      <ForwardRef
+        ml={1}
+      >
+        <Icon
+          color="blue.500"
+          name="CIRCLE_INFO"
+          size="md"
+        />
+      </ForwardRef>
+    </Tooltip>
+  </ForwardRef>
 </MailingListItemstyle__Container>
 `;
 
@@ -54,24 +77,47 @@ exports[`<MailingListItem /> should renders correctly when selected 1`] = `
   >
     Je suis un titre de projet
   </p>
-  <MailingListItemstyle__InfoMembers>
-    <Icon
-      color="#6c757d"
-      name="new-user"
-      size={13}
-    />
-    <p>
-      2
-       
-      <FormattedMessage
-        id="global.members"
-        values={
-          Object {
-            "num": 2,
-          }
-        }
+  <ForwardRef
+    align="center"
+    direction="row"
+  >
+    <ForwardRef>
+      <Icon
+        color="gray.500"
+        mr={1}
+        name="USER_O"
+        size="md"
       />
-    </p>
-  </MailingListItemstyle__InfoMembers>
+      <Text
+        as="span"
+        mr={1}
+      >
+        1
+      </Text>
+      <Text>
+        <FormattedMessage
+          id="global.members"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </Text>
+    </ForwardRef>
+    <Tooltip
+      label="has-consent-to-internal-email"
+    >
+      <ForwardRef
+        ml={1}
+      >
+        <Icon
+          color="blue.500"
+          name="CIRCLE_INFO"
+          size="md"
+        />
+      </ForwardRef>
+    </Tooltip>
+  </ForwardRef>
 </MailingListItemstyle__Container>
 `;

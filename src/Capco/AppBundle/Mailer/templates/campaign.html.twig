@@ -10,7 +10,11 @@
 
 {% block footer_mail %}
     <div>
-        <p style="margin: 0 0 18px 0;">{{ 'email.notification.footer.subscribe.to'|trans({'{siteName}': siteName,'{siteUrl}': url('app_homepage'),}, 'CapcoAppBundle', user_locale) | raw }}</p>
+        <p style="margin: 0;">{{ 'email.notification.footer.subscribe.to'|trans({'{siteName}': siteName,'{siteUrl}': url('app_homepage'),}, 'CapcoAppBundle', user_locale) | raw }}</p>
+
+        <p style="margin: 0 0 18px 0;">
+            {{ 'click-here-to-unsubscribe'|trans({'{unsubscribeUrl}': unsubscribeUrl,}, 'CapcoAppBundle', user_locale) | raw }}
+        </p>
 
         <p style="text-align: center;">
             {{ 'email.propulsed.by.capco'|trans({

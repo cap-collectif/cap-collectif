@@ -22,6 +22,12 @@ Scenario: GraphQL admin wants to get count of all users and have figures of emai
 	      usersWithSuperAdmin: users(superAdmin: true) {
 	        totalCount
 	      }
+	      usersWithConsentInternalCommunication: users(consentInternalCommunication: true) {
+	        totalCount
+	      }
+	      usersWithoutConsentInternalCommunication: users(consentInternalCommunication: false) {
+	        totalCount
+	      }
       }"
     }
   """
@@ -43,6 +49,12 @@ Scenario: GraphQL admin wants to get count of all users and have figures of emai
         },
         "usersWithSuperAdmin": {
           "totalCount": 235
+        },
+        "usersWithConsentInternalCommunication": {
+          "totalCount": 199
+        },
+        "usersWithoutConsentInternalCommunication": {
+          "totalCount": 27
         }
       }
     }

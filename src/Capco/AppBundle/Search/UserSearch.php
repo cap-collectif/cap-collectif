@@ -88,7 +88,8 @@ class UserSearch extends Search
         ?string $cursor = null,
         bool $showSuperAdmin = false,
         bool $includeDisabled = false,
-        ?bool $emailConfirmed = null
+        ?bool $emailConfirmed = null,
+        ?bool $consentInternalCommunication = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if (!$showSuperAdmin) {
@@ -102,6 +103,9 @@ class UserSearch extends Search
         }
         if (null !== $emailConfirmed) {
             $boolQuery->addFilter(new Term(['isEmailConfirmed' => $emailConfirmed]));
+        }
+        if (null !== $consentInternalCommunication) {
+            $boolQuery->addFilter(new Term(['isConsentInternalCommunication' => $consentInternalCommunication]));
         }
 
         $query = new Query();

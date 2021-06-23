@@ -12,10 +12,20 @@ class MailingListUsersConnection implements ResolverInterface
 {
     public function __invoke(MailingList $mailingList, Argument $argument): Connection
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($mailingList) {
-            return $mailingList->getUsersWithValidEmail()->toArray();
+        $paginator = new Paginator(function (int $offset, int $limit) use (
+            $mailingList,
+            $argument
+        ) {
+            return $mailingList
+                ->getUsersWithValidEmail($argument->offsetGet('consentInternalCommunicationOnly'))
+                ->toArray();
         });
 
-        return $paginator->auto($argument, $mailingList->getUsersWithValidEmail()->count());
+        return $paginator->auto(
+            $argument,
+            $mailingList
+                ->getUsersWithValidEmail($argument->offsetGet('consentInternalCommunicationOnly'))
+                ->count()
+        );
     }
 }

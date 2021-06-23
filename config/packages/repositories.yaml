@@ -608,3 +608,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:ProposalSocialNetworksRepository']
+
+    Capco\AppBundle\Repository\ActionTokenRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ActionToken']

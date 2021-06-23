@@ -11,8 +11,8 @@ const baseProps = {
     $refType,
     id: '1',
     name: 'Je suis une mailing list',
-    users: {
-      totalCount: 2,
+    usersConsenting: {
+      totalCount: 1,
     },
     project: {
       title: 'Je suis un titre de projet',

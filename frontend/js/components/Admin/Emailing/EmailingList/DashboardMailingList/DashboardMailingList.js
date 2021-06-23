@@ -13,6 +13,7 @@ import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers'
 import { type DashboardMailingList_query } from '~relay/DashboardMailingList_query.graphql';
 import NoMailingList from '~/components/Admin/Emailing/EmailingList/NoMailingList/NoMailingList';
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding';
+import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
 export const MAILING_LIST_PAGINATION = 30;
 
@@ -84,6 +85,13 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
           placeholder={intl.formatMessage({ id: 'global.menu.search' })}
         />
       </S.Header>
+
+      <InfoMessage variant="info" my={4}>
+        <InfoMessage.Title>{intl.formatMessage({ id: 'mailingList-update' })}</InfoMessage.Title>
+        <InfoMessage.Content>
+          {intl.formatMessage({ id: 'mailingList-update-beta' })}
+        </InfoMessage.Content>
+      </InfoMessage>
 
       <PickableList
         isLoading={status === 'loading'}

@@ -1,0 +1,20 @@
+{% extends '@CapcoApp/layout.html.twig' %}
+
+{% block mainContent %}
+    <div class="user-invitation-page-app-container">
+        {{ react_render_component('UserUnsubscribePageApp', {'rendering': 'client_side', props: {
+            logoUrl: media_public_url(capco_site_image_media('image.logo'), 'default_logo'),
+            platformName: siteName,
+            redirectUrl: redirectUrl
+        } }) }}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+            background-color: #ecf0f5 !important;
+        }
+    </style>
+{% endblock %}

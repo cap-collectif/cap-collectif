@@ -1,0 +1,3 @@
+Capco\AppBundle\Entity\ActionToken:
+    user5unsubscribeToken:
+        __construct: ['@user5', 'unsubscribe', 'user5unsubscribeToken']

@@ -19,6 +19,9 @@ const baseProps = {
       mailingListUsers: {
         totalCount: 3,
       },
+      mailingListUsersConsenting: {
+        totalCount: 3,
+      },
     },
     mailingInternal: null,
   },
@@ -49,6 +52,15 @@ const baseProps = {
     },
     usersNotConfirmed: {
       totalCount: 15,
+    },
+    usersRefusing: {
+      totalCount: 3,
+    },
+    usersConfirmedRefusing: {
+      totalCount: 2,
+    },
+    usersNotConfirmedRefusing: {
+      totalCount: 1,
     },
   },
 };

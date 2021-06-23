@@ -181,6 +181,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/FooterSocialNetwork.yaml',
             $this->fixturesDir . 'Dev/Theme.yaml',
             $this->fixturesDir . 'Dev/ThemeTranslation.yaml',
+            $this->fixturesDir . 'Dev/ActionToken.yaml',
 
             // Debate application.
             $this->fixturesDir . 'Dev/Debate.yaml',

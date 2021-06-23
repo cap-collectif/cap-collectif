@@ -75,6 +75,9 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
         "mailingListUsers": Object {
           "totalCount": 3,
         },
+        "mailingListUsersConsenting": Object {
+          "totalCount": 3,
+        },
         "name": "Je suis une mailingList",
         "project": Object {
           "title": "P&C",
@@ -162,6 +165,9 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
         "mailingListUsers": Object {
           "totalCount": 3,
         },
+        "mailingListUsersConsenting": Object {
+          "totalCount": 3,
+        },
         "name": "Je suis une mailingList",
         "project": Object {
           "title": "P&C",
@@ -247,6 +253,9 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
       Object {
         "$fragmentRefs": null,
         "mailingListUsers": Object {
+          "totalCount": 3,
+        },
+        "mailingListUsersConsenting": Object {
           "totalCount": 3,
         },
         "name": "Je suis une mailingList",
