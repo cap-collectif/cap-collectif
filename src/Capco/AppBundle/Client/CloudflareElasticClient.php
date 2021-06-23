@@ -310,12 +310,13 @@ class CloudflareElasticClient
     private function getClientRequestURIFilters(): array
     {
         return [
-            new Query\Regexp('ClientRequestURI', '*/js/*'),
-            new Query\Regexp('ClientRequestURI', '/graphql/*'),
-            new Query\Regexp('ClientRequestURI', '*/css/*'),
-            new Query\Regexp('ClientRequestURI', '*/admin/*'),
-            new Query\Regexp('ClientRequestURI', '*/media/*'),
-            new Query\Regexp('ClientRequestURI', '/fonts/*'),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/js']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/graphql']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/css']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/admin']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/media']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/fonts']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/cdn-cgi']),
         ];
     }
 
