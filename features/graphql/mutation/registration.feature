@@ -335,3 +335,68 @@ Scenario: GraphQL client wants to hack register form with username payload
   {"data":{"register":{"errorsCode":null}}}
   """
   Then user identified by email "pwned@gmail.com" should have username "pwned"
+
+@database
+Scenario: GraphQL client wants to register when invited to a group
+  Given feature "registration" is enabled
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation Register($input: RegisterInput!) {
+      register(input: $input) {
+        user {
+          displayName
+          groups {
+            edges {
+              node {
+                id
+              }
+            }
+          }
+        }
+        errorsCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "username": "user invited in group",
+        "email": "user-invited-in-group@gmail.com",
+        "plainPassword": "supersecureuserpass",
+        "captcha": "fakekey",
+        "invitationToken": "invitedgrouptoken",
+        "responses": [
+          {
+            "question": "UXVlc3Rpb246Ng==",
+            "value": "Réponse à la question obligatoire"
+          },
+          {
+            "question": "UXVlc3Rpb246MTc=",
+            "value": "Sangohan"
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "register": {
+        "user": {
+          "displayName": "user invited in group",
+          "groups": {
+            "edges": [
+              {
+                "node": {
+                  "id": "group1"
+                }
+              }
+            ]
+          }
+        },
+        "errorsCode": null
+      }
+    }
+  }
+  """

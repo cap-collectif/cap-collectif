@@ -20,3 +20,11 @@ Capco\AppBundle\Entity\UserInvite:
         token: 'sorryiamtheexpiredtoken'
         expiresAt: <(new \DateTime('1999-03-02 00:00:51'))>
         isAdmin: false
+    userGroupInvitation:
+        id: 'userGroupInvitation'
+        createdAt: <(new \DateTime('2020-03-04 00:00:51'))>
+        email: 'user-invited-in-group@gmail.com'
+        token: 'invitedgrouptoken'
+        expiresAt: <(new \DateTime('2030-01-01 00:00:00'))>
+        isAdmin: false
+        groups: ['@group1']

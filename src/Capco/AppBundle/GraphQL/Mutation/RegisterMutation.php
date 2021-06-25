@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
@@ -94,6 +95,13 @@ class RegisterMutation implements MutationInterface
 
         /** @var User $user */
         $user = $this->userManager->createUser();
+
+        if($invitation) {
+            foreach ($invitation->getGroups() as $group) {
+                $userGroup = (new UserGroup())->setGroup($group)->setUser($user);
+                $this->em->persist($userGroup);
+            }
+        }
 
         if ($this->toggleManager->isActive('multilangue')) {
             if (isset($data['locale']) && $data['locale']) {

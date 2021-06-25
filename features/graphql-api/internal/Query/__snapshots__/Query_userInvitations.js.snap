@@ -6,6 +6,13 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "email": "user-invited-in-group@gmail.com",
+          "id": "VXNlckludml0ZTp1c2VyR3JvdXBJbnZpdGF0aW9u",
+          "isAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
           "email": "sad@expired.com",
           "id": "VXNlckludml0ZTpleHBpcmVkSW52aXRhdGlvbg==",
           "isAdmin": false,
