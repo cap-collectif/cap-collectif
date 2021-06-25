@@ -4,7 +4,6 @@ import { useQueryLoader } from 'react-relay';
 import moment from 'moment';
 import isEqual from 'lodash/isEqual';
 import DashboardPage, { DashboardPageQuery } from './DashboardPage';
-import Spinner from '~ds/Spinner/Spinner';
 import {
   DashboardPageContext,
   useDashboard,
@@ -67,9 +66,7 @@ const DashboardPageQueryRender = (): React.Node => {
     }
   }, [filters, loadQuery, queryReference]);
 
-  if (!queryReference) return <Spinner />;
-
-  return <DashboardPage queryReference={queryReference} />;
+  return queryReference ? <DashboardPage queryReference={queryReference} /> : null;
 };
 
 export default DashboardPageQueryContainer;

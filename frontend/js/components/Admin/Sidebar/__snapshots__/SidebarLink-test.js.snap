@@ -19,6 +19,7 @@ exports[`<SidebarLink /> renders correctly 1`] = `
   >
     <Text
       as="span"
+      lineHeight="normal"
       verticalAlign="middle"
     >
       Réglages

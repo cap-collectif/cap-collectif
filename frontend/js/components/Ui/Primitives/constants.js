@@ -17,6 +17,7 @@ export const LineHeight = {
   SM: 'sm',
   S: 's',
   Base: 'base',
+  Normal: 'normal',
   M: 'm',
   L: 'l',
   XL: 'xl',

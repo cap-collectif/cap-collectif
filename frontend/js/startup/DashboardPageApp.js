@@ -1,7 +1,7 @@
 // @flow
 import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import Loader from '~ui/FeedbacksIndicators/Loader';
+import DashboardPagePlaceholder from '~/components/Admin/Dashboard/DashboardPagePlaceholder';
 
 const DashboardPageQuery = lazy(() =>
   import(
@@ -10,9 +10,9 @@ const DashboardPageQuery = lazy(() =>
 );
 
 export default () => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
+  <Providers>
+    <Suspense fallback={<DashboardPagePlaceholder />}>
       <DashboardPageQuery />
-    </Providers>
-  </Suspense>
+    </Suspense>
+  </Providers>
 );

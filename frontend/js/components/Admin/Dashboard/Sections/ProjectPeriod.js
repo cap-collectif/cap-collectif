@@ -11,7 +11,7 @@ const ProjectPeriod = (): React.Node => {
   const projectName =
     filters.projectId === 'ALL'
       ? intl.formatMessage({ id: 'global.the.platform' })
-      : intl.formatMessage({ id: 'global.the.platform' });
+      : intl.formatMessage({ id: 'global.the.project' });
   const dateStart = intl.formatDate(filters.startAt, {
     day: 'numeric',
     month: 'long',

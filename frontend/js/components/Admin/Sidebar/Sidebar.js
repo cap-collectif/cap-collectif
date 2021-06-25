@@ -356,6 +356,7 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
               text="admin.label.analytics"
               href="/admin/capco/analytics/list"
               icon="PIE_CHART"
+              withLabel={isOpen}
               fontSize={3}
               p={3}
               width="100%"

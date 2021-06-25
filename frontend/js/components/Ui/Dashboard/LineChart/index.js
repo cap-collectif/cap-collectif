@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  ReferenceLine,
 } from 'recharts';
 import AppBox from '~ui/Primitives/AppBox';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
@@ -59,6 +60,11 @@ const LineChart = ({
           {withAxis && <XAxis dataKey="date" />}
           {withAxis && <YAxis />}
           {withGrid && <CartesianGrid strokeDasharray="3 3" />}
+
+          {data.length === 1 && (
+            <ReferenceLine y={data[0].value} stroke={colors.blue['700']} strokeWidth={2} />
+          )}
+
           <Line
             type="monotone"
             dataKey="value"
@@ -67,6 +73,7 @@ const LineChart = ({
             dot={false}
             activeDot={false}
           />
+
           {withTooltip && (
             <Tooltip
               content={tooltipData => renderTooltip(tooltipData, label)}

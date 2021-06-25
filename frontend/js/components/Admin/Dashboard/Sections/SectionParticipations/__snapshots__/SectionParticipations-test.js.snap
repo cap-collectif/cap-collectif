@@ -21,7 +21,7 @@ exports[`<SectionParticipations /> <TestSectionParticipations /> should render c
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jGDVOz"
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bGMWCq"
           id="vote"
         >
           <p
@@ -42,7 +42,7 @@ exports[`<SectionParticipations /> <TestSectionParticipations /> should render c
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gWEYXv"
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hxUnw"
           id="comment"
         >
           <p
@@ -63,7 +63,7 @@ exports[`<SectionParticipations /> <TestSectionParticipations /> should render c
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gWEYXv"
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hxUnw"
           id="contribution"
         >
           <p
@@ -84,7 +84,7 @@ exports[`<SectionParticipations /> <TestSectionParticipations /> should render c
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gWEYXv"
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hxUnw"
           id="follower"
         >
           <p

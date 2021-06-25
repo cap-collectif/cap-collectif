@@ -33,7 +33,7 @@ const DashboardTitle = ({ query: queryFragment }: Props): React.Node => {
 
   return (
     <Flex direction="row" align="center" justify="space-between" px={6} py={4} bg="white">
-      <Text color="blue.800" {...headingStyles.h4} fontWeight={FontWeight.Bold}>
+      <Text color="blue.800" {...headingStyles.h4} fontWeight={FontWeight.Semibold}>
         {intl.formatMessage({ id: 'dashboard-platform' })}
       </Text>
 

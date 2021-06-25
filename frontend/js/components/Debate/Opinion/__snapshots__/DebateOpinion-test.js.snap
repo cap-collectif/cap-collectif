@@ -65,7 +65,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
       className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
     >
       <h4
-        className="sc-bdnylx fzwkzv"
+        className="sc-bdnylx hNCYYa"
       >
         Je suis pour
       </h4>
@@ -154,7 +154,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
       className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
     >
       <h4
-        className="sc-bdnylx fzwkzv"
+        className="sc-bdnylx hNCYYa"
       >
         Je suis pour
       </h4>
@@ -240,7 +240,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
       className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
     >
       <h4
-        className="sc-bdnylx fzwkzv"
+        className="sc-bdnylx hNCYYa"
       >
         Je suis pour
       </h4>
@@ -329,7 +329,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
       className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
     >
       <h4
-        className="sc-bdnylx fzwkzv"
+        className="sc-bdnylx hNCYYa"
       >
         Je suis pour
       </h4>
@@ -422,7 +422,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
       className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
     >
       <h4
-        className="sc-bdnylx fzwkzv"
+        className="sc-bdnylx hNCYYa"
       >
         Je suis pour
       </h4>

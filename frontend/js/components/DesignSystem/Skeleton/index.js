@@ -21,7 +21,6 @@ const SkeletonInner = styled(motion.custom(AppBox))``;
 const Skeleton = ({
   isLoaded = false,
   children,
-  animate = true,
   placeholder,
   ...rest
 }: SkeletonProps): React.Node => (
@@ -34,13 +33,6 @@ const Skeleton = ({
         exit={{ opacity: 0 }}
         {...rest}>
         {children}
-      </SkeletonInner>
-    ) : animate ? (
-      <SkeletonInner
-        animate={{ opacity: 0.5 }}
-        transition={{ duration: 1, repeatType: 'reverse', repeat: Infinity }}
-        {...rest}>
-        {placeholder}
       </SkeletonInner>
     ) : (
       placeholder

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 type Props = {
-    readonly isLoaded: ?boolean,
+    readonly isLoaded: boolean | null,
     readonly children: ReactNode,
     readonly placeholder: ReactNode,
     readonly animate?: boolean,

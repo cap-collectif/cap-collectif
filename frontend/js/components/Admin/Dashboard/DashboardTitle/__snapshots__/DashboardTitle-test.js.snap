@@ -5,7 +5,7 @@ exports[`<DashboardTitle /> <TestDashboardTitle /> should render correctly 1`] =
   className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 ixbuAQ"
 >
   <p
-    className="sc-bdnylx hVwkzH"
+    className="sc-bdnylx brZeUD"
   >
     dashboard-platform
   </p>

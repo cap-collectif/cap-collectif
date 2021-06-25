@@ -2,7 +2,7 @@
 
 exports[`<SectionProposalCategories /> <TestSectionProposalCategories /> should render correctly with registrations 1`] = `
 <div
-  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fpkGpz lvJOm"
+  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jwmtxj lvJOm"
 >
   <p
     className="sc-bdnylx fnSuYt"
@@ -27,7 +27,7 @@ exports[`<SectionProposalCategories /> <TestSectionProposalCategories /> should 
         <p
           className="sc-bdnylx dbMpeV"
         >
-          Environment (66%)
+          Environment (67%)
         </p>
       </div>
       <div

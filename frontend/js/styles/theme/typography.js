@@ -15,6 +15,7 @@ const typography = {
     l: pxToRem(48),
     m: pxToRem(32),
     base: pxToRem(24),
+    normal: '1rem',
     s: pxToRem(18),
     sm: pxToRem(16),
   },

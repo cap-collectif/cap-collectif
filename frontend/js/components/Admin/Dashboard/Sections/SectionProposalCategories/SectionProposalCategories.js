@@ -27,7 +27,7 @@ const formatCategories = (values, totalCount) =>
   values.map(value => ({
     id: value.category.id,
     label: value.category.name,
-    value: parseInt(((value.totalCount / totalCount) * 100).toFixed(2), 10),
+    value: Math.round((value.totalCount / totalCount) * 100),
   }));
 
 const SectionProposalCategories = ({ categories: categoriesFragment }: Props): React.Node => {
@@ -35,7 +35,7 @@ const SectionProposalCategories = ({ categories: categoriesFragment }: Props): R
   const intl = useIntl();
 
   return (
-    <Section label={intl.formatMessage({ id: 'categories-most-use-proposal' })} flex={1}>
+    <Section label={intl.formatMessage({ id: 'categories-most-use-proposal' })} width="50%">
       <PieChart percentages={formatCategories(categories.values, categories.totalCount)} />
     </Section>
   );

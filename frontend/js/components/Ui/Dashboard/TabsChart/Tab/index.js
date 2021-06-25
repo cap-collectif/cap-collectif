@@ -41,7 +41,8 @@ const Tab = ({ id, label, count, active, data, selectTab }: TabProps) => (
       textAlign="left"
       borderBottom={active ? 'none' : 'normal'}
       borderRight={active ? 'normal' : 'none'}
-      borderColor="gray.150">
+      borderColor="gray.150"
+      opacity={active ? 1 : 0.5}>
       <Text color="blue.900" fontSize={3} capitalize>
         {label}
       </Text>

@@ -10,7 +10,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import { headingStyles } from '~ui/Primitives/Heading';
 import UserAvatar from '~/components/User/NewUserAvatar';
-import { FontWeight } from '~ui/Primitives/constants';
+import { FontWeight, LineHeight } from '~ui/Primitives/constants';
 
 type Props = {|
   +contributor: Contributor_contributor$key,
@@ -69,7 +69,12 @@ const Contributor = ({ contributor: contributorFragment }: Props): React.Node =>
       </Text>
 
       {contributions.map(contribution => (
-        <Text color="gray.900" key={contribution.type} fontSize={1} capitalize>
+        <Text
+          color="gray.900"
+          key={contribution.type}
+          fontSize={1}
+          lineHeight={LineHeight.Normal}
+          capitalize>
           {getContributionWording(contribution.type, intl, contribution.totalCount)}
         </Text>
       ))}

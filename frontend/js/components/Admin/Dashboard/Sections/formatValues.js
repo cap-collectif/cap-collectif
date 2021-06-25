@@ -17,6 +17,7 @@ const formatValues = (values: $ReadOnlyArray<Value>, intl: IntlShape): ValueForm
     date: intl.formatDate(moment(value.key), {
       day: 'numeric',
       month: 'short',
+      year: 'numeric',
     }),
     value: value.totalCount,
   }));

@@ -13,6 +13,7 @@ type Props = {|
   +text: string,
   +icon?: $Values<typeof ICON_NAME>,
   +beta?: boolean,
+  +withLabel?: boolean,
 |};
 
 const IconActivePin = () => (
@@ -25,7 +26,14 @@ const IconActivePin = () => (
   </svg>
 );
 
-export const SidebarLink = ({ text, href, icon, beta, ...props }: Props): React.Node => {
+export const SidebarLink = ({
+  text,
+  href,
+  icon,
+  beta,
+  withLabel = true,
+  ...props
+}: Props): React.Node => {
   const intl = useIntl();
   const active =
     window.location.href.includes(href) ||
@@ -45,7 +53,7 @@ export const SidebarLink = ({ text, href, icon, beta, ...props }: Props): React.
       display="flex"
       flexDirection="row"
       alignItems="center"
-      justifyContent="space-between"
+      justifyContent={withLabel ? 'space-between' : 'center'}
       css={{
         textDecoration: 'none',
         color: active ? colors.blue[100] : colors.gray[300],
@@ -61,14 +69,16 @@ export const SidebarLink = ({ text, href, icon, beta, ...props }: Props): React.
             <IconActivePin />
           </AppBox>
         )}
-        {icon && <Icon name={icon} size="md" mr={1} verticalAlign="middle" />}
-        <Text as="span" verticalAlign="middle">
-          {intl.formatMessage({ id: text })}
-        </Text>
+        {icon && <Icon name={icon} size="md" mr={withLabel ? 1 : 0} verticalAlign="middle" />}
+        {withLabel && (
+          <Text as="span" verticalAlign="middle" lineHeight="normal">
+            {intl.formatMessage({ id: text })}
+          </Text>
+        )}
       </AppBox>
 
-      {beta && (
-        <Tag variant="aqua" interactive={false} ml={3} capitalize>
+      {beta && withLabel && (
+        <Tag variant="aqua" interactive={false} capitalize>
           {intl.formatMessage({ id: 'global.beta' })}
         </Tag>
       )}

@@ -131,7 +131,7 @@ const DashboardFiltersForm = reduxForm({
   form: formName,
 })(DashboardFilters);
 
-const mapStateToProps = (state: GlobalState, props: Props) => ({
+const mapStateToProps = (state: GlobalState, props: ComponentProps) => ({
   initialValues: {
     startAt: props.defaultFilters.startAt,
     endAt: props.defaultFilters.endAt,

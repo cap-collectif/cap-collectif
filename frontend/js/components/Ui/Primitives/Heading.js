@@ -43,7 +43,7 @@ export const headingStyles = {
   h4: {
     fontSize: 4,
     fontWeight: FontWeight.Normal,
-    lineHeight: LineHeight.SM,
+    lineHeight: LineHeight.Base,
   },
   h5: {
     fontSize: 1,
