@@ -317,6 +317,13 @@ class CloudflareElasticClient
             new Query\Prefix(['ClientRequestURI.keyword' => '/media']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/fonts']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/cdn-cgi']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/jquery']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/bundles']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/favicon']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/widget_debate']),
+            new Query\Term(['ClientRequestURI.keyword' => '/manifest.json']),
+            new Query\Term(['ClientRequestURI.keyword' => '/robots.txt']),
+            new Query\Term(['ClientRequestURI.keyword' => '/browser-update.min.js']),
         ];
     }
 

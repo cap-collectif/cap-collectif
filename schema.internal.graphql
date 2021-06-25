@@ -2822,6 +2822,9 @@ enum ContributionType {
 
   """Get contributions that are a reply"""
   REPLY
+
+  """Get contributions that are debate argument."""
+  DEBATEARGUMENT
 }
 
 """A contribution with an author"""
