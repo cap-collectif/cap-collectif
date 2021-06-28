@@ -498,8 +498,8 @@ class UserRepository extends EntityRepository
         $rawQuery =
             'SELECT u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH ' .
-            $voteWith .
+          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH '.
+            $voteWith.
             '
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           LEFT JOIN pv.selectionStep s
@@ -948,7 +948,7 @@ class UserRepository extends EntityRepository
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinion(Opinion $opinion): int
@@ -960,7 +960,7 @@ class UserRepository extends EntityRepository
             ->andWhere('f.opinion = :opinion')
             ->setParameter('opinion', $opinion);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinionVersion(OpinionVersion $opinionVersion): int
@@ -972,7 +972,7 @@ class UserRepository extends EntityRepository
             ->andWhere('f.opinionVersion = :opinionVersion')
             ->setParameter('opinionVersion', $opinionVersion);
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
@@ -987,7 +987,7 @@ class UserRepository extends EntityRepository
             ->setParameter('proposalId', $proposal->getId())
             ->setParameter('userId', $user->getId());
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinionAndUser(Opinion $opinion, User $user): int
@@ -1001,7 +1001,7 @@ class UserRepository extends EntityRepository
             ->setParameter('opinionId', $opinion->getId())
             ->setParameter('userId', $user->getId());
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinionVersionAndUser(OpinionVersion $version, User $user): int
@@ -1015,7 +1015,7 @@ class UserRepository extends EntityRepository
             ->setParameter('versionId', $version->getId())
             ->setParameter('userId', $user->getId());
 
-        return (int) $query->getQuery()->getSingleScalarResult();
+        return (int)$query->getQuery()->getSingleScalarResult();
     }
 
     public function findUsersFollowingProposal()
@@ -1092,7 +1092,7 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.roles LIKE :roles')
             ->orderBy('u.email', 'ASC')
-            ->setParameter('roles', '%"' . $role . '"%');
+            ->setParameter('roles', '%"'.$role.'"%');
 
         return $qb->getQuery()->getResult();
     }
@@ -1113,8 +1113,7 @@ class UserRepository extends EntityRepository
         return array_map(fn(array $row) => $row['email'], $results);
     }
 
-    public function findByEmailOrAccessTokenOrUsername(
-        string $email = '',
+    public function findByAccessTokenOrUsername(
         string $accessToken = '',
         string $accessId = ''
     ): ?User {
@@ -1122,30 +1121,16 @@ class UserRepository extends EntityRepository
 
         return $qb
             ->select('u')
-            ->where(
-                $qb
-                    ->expr()
-                    ->orX()
-                    ->add(
-                        $qb
-                            ->expr()
-                            ->orx(
-                                $qb->expr()->eq('u.franceConnectId', ':accessId'),
-                                $qb->expr()->eq('u.franceConnectAccessToken', ':accessToken'),
-                                $qb->expr()->eq('u.facebook_access_token', ':accessToken'),
-                                $qb->expr()->eq('u.facebook_id', ':accessId'),
-                                $qb->expr()->eq('u.google_access_token', ':accessToken'),
-                                $qb->expr()->eq('u.google_id', ':accessId'),
-                                $qb->expr()->eq('u.openIdAccessToken', ':accessToken'),
-                                $qb->expr()->eq('u.openId', ':accessId'),
-                                $qb->expr()->eq('u.twitter_access_token', ':accessToken'),
-                                $qb->expr()->eq('u.twitter_id', ':accessId')
-                            )
-                    )
-            )
-            // WARNING email condition should be less priority
-            ->orWhere('u.email = :email')
-            ->setParameter('email', $email)
+            ->orWhere('u.franceConnectId = :accessId')
+            ->orWhere('u.franceConnectAccessToken = :accessToken')
+            ->orWhere('u.facebook_access_token = :accessToken')
+            ->orWhere('u.facebook_id = :accessId')
+            ->orWhere('u.google_access_token = :accessToken')
+            ->orWhere('u.google_id = :accessId')
+            ->orWhere('u.openIdAccessToken = :accessToken')
+            ->orWhere('u.openId = :accessId')
+            ->orWhere('u.twitter_access_token = :accessToken')
+            ->orWhere('u.twitter_id = :accessId')
             ->setParameter('accessToken', $accessToken)
             ->setParameter('accessId', $accessId)
             ->getQuery()

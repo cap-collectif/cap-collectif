@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
@@ -50,14 +51,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $setterToken = $setter . 'AccessToken';
 
         //we "disconnect" previously connected users
-        if (
-            null !==
-            ($previousUser = $this->userRepository->findByEmailOrAccessTokenOrUsername(
-                $email,
-                $response->getAccessToken(),
-                $response->getUsername()
-            ))
-        ) {
+        if (null !== ($previousUser = $this - $this->getUser($email, $response))) {
             $previousUser->{$setterId}(null);
             $previousUser->{$setterToken}(null);
             $this->userManager->updateUser($previousUser);
@@ -76,11 +70,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $username =
             $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         // because, accounts created with FranceConnect can change their email
-        $user = $this->userRepository->findByEmailOrAccessTokenOrUsername(
-            $email,
-            $response->getAccessToken(),
-            $response->getUsername()
-        );
+        $user = $this->getUser($email, $response);
         $isNewUser = false;
         if (null === $user) {
             $isNewUser = true;
@@ -177,5 +167,15 @@ class OauthUserProvider extends FOSUBUserProvider
         }
 
         return $user;
+    }
+
+    private function getUser(string $email, UserResponseInterface $response): ?User
+    {
+        $user = $this->userRepository->findByAccessTokenOrUsername(
+            $response->getAccessToken(),
+            $response->getUsername()
+        );
+
+        return $user ?: $this->userRepository->findOneByEmail($email);
     }
 }

@@ -52,10 +52,14 @@ class OauthUserProviderSpec extends ObjectBehavior
 
         // We try to find a user that match the criterias, but could not find one.
         $userRepository
-            ->findByEmailOrAccessTokenOrUsername(
-                'openid_user@test.com',
+            ->findByAccessTokenOrUsername(
                 'openid_access_token',
                 'openid_id'
+            )
+            ->willReturn(null);
+        $userRepository
+            ->findOneByEmail(
+                'openid_user@test.com'
             )
             ->willReturn(null);
 
@@ -108,8 +112,7 @@ class OauthUserProviderSpec extends ObjectBehavior
 
         // We try to find a user that match the criterias, and find one.
         $userRepository
-            ->findByEmailOrAccessTokenOrUsername(
-                'openid_user@test.com',
+            ->findByAccessTokenOrUsername(
                 'openid_access_token',
                 'openid_id'
             )
@@ -147,8 +150,7 @@ class OauthUserProviderSpec extends ObjectBehavior
 
         // We try to find a user that match the criterias, and find one.
         $userRepository
-            ->findByEmailOrAccessTokenOrUsername(
-                'openid_user@test.com',
+            ->findByAccessTokenOrUsername(
                 'openid_access_token',
                 'openid_id'
             )
