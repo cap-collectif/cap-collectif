@@ -53,10 +53,10 @@ sub vcl_recv {
     return(synth(200, "Ban added"));
   }
 
-  # Remove all cookies except the Symfony or SimpleSAML session or Paris (mcpAuth) session, or IDF (KEYCLOAK) session.
+  # Remove all cookies except the Symfony or SimpleSAML session or Paris (mcpAuth) session.
   if (req.http.Cookie) {
     cookie.parse(req.http.Cookie);
-    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,mcpAuth,locale,KEYCLOAK_IDENTITY,KEYCLOAK_SESSION,AUTH_SESSION_ID_LEGACY");
+    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,mcpAuth,locale");
     set req.http.cookie = cookie.get_string();
 
     if (req.http.Cookie == "") {
