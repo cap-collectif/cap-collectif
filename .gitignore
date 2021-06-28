@@ -45,6 +45,7 @@ infrastructure/services/databasefixtures/dump.sql
 # Node
 **/node_modules/
 /app/Resources/libs
+**/.next
 
 # redis
 dump.rdb
