@@ -1,0 +1,11 @@
+CreateSenderEmailDomainInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of CreateSenderEmailDomain mutation.'
+        fields:
+            service:
+                type: 'SenderEmailDomainService!'
+                description: 'The service used by the domain.'
+            value:
+                type: 'String!'
+                description: 'The domain, eg cap-collectif.com'

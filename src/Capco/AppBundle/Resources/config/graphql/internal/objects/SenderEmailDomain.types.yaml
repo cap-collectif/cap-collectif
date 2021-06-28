@@ -1,0 +1,18 @@
+SenderEmailDomain:
+    type: object
+    config:
+        name: SenderEmailDomain
+        description: Represent a registered domain name for a mailer service
+        fields:
+            value:
+                type: 'String!'
+                description: 'The domain, eg cap-collectif.com.'
+            service:
+                type: 'SenderEmailDomainService!'
+                description: 'The service to use : mailjet or mandrill.'
+            spfValidation:
+                type: 'Boolean!'
+                description: 'Is the SPF validated.'
+            dkimValidation:
+                type: 'Boolean!'
+                description: 'Is the DKIM validated.'

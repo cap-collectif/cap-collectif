@@ -1,0 +1,10 @@
+CreateSenderEmailDomainPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            senderEmailDomain:
+                type: 'SenderEmailDomain'
+                description: 'The created SenderEmailDomain.'
+            errorCode:
+                type: 'CreateSenderEmailDomainErrorCode'
+                description: 'The error generated, if any.'

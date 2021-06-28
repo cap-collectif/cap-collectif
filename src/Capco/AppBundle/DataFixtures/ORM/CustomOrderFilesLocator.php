@@ -98,6 +98,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/HighlightedContent.yaml',
             $this->fixturesDir . 'Benchmark/Event.yaml',
             $this->fixturesDir . 'Benchmark/EventTranslation.yaml',
+            $this->fixturesDir . 'Benchmark/SenderEmailDomain.yaml',
         ];
     }
 
@@ -144,6 +145,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Prod/EventTranslation.yaml',
             $this->fixturesDir . 'Prod/HighlightedContent.yaml',
             $this->fixturesDir . 'Prod/FranceConnectSSOConfiguration.yaml',
+            $this->fixturesDir . 'Prod/SenderEmailDomain.yaml',
         ];
     }
 
@@ -293,6 +295,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/EmailingCampaign.yaml',
             $this->fixturesDir . 'Dev/ProposalRevision.yaml',
             $this->fixturesDir . 'Dev/DebateArticle.yaml',
+            $this->fixturesDir . 'Dev/SenderEmailDomain.yaml',
         ];
     }
 }

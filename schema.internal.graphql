@@ -3282,6 +3282,30 @@ type CreateQuestionnairePayload {
   clientMutationId: String
 }
 
+"""Possible errors on createSenderEmailDomain mutation."""
+enum CreateSenderEmailDomainErrorCode {
+  """There is already a SenderEmailDomain matching service and value."""
+  ALREADY_EXIST
+}
+
+input CreateSenderEmailDomainInput {
+  """The service used by the domain."""
+  service: SenderEmailDomainService!
+
+  """The domain, eg cap-collectif.com"""
+  value: String!
+  clientMutationId: String
+}
+
+type CreateSenderEmailDomainPayload {
+  """The created SenderEmailDomain."""
+  senderEmailDomain: SenderEmailDomain
+
+  """The error generated, if any."""
+  errorCode: CreateSenderEmailDomainErrorCode
+  clientMutationId: String
+}
+
 input CreateUserInput {
   """The user's username"""
   username: String!
@@ -6514,6 +6538,9 @@ type Mutation {
 
   """Update an external service configuration."""
   updateExternalServiceConfiguration(input: UpdateExternalServiceConfigurationInput!): UpdateExternalServiceConfigurationPayload
+
+  """Create a senderEmailDomain."""
+  createSenderEmailDomain(input: CreateSenderEmailDomainInput!): CreateSenderEmailDomainPayload
 }
 
 """A connection to a list of items."""
@@ -9920,6 +9947,9 @@ type Query {
     """The type of configuration asked"""
     type: ExternalServiceConfigurationType!
   ): ExternalServiceConfiguration!
+
+  """Get all domains registered"""
+  senderEmailDomains: [SenderEmailDomain!]!
 }
 
 input QueryAnalyticsFilter {
@@ -11728,6 +11758,30 @@ type SendEmailingCampaignPayload {
   """The error code, if any"""
   error: SendEmailingCampaignErrorCode
   clientMutationId: String
+}
+
+"""Represent a registered domain name for a mailer service"""
+type SenderEmailDomain {
+  """The domain, eg cap-collectif.com."""
+  value: String!
+
+  """The service to use : mailjet or mandrill."""
+  service: SenderEmailDomainService!
+
+  """Is the SPF validated."""
+  spfValidation: Boolean!
+
+  """Is the DKIM validated."""
+  dkimValidation: Boolean!
+}
+
+"""Possible types for SenderEmailDomain."""
+enum SenderEmailDomainService {
+  """Choice of the external mailer client : mandrill or mailjet."""
+  MANDRILL
+
+  """Choice of the external mailer client : mandrill or mailjet."""
+  MAILJET
 }
 
 input SetDefaultLocaleInput {

@@ -1,0 +1,8 @@
+CreateSenderEmailDomainErrorCode:
+    type: enum
+    config:
+        description: 'Possible errors on createSenderEmailDomain mutation.'
+        values:
+            ALREADY_EXIST:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailDomainMutation::ALREADY_EXIST")'
+                description: 'There is already a SenderEmailDomain matching service and value.'

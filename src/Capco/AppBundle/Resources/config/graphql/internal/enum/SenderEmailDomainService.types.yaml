@@ -1,0 +1,11 @@
+SenderEmailDomainService:
+    type: enum
+    config:
+        description: 'Possible types for SenderEmailDomain.'
+        values:
+            MANDRILL:
+                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::MAILER_MANDRILL")'
+                description: 'Choice of the external mailer client : mandrill or mailjet.'
+            MAILJET:
+                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::MAILER_MAILJET")'
+                description: 'Choice of the external mailer client : mandrill or mailjet.'

@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\SenderEmailDomain:
+    mandrillCapco:
+        value: 'cap-collectif.com'
+        service: 'mandrill'
+    mailjetCapco:
+        value: 'cap-collectif.com'
+        service: 'mailjet'

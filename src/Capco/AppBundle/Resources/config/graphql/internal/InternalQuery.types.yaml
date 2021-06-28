@@ -536,3 +536,8 @@ InternalQuery:
                         description: 'The type of configuration asked'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ExternalServiceConfigurationResolver", [args])'
                 access: "@=hasRole('ROLE_ADMIN')"
+            senderEmailDomains:
+                type: '[SenderEmailDomain!]!'
+                description: 'Get all domains registered'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\External\\SenderEmailDomainResolver", [args])'

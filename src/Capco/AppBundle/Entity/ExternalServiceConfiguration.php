@@ -11,11 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ExternalServiceConfiguration
 {
+    public const MAILER_MANDRILL = 'mandrill';
+    public const MAILER_MAILJET = 'mailjet';
     public const TYPE_MAILER = 'mailer';
 
     public const TYPES = [self::TYPE_MAILER];
     public const AVAILABLE_VALUES = [
-        self::TYPE_MAILER => ['mandrill', 'mailjet'],
+        self::TYPE_MAILER => [self::MAILER_MANDRILL, self::MAILER_MAILJET],
     ];
 
     /**

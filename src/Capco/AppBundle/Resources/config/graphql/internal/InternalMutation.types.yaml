@@ -1262,3 +1262,11 @@ InternalMutation:
                     inputType: UpdateExternalServiceConfigurationInput
                     payloadType: UpdateExternalServiceConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateExternalServiceConfigurationMutation", [value])'
+            createSenderEmailDomain:
+                description: 'Create a senderEmailDomain.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateSenderEmailDomainInput
+                    payloadType: CreateSenderEmailDomainPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailDomainMutation", [value])'
