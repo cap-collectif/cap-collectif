@@ -9,6 +9,7 @@ Object {
           "email": "user-invited-in-group@gmail.com",
           "id": "VXNlckludml0ZTp1c2VyR3JvdXBJbnZpdGF0aW9u",
           "isAdmin": false,
+          "isProjectAdmin": false,
         },
       },
       Object {
@@ -16,6 +17,15 @@ Object {
           "email": "sad@expired.com",
           "id": "VXNlckludml0ZTpleHBpcmVkSW52aXRhdGlvbg==",
           "isAdmin": false,
+          "isProjectAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
+          "email": "toto@project_admin.com",
+          "id": "VXNlckludml0ZTpwcm9qZWN0QWRtaW5JbnZpdGF0aW9u",
+          "isAdmin": false,
+          "isProjectAdmin": true,
         },
       },
       Object {
@@ -23,6 +33,7 @@ Object {
           "email": "ram@chan.com",
           "id": "VXNlckludml0ZTpyYW1JbnZpdGF0aW9u",
           "isAdmin": false,
+          "isProjectAdmin": false,
         },
       },
       Object {
@@ -30,6 +41,7 @@ Object {
           "email": "rem@chan.com",
           "id": "VXNlckludml0ZTpyZW1JbnZpdGF0aW9u",
           "isAdmin": true,
+          "isProjectAdmin": false,
         },
       },
     ],

@@ -2,14 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\UserInviteStatus;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserInviteRepository::class)
@@ -40,6 +38,11 @@ class UserInvite
      * @ORM\Column(name="is_admin", type="boolean")
      */
     private bool $isAdmin;
+
+    /**
+     * @ORM\Column(name="is_project_admin", type="boolean", options={"default": false})
+     */
+    private bool $isProjectAdmin = false;
 
     /**
      * @ORM\ManyToMany(targetEntity=Group::class, inversedBy="userInvites")
@@ -103,11 +106,23 @@ class UserInvite
         return $this;
     }
 
+    public function isProjectAdmin(): ?bool
+    {
+        return $this->isProjectAdmin;
+    }
+
+    public function setIsProjectAdmin(bool $isProjectAdmin): self
+    {
+        $this->isProjectAdmin = $isProjectAdmin;
+
+        return $this;
+    }
+
     public function hasExpired(): bool
     {
         return $this->expiresAt < new \DateTimeImmutable();
     }
-    
+
     /**
      * @return Collection|Group[]
      */
@@ -135,6 +150,7 @@ class UserInvite
     public function setGroups(ArrayCollection $groups): self
     {
         $this->groups = $groups;
+
         return $this;
     }
 }

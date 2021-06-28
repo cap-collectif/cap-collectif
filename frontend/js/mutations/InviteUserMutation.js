@@ -20,6 +20,7 @@ const mutation = graphql`
           id
           email
           isAdmin
+          isProjectAdmin
           status
           groups {
             edges {

@@ -6,6 +6,7 @@ const InviteUsersMutation = /* GraphQL */ `
     id
     email
     isAdmin
+    isProjectAdmin
     groups {
       edges {
         node {
@@ -34,8 +35,8 @@ const InviteUsersMutation = /* GraphQL */ `
 describe('Internal|inviteUsers mutation access control', () => {
   const input = {
     emails: ['iwillberejected@sad.com'],
-    isAdmin: true,
-    groups: []
+    role: 'ROLE_ADMIN',
+    groups: [],
   };
   it('should not throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
     expect.assertions(1);
@@ -50,8 +51,8 @@ describe('Internal|inviteUsers mutation', () => {
       {
         input: {
           emails: ['mail@test.com', 'mail2@test.com'],
-          isAdmin: false,
-          groups: []
+          role: 'ROLE_USER',
+          groups: [],
         },
       },
       'internal_super_admin',
@@ -60,10 +61,10 @@ describe('Internal|inviteUsers mutation', () => {
     expect(response.inviteUsers.newInvitations.length).toBe(2);
     expect(response.inviteUsers.newInvitations[0].node.email).toBe('mail@test.com');
     expect(response.inviteUsers.newInvitations[0].node.isAdmin).toBe(false);
-    expect(response.inviteUsers.newInvitations[0].node.groups).toStrictEqual({edges: []});
+    expect(response.inviteUsers.newInvitations[0].node.groups).toStrictEqual({ edges: [] });
     expect(response.inviteUsers.newInvitations[1].node.email).toBe('mail2@test.com');
     expect(response.inviteUsers.newInvitations[1].node.isAdmin).toBe(false);
-    expect(response.inviteUsers.newInvitations[1].node.groups).toStrictEqual({edges: []});
+    expect(response.inviteUsers.newInvitations[1].node.groups).toStrictEqual({ edges: [] });
 
     expect(response.inviteUsers.updatedInvitations.length).toBe(0);
   });
@@ -74,8 +75,8 @@ describe('Internal|inviteUsers mutation', () => {
       {
         input: {
           emails: ['mail3@test.com', 'mail4@test.com'],
-          isAdmin: true,
-          groups: []
+          role: 'ROLE_ADMIN',
+          groups: [],
         },
       },
       'internal_super_admin',
@@ -84,10 +85,10 @@ describe('Internal|inviteUsers mutation', () => {
     expect(response.inviteUsers.newInvitations.length).toBe(2);
     expect(response.inviteUsers.newInvitations[0].node.email).toBe('mail3@test.com');
     expect(response.inviteUsers.newInvitations[0].node.isAdmin).toBe(true);
-    expect(response.inviteUsers.newInvitations[0].node.groups).toStrictEqual({edges: []});
+    expect(response.inviteUsers.newInvitations[0].node.groups).toStrictEqual({ edges: [] });
     expect(response.inviteUsers.newInvitations[1].node.email).toBe('mail4@test.com');
     expect(response.inviteUsers.newInvitations[1].node.isAdmin).toBe(true);
-    expect(response.inviteUsers.newInvitations[1].node.groups).toStrictEqual({edges: []});
+    expect(response.inviteUsers.newInvitations[1].node.groups).toStrictEqual({ edges: [] });
 
     expect(response.inviteUsers.updatedInvitations.length).toBe(0);
   });
@@ -101,8 +102,8 @@ describe('Internal|inviteUsers mutation', () => {
       {
         input: {
           emails,
-          isAdmin: true,
-          groups: []
+          role: 'ROLE_ADMIN',
+          groups: [],
         },
       },
       'internal_super_admin',
@@ -114,8 +115,8 @@ describe('Internal|inviteUsers mutation', () => {
       {
         input: {
           emails,
-          isAdmin: false,
-          groups: []
+          role: 'ROLE_USER',
+          groups: [],
         },
       },
       'internal_super_admin',
@@ -124,10 +125,10 @@ describe('Internal|inviteUsers mutation', () => {
     expect(response.inviteUsers.updatedInvitations.length).toBe(2);
     expect(response.inviteUsers.updatedInvitations[0].node.email).toBe('mail@test.com');
     expect(response.inviteUsers.updatedInvitations[0].node.isAdmin).toBe(false);
-    expect(response.inviteUsers.updatedInvitations[0].node.groups).toStrictEqual({edges: []});
+    expect(response.inviteUsers.updatedInvitations[0].node.groups).toStrictEqual({ edges: [] });
     expect(response.inviteUsers.updatedInvitations[1].node.email).toBe('mail2@test.com');
     expect(response.inviteUsers.updatedInvitations[1].node.isAdmin).toBe(false);
-    expect(response.inviteUsers.updatedInvitations[1].node.groups).toStrictEqual({edges: []});
+    expect(response.inviteUsers.updatedInvitations[1].node.groups).toStrictEqual({ edges: [] });
 
     expect(response.inviteUsers.newInvitations.length).toBe(0);
   });
@@ -138,8 +139,8 @@ describe('Internal|inviteUsers mutation', () => {
       {
         input: {
           emails: ['mail123@test.com', 'mail456@test.com'],
-          isAdmin: false,
-          groups: ['group1']
+          role: 'ROLE_USER',
+          groups: ['group1'],
         },
       },
       'internal_super_admin',
@@ -148,13 +149,15 @@ describe('Internal|inviteUsers mutation', () => {
     expect(response.inviteUsers.newInvitations.length).toBe(2);
     expect(response.inviteUsers.newInvitations[0].node.email).toBe('mail123@test.com');
     expect(response.inviteUsers.newInvitations[0].node.isAdmin).toBe(false);
-    expect(response.inviteUsers.newInvitations[0].node.groups).toStrictEqual({edges: [{node: {title: 'Super-administrateur'}}]});
+    expect(response.inviteUsers.newInvitations[0].node.groups).toStrictEqual({
+      edges: [{ node: { title: 'Super-administrateur' } }],
+    });
     expect(response.inviteUsers.newInvitations[1].node.email).toBe('mail456@test.com');
     expect(response.inviteUsers.newInvitations[1].node.isAdmin).toBe(false);
-    expect(response.inviteUsers.newInvitations[1].node.groups).toStrictEqual({edges: [{node: {title: 'Super-administrateur'}}]});
+    expect(response.inviteUsers.newInvitations[1].node.groups).toStrictEqual({
+      edges: [{ node: { title: 'Super-administrateur' } }],
+    });
 
     expect(response.inviteUsers.updatedInvitations.length).toBe(0);
   });
-
-
 });

@@ -10,9 +10,9 @@ InviteUsersInput:
             emails:
                 type: '[String!]!'
                 description: 'The list of emails to invite'
-            isAdmin:
-                type: 'Boolean!'
-                description: 'Does the newly invited users will be administrators?'
+            role:
+                type: 'InviteUsersRole!'
+                description: 'The newly invited users role'
             groups:
                 type: '[ID]!'
                 description: 'Users will be invited to join these groups'

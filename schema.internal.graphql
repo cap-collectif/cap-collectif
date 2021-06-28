@@ -5665,8 +5665,8 @@ input InviteUsersInput {
   """The list of emails to invite"""
   emails: [String!]!
 
-  """Does the newly invited users will be administrators?"""
-  isAdmin: Boolean!
+  """The newly invited users role"""
+  role: InviteUsersRole!
 
   """Users will be invited to join these groups"""
   groups: [ID]!
@@ -5680,6 +5680,18 @@ type InviteUsersPayload {
   """The updated user invitations edge"""
   updatedInvitations: [UserInviteEdge!]!
   clientMutationId: String
+}
+
+"""Available roles for an `inviteUsers` mutation."""
+enum InviteUsersRole {
+  """Give the user the `ROLE_USER` role."""
+  ROLE_USER
+
+  """Give the user the `ROLE_ADMIN` role."""
+  ROLE_ADMIN
+
+  """Give the user the `ROLE_PROJECT_ADMIN` role."""
+  ROLE_PROJECT_ADMIN
 }
 
 """A string containing JSON code."""
@@ -14375,6 +14387,9 @@ type UserInvite {
 
   """Will the invited user be an admin?"""
   isAdmin: Boolean!
+
+  """Will the invited user be a project admin?"""
+  isProjectAdmin: Boolean!
 
   """The invitation status"""
   status: UserInviteStatus!

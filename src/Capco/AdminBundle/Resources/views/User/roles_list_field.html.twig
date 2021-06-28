@@ -1,0 +1,9 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% spaceless %}
+        {% for role in value %}
+            {{ role | trans({}, 'CapcoAppBundle') }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+{% endblock %}

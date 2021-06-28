@@ -7,6 +7,7 @@ const UserInvitationsQuery = /* GraphQL */ `
           id
           email
           isAdmin
+          isProjectAdmin
         }
       }
     }

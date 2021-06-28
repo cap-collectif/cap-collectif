@@ -1,30 +1,35 @@
 // @flow
 
+import type { InviteUsersRole } from '~relay/InviteUserMutation.graphql';
+
 type UserInviteModalStep = 'CHOOSE_USERS' | 'CHOOSE_ROLE' | 'SENDING_CONFIRMATION';
 
 type Groups = Array<{|
   +id: string,
-  +label: string
-|}>
+  +label: string,
+|}>;
 
 export type UserInviteModalState = {|
   +step: UserInviteModalStep,
   +emails: string[],
   +groups: Groups,
-  +isAdmin: boolean
+  +role: InviteUsersRole,
 |};
 
 export type Action =
   | { type: 'GOTO_ROLE_STEP', payload: string[] }
   | { type: 'GOTO_CHOOSE_USERS_STEP' }
-  | { type: 'GOTO_SENDING_CONFIRMATION', payload: { emails: string[], isAdmin: boolean, groups: Groups } }
+  | {
+      type: 'GOTO_SENDING_CONFIRMATION',
+      payload: { emails: string[], role: InviteUsersRole, groups: Groups },
+    };
 
 export const initialState: UserInviteModalState = {
   step: 'CHOOSE_USERS',
   emails: [],
-  isAdmin: false,
-  groups: []
-}
+  groups: [],
+  role: 'ROLE_USER',
+};
 
 export const createReducer = (
   state: UserInviteModalState,
@@ -45,7 +50,7 @@ export const createReducer = (
     case 'GOTO_SENDING_CONFIRMATION':
       return {
         emails: action.payload.emails,
-        isAdmin: action.payload.isAdmin,
+        role: action.payload.role,
         groups: action.payload.groups,
         step: 'SENDING_CONFIRMATION',
       };

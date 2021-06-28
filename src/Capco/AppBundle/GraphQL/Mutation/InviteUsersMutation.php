@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
@@ -41,19 +42,22 @@ class InviteUsersMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
-        list($emails, $isAdmin, $maxResults, $groupIds) = [
+        list($emails, $role, $maxResults, $groupIds) = [
             array_filter($args->offsetGet('emails')),
-            $args->offsetGet('isAdmin'),
+            $args->offsetGet('role'),
             $args->offsetGet('maxResults'),
             $args->offsetGet('groups'),
         ];
+
+        $isAdmin = UserRole::ROLE_ADMIN === $role;
+        $isProjectAdmin = UserRole::ROLE_PROJECT_ADMIN === $role;
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);
         $toUpdateEmails = [];
         $newInvitations = [];
 
-        $groupEntities = array_map(function($groupId){
+        $groupEntities = array_map(function ($groupId) {
             return $this->groupRepository->find($groupId);
         }, $groupIds);
 
@@ -70,9 +74,9 @@ class InviteUsersMutation implements MutationInterface
             $invitation = (new UserInvite())
                 ->setEmail($email)
                 ->setIsAdmin($isAdmin)
+                ->setIsProjectAdmin($isProjectAdmin)
                 ->setToken($this->tokenGenerator->generateToken())
-                ->setExpiresAt((new \DateTimeImmutable())->modify(self::EXPIRES_AT_PERIOD))
-            ;
+                ->setExpiresAt((new \DateTimeImmutable())->modify(self::EXPIRES_AT_PERIOD));
 
             foreach ($groupEntities as $groupEntity) {
                 $invitation->addGroup($groupEntity);
@@ -96,6 +100,7 @@ class InviteUsersMutation implements MutationInterface
                 $userInvite = $this->userInviteRepository->findOneBy(['email' => $email]);
                 $userInvite->setExpiresAt(new \DateTimeImmutable(self::EXPIRES_AT_PERIOD));
                 $userInvite->setIsAdmin($isAdmin);
+                $userInvite->setIsProjectAdmin($isProjectAdmin);
                 $userInvite->setGroups(new ArrayCollection($groupEntities));
                 $this->em->persist($userInvite);
             }

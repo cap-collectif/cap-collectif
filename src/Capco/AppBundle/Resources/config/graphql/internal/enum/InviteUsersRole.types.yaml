@@ -1,0 +1,15 @@
+InviteUsersRole:
+    type: enum
+    config:
+        name: InviteUsersRole
+        description: 'Available roles for an `inviteUsers` mutation.'
+        values:
+            ROLE_USER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_USER")'
+                description: 'Give the user the `ROLE_USER` role.'
+            ROLE_ADMIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_ADMIN")'
+                description: 'Give the user the `ROLE_ADMIN` role.'
+            ROLE_PROJECT_ADMIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_PROJECT_ADMIN")'
+                description: 'Give the user the `ROLE_PROJECT_ADMIN` role.'

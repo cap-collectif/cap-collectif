@@ -5,6 +5,7 @@ security:
             cost: 12
 
     role_hierarchy:
+        ROLE_PROJECT_ADMIN: [ROLE_USER]
         ROLE_ADMIN: [ROLE_USER, ROLE_SONATA_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         SONATA:

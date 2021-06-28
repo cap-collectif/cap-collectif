@@ -6,11 +6,9 @@ use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
-use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -19,7 +17,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegisterMutation implements MutationInterface
@@ -110,8 +107,13 @@ class RegisterMutation implements MutationInterface
         }
         unset($data['locale']);
 
-        if ($invitation && $invitation->isAdmin()) {
-            $user->addRole(UserRole::ROLE_ADMIN);
+        if ($invitation) {
+            if ($invitation->isProjectAdmin()) {
+                $user->addRole(UserRole::ROLE_PROJECT_ADMIN);
+            }
+            if ($invitation->isAdmin()) {
+                $user->addRole(UserRole::ROLE_ADMIN);
+            }
         }
 
         $form = $this->formFactory->create(ApiRegistrationFormType::class, $user);

@@ -13,8 +13,10 @@ use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -33,23 +35,24 @@ class ApiRegistrationFormType extends AbstractType
     {
         // disable password repeated
         $builder->remove('plainPassword')->add('plainPassword', PasswordType::class, [
-            'constraints' => [new PasswordComplexity(), new NotBlank()]
+            'constraints' => [new PasswordComplexity(), new NotBlank()],
         ]);
         $builder
             ->add('username', PurifiedTextType::class, [
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
-            ->add('email', EmailType::class, ['required' => true]);
+            ->add('email', EmailType::class, ['required' => true])
+            ->add('roles', CollectionType::class, ['entry_type' => TextType::class]);
 
         $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', EntityType::class, [
                 'required' => false,
-                'class' => UserType::class
+                'class' => UserType::class,
             ]);
         }
 
@@ -66,7 +69,7 @@ class ApiRegistrationFormType extends AbstractType
                 'by_reference' => false,
                 // Suppression d'index_property lors de l'inscription car il posait problème, pourquoi ? Seul le mystère nous le dira
                 'types' => [ValueResponseType::class, MediaResponseType::class],
-                'type_name' => AbstractResponse::TYPE_FIELD_NAME
+                'type_name' => AbstractResponse::TYPE_FIELD_NAME,
             ]);
     }
 
@@ -75,7 +78,7 @@ class ApiRegistrationFormType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'constraints' => new Valid(),
-            'validation_groups' => ['registration']
+            'validation_groups' => ['registration'],
         ]);
     }
 }

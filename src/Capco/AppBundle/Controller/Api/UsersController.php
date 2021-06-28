@@ -111,7 +111,6 @@ class UsersController extends AbstractFOSRestController
 
     /**
      * Create a user.
-     * )
      *
      * @Post("/users")
      * @View(statusCode=201, serializerGroups={"UserId"})
@@ -148,7 +147,7 @@ class UsersController extends AbstractFOSRestController
         /** @var User $user */
         $user = $this->userManager->createUser();
 
-        if($invitation) {
+        if ($invitation) {
             foreach ($invitation->getGroups() as $group) {
                 $userGroup = (new UserGroup())->setGroup($group)->setUser($user);
                 $em->persist($userGroup);
@@ -164,8 +163,13 @@ class UsersController extends AbstractFOSRestController
         }
         unset($submittedData['locale']);
 
-        if ($invitation && $invitation->isAdmin()) {
-            $user->addRole(UserRole::ROLE_ADMIN);
+        if ($invitation) {
+            if ($invitation->isProjectAdmin()) {
+                $user->addRole(UserRole::ROLE_PROJECT_ADMIN);
+            }
+            if ($invitation->isAdmin()) {
+                $user->addRole(UserRole::ROLE_ADMIN);
+            }
         }
 
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();

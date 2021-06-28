@@ -17,6 +17,7 @@ import Text from '~ui/Primitives/Text';
 import Flex from '~ui/Primitives/Layout/Flex';
 import AppBox from '~ui/Primitives/AppBox';
 import { ModalBody } from '../UserInviteAdminPage.style';
+import type { InviteUsersRole } from '~relay/InviteUserMutation.graphql';
 
 type Props = {|
   +queryFragment: UserInviteModalStepChooseRole_query$key,
@@ -33,7 +34,7 @@ const FRAGMENT = graphql`
 
 export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.Node => {
   const { dispatch, emails } = useUserInviteModalContext();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState<InviteUsersRole>('ROLE_USER');
   const [groups, setGroups] = useState([]);
   const [options, setOptions] = useState([]);
   const intl = useIntl();
@@ -73,9 +74,21 @@ export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.N
               id="user"
               value="user"
               name="role"
-              checked={!isAdmin}
+              checked={role === 'ROLE_USER'}
               onChange={() => {
-                setIsAdmin(false);
+                setRole('ROLE_USER');
+              }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <Radio
+              label={intl.formatMessage({ id: 'roles.project_admin' })}
+              id="project_admin"
+              value="project_admin"
+              name="role"
+              checked={role === 'ROLE_PROJECT_ADMIN'}
+              onChange={() => {
+                setRole('ROLE_PROJECT_ADMIN');
               }}
             />
           </InputGroup>
@@ -85,9 +98,9 @@ export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.N
               id="admin"
               value="admin"
               name="role"
-              checked={isAdmin}
+              checked={role === 'ROLE_ADMIN'}
               onChange={() => {
-                setIsAdmin(true);
+                setRole('ROLE_ADMIN');
               }}
             />
           </InputGroup>
@@ -119,7 +132,10 @@ export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.N
             variant="primary"
             variantSize="big"
             onClick={() =>
-              dispatch({ type: 'GOTO_SENDING_CONFIRMATION', payload: { emails, isAdmin, groups } })
+              dispatch({
+                type: 'GOTO_SENDING_CONFIRMATION',
+                payload: { emails, role, groups },
+              })
             }>
             {intl.formatMessage({ id: 'global.next' })}
           </Button>

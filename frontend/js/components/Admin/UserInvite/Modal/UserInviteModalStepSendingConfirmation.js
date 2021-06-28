@@ -17,7 +17,7 @@ type Props = {|
 
 const UserInviteModalStepSendingConfirmation = ({ onClose }: Props): React.Node => {
   const intl = useIntl();
-  const { dispatch, emails, isAdmin, groups } = useUserInviteModalContext();
+  const { dispatch, emails, role, groups } = useUserInviteModalContext();
   const { stopLoading, isLoading, startLoading } = useLoadingMachine();
 
   const onSubmit = async () => {
@@ -25,7 +25,7 @@ const UserInviteModalStepSendingConfirmation = ({ onClose }: Props): React.Node 
       const input = {
         maxResults: INVITE_USERS_MAX_RESULTS,
         emails,
-        isAdmin,
+        role,
         groups: groups.map(group => group.id),
       };
       startLoading();

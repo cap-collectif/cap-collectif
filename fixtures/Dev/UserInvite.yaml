@@ -6,6 +6,7 @@ Capco\AppBundle\Entity\UserInvite:
         token: 'oniiiichaaan'
         expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
         isAdmin: true
+        isProjectAdmin: false
     ramInvitation:
         id: 'ramInvitation'
         createdAt: <(new \DateTime('2020-03-02 00:00:51'))>
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\UserInvite:
         token: 'daiski'
         expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
         isAdmin: false
+        isProjectAdmin: false
     expiredInvitation:
         id: 'expiredInvitation'
         createdAt: <(new \DateTime('2020-03-03 00:00:51'))>
@@ -20,11 +22,21 @@ Capco\AppBundle\Entity\UserInvite:
         token: 'sorryiamtheexpiredtoken'
         expiresAt: <(new \DateTime('1999-03-02 00:00:51'))>
         isAdmin: false
+        isProjectAdmin: false
+    projectAdminInvitation:
+        id: 'projectAdminInvitation'
+        createdAt: <identity((new \DateTime('2020-03-03 00:00:51')))>
+        email: 'toto@project_admin.com'
+        token: 'iamtheprojectadmintoken'
+        expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
+        isAdmin: false
+        isProjectAdmin: true
     userGroupInvitation:
         id: 'userGroupInvitation'
         createdAt: <(new \DateTime('2020-03-04 00:00:51'))>
         email: 'user-invited-in-group@gmail.com'
         token: 'invitedgrouptoken'
-        expiresAt: <(new \DateTime('2030-01-01 00:00:00'))>
+        expiresAt: <(new \DateTime('2030-01-01 00:00:10'))>
         isAdmin: false
+        isProjectAdmin: false
         groups: ['@group1']

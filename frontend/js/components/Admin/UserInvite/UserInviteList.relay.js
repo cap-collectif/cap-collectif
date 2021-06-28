@@ -1,7 +1,7 @@
 // @flow
 import { graphql } from 'react-relay';
 // eslint-disable-next-line import/no-unresolved
-import type {GraphQLTaggedNode} from "relay-runtime/query/GraphQLTag";
+import type { GraphQLTaggedNode } from 'relay-runtime/query/GraphQLTag';
 import type { UserInviteList_query } from '~relay/UserInviteList_query.graphql';
 
 export type RelayProps = {|
@@ -15,9 +15,8 @@ export type Arguments = {|
 
 export const FRAGMENT: GraphQLTaggedNode = graphql`
   fragment UserInviteList_query on Query
-    @argumentDefinitions(first: { type: "Int", defaultValue: 50 }, cursor: { type: "String" }) 
-    @refetchable(queryName: "UserInviteListQuery")
-    {
+    @argumentDefinitions(first: { type: "Int", defaultValue: 50 }, cursor: { type: "String" })
+    @refetchable(queryName: "UserInviteListQuery") {
     userInvitations(first: $first, after: $cursor)
       @connection(key: "UserInviteList_userInvitations") {
       pageInfo {
@@ -30,6 +29,7 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
           id
           email
           isAdmin
+          isProjectAdmin
           status
           groups {
             edges {

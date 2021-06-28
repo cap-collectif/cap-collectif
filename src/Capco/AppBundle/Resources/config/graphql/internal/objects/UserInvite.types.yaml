@@ -17,6 +17,9 @@ UserInvite:
             isAdmin:
                 type: 'Boolean!'
                 description: 'Will the invited user be an admin?'
+            isProjectAdmin:
+                type: 'Boolean!'
+                description: 'Will the invited user be a project admin?'
             status:
                 type: 'UserInviteStatus!'
                 description: 'The invitation status'

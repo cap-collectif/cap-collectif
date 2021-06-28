@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -48,6 +47,10 @@ class UserAdmin extends BaseAdmin
                 'template' => 'CapcoAdminBundle:User:username_list_field.html.twig',
             ])
             ->add('email')
+            ->add('roles', null, [
+                'label' => 'global.role',
+                'template' => 'CapcoAdminBundle:User:roles_list_field.html.twig',
+            ])
             ->add('enabled', null)
             ->add('isEmailConfirmed', null, [
                 'label' => 'confirmed-by-email',

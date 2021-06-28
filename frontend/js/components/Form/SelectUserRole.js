@@ -34,6 +34,11 @@ export class SelectUserRole extends Component<Props> {
         label: intl.formatMessage({ id: 'roles.user' }),
       },
       {
+        id: 'ROLE_PROJECT_ADMIN',
+        useIdAsValue: true,
+        label: intl.formatMessage({ id: 'roles.project_admin' }),
+      },
+      {
         id: 'ROLE_ADMIN',
         useIdAsValue: true,
         label: intl.formatMessage({ id: 'roles.admin' }),

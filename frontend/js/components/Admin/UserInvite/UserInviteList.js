@@ -12,21 +12,26 @@ import Button from '~ds/Button/Button';
 import CancelUserInvitationsMutation from '~/mutations/CancelUserInvitationsMutation';
 import { toast } from '~ds/Toast';
 import TablePlaceholder from '~ds/Table/placeholder';
-import type {UserInviteList_query$key, UserInviteStatus} from "~relay/UserInviteList_query.graphql";
-import ButtonGroup from "~ds/ButtonGroup/ButtonGroup";
-import ButtonQuickAction from "~ds/ButtonQuickAction/ButtonQuickAction";
-import Tag from "~ds/Tag/Tag";
+import type {
+  UserInviteList_query$key,
+  UserInviteStatus,
+} from '~relay/UserInviteList_query.graphql';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
+import Tag from '~ds/Tag/Tag';
 
 type Props = {|
   query: UserInviteList_query$key,
 |};
 
-const StatusTag = ({status}: {status: ?UserInviteStatus}) => {
+const StatusTag = ({ status }: { status: ?UserInviteStatus }) => {
   const intl = useIntl();
-  if (status === 'PENDING') return <Tag variant="orange">{intl.formatMessage({id: 'waiting'})}</Tag>
-  if (status === 'EXPIRED') return <Tag variant="red">{intl.formatMessage({id: 'global.expired.feminine'})}</Tag>
-  return null
-}
+  if (status === 'PENDING')
+    return <Tag variant="orange">{intl.formatMessage({ id: 'waiting' })}</Tag>;
+  if (status === 'EXPIRED')
+    return <Tag variant="red">{intl.formatMessage({ id: 'global.expired.feminine' })}</Tag>;
+  return null;
+};
 
 export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
   const intl = useIntl();
@@ -37,11 +42,11 @@ export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
   const groupsText = (userInvite): string => {
     return userInvite?.groups?.edges && userInvite?.groups?.edges?.length > 0
       ? userInvite?.groups?.edges
-        ?.map((edge) => edge?.node?.title)
-        ?.filter(Boolean)
-        ?.reduce((acc, title) => `${acc} / ${title}`)
-      : '-'
-  }
+          ?.map(edge => edge?.node?.title)
+          ?.filter(Boolean)
+          ?.reduce((acc, title) => `${acc} / ${title}`)
+      : '-';
+  };
 
   const cancelInvite = async invitationsIds => {
     try {
@@ -77,31 +82,44 @@ export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
             <Table.Th noPlaceholder>{intl.formatMessage({ id: 'global.invitations' })}</Table.Th>
             <Table.Th noPlaceholder>{intl.formatMessage({ id: 'global.role' })}</Table.Th>
             <Table.Th noPlaceholder>{intl.formatMessage({ id: 'admin.label.group' })}</Table.Th>
-            <Table.Th noPlaceholder>{intl.formatMessage({ id: 'admin.fields.step.group_statuses' })}</Table.Th>
+            <Table.Th noPlaceholder>
+              {intl.formatMessage({ id: 'admin.fields.step.group_statuses' })}
+            </Table.Th>
             <Table.Th noPlaceholder> </Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody
           useInfiniteScroll
           onScrollToBottom={() => {
-            loadNext(CONNECTION_NODES_PER_PAGE)
+            loadNext(CONNECTION_NODES_PER_PAGE);
           }}
           hasMore={hasNext}>
-          {invitations.map((userInvite) => (
+          {invitations.map(userInvite => (
             <Table.Tr key={userInvite?.id} rowId={userInvite?.id} checkboxLabel={userInvite?.email}>
               <Table.Td>{userInvite?.email}</Table.Td>
               <Table.Td>
-                {userInvite?.isAdmin
-                  ? intl.formatMessage({ id: 'roles.admin' })
-                  : intl.formatMessage({ id: 'roles.user' })}
+                {(() => {
+                  if (userInvite?.isProjectAdmin) {
+                    return intl.formatMessage({ id: 'roles.project_admin' });
+                  }
+                  if (userInvite?.isAdmin) {
+                    return intl.formatMessage({ id: 'roles.admin' });
+                  }
+                  return intl.formatMessage({ id: 'roles.user' });
+                })()}
               </Table.Td>
               <Table.Td>{groupsText(userInvite)}</Table.Td>
               <Table.Td>
-                 <StatusTag status={userInvite?.status} />
+                <StatusTag status={userInvite?.status} />
               </Table.Td>
               <Table.Td>
                 <ButtonGroup>
-                  <ButtonQuickAction icon="TRASH" label="delete" variantColor="danger" onClick={() => cancelInvite([userInvite?.id])}/>
+                  <ButtonQuickAction
+                    icon="TRASH"
+                    label="delete"
+                    variantColor="danger"
+                    onClick={() => cancelInvite([userInvite?.id])}
+                  />
                 </ButtonGroup>
               </Table.Td>
             </Table.Tr>

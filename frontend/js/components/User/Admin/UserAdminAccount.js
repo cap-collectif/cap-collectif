@@ -75,7 +75,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
 };
 
 const validate = (values: ?FormValues) => {
-  console.log(values);
   const errors = {};
   if (values && values.roles && values.roles.labels.length === 0) {
     errors.roles = '1-option-minimum';

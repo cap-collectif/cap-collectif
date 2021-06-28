@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Enum\UserRole;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -24,8 +25,13 @@ class UserRolesTextResolver implements ResolverInterface
     {
         $convertedRoles = array_map(function ($role) {
             return str_replace(
-                ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'],
-                ['Utilisateur', 'Administrateur', 'Super Admin'],
+                [
+                    UserRole::ROLE_USER,
+                    UserRole::ROLE_ADMIN,
+                    UserRole::ROLE_PROJECT_ADMIN,
+                    UserRole::ROLE_SUPER_ADMIN,
+                ],
+                ['Utilisateur', 'Administrateur', 'Créateur de projet', 'Super Admin'],
                 $role
             );
         }, $user->getRoles());
