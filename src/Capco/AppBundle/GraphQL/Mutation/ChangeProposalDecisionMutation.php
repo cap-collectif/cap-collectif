@@ -203,7 +203,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
                     ->setProposal($proposalDecision->getProposal())
                     ->setIsPublished(false);
             }
-            $officialResponse->setBody(strip_tags($args->offsetGet('body')));
+            $officialResponse->setBody($args->offsetGet('body'));
             $this->updateDecisionOfficialResponseAuthors($officialResponse, $args);
         } elseif ($proposalDecision->getOfficialResponse()) {
             $this->entityManager->remove($proposalDecision->getOfficialResponse());
