@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Resolver\Project;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
-
 class ProjectSearchParameters
 {
     private $elements = 0;
@@ -81,17 +79,6 @@ class ProjectSearchParameters
         return $this->page;
     }
 
-    public static function createFromRequest(ParamFetcherInterface $request, bool $limit = false): self
-    {
-        return new self(
-            $request->get('limit') ?? $limit ? 8 : 0,
-            $request->get('page') ?? 1,
-            $request->get('term'),
-            $request->get('type'),
-            $request->get('orderBy'),
-            $request->get('theme')
-        );
-    }
 
     public function toArray(): array
     {

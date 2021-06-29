@@ -180,7 +180,6 @@
         "ksubileau/color-thief-php": "^1.4",
         "php-translation/loco-adapter": "^0.11",
         "jolicode/jolinotif": "^2.0",
-        "friendsofsymfony/rest-bundle": "2.8.6",
         "egeloen/ckeditor-bundle": "dev-feature/symfony4-compat#f9f68afcff81a210f2122013a852384f4102b65a",
         "egeloen/json-builder": "dev-feature/symfony4",
         "bjeavons/zxcvbn-php": "^1.0",
@@ -203,7 +202,9 @@
         "doctrine/cache": "^1.10",
         "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/maker-bundle": "^1.20",
-        "symfony/http-client": "~4.4.18"
+        "symfony/http-client": "~4.4.18",
+        "willdurand/negotiation": "^3.0",
+        "willdurand/jsonp-callback-validator": "^1.1"
     },
     "require-dev": {
         "behat/behat": "^3.3",

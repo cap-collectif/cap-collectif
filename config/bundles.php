@@ -68,8 +68,6 @@ return [
     ],
     Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
     Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle::class => ['all' => true],
-    // API
-    FOS\RestBundle\FOSRestBundle::class => ['all' => true],
     // GraphQL
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
     // Swarrot to publish and consume rabbitmq messages

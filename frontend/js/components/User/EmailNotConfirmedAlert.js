@@ -3,8 +3,8 @@ import React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Alert, Button } from 'react-bootstrap';
-import Fetcher from '../../services/Fetcher';
 import type { EmailNotConfirmedAlert_viewer } from '~relay/EmailNotConfirmedAlert_viewer.graphql';
+import ResendEmailConfirmationMutation from '~/mutations/ResendEmailConfirmationMutation';
 
 type Props = {|
   viewer: ?EmailNotConfirmedAlert_viewer,
@@ -23,19 +23,18 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
 
   handleResend = () => {
     this.setState({ resendingConfirmation: true });
-    Fetcher.post('/account/resend_confirmation_email')
+    ResendEmailConfirmationMutation.commit()
       .then(() => {
         this.setState({
           resendingConfirmation: false,
           confirmationSent: true,
         });
-      })
-      .catch(() => {
+      }).catch(() => {
         this.setState({
           resendingConfirmation: false,
           confirmationSent: true,
         });
-      });
+      })
   };
 
   render() {

@@ -41,22 +41,6 @@ capco_graphiql:
 
 # API
 
-capco_api_toggles:
-    resource: '@CapcoAppBundle/Controller/Api/FeaturesController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_projects:
-    resource: '@CapcoAppBundle/Controller/Api/ProjectsController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
 capco_api_medias:
     resource: '@CapcoAppBundle/Controller/Api/MediasController.php'
     type: annotation
@@ -67,62 +51,6 @@ capco_api_medias:
 
 capco_api_fonts:
     resource: '@CapcoAppBundle/Controller/Api/FontsController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_users:
-    resource: '@CapcoAppBundle/Controller/Api/UsersController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_opinions:
-    resource: '@CapcoAppBundle/Controller/Api/OpinionsController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_opinion_types:
-    resource: '@CapcoAppBundle/Controller/Api/OpinionTypesController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_proposal_forms:
-    resource: '@CapcoAppBundle/Controller/Api/ProposalFormsController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_proposals:
-    resource: '@CapcoAppBundle/Controller/Api/ProposalsController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_statuses:
-    resource: '@CapcoAppBundle/Controller/Api/StatusesController.php'
-    type: annotation
-    prefix: /api
-    defaults:
-        _format: json
-    options: { i18n: false }
-
-capco_api_sourcecategories:
-    resource: '@CapcoAppBundle/Controller/Api/SourceCategoriesController.php'
     type: annotation
     prefix: /api
     defaults:

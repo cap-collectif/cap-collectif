@@ -50,8 +50,11 @@ class LocaleController extends AbstractController
     public function setUserLocale(Request $request, string $localeCode): JsonResponse
     {
         $user = $this->getUser();
-        $routeName = $request->request->get('routeName', 'app_homepage');
-        $params = $request->request->get('routeParams', []);
+
+        $requestBody = json_decode($request->getContent(), true);
+        $routeName = $requestBody['routeName'] ?? 'app_homepage';
+        $params = $requestBody['routeParams'] ?? [];
+
         $keptParams = $params['_route_params'] ?? [];
 
         if (null !== $user) {
