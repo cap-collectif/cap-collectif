@@ -5,7 +5,7 @@ export const isEmail = (value: ?string): boolean => {
 };
 
 export const isUrl = (value: ?string): boolean => {
-  const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+  const urlPattern = /^(https:\/\/)[\w.-]+(?:\.[\w/.-]+)+[\w\-/._~:/?#[\]@!/$&'/(/)/*/+,;=.]+$/gi;
   return !value || urlPattern.test(value);
 };
 
@@ -22,7 +22,7 @@ export const checkOnlyNumbers = (input: string): boolean => {
 export const checkSiret = (input: string): boolean => {
   const regexS = /\d{14}$/gm;
   const regex = new RegExp(regexS);
-  input = input.replace(/\s/g,'');
+  input = input.replace(/\s/g, '');
   const results = regex.exec(input);
   return !!results && results[0] === input;
 };
@@ -30,7 +30,7 @@ export const checkSiret = (input: string): boolean => {
 export const checkRNA = (input: string): boolean => {
   const regexS = /W\d{9}$/gm;
   const regex = new RegExp(regexS);
-  input = input.replace(/\s/g,'');
+  input = input.replace(/\s/g, '');
   const results = regex.exec(input);
   return !!results && results[0] === input;
 };

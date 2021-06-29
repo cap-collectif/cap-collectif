@@ -361,7 +361,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         />
       }
       name="twitterUrl"
-      placeholder="twitter.com"
+      placeholder="https://twitter.com/pseudo"
       type="text"
     />
     <Field
@@ -374,7 +374,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         />
       }
       name="facebookUrl"
-      placeholder="facebook.com"
+      placeholder="https://facebook.com/pseudo"
       type="text"
     />
     <Field
@@ -387,7 +387,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         />
       }
       name="instagramUrl"
-      placeholder="instagram.com"
+      placeholder="https://instagram.com/pseudo"
       type="text"
     />
     <Field
@@ -400,7 +400,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         />
       }
       name="linkedInUrl"
-      placeholder="linkedin.com"
+      placeholder="https://linkedin.com/in/pseudo"
       type="text"
     />
     <Field
@@ -413,7 +413,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         />
       }
       name="youtubeUrl"
-      placeholder="youtube.com"
+      placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
   </ProposalForm__ExternaLinks>
@@ -846,7 +846,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         />
       }
       name="twitterUrl"
-      placeholder="twitter.com"
+      placeholder="https://twitter.com/pseudo"
       type="text"
     />
     <Field
@@ -859,7 +859,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         />
       }
       name="facebookUrl"
-      placeholder="facebook.com"
+      placeholder="https://facebook.com/pseudo"
       type="text"
     />
     <Field
@@ -872,7 +872,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         />
       }
       name="instagramUrl"
-      placeholder="instagram.com"
+      placeholder="https://instagram.com/pseudo"
       type="text"
     />
     <Field
@@ -885,7 +885,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         />
       }
       name="linkedInUrl"
-      placeholder="linkedin.com"
+      placeholder="https://linkedin.com/in/pseudo"
       type="text"
     />
     <Field
@@ -898,7 +898,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         />
       }
       name="youtubeUrl"
-      placeholder="youtube.com"
+      placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
   </ProposalForm__ExternaLinks>
@@ -1266,7 +1266,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         />
       }
       name="twitterUrl"
-      placeholder="twitter.com"
+      placeholder="https://twitter.com/pseudo"
       type="text"
     />
     <Field
@@ -1279,7 +1279,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         />
       }
       name="facebookUrl"
-      placeholder="facebook.com"
+      placeholder="https://facebook.com/pseudo"
       type="text"
     />
     <Field
@@ -1292,7 +1292,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         />
       }
       name="instagramUrl"
-      placeholder="instagram.com"
+      placeholder="https://instagram.com/pseudo"
       type="text"
     />
     <Field
@@ -1305,7 +1305,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         />
       }
       name="linkedInUrl"
-      placeholder="linkedin.com"
+      placeholder="https://linkedin.com/in/pseudo"
       type="text"
     />
     <Field
@@ -1318,7 +1318,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         />
       }
       name="youtubeUrl"
-      placeholder="youtube.com"
+      placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
   </ProposalForm__ExternaLinks>
@@ -1686,7 +1686,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
         />
       }
       name="twitterUrl"
-      placeholder="twitter.com"
+      placeholder="https://twitter.com/pseudo"
       type="text"
     />
     <Field
@@ -1699,7 +1699,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
         />
       }
       name="facebookUrl"
-      placeholder="facebook.com"
+      placeholder="https://facebook.com/pseudo"
       type="text"
     />
     <Field
@@ -1712,7 +1712,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
         />
       }
       name="instagramUrl"
-      placeholder="instagram.com"
+      placeholder="https://instagram.com/pseudo"
       type="text"
     />
     <Field
@@ -1725,7 +1725,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
         />
       }
       name="linkedInUrl"
-      placeholder="linkedin.com"
+      placeholder="https://linkedin.com/in/pseudo"
       type="text"
     />
     <Field
@@ -1738,7 +1738,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
         />
       }
       name="youtubeUrl"
-      placeholder="youtube.com"
+      placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
   </ProposalForm__ExternaLinks>
@@ -2106,7 +2106,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       }
       name="twitterUrl"
-      placeholder="twitter.com"
+      placeholder="https://twitter.com/pseudo"
       type="text"
     />
     <Field
@@ -2119,7 +2119,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       }
       name="facebookUrl"
-      placeholder="facebook.com"
+      placeholder="https://facebook.com/pseudo"
       type="text"
     />
     <Field
@@ -2132,7 +2132,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       }
       name="instagramUrl"
-      placeholder="instagram.com"
+      placeholder="https://instagram.com/pseudo"
       type="text"
     />
     <Field
@@ -2145,7 +2145,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       }
       name="linkedInUrl"
-      placeholder="linkedin.com"
+      placeholder="https://linkedin.com/in/pseudo"
       type="text"
     />
     <Field
@@ -2158,7 +2158,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       }
       name="youtubeUrl"
-      placeholder="youtube.com"
+      placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
   </ProposalForm__ExternaLinks>

@@ -755,7 +755,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 component={component}
                 type="text"
                 label={<FormattedMessage id="share.twitter" />}
-                placeholder="twitter.com"
+                placeholder="https://twitter.com/pseudo"
               />
             )}
             {proposalForm.usingFacebook && (
@@ -765,7 +765,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 component={component}
                 type="text"
                 label={<FormattedMessage id="share.facebook" />}
-                placeholder="facebook.com"
+                placeholder="https://facebook.com/pseudo"
               />
             )}
             {proposalForm.usingInstagram && (
@@ -775,7 +775,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 component={component}
                 type="text"
                 label={<FormattedMessage id="instagram" />}
-                placeholder="instagram.com"
+                placeholder="https://instagram.com/pseudo"
               />
             )}
             {proposalForm.usingLinkedIn && (
@@ -785,7 +785,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 component={component}
                 type="text"
                 label={<FormattedMessage id="share.linkedin" />}
-                placeholder="linkedin.com"
+                placeholder="https://linkedin.com/in/pseudo"
               />
             )}
             {proposalForm.usingYoutube && (
@@ -795,7 +795,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 component={component}
                 type="text"
                 label={<FormattedMessage id="youtube" />}
-                placeholder="youtube.com"
+                placeholder="https://youtube.com/channel/pseudo"
               />
             )}
           </ExternaLinks>

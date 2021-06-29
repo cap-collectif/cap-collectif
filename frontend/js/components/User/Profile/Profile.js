@@ -17,6 +17,7 @@ import {
   getSsoTradKey,
 } from '~/components/User/Profile/PersonalData';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
+import { fbRegEx, linkedInRegEx, twitterRegEx } from '~/components/Utils/SocialNetworkRegexUtils';
 
 type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
@@ -41,9 +42,6 @@ const validate = (values: Object) => {
     'facebookUrl',
     'username',
   ];
-  const fbRegEx = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w]*\/)*([\w]*)/;
-  const twitterRegEx = /(?:https?:\/\/)?(?:www\.)?(mbasic.twitter|m\.twitter|twitter)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:[\w]*\/)*([\w]*)/;
-  const linkedInRegEx = /(?:https?:\/\/)?(?:www\.)?(mbasic.linkedin|m\.linkedin|linkedin)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w]*\/)*([\w]*)/;
 
   fields.forEach(value => {
     if (value === 'username') {

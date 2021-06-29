@@ -44,6 +44,13 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
 import Heading from '~ui/Primitives/Heading';
+import {
+  fbRegEx,
+  linkedInRegEx,
+  twitterRegEx,
+  instagramRegEx,
+  youtubeRegEx,
+} from '~/components/Utils/SocialNetworkRegexUtils';
 
 type FormValues = {|
   media: ?{ id: Uuid },
@@ -182,6 +189,7 @@ const onSubmit = (
     youtubeUrl: '',
   };
 
+  
   if (proposal && proposal.form.isUsingAnySocialNetworks) {
     if (values.webPageUrl) {
       input.webPageUrl = values.webPageUrl;
@@ -317,10 +325,7 @@ export const validateProposalContent = (
       errors.webPageUrl = 'error-webPage-url';
     }
 
-    if (
-      values.facebookUrl &&
-      (values.facebookUrl.indexOf('facebook.com') === -1 || !isUrl(values.facebookUrl))
-    ) {
+    if (values.facebookUrl && (!values.facebookUrl.match(fbRegEx) || !isUrl(values.facebookUrl))) {
       errors.facebookUrl = {
         id: 'error-invalid-facebook-url',
       };
@@ -328,7 +333,7 @@ export const validateProposalContent = (
 
     if (
       values.twitterUrl &&
-      (values.twitterUrl.indexOf('twitter.com') === -1 || !isUrl(values.twitterUrl))
+      (!values.twitterUrl.match(twitterRegEx) || !isUrl(values.twitterUrl))
     ) {
       errors.twitterUrl = {
         id: 'error-invalid-socialNetwork-url',
@@ -338,7 +343,7 @@ export const validateProposalContent = (
 
     if (
       values.instagramUrl &&
-      (values.instagramUrl.indexOf('instagram.com') === -1 || !isUrl(values.instagramUrl))
+      (!values.instagramUrl.match(instagramRegEx) || !isUrl(values.instagramUrl))
     ) {
       errors.instagramUrl = {
         id: 'error-invalid-socialNetwork-url',
@@ -348,7 +353,7 @@ export const validateProposalContent = (
 
     if (
       values.linkedInUrl &&
-      (values.linkedInUrl.indexOf('linkedin.com') === -1 || !isUrl(values.linkedInUrl))
+      (!values.linkedInUrl.match(linkedInRegEx) || !isUrl(values.linkedInUrl))
     ) {
       errors.linkedInUrl = {
         id: 'error-invalid-socialNetwork-url',
@@ -357,7 +362,7 @@ export const validateProposalContent = (
     }
     if (
       values.youtubeUrl &&
-      (values.youtubeUrl.indexOf('youtube.com') === -1 || !isUrl(values.youtubeUrl))
+      (!values.youtubeUrl.match(youtubeRegEx) || !isUrl(values.youtubeUrl))
     ) {
       errors.youtubeUrl = {
         id: 'error-invalid-youtube-url',
@@ -702,7 +707,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   component={component}
                   type="text"
                   label={<FormattedMessage id="share.twitter" />}
-                  placeholder="twitter.com"
+                  placeholder="https://twitter.com/pseudo"
                 />
               )}
               {proposal.form.usingFacebook && (
@@ -712,7 +717,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   component={component}
                   type="text"
                   label={<FormattedMessage id="share.facebook" />}
-                  placeholder="facebook.com"
+                  placeholder="https://facebook.com/pseudo"
                 />
               )}
               {proposal.form.usingInstagram && (
@@ -722,7 +727,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   component={component}
                   type="text"
                   label={<FormattedMessage id="instagram" />}
-                  placeholder="instagram.com"
+                  placeholder="https://instagram.com/pseudo"
                 />
               )}
               {proposal.form.usingLinkedIn && (
@@ -732,7 +737,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   component={component}
                   type="text"
                   label={<FormattedMessage id="share.linkedin" />}
-                  placeholder="linkedin.com"
+                  placeholder="https://linkedin.com/in/pseudo"
                 />
               )}
               {proposal.form.usingYoutube && (
@@ -742,7 +747,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   component={component}
                   type="text"
                   label={<FormattedMessage id="youtube" />}
-                  placeholder="youtube.com"
+                  placeholder="https://youtube.com/channel/pseudo"
                 />
               )}
             </ExternaLinksCard>

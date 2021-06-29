@@ -422,7 +422,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           />
         }
         name="twitterUrl"
-        placeholder="twitter.com"
+        placeholder="https://twitter.com/pseudo"
         type="text"
       />
       <Field
@@ -435,7 +435,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           />
         }
         name="facebookUrl"
-        placeholder="facebook.com"
+        placeholder="https://facebook.com/pseudo"
         type="text"
       />
       <Field
@@ -448,7 +448,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           />
         }
         name="instagramUrl"
-        placeholder="instagram.com"
+        placeholder="https://instagram.com/pseudo"
         type="text"
       />
       <Field
@@ -461,7 +461,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           />
         }
         name="linkedInUrl"
-        placeholder="linkedin.com"
+        placeholder="https://linkedin.com/in/pseudo"
         type="text"
       />
       <Field
@@ -474,7 +474,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           />
         }
         name="youtubeUrl"
-        placeholder="youtube.com"
+        placeholder="https://youtube.com/channel/pseudo"
         type="text"
       />
     </ProposalAdminContentForm__ExternaLinksCard>
@@ -1090,7 +1090,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           />
         }
         name="twitterUrl"
-        placeholder="twitter.com"
+        placeholder="https://twitter.com/pseudo"
         type="text"
       />
       <Field
@@ -1103,7 +1103,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           />
         }
         name="facebookUrl"
-        placeholder="facebook.com"
+        placeholder="https://facebook.com/pseudo"
         type="text"
       />
       <Field
@@ -1116,7 +1116,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           />
         }
         name="instagramUrl"
-        placeholder="instagram.com"
+        placeholder="https://instagram.com/pseudo"
         type="text"
       />
       <Field
@@ -1129,7 +1129,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           />
         }
         name="linkedInUrl"
-        placeholder="linkedin.com"
+        placeholder="https://linkedin.com/in/pseudo"
         type="text"
       />
       <Field
@@ -1142,7 +1142,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
           />
         }
         name="youtubeUrl"
-        placeholder="youtube.com"
+        placeholder="https://youtube.com/channel/pseudo"
         type="text"
       />
     </ProposalAdminContentForm__ExternaLinksCard>
@@ -1758,7 +1758,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           />
         }
         name="twitterUrl"
-        placeholder="twitter.com"
+        placeholder="https://twitter.com/pseudo"
         type="text"
       />
       <Field
@@ -1771,7 +1771,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           />
         }
         name="facebookUrl"
-        placeholder="facebook.com"
+        placeholder="https://facebook.com/pseudo"
         type="text"
       />
       <Field
@@ -1784,7 +1784,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           />
         }
         name="instagramUrl"
-        placeholder="instagram.com"
+        placeholder="https://instagram.com/pseudo"
         type="text"
       />
       <Field
@@ -1797,7 +1797,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           />
         }
         name="linkedInUrl"
-        placeholder="linkedin.com"
+        placeholder="https://linkedin.com/in/pseudo"
         type="text"
       />
       <Field
@@ -1810,7 +1810,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           />
         }
         name="youtubeUrl"
-        placeholder="youtube.com"
+        placeholder="https://youtube.com/channel/pseudo"
         type="text"
       />
     </ProposalAdminContentForm__ExternaLinksCard>
