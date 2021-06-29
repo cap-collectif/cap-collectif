@@ -498,8 +498,8 @@ class UserRepository extends EntityRepository
         $rawQuery =
             'SELECT u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH '.
-            $voteWith.
+          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH ' .
+            $voteWith .
             '
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           LEFT JOIN pv.selectionStep s
@@ -948,7 +948,7 @@ class UserRepository extends EntityRepository
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinion(Opinion $opinion): int
@@ -960,7 +960,7 @@ class UserRepository extends EntityRepository
             ->andWhere('f.opinion = :opinion')
             ->setParameter('opinion', $opinion);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinionVersion(OpinionVersion $opinionVersion): int
@@ -972,7 +972,7 @@ class UserRepository extends EntityRepository
             ->andWhere('f.opinionVersion = :opinionVersion')
             ->setParameter('opinionVersion', $opinionVersion);
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
@@ -987,7 +987,7 @@ class UserRepository extends EntityRepository
             ->setParameter('proposalId', $proposal->getId())
             ->setParameter('userId', $user->getId());
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinionAndUser(Opinion $opinion, User $user): int
@@ -1001,7 +1001,7 @@ class UserRepository extends EntityRepository
             ->setParameter('opinionId', $opinion->getId())
             ->setParameter('userId', $user->getId());
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForOpinionVersionAndUser(OpinionVersion $version, User $user): int
@@ -1015,7 +1015,7 @@ class UserRepository extends EntityRepository
             ->setParameter('versionId', $version->getId())
             ->setParameter('userId', $user->getId());
 
-        return (int)$query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function findUsersFollowingProposal()
@@ -1092,7 +1092,7 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.roles LIKE :roles')
             ->orderBy('u.email', 'ASC')
-            ->setParameter('roles', '%"'.$role.'"%');
+            ->setParameter('roles', '%"' . $role . '"%');
 
         return $qb->getQuery()->getResult();
     }
@@ -1150,7 +1150,7 @@ class UserRepository extends EntityRepository
         $qb->select('u')->where('u.email IS NOT NULL');
 
         if (!$includeUnsubscribed) {
-            $qb->andWhere('u.consent_internal_communication = 1');
+            $qb->andWhere('u.consentInternalCommunication = 1');
         }
 
         if (EmailingCampaignInternalList::CONFIRMED === $internalList) {
