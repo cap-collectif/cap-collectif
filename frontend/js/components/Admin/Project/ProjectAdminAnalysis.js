@@ -42,7 +42,6 @@ import {
   AnalysisProposalListFiltersList,
   AnalysisProposalListHeaderContainer,
 } from '~ui/Analysis/common.style';
-import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader';
 import ModalConfirmRevokement from './ModalConfirmRevokement/ModalConfirmRevokement';
 import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation';
 import AssignDecisionMakerToProposalsMutation from '~/mutations/AssignDecisionMakerToProposalsMutation';
@@ -74,6 +73,8 @@ import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
+import { clearToasts, toast } from '~ds/Toast';
+import { PROJECT_ADMIN_PROPOSAL_LOAD_100 } from '~/components/Admin/Project/ProjectAdminProposals';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -806,7 +807,7 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
 
 export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: Props) => {
   const intl = useIntl();
-  const { parameters, status, dispatch } = useProjectAdminProposalsContext();
+  const { parameters, dispatch } = useProjectAdminProposalsContext();
   const proposalsWithTheme = getFormattedProposalsWithTheme(project);
 
   const hasProposals =
@@ -828,6 +829,38 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
         return '';
     }
   };
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const loadMore = React.useCallback(() => {
+    if (!project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage) {
+      return;
+    }
+    relay.loadMore(PROJECT_ADMIN_PROPOSAL_LOAD_100, () => {
+      loadMore();
+    });
+  }, [relay, project]);
+
+  const loadAll = React.useCallback(() => {
+    if (!loading) {
+      const duration = project.firstAnalysisStep?.proposals?.totalCount
+        ? project.firstAnalysisStep?.proposals?.totalCount * 20
+        : PROJECT_ADMIN_PROPOSAL_PAGINATION * 20;
+      toast({
+        variant: 'loading',
+        content: intl.formatMessage({ id: 'loading-contributions' }),
+        position: 'bottom',
+        duration,
+      });
+      setLoading(true);
+    }
+    loadMore();
+  }, [intl, loadMore, loading, project]);
+
+  React.useEffect(() => {
+    if (!loading || !project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage) {
+      clearToasts();
+    }
+    loadAll();
+  }, [loading, loadAll, project]);
 
   return (
     <AnalysisPickableListContainer>
@@ -873,14 +906,7 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
         </div>
       </AnalysisHeader>
 
-      <PickableList
-        isLoading={status === 'loading'}
-        useInfiniteScroll={hasProposals}
-        onScrollToBottom={() => {
-          relay.loadMore(PROJECT_ADMIN_PROPOSAL_PAGINATION);
-        }}
-        hasMore={project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage}
-        loader={<AnalysisProposalListLoader key="loader" />}>
+      <PickableList>
         <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
           <ProposalListHeader project={project} defaultUsers={defaultUsers} themes={themes} />
         </AnalysisProposalListHeaderContainer>

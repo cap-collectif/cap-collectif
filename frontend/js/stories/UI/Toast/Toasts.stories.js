@@ -4,7 +4,7 @@ import * as React from 'react';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Button from '~ds/Button/Button';
 import Text from '~ui/Primitives/Text';
-import { toast } from '~ds/Toast';
+import { clearToasts, toast } from '~ds/Toast';
 
 export default {
   title: 'Design system/Toasts',
@@ -60,6 +60,14 @@ const Template = (args: any) => (
         });
       }}>
       Notify danger
+    </Button>
+    <Button
+      variant="primary"
+      variantSize="medium"
+      onClick={() => {
+        clearToasts();
+      }}>
+      Clear all Toasts
     </Button>
   </Flex>
 );

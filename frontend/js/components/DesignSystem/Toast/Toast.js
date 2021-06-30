@@ -19,11 +19,12 @@ import Icon, { ICON_NAME, type Props as IconProps } from '~ds/Icon/Icon';
 import colors from '~/styles/modules/colors';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { boxShadow } from '~/styles/theme/base';
+import Spinner from '~ds/Spinner/Spinner';
 
 export type ToastProps = {|
   +position?: 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right',
   +id: string,
-  +variant: 'info' | 'success' | 'danger' | 'warning',
+  +variant: 'info' | 'success' | 'danger' | 'warning' | 'loading',
   +closable?: boolean,
   +duration?: number,
   +content: React.Node,
@@ -69,6 +70,11 @@ const ToastInner = styled(motion.custom(AppBox)).attrs({
       },
       info: {
         color: 'blue.900',
+        bg: 'blue.100',
+        boxShadow: `0 -5px 0 ${colors.blue[300]}, ${boxShadow.medium}`,
+      },
+      loading: {
+        color: 'blue.800',
         bg: 'blue.100',
         boxShadow: `0 -5px 0 ${colors.blue[300]}, ${boxShadow.medium}`,
       },
@@ -174,7 +180,7 @@ const Toast = ({
       animation={show ? getAnimation(position) : fadeOut}>
       <Flex align="center" css={{ '& > *:last-child': { flex: 1 } }}>
         {/** $FlowFixMe IconProps needs a name property but is is defined in getIcon */}
-        {getIcon(variant, { mr: 2 })}
+        {variant === 'loading' ? <Spinner mr={2} /> : getIcon(variant, { mr: 2 })}
         {typeof content === 'string' ? (
           <Text dangerouslySetInnerHTML={{ __html: content }} />
         ) : (

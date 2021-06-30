@@ -55,7 +55,6 @@ import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import ProjectAdminMergeModale from '~/components/Admin/Project/Modale/ProjectAdminMergeModale';
 import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal';
-import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader';
 import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
 import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
@@ -69,8 +68,10 @@ import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal
 import Button from '~ds/Button/Button';
 import Flex from '~ui/Primitives/Layout/Flex';
 import NewExportButton from '~/components/Admin/Project/ExportButton/NewExportButton';
+import { clearToasts, toast } from '~ds/Toast';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
+export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
 
 const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 
@@ -552,7 +553,7 @@ export const ProjectAdminProposals = ({
   hasContributionsStep,
   features,
 }: Props) => {
-  const { parameters, dispatch, status } = useProjectAdminProposalsContext();
+  const { parameters, dispatch } = useProjectAdminProposalsContext();
   const intl = useIntl();
   const history = useHistory();
   const hasProposals = project.proposals?.totalCount > 0;
@@ -571,6 +572,37 @@ export const ProjectAdminProposals = ({
   const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
     null,
   );
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const loadMore = React.useCallback(() => {
+    if (!project.proposals.pageInfo.hasNextPage) {
+      return;
+    }
+    relay.loadMore(PROJECT_ADMIN_PROPOSAL_LOAD_100, () => {
+      loadMore();
+    });
+  }, [project.proposals.pageInfo.hasNextPage, relay]);
+
+  const loadAll = React.useCallback(() => {
+    if (!loading) {
+      toast({
+        variant: 'loading',
+        content: intl.formatMessage({ id: 'loading-contributions' }),
+        position: 'bottom',
+        duration: project.proposals.totalCount * 20,
+      });
+      setLoading(true);
+    }
+
+    loadMore();
+  }, [intl, loadMore, project, loading]);
+
+  React.useEffect(() => {
+    if (!loading || !project.proposals.pageInfo.hasNextPage) {
+      clearToasts();
+    }
+    loadAll();
+  }, [loadAll, loading, project]);
 
   const isInteractive =
     parameters.filters.state !== 'ALL' &&
@@ -670,14 +702,7 @@ export const ProjectAdminProposals = ({
           </div>
         </S.ProjectAdminProposalsHeader>
 
-        <PickableList
-          isLoading={status === 'loading'}
-          useInfiniteScroll={hasProposals}
-          onScrollToBottom={() => {
-            relay.loadMore(PROJECT_ADMIN_PROPOSAL_PAGINATION);
-          }}
-          hasMore={project.proposals?.pageInfo.hasNextPage}
-          loader={<AnalysisProposalListLoader key="loader" />}>
+        <PickableList>
           <AnalysisProposalListHeaderContainer
             isSelectable={isInteractive}
             disabled={!hasProposals && !hasSelectedFilters}>

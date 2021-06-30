@@ -35,6 +35,7 @@ import type { ProjectAdminParticipants_project } from '~relay/ProjectAdminPartic
 import colors from '~/styles/modules/colors';
 import ModalCreateMailingList from '~/components/Admin/Project/ProjectAdminParticipantTab/ModalCreateMailingList/ModalCreateMailingList';
 import type { GlobalState } from '~/types';
+import { clearToasts } from '~ds/Toast';
 
 export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30;
 
@@ -212,6 +213,9 @@ export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Pr
   const hasParticipants = project.participants?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
   const { isOpen, onOpen, onClose } = useDisclosure(false);
+  React.useEffect(() => {
+    clearToasts();
+  });
 
   return (
     <AnalysisPickableListContainer>

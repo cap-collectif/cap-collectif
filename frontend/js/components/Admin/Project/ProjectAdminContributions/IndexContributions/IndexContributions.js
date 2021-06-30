@@ -8,6 +8,7 @@ import ContributionStep from './ContributionStep';
 import { type IndexContributions_project } from '~relay/IndexContributions_project.graphql';
 import Text from '~ui/Primitives/Text';
 import Heading from '~ui/Primitives/Heading';
+import { clearToasts } from '~ds/Toast';
 
 export const STEP_CONTRIBUTIONS = ['CollectStep', 'DebateStep'];
 
@@ -34,7 +35,9 @@ type Props = {|
 export const IndexContributions = ({ project }: Props) => {
   const { url: baseLinkUrl } = useRouteMatch();
   const intl = useIntl();
-
+  React.useEffect(() => {
+    clearToasts();
+  });
   return (
     <Flex direction="column">
       <Heading as="h4" mb={2} color="blue.900">

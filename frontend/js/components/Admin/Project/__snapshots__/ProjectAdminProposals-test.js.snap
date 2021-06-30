@@ -110,13 +110,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
         </InlineSelect>
       </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-    <PickableList
-      hasMore={false}
-      isLoading={false}
-      loader={<AnalysisProposalListLoader />}
-      onScrollToBottom={[Function]}
-      useInfiniteScroll={true}
-    >
+    <PickableList>
       <commonstyle__AnalysisProposalListHeaderContainer
         disabled={false}
         isSelectable={true}
@@ -1239,13 +1233,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
         </InlineSelect>
       </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-    <PickableList
-      hasMore={false}
-      isLoading={false}
-      loader={<AnalysisProposalListLoader />}
-      onScrollToBottom={[Function]}
-      useInfiniteScroll={true}
-    >
+    <PickableList>
       <commonstyle__AnalysisProposalListHeaderContainer
         disabled={false}
         isSelectable={true}
@@ -2359,13 +2347,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
         </InlineSelect>
       </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-    <PickableList
-      hasMore={false}
-      isLoading={false}
-      loader={<AnalysisProposalListLoader />}
-      onScrollToBottom={[Function]}
-      useInfiniteScroll={true}
-    >
+    <PickableList>
       <commonstyle__AnalysisProposalListHeaderContainer
         disabled={false}
         isSelectable={true}
@@ -3480,13 +3462,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
         </InlineSelect>
       </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-    <PickableList
-      hasMore={false}
-      isLoading={false}
-      loader={<AnalysisProposalListLoader />}
-      onScrollToBottom={[Function]}
-      useInfiniteScroll={false}
-    >
+    <PickableList>
       <commonstyle__AnalysisProposalListHeaderContainer
         disabled={true}
         isSelectable={true}

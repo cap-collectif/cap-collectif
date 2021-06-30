@@ -20,6 +20,7 @@ import {
 } from '../Form/ProjectAdminForm.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import Text from '~ui/Primitives/Text';
+import { clearToasts } from '~ds/Toast';
 
 type Option = {|
   value: string,
@@ -96,6 +97,10 @@ export const validate = (props: FormValues) => {
 };
 
 export const ProjectContentAdminForm = ({ intl }: Props) => {
+  React.useEffect(() => {
+    clearToasts();
+  });
+
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">

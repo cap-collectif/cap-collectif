@@ -36,9 +36,13 @@ const ToastsContainer = () => {
     Emitter.on(UIEvents.ToastShow, (toast: ToastProps) => {
       setToasts(n => [...n, toast]);
     });
+    Emitter.on(UIEvents.ToastClear, () => {
+      setToasts([]);
+    });
 
     return () => {
       Emitter.removeAllListeners(UIEvents.ToastShow);
+      Emitter.removeAllListeners(UIEvents.ToastClear);
     };
   }, []);
 
