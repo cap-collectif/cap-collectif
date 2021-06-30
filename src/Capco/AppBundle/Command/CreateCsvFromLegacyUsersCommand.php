@@ -63,7 +63,6 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         'city' => 'city',
         'phone' => 'phone',
         'url' => 'url',
-        'googleId' => 'googleId',
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
 
@@ -278,7 +277,6 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         city
         phone
         url
-        googleId
         facebookId
         samlId
         contributions {

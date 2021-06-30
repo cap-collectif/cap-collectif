@@ -69,7 +69,6 @@ export class LoginSocialButtons extends React.Component<Props> {
             },
           )}
         {features.login_facebook && <LoginSocialButton type="facebook" />}
-        {features.login_gplus && <LoginSocialButton type="google" />}
         {!features.sso_by_pass_auth && (
           <p className="p--centered">
             <FormattedMessage id="login.or" />

@@ -1125,8 +1125,6 @@ class UserRepository extends EntityRepository
             ->orWhere('u.franceConnectAccessToken = :accessToken')
             ->orWhere('u.facebook_access_token = :accessToken')
             ->orWhere('u.facebook_id = :accessId')
-            ->orWhere('u.google_access_token = :accessToken')
-            ->orWhere('u.google_id = :accessId')
             ->orWhere('u.openIdAccessToken = :accessToken')
             ->orWhere('u.openId = :accessId')
             ->orWhere('u.twitter_access_token = :accessToken')

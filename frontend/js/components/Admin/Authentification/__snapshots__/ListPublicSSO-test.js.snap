@@ -21,20 +21,6 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
     </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
       <Toggle
-        checked={false}
-        id="toggle-google-plus"
-        label={
-          <h5
-            className="mb-0 mt-0"
-          >
-            Google
-          </h5>
-        }
-        onChange={[Function]}
-      />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
         checked={true}
         disabled={true}
         id="toggle-email"
@@ -68,20 +54,6 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
             className="mb-0 mt-0"
           >
             Facebook
-          </h5>
-        }
-        onChange={[Function]}
-      />
-    </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-    <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
-        checked={false}
-        id="toggle-google-plus"
-        label={
-          <h5
-            className="mb-0 mt-0"
-          >
-            Google
           </h5>
         }
         onChange={[Function]}

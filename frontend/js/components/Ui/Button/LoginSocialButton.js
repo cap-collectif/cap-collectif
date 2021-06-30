@@ -7,7 +7,7 @@ import { baseUrl } from '~/config';
 import SocialIcon from '../Icons/SocialIcon';
 import AppBox from '~ui/Primitives/AppBox';
 
-type LoginSocialButtonType = 'facebook' | 'google' | 'openId' | 'franceConnect' | 'saml';
+type LoginSocialButtonType = 'facebook' | 'openId' | 'franceConnect' | 'saml';
 
 type Props = {|
   type: LoginSocialButtonType,
@@ -25,8 +25,6 @@ const getLabelColorForType = (type: LoginSocialButtonType, color?: string): stri
   switch (type) {
     case 'facebook':
       return 'white';
-    case 'google':
-      return 'white';
     case 'openId':
       return color || 'white';
     case 'saml':
@@ -41,8 +39,6 @@ const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: string): s
   switch (type) {
     case 'facebook':
       return '#3B5998';
-    case 'google':
-      return '#1b9bd1';
     case 'openId':
       return bgColor || '#1b9bd1';
     case 'saml':
@@ -57,9 +53,6 @@ export const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: s
   switch (type) {
     case 'facebook':
       return `/login/facebook?_destination=${window && window.location.href}`;
-
-    case 'google':
-      return `/login/google?_destination=${window && window.location.href}`;
 
     case 'openId':
       return `/login/openid?_destination=${redirectUri}`;
@@ -79,8 +72,6 @@ const getButtonContentForType = (type: string): string => {
   switch (type) {
     case 'facebook':
       return 'Facebook';
-    case 'google':
-      return 'Google';
     case 'saml':
       return 'Saml';
     default:

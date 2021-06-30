@@ -17,7 +17,7 @@ import {
   submit,
   Field,
 } from 'redux-form';
-import styled, { css, type StyledComponent } from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
@@ -206,21 +206,10 @@ const SsoIcon: StyledComponent<{ type?: string }, {}, HTMLDivElement> = styled.d
   width: 40px;
   margin-right: 5px;
   .loginIcon {
-    ${props =>
-      props.type === 'google' &&
-      css`
-        border-radius: 50%;
-        padding: 7px;
-        background-color: #fff;
-        border: solid 1px #ddd;
-      `}
     & > svg {
       ${props => {
         if (props.type === 'franceConnect') {
           return 'height: 45px;transform: translate(5px , 5px);';
-        }
-        if (props.type === 'google') {
-          return 'height: 22px;transform: translate(0px , -2px);';
         }
         if (props.type === 'fb') {
           return 'height: 45px;transform: translate(-12px , -2px);';
@@ -549,34 +538,6 @@ export const AccountForm = ({
                     </>
                   </ListGroupItem>
                 )}
-                {features.login_gplus && (
-                  <ListGroupItem className="bgc-fa h-70">
-                    <SsoDiv>
-                      <SsoIcon type="google">
-                        <SocialIcon className="loginIcon" name="googleColored" />
-                      </SsoIcon>
-                      <span>
-                        <b>Google</b>
-                      </span>
-                    </SsoDiv>
-                    <>
-                      {!viewer.googleId ? (
-                        <AssociateLink
-                          bcd="rgba(3, 136, 204, 0.08)"
-                          color="rgb(0, 140, 214)"
-                          href={getButtonLinkForType(
-                            'google',
-                            `${window && window.location.origin + window.location.pathname}`,
-                          )}
-                          title="google">
-                          <FormattedMessage id="global-link" />
-                        </AssociateLink>
-                      ) : (
-                        <>{dissociate('GOOGLE', 'Google')}</>
-                      )}
-                    </>
-                  </ListGroupItem>
-                )}
               </ListGroup>
             </SsoGroup>
           ) : null}
@@ -628,7 +589,6 @@ export default createFragmentContainer(container, {
       locale
       newEmailToConfirm
       facebookId
-      googleId
       hasPassword
       isFranceConnectAccount
       ...DeleteAccountModal_viewer

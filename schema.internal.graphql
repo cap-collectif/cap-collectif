@@ -1314,9 +1314,6 @@ enum AvailableSso {
   """FranceConnect sso service"""
   FRANCE_CONNECT
 
-  """Google sso service"""
-  GOOGLE
-
   """Facebook sso service"""
   FACEBOOK
 }
@@ -13965,7 +13962,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
   zipCode: String
   city: String
   phone: String
-  googleId: String
   facebookId: String
   samlId: String
   franceConnectId: String

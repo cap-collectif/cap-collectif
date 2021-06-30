@@ -49,7 +49,6 @@ security:
             oauth:
                 resource_owners:
                     facebook: /login/check-facebook
-                    google: /login/check-google
                     openid: /login/check-openid
                     franceconnect: /login/check-franceconnect
                 login_path: /

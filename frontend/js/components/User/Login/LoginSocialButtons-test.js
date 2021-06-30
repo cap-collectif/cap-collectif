@@ -25,14 +25,6 @@ describe('<LoginSocialButtons />', () => {
     features,
     ssoList: [],
   };
-
-  const propsWithFeatureLoginGoogleActivated = {
-    features: {
-      ...features,
-      login_gplus: true,
-    },
-    ssoList: [],
-  };
   const propsWithFeatureLoginFacebookActivated = {
     features: {
       ...features,
@@ -104,11 +96,6 @@ describe('<LoginSocialButtons />', () => {
 
   it('renders only Facebook button', () => {
     const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginFacebookActivated} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders only Google button', () => {
-    const wrapper = shallow(<LoginSocialButtons {...propsWithFeatureLoginGoogleActivated} />);
     expect(wrapper).toMatchSnapshot();
   });
 

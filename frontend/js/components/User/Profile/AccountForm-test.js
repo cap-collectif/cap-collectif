@@ -13,7 +13,6 @@ describe('<AccountForm />', () => {
     locale: 'fr-FR',
     email: 'initial-email@gmail.fr',
     facebookId: null,
-    googleId: null,
     isFranceConnectAccount: false,
     newEmailToConfirm: null,
     hasPassword: true,

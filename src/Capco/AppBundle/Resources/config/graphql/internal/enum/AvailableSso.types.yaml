@@ -6,9 +6,6 @@ AvailableSso:
             FRANCE_CONNECT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\AvailableSso::FRANCE_CONNECT")'
                 description: 'FranceConnect sso service'
-            GOOGLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableSso::GOOGLE")'
-                description: 'Google sso service'
             FACEBOOK:
                 value: '@=constant("Capco\\AppBundle\\Enum\\AvailableSso::FACEBOOK")'
                 description: 'Facebook sso service'

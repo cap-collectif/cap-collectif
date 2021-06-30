@@ -686,7 +686,6 @@ EOF;
       phone
       url
       samlId
-      googleId
       facebookId
       facebookUrl
       twitterUrl

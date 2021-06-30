@@ -28,9 +28,6 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   <LoginSocialButton
     type="facebook"
   />
-  <LoginSocialButton
-    type="google"
-  />
   <p
     className="p--centered"
   >
@@ -81,30 +78,6 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
   <LoginSocialButton
     key="0"
     type="franceConnect"
-  />
-  <p
-    className="p--centered"
-  >
-    <FormattedMessage
-      id="login.or"
-      values={Object {}}
-    />
-  </p>
-</Fragment>
-`;
-
-exports[`<LoginSocialButtons /> renders only Google button 1`] = `
-<Fragment>
-  <div
-    className="font-weight-semi-bold"
-  >
-    <FormattedMessage
-      id="authenticate-with"
-      values={Object {}}
-    />
-  </div>
-  <LoginSocialButton
-    type="google"
   />
   <p
     className="p--centered"
@@ -197,9 +170,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   />
   <LoginSocialButton
     type="facebook"
-  />
-  <LoginSocialButton
-    type="google"
   />
 </Fragment>
 `;

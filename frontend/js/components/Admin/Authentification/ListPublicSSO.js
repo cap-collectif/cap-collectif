@@ -51,6 +51,7 @@ const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(
 `;
 
 export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) => {
+
   const [showFranceConnectModal, setShowFranceConnectModal] = useState<boolean>(false);
 
   const handleClose = () => {
@@ -102,14 +103,6 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
             checked={features.login_facebook}
             onChange={() => onToggle('login_facebook', !features.login_facebook)}
             label={<h5 className="mb-0 mt-0">Facebook</h5>}
-          />
-        </ListGroupItemWithJustifyContentEnd>
-        <ListGroupItemWithJustifyContentEnd>
-          <Toggle
-            id="toggle-google-plus"
-            checked={features.login_gplus}
-            onChange={() => onToggle('login_gplus', !features.login_gplus)}
-            label={<h5 className="mb-0 mt-0">Google</h5>}
           />
         </ListGroupItemWithJustifyContentEnd>
         <ListGroupItemWithJustifyContentEnd>

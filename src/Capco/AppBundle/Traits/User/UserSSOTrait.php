@@ -8,11 +8,27 @@ use FOS\UserBundle\Util\Canonicalizer;
 trait UserSSOTrait
 {
     use FranceConnectUserTrait;
-    use UserSSOParisTrait;
     use UserSSOOpenIdTrait;
+    use UserSSOParisTrait;
 
     //saml
     protected ?string $samlId;
+
+    //facebook
+    protected ?string $facebook_id;
+    protected ?string $facebook_access_token;
+    protected ?string $facebookUrl;
+
+    //twitter
+    protected ?string $twitter_id;
+    protected ?string $twitter_access_token;
+    protected ?string $twitterUrl;
+
+    //linkedin
+    protected ?string $linkedInUrl;
+
+    protected ?\DateTime $credentialsExpireAt;
+    protected bool $credentialsExpired = false;
 
     public function setSamlAttributes(string $idp, array $attributes): void
     {
@@ -53,11 +69,6 @@ trait UserSSOTrait
         return $this->samlId;
     }
 
-    //facebook
-    protected ?string $facebook_id;
-    protected ?string $facebook_access_token;
-    protected ?string $facebookUrl;
-
     public function getFacebookAccessToken(): ?string
     {
         return $this->facebook_access_token;
@@ -87,35 +98,6 @@ trait UserSSOTrait
     {
         $this->facebookUrl = $facebookUrl;
     }
-
-    //google
-    protected ?string $google_id;
-    protected ?string $google_access_token;
-
-    public function getGoogleId(): ?string
-    {
-        return $this->google_id;
-    }
-
-    public function setGoogleId(?string $google_id): void
-    {
-        $this->google_id = $google_id;
-    }
-
-    public function getGoogleAccessToken(): ?string
-    {
-        return $this->google_access_token;
-    }
-
-    public function setGoogleAccessToken(?string $google_access_token): void
-    {
-        $this->google_access_token = $google_access_token;
-    }
-
-    //twitter
-    protected ?string $twitter_id;
-    protected ?string $twitter_access_token;
-    protected ?string $twitterUrl;
 
     public function setTwitterId(?string $twitter_id): self
     {
@@ -149,9 +131,6 @@ trait UserSSOTrait
         $this->twitterUrl = $twitterUrl;
     }
 
-    //linkedin
-    protected ?string $linkedInUrl;
-
     public function getLinkedInUrl(): ?string
     {
         return $this->linkedInUrl;
@@ -163,10 +142,6 @@ trait UserSSOTrait
 
         return $this;
     }
-
-
-    protected ?\DateTime $credentialsExpireAt;
-    protected bool $credentialsExpired = false;
 
     public function isCredentialsExpired(): bool
     {
@@ -191,5 +166,4 @@ trait UserSSOTrait
 
         return $this;
     }
-
 }

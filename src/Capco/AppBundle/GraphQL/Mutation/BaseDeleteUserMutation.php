@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
@@ -29,10 +28,8 @@ use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\ProfileFormType;
 use Capco\UserBundle\Form\Type\UserMedia;
 use Doctrine\ORM\EntityManagerInterface;
-use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -126,7 +123,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 try {
                     $this->removeObjectMedia($contribution);
                 } catch (\Exception $e) {
-                    $this->logger->error(__METHOD__.' : '.$e->getMessage());
+                    $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
                 }
             }
             if ($contribution instanceof Proposal) {
@@ -181,7 +178,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 try {
                     $this->removeObjectMedia($contribution);
                 } catch (\Exception $e) {
-                    $this->logger->error(__METHOD__.' : '.$e->getMessage());
+                    $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
                 }
             }
         }
@@ -209,11 +206,9 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     public function anonymizeUser(User $user): void
     {
-        $newsletter = $this->newsletterSubscriptionRepository->findOneBy(
-            [
-                'email' => $user->getEmail(),
-            ]
-        );
+        $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
+            'email' => $user->getEmail(),
+        ]);
         $userGroups = $this->groupRepository->findBy(['user' => $user]);
 
         if ($newsletter) {
@@ -245,10 +240,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $user->setTwitterName(null);
         $user->setTwitterAccessToken(null);
 
-        $user->setGoogleId(null);
         $user->setGplusData(null);
         $user->setGplusName(null);
-        $user->setGoogleAccessToken(null);
         $user->setGplusData(null);
 
         $user->setOpenId(null);
@@ -276,19 +269,15 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
             try {
                 $this->removeObjectMedia($user);
             } catch (\Exception $e) {
-                $this->logger->error(__METHOD__.' : '.$e->getMessage());
-                $form = $this->formFactory->create(
-                    UserMedia::class,
-                    $user,
-                    [
-                        'csrf_protection' => false,
-                    ]
-                );
+                $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
+                $form = $this->formFactory->create(UserMedia::class, $user, [
+                    'csrf_protection' => false,
+                ]);
                 // we force to delete media, so fill an empty field
                 $form->submit(['media' => null], false);
 
                 if (!$form->isValid()) {
-                    $this->logger->error(__METHOD__.(string)$form->getErrors(true, false));
+                    $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
 
                     throw new \Exception('Can\'t delete user profile image !');
                 }
@@ -337,7 +326,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function shallContributionBeDeleted(User $user, $contribution): bool
     {
-        if ($contribution instanceof AbstractVote &&
+        if (
+            $contribution instanceof AbstractVote &&
             method_exists($contribution->getRelated(), 'getStep') &&
             $contribution->getRelated() &&
             $contribution->getRelated()->getStep() &&
@@ -347,7 +337,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 ->canContribute($user)
         ) {
             return true;
-        } elseif ($contribution instanceof Comment) {
+        }
+        if ($contribution instanceof Comment) {
             if (!$this->commentRepository->findOneBy(['parent' => $contribution->getId()])) {
                 return true;
             }

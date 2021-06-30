@@ -19,7 +19,6 @@ class OauthConnectController extends ConnectController
 {
     protected $featuresForServices = [
         'facebook' => ['login_facebook'],
-        'google' => ['login_gplus'],
         'twitter' => ['login_twitter'],
         'franceconnect' => ['login_franceconnect'],
     ];

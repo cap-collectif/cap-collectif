@@ -47,9 +47,6 @@
         <field name="facebook_access_token" column="facebook_access_token" type="string" length="255" nullable="true" />
         <field name="facebookUrl" column="facebook_url" type="string" length="255" nullable="true" />
 
-        <field name="google_id" column="google_id" type="string" length="255" nullable="true" />
-        <field name="google_access_token" column="google_access_token" type="string" length="255" nullable="true" />
-
         <field name="openId" column="openid_id" type="string" length="255" nullable="true" />
         <field name="openIdAccessToken" column="openid_access_token" type="text" nullable="true" />
 
