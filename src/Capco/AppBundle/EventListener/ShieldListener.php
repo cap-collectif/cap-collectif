@@ -55,10 +55,13 @@ class ShieldListener
 
         //vote by mail
         'capco_app_debate_vote_by_token',
+
+        //unsubscribe
+        'capco_app_action_token',
     ];
-    protected $manager;
-    protected $tokenStorage;
-    protected $templating;
+    protected Manager $manager;
+    protected TokenStorageInterface $tokenStorage;
+    protected Environment $templating;
 
     public function __construct(
         Manager $manager,
