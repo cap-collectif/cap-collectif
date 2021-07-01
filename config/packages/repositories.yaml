@@ -620,3 +620,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:SenderEmailDomain']
+
+    Capco\AppBundle\Repository\SenderEmailRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SenderEmail']

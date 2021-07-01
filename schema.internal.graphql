@@ -3303,6 +3303,33 @@ type CreateSenderEmailDomainPayload {
   clientMutationId: String
 }
 
+"""Possible errors on createSenderDomain mutation."""
+enum CreateSenderEmailErrorCode {
+  """There is already a SenderEmail matching locale and domain."""
+  ALREADY_EXIST
+
+  """The domain is not in the list of domains."""
+  INVALID_DOMAIN
+}
+
+input CreateSenderEmailInput {
+  """The first part of the address, before the @."""
+  locale: String!
+
+  """The second part of the address, after the @."""
+  domain: String!
+  clientMutationId: String
+}
+
+type CreateSenderEmailPayload {
+  """The created SenderEmail."""
+  senderEmail: SenderEmail
+
+  """The error generated, if any."""
+  errorCode: CreateSenderEmailErrorCode
+  clientMutationId: String
+}
+
 input CreateUserInput {
   """The user's username"""
   username: String!
@@ -6550,6 +6577,12 @@ type Mutation {
 
   """Create a senderEmailDomain."""
   createSenderEmailDomain(input: CreateSenderEmailDomainInput!): CreateSenderEmailDomainPayload
+
+  """Add an email to address to send emails."""
+  createSenderEmail(input: CreateSenderEmailInput!): CreateSenderEmailPayload
+
+  """select a senderEmail as the one to send emails"""
+  selectSenderEmail(input: SelectSenderEmailInput!): SelectSenderEmailPayload
 }
 
 """A connection to a list of items."""
@@ -9959,6 +9992,9 @@ type Query {
 
   """Get all domains registered"""
   senderEmailDomains: [SenderEmailDomain!]!
+
+  """Get all sending addresses registered"""
+  senderEmails: [SenderEmail!]!
 }
 
 input QueryAnalyticsFilter {
@@ -11458,6 +11494,27 @@ type SelectProposalPayload {
   clientMutationId: String
 }
 
+"""Possible errors on selectSenderDomain mutation."""
+enum SelectSenderEmailErrorCode {
+  """No `SenderEmail` matching your id."""
+  UNKNOWN_SENDER_EMAIL
+}
+
+input SelectSenderEmailInput {
+  """The SenderEmail to be selected."""
+  senderEmail: ID!
+  clientMutationId: String
+}
+
+type SelectSenderEmailPayload {
+  """The selected SenderEmail."""
+  senderEmail: SenderEmail
+
+  """The error generated, if any."""
+  errorCode: SelectSenderEmailErrorCode
+  clientMutationId: String
+}
+
 """A budget contribution"""
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The ID of an object"""
@@ -11767,6 +11824,24 @@ type SendEmailingCampaignPayload {
   """The error code, if any"""
   error: SendEmailingCampaignErrorCode
   clientMutationId: String
+}
+
+"""Represent an email address to use to send emails."""
+type SenderEmail {
+  """uuid of the SenderEmail"""
+  id: ID!
+
+  """The first part of the address, before the @."""
+  locale: String!
+
+  """The second part of the address, after the @."""
+  domain: String!
+
+  """The whole address."""
+  address: String!
+
+  """Is the address selected to send."""
+  isDefault: Boolean!
 }
 
 """Represent a registered domain name for a mailer service"""

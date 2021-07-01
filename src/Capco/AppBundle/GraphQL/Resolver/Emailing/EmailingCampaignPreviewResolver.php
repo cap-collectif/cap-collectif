@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\EmailingCampaign;
+namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;

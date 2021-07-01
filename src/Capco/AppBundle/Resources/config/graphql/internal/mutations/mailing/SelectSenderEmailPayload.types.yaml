@@ -1,0 +1,10 @@
+SelectSenderEmailPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            senderEmail:
+                type: 'SenderEmail'
+                description: 'The selected SenderEmail.'
+            errorCode:
+                type: 'SelectSenderEmailErrorCode'
+                description: 'The error generated, if any.'

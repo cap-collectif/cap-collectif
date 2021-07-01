@@ -477,7 +477,7 @@ InternalQuery:
                 type: MailingListConnection!
                 description: 'Get all mailing lists'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\MailingListResolver", [args])'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     term:
@@ -487,7 +487,7 @@ InternalQuery:
                 type: EmailingCampaignConnection!
                 description: 'Get all emailing campaigns'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EmailingCampaign\\EmailingCampaignResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\EmailingCampaignResolver", [args])'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     status:
@@ -540,4 +540,9 @@ InternalQuery:
                 type: '[SenderEmailDomain!]!'
                 description: 'Get all domains registered'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\External\\SenderEmailDomainResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailDomainResolver", [args])'
+            senderEmails:
+                type: '[SenderEmail!]!'
+                description: 'Get all sending addresses registered'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [args])'

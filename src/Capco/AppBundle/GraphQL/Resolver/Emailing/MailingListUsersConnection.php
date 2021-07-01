@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\MailingList;
+namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Entity\MailingList;
 use Overblog\GraphQLBundle\Definition\Argument;

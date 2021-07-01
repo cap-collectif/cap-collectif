@@ -43,4 +43,4 @@ EmailingCampaign:
             preview:
                 type: 'HTML'
                 description: 'preview of the email'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EmailingCampaign\\EmailingCampaignPreviewResolver", [value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\EmailingCampaignPreviewResolver", [value])'

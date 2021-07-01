@@ -1,0 +1,8 @@
+SelectSenderEmailInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of SelectSenderEmail mutation.'
+        fields:
+            senderEmail:
+                type: 'ID!'
+                description: 'The SenderEmail to be selected.'

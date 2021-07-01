@@ -1,0 +1,24 @@
+SenderEmail:
+    type: object
+    config:
+        name: SenderEmail
+        description: Represent an email address to use to send emails.
+        fields:
+            id:
+                type: 'ID!'
+                description: 'uuid of the SenderEmail'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: SenderEmail
+            locale:
+                type: 'String!'
+                description: 'The first part of the address, before the @.'
+            domain:
+                type: 'String!'
+                description: 'The second part of the address, after the @.'
+            address:
+                type: 'String!'
+                description: 'The whole address.'
+            isDefault:
+                type: 'Boolean!'
+                description: 'Is the address selected to send.'

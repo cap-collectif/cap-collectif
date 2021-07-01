@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\SenderEmail:
+    assistance-capco:
+        id: assistance-capco
+        locale: 'assistance'
+        domain: 'cap-collectif.com'
+        isDefault: true
+    dev-capco:
+        id: dev-capco
+        locale: 'dev'
+        domain: 'cap-collectif.com'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\External;
+namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Mailer\SenderEmailDomains\SenderEmailDomainsManager;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;

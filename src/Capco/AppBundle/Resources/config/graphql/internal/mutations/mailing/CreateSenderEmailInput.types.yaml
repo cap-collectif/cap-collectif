@@ -1,0 +1,11 @@
+CreateSenderEmailInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of CreateSenderEmail mutation.'
+        fields:
+            locale:
+                type: 'String!'
+                description: 'The first part of the address, before the @.'
+            domain:
+                type: 'String!'
+                description: 'The second part of the address, after the @.'
