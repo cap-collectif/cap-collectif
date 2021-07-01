@@ -9,6 +9,7 @@ use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
@@ -21,6 +22,7 @@ class OauthUserProvider extends FOSUBUserProvider
     private UserRepository $userRepository;
     private GroupMutation $groupMutation;
     private FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
+    private LoggerInterface $logger;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -29,21 +31,34 @@ class OauthUserProvider extends FOSUBUserProvider
         Indexer $indexer,
         array $properties,
         GroupMutation $groupMutation,
-        FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository
+        FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
+        LoggerInterface $logger
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
         $this->indexer = $indexer;
         $this->groupMutation = $groupMutation;
         $this->franceConnectSSOConfigurationRepository = $franceConnectSSOConfigurationRepository;
+        $this->logger = $logger;
 
         parent::__construct($userManager, $properties);
+    }
+
+    private function debug(UserResponseInterface $response)
+    {
+        $this->logger->debug(__METHOD__ . ' getEmail {email}',  ['email' => $response->getEmail()]);
+        $this->logger->debug(__METHOD__ . ' getUsername {username}',  ['username' => $response->getUsername()]);
+        $this->logger->debug(__METHOD__ . ' resource owner name {service} ',  ['service' => $response->getResourceOwner()->getName()]);
+        $this->logger->debug(__METHOD__ . ' getAccessToken {getAccessToken}', ['getAccessToken' => $response->getAccessToken()]);
+        $this->logger->debug(__METHOD__ . ' getLastName {getLastName}',  ['getLastName' => $response->getLastName()]);
+        $this->logger->debug(__METHOD__ . ' getFirstName {getFirstName}' , ['getFirstName' => $response->getFirstName()]);
+        $this->logger->debug(__METHOD__ . ' getNickname {getNickname}' , ['getNickname' => $response->getNickname()]);
     }
 
     public function connect(UserInterface $user, UserResponseInterface $response): void
     {
         $email = $response->getEmail() ?: $response->getUsername();
-
+        $this->debug($response);
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($service);
@@ -67,6 +82,7 @@ class OauthUserProvider extends FOSUBUserProvider
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
         $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
+        $this->debug($response);
         $username =
             $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         // because, accounts created with FranceConnect can change their email

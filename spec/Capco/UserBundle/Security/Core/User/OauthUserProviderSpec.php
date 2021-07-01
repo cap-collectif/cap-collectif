@@ -13,6 +13,7 @@ use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\UserBundle\Security\Core\User\OauthUserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Psr\Log\LoggerInterface;
 
 class OauthUserProviderSpec extends ObjectBehavior
 {
@@ -27,7 +28,8 @@ class OauthUserProviderSpec extends ObjectBehavior
         OpenIDExtraMapper $extraMapper,
         Indexer $indexer,
         GroupMutation $groupMutation,
-        FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository
+        FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
+        LoggerInterface $logger
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -36,7 +38,8 @@ class OauthUserProviderSpec extends ObjectBehavior
             $indexer,
             [],
             $groupMutation,
-            $franceConnectSSOConfigurationRepository
+            $franceConnectSSOConfigurationRepository,
+            $logger
         );
     }
 
@@ -182,7 +185,7 @@ class OauthUserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
-    public function it_map(UserResponseInterface $response, User $user)
+    public function it_map(UserResponseInterface $response, User $user,OpenIDResourceOwner $IDResourceOwner)
     {
         $data = [];
         $data['given_name'] = 'toto';
@@ -270,5 +273,7 @@ class OauthUserProviderSpec extends ObjectBehavior
         $response->getAccessToken()->willReturn('openid_access_token');
         $response->getUsername()->willReturn('openid_id');
         $response->getResourceOwner()->willReturn($ressourceOwner);
+        $response->getLastName()->willReturn('Smith');
+        $response->getFirstName()->willReturn('jean');
     }
 }
