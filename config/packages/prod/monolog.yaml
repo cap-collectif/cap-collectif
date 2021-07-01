@@ -21,7 +21,7 @@ monolog:
         # Sentry configuration
         sentry:
             type: fingers_crossed
-            action_level: error
+            action_level: '%sentry_log_level%'
             handler: sentry_buffer
             excluded_404s:
                 - ^/

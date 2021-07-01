@@ -50,6 +50,7 @@ parameters:
     mailjet_public_key: '%env(SYMFONY_MAILJET_PUBLIC_KEY)%'
     mailjet_private_key: '%env(SYMFONY_MAILJET_PRIVATE_KEY)%'
     instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
+    sentry_log_level: '%env(SYMFONY_SENTRY_LOG_LEVEL)%'
     sonata_translation.admin.extension.knplabs_translatable.class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
     loco_key: ***REMOVED***
     knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
@@ -82,6 +83,9 @@ parameters:
     cloudflare_elastic_username: '%env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME)%'
     cloudflare_elastic_password: '%env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD)%'
     cloudflare_elastic_id: '%env(SYMFONY_CLOUDFLARE_ELASTIC_ID)%'
+    #
+    # Default values :
+    #
     env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -153,6 +157,7 @@ parameters:
     env(SYMFONY_CLOUDFLARE_ELASTIC_ID): '***REMOVED***'
     env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME): 'elastic'
     env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD): '***REMOVED***'
+    env(SYMFONY_SENTRY_LOG_LEVEL): 'error'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
