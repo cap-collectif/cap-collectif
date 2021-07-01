@@ -68,7 +68,7 @@ final class Version20210628155900 extends AbstractMigration implements Container
             'id' => $this->generator->generate($this->em, null),
             'locale' => $locale,
             'domain' => $domain,
-            'is_default' => $isDefault,
+            'is_default' => $isDefault ? 1 : 0,
         ]);
     }
 
