@@ -7,6 +7,7 @@ use Doctrine\Common\Util\ClassUtils;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutation implements
     MutationInterface
@@ -19,7 +20,7 @@ class DeleteDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutati
             $debate = $this->getDebateFromInput($input, null);
             self::checkDebateIsOpen($debate);
             $argument = $this->getArgumentFromHash($input);
-            $deletedDebateAnonymousArgumentId = $this->removeFromDbAndIndex($argument);
+            $deletedDebateAnonymousArgumentId = GlobalId::toGlobalId('DebateArgument', $this->removeFromDbAndIndex($argument));
         } catch (UserError $userError) {
             return ['errorCode' => $userError->getMessage()];
         }

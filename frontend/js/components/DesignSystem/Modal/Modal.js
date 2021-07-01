@@ -31,6 +31,7 @@ export type ModalProps = {|
   +ariaLabel: string,
   +onOpen?: () => void,
   +onClose?: () => void,
+  +fullSizeOnMobile?: boolean,
 |};
 const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   position: 'fixed',
@@ -49,12 +50,12 @@ const ModalInner = styled(motion.custom(AppBox)).attrs(props => ({
   display: 'flex',
   bg: 'white',
   flexDirection: 'column',
-  mt: ['auto', 0],
+  mt: [props.fullSizeOnMobile ? 0 : 'auto', 0],
   width: ['100%', '50%'],
   boxShadow: 'medium',
   borderRadius: 'modal',
-  borderBottomLeftRadius: [0, 'modal'],
-  borderBottomRightRadius: [0, 'modal'],
+  borderBottomLeftRadius: [props.fullSizeOnMobile ? 'modal' : 0, 'modal'],
+  borderBottomRightRadius: [props.fullSizeOnMobile ? 'modal' : 0, 'modal'],
   ...props,
 }))``;
 type ProviderProps = {| +children: React$Node, +context: Context |};

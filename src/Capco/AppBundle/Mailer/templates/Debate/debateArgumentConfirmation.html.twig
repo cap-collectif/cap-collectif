@@ -26,8 +26,11 @@
                     {{ 'mail-greeting-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale)}}<hr/>
                         {{ 'argument.publication.email.body'|trans({}, 'CapcoAppBundle', user_locale) }}
                     </p>
-                    <a href="{{ confirmationUrl }}">{{ 'argument.publication.email.button'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
-                    {{ confirmationUrl }}
+                    <div style="background: #1A88FF;box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);border-radius: 3px;padding: 16px;text-align: center;margin-bottom: 8px;max-width:300px">
+                        <a style="text-transform: uppercase;color: #FFFFFF;" href="{{ confirmationUrl }}">{{ 'argument.publication.email.button'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
+                    </div>
+                   
+                    <a style="text-align: center;color: #1A88FF;" href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
                 </div>
             </div>
         {% endblock %}

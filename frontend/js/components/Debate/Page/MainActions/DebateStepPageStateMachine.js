@@ -24,6 +24,7 @@ export type VoteState =
   | 'voted_not_confirmed'
   | 'argumented'
   | 'argumented_not_confirmed'
+  | 'argumented_anonymous'
   | 'result';
 
 export type VoteAction = 'VOTE' | 'ARGUMENT' | 'DELETE_ARGUMENT' | 'DELETE_VOTE';
@@ -42,12 +43,15 @@ export const getInitialState = (
   }
 
   if (stepClosed) return 'result';
+
   if (
     isAnonymousVoteAllowed &&
     CookieMonster.hasDebateAnonymousVoteCookie(debate.id) &&
     !isAuthenticated
   ) {
-    return 'voted_anonymous';
+    return CookieMonster.hasDebateAnonymousArgumentCookie(debate.id)
+      ? 'argumented_anonymous'
+      : 'voted_anonymous';
   }
 
   return isAuthenticated
@@ -71,6 +75,7 @@ export const debateStateMachine: DebateStateMachine = createMachine({
         voted_not_confirmed: 'voted_not_confirmed',
         argumented: 'argumented',
         argumented_not_confirmed: 'argumented_not_confirmed',
+        argumented_anonymous: 'argumented_anonymous',
         result: 'result',
       },
     },
@@ -110,6 +115,12 @@ export const debateStateMachine: DebateStateMachine = createMachine({
       on: {
         DELETE_ARGUMENT: 'voted',
         DELETE_VOTE: 'none',
+      },
+    },
+    argumented_anonymous: {
+      on: {
+        DELETE_ARGUMENT: 'voted_anonymous',
+        DELETE_VOTE: 'none_anonymous',
       },
     },
     argumented_not_confirmed: {

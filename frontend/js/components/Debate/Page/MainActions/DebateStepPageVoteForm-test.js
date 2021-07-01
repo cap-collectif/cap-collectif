@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import * as hooks from '@xstate/react/lib/useActor';
 import { DebateStepPageVoteForm } from './DebateStepPageVoteForm';
 import { $refType, $fragmentRefs, formMock, intlMock } from '~/mocks';
-import MockProviders from '~/testUtils';
+import MockProviders, { addsSupportForPortals, clearSupportForPortals } from '~/testUtils';
 import { MachineContext } from './DebateStepPageStateMachine';
 
 describe('<DebateStepPageVoteForm/>', () => {
@@ -38,6 +38,14 @@ describe('<DebateStepPageVoteForm/>', () => {
       body: '',
     },
   };
+
+  beforeEach(() => {
+    addsSupportForPortals();
+  });
+
+  afterEach(() => {
+    clearSupportForPortals();
+  });
 
   const Machine = { value: {} };
   const DebateStepPageVoteFormDecorated = reduxForm({ form: 'testForm' })(DebateStepPageVoteForm);

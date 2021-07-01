@@ -67,12 +67,13 @@
                 'source',
                 'reply',
                 'argument',
-                'debateArgument'
+                'debateArgument',
+                'debateAnonymousArgument'
             ])
         %}
         {% set opinionsCount = counters['opinion'] + totalProposalsCount %}
         {% set versionsCount = counters['opinionVersion'] %}
-        {% set argumentsCount = counters['argument'] + counters['debateArgument'] %}
+        {% set argumentsCount = counters['argument'] + counters['debateArgument']  + counters['debateAnonymousArgument']%}
         {% set sourcesCount = counters['source'] %}
         {% set repliesCount = counters['reply'] %}
         

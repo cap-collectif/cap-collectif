@@ -48,30 +48,32 @@ const mutation = graphql`
 
 const commit = (
   variables: AddDebateArgumentMutationVariables,
-  viewer: Viewer,
+  viewer?: Viewer,
 ): Promise<AddDebateArgumentMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
-    optimisticResponse: {
-      createDebateArgument: {
-        errorCode: null,
-        debateArgument: {
-          votes: {
-            totalCount: 0,
+    optimisticResponse: viewer
+      ? {
+          createDebateArgument: {
+            errorCode: null,
+            debateArgument: {
+              votes: {
+                totalCount: 0,
+              },
+              author: {
+                id: viewer.id,
+                username: viewer.username,
+              },
+              id: new Date().toISOString(),
+              published: viewer.isEmailConfirmed,
+              body: variables.input.body,
+              type: variables.input.type,
+              viewerDidAuthor: true,
+            },
           },
-          author: {
-            id: viewer.id,
-            username: viewer.username,
-          },
-          id: new Date().toISOString(),
-          published: viewer.isEmailConfirmed,
-          body: variables.input.body,
-          type: variables.input.type,
-          viewerDidAuthor: true,
-        },
-      },
-    },
+        }
+      : null,
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('createDebateArgument');
       if (!payload) return;

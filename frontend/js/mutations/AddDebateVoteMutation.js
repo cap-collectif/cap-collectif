@@ -42,41 +42,43 @@ const mutation = graphql`
 
 const commit = (
   variables: AddDebateVoteMutationVariables,
-  optimisticResponse: OptimisticResponse,
+  optimisticResponse?: OptimisticResponse,
 ): Promise<AddDebateVoteMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
-    optimisticResponse: {
-      addDebateVote: {
-        errorCode: null,
-        debateVote: {
-          id: new Date().toISOString(),
-          type: variables.input.type,
-          published: optimisticResponse.viewerConfirmed,
-          debate: {
-            id: variables.input.debateId,
-            viewerHasArgument: false,
-            viewerHasVote: true,
-            viewerVote: {
+    optimisticResponse: optimisticResponse
+      ? {
+          addDebateVote: {
+            errorCode: null,
+            debateVote: {
               id: new Date().toISOString(),
               type: variables.input.type,
-            },
-            yesVotes: {
-              totalCount:
-                variables.input.type === 'FOR' && optimisticResponse.viewerConfirmed
-                  ? optimisticResponse.yesVotes + 1
-                  : optimisticResponse.yesVotes,
-            },
-            votes: {
-              totalCount: optimisticResponse.viewerConfirmed
-                ? optimisticResponse.votes + 1
-                : optimisticResponse.votes,
+              published: optimisticResponse.viewerConfirmed,
+              debate: {
+                id: variables.input.debateId,
+                viewerHasArgument: false,
+                viewerHasVote: true,
+                viewerVote: {
+                  id: new Date().toISOString(),
+                  type: variables.input.type,
+                },
+                yesVotes: {
+                  totalCount:
+                    variables.input.type === 'FOR' && optimisticResponse.viewerConfirmed
+                      ? optimisticResponse.yesVotes + 1
+                      : optimisticResponse.yesVotes,
+                },
+                votes: {
+                  totalCount: optimisticResponse.viewerConfirmed
+                    ? optimisticResponse.votes + 1
+                    : optimisticResponse.votes,
+                },
+              },
             },
           },
-        },
-      },
-    },
+        }
+      : null,
   });
 
 export default { commit };

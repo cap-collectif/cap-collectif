@@ -431,11 +431,6 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
               onDrop={[Function]}
               onFocus={[Function]}
               placeholder="why-are-you-against"
-              style={
-                Object {
-                  "pointerEvents": "auto",
-                }
-              }
               type="textarea"
               value=""
               warnings={null}

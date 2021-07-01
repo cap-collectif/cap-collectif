@@ -4,7 +4,7 @@ exports[`Internal.project counters fetches participations counters by project 1`
 Object {
   "project": Object {
     "contributions": Object {
-      "totalCount": 9,
+      "totalCount": 10,
     },
     "contributors": Object {
       "totalCount": 15,

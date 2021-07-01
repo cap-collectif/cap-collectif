@@ -26,6 +26,7 @@ export const DebateArgumentListProfile = ({ debateArgumentList, relay }: Props) 
     id: string,
     type: 'FOR' | 'AGAINST',
     debateUrl: string,
+    hash?: ?string,
   }>(null);
 
   const handleLoadMore = () => {

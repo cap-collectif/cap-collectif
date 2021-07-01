@@ -9,6 +9,7 @@ final class ContributionType implements EnumType
     public const COMMENT = 'COMMENT';
     public const ARGUMENT = 'ARGUMENT';
     public const DEBATEARGUMENT = 'DEBATEARGUMENT';
+    public const DEBATE_ANONYMOUS_ARGUMENT = 'DEBATE_ANONYMOUS_ARGUMENT';
     public const SOURCE = 'SOURCE';
     public const PROPOSAL = 'PROPOSAL';
     public const REPLY = 'REPLY';

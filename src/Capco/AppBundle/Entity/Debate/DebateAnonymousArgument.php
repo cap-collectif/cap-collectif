@@ -167,7 +167,10 @@ class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParti
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ElasticsearchDebateArgument'];
+        return [
+            'ElasticsearchDebateArgument',
+            'ElasticsearchDebateArgumentNestedProject'
+        ];
     }
 
     public static function getElasticsearchPriority(): int

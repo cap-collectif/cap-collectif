@@ -91,7 +91,7 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
             'debate' => $debate,
             'deletedDebateAnonymousVoteId' => GlobalId::toGlobalId('DebateAnonymousVote', $voteId),
             'deletedDebateAnonymousArgumentId' => $argumentId
-                ? GlobalId::toGlobalId('DebateAnonymousArgument', $argumentId)
+                ? GlobalId::toGlobalId('DebateArgument', $argumentId)
                 : null,
             'errorCode' => null,
         ];

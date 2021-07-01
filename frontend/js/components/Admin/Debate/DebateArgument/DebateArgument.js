@@ -86,7 +86,10 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
         </Text>
 
         <InlineList separator="•" color="gray.600">
-          <Text>{author?.username ?? intl.formatMessage({ id: 'global.anonymous' })}</Text>
+          <Text>
+            {author?.username ??
+              `${argument.username || ''} (${intl.formatMessage({ id: 'global.anonymous' })})`}
+          </Text>
 
           {published && (
             <Text>
@@ -202,14 +205,21 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
 
 export default createFragmentContainer(DebateArgument, {
   argument: graphql`
-    fragment DebateArgument_argument on DebateArgument {
+    fragment DebateArgument_argument on AbstractDebateArgument {
       id
       body
       published
       publishedAt
       type
-      author {
+      ... on DebateArgument {
+        author {
+          id
+          username
+        }
+      }
+      ... on DebateAnonymousArgument {
         username
+        email
       }
       debate {
         id

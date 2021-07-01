@@ -13,9 +13,7 @@ const baseProps = {
     published: true,
     publishedAt: '2017-02-01 00:03:00',
     type: 'FOR',
-    author: {
-      username: 'Vince',
-    },
+    author: { id: 'vincero', username: 'Vince' },
     debate: {
       id: 'debate-123',
     },

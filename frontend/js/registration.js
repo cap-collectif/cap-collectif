@@ -84,6 +84,7 @@ import DebateCardApp from '~/startup/DebateCardApp';
 import WhatsNewApp from '~/startup/WhatsNewApp';
 import DebateWidgetAccessDeniedApp from '~/startup/DebateWidgetAccessDeniedApp';
 import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp';
+import ChartModalApp from '~/startup/ChartModalApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -156,6 +157,7 @@ ReactOnRails.register({
   DebateStepPageApp,
   DebateWidgetAccessDeniedApp,
   UserUnsubscribePageApp,
+  ChartModalApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

@@ -9,5 +9,5 @@ CreateDebateAnonymousArgumentPayload:
                 type: 'CreateDebateAnonymousArgumentErrorCode'
                 description: 'An unsuccessful mutation will return an error.'
             token:
-                type: 'String!'
+                type: 'String'
                 description: 'The token of the argument.'

@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -34,6 +35,7 @@ class ContributionSearch extends Search
         ContributionType::OPINIONVERSION => OpinionVersion::class,
         ContributionType::ARGUMENT => Argument::class,
         ContributionType::DEBATEARGUMENT => DebateArgument::class,
+        ContributionType::DEBATE_ANONYMOUS_ARGUMENT => DebateAnonymousArgument::class,
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
@@ -406,6 +408,7 @@ class ContributionSearch extends Search
             OpinionVersion::getElasticsearchTypeName(),
             Argument::getElasticsearchTypeName(),
             DebateArgument::getElasticsearchTypeName(),
+            DebateAnonymousArgument::getElasticsearchTypeName(),
             Source::getElasticsearchTypeName(),
             Proposal::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName(),
@@ -444,6 +447,7 @@ class ContributionSearch extends Search
                 OpinionVersion::getElasticsearchTypeName(),
                 Argument::getElasticsearchTypeName(),
                 DebateArgument::getElasticsearchTypeName(),
+                DebateAnonymousArgument::getElasticsearchTypeName(),
                 Source::getElasticsearchTypeName(),
                 Proposal::getElasticsearchTypeName(),
                 Reply::getElasticsearchTypeName(),
@@ -457,6 +461,7 @@ class ContributionSearch extends Search
                 OpinionVersion::getElasticsearchTypeName(),
                 Argument::getElasticsearchTypeName(),
                 DebateArgument::getElasticsearchTypeName(),
+                DebateAnonymousArgument::getElasticsearchTypeName(),
                 Source::getElasticsearchTypeName(),
                 Proposal::getElasticsearchTypeName(),
                 Reply::getElasticsearchTypeName(),

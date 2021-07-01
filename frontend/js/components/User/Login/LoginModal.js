@@ -65,6 +65,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(change(formName, 'username', null));
     dispatch(change(formName, 'password', null));
     dispatch(change(formName, 'captcha', null));
+    dispatch(change(formName, 'onSuccessAction', null));
     dispatch(closeLoginModal());
   },
 });

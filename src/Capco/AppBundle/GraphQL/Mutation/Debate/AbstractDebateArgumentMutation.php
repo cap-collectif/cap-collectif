@@ -90,7 +90,10 @@ class AbstractDebateArgumentMutation
                 throw new UserError(self::ALREADY_HAS_ARGUMENT);
             }
         } else {
-            if ($this->anonymousRepository->findOneByEmail($input->offsetGet('email'))) {
+            if ($this->anonymousRepository->findOneBy([
+                'email' => $input->offsetGet('email'),
+                'debate' => $debate
+            ])) {
                 throw new UserError(self::ALREADY_HAS_ARGUMENT);
             }
         }

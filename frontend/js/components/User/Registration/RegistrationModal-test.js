@@ -12,9 +12,6 @@ describe('<RegistrationModal />', () => {
     textBottom: null,
     onSubmit: jest.fn(),
     submitting: false,
-    displayChartModal: false,
-    onCloseChart: jest.fn(),
-    charterBody: 'Super charte !!',
     locale: 'fr-FR',
   };
 
@@ -36,17 +33,13 @@ describe('<RegistrationModal />', () => {
   });
 
   it('renders modal and chart', () => {
-    const wrapper = shallow(
-      <RegistrationModal query={defaultQuery} {...props} show displayChartModal />,
-    );
+    const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders modal and not chart', () => {
-    const wrapper = shallow(
-      <RegistrationModal query={defaultQuery} {...props} show displayChartModal={false} />,
-    );
+    const wrapper = shallow(<RegistrationModal query={defaultQuery} {...props} show={false} />);
 
     expect(wrapper).toMatchSnapshot();
   });

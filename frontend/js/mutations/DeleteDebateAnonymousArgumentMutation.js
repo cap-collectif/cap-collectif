@@ -2,40 +2,46 @@
 import { graphql } from 'react-relay';
 // eslint-disable-next-line import/no-unresolved
 import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes';
-import environment from '~/createRelayEnvironment';
-
+import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  RemoveDebateAnonymousVoteMutationVariables,
-  RemoveDebateAnonymousVoteMutationResponse,
-} from '~relay/RemoveDebateAnonymousVoteMutation.graphql';
+  DeleteDebateAnonymousArgumentMutationVariables,
+  DeleteDebateAnonymousArgumentMutationResponse,
+} from '~relay/DeleteDebateAnonymousArgumentMutation.graphql';
 
 type Variables = {|
-  ...RemoveDebateAnonymousVoteMutationVariables,
+  ...DeleteDebateAnonymousArgumentMutationVariables,
   debateId: string,
 |};
 
 const mutation = graphql`
-  mutation RemoveDebateAnonymousVoteMutation($input: RemoveDebateAnonymousVoteInput!) {
-    removeDebateAnonymousVote(input: $input) {
+  mutation DeleteDebateAnonymousArgumentMutation(
+    $input: DeleteDebateAnonymousArgumentInput!
+    $connections: [ID!]!
+  ) {
+    deleteDebateAnonymousArgument(input: $input) {
       errorCode
-      deletedDebateAnonymousVoteId
-      deletedDebateAnonymousArgumentId
+      deletedDebateAnonymousArgumentId @deleteEdge(connections: $connections)
+      debate {
+        id
+      }
     }
   }
 `;
 
-const commit = (variables: Variables): Promise<RemoveDebateAnonymousVoteMutationResponse> =>
+const commit = (variables: Variables): Promise<DeleteDebateAnonymousArgumentMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
-      const payload = store.getRootField('removeDebateAnonymousVote');
+      const payload = store.getRootField('deleteDebateAnonymousArgument');
       if (!payload) return;
       const argument = payload.getValue('deletedDebateAnonymousArgumentId');
       if (!argument || typeof argument !== 'string') return;
       const argumentProxy = store.get(argument);
-      if (!argumentProxy) return;
+      if (!argumentProxy) {
+        throw new Error('Expected argument to be in the store');
+      }
       const debateProxy = store.get(variables.debateId);
       if (!debateProxy) {
         throw new Error('Expected debate to be in the store');
@@ -60,13 +66,6 @@ const commit = (variables: Variables): Promise<RemoveDebateAnonymousVoteMutation
       if (!argumentsTrashed) return;
       const countArgumentsTrashed = parseInt(argumentsTrashed.getValue('totalCount'), 10);
       argumentsTrashed.setValue(countArgumentsTrashed - 1, 'totalCount');
-    },
-    optimisticResponse: {
-      removeDebateAnonymousVote: {
-        errorCode: null,
-        deletedDebateAnonymousVoteId: new Date().toISOString(),
-        deletedDebateAnonymousArgumentId: new Date().toISOString(),
-      },
     },
   });
 

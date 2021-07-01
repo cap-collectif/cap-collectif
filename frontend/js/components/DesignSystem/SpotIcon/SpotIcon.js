@@ -15,6 +15,9 @@ export const SPOT_ICON_NAME = {
   DELETE: 'DELETE',
   USER_DISCUSS: 'USER_DISCUSS',
   BULB_SKETCH: 'BULB_SKETCH',
+  CHATTING: 'CHATTING',
+  MAIL_1: 'MAIL_1',
+  MAIL_2: 'MAIL_2',
 };
 
 export const SPOT_ICON_SIZE = {

@@ -157,6 +157,7 @@ export const DebateStepPageAlternateArgumentsPagination = ({
     id: string,
     type: 'FOR' | 'AGAINST',
     debateUrl: string,
+    hash?: ?string,
   }>(null);
 
   if (handleChange) handleChange({ ...paginationProps, hasMore: paginationProps.hasMore() });

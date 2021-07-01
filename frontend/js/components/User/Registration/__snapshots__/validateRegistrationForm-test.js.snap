@@ -122,30 +122,12 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     type="checkbox"
   >
     <span>
-      <FormattedMessage
-        id="registration.charte"
-        values={
-          Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
-            >
-              la charte
-            </Button>,
-          }
-        }
+      <ChartLinkComponent
+        cguName="la charte"
+        dispatch={[MockFunction]}
       />
-       
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <PrivacyPolicyComponent
+        privacyPolicyRequired={true}
       />
     </span>
   </Field>
@@ -349,30 +331,12 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     type="checkbox"
   >
     <span>
-      <FormattedMessage
-        id="registration.charte"
-        values={
-          Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
-            >
-              la charte
-            </Button>,
-          }
-        }
+      <ChartLinkComponent
+        cguName="la charte"
+        dispatch={[MockFunction]}
       />
-       
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <PrivacyPolicyComponent
+        privacyPolicyRequired={true}
       />
     </span>
   </Field>
@@ -564,30 +528,12 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     type="checkbox"
   >
     <span>
-      <FormattedMessage
-        id="registration.charte"
-        values={
-          Object {
-            "link": <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              className="p-0 text-decoration-none"
-              disabled={false}
-              onClick={[Function]}
-              variant="link"
-            >
-              la charte
-            </Button>,
-          }
-        }
+      <ChartLinkComponent
+        cguName="la charte"
+        dispatch={[MockFunction]}
       />
-       
-      <Connect(PrivacyModal)
-        className="text-decoration-none"
-        linkKeyword="and-the"
-        title="capco.module.privacy_policy"
+      <PrivacyPolicyComponent
+        privacyPolicyRequired={true}
       />
     </span>
   </Field>

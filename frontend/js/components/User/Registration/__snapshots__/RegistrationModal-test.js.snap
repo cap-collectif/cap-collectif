@@ -2,67 +2,7 @@
 
 exports[`<RegistrationModal /> renders a form 1`] = `
 <Fragment>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="medium"
-    dialogComponentClass={[Function]}
-    enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="close.modal"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h1"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="charter"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <WYSIWYGRender
-        value="Super charte !!"
-      />
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[MockFunction]}
-      />
-    </ModalFooter>
-  </Modal>
+  <Connect(ChartModal) />
   <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -126,67 +66,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
 
 exports[`<RegistrationModal /> renders a top text and a bottom text if specified 1`] = `
 <Fragment>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="medium"
-    dialogComponentClass={[Function]}
-    enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="close.modal"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h1"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="charter"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <WYSIWYGRender
-        value="Super charte !!"
-      />
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[MockFunction]}
-      />
-    </ModalFooter>
-  </Modal>
+  <Connect(ChartModal) />
   <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -264,67 +144,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
 
 exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
 <Fragment>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="medium"
-    dialogComponentClass={[Function]}
-    enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="close.modal"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h1"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="charter"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <WYSIWYGRender
-        value="Super charte !!"
-      />
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[MockFunction]}
-      />
-    </ModalFooter>
-  </Modal>
+  <Connect(ChartModal) />
   <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -388,67 +208,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
 
 exports[`<RegistrationModal /> renders modal and chart 1`] = `
 <Fragment>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="medium"
-    dialogComponentClass={[Function]}
-    enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="close.modal"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h1"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="charter"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <WYSIWYGRender
-        value="Super charte !!"
-      />
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[MockFunction]}
-      />
-    </ModalFooter>
-  </Modal>
+  <Connect(ChartModal) />
   <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -512,67 +272,7 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
 
 exports[`<RegistrationModal /> renders modal and not chart 1`] = `
 <Fragment>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="medium"
-    dialogComponentClass={[Function]}
-    enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="close.modal"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h1"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="charter"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <WYSIWYGRender
-        value="Super charte !!"
-      />
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[MockFunction]}
-      />
-    </ModalFooter>
-  </Modal>
+  <Connect(ChartModal) />
   <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -580,7 +280,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
     bsSize="small"
     enforceFocus={false}
     onHide={[Function]}
-    show={true}
+    show={false}
   >
     <ModalHeader
       bsClass="modal-header"
@@ -636,67 +336,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
 
 exports[`<RegistrationModal /> renders modal if shown 1`] = `
 <Fragment>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    bsSize="medium"
-    dialogComponentClass={[Function]}
-    enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="close.modal"
-    >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h1"
-        id="contained-modal-title-lg"
-      >
-        <FormattedMessage
-          id="charter"
-          values={Object {}}
-        />
-      </ModalTitle>
-    </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <WYSIWYGRender
-        value="Super charte !!"
-      />
-    </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[MockFunction]}
-      />
-    </ModalFooter>
-  </Modal>
+  <Connect(ChartModal) />
   <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"

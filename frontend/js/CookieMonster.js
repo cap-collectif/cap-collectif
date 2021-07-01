@@ -4,6 +4,8 @@ import type { ForOrAgainstValue } from '~relay/AddDebateAnonymousVoteMutation.gr
 
 const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes';
 
+const DEBATE_ANONYMOUS_ARGUMENTS_NAME = 'CapcoAnonArguments';
+
 const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid'];
 
 const FACEBOOK_COOKIE_NAMES = ['_fbp'];
@@ -29,6 +31,12 @@ type DebateAnonymousVoteValue = {| type: ForOrAgainstValue, token: string |};
 
 type DebateAnonymousVotesCookie = {|
   [debateId: string]: DebateAnonymousVoteValue,
+|};
+
+type DebateAnonymousArgumentValue = {| type: ForOrAgainstValue, token: string, id: string |};
+
+type DebateAnonymousArgumentsCookie = {|
+  [debateId: string]: DebateAnonymousArgumentValue,
 |};
 
 class CookieMonster {
@@ -97,6 +105,61 @@ class CookieMonster {
       delete votes[debateId];
     }
     Cookies.set(DEBATE_ANONYMOUS_VOTES_NAME, btoa(JSON.stringify(votes)), {
+      expires: 395,
+      secure: true,
+      sameSite: 'None',
+    });
+  };
+
+  getDebateAnonymousArgumentCookie = (debateId: string): DebateAnonymousArgumentValue | null => {
+    const args: DebateAnonymousArgumentsCookie = Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)))
+      : {};
+    if (debateId in args) return args[debateId];
+    return null;
+  };
+
+  getHashedDebateAnonymousArgumentCookie = (debateId: string): string | null => {
+    const args: DebateAnonymousArgumentsCookie = Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)))
+      : {};
+    if (debateId in args) {
+      const arg: DebateAnonymousArgumentValue = args[debateId];
+      return btoa(`${arg.type}:${arg.token}`);
+    }
+    return null;
+  };
+
+  hasDebateAnonymousArgumentCookie = (debateId: string): boolean =>
+    !!this.getDebateAnonymousArgumentCookie(debateId);
+
+  addDebateAnonymousArgumentCookie = (
+    debateId: string,
+    { type, token, id }: DebateAnonymousArgumentValue,
+  ): void => {
+    const args: DebateAnonymousArgumentsCookie = Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)))
+      : {};
+    args[debateId] = {
+      type,
+      token,
+      id,
+    };
+    Cookies.set(DEBATE_ANONYMOUS_ARGUMENTS_NAME, btoa(JSON.stringify(args)), {
+      expires: 395,
+      secure: true,
+      sameSite: 'None',
+    });
+  };
+
+  removeDebateAnonymousArgumentCookie = (debateId: string): void => {
+    const args: DebateAnonymousArgumentsCookie = Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)
+      ? JSON.parse(atob(Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)))
+      : {};
+    if (debateId in args) {
+      delete args[debateId];
+    }
+    Cookies.set(DEBATE_ANONYMOUS_ARGUMENTS_NAME, btoa(JSON.stringify(args)), {
       expires: 395,
       secure: true,
       sameSite: 'None',

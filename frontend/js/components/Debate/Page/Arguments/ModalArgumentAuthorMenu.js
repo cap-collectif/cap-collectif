@@ -11,11 +11,11 @@ import ModalDeleteArgumentMobile from '~/components/Debate/Page/Arguments/ModalD
 
 type Props = {|
   argument: ModalArgumentAuthorMenu_argument,
+  hasViewer?: boolean,
 |};
 
-export const ModalArgumentAuthorMenu = ({ argument }: Props): React.Node => {
+export const ModalArgumentAuthorMenu = ({ argument, hasViewer = true }: Props): React.Node => {
   const intl = useIntl();
-
   return (
     <Modal
       ariaLabel={intl.formatMessage({ id: 'global.menu' })}
@@ -28,8 +28,14 @@ export const ModalArgumentAuthorMenu = ({ argument }: Props): React.Node => {
       }>
       {({ hide: hideModalMenu }) => (
         <Modal.Body spacing={6} p={6}>
-          <ModalEditArgumentMobile argument={argument} hidePreviousModal={hideModalMenu} />
-          <ModalDeleteArgumentMobile argument={argument} hidePreviousModal={hideModalMenu} />
+          {hasViewer && (
+            <ModalEditArgumentMobile argument={argument} hidePreviousModal={hideModalMenu} />
+          )}
+          <ModalDeleteArgumentMobile
+            argument={argument}
+            hidePreviousModal={hideModalMenu}
+            hasViewer={hasViewer}
+          />
         </Modal.Body>
       )}
     </Modal>

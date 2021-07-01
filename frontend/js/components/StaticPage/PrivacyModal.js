@@ -11,6 +11,7 @@ type Props = {|
   +privacyContent: string,
   +title: string,
   +linkKeyword?: string,
+  +onClick?: () => void,
 |};
 
 export const PrivacyModal = ({

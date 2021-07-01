@@ -16,6 +16,7 @@ import useOnScreen from '~/utils/hooks/useOnScreen';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
+import CookieMonster from '~/CookieMonster';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 import {
   debateStateMachine,
@@ -54,8 +55,10 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const [showArgumentForm, setShowArgumentForm] = useState(!debate.viewerHasArgument);
+  const [showArgumentForm, setShowArgumentForm] = useState(
+    (isAuthenticated && !debate.viewerHasArgument) ||
+      (!isAuthenticated && !CookieMonster.hasDebateAnonymousArgumentCookie(debate.id)),
+  );
   const ref = useRef();
   const isVisible = useOnScreen(ref);
   const { widget } = useDebateStepPage();

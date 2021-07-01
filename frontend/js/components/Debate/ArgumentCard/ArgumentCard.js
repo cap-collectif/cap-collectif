@@ -32,6 +32,7 @@ import Tooltip from '~ds/Tooltip/Tooltip';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
 import AppBox from '~ui/Primitives/AppBox';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {|
   ...AppBoxProps,
@@ -41,7 +42,12 @@ type Props = {|
   +isMobile?: boolean,
   +setArgumentReported: (argument: ArgumentReported) => void,
   +setModerateArgumentModal: (argument: ModerateArgument) => void,
-  +setDeleteModalInfo: ({ id: string, type: ForOrAgainstValue, debateUrl: string }) => void,
+  +setDeleteModalInfo: ({
+    id: string,
+    type: ForOrAgainstValue,
+    debateUrl: string,
+    hash?: ?string,
+  }) => void,
 |};
 
 export const voteForArgument = (
@@ -93,19 +99,27 @@ export const ArgumentCard = ({
   ...props
 }: Props): Node => {
   const isViewerAdmin = viewer && viewer.isAdmin;
-  const isAuthor = argument.viewerDidAuthor;
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
   const { widget, stepClosed } = useDebateStepPage();
   const [isEditing, setIsEditing] = useState(false);
   const [readMore, setReadMore] = useState(false);
+  const anonymousArgument = CookieMonster.getDebateAnonymousArgumentCookie(argument.debate?.id);
+  const anonymousArgumentHash = CookieMonster.getHashedDebateAnonymousArgumentCookie(
+    argument.debate?.id,
+  );
+  const isAuthor = argument.viewerDidAuthor || (anonymousArgument?.id === argument.id && !viewer);
   return (
     <Card p={6} bg="white" {...props}>
       <Flex height="100%" direction="column">
         <Flex mb={2} direction="row" justifyContent="space-between" alignItems="start">
           <Flex direction="row" alignItems="center" flexWrap="wrap">
             <Text maxWidth="100%" overflow="hidden" mr={2} mb="8px !important">
-              {argument.author?.username ?? intl.formatMessage({ id: 'global.anonymous' })}
+              {argument.author?.username
+                ? argument.author.username
+                : argument.username?.length
+                ? argument.username
+                : intl.formatMessage({ id: 'global.anonymous' })}
             </Text>
             <Tag
               mb={2}
@@ -164,7 +178,7 @@ export const ArgumentCard = ({
               !stepClosed &&
               (!isMobile ? (
                 <>
-                  {!isEditing && (
+                  {!isEditing && viewer && (
                     <Button
                       onClick={() => setIsEditing(true)}
                       rightIcon={ICON_NAME.PENCIL}
@@ -179,6 +193,7 @@ export const ArgumentCard = ({
                         id: argument.id,
                         type: argument.type,
                         debateUrl: argument.debate.url,
+                        hash: viewer ? null : anonymousArgumentHash,
                       })
                     }
                     rightIcon={ICON_NAME.TRASH}
@@ -187,7 +202,7 @@ export const ArgumentCard = ({
                   />
                 </>
               ) : (
-                <ModalArgumentAuthorMenu argument={argument} />
+                <ModalArgumentAuthorMenu argument={argument} hasViewer={!!viewer} />
               ))}
 
             {argument.viewerCanReport &&
@@ -312,6 +327,9 @@ export default (createFragmentContainer(ArgumentCard, {
           username
         }
         viewerDidAuthor @include(if: $isAuthenticated)
+      }
+      ... on DebateAnonymousArgument {
+        username
       }
       debate {
         id

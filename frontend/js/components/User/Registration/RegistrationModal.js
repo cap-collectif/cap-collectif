@@ -17,20 +17,18 @@ import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import type { RegistrationModal_query } from '~relay/RegistrationModal_query.graphql';
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 import { mediaQueryMobile } from '~/utils/sizes';
+import ChartModal from './ChartModal';
 
 type StateProps = {|
   +show: boolean,
   +textTop: ?string,
   +textBottom: ?string,
   +submitting: boolean,
-  +displayChartModal: boolean,
-  +charterBody?: ?string,
 |};
 
 type DispatchProps = {|
   +onClose: () => typeof closeRegistrationModal,
   +onSubmit: () => typeof submit,
-  +onCloseChart: () => typeof hideChartModal,
 |};
 
 type Props = {|
@@ -81,37 +79,14 @@ export const RegistrationModal = ({
   show,
   textTop,
   textBottom,
-  displayChartModal,
-  onCloseChart,
-  charterBody,
   query,
   locale,
 }: Props) => {
   const { track } = useAnalytics();
   const intl = useIntl();
-
   return (
     <>
-      <Modal
-        animation={false}
-        show={displayChartModal}
-        autoFocus
-        onHide={onCloseChart}
-        bsSize="medium"
-        aria-labelledby="contained-modal-title-lg"
-        enforceFocus={false}>
-        <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
-          <Modal.Title id="contained-modal-title-lg" componentClass="h1">
-            <FormattedMessage id="charter" />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <WYSIWYGRender value={charterBody} />
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton label="global.close" onClose={onCloseChart} />
-        </Modal.Footer>
-      </Modal>
+      <ChartModal />
       <ModalContainer
         animation={false}
         show={show}
@@ -172,9 +147,7 @@ const mapStateToProps = state => ({
     ? state.user.registration_form.bottomText
     : null,
   show: state.user.showRegistrationModal,
-  displayChartModal: state.user.displayChartModal,
   submitting: isSubmitting(form)(state),
-  charterBody: state.default.parameters['charter.body'],
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

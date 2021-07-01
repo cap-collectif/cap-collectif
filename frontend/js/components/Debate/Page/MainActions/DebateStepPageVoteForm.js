@@ -25,9 +25,6 @@ import { formatConnectionPath } from '~/shared/utils/relay';
 import useScript from '~/utils/hooks/useScript';
 import MobilePublishArgumentModal from '~/components/Debate/Page/Modals/MobilePublishArgumentModal';
 import Text from '~ui/Primitives/Text';
-import ConditionalWrapper from '~/components/Utils/ConditionalWrapper';
-import LoginOverlay from '~/components/Utils/LoginOverlay';
-import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 import Popover from '~ds/Popover';
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import RemoveDebateVoteMutation from '~/mutations/RemoveDebateVoteMutation';
@@ -37,6 +34,7 @@ import ModalDeleteVoteMobile from '~/components/Debate/Page/Modals/ModalDeleteVo
 import RemoveDebateAnonymousVoteMutation from '~/mutations/RemoveDebateAnonymousVoteMutation';
 import CookieMonster from '~/CookieMonster';
 import { MachineContext, type VoteAction, type VoteState } from './DebateStepPageStateMachine';
+import ModalPublishArgumentAnonymous from '~/components/Debate/Page/Modals/ModalPublishArgumentAnonymous';
 
 export const formName = 'debate-argument-form';
 
@@ -165,12 +163,16 @@ const deleteAnonymousVoteFromViewer = (
   intl: IntlShape,
 ) => {
   const hash = CookieMonster.getHashedDebateAnonymousVoteCookie(debateId);
+  const argumentHash = CookieMonster.getHashedDebateAnonymousArgumentCookie(debateId);
+
   if (!hash) return;
   return RemoveDebateAnonymousVoteMutation.commit({
     input: {
       debateId,
       hash,
+      argumentHash,
     },
+    debateId,
   })
     .then(response => {
       if (response.removeDebateAnonymousVote?.errorCode) {
@@ -181,6 +183,7 @@ const deleteAnonymousVoteFromViewer = (
           content: intl.formatHTMLMessage({ id: 'vote.delete_success' }),
         });
         CookieMonster.removeDebateAnonymousVoteCookie(debateId);
+        if (argumentHash) CookieMonster.removeDebateAnonymousArgumentCookie(debateId);
         send('DELETE_VOTE');
         setShowArgumentForm(true);
       }
@@ -231,12 +234,13 @@ const deleteVoteFromViewer = (
     });
 };
 
-const bandMessage = (fromWidget: boolean) => ({
+const bandMessage = () => ({
   voted: 'thanks-for-your-vote',
-  voted_anonymous: fromWidget ? 'thanks-vote-argument-on-instance' : 'thanks-for-your-vote',
+  voted_anonymous: 'thanks-for-your-vote',
   argumented: 'thanks-for-debate-richer',
   voted_not_confirmed: 'publish.vote.validate.account',
   argumented_not_confirmed: 'publish.argument.validate.account',
+  argumented_anonymous: 'thanks-for-debate-richer',
   none: null,
   none_not_confirmed: null,
   none_anonymous: null,
@@ -282,19 +286,18 @@ export const DebateStepPageVoteForm = ({
   handleSubmit,
   organizationName,
   intl,
+  widgetLocation,
 }: Props): React.Node => {
   useScript('https://platform.twitter.com/widgets.js');
   const { track } = useAnalytics();
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const { widget } = useDebateStepPage();
   const machine = React.useContext(MachineContext);
   const [current, send] = useActor<{ value: VoteState }, VoteAction>(machine);
   const { value } = current;
   const viewerVoteValue =
-    value === 'voted_anonymous'
+    value === 'voted_anonymous' || value === 'argumented_anonymous'
       ? CookieMonster.getDebateAnonymousVoteCookie(debate.id)?.type ?? 'AGAINST'
       : debate.viewerVote?.type ?? 'AGAINST';
-
   const title = viewerVoteValue === 'FOR' ? 'why-are-you-for' : 'why-are-you-against';
   return (
     <motion.div
@@ -323,7 +326,7 @@ export const DebateStepPageVoteForm = ({
                     variant="link"
                     variantColor="hierarchy"
                     onClick={() => {
-                      if (value !== 'voted_anonymous') {
+                      if (value !== 'voted_anonymous' && value !== 'argumented_anonymous') {
                         deleteVoteFromViewer(
                           debate.id,
                           viewerVoteValue,
@@ -343,11 +346,11 @@ export const DebateStepPageVoteForm = ({
                 ))}
               <Text textAlign="center">
                 <span role="img" aria-label="vote" css={{ fontSize: 20, marginRight: 8 }}>
-                  {value === 'argumented' || value === 'argumented_not_confirmed' ? '🎉' : '🗳️'}
+                  {value.includes('argumented') ? '🎉' : '🗳️'}
                 </span>
-                {bandMessage(widget.isSource)[value] && (
+                {bandMessage()[value] && (
                   <FormattedHTMLMessage
-                    id={bandMessage(widget.isSource)[value]}
+                    id={bandMessage()[value]}
                     values={
                       value === 'voted_anonymous' ? { instance: organizationName } : undefined
                     }
@@ -360,12 +363,12 @@ export const DebateStepPageVoteForm = ({
           {!isMobile && (
             <>
               <span role="img" aria-label="vote" css={{ fontSize: 36, marginRight: 8 }}>
-                {value === 'argumented' || value === 'argumented_not_confirmed' ? '🎉' : '🗳️'}
+                {value.includes('argumented') ? '🎉' : '🗳️'}
               </span>
 
-              {bandMessage(widget.isSource)[value] && (
+              {bandMessage()[value] && (
                 <FormattedHTMLMessage
-                  id={bandMessage(widget.isSource)[value]}
+                  id={bandMessage()[value]}
                   values={value === 'voted_anonymous' ? { instance: organizationName } : undefined}
                 />
               )}
@@ -434,7 +437,7 @@ export const DebateStepPageVoteForm = ({
                   variant="link"
                   variantColor="hierarchy"
                   onClick={() => {
-                    if (value === 'voted_anonymous') {
+                    if (value === 'voted_anonymous' || value === 'argumented_anonymous') {
                       deleteAnonymousVoteFromViewer(debate.id, send, setShowArgumentForm, intl);
                     } else {
                       track('debate_vote_delete', {
@@ -504,45 +507,50 @@ export const DebateStepPageVoteForm = ({
         </Flex>
       )}
 
-      {showArgumentForm && !isMobile && !widget.isSource && (
-        <ConditionalWrapper
-          when={value === 'voted_anonymous'}
-          wrapper={children => <LoginOverlay placement="bottom">{children}</LoginOverlay>}>
-          <Card
-            borderRadius="8px"
-            width="100%"
-            bg="white"
-            boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
-            p={6}
-            mt={8}
-            css={{
-              '& form textarea[disabled]': {
-                backgroundColor: 'transparent !important',
-              },
-            }}
-            pb={body?.length > 0 ? 6 : 2}>
-            <Form id={formName} onSubmit={handleSubmit} disabled={value === 'voted_anonymous'}>
-              <Field
-                name="body"
-                component={component}
-                type="textarea"
-                id="body"
-                minLength="1"
-                autoComplete="off"
-                placeholder={title}
-                style={{
-                  pointerEvents: value === 'voted_anonymous' ? 'none' : 'auto',
-                }}
-              />
-              {value !== 'voted_anonymous' && body?.length > 0 && (
-                <Flex justifyContent="flex-end">
-                  <Button
-                    onClick={() => setShowArgumentForm(false)}
-                    mr={7}
-                    variant="link"
-                    variantColor="primary">
-                    <FormattedMessage id="global.cancel" />
-                  </Button>
+      {showArgumentForm && !isMobile && !widgetLocation && (
+        <Card
+          borderRadius="8px"
+          width="100%"
+          bg="white"
+          boxShadow="0px 10px 50px 0px rgba(0, 0, 0, 0.15)"
+          p={6}
+          mt={8}
+          css={{
+            '& form textarea[disabled]': {
+              backgroundColor: 'transparent !important',
+            },
+          }}
+          pb={body?.length > 0 ? 6 : 2}>
+          <Form id={formName} onSubmit={handleSubmit} disabled={false}>
+            <Field
+              name="body"
+              component={component}
+              type="textarea"
+              id="body"
+              minLength="1"
+              autoComplete="off"
+              placeholder={title}
+            />
+            {body?.length > 0 && (
+              <Flex justifyContent="flex-end">
+                <Button
+                  onClick={() => setShowArgumentForm(false)}
+                  mr={7}
+                  variant="link"
+                  variantColor="primary">
+                  <FormattedMessage id="global.cancel" />
+                </Button>
+                {value === 'voted_anonymous' ? (
+                  <ModalPublishArgumentAnonymous
+                    formName={formName}
+                    initialState="INFO"
+                    message="global.validate"
+                    title={title}
+                    argumentBody={body}
+                    viewerVoteValue={viewerVoteValue}
+                    debate={debate.id}
+                  />
+                ) : (
                   <Button
                     onClick={() => {
                       track('debate_argument_publish', {
@@ -557,29 +565,14 @@ export const DebateStepPageVoteForm = ({
                       id={viewerIsConfirmed ? 'argument.publish.mine' : 'global.validate'}
                     />
                   </Button>
-                </Flex>
-              )}
-            </Form>
-          </Card>
-        </ConditionalWrapper>
+                )}
+              </Flex>
+            )}
+          </Form>
+        </Card>
       )}
 
-      {showArgumentForm && widget.isSource && (
-        <Flex direction="row" justify="center" mt={4}>
-          <Button
-            onClick={() => {
-              window.open(url, '_blank');
-            }}
-            variant="primary"
-            variantColor="primary"
-            variantSize="big"
-            rightIcon="PREVIEW">
-            <FormattedMessage id="continue-on-instance" values={{ instance: organizationName }} />
-          </Button>
-        </Flex>
-      )}
-
-      {showArgumentForm && isMobile && !widget.isSource && (
+      {showArgumentForm && (isMobile || widgetLocation) && (
         <>
           <MobilePublishArgumentModal
             debateUrl={debate.url}
@@ -588,11 +581,17 @@ export const DebateStepPageVoteForm = ({
             onClose={onClose}
             onSubmit={handleSubmit}
           />
-          <ConditionalWrapper
-            when={value === 'voted_anonymous'}
-            wrapper={children => (
-              <LoginOverlay placement={isAbsolute ? 'top' : 'bottom'}>{children}</LoginOverlay>
-            )}>
+          {value === 'voted_anonymous' ? (
+            <ModalPublishArgumentAnonymous
+              formName={formName}
+              initialState="FORM"
+              message="publish-argument"
+              isMobile={isMobile}
+              title={title}
+              viewerVoteValue={viewerVoteValue}
+              debate={debate.id}
+            />
+          ) : (
             <Button
               mt={3}
               onClick={onOpen}
@@ -602,7 +601,7 @@ export const DebateStepPageVoteForm = ({
               width="100%">
               {intl.formatMessage({ id: 'publish-argument' })}
             </Button>
-          </ConditionalWrapper>
+          )}
         </>
       )}
     </motion.div>

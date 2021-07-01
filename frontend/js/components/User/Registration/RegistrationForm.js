@@ -1,4 +1,4 @@
- // @flow
+// @flow
 import * as React from 'react';
 import memoize from 'lodash/memoize';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -79,6 +79,49 @@ const getCustomFieldsErrors = (values: FormValues, props: Props) => {
 
 export const form = 'registration-form';
 
+export const ChartLinkComponent = ({
+  cguName,
+  dispatch,
+}: {|
+  +cguName: string,
+  +dispatch: Dispatch,
+|}) => {
+  return (
+    <FormattedMessage
+      id="registration.charte"
+      values={{
+        link: (
+          <Button
+            className="p-0 text-decoration-none"
+            variant="link"
+            bsStyle="link"
+            onClick={() => {
+              dispatch(displayChartModal());
+            }}>
+            {cguName}
+          </Button>
+        ),
+      }}
+    />
+  );
+};
+
+export const PrivacyPolicyComponent = ({
+  privacyPolicyRequired,
+  onClick,
+}: {|
+  +onClick?: () => void,
+  +privacyPolicyRequired: boolean,
+|}) =>
+  privacyPolicyRequired ? (
+    <PrivacyModal
+      onClick={onClick}
+      title="capco.module.privacy_policy"
+      linkKeyword="and-the"
+      className="text-decoration-none"
+    />
+  ) : null;
+
 export const RegistrationForm = ({
   cguName,
   responses,
@@ -99,33 +142,6 @@ export const RegistrationForm = ({
   questions,
   locale,
 }: Props) => {
-  const privacyPolicyComponent = privacyPolicyRequired ? (
-    <PrivacyModal
-      title="capco.module.privacy_policy"
-      linkKeyword="and-the"
-      className="text-decoration-none"
-    />
-  ) : null;
-
-  const chartLinkComponent = (
-    <FormattedMessage
-      id="registration.charte"
-      values={{
-        link: (
-          <Button
-            className="p-0 text-decoration-none"
-            variant="link"
-            bsStyle="link"
-            onClick={() => {
-              dispatch(displayChartModal());
-            }}>
-            {cguName}
-          </Button>
-        ),
-      }}
-    />
-  );
-
   return (
     <form onSubmit={handleSubmit} id="registration-form">
       <Field name="locale" id="locale" component={renderComponent} value={locale} type="hidden" />
@@ -225,7 +241,8 @@ export const RegistrationForm = ({
         type="checkbox"
         labelClassName="font-weight-normal">
         <span>
-          {chartLinkComponent} {privacyPolicyComponent}
+          <ChartLinkComponent cguName={cguName} dispatch={dispatch} />
+          <PrivacyPolicyComponent privacyPolicyRequired={privacyPolicyRequired} />
         </span>
       </Field>
       {addConsentInternalCommunicationField && (

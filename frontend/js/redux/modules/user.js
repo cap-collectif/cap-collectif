@@ -13,6 +13,7 @@ import CancelEmailChangeMutation from '~/mutations/CancelEmailChangeMutation';
 import ResendEmailConfirmationMutation from '~/mutations/ResendEmailConfirmationMutation';
 import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutation';
 import type { RegisterEmailDomainsInput } from '~relay/RegisterEmailDomainsMutation.graphql';
+import { userActions } from './user_actions';
 
 export const accountForm = 'accountForm';
 
@@ -196,7 +197,7 @@ export const setRegistrationEmailDomains = (values: RegisterEmailDomainsInput): 
 export const login = (
   data: { username: string, password: string, displayCaptcha: boolean, captcha?: ?string },
   dispatch: Dispatch,
-  props: { restrictConnection: boolean },
+  props: { restrictConnection: boolean, values?: { onSuccessAction?: string } },
 ): Promise<*> => {
   if (!data.password || data.password.length < 1) {
     return new Promise(() => {
@@ -231,8 +232,12 @@ export const login = (
     })
     .then((response: { success?: boolean, reason: ?string, failedAttempts?: number }) => {
       if (response.success) {
-        dispatch(closeLoginModal());
-        window.location.reload();
+        if (props.values?.onSuccessAction) {
+          userActions(props.values.onSuccessAction);
+        } else {
+          dispatch(closeLoginModal());
+          window.location.reload();
+        }
         return true;
       }
       if (response.reason === LOGIN_WRONG_CREDENTIALS) {
@@ -261,7 +266,7 @@ export const register = async (
     questions: undefined,
     charte: undefined,
     passwordConditions: undefined,
-    passwordComplexityScore: undefined
+    passwordComplexityScore: undefined,
   };
   if (values.questions && values.questions.length > 0) {
     form.responses = formatSubmitResponses(values.responses, values.questions);

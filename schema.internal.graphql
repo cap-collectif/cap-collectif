@@ -2937,7 +2937,7 @@ type CreateDebateAnonymousArgumentPayload {
   errorCode: CreateDebateAnonymousArgumentErrorCode
 
   """The token of the argument."""
-  token: String!
+  token: String
   clientMutationId: String
 }
 

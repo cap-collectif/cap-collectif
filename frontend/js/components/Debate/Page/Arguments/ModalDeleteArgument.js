@@ -4,15 +4,17 @@ import styled, { type StyledComponent } from 'styled-components';
 import { type IntlShape, useIntl } from 'react-intl';
 import { useAnalytics } from 'use-analytics';
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation';
+import DeleteDebateAnonymousArgumentMutation from '~/mutations/DeleteDebateAnonymousArgumentMutation';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { toast } from '~ds/Toast';
 import { formatConnectionPath } from '~/shared/utils/relay';
 import { mediaQueryMobile } from '~/utils/sizes';
 import DeleteModal from '~/components/Modal/DeleteModal';
+import CookieMonster from '~/CookieMonster';
 
 type Props = {|
   onClose: () => void,
-  argumentInfo: { id: string, type: 'FOR' | 'AGAINST', debateUrl: string },
+  argumentInfo: { id: string, type: 'FOR' | 'AGAINST', debateUrl: string, hash?: ?string },
   debateId: string,
 |};
 
@@ -33,7 +35,7 @@ const ModalContainer: StyledComponent<{}, {}, typeof DeleteModal> = styled(Delet
 `;
 
 const onSubmit = (
-  argumentInfo: { id: string, type: 'FOR' | 'AGAINST', debateUrl: string },
+  argumentInfo: { id: string, type: 'FOR' | 'AGAINST', debateUrl: string, hash?: ?string },
   debateId: string,
   intl: IntlShape,
   onClose: () => void,
@@ -44,35 +46,56 @@ const onSubmit = (
       'DebateStepPageArgumentsPagination_arguments',
       `(value:"${argumentInfo.type}")`,
     ),
-    formatConnectionPath(
-      ['client', debateId],
-      'DebateStepPageAlternateArgumentsPagination_alternateArguments',
-    ),
   ];
 
-  return DeleteDebateArgumentMutation.commit({
-    input: {
-      id: argumentInfo.id,
-    },
-    connections,
-    debateId,
-  })
-    .then(response => {
-      onClose();
-      if (response.deleteDebateArgument?.errorCode) {
-        mutationErrorToast(intl);
-      }
+  return argumentInfo.hash
+    ? DeleteDebateAnonymousArgumentMutation.commit({
+        input: {
+          debate: debateId,
+          hash: argumentInfo.hash,
+        },
+        connections,
+        debateId,
+      })
+        .then(response => {
+          onClose();
+          if (response.deleteDebateAnonymousArgument?.errorCode) {
+            mutationErrorToast(intl);
+          }
+          CookieMonster.removeDebateAnonymousArgumentCookie(debateId);
+          toast({
+            variant: 'success',
+            content: intl.formatMessage({
+              id: 'alert.success.delete.argument',
+            }),
+          });
+        })
+        .catch(() => {
+          mutationErrorToast(intl);
+        })
+    : DeleteDebateArgumentMutation.commit({
+        input: {
+          id: argumentInfo.id,
+        },
+        connections,
+        debateId,
+      })
+        .then(response => {
+          onClose();
+          if (response.deleteDebateArgument?.errorCode) {
+            mutationErrorToast(intl);
+          }
 
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({
-          id: 'alert.success.delete.argument',
-        }),
-      });
-    })
-    .catch(() => {
-      mutationErrorToast(intl);
-    });
+          toast({
+            variant: 'success',
+            content: intl.formatMessage({
+              id: 'alert.success.delete.argument',
+            }),
+          });
+        })
+        .catch(() => {
+          mutationErrorToast(intl);
+        });
 };
 
 export const ModalDeleteArgument = ({ argumentInfo, debateId, onClose }: Props): React.Node => {
