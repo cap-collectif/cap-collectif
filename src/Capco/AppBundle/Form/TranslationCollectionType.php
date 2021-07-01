@@ -51,6 +51,7 @@ class TranslationCollectionType extends AbstractType
             'default_locale' => $this->defaultLocale,
             'required_locales' => $this->publishedLocales,
             'fields' => [],
+            'fields_options' => [],
             'excluded_fields' => [],
             'allow_extra_fields' => true
         ]);

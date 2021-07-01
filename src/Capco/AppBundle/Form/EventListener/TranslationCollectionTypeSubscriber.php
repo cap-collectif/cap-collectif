@@ -27,6 +27,7 @@ class TranslationCollectionTypeSubscriber implements EventSubscriberInterface
                 'required' => \in_array($locale, $formOptions['required_locales'], true),
                 'block_name' => 'locale',
                 'fields' => $formOptions['fields'],
+                'fields_options' => $formOptions['fields_options'],
                 'excluded_fields' => $formOptions['excluded_fields']
             ]);
         }

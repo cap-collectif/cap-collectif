@@ -24,7 +24,8 @@ class TranslationType extends AbstractType
     {
         $resolver->setDefaults([
             'fields' => [],
-            'excluded_fields' => []
+            'excluded_fields' => [],
+            'fields_options' => []
         ]);
     }
 }
