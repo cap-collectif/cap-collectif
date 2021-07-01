@@ -89,7 +89,7 @@ final class Version20210610142134 extends AbstractMigration implements Container
     private function getCurrentMailer(): string
     {
         return $this->connection->fetchOne(
-            'SELECT value FROM external_site_configuration WHERE type = :type',
+            'SELECT value FROM external_service_configuration WHERE type = :type',
             ['type' => 'mailer']
         );
     }
