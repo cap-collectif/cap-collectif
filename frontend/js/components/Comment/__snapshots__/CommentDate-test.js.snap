@@ -31,7 +31,7 @@ exports[`<CommentDate /> should render correctly 1`] = `
     }
   >
     <span>
-      il y a 3 ans
+      il y a 4 ans
     </span>
   </OverlayTrigger>
   <span>
@@ -75,7 +75,7 @@ exports[`<CommentDate /> should render correctly with trashed false 1`] = `
     }
   >
     <span>
-      il y a 3 ans
+      il y a 4 ans
     </span>
   </OverlayTrigger>
   <span>
