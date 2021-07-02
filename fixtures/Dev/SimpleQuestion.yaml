@@ -465,6 +465,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1393
         title: Raison sociale
         type: 0 # text
+        required: true
     simpleQuestionBP3Idf4:
         id: 1394
         title: Ligne adr 1 - Demandeur

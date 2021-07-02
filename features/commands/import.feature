@@ -116,8 +116,9 @@ Scenario: Admin wants to import idf users from a CSV
   And I should see "3 users successfully created." in output
   And I should see "Skipping 1 duplicated email(s)." in output
 
+@database
 Scenario: Admin wants to import a IDF BP
-  Given I run "capco:import:idf-proposals-from-csv /var/www/__snapshots__/imports/proposals_idf_bp3.csv proposalformIdfBP3 -d ,"
+  Given I run "capco:import:idf-proposals-from-csv /__snapshots__/imports/proposals_idf_bp3.csv proposalformIdfBP3 -d ,"
   Then the command exit code should be 0
   And I should see "1 proposals successfully created." in output
 

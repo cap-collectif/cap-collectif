@@ -420,6 +420,18 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
             : new ArrayCollection();
     }
 
+    public function getQuestionByTitle(string $title): ?AbstractQuestion
+    {
+        /** @var AbstractQuestion $question */
+        foreach ($this->getRealQuestions() as $question) {
+            if ($question->getTitle() === $title) {
+                return $question;
+            }
+        }
+
+        return null;
+    }
+
     public function getQuestions(): Collection
     {
         return $this->questions;
@@ -1048,6 +1060,40 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
             $this->getAnalysisConfiguration()->isCostEstimationEnabled()
         ) {
             $fields = array_merge($fields, ['estimation']);
+        }
+
+        return $fields;
+    }
+
+    public function getMandatoryFieldsUsed(): array
+    {
+        $fields = ['title' => true, 'author' => true];
+        if ($this->usingCategories) {
+            $fields = array_merge($fields, ['category' => $this->categoryMandatory]);
+        }
+        if ($this->usingThemes) {
+            $fields = array_merge($fields, ['theme' => $this->themeMandatory]);
+        }
+        if ($this->usingDistrict) {
+            $fields = array_merge($fields, ['district' => $this->districtMandatory]);
+        }
+        if ($this->usingTipsmeee) {
+            $fields = array_merge($fields, ['tipsmeee' => $this->themeMandatory]);
+        }
+        if ($this->usingDescription) {
+            $fields = array_merge($fields, ['body' => $this->descriptionMandatory]);
+        }
+        if (
+            $this->getAnalysisConfiguration() &&
+            $this->getAnalysisConfiguration()->isCostEstimationEnabled()
+        ) {
+            $fields = array_merge($fields, ['estimation' => false]);
+        }
+
+        foreach ($this->getRealQuestions() as $question) {
+            if ($question instanceof SimpleQuestion) {
+                $fields = array_merge($fields, [$question->getTitle() => $question->isRequired()]);
+            }
         }
 
         return $fields;

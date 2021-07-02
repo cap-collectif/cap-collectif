@@ -11,7 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class ResponseResolver implements ResolverInterface
 {
-    private $typeResolver;
+    private TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {

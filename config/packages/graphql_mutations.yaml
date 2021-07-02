@@ -9,6 +9,7 @@ services:
             Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
             $authorizationChecker: '@security.authorization_checker'
             $locale: '%locale%'
+            $projectDir: '%kernel.project_dir%'
 
     _instanceof:
         Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:

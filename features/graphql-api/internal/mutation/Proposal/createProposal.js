@@ -49,6 +49,12 @@ describe('Internal|create proposal', () => {
       instagramUrl: null,
       youtubeUrl: null,
       linkedInUrl: null,
+      responses: [
+        {
+          question: toGlobalId('SimpleQuestion', '1393'),
+          value: 'ERL',
+        },
+      ],
     };
     // expect.assertions(1);
     const response = await graphql(createProposal, { input }, 'internal_user');

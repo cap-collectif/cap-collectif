@@ -44,6 +44,7 @@ describe('Internal | Update proposal content', () => {
     );
     expect(updateProposal).toMatchSnapshot();
   });
+
   it('update proposal with rs', async () => {
     const updateProposal = await graphql(
       UpdateProposalMutation,
@@ -56,6 +57,12 @@ describe('Internal | Update proposal content', () => {
           instagramUrl: null,
           youtubeUrl: null,
           linkedInUrl: null,
+          responses: [
+            {
+              question: toGlobalId('SimpleQuestion', '1393'),
+              value: 'ERL',
+            },
+          ],
         },
       },
       'internal_user',

@@ -17,13 +17,12 @@ use Liip\ImagineBundle\Service\FilterService;
  */
 class MediaProcessor implements ProcessorInterface
 {
+    // TODO: Please investigate why this is slow since SF4.
+    const ENABLE_PROCESSOR = true;
     private array $referenceMap = [];
     private EntityManagerInterface $em;
     private FilterService $filterService;
     private string $projectDir;
-
-    /* TODO: Please investigate why this is slow since SF4. */
-    const ENABLE_PROCESSOR = true;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -66,23 +65,22 @@ class MediaProcessor implements ProcessorInterface
                 !empty($newProviderReference) &&
                 $newProviderReference !== $object->getProviderReference()
             ) {
-
-                (Process::fromShellCommandline(
+                Process::fromShellCommandline(
                     'mv /var/www/public/media/default/0001/01/' .
                         $object->getProviderReference() .
                         ' /var/www/public/media/default/0001/01/' .
                         $newProviderReference
-                ))->mustRun();
+                )->mustRun();
 
                 // Restore providerReference in fixtures
                 $object->setProviderReference($newProviderReference);
 
                 // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation
                 $imgFormats = ['default_logo', 'default_avatar', 'default_project'];
-                $notNeededExtensions = ['pdf', 'svg'];
+                $notNeededExtensions = ['pdf', 'svg', 'csv'];
                 foreach ($imgFormats as $format) {
                     $extension = pathinfo($newProviderReference)['extension'];
-                    if (!in_array($extension, $notNeededExtensions, true)) {
+                    if (!\in_array($extension, $notNeededExtensions, true)) {
                         // Will generate cache file
                         $this->filterService->getUrlOfFilteredImage(
                             'default/0001/01/' . $newProviderReference,

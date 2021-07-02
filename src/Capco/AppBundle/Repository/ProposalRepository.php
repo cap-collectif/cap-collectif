@@ -23,19 +23,18 @@ class ProposalRepository extends EntityRepository
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('p');
-        $qb
-            ->addSelect(
-                'progressSteps',
-                'status',
-                'author',
-                'theme',
-                'district',
-                'category',
-                'likers',
-                'proposalEvaluation',
-                'proposalForm',
-                'step'
-            )
+        $qb->addSelect(
+            'progressSteps',
+            'status',
+            'author',
+            'theme',
+            'district',
+            'category',
+            'likers',
+            'proposalEvaluation',
+            'proposalForm',
+            'step'
+        )
             ->leftJoin('p.proposalForm', 'proposalForm')
             ->leftJoin('proposalForm.step', 'step')
             ->leftJoin('p.author', 'author')
@@ -228,8 +227,7 @@ class ProposalRepository extends EntityRepository
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('p');
-        $qb
-            ->select('count(DISTINCT p)')
+        $qb->select('count(DISTINCT p)')
             ->andWhere('p.author = :author')
             ->setParameter('author', $user);
 
@@ -412,23 +410,22 @@ class ProposalRepository extends EntityRepository
             ->setParameter('stepId', $step->getId());
 
         if ($themeId) {
-            $qb
-                ->leftJoin('proposal.theme', 't')
+            $qb->leftJoin('proposal.theme', 't')
                 ->andWhere('t.id = :themeId')
                 ->setParameter('themeId', $themeId);
         }
 
         if ($districtId) {
-            $qb
-                ->leftJoin('proposal.district', 'd')
+            $qb->leftJoin('proposal.district', 'd')
                 ->andWhere('d.id = :districtId')
                 ->setParameter('districtId', $districtId);
         }
 
         if ($categoryId) {
-            $qb
-                ->andWhere('proposal.category = :categoryId')
-                ->setParameter('categoryId', $categoryId);
+            $qb->andWhere('proposal.category = :categoryId')->setParameter(
+                'categoryId',
+                $categoryId
+            );
         }
 
         $qb->orderBy('value', 'DESC');
@@ -465,22 +462,19 @@ class ProposalRepository extends EntityRepository
             ->setParameter('stepId', $step->getId());
 
         if ($themeId) {
-            $qb
-                ->leftJoin('p.theme', 't')
+            $qb->leftJoin('p.theme', 't')
                 ->andWhere('t.id = :themeId')
                 ->setParameter('themeId', $themeId);
         }
 
         if ($districtId) {
-            $qb
-                ->leftJoin('p.district', 'd')
+            $qb->leftJoin('p.district', 'd')
                 ->andWhere('d.id = :districtId')
                 ->setParameter('districtId', $districtId);
         }
 
         if ($categoryId) {
-            $qb
-                ->leftJoin('p.category', 'category')
+            $qb->leftJoin('p.category', 'category')
                 ->andWhere('category.id = :categoryId')
                 ->setParameter('categoryId', $categoryId);
         }
@@ -530,8 +524,7 @@ class ProposalRepository extends EntityRepository
         string $proposalId
     ): array {
         $qb = $this->createQueryBuilder('proposal');
-        $qb
-            ->select('proposal.id')
+        $qb->select('proposal.id')
             ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
             ->leftJoin('proposal.collectVotes', 'collectVotes')
             ->leftJoin('proposal.selectionVotes', 'selectionVotes')
@@ -550,8 +543,7 @@ class ProposalRepository extends EntityRepository
     ): array {
         $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id');
-        $qb
-            ->addSelect('COUNT(comments.id) as countComment')
+        $qb->addSelect('COUNT(comments.id) as countComment')
             ->leftJoin('proposal.comments', 'comments')
             ->andWhere($qb->expr()->between('comments.createdAt', ':from', ':to'))
             ->andWhere($qb->expr()->eq('proposal.id', ':id'))
@@ -566,8 +558,7 @@ class ProposalRepository extends EntityRepository
         string $proposalId
     ): array {
         $qb = $this->createQueryBuilder('proposal');
-        $qb
-            ->select('proposal.id')
+        $qb->select('proposal.id')
             ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name as sName')
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'sStep')
@@ -656,16 +647,15 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.decisionMaker', 'decisionMaker')
             ->leftJoin('p.supervisor', 'supervisor')
             ->andWhere('pas.project = :project');
-        $qb
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        'analysts.analyst = :viewer',
-                        'decisionMaker.decisionMaker = :viewer',
-                        'supervisor.supervisor = :viewer'
-                    )
-            )
+        $qb->andWhere(
+            $qb
+                ->expr()
+                ->orX(
+                    'analysts.analyst = :viewer',
+                    'decisionMaker.decisionMaker = :viewer',
+                    'supervisor.supervisor = :viewer'
+                )
+        )
             ->setParameter('project', $project)
             ->setParameter('viewer', $viewer)
             ->setFirstResult($first)
@@ -683,16 +673,15 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.decisionMaker', 'decisionMaker')
             ->leftJoin('p.supervisor', 'supervisor')
             ->andWhere('pas.project = :project');
-        $qb
-            ->andWhere(
-                $qb
-                    ->expr()
-                    ->orX(
-                        'analysts.analyst = :viewer',
-                        'decisionMaker.decisionMaker = :viewer',
-                        'supervisor.supervisor = :viewer'
-                    )
-            )
+        $qb->andWhere(
+            $qb
+                ->expr()
+                ->orX(
+                    'analysts.analyst = :viewer',
+                    'decisionMaker.decisionMaker = :viewer',
+                    'supervisor.supervisor = :viewer'
+                )
+        )
             ->setParameter('project', $project)
             ->setParameter('viewer', $viewer);
 
@@ -707,6 +696,25 @@ class ProposalRepository extends EntityRepository
             ->setParameter('form', $form)
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function getProposalByEmailAndTitleOnStep(
+        string $title,
+        string $authorEmail,
+        AbstractStep $step,
+        ProposalForm $proposalForm
+    ): int {
+        $query = $this->createQueryBuilder('proposal')
+            ->select('COUNT(proposal.id)')
+            ->leftJoin('proposal.author', 'author')
+            ->andWhere('proposal.proposalForm = :form')
+            ->andWhere('proposal.title = :title')
+            ->andWhere('author.email = :user')
+            ->setParameter('form', $proposalForm)
+            ->setParameter('title', $title)
+            ->setParameter('user', $authorEmail);
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
@@ -732,8 +740,7 @@ class ProposalRepository extends EntityRepository
         User $user
     ): QueryBuilder {
         $qb = $this->getIsEnabledQueryBuilder('p');
-        $qb
-            ->andWhere('p.author = :user')
+        $qb->andWhere('p.author = :user')
             ->leftJoin('p.selections', 'ps')
             ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 's')
@@ -780,8 +787,7 @@ class ProposalRepository extends EntityRepository
     private function createPublicProposalsByAuthorQuery(User $author): QueryBuilder
     {
         $qb = $this->getIsEnabledQueryBuilder('p');
-        $qb
-            ->andWhere('p.author = :author')
+        $qb->andWhere('p.author = :author')
             ->leftJoin('p.selections', 'ps')
             ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 's')

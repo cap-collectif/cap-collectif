@@ -605,6 +605,41 @@ type AddProposalVotePayload {
   clientMutationId: String
 }
 
+input AddProposalsFromCsvInput {
+  """The id of the form form proposal"""
+  proposalFormId: ID!
+
+  """The ID of csv file uploaded to import"""
+  csvToImport: ID!
+
+  """
+  This option is useful if you want to test your import. Set it to false if you want to import definitively.
+  """
+  dryRun: Boolean! = true
+
+  """the char mark to delimit column in csv"""
+  delimiter: String = ";"
+  clientMutationId: String
+}
+
+type AddProposalsFromCsvPayload {
+  """List of imported proposals."""
+  importedProposals: ProposalConnection
+
+  """List of bad lines."""
+  badLines: [Int]!
+
+  """Number of doubloon"""
+  duplicates: [Int]!
+
+  """Lines with missing data mandatory"""
+  mandatoryMissing: [Int]!
+
+  """code of error"""
+  errorCode: ProposalImportsErrorCode
+  clientMutationId: String
+}
+
 """Available errors on step assignment of proposals"""
 enum AddProposalsToStepsErrorCode {
   """No proposal match your id"""
@@ -6417,6 +6452,7 @@ type Mutation {
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
+  addProposalsFromCsv(input: AddProposalsFromCsvInput!): AddProposalsFromCsvPayload
   createProposalFusion(input: CreateProposalFusionInput!): CreateProposalFusionPayload
   updateProposalFusion(input: UpdateProposalFusionInput!): UpdateProposalFusionPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
@@ -8899,6 +8935,18 @@ enum ProposalFormObjectType {
 
   """The proposal form is an Establishment"""
   ESTABLISHMENT
+}
+
+"""Available errors on proposal news mutation"""
+enum ProposalImportsErrorCode {
+  """No proposal form match your id"""
+  PROPOSAL_FORM_NOT_FOUND
+
+  """CSV file has bad header"""
+  BAD_DATA_MODEL
+
+  """Given CSV file is empty"""
+  EMPTY_FILE
 }
 
 """Available errors on proposal news mutation"""

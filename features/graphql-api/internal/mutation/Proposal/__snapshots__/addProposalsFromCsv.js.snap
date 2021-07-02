@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal mutation.addProposalsFromCsv should import 1`] = `
+Object {
+  "addProposalsFromCsv": Object {
+    "badLines": Array [
+      2,
+      3,
+    ],
+    "duplicates": Array [
+      5,
+    ],
+    "errorCode": null,
+    "importedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "test OK",
+          },
+        },
+      ],
+    },
+    "mandatoryMissing": Array [
+      6,
+    ],
+  },
+}
+`;
+
+exports[`Internal mutation.addProposalsFromCsv should not import 1`] = `
+Object {
+  "addProposalsFromCsv": Object {
+    "badLines": Array [
+      2,
+      3,
+    ],
+    "duplicates": Array [
+      5,
+    ],
+    "errorCode": null,
+    "importedProposals": Object {
+      "edges": Array [],
+    },
+    "mandatoryMissing": Array [
+      6,
+    ],
+  },
+}
+`;

@@ -1,0 +1,15 @@
+ProposalImportsErrorCode:
+    type: enum
+    config:
+        name: ProposalImportsErrorCode
+        description: 'Available errors on proposal news mutation'
+        values:
+            PROPOSAL_FORM_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::PROPOSAL_FORM_NOT_FOUND")'
+                description: 'No proposal form match your id'
+            BAD_DATA_MODEL:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::BAD_DATA_MODEL")'
+                description: 'CSV file has bad header'
+            EMPTY_FILE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation::EMPTY_FILE")'
+                description: 'Given CSV file is empty'

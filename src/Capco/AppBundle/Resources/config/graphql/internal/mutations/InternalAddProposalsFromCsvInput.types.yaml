@@ -1,0 +1,20 @@
+InternalAddProposalsFromCsvInput:
+    type: relay-mutation-input
+    config:
+        description: 'Add many proposals.'
+        name: AddProposalsFromCsvInput
+        fields:
+            proposalFormId:
+                type: 'ID!'
+                description: 'The id of the form form proposal'
+            csvToImport:
+                type: 'ID!'
+                description: 'The ID of csv file uploaded to import'
+            dryRun:
+                type: 'Boolean!'
+                description: 'This option is useful if you want to test your import. Set it to false if you want to import definitively.'
+                defaultValue: true
+            delimiter:
+                type: 'String'
+                defaultValue: ';'
+                description: 'the char mark to delimit column in csv'

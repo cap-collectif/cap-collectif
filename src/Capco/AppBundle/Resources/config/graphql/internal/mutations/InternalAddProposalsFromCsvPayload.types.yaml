@@ -1,0 +1,20 @@
+InternalAddProposalsFromCsvPayload:
+    type: relay-mutation-payload
+    config:
+        name: AddProposalsFromCsvPayload
+        fields:
+            importedProposals:
+                type: 'InternalProposalConnection'
+                description: 'List of imported proposals.'
+            badLines:
+                type: '[Int]!'
+                description: 'List of bad lines.'
+            duplicates:
+                type: '[Int]!'
+                description: 'Number of doubloon'
+            mandatoryMissing:
+                type: '[Int]!'
+                description: 'Lines with missing data mandatory'
+            errorCode:
+                type: 'ProposalImportsErrorCode'
+                description: 'code of error'

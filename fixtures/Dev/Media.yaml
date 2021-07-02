@@ -422,3 +422,9 @@ Capco\MediaBundle\Entity\Media:
         name: imageArchived
         category: '@MediaCategory1'
         providerReference: archived.jpeg
+    importedCsvProposals:
+        id: 'importedCsvProposals'
+        binaryContent: proposals_idf_bp3.csv
+        name: proposalToImport
+        category: '@MediaCategory1'
+        providerReference: proposals_idf_bp3.csv

@@ -8,6 +8,10 @@ services:
             Caxy\HtmlDiffBundle\Service\HtmlDiffService: '@caxy.html_diff'
             $samlIdp: '%simplesamlphp.sp%'
             $logger: '@logger'
+            $projectDir: '%kernel.project_dir%'
+
+    Capco\AppBundle\Import\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Import/*'
 
     Capco\AppBundle\EventListener\ToggleSubscriber:
         tags:
