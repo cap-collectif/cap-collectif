@@ -47,9 +47,10 @@ const DonationAmount: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 const FRAGMENT = graphql`
-  fragment ProposalPageDonators_proposal on Proposal {
+  fragment ProposalPageDonators_proposal on Proposal
+    @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
     title
-    tipsmeee {
+    tipsmeee @include(if: $isTipsMeeeEnabled) {
       topDonators {
         name
         amount

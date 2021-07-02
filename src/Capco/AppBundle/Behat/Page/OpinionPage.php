@@ -280,7 +280,7 @@ class OpinionPage extends Page
     {
         $this->getElement('source create title field')->setValue('Titre de la source');
         $this->getElement('source create body field')->setValue('Contenu de la source');
-        $this->getElement('source create link field')->setValue('http://www.google.fr');
+        $this->getElement('source create link field')->setValue('https://www.google.fr');
         $this->selectSourceCategory();
     }
 

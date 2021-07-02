@@ -3226,56 +3226,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "TipsMeee",
-                      "kind": "LinkedField",
-                      "name": "tipsmeee",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "ProposalTopDonator",
-                          "kind": "LinkedField",
-                          "name": "topDonators",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "name",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "amount",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "date",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "email",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
                       "kind": "ScalarField",
                       "name": "url",
                       "storageKey": null,
@@ -3408,6 +3358,45 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "donationTotalCount",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "ProposalTopDonator",
+                              "kind": "LinkedField",
+                              "name": "topDonators",
+                              "plural": true,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "name",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "amount",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "email",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "date",
+                                  "storageKey": null,
+                                },
+                              ],
                               "storageKey": null,
                             },
                           ],
@@ -7212,7 +7201,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "e0c5f5bd665868729ad01b09abd2f138",
+          "cacheID": "1497b03b947ca379dfc8a1a42b835606",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8333,9 +8322,9 @@ fragment ProposalPageDiscussions_proposal on Proposal {
   ...ProposalPageComments_proposal
 }
 
-fragment ProposalPageDonators_proposal on Proposal {
+fragment ProposalPageDonators_proposal_4iFR9m on Proposal {
   title
-  tipsmeee {
+  tipsmeee @include(if: $isTipsMeeeEnabled) {
     topDonators {
       name
       amount
@@ -8508,7 +8497,7 @@ fragment ProposalPageLogic_query_2JM5Hk on Query {
     ...ProposalPageVotes_proposal
     ...ProposalPageBlog_proposal
     ...ProposalPageFollowers_proposal
-    ...ProposalPageDonators_proposal
+    ...ProposalPageDonators_proposal_4iFR9m
     ...ProposalPageHeader_proposal_19sAkT
     ...ProposalPageMainAside_proposal_zqPYL @include(if: $isAuthenticated)
     ...ProposalAnalysisPanel_proposal_2uwUKI @include(if: $isAuthenticated)

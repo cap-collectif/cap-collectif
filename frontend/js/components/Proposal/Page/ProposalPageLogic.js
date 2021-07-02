@@ -195,9 +195,11 @@ export const ProposalPageLogic = ({
             <Tab.Pane eventKey="followers">
               <ProposalPageFollowers proposal={proposal} pageAdmin={false} />
             </Tab.Pane>
-            <Tab.Pane eventKey="donators">
-              <ProposalPageDonators proposal={proposal} />
-            </Tab.Pane>
+            {features.unstable__tipsmeee && (
+              <Tab.Pane eventKey="donators">
+                <ProposalPageDonators proposal={proposal} />
+              </Tab.Pane>
+            )}
           </Tab.Content>
         </PageContainer>
       </Tab.Container>
@@ -265,7 +267,7 @@ export default createFragmentContainer(
           ...ProposalPageVotes_proposal
           ...ProposalPageBlog_proposal
           ...ProposalPageFollowers_proposal
-          ...ProposalPageDonators_proposal
+          ...ProposalPageDonators_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
           ...ProposalPageHeader_proposal
             @arguments(
               isAuthenticated: $isAuthenticated
