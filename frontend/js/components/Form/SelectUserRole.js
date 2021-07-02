@@ -15,28 +15,18 @@ type OwnProps = {|
 type Props = {|
   ...OwnProps,
   isSuperAdmin: boolean,
+  hasProjectAdminFeature: boolean,
   intl: IntlShape,
 |};
 
 export class SelectUserRole extends Component<Props> {
   render() {
-    const { isSuperAdmin, intl, id, name, label } = this.props;
-
-    const superAdminRole = {
-      id: 'ROLE_SUPER_ADMIN',
-      useIdAsValue: true,
-      label: intl.formatMessage({ id: 'roles.super_admin' }),
-    };
+    const { isSuperAdmin, hasProjectAdminFeature, intl, id, name, label } = this.props;
     const userRoles = [
       {
         id: 'ROLE_USER',
         useIdAsValue: true,
         label: intl.formatMessage({ id: 'roles.user' }),
-      },
-      {
-        id: 'ROLE_PROJECT_ADMIN',
-        useIdAsValue: true,
-        label: intl.formatMessage({ id: 'roles.project_admin' }),
       },
       {
         id: 'ROLE_ADMIN',
@@ -45,8 +35,19 @@ export class SelectUserRole extends Component<Props> {
       },
     ];
 
+    if (hasProjectAdminFeature) {
+      userRoles.push({
+        id: 'ROLE_PROJECT_ADMIN',
+        useIdAsValue: true,
+        label: intl.formatMessage({ id: 'roles.project_admin' }),
+      });
+    }
     if (isSuperAdmin) {
-      userRoles.push(superAdminRole);
+      userRoles.push({
+        id: 'ROLE_SUPER_ADMIN',
+        useIdAsValue: true,
+        label: intl.formatMessage({ id: 'roles.super_admin' }),
+      });
     }
     return (
       <Field
@@ -63,6 +64,7 @@ export class SelectUserRole extends Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  hasProjectAdminFeature: state.default.features.unstable_project_admin ?? false,
 });
 
 const connector = connect<any, any, _, _, _, _>(mapStateToProps);

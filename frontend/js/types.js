@@ -102,6 +102,7 @@ export type FeatureToggles = {
   unstable__new_project_card: ?boolean,
   import_proposals: ?boolean,
   unstable__analytics_page: ?boolean,
+  unstable_project_admin: ?boolean,
   http_redirects: ?boolean,
 };
 

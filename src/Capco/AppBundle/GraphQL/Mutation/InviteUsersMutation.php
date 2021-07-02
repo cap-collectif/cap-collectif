@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,19 +26,22 @@ class InviteUsersMutation implements MutationInterface
     private UserInviteRepository $userInviteRepository;
     private UserRepository $userRepository;
     private GroupRepository $groupRepository;
+    private Manager $manager;
 
     public function __construct(
         TokenGeneratorInterface $tokenGenerator,
         EntityManagerInterface $em,
         UserInviteRepository $userInviteRepository,
         UserRepository $userRepository,
-        GroupRepository $groupRepository
+        GroupRepository $groupRepository,
+        Manager $manager
     ) {
         $this->tokenGenerator = $tokenGenerator;
         $this->em = $em;
         $this->userInviteRepository = $userInviteRepository;
         $this->userRepository = $userRepository;
         $this->groupRepository = $groupRepository;
+        $this->manager = $manager;
     }
 
     public function __invoke(Argument $args): array
@@ -50,7 +54,7 @@ class InviteUsersMutation implements MutationInterface
         ];
 
         $isAdmin = UserRole::ROLE_ADMIN === $role;
-        $isProjectAdmin = UserRole::ROLE_PROJECT_ADMIN === $role;
+        $isProjectAdmin = $this->manager->isActive(Manager::unstable_project_admin) && UserRole::ROLE_PROJECT_ADMIN === $role;
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);

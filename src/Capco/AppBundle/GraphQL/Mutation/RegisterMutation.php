@@ -41,6 +41,7 @@ class RegisterMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private EntityManagerInterface $em;
     private ResponsesFormatter $responsesFormatter;
+    private Manager $manager;
 
     public function __construct(
         Manager $toggleManager,
@@ -52,7 +53,8 @@ class RegisterMutation implements MutationInterface
         FOSNotifier $notifier,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
-        ResponsesFormatter $responsesFormatter
+        ResponsesFormatter $responsesFormatter,
+        Manager $manager
     ) {
         $this->toggleManager = $toggleManager;
         $this->userInviteRepository = $userInviteRepository;
@@ -64,6 +66,7 @@ class RegisterMutation implements MutationInterface
         $this->formFactory = $formFactory;
         $this->em = $em;
         $this->responsesFormatter = $responsesFormatter;
+        $this->manager = $manager;
     }
 
     public function __invoke(Argument $args)
@@ -108,7 +111,7 @@ class RegisterMutation implements MutationInterface
         unset($data['locale']);
 
         if ($invitation) {
-            if ($invitation->isProjectAdmin()) {
+            if ($this->manager->isActive(Manager::unstable_project_admin) && $invitation->isProjectAdmin()) {
                 $user->addRole(UserRole::ROLE_PROJECT_ADMIN);
             }
             if ($invitation->isAdmin()) {

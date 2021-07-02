@@ -18,6 +18,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import AppBox from '~ui/Primitives/AppBox';
 import { ModalBody } from '../UserInviteAdminPage.style';
 import type { InviteUsersRole } from '~relay/InviteUserMutation.graphql';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {|
   +queryFragment: UserInviteModalStepChooseRole_query$key,
@@ -34,6 +35,7 @@ const FRAGMENT = graphql`
 
 export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.Node => {
   const { dispatch, emails } = useUserInviteModalContext();
+  const hasProjectAdminFeature = useFeatureFlag('unstable_project_admin');
   const [role, setRole] = useState<InviteUsersRole>('ROLE_USER');
   const [groups, setGroups] = useState([]);
   const [options, setOptions] = useState([]);
@@ -80,18 +82,20 @@ export const UserInviteModalStepChooseRole = ({ queryFragment }: Props): React.N
               }}
             />
           </InputGroup>
-          <InputGroup>
-            <Radio
-              label={intl.formatMessage({ id: 'roles.project_admin' })}
-              id="project_admin"
-              value="project_admin"
-              name="role"
-              checked={role === 'ROLE_PROJECT_ADMIN'}
-              onChange={() => {
-                setRole('ROLE_PROJECT_ADMIN');
-              }}
-            />
-          </InputGroup>
+          {hasProjectAdminFeature && (
+            <InputGroup>
+              <Radio
+                label={intl.formatMessage({ id: 'roles.project_admin' })}
+                id="project_admin"
+                value="project_admin"
+                name="role"
+                checked={role === 'ROLE_PROJECT_ADMIN'}
+                onChange={() => {
+                  setRole('ROLE_PROJECT_ADMIN');
+                }}
+              />
+            </InputGroup>
+          )}
           <InputGroup>
             <Radio
               label={intl.formatMessage({ id: 'roles.admin' })}
