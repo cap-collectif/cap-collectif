@@ -1,5 +1,5 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentExternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl
-VXNlcjp1c2VyVGhlbw==,theo@cap-collectif.com,"Théo QP",,"2019-06-03 09:30:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/theoqp
+VXNlcjp1c2VyVGhlbw==,theo@cap-collectif.com,"Théo QP",,"2019-06-03 09:30:00",,,"Utilisateur|Créateur de projet",No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/theoqp
 VXNlcjp1c2VyMjAw,user200@cap-collectif.com,user200,Citoyen,"2017-01-01 03:20:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user200
 VXNlcjp1c2VyMTk5,user199@cap-collectif.com,user199,Citoyen,"2017-01-01 03:19:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user199
 VXNlcjp1c2VyMTk4,user198@cap-collectif.com,user198,Citoyen,"2017-01-01 03:18:00",,,Utilisateur,No,Yes,Yes,No,No,,,,,,,,,https://capco.dev/profile/user198

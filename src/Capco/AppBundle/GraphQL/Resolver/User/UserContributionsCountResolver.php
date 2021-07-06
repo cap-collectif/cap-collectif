@@ -8,14 +8,14 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserContributionsCountResolver implements ResolverInterface
 {
-    protected $userEventCommentsCountResolver;
-    protected $userOpinionVersionResolver;
-    protected $userProposalsResolver;
-    protected $userSourcesResolver;
-    protected $userOpinionsResolver;
-    protected $userRepliesResolver;
-    private $userVotesResolver;
-    private $argumentRepository;
+    protected UserEventCommentsCountResolver $userEventCommentsCountResolver;
+    protected UserOpinionVersionResolver $userOpinionVersionResolver;
+    protected UserProposalsResolver $userProposalsResolver;
+    protected UserSourcesResolver $userSourcesResolver;
+    protected UserOpinionsResolver $userOpinionsResolver;
+    protected UserRepliesResolver $userRepliesResolver;
+    private UserVotesResolver $userVotesResolver;
+    private ArgumentRepository $argumentRepository;
 
     public function __construct(
         UserEventCommentsCountResolver $userEventCommentsCountResolver,

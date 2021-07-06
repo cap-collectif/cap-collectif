@@ -15,7 +15,7 @@ Scenario: GraphQL admin want to get all contributions
   """
   {
     "data": {
-      "allContributions": 1013
+      "allContributions": 1015
     }
   }
   """

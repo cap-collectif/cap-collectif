@@ -1190,6 +1190,148 @@ EOF;
         return $stmt->fetchAll();
     }
 
+    public function findDuplicatesUsers()
+    {
+        $sql = <<<'EOF'
+    select u.id as userId, u.france_connect_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'franceConnect' SSO  FROM fos_user u
+    where france_connect_id IS NOT NULL
+    GROUP BY u.france_connect_id
+    HAVING duplicates > 1
+    UNION
+    select u.id as userId, u.twitter_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'twitter' SSO  FROM fos_user u
+    where twitter_id IS NOT NULL
+    GROUP BY u.twitter_id
+    HAVING duplicates > 1
+    UNION
+    select u.id as userId, u.facebook_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'facebook' SSO  FROM fos_user u
+    where facebook_id IS NOT NULL
+    GROUP BY u.facebook_id
+    HAVING duplicates > 1
+    UNION
+    select u.id as userId, u.saml_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'saml'  SSO  FROM fos_user u
+    where saml_id IS NOT NULL
+    GROUP BY u.saml_id
+    HAVING duplicates > 1
+EOF;
+
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAllAssociative();
+    }
+
+    public function findDuplicateFranceConnect(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select(
+                'u.id as userId',
+                'u.franceConnectId as france_connect_id',
+                'u.email',
+                'COUNT(u.id) as duplicates'
+            )
+            ->where('u.franceConnectId IS NOT NULL')
+            ->groupBy('u.franceConnectId')
+            ->having('duplicates > 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findDuplicateFacebook(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u.id as userId', 'u.facebook_id', 'u.email', 'COUNT(u.id) as duplicates')
+            ->where('u.facebook_id IS NOT NULL')
+            ->groupBy('u.facebook_id')
+            ->having('duplicates > 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findDuplicateTwitter(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u.id as userId', 'u.twitter_id', 'u.email', 'COUNT(u.id) as duplicates')
+            ->where('u.twitter_id IS NOT NULL')
+            ->groupBy('u.twitter_id')
+            ->having('duplicates > 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findDuplicateSaml(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select(
+                'u.id as userId',
+                'u.samlId as saml_id',
+                'u.email',
+                'COUNT(u.id) as duplicates'
+            )
+            ->where('u.samlId IS NOT NULL')
+            ->groupBy('u.samlId')
+            ->having('duplicates > 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findSameFranceConnectId(string $franceConnectId): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u.id as userId', 'u.franceConnectId as france_connect_id', 'u.email')
+            ->where('u.franceConnectId = :fcId')
+            ->setParameter('fcId', $franceConnectId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findSameFacebookId(string $facebookId): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u.id as userId', 'u.facebook_id', 'u.email')
+            ->where('u.facebook_id = :fbId')
+            ->setParameter('fbId', $facebookId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findSameTwitterId(string $twitterId): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u.id as userId', 'u.twitter_id', 'u.email')
+            ->where('u.twitter_id = :twitterId')
+            ->setParameter('twitterId', $twitterId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findSameSamlId(string $samlId): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u.id as userId', 'u.samlId as saml_id', 'u.email')
+            ->where('u.samlId = :samlId')
+            ->setParameter('samlId', $samlId)
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');

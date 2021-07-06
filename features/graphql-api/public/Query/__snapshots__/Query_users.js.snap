@@ -5,6 +5,29 @@ Object {
   "users": Object {
     "edges": Array [
       Object {
+        "cursor": "YToyOntpOjA7aToxNTg2NTAzODAwMDAwO2k6MTtzOjM2OiJkdXBsaWNhdGVzVXNlckNvbm5lY3RlZEZyYW5jZUNvbm5lY3QiO30=",
+        "node": Object {
+          "biography": "Je suis un doublon",
+          "consentInternalCommunication": null,
+          "createdAt": "2020-04-10 09:30:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjpkdXBsaWNhdGVzVXNlckNvbm5lY3RlZEZyYW5jZUNvbm5lY3Q=",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/lampegerare",
+          "userType": null,
+          "username": "LAMPE Gerare",
+          "websiteUrl": null,
+        },
+      },
+      Object {
         "cursor": "YToyOntpOjA7aToxNTgzODI5MDAwMDAwO2k6MTtzOjI2OiJ1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
         "node": Object {
           "biography": "Je suis créé via france connect",
@@ -20,7 +43,7 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
+          "updatedAt": "2020-03-10 09:30:00",
           "url": "https://capco.test/profile/lampegeraldine",
           "userType": null,
           "username": "LAMPE Geraldine",
@@ -185,6 +208,31 @@ Object {
           "url": "https://capco.test/profile/omar3rem",
           "userType": null,
           "username": "Omar <3 Rem",
+          "websiteUrl": null,
+        },
+      },
+      Object {
+        "cursor": "YToyOntpOjA7aToxNTM2MTMyNjAwMDAwO2k6MTtzOjE4OiJ1c2VySmVhbkR1cGxpY2F0ZXMiO30=",
+        "node": Object {
+          "biography": "Yrf pungf qbzvarebag ovragbg yr zbaqr.",
+          "consentInternalCommunication": null,
+          "createdAt": "2018-09-05 09:30:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VySmVhbkR1cGxpY2F0ZXM=",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/juan",
+          "userType": Object {
+            "name": "Citoyen",
+          },
+          "username": "Juan",
           "websiteUrl": null,
         },
       },
@@ -2438,64 +2486,14 @@ Object {
           "websiteUrl": null,
         },
       },
-      Object {
-        "cursor": "YToyOntpOjA7aToxNDgzMjMxODAwMDAwO2k6MTtzOjc6InVzZXIxMTAiO30=",
-        "node": Object {
-          "biography": null,
-          "consentInternalCommunication": null,
-          "createdAt": "2017-01-01 01:50:00",
-          "deletedAccountAt": null,
-          "email": null,
-          "enabled": true,
-          "facebookUrl": null,
-          "id": "VXNlcjp1c2VyMTEw",
-          "linkedInUrl": null,
-          "responses": Object {
-            "edges": Array [],
-          },
-          "twitterUrl": null,
-          "updatedAt": null,
-          "url": "https://capco.test/profile/user110",
-          "userType": Object {
-            "name": "Citoyen",
-          },
-          "username": "user110",
-          "websiteUrl": null,
-        },
-      },
-      Object {
-        "cursor": "YToyOntpOjA7aToxNDgzMjMxNzQwMDAwO2k6MTtzOjc6InVzZXIxMDkiO30=",
-        "node": Object {
-          "biography": null,
-          "consentInternalCommunication": null,
-          "createdAt": "2017-01-01 01:49:00",
-          "deletedAccountAt": null,
-          "email": null,
-          "enabled": true,
-          "facebookUrl": null,
-          "id": "VXNlcjp1c2VyMTA5",
-          "linkedInUrl": null,
-          "responses": Object {
-            "edges": Array [],
-          },
-          "twitterUrl": null,
-          "updatedAt": null,
-          "url": "https://capco.test/profile/user109",
-          "userType": Object {
-            "name": "Citoyen",
-          },
-          "username": "user109",
-          "websiteUrl": null,
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YToyOntpOjA7aToxNDgzMjMxNzQwMDAwO2k6MTtzOjc6InVzZXIxMDkiO30=",
+      "endCursor": "YToyOntpOjA7aToxNDgzMjMxODYwMDAwO2k6MTtzOjc6InVzZXIxMTEiO30=",
       "hasNextPage": true,
       "hasPreviousPage": false,
-      "startCursor": "YToyOntpOjA7aToxNTgzODI5MDAwMDAwO2k6MTtzOjI2OiJ1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
+      "startCursor": "YToyOntpOjA7aToxNTg2NTAzODAwMDAwO2k6MTtzOjM2OiJkdXBsaWNhdGVzVXNlckNvbm5lY3RlZEZyYW5jZUNvbm5lY3QiO30=",
     },
-    "totalCount": 226,
+    "totalCount": 228,
   },
 }
 `;
@@ -2504,6 +2502,12 @@ exports[`Preview|Query.users connection fetches the five first users, including 
 Object {
   "users": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "_id": "duplicatesUserConnectedFranceConnect",
+          "isSuperAdmin": false,
+        },
+      },
       Object {
         "node": Object {
           "_id": "userConnectedFranceConnect",
@@ -2528,12 +2532,6 @@ Object {
           "isSuperAdmin": true,
         },
       },
-      Object {
-        "node": Object {
-          "_id": "userMickael",
-          "isSuperAdmin": false,
-        },
-      },
     ],
   },
 }
@@ -2543,6 +2541,12 @@ exports[`Preview|Query.users connection fetches the five last users 1`] = `
 Object {
   "users": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "_id": "duplicatesUserConnectedFranceConnect",
+          "createdAt": "2020-04-10 09:30:00",
+        },
+      },
       Object {
         "node": Object {
           "_id": "userConnectedFranceConnect",
@@ -2565,12 +2569,6 @@ Object {
         "node": Object {
           "_id": "userMickael",
           "createdAt": "2019-11-04 09:30:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "userAgui",
-          "createdAt": "2019-09-09 09:30:00",
         },
       },
     ],
@@ -2714,7 +2712,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxNjEiO30=",
     },
-    "totalCount": 226,
+    "totalCount": 228,
   },
 }
 `;

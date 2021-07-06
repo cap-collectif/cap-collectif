@@ -964,7 +964,7 @@ Object {
         },
         Object {
           "key": "2018-09-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 2,
         },
         Object {
           "key": "2018-10-01T00:00:00.000Z",
@@ -1037,6 +1037,10 @@ Object {
         Object {
           "key": "2020-03-01T00:00:00.000Z",
           "totalCount": 3,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 1,
         },
       ],
     },
@@ -2428,7 +2432,7 @@ Object {
         },
         Object {
           "key": "2018-09-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 2,
         },
         Object {
           "key": "2018-10-01T00:00:00.000Z",
@@ -2501,6 +2505,10 @@ Object {
         Object {
           "key": "2020-03-01T00:00:00.000Z",
           "totalCount": 3,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 1,
         },
       ],
     },

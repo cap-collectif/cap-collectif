@@ -88,3 +88,7 @@ services:
     Capco\AppBundle\Command\ImportIDFProposalsFromCsvCommand:
         arguments:
             $name: 'capco:import:idf-proposals'
+
+    Capco\AppBundle\Command\Migrations\FindDuplicatesSsoUsersCommand:
+        arguments:
+            $name: 'capco:find:duplicate-sso'

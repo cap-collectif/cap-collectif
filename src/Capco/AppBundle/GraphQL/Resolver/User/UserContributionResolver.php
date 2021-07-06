@@ -17,7 +17,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
 {
     use ContainerAwareTrait;
 
-    private $contributionSearch;
+    private ContributionSearch $contributionSearch;
 
     public function __construct(ContributionSearch $contributionSearch)
     {
@@ -39,7 +39,7 @@ class UserContributionResolver implements ContainerAwareInterface, ResolverInter
             $args->offsetGet('contribuableId'),
             $args->offsetGet('includeTrashed'),
             $args->offsetGet('orderBy')['field'],
-            $args->offsetGet('orderBy')['direction']
+            $args->offsetGet('orderBy')['direction'],
         ];
 
         $order = ContributionSearch::findOrderFromFieldAndDirection($field, $direction);
