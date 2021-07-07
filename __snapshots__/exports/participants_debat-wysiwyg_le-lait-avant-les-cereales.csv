@@ -1,3 +1,3 @@
-﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_dateOfBirth,user_websiteUrl,user_biography,user_address,user_zipCode,user_city,user_phone,user_profileUrl
-VXNlcjp1c2VyNDM=,user43@cap-collectif.com,user43,Citoyen,"2017-01-01 00:43:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user43
-VXNlcjp1c2VyNDI=,user42@cap-collectif.com,user42,Citoyen,"2017-01-01 00:42:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user42
+﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_websiteUrl,user_biography,user_zipCode,user_city,user_firstname,user_lastname,user_dateOfBirth,user_postalAddress,user_phone,user_profileUrl
+VXNlcjp1c2VyNDM=,user43@cap-collectif.com,user43,Citoyen,"2017-01-01 00:43:00",,,Utilisateur,,1,1,,,,,,,,firstname43,lastname43,,,,https://capco.dev/profile/user43
+VXNlcjp1c2VyNDI=,user42@cap-collectif.com,user42,Citoyen,"2017-01-01 00:42:00",,,Utilisateur,,1,1,,,,,,,,firstname42,lastname42,,,,https://capco.dev/profile/user42

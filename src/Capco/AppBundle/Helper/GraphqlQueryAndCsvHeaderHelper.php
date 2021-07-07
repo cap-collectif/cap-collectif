@@ -21,9 +21,14 @@ class GraphqlQueryAndCsvHeaderHelper
     locked
     phoneConfirmed
     gender
+    firstname
+    lastname
     dateOfBirth
     websiteUrl
     biography
+    postalAddress {
+      formatted
+    }
     address
     zipCode
     city
@@ -46,12 +51,14 @@ class GraphqlQueryAndCsvHeaderHelper
         'user_locked',
         'user_phoneConfirmed',
         'user_gender',
-        'user_dateOfBirth',
         'user_websiteUrl',
         'user_biography',
-        'user_address',
         'user_zipCode',
         'user_city',
+        'user_firstname',
+        'user_lastname',
+        'user_dateOfBirth',
+        'user_postalAddress',
         'user_phone',
         'user_profileUrl',
     ];

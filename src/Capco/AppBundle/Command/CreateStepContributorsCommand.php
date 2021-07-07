@@ -22,12 +22,12 @@ class CreateStepContributorsCommand extends BaseExportCommand
     use SnapshotCommandTrait;
     protected static $defaultName = 'capco:export:step-contributors';
 
-    private $toggleManager;
-    private $connectionTraversor;
-    private $executor;
-    private $logger;
-    private $projectRootDir;
-    private $stepRepository;
+    private Manager $toggleManager;
+    private ConnectionTraversor $connectionTraversor;
+    private Executor $executor;
+    private LoggerInterface $logger;
+    private string $projectRootDir;
+    private AbstractStepRepository $stepRepository;
 
     public function __construct(
         GraphQlAclListener $listener,
@@ -120,12 +120,16 @@ class CreateStepContributorsCommand extends BaseExportCommand
                         $contributor['locked'],
                         $contributor['phoneConfirmed'],
                         $contributor['gender'],
-                        $contributor['dateOfBirth'],
                         $contributor['websiteUrl'],
                         $contributor['biography'],
-                        $contributor['address'],
                         $contributor['zipCode'],
                         $contributor['city'],
+                        $contributor['firstname'],
+                        $contributor['lastname'],
+                        $contributor['dateOfBirth'],
+                        $contributor['postalAddress']
+                            ? $contributor['postalAddress']['formatted']
+                            : null,
                         $contributor['phone'],
                         $contributor['url'],
                     ])
