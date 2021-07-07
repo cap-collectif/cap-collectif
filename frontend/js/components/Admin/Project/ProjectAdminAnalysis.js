@@ -831,13 +831,13 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
   };
   const [loading, setLoading] = React.useState<boolean>(false);
   const loadMore = React.useCallback(() => {
-    if (!project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage) {
+    if (!relay.hasMore()) {
       return;
     }
     relay.loadMore(PROJECT_ADMIN_PROPOSAL_LOAD_100, () => {
       loadMore();
     });
-  }, [relay, project]);
+  }, [relay]);
 
   const loadAll = React.useCallback(() => {
     if (!loading) {
@@ -856,11 +856,11 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
   }, [intl, loadMore, loading, project]);
 
   React.useEffect(() => {
-    if (!loading || !project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage) {
+    if (!loading || !relay.hasMore() || !relay.isLoading()) {
       clearToasts();
     }
     loadAll();
-  }, [loading, loadAll, project]);
+  }, [loading, loadAll, relay]);
 
   return (
     <AnalysisPickableListContainer>

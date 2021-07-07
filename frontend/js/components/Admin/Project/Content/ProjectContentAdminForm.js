@@ -100,7 +100,6 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
   React.useEffect(() => {
     clearToasts();
   });
-
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">

@@ -575,13 +575,13 @@ export const ProjectAdminProposals = ({
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const loadMore = React.useCallback(() => {
-    if (!project.proposals.pageInfo.hasNextPage) {
+    if (!relay.hasMore() || relay.isLoading()) {
       return;
     }
     relay.loadMore(PROJECT_ADMIN_PROPOSAL_LOAD_100, () => {
       loadMore();
     });
-  }, [project.proposals.pageInfo.hasNextPage, relay]);
+  }, [relay]);
 
   const loadAll = React.useCallback(() => {
     if (!loading) {
@@ -598,11 +598,11 @@ export const ProjectAdminProposals = ({
   }, [intl, loadMore, project, loading]);
 
   React.useEffect(() => {
-    if (!loading || !project.proposals.pageInfo.hasNextPage) {
+    if (!loading || !relay.hasMore() || !relay.isLoading()) {
       clearToasts();
     }
     loadAll();
-  }, [loadAll, loading, project]);
+  }, [loadAll, loading, relay]);
 
   const isInteractive =
     parameters.filters.state !== 'ALL' &&
