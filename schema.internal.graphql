@@ -6619,6 +6619,9 @@ type Mutation {
 
   """select a senderEmail as the one to send emails"""
   selectSenderEmail(input: SelectSenderEmailInput!): SelectSenderEmailPayload
+
+  """update a SiteParameter."""
+  updateSiteParameter(input: UpdateSiteParameterInput!): UpdateSiteParameterPayload
 }
 
 """A connection to a list of items."""
@@ -13916,6 +13919,42 @@ input UpdateShieldAdminFormTranslationInput {
 
   """Introduction text to show on shield page."""
   introduction: HTML
+}
+
+"""Available errors for an `updateSiteParameter` mutation."""
+enum UpdateSiteParameterErrorCode {
+  """The given value is invalid."""
+  INVALID_VALUE
+}
+
+input UpdateSiteParameterInput {
+  """The keyname of the SiteParameter to be updated"""
+  keyname: UpdateSiteParameterKeyname!
+
+  """The new value fo the SiteParameter."""
+  value: String!
+
+  """The locale of the new value, if relevant."""
+  locale: String
+  clientMutationId: String
+}
+
+"""Available keynames for an `updateSiteParameter` mutation."""
+enum UpdateSiteParameterKeyname {
+  """Give the user the `ROLE_USER` role."""
+  RECEIVE_ADDRESS
+
+  """Give the user the `ROLE_ADMIN` role."""
+  SEND_NAME
+}
+
+type UpdateSiteParameterPayload {
+  """The updated SiteParameter."""
+  siteParameter: SiteParameter
+
+  """The error generated, if any."""
+  errorCode: UpdateSiteParameterErrorCode
+  clientMutationId: String
 }
 
 input UpdateUserAccountInput {

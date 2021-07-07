@@ -1,0 +1,14 @@
+UpdateSiteParameterInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateSiteParameter mutation.'
+        fields:
+            keyname:
+                type: 'UpdateSiteParameterKeyname!'
+                description: 'The keyname of the SiteParameter to be updated'
+            value:
+                type: 'String!'
+                description: 'The new value fo the SiteParameter.'
+            locale:
+                type: 'String'
+                description: 'The locale of the new value, if relevant.'

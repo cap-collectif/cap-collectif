@@ -1,0 +1,10 @@
+UpdateSiteParameterPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteParameter:
+                type: 'SiteParameter'
+                description: 'The updated SiteParameter.'
+            errorCode:
+                type: 'UpdateSiteParameterErrorCode'
+                description: 'The error generated, if any.'

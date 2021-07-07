@@ -1293,3 +1293,11 @@ InternalMutation:
                     inputType: SelectSenderEmailInput
                     payloadType: SelectSenderEmailPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\SelectSenderEmailMutation", [value])'
+            updateSiteParameter:
+                description: 'update a SiteParameter.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateSiteParameterInput
+                    payloadType: UpdateSiteParameterPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSiteParameterMutation", [value])'
