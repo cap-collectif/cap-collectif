@@ -21,6 +21,7 @@ exports[`<ProjectCard /> should render correctly 1`] = `
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
       _css2={null}
+      _css3={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -164,6 +165,7 @@ exports[`<ProjectCard /> should render correctly an archived project 1`] = `
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
       _css2="grayscale(1)"
+      _css3="50%"
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -336,6 +338,7 @@ exports[`<ProjectCard /> should render correctly an external project 1`] = `
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
       _css2={null}
+      _css3={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -479,6 +482,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
       _css2={null}
+      _css3={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -651,6 +655,7 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
       _css2={null}
+      _css3={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -859,6 +864,7 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
     <ProjectCard___StyledAppBox2
       _css="#e5e5e5"
       _css2={null}
+      _css3={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -1035,6 +1041,7 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
     <ProjectCard___StyledAppBox2
       _css="url(/cover.jpg)"
       _css2={null}
+      _css3={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"

@@ -53,6 +53,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
             background: project.cover?.url ? `url(${project.cover?.url})` : backgroundColor,
             backgroundSize: 'cover',
             filter: project.archived ? 'grayscale(1)' : null,
+            opacity: project.archived ? '50%' : null,
           }}
           position="relative"
           width="100%"
