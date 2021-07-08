@@ -1,5 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses with textValue 1`] = `
+Object {
+  "question": Object {
+    "choices": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "responses": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "value": "\\"Sans profession\\"",
+                  },
+                },
+              ],
+              "totalCount": 1,
+            },
+            "title": "Sans profession",
+          },
+        },
+        Object {
+          "node": Object {
+            "responses": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "value": "\\"Profession libérale\\"",
+                  },
+                },
+              ],
+              "totalCount": 1,
+            },
+            "title": "Profession libérale",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
 exports[`MultipleChoiceQuestion.responses array fetches a multiple choice question's responses: 13 1`] = `
 Object {
   "node": Object {

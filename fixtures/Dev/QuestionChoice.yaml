@@ -1035,3 +1035,15 @@ Capco\AppBundle\Entity\QuestionChoice:
         color: '#FF7400'
         position: 4
         question: '@questionnaireProjectOwnerQuestionFoodApple'
+    questionChoice133:
+        id: 'questionChoice133'
+        title: 'Sans profession'
+        color: '#FF7400'
+        position: 1
+        question: '@xQuestion18'
+    questionChoice134:
+        id: 'questionChoice135'
+        title: 'Profession libérale'
+        color: '#FF4D00'
+        position: 2
+        question: '@xQuestion18'

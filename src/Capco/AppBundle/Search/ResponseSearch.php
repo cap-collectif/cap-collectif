@@ -131,12 +131,7 @@ class ResponseSearch extends Search
                         new Query\Terms('objectValue.labels', [$questionChoice->getTitle()])
                     ),
                 (new BoolQuery())->addFilter(
-                    (new Query\Match())
-                        ->setFieldQuery(
-                            'textValue',
-                            Sanitizer::escape($questionChoice->getTitle(), [' '])
-                        )
-                        ->setFieldOperator('textValue', Query\Match::OPERATOR_AND)
+                    new Query\Term(['textValue.key' => $questionChoice->getTitle()])
                 ),
             ])
         );

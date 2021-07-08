@@ -396,3 +396,9 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
         title: Quel type de pomme es-tu ?
         required: true
         type: 8 # button
+    xQuestion18:
+        id: 3944
+        title: Votre catégorie socio-professionnel
+        required: false
+        type: 8
+        randomQuestionChoices: false

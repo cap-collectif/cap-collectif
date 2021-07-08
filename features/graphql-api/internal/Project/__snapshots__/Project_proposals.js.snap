@@ -1058,6 +1058,10 @@ Object {
             "formattedValue": "Il bluffe",
             "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
           },
+          Object {
+            "formattedValue": "Sans profession",
+            "value": "\\"Sans profession\\"",
+          },
         ],
         "title": "Proposition plus votable",
       },

@@ -139,6 +139,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -238,6 +246,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -339,6 +355,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -438,6 +462,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -539,6 +571,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -638,6 +678,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -739,6 +787,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -838,6 +894,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -939,6 +1003,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -1038,6 +1110,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -1139,6 +1219,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -1238,6 +1326,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -1339,6 +1435,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -1438,6 +1542,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2020-02-12 00:00:00",
@@ -1539,6 +1651,14 @@ Object {
                 },
                 "value": null,
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2020-02-12 00:00:00",
           },
@@ -1638,6 +1758,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2019-03-20 00:00:00",
@@ -1746,6 +1874,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "\\"Profession libérale\\"",
               },
             ],
             "updatedAt": "2019-03-06 00:00:00",
@@ -1863,6 +1999,14 @@ Object {
                 },
                 "value": "0",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "\\"Sans profession\\"",
+              },
             ],
             "updatedAt": "2019-03-02 00:00:00",
           },
@@ -1962,6 +2106,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "0",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -2063,6 +2215,14 @@ Object {
                 },
                 "value": "0",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -2162,6 +2322,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "1",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -2263,6 +2431,14 @@ Object {
                 },
                 "value": "1",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -2362,6 +2538,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "1",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -2463,6 +2647,14 @@ Object {
                 },
                 "value": "1",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -2562,6 +2754,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "3",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -2663,6 +2863,14 @@ Object {
                 },
                 "value": "3",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -2762,6 +2970,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "4",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -2863,6 +3079,14 @@ Object {
                 },
                 "value": "4",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -2962,6 +3186,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "4",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -3063,6 +3295,14 @@ Object {
                 },
                 "value": "0",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -3162,6 +3402,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": "0",
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-02 00:00:00",
@@ -3263,6 +3511,14 @@ Object {
                 },
                 "value": "0",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -3363,6 +3619,14 @@ Object {
                 },
                 "value": "0",
               },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
+              },
             ],
             "updatedAt": "2016-03-02 00:00:00",
           },
@@ -3462,6 +3726,14 @@ Object {
                   "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
                 },
                 "value": null,
+              },
+              Object {
+                "question": Object {
+                  "__typename": "MultipleChoiceQuestion",
+                  "id": "UXVlc3Rpb246Mzk0NA==",
+                  "title": "Votre catégorie socio-professionnel",
+                },
+                "value": "{\\"labels\\":[],\\"other\\":null}",
               },
             ],
             "updatedAt": "2016-03-01 00:00:00",

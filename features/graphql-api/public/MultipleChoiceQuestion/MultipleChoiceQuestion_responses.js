@@ -18,6 +18,33 @@ const MultipleChoiceQuestionResponsesQuery = /* GraphQL */ `
   }
 `;
 
+const QuestionChoiceResponsesQuery = /* GraphQL */ `
+  query QuestionResponsesQuery($id: ID!) {
+    question: node(id: $id) {
+      ... on MultipleChoiceQuestion {
+        choices {
+          totalCount
+          edges {
+            node {
+              title
+              responses {
+                totalCount
+                edges {
+                  node {
+                    ... on ValueResponse {
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('MultipleChoiceQuestion.responses array', () => {
   it("fetches a multiple choice question's responses", async () => {
     await global.asyncForEach(
@@ -34,5 +61,17 @@ describe('MultipleChoiceQuestion.responses array', () => {
         ).resolves.toMatchSnapshot(id);
       },
     );
+  });
+
+  it("fetches a multiple choice question's responses with textValue", async () => {
+    await expect(
+      graphql(
+        QuestionChoiceResponsesQuery,
+        {
+          id: 3944,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
   });
 });

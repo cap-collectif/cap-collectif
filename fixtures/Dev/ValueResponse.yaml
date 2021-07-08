@@ -245,6 +245,17 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         reply: '@reply2'
         value: { 'labels': ['Il bluffe'], 'other': null }
         createdAt: <(new \DateTime('2021-01-01 02:47:00'))>
+    response47:
+        question: '@xQuestion18'
+        proposal: '@proposal12'
+        reply: '@reply2'
+        value: 'Sans profession'
+        createdAt: <(new \DateTime('2021-01-01 02:47:00'))>
+    response48:
+        question: '@xQuestion18'
+        reply: '@reply6'
+        value: 'Profession libérale'
+        createdAt: <(new \DateTime('2021-01-01 02:27:00'))>
 
     response1IdfProposal1:
         question: '@xQuestionIdfGrandOrLocal'

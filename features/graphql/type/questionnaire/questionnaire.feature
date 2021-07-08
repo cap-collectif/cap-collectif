@@ -21,16 +21,17 @@ Scenario: GraphQL client wants to retrieve questions
     "data": {
       "questionnaire": {
         "questions": [
-          {"id":"UXVlc3Rpb246Mg=="},
-          {"id":"UXVlc3Rpb246MTM="},
-          {"id":"UXVlc3Rpb246MTQ="},
-          {"id":"UXVlc3Rpb246MTU="},
-          {"id":"UXVlc3Rpb246MTY="},
-          {"id":"UXVlc3Rpb246MTg="},
-          {"id":"UXVlc3Rpb246MTk="},
-          {"id":"UXVlc3Rpb246MzAx"},
-          {"id":"UXVlc3Rpb246MzAy"},
-          {"id":"UXVlc3Rpb246MTM4NQ=="}
+          {"id": "UXVlc3Rpb246Mg=="},
+          {"id": "UXVlc3Rpb246MTM="},
+          {"id": "UXVlc3Rpb246MTQ="},
+          {"id": "UXVlc3Rpb246MTU="},
+          {"id": "UXVlc3Rpb246MTY="},
+          {"id": "UXVlc3Rpb246MTg="},
+          {"id": "UXVlc3Rpb246MTk="},
+          {"id": "UXVlc3Rpb246MzAx"},
+          {"id": "UXVlc3Rpb246MzAy"},
+          {"id": "UXVlc3Rpb246MTM4NQ=="},
+          {"id": "UXVlc3Rpb246Mzk0NA=="}
         ]
       }
     }
@@ -171,6 +172,12 @@ Scenario: GraphQL client wants to get question's participants with users not con
               "id": "UXVlc3Rpb246MTM4NQ==",
               "participants": {
                 "totalCount": 16
+              }
+            },
+            {
+              "id": "UXVlc3Rpb246Mzk0NA==",
+              "participants": {
+                "totalCount": 2
               }
             }
           ]

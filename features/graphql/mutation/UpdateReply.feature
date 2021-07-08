@@ -121,6 +121,12 @@ Scenario: Author wants to update his reply
                 "id": "UXVlc3Rpb246MTM4NQ=="
               },
               "value": "0"
+            },
+            {
+              "question":{
+                "id":"UXVlc3Rpb246Mzk0NA=="
+              },
+              "value":"\u0022Sans profession\u0022"
             }
           ]
         }
@@ -239,6 +245,12 @@ Scenario: User wants to published a reply in draft
                      "id":"UXVlc3Rpb246MTM4NQ=="
                   },
                   "value":null
+               },
+               {
+                  "question":{
+                    "id":"UXVlc3Rpb246Mzk0NA=="
+                  },
+                  "value":"{\u0022labels\u0022:[],\u0022other\u0022:null}"
                }
             ]
          }

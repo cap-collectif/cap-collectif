@@ -38,7 +38,8 @@ class AbstractResponseNormalizer implements
         $data = $this->normalizer->normalize($object, $format, $context);
         if (!($object instanceof MediaResponse)) {
             if (\is_string($responseValue = $object->getValue())) {
-                $data['textValue'] = $responseValue;
+                // We do not need HTML tags in ES.
+                $data['textValue'] = strip_tags($responseValue);
             } else {
                 $data['objectValue'] = $responseValue;
             }

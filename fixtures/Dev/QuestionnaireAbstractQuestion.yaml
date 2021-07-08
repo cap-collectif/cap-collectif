@@ -655,6 +655,10 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaire1'
         question: '@majorityDecisionWeeb'
         position: 10
+    qaq67:
+        questionnaire: '@questionnaire1'
+        question: '@xQuestion18'
+        position: 11
     qaqFood1:
         questionnaire: '@questionnaireFood'
         question: '@simplequestionFood1'
