@@ -16,7 +16,7 @@ type ThProps = {|
   ...AppBoxProps,
   isNumeric?: boolean,
   noPlaceholder?: boolean,
-  children: React.Node | (({ styles: DefaultStyles }) => React.Node),
+  children?: React.Node | (({ styles: DefaultStyles }) => React.Node),
 |};
 
 const styles: DefaultStyles = {

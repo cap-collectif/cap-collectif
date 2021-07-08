@@ -37,6 +37,7 @@ import UserInviteAdminPageApp from '~/startup/UserInviteAdminPageApp';
 import EmailingListPageApp from '~/startup/EmailingListPageApp';
 import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp';
 import EmailingMailParameterPageApp from '~/startup/EmailingMailParameterPageApp';
+import EmailingParametersPageApp from '~/startup/EmailingParametersPageApp';
 import ToastsContainerApp from '~/startup/ToastsContainerApp';
 import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsSectionConfigurationApp';
 import SidebarApp from '~/startup/SidebarApp';
@@ -82,6 +83,7 @@ ReactOnRails.register({
   EmailingListPageApp,
   EmailingCampaignPageApp,
   EmailingMailParameterPageApp,
+  EmailingParametersPageApp,
   SidebarApp,
   DashboardPageApp,
 });

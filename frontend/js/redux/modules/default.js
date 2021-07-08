@@ -95,6 +95,7 @@ export const features: FeatureToggles = {
   unstable__analysis: false,
   majority_vote_question: false,
   unstable__emailing: false,
+  unstable__emailing_parameters: false,
   proposal_revisions: false,
   unstable__debate: false,
   unstable__tipsmeee: false,

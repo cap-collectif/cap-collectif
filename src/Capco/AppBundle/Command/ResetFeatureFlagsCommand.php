@@ -95,6 +95,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('remind_user_account_confirmation');
         $this->manager->activate('unstable__remote_events');
         $this->manager->deactivate('unstable__emailing');
+        $this->manager->deactivate(Manager::unstable__emailing_parameters);
         $this->manager->activate(Manager::unstable__debate);
         $this->manager->activate(Manager::proposal_revisions);
         $this->manager->activate(Manager::unstable__new_consultation_page);

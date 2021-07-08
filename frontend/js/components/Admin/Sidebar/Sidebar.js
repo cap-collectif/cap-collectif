@@ -346,6 +346,12 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin-menu-campaign-list" href="/admin/mailingCampaign/list" />
                   <SidebarLink text="admin-menu-emailing-list" href="/admin/mailingList/list" />
+                  {features.unstable__emailing_parameters ? (
+                    <SidebarLink
+                      text="admin-menu-parameters"
+                      href="/admin/mailingParameters/list"
+                    />
+                  ) : null}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

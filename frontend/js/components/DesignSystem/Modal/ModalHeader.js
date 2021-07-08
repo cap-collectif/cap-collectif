@@ -5,7 +5,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Icon from '~ds/Icon/Icon';
 import Button from '~ds/Button/Button';
 import type { FlexProps } from '~ui/Primitives/Layout/Flex';
-import AppBox from '~ui/Primitives/AppBox';
+import ModalHeaderLabel from './ModalHeaderLabel';
 import { useModal } from '~ds/Modal/Modal.context';
 
 type Props = {|
@@ -17,7 +17,8 @@ const ModalHeader = ({ children, ...rest }: Props) => {
   const { hide, hideCloseButton } = useModal();
   return (
     <Flex as="header" p={6} pb={0} align="center" {...rest}>
-      <AppBox
+      <Flex
+        direction="column"
         flex={1}
         css={css({
           'h1, h2, h3, h4, h5, h6': {
@@ -29,7 +30,7 @@ const ModalHeader = ({ children, ...rest }: Props) => {
           },
         })}>
         {children}
-      </AppBox>
+      </Flex>
       {!hideCloseButton && (
         <Button p={0} variantSize="medium" onClick={hide}>
           <Icon name="CROSS" />
@@ -40,5 +41,6 @@ const ModalHeader = ({ children, ...rest }: Props) => {
 };
 
 ModalHeader.displayName = 'Modal.Header';
+ModalHeader.Label = ModalHeaderLabel;
 
 export default ModalHeader;

@@ -36,7 +36,7 @@ exports[`<ModalSectionPageViews /> <TestModalSectionPageViews /> should render c
         className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gwSffl"
       >
         <div
-          className="sc-bdnylx ModalHeader___StyledAppBox-sc-1yfwqjx-0 inwnda hSCmWF"
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm ModalHeader___StyledFlex-sc-1yfwqjx-0 cibXUu"
         >
           <h4
             className="sc-bdnylx hXfmUv"

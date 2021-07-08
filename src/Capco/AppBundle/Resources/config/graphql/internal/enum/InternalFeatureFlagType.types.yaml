@@ -120,6 +120,8 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::majority_vote_question")'
             unstable__emailing:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__emailing")'
+            unstable__emailing_parameters:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__emailing_parameters")'
             unstable__debate:
                 description: 'Whether or not an admin can use `DebateStep`. Used in dev only.'
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__debate")'

@@ -409,7 +409,21 @@ services:
             - { name: sonata.admin, manager_type: orm, label: admin.label.step }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setSubClasses,[{collect_step: Capco\AppBundle\Entity\Steps\CollectStep,presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep,consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep,synthesis_step: Capco\AppBundle\Entity\Steps\SynthesisStep,ranking_step: Capco\AppBundle\Entity\Steps\RankingStep,election_step: Capco\AppBundle\Entity\Steps\SelectionStep,questionnaire_step: Capco\AppBundle\Entity\Steps\QuestionnaireStep,other_step: Capco\AppBundle\Entity\Steps\OtherStep,},],]
+            - [
+                  setSubClasses,
+                  [
+                      {
+                          collect_step: Capco\AppBundle\Entity\Steps\CollectStep,
+                          presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep,
+                          consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep,
+                          synthesis_step: Capco\AppBundle\Entity\Steps\SynthesisStep,
+                          ranking_step: Capco\AppBundle\Entity\Steps\RankingStep,
+                          election_step: Capco\AppBundle\Entity\Steps\SelectionStep,
+                          questionnaire_step: Capco\AppBundle\Entity\Steps\QuestionnaireStep,
+                          other_step: Capco\AppBundle\Entity\Steps\OtherStep,
+                      },
+                  ],
+              ]
 
     Capco\AdminBundle\Admin\ThemeAdmin:
         arguments:
@@ -611,7 +625,11 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate,['list', 'CapcoAdminBundle:Event:list.html.twig'],['create', 'CapcoAdminBundle:Event:create.html.twig'],]
+            - [
+                  setTemplate,
+                  ['list', 'CapcoAdminBundle:Event:list.html.twig'],
+                  ['create', 'CapcoAdminBundle:Event:create.html.twig'],
+              ]
 
     Capco\AdminBundle\Admin\VideoAdmin:
         arguments: [~, Capco\AppBundle\Entity\Video, Capco\AdminBundle\Controller\CRUDController]
@@ -645,7 +663,16 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setSubClasses,[{event_comment: Capco\AppBundle\Entity\EventComment,post_comment: Capco\AppBundle\Entity\PostComment,proposal_comment: Capco\AppBundle\Entity\ProposalComment,},],]
+            - [
+                  setSubClasses,
+                  [
+                      {
+                          event_comment: Capco\AppBundle\Entity\EventComment,
+                          post_comment: Capco\AppBundle\Entity\PostComment,
+                          proposal_comment: Capco\AppBundle\Entity\ProposalComment,
+                      },
+                  ],
+              ]
 
     Capco\AdminBundle\Admin\CommentVoteAdmin:
         arguments:
@@ -722,7 +749,17 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
-            - [setSubClasses,[{highlighted_post: Capco\AppBundle\Entity\HighlightedPost,highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme,highlighted_event: Capco\AppBundle\Entity\HighlightedEvent,highlighted_project: Capco\AppBundle\Entity\HighlightedProject,},],]
+            - [
+                  setSubClasses,
+                  [
+                      {
+                          highlighted_post: Capco\AppBundle\Entity\HighlightedPost,
+                          highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme,
+                          highlighted_event: Capco\AppBundle\Entity\HighlightedEvent,
+                          highlighted_project: Capco\AppBundle\Entity\HighlightedProject,
+                      },
+                  ],
+              ]
 
     Capco\AdminBundle\Admin\ProjectAbstractStepAdmin:
         arguments:
@@ -855,7 +892,11 @@ services:
 
     Capco\AdminBundle\Admin\ProjectTypeAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\ProjectType, Capco\AdminBundle\Controller\ProjectTypeController]
+            [
+                ~,
+                Capco\AppBundle\Entity\ProjectType,
+                Capco\AdminBundle\Controller\ProjectTypeController,
+            ]
         tags:
             - {
                   name: sonata.admin,
@@ -989,14 +1030,29 @@ services:
             - { name: sonata.admin, manager_type: orm, label: global-typeface }
 
     Capco\AdminBundle\Admin\EmailingListAdmin:
-        arguments: [ ~, Capco\AppBundle\Entity\EmailingList, Capco\AdminBundle\Controller\EmailingListController ]
+        arguments:
+            [
+                ~,
+                Capco\AppBundle\Entity\EmailingList,
+                Capco\AdminBundle\Controller\EmailingListController,
+            ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-emailing-list }
 
     Capco\AdminBundle\Admin\EmailingCampaignAdmin:
-        arguments: [ ~, Capco\AppBundle\Entity\EmailingCampaign, Capco\AdminBundle\Controller\EmailingCampaignController ]
+        arguments:
+            [
+                ~,
+                Capco\AppBundle\Entity\EmailingCampaign,
+                Capco\AdminBundle\Controller\EmailingCampaignController,
+            ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-campaign-list }
+
+    Capco\AdminBundle\Admin\EmailingParametersAdmin:
+        arguments: [~, ~, Capco\AdminBundle\Controller\EmailingParametersController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin-menu-parameters }
 
     Capco\AdminBundle\Admin\UserInviteAdmin:
         arguments:

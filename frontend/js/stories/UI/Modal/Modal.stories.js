@@ -35,6 +35,7 @@ const Template = (args: any) => (
         </Button>
       }>
       <Modal.Header>
+        <Modal.Header.Label>Manga</Modal.Header.Label>
         <Heading>Genshin impact</Heading>
       </Modal.Header>
       <Modal.Body>
@@ -98,6 +99,7 @@ const LongTemplate = (args: any) => (
       {({ hide }) => (
         <>
           <Modal.Header>
+            <Modal.Header.Label>Manga</Modal.Header.Label>
             <Heading>Genshin impact</Heading>
           </Modal.Header>
           <Modal.Body>
@@ -167,6 +169,7 @@ const RenderPropsTemplate = (args: any) => (
       {({ hide }) => (
         <>
           <Modal.Header>
+            <Modal.Header.Label>Manga</Modal.Header.Label>
             <Heading>Genshin impact</Heading>
           </Modal.Header>
           <Modal.Body>
@@ -205,6 +208,7 @@ const CustomTemplate = (args: any) => (
         </Button>
       }>
       <Modal.Header>
+        <Modal.Header.Label>Manga</Modal.Header.Label>
         <Heading>Genshin impact</Heading>
       </Modal.Header>
       <Modal.Body>
@@ -233,6 +237,7 @@ const ControlledTemplate = (args: any) => {
     return (
       <Modal {...args} show={show} onClose={onClose} ariaLabel="Une personne">
         <Modal.Header>
+          <Modal.Header.Label>Manga</Modal.Header.Label>
           <Heading>Salut {person.name}</Heading>
         </Modal.Header>
         <Modal.Body>

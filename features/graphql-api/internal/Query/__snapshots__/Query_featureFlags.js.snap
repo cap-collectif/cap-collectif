@@ -236,6 +236,10 @@ Object {
       "type": "unstable__emailing",
     },
     Object {
+      "enabled": false,
+      "type": "unstable__emailing_parameters",
+    },
+    Object {
       "enabled": true,
       "type": "unstable__debate",
     },

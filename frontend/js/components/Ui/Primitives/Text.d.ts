@@ -1,9 +1,9 @@
 import { PolymorphicComponent } from './AppBox'
 
-type Props = {
+export type TextProps = {
   readonly truncate?: number
 }
 
-declare const Text: PolymorphicComponent<Props>
+declare const Text: PolymorphicComponent<TextProps>
 
 export default Text

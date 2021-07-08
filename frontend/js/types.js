@@ -95,6 +95,7 @@ export type FeatureToggles = {
   report_browers_errors_to_sentry: ?boolean,
   majority_vote_question: ?boolean,
   unstable__emailing: ?boolean,
+  unstable__emailing_parameters: ?boolean,
   proposal_revisions: ?boolean,
   unstable__debate: ?boolean,
   unstable__tipsmeee: ?boolean,
