@@ -568,18 +568,22 @@ class ProposalMutation implements ContainerAwareInterface
         $messageData = ['proposalId' => $proposal->getId()];
         if ($wasDraft && !$proposal->isDraft()) {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_CREATE;
+            $sendNotification = true;
         } elseif ($wasInRevision) {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_REVISION_REVISE;
             $messageData['date'] = $now->format('Y-m-d H:i:s');
+            $sendNotification = true;
         } else {
+            $sendNotification = $viewer->isAdmin() && $author !== $viewer ? false : true;
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
             $messageData['date'] = $proposal->getUpdatedAt()->format('Y-m-d H:i:s');
         }
         $indexer = $this->container->get(Indexer::class);
-        $this->container
-            ->get('swarrot.publisher')
-            ->publish($proposalQueue, new Message(json_encode($messageData)));
-
+        if ($sendNotification) {
+            $this->container
+                ->get('swarrot.publisher')
+                ->publish($proposalQueue, new Message(json_encode($messageData)));
+        }
         if (isset($values['likers'])) {
             $this->proposalLikersDataLoader->invalidate($proposal);
         }

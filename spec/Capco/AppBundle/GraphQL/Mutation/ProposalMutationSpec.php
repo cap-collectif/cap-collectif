@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
@@ -160,7 +161,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
     }
 
-    public function it_change_content_from_revision(
+    public function it_change_content_from_revision_as_role_user(
         Argument $input,
         User $author,
         User $admin,
@@ -297,6 +298,106 @@ class ProposalMutationSpec extends ObjectBehavior
         $indexer->finishBulk()->shouldBeCalled();
 
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
+    }
+
+    public function it_change_content_as_role_admin(
+        Argument $input,
+        User $proposalAuthor,
+        User $admin,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        Proposal $proposal,
+        Form $form,
+        Indexer $indexer,
+        Publisher $publisher,
+        ProposalForm $proposalForm,
+        Container $container,
+        GlobalIdResolver $globalIdResolver,
+        ProposalSocialNetworks $proposalSocialNetworks,
+        Manager $manager
+    ) {
+        $this->setContainer($container);
+
+        $values = [];
+        $values['id'] = GlobalId::toGlobalId('Proposal', 'proposal10');
+        $values['draft'] = false;
+        $values['title'] = 'new title';
+        $container->get(Manager::class)->willReturn($manager);
+        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
+        $proposalAuthor->getId()->willReturn('userSpyl');
+        $proposalAuthor->getUsername()->willReturn('aUser');
+        $proposalAuthor->isEmailConfirmed()->willReturn(true);
+        $proposalAuthor->isAdmin()->willReturn(false);
+
+        $admin->getId()->willReturn('userMaxime');
+        $admin->getUsername()->willReturn('aUser');
+        $admin->isEmailConfirmed()->willReturn(true);
+        $admin->isAdmin()->willReturn(true);
+
+        $input->getArrayCopy()->willReturn($values);
+
+        $proposal->getId()->willReturn('proposal10');
+        $proposal->isDraft()->willReturn(false);
+        $proposal->getAuthor()->willReturn($proposalAuthor);
+        $proposal->getPublishedAt()->willReturn(new \DateTime());
+        $proposal->isTrashed()->willReturn(false);
+        $proposal->getTitle()->willReturn('Proposal modified by admin');
+        $proposal->isInRevision()->willReturn(false);
+        $proposal->canContribute($admin)->willReturn(true);
+        $proposal->setUpdateAuthor($admin)->shouldBeCalled();
+        $proposal->getUpdateAuthor()->willReturn($admin);
+        $proposal->getRevisions()->willReturn(new ArrayCollection());
+        $proposal->getProposalForm()->willReturn($proposalForm);
+        $proposal->getUpdatedAt()->willReturn(new \DateTime());
+
+        $proposalForm->isUsingFacebook()->willReturn(false);
+        $proposalForm->isUsingInstagram()->willReturn(false);
+        $proposalForm->isUsingWebPage()->willReturn(false);
+        $proposalForm->isUsingTwitter()->willReturn(false);
+        $proposalForm->isUsingYoutube()->willReturn(false);
+        $proposalForm->isUsingLinkedIn()->willReturn(false);
+
+        $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
+        $proposalSocialNetworks->getProposal()->willReturn($proposal);
+
+        $globalIdResolver->resolve($values['id'], $admin)->willReturn($proposal);
+
+        $container->get(Indexer::class)->willReturn($indexer);
+        $container->get('swarrot.publisher')->willReturn($publisher);
+
+        $formFactory
+            ->create(ProposalAdminType::class, $proposal, [
+                'proposalForm' => $proposalForm,
+                'validation_groups' => ['Default'],
+            ])
+            ->willReturn($form);
+        $publisher
+            ->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
+                \Prophecy\Argument::type(\Swarrot\Broker\Message::class)
+            )
+            ->shouldNotBeCalled();
+        $form
+            ->submit(
+                [
+                    'title' => 'new title',
+                ],
+                false
+            )
+            ->willReturn(null);
+        $form->isValid()->willReturn(true);
+        $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldNotBeCalled();
+
+        $form->remove('author')->shouldNotBeCalled();
+
+        $em->flush()->shouldBeCalled();
+
+        $indexer
+            ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
+            ->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
+
+        $this->changeContent($input, $admin)->shouldBe(['proposal' => $proposal]);
     }
 
     public function it_hydrate_social_networks(
