@@ -1208,9 +1208,9 @@ EOF;
     GROUP BY u.facebook_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.saml_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'saml'  SSO  FROM fos_user u
-    where saml_id IS NOT NULL
-    GROUP BY u.saml_id
+    select u.id as userId, u.openid_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'openId'  SSO  FROM fos_user u
+    where openid_id IS NOT NULL
+    GROUP BY u.openid_id
     HAVING duplicates > 1
 EOF;
 
@@ -1266,19 +1266,19 @@ EOF;
             ->getResult();
     }
 
-    public function findDuplicateSaml(): array
+    public function findDuplicateOpenId(): array
     {
         $qb = $this->createQueryBuilder('u');
 
         return $qb
             ->select(
                 'u.id as userId',
-                'u.samlId as saml_id',
+                'u.openId as openid_id',
                 'u.email',
                 'COUNT(u.id) as duplicates'
             )
-            ->where('u.samlId IS NOT NULL')
-            ->groupBy('u.samlId')
+            ->where('u.openId IS NOT NULL')
+            ->groupBy('u.openId')
             ->having('duplicates > 1')
             ->getQuery()
             ->getResult();
@@ -1320,14 +1320,14 @@ EOF;
             ->getResult();
     }
 
-    public function findSameSamlId(string $samlId): array
+    public function findSameOpenId(string $samlId): array
     {
         $qb = $this->createQueryBuilder('u');
 
         return $qb
-            ->select('u.id as userId', 'u.samlId as saml_id', 'u.email')
-            ->where('u.samlId = :samlId')
-            ->setParameter('samlId', $samlId)
+            ->select('u.id as userId', 'u.openId as openId_id', 'u.email')
+            ->where('u.openId = :openId')
+            ->setParameter('openId', $samlId)
             ->getQuery()
             ->getResult();
     }

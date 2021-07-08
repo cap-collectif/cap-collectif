@@ -51,8 +51,8 @@ class FindDuplicatesSsoUsersCommand extends Command
                 $users = $this->userRepository->findSameTwitterId($ssoId);
 
                 break;
-            case 'saml':
-                $users = $this->userRepository->findSameSamlId($ssoId);
+            case 'openId':
+                $users = $this->userRepository->findSameOpenId($ssoId);
 
                 break;
             default:
