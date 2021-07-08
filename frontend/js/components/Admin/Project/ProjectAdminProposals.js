@@ -647,7 +647,7 @@ export const ProjectAdminProposals = ({
             />
           </div>
           <div>
-            {features.import_proposals && <ImportButton />}
+            {features.import_proposals && selectedStepId && <ImportButton selectedStepId={selectedStepId} />}
             <NewExportButton
               disabled={!hasProposals}
               onChange={(stepSlug: string | string[]) => {

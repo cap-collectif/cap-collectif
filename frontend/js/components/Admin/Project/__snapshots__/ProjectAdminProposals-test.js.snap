@@ -3375,7 +3375,6 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
         />
       </div>
       <div>
-        <ImportButton />
         <NewExportButton
           disabled={true}
           exportableSteps={

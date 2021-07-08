@@ -14,6 +14,7 @@ services:
             $fosFormFactory: '@fos_user.resetting.form.factory'
             $fireWall: '%fos_user.firewall_name%'
             $projectDir: '%kernel.project_dir%'
+            $locale: '%locale%'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/'

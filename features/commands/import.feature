@@ -124,15 +124,15 @@ Scenario: Admin wants to import a IDF BP
 
 Scenario: Admin wants to generate csv model type to import proposals
   Given I run "capco:import-proposals:generate-header-csv proposalformIdfBP3 -d ,"
-  And exported "csv" model file with name "Formulaire_du_budget_participatif_3_de_l_Idf.csv" should match its snapshot
+  And exported "csv" model file with name "Budget_Participatif_IdF_3-Collecte_des_projets_Idf_BRP_3_vierge.csv" should match its snapshot
   Then the command exit code should be 0
 
 Scenario: Admin wants to generate csv model type to import proposals
   Given I run "capco:import-proposals:generate-header-csv proposalForm1 -d ,"
-  And exported "csv" model file with name "Collecte_des_propositions_pour_le_budget_2016_de_la_Ville_de_Rennes.csv" should match its snapshot
+  And exported "csv" model file with name "Budget_Participatif_Rennes-Collecte_des_propositions_vierge.csv" should match its snapshot
   Then the command exit code should be 0
 
 Scenario: Admin wants to generate csv model type to import proposals
   Given I run "capco:import-proposals:generate-header-csv proposalformCafetier -d ,"
-  And exported "csv" model file with name "Formulaire_du_financement_participatif_des_cafetiers.csv" should match its snapshot
+  And exported "csv" model file with name "Sauvons_nos_cafes-Soutenons_nos_bistros_et_cafes_dans_cette_periode_difficile_vierge.csv" should match its snapshot
   Then the command exit code should be 0

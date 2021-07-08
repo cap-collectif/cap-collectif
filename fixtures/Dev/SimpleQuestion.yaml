@@ -494,3 +494,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1400
         title: Type de porteur de projet
         type: 0 # text
+    simpleQuestionBP3Idf11:
+        id: 1401
+        title: Quel est l'age du capitaine
+        type: 9 # number

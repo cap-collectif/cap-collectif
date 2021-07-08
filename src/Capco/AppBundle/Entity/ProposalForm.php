@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
@@ -1055,12 +1056,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         if ($this->usingSummary) {
             $fields = array_merge($fields, ['summary']);
         }
-        if (
-            $this->getAnalysisConfiguration() &&
-            $this->getAnalysisConfiguration()->isCostEstimationEnabled()
-        ) {
-            $fields = array_merge($fields, ['estimation']);
-        }
 
         return $fields;
     }
@@ -1104,8 +1099,77 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         $fields = [];
         /** @var AbstractQuestion $question */
         foreach ($this->getRealQuestions() as $question) {
-            if (!\in_array($question->getTitle(), $fields) && $question instanceof SimpleQuestion) {
+            if (
+                !\in_array($question->getTitle(), $fields) &&
+                ($question instanceof SimpleQuestion || $question instanceof MediaQuestion)
+            ) {
                 $fields = array_merge($fields, [$question->getTitle()]);
+            }
+            if (
+                !\in_array($question->getTitle(), $fields) &&
+                $question instanceof MultipleChoiceQuestion &&
+                \in_array($question->getType(), [
+                    AbstractQuestion::QUESTION_TYPE_RADIO,
+                    AbstractQuestion::QUESTION_TYPE_SELECT,
+                    AbstractQuestion::QUESTION_TYPE_BUTTON,
+                    AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION,
+                ])
+            ) {
+                $fields = array_merge($fields, [$question->getTitle()]);
+            }
+        }
+
+        return $fields;
+    }
+
+    public function getFieldsType(Collection $questions, bool $nextChoice = false): array
+    {
+        $fields = [];
+        /** @var AbstractQuestion $question */
+        foreach ($questions as $question) {
+            if ($question instanceof SimpleQuestion || $question instanceof MediaQuestion) {
+                $type = 'texte brut';
+                if ($question instanceof MediaQuestion) {
+                    $type = 'URL';
+                } elseif (
+                    $question instanceof SimpleQuestion &&
+                    'editor' === $question->getInputType()
+                ) {
+                    $type = 'texte brut ou html';
+                } elseif (
+                    $question instanceof SimpleQuestion &&
+                    'number' === $question->getInputType()
+                ) {
+                    $type = 'nombre';
+                } elseif (
+                    AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
+                ) {
+                    $type = $nextChoice ? 'bien' : 'très bien';
+                }
+
+                $fields[$question->getTitle()] = $type;
+
+                continue;
+            }
+            if (
+                $question instanceof MultipleChoiceQuestion &&
+                \in_array($question->getType(), [
+                    AbstractQuestion::QUESTION_TYPE_RADIO,
+                    AbstractQuestion::QUESTION_TYPE_SELECT,
+                    AbstractQuestion::QUESTION_TYPE_BUTTON,
+                    AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION,
+                ])
+            ) {
+                $choices = $question->getChoices()->toArray();
+                $type =
+                    $nextChoice && \count($choices) > 1
+                        ? $choices[1]->getTitle()
+                        : $question
+                            ->getChoices()
+                            ->first()
+                            ->getTitle();
+
+                $fields[$question->getTitle()] = $type;
             }
         }
 

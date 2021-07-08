@@ -184,6 +184,11 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         );
     }
 
+    public function getProposalFormId()
+    {
+        return $this->getProposalForm()->getId();
+    }
+
     public function getProposals()
     {
         $proposals = [];

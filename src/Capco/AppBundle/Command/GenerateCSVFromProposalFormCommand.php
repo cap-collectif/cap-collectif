@@ -23,17 +23,20 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
     protected string $projectRootDir;
     private ProposalFormRepository $proposalFormRepository;
     private ThemeRepository $themeRepository;
+    private string $locale;
 
     public function __construct(
         ExportUtils $exportUtils,
         ProposalFormRepository $proposalFormRepository,
         ThemeRepository $themeRepository,
-        string $projectRootDir
+        string $projectRootDir,
+        string $locale
     ) {
         parent::__construct($exportUtils);
         $this->projectRootDir = $projectRootDir;
         $this->proposalFormRepository = $proposalFormRepository;
         $this->themeRepository = $themeRepository;
+        $this->locale = $locale;
     }
 
     protected function configure(): void
@@ -72,7 +75,13 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
             return 1;
         }
 
-        $filename = Text::sanitizeFileName($proposalForm->getTitle()) . '.csv';
+        $filename =
+            Text::sanitizeFileName($proposalForm->getProject()->getTitle()) .
+            '-' .
+            Text::sanitizeFileName($proposalForm->getStep()->getTitle()) .
+            '_vierge.csv';
+        setlocale(\LC_CTYPE, str_replace('-', '_', $this->locale));
+        $filename = iconv('UTF-8', 'ASCII//TRANSLIT', $filename);
         $header = array_merge($proposalForm->getFieldsUsed(), $proposalForm->getCustomFields());
         $writer = WriterFactory::create('csv', $delimiter);
         $fileName = '/tmp/' . $filename;
@@ -87,34 +96,32 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
 
     private function addRowExample(
         WriterInterface &$writer,
-        array $header,
-        ProposalForm $proposalForm
+        array $initHeader,
+        ProposalForm $proposalForm,
+        $next = false
     ) {
-        $example = ['Titre de ma proposition', 'user@email.com'];
-        $bodyHtml = <<<'EOF'
-<h1>Titre</h1>  <p><br></p>  <p>Paragraphe, je suis un super paragraphe en html</p>  <p><br></p>  <p>Pragraphe 2 avec des mots <strong>gras</strong> <em>italique et </em><u>souligné.</u> En plus, j’ajoute un super <a href="https://cap-collectif.com">lien</a><u>.<br></u></p>
-EOF;
-        $category = $proposalForm->getCategories()->first()
-            ? $proposalForm
-                ->getCategories()
-                ->first()
-                ->getName()
-            : '';
+        $example = ['texte brut'];
+        $email = !$next ? 'jean.dupont@email.com' : 'julie.martin@email.com';
+        $example = array_merge($example, [$email]);
+        $categories = $proposalForm->getCategories();
+        $category = $categories->first() ? $categories->first()->getName() : '';
         $themes = $this->themeRepository->findBy([], ['createdAt' => 'ASC']);
         $theme = $themes ? $themes[0]->getTitle() : '';
-        $district = $proposalForm->getDistricts()->first()
-            ? $proposalForm
-                ->getDistricts()
-                ->first()
-                ->getName()
-            : '';
-        $header = array_flip($header);
-        if (isset($header['address'])) {
-            $example = array_merge($example, [
-                '[{"address_components":[{"long_name":"45","short_name":"45","types":["street_number"]},{"long_name":"Rue de Brest","short_name":"Rue de Brest","types":["route"]},{"long_name":"Rennes",  "short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"45 Rue de Brest, 35000 Rennes, France","geometry":{"location":{"lat":48.1133495,"lng":-1.6984153},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.11469848029149,"lng":-1.697066319708498},"southwest":{"lat":48.1120005197085,"lng":-1.699764280291502}}},"place_id":"ChIJ1wi1uoPgDkgREYKb8YA-iqY","types":["church","establishment","place_of_worship","point_of_interest"]}]',
-            ]);
+        $districts = $proposalForm->getDistricts();
+        $district = $districts->first() ? $districts->first()->getName() : '';
+        if ($next) {
+            $category = $categories->next();
+            $category = $category ? $category->getName() : '';
+            $theme = $themes && isset($themes[1]) ? $themes[1]->getTitle() : '';
+            $district = $districts->next();
+            $district = $district ? $district->getName() : '';
         }
 
+        $header = array_flip($initHeader);
+        if (isset($header['address'])) {
+            $address = !$next ? 'Format GEOJSON' : 'Tour Eiffel, 75007 Paris';
+            $example = array_merge($example, [$address]);
+        }
         if (isset($header['category'])) {
             $example = array_merge($example, [$category]);
         }
@@ -125,25 +132,28 @@ EOF;
             $example = array_merge($example, [$district]);
         }
         if (isset($header['tipsmeee'])) {
-            $example = array_merge($example, ['tipsmeeeID']);
+            $example = array_merge($example, ['code_tipsmeee']);
         }
         if (isset($header['media_url'])) {
-            $example = array_merge($example, [
-                'https://environnement.brussels/sites/default/files/user_files/images/pages/ban_inspirons_1200x628_fr.png',
-            ]);
+            $example = array_merge($example, ['URL']);
         }
         if (isset($header['body'])) {
-            $example = array_merge($example, [$bodyHtml]);
+            $example = array_merge($example, ['texte brut ou html']);
         }
         if (isset($header['summary'])) {
-            $example = array_merge($example, ['Un résumé']);
+            $example = array_merge($example, ['texte brut']);
         }
-        if (isset($header['estimation'])) {
-            $example = array_merge($example, ['1800']);
+        foreach (
+            $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next)
+            as $field => $type
+        ) {
+            $example = array_merge($example, [$type]);
         }
-        foreach ($proposalForm->getCustomFields() as $customField) {
-            $example = array_merge($example, [$customField]);
-        }
+
         $writer->addRow(WriterEntityFactory::createRowFromArray($example));
+
+        if (!$next) {
+            $this->addRowExample($writer, $initHeader, $proposalForm, true);
+        }
     }
 }

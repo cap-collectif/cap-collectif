@@ -8,6 +8,7 @@ services:
             Predis\ClientInterface: '@snc_redis.default'
             $logger: '@logger'
             $env: '%kernel.environment%'
+            $locale: '%locale%'
 
     Capco\AppBundle\Command\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
