@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Field } from 'redux-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import { Container } from '../common.style';
-import { InstructionContainer, InfoRow, InfoMailingList, ButtonMembers } from './style';
+import { InstructionContainer, ButtonMembers } from './style';
 import component from '~/components/Form/Field';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
@@ -15,6 +15,8 @@ import type { Parameter_emailingCampaign } from '~relay/Parameter_emailingCampai
 import Text from '~ui/Primitives/Text';
 import Tooltip from '~ds/Tooltip/Tooltip';
 import Flex from '~ui/Primitives/Layout/Flex';
+import AppBox from '~ui/Primitives/AppBox';
+import { LineHeight } from '~ui/Primitives/constants';
 
 export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED'];
 
@@ -133,40 +135,40 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       </Field>
 
       {hasMailingList && countUsers > 0 && (
-        <InfoMailingList>
-          <InfoRow>
-            <Flex>
-              <Icon name={ICON_NAME.USER_O} size="md" color="gray.500" />
-              <Text as="span">
-                {countUsers - countUsersRefusing}{' '}
-                <FormattedMessage
-                  id="global.members"
-                  values={{ num: countUsers - countUsersRefusing }}
-                />{' '}
-              </Text>
-              <Tooltip
-                label={intl.formatMessage(
-                  { id: 'has-consent-to-internal-email' },
-                  { num: countUsers - countUsersRefusing },
-                )}>
-                <Icon name={ICON_NAME.CIRCLE_INFO} size="md" color="blue.500" />
-              </Tooltip>
-
-              {mailingList?.project && (
-                <>
-                  <Icon name={ICON_NAME.BOOK_STAR_O} size="md" color="gray.900" />
-                  <Text as="span">{mailingList.project.title}</Text>
-                </>
+        <Flex direction="column" align="flex-start" spacing={2}>
+          <Flex>
+            <Icon name={ICON_NAME.USER_O} size="md" color="gray.500" />
+            <Text as="span">
+              {countUsers - countUsersRefusing}{' '}
+              {intl.formatMessage(
+                { id: 'global.members' },
+                { num: countUsers - countUsersRefusing },
               )}
-            </Flex>
-          </InfoRow>
+            </Text>
+            <Tooltip
+              label={intl.formatMessage(
+                { id: 'has-consent-to-internal-email' },
+                { num: countUsers - countUsersRefusing },
+              )}>
+              <AppBox lineHeight={LineHeight.Normal}>
+                <Icon name={ICON_NAME.CIRCLE_INFO} size="md" color="blue.500" />
+              </AppBox>
+            </Tooltip>
+
+            {mailingList?.project && (
+              <>
+                <Icon name={ICON_NAME.BOOK_STAR_O} size="md" color="gray.900" />
+                <Text as="span">{mailingList.project.title}</Text>
+              </>
+            )}
+          </Flex>
 
           {countUsers > 0 && countUsers > countUsersRefusing && (
             <ButtonMembers type="button" onClick={onOpen}>
               {intl.formatMessage({ id: 'consult-members' })}
             </ButtonMembers>
           )}
-        </InfoMailingList>
+        </Flex>
       )}
 
       <InstructionContainer>

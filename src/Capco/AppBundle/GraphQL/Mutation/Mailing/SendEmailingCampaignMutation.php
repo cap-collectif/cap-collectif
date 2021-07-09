@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -10,25 +11,29 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     private EmailingCampaignSender $sender;
     private EntityManagerInterface $entityManager;
+    private Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $resolver,
         EmailingCampaignSender $sender,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        Publisher $publisher
     ) {
         parent::__construct($resolver);
         $this->sender = $sender;
         $this->entityManager = $entityManager;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $emailingCampaign = null;
         $error = null;
 
         try {
@@ -52,8 +57,18 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         return $emailingCampaign;
     }
 
-    private function sendEmailingCampaign(EmailingCampaign $emailingCampaign): EmailingCampaign
+    private function sendEmailingCampaign(EmailingCampaign $emailingCampaign): void
     {
-        return $this->sender->send($emailingCampaign);
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::EMAILING_CAMPAIGN,
+            new Message(
+                json_encode([
+                    'emailingCampaignId' => $emailingCampaign->getId(),
+                ])
+            )
+        );
+
+        $emailingCampaign->setSendAt(new \DateTime());
+        $emailingCampaign->setStatus(EmailingCampaignStatus::SENT);
     }
 }

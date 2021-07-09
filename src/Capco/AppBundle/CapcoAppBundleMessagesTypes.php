@@ -38,5 +38,7 @@ final class CapcoAppBundleMessagesTypes
 
     public const REPORT = 'report';
 
+    public const EMAILING_CAMPAIGN = 'emailing.campaign';
+
     public const ELASTICSEARCH_INDEXATION = 'elasticsearch.indexation';
 }

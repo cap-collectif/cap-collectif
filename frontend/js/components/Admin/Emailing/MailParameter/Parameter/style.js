@@ -17,32 +17,6 @@ export const InstructionContainer: StyledComponent<{}, {}, HTMLDivElement> = sty
   }
 `;
 
-export const InfoMailingList: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-export const InfoRow: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 15px;
-
-  p {
-    margin: 0;
-    font-weight: 600;
-
-    & + p {
-      margin-left: 10px;
-    }
-  }
-
-  .icon {
-    margin-right: 5px;
-  }
-`;
-
 export const ButtonMembers: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   padding: 8px;
   background-color: ${colors.blue};

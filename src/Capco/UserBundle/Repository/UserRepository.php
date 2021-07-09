@@ -1142,13 +1142,20 @@ class UserRepository extends EntityRepository
 
     public function getFromInternalList(
         string $internalList,
-        bool $includeUnsubscribed = false
+        bool $includeUnsubscribed = false,
+        bool $includeSuperAdmin = false
     ): array {
         $qb = $this->createQueryBuilder('u');
-        $qb->select('u')->where('u.email IS NOT NULL');
+        $qb->select('u')
+            ->where('u.email IS NOT NULL')
+            ->where('u.enabled = 1');
 
         if (!$includeUnsubscribed) {
             $qb->andWhere('u.consentInternalCommunication = 1');
+        }
+
+        if (!$includeSuperAdmin) {
+            $qb->andWhere('u.roles NOT LIKE :role')->setParameter('role', '%ROLE_SUPER_ADMIN%');
         }
 
         if (EmailingCampaignInternalList::CONFIRMED === $internalList) {
