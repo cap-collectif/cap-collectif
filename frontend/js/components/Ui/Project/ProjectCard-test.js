@@ -14,9 +14,28 @@ describe('<ProjectCard />', () => {
     isExternal: false,
     externalLink: null,
     url: 'http://capco/project1',
+    steps: [
+      {
+        state: 'CLOSED',
+        __typename: 'PresentationStep',
+      },
+      {
+        state: 'OPENED',
+        __typename: 'ConsultationStep',
+      },
+      {
+        state: 'CLOSED',
+        __typename: 'OtherStep',
+      },
+      {
+        state: 'CLOSED',
+        __typename: 'RankingStep',
+      },
+    ],
     currentStep: {
       id: 'cstep',
       timeless: false,
+      state: 'OPENED',
       timeRange: {
         endAt: '2030-04-10 00:00:00',
       },
@@ -58,8 +77,8 @@ describe('<ProjectCard />', () => {
 
   const archivedProject = {
     ...project,
-    archived: true
-  }
+    archived: true,
+  };
 
   const projectWithoutCover = {
     ...project,

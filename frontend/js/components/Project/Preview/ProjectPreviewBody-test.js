@@ -14,6 +14,7 @@ const defaultStep = {
   },
   timeless: null,
   type: null,
+  __typename: 'PresentationStep',
   url: '',
 };
 
@@ -30,6 +31,7 @@ const closedStepComplete1 = {
     endAt: '2016-12-28T09:00:24+01:00',
   },
   type: 'presentation',
+  __typename: 'PresentationStep',
   url: 'http://capco/closed-step1/show-link',
 };
 
@@ -42,6 +44,7 @@ const closedStepComplete2 = {
     endAt: '2017-01-28T09:00:24+01:00',
   },
   type: 'presentation',
+  __typename: 'PresentationStep',
   url: 'http://capco/closed-step2/show-link',
 };
 
@@ -55,6 +58,7 @@ const openStep1 = {
   },
   timeless: false,
   type: 'collect',
+  __typename: 'CollectStep',
   url: 'http://capco/step1/show-link',
 };
 
@@ -68,6 +72,7 @@ const openStep2 = {
   },
   timeless: false,
   type: 'collect',
+  __typename: 'CollectStep',
   url: 'http://capco/step2/show-link',
 };
 
@@ -82,6 +87,7 @@ const futureStep1 = {
   title: 'Future step 1',
   state: 'FUTURE',
   type: 'presentation',
+  __typename: 'PresentationStep',
   timeRange: {
     startAt: '2017-12-20T09:00:24+01:00',
     endAt: '2017-12-28T09:00:24+01:00',
@@ -98,6 +104,7 @@ const futureStep2 = {
     endAt: '2018-01-28T09:00:24+01:00',
   },
   type: 'presentation',
+  __typename: 'PresentationStep',
   url: 'http://capco/future-step2/show-link',
 };
 
@@ -136,6 +143,7 @@ const secondTest = {
         },
         timeless: false,
         type: 'presentation',
+        __typename: 'PresentationStep',
         url: 'http://capco/step/show-link',
       },
       {
@@ -148,6 +156,7 @@ const secondTest = {
         },
         timeless: true,
         type: 'collect',
+        __typename: 'CollectStep',
         url: 'http://capco/timeless-step/show-link',
       },
       defaultFutureStep,

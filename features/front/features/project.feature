@@ -113,7 +113,7 @@ Scenario: Project can be filtered by status
   Then I should see 16 ".project-preview" elements
   And I select "step.status.closed" from react "#project-status"
   And I wait ".project-preview" to appear on current page
-  Then I should see 7 ".project-preview" elements
+  Then I should see 5 ".project-preview" elements
   And I select "ongoing-and-future" from react "#project-status"
   Then I should see 1 ".project-preview" elements
 

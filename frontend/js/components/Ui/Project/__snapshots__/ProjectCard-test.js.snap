@@ -505,7 +505,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
     >
       <Tag
         mr={1}
-        variant="aqua"
+        variant="green"
       >
         <Text
           as="span"
@@ -513,7 +513,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
           fontWeight="700"
           lineHeight="sm"
         >
-          step.status.future
+          global.new
         </Text>
       </Tag>
     </ProjectCardutils___StyledFlex>
@@ -678,7 +678,7 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
     >
       <Tag
         mr={1}
-        variant="aqua"
+        variant="green"
       >
         <Text
           as="span"
@@ -686,7 +686,7 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
           fontWeight="700"
           lineHeight="sm"
         >
-          step.status.future
+          global.new
         </Text>
       </Tag>
     </ProjectCardutils___StyledFlex>
@@ -891,7 +891,7 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
     >
       <Tag
         mr={1}
-        variant="aqua"
+        variant="green"
       >
         <Text
           as="span"
@@ -899,7 +899,7 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
           fontWeight="700"
           lineHeight="sm"
         >
-          step.status.future
+          global.new
         </Text>
       </Tag>
     </ProjectCardutils___StyledFlex>
@@ -1064,7 +1064,7 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
     >
       <Tag
         mr={1}
-        variant="aqua"
+        variant="green"
       >
         <Text
           as="span"
@@ -1072,7 +1072,7 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
           fontWeight="700"
           lineHeight="sm"
         >
-          step.status.future
+          global.new
         </Text>
       </Tag>
     </ProjectCardutils___StyledFlex>

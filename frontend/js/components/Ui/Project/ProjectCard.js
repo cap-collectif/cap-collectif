@@ -193,9 +193,14 @@ export default createFragmentContainer(
         }
         visibility
         publishedAt
+        steps {
+          state
+          __typename
+        }
         currentStep {
           id
           timeless
+          state
           timeRange {
             endAt
           }

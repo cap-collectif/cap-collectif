@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 import moment from 'moment';
 import css from '@styled-system/css';
-import type { ProjectCard_project } from '~relay/ProjectCard_project.graphql';
+import type { ProjectCard_project, StepState } from '~relay/ProjectCard_project.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
@@ -11,6 +11,11 @@ import { LineHeight } from '~ui/Primitives/constants';
 import Tag, { type TagVariant } from '~ds/Tag/Tag';
 import FormattedNumber from '~/components/Utils/FormattedNumber';
 import colors from '~/styles/modules/colors';
+
+type Steps = $ReadOnlyArray<{|
+  +state: StepState,
+  +__typename: string,
+|}>;
 
 export const formatCounter = (iconName: string, count: number, archived: boolean) => (
   <Flex direction="row" alignItems="center">
@@ -41,6 +46,20 @@ export const formatInfo = (iconName: string, text: string, archived: boolean, co
     </Text>
   </Flex>
 );
+
+const getIsFutureStep = (steps: Steps): boolean => {
+  const openedSteps = steps.filter(
+    step => step.state === 'OPENED' && step.__typename !== 'PresentationStep',
+  );
+  const futureSteps = steps.filter(
+    step => step.state === 'FUTURE' && step.__typename !== 'PresentationStep',
+  );
+  const closedSteps = steps.filter(
+    step => step.state === 'CLOSED' && step.__typename !== 'PresentationStep',
+  );
+
+  return futureSteps.length > 0 && openedSteps.length === 0 && closedSteps.length === 0;
+};
 
 export const renderTag = (
   project: ProjectCard_project,
@@ -78,18 +97,15 @@ export const renderTag = (
   const isRestricted = project.visibility !== 'PUBLIC';
   const now = moment();
   const publishedTime = now.diff(moment(project.publishedAt), 'hours');
-  if (publishedTime < 0 && isProjectsPage)
+
+  const isFutureStep = project.steps ? getIsFutureStep(project.steps) : null;
+
+  if (isFutureStep && isProjectsPage)
     return tag('aqua', intl.formatMessage({ id: 'step.status.future' }), isRestricted);
 
   if (!project.currentStep) return null;
 
-  const isStepFinished = project.currentStep
-    ? project.currentStep.timeless
-      ? false
-      : project.currentStep.timeRange?.endAt
-      ? now.isAfter(moment(project.currentStep.timeRange.endAt))
-      : false
-    : false;
+  const isStepFinished = project.currentStep.state === 'CLOSED';
 
   if (isStepFinished && isProjectsPage)
     return tag('neutral-gray', intl.formatMessage({ id: 'global.ended' }), isRestricted);

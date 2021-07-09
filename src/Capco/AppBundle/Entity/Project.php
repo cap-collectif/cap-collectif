@@ -732,18 +732,33 @@ class Project implements IndexableInterface
     public function getCurrentStep(): ?AbstractStep
     {
         foreach ($this->steps as $step) {
-            if (null !== $step && $step->getStep() && $step->getStep()->isOpen()) {
+            if (
+                null !== $step &&
+                $step->getStep() &&
+                $step->getStep()->isOpen() &&
+                'presentation' !== $step->getStep()->getType()
+            ) {
                 return $step->getStep();
             }
         }
         foreach ($this->steps as $step) {
-            if (null !== $step && $step->getStep() && $step->getStep()->isFuture()) {
+            if (
+                null !== $step &&
+                $step->getStep() &&
+                $step->getStep()->isFuture() &&
+                'presentation' !== $step->getStep()->getType()
+            ) {
                 return $step->getStep();
             }
         }
         $reversedSteps = array_reverse($this->steps->toArray());
         foreach ($reversedSteps as $step) {
-            if (null !== $step && $step->getStep() && $step->getStep()->isClosed()) {
+            if (
+                null !== $step &&
+                $step->getStep() &&
+                $step->getStep()->isClosed() &&
+                'presentation' !== $step->getStep()->getType()
+            ) {
                 return $step->getStep();
             }
         }
