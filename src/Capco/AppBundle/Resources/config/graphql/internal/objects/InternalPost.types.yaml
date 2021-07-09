@@ -23,3 +23,14 @@ InternalPost:
             viewerDidAuthor:
                 type: 'Boolean!'
                 resolve: '@=value.isAuthor(getUser())'
+            customCode:
+                type: 'String'
+            isPublished:
+                type: 'Boolean!'
+            metaDescription:
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getMetaDescription(args["locale"], true)'
+            owner:
+                type: 'InternalPostOwner'
+                description: 'The owner of the post.'

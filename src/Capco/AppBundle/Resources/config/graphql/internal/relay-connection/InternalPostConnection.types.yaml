@@ -1,0 +1,8 @@
+InternalPostConnection:
+    type: relay-connection
+    config:
+        name: PostConnection
+        nodeType: InternalPost!
+        connectionFields:
+            totalCount:
+                type: Int!

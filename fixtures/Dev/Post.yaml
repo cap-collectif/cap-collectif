@@ -105,3 +105,14 @@ Capco\AppBundle\Entity\Post:
         media: null
         proposals: ['@proposalIdf4']
         displayedOnBlog: false
+    postWithOwner:
+        id: postWithOwner
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@userTheo'
+        media: null
+        displayedOnBlog: false
+        owner: '@userTheo'

@@ -3,10 +3,13 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\PostAffiliation;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -312,6 +315,21 @@ class PostRepository extends EntityRepository
             ->orderBy('p.createdAt', 'DESC')
             ->addOrderBy('p.publishedAt', 'DESC')
             ->setMaxResults($count);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->addSelect('a', 'm', 'c', 't')
+            ->leftJoin('p.Authors', 'a')
+            ->leftJoin('p.media', 'm')
+            ->leftJoin('p.projects', 'c')
+            ->leftJoin('p.themes', 't')
+            ->where('p.id IN (:ids)')
+            ->setParameter('ids', $ids);
 
         return $qb->getQuery()->getResult();
     }

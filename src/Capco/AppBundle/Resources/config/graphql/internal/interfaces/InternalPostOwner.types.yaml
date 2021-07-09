@@ -1,0 +1,35 @@
+InternalPostOwner:
+    type: interface
+    config:
+        name: PostOwner
+        description: 'Represent an owner of a post.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\PostOwnerTypeResolver", [value])'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'User ID'
+            username:
+                type: 'String'
+                description: 'User username'
+            posts:
+                type: 'InternalPostConnection!'
+                description: 'Get all posts that the user owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserPostsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    affiliations:
+                        type: '[InternalPostAffiliation!]'
+                        description: |
+                            Array of viewer's affiliation options for posts returned from the connection.
+                            For example, OWNER will include only posts that the current viewer owns.
+                    query:
+                        type: 'String'
+                        description: the search query
+                    orderBy:
+                        type: 'PostOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\PostOrderField::UPDATED_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for posts'

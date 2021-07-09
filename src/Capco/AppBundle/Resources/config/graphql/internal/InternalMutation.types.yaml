@@ -1301,3 +1301,28 @@ InternalMutation:
                     inputType: UpdateSiteParameterInput
                     payloadType: UpdateSiteParameterPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSiteParameterMutation", [value])'
+            # POST
+            createPost:
+                description: 'Create blog post'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreatePostInput
+                    payloadType: CreatePostPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation", [value, getUser()])'
+            updatePost:
+                description: 'Update blog post'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdatePostInput
+                    payloadType: UpdatePostPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation", [value, getUser()])'
+            deletePost:
+                description: 'Delete blog post'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeletePostInput
+                    payloadType: DeletePostPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeletePostMutation", [value, getUser()])'

@@ -1,0 +1,9 @@
+CreatePostErrorCode:
+  type: enum
+  config:
+    name: CreatePostErrorCode
+    description: 'Available errors on createPost mutation'
+    values:
+      INVALID_FORM:
+        value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation::INVALID_FORM")'
+        description: 'Submitted form is invalid'

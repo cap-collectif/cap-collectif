@@ -124,6 +124,26 @@ Object {
       ],
     },
     Object {
+      "enTitle": "Post title owned by an owner",
+      "frTitle": "Articles avec owner",
+      "id": "UG9zdDpwb3N0V2l0aE93bmVy",
+      "title": "Articles avec owner",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Post body owned by an owner",
+          "locale": "EN_GB",
+          "title": "Post title owned by an owner",
+        },
+        Object {
+          "abstract": null,
+          "body": "Body de l'article avec owner",
+          "locale": "FR_FR",
+          "title": "Articles avec owner",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

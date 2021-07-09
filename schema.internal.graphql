@@ -3166,6 +3166,71 @@ type CreateOpinionPayload {
   clientMutationId: String
 }
 
+"""Available errors on createPost mutation"""
+enum CreatePostErrorCode {
+  """Submitted form is invalid"""
+  INVALID_FORM
+}
+
+input CreatePostInput {
+  translations: [CreatePostTranslationInput!]
+
+  """post authors"""
+  authors: [ID!]!
+
+  """post customCode"""
+  customCode: String
+
+  """related projects related to the post"""
+  projects: [ID]!
+
+  """proposals related to the post"""
+  proposals: [ID]!
+
+  """themes related to the post"""
+  themes: [ID]!
+
+  """Whether or not the post should be displayed on blog"""
+  displayedOnBlog: Boolean!
+
+  """When the post should be pusblished"""
+  publishedAt: DateTime!
+
+  """Whether or not the post should be published"""
+  isPublished: Boolean!
+
+  """Whether or not the post should be commentable"""
+  commentable: Boolean!
+  clientMutationId: String
+}
+
+type CreatePostPayload {
+  """The created post"""
+  post: Post
+
+  """Available errorCode for createPost mutation"""
+  errorCode: CreatePostErrorCode
+  clientMutationId: String
+}
+
+input CreatePostTranslationInput {
+  """post title"""
+  title: String!
+
+  """post body"""
+  body: HTML!
+
+  """post abstract"""
+  abstract: String
+
+  """post metadescription"""
+  metaDescription: String
+
+  """the locale of the translation"""
+  locale: String!
+  clientMutationId: String
+}
+
 input CreateProjectDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean = false
@@ -4545,6 +4610,24 @@ input DeleteOpinionInput {
 type DeleteOpinionPayload {
   """The deleted ID."""
   deletedOpinionId: ID
+  clientMutationId: String
+}
+
+"""Available errors on deletePost mutation"""
+enum DeletePostErrorCode {
+  """no post match for this id"""
+  POST_NOT_FOUND
+}
+
+input DeletePostInput {
+  """The id of the post to delete"""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeletePostPayload {
+  """Available errorCode for deletePost mutation"""
+  errorCode: DeletePostErrorCode
   clientMutationId: String
 }
 
@@ -6623,6 +6706,15 @@ type Mutation {
 
   """update a SiteParameter."""
   updateSiteParameter(input: UpdateSiteParameterInput!): UpdateSiteParameterPayload
+
+  """Create blog post"""
+  createPost(input: CreatePostInput!): CreatePostPayload
+
+  """Update blog post"""
+  updatePost(input: UpdatePostInput!): UpdatePostPayload
+
+  """Delete blog post"""
+  deletePost(input: DeletePostInput!): DeletePostPayload
 }
 
 """A connection to a list of items."""
@@ -7482,6 +7574,89 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
   displayedOnBlog: Boolean!
   relatedContent: [PostRelatedContent!]!
   viewerDidAuthor: Boolean!
+  customCode: String
+  isPublished: Boolean!
+  metaDescription(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """The owner of the post."""
+  owner: PostOwner
+}
+
+"""The affiliation of a user to a post"""
+enum PostAffiliation {
+  """Posts that are owned by the authenticated user."""
+  OWNER
+}
+
+"""A connection to a list of items."""
+type PostConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [PostEdge]
+}
+
+"""An edge in a connection."""
+type PostEdge {
+  """The item at the end of the edge."""
+  node: Post!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of posts can be ordered upon return."""
+input PostOrder {
+  """The field to order posts by."""
+  field: PostOrderField! = UPDATED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which posts can be ordered"""
+enum PostOrderField {
+  """Allows ordering a list of posts by when they have been updated."""
+  UPDATED_AT
+}
+
+"""Represent an owner of a post."""
+interface PostOwner {
+  """User ID"""
+  id: ID!
+
+  """User username"""
+  username: String
+
+  """Get all posts that the user owns."""
+  posts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for posts returned from the connection.
+    For example, OWNER will include only posts that the current viewer owns.
+    
+    """
+    affiliations: [PostAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for posts"""
+    orderBy: PostOrder = {field: UPDATED_AT, direction: DESC}
+  ): PostConnection!
 }
 
 """Available publication statuses for a post."""
@@ -13371,6 +13546,59 @@ type UpdateOpinionPayload {
   clientMutationId: String
 }
 
+"""Available errors on updatePost mutation"""
+enum UpdatePostErrorCode {
+  """Submitted form is invalid"""
+  INVALID_FORM
+
+  """no post match for this id"""
+  POST_NOT_FOUND
+}
+
+input UpdatePostInput {
+  translations: [CreatePostTranslationInput!]
+
+  """post authors"""
+  authors: [ID!]!
+
+  """post customCode"""
+  customCode: String
+
+  """related projects related to the post"""
+  projects: [ID]!
+
+  """proposals related to the post"""
+  proposals: [ID]!
+
+  """themes related to the post"""
+  themes: [ID]!
+
+  """Whether or not the post should be displayed on blog"""
+  displayedOnBlog: Boolean!
+
+  """When the post should be pusblished"""
+  publishedAt: DateTime!
+
+  """Whether or not the post should be published"""
+  isPublished: Boolean!
+
+  """Whether or not the post should be commentable"""
+  commentable: Boolean!
+  clientMutationId: String
+
+  """The id of the post to update"""
+  id: ID!
+}
+
+type UpdatePostPayload {
+  """The updated post"""
+  post: Post
+
+  """Available errorCode for updatePost mutation"""
+  errorCode: UpdatePostErrorCode
+  clientMutationId: String
+}
+
 input UpdateProfileAccountEmailInput {
   """The password to confirm action"""
   passwordConfirm: String!
@@ -13988,14 +14216,14 @@ enum UpdateUserEmailErrorCode {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner {
-  """The ID of an object."""
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner {
+  """User ID"""
   id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The user's public name."""
+  """User username"""
   username: String
 
   """Whether or not this user is the authenticated user."""
@@ -14071,6 +14299,30 @@ type User implements Node & UniformResourceLocatable & ProjectOwner {
     """
     affiliations: [ProjectAffiliation!]
   ): ProjectConnection!
+
+  """Get all posts that the user owns."""
+  posts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for posts returned from the connection.
+    For example, OWNER will include only posts that the current viewer owns.
+    
+    """
+    affiliations: [PostAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for posts"""
+    orderBy: PostOrder = {field: UPDATED_AT, direction: DESC}
+  ): PostConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!

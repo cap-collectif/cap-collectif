@@ -4,11 +4,13 @@ InternalUser:
         - PreviewUser
         - InternalPrimaryKey
         - InternalProjectOwner
+        - InternalPostOwner
     config:
         description: "A user is an individual's account."
         name: User
         interfaces:
             - InternalProjectOwner
+            - InternalPostOwner
         fields:
             adminUrl:
                 type: 'URI!'

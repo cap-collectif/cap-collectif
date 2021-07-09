@@ -151,6 +151,7 @@ mappings:
                 trashedAt: { type: date }
         title: *text_analysis_highlighted
         authors: *Author
+        owner: *Author
         visibility: { type: long }
         districts:
             properties:

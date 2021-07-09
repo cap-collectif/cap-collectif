@@ -13,8 +13,10 @@ Capco\AppBundle\Entity\Post:
         publishedAt:
             groups: [Default]
         Authors:
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
             serialized_name: authors
+        owner:
+            groups: [Posts, PostDetails, Elasticsearch]
         themes:
             groups: [Posts, PostDetails, Elasticsearch]
         getAbstractOrBeginningOfTheText:

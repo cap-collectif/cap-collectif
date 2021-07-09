@@ -100,6 +100,11 @@ class Post implements
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private ?User $owner;
+
     public function __construct()
     {
         $this->Authors = new ArrayCollection();
@@ -406,6 +411,18 @@ class Post implements
         if ($this->proposals->contains($proposal)) {
             $this->proposals->removeElement($proposal);
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

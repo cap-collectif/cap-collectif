@@ -1,0 +1,34 @@
+CreatePostInput:
+  type: relay-mutation-input
+  config:
+    description: 'Input of createPost mutation.'
+    fields:
+      translations:
+        type: '[InternalCreatePostTranslationInput!]'
+      authors:
+        type: '[ID!]!'
+        description: 'post authors'
+      customCode:
+        type: 'String'
+        description: 'post customCode'
+      projects:
+        type: '[ID]!'
+        description: 'related projects related to the post'
+      proposals:
+        type: '[ID]!'
+        description: 'proposals related to the post'
+      themes:
+        type: '[ID]!'
+        description: 'themes related to the post'
+      displayedOnBlog:
+        type: 'Boolean!'
+        description: 'Whether or not the post should be displayed on blog'
+      publishedAt:
+        type: 'DateTime!'
+        description: 'When the post should be pusblished'
+      isPublished:
+        type: 'Boolean!'
+        description: 'Whether or not the post should be published'
+      commentable:
+        type: 'Boolean!'
+        description: 'Whether or not the post should be commentable'

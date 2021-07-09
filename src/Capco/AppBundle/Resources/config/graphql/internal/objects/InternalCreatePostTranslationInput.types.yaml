@@ -1,0 +1,20 @@
+InternalCreatePostTranslationInput:
+  type: relay-mutation-input
+  config:
+    name: CreatePostTranslationInput
+    fields:
+      title:
+        type: 'String!'
+        description: 'post title'
+      body:
+        type: 'HTML!'
+        description: 'post body'
+      abstract:
+        type: 'String'
+        description: 'post abstract'
+      metaDescription:
+        type: 'String'
+        description: 'post metadescription'
+      locale:
+        type: 'String!'
+        description: 'the locale of the translation'
