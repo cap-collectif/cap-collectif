@@ -24,6 +24,7 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class AddReplyMutation implements MutationInterface
 {
@@ -59,7 +60,7 @@ class AddReplyMutation implements MutationInterface
         $this->publisher = $publisher;
     }
 
-    public function __invoke(Argument $input, User $user, RequestStack $request): array
+    public function __invoke(Argument $input, User $user, RequestStack $requestStack): array
     {
         $values = $input->getArrayCopy();
 
@@ -83,7 +84,7 @@ class AddReplyMutation implements MutationInterface
             ->setAuthor($user)
             ->setQuestionnaire($questionnaire)
             ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
-            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+            ->setIpAddress(IPGuesser::getClientIp($requestStack->getCurrentRequest()));
 
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 

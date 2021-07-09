@@ -15,6 +15,7 @@ use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class SentryListener implements EventSubscriberInterface
 {
@@ -36,7 +37,7 @@ class SentryListener implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
-        $userData['ip_address'] = $request->getClientIp();
+        $userData['ip_address'] = IPGuesser::getClientIp($request);
 
         if ($user = $this->security->getUser()) {
             $userData['username'] = $user->getUsername();

@@ -14,6 +14,7 @@ use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Utils\IPGuesser;
 
 abstract class Search
 {
@@ -37,16 +38,16 @@ abstract class Search
         $this->index = $index;
     }
 
-    public static function generateSeed(?RequestStack $request = null, $viewer = null)
+    public static function generateSeed(?RequestStack $requestStack = null, $viewer = null)
     {
         if ($viewer instanceof User) {
             // sprintf with %u is here in order to avoid negative int.
             return sprintf('%u', crc32($viewer->getId()));
         }
 
-        if ($request && $request->getCurrentRequest()) {
+        if ($requestStack && $requestStack->getCurrentRequest()) {
             // sprintf with %u is here in order to avoid negative int.
-            return sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
+            return sprintf('%u', ip2long(IPGuesser::getClientIp($requestStack->getCurrentRequest())));
         }
 
         return random_int(0, \PHP_INT_MAX);

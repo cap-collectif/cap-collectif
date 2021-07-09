@@ -7,6 +7,7 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class ReCaptchaValidator extends ConstraintValidator
 {
@@ -25,7 +26,7 @@ class ReCaptchaValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if ($this->enabled && $this->toggle->isActive('captcha') && !$this->recaptcha->verify($value, $this->request->getClientIp())->isSuccess()) {
+        if ($this->enabled && $this->toggle->isActive('captcha') && !$this->recaptcha->verify($value, IPGuesser::getClientIp($request))->isSuccess()) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

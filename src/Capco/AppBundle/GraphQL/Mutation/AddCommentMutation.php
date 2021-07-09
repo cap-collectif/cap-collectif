@@ -26,6 +26,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class AddCommentMutation implements MutationInterface
 {
@@ -101,7 +102,7 @@ class AddCommentMutation implements MutationInterface
 
         $comment
             ->setAuthor($viewer)
-            ->setAuthorIp($requestStack->getCurrentRequest()->getClientIp())
+            ->setAuthorIp(IPGuesser::getClientIp($requestStack->getCurrentRequest()))
             ->setRelatedObject($relatedCommentInstance)
             ->setParent($commentable instanceof Comment ? $commentable : null);
 

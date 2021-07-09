@@ -26,6 +26,7 @@ use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class AddProposalVoteMutation implements MutationInterface
 {
@@ -129,7 +130,7 @@ class AddProposalVoteMutation implements MutationInterface
         }
 
         $vote
-            ->setIpAddress($request->getCurrentRequest()->getClientIp())
+            ->setIpAddress(IPGuesser::getClientIp($request->getCurrentRequest()))
             ->setUser($user)
             ->setPrivate($input->offsetGet('anonymously'))
             ->setProposal($proposal);

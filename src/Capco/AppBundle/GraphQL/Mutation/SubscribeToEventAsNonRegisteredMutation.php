@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
 {
@@ -53,7 +54,7 @@ class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
         $eventRegistration
             ->setUsername($username)
             ->setPrivate($isPrivate)
-            ->setIpAddress($request ? $request->getClientIp() : null)
+            ->setIpAddress(IPGuesser::getClientIp($requestStack->getCurrentRequest()))
             ->setEmail($email)
             ->setConfirmed(true);
 

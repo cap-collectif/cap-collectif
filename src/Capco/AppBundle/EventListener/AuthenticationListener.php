@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
@@ -33,14 +34,13 @@ class AuthenticationListener implements EventSubscriberInterface
             $data = json_decode($request->getContent(), true);
             $email = $data['username'] ?? null;
             $headers = $request->headers;
-            $ipAddress = $request->getClientIp();
             $userConnection = new UserConnection();
             $userConnection
                 ->setSuccess(false)
                 ->setDatetime($timestamp)
                 ->setEmail($email)
                 ->setNavigator($headers->get('user-agent'))
-                ->setIpAddress($ipAddress);
+                ->setIpAddress(IPGuesser::getClientIp($request));
             $this->em->persist($userConnection);
             $this->em->flush();
         }
@@ -65,7 +65,7 @@ class AuthenticationListener implements EventSubscriberInterface
                 ->setEmail($email)
                 ->setSuccess(true)
                 ->setNavigator($headers->get('user-agent'))
-                ->setIpAddress($event->getRequest()->getClientIp());
+                ->setIpAddress(IPGuesser::getClientIp($request));
             $this->em->persist($userConnection);
             $this->em->flush();
         }

@@ -15,6 +15,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class ContactProposalAuthorMutation implements MutationInterface
 {
@@ -41,7 +42,7 @@ class ContactProposalAuthorMutation implements MutationInterface
         $errorLog = $this->getErrorLog(
             $proposal,
             $argument->offsetGet('captcha'),
-            $requestStack->getMasterRequest()->getClientIp()
+            IPGuesser::getClientIp($requestStack->getCurrentRequest())
         );
 
         if (is_null($errorLog)) {

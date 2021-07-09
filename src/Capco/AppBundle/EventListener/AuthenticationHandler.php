@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 {
@@ -30,7 +31,7 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
         $email = $data['username'] ?? '';
         $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailAndIPInLastHour(
             $email,
-            $request->getClientIp()
+            IPGuesser::getClientIp($request)
         );
         $this->logger->warning(
             'Une tentative de connection ratée a été réalisée sur l\'adresse email',

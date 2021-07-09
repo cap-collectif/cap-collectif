@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class EventController extends Controller
 {
@@ -172,7 +173,7 @@ class EventController extends Controller
         ]);
 
         if ('POST' === $request->getMethod()) {
-            $registration->setIpAddress($request->getClientIp());
+            $registration->setIpAddress(IPGuesser::getClientIp($request));
             $registration->setUser($user);
             $form->handleRequest($request);
             $registration->setConfirmed(!$registration->isConfirmed());

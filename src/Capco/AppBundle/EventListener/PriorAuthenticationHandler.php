@@ -8,6 +8,7 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\AppBundle\Repository\UserConnectionRepository;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Capco\AppBundle\Utils\IPGuesser;
 
 class PriorAuthenticationHandler
 {
@@ -45,7 +46,7 @@ class PriorAuthenticationHandler
                     );
                 }
 
-                $ip = $request->getClientIp();
+                $ip = IPGuesser::getClientIp($request);
                 $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailAndIPInLastHour(
                     $email,
                     $ip
@@ -66,7 +67,7 @@ class PriorAuthenticationHandler
                         );
                     } else {
                         $recaptcha = new ReCaptcha($this->apiKey);
-                        $resp = $recaptcha->verify($data['captcha'], $request->getClientIp());
+                        $resp = $recaptcha->verify($data['captcha'], $ip);
 
                         if (!$resp->isSuccess()) {
                             $event->setResponse(
