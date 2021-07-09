@@ -12,11 +12,13 @@ class SectionSectionResolver implements ResolverInterface
     {
         $iterator = $type->getChildren()->getIterator();
 
+        $typeChildren = iterator_to_array($iterator);
+
         // define ordering closure, using preferred comparison method/field
-        $iterator->uasort(function ($first, $second) {
+        usort($typeChildren, function ($first, $second) {
             return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
         });
 
-        return $iterator;
+        return $typeChildren;
     }
 }

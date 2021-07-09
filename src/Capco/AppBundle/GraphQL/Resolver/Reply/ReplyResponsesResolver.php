@@ -50,11 +50,12 @@ class ReplyResponsesResolver implements ResolverInterface
             $context
         );
         $iterator = $responses->getIterator();
+        $responsesArray = iterator_to_array($iterator);
 
-        $iterator->uasort(function ($a, $b) {
+        usort($responsesArray, function ($a, $b) {
             return $a->getQuestion()->getPosition() - $b->getQuestion()->getPosition();
         });
 
-        return $iterator;
+        return $responsesArray;
     }
 }

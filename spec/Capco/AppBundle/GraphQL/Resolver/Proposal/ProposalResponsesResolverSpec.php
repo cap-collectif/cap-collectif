@@ -63,7 +63,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
 
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
+            iterator_to_array($responses->getIterator())
+        );
     }
 
     public function it_should_return_all_responses_when_viewer_is_admin(
@@ -96,7 +98,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
+            iterator_to_array($responses->getIterator())
+        );
     }
 
     public function it_should_return_all_responses_when_viewer_is_analyst(
@@ -129,7 +133,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(true);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
+            iterator_to_array($responses->getIterator())
+        );
     }
 
     public function it_should_return_private_responses_when_viewer_is_author(
@@ -162,7 +168,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
         $viewer->isAdmin()->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
+            iterator_to_array($responses->getIterator())
+        );
     }
 
     public function it_should_not_return_hidden_responses_when_viewer_is_author(
@@ -195,9 +203,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
         $viewer->isAdmin()->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike([]);
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_anonymous(
@@ -225,9 +231,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike([]);
     }
 
     public function it_should_not_return_hidden_responses_when_viewer_is_anonymous(
@@ -255,9 +259,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike([]);
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_not_author(
@@ -290,9 +292,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike([]);
     }
 
     public function it_should_not_return_hidden_responses_when_viewer_is_not_author(
@@ -325,8 +325,6 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
+        $this->__invoke($proposal, $viewer, $context)->shouldBeLike([]);
     }
 }

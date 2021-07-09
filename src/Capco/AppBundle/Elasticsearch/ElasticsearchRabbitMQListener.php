@@ -32,7 +32,8 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
 
     public function orderByPriority(\ArrayObject $arrayObject): array
     {
-        $arrayObject->uasort(static function (array $a, array $b) {
+        $array = $arrayObject->getArrayCopy();
+        usort($array, static function (array $a, array $b) {
             $aPriority = $a['priority'];
             $bPriority = $b['priority'];
             if ($aPriority === $bPriority) {
@@ -42,7 +43,7 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
             return $aPriority < $bPriority ? -1 : 1;
         });
 
-        return $arrayObject->getArrayCopy();
+        return $array;
     }
 
     public function onKernelTerminate(): void

@@ -108,7 +108,7 @@ class IndexBuilder
         }
 
         // Newest first
-        uasort($indexes, function ($a, $b) {
+        usort($indexes, function ($a, $b) {
             return $a['date'] < $b['date'];
         });
 
@@ -169,7 +169,7 @@ class IndexBuilder
             ];
         }
         // Newest first
-        uasort($indexes, static function ($a, $b) {
+        usort($indexes, static function ($a, $b) {
             return $a['date'] < $b['date'];
         });
 

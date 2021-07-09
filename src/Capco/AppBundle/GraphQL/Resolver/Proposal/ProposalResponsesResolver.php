@@ -32,7 +32,7 @@ class ProposalResponsesResolver implements ResolverInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function __invoke(Proposal $proposal, $viewer, \ArrayObject $context): iterable
+    public function __invoke(Proposal $proposal, $viewer, \ArrayObject $context): array
     {
         $isLegacyAnalyst = $this->proposalViewerIsAnEvaluerResolver->__invoke($proposal, $viewer);
         $isAnalyst = false;
@@ -53,11 +53,12 @@ class ProposalResponsesResolver implements ResolverInterface
         );
 
         $iterator = $responses->getIterator();
+        $responsesArray = iterator_to_array($iterator);
 
-        $iterator->uasort(function ($a, $b) {
+        usort($responsesArray, function ($a, $b) {
             return $a->getQuestion()->getPosition() - $b->getQuestion()->getPosition();
         });
 
-        return $iterator;
+        return $responsesArray;
     }
 }

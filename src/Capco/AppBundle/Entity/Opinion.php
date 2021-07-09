@@ -444,14 +444,16 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     public function getSortedAppendices()
     {
         $iterator = $this->appendices->getIterator();
-        $iterator->uasort(function ($a, $b) {
+        $appendicesArray = iterator_to_array($iterator);
+
+        usort($appendicesArray, function ($a, $b) {
             return $this->getPositionForAppendixType($a->getAppendixType()) <
                 $this->getPositionForAppendixType($b->getAppendixType())
                 ? -1
                 : 1;
         });
 
-        return iterator_to_array($iterator);
+        return $appendicesArray;
     }
 
     public function getPositionForAppendixType($at)

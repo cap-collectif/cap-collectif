@@ -59,7 +59,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
             $filtered = array_filter($jumps, static function (LogicJump $jump) use ($id) {
                 return $jump->getOrigin()->getId() === $id;
             });
-            uasort($filtered, static function (LogicJump $a, LogicJump $b) use (
+            usort($filtered, static function (LogicJump $a, LogicJump $b) use (
                 $direction,
                 $field
             ) {

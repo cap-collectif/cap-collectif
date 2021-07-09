@@ -129,7 +129,7 @@ class ContributionResolver
             $contributor['votes'] += $contributor['proposals_votes'] ?? 0;
         }
 
-        uasort($contributors, function ($a, $b) {
+        usort($contributors, function ($a, $b) {
             return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes'];
         });
 
@@ -248,7 +248,7 @@ class ContributionResolver
             $contributor['votes'] += $contributor['proposals_votes'] ?? 0;
         }
 
-        uasort($contributors, function ($a, $b) {
+        usort($contributors, function ($a, $b) {
             return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes'];
         });
 

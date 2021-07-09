@@ -445,12 +445,12 @@ class Project implements IndexableInterface
 
     public function getThemes(): iterable
     {
-        $iterator = $this->themes->getIterator();
-        $iterator->uasort(function ($a, $b) {
+        $themesArray = $this->themes->toArray();
+        usort($themesArray, function ($a, $b) {
             return $a->getPosition() <=> $b->getPosition();
         });
 
-        return new ArrayCollection(iterator_to_array($iterator));
+        return new ArrayCollection($themesArray);
     }
 
     /**
