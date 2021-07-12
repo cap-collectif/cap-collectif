@@ -12,8 +12,10 @@ use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Entity\ProposalDecisionMaker;
 use Capco\AppBundle\Entity\ProposalSupervisor;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
@@ -34,13 +36,16 @@ class ElasticsearchDoctrineListener implements EventSubscriber
 {
     private LoggerInterface $logger;
     private ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener;
+    private AbstractResponseRepository $responseRepository;
 
     public function __construct(
         ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        AbstractResponseRepository $responseRepository
     ) {
         $this->logger = $logger;
         $this->elasticsearchRabbitMQListener = $elasticsearchRabbitMQListener;
+        $this->responseRepository = $responseRepository;
     }
 
     public function getSubscribedEvents(): array
@@ -78,7 +83,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             '[elastic_search_doctrine_listener] Adding new message to stack ' . $body
         );
 
-        // We cannot dinamicly call static methods with phpspec, so we hardcode the priority to 1.
+        // We cannot dynamically call static methods with phpspec, so we hardcode the priority to 1.
         if (false !== strpos(\get_class($entity), 'Double')) {
             $priority = 1;
         } else {
@@ -142,6 +147,15 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             ) {
                 foreach ($votes as $vote) {
                     $this->process($vote, false);
+                }
+            }
+        }
+
+        if ($entity instanceof Reply) {
+            $responses = $this->responseRepository->getByReply($entity);
+            if (\count($responses) > 0) {
+                foreach ($responses as $response) {
+                    $this->process($response, false);
                 }
             }
         }

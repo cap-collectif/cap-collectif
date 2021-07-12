@@ -4,10 +4,11 @@ namespace spec\Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
-use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -22,9 +23,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 {
-    public function let(ElasticsearchRabbitMQListener $listener, LoggerInterface $logger): void
-    {
-        $this->beConstructedWith($listener, $logger);
+    public function let(
+        ElasticsearchRabbitMQListener $listener,
+        LoggerInterface $logger,
+        AbstractResponseRepository $responseRepository
+    ): void {
+        $this->beConstructedWith($listener, $logger, $responseRepository);
     }
 
     public function it_is_initializable(): void
@@ -37,7 +41,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->getSubscribedEvents()->shouldReturn([
             Events::postPersist,
             Events::postUpdate,
-            Events::preRemove
+            Events::preRemove,
         ]);
     }
 
@@ -57,10 +61,65 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $message = new Message(
             json_encode([
                 'class' => \get_class($event->getWrappedObject()),
-                'id' => 'event1'
+                'id' => 'event1',
             ])
         );
         $listener->addToMessageStack($message, 1)->shouldBeCalledOnce();
+    }
+
+    public function it_index_a_reply(
+        ElasticsearchRabbitMQListener $listener,
+        LifecycleEventArgs $args,
+        Reply $reply,
+        ValueResponse $response,
+        User $author,
+        AbstractResponseRepository $responseRepository
+    ) {
+        $response->getId()->willReturn(10);
+        $response->getValue()->willReturn('test');
+        $response->getReply()->willReturn($reply);
+
+        $author->getId()->willReturn('user1');
+
+        $reply->getId()->willReturn('reply1');
+        $reply->getAuthor()->willReturn($author);
+        $responseRepository->getByReply($reply)->willReturn([$response]);
+        $args->getObject()->willReturn($reply);
+        $this->handleEvent($args);
+
+        $replyMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($reply->getWrappedObject()),
+                    'id' => 'reply1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+
+        $userMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($author->getWrappedObject()),
+                    'id' => 'user1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+
+        $responseMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($response->getWrappedObject()),
+                    'id' => 10,
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+
+        $listener->addToMessageStack($replyMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($userMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($responseMessage, 1)->shouldBeCalledOnce();
     }
 
     public function it_index_a_proposal(
@@ -83,7 +142,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposalMessage = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
-                'id' => 'proposal1'
+                'id' => 'proposal1',
             ])
         );
         $authorMessage = new Message(
@@ -115,19 +174,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposalCollectVoteMessage = new Message(
             json_encode([
                 'class' => \get_class($vote->getWrappedObject()),
-                'id' => 'proposalCollectVote1'
+                'id' => 'proposalCollectVote1',
             ])
         );
         $proposalMessage = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
-                'id' => 'proposal1'
+                'id' => 'proposal1',
             ])
         );
         $voteAuthorMessage = new Message(
             json_encode([
                 'class' => \get_class($voteAuthor->getWrappedObject()),
-                'id' => 'user1'
+                'id' => 'user1',
             ])
         );
         $listener->addToMessageStack($proposalMessage, 1)->shouldBeCalledOnce();
@@ -145,19 +204,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $commentMessage = new Message(
             json_encode([
                 'class' => \get_class($comment->getWrappedObject()),
-                'id' => 'comment1'
+                'id' => 'comment1',
             ])
         );
         $commentProposalMessage = new Message(
             json_encode([
                 'class' => \get_class($commentProposal->getWrappedObject()),
-                'id' => 'proposal1'
+                'id' => 'proposal1',
             ])
         );
         $commentAuthorMessage = new Message(
             json_encode([
                 'class' => \get_class($commentAuthor->getWrappedObject()),
-                'id' => 'user1'
+                'id' => 'user1',
             ])
         );
 
@@ -190,7 +249,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $message = new Message(
             json_encode([
                 'class' => \get_class($projectDistrict->getWrappedObject()),
-                'id' => 'projectDistrict1'
+                'id' => 'projectDistrict1',
             ])
         );
         $listener->addToMessageStack($message, 1)->shouldBeCalledOnce();
@@ -209,7 +268,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $message = new Message(
             json_encode([
                 'class' => \get_class($proposalDistrict->getWrappedObject()),
-                'id' => 'proposalDistrict1'
+                'id' => 'proposalDistrict1',
             ])
         );
         $listener->addToMessageStack($message, 1)->shouldBeCalledOnce();
