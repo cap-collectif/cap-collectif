@@ -8,7 +8,7 @@ import type { FlexProps } from '~ui/Primitives/Layout/Flex';
 import ModalHeaderLabel from './ModalHeaderLabel';
 import { useModal } from '~ds/Modal/Modal.context';
 
-type Props = {|
+export type Props = {|
   ...FlexProps,
   +children?: React$Node,
 |};

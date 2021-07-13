@@ -76,7 +76,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           className="sc-bdnylx kZQgZO"
         >
           <div
-            className="sc-bdnylx itQvPO"
+            className="sc-bdnylx dwYmmZ"
           >
             <div
               className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iUOWTb"
@@ -231,7 +231,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           className="sc-bdnylx kZQgZO"
         >
           <div
-            className="sc-bdnylx itQvPO"
+            className="sc-bdnylx dwYmmZ"
           >
             <div
               className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iUOWTb"
@@ -386,7 +386,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           className="sc-bdnylx kZQgZO"
         >
           <div
-            className="sc-bdnylx itQvPO"
+            className="sc-bdnylx dwYmmZ"
           >
             <div
               className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iUOWTb"

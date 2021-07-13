@@ -9,7 +9,7 @@ exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] =
     className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iXOGtN eEzioL"
   >
     <div
-      className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf hbhIdg jxKYEO"
+      className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf gwIhkD jxKYEO"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}

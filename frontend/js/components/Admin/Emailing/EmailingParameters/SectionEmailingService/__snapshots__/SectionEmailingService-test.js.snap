@@ -62,7 +62,7 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eUlqVA"
+      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 BUKeH"
     >
       <div
         checked={true}
@@ -101,7 +101,7 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
         />
       </div>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf hFzNlp jxKYEO"
+        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf PzKBq jxKYEO"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}

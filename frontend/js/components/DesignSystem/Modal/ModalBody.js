@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { FlexProps } from '~ui/Primitives/Layout/Flex';
 import Flex from '~ui/Primitives/Layout/Flex';
 
-type Props = {|
+export type Props = {|
   ...FlexProps,
   +children?: React$Node,
 |};

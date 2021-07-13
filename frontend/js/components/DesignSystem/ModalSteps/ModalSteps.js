@@ -1,0 +1,58 @@
+// @flow
+import * as React from 'react';
+import Modal, { type ModalProps } from '~ds/Modal/Modal';
+import { ModalStepsContext, type Step } from '~ds/ModalSteps/ModalSteps.context';
+import ModalStepsProgressBar from './ModalStepsProgressBar';
+import ModalStepsHeader from './ModalStepsHeader';
+import ModalStepsBody from './ModalStepsBody';
+import ModalStepsFooter from './ModalStepsFooter';
+
+type ModalStepsProps = {|
+  ...ModalProps,
+  +defaultStepId?: string,
+  +resetStepOnClose?: boolean,
+|};
+
+const ModalSteps = ({ children, defaultStepId, resetStepOnClose, ...rest }: ModalStepsProps) => {
+  const [currentStep, setCurrentStep] = React.useState<number>(0);
+  const [stepsRegistered, registerSteps] = React.useState<Step[]>([]);
+
+  const context = React.useMemo(
+    () => ({
+      currentStep,
+      setCurrentStep,
+      steps: stepsRegistered,
+      registerSteps,
+    }),
+    [currentStep, stepsRegistered],
+  );
+
+  React.useEffect(() => {
+    const defaultStep: number = defaultStepId
+      ? stepsRegistered.findIndex(step => step.id === defaultStepId) || 0
+      : 0;
+
+    setCurrentStep(defaultStep);
+
+    return () => {
+      if (resetStepOnClose) setCurrentStep(defaultStep);
+    };
+  }, [defaultStepId, resetStepOnClose, stepsRegistered]);
+
+  return (
+    <ModalStepsContext.Provider value={context}>
+      <Modal {...rest}>
+        {modalProps => (typeof children === 'function' ? children(modalProps) : children)}
+      </Modal>
+    </ModalStepsContext.Provider>
+  );
+};
+
+ModalSteps.displayName = 'ModalSteps';
+
+ModalSteps.Header = ModalStepsHeader;
+ModalSteps.Footer = ModalStepsFooter;
+ModalSteps.ProgressBar = ModalStepsProgressBar;
+ModalSteps.Body = ModalStepsBody;
+
+export default ModalSteps;

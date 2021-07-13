@@ -191,6 +191,8 @@ type BoxShadow = {|
 
 type Overflow = {|
   overflow?: Responsive<string>,
+  overflowX?: Responsive<string>,
+  overflowY?: Responsive<string>,
 |};
 
 type Hover = {|

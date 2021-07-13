@@ -38,9 +38,9 @@ const colors: Colors = {
   },
   'neutral-gray': {
     '50': '#FAFAFA',
-    '100': '#F8F8F8',
+    '100': '#F7F7F7',
     '150': '#EBEBEB',
-    '200': '#DEDEDE',
+    '200': '#DDDDDD',
     '300': '#C4C4C4',
     '400': '#ABABAB',
     '500': '#919191',
@@ -100,7 +100,7 @@ const colors: Colors = {
   blue: {
     '100': '#FAFCFF',
     '150': '#E0EFFF',
-    '200': '#C2E0FF',
+    '200': '#C2DFFF',
     '300': '#8AC2FF',
     '400': '#52A5FF',
     '500': '#1A88FF',

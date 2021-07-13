@@ -65,7 +65,7 @@ exports[`<ModalSectionVisitors /> <TestModalSectionVisitors /> should render cor
           period-on-project-from-to
         </p>
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iwmRXD InfoMessage__InfoMessageInner-w1nooo-0 fmcqql"
+          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iwmRXD InfoMessage__InfoMessageInner-w1nooo-0 koCgEK"
         >
           <div
             className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB hmLkpw info-message-title"
