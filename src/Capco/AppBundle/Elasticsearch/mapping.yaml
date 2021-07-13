@@ -318,7 +318,7 @@ mappings:
             fields:
                 std: { type: text, analyzer: capco_standard }
                 tag: { type: text, analyzer: tag_cloud, fielddata: true }
-                key: { type: keyword }
+                key: { type: keyword, ignore_above: 10000 }
         objectValue:
             properties:
                 labels: { type: keyword }
