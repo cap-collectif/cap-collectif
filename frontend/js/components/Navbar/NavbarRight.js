@@ -37,6 +37,7 @@ export const NavbarRight = ({
     window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
   };
   const isMobile = useIsMobile();
+  const isProjectAdmin = user ? user.isProjectAdmin : false;
 
   return (
     <>
@@ -81,8 +82,11 @@ export const NavbarRight = ({
               { id: 'user.account.menu' },
               { username: user.username },
             )}>
-            {user.isAdmin && (
-              <MenuItem {...menu} href="/admin/" as={S.TabsLink}>
+            {(user.isAdmin || isProjectAdmin) && (
+              <MenuItem
+                {...menu}
+                href={user.isAdmin ? '/admin/' : '/admin/capco/app/project/list'}
+                as={S.TabsLink}>
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
                 {intl.formatMessage({ id: 'global.administration' })}
               </MenuItem>

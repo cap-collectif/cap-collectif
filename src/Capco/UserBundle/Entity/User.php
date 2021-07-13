@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\User\UserAddressTrait;
 use Capco\AppBundle\Traits\User\UserSSOTrait;
 use Capco\MediaBundle\Entity\Media;
@@ -657,7 +658,12 @@ class User extends BaseUser implements
 
     public function isSuperAdmin(): bool
     {
-        return $this->hasRole('ROLE_SUPER_ADMIN');
+        return $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
+    }
+
+    public function isProjectAdmin(): bool
+    {
+        return $this->hasRole(UserRole::ROLE_PROJECT_ADMIN);
     }
 
     /**
@@ -665,7 +671,7 @@ class User extends BaseUser implements
      */
     public function isAdmin(): bool
     {
-        return $this->hasRole('ROLE_ADMIN') || $this->hasRole('ROLE_SUPER_ADMIN');
+        return $this->hasRole(UserRole::ROLE_ADMIN) || $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
     }
 
     public function isEvaluerOnLegacyTool(): bool

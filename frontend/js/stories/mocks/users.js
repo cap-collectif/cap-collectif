@@ -13,6 +13,7 @@ export const author = {
   vip: false,
   isViewer: false,
   isAdmin: true,
+  isProjectAdmin: false,
   isEvaluerOnLegacyTool: true,
   isEvaluerOnNewTool: true,
   isPhoneConfirmed: true,

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
@@ -181,6 +182,11 @@ final class ProjectAdmin extends CapcoAdmin
             );
         $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
         $query->setParameter('author', $user);
+
+        if($user->hasRole(UserRole::ROLE_PROJECT_ADMIN)) {
+            $query->andWhere($query->getRootAliases()[0] . '.owner = :owner')
+                ->setParameter('owner', $user);
+        }
 
         return $query;
     }

@@ -28,6 +28,7 @@ export type User = {
   +isEvaluerOnNewTool: boolean,
   +phone: string,
   +isAdmin: boolean,
+  +isProjectAdmin: boolean,
   +email: string,
   +newEmailToConfirm: ?string,
   +media: ?{
@@ -75,6 +76,7 @@ export type State = {
     +isPhoneConfirmed: boolean,
     +phone: string,
     +isAdmin: boolean,
+    +isProjectAdmin: boolean,
     +email: string,
     +newEmailToConfirm: ?string,
     +media: ?{

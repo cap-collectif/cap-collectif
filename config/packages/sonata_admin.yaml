@@ -115,3 +115,18 @@ sonata_block:
         Capco\AdminBundle\Block\RecentPostBlockService: ~
         Capco\AdminBundle\Block\RecentContributionsBlockService: ~
         Capco\AdminBundle\Block\HelpBlockService: ~
+
+services:
+    Capco\AdminBundle\Action\DashboardAction:
+        arguments:
+            - '%sonata.admin.configuration.dashboard_blocks%'
+            - '@sonata.admin.breadcrumbs_builder'
+            - '@sonata.admin.global_template_registry'
+            - '@sonata.admin.pool'
+            - '@twig'
+            - '@security.token_storage'
+            - '@router'
+
+    sonata.admin.action.dashboard:
+        alias: 'Capco\AdminBundle\Action\DashboardAction'
+        public: true

@@ -174,6 +174,7 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "isEvaluerOnLegacyTool": true,
           "isEvaluerOnNewTool": false,
           "isPhoneConfirmed": true,
+          "isProjectAdmin": false,
           "isViewer": false,
           "media": Object {
             "url": "https://source.unsplash.com/random/150x150",
@@ -960,6 +961,951 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
 </Fragment>
 `;
 
+exports[`<NavbarRight /> should render with an admin link when user is a project admin 1`] = `
+<Fragment>
+  <Memo(ForwardRef(MenuButton))
+    animated={false}
+    animating={false}
+    aria-label="user.account.menu"
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "__docgenInfo": Object {
+          "description": "",
+          "methods": Array [],
+        },
+        "attrs": Array [
+          Object {
+            "align": "center",
+            "direction": "row",
+            "height": "100%",
+            "px": 4,
+            "py": 2,
+          },
+        ],
+        "componentStyle": e {
+          "baseHash": 1387770474,
+          "baseStyle": undefined,
+          "componentId": "styles__DropdownToggle-sc-11246z7-5",
+          "isStatic": false,
+          "rules": Array [
+            ".caret{margin-left:5px;}",
+            [Function],
+            " &:hover,&:focus{color:",
+            [Function],
+            ";background-color:",
+            [Function],
+            ";}",
+          ],
+          "staticRulesId": "",
+        },
+        "displayName": "styles__DropdownToggle",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "shouldForwardProp": undefined,
+        "styledComponentId": "styles__DropdownToggle-sc-11246z7-5",
+        "target": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "__docgenInfo": Object {
+            "description": "",
+            "methods": Array [],
+          },
+          "render": [Function],
+        },
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    baseId="mock"
+    down={[Function]}
+    first={[Function]}
+    groups={Array []}
+    hide={[Function]}
+    id="navbar-username"
+    isOpen={false}
+    items={Array []}
+    last={[Function]}
+    loop={false}
+    modal={false}
+    move={[Function]}
+    next={[Function]}
+    orientation="vertical"
+    place={[Function]}
+    placement="bottom-start"
+    previous={[Function]}
+    registerGroup={[Function]}
+    registerItem={[Function]}
+    reset={[Function]}
+    rtl={false}
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setCurrentId={[Function]}
+    setLoop={[Function]}
+    setModal={[Function]}
+    setOrientation={[Function]}
+    setRTL={[Function]}
+    setShift={[Function]}
+    setVisible={[Function]}
+    setWrap={[Function]}
+    shift={false}
+    show={[Function]}
+    sort={[Function]}
+    stopAnimation={[Function]}
+    toggle={[Function]}
+    unregisterGroup={[Function]}
+    unregisterItem={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_hasActiveWidget={false}
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_includesBaseElement={false}
+    unstable_moves={0}
+    unstable_originalPlacement="bottom-start"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_setHasActiveWidget={[Function]}
+    unstable_setIncludesBaseElement={[Function]}
+    unstable_setValue={[Function]}
+    unstable_setVirtual={[Function]}
+    unstable_update={[Function]}
+    unstable_values={Object {}}
+    unstable_virtual={false}
+    up={[Function]}
+    visible={false}
+    wrap={false}
+  >
+    <Connect(UserAvatarDeprecated)
+      anchor={false}
+      size={34}
+      user={
+        Object {
+          "_links": Object {
+            "profile": "https://capco.dev/profile",
+          },
+          "displayName": "admin",
+          "email": "admin@test.com",
+          "id": "user1",
+          "isAdmin": false,
+          "isEmailConfirmed": true,
+          "isEvaluerOnLegacyTool": true,
+          "isEvaluerOnNewTool": false,
+          "isPhoneConfirmed": true,
+          "isProjectAdmin": true,
+          "isViewer": false,
+          "media": Object {
+            "url": "https://source.unsplash.com/random/150x150",
+          },
+          "newEmailToConfirm": null,
+          "phone": "0101010101",
+          "roles": Array [],
+          "uniqueId": "admin",
+          "username": "admin",
+          "vip": false,
+        }
+      }
+    />
+    <AppBox
+      as="span"
+      ml={2}
+    >
+      admin
+    </AppBox>
+    <span
+      className="caret"
+    />
+  </Memo(ForwardRef(MenuButton))>
+  <ForwardRef(Menu)
+    animated={false}
+    animating={false}
+    aria-label="user.account.menu"
+    as={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "__docgenInfo": Object {
+          "description": "",
+          "methods": Array [],
+        },
+        "attrs": Array [
+          Object {
+            "align": "center",
+            "boxShadow": "rgb(0 0 0 / 18%) 0px 6px 12px",
+            "direction": "column",
+            "fontSize": "14px",
+            "overflow": "hidden",
+            "py": 1,
+          },
+        ],
+        "componentStyle": e {
+          "baseHash": 477636232,
+          "baseStyle": undefined,
+          "componentId": "styles__DropdownMenu-sc-11246z7-6",
+          "isStatic": false,
+          "rules": Array [
+            "border-radius:0 0 4px 4px;background-color:",
+            [Function],
+            ";&:hover,&:focus{outline:none;}a{width:100%;font-weight:400;padding:3px 20px;}@media (max-width:",
+            "767px",
+            "){a{text-align:left;}}",
+          ],
+          "staticRulesId": "",
+        },
+        "displayName": "styles__DropdownMenu",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "shouldForwardProp": undefined,
+        "styledComponentId": "styles__DropdownMenu-sc-11246z7-6",
+        "target": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "__docgenInfo": Object {
+            "description": "",
+            "methods": Array [],
+          },
+          "render": [Function],
+        },
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    baseId="mock"
+    down={[Function]}
+    first={[Function]}
+    groups={Array []}
+    hide={[Function]}
+    hideOnClickOutside={true}
+    items={Array []}
+    last={[Function]}
+    loop={false}
+    modal={false}
+    move={[Function]}
+    next={[Function]}
+    orientation="vertical"
+    place={[Function]}
+    placement="bottom-start"
+    previous={[Function]}
+    registerGroup={[Function]}
+    registerItem={[Function]}
+    reset={[Function]}
+    rtl={false}
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setCurrentId={[Function]}
+    setLoop={[Function]}
+    setModal={[Function]}
+    setOrientation={[Function]}
+    setRTL={[Function]}
+    setShift={[Function]}
+    setVisible={[Function]}
+    setWrap={[Function]}
+    shift={false}
+    show={[Function]}
+    sort={[Function]}
+    stopAnimation={[Function]}
+    toggle={[Function]}
+    unregisterGroup={[Function]}
+    unregisterItem={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_hasActiveWidget={false}
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_includesBaseElement={false}
+    unstable_moves={0}
+    unstable_originalPlacement="bottom-start"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
+        "left": "100%",
+        "position": "fixed",
+        "top": "100%",
+      }
+    }
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_setHasActiveWidget={[Function]}
+    unstable_setIncludesBaseElement={[Function]}
+    unstable_setValue={[Function]}
+    unstable_setVirtual={[Function]}
+    unstable_update={[Function]}
+    unstable_values={Object {}}
+    unstable_virtual={false}
+    up={[Function]}
+    visible={false}
+    wrap={false}
+  >
+    <Memo(ForwardRef(MenuItem))
+      animated={false}
+      animating={false}
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": e {
+            "baseHash": -1661384672,
+            "baseStyle": undefined,
+            "componentId": "styles__TabsLink-sc-11246z7-2",
+            "isStatic": false,
+            "rules": Array [
+              "color:",
+              [Function],
+              ";text-decoration:none;text-align:left;",
+              [Function],
+              " &:hover,&:focus{color:",
+              [Function],
+              ";background-color:",
+              [Function],
+              ";text-decoration:none;outline:none;}",
+            ],
+            "staticRulesId": "",
+          },
+          "displayName": "styles__TabsLink",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "shouldForwardProp": undefined,
+          "styledComponentId": "styles__TabsLink-sc-11246z7-2",
+          "target": "a",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      baseId="mock"
+      down={[Function]}
+      first={[Function]}
+      groups={Array []}
+      hide={[Function]}
+      href="/admin/capco/app/project/list"
+      items={Array []}
+      last={[Function]}
+      loop={false}
+      modal={false}
+      move={[Function]}
+      next={[Function]}
+      orientation="vertical"
+      place={[Function]}
+      placement="bottom-start"
+      previous={[Function]}
+      registerGroup={[Function]}
+      registerItem={[Function]}
+      reset={[Function]}
+      rtl={false}
+      setAnimated={[Function]}
+      setBaseId={[Function]}
+      setCurrentId={[Function]}
+      setLoop={[Function]}
+      setModal={[Function]}
+      setOrientation={[Function]}
+      setRTL={[Function]}
+      setShift={[Function]}
+      setVisible={[Function]}
+      setWrap={[Function]}
+      shift={false}
+      show={[Function]}
+      sort={[Function]}
+      stopAnimation={[Function]}
+      toggle={[Function]}
+      unregisterGroup={[Function]}
+      unregisterItem={[Function]}
+      unstable_arrowRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_arrowStyles={Object {}}
+      unstable_disclosureRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_hasActiveWidget={false}
+      unstable_idCountRef={
+        Object {
+          "current": 0,
+        }
+      }
+      unstable_includesBaseElement={false}
+      unstable_moves={0}
+      unstable_originalPlacement="bottom-start"
+      unstable_popoverRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_popoverStyles={
+        Object {
+          "left": "100%",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      unstable_referenceRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_setHasActiveWidget={[Function]}
+      unstable_setIncludesBaseElement={[Function]}
+      unstable_setValue={[Function]}
+      unstable_setVirtual={[Function]}
+      unstable_update={[Function]}
+      unstable_values={Object {}}
+      unstable_virtual={false}
+      up={[Function]}
+      visible={false}
+      wrap={false}
+    >
+      <i
+        aria-hidden="true"
+        className="cap-setting-gears-1 mr-10"
+      />
+      global.administration
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
+      animated={false}
+      animating={false}
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": e {
+            "baseHash": -1661384672,
+            "baseStyle": undefined,
+            "componentId": "styles__TabsLink-sc-11246z7-2",
+            "isStatic": false,
+            "rules": Array [
+              "color:",
+              [Function],
+              ";text-decoration:none;text-align:left;",
+              [Function],
+              " &:hover,&:focus{color:",
+              [Function],
+              ";background-color:",
+              [Function],
+              ";text-decoration:none;outline:none;}",
+            ],
+            "staticRulesId": "",
+          },
+          "displayName": "styles__TabsLink",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "shouldForwardProp": undefined,
+          "styledComponentId": "styles__TabsLink-sc-11246z7-2",
+          "target": "a",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      baseId="mock"
+      down={[Function]}
+      first={[Function]}
+      groups={Array []}
+      hide={[Function]}
+      href="/evaluations"
+      items={Array []}
+      last={[Function]}
+      loop={false}
+      modal={false}
+      move={[Function]}
+      next={[Function]}
+      orientation="vertical"
+      place={[Function]}
+      placement="bottom-start"
+      previous={[Function]}
+      registerGroup={[Function]}
+      registerItem={[Function]}
+      reset={[Function]}
+      rtl={false}
+      setAnimated={[Function]}
+      setBaseId={[Function]}
+      setCurrentId={[Function]}
+      setLoop={[Function]}
+      setModal={[Function]}
+      setOrientation={[Function]}
+      setRTL={[Function]}
+      setShift={[Function]}
+      setVisible={[Function]}
+      setWrap={[Function]}
+      shift={false}
+      show={[Function]}
+      sort={[Function]}
+      stopAnimation={[Function]}
+      toggle={[Function]}
+      unregisterGroup={[Function]}
+      unregisterItem={[Function]}
+      unstable_arrowRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_arrowStyles={Object {}}
+      unstable_disclosureRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_hasActiveWidget={false}
+      unstable_idCountRef={
+        Object {
+          "current": 0,
+        }
+      }
+      unstable_includesBaseElement={false}
+      unstable_moves={0}
+      unstable_originalPlacement="bottom-start"
+      unstable_popoverRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_popoverStyles={
+        Object {
+          "left": "100%",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      unstable_referenceRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_setHasActiveWidget={[Function]}
+      unstable_setIncludesBaseElement={[Function]}
+      unstable_setValue={[Function]}
+      unstable_setVirtual={[Function]}
+      unstable_update={[Function]}
+      unstable_values={Object {}}
+      unstable_virtual={false}
+      up={[Function]}
+      visible={false}
+      wrap={false}
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-edit-write mr-10"
+      />
+      evaluations.index.page_title
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuItem))
+      animated={false}
+      animating={false}
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": e {
+            "baseHash": -1661384672,
+            "baseStyle": undefined,
+            "componentId": "styles__TabsLink-sc-11246z7-2",
+            "isStatic": false,
+            "rules": Array [
+              "color:",
+              [Function],
+              ";text-decoration:none;text-align:left;",
+              [Function],
+              " &:hover,&:focus{color:",
+              [Function],
+              ";background-color:",
+              [Function],
+              ";text-decoration:none;outline:none;}",
+            ],
+            "staticRulesId": "",
+          },
+          "displayName": "styles__TabsLink",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "shouldForwardProp": undefined,
+          "styledComponentId": "styles__TabsLink-sc-11246z7-2",
+          "target": "a",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      baseId="mock"
+      down={[Function]}
+      first={[Function]}
+      groups={Array []}
+      hide={[Function]}
+      href="/profile/edit-profile"
+      items={Array []}
+      last={[Function]}
+      loop={false}
+      modal={false}
+      move={[Function]}
+      next={[Function]}
+      orientation="vertical"
+      place={[Function]}
+      placement="bottom-start"
+      previous={[Function]}
+      registerGroup={[Function]}
+      registerItem={[Function]}
+      reset={[Function]}
+      rtl={false}
+      setAnimated={[Function]}
+      setBaseId={[Function]}
+      setCurrentId={[Function]}
+      setLoop={[Function]}
+      setModal={[Function]}
+      setOrientation={[Function]}
+      setRTL={[Function]}
+      setShift={[Function]}
+      setVisible={[Function]}
+      setWrap={[Function]}
+      shift={false}
+      show={[Function]}
+      sort={[Function]}
+      stopAnimation={[Function]}
+      toggle={[Function]}
+      unregisterGroup={[Function]}
+      unregisterItem={[Function]}
+      unstable_arrowRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_arrowStyles={Object {}}
+      unstable_disclosureRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_hasActiveWidget={false}
+      unstable_idCountRef={
+        Object {
+          "current": 0,
+        }
+      }
+      unstable_includesBaseElement={false}
+      unstable_moves={0}
+      unstable_originalPlacement="bottom-start"
+      unstable_popoverRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_popoverStyles={
+        Object {
+          "left": "100%",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      unstable_referenceRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_setHasActiveWidget={[Function]}
+      unstable_setIncludesBaseElement={[Function]}
+      unstable_setValue={[Function]}
+      unstable_setVirtual={[Function]}
+      unstable_update={[Function]}
+      unstable_values={Object {}}
+      unstable_virtual={false}
+      up={[Function]}
+      visible={false}
+      wrap={false}
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-setting-adjustment mr-10"
+      />
+      global.params
+    </Memo(ForwardRef(MenuItem))>
+    <Memo(ForwardRef(MenuSeparator))
+      animated={false}
+      animating={false}
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": e {
+            "baseHash": -1836946241,
+            "baseStyle": undefined,
+            "componentId": "styles__Separator-sc-11246z7-4",
+            "isStatic": false,
+            "rules": Array [
+              "margin:10px 0;border:1px solid #e3e3e3;width:100%;",
+            ],
+            "staticRulesId": "",
+          },
+          "displayName": "styles__Separator",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "shouldForwardProp": undefined,
+          "styledComponentId": "styles__Separator-sc-11246z7-4",
+          "target": "hr",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      baseId="mock"
+      down={[Function]}
+      first={[Function]}
+      groups={Array []}
+      hide={[Function]}
+      items={Array []}
+      last={[Function]}
+      loop={false}
+      modal={false}
+      move={[Function]}
+      next={[Function]}
+      orientation="vertical"
+      place={[Function]}
+      placement="bottom-start"
+      previous={[Function]}
+      registerGroup={[Function]}
+      registerItem={[Function]}
+      reset={[Function]}
+      rtl={false}
+      setAnimated={[Function]}
+      setBaseId={[Function]}
+      setCurrentId={[Function]}
+      setLoop={[Function]}
+      setModal={[Function]}
+      setOrientation={[Function]}
+      setRTL={[Function]}
+      setShift={[Function]}
+      setVisible={[Function]}
+      setWrap={[Function]}
+      shift={false}
+      show={[Function]}
+      sort={[Function]}
+      stopAnimation={[Function]}
+      toggle={[Function]}
+      unregisterGroup={[Function]}
+      unregisterItem={[Function]}
+      unstable_arrowRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_arrowStyles={Object {}}
+      unstable_disclosureRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_hasActiveWidget={false}
+      unstable_idCountRef={
+        Object {
+          "current": 0,
+        }
+      }
+      unstable_includesBaseElement={false}
+      unstable_moves={0}
+      unstable_originalPlacement="bottom-start"
+      unstable_popoverRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_popoverStyles={
+        Object {
+          "left": "100%",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      unstable_referenceRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_setHasActiveWidget={[Function]}
+      unstable_setIncludesBaseElement={[Function]}
+      unstable_setValue={[Function]}
+      unstable_setVirtual={[Function]}
+      unstable_update={[Function]}
+      unstable_values={Object {}}
+      unstable_virtual={false}
+      up={[Function]}
+      visible={false}
+      wrap={false}
+    />
+    <Memo(ForwardRef(MenuItem))
+      animated={false}
+      animating={false}
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": e {
+            "baseHash": -1661384672,
+            "baseStyle": undefined,
+            "componentId": "styles__TabsLink-sc-11246z7-2",
+            "isStatic": false,
+            "rules": Array [
+              "color:",
+              [Function],
+              ";text-decoration:none;text-align:left;",
+              [Function],
+              " &:hover,&:focus{color:",
+              [Function],
+              ";background-color:",
+              [Function],
+              ";text-decoration:none;outline:none;}",
+            ],
+            "staticRulesId": "",
+          },
+          "displayName": "styles__TabsLink",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "shouldForwardProp": undefined,
+          "styledComponentId": "styles__TabsLink-sc-11246z7-2",
+          "target": "a",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      baseId="mock"
+      down={[Function]}
+      first={[Function]}
+      groups={Array []}
+      hide={[Function]}
+      id="logout-button"
+      items={Array []}
+      last={[Function]}
+      loop={false}
+      modal={false}
+      move={[Function]}
+      next={[Function]}
+      onClick={[Function]}
+      orientation="vertical"
+      place={[Function]}
+      placement="bottom-start"
+      previous={[Function]}
+      registerGroup={[Function]}
+      registerItem={[Function]}
+      reset={[Function]}
+      rtl={false}
+      setAnimated={[Function]}
+      setBaseId={[Function]}
+      setCurrentId={[Function]}
+      setLoop={[Function]}
+      setModal={[Function]}
+      setOrientation={[Function]}
+      setRTL={[Function]}
+      setShift={[Function]}
+      setVisible={[Function]}
+      setWrap={[Function]}
+      shift={false}
+      show={[Function]}
+      sort={[Function]}
+      stopAnimation={[Function]}
+      toggle={[Function]}
+      unregisterGroup={[Function]}
+      unregisterItem={[Function]}
+      unstable_arrowRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_arrowStyles={Object {}}
+      unstable_disclosureRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_hasActiveWidget={false}
+      unstable_idCountRef={
+        Object {
+          "current": 0,
+        }
+      }
+      unstable_includesBaseElement={false}
+      unstable_moves={0}
+      unstable_originalPlacement="bottom-start"
+      unstable_popoverRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_popoverStyles={
+        Object {
+          "left": "100%",
+          "position": "fixed",
+          "top": "100%",
+        }
+      }
+      unstable_referenceRef={
+        Object {
+          "current": null,
+        }
+      }
+      unstable_setHasActiveWidget={[Function]}
+      unstable_setIncludesBaseElement={[Function]}
+      unstable_setValue={[Function]}
+      unstable_setVirtual={[Function]}
+      unstable_update={[Function]}
+      unstable_values={Object {}}
+      unstable_virtual={false}
+      up={[Function]}
+      visible={false}
+      wrap={false}
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-power-1 mr-10"
+      />
+      global.logout
+    </Memo(ForwardRef(MenuItem))>
+  </ForwardRef(Menu)>
+</Fragment>
+`;
+
 exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = `
 <Fragment>
   <Memo(ForwardRef(MenuButton))
@@ -1118,6 +2064,7 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "isEvaluerOnLegacyTool": true,
           "isEvaluerOnNewTool": false,
           "isPhoneConfirmed": true,
+          "isProjectAdmin": false,
           "isViewer": false,
           "media": Object {
             "url": "https://source.unsplash.com/random/150x150",

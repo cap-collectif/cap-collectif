@@ -37,6 +37,7 @@ export const user = {
   vip: false,
   isViewer: false,
   isAdmin: true,
+  isProjectAdmin: false,
   isEvaluerOnLegacyTool: true,
   isEvaluerOnNewTool: false,
 };
@@ -69,6 +70,13 @@ describe('<NavbarRight />', () => {
         user={user}
         instanceName="idf-bp-dedicated"
       />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render with an admin link when user is a project admin', () => {
+    const wrapper = shallow(
+      <NavbarRight {...props} user={{ ...user, isAdmin: false, isProjectAdmin: true }} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
