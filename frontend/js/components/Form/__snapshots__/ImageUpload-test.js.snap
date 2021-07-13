@@ -16,10 +16,19 @@ exports[`<ImageUpload /> render correctly 1`] = `
     <Dropzone
       accept=""
       disablePreview={false}
+      disabled={false}
+      getFilesFromEvent={[Function]}
+      maxFiles={0}
       maxSize={Infinity}
       minSize={0}
       multiple={false}
+      noClick={false}
+      noDrag={false}
+      noDragEventsBubbling={false}
+      noKeyboard={false}
       onDrop={[Function]}
+      preventDropOnDocument={true}
+      validator={null}
     >
       <Component />
     </Dropzone>
@@ -100,10 +109,19 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     <Dropzone
       accept=""
       disablePreview={true}
+      disabled={false}
+      getFilesFromEvent={[Function]}
+      maxFiles={0}
       maxSize={Infinity}
       minSize={0}
       multiple={false}
+      noClick={false}
+      noDrag={false}
+      noDragEventsBubbling={false}
+      noKeyboard={false}
       onDrop={[Function]}
+      preventDropOnDocument={true}
+      validator={null}
     >
       <Component />
     </Dropzone>

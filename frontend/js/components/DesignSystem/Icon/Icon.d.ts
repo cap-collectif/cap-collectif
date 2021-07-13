@@ -50,17 +50,14 @@ declare export const ICON_NAME = {
     LINKEDIN: 'LINKEDIN',
     TWITTER: 'TWITTER',
     DRAG: 'DRAG',
-    FACEBOOK: 'FACEBOOK',
-    ENVELOPE: 'ENVELOPE',
-    LINK: 'LINK',
-    LINKEDIN: 'LINKEDIN',
-    TWITTER: 'TWITTER',
     FILE_O: 'FILE_O',
+    FILE: 'FILE',
     COG_O: 'COG_O',
     ENVELOPE_O: 'ENVELOPE_O',
     LOCK: 'LOCK',
     PRINT: 'PRINT',
-    PIE_CHART: 'PIE_CHART'
+    PIE_CHART: 'PIE_CHART',
+    ADD_DRAG: 'ADD_DRAG'
 };
 
 declare export const ICON_SIZE = {

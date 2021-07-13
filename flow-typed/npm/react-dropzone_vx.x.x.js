@@ -1,10 +1,23 @@
 // flow-typed signature: ce9460b02a3ccf3df34711037f718704
 // flow-typed version: <<STUB>>/react-dropzone_v5/flow_v0.75.0
 
+import * as React from 'react';
+import type { HTMLAttributes } from 'react';
+
 declare module "react-dropzone" {
   declare export function useDropzone(options?: DropzoneOptions): DropzoneState;
 
   declare export { FileWithPath } from "file-selector";
+
+  declare export type FileError ={
+    message: string;
+    code: "file-too-large" | "file-too-small" | "too-many-files" | "file-invalid-type" | string;
+  }
+
+  declare export type FileRejection= {
+    file: File;
+    errors: FileError[];
+  }
  
   declare export type DropzoneFile = File & {
     preview?: string;
@@ -28,13 +41,16 @@ declare module "react-dropzone" {
     noDrag?: boolean,
     noDragEventsBubbling?: boolean,
     disabled?: boolean,
-    onDrop?: (acceptedFiles: Array<DropzoneFile>, rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
-    onDropAccepted?: (acceptedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
-    onDropRejected?: (rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
+    onDrop?: (acceptedFiles: Array<DropzoneFile>, fileRejections: FileRejection[], event: SyntheticDragEvent<>) => mixed,
+    onDropAccepted?: (files: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
+    onDropRejected?: (fileRejections: FileRejection[], event: SyntheticDragEvent<>) => mixed,
     getFilesFromEvent?: (
       event: DropEvent
     ) => Promise<Array<File | DataTransferItem>>,
-    onFileDialogCancel?: () => void
+    onFileDialogCancel?: () => void,
+    maxFiles?: number,
+    validator?: (file:File) => FileError | FileError[] | null,
+
   };
 
   declare export type DropEvent =
@@ -51,7 +67,7 @@ declare module "react-dropzone" {
     isFileDialogActive: boolean,
     draggedFiles: File[],
     acceptedFiles: File[],
-    rejectedFiles: File[],
+    fileRejections: FileRejection[];
     rootRef: React.RefObject<HTMLElement>,
     inputRef: React.RefObject<HTMLInputElement>,
     getRootProps(props?: DropzoneRootProps): DropzoneRootProps,

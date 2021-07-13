@@ -59,9 +59,11 @@ export const ICON_NAME = {
   TWITTER: 'TWITTER',
   DRAG: 'DRAG',
   FILE_O: 'FILE_O',
+  FILE: 'FILE',
   COG_O: 'COG_O',
   ENVELOPE_O: 'ENVELOPE_O',
   LOCK: 'LOCK',
+  ADD_DRAG: 'ADD_DRAG',
   PRINT: 'PRINT',
   PIE_CHART: 'PIE_CHART',
 };
