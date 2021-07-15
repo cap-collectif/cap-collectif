@@ -11,22 +11,27 @@ use Capco\AppBundle\Utils\IPGuesser;
 
 class ReCaptchaValidator extends ConstraintValidator
 {
-    protected $request;
-    protected $recaptcha;
-    protected $enabled;
-    protected $toggle;
+    protected RequestStack $requestStack;
+    protected ReCaptcha $recaptcha;
+    protected Manager $toggle;
+
+    // used to disable in functional testing
+    protected bool $enabled;
 
     public function __construct(RequestStack $requestStack, string $privateKey, Manager $toggle, bool $enabled = true)
     {
-        $this->request = $requestStack->getCurrentRequest();
+        $this->requestStack = $requestStack;
         $this->recaptcha = new ReCaptcha($privateKey);
         $this->toggle = $toggle;
-        $this->enabled = $enabled; // used to disable in functional testing
+        $this->enabled = $enabled;
     }
 
     public function validate($value, Constraint $constraint)
     {
-        if ($this->enabled && $this->toggle->isActive('captcha') && !$this->recaptcha->verify($value, IPGuesser::getClientIp($request))->isSuccess()) {
+        $request = $requestStack->getCurrentRequest();
+        $ip = IPGuesser::getClientIp($request);
+
+        if ($this->enabled && $this->toggle->isActive('captcha') && !$this->recaptcha->verify($value, $ip)->isSuccess()) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
