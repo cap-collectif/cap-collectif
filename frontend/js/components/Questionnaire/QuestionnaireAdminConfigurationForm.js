@@ -331,7 +331,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
                 id="parameters-submit"
                 type="submit"
                 bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.change'} />
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
