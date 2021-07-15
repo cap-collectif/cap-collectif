@@ -28,7 +28,7 @@ class ReCaptchaValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        $request = $requestStack->getCurrentRequest();
+        $request = $this->requestStack->getCurrentRequest();
         $ip = IPGuesser::getClientIp($request);
 
         if ($this->enabled && $this->toggle->isActive('captcha') && !$this->recaptcha->verify($value, $ip)->isSuccess()) {
