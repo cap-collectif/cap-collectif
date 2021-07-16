@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Alert } from 'react-bootstrap';
 import RequirementsForm from './RequirementsForm';
 import type { RequirementsModal_step } from '~relay/RequirementsModal_step.graphql';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 
 type Props = {|
   +show: boolean,
@@ -37,7 +38,7 @@ export const RequirementsModal = ({ show, handleClose, step }: Props) => {
 
         <div className="row">
           <div className="col-xs-12">
-            <p>{step.requirements.reason}</p>
+            <WYSIWYGRender value={step.requirements.reason} />
           </div>
           <RequirementsForm stepId={step.id} step={step} />
         </div>
