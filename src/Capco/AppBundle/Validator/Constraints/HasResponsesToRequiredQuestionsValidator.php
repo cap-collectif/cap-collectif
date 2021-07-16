@@ -107,10 +107,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
     private function questionsHaveAtLeastOneLogicJump(iterable $questions): bool
     {
         foreach ($questions as $question) {
-            if (
-                \count($question->getJumps()) > 0 ||
-                $question->hasAlwaysJumpDestinationQuestion()
-            ) {
+            if (\count($question->getJumps()) > 0) {
                 return true;
             }
         }
