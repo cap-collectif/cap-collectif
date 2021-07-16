@@ -52,3 +52,10 @@ Circle.args = {
   multiple: false,
   circle: true,
 };
+export const Disabled = Template.bind({});
+Disabled.args = {
+  size: UPLOADER_SIZE.LG,
+  maxSize: 10,
+  multiple: false,
+  disabled: true,
+};

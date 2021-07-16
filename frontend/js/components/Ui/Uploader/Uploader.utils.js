@@ -5,6 +5,7 @@ import fileSizeConvert from '~/utils/fileSizeConvert';
 
 const ERROR_TYPE = {
   INVALID_TYPE: 'download-error-file-format',
+  INVALID_TYPE_MULTIPLE: 'download-error-file-formats',
   MAX_WEIGHT_MULTIPLE: 'error-download-file-sizes',
   MAX_WEIGHT: 'error-download-file-size',
   TIMEOUT: 'error-download-timeout',
@@ -40,6 +41,12 @@ export const getError = ({ fileRejection, maxSize, intl, acceptedFiles, multiple
   }
 
   if (acceptedFiles && mainError.code === 'file-invalid-type') {
+    if (multiple) {
+      return intl.formatMessage(
+        { id: ERROR_TYPE.INVALID_TYPE_MULTIPLE },
+        { fileName, fileType: fileExtension },
+      );
+    }
     return intl.formatMessage(
       { id: ERROR_TYPE.INVALID_TYPE },
       { fileName, fileType: fileExtension },

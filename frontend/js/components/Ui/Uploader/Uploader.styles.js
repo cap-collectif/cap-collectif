@@ -116,7 +116,7 @@ export const ThumbnailControls: StyledComponent<
   align-items: center;
   justify-content: center;
   & > button {
-    display: none !important;
+    opacity: 0 !important;
   }
   &:hover {
     background: linear-gradient(0deg, rgba(39, 43, 48, 0.32), rgba(39, 43, 48, 0.32));
@@ -124,7 +124,7 @@ export const ThumbnailControls: StyledComponent<
       color: ${colors.white};
     }
     & > button {
-      display: flex !important;
+      opacity: 1 !important;
     }
   }
 `;
@@ -144,7 +144,7 @@ export const FileItem: StyledComponent<{}, {}, any> = styled.li`
   padding: 8px;
   border-radius: 4px;
   & > button {
-    display: none !important;
+    opacity: 0 !important;
   }
   &:hover {
     background-color: ${colors.gray[100]};
@@ -152,7 +152,7 @@ export const FileItem: StyledComponent<{}, {}, any> = styled.li`
       color: ${colors.gray[700]};
     }
     & > button {
-      display: flex !important;
+      opacity: 1 !important;
     }
   }
 `;
