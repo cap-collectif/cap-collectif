@@ -11,7 +11,7 @@ Object {
               "edges": Array [
                 Object {
                   "node": Object {
-                    "value": "\\"Sans profession\\"",
+                    "value": "{\\"labels\\":[\\"Sans profession\\"],\\"other\\":null}",
                   },
                 },
               ],
@@ -26,7 +26,7 @@ Object {
               "edges": Array [
                 Object {
                   "node": Object {
-                    "value": "\\"Profession libérale\\"",
+                    "value": "{\\"labels\\":[\\"Profession libérale\\"],\\"other\\":null}",
                   },
                 },
               ],

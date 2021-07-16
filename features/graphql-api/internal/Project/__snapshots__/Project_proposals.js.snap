@@ -1060,7 +1060,7 @@ Object {
           },
           Object {
             "formattedValue": "Sans profession",
-            "value": "\\"Sans profession\\"",
+            "value": "{\\"labels\\":[\\"Sans profession\\"],\\"other\\":null}",
           },
         ],
         "title": "Proposition plus votable",

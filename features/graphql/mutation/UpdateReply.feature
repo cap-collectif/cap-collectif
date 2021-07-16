@@ -126,7 +126,7 @@ Scenario: Author wants to update his reply
               "question":{
                 "id":"UXVlc3Rpb246Mzk0NA=="
               },
-              "value":"\u0022Sans profession\u0022"
+              "value":"{\"labels\":[\"Sans profession\"],\"other\":null}"
             }
           ]
         }

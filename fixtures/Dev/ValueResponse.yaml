@@ -249,12 +249,12 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@xQuestion18'
         proposal: '@proposal12'
         reply: '@reply2'
-        value: 'Sans profession'
+        value: { 'labels': ['Sans profession'], 'other': null }
         createdAt: <(new \DateTime('2021-01-01 02:47:00'))>
     response48:
         question: '@xQuestion18'
         reply: '@reply6'
-        value: 'Profession libérale'
+        value: { 'labels': ['Profession libérale'], 'other': null }
         createdAt: <(new \DateTime('2021-01-01 02:27:00'))>
 
     response1IdfProposal1:
