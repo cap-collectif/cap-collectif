@@ -2,8 +2,10 @@
 
 exports[`<MultipleRadioButton /> should render correctly 1`] = `
 <div
+  aria-labelledby="label-123"
   className="form-group form-fields"
   id="1"
+  role="radiogroup"
 >
   <Help
     className="help-block"
@@ -57,8 +59,10 @@ exports[`<MultipleRadioButton /> should render correctly 1`] = `
 
 exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
 <div
+  aria-labelledby="label-123"
   className="form-group form-fields"
   id="1"
+  role="radiogroup"
 >
   <Help
     className="help-block"
@@ -112,8 +116,10 @@ exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
 
 exports[`<MultipleRadioButton /> should render correctly when in questionnaire form 1`] = `
 <div
+  aria-labelledby="label-123"
   className="form-group form-fields"
   id="1"
+  role="radiogroup"
 >
   <Help
     className="help-block"

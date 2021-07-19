@@ -2,6 +2,7 @@
 
 exports[`<FileUpload /> should render correctly 1`] = `
 <FileUploadstyle__FileUploadContainer
+  aria-labelledby="label-123"
   id="123"
 >
   <Help
@@ -100,6 +101,7 @@ exports[`<FileUpload /> should render correctly 1`] = `
 
 exports[`<FileUpload /> should render correctly when disabled 1`] = `
 <FileUploadstyle__FileUploadContainer
+  aria-labelledby="label-123"
   id="123"
 >
   <Help
@@ -198,6 +200,7 @@ exports[`<FileUpload /> should render correctly when disabled 1`] = `
 
 exports[`<FileUpload /> should render correctly when in questionnaire form 1`] = `
 <FileUploadstyle__FileUploadContainer
+  aria-labelledby="label-123"
   id="123"
 >
   <Help
@@ -296,6 +299,7 @@ exports[`<FileUpload /> should render correctly when in questionnaire form 1`] =
 
 exports[`<FileUpload /> should render correctly when no value 1`] = `
 <FileUploadstyle__FileUploadContainer
+  aria-labelledby="label-123"
   id="123"
 >
   <Help

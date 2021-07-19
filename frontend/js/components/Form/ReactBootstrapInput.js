@@ -222,7 +222,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       props.placeholder = intl.formatMessage({ id: props.placeholder });
     }
 
-    const ariaDescribedBy = `${props.id ? `${props.id}-error` : ''} ${
+    const ariaDescribedBy = `${props.id ? `label-${props.id}` : ''} ${
       props.help && props.id ? `${props.id}-help` : ''
     }`;
     const ariaInvalid = !!errors;
@@ -642,7 +642,11 @@ class ReactBootstrapInput extends React.Component<Props> {
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
         {label && (
-          <Label htmlFor={id || ''} className={cx('control-label', labelClassName)} type="label">
+          <Label
+            htmlFor={id || ''}
+            className={cx('control-label', labelClassName)}
+            type="label"
+            id={id ? `label-${id}` : ''}>
             {label}
           </Label>
         )}

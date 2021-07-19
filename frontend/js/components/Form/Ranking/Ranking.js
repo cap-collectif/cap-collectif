@@ -30,7 +30,7 @@ const Ranking = ({ field, id, disabled = false, typeForm, onChange }: Props) => 
   };
 
   return (
-    <div className="form-group" id={id}>
+    <div className="form-group" id={id} aria-labelledby={`label-${id}`}>
       {field.helpText && (
         <Help className="help-block" typeForm={typeForm}>
           {field.helpText}
@@ -38,7 +38,7 @@ const Ranking = ({ field, id, disabled = false, typeForm, onChange }: Props) => 
       )}
       {field.description && <Description typeForm={typeForm}>{field.description}</Description>}
 
-      <RankingList dataForm={field} onChange={handleRankingChange} isDisabled={disabled} />
+      <RankingList dataForm={field} onChange={handleRankingChange} isDisabled={disabled} id={id} />
     </div>
   );
 };

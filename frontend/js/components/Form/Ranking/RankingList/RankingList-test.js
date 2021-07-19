@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import RankingList from './RankingList';
 
 const baseRankingList = {
+  id: '123-rakintlist',
   dataForm: {
     id: '12',
     helpText: "Texte d'aide",

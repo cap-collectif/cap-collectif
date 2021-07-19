@@ -63,7 +63,7 @@ const FileUpload = ({ id, typeForm, className, onChange, disabled, value }: Prop
   };
 
   return (
-    <FileUploadContainer id={id} className={className}>
+    <FileUploadContainer id={id} className={className} aria-labelledby={`label-${id}`}>
       <Help typeForm={typeForm}>
         <FormattedMessage id="max-weight-10mo" />
       </Help>

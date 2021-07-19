@@ -80,7 +80,11 @@ const MultipleRadioButton = ({
   };
 
   return (
-    <div className="form-group form-fields" id={id}>
+    <div
+      className="form-group form-fields"
+      id={id}
+      role="radiogroup"
+      aria-labelledby={`label-${field.id}`}>
       {field.helpText && (
         <Help className="help-block" typeForm={typeForm}>
           {field.helpText}

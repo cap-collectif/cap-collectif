@@ -55,7 +55,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
         class="form-group"
       >
         <textarea
-          aria-describedby="body-error "
+          aria-describedby="label-body "
           aria-invalid="false"
           autocomplete="off"
           class="form-control"
@@ -141,7 +141,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
         class="form-group"
       >
         <textarea
-          aria-describedby="body-error "
+          aria-describedby="label-body "
           aria-invalid="false"
           autocomplete="off"
           class="form-control"
@@ -321,7 +321,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
         class="form-group"
       >
         <textarea
-          aria-describedby="body-error "
+          aria-describedby="label-body "
           aria-invalid="false"
           autocomplete="off"
           class="form-control"
@@ -407,7 +407,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
         class="form-group"
       >
         <textarea
-          aria-describedby="body-error "
+          aria-describedby="label-body "
           aria-invalid="false"
           autocomplete="off"
           class="form-control"

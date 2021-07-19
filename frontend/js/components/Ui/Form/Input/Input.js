@@ -58,6 +58,8 @@ const Input = ({
       onFocus={onFocus}
       value={value}
       aria-required={required}
+      aria-labelledby={id ? `label-${id}` : ''}
+      autoComplete="off"
     />
   </InputContainer>
 );

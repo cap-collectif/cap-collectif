@@ -20,7 +20,7 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
           one-possible-answer
         </span>
         <select
-          aria-describedby="project-error "
+          aria-describedby="label-project "
           aria-invalid={false}
           autoFocus={false}
           className="form-control"

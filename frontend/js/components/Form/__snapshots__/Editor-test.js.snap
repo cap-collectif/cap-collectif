@@ -2,6 +2,7 @@
 
 exports[`<Editor /> should render correctly with defaultProps 1`] = `
 <div
+  aria-labelledby="label-azerty"
   class="Editor__Container-sc-1pxywe6-0 bAKYmZ editor test"
   id="azerty"
 >

@@ -417,7 +417,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
             className="form-group"
           >
             <textarea
-              aria-describedby="body-error "
+              aria-describedby="label-body "
               aria-invalid={false}
               autoComplete="off"
               autoFocus={false}

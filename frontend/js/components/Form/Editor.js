@@ -181,7 +181,11 @@ export class Editor extends React.Component<Props, State> {
     };
 
     return (
-      <Container id={id} className={classNames(classes)} hasCounter={withCharacterCounter}>
+      <Container
+        id={id}
+        className={classNames(classes)}
+        hasCounter={withCharacterCounter}
+        aria-labelledby={id ? `label-${id}` : ''}>
         <div ref={this.toolbarRef}>
           <QuillToolbar onFocus={() => this.quill.focus()} />
         </div>

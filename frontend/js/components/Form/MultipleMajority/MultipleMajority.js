@@ -35,7 +35,11 @@ const MultipleMajority = ({
       ? choices
       : ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
   return (
-    <div id={field.id} className="form-group">
+    <div
+      id={field.id}
+      className="form-group"
+      role="radiogroup"
+      aria-labelledby={`label-${field.id}`}>
       <ChoicesContainer
         disabled={disabled}
         asPreview={asPreview}

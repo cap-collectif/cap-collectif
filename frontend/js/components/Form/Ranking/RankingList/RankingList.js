@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { type DropResult, type DragUpdate } from 'react-beautiful-dnd';
 import isEqual from 'lodash/isEqual';
+import { useIntl } from 'react-intl';
 import Context from '~/components/Ui/DragnDrop/Context/Context';
 import List from '~/components/Ui/DragnDrop/List/List';
 import Item from '~/components/Ui/DragnDrop/Item/Item';
@@ -12,6 +13,7 @@ import { swap, moveItemOnAvailable, moveItem, formatDataDraggable } from '~/util
 import config from '~/config';
 import { type FieldsProps } from '../Ranking';
 import { type Field } from '../../Form.type';
+import VisuallyHidden from '~ds/VisuallyHidden/VisuallyHidden';
 
 const ID_LIST: {
   CHOICES: 'ranking__choices',
@@ -22,6 +24,7 @@ const ID_LIST: {
 };
 
 type RankingListProps = {
+  id: string,
   onChange: (Array<Field>) => void,
   dataForm: FieldsProps,
   isDisabled?: boolean,
@@ -53,7 +56,8 @@ const getTotalChoice = (choice, selection) => {
   return total;
 };
 
-const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
+const RankingList = ({ dataForm, isDisabled, onChange, id }: RankingListProps) => {
+  const intl = useIntl();
   const { choices: formChoices, values: formSelection = [] } = dataForm;
   const totalChoice: number = getTotalChoice(formChoices, formSelection);
 
@@ -100,7 +104,7 @@ const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
     }
   }, [selection, choices, onChange, formSelection, formChoices, totalChoice, previousSelection]);
 
-  const getList = (id: string) => (id === ID_LIST.CHOICES ? choices : selection);
+  const getList = (listId: string) => (listId === ID_LIST.CHOICES ? choices : selection);
 
   const getDestinationIndex = (list, draggableIdDestination) => {
     let destinationIndex = list.findIndex(item => item && item.id === draggableIdDestination);
@@ -208,7 +212,11 @@ const RankingList = ({ dataForm, isDisabled, onChange }: RankingListProps) => {
     : null;
 
   return (
-    <RankingListContainer>
+    <RankingListContainer ariaLabelledby={`label-${id}`} tabIndex={0} role="group">
+      <VisuallyHidden id="drag-instructions">
+        {intl.formatMessage({ id: 'aria-ranking-item-instructions' })}
+      </VisuallyHidden>
+
       <Context isDisabled={isDisabled} onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
         <List
           id={ID_LIST.CHOICES}

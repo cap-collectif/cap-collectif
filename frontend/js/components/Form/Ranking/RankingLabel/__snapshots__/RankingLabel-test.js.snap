@@ -21,6 +21,7 @@ exports[`<RankingLabel /> should render correctly 1`] = `
     width="100%"
   />
   <button
+    aria-label="aria-ranking-button-select"
     className="btn-pick-item"
     disabled={false}
     onClick={[Function]}
@@ -59,6 +60,7 @@ exports[`<RankingLabel /> should render correctly when disabled 1`] = `
     width="100%"
   />
   <button
+    aria-label="aria-ranking-button-select"
     className="btn-pick-item"
     disabled={true}
     onClick={[Function]}
@@ -89,6 +91,7 @@ exports[`<RankingLabel /> should render correctly without description 1`] = `
     width="100%"
   />
   <button
+    aria-label="aria-ranking-button-select"
     className="btn-pick-item"
     disabled={false}
     onClick={[Function]}
@@ -120,6 +123,7 @@ exports[`<RankingLabel /> should render correctly without image 1`] = `
     }
   />
   <button
+    aria-label="aria-ranking-button-select"
     className="btn-pick-item"
     disabled={false}
     onClick={[Function]}

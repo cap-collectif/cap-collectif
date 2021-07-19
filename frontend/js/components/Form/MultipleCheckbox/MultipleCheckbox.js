@@ -66,7 +66,7 @@ const MultipleCheckbox = ({
   };
 
   return (
-    <div className="form-group form-fields" id={id}>
+    <div className="form-group form-fields" id={id} role="group" aria-labelledby={`label-${id}`}>
       {field.helpText && (
         <Help className="help-block" typeForm={typeForm}>
           {field.helpText}

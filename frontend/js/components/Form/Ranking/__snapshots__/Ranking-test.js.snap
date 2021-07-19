@@ -2,6 +2,7 @@
 
 exports[`<Ranking /> should render correctly 1`] = `
 <div
+  aria-labelledby="label-ranking"
   className="form-group"
   id="ranking"
 >
@@ -37,6 +38,7 @@ exports[`<Ranking /> should render correctly 1`] = `
         "values": null,
       }
     }
+    id="ranking"
     isDisabled={false}
     onChange={[Function]}
   />

@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RankingList /> should render correctly 1`] = `
-<RankingListstyle__RankingListContainer>
+<RankingListstyle__RankingListContainer
+  ariaLabelledby="label-123-rakintlist"
+  role="group"
+  tabIndex={0}
+>
+  <VisuallyHidden
+    id="drag-instructions"
+  >
+    aria-ranking-item-instructions
+  </VisuallyHidden>
   <Context
     isDisabled={false}
     onDragEnd={[Function]}
@@ -109,7 +118,16 @@ exports[`<RankingList /> should render correctly 1`] = `
 `;
 
 exports[`<RankingList /> should render correctly when disabled 1`] = `
-<RankingListstyle__RankingListContainer>
+<RankingListstyle__RankingListContainer
+  ariaLabelledby="label-123-rakintlist"
+  role="group"
+  tabIndex={0}
+>
+  <VisuallyHidden
+    id="drag-instructions"
+  >
+    aria-ranking-item-instructions
+  </VisuallyHidden>
   <Context
     isDisabled={true}
     onDragEnd={[Function]}

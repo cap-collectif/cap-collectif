@@ -2,8 +2,10 @@
 
 exports[`<MultipleCheckbox /> should render correctly 1`] = `
 <div
+  aria-labelledby="label-1"
   className="form-group form-fields"
   id="1"
+  role="group"
 >
   <Help
     className="help-block"
@@ -53,8 +55,10 @@ exports[`<MultipleCheckbox /> should render correctly 1`] = `
 
 exports[`<MultipleCheckbox /> should render correctly when disabled 1`] = `
 <div
+  aria-labelledby="label-1"
   className="form-group form-fields"
   id="1"
+  role="group"
 >
   <Help
     className="help-block"
@@ -104,8 +108,10 @@ exports[`<MultipleCheckbox /> should render correctly when disabled 1`] = `
 
 exports[`<MultipleCheckbox /> should render correctly when in questionnaire form 1`] = `
 <div
+  aria-labelledby="label-1"
   className="form-group form-fields"
   id="1"
+  role="group"
 >
   <Help
     className="help-block"

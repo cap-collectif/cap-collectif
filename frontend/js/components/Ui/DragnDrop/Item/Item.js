@@ -37,7 +37,8 @@ const Item = ({
         isEmpty={!children}
         ref={provided.innerRef}
         {...provided.draggableProps}
-        {...provided.dragHandleProps}>
+        {...provided.dragHandleProps}
+        aria-labelledby="drag-instructions">
         {preview}
 
         {children && (
