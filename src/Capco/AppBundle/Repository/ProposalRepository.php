@@ -717,6 +717,17 @@ class ProposalRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    public function getProposalsByProject(string $projectId): array
+    {
+        $qb = $this->getQueryProposalWithProject();
+        $qb->andWhere($qb->expr()->eq('pas.project', ':projectId'))->setParameter(
+            ':projectId',
+            $projectId
+        );
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

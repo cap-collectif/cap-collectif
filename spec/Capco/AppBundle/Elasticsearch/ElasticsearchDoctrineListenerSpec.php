@@ -6,9 +6,14 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Resolver\EntityChangeSetResolver;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -26,9 +31,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     public function let(
         ElasticsearchRabbitMQListener $listener,
         LoggerInterface $logger,
-        AbstractResponseRepository $responseRepository
+        AbstractResponseRepository $responseRepository,
+        ProposalRepository $proposalRepository,
+        OpinionRepository $opinionRepository,
+        EntityChangeSetResolver $changeSetResolver
     ): void {
-        $this->beConstructedWith($listener, $logger, $responseRepository);
+        $this->beConstructedWith(
+            $listener,
+            $logger,
+            $responseRepository,
+            $proposalRepository,
+            $opinionRepository,
+            $changeSetResolver
+        );
     }
 
     public function it_is_initializable(): void
@@ -120,6 +135,127 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $listener->addToMessageStack($replyMessage, 1)->shouldBeCalledOnce();
         $listener->addToMessageStack($userMessage, 1)->shouldBeCalledOnce();
         $listener->addToMessageStack($responseMessage, 1)->shouldBeCalledOnce();
+    }
+
+    public function it_index_a_project(
+        ElasticsearchRabbitMQListener $listener,
+        LifecycleEventArgs $args,
+        ProposalRepository $proposalRepository,
+        OpinionRepository $opinionRepository,
+        EntityChangeSetResolver $changeSetResolver,
+        Project $project,
+        Proposal $proposal,
+        Opinion $opinion
+    ): void {
+        $project->getId()->willReturn('project1');
+        $project->getVisibility()->willReturn(1);
+        $project->getTitle()->willReturn('La 7a hardcore.');
+
+        $proposal->getId()->willReturn('proposal1');
+        $proposal->getProject()->willReturn($project);
+        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
+        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
+        $proposal->getComments()->willReturn(new ArrayCollection());
+
+        $opinion->getId()->willReturn('opinion1');
+
+        $entityChangeSet = [
+            'visibility' => [
+                0 => 1,
+                1 => 2,
+            ],
+        ];
+
+        $changeSetResolver->getEntityChangeSet($project)->willReturn($entityChangeSet);
+
+        $proposalRepository->getProposalsByProject('project1')->willReturn([$proposal]);
+        $opinionRepository->getOpinionsByProject('project1')->willReturn([$opinion]);
+        $args->getObject()->willReturn($project);
+
+        $this->handleEvent($args);
+
+        $projectMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($project->getWrappedObject()),
+                    'id' => 'project1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+        $proposalMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($proposal->getWrappedObject()),
+                    'id' => 'proposal1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+        $opinionMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($opinion->getWrappedObject()),
+                    'id' => 'opinion1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+
+        $listener->addToMessageStack($projectMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($proposalMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($opinionMessage, 1)->shouldBeCalledOnce();
+    }
+
+    public function it_index_a_project_with_no_changes(
+        ElasticsearchRabbitMQListener $listener,
+        LifecycleEventArgs $args,
+        ProposalRepository $proposalRepository,
+        EntityChangeSetResolver $changeSetResolver,
+        Project $project,
+        Proposal $proposal
+    ) {
+        $project->getId()->willReturn('project1');
+        $project->getVisibility()->willReturn(1);
+        $project->getTitle()->willReturn('La 8c impossible.');
+
+        $proposal->getId()->willReturn('proposal1');
+        $proposal->getProject()->willReturn($project);
+        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
+        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
+        $proposal->getComments()->willReturn(new ArrayCollection());
+
+        $entityChangeSet = [
+            'title' => [
+                0 => 'La 8c impossible.',
+                1 => 'test1',
+            ],
+        ];
+
+        $changeSetResolver->getEntityChangeSet($project)->willReturn($entityChangeSet);
+        $args->getObject()->willReturn($project);
+        $this->handleEvent($args);
+        $projectMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($project->getWrappedObject()),
+                    'id' => 'project1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+        $proposalMessage = new Message(
+            json_encode(
+                [
+                    'class' => \get_class($proposal->getWrappedObject()),
+                    'id' => 'proposal1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
+
+        $listener->addToMessageStack($projectMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($proposalMessage, 1)->shouldNotBeCalled();
     }
 
     public function it_index_a_proposal(

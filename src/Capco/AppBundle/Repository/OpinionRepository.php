@@ -25,8 +25,7 @@ class OpinionRepository extends EntityRepository
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('o');
-        $qb
-            ->addSelect('aut', 'oc', 'oot', 'autm', 'ocs')
+        $qb->addSelect('aut', 'oc', 'oot', 'autm', 'ocs')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('o.OpinionType', 'oot')
@@ -34,6 +33,19 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('oc.step', 'ocs')
             ->where('o.id IN (:ids)')
             ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getOpinionsByProject(string $projectId): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->leftJoin('cas.project', 'c')
+            ->andWhere($qb->expr()->eq('c.id', ':projectId'))
+            ->setParameter(':projectId', $projectId);
 
         return $qb->getQuery()->getResult();
     }
@@ -192,8 +204,7 @@ class OpinionRepository extends EntityRepository
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('o');
-        $qb
-            ->select('count(DISTINCT o)')
+        $qb->select('count(DISTINCT o)')
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user);
 
