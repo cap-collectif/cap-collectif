@@ -257,7 +257,7 @@ InternalProposal:
                 type: 'Boolean!'
             webPageUrl:
                 type: 'URI'
-                description:
+                description: 'link of Web page'
             facebookUrl:
                 type: 'URI'
                 description: 'link of Facebook page'

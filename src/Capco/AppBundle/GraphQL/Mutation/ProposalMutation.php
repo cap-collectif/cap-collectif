@@ -603,12 +603,9 @@ class ProposalMutation implements ContainerAwareInterface
         $socialNetworks =
             !$create && $proposal->getProposalSocialNetworks()
                 ? $proposal->getProposalSocialNetworks()
-                : new ProposalSocialNetworks();
-        if ($create || !$socialNetworks) {
-            $socialNetworks = new ProposalSocialNetworks();
-            $socialNetworks->setProposal($proposal);
-            $proposal->setProposalSocialNetworks($socialNetworks);
-        }
+                : (new ProposalSocialNetworks())->setProposal($proposal);
+
+        $proposal->setProposalSocialNetworks($socialNetworks);
 
         if ($proposalForm->isUsingWebPage()) {
             $socialNetworks->setWebPageUrl($values['webPageUrl']);

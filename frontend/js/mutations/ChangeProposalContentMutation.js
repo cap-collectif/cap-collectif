@@ -64,6 +64,12 @@ const mutation = graphql`
         district {
           id
         }
+        twitterUrl
+        webPageUrl
+        facebookUrl
+        instagramUrl
+        linkedInUrl
+        youtubeUrl
       }
     }
   }

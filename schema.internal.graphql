@@ -8594,6 +8594,8 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Return all tipsmeee related data."""
   tipsmeee: TipsMeee
   isProposalAuthorAllowedToAddNews: Boolean!
+
+  """link of Web page"""
   webPageUrl: URI
 
   """link of Facebook page"""

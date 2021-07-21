@@ -125,6 +125,9 @@ class ProposalMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
 
         // we set the proposal as non draft
+        $proposal
+            ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
+            ->shouldBeCalled();
         $proposal->setDraft(false)->shouldBeCalled();
         $proposal->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
@@ -260,6 +263,9 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
+        $proposal
+            ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
+            ->shouldBeCalled();
 
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
 
@@ -359,6 +365,9 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
+        $proposal
+            ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
+            ->shouldBeCalled();
 
         $globalIdResolver->resolve($values['id'], $admin)->willReturn($proposal);
 
