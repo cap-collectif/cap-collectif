@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireCreateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -27,9 +28,13 @@ class CreateQuestionnaireMutation implements MutationInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $questionnaire = new Questionnaire();
+
+        if ($viewer->hasRole('ROLE_PROJECT_ADMIN') && !$viewer->hasRole('ROLE_ADMIN')) {
+            $questionnaire->setOwner($viewer);
+        }
 
         $form = $this->formFactory->create(QuestionnaireCreateType::class, $questionnaire);
 

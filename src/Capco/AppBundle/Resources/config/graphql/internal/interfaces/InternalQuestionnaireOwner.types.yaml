@@ -1,0 +1,35 @@
+InternalQuestionnaireOwner:
+  type: interface
+  config:
+    name: QuestionnaireOwner
+    description: 'Represent an owner of a questionnaire.'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\QuestionnaireOwnerTypeResolver", [value])'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'User ID'
+      username:
+        type: 'String'
+        description: 'User username'
+      questionnaires:
+        type: 'InternalQuestionnaireConnection!'
+        description: 'Get all questionnaires that the user owns.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QuestionnairesResolver", [args, value])'
+        argsBuilder: 'Relay::ForwardConnection'
+        args:
+          affiliations:
+            type: '[InternalQuestionnaireAffiliation!]'
+            description: |
+              Array of viewer's affiliation options for questionnaires returned from the connection.
+              For example, OWNER will include only questionnaires that the current viewer owns.
+          query:
+            type: 'String'
+            description: the search query
+          orderBy:
+            type: 'QuestionnaireOrder'
+            defaultValue:
+              {
+                field: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireOrderField::CREATED_AT")',
+                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+              }
+            description: 'The ordering direction for questionnaires'

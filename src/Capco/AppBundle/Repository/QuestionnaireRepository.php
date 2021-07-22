@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
+use Capco\AppBundle\Enum\QuestionnaireAffiliation;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\ProposalForm;
 
@@ -53,6 +55,43 @@ class QuestionnaireRepository extends EntityRepository
         if (null !== $term) {
             $qb->where('q.title LIKE :query');
             $qb->setParameter('query', "%{$term}%");
+        }
+
+        return $qb->getQuery()->execute();
+    }
+
+    public function getAll(
+        ?int $offset,
+        ?int $limit,
+        ?array $affiliations,
+        ?User $user,
+        ?string $query,
+        ?string $orderByField,
+        ?string $orderByDirection
+    ) {
+        $qb = $this->createQueryBuilder('q');
+
+        if ($query) {
+            $qb->where('q.title LIKE :query');
+            $qb->setParameter('query', "%{$query}%");
+        }
+
+        if ($affiliations && in_array(QuestionnaireAffiliation::OWNER, $affiliations) && $user) {
+            $qb->join('q.owner', 'o');
+            $qb->andWhere('q.owner = :user');
+            $qb->setParameter('user', $user);
+        }
+
+        if ($orderByField) {
+            $qb->orderBy("q.{$orderByField}", $orderByDirection);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
         }
 
         return $qb->getQuery()->execute();

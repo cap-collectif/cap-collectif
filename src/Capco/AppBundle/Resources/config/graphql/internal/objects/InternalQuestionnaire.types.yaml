@@ -58,3 +58,12 @@ InternalQuestionnaire:
             isIndexationDone:
                 type: 'Boolean!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+            createdAt:
+                type: 'DateTime'
+                resolve: '@=value.getCreatedAt()'
+            updatedAt:
+                type: 'DateTime'
+                resolve: '@=value.getUpdatedAt()'
+            owner:
+                type: 'InternalQuestionnaireOwner'
+                description: 'The owner of the questionnaire.'

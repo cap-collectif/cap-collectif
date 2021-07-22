@@ -1,0 +1,8 @@
+InternalQuestionnaireConnection:
+    type: relay-connection
+    config:
+        name: QuestionnaireConnection
+        nodeType: InternalQuestionnaire!
+        connectionFields:
+            totalCount:
+                type: Int!

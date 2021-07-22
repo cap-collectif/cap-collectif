@@ -1,0 +1,8 @@
+DeleteQuestionnaireInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteQuestionnaire mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the Questionnaire to delete'

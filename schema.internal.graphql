@@ -4673,6 +4673,24 @@ type DeleteProposalPayload {
   clientMutationId: String
 }
 
+"""Available errors on deleteQuestionnaire mutation"""
+enum DeleteQuestionnaireErrorCode {
+  """no questionnaire match for this id"""
+  QUESTIONNAIRE_NOT_FOUND
+}
+
+input DeleteQuestionnaireInput {
+  """The id of the Questionnaire to delete"""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteQuestionnairePayload {
+  """Available errorCode for deleteQuestionnaire mutation"""
+  errorCode: DeleteQuestionnaireErrorCode
+  clientMutationId: String
+}
+
 input DeleteReplyInput {
   """The id of the reply"""
   id: ID!
@@ -6588,6 +6606,7 @@ type Mutation {
   createQuestionnaire(input: CreateQuestionnaireInput!): CreateQuestionnairePayload
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
+  deleteQuestionnaire(input: DeleteQuestionnaireInput!): DeleteQuestionnairePayload
   createProject(input: CreateProjectInput!): CreateProjectPayload
   createAlphaProject(input: CreateAlphaProjectInput!): CreateAlphaProjectPayload
   updateAlphaProject(input: UpdateAlphaProjectInput!): UpdateAlphaProjectPayload
@@ -10224,6 +10243,23 @@ type Query {
 
   """Get all sending addresses registered"""
   senderEmails: [SenderEmail!]!
+
+  """Get all questionnaires"""
+  questionnaires(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for questionnaires"""
+    orderBy: QuestionnaireOrder = {field: UPDATED_AT, direction: DESC}
+  ): QuestionnaireConnection
 }
 
 input QueryAnalyticsFilter {
@@ -10511,10 +10547,96 @@ type Questionnaire implements Node {
   exportResultsUrl: URI!
   adminUrl: URI!
   isIndexationDone: Boolean!
+  createdAt: DateTime
+  updatedAt: DateTime
+
+  """The owner of the questionnaire."""
+  owner: QuestionnaireOwner
 }
 
 input QuestionnaireAbstractQuestionInput {
   question: QuestionInput!
+}
+
+"""The affiliation of a user to a questionnaire"""
+enum QuestionnaireAffiliation {
+  """Questionnaires that are owned by the authenticated user."""
+  OWNER
+}
+
+"""A connection to a list of items."""
+type QuestionnaireConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [QuestionnaireEdge]
+}
+
+"""An edge in a connection."""
+type QuestionnaireEdge {
+  """The item at the end of the edge."""
+  node: Questionnaire!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of questionnaires can be ordered upon return."""
+input QuestionnaireOrder {
+  """The field to order questionnaires by."""
+  field: QuestionnaireOrderField! = CREATED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which questionnaires can be ordered"""
+enum QuestionnaireOrderField {
+  """
+  Allows ordering a list of questionnaires by when they have been updated.
+  """
+  UPDATED_AT
+
+  """
+  Allows ordering a list of questionnaires by when they have been created.
+  """
+  CREATED_AT
+}
+
+"""Represent an owner of a questionnaire."""
+interface QuestionnaireOwner {
+  """User ID"""
+  id: ID!
+
+  """User username"""
+  username: String
+
+  """Get all questionnaires that the user owns."""
+  questionnaires(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for questionnaires returned from the connection.
+    For example, OWNER will include only questionnaires that the current viewer owns.
+    
+    """
+    affiliations: [QuestionnaireAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for questionnaires"""
+    orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
+  ): QuestionnaireConnection!
 }
 
 """A step inside a project."""
@@ -14218,7 +14340,7 @@ enum UpdateUserEmailErrorCode {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner {
   """User ID"""
   id: ID!
 
@@ -14325,6 +14447,30 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """The ordering direction for posts"""
     orderBy: PostOrder = {field: UPDATED_AT, direction: DESC}
   ): PostConnection!
+
+  """Get all questionnaires that the user owns."""
+  questionnaires(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for questionnaires returned from the connection.
+    For example, OWNER will include only questionnaires that the current viewer owns.
+    
+    """
+    affiliations: [QuestionnaireAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for questionnaires"""
+    orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
+  ): QuestionnaireConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!

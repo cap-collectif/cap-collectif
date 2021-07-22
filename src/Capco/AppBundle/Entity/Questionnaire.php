@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -122,6 +123,11 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
      * @ORM\Column(name="notify_response_delete", type="boolean", nullable=false, options={"default" = false})
      */
     private $notifyResponseDelete = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private ?User $owner;
 
     public function __construct()
     {
@@ -539,6 +545,18 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     public function setNotifyResponseDelete(bool $value): self
     {
         $this->notifyResponseDelete = $value;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

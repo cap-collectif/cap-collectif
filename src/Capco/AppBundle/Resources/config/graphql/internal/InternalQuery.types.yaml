@@ -546,3 +546,21 @@ InternalQuery:
                 description: 'Get all sending addresses registered'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [args])'
+            questionnaires:
+                type: 'InternalQuestionnaireConnection'
+                description: 'Get all questionnaires'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QuestionnairesResolver", [args, getUser()])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    query:
+                        type: 'String'
+                        description: 'the search query'
+                    orderBy:
+                        type: 'QuestionnaireOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireOrderField::UPDATED_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for questionnaires'
