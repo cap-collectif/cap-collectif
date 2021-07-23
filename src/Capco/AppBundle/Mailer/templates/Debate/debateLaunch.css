@@ -1,11 +1,14 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 p{
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     color: #2B2B2B;
-    font-family: 'OpenSans', helvetica, arial, sans-serif !important;
+    font-family: 'OpenSans', Roboto, sans-serif !important;
+}
+h1,h2,h3,h4,h5,h6,a,span{
+    font-family: 'OpenSans', Roboto, sans-serif !important;
 }
 
 .mail__greeting {
@@ -18,10 +21,12 @@ p{
     text-align: left;
 }
 .mail__banner{
+    position: relative;
     width: 100%;
     max-height: 150px;
     height: 150px;
     object-fit: cover;
+    overflow: hidden;
 }
 .mail__vote {
     display: block;
@@ -102,13 +107,16 @@ p{
     width: 100%;
     max-height: 180px;
     object-fit: cover;
-    margin: 24px 0px;
+    margin: 16px 0px;
 }
 .mail_WYSIWIG h3 {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 24px;
+}
+.mail_WYSIWIG p {
+    margin-top: 0;
 }
 .mail__opinions{
     display: grid;
@@ -163,6 +171,17 @@ p{
     color: #5E5E5E;
     margin: 8px 0 0 0;
 }
+.mail__opinion_for_title,
+.mail__opinion_against_title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #2B2B2B;
+    margin-top: 16px;
+    text-align: left;
+}
+
 .mail__opinion_for_body,
 .mail__opinion_against_body{
     font-style: normal;
@@ -170,7 +189,8 @@ p{
     font-size: 14px;
     line-height: 19px;
     color: #2B2B2B;
-    margin-top: 24px;
+    margin-top: 8px;
+    text-align: left;
 }
 .mail__debate_link {
     width: 100%;
@@ -189,14 +209,14 @@ p{
     text-align: center !important;
 }
 @media (min-width: 320px) and (max-width: 480px) {
+    .spacer{
+        display:none !important;
+    }
     body{
         margin: 0!important;
     }
     .mail-container{
-        padding: 40px 32px !important;
-    }
-    #email-penrose-conteneur{
-        padding: 0!important;
+        padding: 0px !important;
     }
     #email-penrose-conteneur:first-child {
         padding: 24px !important;
@@ -204,7 +224,15 @@ p{
     table, thead, tbody, th, td, tr {
         display: block!important;
     }
-    .res-opinion__button,
+    .res-opinion__button{
+        width: 48% !important;
+    }
+    .res-opinion__button__for{
+        float: left !important ;
+    }
+    .res-opinion__button__against{
+        float: right !important ;
+    }
     .res-opinion{
         width: 100% !important;
     }
@@ -246,11 +274,13 @@ p{
         margin: auto 0;
     }
     .vote__thumb{
+        object-fit: cover;
         width: 22px;
         padding: 7px 0;
     }
 }
 .vote__thumb{
+    object-fit: cover;
     width: 22px;
     height: 13px;
 }
@@ -287,13 +317,15 @@ table {
     height: 32px;
     border: 2px solid #FFC61A;
     filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.1));
-    border-radius: 60px;}
+    border-radius: 60px;
+    object-fit: cover;
+}
 
 .mail_opinion_user_displayName{
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 36px;
 }
 .res-opinion{
     background: #FFFFFF;
@@ -301,6 +333,14 @@ table {
     border-radius: 8px;
 }
 .res-opinion__button{border: 0}
+.res-opinion__button__for{
+    width: 42%;
+    vertical-align: top;
+    float: right;
+}
+.res-opinion__button__against{
+    width: 48%;
+}
 td {
     vertical-align: top;
     padding: 0px;

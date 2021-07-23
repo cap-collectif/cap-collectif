@@ -1,268 +1,272 @@
 {% extends "@CapcoMail/standardLayoutNew.html.twig" %}
-		{% set logo = app_logo_url() %}
-		{% set btnBg = capco_site_color_value('color.btn.bg') %}
-		{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
-		{% set btnText = capco_site_color_value('color.btn.text') %}
-		{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
-		{% set linkText = capco_site_color_value('color.link.default') %}
-		{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
-		{% block style_mail %}
-            {{ parent() }}
-            {{ include("@CapcoMail/Debate/debateLaunch.css") }}
-        {% endblock %}
-		{% block core_mail %}
-            <div>
-                {% if logo is not null %}
-                    <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ organizationName }}" />
+{% set logo = app_logo_url() %}
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+{% block style_mail %}
+    {{ parent() }}
+    {{ include("@CapcoMail/Debate/debateLaunch.css") }}
+{% endblock %}
+{% block core_mail %}
+    <div>
+        {% if logo is not null %}
+            <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ organizationName }}" />
+        {% else %}
+            <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+        {% endif %}
+        {% if coverUrl %}
+            <a class='mail__banner' href="{{ debateUrl }}" title="mail__banner" target="_blank">
+                <img style="position: relative;width: 100%;max-height: 150px;height: 150px;object-fit: cover;overflow: hidden;" class='mail__banner' src='{{ coverUrl }}' alt='banner for the email'>
+            </a>
+        {% endif %}
+        <div class='mail__greeting'>
+            <p>{{ 'mail-greeting-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale) }}</p>
+            {# ICI LA DIFF ENTRE MAIL DE LANCEMENT ET MAIL DE RELANCE #}
+            {% if debate.step.debateType == "FACE_TO_FACE" %}
+                {% if isReminder %}
+                    <p>
+                        {{ 'debate-mail-relance'|trans({
+                            '{debateUrl}': debateUrl,
+                            '{title}':debate.step.title,
+                            '{participantsCount}':participantsCount,
+                        }, 'CapcoAppBundle', user_locale) | raw }}
+                    </p>
                 {% else %}
-                    <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+                    <p>
+                        {{ 'debate-mail-lancement'|trans({
+                            '{debateUrl}': debateUrl,
+                            '{title}':debate.step.title,
+                            '{forOpinionAuthor}':debate.forOpinion.author.displayName,
+                            '{againstOpinionAuthor}':debate.againstOpinion.author.displayName
+                        }, 'CapcoAppBundle', user_locale) | raw }}
+                    </p>
                 {% endif %}
-                {% if coverUrl %}
-                    <img class='mail__banner' src='{{ coverUrl }}' alt='banner for the email'>
+            {% else %}
+                {% if isReminder %}
+                    <p>
+                        {{ 'debate-mail-relance'|trans({
+                            '{debateUrl}': debateUrl,
+                            '{title}':debate.step.title,
+                            '{participantsCount}':participantsCount,
+                        }, 'CapcoAppBundle', user_locale) | raw }}
+                    </p>
+                {% else %}
+                    <p>
+                        {{ 'debate-mail-lancement-wysiwyg'|trans({
+                            '{debateUrl}': debateUrl,
+                            '{title}':debate.step.title,
+                        }, 'CapcoAppBundle', user_locale) | raw }}
+                    </p>
                 {% endif %}
-
-
-                <div class='mail__greeting'>
-                    <p>{{ 'mail-greeting-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale) }}</p>
-
-                    {# ICI LA DIFF ENTRE MAIL DE LANCEMENT ET MAIL DE RELANCE #}
-
-                    {% if debate.step.debateType == "FACE_TO_FACE" %}
-                        {% if isReminder %}
-
-
-                            <p>
-                                {{ 'debate-mail-relance'|trans({
-                                    '{debateUrl}': debateUrl,
-                                    '{title}':debate.step.title,
-                                    '{participantsCount}':participantsCount,
-                                }, 'CapcoAppBundle', user_locale) | raw }}
-                            </p>
-                        {% else %}
-
-
-                            <p>
-                                {{ 'debate-mail-lancement'|trans({
-                                    '{debateUrl}': debateUrl,
-                                    '{title}':debate.step.title,
-                                    '{forOpinionAuthor}':debate.forOpinion.author.displayName,
-                                    '{againstOpinionAuthor}':debate.againstOpinion.author.displayName
-                                }, 'CapcoAppBundle', user_locale) | raw }}
-                            </p>
-                        {% endif %}
-                    {% else %}
-                        {% if isReminder %}
-
-
-                            <p>
-                                {{ 'debate-mail-relance'|trans({
-                                    '{debateUrl}': debateUrl,
-                                    '{title}':debate.step.title,
-                                    '{participantsCount}':participantsCount,
-                                }, 'CapcoAppBundle', user_locale) | raw }}
-                            </p>
-                        {% else %}
-
-
-                            <p>
-                                {{ 'debate-mail-lancement-wysiwyg'|trans({
-                                    '{debateUrl}': debateUrl,
-                                    '{title}':debate.step.title,
-                                }, 'CapcoAppBundle', user_locale) | raw }}
-                            </p>
-                        {% endif %}
-                    {% endif %}
-
-
-                </div>
-                {# VOTE #}
-                <div class='mail__vote'>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <h3>
-                                    {{ debate.step.title }}
-                                </h3>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                    <table>
-                        <tbody>
-                            <tr>
-                                {# ICI lES BOUTONS DE VOTE #}
-                                <td class='res-opinion__button' style='float: right'>
-                                    <a class='mail__vote_for'
-                                       href="{{ forUrl }}">
-                                        <table>
-                                            <tbody>
-                                                <tr class='vote__button_row'>
-                                                    <td style='vertical-align: middle'><img class='vote__thumb' src="{{ baseUrl ~ asset('ThumbsUp.png') }}" alt=" thumbs up"  ></td>
-                                                    <td style='vertical-align: middle'><p style='height: 24px;vertical-align: middle;display: table-cell;'>{{ 'mail-vote-for'|trans({}, 'CapcoAppBundle', user_locale)}}</p></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </td>
-                                <td class='res-opinion__button'>
-                                    <a  class='mail__vote_against'
-                                        href="{{ againstUrl }}">
-                                        <table>
-                                            <tbody>
-                                                <tr class='vote__button_row'>
-                                                    <td style='vertical-align: middle'><img class='vote__thumb' src='{{ baseUrl ~ asset('ThumbsDown.png') }}' alt='Thumbs down'></td>
-                                                    <td style='vertical-align: middle'><p style='height: 24px;vertical-align: middle;display: table-cell;'>{{ 'mail-vote-against'|trans({}, 'CapcoAppBundle', user_locale)}}</p></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-
-                {# ICI L'ENCART DES AVIS #}
-                {% if debate.step.debateType == "FACE_TO_FACE" %}
-                    <div class='opinions'>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    {% if debate.forOpinion %}
-                                        <td class='res-opinion' style='width: 49%;vertical-align: top;'>
-                                            <table style='height: 21px '>
-                                                <tbody>
-                                                <tr>
-                                                    <td style='float: left; height: 21px'>
-                                                        <div class='mail__opinion_for_badge'>{{ 'opinion.for'|trans({}, 'CapcoAppBundle', user_locale) }}</div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <table style='margin-top: 16px;margin-left: 16px;'>
-                                                <tbody>
-                                                <tr>
-                                                    {% if forAuthorImgUrl %}
-                                                        <td style='width: 48px;vertical-align: middle'>
-                                                            <img class='mail__author_avatar' src='{{ forAuthorImgUrl }}' alt='photo of {{ debate.forOpinion.author.displayName }}'>
-                                                        </td>
-                                                        <td style='vertical-align: middle'>
-                                                            <p class='mail_opinion_user_displayName'> {{ debate.forOpinion.author.displayName }}</p>
-                                                        </td>
-                                                    {% else %}
-                                                        <td style='vertical-align: middle'>
-                                                            <p class='mail_opinion_user_displayName'> {{ debate.forOpinion.author.displayName }}</p>
-                                                        </td>
-                                                    {% endif %}
-
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            {% if debate.forOpinion.author.biography %}
-                                            <table style='padding: 0 16px'>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <p class='mail__opinion_for_user_bio'>{{ debate.forOpinion.author.biography }}</p>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            {% endif %}
-                                            {% if debate.forOpinion %}
-                                            <table style='padding: 0 16px'>
-                                                <tbody>
-                                                <tr>
-                                                    <td><div class='mail__opinion_for_body'>{{ debate.forOpinion.bodyExcerpt(512) | purify('default') | raw }}</div></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            {% endif %}
-                                        </td>
-                                    {% endif %}
-
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-
-                                    {% if debate.againstOpinion %}
-                                        <td class='res-opinion' style='width: 49%;vertical-align: top;'>
-                                            <table style='height: 21px;'>
-                                                <tbody>
-                                                <tr>
-                                                    <td style='float: left; height: 21px'>
-                                                        <div class='mail__opinion_against_badge'>{{ 'opinion.against'|trans({}, 'CapcoAppBundle', user_locale) }}</div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <table style='margin-top: 16px;margin-left: 16px;'>
-                                                <tbody>
-                                                <tr>
-                                                    {% if againstAuthorImgUrl %}
-                                                        <td style='width: 48px;vertical-align: middle'>
-                                                            <img class='mail__author_avatar' src='{{ againstAuthorImgUrl }}' alt='photo of {{ debate.againstOpinion.author.displayName }}'>
-                                                        </td>
-                                                        <td style='vertical-align: middle'>
-                                                            <p class='mail_opinion_user_displayName'> {{ debate.againstOpinion.author.displayName }}</p>
-                                                        </td>
-                                                    {% else %}
-                                                        <td style='vertical-align: middle'>
-                                                            <p class='mail_opinion_user_displayName'> {{ debate.againstOpinion.author.displayName }}</p>
-                                                        </td>
-                                                    {% endif %}
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            {% if debate.againstOpinion.author.biography %}
-                                            <table style='padding: 0 16px'>
-                                                <tbody>
-                                                <tr>
-                                                    <td><p class='mail__opinion_against_user_bio'>{{ debate.againstOpinion.author.biography }}</p></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            {% endif %}
-                                            {% if debate.againstOpinion %}
-                                            <table style='padding: 0 16px'>
-                                                <tbody>
-                                                <tr>
-                                                    <td><div class='mail__opinion_against_body'>{{ debate.againstOpinion.bodyExcerpt(512) | purify('default') | raw }}</div></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            {% endif %}
-                                        </td>
-                                    {% endif %}
+            {% endif %}
+        </div>
+        {# VOTE #}
+        <div class='mail__vote'>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                <tr>
+                    <td>
+                        <h3>
+                            {{ debate.step.title }}
+                        </h3>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" style='height:48px'>
+                <tbody>
+                <tr>
+                    {# ICI lES BOUTONS DE VOTE #}
+                    <td class='res-opinion__button res-opinion__button__for '>
+                        <a class='mail__vote_for'
+                           href="{{ forUrl }}">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody>
+                                <tr class='vote__button_row'>
+                                    <td style='vertical-align: middle'><img class='vote__thumb' src="{{ baseUrl ~ asset('ThumbUp.png') }}" alt=" thumbs up"  ></td>
+                                    <td style='vertical-align: middle'>
+                                        <p style='height: 24px;vertical-align: middle;display: table-cell;'>{{ 'mail-vote-for'|trans({}, 'CapcoAppBundle', user_locale)}}</p>
+                                    </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                {% else %} {# WYSIWIG #}
-                    <div class='mail_WYSIWIG'> {{debate.step.debateContent | purify('default') | truncate(1000) | raw  }}</div>
-                {% endif %}
-
-
-                <div class='mail__debate_link'><a href="{{ debateUrl }}">{{ 'consulter-site'|trans({}, 'CapcoAppBundle', user_locale)}}</a></div>
+                                </tbody>
+                            </table>
+                        </a>
+                    </td>
+                    <td class='spacer'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td class='res-opinion__button res-opinion__button__against'>
+                        <a  class='mail__vote_against'
+                            href="{{ againstUrl }}">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody>
+                                <tr class='vote__button_row'>
+                                    <td style='vertical-align: middle'><img class='vote__thumb' src='{{ baseUrl ~ asset('ThumbDown.png') }}' alt='Thumbs down'></td>
+                                    <td style='vertical-align: middle'>
+                                        <p style='height: 24px;vertical-align: middle;display: table-cell;'>{{ 'mail-vote-against'|trans({}, 'CapcoAppBundle', user_locale)}}</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        {# ICI L'ENCART DES AVIS #}
+        {% if debate.step.debateType == "FACE_TO_FACE" %}
+            <div class='opinions'>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                    <tr>
+                        {% if debate.forOpinion %}
+                            <td class='res-opinion' style='width: 49%;vertical-align: top;'>
+                                <table cellpadding="0" cellspacing="0" border="0" style='height: 21px '>
+                                    <tbody>
+                                    <tr>
+                                        <td style='float: left; height: 21px'>
+                                            <div class='mail__opinion_for_badge'>{{ 'opinion.for'|trans({}, 'CapcoAppBundle', user_locale) }}</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" border="0" style='margin-top: 16px;padding: 0px 16px;height: 48px;'>
+                                    <tbody>
+                                    <tr>
+                                        {% if forAuthorImgUrl %}
+                                            <td style='width: 48px;float: left;vertical-align: middle'>
+                                                <img class='mail__author_avatar' src='{{ forAuthorImgUrl }}' alt='photo of {{ debate.forOpinion.author.displayName }}'>
+                                            </td>
+                                            <td style='vertical-align: middle; float:left;'>
+                                                <p  style="margin: 0" class='mail_opinion_user_displayName'> {{ debate.forOpinion.author.displayName }}</p>
+                                            </td>
+                                        {% else %}
+                                            <td style='vertical-align: middle'>
+                                                <p class='mail_opinion_user_displayName'> {{ debate.forOpinion.author.displayName }}</p>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {% if debate.forOpinion.author.biography %}
+                                    <table cellpadding="0" cellspacing="0" border="0" style='padding: 0 16px'>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <p class='mail__opinion_for_user_bio'>{{ debate.forOpinion.author.biography }}</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                                {% if debate.forOpinion.title  %}
+                                    <table cellpadding="0" cellspacing="0" border="0" style='padding: 0 16px'>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class='mail__opinion_against_title'>{{ debate.forOpinion.title}}</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                                {% if debate.forOpinion %}
+                                    <table cellpadding="0" cellspacing="0" border="0" style='padding: 0 16px'>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class='mail__opinion_for_body'>{{ debate.forOpinion.bodyExcerpt(512) | purify('default') | raw }}</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        {% if debate.againstOpinion %}
+                            <td class='res-opinion' style='width: 49%;vertical-align: top;'>
+                                <table cellpadding="0" cellspacing="0" border="0" style='height: 21px;'>
+                                    <tbody>
+                                    <tr>
+                                        <td style='float: left; height: 21px'>
+                                            <div class='mail__opinion_against_badge'>{{ 'opinion.against'|trans({}, 'CapcoAppBundle', user_locale) }}</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" border="0" style='margin-top: 16px;padding: 0px 16px;height: 48px;'>
+                                    <tbody>
+                                    <tr>
+                                        {% if againstAuthorImgUrl %}
+                                            <td style='width: 48px;float: left;vertical-align: middle'>
+                                                <img class='mail__author_avatar' src='{{ againstAuthorImgUrl }}' alt='photo of {{ debate.againstOpinion.author.displayName }}'>
+                                            </td>
+                                            <td style='vertical-align: middle; float:left;'>
+                                                <p style="margin: 0"  class='mail_opinion_user_displayName'> {{ debate.againstOpinion.author.displayName }}</p>
+                                            </td>
+                                        {% else %}
+                                            <td style='vertical-align: middle'>
+                                                <p class='mail_opinion_user_displayName'> {{ debate.againstOpinion.author.displayName }}</p>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {% if debate.againstOpinion.author.biography %}
+                                    <table cellpadding="0" cellspacing="0" border="0" style='padding: 0 16px'>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <p class='mail__opinion_against_user_bio'>{{ debate.againstOpinion.author.biography }}</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                                {% if debate.againstOpinion.title %}
+                                    <table cellpadding="0" cellspacing="0" border="0" style='padding: 0 16px'>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class='mail__opinion_against_title'>{{ debate.againstOpinion.title }}</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                                {% if debate.againstOpinion %}
+                                    <table cellpadding="0" cellspacing="0" border="0" style='padding: 0 16px'>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class='mail__opinion_against_body'>{{ debate.againstOpinion.bodyExcerpt(512) | purify('default') | raw }}</div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        {% endblock %}
-		{% block footer_mail %}
-
-
-            <div>
-                <p style="margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by.with-unsubscribe'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,'{unsubscribeUrl}': unsubscribeUrl}, 'CapcoAppBundle', user_locale) | raw }}</p>
-                <p style="text-align: left;">
-                    {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
-
-
-                    <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
-                    Cap Collectif
-
-
-                </p>
-            </div>
-        {% endblock %}
-
+        {% else %} {# WYSIWIG #}
+            <div class='mail_WYSIWIG'> {{debate.step.debateContent | purify('default') | truncate(1000) | raw  }}</div>
+        {% endif %}
+        <div class='mail__debate_link'><a href="{{ debateUrl }}">{{ 'consulter-site'|trans({}, 'CapcoAppBundle', user_locale)}}</a></div>
+    </div>
+{% endblock %}
+{% block footer_mail %}
+    <div>
+        <p style="margin: 0; text-align: left;color:#ABABAB">{{ 'email.notification.footer.mail-send-by.with-unsubscribe'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,'{unsubscribeUrl}': unsubscribeUrl}, 'CapcoAppBundle', user_locale) | raw }}</p>
+        <p style="text-align: left;color:#ABABAB">
+            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
+            Cap Collectif
+        </p>
+    </div>
+{% endblock %}

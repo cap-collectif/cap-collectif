@@ -32,6 +32,7 @@ class DebateLaunch extends AbstractExternalMessage
         return [
             'debateUrl' => 'http://capco.dev',
             'coverUrl' => 'https://source.unsplash.com/random/800x600',
+            'unsubscribeUrl' => 'http://capco.dev',
             'forUrl' => 'test',
             'forAuthorImgUrl' => 'https://source.unsplash.com/random/64x64',
             'againstAuthorImgUrl' => 'https://source.unsplash.com/random/64x64',
@@ -72,7 +73,7 @@ class DebateLaunch extends AbstractExternalMessage
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],
             'participantsCount' => $params['participantsCount'],
-            'unsubscribeUrl' => $params['unsubscribeUrl']
+            'unsubscribeUrl' => $params['unsubscribeUrl'],
         ];
     }
 }
