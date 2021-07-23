@@ -37,13 +37,13 @@ class MailCatcherContext extends Base implements KernelAwareContext
         } elseif ($message->hasPart('text/plain')) {
             $content = $message->getPart('text/plain')->getContent();
         } else {
-            throw new \RuntimeException(sprintf('Unable to read mail'));
+            throw new \RuntimeException('Unable to read mail');
         }
 
         if ($writeSnapshot) {
             $newSnapshot = fopen(self::SNAPSHOTS_PATH . $file, 'w');
             fwrite($newSnapshot, $content);
-            chmod(self::SNAPSHOTS_PATH . $file, 0755);
+            chmod(self::SNAPSHOTS_PATH . $file, 0777);
             fclose($newSnapshot);
             echo "\"Snapshot writen at '${file}'. You can now relaunch the testsuite.\"";
 
@@ -60,7 +60,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
                 ->diff($content, $text);
             $dir = self::SNAPSHOTS_DIFF_PATH;
             if (!file_exists($dir)) {
-                mkdir($dir, 0700);
+                mkdir($dir, 0777);
             }
             $path = $dir . $file;
             $newDiff = fopen($path, 'w');
@@ -83,8 +83,6 @@ class MailCatcherContext extends Base implements KernelAwareContext
     }
 
     /**
-     * @param Message $message
-     *
      * @return Crawler
      */
     private function getCrawler(Message $message)
