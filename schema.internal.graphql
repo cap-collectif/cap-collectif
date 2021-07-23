@@ -1963,6 +1963,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 
   """A list of proposals associated to the object."""
   proposals(
@@ -2063,7 +2064,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): RequirementConnection!
-  project: Project
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -2619,6 +2619,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
 
+  """The project"""
+  project: Project!
+
   """A list of contributor associated with the consultation step."""
   contributors(
     """
@@ -2641,9 +2644,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
     """The user's login (for example, an email)."""
     login: String!
   ): Boolean!
-
-  """The project"""
-  project: Project!
 
   """Contributions are allowed right now."""
   contribuable: Boolean!
@@ -4202,6 +4202,7 @@ type DebateStep implements Step & Node {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 
   """The debate of the step."""
   debate: Debate!
@@ -7254,6 +7255,7 @@ type OtherStep implements Node & Step {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 }
 
 """A page."""
@@ -7774,6 +7776,7 @@ type PresentationStep implements Node & Step {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 }
 
 """A vote that can be anonymous."""
@@ -9430,6 +9433,7 @@ interface ProposalStep {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 
   """A list of proposals associated to the object."""
   proposals(
@@ -9530,7 +9534,6 @@ interface ProposalStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): RequirementConnection!
-  project: Project
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -10694,6 +10697,7 @@ type QuestionnaireStep implements Node & Step {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
   footer: String
 
   """A list of contributor associated with the step."""
@@ -10775,6 +10779,7 @@ type RankingStep implements Node & Step {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -11921,6 +11926,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 
   """A list of proposals associated to the object."""
   proposals(
@@ -12021,7 +12027,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): RequirementConnection!
-  project: Project
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -12691,6 +12696,7 @@ interface Step {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 }
 
 """Ways in which lists of steps can be ordered upon return."""
@@ -12851,6 +12857,7 @@ type SynthesisStep implements Step & Node {
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
+  project: Project
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI
