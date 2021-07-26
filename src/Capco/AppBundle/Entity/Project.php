@@ -859,12 +859,14 @@ class Project implements IndexableInterface
         $steps = [];
 
         foreach ($this->steps as $pas) {
+            /** @var AbstractStep $step */
             $step = $pas->getStep();
             if (
                 $step->isConsultationStep() ||
                 $step->isCollectStep() ||
                 $step->isSelectionStep() ||
-                $step->isQuestionnaireStep()
+                $step->isQuestionnaireStep() ||
+                $step->isDebateStep()
             ) {
                 $steps[] = $pas;
             }

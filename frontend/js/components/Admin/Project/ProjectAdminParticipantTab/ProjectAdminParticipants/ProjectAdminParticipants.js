@@ -338,6 +338,11 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
           step {
             id
             title
+            ... on DebateStep {
+              contributors {
+                totalCount
+              }
+            }
             ... on ConsultationStep {
               contributors {
                 totalCount
