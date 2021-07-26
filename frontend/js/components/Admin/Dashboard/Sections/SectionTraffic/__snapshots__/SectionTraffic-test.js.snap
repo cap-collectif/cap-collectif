@@ -2,39 +2,39 @@
 
 exports[`<SectionTraffic /> <TestSectionTraffic /> should render correctly with visitors 1`] = `
 <div
-  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jwmtxj lvJOm"
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX iPdEvQ gconsy"
 >
   <p
-    className="sc-bdnylx fnSuYt"
+    className="sc-bdnxRM eTkmVK"
   >
     traffic-source
   </p>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN cInwIi"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO dFwAyC"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eOzEtb"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX kdPEIU"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cJmSdz hmLkpw"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX xAFCE fvBSZY"
         onMouseOut={[Function]}
         onMouseOver={[Function]}
       >
         <div
-          className="sc-bdnylx fOVeYY"
+          className="sc-bdnxRM beXimH"
         />
         <p
-          className="sc-bdnylx dbMpeV"
+          className="sc-bdnxRM eNREli"
         >
           search-engine (38%)
         </p>
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dOUxlN"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
     >
       <div
-        className="sc-bdnylx btsXsj"
+        className="sc-bdnxRM CKQuA"
         onMouseOut={[Function]}
         onMouseOver={[Function]}
       />

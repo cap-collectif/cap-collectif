@@ -16,7 +16,7 @@ export type ANALYTICS_ACTIONS =
   | 'debate_argument_publish';
 
 export const analytics = Analytics({
-  app: window.location.hostname,
+  app: typeof window !== 'undefined' ? window.location.hostname : 'Unknown',
   plugins: [
     {
       name: 'Analythicccs',

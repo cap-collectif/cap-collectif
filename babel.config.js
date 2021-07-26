@@ -50,7 +50,12 @@ module.exports = function(api) {
       '@babel/plugin-proposal-optional-chaining',
       '@babel/plugin-syntax-dynamic-import',
       'babel-plugin-dev-expression',
-      'styled-components',
+      [
+        'babel-plugin-styled-components',
+        {
+          ssr: false,
+        },
+      ],
       'react-docgen',
       ['relay', { artifactDirectory: './frontend/js/__generated__/~relay' }],
       'transform-class-properties',

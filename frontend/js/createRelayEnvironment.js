@@ -22,7 +22,7 @@ const environment = (new Environment({
 }): TEnvironment);
 
 commitLocalUpdate(environment, (storeProxy: RecordSourceProxy) => {
-  const featureFlags = window._capco_featureFlags || [];
+  const featureFlags = typeof window !== 'undefined' ? window._capco_featureFlags || [] : [];
   const newfeatureFlagsRecords = featureFlags.map((f, key) => {
     const newRecord = storeProxy.create(`client:root:featureFlags:${key}`, 'FeatureFlag');
     newRecord.setValue(f.enabled, 'enabled');
@@ -30,6 +30,10 @@ commitLocalUpdate(environment, (storeProxy: RecordSourceProxy) => {
     return newRecord;
   });
   storeProxy.getRoot().setLinkedRecords(newfeatureFlagsRecords, 'featureFlags');
+  // We don't need feature flags in `window` anymore, so make sure none is using it that way.
+  if (featureFlags.length) {
+    delete window._capco_featureFlags;
+  }
 });
 
 export default environment;

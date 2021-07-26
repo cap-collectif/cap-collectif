@@ -147,15 +147,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       invitation.pending
     </h3>
     <div
-      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbjAj dFIPdD"
+        className="sc-bkbkJK fPiBNh"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbjAj klnAWo"
+        className="sc-bkbkJK bWIQdi"
       >
         roles.user
       </p>
@@ -311,15 +311,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       invitation.pending
     </h3>
     <div
-      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbjAj dFIPdD"
+        className="sc-bkbkJK fPiBNh"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbjAj klnAWo"
+        className="sc-bkbkJK bWIQdi"
       >
         roles.user
       </p>
@@ -481,15 +481,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       invitation.pending
     </h3>
     <div
-      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbjAj dFIPdD"
+        className="sc-bkbkJK fPiBNh"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbjAj klnAWo"
+        className="sc-bkbkJK bWIQdi"
       >
         roles.user
       </p>
@@ -651,15 +651,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       invitation.pending
     </h3>
     <div
-      className="sc-bkbjAj GroupAdminPendingInvitationsList__UserInvitePendingList-sc-1c2zhf8-0  KeAcJ"
+      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbjAj dFIPdD"
+        className="sc-bkbkJK fPiBNh"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbjAj klnAWo"
+        className="sc-bkbkJK bWIQdi"
       >
         roles.user
       </p>

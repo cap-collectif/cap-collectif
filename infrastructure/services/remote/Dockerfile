@@ -1,4 +1,4 @@
-FROM node:11-slim AS node
+FROM node:16-slim AS node
 
 FROM debian:buster AS base
 
@@ -149,7 +149,9 @@ RUN set -x \
 
 # Install varnish
 RUN apt-get update -y && \
-	    apt-get install -y build-essential automake libtool curl git python-docutils
+	apt-get install -y build-essential automake libtool curl git python-docutils && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl https://packagecloud.io/install/repositories/varnishcache/varnish66/script.deb.sh | /bin/bash && \
 	    apt-get install -y varnish-dev && \
@@ -178,7 +180,7 @@ COPY infrastructure/services/remote/cron/run                   /etc/service/cron
 COPY infrastructure/services/remote/elasticsearch/run          /etc/service/elasticsearch/run
 COPY infrastructure/services/remote/varnish/run                /etc/service/varnish/run
 COPY infrastructure/services/remote/rabbitmq/run               /etc/service/rabbitmq/run
-#COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
+COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
 COPY infrastructure/services/remote/supervisord/run            /etc/service/supervisord/run
 COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-fpm/run
 COPY infrastructure/services/remote/redirectionio/run          /etc/service/redirectionio/run
@@ -243,13 +245,16 @@ RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$
     && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
     && rm yarn-v$YARN_VERSION.tar.gz
 
+RUN yarn global add pm2
+
 # Download PHP dependencies
 COPY composer.json composer.lock ./
 
 # Will only install bundles that have changed since building the base image
 RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
 
-# Then add usefull source code
+# Then add usefull source code for production
+# -- Symfony app --
 COPY bin /var/www/bin
 COPY translations /var/www/translations
 COPY public /var/www/public
@@ -261,13 +266,18 @@ COPY templates /var/www/templates
 COPY config /var/www/config
 COPY fixtures /var/www/fixtures
 
+# -- NextJS app (admin-next) --
+# Make sure "admin-next/.next" is built during previous CI step
+# For now we copy everything, but it can be improved see https://nextjs.org/docs/deployment#docker-image
+COPY admin-next /var/www/admin-next
+COPY node_modules /var/www/node_modules
+
 RUN mkdir -m 755 -p /tmp/phpstan/cache/PHPStan/
 
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
-    && chown -R capco:capco . \
+    && chown -R capco:capco bin translations src public app templates config fixtures admin-next \
     && mkdir -p var/cache/prod \
-    && chown -R capco:capco var \
     && chmod -R 777 var
 
 # Newrelic agent
@@ -275,11 +285,16 @@ ENV NEWRELIC_VERSION=9.16.0.295
 ENV NEWRELIC_NAME=newrelic-php5-$NEWRELIC_VERSION-linux
 ENV NEWRELIC_AGENT_URL=https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/${NEWRELIC_NAME}.tar.gz
 
-RUN   curl -L $NEWRELIC_AGENT_URL | tar -C /tmp -zx && \
+RUN curl -L $NEWRELIC_AGENT_URL | tar -C /tmp -zx && \
   export NR_INSTALL_USE_CP_NOT_LN=1 && \
   export NR_INSTALL_SILENT=1 && \
   /tmp/$NEWRELIC_NAME/newrelic-install install && \
   rm -rf /tmp/newrelic-php5-* /tmp/nrinstall*
+
+# Admin-next
+ENV ADMIN_NEXT_PORT 3000
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV production
 
 # /!\
 # /!\ Beyond this step nothing is cached /!\

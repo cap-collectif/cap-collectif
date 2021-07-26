@@ -69,7 +69,7 @@ exports[`<TagCloud /> should render correctly 1`] = `
     isHover={false}
   >
     <div
-      className="TagCloud__Container-sc-1pikt4p-0 cKCEn"
+      className="TagCloud__Container-jQhbLY hufUNN"
     >
       <OverlayTrigger
         defaultOverlayShown={false}

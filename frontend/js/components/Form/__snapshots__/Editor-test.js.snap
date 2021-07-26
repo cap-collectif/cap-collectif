@@ -3,22 +3,22 @@
 exports[`<Editor /> should render correctly with defaultProps 1`] = `
 <div
   aria-labelledby="label-azerty"
-  class="Editor__Container-sc-1pxywe6-0 bAKYmZ editor test"
+  class="Editor__Container-iWGgom fJXUsY editor test"
   id="azerty"
 >
   <div>
     <div
       aria-orientation="horizontal"
-      class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dOUxlN"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm"
       id="quill-toolbar"
       role="menubar"
     >
       <span
-        class="sc-bdnylx bgIGJQ"
+        class="sc-bdnxRM hptjof"
         clip="rect(0px, 0px, 0px, 0px)"
       >
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
           id="quill-toolbar-1"
           role="menuitem"
           tabindex="0"
@@ -53,7 +53,7 @@ exports[`<Editor /> should render correctly with defaultProps 1`] = `
       </select>
       <div
         aria-label="aria-editor-tools-style"
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dOUxlN ql-formats ql-editor-button"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats ql-editor-button"
         role="group"
       >
         <button
@@ -91,7 +91,7 @@ exports[`<Editor /> should render correctly with defaultProps 1`] = `
       </div>
       <div
         aria-label="aria-editor-tools-alignment"
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dOUxlN ql-formats"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
         role="group"
       >
         <button
@@ -157,7 +157,7 @@ exports[`<Editor /> should render correctly with defaultProps 1`] = `
       </div>
       <div
         aria-label="aria-editor-tools-insertion"
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dOUxlN ql-formats"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm ql-formats"
         role="group"
       >
         <button

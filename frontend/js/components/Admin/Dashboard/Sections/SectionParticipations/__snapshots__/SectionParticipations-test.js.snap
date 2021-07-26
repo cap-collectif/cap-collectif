@@ -2,98 +2,98 @@
 
 exports[`<SectionParticipations /> <TestSectionParticipations /> should render correctly with participations data 1`] = `
 <div
-  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jwmtxj lvJOm"
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX iPdEvQ gconsy"
 >
   <p
-    className="sc-bdnylx fnSuYt"
+    className="sc-bdnxRM eTkmVK"
   >
     methods-of-participation
   </p>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN hgJQQt"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO iDXJcF"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fMjMDD"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hAeXKk"
     >
       <button
-        className="sc-bdnylx ePyufy"
+        className="sc-bdnxRM erkLgV"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bGMWCq"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX gutoIJ"
           id="vote"
         >
           <p
-            className="sc-bdnylx hhMOMR"
+            className="sc-bdnxRM XJhWy"
           >
             vote-plural
           </p>
           <p
-            className="sc-bdnylx eEMnqn"
+            className="sc-bdnxRM lesLoo"
           >
             50
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnylx ePyufy"
+        className="sc-bdnxRM erkLgV"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hxUnw"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ibuhHn"
           id="comment"
         >
           <p
-            className="sc-bdnylx hhMOMR"
+            className="sc-bdnxRM XJhWy"
           >
             comment.dynamic
           </p>
           <p
-            className="sc-bdnylx eEMnqn"
+            className="sc-bdnxRM lesLoo"
           >
             10
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnylx ePyufy"
+        className="sc-bdnxRM erkLgV"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hxUnw"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ibuhHn"
           id="contribution"
         >
           <p
-            className="sc-bdnylx hhMOMR"
+            className="sc-bdnxRM XJhWy"
           >
             contribution-plural
           </p>
           <p
-            className="sc-bdnylx eEMnqn"
+            className="sc-bdnxRM lesLoo"
           >
             30
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnylx ePyufy"
+        className="sc-bdnxRM erkLgV"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hxUnw"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ibuhHn"
           id="follower"
         >
           <p
-            className="sc-bdnylx hhMOMR"
+            className="sc-bdnxRM XJhWy"
           >
             subscription.dynamic
           </p>
           <p
-            className="sc-bdnylx eEMnqn"
+            className="sc-bdnxRM lesLoo"
           >
             50
           </p>
@@ -101,7 +101,7 @@ exports[`<SectionParticipations /> <TestSectionParticipations /> should render c
       </button>
     </div>
     <div
-      className="sc-bdnylx ieIFwr"
+      className="sc-bdnxRM dA-daRw"
       id="vote"
     >
       <div

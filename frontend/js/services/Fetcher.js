@@ -29,28 +29,8 @@ export const createFormDataHeaders = () => {
 };
 
 class Fetcher {
-
-  getFromAPI(url: string, header?: Object): Promise<*>{
-    return fetch(url, {
-      method: 'GET',
-      headers: header ? {...header, ...createHeaders()} : createHeaders(),
-    })
-      .then(status)
-      .then(json);
-  }
-
-  get(uri: string): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'GET',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-    })
-      .then(status)
-      .then(json);
-  }
-
   graphqlFormData(body: FormData): Promise<*> {
-    return fetch(config.graphql, {
+    return fetch(config.getGraphqlInternalUrl(), {
       method: 'POST',
       credentials: 'same-origin',
       headers: createFormDataHeaders(),
@@ -61,7 +41,7 @@ class Fetcher {
   }
 
   graphql(body: Object) {
-    return fetch(config.graphql, {
+    return fetch(config.getGraphqlInternalUrl(), {
       method: 'POST',
       credentials: 'same-origin',
       headers: createHeaders(),
@@ -72,7 +52,7 @@ class Fetcher {
   }
 
   postFormData(uri: string, body: FormData): Promise<*> {
-    return fetch(config.api + uri, {
+    return fetch(config.getApiUrl() + uri, {
       method: 'POST',
       credentials: 'same-origin',
       headers: createFormDataHeaders(),
@@ -81,7 +61,7 @@ class Fetcher {
   }
 
   post(uri: string, body: ?Object = {}) {
-    return fetch(config.api + uri, {
+    return fetch(config.getApiUrl() + uri, {
       method: 'POST',
       credentials: 'same-origin',
       headers: createHeaders(),
@@ -90,7 +70,7 @@ class Fetcher {
   }
 
   postToJson(uri: string, body: Object) {
-    return fetch(config.api + uri, {
+    return fetch(config.getApiUrl() + uri, {
       method: 'POST',
       credentials: 'same-origin',
       headers: createHeaders(),
@@ -98,43 +78,6 @@ class Fetcher {
     })
       .then(status)
       .then(json);
-  }
-
-  put(uri: string, body: Object): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'PUT',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    }).then(status);
-  }
-
-  putToJson(uri: string, body: Object): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'PUT',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    })
-      .then(status)
-      .then(json);
-  }
-
-  patch(uri: string, body: Object): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'PATCH',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    }).then(status);
-  }
-
-  delete(uri: string): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'DELETE',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-    }).then(status);
   }
 }
 

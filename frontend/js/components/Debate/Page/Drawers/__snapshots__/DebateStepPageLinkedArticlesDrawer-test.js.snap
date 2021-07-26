@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -11,50 +11,50 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
   }
 >
   <div
-    className="sc-bdnylx iQjReO"
+    className="sc-bdnxRM XLxeJ"
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bewhaF bSAkp AMDLx icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <h3
-      className="sc-bdnylx bdpTAi"
+      className="sc-bdnxRM gGrbVp"
     >
       related.articles
     </h3>
   </div>
   <div
-    className="sc-bdnylx blraWc"
+    className="sc-bdnxRM jQRgHv"
     onClose={[MockFunction]}
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dOMygj eEzioL"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX gbztCQ kvrLSX"
     >
       <a
         href="https://www.generationlibre.eu/medias/non-au-passeport-vaccinal-gaspard-koenig/"
       >
         <div
-          className="sc-bdnylx dOIdKk"
+          className="sc-bdnxRM hfcBsP"
         >
           <div
-            className="sc-bdnylx iPLNRb"
+            className="sc-bdnxRM iWlTDY"
           >
             <img
-              className="sc-bdnylx DebateArticleCard___StyledAppBox-sc-1df559e-3 jMFVjo jHjKDt"
+              className="sc-bdnxRM DebateArticleCard___StyledAppBox-kqpQIr gYudlT hxYzZU"
               src="https://www.generationlibre.eu/wp-content/uploads/2021/03/markus-winkler-eNyIi0oS7P4-unsplash-e1616584197949-1024x576.jpg"
             />
           </div>
           <div
-            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cRnflb"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hnymlQ"
           >
             <h2
-              className="sc-bdnylx cpDXxn DebateArticleCard__DebateArticleCardTitle-sc-1df559e-0"
+              className="sc-bdnxRM gFWXGs DebateArticleCard__DebateArticleCardTitle-hRgxQk"
               title="« Non au passeport vaccinal » Gaspard Koenig - GenerationLibre"
             >
               « Non au passeport vaccinal » Gaspard Koenig - GenerationLibre
             </h2>
             <p
-              className="sc-bdnylx puQAW DebateArticleCard__DebateArticleCardOrigin-sc-1df559e-2"
+              className="sc-bdnxRM cRTGLp DebateArticleCard__DebateArticleCardOrigin-okDwU"
             >
               GenerationLibre
             </p>
@@ -65,32 +65,32 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
         href="https://actu.orange.fr/societe/videos/macron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent-CNT000001tKjH0.html"
       >
         <div
-          className="sc-bdnylx dOIdKk"
+          className="sc-bdnxRM hfcBsP"
         >
           <div
-            className="sc-bdnylx iPLNRb"
+            className="sc-bdnxRM iWlTDY"
           >
             <img
-              className="sc-bdnylx DebateArticleCard___StyledAppBox-sc-1df559e-3 jMFVjo jHjKDt"
+              className="sc-bdnxRM DebateArticleCard___StyledAppBox-kqpQIr gYudlT hxYzZU"
               src="http://media1.woopic.com/api/v1/images/1039%2Fmulti%2F3ukfr%2Fmacron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent%7Cfzqpqs-H.jpg?format=470x264&facedetect=1&quality=85"
             />
           </div>
           <div
-            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cRnflb"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hnymlQ"
           >
             <h2
-              className="sc-bdnylx cpDXxn DebateArticleCard__DebateArticleCardTitle-sc-1df559e-0"
+              className="sc-bdnxRM gFWXGs DebateArticleCard__DebateArticleCardTitle-hRgxQk"
               title="Macron: ceux qui disent \\"on aura un vaccin en mars ou avril prochain, vous trompent\\""
             >
               Macron: ceux qui disent "on aura un vaccin en mars ou avril prochain, vous trompent"
             </h2>
             <p
-              className="sc-bdnylx puQAW DebateArticleCard__DebateArticleCardOrigin-sc-1df559e-2"
+              className="sc-bdnxRM cRTGLp DebateArticleCard__DebateArticleCardOrigin-okDwU"
             >
               Orange Actualités
             </p>
             <p
-              className="sc-bdnylx hEZhUY"
+              className="sc-bdnxRM hhFWBv"
             >
               2 avr. 2021
             </p>
@@ -101,32 +101,32 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
         href="https://www.francetvinfo.fr/sante/maladie/coronavirus/vaccin/covid-19-passeport-vaccinal-pass-sanitaire-certificat-vert-l-article-a-lire-pour-comprendre-le-debat-qui-agite-la-france-et-l-europe_4324853.html"
       >
         <div
-          className="sc-bdnylx dOIdKk"
+          className="sc-bdnxRM hfcBsP"
         >
           <div
-            className="sc-bdnylx iPLNRb"
+            className="sc-bdnxRM iWlTDY"
           >
             <img
-              className="sc-bdnylx DebateArticleCard___StyledAppBox-sc-1df559e-3 jMFVjo jHjKDt"
+              className="sc-bdnxRM DebateArticleCard___StyledAppBox-kqpQIr gYudlT hxYzZU"
               src="https://www.francetvinfo.fr/pictures/XG0eIHnEfHnOuHCFy2xOQse_Um4/1500x843/2021/03/09/phplNpe9r.jpg"
             />
           </div>
           <div
-            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cRnflb"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hnymlQ"
           >
             <h2
-              className="sc-bdnylx cpDXxn DebateArticleCard__DebateArticleCardTitle-sc-1df559e-0"
+              className="sc-bdnxRM gFWXGs DebateArticleCard__DebateArticleCardTitle-hRgxQk"
               title="Covid-19 : passeport vaccinal, \\"pass sanitaire\\", \\"certificat vert\\"... L'article à lire pour comprendre le débat qui agite la France et l'Europe"
             >
               Covid-19 : passeport vaccinal, "pass sanitaire", "certificat vert"... L'article à lire pour comprendre le débat qui agite la France et l'Europe
             </h2>
             <p
-              className="sc-bdnylx puQAW DebateArticleCard__DebateArticleCardOrigin-sc-1df559e-2"
+              className="sc-bdnxRM cRTGLp DebateArticleCard__DebateArticleCardOrigin-okDwU"
             >
               Franceinfo
             </p>
             <p
-              className="sc-bdnylx hEZhUY"
+              className="sc-bdnxRM hhFWBv"
             >
               11 mars 2021
             </p>

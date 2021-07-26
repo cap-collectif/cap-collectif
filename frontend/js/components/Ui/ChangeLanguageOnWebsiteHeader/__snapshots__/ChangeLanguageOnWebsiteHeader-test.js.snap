@@ -57,7 +57,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
       id="changeLanguageProposalContainer"
     >
       <div
-        className="ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer-sc-3ukalg-0 iGJjLx"
+        className="ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer-ioHxFq elnHcu"
         id="changeLanguageProposalContainer"
       >
         <div
@@ -65,11 +65,11 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
         >
           <ChangeLanguageOnWebsiteHeader__Content>
             <div
-              className="ChangeLanguageOnWebsiteHeader__Content-sc-3ukalg-1 jivcJb"
+              className="ChangeLanguageOnWebsiteHeader__Content-fOGNkc hGHwmc"
             >
               <ChangeLanguageOnWebsiteHeader__ChangeLanguageText>
                 <div
-                  className="ChangeLanguageOnWebsiteHeader__ChangeLanguageText-sc-3ukalg-5 fUrMhF"
+                  className="ChangeLanguageOnWebsiteHeader__ChangeLanguageText-cvzOoI iTmxI"
                 >
                   <span>
                     Do you want to consult the website in your language?
@@ -78,7 +78,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
               </ChangeLanguageOnWebsiteHeader__ChangeLanguageText>
               <ChangeLanguageOnWebsiteHeader__ChangeLanguageForm>
                 <div
-                  className="ChangeLanguageOnWebsiteHeader__ChangeLanguageForm-sc-3ukalg-3 dDnQgc"
+                  className="ChangeLanguageOnWebsiteHeader__ChangeLanguageForm-hgTEGX ciaSiE"
                 >
                   <SiteLanguageChangeButton
                     backgroundColor="rgba(255, 255, 255, 0.15) !important"
@@ -146,7 +146,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                         backgroundColor="rgba(255, 255, 255, 0.15) !important"
                         borderless={false}
                         bsStyle="default"
-                        className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN"
+                        className="SiteLanguageChangeButton__DropdownLanguageButton-dRFOTq fgAFZE"
                         dropup={false}
                         id="language-change-button-dropdown"
                         noCaret={true}
@@ -206,7 +206,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                   bsClass="dropdown-toggle"
                                   bsRole="toggle"
                                   bsStyle="default"
-                                  className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN"
+                                  className="SiteLanguageChangeButton__DropdownLanguageButton-dRFOTq fgAFZE"
                                   id="language-change-button-dropdown"
                                   key=".0"
                                   noCaret={true}
@@ -224,7 +224,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                     borderless={false}
                                     bsClass="btn"
                                     bsStyle="default"
-                                    className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN dropdown-toggle"
+                                    className="SiteLanguageChangeButton__DropdownLanguageButton-dRFOTq fgAFZE dropdown-toggle"
                                     disabled={false}
                                     id="language-change-button-dropdown"
                                     onClick={[Function]}
@@ -236,7 +236,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                       aria-haspopup={true}
                                       backgroundColor="rgba(255, 255, 255, 0.15) !important"
                                       borderless={false}
-                                      className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN dropdown-toggle btn btn-default"
+                                      className="SiteLanguageChangeButton__DropdownLanguageButton-dRFOTq fgAFZE dropdown-toggle btn btn-default"
                                       disabled={false}
                                       id="language-change-button-dropdown"
                                       onClick={[Function]}
@@ -246,20 +246,20 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                     >
                                       <SiteLanguageChangeButton__LanguageContainer>
                                         <div
-                                          className="SiteLanguageChangeButton__LanguageContainer-auo8vl-1 bWShrw"
+                                          className="SiteLanguageChangeButton__LanguageContainer-jnQjHA iPyUgq"
                                         >
                                           <SiteLanguageChangeButton__SiteEarthIcon
                                             color="#FFF"
                                             small={false}
                                           >
                                             <EarthIcon
-                                              className="SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4 hYqVBN"
+                                              className="SiteLanguageChangeButton__SiteEarthIcon-bByLxf ktueMb"
                                               color="#FFF"
                                               size={16}
                                               small={false}
                                             >
                                               <svg
-                                                className="SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4 hYqVBN"
+                                                className="SiteLanguageChangeButton__SiteEarthIcon-bByLxf ktueMb"
                                                 height="16px"
                                                 role="img"
                                                 viewBox="0 0 24 24"
@@ -324,7 +324,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                             color="#FFF"
                                           >
                                             <div
-                                              className="SiteLanguageChangeButton__Language-auo8vl-0 iNDbms"
+                                              className="SiteLanguageChangeButton__Language-aWPXv bQukHR"
                                               color="#FFF"
                                             >
                                               <span>
@@ -340,7 +340,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                         id="language-change-caret"
                                       >
                                         <i
-                                          className="SiteLanguageChangeButton__Caret-auo8vl-5 cmQJL cap-arrow-39"
+                                          className="SiteLanguageChangeButton__Caret-kCoVYY ldsuG cap-arrow-39"
                                           color="#FFF"
                                           id="language-change-caret"
                                         />
@@ -377,7 +377,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                       >
                                         <MenuItem
                                           bsClass="dropdown"
-                                          className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                          className="SiteLanguageChangeButton__MenuLanguageItem-dVUnAN kGLVq"
                                           disabled={false}
                                           divider={false}
                                           header={false}
@@ -388,7 +388,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                           small={false}
                                         >
                                           <li
-                                            className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                            className="SiteLanguageChangeButton__MenuLanguageItem-dVUnAN kGLVq"
                                             role="presentation"
                                           >
                                             <SafeAnchor
@@ -427,7 +427,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                       >
                                         <MenuItem
                                           bsClass="dropdown"
-                                          className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                          className="SiteLanguageChangeButton__MenuLanguageItem-dVUnAN kGLVq"
                                           disabled={false}
                                           divider={false}
                                           header={false}
@@ -438,7 +438,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                           small={false}
                                         >
                                           <li
-                                            className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                            className="SiteLanguageChangeButton__MenuLanguageItem-dVUnAN kGLVq"
                                             role="presentation"
                                           >
                                             <SafeAnchor
@@ -477,7 +477,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                       >
                                         <MenuItem
                                           bsClass="dropdown"
-                                          className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                          className="SiteLanguageChangeButton__MenuLanguageItem-dVUnAN kGLVq"
                                           disabled={false}
                                           divider={false}
                                           header={false}
@@ -488,7 +488,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                                           small={false}
                                         >
                                           <li
-                                            className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                            className="SiteLanguageChangeButton__MenuLanguageItem-dVUnAN kGLVq"
                                             role="presentation"
                                           >
                                             <SafeAnchor
@@ -537,13 +537,13 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
                       block={false}
                       bsClass="btn"
                       bsStyle="primary"
-                      className="ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4 bsWHAR"
+                      className="ChangeLanguageOnWebsiteHeader__ContinueButton-eTcHmK fxQVmD"
                       disabled={false}
                       id="language-header-continue-button"
                       onClick={[Function]}
                     >
                       <button
-                        className="ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4 bsWHAR btn btn-primary"
+                        className="ChangeLanguageOnWebsiteHeader__ContinueButton-eTcHmK fxQVmD btn btn-primary"
                         disabled={false}
                         id="language-header-continue-button"
                         onClick={[Function]}
@@ -566,7 +566,7 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
           onClick={[Function]}
         >
           <i
-            className="ChangeLanguageOnWebsiteHeader__Close-sc-3ukalg-2 hrtVLv cap-delete-1"
+            className="ChangeLanguageOnWebsiteHeader__Close-dUgKqL lehvHj cap-delete-1"
             id="language-header-close"
             onClick={[Function]}
           />

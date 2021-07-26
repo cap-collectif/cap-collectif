@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -11,18 +11,18 @@ exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1
   }
 >
   <div
-    className="sc-bdnylx iEdWcg"
+    className="sc-bdnxRM ctlvnX"
     onClose={[MockFunction]}
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 fHdDJV fYtUti KA-deO icon DebateStepPageOpinionDrawer___StyledIcon-sc-5pk0sq-0 eZhGDQ detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG jtsHZK bSAkp AMDLx icon DebateStepPageOpinionDrawer___StyledIcon-saWWq Gmooy detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fCWFqy"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX eErtxh"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gOpQZu Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX ldbxA-d Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -32,44 +32,44 @@ exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<media-url>"
           title="Agui le penseur"
         />
       </div>
       <p
-        className="sc-bdnylx kjCcMv"
+        className="sc-bdnxRM dYwlXI"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 hpvAIi gJWoeF jxKYEO"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS WvGVp hBLRKx cguwDa"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         title=""
       >
         <p
-          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
         >
           <h5
-            className="sc-bdnylx QGwHw"
+            className="sc-bdnxRM ewLwjT"
           >
             opinion.for
           </h5>
         </p>
       </div>
       <p
-        className="sc-bdnylx jbXBBB"
+        className="sc-bdnxRM dNpFoK"
       >
         Jsuis né dans les favela au brésil
       </p>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 ybJAm eEzioL"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ggEaaV kvrLSX"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>
@@ -91,7 +91,7 @@ exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1
 
 exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when open 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -100,18 +100,18 @@ exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when o
   }
 >
   <div
-    className="sc-bdnylx iEdWcg"
+    className="sc-bdnxRM ctlvnX"
     onClose={[MockFunction]}
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 fHdDJV fYtUti KA-deO icon DebateStepPageOpinionDrawer___StyledIcon-sc-5pk0sq-0 eZhGDQ detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG jtsHZK bSAkp AMDLx icon DebateStepPageOpinionDrawer___StyledIcon-saWWq Gmooy detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fCWFqy"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX eErtxh"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gOpQZu Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX ldbxA-d Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -121,44 +121,44 @@ exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when o
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<media-url>"
           title="Agui le penseur"
         />
       </div>
       <p
-        className="sc-bdnylx kjCcMv"
+        className="sc-bdnxRM dYwlXI"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 hpvAIi gJWoeF jxKYEO"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS WvGVp hBLRKx cguwDa"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         title=""
       >
         <p
-          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
         >
           <h5
-            className="sc-bdnylx QGwHw"
+            className="sc-bdnxRM ewLwjT"
           >
             opinion.for
           </h5>
         </p>
       </div>
       <p
-        className="sc-bdnylx jbXBBB"
+        className="sc-bdnxRM dNpFoK"
       >
         Jsuis né dans les favela au brésil
       </p>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 ybJAm eEzioL"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ggEaaV kvrLSX"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>

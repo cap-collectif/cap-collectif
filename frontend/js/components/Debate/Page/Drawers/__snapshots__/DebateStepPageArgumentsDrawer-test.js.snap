@@ -2,26 +2,26 @@
 
 exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={Object {}}
 >
   <div
-    className="sc-bdnylx gIhehC"
+    className="sc-bdnxRM vhSwl"
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bewhaF bSAkp AMDLx icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
     >
       <p
-        className="sc-bdnylx fOqqJY"
+        className="sc-bdnxRM jNrDFP"
       >
         shortcut.opinion {"num":42}
       </p>
       <p
-        className="sc-bdnylx kWTGsb"
+        className="sc-bdnxRM bXUMKY"
       >
         vote-count-for-and-against {"for":42,"against":42}
       </p>
@@ -30,7 +30,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
       aria-controls="id-1"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 dZGGKz gQREUn"
+      className="sc-bdnxRM Button__ButtonInner-dWPVNG iUmRkk jfKDDI"
       onClick={[Function]}
       onClickCapture={[Function]}
       onKeyDown={[Function]}
@@ -42,7 +42,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
     >
       argument.sort.label
       <IconMock
-        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 blLayl jSXedj KA-deO icon"
+        className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bFiFFK fZkSKg AMDLx icon"
       />
     </button>
     <div
@@ -65,72 +65,72 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
     />
   </div>
   <div
-    className="sc-bdnylx blraWc"
+    className="sc-bdnxRM jQRgHv"
     onClose={[MockFunction]}
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 crNeQp eEzioL"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bublzy kvrLSX"
     >
       <div>
         <div
-          className="sc-bdnylx kZQgZO"
+          className="sc-bdnxRM flMSnR"
         >
           <div
-            className="sc-bdnylx dwYmmZ"
+            className="sc-bdnxRM kHoaOi"
           >
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iUOWTb"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX gkNvOE"
             >
               <div
-                className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lfNsLz"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX cZJVMU"
               >
                 <div
-                  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hyNyuu"
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX bAwZMN"
                 >
                   <p
-                    className="sc-bdnylx cewAzR"
+                    className="sc-bdnxRM gnFOYm"
                   >
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc gddsJf jxKYEO"
+                    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS lewMoL fXDMcr cguwDa"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
                     title=""
                   >
                     <p
-                      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+                      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
                     >
                       <span
-                        className="sc-bdnylx cISkos"
+                        className="sc-bdnxRM dClQKr"
                       >
                         global.against
                       </span>
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh gddsJf jxKYEO"
+                    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS kPtSrS fXDMcr cguwDa"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
                     title=""
                   >
                     <IconMock
-                      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+                      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
                     />
                     <p
-                      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+                      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
                     >
                       <span
-                        className="sc-bdnylx cISkos"
+                        className="sc-bdnxRM dClQKr"
                       >
                         post_is_not_public
                       </span>
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
                     style={
                       Object {
                         "opacity": 0,
@@ -139,48 +139,48 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     }
                   >
                     <p
-                      className="sc-bdnylx hIgmxG"
+                      className="sc-bdnxRM cZcArZ"
                       title="account-not-confirmed-end-step"
                     >
                       account-not-confirmed-end-step
                     </p>
                     <div
-                      className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
                       data-popper-arrow={true}
                       id="arrow"
                     />
                   </div>
                 </div>
                 <div
-                  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
                 />
               </div>
               <p
-                className="sc-bdnylx fNJNWw"
+                className="sc-bdnxRM isZYbz"
               >
                 &lt;mock-value-for-field-"body"&gt;
                  
               </p>
               <div
-                className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eHYrYo"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX hraBfz"
               >
                 <div
-                  className="sc-bdnylx"
+                  className="sc-bdnxRM"
                 >
                   <button
                     aria-label="vote.add"
-                    className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+                    className="sc-bdnxRM Button__ButtonInner-dWPVNG idDWwA jfKDDI"
                     disabled={true}
                     onClick={[Function]}
                     type="button"
                   >
                     <IconMock
-                      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+                      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cstreB bSAkp AMDLx icon"
                     />
                   </button>
                 </div>
                 <div
-                  className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+                  className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
                   style={
                     Object {
                       "opacity": 0,
@@ -189,19 +189,19 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   }
                 >
                   <p
-                    className="sc-bdnylx hIgmxG"
+                    className="sc-bdnxRM cZcArZ"
                     title="confirm-account-to-interact"
                   >
                     confirm-account-to-interact
                   </p>
                   <div
-                    className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+                    className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
                     data-popper-arrow={true}
                     id="arrow"
                   />
                 </div>
                 <span
-                  className="sc-bdnylx boQrcS"
+                  className="sc-bdnxRM eJeZJJ"
                 >
                   42
                 </span>
@@ -228,64 +228,64 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           </div>
         </div>
         <div
-          className="sc-bdnylx kZQgZO"
+          className="sc-bdnxRM flMSnR"
         >
           <div
-            className="sc-bdnylx dwYmmZ"
+            className="sc-bdnxRM kHoaOi"
           >
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iUOWTb"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX gkNvOE"
             >
               <div
-                className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lfNsLz"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX cZJVMU"
               >
                 <div
-                  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hyNyuu"
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX bAwZMN"
                 >
                   <p
-                    className="sc-bdnylx cewAzR"
+                    className="sc-bdnxRM gnFOYm"
                   >
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc gddsJf jxKYEO"
+                    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS lewMoL fXDMcr cguwDa"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
                     title=""
                   >
                     <p
-                      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+                      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
                     >
                       <span
-                        className="sc-bdnylx cISkos"
+                        className="sc-bdnxRM dClQKr"
                       >
                         global.against
                       </span>
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh gddsJf jxKYEO"
+                    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS kPtSrS fXDMcr cguwDa"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
                     title=""
                   >
                     <IconMock
-                      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+                      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
                     />
                     <p
-                      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+                      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
                     >
                       <span
-                        className="sc-bdnylx cISkos"
+                        className="sc-bdnxRM dClQKr"
                       >
                         post_is_not_public
                       </span>
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
                     style={
                       Object {
                         "opacity": 0,
@@ -294,48 +294,48 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     }
                   >
                     <p
-                      className="sc-bdnylx hIgmxG"
+                      className="sc-bdnxRM cZcArZ"
                       title="account-not-confirmed-end-step"
                     >
                       account-not-confirmed-end-step
                     </p>
                     <div
-                      className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
                       data-popper-arrow={true}
                       id="arrow"
                     />
                   </div>
                 </div>
                 <div
-                  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
                 />
               </div>
               <p
-                className="sc-bdnylx fNJNWw"
+                className="sc-bdnxRM isZYbz"
               >
                 &lt;mock-value-for-field-"body"&gt;
                  
               </p>
               <div
-                className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eHYrYo"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX hraBfz"
               >
                 <div
-                  className="sc-bdnylx"
+                  className="sc-bdnxRM"
                 >
                   <button
                     aria-label="vote.add"
-                    className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+                    className="sc-bdnxRM Button__ButtonInner-dWPVNG idDWwA jfKDDI"
                     disabled={true}
                     onClick={[Function]}
                     type="button"
                   >
                     <IconMock
-                      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+                      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cstreB bSAkp AMDLx icon"
                     />
                   </button>
                 </div>
                 <div
-                  className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+                  className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
                   style={
                     Object {
                       "opacity": 0,
@@ -344,19 +344,19 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   }
                 >
                   <p
-                    className="sc-bdnylx hIgmxG"
+                    className="sc-bdnxRM cZcArZ"
                     title="confirm-account-to-interact"
                   >
                     confirm-account-to-interact
                   </p>
                   <div
-                    className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+                    className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
                     data-popper-arrow={true}
                     id="arrow"
                   />
                 </div>
                 <span
-                  className="sc-bdnylx boQrcS"
+                  className="sc-bdnxRM eJeZJJ"
                 >
                   42
                 </span>
@@ -383,64 +383,64 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           </div>
         </div>
         <div
-          className="sc-bdnylx kZQgZO"
+          className="sc-bdnxRM flMSnR"
         >
           <div
-            className="sc-bdnylx dwYmmZ"
+            className="sc-bdnxRM kHoaOi"
           >
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iUOWTb"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX gkNvOE"
             >
               <div
-                className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lfNsLz"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX cZJVMU"
               >
                 <div
-                  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hyNyuu"
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX bAwZMN"
                 >
                   <p
-                    className="sc-bdnylx cewAzR"
+                    className="sc-bdnxRM gnFOYm"
                   >
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 ezVqzc gddsJf jxKYEO"
+                    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS lewMoL fXDMcr cguwDa"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
                     title=""
                   >
                     <p
-                      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+                      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
                     >
                       <span
-                        className="sc-bdnylx cISkos"
+                        className="sc-bdnxRM dClQKr"
                       >
                         global.against
                       </span>
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bHVynh gddsJf jxKYEO"
+                    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS kPtSrS fXDMcr cguwDa"
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
                     title=""
                   >
                     <IconMock
-                      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+                      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
                     />
                     <p
-                      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+                      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
                     >
                       <span
-                        className="sc-bdnylx cISkos"
+                        className="sc-bdnxRM dClQKr"
                       >
                         post_is_not_public
                       </span>
                     </p>
                   </div>
                   <div
-                    className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
                     style={
                       Object {
                         "opacity": 0,
@@ -449,48 +449,48 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     }
                   >
                     <p
-                      className="sc-bdnylx hIgmxG"
+                      className="sc-bdnxRM cZcArZ"
                       title="account-not-confirmed-end-step"
                     >
                       account-not-confirmed-end-step
                     </p>
                     <div
-                      className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
                       data-popper-arrow={true}
                       id="arrow"
                     />
                   </div>
                 </div>
                 <div
-                  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
                 />
               </div>
               <p
-                className="sc-bdnylx fNJNWw"
+                className="sc-bdnxRM isZYbz"
               >
                 &lt;mock-value-for-field-"body"&gt;
                  
               </p>
               <div
-                className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eHYrYo"
+                className="sc-bdnxRM Flex___StyledAppBox-RSPpX hraBfz"
               >
                 <div
-                  className="sc-bdnylx"
+                  className="sc-bdnxRM"
                 >
                   <button
                     aria-label="vote.add"
-                    className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+                    className="sc-bdnxRM Button__ButtonInner-dWPVNG idDWwA jfKDDI"
                     disabled={true}
                     onClick={[Function]}
                     type="button"
                   >
                     <IconMock
-                      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+                      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cstreB bSAkp AMDLx icon"
                     />
                   </button>
                 </div>
                 <div
-                  className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+                  className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
                   style={
                     Object {
                       "opacity": 0,
@@ -499,19 +499,19 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   }
                 >
                   <p
-                    className="sc-bdnylx hIgmxG"
+                    className="sc-bdnxRM cZcArZ"
                     title="confirm-account-to-interact"
                   >
                     confirm-account-to-interact
                   </p>
                   <div
-                    className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+                    className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
                     data-popper-arrow={true}
                     id="arrow"
                   />
                 </div>
                 <span
-                  className="sc-bdnylx boQrcS"
+                  className="sc-bdnxRM eJeZJJ"
                 >
                   42
                 </span>

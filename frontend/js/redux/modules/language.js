@@ -1,12 +1,15 @@
 // @flow
 import type { Exact, Action } from '~/types';
+import config from '../../config';
 
 export type State = {
   +currentLanguage: string,
 };
 
 const initialState: State = {
-  currentLanguage: new URLSearchParams(window.location.search).get('tl') || window.locale,
+  currentLanguage: config.canUseDOM
+    ? new URLSearchParams(window.location.search).get('tl') || window.locale
+    : 'fr_FR',
 };
 
 type ChangeLanguageSelectedAction = {

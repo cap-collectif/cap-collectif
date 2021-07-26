@@ -94,7 +94,7 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
       target={null}
       trigger="click"
     >
-      <_default
+      <CapcoPopover
         id="popover-positioned-right"
       >
         <i
@@ -136,7 +136,7 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
             />
           </Button>
         </div>
-      </_default>
+      </CapcoPopover>
     </Overlay>
   </Col>
 </ProposalsUserVotesstyle__VoteItemContainer>
@@ -222,7 +222,7 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
       target={null}
       trigger="click"
     >
-      <_default
+      <CapcoPopover
         id="popover-positioned-right"
       >
         <i
@@ -264,7 +264,7 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
             />
           </Button>
         </div>
-      </_default>
+      </CapcoPopover>
     </Overlay>
   </Col>
 </ProposalsUserVotesstyle__VoteItemContainer>
@@ -364,7 +364,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       target={null}
       trigger="click"
     >
-      <_default
+      <CapcoPopover
         id="popover-positioned-right"
       >
         <i
@@ -406,7 +406,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
             />
           </Button>
         </div>
-      </_default>
+      </CapcoPopover>
     </Overlay>
   </Col>
 </ProposalsUserVotesstyle__VoteItemContainer>

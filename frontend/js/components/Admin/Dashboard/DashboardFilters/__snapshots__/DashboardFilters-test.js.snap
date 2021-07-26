@@ -2,14 +2,14 @@
 
 exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1`] = `
 <form
-  className="sc-bdnylx DashboardFilters___StyledAppBox-fm1ta2-0  hvvvGY"
+  className="sc-bdnxRM DashboardFilters___StyledAppBox-gotpDz  hCWgrD"
   id="form-filters-dashboard"
 >
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB hmLkpw"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba fvBSZY"
   >
     <div
-      className="sc-bdnylx oJqyp"
+      className="sc-bdnxRM jjdyfG"
     >
       <div
         className="form-group"
@@ -54,10 +54,10 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bRjSJB gJjENc"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX jfPcLy fZdyCs"
     >
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         global.from
       </p>
@@ -68,7 +68,7 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
           className="form-fields input-group"
         >
           <div
-            className="rdt DateTime__BasicDateTime-sc-8jale2-0 dVWALI"
+            className="rdt DateTime__BasicDateTime-pKfBS hINnoB"
           >
             <input
               className="form-control"
@@ -473,7 +473,7 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
         </span>
       </div>
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         global.to
       </p>
@@ -484,7 +484,7 @@ exports[`<DashboardFilters /> <TestDashboardFilters /> should render correctly 1
           className="form-fields input-group"
         >
           <div
-            className="rdt DateTime__BasicDateTime-sc-8jale2-0 dVWALI"
+            className="rdt DateTime__BasicDateTime-pKfBS hINnoB"
           >
             <input
               className="form-control"

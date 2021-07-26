@@ -3,67 +3,67 @@
 exports[`<SectionMostVisitedPages /> <TestSectionMostVisitedPages /> should render correctly with most visited pages 1`] = `
 Array [
   <button
-    className="sc-bdnylx SectionMostVisitedPages___StyledAppBox-x5c9p7-0 gfXgdH itihwH"
+    className="sc-bdnxRM SectionMostVisitedPages___StyledAppBox-hHScbY dBvNpA dIkBwg"
     onClick={[Function]}
     type="button"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cobHxM lvJOm"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX knsysb gconsy"
     >
       <p
-        className="sc-bdnylx fnSuYt"
+        className="sc-bdnxRM eTkmVK"
       >
         most-visited-pages
       </p>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN glBRts"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO MYLyI"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fHsahe"
         >
           <p
-            className="sc-bdnylx dbMpeV"
+            className="sc-bdnxRM eNREli"
             title="2014-12-01T00:00:00.000Z"
           >
             2014-12-01T00:00:00.000Z
           </p>
           <p
-            className="sc-bdnylx flhlcS"
+            className="sc-bdnxRM kcBZUN"
           >
             50
           </p>
         </div>
         <div
-          className="sc-bdnylx ivgGPR"
+          className="sc-bdnxRM dPoQcS"
         >
           <div
-            className="sc-bdnylx iznDD"
+            className="sc-bdnxRM geBSxU"
           />
         </div>
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN glBRts"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO MYLyI"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fHsahe"
         >
           <p
-            className="sc-bdnylx dbMpeV"
+            className="sc-bdnxRM eNREli"
             title="2015-01-01T00:00:00.000Z"
           >
             2015-01-01T00:00:00.000Z
           </p>
           <p
-            className="sc-bdnylx flhlcS"
+            className="sc-bdnxRM kcBZUN"
           >
             60
           </p>
         </div>
         <div
-          className="sc-bdnylx ivgGPR"
+          className="sc-bdnxRM dPoQcS"
         >
           <div
-            className="sc-bdnylx hkPfgz"
+            className="sc-bdnxRM kAEhCk"
           />
         </div>
       </div>

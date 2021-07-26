@@ -24,9 +24,9 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
           },
         ],
         "componentStyle": e {
-          "baseHash": 1387770474,
+          "baseHash": -861558889,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownToggle-sc-11246z7-5",
+          "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
             ".caret{margin-left:5px;}",
@@ -43,7 +43,7 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
         "foldedComponentIds": Array [],
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownToggle-sc-11246z7-5",
+        "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "__docgenInfo": Object {
@@ -170,9 +170,9 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
           },
         ],
         "componentStyle": e {
-          "baseHash": 477636232,
+          "baseHash": -1788907091,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownMenu-sc-11246z7-6",
+          "componentId": "styles__DropdownMenu-OiPbk",
           "isStatic": false,
           "rules": Array [
             "border-radius:0 0 4px 4px;background-color:",
@@ -187,7 +187,7 @@ exports[`<TabsBarDropdown /> should render correctly 1`] = `
         "foldedComponentIds": Array [],
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownMenu-sc-11246z7-6",
+        "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "__docgenInfo": Object {
@@ -314,9 +314,9 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           },
         ],
         "componentStyle": e {
-          "baseHash": 1387770474,
+          "baseHash": -861558889,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownToggle-sc-11246z7-5",
+          "componentId": "styles__DropdownToggle-ckofMh",
           "isStatic": false,
           "rules": Array [
             ".caret{margin-left:5px;}",
@@ -333,7 +333,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
         "foldedComponentIds": Array [],
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownToggle-sc-11246z7-5",
+        "styledComponentId": "styles__DropdownToggle-ckofMh",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "__docgenInfo": Object {
@@ -460,9 +460,9 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           },
         ],
         "componentStyle": e {
-          "baseHash": 477636232,
+          "baseHash": -1788907091,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownMenu-sc-11246z7-6",
+          "componentId": "styles__DropdownMenu-OiPbk",
           "isStatic": false,
           "rules": Array [
             "border-radius:0 0 4px 4px;background-color:",
@@ -477,7 +477,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
         "foldedComponentIds": Array [],
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownMenu-sc-11246z7-6",
+        "styledComponentId": "styles__DropdownMenu-OiPbk",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "__docgenInfo": Object {
@@ -586,9 +586,9 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1661384672,
+            "baseHash": -1015264920,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-sc-11246z7-2",
+            "componentId": "styles__TabsLink-eEYuCY",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -607,7 +607,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           "foldedComponentIds": Array [],
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-sc-11246z7-2",
+          "styledComponentId": "styles__TabsLink-eEYuCY",
           "target": "a",
           "toString": [Function],
           "warnTooManyClasses": [Function],
@@ -711,9 +711,9 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1661384672,
+            "baseHash": -1015264920,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-sc-11246z7-2",
+            "componentId": "styles__TabsLink-eEYuCY",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -732,7 +732,7 @@ exports[`<TabsBarDropdown /> should render correctly with multiple children 1`] 
           "foldedComponentIds": Array [],
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-sc-11246z7-2",
+          "styledComponentId": "styles__TabsLink-eEYuCY",
           "target": "a",
           "toString": [Function],
           "warnTooManyClasses": [Function],

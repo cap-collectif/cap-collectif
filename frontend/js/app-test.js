@@ -1,6 +1,6 @@
 // @flow
 /* eslint-env jest */
-require('./app.js');
+require('./app');
 
 it('Should return one script child with raw javascript as input with double quotes', () => {
   const scriptText = 'console.log("js");';

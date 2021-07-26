@@ -4,7 +4,7 @@ exports[`<ButtonPopover /> renders correctly 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <_default
+    <CapcoPopover
       id="1-popover"
     >
       <p
@@ -12,7 +12,7 @@ exports[`<ButtonPopover /> renders correctly 1`] = `
       >
         Bonjour
       </p>
-    </_default>
+    </CapcoPopover>
   }
   placement="top"
   trigger="click"

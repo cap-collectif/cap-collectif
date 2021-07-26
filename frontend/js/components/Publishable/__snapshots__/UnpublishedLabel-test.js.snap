@@ -6,7 +6,7 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <_default
+      <CapcoPopover
         id="publishable-id1-not-accounted-popover"
         title={
           <strong
@@ -27,7 +27,7 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
             }
           }
         />
-      </_default>
+      </CapcoPopover>
     }
     placement="top"
     trigger={
@@ -62,7 +62,7 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <_default
+      <CapcoPopover
         id="publishable-id1-not-accounted-popover"
         title={
           <strong
@@ -83,7 +83,7 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
             }
           }
         />
-      </_default>
+      </CapcoPopover>
     }
     placement="top"
     trigger={
@@ -118,7 +118,7 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
   <OverlayTrigger
     defaultOverlayShown={false}
     overlay={
-      <_default
+      <CapcoPopover
         id="publishable-id1-not-accounted-popover"
         title={
           <strong
@@ -142,7 +142,7 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
             }
           />
         </p>
-      </_default>
+      </CapcoPopover>
     }
     placement="top"
     trigger={

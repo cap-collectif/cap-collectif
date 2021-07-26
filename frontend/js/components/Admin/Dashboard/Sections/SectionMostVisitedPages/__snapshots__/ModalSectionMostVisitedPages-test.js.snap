@@ -15,7 +15,7 @@ exports[`<ModalSectionMostVisitedPages /> <TestModalSectionMostVisitedPages /> s
   tabIndex={-1}
 >
   <div
-    className="sc-bdnylx dCrSrw Modal__ModalContainerInner-sc-11juq2l-0"
+    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<ModalSectionMostVisitedPages /> <TestModalSectionMostVisitedPages /> s
     }
   >
     <div
-      className="sc-bdnylx hDMLix Modal__ModalInner-sc-11juq2l-1"
+      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
       id="modal-section-contributors"
       style={
         Object {
@@ -34,79 +34,79 @@ exports[`<ModalSectionMostVisitedPages /> <TestModalSectionMostVisitedPages /> s
       }
     >
       <header
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gwSffl"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm ModalHeader___StyledFlex-sc-1yfwqjx-0 cibXUu"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
         >
           <h4
-            className="sc-bdnylx hXfmUv"
+            className="sc-bdnxRM jjwcBQ"
           >
             most-visited-pages
           </h4>
         </div>
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 kjpljQ gQREUn"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jxagfU jSXedj KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
           />
         </button>
       </header>
       <main
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gcGteT icVUjK"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs jAjMvW"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN glBRts"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO MYLyI"
         >
           <div
-            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fHsahe"
           >
             <p
-              className="sc-bdnylx dbMpeV"
+              className="sc-bdnxRM eNREli"
               title="2014-12-01T00:00:00.000Z"
             >
               2014-12-01T00:00:00.000Z
             </p>
             <p
-              className="sc-bdnylx flhlcS"
+              className="sc-bdnxRM kcBZUN"
             >
               50
             </p>
           </div>
           <div
-            className="sc-bdnylx ivgGPR"
+            className="sc-bdnxRM dPoQcS"
           >
             <div
-              className="sc-bdnylx iznDD"
+              className="sc-bdnxRM geBSxU"
             />
           </div>
         </div>
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN glBRts"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO MYLyI"
         >
           <div
-            className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dwCVvh"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fHsahe"
           >
             <p
-              className="sc-bdnylx dbMpeV"
+              className="sc-bdnxRM eNREli"
               title="2015-01-01T00:00:00.000Z"
             >
               2015-01-01T00:00:00.000Z
             </p>
             <p
-              className="sc-bdnylx flhlcS"
+              className="sc-bdnxRM kcBZUN"
             >
               60
             </p>
           </div>
           <div
-            className="sc-bdnylx ivgGPR"
+            className="sc-bdnxRM dPoQcS"
           >
             <div
-              className="sc-bdnylx hkPfgz"
+              className="sc-bdnxRM kAEhCk"
             />
           </div>
         </div>

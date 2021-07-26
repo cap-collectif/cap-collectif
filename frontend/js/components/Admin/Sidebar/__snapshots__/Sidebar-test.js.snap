@@ -2,13 +2,13 @@
 
 exports[`<Sidebar /> renders correctly 1`] = `
 <aside
-  class="sc-bdnylx Sidebar___StyledAppBox-sc-18c9lo3-2 hiHqfP ghEswt"
+  class="sc-bdnxRM Sidebar___StyledAppBox-hqZKyq gPNgUo kZvYAJ"
 >
   <div
-    class="sc-bdnylx Sidebar___StyledAppBox2-sc-18c9lo3-3 hpTgTH eVwVKy"
+    class="sc-bdnxRM Sidebar___StyledAppBox2-eBTSsA fzEAxc jjWZUd"
   >
     <div
-      class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kmQkSG"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX jBbfN"
     >
       <a
         href="/"
@@ -48,7 +48,7 @@ exports[`<Sidebar /> renders correctly 1`] = `
         </svg>
       </a>
       <button
-        class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+        class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
         type="button"
       >
         <svg
@@ -80,165 +80,165 @@ exports[`<Sidebar /> renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 oErIa Sidebar___StyledFlex-sc-18c9lo3-4 dwTeIP"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX lglZEl Sidebar___StyledFlex-lcxgAl hsycRo"
     >
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="contributions"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 global.contribution
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="contenus"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 admin.group.content
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="projets"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 admin.group.project
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="utilisateurs"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 sonata.admin.group.user
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="reglages"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 admin.group.parameters
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="pages"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 admin.group.pages
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
       </div>
     </div>
     <span
-      class="sc-bdnylx gMVuOh"
+      class="sc-bdnxRM fSKKZW"
     >
       app-version 2020.07.07-xsinjdic
     </span>
@@ -248,13 +248,13 @@ exports[`<Sidebar /> renders correctly 1`] = `
 
 exports[`<Sidebar /> renders when the user is a project admin and not an admin 1`] = `
 <aside
-  class="sc-bdnylx Sidebar___StyledAppBox-sc-18c9lo3-2 hiHqfP ghEswt"
+  class="sc-bdnxRM Sidebar___StyledAppBox-hqZKyq gPNgUo kZvYAJ"
 >
   <div
-    class="sc-bdnylx Sidebar___StyledAppBox2-sc-18c9lo3-3 hpTgTH eVwVKy"
+    class="sc-bdnxRM Sidebar___StyledAppBox2-eBTSsA fzEAxc jjWZUd"
   >
     <div
-      class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kmQkSG"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX jBbfN"
     >
       <a
         href="/"
@@ -294,7 +294,7 @@ exports[`<Sidebar /> renders when the user is a project admin and not an admin 1
         </svg>
       </a>
       <button
-        class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+        class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
         type="button"
       >
         <svg
@@ -326,40 +326,40 @@ exports[`<Sidebar /> renders when the user is a project admin and not an admin 1
       </button>
     </div>
     <div
-      class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 oErIa Sidebar___StyledFlex-sc-18c9lo3-4 dwTeIP"
+      class="sc-bdnxRM Flex___StyledAppBox-RSPpX lglZEl Sidebar___StyledFlex-lcxgAl hsycRo"
     >
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <div
-          class="sc-bdnylx khhEFF Sidebar__SidebarAccordionItem-sc-18c9lo3-0"
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="projets"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jhXMaU gQREUn SidebarButton___StyledButton-sc-94bejg-0 ksrdAe"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
             type="button"
           >
             <div
-              class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fkAufB"
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
             >
               <iconmock
-                class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
               />
               <p
-                class="sc-bdnylx iuuwAP SidebarButton___StyledText-sc-94bejg-1 dSvrnV"
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
               >
                 admin.group.project
               </p>
             </div>
             <iconmock
-              class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jvdmyl gtEoKs KA-deO icon"
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
             />
           </button>
         </div>
       </div>
     </div>
     <span
-      class="sc-bdnylx gMVuOh"
+      class="sc-bdnxRM fSKKZW"
     >
       app-version 2020.07.07-xsinjdic
     </span>

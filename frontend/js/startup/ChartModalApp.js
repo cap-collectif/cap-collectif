@@ -3,7 +3,7 @@ import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
 
 const ChartModal = lazy(() =>
-  import(/* webpackChunkName: "ChartModal" */ '~/components/User/Registration/ChartModal.js'),
+  import(/* webpackChunkName: "ChartModal" */ '~/components/User/Registration/ChartModal'),
 );
 
 export default () => (

@@ -3,29 +3,29 @@
 exports[`<SectionPageViews /> <TestSectionPageViews /> should render correctly with contributors 1`] = `
 Array [
   <button
-    className="sc-bdnylx SectionPageViews___StyledAppBox-sc-1v1lsxx-0 jBboRH iOkvWL"
+    className="sc-bdnxRM SectionPageViews___StyledAppBox-jKcINs ligvsE iuxBxp"
     onClick={[Function]}
     type="button"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gRDXmN"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX kSuEVa"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dqCgLg"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX iRHhHD"
       >
         <p
-          className="sc-bdnylx eIvhzY"
+          className="sc-bdnxRM cTsaRH"
         >
           global.page.views.dynamic
         </p>
         <p
-          className="sc-bdnylx eEMnqn"
+          className="sc-bdnxRM lesLoo"
         >
           110
         </p>
       </div>
       <div
-        className="sc-bdnylx keezSv"
+        className="sc-bdnxRM bcTRzA"
       >
         <div
           className="recharts-responsive-container"

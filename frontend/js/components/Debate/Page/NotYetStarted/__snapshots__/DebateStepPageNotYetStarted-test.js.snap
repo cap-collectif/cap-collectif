@@ -2,30 +2,30 @@
 
 exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
 <div
-  className="sc-bdnylx"
+  className="sc-bdnxRM"
   id="DebateStepPageNotYetStarted"
 >
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iXOGtN eEzioL"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX jeswne kvrLSX"
   >
     <div
-      className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf gwIhkD jxKYEO"
+      className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS ddZVrU czLSQf cguwDa"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       title=""
     >
       <IconMock
-        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+        className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
       />
       <p
-        className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+        className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
       >
         count.daysUntil {"count":725}
       </p>
     </div>
     <h2
-      className="sc-bdnylx eEtCQU"
+      className="sc-bdnxRM afcbP"
     >
       
     </h2>

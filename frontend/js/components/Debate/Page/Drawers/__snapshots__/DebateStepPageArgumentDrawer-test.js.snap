@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -11,32 +11,32 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
   }
 >
   <div
-    className="sc-bdnylx lhzlXY"
+    className="sc-bdnxRM epclJX"
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bewhaF bSAkp AMDLx icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm glBRts"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ MYLyI"
     >
       <p
-        className="sc-bdnylx fOqqJY"
+        className="sc-bdnxRM jNrDFP"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF gJWoeF jxKYEO"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS dgZvza hBLRKx cguwDa"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         title=""
       >
         <p
-          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
         >
           <h5
-            className="sc-bdnylx QGwHw"
+            className="sc-bdnxRM ewLwjT"
           >
             global.for
           </h5>
@@ -45,32 +45,32 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
     </div>
   </div>
   <div
-    className="sc-bdnylx blraWc"
+    className="sc-bdnxRM jQRgHv"
     onClose={[MockFunction]}
   >
     <p
-      className="sc-bdnylx fNJNWw"
+      className="sc-bdnxRM isZYbz"
     >
       coucou
     </p>
   </div>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bxbtuz"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX kDslbU"
     onClose={[MockFunction]}
   >
     <button
       aria-label="vote.add"
-      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+      className="sc-bdnxRM Button__ButtonInner-dWPVNG idDWwA jfKDDI"
       disabled={true}
       onClick={[Function]}
       type="button"
     >
       <IconMock
-        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+        className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cstreB bSAkp AMDLx icon"
       />
     </button>
     <span
-      className="sc-bdnylx kuntTJ"
+      className="sc-bdnxRM bUnbAK"
     >
       10
     </span>
@@ -98,7 +98,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has vote 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -107,32 +107,32 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
   }
 >
   <div
-    className="sc-bdnylx lhzlXY"
+    className="sc-bdnxRM epclJX"
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bewhaF bSAkp AMDLx icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm glBRts"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ MYLyI"
     >
       <p
-        className="sc-bdnylx fOqqJY"
+        className="sc-bdnxRM jNrDFP"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF gJWoeF jxKYEO"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS dgZvza hBLRKx cguwDa"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         title=""
       >
         <p
-          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
         >
           <h5
-            className="sc-bdnylx QGwHw"
+            className="sc-bdnxRM ewLwjT"
           >
             global.for
           </h5>
@@ -141,32 +141,32 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
     </div>
   </div>
   <div
-    className="sc-bdnylx blraWc"
+    className="sc-bdnxRM jQRgHv"
     onClose={[MockFunction]}
   >
     <p
-      className="sc-bdnylx fNJNWw"
+      className="sc-bdnxRM isZYbz"
     >
       coucou
     </p>
   </div>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bxbtuz"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX kDslbU"
     onClose={[MockFunction]}
   >
     <button
       aria-label="vote.add"
-      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+      className="sc-bdnxRM Button__ButtonInner-dWPVNG idDWwA jfKDDI"
       disabled={true}
       onClick={[Function]}
       type="button"
     >
       <IconMock
-        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+        className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cstreB bSAkp AMDLx icon"
       />
     </button>
     <span
-      className="sc-bdnylx kuntTJ"
+      className="sc-bdnxRM bUnbAK"
     >
       10
     </span>
@@ -194,7 +194,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is the author 1`] = `
 <div
-  className="sc-bdnylx hYvovQ DetailDrawer__DetailDrawerInner-sc-1a1y5qt-0"
+  className="sc-bdnxRM iIjqGL DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -203,32 +203,32 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
   }
 >
   <div
-    className="sc-bdnylx lhzlXY"
+    className="sc-bdnxRM epclJX"
   >
     <IconMock
-      className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 bLqthO fYtUti KA-deO icon DetailDrawerHeader___StyledIcon-sc-2cfhlh-0 ishjvr detail__drawer--back-arow"
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG bewhaF bSAkp AMDLx icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       onClick={[MockFunction]}
     />
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm glBRts"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ MYLyI"
     >
       <p
-        className="sc-bdnylx fOqqJY"
+        className="sc-bdnxRM jNrDFP"
       >
         Agui le penseur
       </p>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 bfcpyF gJWoeF jxKYEO"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS dgZvza hBLRKx cguwDa"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         title=""
       >
         <p
-          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
         >
           <h5
-            className="sc-bdnylx QGwHw"
+            className="sc-bdnxRM ewLwjT"
           >
             global.for
           </h5>
@@ -237,32 +237,32 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
     </div>
   </div>
   <div
-    className="sc-bdnylx blraWc"
+    className="sc-bdnxRM jQRgHv"
     onClose={[MockFunction]}
   >
     <p
-      className="sc-bdnylx fNJNWw"
+      className="sc-bdnxRM isZYbz"
     >
       coucou
     </p>
   </div>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bxbtuz"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX kDslbU"
     onClose={[MockFunction]}
   >
     <button
       aria-label="vote.add"
-      className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 lbEeYr gQREUn"
+      className="sc-bdnxRM Button__ButtonInner-dWPVNG idDWwA jfKDDI"
       disabled={true}
       onClick={[Function]}
       type="button"
     >
       <IconMock
-        className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ikTpXS fYtUti KA-deO icon"
+        className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cstreB bSAkp AMDLx icon"
       />
     </button>
     <span
-      className="sc-bdnylx kuntTJ"
+      className="sc-bdnxRM bUnbAK"
     >
       10
     </span>

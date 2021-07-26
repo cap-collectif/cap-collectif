@@ -41,8 +41,15 @@ const devConf = {
       'lodash-es': 'lodash',
     },
     fallback: {
+      fs: false,
+      tls: false,
+      net: false,
+      path: false,
+      http: false,
+      https: false,
       stream: require.resolve('stream-browserify'),
       zlib: require.resolve('browserify-zlib'),
+      crypto: require.resolve('crypto-browserify'),
     },
   },
 

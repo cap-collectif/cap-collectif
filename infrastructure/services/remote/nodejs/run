@@ -2,7 +2,6 @@
 
 echo "[$(date -u)][NODEJS] Started!"
 
-rm -f /var/node_ssr.sock || true
-cd /var
+cd /var/www/admin-next
 
-exec env NODE_ENV=production node /var/www/nodejs/server.js
+exec pm2 start --no-daemon yarn --name "admin-next" --interpreter bash -- start

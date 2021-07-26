@@ -51,7 +51,7 @@ class CookieMonster {
     }
     this.cookieBanner = document.getElementById('cookie-banner');
     this.cookieConsent = document.getElementById('cookie-consent');
-    if (typeof window._capco_ga_cookie_value === 'undefined') {
+    if (typeof window._capco_ga_cookie_value === 'undefined' && typeof Cookies !== 'undefined') {
       // $FlowFixMe
       window._capco_ga_cookie_value = Cookies.getJSON('_ga');
     }

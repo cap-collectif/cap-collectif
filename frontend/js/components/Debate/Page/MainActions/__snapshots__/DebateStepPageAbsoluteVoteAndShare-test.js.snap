@@ -2,21 +2,21 @@
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly 1`] = `
 <div
-  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw eSUepw"
+  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb MNiHh"
 >
   <div
-    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cihlnc crVXXX"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX AqBSD dagDTf"
     >
       <p
-        className="sc-bdnylx dCXhMr"
+        className="sc-bdnxRM jtOdAA"
       >
         
       </p>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lmAIgj dzUdRG"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX kTCDAs cPNXGW"
         style={
           Object {
             "opacity": 0,
@@ -27,7 +27,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           aria-controls="popover-overlay"
           aria-expanded={false}
           aria-haspopup="dialog"
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
           onClick={[Function]}
           onClickCapture={[Function]}
           onKeyDown={[Function]}
@@ -40,13 +40,13 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
           />
           global.for
         </button>
         <div
           aria-label="vote.popover.title"
-          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
           data-dialog={true}
           hidden={true}
           id="login-popover"
@@ -66,7 +66,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           tabIndex={0}
         >
           <div
-            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
             style={
               Object {
                 "bottom": "100%",
@@ -96,27 +96,27 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
             </svg>
           </div>
           <div
-            className="sc-bdnylx eWkbGr"
+            className="sc-bdnxRM kGlejw"
           >
             <p
-              className="sc-bdnylx YLtjJ"
+              className="sc-bdnxRM gCefO"
             >
               vote.popover.title
             </p>
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
             >
               <p
-                className="sc-bdnylx jEhuac"
+                className="sc-bdnxRM iwmYLL"
               >
                 vote.popover.body
               </p>
               <span
-                className="sc-bdnylx bgIGJQ"
+                className="sc-bdnxRM hptjof"
                 clip="rect(0px, 0px, 0px, 0px)"
               >
                 <button
-                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
                   onClick={[Function]}
                   type="button"
                 >
@@ -144,7 +144,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           aria-controls="popover-overlay"
           aria-expanded={false}
           aria-haspopup="dialog"
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
           onClick={[Function]}
           onClickCapture={[Function]}
           onKeyDown={[Function]}
@@ -157,13 +157,13 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
           />
           global.against
         </button>
         <div
           aria-label="vote.popover.title"
-          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
           data-dialog={true}
           hidden={true}
           id="login-popover"
@@ -183,7 +183,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           tabIndex={0}
         >
           <div
-            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
             style={
               Object {
                 "bottom": "100%",
@@ -213,27 +213,27 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
             </svg>
           </div>
           <div
-            className="sc-bdnylx eWkbGr"
+            className="sc-bdnxRM kGlejw"
           >
             <p
-              className="sc-bdnylx YLtjJ"
+              className="sc-bdnxRM gCefO"
             >
               vote.popover.title
             </p>
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
             >
               <p
-                className="sc-bdnylx jEhuac"
+                className="sc-bdnxRM iwmYLL"
               >
                 vote.popover.body
               </p>
               <span
-                className="sc-bdnylx bgIGJQ"
+                className="sc-bdnxRM hptjof"
                 clip="rect(0px, 0px, 0px, 0px)"
               >
                 <button
-                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
                   onClick={[Function]}
                   type="button"
                 >
@@ -265,10 +265,10 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when argumented 1`] = `
 <div
-  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw eSUepw"
+  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb MNiHh"
 >
   <div
-    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
   >
     <div
       style={
@@ -278,11 +278,11 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
       }
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
       >
         <span
           aria-label="vote"
-          className="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+          className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
           role="img"
         >
           🎉
@@ -295,7 +295,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           }
         />
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
           onClick={[Function]}
           type="button"
         >
@@ -303,7 +303,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
         </button>
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
       >
         <iframe
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -329,17 +329,17 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           Tweet
         </a>
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
           />
           global.link
         </button>
         <div
-          className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+          className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
           style={
             Object {
               "opacity": 0,
@@ -348,13 +348,13 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           }
         >
           <p
-            className="sc-bdnylx hIgmxG"
+            className="sc-bdnxRM cZcArZ"
             title="copied-link"
           >
             copied-link
           </p>
           <div
-            className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+            className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
             data-popper-arrow={true}
             id="arrow"
           />
@@ -367,10 +367,10 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when voted 1`] = `
 <div
-  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw gBGgFy"
+  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb dlsZIf"
 >
   <div
-    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
   >
     <div
       style={
@@ -380,11 +380,11 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
       }
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
       >
         <span
           aria-label="vote"
-          className="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+          className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
           role="img"
         >
           🗳️
@@ -397,7 +397,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
           }
         />
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
           onClick={[Function]}
           type="button"
         >
@@ -405,10 +405,10 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
         </button>
       </div>
       <div
-        className="sc-bdnylx dJHjFW DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+        className="sc-bdnxRM inHOUp DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
       >
         <form
-          className="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+          className="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
           disabled={false}
           id="debate-argument-form"
           onSubmit={[Function]}
@@ -436,7 +436,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
               warnings={null}
             />
             <div
-              className="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+              className="Notepad__Container-inQLrC cTBqFb visible-print-block"
             >
               <span />
               <span />
@@ -464,21 +464,21 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop ren
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly 1`] = `
 <div
-  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 fpYjMC eSUepw"
+  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL jlRppZ MNiHh"
 >
   <div
-    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 cihlnc crVXXX"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX AqBSD dagDTf"
     >
       <p
-        className="sc-bdnylx dCXhMr"
+        className="sc-bdnxRM jtOdAA"
       >
         
       </p>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 lmAIgj dzUdRG"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX kTCDAs cPNXGW"
         style={
           Object {
             "opacity": 0,
@@ -489,7 +489,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           aria-controls="popover-overlay"
           aria-expanded={false}
           aria-haspopup="dialog"
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
           onClick={[Function]}
           onClickCapture={[Function]}
           onKeyDown={[Function]}
@@ -502,13 +502,13 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
           />
           global.for
         </button>
         <div
           aria-label="vote.popover.title"
-          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
           data-dialog={true}
           hidden={true}
           id="login-popover"
@@ -528,7 +528,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           tabIndex={0}
         >
           <div
-            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 hvAiyy khTqzW"
+            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg bGinxx cBAwUK"
             style={
               Object {
                 "fontSize": 30,
@@ -558,27 +558,27 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
             </svg>
           </div>
           <div
-            className="sc-bdnylx eWkbGr"
+            className="sc-bdnxRM kGlejw"
           >
             <p
-              className="sc-bdnylx YLtjJ"
+              className="sc-bdnxRM gCefO"
             >
               vote.popover.title
             </p>
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
             >
               <p
-                className="sc-bdnylx jEhuac"
+                className="sc-bdnxRM iwmYLL"
               >
                 vote.popover.body
               </p>
               <span
-                className="sc-bdnylx bgIGJQ"
+                className="sc-bdnxRM hptjof"
                 clip="rect(0px, 0px, 0px, 0px)"
               >
                 <button
-                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
                   onClick={[Function]}
                   type="button"
                 >
@@ -606,7 +606,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           aria-controls="popover-overlay"
           aria-expanded={false}
           aria-haspopup="dialog"
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
           onClick={[Function]}
           onClickCapture={[Function]}
           onKeyDown={[Function]}
@@ -619,13 +619,13 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
           />
           global.against
         </button>
         <div
           aria-label="vote.popover.title"
-          className="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+          className="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
           data-dialog={true}
           hidden={true}
           id="login-popover"
@@ -645,7 +645,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           tabIndex={0}
         >
           <div
-            className="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 hvAiyy khTqzW"
+            className="sc-bdnxRM LoginOverlay__Arrow-jnMMdg bGinxx cBAwUK"
             style={
               Object {
                 "fontSize": 30,
@@ -675,27 +675,27 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
             </svg>
           </div>
           <div
-            className="sc-bdnylx eWkbGr"
+            className="sc-bdnxRM kGlejw"
           >
             <p
-              className="sc-bdnylx YLtjJ"
+              className="sc-bdnxRM gCefO"
             >
               vote.popover.title
             </p>
             <div
-              className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
             >
               <p
-                className="sc-bdnylx jEhuac"
+                className="sc-bdnxRM iwmYLL"
               >
                 vote.popover.body
               </p>
               <span
-                className="sc-bdnylx bgIGJQ"
+                className="sc-bdnxRM hptjof"
                 clip="rect(0px, 0px, 0px, 0px)"
               >
                 <button
-                  className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+                  className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
                   onClick={[Function]}
                   type="button"
                 >
@@ -727,10 +727,10 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when argumented 1`] = `
 <div
-  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 dhjTiw eSUepw"
+  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL hLGqxb MNiHh"
 >
   <div
-    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
   >
     <div
       style={
@@ -740,11 +740,11 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
       }
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
       >
         <span
           aria-label="vote"
-          className="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+          className="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
           role="img"
         >
           🎉
@@ -757,7 +757,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           }
         />
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
           onClick={[Function]}
           type="button"
         >
@@ -765,7 +765,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
         </button>
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
       >
         <iframe
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -791,17 +791,17 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           Tweet
         </a>
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
           />
           global.link
         </button>
         <div
-          className="sc-bdnylx jDkTpd Tooltip__TooltipInner-xw2xlw-0 jyDVSs"
+          className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
           style={
             Object {
               "opacity": 0,
@@ -810,13 +810,13 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
           }
         >
           <p
-            className="sc-bdnylx hIgmxG"
+            className="sc-bdnxRM cZcArZ"
             title="copied-link"
           >
             copied-link
           </p>
           <div
-            className="sc-bdnylx Tooltip__Arrow-xw2xlw-1 Tooltip___StyledArrow-xw2xlw-2  jipOxN hWNQFr"
+            className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
             data-popper-arrow={true}
             id="arrow"
           />
@@ -829,10 +829,10 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
 
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when voted 1`] = `
 <div
-  className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox-sc-18frc3o-0 fpYjMC eSUepw"
+  className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox-hAjSFL jlRppZ MNiHh"
 >
   <div
-    className="sc-bdnylx DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-sc-18frc3o-1  deWHaO container"
+    className="sc-bdnxRM DebateStepPageAbsoluteVoteAndShare___StyledAppBox2-cwZKRh  hIdYPX container"
   >
     <div
       style={
@@ -842,14 +842,14 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
       }
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 eXWFqf"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX hjHJnk"
       >
         <p
-          className="sc-bdnylx dzpbOH"
+          className="sc-bdnxRM PLHLg"
         >
           <span
             aria-label="vote"
-            className="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+            className="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
             role="img"
           >
             🗳️
@@ -864,7 +864,7 @@ exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile rend
         </p>
       </div>
       <button
-        className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
         onClick={[Function]}
         type="button"
       >

@@ -23,21 +23,21 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
   tabindex="-1"
 >
   <div
-    class="sc-bdnylx dCrSrw Modal__ModalContainerInner-sc-11juq2l-0"
+    class="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
     style="opacity:0"
   >
     <div
-      class="sc-bdnylx hDMLix Modal__ModalInner-sc-11juq2l-1"
+      class="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
       style="opacity:0;transform:translateY(-20px) translateZ(0)"
     >
       <main
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gcGteT lvJOm"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs gconsy"
       >
         <button
           aria-controls="id-2"
           aria-expanded="false"
           aria-haspopup="dialog"
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTHfeU ecJjSS"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG cMnXb dwbTkh"
           type="button"
         >
           global.report.submit

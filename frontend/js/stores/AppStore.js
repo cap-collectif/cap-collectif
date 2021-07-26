@@ -18,10 +18,16 @@ import { reducer as languageReducer } from '~/redux/modules/language';
 import type { Store, GlobalState } from '~/types';
 
 export default function configureStore(initialState: GlobalState): Store {
-  // $FlowExpectedError not writable
-  initialState.intl = {};
-  initialState.intl.locale = window.locale;
-  initialState.intl.messages = window.intl_messages;
+  // Let's hydrate our translations if missing
+  if (!initialState.intl) {
+    const locale = typeof window !== 'undefined' ? window.locale : 'Unknown';
+    const intl_messages = typeof window !== 'undefined' ? window.intl_messages : {};
+    // $FlowExpectedError not writable
+    initialState.intl = {};
+    initialState.intl.locale = locale;
+    initialState.intl.messages = intl_messages;
+  }
+
   if (
     initialState.project &&
     initialState.proposal &&

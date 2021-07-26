@@ -2,24 +2,24 @@
 
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
   style="opacity:0"
 >
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.for
   </button>
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.against
   </button>
@@ -28,24 +28,24 @@ exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
   style="opacity:0"
 >
   <button
     aria-controls="popover-overlay"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.for
   </button>
   <div
     aria-label="vote.popover.title"
-    class="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+    class="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
     data-dialog="true"
     hidden=""
     id="login-popover"
@@ -54,7 +54,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     tabindex="0"
   >
     <div
-      class="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+      class="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
       style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
       <svg
@@ -72,27 +72,27 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
       </svg>
     </div>
     <div
-      class="sc-bdnylx eWkbGr"
+      class="sc-bdnxRM kGlejw"
     >
       <p
-        class="sc-bdnylx YLtjJ"
+        class="sc-bdnxRM gCefO"
       >
         vote.popover.title
       </p>
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
       >
         <p
-          class="sc-bdnylx jEhuac"
+          class="sc-bdnxRM iwmYLL"
         >
           vote.popover.body
         </p>
         <span
-          class="sc-bdnylx bgIGJQ"
+          class="sc-bdnxRM hptjof"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
             type="button"
           >
             global.close
@@ -115,17 +115,17 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     aria-controls="popover-overlay"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.against
   </button>
   <div
     aria-label="vote.popover.title"
-    class="sc-bdnylx LoginOverlay__PopoverContainer-c0lhnx-0 cNFNYl rLblB"
+    class="sc-bdnxRM LoginOverlay__PopoverContainer-jXpOVX lhlbgG dibtT"
     data-dialog="true"
     hidden=""
     id="login-popover"
@@ -134,7 +134,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     tabindex="0"
   >
     <div
-      class="sc-bdnylx LoginOverlay__Arrow-c0lhnx-2 kGqIZa hoKyqX"
+      class="sc-bdnxRM LoginOverlay__Arrow-jnMMdg eRHiAV ICvob"
       style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
       <svg
@@ -152,27 +152,27 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
       </svg>
     </div>
     <div
-      class="sc-bdnylx eWkbGr"
+      class="sc-bdnxRM kGlejw"
     >
       <p
-        class="sc-bdnylx YLtjJ"
+        class="sc-bdnxRM gCefO"
       >
         vote.popover.title
       </p>
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kIsWfm cRYDhl"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX eSWkNp cbVHFV"
       >
         <p
-          class="sc-bdnylx jEhuac"
+          class="sc-bdnxRM iwmYLL"
         >
           vote.popover.body
         </p>
         <span
-          class="sc-bdnylx bgIGJQ"
+          class="sc-bdnxRM hptjof"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 khpBZc gQREUn"
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX jfKDDI"
             type="button"
           >
             global.close
@@ -196,24 +196,24 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
 
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
   style="opacity:0"
 >
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.for
   </button>
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.against
   </button>
@@ -222,24 +222,24 @@ exports[`<DebateStepPageVote/> should renders correctly with anonymous participa
 
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fBUPCS dzUdRG"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX iEaHFR cPNXGW"
   style="opacity:0"
 >
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton-sc-1t1mb78-0 dOSxvR"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton-gxOSUk jhmZfJ"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.for
   </button>
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU gQREUn DebateStepPageVote___StyledButton2-sc-1t1mb78-1 kZJOtr"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL jfKDDI DebateStepPageVote___StyledButton2-gycKnS dYDflg"
     type="button"
   >
     <iconmock
-      class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 ldGFSW jSXedj KA-deO icon"
+      class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
     />
     global.against
   </button>

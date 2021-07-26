@@ -84,11 +84,11 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
           },
         ],
         "componentStyle": e {
-          "baseHash": -792256484,
+          "baseHash": 225662434,
           "baseStyle": e {
-            "baseHash": -594304118,
+            "baseHash": -715527839,
             "baseStyle": undefined,
-            "componentId": "sc-bdnylx",
+            "componentId": "sc-bdnxRM",
             "isStatic": false,
             "rules": Array [
               [Function],
@@ -96,7 +96,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
             ],
             "staticRulesId": "",
           },
-          "componentId": "LoginOverlay__PopoverContainer-c0lhnx-0",
+          "componentId": "LoginOverlay__PopoverContainer-jXpOVX",
           "isStatic": false,
           "rules": Array [
             "outline:none;",
@@ -105,11 +105,11 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
         },
         "displayName": "LoginOverlay__PopoverContainer",
         "foldedComponentIds": Array [
-          "sc-bdnylx",
+          "sc-bdnxRM",
         ],
         "render": [Function],
         "shouldForwardProp": [Function],
-        "styledComponentId": "LoginOverlay__PopoverContainer-c0lhnx-0",
+        "styledComponentId": "LoginOverlay__PopoverContainer-jXpOVX",
         "target": "div",
         "toString": [Function],
         "warnTooManyClasses": [Function],
@@ -177,11 +177,11 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": 942267553,
+            "baseHash": 33891833,
             "baseStyle": e {
-              "baseHash": -594304118,
+              "baseHash": -715527839,
               "baseStyle": undefined,
-              "componentId": "sc-bdnylx",
+              "componentId": "sc-bdnxRM",
               "isStatic": false,
               "rules": Array [
                 [Function],
@@ -189,7 +189,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
               ],
               "staticRulesId": "",
             },
-            "componentId": "LoginOverlay__Arrow-c0lhnx-2",
+            "componentId": "LoginOverlay__Arrow-jnMMdg",
             "isStatic": false,
             "rules": Array [
               ".stroke{fill:none;}.fill{fill:",
@@ -200,11 +200,11 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
           },
           "displayName": "LoginOverlay__Arrow",
           "foldedComponentIds": Array [
-            "sc-bdnylx",
+            "sc-bdnxRM",
           ],
           "render": [Function],
           "shouldForwardProp": [Function],
-          "styledComponentId": "LoginOverlay__Arrow-c0lhnx-2",
+          "styledComponentId": "LoginOverlay__Arrow-jnMMdg",
           "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],

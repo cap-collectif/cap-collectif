@@ -27,10 +27,11 @@ unnecessary-optional-chain=off
 .*/node_modules/react-beautiful-dnd/src/state/middleware/focus.js
 .*/node_modules/react-beautiful-dnd/src/state/middleware/lift.js
 .*/node_modules/react-simple-code-editor/lib/index.js.flow
-.*/node_modules/relay-compiler/transforms/RelayRelayDirectiveTransform.js.flow
-.*/node_modules/react-relay/ReactRelayPaginationContainer.js.flow
 .*/node_modules/polished/lib/shorthands/position.js.flow
 .*/node_modules/immutable/dist/immutable.js
+; react-relay
+.*/node_modules/relay-compiler/transforms/RelayRelayDirectiveTransform.js.flow
+.*/node_modules/react-relay/ReactRelayPaginationContainer.js.flow
 
 [declarations] 
 .*/node_modules/relay-runtime/store/DataChecker.js.flow

@@ -2,36 +2,36 @@
 
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 <div
-  className="sc-bdnylx dsPyrQ DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
+  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn bCbDQU"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     title=""
   >
     <p
-      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
     >
       <span
-        className="sc-bdnylx cISkos"
+        className="sc-bdnxRM dClQKr"
       >
         opinion.for
       </span>
     </p>
   </div>
   <div
-    className="sc-bdnylx DebateOpinion___StyledAppBox-sc-1ua3st0-2 bQeIg tISUQ"
+    className="sc-bdnxRM DebateOpinion___StyledAppBox-iqiyXL bulKA-D ereNse"
   />
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gqMqqJ"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX dRGDei"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 geAHBO dzUdRG"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bzrQcx cPNXGW"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jaHnoK Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bCAVYp Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -41,36 +41,36 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<mock-value-for-field-\\"url\\">"
           title="Agui le penseur"
         />
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <p
-          className="sc-bdnylx iOYGli"
+          className="sc-bdnxRM kXjGxJ"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdnylx dJflcy"
+          className="sc-bdnxRM fusnfN"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO cDRBxz"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         <div
           className=" ql-editor"
@@ -91,36 +91,36 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
 
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 <div
-  className="sc-bdnylx dsPyrQ DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
+  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn bCbDQU"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     title=""
   >
     <p
-      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
     >
       <span
-        className="sc-bdnylx cISkos"
+        className="sc-bdnxRM dClQKr"
       >
         opinion.for
       </span>
     </p>
   </div>
   <div
-    className="sc-bdnylx DebateOpinion___StyledAppBox-sc-1ua3st0-2 bQeIg tISUQ"
+    className="sc-bdnxRM DebateOpinion___StyledAppBox-iqiyXL bulKA-D ereNse"
   />
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gqMqqJ"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX dRGDei"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 geAHBO dzUdRG"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bzrQcx cPNXGW"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jaHnoK Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bCAVYp Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -130,36 +130,36 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<mock-value-for-field-\\"url\\">"
           title="Agui le penseur"
         />
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <p
-          className="sc-bdnylx iOYGli"
+          className="sc-bdnxRM kXjGxJ"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdnylx dJflcy"
+          className="sc-bdnxRM fusnfN"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO cDRBxz"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         <div
           className=" ql-editor"
@@ -180,33 +180,33 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
 
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 <div
-  className="sc-bdnylx dSMDDu DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
+  className="sc-bdnxRM APGfF DebateOpinion___StyledCard-dZwepn bCbDQU"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     title=""
   >
     <p
-      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
     >
       <span
-        className="sc-bdnylx cISkos"
+        className="sc-bdnxRM dClQKr"
       >
         opinion.for
       </span>
     </p>
   </div>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gqMqqJ"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX dRGDei"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 geAHBO dzUdRG"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bzrQcx cPNXGW"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jaHnoK Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bCAVYp Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -216,36 +216,36 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<mock-value-for-field-\\"url\\">"
           title="Agui le penseur"
         />
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <p
-          className="sc-bdnylx iOYGli"
+          className="sc-bdnxRM kXjGxJ"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdnylx dJflcy"
+          className="sc-bdnxRM fusnfN"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO cDRBxz"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         <div
           className=" ql-editor"
@@ -266,36 +266,36 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
 
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 <div
-  className="sc-bdnylx dsPyrQ DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
+  className="sc-bdnxRM eMovSv DebateOpinion___StyledCard-dZwepn bCbDQU"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     title=""
   >
     <p
-      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
     >
       <span
-        className="sc-bdnylx cISkos"
+        className="sc-bdnxRM dClQKr"
       >
         opinion.for
       </span>
     </p>
   </div>
   <div
-    className="sc-bdnylx DebateOpinion___StyledAppBox-sc-1ua3st0-2 bQeIg tISUQ"
+    className="sc-bdnxRM DebateOpinion___StyledAppBox-iqiyXL bulKA-D ereNse"
   />
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gqMqqJ"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX dRGDei"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 geAHBO dzUdRG"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bzrQcx cPNXGW"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jaHnoK Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bCAVYp Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -305,36 +305,36 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<mock-value-for-field-\\"url\\">"
           title="Agui le penseur"
         />
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <p
-          className="sc-bdnylx iOYGli"
+          className="sc-bdnxRM kXjGxJ"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdnylx dJflcy"
+          className="sc-bdnxRM fusnfN"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO cDRBxz"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         <div
           className=" ql-editor"
@@ -349,7 +349,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
         />
       </p>
       <button
-        className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 bSsEQa engGlZ DebateOpinion___StyledButton-sc-1ua3st0-3 fKiZVV"
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG bJBJyt kfdEqC DebateOpinion___StyledButton-eaGvMt iPqugS"
         onClick={[Function]}
         type="button"
       >
@@ -362,33 +362,33 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
 
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 <div
-  className="sc-bdnylx dSMDDu DebateOpinion___StyledCard-sc-1ua3st0-0 dYPUuK"
+  className="sc-bdnxRM APGfF DebateOpinion___StyledCard-dZwepn bCbDQU"
 >
   <div
-    className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 gKROGE gJWoeF jxKYEO DebateOpinion___StyledTag-sc-1ua3st0-1 gvZJlt"
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS bjKNvb hBLRKx cguwDa DebateOpinion___StyledTag-dFitVd brwjZN"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     title=""
   >
     <p
-      className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
     >
       <span
-        className="sc-bdnylx cISkos"
+        className="sc-bdnxRM dClQKr"
       >
         opinion.for
       </span>
     </p>
   </div>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gqMqqJ"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX dRGDei"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 geAHBO dzUdRG"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bzrQcx cPNXGW"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jaHnoK Avatar__AvatarInner-m2mkt1-0 bgEkQe"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bCAVYp Avatar__AvatarInner-chaUKm grFDLb"
         style={
           Object {
             "background": "#2d867a",
@@ -398,36 +398,36 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdnylx Avatar___StyledAppBox-m2mkt1-1 jMFVjo eQJcjv"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
           src="<mock-value-for-field-\\"url\\">"
           title="Agui le penseur"
         />
       </div>
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
       >
         <p
-          className="sc-bdnylx iOYGli"
+          className="sc-bdnxRM kXjGxJ"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdnylx dJflcy"
+          className="sc-bdnxRM fusnfN"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dXvIkN bgDJln"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO cDRBxz"
     >
       <h4
-        className="sc-bdnylx hNCYYa"
+        className="sc-bdnxRM gPFhMB"
       >
         Je suis pour
       </h4>
       <p
-        className="sc-bdnylx fNJNWw"
+        className="sc-bdnxRM isZYbz"
       >
         <div
           className=" ql-editor"
@@ -442,7 +442,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
         />
       </p>
       <button
-        className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 bSsEQa engGlZ DebateOpinion___StyledButton-sc-1ua3st0-3 fKiZVV"
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG bJBJyt kfdEqC DebateOpinion___StyledButton-eaGvMt iPqugS"
         onClick={[Function]}
         type="button"
       >

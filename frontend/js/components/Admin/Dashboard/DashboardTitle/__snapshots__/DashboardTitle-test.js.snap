@@ -2,41 +2,41 @@
 
 exports[`<DashboardTitle /> <TestDashboardTitle /> should render correctly 1`] = `
 <div
-  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 ixbuAQ"
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX jkoIhn"
 >
   <p
-    className="sc-bdnylx brZeUD"
+    className="sc-bdnxRM cfDxpI"
   >
     dashboard-platform
   </p>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 bPbIam gqZsEv"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX hDQBR fGTmtL"
   >
     <p
-      className="sc-bdnylx fNJNWw"
+      className="sc-bdnxRM isZYbz"
     >
       <span
-        className="sc-bdnylx iRaWyl"
+        className="sc-bdnxRM emHofC"
       >
         10
       </span>
       global.project-dynamic
     </p>
     <p
-      className="sc-bdnylx fNJNWw"
+      className="sc-bdnxRM isZYbz"
     >
       <span
-        className="sc-bdnylx jA-dhDL"
+        className="sc-bdnxRM cSzhbU"
       >
         5
       </span>
       global.in-progress
     </p>
     <p
-      className="sc-bdnylx fNJNWw"
+      className="sc-bdnxRM isZYbz"
     >
       <span
-        className="sc-bdnylx dtwjrQ"
+        className="sc-bdnxRM cVwRKf"
       >
         5
       </span>

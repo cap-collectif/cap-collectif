@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import Quill from 'quill';
 import styled, { type StyledComponent } from 'styled-components';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -69,6 +68,12 @@ export class Editor extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    // eslint-disable-next-line
+    const Quill = require('quill');
+
     const { onBlur, onChange, value, intl, disabled, maxLength } = this.props;
 
     const size = Quill.import('formats/size');

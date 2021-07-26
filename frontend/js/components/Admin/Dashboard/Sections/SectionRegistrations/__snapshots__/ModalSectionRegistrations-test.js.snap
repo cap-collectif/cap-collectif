@@ -15,7 +15,7 @@ exports[`<ModalSectionRegistrations /> <TestModalSectionRegistrations /> should 
   tabIndex={-1}
 >
   <div
-    className="sc-bdnylx dCrSrw Modal__ModalContainerInner-sc-11juq2l-0"
+    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<ModalSectionRegistrations /> <TestModalSectionRegistrations /> should 
     }
   >
     <div
-      className="sc-bdnylx hDMLix Modal__ModalInner-sc-11juq2l-1"
+      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
       style={
         Object {
           "opacity": 0,
@@ -33,13 +33,13 @@ exports[`<ModalSectionRegistrations /> <TestModalSectionRegistrations /> should 
       }
     >
       <header
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gwSffl"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
       >
         <div
-          className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jjxORm ModalHeader___StyledFlex-sc-1yfwqjx-0 cibXUu"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
         >
           <h4
-            className="sc-bdnylx hXfmUv"
+            className="sc-bdnxRM jjwcBQ"
           >
             110
              
@@ -47,25 +47,25 @@ exports[`<ModalSectionRegistrations /> <TestModalSectionRegistrations /> should 
           </h4>
         </div>
         <button
-          className="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 kjpljQ gQREUn"
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 jxagfU jSXedj KA-deO icon"
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
           />
         </button>
       </header>
       <main
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gcGteT icVUjK"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs jAjMvW"
       >
         <p
-          className="sc-bdnylx ihLXaw"
+          className="sc-bdnxRM iPiBX"
         >
           period-on-project-from-to
         </p>
         <div
-          className="sc-bdnylx bDYDFF"
+          className="sc-bdnxRM kaNcIi"
         >
           <div
             className="recharts-responsive-container"

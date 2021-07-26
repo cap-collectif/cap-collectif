@@ -28,7 +28,7 @@ exports[`<EventLabelStatus /> renders correcty event event waiting 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <_default
+    <CapcoPopover
       id="event-status-popover"
       placement="top"
     >
@@ -43,7 +43,7 @@ exports[`<EventLabelStatus /> renders correcty event event waiting 1`] = `
         id="event-preview-waiting-exam"
         values={Object {}}
       />
-    </_default>
+    </CapcoPopover>
   }
   placement="top"
   trigger={
@@ -74,7 +74,7 @@ exports[`<EventLabelStatus /> renders correcty event refused 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={
-    <_default
+    <CapcoPopover
       id="event-status-popover"
       placement="top"
     >
@@ -89,7 +89,7 @@ exports[`<EventLabelStatus /> renders correcty event refused 1`] = `
         id="event-preview-refused-by-admin"
         values={Object {}}
       />
-    </_default>
+    </CapcoPopover>
   }
   placement="top"
   trigger={

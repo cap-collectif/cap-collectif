@@ -3,29 +3,29 @@
 exports[`<SectionRegistrations /> <TestSectionRegistrations /> should render correctly with contributors 1`] = `
 Array [
   <button
-    className="sc-bdnylx SectionRegistrations___StyledAppBox-sc-8b1uap-0 jBboRH jZJkxq"
+    className="sc-bdnxRM SectionRegistrations___StyledAppBox-kZkaCb ligvsE bxJCTK"
     onClick={[Function]}
     type="button"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 gRDXmN"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX kSuEVa"
     >
       <div
-        className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 dqCgLg"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX iRHhHD"
       >
         <p
-          className="sc-bdnylx eIvhzY"
+          className="sc-bdnxRM cTsaRH"
         >
           global.registration.dynamic
         </p>
         <p
-          className="sc-bdnylx eEMnqn"
+          className="sc-bdnxRM lesLoo"
         >
           110
         </p>
       </div>
       <div
-        className="sc-bdnylx keezSv"
+        className="sc-bdnxRM bcTRzA"
       >
         <div
           className="recharts-responsive-container"

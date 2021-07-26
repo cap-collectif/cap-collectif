@@ -2,18 +2,18 @@
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX kmDSul"
 >
   <div
-    class="sc-bdnylx gCzbeZ"
+    class="sc-bdnxRM kQcgIq"
   >
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       thanks-participation-debate-ended
     </p>
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       summary-debate-participation
     </p>
@@ -23,18 +23,18 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX kmDSul"
 >
   <div
-    class="sc-bdnylx gCzbeZ"
+    class="sc-bdnxRM kQcgIq"
   >
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       thanks-participation-debate-ended
     </p>
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       summary-debate-participation
     </p>
@@ -44,18 +44,18 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous participation allowed 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX kmDSul"
 >
   <div
-    class="sc-bdnylx gCzbeZ"
+    class="sc-bdnxRM kQcgIq"
   >
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       thanks-participation-debate-ended
     </p>
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       summary-debate-participation
     </p>
@@ -65,18 +65,18 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous particip
 
 exports[`<DebateStepPageVoteAndShare/> renders correctly when viewer not confirmed 1`] = `
 <div
-  class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 iJKJZe"
+  class="sc-bdnxRM Flex___StyledAppBox-RSPpX kmDSul"
 >
   <div
-    class="sc-bdnylx gCzbeZ"
+    class="sc-bdnxRM kQcgIq"
   >
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       thanks-participation-debate-ended
     </p>
     <p
-      class="sc-bdnylx kWTGsb"
+      class="sc-bdnxRM bXUMKY"
     >
       summary-debate-participation
     </p>

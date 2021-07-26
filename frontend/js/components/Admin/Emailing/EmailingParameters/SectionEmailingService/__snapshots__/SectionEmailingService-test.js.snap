@@ -2,34 +2,34 @@
 
 exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render correctly 1`] = `
 <div
-  className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 coaMZn gqZsEv"
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX fDWoMk fGTmtL"
 >
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 izVcDk iItEno"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP jFCIdI"
   >
     <p
-      className="sc-bdnylx bFqpwT"
+      className="sc-bdnxRM gJQnhc"
     >
       emailing-service
     </p>
     <p
-      className="sc-bdnylx egZTvB"
+      className="sc-bdnxRM lhgRuK"
     >
       emailing-service-explanation
     </p>
   </div>
   <div
-    className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 hJYiEE gqZsEv"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX gvclRr fGTmtL"
   >
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 kmEZDI"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX iwUhtX"
     >
       <div
         checked={false}
-        className="Radiostyle__RadioContainer-cnjs2g-0 kwFhKa radio-container"
+        className="Radiostyle__RadioContainer-herXYA eHjEqc radio-container"
       >
         <label
-          className="Labelstyle__LabelContainer-vuqpbh-0 bQzfsm label-container"
+          className="Labelstyle__LabelContainer-jXVmhf kVLvwp label-container"
           htmlFor="mandrill"
           id="label-radio-mandrill"
           type="radio"
@@ -47,7 +47,7 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
             width={19}
           />
           <IconMock
-            className="sc-bdnylx eLALvm"
+            className="sc-bdnxRM gweLjN"
           />
         </label>
         <input
@@ -62,14 +62,14 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
       </div>
     </div>
     <div
-      className="sc-bdnylx Flex___StyledAppBox-ll88x1-0 BUKeH"
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX eKGpDg"
     >
       <div
         checked={true}
-        className="Radiostyle__RadioContainer-cnjs2g-0 kwFhKa radio-container"
+        className="Radiostyle__RadioContainer-herXYA eHjEqc radio-container"
       >
         <label
-          className="Labelstyle__LabelContainer-vuqpbh-0 bQzfsm label-container"
+          className="Labelstyle__LabelContainer-jXVmhf kVLvwp label-container"
           htmlFor="mailjet"
           id="label-radio-mailjet"
           type="radio"
@@ -87,7 +87,7 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
             width={19}
           />
           <IconMock
-            className="sc-bdnylx eLALvm"
+            className="sc-bdnxRM gweLjN"
           />
         </label>
         <input
@@ -101,14 +101,14 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
         />
       </div>
       <div
-        className="sc-bdnylx Tag__TagInner-sc-1e1bibo-0 Tag___StyledTagInner-sc-1e1bibo-1 didTnf PzKBq jxKYEO"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS ddZVrU kAivJO cguwDa"
         onClick={[Function]}
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         title="global.active"
       >
         <p
-          className="sc-bdnylx dcRxfY Tag___StyledText-sc-1e1bibo-3 iIxMlD"
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
         >
           global.active
         </p>

@@ -5,11 +5,11 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <span
       aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
       role="img"
     >
       🎉
@@ -18,14 +18,14 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       thanks-for-debate-richer
     </span>
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
   >
     <a
       class="twitter-share-button"
@@ -35,20 +35,20 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
       Tweet
     </a>
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
       type="button"
     >
       <iconmock
-        class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+        class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
       />
       global.link
     </button>
   </div>
   <div
-    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
       id="debate-argument-form"
     >
       <div
@@ -66,7 +66,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
           type="textarea"
         />
         <div
-          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
         >
           <span />
           <span />
@@ -86,16 +86,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] 
         </div>
       </div>
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
       >
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
           type="button"
         >
           global.cancel
         </button>
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU haoEhH"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
           type="submit"
         >
           argument.publish.mine
@@ -111,11 +111,11 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <span
       aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
       role="img"
     >
       🎉
@@ -124,17 +124,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
       publish.argument.validate.account
     </span>
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
       id="debate-argument-form"
     >
       <div
@@ -152,7 +152,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
           type="textarea"
         />
         <div
-          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
         >
           <span />
           <span />
@@ -172,16 +172,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
         </div>
       </div>
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
       >
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
           type="button"
         >
           global.cancel
         </button>
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU haoEhH"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
           type="submit"
         >
           argument.publish.mine
@@ -197,20 +197,20 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnylx dzpbOH"
+      class="sc-bdnxRM PLHLg"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
         role="img"
       >
         🎉
@@ -221,7 +221,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not 
     </p>
   </div>
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
     type="button"
   >
     publish-argument
@@ -234,20 +234,20 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnylx dzpbOH"
+      class="sc-bdnxRM PLHLg"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
         role="img"
       >
         🎉
@@ -258,7 +258,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
     </p>
   </div>
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 fXlkxX hmLkpw"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX KSjKw fvBSZY"
   >
     <a
       class="twitter-share-button"
@@ -268,17 +268,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
       Tweet
     </a>
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cRPoGN gQREUn"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG fVKHUK jfKDDI"
       type="button"
     >
       <iconmock
-        class="sc-bdnylx Icon__IconInner-sc-19k5t1s-0 Icon___StyledIconInner-sc-19k5t1s-1 kGTwVK gtEoKs KA-deO icon"
+        class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
       />
       global.link
     </button>
   </div>
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
     type="button"
   >
     publish-argument
@@ -291,11 +291,11 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <span
       aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
       role="img"
     >
       🗳️
@@ -304,17 +304,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
       thanks-for-your-vote
     </span>
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
       id="debate-argument-form"
     >
       <div
@@ -332,7 +332,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
           type="textarea"
         />
         <div
-          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
         >
           <span />
           <span />
@@ -352,16 +352,16 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
         </div>
       </div>
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
       >
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
           type="button"
         >
           global.cancel
         </button>
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cTWwWU haoEhH"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
           type="submit"
         >
           argument.publish.mine
@@ -377,11 +377,11 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
   style="width:100%;opacity:0"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <span
       aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-sc-89or92-2 gBdWGG"
+      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
       role="img"
     >
       🗳️
@@ -390,17 +390,17 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
       thanks-for-your-vote {"instance":"CapCollectif"}
     </span>
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
   </div>
   <div
-    class="sc-bdnylx lgXcQA DebateStepPageVoteForm___StyledCard-sc-89or92-3 gXzbu"
+    class="sc-bdnxRM cnbanf DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
   >
     <form
-      class="DebateStepPageVoteForm__Form-sc-89or92-0 cEBedW"
+      class="DebateStepPageVoteForm__Form-kqneNm jEFxSi"
       id="debate-argument-form"
     >
       <div
@@ -418,7 +418,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
           type="textarea"
         />
         <div
-          class="Notepad__Container-zxztj1-0 dDbxVX visible-print-block"
+          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
         >
           <span />
           <span />
@@ -438,10 +438,10 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
         </div>
       </div>
       <div
-        class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 Aouvj"
+        class="sc-bdnxRM Flex___StyledAppBox-RSPpX cOrEHs"
       >
         <button
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 vNxBw engGlZ"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG eWdgRn kfdEqC"
           type="button"
         >
           global.cancel
@@ -450,7 +450,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
           aria-controls="id-1"
           aria-expanded="false"
           aria-haspopup="dialog"
-          class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jyQeYF haoEhH"
+          class="sc-bdnxRM Button__ButtonInner-dWPVNG jyNtxW kFclcg"
           type="submit"
         >
           global.validate
@@ -476,20 +476,20 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnylx dzpbOH"
+      class="sc-bdnxRM PLHLg"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
         role="img"
       >
         🗳️
@@ -503,7 +503,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymous
     aria-controls="id-1"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 dkWwsm haoEhH"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG ktGAwN kFclcg"
     type="submit"
   >
     publish-argument
@@ -526,20 +526,20 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
   style="width:100%;opacity:1"
 >
   <div
-    class="sc-bdnylx Flex___StyledAppBox-ll88x1-0 jA-dDXy"
+    class="sc-bdnxRM Flex___StyledAppBox-RSPpX kFoLMp"
   >
     <button
-      class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 jNKdvh kiIbCx"
+      class="sc-bdnxRM Button__ButtonInner-dWPVNG jyZEiW fLviuu"
       type="button"
     >
       delete.vote.against
     </button>
     <p
-      class="sc-bdnylx dzpbOH"
+      class="sc-bdnxRM PLHLg"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-sc-89or92-1 bypLWg"
+        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
         role="img"
       >
         🗳️
@@ -550,7 +550,7 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
     </p>
   </div>
   <button
-    class="sc-bdnylx Button__ButtonInner-sc-1rfi9ir-0 cWJmph haoEhH"
+    class="sc-bdnxRM Button__ButtonInner-dWPVNG hgJMSO kFclcg"
     type="button"
   >
     publish-argument
