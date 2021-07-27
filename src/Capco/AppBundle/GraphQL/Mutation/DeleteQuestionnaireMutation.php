@@ -30,9 +30,11 @@ class DeleteQuestionnaireMutation implements MutationInterface
             return ['errorCode' => self::QUESTIONNAIRE_NOT_FOUND];
         }
 
+        $id = $questionnaire->getId();
+
         $this->em->remove($questionnaire);
         $this->em->flush();
 
-        return ['errorCode' => null];
+        return ['errorCode' => null, 'id' => $id];
     }
 }

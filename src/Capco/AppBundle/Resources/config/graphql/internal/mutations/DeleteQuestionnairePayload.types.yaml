@@ -5,3 +5,6 @@ DeleteQuestionnairePayload:
             errorCode:
                 type: 'DeleteQuestionnaireErrorCode'
                 description: 'Available errorCode for deleteQuestionnaire mutation'
+            id:
+                type: 'ID'
+                description: 'The deleted questionnaire id'

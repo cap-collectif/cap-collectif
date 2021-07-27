@@ -4689,6 +4689,9 @@ input DeleteQuestionnaireInput {
 type DeleteQuestionnairePayload {
   """Available errorCode for deleteQuestionnaire mutation"""
   errorCode: DeleteQuestionnaireErrorCode
+
+  """The deleted questionnaire id"""
+  id: ID
   clientMutationId: String
 }
 
