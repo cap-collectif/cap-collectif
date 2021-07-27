@@ -1,114 +1,119 @@
 Capco\AppBundle\Entity\UserGroup:
-  # Group 1
-  userGroup1:
-    id: userGroup1
-    user: '@user1'
-    group: '@group1'
-  userGroup2:
-    id: userGroup2
-    user: '@user2'
-    group: '@group1'
-  userGroup3:
-    id: userGroup3
-    user: '@user5'
-    group: '@group1'
-  userGroup4:
-    id: userGroup4
-    user: '@userSpyl'
-    group: '@group1'
-  userGroup5:
-    id: userGroup5
-    user: '@userWelcomattic'
-    group: '@group1'
+    # Group 1
+    userGroup1:
+        id: userGroup1
+        user: '@user1'
+        group: '@group1'
+    userGroup2:
+        id: userGroup2
+        user: '@user2'
+        group: '@group1'
+    userGroup3:
+        id: userGroup3
+        user: '@user5'
+        group: '@group1'
+    userGroup4:
+        id: userGroup4
+        user: '@userSpyl'
+        group: '@group1'
+    userGroup5:
+        id: userGroup5
+        user: '@userWelcomattic'
+        group: '@group1'
 
-  # Group 2
-  userGroup6:
-    id: userGroup6
-    user: '@user1'
-    group: '@group2'
-  userGroup7:
-    id: userGroup7
-    user: '@user503'
-    group: '@group2'
-  userGroup141:
-    id: userGroup141
-    user: '@user520'
-    group: '@group2'
+    # Group 2
+    userGroup6:
+        id: userGroup6
+        user: '@user1'
+        group: '@group2'
+    userGroup7:
+        id: userGroup7
+        user: '@user503'
+        group: '@group2'
+    userGroup141:
+        id: userGroup141
+        user: '@user520'
+        group: '@group2'
 
-  # Group 3
-  userGroup8:
-    id: userGroup8
-    user: '@user1'
-    group: '@group3'
-  userGroup9:
-    id: userGroup9
-    user: '@userKiroule'
-    group: '@group3'
-  userGroup10:
-    id: userGroup10
-    user: '@user2'
-    group: '@group3'
-  userGroup14:
-    id: userGroup14
-    user: '@user8'
-    group: '@group3'
-  userGroup15:
-    id: userGroup15
-    user: '@user9'
-    group: '@group3'
-  userGroup16:
-    id: userGroup16
-    user: '@user10'
-    group: '@group3'
-  userGroup17:
-    id: userGroup17
-    user: '@user11'
-    group: '@group3'
-  userGroup18:
-    id: userGroup18
-    user: '@user12'
-    group: '@group3'
-  userGroup19:
-    id: userGroup19
-    user: '@user4'
-    group: '@group3'
-  userGroup21:
-    id: userGroup21
-    user: '@user13'
-    group: '@group3'
-  userGroup22:
-    id: userGroup22
-    user: '@user14'
-    group: '@group3'
-  userGroup{23..140}:
-    id: 'userGroup<current()>'
-    user: '@user<current()>'
-    group: '@group3'
-  # Group 4
-  userGroup11:
-    id: userGroup11
-    user: '@user1'
-    group: '@group4'
+    # Group 3
+    userGroup8:
+        id: userGroup8
+        user: '@user1'
+        group: '@group3'
+    userGroup9:
+        id: userGroup9
+        user: '@userKiroule'
+        group: '@group3'
+    userGroup10:
+        id: userGroup10
+        user: '@user2'
+        group: '@group3'
+    userGroup14:
+        id: userGroup14
+        user: '@user8'
+        group: '@group3'
+    userGroup15:
+        id: userGroup15
+        user: '@user9'
+        group: '@group3'
+    userGroup16:
+        id: userGroup16
+        user: '@user10'
+        group: '@group3'
+    userGroup17:
+        id: userGroup17
+        user: '@user11'
+        group: '@group3'
+    userGroup18:
+        id: userGroup18
+        user: '@user12'
+        group: '@group3'
+    userGroup19:
+        id: userGroup19
+        user: '@user4'
+        group: '@group3'
+    userGroup21:
+        id: userGroup21
+        user: '@user13'
+        group: '@group3'
+    userGroup22:
+        id: userGroup22
+        user: '@user14'
+        group: '@group3'
+    userGroup{23..140}:
+        id: 'userGroup<current()>'
+        user: '@user<current()>'
+        group: '@group3'
+    # Group 4
+    userGroup11:
+        id: userGroup11
+        user: '@user1'
+        group: '@group4'
 
-  # No persons in Group 5
+    # No persons in Group 5
 
-  # Group 6
-  userGroup12:
-    id: userGroup12
-    user: '@user2'
-    group: '@group6'
-  userGroup20:
-    id: userGroup20
-    user: '@user4'
-    group: '@group6'
+    # Group 6
+    userGroup12:
+        id: userGroup12
+        user: '@user2'
+        group: '@group6'
+    userGroup20:
+        id: userGroup20
+        user: '@user4'
+        group: '@group6'
 
-  # Group 7
-  userGroup200:
-    id: userGroup200
-    user: '@userKiroule'
-    group: '@group7'
-  # Group 8
-  userGroup201:
-    id: userGroup201
-    user: '@user504'
-    group: '@group8'
+    # Group 7
+    userGroup200:
+        id: userGroup200
+        user: '@userKiroule'
+        group: '@group7'
+    # Group 8
+    userGroup201:
+        id: userGroup201
+        user: '@user504'
+        group: '@group8'
+
+    userGroup202:
+        id: userGroup202
+        user: '@duplicatesUserConnectedFranceConnect'
+        group: '@group8'

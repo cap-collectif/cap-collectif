@@ -1200,22 +1200,22 @@ EOF;
     public function findDuplicatesUsers()
     {
         $sql = <<<'EOF'
-    select u.id as userId, u.france_connect_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'franceConnect' SSO  FROM fos_user u
+    select u.id as userId, u.france_connect_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'franceConnect' SSO  FROM fos_user u
     where france_connect_id IS NOT NULL
     GROUP BY u.france_connect_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.twitter_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'twitter' SSO  FROM fos_user u
+    select u.id as userId, u.twitter_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'twitter' SSO  FROM fos_user u
     where twitter_id IS NOT NULL
     GROUP BY u.twitter_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.facebook_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'facebook' SSO  FROM fos_user u
+    select u.id as userId, u.facebook_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'facebook' SSO  FROM fos_user u
     where facebook_id IS NOT NULL
     GROUP BY u.facebook_id
     HAVING duplicates > 1
     UNION
-    select u.id as userId, u.openid_id as all_id, u.email as email, COUNT(u.id) as duplicates, 'openId'  SSO  FROM fos_user u
+    select u.id as userId, u.openid_id as sso_id, u.email as email, COUNT(u.id) as duplicates, 'openId'  SSO  FROM fos_user u
     where openid_id IS NOT NULL
     GROUP BY u.openid_id
     HAVING duplicates > 1
@@ -1227,6 +1227,22 @@ EOF;
         $stmt->execute();
 
         return $stmt->fetchAllAssociative();
+    }
+
+    public function prefixUserSSoId(string $userId,string $ssoFieldName,int $key)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->update()
+            ->set(
+                'u.' . $ssoFieldName,
+                $qb->expr()->concat($qb->expr()->literal("duplicate-$key-"), 'u.' . $ssoFieldName)
+            )
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
     }
 
     public function findDuplicateFranceConnect(): array

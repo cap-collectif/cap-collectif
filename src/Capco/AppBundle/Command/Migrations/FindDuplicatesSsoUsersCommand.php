@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Migrations;
 
 use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionsCountResolver;
+use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -11,6 +12,7 @@ use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -21,22 +23,25 @@ class FindDuplicatesSsoUsersCommand extends Command
     private UserRepository $userRepository;
     private UserContributionsCountResolver $countResolver;
     private EntityManagerInterface $em;
+    private UserGroupRepository $ugRepository;
 
     public function __construct(
         string $name,
         UserRepository $userRepository,
         UserContributionsCountResolver $countResolver,
         DeleteAccountMutation $deleteAccountMutation,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        UserGroupRepository $ugRepository
     ) {
         parent::__construct($name);
         $this->deleteAccountMutation = $deleteAccountMutation;
         $this->userRepository = $userRepository;
         $this->countResolver = $countResolver;
         $this->em = $em;
+        $this->ugRepository = $ugRepository;
     }
 
-    public function findSameUsers(string $sso, string $ssoId, SymfonyStyle $io): array
+    public function findSameUsers(string $sso, string $ssoId): array
     {
         switch ($sso) {
             case 'france_connect':
@@ -73,12 +78,13 @@ class FindDuplicatesSsoUsersCommand extends Command
         $helper = $this->getHelper('question');
         $io = new SymfonyStyle($input, $output);
         $input->setInteractive(true);
-        $sso = 'all';
+        $sso = 'sso';
 
         $res = $this->findDuplicatesUsers($sso, $input, $output, $io);
         if (!$res) {
             return 0;
         }
+
         $duplicatesUsers = $res['duplicatesUsers'];
         $ssoId = $res['ssoId'];
         $default = $duplicatesUsers[0][$ssoId];
@@ -89,12 +95,12 @@ class FindDuplicatesSsoUsersCommand extends Command
         );
 
         $ssoId = $helper->ask($input, $output, $question);
-        $key = array_search($ssoId, array_column($duplicatesUsers, 'all_id'));
+        $key = array_search($ssoId, array_column($duplicatesUsers, 'sso_id'));
         $sso = $duplicatesUsers[$key]['SSO'];
 
-        $users = $this->findSameUsers($sso, $ssoId, $io);
+        $users = $this->findSameUsers($sso, $ssoId);
         $usersWithContributions = $this->countUserContributions($users, $io);
-        $this->deleteDuplicateUser($usersWithContributions, $input, $output, $helper, $io);
+        $this->deleteDuplicateUser($usersWithContributions, $input, $output, $helper, $io, $sso);
 
         $this->execute($input, $output);
 
@@ -106,7 +112,8 @@ class FindDuplicatesSsoUsersCommand extends Command
         InputInterface $input,
         OutputInterface $output,
         HelperInterface $helper,
-        SymfonyStyle $io
+        SymfonyStyle $io,
+        string $sso
     ) {
         $userToDelete = null;
         $row = 0;
@@ -118,6 +125,18 @@ class FindDuplicatesSsoUsersCommand extends Command
                 break;
             }
         }
+
+        if (!$userToDelete) {
+            $this->choiceWhatToDoIfUsersGotContributions(
+                $usersWithContributions,
+                $input,
+                $output,
+                $helper,
+                $io,
+                $sso
+            );
+        }
+
         $question = new Question(
             sprintf(
                 'Please enter the userId to delete, default : %s (column %d)' . \PHP_EOL,
@@ -126,13 +145,24 @@ class FindDuplicatesSsoUsersCommand extends Command
             ),
             $userToDelete['userId']
         );
+
         $userId = $helper->ask($input, $output, $question);
         if ($userId !== $userToDelete['userId']) {
             $key = array_search($userId, array_column($usersWithContributions, 'userId'));
             $userToDelete = $usersWithContributions[$key];
-            $userId = $userToDelete['userId'];
         }
 
+        $this->deleteUser($userToDelete, $input, $output, $io, $helper);
+    }
+
+    private function deleteUser(
+        array $userToDelete,
+        InputInterface $input,
+        OutputInterface $output,
+        SymfonyStyle $io,
+        HelperInterface $helper
+    ) {
+        $userId = $userToDelete['userId'];
         $io->warning(
             sprintf(
                 'You will delete user %s with %d contribution(s)',
@@ -140,16 +170,100 @@ class FindDuplicatesSsoUsersCommand extends Command
                 $userToDelete['totalContributions']
             )
         );
-        $question = new ConfirmationQuestion('Continue with this action ? ', false, '/^(y|j)/i');
+        $question = new ConfirmationQuestion(
+            'Continue with this action ? (y/n)',
+            false,
+            '/^(y|j)/i'
+        );
 
         if ($helper->ask($input, $output, $question)) {
             $user = $this->userRepository->find($userId);
+            $userGroups = $this->ugRepository->findBy(['user' => $user]);
+            if ($userGroups) {
+                foreach ($userGroups as $userGroup) {
+                    $this->em->remove($userGroup);
+                }
+            }
+
             $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps($user);
             $this->em->refresh($user);
             $this->em->remove($user);
             $this->em->flush();
 
             $io->success(sprintf('User %s has been successfully deleted', $userToDelete['userId']));
+        }
+    }
+
+    private function choiceWhatToDoIfUsersGotContributions(
+        $usersWithContributions,
+        InputInterface $input,
+        OutputInterface $output,
+        HelperInterface $helper,
+        SymfonyStyle $io,
+        string $sso
+    ) {
+        $userToDelete = $usersWithContributions[0];
+        $userToKeep = $userToDelete;
+        $keyToKeep = 0;
+        foreach ($usersWithContributions as $key => $user) {
+            if ($user['totalContributions'] > $userToKeep['totalContributions']) {
+                $userToKeep = $user;
+                $keyToKeep = $key;
+            }
+        }
+
+        $io->warning('All users got contributions.');
+
+        $question = new ChoiceQuestion(
+            'What do you want to do ?' . \PHP_EOL,
+            [
+                'Back to the beginning',
+                sprintf(
+                    'Prefix account sso_id with less contribution to block accounts. So we keep account with id %s and block others',
+                    $userToKeep['userId']
+                ),
+            ],
+            0
+        );
+
+        $choice = $helper->ask($input, $output, $question);
+        if ('Back to the beginning' === $choice) {
+            $this->execute($input, $output);
+        }
+
+        unset($usersWithContributions[$keyToKeep]);
+        $io->warning('This users will me blocked');
+        $question = new ConfirmationQuestion(
+            'Continue with this action ? (y/n)',
+            false,
+            '/^(y|j)/i'
+        );
+        if (!$helper->ask($input, $output, $question)) {
+            $this->execute($input, $output);
+        }
+
+        $this->generateTable($io, $usersWithContributions, [
+            'userId',
+            'userEmail',
+            'totalContributions',
+            'userCreatedAt',
+            'userUpdatedAt',
+        ]);
+
+        $userIds = array_map(static function ($user) {
+            return $user['userId'];
+        }, $usersWithContributions);
+
+        try {
+            foreach ($usersWithContributions as $key => $user) {
+                $this->userRepository->prefixUserSSoId($user['userId'], $sso . 'Id', $key+1);
+            }
+            $io->success(sprintf('Users with ids %s successfully blocked', implode(',', $userIds)));
+
+            $this->execute($input, $output);
+        } catch (\Exception $exception) {
+            $io->error('blocked users failed, please contact an admin, and looked at logs');
+            $this->execute($input, $output);
         }
     }
 
