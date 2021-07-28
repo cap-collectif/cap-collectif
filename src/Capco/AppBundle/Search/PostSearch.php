@@ -44,8 +44,6 @@ class PostSearch extends Search
 
         if ($affiliations && \in_array(PostAffiliation::OWNER, $affiliations, true)) {
             $boolQuery->addFilter(new Term(['owner.id' => $user->getId()]));
-        } else {
-            $boolQuery->addFilter(new Term(['authors.id' => $user->getId()]));
         }
 
         $query = new Query($boolQuery);
