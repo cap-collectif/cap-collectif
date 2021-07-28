@@ -74,6 +74,19 @@ const AnalyticsQuery = /* GraphQL */ `
   }
 `;
 
+const ExternalAnalyticsQuery = /* GraphQL */ `
+  query ExternalAnalyticsQuery($filter: QueryAnalyticsFilter!) {
+    analytics(filter: $filter) {
+      mostVisitedPages {
+        values {
+          key
+          totalCount
+        }
+      }
+    }
+  }
+`;
+
 describe('Internal|Analytics', () => {
   it('fetches analytics data', async () => {
     await expect(
@@ -97,6 +110,20 @@ describe('Internal|Analytics', () => {
             endAt: '2021-01-01 00:00:00',
             projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
           },
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+});
+
+describe('External|Analytics', () => {
+  it('fetches external analytics data filtered by url', async () => {
+    await expect(
+      graphql(
+        ExternalAnalyticsQuery,
+        {
+          filter: { startAt: '2010-01-01 00:00:00', endAt: '2021-01-01 00:00:00' },
         },
         'internal_admin',
       ),

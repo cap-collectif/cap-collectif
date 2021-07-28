@@ -146,7 +146,13 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(new DateHistogram('registrations', 'createdAt', 'month'));
+            ->addAggregation(
+                new DateHistogram(
+                    'registrations',
+                    'createdAt',
+                    $this->getDateHistogramInterval($start, $end)
+                )
+            );
 
         return $this->index->createSearch($query);
     }
@@ -179,7 +185,13 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(new DateHistogram('votes', 'createdAt', 'month'));
+            ->addAggregation(
+                new DateHistogram(
+                    'votes',
+                    'createdAt',
+                    $this->getDateHistogramInterval($start, $end)
+                )
+            );
 
         return $this->index->createSearch($query);
     }
@@ -217,7 +229,13 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(new DateHistogram('comments', 'createdAt', 'month'));
+            ->addAggregation(
+                new DateHistogram(
+                    'comments',
+                    'createdAt',
+                    $this->getDateHistogramInterval($start, $end)
+                )
+            );
 
         return $this->index->createSearch($query);
     }
@@ -266,7 +284,13 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(new DateHistogram('followers', 'followedAt', 'month'));
+            ->addAggregation(
+                new DateHistogram(
+                    'followers',
+                    'followedAt',
+                    $this->getDateHistogramInterval($start, $end)
+                )
+            );
 
         return $this->index->createSearch($query);
     }
@@ -313,8 +337,7 @@ class AnalyticsSearch
         DateTimeInterface $start,
         DateTimeInterface $end,
         ?string $projectId = null,
-        string $aggregatedField = 'createdAt',
-        string $interval = 'month'
+        string $aggregatedField = 'createdAt'
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
         $boolQuery
@@ -333,7 +356,13 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(new DateHistogram($aggregationName, $aggregatedField, $interval));
+            ->addAggregation(
+                new DateHistogram(
+                    $aggregationName,
+                    $aggregatedField,
+                    $this->getDateHistogramInterval($start, $end)
+                )
+            );
 
         return $this->index->createSearch($query);
     }
@@ -398,7 +427,7 @@ class AnalyticsSearch
                 (new DateHistogram(
                     'participations_per_interval',
                     'createdAt',
-                    'month'
+                    $this->getDateHistogramInterval($start, $end)
                 ))->addAggregation(
                     (new Cardinality('participants_per_interval'))->setField('author.id')
                 )
@@ -446,5 +475,19 @@ class AnalyticsSearch
         }
 
         return $boolQuery;
+    }
+
+    private function getDateHistogramInterval(
+        DateTimeInterface $start,
+        DateTimeInterface $end
+    ): string {
+        $daysDiff = $start->diff($end)->days;
+        $dateHistogramInterval = 'day';
+        // 2 months
+        if ($daysDiff > 60) {
+            $dateHistogramInterval = 'month';
+        }
+
+        return $dateHistogramInterval;
     }
 }

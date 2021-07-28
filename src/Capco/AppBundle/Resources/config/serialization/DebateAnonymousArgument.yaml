@@ -23,6 +23,8 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousArgument:
             groups: [ElasticsearchDebateArgument]
         ipAddress:
             groups: [ElasticsearchDebateArgument]
+        createdAt:
+            groups: [ElasticsearchDebateArgument]
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchDebateArgument]

@@ -1,5 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`External|Analytics fetches external analytics data filtered by url 1`] = `
+Object {
+  "analytics": Object {
+    "mostVisitedPages": Object {
+      "values": Array [
+        Object {
+          "key": "/projects",
+          "totalCount": 8,
+        },
+        Object {
+          "key": "/project/budget-participatif-rennes",
+          "totalCount": 5,
+        },
+        Object {
+          "key": "/project/debat-sur-le-cannabis",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "/project/project-analyse",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "/",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "/project/pour-ou-contre-la-vaccination-obligatoire-des-soignants/debate/pour-ou-contre-la-vaccination-des-soignants",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "/blog/post-fr-1",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "/contact",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "/themes",
+          "totalCount": 1,
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`Internal|Analytics fetches analytics data 1`] = `
 Object {
   "analytics": Object {
@@ -367,35 +414,35 @@ Object {
         },
         Object {
           "key": "2019-12-01T00:00:00.000Z",
-          "totalCount": 21,
+          "totalCount": 22,
         },
         Object {
           "key": "2020-01-01T00:00:00.000Z",
-          "totalCount": 24,
+          "totalCount": 50,
         },
         Object {
           "key": "2020-02-01T00:00:00.000Z",
-          "totalCount": 0,
+          "totalCount": 29,
         },
         Object {
           "key": "2020-03-01T00:00:00.000Z",
-          "totalCount": 9,
+          "totalCount": 40,
         },
         Object {
           "key": "2020-04-01T00:00:00.000Z",
-          "totalCount": 0,
+          "totalCount": 30,
         },
         Object {
           "key": "2020-05-01T00:00:00.000Z",
-          "totalCount": 0,
+          "totalCount": 31,
         },
         Object {
           "key": "2020-06-01T00:00:00.000Z",
-          "totalCount": 3,
+          "totalCount": 33,
         },
         Object {
           "key": "2020-07-01T00:00:00.000Z",
-          "totalCount": 0,
+          "totalCount": 18,
         },
         Object {
           "key": "2020-08-01T00:00:00.000Z",
@@ -407,7 +454,7 @@ Object {
         },
         Object {
           "key": "2020-10-01T00:00:00.000Z",
-          "totalCount": 0,
+          "totalCount": 11,
         },
         Object {
           "key": "2020-11-01T00:00:00.000Z",
@@ -659,7 +706,7 @@ Object {
         },
         Object {
           "key": "2019-12-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 2,
         },
         Object {
           "key": "2020-01-01T00:00:00.000Z",
@@ -699,7 +746,7 @@ Object {
         },
         Object {
           "key": "2020-10-01T00:00:00.000Z",
-          "totalCount": 0,
+          "totalCount": 9,
         },
         Object {
           "key": "2020-11-01T00:00:00.000Z",
@@ -764,6 +811,10 @@ Object {
         },
         Object {
           "key": "/",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "/project/pour-ou-contre-la-vaccination-obligatoire-des-soignants/debate/pour-ou-contre-la-vaccination-des-soignants",
           "totalCount": 2,
         },
         Object {
@@ -1077,7 +1128,7 @@ Object {
           "type": "SOCIAL_NETWORK",
         },
         Object {
-          "totalCount": 8,
+          "totalCount": 10,
           "type": "DIRECT",
         },
         Object {
@@ -1418,7 +1469,7 @@ Object {
         },
         Object {
           "key": "2020-06-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 3,
         },
         Object {
           "key": "2020-07-01T00:00:00.000Z",
@@ -1446,7 +1497,7 @@ Object {
       "values": Array [
         Object {
           "key": "2014-12-01T00:00:00.000Z",
-          "totalCount": 109,
+          "totalCount": 114,
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",
