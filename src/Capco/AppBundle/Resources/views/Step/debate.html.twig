@@ -34,21 +34,12 @@
 {% block body %}
     {% if shouldDisplayProjectHeader %}
         <section>
-            <div class="container">
+            <div class="container" style='padding:0;'>
                 {% include '@CapcoApp/Project/show_title.html.twig' %}
             </div>
         </section>
     {% endif %}
 
-    {% if project.steps | length > 1 and shouldDisplayProjectHeader %}
-        <section>
-            {{ react_render_component('ProjectStepTabsApp', {
-                'props': {
-                    'projectId': project.id|toGlobalId('Project')
-                },
-            }) }}
-        </section>
-    {% endif %}
 
     {% block stepNavigation %}{% endblock %}
     <style>

@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
+<ul
+  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox-jUaLZX czlZPR bJxwoi projectHeader__blocks"
+>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id=""
+    >
+      16
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Contribution-plural
+    </p>
+  </li>
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM dicyTt"
+    >
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        proposal-count {"count":84}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        amendment-count {"count":42}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        argument-count {"count":84}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        source-count {"count":42}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        answer-count {"count":42}
+      </p>
+    </div>
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
+    />
+  </div>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id="votes-counter-pill"
+    >
+      5
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Vote-plural
+    </p>
+  </li>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id=""
+    >
+      46
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Project.preview.counters.contributors
+    </p>
+  </li>
+</ul>
+`;
+
+exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
+<ul
+  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox-jUaLZX czlZPR bJxwoi projectHeader__blocks"
+>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id=""
+    >
+      16
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Contribution-plural
+    </p>
+  </li>
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM dicyTt"
+    >
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        proposal-count {"count":84}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        amendment-count {"count":42}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        argument-count {"count":84}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        source-count {"count":42}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        answer-count {"count":42}
+      </p>
+    </div>
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
+    />
+  </div>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id="votes-counter-pill"
+    >
+      5
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Vote-plural
+    </p>
+  </li>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id=""
+    >
+      46
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Project.preview.counters.contributors
+    </p>
+  </li>
+</ul>
+`;
+
+exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`] = `
+<ul
+  className="sc-bdnxRM ProjectHeaderCover___StyledAppBox-jUaLZX czlZPR bJxwoi projectHeader__blocks"
+>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id=""
+    >
+      16
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Contribution-plural
+    </p>
+  </li>
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM dicyTt"
+    >
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        proposal-count {"count":84}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        amendment-count {"count":42}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        argument-count {"count":84}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        source-count {"count":42}
+      </p>
+      <p
+        className="sc-bdnxRM lmUqmF"
+      >
+        answer-count {"count":42}
+      </p>
+    </div>
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
+    />
+  </div>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id="votes-counter-pill"
+    >
+      5
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Vote-plural
+    </p>
+  </li>
+  <li
+    className="sc-bdnxRM ifddLS projectHeader__block"
+  >
+    <h2
+      className="sc-bdnxRM hmLYRe projectHeader__block__content"
+      id=""
+    >
+      46
+    </h2>
+    <p
+      className="sc-bdnxRM iIkjNK projectHeader__block__title"
+    >
+      Project.preview.counters.contributors
+    </p>
+  </li>
+</ul>
+`;

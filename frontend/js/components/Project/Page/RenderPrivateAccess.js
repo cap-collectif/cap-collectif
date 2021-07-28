@@ -1,53 +1,40 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { OverlayTrigger } from 'react-bootstrap';
-import { createFragmentContainer, graphql } from 'react-relay';
-import styled from 'styled-components';
-import Tooltip from '../../Utils/Tooltip';
-import Tag from '../../Ui/Labels/Tag';
-import type { RenderPrivateAccess_project } from '~relay/RenderPrivateAccess_project.graphql';
-import colors from '~/styles/modules/colors';
+import { graphql, useFragment } from 'react-relay';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Tag from '~ds/Tag/Tag';
+import type { RenderPrivateAccess_project$key } from '~relay/RenderPrivateAccess_project.graphql';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
 type Props = {
-  project: RenderPrivateAccess_project,
-  lockIcon?: ?string,
+  project: RenderPrivateAccess_project$key,
 };
 
-const StyledTag = styled(Tag)`
-  color: ${props => (props.archived ? `${colors['neutral-gray']['500']}` : 'inherit')};
+const FRAGMENT = graphql`
+  fragment RenderPrivateAccess_project on Project {
+    visibility
+    archived
+  }
 `;
 
-export class RenderPrivateAccess extends React.Component<Props> {
-  render() {
-    const { project, lockIcon } = this.props;
-    let visibleBy = 'global.draft.only_visible_by_you';
-    const lock = lockIcon || 'cap-lock-2';
-    if (project && project.visibility && project.visibility === 'ADMIN') {
-      visibleBy = 'only-visible-by-administrators';
-    }
-
-    const tooltip = (
-      <Tooltip id="tooltip">
-        <FormattedMessage id={visibleBy} />
-      </Tooltip>
-    );
-
-    return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
-        <StyledTag archived={project.archived} icon={`cap ${lock} mr-1`}>
-          <FormattedMessage id="restrictedaccess" />
-        </StyledTag>
-      </OverlayTrigger>
-    );
+const RenderPrivateAccess = ({ project }: Props): React.Node => {
+  const data = useFragment(FRAGMENT, project);
+  let visibleBy = 'global.draft.only_visible_by_you';
+  if (data && data.visibility && data.visibility === 'ADMIN') {
+    visibleBy = 'only-visible-by-administrators';
   }
-}
 
-export default createFragmentContainer(RenderPrivateAccess, {
-  project: graphql`
-    fragment RenderPrivateAccess_project on Project {
-      visibility
-      archived
-    }
-  `,
-});
+  return (
+    <Tooltip placement="top" label={<FormattedMessage id={visibleBy} />}>
+      <Tag
+        id="restricted-access"
+        icon={ICON_NAME.LOCK}
+        variant="neutral-gray"
+        color={data.archived ? 'neutral-gray.500' : 'neutral-gray.800'}>
+        <FormattedMessage id="restrictedaccess" />
+      </Tag>
+    </Tooltip>
+  );
+};
+export default RenderPrivateAccess;

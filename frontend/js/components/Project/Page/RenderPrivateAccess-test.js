@@ -1,40 +1,71 @@
 // @flow
 /* eslint-env jest */
-import React from 'react';
-import { shallow } from 'enzyme';
-import { RenderPrivateAccess } from './RenderPrivateAccess';
-import { $refType } from '../../../mocks';
+import * as React from 'react';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
+import ReactTestRenderer from 'react-test-renderer';
+import RenderPrivateAccess from './RenderPrivateAccess';
+import {
+  addsSupportForPortals,
+  clearSupportForPortals,
+  RelaySuspensFragmentTest,
+} from '~/testUtils';
+import type { RenderPrivateAccessTestQuery } from '~relay/RenderPrivateAccessTestQuery.graphql';
 
 describe('<RenderPrivateAccess />', () => {
-  const projectVisibleByMe = {
-    visibility: 'ME',
-    archived: false,
-    $refType,
-  };
-  const projectVisibleByAdmin = {
-    visibility: 'ADMIN',
-    archived: false,
-    $refType,
+  let environment;
+  let TestComponent;
+
+  const defaultMockResolvers = {
+    Project: () => ({
+      visibility: 'ME',
+    }),
   };
 
-  const archivedProject = {
-    visibility: 'ME',
-    archived: true,
-    $refType,
-  };
+  const query = graphql`
+    query RenderPrivateAccessTestQuery($id: ID = "<default>") @relay_test_operation {
+      project: node(id: $id) {
+        ...RenderPrivateAccess_project
+      }
+    }
+  `;
+
+  afterEach(() => {
+    clearSupportForPortals();
+  });
+
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    const TestRenderer = props => {
+      const data = useLazyLoadQuery<RenderPrivateAccessTestQuery>(query, {});
+      if (!data.project) return null;
+      return <RenderPrivateAccess project={data.project} {...props} />;
+    };
+    TestComponent = props => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
+    );
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+  });
 
   it('should render correctly for me only', () => {
-    const wrapper = shallow(
-      <RenderPrivateAccess project={projectVisibleByMe} lockIcon="cap-lock-1" />,
-    );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly for admin only', () => {
-    const wrapper = shallow(<RenderPrivateAccess project={projectVisibleByAdmin} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-  it('should render correctly for archived project', () => {
-    const wrapper = shallow(<RenderPrivateAccess project={archivedProject} />);
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Project: () => ({
+          visibility: 'ADMIN',
+        }),
+      }),
+    );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
 });

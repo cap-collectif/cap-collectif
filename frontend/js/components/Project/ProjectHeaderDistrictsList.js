@@ -1,119 +1,107 @@
 // @flow
 import * as React from 'react';
-import { Modal, Button, ListGroupItem } from 'react-bootstrap';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { ListGroupItem } from 'react-bootstrap';
+import { graphql, useFragment } from 'react-relay';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
+import { useDisclosure } from '@liinkiing/react-hooks';
+import type { StyledComponent } from 'styled-components';
+import Modal from '~ds/Modal/Modal';
 import colors from '~/styles/modules/colors';
+import ProjectHeader from '~ui/Project/ProjectHeader';
+import Button from '~ds/Button/Button';
 
-import InlineList from '../Ui/List/InlineList';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
-import type { ProjectHeaderDistrictsList_project } from '~relay/ProjectHeaderDistrictsList_project.graphql';
+import { type ProjectHeaderDistrictsList_project$key } from '~relay/ProjectHeaderDistrictsList_project.graphql';
 
 type Props = {|
   +breakingNumber: number,
-  +fontSize: number,
-  +project: ProjectHeaderDistrictsList_project,
+  +project: ProjectHeaderDistrictsList_project$key,
 |};
 
-type State = {|
-  +show: boolean,
-|};
-
-const DistrictsButton = styled(Button)`
-  font-size: ${props => props.fontSize}px;
-  padding: 0;
+export const DistrictsButton: StyledComponent<
+  { archived: boolean },
+  {},
+  typeof ProjectHeader.Info.Location,
+> = styled(ProjectHeader.Info.Location)`
+  cursor: pointer;
   vertical-align: baseline;
   color: ${props => (props.archived ? `${colors['neutral-gray']['500']} !important` : null)};
 `;
 
-const InlineListLi = styled.li`
-  color: ${props => (props.archived ? `${colors['neutral-gray']['500']}` : 'inherit')};
-`;
-
-export class ProjectHeaderDistrictsList extends React.Component<Props, State> {
-  state = {
-    show: false,
-  };
-
-  handleClose = () => {
-    this.setState({ show: false });
-  };
-
-  handleShow = () => {
-    this.setState({ show: true });
-  };
-
-  render() {
-    const { project, breakingNumber, fontSize } = this.props;
-    const { show } = this.state;
-
-    if (project.districts && project.districts.edges) {
-      if (project.districts.totalCount <= breakingNumber) {
-        return (
-          <InlineList className="d-i" separator="•">
-            {project.districts.edges.map((district, key) => (
-              <InlineListLi archived={project.archived} key={key}>
-                {district?.node?.name}
-              </InlineListLi>
-            ))}
-          </InlineList>
-        );
-      }
-
-      return (
-        <React.Fragment>
-          <DistrictsButton
-            fontSize={fontSize}
-            bsStyle="link"
-            onClick={this.handleShow}
-            className="p-0 project-districts__modal-link"
-            archived={project.archived}>
-            {project.districts.edges[0]?.node?.name}{' '}
-            <FormattedMessage
-              id="and-count-other-areas"
-              values={{
-                count: project.districts.totalCount - 1,
-              }}
-            />
-          </DistrictsButton>
-          <Modal show={show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>
-                <FormattedMessage
-                  id="count-area"
-                  values={{
-                    count: project.districts.totalCount,
-                  }}
-                />
-              </Modal.Title>
-            </Modal.Header>
-            <ListGroupFlush>
-              {project.districts.edges.map((district, key) => (
-                <ListGroupItem key={key}>{district?.node?.name}</ListGroupItem>
-              ))}
-            </ListGroupFlush>
-          </Modal>
-        </React.Fragment>
-      );
-    }
-
-    return null;
-  }
-}
-
-export default createFragmentContainer(ProjectHeaderDistrictsList, {
-  project: graphql`
-    fragment ProjectHeaderDistrictsList_project on Project {
-      districts {
-        totalCount
-        edges {
-          node {
-            name
-          }
+const FRAGMENT = graphql`
+  fragment ProjectHeaderDistrictsList_project on Project {
+    districts {
+      totalCount
+      edges {
+        node {
+          name
         }
       }
-      archived
     }
-  `,
-});
+    archived
+  }
+`;
+
+const ProjectHeaderDistrictsList = ({ breakingNumber, project }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const intl = useIntl();
+  const data = useFragment(FRAGMENT, project);
+  if (!!data.districts && !!data.districts.edges) {
+    if (!!data.districts?.totalCount && data.districts?.totalCount <= breakingNumber) {
+      return data.districts?.edges?.map<any>((district: any, key: number) => (
+        <ProjectHeader.Info.Location key={key} content={district?.node?.name} />
+      ));
+    }
+    return (
+      <>
+        <DistrictsButton
+          content={
+            <>
+              {data.districts.edges[0]?.node?.name}{' '}
+              <FormattedMessage
+                id="and-count-other-areas"
+                values={{
+                  count: data.districts.totalCount - 1,
+                }}
+              />
+            </>
+          }
+          onClick={onOpen}
+          className="p-0 data-districts__modal-link"
+          archived={data.archived}
+        />
+        <Modal
+          show={isOpen}
+          onClose={onClose}
+          ariaLabel={intl.formatMessage({ id: 'data_district_list' })}>
+          <Modal.Header>
+            <FormattedMessage
+              id="count-area"
+              values={{
+                count: data.districts?.totalCount,
+              }}
+            />
+          </Modal.Header>
+          <Modal.Body>
+            <ListGroupFlush>
+              {data.districts?.totalCount &&
+                data.districts?.totalCount > 0 &&
+                data.districts?.edges?.map((district, key) => (
+                  <ListGroupItem key={key}>{district?.node?.name}</ListGroupItem>
+                ))}
+            </ListGroupFlush>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" variantSize="medium" onClick={onClose}>
+              <FormattedMessage id="global.close" />
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
+  return null;
+};
+export default ProjectHeaderDistrictsList;

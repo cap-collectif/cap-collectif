@@ -8,10 +8,10 @@ import Avatar from '~ds/Avatar/Avatar';
 describe('<ProjectHeader />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(
-      <ProjectHeader coverURL="/cover.jpg">
+      <ProjectHeader>
         <ProjectHeader.Cover>
           <ProjectHeader.Content>
-            <ProjectHeader.Authors>
+            <ProjectHeader.Authors active>
               <Avatar
                 name="Mikasa Estucasa"
                 src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
@@ -34,7 +34,10 @@ describe('<ProjectHeader />', () => {
             <ProjectHeader.Info>
               <ProjectHeader.Info.Location content="Nantes" />
               <ProjectHeader.Info.Location content="Bellevue Chantenay Sainte-Anne" />
-              <ProjectHeader.Info.Theme content="Projet de loi, consentement, seuil d’âge, mineur" />
+              <ProjectHeader.Info.Theme
+                href="#"
+                content="Projet de loi, consentement, seuil d’âge, mineur"
+              />
             </ProjectHeader.Info>
             <ProjectHeader.Socials>
               <ProjectHeader.Social href="#" name="FACEBOOK" />
@@ -45,26 +48,30 @@ describe('<ProjectHeader />', () => {
           <ProjectHeader.CoverImage src="/cover.jpg" alt="Cover Image" />
         </ProjectHeader.Cover>
         <ProjectHeader.Frise>
-          <ProjectHeader.Steps modalTitle="Etapes de Consultation">
+          <ProjectHeader.Steps currentStepIndex={0} modalTitle="Etapes de Consultation">
             <ProjectHeader.Step
+              href="#"
               title="Dépots de projets"
               content="terminé"
               tooltipLabel="Terminé"
               state="FINISHED"
             />
             <ProjectHeader.Step
+              href="#"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
               state="FINISHED"
             />
             <ProjectHeader.Step
+              href="#"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
               state="FINISHED"
             />
             <ProjectHeader.Step
+              href="#"
               title="Consultation"
               content="30 jours restants"
               tooltipLabel="30 jours restants"
@@ -72,18 +79,21 @@ describe('<ProjectHeader />', () => {
               <ProjectHeader.Step.Progress progress={50} />
             </ProjectHeader.Step>
             <ProjectHeader.Step
+              href="#"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
               state="WAITING"
             />
             <ProjectHeader.Step
+              href="#"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"
               state="WAITING"
             />
             <ProjectHeader.Step
+              href="#"
               title="Le vote des projets"
               content="30 jours restants"
               tooltipLabel="Test tooltip"

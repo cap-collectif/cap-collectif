@@ -103,19 +103,19 @@ global.cookieMonster = require('./CookieMonster').default;
 // react-intl@3.x polyfills for iNtErNeT eXpLoReR 11
 if (!Intl.PluralRules) {
   require('@formatjs/intl-pluralrules/polyfill');
-  require('@formatjs/intl-pluralrules/dist/locale-data/fr');
-  require('@formatjs/intl-pluralrules/dist/locale-data/nl');
-  require('@formatjs/intl-pluralrules/dist/locale-data/en');
-  require('@formatjs/intl-pluralrules/dist/locale-data/es');
-  require('@formatjs/intl-pluralrules/dist/locale-data/de');
+  require('@formatjs/intl-pluralrules/locale-data/fr');
+  require('@formatjs/intl-pluralrules/locale-data/nl');
+  require('@formatjs/intl-pluralrules/locale-data/en');
+  require('@formatjs/intl-pluralrules/locale-data/es');
+  require('@formatjs/intl-pluralrules/locale-data/de');
 }
 if (!Intl.RelativeTimeFormat) {
   require('@formatjs/intl-relativetimeformat/polyfill');
-  require('@formatjs/intl-relativetimeformat/dist/locale-data/fr');
-  require('@formatjs/intl-relativetimeformat/dist/locale-data/nl');
-  require('@formatjs/intl-relativetimeformat/dist/locale-data/en');
-  require('@formatjs/intl-relativetimeformat/dist/locale-data/es');
-  require('@formatjs/intl-relativetimeformat/dist/locale-data/de');
+  require('@formatjs/intl-relativetimeformat/locale-data/fr');
+  require('@formatjs/intl-relativetimeformat/locale-data/nl');
+  require('@formatjs/intl-relativetimeformat/locale-data/en');
+  require('@formatjs/intl-relativetimeformat/locale-data/es');
+  require('@formatjs/intl-relativetimeformat/locale-data/de');
 }
 
 // Our global App for symfony

@@ -13,9 +13,6 @@ Scenario: Logged in admin wants to edit alpha admin project
   And I fill the "#districts" react element with child number 1
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page
-  And I go to "/consultation/projet-sans-etapes-participatives/presentation/presentation-3"
-  And I wait ".cap-marker-1" to appear on current page
-  Then I should see "Centre ville"
 
 @database
 Scenario: Logged in super admin wants to restrict a project
@@ -141,8 +138,7 @@ Scenario: Logged in admin wants to add a presentation step to a project
   And I wait "#details" to appear on current page
   Then I should see "PresentationStepTitle"
   Then I should see "PresentationStepBody"
-
-
+  
 @database
 Scenario: Logged in admin wants to add a debate step to a project
   Given I am logged in as admin

@@ -1,374 +1,683 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalUserVoteItem /> should render correctly without arrow & with active tab 1`] = `
+exports[`<ProjectStepTabs /> should render correctly without arrow & with active tab 1`] = `
 <div
-  className="step-tabs hidden-print"
+  className="sc-bdnxRM dTkKkW frise"
 >
-  <div
-    className="step-tabs__bar container"
+  <ul
+    className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox3-brPamy gCmJTI kqjIJu frise__stepList"
   >
     <div
-      className="position-relative"
-      id="step-tabs-content"
+      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj jOvakW slick-initialized"
     >
+      
       <div
-        className="step-tabs__list"
-        id="step-tabs-list"
+        className="slick-list"
       >
-        <ul
-          className="nav"
-          id="step-tabs-scroll-nav"
+        <div
+          className="slick-track"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
           style={
             Object {
-              "transform": "translateX(0px)",
+              "WebkitTransform": "translate3d(0px, 0px, 0px)",
+              "WebkitTransition": "",
+              "msTransform": "translateX(0px)",
+              "opacity": 1,
+              "transform": "translate3d(0px, 0px, 0px)",
+              "transition": "",
             }
           }
         >
-          <li
-            key="0"
-            title="presentation step - global.active.step"
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active slick-current"
+            data-index={0}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
           >
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP gtTeFr jA-dOqc frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
               >
-                <span>
-                  1
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-title"
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 231 56"
+                  width="248"
                 >
-                  <span
-                    className="navbar__step-nb_small"
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    width="215.6"
+                  />
+                  <path
+                    d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    clipRule="evenodd"
+                    d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                    fill="white"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    title="Présentation"
                   >
-                    1
-                    .
-                  </span>
-                  presentation step
-                </span>
-                <p
-                  className="excerpt"
-                />
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li
-            key="1"
-            title="open step - global.active.step"
+                    Présentation
+                  </h5>
+                  <p
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                  >
+                    
+                  </p>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active"
+            data-index={1}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
           >
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP cFfMis jA-dOqc frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
               >
-                <span>
-                  2
-                </span>
-              </div>
-              <div
-                className="navbar__step"
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 248 56"
+                  width="248"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    transform="translate(17)"
+                    width="216"
+                  />
+                  <path
+                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title"
+                    title="Consultation"
+                  >
+                    Consultation
+                  </h5>
+                  <p
+                    className="sc-bdnxRM AiBJM frise__stepItem__link__content"
+                  >
+                    step.status.closed
+                  </p>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active"
+            data-index={2}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd jA-dOqc frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
               >
-                <span
-                  className="navbar__step-title"
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 248 56"
+                  width="248"
                 >
-                  <span
-                    className="navbar__step-nb_small"
-                  >
-                    2
-                    .
-                  </span>
-                  open step
-                </span>
-                <p
-                  className="excerpt"
+                  <path
+                    clipRule="evenodd"
+                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    transform="translate(17)"
+                    width="216"
+                  />
+                  <path
+                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
                 >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={true}
+                  <h5
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    title="Dépôt"
                   >
-                    <FormattedMessage
-                      id="step.status.open"
-                      values={Object {}}
+                    Dépôt
+                  </h5>
+                  <p
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                  >
+                    count.block.daysLeft
+                  </p>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active"
+            data-index={3}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd bhnpCO frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 248 56"
+                  width="248"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    transform="translate(17)"
+                    width="216"
+                  />
+                  <path
+                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title"
+                    title="Questionnaire qui dénonce"
+                  >
+                    Questionnaire qui dénonce
+                  </h5>
+                  <div
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+                    style={
+                      Object {
+                        "opacity": 0,
+                        "transform": "scale(0.8) translateZ(0)",
+                      }
+                    }
+                  >
+                    <p
+                      className="sc-bdnxRM cZcArZ"
+                      title="frise-tooltip-text"
+                    >
+                      frise-tooltip-text
+                    </p>
+                    <div
+                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+                      data-popper-arrow={true}
+                      id="arrow"
                     />
-                  </ProjectStepTabs__StepExcerptBadge>
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
+                  </div>
+                  <p
+                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content"
                   />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li
-            className="active"
-            key="2"
-            title="timeless step - global.active.step"
-          >
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
-              >
-                <span>
-                  3
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-title"
-                >
-                  <span
-                    className="navbar__step-nb_small"
-                  >
-                    3
-                    .
-                  </span>
-                  timeless step
-                </span>
-                <p
-                  className="excerpt"
-                >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={true}
-                  >
-                    <FormattedMessage
-                      id="step.status.open"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li
-            key="3"
-            title="last step - global.active.step"
-          >
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
-              >
-                <span>
-                  4
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-title"
-                >
-                  <span
-                    className="navbar__step-nb_small"
-                  >
-                    4
-                    .
-                  </span>
-                  last step
-                </span>
-                <p
-                  className="excerpt"
-                >
-                  <ProjectStepTabs__StepExcerptBadge
-                    activeTab={false}
-                  >
-                    <FormattedMessage
-                      id="step.status.closed"
-                      values={Object {}}
-                    />
-                  </ProjectStepTabs__StepExcerptBadge>
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-        </ul>
+                </a>
+              </li>
+            </div>
+          </div>
+        </div>
       </div>
+      
+      
     </div>
-  </div>
+  </ul>
 </div>
 `;
 
-exports[`<ProposalUserVoteItem /> should render null when there is only one step 1`] = `""`;
+exports[`<ProjectStepTabs /> should render null when there is only one step 1`] = `
+<div
+  className="sc-bdnxRM dTkKkW frise"
+>
+  <ul
+    className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox3-brPamy gCmJTI kqjIJu frise__stepList"
+  >
+    <div
+      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj jOvakW slick-initialized"
+    >
+      
+      <div
+        className="slick-list"
+      >
+        <div
+          className="slick-track"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "WebkitTransform": "translate3d(0px, 0px, 0px)",
+              "WebkitTransition": "",
+              "msTransform": "translateX(0px)",
+              "opacity": 1,
+              "transform": "translate3d(0px, 0px, 0px)",
+              "transition": "",
+            }
+          }
+        >
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active slick-current"
+            data-index={0}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP gtTeFr jA-dOqc frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 231 56"
+                  width="248"
+                >
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    width="215.6"
+                  />
+                  <path
+                    d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    clipRule="evenodd"
+                    d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                    fill="white"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    title="Présentation"
+                  >
+                    Présentation
+                  </h5>
+                  <p
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                  >
+                    
+                  </p>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active"
+            data-index={1}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP cFfMis jA-dOqc frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 248 56"
+                  width="248"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    transform="translate(17)"
+                    width="216"
+                  />
+                  <path
+                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title"
+                    title="Consultation"
+                  >
+                    Consultation
+                  </h5>
+                  <p
+                    className="sc-bdnxRM AiBJM frise__stepItem__link__content"
+                  >
+                    step.status.closed
+                  </p>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active"
+            data-index={2}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd jA-dOqc frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 248 56"
+                  width="248"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    transform="translate(17)"
+                    width="216"
+                  />
+                  <path
+                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    title="Dépôt"
+                  >
+                    Dépôt
+                  </h5>
+                  <p
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                  >
+                    count.block.daysLeft
+                  </p>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active"
+            data-index={3}
+            onClick={[Function]}
+            style={
+              Object {
+                "outline": "none",
+                "width": null,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <li
+                className="sc-bdnxRM ProjectHeaderFrise___StyledAppBox6-cGAFbP kcPizd bhnpCO frise__stepItem"
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <svg
+                  fill="none"
+                  height="56"
+                  viewBox="0 0 248 56"
+                  width="248"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <rect
+                    fill="currentColor"
+                    height="56"
+                    transform="translate(17)"
+                    width="216"
+                  />
+                  <path
+                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <a
+                  className="sc-bdnxRM Flex___StyledAppBox-RSPpX ikBrtL frise__stepItem__link"
+                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
+                  style={
+                    Object {
+                      "transform": "translate(-45%,-50%)",
+                    }
+                  }
+                >
+                  <h5
+                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title"
+                    title="Questionnaire qui dénonce"
+                  >
+                    Questionnaire qui dénonce
+                  </h5>
+                  <div
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+                    style={
+                      Object {
+                        "opacity": 0,
+                        "transform": "scale(0.8) translateZ(0)",
+                      }
+                    }
+                  >
+                    <p
+                      className="sc-bdnxRM cZcArZ"
+                      title="frise-tooltip-text"
+                    >
+                      frise-tooltip-text
+                    </p>
+                    <div
+                      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+                      data-popper-arrow={true}
+                      id="arrow"
+                    />
+                  </div>
+                  <p
+                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content"
+                  />
+                </a>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </ul>
+</div>
+`;

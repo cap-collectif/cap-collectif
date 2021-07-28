@@ -1,34 +1,31 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
-// TODO https://github.com/cap-collectif/platform/issues/7774
-// eslint-disable-next-line no-restricted-imports
-import { Modal, ListGroupItem, ListGroup } from 'react-bootstrap';
-
-import type { State, FeatureToggles } from '../../../types';
-import CloseButton from '../../Form/CloseButton';
+import { graphql, useFragment } from 'react-relay';
+import { useIntl } from 'react-intl';
+import { ListGroupItem } from 'react-bootstrap';
+import ListGroupFlush from '../../Ui/List/ListGroupFlush';
+import Modal from '~ds/Modal/Modal';
 import UserAvatar from '../../User/UserAvatar';
-
-import type { ProjectHeaderAuthorsModal_users } from '~relay/ProjectHeaderAuthorsModal_users.graphql';
+import Button from '~ds/Button/Button';
+import Heading from '~ui/Primitives/Heading';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import type { ProjectHeaderAuthorsModal_project$key } from '~relay/ProjectHeaderAuthorsModal_project.graphql';
 
 type Props = {|
-  show: boolean,
-  onClose: () => void,
-  features: FeatureToggles,
-  users: ProjectHeaderAuthorsModal_users,
+  +show: boolean,
+  +onClose: () => void,
+  +project: ProjectHeaderAuthorsModal_project$key,
 |};
 
 const ProjectAuthorItem = styled(ListGroupItem).attrs({
   className: 'projectAuthorItem',
 })`
-  border-left: none;
   border-right: none;
+  border-left: none;
 `;
 
-const ProjectAuthorList = styled(ListGroup)`
+const ProjectAuthorList = styled(ListGroupFlush)`
   .projectAuthorItem:first-of-type {
     border-top: none;
   }
@@ -38,64 +35,63 @@ const ProjectAuthorList = styled(ListGroup)`
   }
 `;
 
-const renderAuthorItemUserName = (user, profileFeature) =>
-  profileFeature ? (
-    <a href={user.url}>{user.username}</a>
-  ) : (
-    <span className="font-weight-bold">{user.username}</span>
-  );
-
-const renderAuthorsList = (users: ProjectHeaderAuthorsModal_users, features: FeatureToggles) =>
-  users.map((user, key) => (
-    <ProjectAuthorItem key={key}>
-      <div className="d-flex">
-        <UserAvatar user={user} features={features} />
-        <div className="d-flex fd-column">
-          {renderAuthorItemUserName(user, !!features.profiles)}{' '}
-          <span className="excerpt">{user.userType ? user.userType.name : ''}</span>
-        </div>
-      </div>
-    </ProjectAuthorItem>
-  ));
-
-export const ProjectHeaderAuthorsModal = ({ show, onClose, users, features }: Props) => (
-  <Modal id="show-authors-modal" animation={false} onHide={onClose} show={show}>
-    <Modal.Header closeButton>
-      <Modal.Title id="contained-modal-title-lg" className="font-weight-bold">
-        <FormattedMessage
-          id="number-of-authors"
-          values={{
-            num: users ? users.length : 0,
-          }}
-        />
-      </Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <ProjectAuthorList className="mb-0">{renderAuthorsList(users, features)}</ProjectAuthorList>
-    </Modal.Body>
-    <Modal.Footer>
-      <CloseButton onClose={onClose} />
-    </Modal.Footer>
-  </Modal>
-);
-
-const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-});
-
-export default createFragmentContainer(
-  connect<any, any, _, _, _, _>(mapStateToProps)(ProjectHeaderAuthorsModal),
-  {
-    users: graphql`
-      fragment ProjectHeaderAuthorsModal_users on User @relay(plural: true) {
-        id
-        url
-        username
-        userType {
-          name
-        }
-        ...UserAvatar_user
+const FRAGMENT = graphql`
+  fragment ProjectHeaderAuthorsModal_project on Project {
+    authors {
+      ...UserAvatar_user
+      id
+      url
+      username
+      userType {
+        name
       }
-    `,
-  },
-);
+    }
+  }
+`;
+
+const ProjectHeaderAuthorsModal = ({ show, onClose, project }: Props): React.Node => {
+  const profilesToggle = useFeatureFlag('profiles');
+  const intl = useIntl();
+  const data = useFragment(FRAGMENT, project);
+  return (
+    <Modal
+      id="show-authors-modal"
+      show={show}
+      onClose={onClose}
+      ariaLabel={intl.formatMessage({ id: 'project.authors' })}>
+      <Modal.Header>
+        <Heading>
+          {intl.formatMessage(
+            { id: 'number-of-authors' },
+            { num: data.authors ? data.authors.length : 0 },
+          )}
+        </Heading>
+      </Modal.Header>
+      <Modal.Body>
+        <ProjectAuthorList className="mb-0">
+          {data.authors.map(user => (
+            <ProjectAuthorItem key={user.id}>
+              <div className="d-flex">
+                <UserAvatar user={user} />
+                <div className="d-flex fd-column">
+                  {profilesToggle ? (
+                    <a href={user.url}>{user.username}</a>
+                  ) : (
+                    <span className="font-weight-bold">{user.username}</span>
+                  )}
+                  <span className="excerpt">{user.userType ? user.userType.name : ''}</span>
+                </div>
+              </div>
+            </ProjectAuthorItem>
+          ))}
+        </ProjectAuthorList>
+      </Modal.Body>
+      <Modal.Footer spacing={2}>
+        <Button variant="primary" variantSize="medium" onClick={onClose}>
+          {intl.formatMessage({ id: 'global.close' })}
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+export default ProjectHeaderAuthorsModal;

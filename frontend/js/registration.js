@@ -7,7 +7,6 @@ import ProposalStepPageApp from './startup/ProposalStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
-import ProjectStepTabsApp from './startup/ProjectStepTabsApp';
 import CarouselApp from './startup/CarouselApp';
 import MetricsApp from './startup/MetricsApp';
 import OpinionPageApp from './startup/OpinionPageApp';
@@ -23,14 +22,11 @@ import SourcePageApp from './startup/SourcePageApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
 import AccountProfileApp from './startup/AccountProfileApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
-import ProjectHeaderDistrictsApp from './startup/ProjectHeaderDistrictsApp';
-import ProjectHeaderAuthorsApp from './startup/ProjectHeaderAuthorsApp';
-import ProjectHeaderCounterApp from './startup/ProjectHeaderCounterApp';
 import SectionListPageApp from './startup/SectionListPageApp';
-import ProjectListPageApp from './startup/ProjectListPageApp';
 import ShieldApp from './startup/ShieldApp';
 import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
+import ProjectListPageApp from './startup/ProjectListPageApp';
 import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 import EditProfileApp from './startup/EditProfileApp';
@@ -39,7 +35,6 @@ import CookieManagerApp from './startup/CookieManagerApp';
 import PrivacyApp from './startup/PrivacyApp';
 import CookieApp from './startup/CookieApp';
 import ProjectRestrictedAccessAlertApp from './startup/ProjectRestrictedAccessAlertApp';
-import ProjectRestrictedAccessApp from './startup/ProjectRestrictedAccessApp';
 import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
@@ -82,6 +77,7 @@ import DebateStepPageApp from '~/startup/DebateStepPageApp';
 import ProposalNewsHeaderButtonsApp from '~/startup/ProposalNewsHeaderButtonsApp';
 import DebateCardApp from '~/startup/DebateCardApp';
 import WhatsNewApp from '~/startup/WhatsNewApp';
+import ProjectHeaderApp from '~/startup/ProjectHeaderApp';
 import DebateWidgetAccessDeniedApp from '~/startup/DebateWidgetAccessDeniedApp';
 import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp';
 import ChartModalApp from '~/startup/ChartModalApp';
@@ -109,7 +105,6 @@ ReactOnRails.register({
   SectionPageApp,
   AccountProfileApp,
   ProjectTrashButtonApp,
-  ProjectStepTabsApp,
   CarouselApp,
   MetricsApp,
   EvaluationsIndexPageApp,
@@ -124,16 +119,12 @@ ReactOnRails.register({
   UserProposalsApp,
   ProposalsUserVotesPageApp,
   ShareButtonDropdownApp,
-  ProjectHeaderAuthorsApp,
-  ProjectHeaderCounterApp,
-  ProjectHeaderDistrictsApp,
   EditProfileApp,
   CookieManagerApp,
   PrivacyApp,
   CookieApp,
   CookieContentApp,
   ProjectRestrictedAccessAlertApp,
-  ProjectRestrictedAccessApp,
   ArgumentListApp,
   VoteListApp,
   EventApp,
@@ -155,6 +146,7 @@ ReactOnRails.register({
   UserInvitationPageApp,
   ResetPasswordApp,
   DebateStepPageApp,
+  ProjectHeaderApp,
   DebateWidgetAccessDeniedApp,
   UserUnsubscribePageApp,
   ChartModalApp,

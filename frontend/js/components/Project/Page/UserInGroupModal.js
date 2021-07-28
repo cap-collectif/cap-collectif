@@ -1,161 +1,104 @@
 // @flow
-import React from 'react';
-import { Modal, ListGroupItem, Button } from 'react-bootstrap';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import type { UserInGroupModal_group } from '~relay/UserInGroupModal_group.graphql';
+import * as React from 'react';
+import { ListGroupItem } from 'react-bootstrap';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { graphql, usePaginationFragment } from 'react-relay';
 import UserAvatar from '../../User/UserAvatar';
-import CloseButton from '../../Form/CloseButton';
+import Modal from '~ds/Modal/Modal';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
+import type { UserInGroupModal_group$key } from '~relay/UserInGroupModal_group.graphql';
+import Heading from '~ui/Primitives/Heading';
+import Button from '~ds/Button/Button';
 
 type RelayProps = {|
-  group: UserInGroupModal_group,
+  group: UserInGroupModal_group$key,
 |};
 
 type Props = {|
   ...RelayProps,
   show: boolean,
   handleClose: () => void,
-  relay: RelayPaginationProp,
-  intl: IntlShape,
 |};
-type State = {
-  loading: boolean,
-};
 
-export class UserInGroupModal extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
-  closeModal = () => {
-    const { handleClose } = this.props;
-    handleClose();
-  };
-
-  loadMore = () => {
-    this.setState({ loading: true });
-    const { relay } = this.props;
-    relay.loadMore(10, () => {
-      this.setState({ loading: false });
-    });
-  };
-
-  render() {
-    const { show, group, relay, intl } = this.props;
-    const { loading } = this.state;
-
-    return (
-      <div>
-        <Modal
-          id={`${group.id}-modal`}
-          animation={false}
-          show={show}
-          onHide={this.closeModal}
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              <b>{group.title}</b>
-            </Modal.Title>
-          </Modal.Header>
-          {group.users !== null && group.users.edges && group.users.edges.length > 0 && (
-            <ListGroupFlush>
-              {group.users.edges
-                .filter(Boolean)
-                .map(edge => edge && edge.node)
-                .filter(Boolean)
-                .map(user => (
-                  <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
-                    <UserAvatar user={user} />
-                    <a
-                      href={user.url}
-                      className="align-self-center"
-                      title={intl.formatMessage(
-                        { id: 'usernames-profile' },
-                        { userName: user.username },
-                      )}>
-                      {user.username}
-                    </a>
-                  </ListGroupItem>
-                ))}
-              {relay.hasMore() && (
-                <div className="text-center mt-15 mb-10">
-                  <Button
-                    id="load-more"
-                    bsStyle="primary"
-                    disabled={loading}
-                    onClick={this.loadMore}>
-                    <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'global.more'} />
-                  </Button>
-                </div>
-              )}
-            </ListGroupFlush>
-          )}
-          <Modal.Footer>
-            <CloseButton label="global.close" onClose={this.closeModal} />
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
+const FRAGMENT = graphql`
+  fragment UserInGroupModal_group on Group
+    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" })
+    @refetchable(queryName: "UsersInGroupListQuery") {
+    id
+    title
+    users(first: $count, after: $cursor) @connection(key: "UserInGroupModal_users") {
+      edges {
+        node {
+          id
+          ...UserAvatar_user
+          url
+          username
+        }
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
   }
-}
+`;
 
-const container = injectIntl(UserInGroupModal);
-
-export default createPaginationContainer(
-  container,
-  {
-    group: graphql`
-      fragment UserInGroupModal_group on Group
-        @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
-        id
-        title
-        users(first: $count, after: $cursor) @connection(key: "UserInGroupModal_users") {
-          edges {
-            cursor
-            node {
-              id
-              ...UserAvatar_user
-              url
-              username
-            }
-          }
-          pageInfo {
-            hasPreviousPage
-            hasNextPage
-            startCursor
-            endCursor
-          }
-          totalCount
-        }
-      }
-    `,
-  },
-  {
-    direction: 'forward',
-    // $FlowFixMe Type of getConnection is not strict
-    getConnectionFromProps(props: Props) {
-      return props.group && props.group.users;
-    },
-    getFragmentVariables(previousVariables, totalCount) {
-      return {
-        ...previousVariables,
-        count: totalCount,
-      };
-    },
-    getVariables(props, { count, cursor }) {
-      return {
-        count,
-        cursor,
-        groupId: props.group.id,
-      };
-    },
-    query: graphql`
-      query UserInGroupModalQuery($groupId: ID!, $count: Int!, $cursor: String) {
-        group: node(id: $groupId) {
-          ...UserInGroupModal_group @arguments(count: $count, cursor: $cursor)
-        }
-      }
-    `,
-  },
-);
+const UserInGroupModal = ({ show, group, handleClose }: Props): React.Node => {
+  const intl = useIntl();
+  const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(FRAGMENT, group);
+  return (
+    <Modal
+      id={`${data.id}-modal`}
+      show={show}
+      onClose={handleClose}
+      ariaLabel={intl.formatMessage({ id: 'people-with-access-to-project' })}>
+      <Modal.Header>
+        <Heading id="contained-modal-title-lg">{data.title}</Heading>
+      </Modal.Header>
+      <Modal.Body>
+        {data.users !== null && data.users.edges && data.users.edges.length > 0 && (
+          <ListGroupFlush>
+            {data.users.edges
+              .filter(Boolean)
+              .map(edge => edge && edge.node)
+              .filter(Boolean)
+              .map(user => (
+                <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
+                  <UserAvatar user={user} />
+                  <a
+                    href={user.url}
+                    className="align-self-center"
+                    title={intl.formatMessage(
+                      { id: 'usernames-profile' },
+                      { userName: user.username },
+                    )}>
+                    {user.username}
+                  </a>
+                </ListGroupItem>
+              ))}
+            {hasNext && (
+              <div className="text-center mt-15 mb-10">
+                <Button
+                  id="load-more"
+                  variant="secondary"
+                  variantSize="medium"
+                  disabled={isLoadingNext}
+                  onClick={() => loadNext(10)}>
+                  <FormattedMessage id={isLoadingNext ? 'global.loading' : 'global.more'} />
+                </Button>
+              </div>
+            )}
+          </ListGroupFlush>
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" variantSize="medium" onClick={handleClose}>
+          <FormattedMessage id="global.close" />
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+export default UserInGroupModal;

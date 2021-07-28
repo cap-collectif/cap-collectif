@@ -1,0 +1,305 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeaderAuthorList /> renders correctly with one author 1`] = `
+Array [
+  <div
+    aria-label="project.authors"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    id="project-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM gwxoTk"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#862d84",
+            "color": undefined,
+          }
+        }
+        title="admin"
+      >
+        a
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM hEKNNt"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#1f4a93",
+            "color": undefined,
+          }
+        }
+      >
+        <img
+          alt="welcomattic"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+          title="welcomattic"
+        />
+      </div>
+    </div>
+    <p
+      className="sc-bdnxRM fChsQe"
+      id="authors-credit"
+    >
+      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+    </p>
+  </div>,
+]
+`;
+
+exports[`<ProjectHeaderAuthorList /> renders correctly with two authors but profiles are disabled 1`] = `
+Array [
+  <div
+    aria-label="project.authors"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    id="project-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM gwxoTk"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#862d84",
+            "color": undefined,
+          }
+        }
+        title="admin"
+      >
+        a
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM hEKNNt"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#1f4a93",
+            "color": undefined,
+          }
+        }
+      >
+        <img
+          alt="welcomattic"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+          title="welcomattic"
+        />
+      </div>
+    </div>
+    <p
+      className="sc-bdnxRM fChsQe"
+      id="authors-credit"
+    >
+      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+    </p>
+  </div>,
+]
+`;
+
+exports[`<ProjectHeaderAuthorList /> renders correctly without authors 1`] = `
+Array [
+  <div
+    aria-label="project.authors"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    id="project-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM gwxoTk"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#862d84",
+            "color": undefined,
+          }
+        }
+        title="admin"
+      >
+        a
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM hEKNNt"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#1f4a93",
+            "color": undefined,
+          }
+        }
+      >
+        <img
+          alt="welcomattic"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+          title="welcomattic"
+        />
+      </div>
+    </div>
+    <p
+      className="sc-bdnxRM fChsQe"
+      id="authors-credit"
+    >
+      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+    </p>
+  </div>,
+]
+`;
+
+exports[`<ProjectHeaderAuthorList /> should render correctly 1`] = `
+Array [
+  <div
+    aria-label="project.authors"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+  <div
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    id="project-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM gwxoTk"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#862d84",
+            "color": undefined,
+          }
+        }
+        title="admin"
+      >
+        a
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM hEKNNt"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+        style={
+          Object {
+            "background": "#1f4a93",
+            "color": undefined,
+          }
+        }
+      >
+        <img
+          alt="welcomattic"
+          className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+          src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
+          title="welcomattic"
+        />
+      </div>
+    </div>
+    <p
+      className="sc-bdnxRM fChsQe"
+      id="authors-credit"
+    >
+      avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
+    </p>
+  </div>,
+]
+`;

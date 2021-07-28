@@ -126,6 +126,7 @@ export default createRefetchContainer(
           @arguments(
             theme: $theme
             orderBy: $orderBy
+            cursor: $cursor
             type: $type
             district: $district
             author: $author
@@ -154,6 +155,7 @@ export default createRefetchContainer(
         @arguments(
           theme: $theme
           orderBy: $orderBy
+          cursor: $cursor
           author: $author
           type: $type
           district: $district

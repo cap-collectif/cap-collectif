@@ -4,7 +4,9 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProjectRestrictedAccessAlert = lazy(() =>
-  import(/* webpackChunkName: "ProjectRestrictedAccessAlert" */ '~/components/Project/Page/ProjectRestrictedAccessAlert'),
+  import(
+    /* webpackChunkName: "ProjectRestrictedAccessAlert" */ '~/components/Project/Page/ProjectRestrictedAccessAlert'
+  ),
 );
 
 export default (props: { projectId: string }) => (

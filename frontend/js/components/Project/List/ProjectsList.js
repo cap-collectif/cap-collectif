@@ -114,6 +114,7 @@ class ProjectsList extends React.Component<Props> {
               @arguments(
                 theme: $theme
                 orderBy: $orderBy
+                cursor: $cursor
                 author: $author
                 type: $type
                 term: $term

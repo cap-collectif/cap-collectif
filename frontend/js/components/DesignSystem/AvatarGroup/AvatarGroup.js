@@ -58,9 +58,30 @@ export const AvatarGroup = ({
   ));
   let renderAuthorsNames;
   if (showNames) {
-    renderAuthorsNames =
-      validChildren.length <= 1 ? (
+    if (validChildren.length === 2) {
+      renderAuthorsNames = (
         <Text
+          id="authors-credit"
+          flex={['100%', 'inherit']}
+          fontWeight={400}
+          fontSize={14}
+          lineHeight="24px"
+          color="neutral-gray.900"
+          marginLeft={[0, margins.mr * -1]}
+          paddingLeft={[0, 2]}
+          height="auto"
+          display="flex"
+          alignItems="center">
+          <FormattedMessage
+            id="avatar-group-shownames-2"
+            values={{ first: validChildren[0].props.name, second: validChildren[1].props.name }}
+          />
+        </Text>
+      );
+    } else if (validChildren.length <= 1) {
+      renderAuthorsNames = (
+        <Text
+          id="authors-credit"
           flex={['100%', 'inherit']}
           fontWeight={400}
           fontSize={14}
@@ -73,7 +94,9 @@ export const AvatarGroup = ({
           alignItems="center">
           {validChildren[0].props.name}
         </Text>
-      ) : (
+      );
+    } else {
+      renderAuthorsNames = (
         <>
           <Text
             flex={['100%', 'inherit']}
@@ -106,6 +129,7 @@ export const AvatarGroup = ({
           </Text>
         </>
       );
+    }
   }
 
   return (

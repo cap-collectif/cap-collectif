@@ -26,7 +26,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters when projec
       showZero={true}
       value={60}
     />
-    <Relay(ProjectRestrictedAccessFragment)
+    <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
       project={
         Object {
@@ -94,9 +94,8 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
     <Tag
       icon="cap cap-marker-1-1"
     >
-      <Relay(ProjectHeaderDistrictsList)
+      <ProjectHeaderDistrictsList
         breakingNumber={1}
-        fontSize={14}
         project={
           Object {
             "$fragmentRefs": null,
@@ -157,7 +156,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
         }
       />
     </Tag>
-    <Relay(ProjectRestrictedAccessFragment)
+    <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
       project={
         Object {
@@ -248,7 +247,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
       showZero={true}
       value={60}
     />
-    <Relay(ProjectRestrictedAccessFragment)
+    <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
       project={
         Object {

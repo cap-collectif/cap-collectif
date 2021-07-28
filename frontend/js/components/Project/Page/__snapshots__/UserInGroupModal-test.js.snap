@@ -1,298 +1,340 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] = `
-<div>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    id="group2-modal"
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
+<div
+  aria-label="people-with-access-to-project"
+  aria-modal={true}
+  data-dialog={true}
+  hidden={false}
+  id="id-1"
+  onAnimationEnd={[Function]}
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  onTransitionEnd={[Function]}
+  role="dialog"
+  tabIndex={-1}
+>
+  <div
+    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    onClick={[Function]}
+    style={
+      Object {
+        "opacity": 0,
       }
     }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
   >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="Close"
+    <div
+      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      id="<Node-mock-id-1>-modal"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateY(-20px) translateZ(0)",
+        }
+      }
     >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h4"
-        id="contained-modal-title-lg"
+      <header
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
       >
-        <b>
-          Mon super groupe 2
-        </b>
-      </ModalTitle>
-    </ModalHeader>
-    <ListGroupFlush
-      striped={false}
-    >
-      <ListGroupItem
-        bsClass="list-group-item"
-        className="d-flex text-left"
-        id="user1"
-        key="user1"
-        listItem={false}
-      >
-        <Relay(Connect(UserAvatar))
-          user={
-            Object {
-              "$fragmentRefs": null,
-              "id": "user1",
-              "url": "http://poudre.de/perlinpinpin",
-              "username": "Perlinpinpin",
-            }
-          }
-        />
-        <a
-          className="align-self-center"
-          href="http://poudre.de/perlinpinpin"
-          title="usernames-profile"
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
         >
-          Perlinpinpin
-        </a>
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        className="d-flex text-left"
-        id="user2"
-        key="user2"
-        listItem={false}
-      >
-        <Relay(Connect(UserAvatar))
-          user={
-            Object {
-              "$fragmentRefs": null,
-              "id": "user2",
-              "url": "htp://toto.com",
-              "username": "Toto",
-            }
-          }
-        />
-        <a
-          className="align-self-center"
-          href="htp://toto.com"
-          title="usernames-profile"
+          <h2
+            className="sc-bdnxRM fenvOW"
+            id="contained-modal-title-lg"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h2>
+        </div>
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+          onClick={[Function]}
+          type="button"
         >
-          Toto
-        </a>
-      </ListGroupItem>
-    </ListGroupFlush>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[Function]}
-      />
-    </ModalFooter>
-  </Modal>
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+          />
+        </button>
+      </header>
+      <main
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+      >
+        <ul
+          className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+          striped={false}
+        >
+          <li
+            className="d-flex text-left list-group-item"
+            id="<User-mock-id-2>"
+          >
+            <span
+              className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              style={Object {}}
+            >
+              <img
+                alt="<mock-value-for-field-\\"username\\">"
+                className="img-circle object-cover user-avatar mr-10 "
+                src="<mock-value-for-field-\\"url\\">"
+                style={
+                  Object {
+                    "height": "45px",
+                    "width": "45px",
+                  }
+                }
+              />
+            </span>
+            <a
+              className="align-self-center"
+              href="<mock-value-for-field-\\"url\\">"
+              title="usernames-profile"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
+          </li>
+        </ul>
+      </main>
+      <footer
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          global.close
+        </button>
+      </footer>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<UserInGroupModal /> should render correctly with user in load more 1`] = `
-<div>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    id="group2-modal"
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
+<div
+  aria-label="people-with-access-to-project"
+  aria-modal={true}
+  data-dialog={true}
+  hidden={false}
+  id="id-1"
+  onAnimationEnd={[Function]}
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  onTransitionEnd={[Function]}
+  role="dialog"
+  tabIndex={-1}
+>
+  <div
+    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    onClick={[Function]}
+    style={
+      Object {
+        "opacity": 0,
       }
     }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
   >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="Close"
+    <div
+      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      id="<Node-mock-id-1>-modal"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateY(-20px) translateZ(0)",
+        }
+      }
     >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h4"
-        id="contained-modal-title-lg"
+      <header
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
       >
-        <b>
-          Mon super groupe 2
-        </b>
-      </ModalTitle>
-    </ModalHeader>
-    <ListGroupFlush
-      striped={false}
-    >
-      <ListGroupItem
-        bsClass="list-group-item"
-        className="d-flex text-left"
-        id="user1"
-        key="user1"
-        listItem={false}
-      >
-        <Relay(Connect(UserAvatar))
-          user={
-            Object {
-              "$fragmentRefs": null,
-              "id": "user1",
-              "url": "http://poudre.de/perlinpinpin",
-              "username": "Perlinpinpin",
-            }
-          }
-        />
-        <a
-          className="align-self-center"
-          href="http://poudre.de/perlinpinpin"
-          title="usernames-profile"
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
         >
-          Perlinpinpin
-        </a>
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        className="d-flex text-left"
-        id="user2"
-        key="user2"
-        listItem={false}
-      >
-        <Relay(Connect(UserAvatar))
-          user={
-            Object {
-              "$fragmentRefs": null,
-              "id": "user2",
-              "url": "htp://toto.com",
-              "username": "Toto",
-            }
-          }
-        />
-        <a
-          className="align-self-center"
-          href="htp://toto.com"
-          title="usernames-profile"
-        >
-          Toto
-        </a>
-      </ListGroupItem>
-      <div
-        className="text-center mt-15 mb-10"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          id="load-more"
+          <h2
+            className="sc-bdnxRM fenvOW"
+            id="contained-modal-title-lg"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h2>
+        </div>
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
           onClick={[Function]}
+          type="button"
         >
-          <FormattedMessage
-            id="global.more"
-            values={Object {}}
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
           />
-        </Button>
-      </div>
-    </ListGroupFlush>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[Function]}
-      />
-    </ModalFooter>
-  </Modal>
+        </button>
+      </header>
+      <main
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+      >
+        <ul
+          className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+          striped={false}
+        >
+          <li
+            className="d-flex text-left list-group-item"
+            id="<User-mock-id-2>"
+          >
+            <span
+              className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              style={Object {}}
+            >
+              <img
+                alt="<mock-value-for-field-\\"username\\">"
+                className="img-circle object-cover user-avatar mr-10 "
+                src="<mock-value-for-field-\\"url\\">"
+                style={
+                  Object {
+                    "height": "45px",
+                    "width": "45px",
+                  }
+                }
+              />
+            </span>
+            <a
+              className="align-self-center"
+              href="<mock-value-for-field-\\"url\\">"
+              title="usernames-profile"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
+          </li>
+        </ul>
+      </main>
+      <footer
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          global.close
+        </button>
+      </footer>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<UserInGroupModal /> should render correctly without user in group 1`] = `
-<div>
-  <Modal
-    animation={false}
-    aria-labelledby="contained-modal-title-lg"
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    id="group1-modal"
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
+<div
+  aria-label="people-with-access-to-project"
+  aria-modal={true}
+  data-dialog={true}
+  hidden={false}
+  id="id-1"
+  onAnimationEnd={[Function]}
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  onTransitionEnd={[Function]}
+  role="dialog"
+  tabIndex={-1}
+>
+  <div
+    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    onClick={[Function]}
+    style={
+      Object {
+        "opacity": 0,
       }
     }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
   >
-    <ModalHeader
-      bsClass="modal-header"
-      closeButton={true}
-      closeLabel="Close"
+    <div
+      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      id="<Node-mock-id-1>-modal"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateY(-20px) translateZ(0)",
+        }
+      }
     >
-      <ModalTitle
-        bsClass="modal-title"
-        componentClass="h4"
-        id="contained-modal-title-lg"
+      <header
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
       >
-        <b>
-          Mon super groupe 1
-        </b>
-      </ModalTitle>
-    </ModalHeader>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
-      <CloseButton
-        label="global.close"
-        onClose={[Function]}
-      />
-    </ModalFooter>
-  </Modal>
+        <div
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+        >
+          <h2
+            className="sc-bdnxRM fenvOW"
+            id="contained-modal-title-lg"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h2>
+        </div>
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+          />
+        </button>
+      </header>
+      <main
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+      >
+        <ul
+          className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+          striped={false}
+        >
+          <li
+            className="d-flex text-left list-group-item"
+            id="<User-mock-id-2>"
+          >
+            <span
+              className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              style={Object {}}
+            >
+              <img
+                alt="<mock-value-for-field-\\"username\\">"
+                className="img-circle object-cover user-avatar mr-10 "
+                src="<mock-value-for-field-\\"url\\">"
+                style={
+                  Object {
+                    "height": "45px",
+                    "width": "45px",
+                  }
+                }
+              />
+            </span>
+            <a
+              className="align-self-center"
+              href="<mock-value-for-field-\\"url\\">"
+              title="usernames-profile"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
+          </li>
+        </ul>
+      </main>
+      <footer
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          global.close
+        </button>
+      </footer>
+    </div>
+  </div>
 </div>
 `;

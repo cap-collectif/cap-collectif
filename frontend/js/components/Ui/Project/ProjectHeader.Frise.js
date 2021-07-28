@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Slider from 'react-slick';
 import styled, { type StyledComponent } from 'styled-components';
+import { useSelector } from 'react-redux';
 import AppBox from '~ui/Primitives/AppBox';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 import Modal from '~ds/Modal/Modal';
@@ -12,21 +13,48 @@ import { cleanChildren } from '~/utils/cleanChildren';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import Heading from '~ui/Primitives/Heading';
 import Tooltip from '~ds/Tooltip/Tooltip';
+import hexToRgb from '~/utils/colors/hexToRgb';
+import StartStep from '~ui/Project/SVG/Start';
+import EndStep from '~ui/Project/SVG/End';
+import MiddleStep from '~ui/Project/SVG/Step';
 
 type FriseProps = {|
   ...AppBoxProps,
   children: React.Node,
 |};
 export const Frise = ({ children, ...rest }: FriseProps) => (
-  <AppBox width="100%" paddingX={[4, 0]} marginBottom={-6} marginTop={3} {...rest}>
+  <AppBox
+    className="frise"
+    width="100%"
+    paddingX={[4, 0]}
+    marginBottom={[-8, -13]}
+    marginTop={3}
+    {...rest}>
     {children}
   </AppBox>
 );
 
-const StepsContainer: StyledComponent<{}, {}, typeof Slider> = styled(Slider)`
+const StepsContainer: StyledComponent<{ RGBPrimary: any }, {}, typeof Slider> = styled(Slider)`
   width: 100%;
+  & .slick-track {
+    margin: 0;
+  }
+  & p {
+    margin-bottom: 0;
+  }
+  & a {
+    color: initial;
+    &:hover {
+      color: initial;
+      text-decoration: none;
+    }
+  }
   .slick-slide {
     outline: none !important;
+    margin-right: 0.375rem;
+  }
+  .slick-slide:first-child {
+    margin-right: -0.625rem;
   }
   .slick-next,
   .slick-prev {
@@ -39,7 +67,12 @@ const StepsContainer: StyledComponent<{}, {}, typeof Slider> = styled(Slider)`
       &:hover,
       &:focus {
         color: initial;
-        background: #0f0038;
+        background: rgba(
+          ${props => props.RGBPrimary.r},
+          ${props => props.RGBPrimary.g},
+          ${props => props.RGBPrimary.b},
+          0.85
+        );
       }
       &.slick-disabled {
         display: none !important;
@@ -56,7 +89,7 @@ const StepArrowContainer = styled('button')`
   height: 100%;
   cursor: pointer;
   border: none;
-  background: transparent;
+  background: #fff;
   padding: 0;
   outline: none;
 `;
@@ -78,14 +111,24 @@ type StepsProps = {|
   ...AppBoxProps,
   modalTitle: string,
   children: React.Node,
+  currentStepIndex: number,
 |};
-export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
+export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: StepsProps) => {
+  const mainColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
+  const RGBPrimary = hexToRgb(mainColor);
+  const sliderEle = React.useRef<typeof Slider>(null);
   const validChildren = cleanChildren(children);
   const activeStep =
     validChildren.filter(child => {
       return !!cleanChildren(child.props.children)[0]?.props?.progress;
     })[0] || validChildren.filter(child => child.props.state === 'ACTIVE')[0];
   const isMobile = useIsMobile();
+  React.useEffect(() => {
+    const timeOutID = setTimeout(() => sliderEle.current.slickGoTo(currentStepIndex, false), 350);
+    return () => {
+      clearTimeout(timeOutID);
+    };
+  }, [currentStepIndex]);
   if (!isMobile) {
     const settings = {
       dots: false,
@@ -102,7 +145,7 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
           right={4}
           zIndex={9}
           borderRadius="buttonQuickAction"
-          backgroundColor="#3008A0"
+          backgroundColor={`rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},1)`}
           css={{ opacity: 0.6 }}
           display="flex !important"
           alignItems="center"
@@ -117,7 +160,7 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
           left={4}
           zIndex={9}
           borderRadius="buttonQuickAction"
-          backgroundColor="#3008A0"
+          backgroundColor={`rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},1)`}
           css={{ opacity: 0.6 }}
           display="flex !important"
           alignItems="center"
@@ -128,6 +171,7 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
     };
     return (
       <AppBox
+        className="frise__stepList"
         position="relative"
         display="flex"
         flexDirection="row"
@@ -139,12 +183,19 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
         justifyContent="flex-start"
         as="ul"
         boxShadow="0px 2px 8px 0px rgba(0,0,0,0.1)"
-        borderRadius={1}
+        borderRadius="normal"
         backgroundColor="white"
         height={11}
         css={{ paddingInlineStart: '0px' }}
         {...rest}>
-        <StepsContainer {...settings}>{children}</StepsContainer>
+        <StepsContainer RGBPrimary={RGBPrimary} ref={sliderEle} {...settings}>
+          {validChildren.map((child, index) =>
+            React.cloneElement(child, {
+              isStart: index === 0,
+              isEnd: validChildren.length > 5 && index === validChildren.length - 1,
+            }),
+          )}
+        </StepsContainer>
       </AppBox>
     );
   }
@@ -152,6 +203,7 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
   if (activeStep) {
     return (
       <AppBox
+        className="frise__stepList"
         position="relative"
         display="flex"
         flexDirection="row"
@@ -171,18 +223,22 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
         <Modal
           borderRadius="16px 16px 0px 0px"
           boxShadow="0px 10px 99px rgba(0, 0, 0, 0.302)"
-          margin="50% 0 0 0 !important"
           ariaLabel={modalTitle}
+          scrollBehavior="inside"
           disclosure={
-            <StepArrowContainer>
-              {React.cloneElement(activeStep)}
+            <StepArrowContainer
+              onClick={e => {
+                e.stopPropagation();
+                e.nativeEvent.stopImmediatePropagation();
+              }}>
+              {React.cloneElement(activeStep, { style: { pointerEvents: 'none' } })}
               <StepsModalToggle className="arrow">
                 <Icon
                   name="ARROW_DOWN"
                   size="md"
                   color="white"
                   borderRadius="buttonQuickAction"
-                  backgroundColor="#3008A0"
+                  backgroundColor={`rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},1)`}
                 />
               </StepsModalToggle>
             </StepArrowContainer>
@@ -198,6 +254,7 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
 
   return (
     <AppBox
+      className="frise__stepList"
       position="relative"
       display="flex"
       flexDirection="row"
@@ -217,11 +274,15 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
       <Modal
         borderRadius="16px 16px 0px 0px"
         boxShadow="0px 10px 99px rgba(0, 0, 0, 0.302)"
-        margin="50% 0 0 0 !important"
         ariaLabel={modalTitle}
+        scrollBehavior="inside"
         disclosure={
-          <StepArrowContainer>
-            {React.cloneElement(validChildren[0])}
+          <StepArrowContainer
+            onClick={e => {
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+            }}>
+            {React.cloneElement(validChildren[0], { style: { pointerEvents: 'none' } })}
             <StepsModalToggle className="arrow" style={{ height: '100%' }}>
               <Icon
                 style={{ opacity: '0.6' }}
@@ -230,7 +291,7 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
                 size="md"
                 color="white"
                 borderRadius="buttonQuickAction"
-                backgroundColor="#3008A0"
+                backgroundColor={`rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},1)`}
               />
             </StepsModalToggle>
           </StepArrowContainer>
@@ -247,19 +308,34 @@ export const Steps = ({ children, modalTitle, ...rest }: StepsProps) => {
 type StepProps = {|
   ...AppBoxProps,
   title: string,
-  content: string,
-  tooltipLabel?: string,
+  content?: string,
+  tooltipLabel?: ?string,
   state: 'ACTIVE' | 'FINISHED' | 'WAITING',
+  href: string,
   children?: React.Node,
+  isStart?: boolean,
+  isEnd?: boolean,
 |};
-export const Step = ({ title, content, tooltipLabel, state, children, ...rest }: StepProps) => {
+export const Step = ({
+  title,
+  content,
+  tooltipLabel,
+  state,
+  href,
+  children,
+  isStart = false,
+  isEnd = false,
+  ...rest
+}: StepProps) => {
+  const mainColor = useSelector(store => store.default.parameters['color.btn.primary.bg']);
+  const RGBPrimary = hexToRgb(mainColor);
   const validChildren = cleanChildren(children);
   const progressBar = validChildren[0]?.props.progress ? validChildren[0] : undefined;
   const isMobile = useIsMobile();
   const getBackgroundColor = () => {
     switch (state) {
       case 'ACTIVE':
-        return '#EBE7F9';
+        return `rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},0.08)`;
       default:
         if (isMobile) {
           return 'neutral-gray.50';
@@ -270,7 +346,7 @@ export const Step = ({ title, content, tooltipLabel, state, children, ...rest }:
   const getTextColor = () => {
     switch (state) {
       case 'ACTIVE':
-        return '#6030E8';
+        return mainColor;
       case 'FINISHED':
         return 'neutral-gray.900';
       default:
@@ -280,60 +356,81 @@ export const Step = ({ title, content, tooltipLabel, state, children, ...rest }:
 
   if (!isMobile) {
     return (
-      <Tooltip label={tooltipLabel} delay={[1500, 350]}>
-        <AppBox
-          color={getBackgroundColor()}
-          css={{
-            outline: 'initial',
-            cursor: state === 'WAITING' ? 'initial' : 'pointer',
-            '&:hover': {
-              color: state === 'WAITING' ? getBackgroundColor() : '#F8F7FD',
-            },
-          }}
-          display="flex !important"
-          flexDirection="column"
-          justifyContent="flex-start"
-          as="li"
-          position="relative"
-          marginRight={-5}
-          {...rest}>
-          <svg width="248" height="56" viewBox="0 0 248 56" fill="none">
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-              fill="currentColor"
-            />
-            <rect width="216" height="56" transform="translate(17)" fill="currentColor" />
-            <path
-              d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-              fill="currentColor"
-            />
-          </svg>
-          <Flex
-            direction="column"
-            align="center"
-            position="absolute"
-            zIndex={9}
-            width="248px"
-            top="50%"
-            left="50%"
-            style={{ transform: 'translate(-45%,-50%)' }}>
-            <Text as="p" fontSize={2} lineHeight="sm" fontWeight="semibold" color={getTextColor()}>
+      <AppBox
+        className="frise__stepItem"
+        color={getBackgroundColor()}
+        css={{
+          outline: 'initial',
+          '&:hover': {
+            color:
+              state === 'WAITING'
+                ? getBackgroundColor()
+                : `rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},0.05)`,
+          },
+        }}
+        display="flex !important"
+        flexDirection="column"
+        justifyContent="flex-start"
+        as="li"
+        position="relative"
+        marginRight={-5}
+        marginLeft={isStart ? -3 : 0}
+        {...rest}>
+        {isStart && <StartStep />}
+        {isEnd && <EndStep />}
+        {!isStart && !isEnd && <MiddleStep />}
+        <Flex
+          className="frise__stepItem__link"
+          direction="column"
+          align="center"
+          position="absolute"
+          zIndex={9}
+          width="248px"
+          top="50%"
+          left="50%"
+          as="a"
+          paddingX={4}
+          textAlign="center"
+          height="100%"
+          justify="center"
+          href={href}
+          style={{
+            transform: 'translate(-45%,-50%)',
+          }}>
+          <Tooltip label={tooltipLabel} delay={[500, 350]}>
+            <Text
+              className="frise__stepItem__link__title"
+              as="h5"
+              fontSize={2}
+              lineHeight="sm"
+              fontWeight="semibold"
+              color={getTextColor()}
+              truncate={50}>
               {title}
             </Text>
-            <Text fontSize={1} lineHeight="sm" fontWeight="normal" color={getTextColor()}>
-              {content}
-            </Text>
-          </Flex>
-          {children}
-        </AppBox>
-      </Tooltip>
+          </Tooltip>
+          <Text
+            className="frise__stepItem__link__content"
+            fontSize={1}
+            lineHeight="sm"
+            fontWeight="normal"
+            color={getTextColor()}>
+            {content}
+          </Text>
+        </Flex>
+
+        {progressBar
+          ? React.cloneElement(progressBar, {
+              width: isStart ? '222px' : '232px',
+            })
+          : null}
+      </AppBox>
     );
   }
   return (
     <Tooltip label={tooltipLabel}>
       <AppBox
+        className="frise__stepItem"
         display="flex !important"
         flexDirection="column"
         justifyContent="flex-start"
@@ -346,20 +443,36 @@ export const Step = ({ title, content, tooltipLabel, state, children, ...rest }:
         marginBottom={2}
         borderRadius="normal"
         overflow="hidden"
+        textAlign="center"
         {...rest}>
         <Flex
+          className="frise__stepItem__link"
           direction="column"
           align="center"
           position="absolute"
           zIndex={9}
-          width="100%"
+          width="calc(100% - 100px)"
           top="50%"
           left="50%"
+          as="a"
+          href={href}
           style={{ transform: 'translate(-50%,-50%)' }}>
-          <Text as="h5" fontSize={1} lineHeight="sm" fontWeight="semibold" color={getTextColor()}>
+          <Text
+            className="frise__stepItem__link__title"
+            as="h5"
+            fontSize={1}
+            lineHeight="sm"
+            fontWeight="semibold"
+            truncate={50}
+            color={getTextColor()}>
             {title}
           </Text>
-          <Text fontSize={1} lineHeight="sm" fontWeight="normal" color={getTextColor()}>
+          <Text
+            className="frise__stepItem__link__content"
+            fontSize={1}
+            lineHeight="sm"
+            fontWeight="normal"
+            color={getTextColor()}>
             {content}
           </Text>
         </Flex>
@@ -377,25 +490,29 @@ type ProgressPropTypes = {|
   progress: number,
 |};
 
-const Progress = ({ progress, ...rest }: ProgressPropTypes) => (
-  <Flex
-    direction="row"
-    width="100%"
-    height={1}
-    position="absolute"
-    bottom={0}
-    backgroundColor="#B19BED"
-    marginLeft="2px"
-    style={{ transform: 'skew(328deg,0)' }}
-    {...rest}>
-    <div
-      style={{
-        width: `${progress}%`,
-        height: '4px',
-        borderRadius: '0px 50px 50px 0px',
-        backgroundColor: '#6030E8',
-      }}
-    />
-  </Flex>
-);
+const Progress = ({ progress, ...rest }: ProgressPropTypes) => {
+  const mainColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
+  const RGBPrimary = hexToRgb(mainColor);
+  return (
+    <Flex
+      className="frise__stepItem__progressbar"
+      direction="row"
+      width="232px"
+      height={1}
+      position="absolute"
+      bottom={0}
+      backgroundColor={`rgba(${RGBPrimary.r},${RGBPrimary.g},${RGBPrimary.b},0.47)`}
+      marginLeft="2px"
+      style={{ transform: 'skew(328deg,0)' }}
+      {...rest}>
+      <AppBox
+        className="frise__stepItem__progress"
+        width={`${progress}%`}
+        height={1}
+        borderRadius="0px 50px 50px 0px"
+        backgroundColor={mainColor}
+      />
+    </Flex>
+  );
+};
 Step.Progress = Progress;

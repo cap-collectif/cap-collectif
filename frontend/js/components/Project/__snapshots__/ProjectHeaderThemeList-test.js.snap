@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeaderThemeList /> should render correctly 1`] = `
+Array [
+  <a
+    className="sc-bdnxRM HxneP ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    onClick={[Function]}
+  >
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG griLIq fZkSKg AMDLx icon"
+    />
+    <p
+      className="sc-bdnxRM hELlhr"
+      title="Immobilier "
+    >
+      Immobilier
+       
+      and-count-other-themes {"count":3}
+    </p>
+  </a>,
+  <div
+    aria-label="data_theme_list"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;
+
+exports[`<ProjectHeaderThemeList /> should render correctly when project is archived 1`] = `
+Array [
+  <a
+    className="sc-bdnxRM HxneP ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    onClick={[Function]}
+  >
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG griLIq fZkSKg AMDLx icon"
+    />
+    <p
+      className="sc-bdnxRM hELlhr"
+      title="Immobilier "
+    >
+      Immobilier
+       
+      and-count-other-themes {"count":3}
+    </p>
+  </a>,
+  <div
+    aria-label="data_theme_list"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;
+
+exports[`<ProjectHeaderThemeList /> should render correctly with the display of modal 1`] = `
+Array [
+  <a
+    className="sc-bdnxRM HxneP ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    onClick={[Function]}
+  >
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG griLIq fZkSKg AMDLx icon"
+    />
+    <p
+      className="sc-bdnxRM hELlhr"
+      title="Immobilier "
+    >
+      Immobilier
+       
+      and-count-other-themes {"count":3}
+    </p>
+  </a>,
+  <div
+    aria-label="data_theme_list"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+        >
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+          >
+            count-themes {"count":4}
+          </div>
+          <button
+            className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+            onClick={[Function]}
+            type="button"
+          >
+            <IconMock
+              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+            />
+          </button>
+        </header>
+        <main
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+        >
+          <ul
+            className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+            striped={false}
+          >
+            <li
+              className="list-group-item"
+            >
+              <a
+                href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+              >
+                Immobilier
+              </a>
+            </li>
+            <li
+              className="list-group-item"
+            >
+              <a
+                href="https://capco.dev/themes/justice?_locale=fr-FR"
+              >
+                Justice
+              </a>
+            </li>
+            <li
+              className="list-group-item"
+            >
+              <a
+                href="https://capco.dev/themes/transport?_locale=fr-FR"
+              >
+                Transport
+              </a>
+            </li>
+            <li
+              className="list-group-item"
+            >
+              <a
+                href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
+              >
+                Thème vide
+              </a>
+            </li>
+          </ul>
+        </main>
+        <footer
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+        >
+          <button
+            className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+            onClick={[Function]}
+            type="button"
+          >
+            global.close
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

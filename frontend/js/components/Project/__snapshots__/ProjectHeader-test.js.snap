@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectHeader /> should render correctly 1`] = `
+<div
+  className="sc-bdnxRM Flex___StyledAppBox-RSPpX hKRDgh projectHeader"
+>
+  <div
+    className="sc-bdnxRM mutyP projectHeader__cover"
+  >
+    <div
+      className="sc-bdnxRM jcRvHj projectHeader__cover__content"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+        id="project-header"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "default",
+          }
+        }
+      >
+        <div
+          className="sc-bdnxRM gwxoTk"
+        >
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX bIHLFK Avatar__AvatarInner-chaUKm gGHClA"
+            style={
+              Object {
+                "background": "#842d86",
+                "color": undefined,
+              }
+            }
+          >
+            <img
+              alt="Vince"
+              className="sc-bdnxRM Avatar___StyledAppBox-jLrEWR gYudlT kOoGOC"
+              src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
+              title="Vince"
+            />
+          </div>
+        </div>
+        <p
+          className="sc-bdnxRM fChsQe"
+          id="authors-credit"
+        >
+          Vince
+        </p>
+      </div>
+      <h3
+        className="sc-bdnxRM jhjGuP projectHeader__title"
+        title="Food project"
+      >
+        Food project
+      </h3>
+    </div>
+    <div
+      className="sc-bdnxRM dZqVuh projectHeader__coverImage"
+    >
+      <img
+        alt="Media Food"
+        className="sc-bdnxRM bnKRvo"
+        src="https://127.0.0.1/media/default/0001/01/providerReference58.jpg"
+        style={
+          Object {
+            "objectFit": "cover",
+          }
+        }
+      />
+    </div>
+    <div
+      className="sc-bdnxRM fyCKaM"
+    >
+      <div
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS CLPlG jVkzaf cguwDa"
+        id="restricted-access"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        title=""
+      >
+        <IconMock
+          className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
+        />
+        <p
+          className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+        >
+          restrictedaccess
+        </p>
+      </div>
+      <div
+        className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+          }
+        }
+      >
+        only-visible-by-administrators
+        <div
+          className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+          data-popper-arrow={true}
+          id="arrow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

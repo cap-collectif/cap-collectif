@@ -58,7 +58,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
           )}
           {project.districts && project.districts.totalCount > 0 && (
             <Tag icon="cap cap-marker-1-1">
-              <ProjectHeaderDistrictsList fontSize={14} project={project} breakingNumber={1}/>
+              <ProjectHeaderDistrictsList project={project} breakingNumber={1} />
             </Tag>
           )}
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />

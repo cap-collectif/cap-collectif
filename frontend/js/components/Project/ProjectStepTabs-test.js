@@ -1,112 +1,145 @@
 // @flow
 /* eslint-env jest */
-import React from 'react';
-import { shallow } from 'enzyme';
-import { ProjectStepTabs } from './ProjectStepTabs';
-import { intlMock, $refType } from '../../mocks';
+import * as React from 'react';
+import ReactTestRenderer from 'react-test-renderer';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
+import ProjectStepTabs from './ProjectStepTabs';
+import {
+  addsSupportForPortals,
+  clearSupportForPortals,
+  RelaySuspensFragmentTest,
+} from '~/testUtils';
+import type { ProjectStepTabsTestQuery } from '~relay/ProjectStepTabsTestQuery.graphql';
 
-describe('<ProposalUserVoteItem />', () => {
-  const props = {
-    project: {
-      $refType,
+describe('<ProjectStepTabs />', () => {
+  let environment;
+  let TestComponent;
+
+  const defaultMockResolvers = {
+    Project: () => ({
       steps: [
         {
-          url: 'www.test.com',
-          id: 'cs1',
-          __typename: 'PresentationStep',
-          label: 'presentation step',
-          state: 'OPENED',
-          enabled: true,
-        },
-        {
-          url: 'www.test.com',
-          id: 'cs2',
-          __typename: 'ConsultationStep',
-          label: 'open step',
-          state: 'OPENED',
-          enabled: true,
-        },
-        {
-          url: 'www.test.com',
-          id: 'cs3',
-          __typename: 'ConsultationStep',
-          label: 'timeless step',
-          state: 'OPENED',
-          enabled: true,
-        },
-        {
-          url: 'www.test.com',
-          id: 'cs4',
-          __typename: 'ConsultationStep',
-          label: 'last step',
+          id: 'pstepProjectWithOwner',
           state: 'CLOSED',
+          label: 'Présentation',
+          __typename: 'PresentationStep',
+          url:
+            'https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner',
           enabled: true,
+          timeRange: {
+            startAt: null,
+            endAt: null,
+          },
+        },
+        {
+          id: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcFByb2plY3RPd25lcg==',
+          state: 'CLOSED',
+          label: 'Consultation',
+          __typename: 'ConsultationStep',
+          url:
+            'https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet',
+          enabled: true,
+          timeRange: {
+            startAt: '2020-11-03 20:30:55',
+            endAt: '2032-11-03 06:45:12',
+          },
+        },
+        {
+          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9qZWN0V2l0aE93bmVy',
+          state: 'OPENED',
+          label: 'Dépôt',
+          __typename: 'CollectStep',
+          url:
+            'https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet',
+          enabled: true,
+          timeRange: {
+            startAt: '2020-10-16 00:00:00',
+            endAt: '2021-10-16 00:00:00',
+          },
+        },
+        {
+          id: 'questionnaireStepProjectWithOwner',
+          state: 'FUTURE',
+          label: 'Questionnaire qui dénonce',
+          __typename: 'QuestionnaireStep',
+          url:
+            'https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet',
+          enabled: true,
+          timeRange: {
+            startAt: '2020-09-11 00:00:00',
+            endAt: '2024-09-27 00:00:00',
+          },
         },
       ],
-    },
-    currentStepId: 'cs3',
-    projectId: '5',
-    intl: intlMock,
+      projectId: '5',
+    }),
   };
 
-  const oneStepProps = {
-    project: {
-      $refType,
-      steps: [
-        {
-          url: 'www.test.com',
-          id: 'cs1',
-          __typename: 'PresentationStep',
-          label: 'presentation step',
-          state: 'OPENED',
-          enabled: true,
-        },
-      ],
-    },
-    currentStepId: 'cs1',
-    projectId: '5',
-    intl: intlMock,
-  };
+  const query = graphql`
+    query ProjectStepTabsTestQuery($id: ID = "<default>") @relay_test_operation {
+      project: node(id: $id) {
+        ...ProjectStepTabs_project
+      }
+    }
+  `;
+  afterEach(() => {
+    clearSupportForPortals();
+  });
+
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    const TestRenderer = props => {
+      const data = useLazyLoadQuery<ProjectStepTabsTestQuery>(query, {});
+      if (!data.project) return null;
+      return <ProjectStepTabs project={data.project} {...props} />;
+    };
+    TestComponent = props => (
+      <RelaySuspensFragmentTest
+        store={{
+          project: { currentProjectStepById: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcFByb2plY3RPd25lcg==' },
+          default: { parameters: { 'color.btn.primary.bg': '#546E7A' } },
+        }}
+        environment={environment}>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
+    );
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+  });
 
   it('should render correctly without arrow & with active tab', () => {
-    const wrapper = shallow(<ProjectStepTabs {...props} />);
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render null when there is only one step', () => {
-    const wrapper = shallow(<ProjectStepTabs {...oneStepProps} />);
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Project: () => ({
+          steps: [
+            {
+              id: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcFByb2plY3RPd25lcg==',
+              state: 'OPENED',
+              label: 'Consultation',
+              __typename: 'ConsultationStep',
+              url:
+                'https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet',
+              enabled: true,
+              timeRange: {
+                startAt: '2020-11-03 20:30:55',
+                endAt: '2032-11-03 06:45:12',
+              },
+            },
+          ],
+          projectId: '5',
+        }),
+      }),
+    );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly with right arrow', () => {
-    const wrapper = shallow(<ProjectStepTabs {...props} />);
-    wrapper.setState({ showArrowRight: true });
-    expect(wrapper.find('#step-tabs-tab-next')).toHaveLength(1);
-    expect(wrapper.find('#step-tabs-tab-prev')).toHaveLength(0);
-  });
-
-  it('should render correctly with left arrow', () => {
-    const wrapper = shallow(<ProjectStepTabs {...props} />);
-    wrapper.setState({ showArrowLeft: true });
-    expect(wrapper.find('#step-tabs-tab-next')).toHaveLength(0);
-    expect(wrapper.find('#step-tabs-tab-prev')).toHaveLength(1);
-  });
-
-  it('should render correctly with negative translate', () => {
-    const wrapper = shallow(<ProjectStepTabs {...props} />);
-    wrapper.setState({ translateX: -300 });
-    const scrollNav = wrapper.find('#step-tabs-scroll-nav').prop('style');
-    expect(scrollNav).toHaveProperty('transform', 'translateX(-300px)');
-    expect(wrapper.find('#step-tabs-tab-next')).toHaveLength(0);
-    expect(wrapper.find('#step-tabs-tab-prev')).toHaveLength(1);
-  });
-
-  it('should render correctly with positive translate', () => {
-    const wrapper = shallow(<ProjectStepTabs {...props} />);
-    wrapper.setState({ translateX: 300 });
-    const scrollNav = wrapper.find('#step-tabs-scroll-nav').prop('style');
-    expect(scrollNav).toHaveProperty('transform', 'translateX(300px)');
-    expect(wrapper.find('#step-tabs-tab-next')).toHaveLength(1);
-    expect(wrapper.find('#step-tabs-tab-prev')).toHaveLength(0);
   });
 });

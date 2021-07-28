@@ -1,339 +1,137 @@
 // @flow
-import React, { PureComponent } from 'react';
-import { Badge, Button } from 'react-bootstrap';
-import styled, { css } from 'styled-components';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { type GlobalState } from '../../types';
-import colors from '../../utils/colors';
-import type { ProjectStepTabs_project, StepState } from '~relay/ProjectStepTabs_project.graphql';
+import * as React from 'react';
+import { useIntl } from 'react-intl';
+import { useFragment, graphql } from 'react-relay';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
+import ProjectHeader from '~ui/Project/ProjectHeader';
+import type { ProjectStepTabs_project$key } from '~relay/ProjectStepTabs_project.graphql';
+import { fromGlobalId } from '~/utils/fromGlobalId';
 
 export type Props = {|
-  project: ProjectStepTabs_project,
-  currentStepId: ?string,
-  projectId: string,
-  intl: IntlShape,
+  project: ProjectStepTabs_project$key,
 |};
-
-type State = {
-  translateX: number,
-  showArrowRight: boolean,
-  showArrowLeft: boolean,
-  firstArrowDisplay: boolean,
-};
-
-const StepExcerptBadge = styled(Badge)`
-  border-radius: 3px;
-  ${({ activeTab }: { activeTab: boolean }) =>
-    !activeTab &&
-    css`
-      background-color: ${colors.borderColor} !important;
-      color: ${colors.darkGray};
-    `}
-`;
-
-const getNavValues = () => {
-  const stepTabsBar = document.getElementById('step-tabs-list');
-  const stepTabsBarWidth: number = stepTabsBar ? stepTabsBar.offsetWidth : 0;
-  const getBoundingBar: ?Object = stepTabsBar ? stepTabsBar.getBoundingClientRect() : null;
-  const barRight: number = getBoundingBar ? getBoundingBar.right : 0;
-  const barLeft: number = getBoundingBar ? getBoundingBar.left : 0;
-
-  const activeTab: ?Object = stepTabsBar && stepTabsBar.getElementsByClassName('active')[0];
-  const getBoundingActiveTab: ?Object = activeTab && activeTab.getBoundingClientRect();
-  const activeTabLeft: number = getBoundingActiveTab ? getBoundingActiveTab.left : 0;
-  const activeTabRight: number = getBoundingActiveTab ? getBoundingActiveTab.right : 0;
-
-  const stepScrollNav: ?Object = document.getElementById('step-tabs-scroll-nav');
-  const scrollNavWidth: number = stepScrollNav ? stepScrollNav.offsetWidth : 0;
-  const getBoundingScrollNav: ?Object = stepScrollNav && stepScrollNav.getBoundingClientRect();
-  const scrollNavRight: number = getBoundingScrollNav ? getBoundingScrollNav.right : 0;
-  const scrollNavLeft: number = getBoundingScrollNav ? getBoundingScrollNav.left : 0;
-
-  const stepTabsSvg: ?Object = document.getElementById('step-tabs-svg');
-  const getBoundingStepTabsSvg: ?Object = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
-  const stepTabsSvgWidth: number = getBoundingStepTabsSvg ? getBoundingStepTabsSvg.width : 0;
-
-  return {
-    stepTabsBarWidth,
-    stepScrollNav,
-    stepTabsBar,
-    scrollNavWidth,
-    scrollNavRight,
-    scrollNavLeft,
-    stepTabsSvgWidth,
-    activeTab,
-    barRight,
-    barLeft,
-    activeTabLeft,
-    activeTabRight,
-  };
-};
-
-export class ProjectStepTabs extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      translateX: 0,
-      showArrowRight: false,
-      showArrowLeft: false,
-      firstArrowDisplay: true,
-    };
+const FRAGMENT = graphql`
+  fragment ProjectStepTabs_project on Project {
+    steps {
+      id
+      state
+      label
+      __typename
+      url
+      enabled
+      timeRange {
+        startAt
+        endAt
+      }
+    }
   }
+`;
+const ProjectStepTabs = ({ project }: Props): React.Node => {
+  const data = useFragment(FRAGMENT, project);
+  const intl = useIntl();
+  const currentStepId = useSelector(state => state.project.currentProjectStepById);
+  const { id: current } = fromGlobalId(currentStepId);
+  const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
+  React.useEffect(() => {
+    setCurrentStepIndex(
+      data.steps.findIndex(elem => {
+        const { id } = fromGlobalId(elem.id);
+        return id === current;
+      }),
+    );
+  }, [current, data.steps]);
 
-  componentDidMount = () => {
-    const {
-      barRight,
-      barLeft,
-      activeTab,
-      activeTabRight,
-      activeTabLeft,
-      scrollNavWidth,
-      stepTabsSvgWidth,
-      stepTabsBarWidth,
-    } = getNavValues();
+  const returnStepStatus = step => {
+    if (step.state !== 'FUTURE') {
+      if (step.state === 'CLOSED' && step.__typename !== 'PresentationStep') {
+        return intl.formatMessage({ id: 'step.status.closed' });
+      }
+      if (step.timeRange?.startAt && step.timeRange?.endAt && step.__typename === 'OtherStep') {
+        return intl.formatMessage({ id: 'step.status.open' });
+      }
+      if (
+        step.timeRange?.startAt &&
+        step.timeRange?.endAt &&
+        step.__typename !== 'OtherStep' &&
+        step.__typename !== 'PresentationStep'
+      ) {
+        const count = moment(step.timeRange?.endAt).diff(moment(), 'days');
+        if (count === 0) {
+          const hours = moment(step.timeRange?.endAt).diff(moment(), 'hours');
+          return intl.formatMessage({ id: 'count.block.hoursLeft' }, { count: hours });
+        }
+        return intl.formatMessage({ id: 'count.block.daysLeft' }, { count });
+      }
 
-    // move left
-    if (activeTabRight > barRight) {
-      const diffRight = barRight - activeTabRight;
-      this.setState({ translateX: diffRight - stepTabsSvgWidth });
-    }
-
-    // if it doesn't move
-    if (
-      (activeTabRight <= barRight &&
-        activeTabLeft >= barLeft &&
-        scrollNavWidth > stepTabsBarWidth) ||
-      (scrollNavWidth > stepTabsBarWidth && !activeTab)
-    ) {
-      this.setState({ showArrowRight: true });
+      return '';
     }
   };
-
-  componentDidUpdate = (prevProps: Props, preState: State) => {
-    const { firstArrowDisplay, translateX } = this.state;
-    const { barRight, scrollNavRight, activeTabRight } = getNavValues();
-
-    const nextArrow: ?Object = document.getElementById('step-tabs-tab-next');
-    const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width : 0;
-    const nextArrowRight: number = nextArrow ? nextArrow.getBoundingClientRect().right : 0;
-
-    if (preState.translateX === 0 && translateX !== 0) {
-      if (translateX < 0) {
-        // eslint-disable-next-line react/no-did-update-set-state
-        this.setState({ showArrowLeft: true });
+  const getTooltipText = step => {
+    if (
+      step.state === 'FUTURE' &&
+      step.timeRange?.startAt &&
+      step.__typename !== 'PresentationStep'
+    ) {
+      return intl.formatMessage(
+        { id: 'frise-tooltip-text' },
+        {
+          date: intl.formatDate(moment(step.timeRange?.startAt), {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }),
+        },
+      );
+    }
+    return null;
+  };
+  const renderProgressBar = step => {
+    const { id: decoded } = fromGlobalId(step.id);
+    if (step.state === 'OPENED') {
+      if (decoded === current && step.timeRange?.startAt && step.timeRange?.endAt) {
+        const progress =
+          moment().diff(moment(step.timeRange.startAt), 'days') /
+          moment(step.timeRange?.endAt).diff(moment(step.timeRange?.startAt), 'days');
+        return <ProjectHeader.Step.Progress progress={progress * 100} />;
       }
     }
 
-    if (firstArrowDisplay) {
-      if (scrollNavRight + translateX > barRight) {
-        // eslint-disable-next-line react/no-did-update-set-state
-        this.setState({ showArrowRight: true, firstArrowDisplay: false });
-      }
-    }
-    const { showArrowRight } = this.state;
-    if (
-      nextArrowRight === barRight &&
-      activeTabRight > barRight &&
-      preState.showArrowRight === false &&
-      showArrowRight !== false
-    ) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ translateX: translateX - nextArrowWidth });
-    }
+    return null;
   };
-
-  getClass = (stepId: string) => {
-    const { currentStepId } = this.props;
-
-    if (currentStepId === stepId) {
-      return 'active';
-    }
-  };
-
-  getTranslateLeft = () => {
-    const { translateX } = this.state;
-    const { stepTabsBarWidth, barLeft, scrollNavLeft } = getNavValues();
-
-    const diffLeft = barLeft - scrollNavLeft;
-
-    if (diffLeft < stepTabsBarWidth) {
-      this.setState({
-        translateX: translateX + diffLeft,
-        showArrowLeft: false,
-        showArrowRight: true,
-      });
-    }
-
-    if (diffLeft > stepTabsBarWidth) {
-      this.setState({
-        translateX: translateX + stepTabsBarWidth,
-        showArrowRight: true,
-      });
-    }
-
-    if (diffLeft === stepTabsBarWidth) {
-      this.setState({
-        translateX: translateX + stepTabsBarWidth,
-        showArrowRight: true,
-        showArrowLeft: false,
-      });
-    }
-  };
-
-  getTranslateRight = () => {
-    const { translateX } = this.state;
-    const { stepTabsBarWidth, scrollNavRight, barRight, stepTabsSvgWidth } = getNavValues();
-
-    const diffRight = scrollNavRight - barRight;
-
-    if (diffRight < stepTabsBarWidth) {
-      this.setState({
-        translateX: translateX - diffRight - stepTabsSvgWidth,
-        showArrowRight: false,
-        showArrowLeft: true,
-      });
-    }
-
-    if (diffRight > stepTabsBarWidth) {
-      this.setState({
-        translateX: translateX - stepTabsBarWidth,
-        showArrowLeft: true,
-      });
-    }
-
-    if (diffRight === stepTabsBarWidth) {
-      this.setState({
-        translateX: translateX - stepTabsBarWidth,
-        showArrowLeft: true,
-        showArrowRight: false,
-      });
-    }
-  };
-
-  renderStepState(state: ?StepState) {
-    if (!state) return null;
-    if (state === 'OPENED') {
-      return <FormattedMessage id="step.status.open" />;
+  const getColorState = (stepId, state) => {
+    const { id: decoded } = fromGlobalId(stepId);
+    if (decoded === current) {
+      return 'ACTIVE';
     }
     if (state === 'FUTURE') {
-      return <FormattedMessage id="step.status.future" />;
+      return 'WAITING';
     }
-    if (state === 'CLOSED') {
-      return <FormattedMessage id="step.status.closed" />;
-    }
-    // eslint-disable-next-line no-unused-expressions
-    (state: empty);
+    return 'FINISHED';
+  };
+  if (!data || data.steps.length <= 1) {
+    return null;
   }
-
-  render() {
-    const { project, intl } = this.props;
-
-    if (!project || project.steps.length <= 1) {
-      return null;
-    }
-
-    const { translateX, showArrowLeft, showArrowRight } = this.state;
-    const translation = `translateX(${translateX}px)`;
-
-    return (
-      <div className="step-tabs hidden-print">
-        <div className="step-tabs__bar container">
-          <div id="step-tabs-content" className="position-relative">
-            {showArrowLeft && (
-              <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
-                <Button bsStyle="link" onClick={this.getTranslateLeft}>
-                  <i className="cap-arrow-65" />
-                </Button>
-              </div>
-            )}
-            {showArrowRight && (
-              <div className="step-tabs__tab-next" id="step-tabs-tab-next">
-                <Button bsStyle="link" onClick={this.getTranslateRight}>
-                  <i className="cap-arrow-66" />
-                </Button>
-              </div>
-            )}
-            <div className="step-tabs__list" id="step-tabs-list">
-              <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
-                {project.steps
-                  .filter(step => step.enabled)
-                  .map((step, key) => (
-                    <li
-                      className={this.getClass(step.id)}
-                      key={key}
-                      title={`${step.label} - ${intl.formatMessage({
-                        id: 'global.active.step',
-                      })}`}>
-                      <a href={step.url} className="d-flex">
-                        <div className="navbar__step-nb">
-                          <span>{key + 1}</span>
-                        </div>
-
-                        <div className="navbar__step">
-                          <span className="navbar__step-title">
-                            <span className="navbar__step-nb_small">{key + 1}.</span>
-                            {step.label}
-                          </span>
-                          <p className="excerpt">
-                            {step.__typename !== 'PresentationStep' && (
-                              <StepExcerptBadge activeTab={step.state === 'OPENED'}>
-                                {this.renderStepState(step.state)}
-                              </StepExcerptBadge>
-                            )}
-                          </p>
-                        </div>
-                      </a>
-                      <svg
-                        id="step-tabs-svg"
-                        height="80"
-                        width="21"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <filter id="f1" x="0" y="0" width="200%" height="200%">
-                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                            <feColorMatrix
-                              result="matrixOut"
-                              in="offOut"
-                              type="matrix"
-                              values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                            />
-                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
-                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                          </filter>
-                        </defs>
-                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
-                      </svg>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state: GlobalState) => ({
-  currentStepId: state.project.currentProjectStepById,
-});
-
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(ProjectStepTabs));
-
-export default createFragmentContainer(container, {
-  project: graphql`
-    fragment ProjectStepTabs_project on Project {
-      steps {
-        id
-        state
-        label
-        __typename
-        url
-        enabled
-      }
-    }
-  `,
-});
+  return (
+    <ProjectHeader.Frise>
+      <ProjectHeader.Steps
+        modalTitle={intl.formatMessage({ id: 'project-header-step-modal-title' })}
+        currentStepIndex={currentStepIndex}>
+        {data.steps
+          .filter(step => step.enabled)
+          .map(step => (
+            <ProjectHeader.Step
+              key={step.id}
+              title={step.label}
+              href={step.url}
+              content={returnStepStatus(step)}
+              tooltipLabel={getTooltipText(step)}
+              state={getColorState(step.id, step.state)}>
+              {renderProgressBar(step)}
+            </ProjectHeader.Step>
+          ))}
+      </ProjectHeader.Steps>
+    </ProjectHeader.Frise>
+  );
+};
+export default ProjectStepTabs;

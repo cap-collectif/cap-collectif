@@ -27,7 +27,6 @@ class CollectPage extends Page
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button',
         'restricted-access' => '#restricted-access',
-        'restricted-access-link' => '#restricted-access > span > span',
         'restricted-group-link' => ' > button',
     ];
 
@@ -120,8 +119,6 @@ class CollectPage extends Page
     public function clickOnRestrictedAccess()
     {
         $this->getElement('restricted-access')->click();
-
-        return $this->getElement('restricted-access-link')->click();
     }
 
     public function iClickOnUserGroupModal(string $groupId)

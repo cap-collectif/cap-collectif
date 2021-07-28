@@ -1,85 +1,57 @@
 // @flow
-import React from 'react';
-import { OverlayTrigger } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
-import styled from 'styled-components';
+import * as React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { graphql, useFragment } from 'react-relay';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import UserGroupModal from './UserGroupModal';
-import Tag from '../../Ui/Labels/Tag';
-import Tooltip from '../../Utils/Tooltip';
-import type { RenderCustomAccess_project } from '~relay/RenderCustomAccess_project.graphql';
-import colors from '~/styles/modules/colors';
+import Tag from '~ds/Tag/Tag';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import type { RenderCustomAccess_project$key } from '~relay/RenderCustomAccess_project.graphql';
+import { ICON_NAME } from '~ds/Icon/Icon';
 
-type Props = {
-  project: RenderCustomAccess_project,
-  lockIcon?: ?string,
-};
-type State = {
-  showModal: boolean,
-};
-
-const StyledTag = styled(Tag)`
-  color: ${props => (props.archived ? `${colors['neutral-gray']['500']}` : 'inherit')};
-  background: none;
+type Props = {| +project: RenderCustomAccess_project$key |};
+const FRAGMENT = graphql`
+  fragment RenderCustomAccess_project on Project
+    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+    restrictedViewers(first: $count, after: $cursor) {
+      totalUserCount
+    }
+    archived
+    ...UserGroupModal_project @arguments(count: $count, cursor: $cursor)
+  }
 `;
 
-export class RenderCustomAccess extends React.Component<Props, State> {
-  state = {
-    showModal: false,
-  };
+const RenderCustomAccess = ({ project }: Props): React.Node => {
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
+  const intl = useIntl();
+  const data = useFragment(FRAGMENT, project);
 
-  showModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  hideModal = () => {
-    this.setState({ showModal: false });
-  };
-
-  render() {
-    const { project, lockIcon } = this.props;
-    let nbUserInGroups = 0;
-    const lock = lockIcon || 'cap-lock-2';
-
-    if (
-      project != null &&
-      project.restrictedViewers != null &&
-      project.restrictedViewers.totalUserCount != null
-    ) {
-      nbUserInGroups = project.restrictedViewers.totalUserCount;
-    }
-
-    const tooltip = (
-      <Tooltip id="tooltip">
-        <FormattedMessage id="only-visible-by" values={{ num: nbUserInGroups }} />
-      </Tooltip>
-    );
-
-    const { showModal } = this.state;
-
-    return (
-      <React.Fragment>
-        <StyledTag icon={`cap ${lock} mr-1`} onClick={this.showModal} archived={project?.archived}>
-          <OverlayTrigger placement="top" overlay={tooltip}>
-            <FormattedMessage id="restrictedaccess" />
-          </OverlayTrigger>
-        </StyledTag>
-        <div>
-          <UserGroupModal project={project} show={showModal} handleClose={this.hideModal} />
-        </div>
-      </React.Fragment>
-    );
+  let nbUserInGroups = 0;
+  if (
+    data != null &&
+    data.restrictedViewers != null &&
+    data.restrictedViewers.totalUserCount != null
+  ) {
+    nbUserInGroups = data.restrictedViewers.totalUserCount;
   }
-}
 
-export default createFragmentContainer(RenderCustomAccess, {
-  project: graphql`
-    fragment RenderCustomAccess_project on Project {
-      restrictedViewers(first: $count, after: $cursor) {
-        totalUserCount
-      }
-      archived
-      ...UserGroupModal_project @arguments(count: $count, cursor: $cursor)
-    }
-  `,
-});
+  return (
+    <React.Fragment>
+      <Tooltip
+        id="tooltip"
+        label={intl.formatMessage({ id: 'only-visible-by' }, { num: nbUserInGroups })}>
+        <Tag
+          id="restricted-access"
+          icon={ICON_NAME.LOCK}
+          variant="neutral-gray"
+          color={data?.archived ? 'neutral-gray.500' : 'neutral-gray.800'}
+          onClick={onOpen}>
+          <FormattedMessage id="restrictedaccess" />
+        </Tag>
+      </Tooltip>
+
+      <UserGroupModal project={data} show={isOpen} handleClose={onClose} />
+    </React.Fragment>
+  );
+};
+export default RenderCustomAccess;

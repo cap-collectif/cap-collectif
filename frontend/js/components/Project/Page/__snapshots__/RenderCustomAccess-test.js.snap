@@ -1,113 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RenderCustomAccess /> should render correctly 1`] = `
-<Fragment>
-  <RenderCustomAccess__StyledTag
-    archived={false}
-    icon="cap cap-lock-2 mr-1"
+Array [
+  <div
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS CLPlG jVkzaf cguwDa"
+    id="restricted-access"
     onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    title=""
   >
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      overlay={
-        <_default
-          id="tooltip"
-        >
-          <FormattedMessage
-            id="only-visible-by"
-            values={
-              Object {
-                "num": 15,
-              }
-            }
-          />
-        </_default>
-      }
-      placement="top"
-      trigger={
-        Array [
-          "hover",
-          "focus",
-        ]
-      }
-    >
-      <FormattedMessage
-        id="restrictedaccess"
-        values={Object {}}
-      />
-    </OverlayTrigger>
-  </RenderCustomAccess__StyledTag>
-  <div>
-    <Relay(injectIntl(UserGroupModal))
-      handleClose={[Function]}
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "archived": false,
-          "restrictedViewers": Object {
-            "totalUserCount": 15,
-          },
-        }
-      }
-      show={false}
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
     />
-  </div>
-</Fragment>
-`;
-
-exports[`<RenderCustomAccess /> should render correctly with archived project 1`] = `
-<Fragment>
-  <RenderCustomAccess__StyledTag
-    archived={true}
-    icon="cap cap-lock-2 mr-1"
-    onClick={[Function]}
+    <p
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+    >
+      restrictedaccess
+    </p>
+  </div>,
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    id="tooltip"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
   >
-    <OverlayTrigger
-      defaultOverlayShown={false}
-      overlay={
-        <_default
-          id="tooltip"
-        >
-          <FormattedMessage
-            id="only-visible-by"
-            values={
-              Object {
-                "num": 15,
-              }
-            }
-          />
-        </_default>
-      }
-      placement="top"
-      trigger={
-        Array [
-          "hover",
-          "focus",
-        ]
-      }
+    <p
+      className="sc-bdnxRM cZcArZ"
+      title="only-visible-by"
     >
-      <FormattedMessage
-        id="restrictedaccess"
-        values={Object {}}
-      />
-    </OverlayTrigger>
-  </RenderCustomAccess__StyledTag>
-  <div>
-    <Relay(injectIntl(UserGroupModal))
-      handleClose={[Function]}
-      project={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "archived": true,
-          "restrictedViewers": Object {
-            "totalUserCount": 15,
-          },
-        }
-      }
-      show={false}
+      only-visible-by
+    </p>
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
     />
-  </div>
-</Fragment>
+  </div>,
+  <div
+    aria-label="groups-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
 `;

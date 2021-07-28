@@ -282,13 +282,6 @@ Scenario: Pierre can access to a restricted project to his user group
   And I should not see "ptondereau" in the "#group3-modal .list-group" element
   Then I search "ptondereau" in list "#group3-modal .list-group"
 
-Scenario: Anonymous can access a project and see all authors
-  Given I visited "collect page" with:
-    | projectSlug | questions-responses                |
-    | stepSlug    | collecte-des-questions-chez-youpie |
-  Then I should see "Questions/Responses"
-  And I should see 2 "#project-header .user-avatar" elements
-
 Scenario: User can access project's trashed opinions
   Given feature "project_trash" is enabled
   And I am logged in as admin

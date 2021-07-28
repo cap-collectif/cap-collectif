@@ -1,75 +1,91 @@
 // @flow
 /* eslint-env jest */
-import React from 'react';
-import { shallow } from 'enzyme';
-
-import { ProjectHeaderDistrictsList } from './ProjectHeaderDistrictsList';
-import { $refType } from '../../mocks';
-
-const props = {
-  breakingNumber: 3,
-  fontSize: 16,
-  project: {
-    $refType,
-    districts: {
-      totalCount: 5,
-      edges: [
-        { node: { name: 'zone 1' } },
-        { node: { name: 'zone 2' } },
-        { node: { name: 'zone 3' } },
-      ],
-    },
-    archived: false
-  },
-};
-
-const propsArchived = {
-  ...props,
-  project: {
-    ...props.project,
-    archived: true
-  }
-}
-
-const propsWithMoreDistricts = {
-  breakingNumber: 3,
-  fontSize: 16,
-  project: {
-    $refType,
-    districts: {
-      totalCount: 5,
-      edges: [
-        { node: { name: 'zone 1' } },
-        { node: { name: 'zone 2' } },
-        { node: { name: 'zone 3' } },
-        { node: { name: 'zone 4' } },
-        { node: { name: 'zone 5' } },
-      ],
-    },
-    archived: false
-  },
-};
+import * as React from 'react';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
+import ReactTestRenderer, { act } from 'react-test-renderer';
+import ProjectHeaderDistrictsList, { DistrictsButton } from './ProjectHeaderDistrictsList';
+import {
+  addsSupportForPortals,
+  clearSupportForPortals,
+  RelaySuspensFragmentTest,
+} from '~/testUtils';
+import type { ProjectHeaderDistrictsListTestQuery } from '~relay/ProjectHeaderDistrictsListTestQuery.graphql';
 
 describe('<ProjectHeaderDistrictsList />', () => {
-  it('should render correctly', () => {
-    const wrapper = shallow(<ProjectHeaderDistrictsList {...props} />);
-    expect(wrapper).toMatchSnapshot();
+  let environment;
+  let TestComponent;
+
+  const defaultMockResolvers = {
+    Project: () => ({
+      districts: {
+        totalCount: 5,
+        edges: [
+          { node: { name: 'zone 1' } },
+          { node: { name: 'zone 2' } },
+          { node: { name: 'zone 3' } },
+          { node: { name: 'zone 4' } },
+          { node: { name: 'zone 5' } },
+        ],
+      },
+      archived: false,
+    }),
+  };
+
+  const query = graphql`
+    query ProjectHeaderDistrictsListTestQuery($id: ID = "<default>") @relay_test_operation {
+      project: node(id: $id) {
+        ...ProjectHeaderDistrictsList_project
+      }
+    }
+  `;
+  afterEach(() => {
+    clearSupportForPortals();
   });
 
-  it('should render correctly with many districts', () => {
-    const wrapper = shallow(<ProjectHeaderDistrictsList {...propsWithMoreDistricts} />);
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    const TestRenderer = props => {
+      const data = useLazyLoadQuery<ProjectHeaderDistrictsListTestQuery>(query, {});
+      if (!data.project) return null;
+      return <ProjectHeaderDistrictsList project={data.project} breakingNumber={3} {...props} />;
+    };
+    TestComponent = props => (
+      <RelaySuspensFragmentTest
+        store={{
+          default: { parameters: { 'color.link.hover': '#546E7A' } },
+        }}
+        environment={environment}>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
+    );
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+  });
+
+  it('should render correctly', () => {
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with the display of modal', () => {
-    const wrapper = shallow(<ProjectHeaderDistrictsList {...propsWithMoreDistricts} />);
-    wrapper.setState({ show: true });
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
+
+    act(() => {
+      wrapper.root.findByType(DistrictsButton).props.onClick();
+    });
     expect(wrapper).toMatchSnapshot();
   });
-
   it('should render correctly when project is archived', () => {
-    const wrapper = shallow(<ProjectHeaderDistrictsList {...propsArchived} />);
-    wrapper.setState({ show: true });
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Project: () => ({ ...defaultMockResolvers.Project(), archived: true }),
+      }),
+    );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
 });

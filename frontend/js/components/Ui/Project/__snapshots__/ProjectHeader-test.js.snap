@@ -1,14 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectHeader /> should render correctly 1`] = `
-<AppBox
-  display="flex"
-  flexDirection="column"
+<ForwardRef
+  className="projectHeader"
+  direction="column"
   maxWidth="100%"
+  paddingY={
+    Array [
+      0,
+      9,
+    ]
+  }
 >
   <Cover>
     <Content>
-      <Authors>
+      <Authors
+        active={true}
+      >
         <Avatar
           name="Mikasa Estucasa"
           src="https://risibank.fr/cache/stickers/d1261/126102-full.png"
@@ -71,6 +79,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         />
         <Theme
           content="Projet de loi, consentement, seuil d’âge, mineur"
+          href="#"
         />
       </Info>
       <Socials>
@@ -95,28 +104,33 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
   </Cover>
   <Frise>
     <Steps
+      currentStepIndex={0}
       modalTitle="Etapes de Consultation"
     >
       <Step
         content="terminé"
+        href="#"
         state="FINISHED"
         title="Dépots de projets"
         tooltipLabel="Terminé"
       />
       <Step
         content="30 jours restants"
+        href="#"
         state="FINISHED"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
       />
       <Step
         content="30 jours restants"
+        href="#"
         state="FINISHED"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
       />
       <Step
         content="30 jours restants"
+        href="#"
         state="ACTIVE"
         title="Consultation"
         tooltipLabel="30 jours restants"
@@ -127,23 +141,26 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       </Step>
       <Step
         content="30 jours restants"
+        href="#"
         state="WAITING"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
       />
       <Step
         content="30 jours restants"
+        href="#"
         state="WAITING"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
       />
       <Step
         content="30 jours restants"
+        href="#"
         state="WAITING"
         title="Le vote des projets"
         tooltipLabel="Test tooltip"
       />
     </Steps>
   </Frise>
-</AppBox>
+</ForwardRef>
 `;

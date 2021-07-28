@@ -1,134 +1,156 @@
 // @flow
 /* eslint-env jest */
-import React from 'react';
-import { shallow } from 'enzyme';
-import { UserInGroupModal } from './UserInGroupModal';
-import { $refType, $fragmentRefs, relayPaginationMock, intlMock } from '../../../mocks';
+import * as React from 'react';
+import { graphql, useLazyLoadQuery } from 'react-relay';
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
+import ReactTestRenderer from 'react-test-renderer';
+import {
+  addsSupportForPortals,
+  clearSupportForPortals,
+  RelaySuspensFragmentTest,
+} from '~/testUtils';
+import UserInGroupModal from './UserInGroupModal';
+import type { UserInGroupModalTestQuery } from '~relay/UserInGroupModalTestQuery.graphql';
 
 describe('<UserInGroupModal />', () => {
-  const noUser = {
-    id: 'group1',
-    title: 'Mon super groupe 1',
-    users: {
-      edges: [],
-      pageInfo: {
-        hasPreviousPage: false,
-        hasNextPage: false,
-        startCursor: 'null',
-        endCursor: 'null',
-      },
-      totalCount: 0,
-    },
-    $refType,
-  };
+  let environment;
+  let TestComponent;
+  let handleClose;
 
-  const twoUsers = {
-    id: 'group2',
-    title: 'Mon super groupe 2',
-    users: {
-      edges: [
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
-          node: {
-            $fragmentRefs,
-            id: 'user1',
-            username: 'Perlinpinpin',
-            url: 'http://poudre.de/perlinpinpin',
-          },
-        },
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
-          node: {
-            $fragmentRefs,
-            id: 'user2',
-            username: 'Toto',
-            url: 'htp://toto.com',
-          },
-        },
-      ],
-      pageInfo: {
-        hasPreviousPage: false,
-        hasNextPage: false,
-        startCursor: 'YXJyYXljb25uZWN0aW9uOjA=',
-        endCursor: 'YXJyYXljb25uZWN0aW9uOjE=',
-      },
-      totalCount: 2,
-    },
-    $refType,
-  };
-  const twoUsersWithNextPage = {
-    id: 'group2',
-    title: 'Mon super groupe 2',
-    users: {
-      edges: [
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
-          node: {
-            $fragmentRefs,
-            id: 'user1',
-            username: 'Perlinpinpin',
-            url: 'http://poudre.de/perlinpinpin',
-          },
-        },
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
-          node: {
-            $fragmentRefs,
-            id: 'user2',
-            username: 'Toto',
-            url: 'htp://toto.com',
-          },
-        },
-      ],
-      pageInfo: {
-        hasPreviousPage: false,
-        hasNextPage: true,
-        startCursor: 'YXJyYXljb25uZWN0aW9uOjA=',
-        endCursor: 'YXJyYXljb25uZWN0aW9uOjE=',
-      },
-      totalCount: 2,
-    },
-    $refType,
-  };
+  const defaultMockResolvers = {};
+  const query = graphql`
+    query UserInGroupModalTestQuery($id: ID = "<default>", $first: Int, $cursor: String)
+      @relay_test_operation {
+      group: node(id: $id) {
+        ...UserInGroupModal_group @arguments(count: $first, cursor: $cursor)
+      }
+    }
+  `;
 
-  const intl = {
-    intl: intlMock,
-  };
+  afterEach(() => {
+    clearSupportForPortals();
+  });
+
+  beforeEach(() => {
+    addsSupportForPortals();
+    environment = createMockEnvironment();
+    handleClose = jest.fn();
+    const TestRenderer = props => {
+      const data = useLazyLoadQuery<UserInGroupModalTestQuery>(query, { first: 10, cursor: null });
+      if (!data.group) return null;
+      return <UserInGroupModal handleClose={handleClose} show group={data.group} {...props} />;
+    };
+    TestComponent = props => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
+    );
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, defaultMockResolvers),
+    );
+  });
 
   it('should render correctly without user in group', () => {
-    const wrapper = shallow(
-      <UserInGroupModal
-        group={noUser}
-        show={false}
-        handleClose={() => {}}
-        relay={relayPaginationMock}
-        {...intl}
-      />,
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Group: () => ({
+          id: 'group1',
+          title: 'Mon super groupe 1',
+          users: {
+            edges: [],
+            pageInfo: {
+              hasPreviousPage: false,
+              hasNextPage: false,
+              startCursor: 'null',
+              endCursor: 'null',
+            },
+            totalCount: 0,
+          },
+        }),
+      }),
     );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly with user in 2 groups', () => {
-    const wrapper = shallow(
-      <UserInGroupModal
-        group={twoUsers}
-        show
-        handleClose={() => {}}
-        relay={relayPaginationMock}
-        {...intl}
-      />,
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Group: () => ({
+          id: 'group2',
+          title: 'Mon super groupe 2',
+          users: {
+            edges: [
+              {
+                cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
+                node: {
+                  id: 'user1',
+                  username: 'Perlinpinpin',
+                  url: 'http://poudre.de/perlinpinpin',
+                },
+              },
+              {
+                cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
+                node: {
+                  id: 'user2',
+                  username: 'Toto',
+                  url: 'htp://toto.com',
+                },
+              },
+            ],
+            pageInfo: {
+              hasPreviousPage: false,
+              hasNextPage: false,
+              startCursor: 'YXJyYXljb25uZWN0aW9uOjA=',
+              endCursor: 'YXJyYXljb25uZWN0aW9uOjE=',
+            },
+            totalCount: 2,
+          },
+        }),
+      }),
     );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly with user in load more', () => {
-    const wrapper = shallow(
-      <UserInGroupModal
-        group={twoUsersWithNextPage}
-        show
-        handleClose={() => {}}
-        relay={{ ...relayPaginationMock, hasMore: () => true }}
-        {...intl}
-      />,
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        ...defaultMockResolvers,
+        Group: () => ({
+          id: 'group2',
+          title: 'Mon super groupe 2',
+          users: {
+            edges: [
+              {
+                cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
+                node: {
+                  id: 'user1',
+                  username: 'Perlinpinpin',
+                  url: 'http://poudre.de/perlinpinpin',
+                },
+              },
+              {
+                cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
+                node: {
+                  id: 'user2',
+                  username: 'Toto',
+                  url: 'htp://toto.com',
+                },
+              },
+            ],
+            pageInfo: {
+              hasPreviousPage: false,
+              hasNextPage: true,
+              startCursor: 'YXJyYXljb25uZWN0aW9uOjA=',
+              endCursor: 'YXJyYXljb25uZWN0aW9uOjE=',
+            },
+            totalCount: 2,
+          },
+        }),
+      }),
     );
+    const wrapper = ReactTestRenderer.create(<TestComponent />);
     expect(wrapper).toMatchSnapshot();
   });
 });

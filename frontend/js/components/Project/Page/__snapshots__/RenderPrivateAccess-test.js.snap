@@ -1,100 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <_default
-      id="tooltip"
-    >
-      <FormattedMessage
-        id="only-visible-by-administrators"
-        values={Object {}}
-      />
-    </_default>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <RenderPrivateAccess__StyledTag
-    archived={false}
-    icon="cap cap-lock-2 mr-1"
+Array [
+  <div
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS CLPlG jVkzaf cguwDa"
+    id="restricted-access"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    title=""
   >
-    <FormattedMessage
-      id="restrictedaccess"
-      values={Object {}}
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
     />
-  </RenderPrivateAccess__StyledTag>
-</OverlayTrigger>
-`;
-
-exports[`<RenderPrivateAccess /> should render correctly for archived project 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <_default
-      id="tooltip"
+    <p
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
     >
-      <FormattedMessage
-        id="global.draft.only_visible_by_you"
-        values={Object {}}
-      />
-    </_default>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <RenderPrivateAccess__StyledTag
-    archived={true}
-    icon="cap cap-lock-2 mr-1"
+      restrictedaccess
+    </p>
+  </div>,
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
   >
-    <FormattedMessage
-      id="restrictedaccess"
-      values={Object {}}
+    global.draft.only_visible_by_you
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
     />
-  </RenderPrivateAccess__StyledTag>
-</OverlayTrigger>
+  </div>,
+]
 `;
 
 exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
-<OverlayTrigger
-  defaultOverlayShown={false}
-  overlay={
-    <_default
-      id="tooltip"
-    >
-      <FormattedMessage
-        id="global.draft.only_visible_by_you"
-        values={Object {}}
-      />
-    </_default>
-  }
-  placement="top"
-  trigger={
-    Array [
-      "hover",
-      "focus",
-    ]
-  }
->
-  <RenderPrivateAccess__StyledTag
-    archived={false}
-    icon="cap cap-lock-1 mr-1"
+Array [
+  <div
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS CLPlG jVkzaf cguwDa"
+    id="restricted-access"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    title=""
   >
-    <FormattedMessage
-      id="restrictedaccess"
-      values={Object {}}
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG cyHrtp cIIQlv AMDLx icon"
     />
-  </RenderPrivateAccess__StyledTag>
-</OverlayTrigger>
+    <p
+      className="sc-bdnxRM ffkNxr Tag___StyledText-hGgPZv bchNbO"
+    >
+      restrictedaccess
+    </p>
+  </div>,
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
+  >
+    global.draft.only_visible_by_you
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
+    />
+  </div>,
+]
 `;

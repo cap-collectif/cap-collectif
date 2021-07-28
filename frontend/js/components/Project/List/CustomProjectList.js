@@ -20,7 +20,7 @@ const query = graphql`
       projects {
         edges {
           node {
-            ...ProjectPreview_project
+            ...ProjectPreview_project @arguments(count: $count, cursor: $cursor)
           }
         }
       }

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import AppBox from '~ui/Primitives/AppBox';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 import {
@@ -16,18 +15,18 @@ import {
   Info,
 } from './ProjectHeader.Cover';
 import { Frise, Step, Steps } from './ProjectHeader.Frise';
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   ...AppBoxProps,
-  coverURL: string,
   children?: React.Node,
 |};
 
-const ProjectHeader = ({ children, coverURL, ...rest }: Props) => {
+const ProjectHeader = ({ children, ...rest }: Props) => {
   return (
-    <AppBox display="flex" flexDirection="column" maxWidth="100%" {...rest}>
+    <Flex direction="column" className="projectHeader" maxWidth="100%" paddingY={[0, 9]} {...rest}>
       {children}
-    </AppBox>
+    </Flex>
   );
 };
 ProjectHeader.Cover = Cover;

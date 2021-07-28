@@ -62,11 +62,10 @@ class ParametersRuntime implements RuntimeExtensionInterface
     public function getFeaturesFlagsForRelay(): array
     {
         $flags = $this->manager->all();
-        $formattedFlags = array_map(function ($key) use ($flags) {
+
+        return array_map(function ($key) use ($flags) {
             return ['type' => $key, 'enabled' => $flags[$key]];
         }, array_keys($flags));
-
-        return $formattedFlags;
     }
 
     public function getSiteParameters(): array
@@ -126,6 +125,7 @@ class ParametersRuntime implements RuntimeExtensionInterface
                 'color.votes_bar.btn.bg',
                 'color.votes_bar.btn.text',
                 'color.link.default',
+                'color.link.hover',
             ];
 
             foreach ($colors as $color) {

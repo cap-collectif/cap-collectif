@@ -1,172 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
-<Modal
-  animation={false}
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  id="show-authors-modal"
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
-  onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
-  show={true}
+<div
+  aria-label="project.authors"
+  aria-modal={true}
+  data-dialog={true}
+  hidden={false}
+  id="id-1"
+  onAnimationEnd={[Function]}
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  onTransitionEnd={[Function]}
+  role="dialog"
+  tabIndex={-1}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
+  <div
+    className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+    onClick={[Function]}
+    style={
+      Object {
+        "opacity": 0,
+      }
+    }
   >
-    <ModalTitle
-      bsClass="modal-title"
-      className="font-weight-bold"
-      componentClass="h4"
-      id="contained-modal-title-lg"
-    >
-      <FormattedMessage
-        id="number-of-authors"
-        values={
-          Object {
-            "num": 1,
-          }
+    <div
+      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      id="show-authors-modal"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateY(-20px) translateZ(0)",
         }
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <ProjectHeaderAuthorsModal__ProjectAuthorList
-      className="mb-0"
+      }
     >
-      <ProjectHeaderAuthorsModal__ProjectAuthorItem
-        key="0"
+      <header
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
       >
         <div
-          className="d-flex"
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
         >
-          <Relay(Connect(UserAvatar))
-            features={
-              Object {
-                "allow_users_to_propose_events": false,
-                "app_news": false,
-                "blog": false,
-                "calendar": false,
-                "captcha": false,
-                "consent_external_communication": false,
-                "consent_internal_communication": false,
-                "consultation_plan": false,
-                "disconnect_openid": false,
-                "display_map": false,
-                "display_pictures_in_depository_proposals_list": false,
-                "display_pictures_in_event_list": false,
-                "districts": false,
-                "export": false,
-                "external_project": false,
-                "http_redirects": false,
-                "import_proposals": false,
-                "login_facebook": false,
-                "login_franceconnect": false,
-                "login_gplus": false,
-                "login_paris": false,
-                "login_saml": false,
-                "majority_vote_question": false,
-                "members_list": false,
-                "multilangue": false,
-                "new_feature_questionnaire_result": false,
-                "newsletter": false,
-                "phone_confirmation": false,
-                "privacy_policy": false,
-                "profiles": false,
-                "project_trash": false,
-                "projects_form": false,
-                "proposal_revisions": false,
-                "read_more": false,
-                "registration": false,
-                "report_browers_errors_to_sentry": false,
-                "reporting": false,
-                "restrict_connection": false,
-                "restrict_registration_via_email_domain": false,
-                "search": false,
-                "secure_password": false,
-                "server_side_rendering": false,
-                "share_buttons": false,
-                "shield_mode": false,
-                "sso_by_pass_auth": false,
-                "themes": false,
-                "unstable__admin_editor": false,
-                "unstable__analysis": false,
-                "unstable__analytics_page": false,
-                "unstable__debate": false,
-                "unstable__emailing": false,
-                "unstable__emailing_parameters": false,
-                "unstable__new_consultation_page": false,
-                "unstable__new_project_card": false,
-                "unstable__remote_events": false,
-                "unstable__tipsmeee": false,
-                "unstable_project_admin": false,
-                "user_type": false,
-                "votes_evolution": false,
-                "votes_min": false,
-                "zipcode_at_register": false,
-              }
-            }
-            user={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "id": "1",
-                "url": "test.com",
-                "userType": Object {
-                  "name": "userType1",
-                },
-                "username": "toto",
-              }
-            }
-          />
-          <div
-            className="d-flex fd-column"
+          <h2
+            className="sc-bdnxRM fenvOW"
           >
-            <span
-              className="font-weight-bold"
-            >
-              toto
-            </span>
-             
-            <span
-              className="excerpt"
-            >
-              userType1
-            </span>
-          </div>
+            number-of-authors
+          </h2>
         </div>
-      </ProjectHeaderAuthorsModal__ProjectAuthorItem>
-    </ProjectHeaderAuthorsModal__ProjectAuthorList>
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-  </ModalFooter>
-</Modal>
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+          onClick={[Function]}
+          type="button"
+        >
+          <IconMock
+            className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+          />
+        </button>
+      </header>
+      <main
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+      >
+        <div
+          className="ListGroupFlush__Container-eGshRq kTxvA-D ProjectHeaderAuthorsModal__ProjectAuthorList-ewUUPt gcaloH mb-0 list-group-flush list-group"
+          striped={false}
+        >
+          <span
+            className="ProjectHeaderAuthorsModal__ProjectAuthorItem-fAXgWq jevrND projectAuthorItem list-group-item"
+          >
+            <div
+              className="d-flex"
+            >
+              <span
+                className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                onMouseOut={[Function]}
+                onMouseOver={[Function]}
+                style={Object {}}
+              >
+                <svg
+                  className="img-circle avatar user-avatar mr-10 "
+                  height="45px"
+                  style={
+                    Object {
+                      "boxShadow": "0 0px 5px rgba(0, 0, 0, 0.175)",
+                    }
+                  }
+                  viewBox="0 0 24 24"
+                  width="45px"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <style>
+                      
+            .a {
+              fill: #fff;
+            }
+          
+                    </style>
+                  </defs>
+                  <g
+                    transform="translate(0)"
+                  >
+                    <circle
+                      className="a"
+                      cx="12"
+                      cy="12"
+                      r="12"
+                    />
+                    <path
+                      className="default-avatar-svg"
+                      d="M-788.14-180.224h0A12,12,0,0,1-791-188a11.921,11.921,0,0,1,3.515-8.485A11.921,11.921,0,0,1-779-200a11.923,11.923,0,0,1,8.486,3.515A11.921,11.921,0,0,1-767-188a12,12,0,0,1-2.859,7.774c-.932-.973-2.924-1.7-5.445-2.631l-.937-.348a.221.221,0,0,1-.142-.2v-1.851a.217.217,0,0,1,.073-.163,3.7,3.7,0,0,0,1.221-2.414.215.215,0,0,1,.062-.133,1.663,1.663,0,0,0,.388-.785,1.991,1.991,0,0,0-.278-1.685.219.219,0,0,1-.033-.22,7.235,7.235,0,0,0,.741-3.719c-.289-1.444-2.328-2.005-3.986-2.047l-.184,0c-1.316,0-2.924.313-3.488,1.192a.219.219,0,0,1-.149.1,1.621,1.621,0,0,0-1.1.631c-.891,1.2.084,3.815.1,3.839a.222.222,0,0,1-.043.2,1.971,1.971,0,0,0-.3,1.706,1.663,1.663,0,0,0,.388.785.21.21,0,0,1,.062.133,3.7,3.7,0,0,0,1.221,2.414.22.22,0,0,1,.074.165v1.851a.218.218,0,0,1-.142.2l-.939.349c-2.517.925-4.506,1.656-5.441,2.629Z"
+                      transform="translate(791 200)"
+                    />
+                  </g>
+                </svg>
+              </span>
+              <div
+                className="d-flex fd-column"
+              >
+                <span
+                  className="font-weight-bold"
+                >
+                  admin
+                </span>
+                <span
+                  className="excerpt"
+                >
+                  Citoyen
+                </span>
+              </div>
+            </div>
+          </span>
+        </div>
+      </main>
+      <footer
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM fvBSZY"
+      >
+        <button
+          className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kFclcg"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          global.close
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>
 `;
