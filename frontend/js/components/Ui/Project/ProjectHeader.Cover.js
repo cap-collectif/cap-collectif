@@ -77,7 +77,7 @@ export const Title = ({ children, ...rest }: TitleProps) => {
       fontWeight="semibold"
       color="neutral-gray.900"
       marginTop={2}
-      truncate={70}
+      truncate={130}
       {...rest}>
       {children}
     </Text>
