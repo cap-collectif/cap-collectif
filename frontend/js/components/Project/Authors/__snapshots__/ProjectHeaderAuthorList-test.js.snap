@@ -21,7 +21,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -67,7 +67,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe"
+      className="sc-bdnxRM fChsQe platform__body"
       id="authors-credit"
     >
       avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
@@ -97,7 +97,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -143,7 +143,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe"
+      className="sc-bdnxRM fChsQe platform__body"
       id="authors-credit"
     >
       avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
@@ -173,7 +173,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -219,7 +219,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe"
+      className="sc-bdnxRM fChsQe platform__body"
       id="authors-credit"
     >
       avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}
@@ -249,7 +249,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -295,7 +295,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM fChsQe"
+      className="sc-bdnxRM fChsQe platform__body"
       id="authors-credit"
     >
       avatar-group-shownames-2 {"first":"admin","second":"welcomattic"}

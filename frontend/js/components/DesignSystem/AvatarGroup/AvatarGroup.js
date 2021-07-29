@@ -62,6 +62,7 @@ export const AvatarGroup = ({
       renderAuthorsNames = (
         <Text
           id="authors-credit"
+          className="platform__body"
           flex={['100%', 'inherit']}
           fontWeight={400}
           fontSize={14}
@@ -82,6 +83,7 @@ export const AvatarGroup = ({
       renderAuthorsNames = (
         <Text
           id="authors-credit"
+          className="platform__body"
           flex={['100%', 'inherit']}
           fontWeight={400}
           fontSize={14}
@@ -101,6 +103,7 @@ export const AvatarGroup = ({
           <Text
             flex={['100%', 'inherit']}
             fontWeight={400}
+            className="platform__body"
             fontSize={14}
             lineHeight="24px"
             color="neutral-gray.900"
@@ -117,6 +120,7 @@ export const AvatarGroup = ({
           <Text
             flex={['100%', 'inherit']}
             fontWeight={400}
+            className="platform__body"
             fontSize={14}
             lineHeight="24px"
             color="neutral-gray.900"

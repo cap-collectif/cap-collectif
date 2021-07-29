@@ -11,7 +11,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       className="sc-bdnxRM jcRvHj projectHeader__cover__content"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
         id="project-header"
         onClick={[Function]}
         style={
@@ -41,14 +41,14 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           </div>
         </div>
         <p
-          className="sc-bdnxRM fChsQe"
+          className="sc-bdnxRM fChsQe platform__body"
           id="authors-credit"
         >
           Vince
         </p>
       </div>
       <h3
-        className="sc-bdnxRM jhjGuP projectHeader__title"
+        className="sc-bdnxRM jhjGuP projectHeader__title platform__title"
         title="Food project"
       >
         Food project

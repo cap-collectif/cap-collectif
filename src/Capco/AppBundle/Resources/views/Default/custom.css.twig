@@ -671,6 +671,14 @@
     .h6 {
         font-family: {{ current_font().heading.familyName|raw }};
     }
+    
+    .platform__title {
+        font-family: {{ current_font().heading.familyName|raw }} !important;
+    }
+.platform__body {
+    font-family: {{ current_font().body.familyName|raw }} !important;
+}
+    
     body h1,
     body h2,
     body h3,

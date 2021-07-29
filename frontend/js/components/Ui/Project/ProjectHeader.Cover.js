@@ -69,7 +69,7 @@ type TitleProps = {|
 export const Title = ({ children, ...rest }: TitleProps) => {
   return (
     <Text
-      className="projectHeader__title"
+      className="projectHeader__title platform__title"
       width="100%"
       as="h3"
       fontSize={[4, 6]}
@@ -139,7 +139,7 @@ export const Authors = ({ children, active, ...rest }: AuthorsProps) => {
   return (
     <AvatarGroup
       id="project-header"
-      className="projectHeader__authors"
+      className="projectHeader__authors platform__body"
       minHeight={isMobile ? 13 : 9}
       marginTop={[-8, 0]}
       zIndex={0}
@@ -210,7 +210,7 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
       as="li"
       {...rest}>
       <Heading
-        className="projectHeader__block__content"
+        className="projectHeader__block__content platform__body"
         id={contentId || ''}
         fontSize={[2, 4]}
         lineHeight="base"
@@ -220,7 +220,7 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
         {typeof content === 'number' ? formatBigNumber(content) : content}
       </Heading>
       <Text
-        className="projectHeader__block__title"
+        className="projectHeader__block__title platform__body"
         color="neutral-gray.900"
         fontSize={[1, 4]}
         lineHeight="base"
@@ -277,7 +277,13 @@ const Location = ({ content, ...rest }: LocationProps) => (
     as="li"
     {...rest}>
     <Icon color="neutral-gray.500" size="md" name="PIN_O" marginLeft="-5px" />
-    <Text fontSize={[1, 2]} lineHeight="sm" fontWeight="normal" color="gray.900" truncate={35}>
+    <Text
+      className="platform__body"
+      fontSize={[1, 2]}
+      lineHeight="sm"
+      fontWeight="normal"
+      color="gray.900"
+      truncate={35}>
       {content}
     </Text>
   </AppBox>
@@ -302,7 +308,13 @@ const Theme = ({ content, href, ...rest }: ThemeProps) => (
     href={href}
     {...rest}>
     <Icon color="neutral-gray.500" size="md" name="FOLDER_O" marginLeft="-3px" />
-    <Text fontSize={[1, 2]} lineHeight="sm" fontWeight="normal" color="gray.900" truncate={35}>
+    <Text
+      className="platform__body"
+      fontSize={[1, 2]}
+      lineHeight="sm"
+      fontWeight="normal"
+      color="gray.900"
+      truncate={35}>
       {content}
     </Text>
   </AppBox>

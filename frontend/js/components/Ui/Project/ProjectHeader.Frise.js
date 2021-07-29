@@ -397,9 +397,9 @@ export const Step = ({
           style={{
             transform: 'translate(-45%,-50%)',
           }}>
-          <Tooltip label={tooltipLabel} delay={[500, 350]}>
+          <Tooltip className="platform__body" label={tooltipLabel} delay={[500, 350]}>
             <Text
-              className="frise__stepItem__link__title"
+              className="frise__stepItem__link__title platform__body"
               as="h5"
               fontSize={2}
               lineHeight="sm"
@@ -410,7 +410,7 @@ export const Step = ({
             </Text>
           </Tooltip>
           <Text
-            className="frise__stepItem__link__content"
+            className="frise__stepItem__link__content platform__body"
             fontSize={1}
             lineHeight="sm"
             fontWeight="normal"
@@ -428,7 +428,7 @@ export const Step = ({
     );
   }
   return (
-    <Tooltip label={tooltipLabel}>
+    <Tooltip className="platform__body" label={tooltipLabel}>
       <AppBox
         className="frise__stepItem"
         display="flex !important"
@@ -458,7 +458,7 @@ export const Step = ({
           href={href}
           style={{ transform: 'translate(-50%,-50%)' }}>
           <Text
-            className="frise__stepItem__link__title"
+            className="frise__stepItem__link__title platform__body"
             as="h5"
             fontSize={1}
             lineHeight="sm"
@@ -468,7 +468,7 @@ export const Step = ({
             {title}
           </Text>
           <Text
-            className="frise__stepItem__link__content"
+            className="frise__stepItem__link__content platform__body"
             fontSize={1}
             lineHeight="sm"
             fontWeight="normal"

@@ -86,13 +86,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   }
                 >
                   <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
                     title="Présentation"
                   >
                     Présentation
                   </h5>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
                   >
                     
                   </p>
@@ -157,13 +157,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   }
                 >
                   <h5
-                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title"
+                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title platform__body"
                     title="Consultation"
                   >
                     Consultation
                   </h5>
                   <p
-                    className="sc-bdnxRM AiBJM frise__stepItem__link__content"
+                    className="sc-bdnxRM AiBJM frise__stepItem__link__content platform__body"
                   >
                     step.status.closed
                   </p>
@@ -228,13 +228,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   }
                 >
                   <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
                     title="Dépôt"
                   >
                     Dépôt
                   </h5>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
                   >
                     count.block.daysLeft
                   </p>
@@ -299,13 +299,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   }
                 >
                   <h5
-                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title"
+                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title platform__body"
                     title="Questionnaire qui dénonce"
                   >
                     Questionnaire qui dénonce
                   </h5>
                   <div
-                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ platform__body"
                     style={
                       Object {
                         "opacity": 0,
@@ -326,7 +326,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     />
                   </div>
                   <p
-                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content"
+                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content platform__body"
                   />
                 </a>
               </li>
@@ -427,13 +427,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   }
                 >
                   <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
                     title="Présentation"
                   >
                     Présentation
                   </h5>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
                   >
                     
                   </p>
@@ -498,13 +498,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   }
                 >
                   <h5
-                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title"
+                    className="sc-bdnxRM hvVQBw frise__stepItem__link__title platform__body"
                     title="Consultation"
                   >
                     Consultation
                   </h5>
                   <p
-                    className="sc-bdnxRM AiBJM frise__stepItem__link__content"
+                    className="sc-bdnxRM AiBJM frise__stepItem__link__content platform__body"
                   >
                     step.status.closed
                   </p>
@@ -569,13 +569,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   }
                 >
                   <h5
-                    className="sc-bdnxRM OHwgU frise__stepItem__link__title"
+                    className="sc-bdnxRM OHwgU frise__stepItem__link__title platform__body"
                     title="Dépôt"
                   >
                     Dépôt
                   </h5>
                   <p
-                    className="sc-bdnxRM erHgoo frise__stepItem__link__content"
+                    className="sc-bdnxRM erHgoo frise__stepItem__link__content platform__body"
                   >
                     count.block.daysLeft
                   </p>
@@ -640,13 +640,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   }
                 >
                   <h5
-                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title"
+                    className="sc-bdnxRM cWYEuU frise__stepItem__link__title platform__body"
                     title="Questionnaire qui dénonce"
                   >
                     Questionnaire qui dénonce
                   </h5>
                   <div
-                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+                    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ platform__body"
                     style={
                       Object {
                         "opacity": 0,
@@ -667,7 +667,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     />
                   </div>
                   <p
-                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content"
+                    className="sc-bdnxRM gzYoCo frise__stepItem__link__content platform__body"
                   />
                 </a>
               </li>
