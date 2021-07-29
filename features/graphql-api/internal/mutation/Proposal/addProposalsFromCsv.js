@@ -7,10 +7,13 @@ const AddProposalsFromCsvMutation = /* GraphQL */ `
       badLines
       duplicates
       mandatoryMissing
+      importableProposals
       importedProposals {
         edges {
           node {
             title
+            webPageUrl
+            facebookUrl
           }
         }
       }

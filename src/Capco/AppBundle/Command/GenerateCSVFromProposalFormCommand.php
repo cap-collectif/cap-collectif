@@ -119,7 +119,7 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
 
         $header = array_flip($initHeader);
         if (isset($header['address'])) {
-            $address = !$next ? 'Format GEOJSON' : 'Tour Eiffel, 75007 Paris';
+            $address = !$next ? 'Format Geocoding' : 'Tour Eiffel, 75007 Paris';
             $example = array_merge($example, [$address]);
         }
         if (isset($header['category'])) {
@@ -142,6 +142,24 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         }
         if (isset($header['summary'])) {
             $example = array_merge($example, ['texte brut']);
+        }
+        if (isset($header['webPageUrl'])) {
+            $example = array_merge($example, ['URL']);
+        }
+        if (isset($header['linkedInUrl'])) {
+            $example = array_merge($example, ['URL']);
+        }
+        if (isset($header['youtubeUrl'])) {
+            $example = array_merge($example, ['URL']);
+        }
+        if (isset($header['facebookUrl'])) {
+            $example = array_merge($example, ['URL']);
+        }
+        if (isset($header['twitterUrl'])) {
+            $example = array_merge($example, ['URL']);
+        }
+        if (isset($header['instagramUrl'])) {
+            $example = array_merge($example, ['URL']);
         }
         foreach (
             $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next)

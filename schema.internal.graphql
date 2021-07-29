@@ -637,6 +637,9 @@ type AddProposalsFromCsvPayload {
 
   """code of error"""
   errorCode: ProposalImportsErrorCode
+
+  """Number of importable proposals."""
+  importableProposals: Int!
   clientMutationId: String
 }
 

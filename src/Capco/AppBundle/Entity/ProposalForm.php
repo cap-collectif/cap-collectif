@@ -1056,6 +1056,24 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         if ($this->usingSummary) {
             $fields = array_merge($fields, ['summary']);
         }
+        if ($this->usingWebPage) {
+            $fields = array_merge($fields, ['webPageUrl']);
+        }
+        if ($this->usingLinkedIn) {
+            $fields = array_merge($fields, ['linkedInUrl']);
+        }
+        if ($this->usingYoutube) {
+            $fields = array_merge($fields, ['youtubeUrl']);
+        }
+        if ($this->usingFacebook) {
+            $fields = array_merge($fields, ['facebookUrl']);
+        }
+        if ($this->usingTwitter) {
+            $fields = array_merge($fields, ['twitterUrl']);
+        }
+        if ($this->usingTwitter) {
+            $fields = array_merge($fields, ['instagramUrl']);
+        }
 
         return $fields;
     }

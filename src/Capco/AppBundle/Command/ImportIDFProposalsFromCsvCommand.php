@@ -52,19 +52,15 @@ class ImportIDFProposalsFromCsvCommand extends Command
                 InputArgument::REQUIRED,
                 'Please provide the proposal form id where you want to import proposals.'
             )
-            ->addOption(
-                'delimiter',
-                'd',
-                InputOption::VALUE_OPTIONAL,
-                'Delimiter used in csv',
-                ';'
-            );
+            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';')
+            ->addOption('dryRun', 'dr', InputOption::VALUE_OPTIONAL, '', false);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $this->importProposalsFromCsv->setFilePath($input->getArgument('filePath'));
         $this->importProposalsFromCsv->setDelimiter($input->getOption('delimiter'));
+        $dryRun = $input->getOption('dryRun');
         $proposalFormId = $input->getArgument('proposal-form');
         $proposalForm = $this->proposalFormRepository->find($proposalFormId);
         if (!$proposalForm) {
@@ -77,10 +73,13 @@ class ImportIDFProposalsFromCsvCommand extends Command
         try {
             $result = $this->importProposalsFromCsv->import(
                 $proposalForm->getStep(),
-                false,
+                $dryRun,
                 $output
             );
 
+            $output->writeln(
+                '<info>' . $result['importableProposals'] . ' proposals are importable.</info>'
+            );
             $output->writeln(
                 '<info>' .
                     \count($result['importedProposals']) .

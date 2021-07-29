@@ -77,6 +77,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $proposalForm = $this->proposalFormRepository->find($input->offsetGet('proposalFormId'));
         if (!$proposalForm) {
             return [
+                'importableProposals' => 0,
                 'importedProposals' => [],
                 'badLines' => [],
                 'duplicates' => [],
@@ -89,6 +90,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
 
         try {
             $proposals = $this->importProposalsFromCsv->import($proposalForm->getStep(), $dryRun);
+
             $this->em->remove($media);
 
             $proposals['importedProposals'] = $this->getConnection(
@@ -101,6 +103,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
             switch ($exception->getMessage()) {
                 case self::EMPTY_FILE:
                     return [
+                        'importableProposals' => 0,
                         'importedProposals' => [],
                         'badLines' => [],
                         'duplicates' => [],
@@ -109,6 +112,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
                     ];
                 case self::BAD_DATA_MODEL:
                     return [
+                        'importableProposals' => 0,
                         'importedProposals' => [],
                         'badLines' => [],
                         'duplicates' => [],

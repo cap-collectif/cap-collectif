@@ -18,3 +18,6 @@ InternalAddProposalsFromCsvPayload:
             errorCode:
                 type: 'ProposalImportsErrorCode'
                 description: 'code of error'
+            importableProposals:
+                type: 'Int!'
+                description: 'Number of importable proposals.'

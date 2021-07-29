@@ -429,7 +429,7 @@ class ProposalMutation implements ContainerAwareInterface
             $proposal->setStatus($defaultStatus);
         }
 
-        $values = $this->hydrateSocialNetworks($values, $proposal, $proposalForm, true);
+        $values = $this::hydrateSocialNetworks($values, $proposal, $proposalForm, true);
         $form = $this->formFactory->create(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
@@ -524,7 +524,7 @@ class ProposalMutation implements ContainerAwareInterface
         $this->shouldBeDraft($proposal, $author, $values, $wasDraft, $draft);
 
         $values = $this->fixValues($values, $proposalForm);
-        $values = $this->hydrateSocialNetworks($values, $proposal, $proposalForm);
+        $values = $this::hydrateSocialNetworks($values, $proposal, $proposalForm);
 
         /** @var Form $form */
         $form = $this->formFactory->create(ProposalAdminType::class, $proposal, [
@@ -594,46 +594,48 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function hydrateSocialNetworks(
+    public static function hydrateSocialNetworks(
         array $values,
         Proposal $proposal,
         ProposalForm $proposalForm,
-        bool $create = false
-    ) {
+        bool $create = false,
+        $unsetValue = true
+    ): array {
         $socialNetworks =
             !$create && $proposal->getProposalSocialNetworks()
                 ? $proposal->getProposalSocialNetworks()
                 : (new ProposalSocialNetworks())->setProposal($proposal);
 
         $proposal->setProposalSocialNetworks($socialNetworks);
-
-        if ($proposalForm->isUsingWebPage()) {
+        if ($proposalForm->isUsingWebPage() && isset($values['webPageUrl'])) {
             $socialNetworks->setWebPageUrl($values['webPageUrl']);
         }
-        if ($proposalForm->isUsingFacebook()) {
+        if ($proposalForm->isUsingFacebook() && isset($values['facebookUrl'])) {
             $socialNetworks->setFacebookUrl($values['facebookUrl']);
         }
-        if ($proposalForm->isUsingTwitter()) {
+        if ($proposalForm->isUsingTwitter() && isset($values['twitterUrl'])) {
             $socialNetworks->setTwitterUrl($values['twitterUrl']);
         }
-        if ($proposalForm->isUsingInstagram()) {
+        if ($proposalForm->isUsingInstagram() && isset($values['instagramUrl'])) {
             $socialNetworks->setInstagramUrl($values['instagramUrl']);
         }
-        if ($proposalForm->isUsingLinkedIn()) {
+        if ($proposalForm->isUsingLinkedIn() && isset($values['linkedInUrl'])) {
             $socialNetworks->setLinkedInUrl($values['linkedInUrl']);
         }
-        if ($proposalForm->isUsingYoutube()) {
+        if ($proposalForm->isUsingYoutube() && isset($values['youtubeUrl'])) {
             $socialNetworks->setYoutubeUrl($values['youtubeUrl']);
         }
 
-        unset(
-            $values['webPageUrl'],
-            $values['facebookUrl'],
-            $values['twitterUrl'],
-            $values['instagramUrl'],
-            $values['linkedInUrl'],
-            $values['youtubeUrl']
-        );
+        if ($unsetValue) {
+            unset(
+                $values['webPageUrl'],
+                $values['facebookUrl'],
+                $values['twitterUrl'],
+                $values['instagramUrl'],
+                $values['linkedInUrl'],
+                $values['youtubeUrl']
+            );
+        }
 
         return $values;
     }

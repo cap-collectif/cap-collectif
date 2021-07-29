@@ -13,6 +13,7 @@ const mutation = graphql`
       badLines
       duplicates
       mandatoryMissing
+      importableProposals
       importedProposals {
         totalCount
         edges {

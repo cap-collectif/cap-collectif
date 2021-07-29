@@ -64,6 +64,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $proposalFormRepository->find('badUUID')->willReturn(null);
 
         $fail = [
+            'importableProposals' => 0,
             'importedProposals' => [],
             'badLines' => [],
             'duplicates' => [],
@@ -106,6 +107,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             ->willThrow(new \RuntimeException('EMPTY_FILE'));
 
         $fail = [
+            'importableProposals' => 0,
             'importedProposals' => [],
             'badLines' => [],
             'duplicates' => [],
@@ -148,6 +150,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             ->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
 
         $fail = [
+            'importableProposals' => 0,
             'importedProposals' => [],
             'badLines' => [],
             'duplicates' => [],

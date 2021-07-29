@@ -11,11 +11,14 @@ Object {
       5,
     ],
     "errorCode": null,
+    "importableProposals": 0,
     "importedProposals": Object {
       "edges": Array [
         Object {
           "node": Object {
+            "facebookUrl": "https://facebook.com/user/toto",
             "title": "test OK",
+            "webPageUrl": "https://perdu.com",
           },
         },
       ],
@@ -38,6 +41,7 @@ Object {
       5,
     ],
     "errorCode": null,
+    "importableProposals": 1,
     "importedProposals": Object {
       "edges": Array [],
     },

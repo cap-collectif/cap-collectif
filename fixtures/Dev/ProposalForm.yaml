@@ -386,12 +386,12 @@ Capco\AppBundle\Entity\ProposalForm:
         step: '@collectstepIdf3'
         usingThemes: true
         usingAddress: true
-        usingDistrict: true
+        usingDistrict: false
         usingDescription: true
         usingIllustration: true
         usingCategories: true
         usingSummary: true
-        districtMandatory: true
+        districtMandatory: false
         themeMandatory: false
         descriptionMandatory: true
         categoryMandatory: true

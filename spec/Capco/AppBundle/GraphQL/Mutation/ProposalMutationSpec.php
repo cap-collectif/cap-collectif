@@ -435,11 +435,11 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $proposal->getProposalSocialNetworks()->willReturn(null);
         $proposal->setProposalSocialNetworks(\Prophecy\Argument::any())->willReturn($proposal);
-        $this->hydrateSocialNetworks($values, $proposal, $proposalForm, $create)->shouldReturn([
+        $this::hydrateSocialNetworks($values, $proposal, $proposalForm, $create)->shouldReturn([
             'otherField' => 'value',
         ]);
 
-        $proposalSocialNetworks->setWebPageUrl(null)->shouldBeCalled();
+        $proposalSocialNetworks->setWebPageUrl(null)->shouldNotBeCalled();
         $proposalSocialNetworks->setFacebookUrl('facebookUrl')->shouldNotBeCalled();
         $proposalSocialNetworks->setTwitterUrl('twitterUrl')->shouldBeCalled();
         $proposalSocialNetworks->setInstagramUrl('instagramUrl')->shouldBeCalled();
@@ -447,7 +447,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalSocialNetworks->setYoutubeUrl('youtubeUrl')->shouldBeCalled();
 
         $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
-        $this->hydrateSocialNetworks($values, $proposal, $proposalForm, $create)->shouldReturn([
+        $this::hydrateSocialNetworks($values, $proposal, $proposalForm, $create)->shouldReturn([
             'otherField' => 'value',
         ]);
     }

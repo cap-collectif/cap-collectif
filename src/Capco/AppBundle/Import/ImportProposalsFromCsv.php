@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalsFromCsvMutation;
+use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
@@ -22,6 +23,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Utils\Map;
+use Capco\AppBundle\Utils\SpoutHelper;
 use Capco\AppBundle\Utils\Text;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -53,6 +55,7 @@ class ImportProposalsFromCsv
     protected LoggerInterface $logger;
     protected ThemeRepository $themeRepository;
     protected Indexer $indexer;
+    protected Reader $reader;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -107,8 +110,11 @@ class ImportProposalsFromCsv
                 $this->proposalForm->getCustomFields()
             )
         );
-
-        $rows = $this->getRecords();
+        $reader = $this->getRecords();
+        $rows = $reader
+            ->getSheetIterator()
+            ->current()
+            ->getRowIterator();
         $rows->rewind();
         $count = \count(iterator_to_array($rows));
 
@@ -119,11 +125,9 @@ class ImportProposalsFromCsv
         if (!$this->isValidHeaders($rows->current()->toArray())) {
             throw new \RuntimeException(AddProposalsFromCsvMutation::BAD_DATA_MODEL);
         }
-        $createdProposals = [];
-        $proposalsFail = [];
-        $mandatoryMissing = [];
 
-        $duplicates = $this->getDuplicates($rows, $step);
+        $associativeRowsWithHeaderLine = $this->getAssociativeRowsColumns($reader);
+        $duplicates = $this->getDuplicates($associativeRowsWithHeaderLine, $step);
         if (empty($step)) {
             throw new \RuntimeException('STEP_NOT_FOUND');
         }
@@ -132,10 +136,14 @@ class ImportProposalsFromCsv
             $progress = new ProgressBar($output, $count - 1);
             $progress->start();
         }
-
+        $createdProposals = [];
+        $proposalsFail = [];
+        $mandatoryMissing = [];
+        $importableProposals = 0;
         $this->loopRows(
-            $rows,
+            $associativeRowsWithHeaderLine,
             $createdProposals,
+            $importableProposals,
             $proposalsFail,
             $mandatoryMissing,
             $duplicates,
@@ -163,6 +171,7 @@ class ImportProposalsFromCsv
 
         return [
             'importedProposals' => !$dryRun && !empty($createdProposals) ? $createdProposals : [],
+            'importableProposals' => $importableProposals,
             'badLines' => array_values($proposalsFail),
             'duplicates' => array_values($duplicates),
             'mandatoryMissing' => array_values($mandatoryMissing),
@@ -170,24 +179,37 @@ class ImportProposalsFromCsv
         ];
     }
 
-    protected function getRecords(): \Iterator
+    protected function getRecords(): Reader
     {
         /** @var Reader $reader */
         $reader = ReaderEntityFactory::createCSVReader();
         $reader->setFieldDelimiter($this->delimiter ?? ';');
         $reader->open($this->projectDir . $this->filePath);
 
-        return $reader
-            ->getSheetIterator()
-            ->current()
-            ->getRowIterator();
+        return $reader;
+    }
+
+    protected function getAssociativeRowsColumns(Reader $reader): array
+    {
+        $rowWithHeaderKeys = [];
+        foreach ($reader->getSheetIterator() as $sheet) {
+            //Initialize SpoutHelper with the current Sheet and       the row number which contains the header
+            $spoutHelper = new SpoutHelper($sheet, 1);
+
+            foreach ($sheet->getRowIterator() as $key => $row) {
+                //Get the indexed array with col name as key and col val as value`
+                $rowWithHeaderKeys[] = $spoutHelper->rowWithFormattedHeaders($row->toArray());
+            }
+        }
+
+        return $rowWithHeaderKeys;
     }
 
     protected function isValidRow(array $row): bool
     {
         $fields = $this->proposalForm->getMandatoryFieldsUsed();
         foreach ($fields as $field => $mandatory) {
-            if ($mandatory && empty($row[$this->headers[$field]])) {
+            if ($mandatory && empty($row[$field])) {
                 return false;
             }
         }
@@ -230,23 +252,23 @@ class ImportProposalsFromCsv
         return true;
     }
 
-    private function getDuplicates(iterable $rows, AbstractStep $step): array
+    private function getDuplicates(array $rows, AbstractStep $step): array
     {
         $duplicates = [];
         $proposals = [];
         /** @var Row $row */
         foreach ($rows as $key => $row) {
+            ++$key;
             if (1 === $key) {
                 continue;
             }
-            $row = $row->toArray();
-            $current = [$row[$this->headers['title']], $row[$this->headers['author']]];
+            $current = [$row['title'], $row['author']];
             if (\in_array($current, $proposals)) {
                 $duplicates[] = $key;
             } elseif (
                 $this->proposalRepository->getProposalByEmailAndTitleOnStep(
-                    $row[$this->headers['title']],
-                    $row[$this->headers['author']],
+                    $row['title'],
+                    $row['author'],
                     $step,
                     $this->proposalForm
                 ) > 0
@@ -260,24 +282,26 @@ class ImportProposalsFromCsv
     }
 
     private function loopRows(
-        \Iterator $rows,
+        array $rows,
         array &$proposals,
+        int &$importableProposals,
         array &$proposalsFail,
         array &$mandatoryMissing,
         array $duplicates,
         bool $dryRun = true
     ) {
-        /** @var Row $row */
         foreach ($rows as $key => $row) {
-            $row = $row->toArray();
-            // is line in doubloon, line is skipped
-            if (\in_array($key, $duplicates)) {
-                continue;
-            }
+            $isCurrentLineFail = false;
+            // array start at 0, csv start at 1
+            ++$key;
             // first line is the header, skipped it
             if (1 === $key) {
                 continue;
             }
+            if (\in_array($key, $duplicates)) {
+                continue;
+            }
+
             // if row is not valid
             if (!$this->isValidRow($row)) {
                 $mandatoryMissing[] = $key;
@@ -286,76 +310,54 @@ class ImportProposalsFromCsv
             }
 
             try {
-                $district = null;
-                if (
-                    $this->proposalForm->isUsingDistrict() &&
-                    !empty($row[$this->headers['district']])
-                ) {
+                $status = $media = $theme = $author = $district = null;
+                if ($this->proposalForm->isUsingDistrict() && !empty($row['district'])) {
                     if (
                         !($district = $this->districtRepository->findDistrictByName(
-                            trim($row[$this->headers['district']])
+                            trim($row['district'])
                         ))
                     ) {
+                        $isCurrentLineFail = true;
                         $proposalsFail[] = $key;
-
-                        continue;
                     }
                 }
                 $status = $this->proposalForm->getStep()->getDefaultStatus();
-                if (isset($this->headers['status']) && !empty($row[$this->headers['status']])) {
+                if (isset($row['status']) && !empty($row['status'])) {
                     if (
                         !($status = $this->statusRepository->findOneBy([
-                            'name' => trim($row[$this->headers['status']]),
+                            'name' => trim($row['status']),
                             'step' => $this->proposalForm->getStep(),
                         ]))
                     ) {
+                        $isCurrentLineFail = true;
                         $proposalsFail[] = $key;
-
-                        continue;
                     }
                 }
                 $theme = null;
-                if ($this->proposalForm->isUsingThemes() && !empty($row[$this->headers['theme']])) {
-                    if (
-                        !($theme = $this->themeRepository->findOneWithTitle(
-                            trim($row[$this->headers['theme']])
-                        ))
-                    ) {
+                if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
+                    if (!($theme = $this->themeRepository->findOneWithTitle(trim($row['theme'])))) {
                         $proposalsFail[] = $key;
-
-                        continue;
+                        $isCurrentLineFail = true;
                     }
                 }
-                if (
-                    !($author = $this->userRepository->findOneByEmail(
-                        $row[$this->headers['author']]
-                    ))
-                ) {
+                if (!($author = $this->userRepository->findOneByEmail($row['author']))) {
                     $proposalsFail[] = $key;
-
-                    continue;
+                    $isCurrentLineFail = true;
                 }
                 $media = null;
-                if (
-                    $this->proposalForm->isUsingIllustration() &&
-                    !empty($row[$this->headers['media_url']])
-                ) {
-                    if (!($media = $this->getMedia($row[$this->headers['media_url']]))) {
+                if ($this->proposalForm->isUsingIllustration() && !empty($row['media_url'])) {
+                    if (!($media = $this->getMedia($row['media_url']))) {
                         $proposalsFail[] = $key;
-
-                        continue;
+                        $isCurrentLineFail = true;
                     }
                 }
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
 
                 $proposalsFail[] = $key;
-
-                continue;
             }
-
-            if (!$dryRun) {
-                $proposals[] = $this->createProposal(
+            if (!$dryRun && !$isCurrentLineFail && $author) {
+                $proposals[$key] = $this->createProposal(
                     $row,
                     $author,
                     $district,
@@ -363,6 +365,8 @@ class ImportProposalsFromCsv
                     $theme,
                     $media
                 );
+            } elseif ($dryRun && $author && !$isCurrentLineFail) {
+                ++$importableProposals;
             }
         }
     }
@@ -394,7 +398,7 @@ class ImportProposalsFromCsv
         ?Media $media
     ): Proposal {
         $proposal = (new Proposal())
-            ->setTitle(Text::escapeHtml($row[$this->headers['title']]))
+            ->setTitle(Text::escapeHtml($row['title']))
             ->setAuthor($author)
             ->setProposalForm($this->proposalForm)
             ->setDistrict($district)
@@ -402,38 +406,43 @@ class ImportProposalsFromCsv
             ->setTheme($theme)
             ->setMedia($media)
             ->setPublishedAt(new \DateTime());
-        if ($this->proposalForm->getUsingAddress() && !empty($row[$this->headers['address']])) {
-            if (Text::isJSON($row[$this->headers['address']])) {
-                $proposal->setAddress($row[$this->headers['address']]);
+        if ($this->proposalForm->getUsingAddress() && !empty($row['address'])) {
+            if (Text::isJSON($row['address'])) {
+                $proposal->setAddress($row['address']);
             } else {
-                $proposal->setAddress(
-                    $this->map->getFormattedAddress($row[$this->headers['address']])
-                );
+                $proposal->setAddress($this->map->getFormattedAddress($row['address']));
             }
         }
         if ($this->proposalForm->isUsingTipsmeee()) {
-            $proposal->setTipsmeeeId($row[$this->headers['tipsmeeee']]);
+            $proposal->setTipsmeeeId($row['tipsmeeee']);
         }
-        if (
-            $this->proposalForm->isUsingEstimation() &&
-            !empty($row[$this->headers['estimation']])
-        ) {
-            $proposal->setEstimation((float) $row[$this->headers['estimation']]);
+        if ($this->proposalForm->isUsingEstimation() && !empty($row['estimation'])) {
+            $proposal->setEstimation((float) $row['estimation']);
         }
 
-        if ($this->proposalForm->isUsingCategories() && !empty($row[$this->headers['category']])) {
+        if ($this->proposalForm->isUsingCategories() && !empty($row['category'])) {
             $proposalCategory = $this->proposalCategoryRepository->findOneBy([
-                'name' => trim($row[$this->headers['category']]),
+                'name' => trim($row['category']),
                 'form' => $this->proposalForm,
             ]);
             $proposal->setCategory($proposalCategory);
         }
 
-        if ($this->proposalForm->getUsingSummary() && !empty($row[$this->headers['summary']])) {
-            $proposal->setSummary(Text::escapeHtml($row[$this->headers['summary']]));
+        if ($this->proposalForm->getUsingSummary() && !empty($row['summary'])) {
+            $proposal->setSummary(Text::escapeHtml($row['summary']));
         }
-        if ($this->proposalForm->getUsingDescription() && !empty($row[$this->headers['body']])) {
-            $proposal->setBody($row[$this->headers['body']]);
+        if ($this->proposalForm->getUsingDescription() && !empty($row['body'])) {
+            $proposal->setBody($row['body']);
+        }
+
+        if ($this->proposalForm->isUsingAnySocialNetworks()) {
+            ProposalMutation::hydrateSocialNetworks(
+                $row,
+                $proposal,
+                $this->proposalForm,
+                true,
+                false
+            );
         }
         if (\count($this->proposalForm->getCustomFields()) > 0) {
             foreach ($this->proposalForm->getRealQuestions() as $question) {
@@ -444,7 +453,7 @@ class ImportProposalsFromCsv
             foreach ($this->customFields as $questionTitle) {
                 $response = (new ValueResponse())
                     ->setQuestion($this->proposalForm->getQuestionByTitle($questionTitle))
-                    ->setValue($row[$this->headers[$questionTitle]] ?? '');
+                    ->setValue($row[$questionTitle] ?? '');
                 $proposal->addResponse($response);
             }
         }

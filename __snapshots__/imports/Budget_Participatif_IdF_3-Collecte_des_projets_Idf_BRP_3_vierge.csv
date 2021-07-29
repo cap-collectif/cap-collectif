@@ -1,3 +1,3 @@
-﻿title,author,address,category,theme,district,media_url,body,summary,"No Mes Démarches","No IRIS","Raison sociale"
-"texte brut",jean.dupont@email.com,"Format GEOJSON","Énergies renouvelables et efficacité énergétique",Immobilier,"Toute la région (IDF BP3)",URL,"texte brut ou html","texte brut",nombre,"texte brut","texte brut"
-"texte brut",julie.martin@email.com,"Tour Eiffel, 75007 Paris","Espaces verts et biodiversité",Justice,"Val de marne (94) (IDF BP3)",URL,"texte brut ou html","texte brut",nombre,"texte brut","texte brut"
+﻿title,author,address,category,theme,media_url,body,summary,webPageUrl,linkedInUrl,youtubeUrl,facebookUrl,twitterUrl,instagramUrl,"No Mes Démarches","No IRIS","Raison sociale"
+"texte brut",jean.dupont@email.com,"Format Geocoding","Énergies renouvelables et efficacité énergétique",Immobilier,URL,"texte brut ou html","texte brut",URL,URL,URL,URL,URL,URL,nombre,"texte brut","texte brut"
+"texte brut",julie.martin@email.com,"Tour Eiffel, 75007 Paris","Espaces verts et biodiversité",Justice,URL,"texte brut ou html","texte brut",URL,URL,URL,URL,URL,URL,nombre,"texte brut","texte brut"
