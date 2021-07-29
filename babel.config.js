@@ -44,6 +44,7 @@ module.exports = function(api) {
       ],
     ];
     const plugins = [
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
       '@babel/plugin-transform-arrow-functions',
       '@babel/plugin-proposal-nullish-coalescing-operator',
       ['@babel/plugin-proposal-class-properties', { loose: true }],
