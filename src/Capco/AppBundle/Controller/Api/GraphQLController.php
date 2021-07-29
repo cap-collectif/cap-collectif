@@ -81,7 +81,21 @@ class GraphQLController extends BaseController
                 return new Response('', 405);
             }
             $payload = $this->processQuery($request, $schemaName, $batched);
-            $response = new JsonResponse($payload, 200);
+
+            // look for a syntax error in graphql response
+            $syntaxError = false;
+            if (isset($payload['errors']) && \count($payload['errors']) > 0) {
+                foreach ($payload['errors'] as $error) {
+                    if (false !== strpos($error['message'], 'Syntax Error')) {
+                        $syntaxError = true;
+
+                        break;
+                    }
+                }
+            }
+
+            $statusCode = $syntaxError ? 400 : 200;
+            $response = new JsonResponse($payload, $statusCode);
         }
         $this->addCORSHeadersIfNeeded($response, $request);
 

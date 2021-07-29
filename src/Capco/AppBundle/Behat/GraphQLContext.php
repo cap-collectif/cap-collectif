@@ -6,6 +6,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Coduo\PHPMatcher\PHPMatcher;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use PHPUnit\Framework\Assert;
 
 class GraphQLContext implements Context
@@ -16,6 +17,7 @@ class GraphQLContext implements Context
     public $client;
     public $response;
     public $rawResponse;
+    public $statusCode;
 
     public $resultChecker = '';
 
@@ -193,6 +195,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When /^I send a GraphQL POST request without throwing:$/
+     */
+    public function iSendAnInternalGraphQLPostRequestWithoutThrowing(PyStringNode $string)
+    {
+        $this->iSendAGraphQLPostRequest('internal', $string, 'POST', 'https://capco.dev', false);
+    }
+
+    /**
      * @When I send a public GraphQL POST request with origin :origin :
      */
     public function iSendAPublicGraphQLPostRequestWithOrigin(string $origin, PyStringNode $string)
@@ -222,6 +232,14 @@ class GraphQLContext implements Context
         );
     }
 
+    /**
+     * @Then /^the GraphQL response status code should be (?P<code>\d+)$/
+     */
+    public function theGraphQLResponseStatusCodeShouldBe($statusCode)
+    {
+        Assert::assertEquals($statusCode, $this->statusCode);
+    }
+
     protected function createAuthenticatedClient(
         string $username = 'test',
         string $password = 'test'
@@ -247,7 +265,8 @@ class GraphQLContext implements Context
         string $schemaName,
         PyStringNode $string,
         string $method = 'POST',
-        string $origin = 'https://capco.dev'
+        string $origin = 'https://capco.dev',
+        bool $shouldThrow = true
     ) {
         $endpoint = 'internal' === $schemaName ? '/graphql/internal' : '/graphql';
         $accept =
@@ -263,11 +282,24 @@ class GraphQLContext implements Context
 
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $response = $this->client->request($method, $endpoint, [
-            'json' => json_decode($string, true),
-            'headers' => $headers,
-        ]);
-        $this->response = (string) $response->getBody();
-        $this->rawResponse = $response;
+
+        try {
+            $response = $this->client->request($method, $endpoint, [
+                'json' => json_decode($string, true),
+                'headers' => $headers,
+            ]);
+
+            $this->response = (string) $response->getBody();
+            $this->rawResponse = $response;
+            $this->statusCode = $response->getStatusCode();
+        } catch (ClientException $exception) {
+            if ($shouldThrow) {
+                throw $exception;
+            }
+            // fail silently
+            $this->response = (string) $exception->getResponse()->getBody();
+            $this->rawResponse = $exception->getResponse();
+            $this->statusCode = $exception->getResponse()->getStatusCode();
+        }
     }
 }
