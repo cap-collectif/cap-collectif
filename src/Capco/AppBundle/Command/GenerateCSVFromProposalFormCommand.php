@@ -100,9 +100,9 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         ProposalForm $proposalForm,
         $next = false
     ) {
-        $example = ['texte brut'];
         $email = !$next ? 'jean.dupont@email.com' : 'julie.martin@email.com';
-        $example = array_merge($example, [$email]);
+        // title, email, cost
+        $example = ['texte brut', $email, 'nombre'];
         $categories = $proposalForm->getCategories();
         $category = $categories->first() ? $categories->first()->getName() : '';
         $themes = $this->themeRepository->findBy([], ['createdAt' => 'ASC']);

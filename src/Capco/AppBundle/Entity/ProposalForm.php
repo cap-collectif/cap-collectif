@@ -1031,7 +1031,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 
     public function getFieldsUsed(): array
     {
-        $fields = ['title', 'author'];
+        $fields = ['title', 'author', 'cost'];
         if ($this->usingAddress) {
             $fields = array_merge($fields, ['address']);
         }

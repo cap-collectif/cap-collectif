@@ -406,6 +406,9 @@ class ImportProposalsFromCsv
             ->setTheme($theme)
             ->setMedia($media)
             ->setPublishedAt(new \DateTime());
+        if (isset($row['cost']) && is_numeric($row['cost'])) {
+            $proposal->setEstimation($row['cost']);
+        }
         if ($this->proposalForm->getUsingAddress() && !empty($row['address'])) {
             if (Text::isJSON($row['address'])) {
                 $proposal->setAddress($row['address']);
