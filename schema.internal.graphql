@@ -2388,9 +2388,6 @@ enum ConcreteStepType {
   """Represent a ranking step."""
   RANKING
 
-  """Represent a synthesis step."""
-  SYNTHESIS
-
   """Represent a debate step."""
   DEBATE
 }
@@ -8305,7 +8302,6 @@ input ProjectStepInput {
   footer: HTML
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
-  synthesis: ID
   isAnonymousParticipationAllowed: Boolean
   articles: [DebateArticleInput]
   debateType: DebateType
@@ -12807,67 +12803,6 @@ enum SubscriptionTypeValue {
 
   """Get minimal notifications for this subscription"""
   MINIMAL
-}
-
-"""A step inside a project."""
-type SynthesisStep implements Step & Node {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The ID of an object."""
-  id: ID!
-
-  """The title of the step."""
-  title: String!
-
-  """Identifies the current state of the step."""
-  state: StepState!
-
-  """The kind of the step"""
-  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
-
-  """The type of the step"""
-  type: String @deprecated(reason: "Please, use `__typename` instead.")
-
-  """Does the step have a end date ?"""
-  timeless: Boolean
-
-  """The introduction text of the step."""
-  body: HTML
-
-  """Is the step enabled or not"""
-  enabled: Boolean!
-
-  """The label of the step"""
-  label: String!
-
-  """The step's metadescription"""
-  metaDescription: String
-
-  """The step's custom code"""
-  customCode: String
-
-  """The step's slug"""
-  slug: String
-
-  """Events linked to the step"""
-  events(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: EventOrder! = {field: START_AT, direction: DESC}
-  ): EventConnection!
-  project: Project
-
-  """Legacy url to edit a synthesis."""
-  editSynthesisUrl: URI
 }
 
 """Object containing the tag value and the number of occurrences."""

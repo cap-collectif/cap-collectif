@@ -43,7 +43,6 @@ use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
-use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
@@ -82,7 +81,6 @@ class ApplicationContext extends UserContext
     use QuestionnaireStepsTrait;
     use ReportingStepsTrait;
     use SharingStepsTrait;
-    use SynthesisStepsTrait;
     use ThemeStepsTrait;
     use UserProfileTrait;
 

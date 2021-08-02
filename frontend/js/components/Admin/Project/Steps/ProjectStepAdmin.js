@@ -95,7 +95,7 @@ export const ProjectStepAdmin = ({ form, project, hasFeatureDebate }: Props) => 
                   </>
                 }>
                 {stepTypes
-                  .filter(st => st.value !== 'RankingStep' && st.value !== 'SynthesisStep')
+                  .filter(st => st.value !== 'RankingStep')
                   .map((st, idx) => (
                     <StepMenuItem
                       key={idx}

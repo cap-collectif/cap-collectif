@@ -1757,24 +1757,6 @@ enum StepState {
   CLOSED
 }
 
-"""A step is a part of a project."""
-type SynthesisStep implements Step & Node {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The ID of an object."""
-  id: ID!
-
-  """The title of the step."""
-  title: String!
-
-  """Identifies the current state of the step."""
-  state: StepState!
-}
-
 """A theme."""
 type Theme {
   """Identifies the title of the theme."""

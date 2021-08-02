@@ -5,7 +5,6 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
             consultation: Capco\AppBundle\Entity\Steps\ConsultationStep
             presentation: Capco\AppBundle\Entity\Steps\PresentationStep
             other: Capco\AppBundle\Entity\Steps\OtherStep
-            synthesis: Capco\AppBundle\Entity\Steps\SynthesisStep
             collect: Capco\AppBundle\Entity\Steps\CollectStep
             ranking: Capco\AppBundle\Entity\Steps\RankingStep
             selection: Capco\AppBundle\Entity\Steps\SelectionStep

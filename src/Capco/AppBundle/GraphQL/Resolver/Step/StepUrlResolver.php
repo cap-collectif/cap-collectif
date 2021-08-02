@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Symfony\Component\Routing\RouterInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -68,10 +67,6 @@ class StepUrlResolver implements ResolverInterface
                 $routeName = $step->isMultiConsultation()
                     ? 'app_project_show_consultations'
                     : 'app_project_show_consultation';
-
-                break;
-            case SynthesisStep::class:
-                $routeName = 'app_project_show_synthesis';
 
                 break;
             case OtherStep::class:

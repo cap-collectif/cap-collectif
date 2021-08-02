@@ -13,7 +13,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\Annotation\Route;
@@ -260,38 +259,6 @@ class StepController extends Controller
     }
 
     /**
-     * @Route("/project/{projectSlug}/synthesis/{stepSlug}", name="app_project_show_synthesis")
-     * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
-     * @Template("CapcoAppBundle:Step:synthesis.html.twig")
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @Entity("step", class="CapcoAppBundle:Steps\SynthesisStep", options={
-     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
-     *    "repository_method"="getOneBySlugAndProjectSlug",
-     *    "map_method_signature"=true
-     * })
-     */
-    public function showSynthesisAction(Project $project, SynthesisStep $step)
-    {
-        if (!$project->canDisplay($this->getUser())) {
-            throw new ProjectAccessDeniedException();
-        }
-
-        $props = $this->serializer->serialize(
-            [
-                'synthesis_id' => $step->getSynthesis() ? $step->getSynthesis()->getId() : null,
-                'mode' => 'view',
-            ],
-            'json'
-        );
-
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-            'props' => $props,
-        ];
-    }
-
-    /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\CollectStep", options={
@@ -395,44 +362,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'proposalForm' => null,
-        ];
-    }
-
-    /**
-     * @Route("/project/{projectSlug}/synthesis/{stepSlug}/edition", name="app_project_edit_synthesis")
-     * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
-     * @Template("CapcoAppBundle:Synthesis:main.html.twig")
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @Entity("step", class="CapcoAppBundle:Steps\SynthesisStep", options={
-     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
-     *    "repository_method"="getOneBySlugAndProjectSlug",
-     *    "map_method_signature"=true
-     * })
-     */
-    public function editSynthesisAction(Project $project, SynthesisStep $step)
-    {
-        if (!$project->canDisplay($this->getUser())) {
-            throw new ProjectAccessDeniedException();
-        }
-
-        if (
-            !$step->getSynthesis()->isEditable() ||
-            !$this->authorizationChecker->isGranted('ROLE_ADMIN')
-        ) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
-            );
-        }
-
-        $props = $this->serializer->serialize(
-            ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'edit'],
-            'json'
-        );
-
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-            'props' => $props,
         ];
     }
 

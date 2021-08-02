@@ -35,7 +35,6 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
@@ -200,13 +199,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof OtherStep) {
             return $this->typeResolver->resolve('OtherStep');
-        }
-        if ($node instanceof SynthesisStep) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewSynthesisStep');
-            }
-
-            return $this->typeResolver->resolve('InternalSynthesisStep');
         }
         if ($node instanceof RankingStep) {
             return $this->typeResolver->resolve('RankingStep');

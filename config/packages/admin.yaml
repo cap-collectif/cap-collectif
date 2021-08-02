@@ -416,7 +416,6 @@ services:
                           collect_step: Capco\AppBundle\Entity\Steps\CollectStep,
                           presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep,
                           consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep,
-                          synthesis_step: Capco\AppBundle\Entity\Steps\SynthesisStep,
                           ranking_step: Capco\AppBundle\Entity\Steps\RankingStep,
                           election_step: Capco\AppBundle\Entity\Steps\SelectionStep,
                           questionnaire_step: Capco\AppBundle\Entity\Steps\QuestionnaireStep,

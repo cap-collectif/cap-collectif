@@ -34,12 +34,6 @@ export const STEP_TYPES: StepType[] = [
     editLabel: 'edit-consultation-step',
   },
   {
-    value: 'SynthesisStep',
-    label: 'global.synthesis',
-    addLabel: 'add-synthesis-step',
-    editLabel: 'edit-synthesis-step',
-  },
-  {
     value: 'RankingStep',
     label: 'global.ranking',
     addLabel: 'add-ranking-step',

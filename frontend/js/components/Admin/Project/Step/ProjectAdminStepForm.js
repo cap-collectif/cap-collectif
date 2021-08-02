@@ -22,7 +22,6 @@ import {
   ViewsContainer,
 } from './ProjectAdminStepForm.style';
 import { createRequirements, type Requirement, formatRequirements } from './StepRequirementsList';
-import ProjectAdminSynthesisStepForm from './ProjectAdminSynthesisStepForm';
 import ProjectAdminSelectionStepForm from './ProjectAdminSelectionStepForm';
 import { type ProposalStepStatus } from './StepStatusesList';
 import type { ProjectAdminStepForm_project } from '~relay/ProjectAdminStepForm_project.graphql';
@@ -518,7 +517,6 @@ export function ProjectAdminStepForm({
               consultations={step.consultations}
             />
           )}
-          {step.type === 'SynthesisStep' && <ProjectAdminSynthesisStepForm />}
           {step.type === 'SelectionStep' && (
             <ProjectAdminSelectionStepForm
               isBudgetEnabled={isBudgetEnabled}

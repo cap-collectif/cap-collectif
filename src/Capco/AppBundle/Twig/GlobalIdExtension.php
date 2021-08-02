@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
@@ -61,10 +60,6 @@ class GlobalIdExtension extends AbstractExtension
                 break;
             case PresentationStep::class:
                 $type = 'PresentationStep';
-
-                break;
-            case SynthesisStep::class:
-                $type = 'SynthesisStep';
 
                 break;
             case DebateStep::class:

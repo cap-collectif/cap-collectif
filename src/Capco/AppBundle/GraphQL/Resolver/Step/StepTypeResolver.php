@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
@@ -63,13 +62,6 @@ class StepTypeResolver implements ResolverInterface
         }
         if ($step instanceof OtherStep) {
             return $this->typeResolver->resolve('OtherStep');
-        }
-        if ($step instanceof SynthesisStep) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
-                return $this->typeResolver->resolve('PreviewSynthesisStep');
-            }
-
-            return $this->typeResolver->resolve('InternalSynthesisStep');
         }
         if ($step instanceof RankingStep) {
             return $this->typeResolver->resolve('RankingStep');

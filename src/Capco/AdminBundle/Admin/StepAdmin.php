@@ -13,7 +13,6 @@ use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\StatusRepository;
@@ -22,7 +21,6 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -44,7 +42,6 @@ class StepAdmin extends CapcoAdmin
 
     protected $labels = [
         PresentationStep::class => 'proposal.tabs.content',
-        SynthesisStep::class => 'global.synthesis',
         QuestionnaireStep::class => 'global.questionnaire',
         OtherStep::class => '',
         ConsultationStep::class => 'global.consultation',
@@ -237,19 +234,6 @@ class StepAdmin extends CapcoAdmin
                     'purify_html_profile' => 'default',
                 ])
                 ->end();
-        } elseif ($subject instanceof SynthesisStep) {
-            $formMapper
-                ->add('body', CKEditorType::class, [
-                    'config_name' => 'admin_editor',
-                    'label' => 'global.intro',
-                    'required' => false,
-                ])
-                ->add(
-                    'synthesis',
-                    AdminType::class,
-                    ['label' => 'global.synthesis', 'required' => true],
-                    ['link_parameters' => ['projectId']]
-                );
         } elseif ($subject instanceof RankingStep) {
             $formMapper
                 ->add('body', CKEditorType::class, [
@@ -309,7 +293,7 @@ class StepAdmin extends CapcoAdmin
                     'choices' => SelectionStep::getVoteTypeLabels(),
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
-                    'help' => 'admin.help.step.vote_type'
+                    'help' => 'admin.help.step.vote_type',
                 ])
                 ->add('votesLimit', IntegerType::class, [
                     'label' => 'admin.fields.step.votesLimit',

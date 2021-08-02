@@ -93,8 +93,6 @@ const convertTypenameToConcreteStepType = (typename: string): ConcreteStepType =
       return 'RANKING';
     case 'SelectionStep':
       return 'SELECTION';
-    case 'SynthesisStep':
-      return 'SYNTHESIS';
     case 'DebateStep':
       return 'DEBATE';
     case 'OtherStep':
@@ -136,7 +134,7 @@ const onSubmit = (
     steps,
     locale,
     restrictedViewerGroups,
-    archived
+    archived,
   }: FormValues,
   dispatch: Dispatch,
   props: Props,
@@ -273,7 +271,7 @@ const onSubmit = (
         })
       : [],
     locale: locale ? locale.value : null,
-    archived
+    archived,
   };
 
   if (props.project) {
@@ -374,7 +372,7 @@ const validate = (values: FormValues) => {
     externalContributionsCount,
     steps,
     locale,
-    archived
+    archived,
   } = values;
   return {
     ...validateSteps({ steps }),

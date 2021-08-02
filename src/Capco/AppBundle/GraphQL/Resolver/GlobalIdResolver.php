@@ -136,7 +136,6 @@ class GlobalIdResolver
                 case 'PresentationStep':
                 case 'CollectStep':
                 case 'SelectionStep':
-                case 'SynthesisStep':
                 case 'RankingStep':
                 case 'DebateStep':
                     $node = $this->container->get(AbstractStepRepository::class)->find($uuid);

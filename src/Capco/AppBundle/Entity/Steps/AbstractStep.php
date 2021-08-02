@@ -33,7 +33,6 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
  *      "presentation"  = "PresentationStep",
  *      "other"         = "OtherStep",
  *      "collect"       = "CollectStep",
- *      "synthesis"     = "SynthesisStep",
  *      "ranking"       = "RankingStep",
  *      "selection"     = "SelectionStep",
  *      "questionnaire" = "QuestionnaireStep",
@@ -355,11 +354,6 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     }
 
     public function isOtherStep(): bool
-    {
-        return false;
-    }
-
-    public function isSynthesisStep(): bool
     {
         return false;
     }

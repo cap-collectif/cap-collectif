@@ -212,7 +212,6 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/RankingStep.yaml',
             $this->fixturesDir . 'Dev/OtherStep.yaml',
             $this->fixturesDir . 'Dev/Synthesis.yaml',
-            $this->fixturesDir . 'Dev/SynthesisStep.yaml',
             $this->fixturesDir . 'Dev/CollectStep.yaml',
             $this->fixturesDir . 'Dev/SelectionStep.yaml',
             $this->fixturesDir . 'Dev/Requirement.yaml',

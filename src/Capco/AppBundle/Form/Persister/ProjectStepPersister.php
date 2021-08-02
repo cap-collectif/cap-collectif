@@ -14,7 +14,6 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,7 +25,6 @@ use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\Form\Step\RankingStepFormType;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Form\Step\SelectionStepFormType;
-use Capco\AppBundle\Form\Step\SynthesisStepFormType;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
@@ -45,7 +43,6 @@ class ProjectStepPersister
         ConsultationStep::TYPE,
         CollectStep::TYPE,
         SelectionStep::TYPE,
-        SynthesisStep::TYPE,
         DebateStep::TYPE,
     ];
 
@@ -190,10 +187,6 @@ class ProjectStepPersister
                 break;
             case QuestionnaireStep::TYPE:
                 $return = [QuestionnaireStepFormType::class, new QuestionnaireStep()];
-
-                break;
-            case SynthesisStep::TYPE:
-                $return = [SynthesisStepFormType::class, new SynthesisStep()];
 
                 break;
             case DebateStep::TYPE:

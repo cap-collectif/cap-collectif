@@ -90,9 +90,6 @@ ProjectStepInput:
                 type: 'Int'
             nbVersionsToDisplay:
                 type: 'Int'
-            # SynthesisStep
-            synthesis:
-                type: 'ID'
             # DebateStep
             isAnonymousParticipationAllowed:
                 type: 'Boolean'

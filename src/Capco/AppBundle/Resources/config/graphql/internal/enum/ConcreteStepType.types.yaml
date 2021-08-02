@@ -24,9 +24,6 @@ ConcreteStepType:
             RANKING:
                 value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\RankingStep::TYPE")'
                 description: 'Represent a ranking step.'
-            SYNTHESIS:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\SynthesisStep::TYPE")'
-                description: 'Represent a synthesis step.'
             DEBATE:
                 value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\DebateStep::TYPE")'
                 description: 'Represent a debate step.'
