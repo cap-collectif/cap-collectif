@@ -1,63 +1,90 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
+import { graphql, useFragment } from 'react-relay';
+import { useDispatch, useSelector } from 'react-redux';
 import { isSubmitting, submit } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
-import { Container, LogoContainer, ContentContainer, Symbols } from './UserInvitationPage.style';
-import type { UserInvitationPageAppProps } from '~/startup/UserInvitationPageApp';
-import type { State, Dispatch } from '~/types';
+import { FormattedMessage, useIntl } from 'react-intl';
+import {
+  Container,
+  LogoContainer,
+  ContentContainer,
+  Symbols,
+  BackLink,
+} from './UserInvitationPage.style';
+import type { GlobalState } from '~/types';
 import RegistrationForm, { form } from '~/components/User/Registration/RegistrationForm';
 import SubmitButton from '~/components/Form/SubmitButton';
-import type { UserInvitationPage_query } from '~relay/UserInvitationPage_query.graphql';
-import type { UserInvitationPage_colors } from '~relay/UserInvitationPage_colors.graphql';
-import type { UserInvitationPage_logo } from '~relay/UserInvitationPage_logo.graphql';
-
-type StateProps = {|
-  +organizationName: string,
-  +submitting: boolean,
-  +defaultColor: {|
-    +defaultPrimaryColor: string,
-    +defaultColorText: string,
-  |},
-|};
-
-type DispatchProps = {|
-  +onSubmit: () => typeof submit,
-|};
+import type { UserInvitationPage_query$key } from '~relay/UserInvitationPage_query.graphql';
+import type { UserInvitationPage_logo$key } from '~relay/UserInvitationPage_logo.graphql';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Icon from '~ds/Icon/Icon';
 
 type RelayProps = {|
-  query: UserInvitationPage_query,
-  colors: UserInvitationPage_colors,
-  logo: UserInvitationPage_logo,
+  +queryFragmentRef: UserInvitationPage_query$key,
+  +logoFragmentRef: UserInvitationPage_logo$key,
+|};
+
+type ComponentProps = {|
+  +email: string,
+  +token: string,
+  +hasEnabledSSO: boolean,
+  +primaryColor: string,
+  +btnTextColor: string,
 |};
 
 type Props = {|
-  ...StateProps,
-  ...DispatchProps,
-  ...UserInvitationPageAppProps,
+  ...ComponentProps,
   ...RelayProps,
 |};
 
+const QUERY_FRAGMENT = graphql`
+  fragment UserInvitationPage_query on Query {
+    ...RegistrationForm_query
+  }
+`;
+
+const LOGO_FRAGMENT = graphql`
+  fragment UserInvitationPage_logo on SiteImage {
+    media {
+      url(format: "reference")
+    }
+  }
+`;
+
 export const UserInvitationPage = ({
   email,
-  onSubmit,
-  organizationName,
   token,
-  submitting,
-  query,
-  colors,
-  logo,
-  defaultColor: { defaultPrimaryColor, defaultColorText },
+  queryFragmentRef,
+  logoFragmentRef,
+  hasEnabledSSO,
+  primaryColor,
+  btnTextColor,
 }: Props) => {
-  const primaryColor =
-    colors.find(color => color.keyname === 'color.btn.primary.bg')?.value || defaultPrimaryColor;
-  const btnText =
-    colors.find(color => color.keyname === 'color.btn.primary.text')?.value || defaultColorText;
+  const intl = useIntl();
+
+  const query = useFragment(QUERY_FRAGMENT, queryFragmentRef);
+  const logo = useFragment(LOGO_FRAGMENT, logoFragmentRef);
+
+  const { organizationName, submitting } = useSelector((state: GlobalState) => {
+    return {
+      organizationName: state.default.parameters['global.site.organization_name'],
+      submitting: isSubmitting(form)(state),
+    };
+  });
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => dispatch(submit(form));
 
   return (
     <Container>
-      <ContentContainer primaryColor={primaryColor} btnText={btnText}>
+      <ContentContainer primaryColor={primaryColor} btnText={btnTextColor}>
+        {hasEnabledSSO && (
+          <Flex alignItems="center" mb={4}>
+            <Icon name="LONG_ARROW_LEFT" size="sm" />
+            <BackLink to="/sso">{intl.formatMessage({ id: 'global.back' })}</BackLink>
+          </Flex>
+        )}
         <h1>
           <FormattedMessage id="global-welcome" /> 👋
         </h1>
@@ -90,48 +117,4 @@ export const UserInvitationPage = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  submitting: isSubmitting(form)(state),
-  organizationName: state.default.parameters['global.site.organization_name'],
-  defaultColor: {
-    defaultPrimaryColor: state.default.parameters['color.btn.primary.bg'],
-    defaultColorText: state.default.parameters['color.btn.primary.text'],
-  },
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSubmit: () => dispatch(submit(form)),
-});
-
-const UserInvitationPageConnected = connect<
-  Props,
-  {| ...RelayProps, ...UserInvitationPageAppProps |},
-  _,
-  _,
-  _,
-  _,
->(
-  mapStateToProps,
-  mapDispatchToProps,
-)(UserInvitationPage);
-
-export default createFragmentContainer(UserInvitationPageConnected, {
-  query: graphql`
-    fragment UserInvitationPage_query on Query {
-      ...RegistrationForm_query
-    }
-  `,
-  colors: graphql`
-    fragment UserInvitationPage_colors on SiteColor @relay(plural: true) {
-      keyname
-      value
-    }
-  `,
-  logo: graphql`
-    fragment UserInvitationPage_logo on SiteImage {
-      media {
-        url(format: "reference")
-      }
-    }
-  `,
-});
+export default UserInvitationPage;

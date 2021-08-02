@@ -346,3 +346,6 @@ services:
     Capco\AppBundle\Mailer\SenderEmailDomains\SenderEmailDomainsManager:
         arguments:
             $environment: '%kernel.environment%'
+
+    Capco\UserBundle\Handler\UserInvitationHandler:
+        autowire: true

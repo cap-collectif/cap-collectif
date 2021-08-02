@@ -121,6 +121,7 @@ class Manager
         self::login_gplus,
         self::login_saml,
         self::login_paris,
+        self::login_openid,
         self::privacy_policy,
         self::members_list,
         self::newsletter,

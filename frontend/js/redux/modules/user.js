@@ -15,6 +15,7 @@ import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutati
 import type { RegisterEmailDomainsInput } from '~relay/RegisterEmailDomainsMutation.graphql';
 import { userActions } from './user_actions';
 
+
 export const accountForm = 'accountForm';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';

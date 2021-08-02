@@ -56,6 +56,10 @@ Object {
       "type": "login_paris",
     },
     Object {
+      "enabled": false,
+      "type": "login_openid",
+    },
+    Object {
       "enabled": true,
       "type": "privacy_policy",
     },

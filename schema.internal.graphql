@@ -5402,6 +5402,7 @@ enum FeatureFlagType {
   http_redirects
   report_browers_errors_to_sentry
   login_saml
+  login_openid
   phone_confirmation
   reporting
   display_map

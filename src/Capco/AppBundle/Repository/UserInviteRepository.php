@@ -61,6 +61,19 @@ class UserInviteRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findOneByEmailAndNotExpired(string $email): ?UserInvite
+    {
+        return $this->createQueryBuilder('ui')
+            ->andWhere('ui.email = :email')
+            ->andWhere('ui.expiresAt > :now')
+            ->setParameters([
+                'now' => new \DateTimeImmutable(),
+                'email' => $email,
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function findOneByTokenNotExpiredAndEmail(string $token, string $email): ?UserInvite
     {
         return $this->createQueryBuilder('ui')
@@ -83,8 +96,7 @@ class UserInviteRepository extends EntityRepository
             ->where('g = :group')
             ->setParameter('group', $group)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     private function getPaginated(?int $limit, ?int $offset): QueryBuilder

@@ -37,7 +37,12 @@
     <div class="user-invitation-page-app-container">
     {{ react_render_component('UserInvitationPageApp', {'rendering': 'client_side', props: {
         token: token,
-        email: email
+        email: email,
+        baseUrl: baseUrl,
+        loginFacebook: loginFacebook,
+        loginFranceConnect: loginFranceConnect,
+        ssoList: ssoList,
+        hasEnabledSSO: hasEnabledSSO
     } }) }}
     </div>
 {% endblock %}

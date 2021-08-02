@@ -3,11 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import tinycolor from 'tinycolor2';
-import { baseUrl } from '~/config';
 import SocialIcon from '../Icons/SocialIcon';
 import AppBox from '~ui/Primitives/AppBox';
+import { baseUrl } from '~/config';
 
-type LoginSocialButtonType = 'facebook' | 'openId' | 'franceConnect' | 'saml';
+export type LoginSocialButtonType = 'facebook' | 'openId' | 'franceConnect' | 'saml' | 'oauth2';
 
 type Props = {|
   type: LoginSocialButtonType,
@@ -21,7 +21,7 @@ type State = {
   +isHover: boolean,
 };
 
-const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
+export const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
   switch (type) {
     case 'facebook':
       return 'white';
@@ -35,7 +35,8 @@ const getLabelColorForType = (type: LoginSocialButtonType, color?: string): stri
       return 'white';
   }
 };
-const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: string): string => {
+
+export const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: string): string => {
   switch (type) {
     case 'facebook':
       return '#3B5998';
@@ -49,26 +50,30 @@ const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: string): s
       return '#034ea2';
   }
 };
-export const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string): string => {
+export const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string, isInvitationSSO: boolean = false): string => {
+  const destination = isInvitationSSO ? baseUrl : window && window.location.href;
+
   switch (type) {
     case 'facebook':
-      return `/login/facebook?_destination=${window && window.location.href}`;
+      return `/login/facebook?_destination=${destination}`;
 
     case 'openId':
+    case 'oauth2':
       return `/login/openid?_destination=${redirectUri}`;
 
     case 'saml':
-      return `/login-saml?_destination=${window && window.location.href}`;
+      return `/login-saml?_destination=${destination}`;
 
     case 'franceConnect':
       return redirectUri
         ? `/login/franceconnect?_destination=${redirectUri}`
-        : `/login/franceconnect?_destination=${window && window.location.href}`;
+        : `/login/franceconnect?_destination=${destination}`;
     default:
       return '';
   }
 };
-const getButtonContentForType = (type: string): string => {
+
+export const getButtonContentForType = (type: string): string => {
   switch (type) {
     case 'facebook':
       return 'Facebook';
@@ -79,7 +84,7 @@ const getButtonContentForType = (type: string): string => {
   }
 };
 
-type LinkButtonProps = {|
+export type LinkButtonProps = {|
   type: LoginSocialButtonType,
   labelColor?: string,
   buttonColor?: string,
@@ -150,7 +155,7 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
   }
 `;
 
-const FranceConnectLink: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const FranceConnectLink: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 8px;
   color: #00acc1;
   font-size: 13px;
@@ -161,7 +166,7 @@ const FranceConnectLink: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   position: relative;
   margin-top: 10px;
   width: 100%;
@@ -196,9 +201,7 @@ export default class LoginSocialButton extends React.Component<Props, State> {
   render() {
     const { type, switchUserMode, text, labelColor, buttonColor } = this.props;
     const { isHover } = this.state;
-    const redirectUri = switchUserMode
-      ? `${baseUrl}/sso/switch-user`
-      : `${window && window.location.href}`;
+    const redirectUri = switchUserMode ? `${baseUrl}/sso/switch-user` : window && window.location.href;
 
     if (text === 'grandLyonConnect') {
       return (

@@ -106,6 +106,8 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::report_browers_errors_to_sentry")'
             login_saml:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_saml")'
+            login_openid:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_openid")'
             phone_confirmation:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::phone_confirmation")'
             reporting:

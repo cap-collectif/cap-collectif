@@ -2,6 +2,7 @@
 
 namespace spec\Capco\UserBundle\Security\Core\User;
 
+use Capco\UserBundle\Handler\UserInvitationHandler;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -29,7 +30,8 @@ class OauthUserProviderSpec extends ObjectBehavior
         Indexer $indexer,
         GroupMutation $groupMutation,
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        UserInvitationHandler $userInvitationHandler
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -39,7 +41,8 @@ class OauthUserProviderSpec extends ObjectBehavior
             [],
             $groupMutation,
             $franceConnectSSOConfigurationRepository,
-            $logger
+            $logger,
+            $userInvitationHandler
         );
     }
 
@@ -55,16 +58,9 @@ class OauthUserProviderSpec extends ObjectBehavior
 
         // We try to find a user that match the criterias, but could not find one.
         $userRepository
-            ->findByAccessTokenOrUsername(
-                'openid_access_token',
-                'openid_id'
-            )
+            ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
             ->willReturn(null);
-        $userRepository
-            ->findOneByEmail(
-                'openid_user@test.com'
-            )
-            ->willReturn(null);
+        $userRepository->findOneByEmail('openid_user@test.com')->willReturn(null);
 
         $userManager
             ->createUser()
@@ -115,10 +111,7 @@ class OauthUserProviderSpec extends ObjectBehavior
 
         // We try to find a user that match the criterias, and find one.
         $userRepository
-            ->findByAccessTokenOrUsername(
-                'openid_access_token',
-                'openid_id'
-            )
+            ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
             ->willReturn($user);
         $user->getId()->willReturn('<some uuid>');
 
@@ -153,10 +146,7 @@ class OauthUserProviderSpec extends ObjectBehavior
 
         // We try to find a user that match the criterias, and find one.
         $userRepository
-            ->findByAccessTokenOrUsername(
-                'openid_access_token',
-                'openid_id'
-            )
+            ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
             ->willReturn($user);
         $user->getId()->willReturn('<some uuid>');
 
@@ -185,8 +175,11 @@ class OauthUserProviderSpec extends ObjectBehavior
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
-    public function it_map(UserResponseInterface $response, User $user,OpenIDResourceOwner $IDResourceOwner)
-    {
+    public function it_map(
+        UserResponseInterface $response,
+        User $user,
+        OpenIDResourceOwner $IDResourceOwner
+    ) {
         $data = [];
         $data['given_name'] = 'toto';
         $data['family_name'] = 'ala';

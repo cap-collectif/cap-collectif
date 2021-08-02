@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Handler\UserInvitationHandler;
 use Doctrine\Common\Util\ClassUtils;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
@@ -23,6 +24,7 @@ class OauthUserProvider extends FOSUBUserProvider
     private GroupMutation $groupMutation;
     private FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
     private LoggerInterface $logger;
+    private UserInvitationHandler $userInvitationHandler;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -32,7 +34,8 @@ class OauthUserProvider extends FOSUBUserProvider
         array $properties,
         GroupMutation $groupMutation,
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        UserInvitationHandler $userInvitationHandler
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
@@ -40,19 +43,9 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->groupMutation = $groupMutation;
         $this->franceConnectSSOConfigurationRepository = $franceConnectSSOConfigurationRepository;
         $this->logger = $logger;
+        $this->userInvitationHandler = $userInvitationHandler;
 
         parent::__construct($userManager, $properties);
-    }
-
-    private function debug(UserResponseInterface $response)
-    {
-        $this->logger->debug(__METHOD__ . ' getEmail {email}',  ['email' => $response->getEmail()]);
-        $this->logger->debug(__METHOD__ . ' getUsername {username}',  ['username' => $response->getUsername()]);
-        $this->logger->debug(__METHOD__ . ' resource owner name {service} ',  ['service' => $response->getResourceOwner()->getName()]);
-        $this->logger->debug(__METHOD__ . ' getAccessToken {getAccessToken}', ['getAccessToken' => $response->getAccessToken()]);
-        $this->logger->debug(__METHOD__ . ' getLastName {getLastName}',  ['getLastName' => $response->getLastName()]);
-        $this->logger->debug(__METHOD__ . ' getFirstName {getFirstName}' , ['getFirstName' => $response->getFirstName()]);
-        $this->logger->debug(__METHOD__ . ' getNickname {getNickname}' , ['getNickname' => $response->getNickname()]);
     }
 
     public function connect(UserInterface $user, UserResponseInterface $response): void
@@ -94,6 +87,7 @@ class OauthUserProvider extends FOSUBUserProvider
             $user->setUsername($username);
             $user->setEmail($email);
             $user->setEnabled(true);
+            $this->userInvitationHandler->handleUserInvite($user);
         }
 
         $ressourceOwner = $response->getResourceOwner();
@@ -183,6 +177,29 @@ class OauthUserProvider extends FOSUBUserProvider
         }
 
         return $user;
+    }
+
+    private function debug(UserResponseInterface $response)
+    {
+        $this->logger->debug(__METHOD__ . ' getEmail {email}', ['email' => $response->getEmail()]);
+        $this->logger->debug(__METHOD__ . ' getUsername {username}', [
+            'username' => $response->getUsername(),
+        ]);
+        $this->logger->debug(__METHOD__ . ' resource owner name {service} ', [
+            'service' => $response->getResourceOwner()->getName(),
+        ]);
+        $this->logger->debug(__METHOD__ . ' getAccessToken {getAccessToken}', [
+            'getAccessToken' => $response->getAccessToken(),
+        ]);
+        $this->logger->debug(__METHOD__ . ' getLastName {getLastName}', [
+            'getLastName' => $response->getLastName(),
+        ]);
+        $this->logger->debug(__METHOD__ . ' getFirstName {getFirstName}', [
+            'getFirstName' => $response->getFirstName(),
+        ]);
+        $this->logger->debug(__METHOD__ . ' getNickname {getNickname}', [
+            'getNickname' => $response->getNickname(),
+        ]);
     }
 
     private function getUser(string $email, UserResponseInterface $response): ?User

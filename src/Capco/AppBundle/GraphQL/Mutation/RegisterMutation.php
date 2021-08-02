@@ -2,14 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\UserGroup;
-use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
+use Capco\UserBundle\Handler\UserInvitationHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -42,6 +41,7 @@ class RegisterMutation implements MutationInterface
     private EntityManagerInterface $em;
     private ResponsesFormatter $responsesFormatter;
     private Manager $manager;
+    private UserInvitationHandler $userInvitationHandler;
 
     public function __construct(
         Manager $toggleManager,
@@ -54,7 +54,8 @@ class RegisterMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
         ResponsesFormatter $responsesFormatter,
-        Manager $manager
+        Manager $manager,
+        UserInvitationHandler $userInvitationHandler
     ) {
         $this->toggleManager = $toggleManager;
         $this->userInviteRepository = $userInviteRepository;
@@ -67,6 +68,7 @@ class RegisterMutation implements MutationInterface
         $this->em = $em;
         $this->responsesFormatter = $responsesFormatter;
         $this->manager = $manager;
+        $this->userInvitationHandler = $userInvitationHandler;
     }
 
     public function __invoke(Argument $args)
@@ -96,28 +98,12 @@ class RegisterMutation implements MutationInterface
         /** @var User $user */
         $user = $this->userManager->createUser();
 
-        if($invitation) {
-            foreach ($invitation->getGroups() as $group) {
-                $userGroup = (new UserGroup())->setGroup($group)->setUser($user);
-                $this->em->persist($userGroup);
-            }
-        }
-
         if ($this->toggleManager->isActive('multilangue')) {
             if (isset($data['locale']) && $data['locale']) {
                 $user->setLocale($data['locale']);
             }
         }
         unset($data['locale']);
-
-        if ($invitation) {
-            if ($this->manager->isActive(Manager::unstable_project_admin) && $invitation->isProjectAdmin()) {
-                $user->addRole(UserRole::ROLE_PROJECT_ADMIN);
-            }
-            if ($invitation->isAdmin()) {
-                $user->addRole(UserRole::ROLE_ADMIN);
-            }
-        }
 
         $form = $this->formFactory->create(ApiRegistrationFormType::class, $user);
         if (isset($data['responses'])) {
@@ -154,12 +140,7 @@ class RegisterMutation implements MutationInterface
         // This allow the user to login
         $user->setEnabled(true);
 
-        if ($invitation) {
-            // If the user has been invited by an admin, we auto confirm the user
-            $user->setConfirmationToken(null)->setConfirmedAccountAt(new \DateTime());
-
-            $this->em->remove($invitation);
-        } else {
+        if (!$invitation) {
             // We generate a confirmation token to validate email
             $token = $this->tokenGenerator->generateToken();
             $user->setConfirmationToken($token);
@@ -167,6 +148,8 @@ class RegisterMutation implements MutationInterface
         }
 
         $this->userManager->updateUser($user);
+
+        $this->userInvitationHandler->handleUserInvite($user);
 
         return ['user' => $user, 'errorsCode' => null];
     }

@@ -1,15 +1,22 @@
 // @flow
 import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AlertBoxApp from '~/startup/AlertBoxApp';
-import UserInvitationPage from '~/components/User/Invitation/UserInvitationPage';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { UserInvitationPageAppQueryResponse } from '~relay/UserInvitationPageAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
+import UserInvitationRoot from '~/components/User/Invitation/UserInvitationRoot';
 
 export type UserInvitationPageAppProps = {|
   +email: string,
   +token: string,
+  +baseUrl: string,
+  +loginFacebook: boolean,
+  +loginFranceConnect: boolean,
+  +loginSaml: boolean,
+  +ssoList: any,
+  +hasEnabledSSO: boolean,
 |};
 
 type Props = UserInvitationPageAppProps;
@@ -20,12 +27,12 @@ export default (propsComponent: Props) => (
       environment={environment}
       query={graphql`
         query UserInvitationPageAppQuery {
-          ...UserInvitationPage_query
+          ...UserInvitationRootPage_query
           siteColors {
-            ...UserInvitationPage_colors
+            ...UserInvitationRootPage_colors
           }
           siteImage(keyname: "image.logo") {
-            ...UserInvitationPage_logo
+            ...UserInvitationRootPage_logo
           }
         }
       `}
@@ -41,12 +48,20 @@ export default (propsComponent: Props) => (
 
         if (props && props.siteImage && props.siteColors) {
           return (
-            <UserInvitationPage
-              query={props}
-              colors={props.siteColors}
-              logo={props.siteImage}
-              {...propsComponent}
-            />
+            <Router basename={propsComponent.baseUrl}>
+              <UserInvitationRoot
+                queryFragmentRef={props}
+                logoFragmentRef={props.siteImage}
+                colorsFragmentRef={props.siteColors}
+                email={propsComponent.email}
+                token={propsComponent.token}
+                baseUrl={propsComponent.baseUrl}
+                loginFacebook={propsComponent.loginFacebook}
+                loginFranceConnect={propsComponent.loginFranceConnect}
+                ssoList={propsComponent.ssoList}
+                hasEnabledSSO={propsComponent.hasEnabledSSO}
+              />
+            </Router>
           );
         }
 

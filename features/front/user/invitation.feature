@@ -3,6 +3,7 @@ Feature: User invitation
 
 Background:
   Given features "registration", "user_type", "zipcode_at_register", "captcha" are enabled
+  Given I disable features "login_facebook", "login_saml", "login_openid", "login_franceconnect"
 
 @database
 Scenario: An expired invitation should redirect to homepage

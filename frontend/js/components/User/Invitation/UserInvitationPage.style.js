@@ -1,5 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
+import { Link as RouterLink } from 'react-router-dom';
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes';
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 import { baseUrl } from '~/config';
@@ -23,7 +24,6 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
     }
 
     .content-container {
-      margin-top: -10px;
       border-radius: 10px 10px 0 0;
     }
   }
@@ -50,15 +50,12 @@ export const LogoContainer: StyledComponent<
   }
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    position: static;
-    padding: 8px 0 18px 0;
     order: -1;
     flex-shrink: 0;
+    height: 22px;
 
     img {
-      height: 80px;
-      max-height: 80px;
-      max-width: initial;
+      display: none;
     }
   }
 `;
@@ -140,4 +137,12 @@ export const ContentContainer: StyledComponent<
       border-radius: ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0 0;
     }
   }
+`;
+
+export const BackLink: StyledComponent<{}, {}, typeof RouterLink> = styled(RouterLink)`
+  text-decoration: none;
+  color: #85919d !important;
+  font-weight: 600;
+  margin-left: 8px;
+  font-size: 14px;
 `;
