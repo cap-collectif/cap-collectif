@@ -87,7 +87,7 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
                   formatInfo(
                     ICON_NAME.PIN_O,
                     project.districts.edges?.map(district => district?.node?.name).join(' • ') ||
-                      '',
+                      null,
                     project.archived,
                   )}
                 {project.themes &&

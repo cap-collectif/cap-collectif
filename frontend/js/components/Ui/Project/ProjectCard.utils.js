@@ -31,21 +31,26 @@ export const formatCounter = (iconName: string, count: number, archived: boolean
   </Flex>
 );
 
-export const formatInfo = (iconName: string, text: string, archived: boolean, color?: string) => (
-  <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
-    <Icon name={ICON_NAME[iconName]} size={ICON_SIZE.MD} mr={1} />
-    <Text
-      as="span"
-      css={{
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        color: archived ? colors['neutral-gray']['400'] : color,
-      }}>
-      {text}
-    </Text>
-  </Flex>
-);
+export const formatInfo = (iconName: string, text: ?string, archived: boolean, color?: string) => {
+  if (!text) {
+    return null;
+  }
+  return (
+    <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
+      <Icon name={ICON_NAME[iconName]} size={ICON_SIZE.MD} mr={1} />
+      <Text
+        as="span"
+        css={{
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          color: archived ? colors['neutral-gray']['400'] : color,
+        }}>
+        {text}
+      </Text>
+    </Flex>
+  );
+};
 
 const getIsFutureStep = (steps: Steps): boolean => {
   const openedSteps = steps.filter(

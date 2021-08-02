@@ -3,7 +3,6 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import ProjectHeaderDistrictsList from '../ProjectHeaderDistrictsList';
-import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
 import ProjectRestrictedAccessFragment from '../Page/ProjectRestrictedAccessFragment';
 import type { ProjectPreviewCounters_project } from '~relay/ProjectPreviewCounters_project.graphql';
@@ -57,9 +56,7 @@ export class ProjectPreviewCounters extends React.Component<Props> {
             />
           )}
           {project.districts && project.districts.totalCount > 0 && (
-            <Tag icon="cap cap-marker-1-1">
-              <ProjectHeaderDistrictsList project={project} breakingNumber={1} />
-            </Tag>
+            <ProjectHeaderDistrictsList project={project} breakingNumber={1} />
           )}
           <ProjectRestrictedAccessFragment project={project} icon="cap-lock-2-1" />
         </TagsList>

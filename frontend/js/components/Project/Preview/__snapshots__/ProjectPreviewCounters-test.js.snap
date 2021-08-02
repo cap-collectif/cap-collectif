@@ -91,71 +91,67 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
       showZero={true}
       value={60}
     />
-    <Tag
-      icon="cap cap-marker-1-1"
-    >
-      <ProjectHeaderDistrictsList
-        breakingNumber={1}
-        project={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "anonymousVotes": Object {
-              "totalCount": 12,
-            },
-            "archived": false,
-            "contributions": Object {
-              "totalCount": 89,
-            },
-            "contributors": Object {
-              "totalCount": 48,
-            },
-            "districts": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "name": "zone 1",
-                  },
+    <ProjectHeaderDistrictsList
+      breakingNumber={1}
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
+          "archived": false,
+          "contributions": Object {
+            "totalCount": 89,
+          },
+          "contributors": Object {
+            "totalCount": 48,
+          },
+          "districts": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "name": "zone 1",
                 },
-                Object {
-                  "node": Object {
-                    "name": "zone 2",
-                  },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 2",
                 },
-                Object {
-                  "node": Object {
-                    "name": "zone 3",
-                  },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 3",
                 },
-                Object {
-                  "node": Object {
-                    "name": "zone 4",
-                  },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 4",
                 },
-                Object {
-                  "node": Object {
-                    "name": "zone 5",
-                  },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 5",
                 },
-              ],
-              "totalCount": 5,
-            },
-            "hasParticipativeStep": true,
-            "id": "project2",
-            "isContributionsCounterDisplayable": true,
-            "isExternal": false,
-            "isParticipantsCounterDisplayable": true,
-            "isVotesCounterDisplayable": true,
-            "type": Object {
-              "title": "global.consultation",
-            },
-            "votes": Object {
-              "totalCount": 54,
-            },
-          }
+              },
+            ],
+            "totalCount": 5,
+          },
+          "hasParticipativeStep": true,
+          "id": "project2",
+          "isContributionsCounterDisplayable": true,
+          "isExternal": false,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "global.consultation",
+          },
+          "votes": Object {
+            "totalCount": 54,
+          },
         }
-      />
-    </Tag>
+      }
+    />
     <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
       project={
