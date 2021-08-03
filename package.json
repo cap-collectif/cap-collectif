@@ -344,6 +344,7 @@
         "react-radio": "^2.1.2",
         "react-radio-buttons": "^1.0.11",
         "react-redux": "^7.2.2",
+        "react-error-boundary": "^3.1.3",
         "react-relay": "11.0.0",
         "react-router-bootstrap": "rr-v3",
         "react-router-dom": "5.1.2",

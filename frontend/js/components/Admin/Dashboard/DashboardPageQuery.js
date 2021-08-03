@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryLoader } from 'react-relay';
 import moment from 'moment';
 import isEqual from 'lodash/isEqual';
@@ -11,6 +12,7 @@ import {
   type FilterType,
 } from './DashboardPage.context';
 import { getFieldsFromUrl, updateQueryUrl } from '~/shared/utils/getFieldsFromUrl';
+import DashboardError from './DashboardError/DashboardError';
 
 const DEFAULT_FILTERS = {
   startAt: moment('2014-11-08T17:44:56.144').format('MM/DD/YYYY'),
@@ -66,7 +68,21 @@ const DashboardPageQueryRender = (): React.Node => {
     }
   }, [filters, loadQuery, queryReference]);
 
-  return queryReference ? <DashboardPage queryReference={queryReference} /> : null;
+  return queryReference ? (
+    <ErrorBoundary
+      FallbackComponent={DashboardError}
+      onReset={() => {
+        loadQuery({
+          filter: {
+            startAt: filters.startAt,
+            endAt: filters.endAt,
+            projectId: filters.projectId === 'ALL' ? null : filters.projectId,
+          },
+        });
+      }}>
+      <DashboardPage queryReference={queryReference} />
+    </ErrorBoundary>
+  ) : null;
 };
 
 export default DashboardPageQueryContainer;
