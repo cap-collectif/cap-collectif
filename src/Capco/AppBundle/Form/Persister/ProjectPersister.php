@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\AlphaProjectFormType;
 use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
 use Doctrine\DBAL\Driver\DriverException;
@@ -42,15 +43,17 @@ class ProjectPersister
         $this->repository = $repository;
     }
 
-    public function persist(Argument $input, ?bool $editMode = false): Project
+    public function persist(Argument $input, User $viewer, ?bool $editMode = false): Project
     {
         $arguments = $input->getArrayCopy();
 
-        if (\count($arguments['authors']) <= 0) {
+        if ($viewer->isOnlyProjectAdmin()) {
+            $arguments['authors'] = [GlobalId::toGlobalId('User', $viewer->getId())];
+        } elseif (\count($arguments['authors']) <= 0) {
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = new Project();
+        $project = (new Project())->setOwner($viewer);
 
         if ($editMode) {
             $projectId = GlobalId::fromGlobalId($input->offsetGet('projectId'))['id'];
@@ -58,6 +61,7 @@ class ProjectPersister
             if (!$project) {
                 throw new UserError(sprintf('Unknown project "%d"', $projectId));
             }
+            $project->setOwner($viewer);
             unset($arguments['projectId']);
         }
 

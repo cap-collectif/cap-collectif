@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Security\ProjectVoter;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +20,7 @@ use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProjectMutation implements MutationInterface
 {
@@ -26,6 +30,7 @@ class CreateProjectMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private UserRepository $userRepository;
     private ProjectTypeRepository $projectTypeRepository;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -33,7 +38,8 @@ class CreateProjectMutation implements MutationInterface
         UserRepository $userRepository,
         FormFactoryInterface $formFactory,
         ProjectAuthorTransformer $transformer,
-        ProjectTypeRepository $projectTypeRepository
+        ProjectTypeRepository $projectTypeRepository,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->logger = $logger;
@@ -41,17 +47,20 @@ class CreateProjectMutation implements MutationInterface
         $this->formFactory = $formFactory;
         $this->userRepository = $userRepository;
         $this->projectTypeRepository = $projectTypeRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getArrayCopy();
 
-        if (\count($arguments['authors']) <= 0) {
+        if ($viewer->isOnlyProjectAdmin()) {
+            $arguments['authors'] = [GlobalId::toGlobalId('User', $viewer->getId())];
+        } elseif (\count($arguments['authors']) <= 0) {
             throw new UserError('You must specify at least one author.');
         }
 
-        $project = new Project();
+        $project = (new Project())->setOwner($viewer);
 
         $form = $this->formFactory->create(ProjectFormType::class, $project);
 
@@ -99,5 +108,10 @@ class CreateProjectMutation implements MutationInterface
         }
 
         return ['project' => $project];
+    }
+
+    public function isGranted(): bool
+    {
+        return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());
     }
 }

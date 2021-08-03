@@ -5,6 +5,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { OverlayTrigger } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage, type IntlShape } from 'react-intl';
+import { useSelector } from 'react-redux';
 import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
 import UserListField from '../../Field/UserListField';
@@ -21,6 +22,7 @@ import {
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import Text from '~ui/Primitives/Text';
 import { clearToasts } from '~ds/Toast';
+import type { GlobalState } from '~/types';
 
 type Option = {|
   value: string,
@@ -97,6 +99,8 @@ export const validate = (props: FormValues) => {
 };
 
 export const ProjectContentAdminForm = ({ intl }: Props) => {
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user ? user.isAdmin : false;
   React.useEffect(() => {
     clearToasts();
   });
@@ -115,20 +119,22 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
             label={<FormattedMessage id="global.title" />}
             component={renderComponent}
           />
-          <UserListField
-            id="project-author"
-            name="authors"
-            clearable
-            selectFieldIsObject
-            debounce
-            autoload
-            multi
-            placeholder=" "
-            labelClassName="control-label"
-            inputClassName="fake-inputClassName"
-            label={<FormattedMessage id="admin.fields.project.authors" />}
-            ariaControls="EventListFilters-filter-author-listbox"
-          />
+          {isAdmin && (
+            <UserListField
+              id="project-author"
+              name="authors"
+              clearable
+              selectFieldIsObject
+              debounce
+              autoload
+              multi
+              placeholder=" "
+              labelClassName="control-label"
+              inputClassName="fake-inputClassName"
+              label={<FormattedMessage id="admin.fields.project.authors" />}
+              ariaControls="EventListFilters-filter-author-listbox"
+            />
+          )}
 
           <ProjectSmallInput>
             <ProjectTypeListField optional placeholder=" " />

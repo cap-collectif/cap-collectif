@@ -128,6 +128,23 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
   }
 `;
 
+const CreateAlphaProjectWithOwnerMutation = /* GraphQL */ `
+  mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
+    createAlphaProject(input: $input) {
+      project {
+        id
+        title
+        authors {
+          username
+        }
+        owner {
+          username
+        }
+      }
+    }
+  }
+`;
+
 const BASE_PROJECT = {
   title: 'Je suis un projet simple',
   Cover: 'media1',
@@ -790,5 +807,31 @@ it('create a project with group of users as visibility', async () => {
         },
       },
     },
+  });
+});
+
+describe('access control', () => {
+  it('should create a project when the user is a project admin', async () => {
+    const response = await graphql(
+      CreateAlphaProjectWithOwnerMutation,
+      { input: { ...BASE_PROJECT } },
+      'internal_theo',
+    );
+    expect(response.createAlphaProject.project.owner.username).toStrictEqual('Théo QP');
+  });
+
+  it('should create a project when the user is a project admin and should be the author', async () => {
+    const response = await graphql(
+      CreateAlphaProjectWithOwnerMutation,
+      { input: { ...BASE_PROJECT } },
+      'internal_theo',
+    );
+    expect(response.createAlphaProject.project.authors).toStrictEqual([{ username: 'Théo QP' }]);
+  });
+
+  it('should not create a project when user is a not a project admin', async () => {
+    await expect(
+      graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_user'),
+    ).rejects.toThrowError('Access denied to this field.');
   });
 });

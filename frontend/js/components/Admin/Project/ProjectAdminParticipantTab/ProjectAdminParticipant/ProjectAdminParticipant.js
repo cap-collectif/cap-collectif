@@ -37,6 +37,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
   const {
     id,
     username,
+    url,
     adminUrl,
     firstname,
     lastname,
@@ -57,7 +58,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
         <UsernameContainer>
-          <a href={adminUrl}>{translateContent(username)}</a>
+          <a href={adminUrl ?? url}>{translateContent(username)}</a>
 
           {vip && !hasAccountDeleted && (
             <OverlayTrigger
@@ -151,12 +152,13 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
 const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminParticipant, {
   participant: graphql`
     fragment ProjectAdminParticipant_participant on User
-      @argumentDefinitions(contribuableId: { type: "ID" }) {
+      @argumentDefinitions(contribuableId: { type: "ID" }, viewerIsAdmin: { type: "Boolean!" }) {
       id
       username
       firstname
       lastname
-      adminUrl
+      adminUrl @include(if: $viewerIsAdmin)
+      url
       lastLogin
       email
       vip

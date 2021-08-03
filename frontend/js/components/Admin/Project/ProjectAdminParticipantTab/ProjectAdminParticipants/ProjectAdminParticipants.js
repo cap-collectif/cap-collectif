@@ -43,6 +43,7 @@ type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminParticipants_project,
   +hasFeatureEmail: boolean,
+  +viewerIsAdmin: boolean,
 |};
 
 type HeaderProps = {|
@@ -205,7 +206,12 @@ const DashboardHeader = ({
   );
 };
 
-export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Props) => {
+export const ProjectAdminParticipants = ({
+  project,
+  relay,
+  hasFeatureEmail,
+  viewerIsAdmin,
+}: Props) => {
   const { parameters, status, dispatch } = useProjectAdminParticipantsContext();
   const { selectedRows } = usePickableList();
   const refusingCount = countSelectedNotConsenting(project, selectedRows);
@@ -220,24 +226,26 @@ export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Pr
   return (
     <AnalysisPickableListContainer>
       <HeaderContainer>
-        <ExportButton
-          hasMarginRight
-          disabled={!hasParticipants}
-          linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
-          onChange={stepId => {
-            window.open(`/export-step-contributors/${stepId}`, '_blank');
-          }}>
-          {project.exportableSteps.filter(Boolean).map(({ step }) => {
-            if (step.contributors && step.contributors.totalCount > 0) {
-              return (
-                <DropdownSelect.Choice key={step.id} value={step.id} className="export-option">
-                  {step.title}
-                </DropdownSelect.Choice>
-              );
-            }
-            return null;
-          })}
-        </ExportButton>
+        {viewerIsAdmin && project.exportableSteps && (
+          <ExportButton
+            hasMarginRight
+            disabled={!hasParticipants}
+            linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+            onChange={stepId => {
+              window.open(`/export-step-contributors/${stepId}`, '_blank');
+            }}>
+            {project.exportableSteps.filter(Boolean).map(({ step }) => {
+              if (step.contributors && step.contributors.totalCount > 0) {
+                return (
+                  <DropdownSelect.Choice key={step.id} value={step.id} className="export-option">
+                    {step.title}
+                  </DropdownSelect.Choice>
+                );
+              }
+              return null;
+            })}
+          </ExportButton>
+        )}
 
         <ClearableInput
           id="search"
@@ -318,6 +326,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
     project: graphql`
       fragment ProjectAdminParticipants_project on Project
         @argumentDefinitions(
+          viewerIsAdmin: { type: "Boolean!" }
           projectId: { type: "ID!" }
           count: { type: "Int!" }
           cursor: { type: "String" }
@@ -334,7 +343,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
           id
           title
         }
-        exportableSteps {
+        exportableSteps @include(if: $viewerIsAdmin) {
           step {
             id
             title
@@ -390,7 +399,8 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
                 id
                 name
               }
-              ...ProjectAdminParticipant_participant @arguments(contribuableId: $contribuableId)
+              ...ProjectAdminParticipant_participant
+                @arguments(contribuableId: $contribuableId, viewerIsAdmin: $viewerIsAdmin)
             }
           }
         }
@@ -417,6 +427,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
     getVariables(props: Props, { count, cursor }, fragmentVariables) {
       return {
         ...fragmentVariables,
+        viewerIsAdmin: props.viewerIsAdmin,
         count,
         cursor,
       };
@@ -431,6 +442,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
         $userType: ID
         $step: ID
         $contribuableId: ID
+        $viewerIsAdmin: Boolean!
       ) {
         project: node(id: $projectId) {
           id
@@ -444,6 +456,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
               userType: $userType
               step: $step
               contribuableId: $contribuableId
+              viewerIsAdmin: $viewerIsAdmin
             )
         }
       }
@@ -453,6 +466,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
 
 const mapStateToProps = (state: GlobalState) => ({
   hasFeatureEmail: state.default.features.unstable__emailing || false,
+  viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 
 const ProjectAdminParticipantsConnected = connect<any, any, _, _, _, _>(mapStateToProps)(

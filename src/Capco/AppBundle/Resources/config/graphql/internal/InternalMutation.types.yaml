@@ -702,28 +702,28 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteQuestionnaireMutation", [value, getUser()])'
             # Project
             createProject:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProjectMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateProjectInput
                     payloadType: CreateProjectPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProjectMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProjectMutation", [value, getUser()])'
             # TODO: When the frontend is fully migrated from Sonata, we can delete the above `createProject` and rename `createAlphaProject` to `createProject`
             # and all related Inputs/Payloads/Mutation
             createAlphaProject:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateAlphaProjectMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateAlphaProjectInput
                     payloadType: CreateAlphaProjectPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateAlphaProjectMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateAlphaProjectMutation", [value, getUser()])'
             updateAlphaProject:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation").isGranted(args["input"]["projectId"])'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateAlphaProjectInput
                     payloadType: UpdateAlphaProjectPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation", [value, getUser()])'
             duplicateProject:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

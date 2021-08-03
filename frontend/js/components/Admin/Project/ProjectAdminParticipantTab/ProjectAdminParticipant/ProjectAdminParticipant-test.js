@@ -22,7 +22,7 @@ describe('<ProjectAdminParticipant />', () => {
   const query = graphql`
     query ProjectAdminParticipantTestQuery($id: ID = "<default>") @relay_test_operation {
       participant: node(id: $id) {
-        ...ProjectAdminParticipant_participant
+        ...ProjectAdminParticipant_participant @arguments(viewerIsAdmin: true)
       }
     }
   `;

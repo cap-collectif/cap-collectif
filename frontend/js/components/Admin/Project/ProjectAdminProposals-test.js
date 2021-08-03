@@ -864,6 +864,7 @@ describe('<ProjectAdminProposals />', () => {
     },
     themes,
     features,
+    viewerIsAdmin: true,
     baseUrl: 'jesuislurldebase',
     hasContributionsStep: true,
   };
@@ -929,6 +930,31 @@ describe('<ProjectAdminProposals />', () => {
 
   it('renders the "No proposals" placeholder when the project does not have any proposals', () => {
     const wrapper = shallow(<ProjectAdminProposals {...props.noProposals} />);
+    expect(wrapper.find(AnalysisNoProposal)).toHaveLength(1);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when the project have proposals when user is not an admin', () => {
+    const wrapper = shallow(<ProjectAdminProposals {...props.basic} viewerIsAdmin={false} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with badges when the project has merged proposals when user is not an admin', () => {
+    const wrapper = shallow(
+      <ProjectAdminProposals {...props.withMergeProposals} viewerIsAdmin={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly  when no contributions step when user is not an admin', () => {
+    const wrapper = shallow(
+      <ProjectAdminProposals {...props.noContributionStep} viewerIsAdmin={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders the "No proposals" placeholder when the project does not have any proposals when user is not an admin', () => {
+    const wrapper = shallow(<ProjectAdminProposals {...props.noProposals} viewerIsAdmin={false} />);
     expect(wrapper.find(AnalysisNoProposal)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });

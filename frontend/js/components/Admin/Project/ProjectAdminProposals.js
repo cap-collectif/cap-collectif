@@ -77,6 +77,7 @@ const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 
 type Props = {|
   +features: FeatureToggles,
+  +viewerIsAdmin: boolean,
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
   +themes: ProjectAdminProposals_themes,
@@ -551,6 +552,7 @@ export const ProjectAdminProposals = ({
   relay,
   baseUrl,
   hasContributionsStep,
+  viewerIsAdmin,
   features,
 }: Props) => {
   const { parameters, dispatch } = useProjectAdminProposalsContext();
@@ -647,20 +649,24 @@ export const ProjectAdminProposals = ({
             />
           </div>
           <div>
-            {features.import_proposals && selectedStepId && <ImportButton selectedStepId={selectedStepId} />}
-            <NewExportButton
-              disabled={!hasProposals}
-              onChange={(stepSlug: string | string[]) => {
-                if (typeof stepSlug === 'string') {
-                  window.open(
-                    `/projects/${project.slug}/step/${stepSlug ?? ''}/download`,
-                    '_blank',
-                  );
-                }
-              }}
-              exportableSteps={project.exportableSteps}
-              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
-            />
+            {features.import_proposals && selectedStepId && (
+              <ImportButton selectedStepId={selectedStepId} />
+            )}
+            {viewerIsAdmin && project.exportableSteps && (
+              <NewExportButton
+                disabled={!hasProposals}
+                onChange={(stepSlug: string | string[]) => {
+                  if (typeof stepSlug === 'string') {
+                    window.open(
+                      `/projects/${project.slug}/step/${stepSlug ?? ''}/download`,
+                      '_blank',
+                    );
+                  }
+                }}
+                exportableSteps={project.exportableSteps}
+                linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+              />
+            )}
           </div>
         </Flex>
 
@@ -779,6 +785,7 @@ export const ProjectAdminProposals = ({
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 
 const container = createPaginationContainer(
@@ -788,6 +795,7 @@ const container = createPaginationContainer(
       fragment ProjectAdminProposals_project on Project
         @argumentDefinitions(
           projectId: { type: "ID!" }
+          viewerIsAdmin: { type: "Boolean!" }
           count: { type: "Int!" }
           proposalRevisionsEnabled: { type: "Boolean!" }
           cursor: { type: "String" }
@@ -806,7 +814,7 @@ const container = createPaginationContainer(
         id
         adminAlphaUrl
         slug
-        exportableSteps {
+        exportableSteps @include(if: $viewerIsAdmin) {
           position
           step {
             id
@@ -978,6 +986,7 @@ const container = createPaginationContainer(
     query: graphql`
       query ProjectAdminProposalsPaginatedQuery(
         $projectId: ID!
+        $viewerIsAdmin: Boolean!
         $count: Int!
         $proposalRevisionsEnabled: Boolean!
         $cursor: String
@@ -995,6 +1004,7 @@ const container = createPaginationContainer(
           ...ProjectAdminProposals_project
             @arguments(
               projectId: $projectId
+              viewerIsAdmin: $viewerIsAdmin
               count: $count
               proposalRevisionsEnabled: $proposalRevisionsEnabled
               cursor: $cursor

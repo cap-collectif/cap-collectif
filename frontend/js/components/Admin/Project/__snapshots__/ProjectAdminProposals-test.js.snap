@@ -1111,6 +1111,1089 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
 </Provider>
 `;
 
+exports[`<ProjectAdminProposals /> renders correctly  when no contributions step when user is not an admin 1`] = `
+<Provider>
+  <commonstyle__AnalysisPickableListContainer>
+    <ForwardRef
+      justify="space-between"
+    >
+      <div>
+        <ClearableInput
+          disabled={false}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
+      <div />
+    </ForwardRef>
+    <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+      <div>
+        <InlineSelect
+          onChange={[Function]}
+          value="PUBLISHED"
+        >
+          <InlineSelect.Choice
+            value="ALL"
+          >
+            <FormattedMessage
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 9,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 4,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 2,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 3,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+    </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+    <PickableList>
+      <commonstyle__AnalysisProposalListHeaderContainer
+        disabled={false}
+        isSelectable={true}
+      >
+        <ProposalListHeader
+          project={
+            Object {
+              "$refType": null,
+              "adminAlphaUrl": "http://example.com",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep1",
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+                Object {
+                  "position": 1,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep2",
+                    "slug": "selection-step-2",
+                    "title": "selectionStep2",
+                  },
+                },
+              ],
+              "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+              "proposals": Object {
+                "edges": Array [
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo1",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district1",
+                        "name": "Beauregard",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:00:00",
+                      "reference": "1",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Ravalement de la façade de la bibliothèque municipale",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo12",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNTIy",
+                        "username": "johnsmith",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "12",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "SUCCESS",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Renovation of the gymnasium",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo2",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNQ==",
+                        "username": "user",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "2",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "SUCCESS",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Rénovation du gymnase",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo3",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district4",
+                        "name": "Beaulieu",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:04:00",
+                      "reference": "3",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Installation de bancs sur la place de la mairie",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo4",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNw==",
+                        "username": "user7",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:04:19",
+                      "reference": "4",
+                      "selections": Array [],
+                      "status": null,
+                      "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo7",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:07:00",
+                      "reference": "7",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition pas encore votable",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo8",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:08:00",
+                      "reference": "8",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition plus votable",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo1104",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": null,
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2018-04-11 00:00:00",
+                      "reference": "1104",
+                      "selections": Array [],
+                      "status": null,
+                      "title": "Test de publication avec accusé de réception",
+                      "trashed": false,
+                    },
+                  },
+                ],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 8,
+              },
+              "proposalsAll": Object {
+                "totalCount": 9,
+              },
+              "proposalsDraft": Object {
+                "totalCount": 2,
+              },
+              "proposalsPublished": Object {
+                "totalCount": 4,
+              },
+              "proposalsTrashed": Object {
+                "totalCount": 3,
+              },
+              "slug": "je-suis-un-slug",
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "form": Object {
+                    "categories": Array [
+                      Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                    ],
+                    "districts": Array [
+                      Object {
+                        "id": "district1",
+                        "name": "Mon beau quartier",
+                      },
+                      Object {
+                        "id": "district2",
+                        "name": "Noisyzoo",
+                      },
+                    ],
+                    "usingThemes": false,
+                  },
+                  "id": "cstep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status1",
+                      "name": "Approuvé",
+                    },
+                    Object {
+                      "color": "DANGER",
+                      "id": "status2",
+                      "name": "Rejeté",
+                    },
+                  ],
+                  "title": "Étape de dépôt",
+                },
+                Object {
+                  "__typename": "SelectionStep",
+                  "id": "selectionStep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "INFO",
+                      "id": "status4",
+                      "name": "Soumis au vote",
+                    },
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status5",
+                      "name": "Vote gagné",
+                    },
+                  ],
+                  "title": "Sélection",
+                },
+              ],
+            }
+          }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
+          }
+        />
+      </commonstyle__AnalysisProposalListHeaderContainer>
+      <PickableList.Body>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo1",
+              "author": Object {
+                "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                "username": "welcomattic",
+              },
+              "category": Object {
+                "id": "pCategory2",
+                "name": "Politique",
+              },
+              "district": Object {
+                "id": "district1",
+                "name": "Beauregard",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:00:00",
+              "reference": "1",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Ravalement de la façade de la bibliothèque municipale",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo12",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNTIy",
+                "username": "johnsmith",
+              },
+              "category": Object {
+                "id": "pCategory1",
+                "name": "Aménagement",
+              },
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:03:00",
+              "reference": "12",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "SUCCESS",
+                "id": "status2",
+                "name": "Approuvé",
+              },
+              "title": "Renovation of the gymnasium",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+              onClick={[Function]}
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo2",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+                "username": "user",
+              },
+              "category": Object {
+                "id": "pCategory1",
+                "name": "Aménagement",
+              },
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:03:00",
+              "reference": "2",
+              "selections": Array [],
+              "status": Object {
+                "color": "SUCCESS",
+                "id": "status2",
+                "name": "Approuvé",
+              },
+              "title": "Rénovation du gymnase",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+              onClick={[Function]}
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo3",
+              "author": Object {
+                "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                "username": "welcomattic",
+              },
+              "category": Object {
+                "id": "pCategory2",
+                "name": "Politique",
+              },
+              "district": Object {
+                "id": "district4",
+                "name": "Beaulieu",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:04:00",
+              "reference": "3",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Installation de bancs sur la place de la mairie",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo4",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNw==",
+                "username": "user7",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:04:19",
+              "reference": "4",
+              "selections": Array [],
+              "status": null,
+              "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="default"
+              onClick={[Function]}
+            >
+              admin.fields.proposal.no_status
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo7",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district3",
+                "name": "Maurepas Patton",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:07:00",
+              "reference": "7",
+              "selections": Array [],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Proposition pas encore votable",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo8",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district3",
+                "name": "Maurepas Patton",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:08:00",
+              "reference": "8",
+              "selections": Array [],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Proposition plus votable",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo1104",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": null,
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2018-04-11 00:00:00",
+              "reference": "1104",
+              "selections": Array [],
+              "status": null,
+              "title": "Test de publication avec accusé de réception",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="default"
+              onClick={[Function]}
+            >
+              admin.fields.proposal.no_status
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+      </PickableList.Body>
+    </PickableList>
+  </commonstyle__AnalysisPickableListContainer>
+</Provider>
+`;
+
 exports[`<ProjectAdminProposals /> renders correctly when the project have proposals 1`] = `
 <Provider>
   <commonstyle__AnalysisPickableListContainer>
@@ -1175,6 +2258,1101 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           onChange={[Function]}
         />
       </div>
+    </ForwardRef>
+    <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+      <div>
+        <InlineSelect
+          onChange={[Function]}
+          value="PUBLISHED"
+        >
+          <InlineSelect.Choice
+            value="ALL"
+          >
+            <FormattedMessage
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 9,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 4,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 2,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 3,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+    </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+    <PickableList>
+      <commonstyle__AnalysisProposalListHeaderContainer
+        disabled={false}
+        isSelectable={true}
+      >
+        <ProposalListHeader
+          project={
+            Object {
+              "$refType": null,
+              "adminAlphaUrl": "http://example.com",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep1",
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+                Object {
+                  "position": 1,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep2",
+                    "slug": "selection-step-2",
+                    "title": "selectionStep2",
+                  },
+                },
+              ],
+              "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+              "proposals": Object {
+                "edges": Array [
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo1",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district1",
+                        "name": "Beauregard",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:00:00",
+                      "reference": "1",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Ravalement de la façade de la bibliothèque municipale",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo12",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNTIy",
+                        "username": "johnsmith",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "12",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "SUCCESS",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Renovation of the gymnasium",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo2",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNQ==",
+                        "username": "user",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "2",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "SUCCESS",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Rénovation du gymnase",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo3",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district4",
+                        "name": "Beaulieu",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:04:00",
+                      "reference": "3",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Installation de bancs sur la place de la mairie",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo4",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNw==",
+                        "username": "user7",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:04:19",
+                      "reference": "4",
+                      "selections": Array [],
+                      "status": null,
+                      "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo7",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:07:00",
+                      "reference": "7",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition pas encore votable",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo8",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:08:00",
+                      "reference": "8",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition plus votable",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo1104",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": null,
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2018-04-11 00:00:00",
+                      "reference": "1104",
+                      "selections": Array [],
+                      "status": null,
+                      "title": "Test de publication avec accusé de réception",
+                      "trashed": false,
+                    },
+                  },
+                ],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 8,
+              },
+              "proposalsAll": Object {
+                "totalCount": 9,
+              },
+              "proposalsDraft": Object {
+                "totalCount": 2,
+              },
+              "proposalsPublished": Object {
+                "totalCount": 4,
+              },
+              "proposalsTrashed": Object {
+                "totalCount": 3,
+              },
+              "slug": "je-suis-un-slug",
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "form": Object {
+                    "categories": Array [
+                      Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                    ],
+                    "districts": Array [
+                      Object {
+                        "id": "district1",
+                        "name": "Mon beau quartier",
+                      },
+                      Object {
+                        "id": "district2",
+                        "name": "Noisyzoo",
+                      },
+                    ],
+                    "usingThemes": false,
+                  },
+                  "id": "cstep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status1",
+                      "name": "Approuvé",
+                    },
+                    Object {
+                      "color": "DANGER",
+                      "id": "status2",
+                      "name": "Rejeté",
+                    },
+                  ],
+                  "title": "Étape de dépôt",
+                },
+                Object {
+                  "__typename": "SelectionStep",
+                  "id": "selectionStep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "INFO",
+                      "id": "status4",
+                      "name": "Soumis au vote",
+                    },
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status5",
+                      "name": "Vote gagné",
+                    },
+                  ],
+                  "title": "Sélection",
+                },
+              ],
+            }
+          }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
+          }
+        />
+      </commonstyle__AnalysisProposalListHeaderContainer>
+      <PickableList.Body>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo1",
+              "author": Object {
+                "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                "username": "welcomattic",
+              },
+              "category": Object {
+                "id": "pCategory2",
+                "name": "Politique",
+              },
+              "district": Object {
+                "id": "district1",
+                "name": "Beauregard",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:00:00",
+              "reference": "1",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Ravalement de la façade de la bibliothèque municipale",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo12",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNTIy",
+                "username": "johnsmith",
+              },
+              "category": Object {
+                "id": "pCategory1",
+                "name": "Aménagement",
+              },
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:03:00",
+              "reference": "12",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "SUCCESS",
+                "id": "status2",
+                "name": "Approuvé",
+              },
+              "title": "Renovation of the gymnasium",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+              onClick={[Function]}
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo2",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+                "username": "user",
+              },
+              "category": Object {
+                "id": "pCategory1",
+                "name": "Aménagement",
+              },
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:03:00",
+              "reference": "2",
+              "selections": Array [],
+              "status": Object {
+                "color": "SUCCESS",
+                "id": "status2",
+                "name": "Approuvé",
+              },
+              "title": "Rénovation du gymnase",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+              onClick={[Function]}
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo3",
+              "author": Object {
+                "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                "username": "welcomattic",
+              },
+              "category": Object {
+                "id": "pCategory2",
+                "name": "Politique",
+              },
+              "district": Object {
+                "id": "district4",
+                "name": "Beaulieu",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:04:00",
+              "reference": "3",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Installation de bancs sur la place de la mairie",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo4",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNw==",
+                "username": "user7",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:04:19",
+              "reference": "4",
+              "selections": Array [],
+              "status": null,
+              "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="default"
+              onClick={[Function]}
+            >
+              admin.fields.proposal.no_status
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo7",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district3",
+                "name": "Maurepas Patton",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:07:00",
+              "reference": "7",
+              "selections": Array [],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Proposition pas encore votable",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo8",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district3",
+                "name": "Maurepas Patton",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:08:00",
+              "reference": "8",
+              "selections": Array [],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Proposition plus votable",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo1104",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": null,
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2018-04-11 00:00:00",
+              "reference": "1104",
+              "selections": Array [],
+              "status": null,
+              "title": "Test de publication avec accusé de réception",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="default"
+              onClick={[Function]}
+            >
+              admin.fields.proposal.no_status
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+      </PickableList.Body>
+    </PickableList>
+  </commonstyle__AnalysisPickableListContainer>
+</Provider>
+`;
+
+exports[`<ProjectAdminProposals /> renders correctly when the project have proposals when user is not an admin 1`] = `
+<Provider>
+  <commonstyle__AnalysisPickableListContainer>
+    <Button
+      leftIcon="LONG_ARROW_LEFT"
+      mb={4}
+      onClick={[Function]}
+      size="small"
+      variant="tertiary"
+    >
+      <FormattedMessage
+        id="global.steps"
+        values={Object {}}
+      />
+    </Button>
+    <ForwardRef
+      justify="space-between"
+    >
+      <div>
+        <ClearableInput
+          disabled={false}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
+      <div />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -3339,6 +5517,1092 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
 </Provider>
 `;
 
+exports[`<ProjectAdminProposals /> renders correctly with badges when the project has merged proposals when user is not an admin 1`] = `
+<Provider>
+  <commonstyle__AnalysisPickableListContainer>
+    <Button
+      leftIcon="LONG_ARROW_LEFT"
+      mb={4}
+      onClick={[Function]}
+      size="small"
+      variant="tertiary"
+    >
+      <FormattedMessage
+        id="global.steps"
+        values={Object {}}
+      />
+    </Button>
+    <ForwardRef
+      justify="space-between"
+    >
+      <div>
+        <ClearableInput
+          disabled={false}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
+      <div />
+    </ForwardRef>
+    <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+      <div>
+        <InlineSelect
+          onChange={[Function]}
+          value="PUBLISHED"
+        >
+          <InlineSelect.Choice
+            value="ALL"
+          >
+            <FormattedMessage
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 9,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 4,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 2,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 3,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+    </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+    <PickableList>
+      <commonstyle__AnalysisProposalListHeaderContainer
+        disabled={false}
+        isSelectable={true}
+      >
+        <ProposalListHeader
+          project={
+            Object {
+              "$refType": null,
+              "adminAlphaUrl": "http://example.com",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep1",
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+              ],
+              "id": "UHJvamVjdDpwcm9dzdqZWN0Ng==",
+              "proposals": Object {
+                "edges": Array [
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo1",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district1",
+                        "name": "Beauregard",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:00:00",
+                      "reference": "1",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Ravalement de la façade de la bibliothèque municipale",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo12",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNTIy",
+                        "username": "johnsmith",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": true,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "12",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "SUCCESS",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Renovation of the gymnasium",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo2",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNQ==",
+                        "username": "user",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": true,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "2",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "SUCCESS",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Rénovation du gymnase",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo3",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district4",
+                        "name": "Beaulieu",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 0,
+                      },
+                      "publishedAt": "2017-02-01 00:04:00",
+                      "reference": "3",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                            "title": "Selection step 1 title",
+                          },
+                        },
+                      ],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Installation de bancs sur la place de la mairie",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo4",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNw==",
+                        "username": "user7",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:04:19",
+                      "reference": "4",
+                      "selections": Array [],
+                      "status": null,
+                      "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo7",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:07:00",
+                      "reference": "7",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition pas encore votable",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo8",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2017-02-01 00:08:00",
+                      "reference": "8",
+                      "selections": Array [],
+                      "status": Object {
+                        "color": "INFO",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition plus votable",
+                      "trashed": false,
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
+                    "node": Object {
+                      "$fragmentRefs": null,
+                      "adminUrl": "https://capco.dev/admin/lapropo1104",
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": null,
+                      "draft": false,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "hasBeenMerged": false,
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "proposalVotes": Object {
+                        "totalCount": 10,
+                        "totalPointsCount": 26,
+                      },
+                      "publishedAt": "2018-04-11 00:00:00",
+                      "reference": "1104",
+                      "selections": Array [],
+                      "status": null,
+                      "title": "Test de publication avec accusé de réception",
+                      "trashed": false,
+                    },
+                  },
+                ],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 8,
+              },
+              "proposalsAll": Object {
+                "totalCount": 9,
+              },
+              "proposalsDraft": Object {
+                "totalCount": 2,
+              },
+              "proposalsPublished": Object {
+                "totalCount": 4,
+              },
+              "proposalsTrashed": Object {
+                "totalCount": 3,
+              },
+              "slug": "default-merged-proposal-project",
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "form": Object {
+                    "categories": Array [
+                      Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                    ],
+                    "districts": Array [
+                      Object {
+                        "id": "district1",
+                        "name": "Mon beau quartier",
+                      },
+                      Object {
+                        "id": "district2",
+                        "name": "Noisyzoo",
+                      },
+                    ],
+                    "usingThemes": false,
+                  },
+                  "id": "cstep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status1",
+                      "name": "Approuvé",
+                    },
+                    Object {
+                      "color": "DANGER",
+                      "id": "status2",
+                      "name": "Rejeté",
+                    },
+                  ],
+                  "title": "Étape de dépôt",
+                },
+                Object {
+                  "__typename": "SelectionStep",
+                  "id": "selectionStep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "INFO",
+                      "id": "status4",
+                      "name": "Soumis au vote",
+                    },
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status5",
+                      "name": "Vote gagné",
+                    },
+                  ],
+                  "title": "Sélection",
+                },
+              ],
+            }
+          }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
+          }
+        />
+      </commonstyle__AnalysisProposalListHeaderContainer>
+      <PickableList.Body>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo1",
+              "author": Object {
+                "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                "username": "welcomattic",
+              },
+              "category": Object {
+                "id": "pCategory2",
+                "name": "Politique",
+              },
+              "district": Object {
+                "id": "district1",
+                "name": "Beauregard",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:00:00",
+              "reference": "1",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Ravalement de la façade de la bibliothèque municipale",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo12",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNTIy",
+                "username": "johnsmith",
+              },
+              "category": Object {
+                "id": "pCategory1",
+                "name": "Aménagement",
+              },
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": true,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:03:00",
+              "reference": "12",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "SUCCESS",
+                "id": "status2",
+                "name": "Approuvé",
+              },
+              "title": "Renovation of the gymnasium",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+              onClick={[Function]}
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo2",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNQ==",
+                "username": "user",
+              },
+              "category": Object {
+                "id": "pCategory1",
+                "name": "Aménagement",
+              },
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": true,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:03:00",
+              "reference": "2",
+              "selections": Array [],
+              "status": Object {
+                "color": "SUCCESS",
+                "id": "status2",
+                "name": "Approuvé",
+              },
+              "title": "Rénovation du gymnase",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="success"
+              onClick={[Function]}
+            >
+              Approuvé
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          points={0}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo3",
+              "author": Object {
+                "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+                "username": "welcomattic",
+              },
+              "category": Object {
+                "id": "pCategory2",
+                "name": "Politique",
+              },
+              "district": Object {
+                "id": "district4",
+                "name": "Beaulieu",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 0,
+              },
+              "publishedAt": "2017-02-01 00:04:00",
+              "reference": "3",
+              "selections": Array [
+                Object {
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "title": "Selection step 1 title",
+                  },
+                },
+              ],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Installation de bancs sur la place de la mairie",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo4",
+              "author": Object {
+                "id": "VXNlcjp1c2VyNw==",
+                "username": "user7",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district2",
+                "name": "Nord Saint-Martin",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:04:19",
+              "reference": "4",
+              "selections": Array [],
+              "status": null,
+              "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="default"
+              onClick={[Function]}
+            >
+              admin.fields.proposal.no_status
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo7",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district3",
+                "name": "Maurepas Patton",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:07:00",
+              "reference": "7",
+              "selections": Array [],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Proposition pas encore votable",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo8",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": Object {
+                "id": "district3",
+                "name": "Maurepas Patton",
+              },
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2017-02-01 00:08:00",
+              "reference": "8",
+              "selections": Array [],
+              "status": Object {
+                "color": "INFO",
+                "id": "status1",
+                "name": "En cours",
+              },
+              "title": "Proposition plus votable",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="info"
+              onClick={[Function]}
+            >
+              En cours
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+        <Relay(AnalysisProposal)
+          dispatch={[Function]}
+          hasRegroupTag={true}
+          hasStateTag={false}
+          hasThemeEnabled={false}
+          isAdminView={true}
+          isVotable={false}
+          isVoteRanking={false}
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          points={26}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "adminUrl": "https://capco.dev/admin/lapropo1104",
+              "author": Object {
+                "id": "VXNlcjp1c2VyQWRtaW4=",
+                "username": "admin",
+              },
+              "category": null,
+              "district": null,
+              "draft": false,
+              "form": Object {
+                "step": Object {
+                  "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                  "title": "Collecte des propositions",
+                },
+              },
+              "hasBeenMerged": false,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+              "proposalVotes": Object {
+                "totalCount": 10,
+                "totalPointsCount": 26,
+              },
+              "publishedAt": "2018-04-11 00:00:00",
+              "reference": "1104",
+              "selections": Array [],
+              "status": null,
+              "title": "Test de publication avec accusé de réception",
+              "trashed": false,
+            }
+          }
+          proposalSelected={null}
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
+          votes={10}
+        >
+          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+            <ProjectAdminProposalsstyle__Label
+              bsStyle="default"
+              onClick={[Function]}
+            >
+              admin.fields.proposal.no_status
+            </ProjectAdminProposalsstyle__Label>
+          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+        </Relay(AnalysisProposal)>
+      </PickableList.Body>
+    </PickableList>
+  </commonstyle__AnalysisPickableListContainer>
+</Provider>
+`;
+
 exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when the project does not have any proposals 1`] = `
 <Provider>
   <commonstyle__AnalysisPickableListContainer>
@@ -3403,6 +6667,249 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           onChange={[Function]}
         />
       </div>
+    </ForwardRef>
+    <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+      <div>
+        <InlineSelect
+          onChange={[Function]}
+          value="PUBLISHED"
+        >
+          <InlineSelect.Choice
+            value="ALL"
+          >
+            <FormattedMessage
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+    </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+    <PickableList>
+      <commonstyle__AnalysisProposalListHeaderContainer
+        disabled={true}
+        isSelectable={true}
+      >
+        <ProposalListHeader
+          project={
+            Object {
+              "$refType": null,
+              "adminAlphaUrl": "http://example.com",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep1",
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+                Object {
+                  "position": 1,
+                  "step": Object {
+                    "__typename": "SelectionStep",
+                    "id": "selectionStep2",
+                    "slug": "selection-step-2",
+                    "title": "selectionStep2",
+                  },
+                },
+              ],
+              "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+              "proposals": Object {
+                "edges": Array [],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 0,
+              },
+              "proposalsAll": Object {
+                "totalCount": 0,
+              },
+              "proposalsDraft": Object {
+                "totalCount": 0,
+              },
+              "proposalsPublished": Object {
+                "totalCount": 0,
+              },
+              "proposalsTrashed": Object {
+                "totalCount": 0,
+              },
+              "slug": "je-suis-un-slug",
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "form": Object {
+                    "categories": Array [
+                      Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                    ],
+                    "districts": Array [
+                      Object {
+                        "id": "district1",
+                        "name": "Mon beau quartier",
+                      },
+                      Object {
+                        "id": "district2",
+                        "name": "Noisyzoo",
+                      },
+                    ],
+                    "usingThemes": false,
+                  },
+                  "id": "cstep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status1",
+                      "name": "Approuvé",
+                    },
+                    Object {
+                      "color": "DANGER",
+                      "id": "status2",
+                      "name": "Rejeté",
+                    },
+                  ],
+                  "title": "Étape de dépôt",
+                },
+                Object {
+                  "__typename": "SelectionStep",
+                  "id": "selectionStep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "INFO",
+                      "id": "status4",
+                      "name": "Soumis au vote",
+                    },
+                    Object {
+                      "color": "SUCCESS",
+                      "id": "status5",
+                      "name": "Vote gagné",
+                    },
+                  ],
+                  "title": "Sélection",
+                },
+              ],
+            }
+          }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
+          }
+        />
+      </commonstyle__AnalysisProposalListHeaderContainer>
+      <PickableList.Body>
+        <AnalysisNoProposal
+          state="PUBLISHED"
+        >
+          <FormattedMessage
+            id="help.text.section.all.empty"
+            tagName="p"
+            values={Object {}}
+          />
+        </AnalysisNoProposal>
+      </PickableList.Body>
+    </PickableList>
+  </commonstyle__AnalysisPickableListContainer>
+</Provider>
+`;
+
+exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when the project does not have any proposals when user is not an admin 1`] = `
+<Provider>
+  <commonstyle__AnalysisPickableListContainer>
+    <Button
+      leftIcon="LONG_ARROW_LEFT"
+      mb={4}
+      onClick={[Function]}
+      size="small"
+      variant="tertiary"
+    >
+      <FormattedMessage
+        id="global.steps"
+        values={Object {}}
+      />
+    </Button>
+    <ForwardRef
+      justify="space-between"
+    >
+      <div>
+        <ClearableInput
+          disabled={true}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
+      <div />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>

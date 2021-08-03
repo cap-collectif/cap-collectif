@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectContentAdminForm } from './ProjectContentAdminForm';
 import { formMock, intlMock, $refType } from '~/mocks';
+import MockProviders from '~/testUtils';
 
 describe('<ProjectContentAdminForm />', () => {
   const defaultProps = {
@@ -13,7 +14,11 @@ describe('<ProjectContentAdminForm />', () => {
   };
 
   it('renders correctly empty', () => {
-    const wrapper = shallow(<ProjectContentAdminForm {...defaultProps} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: false } } }}>
+        <ProjectContentAdminForm {...defaultProps} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -35,7 +40,11 @@ describe('<ProjectContentAdminForm />', () => {
         metaDescription: 'so meta',
       },
     };
-    const wrapper = shallow(<ProjectContentAdminForm {...props} />);
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: false } } }}>
+        <ProjectContentAdminForm {...props} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

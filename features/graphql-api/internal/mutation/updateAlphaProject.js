@@ -1041,3 +1041,117 @@ it('update an existing project with a DebateStep to add a PresentationStep', asy
     },
   });
 });
+
+describe('project access control', () => {
+  const BASE_INPUT = {
+    title: 'Projet avec administrateur de projet',
+    authors: ['VXNlcjp1c2VyU3B5bA=='],
+    projectType: '2',
+    Cover: null,
+    video: null,
+    themes: [],
+    districts: [],
+    metaDescription: null,
+    isExternal: false,
+    publishedAt: '2020-06-19 13:00:00',
+    visibility: 'PUBLIC',
+    opinionCanBeFollowed: false,
+    steps: [
+      {
+        id: 'pstepProjectWithOwner',
+        body: 'Je suis un projet qui contient un administrateur de projet (dit owner en API)',
+        type: 'PRESENTATION',
+        title: 'Présentation',
+        startAt: null,
+        endAt: null,
+        label: 'Présentation',
+        customCode: null,
+        metaDescription: null,
+        isEnabled: true,
+        requirements: [],
+      },
+      {
+        id: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcFByb2plY3RPd25lcg==',
+        body:
+          "Je suis une belle étape de consultation au sein d'un projet avec un administrateur de projet",
+        timeless: false,
+        type: 'CONSULTATION',
+        title: 'Étape de consultation dans un projet avec administrateur de projet',
+        startAt: '2020-11-03 20:30:55',
+        endAt: '2032-11-03 06:45:12',
+        label: 'Consultation',
+        customCode: null,
+        metaDescription: null,
+        isEnabled: true,
+        consultations: ['Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvblByb2plY3RXaXRoT3duZXI='],
+        requirements: [],
+        requirementsReason: null,
+      },
+      {
+        id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9qZWN0V2l0aE93bmVy',
+        body: 'Ouais le body ouais',
+        timeless: false,
+        type: 'COLLECT',
+        title: 'Budget participatif du projet avec administrateur de projet',
+        startAt: '2020-10-16 00:00:00',
+        endAt: '2021-10-16 00:00:00',
+        label: 'Dépôt',
+        customCode: null,
+        metaDescription: null,
+        isEnabled: true,
+        allowAuthorsToAddNews: false,
+        defaultSort: 'RANDOM',
+        mainView: 'grid',
+        proposalForm: 'proposalFormProjectWithOwner',
+        private: false,
+        defaultStatus: null,
+        statuses: [],
+        votesHelpText: null,
+        votesLimit: null,
+        votesMin: null,
+        votesRanking: false,
+        voteThreshold: null,
+        voteType: 'DISABLED',
+        budget: null,
+        requirements: [],
+        requirementsReason: null,
+      },
+      {
+        id: 'questionnaireStepProjectWithOwner',
+        body: 'Ici ça va pookie fort',
+        timeless: false,
+        type: 'QUESTIONNAIRE',
+        title: 'Questionnaire administrateur de projet',
+        startAt: '2020-09-11 00:00:00',
+        endAt: '2024-09-27 00:00:00',
+        label: 'Questionnaire qui dénonce',
+        customCode: null,
+        metaDescription: null,
+        isEnabled: true,
+        requirements: [],
+        questionnaire: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlUHJvamVjdFdpdGhPd25lcg==',
+        footer: null,
+      },
+    ],
+    locale: null,
+    archived: false,
+  };
+  it('should update a project with an owner when user is a project admin and the owner', async () => {
+    const response = await graphql(
+      UpdateAlphaProjectMutation,
+      { input: { ...BASE_INPUT, projectId: toGlobalId('Project', 'projectWithOwner') } },
+      'internal_theo',
+    );
+    expect(response.updateAlphaProject).not.toBeNull();
+  });
+
+  it('should not update a project with an owner when user is a project admin and not the owner', async () => {
+    await expect(
+      graphql(
+        UpdateAlphaProjectMutation,
+        { input: { ...BASE_INPUT, projectId: toGlobalId('Project', 'projectIdf3') } },
+        'internal_theo',
+      ),
+    ).rejects.toThrowError('Access denied to this field.');
+  });
+});

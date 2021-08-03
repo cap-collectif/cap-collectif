@@ -674,6 +674,11 @@ class User extends BaseUser implements
         return $this->hasRole(UserRole::ROLE_ADMIN) || $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
     }
 
+    public function isOnlyProjectAdmin(): bool
+    {
+        return $this->isProjectAdmin() && !$this->isAdmin();
+    }
+
     public function isEvaluerOnLegacyTool(): bool
     {
         foreach ($this->userGroups as $userGroup) {

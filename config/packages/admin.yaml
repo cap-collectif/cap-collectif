@@ -955,6 +955,7 @@ services:
                 ~,
                 Capco\AppBundle\Entity\AlphaProject,
                 Capco\AdminBundle\Controller\AlphaProjectController,
+                '@security.authorization_checker',
             ]
         tags:
             - {

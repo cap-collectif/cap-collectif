@@ -22,6 +22,7 @@ export const queryContributions = graphql`
   query ProjectAdminContributionsPageQuery(
     # ARGUMENTS OF ProjectAdminProposals
     $projectId: ID!
+    $viewerIsAdmin: Boolean!
     $countProposalPagination: Int!
     $cursorProposalPagination: String
     $proposalRevisionsEnabled: Boolean!
@@ -78,6 +79,7 @@ export const queryContributions = graphql`
     ...ProjectAdminProposalsPage_query
       @arguments(
         projectId: $projectId
+        viewerIsAdmin: $viewerIsAdmin
         count: $countProposalPagination
         cursor: $cursorProposalPagination
         proposalRevisionsEnabled: $proposalRevisionsEnabled

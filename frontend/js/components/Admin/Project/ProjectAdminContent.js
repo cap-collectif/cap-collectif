@@ -37,6 +37,7 @@ import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.
 
 type Props = {|
   +features: FeatureToggles,
+  +viewerIsAdmin: boolean,
   +project: ProjectAdminContent_project,
   +firstCollectStepId: ?string,
 |};
@@ -147,7 +148,12 @@ const formatNavbarLinks = (
   return links;
 };
 
-export const ProjectAdminContent = ({ project, firstCollectStepId, features }: Props) => {
+export const ProjectAdminContent = ({
+  project,
+  firstCollectStepId,
+  features,
+  viewerIsAdmin,
+}: Props) => {
   const location = useLocation();
   const [title, setTitle] = useState<string>(project.title);
   const path = getProjectAdminBaseUrl(project._id);
@@ -170,7 +176,7 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
     queryContributions,
     {
       // CollectStep
-      ...renameInitialVariable(queryVariableProposal),
+      ...renameInitialVariable(queryVariableProposal(viewerIsAdmin)),
       projectId: project.id,
       proposalStep: firstCollectStepId,
       proposalRevisionsEnabled: features.proposal_revisions ?? false,
@@ -192,7 +198,7 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
   dataParticipantPrefetch.next(
     environment,
     queryParticipant,
-    { projectId: project.id, ...queryVariableParticipant(project.id) },
+    { projectId: project.id, ...queryVariableParticipant(project.id, viewerIsAdmin) },
     { fetchPolicy: 'store-or-network' },
   );
 
@@ -270,6 +276,7 @@ const ProjectAdminRouterWrapper = ({
   project,
   features,
   firstCollectStepId,
+  viewerIsAdmin,
 }: {
   ...Props,
   +firstCollectStepId?: ?string,
@@ -277,6 +284,7 @@ const ProjectAdminRouterWrapper = ({
   <RelayEnvironmentProvider environment={environment}>
     <Router>
       <ProjectAdminContent
+        viewerIsAdmin={viewerIsAdmin}
         project={project}
         features={features}
         firstCollectStepId={firstCollectStepId}
@@ -287,6 +295,7 @@ const ProjectAdminRouterWrapper = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
+  viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
   title: formValueSelector('projectAdminForm')(state, 'title'),
 });
 

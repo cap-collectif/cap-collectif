@@ -3,15 +3,28 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Security\ProjectVoter;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AlphaProjectAdmin extends CapcoAdmin
 {
     protected $baseRouteName = 'capco_admin_alpha_project';
     protected $baseRoutePattern = 'alpha/project';
+    private AuthorizationCheckerInterface $authorizationChecker;
+
+    public function __construct(
+        $code,
+        $class,
+        $baseControllerName,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->authorizationChecker = $authorizationChecker;
+    }
 
     public function getObject($id)
     {
@@ -28,6 +41,11 @@ class AlphaProjectAdmin extends CapcoAdmin
         }
 
         return parent::getTemplate($name);
+    }
+
+    public function isGranted($name, $object = null)
+    {
+        return $this->authorizationChecker->isGranted(ProjectVoter::VIEW, $object);
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -49,8 +67,14 @@ class AlphaProjectAdmin extends CapcoAdmin
         $collection->add('editAnalysis', $this->getRouterIdParameter() . '/analysis');
         $collection->add('editContributors', $this->getRouterIdParameter() . '/contributors');
         $collection->add('indexProposals', $this->getRouterIdParameter() . '/contributions');
-        $collection->add('editDebate', $this->getRouterIdParameter() . '/contributions/debate/{slug}');
-        $collection->add('editProposals', $this->getRouterIdParameter() . '/contributions/proposals');
+        $collection->add(
+            'editDebate',
+            $this->getRouterIdParameter() . '/contributions/debate/{slug}'
+        );
+        $collection->add(
+            'editProposals',
+            $this->getRouterIdParameter() . '/contributions/proposals'
+        );
         $collection->add('editParticipants', $this->getRouterIdParameter() . '/participants');
         $collection->clearExcept([
             'create',
@@ -60,7 +84,7 @@ class AlphaProjectAdmin extends CapcoAdmin
             'editDebate',
             'editContributors',
             'editProposals',
-            'editParticipants'
+            'editParticipants',
         ]);
     }
 }

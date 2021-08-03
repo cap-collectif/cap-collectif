@@ -22,6 +22,7 @@ import Skeleton from '~ds/Skeleton';
 
 type ReduxProps = {|
   +proposalRevisionsEnabled: boolean,
+  +viewerIsAdmin: boolean,
 |};
 
 type Props = {|
@@ -38,6 +39,7 @@ type PropsQuery = {|
 |};
 
 type VariableQuery = {|
+  +viewerIsAdmin: boolean,
   +count: number,
   +cursor: ?string,
   +orderBy: {|
@@ -85,8 +87,10 @@ export const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminPageParameters,
   proposalRevisionsEnabled: boolean = false,
+  viewerIsAdmin: boolean,
 ): ProjectAdminProposalsPageQueryVariables => ({
   projectId,
+  viewerIsAdmin,
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   proposalRevisionsEnabled,
   cursor: null,
@@ -106,6 +110,7 @@ export const createQueryVariables = (
 export const queryProposals = graphql`
   query ProjectAdminProposalsPageQuery(
     $projectId: ID!
+    $viewerIsAdmin: Boolean!
     $count: Int!
     $proposalRevisionsEnabled: Boolean!
     $cursor: String
@@ -122,6 +127,7 @@ export const queryProposals = graphql`
       ...ProjectAdminProposals_project
         @arguments(
           projectId: $projectId
+          viewerIsAdmin: $viewerIsAdmin
           count: $count
           proposalRevisionsEnabled: $proposalRevisionsEnabled
           cursor: $cursor
@@ -152,6 +158,7 @@ export const renameInitialVariable = ({
   step,
   status,
   term,
+  viewerIsAdmin,
 }: VariableQuery) => ({
   countProposalPagination: count,
   cursorProposalPagination: cursor,
@@ -163,10 +170,12 @@ export const renameInitialVariable = ({
   proposalStatus: status,
   proposalStep: step,
   proposalTerm: term,
+  viewerIsAdmin,
 });
 
-export const initialVariables = {
+export const initialVariables = (viewerIsAdmin: boolean) => ({
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
+  viewerIsAdmin,
   cursor: null,
   orderBy: {
     field: 'PUBLISHED_AT',
@@ -179,13 +188,14 @@ export const initialVariables = {
   step: null,
   status: null,
   term: null,
-};
+});
 
 const ProjectAdminProposalsPage = ({
   query: dataPreloaded,
   projectId,
   proposalRevisionsEnabled,
   hasContributionsStep,
+  viewerIsAdmin,
   baseUrl,
 }: Props) => {
   const { parameters, firstCollectStepId } = useProjectAdminProposalsContext();
@@ -194,11 +204,12 @@ const ProjectAdminProposalsPage = ({
     projectId,
     parameters,
     proposalRevisionsEnabled,
+    viewerIsAdmin,
   );
 
   const hasFilters: boolean = !isEqual(
     {
-      ...initialVariables,
+      ...initialVariables(viewerIsAdmin),
       projectId,
       step: firstCollectStepId,
       proposalRevisionsEnabled,
@@ -237,6 +248,7 @@ const ProjectAdminProposalsPage = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
+  viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 
 export default createFragmentContainer(
@@ -246,6 +258,7 @@ export default createFragmentContainer(
       fragment ProjectAdminProposalsPage_query on Query
         @argumentDefinitions(
           projectId: { type: "ID!" }
+          viewerIsAdmin: { type: "Boolean!" }
           count: { type: "Int!" }
           proposalRevisionsEnabled: { type: "Boolean!" }
           cursor: { type: "String" }
@@ -266,6 +279,7 @@ export default createFragmentContainer(
           ...ProjectAdminProposals_project
             @arguments(
               projectId: $projectId
+              viewerIsAdmin: $viewerIsAdmin
               count: $count
               proposalRevisionsEnabled: $proposalRevisionsEnabled
               cursor: $cursor

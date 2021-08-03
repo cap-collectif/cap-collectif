@@ -2,7 +2,8 @@
 import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks';
-import type { ResultPreloadQuery, Query } from '~/types';
+import { useSelector } from 'react-redux';
+import type { ResultPreloadQuery, Query, GlobalState } from '~/types';
 import type {
   ProjectAdminParticipantTabQueryResponse,
   ProjectAdminParticipantTabQueryVariables,
@@ -29,9 +30,11 @@ type PropsQuery = {|
 const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminParticipantParameters,
+  viewerIsAdmin: boolean,
 ): ProjectAdminParticipantTabQueryVariables => ({
   projectId,
   count: PROJECT_ADMIN_PARTICIPANT_PAGINATION,
+  viewerIsAdmin,
   cursor: null,
   orderBy: {
     field: 'ACTIVITY',
@@ -53,11 +56,13 @@ export const queryParticipant = graphql`
     $userType: ID
     $step: ID
     $contribuableId: ID
+    $viewerIsAdmin: Boolean!
   ) {
     project: node(id: $projectId) {
       ...ProjectAdminParticipants_project
         @arguments(
           projectId: $projectId
+          viewerIsAdmin: $viewerIsAdmin
           count: $count
           cursor: $cursor
           orderBy: $orderBy
@@ -70,9 +75,10 @@ export const queryParticipant = graphql`
   }
 `;
 
-export const initialVariables = (projectId: string) => ({
+export const initialVariables = (projectId: string, viewerIsAdmin: boolean = false) => ({
   count: PROJECT_ADMIN_PARTICIPANT_PAGINATION,
   cursor: null,
+  viewerIsAdmin,
   orderBy: {
     field: 'ACTIVITY',
     direction: 'DESC',
@@ -85,10 +91,12 @@ export const initialVariables = (projectId: string) => ({
 
 const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
   const { parameters } = useProjectAdminParticipantsContext();
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const viewerIsAdmin = user ? user.isAdmin : false;
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
-  const queryVariablesWithParameters = createQueryVariables(projectId, parameters);
+  const queryVariablesWithParameters = createQueryVariables(projectId, parameters, viewerIsAdmin);
   const hasFilters: boolean = !isEqual(
-    { projectId, ...initialVariables(projectId) },
+    { projectId, ...initialVariables(projectId, viewerIsAdmin) },
     queryVariablesWithParameters,
   );
 

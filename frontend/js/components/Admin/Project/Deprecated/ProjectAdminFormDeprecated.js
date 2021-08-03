@@ -26,6 +26,7 @@ type Props = {|
   intl: IntlShape,
   formName: string,
   features: FeatureToggles,
+  isAdmin: boolean,
 |};
 
 type Author = {|
@@ -97,7 +98,7 @@ const validate = ({ title, authors }: FormValues) => {
   react project page is complete.
 */
 export const ProjectAdminFormDeprecated = (props: Props) => {
-  const { handleSubmit, intl, invalid, submitting, pristine, project, features } = props;
+  const { handleSubmit, intl, invalid, submitting, pristine, project, features, isAdmin } = props;
 
   let noModal = window.location.href.indexOf('?back=alpha') !== -1;
   const isFirstTime = !localStorage.getItem(`projectForm_${project?._id || ''}`);
@@ -164,27 +165,29 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
               }
               component={renderComponent}
             />
-            <UserListField
-              id="project-author"
-              name="authors"
-              clearable
-              selectFieldIsObject
-              debounce
-              autoload={false}
-              multi
-              labelClassName="control-label"
-              inputClassName="fake-inputClassName"
-              placeholder={intl.formatMessage({ id: 'all-the-authors' })}
-              label={
-                <div>
-                  <FormattedMessage id="admin.fields.project.authors" />
-                  <span className="excerpt">
-                    <FormattedMessage id="global.mandatory" />
-                  </span>
-                </div>
-              }
-              ariaControls="EventListFilters-filter-author-listbox"
-            />
+            {isAdmin && (
+              <UserListField
+                id="project-author"
+                name="authors"
+                clearable
+                selectFieldIsObject
+                debounce
+                autoload={false}
+                multi
+                labelClassName="control-label"
+                inputClassName="fake-inputClassName"
+                placeholder={intl.formatMessage({ id: 'all-the-authors' })}
+                label={
+                  <div>
+                    <FormattedMessage id="admin.fields.project.authors" />
+                    <span className="excerpt">
+                      <FormattedMessage id="global.mandatory" />
+                    </span>
+                  </div>
+                }
+                ariaControls="EventListFilters-filter-author-listbox"
+              />
+            )}
 
             <ProjectTypeListField />
             <Button
@@ -207,6 +210,7 @@ export const ProjectAdminFormDeprecated = (props: Props) => {
 
 const mapStateToProps = (state, { project }: Props) => ({
   features: state.default.features,
+  isAdmin: state.user.user ? state.user.user.isAdmin : false,
   initialValues: {
     authors: project ? project.authors : [],
     title: project ? project.title : null,
