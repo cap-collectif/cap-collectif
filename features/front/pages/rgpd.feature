@@ -25,7 +25,7 @@ Scenario: An anonymous cant simply accept cookies by scrolling
 Scenario: An anonymous wants to refuse all cookies
   Given I visited "home page" with cookies not accepted
   And I should see "cookies-text"
-  Then I click on button "#cookie-more-button"
+  Then I click on button "#cookie-decline-button"
   And I should see a cookie named "hasFullConsent"
 
 Scenario: An anonymous wants to toggle cookies performance
@@ -37,8 +37,7 @@ Scenario: An anonymous wants to toggle cookies performance
   Then I check element "cookies-enable-analytic"
   And I should see "list.label_enabled"
   And I click on button "#cookies-save"
-  And I should not see "cookies.content.page"
-  And I should not see "cookies-text"
+  And I wait "cookies.content.page" to disappear on current page in "#cookies-manager"
   Then I go to a proposal with lot of comments
   And I visited "projects page" with cookies not accepted
   When I click on button "#cookies-management"

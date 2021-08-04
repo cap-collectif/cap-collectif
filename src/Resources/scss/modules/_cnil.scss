@@ -1,9 +1,6 @@
 /* ===============================================================
    CNIL
 ================================================================*/
-#cookie-consent {
-    border-radius: 4px;
-}
 .cookie-banner, #cookieChoiceInfo {
     display: none;
     position: fixed;
@@ -19,18 +16,6 @@
         display: flex;
         justify-content: space-between;
     }
-
-  #cookie-more-button {
-    background-color: $dark;
-    color: $white;
-  }
-
-  #cookie-consent {
-    background-color: $white;
-    color: $dark;
-    text-decoration: none;
-    padding: 12px 16px;
-  }
 }
 
 .cookie-inform-and-ask {

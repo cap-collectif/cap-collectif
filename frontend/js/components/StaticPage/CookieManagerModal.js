@@ -1,70 +1,32 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useDisclosure } from '@liinkiing/react-hooks';
 import CloseButton from '../Form/CloseButton';
 import Cookie from './Cookie';
 import CookieMonster from '../../CookieMonster';
-import type { State } from '../../types';
+import type { State } from '~/types';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
+import {
+  LinkSeparator,
+  CookieBanner,
+  ButtonParameters,
+  ButtonDecline,
+  ButtonAccept,
+} from './CookieManagerModal.style';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
 
-type Props = {
-  analyticsJs: ?string,
-  adJs: ?string,
-  separator?: string,
-  cookieTrad?: ?string,
-  isLink: boolean,
-};
-
-export const LinkSeparator: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
-  padding: 0 8px;
-  @media (max-width: 767px) {
-    display: none;
-  }
-`;
-
-export const CookieBanner: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .cookie-banner.active {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-  }
-  .cookie-text {
-    padding: 0;
-  }
-  @media (max-width: 479px) {
-    flex-direction: column;
-    padding: 16px;
-    .cookie-button {
-      margin-top: 8px;
-      width: 100%;
-    }
-    #cookie-consent {
-      padding: 4px 8px;
-    }
-  }
-  @media (min-width: 480px) and (max-width: 1080px) {
-    padding: 32px;
-    flex-direction: column;
-    .cookie-button {
-      margin-top: 24px;
-      width: 100%;
-    }
-  }
-  @media (min-width: 1080px) {
-    padding: 32px 37px;
-    .cookie-button {
-      width: 100%;
-      min-width: 380px;
-      max-width: 400px;
-      text-align: right;
-      padding-right: 0;
-      padding-left: 0;
-    }
-  }
-`;
+type Props = {|
+  +analyticsJs: ?string,
+  +adJs: ?string,
+  +separator?: string,
+  +cookieTrad?: ?string,
+  +isLink?: boolean,
+|};
 
 export const CookieManagerModal = ({
   isLink = false,
@@ -122,65 +84,53 @@ export const CookieManagerModal = ({
         </div>
       ) : (
         <CookieBanner id="cookie-banner" className="cookie-banner">
-          <div className="cookie-text">
-            <FormattedMessage id="cookies-text" />
-          </div>
-          <div className="text-center cookie-button">
-            <Button
-              id="cookie-more-button"
-              className="mr-10"
-              variant="link"
-              bsStyle="link"
+          <Flex direction="column" spacing={2} className="cookie-text-wrapper">
+            <Text>{intl.formatMessage({ id: 'cookies-text' })}</Text>
+
+            <ButtonParameters id="cookies-parameters" onClick={onOpen}>
+              {intl.formatMessage({ id: 'setup-cookies' })}
+            </ButtonParameters>
+          </Flex>
+
+          <div className="cookie-button">
+            <ButtonDecline
+              id="cookie-decline-button"
               onClick={() => {
                 CookieMonster.doNotConsiderFullConsent(true);
-              }}
-              name="cookie-refused">
-              <FormattedMessage id="refused-all-cookies" />
-            </Button>
-            <Button
+              }}>
+              {intl.formatMessage({ id: 'decline-optional-cookies' })}
+            </ButtonDecline>
+
+            <ButtonAccept
               id="cookie-consent"
-              bsStyle="default"
-              className="btn btn-default btn-sm"
+              className="btn-cookie-consent"
               onClick={() => {
                 CookieMonster.considerFullConsent();
               }}>
-              <FormattedMessage id="accept-everything" />
-            </Button>
+              {intl.formatMessage({ id: 'accept-everything' })}
+            </ButtonAccept>
           </div>
         </CookieBanner>
       )}
-      <div>
-        <Modal
-          animation={false}
-          show={isOpen}
-          onHide={onClose}
-          bsSize="large"
-          id="cookies-modal"
-          className="cookie-manager"
-          aria-labelledby="contained-modal-title-lg">
-          <Modal.Header
-            closeButton
-            closeLabel={intl.formatMessage({ id: 'close.modal' })}
-            className="cookie-manager">
-            <Modal.Title id="contained-modal-title-lg" className="cookie-manager">
-              <FormattedMessage id="cookies-management" />
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Cookie analyticsJs={analyticsJs} adJs={adJs} ref={cookie} />
-          </Modal.Body>
-          <Modal.Footer className="cookie-manager">
-            <CloseButton buttonId="cookies-cancel" onClose={onClose} />
-            <button
-              className="ml-15 btn btn-primary"
-              id="cookies-save"
-              onClick={saveCookie}
-              type="submit">
-              <FormattedMessage id="global.save" />
-            </button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+
+      <Modal
+        show={isOpen}
+        onClose={onClose}
+        ariaLabel={intl.formatMessage({ id: 'cookies-management' })}
+        className="modal-cookie-manager">
+        <Modal.Header>
+          <Heading>{intl.formatMessage({ id: 'cookies-management' })}</Heading>
+        </Modal.Header>
+        <Modal.Body>
+          <Cookie analyticsJs={analyticsJs} adJs={adJs} ref={cookie} />
+        </Modal.Body>
+        <Modal.Footer spacing={2}>
+          <CloseButton buttonId="cookies-cancel" onClose={onClose} />
+          <button type="submit" className="btn btn-primary" id="cookies-save" onClick={saveCookie}>
+            {intl.formatMessage({ id: 'global.save' })}
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
