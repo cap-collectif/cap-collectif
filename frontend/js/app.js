@@ -5,6 +5,8 @@ import 'moment-timezone';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'url-search-params-polyfill';
+import { shouldPolyfill } from '@formatjs/intl-pluralrules/should-polyfill';
+import { shouldPolyfill as relativeShouldPolyfill } from '@formatjs/intl-relativetimeformat/should-polyfill';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -100,22 +102,84 @@ if (isSafari) {
 
 global.cookieMonster = require('./CookieMonster').default;
 
+async function polyfill(locale: string) {
+  if (!shouldPolyfill(locale)) {
+    return;
+  }
+  // Load the polyfill 1st BEFORE loading data
+  await import('@formatjs/intl-pluralrules/polyfill');
+
+  switch (locale) {
+    case 'en-GB':
+    case 'eu-EU':
+      await import('@formatjs/intl-pluralrules/locale-data/en');
+      break;
+    case 'de-DE':
+      await import('@formatjs/intl-pluralrules/locale-data/de');
+      break;
+    case 'es-ES':
+      await import('@formatjs/intl-pluralrules/locale-data/es');
+      break;
+    case 'nl-NL':
+      await import('@formatjs/intl-pluralrules/locale-data/nl');
+      break;
+    case 'sv-SE':
+      await import('@formatjs/intl-pluralrules/locale-data/sv');
+      break;
+    case 'fr-FR':
+    case 'oc-OC':
+    default:
+      await import('@formatjs/intl-pluralrules/locale-data/fr');
+      break;
+  }
+}
+
 // react-intl@3.x polyfills for iNtErNeT eXpLoReR 11
 if (!Intl.PluralRules) {
-  require('@formatjs/intl-pluralrules/polyfill');
-  require('@formatjs/intl-pluralrules/locale-data/fr');
-  require('@formatjs/intl-pluralrules/locale-data/nl');
-  require('@formatjs/intl-pluralrules/locale-data/en');
-  require('@formatjs/intl-pluralrules/locale-data/es');
-  require('@formatjs/intl-pluralrules/locale-data/de');
+  polyfill(locale)
+    .then((accepted, rejected) => {
+      console.log('intl-pluralrules imported');
+    })
+    .catch(error => console.error('intl-pluralrules', error));
+}
+
+async function relativePolyfill(locale: string) {
+  if (!relativeShouldPolyfill(locale)) {
+    return;
+  }
+  // Load the polyfill 1st BEFORE loading data
+  await import('@formatjs/intl-relativetimeformat/polyfill');
+
+  switch (locale) {
+    case 'en-GB':
+    case 'eu-EU':
+      await import('@formatjs/intl-relativetimeformat/locale-data/en');
+      break;
+    case 'de-DE':
+      await import('@formatjs/intl-relativetimeformat/locale-data/de');
+      break;
+    case 'es-ES':
+      await import('@formatjs/intl-relativetimeformat/locale-data/es');
+      break;
+    case 'nl-NL':
+      await import('@formatjs/intl-relativetimeformat/locale-data/nl');
+      break;
+    case 'sv-SE':
+      await import('@formatjs/intl-relativetimeformat/locale-data/sv');
+      break;
+    case 'fr-FR':
+    case 'oc-OC':
+    default:
+      await import('@formatjs/intl-relativetimeformat/locale-data/fr');
+      break;
+  }
 }
 if (!Intl.RelativeTimeFormat) {
-  require('@formatjs/intl-relativetimeformat/polyfill');
-  require('@formatjs/intl-relativetimeformat/locale-data/fr');
-  require('@formatjs/intl-relativetimeformat/locale-data/nl');
-  require('@formatjs/intl-relativetimeformat/locale-data/en');
-  require('@formatjs/intl-relativetimeformat/locale-data/es');
-  require('@formatjs/intl-relativetimeformat/locale-data/de');
+  relativePolyfill(locale)
+    .then((accepted, rejected) => {
+      console.log('intl-relativetimeformat imported');
+    })
+    .catch(error => console.error('intl-relativetimeformat', error));
 }
 
 // Our global App for symfony
