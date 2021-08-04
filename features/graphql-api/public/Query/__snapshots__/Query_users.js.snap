@@ -20,7 +20,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/lampegerare",
           "userType": null,
           "username": "LAMPE Gerare",
@@ -43,7 +42,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": "2020-03-10 09:30:00",
           "url": "https://capco.test/profile/lampegeraldine",
           "userType": null,
           "username": "LAMPE Geraldine",
@@ -66,7 +64,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/ianapprentidevops",
           "userType": null,
           "username": "Ian apprenti DevOps",
@@ -89,7 +86,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/angelaclairelouise",
           "userType": null,
           "username": "Angela Claire Louise",
@@ -112,7 +108,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/devnull",
           "userType": null,
           "username": "Dev null",
@@ -135,7 +130,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/agui",
           "userType": null,
           "username": "Agui",
@@ -158,7 +152,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/jpec",
           "userType": null,
           "username": "Jpec",
@@ -181,7 +174,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/theoqp",
           "userType": null,
           "username": "Théo QP",
@@ -204,7 +196,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/omar3rem",
           "userType": null,
           "username": "Omar <3 Rem",
@@ -227,7 +218,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/juan",
           "userType": Object {
             "name": "Citoyen",
@@ -252,7 +242,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user200",
           "userType": Object {
             "name": "Citoyen",
@@ -277,7 +266,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user199",
           "userType": Object {
             "name": "Citoyen",
@@ -302,7 +290,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user198",
           "userType": Object {
             "name": "Citoyen",
@@ -327,7 +314,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user197",
           "userType": Object {
             "name": "Citoyen",
@@ -352,7 +338,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user196",
           "userType": Object {
             "name": "Citoyen",
@@ -377,7 +362,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user195",
           "userType": Object {
             "name": "Citoyen",
@@ -402,7 +386,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user194",
           "userType": Object {
             "name": "Citoyen",
@@ -427,7 +410,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user193",
           "userType": Object {
             "name": "Citoyen",
@@ -452,7 +434,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user192",
           "userType": Object {
             "name": "Citoyen",
@@ -477,7 +458,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user191",
           "userType": Object {
             "name": "Citoyen",
@@ -502,7 +482,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user190",
           "userType": Object {
             "name": "Citoyen",
@@ -527,7 +506,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user189",
           "userType": Object {
             "name": "Citoyen",
@@ -552,7 +530,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user188",
           "userType": Object {
             "name": "Citoyen",
@@ -577,7 +554,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user187",
           "userType": Object {
             "name": "Citoyen",
@@ -602,7 +578,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user186",
           "userType": Object {
             "name": "Citoyen",
@@ -627,7 +602,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user185",
           "userType": Object {
             "name": "Citoyen",
@@ -652,7 +626,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user184",
           "userType": Object {
             "name": "Citoyen",
@@ -677,7 +650,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user183",
           "userType": Object {
             "name": "Citoyen",
@@ -702,7 +674,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user182",
           "userType": Object {
             "name": "Citoyen",
@@ -727,7 +698,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user181",
           "userType": Object {
             "name": "Citoyen",
@@ -752,7 +722,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user180",
           "userType": Object {
             "name": "Citoyen",
@@ -777,7 +746,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user179",
           "userType": Object {
             "name": "Citoyen",
@@ -802,7 +770,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user178",
           "userType": Object {
             "name": "Citoyen",
@@ -827,7 +794,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user177",
           "userType": Object {
             "name": "Citoyen",
@@ -852,7 +818,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user176",
           "userType": Object {
             "name": "Citoyen",
@@ -877,7 +842,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user175",
           "userType": Object {
             "name": "Citoyen",
@@ -902,7 +866,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user174",
           "userType": Object {
             "name": "Citoyen",
@@ -927,7 +890,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user173",
           "userType": Object {
             "name": "Citoyen",
@@ -952,7 +914,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user172",
           "userType": Object {
             "name": "Citoyen",
@@ -977,7 +938,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user171",
           "userType": Object {
             "name": "Citoyen",
@@ -1002,7 +962,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user170",
           "userType": Object {
             "name": "Citoyen",
@@ -1027,7 +986,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user169",
           "userType": Object {
             "name": "Citoyen",
@@ -1052,7 +1010,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user168",
           "userType": Object {
             "name": "Citoyen",
@@ -1077,7 +1034,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user167",
           "userType": Object {
             "name": "Citoyen",
@@ -1102,7 +1058,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user166",
           "userType": Object {
             "name": "Citoyen",
@@ -1127,7 +1082,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user165",
           "userType": Object {
             "name": "Citoyen",
@@ -1152,7 +1106,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user164",
           "userType": Object {
             "name": "Citoyen",
@@ -1177,7 +1130,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user163",
           "userType": Object {
             "name": "Citoyen",
@@ -1202,7 +1154,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user162",
           "userType": Object {
             "name": "Citoyen",
@@ -1227,7 +1178,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user161",
           "userType": Object {
             "name": "Citoyen",
@@ -1252,7 +1202,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user160",
           "userType": Object {
             "name": "Citoyen",
@@ -1277,7 +1226,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user159",
           "userType": Object {
             "name": "Citoyen",
@@ -1302,7 +1250,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user158",
           "userType": Object {
             "name": "Citoyen",
@@ -1327,7 +1274,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user157",
           "userType": Object {
             "name": "Citoyen",
@@ -1352,7 +1298,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user156",
           "userType": Object {
             "name": "Citoyen",
@@ -1377,7 +1322,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user155",
           "userType": Object {
             "name": "Citoyen",
@@ -1402,7 +1346,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user154",
           "userType": Object {
             "name": "Citoyen",
@@ -1427,7 +1370,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user153",
           "userType": Object {
             "name": "Citoyen",
@@ -1452,7 +1394,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user152",
           "userType": Object {
             "name": "Citoyen",
@@ -1477,7 +1418,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user151",
           "userType": Object {
             "name": "Citoyen",
@@ -1502,7 +1442,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user150",
           "userType": Object {
             "name": "Citoyen",
@@ -1527,7 +1466,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user149",
           "userType": Object {
             "name": "Citoyen",
@@ -1552,7 +1490,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user148",
           "userType": Object {
             "name": "Citoyen",
@@ -1577,7 +1514,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user147",
           "userType": Object {
             "name": "Citoyen",
@@ -1602,7 +1538,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user146",
           "userType": Object {
             "name": "Citoyen",
@@ -1627,7 +1562,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user145",
           "userType": Object {
             "name": "Citoyen",
@@ -1652,7 +1586,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user144",
           "userType": Object {
             "name": "Citoyen",
@@ -1677,7 +1610,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user143",
           "userType": Object {
             "name": "Citoyen",
@@ -1702,7 +1634,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user142",
           "userType": Object {
             "name": "Citoyen",
@@ -1727,7 +1658,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user141",
           "userType": Object {
             "name": "Citoyen",
@@ -1752,7 +1682,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user140",
           "userType": Object {
             "name": "Citoyen",
@@ -1777,7 +1706,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user139",
           "userType": Object {
             "name": "Citoyen",
@@ -1802,7 +1730,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user138",
           "userType": Object {
             "name": "Citoyen",
@@ -1827,7 +1754,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user137",
           "userType": Object {
             "name": "Citoyen",
@@ -1852,7 +1778,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user136",
           "userType": Object {
             "name": "Citoyen",
@@ -1877,7 +1802,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user135",
           "userType": Object {
             "name": "Citoyen",
@@ -1902,7 +1826,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user134",
           "userType": Object {
             "name": "Citoyen",
@@ -1927,7 +1850,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user133",
           "userType": Object {
             "name": "Citoyen",
@@ -1952,7 +1874,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user132",
           "userType": Object {
             "name": "Citoyen",
@@ -1977,7 +1898,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user131",
           "userType": Object {
             "name": "Citoyen",
@@ -2002,7 +1922,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user130",
           "userType": Object {
             "name": "Citoyen",
@@ -2027,7 +1946,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user129",
           "userType": Object {
             "name": "Citoyen",
@@ -2052,7 +1970,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user128",
           "userType": Object {
             "name": "Citoyen",
@@ -2077,7 +1994,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user127",
           "userType": Object {
             "name": "Citoyen",
@@ -2102,7 +2018,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user126",
           "userType": Object {
             "name": "Citoyen",
@@ -2127,7 +2042,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user125",
           "userType": Object {
             "name": "Citoyen",
@@ -2152,7 +2066,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user124",
           "userType": Object {
             "name": "Citoyen",
@@ -2177,7 +2090,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user123",
           "userType": Object {
             "name": "Citoyen",
@@ -2202,7 +2114,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user122",
           "userType": Object {
             "name": "Citoyen",
@@ -2227,7 +2138,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user121",
           "userType": Object {
             "name": "Citoyen",
@@ -2252,7 +2162,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user120",
           "userType": Object {
             "name": "Citoyen",
@@ -2277,7 +2186,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user119",
           "userType": Object {
             "name": "Citoyen",
@@ -2302,7 +2210,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user118",
           "userType": Object {
             "name": "Citoyen",
@@ -2327,7 +2234,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user117",
           "userType": Object {
             "name": "Citoyen",
@@ -2352,7 +2258,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user116",
           "userType": Object {
             "name": "Citoyen",
@@ -2377,7 +2282,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user115",
           "userType": Object {
             "name": "Citoyen",
@@ -2402,7 +2306,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user114",
           "userType": Object {
             "name": "Citoyen",
@@ -2427,7 +2330,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user113",
           "userType": Object {
             "name": "Citoyen",
@@ -2452,7 +2354,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user112",
           "userType": Object {
             "name": "Citoyen",
@@ -2477,7 +2378,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user111",
           "userType": Object {
             "name": "Citoyen",
@@ -2596,7 +2496,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user161",
           "userType": Object {
             "name": "Citoyen",
@@ -2621,7 +2520,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user160",
           "userType": Object {
             "name": "Citoyen",
@@ -2646,7 +2544,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user159",
           "userType": Object {
             "name": "Citoyen",
@@ -2671,7 +2568,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user158",
           "userType": Object {
             "name": "Citoyen",
@@ -2696,7 +2592,6 @@ Object {
             "edges": Array [],
           },
           "twitterUrl": null,
-          "updatedAt": null,
           "url": "https://capco.test/profile/user157",
           "userType": Object {
             "name": "Citoyen",

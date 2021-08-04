@@ -88,7 +88,3 @@ services:
     Capco\AppBundle\EventListener\DebateArticleListener:
         tags:
             - { name: doctrine.orm.entity_listener, lazy: true }
-
-    Capco\AppBundle\EventListener\MultilangueRouteListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

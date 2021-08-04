@@ -1,7 +1,5 @@
 CreateProposalInput:
     type: relay-mutation-input
-    inherits:
-        - InternalWithSocialNetworks
     config:
         description: 'Create a proposal'
         fields:
@@ -41,3 +39,21 @@ CreateProposalInput:
             tipsmeeeId:
                 type: 'String'
                 description: 'The ID of tipsmeee'
+            webPageUrl:
+                type: 'URI'
+                description: 'The web page URL'
+            facebookUrl:
+                type: 'URI'
+                description: 'The facebook URL'
+            twitterUrl:
+                type: 'URI'
+                description: 'The twitter URL'
+            instagramUrl:
+                type: 'URI'
+                description: 'The instagram URL'
+            youtubeUrl:
+                type: 'URI'
+                description: 'The youtube URL'
+            linkedInUrl:
+                type: 'URI'
+                description: 'The linkedIn URL'

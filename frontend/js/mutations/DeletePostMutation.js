@@ -10,7 +10,7 @@ import type {
 const mutation = graphql`
   mutation DeletePostMutation($input: DeletePostInput!) {
     deletePost(input: $input) {
-      errorCode
+      deletedPostId
     }
   }
 `;

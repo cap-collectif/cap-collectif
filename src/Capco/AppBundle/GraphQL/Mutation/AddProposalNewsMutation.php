@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostTranslation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalPostType;
-use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
@@ -25,7 +24,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddProposalNewsMutation implements MutationInterface
 {
+    public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
     public const PROPOSAL_DOESNT_ALLOW_NEWS = 'PROPOSAL_DOESNT_ALLOW_NEWS';
+    public const ACCESS_DENIED = 'ACCESS_DENIED';
 
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
@@ -92,10 +93,10 @@ class AddProposalNewsMutation implements MutationInterface
         if (!$proposal || !$proposal instanceof Proposal) {
             $this->logger->error('Unknown proposal with id: ' . $proposalGlobalId);
 
-            throw new UserError(BaseProposalError::PROPOSAL_NOT_FOUND);
+            throw new UserError(self::PROPOSAL_NOT_FOUND);
         }
         if ($proposal->getAuthor() !== $viewer && !$viewer->isAdmin()) {
-            throw new UserError(BaseProposalError::ACCESS_DENIED);
+            throw new UserError(self::ACCESS_DENIED);
         }
 
         return $proposal;
@@ -139,7 +140,7 @@ class AddProposalNewsMutation implements MutationInterface
                     $translation->setBody(
                         htmlentities(
                             $values['translations'][$availableLocale]['body'],
-                            \ENT_QUOTES,
+                            ENT_QUOTES,
                             'UTF-8'
                         )
                     );

@@ -1640,24 +1640,6 @@ type ChangeProposalAssessmentPayload {
 }
 
 input ChangeProposalContentInput {
-  """Link of Web page."""
-  webPageUrl: URI
-
-  """Link of Facebook page."""
-  facebookUrl: URI
-
-  """Link of Twitter page."""
-  twitterUrl: URI
-
-  """Link of Instagram page."""
-  instagramUrl: URI
-
-  """Link of LinkedIn profile."""
-  linkedInUrl: URI
-
-  """Link of Youtube channel."""
-  youtubeUrl: URI
-
   """The proposal id"""
   id: ID!
 
@@ -1700,6 +1682,24 @@ input ChangeProposalContentInput {
   tipsmeeeId: String
   estimation: Int
   likers: [ID!]
+
+  """The web page URL"""
+  webPageUrl: URI
+
+  """The facebook URL"""
+  facebookUrl: URI
+
+  """The twitter URL"""
+  twitterUrl: URI
+
+  """The instagram URL"""
+  instagramUrl: URI
+
+  """The youtube URL"""
+  youtubeUrl: URI
+
+  """The linkedIn URL"""
+  linkedInUrl: URI
   clientMutationId: String
 }
 
@@ -3300,24 +3300,6 @@ type CreateProposalFusionPayload {
 }
 
 input CreateProposalInput {
-  """Link of Web page."""
-  webPageUrl: URI
-
-  """Link of Facebook page."""
-  facebookUrl: URI
-
-  """Link of Twitter page."""
-  twitterUrl: URI
-
-  """Link of Instagram page."""
-  instagramUrl: URI
-
-  """Link of LinkedIn profile."""
-  linkedInUrl: URI
-
-  """Link of Youtube channel."""
-  youtubeUrl: URI
-
   """The id of the form form proposal"""
   proposalFormId: ID!
 
@@ -3353,6 +3335,24 @@ input CreateProposalInput {
 
   """The ID of tipsmeee"""
   tipsmeeeId: String
+
+  """The web page URL"""
+  webPageUrl: URI
+
+  """The facebook URL"""
+  facebookUrl: URI
+
+  """The twitter URL"""
+  twitterUrl: URI
+
+  """The instagram URL"""
+  instagramUrl: URI
+
+  """The youtube URL"""
+  youtubeUrl: URI
+
+  """The linkedIn URL"""
+  linkedInUrl: URI
   clientMutationId: String
 }
 
@@ -4614,12 +4614,6 @@ type DeleteOpinionPayload {
   clientMutationId: String
 }
 
-"""Available errors on deletePost mutation"""
-enum DeletePostErrorCode {
-  """no post match for this id"""
-  POST_NOT_FOUND
-}
-
 input DeletePostInput {
   """The id of the post to delete"""
   id: ID!
@@ -4627,8 +4621,8 @@ input DeletePostInput {
 }
 
 type DeletePostPayload {
-  """Available errorCode for deletePost mutation"""
-  errorCode: DeletePostErrorCode
+  """The deleted post id"""
+  deletedPostId: ID
   clientMutationId: String
 }
 
@@ -6739,9 +6733,6 @@ type Mutation {
 
   """Delete blog post"""
   deletePost(input: DeletePostInput!): DeletePostPayload
-
-  """Update social networks on a proposal"""
-  updateProposalSocialNetworks(input: UpdateProposalSocialNetworksInput!): UpdateProposalSocialNetworksPayload
 }
 
 """A connection to a list of items."""
@@ -8513,24 +8504,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Did the viewer author this entity."""
   viewerDidAuthor: Boolean
-
-  """Link of Web page."""
-  webPageUrl: URI
-
-  """Link of Facebook page."""
-  facebookUrl: URI
-
-  """Link of Twitter page."""
-  twitterUrl: URI
-
-  """Link of Instagram page."""
-  instagramUrl: URI
-
-  """Link of LinkedIn profile."""
-  linkedInUrl: URI
-
-  """Link of Youtube channel."""
-  youtubeUrl: URI
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   currentVotableStep: ProposalStep
@@ -8641,8 +8614,26 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   tipsmeee: TipsMeee
   isProposalAuthorAllowedToAddNews: Boolean!
 
+  """link of Web page"""
+  webPageUrl: URI
+
+  """link of Facebook page"""
+  facebookUrl: URI
+
+  """link of Twitter page"""
+  twitterUrl: URI
+
+  """link of Instagram page"""
+  instagramUrl: URI
+
+  """link of LinkedIn profile"""
+  linkedInUrl: URI
+
+  """link of Youtube channel"""
+  youtubeUrl: URI
+
   """
-  True if proposal got any social network value and proposal form using any social networks.
+  true if proposal got any social network value and proposal form using any social networks
   """
   isUsingAnySocialNetworks: Boolean!
 }
@@ -9160,17 +9151,17 @@ enum ProposalImportsErrorCode {
 
 """Available errors on proposal news mutation"""
 enum ProposalNewsErrorCode {
-  """No proposal match your id."""
+  """No proposal match your id"""
   PROPOSAL_NOT_FOUND
 
-  """Access denied."""
-  ACCESS_DENIED
-
-  """ROLE_USER cant add proposal news on this project"""
+  """ROLE_USER cant add porposal news on this project"""
   PROPOSAL_DOESNT_ALLOW_NEWS
 
   """No post match your id"""
   POST_NOT_FOUND
+
+  """Access denied."""
+  ACCESS_DENIED
 
   """Invalid data in submitted form ."""
   INVALID_DATA
@@ -9331,18 +9322,6 @@ type ProposalSelection {
 
   """The status of the proposal in the step."""
   status: ProposalStepStatus
-}
-
-"""Available errors on proposal social networks mutation."""
-enum ProposalSocialNetworksErrorCode {
-  """No proposal match your id."""
-  PROPOSAL_NOT_FOUND
-
-  """Access denied."""
-  ACCESS_DENIED
-
-  """Social networks are not available on this proposal."""
-  PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS
 }
 
 """Value of a proposal sorting"""
@@ -13639,9 +13618,6 @@ type UpdateOpinionPayload {
 enum UpdatePostErrorCode {
   """Submitted form is invalid"""
   INVALID_FORM
-
-  """no post match for this id"""
-  POST_NOT_FOUND
 }
 
 input UpdatePostInput {
@@ -14072,39 +14048,6 @@ type UpdateProposalNewsPayload {
 
   """An unsuccessful mutation will return an error message"""
   errorCode: ProposalNewsErrorCode
-  clientMutationId: String
-}
-
-input UpdateProposalSocialNetworksInput {
-  """Link of Web page."""
-  webPageUrl: URI
-
-  """Link of Facebook page."""
-  facebookUrl: URI
-
-  """Link of Twitter page."""
-  twitterUrl: URI
-
-  """Link of Instagram page."""
-  instagramUrl: URI
-
-  """Link of LinkedIn profile."""
-  linkedInUrl: URI
-
-  """Link of Youtube channel."""
-  youtubeUrl: URI
-
-  """The id of the proposal to update social networks."""
-  proposalId: ID!
-  clientMutationId: String
-}
-
-type UpdateProposalSocialNetworksPayload {
-  """The proposal to update."""
-  proposal: Proposal
-
-  """An unsuccessful mutation will return an error message"""
-  errorCode: ProposalSocialNetworksErrorCode
   clientMutationId: String
 }
 

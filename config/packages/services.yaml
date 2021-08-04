@@ -253,6 +253,14 @@ services:
         arguments:
             $formatter: '@Webfactory\IcuTranslationBundle\Translator\Formatting\IntlFormatter'
 
+    jms_i18n_routing.loader:
+        public: true
+        class: Capco\AppBundle\Router\I18nLoader
+        arguments:
+            $manager: '@Capco\AppBundle\Toggle\Manager'
+            $routeExclusionStrategy: '@jms_i18n_routing.route_exclusion_strategy'
+            $patternGenerationStrategy: '@Capco\AppBundle\Router\DefaultPatternGenerationStrategy'
+
     Capco\AppBundle\Router\I18nRouter:
         autowire: true
         arguments:
@@ -264,8 +272,6 @@ services:
             - [setI18nLoaderId, ['jms_i18n_routing.loader']]
             - [setDefaultLocale, ['%jms_i18n_routing.default_locale%']]
             - [setRedirectToHost, ['%jms_i18n_routing.redirect_to_host%']]
-            - [setOption, ['cache_dir', '%kernel.cache_dir%']]
-            - [setOption, ['debug', '%kernel.debug%']]
 
     jms_i18n_routing.router: '@Capco\AppBundle\Router\I18nRouter'
 

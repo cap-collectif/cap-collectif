@@ -116,3 +116,14 @@ Capco\AppBundle\Entity\Post:
         media: null
         displayedOnBlog: false
         owner: '@userTheo'
+    postWithOwner2:
+        id: postWithOwner2
+        isPublished: true
+        createdAt: <(new \DateTime('2020-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        Authors:
+            - '@userTheo'
+        media: null
+        displayedOnBlog: false
+        owner: '@userTheo'

@@ -384,26 +384,21 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectstepIdf3'
         project: '@projectIdf3'
         position: 1
-    pasBp3ClosedIdf1:
-        id: pasBp3ClosedIdf1
-        step: '@collectStepClosedIdf3'
-        project: '@projectIdf3'
-        position: 2
     pasBp3Idf2:
         id: pasBp3Idf2
         step: '@selectionStepIdf3Analyse'
         project: '@projectIdf3'
-        position: 3
+        position: 2
     pasBp3Idf13:
         id: pasBp3Idf13
         step: '@selectionStepIdf3Vote'
         project: '@projectIdf3'
-        position: 4
+        position: 3
     pasBp3Idf4:
         id: pasBp3Idf4
         step: '@selectionStepIdf3Winners'
         project: '@projectIdf3'
-        position: 5
+        position: 4
     pasWithOwner1:
         id: pasWithOwner1
         step: '@pstepProjectWithOwner'

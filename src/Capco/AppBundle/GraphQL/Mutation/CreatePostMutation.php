@@ -5,12 +5,13 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreatePostMutation implements MutationInterface
 {
@@ -18,30 +19,27 @@ class CreatePostMutation implements MutationInterface
 
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(EntityManagerInterface $em, FormFactoryInterface $formFactory)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $post = new Post();
 
-        return $this->createPost($post, $input, $viewer);
-    }
-
-    public function createPost(Post $post, Argument $input, User $viewer): array
-    {
         $data = $input->getArrayCopy();
         unset($data['authors']);
         $data['Authors'] = $input->offsetGet('authors');
 
-        if ($viewer->hasRole('ROLE_PROJECT_ADMIN') && !$viewer->hasRole('ROLE_ADMIN')) {
-            $viewerGlobalId = GlobalId::toGlobalId('User', $viewer->getId());
-            $data['Authors'] = [$viewerGlobalId];
-        }
+        $post->setOwner($viewer);
 
         LocaleUtils::indexTranslations($data);
 
@@ -52,9 +50,18 @@ class CreatePostMutation implements MutationInterface
             return ['post' => null, 'errorCode' => self::INVALID_FORM];
         }
 
+        if ($viewer->isOnlyProjectAdmin()) {
+            $post->setAuthors([$viewer]);
+        }
+
         $this->em->persist($post);
         $this->em->flush();
 
         return ['post' => $post, 'errorCode' => null];
+    }
+
+    public function isGranted(): bool
+    {
+        return $this->authorizationChecker->isGranted(PostVoter::CREATE, new Post());
     }
 }

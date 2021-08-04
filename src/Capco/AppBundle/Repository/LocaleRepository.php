@@ -100,20 +100,9 @@ class LocaleRepository extends EntityRepository
     public function isCodePublished(string $userLocaleCode): bool
     {
         $qb = $this->createQueryBuilder('l');
-        $qb->select('COUNT(l.id)')
+        $qb
+            ->select('COUNT(l.id)')
             ->where('l.code = :userCode')
-            ->andWhere('l.published = true')
-            ->setParameter('userCode', $userLocaleCode);
-
-        return 0 < $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function isCodeEnabled(string $userLocaleCode): bool
-    {
-        $qb = $this->createQueryBuilder('l');
-        $qb->select('COUNT(l.id)')
-            ->where('l.code = :userCode')
-            ->andWhere('l.enabled = true')
             ->setParameter('userCode', $userLocaleCode);
 
         return 0 < $qb->getQuery()->getSingleScalarResult();
@@ -122,7 +111,8 @@ class LocaleRepository extends EntityRepository
     private function getSimilarCode(string $userCode): ?string
     {
         $qb = $this->createQueryBuilder('l');
-        $qb->select('l.code')
+        $qb
+            ->select('l.code')
             ->where('l.code LIKE :firstPartOfCode')
             ->setParameter('firstPartOfCode', substr($userCode, 0, 2));
 

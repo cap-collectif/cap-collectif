@@ -2,6 +2,6 @@ DeletePostPayload:
     type: relay-mutation-payload
     config:
         fields:
-            errorCode:
-                type: 'DeletePostErrorCode'
-                description: 'Available errorCode for deletePost mutation'
+            deletedPostId:
+                type: 'ID'
+                description: 'The deleted post id'

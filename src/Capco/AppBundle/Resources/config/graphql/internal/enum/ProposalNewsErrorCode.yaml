@@ -1,17 +1,21 @@
 ProposalNewsErrorCode:
     type: enum
-    inherits:
-        - ProposalErrorCode
     config:
         name: ProposalNewsErrorCode
         description: 'Available errors on proposal news mutation'
         values:
+            PROPOSAL_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalNewsMutation::PROPOSAL_NOT_FOUND")'
+                description: 'No proposal match your id'
             PROPOSAL_DOESNT_ALLOW_NEWS:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalNewsMutation::PROPOSAL_DOESNT_ALLOW_NEWS")'
-                description: 'ROLE_USER cant add proposal news on this project'
+                description: 'ROLE_USER cant add porposal news on this project'
             POST_NOT_FOUND:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalNewsMutation::POST_NOT_FOUND")'
                 description: 'No post match your id'
+            ACCESS_DENIED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalNewsMutation::ACCESS_DENIED")'
+                description: 'Access denied.'
             INVALID_DATA:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalNewsMutation::INVALID_DATA")'
                 description: 'Invalid data in submitted form .'

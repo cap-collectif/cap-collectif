@@ -427,11 +427,11 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
         $values['otherField'] = 'value';
         $values['webPageUrl'] = null;
-        $values['facebookUrl'] = 'https://facebook.com/user';
-        $values['twitterUrl'] = 'https://twitter.com/user';
-        $values['instagramUrl'] = 'https://instagram.com/user';
-        $values['linkedInUrl'] = 'https://linkedin.com/user';
-        $values['youtubeUrl'] = 'https://youtube.com/user';
+        $values['facebookUrl'] = 'facebookUrl';
+        $values['twitterUrl'] = 'twitterUrl';
+        $values['instagramUrl'] = 'instagramUrl';
+        $values['linkedInUrl'] = 'linkedInUrl';
+        $values['youtubeUrl'] = 'youtubeUrl';
 
         $proposal->getProposalSocialNetworks()->willReturn(null);
         $proposal->setProposalSocialNetworks(\Prophecy\Argument::any())->willReturn($proposal);
@@ -440,11 +440,11 @@ class ProposalMutationSpec extends ObjectBehavior
         ]);
 
         $proposalSocialNetworks->setWebPageUrl(null)->shouldNotBeCalled();
-        $proposalSocialNetworks->setFacebookUrl($values['facebookUrl'])->shouldNotBeCalled();
-        $proposalSocialNetworks->setTwitterUrl($values['twitterUrl'])->shouldBeCalled();
-        $proposalSocialNetworks->setInstagramUrl($values['instagramUrl'])->shouldBeCalled();
-        $proposalSocialNetworks->setLinkedInUrl($values['linkedInUrl'])->shouldBeCalled();
-        $proposalSocialNetworks->setYoutubeUrl($values['youtubeUrl'])->shouldBeCalled();
+        $proposalSocialNetworks->setFacebookUrl('facebookUrl')->shouldNotBeCalled();
+        $proposalSocialNetworks->setTwitterUrl('twitterUrl')->shouldBeCalled();
+        $proposalSocialNetworks->setInstagramUrl('instagramUrl')->shouldBeCalled();
+        $proposalSocialNetworks->setLinkedInUrl('linkedInUrl')->shouldBeCalled();
+        $proposalSocialNetworks->setYoutubeUrl('youtubeUrl')->shouldBeCalled();
 
         $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
         $this::hydrateSocialNetworks($values, $proposal, $proposalForm, $create)->shouldReturn([
