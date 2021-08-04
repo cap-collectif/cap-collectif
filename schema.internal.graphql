@@ -4614,12 +4614,6 @@ type DeleteOpinionPayload {
   clientMutationId: String
 }
 
-"""Available errors on deletePost mutation"""
-enum DeletePostErrorCode {
-  """no post match for this id"""
-  POST_NOT_FOUND
-}
-
 input DeletePostInput {
   """The id of the post to delete"""
   id: ID!
@@ -4627,8 +4621,8 @@ input DeletePostInput {
 }
 
 type DeletePostPayload {
-  """Available errorCode for deletePost mutation"""
-  errorCode: DeletePostErrorCode
+  """The deleted post id"""
+  deletedPostId: ID
   clientMutationId: String
 }
 
@@ -13624,9 +13618,6 @@ type UpdateOpinionPayload {
 enum UpdatePostErrorCode {
   """Submitted form is invalid"""
   INVALID_FORM
-
-  """no post match for this id"""
-  POST_NOT_FOUND
 }
 
 input UpdatePostInput {

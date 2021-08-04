@@ -1,9 +1,0 @@
-DeletePostErrorCode:
-  type: enum
-  config:
-    name: DeletePostErrorCode
-    description: 'Available errors on deletePost mutation'
-    values:
-      POST_NOT_FOUND:
-        value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\DeletePostMutation::POST_NOT_FOUND")'
-        description: 'no post match for this id'

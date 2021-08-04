@@ -1311,7 +1311,7 @@ InternalMutation:
             # POST
             createPost:
                 description: 'Create blog post'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreatePostInput
@@ -1319,7 +1319,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation", [value, getUser()])'
             updatePost:
                 description: 'Update blog post'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdatePostInput
@@ -1327,7 +1327,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation", [value, getUser()])'
             deletePost:
                 description: 'Delete blog post'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeletePostMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeletePostInput

@@ -15,6 +15,11 @@ const CreatePostMutation = /* GraphQL*/ `
         commentable
         authors {
           id
+          username
+        }
+        owner {
+          id
+          username
         }
         relatedContent {
           __typename
@@ -125,5 +130,21 @@ describe('mutations.createPost', () => {
 
     expect(response.createPost.post.body).toBe('');
     expect(response.createPost.errorCode).toBe(null);
+  });
+
+  it('authors should be set to project admin when project admin user create a post', async () => {
+    const response = await graphql(
+      CreatePostMutation,
+      {
+        input: requiredInput,
+      },
+      'internal_theo',
+    );
+
+    expect(response.createPost.post.authors[0].id).toBe('VXNlcjp1c2VyVGhlbw==');
+    expect(response.createPost.post.authors[0].username).toBe('Théo QP');
+
+    expect(response.createPost.post.owner.id).toBe('VXNlcjp1c2VyVGhlbw==');
+    expect(response.createPost.post.owner.username).toBe('Théo QP');
   });
 });

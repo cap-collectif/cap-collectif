@@ -24,6 +24,26 @@ Object {
       ],
     },
     Object {
+      "enTitle": "Second post owned by an owner",
+      "frTitle": "Deuxieme article possédé par un owner",
+      "id": "UG9zdDpwb3N0V2l0aE93bmVyMg==",
+      "title": "Deuxieme article possédé par un owner",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Post body owned by an owner2",
+          "locale": "EN_GB",
+          "title": "Second post owned by an owner",
+        },
+        Object {
+          "abstract": null,
+          "body": "Body de l'article avec owner2",
+          "locale": "FR_FR",
+          "title": "Deuxieme article possédé par un owner",
+        },
+      ],
+    },
+    Object {
       "enTitle": "User's Post on his own proposal",
       "frTitle": "Post d'un utilisateur sur sa proposition",
       "id": "UG9zdDpwb3N0MTc=",
