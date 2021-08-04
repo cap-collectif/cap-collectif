@@ -24,6 +24,7 @@ class AnalyticsResolver implements ResolverInterface
             'startAt' => $filter['startAt'],
             'endAt' => $filter['endAt'],
             'projectId' => $filter['projectId'],
+            'topContributorsCount' => $filter['topContributorsCount'],
         ]);
     }
 }

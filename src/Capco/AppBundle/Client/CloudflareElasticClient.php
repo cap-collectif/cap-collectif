@@ -193,10 +193,19 @@ class CloudflareElasticClient
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
-                new Query\Regexp(
-                    'ClientRequestReferer.keyword',
-                    '(http|https)(://|://www.)(bing|qwant|google|ecosia|duckduckgo).*'
-                )
+                (new Query\BoolQuery())->addShould([
+                    (new Query\BoolQuery())
+                        ->addFilter(new Query\Exists('ClientRequestReferer'))
+                        ->addFilter(
+                            new Query\Regexp(
+                                'ClientRequestReferer.keyword',
+                                '(http|https)(://|://www.)(bing|qwant|google|ecosia|duckduckgo).*'
+                            )
+                        ),
+                    (new Query\BoolQuery())
+                        ->addFilter(new Query\Exists('ClientIPClass'))
+                        ->addFilter(new Query\Term(['ClientIPClass' => 'searchEngine'])),
+                ])
             )
             ->addFilter(
                 new Range('@timestamp', [
@@ -205,7 +214,12 @@ class CloudflareElasticClient
                 ])
             )
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname))
-            ->addMustNot($this->getClientRequestURIFilters());
+            ->addMustNot(
+                array_merge(
+                    $this->getClientRequestURIFilters(),
+                    $this->getSocialNetworksURIPatternFilter()
+                )
+            );
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -230,9 +244,20 @@ class CloudflareElasticClient
                 ])
             )
             ->addFilter(
-                new Query\Regexp(
-                    'ClientRequestReferer.keyword',
-                    '(http|https)(://|://www.)(instagram|linkedin|twitter|facebook).(fr|com|uk|ca).*'
+                (new Query\BoolQuery())->addShould(
+                    array_merge(
+                        [
+                            (new Query\BoolQuery())
+                                ->addFilter(new Query\Exists('ClientRequestReferer'))
+                                ->addFilter(
+                                    new Query\Regexp(
+                                        'ClientRequestReferer.keyword',
+                                        '(http|https)(://|://www.)(instagram|linkedin|twitter|facebook).(fr|com|uk|ca).*'
+                                    )
+                                ),
+                        ],
+                        $this->getSocialNetworksURIPatternFilter()
+                    )
                 )
             )
             ->addFilter(new Query\MatchPhrase('ClientRequestHost', $this->hostname));
@@ -260,7 +285,8 @@ class CloudflareElasticClient
             ->addMustNot(
                 array_merge(
                     [new Query\Exists('ClientRequestReferer')],
-                    $this->getClientRequestURIFilters()
+                    $this->getClientRequestURIFilters(),
+                    $this->getSocialNetworksURIPatternFilter()
                 )
             );
 
@@ -313,24 +339,71 @@ class CloudflareElasticClient
     ): Query\BoolQuery {
         if ($projectSlug) {
             $boolQuery->addFilter(
-                new Query\MatchPhrase('ClientRequestURI', '/project/' . $projectSlug)
+                new Query\Wildcard('ClientRequestURI.keyword', '*' . $projectSlug . '*')
             );
         }
 
         return $boolQuery;
     }
 
+    /**
+     * Provide a list of queries to filter with the client
+     * request URI to avoid getting useless logs in analytics.
+     */
     private function getClientRequestURIFilters(): array
     {
         return [
             new Query\Prefix(['ClientRequestURI.keyword' => '/graphql']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/admin']),
+            new Query\Prefix(['ClientRequestURI.keyword' => '/sso']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/cdn-cgi']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/widget_debate']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/login_check']),
             new Query\Prefix(['ClientRequestURI.keyword' => '/logout']),
             new Query\Wildcard('ClientRequestURI.keyword', '/*.*'),
+            // Cloudflare provide a ClientIPClass field that match a certain type of third party service
+            // with the IP value, we use it to exclude useless entries.
+            (new Query\BoolQuery())->addShould([
+                (new Query\BoolQuery())
+                    ->addFilter(new Query\Exists('ClientIPClass'))
+                    ->addFilter(new Query\Term(['ClientIPClass' => 'monitoringService'])),
+                $this->getUpTimeRobotIPFilterQuery(),
+            ]),
         ];
+    }
+
+    /**
+     * Return a new Bool query with filter on the list of
+     * the main ip range provided by UpTimeRobot.
+     */
+    private function getUpTimeRobotIPFilterQuery(): Query\BoolQuery
+    {
+        return (new Query\BoolQuery())->addShould([
+            (new Query\BoolQuery())->addFilter(
+                new Range('ClientIP.ip', [
+                    'gte' => '69.162.124.226',
+                    'lte' => '69.162.124.237',
+                ])
+            ),
+            (new Query\BoolQuery())->addFilter(
+                new Range('ClientIP.ip', [
+                    'gte' => '63.143.42.242',
+                    'lte' => '63.143.42.253',
+                ])
+            ),
+            (new Query\BoolQuery())->addFilter(
+                new Range('ClientIP.ip', [
+                    'gte' => '216.245.221.82',
+                    'lte' => '216.245.221.93',
+                ])
+            ),
+            (new Query\BoolQuery())->addFilter(
+                new Range('ClientIP.ip', [
+                    'gte' => '208.115.199.18',
+                    'lte' => '208.115.199.30',
+                ])
+            ),
+        ]);
     }
 
     private function createEsClient(
@@ -359,17 +432,37 @@ class CloudflareElasticClient
         );
     }
 
+    /**
+     * Redefine the pitch of the date histogram to years if the difference
+     * between its start date and its end date is greater than 1 year.
+     *
+     * It avoid getting too much data on a low pitch.
+     */
     private function getDateHistogramInterval(
         DateTimeInterface $start,
         DateTimeInterface $end
     ): string {
         $daysDiff = $start->diff($end)->days;
         $dateHistogramInterval = 'day';
-        // 2 months
-        if ($daysDiff > 60) {
+        if ($daysDiff > 365) {
             $dateHistogramInterval = 'month';
         }
 
         return $dateHistogramInterval;
+    }
+
+    /**
+     * Provide a list of queries to filter with the client
+     * request URI to get entries from social networks.
+     */
+    private function getSocialNetworksURIPatternFilter(): array
+    {
+        return [
+            new Query\Wildcard(
+                'ClientRequestURI.keyword',
+                '*?source_utm=facebook-instagram-messenger*'
+            ),
+            new Query\Wildcard('ClientRequestURI.keyword', '*?fbclid*'),
+        ];
     }
 }

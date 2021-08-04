@@ -10272,6 +10272,7 @@ input QueryAnalyticsFilter {
   startAt: DateTime!
   endAt: DateTime!
   projectId: ID = null
+  topContributorsCount: Int = 4
 }
 
 """Fetches an object given its ID"""

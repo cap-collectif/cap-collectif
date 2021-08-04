@@ -79,10 +79,11 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     public function all(array $keys)
     {
         $filters = $keys[0];
-        list($start, $end, $projectId) = [
+        list($start, $end, $projectId, $topContributorsCount) = [
             new \DateTime($filters['startAt']),
             new \DateTime($filters['endAt']),
             GlobalId::fromGlobalId($filters['projectId'])['id'],
+            $filters['topContributorsCount'],
         ];
         $projectSlug = null;
         if ($projectId) {
@@ -91,9 +92,15 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
                 throw new UserError('This project id doest not exist.');
             }
             $projectSlug = $project->getSlug();
+            // We avoid getting a too wide time range by setting the start date to the project's publication date
+            // if the given start date is smaller.
+            $projectPublicationDate = $project->getPublishedAt();
+            if ($projectPublicationDate && $start < $project->getPublishedAt()) {
+                $start = $projectPublicationDate;
+            }
         }
         $internalSets = $this->analyticsSearch
-            ->getInternalAnalyticsResultSet($start, $end, $projectId)
+            ->getInternalAnalyticsResultSet($start, $end, $topContributorsCount, $projectId)
             ->getResultSets();
         $externalSets = $this->cloudflareElasticClient
             ->getExternalAnalyticsResultSet($start, $end, $projectSlug)
@@ -134,6 +141,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
             'startAt' => (new \DateTime($key['startAt']))->format(DateTimeInterface::ATOM),
             'endAt' => (new \DateTime($key['startAt']))->format(DateTimeInterface::ATOM),
             'projectId' => $key['projectId'],
+            'topContributorsCount' => $key['topContributorsCount'],
         ];
     }
 }

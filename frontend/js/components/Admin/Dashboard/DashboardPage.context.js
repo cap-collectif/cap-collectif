@@ -17,7 +17,9 @@ export type Context = {|
 
 export const DashboardPageContext: React.Context<Context> = React.createContext<Context>({
   filters: {
-    startAt: moment('2014-11-08T17:44:56.144').format('MM/DD/YYYY'),
+    startAt: moment()
+      .subtract(1, 'years')
+      .format('MM/DD/YYYY'),
     endAt: moment().format('MM/DD/YYYY'),
     projectId: 'ALL',
   },

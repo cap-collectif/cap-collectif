@@ -24,6 +24,7 @@ class AnalyticsSearch
         'opinionVersion',
         'argument',
         'debateArgument',
+        'debateAnonymousArgument',
         'source',
     ];
 
@@ -37,6 +38,7 @@ class AnalyticsSearch
     public function getInternalAnalyticsResultSet(
         DateTimeInterface $start,
         DateTimeInterface $end,
+        int $topContributorsCount,
         ?string $projectId = null
     ): \Elastica\Multi\ResultSet {
         $multiSearchQuery = new Search($this->getClient());
@@ -48,7 +50,12 @@ class AnalyticsSearch
             'comments' => $this->createCommentsQuery($start, $end, $projectId),
             'contributions' => $this->createContributionsQuery($start, $end, $projectId),
             'followers' => $this->createFollowersQuery($start, $end, $projectId),
-            'topContributors' => $this->createTopContributorsQuery($start, $end, $projectId),
+            'topContributors' => $this->createTopContributorsQuery(
+                $start,
+                $end,
+                $topContributorsCount,
+                $projectId
+            ),
             'mostUsedProposalCategories' => $this->createMostUsedProposalCategoriesQuery(
                 $start,
                 $end,
@@ -260,15 +267,12 @@ class AnalyticsSearch
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
-        $boolQuery
-            ->addFilter(new Query\Terms('objectType', ['follower']))
-            ->addFilter(
-                new Range('followedAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
-                ])
-            )
-            ->addFilter(new Query\Term(['published' => true]));
+        $boolQuery->addFilter(new Query\Term(['objectType' => 'follower']))->addFilter(
+            new Range('followedAt', [
+                'gte' => $start->format(DateTimeInterface::ATOM),
+                'lte' => $end->format(DateTimeInterface::ATOM),
+            ])
+        );
 
         if ($projectId) {
             $boolQuery->addFilter(
@@ -298,6 +302,7 @@ class AnalyticsSearch
     private function createTopContributorsQuery(
         DateTimeInterface $start,
         DateTimeInterface $end,
+        int $topContributorsCount,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
@@ -323,7 +328,7 @@ class AnalyticsSearch
                         (new Terms('objectType'))
                             ->setField('objectType')
                             ->setOrder('_count', 'desc')
-                            ->setSize(10)
+                            ->setSize($topContributorsCount)
                     )
             )
             ->setSize(0);
@@ -477,14 +482,19 @@ class AnalyticsSearch
         return $boolQuery;
     }
 
+    /**
+     * Redefine the pitch of the date histogram to years if the difference
+     * between its start date and its end date is greater than 1 year.
+     *
+     * It avoid getting too much data on a low pitch.
+     */
     private function getDateHistogramInterval(
         DateTimeInterface $start,
         DateTimeInterface $end
     ): string {
         $daysDiff = $start->diff($end)->days;
         $dateHistogramInterval = 'day';
-        // 2 months
-        if ($daysDiff > 60) {
+        if ($daysDiff > 365) {
             $dateHistogramInterval = 'month';
         }
 

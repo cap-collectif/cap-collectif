@@ -10,3 +10,6 @@ InternalQueryAnalyticsFilter:
             projectId:
                 type: ID
                 defaultValue: null
+            topContributorsCount:
+                type: Int
+                defaultValue: 4

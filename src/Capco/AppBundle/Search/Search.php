@@ -47,7 +47,10 @@ abstract class Search
 
         if ($requestStack && $requestStack->getCurrentRequest()) {
             // sprintf with %u is here in order to avoid negative int.
-            return sprintf('%u', ip2long(IPGuesser::getClientIp($requestStack->getCurrentRequest())));
+            return sprintf(
+                '%u',
+                ip2long(IPGuesser::getClientIp($requestStack->getCurrentRequest()))
+            );
         }
 
         return random_int(0, \PHP_INT_MAX);
@@ -204,7 +207,7 @@ abstract class Search
         return $this->getHydratedResults($repository, $ids);
     }
 
-    protected function getRandomSortedQuery(Query\AbstractQuery $query, int $seed = 123): Query
+    protected function getRandomSortedQuery(Query\AbstractQuery $query, ?int $seed = 123): Query
     {
         $functionScore = new Query\FunctionScore();
         $functionScore->setBoostMode(Query\FunctionScore::BOOST_MODE_REPLACE);
