@@ -5,14 +5,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
-use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreatePostMutation implements MutationInterface
 {
@@ -20,16 +18,11 @@ class CreatePostMutation implements MutationInterface
 
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
-    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
+    public function __construct(EntityManagerInterface $em, FormFactoryInterface $formFactory)
+    {
         $this->em = $em;
         $this->formFactory = $formFactory;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -45,9 +38,7 @@ class CreatePostMutation implements MutationInterface
         unset($data['authors']);
         $data['Authors'] = $input->offsetGet('authors');
 
-        $post->setOwner($viewer);
-
-        if ($viewer->isOnlyProjectAdmin()) {
+        if ($viewer->hasRole('ROLE_PROJECT_ADMIN') && !$viewer->hasRole('ROLE_ADMIN')) {
             $viewerGlobalId = GlobalId::toGlobalId('User', $viewer->getId());
             $data['Authors'] = [$viewerGlobalId];
         }
@@ -65,10 +56,5 @@ class CreatePostMutation implements MutationInterface
         $this->em->flush();
 
         return ['post' => $post, 'errorCode' => null];
-    }
-
-    public function isGranted(): bool
-    {
-        return $this->authorizationChecker->isGranted(PostVoter::CREATE, new Post());
     }
 }

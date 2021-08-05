@@ -16,9 +16,6 @@ services:
     Capco\AppBundle\Security\DebateArgumentVoter:
         tags:
             - { name: security.voter }
-    Capco\AppBundle\Security\PostVoter:
-        tags:
-            - { name: security.voter }
     Capco\AppBundle\Security\ProjectVoter:
         tags:
             - { name: security.voter }

@@ -107,23 +107,13 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post21'
         title: Mon premier article
         body: 'Je me prends trop pour un journaliste à écrire des articles'
-    postWithOwnerEn1:
+    postWithOwnerEn21:
         locale: en-GB
         translatable: '@postWithOwner'
         title: Post title owned by an owner
         body: 'Post body owned by an owner'
-    postWithOwnerFr1:
+    postWithOwnerFr21:
         locale: fr-FR
         translatable: '@postWithOwner'
         title: Articles avec owner
         body: "Body de l'article avec owner"
-    postWithOwnerEn2:
-        locale: en-GB
-        translatable: '@postWithOwner2'
-        title: Second post owned by an owner
-        body: 'Post body owned by an owner2'
-    postWithOwnerFr2:
-        locale: fr-FR
-        translatable: '@postWithOwner2'
-        title: Deuxieme article possédé par un owner
-        body: "Body de l'article avec owner2"

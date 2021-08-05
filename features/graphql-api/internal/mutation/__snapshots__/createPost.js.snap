@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mutations.createPost admin should create a post with required fields. 1`] = `
+Object {
+  "createPost": Object {
+    "errorCode": null,
+    "post": Object {
+      "abstract": "Mon article",
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyVGhlbw==",
+        },
+      ],
+      "body": "<p>Mon article</p>",
+      "commentable": true,
+      "displayedOnBlog": true,
+      "isPublished": true,
+      "metaDescription": null,
+      "publishedAt": "2020-06-05 12:15:30",
+      "relatedContent": Array [],
+      "title": "Titre !",
+    },
+  },
+}
+`;
+
 exports[`mutations.createPost admin should create a post with optionnal fields. 1`] = `
 Object {
   "createPost": Object {
@@ -9,7 +33,6 @@ Object {
       "authors": Array [
         Object {
           "id": "VXNlcjp1c2VyVGhlbw==",
-          "username": "Théo QP",
         },
       ],
       "body": "<p>Mon article</p>",
@@ -17,10 +40,6 @@ Object {
       "displayedOnBlog": true,
       "isPublished": true,
       "metaDescription": "meta description",
-      "owner": Object {
-        "id": "VXNlcjp1c2VyQWRtaW4=",
-        "username": "admin",
-      },
       "publishedAt": "2020-06-05 12:15:30",
       "relatedContent": Array [
         Object {
@@ -49,35 +68,6 @@ Object {
           "title": "Food project",
         },
       ],
-      "title": "Titre !",
-    },
-  },
-}
-`;
-
-exports[`mutations.createPost admin should create a post with required fields. 1`] = `
-Object {
-  "createPost": Object {
-    "errorCode": null,
-    "post": Object {
-      "abstract": "Mon article",
-      "authors": Array [
-        Object {
-          "id": "VXNlcjp1c2VyVGhlbw==",
-          "username": "Théo QP",
-        },
-      ],
-      "body": "<p>Mon article</p>",
-      "commentable": true,
-      "displayedOnBlog": true,
-      "isPublished": true,
-      "metaDescription": null,
-      "owner": Object {
-        "id": "VXNlcjp1c2VyQWRtaW4=",
-        "username": "admin",
-      },
-      "publishedAt": "2020-06-05 12:15:30",
-      "relatedContent": Array [],
       "title": "Titre !",
     },
   },

@@ -1,0 +1,23 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block jumbotron %}
+	<div class="jumbotron jumbotron--custom jumbotron--bg-1  text-center">
+		<div class="header-img">
+			<div class="container">
+				<h1>{{ 'error.404.title'|trans({},'CapcoAppBundle') }}</h1>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body %}
+	<section class="section--custom">
+        <div class="container text-center error-page">
+            <i class="cap cap-delete-2"></i>
+            <p class="clearfix mt-5 error-page__name">{{ '404-error'|trans({}, 'CapcoAppBundle') }}</p>
+            <p class="clearfix mt-5 error-page__definition">{{ 'the-page-you-are-looking-for-cant-be-found'|trans({}, 'CapcoAppBundle') }}</p>
+            <a class="clearfix mt-5 error-page__back-home" href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a>
+            <a class="clearfix error-page__report" href="{{ path('app_contact') }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
+        </div>
+	</section>
+{% endblock %}

@@ -107,9 +107,13 @@ describe('mutations.updatePost', () => {
   });
 
   it('admin should have an error when attempting to update a unknown post.', async () => {
-    await expect(
-      graphql(UpdatePostMutation, { input: { ...requiredInput, id: 'abc' } }, 'internal_admin'),
-    ).rejects.toThrowError('Access denied to this field.');
+    const response = await graphql(
+      UpdatePostMutation,
+      {
+        input: { ...requiredInput, id: 'abc' },
+      },
+      'internal_admin',
+    );
   });
 
   it('response body should be html_purified to prevent XSS attack.', async () => {
@@ -132,11 +136,5 @@ describe('mutations.updatePost', () => {
 
     expect(response.updatePost.post.body).toBe('');
     expect(response.updatePost.errorCode).toBe(null);
-  });
-
-  it('should return NOT_AUTHORIZED errorCode if project admin user attempt to update a post that he does not own', async () => {
-    await expect(
-      graphql(UpdatePostMutation, { input: requiredInput }, 'internal_theo'),
-    ).rejects.toThrowError('Access denied to this field.');
   });
 });

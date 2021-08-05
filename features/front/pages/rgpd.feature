@@ -115,6 +115,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
 Scenario: An anonymous goes to a page not in his default language and should see banner. Then, after his choice, all  pages not in his locale should show the banner
   Given feature "multilangue" is enabled
   Given I go to "/de/"
+  And I should not see "error.404.title"
   And I should not see a cookie named "locale"
   And I wait "#changeLanguageProposalContainer" to appear on current page
   And I click the "#language-header-close" element
