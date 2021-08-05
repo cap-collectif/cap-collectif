@@ -56,7 +56,9 @@ class ProjectVotesResolver implements ResolverInterface
         $totalCount = 0;
 
         foreach ($project->getSteps() as $pas) {
-            $totalCount += $this->countStepVotes($pas->getStep(), $anonymous);
+            if ($pas->getStep()) {
+                $totalCount += $this->countStepVotes($pas->getStep(), $anonymous);
+            }
         }
 
         return $totalCount;

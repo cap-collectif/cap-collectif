@@ -66,7 +66,9 @@ class QueryVotesResolver implements ResolverInterface
         $totalCount = 0;
 
         foreach ($project->getSteps() as $pas) {
-            $totalCount += $this->countStepVotes($pas->getStep(), $onlyAccounted);
+            if ($pas->getStep()) {
+                $totalCount += $this->countStepVotes($pas->getStep(), $onlyAccounted);
+            }
         }
 
         return $totalCount;
