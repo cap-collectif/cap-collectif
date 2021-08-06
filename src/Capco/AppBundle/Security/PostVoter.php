@@ -47,9 +47,9 @@ class PostVoter extends Voter
                 return $this->canEdit($post, $viewer);
             case self::DELETE:
                 return $this->canDelete($post, $viewer);
+            default:
+                return false;
         }
-
-        throw new \LogicException('This code should not be reached!');
     }
 
     private function canCreate(Post $post, User $viewer): bool
