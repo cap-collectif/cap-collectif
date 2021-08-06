@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\CreatePostMutation;
+use Capco\AppBundle\Security\PostVoter;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
@@ -136,5 +137,13 @@ class CreatePostMutationSpec extends ObjectBehavior
 
         $post->shouldHaveType(Post::class);
         $payload['errorCode']->shouldBe(null);
+    }
+
+    public function it_should_call_voter(AuthorizationChecker $authorizationChecker)
+    {
+        $authorizationChecker
+            ->isGranted(PostVoter::CREATE, Argument::type(Post::class))
+            ->shouldBeCalled();
+        $this->isGranted();
     }
 }
