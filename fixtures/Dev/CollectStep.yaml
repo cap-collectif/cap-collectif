@@ -218,6 +218,13 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
         startAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>
+    collectStepClosedIdf3:
+        id: collectStepClosedIdf3
+        title: Étape fermée, mais on peut modifier les réseaux sociaux des propositions
+        label: Dépôt des projets
+        body: Encore une super étape de dépôt
+        startAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
+        endAt: <identity((new \DateTime('2021-07-01 12:00:00')))>
     collectStepProjectWithOwner:
         id: collectStepProjectWithOwner
         title: Budget participatif du projet avec administrateur de projet

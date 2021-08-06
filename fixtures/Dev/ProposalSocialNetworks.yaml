@@ -7,3 +7,6 @@ Capco\AppBundle\Entity\ProposalSocialNetworks:
         linkedInUrl: 'https://www.linkedin.com/company/region-ile-de-france'
         facebookUrl: 'https://www.facebook.com/RegionIledeFrance'
         youtubeUrl: 'https://www.youtube.com/RegionIledeFrance'
+    proposalSocialNetworks3:
+        proposal: '@proposalAvecDesRsAModifier'
+        webPageUrl: 'https://theuselessweb.com/'

@@ -1,0 +1,11 @@
+ProposalSocialNetworksErrorCode:
+    type: enum
+    inherits:
+        - ProposalErrorCode
+    config:
+        name: ProposalSocialNetworksErrorCode
+        description: 'Available errors on proposal social networks mutation.'
+        values:
+            PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalSocialNetworksMutation::PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS")'
+                description: 'Social networks are not available on this proposal.'

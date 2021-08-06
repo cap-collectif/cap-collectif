@@ -30,10 +30,13 @@ Capco\AppBundle\Entity\ProposalForm:
     proposalform2:
         id: proposalForm2
         title: Formulaire de la collecte 2
-        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        description: Formulaire de collect fermé avec des réseaux sociaux
         step: '@collectstep2'
         notificationsConfiguration: '@proposalFormNotificationConfiguration2'
         reference: 2
+        usingWebPage: true
+        usingTwitter: true
+        usingFacebook: true
     proposalform3:
         id: proposalForm3
         title: Formulaire de la collecte 3
@@ -414,3 +417,29 @@ Capco\AppBundle\Entity\ProposalForm:
         usingDescription: true
         descriptionMandatory: true
         usingIllustration: true
+    proposalFormStepClosedIdfBP3:
+        id: proposalFormStepClosedIdfBP3
+        title: Formulaire du budget participatif 3 de l'Idf sur étape fermée
+        description: Whesh le BP3 c'est de l'eau
+        step: '@collectStepClosedIdf3'
+        usingThemes: true
+        usingAddress: true
+        usingDistrict: true
+        usingDescription: true
+        usingIllustration: true
+        usingCategories: true
+        usingSummary: true
+        districtMandatory: true
+        themeMandatory: false
+        descriptionMandatory: true
+        categoryMandatory: true
+        zoomMap: 9
+        mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
+        reference: 24
+        addressHelpText: Précisez l'adresse principale où sera mis en oeuvre votre projet
+        usingWebPage: true
+        usingTwitter: true
+        usingFacebook: true
+        usingInstagram: true
+        usingYoutube: true
+        usingLinkedIn: false

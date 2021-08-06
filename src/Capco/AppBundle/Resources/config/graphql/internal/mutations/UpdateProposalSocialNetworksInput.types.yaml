@@ -1,0 +1,10 @@
+UpdateProposalSocialNetworksInput:
+    type: relay-mutation-input
+    inherits:
+        - InternalWithSocialNetworks
+    config:
+        description: 'Input of updateProposalSocialNetworks mutation.'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The id of the proposal to update social networks.'

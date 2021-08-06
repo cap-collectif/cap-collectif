@@ -1333,3 +1333,11 @@ InternalMutation:
                     inputType: DeletePostInput
                     payloadType: DeletePostPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeletePostMutation", [value, getUser()])'
+            updateProposalSocialNetworks:
+                description: 'Update social networks on a proposal'
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProposalSocialNetworksInput
+                    payloadType: UpdateProposalSocialNetworksPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalSocialNetworksMutation", [value, getUser()])'

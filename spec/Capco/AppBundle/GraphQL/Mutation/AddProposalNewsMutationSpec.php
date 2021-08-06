@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Form\ProposalPostType;
+use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalNewsMutation;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
@@ -64,7 +65,7 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
         $payload = $this->__invoke($arguments, $viewer);
-        $payload['errorCode']->shouldBe(AddProposalNewsMutation::PROPOSAL_NOT_FOUND);
+        $payload['errorCode']->shouldBe('PROPOSAL_NOT_FOUND');
     }
 
     public function it_returns_userError_if_access_denied(
@@ -81,7 +82,7 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposal);
         $payload = $this->__invoke($arguments, $viewer);
-        $payload['errorCode']->shouldBe(AddProposalNewsMutation::ACCESS_DENIED);
+        $payload['errorCode']->shouldBe('ACCESS_DENIED');
     }
 
     public function it_returns_userError_if_step_dont_allow_news(
@@ -102,11 +103,11 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
 
         $project->getCurrentStep()->willReturn(null);
         $payload = $this->__invoke($arguments, $viewer);
-        $payload['errorCode']->shouldBe(AddProposalNewsMutation::PROPOSAL_DOESNT_ALLOW_NEWS);
+        $payload['errorCode']->shouldBe('PROPOSAL_DOESNT_ALLOW_NEWS');
 
         $project->getCurrentStep()->willReturn($currentStep);
         $payload = $this->__invoke($arguments, $viewer);
-        $payload['errorCode']->shouldBe(AddProposalNewsMutation::PROPOSAL_DOESNT_ALLOW_NEWS);
+        $payload['errorCode']->shouldBe('PROPOSAL_DOESNT_ALLOW_NEWS');
     }
 
     public function it_persists_new_proposal_news_and_send_notification(
