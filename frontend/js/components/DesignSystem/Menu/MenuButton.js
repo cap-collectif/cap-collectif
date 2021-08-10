@@ -1,23 +1,19 @@
 // @flow
 import * as React from 'react';
-import { Menu as HeadlessMenu } from '@headlessui/react';
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import { MenuButton as ReakitMenuButton } from 'reakit/Menu';
+import { useMenu } from './Menu.context';
 
-type RenderProps = (props: { +open: boolean }) => React.Node;
+const MenuButton = React.forwardRef<any, HTMLButtonElement>((props, ref) => {
+  const buttonProps = {
+    ...props.children.props,
+    as: props.children.type,
+    children: props.children.props.children,
+  };
 
-type Props = {|
-  ...AppBoxProps,
-  +children: RenderProps | React.Node,
-|};
-
-export const MENU_BUTTON_TYPE: 'MenuButton' = 'MenuButton';
-
-// So that we can use MenuButton as a real Button
-const MenuButton = React.forwardRef<any, HTMLButtonElement>(({ ...props }: Props, ref) => {
-  return <HeadlessMenu.Button ref={ref} {...props} />;
+  const { reakitMenu } = useMenu();
+  return <ReakitMenuButton ref={ref} {...reakitMenu} {...buttonProps} />;
 });
 
-MenuButton.name = MENU_BUTTON_TYPE;
 MenuButton.displayName = 'Menu.Button';
 
 export default MenuButton;

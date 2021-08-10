@@ -44,7 +44,7 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node =>
           <FormattedMessage id="shortcut.opinion" values={{ num: argumentsCount }} />
         </Heading>
         <Menu>
-          <Menu.Button as={React.Fragment}>
+          <Menu.Button>
             <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
               <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
             </Button>

@@ -37,9 +37,7 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
       spacing={5}
     >
       <Menu>
-        <Menu.Button
-          as={Symbol(react.fragment)}
-        >
+        <Menu.Button>
           <Button
             color="gray.500"
             rightIcon="ARROW_DOWN_O"
@@ -131,9 +129,7 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
       spacing={5}
     >
       <Menu>
-        <Menu.Button
-          as={Symbol(react.fragment)}
-        >
+        <Menu.Button>
           <Button
             color="gray.500"
             rightIcon="ARROW_DOWN_O"
@@ -225,9 +221,7 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
       spacing={5}
     >
       <Menu>
-        <Menu.Button
-          as={Symbol(react.fragment)}
-        >
+        <Menu.Button>
           <Button
             color="gray.500"
             rightIcon="ARROW_DOWN_O"

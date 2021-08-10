@@ -66,7 +66,7 @@ const QuestionnaireAdminResultsExportMenu = ({ questionnaire, logoUrl, chartsRef
   return (
     <>
       <Menu>
-        <Menu.Button as={React.Fragment}>
+        <Menu.Button>
           <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="small">
             <FormattedMessage id="global.export" />
           </Button>
@@ -78,12 +78,10 @@ const QuestionnaireAdminResultsExportMenu = ({ questionnaire, logoUrl, chartsRef
             </Text>
           </Menu.ListItem>
           <Menu.ListItem
-            // TODO https://github.com/cap-collectif/platform/issues/12532
             onClick={() => {
-              setTimeout(() => {
-                onOpen();
-              }, 100);
-            }}>
+              onOpen();
+            }}
+            closeOnSelect={false}>
             <Text width="100%" height="100%">
               <FormattedMessage id="pdf-file" />
             </Text>

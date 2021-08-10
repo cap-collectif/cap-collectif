@@ -291,6 +291,9 @@ type Input = {|
 type Accessibility = {|
   +'aria-hidden'?: boolean,
   +'aria-label'?: string,
+  +ariaLabel?: string,
+  +ariaLabelledby?: string,
+  +'aria-labelledby'?: string,
   +tabIndex?: number,
 |};
 

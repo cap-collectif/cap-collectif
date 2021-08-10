@@ -1,22 +1,17 @@
 // @flow
 import * as React from 'react';
-import { Menu as HeadlessMenu } from '@headlessui/react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
-import { AnimatePresence, m as motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
+import { Menu } from 'reakit/Menu';
+import { useMenu } from './Menu.context';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
-import Flex from '~ui/Primitives/Layout/Flex';
-import { useMenu } from '~ds/Menu/Menu.context';
 import { LAYOUT_TRANSITION_SPRING } from '~/utils/motion';
-
-type RenderProps = (props: { +open: boolean }) => React.Node;
+import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
   ...AppBoxProps,
-  +align?: 'left' | 'right',
-  +children: RenderProps | React.Node,
 |};
-
-export const MENU_LIST_TYPE: 'MenuList' = 'MenuList';
 
 const MenuItems = styled(motion.custom(Flex)).attrs(props => ({
   direction: 'column',
@@ -37,33 +32,35 @@ const MenuItems = styled(motion.custom(Flex)).attrs(props => ({
   }
 `;
 
-const MenuList = React.forwardRef<Props, HTMLElement>(
-  ({ children, align = 'right', ...props }: Props, ref) => {
-    const { open, closeOnSelect } = useMenu();
-
+const MenuList = forwardRef<Props, HTMLElement>(
+  ({ children, ariaLabel, ariaLabelledby, ...props }: Props, ref) => {
+    const { reakitMenu, hideOnClickOutside } = useMenu();
+    const label = ariaLabel ?? props['aria-label'] ?? undefined;
+    const labelledby = ariaLabelledby ?? props['aria-labelledby'] ?? undefined;
     return (
-      <AnimatePresence>
-        {open && (
-          <HeadlessMenu.Items
-            static
-            closeOnSelect={closeOnSelect}
-            ref={ref}
-            as={MenuItems}
-            align={align}
-            {...props}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={LAYOUT_TRANSITION_SPRING}
-            exit={{ opacity: 0, y: -10 }}>
-            {children}
-          </HeadlessMenu.Items>
-        )}
-      </AnimatePresence>
+      <Menu
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 },
+        }}
+        aria-label={label}
+        aria-labelledby={labelledby}
+        hideOnClickOutside={hideOnClickOutside}
+        {...reakitMenu}
+        style={{ outline: 'none' }}
+        as={MenuItems}
+        ref={ref}
+        zIndex={1000}
+        {...props}
+        initial="hidden"
+        animate={reakitMenu.visible ? 'visible' : 'hidden'}
+        transition={LAYOUT_TRANSITION_SPRING}>
+        {children}
+      </Menu>
     );
   },
 );
 
-MenuList.name = MENU_LIST_TYPE;
 MenuList.displayName = 'Menu.List';
 
 export default MenuList;

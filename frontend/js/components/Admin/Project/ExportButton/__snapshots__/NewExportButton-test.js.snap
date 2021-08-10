@@ -4,9 +4,7 @@ exports[`<NewExportButton/> render correctly 1`] = `
 <Menu
   placement="bottom-start"
 >
-  <Menu.Button
-    as={Symbol(react.fragment)}
-  >
+  <Menu.Button>
     <Button
       disabled={false}
       rightIcon="ARROW_DOWN_O"
@@ -89,9 +87,7 @@ exports[`<NewExportButton/> render disabled 1`] = `
 <Menu
   placement="bottom-start"
 >
-  <Menu.Button
-    as={Symbol(react.fragment)}
-  >
+  <Menu.Button>
     <Button
       disabled={true}
       rightIcon="ARROW_DOWN_O"

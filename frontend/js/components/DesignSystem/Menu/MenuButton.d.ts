@@ -1,6 +1,10 @@
-import { CommonProps } from './common';
-import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
+import { MenuButtonHTMLProps } from 'reakit/Menu'
+import { FC } from 'react';
 
-declare const MenuButton: PolymorphicComponent<CommonProps>
+type Props = MenuButtonHTMLProps & {
+  as?: any
+}
+
+declare const MenuButton: FC<Props>
 
 export default MenuButton;

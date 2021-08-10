@@ -39,7 +39,7 @@ const Template = (args: TableProps) => (
         <Table.Th>
           {({ styles }) => (
             <Menu>
-              <Menu.Button as={React.Fragment}>
+              <Menu.Button>
                 <Button rightIcon={ICON_NAME.ARROW_DOWN_O} {...styles}>
                   Publication
                 </Button>

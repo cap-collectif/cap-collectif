@@ -7,6 +7,8 @@ import Button from '~ds/Button/Button';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import Avatar from '~ds/Avatar/Avatar';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
 
 export default {
   title: 'Design system/Menu',
@@ -37,10 +39,10 @@ export default {
     closeOnSelect: { control: { type: 'boolean' } },
   },
 };
-const DefaultTemplate = () => (
+const DefaultTemplate = (args: any) => (
   <Flex justify="center">
-    <Menu>
-      <Menu.Button as={React.Fragment}>
+    <Menu {...args}>
+      <Menu.Button>
         <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
           Menu
         </Button>
@@ -70,7 +72,7 @@ const OptionsGroupsTemplate = () => {
   return (
     <Flex justify="center">
       <Menu closeOnSelect={false}>
-        <Menu.Button as={React.Fragment}>
+        <Menu.Button>
           <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
             Menu
           </Button>
@@ -110,7 +112,7 @@ export const withOptionGroups = OptionsGroupsTemplate.bind({});
 const IconTemplate = () => (
   <Flex justify="center">
     <Menu>
-      <Menu.Button as={React.Fragment}>
+      <Menu.Button>
         <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
           Menu
         </Button>
@@ -140,7 +142,7 @@ const CustomButtonTemplate = () => {
   return (
     <Flex justify="center">
       <Menu>
-        <Menu.Button as={React.Fragment}>
+        <Menu.Button>
           <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="tertiary" variantSize="medium">
             Sort
           </Button>
@@ -167,12 +169,10 @@ export const withCustomButton = CustomButtonTemplate.bind({});
 const CustomPlacementTemplate = (args: any) => (
   <Flex justify="center" height="450px" align="center">
     <Menu {...args}>
-      <Menu.Button
-        as={Button}
-        variant="primary"
-        rightIcon={ICON_NAME.ARROW_DOWN_O}
-        variantSize="medium">
-        Menu
+      <Menu.Button>
+        <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
+          Menu
+        </Button>
       </Menu.Button>
       <Menu.List>
         <Menu.ListItem>
@@ -195,4 +195,43 @@ const CustomPlacementTemplate = (args: any) => (
 export const withCustomPlacement = CustomPlacementTemplate.bind({});
 withCustomPlacement.args = {
   placement: 'bottom-start',
+};
+
+export const WithModalOption = (args: any) => {
+  return (
+    <Flex justify="center" height="450px" align="center">
+      <Menu {...args}>
+        <Menu.Button>
+          <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="medium">
+            Menu
+          </Button>
+        </Menu.Button>
+        <Menu.List>
+          <Modal
+            ariaLabel="Profile"
+            disclosure={
+              <Menu.ListItem closeOnSelect={false}>
+                <Icon mr={1} name="USER_O" />
+                <Text>Open my profile</Text>
+              </Menu.ListItem>
+            }>
+            <Modal.Header>
+              <Heading>My profile</Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Hello from your profile</Text>
+            </Modal.Body>
+          </Modal>
+          <Menu.ListItem disabled color="gray.500">
+            <Icon mr={1} name="PENCIL" />
+            <Text>Edit (not available yet)</Text>
+          </Menu.ListItem>
+          <Menu.ListItem>
+            <Icon mr={1} name="CROSS" />
+            <Text>Logout</Text>
+          </Menu.ListItem>
+        </Menu.List>
+      </Menu>
+    </Flex>
+  );
 };

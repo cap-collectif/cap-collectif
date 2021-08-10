@@ -80,7 +80,7 @@ const SectionSendingDomains = ({
               </Table.Td>
               <Table.Td>
                 <Menu>
-                  <Menu.Button as={React.Fragment}>
+                  <Menu.Button>
                     <Button
                       rightIcon={ICON_NAME.MORE}
                       aria-label={intl.formatMessage({ id: 'global.menu' })}

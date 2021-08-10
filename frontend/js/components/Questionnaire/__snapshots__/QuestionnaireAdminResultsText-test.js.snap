@@ -16,9 +16,7 @@ exports[`<QuestionnaireAdminResultsText /> renders correctly simpleQuestion resp
       />
     </Text>
     <Menu>
-      <Menu.Button
-        as={Symbol(react.fragment)}
-      >
+      <Menu.Button>
         <QuestionnaireAdminResultsText___StyledButton
           color="blue.500"
           rightIcon="ARROW_DOWN_O"
@@ -30,7 +28,9 @@ exports[`<QuestionnaireAdminResultsText /> renders correctly simpleQuestion resp
           />
         </QuestionnaireAdminResultsText___StyledButton>
       </Menu.Button>
-      <Menu.List>
+      <Menu.List
+        aria-label="question.display.tag_cloud"
+      >
         <Menu.OptionGroup
           onChange={[Function]}
           type="radio"

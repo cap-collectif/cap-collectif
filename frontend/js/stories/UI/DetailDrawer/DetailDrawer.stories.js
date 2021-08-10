@@ -20,7 +20,7 @@ const Template = () => {
         <DetailDrawer.Header textAlign="center" justifyContent="space-between">
           <Text fontWeight="bold">John Doe</Text>
           <Menu>
-            <Menu.Button as={React.Fragment}>
+            <Menu.Button>
               <Button variant="tertiary">Actions</Button>
             </Menu.Button>
             <Menu.List>

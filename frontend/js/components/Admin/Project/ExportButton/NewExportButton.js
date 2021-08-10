@@ -35,7 +35,7 @@ const NewExportButton = ({ onChange, linkHelp, exportableSteps, disabled }: Prop
   const intl = useIntl();
   return (
     <Menu placement="bottom-start">
-      <Menu.Button as={React.Fragment}>
+      <Menu.Button>
         <Button
           disabled={disabled}
           rightIcon={ICON_NAME.ARROW_DOWN_O}

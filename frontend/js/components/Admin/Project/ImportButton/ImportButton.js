@@ -17,8 +17,8 @@ const ImportButton = ({ selectedStepId }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   return (
     <>
-      <Menu placement="bottom-start">
-        <Menu.Button as={React.Fragment} mr={6}>
+      <Menu placement="bottom-start" mr={6}>
+        <Menu.Button>
           <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variantSize="small" variant="secondary">
             {intl.formatMessage({ id: 'global.create' })}
           </Button>

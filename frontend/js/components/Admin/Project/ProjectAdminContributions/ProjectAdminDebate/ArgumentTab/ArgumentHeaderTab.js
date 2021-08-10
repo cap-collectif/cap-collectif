@@ -63,7 +63,7 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
 
         <Flex direction="row" align="center" spacing={5}>
           <Menu>
-            <Menu.Button as={React.Fragment}>
+            <Menu.Button>
               <Button rightIcon={ICON_NAME.ARROW_DOWN_O} color="gray.500">
                 {intl.formatMessage({ id: 'label_filters' })}
               </Button>
