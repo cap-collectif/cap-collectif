@@ -14,6 +14,7 @@ const baseProps = {
     phone: '0606060606',
     isAdmin: false,
     isProjectAdmin: false,
+    isOnlyProjectAdmin: false,
     isEvaluerOnLegacyTool: false,
     isEvaluerOnNewTool: false,
     email: 'test@gmail.com',

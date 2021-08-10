@@ -72,7 +72,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) =>
       }
       const createdProposal = response.createProposalFusion.proposal;
       dispatch(closeCreateFusionModal());
-      window.location.href = createdProposal.adminUrl;
+      if (createdProposal.adminUrl) {
+        window.location.href = createdProposal.adminUrl;
+      }
     })
     .catch(() => {
       throw new SubmissionError({

@@ -113,7 +113,9 @@ const AnalysisProposal = ({
                 />
               </OverlayTrigger>
             )}
-            <a href={isAdminView ? proposal?.adminUrl : proposal.url}>{proposal.title}</a>
+            <a href={isAdminView ? proposal?.adminUrl ?? proposal.url : proposal.url}>
+              {proposal.title}
+            </a>
           </h2>
         </ProposalListRowHeader>
 
@@ -200,7 +202,9 @@ const AnalysisProposal = ({
             <button
               type="button"
               onClick={() => {
-                window.open(proposal?.adminUrl, '_blank');
+                if (proposal?.adminUrl) {
+                  window.open(proposal?.adminUrl, '_blank');
+                }
               }}>
               <FormattedMessage id="global.edit" />
             </button>

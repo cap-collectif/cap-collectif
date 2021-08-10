@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form\Persister;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -61,6 +62,13 @@ class ProjectPersister
             if (!$project) {
                 throw new UserError(sprintf('Unknown project "%d"', $projectId));
             }
+            if (
+                ProjectVisibilityMode::VISIBILITY_ADMIN === $arguments['visibility'] &&
+                $viewer->isOnlyProjectAdmin()
+            ) {
+                throw new UserError('Access denied to this field.');
+            }
+
             $project->setOwner($viewer);
             unset($arguments['projectId']);
         }
@@ -70,6 +78,13 @@ class ProjectPersister
         list($dataAuthors, $steps) = [$arguments['authors'], $arguments['steps']];
         unset($arguments['authors'], $arguments['steps']);
         $form->submit($arguments);
+
+        if (!$editMode && $viewer->isOnlyProjectAdmin()) {
+            // We force the project to restrict it's visibility when a project admin
+            // create a new project, but this should only apply on creation
+            $project->setVisibility(ProjectVisibilityMode::VISIBILITY_ME);
+        }
+
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 

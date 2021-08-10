@@ -14,6 +14,7 @@ export const author = {
   isViewer: false,
   isAdmin: true,
   isProjectAdmin: false,
+  isOnlyProjectAdmin: false,
   isEvaluerOnLegacyTool: true,
   isEvaluerOnNewTool: true,
   isPhoneConfirmed: true,

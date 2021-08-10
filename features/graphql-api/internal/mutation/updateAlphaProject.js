@@ -1154,4 +1154,20 @@ describe('project access control', () => {
       ),
     ).rejects.toThrowError('Access denied to this field.');
   });
+
+  it('should not update a project when user is a project admin and set the project visibility to `ADMIN`', async () => {
+    await expect(
+      graphql(
+        UpdateAlphaProjectMutation,
+        {
+          input: {
+            ...BASE_INPUT,
+            projectId: toGlobalId('Project', 'projectIdf3'),
+            visibility: 'ADMIN',
+          },
+        },
+        'internal_theo',
+      ),
+    ).rejects.toThrowError('Access denied to this field.');
+  });
 });

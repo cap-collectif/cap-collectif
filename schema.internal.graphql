@@ -8543,7 +8543,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   viewerIsFollowing: Boolean!
 
   """The admin URL to this resource."""
-  adminUrl: URI!
+  adminUrl: URI
 
   """Did the viewer author this entity."""
   viewerDidAuthor: Boolean
@@ -13203,7 +13203,7 @@ type UnfollowProposalPayload {
 """Represents a type that can be retrieved by a URL on the admin."""
 interface UniformResourceAdminLocatable {
   """The admin URL to this resource."""
-  adminUrl: URI!
+  adminUrl: URI
 }
 
 """Represents a type that can be retrieved by a URL."""

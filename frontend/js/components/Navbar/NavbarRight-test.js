@@ -38,6 +38,7 @@ export const user = {
   isViewer: false,
   isAdmin: true,
   isProjectAdmin: false,
+  isOnlyProjectAdmin: false,
   isEvaluerOnLegacyTool: true,
   isEvaluerOnNewTool: false,
 };

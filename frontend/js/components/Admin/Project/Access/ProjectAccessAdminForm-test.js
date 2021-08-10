@@ -10,6 +10,7 @@ describe('<ProjectAccessAdminForm />', () => {
     ...formMock,
     intl: intlMock,
     project: null,
+    isAdmin: true,
     visibility: 'ADMIN',
     formName: 'ProjectAdminForm',
     initialGroups: [],
@@ -29,6 +30,11 @@ describe('<ProjectAccessAdminForm />', () => {
       },
     };
     const wrapper = shallow(<ProjectAccessAdminForm {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly empty when user is not admin', () => {
+    const wrapper = shallow(<ProjectAccessAdminForm {...defaultProps} isAdmin={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

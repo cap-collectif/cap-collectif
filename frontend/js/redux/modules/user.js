@@ -15,7 +15,6 @@ import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutati
 import type { RegisterEmailDomainsInput } from '~relay/RegisterEmailDomainsMutation.graphql';
 import { userActions } from './user_actions';
 
-
 export const accountForm = 'accountForm';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
@@ -30,6 +29,7 @@ export type User = {
   +phone: string,
   +isAdmin: boolean,
   +isProjectAdmin: boolean,
+  +isOnlyProjectAdmin: boolean,
   +email: string,
   +newEmailToConfirm: ?string,
   +media: ?{
@@ -78,6 +78,7 @@ export type State = {
     +phone: string,
     +isAdmin: boolean,
     +isProjectAdmin: boolean,
+    +isOnlyProjectAdmin: boolean,
     +email: string,
     +newEmailToConfirm: ?string,
     +media: ?{

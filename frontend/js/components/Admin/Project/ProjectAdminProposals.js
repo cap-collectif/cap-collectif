@@ -648,7 +648,7 @@ export const ProjectAdminProposals = ({
               placeholder={intl.formatMessage({ id: 'global.menu.search' })}
             />
           </div>
-          <div>
+          <Flex spacing={6}>
             {features.import_proposals && selectedStepId && (
               <ImportButton selectedStepId={selectedStepId} />
             )}
@@ -667,7 +667,7 @@ export const ProjectAdminProposals = ({
                 linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
               />
             )}
-          </div>
+          </Flex>
         </Flex>
 
         <S.ProjectAdminProposalsHeader>

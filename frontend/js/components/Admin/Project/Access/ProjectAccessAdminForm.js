@@ -24,12 +24,17 @@ export type FormValues = {|
   restrictedViewerGroups: Array<{| label: string, value: string |}>,
 |};
 
+type ReduxProps = {|
+  +visibility: ProjectVisibility,
+  +isAdmin: boolean,
+|};
+
 type Props = {|
+  ...ReduxProps,
   ...ReduxFormFormProps,
   project: ?ProjectAccessAdminForm_project,
   intl: IntlShape,
   formName: string,
-  visibility: ProjectVisibility,
   initialGroups: Array<{| label: string, value: string |}>,
 |};
 
@@ -56,7 +61,7 @@ export const loadGroupOptions = (initialGroups: ?Array<{| label: string, value: 
   });
 };
 
-export const ProjectAccessAdminForm = ({ visibility, initialGroups }: Props) => (
+export const ProjectAccessAdminForm = ({ visibility, initialGroups, isAdmin }: Props) => (
   <div className="col-md-12">
     <ProjectBoxContainer className="box container-fluid">
       <ProjectBoxHeader>
@@ -75,15 +80,17 @@ export const ProjectAccessAdminForm = ({ visibility, initialGroups }: Props) => 
             radioChecked={visibility === 'ME'}>
             <FormattedMessage id="myself-visibility-only-me" />
           </Field>
-          <Field
-            component={renderComponent}
-            id="project-visibility-ADMIN"
-            name="visibility"
-            type="radio"
-            value="ADMIN"
-            radioChecked={visibility === 'ADMIN'}>
-            <FormattedMessage id="global-administrators" />
-          </Field>
+          {isAdmin && (
+            <Field
+              component={renderComponent}
+              id="project-visibility-ADMIN"
+              name="visibility"
+              type="radio"
+              value="ADMIN"
+              radioChecked={visibility === 'ADMIN'}>
+              <FormattedMessage id="global-administrators" />
+            </Field>
+          )}
           <Field
             component={renderComponent}
             id="project-visibility-PUBLIC"
@@ -129,6 +136,7 @@ export const ProjectAccessAdminForm = ({ visibility, initialGroups }: Props) => 
 
 const mapStateToProps = (state: GlobalState) => ({
   visibility: formValueSelector('projectAdminForm')(state, 'visibility'),
+  isAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 
 export const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProjectAccessAdminForm);

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -61,6 +62,9 @@ class CreateProjectMutation implements MutationInterface
         }
 
         $project = (new Project())->setOwner($viewer);
+        if ($viewer->isOnlyProjectAdmin()) {
+            $project->setVisibility(ProjectVisibilityMode::VISIBILITY_ME);
+        }
 
         $form = $this->formFactory->create(ProjectFormType::class, $project);
 

@@ -23,7 +23,9 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           type="text"
         />
       </div>
-      <div>
+      <ForwardRef
+        spacing={6}
+      >
         <NewExportButton
           disabled={false}
           exportableSteps={
@@ -51,7 +53,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </div>
+      </ForwardRef>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -1134,7 +1136,9 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           type="text"
         />
       </div>
-      <div />
+      <ForwardRef
+        spacing={6}
+      />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -2229,7 +2233,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           type="text"
         />
       </div>
-      <div>
+      <ForwardRef
+        spacing={6}
+      >
         <NewExportButton
           disabled={false}
           exportableSteps={
@@ -2257,7 +2263,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </div>
+      </ForwardRef>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -3352,7 +3358,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           type="text"
         />
       </div>
-      <div />
+      <ForwardRef
+        spacing={6}
+      />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -4447,7 +4455,9 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           type="text"
         />
       </div>
-      <div>
+      <ForwardRef
+        spacing={6}
+      >
         <NewExportButton
           disabled={false}
           exportableSteps={
@@ -4466,7 +4476,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </div>
+      </ForwardRef>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -5552,7 +5562,9 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           type="text"
         />
       </div>
-      <div />
+      <ForwardRef
+        spacing={6}
+      />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -6638,7 +6650,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           type="text"
         />
       </div>
-      <div>
+      <ForwardRef
+        spacing={6}
+      >
         <NewExportButton
           disabled={true}
           exportableSteps={
@@ -6666,7 +6680,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </div>
+      </ForwardRef>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -6909,7 +6923,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           type="text"
         />
       </div>
-      <div />
+      <ForwardRef
+        spacing={6}
+      />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
