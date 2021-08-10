@@ -89,8 +89,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $dryRun = $input->offsetGet('dryRun');
 
         try {
-            $proposals = $this->importProposalsFromCsv->import($proposalForm->getStep(), $dryRun);
-
+            $proposals = $this->importProposalsFromCsv->import($dryRun);
             $this->em->remove($media);
 
             $proposals['importedProposals'] = $this->getConnection(
@@ -98,8 +97,15 @@ class AddProposalsFromCsvMutation implements MutationInterface
                 $input
             );
 
-            return $proposals;
-        } catch (\Exception $exception) {
+            return [
+                'importableProposals' => $proposals['importableProposals'],
+                'importedProposals' => $proposals['importedProposals'],
+                'badLines' => array_keys($proposals['badLines']),
+                'duplicates' => $proposals['duplicates'],
+                'mandatoryMissing' => array_keys($proposals['mandatoryMissing']),
+                'errorCode' => null,
+            ];
+        } catch (\RuntimeException $exception) {
             switch ($exception->getMessage()) {
                 case self::EMPTY_FILE:
                     return [

@@ -69,7 +69,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             'badLines' => [],
             'duplicates' => [],
             'mandatoryMissing' => [],
-            'errorCode' => AddProposalsFromCsvMutation::PROPOSAL_FORM_NOT_FOUND,
+            'errorCode' => 'PROPOSAL_FORM_NOT_FOUND',
         ];
 
         $this->__invoke($input)->shouldReturn($fail);
@@ -102,9 +102,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
-        $importProposalsFromCsv
-            ->import($step, false)
-            ->willThrow(new \RuntimeException('EMPTY_FILE'));
+        $importProposalsFromCsv->import(false)->willThrow(new \RuntimeException('EMPTY_FILE'));
 
         $fail = [
             'importableProposals' => 0,
@@ -112,7 +110,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             'badLines' => [],
             'duplicates' => [],
             'mandatoryMissing' => [],
-            'errorCode' => AddProposalsFromCsvMutation::EMPTY_FILE,
+            'errorCode' => 'EMPTY_FILE',
         ];
 
         $this->__invoke($input)->shouldReturn($fail);
@@ -145,9 +143,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
-        $importProposalsFromCsv
-            ->import($step, false)
-            ->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
+        $importProposalsFromCsv->import(false)->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
 
         $fail = [
             'importableProposals' => 0,
@@ -155,7 +151,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             'badLines' => [],
             'duplicates' => [],
             'mandatoryMissing' => [],
-            'errorCode' => AddProposalsFromCsvMutation::BAD_DATA_MODEL,
+            'errorCode' => 'BAD_DATA_MODEL',
         ];
 
         $this->__invoke($input)->shouldReturn($fail);
@@ -188,9 +184,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
-        $importProposalsFromCsv
-            ->import($step, false)
-            ->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
+        $importProposalsFromCsv->import(false)->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
 
         $this->shouldThrow(new \RuntimeException('STEP_NOT_FOUND'))->during('__invoke', [$input]);
     }

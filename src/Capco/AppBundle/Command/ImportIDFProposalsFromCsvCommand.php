@@ -71,11 +71,7 @@ class ImportIDFProposalsFromCsvCommand extends Command
         $this->importProposalsFromCsv->setProposalForm($proposalForm);
 
         try {
-            $result = $this->importProposalsFromCsv->import(
-                $proposalForm->getStep(),
-                $dryRun,
-                $output
-            );
+            $result = $this->importProposalsFromCsv->import($dryRun, $output);
 
             $output->writeln(
                 '<info>' . $result['importableProposals'] . ' proposals are importable.</info>'
@@ -86,8 +82,10 @@ class ImportIDFProposalsFromCsvCommand extends Command
                     ' proposals successfully created.</info>'
             );
             $output->writeln(
-                '<info>Lines : ' .
-                    implode(',', $result['badLines']) .
+                '<info>' .
+                    array_sum($result['badLines']) .
+                    ' bad data. Lines : ' .
+                    implode(',', array_keys($result['badLines'])) .
                     '  are bad and not imported.</info>'
             );
             $output->writeln(
@@ -96,8 +94,10 @@ class ImportIDFProposalsFromCsvCommand extends Command
                     ' already existent and not imported.</info>'
             );
             $output->writeln(
-                '<info>Lines : ' .
-                    implode(',', $result['mandatoryMissing']) .
+                '<info>' .
+                    array_sum($result['mandatoryMissing']) .
+                    ' mandatory fields missing. Lines : ' .
+                    implode(',', array_keys($result['mandatoryMissing'])) .
                     ' missing somes required data and not imported.</info>'
             );
 

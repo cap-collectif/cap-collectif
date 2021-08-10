@@ -698,10 +698,9 @@ class ProposalRepository extends EntityRepository
             ->getArrayResult();
     }
 
-    public function getProposalByEmailAndTitleOnStep(
+    public function getProposalByEmailAndTitleOnProposalForm(
         string $title,
         string $authorEmail,
-        AbstractStep $step,
         ProposalForm $proposalForm
     ): int {
         $query = $this->createQueryBuilder('proposal')

@@ -174,7 +174,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                   onClick={() => {
                     if (
                       window.confirm(
-                        intl.formatMessage({ id: 'proposal.admin.status.delete.confirmation' }),
+                        intl.formatMessage({ id: 'opinion.delete.subtitle' }),
                       )
                     ) {
                       onDelete(proposal.id);

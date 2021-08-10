@@ -11,6 +11,10 @@ class ValueResponse extends AbstractResponse
 {
     /**
      * @ORM\Column(name="value", type="json", nullable=true)
+     *
+     * if question is multiple choice question with SELECT type, value=$value
+     * other multiple choice question with simple choice value is like $value = sprintf('{"labels":["%s"], "other": null}', $value);
+     * if $question->otherAllowed and value is not a valid choice, value should be like $value = sprintf('{"labels":[], "other": "%s"}', $value)
      */
     protected $value;
 

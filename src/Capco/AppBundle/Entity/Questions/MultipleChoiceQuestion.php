@@ -84,6 +84,19 @@ class MultipleChoiceQuestion extends AbstractQuestion
             : new ArrayCollection($this->choices);
     }
 
+    public function isChoiceValid(string $choiceToFind): bool
+    {
+        if ($this->getChoices()) {
+            foreach ($this->getChoices() as $choice) {
+                if ($choice->getTitle() === $choiceToFind) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public function setChoices(Collection $choices): self
     {
         /** @var QuestionChoice $qc */
