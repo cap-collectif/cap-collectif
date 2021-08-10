@@ -16,6 +16,7 @@ Scenario: GraphQL client wants to get all campaigns
             senderName
             object
             content
+            unlayerConf
             sendAt
             status
             mailingInternal
@@ -43,6 +44,7 @@ Scenario: GraphQL client wants to get all campaigns
               "senderName": "Les devs de capco",
               "object": "Merci",
               "content": "<p>C'est gentil d'avoir participé.</p>",
+              "unlayerConf": null,
               "sendAt": "2021-01-01 00:00:00",
               "status": "PLANNED",
               "mailingInternal": "CONFIRMED",
@@ -57,6 +59,7 @@ Scenario: GraphQL client wants to get all campaigns
               "senderName": "Les devs de capco",
               "object": "Veuillez confirmer votre email",
               "content": "<p>Pourquoi vous l'avez toujours pas fait ?</p>",
+              "unlayerConf": null,
               "sendAt": "2020-10-01 00:00:00",
               "status": "SENT",
               "mailingInternal": "NOT_CONFIRMED",
@@ -71,6 +74,7 @@ Scenario: GraphQL client wants to get all campaigns
               "senderName": "Les devs de capco",
               "object": "Second confinement",
               "content": "<p>Je pense qu'on va devoir relancer le projet.</p>",
+              "unlayerConf": "{\"who\":\"agui\"}",
               "sendAt": null,
               "status": "DRAFT",
               "mailingInternal": null,

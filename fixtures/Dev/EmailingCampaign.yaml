@@ -28,6 +28,7 @@ Capco\AppBundle\Entity\EmailingCampaign:
         senderName: 'Les devs de capco'
         object: 'Second confinement'
         content: <stripslashes('\<p>\')>Je pense qu'on va devoir relancer le projet.<stripslashes('\</p>\')>
+        unlayerConf: '{"who":"agui"}'
         mailingList: '@mailingListFromCovidProject'
         mailingInternal: null
         sendAt: null

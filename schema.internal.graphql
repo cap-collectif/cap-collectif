@@ -4924,6 +4924,9 @@ type EmailingCampaign implements Node {
   """the content of the email"""
   content: HTML!
 
+  """Unlayer configuration in json format."""
+  unlayerConf: JSON
+
   """the list of users who shall receive the email"""
   mailingList: MailingList
 
@@ -13477,6 +13480,9 @@ input UpdateEmailingCampaignInput {
 
   """content of the email"""
   content: String = ""
+
+  """unlayer configuration of the email"""
+  unlayerConf: String
 
   """the date when the email shall be sent"""
   sendAt: DateTime = null

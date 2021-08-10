@@ -29,6 +29,9 @@ UpdateEmailingCampaignInput:
                 type: 'String'
                 description: 'content of the email'
                 defaultValue: ''
+            unlayerConf:
+                type: 'String'
+                description: 'unlayer configuration of the email'
             sendAt:
                 type: 'DateTime'
                 description: 'the date when the email shall be sent'

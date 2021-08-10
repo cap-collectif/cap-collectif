@@ -28,6 +28,9 @@ EmailingCampaign:
             content:
                 type: 'HTML!'
                 description: 'the content of the email'
+            unlayerConf:
+                type: 'JSON'
+                description: 'Unlayer configuration in json format.'
             mailingList:
                 type: 'MailingList'
                 description: 'the list of users who shall receive the email'

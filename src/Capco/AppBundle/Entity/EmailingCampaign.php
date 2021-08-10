@@ -42,6 +42,11 @@ class EmailingCampaign
     private string $content = '';
 
     /**
+     * @ORM\Column(name="unlayer_conf", type="json", nullable=true)
+     */
+    private ?string $unlayerConf = null;
+
+    /**
      * @ORM\ManyToOne(targetEntity=MailingList::class, inversedBy="emailingCampaigns")
      * @ORM\JoinColumn(nullable=true, name="mailing_list_id")
      */
@@ -122,6 +127,16 @@ class EmailingCampaign
         return $this;
     }
 
+    public function getUnlayerConf(): ?string
+    {
+        return $this->unlayerConf;
+    }
+
+    public function setUnlayerConf(?string $unlayerConf): void
+    {
+        $this->unlayerConf = $unlayerConf;
+    }
+
     public function getMailingList(): ?MailingList
     {
         return $this->mailingList;
@@ -176,31 +191,25 @@ class EmailingCampaign
 
     public function isEditable(): bool
     {
-        return in_array($this->status, EmailingCampaignStatus::EDITABLE);
+        return \in_array($this->status, EmailingCampaignStatus::EDITABLE);
     }
 
     public function hasReceipt(): bool
     {
-        return ($this->mailingList || $this->mailingInternal);
+        return $this->mailingList || $this->mailingInternal;
     }
 
     public function isComplete(): bool
     {
-        return (
-            $this->senderName &&
+        return $this->senderName &&
             $this->senderEmail &&
-            ('' !== $this->object) &&
-            ('' !== $this->content)
-        );
+            '' !== $this->object &&
+            '' !== $this->content;
     }
 
     public function canBeSent(): bool
     {
-        return (
-            $this->isEditable() &&
-            $this->isComplete() &&
-            $this->hasReceipt()
-        );
+        return $this->isEditable() && $this->isComplete() && $this->hasReceipt();
     }
 
     public function archive(): void

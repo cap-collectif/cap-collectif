@@ -19,44 +19,47 @@ class EmailingCampaignType extends AbstractType
     {
         $builder
             ->add('name', PurifiedTextType::class, [
-                'required'=> true,
+                'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('senderEmail', EmailType::class, [
-                'required' => true
+                'required' => true,
             ])
             ->add('senderName', PurifiedTextType::class, [
-                'required'=> true,
+                'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
                 'purify_html_profile' => 'default',
             ])
             ->add('mailingList', EntityType::class, [
                 'class' => MailingList::class,
-                'required' => false
+                'required' => false,
             ])
             ->add('mailingInternal', ChoiceType::class, [
                 'choices' => EmailingCampaignInternalList::ALL,
-                'required' => false
+                'required' => false,
             ])
             ->add('object', PurifiedTextType::class, [
-                'required'=> false,
+                'required' => false,
                 'purify_html' => true,
                 'strip_tags' => true,
                 'purify_html_profile' => 'default',
-                'empty_data' => ''
+                'empty_data' => '',
             ])
             ->add('content', TextType::class, [
                 'required' => false,
-                'empty_data' => ''
+                'empty_data' => '',
+            ])
+            ->add('unlayerConf', TextType::class, [
+                'required' => false,
+                'empty_data' => '',
             ])
             ->add('sendAt', DateTimeType::class, [
                 'required' => false,
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',
-            ])
-        ;
+            ]);
     }
 }
