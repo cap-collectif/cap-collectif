@@ -18,7 +18,6 @@ const OpenDataUsersQuery = /* GraphQL */ `
           websiteUrl
           facebookUrl
           createdAt
-          updatedAt
           deletedAccountAt
           enabled
           biography
