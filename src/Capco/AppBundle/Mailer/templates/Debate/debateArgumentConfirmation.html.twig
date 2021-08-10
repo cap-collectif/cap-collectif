@@ -13,31 +13,49 @@
 		{% block core_mail %}
             <div>
                 {% if logo is not null %}
-                    <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ organizationName }}" />
+                    <img src="{{ logo }}" alt="logo {{ organizationName }}"  style="width:150px;margin-bottom:5px;"/>
                 {% else %}
-                    <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+                    <img src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" style="margin-bottom:5px;"/>
                 {% endif %}
 
                 <div>
-                    <h1>
+    
+                     <table style="width: 100%;margin-bottom:20px;">
+                        <tr>
+                            <td class="mail__link__wrapper">
+                               <h1>
                         {{ 'argument.publication.email.title'|trans({}, 'CapcoAppBundle', user_locale) }}
                     </h1>
-                    <p>
-                    {{ 'mail-greeting-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale)}}<hr/>
+                    <p style="color: #5E5E5E;">
+                    {{ 'mail-greeting-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale)}}<br/>
                         {{ 'argument.publication.email.body'|trans({}, 'CapcoAppBundle', user_locale) }}
                     </p>
-                    <div style="background: #1A88FF;box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);border-radius: 3px;padding: 16px;text-align: center;margin-bottom: 8px;max-width:300px">
-                        <a style="text-transform: uppercase;color: #FFFFFF;" href="{{ confirmationUrl }}">{{ 'argument.publication.email.button'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
-                    </div>
-                   
-                    <a style="text-align: center;color: #1A88FF;" href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 100%;">
+                       
+                            <td class="mail__button__argument__wrapper">
+                                <div class="mail__button__argument__publish">
+                                    <a href="{{ confirmationUrl }}">{{ 'argument.publication.email.button'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
+                                </div>
+                            </td>
+                       
+                    </table>
+                     <table style="width: 100%;">
+                      
+                            <td class="mail__link__wrapper">
+                                <a style="text-align: center;color: #1A88FF;" href="{{ confirmationUrl }}">{{ 'https://' ~ confirmationUrl|split('/')[2] ~ '/...' }}</a>
+                            </td>
+                      
+                    </table>
                 </div>
             </div>
         {% endblock %}
 		{% block footer_mail %}
             <div>
-                <p style="margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
-                <p style="text-align: left;">
+                <p style="color:#ABABAB;margin: 0; text-align: left">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
+                <p style="color:#ABABAB;text-align: left;">
                     {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
 
 

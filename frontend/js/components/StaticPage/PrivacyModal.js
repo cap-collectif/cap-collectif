@@ -6,6 +6,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import CloseButton from '../Form/CloseButton';
 import type { State } from '~/types';
+import AppBox from '../Ui/Primitives/AppBox';
 
 type Props = {|
   +privacyContent: string,
@@ -23,8 +24,8 @@ export const PrivacyModal = ({
   const intl = useIntl();
 
   return (
-    <div className="privacy-policy">
-      <div>
+    <span className="privacy-policy">
+      <AppBox as="span" display="inline-flex" alignItems="center">
         {linkKeyword && <FormattedMessage id={linkKeyword} />}&nbsp;
         <Button
           id="privacy-policy"
@@ -35,7 +36,7 @@ export const PrivacyModal = ({
           name="privacy">
           <FormattedMessage id={title} />
         </Button>
-      </div>
+      </AppBox>
       <Modal
         animation={false}
         show={isOpen}
@@ -59,7 +60,7 @@ export const PrivacyModal = ({
           <CloseButton buttonId="cookies-cancel" onClose={onClose} />
         </Modal.Footer>
       </Modal>
-    </div>
+    </span>
   );
 };
 

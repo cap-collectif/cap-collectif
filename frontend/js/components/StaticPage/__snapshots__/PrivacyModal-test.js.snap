@@ -1,10 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PrivacyModal /> should render correctly 1`] = `
-<div
+<span
   className="privacy-policy"
 >
-  <div>
+  <AppBox
+    alignItems="center"
+    as="span"
+    display="inline-flex"
+  >
      
     <Button
       active={false}
@@ -23,7 +27,7 @@ exports[`<PrivacyModal /> should render correctly 1`] = `
         values={Object {}}
       />
     </Button>
-  </div>
+  </AppBox>
   <Modal
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -96,14 +100,18 @@ exports[`<PrivacyModal /> should render correctly 1`] = `
       />
     </ModalFooter>
   </Modal>
-</div>
+</span>
 `;
 
 exports[`<PrivacyModal /> should render correctly with link key work 1`] = `
-<div
+<span
   className="privacy-policy"
 >
-  <div>
+  <AppBox
+    alignItems="center"
+    as="span"
+    display="inline-flex"
+  >
     <FormattedMessage
       id="Thats the link keyword"
       values={Object {}}
@@ -126,7 +134,7 @@ exports[`<PrivacyModal /> should render correctly with link key work 1`] = `
         values={Object {}}
       />
     </Button>
-  </div>
+  </AppBox>
   <Modal
     animation={false}
     aria-labelledby="contained-modal-title-lg"
@@ -199,5 +207,5 @@ exports[`<PrivacyModal /> should render correctly with link key work 1`] = `
       />
     </ModalFooter>
   </Modal>
-</div>
+</span>
 `;

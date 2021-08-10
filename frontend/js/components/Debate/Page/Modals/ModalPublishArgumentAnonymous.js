@@ -150,6 +150,7 @@ const ModalContent = ({
   intl,
   email,
   debate,
+  submitting,
 }: Props) => {
   const focusInputRef = React.useCallback(node => {
     if (node !== null) {
@@ -289,6 +290,7 @@ const ModalContent = ({
               <Button
                 disabled={invalid || pristine}
                 type="submit"
+                isLoading={submitting}
                 onClick={() => {}}
                 variant="primary"
                 variantSize="big"

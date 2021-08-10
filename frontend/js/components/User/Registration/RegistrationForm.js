@@ -19,6 +19,7 @@ import validateResponses from '~/utils/form/validateResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
+import AppBox from '~/components/Ui/Primitives/AppBox';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -87,22 +88,25 @@ export const ChartLinkComponent = ({
   +dispatch: Dispatch,
 |}) => {
   return (
-    <FormattedMessage
-      id="registration.charte"
-      values={{
-        link: (
-          <Button
-            className="p-0 text-decoration-none"
-            variant="link"
-            bsStyle="link"
-            onClick={() => {
-              dispatch(displayChartModal());
-            }}>
-            {cguName}
-          </Button>
-        ),
-      }}
-    />
+    <AppBox as="span" css={{ '& > span': { display: 'inline-flex', alignItems: 'center' } }}>
+      <FormattedMessage
+        id="registration.charte"
+        css={{ display: 'inline-flex' }}
+        values={{
+          link: (
+            <Button
+              className="p-0 ml-5 mr-5 text-decoration-none"
+              variant="link"
+              bsStyle="link"
+              onClick={() => {
+                dispatch(displayChartModal());
+              }}>
+              {cguName}
+            </Button>
+          ),
+        }}
+      />
+    </AppBox>
   );
 };
 

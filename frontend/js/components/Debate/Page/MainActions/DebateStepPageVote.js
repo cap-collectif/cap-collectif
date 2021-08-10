@@ -229,6 +229,7 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
             css={css({
               mb: `${SPACES_SCALES[6]} !important`,
             })}
+            textAlign="center"
             className="recaptcha-message"
             color="neutral-gray.700">
             {intl.formatMessage({ id: 'publish-anonymous-debate-vote-bot' })}
