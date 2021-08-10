@@ -1049,3 +1049,25 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: $createdAt
         publishedAt: $createdAt
         undraftAt: $createdAt
+    proposalAvecDesRsAAjouter:
+        id: proposalAvecDesRsAAjouter
+        title: Proposition avec réseaux sociaux à ajouter
+        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        author: '@user5'
+        proposalForm: '@proposalFormStepClosedIdfBP3'
+        createdAt: <identity((new \DateTime('2021-06-03')))>
+        category: '@pCategory1'
+        reference: 136
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalAvecDesRsAModifier:
+        id: proposalAvecDesRsAModifier
+        title: Proposition avec réseaux sociaux modifiable
+        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        author: '@user5'
+        proposalForm: '@proposalFormStepClosedIdfBP3'
+        createdAt: <identity((new \DateTime('2021-06-03')))>
+        category: '@pCategory1'
+        reference: 137
+        publishedAt: $createdAt
+        undraftAt: $createdAt

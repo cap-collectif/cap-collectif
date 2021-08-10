@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal | createProposalForm create proposalForm 1`] = `
+Object {
+  "createProposalForm": Object {
+    "proposalForm": Object {
+      "owner": Object {
+        "username": "Théo QP",
+      },
+      "title": "Bonjour !",
+    },
+  },
+}
+`;

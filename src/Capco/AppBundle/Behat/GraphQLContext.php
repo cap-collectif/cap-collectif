@@ -121,6 +121,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @Given I am logged in to graphql as theo
+     */
+    public function iAmLoggedInToGraphQLAsTheo()
+    {
+        $this->createAuthenticatedClient('theo@cap-collectif.com', 'toto');
+    }
+
+    /**
      * @Given I am logged out
      */
     public function iAmLoggedOut()
@@ -230,6 +238,20 @@ class GraphQLContext implements Context
             $matcher->match($this->response, $pattern->getRaw()),
             $matcher->error() . ' ' . $this->response
         );
+    }
+
+    /**
+     * @Then the JSON response should have error :errorMessage
+     */
+    public function theJsonResponseShouldHaveError(string $errorMessage)
+    {
+        $found = 0;
+        foreach (json_decode($this->response)->errors as $responseError) {
+            if ($responseError->message === $errorMessage) {
+                ++$found;
+            }
+        }
+        Assert::assertEquals(1, $found);
     }
 
     /**

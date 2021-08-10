@@ -1,0 +1,8 @@
+DeleteProposalFormInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteProposalForm mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the `ProposalForm` to delete.'

@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryProposalFormResolver implements ResolverInterface
 {
-    private $repository;
+    private ProposalFormRepository $repository;
 
     public function __construct(ProposalFormRepository $repository)
     {

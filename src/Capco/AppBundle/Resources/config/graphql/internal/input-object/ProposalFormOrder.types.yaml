@@ -1,0 +1,13 @@
+ProposalFormOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of proposalForms can be ordered upon return.'
+        fields:
+            field:
+                type: 'ProposalFormOrderField!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormOrderField::CREATED_AT")'
+                description: 'The field to order `ProposalForm` by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                description: 'The ordering direction.'

@@ -1,0 +1,7 @@
+DeleteProposalFormPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedProposalFormId:
+                type: 'ID'
+                description: 'The deleted `ProposalForm` id.'

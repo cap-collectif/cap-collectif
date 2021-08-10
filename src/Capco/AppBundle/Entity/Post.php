@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\OwnerTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
@@ -33,6 +34,7 @@ class Post implements
 {
     use CommentableTrait;
     use CustomCodeTrait;
+    use OwnerTrait;
     use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;
@@ -99,11 +101,6 @@ class Post implements
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="post")
      */
     private $comments;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     */
-    private ?User $owner;
 
     public function __construct()
     {
@@ -411,18 +408,6 @@ class Post implements
         if ($this->proposals->contains($proposal)) {
             $this->proposals->removeElement($proposal);
         }
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
 
         return $this;
     }

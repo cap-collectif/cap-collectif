@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
@@ -34,24 +32,6 @@ class ProposalFormMutation
         $this->logger = $logger;
         $this->proposalFormRepository = $proposalFormRepository;
         $this->questionnaireRepository = $questionnaireRepository;
-    }
-
-    public function create(Argument $input): array
-    {
-        $proposalForm = new ProposalForm();
-
-        $form = $this->formFactory->create(ProposalFormCreateType::class, $proposalForm);
-
-        $form->submit($input->getArrayCopy(), false);
-
-        if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
-        }
-
-        $this->em->persist($proposalForm);
-        $this->em->flush();
-
-        return ['proposalForm' => $proposalForm];
     }
 
     public function updateNotificationsConfiguration(Argument $input)

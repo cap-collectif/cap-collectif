@@ -1,0 +1,8 @@
+InternalProposalFormConnection:
+    type: relay-connection
+    config:
+        name: ProposalFormConnection
+        nodeType: ProposalForm!
+        connectionFields:
+            totalCount:
+                type: Int!

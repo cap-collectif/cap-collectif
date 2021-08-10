@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Field, FieldArray, arrayPush, change } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
@@ -11,7 +11,7 @@ import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
 import { renderSubSection } from './ProjectAdminStepForm.utils';
 import StepStatusesList, { type ProposalStepStatus } from './StepStatusesList';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import { PrivacyInfo } from './ProjectAdminStepForm.style';
 import StepVotesFields from './StepVotesFields';
@@ -37,13 +37,22 @@ type Props = {|
 |};
 
 export const getAvailableProposals = graphql`
-  query ProjectAdminCollectStepFormProposalsQuery($term: String) {
-    availableProposalForms(term: $term) {
-      id
-      title
-      isGridViewEnabled
-      isListViewEnabled
-      isMapViewEnabled
+  query ProjectAdminCollectStepFormProposalsQuery(
+    $term: String
+    $affiliations: [ProposalFormAffiliation!]
+  ) {
+    viewer {
+      proposalForms(query: $term, affiliations: $affiliations, availableOnly: true) {
+        edges {
+          node {
+            id
+            title
+            isGridViewEnabled
+            isListViewEnabled
+            isMapViewEnabled
+          }
+        }
+      }
     }
   }
 `;
@@ -51,16 +60,18 @@ export const getAvailableProposals = graphql`
 export const loadProposalOptions = (
   proposal: ?{| label: string, value: string |},
   term: ?string,
+  isAdmin: boolean,
 ) => {
   return fetchQuery_DEPRECATED(environment, getAvailableProposals, {
     term: term === '' ? null : term,
+    affiliations: isAdmin ? [] : ['OWNER'],
   }).then(data => {
-    const proposals = data.availableProposalForms.map(p => ({
-      value: p.id,
-      label: p.title,
-      isGridViewEnabled: p.isGridViewEnabled,
-      isListViewEnabled: p.isListViewEnabled,
-      isMapViewEnabled: p.isMapViewEnabled,
+    const proposals = data.viewer.proposalForms.edges.map(p => ({
+      value: p.node.id,
+      label: p.node.title,
+      isGridViewEnabled: p.node.isGridViewEnabled,
+      isListViewEnabled: p.node.isListViewEnabled,
+      isMapViewEnabled: p.node.isMapViewEnabled,
     }));
 
     if (proposal && !proposals.some(q => q.value === proposal.value)) proposals.push(proposal);
@@ -86,6 +97,8 @@ export const ProjectAdminCollectStepForm = ({
   votesRanking,
 }: Props) => {
   const intl = useIntl();
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user ? user.isAdmin : false;
   const statusesWithId = statuses?.filter(s => s.id) || [];
   return (
     <>
@@ -106,7 +119,7 @@ export const ProjectAdminCollectStepForm = ({
         aria-haspopup="true"
         defaultOptions
         cacheOptions
-        loadOptions={term => loadProposalOptions(proposal, term)}
+        loadOptions={term => loadProposalOptions(proposal, term, isAdmin)}
         clearable
       />
       {renderSubSection('global.proposals')}

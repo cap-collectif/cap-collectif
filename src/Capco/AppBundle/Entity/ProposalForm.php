@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
+use Capco\AppBundle\Traits\OwnerTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\UsingSocialNetworksTrait;
@@ -44,6 +45,7 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  */
 class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 {
+    use OwnerTrait;
     use ReferenceTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
@@ -54,11 +56,12 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    protected $updatedAt;
+    protected ?\DateTime $updatedAt = null;
 
     // Sonata always triggering _clone so we had to do this :/
     //@todo change this https://github.com/cap-collectif/platform/issues/5700
-    protected $cloneEnable = false;
+    protected bool $cloneEnable = false;
+
     /**
      * @ORM\Column(name="grid_view_enabled", type="boolean", nullable=false, options={"default": true})
      */
@@ -77,205 +80,205 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="proposalForm", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $step;
+    private ?CollectStep $step;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="proposalForm")
      */
-    private $proposals;
+    private Collection $proposals;
 
     /**
      * @ORM\Column(name="commentable", type="boolean", nullable=false, options={"default": true})
      */
-    private $commentable = true;
+    private bool $commentable = true;
 
     /**
      * @ORM\Column(name="costable", type="boolean", nullable=false, options={"default": true})
      */
-    private $costable = true;
+    private bool $costable = true;
 
     /**
      * @Assert\Valid
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
-    private $questions;
+    private Collection $questions;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCategory", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
      * @ORM\OrderBy({"name" = "ASC"})
      */
-    private $categories;
+    private Collection $categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
      * @ORM\OrderBy({"id" = "ASC"})
      */
-    private $districts;
+    private Collection $districts;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
-    private $titleHelpText;
+    private ?string $titleHelpText;
 
     /**
      * @ORM\Column(name="summary_help_text", type="string", length=255, nullable=true)
      */
-    private $summaryHelpText;
+    private ?string $summaryHelpText;
 
     /**
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
-    private $descriptionHelpText;
+    private ?string $descriptionHelpText;
 
     /**
      * @ORM\Column(name="theme_help_text", type="string", length=255, nullable=true)
      */
-    private $themeHelpText;
+    private ?string $themeHelpText;
 
     /**
      * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
-    private $districtHelpText;
+    private ?string $districtHelpText;
 
     /**
      * @ORM\Column(name="category_help_text", type="string", length=255, nullable=true)
      */
-    private $categoryHelpText;
+    private ?string $categoryHelpText;
 
     /**
      * @ORM\Column(name="address_help_text", type="string", length=255, nullable=true)
      */
-    private $addressHelpText;
+    private ?string $addressHelpText;
 
     /**
      * @ORM\Column(name="illustration_help_text", type="string", length=255, nullable=true)
      */
-    private $illustrationHelpText;
+    private ?string $illustrationHelpText;
 
     /**
      * @ORM\Column(name="using_themes", type="boolean", nullable=false)
      */
-    private $usingThemes = false;
+    private bool $usingThemes = false;
 
     /**
      * @ORM\Column(name="allow_aknowledge", type="boolean", nullable=false)
      */
-    private $allowAknowledge = false;
+    private bool $allowAknowledge = false;
 
     /**
      * @ORM\Column(name="theme_mandatory", type="boolean", nullable=false)
      */
-    private $themeMandatory = false;
+    private bool $themeMandatory = false;
 
     /**
      * @ORM\Column(name="using_categories", type="boolean", nullable=false)
      */
-    private $usingCategories = false;
+    private bool $usingCategories = false;
 
     /**
      * @ORM\Column(name="category_mandatory", type="boolean", nullable=false)
      */
-    private $categoryMandatory = false;
+    private bool $categoryMandatory = false;
 
     /**
      * @ORM\Column(name="district_mandatory", type="boolean", nullable=false)
      */
-    private $districtMandatory = false;
+    private bool $districtMandatory = false;
 
     /**
      * @ORM\Column(name="using_district", type="boolean", nullable=false)
      */
-    private $usingDistrict = false;
+    private bool $usingDistrict = false;
 
     /**
      * @ORM\Column(name="using_tipsmeee", type="boolean", nullable=false, options={"default": false})
      */
-    private $usingTipsmeee = false;
+    private bool $usingTipsmeee = false;
 
     /**
      * @ORM\Column(name="tipsmeee_help_text", type="string", length=255, nullable=true)
      */
-    private $tipsmeeeHelpText;
+    private ?string $tipsmeeeHelpText;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
-    private $notificationsConfiguration;
+    private ProposalFormNotificationConfiguration $notificationsConfiguration;
 
     /**
      * @ORM\Column(name="using_address", nullable=false, type="boolean", options={"default": false})
      */
-    private $usingAddress = false;
+    private bool $usingAddress = false;
 
     /**
      * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean", options={"default": false})
      */
-    private $proposalInAZoneRequired = false;
+    private bool $proposalInAZoneRequired = false;
 
     /**
      * @ORM\Column(name="zoom_map", nullable=true, type="integer")
      */
-    private $zoomMap;
+    private ?int $zoomMap;
 
     /**
      * @ORM\Column(name="map_center", type="text", nullable=true)
      */
-    private $mapCenter;
+    private ?string $mapCenter;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalForm", cascade={"persist"})
      * @ORM\JoinColumn(name="evaluation_form_id", nullable=true)
      */
-    private $evaluationForm;
+    private ?Questionnaire $evaluationForm;
 
     /**
      * @ORM\Column(name="object_type", nullable=false, type="string", options={"default": "proposal"})
      */
-    private $objectType = ProposalFormObjectType::PROPOSAL;
+    private string $objectType = ProposalFormObjectType::PROPOSAL;
 
     /**
      * @ORM\Column(name="using_description", type="boolean", nullable=false)
      */
-    private $usingDescription = false;
+    private bool $usingDescription = false;
 
     /**
      * @ORM\Column(name="description_mandatory", type="boolean", nullable=false)
      */
-    private $descriptionMandatory = false;
+    private bool $descriptionMandatory = false;
 
     /**
      * @ORM\Column(name="using_summary", type="boolean", nullable=false)
      */
-    private $usingSummary = false;
+    private bool $usingSummary = false;
 
     /**
      * @ORM\Column(name="using_illustration", type="boolean", nullable=false)
      */
-    private $usingIllustration = false;
+    private bool $usingIllustration = false;
 
     /**
      * @ORM\Column(name="suggesting_similar_proposals", type="boolean", nullable=false, options={"default": true})
      */
-    private $suggestingSimilarProposals = true;
+    private bool $suggestingSimilarProposals = true;
 
     /**
      * @ORM\Column(name="can_contact", type="boolean", nullable=false)
      */
-    private $canContact = false;
+    private bool $canContact = false;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AnalysisConfiguration", mappedBy="proposalForm", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true, name="analysis_configuration", onDelete="SET NULL")
      */
-    private $analysisConfiguration;
+    private ?AnalysisConfiguration $analysisConfiguration;
 
     public function __construct()
     {
@@ -337,7 +340,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         }
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
     }
@@ -354,7 +357,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function initializeNotificationConfiguration()
+    public function initializeNotificationConfiguration(): void
     {
         $proposalFormNotificationConfiguration = new ProposalFormNotificationConfiguration();
         $proposalFormNotificationConfiguration->setProposalForm($this);
@@ -386,7 +389,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->description;
     }
 
-    public function getSummaryHelpText()
+    public function getSummaryHelpText(): ?string
     {
         return $this->summaryHelpText;
     }
@@ -521,7 +524,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->getStep() && $this->getStep()->canContribute($user);
     }
 
-    public function getTitleHelpText()
+    public function getTitleHelpText(): ?string
     {
         return $this->titleHelpText;
     }
@@ -533,7 +536,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getDescriptionHelpText()
+    public function getDescriptionHelpText(): ?string
     {
         return $this->descriptionHelpText;
     }
@@ -545,7 +548,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getThemeHelpText()
+    public function getThemeHelpText(): ?string
     {
         return $this->themeHelpText;
     }
@@ -557,7 +560,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getDistrictHelpText()
+    public function getDistrictHelpText(): ?string
     {
         return $this->districtHelpText;
     }
@@ -709,7 +712,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getCategoryHelpText()
+    public function getCategoryHelpText(): ?string
     {
         return $this->categoryHelpText;
     }
@@ -780,7 +783,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getAddressHelpText()
+    public function getAddressHelpText(): ?string
     {
         return $this->addressHelpText;
     }
@@ -792,7 +795,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getZoomMap()
+    public function getZoomMap(): ?int
     {
         return $this->zoomMap;
     }
@@ -816,7 +819,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getIllustrationHelpText()
+    public function getIllustrationHelpText(): ?string
     {
         return $this->illustrationHelpText;
     }

@@ -607,22 +607,46 @@ class ProposalMutation implements ContainerAwareInterface
                 : (new ProposalSocialNetworks())->setProposal($proposal);
 
         $proposal->setProposalSocialNetworks($socialNetworks);
-        if ($proposalForm->isUsingWebPage() && isset($values['webPageUrl'])) {
+        if (
+            $proposalForm->isUsingWebPage() &&
+            isset($values['webPageUrl']) &&
+            filter_var($values['webPageUrl'], \FILTER_VALIDATE_URL)
+        ) {
             $socialNetworks->setWebPageUrl($values['webPageUrl']);
         }
-        if ($proposalForm->isUsingFacebook() && isset($values['facebookUrl'])) {
+        if (
+            $proposalForm->isUsingFacebook() &&
+            isset($values['facebookUrl']) &&
+            filter_var($values['facebookUrl'], \FILTER_VALIDATE_URL)
+        ) {
             $socialNetworks->setFacebookUrl($values['facebookUrl']);
         }
-        if ($proposalForm->isUsingTwitter() && isset($values['twitterUrl'])) {
+        if (
+            $proposalForm->isUsingTwitter() &&
+            isset($values['twitterUrl']) &&
+            filter_var($values['twitterUrl'], \FILTER_VALIDATE_URL)
+        ) {
             $socialNetworks->setTwitterUrl($values['twitterUrl']);
         }
-        if ($proposalForm->isUsingInstagram() && isset($values['instagramUrl'])) {
+        if (
+            $proposalForm->isUsingInstagram() &&
+            isset($values['instagramUrl']) &&
+            filter_var($values['instagramUrl'], \FILTER_VALIDATE_URL)
+        ) {
             $socialNetworks->setInstagramUrl($values['instagramUrl']);
         }
-        if ($proposalForm->isUsingLinkedIn() && isset($values['linkedInUrl'])) {
+        if (
+            $proposalForm->isUsingLinkedIn() &&
+            isset($values['linkedInUrl']) &&
+            filter_var($values['linkedInUrl'], \FILTER_VALIDATE_URL)
+        ) {
             $socialNetworks->setLinkedInUrl($values['linkedInUrl']);
         }
-        if ($proposalForm->isUsingYoutube() && isset($values['youtubeUrl'])) {
+        if (
+            $proposalForm->isUsingYoutube() &&
+            isset($values['youtubeUrl']) &&
+            filter_var($values['youtubeUrl'], \FILTER_VALIDATE_URL)
+        ) {
             $socialNetworks->setYoutubeUrl($values['youtubeUrl']);
         }
 

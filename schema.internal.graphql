@@ -1640,6 +1640,24 @@ type ChangeProposalAssessmentPayload {
 }
 
 input ChangeProposalContentInput {
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
+
   """The proposal id"""
   id: ID!
 
@@ -1682,24 +1700,6 @@ input ChangeProposalContentInput {
   tipsmeeeId: String
   estimation: Int
   likers: [ID!]
-
-  """The web page URL"""
-  webPageUrl: URI
-
-  """The facebook URL"""
-  facebookUrl: URI
-
-  """The twitter URL"""
-  twitterUrl: URI
-
-  """The instagram URL"""
-  instagramUrl: URI
-
-  """The youtube URL"""
-  youtubeUrl: URI
-
-  """The linkedIn URL"""
-  linkedInUrl: URI
   clientMutationId: String
 }
 
@@ -3300,6 +3300,24 @@ type CreateProposalFusionPayload {
 }
 
 input CreateProposalInput {
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
+
   """The id of the form form proposal"""
   proposalFormId: ID!
 
@@ -3335,24 +3353,6 @@ input CreateProposalInput {
 
   """The ID of tipsmeee"""
   tipsmeeeId: String
-
-  """The web page URL"""
-  webPageUrl: URI
-
-  """The facebook URL"""
-  facebookUrl: URI
-
-  """The twitter URL"""
-  twitterUrl: URI
-
-  """The instagram URL"""
-  instagramUrl: URI
-
-  """The youtube URL"""
-  youtubeUrl: URI
-
-  """The linkedIn URL"""
-  linkedInUrl: URI
   clientMutationId: String
 }
 
@@ -4614,6 +4614,12 @@ type DeleteOpinionPayload {
   clientMutationId: String
 }
 
+"""Available errors on deletePost mutation"""
+enum DeletePostErrorCode {
+  """no post match for this id"""
+  POST_NOT_FOUND
+}
+
 input DeletePostInput {
   """The id of the post to delete"""
   id: ID!
@@ -4621,8 +4627,8 @@ input DeletePostInput {
 }
 
 type DeletePostPayload {
-  """The deleted post id"""
-  deletedPostId: ID
+  """Available errorCode for deletePost mutation"""
+  errorCode: DeletePostErrorCode
   clientMutationId: String
 }
 
@@ -4635,6 +4641,18 @@ type DeleteProjectDistrictPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input DeleteProposalFormInput {
+  """The id of the `ProposalForm` to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteProposalFormPayload {
+  """The deleted `ProposalForm` id."""
+  deletedProposalFormId: ID
   clientMutationId: String
 }
 
@@ -4834,6 +4852,29 @@ type DuplicateProjectPayload {
 
   """The new cloned project."""
   newProject: Project
+  clientMutationId: String
+}
+
+"""Available errors on duplicateProposalForm mutation."""
+enum DuplicateProposalFormErrorCode {
+  """
+  The requested `ProposalForm` does not exist or you have no rights on it.
+  """
+  NOT_FOUND
+}
+
+input DuplicateProposalFormInput {
+  """The id of the `ProposalForm` to duplicate."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DuplicateProposalFormPayload {
+  """Available errors on duplicateProposalForm mutation."""
+  error: DuplicateProposalFormErrorCode
+
+  """The cloned `ProposalForm`."""
+  duplicatedProposalForm: ProposalForm
   clientMutationId: String
 }
 
@@ -6576,9 +6617,11 @@ type Mutation {
   updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   updateRegistrationFormCommunication(input: UpdateRegistrationFormCommunicationInput!): UpdateRegistrationFormCommunicationPayload
   contactProposalAuthor(input: ContactProposalAuthorInput!): ContactProposalAuthorPayload
-  createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
+  createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
+  deleteProposalForm(input: DeleteProposalFormInput!): DeleteProposalFormPayload
+  duplicateProposalForm(input: DuplicateProposalFormInput!): DuplicateProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
   changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
@@ -6733,6 +6776,9 @@ type Mutation {
 
   """Delete blog post"""
   deletePost(input: DeletePostInput!): DeletePostPayload
+
+  """Update social networks on a proposal"""
+  updateProposalSocialNetworks(input: UpdateProposalSocialNetworksInput!): UpdateProposalSocialNetworksPayload
 }
 
 """A connection to a list of items."""
@@ -8504,6 +8550,24 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Did the viewer author this entity."""
   viewerDidAuthor: Boolean
+
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
   currentVotableStep: ProposalStep
@@ -8614,26 +8678,8 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   tipsmeee: TipsMeee
   isProposalAuthorAllowedToAddNews: Boolean!
 
-  """link of Web page"""
-  webPageUrl: URI
-
-  """link of Facebook page"""
-  facebookUrl: URI
-
-  """link of Twitter page"""
-  twitterUrl: URI
-
-  """link of Instagram page"""
-  instagramUrl: URI
-
-  """link of LinkedIn profile"""
-  linkedInUrl: URI
-
-  """link of Youtube channel"""
-  youtubeUrl: URI
-
   """
-  true if proposal got any social network value and proposal form using any social networks
+  True if proposal got any social network value and proposal form using any social networks.
   """
   isUsingAnySocialNetworks: Boolean!
 }
@@ -9123,6 +9169,37 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """Proposal form using any social networks field"""
   isUsingAnySocialNetworks: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+
+  """The owner of the questionnaire."""
+  owner: QuestionnaireOwner
+}
+
+"""The affiliation of a user to a `ProposalForm.`"""
+enum ProposalFormAffiliation {
+  """`ProposalForms` that are owned by the authenticated user."""
+  OWNER
+}
+
+"""A connection to a list of items."""
+type ProposalFormConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ProposalFormEdge]
+}
+
+"""An edge in a connection."""
+type ProposalFormEdge {
+  """The item at the end of the edge."""
+  node: ProposalForm!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """Value of a proposal sorting"""
@@ -9135,6 +9212,64 @@ enum ProposalFormObjectType {
 
   """The proposal form is an Establishment"""
   ESTABLISHMENT
+}
+
+"""Ways in which lists of proposalForms can be ordered upon return."""
+input ProposalFormOrder {
+  """The field to order `ProposalForm` by."""
+  field: ProposalFormOrderField! = CREATED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which `ProposalForms` can be ordered."""
+enum ProposalFormOrderField {
+  """
+  Allows ordering a list of `ProposalForms` by when they have been updated.
+  """
+  UPDATED_AT
+
+  """
+  Allows ordering a list of `ProposalForms` by when they have been created.
+  """
+  CREATED_AT
+}
+
+"""Represent an owner of a `ProposalForm`."""
+interface ProposalFormOwner {
+  """User ID"""
+  id: ID!
+
+  """User username."""
+  username: String
+
+  """Get all `ProposalForms` that the user owns."""
+  proposalForms(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Only available proposalForms will be returned."""
+    availableOnly: Boolean! = false
+
+    """
+    Array of viewer's affiliation options for proposalForms returned from the connection.
+    For example, OWNER will include only proposalForms that the current viewer owns.
+    
+    """
+    affiliations: [ProposalFormAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for proposalForms"""
+    orderBy: ProposalFormOrder = {field: CREATED_AT, direction: DESC}
+  ): ProposalFormConnection!
 }
 
 """Available errors on proposal news mutation"""
@@ -9151,17 +9286,17 @@ enum ProposalImportsErrorCode {
 
 """Available errors on proposal news mutation"""
 enum ProposalNewsErrorCode {
-  """No proposal match your id"""
+  """No proposal match your id."""
   PROPOSAL_NOT_FOUND
 
-  """ROLE_USER cant add porposal news on this project"""
+  """Access denied."""
+  ACCESS_DENIED
+
+  """ROLE_USER cant add proposal news on this project"""
   PROPOSAL_DOESNT_ALLOW_NEWS
 
   """No post match your id"""
   POST_NOT_FOUND
-
-  """Access denied."""
-  ACCESS_DENIED
 
   """Invalid data in submitted form ."""
   INVALID_DATA
@@ -9322,6 +9457,18 @@ type ProposalSelection {
 
   """The status of the proposal in the step."""
   status: ProposalStepStatus
+}
+
+"""Available errors on proposal social networks mutation."""
+enum ProposalSocialNetworksErrorCode {
+  """No proposal match your id."""
+  PROPOSAL_NOT_FOUND
+
+  """Access denied."""
+  ACCESS_DENIED
+
+  """Social networks are not available on this proposal."""
+  PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS
 }
 
 """Value of a proposal sorting"""
@@ -10007,12 +10154,6 @@ type Query {
 
   """Lookup availables districts on a proposalForm for a given address."""
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!
-
-  """Lookup proposalForms available to use in a collect step."""
-  availableProposalForms(
-    """Retrieve proposal forms where title match term param."""
-    term: String
-  ): [ProposalForm!]!
 
   """TO BE REMOVED"""
   contributions(
@@ -13618,6 +13759,9 @@ type UpdateOpinionPayload {
 enum UpdatePostErrorCode {
   """Submitted form is invalid"""
   INVALID_FORM
+
+  """no post match for this id"""
+  POST_NOT_FOUND
 }
 
 input UpdatePostInput {
@@ -14051,6 +14195,39 @@ type UpdateProposalNewsPayload {
   clientMutationId: String
 }
 
+input UpdateProposalSocialNetworksInput {
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
+
+  """The id of the proposal to update social networks."""
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type UpdateProposalSocialNetworksPayload {
+  """The proposal to update."""
+  proposal: Proposal
+
+  """An unsuccessful mutation will return an error message"""
+  errorCode: ProposalSocialNetworksErrorCode
+  clientMutationId: String
+}
+
 input UpdateProposalVotesInput {
   """The step."""
   step: ID!
@@ -14281,14 +14458,14 @@ enum UpdateUserEmailErrorCode {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & ProposalFormOwner {
   """User ID"""
   id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """User username"""
+  """User username."""
   username: String
 
   """Whether or not this user is the authenticated user."""
@@ -14412,6 +14589,33 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """The ordering direction for questionnaires"""
     orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
   ): QuestionnaireConnection!
+
+  """Get all `ProposalForms` that the user owns."""
+  proposalForms(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Only available proposalForms will be returned."""
+    availableOnly: Boolean! = false
+
+    """
+    Array of viewer's affiliation options for proposalForms returned from the connection.
+    For example, OWNER will include only proposalForms that the current viewer owns.
+    
+    """
+    affiliations: [ProposalFormAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for proposalForms"""
+    orderBy: ProposalFormOrder = {field: CREATED_AT, direction: DESC}
+  ): ProposalFormConnection!
 
   """The user's admin edit url"""
   adminUrl: URI!

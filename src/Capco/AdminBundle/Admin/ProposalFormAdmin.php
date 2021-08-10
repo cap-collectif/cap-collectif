@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\UserRole;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -62,6 +63,12 @@ class ProposalFormAdmin extends CapcoAdmin
         // if proposal form is just be created, it's not linked to a step, but we need to display it
         $query->orWhere($query->getRootAliases()[0] . '.step IS NULL');
         $query->setParameter('author', $user);
+
+        if (!$user->isAdmin()) {
+            $query
+                ->andWhere($query->getRootAliases()[0] . '.owner = :owner')
+                ->setParameter('owner', $user);
+        }
 
         return $query;
     }

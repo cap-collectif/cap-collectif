@@ -13,6 +13,7 @@ security:
     access_control:
         - { path: ^/admin/alpha/project, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/capco/app/project, roles: ROLE_PROJECT_ADMIN }
+        - { path: ^/admin/capco/app/proposalform, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/dashboard, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
     providers:

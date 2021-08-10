@@ -1,0 +1,11 @@
+ProposalFormOrderField:
+    type: enum
+    config:
+        description: 'Properties by which `ProposalForms` can be ordered.'
+        values:
+            UPDATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormOrderField::UPDATED_AT")'
+                description: 'Allows ordering a list of `ProposalForms` by when they have been updated.'
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormOrderField::CREATED_AT")'
+                description: 'Allows ordering a list of `ProposalForms` by when they have been created.'

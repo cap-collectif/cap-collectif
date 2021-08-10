@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal | deleteProposalForm cannot delete someone else ProposalForm if admin 1`] = `
+Object {
+  "deleteProposalForm": Object {
+    "deletedProposalFormId": "proposalForm2",
+  },
+}
+`;
+
+exports[`Internal | deleteProposalForm delete own ProposalForm 1`] = `
+Object {
+  "deleteProposalForm": Object {
+    "deletedProposalFormId": "proposalFormWithOwner",
+  },
+}
+`;

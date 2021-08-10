@@ -1,0 +1,10 @@
+DuplicateProposalFormPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            error:
+                type: 'DuplicateProposalFormErrorCode'
+                description: 'Available errors on duplicateProposalForm mutation.'
+            duplicatedProposalForm:
+                type: 'ProposalForm'
+                description: 'The cloned `ProposalForm`.'

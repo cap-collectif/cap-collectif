@@ -197,6 +197,10 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                 />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin.label.project" href="/admin/capco/app/project/list" />
+                  <SidebarLink
+                    text="admin.label.proposal_form"
+                    href="/admin/capco/app/proposalform/list"
+                  />
                   {isAdmin ? (
                     <SidebarLink
                       text="admin.label.appendix"
@@ -213,12 +217,6 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                     <SidebarLink
                       text="admin.label.consultation"
                       href="/admin/capco/app/consultation/list"
-                    />
-                  ) : null}
-                  {isAdmin ? (
-                    <SidebarLink
-                      text="admin.label.proposal_form"
-                      href="/admin/capco/app/proposalform/list"
                     />
                   ) : null}
                   {isAdmin ? (

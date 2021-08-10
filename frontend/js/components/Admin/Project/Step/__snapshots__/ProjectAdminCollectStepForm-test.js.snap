@@ -1,317 +1,537 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectAdminCollectStepForm /> renders correctly 1`] = `
-<Fragment>
-  <ProjectAdminFormstyle__ProjectBoxHeader>
-    <h5>
-      <FormattedMessage
-        id="collect_step"
-        values={Object {}}
-      />
-    </h5>
-  </ProjectAdminFormstyle__ProjectBoxHeader>
-  <Field
-    aria-autocomplete="list"
-    aria-haspopup="true"
-    autoload={true}
-    cacheOptions={true}
-    clearable={true}
-    component={[Function]}
-    debounce={true}
-    defaultOptions={true}
-    id="step-proposalForm"
-    inputClassName="fake-inputClassName"
-    label={
-      <FormattedMessage
-        id="admin.fields.step.proposal_form"
-        values={Object {}}
-      />
+exports[`<ProjectAdminCollectStepForm /> renders correctly for admin 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
     }
-    labelClassName="control-label"
-    loadOptions={[Function]}
-    name="proposalForm"
-    placeholder=" "
-    role="combobox"
-    selectFieldIsObject={true}
-  />
-  <ProjectAdminFormstyle__ProjectBoxHeader>
-    <h5>
-      <FormattedMessage
-        id="global.proposals"
-        values={Object {}}
-      />
-    </h5>
-  </ProjectAdminFormstyle__ProjectBoxHeader>
-  <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-    <ForwardRef
-      direction="row"
-      flex="1"
-    >
-      <ForwardRef
-        direction="row"
-        flex="1"
-        maxWidth="230px"
-      >
-        <Field
-          clearable={false}
-          component={[Function]}
-          id="step-defaultSort"
-          inputClassName="fake-inputClassName"
-          label={
-            <FormattedMessage
-              id="admin.fields.opinion_type.default_filter"
-              values={Object {}}
-            />
+  }
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
+          Object {
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
+            ],
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
+              },
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
+              },
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
+              },
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
+              },
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
+              },
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
+              },
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
+              },
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
+              },
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
+            ],
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
+            ],
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
           }
-          labelClassName="control-label"
-          name="defaultSort"
-          options={
-            Array [
-              Object {
-                "label": "global.random",
-                "value": "RANDOM",
+        }
+      >
+        <ProjectAdminCollectStepForm
+          dispatch={[MockFunction]}
+          isBudgetEnabled={true}
+          isLimitEnabled={false}
+          isPrivate={false}
+          isTresholdEnabled={true}
+          stepFormName="defaultForm"
+          votable={true}
+          votesLimit={3}
+          votesMin={1}
+          votesRanking={true}
+        />
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
+`;
+
+exports[`<ProjectAdminCollectStepForm /> renders correctly for project admin 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
+>
+  <Connect(IntlProvider)>
+    <Provider>
+      <Component
+        theme={
+          Object {
+            "borders": Object {
+              "avatar": "2px solid",
+              "button": "1px solid",
+              "card": "1px solid",
+              "normal": "1px solid",
+            },
+            "breakpoints": Array [
+              "767px",
+              "1024px",
+            ],
+            "colors": Object {
+              "aqua": Object {
+                "100": "#FAFEFE",
+                "150": "#E4F8FC",
+                "200": "#C9F2F8",
+                "300": "#97E6F2",
+                "400": "#65DAEC",
+                "500": "#33CEE6",
+                "600": "#19B0C8",
+                "700": "#138496",
+                "800": "#0C5864",
+                "900": "#062C32",
               },
-              Object {
-                "label": "global.filter_f_comments",
-                "value": "COMMENTS",
+              "black": "#000",
+              "blue": Object {
+                "100": "#FAFCFF",
+                "150": "#E0EFFF",
+                "200": "#C2DFFF",
+                "300": "#8AC2FF",
+                "400": "#52A5FF",
+                "500": "#1A88FF",
+                "600": "#006CE0",
+                "700": "#0051A8",
+                "800": "#003670",
+                "900": "#001B38",
               },
-              Object {
-                "label": "global.filter_f_last",
-                "value": "LAST",
+              "current": "currentColor",
+              "dark": "#30363D",
+              "gray": Object {
+                "100": "#F7F7F8",
+                "150": "#E8EBED",
+                "200": "#DADEE1",
+                "300": "#BEC4CB",
+                "400": "#A2ABB4",
+                "500": "#85919D",
+                "600": "#6B7885",
+                "700": "#545E68",
+                "800": "#3D454C",
+                "900": "#272B30",
               },
-              Object {
-                "label": "global.filter_f_old",
-                "value": "OLD",
+              "green": Object {
+                "100": "#FBFEFC",
+                "150": "#E4F9E9",
+                "200": "#CEF3D6",
+                "300": "#A1E8B1",
+                "400": "#73DD8C",
+                "500": "#46D267",
+                "600": "#2CB54C",
+                "700": "#218739",
+                "800": "#165A26",
+                "900": "#0B2D13",
               },
-              Object {
-                "label": "step.sort.votes",
-                "value": "VOTES",
+              "neutral-gray": Object {
+                "100": "#F7F7F7",
+                "150": "#EBEBEB",
+                "200": "#DDDDDD",
+                "300": "#C4C4C4",
+                "400": "#ABABAB",
+                "50": "#FAFAFA",
+                "500": "#919191",
+                "600": "#787878",
+                "700": "#5E5E5E",
+                "800": "#454545",
+                "900": "#2B2B2B",
               },
-              Object {
-                "label": "global.filter_f_least-votes",
-                "value": "LEAST_VOTE",
+              "orange": Object {
+                "100": "#FFFDFA",
+                "150": "#FFF3E0",
+                "200": "#FFE7C2",
+                "300": "#FFD08A",
+                "400": "#FFBA52",
+                "500": "#FFA31A",
+                "600": "#E08700",
+                "700": "#A86500",
+                "800": "#704300",
+                "900": "#382200",
               },
-              Object {
-                "label": "global.filter_f_cheap",
-                "value": "CHEAP",
+              "red": Object {
+                "100": "#FEFBFB",
+                "150": "#FAE5E7",
+                "200": "#F6CBCF",
+                "300": "#ED9BA4",
+                "400": "#E56C78",
+                "500": "#DD3C4C",
+                "600": "#BF2231",
+                "700": "#8F1925",
+                "800": "#5F1119",
+                "900": "#30080C",
               },
-              Object {
-                "label": "global.filter_f_expensive",
-                "value": "EXPENSIVE",
+              "transparent": "transparent",
+              "white": "#fff",
+              "yellow": Object {
+                "100": "#FFFEFA",
+                "150": "#FFF7E0",
+                "200": "#FFF0C2",
+                "300": "#FFE28A",
+                "400": "#FFDA52",
+                "500": "#FFC61A",
+                "600": "#E0A800",
+                "700": "#A87E00",
+                "800": "#705400",
+                "900": "#382A00",
               },
-            ]
+            },
+            "fontSizes": Array [
+              0,
+              "1.100rem",
+              "1.300rem",
+              "1.400rem",
+              "1.800rem",
+              "2.400rem",
+              "3.300rem",
+              "4.400rem",
+            ],
+            "fontWeights": Object {
+              "black": 900,
+              "bold": 700,
+              "extrabold": 800,
+              "hairline": 100,
+              "light": 300,
+              "medium": 500,
+              "normal": 400,
+              "semibold": 600,
+              "thin": 200,
+            },
+            "fonts": Object {
+              "body": "OpenSans, Helvetica, Arial, sans-serif",
+              "content": "OpenSans, Helvetica, Arial, sans-serif",
+              "heading": "OpenSans, Helvetica, Arial, sans-serif",
+              "input": "Roboto, Helvetica, Arial, sans-serif",
+              "label": "OpenSans, Helvetica, Arial, sans-serif",
+              "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+              "roboto": "Roboto, Helvetica, Arial, sans-serif",
+            },
+            "iconSizes": Array [
+              "1.200rem",
+              "1.600rem",
+              "2.400rem",
+              "3.200rem",
+              "4.800rem",
+              "6.400rem",
+            ],
+            "letterSpacings": Object {
+              "normal": "0",
+              "tight": "-0.025em",
+              "tighter": "-0.05em",
+              "wide": "0.025em",
+              "wider": "0.05em",
+              "widest": "0.1em",
+            },
+            "lineHeights": Object {
+              "base": "2.400rem",
+              "l": "4.800rem",
+              "m": "3.200rem",
+              "normal": "1rem",
+              "s": "1.800rem",
+              "sm": "1.600rem",
+              "xl": "6.400rem",
+            },
+            "radii": Object {
+              "accordion": 8,
+              "adminSection": 8,
+              "button": 4,
+              "buttonQuickAction": 50,
+              "card": 4,
+              "modal": 5,
+              "normal": 4,
+              "notifications": 4,
+              "placeholder": 4,
+              "popover": 8,
+              "poppin": 8,
+              "project_card": 8,
+              "table": 8,
+              "tags": 4,
+              "toasts": 4,
+              "tooltip": 4,
+            },
+            "shadows": Object {
+              "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+              "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+              "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+            },
+            "sizes": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
+            "space": Array [
+              0,
+              "0.400rem",
+              "0.800rem",
+              "1.200rem",
+              "1.600rem",
+              "2.000rem",
+              "2.400rem",
+              "2.800rem",
+              "3.200rem",
+              "4.000rem",
+              "4.800rem",
+              "5.600rem",
+              "6.400rem",
+              "7.200rem",
+              "12.800rem",
+              "25.600rem",
+              "51.200rem",
+            ],
           }
-          placeholder=" "
-        />
-      </ForwardRef>
-      <ForwardRef
-        direction="column"
-        maxWidth="175px"
-        ml={2}
-        width="100%"
+        }
       >
-        <FormattedMessage
-          id="project-visibility"
-          tagName="b"
-          values={Object {}}
+        <ProjectAdminCollectStepForm
+          dispatch={[MockFunction]}
+          isBudgetEnabled={true}
+          isLimitEnabled={false}
+          isPrivate={false}
+          isTresholdEnabled={true}
+          stepFormName="defaultForm"
+          votable={true}
+          votesLimit={3}
+          votesMin={1}
+          votesRanking={true}
         />
-        <ForwardRef>
-          <DropdownButton
-            className="mt-15"
-            id="js-btn-visibility-step"
-            title={
-              <FormattedMessage
-                id="public"
-                values={Object {}}
-              />
-            }
-          >
-            <MenuItem
-              bsClass="dropdown"
-              disabled={false}
-              divider={false}
-              header={false}
-              id="public-collect"
-              onClick={[Function]}
-            >
-              <ProjectAdminStepFormstyle__PrivacyInfo>
-                <FormattedMessage
-                  id="public"
-                  values={Object {}}
-                />
-                <FormattedMessage
-                  id="everybody"
-                  values={Object {}}
-                />
-              </ProjectAdminStepFormstyle__PrivacyInfo>
-            </MenuItem>
-            <MenuItem
-              bsClass="dropdown"
-              disabled={false}
-              divider={false}
-              header={false}
-              id="private-collect"
-              onClick={[Function]}
-            >
-              <ProjectAdminStepFormstyle__PrivacyInfo>
-                <FormattedMessage
-                  id="global-restricted"
-                  values={Object {}}
-                />
-                <FormattedMessage
-                  id="authors-and-administrators"
-                  values={Object {}}
-                />
-              </ProjectAdminStepFormstyle__PrivacyInfo>
-            </MenuItem>
-          </DropdownButton>
-        </ForwardRef>
-      </ForwardRef>
-    </ForwardRef>
-    <ForwardRef
-      direction="column"
-      flex="1"
-    >
-      <Text
-        color="gray.900"
-        fontSize={14}
-        fontWeight={600}
-      >
-        <FormattedMessage
-          id="proposal-news-label"
-          values={Object {}}
-        />
-      </Text>
-      <Text
-        color="gray.600"
-        fontSize={11}
-        lineHeight="16px"
-        mb={2}
-        mt={1}
-      >
-        <FormattedMessage
-          id="proposal-news-help-text"
-          values={Object {}}
-        />
-      </Text>
-      <Field
-        component={[Function]}
-        id="step-allowAuthorsToAddNews"
-        name="allowAuthorsToAddNews"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="allow-proposal-news"
-          values={Object {}}
-        />
-      </Field>
-    </ForwardRef>
-  </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-  <Connect(StepVotesFields)
-    isBudgetEnabled={true}
-    isLimitEnabled={false}
-    isTresholdEnabled={true}
-    options={
-      Object {
-        "limit": 3,
-        "min": 1,
-        "ranking": true,
-      }
-    }
-    stepFormName="defaultForm"
-    votable={true}
-  />
-  <ProjectAdminFormstyle__ProjectBoxHeader>
-    <h5>
-      <FormattedMessage
-        id="admin.fields.step.statuses"
-        values={Object {}}
-      />
-    </h5>
-  </ProjectAdminFormstyle__ProjectBoxHeader>
-  <FieldArray
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(StepStatusesList)",
-        "type": [Function],
-      }
-    }
-    formName="stepForm"
-    name="statuses"
-  />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="btn-outline-primary box-content__toolbar mb-20"
-    disabled={false}
-    id="js-btn-create-step"
-    onClick={[Function]}
-  >
-    <i
-      className="fa fa-plus-circle"
-    />
-     
-    <FormattedMessage
-      id="global.add"
-      values={Object {}}
-    />
-  </Button>
-  <ProjectAdminFormstyle__ProjectBoxHeader>
-    <h5>
-      <FormattedMessage
-        id="requirements"
-        values={Object {}}
-      />
-    </h5>
-  </ProjectAdminFormstyle__ProjectBoxHeader>
-  <FieldArray
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(StepRequirementsList)",
-        "type": [Function],
-      }
-    }
-    formName="stepForm"
-    name="requirements"
-  />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="btn-outline-primary box-content__toolbar mb-20"
-    disabled={false}
-    id="js-btn-create-step"
-    onClick={[Function]}
-  >
-    <i
-      className="fa fa-plus-circle"
-    />
-     
-    <FormattedMessage
-      id="global.add"
-      values={Object {}}
-    />
-  </Button>
-  <Field
-    component={[Function]}
-    id="step-requirementsReason"
-    label={
-      <FormattedMessage
-        id="reason-for-collection"
-        values={Object {}}
-      />
-    }
-    name="requirementsReason"
-    type="editor"
-  />
-</Fragment>
+      </Component>
+    </Provider>
+  </Connect(IntlProvider)>
+</Provider>
 `;

@@ -1,9 +1,12 @@
 UpdatePostErrorCode:
-    type: enum
-    config:
-        name: UpdatePostErrorCode
-        description: 'Available errors on updatePost mutation'
-        values:
-            INVALID_FORM:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation::INVALID_FORM")'
-                description: 'Submitted form is invalid'
+  type: enum
+  config:
+    name: UpdatePostErrorCode
+    description: 'Available errors on updatePost mutation'
+    values:
+      INVALID_FORM:
+        value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation::INVALID_FORM")'
+        description: 'Submitted form is invalid'
+      POST_NOT_FOUND:
+        value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation::POST_NOT_FOUND")'
+        description: 'no post match for this id'

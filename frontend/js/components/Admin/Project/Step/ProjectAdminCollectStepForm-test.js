@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminCollectStepForm } from './ProjectAdminCollectStepForm';
+import MockProviders from '~/testUtils';
 
 describe('<ProjectAdminCollectStepForm />', () => {
   const defaultProps = {
@@ -18,8 +19,21 @@ describe('<ProjectAdminCollectStepForm />', () => {
     stepFormName: 'defaultForm',
   };
 
-  it('renders correctly', () => {
-    const wrapper = shallow(<ProjectAdminCollectStepForm {...defaultProps} />);
+  it('renders correctly for project admin', () => {
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: false } } }}>
+        <ProjectAdminCollectStepForm {...defaultProps} />
+      </MockProviders>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly for admin', () => {
+    const wrapper = shallow(
+      <MockProviders store={{ user: { user: { isAdmin: true } } }}>
+        <ProjectAdminCollectStepForm {...defaultProps} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

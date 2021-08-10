@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Mutation;
+namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CategoryImage;
@@ -10,6 +10,7 @@ use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Exception\ViewConfigurationException;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -19,19 +20,19 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class UpdateProposalFormMutation implements MutationInterface
+class UpdateProposalFormMutation extends AbstractProposalFormMutation
 {
     use QuestionPersisterTrait;
 
-    private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private ProposalFormRepository $proposalFormRepo;
     private LoggerInterface $logger;
@@ -47,6 +48,7 @@ class UpdateProposalFormMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
         FormFactoryInterface $formFactory,
         ProposalFormRepository $proposalFormRepo,
         LoggerInterface $logger,
@@ -58,9 +60,10 @@ class UpdateProposalFormMutation implements MutationInterface
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         Indexer $indexer,
         ValidatorInterface $colorValidator,
-        Manager $toggleManager
+        Manager $toggleManager,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->em = $em;
+        parent::__construct($em, $globalIdResolver, $authorizationChecker);
         $this->formFactory = $formFactory;
         $this->proposalFormRepo = $proposalFormRepo;
         $this->logger = $logger;
@@ -75,7 +78,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->toggleManager = $toggleManager;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getArrayCopy();
         $id = $arguments['proposalFormId'];

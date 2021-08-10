@@ -1,0 +1,39 @@
+InternalProposalFormOwner:
+    type: interface
+    config:
+        name: ProposalFormOwner
+        description: 'Represent an owner of a `ProposalForm`.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalFormOwnerTypeResolver", [value])'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'User ID'
+            username:
+                type: 'String'
+                description: 'User username.'
+            proposalForms:
+                type: 'InternalProposalFormConnection!'
+                description: 'Get all `ProposalForms` that the user owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormOwner\\ProposalFormOwnerProposalFormsResolver", [args, value])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    availableOnly:
+                        type: 'Boolean!'
+                        description: 'Only available proposalForms will be returned.'
+                        defaultValue: false
+                    affiliations:
+                        type: '[InternalProposalFormAffiliation!]'
+                        description: |
+                            Array of viewer's affiliation options for proposalForms returned from the connection.
+                            For example, OWNER will include only proposalForms that the current viewer owns.
+                    query:
+                        type: 'String'
+                        description: the search query
+                    orderBy:
+                        type: 'ProposalFormOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormOrderField::CREATED_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for proposalForms'

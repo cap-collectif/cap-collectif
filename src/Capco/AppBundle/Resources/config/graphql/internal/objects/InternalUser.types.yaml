@@ -6,6 +6,7 @@ InternalUser:
         - InternalProjectOwner
         - InternalPostOwner
         - InternalQuestionnaireOwner
+        - InternalProposalFormOwner
     config:
         description: "A user is an individual's account."
         name: User
@@ -13,6 +14,7 @@ InternalUser:
             - InternalProjectOwner
             - InternalPostOwner
             - InternalQuestionnaireOwner
+            - InternalProposalFormOwner
         fields:
             adminUrl:
                 type: 'URI!'

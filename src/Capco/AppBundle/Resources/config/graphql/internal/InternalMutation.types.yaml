@@ -483,14 +483,6 @@ InternalMutation:
                     inputType: ContactProposalAuthorInput
                     payloadType: ContactProposalAuthorPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ContactProposalAuthorMutation", [value, serv("request_stack")])'
-            # Proposal Form
-            createProposalForm:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: CreateProposalFormInput
-                    payloadType: CreateProposalFormPayload
-                    mutateAndGetPayload: "@=mutation('createProposalForm', [value])"
             changeDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
@@ -498,13 +490,35 @@ InternalMutation:
                     inputType: ChangeDistrictInput
                     payloadType: ChangeDistrictPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DistrictMutation", [value])'
+            # Proposal Form
+            createProposalForm:
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateProposalFormInput
+                    payloadType: CreateProposalFormPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\CreateProposalFormMutation", [value, getUser()])'
             updateProposalForm:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\UpdateProposalFormMutation").isGranted(args["input"]["proposalFormId"], getUser(), "edit")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateProposalFormInput
                     payloadType: UpdateProposalFormPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFormMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\UpdateProposalFormMutation", [value, getUser()])'
+            deleteProposalForm:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\DeleteProposalFormMutation").isGranted(args["input"]["id"], getUser(), "delete")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteProposalFormInput
+                    payloadType: DeleteProposalFormPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\DeleteProposalFormMutation", [value, getUser()])'
+            duplicateProposalForm:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\DuplicateProposalFormMutation").isGranted(args["input"]["id"], getUser(), "duplicate")'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DuplicateProposalFormInput
+                    payloadType: DuplicateProposalFormPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\DuplicateProposalFormMutation", [value, getUser()])'
             updateProposalFormNotificationsConfiguration:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
@@ -1311,7 +1325,7 @@ InternalMutation:
             # POST
             createPost:
                 description: 'Create blog post'
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation").isGranted()'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreatePostInput
@@ -1319,7 +1333,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreatePostMutation", [value, getUser()])'
             updatePost:
                 description: 'Update blog post'
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation").isGranted(args["input"]["id"], getUser())'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdatePostInput
@@ -1327,9 +1341,17 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdatePostMutation", [value, getUser()])'
             deletePost:
                 description: 'Delete blog post'
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeletePostMutation").isGranted(args["input"]["id"], getUser())'
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeletePostInput
                     payloadType: DeletePostPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeletePostMutation", [value, getUser()])'
+            updateProposalSocialNetworks:
+                description: 'Update social networks on a proposal'
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProposalSocialNetworksInput
+                    payloadType: UpdateProposalSocialNetworksPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalSocialNetworksMutation", [value, getUser()])'

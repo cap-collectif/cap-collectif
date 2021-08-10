@@ -1,0 +1,9 @@
+DuplicateProposalFormErrorCode:
+    type: enum
+    config:
+        name: DuplicateProposalFormErrorCode
+        description: 'Available errors on duplicateProposalForm mutation.'
+        values:
+            NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\DuplicateProposalFormMutation::NOT_FOUND")'
+                description: 'The requested `ProposalForm` does not exist or you have no rights on it.'

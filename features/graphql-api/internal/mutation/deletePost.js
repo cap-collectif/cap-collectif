@@ -4,7 +4,7 @@ import '../../_setup';
 const DeletePostMutation = /* GraphQL*/ `
   mutation DeletePost($input: DeletePostInput!) {
     deletePost(input: $input) {
-      deletedPostId
+      errorCode
     }
   }
 `;
@@ -19,18 +19,18 @@ describe('mutations.deletePost', () => {
       'internal_admin',
     );
 
-    expect(response.deletePost.deletedPostId).toBe('UG9zdDpwb3N0MQ==');
+    expect(response.deletePost.errorCode).toBe(null);
   });
 
-  it('should throw an access denied when admin attempt to delete a unknown post.', async () => {
-    await expect(
-      graphql(DeletePostMutation, { input: { id: 'abc' } }, 'internal_admin'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+  it('admin should have an error when attempting to delete a unknown post.', async () => {
+    const response = await graphql(
+      DeletePostMutation,
+      {
+        input: { id: 'abc' },
+      },
+      'internal_admin',
+    );
 
-  it('should throw an access denied when project admin user attempt to delete a post that he does not own', async () => {
-    await expect(
-      graphql(DeletePostMutation, { input: { id: 'UG9zdDpwb3N0MTQ=' } }, 'internal_theo'),
-    ).rejects.toThrowError('Access denied to this field.');
+    expect(response.deletePost.errorCode).toBe('POST_NOT_FOUND');
   });
 });

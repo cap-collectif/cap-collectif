@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal | duplicateProposalForm duplicate own proposalForm 1`] = `
+Object {
+  "duplicateProposalForm": Object {
+    "duplicatedProposalForm": Object {
+      "owner": Object {
+        "username": "Théo QP",
+      },
+      "title": "copy-of Formulaire avec propriétaire",
+    },
+  },
+}
+`;
+
+exports[`Internal | duplicateProposalForm duplicate someone else proposalForm as admin 1`] = `
+Object {
+  "duplicateProposalForm": Object {
+    "duplicatedProposalForm": Object {
+      "owner": Object {
+        "username": "admin",
+      },
+      "title": "copy-of Formulaire de la collecte 2",
+    },
+  },
+}
+`;
