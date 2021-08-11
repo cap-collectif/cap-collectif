@@ -8,7 +8,7 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 class ModerationTokenListener
 {
     const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ModerableTrait';
-    private $tokenGenerator;
+    private TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(TokenGeneratorInterface $tokenGenerator)
     {

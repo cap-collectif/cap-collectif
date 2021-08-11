@@ -14,7 +14,6 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalsFromCsvMutation;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
@@ -31,6 +30,7 @@ use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -58,6 +58,8 @@ class ImportProposalsFromCsv
     private int $importableProposals = 0;
     private array $badData = [];
     private array $mandatoryMissing = [];
+    private ?Proposal $lastEntity = null;
+    private TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -71,6 +73,7 @@ class ImportProposalsFromCsv
         ThemeRepository $themeRepository,
         Indexer $indexer,
         LoggerInterface $logger,
+        TokenGeneratorInterface $tokenGenerator,
         string $projectDir
     ) {
         $this->mediaManager = $mediaManager;
@@ -84,6 +87,7 @@ class ImportProposalsFromCsv
         $this->themeRepository = $themeRepository;
         $this->indexer = $indexer;
         $this->logger = $logger;
+        $this->tokenGenerator = $tokenGenerator;
         $this->projectDir = $projectDir;
     }
 
@@ -159,7 +163,7 @@ class ImportProposalsFromCsv
                     $progress->finish();
                 }
             } catch (\RuntimeException $e) {
-                $this->logger->error('Error when flushing proposals : '.$e->getMessage());
+                $this->logger->error('Error when flushing proposals : ' . $e->getMessage());
 
                 throw $e;
             }
@@ -207,7 +211,7 @@ class ImportProposalsFromCsv
         /** @var Reader $reader */
         $reader = ReaderEntityFactory::createCSVReader();
         $reader->setFieldDelimiter($this->delimiter ?? ';');
-        $reader->open($this->projectDir.$this->filePath);
+        $reader->open($this->projectDir . $this->filePath);
 
         return $reader;
     }
@@ -245,15 +249,19 @@ class ImportProposalsFromCsv
         return array_flip($fileHeader) === $this->headers;
     }
 
-    private function setProposalReference(Proposal $proposal): void
+    private function setProposalReferenceAndModerationToken(Proposal $proposal): void
     {
-        $lastEntity = $this->proposalRepository->findOneBy([], ['reference' => 'DESC']);
-
-        if (null === $lastEntity) {
+        if (!$this->lastEntity) {
+            $this->lastEntity = $this->proposalRepository->findOneBy([], ['reference' => 'DESC']);
+        }
+        if (null === $this->lastEntity) {
             $proposal->setReference(1);
         } else {
-            $proposal->setReference($lastEntity->getReference() + 1);
+            $proposal->setReference($this->lastEntity->getReference() + 1);
         }
+        $token = $this->tokenGenerator->generateToken();
+        $proposal->setModerationToken($token);
+        $this->lastEntity = $proposal;
     }
 
     private function getDuplicates(array $rows): array
@@ -301,7 +309,7 @@ class ImportProposalsFromCsv
             // if row is not valid
             $this->mandatoryMissing = $this->isValidRow($row, $this->mandatoryMissing, $key);
             if (!empty($this->mandatoryMissing[$key])) {
-                $this->logger->error('Mandatory missing in line '.$key);
+                $this->logger->error('Mandatory missing in line ' . $key);
 
                 $isCurrentLineFail = true;
             }
@@ -316,7 +324,7 @@ class ImportProposalsFromCsv
                     ) {
                         $isCurrentLineFail = true;
                         $this->badData = $this->incrementBadData($this->badData, $key);
-                        $this->logger->error('bad data district in line '.$key);
+                        $this->logger->error('bad data district in line ' . $key);
                     }
                 }
                 $status = $this->proposalForm->getStep()->getDefaultStatus();
@@ -329,18 +337,14 @@ class ImportProposalsFromCsv
                     ) {
                         $isCurrentLineFail = true;
                         $this->badData = $this->incrementBadData($this->badData, $key);
-                        $this->logger->error('bad data statute in line '.$key);
+                        $this->logger->error('bad data statute in line ' . $key);
                     }
                 }
                 if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
-                    if (
-                        !($theme = $this->themeRepository->findOneWithTitle(
-                            trim($row['theme'])
-                        ))
-                    ) {
+                    if (!($theme = $this->themeRepository->findOneWithTitle(trim($row['theme'])))) {
                         $this->badData = $this->incrementBadData($this->badData, $key);
                         $isCurrentLineFail = true;
-                        $this->logger->error('bad data theme in line '.$key);
+                        $this->logger->error('bad data theme in line ' . $key);
                     }
                 }
                 if ($this->proposalForm->isUsingCategories() && !empty($row['category'])) {
@@ -364,13 +368,13 @@ class ImportProposalsFromCsv
                 if (!($author = $this->userRepository->findOneByEmail(trim($row['author'])))) {
                     $this->badData = $this->incrementBadData($this->badData, $key);
                     $isCurrentLineFail = true;
-                    $this->logger->error('bad data author in line '.$key);
+                    $this->logger->error('bad data author in line ' . $key);
                 }
                 if ($this->proposalForm->isUsingIllustration() && !empty($row['media_url'])) {
                     if (!($media = $this->getMedia($row['media_url']))) {
                         $this->badData = $this->incrementBadData($this->badData, $key);
                         $isCurrentLineFail = true;
-                        $this->logger->error('bad data media_url in line '.$key);
+                        $this->logger->error('bad data media_url in line ' . $key);
                     }
                 }
                 if (
@@ -420,7 +424,7 @@ class ImportProposalsFromCsv
             }
             $fileUrl = explode('/', $url);
             $mediaName = end($fileUrl);
-            $filePath = '/tmp/'.$mediaName;
+            $filePath = '/tmp/' . $mediaName;
             file_put_contents($filePath, $mediaBinaryFile);
 
             return $this->mediaManager->createImageFromPath($filePath, $mediaName);
@@ -461,7 +465,7 @@ class ImportProposalsFromCsv
             $proposal->setTipsmeeeId($row['tipsmeeee']);
         }
         if ($this->proposalForm->isUsingEstimation() && !empty($row['estimation'])) {
-            $proposal->setEstimation((float)$row['estimation']);
+            $proposal->setEstimation((float) $row['estimation']);
         }
 
         if ($this->proposalForm->isUsingCategories()) {
@@ -484,7 +488,7 @@ class ImportProposalsFromCsv
                 false
             );
         }
-        $this->setProposalReference($proposal);
+        $this->setProposalReferenceAndModerationToken($proposal);
 
         if (\count($this->proposalForm->getCustomFields()) > 0) {
             foreach ($this->customFields as $questionTitle) {

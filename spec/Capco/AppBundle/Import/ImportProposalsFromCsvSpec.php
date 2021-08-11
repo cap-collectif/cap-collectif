@@ -18,6 +18,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use DG\BypassFinals;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
@@ -36,7 +37,8 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         EntityManagerInterface $om,
         ThemeRepository $themeRepository,
         Indexer $indexer,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        TokenGeneratorInterface $tokenGenerator
     ) {
         $this->beConstructedWith(
             $mediaManager,
@@ -50,6 +52,7 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
             $themeRepository,
             $indexer,
             $logger,
+            $tokenGenerator,
             '/var/www/tmp'
         );
     }
