@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserContributionsCountResolver;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\Table;
@@ -24,6 +25,7 @@ class FindDuplicatesSsoUsersCommand extends Command
     private UserContributionsCountResolver $countResolver;
     private EntityManagerInterface $em;
     private UserGroupRepository $ugRepository;
+    private LoggerInterface $logger;
 
     public function __construct(
         string $name,
@@ -31,7 +33,8 @@ class FindDuplicatesSsoUsersCommand extends Command
         UserContributionsCountResolver $countResolver,
         DeleteAccountMutation $deleteAccountMutation,
         EntityManagerInterface $em,
-        UserGroupRepository $ugRepository
+        UserGroupRepository $ugRepository,
+        LoggerInterface $logger
     ) {
         parent::__construct($name);
         $this->deleteAccountMutation = $deleteAccountMutation;
@@ -39,6 +42,7 @@ class FindDuplicatesSsoUsersCommand extends Command
         $this->countResolver = $countResolver;
         $this->em = $em;
         $this->ugRepository = $ugRepository;
+        $this->logger = $logger;
     }
 
     public function findSameUsers(string $sso, string $ssoId): array
@@ -219,7 +223,7 @@ class FindDuplicatesSsoUsersCommand extends Command
             [
                 'Back to the beginning',
                 sprintf(
-                    'Prefix account sso_id with less contribution to block accounts. So we keep account with id %s and block others',
+                    'Prefixed accounts sso_id with the fewer contributions to block accounts. So we keep account with id %s and will block others',
                     $userToKeep['userId']
                 ),
             ],
@@ -232,15 +236,7 @@ class FindDuplicatesSsoUsersCommand extends Command
         }
 
         unset($usersWithContributions[$keyToKeep]);
-        $io->warning('This users will me blocked');
-        $question = new ConfirmationQuestion(
-            'Continue with this action ? (y/n)',
-            false,
-            '/^(y|j)/i'
-        );
-        if (!$helper->ask($input, $output, $question)) {
-            $this->execute($input, $output);
-        }
+        $io->warning('This users will be blocked');
 
         $this->generateTable($io, $usersWithContributions, [
             'userId',
@@ -250,20 +246,48 @@ class FindDuplicatesSsoUsersCommand extends Command
             'userUpdatedAt',
         ]);
 
+        $question = new ConfirmationQuestion(
+            'Continue with this action ? (y/n)',
+            false,
+            '/^(y|j)/i'
+        );
+        if (!$helper->ask($input, $output, $question)) {
+            $this->execute($input, $output);
+        }
+
         $userIds = array_map(static function ($user) {
             return $user['userId'];
         }, $usersWithContributions);
 
         try {
             foreach ($usersWithContributions as $key => $user) {
-                $this->userRepository->prefixUserSSoId($user['userId'], $sso . 'Id', $key+1);
+                $this->userRepository->prefixUserSSoId(
+                    $user['userId'],
+                    $this->getSsoFieldName($sso),
+                    $key + 1
+                );
             }
             $io->success(sprintf('Users with ids %s successfully blocked', implode(',', $userIds)));
 
             $this->execute($input, $output);
         } catch (\Exception $exception) {
-            $io->error('blocked users failed, please contact an admin, and looked at logs');
+            $io->error(
+                'User blocking failed, please contact an administrator who will look at the logs'
+            );
+            $this->logger->error($exception->getMessage());
             $this->execute($input, $output);
+        }
+    }
+
+    private function getSsoFieldName(string $sso): string
+    {
+        switch ($sso) {
+            case 'franceConnect':
+                return 'franceConnectId';
+            case 'openId':
+                return 'openId';
+            default:
+                return $sso . '_id';
         }
     }
 
