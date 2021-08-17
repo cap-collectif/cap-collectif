@@ -138,3 +138,17 @@ Capco\AppBundle\Entity\Questionnaire:
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
         privateResult: true
+        owner: '@userTheo'
+        createdAt: <(new \DateTime('2019-09-11'))>
+    questionnaireProjectWithOwner2:
+        id: questionnaireProjectWithOwner2
+        title: Questionnaire visible par un owner
+        description: je suis visible par un owner
+        step: '@questionnaireStepProjectWithOwner2'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@userTheo'
+        createdAt: <(new \DateTime('2020-09-11'))>

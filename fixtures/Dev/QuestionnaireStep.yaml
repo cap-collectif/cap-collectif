@@ -266,3 +266,10 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
         body: Ici ça va pookie fort
         startAt: <(new \DateTime('2020-09-11'))>
         endAt: <(new \DateTime('2024-09-27'))>
+    questionnaireStepProjectWithOwner2:
+        id: questionnaireStepProjectWithOwner2
+        title: Questionnaire administrateur de projet 2
+        label: Questionnaire qui dénonce 2
+        body: hey
+        startAt: <(new \DateTime('2020-09-11'))>
+        endAt: <(new \DateTime('2024-09-27'))>

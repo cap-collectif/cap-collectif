@@ -4680,12 +4680,6 @@ type DeleteProposalPayload {
   clientMutationId: String
 }
 
-"""Available errors on deleteQuestionnaire mutation"""
-enum DeleteQuestionnaireErrorCode {
-  """no questionnaire match for this id"""
-  QUESTIONNAIRE_NOT_FOUND
-}
-
 input DeleteQuestionnaireInput {
   """The id of the Questionnaire to delete"""
   id: ID!
@@ -4693,11 +4687,8 @@ input DeleteQuestionnaireInput {
 }
 
 type DeleteQuestionnairePayload {
-  """Available errorCode for deleteQuestionnaire mutation"""
-  errorCode: DeleteQuestionnaireErrorCode
-
   """The deleted questionnaire id"""
-  id: ID
+  deletedQuestionnaireId: ID
   clientMutationId: String
 }
 
@@ -10381,23 +10372,6 @@ type Query {
 
   """Get all sending addresses registered"""
   senderEmails: [SenderEmail!]!
-
-  """Get all questionnaires"""
-  questionnaires(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """the search query"""
-    query: String
-
-    """The ordering direction for questionnaires"""
-    orderBy: QuestionnaireOrder = {field: UPDATED_AT, direction: DESC}
-  ): QuestionnaireConnection
 }
 
 input QueryAnalyticsFilter {
@@ -10775,6 +10749,9 @@ interface QuestionnaireOwner {
 
     """The ordering direction for questionnaires"""
     orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
+
+    """Filter by available questionnaires"""
+    onlyAvailables: Boolean
   ): QuestionnaireConnection!
 }
 
@@ -14585,6 +14562,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """The ordering direction for questionnaires"""
     orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
+
+    """Filter by available questionnaires"""
+    onlyAvailables: Boolean
   ): QuestionnaireConnection!
 
   """Get all `ProposalForms` that the user owns."""

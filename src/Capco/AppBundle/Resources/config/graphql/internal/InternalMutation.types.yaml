@@ -701,14 +701,14 @@ InternalMutation:
                     payloadType: UpdateQuestionnaireParametersPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireParametersMutation", [value])'
             updateQuestionnaireConfiguration:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation").isGranted(args["input"]["questionnaireId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateQuestionnaireConfigurationInput
                     payloadType: UpdateQuestionnaireConfigurationPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value, getUser()])'
             deleteQuestionnaire:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteQuestionnaireMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteQuestionnaireInput

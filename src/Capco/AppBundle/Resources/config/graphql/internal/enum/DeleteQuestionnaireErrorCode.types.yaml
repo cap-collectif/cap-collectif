@@ -1,9 +1,0 @@
-DeleteQuestionnaireErrorCode:
-    type: enum
-    config:
-        name: DeleteQuestionnaireErrorCode
-        description: 'Available errors on deleteQuestionnaire mutation'
-        values:
-            QUESTIONNAIRE_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteQuestionnaireMutation::QUESTIONNAIRE_NOT_FOUND")'
-                description: 'no questionnaire match for this id'

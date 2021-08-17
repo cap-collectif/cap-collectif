@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Query;
+namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Enum\QuestionnaireOrderField;
 use Capco\UserBundle\Entity\User;
@@ -11,7 +11,7 @@ use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class QuestionnairesResolver implements ResolverInterface
+class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
 {
     private LoggerInterface $logger;
     private QuestionnaireRepository $questionnaireRepository;
@@ -24,25 +24,21 @@ class QuestionnairesResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(?Argument $args = null, User $viewer): ConnectionInterface
+    public function __invoke(Argument $args, User $viewer): ConnectionInterface
     {
-        if (!$args) {
-            $args = new Argument([
-                'first' => 0,
-            ]);
-        }
-
         $query = $args->offsetGet('query');
         $orderByField = QuestionnaireOrderField::SORT_FIELD[$args->offsetGet('orderBy')['field']];
         $orderByDirection = $args->offsetGet('orderBy')['direction'];
         $affiliations = $args->offsetGet('affiliations') ?? [];
+        $onlyAvailables = $args->offsetGet('onlyAvailables') ?? null;
 
         $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $affiliations,
             $query,
             $orderByField,
             $orderByDirection,
-            $viewer
+            $viewer,
+            $onlyAvailables
         ) {
             return $this->questionnaireRepository->getAll(
                 $offset,
@@ -51,13 +47,21 @@ class QuestionnairesResolver implements ResolverInterface
                 $viewer,
                 $query,
                 $orderByField,
-                $orderByDirection
+                $orderByDirection,
+                $onlyAvailables
             );
         });
 
-        //        $totalCount = count($questionnaires);
-        // TODO => TO REMOVE WHEN SWITCHING TO ES
-        $totalCount = 10;
+        $totalCount = $this->questionnaireRepository->getAllCount(
+            null,
+            null,
+            $affiliations,
+            $viewer,
+            $query,
+            $orderByField,
+            $orderByDirection,
+            $onlyAvailables
+        );
 
         return $paginator->auto($args, $totalCount);
     }

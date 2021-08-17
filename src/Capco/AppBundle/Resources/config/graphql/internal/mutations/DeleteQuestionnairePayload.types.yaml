@@ -2,9 +2,6 @@ DeleteQuestionnairePayload:
     type: relay-mutation-payload
     config:
         fields:
-            errorCode:
-                type: 'DeleteQuestionnaireErrorCode'
-                description: 'Available errorCode for deleteQuestionnaire mutation'
-            id:
+            deletedQuestionnaireId:
                 type: 'ID'
                 description: 'The deleted questionnaire id'

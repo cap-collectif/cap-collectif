@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
+use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Questionnaire;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -18,6 +18,7 @@ use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateQuestionnaireConfigurationMutation implements MutationInterface
@@ -26,8 +27,9 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
-    private QuestionnaireRepository $questionnaireRepository;
     private LoggerInterface $logger;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private GlobalIdResolver $globalIdResolver;
 
     /** used in QuestionPersisterTrait */
     private QuestionnaireAbstractQuestionRepository $questionRepo;
@@ -39,36 +41,36 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        QuestionnaireRepository $questionnaireRepository,
+        GlobalIdResolver $globalIdResolver,
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         LoggerInterface $logger,
         Indexer $indexer,
-        ValidatorInterface $colorValidator
+        ValidatorInterface $colorValidator,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
-        $this->questionnaireRepository = $questionnaireRepository;
         $this->questionRepo = $questionRepo;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->logger = $logger;
         $this->indexer = $indexer;
         $this->colorValidator = $colorValidator;
         $this->choiceQuestionRepository = $choiceQuestionRepository;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getArrayCopy();
         $questionnaireId = GlobalId::fromGlobalId($arguments['questionnaireId'])['id'];
-        /** @var Questionnaire $questionnaire */
-        $questionnaire = $this->questionnaireRepository->find($questionnaireId);
+        $questionnaire = $this->globalIdResolver->resolve($arguments['questionnaireId'], $viewer);
 
-        if (!$questionnaire) {
-            throw new UserError(sprintf('Unknown questionnaire with id "%s"', $questionnaireId));
-        }
         unset($arguments['questionnaireId']);
+
+        $questionnaire->setUpdatedAt(new \Datetime());
 
         $form = $this->formFactory->create(
             QuestionnaireConfigurationUpdateType::class,
@@ -83,7 +85,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . $form->getErrors(true, false)->__toString());
 
             throw GraphQLException::fromFormErrors($form);
         }
@@ -100,5 +102,16 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         }
 
         return ['questionnaire' => $questionnaire];
+    }
+
+    public function isGranted(string $id, User $viewer): bool
+    {
+        $questionnaire = $this->globalIdResolver->resolve($id, $viewer);
+
+        if ($questionnaire) {
+            return $this->authorizationChecker->isGranted(QuestionnaireVoter::EDIT, $questionnaire);
+        }
+
+        return false;
     }
 }

@@ -223,7 +223,7 @@ services:
             [
                 ~,
                 Capco\AppBundle\Entity\Questionnaire,
-                Capco\AdminBundle\Controller\CRUDController,
+                Capco\AdminBundle\Controller\QuestionnaireController,
                 '@security.token_storage',
             ]
         tags:

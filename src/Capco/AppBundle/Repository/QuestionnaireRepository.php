@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\QuestionnaireAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\ProposalForm;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * QuestionnaireRepository.
@@ -60,15 +61,16 @@ class QuestionnaireRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function getAll(
+    public function getAllQueryBuilder(
         ?int $offset,
         ?int $limit,
         ?array $affiliations,
         ?User $user,
         ?string $query,
         ?string $orderByField,
-        ?string $orderByDirection
-    ) {
+        ?string $orderByDirection,
+        ?bool $availableQuestionnaires
+    ): QueryBuilder {
         $qb = $this->createQueryBuilder('q');
 
         if ($query) {
@@ -76,10 +78,26 @@ class QuestionnaireRepository extends EntityRepository
             $qb->setParameter('query', "%{$query}%");
         }
 
-        if ($affiliations && in_array(QuestionnaireAffiliation::OWNER, $affiliations) && $user) {
+        if ($affiliations && \in_array(QuestionnaireAffiliation::OWNER, $affiliations) && $user) {
             $qb->join('q.owner', 'o');
             $qb->andWhere('q.owner = :user');
             $qb->setParameter('user', $user);
+        }
+
+        if ($availableQuestionnaires) {
+            $qb->leftJoin(ProposalForm::class, 'prf', 'WITH', 'prf.evaluationForm = q.id')
+                ->leftJoin(AnalysisConfiguration::class, 'ac', 'WITH', 'ac.evaluationForm = q.id')
+                ->leftJoin('q.proposalForm', 'pf')
+                ->andWhere(
+                    $qb
+                        ->expr()
+                        ->andX(
+                            $qb->expr()->isNull('pf.id'),
+                            $qb->expr()->isNull('q.step'),
+                            $qb->expr()->isNull('prf.evaluationForm'),
+                            $qb->expr()->isNull('ac.evaluationForm')
+                        )
+                );
         }
 
         if ($orderByField) {
@@ -94,6 +112,55 @@ class QuestionnaireRepository extends EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        return $qb->getQuery()->execute();
+        return $qb;
+    }
+
+    public function getAll(
+        ?int $offset,
+        ?int $limit,
+        ?array $affiliations,
+        ?User $user,
+        ?string $query,
+        ?string $orderByField,
+        ?string $orderByDirection,
+        ?bool $availableQuestionnaires
+    ) {
+        return $this->getAllQueryBuilder(
+            $offset,
+            $limit,
+            $affiliations,
+            $user,
+            $query,
+            $orderByField,
+            $orderByDirection,
+            $availableQuestionnaires
+        )
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAllCount(
+        ?int $offset,
+        ?int $limit,
+        ?array $affiliations,
+        ?User $user,
+        ?string $query,
+        ?string $orderByField,
+        ?string $orderByDirection,
+        ?bool $availableQuestionnaires
+    ): int {
+        $qb = $this->getAllQueryBuilder(
+            $offset,
+            $limit,
+            $affiliations,
+            $user,
+            $query,
+            $orderByField,
+            $orderByDirection,
+            $availableQuestionnaires
+        );
+        $qb->select('COUNT(q.id)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

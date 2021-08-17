@@ -23,6 +23,21 @@ const UpdateQuestionnaireChoicesMutation = /* GraphQL */ `
   }
 `;
 
+const UpdateQuestionnaireMutation = /* GraphQL */ `
+  mutation UpdateQuestionnaireMutation($input: UpdateQuestionnaireConfigurationInput!) {
+    updateQuestionnaireConfiguration(input: $input) {
+      questionnaire {
+        title
+        description
+        owner {
+          id
+          username
+        }
+      }
+    }
+  }
+`;
+
 describe('Internal|updateQuestionnaireConfiguration mutation', () => {
   it('Add over 1000 choices and some duplicates choices', async () => {
     const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=';
@@ -126,5 +141,53 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
         },
       },
     });
+  });
+
+  it('should update correctly', async () => {
+    const response = await graphql(
+      UpdateQuestionnaireMutation,
+      {
+        input: {
+          title: 'test',
+          description: '<p>abc</p>',
+          questionnaireId: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==',
+        },
+      },
+      'internal_admin',
+    );
+
+    expect(response.updateQuestionnaireConfiguration.questionnaire.title).toBe('test');
+    expect(response.updateQuestionnaireConfiguration.questionnaire.description).toBe('<p>abc</p>');
+    expect(response.updateQuestionnaireConfiguration.questionnaire.owner).toBe(null);
+  });
+
+  it('should throw an access denied if a project admin user attempt to update a questionnaire that he does not own', async () => {
+    await expect(
+      graphql(
+        UpdateQuestionnaireMutation,
+        {
+          input: {
+            title: 'test',
+            questionnaireId: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==',
+          },
+        },
+        'internal_theo',
+      ),
+    ).rejects.toThrowError('Access denied to this field.');
+  });
+
+  it('should throw an access denied when questionnaire does not exist', async () => {
+    await expect(
+      graphql(
+        UpdateQuestionnaireMutation,
+        {
+          input: {
+            title: 'test',
+            questionnaireId: 'abc',
+          },
+        },
+        'internal_admin',
+      ),
+    ).rejects.toThrowError('Access denied to this field.');
   });
 });

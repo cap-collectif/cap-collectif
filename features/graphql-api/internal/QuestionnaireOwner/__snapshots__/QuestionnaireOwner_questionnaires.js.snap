@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.viewer.questionnaires should correctly fetch all available questionnaires. 1`] = `
+Object {
+  "viewer": Object {
+    "questionnaires": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+            "title": "Questionnaire non rattaché",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNQ==",
+            "title": "Questionnaire pour budget participatif disponible",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
