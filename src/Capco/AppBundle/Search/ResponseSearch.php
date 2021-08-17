@@ -68,7 +68,7 @@ class ResponseSearch extends Search
 
         if ($term) {
             $boolQuery->addFilter(
-                (new Query\Match())
+                (new Query\MatchQuery())
                     ->setFieldQuery('textValue', Sanitizer::escape($term, [' ']))
                     ->setFieldOperator('textValue', Query\Match::OPERATOR_AND)
             );

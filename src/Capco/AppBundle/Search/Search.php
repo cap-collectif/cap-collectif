@@ -188,7 +188,7 @@ abstract class Search
         if (\is_array($terms)) {
             $matchQuery = new Query\Terms($fieldName, $terms);
         } else {
-            $matchQuery = new Query\Match($fieldName, $terms);
+            $matchQuery = new Query\MatchQuery($fieldName, $terms);
         }
 
         $query->addMustNot($matchQuery);

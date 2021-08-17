@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +26,7 @@ class StepController extends CRUDController
      */
     public function retrieveProposalsAutocompleteItemsAction(Request $request, Project $project)
     {
-        $titleQuery = new Match();
+        $titleQuery = new MatchQuery();
         $titleQuery->setFieldQuery('title.autocomplete', $request->query->get('q'));
         $titleQuery->setFieldParam('title.autocomplete', 'analyzer', 'standard');
 

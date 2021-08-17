@@ -71,7 +71,7 @@ class QuestionChoiceSearch extends Search
                         (new Query\MatchPhrasePrefix())
                             ->setFieldQuery('label', $sanitizedTerm)
                             ->setFieldMaxExpansions('label'),
-                        new Query\Match('label', $sanitizedTerm),
+                        new Query\MatchQuery('label', $sanitizedTerm),
                     ]);
                     $query->setQuery($boolQuery);
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
