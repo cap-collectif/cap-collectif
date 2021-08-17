@@ -25,7 +25,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     doubleClickZoom={false}
     dragging={true}
     gestureHandling={true}
-    maxZoom={18}
+    maxZoom={22}
     onClick={[Function]}
     onZoomStart={[Function]}
     style={
@@ -46,6 +46,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       maxClusterRadius={30}
       onClusterClick={[Function]}
       showCoverageOnHover={false}
+      spiderfyDistanceMultiplier={4}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     >
@@ -242,7 +243,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     doubleClickZoom={false}
     dragging={true}
     gestureHandling={true}
-    maxZoom={18}
+    maxZoom={22}
     onClick={[Function]}
     onZoomStart={[Function]}
     style={
@@ -263,6 +264,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       maxClusterRadius={30}
       onClusterClick={[Function]}
       showCoverageOnHover={false}
+      spiderfyDistanceMultiplier={4}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     >

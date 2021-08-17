@@ -32,6 +32,7 @@ import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import ProposalMapLoaderPane from './ProposalMapLoaderPane';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
+import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 
 type MapCenterObject = {|
   lat: number,
@@ -211,7 +212,7 @@ export const ProposalLeafletMap = ({
       <StyledMap
         center={defaultMapOptions.center}
         zoom={defaultMapOptions.zoom}
-        maxZoom={18}
+        maxZoom={MAX_MAP_ZOOM}
         style={{
           height: isMobile ? '100vw' : '50vw',
           zIndex: 0,
@@ -242,6 +243,7 @@ export const ProposalLeafletMap = ({
           onClusterClick={() => {
             isOnCluster = true;
           }}
+          spiderfyDistanceMultiplier={4}
           maxClusterRadius={30}>
           {markers?.length > 0 &&
             markers.map((mark, key) => {

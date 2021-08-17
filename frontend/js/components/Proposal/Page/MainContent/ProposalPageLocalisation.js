@@ -12,6 +12,7 @@ import type { GlobalState } from '~/types';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
+import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 
 import type { ProposalPageLocalisation_proposal } from '~relay/ProposalPageLocalisation_proposal.graphql';
 import {
@@ -68,7 +69,7 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
                   lng: proposal?.address.lng,
                 }}
                 zoom={16}
-                maxZoom={18}
+                maxZoom={MAX_MAP_ZOOM}
                 style={{
                   width: '100%',
                   height: 175,

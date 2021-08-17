@@ -19,6 +19,7 @@ import EventMapPreview from './EventMapPreview/EventMapPreview';
 import environment from '~/createRelayEnvironment';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import type { EventMapPreview_event } from '~relay/EventMapPreview_event.graphql';
+import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 
 type Props = {|
   markers: Object | '',
@@ -149,7 +150,7 @@ export class LeafletMap extends Component<Props, State> {
         <Map
           bounds={bounds.isValid() ? bounds : undefined}
           zoom={defaultMapOptions.zoom}
-          maxZoom={18}
+          maxZoom={MAX_MAP_ZOOM}
           preferCanvas
           id="event-map"
           style={loading ? { WebkitFilter: 'blur(5px)', zIndex: '0' } : { zIndex: '0' }}

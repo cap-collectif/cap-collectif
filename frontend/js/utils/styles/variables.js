@@ -24,3 +24,5 @@ export const BASE_INPUT = css`
     background-color: ${colors.disabledGray};
   }
 `;
+
+export const MAX_MAP_ZOOM = 22;
