@@ -68,17 +68,6 @@ Scenario: Logged in admin wants edit a proposal form page content
   Then I should see "global.saved"
 
 @database @rabbitmq
-Scenario: Logged in admin wants edit a proposal form on evaluation tab
-  Given I am logged in as admin
-  And I go to the admin proposal form page with id "proposalFormVote"
-  Then I go to the admin proposal form analysis tab
-  And I change the proposal form select "proposal form evaluation question" with option "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNQ=="
-  And I wait 1 seconds
-  Then I save current admin proposal form "evaluation"
-  And I wait ".alert__form_succeeded-message" to appear on current page
-  Then I should see "global.saved"
-
-@database @rabbitmq
 Scenario: Logged in admin wants edit a proposal form on notification tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"

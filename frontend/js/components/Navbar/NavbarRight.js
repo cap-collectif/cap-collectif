@@ -113,7 +113,7 @@ export const NavbarRight = ({
               </MenuItem>
             )}
 
-            {(user.isEvaluerOnLegacyTool || user.isEvaluerOnNewTool) && (
+            {user.isEvaluerOnNewTool && (
               <MenuItem {...menu} as={S.TabsLink} href="/evaluations">
                 <i className="cap cap-edit-write mr-10" aria-hidden="true" />
                 {intl.formatMessage({ id: 'evaluations.index.page_title' })}

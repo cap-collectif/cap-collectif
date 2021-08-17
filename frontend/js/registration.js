@@ -24,7 +24,7 @@ import AccountProfileApp from './startup/AccountProfileApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import SectionListPageApp from './startup/SectionListPageApp';
 import ShieldApp from './startup/ShieldApp';
-import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
+import AnalysisPageApp from './startup/AnalysisPageApp';
 import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
@@ -107,7 +107,7 @@ ReactOnRails.register({
   ProjectTrashButtonApp,
   CarouselApp,
   MetricsApp,
-  EvaluationsIndexPageApp,
+  AnalysisPageApp,
   OpinionPageApp,
   CommentSectionApp,
   ProposalPageApp,

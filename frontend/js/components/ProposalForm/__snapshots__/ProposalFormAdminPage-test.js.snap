@@ -1783,31 +1783,6 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "EvaluationForm",
-                      "kind": "LinkedField",
-                      "name": "evaluationForm",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "title",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
                       "kind": "ScalarField",
                       "name": "isIndexationDone",
                       "storageKey": null,
@@ -1983,7 +1958,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "695f202d57e2616aff6691791493e1b3",
+          "cacheID": "4242d18d5768250fec32b2ca361da500",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2290,17 +2265,6 @@ fragment ProposalFormAdminConfigurationForm_query on Query {
   }
 }
 
-fragment ProposalFormAdminEvaluationForm_proposalForm on ProposalForm {
-  id
-  evaluationForm {
-    id
-    title
-  }
-  step {
-    id
-  }
-}
-
 fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
   id
   notificationsConfiguration {
@@ -2326,7 +2290,6 @@ fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
   ...ProposalFormAdminNotificationForm_proposalForm
   ...ProposalFormAdminSettingsForm_proposalForm
   ...ProposalFormAdminAnalysisConfigurationForm_proposalForm
-  ...ProposalFormAdminEvaluationForm_proposalForm
 }
 
 fragment ProposalFormAdminPageTabs_query on Query {

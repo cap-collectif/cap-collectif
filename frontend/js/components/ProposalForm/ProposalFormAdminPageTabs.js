@@ -1,13 +1,11 @@
 // @flow
 import React from 'react';
-import { Badge } from 'react-bootstrap';
 import { MemoryRouter, Route, Switch, NavLink } from 'react-router-dom';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
-import ProposalFormAdminEvaluationForm from './ProposalFormAdminEvaluationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import ProposalFormAdminAnalysisConfigurationForm from './ProposalFormAdminAnalysisConfigurationForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
@@ -23,8 +21,7 @@ import colors from '~/utils/colors';
 
 const TABS = {
   CONFIGURATION: '/configuration',
-  LEGACY_ANALYSIS: '/legacy_analysis',
-  NEW_ANALYSIS: '/new_analysis',
+  ANALYSIS: '/new_analysis',
   NOTIFICATIONS: '/notifications',
   SETTINGS: '/settings',
 };
@@ -94,20 +91,11 @@ export const ProposalFormAdminPageTabs = ({
               {intl.formatMessage({ id: 'global.configuration' })}
             </NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink to={TABS.LEGACY_ANALYSIS} activeClassName="active" id="link-tab-analysis">
-              {intl.formatMessage({ id: 'proposal.tabs.evaluation' })}
-            </NavLink>
-          </NavItem>
+
           {analysisFeatureEnabled && proposalForm.step && (
             <NavItem>
-              <NavLink to={TABS.NEW_ANALYSIS} activeClassName="active" id="link-tab-new-analysis">
-                <FormattedMessage id="proposal.tabs.evaluation" />
-                <span className="ml-5">
-                  <Badge pill variant="primary">
-                    <FormattedMessage id="badge.new" />
-                  </Badge>
-                </span>
+              <NavLink to={TABS.ANALYSIS} activeClassName="active" id="link-tab-new-analysis">
+                {intl.formatMessage({ id: 'proposal.tabs.evaluation' })}
               </NavLink>
             </NavItem>
           )}
@@ -129,12 +117,8 @@ export const ProposalFormAdminPageTabs = ({
           <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
         </Route>
 
-        <Route path={TABS.LEGACY_ANALYSIS}>
-          <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
-        </Route>
-
         {analysisFeatureEnabled && !!proposalForm.step && (
-          <Route path={TABS.NEW_ANALYSIS}>
+          <Route path={TABS.ANALYSIS}>
             <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
           </Route>
         )}
@@ -170,7 +154,6 @@ export default createFragmentContainer(container, {
       ...ProposalFormAdminNotificationForm_proposalForm
       ...ProposalFormAdminSettingsForm_proposalForm
       ...ProposalFormAdminAnalysisConfigurationForm_proposalForm
-      ...ProposalFormAdminEvaluationForm_proposalForm
     }
   `,
   query: graphql`

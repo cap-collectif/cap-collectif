@@ -8,14 +8,13 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
     initialEntries={
       Array [
         "/configuration",
-        "/legacy_analysis",
         "/new_analysis",
         "/notifications",
         "/settings",
       ]
     }
     initialIndex={0}
-    keyLength={5}
+    keyLength={4}
   >
     <header>
       <div>
@@ -76,15 +75,6 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
         <ProposalFormAdminPageTabsstyle__NavItem>
           <NavLink
             activeClassName="active"
-            id="link-tab-analysis"
-            to="/legacy_analysis"
-          >
-            proposal.tabs.evaluation
-          </NavLink>
-        </ProposalFormAdminPageTabsstyle__NavItem>
-        <ProposalFormAdminPageTabsstyle__NavItem>
-          <NavLink
-            activeClassName="active"
             id="link-tab-notification"
             to="/notifications"
           >
@@ -120,21 +110,6 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-            }
-          }
-        />
-      </Route>
-      <Route
-        path="/legacy_analysis"
-      >
-        <Relay(injectIntl(Connect(ReduxForm)))
-          proposalForm={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "step": null,
-              "title": "ceci est le titre du proposal form",
-              "url": "http://capco.dev/top-budget",
             }
           }
         />
@@ -182,14 +157,13 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
     initialEntries={
       Array [
         "/configuration",
-        "/legacy_analysis",
         "/new_analysis",
         "/notifications",
         "/settings",
       ]
     }
     initialIndex={0}
-    keyLength={5}
+    keyLength={4}
   >
     <header>
       <div>
@@ -250,15 +224,6 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
         <ProposalFormAdminPageTabsstyle__NavItem>
           <NavLink
             activeClassName="active"
-            id="link-tab-analysis"
-            to="/legacy_analysis"
-          >
-            proposal.tabs.evaluation
-          </NavLink>
-        </ProposalFormAdminPageTabsstyle__NavItem>
-        <ProposalFormAdminPageTabsstyle__NavItem>
-          <NavLink
-            activeClassName="active"
             id="link-tab-notification"
             to="/notifications"
           >
@@ -296,23 +261,6 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-            }
-          }
-        />
-      </Route>
-      <Route
-        path="/legacy_analysis"
-      >
-        <Relay(injectIntl(Connect(ReduxForm)))
-          proposalForm={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "step": Object {
-                "id": "<random id>",
-              },
-              "title": "ceci est le titre du proposal form",
-              "url": "http://capco.dev/top-budget",
             }
           }
         />
@@ -364,14 +312,13 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
     initialEntries={
       Array [
         "/configuration",
-        "/legacy_analysis",
         "/new_analysis",
         "/notifications",
         "/settings",
       ]
     }
     initialIndex={0}
-    keyLength={5}
+    keyLength={4}
   >
     <header>
       <div>
@@ -432,37 +379,10 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
         <ProposalFormAdminPageTabsstyle__NavItem>
           <NavLink
             activeClassName="active"
-            id="link-tab-analysis"
-            to="/legacy_analysis"
-          >
-            proposal.tabs.evaluation
-          </NavLink>
-        </ProposalFormAdminPageTabsstyle__NavItem>
-        <ProposalFormAdminPageTabsstyle__NavItem>
-          <NavLink
-            activeClassName="active"
             id="link-tab-new-analysis"
             to="/new_analysis"
           >
-            <FormattedMessage
-              id="proposal.tabs.evaluation"
-              values={Object {}}
-            />
-            <span
-              className="ml-5"
-            >
-              <Badge
-                bsClass="badge"
-                pill={true}
-                pullRight={false}
-                variant="primary"
-              >
-                <FormattedMessage
-                  id="badge.new"
-                  values={Object {}}
-                />
-              </Badge>
-            </span>
+            proposal.tabs.evaluation
           </NavLink>
         </ProposalFormAdminPageTabsstyle__NavItem>
         <ProposalFormAdminPageTabsstyle__NavItem>
@@ -505,23 +425,6 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-            }
-          }
-        />
-      </Route>
-      <Route
-        path="/legacy_analysis"
-      >
-        <Relay(injectIntl(Connect(ReduxForm)))
-          proposalForm={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "step": Object {
-                "id": "<random id>",
-              },
-              "title": "ceci est le titre du proposal form",
-              "url": "http://capco.dev/top-budget",
             }
           }
         />

@@ -27,7 +27,7 @@ import QuestionnaireCreateButtonApp from '../js/startup/QuestionnaireCreateButto
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
-import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
+import AnalysisPageApp from '../js/startup/AnalysisPageApp';
 import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
 import AccountProfileFollowingsApp from '../js/startup/AccountProfileFollowingsApp';
@@ -84,7 +84,7 @@ ReactOnRails.register({
   ProposalCreateFusionButtonApp,
   ProposalAdminPageApp,
   ProjectsListApp,
-  EvaluationsIndexPageApp,
+  AnalysisPageApp,
   ProposalStepPageApp,
   NavbarApp,
   EmailNotConfirmedApp,
