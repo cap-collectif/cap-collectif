@@ -10751,7 +10751,7 @@ interface QuestionnaireOwner {
     orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
 
     """Filter by available questionnaires"""
-    onlyAvailables: Boolean
+    availableOnly: Boolean
   ): QuestionnaireConnection!
 }
 
@@ -14564,7 +14564,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     orderBy: QuestionnaireOrder = {field: CREATED_AT, direction: DESC}
 
     """Filter by available questionnaires"""
-    onlyAvailables: Boolean
+    availableOnly: Boolean
   ): QuestionnaireConnection!
 
   """Get all `ProposalForms` that the user owns."""

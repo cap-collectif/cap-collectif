@@ -30,7 +30,7 @@ class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
         $orderByField = QuestionnaireOrderField::SORT_FIELD[$args->offsetGet('orderBy')['field']];
         $orderByDirection = $args->offsetGet('orderBy')['direction'];
         $affiliations = $args->offsetGet('affiliations') ?? [];
-        $onlyAvailables = $args->offsetGet('onlyAvailables') ?? null;
+        $availableOnly = $args->offsetGet('availableOnly') ?? null;
 
         $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $affiliations,
@@ -38,7 +38,7 @@ class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
             $orderByField,
             $orderByDirection,
             $viewer,
-            $onlyAvailables
+            $availableOnly
         ) {
             return $this->questionnaireRepository->getAll(
                 $offset,
@@ -48,7 +48,7 @@ class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
                 $query,
                 $orderByField,
                 $orderByDirection,
-                $onlyAvailables
+                $availableOnly
             );
         });
 
@@ -60,7 +60,7 @@ class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
             $query,
             $orderByField,
             $orderByDirection,
-            $onlyAvailables
+            $availableOnly
         );
 
         return $paginator->auto($args, $totalCount);

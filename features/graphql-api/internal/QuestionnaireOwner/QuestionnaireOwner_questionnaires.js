@@ -64,10 +64,10 @@ const QuestionnaireOwnerQuestionnaireQueryOrderBy = /* GraphQL */ `
   }
 `;
 
-const QuestionnaireOwnerQuestionnaireQueryOnlyAvailables = /* GraphQL */ `
-  query QuestionnaireOwnerQuestionnaireQueryOnlyAvailables($onlyAvailables: Boolean) {
+const QuestionnaireOwnerQuestionnaireQueryAvailableOnly = /* GraphQL */ `
+  query QuestionnaireOwnerQuestionnaireQueryAvailableOnly($availableOnly: Boolean) {
     viewer {
-      questionnaires(onlyAvailables: $onlyAvailables) {
+      questionnaires(availableOnly: $availableOnly) {
         totalCount
         edges {
           node {
@@ -159,9 +159,9 @@ describe('Internal.viewer.questionnaires', () => {
   it('should correctly fetch all available questionnaires.', async () => {
     await expect(
       graphql(
-        QuestionnaireOwnerQuestionnaireQueryOnlyAvailables,
+        QuestionnaireOwnerQuestionnaireQueryAvailableOnly,
         {
-          onlyAvailables: true,
+          availableOnly: true,
         },
         'internal_admin',
       ),

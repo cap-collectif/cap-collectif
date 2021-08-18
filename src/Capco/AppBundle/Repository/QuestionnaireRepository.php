@@ -69,7 +69,7 @@ class QuestionnaireRepository extends EntityRepository
         ?string $query,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?bool $availableQuestionnaires
+        ?bool $availableOnly
     ): QueryBuilder {
         $qb = $this->createQueryBuilder('q');
 
@@ -84,7 +84,7 @@ class QuestionnaireRepository extends EntityRepository
             $qb->setParameter('user', $user);
         }
 
-        if ($availableQuestionnaires) {
+        if ($availableOnly) {
             $qb->leftJoin(ProposalForm::class, 'prf', 'WITH', 'prf.evaluationForm = q.id')
                 ->leftJoin(AnalysisConfiguration::class, 'ac', 'WITH', 'ac.evaluationForm = q.id')
                 ->leftJoin('q.proposalForm', 'pf')
@@ -123,7 +123,7 @@ class QuestionnaireRepository extends EntityRepository
         ?string $query,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?bool $availableQuestionnaires
+        ?bool $availableOnly
     ) {
         return $this->getAllQueryBuilder(
             $offset,
@@ -133,7 +133,7 @@ class QuestionnaireRepository extends EntityRepository
             $query,
             $orderByField,
             $orderByDirection,
-            $availableQuestionnaires
+            $availableOnly
         )
             ->getQuery()
             ->getResult();
@@ -147,7 +147,7 @@ class QuestionnaireRepository extends EntityRepository
         ?string $query,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?bool $availableQuestionnaires
+        ?bool $availableOnly
     ): int {
         $qb = $this->getAllQueryBuilder(
             $offset,
@@ -157,7 +157,7 @@ class QuestionnaireRepository extends EntityRepository
             $query,
             $orderByField,
             $orderByDirection,
-            $availableQuestionnaires
+            $availableOnly
         );
         $qb->select('COUNT(q.id)');
 

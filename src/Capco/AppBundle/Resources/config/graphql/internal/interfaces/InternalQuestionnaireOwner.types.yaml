@@ -33,6 +33,6 @@ InternalQuestionnaireOwner:
                                 direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
                             }
                         description: 'The ordering direction for questionnaires'
-                    onlyAvailables:
+                    availableOnly:
                         type: 'Boolean'
                         description: 'Filter by available questionnaires'
