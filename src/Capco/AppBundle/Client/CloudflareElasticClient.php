@@ -8,6 +8,9 @@ use DateTimeInterface;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Terms;
 use Elastica\Client;
+use Elastica\Connection;
+use Elastica\Exception\ClientException;
+use Elastica\Exception\Connection\HttpException;
 use Elastica\Multi\ResultSet;
 use Elastica\Query;
 use Elastica\Query\Range;
@@ -17,6 +20,7 @@ use Psr\Log\LoggerInterface;
 class CloudflareElasticClient
 {
     private Client $esClient;
+    private LoggerInterface $logger;
     private string $hostname;
     private string $index;
 
@@ -30,6 +34,7 @@ class CloudflareElasticClient
         string $elasticsearchHost
     ) {
         $this->hostname = $hostname;
+        $this->logger = $logger;
         $this->esClient = $this->createEsClient(
             $clientId,
             $username,
@@ -44,7 +49,7 @@ class CloudflareElasticClient
         DateTimeInterface $start,
         DateTimeInterface $end,
         ?string $projectSlug = null
-    ): ResultSet {
+    ): ?ResultSet {
         $multisearchQuery = new Search($this->esClient);
         $multisearchQuery->addSearches([
             PlatformAnalyticsTrafficSourceType::SEARCH_ENGINE => $this->createSearchEngineEntriesQuery(
@@ -69,22 +74,54 @@ class CloudflareElasticClient
             ),
         ]);
 
-        return $multisearchQuery->search();
+        try {
+            $searchResult = $multisearchQuery->search();
+        } catch (ClientException $clientException) {
+            $this->esClient->addConnection(new Connection($this->esClient->getConfig()));
+            $searchResult = $multisearchQuery->search();
+        } catch (HttpException $exception) {
+            $searchResult = null;
+            $this->logger->error('Traffic source multi search query timed out.', [
+                'project_slug' => $projectSlug,
+                'date_interval' => compact($start, $end),
+            ]);
+        }
+
+        return $searchResult;
     }
 
     public function getExternalAnalyticsResultSet(
         DateTimeInterface $start,
         DateTimeInterface $end,
+        array $requestedFields,
         ?string $projectSlug = null
-    ): ResultSet {
+    ): ?ResultSet {
         $multisearchQuery = new Search($this->esClient);
-        $multisearchQuery->addSearches([
+        $searchQueries = [
             'visitors' => $this->createUniqueVisitorsQuery($start, $end, $projectSlug),
             'pageViews' => $this->createPageViewsQuery($start, $end, $projectSlug),
             'mostVisitedPages' => $this->createMostVisitedPagesQuery($start, $end, $projectSlug),
-        ]);
+        ];
 
-        return $multisearchQuery->search();
+        $multisearchQuery->addSearches(
+            $this->unsetNonRequestedSearchQueries($searchQueries, $requestedFields)
+        );
+
+        try {
+            $searchResult = $multisearchQuery->search();
+        } catch (ClientException $clientException) {
+            $this->esClient->addConnection(new Connection($this->esClient->getConfig()));
+            $searchResult = $multisearchQuery->search();
+        } catch (HttpException $exception) {
+            $searchResult = null;
+            $this->logger->error('External analytic multi search query timed out.', [
+                'requested_fields' => $requestedFields,
+                'project_slug' => $projectSlug,
+                'date_interval' => compact($start, $end),
+            ]);
+        }
+
+        return $searchResult;
     }
 
     private function createUniqueVisitorsQuery(
@@ -426,6 +463,9 @@ class CloudflareElasticClient
                 'username' => $username,
                 'password' => $password,
                 'transport' => $devOrTest ? 'http' : 'https',
+                'timeout' => '5s',
+                'log' => true,
+                'persistent' => false,
             ],
             null,
             $logger
@@ -464,5 +504,20 @@ class CloudflareElasticClient
             ),
             new Query\Wildcard('ClientRequestURI.keyword', '*?fbclid*'),
         ];
+    }
+
+    private function unsetNonRequestedSearchQueries(
+        array $searchQueries,
+        array $requestedFields
+    ): array {
+        // We unset the non-requested fields before starting the request.
+        $requestedFieldsDiff = array_diff(array_keys($searchQueries), $requestedFields);
+        if (!empty($requestedFieldsDiff)) {
+            foreach ($requestedFieldsDiff as $field) {
+                unset($searchQueries[$field]);
+            }
+        }
+
+        return $searchQueries;
     }
 }

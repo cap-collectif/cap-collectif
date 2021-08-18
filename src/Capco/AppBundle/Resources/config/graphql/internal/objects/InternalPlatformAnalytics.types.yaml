@@ -5,43 +5,41 @@ InternalPlatformAnalytics:
         description: Represent a set of analytics for a platform
         fields:
             registrations:
-                type: 'InternalPlatformAnalyticsRegistrations!'
+                type: 'InternalPlatformAnalyticsRegistrations'
                 description: 'Get the registrations analytics of the platform.'
             votes:
-                type: 'InternalPlatformAnalyticsVotes!'
+                type: 'InternalPlatformAnalyticsVotes'
                 description: 'Get the votes analytics of the platform.'
             comments:
-                type: 'InternalPlatformAnalyticsComments!'
+                type: 'InternalPlatformAnalyticsComments'
                 description: 'Get the comments analytics of the platform.'
             contributions:
-                type: 'InternalPlatformAnalyticsContributions!'
+                type: 'InternalPlatformAnalyticsContributions'
                 description: 'Get the contributions analytics of the platform.'
             followers:
-                type: 'InternalPlatformAnalyticsFollowers!'
+                type: 'InternalPlatformAnalyticsFollowers'
                 description: 'Get the followers analytics of the platform.'
             visitors:
-                type: 'InternalPlatformAnalyticsVisitors!'
+                type: 'InternalPlatformAnalyticsVisitors'
                 description: 'Get the visitors analytics of the platform.'
             pageViews:
-                type: 'InternalPlatformAnalyticsPageViews!'
+                type: 'InternalPlatformAnalyticsPageViews'
                 description: 'Get the page views analytics of the platform.'
             trafficSources:
-                type: 'InternalPlatformAnalyticsTrafficSources!'
+                type: 'InternalPlatformAnalyticsTrafficSources'
                 description: 'Get the traffic sources analytics of the platform.'
             mostVisitedPages:
-                type: 'InternalPlatformAnalyticsMostVisitedPages!'
+                type: 'InternalPlatformAnalyticsMostVisitedPages'
                 description: 'Get the most visited pages analytics of the platform.'
             contributors:
-                type: 'InternalPlatformAnalyticsContributors!'
+                type: 'InternalPlatformAnalyticsContributors'
                 description: 'Get the contributors analytics of the platform.'
+            anonymousContributors:
+                type: 'InternalPlatformAnalyticsAnonymousContributors'
+                description: 'Get the anonymous contributors analytics of the platform.'
             topContributors:
-                resolve: '@=value["topContributors"].getContributors(args["first"])'
                 description: 'Get the top contributors analytics of the platform.'
-                type: '[InternalPlatformAnalyticsTopContributor!]!'
-                args:
-                    first:
-                        type: 'Int'
-                        defaultValue: 4
+                type: '[InternalPlatformAnalyticsTopContributor!]'
             mostUsedProposalCategories:
-                type: 'InternalPlatformAnalyticsMostUsedProposalCategories!'
+                type: 'InternalPlatformAnalyticsMostUsedProposalCategories'
                 description: 'Get the most used proposal categories analytics of the platform.'

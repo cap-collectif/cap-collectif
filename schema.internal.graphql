@@ -7372,40 +7372,49 @@ type PhoneRequirement implements Node & Requirement {
 """Represent a set of analytics for a platform"""
 type PlatformAnalytics {
   """Get the registrations analytics of the platform."""
-  registrations: PlatformAnalyticsRegistrations!
+  registrations: PlatformAnalyticsRegistrations
 
   """Get the votes analytics of the platform."""
-  votes: PlatformAnalyticsVotes!
+  votes: PlatformAnalyticsVotes
 
   """Get the comments analytics of the platform."""
-  comments: PlatformAnalyticsComments!
+  comments: PlatformAnalyticsComments
 
   """Get the contributions analytics of the platform."""
-  contributions: PlatformAnalyticsContributions!
+  contributions: PlatformAnalyticsContributions
 
   """Get the followers analytics of the platform."""
-  followers: PlatformAnalyticsFollowers!
+  followers: PlatformAnalyticsFollowers
 
   """Get the visitors analytics of the platform."""
-  visitors: PlatformAnalyticsVisitors!
+  visitors: PlatformAnalyticsVisitors
 
   """Get the page views analytics of the platform."""
-  pageViews: PlatformAnalyticsPageViews!
+  pageViews: PlatformAnalyticsPageViews
 
   """Get the traffic sources analytics of the platform."""
-  trafficSources: PlatformAnalyticsTrafficSources!
+  trafficSources: PlatformAnalyticsTrafficSources
 
   """Get the most visited pages analytics of the platform."""
-  mostVisitedPages: PlatformAnalyticsMostVisitedPages!
+  mostVisitedPages: PlatformAnalyticsMostVisitedPages
 
   """Get the contributors analytics of the platform."""
-  contributors: PlatformAnalyticsContributors!
+  contributors: PlatformAnalyticsContributors
+
+  """Get the anonymous contributors analytics of the platform."""
+  anonymousContributors: PlatformAnalyticsAnonymousContributors
 
   """Get the top contributors analytics of the platform."""
-  topContributors(first: Int = 4): [PlatformAnalyticsTopContributor!]!
+  topContributors: [PlatformAnalyticsTopContributor!]
 
   """Get the most used proposal categories analytics of the platform."""
-  mostUsedProposalCategories: PlatformAnalyticsMostUsedProposalCategories!
+  mostUsedProposalCategories: PlatformAnalyticsMostUsedProposalCategories
+}
+
+"""Represent the anonymous contributors for a platform"""
+type PlatformAnalyticsAnonymousContributors {
+  totalCount: Int!
+  values: [AggregatedResult!]!
 }
 
 """Represent the comments analytics for a platform"""

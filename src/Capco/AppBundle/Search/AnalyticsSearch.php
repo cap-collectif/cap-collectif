@@ -7,12 +7,14 @@ use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Terms;
 use Elastica\Client;
+use Elastica\Exception\Connection\HttpException;
 use Elastica\Index;
 use Elastica\Multi\Search;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
 use Elastica\ResultSet;
+use Psr\Log\LoggerInterface;
 
 class AnalyticsSearch
 {
@@ -29,21 +31,23 @@ class AnalyticsSearch
     ];
 
     private Index $index;
+    private LoggerInterface $logger;
 
-    public function __construct(Index $index)
+    public function __construct(Index $index, LoggerInterface $logger)
     {
         $this->index = $index;
+        $this->logger = $logger;
     }
 
     public function getInternalAnalyticsResultSet(
         DateTimeInterface $start,
         DateTimeInterface $end,
         int $topContributorsCount,
+        array $requestedFields,
         ?string $projectId = null
     ): \Elastica\Multi\ResultSet {
         $multiSearchQuery = new Search($this->getClient());
-
-        $multiSearchQuery->addSearches([
+        $searchQueries = [
             'registrations' => $this->createUserRegistrationsQuery($start, $end),
             'contributors' => $this->createContributorsQuery($start, $end, $projectId),
             'votes' => $this->createVotesQuery($start, $end, $projectId),
@@ -56,14 +60,42 @@ class AnalyticsSearch
                 $topContributorsCount,
                 $projectId
             ),
+            'anonymousContributors' => $this->createAnonymousContributorsQuery(
+                $start,
+                $end,
+                $projectId
+            ),
             'mostUsedProposalCategories' => $this->createMostUsedProposalCategoriesQuery(
                 $start,
                 $end,
                 $projectId
             ),
-        ]);
+        ];
 
-        return $multiSearchQuery->search();
+        $multiSearchQuery->addSearches(
+            $this->unsetNonRequestedSearchQueries($searchQueries, $requestedFields)
+        );
+
+        try {
+            $searchResult = $multiSearchQuery->search();
+        } catch (HttpException $exception) {
+            $searchResult = null;
+            $this->logger->error('Internal analytics multi search query timed out.', [
+                'requested_fields' => $requestedFields,
+                'project_id' => $projectId,
+                'date_interval' => compact($start, $end),
+            ]);
+        }
+
+        return $searchResult;
+    }
+
+    public function getAnonymousContributorsResultSet(
+        DateTimeInterface $start,
+        DateTimeInterface $end,
+        ?string $projectId = null
+    ): ResultSet {
+        return $this->createAnonymousContributorsQuery($start, $end, $projectId)->search();
     }
 
     public function getUserRegistrationsResultSet(
@@ -127,6 +159,41 @@ class AnalyticsSearch
         ?string $projectId = null
     ): ResultSet {
         return $this->createContributorsQuery($start, $end, $projectId)->search();
+    }
+
+    public function createAnonymousContributorsQuery(
+        DateTimeInterface $start,
+        DateTimeInterface $end,
+        ?string $projectId = null
+    ): \Elastica\Search {
+        $boolQuery = new BoolQuery();
+        $boolQuery
+            ->addFilter(new Query\Term(['objectType' => 'debateAnonymousVote']))
+            ->addFilter(
+                new Range('createdAt', [
+                    'gte' => $start->format(DateTimeInterface::ATOM),
+                    'lte' => $end->format(DateTimeInterface::ATOM),
+                ])
+            )
+            ->addFilter(new Query\Term(['published' => true]));
+        $this->addProjectFilters($boolQuery, $projectId);
+
+        $query = new Query($boolQuery);
+        $query
+            ->setTrackTotalHits(true)
+            ->setSize(0)
+            ->addAggregation(
+                (new DateHistogram(
+                    'anonymous_participations_per_interval',
+                    'createdAt',
+                    $this->getDateHistogramInterval($start, $end)
+                ))->addAggregation(
+                    (new Cardinality('anonymous_participants_per_interval'))->setField('ipAddress')
+                )
+            )
+            ->addAggregation((new Cardinality('anonymous_participants'))->setField('ipAddress'));
+
+        return $this->index->createSearch($query);
     }
 
     private function getClient(): Client
@@ -324,11 +391,12 @@ class AnalyticsSearch
                 (new Terms('author'))
                     ->setField('author.id')
                     ->setOrder('_count', 'desc')
+                    ->setSize($topContributorsCount)
                     ->addAggregation(
                         (new Terms('objectType'))
                             ->setField('objectType')
                             ->setOrder('_count', 'desc')
-                            ->setSize($topContributorsCount)
+                            ->setSize(2)
                     )
             )
             ->setSize(0);
@@ -499,5 +567,20 @@ class AnalyticsSearch
         }
 
         return $dateHistogramInterval;
+    }
+
+    private function unsetNonRequestedSearchQueries(
+        array $searchQueries,
+        array $requestedFields
+    ): array {
+        // We unset the non-requested fields before starting the request.
+        $requestedFieldsDiff = array_diff(array_keys($searchQueries), $requestedFields);
+        if (!empty($requestedFieldsDiff)) {
+            foreach ($requestedFieldsDiff as $field) {
+                unset($searchQueries[$field]);
+            }
+        }
+
+        return $searchQueries;
     }
 }

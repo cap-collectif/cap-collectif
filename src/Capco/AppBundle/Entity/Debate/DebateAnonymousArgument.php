@@ -152,8 +152,6 @@ class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParti
         return $this;
     }
 
-
-
     /** ES */
     public function isIndexable(): bool
     {

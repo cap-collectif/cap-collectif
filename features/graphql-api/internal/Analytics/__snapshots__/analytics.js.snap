@@ -50,6 +50,15 @@ Object {
 exports[`Internal|Analytics fetches analytics data 1`] = `
 Object {
   "analytics": Object {
+    "anonymousContributors": Object {
+      "totalCount": 3,
+      "values": Array [
+        Object {
+          "key": "2014-12-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+      ],
+    },
     "comments": Object {
       "values": Array [
         Object {
@@ -460,6 +469,38 @@ Object {
           "key": "2020-11-01T00:00:00.000Z",
           "totalCount": 3,
         },
+        Object {
+          "key": "2020-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-04-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2021-05-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2021-06-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2021-07-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
       ],
     },
     "contributors": Object {
@@ -752,6 +793,38 @@ Object {
           "key": "2020-11-01T00:00:00.000Z",
           "totalCount": 2,
         },
+        Object {
+          "key": "2020-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-05-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2021-06-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2021-07-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
       ],
     },
     "followers": Object {
@@ -856,15 +929,15 @@ Object {
         },
         Object {
           "category": Object {
-            "id": "pCategory1",
+            "id": "pCategory2",
           },
-          "totalCount": 3,
+          "totalCount": 4,
         },
         Object {
           "category": Object {
-            "id": "pCategory2",
+            "id": "pCategory1",
           },
-          "totalCount": 2,
+          "totalCount": 3,
         },
       ],
     },
@@ -1844,6 +1917,46 @@ Object {
           "key": "2020-07-01T00:00:00.000Z",
           "totalCount": 36,
         },
+        Object {
+          "key": "2020-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-05-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
       ],
     },
   },
@@ -1853,6 +1966,10 @@ Object {
 exports[`Internal|Analytics fetches analytics data by project 1`] = `
 Object {
   "analytics": Object {
+    "anonymousContributors": Object {
+      "totalCount": 0,
+      "values": Array [],
+    },
     "comments": Object {
       "values": Array [
         Object {

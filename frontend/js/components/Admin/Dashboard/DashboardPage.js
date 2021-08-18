@@ -71,10 +71,10 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
   const { filters } = useDashboard();
   const { analytics } = query;
   const hasSmallCharts =
-    analytics.visitors.totalCount > 0 ||
-    analytics.registrations.totalCount > 0 ||
-    analytics.contributors.totalCount > 0 ||
-    analytics.pageViews.totalCount > 0;
+    (analytics.visitors && analytics.visitors.totalCount > 0) ||
+    (analytics.registrations && analytics.registrations.totalCount > 0) ||
+    (analytics.contributors && analytics.contributors.totalCount > 0) ||
+    (analytics.pageViews && analytics.pageViews.totalCount > 0);
 
   return (
     <Flex direction="column" spacing={3}>
@@ -85,14 +85,18 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
 
         {hasSmallCharts && (
           <Flex direction="row" justify="flex-start" overflow="auto" spacing={8}>
-            {analytics.visitors.totalCount > 0 && <SectionVisitors visitors={analytics.visitors} />}
-            {analytics.registrations.totalCount > 0 && filters.projectId === 'ALL' && (
-              <SectionRegistrations registrations={analytics.registrations} />
+            {analytics.visitors && analytics.visitors.totalCount > 0 && (
+              <SectionVisitors visitors={analytics.visitors} />
             )}
-            {analytics.contributors.totalCount > 0 && (
+            {analytics.registrations &&
+              analytics.registrations.totalCount > 0 &&
+              filters.projectId === 'ALL' && (
+                <SectionRegistrations registrations={analytics.registrations} />
+              )}
+            {analytics.contributors && analytics.contributors.totalCount > 0 && (
               <SectionContributors contributors={analytics.contributors} />
             )}
-            {analytics.pageViews.totalCount > 0 && (
+            {analytics.pageViews && analytics.pageViews.totalCount > 0 && (
               <SectionPageViews pageViews={analytics.pageViews} />
             )}
           </Flex>
@@ -102,24 +106,26 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
           <SectionParticipations analytics={analytics} />
 
           <Flex direction="column" spacing={8} width="50%">
-            {analytics.mostVisitedPages.totalCount > 0 && (
+            {analytics.mostVisitedPages && analytics.mostVisitedPages.totalCount > 0 && (
               <SectionMostVisitedPages mostVisitedPages={analytics.mostVisitedPages} />
             )}
 
-            {analytics.contributors.totalCount > 0 && (
-              <SectionTopContributors topContributors={analytics.topContributors} />
-            )}
+            {analytics.topContributors &&
+              analytics.contributors && analytics.contributors.totalCount > 0 && (
+                <SectionTopContributors topContributors={analytics.topContributors} />
+              )}
           </Flex>
         </Flex>
 
         <Flex direction="row" justify="space-between" spacing={8}>
-          {analytics.trafficSources.totalCount > 0 && (
+          {analytics.trafficSources && analytics.trafficSources.totalCount > 0 && (
             <SectionTraffic traffic={analytics.trafficSources} />
           )}
 
-          {analytics.mostUsedProposalCategories.totalCount > 0 && (
-            <SectionProposalCategories categories={analytics.mostUsedProposalCategories} />
-          )}
+          {analytics.mostUsedProposalCategories &&
+            analytics.mostUsedProposalCategories?.totalCount > 0 && (
+              <SectionProposalCategories categories={analytics.mostUsedProposalCategories} />
+            )}
         </Flex>
       </Flex>
     </Flex>

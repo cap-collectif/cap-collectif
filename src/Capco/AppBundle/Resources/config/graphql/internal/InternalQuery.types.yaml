@@ -508,7 +508,7 @@ InternalQuery:
                 type: 'InternalPlatformAnalytics!'
                 description: 'Return the platform analytics'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\AnalyticsResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\AnalyticsResolver", [args, info])'
                 args:
                     filter:
                         type: 'InternalQueryAnalyticsFilter!'

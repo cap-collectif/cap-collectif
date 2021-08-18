@@ -62,6 +62,13 @@ const AnalyticsQuery = /* GraphQL */ `
           id
         }
       }
+      anonymousContributors {
+        totalCount
+        values {
+          key
+          totalCount
+        }
+      }
       mostUsedProposalCategories {
         values {
           category {
@@ -93,7 +100,7 @@ describe('Internal|Analytics', () => {
       graphql(
         AnalyticsQuery,
         {
-          filter: { startAt: '2010-01-01 00:00:00', endAt: '2021-01-01 00:00:00' },
+          filter: { startAt: '2010-01-01 00:00:00', endAt: '2022-01-01 00:00:00' },
         },
         'internal_admin',
       ),
@@ -107,7 +114,7 @@ describe('Internal|Analytics', () => {
         {
           filter: {
             startAt: '2010-01-01 00:00:00',
-            endAt: '2021-01-01 00:00:00',
+            endAt: '2022-01-01 00:00:00',
             projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
           },
         },
@@ -123,7 +130,7 @@ describe('External|Analytics', () => {
       graphql(
         ExternalAnalyticsQuery,
         {
-          filter: { startAt: '2010-01-01 00:00:00', endAt: '2021-01-01 00:00:00' },
+          filter: { startAt: '2010-01-01 00:00:00', endAt: '2022-01-01 00:00:00' },
         },
         'internal_admin',
       ),

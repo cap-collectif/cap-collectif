@@ -1,0 +1,7 @@
+InternalPlatformAnalyticsAnonymousContributors:
+    type: object
+    inherits:
+        - InternalAggregatable
+    config:
+        name: PlatformAnalyticsAnonymousContributors
+        description: Represent the anonymous contributors for a platform

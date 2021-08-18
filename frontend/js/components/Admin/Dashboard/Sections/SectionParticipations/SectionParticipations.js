@@ -54,30 +54,33 @@ const SectionParticipations = ({ analytics: analyticsFragment }: Props): React.N
       <TabsChart>
         <TabsChart.Tab
           id="vote"
-          label={intl.formatMessage({ id: 'vote-plural' }, { num: votes.totalCount })}
-          count={votes.totalCount}
-          data={formatValues(votes.values, intl)}
+          label={intl.formatMessage({ id: 'vote-plural' }, { num: votes?.totalCount ?? 0 })}
+          count={votes?.totalCount ?? 0}
+          data={formatValues(votes?.values ?? [], intl)}
         />
         <TabsChart.Tab
           id="comment"
-          label={intl.formatMessage({ id: 'comment.dynamic' }, { num: comments.totalCount })}
-          count={comments.totalCount}
-          data={formatValues(comments.values, intl)}
+          label={intl.formatMessage({ id: 'comment.dynamic' }, { num: comments?.totalCount ?? 0 })}
+          count={comments?.totalCount ?? 0}
+          data={formatValues(comments?.values ?? [], intl)}
         />
         <TabsChart.Tab
           id="contribution"
           label={intl.formatMessage(
             { id: 'contribution-plural' },
-            { num: contributions.totalCount },
+            { num: contributions?.totalCount ?? 0 },
           )}
-          count={contributions.totalCount}
-          data={formatValues(contributions.values, intl)}
+          count={contributions?.totalCount ?? 0}
+          data={formatValues(contributions?.values ?? [], intl)}
         />
         <TabsChart.Tab
           id="follower"
-          label={intl.formatMessage({ id: 'subscription.dynamic' }, { num: followers.totalCount })}
-          count={followers.totalCount}
-          data={formatValues(followers.values, intl)}
+          label={intl.formatMessage(
+            { id: 'subscription.dynamic' },
+            { num: followers?.totalCount ?? 0 },
+          )}
+          count={followers?.totalCount ?? 0}
+          data={formatValues(followers?.values ?? [], intl)}
         />
       </TabsChart>
     </Section>
