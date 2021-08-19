@@ -219,12 +219,10 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                     text="admin.label.proposal_form"
                     href="/admin/capco/app/proposalform/list"
                   />
-                  {isAdmin ? (
-                    <SidebarLink
-                      text="admin.label.questionnaire"
-                      href="/admin/capco/app/questionnaire/list"
-                    />
-                  ) : null}
+                  <SidebarLink
+                    text="admin.label.questionnaire"
+                    href="/admin/capco/app/questionnaire/list"
+                  />
                   {isAdmin ? (
                     <SidebarLink
                       text="admin.label.pages.types"

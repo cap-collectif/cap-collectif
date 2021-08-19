@@ -8,6 +8,7 @@ import { ICON_NAME } from '~ds/Icon/Icon';
 import Text from '~ui/Primitives/Text';
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction';
 import TablePlaceholder, { type TablePlaceholderProps } from '~ds/Table/placeholder';
+import { toast } from '~ds/Toast';
 
 export default {
   title: 'Design system/Table',
@@ -155,3 +156,51 @@ Placeholder.args = {
   selectable: true,
 };
 Placeholder.storyName = 'loading';
+
+const TemplateEmpty = (args: TableProps) => (
+  <Table {...args}>
+    <Table.Thead>
+      <Table.Tr>
+        <Table.Th>Fruit</Table.Th>
+        <Table.Th>Job</Table.Th>
+        <Table.Th>Country</Table.Th>
+        <Table.Th isNumeric>Number</Table.Th>
+        <Table.Th>
+          {({ styles }) => (
+            <Menu>
+              <Menu.Button as={React.Fragment}>
+                <Button rightIcon={ICON_NAME.ARROW_DOWN_O} {...styles}>
+                  Publication
+                </Button>
+              </Menu.Button>
+              <Menu.List>
+                <Menu.ListItem>
+                  <Text>Recent</Text>
+                </Menu.ListItem>
+                <Menu.ListItem>
+                  <Text>Older</Text>
+                </Menu.ListItem>
+              </Menu.List>
+            </Menu>
+          )}
+        </Table.Th>
+        <Table.Th>Description</Table.Th>
+        <Table.Th>Gender</Table.Th>
+        <Table.Th>Action</Table.Th>
+      </Table.Tr>
+    </Table.Thead>
+
+    <Table.Tbody>{null}</Table.Tbody>
+  </Table>
+);
+
+export const Empty = TemplateEmpty.bind({});
+
+Empty.args = {
+  onReset: () => {
+    toast({
+      variant: 'success',
+      content: 'Reset',
+    });
+  },
+};

@@ -4,15 +4,13 @@ import css from '@styled-system/css';
 import AppBox from '~ui/Primitives/AppBox';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import { useTable } from '~ds/Table/context';
-import Th from '~ds/Table/Th';
-import Td from '~ds/Table/Td';
 import TrCheckbox from './TrCheckbox';
 
 type VerticalAlign = 'top' | 'middle' | 'bottom';
 
 type TrProps = {|
   ...AppBoxProps,
-  +children: React.ChildrenArray<React.Element<typeof Th> | React.Element<typeof Td>>,
+  +children: React.Node,
   +rowId?: string,
   +selectable?: boolean,
   +inHead?: boolean,

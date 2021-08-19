@@ -6,12 +6,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 import AppBox from '~ui/Primitives/AppBox';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import { useTable } from '~ds/Table/context';
-import Tr from '~ds/Table/Tr';
 import Spinner from '~ds/Spinner/Spinner';
 
 type TbodyProps = {|
   ...AppBoxProps,
-  +children: ?React.ChildrenArray<React.Element<typeof Tr>>,
+  +children: ?React.Node,
   +onScrollToBottom?: () => void,
   +useInfiniteScroll?: boolean,
   +hasMore?: boolean,

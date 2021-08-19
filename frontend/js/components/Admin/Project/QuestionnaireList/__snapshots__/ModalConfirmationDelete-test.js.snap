@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render correctly 1`] = `
+Array [
+  <button
+    aria-controls="id-1"
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
+    />
+  </button>,
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
+  >
+    <p
+      className="sc-bdnxRM cZcArZ"
+      title="global.delete"
+    >
+      global.delete
+    </p>
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
+    />
+  </div>,
+  <div
+    aria-label="delete-confirmation"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={true}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+  />,
+]
+`;
+
+exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render modal open 1`] = `
+Array [
+  <button
+    aria-controls="id-1"
+    aria-expanded={true}
+    aria-haspopup="dialog"
+    className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
+    onClick={[Function]}
+    onClickCapture={[Function]}
+    onKeyDown={[Function]}
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    type="button"
+  >
+    <IconMock
+      className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
+    />
+  </button>,
+  <div
+    className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": "scale(0.8) translateZ(0)",
+      }
+    }
+  >
+    <p
+      className="sc-bdnxRM cZcArZ"
+      title="global.delete"
+    >
+      global.delete
+    </p>
+    <div
+      className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+      data-popper-arrow={true}
+      id="arrow"
+    />
+  </div>,
+  <div
+    aria-label="delete-confirmation"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-1"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bdnxRM ctgkbT Modal__ModalContainerInner-gRLtaR"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+        >
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+          >
+            <h2
+              className="sc-bdnxRM fenvOW"
+            >
+              delete-confirmation
+            </h2>
+          </div>
+          <button
+            className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+            onClick={[Function]}
+            type="button"
+          >
+            <IconMock
+              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+            />
+          </button>
+        </header>
+        <main
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+        >
+          <p
+            className="sc-bdnxRM isZYbz"
+          >
+            are-you-sure-to-delete-something
+          </p>
+        </main>
+        <footer
+          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM fvBSZY"
+        >
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+          >
+            <button
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kHicjK"
+              onClick={[Function]}
+              type="button"
+            >
+              cancel
+            </button>
+            <button
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf dwbTkh"
+              onClick={[Function]}
+              type="button"
+            >
+              global.delete
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

@@ -23,7 +23,6 @@ import ProjectListPageApp from '../js/startup/ProjectListPageApp';
 import ProposalAdminPageApp from '../js/startup/ProposalAdminPageApp';
 import ProposalFormAdminPageApp from '../js/startup/ProposalFormAdminPageApp';
 import QuestionnaireAdminPageApp from '../js/startup/QuestionnaireAdminPageApp';
-import QuestionnaireCreateButtonApp from '../js/startup/QuestionnaireCreateButtonApp';
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
@@ -112,7 +111,6 @@ ReactOnRails.register({
   CookieContentApp,
   UserAdminPageApp,
   ProjectRestrictedAccessAlertApp,
-  QuestionnaireCreateButtonApp,
   ArgumentListApp,
   VoteListApp,
   EventApp,

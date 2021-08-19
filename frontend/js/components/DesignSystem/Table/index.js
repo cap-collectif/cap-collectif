@@ -8,6 +8,7 @@ import Tr from './Tr';
 import Td from './Td';
 import Th from './Th';
 import ActionBar from './ActionBar';
+import EmptyMessage from './EmptyMessage';
 import { TableContext } from './context';
 import Flex from '~ui/Primitives/Layout/Flex';
 import { createReducer, type Action, type State } from './reducer';
@@ -18,6 +19,7 @@ export type TableProps = {|
   +actionBar?: React.Node | (({ selectedRows: string[] }) => React.Node),
   +selectable?: boolean,
   +isLoading?: boolean,
+  +onReset?: () => void,
 |};
 
 type TableProviderProps = {|
@@ -59,35 +61,45 @@ const TableProvider = ({ selectable = false, isLoading = false, children }: Tabl
   return <TableContext.Provider value={context}>{children}</TableContext.Provider>;
 };
 
-const Table = ({ children, actionBar, selectable, isLoading, ...props }: TableProps) => (
+const Table = ({ children, actionBar, selectable, isLoading, onReset, ...props }: TableProps) => (
   <TableProvider selectable={selectable} isLoading={isLoading}>
-    {selectable ? (
-      <Flex
-        direction="column"
-        width="100%"
-        borderRadius="table"
-        overflow="hidden"
-        border="normal"
-        borderColor="gray.150"
-      >
-        <ActionBar>{actionBar}</ActionBar>
+    <TableContext.Consumer>
+      {context =>
+        selectable ? (
+          <Flex
+            direction="column"
+            width="100%"
+            borderRadius="table"
+            overflow="hidden"
+            border="normal"
+            borderColor="gray.150">
+            <ActionBar>{actionBar}</ActionBar>
 
-        <AppBox as="table" {...props}>
-          {children}
-        </AppBox>
-      </Flex>
-    ) : (
-      <AppBox
-        as="table"
-        borderRadius="table"
-        overflow="hidden"
-        width="100%"
-        border="normal"
-        borderColor="gray.150"
-        {...props}>
-        {children}
-      </AppBox>
-    )}
+            <AppBox>
+              <AppBox as="table" {...props}>
+                {children}
+              </AppBox>
+              {context.rowsCount === 0 && onReset && <EmptyMessage onReset={onReset} />}
+            </AppBox>
+          </Flex>
+        ) : (
+          <AppBox>
+            <AppBox
+              as="table"
+              borderRadius="table"
+              overflow="hidden"
+              width="100%"
+              border="normal"
+              borderColor="gray.150"
+              {...props}>
+              {children}
+            </AppBox>
+
+            {context.rowsCount === 0 && onReset && <EmptyMessage onReset={onReset} />}
+          </AppBox>
+        )
+      }
+    </TableContext.Consumer>
   </TableProvider>
 );
 

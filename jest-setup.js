@@ -49,10 +49,14 @@ global.Modernizr = {
 
 global.window.__SERVER__ = false;
 
-global.window.IntersectionObserver = jest.fn(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-}));
+// This mock works only with a normal function (source: https://stackoverflow.com/a/67575349)
+// eslint-disable-next-line func-names
+global.window.IntersectionObserver = function() {
+  return {
+    observe: jest.fn(),
+    disconnect: jest.fn(),
+  };
+};
 
 global.window.matchMedia =
   window.matchMedia ||

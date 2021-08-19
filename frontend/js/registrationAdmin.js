@@ -4,7 +4,6 @@ import ReactOnRails from 'react-on-rails';
 import AdminRightNavbarApp from '~/startup/AdminRightNavbarApp';
 import ProjectCreateButtonApp from '~/startup/ProjectCreateButtonApp';
 import ProposalFormCreateButtonApp from '~/startup/ProposalFormCreateButtonApp';
-import QuestionnaireCreateButtonApp from '~/startup/QuestionnaireCreateButtonApp';
 import SiteFaviconAdminPageApp from '~/startup/SiteFaviconAdminPageApp';
 import ProposalFormAdminPageApp from '~/startup/ProposalFormAdminPageApp';
 import QuestionnaireAdminPageApp from '~/startup/QuestionnaireAdminPageApp';
@@ -42,6 +41,7 @@ import ToastsContainerApp from '~/startup/ToastsContainerApp';
 import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsSectionConfigurationApp';
 import SidebarApp from '~/startup/SidebarApp';
 import DashboardPageApp from '~/startup/DashboardPageApp';
+import AdminQuestionnaireListApp from '~/startup/AdminQuestionnaireListApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -52,7 +52,6 @@ ReactOnRails.register({
   AdminRightNavbarApp,
   ProjectCreateButtonApp,
   ProposalFormCreateButtonApp,
-  QuestionnaireCreateButtonApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
   GroupAdminPageApp,
@@ -86,4 +85,5 @@ ReactOnRails.register({
   EmailingParametersPageApp,
   SidebarApp,
   DashboardPageApp,
+  AdminQuestionnaireListApp,
 });

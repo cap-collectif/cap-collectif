@@ -104,6 +104,7 @@ well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Project/Proje
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Project/ProjectHeaderShareButtons.js
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Project/ProjectStepTabs.js
 well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Emailing/EmailingParameters
+well_formed_exports.includes=<PROJECT_ROOT>/frontend/js/components/Admin/Project/Questionnaire
 
 
 module.system.node.resolve_dirname=node_modules

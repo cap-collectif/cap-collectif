@@ -424,3 +424,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@questionnaireStepProjectWithOwner'
         project: '@projectWithOwner'
         position: 4
+    pasWithOwner5:
+        id: pasWithOwner5
+        step: '@questionnaireStepProjectWithOwner2'
+        project: '@projectWithOwner'
+        position: 5

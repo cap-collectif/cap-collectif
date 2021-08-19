@@ -78,6 +78,15 @@ class QuestionnaireAdmin extends CapcoAdmin
         return $query;
     }
 
+    public function getTemplate($name)
+    {
+        if ('list' === $name) {
+            return 'CapcoAdminBundle:Questionnaire:list.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -118,4 +127,6 @@ class QuestionnaireAdmin extends CapcoAdmin
     {
         $collection->remove('create');
     }
+
+
 }

@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { FormattedMessage, injectIntl, useIntl, type IntlShape } from 'react-intl';
 import moment from 'moment';
 import { change, reset, Field, formValueSelector, reduxForm } from 'redux-form';
 import { Button, ButtonToolbar, ToggleButton, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import type { Dispatch, State, Uuid } from '~/types';
+import type { Dispatch, GlobalState, State, Uuid } from '~/types';
 import component from '../Form/Field';
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import type { ProposalFormAdminAnalysisConfigurationForm_proposalForm } from '~relay/ProposalFormAdminAnalysisConfigurationForm_proposalForm.graphql';
@@ -44,6 +44,12 @@ type Props = {|
   effectiveDate: ?string,
   evaluationFormId: ?string,
   moveToSelectionStep: ?string,
+|};
+
+type QuestionnaireFormatted = {|
+  +id: string,
+  +title: string,
+  +adminUrl: string,
 |};
 
 type FormValues = Object;
@@ -119,6 +125,9 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
   submitting,
 }: Props) => {
   const intl = useIntl();
+  const { user } = useSelector((state: GlobalState) => state.user);
+  const isAdmin = user?.isAdmin || false;
+
   const statusesGroupedByStep = React.useMemo(() => getStatusesGroupedByStep(proposalForm), [
     proposalForm,
   ]);
@@ -132,12 +141,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
     }
   }, [selectedAnalysisStep, proposalForm.step, dispatch, effectiveDate]);
 
-  const openQuestionnaire = (
-    availableQuestionnaires: $PropertyType<
-      ProposalFormAdminAnalysisConfigurationFormQueryResponse,
-      'availableQuestionnaires',
-    >,
-  ) => {
+  const openQuestionnaire = (availableQuestionnaires: QuestionnaireFormatted[]) => {
     const questionnaire = availableQuestionnaires.find(q => q.id === evaluationFormId);
 
     window.open(questionnaire?.adminUrl, '_blank');
@@ -208,14 +212,24 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
         </ProjectBoxHeader>
         <div className="box-content">
           <QueryRenderer
-            variables={{}}
+            variables={{
+              affiliations: isAdmin ? null : ['OWNER'],
+            }}
             environment={environment}
             query={graphql`
-              query ProposalFormAdminAnalysisConfigurationFormQuery {
-                availableQuestionnaires {
-                  id
-                  title
-                  adminUrl
+              query ProposalFormAdminAnalysisConfigurationFormQuery(
+                $affiliations: [QuestionnaireAffiliation!]
+              ) {
+                viewer {
+                  questionnaires(affiliations: $affiliations, availableOnly: true) {
+                    edges {
+                      node {
+                        id
+                        title
+                        adminUrl
+                      }
+                    }
+                  }
                 }
               }
             `}
@@ -232,7 +246,19 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
               }
 
               if (props) {
-                const { availableQuestionnaires } = props;
+                const { viewer } = props;
+
+                const availableQuestionnaires: QuestionnaireFormatted[] =
+                  viewer.questionnaires.edges
+                    ?.filter(Boolean)
+                    .map(edge => edge.node)
+                    .filter(Boolean)
+                    .map(q => ({
+                      id: q.id,
+                      title: q.title,
+                      adminUrl: q.adminUrl,
+                    })) || [];
+
                 return (
                   <Field
                     clearable
@@ -250,12 +276,14 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
                         : []),
                       ...availableQuestionnaires
                         .filter(
-                          form =>
-                            form.id !== proposalForm?.analysisConfiguration?.evaluationForm?.id,
+                          questionnaire =>
+                            questionnaire.id !==
+                            proposalForm?.analysisConfiguration?.evaluationForm?.id,
                         )
-                        .map(form => {
-                          return { value: form.id, label: form.title };
-                        }),
+                        .map(questionnaire => ({
+                          value: questionnaire.id,
+                          label: questionnaire.title,
+                        })),
                     ]}
                     component={select}
                     id="evaluationForm"
