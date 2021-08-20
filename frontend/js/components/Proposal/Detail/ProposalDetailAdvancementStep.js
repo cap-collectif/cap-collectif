@@ -35,7 +35,7 @@ class ProposalDetailAdvancementStep extends React.Component<Props> {
 
     return (
       <>
-        <FormattedDate value={moment(step.startAt)} day="numeric" month="short" year="numeric" /> -
+        <FormattedDate value={moment(step.startAt)} day="numeric" month="short" year="numeric" />&nbsp;-&nbsp;
         <FormattedDate value={moment(step.endAt)} day="numeric" month="short" year="numeric" />
       </>
     );

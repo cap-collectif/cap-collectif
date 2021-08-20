@@ -46,16 +46,26 @@ trait SocialNetworksValueTrait
             : null;
     }
 
-    public function isUsingAnySocialNetworks(): bool
+    public function isProposalUsingAnySocialNetworks(): bool
     {
         $proposalForm = $this->getProposalForm();
+        if (!$proposalForm) {
+            return false;
+        }
 
-        return $this->getProposalForm()->isUsingAnySocialNetworks() &&
-            (($this->getYoutubeUrl() && $proposalForm->isUsingYoutube()) ||
-                ($this->getWebPageUrl() && $proposalForm->isUsingWebPage()) ||
-                ($this->getFacebookUrl() && $proposalForm->isUsingFacebook()) ||
-                ($this->getLinkedInUrl() && $proposalForm->isUsingLinkedIn()) ||
-                ($this->getTwitterUrl() && $proposalForm->isUsingTwitter()) ||
-                ($this->getInstagramUrl() && $proposalForm->isUsingInstagram()));
+        if (!$proposalForm->isUsingAnySocialNetworks()) {
+            return false;
+        }
+
+        if (!$this->getProposalSocialNetworks()) {
+            return false;
+        }
+
+        return (bool) ($proposalForm->isUsingYoutube() && $this->getYoutubeUrl()) ||
+            (bool) ($proposalForm->isUsingWebPage() && $this->getWebPageUrl()) ||
+            (bool) ($proposalForm->isUsingFacebook() && $this->getFacebookUrl()) ||
+            (bool) ($proposalForm->isUsingLinkedIn() && $this->getLinkedInUrl()) ||
+            (bool) ($proposalForm->isUsingTwitter() && $this->getTwitterUrl()) ||
+            (bool) ($proposalForm->isUsingInstagram() && $this->getInstagramUrl());
     }
 }

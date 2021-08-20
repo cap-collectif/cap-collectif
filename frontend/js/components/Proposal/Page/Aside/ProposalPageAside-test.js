@@ -15,11 +15,16 @@ const proposal = {
     $fragmentRefs,
   },
   tipsmeeeId: null,
-  isUsingAnySocialNetworks: true,
+  isProposalUsingAnySocialNetworks: true,
+  viewerDidAuthor: true,
   form: {
+    isUsingAnySocialNetworks: true,
     usingCategories: true,
     usingThemes: false,
     usingTipsmeee: false,
+    step: {
+      state: 'CLOSED',
+    },
   },
 };
 
@@ -71,9 +76,13 @@ describe('<ProposalPageAside />', () => {
         proposal={{
           ...proposal,
           form: {
+            isUsingAnySocialNetworks: true,
             usingCategories: true,
             usingThemes: true,
             usingTipsmeee: true,
+            step: {
+              state: 'OPENED',
+            },
           },
           tipsmeeeId: 'aTipsmeCode',
         }}

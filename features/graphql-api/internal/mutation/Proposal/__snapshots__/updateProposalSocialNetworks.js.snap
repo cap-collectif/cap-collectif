@@ -1,13 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal | Update proposal social networks without sn update proposal body with unauthorized iframe. 1`] = `
+exports[`Internal | Update proposal social networks without sn Update proposal social networks with existing sn 1`] = `
 Object {
   "updateProposalSocialNetworks": Object {
     "errorCode": null,
     "proposal": Object {
       "facebookUrl": null,
       "twitterUrl": "https://twitter.com/capco",
-      "webPageUrl": "https://theuselessweb.com/",
+      "webPageUrl": null,
+    },
+  },
+}
+`;
+
+exports[`Internal | Update proposal social networks without sn remove twitter url on proposal social networks with existing sn 1`] = `
+Object {
+  "updateProposalSocialNetworks": Object {
+    "errorCode": null,
+    "proposal": Object {
+      "facebookUrl": null,
+      "twitterUrl": null,
+      "webPageUrl": null,
     },
   },
 }

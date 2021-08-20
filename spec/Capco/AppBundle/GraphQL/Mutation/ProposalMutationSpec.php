@@ -439,8 +439,8 @@ class ProposalMutationSpec extends ObjectBehavior
             'otherField' => 'value',
         ]);
 
-        $proposalSocialNetworks->setWebPageUrl(null)->shouldNotBeCalled();
-        $proposalSocialNetworks->setFacebookUrl($values['facebookUrl'])->shouldNotBeCalled();
+        $proposalSocialNetworks->setWebPageUrl(null)->shouldBeCalled();
+        $proposalSocialNetworks->setFacebookUrl('https://facebook.com/user')->shouldNotBeCalled();
         $proposalSocialNetworks->setTwitterUrl($values['twitterUrl'])->shouldBeCalled();
         $proposalSocialNetworks->setInstagramUrl($values['instagramUrl'])->shouldBeCalled();
         $proposalSocialNetworks->setLinkedInUrl($values['linkedInUrl'])->shouldBeCalled();

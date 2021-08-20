@@ -8678,7 +8678,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """
   True if proposal got any social network value and proposal form using any social networks.
   """
-  isUsingAnySocialNetworks: Boolean!
+  isProposalUsingAnySocialNetworks: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -9146,6 +9146,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
   """The help text for tipsmeee."""
   tipsmeeeHelpText: String
 
+  """The number of social networks used."""
+  numberOfUsedSocialNetworks: Int!
+
   """Proposal form using web page field"""
   usingWebPage: Boolean!
 
@@ -9171,6 +9174,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """The owner of the questionnaire."""
   owner: QuestionnaireOwner
+
+  """The social networks used as string."""
+  socialNetworksUsed: String!
 }
 
 """The affiliation of a user to a `ProposalForm.`"""

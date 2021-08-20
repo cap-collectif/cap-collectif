@@ -16,7 +16,7 @@ const UpdateProposalSocialNetworksMutation = /* GraphQL */ `
 
 describe('Internal | Update proposal social networks without sn', () => {
   it('update proposal sn', async () => {
-    const updateProposal = await graphql(
+    const updateProposalSocialNetwork = await graphql(
       UpdateProposalSocialNetworksMutation,
       {
         input: {
@@ -26,11 +26,11 @@ describe('Internal | Update proposal social networks without sn', () => {
       },
       'internal_user',
     );
-    expect(updateProposal).toMatchSnapshot();
+    expect(updateProposalSocialNetwork).toMatchSnapshot();
   });
 
-  it('update proposal body with unauthorized iframe.', async () => {
-    const updateProposal = await graphql(
+  it('Update proposal social networks with existing sn', async () => {
+    const updateProposalWithSocialNetwork = await graphql(
       UpdateProposalSocialNetworksMutation,
       {
         input: {
@@ -40,6 +40,19 @@ describe('Internal | Update proposal social networks without sn', () => {
       },
       'internal_user',
     );
-    expect(updateProposal).toMatchSnapshot();
+    expect(updateProposalWithSocialNetwork).toMatchSnapshot();
+  });
+  it('remove twitter url on proposal social networks with existing sn', async () => {
+    const updateProposalWithSocialNetwork = await graphql(
+      UpdateProposalSocialNetworksMutation,
+      {
+        input: {
+          proposalId: toGlobalId('Proposal', 'proposalAvecDesRsAModifier'),
+          twitterUrl: null,
+        },
+      },
+      'internal_user',
+    );
+    expect(updateProposalWithSocialNetwork).toMatchSnapshot();
   });
 });

@@ -76,7 +76,7 @@ export const ProposalPageMainAside = ({ proposal, features, display }: Props) =>
       {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
         <ProposalTipsMeeeAside proposal={proposal} />
       )}
-      {proposal && proposal.isUsingAnySocialNetworks && (
+      {proposal && proposal.isProposalUsingAnySocialNetworks && (
         <ProposalSocialNetworkLinks proposal={proposal} />
       )}
     </Container>
@@ -99,7 +99,7 @@ export default createFragmentContainer(
         ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
         ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
         ...ProposalSocialNetworkLinks_proposal
-        isUsingAnySocialNetworks
+        isProposalUsingAnySocialNetworks
         currentVotableStep {
           votesRanking
           voteType

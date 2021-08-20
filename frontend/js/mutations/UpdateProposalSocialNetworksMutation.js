@@ -18,6 +18,8 @@ const mutation = graphql`
         instagramUrl
         linkedInUrl
         youtubeUrl
+        ...ProposalSocialNetworkLinks_proposal
+        ...ModalProposalSocialNetworks_proposal
       }
       errorCode
     }

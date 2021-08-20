@@ -48,7 +48,7 @@ exports[`<ProposalDetailAdvancementStep /> can render a step with status 1`] = `
             value={"2017-09-05T13:48:55.000Z"}
             year="numeric"
           />
-           -
+           - 
           <FormattedDate
             day="numeric"
             month="short"
@@ -123,7 +123,7 @@ exports[`<ProposalDetailAdvancementStep /> can render a step without status 1`] 
             value={"2017-09-05T13:48:55.000Z"}
             year="numeric"
           />
-           -
+           - 
           <FormattedDate
             day="numeric"
             month="short"

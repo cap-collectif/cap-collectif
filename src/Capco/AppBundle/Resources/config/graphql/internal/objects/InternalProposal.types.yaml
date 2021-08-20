@@ -256,6 +256,6 @@ InternalProposal:
                 type: '[InternalProposalSelection!]!'
             isProposalAuthorAllowedToAddNews:
                 type: 'Boolean!'
-            isUsingAnySocialNetworks:
+            isProposalUsingAnySocialNetworks:
                 type: 'Boolean!'
                 description: 'True if proposal got any social network value and proposal form using any social networks.'

@@ -136,9 +136,12 @@ export const ProposalPageAside = ({
             )}
           </>
         )}
-        {proposal && proposal.isUsingAnySocialNetworks && (
-          <ProposalSocialNetworkLinks proposal={proposal} />
-        )}
+        {proposal &&
+          (proposal.isProposalUsingAnySocialNetworks ||
+            (proposal.form.isUsingAnySocialNetworks &&
+              proposal.form.step &&
+              proposal.form.step.state === 'CLOSED' &&
+              proposal.viewerDidAuthor)) && <ProposalSocialNetworkLinks proposal={proposal} />}
       </div>
     </Aside>
   );
@@ -163,10 +166,15 @@ export default createFragmentContainer(
           voteType
           ...ProposalPageVoteThreshold_step
         }
+        viewerDidAuthor
+        isProposalUsingAnySocialNetworks
         ...ProposalSocialNetworkLinks_proposal
         tipsmeeeId @include(if: $isTipsMeeeEnabled)
-        isUsingAnySocialNetworks
         form {
+          step {
+            state
+          }
+          isUsingAnySocialNetworks
           usingCategories
           usingThemes
           usingTipsmeee @include(if: $isTipsMeeeEnabled)

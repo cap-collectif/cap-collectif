@@ -142,6 +142,9 @@ ProposalForm:
             tipsmeeeHelpText:
                 type: 'String'
                 description: 'The help text for tipsmeee.'
+            numberOfUsedSocialNetworks:
+                type: 'Int!'
+                description: 'The number of social networks used.'
             usingWebPage:
                 type: 'Boolean!'
                 description: 'Proposal form using web page field'
@@ -172,3 +175,6 @@ ProposalForm:
             owner:
                 type: 'InternalQuestionnaireOwner'
                 description: 'The owner of the questionnaire.'
+            socialNetworksUsed:
+                type: 'String!'
+                description: 'The social networks used as string.'

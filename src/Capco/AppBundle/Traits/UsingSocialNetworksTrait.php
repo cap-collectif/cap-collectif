@@ -117,4 +117,51 @@ trait UsingSocialNetworksTrait
             $this->usingInstagram ||
             $this->usingLinkedIn;
     }
+
+    public function getSocialNetworksUsed(): string
+    {
+        $sn = '';
+        if ($this->usingTwitter) {
+            $sn .= ', Twitter';
+        }
+        if ($this->usingFacebook) {
+            $sn .= ', Facebook';
+        }
+        if ($this->usingInstagram) {
+            $sn .= ', Instagram';
+        }
+        if ($this->usingLinkedIn) {
+            $sn .= ', LinkedIn';
+        }
+        if ($this->usingYoutube) {
+            $sn .= ', Youtube';
+        }
+
+        return $sn;
+    }
+
+    public function numberOfUsedSocialNetworks(): int
+    {
+        $counter = 0;
+        if ($this->usingWebPage) {
+            ++$counter;
+        }
+        if ($this->usingTwitter) {
+            ++$counter;
+        }
+        if ($this->usingFacebook) {
+            ++$counter;
+        }
+        if ($this->usingInstagram) {
+            ++$counter;
+        }
+        if ($this->usingLinkedIn) {
+            ++$counter;
+        }
+        if ($this->usingYoutube) {
+            ++$counter;
+        }
+
+        return $counter;
+    }
 }
