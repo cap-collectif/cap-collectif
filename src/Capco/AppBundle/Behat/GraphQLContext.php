@@ -141,10 +141,10 @@ class GraphQLContext implements Context
      */
     public function iSendAraphQLQuery(PyStringNode $query)
     {
-        $response = $this->client->request('GET', '/graphql/internal', [
-            'query' => ['query' => $query->getRaw()],
+        $response = $this->client->request('POST', '/graphql/internal', [
+            'body' => json_encode(['query' => $query->getRaw()]),
             'headers' => [
-                'Content-Type' => 'application/graphql',
+                'Content-Type' => 'application/json',
             ],
         ]);
         Assert::assertSame(200, (int) $response->getStatusCode());

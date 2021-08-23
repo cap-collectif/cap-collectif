@@ -1,34 +1,16 @@
-import { NextPage, GetServerSideProps } from 'next';
-import Sidebar from '~/components/Admin/Sidebar/Sidebar';
-import React, { lazy, Suspense } from 'react';
-import DashboardPagePlaceholder from '~/components/Admin/Dashboard/DashboardPagePlaceholder';
+import { NextPage } from 'next';
+import { PageProps } from '../types';
 
-const DashboardPageQuery = lazy(() =>
-    import(
-        /* webpackChunkName: "DashboardPageQuery" */ '~/components/Admin/Dashboard/DashboardPageQuery'
-    ),
-);
-
-type Props = {
-    appVersion: string;
-};
-
-const Home: NextPage<Props> = ({ appVersion }) => {
+const Index: NextPage<PageProps> = ({ viewerSession }) => {
     return (
         <>
-            <Sidebar appVersion={appVersion} />
-            {/* <Suspense fallback={<DashboardPagePlaceholder />}>
-                <DashboardPageQuery />
-            </Suspense> */}
+            <p style={{ textAlgin: 'center' }}>Bienvenue: {JSON.stringify(viewerSession)}</p>
+            {'You can try hot module reloading with: '}
+            <a href="/emails">Emails</a>
+            {' | '}
+            <a href="/dashboard">Dashboard</a>
         </>
     );
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
-    // Fetch data from external API
-    const appVersion = 'dev';
-
-    return { props: { appVersion } };
-};
-
-export default Home;
+export default Index;

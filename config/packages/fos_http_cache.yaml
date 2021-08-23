@@ -30,7 +30,7 @@ fos_http_cache:
                   cache_control:
                       public: true
                       s_maxage: 60
-                  vary: [Accept-Encoding, Accept-Language]
+                  vary: [Accept-Encoding, Accept-Language, Origin, Access-Control-Request-Headers, Access-Control-Request-Method]
     # The proxy client sends invalidation requests to your caching proxy.
     proxy_client:
         default: varnish

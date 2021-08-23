@@ -15,6 +15,7 @@ services:
             $fireWall: '%fos_user.firewall_name%'
             $projectDir: '%kernel.project_dir%'
             $locale: '%locale%'
+            $env: '%kernel.environment%'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/'
@@ -61,6 +62,7 @@ services:
         arguments:
             $batchParser: '@Overblog\GraphQLBundle\Request\BatchParser'
             $requestParser: '@Overblog\GraphQLBundle\Request\Parser'
+            $env: '%kernel.environment%'
 
     Capco\AppBundle\Controller\Api\GraphiQLController:
         public: true

@@ -7,6 +7,7 @@ import colors from '~/styles/modules/colors';
 import Icon, { ICON_NAME } from '~ds/Icon/Icon';
 import Tag from '~ds/Tag/Tag';
 import Text from '~ui/Primitives/Text';
+import { getBaseUrlWithAdminNextSupport } from '~/config';
 
 type Props = {|
   ...LinkProps,
@@ -47,7 +48,7 @@ export const SidebarLink = ({
   return (
     <Link
       p={1}
-      href={href}
+      href={getBaseUrlWithAdminNextSupport() + href}
       fontSize={13}
       width="120%"
       display="flex"

@@ -13,15 +13,7 @@ snc_redis:
             logging: false
     session:
         client: session
-        prefix: '%redis_prefix%session_%kernel.environment%_' # We add env in prefix to allow multi environments sessions in dev
-        # /!\ Our session data should be "read-only" :
-        # we use parallel requests and want to avoid cascading requests.
-        #
-        # Unfortunately we are currently using some flash messages that write in the session,
-        # so we are stuck until we fix this…
-        #
-        # TODO https://github.com/cap-collectif/platform/issues/12189
-        locking: true
+        # Other parameters will be ignored, see `SessionWithJsonHandler.php`
     doctrine:
         metadata_cache:
             client: default

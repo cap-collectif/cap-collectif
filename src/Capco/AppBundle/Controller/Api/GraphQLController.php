@@ -4,43 +4,39 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Overblog\GraphQLBundle\Request as GraphQLRequest;
 use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
+use Psr\Log\LoggerInterface;
+use Overblog\GraphQLBundle\Request\Parser;
+use Overblog\GraphQLBundle\Request\ParserInterface;
+use Overblog\GraphQLBundle\Request\Executor;
 
 class GraphQLController extends BaseController
 {
     public const PREVIEW_HEADER = 'application/vnd.cap-collectif.preview+json';
-    /**
-     * @var GraphQLRequest\BatchParser
-     */
-    private $batchParser;
-    /**
-     * @var GraphQLRequest\Executor
-     */
-    private $requestExecutor;
-    /**
-     * @var GraphQLRequest\Parser
-     */
-    private $requestParser;
 
-    private $logger;
+    private ParserInterface $batchParser;
+    private Executor $requestExecutor;
+    private Parser $requestParser;
+    private LoggerInterface $logger;
+    private string $env;
 
     public function __construct(
-        GraphQLRequest\ParserInterface $batchParser,
-        GraphQLRequest\Executor $requestExecutor,
-        GraphQLRequest\ParserInterface $requestParser,
-        LoggerInterface $logger
+        ParserInterface $batchParser,
+        Executor $requestExecutor,
+        Parser $requestParser,
+        LoggerInterface $logger,
+        string $env
     ) {
         parent::__construct($batchParser, $requestExecutor, $requestParser, false, false);
         $this->batchParser = $batchParser;
         $this->requestExecutor = $requestExecutor;
         $this->requestParser = $requestParser;
         $this->logger = $logger;
+        $this->env = $env;
     }
 
     /**
@@ -67,47 +63,75 @@ class GraphQLController extends BaseController
         }
     }
 
-    // See https://github.com/overblog/GraphQLBundle/blob/master/src/Controller/GraphController.php
-
     /**
-     * @return JsonResponse|Response
+     * See https://github.com/overblog/GraphQLBundle/blob/master/src/Controller/GraphController.php.
      */
     private function createResponse(Request $request, ?string $schemaName, bool $batched): Response
     {
         if ('OPTIONS' === $request->getMethod()) {
             $response = new JsonResponse([], 200);
-        } else {
-            if (!\in_array($request->getMethod(), ['POST', 'GET'])) {
-                return new Response('', 405);
-            }
-            $payload = $this->processQuery($request, $schemaName, $batched);
+            $this->addCORSAndCacheHeadersIfNeeded($response, $request);
 
-            // look for a syntax error in graphql response
-            $syntaxError = false;
-            if (isset($payload['errors']) && \count($payload['errors']) > 0) {
-                foreach ($payload['errors'] as $error) {
-                    if (false !== strpos($error['message'], 'Syntax Error')) {
-                        $syntaxError = true;
+            return $response;
+        }
 
-                        break;
-                    }
+        if ('POST' !== $request->getMethod()) {
+            $response = new JsonResponse('', 405);
+            $this->addCORSAndCacheHeadersIfNeeded($response, $request);
+
+            return $response;
+        }
+
+        $payload = $this->processQuery($request, $schemaName, $batched);
+
+        // look for a syntax error in graphql response
+        $syntaxError = false;
+        if (isset($payload['errors']) && \count($payload['errors']) > 0) {
+            foreach ($payload['errors'] as $error) {
+                if (false !== strpos($error['message'], 'Syntax Error')) {
+                    $syntaxError = true;
+
+                    break;
                 }
             }
-
-            $statusCode = $syntaxError ? 400 : 200;
-            $response = new JsonResponse($payload, $statusCode);
         }
-        $this->addCORSHeadersIfNeeded($response, $request);
 
-        // We had Cache headers here
-        $response->setSharedMaxAge(60);
-        $response->setPublic();
+        $statusCode = $syntaxError ? 400 : 200;
+        $response = new JsonResponse($payload, $statusCode);
+        $this->addCORSAndCacheHeadersIfNeeded($response, $request);
 
         return $response;
     }
 
-    private function addCORSHeadersIfNeeded(Response $response, Request $request): void
+    private function addCORSAndCacheHeadersIfNeeded(Response $response, Request $request): void
     {
+        // We make sure to handle CORS for the MacOS Symfony proxy (It's not needed on Linux)…
+        if ('dev' === $this->env && $request->headers->has('Origin')) {
+            $response->headers->set(
+                'Access-Control-Allow-Origin',
+                $request->headers->get('Origin'),
+                true
+            );
+            $response->headers->set('Access-Control-Allow-Credentials', 'true', true);
+            $response->headers->set(
+                'Access-Control-Allow-Headers',
+                'Accept, Accept-Language, Origin, Content-Type, Authorization, SetBySymfonyShouldBeOnDevOnly',
+                true
+            );
+            $response->headers->set('Access-Control-Allow-Methods', 'OPTIONS, POST', true);
+            $response->headers->set('Access-Control-Max-Age', '86400', true);
+        }
+
+        // We had Cache headers here
+        $response->setSharedMaxAge(60);
+        $response->setPublic();
+        $response->setVary([
+            'Accept-Encoding',
+            'Accept-Language',
+            'Origin',
+            'Access-Control-Request-Headers',
+            'Access-Control-Request-Method',
+        ]);
     }
 
     private function processQuery(Request $request, ?string $schemaName, bool $batched): array

@@ -115,11 +115,15 @@ def configure_vhosts(mode='symfony_bin'):
         'rabbitmq.cap.co',
         'cerebro.cap.co',
     ]
+    localhost_domains = [
+        'admin-next.capco.dev'
+    ]
     if _platform == 'darwin' and mode == "symfony_bin":
         domains.remove('capco.dev')
         tld = 'dev'
         proxy_path = '~/.symfony/proxy.json'
         run('symfony local:proxy:domain:attach capco', warn=True)
+
         if run('cat ' + proxy_path + ' | grep \'%s\'' % '"tld": "wip"', warn=True).stdout:
             run("sed -i .bak 's/\"tld\": \"wip\"/\"tld\": \"" + tld + "\"/g' " + proxy_path, warn=True)
         print(color_cyan + 'Successfully attached Symfony proxy domain to ' + color_yellow + 'capco.' + tld + color_white)
@@ -129,6 +133,11 @@ def configure_vhosts(mode='symfony_bin'):
             print(color_cyan + '%s should point to %s in /etc/hosts' % (domain, Config.local_ip) + color_white)
             run('echo "%s %s" | sudo tee -a /etc/hosts' % (Config.local_ip, domain), warn=True)
 
+    for domain in localhost_domains:
+        if not run('cat /etc/hosts | grep %s | grep %s' % (domain, '127.0.0.1'), warn=True).stdout:
+            print(color_cyan + '%s should point to %s in /etc/hosts' % (domain, '127.0.0.1') + color_white)
+            run('echo "%s %s" | sudo tee -a /etc/hosts' % ('127.0.0.1', domain), warn=True)
+ 
 
 def generate_ssl():
     """

@@ -343,3 +343,9 @@ services:
 
     Capco\UserBundle\Handler\UserInvitationHandler:
         autowire: true
+
+
+    Capco\UserBundle\Security\SessionWithJsonHandler:
+        arguments:
+            $redis: '@snc_redis.default'
+            $prefix: '%redis_prefix%session_json_new_%kernel.environment%_' # We add env in prefix to allow multi environments sessions in dev

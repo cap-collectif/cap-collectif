@@ -55,9 +55,8 @@ export type Action =
   | { type: 'CLEAR_TERM' }
   | { type: 'INIT_FILTERS_FROM_URL' };
 
-const url = new URL(window.location.href);
-
 export const createReducer = (state: DashboardState, action: Action) => {
+  const url = new URL(window.location.href);
   switch (action.type) {
     case 'START_LOADING':
       return {

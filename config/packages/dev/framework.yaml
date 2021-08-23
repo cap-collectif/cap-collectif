@@ -1,0 +1,4 @@
+framework:
+    session:
+        # In development, we share our session cookie with `admin-next.capco.dev`.
+        cookie_domain: .capco.dev

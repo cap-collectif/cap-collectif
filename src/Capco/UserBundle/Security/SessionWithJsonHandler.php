@@ -1,0 +1,114 @@
+<?php
+
+namespace Capco\UserBundle\Security;
+
+// TODO: We could switch no native Symfony but it does not support locking, and we are using it…
+// Please, one day use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler instead.
+use Snc\RedisBundle\Session\Storage\Handler\RedisSessionHandler as BaseHandler;
+use Predis\ClientInterface;
+use Symfony\Component\Security\Core\Security;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\UserBundle\Entity\User;
+
+/**
+ * SessionWithJsonHandler add a Json string used by our NodeJS apps.
+ * This way we can read some session data in NodeJS.
+ */
+class SessionWithJsonHandler extends BaseHandler
+{
+    private Security $security;
+    public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
+
+    public function __construct(ClientInterface $redis, Security $security, array $options = [], string $prefix)
+    {
+        $options['ttl'] = 1209600; // This is two weeks
+        $options['prefix'] = $prefix;
+        # /!\ Our session data should be "read-only" :
+        # we use parallel requests and want to avoid cascading requests.
+        #
+        # Unfortunately we are currently using some flash messages that write in the session,
+        # so we are stuck until we fix this…
+        #
+        # TODO https://github.com/cap-collectif/platform/issues/12189
+        $locking = true;
+
+        parent::__construct($redis, $options, $prefix, $locking);
+        $this->security = $security;
+    }
+
+
+    // See: https://symfony.com/doc/current/session/proxy_examples.html#read-only-guest-sessions
+    private function getUser(): ?User
+    {
+        $user = $this->security->getUser();
+        if ($user instanceof User) {
+            return $user;
+        }
+
+        return null;
+    }
+
+    /**
+     * $sessionId: string
+     * $data: string
+     *
+     * We must return 1 to avoid session_close errors
+     * 
+     * @return bool
+     */
+    public function write($sessionId, $data)
+    {
+        $viewer = $this->getUser();
+        
+        return parent::write($sessionId, $this->encode($data, $viewer));
+    }
+
+    /**
+     * $sessionId: string
+     * 
+     * @return string
+     */
+    public function read($sessionId)
+    {
+        $encodedSession = parent::read($sessionId);
+        $rawPhpSession = $this->decode($encodedSession);
+
+        return $rawPhpSession;
+    }
+
+    public function encode(string $rawPhpSession, ?User $viewer): string
+    {
+        $encodedSession = $rawPhpSession . self::SEPARATOR;
+        if ($viewer) {
+            $encodedSession .= json_encode([
+                'viewer'=> [
+                    'email' => $viewer->getEmail(),
+                    'username' => $viewer->getUsername(),
+                    'id' => GlobalId::toGlobalId('User', $viewer->getId()),
+                    'isAdmin' => $viewer->isAdmin(),
+                    'isSuperAdmin' => $viewer->isSuperAdmin(),
+                    'isProjectAdmin' => $viewer->isProjectAdmin()
+            ]]);
+        }
+
+        return $encodedSession;
+    }
+
+
+    public function decode(string $encodedSession): string
+    {
+        if (strlen($encodedSession) == 0) {
+            return "";
+        }
+
+        $decodedArray = explode(self::SEPARATOR, $encodedSession);
+
+        if (!$decodedArray || !isset($decodedArray[0])) {
+            return "";
+        }
+
+        $rawPhpSession = $decodedArray[0];
+
+        return $rawPhpSession;
+    }
+}

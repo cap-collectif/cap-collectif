@@ -2,17 +2,37 @@ This is our [Next.js](https://nextjs.org/) administration.
 
 ## Getting Started
 
-First, run the development server:
+### Requirements
+
+First, make sure your `/etc/host` contains:
+
+```
+127.0.0.1 admin-next.capco.dev
+```
+
+Then check all docker containers are running (`fab local.infrastructures.up`), because `admin-next` is using Redis from `platform`.
+
+### Daily commands
+
+Start the development Admin Next SSL proxy (you will need to keep it running, it adds HTTPS support):
+
+```bash
+yarn start-ssl-proxy
+```
+
+Then in an other tab you can start the NextJS development server:
 
 ```bash
 yarn dev
 ```
 
-Open [http://localhost:3000/admin-next](http://localhost:3000//admin-next) with your browser to see the result.
+Open [https://admin-next.capco.dev:3001/](https://admin-next.capco.dev:3001/) with your browser to see the result.
 
-The `pages/*` directory is mapped to `/admin-next/*`. 
+The `pages/*` directory is mapped to `/*` with auto reloading. 
 
 ## How to install deps
+
+We use a workspace, so use something like :
 
 ```bash
 yarn workspace admin-next add next@10 react@16.14.0 react-dom@16.14.0 babel-plugin-relay @babel/preset-flow @babel/preset-react

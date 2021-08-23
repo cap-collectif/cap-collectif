@@ -4,8 +4,11 @@
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 const nextConfig = {
-  // reactStrictMode: true,
-  basePath: '/admin-next',
+  // TODO enable this
+  webpack5: false,
+  // TODO enable this
+  reactStrictMode: false,
+  basePath: process.argv.includes('dev') ? '' : '/admin-next',
   experimental: {
     externalDir: true,
   },
@@ -16,7 +19,7 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  webpack(config) {
+  webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
       issuer: {
@@ -24,6 +27,14 @@ const nextConfig = {
       },
       use: ['@svgr/webpack'],
     });
+
+    if (!isServer) {
+      config.node = {
+        net: 'empty',
+        tls: 'empty',
+        child_process: 'empty',
+      };
+    }
 
     return config;
   },

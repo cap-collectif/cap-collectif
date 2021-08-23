@@ -9,20 +9,27 @@ export const getBaseUrl = () =>
   }`;
 
 const isDev = () =>
-  getBaseUrl() === 'https://capco.dev' || getBaseUrl() === 'http://localhost:3000';
+  getBaseUrl() === 'https://capco.dev' || getBaseUrl() === 'https://admin-next.capco.dev:3001';
 
 // This may not be up to date in admin-next
 export const baseUrl = getBaseUrl();
+
+export const getBaseUrlWithAdminNextSupport = () => {
+  if (isDev()) {
+    return 'https://capco.dev';
+  }
+  return getBaseUrl();
+};
 
 const isTest = () => getBaseUrl() === 'https://capco.test';
 
 export default {
   getGraphqlInternalUrl: () => {
-    const apiBaseUrl = isDev() ? 'https://capco.dev' : getBaseUrl();
+    const apiBaseUrl = getBaseUrlWithAdminNextSupport();
     return `${apiBaseUrl}/graphql/internal`;
   },
   getApiUrl: () => {
-    const apiBaseUrl = isDev() ? 'https://capco.dev' : getBaseUrl();
+    const apiBaseUrl = getBaseUrlWithAdminNextSupport();
     return `${apiBaseUrl}/api`;
   },
   mapsServerKey: '***REMOVED***',

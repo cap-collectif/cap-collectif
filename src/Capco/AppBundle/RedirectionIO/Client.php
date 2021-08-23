@@ -5,7 +5,6 @@ namespace Capco\AppBundle\RedirectionIO;
 use Capco\AppBundle\Toggle\Manager;
 use Psr\Log\LoggerInterface;
 use RedirectionIO\Client\Sdk\Command\CommandInterface;
-use RedirectionIO\Client\Sdk\Exception\AgentNotFoundException;
 use RedirectionIO\Client\Sdk\Exception\ExceptionInterface;
 use RedirectionIO\Client\Sdk\Exception\TimeoutException;
 
@@ -52,8 +51,12 @@ class Client
 
     public function request(CommandInterface $command)
     {
+        if (!$this->toggle->isActive('http_redirects')) {
+            return null;
+        }
+
         $projectKey = $this->projectKeyDataloader->loadKey();
-        if (!$projectKey || !$this->toggle->isActive('http_redirects')) {
+        if (!$projectKey) {
             return null;
         }
 
@@ -73,6 +76,8 @@ class Client
     private function doRequest(CommandInterface $command)
     {
         $connection = $this->getConnection();
+
+        if (!$connection) return null;
 
         $toSend = $command->getName() . "\0" . $command->getRequest() . "\0";
         $sent = $this->box('doSend', false, [$connection, $toSend]);
@@ -158,11 +163,11 @@ class Client
             return $connection;
         }
 
-        $this->logger->error('Can not find an agent.', [
+        $this->logger->warning('Can not find RedirectionIO agent.', [
             'connections_options' => $this->connections,
         ]);
 
-        throw new AgentNotFoundException();
+        return null;
     }
 
     private function doConnect($options)
@@ -245,7 +250,7 @@ class Client
         } catch (\ErrorException $exception) {
             $returnValue = $defaultReturnValue;
 
-            $this->logger->warning('Impossible to execute a boxed call.', [
+            $this->logger->warning('Impossible to execute RedirectionIO boxed call.', [
                 'method' => $method,
                 'default_return_value' => $defaultReturnValue,
                 'args' => $args,
