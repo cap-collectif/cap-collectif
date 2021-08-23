@@ -1,9 +1,11 @@
 // @flow
 import React, { useState, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
+import { useLeafletContext } from '@react-leaflet/core';
+import ReactDOM from 'react-dom';
+import L from 'leaflet';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
-import LeafletControl from './LeafletControl';
 import { LoaderPane } from './ProposalLeafletMap.style';
 
 type Props = {|
@@ -11,7 +13,33 @@ type Props = {|
   retry: () => void,
 |};
 
-const ProposalMapLoaderPane = ({ hasError, retry }: Props) => {
+const Pane = (hasError, retry, isOffline, intl) => (
+  <LoaderPane>
+    {isOffline ? (
+      <div>
+        <Icon name={ICON_NAME.wifiOff} size={14} color="#ff8b00" />
+        {intl.formatMessage({ id: 'attempt.to.connect' })}
+      </div>
+    ) : hasError ? (
+      <div>
+        <Icon name={ICON_NAME.removeCircle} size={14} color="#f00040" />
+        {intl.formatMessage({ id: 'loading.failed.retry' })}
+        <button onClick={retry} type="button">
+          {intl.formatMessage({ id: 'global.retry' })}
+        </button>
+      </div>
+    ) : (
+      <div>
+        <Loader size={14} />
+        {intl.formatMessage({ id: 'loading.proposals' })}
+      </div>
+    )}
+  </LoaderPane>
+);
+
+const ProposalMapLoaderPane = ({ hasError, retry }: Props): null => {
+  const context = useLeafletContext();
+  const intl = useIntl();
   const [isOffline, setIsOffline] = useState<boolean>(!window.navigator.onLine);
 
   useEffect(() => {
@@ -24,30 +52,24 @@ const ProposalMapLoaderPane = ({ hasError, retry }: Props) => {
     };
   });
 
-  return (
-    <LeafletControl position="bottomleft">
-      <LoaderPane>
-        {isOffline ? (
-          <div>
-            <Icon name={ICON_NAME.wifiOff} size={14} color="#ff8b00" />
-            <FormattedMessage id="attempt.to.connect" />
-          </div>
-        ) : hasError ? (
-          <div>
-            <Icon name={ICON_NAME.removeCircle} size={14} color="#f00040" />
-            <FormattedMessage id="loading.failed.retry" />
-            <button onClick={retry} type="button">
-              <FormattedMessage id="global.retry" />
-            </button>
-          </div>
-        ) : (
-          <div>
-            <Loader size={14} />
-            <FormattedMessage id="loading.proposals" />
-          </div>
-        )}
-      </LoaderPane>
-    </LeafletControl>
-  );
+  useEffect(() => {
+    const MapInfoComponent = L.Control.extend({
+      onAdd: () => {
+        const div = L.DomUtil.create('div', 'map-info');
+        ReactDOM.render(Pane(hasError, retry, isOffline, intl), div);
+        L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+        return div;
+      },
+    });
+    const mapInfoInstance = new MapInfoComponent({ position: 'bottomleft' });
+    mapInfoInstance.addTo(context.map);
+
+    return (): void => {
+      mapInfoInstance.remove();
+    };
+  }, [context.map, hasError, retry, isOffline, intl]);
+
+  return null;
 };
+
 export default ProposalMapLoaderPane;

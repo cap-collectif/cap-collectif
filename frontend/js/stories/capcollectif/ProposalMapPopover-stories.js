@@ -5,7 +5,7 @@ import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { storiesOf } from '@storybook/react';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { BlankPopup } from '~/components/Proposal/Map/ProposalLeafletMap.style';
 import {
   PopoverContent,
@@ -38,7 +38,7 @@ export const ProposalMapPopover = (props: Props) => {
 
   return (
     <React.Fragment>
-      <Map
+      <MapContainer
         center={{ lat: 48.8586047, lng: 2.3137325 }}
         zoom={12}
         maxZoom={18}
@@ -93,7 +93,7 @@ export const ProposalMapPopover = (props: Props) => {
             </PopoverContainer>
           </BlankPopup>
         </Marker>
-      </Map>
+      </MapContainer>
     </React.Fragment>
   );
 };

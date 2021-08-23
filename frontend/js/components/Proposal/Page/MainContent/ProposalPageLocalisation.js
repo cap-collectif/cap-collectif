@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import colors from '~/utils/colors';
 import config from '~/config';
@@ -63,7 +63,7 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
           {proposal?.address && config.canUseDOM ? (
             <div className="proposal-map__block">
               <p>{proposal?.address.formatted}</p>
-              <Map
+              <MapContainer
                 center={{
                   lat: proposal?.address.lat,
                   lng: proposal?.address.lng,
@@ -89,7 +89,7 @@ export const ProposalPageLocalisation = ({ proposal, mapTokens }: Props) => {
                     popupAnchor: [0, -40],
                   })}
                 />
-              </Map>
+              </MapContainer>
             </div>
           ) : null}
         </Skeleton>

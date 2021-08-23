@@ -26,8 +26,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     dragging={true}
     gestureHandling={true}
     maxZoom={22}
-    onClick={[Function]}
-    onZoomStart={[Function]}
     style={
       Object {
         "height": "50vw",
@@ -35,23 +33,29 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       }
     }
     tap={true}
+    whenCreated={[Function]}
     zoom={12}
     zoomControl={false}
   >
-    <ForwardRef(Leaflet(TileLayer))
+    <ForwardRef(LeafComponent)
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
-    <ForwardRef(Leaflet(MarkerClusterGroup))
+    <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
-      onClusterClick={[Function]}
+      onClick={[Function]}
       showCoverageOnHover={false}
       spiderfyDistanceMultiplier={4}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     >
-      <ForwardRef(Leaflet(Marker))
+      <ForwardRef(ContainerComponent)
         alt="marker-0"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
         icon={
           NewClass {
             "_initHooksCalled": true,
@@ -74,7 +78,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           }
         }
         key="0"
-        onClick={[Function]}
         position={
           Array [
             49.8397,
@@ -103,9 +106,14 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(Leaflet(Marker))>
-      <ForwardRef(Leaflet(Marker))
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
         alt="marker-1"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
         icon={
           NewClass {
             "_initHooksCalled": true,
@@ -128,7 +136,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           }
         }
         key="1"
-        onClick={[Function]}
         position={
           Array [
             52.2297,
@@ -157,9 +164,14 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(Leaflet(Marker))>
-      <ForwardRef(Leaflet(Marker))
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
         alt="marker-2"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
         icon={
           NewClass {
             "_initHooksCalled": true,
@@ -182,7 +194,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           }
         }
         key="2"
-        onClick={[Function]}
         position={
           Array [
             51.5074,
@@ -211,9 +222,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(Leaflet(Marker))>
-    </ForwardRef(Leaflet(MarkerClusterGroup))>
-    <ForwardRef(Leaflet(ZoomControl))
+      </ForwardRef(ContainerComponent)>
+    </ForwardRef(ContainerComponent)>
+    <ForwardRef(LeafComponent)
       position="bottomright"
     />
   </ProposalLeafletMapstyle__StyledMap>
@@ -244,8 +255,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     dragging={true}
     gestureHandling={true}
     maxZoom={22}
-    onClick={[Function]}
-    onZoomStart={[Function]}
     style={
       Object {
         "height": "50vw",
@@ -253,23 +262,29 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       }
     }
     tap={true}
+    whenCreated={[Function]}
     zoom={12}
     zoomControl={false}
   >
-    <ForwardRef(Leaflet(TileLayer))
+    <ForwardRef(LeafComponent)
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
-    <ForwardRef(Leaflet(MarkerClusterGroup))
+    <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
-      onClusterClick={[Function]}
+      onClick={[Function]}
       showCoverageOnHover={false}
       spiderfyDistanceMultiplier={4}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     >
-      <ForwardRef(Leaflet(Marker))
+      <ForwardRef(ContainerComponent)
         alt="marker-0"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
         icon={
           NewClass {
             "_initHooksCalled": true,
@@ -292,7 +307,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           }
         }
         key="0"
-        onClick={[Function]}
         position={
           Array [
             49.8397,
@@ -321,9 +335,14 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(Leaflet(Marker))>
-      <ForwardRef(Leaflet(Marker))
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
         alt="marker-1"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
         icon={
           NewClass {
             "_initHooksCalled": true,
@@ -346,7 +365,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           }
         }
         key="1"
-        onClick={[Function]}
         position={
           Array [
             52.2297,
@@ -375,9 +393,14 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(Leaflet(Marker))>
-      <ForwardRef(Leaflet(Marker))
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
         alt="marker-2"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
         icon={
           NewClass {
             "_initHooksCalled": true,
@@ -400,7 +423,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           }
         }
         key="2"
-        onClick={[Function]}
         position={
           Array [
             51.5074,
@@ -429,9 +451,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(Leaflet(Marker))>
-    </ForwardRef(Leaflet(MarkerClusterGroup))>
-    <ForwardRef(Leaflet(ZoomControl))
+      </ForwardRef(ContainerComponent)>
+    </ForwardRef(ContainerComponent)>
+    <ForwardRef(LeafComponent)
       position="bottomright"
     />
     <ProposalMapLoaderPane

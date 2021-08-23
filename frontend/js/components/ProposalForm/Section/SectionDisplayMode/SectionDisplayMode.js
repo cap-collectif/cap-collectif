@@ -9,7 +9,7 @@ import L from 'leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
-import { Map, Marker, TileLayer, ZoomControl } from 'react-leaflet';
+import { MapContainer as Map, Marker, TileLayer, ZoomControl } from 'react-leaflet';
 import type { Dispatch, GlobalState } from '~/types';
 import viewChoice from './ViewChoice/ViewChoice';
 import {
@@ -35,6 +35,7 @@ import type {
   AddressCompleteFormatted,
   AddressComplete,
 } from '~/components/Form/Address/Address.type';
+import type { MapProps } from '~/components/Proposal/Map/ProposalLeafletMap';
 
 const publicToken =
   '***REMOVED***';
@@ -217,8 +218,8 @@ export const SectionDisplayMode = ({
       dispatch(change(formName, 'mapCenter.json', dataLocation.addressOriginal));
       dispatch(change(formName, 'zoomMap', zoomId));
 
-      if (refMap.current?.leafletElement) {
-        refMap.current.leafletElement.setView([lat, lng], zoomId);
+      if (refMap.current) {
+        refMap.current.setView([lat, lng], zoomId);
       }
     },
     [dispatch, updateInfoLocation, formName],
@@ -440,7 +441,9 @@ export const SectionDisplayMode = ({
                 />
 
                 <Map
-                  ref={refMap}
+                  whenCreated={(map: MapProps) => {
+                    refMap.current = map;
+                  }}
                   className="map"
                   center={position}
                   zoom={zoom || 10}

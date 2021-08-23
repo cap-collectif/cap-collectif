@@ -2,7 +2,7 @@
 
 exports[`<ProposalFormCategoryPinPreview /> render correctly 1`] = `
 <ProposalFormCategoryPinPreview__Container>
-  <Map
+  <MapContainer
     center={
       Object {
         "lat": 48.8604,
@@ -23,11 +23,11 @@ exports[`<ProposalFormCategoryPinPreview /> render correctly 1`] = `
     zoom={16}
     zoomControl={false}
   >
-    <ForwardRef(Leaflet(TileLayer))
+    <ForwardRef(LeafComponent)
       attribution="© <a href\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
-    <ForwardRef(Leaflet(Marker))
+    <ForwardRef(ContainerComponent)
       icon={
         NewClass {
           "_initHooksCalled": true,
@@ -52,6 +52,6 @@ exports[`<ProposalFormCategoryPinPreview /> render correctly 1`] = `
         ]
       }
     />
-  </Map>
+  </MapContainer>
 </ProposalFormCategoryPinPreview__Container>
 `;

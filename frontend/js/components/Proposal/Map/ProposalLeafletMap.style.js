@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import { Map, Popup } from 'react-leaflet';
+import { MapContainer as Map, Popup } from 'react-leaflet';
 import Slider from 'react-slick';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
@@ -41,6 +41,9 @@ export const StyledMap: StyledComponent<{}, {}, typeof Map> = styled(Map)`
     display: none;
   }
 
+  /**
+    TODO: enlever pour voir le popup déposer (prochaine pr)
+  **/
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .leaflet-popup {
       display: none;

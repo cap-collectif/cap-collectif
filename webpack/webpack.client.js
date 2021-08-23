@@ -38,6 +38,7 @@ const devConf = {
       '~svg': path.resolve(__dirname, '../public/svg'),
       '~image': path.resolve(__dirname, '../public/image'),
       react: path.resolve('./node_modules/react'),
+      leaflet: path.resolve('node_modules/leaflet'),
       'lodash-es': 'lodash',
     },
     fallback: {

@@ -3,7 +3,7 @@
 exports[`should not render when no proposals are in the step 1`] = `""`;
 
 exports[`should render correctly with proposals 1`] = `
-<Relay(Connect(Component))
+<Relay(Connect(ProposalLeafletMap))
   defaultMapOptions={
     Object {
       "center": Object {

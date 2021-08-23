@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { connect } from 'react-redux';
 import { fetchQuery_DEPRECATED, graphql } from 'relay-runtime';
 import { FormattedMessage } from 'react-intl';
@@ -10,7 +10,6 @@ import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import LocateControl from '~/components/Proposal/Map/LocateControl';
-import LeafletSearch from '~/components/Proposal/Map/LeafletSearch';
 import type { GlobalState, Dispatch } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
 import type { MapTokens } from '~/redux/modules/user';
@@ -147,7 +146,7 @@ export class LeafletMap extends Component<Props, State> {
           </p>
         ) : null}
 
-        <Map
+        <MapContainer
           bounds={bounds.isValid() ? bounds : undefined}
           zoom={defaultMapOptions.zoom}
           maxZoom={MAX_MAP_ZOOM}
@@ -204,8 +203,7 @@ export class LeafletMap extends Component<Props, State> {
                 )}
           </MarkerClusterGroup>
           <LocateControl />
-          <LeafletSearch messageSearch="proposal_form.address" />
-        </Map>
+        </MapContainer>
       </div>
     );
   }

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
@@ -56,7 +56,7 @@ export const ProposalFormCategoryPinPreview = ({ color, icon, mapTokens }: Props
   }
   return (
     <Container>
-      <Map
+      <MapContainer
         center={{
           lat: 48.8604,
           lng: 2.3507,
@@ -90,7 +90,7 @@ export const ProposalFormCategoryPinPreview = ({ color, icon, mapTokens }: Props
             iconAnchor: [17, 48],
           })}
         />
-      </Map>
+      </MapContainer>
     </Container>
   );
 };

@@ -219,7 +219,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
             placeholder="proposal.map.form.placeholder"
             type="address"
           />
-          <Map
+          <MapContainer
             center={
               Array [
                 48.8534,
@@ -229,17 +229,18 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
             className="map"
             doubleClickZoom={false}
             gestureHandling={true}
+            whenCreated={[Function]}
             zoom={10}
             zoomControl={false}
           >
-            <ForwardRef(Leaflet(TileLayer))
+            <ForwardRef(LeafComponent)
               attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
               url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
             />
-            <ForwardRef(Leaflet(ZoomControl))
+            <ForwardRef(LeafComponent)
               position="bottomright"
             />
-            <ForwardRef(Leaflet(Marker))
+            <ForwardRef(ContainerComponent)
               icon={
                 NewClass {
                   "_initHooksCalled": true,
@@ -263,7 +264,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                 ]
               }
             />
-          </Map>
+          </MapContainer>
           <div
             className="fields"
           >

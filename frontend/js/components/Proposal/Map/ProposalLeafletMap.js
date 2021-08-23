@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { renderToString } from 'react-dom/server';
 import noop from 'lodash/noop';
-import { TileLayer, GeoJSON, Marker, withLeaflet } from 'react-leaflet';
+import { TileLayer, GeoJSON, Marker } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -39,19 +39,17 @@ type MapCenterObject = {|
   lng: number,
 |};
 
-// We should try to type Leaflet, this will do the trick in the meantime
-type MapRef = {
-  current: null | {
-    contextValue: {
-      map: {
-        flyTo: (Array<number>, ?number) => void,
-        panTo: (?Array<number> | null) => void,
-        getPanes: () => { markerPane?: { children: Array<HTMLImageElement> } } | null,
-        removeLayer: (typeof L.Marker) => void,
-      },
-    },
-  },
+export type MapProps = {
+  flyTo: (Array<number>, ?number) => void,
+  setView: (Array<number>, ?number) => void,
+  panTo: (?Array<number> | null) => void,
+  getPanes: () => { markerPane?: { children: Array<HTMLImageElement> } } | null,
+  removeLayer: (typeof L.Marker) => void,
+  on: (string, () => void) => void,
 };
+export type MapRef = {|
+  +current: null | MapProps,
+|};
 
 export type MapOptions = {|
   center: MapCenterObject,
@@ -123,7 +121,7 @@ const convertToGeoJsonStyle = (style: Style) => {
 };
 
 const goToPosition = (mapRef: MapRef, address: ?{| +lat: number, +lng: number |}) =>
-  mapRef.current?.contextValue.map.panTo([address?.lat || 0, address?.lng || 0]);
+  mapRef.current?.panTo([address?.lat || 0, address?.lng || 0]);
 
 const locationIcon = L.divIcon({
   className: 'leaflet-control-locate-location',
@@ -135,14 +133,12 @@ let locationMarker: typeof L.Marker = {};
 
 const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
   if (mapRef.current) {
-    mapRef.current.contextValue.map.removeLayer(locationMarker);
+    mapRef.current.removeLayer(locationMarker);
   }
   if (mapRef.current) {
-    mapRef.current.contextValue.map.flyTo([lat, lng], 18);
+    mapRef.current.flyTo([lat, lng], 18);
   }
-  locationMarker = L.marker([lat, lng], { icon: locationIcon }).addTo(
-    mapRef.current?.contextValue.map,
-  );
+  locationMarker = L.marker([lat, lng], { icon: locationIcon }).addTo(mapRef.current);
 };
 
 const settingsSlider = {
@@ -208,8 +204,18 @@ export const ProposalLeafletMap = ({
         onChange={setAddress}
         placeholder={intl.formatMessage({ id: 'proposal.map.form.placeholder' })}
       />
-
       <StyledMap
+        whenCreated={(map: MapProps) => {
+          mapRef.current = map;
+          map.on('click', () => {
+            setIsMobileSliderOpen(false);
+            isOnCluster = false;
+          });
+          map.on('zoomstart', () => {
+            setIsMobileSliderOpen(false);
+            isOnCluster = false;
+          });
+        }}
         center={defaultMapOptions.center}
         zoom={defaultMapOptions.zoom}
         maxZoom={MAX_MAP_ZOOM}
@@ -218,18 +224,9 @@ export const ProposalLeafletMap = ({
           zIndex: 0,
         }}
         zoomControl={false}
-        ref={mapRef}
         dragging={!L.Browser.mobile}
         tap={!L.Browser.mobile}
         className={className}
-        onClick={() => {
-          setIsMobileSliderOpen(false);
-          isOnCluster = false;
-        }}
-        onZoomStart={() => {
-          setIsMobileSliderOpen(false);
-          isOnCluster = false;
-        }}
         doubleClickZoom={false}
         gestureHandling>
         <TileLayer
@@ -240,7 +237,7 @@ export const ProposalLeafletMap = ({
           spiderfyOnMaxZoom
           showCoverageOnHover={false}
           zoomToBoundsOnClick
-          onClusterClick={() => {
+          onClick={() => {
             isOnCluster = true;
           }}
           spiderfyDistanceMultiplier={4}
@@ -267,16 +264,18 @@ export const ProposalLeafletMap = ({
                     iconAnchor: [size / 2, size],
                     popupAnchor: [0, -size],
                   })}
-                  onClick={e => {
-                    const isOpen: boolean = e.target.isPopupOpen();
-                    if (!isOnCluster || isMobile) {
-                      setInitialSlide(isOpen ? key : null);
-                      setIsMobileSliderOpen(isOpen);
-                      if (isMobile) {
-                        goToPosition(mapRef, markers[key].address);
-                        if (slickRef?.current) slickRef.current.slickGoTo(key);
+                  eventHandlers={{
+                    click: e => {
+                      const isOpen: boolean = e.target.isPopupOpen();
+                      if (!isOnCluster || isMobile) {
+                        setInitialSlide(isOpen ? key : null);
+                        setIsMobileSliderOpen(isOpen);
+                        if (isMobile) {
+                          goToPosition(mapRef, markers[key].address);
+                          if (slickRef?.current) slickRef.current.slickGoTo(key);
+                        }
                       }
-                    }
+                    },
                   }}>
                   <BlankPopup closeButton={false}>
                     <ProposalMapPopover proposal={mark} />
@@ -293,7 +292,6 @@ export const ProposalLeafletMap = ({
               data={geoJson.district}
             />
           ))}
-
         {!isMobile && <ZoomControl position="bottomright" />}
         {hasMore && <ProposalMapLoaderPane hasError={hasError} retry={retry} />}
       </StyledMap>
@@ -332,7 +330,7 @@ const mapStateToProps = (state: State) => ({
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
 });
 
-const container = connect<any, any, _, _, _, _>(mapStateToProps)(withLeaflet(ProposalLeafletMap));
+const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalLeafletMap);
 
 export default createFragmentContainer(container, {
   proposals: graphql`

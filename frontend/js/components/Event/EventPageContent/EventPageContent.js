@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
@@ -66,7 +66,7 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
         {body && <WYSIWYGRender className="description" value={body} />}
 
         {googleMapsAddress && isPresential && (
-          <Map
+          <MapContainer
             center={[googleMapsAddress.lat, googleMapsAddress.lng]}
             zoom={10}
             style={{
@@ -88,7 +88,7 @@ export const EventPageContent = ({ event, viewer, hasProposeEventEnabled, intl }
                 iconAnchor: [20, 40],
               })}
             />
-          </Map>
+          </MapContainer>
         )}
 
         <ShareButtonDropdownApp title={event.title} id={event.id} url={event.url} />

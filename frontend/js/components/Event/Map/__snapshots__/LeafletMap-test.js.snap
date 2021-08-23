@@ -8,7 +8,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     }
   }
 >
-  <Map
+  <MapContainer
     doubleClickZoom={false}
     gestureHandling={true}
     id="event-map"
@@ -22,21 +22,18 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     }
     zoom={12}
   >
-    <ForwardRef(Leaflet(TileLayer))
+    <ForwardRef(LeafComponent)
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
-    <ForwardRef(Leaflet(MarkerClusterGroup))
+    <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
       onPopupClose={[Function]}
       showCoverageOnHover={false}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     />
-    <ForwardRef(Leaflet(injectIntl(LocateControl))) />
-    <Connect(Component)
-      messageSearch="proposal_form.address"
-    />
-  </Map>
+    <injectIntl(Component) />
+  </MapContainer>
 </div>
 `;
