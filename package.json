@@ -281,7 +281,7 @@
         "intersection-observer": "^0.12.0",
         "intl": "^1.2.5",
         "intl-relativeformat": "^2.1.0",
-        "jest": "^24.8.0",
+        "jest": "^27.0.6",
         "jest-styled-components": "^7.0.3",
         "jimp": "^0.9.3",
         "jquery": "^3.5.1",

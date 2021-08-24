@@ -7,7 +7,7 @@ const getSessionCookieFromReq = (req: NextApiRequest): string | null => {
     const cookieHeader = req && req.headers && req.headers.cookie;
     if (cookieHeader) {
         const cookies = cookie.parse(cookieHeader);
-        return cookies[SESSION_COOKIE_NAME];
+        return cookies[SESSION_COOKIE_NAME] || null;
     }
     return null;
 };

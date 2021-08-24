@@ -1,11 +1,11 @@
-import exec from 'await-exec';
+import exec from './await-exec';
 import { createClient } from 'redis';
 import { __isDev__ } from '../config';
 
-const getRedisHost = async (): string => {
+export const getRedisHost = async (): string => {
     if (__isDev__) {
-        const { stdout, stderr } = await exec(`dinghy ip`);
-        if (stderr) {
+        const { error, stdout } = await exec(`dinghy ip`);
+        if (error) {
             // We are on linux if no dinghy.
             return '127.0.0.1';
         }
