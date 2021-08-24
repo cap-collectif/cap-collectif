@@ -165,7 +165,7 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
-            {isAdmin ? (
+            {isAdmin || isProjectAdmin ? (
               <SidebarAccordionItem id="contenus">
                 <SidebarButton
                   icon={ICON_NAME.FOLDER_O}
@@ -173,18 +173,28 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                   isOpen={isOpen}
                 />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  <SidebarLink
-                    text="admin.label.highlighted"
-                    href="/admin/capco/app/highlightedcontent/list"
-                  />
-                  <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
-                  <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
+                  {isAdmin && (
+                    <SidebarLink
+                      text="admin.label.highlighted"
+                      href="/admin/capco/app/highlightedcontent/list"
+                    />
+                  )}
+                  {isAdmin && (
+                    <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
+                  )}
+                  {isAdmin && (
+                    <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
+                  )}
                   {features.calendar && (
                     <SidebarLink text="admin.label.events" href="/admin/capco/app/event/list" />
                   )}
-                  <SidebarLink text="admin.label.video" href="/admin/capco/app/video/list" />
-                  <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />
-                  <SidebarLink text="media" href="/admin/capco/media/media/list" />
+                  {isAdmin && (
+                    <SidebarLink text="admin.label.video" href="/admin/capco/app/video/list" />
+                  )}
+                  {isAdmin && (
+                    <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />
+                  )}
+                  {isAdmin && <SidebarLink text="media" href="/admin/capco/media/media/list" />}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

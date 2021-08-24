@@ -333,6 +333,31 @@ exports[`<Sidebar /> renders when the user is a project admin and not an admin 1
       >
         <div
           class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
+          id="contenus"
+        >
+          <button
+            class="sc-bdnxRM Button__ButtonInner-dWPVNG gqtmL jfKDDI SidebarButton___StyledButton-jIxZSe jcGNNr"
+            type="button"
+          >
+            <div
+              class="sc-bdnxRM Flex___StyledAppBox-RSPpX eauOba"
+            >
+              <iconmock
+                class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG YEdiR fZkSKg AMDLx icon"
+              />
+              <p
+                class="sc-bdnxRM cumezM SidebarButton___StyledText-bYTgVJ jnwhtK"
+              >
+                admin.group.content
+              </p>
+            </div>
+            <iconmock
+              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG dbBOoi cIIQlv AMDLx icon"
+            />
+          </button>
+        </div>
+        <div
+          class="sc-bdnxRM jRnhua Sidebar__SidebarAccordionItem-fxNiQF"
           id="projets"
         >
           <button

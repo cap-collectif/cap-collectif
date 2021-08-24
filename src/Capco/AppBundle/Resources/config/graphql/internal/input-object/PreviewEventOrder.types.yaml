@@ -1,12 +1,14 @@
 PreviewEventOrder:
-  type: input-object
-  config:
-    name: EventOrder
-    description: 'Ways in which lists of events can be ordered upon return.'
-    fields:
-      field:
-        type: 'PreviewEventOrderField!'
-        description: 'The field in which to order nodes by.'
-      direction:
-        type: 'OrderDirection!'
-        description: 'The direction in which to order nodes.'
+    type: input-object
+    config:
+        name: EventOrder
+        description: 'Ways in which lists of events can be ordered upon return.'
+        fields:
+            field:
+                type: 'PreviewEventOrderField!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\EventOrderField::START_AT")'
+                description: 'The field in which to order nodes by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                description: 'The direction in which to order nodes.'

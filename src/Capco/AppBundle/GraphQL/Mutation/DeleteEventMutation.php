@@ -9,22 +9,23 @@ use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
+use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Error\UserError;
 use Sonata\MediaBundle\Provider\ImageProvider;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteEventMutation extends BaseDeleteMutation
 {
-    private $globalIdResolver;
-    private $indexer;
-    private $publisher;
-    private $registration;
-    private $translator;
+    private GlobalIdResolver $globalIdResolver;
+    private Indexer $indexer;
+    private Publisher $publisher;
+    private EventRegistrationRepository $registration;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -33,14 +34,14 @@ class DeleteEventMutation extends BaseDeleteMutation
         Publisher $publisher,
         EventRegistrationRepository $registration,
         ImageProvider $mediaProvider,
-        TranslatorInterface $translator
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         parent::__construct($em, $mediaProvider);
         $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
         $this->publisher = $publisher;
         $this->registration = $registration;
-        $this->translator = $translator;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -48,14 +49,7 @@ class DeleteEventMutation extends BaseDeleteMutation
         $id = $input->offsetGet('eventId');
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($id, $viewer);
-        $userErrors = [];
-        if (!$event) {
-            $userErrors = ['This event doesnt exist.'];
-        }
 
-        if ($viewer !== $event->getAuthor() && (!$viewer->isAdmin() || !$viewer->isSuperAdmin())) {
-            throw new UserError('You are not authorized to delete this event');
-        }
         $eventParticipants = $this->registration->getAllParticipantsInEvent($event);
         $eventMedia = $event->getMedia();
         if ($eventMedia) {
@@ -88,7 +82,7 @@ class DeleteEventMutation extends BaseDeleteMutation
             ->getResult();
 
         $this->em->flush();
-        $this->indexer->remove(\get_class($event), $id);
+        $this->indexer->remove(ClassUtils::getClass($event), $id);
         $this->indexer->finishBulk();
 
         $this->publisher->publish(
@@ -104,7 +98,17 @@ class DeleteEventMutation extends BaseDeleteMutation
         return [
             'event' => $event,
             'deletedEventId' => $id,
-            'userErrors' => $userErrors,
         ];
+    }
+
+    public function isGranted(string $eventId, User $viewer): bool
+    {
+        $event = $this->globalIdResolver->resolve($eventId, $viewer);
+
+        if (!$event) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EventVoter::DELETE, $event);
     }
 }

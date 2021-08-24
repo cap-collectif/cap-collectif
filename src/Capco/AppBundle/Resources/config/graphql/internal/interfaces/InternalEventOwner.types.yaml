@@ -1,0 +1,43 @@
+InternalEventOwner:
+    type: interface
+    config:
+        name: EventOwner
+        description: 'Represent an owner of a Event.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\EventOwnerTypeResolver", [value])'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'User ID'
+            username:
+                type: 'String'
+                description: 'User username'
+            events:
+                type: 'InternalEventConnection!'
+                description: 'Get all events that the user owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventOwnerEventsResolver", [args, value])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    affiliations:
+                        type: '[InternalEventAffiliation!]'
+                        description: |
+                            Array of viewer's affiliation options for events returned from the connection.
+                            For example, OWNER will include only events that the current viewer owns.
+                    search:
+                        type: 'String'
+                        description: the search query
+                    orderBy:
+                        type: 'PreviewEventOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\EventOrderField::START_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for events.'
+                    status:
+                        type: 'InternalEventStatus'
+                        description: 'Filter events by a given status.'
+                        defaultValue: null
+                    onlyWhenAuthor:
+                        type: 'Boolean'
+                        description: 'only fetch where user is author'
+                        defaultValue: false

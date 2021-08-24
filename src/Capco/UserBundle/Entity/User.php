@@ -679,6 +679,11 @@ class User extends BaseUser implements
         return $this->isProjectAdmin() && !$this->isAdmin();
     }
 
+    public function isOnlyUser(): bool
+    {
+        return !$this->isProjectAdmin() && !$this->isAdmin();
+    }
+
     public function isEvaluerOnLegacyTool(): bool
     {
         foreach ($this->userGroups as $userGroup) {

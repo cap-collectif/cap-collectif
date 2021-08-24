@@ -34,7 +34,7 @@ InternalMutation:
                     payloadType: InternalChangeSiteFaviconPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeSiteFaviconMutation", [value])'
             addEvent:
-                access: "@=hasRole('ROLE_USER')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation").isGranted()'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: InternalAddEventInput
@@ -48,7 +48,7 @@ InternalMutation:
                     payloadType: InternalReviewEventPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ReviewEventMutation", [value, getUser()])'
             deleteEvent:
-                access: "@=hasRole('ROLE_USER')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation").isGranted(args["input"]["eventId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: PreviewDeleteEventInput
@@ -62,7 +62,7 @@ InternalMutation:
                     payloadType: InternalAddEventsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventsMutation", [value])'
             changeEvent:
-                access: "@=hasRole('ROLE_USER')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: InternalChangeEventInput

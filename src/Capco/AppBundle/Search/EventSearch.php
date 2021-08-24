@@ -2,14 +2,19 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Enum\EventAffiliation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
 use Capco\AppBundle\Enum\EventOrderField;
+use Elastica\ResultSet;
 
 class EventSearch extends Search
 {
@@ -29,21 +34,29 @@ class EventSearch extends Search
     ];
 
     private EventRepository $eventRepository;
+    private EntityManagerInterface $em;
 
-    public function __construct(Index $index, EventRepository $eventRepository)
-    {
+    public function __construct(
+        Index $index,
+        EventRepository $eventRepository,
+        EntityManagerInterface $em
+    ) {
         parent::__construct($index);
         $this->eventRepository = $eventRepository;
         $this->type = 'event';
+        $this->em = $em;
     }
 
     public function searchEvents(
-        int $offset,
+        ?string $cursor,
         int $limit,
         ?string $terms,
         array $providedFilters,
-        array $orderBy
-    ): array {
+        array $orderBy,
+        ?array $affiliations = null,
+        ?User $user = null,
+        ?bool $onlyWhenAuthor = false
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
             $boolQuery,
@@ -51,6 +64,19 @@ class EventSearch extends Search
             $terms,
             'phrase_prefix'
         );
+
+        $hasOwnerAffiliation =
+            $user &&
+            !$onlyWhenAuthor &&
+            $affiliations &&
+            \in_array(EventAffiliation::OWNER, $affiliations, true);
+        if ($hasOwnerAffiliation) {
+            $boolQuery->addFilter(new Term(['owner.id' => $user->getId()]));
+        }
+
+        if ($user && $onlyWhenAuthor) {
+            $boolQuery->addFilter(new Term(['author.id' => $user->getId()]));
+        }
 
         if (isset($providedFilters['isFuture'])) {
             switch ($providedFilters['isFuture']) {
@@ -92,22 +118,31 @@ class EventSearch extends Search
             $query->setSort($this->getEventSort($orderBy));
         }
 
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+        $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
+        $this->applyCursor($query, $cursor);
         $query->setTrackTotalHits(true);
+
         $resultSet = $this->index->search($query);
+        $cursors = $this->getCursors($resultSet);
 
-        $ids = array_map(static function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
+        return $this->getData($cursors, $resultSet);
+    }
 
-        return [
-            'events' => $this->getHydratedResults($this->eventRepository, $ids),
-            'count' => $resultSet->getTotalHits(),
-        ];
+    public function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
+    {
+        $emFilters = $this->em->getFilters();
+        if ($emFilters->isEnabled('softdeleted')) {
+            $this->em->getFilters()->disable('softdeleted');
+        }
+        $results = new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->eventRepository, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
+        $emFilters->enable('softdeleted');
+
+        return $results;
     }
 
     public function getAllIdsOfAuthorOfEvent(?string $terms = null): array
@@ -182,6 +217,9 @@ class EventSearch extends Search
             $filters['author.id'] = GlobalIdResolver::getDecodedId($providedFilters['author'])[
                 'id'
             ];
+        }
+        if (isset($providedFilters['status']) && null !== $providedFilters['status']) {
+            $filters['eventStatus'] = $providedFilters['status'];
         }
 
         return $filters;

@@ -186,3 +186,9 @@ Capco\AppBundle\Entity\EventTranslation:
         translatable: '@eventRemotePastWithReplay'
         title: "+ de tech dans la civictech : c'est quoi une API ?"
         body: <('Terme barbare mais qui vous sera expliqué avec pédagogie par notre Directeur technique, Aurélien David. Au-delà de la définition, il vous expliquera les usages immédiats possibles pour vous et en quoi les API seront bien le pilier demain des démarches numériques sur votre territoire.')>
+    eventWithOwner_fr:
+        id: 'eventWithOwner_fr'
+        locale: 'fr-FR'
+        translatable: '@eventWithOwner'
+        title: 'Evenement owned par un owner'
+        body: <('Event body')>

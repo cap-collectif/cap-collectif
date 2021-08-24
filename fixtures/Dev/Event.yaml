@@ -257,3 +257,18 @@ Capco\AppBundle\Entity\Event:
         recordingLink: <('https://assets.cap.co/jitsi_recordings/MVu7w6fg1QZSpMz+hHYh9AGG7w3Xm6QiyKwhQXVM-dg3IUp2xiDfyK6R7G3zTCLbROTdnlO60LYfobyBBwHjRw==.mp4')>
         projects: ['@projectIdf']
         steps: ['@collectstepIdf', '@selectionStepIdfAnalyse']
+    eventWithOwner:
+        id: eventWithOwner
+        startAt: <identity((new \DateTime('2020-05-28')))>
+        author: '@userTheo'
+        owner: '@userTheo'
+        createdAt: <identity((new \DateTime('2020-05-28')))>
+        isPresential: false
+        enabled: true
+        animator: '@userTheo'
+        isRecordingPublished: true
+        roomName: I_AM_A_RANDOM_GENERATED_ROOM_NAME_2
+        jitsiToken: I_AM_A_RANDOM_GENERATED_TOKEN_2
+        recordingLink: <('https://assets.cap.co/jitsi_recordings/MVu7w6fg1QZSpMz+hHYh9AGG7w3Xm6QiyKwhQXVM-dg3IUp2xiDfyK6R7G3zTCLbROTdnlO60LYfobyBBwHjRw==.mp4')>
+        projects: ['@projectIdf']
+        steps: ['@collectstepIdf', '@selectionStepIdfAnalyse']

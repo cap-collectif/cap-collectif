@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\GraphQL\Mutation\GenerateJitsiRoomMutation;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Security\EventVoter;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -24,6 +25,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\Translator;
 
 class AddEventMutationSpec extends ObjectBehavior
@@ -37,7 +39,8 @@ class AddEventMutationSpec extends ObjectBehavior
         Publisher $publisher,
         Translator $translator,
         LocaleRepository $localeRepository,
-        GenerateJitsiRoomMutation $generateJitsiRoomMutation
+        GenerateJitsiRoomMutation $generateJitsiRoomMutation,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
         $this->beConstructedWith(
@@ -49,7 +52,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $publisher,
             $translator,
             $localeRepository,
-            $generateJitsiRoomMutation
+            $generateJitsiRoomMutation,
+            $authorizationChecker
         );
     }
 
@@ -74,6 +78,9 @@ class AddEventMutationSpec extends ObjectBehavior
                 [
                     'locale' => 'fr-FR',
                     'body' => 'My body',
+                    'title' => 'title',
+                    'metaDescription' => 'metaDescription',
+                    'link' => 'link',
                 ],
             ],
         ];
@@ -83,12 +90,24 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
         $viewer->isSuperAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOnlyUser()->willReturn(true);
 
         $event->getAuthor()->willReturn($viewer);
 
         $form
             ->submit(
-                ['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]],
+                [
+                    'translations' => [
+                        'fr-FR' => [
+                            'locale' => 'fr-FR',
+                            'body' => 'My body',
+                            'title' => 'title',
+                            'metaDescription' => 'metaDescription',
+                            'link' => 'link',
+                        ],
+                    ],
+                ],
                 false
             )
             ->willReturn(null);
@@ -116,6 +135,67 @@ class AddEventMutationSpec extends ObjectBehavior
         $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
     }
 
+    public function it_persists_new_event_with_given_author(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        Arg $arguments,
+        User $viewer,
+        Form $form,
+        Indexer $indexer,
+        Event $event,
+        Publisher $publisher,
+        GlobalIdResolver $globalIdResolver,
+        User $author
+    ) {
+        $values = [
+            'startAt' => '2019-04-09T22:00:23.000',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body',
+                ],
+            ],
+            'author' => 'abc',
+        ];
+
+        $event->getBody()->willReturn('My body');
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(true);
+        $viewer->isSuperAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOnlyUser()->willReturn(true);
+
+        $globalIdResolver->resolve($values['author'], $viewer)->willReturn($author);
+
+        $event->getAuthor()->willReturn($viewer);
+
+        $form
+            ->submit(
+                ['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]],
+                false
+            )
+            ->willReturn(null);
+        $form->isValid()->willReturn(true);
+
+        $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
+        $arguments->getArrayCopy()->willReturn($values);
+
+        $em->persist(Argument::type(Event::class))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        // we cant moke ID with phpSpec, but in reality there is an ID
+        $indexer->index(Event::class, null)->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['eventEdge']->shouldHaveType(Edge::class);
+        $payload['eventEdge']->node->shouldHaveType(Event::class);
+        $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
+    }
+
     public function it_try_to_persists_new_event_with_customCode_as_user(
         Arg $arguments,
         User $viewer
@@ -134,6 +214,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
         $viewer->isSuperAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOnlyUser()->willReturn(true);
 
         $arguments->getArrayCopy()->willReturn($values);
         $payload = $this->__invoke($arguments, $viewer);
@@ -168,6 +250,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(true);
+        $viewer->isProjectAdmin()->willReturn(true);
+        $viewer->isOnlyUser()->willReturn(false);
 
         $event->getAuthor()->willReturn($viewer);
 
@@ -222,6 +306,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOnlyUser()->willReturn(false);
 
         $event->setAuthor($viewer)->willReturn($event);
         $event->getAuthor()->willReturn($viewer);
@@ -240,5 +326,14 @@ class AddEventMutationSpec extends ObjectBehavior
             $arguments,
             $viewer,
         ]);
+    }
+
+    public function it_should_call_voter(AuthorizationCheckerInterface $authorizationChecker)
+    {
+        $authorizationChecker
+            ->isGranted(EventVoter::CREATE, Argument::type(Event::class))
+            ->shouldBeCalled()
+            ->willReturn(true);
+        $this->isGranted()->shouldReturn(true);
     }
 }

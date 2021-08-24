@@ -62,19 +62,6 @@ class ChangeEventMutation implements MutationInterface
 
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($values['id'], $viewer);
-        if (!$event) {
-            return [
-                'event' => null,
-                'userErrors' => [['message' => 'Could not find your event.']],
-            ];
-        }
-
-        if (!$this->authorizationChecker->isGranted(EventVoter::EDIT, $event)) {
-            return [
-                'event' => null,
-                'userErrors' => [['message' => 'Access denied']],
-            ];
-        }
 
         unset($values['id']);
         LocaleUtils::indexTranslations($values);
@@ -127,5 +114,16 @@ class ChangeEventMutation implements MutationInterface
         }
 
         return ['event' => $event, 'userErrors' => []];
+    }
+
+    public function isGranted(string $eventId, User $viewer): bool
+    {
+        $event = $this->globalIdResolver->resolve($eventId, $viewer);
+
+        if (!$event) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EventVoter::EDIT, $event);
     }
 }

@@ -123,3 +123,10 @@ InternalEvent:
                 type: 'Boolean!'
                 description: 'Wheter or not the viewer can join the room before it starts.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventViewerCanJoinBeforeStartResolver", [value, getUser()])'
+            owner:
+                type: 'InternalEventOwner'
+                description: 'The owner of the event.'
+            reviewStatus:
+                type: 'EventReviewStatus'
+                description: 'The event status.'
+                resolve: '@=value.getStatus()'

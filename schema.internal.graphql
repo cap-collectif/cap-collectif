@@ -5189,6 +5189,18 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """Wheter or not the viewer can join the room before it starts."""
   viewerIsRoomAnimator: Boolean!
+
+  """The owner of the event."""
+  owner: EventOwner
+
+  """The event status."""
+  reviewStatus: EventReviewStatus
+}
+
+"""The affiliation of a user to a event"""
+enum EventAffiliation {
+  """Events that are owned by the authenticated user."""
+  OWNER
 }
 
 """A connection to a list of items."""
@@ -5235,10 +5247,10 @@ input EventInput {
 """Ways in which lists of events can be ordered upon return."""
 input EventOrder {
   """The field in which to order nodes by."""
-  field: EventOrderField!
+  field: EventOrderField! = START_AT
 
   """The direction in which to order nodes."""
-  direction: OrderDirection!
+  direction: OrderDirection! = DESC
 }
 
 """Ordering options for events returned from the connection."""
@@ -5248,6 +5260,45 @@ enum EventOrderField {
 
   """Order by the start date of the time range."""
   START_AT
+}
+
+"""Represent an owner of a Event."""
+interface EventOwner {
+  """User ID"""
+  id: ID!
+
+  """User username"""
+  username: String
+
+  """Get all events that the user owns."""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for events returned from the connection.
+    For example, OWNER will include only events that the current viewer owns.
+    
+    """
+    affiliations: [EventAffiliation!]
+
+    """the search query"""
+    search: String
+
+    """The ordering direction for events."""
+    orderBy: EventOrder = {field: START_AT, direction: DESC}
+
+    """Filter events by a given status."""
+    status: EventStatus = null
+
+    """only fetch where user is author"""
+    onlyWhenAuthor: Boolean = false
+  ): EventConnection!
 }
 
 """Type of refused event reason"""
@@ -5311,6 +5362,30 @@ enum EventReviewStatus {
 
   """The review is in refused status."""
   REFUSED
+
+  """The event is published"""
+  PUBLISHED
+
+  """The event is not published"""
+  NOT_PUBLISHED
+
+  """The event deleted"""
+  DELETED
+}
+
+"""List of available filters to filter `Event`"""
+enum EventStatus {
+  """Filter by approved status."""
+  APPROVED
+
+  """Filter by awaiting status."""
+  AWAITING
+
+  """Filter by refused status."""
+  REFUSED
+
+  """Filter by deleted status."""
+  DELETED
 }
 
 """Translation of an event."""
@@ -14447,7 +14522,7 @@ enum UpdateUserEmailErrorCode {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & ProposalFormOwner {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner {
   """User ID"""
   id: ID!
 
@@ -14581,6 +14656,36 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """Filter by available questionnaires"""
     availableOnly: Boolean
   ): QuestionnaireConnection!
+
+  """Get all events that the user owns."""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Array of viewer's affiliation options for events returned from the connection.
+    For example, OWNER will include only events that the current viewer owns.
+    
+    """
+    affiliations: [EventAffiliation!]
+
+    """the search query"""
+    search: String
+
+    """The ordering direction for events."""
+    orderBy: EventOrder = {field: START_AT, direction: DESC}
+
+    """Filter events by a given status."""
+    status: EventStatus = null
+
+    """only fetch where user is author"""
+    onlyWhenAuthor: Boolean = false
+  ): EventConnection!
 
   """Get all `ProposalForms` that the user owns."""
   proposalForms(
@@ -14837,18 +14942,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ReportConnection!
-
-  """Get all events the user has created."""
-  events(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: EventOrder = {field: START_AT, direction: DESC}
-  ): EventConnection!
 
   """Return the user's contributions of the type requested."""
   contributions(

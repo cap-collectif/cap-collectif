@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Search\EventSearch;
@@ -9,7 +10,6 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Enum\OrderDirection;
@@ -47,12 +47,9 @@ class QueryEventsResolver implements ResolverInterface
 
     public function getEventsConnection(Argument $args): ConnectionInterface
     {
-        $totalCount = 0;
-
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $args,
-                &$totalCount
+            $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+                $args
             ) {
                 $filters = [];
                 $search = null;
@@ -98,23 +95,16 @@ class QueryEventsResolver implements ResolverInterface
                     $search = $args->offsetGet('search');
                 }
 
-                $results = $this->eventSearch->searchEvents(
-                    $offset,
+                return $this->eventSearch->searchEvents(
+                    $cursor,
                     $limit,
                     $search,
                     $filters,
                     $orderBy
                 );
-
-                $totalCount = (int) $results['count'];
-
-                return $results['events'];
             });
 
-            $connection = $paginator->auto($args, $totalCount);
-            $connection->setTotalCount($totalCount);
-
-            return $connection;
+            return $paginator->auto($args);
         } catch (\RuntimeException $exception) {
             $this->logger->error(
                 __METHOD__ .

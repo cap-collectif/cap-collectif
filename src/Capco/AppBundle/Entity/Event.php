@@ -222,6 +222,11 @@ class Event implements
      */
     private $authorAgreeToUsePersonalDataForEventOnly;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private ?User $owner;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -870,6 +875,21 @@ class Event implements
     public function setAnimator(?User $animator): self
     {
         $this->animator = $animator;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @return Event
+     */
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

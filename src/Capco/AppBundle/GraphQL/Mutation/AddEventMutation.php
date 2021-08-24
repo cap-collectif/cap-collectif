@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Security\EventVoter;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\DBAL\Exception\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -24,6 +25,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddEventMutation implements MutationInterface
@@ -37,6 +39,7 @@ class AddEventMutation implements MutationInterface
     private Publisher $publisher;
     private LocaleRepository $localeRepository;
     private GenerateJitsiRoomMutation $generateJitsiRoomMutation;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -47,7 +50,8 @@ class AddEventMutation implements MutationInterface
         Publisher $publisher,
         TranslatorInterface $translator,
         LocaleRepository $localeRepository,
-        GenerateJitsiRoomMutation $generateJitsiRoomMutation
+        GenerateJitsiRoomMutation $generateJitsiRoomMutation,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -58,13 +62,19 @@ class AddEventMutation implements MutationInterface
         $this->publisher = $publisher;
         $this->localeRepository = $localeRepository;
         $this->generateJitsiRoomMutation = $generateJitsiRoomMutation;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input, User $viewer): array
     {
         $values = $input->getArrayCopy();
 
-        if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
+        if (
+            isset($values['customCode']) &&
+            !empty($values['customCode']) &&
+            !$viewer->isAdmin() &&
+            !$viewer->isProjectAdmin()
+        ) {
             return [
                 'eventEdge' => null,
                 'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
@@ -100,12 +110,16 @@ class AddEventMutation implements MutationInterface
             $author = $this->globalIdResolver->resolve($values['author'], $viewer);
         }
 
-        // admin or superAdmin can set other user as author
-        if ($author && $viewer->isAdmin()) {
-            $event = (new Event())->setAuthor($author);
+        $event = new Event();
+
+        if ($viewer->isAdmin() || $viewer->isProjectAdmin()) {
+            $event->setOwner($viewer);
+            $event->setAuthor($author);
             $event->setEnabled(true);
-        } else {
-            $event = (new Event())->setAuthor($viewer);
+        }
+
+        if ($viewer->isOnlyUser()) {
+            $event->setAuthor($viewer);
             $event->setReview(new EventReview());
         }
 
@@ -195,6 +209,11 @@ class AddEventMutation implements MutationInterface
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
         }
+    }
+
+    public function isGranted(): bool
+    {
+        return $this->authorizationChecker->isGranted(EventVoter::CREATE, new Event());
     }
 
     private static function areDateInvalid(array $values): bool

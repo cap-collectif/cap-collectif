@@ -6,6 +6,7 @@ InternalUser:
         - InternalProjectOwner
         - InternalPostOwner
         - InternalQuestionnaireOwner
+        - InternalEventOwner
         - InternalProposalFormOwner
     config:
         description: "A user is an individual's account."
@@ -14,6 +15,7 @@ InternalUser:
             - InternalProjectOwner
             - InternalPostOwner
             - InternalQuestionnaireOwner
+            - InternalEventOwner
             - InternalProposalFormOwner
         fields:
             adminUrl:
@@ -241,15 +243,6 @@ InternalUser:
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all reports the user has done.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
-            events:
-                type: 'InternalEventConnection!'
-                argsBuilder: 'Relay::ForwardConnection'
-                description: 'Get all events the user has created.'
-                args:
-                    orderBy:
-                        type: 'PreviewEventOrder'
-                        defaultValue: { field: START_AT, direction: DESC }
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
             contributions:
                 type: 'ContributionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

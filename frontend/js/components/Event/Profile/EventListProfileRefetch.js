@@ -90,7 +90,7 @@ export default createRefetchContainer(
       fragment EventListProfileRefetch_user on User
         @argumentDefinitions(orderBy: { type: "EventOrder" }) {
         id
-        events(first: 100, orderBy: $orderBy) {
+        events(first: 100, orderBy: $orderBy, onlyWhenAuthor: true) {
           edges {
             node {
               id

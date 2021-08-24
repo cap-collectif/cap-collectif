@@ -1066,7 +1066,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      events {
+      events(onlyWhenAuthor: true) {
         edges {
           node {
             title

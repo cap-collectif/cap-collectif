@@ -142,7 +142,7 @@ class EventController extends Controller
                 $this->renderView('CapcoAppBundle:Event:cancel.html.twig', ['event' => $event])
             );
         }
-        $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
+        $this->denyAccessUnlessGranted(EventVoter::VIEW_FRONT, $event);
 
         // TODO https://github.com/cap-collectif/platform/issues/10940
         // we can use session to avoid this.

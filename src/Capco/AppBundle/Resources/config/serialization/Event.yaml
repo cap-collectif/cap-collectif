@@ -42,3 +42,8 @@ Capco\AppBundle\Entity\Event:
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchEvent]
+        owner:
+            groups: [Events, ElasticsearchEvent]
+        getStatus:
+            serialized_name: eventStatus
+            groups: [Events, ElasticsearchEvent]

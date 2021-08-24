@@ -104,18 +104,66 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $payload['event']->shouldBe($event);
     }
 
-    public function it_resolve_userErrors_on_unknown_id(
+    public function it_updates_an_event_with_new_author_and_new_animator(
         GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
         Arg $arguments,
-        User $viewer
+        User $viewer,
+        Form $form,
+        Event $event,
+        Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker,
+        User $newAuthor,
+        User $newAnimator
     ) {
-        $values = ['id' => 'base64id', 'body' => 'My body'];
+        $values = [
+            'id' => 'base64id',
+            'customCode' => 'abc',
+            'startAt' => '2050-02-03 10:00:00',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body',
+                ],
+            ],
+            'author' => 'abc',
+            'animator' => 'def',
+        ];
+
+        $viewer->isAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
-        $globalIdResolver->resolve('base64id', $viewer)->willReturn(null);
-        $this->__invoke($arguments, $viewer)->shouldBe([
-            'event' => null,
-            'userErrors' => [['message' => 'Could not find your event.']],
-        ]);
+        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
+        $event->getId()->willReturn('event1');
+        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+
+        $globalIdResolver->resolve($values['author'], $viewer)->willReturn($newAuthor);
+        $event->getAuthor()->willReturn(null);
+        $event->setAuthor($newAuthor)->shouldBeCalled();
+
+        $globalIdResolver->resolve($values['animator'], $viewer)->willReturn($newAnimator);
+        $event->getAnimator()->willReturn(null);
+        $event->setAnimator($newAnimator)->shouldBeCalled();
+
+        $formFactory->create(EventType::class, $event)->willReturn($form);
+        $form
+            ->submit(
+                [
+                    'customCode' => 'abc',
+                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']],
+                ],
+                false
+            )
+            ->willReturn(null);
+        $form->isValid()->willReturn(true);
+        $em->flush()->shouldBeCalled();
+        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
+        $publisher->publish('event.update', Argument::type(Message::class))->shouldNotBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['event']->shouldBe($event);
     }
 
     public function it_throws_error_on_invalid_form(
@@ -126,9 +174,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         FormError $error,
         User $viewer,
         Event $event,
-        EventReview $eventReview,
-        AuthorizationCheckerInterface $authorizationChecker,
-        AddEventMutation $addEventMutation
+        EventReview $eventReview
     ) {
         $values = ['id' => 'base64id', 'body' => '', 'translations' => []];
 
@@ -144,10 +190,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
             ->resolve('base64id', $viewer)
             ->shouldBeCalled()
             ->willReturn($event);
-        $authorizationChecker
-            ->isGranted(EventVoter::EDIT, $event)
-            ->shouldBeCalled()
-            ->willReturn(true);
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $eventReview->getStatus()->willReturn(EventReviewStatusType::AWAITING);
         $event->getId()->willReturn('id');
@@ -159,7 +201,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
-        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
 
         $this->__invoke($input, $viewer);
         $this->shouldThrow(GraphQLException::fromString('Invalid data.'));
@@ -178,35 +219,6 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
             'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
-        ]);
-    }
-
-    public function it_try_edit_a_user_event(
-        Arg $arguments,
-        User $viewer,
-        Event $event,
-        User $author,
-        AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $values = ['body' => 'My body', 'id' => 'base64id'];
-        $viewer->getId()->willReturn('iMNotTheAuthor');
-        $viewer->getUsername()->willReturn('My username is toto');
-        $viewer->isAdmin()->willReturn(false);
-        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
-
-        $author->isAdmin()->willReturn(false);
-        $author->getId()->willReturn('iMTheAuthor');
-        $author->getUsername()->willReturn('My username is titi');
-
-        $event->getAuthor()->willReturn($author);
-
-        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(false);
-
-        $arguments->getArrayCopy()->willReturn($values);
-        $this->__invoke($arguments, $viewer)->shouldBe([
-            'event' => null,
-            'userErrors' => [['message' => 'Access denied']],
         ]);
     }
 
@@ -269,5 +281,29 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $payload->shouldHaveCount(2);
         $payload['userErrors']->shouldBe([]);
         $payload['event']->shouldBe($event);
+    }
+
+    public function it_should_return_false_if_no_event_found(
+        GlobalIdResolver $globalIdResolver,
+        User $viewer
+    ) {
+        $eventId = 'abc';
+        $globalIdResolver->resolve($eventId, $viewer)->willReturn(null);
+        $this->isGranted($eventId, $viewer)->shouldReturn(false);
+    }
+
+    public function it_should_call_voter_if_event_found(
+        GlobalIdResolver $globalIdResolver,
+        User $viewer,
+        Event $event,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $eventId = 'abc';
+        $globalIdResolver->resolve($eventId, $viewer)->willReturn($event);
+        $authorizationChecker
+            ->isGranted(EventVoter::EDIT, $event)
+            ->willReturn(true)
+            ->shouldBeCalled();
+        $this->isGranted($eventId, $viewer);
     }
 }

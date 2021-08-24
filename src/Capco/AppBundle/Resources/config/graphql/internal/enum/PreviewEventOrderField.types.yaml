@@ -1,12 +1,7 @@
 PreviewEventOrderField:
-  type: enum
-  config:
-    name: EventOrderField
-    description: 'Ordering options for events returned from the connection.'
-    values:
-      END_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\EventOrderField::END_AT")'
-        description: 'Order by the end date of the time range.'
-      START_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\EventOrderField::START_AT")'
-        description: 'Order by the start date of the time range.'
+    type: enum
+    inherits:
+        - InternalEventOrderField
+    config:
+        name: EventOrderField
+        description: 'Ordering options for events returned from the connection.'
