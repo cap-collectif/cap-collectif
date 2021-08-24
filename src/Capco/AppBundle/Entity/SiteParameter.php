@@ -31,6 +31,8 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'proposal.pagination',
         'homepage.jumbotron.share_button',
         'members.pagination.size',
+        'admin.mail.notifications.send_name',
+        'admin.mail.notifications.send_address',
         'admin.mail.notifications.receive_address',
         'snalytical-tracking-scripts-on-all-pages',
         'ad-scripts-on-all-pages',
