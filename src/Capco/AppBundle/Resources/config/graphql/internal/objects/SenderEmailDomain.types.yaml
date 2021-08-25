@@ -4,6 +4,9 @@ SenderEmailDomain:
         name: SenderEmailDomain
         description: Represent a registered domain name for a mailer service
         fields:
+            id:
+                type: 'ID!'
+                description: 'Uuid of the domain.'
             value:
                 type: 'String!'
                 description: 'The domain, eg cap-collectif.com.'

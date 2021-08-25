@@ -1,7 +1,13 @@
 Capco\AppBundle\Entity\SenderEmailDomain:
     mandrillCapco:
+        id: 'mandrillCapco'
         value: 'cap-collectif.com'
         service: 'mandrill'
     mailjetCapco:
+        id: 'mailjetCapco'
         value: 'cap-collectif.com'
+        service: 'mailjet'
+    mailjetElysee:
+        id: 'mailjetElysee'
+        value: 'elysee.gouv'
         service: 'mailjet'

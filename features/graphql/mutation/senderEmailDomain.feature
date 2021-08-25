@@ -76,3 +76,64 @@ Scenario: Admin adds a new SenderEmailDomain
     }
   }
   """
+
+Scenario: Admin tries ti delete an used SenderEmailDomain
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: DeleteSenderEmailDomainInput!) {
+      deleteSenderEmailDomain(input: $input) {
+        deletedId
+        errorCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "mailjetCapco"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "deleteSenderEmailDomain": {
+        "deletedId": null,
+        "errorCode": "DOMAIN_USED"
+      }
+    }
+  }
+  """
+
+@database
+Scenario: Admin deletes a SenderEmailDomain
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: DeleteSenderEmailDomainInput!) {
+      deleteSenderEmailDomain(input: $input) {
+        deletedId
+        errorCode
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "mailjetElysee"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "deleteSenderEmailDomain": {
+        "deletedId": "mailjetElysee",
+        "errorCode": null
+      }
+    }
+  }
+  """

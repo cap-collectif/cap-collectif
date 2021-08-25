@@ -4715,6 +4715,30 @@ type DeleteSSOConfigurationPayload {
   clientMutationId: String
 }
 
+"""Possible errors on createSenderEmailDomain mutation."""
+enum DeleteSenderEmailDomainErrorCode {
+  """No SenderEmailDomain match your id"""
+  NOT_FOUND
+
+  """SenderEmailDomain is used by a SenderEmail"""
+  DOMAIN_USED
+}
+
+input DeleteSenderEmailDomainInput {
+  """The SenderEmailDomain to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSenderEmailDomainPayload {
+  """The deleted SenderEmailDomain."""
+  deletedId: ID
+
+  """The error generated, if any."""
+  errorCode: DeleteSenderEmailDomainErrorCode
+  clientMutationId: String
+}
+
 input DeleteSourceInput {
   """The ID to delete."""
   sourceId: ID!
@@ -6821,6 +6845,9 @@ type Mutation {
 
   """Create a senderEmailDomain."""
   createSenderEmailDomain(input: CreateSenderEmailDomainInput!): CreateSenderEmailDomainPayload
+
+  """Delete a senderEmailDomain."""
+  deleteSenderEmailDomain(input: DeleteSenderEmailDomainInput!): DeleteSenderEmailDomainPayload
 
   """Add an email to address to send emails."""
   createSenderEmail(input: CreateSenderEmailInput!): CreateSenderEmailPayload
@@ -12405,6 +12432,9 @@ type SenderEmail {
 
 """Represent a registered domain name for a mailer service"""
 type SenderEmailDomain {
+  """Uuid of the domain."""
+  id: ID!
+
   """The domain, eg cap-collectif.com."""
   value: String!
 

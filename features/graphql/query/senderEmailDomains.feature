@@ -35,6 +35,12 @@ Scenario: GraphQL admin wants to get all senderEmailDomains
           "service": "MANDRILL",
           "spfValidation": false,
           "dkimValidation": false
+        },
+        {
+          "value": "elysee.gouv",
+          "service": "MAILJET",
+          "spfValidation": false,
+          "dkimValidation": false
         }
       ]
     }

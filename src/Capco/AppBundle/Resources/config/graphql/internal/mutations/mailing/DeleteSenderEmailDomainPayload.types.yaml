@@ -1,0 +1,10 @@
+DeleteSenderEmailDomainPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedId:
+                type: 'ID'
+                description: 'The deleted SenderEmailDomain.'
+            errorCode:
+                type: 'DeleteSenderEmailDomainErrorCode'
+                description: 'The error generated, if any.'

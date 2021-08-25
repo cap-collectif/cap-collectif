@@ -1298,6 +1298,14 @@ InternalMutation:
                     inputType: CreateSenderEmailDomainInput
                     payloadType: CreateSenderEmailDomainPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailDomainMutation", [value])'
+            deleteSenderEmailDomain:
+                description: 'Delete a senderEmailDomain.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteSenderEmailDomainInput
+                    payloadType: DeleteSenderEmailDomainPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteSenderEmailDomainMutation", [value])'
             createSenderEmail:
                 description: 'Add an email to address to send emails.'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__emailing')"
