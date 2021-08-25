@@ -3,17 +3,23 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Post;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Security\PostVoter;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class PostAdminUrlResolver implements ResolverInterface
 {
-    private $router;
+    private RouterInterface $router;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(RouterInterface $router)
-    {
+    public function __construct(
+        RouterInterface $router,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->router = $router;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Post $post): string
@@ -23,5 +29,10 @@ class PostAdminUrlResolver implements ResolverInterface
             ['id' => $post->getId()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
+    }
+
+    public function isGranted(Post $post): bool
+    {
+        return $this->authorizationChecker->isGranted(PostVoter::EDIT, $post);
     }
 }

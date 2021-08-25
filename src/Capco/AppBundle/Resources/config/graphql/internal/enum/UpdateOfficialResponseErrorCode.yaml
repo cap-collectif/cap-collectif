@@ -22,3 +22,6 @@ UpdateOfficialResponseErrorCode:
             INVALID_DATE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::INVALID_DATE")'
                 description: 'The received date is not valid.'
+            NOT_ADMIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::NOT_ADMIN")'
+                description: 'Not admin of this project.'

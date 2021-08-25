@@ -127,3 +127,13 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@postWithOwner2'
         title: Deuxieme article possédé par un owner
         body: "Body de l'article avec owner2"
+    postWithOwnerOnProposalFr:
+        locale: fr-FR
+        translatable: '@postWithOwnerOnProposal'
+        title: Actualité du projet théo
+        body: "Body de l'actualité du projet théo"
+    postWithOwnerOnProposalEn:
+        locale: en-GB
+        translatable: '@postWithOwnerOnProposal'
+        title: Actuality of the project théo
+        body: 'Body of the actuality of the project théo'

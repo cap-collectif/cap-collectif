@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Security;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -47,6 +48,8 @@ class PostVoterSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(true);
         $subject->getOwner()->willReturn(null);
+        $subject->getProjects()->willReturn(new ArrayCollection());
+        $subject->getAuthors()->willReturn(new ArrayCollection());
 
         $this->vote($token, $subject, [PostVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED

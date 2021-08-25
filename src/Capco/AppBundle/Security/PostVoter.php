@@ -77,6 +77,12 @@ class PostVoter extends Voter
             return true;
         }
 
+        foreach ($post->getProjects() as $project) {
+            if ($project->getOwner() === $viewer) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

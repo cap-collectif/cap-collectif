@@ -25,10 +25,13 @@ type Variables = {
 };
 
 const mutation = graphql`
-  mutation ChangeProposalPublicationStatusMutation($input: ChangeProposalPublicationStatusInput!) {
+  mutation ChangeProposalPublicationStatusMutation(
+    $input: ChangeProposalPublicationStatusInput!
+    $viewerIsAdmin: Boolean!
+  ) {
     changeProposalPublicationStatus(input: $input) {
       proposal {
-        ...ProposalAdminStatusForm_proposal
+        ...ProposalAdminStatusForm_proposal @arguments(viewerIsAdmin: $viewerIsAdmin)
       }
     }
   }

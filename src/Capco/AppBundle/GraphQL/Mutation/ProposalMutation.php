@@ -45,11 +45,13 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
     use ResolverTrait;
+    protected AuthorizationCheckerInterface $authorizationChecker;
 
     private LoggerInterface $logger;
     private ProposalLikersDataLoader $proposalLikersDataLoader;
@@ -66,7 +68,8 @@ class ProposalMutation implements ContainerAwareInterface
         Publisher $publisher,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        Manager $manager
+        Manager $manager,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->logger = $logger;
         $this->proposalLikersDataLoader = $proposalLikersDataLoader;
@@ -75,6 +78,15 @@ class ProposalMutation implements ContainerAwareInterface
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->manager = $manager;
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
+    public function isGranted(string $id, ?User $viewer, string $accessType): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            $accessType,
+            $this->getProposal($id, $viewer)
+        );
     }
 
     public function changeNotation(Argument $input, $user)
@@ -505,20 +517,6 @@ class ProposalMutation implements ContainerAwareInterface
         unset($values['id']); // This only useful to retrieve the proposal
         $proposalForm = $proposal->getProposalForm();
 
-        if ($viewer !== $author && !$viewer->isAdmin()) {
-            $error = 'You must be the author to update a proposal.';
-            $this->logger->error($error);
-
-            throw new UserError($error);
-        }
-
-        if (!$proposal->canContribute($viewer) && !$viewer->isAdmin()) {
-            $error = 'Sorry, you can\'t contribute to this proposal anymore.';
-            $this->logger->error($error);
-
-            throw new UserError($error);
-        }
-
         $draft = false;
 
         $this->shouldBeDraft($proposal, $author, $values, $wasDraft, $draft);
@@ -574,9 +572,10 @@ class ProposalMutation implements ContainerAwareInterface
             $messageData['date'] = $now->format('Y-m-d H:i:s');
             $sendNotification = true;
         } else {
-            $sendNotification = $viewer->isAdmin() && $author !== $viewer ? false : true;
+            $sendNotification =
+                $proposal->viewerIsAdminOrOwner($viewer) && $author !== $viewer ? false : true;
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
-            $messageData['date'] = $proposal->getUpdatedAt()->format('Y-m-d H:i:s');
+            $messageData['date'] = $proposal->getLastModifiedAt()->format('Y-m-d H:i:s');
         }
         $indexer = $this->container->get(Indexer::class);
         if ($sendNotification) {
@@ -746,5 +745,10 @@ class ProposalMutation implements ContainerAwareInterface
             }
             unset($values['draft']);
         }
+    }
+
+    private function getProposal(string $id, ?User $viewer): ?Proposal
+    {
+        return $this->globalIdResolver->resolve($id, $viewer);
     }
 }

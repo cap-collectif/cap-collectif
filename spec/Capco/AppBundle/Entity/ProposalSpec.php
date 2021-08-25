@@ -43,18 +43,28 @@ class ProposalSpec extends ObjectBehavior
         $this->shouldImplement(DisplayableInBOInterface::class);
     }
 
-    public function it_can_be_seen_in_BO_only_by_admin_or_super_admin(
+    public function it_can_be_seen_in_BO_only_by_owner_admin_or_super_admin(
         User $viewer,
-        Proposal $proposal
+        Project $project,
+        CollectStep $step,
+        ProposalForm $proposalForm
     ): void {
+        $step->getProject()->willReturn($project);
+        $proposalForm->getStep()->willReturn($step);
+        $this->setProposalForm($proposalForm);
+
         $viewer->isAdmin()->willReturn(false);
         $this->viewerCanSeeInBo($viewer)->shouldReturn(false);
 
         $viewer->isAdmin()->willReturn(true);
         $this->viewerCanSeeInBo($viewer)->shouldReturn(true);
+
+        $viewer->isAdmin()->willReturn(false);
+        $project->getOwner()->willReturn($viewer);
+        $this->viewerCanSeeInBo($viewer)->shouldReturn(true);
     }
 
-    public function it_can_be_seen_by_admin_or_super_admin(User $viewer, Proposal $proposal): void
+    public function it_can_be_seen_by_admin_or_super_admin(User $viewer): void
     {
         $viewer->isAdmin()->willReturn(true);
         $this->viewerCanSee($viewer)->shouldReturn(true);
@@ -62,10 +72,13 @@ class ProposalSpec extends ObjectBehavior
 
     public function it_can_be_seen_by_author_if_not_published(
         User $viewer,
+        Project $project,
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
         $collectStep->isPrivate()->willReturn(true);
+        $collectStep->getProject()->willReturn($project);
+        $project->getOwner()->willReturn(null);
         $proposalForm->getStep()->willReturn($collectStep);
         $viewer->isAdmin()->willReturn(false);
         $this->setProposalForm($proposalForm);
@@ -92,11 +105,14 @@ class ProposalSpec extends ObjectBehavior
 
     public function it_can_be_seen_by_author_if_step_is_private(
         User $author,
+        Project $project,
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
         $author->isAdmin()->willReturn(false);
         $collectStep->isPrivate()->willReturn(true);
+        $collectStep->getProject()->willReturn($project);
+        $project->getOwner()->willReturn(null);
         $proposalForm->getStep()->willReturn($collectStep);
         $this->setProposalForm($proposalForm);
         $this->setProposalDecisionMaker(null);
@@ -107,12 +123,15 @@ class ProposalSpec extends ObjectBehavior
 
     public function it_can_be_seen_by_analyst_if_step_is_private(
         User $analyst,
+        Project $project,
         ProposalAnalyst $proposalAnalyst,
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
         $analyst->isAdmin()->willReturn(false);
         $collectStep->isPrivate()->willReturn(true);
+        $collectStep->getProject()->willReturn($project);
+        $project->getOwner()->willReturn(null);
         $proposalForm->getStep()->willReturn($collectStep);
         $this->setProposalForm($proposalForm);
         $this->setProposalDecisionMaker(null);
@@ -128,6 +147,24 @@ class ProposalSpec extends ObjectBehavior
         $this->viewerCanSee($analyst)->shouldReturn(true);
     }
 
+    public function it_can_be_seen_by_project_owner_if_step_is_private(
+        User $owner,
+        Project $project,
+        ProposalForm $proposalForm,
+        CollectStep $collectStep
+    ): void {
+        $owner->isAdmin()->willReturn(false);
+        $collectStep->isPrivate()->willReturn(true);
+        $collectStep->getProject()->willReturn($project);
+        $project->getOwner()->willReturn($owner);
+        $proposalForm->getStep()->willReturn($collectStep);
+        $this->setProposalForm($proposalForm);
+        $this->setProposalDecisionMaker(null);
+        $this->setSupervisor(null);
+
+        $this->viewerCanSee($owner)->shouldReturn(true);
+    }
+
     public function it_can_be_seen_by_admin_if_step_is_private(
         User $author,
         ProposalForm $proposalForm,
@@ -141,6 +178,74 @@ class ProposalSpec extends ObjectBehavior
         $this->setSupervisor(null);
         $this->setAuthor($author);
         $this->viewerCanSee($author)->shouldReturn(true);
+    }
+
+    public function it_should_know_if_viewer_is_admin_or_owner(
+        User $someoneElse,
+        User $owner,
+        User $admin,
+        ProposalForm $form,
+        CollectStep $step,
+        Project $project
+    ): void {
+        $project->getOwner()->willReturn($owner);
+        $step->getProject()->willReturn($project);
+        $form->getStep()->willReturn($step);
+        $this->setProposalForm($form);
+
+        $someoneElse
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $owner
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $admin
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(true);
+
+        $this->viewerIsAdminOrOwner(null)->shouldReturn(false);
+        $this->viewerIsAdminOrOwner($someoneElse)->shouldReturn(false);
+        $this->viewerIsAdminOrOwner($owner)->shouldReturn(true);
+        $this->viewerIsAdminOrOwner($admin)->shouldReturn(true);
+    }
+
+    public function it_should_know_who_can_update(
+        User $someoneElse,
+        User $author,
+        User $owner,
+        User $admin,
+        ProposalForm $form,
+        CollectStep $step,
+        Project $project
+    ): void {
+        $project->getOwner()->willReturn($owner);
+        $step->getProject()->willReturn($project);
+        $form->getStep()->willReturn($step);
+        $this->setProposalForm($form);
+        $this->setAuthor($author);
+
+        $someoneElse
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $author->isAdmin()->willReturn(false);
+        $owner
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $admin
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(true);
+
+        $this->viewerCanUpdate(null)->shouldReturn(false);
+        $this->viewerCanUpdate($someoneElse)->shouldReturn(false);
+        $this->viewerCanUpdate($author)->shouldReturn(true);
+        $this->viewerCanUpdate($owner)->shouldReturn(true);
+        $this->viewerCanUpdate($admin)->shouldReturn(true);
     }
 
     public function it_should_return_todo_progress_status()

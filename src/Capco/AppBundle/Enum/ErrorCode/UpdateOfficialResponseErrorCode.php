@@ -12,6 +12,7 @@ class UpdateOfficialResponseErrorCode implements EnumType
     public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
     public const PROPOSAL_HAS_RESPONSE = 'PROPOSAL_HAS_RESPONSE';
     public const INVALID_DATE = 'INVALID_DATE';
+    public const NOT_ADMIN = 'NOT_ADMIN';
 
     public const ALL = [
         self::ID_NOT_FOUND,
@@ -19,7 +20,8 @@ class UpdateOfficialResponseErrorCode implements EnumType
         self::NO_AUTHOR,
         self::PROPOSAL_NOT_FOUND,
         self::PROPOSAL_HAS_RESPONSE,
-        self::INVALID_DATE
+        self::INVALID_DATE,
+        self::NOT_ADMIN
     ];
 
     public static function isValid($value): bool

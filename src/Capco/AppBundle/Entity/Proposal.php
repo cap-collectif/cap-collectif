@@ -82,12 +82,12 @@ class Proposal implements
     use ReferenceTrait;
     use SelfLinkableTrait;
     use SluggableTitleTrait;
+    use SocialNetworksValueTrait;
     use SoftDeleteTrait;
     use SummarizableTrait;
     use TimestampableTrait;
     use TrashableTrait;
     use UuidTrait;
-    use SocialNetworksValueTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -813,18 +813,28 @@ class Proposal implements
         return $this->getAuthor() === $user;
     }
 
-    /** @var User */
+    public function viewerIsAdminOrOwner(?User $viewer): bool
+    {
+        return $viewer && ($viewer->isAdmin() || $this->getProjectOwner() === $viewer);
+    }
+
     public function viewerCanSeeInBo($user = null): bool
     {
-        return $user && $user->isAdmin();
+        return $this->viewerIsAdminOrOwner($user);
+    }
+
+    public function viewerCanUpdate(?User $viewer = null): bool
+    {
+        return $viewer && ($this->getAuthor() === $viewer || $this->viewerIsAdminOrOwner($viewer));
     }
 
     public function viewerCanSee(?User $viewer = null): bool
     {
-        // Admin and SuperAdmin can access everything
-        if ($viewer && $viewer->isAdmin()) {
+        // Owner, Admin and SuperAdmin can always access
+        if ($this->viewerIsAdminOrOwner($viewer)) {
             return true;
         }
+
         if ($this->isPrivate() && !$viewer && empty($this->getSelectionSteps())) {
             return false;
         }
@@ -984,6 +994,11 @@ class Proposal implements
         }
 
         return null;
+    }
+
+    public function getProjectOwner(): ?User
+    {
+        return $this->getProject() ? $this->getProject()->getOwner() : null;
     }
 
     public function getSelectionStepsIds(): array

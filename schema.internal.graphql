@@ -13754,6 +13754,9 @@ enum UpdateOfficialResponseErrorCode {
 
   """The received date is not valid."""
   INVALID_DATE
+
+  """Not admin of this project."""
+  NOT_ADMIN
 }
 
 input UpdateOfficialResponseInput {

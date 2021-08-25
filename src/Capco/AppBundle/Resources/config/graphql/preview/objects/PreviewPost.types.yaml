@@ -38,7 +38,7 @@ PreviewPost:
                 type: 'URI!'
                 description: 'The admin url for this post.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", [value])'
-                access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver").isGranted(value)'
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
             media:

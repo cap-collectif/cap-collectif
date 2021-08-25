@@ -22,7 +22,7 @@ Scenario: Admin sends no valid proposal and receives an error
     "variables": {
       "input": {
         "proposalIds": ["idonotexist", "meneither"],
-        "stepIds": ["nostep"]
+        "stepIds": ["U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="]
       }
     }
   }
@@ -198,4 +198,3 @@ Scenario: Admin remove a step from two proposals, only one having it
     }
   }
   """
-

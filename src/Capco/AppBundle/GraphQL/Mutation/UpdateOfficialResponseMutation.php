@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\OfficialResponse;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
@@ -107,6 +108,9 @@ class UpdateOfficialResponseMutation implements MutationInterface
         $proposal = $this->resolver->resolve($proposalId, $user);
         if (null === $proposal) {
             throw new UserError(UpdateOfficialResponseErrorCode::PROPOSAL_NOT_FOUND);
+        }
+        if (!$proposal->viewerIsAdminOrOwner($user)) {
+            throw new UserError(UpdateOfficialResponseErrorCode::NOT_ADMIN);
         }
         if (
             $proposal->getOfficialResponse() &&

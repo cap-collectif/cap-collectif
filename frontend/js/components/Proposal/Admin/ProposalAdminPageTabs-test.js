@@ -17,6 +17,10 @@ describe('<ProposalAdminPageTabs />', () => {
         totalCount: 169,
       },
     },
+    viewer: {
+      $refType,
+      $fragmentRefs,
+    },
   };
 
   it('render correctly', () => {

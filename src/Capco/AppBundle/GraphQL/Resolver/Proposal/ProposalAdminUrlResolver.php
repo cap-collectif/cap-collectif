@@ -24,6 +24,9 @@ class ProposalAdminUrlResolver implements ResolverInterface
     public function __invoke(Proposal $proposal, $viewer, ?ArrayObject $context = null): ?string
     {
         $isAuthorized = $this->isAdminOrAuthorized($context, $viewer);
+        if ($viewer && $proposal->getProject()->getOwner() === $viewer) {
+            $isAuthorized = true;
+        }
 
         if (!$isAuthorized) {
             throw new UserWarning('Access denied to this field.');

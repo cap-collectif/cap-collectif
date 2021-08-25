@@ -24,11 +24,37 @@ describe('<ProposalAdminOfficialAnswerForm />', () => {
     publishedAt: '2017-02-01 00:03:00',
   };
 
+  const admin = {
+    $refType,
+    id: 'adminId',
+    username: 'admin',
+    isAdmin: true,
+  };
+
+  const owner = {
+    $refType,
+    id: 'ownerId',
+    username: 'owner',
+    isAdmin: false,
+  };
+
   it('render correctly without response', () => {
     const wrapper = shallow(
       <ProposalAdminOfficialAnswerForm
         {...props}
         proposal={{ id: 'proposal3', $refType, officialResponse: null }}
+        viewer={admin}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly without response as owner', () => {
+    const wrapper = shallow(
+      <ProposalAdminOfficialAnswerForm
+        {...props}
+        proposal={{ id: 'proposal3', $refType, officialResponse: null }}
+        viewer={owner}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -39,6 +65,7 @@ describe('<ProposalAdminOfficialAnswerForm />', () => {
       <ProposalAdminOfficialAnswerForm
         {...props}
         proposal={{ id: 'proposal3', $refType, officialResponse }}
+        viewer={admin}
       />,
     );
     expect(wrapper).toMatchSnapshot();

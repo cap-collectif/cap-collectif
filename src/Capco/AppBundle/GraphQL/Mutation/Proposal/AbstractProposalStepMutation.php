@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Mutation\Proposal;
-
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -23,27 +21,30 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractProposalStepMutation
 {
-    protected EntityManagerInterface    $entityManager;
-    private GlobalIdResolver            $globalIdResolver;
-    private SelectionRepository         $selectionRepository;
-    private ConnectionBuilder           $connectionBuilder;
-    private Publisher                   $publisher;
-    private Indexer                     $indexer;
+    protected EntityManagerInterface $entityManager;
+    protected AuthorizationCheckerInterface $authorizationChecker;
 
     //restrictions
-    protected ?Project                  $project = null;
-    protected ?AbstractStep             $step = null;
+    protected ?Project $project = null;
+    protected ?AbstractStep $step = null;
+    protected GlobalIdResolver $globalIdResolver;
+    private SelectionRepository $selectionRepository;
+    private ConnectionBuilder $connectionBuilder;
+    private Publisher $publisher;
+    private Indexer $indexer;
 
     public function __construct(
-        EntityManagerInterface  $entityManager,
-        GlobalIdResolver        $globalIdResolver,
-        SelectionRepository     $selectionRepository,
-        ConnectionBuilder       $connectionBuilder,
-        Publisher               $publisher,
-        Indexer                 $indexer
+        EntityManagerInterface $entityManager,
+        GlobalIdResolver $globalIdResolver,
+        SelectionRepository $selectionRepository,
+        ConnectionBuilder $connectionBuilder,
+        Publisher $publisher,
+        Indexer $indexer,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->entityManager = $entityManager;
         $this->globalIdResolver = $globalIdResolver;
@@ -51,6 +52,23 @@ abstract class AbstractProposalStepMutation
         $this->connectionBuilder = $connectionBuilder;
         $this->publisher = $publisher;
         $this->indexer = $indexer;
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
+    public function isGranted(array $stepsIds, ?User $viewer, string $accessType): bool
+    {
+        foreach ($stepsIds as $stepId) {
+            $step = $this->globalIdResolver->resolve($stepId, $viewer);
+            if (
+                !$step ||
+                !$step->getProject() ||
+                !$this->authorizationChecker->isGranted($accessType, $step->getProject())
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     protected function getConnection(array $proposals, Argument $args): ConnectionInterface
@@ -59,7 +77,7 @@ abstract class AbstractProposalStepMutation
             array_values($proposals),
             $args
         );
-        $connection->setTotalCount(count($proposals));
+        $connection->setTotalCount(\count($proposals));
 
         return $connection;
     }
@@ -76,12 +94,10 @@ abstract class AbstractProposalStepMutation
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
                 new Message(
-                    json_encode(
-                        [
-                            'proposalId' => $proposal->getId(),
-                            'date' => new \DateTime(),
-                        ]
-                    )
+                    json_encode([
+                        'proposalId' => $proposal->getId(),
+                        'date' => new \DateTime(),
+                    ])
                 )
             );
         }
@@ -99,7 +115,7 @@ abstract class AbstractProposalStepMutation
     {
         return $this->selectionRepository->findOneBy([
             'proposal' => $proposal,
-            'selectionStep' => $step
+            'selectionStep' => $step,
         ]);
     }
 
@@ -109,7 +125,7 @@ abstract class AbstractProposalStepMutation
 
         if ($id) {
             $status = $this->entityManager->getRepository(Status::class)->find($id);
-            if (is_null($status)) {
+            if (null === $status) {
                 throw new UserError(ProposalStepErrorCode::NO_VALID_STATUS);
             }
 
@@ -152,9 +168,11 @@ abstract class AbstractProposalStepMutation
     private function addProposalIfValid(?Proposal $proposal, array &$proposals): void
     {
         if (
-            $proposal
-            && (is_null($this->project) || $proposal->getProject() === $this->project)
-            && (is_null($this->step) || $proposal->getStep() === $this->step || in_array($this->step, $proposal->getSelectionSteps()))
+            $proposal &&
+            (null === $this->project || $proposal->getProject() === $this->project) &&
+            (null === $this->step ||
+                $proposal->getStep() === $this->step ||
+                \in_array($this->step, $proposal->getSelectionSteps()))
         ) {
             $proposals[$proposal->getId()] = $proposal;
             $this->project = $proposal->getProject();
@@ -163,13 +181,8 @@ abstract class AbstractProposalStepMutation
 
     private function addStepIfValid(?AbstractStep $step, array &$steps): void
     {
-        if (
-            $step
-            && $step->isSelectionStep()
-            && $step->getProject() === $this->project
-        ) {
+        if ($step && $step->isSelectionStep() && $step->getProject() === $this->project) {
             $steps[$step->getId()] = $step;
         }
     }
-
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Mutation\Proposal;
-
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
@@ -18,6 +16,7 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
     {
         $error = null;
         $proposals = [];
+
         try {
             $status = $this->getStatus($args->offsetGet('statusId'), $user);
             $proposals = $this->getProposals($args->offsetGet('proposalIds'), $user);
@@ -28,8 +27,32 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
 
         return [
             'proposals' => $this->getConnection($proposals, $args),
-            'error' => $error
+            'error' => $error,
         ];
+    }
+
+    public function isGrantedStatus(array $input, ?User $viewer, string $accessType): bool
+    {
+        $statusId = $input['statusId'];
+        if ($statusId) {
+            $status = $this->entityManager->getRepository(Status::class)->find($statusId);
+            if (null === $status || !$this->authorizationChecker->isGranted($accessType, $status->getStep()->getProject())) {
+                return false;
+            }
+        }
+
+        return $this->isGrantedStatusCheckProposals($input['proposalIds'], $viewer, $accessType);
+    }
+
+    private function isGrantedStatusCheckProposals(array $proposalsId, ?User $viewer, string $accessType): bool
+    {
+        foreach($this->getProposals($proposalsId, $viewer) as $proposal) {
+            if (!$this->authorizationChecker->isGranted($accessType, $proposal)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function applyStatusToSeveralProposals(array &$proposals, ?Status $status): void
@@ -54,8 +77,9 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
 
     private function applyStatusToCollectStep(Proposal $proposal, ?Status $status): bool
     {
-        if (is_null($status) || $status->getStep()->isCollectStep()) {
+        if (null === $status || $status->getStep()->isCollectStep()) {
             $proposal->setStatus($status);
+
             return true;
         }
 
@@ -65,7 +89,7 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
     private function applyStatusToSelectionSteps(Proposal $proposal, ?Status $status): bool
     {
         $hasChanged = false;
-        if (is_null($status) || $status->getStep()->isSelectionStep()) {
+        if (null === $status || $status->getStep()->isSelectionStep()) {
             foreach ($proposal->getSelections() as $selection) {
                 $hasChanged = $this->applyStatusToSelection($selection, $status);
             }
@@ -76,15 +100,16 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
 
     private function applyStatusToSelection(Selection $selection, ?Status $status): bool
     {
-        if ((is_null($status) || ($status->getStep() === $selection->getStep()))
-            && $selection->getStatus() !== $status
+        if (
+            (null === $status || $status->getStep() === $selection->getStep()) &&
+            $selection->getStatus() !== $status
         ) {
             $selection->setStatus($status);
             $this->entityManager->persist($selection);
+
             return true;
         }
 
         return false;
-
     }
 }

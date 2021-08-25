@@ -129,7 +129,7 @@ class ProposalAnalysisRelatedVoter extends Voter
             return true;
         }
 
-        return $this->viewerIsAdmin();
+        return $subject->viewerIsAdminOrOwner($viewer);
     }
 
     private function canAnalyse(Proposal $subject, User $viewer): bool

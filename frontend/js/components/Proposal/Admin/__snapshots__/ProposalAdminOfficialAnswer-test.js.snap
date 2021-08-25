@@ -105,6 +105,12 @@ exports[`<ProposalAdminOfficialAnswer /> render correctly without response 1`] =
         },
       }
     }
+    viewer={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
   />
 </div>
 `;

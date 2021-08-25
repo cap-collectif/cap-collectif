@@ -18,6 +18,7 @@
 {{ react_render_component('ProposalAdminPageApp', {
   'props': {
     'proposalId': admin.subject.id,
+    'viewerIsAdmin': app.user.isAdmin
   },
   'rendering': 'client_side'
 }) }}

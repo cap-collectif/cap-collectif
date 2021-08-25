@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Security\ProposalFormVoter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -49,5 +50,19 @@ class ProposalFormController extends CRUDController
         $this->addFlash('sonata_flash_success', 'your-form-has-been-duplicated');
 
         return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $filters]));
+    }
+
+    public function editAction($id = null)
+    {
+        $this->throwIfNoAccess();
+
+        return parent::editAction($id);
+    }
+
+    private function throwIfNoAccess()
+    {
+        if (!$this->isGranted(ProposalFormVoter::EDIT, $this->admin->getSubject())) {
+            throw $this->createAccessDeniedException();
+        }
     }
 }

@@ -23,10 +23,11 @@ Scenario: Admin sends no valid status and receives an error
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {"message":"Access denied to this field.","@*@": "@*@"}
+    ],
     "data": {
-      "applyProposalStatus": {
-        "error": "NO_VALID_STATUS"
-      }
+      "applyProposalStatus": null
     }
   }
   """

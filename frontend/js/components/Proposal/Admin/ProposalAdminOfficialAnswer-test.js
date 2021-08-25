@@ -14,6 +14,11 @@ describe('<ProposalAdminOfficialAnswer />', () => {
     form: { adminUrl: '/adminurl' },
   };
 
+  const viewer = {
+    $refType,
+    $fragmentRefs,
+  };
+
   const officialResponse = {
     id: 'response',
     authors: [],
@@ -31,6 +36,7 @@ describe('<ProposalAdminOfficialAnswer />', () => {
             hasAnalysis: true,
           },
         }}
+        viewer={viewer}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -46,6 +52,7 @@ describe('<ProposalAdminOfficialAnswer />', () => {
             hasAnalysis: false,
           },
         }}
+        viewer={viewer}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -62,6 +69,7 @@ describe('<ProposalAdminOfficialAnswer />', () => {
             hasAnalysis: false,
           },
         }}
+        viewer={viewer}
       />,
     );
     expect(wrapper).toMatchSnapshot();

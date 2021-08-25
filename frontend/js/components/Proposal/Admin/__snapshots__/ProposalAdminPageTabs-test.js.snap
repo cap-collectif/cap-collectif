@@ -80,6 +80,12 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
             "url": "",
           }
         }
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
       />
     </Tab>
     <Tab

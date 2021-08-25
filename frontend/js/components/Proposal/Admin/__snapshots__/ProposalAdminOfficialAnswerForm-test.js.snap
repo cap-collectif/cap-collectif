@@ -21,6 +21,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly with response 1`] 
         ariaControls="EventListFilters-filter-author-listbox"
         authorOfEvent={false}
         autoload={false}
+        blockClassName="author_field"
         className=""
         clearable={true}
         debounce={true}
@@ -67,6 +68,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly with response 1`] 
         }
         name="publishedAt"
         type="datetime"
+        wrapperClassName="published_field"
       />
     </ProposalAdminOfficialAnswerForm__Form>
   </ProposalAdminstyle__Container>
@@ -116,6 +118,7 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly without response 1
         ariaControls="EventListFilters-filter-author-listbox"
         authorOfEvent={false}
         autoload={false}
+        blockClassName="author_field"
         className=""
         clearable={true}
         debounce={true}
@@ -161,6 +164,67 @@ exports[`<ProposalAdminOfficialAnswerForm /> render correctly without response 1
         }
         name="publishedAt"
         type="datetime"
+        wrapperClassName="published_field"
+      />
+    </ProposalAdminOfficialAnswerForm__Form>
+  </ProposalAdminstyle__Container>
+  <Connect(SubmitButton)
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_official_answer_publish"
+    label="source.create.submit"
+    onSubmit={[Function]}
+    type="submit"
+  />
+</div>
+`;
+
+exports[`<ProposalAdminOfficialAnswerForm /> render correctly without response as owner 1`] = `
+<div
+  className="mt-20"
+>
+  <ProposalAdminstyle__Container>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="official.answer"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <ProposalAdminOfficialAnswerForm__Form
+      id="proposalAdminOfficialAnswerForm"
+      onSubmit={[MockFunction]}
+    >
+      <Field
+        component={[Function]}
+        id="body"
+        label={
+          <FormattedMessage
+            id="global.reply"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="editor"
+      />
+      <Field
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "disabled": undefined,
+          }
+        }
+        id="publishedAt"
+        label={
+          <FormattedMessage
+            id="global.updated.date"
+            values={Object {}}
+          />
+        }
+        name="publishedAt"
+        type="datetime"
+        wrapperClassName="published_field"
       />
     </ProposalAdminOfficialAnswerForm__Form>
   </ProposalAdminstyle__Container>

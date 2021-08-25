@@ -12,14 +12,16 @@ import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import { Label } from '~/components/Ui/Labels/Label';
 import ProposalAdminOfficialAnswerForm from './ProposalAdminOfficialAnswerForm';
 import { Container } from './ProposalAdmin.style';
+import type { ProposalAdminOfficialAnswer_viewer } from '~relay/ProposalAdminOfficialAnswer_viewer.graphql';
 
 type Props = {|
   proposal: ProposalAdminOfficialAnswer_proposal,
+  viewer: ProposalAdminOfficialAnswer_viewer,
 |};
 
 type View = 'VIEW' | 'EDIT' | 'NONE';
 
-export const ProposalAdminOfficialAnswer = ({ proposal }: Props) => {
+export const ProposalAdminOfficialAnswer = ({ proposal, viewer }: Props) => {
   const { officialResponse } = proposal;
   const hasAnalysis = proposal?.project?.hasAnalysis;
   const authors = officialResponse?.authors || [];
@@ -95,7 +97,11 @@ export const ProposalAdminOfficialAnswer = ({ proposal }: Props) => {
         </>
       )}
       {mode === 'EDIT' && (
-        <ProposalAdminOfficialAnswerForm proposal={proposal} onValidate={() => setMode('VIEW')} />
+        <ProposalAdminOfficialAnswerForm
+          proposal={proposal}
+          viewer={viewer}
+          onValidate={() => setMode('VIEW')}
+        />
       )}
       {mode === 'NONE' && (
         <InfoContainer>
@@ -134,6 +140,11 @@ export default createFragmentContainer(ProposalAdminOfficialAnswer, {
         }
         publishedAt
       }
+    }
+  `,
+  viewer: graphql`
+    fragment ProposalAdminOfficialAnswer_viewer on User {
+      ...ProposalAdminOfficialAnswerForm_viewer
     }
   `,
 });

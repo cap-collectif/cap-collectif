@@ -45,6 +45,7 @@ const onSubmit = (
 
   ChangeProposalPublicationStatusMutation.commit({
     input,
+    viewerIsAdmin: true,
     author: proposal.author,
     parametersConnection,
     parentConnectionId,

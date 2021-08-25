@@ -31,11 +31,32 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
               "kind": "LocalArgument",
               "name": "proposalRevisionsEnabled",
             },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "viewerIsAdmin",
+            },
           ],
           "kind": "Fragment",
           "metadata": null,
           "name": "ProposalAdminPageQuery",
           "selections": Array [
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "viewer",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "ProposalAdminPageTabs_viewer",
+                },
+              ],
+              "storageKey": null,
+            },
             Object {
               "alias": "proposal",
               "args": Array [
@@ -57,6 +78,11 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                       "name": "proposalRevisionsEnabled",
                       "variableName": "proposalRevisionsEnabled",
                     },
+                    Object {
+                      "kind": "Variable",
+                      "name": "viewerIsAdmin",
+                      "variableName": "viewerIsAdmin",
+                    },
                   ],
                   "kind": "FragmentSpread",
                   "name": "ProposalAdminPageTabs_proposal",
@@ -67,7 +93,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "c1370f9104e099c01c0b05feff0fe9b9",
+        "hash": "fe7e748b7a20fc22448d0e9230c1c958",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -89,12 +115,49 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
+              "name": "viewerIsAdmin",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
               "name": "cursor",
             },
           ],
           "kind": "Operation",
           "name": "ProposalAdminPageQuery",
           "selections": Array [
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "viewer",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "username",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "isAdmin",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
             Object {
               "alias": "proposal",
               "args": Array [
@@ -188,13 +251,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "email",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "isViewer",
                           "storageKey": null,
                         },
@@ -204,6 +260,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "kind": "ScalarField",
                           "name": "displayName",
                           "storageKey": null,
+                        },
+                        Object {
+                          "condition": "viewerIsAdmin",
+                          "kind": "Condition",
+                          "passingValue": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "email",
+                              "storageKey": null,
+                            },
+                          ],
                         },
                       ],
                       "storageKey": null,
@@ -2980,7 +3050,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3bd96ae2f87c8402d9bf61914ceb6543",
+          "cacheID": "853d976640292f0235d42541fabd8dcc",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2989,11 +3059,16 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
   $id: ID!
   $count: Int!
   $proposalRevisionsEnabled: Boolean!
+  $viewerIsAdmin: Boolean!
   $cursor: String
 ) {
+  viewer {
+    ...ProposalAdminPageTabs_viewer
+    id
+  }
   proposal: node(id: $id) {
     __typename
-    ...ProposalAdminPageTabs_proposal_2uwUKI
+    ...ProposalAdminPageTabs_proposal_1WGO9S
     id
   }
 }
@@ -3377,6 +3452,12 @@ fragment ProposalAdminOfficialAnswerForm_proposal on Proposal {
   }
 }
 
+fragment ProposalAdminOfficialAnswerForm_viewer on User {
+  id
+  username
+  isAdmin
+}
+
 fragment ProposalAdminOfficialAnswer_proposal on Proposal {
   id
   form {
@@ -3400,10 +3481,14 @@ fragment ProposalAdminOfficialAnswer_proposal on Proposal {
   }
 }
 
-fragment ProposalAdminPageTabs_proposal_2uwUKI on Proposal {
+fragment ProposalAdminOfficialAnswer_viewer on User {
+  ...ProposalAdminOfficialAnswerForm_viewer
+}
+
+fragment ProposalAdminPageTabs_proposal_1WGO9S on Proposal {
   url
   reference
-  ...ProposalAdminStatusForm_proposal
+  ...ProposalAdminStatusForm_proposal_2TMsX8
   ...ProposalAdminSelections_proposal
   ...ProposalAdminContentForm_proposal_2uwUKI
   ...ProposalAdminNotationForm_proposal
@@ -3413,6 +3498,10 @@ fragment ProposalAdminPageTabs_proposal_2uwUKI on Proposal {
   allFollowers: followers(first: 0) {
     totalCount
   }
+}
+
+fragment ProposalAdminPageTabs_viewer on User {
+  ...ProposalAdminOfficialAnswer_viewer
 }
 
 fragment ProposalAdminSelections_proposal on Proposal {
@@ -3458,7 +3547,7 @@ fragment ProposalAdminSelections_proposal on Proposal {
   }
 }
 
-fragment ProposalAdminStatusForm_proposal on Proposal {
+fragment ProposalAdminStatusForm_proposal_2TMsX8 on Proposal {
   id
   publicationStatus
   trashedReason
@@ -3466,7 +3555,7 @@ fragment ProposalAdminStatusForm_proposal on Proposal {
   author {
     id
     isEmailConfirmed
-    email
+    email @include(if: $viewerIsAdmin)
     isViewer
   }
 }
@@ -3594,6 +3683,7 @@ fragment UserPreview_user on User {
         "cursor": null,
         "id": 1,
         "proposalRevisionsEnabled": false,
+        "viewerIsAdmin": true,
       }
     }
   />

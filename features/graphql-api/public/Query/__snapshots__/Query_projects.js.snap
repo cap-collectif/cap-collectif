@@ -28,11 +28,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
-          "contributionsCount": 0,
+          "contributionsCount": 1,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
@@ -260,11 +260,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
-          "contributionsCount": 0,
+          "contributionsCount": 1,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",

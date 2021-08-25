@@ -30,6 +30,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProposalMutationSpec extends ObjectBehavior
 {
@@ -41,6 +42,7 @@ class ProposalMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         Manager $manager,
+        AuthorizationCheckerInterface $authorizationChecker,
         RedisCache $cache,
         AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
         AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver
@@ -53,6 +55,7 @@ class ProposalMutationSpec extends ObjectBehavior
             $em,
             $formFactory,
             $manager,
+            $authorizationChecker,
             $cache,
             $autoCompleteDocQueryResolver,
             $autoCompleteFromSiretQueryResolver
@@ -110,7 +113,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getUpdateAuthor()->willReturn($author);
         $proposal->getRevisions()->willReturn(new ArrayCollection());
         $proposal->getProposalForm()->willReturn($proposalForm);
-        $proposal->getUpdatedAt()->willReturn(new \DateTime());
+        $proposal->getLastModifiedAt()->willReturn(new \DateTime());
+        $proposal->viewerIsAdminOrOwner($author)->willReturn(false);
 
         $proposalForm->isUsingFacebook()->willReturn(false);
         $proposalForm->isUsingInstagram()->willReturn(false);
@@ -252,7 +256,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getUpdateAuthor()->willReturn($author);
         $proposal->getRevisions()->willReturn(new ArrayCollection());
         $proposal->getProposalForm()->willReturn($proposalForm);
-        $proposal->getUpdatedAt()->willReturn(new \DateTime());
+        $proposal->getLastModifiedAt()->willReturn(new \DateTime());
+        $proposal->viewerIsAdminOrOwner($author)->willReturn(false);
 
         $proposalForm->isUsingFacebook()->willReturn(false);
         $proposalForm->isUsingInstagram()->willReturn(false);
@@ -306,6 +311,113 @@ class ProposalMutationSpec extends ObjectBehavior
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
     }
 
+    public function it_change_content_as_project_owner(
+        Argument $input,
+        User $proposalAuthor,
+        User $owner,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        Proposal $proposal,
+        Form $form,
+        Indexer $indexer,
+        Publisher $publisher,
+        ProposalForm $proposalForm,
+        Container $container,
+        GlobalIdResolver $globalIdResolver,
+        ProposalSocialNetworks $proposalSocialNetworks,
+        Manager $manager
+    ) {
+        $this->setContainer($container);
+
+        $values = [];
+        $values['id'] = GlobalId::toGlobalId('Proposal', 'proposal10');
+        $values['draft'] = false;
+        $values['title'] = 'new title';
+        $container->get(Manager::class)->willReturn($manager);
+        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
+        $proposalAuthor->getId()->willReturn('userSpyl');
+        $proposalAuthor->getUsername()->willReturn('aUser');
+        $proposalAuthor->isEmailConfirmed()->willReturn(true);
+        $proposalAuthor->isAdmin()->willReturn(false);
+
+        $owner->getId()->willReturn('userThéo');
+        $owner->getUsername()->willReturn('aUser');
+        $owner->isEmailConfirmed()->willReturn(true);
+        $owner
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+
+        $input->getArrayCopy()->willReturn($values);
+
+        $proposal->getId()->willReturn('proposal10');
+        $proposal->isDraft()->willReturn(false);
+        $proposal->getAuthor()->willReturn($proposalAuthor);
+        $proposal->getPublishedAt()->willReturn(new \DateTime());
+        $proposal->isTrashed()->willReturn(false);
+        $proposal->getTitle()->willReturn('Proposal modified by admin');
+        $proposal->isInRevision()->willReturn(false);
+        $proposal->canContribute($owner)->willReturn(true);
+        $proposal->setUpdateAuthor($owner)->shouldBeCalled();
+        $proposal->getUpdateAuthor()->willReturn($owner);
+        $proposal->getRevisions()->willReturn(new ArrayCollection());
+        $proposal->getProposalForm()->willReturn($proposalForm);
+        $proposal->getLastModifiedAt()->willReturn(new \DateTime());
+        $proposal->viewerIsAdminOrOwner($owner)->willReturn(true);
+
+        $proposalForm->isUsingFacebook()->willReturn(false);
+        $proposalForm->isUsingInstagram()->willReturn(false);
+        $proposalForm->isUsingWebPage()->willReturn(false);
+        $proposalForm->isUsingTwitter()->willReturn(false);
+        $proposalForm->isUsingYoutube()->willReturn(false);
+        $proposalForm->isUsingLinkedIn()->willReturn(false);
+
+        $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
+        $proposalSocialNetworks->getProposal()->willReturn($proposal);
+        $proposal
+            ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
+            ->shouldBeCalled();
+
+        $globalIdResolver->resolve($values['id'], $owner)->willReturn($proposal);
+
+        $container->get(Indexer::class)->willReturn($indexer);
+        $container->get('swarrot.publisher')->willReturn($publisher);
+
+        $formFactory
+            ->create(ProposalAdminType::class, $proposal, [
+                'proposalForm' => $proposalForm,
+                'validation_groups' => ['Default'],
+            ])
+            ->willReturn($form);
+        $publisher
+            ->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
+                \Prophecy\Argument::type(\Swarrot\Broker\Message::class)
+            )
+            ->shouldNotBeCalled();
+        $form
+            ->submit(
+                [
+                    'title' => 'new title',
+                ],
+                false
+            )
+            ->willReturn(null);
+        $form->isValid()->willReturn(true);
+        $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldNotBeCalled();
+
+        $form->remove('author')->shouldBeCalled();
+
+        $em->flush()->shouldBeCalled();
+
+        $indexer
+            ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
+            ->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
+
+        $this->changeContent($input, $owner)->shouldBe(['proposal' => $proposal]);
+    }
+
     public function it_change_content_as_role_admin(
         Argument $input,
         User $proposalAuthor,
@@ -354,7 +466,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getUpdateAuthor()->willReturn($admin);
         $proposal->getRevisions()->willReturn(new ArrayCollection());
         $proposal->getProposalForm()->willReturn($proposalForm);
-        $proposal->getUpdatedAt()->willReturn(new \DateTime());
+        $proposal->getLastModifiedAt()->willReturn(new \DateTime());
+        $proposal->viewerIsAdminOrOwner($admin)->willReturn(true);
 
         $proposalForm->isUsingFacebook()->willReturn(false);
         $proposalForm->isUsingInstagram()->willReturn(false);

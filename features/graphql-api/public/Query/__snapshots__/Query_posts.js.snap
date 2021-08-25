@@ -164,6 +164,26 @@ Object {
       ],
     },
     Object {
+      "enTitle": "Actuality of the project théo",
+      "frTitle": "Actualité du projet théo",
+      "id": "UG9zdDpwb3N0V2l0aE93bmVyT25Qcm9wb3NhbA==",
+      "title": "Actualité du projet théo",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Body of the actuality of the project théo",
+          "locale": "EN_GB",
+          "title": "Actuality of the project théo",
+        },
+        Object {
+          "abstract": null,
+          "body": "Body de l'actualité du projet théo",
+          "locale": "FR_FR",
+          "title": "Actualité du projet théo",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

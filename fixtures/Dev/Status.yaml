@@ -153,3 +153,9 @@ Capco\AppBundle\Entity\Status:
         color: info
         createdAt: <identity((new \DateTime('2021-01-01 00:00:01')))>
         updatedAt: $createdAt
+    statusCollectStepProjectWithOwner:
+        id: statusCollectStepProjectWithOwner
+        name: Rejeté
+        position: 1
+        step: '@collectStepProjectWithOwner'
+        color: danger

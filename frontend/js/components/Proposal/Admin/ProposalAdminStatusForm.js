@@ -22,6 +22,7 @@ type Props = {|
   ...RelayProps,
   publicationStatus: string,
   isSuperAdmin: boolean,
+  viewerIsAdmin: boolean,
   pristine: boolean,
   invalid: boolean,
   valid: boolean,
@@ -48,6 +49,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return ChangeProposalPublicationStatusMutation.commit({
     input,
     author: props.proposal.author,
+    viewerIsAdmin: props.viewerIsAdmin,
   });
 };
 
@@ -172,11 +174,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                 <Button
                   bsStyle="danger"
                   onClick={() => {
-                    if (
-                      window.confirm(
-                        intl.formatMessage({ id: 'opinion.delete.subtitle' }),
-                      )
-                    ) {
+                    if (window.confirm(intl.formatMessage({ id: 'opinion.delete.subtitle' }))) {
                       onDelete(proposal.id);
                     }
                   }}>
@@ -205,6 +203,7 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  viewerIsAdmin: state.user.user ? state.user.user.roles.includes('ROLE_ADMIN') : false,
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
@@ -217,7 +216,8 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalAdminStatusForm_proposal on Proposal {
+    fragment ProposalAdminStatusForm_proposal on Proposal
+      @argumentDefinitions(viewerIsAdmin: { type: "Boolean!" }) {
       id
       publicationStatus
       trashedReason
@@ -225,7 +225,7 @@ export default createFragmentContainer(container, {
       author {
         id
         isEmailConfirmed
-        email
+        email @include(if: $viewerIsAdmin)
         isViewer
       }
     }

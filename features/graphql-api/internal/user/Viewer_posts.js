@@ -62,10 +62,11 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(2);
-    expect(response.viewer.posts.edges).toHaveLength(2);
+    expect(response.viewer.posts.totalCount).toBe(3);
+    expect(response.viewer.posts.edges).toHaveLength(3);
     expect(response.viewer.posts.edges[0].node.owner.username).toBe('Théo QP');
     expect(response.viewer.posts.edges[1].node.owner.username).toBe('Théo QP');
+    expect(response.viewer.posts.edges[2].node.owner.username).toBe('Théo QP');
   });
 
   it('should correctly fetch all posts when affiliations is null.', async () => {
@@ -77,8 +78,8 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(22);
-    expect(response.viewer.posts.edges).toHaveLength(22);
+    expect(response.viewer.posts.totalCount).toBe(23);
+    expect(response.viewer.posts.edges).toHaveLength(23);
   });
 
   it('should correctly fetch posts filtered by a given query', async () => {
@@ -105,8 +106,8 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(22);
-    expect(response.viewer.posts.edges).toHaveLength(22);
+    expect(response.viewer.posts.totalCount).toBe(23);
+    expect(response.viewer.posts.edges).toHaveLength(23);
   });
 
   it('should correctly order posts by a given field and direction', async () => {

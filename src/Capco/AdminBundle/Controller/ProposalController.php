@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Controller;
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Resolver\ProposalResolver;
+use Capco\AppBundle\Security\ProposalVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -51,5 +52,19 @@ class ProposalController extends CRUDController
         $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
+    }
+
+    public function editAction($id = null)
+    {
+        $this->throwIfNoAccess();
+
+        return parent::editAction($id);
+    }
+
+    private function throwIfNoAccess()
+    {
+        if (!$this->isGranted(ProposalVoter::EDIT, $this->admin->getSubject())) {
+            throw $this->createAccessDeniedException();
+        }
     }
 }

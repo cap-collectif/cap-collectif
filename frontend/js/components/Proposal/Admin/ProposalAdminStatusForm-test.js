@@ -24,6 +24,7 @@ describe('<ProposalAdminStatusForm />', () => {
       <ProposalAdminStatusForm
         publicationStatus="UNPUBLISHED"
         isSuperAdmin
+        viewerIsAdmin
         pristine
         invalid={false}
         valid={false}
@@ -57,6 +58,7 @@ describe('<ProposalAdminStatusForm />', () => {
       <ProposalAdminStatusForm
         publicationStatus="PUBLISHED"
         isSuperAdmin
+        viewerIsAdmin
         pristine
         invalid={false}
         valid={false}

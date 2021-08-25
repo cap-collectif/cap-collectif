@@ -182,7 +182,7 @@ services:
             [
                 ~,
                 Capco\AppBundle\Entity\Proposal,
-                Capco\AdminBundle\Controller\CRUDController,
+                Capco\AdminBundle\Controller\ProposalController,
                 '@security.token_storage',
                 '@Capco\AppBundle\Elasticsearch\Indexer',
             ]

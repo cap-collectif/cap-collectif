@@ -14,10 +14,12 @@ import UserListField from '~/components/Admin/Field/UserListField';
 import component from '~/components/Form/Field';
 import SubmitButton from '~/components/Form/SubmitButton';
 import UpdateOfficialResponseMutation from '~/mutations/UpdateOfficialResponseMutation';
+import type { ProposalAdminOfficialAnswerForm_viewer } from '~relay/ProposalAdminOfficialAnswerForm_viewer.graphql';
 
 type Props = {|
   ...ReduxFormFormProps,
   proposal: ProposalAdminOfficialAnswerForm_proposal,
+  viewer: ProposalAdminOfficialAnswerForm_viewer,
   dispatch: Dispatch,
   onValidate: () => void,
   publishedAt: string,
@@ -27,11 +29,11 @@ type Props = {|
 |};
 
 const Form: StyledComponent<{}, {}, HTMLFormElement> = styled.form`
-  > div:first-child {
+  .author_field {
     max-width: 300px;
   }
 
-  > div:nth-child(3) {
+  .published_field {
     max-width: 164px;
   }
 
@@ -49,12 +51,12 @@ type FormValues = {|
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { onValidate, proposal } = props;
+  const { onValidate, proposal, viewer } = props;
   return UpdateOfficialResponseMutation.commit({
     input: {
       id: proposal.officialResponse?.id || undefined,
       body: values.body,
-      authors: values.authors.map(author => author.value),
+      authors: viewer.isAdmin ? values.authors.map(author => author.value) : [viewer.id],
       proposal: proposal.id,
       publishedAt: moment(values.publishedAt).format('YYYY-MM-DD HH:mm:ss'),
       isPublished:
@@ -90,6 +92,7 @@ const validate = ({ body, publishedAt, authors }: FormValues) => {
 
 export const ProposalAdminOfficialAnswerForm = ({
   proposal,
+  viewer,
   dispatch,
   publishedAt,
   pristine,
@@ -109,20 +112,23 @@ export const ProposalAdminOfficialAnswerForm = ({
           </h3>
         </div>
         <Form id={formName} onSubmit={handleSubmit}>
-          <UserListField
-            id="authors"
-            name="authors"
-            clearable
-            selectFieldIsObject
-            debounce
-            autoload={false}
-            multi
-            placeholder=" "
-            labelClassName="control-label"
-            inputClassName="fake-inputClassName"
-            label={<FormattedMessage id="admin.fields.project.authors" />}
-            ariaControls="EventListFilters-filter-author-listbox"
-          />
+          {viewer.isAdmin && (
+            <UserListField
+              id="authors"
+              blockClassName="author_field"
+              name="authors"
+              clearable
+              selectFieldIsObject
+              debounce
+              autoload={false}
+              multi
+              placeholder=" "
+              labelClassName="control-label"
+              inputClassName="fake-inputClassName"
+              label={<FormattedMessage id="admin.fields.project.authors" />}
+              ariaControls="EventListFilters-filter-author-listbox"
+            />
+          )}
           <Field
             type="editor"
             name="body"
@@ -133,6 +139,7 @@ export const ProposalAdminOfficialAnswerForm = ({
           <Field
             label={<FormattedMessage id="global.updated.date" />}
             id="publishedAt"
+            wrapperClassName="published_field"
             name="publishedAt"
             type="datetime"
             dateTimeInputProps={{
@@ -166,7 +173,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
   return {
     publishedAt: formValueSelector(formName)(state, 'publishedAt'),
     initialValues: {
-      authors: proposal.officialResponse?.authors || [],
+      authors: proposal.officialResponse?.authors ?? [],
       body: proposal.officialResponse?.body,
       publishedAt: moment(proposal.officialResponse?.publishedAt).format('YYYY-MM-DD HH:mm:ss'),
     },
@@ -195,6 +202,13 @@ export default createFragmentContainer(container, {
         publishedAt
         isPublished
       }
+    }
+  `,
+  viewer: graphql`
+    fragment ProposalAdminOfficialAnswerForm_viewer on User {
+      id
+      username
+      isAdmin
     }
   `,
 });
