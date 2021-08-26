@@ -155,7 +155,7 @@ class CloudflareElasticClient
                 )
             );
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function createPageViewsQuery(
@@ -186,7 +186,7 @@ class CloudflareElasticClient
                 )
             );
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function createMostVisitedPagesQuery(
@@ -219,7 +219,7 @@ class CloudflareElasticClient
                     ->setSize(10)
             );
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function createSearchEngineEntriesQuery(
@@ -264,7 +264,7 @@ class CloudflareElasticClient
             ->setSize(0)
             ->setTrackTotalHits(true);
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function createSocialNetworksEntriesQuery(
@@ -302,7 +302,7 @@ class CloudflareElasticClient
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function createDirectEntriesQuery(
@@ -330,7 +330,7 @@ class CloudflareElasticClient
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function createExternalEntriesQuery(
@@ -367,7 +367,7 @@ class CloudflareElasticClient
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
 
-        return $this->esClient->getIndex($this->index)->createSearch($query);
+        return $this->createSearchQuery($query, $start, $end);
     }
 
     private function filterClientRequestURIByProject(
@@ -463,7 +463,7 @@ class CloudflareElasticClient
                 'username' => $username,
                 'password' => $password,
                 'transport' => $devOrTest ? 'http' : 'https',
-                'timeout' => '5s',
+                'connect_timeout' => '5s',
                 'log' => true,
                 'persistent' => false,
             ],
@@ -491,6 +491,16 @@ class CloudflareElasticClient
         return $dateHistogramInterval;
     }
 
+    private function createSearchQuery(
+        Query $query,
+        DateTimeInterface $start,
+        DateTimeInterface $end
+    ): \Elastica\Search {
+        return (new \Elastica\Search($this->esClient))
+            ->setQuery($query)
+            ->addIndices($this->getIndexRange($start, $end));
+    }
+
     /**
      * Provide a list of queries to filter with the client
      * request URI to get entries from social networks.
@@ -504,6 +514,21 @@ class CloudflareElasticClient
             ),
             new Query\Wildcard('ClientRequestURI.keyword', '*?fbclid*'),
         ];
+    }
+
+    private function getIndexRange(DateTimeInterface $start, DateTimeInterface $end): array
+    {
+        $startYear = $start->format('Y');
+        $endYear = $end->format('Y');
+        if ('cloudflare-*' === $this->index) {
+            if ($startYear !== $endYear) {
+                return ['cloudflare-' . $startYear . '-*', 'cloudflare-' . $endYear . '-*'];
+            }
+
+            return ['cloudflare-' . $startYear . '-*'];
+        }
+
+        return [$this->index];
     }
 
     private function unsetNonRequestedSearchQueries(

@@ -495,7 +495,7 @@ Object {
         },
         Object {
           "key": "2021-06-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 3,
         },
         Object {
           "key": "2021-07-01T00:00:00.000Z",
@@ -923,6 +923,12 @@ Object {
         },
         Object {
           "category": Object {
+            "id": "pCategory1",
+          },
+          "totalCount": 5,
+        },
+        Object {
+          "category": Object {
             "id": "pCategoryIdf2",
           },
           "totalCount": 5,
@@ -932,12 +938,6 @@ Object {
             "id": "pCategory2",
           },
           "totalCount": 4,
-        },
-        Object {
-          "category": Object {
-            "id": "pCategory1",
-          },
-          "totalCount": 3,
         },
       ],
     },
