@@ -23,3 +23,5 @@ UpdateProposalFormNotificationsConfigurationInput:
                 type: 'Boolean!'
             onProposalNewsDelete:
                 type: 'Boolean!'
+            email:
+                type: 'Email'

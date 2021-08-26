@@ -124,7 +124,7 @@ export const ProposalFormAdminPageTabs = ({
         )}
 
         <Route path={TABS.NOTIFICATIONS}>
-          <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
+          <ProposalFormAdminNotificationForm proposalForm={proposalForm} query={query} />
         </Route>
 
         <Route path={TABS.SETTINGS}>
@@ -159,6 +159,7 @@ export default createFragmentContainer(container, {
   query: graphql`
     fragment ProposalFormAdminPageTabs_query on Query {
       ...ProposalFormAdminConfigurationForm_query
+      ...ProposalFormAdminNotificationForm_query
     }
   `,
 });

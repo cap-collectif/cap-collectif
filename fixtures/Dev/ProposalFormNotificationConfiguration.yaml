@@ -124,3 +124,14 @@ Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfig
         onProposalNewsCreate: false
         onProposalNewsUpdate: false
         onProposalNewsDelete: false
+    proposalFormProjectWithOwnerNotificationConfiguration:
+        onCreate: true
+        onUpdate: true
+        onDelete: true
+        onCommentCreate: true
+        onCommentUpdate: true
+        onCommentDelete: true
+        onProposalNewsCreate: false
+        onProposalNewsUpdate: false
+        onProposalNewsDelete: false
+        email: theo@cap-collectif.com

@@ -13,52 +13,57 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     /**
      * @ORM\Column(name="on_create", type="boolean", options={"default": false})
      */
-    private $onCreate = false;
+    private bool $onCreate = false;
 
     /**
      * @ORM\Column(name="on_update", type="boolean", options={"default": false})
      */
-    private $onUpdate = false;
+    private bool $onUpdate = false;
 
     /**
      * @ORM\Column(name="on_delete", type="boolean", options={"default": false})
      */
-    private $onDelete = false;
+    private bool $onDelete = false;
 
     /**
      * @ORM\Column(name="on_comment_create", type="boolean", options={"default": false})
      */
-    private $onCommentCreate = false;
+    private bool $onCommentCreate = false;
 
     /**
      * @ORM\Column(name="on_comment_update", type="boolean", options={"default": false})
      */
-    private $onCommentUpdate = false;
+    private bool $onCommentUpdate = false;
 
     /**
      * @ORM\Column(name="on_comment_delete", type="boolean", options={"default": false})
      */
-    private $onCommentDelete = false;
+    private bool $onCommentDelete = false;
 
     /**
      * @ORM\Column(name="on_proposal_news_create", type="boolean", options={"default": false})
      */
-    private $onProposalNewsCreate = false;
+    private bool $onProposalNewsCreate = false;
 
     /**
      * @ORM\Column(name="on_proposal_news_update", type="boolean", options={"default": false})
      */
-    private $onProposalNewsUpdate = false;
+    private bool $onProposalNewsUpdate = false;
 
     /**
      * @ORM\Column(name="on_proposal_news_delete", type="boolean", options={"default": false})
      */
-    private $onProposalNewsDelete = false;
+    private bool $onProposalNewsDelete = false;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="notificationsConfiguration")
      */
-    private $proposalForm;
+    private ProposalForm $proposalForm;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $email = null;
 
     public function isOnCreate(): bool
     {
@@ -178,6 +183,16 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
         $this->onProposalNewsDelete = $onProposalNewsDelete;
 
         return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
     }
 
     public function getType(): string

@@ -1567,6 +1567,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "name": "onProposalNewsDelete",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "email",
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -1952,13 +1959,27 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                   "name": "id",
                   "storageKey": null,
                 },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "isAdmin",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "email",
+                  "storageKey": null,
+                },
               ],
               "storageKey": null,
             },
           ],
         },
         "params": Object {
-          "cacheID": "4242d18d5768250fec32b2ca361da500",
+          "cacheID": "51ecf93920c84230b5420afe462d7b7b",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2277,6 +2298,15 @@ fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
     onProposalNewsCreate
     onProposalNewsUpdate
     onProposalNewsDelete
+    email
+  }
+}
+
+fragment ProposalFormAdminNotificationForm_query on Query {
+  viewer {
+    isAdmin
+    email
+    id
   }
 }
 
@@ -2294,6 +2324,7 @@ fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
 
 fragment ProposalFormAdminPageTabs_query on Query {
   ...ProposalFormAdminConfigurationForm_query
+  ...ProposalFormAdminNotificationForm_query
 }
 
 fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {

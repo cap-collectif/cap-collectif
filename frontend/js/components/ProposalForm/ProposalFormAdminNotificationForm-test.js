@@ -28,6 +28,14 @@ describe('<ProposalFormAdminNotificationForm />', () => {
         onProposalNewsCreate: true,
         onProposalNewsUpdate: true,
         onProposalNewsDelete: true,
+        email: null,
+      },
+    },
+    query: {
+      $refType,
+      viewer: {
+        isAdmin: true,
+        email: 'admin@cap-collectif.com',
       },
     },
   };

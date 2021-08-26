@@ -61,6 +61,29 @@ Scenario: Email should be sent to admin if a message is sent to the comment_dele
     "userSlug": "sfavot",
     "body": "Expedita in et voluptatum repudiandae consequatur atque est. Deleniti delectus dicta omnis quis voluptate. Maiores qui nihil sit laboriosam accusantium.",
     "proposal": "Ravalement de la façade de la bibliothèque municipale",
+    "proposalFormNotificationEmail": "sfavot@cap-collectif.com",
+    "projectSlug": "budget-participatif-rennes",
+    "stepSlug": "collecte-des-propositions",
+    "proposalSlug": "ravalement-de-la-facade-de-la-bibliotheque-municipale"
+  }
+  """
+  And I consume "comment_delete"
+  Then I open mail to "sfavot@cap-collectif.com"
+  And I should see "notification.comment.delete.body" in mail
+
+@rabbitmq
+Scenario: Email should be sent to admin if a message is sent to the comment_delete queue
+  Given I publish in "comment_delete" with message below:
+  """
+  {
+    "username": "Suzanne Favot",
+    "notifying": true,
+    "anonymous": false,
+    "notifyTo": "admin",
+    "userSlug": "sfavot",
+    "body": "Expedita in et voluptatum repudiandae consequatur atque est. Deleniti delectus dicta omnis quis voluptate. Maiores qui nihil sit laboriosam accusantium.",
+    "proposal": "Ravalement de la façade de la bibliothèque municipale",
+    "proposalFormNotificationEmail": null,
     "projectSlug": "budget-participatif-rennes",
     "stepSlug": "collecte-des-propositions",
     "proposalSlug": "ravalement-de-la-facade-de-la-bibliotheque-municipale"
@@ -82,6 +105,7 @@ Scenario: Email sent to admin should have correct subject and footer if comment 
     "userSlug": null,
     "body": "Expedita in et voluptatum repudiandae consequatur atque est. Deleniti delectus dicta omnis quis voluptate. Maiores qui nihil sit laboriosam accusantium.",
     "proposal": "Ravalement de la façade de la bibliothèque municipale",
+    "proposalFormNotificationEmail": null,
     "projectSlug": "budget-participatif-rennes",
     "stepSlug": "collecte-des-propositions",
     "proposalSlug": "ravalement-de-la-facade-de-la-bibliotheque-municipale"

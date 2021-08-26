@@ -307,3 +307,15 @@ Scenario: User participated in a proposal
   And I consume "proposal_create"
   Then I open mail with subject "acknowledgement-of-receipt"
   And email should match snapshot "aknowledgeProposal.html"
+
+@rabbitmq
+Scenario: Notification email shall be sent to configured address
+  Given I publish in proposal_create with message below:
+  """
+  {
+    "proposalId": "proposalProjectWithOwner"
+  }
+  """
+  And I consume "proposal_create"
+  Then I open mail with subject "notification.proposal.create.subject" from "assistance@cap-collectif.com" to "theo@cap-collectif.com"
+  And I should see "notification.proposal.create.body" in mail

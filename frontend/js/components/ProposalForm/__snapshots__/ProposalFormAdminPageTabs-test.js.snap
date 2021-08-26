@@ -127,6 +127,12 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
               "url": "http://capco.dev/top-budget",
             }
           }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
         />
       </Route>
       <Route
@@ -278,6 +284,12 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
               },
               "title": "ceci est le titre du proposal form",
               "url": "http://capco.dev/top-budget",
+            }
+          }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
             }
           }
         />
@@ -459,6 +471,12 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
               },
               "title": "ceci est le titre du proposal form",
               "url": "http://capco.dev/top-budget",
+            }
+          }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
             }
           }
         />

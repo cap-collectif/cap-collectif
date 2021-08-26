@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,7 @@ class ProposalFormNotificationsConfigurationType extends AbstractType
             ->add('onProposalNewsCreate', CheckboxType::class, ['required' => false])
             ->add('onProposalNewsUpdate', CheckboxType::class, ['required' => false])
             ->add('onProposalNewsDelete', CheckboxType::class, ['required' => false])
-        ;
+            ->add('email', EmailType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

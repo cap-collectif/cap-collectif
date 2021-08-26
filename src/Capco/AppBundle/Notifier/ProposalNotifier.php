@@ -73,18 +73,27 @@ class ProposalNotifier extends BaseNotifier
     public function onCreate(Proposal $proposal)
     {
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isNotifyingOnCreate()) {
-            $this->mailer->createAndSendMessage(ProposalCreateAdminMessage::class, $proposal, [
-                'proposal' => $proposal,
-                'proposalSummary' =>
-                    $proposal->getSummary() ??
-                    $this->translator->trans('project.votes.widget.no_value'),
-                'proposalURL' => $this->proposalUrlResolver->__invoke(
-                    $proposal,
-                    $this->requestStack
-                ),
-                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
-                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
-            ]);
+            $this->mailer->createAndSendMessage(
+                ProposalCreateAdminMessage::class,
+                $proposal,
+                [
+                    'proposal' => $proposal,
+                    'proposalSummary' =>
+                        $proposal->getSummary() ??
+                        $this->translator->trans('project.votes.widget.no_value'),
+                    'proposalURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+                    'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
+                ],
+                null,
+                $proposal
+                    ->getProposalForm()
+                    ->getNotificationsConfiguration()
+                    ->getEmail()
+            );
         }
 
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge()) {
@@ -130,15 +139,24 @@ class ProposalNotifier extends BaseNotifier
                 ->isOnDelete() &&
             !$proposal->isDraft()
         ) {
-            $this->mailer->createAndSendMessage(ProposalDeleteAdminMessage::class, $proposal, [
-                'proposal' => $proposal,
-                'proposalURL' => $this->proposalUrlResolver->__invoke(
-                    $proposal,
-                    $this->requestStack
-                ),
-                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
-                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
-            ]);
+            $this->mailer->createAndSendMessage(
+                ProposalDeleteAdminMessage::class,
+                $proposal,
+                [
+                    'proposal' => $proposal,
+                    'proposalURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+                    'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
+                ],
+                null,
+                $proposal
+                    ->getProposalForm()
+                    ->getNotificationsConfiguration()
+                    ->getEmail()
+            );
         }
 
         $this->notifyAllAnalystsOnDelete($proposal, $supervisor, $decisionMaker);
@@ -153,15 +171,24 @@ class ProposalNotifier extends BaseNotifier
                 ->getNotificationsConfiguration()
                 ->isOnUpdate()
         ) {
-            $this->mailer->createAndSendMessage(ProposalUpdateAdminMessage::class, $proposal, [
-                'proposal' => $proposal,
-                'proposalURL' => $this->proposalUrlResolver->__invoke(
-                    $proposal,
-                    $this->requestStack
-                ),
-                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
-                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
-            ]);
+            $this->mailer->createAndSendMessage(
+                ProposalUpdateAdminMessage::class,
+                $proposal,
+                [
+                    'proposal' => $proposal,
+                    'proposalURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+                    'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
+                ],
+                null,
+                $proposal
+                    ->getProposalForm()
+                    ->getNotificationsConfiguration()
+                    ->getEmail()
+            );
         }
 
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge()) {

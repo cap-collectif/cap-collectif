@@ -418,6 +418,7 @@ Capco\AppBundle\Entity\ProposalForm:
         usingDescription: true
         descriptionMandatory: true
         usingIllustration: true
+        notificationsConfiguration: '@proposalFormProjectWithOwnerNotificationConfiguration'
     proposalFormStepClosedIdfBP3:
         id: proposalFormStepClosedIdfBP3
         title: Formulaire du budget participatif 3 de l'Idf sur étape fermée

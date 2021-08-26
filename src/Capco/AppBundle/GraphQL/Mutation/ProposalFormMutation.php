@@ -34,41 +34,6 @@ class ProposalFormMutation
         $this->questionnaireRepository = $questionnaireRepository;
     }
 
-    public function updateNotificationsConfiguration(Argument $input)
-    {
-        $arguments = $input->getArrayCopy();
-        $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
-
-        if (!$proposalForm) {
-            throw new UserError(
-                sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId'])
-            );
-        }
-
-        unset($arguments['proposalFormId']);
-
-        $form = $this->formFactory->create(
-            ProposalFormNotificationsConfigurationType::class,
-            $proposalForm->getNotificationsConfiguration()
-        );
-
-        $form->submit($arguments, false);
-
-        if (!$form->isValid()) {
-            $this->logger->error(
-                \get_class($this) .
-                    ' updateNotificationsConfiguration: ' .
-                    (string) $form->getErrors(true, false)
-            );
-
-            throw new UserError('Can\'t change the notification config!');
-        }
-
-        $this->em->flush();
-
-        return ['proposalForm' => $proposalForm];
-    }
-
     public function setEvaluationForm(Argument $input): array
     {
         $arguments = $input->getArrayCopy();

@@ -59,6 +59,11 @@ class CommentSubscriber implements EventSubscriberInterface
                         ->getStep()
                         ->getSlug(),
                     'proposalSlug' => $comment->getProposal()->getSlug(),
+                    'proposalFormNotificationEmail' => $comment
+                        ->getProposal()
+                        ->getProposalForm()
+                        ->getNotificationsConfiguration()
+                        ->getEmail(),
                 ];
                 $this->publisher->publish('comment.delete', new Message(json_encode($comment)));
             }

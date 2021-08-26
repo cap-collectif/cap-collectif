@@ -6940,6 +6940,7 @@ type NotificationsConfiguration {
   onProposalNewsCreate: Boolean!
   onProposalNewsUpdate: Boolean!
   onProposalNewsDelete: Boolean!
+  email: Email
 }
 
 """Oauth2 SSO Configuration."""
@@ -14236,6 +14237,7 @@ input UpdateProposalFormNotificationsConfigurationInput {
   onProposalNewsCreate: Boolean!
   onProposalNewsUpdate: Boolean!
   onProposalNewsDelete: Boolean!
+  email: Email
   clientMutationId: String
 }
 

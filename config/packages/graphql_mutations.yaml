@@ -70,11 +70,6 @@ services:
         tags:
             - {
                   name: overblog_graphql.mutation,
-                  alias: 'updateProposalFormNotificationsConfiguration',
-                  method: 'updateNotificationsConfiguration',
-              }
-            - {
-                  name: overblog_graphql.mutation,
                   alias: 'setEvaluationFormInProposalForm',
                   method: 'setEvaluationForm',
               }

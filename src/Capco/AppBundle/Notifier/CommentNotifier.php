@@ -83,7 +83,13 @@ class CommentNotifier extends BaseNotifier
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
-                        ]
+                        ],
+                        null,
+                        $comment
+                            ->getProposal()
+                            ->getProposalForm()
+                            ->getNotificationsConfiguration()
+                            ->getEmail()
                     );
                 } else {
                     $this->mailer->createAndSendMessage(
@@ -94,7 +100,13 @@ class CommentNotifier extends BaseNotifier
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
                             'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor()),
-                        ]
+                        ],
+                        null,
+                        $comment
+                            ->getProposal()
+                            ->getProposalForm()
+                            ->getNotificationsConfiguration()
+                            ->getEmail()
                     );
                 }
             }
@@ -157,6 +169,7 @@ class CommentNotifier extends BaseNotifier
      *                       'projectSlug' => string,
      *                       'stepSlug' => string,
      *                       'proposalSlug' => string,
+     *                       'proposalFormNotificationEmail' => string | null
      *                       ]
      */
     public function onDelete(array $comment)
@@ -184,7 +197,9 @@ class CommentNotifier extends BaseNotifier
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
                                 ),
-                            ]
+                            ],
+                            null,
+                            $comment['proposalFormNotificationEmail']
                         );
                     } else {
                         $this->mailer->createAndSendMessage(
@@ -200,7 +215,9 @@ class CommentNotifier extends BaseNotifier
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
                                 ),
-                            ]
+                            ],
+                            null,
+                            $comment['proposalFormNotificationEmail']
                         );
                     }
 
@@ -233,7 +250,13 @@ class CommentNotifier extends BaseNotifier
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
-                        ]
+                        ],
+                        null,
+                        $comment
+                            ->getProposal()
+                            ->getProposalForm()
+                            ->getNotificationsConfiguration()
+                            ->getEmail()
                     );
                 } else {
                     $this->mailer->createAndSendMessage(
@@ -244,7 +267,13 @@ class CommentNotifier extends BaseNotifier
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
                             'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor()),
-                        ]
+                        ],
+                        null,
+                        $comment
+                            ->getProposal()
+                            ->getProposalForm()
+                            ->getNotificationsConfiguration()
+                            ->getEmail()
                     );
                 }
             }
