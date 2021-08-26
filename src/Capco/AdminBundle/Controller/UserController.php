@@ -51,15 +51,17 @@ class UserController extends CRUDController
         $filename = 'users.csv';
         $absolutePath = $path . $filename;
         if (file_exists($absolutePath)) {
-            Process::fromShellCommandline('rm -rf ' . $absolutePath)->mustRun();
+            Process::fromShellCommandline('rm -f ' . $absolutePath)->mustRun();
         }
         if (file_exists('/tmp/users.csv')) {
-            Process::fromShellCommandline('rm -rf ' . '/tmp/users.csv')->mustRun();
+            Process::fromShellCommandline('rm -f ' . '/tmp/users.csv')->mustRun();
         }
 
         if (!file_exists($absolutePath)) {
-            CreateCsvFromUsersCommand::export($this->get(LocaleRepository::class)->getDefaultCode(), $this->get('doctrine')
-                ->getConnection());
+            CreateCsvFromUsersCommand::export(
+                $this->get(LocaleRepository::class)->getDefaultCode(),
+                $this->get('doctrine')->getConnection()
+            );
         }
 
         $contentType = 'text/csv';
