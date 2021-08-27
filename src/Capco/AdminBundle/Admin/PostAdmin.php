@@ -71,6 +71,15 @@ class PostAdmin extends CapcoAdmin
         }
     }
 
+    public function getTemplate($name)
+    {
+        if ('list' === $name) {
+            return 'CapcoAdminBundle:Post:list.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title', KnpTranslationFieldFilter::class, [

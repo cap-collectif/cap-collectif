@@ -57,6 +57,7 @@ export { default as DOWNLOAD } from './svg/download-bottom.svg';
 export { default as ADD_DRAG } from './svg/add-drag.svg';
 export { default as PRINT } from './svg/print.svg';
 export { default as PIE_CHART } from './svg/pie-chart.svg';
+export { default as SEARCH } from './svg/search.svg';
 export { default as SN_FACEBOOK } from './svg/sn-fb.svg';
 export { default as SN_TWITTER } from './svg/sn-twitter.svg';
 export { default as SN_YOUTUBE } from './svg/sn-youtube.svg';

@@ -8,9 +8,9 @@ import type {
 } from '~relay/DeletePostMutation.graphql';
 
 const mutation = graphql`
-  mutation DeletePostMutation($input: DeletePostInput!) {
+  mutation DeletePostMutation($input: DeletePostInput!, $connections: [ID!]!) {
     deletePost(input: $input) {
-      deletedPostId
+      deletedPostId @deleteEdge(connections: $connections)
     }
   }
 `;
@@ -19,6 +19,11 @@ const commit = (variables: DeletePostMutationVariables): Promise<DeletePostMutat
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticResponse: {
+      deletePost: {
+        deletedPostId: variables.input.id,
+      },
+    },
   });
 
 export default { commit };

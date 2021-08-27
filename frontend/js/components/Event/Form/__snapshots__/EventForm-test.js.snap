@@ -195,7 +195,7 @@ exports[`<EventForm /> it does not render toggle on frontend even with remote ev
                 ]
               }
             >
-              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              <ProjectContentAdminForm__InformationIcon />
             </OverlayTrigger>
           </span>
         </React.Fragment>
@@ -581,7 +581,7 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
                 ]
               }
             >
-              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              <ProjectContentAdminForm__InformationIcon />
             </OverlayTrigger>
           </span>
         </React.Fragment>
@@ -799,7 +799,7 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
                     ]
                   }
                 >
-                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                  <ProjectContentAdminForm__InformationIcon />
                 </OverlayTrigger>
               </span>
             </React.Fragment>
@@ -1102,7 +1102,7 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
                 ]
               }
             >
-              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              <ProjectContentAdminForm__InformationIcon />
             </OverlayTrigger>
           </span>
         </React.Fragment>
@@ -1320,7 +1320,7 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
                     ]
                   }
                 >
-                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                  <ProjectContentAdminForm__InformationIcon />
                 </OverlayTrigger>
               </span>
             </React.Fragment>
@@ -1590,7 +1590,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
                 ]
               }
             >
-              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              <ProjectContentAdminForm__InformationIcon />
             </OverlayTrigger>
           </span>
         </React.Fragment>
@@ -1808,7 +1808,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
                     ]
                   }
                 >
-                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                  <ProjectContentAdminForm__InformationIcon />
                 </OverlayTrigger>
               </span>
             </React.Fragment>
@@ -2078,7 +2078,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
                 ]
               }
             >
-              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              <ProjectContentAdminForm__InformationIcon />
             </OverlayTrigger>
           </span>
         </React.Fragment>
@@ -2296,7 +2296,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
                     ]
                   }
                 >
-                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                  <ProjectContentAdminForm__InformationIcon />
                 </OverlayTrigger>
               </span>
             </React.Fragment>
@@ -2566,7 +2566,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
                 ]
               }
             >
-              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              <ProjectContentAdminForm__InformationIcon />
             </OverlayTrigger>
           </span>
         </React.Fragment>
@@ -2784,7 +2784,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
                     ]
                   }
                 >
-                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                  <ProjectContentAdminForm__InformationIcon />
                 </OverlayTrigger>
               </span>
             </React.Fragment>

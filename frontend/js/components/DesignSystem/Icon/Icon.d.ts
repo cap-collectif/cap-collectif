@@ -58,6 +58,7 @@ declare export const ICON_NAME = {
     PRINT: 'PRINT',
     PIE_CHART: 'PIE_CHART',
     ADD_DRAG: 'ADD_DRAG',
+    SEARCH: 'SEARCH',
     SN_FACEBOOK: 'SN_FACEBOOK',
     SN_TWITTER: 'SN_TWITTER',
     SN_YOUTUBE: 'SN_YOUTUBE',

@@ -41,6 +41,7 @@ import ToastsContainerApp from '~/startup/ToastsContainerApp';
 import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsSectionConfigurationApp';
 import SidebarApp from '~/startup/SidebarApp';
 import DashboardPageApp from '~/startup/DashboardPageApp';
+import AdminPostListApp from '~/startup/AdminPostListApp';
 import AdminQuestionnaireListApp from '~/startup/AdminQuestionnaireListApp';
 
 ReactOnRails.registerStore({ appStore });
@@ -85,5 +86,6 @@ ReactOnRails.register({
   EmailingParametersPageApp,
   SidebarApp,
   DashboardPageApp,
+  AdminPostListApp,
   AdminQuestionnaireListApp,
 });

@@ -3,7 +3,7 @@
     "private": true,
     "license": "UNLICENSED",
     "scripts": {
-        "test": "NODE_ENV=test jest -c jest.config.js --notify",
+        "test": "NODE_ENV=test jest -c jest.config.js",
         "test:ci": "NODE_ENV=test jest -c jest.config.js --coverage --ci --runInBand",
         "test:watch": "NODE_ENV=test jest -c jest.config.js --watchAll",
         "test-e2e": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand",
@@ -42,7 +42,7 @@
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js",
-        "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re",
+        "precommit": "flow status && lint-staged",
         "cy:open": "yarn --cwd cypress cy:open",
         "cy:run": "yarn --cwd cypress cy:run",
         "cy:run:cy": "yarn --cwd cypress cy:run:ci"

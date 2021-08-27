@@ -43,7 +43,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                 componentClass="div"
               >
                 <div>
-                  <ForwardRef
+                  <Field
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-isRegistrable-listbox"
                     aria-haspopup="true"
@@ -111,7 +111,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                   <div
                     className="visible-xs-block visible-sm-block"
                   >
-                    <ForwardRef
+                    <Field
                       addonAfter={
                         <i
                           className="cap cap-magnifier"
@@ -140,7 +140,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <div>
-                    <ForwardRef(Relay(injectIntl(SelectTheme)))
+                    <Relay(injectIntl(SelectTheme))
                       query={
                         Object {
                           "$fragmentRefs": null,
@@ -158,7 +158,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               >
                 <div>
                   <div>
-                    <ForwardRef(Relay(injectIntl(SelectProject)))
+                    <Relay(injectIntl(SelectProject))
                       query={
                         Object {
                           "$fragmentRefs": null,
@@ -175,7 +175,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                 componentClass="div"
               >
                 <div>
-                  <ForwardRef
+                  <Field
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-userType-listbox"
                     aria-haspopup="true"
@@ -306,7 +306,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                 componentClass="div"
               >
                 <div>
-                  <ForwardRef
+                  <Field
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-isRegistrable-listbox"
                     aria-haspopup="true"
@@ -374,7 +374,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                   <div
                     className="visible-xs-block visible-sm-block"
                   >
-                    <ForwardRef
+                    <Field
                       addonAfter={
                         <i
                           className="cap cap-magnifier"
@@ -402,7 +402,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                 componentClass="div"
               >
                 <div>
-                  <ForwardRef
+                  <Field
                     aria-autocomplete="list"
                     aria-controls="EventListFilters-filter-userType-listbox"
                     aria-haspopup="true"

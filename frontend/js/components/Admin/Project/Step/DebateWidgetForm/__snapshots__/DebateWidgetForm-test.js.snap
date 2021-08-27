@@ -33,14 +33,14 @@ exports[`<DebateWidgetForm /> should renders correctly 1`] = `
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="background"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.background"
         type="color-picker"
@@ -48,14 +48,14 @@ exports[`<DebateWidgetForm /> should renders correctly 1`] = `
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="border"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.border"
         type="color-picker"
@@ -63,14 +63,14 @@ exports[`<DebateWidgetForm /> should renders correctly 1`] = `
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="global.width"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.width"
         type="text"
@@ -78,14 +78,14 @@ exports[`<DebateWidgetForm /> should renders correctly 1`] = `
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="global.height"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.height"
         type="text"
@@ -97,31 +97,31 @@ exports[`<DebateWidgetForm /> should renders correctly 1`] = `
         <ForwardRef
           direction="row"
         >
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
-            <ForwardRef
+            <Text
               as="span"
             >
               destination-link
-            </ForwardRef>
-            <ForwardRef
+            </Text>
+            <Text
               as="span"
               color="gray.500"
             >
               global.optional
-            </ForwardRef>
-          </ForwardRef>
+            </Text>
+          </Text>
           <Tooltip
             label="allow-display-contributions-sources"
           >
-            <ForwardRef(styled.div)>
-              <ForwardRef
+            <AppBox>
+              <Icon
                 color="blue.500"
                 name="CIRCLE_INFO"
                 size="md"
               />
-            </ForwardRef(styled.div)>
+            </AppBox>
           </Tooltip>
         </ForwardRef>
       }
@@ -217,14 +217,14 @@ exports[`<DebateWidgetForm /> should renders correctly with widget destination 1
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="background"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.background"
         type="color-picker"
@@ -232,14 +232,14 @@ exports[`<DebateWidgetForm /> should renders correctly with widget destination 1
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="border"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.border"
         type="color-picker"
@@ -247,14 +247,14 @@ exports[`<DebateWidgetForm /> should renders correctly with widget destination 1
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="global.width"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.width"
         type="text"
@@ -262,14 +262,14 @@ exports[`<DebateWidgetForm /> should renders correctly with widget destination 1
       <Field
         component={[Function]}
         label={
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
             <FormattedMessage
               id="global.height"
               values={Object {}}
             />
-          </ForwardRef>
+          </Text>
         }
         name="widget.height"
         type="text"
@@ -281,31 +281,31 @@ exports[`<DebateWidgetForm /> should renders correctly with widget destination 1
         <ForwardRef
           direction="row"
         >
-          <ForwardRef
+          <Text
             fontWeight="normal"
           >
-            <ForwardRef
+            <Text
               as="span"
             >
               destination-link
-            </ForwardRef>
-            <ForwardRef
+            </Text>
+            <Text
               as="span"
               color="gray.500"
             >
               global.optional
-            </ForwardRef>
-          </ForwardRef>
+            </Text>
+          </Text>
           <Tooltip
             label="allow-display-contributions-sources"
           >
-            <ForwardRef(styled.div)>
-              <ForwardRef
+            <AppBox>
+              <Icon
                 color="blue.500"
                 name="CIRCLE_INFO"
                 size="md"
               />
-            </ForwardRef(styled.div)>
+            </AppBox>
           </Tooltip>
         </ForwardRef>
       }

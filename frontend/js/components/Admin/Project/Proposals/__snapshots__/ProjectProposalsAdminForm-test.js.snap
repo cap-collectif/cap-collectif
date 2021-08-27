@@ -57,7 +57,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
                   ]
                 }
               >
-                <ForwardRef(ProjectProposalsAdminForm__ActivityInformationIcon) />
+                <ProjectProposalsAdminForm__ActivityInformationIcon />
               </OverlayTrigger>
             </span>
           </div>
@@ -127,7 +127,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
                   ]
                 }
               >
-                <ForwardRef(ProjectProposalsAdminForm__ActivityInformationIcon) />
+                <ProjectProposalsAdminForm__ActivityInformationIcon />
               </OverlayTrigger>
             </span>
           </div>

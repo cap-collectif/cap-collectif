@@ -11,3 +11,4 @@ export { default as CHATTING } from './svg/chatting.svg';
 export { default as MAIL_1 } from './svg/mail-1.svg';
 export { default as MAIL_2 } from './svg/mail-2.svg';
 export { default as ERROR } from './svg/error.svg';
+export { default as NEWSPAPER } from './svg/newspaper.svg';
