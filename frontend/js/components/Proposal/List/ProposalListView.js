@@ -9,8 +9,9 @@ import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
-import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
+import type { MapOptions } from '../Map/Map.types';
 import type { ProposalListViewRefetchQueryVariables } from '~relay/ProposalListViewRefetchQuery.graphql';
+import type { GeoJson } from '~/utils/geojson';
 
 type Filters = {|
   categories?: string,

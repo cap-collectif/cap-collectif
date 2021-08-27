@@ -142,6 +142,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   };
   __SERVER__: boolean;
   FileReader: any;
+  google: Object;
 
   alert(message?: any): void;
   blur(): void;

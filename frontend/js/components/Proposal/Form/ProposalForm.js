@@ -60,6 +60,7 @@ import {
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import config from '~/config';
 import Text from '~ui/Primitives/Text';
+import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -121,6 +122,7 @@ type Props = {|
   +addressValue: ?string,
   +responses: ResponsesInReduxForm,
   +user: { id: string, username: string },
+  +geoJsons: Array<GeoJson>,
 |};
 
 export type FormValues = {|
@@ -319,10 +321,10 @@ export const asyncValidate = (values: FormValues) => {
   });
 };
 
-const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
+const validate = (values: FormValues, { proposalForm, features, intl, geoJsons }: Props) => {
   const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
 
-  return validateProposalContent(
+  const errors = validateProposalContent(
     values,
     proposalForm,
     features,
@@ -330,6 +332,12 @@ const validate = (values: FormValues, { proposalForm, features, intl }: Props) =
     values.draft,
     availableQuestions,
   );
+  if (values.address && proposalForm.proposalInAZoneRequired) {
+    const address = JSON.parse(values.address.substring(1, values.address.length - 1));
+    if (!geoContains(geoJsons, address?.geometry?.location))
+      return { ...errors, addressText: 'constraints.address_in_zone' };
+  }
+  return errors;
 };
 
 type State = {
@@ -872,6 +880,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
       instagramUrl: proposal ? proposal.instagramUrl : null,
       linkedInUrl: proposal ? proposal.linkedInUrl : null,
     },
+    geoJsons: formatGeoJsons(proposalForm.districts),
     titleValue: selector(state, 'title'),
     tipsmeeeIdDisabled: proposal && proposal.tipsmeeeId,
     addressValue: selector(state, 'address'),
@@ -953,6 +962,9 @@ export default createFragmentContainer(container, {
       districts(order: ALPHABETICAL) {
         id
         name
+        displayedOnMap
+        geojson
+        id
       }
       categories(order: ALPHABETICAL) {
         id

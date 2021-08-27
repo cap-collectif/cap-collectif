@@ -1585,6 +1585,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "name": "name",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "displayedOnMap",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "geojson",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": "districts(order:\\"ALPHABETICAL\\")",
                         },
@@ -7222,7 +7236,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3eea03719c0828431499c4d4af33a20d",
+          "cacheID": "c0ae89bd74f7a21bdab13cf43916642f",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7939,6 +7953,8 @@ fragment ProposalForm_proposalForm on ProposalForm {
   districts(order: ALPHABETICAL) {
     id
     name
+    displayedOnMap
+    geojson
   }
   categories(order: ALPHABETICAL) {
     id

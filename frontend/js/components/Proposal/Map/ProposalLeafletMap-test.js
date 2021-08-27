@@ -63,6 +63,8 @@ describe('<ProposalLeafletMap />', () => {
     isLoading: false,
     retry: jest.fn(),
     shouldDisplayPictures: true,
+    proposalInAZoneRequired: false,
+    dispatch: jest.fn(),
   };
 
   it('should render a map with only valid markers', () => {

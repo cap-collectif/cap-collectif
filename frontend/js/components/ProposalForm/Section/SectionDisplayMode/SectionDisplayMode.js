@@ -35,7 +35,7 @@ import type {
   AddressCompleteFormatted,
   AddressComplete,
 } from '~/components/Form/Address/Address.type';
-import type { MapProps } from '~/components/Proposal/Map/ProposalLeafletMap';
+import type { MapProps } from '~/components/Proposal/Map/Map.types';
 
 const publicToken =
   '***REMOVED***';

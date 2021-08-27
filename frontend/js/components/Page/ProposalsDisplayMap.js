@@ -1,7 +1,8 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import type { GeoJson, MapOptions } from '../Proposal/Map/ProposalLeafletMap';
+import type { MapOptions } from '../Proposal/Map/Map.types';
+import { type GeoJson } from '~/utils/geojson';
 import ProposalLeafletMap from '../Proposal/Map/ProposalLeafletMap';
 import type { ProposalsDisplayMap_step } from '~relay/ProposalsDisplayMap_step.graphql';
 import type { MapTokens } from '../../redux/modules/user';
@@ -58,6 +59,7 @@ export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
       isLoading={isLoading}
       hasMore={hasMore}
       hasError={hasError}
+      proposalInAZoneRequired={step.form?.proposalInAZoneRequired}
       retry={retry}
       {...rest}
     />
@@ -69,6 +71,9 @@ export default createPaginationContainer(
   {
     step: graphql`
       fragment ProposalsDisplayMap_step on ProposalStep {
+        form {
+          proposalInAZoneRequired
+        }
         proposals(
           first: $count
           after: $cursor

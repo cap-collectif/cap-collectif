@@ -41,12 +41,14 @@ export const StyledMap: StyledComponent<{}, {}, typeof Map> = styled(Map)`
     display: none;
   }
 
-  /**
-    TODO: enlever pour voir le popup déposer (prochaine pr)
-  **/
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    .leaflet-popup {
+    .leaflet-popup:not(.popup-proposal) {
       display: none;
+    }
+    .leaflet-top.leaflet-right {
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
     }
   }
 

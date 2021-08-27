@@ -41,6 +41,27 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
+    <ForwardRef(OverlayComponent)
+      autoPan={false}
+      className="popup-proposal"
+      closeButton={false}
+      key="popup-0"
+      position={
+        Object {
+          "lat": 0,
+          "lng": 0,
+        }
+      }
+    >
+      <Button
+        onClick={[Function]}
+        variant="primary"
+        variantColor="primary"
+        variantSize="small"
+      >
+        Déposer une proposition
+      </Button>
+    </ForwardRef(OverlayComponent)>
     <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
       onClick={[Function]}
@@ -86,7 +107,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         }
       >
         <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
           closeButton={false}
+          key="popup-info"
         >
           <Relay(Connect(ProposalMapPopover))
             proposal={
@@ -144,7 +167,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         }
       >
         <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
           closeButton={false}
+          key="popup-info"
         >
           <Relay(Connect(ProposalMapPopover))
             proposal={
@@ -202,7 +227,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         }
       >
         <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
           closeButton={false}
+          key="popup-info"
         >
           <Relay(Connect(ProposalMapPopover))
             proposal={
@@ -226,6 +253,13 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     </ForwardRef(ContainerComponent)>
     <ForwardRef(LeafComponent)
       position="bottomright"
+    />
+    <ProposalMapDiscoverPane
+      handleClose={[Function]}
+      show={true}
+    />
+    <ProposalMapOutOfAreaPane
+      content="[object Object]"
     />
   </ProposalLeafletMapstyle__StyledMap>
 </ProposalLeafletMapstyle__MapContainer>
@@ -270,6 +304,27 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
+    <ForwardRef(OverlayComponent)
+      autoPan={false}
+      className="popup-proposal"
+      closeButton={false}
+      key="popup-1"
+      position={
+        Object {
+          "lat": 0,
+          "lng": 0,
+        }
+      }
+    >
+      <Button
+        onClick={[Function]}
+        variant="primary"
+        variantColor="primary"
+        variantSize="small"
+      >
+        Déposer une proposition
+      </Button>
+    </ForwardRef(OverlayComponent)>
     <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
       onClick={[Function]}
@@ -315,7 +370,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         }
       >
         <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
           closeButton={false}
+          key="popup-info"
         >
           <Relay(Connect(ProposalMapPopover))
             proposal={
@@ -373,7 +430,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         }
       >
         <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
           closeButton={false}
+          key="popup-info"
         >
           <Relay(Connect(ProposalMapPopover))
             proposal={
@@ -431,7 +490,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         }
       >
         <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
           closeButton={false}
+          key="popup-info"
         >
           <Relay(Connect(ProposalMapPopover))
             proposal={
@@ -459,6 +520,13 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     <ProposalMapLoaderPane
       hasError={false}
       retry={[MockFunction]}
+    />
+    <ProposalMapDiscoverPane
+      handleClose={[Function]}
+      show={true}
+    />
+    <ProposalMapOutOfAreaPane
+      content="[object Object]"
     />
   </ProposalLeafletMapstyle__StyledMap>
 </ProposalLeafletMapstyle__MapContainer>

@@ -17,10 +17,14 @@ describe('<ProposalForm />', () => {
       {
         id: 'district1',
         name: 'District 1',
+        displayedOnMap: false,
+        geojson: '',
       },
       {
         id: 'district2',
         name: 'District 2',
+        displayedOnMap: false,
+        geojson: '',
       },
     ],
     categories: [
@@ -106,10 +110,14 @@ describe('<ProposalForm />', () => {
       {
         id: 'district1',
         name: 'District 1',
+        displayedOnMap: false,
+        geojson: '',
       },
       {
         id: 'district2',
         name: 'District 2',
+        displayedOnMap: false,
+        geojson: '',
       },
     ],
     categories: [
@@ -240,6 +248,7 @@ describe('<ProposalForm />', () => {
       linkedInUrl: 'http://linkedin.com',
       $refType,
     },
+    geoJsons: [],
   };
 
   it('should render an edit form', () => {

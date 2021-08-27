@@ -4,6 +4,7 @@ import type {
   AddressCompleteFormatted,
   AddressType,
 } from '~/components/Form/Address/Address.type';
+import type { MapCenterObject } from '~/components/Proposal/Map/Map.types';
 
 export const getCityFromGoogleAddress = (address: AddressCompleteFormatted): ?string => {
   const locality = address.address_components.find(({ types }) => {
@@ -31,6 +32,13 @@ export const getDataFromGoogleAddress = (
   });
 
   return data?.long_name || '';
+};
+
+export const getAddressFromLatLng = ({ lat, lng }: MapCenterObject) => {
+  const geocoder = new window.google.maps.Geocoder();
+  return geocoder.geocode({ location: { lat, lng } }).then(response => {
+    return response.results[0];
+  });
 };
 
 export const formatAddressFromGoogleAddress = ({

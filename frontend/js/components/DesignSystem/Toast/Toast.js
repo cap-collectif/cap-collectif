@@ -126,7 +126,7 @@ const getAnimation = (position: $PropertyType<ToastProps, 'position'>) => {
   }
 };
 
-const Toast = ({
+export const Toast = ({
   content,
   id,
   onHide,

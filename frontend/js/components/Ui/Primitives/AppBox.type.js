@@ -309,6 +309,8 @@ type Table = {|
   +colSpan?: string,
 |};
 
+type Cursor = {| cursor?: 'pointer' | 'normal' |};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -353,4 +355,5 @@ export type AppBoxProps = {|
   ...Clip,
   ...WhiteSpace,
   ...Table,
+  ...Cursor,
 |};

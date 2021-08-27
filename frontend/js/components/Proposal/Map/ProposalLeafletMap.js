@@ -2,7 +2,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { renderToString } from 'react-dom/server';
 import noop from 'lodash/noop';
-import { TileLayer, GeoJSON, Marker } from 'react-leaflet';
+import { change } from 'redux-form';
+import { TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -13,9 +14,11 @@ import L from 'leaflet';
 import { useResize } from '@liinkiing/react-hooks';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import ZoomControl from './ZoomControl';
-import type { State } from '~/types';
+import type { MapCenterObject, MapOptions, MapProps, MapRef, PopupRef } from './Map.types';
+import type { State, Dispatch } from '~/types';
 import type { MapTokens } from '~/redux/modules/user';
 import ProposalMapPopover from './ProposalMapPopover';
+import LoginOverlay from '~/components/Utils/LoginOverlay';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 import {
   StyledMap,
@@ -33,51 +36,14 @@ import ProposalMapLoaderPane from './ProposalMapLoaderPane';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
-
-type MapCenterObject = {|
-  lat: number,
-  lng: number,
-|};
-
-export type MapProps = {
-  flyTo: (Array<number>, ?number) => void,
-  setView: (Array<number>, ?number) => void,
-  panTo: (?Array<number> | null) => void,
-  getPanes: () => { markerPane?: { children: Array<HTMLImageElement> } } | null,
-  removeLayer: (typeof L.Marker) => void,
-  on: (string, () => void) => void,
-};
-export type MapRef = {|
-  +current: null | MapProps,
-|};
-
-export type MapOptions = {|
-  center: MapCenterObject,
-  zoom: number,
-|};
-
-type Style = {|
-  border: {
-    color: string,
-    id: string,
-    enabled: boolean,
-    opacity: number,
-    size: number,
-    style_type: string,
-  },
-  background: {
-    color: string,
-    id: string,
-    enabled: boolean,
-    opacity: number,
-    style_type: string,
-  },
-|};
-
-export type GeoJson = {|
-  district: string,
-  style: Style,
-|};
+import Button from '~ds/Button/Button';
+import { openCreateModal } from '~/redux/modules/proposal';
+import { geoContains, type GeoJson, type Style } from '~/utils/geojson';
+import ProposalMapDiscoverPane from './ProposalMapDiscoverPane';
+import { getAddressFromLatLng } from '~/utils/googleMapAddress';
+import { formName } from '~/components/Proposal/Form/ProposalForm';
+import { mapToast } from '~ds/Toast';
+import ProposalMapOutOfAreaPane from './ProposalMapOutOfAreaPane';
 
 type Props = {|
   proposals: ProposalLeafletMap_proposals,
@@ -91,6 +57,8 @@ type Props = {|
   hasError: boolean,
   retry: () => void,
   shouldDisplayPictures: boolean,
+  proposalInAZoneRequired: boolean,
+  dispatch: Dispatch,
 |};
 
 const convertToGeoJsonStyle = (style: Style) => {
@@ -109,18 +77,18 @@ const convertToGeoJsonStyle = (style: Style) => {
   if (style.border) {
     districtStyle.color = style.border.color;
     districtStyle.weight = style.border.size;
-    districtStyle.opacity = style.border.opacity / 100;
+    districtStyle.opacity = (style.border.opacity || 0) / 100;
   }
 
   if (style.background) {
     districtStyle.fillColor = style.background.color;
-    districtStyle.fillOpacity = style.background.opacity / 100;
+    districtStyle.fillOpacity = (style.background.opacity || 0) / 100;
   }
 
   return districtStyle || defaultDistrictStyle;
 };
 
-const goToPosition = (mapRef: MapRef, address: ?{| +lat: number, +lng: number |}) =>
+const goToPosition = (mapRef: MapRef, address: ?MapCenterObject) =>
   mapRef.current?.panTo([address?.lat || 0, address?.lng || 0]);
 
 const locationIcon = L.divIcon({
@@ -141,6 +109,29 @@ const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
   locationMarker = L.marker([lat, lng], { icon: locationIcon }).addTo(mapRef.current);
 };
 
+let lastPopoverLatLng = { lat: 0, lng: 0 };
+const openPopup = (
+  mapRef: MapRef,
+  popupRef: PopupRef,
+  latlng?: MapCenterObject,
+  geoJsons,
+  proposalInAZoneRequired: boolean,
+) => {
+  if (!latlng) return;
+  if (proposalInAZoneRequired && !geoContains(geoJsons || [], latlng)) {
+    mapToast();
+    return;
+  }
+  lastPopoverLatLng = latlng;
+  if (popupRef.current) {
+    popupRef.current.setLatLng(latlng).openOn(mapRef.current);
+  }
+};
+
+const closePopup = (mapRef: MapRef, popupRef: PopupRef) => {
+  if (popupRef.current) popupRef.current._close();
+};
+
 const settingsSlider = {
   dots: false,
   infinite: true,
@@ -151,6 +142,7 @@ const settingsSlider = {
 };
 
 let isOnCluster = false;
+// WARNING : Due to the use of global variables this component is for now a one-time use
 export const ProposalLeafletMap = ({
   geoJsons,
   defaultMapOptions,
@@ -161,17 +153,21 @@ export const ProposalLeafletMap = ({
   hasMore,
   hasError,
   retry,
+  dispatch,
   shouldDisplayPictures,
+  proposalInAZoneRequired,
 }: Props) => {
   const intl = useIntl();
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const mapRef = useRef(null);
+  const popupRef = useRef(null);
   const slickRef = useRef(null);
   const [isMobileSliderOpen, setIsMobileSliderOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState<number | null>(null);
   const [address, setAddress] = useState(null);
   const { width } = useResize();
   const isMobile = width < bootstrapGrid.smMin;
+  const [showDiscoverPane, setShowDiscoverPane] = useState(true);
 
   const markers = proposals.filter(
     proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng),
@@ -190,13 +186,9 @@ export const ProposalLeafletMap = ({
       <Address
         id="address"
         getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
-        getAddress={(addressSelected: ?AddressComplete) =>
-          addressSelected
-            ? flyToPosition(
-                mapRef,
-                addressSelected.geometry.location.lat,
-                addressSelected.geometry.location.lng,
-              )
+        getAddress={(addr: ?AddressComplete) =>
+          addr
+            ? flyToPosition(mapRef, addr.geometry.location.lat, addr.geometry.location.lng)
             : noop()
         }
         debounce={1200}
@@ -207,13 +199,17 @@ export const ProposalLeafletMap = ({
       <StyledMap
         whenCreated={(map: MapProps) => {
           mapRef.current = map;
-          map.on('click', () => {
+          map.on('click', (e: ?{ ...?Event, latlng: MapCenterObject }) => {
+            openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired);
             setIsMobileSliderOpen(false);
             isOnCluster = false;
+            setShowDiscoverPane(false);
           });
           map.on('zoomstart', () => {
+            closePopup(mapRef, popupRef);
             setIsMobileSliderOpen(false);
             isOnCluster = false;
+            setShowDiscoverPane(false);
           });
         }}
         center={defaultMapOptions.center}
@@ -233,25 +229,55 @@ export const ProposalLeafletMap = ({
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
           url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
         />
+        <Popup
+          ref={popupRef}
+          key="popup-proposal"
+          closeButton={false}
+          position={lastPopoverLatLng}
+          autoPan={false}
+          className="popup-proposal">
+          <LoginOverlay placement="top">
+            <Button
+              variant="primary"
+              variantColor="primary"
+              variantSize="small"
+              onClick={async () => {
+                const geoAddr = await getAddressFromLatLng(lastPopoverLatLng);
+                dispatch(openCreateModal());
+                dispatch(
+                  change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr),
+                );
+                dispatch(
+                  change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr),
+                );
+              }}>
+              {intl.formatMessage({ id: 'proposal.add' })}
+            </Button>
+          </LoginOverlay>
+        </Popup>
         <MarkerClusterGroup
           spiderfyOnMaxZoom
           showCoverageOnHover={false}
           zoomToBoundsOnClick
-          onClick={() => {
+          onClick={e => {
+            if (isOnCluster)
+              openPopup(mapRef, popupRef, e.latlng, geoJsons, proposalInAZoneRequired);
+            else closePopup(mapRef, popupRef);
             isOnCluster = true;
+            setShowDiscoverPane(false);
           }}
           spiderfyDistanceMultiplier={4}
           maxClusterRadius={30}>
           {markers?.length > 0 &&
-            markers.map((mark, key) => {
-              const size = key === initialSlide ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
+            markers.map((mark, idx) => {
+              const size = idx === initialSlide ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
               const icon = shouldDisplayPictures ? mark.category?.icon : null;
               const color = shouldDisplayPictures ? mark.category?.color || '#1E88E5' : '#1E88E5';
               return (
                 <Marker
-                  key={key}
+                  key={idx}
                   position={[mark.address?.lat, mark.address?.lng]}
-                  alt={`marker-${key}`}
+                  alt={`marker-${idx}`}
                   icon={L.divIcon({
                     className: 'preview-icn',
                     html: renderToString(
@@ -266,18 +292,20 @@ export const ProposalLeafletMap = ({
                   })}
                   eventHandlers={{
                     click: e => {
+                      closePopup(mapRef, popupRef);
+                      setShowDiscoverPane(false);
                       const isOpen: boolean = e.target.isPopupOpen();
                       if (!isOnCluster || isMobile) {
-                        setInitialSlide(isOpen ? key : null);
+                        setInitialSlide(isOpen ? idx : null);
                         setIsMobileSliderOpen(isOpen);
                         if (isMobile) {
-                          goToPosition(mapRef, markers[key].address);
-                          if (slickRef?.current) slickRef.current.slickGoTo(key);
+                          goToPosition(mapRef, markers[idx].address);
+                          if (slickRef?.current) slickRef.current.slickGoTo(idx);
                         }
                       }
                     },
                   }}>
-                  <BlankPopup closeButton={false}>
+                  <BlankPopup closeButton={false} key="popup-info" autoClose={false}>
                     <ProposalMapPopover proposal={mark} />
                   </BlankPopup>
                 </Marker>
@@ -285,15 +313,22 @@ export const ProposalLeafletMap = ({
             })}
         </MarkerClusterGroup>
         {geoJsons &&
-          geoJsons.map((geoJson, key) => (
+          geoJsons.map((geoJson, idx) => (
             <GeoJSON
               style={convertToGeoJsonStyle(geoJson.style)}
-              key={key}
+              key={idx}
               data={geoJson.district}
             />
           ))}
         {!isMobile && <ZoomControl position="bottomright" />}
         {hasMore && <ProposalMapLoaderPane hasError={hasError} retry={retry} />}
+        <ProposalMapDiscoverPane
+          show={showDiscoverPane}
+          handleClose={() => setShowDiscoverPane(false)}
+        />
+        <ProposalMapOutOfAreaPane
+          content={intl.formatHTMLMessage({ id: 'constraints.address_in_zone' })}
+        />
       </StyledMap>
       {isMobileSliderOpen && isMobile && (
         <SliderPane

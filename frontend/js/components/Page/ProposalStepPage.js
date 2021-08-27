@@ -17,8 +17,8 @@ import type {
   ProposalStepPageQueryVariables,
 } from '~relay/ProposalStepPageQuery.graphql';
 import config from '../../config';
-import warning from '../../utils/warning';
 import LoginModal from '~/components/User/Login/LoginModal';
+import { formatGeoJsons } from '~/utils/geojson';
 
 type OwnProps = {|
   stepId: string,
@@ -48,19 +48,6 @@ type RenderedProps = {|
   isTipsMeeeEnabled: boolean,
 |};
 
-const parseGeoJson = (district: { +geojson: string, +id: string }) => {
-  const { geojson, id } = district;
-  try {
-    return JSON.parse(geojson);
-  } catch (e) {
-    warning(
-      false,
-      `Using empty geojson for ${id} because we couldn't parse the geojson : ${geojson}`,
-    );
-    return null;
-  }
-};
-
 export const ProposalStepPageRendered = (props: RenderedProps) => {
   const { isTipsMeeeEnabled, viewer, isAuthenticated, features, step, count } = props;
   const [displayMode, setDisplayMode] = React.useState(step?.mainView);
@@ -77,16 +64,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
 
   let geoJsons = [];
   if (features.display_map && form.districts) {
-    geoJsons = form.districts
-      .filter(d => d.geojson && d.displayedOnMap)
-      .map(d => ({
-        // $FlowFixMe geojson is a non-null string, don't worry Flow
-        district: parseGeoJson(d),
-        style: {
-          border: d.border,
-          background: d.background,
-        },
-      }));
+    geoJsons = formatGeoJsons(form.districts);
   }
   return (
     <div id="ProposalStepPage-rendered">

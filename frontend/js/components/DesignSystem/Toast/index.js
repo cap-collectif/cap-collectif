@@ -11,3 +11,7 @@ export const toast = (value: $Diff<ToastProps, { id: * }>): void => {
 export const clearToasts = (): void => {
   Emitter.emit(UIEvents.ToastClear);
 };
+
+export const mapToast = (): void => {
+  Emitter.emit(UIEvents.ToastShowOnMap);
+};

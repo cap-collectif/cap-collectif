@@ -13,7 +13,7 @@ import LocateControl from '~/components/Proposal/Map/LocateControl';
 import type { GlobalState, Dispatch } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
 import type { MapTokens } from '~/redux/modules/user';
-import type { MapOptions } from '~/components/Proposal/Map/ProposalLeafletMap';
+import type { MapOptions } from '~/components/Proposal/Map/Map.types';
 import EventMapPreview from './EventMapPreview/EventMapPreview';
 import environment from '~/createRelayEnvironment';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
