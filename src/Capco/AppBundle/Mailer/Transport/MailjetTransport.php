@@ -19,7 +19,7 @@ class MailjetTransport implements \Swift_Transport
     }
 
     /**
-     * Not used
+     * Not used.
      */
     public function isStarted()
     {
@@ -27,29 +27,33 @@ class MailjetTransport implements \Swift_Transport
     }
 
     /**
-     * Not used
+     * Not used.
      */
-    public function start() {}
+    public function start()
+    {
+    }
 
     /**
-     * Not used
+     * Not used.
      */
-    public function stop() {}
+    public function stop()
+    {
+    }
 
     /**
-     * Not used
+     * Not used.
      */
-    public function ping() {}
+    public function ping(): bool
+    {
+        return true;
+    }
 
     public function send(
         \Swift_Mime_SimpleMessage $message,
         &$failedRecipients = null,
         ?\Swift_Events_Event $event = null
     ): int {
-        $response = (new Client())->post(
-            self::API_URL,
-            $this->createPostOptions($message)
-        );
+        $response = (new Client())->post(self::API_URL, $this->createPostOptions($message));
 
         if (200 <= $response->getStatusCode() && $response->getStatusCode() <= 300) {
             return $this->handleSuccess($response, $event);
@@ -89,9 +93,11 @@ class MailjetTransport implements \Swift_Transport
         $this->dispatcher->bindEventListener($plugin);
     }
 
-    private function handleSuccess(ResponseInterface $response, ?\Swift_Events_Event $event = null): int
-    {
-        $responseBody = \json_decode($response->getBody()->getContents(), true);
+    private function handleSuccess(
+        ResponseInterface $response,
+        ?\Swift_Events_Event $event = null
+    ): int {
+        $responseBody = json_decode($response->getBody()->getContents(), true);
         $count = $responseBody['Count'] ?? 0;
         if ($event) {
             $this->handleSuccessEvent($count, $event);
@@ -119,7 +125,7 @@ class MailjetTransport implements \Swift_Transport
             'auth' => [$this->getPublicKey(), $this->getPrivateKey()],
             'headers' => [
                 'content-type' => 'application/json',
-            ]
+            ],
         ];
     }
 
@@ -154,7 +160,7 @@ class MailjetTransport implements \Swift_Transport
         foreach ($message->getTo() as $email => $name) {
             $to[] = [
                 'Email' => $email,
-                'Name' => $name
+                'Name' => $name,
             ];
         }
 
@@ -167,7 +173,7 @@ class MailjetTransport implements \Swift_Transport
         foreach ($message->getCc() ?? [] as $email => $name) {
             $cc[] = [
                 'Email' => $email,
-                'Name' => $name
+                'Name' => $name,
             ];
         }
 
@@ -180,7 +186,7 @@ class MailjetTransport implements \Swift_Transport
         foreach ($message->getBcc() ?? [] as $email => $name) {
             $bcc[] = [
                 'Email' => $email,
-                'Name' => $name
+                'Name' => $name,
             ];
         }
 

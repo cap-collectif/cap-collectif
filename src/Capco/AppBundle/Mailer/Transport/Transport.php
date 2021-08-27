@@ -51,8 +51,9 @@ class Transport implements \Swift_Transport
     /**
      * Not used.
      */
-    public function ping()
+    public function ping(): bool
     {
+        return true;
     }
 
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)

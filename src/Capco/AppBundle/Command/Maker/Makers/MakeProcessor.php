@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command\Maker\Makers;
 
 use Capco\AppBundle\Command\Maker\AbstractMaker;
-use Capco\AppBundle\Utils\Text;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -53,7 +52,7 @@ class MakeProcessor extends AbstractMaker
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->className = $input->getArgument('name');
         $this->className = str_replace('Processor', '', $this->className);
@@ -68,5 +67,7 @@ class MakeProcessor extends AbstractMaker
         $path = $this->makeFile();
 
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
+
+        return 0;
     }
 }

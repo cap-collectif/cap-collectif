@@ -46,6 +46,9 @@ parameters:
         - %currentWorkingDirectory%/src/Capco/AppBundle/Repository/AbstractVoteRepository.php
 # because of $connection->totalUserCount = $totalUsersInGroups;
         - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectAllowedGroupsResolver.php
+# Avoid phpstan to create errors when it anticipates version upgrades on Sonata and Symfony
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Cache/SessionListener.php
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Twig/MediaExtension.php
 
 # Method Capco\AppBundle\Entity\Post::canContribute() invoked with 1 parameter, 0 required.
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/CommentableTrait.php

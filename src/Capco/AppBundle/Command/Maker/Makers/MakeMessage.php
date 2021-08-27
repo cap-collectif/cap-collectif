@@ -30,7 +30,9 @@ class MakeMessage extends AbstractMaker
         return [
             'command_class_name' => $this->className,
             'command_entity_name' => $this->entity ? $this->entity->getShortName() : null,
-            'command_entity_name_camelCase' => $this->entity ? Text::camelCase($this->entity->getShortName()) : null,
+            'command_entity_name_camelCase' => $this->entity
+                ? Text::camelCase($this->entity->getShortName())
+                : null,
             'command_related_entity_fqcn' => $this->entity ? $this->entity->getName() : null,
             'command_message_type' => $this->type,
             'command_subject_template' => $this->subject,
@@ -41,36 +43,67 @@ class MakeMessage extends AbstractMaker
         ];
     }
 
-    protected function configure()
+    protected function configure(): void
     {
-        $this
-            ->setName('capco:make:message')
-            ->setDescription('Generate a message for notifications');
+        $this->setName('capco:make:message')->setDescription(
+            'Generate a message for notifications'
+        );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $messageTypes = ['External', 'Admin', 'Moderator', 'Default', 'ExternalContact'];
-        $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>', true);
+        $this->entity = $this->askEntity(
+            $input,
+            $output,
+            'Please type the related entity of your message <info>(e.g Proposal)</info>',
+            true
+        );
 
-        $this->className = $this->askSimpleQuestion($input, $output,
-            'Please type your message name <info>(e.g ' . ($this->entity ? $this->entity->getShortName() : 'Proposal') . 'Create)</info>');
+        $this->className = $this->askSimpleQuestion(
+            $input,
+            $output,
+            'Please type your message name <info>(e.g ' .
+                ($this->entity ? $this->entity->getShortName() : 'Proposal') .
+                'Create)</info>'
+        );
         $this->className = str_replace('Message', '', $this->className);
         $this->className .= 'Message';
-        $this->type = $this->askChoiceQuestion($input, $output, 'Please select your message type <info>(defaults to External</info>)',
+        $this->type = $this->askChoiceQuestion(
+            $input,
+            $output,
+            'Please select your message type <info>(defaults to External</info>)',
             $messageTypes,
             'External',
             $messageTypes
         );
         $this->type .= 'Message';
-        $this->subject = $this->askSimpleQuestion($input, $output, 'Please type the translation key of the message subject');
-        $this->content = $this->askSimpleQuestion($input, $output, 'Please type the translation key of the message content');
+        $this->subject = $this->askSimpleQuestion(
+            $input,
+            $output,
+            'Please type the translation key of the message subject'
+        );
+        $this->content = $this->askSimpleQuestion(
+            $input,
+            $output,
+            'Please type the translation key of the message content'
+        );
 
-        $this->subjectVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the subject <info>(comma-separated list)</info>');
-        $this->templateVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the content <info>(comma-separated list)</info>');
+        $this->subjectVars = $this->askQuestionWithArrayResponse(
+            $input,
+            $output,
+            'Please type the names of the variables in the subject <info>(comma-separated list)</info>'
+        );
+        $this->templateVars = $this->askQuestionWithArrayResponse(
+            $input,
+            $output,
+            'Please type the names of the variables in the content <info>(comma-separated list)</info>'
+        );
 
         $path = $this->makeFile();
 
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
+
+        return 0;
     }
 }
