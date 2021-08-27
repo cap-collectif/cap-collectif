@@ -14,6 +14,7 @@ declare export const SPOT_ICON_NAME = {
     MAIL_1: 'MAIL_1',
     MAIL_2: 'MAIL_2',
     ERROR: 'ERROR',
+    FORM: 'FORM',
     NEWSPAPER: 'NEWSPAPER',
 };
 

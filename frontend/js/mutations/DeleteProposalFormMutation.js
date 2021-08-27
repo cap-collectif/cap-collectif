@@ -5,41 +5,32 @@ import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTy
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  CreateProposalFormMutationResponse,
-  CreateProposalFormMutationVariables,
-} from '~relay/CreateProposalFormMutation.graphql';
+  DeleteProposalFormMutationResponse,
+  DeleteProposalFormMutationVariables,
+} from '~relay/DeleteProposalFormMutation.graphql';
 
 const mutation = graphql`
-  mutation CreateProposalFormMutation($input: CreateProposalFormInput!, $connections: [ID!]!) {
-    createProposalForm(input: $input) {
-      proposalForm @prependNode(connections: $connections, edgeTypeName: "ProposalFormEdge") {
-        ...ProposalFormItem_proposalForm
-      }
+  mutation DeleteProposalFormMutation($input: DeleteProposalFormInput!, $connections: [ID!]!) {
+    deleteProposalForm(input: $input) {
+      deletedProposalFormId @deleteEdge(connections: $connections)
     }
   }
 `;
 
 const commit = (
-  variables: CreateProposalFormMutationVariables,
+  variables: DeleteProposalFormMutationVariables,
   isAdmin: boolean,
-): Promise<CreateProposalFormMutationResponse> =>
+): Promise<DeleteProposalFormMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
     optimisticResponse: {
-      createProposalForm: {
-        proposalForm: {
-          id: new Date().toISOString(),
-          title: variables.input.title,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          step: null,
-          adminUrl: '',
-        },
+      deleteProposalForm: {
+        deletedProposalFormId: variables.input.id,
       },
     },
     updater: (store: RecordSourceSelectorProxy) => {
-      const payload = store.getRootField('createProposalForm');
+      const payload = store.getRootField('deleteProposalForm');
       if (!payload) return;
       const errorCode = payload.getValue('errorCode');
       if (errorCode) return;
@@ -53,7 +44,7 @@ const commit = (
       if (!proposalForms) return;
 
       const proposalFormsTotalCount = parseInt(proposalForms.getValue('totalCount'), 10);
-      proposalForms.setValue(proposalFormsTotalCount + 1, 'totalCount');
+      proposalForms.setValue(proposalFormsTotalCount - 1, 'totalCount');
     },
   });
 

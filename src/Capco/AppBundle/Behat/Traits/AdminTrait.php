@@ -168,6 +168,14 @@ trait AdminTrait
     }
 
     /**
+     * @When I go to the admin proposal form list page
+     */
+    public function iGoToTheAdminProposalFormListPage()
+    {
+        $this->visit('/admin/capco/app/proposalform/list');
+    }
+
+    /**
      * @When I go to the admin user page with userId :userId
      */
     public function iGoToTheAdminUserPageWithId(string $userId)

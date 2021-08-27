@@ -286,6 +286,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         $this->categories = new ArrayCollection();
         $this->districts = new ArrayCollection();
         $this->proposals = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
 
         $this->initializeNotificationConfiguration();
     }
@@ -298,7 +299,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                 $this->step = null;
                 $this->reference = null;
                 $this->createdAt = new \DateTime();
-                $this->updatedAt = null;
+                $this->updatedAt = new \DateTime();;
                 $this->proposals = new ArrayCollection();
 
                 if ($this->evaluationForm) {

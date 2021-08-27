@@ -65,3 +65,5 @@ export { default as SN_WEBPAGE } from './svg/sn-webpage.svg';
 export { default as SN_LINKEDIN } from './svg/sn-linkedin.svg';
 export { default as SN_INSTAGRAM } from './svg/sn-instagram.svg';
 export { default as ICON_PLACEHOLDER } from './svg/icon_placeholder.svg';
+export { default as DUPLICATE } from './svg/duplicate.svg';
+export { default as DUPLICATE_O } from './svg/duplicate-o.svg';

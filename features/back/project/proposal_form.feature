@@ -93,10 +93,9 @@ Scenario: Logged in admin wants edit a proposal form on settings tab
 @database @rabbitmq
 Scenario: Logged in admin wants to duplicate a proposal form
   Given I am logged in as admin
-  And I duplicate a proposal form "proposalForm1"
-  And I wait 1 seconds
-  And I should be redirected to "/admin/capco/app/proposalform/list"
-  Then I should see "your-form-has-been-duplicated"
+  And I go to the admin proposal form list page
+  Then I click on button ".btn-duplicate:first-child"
+  Then I should see "copy-of Ils ne servent que des pintes ?"
 
 @database @rabbitmq
 Scenario: Logged in admin wants to delete the first question on unattached form

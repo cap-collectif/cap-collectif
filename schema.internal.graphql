@@ -9361,7 +9361,7 @@ interface ProposalFormOwner {
     first: Int = 100
 
     """Only available proposalForms will be returned."""
-    availableOnly: Boolean! = false
+    availableOnly: Boolean = false
 
     """
     Array of viewer's affiliation options for proposalForms returned from the connection.
@@ -14733,7 +14733,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     first: Int = 100
 
     """Only available proposalForms will be returned."""
-    availableOnly: Boolean! = false
+    availableOnly: Boolean = false
 
     """
     Array of viewer's affiliation options for proposalForms returned from the connection.

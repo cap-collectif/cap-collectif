@@ -132,13 +132,7 @@
             </li>
         </ul>
     {% endif %}
-    {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.hasSubject == false %}
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                {{ react_render_component('ProposalFormCreateButtonApp') }}
-            </li>
-        </ul>
-    {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
+    {% if admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
         <ul class="nav navbar-nav navbar-right">
             <li>
                 {{ react_render_component('GroupCreateButtonApp') }}

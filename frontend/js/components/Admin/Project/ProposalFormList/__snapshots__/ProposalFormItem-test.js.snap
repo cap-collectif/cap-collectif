@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormItem /> <TestProposalFormItem /> should render correctly 1`] = `
+Array [
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="/admin/proposalForm/proposalForm-1"
+    >
+      Combien font 0 + 0 ?
+    </a>
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="<mock-value-for-field-\\"adminAlphaUrl\\">"
+    >
+      Le projet de la vie
+    </a>
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    2050-03-01 12:00:00
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    2050-03-01 12:00:00
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+    >
+      <button
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ btn-duplicate"
+        onClick={[Function]}
+        type="button"
+      >
+        <IconMock
+          className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
+        />
+      </button>
+      <div
+        className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+          }
+        }
+      >
+        <p
+          className="sc-bdnxRM cZcArZ"
+          title="duplicate"
+        >
+          duplicate
+        </p>
+        <div
+          className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+          data-popper-arrow={true}
+          id="arrow"
+        />
+      </div>
+      <button
+        aria-controls="id-1"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        type="button"
+      >
+        <IconMock
+          className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
+        />
+      </button>
+      <div
+        className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+          }
+        }
+      >
+        <p
+          className="sc-bdnxRM cZcArZ"
+          title="global.delete"
+        >
+          global.delete
+        </p>
+        <div
+          className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+          data-popper-arrow={true}
+          id="arrow"
+        />
+      </div>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-1"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;
