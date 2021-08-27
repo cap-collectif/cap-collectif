@@ -65,14 +65,20 @@ describe('<ModalConfirmationDelete />', () => {
   describe('<TestModalConfirmationDelete />', () => {
     it('should render correctly', () => {
       testComponentTree = ReactTestRenderer.create(
-        <TestModalConfirmationDelete connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
+        <TestModalConfirmationDelete
+          connectionName="client:root:__QuestionnaireList_questionnaires_connection"
+          isAdmin
+        />,
       );
       expect(testComponentTree).toMatchSnapshot();
     });
 
     it('should render modal open', () => {
       testComponentTree = ReactTestRenderer.create(
-        <TestModalConfirmationDelete connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
+        <TestModalConfirmationDelete
+          connectionName="client:root:__QuestionnaireList_questionnaires_connection"
+          isAdmin
+        />,
       );
       const fakeEvent = {};
       testComponentTree.root.findByType('button').props.onClick(fakeEvent);

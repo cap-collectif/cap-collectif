@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import {
   graphql,
   type GraphQLTaggedNode,
@@ -14,8 +15,10 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import ModalCreateQuestionnaire from '~/components/Admin/Project/QuestionnaireList/ModalCreateQuestionnaire';
 import Input from '~ui/Form/Input/Input';
 import QuestionnaireList from './QuestionnaireList';
+import NoResult from './NoResult';
 import QuestionnaireListPlaceholder from './QuestionnaireListPlaceholder';
 import type { QuestionnaireListPageQuery as QuestionnaireListPageQueryType } from '~relay/QuestionnaireListPageQuery.graphql';
+import Button from '~ds/Button/Button';
 
 type Props = {|
   +queryReference: PreloadedQuery<QuestionnaireListPageQueryType>,
@@ -32,6 +35,9 @@ export const QuestionnaireListPageQuery: GraphQLTaggedNode = graphql`
   ) {
     viewer {
       id
+      allQuestionnaire: questionnaires(affiliations: $affiliations) {
+        totalCount
+      }
       ...QuestionnaireList_viewer
         @arguments(
           count: $count
@@ -48,6 +54,7 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
   const intl = useIntl();
   const [term, setTerm] = React.useState<string>('');
   const [orderBy, setOrderBy] = React.useState('DESC');
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const query = usePreloadedQuery<QuestionnaireListPageQueryType>(
     QuestionnaireListPageQuery,
     queryReference,
@@ -65,44 +72,61 @@ const QuestionnaireListPage = ({ queryReference, isAdmin }: Props): React.Node =
         {intl.formatMessage({ id: 'global.questionnaire' })}
       </Text>
 
-      <Flex
-        direction="column"
-        p={8}
-        spacing={4}
-        m={6}
-        bg="white"
-        borderRadius="normal"
-        overflow="hidden">
-        <Flex direction="row" spacing={8}>
-          <ModalCreateQuestionnaire
-            viewerId={query.viewer.id}
-            intl={intl}
-            isAdmin={isAdmin}
-            term={term}
-            orderBy={orderBy}
-          />
+      {query.viewer.allQuestionnaire.totalCount > 0 ? (
+        <Flex
+          direction="column"
+          p={8}
+          spacing={4}
+          m={6}
+          bg="white"
+          borderRadius="normal"
+          overflow="hidden">
+          <Flex direction="row" spacing={8}>
+            <>
+              <Button
+                variant="primary"
+                variantColor="primary"
+                variantSize="small"
+                leftIcon="ADD"
+                id="btn-add-questionnaire"
+                onClick={onOpen}>
+                {intl.formatMessage({ id: 'create-questionnaire' })}
+              </Button>
+              <ModalCreateQuestionnaire
+                viewerId={query.viewer.id}
+                intl={intl}
+                isAdmin={isAdmin}
+                term={term}
+                orderBy={orderBy}
+                show={isOpen}
+                onClose={onClose}
+              />
+            </>
 
-          <Input
-            type="text"
-            name="term"
-            id="search-questionnaire"
-            onChange={(e: SyntheticInputEvent<HTMLInputElement>) => setTerm(e.target.value)}
-            value={term}
-            placeholder={intl.formatMessage({ id: 'search-questionnaire' })}
-          />
+            <Input
+              type="text"
+              name="term"
+              id="search-questionnaire"
+              onChange={(e: SyntheticInputEvent<HTMLInputElement>) => setTerm(e.target.value)}
+              value={term}
+              placeholder={intl.formatMessage({ id: 'search-questionnaire' })}
+            />
+          </Flex>
+
+          <React.Suspense fallback={<QuestionnaireListPlaceholder />}>
+            <QuestionnaireList
+              viewer={query.viewer}
+              term={term}
+              isAdmin={isAdmin}
+              resetTerm={() => setTerm('')}
+              orderBy={orderBy}
+              setOrderBy={setOrderBy}
+            />
+          </React.Suspense>
         </Flex>
-
-        <React.Suspense fallback={<QuestionnaireListPlaceholder />}>
-          <QuestionnaireList
-            viewer={query.viewer}
-            term={term}
-            isAdmin={isAdmin}
-            resetTerm={() => setTerm('')}
-            orderBy={orderBy}
-            setOrderBy={setOrderBy}
-          />
-        </React.Suspense>
-      </Flex>
+      ) : (
+        <NoResult isAdmin={isAdmin} viewerId={query.viewer.id} term={term} orderBy={orderBy} />
+      )}
     </Flex>
   );
 };

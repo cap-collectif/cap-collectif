@@ -141,6 +141,7 @@ const QuestionnaireList = ({
               <QuestionnaireItem
                 questionnaire={questionnaire}
                 connectionName={questionnaires.__id}
+                isAdmin={isAdmin}
               />
             </Table.Tr>
           ))}

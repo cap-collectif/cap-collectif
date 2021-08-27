@@ -72,7 +72,10 @@ describe('<QuestionnaireItem />', () => {
   describe('<TestQuestionnaireItem />', () => {
     it('should render correctly', () => {
       testComponentTree = ReactTestRenderer.create(
-        <TestQuestionnaireItem connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
+        <TestQuestionnaireItem
+          connectionName="client:root:__QuestionnaireList_questionnaires_connection"
+          isAdmin
+        />,
       );
       expect(testComponentTree).toMatchSnapshot();
     });

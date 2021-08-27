@@ -23,6 +23,8 @@ type PropsBefore = {|
   +isAdmin: boolean,
   +orderBy: string,
   +term: string,
+  +show: boolean,
+  +onClose: () => void,
 |};
 
 type Props = {|
@@ -59,16 +61,19 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     title: values.title,
   };
 
-  return CreateQuestionnaireMutation.commit({
-    input,
-    connections: [
-      ConnectionHandler.getConnectionID(props.viewerId, 'QuestionnaireList_questionnaires', {
-        query: props.term || null,
-        affiliations: props.isAdmin ? null : ['OWNER'],
-        orderBy: { field: 'CREATED_AT', direction: props.orderBy },
-      }),
-    ],
-  }).then(response => {
+  return CreateQuestionnaireMutation.commit(
+    {
+      input,
+      connections: [
+        ConnectionHandler.getConnectionID(props.viewerId, 'QuestionnaireList_questionnaires', {
+          query: props.term || null,
+          affiliations: props.isAdmin ? null : ['OWNER'],
+          orderBy: { field: 'CREATED_AT', direction: props.orderBy },
+        }),
+      ],
+    },
+    props.isAdmin,
+  ).then(response => {
     if (!response.createQuestionnaire?.questionnaire) {
       return mutationErrorToast(props.intl);
     }
@@ -86,19 +91,13 @@ const ModalCreateQuestionnaire = ({
   submitting,
   dispatch,
   intl,
+  show,
+  onClose,
 }: Props): React.Node => (
   <Modal
     ariaLabel={intl.formatMessage({ id: 'create-questionnaire' })}
-    disclosure={
-      <Button
-        variant="primary"
-        variantColor="primary"
-        variantSize="small"
-        leftIcon="ADD"
-        id="btn-add-questionnaire">
-        {intl.formatMessage({ id: 'create-questionnaire' })}
-      </Button>
-    }>
+    show={show}
+    onClose={onClose}>
     {({ hide }) => (
       <>
         <Modal.Header>

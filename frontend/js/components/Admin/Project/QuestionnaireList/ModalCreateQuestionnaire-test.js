@@ -11,6 +11,8 @@ const props = {
   isAdmin: true,
   orderBy: 'DESC',
   term: 'test de recherche',
+  show: true,
+  onClose: jest.fn(),
 };
 
 describe('<ModalCreateQuestionnaire  />', () => {

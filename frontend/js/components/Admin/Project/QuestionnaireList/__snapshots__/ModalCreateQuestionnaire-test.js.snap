@@ -30,6 +30,7 @@ exports[`<ModalCreateQuestionnaire  /> should renders correcty 1`] = `
   }
   isAdmin={true}
   keepDirtyOnReinitialize={false}
+  onClose={[MockFunction]}
   onSubmit={[Function]}
   orderBy="DESC"
   persistentSubmitErrors={false}
@@ -38,6 +39,7 @@ exports[`<ModalCreateQuestionnaire  /> should renders correcty 1`] = `
   shouldError={[Function]}
   shouldValidate={[Function]}
   shouldWarn={[Function]}
+  show={true}
   submitAsSideEffect={false}
   term="test de recherche"
   touchOnBlur={true}

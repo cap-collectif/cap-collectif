@@ -10,6 +10,7 @@ import Link from '~ds/Link/Link';
 type Props = {|
   questionnaire: QuestionnaireItem_questionnaire$key,
   connectionName: string,
+  isAdmin: boolean,
 |};
 
 const FRAGMENT = graphql`
@@ -31,6 +32,7 @@ const FRAGMENT = graphql`
 const QuestionnaireItem = ({
   questionnaire: questionnaireFragment,
   connectionName,
+  isAdmin,
 }: Props): React.Node => {
   const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
   const intl = useIntl();
@@ -64,7 +66,11 @@ const QuestionnaireItem = ({
         })}
       </Table.Td>
       <Table.Td>
-        <ModalConfirmationDelete questionnaire={questionnaire} connectionName={connectionName} />
+        <ModalConfirmationDelete
+          questionnaire={questionnaire}
+          connectionName={connectionName}
+          isAdmin={isAdmin}
+        />
       </Table.Td>
     </>
   );

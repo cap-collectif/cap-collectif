@@ -16,6 +16,7 @@ import { toast } from '~ds/Toast';
 type Props = {|
   +questionnaire: ModalConfirmationDelete_questionnaire$key,
   +connectionName: string,
+  +isAdmin: boolean,
 |};
 
 const FRAGMENT = graphql`
@@ -30,13 +31,14 @@ const deleteQuestionnaire = (
   hide: () => void,
   intl: IntlShape,
   connectionName: string,
+  isAdmin: boolean,
 ) => {
   const input = {
     id: questionnaireId,
   };
   hide();
 
-  return DeleteQuestionnaireMutation.commit({ input, connections: [connectionName] })
+  return DeleteQuestionnaireMutation.commit({ input, connections: [connectionName] }, isAdmin)
     .then(() => {
       toast({
         variant: 'success',
@@ -51,6 +53,7 @@ const deleteQuestionnaire = (
 const ModalConfirmationDelete = ({
   questionnaire: questionnaireFragment,
   connectionName,
+  isAdmin,
 }: Props): React.Node => {
   const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
   const intl = useIntl();
@@ -91,7 +94,9 @@ const ModalConfirmationDelete = ({
                 variantSize="medium"
                 variant="primary"
                 variantColor="danger"
-                onClick={() => deleteQuestionnaire(questionnaire.id, hide, intl, connectionName)}>
+                onClick={() =>
+                  deleteQuestionnaire(questionnaire.id, hide, intl, connectionName, isAdmin)
+                }>
                 {intl.formatMessage({ id: 'global.delete' })}
               </Button>
             </ButtonGroup>
