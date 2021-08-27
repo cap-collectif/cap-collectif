@@ -108,13 +108,13 @@ class Proposal implements
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    protected $author;
+    protected User $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="update_author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected $updateAuthor;
+    protected ?User $updateAuthor = null;
 
     /**
      * @Assert\NotNull()
@@ -126,63 +126,63 @@ class Proposal implements
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
-    protected $reports;
+    protected Collection $reports;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="user_favorite_proposal")
      */
-    protected $likers;
+    protected Collection $likers;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", inversedBy="evaluating", cascade={"persist"})
      * @ORM\JoinTable(name="user_evaluatin_proposal")
      */
-    protected $evaluers;
+    protected Collection $evaluers;
 
     /**
      * @ORM\Column(name="rating", type="integer", nullable=true)
      */
-    private $rating;
+    private ?int $rating = null;
 
     /**
      * @ORM\Column(name="annotation", type="text", nullable=true)
      */
-    private $annotation;
+    private ?string $annotation = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $theme;
+    private ?Theme $theme = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $district;
+    private ?ProposalDistrict $district = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $status;
+    private ?Status $status = null;
 
     /**
      * @ORM\Column(name="tipsmeee_id", type="string", nullable=true)
      */
-    private $tipsmeeeId;
+    private ?string $tipsmeeeId = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $category;
+    private ?ProposalCategory $category = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist"})
      */
-    private $comments;
+    private Collection $comments;
 
     /**
      * @ORM\OneToMany(
@@ -191,94 +191,94 @@ class Proposal implements
      *  cascade={"persist"}
      * )
      */
-    private $responses;
+    private Collection $responses;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
-    private $selections;
+    private Collection $selections;
 
     /**
      * @ORM\Column(name="estimation", type="float", nullable=true)
      */
-    private $estimation;
+    private ?float $estimation = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist","remove"},  orphanRemoval=true)
      */
-    private $progressSteps;
+    private Collection $progressSteps;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $media;
+    private ?Media $media = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSelectionVote", mappedBy="proposal", cascade={"persist"})
      */
-    private $selectionVotes;
+    private Collection $selectionVotes;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCollectVote", mappedBy="proposal", cascade={"persist"})
      */
-    private $collectVotes;
+    private Collection $collectVotes;
 
     /** TODO: To remove for a real dynamic evaluation */
 
     /**
      * @ORM\Column(name="service_pilote", type="text", nullable=true)
      */
-    private $servicePilote;
+    private ?string $servicePilote = null;
 
     /**
      * @ORM\Column(name="domaniality", type="text", nullable=true)
      */
-    private $domaniality;
+    private ?string $domaniality = null;
 
     /**
      * @ORM\Column(name="compatibility", type="text", nullable=true)
      */
-    private $compatibility;
+    private ?string $compatibility = null;
 
     /**
      * @ORM\Column(name="environmental_impact", type="text", nullable=true)
      */
-    private $environmentalImpact;
+    private ?string $environmentalImpact = null;
 
     /**
      * @ORM\Column(name="dimension", type="text", nullable=true)
      */
-    private $dimension;
+    private ?string $dimension = null;
 
     /**
      * @ORM\Column(name="functioning_impact", type="text", nullable=true)
      */
-    private $functioningImpact;
+    private ?string $functioningImpact = null;
 
     /**
      * @ORM\Column(name="evaluation", type="text", nullable=true)
      */
-    private $evaluation;
+    private ?string $evaluation = null;
 
     /**
      * @ORM\Column(name="delay", type="text", nullable=true)
      */
-    private $delay;
+    private ?string $delay = null;
 
     /**
      * @ORM\Column(name="proposed_answer", type="text", nullable=true)
      */
-    private $proposedAnswer;
+    private ?string $proposedAnswer = null;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
-    private $proposalEvaluation;
+    private ?ProposalEvaluation $proposalEvaluation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="proposal", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
     private $followers;
 
@@ -308,7 +308,7 @@ class Proposal implements
     private Collection $proposalAnalysts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", cascade={"remove"}, orphanRemoval=true)
      */
     private iterable $analyses;
 
@@ -320,7 +320,7 @@ class Proposal implements
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\OfficialResponse", mappedBy="proposal", cascade={"persist", "remove"})
      */
-    private $officialResponse;
+    private ?OfficialResponse $officialResponse = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSocialNetworks", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)

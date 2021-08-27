@@ -29,7 +29,7 @@ class ProposalDecision implements Timestampable
     /**
      * @ORM\Column(type="integer", nullable=true, name="estimated_cost")
      */
-    private $estimatedCost;
+    private ?int $estimatedCost = null;
 
     // TODO: Rename to decisionMaker.
 
@@ -37,30 +37,30 @@ class ProposalDecision implements Timestampable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true, name="updated_by", referencedColumnName="id")
      */
-    private $updatedBy;
+    private ?User $updatedBy = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="decision")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Choice(choices = {"IN_PROGRESS", "DONE"})
      */
-    private $state = ProposalStatementState::IN_PROGRESS;
+    private string $state = ProposalStatementState::IN_PROGRESS;
 
     /**
      * @ORM\Column(type="boolean", nullable=false, name="is_approved")
      */
-    private $isApproved = true;
+    private bool $isApproved = true;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status")
      * @ORM\JoinColumn(nullable=true, name="refused_reason", referencedColumnName="id")
      */
-    private $refusedReason;
+    private ?Status $refusedReason = null;
 
     /**
      * @Gedmo\Timestampable(on="update")

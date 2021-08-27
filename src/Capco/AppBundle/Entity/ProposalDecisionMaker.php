@@ -21,14 +21,14 @@ class ProposalDecisionMaker implements Timestampable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="decision_maker_id")
      */
-    private $decisionMaker;
+    private User $decisionMaker;
 
     /**
      * @ORM\Id()
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="decisionMaker")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @Gedmo\Timestampable(on="update")

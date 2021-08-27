@@ -19,22 +19,22 @@ class ProposalAnalyst implements Timestampable
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalAnalysts")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="proposal_id")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="proposal_id", onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assigned_by", nullable=true)
      */
-    private $assignedBy;
+    private ?User $assignedBy = null;
 
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="analyst_id")
      */
-    private $analyst;
+    private User $analyst;
 
     /**
      * @Gedmo\Timestampable(on="update")

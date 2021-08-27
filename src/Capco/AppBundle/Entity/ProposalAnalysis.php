@@ -23,31 +23,31 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class ProposalAnalysis implements Timestampable
 {
+    use HasResponsesTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use HasResponsesTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="analyses")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Choice(choices = {"IN_PROGRESS", "TOO_LATE", "FAVOURABLE", "UNFAVOURABLE", "NONE"})
      */
-    private $state = ProposalStatementState::IN_PROGRESS;
+    private string $state = ProposalStatementState::IN_PROGRESS;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="analysis", cascade={"persist"})
      */
-    private $responses;
+    private Collection $responses;
 
     /**
      * @ORM\Column(type="text", nullable=true, name="comment")
      */
-    private $comment;
+    private ?string $comment = null;
 
     //TODO: Rename to analyst.
 
@@ -55,7 +55,7 @@ class ProposalAnalysis implements Timestampable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")
      */
-    private $updatedBy;
+    private ?User $updatedBy = null;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -70,7 +70,8 @@ class ProposalAnalysis implements Timestampable
 
     public function getResponsesQuestions(): Collection
     {
-        return $this->getEvaluationForm() ? $this->getEvaluationForm()->getRealQuestions()
+        return $this->getEvaluationForm()
+            ? $this->getEvaluationForm()->getRealQuestions()
             : new ArrayCollection();
     }
 

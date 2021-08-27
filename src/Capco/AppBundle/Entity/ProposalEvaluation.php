@@ -12,28 +12,28 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  *
  * @ORM\Table(name="proposal_evaluation")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalEvaluationRepository")
  */
 class ProposalEvaluation
 {
-    use UuidTrait;
-    use TimestampableTrait;
-    use VersionableTrait;
     use HasResponsesTrait;
+    use TimestampableTrait;
+    use UuidTrait;
+    use VersionableTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    protected $proposal;
+    protected Proposal $proposal;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposalEvaluation", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposalEvaluation", cascade={"persist", "remove"})
      */
-    private $responses;
+    private Collection $responses;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)

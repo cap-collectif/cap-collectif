@@ -40,7 +40,7 @@ class OfficialResponse
 
     /**
      * @ORM\OneToOne(targetEntity=Proposal::class, inversedBy="officialResponse")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Proposal $proposal;
 
@@ -56,7 +56,7 @@ class OfficialResponse
     /**
      * @ORM\OneToOne(targetEntity=ProposalDecision::class, mappedBy="officialResponse", cascade={"persist", "remove"})
      */
-    private $proposalDecision;
+    private ProposalDecision $proposalDecision;
 
     public function __construct()
     {

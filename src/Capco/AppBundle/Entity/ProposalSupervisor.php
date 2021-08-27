@@ -26,7 +26,7 @@ class ProposalSupervisor implements Timestampable
     /**
      * @ORM\Id()
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="supervisor")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $proposal;
 

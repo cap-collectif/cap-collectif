@@ -89,7 +89,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     private ?CollectStep $step;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="proposalForm")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="proposalForm", cascade={"remove"})
      */
     private Collection $proposals;
 

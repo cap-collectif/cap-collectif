@@ -22,9 +22,9 @@ class ProposalAssessment implements Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="assessment")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     // TODO: Rename to supervisor.
 
@@ -32,13 +32,13 @@ class ProposalAssessment implements Timestampable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")
      */
-    private $updatedBy;
+    private ?User $updatedBy = null;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Choice(choices = {"IN_PROGRESS", "FAVOURABLE", "UNFAVOURABLE", "TOO_LATE"})
      */
-    private $state = ProposalStatementState::IN_PROGRESS;
+    private string $state = ProposalStatementState::IN_PROGRESS;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -49,17 +49,17 @@ class ProposalAssessment implements Timestampable
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $body;
+    private ?string $body = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true, name="estimated_cost")
      */
-    private $estimatedCost;
+    private ?int $estimatedCost = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $officialResponse;
+    private ?string $officialResponse = null;
 
     public function __construct(Proposal $proposal)
     {
