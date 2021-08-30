@@ -44,7 +44,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
   let defaultAccordion = defaultAccordeon || '';
   if (!defaultAccordeon) {
     const keys = Object.keys(URL_MAP);
-    console.log(keys);
     for (const key of keys) {
       if (URL_MAP[key].some(val => window.location.href.includes(val))) defaultAccordion = key;
     }
@@ -185,10 +184,9 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   {isAdmin && (
                     <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
                   )}
-                  {isAdmin ||
-                    (isProjectAdmin && (
-                      <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
-                    ))}
+                  {(isAdmin || isProjectAdmin) && (
+                    <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
+                  )}
                   {features.calendar && (
                     <SidebarLink text="admin.label.events" href="/admin/capco/app/event/list" />
                   )}
