@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostAffiliation;
 use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Repository\PostRepository;
@@ -26,12 +27,12 @@ class PostSearch extends Search
 
     public function getUserPostsPaginated(
         User $user,
-        ?string $searchQuery,
-        array $affiliations,
-        string $orderByField,
-        string $orderByDirection,
         int $limit,
-        ?string $cursor
+        array $affiliations = [],
+        ?string $cursor = null,
+        ?string $searchQuery = null,
+        string $orderByField = PostOrderField::UPDATED_AT,
+        string $orderByDirection = OrderDirection::DESC
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
 

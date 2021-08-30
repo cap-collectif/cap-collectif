@@ -3,26 +3,22 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Search\PostSearch;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Repository\PostRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserPostsResolver implements ResolverInterface
 {
-    private $logger;
-    private $postRepository;
+    private LoggerInterface $logger;
     private PostSearch $postSearch;
 
-    public function __construct(
-        PostRepository $postRepository,
-        LoggerInterface $logger,
-        PostSearch $postSearch
-    ) {
-        $this->postRepository = $postRepository;
+    public function __construct(LoggerInterface $logger, PostSearch $postSearch)
+    {
         $this->logger = $logger;
         $this->postSearch = $postSearch;
     }
@@ -36,9 +32,9 @@ class UserPostsResolver implements ResolverInterface
         }
 
         $affiliations = $args->offsetGet('affiliations') ?? [];
-        $query = $args->offsetGet('query');
-        $orderByField = $args->offsetGet('orderBy')['field'];
-        $orderByDirection = $args->offsetGet('orderBy')['direction'];
+        $query = $args->offsetGet('query') ?? null;
+        $orderByField = $args->offsetGet('orderBy')['field'] ?? PostOrderField::UPDATED_AT;
+        $orderByDirection = $args->offsetGet('orderBy')['direction'] ?? OrderDirection::DESC;
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $user,
@@ -50,12 +46,12 @@ class UserPostsResolver implements ResolverInterface
             try {
                 return $this->postSearch->getUserPostsPaginated(
                     $user,
-                    $query,
-                    $affiliations,
-                    $orderByField,
-                    $orderByDirection,
                     $limit,
-                    $cursor
+                    $affiliations,
+                    $cursor,
+                    $query,
+                    $orderByField,
+                    $orderByDirection
                 );
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());

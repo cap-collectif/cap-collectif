@@ -3,7 +3,6 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventOwnerEventsResolver;
 use Capco\AppBundle\Search\EventSearch;
 use Capco\UserBundle\Entity\User;
@@ -24,7 +23,6 @@ class EventOwnerEventsResolverSpec extends ObjectBehavior
     }
 
     public function it_should_fetch_events(
-        ElasticsearchPaginator $paginator,
         ElasticsearchPaginatedResult $paginatedResult,
         EventSearch $eventSearch,
         User $viewer
