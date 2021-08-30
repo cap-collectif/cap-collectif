@@ -32,10 +32,6 @@ class CreateQuestionnaireMutation implements MutationInterface
     {
         $questionnaire = new Questionnaire();
 
-        if ($viewer->hasRole('ROLE_PROJECT_ADMIN') && !$viewer->hasRole('ROLE_ADMIN')) {
-            $questionnaire->setOwner($viewer);
-        }
-
         $form = $this->formFactory->create(QuestionnaireCreateType::class, $questionnaire);
 
         $form->submit($input->getArrayCopy(), false);

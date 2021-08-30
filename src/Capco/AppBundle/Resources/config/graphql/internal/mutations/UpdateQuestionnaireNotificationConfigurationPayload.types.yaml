@@ -1,0 +1,7 @@
+UpdateQuestionnaireNotificationConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            questionnaire:
+                type: 'InternalQuestionnaire!'
+                description: 'The updated questionnaire.'

@@ -1,0 +1,20 @@
+UpdateQuestionnaireNotificationConfigurationInput:
+    type: relay-mutation-input
+    config:
+        description: 'input of updateQuestionnaireNotificationConfiguration mutation'
+        fields:
+            questionnaireId:
+                type: 'ID!'
+                description: 'The questionnaire id.'
+            email:
+                type: 'Email'
+                description: 'The email that will be used to send notification'
+            onQuestionnaireReplyCreate:
+                type: 'Boolean!'
+                description: 'Notify when a response is created for this questionnaire'
+            onQuestionnaireReplyUpdate:
+                type: 'Boolean!'
+                description: 'Notify when a response is updated for this questionnaire'
+            onQuestionnaireReplyDelete:
+                type: 'Boolean!'
+                description: 'Notify when a response is deleted for this questionnaire'

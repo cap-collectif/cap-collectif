@@ -1,0 +1,86 @@
+Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration:
+    questionnaireNotificationConfiguration1:
+        email: toto@toto.com
+        onQuestionnaireReplyCreate: true
+        onQuestionnaireReplyUpdate: true
+        onQuestionnaireReplyDelete: true
+    questionnaireNotificationConfiguration2:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration3:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration4:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration5:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationWithJumps:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration6:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration7:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration8:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration9:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationWithJumps2:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration10:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfiguration11:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationAdmin:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationGroup:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationLotChoices:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationEvaluationIdf:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationExport:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationProjectWithOwner:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationProjectWithOwner2:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationFood:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false

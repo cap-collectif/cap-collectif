@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\AppBundle\Security\QuestionnaireVoter;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -164,11 +165,12 @@ class ProjectController extends Controller
 
     /**
      * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
      * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
      */
     public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire)
     {
+        $this->denyAccessUnlessGranted(QuestionnaireVoter::EDIT, $questionnaire);
+
         $filePath = $this->questionnaireExportResultsUrlResolver->getFilePath($questionnaire);
         $fileName = $this->questionnaireExportResultsUrlResolver->getFileName($questionnaire);
 

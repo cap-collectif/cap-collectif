@@ -294,35 +294,6 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
               component={ProposalFormAdminQuestions}
               formName={formName}
             />
-            <div className="box-header">
-              <h3 className="box-title">
-                <FormattedMessage id="global.notifications" />
-              </h3>
-              <h4 className="mb-3 mt-0">
-                <FormattedMessage id="notification.answer.created" />
-              </h4>
-              <Field
-                name="notifyResponseCreate"
-                component={component}
-                type="checkbox"
-                id="notify_response_create">
-                <FormattedMessage id="proposal_form.notifications.on_create" />
-              </Field>
-              <Field
-                name="notifyResponseUpdate"
-                component={component}
-                type="checkbox"
-                id="notify_response_update">
-                <FormattedMessage id="global.modified" />
-              </Field>
-              <Field
-                name="notifyResponseDelete"
-                component={component}
-                type="checkbox"
-                id="notify_response_delete">
-                <FormattedMessage id="global.deleted.feminine" />
-              </Field>
-            </div>
             <ButtonToolbar
               className="box-content__toolbar"
               id="questionnaire-admin-configuration-toolbar">
@@ -366,9 +337,6 @@ const mapStateToProps = (state: State, props: RelayProps) => {
     initialValues: {
       title: questionnaire.title,
       description: questionnaire.description,
-      notifyResponseCreate: questionnaire.notifyResponseCreate,
-      notifyResponseUpdate: questionnaire.notifyResponseUpdate,
-      notifyResponseDelete: questionnaire.notifyResponseDelete,
       questions: questionnaire.questions,
     },
   };
@@ -383,9 +351,6 @@ export default createFragmentContainer(intlContainer, {
       id
       title
       description
-      notifyResponseCreate
-      notifyResponseUpdate
-      notifyResponseDelete
       questions {
         id
         ...responsesHelper_adminQuestion @relay(mask: false)

@@ -238,8 +238,14 @@ exports[`SimpleQuestion.responses array fetches a simple question's responses: 1
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [],
-      "totalCount": 0,
+      "edges": Array [
+        Object {
+          "node": Object {
+            "value": "secret",
+          },
+        },
+      ],
+      "totalCount": 1,
     },
   },
 }

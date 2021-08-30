@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\EventListener\DebateArticleListener;
+use Capco\AppBundle\EventListener\QuestionnaireSubscriber;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Status;
@@ -115,6 +116,7 @@ class ReinitCommand extends Command
     private ElasticsearchDoctrineListener $elasticsearchListener;
     private DoctrineListener $publishableListener;
     private ReferenceEventListener $referenceListener;
+    private QuestionnaireSubscriber $questionnaireSubscriber;
     private StepContributionsDataLoader $stepContributionDataloader;
     private ProposalFormProposalsDataLoader $proposalFormProposalsDataloader;
     private CollectStepContributorCountDataLoader $collectStepContributorsDataloader;
@@ -132,6 +134,7 @@ class ReinitCommand extends Command
         DoctrineListener $publishableListener,
         ElasticsearchDoctrineListener $elasticsearchListener,
         ReferenceEventListener $referenceListener,
+        QuestionnaireSubscriber $questionnaireSubscriber,
         StepContributionsDataLoader $stepContributionDataloader,
         ProposalFormProposalsDataLoader $proposalFormProposalsDataloader,
         CollectStepContributorCountDataLoader $collectStepContributorsDataloader,
@@ -158,6 +161,7 @@ class ReinitCommand extends Command
         $this->projectCurrentVotableStepDataloader = $projectCurrentVotableStepDataloader;
         $this->referenceListener = $referenceListener;
         $this->stopwatch = $stopwatch;
+        $this->questionnaireSubscriber = $questionnaireSubscriber;
     }
 
     protected function configure()
@@ -214,6 +218,7 @@ class ReinitCommand extends Command
         $listeners = [
             $this->elasticsearchListener,
             $this->publishableListener,
+            $this->questionnaireSubscriber,
             // $this->referenceListener,
         ];
 

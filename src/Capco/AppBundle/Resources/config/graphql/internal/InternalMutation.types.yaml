@@ -526,6 +526,13 @@ InternalMutation:
                     inputType: UpdateProposalFormNotificationsConfigurationInput
                     payloadType: UpdateProposalFormNotificationsConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalForm\\UpdateProposalFormNotificationsConfiguration", [value, getUser()])'
+            updateQuestionnaireNotificationsConfiguration:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireNotificationConfiguration").isGranted(args["input"]["questionnaireId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateQuestionnaireNotificationConfigurationInput
+                    payloadType: UpdateQuestionnaireNotificationConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireNotificationConfiguration",[value, getUser()])'
             setEvaluationFormInProposalForm:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

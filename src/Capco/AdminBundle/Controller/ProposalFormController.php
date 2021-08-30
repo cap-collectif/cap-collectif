@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -37,6 +38,18 @@ class ProposalFormController extends CRUDController
                 $em->persist($qaq);
                 $em->persist($qaq->getQuestion());
             }
+
+            $notificationsConfiguration = $evaluationForm->getNotificationsConfiguration();
+
+            $newNotificationsConfiguration = (new QuestionnaireNotificationConfiguration())
+                ->setOnQuestionnaireReplyUpdate($notificationsConfiguration->isOnQuestionnaireReplyUpdate())
+                ->setOnQuestionnaireReplyCreate($notificationsConfiguration->isOnQuestionnaireReplyCreate())
+                ->setOnQuestionnaireReplyDelete($notificationsConfiguration->isOnQuestionnaireReplyDelete())
+                ->setEmail($notificationsConfiguration->getEmail())
+                ->setQuestionnaire($evaluationForm)
+            ;
+
+            $evaluationForm->setNotificationsConfiguration($newNotificationsConfiguration);
         }
 
         foreach ($clonedProposalForm->getQuestions() as $qaq) {

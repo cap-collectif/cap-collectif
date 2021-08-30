@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
+use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectAuthor;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -92,6 +94,14 @@ class DuplicateProjectMutation implements MutationInterface
                         ->getStep()
                         ->getProposalForm()
                         ->getAnalysisConfiguration();
+
+                    if ($proposalAnalysisConfiguration->getEvaluationForm()) {
+                        $this->cloneQuestionnaireNotificationConfiguration(
+                            $proposalAnalysisConfiguration->getEvaluationForm(),
+                            $clonedAnalysisConfiguration->getEvaluationForm()
+                        );
+                    }
+
                     if ($proposalAnalysisConfiguration->getSelectionStepStatus()) {
                         $clonedAnalysisConfiguration->setSelectionStepStatus(
                             $this->getStatusCloneReference(
@@ -142,6 +152,10 @@ class DuplicateProjectMutation implements MutationInterface
                             ' ' .
                             $clonedEvaluationForm->getTitle()
                     );
+                    $this->cloneQuestionnaireNotificationConfiguration(
+                        $proposalForm->getEvaluationForm(),
+                        $clonedEvaluationForm
+                    );
                 }
             }
 
@@ -163,6 +177,28 @@ class DuplicateProjectMutation implements MutationInterface
         $this->entityManager->flush();
 
         return ['oldProject' => $project, 'newProject' => $clonedProject];
+    }
+
+    private function cloneQuestionnaireNotificationConfiguration(
+        Questionnaire $originalQuestionnaire,
+        Questionnaire $clonedQuestionnaire
+    ) {
+        $notificationsConfiguration = $originalQuestionnaire->getNotificationsConfiguration();
+
+        $newNotificationsConfiguration = (new QuestionnaireNotificationConfiguration())
+            ->setOnQuestionnaireReplyUpdate(
+                $notificationsConfiguration->isOnQuestionnaireReplyUpdate()
+            )
+            ->setOnQuestionnaireReplyCreate(
+                $notificationsConfiguration->isOnQuestionnaireReplyCreate()
+            )
+            ->setOnQuestionnaireReplyDelete(
+                $notificationsConfiguration->isOnQuestionnaireReplyDelete()
+            )
+            ->setEmail($notificationsConfiguration->getEmail())
+            ->setQuestionnaire($clonedQuestionnaire);
+
+        $clonedQuestionnaire->setNotificationsConfiguration($newNotificationsConfiguration);
     }
 
     private function getStatusCloneReference(

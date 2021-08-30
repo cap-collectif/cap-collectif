@@ -30,7 +30,7 @@ describe('Internal.viewer.posts', () => {
     );
 
     expect(response.createQuestionnaire.questionnaire.title).toBe('questionnaire title');
-    expect(response.createQuestionnaire.questionnaire.owner).toBe(null);
+    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('admin');
   });
 
   it('should create a questionnaire with an owner', async () => {

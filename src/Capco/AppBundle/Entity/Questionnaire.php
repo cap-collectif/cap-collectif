@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
+use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
+use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -111,24 +113,16 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     private $privateResult = true;
 
     /**
-     * @ORM\Column(name="notify_response_create", type="boolean", nullable=false, options={"default" = false})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="questionnaire")
+     * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
-    private $notifyResponseCreate = false;
-
-    /**
-     * @ORM\Column(name="notify_response_update", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $notifyResponseUpdate = false;
-
-    /**
-     * @ORM\Column(name="notify_response_delete", type="boolean", nullable=false, options={"default" = false})
-     */
-    private $notifyResponseDelete = false;
+    private QuestionnaireNotificationConfiguration $notificationsConfiguration;
 
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->initializeNotificationConfiguration();
     }
 
     public function __toString()
@@ -511,36 +505,29 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
 
     public function isNotifyResponseCreate(): bool
     {
-        return $this->notifyResponseCreate;
-    }
-
-    public function setNotifyResponseCreate(bool $value): self
-    {
-        $this->notifyResponseCreate = $value;
-
-        return $this;
+        return $this->notificationsConfiguration->isOnQuestionnaireReplyCreate();
     }
 
     public function isNotifyResponseUpdate(): bool
     {
-        return $this->notifyResponseUpdate;
-    }
-
-    public function setNotifyResponseUpdate(bool $value): self
-    {
-        $this->notifyResponseUpdate = $value;
-
-        return $this;
+        return $this->notificationsConfiguration->isOnQuestionnaireReplyUpdate();
     }
 
     public function isNotifyResponseDelete(): bool
     {
-        return $this->notifyResponseDelete;
+        return $this->notificationsConfiguration->isOnQuestionnaireReplyDelete();
     }
 
-    public function setNotifyResponseDelete(bool $value): self
+    public function getNotificationsConfiguration(): QuestionnaireNotificationConfiguration
     {
-        $this->notifyResponseDelete = $value;
+        return $this->notificationsConfiguration;
+    }
+
+    public function setNotificationsConfiguration(
+        QuestionnaireNotificationConfiguration $notificationsConfiguration
+    ): self {
+        $this->notificationsConfiguration = $notificationsConfiguration;
+        $notificationsConfiguration->setQuestionnaire($this);
 
         return $this;
     }
@@ -570,5 +557,16 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         }
 
         return null;
+    }
+
+    public function initializeNotificationConfiguration(): void
+    {
+        $questionnaireNotificationConfiguration = new QuestionnaireNotificationConfiguration();
+        $questionnaireNotificationConfiguration->setQuestionnaire($this);
+        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyDelete(false);
+        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyCreate(false);
+        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyUpdate(false);
+
+        $this->notificationsConfiguration = $questionnaireNotificationConfiguration;
     }
 }

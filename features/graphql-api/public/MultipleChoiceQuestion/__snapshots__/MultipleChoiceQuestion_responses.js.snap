@@ -248,8 +248,24 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [],
-      "totalCount": 0,
+      "edges": Array [
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Incohérente\\"],\\"other\\":null}",
+          },
+        },
+        Object {
+          "node": Object {
+            "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
+          },
+        },
+      ],
+      "totalCount": 3,
     },
   },
 }

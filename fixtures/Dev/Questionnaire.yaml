@@ -9,8 +9,7 @@ Capco\AppBundle\Entity\Questionnaire:
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
         privateResult: false
-        notifyResponseCreate: 1
-        notifyResponseUpdate: 1
+        notificationsConfiguration: '@questionnaireNotificationConfiguration1'
     questionnaire2:
         id: questionnaire2
         title: Questionnaire de test
@@ -18,6 +17,7 @@ Capco\AppBundle\Entity\Questionnaire:
         step: '@questionnairestep2'
         multipleRepliesAllowed: false
         privateResult: false
+        notificationsConfiguration: '@questionnaireNotificationConfiguration2'
     questionnaire3:
         id: questionnaire3
         title: Questionnaire dans une étape fermée
@@ -25,16 +25,19 @@ Capco\AppBundle\Entity\Questionnaire:
         step: '@questionnairestep3'
         multipleRepliesAllowed: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration3'
     questionnaire4:
         id: questionnaire4
         title: Questionnaire pour budget participatif
         description: Le Budget Participatif permet ainsi aux citoyens parisiens d'apporter des solutions à des problèmes qui les concernent directement
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration4'
     questionnaire5:
         id: questionnaire5
         title: Questionnaire pour budget participatif disponible
         description: Le Budget Participatif permet ainsi aux citoyens parisiens d'apporter des solutions à des problèmes qui les concernent directement
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration5'
     questionnaireWithJumps:
         id: questionnaireWithJumps
         title: El famoso questionnaire a branche
@@ -44,26 +47,31 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfigurationWithJumps'
     questionnaire6:
         id: questionnaire6
         title: Questionnaire pour budget participatif de la Force
         description: Star Wars est un univers de fantasy et de science-fiction créé par George Lucas. D'abord conçue comme une trilogie cinématographique sortie entre 1977 et 1983, la saga s'accroît ensuite, entre 1999 et 2005, de trois nouveaux films, qui racontent des événements antérieurs à la première trilogie.
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration6'
     questionnaire7:
         id: questionnaire7
         title: Consultation pour conquerir le monde
         description: Comment faire pour conquérir le monde ?
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration7'
     questionnaire8:
         id: questionnaire8
         title: Consultation pour la capcoBeer
         description: La bière est une boisson alcoolisée obtenue par fermentation alcoolique d'un moût de produits végétaux amylacés tels que l'orge, le maïs, le riz, la banane, le manioc...
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration8'
     questionnaire9:
         id: questionnaire9
         title: Consultation pour la FLNJ
         description: Le Front de libération des nains de jardin est un réseau de groupes informels se présentant comme une association à but non lucratif dont l'objectif « vise à rendre la liberté des nains de jardin » en les transportant depuis les jardins de leurs propriétaires vers des lieux où ils sont considérés comme libres.
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration9'
     questionnaireWithJumps2:
         id: questionnaireWithJumps2
         title: Questionnaire saut conditionnel (tous les champs)
@@ -73,6 +81,7 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfigurationWithJumps2'
     questionnaire10:
         id: questionnaire10
         title: Questionnaire non rattaché
@@ -81,6 +90,7 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration10'
     questionnaire11:
         id: questionnaire11
         title: Questionnaire Analyste
@@ -88,6 +98,7 @@ Capco\AppBundle\Entity\Questionnaire:
         multipleRepliesAllowed: true
         acknowledgeReplies: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfiguration11'
     questionnaireAdmin:
         id: questionnaireAdmin
         title: Questionnaire pour admin
@@ -95,6 +106,7 @@ Capco\AppBundle\Entity\Questionnaire:
         step: '@questionnairestep4'
         multipleRepliesAllowed: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfigurationAdmin'
     questionnaireGroup:
         id: questionnaireForGroup
         title: Questionnaire visible pour le group2
@@ -102,15 +114,18 @@ Capco\AppBundle\Entity\Questionnaire:
         step: '@questionnairestep5'
         multipleRepliesAllowed: true
         privateResult: true
+        notificationsConfiguration: '@questionnaireNotificationConfigurationGroup'
     questionnaireLotChoices:
         id: questionnaireLotChoices
         title: Que choisir?
         description: J'ai vraiment beaucoup beaucoup de choix disponible pour mes questions
         step: '@questionnaireStepLotChoices'
         multipleRepliesAllowed: true
+        notificationsConfiguration: '@questionnaireNotificationConfigurationLotChoices'
     questionnaireEvaluationIdf:
         id: questionnaireEvaluationIdf
         title: Questionnaire d'étude d'Ile de France
+        notificationsConfiguration: '@questionnaireNotificationConfigurationEvaluationIdf'
     questionnaireExport:
         id: questionnaireExport
         title: Vote majo
@@ -118,6 +133,7 @@ Capco\AppBundle\Entity\Questionnaire:
         privateResult: false
         multipleRepliesAllowed: true
         step: '@questionnaireStepExport'
+        notificationsConfiguration: '@questionnaireNotificationConfigurationExport'
     questionnaireFood:
         id: questionnaireFood
         title: Questionnaire food
@@ -128,6 +144,7 @@ Capco\AppBundle\Entity\Questionnaire:
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
         privateResult: false
+        notificationsConfiguration: '@questionnaireNotificationConfigurationFood'
     questionnaireProjectWithOwner:
         id: questionnaireProjectWithOwner
         title: Est-ce que les administrateurs de projet sont utiles?
@@ -140,6 +157,7 @@ Capco\AppBundle\Entity\Questionnaire:
         privateResult: true
         owner: '@userTheo'
         createdAt: <(new \DateTime('2019-09-11'))>
+        notificationsConfiguration: '@questionnaireNotificationConfigurationProjectWithOwner'
     questionnaireProjectWithOwner2:
         id: questionnaireProjectWithOwner2
         title: Questionnaire visible par un owner
@@ -152,3 +170,4 @@ Capco\AppBundle\Entity\Questionnaire:
         privateResult: true
         owner: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
+        notificationsConfiguration: '@questionnaireNotificationConfigurationProjectWithOwner2'

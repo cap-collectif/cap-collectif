@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updateQuestionnaireNotificationConfiguration mutation should update correctly 1`] = `
+Object {
+  "updateQuestionnaireNotificationsConfiguration": Object {
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+      "notificationsConfiguration": Object {
+        "email": "test@capco.com",
+        "onQuestionnaireReplyCreate": true,
+        "onQuestionnaireReplyDelete": true,
+        "onQuestionnaireReplyUpdate": true,
+      },
+    },
+  },
+}
+`;

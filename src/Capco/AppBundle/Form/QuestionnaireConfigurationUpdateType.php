@@ -32,16 +32,13 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
                 'delete_empty' => function (
-                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
+                    ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
                     return null === $questionnaireAbstractQuestion ||
                         null === $questionnaireAbstractQuestion->getQuestion() ||
                         empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
                 },
-            ])
-            ->add('notifyResponseCreate')
-            ->add('notifyResponseUpdate')
-            ->add('notifyResponseDelete');
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

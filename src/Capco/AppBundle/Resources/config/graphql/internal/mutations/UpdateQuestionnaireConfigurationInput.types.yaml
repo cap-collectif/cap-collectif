@@ -1,25 +1,16 @@
 UpdateQuestionnaireConfigurationInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      questionnaireId:
-        type: 'ID!'
-      title:
-        type: 'String'
-        description: 'The new title of the questionnaire.'
-      description:
-        type: 'String'
-        description: 'The new description of the questionnaire.'
-      notifyResponseCreate:
-        type: 'Boolean'
-        description: 'Do we notify when a response is created?'
-      notifyResponseUpdate:
-        type: 'Boolean'
-        description: 'Do we notify when a response is updated?'
-      notifyResponseDelete:
-        type: 'Boolean'
-        description: 'Do we notify when a response is deleted?'
-      questions:
-        type: '[QuestionnaireAbstractQuestionInput!]'
-        description: 'The new list of available questions for this questionnaire'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            questionnaireId:
+                type: 'ID!'
+            title:
+                type: 'String'
+                description: 'The new title of the questionnaire.'
+            description:
+                type: 'String'
+                description: 'The new description of the questionnaire.'
+            questions:
+                type: '[QuestionnaireAbstractQuestionInput!]'
+                description: 'The new list of available questions for this questionnaire'

@@ -6710,6 +6710,7 @@ type Mutation {
   deleteProposalForm(input: DeleteProposalFormInput!): DeleteProposalFormPayload
   duplicateProposalForm(input: DuplicateProposalFormInput!): DuplicateProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
+  updateQuestionnaireNotificationsConfiguration(input: UpdateQuestionnaireNotificationConfigurationInput!): UpdateQuestionnaireNotificationConfigurationPayload
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
   changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
   updateContactPage(input: UpdateContactPageInput!): UpdateContactPagePayload
@@ -10763,15 +10764,7 @@ type Questionnaire implements Node {
 
   """The questionnaire type"""
   type: QuestionnaireType!
-
-  """Notify when a response is created for this questionnaire"""
-  notifyResponseCreate: Boolean!
-
-  """Notify when a response is updated for this questionnaire"""
-  notifyResponseUpdate: Boolean!
-
-  """Notify when a response is deleted for this questionnaire"""
-  notifyResponseDelete: Boolean!
+  notificationsConfiguration: QuestionnaireNotificationConfiguration!
 
   """Results of survey are private"""
   privateResult: Boolean!
@@ -10813,6 +10806,21 @@ type QuestionnaireEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""A questionnaire notifications configuration"""
+type QuestionnaireNotificationConfiguration {
+  """The email that will be used to send notification"""
+  email: Email
+
+  """The email that will be used to send notification"""
+  onQuestionnaireReplyCreate: Boolean!
+
+  """Notify when a response is created for this questionnaire"""
+  onQuestionnaireReplyUpdate: Boolean!
+
+  """Notify when a response is deleted for this questionnaire"""
+  onQuestionnaireReplyDelete: Boolean!
 }
 
 """Ways in which lists of questionnaires can be ordered upon return."""
@@ -14350,15 +14358,6 @@ input UpdateQuestionnaireConfigurationInput {
   """The new description of the questionnaire."""
   description: String
 
-  """Do we notify when a response is created?"""
-  notifyResponseCreate: Boolean
-
-  """Do we notify when a response is updated?"""
-  notifyResponseUpdate: Boolean
-
-  """Do we notify when a response is deleted?"""
-  notifyResponseDelete: Boolean
-
   """The new list of available questions for this questionnaire"""
   questions: [QuestionnaireAbstractQuestionInput!]
   clientMutationId: String
@@ -14366,6 +14365,30 @@ input UpdateQuestionnaireConfigurationInput {
 
 type UpdateQuestionnaireConfigurationPayload {
   questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateQuestionnaireNotificationConfigurationInput {
+  """The questionnaire id."""
+  questionnaireId: ID!
+
+  """The email that will be used to send notification"""
+  email: Email
+
+  """Notify when a response is created for this questionnaire"""
+  onQuestionnaireReplyCreate: Boolean!
+
+  """Notify when a response is updated for this questionnaire"""
+  onQuestionnaireReplyUpdate: Boolean!
+
+  """Notify when a response is deleted for this questionnaire"""
+  onQuestionnaireReplyDelete: Boolean!
+  clientMutationId: String
+}
+
+type UpdateQuestionnaireNotificationConfigurationPayload {
+  """The updated questionnaire."""
+  questionnaire: Questionnaire!
   clientMutationId: String
 }
 

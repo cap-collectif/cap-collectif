@@ -30,6 +30,7 @@ class QuestionResponsesResolver implements ResolverInterface
             $question->getQuestionnaire() &&
             $question->getQuestionnaire()->isPrivateResult() &&
             (!$viewer || !$viewer->isAdmin())
+            && $question->getQuestionnaire()->getOwner() !== $viewer
         ) {
             return $emptyConnection;
         }

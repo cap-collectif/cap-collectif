@@ -60,11 +60,6 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
      */
     private ProposalForm $proposalForm;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private ?string $email = null;
-
     public function isOnCreate(): bool
     {
         return $this->onCreate;
@@ -183,16 +178,6 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
         $this->onProposalNewsDelete = $onProposalNewsDelete;
 
         return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
     }
 
     public function getType(): string

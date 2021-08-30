@@ -7,8 +7,9 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import QuestionnaireAdminConfigurationForm from './QuestionnaireAdminConfigurationForm';
 import QuestionnaireAdminParametersForm from './QuestionnaireAdminParametersForm';
 import QuestionnaireAdminResults from './QuestionnaireAdminResults';
+import QuestionnaireAdminNotifications from './QuestionnaireAdminNotifications';
 import type { QuestionnaireAdminPageTabs_questionnaire } from '~relay/QuestionnaireAdminPageTabs_questionnaire.graphql';
-import type { State } from '../../types';
+import type { State } from '~/types';
 
 type Props = {|
   enableResultsTab: boolean,
@@ -39,6 +40,9 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
               />
             </Tab>
           ) : null}
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'global.notifications' })}>
+            <QuestionnaireAdminNotifications questionnaire={questionnaire} />
+          </Tab>
         </Tabs>
       </div>
     );
@@ -59,6 +63,7 @@ export default createFragmentContainer(container, {
       ...QuestionnaireAdminResults_questionnaire @include(if: $enableResultsTab)
       ...QuestionnaireAdminConfigurationForm_questionnaire
       ...QuestionnaireAdminParametersForm_questionnaire
+      ...QuestionnaireAdminNotifications_questionnaire
     }
   `,
 });

@@ -17,7 +17,7 @@ use Capco\AppBundle\Traits\FormatDateTrait;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
 {
@@ -28,17 +28,20 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     private LoggerInterface $logger;
     private string $defaultLocale;
+    private QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LoggerInterface $logger,
-        LocaleResolver $localeResolver
+        LocaleResolver $localeResolver,
+        QuestionnaireRepository $questionnaireRepository
     ) {
         $this->logger = $logger;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
+        $this->questionnaireRepository = $questionnaireRepository;
     }
 
     public function onCreate(Reply $reply): void
@@ -52,7 +55,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaireStep = $questionnaire->getStep();
         if (!$reply->getPublishedAt()) {
             $this->logger->error(__METHOD__ . ' bad reply', [
-                'cause' => sprintf('Reply %s dont have published date', $reply->getId())
+                'cause' => sprintf('Reply %s dont have published date', $reply->getId()),
             ]);
 
             return;
@@ -77,7 +80,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             [
                 'projectSlug' => $questionnaireStep->getProject()->getSlug(),
                 'stepSlug' => $questionnaireStep->getSlug(),
-                'replyId' => GlobalId::toGlobalId('Reply', $reply->getId())
+                'replyId' => GlobalId::toGlobalId('Reply', $reply->getId()),
             ],
             RouterInterface::ABSOLUTE_URL
         );
@@ -91,14 +94,17 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             'time' => $this->getTime($reply->getPublishedAt()),
             'userURL' => $userUrl,
             'configURL' => $configUrl,
-            'replyShowURL' => $replyShowUrl
+            'replyShowURL' => $replyShowUrl,
         ];
 
         if ($questionnaire->isNotifyResponseCreate()) {
+            $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
             $this->mailer->createAndSendMessage(
                 QuestionnaireReplyCreateAdminMessage::class,
                 $reply,
-                $params
+                $params,
+                null,
+                $recipientEmail
             );
         }
         if ($questionnaire->isAcknowledgeReplies()) {
@@ -106,8 +112,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $params['endDate'] = $reply->getStep()->getEndAt()
                     ? $this->getLongDate(
                         $reply->getStep()->getEndAt(),
-                        $reply->getAuthor()->getLocale() ??
-                            $this->defaultLocale,
+                        $reply->getAuthor()->getLocale() ?? $this->defaultLocale,
                         $this->siteParams->getValue('global.timezone')
                     )
                     : null;
@@ -140,7 +145,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         if (!$reply->getUpdatedAt()) {
             $this->logger->error(__METHOD__ . ' bad reply', [
-                'cause' => sprintf('Reply %s dont have updated date', $reply->getId())
+                'cause' => sprintf('Reply %s dont have updated date', $reply->getId()),
             ]);
 
             return;
@@ -166,12 +171,13 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             [
                 'projectSlug' => $questionnaireStep->getProject()->getSlug(),
                 'stepSlug' => $questionnaireStep->getSlug(),
-                'replyId' => GlobalId::toGlobalId('Reply', $reply->getId())
+                'replyId' => GlobalId::toGlobalId('Reply', $reply->getId()),
             ],
             RouterInterface::ABSOLUTE_URL
         );
 
         if ($questionnaire->isNotifyResponseUpdate()) {
+            $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
             $this->mailer->createAndSendMessage(
                 QuestionnaireReplyUpdateAdminMessage::class,
                 $reply,
@@ -184,32 +190,30 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     'time' => $this->getTime($reply->getUpdatedAt()),
                     'userURL' => $userUrl,
                     'configURL' => $configUrl,
-                    'replyShowURL' => $replyShowUrl
-                ]
+                    'replyShowURL' => $replyShowUrl,
+                ],
+                null,
+                $recipientEmail
             );
         }
         if ($questionnaire->isAcknowledgeReplies()) {
             $params = [
                 'date' => $this->getLongDate(
                     $reply->getUpdatedAt(),
-                    $locale =
-                        $reply->getAuthor()->getLocale() ??
-                        $this->defaultLocale,
+                    $locale = $reply->getAuthor()->getLocale() ?? $this->defaultLocale,
                     $this->siteParams->getValue('global.timezone')
                 ),
                 'time' => $this->getTime($reply->getUpdatedAt()),
                 'endDate' => $reply->getStep()->getEndAt()
                     ? $this->getLongDate(
                         $reply->getStep()->getEndAt(),
-                        $locale =
-                            $reply->getAuthor()->getLocale() ??
-                            $this->defaultLocale,
+                        $locale = $reply->getAuthor()->getLocale() ?? $this->defaultLocale,
                         $this->siteParams->getValue('global.timezone')
                     )
                     : null,
                 'userURL' => $userUrl,
                 'configURL' => $configUrl,
-                'stepURL' => $replyUrl
+                'stepURL' => $replyUrl,
             ];
             $this->mailer->createAndSendMessage(
                 QuestionnaireAcknowledgeReplyUpdateMessage::class,
@@ -237,6 +241,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
      */
     public function onDelete(array $reply): bool
     {
+        $questionnaire = $this->questionnaireRepository->find($reply['questionnaire_id']);
+        $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
         $userUrl = $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $reply['author_slug'], '_locale' => $this->defaultLocale],
@@ -260,8 +266,10 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $this->defaultLocale,
                     $this->siteParams->getValue('global.timezone')
                 ),
-                'time' => $this->getTime($date)
-            ]
+                'time' => $this->getTime($date),
+            ],
+            null,
+            $recipientEmail
         );
     }
 
@@ -270,7 +278,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaire = $reply->getQuestionnaire();
         if (!$questionnaire) {
             $this->logger->error(__METHOD__ . ' bad survey', [
-                'cause' => sprintf('reply %s dont have questionnaire', $reply->getId())
+                'cause' => sprintf('reply %s dont have questionnaire', $reply->getId()),
             ]);
 
             return false;
@@ -278,14 +286,14 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $questionnaireStep = $questionnaire->getStep();
         if (!$questionnaireStep) {
             $this->logger->error(__METHOD__ . ' bad survey', [
-                'cause' => sprintf('survey %s dont have step', $questionnaire->getId())
+                'cause' => sprintf('survey %s dont have step', $questionnaire->getId()),
             ]);
 
             return false;
         }
         if (!$reply->getStep()) {
             $this->logger->error(__METHOD__ . ' bad reply', [
-                'cause' => sprintf('reply %s dont have step', $reply->getId())
+                'cause' => sprintf('reply %s dont have step', $reply->getId()),
             ]);
 
             return false;

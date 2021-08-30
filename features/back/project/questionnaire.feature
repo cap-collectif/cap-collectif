@@ -19,9 +19,6 @@ Scenario: Logged in admin edit questionnaire
   And I fill in the following:
   | questionnaire_title | Questionnaire edited with test |
   | proposal_form_description | This is a questionnaire description edited with test |
-  And I check element "notify_response_create"
-  And I check element "notify_response_update"
-  And I check element "notify_response_delete"
   And I click on button "#parameters-submit"
   And I wait ".alert__form_succeeded-message" to appear on current page
   Then I should see "global.saved"

@@ -55,6 +55,7 @@ describe('<QuestionnaireAdminParametersForm />', () => {
         {...questionnaireProps}
         currentValues={currentValues}
         initialValues={initialValuesPrivate1}
+        isOnlyProjectAdmin={false}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -67,6 +68,7 @@ describe('<QuestionnaireAdminParametersForm />', () => {
         {...questionnaireProps}
         currentValues={currentValues}
         initialValues={initialValuesPrivate2}
+        isOnlyProjectAdmin={false}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -79,6 +81,7 @@ describe('<QuestionnaireAdminParametersForm />', () => {
         {...questionnaireProps}
         currentValues={currentValues}
         initialValues={initialValuesPublic1}
+        isOnlyProjectAdmin={false}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -91,6 +94,20 @@ describe('<QuestionnaireAdminParametersForm />', () => {
         {...questionnaireProps}
         currentValues={currentValues}
         initialValues={initialValuesPublic2}
+        isOnlyProjectAdmin={false}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with isOnlyProjectAdmin', () => {
+    const wrapper = shallow(
+      <QuestionnaireAdminParametersForm
+        {...formMock}
+        {...questionnaireProps}
+        currentValues={currentValues}
+        initialValues={initialValuesPublic2}
+        isOnlyProjectAdmin
       />,
     );
     expect(wrapper).toMatchSnapshot();

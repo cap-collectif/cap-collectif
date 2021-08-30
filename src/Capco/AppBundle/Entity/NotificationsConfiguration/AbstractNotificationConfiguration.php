@@ -13,7 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="entity", type="string")
  * @ORM\DiscriminatorMap({
- *      "proposalForm" = "ProposalFormNotificationConfiguration"
+ *      "proposalForm" = "ProposalFormNotificationConfiguration",
+ *      "questionnaire" = "QuestionnaireNotificationConfiguration"
  * })
  */
 abstract class AbstractNotificationConfiguration
@@ -21,4 +22,22 @@ abstract class AbstractNotificationConfiguration
     use IdTrait;
 
     abstract public function getType();
+
+    /**
+     * @ORM\Column(name="email", type="string", nullable=true)
+     */
+    private ?string $email = null;
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
 }

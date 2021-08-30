@@ -19,6 +19,7 @@ type Props = {|
   ...ReduxFormFormProps,
   currentValues: Object,
   initialValues: Object,
+  isOnlyProjectAdmin: boolean,
 |};
 
 const formName = 'questionnaire-admin-parameters';
@@ -51,6 +52,7 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
       submitSucceeded,
       submitFailed,
       currentValues,
+      isOnlyProjectAdmin,
     } = this.props;
 
     return (
@@ -88,35 +90,39 @@ export class QuestionnaireAdminParametersForm extends React.Component<Props> {
               id="questionnaire_multiple">
               <FormattedMessage id="answer-several-times" />
             </Field>
-            <div className="box-header">
-              <h3 className="box-title">
-                <FormattedMessage id="results" />
-              </h3>
-            </div>
-            <Field
-              name="privateResult"
-              component={component}
-              type="radio"
-              id="questionnaire_private"
-              checked={currentValues.privateResult === 'private'}
-              value="private">
+            {!isOnlyProjectAdmin && (
               <>
-                <i className="cap-lock-2-1 mr-5" />
-                <FormattedMessage id="administrators" />
+                <div className="box-header">
+                  <h3 className="box-title">
+                    <FormattedMessage id="results" />
+                  </h3>
+                </div>
+                <Field
+                  name="privateResult"
+                  component={component}
+                  type="radio"
+                  id="questionnaire_private"
+                  checked={currentValues.privateResult === 'private'}
+                  value="private">
+                  <>
+                    <i className="cap-lock-2-1 mr-5" />
+                    <FormattedMessage id="administrators" />
+                  </>
+                </Field>
+                <Field
+                  name="privateResult"
+                  component={component}
+                  type="radio"
+                  checked={currentValues.privateResult === 'public'}
+                  id="questionnaire_public"
+                  value="public">
+                  <>
+                    <i className="cap-chat-security mr-5" />
+                    <FormattedMessage id="persons-with-access-to-the-project" />
+                  </>
+                </Field>
               </>
-            </Field>
-            <Field
-              name="privateResult"
-              component={component}
-              type="radio"
-              checked={currentValues.privateResult === 'public'}
-              id="questionnaire_public"
-              value="public">
-              <>
-                <i className="cap-chat-security mr-5" />
-                <FormattedMessage id="persons-with-access-to-the-project" />
-              </>
-            </Field>
+            )}
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -164,6 +170,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     currentValues: {
       privateResult: selector(state, 'privateResult'),
     },
+    isOnlyProjectAdmin: state?.user?.user?.isOnlyProjectAdmin,
   };
 };
 
