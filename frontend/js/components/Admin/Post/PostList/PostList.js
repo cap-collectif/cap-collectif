@@ -71,6 +71,7 @@ const PostList = ({ viewer, term, isAdmin, resetTerm }: Props): React.Node => {
   }, [term, isAdmin, refetch, orderBy]);
   return (
     <Table
+      style={{ border: 'none' }}
       onReset={() => {
         setOrderBy('DESC');
         resetTerm();

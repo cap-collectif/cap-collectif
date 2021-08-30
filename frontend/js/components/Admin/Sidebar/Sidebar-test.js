@@ -64,7 +64,7 @@ describe('<Sidebar />', () => {
   it('renders when the user is a project admin and not an admin', () => {
     const wrapper = render(
       <MockProviders store={{ default: { features }, user: { user: userProjectAdmin } }}>
-        <Sidebar appVersion="2020.07.07-xsinjdic" />
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="contenus" />
       </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();

@@ -5,7 +5,12 @@ exports[`<PostList /> should render correctly 1`] = `
   className="sc-bdnxRM"
 >
   <table
-    className="sc-bdnxRM rcOsy"
+    className="sc-bdnxRM jIIBsu"
+    style={
+      Object {
+        "border": "none",
+      }
+    }
   >
     <thead
       className="sc-bdnxRM dSQJSh"

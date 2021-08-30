@@ -17,7 +17,7 @@ import Button from '~ds/Button/Button';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import { URL_MAP, CAP_COLLECTIF_SVG } from './Sidebar.utils';
 
-export type Props = {| +appVersion: string |};
+export type Props = {| +appVersion: string, +defaultAccordeon?: string |};
 
 const SidebarAccordionItem = styled(Accordion.Item).attrs({ bg: 'gray.900', pb: 0 })``;
 const SidebarAccordionPanel = styled(Accordion.Panel).attrs(({ isFirstRender, isOpen }) => ({
@@ -29,7 +29,7 @@ const SidebarAccordionPanel = styled(Accordion.Panel).attrs(({ isFirstRender, is
 
 const cookieName = 'sidebar_is_opened';
 
-export const Sidebar = ({ appVersion }: Props): React.Node => {
+export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => {
   const savedIsOpen = localStorage.getItem(cookieName);
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = React.useState<boolean>(
@@ -41,10 +41,13 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
   const user = useSelector((state: GlobalState) => state.user.user);
   const isAdmin = user ? user.isAdmin : false;
   const isProjectAdmin = user ? user.isProjectAdmin : false;
-  let defaultAccordion = '';
-  const keys = Object.keys(URL_MAP);
-  for (const key of keys) {
-    if (URL_MAP[key].some(val => window.location.href.includes(val))) defaultAccordion = key;
+  let defaultAccordion = defaultAccordeon || '';
+  if (!defaultAccordeon) {
+    const keys = Object.keys(URL_MAP);
+    console.log(keys);
+    for (const key of keys) {
+      if (URL_MAP[key].some(val => window.location.href.includes(val))) defaultAccordion = key;
+    }
   }
   React.useEffect(() => {
     const sonataNavbar = document.querySelector('nav.navbar.navbar-static-top');
@@ -182,9 +185,10 @@ export const Sidebar = ({ appVersion }: Props): React.Node => {
                   {isAdmin && (
                     <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />
                   )}
-                  {isAdmin && (
-                    <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
-                  )}
+                  {isAdmin ||
+                    (isProjectAdmin && (
+                      <SidebarLink text="admin.label.post" href="/admin/capco/app/post/list" />
+                    ))}
                   {features.calendar && (
                     <SidebarLink text="admin.label.events" href="/admin/capco/app/event/list" />
                   )}

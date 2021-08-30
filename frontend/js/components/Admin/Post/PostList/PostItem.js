@@ -71,7 +71,9 @@ const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => 
         )}
       </Td>
       <Td>
-        <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
+        {post.authors.length > 0 && (
+          <Link href={post.authors[0].url}>{post.authors[0].username}</Link>
+        )}
       </Td>
       <Td>
         <Flex direction="column">
@@ -79,26 +81,29 @@ const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => 
             <Link href={project.url}>{project.title}</Link>
           )}
           <Flex direction="row" color="gray.500">
-            {themes.map((theme, index) => {
-              if (theme && theme.title && theme.url) {
-                if (index + 1 < themes.length) {
-                  return [
+            {themes.length > 0 &&
+              themes.map((theme, index) => {
+                if (theme && theme.title && theme.url) {
+                  if (index + 1 < themes.length) {
+                    return (
+                      <React.Fragment key={theme.url}>
+                        <Link href={theme?.url} color={`${colors.gray['500']}!important`}>
+                          {theme?.title}
+                        </Link>
+                        <span>, &nbsp; </span>
+                      </React.Fragment>
+                    );
+                  }
+                  return (
                     <Link
                       key={theme.url}
                       href={theme?.url}
                       color={`${colors.gray['500']}!important`}>
                       {theme?.title}
-                    </Link>,
-                    <span>, &nbsp; </span>,
-                  ];
+                    </Link>
+                  );
                 }
-                return (
-                  <Link key={theme.url} href={theme?.url} color={`${colors.gray['500']}!important`}>
-                    {theme?.title}
-                  </Link>
-                );
-              }
-            })}
+              })}
           </Flex>
         </Flex>
       </Td>
@@ -108,11 +113,12 @@ const PostItem = ({ post: postFragment, connectionName }: Props): React.Node => 
           : intl.formatMessage({ id: 'global.no.published' })}
       </Td>
       <Td>
-        {intl.formatDate(post.updatedAt, {
-          day: 'numeric',
-          month: 'numeric',
-          year: 'numeric',
-        })}
+        {post.updatedAt &&
+          intl.formatDate(post.updatedAt, {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+          })}
       </Td>
       <Td>
         <Flex direction="row" justify="space-evenly">

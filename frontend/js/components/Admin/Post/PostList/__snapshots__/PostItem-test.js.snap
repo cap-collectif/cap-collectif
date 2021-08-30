@@ -197,3 +197,201 @@ Array [
   </td>,
 ]
 `;
+
+exports[`<PostItem /> should render correctly without authors 1`] = `
+Array [
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
+      title="Post FR 12"
+    >
+      Post FR 12
+    </a>
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+      href="https://localhost/profile/lbrunet"
+    >
+      lbrunet
+    </a>
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX bHyrFO"
+    >
+      <div
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX egukdJ"
+      >
+        <a
+          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
+          href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
+        >
+          Immobilier
+        </a>
+        <span>
+          ,   
+        </span>
+        <a
+          className="sc-bdnxRM Link__LinkInner-jUwnjy cDrLma jnxQhY"
+          href="https://localhost:8000/themes/justice?_locale=fr-FR"
+        >
+          Justice
+        </a>
+      </div>
+    </div>
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    global.published
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    2021-08-04 17:50:27
+  </td>,
+  <td
+    className="sc-bdnxRM iRZsbe"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <div
+      className="sc-bdnxRM Flex___StyledAppBox-RSPpX gNHkfZ"
+    >
+      <button
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hmpeDJ"
+        onClick={[Function]}
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+        type="button"
+      >
+        <IconMock
+          className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
+        />
+      </button>
+      <div
+        className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+          }
+        }
+      >
+        <p
+          className="sc-bdnxRM cZcArZ"
+          title="global.preview"
+        >
+          global.preview
+        </p>
+        <div
+          className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+          data-popper-arrow={true}
+          id="arrow"
+        />
+      </div>
+      <button
+        aria-controls="id-1"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdnxRM Button__ButtonInner-dWPVNG kSiBKu jfKDDI ButtonQuickAction___StyledButton-flKodz hAxyJi"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+        type="button"
+      >
+        <IconMock
+          className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG iBxOux fZkSKg AMDLx icon"
+        />
+      </button>
+      <div
+        className="sc-bdnxRM dOpKpO Tooltip__TooltipInner-csLBUu bsNXjQ"
+        style={
+          Object {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+          }
+        }
+      >
+        <p
+          className="sc-bdnxRM cZcArZ"
+          title="admin.global.delete"
+        >
+          admin.global.delete
+        </p>
+        <div
+          className="sc-bdnxRM Tooltip__Arrow-kQwTtI Tooltip___StyledArrow-kwaUKY  eBARRi psaBR"
+          data-popper-arrow={true}
+          id="arrow"
+        />
+      </div>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-1"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        tabIndex={-1}
+      />
+    </div>
+  </td>,
+]
+`;
