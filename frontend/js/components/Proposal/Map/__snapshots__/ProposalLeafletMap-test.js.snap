@@ -45,7 +45,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       autoPan={false}
       className="popup-proposal"
       closeButton={false}
-      key="popup-0"
+      key="popup-proposal"
       position={
         Object {
           "lat": 0,
@@ -53,14 +53,18 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         }
       }
     >
-      <Button
-        onClick={[Function]}
-        variant="primary"
-        variantColor="primary"
-        variantSize="small"
+      <Connect(LoginOverlay)
+        placement="top"
       >
-        Déposer une proposition
-      </Button>
+        <Button
+          onClick={[Function]}
+          variant="primary"
+          variantColor="primary"
+          variantSize="small"
+        >
+          proposal.add
+        </Button>
+      </Connect(LoginOverlay)>
     </ForwardRef(OverlayComponent)>
     <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
@@ -308,7 +312,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       autoPan={false}
       className="popup-proposal"
       closeButton={false}
-      key="popup-1"
+      key="popup-proposal"
       position={
         Object {
           "lat": 0,
@@ -316,14 +320,18 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         }
       }
     >
-      <Button
-        onClick={[Function]}
-        variant="primary"
-        variantColor="primary"
-        variantSize="small"
+      <Connect(LoginOverlay)
+        placement="top"
       >
-        Déposer une proposition
-      </Button>
+        <Button
+          onClick={[Function]}
+          variant="primary"
+          variantColor="primary"
+          variantSize="small"
+        >
+          proposal.add
+        </Button>
+      </Connect(LoginOverlay)>
     </ForwardRef(OverlayComponent)>
     <ForwardRef(ContainerComponent)
       maxClusterRadius={30}

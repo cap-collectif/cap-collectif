@@ -4,7 +4,7 @@ exports[`<ModalArgumentAuthorMenu /> should renders correcty 1`] = `
 <Modal
   ariaLabel="global.menu"
   disclosure={
-    <ForwardRef
+    <Button
       aria-label="global.menu"
       color="gray.500"
       rightIcon="MORE"

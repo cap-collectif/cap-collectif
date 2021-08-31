@@ -4,14 +4,14 @@ exports[`<ModalEditArgumentMobile /> should renders correcty with argument 1`] =
 <Modal
   ariaLabel="global.edit"
   disclosure={
-    <ForwardRef
+    <Button
       justifyContent="center"
       variant="primary"
       variantColor="primary"
       variantSize="big"
     >
       global.edit
-    </ForwardRef>
+    </Button>
   }
   onClose={[Function]}
 >

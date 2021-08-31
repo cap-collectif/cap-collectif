@@ -96,7 +96,7 @@ exports[`<DebateArgumentItem /> render correctly 1`] = `
         color="neutral-gray.500"
         disabled={false}
         leftIcon={
-          <ForwardRef
+          <Icon
             name="CLAP_O"
             size="lg"
           />
@@ -222,7 +222,7 @@ exports[`<DebateArgumentItem /> render correctly on mobile 1`] = `
         color="neutral-gray.500"
         disabled={false}
         leftIcon={
-          <ForwardRef
+          <Icon
             name="CLAP_O"
             size="lg"
           />
@@ -348,7 +348,7 @@ exports[`<DebateArgumentItem /> render correctly when step closed 1`] = `
         color="neutral-gray.500"
         disabled={true}
         leftIcon={
-          <ForwardRef
+          <Icon
             name="CLAP_O"
             size="lg"
           />

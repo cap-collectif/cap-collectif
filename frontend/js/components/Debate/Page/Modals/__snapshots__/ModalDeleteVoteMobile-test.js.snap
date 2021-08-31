@@ -4,7 +4,7 @@ exports[`<ModalDeleteVoteMobile /> should renders correctly 1`] = `
 <Modal
   ariaLabel="confirm-delete-argument"
   disclosure={
-    <ForwardRef
+    <Button
       color="gray.700"
       mb={
         Array [
@@ -24,7 +24,7 @@ exports[`<ModalDeleteVoteMobile /> should renders correctly 1`] = `
         id="delete.vote.for"
         values={Object {}}
       />
-    </ForwardRef>
+    </Button>
   }
   onClose={[Function]}
 >

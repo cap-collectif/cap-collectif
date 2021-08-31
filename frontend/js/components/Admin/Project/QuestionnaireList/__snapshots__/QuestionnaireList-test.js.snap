@@ -5,7 +5,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
   className="sc-bdnxRM"
 >
   <table
-    className="sc-bdnxRM rcOsy"
+    className="sc-bdnxRM jIIBsu"
   >
     <thead
       className="sc-bdnxRM dSQJSh"
@@ -420,7 +420,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
   className="sc-bdnxRM"
 >
   <table
-    className="sc-bdnxRM rcOsy"
+    className="sc-bdnxRM jIIBsu"
   >
     <thead
       className="sc-bdnxRM dSQJSh"

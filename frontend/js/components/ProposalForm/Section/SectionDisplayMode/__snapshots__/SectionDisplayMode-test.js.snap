@@ -73,7 +73,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
       name="viewEnabled.isGridViewEnabled"
       tooltip={
         Object {
-          "content": <ForwardRef(Relay(PopoverToggleView))
+          "content": <Relay(PopoverToggleView)
             proposalForm={
               Object {
                 "$fragmentRefs": null,
@@ -141,7 +141,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
               }
             />
           </div>
-          <ForwardRef(SectionDisplayModestyle__ButtonToggleView)
+          <SectionDisplayModestyle__ButtonToggleView
             onClick={[Function]}
             type="button"
           >
@@ -150,14 +150,14 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
               name="chevron-up"
               size={14}
             />
-          </ForwardRef(SectionDisplayModestyle__ButtonToggleView)>
+          </SectionDisplayModestyle__ButtonToggleView>
         </React.Fragment>
       }
       name="viewEnabled.isMapViewEnabled"
       onChange={[Function]}
       tooltip={
         Object {
-          "content": <ForwardRef(Relay(PopoverToggleView))
+          "content": <Relay(PopoverToggleView)
             proposalForm={
               Object {
                 "$fragmentRefs": null,
@@ -507,7 +507,7 @@ exports[`<SectionDisplayMode /> should render correctly when map view not enable
       name="viewEnabled.isGridViewEnabled"
       tooltip={
         Object {
-          "content": <ForwardRef(Relay(PopoverToggleView))
+          "content": <Relay(PopoverToggleView)
             proposalForm={
               Object {
                 "$fragmentRefs": null,
@@ -570,7 +570,7 @@ exports[`<SectionDisplayMode /> should render correctly when map view not enable
       onChange={[Function]}
       tooltip={
         Object {
-          "content": <ForwardRef(Relay(PopoverToggleView))
+          "content": <Relay(PopoverToggleView)
             proposalForm={
               Object {
                 "$fragmentRefs": null,

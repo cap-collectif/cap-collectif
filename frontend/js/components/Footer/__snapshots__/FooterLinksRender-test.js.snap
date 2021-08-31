@@ -87,7 +87,7 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
             id="global.navbar.see_more"
             values={Object {}}
           />
-          <ForwardRef(SiteLanguageChangeButton__Caret)
+          <SiteLanguageChangeButton__Caret
             className="cap-arrow-39"
             color="inherit"
           />

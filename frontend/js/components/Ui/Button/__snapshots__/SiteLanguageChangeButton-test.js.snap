@@ -11,20 +11,20 @@ exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
   pullRight={false}
   title={
     <React.Fragment>
-      <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-        <ForwardRef(SiteLanguageChangeButton__SiteEarthIcon)
+      <SiteLanguageChangeButton__LanguageContainer>
+        <SiteLanguageChangeButton__SiteEarthIcon
           color="#000"
           small={false}
         />
-        <ForwardRef(SiteLanguageChangeButton__Language)
+        <SiteLanguageChangeButton__Language
           color="#000"
         >
           <span>
             french
           </span>
-        </ForwardRef(SiteLanguageChangeButton__Language)>
-      </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-      <ForwardRef(SiteLanguageChangeButton__Caret)
+        </SiteLanguageChangeButton__Language>
+      </SiteLanguageChangeButton__LanguageContainer>
+      <SiteLanguageChangeButton__Caret
         className="cap-arrow-39"
         color="#000"
         id="language-change-caret"

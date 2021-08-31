@@ -40,26 +40,26 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly 1`] = `
       dots={true}
       infinite={false}
       nextArrow={
-        <ForwardRef
+        <Button
           className="slick-arrow slick-next"
         >
-          <ForwardRef
+          <Icon
             color="white"
             name="ARROW_RIGHT"
             size="sm"
           />
-        </ForwardRef>
+        </Button>
       }
       prevArrow={
-        <ForwardRef
+        <Button
           className="slick-arrow slick-prev"
         >
-          <ForwardRef
+          <Icon
             color="white"
             name="ARROW_LEFT"
             size="sm"
           />
-        </ForwardRef>
+        </Button>
       }
       responsive={
         Array [
@@ -278,26 +278,26 @@ exports[`<DebateStepPageLinkedArticles /> should renders correctly on mobile 1`]
       dots={true}
       infinite={false}
       nextArrow={
-        <ForwardRef
+        <Button
           className="slick-arrow slick-next"
         >
-          <ForwardRef
+          <Icon
             color="white"
             name="ARROW_RIGHT"
             size="sm"
           />
-        </ForwardRef>
+        </Button>
       }
       prevArrow={
-        <ForwardRef
+        <Button
           className="slick-arrow slick-prev"
         >
-          <ForwardRef
+          <Icon
             color="white"
             name="ARROW_LEFT"
             size="sm"
           />
-        </ForwardRef>
+        </Button>
       }
       responsive={
         Array [

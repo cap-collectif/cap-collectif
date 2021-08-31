@@ -6,7 +6,7 @@ exports[`<CircleColor /> renders correctly 1`] = `
   id="circle-color-dropdown"
   noCaret={false}
   title={
-    <ForwardRef(CircleColor__Circle)
+    <CircleColor__Circle
       color="#f4b721"
     />
   }

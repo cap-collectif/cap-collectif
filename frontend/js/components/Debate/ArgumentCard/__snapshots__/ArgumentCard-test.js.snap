@@ -81,7 +81,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
             color="neutral-gray.500"
             disabled={true}
             leftIcon={
-              <ForwardRef
+              <Icon
                 name="CLAP_O"
                 size="lg"
               />
@@ -222,7 +222,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
             color="neutral-gray.500"
             disabled={true}
             leftIcon={
-              <ForwardRef
+              <Icon
                 name="CLAP_O"
                 size="lg"
               />
@@ -363,7 +363,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
             color="neutral-gray.500"
             disabled={true}
             leftIcon={
-              <ForwardRef
+              <Icon
                 name="CLAP"
                 size="lg"
               />
@@ -504,7 +504,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
             color="neutral-gray.500"
             disabled={true}
             leftIcon={
-              <ForwardRef
+              <Icon
                 name="CLAP"
                 size="lg"
               />
@@ -645,7 +645,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
             color="neutral-gray.500"
             disabled={true}
             leftIcon={
-              <ForwardRef
+              <Icon
                 name="CLAP_O"
                 size="lg"
               />

@@ -3,7 +3,7 @@
 exports[`<TagUser /> should render correctly 1`] = `
 <Tag
   CustomImage={
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Relay(Connect(UserAvatar))
       size={15}
       user={
         Object {
@@ -35,7 +35,7 @@ exports[`<TagUser /> should render correctly 1`] = `
 exports[`<TagUser /> should render correctly with other size 1`] = `
 <Tag
   CustomImage={
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Relay(Connect(UserAvatar))
       size={20}
       user={
         Object {
