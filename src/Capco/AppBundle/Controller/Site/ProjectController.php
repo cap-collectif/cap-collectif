@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
@@ -37,6 +38,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
@@ -57,6 +59,7 @@ class ProjectController extends Controller
     private ContributionResolver $contributionResolver;
     private ProjectHelper $projectHelper;
     private DebateArgumentRepository $debateArgumentRepository;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         TranslatorInterface $translator,
@@ -73,8 +76,9 @@ class ProjectController extends Controller
         ProjectHelper $projectHelper,
         PostRepository $postRepository,
         QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver,
-        $exportDir,
-        DebateArgumentRepository $debateArgumentRepository
+        string $exportDir,
+        DebateArgumentRepository $debateArgumentRepository,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->translator = $translator;
         $this->router = $router;
@@ -93,6 +97,7 @@ class ProjectController extends Controller
         $this->sourceRepository = $sourceRepository;
         $this->questionnaireExportResultsUrlResolver = $questionnaireExportResultsUrlResolver;
         $this->debateArgumentRepository = $debateArgumentRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -358,11 +363,15 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/analysis/download", name="app_project_analysis_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      */
     public function downloadProjectAnalysisAction(Request $request, Project $project)
     {
+        if (!$this->authorizationChecker->isGranted(ProjectVoter::EXPORT, $project)) {
+            throw new ProjectAccessDeniedException(
+                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
+            );
+        }
         $filename = ExportAnalysisCSVCommand::getFilename($project->getSlug(), false);
         $contentType = 'text/csv';
         $fullPath = $this->exportDir . $filename;
@@ -387,11 +396,15 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/decisions/download", name="app_project_decisions_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      */
     public function downloadProjectDecisionAction(Request $request, Project $project)
     {
+        if (!$this->authorizationChecker->isGranted(ProjectVoter::EXPORT, $project)) {
+            throw new ProjectAccessDeniedException(
+                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
+            );
+        }
         $filename = ExportAnalysisCSVCommand::getFilename($project->getSlug(), true);
         $contentType = 'text/csv';
 

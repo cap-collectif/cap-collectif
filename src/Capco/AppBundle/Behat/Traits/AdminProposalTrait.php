@@ -74,10 +74,7 @@ trait AdminProposalTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#proposal_address').length > 0");
         $this->fillField('proposal_address', $address);
-        $this->waitAndThrowOnFailure(
-            2000,
-            "$('#list-suggestion > li:first-child').length > 0"
-        );
+        $this->waitAndThrowOnFailure(2000, "$('#list-suggestion > li:first-child').length > 0");
         $this->iClickElement('#list-suggestion > li:first-child');
         $this->iWait(1);
     }
@@ -137,36 +134,6 @@ trait AdminProposalTrait
     }
 
     /**
-     * @When I check :value in the proposal definition evaluation
-     */
-    public function iCheckTheProposalDefinitionEvaluationWithValue(string $value)
-    {
-        $element =
-            '#proposal-admin-page-tabs-pane-6 div[id="proposal-admin-evaluation-responses3"] div.checkbox input[type="checkbox"][name="choices-for-field-proposal-admin-evaluation-responses3"][value="' .
-            $value .
-            '"]';
-        $elementId = $this->getCurrentPage()
-            ->find('css', $element)
-            ->getAttribute('id');
-
-        $this->checkElementWithId($elementId);
-    }
-
-    /**
-     * @When I check :value in the proposal definition resume
-     */
-    public function iCheckTheProposalResumeEvaluationWithValue(string $value)
-    {
-        $element =
-            '#proposal-admin-page-tabs-pane-6 div.radio input[type="radio"][value="' .
-            $value .
-            '"]';
-        $this->getCurrentPage()
-            ->find('css', $element)
-            ->click();
-    }
-
-    /**
      * @When I save the custom evaluation
      */
     public function iSaveTheCustomProposalEvaluation()
@@ -180,7 +147,7 @@ trait AdminProposalTrait
     public function iClickOnProposalStatus(string $status)
     {
         $element =
-            '#proposal-admin-page-tabs-pane-7 input[type="radio"][name="publicationStatus"][value="' .
+            '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' .
             $status .
             '"]+span';
         $this->getCurrentPage()
@@ -195,7 +162,7 @@ trait AdminProposalTrait
     public function iSaveTheProposalStatus()
     {
         $element =
-            '#proposal-admin-page-tabs-pane-7 button[type="submit"][class="btn btn-primary"]';
+            '#proposal-admin-page-tabs-pane-6 button[type="submit"][class="btn btn-primary"]';
         $this->getCurrentPage()
             ->find('css', $element)
             ->click();
@@ -206,7 +173,7 @@ trait AdminProposalTrait
      */
     public function iDeleteTheProposal()
     {
-        $element = '#proposal-admin-page-tabs-pane-7 button[type="button"][class="btn btn-danger"]';
+        $element = '#proposal-admin-page-tabs-pane-6 button[type="button"][class="btn btn-danger"]';
         $this->getCurrentPage()
             ->find('css', $element)
             ->click();
@@ -229,7 +196,7 @@ trait AdminProposalTrait
     public function iShouldSeeTheProposalStatus(string $status)
     {
         $element =
-            '#proposal-admin-page-tabs-pane-7 input[type="radio"][name="publicationStatus"][value="' .
+            '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' .
             $status .
             '"]+span';
         $this->getCurrentPage()->find('css', $element);

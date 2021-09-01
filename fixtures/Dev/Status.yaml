@@ -159,3 +159,9 @@ Capco\AppBundle\Entity\Status:
         position: 1
         step: '@collectStepProjectWithOwner'
         color: danger
+    statusCollectStepProjectWithOwner2:
+        id: statusCollectStepProjectWithOwner2
+        name: Ok
+        position: 2
+        step: '@collectStepProjectWithOwner'
+        color: success

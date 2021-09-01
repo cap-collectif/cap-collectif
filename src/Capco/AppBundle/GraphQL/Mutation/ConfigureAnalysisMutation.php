@@ -14,12 +14,14 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\StatusRepository;
+use Capco\AppBundle\Security\ProposalFormVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ConfigureAnalysisMutation implements MutationInterface
 {
@@ -33,6 +35,7 @@ class ConfigureAnalysisMutation implements MutationInterface
     private $selectionStepRepository;
     private $entityManager;
     private LoggerInterface $logger;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProposalFormRepository $proposalFormRepository,
@@ -41,7 +44,8 @@ class ConfigureAnalysisMutation implements MutationInterface
         StatusRepository $statusRepository,
         SelectionStepRepository $selectionStepRepository,
         EntityManagerInterface $entityManager,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->proposalFormRepository = $proposalFormRepository;
         $this->questionnaireRepository = $questionnaireRepository;
@@ -50,6 +54,7 @@ class ConfigureAnalysisMutation implements MutationInterface
         $this->selectionStepRepository = $selectionStepRepository;
         $this->entityManager = $entityManager;
         $this->logger = $logger;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $args, $viewer): array
@@ -86,10 +91,7 @@ class ConfigureAnalysisMutation implements MutationInterface
         $unfavourablesStatuses = [];
         $moveToSelectionStep = null;
 
-        /** @var ProposalForm $proposalForm */
-        if (!($proposalForm = $this->proposalFormRepository->find($proposalFormId))) {
-            throw new UserError('This proposalForm does not exist.');
-        }
+        $proposalForm = $this->getProposalForm($proposalFormId);
 
         if (
             !($analysisStep = $this->abstractStepRepository->find(
@@ -166,5 +168,22 @@ class ConfigureAnalysisMutation implements MutationInterface
         }
 
         return compact('analysisConfiguration');
+    }
+
+    public function isGranted(string $proposalFormId): bool
+    {
+        $proposalForm = $this->getProposalForm($proposalFormId);
+
+        return $this->authorizationChecker->isGranted(ProposalFormVoter::EDIT, $proposalForm);
+    }
+
+    private function getProposalForm(string $proposalFormId): ProposalForm
+    {
+        $proposalForm = $this->proposalFormRepository->find($proposalFormId);
+        if (!$proposalForm) {
+            throw new UserError('This proposalForm does not exist.');
+        }
+
+        return $proposalForm;
     }
 }

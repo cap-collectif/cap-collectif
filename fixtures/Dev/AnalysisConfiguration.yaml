@@ -37,3 +37,10 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
             d’élaborer un diagnostic
             de déployer un 5S
             d’animer un brainstorming'
+    analysisConfigurationProjectOwner:
+        id: analysisConfigurationProjectOwner
+        proposalForm: '@proposalFormProjectWithOwner'
+        analysisStep: '@collectStepProjectWithOwner'
+        unfavourableStatuses: ['@statusCollectStepProjectWithOwner']
+        favourableStatus: '@statusCollectStepProjectWithOwner2'
+        body: 'choisissons bien'

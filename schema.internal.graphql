@@ -1747,33 +1747,6 @@ type ChangeProposalDecisionPayload {
   clientMutationId: String
 }
 
-input ChangeProposalEvaluationInput {
-  """The proposal id"""
-  proposalId: ID!
-
-  """The revision number of the evaluation"""
-  version: Int!
-  responses: [ResponseInput!]!
-  clientMutationId: String
-}
-
-type ChangeProposalEvaluationPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
-input ChangeProposalEvaluersInput {
-  """The proposal id"""
-  proposalId: ID!
-  evaluers: [ID!]
-  clientMutationId: String
-}
-
-type ChangeProposalEvaluersPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
 input ChangeProposalNotationInput {
   """The proposal id"""
   proposalId: ID!
@@ -6685,7 +6658,6 @@ type Mutation {
   createProposalFusion(input: CreateProposalFusionInput!): CreateProposalFusionPayload
   updateProposalFusion(input: UpdateProposalFusionInput!): UpdateProposalFusionPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
-  changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   followProposal(input: FollowProposalInput!): FollowProposalPayload
   followOpinion(input: FollowOpinionInput!): FollowOpinionPayload
   updateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
@@ -6712,7 +6684,6 @@ type Mutation {
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
   updateQuestionnaireNotificationsConfiguration(input: UpdateQuestionnaireNotificationConfigurationInput!): UpdateQuestionnaireNotificationConfigurationPayload
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
-  changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
   updateContactPage(input: UpdateContactPageInput!): UpdateContactPagePayload
   updateRegistrationPage(input: UpdateRegistrationPageInput!): UpdateRegistrationPagePayload
   sendContactForm(input: SendContactFormInput!): SendContactFormPayload

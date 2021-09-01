@@ -32,28 +32,6 @@ Scenario: Logged in admin wants edit a proposal advancement tab
   And I wait ".alert__form_succeeded-message" to appear on current page
 
 @database @elasticsearch
-Scenario: Logged in admin wants to add some analyst groups
-  Given I am logged in as admin
-  And I go to the admin proposal page with proposalid "proposal10"
-  Then I go to the admin proposal evaluation tab
-  And I fill "ag" and "Utilisateurs" to the analyst select
-  And I save the current proposal evaluation analysts groupes
-  And I wait ".alert__form_succeeded-message" to appear on current page
-
-@database @elasticsearch
-Scenario: Logged in admin wants to evaluate a proposal
-  Given I am logged in as admin
-  And I go to the admin proposal page with proposalid "proposal10"
-  Then I go to the admin proposal "evaluation" tab
-  And I fill the proposal element "proposal evaluation evaluate" with value "Bonne"
-  And I fill the proposal element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
-  And I evaluate the proposal presentation to "Au top"
-  And I check element "proposal-admin-evaluation-responses3_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UyMw=="
-  And I check element "proposal-admin-evaluation-responses4_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UyNg=="
-  And I save the custom evaluation
-  And I wait ".alert__form_succeeded-message" to appear on current page
-
-@database @elasticsearch
 Scenario: Logged in admin, wants to change the proposal's status
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"

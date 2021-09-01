@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ProposalStatementState;
-use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
 use Capco\AppBundle\Repository\ProposalDecisionRepository;
@@ -92,7 +91,7 @@ class ProposalAnalysisRelatedVoter extends Voter
             case self::ASSIGN_SUPERVISOR:
                 return $this->canAssignSupervisor($subject, $viewer);
             case self::ASSIGN_DECISION_MAKER:
-                return $this->canAssignDecisionMaker($viewer);
+                return $this->canAssignDecisionMaker($subject, $viewer);
             case self::ASSIGN_ANALYST:
                 return $this->canAssignAnalyst($subject, $viewer);
             default:
@@ -102,48 +101,15 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function canSee(Proposal $subject, User $viewer): bool
     {
-        if (
-            $this->proposalDecisionMakerRepository->findBy([
-                'proposal' => $subject,
-                'decisionMaker' => $viewer,
-            ])
-        ) {
-            return true;
-        }
-
-        if (
-            $this->proposalSupervisorRepository->findBy([
-                'proposal' => $subject,
-                'supervisor' => $viewer,
-            ])
-        ) {
-            return true;
-        }
-
-        if (
-            $this->proposalAnalystRepository->findBy([
-                'proposal' => $subject,
-                'analyst' => $viewer,
-            ])
-        ) {
-            return true;
-        }
-
-        return $subject->viewerIsAdminOrOwner($viewer);
+        return $this->viewerIsAdminOrOwner($subject, $viewer) ||
+            $subject->getDecisionMaker() === $viewer ||
+            $subject->getSupervisor() === $viewer ||
+            $subject->getAnalysts()->contains($viewer);
     }
 
     private function canAnalyse(Proposal $subject, User $viewer): bool
     {
-        if (
-            $this->proposalAnalystRepository->findOneBy([
-                'proposal' => $subject,
-                'analyst' => $viewer,
-            ])
-        ) {
-            return true;
-        }
-
-        return false;
+        return $subject->getAnalysts()->contains($viewer);
     }
 
     private function canEvaluate(Proposal $subject, User $viewer): bool
@@ -155,67 +121,40 @@ class ProposalAnalysisRelatedVoter extends Voter
             return false;
         }
 
-        if (
-            $this->proposalSupervisorRepository->findOneBy([
-                'proposal' => $subject,
-                'supervisor' => $viewer,
-            ])
-        ) {
-            return true;
-        }
-
-        return false;
+        return $subject->getSupervisor() === $viewer;
     }
 
     private function canDecide(Proposal $subject, User $viewer): bool
     {
-        if (
-            $this->proposalDecisionMakerRepository->findBy([
-                'proposal' => $subject,
-                'decisionMaker' => $viewer,
-            ])
-        ) {
-            return true;
-        }
-
-        return false;
+        return $subject->getDecisionMaker() === $viewer;
     }
 
     private function canAssignSupervisor(Proposal $subject, User $viewer): bool
     {
-        return $this->canDecide($subject, $viewer) || $this->viewerIsAdmin();
+        return $this->viewerIsAdminOrOwner($subject, $viewer) ||
+            $subject->getDecisionMaker() === $viewer;
     }
 
-    private function canAssignDecisionMaker(User $viewer): bool
+    private function canAssignDecisionMaker(Proposal $subject, User $viewer): bool
     {
-        return $this->viewerIsAdmin();
-    }
-
-    private function viewerIsAdmin(): bool
-    {
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN) ||
-            $this->authorizationChecker->isGranted(UserRole::ROLE_SUPER_ADMIN);
+        return $this->viewerIsAdminOrOwner($subject, $viewer);
     }
 
     private function canAssignAnalyst(Proposal $subject, User $viewer): bool
     {
-        if ($this->viewerIsAdmin()) {
-            return true;
-        }
-
-        if ($this->canDecide($subject, $viewer)) {
-            return true;
-        }
-
         if (
-            $this->proposalSupervisorRepository->findOneBy([
-                'proposal' => $subject,
-                'supervisor' => $viewer,
-            ])
+            $this->viewerIsAdminOrOwner($subject, $viewer) ||
+            $subject->getDecisionMaker() === $viewer ||
+            $subject->getSupervisor() === $viewer
         ) {
             return true;
         }
 
         return $this->canAnalyse($subject, $viewer);
+    }
+
+    private function viewerIsAdminOrOwner(Proposal $subject, User $viewer): bool
+    {
+        return $viewer->isAdmin() || $subject->getProjectOwner() === $viewer;
     }
 }

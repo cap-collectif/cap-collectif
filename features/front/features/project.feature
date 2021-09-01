@@ -299,8 +299,8 @@ Scenario: Admin deletes a proposal ...
   And I wait 2 seconds
   Then I should see "Proposition qui va être jetée"
   When I go to the admin proposal page with proposalid "proposal105"
-  And I wait "#proposal-admin-page-tabs-tab-7" to appear on current page
-  And I click on button "#proposal-admin-page-tabs-tab-7"
+  And I wait "#proposal-admin-page-tabs-tab-6" to appear on current page
+  And I click on button "#proposal-admin-page-tabs-tab-6"
   And I wait 2 seconds
   And I click on button "#proposal-trashed-tab"
   And I fill in the following:

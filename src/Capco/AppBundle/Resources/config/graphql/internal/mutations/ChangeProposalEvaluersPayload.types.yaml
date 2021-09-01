@@ -1,6 +1,0 @@
-ChangeProposalEvaluersPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      proposal:
-        type: 'InternalProposal!'

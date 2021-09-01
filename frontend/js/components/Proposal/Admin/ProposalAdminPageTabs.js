@@ -6,7 +6,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalAdminSelections from './ProposalAdminSelections';
 import ProposalAdminStatusForm from './ProposalAdminStatusForm';
 import ProposalAdminContentForm from './ProposalAdminContentForm';
-import ProposalAdminNotationForm from './ProposalAdminNotationForm';
 import ProposalAdminNewsForm from './ProposalAdminNewsForm';
 import ProposalAdminFollowers from './ProposalAdminFollowers';
 import ProposalAdminOfficialAnswer from './ProposalAdminOfficialAnswer';
@@ -57,10 +56,7 @@ export class ProposalAdminPageTabs extends Component<Props> {
             }>
             <ProposalAdminFollowers proposal={proposal} />
           </Tab>
-          <Tab eventKey={6} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
-            <ProposalAdminNotationForm proposal={proposal} />
-          </Tab>
-          <Tab eventKey={7} title={intl.formatMessage({ id: 'global.state' })}>
+          <Tab eventKey={6} title={intl.formatMessage({ id: 'global.state' })}>
             <ProposalAdminStatusForm proposal={proposal} />
           </Tab>
         </Tabs>
@@ -84,7 +80,6 @@ export default createFragmentContainer(container, {
       ...ProposalAdminSelections_proposal
       ...ProposalAdminContentForm_proposal
         @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
-      ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
       ...ProposalAdminFollowers_proposal
       ...ProposalAdminOfficialAnswer_proposal

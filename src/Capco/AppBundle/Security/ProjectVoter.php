@@ -12,11 +12,16 @@ class ProjectVoter extends Voter
     public const VIEW = 'view';
     public const CREATE = 'create';
     public const EDIT = 'edit';
+    public const EXPORT = 'export';
 
     protected function supports($attribute, $subject): bool
     {
         if ($subject instanceof Project) {
-            return \in_array($attribute, [self::VIEW, self::EDIT, self::CREATE], true);
+            return \in_array(
+                $attribute,
+                [self::VIEW, self::EDIT, self::CREATE, self::EXPORT],
+                true
+            );
         }
 
         return false;
@@ -32,35 +37,40 @@ class ProjectVoter extends Voter
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($subject, $viewer);
+                return self::canView($subject, $viewer);
             case self::EDIT:
-                return $this->canEdit($subject, $viewer);
+                return self::canEdit($subject, $viewer);
             case self::CREATE:
-                return $this->canCreate($subject, $viewer);
+                return self::canCreate($viewer);
+            case self::EXPORT:
+                return self::canDownloadExport($subject, $viewer);
         }
 
         return false;
     }
 
-    private function canView(Project $project, User $viewer): bool
+    private static function canView(Project $project, User $viewer): bool
     {
-        if ($viewer->isAdmin()) {
-            return true;
-        }
-        if ($viewer->isProjectAdmin() && $project->getOwner() === $viewer) {
-            return true;
-        }
-
-        return false;
+        return self::isAdminOrOwner($project, $viewer);
     }
 
-    private function canEdit(Project $project, User $viewer): bool
+    private static function canEdit(Project $project, User $viewer): bool
     {
-        return $this->canView($project, $viewer);
+        return self::isAdminOrOwner($project, $viewer);
     }
 
-    private function canCreate(Project $project, User $viewer): bool
+    private static function canCreate(User $viewer): bool
     {
         return $viewer->isAdmin() || $viewer->isProjectAdmin();
+    }
+
+    private static function canDownloadExport(Project $project, User $viewer): bool
+    {
+        return self::isAdminOrOwner($project, $viewer);
+    }
+
+    private static function isAdminOrOwner(Project $project, User $viewer): bool
+    {
+        return $viewer->isAdmin() || $project->getOwner() === $viewer;
     }
 }

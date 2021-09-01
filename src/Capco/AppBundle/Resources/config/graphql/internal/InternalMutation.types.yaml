@@ -351,13 +351,6 @@ InternalMutation:
                     inputType: ChangeProposalNotationInput
                     payloadType: ChangeProposalNotationPayload
                     mutateAndGetPayload: "@=mutation('changeProposalNotation', [value, getUser()])"
-            changeProposalEvaluers:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: ChangeProposalEvaluersInput
-                    payloadType: ChangeProposalEvaluersPayload
-                    mutateAndGetPayload: "@=mutation('changeProposalEvaluers', [value,getUser()])"
             followProposal:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
@@ -540,14 +533,6 @@ InternalMutation:
                     inputType: SetEvaluationFormInProposalFormInput
                     payloadType: SetEvaluationFormInProposalFormPayload
                     mutateAndGetPayload: "@=mutation('setEvaluationFormInProposalForm', [value])"
-            # Proposal Evaluation
-            changeProposalEvaluation:
-                access: "@=hasRole('ROLE_USER')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: ChangeProposalEvaluationInput
-                    payloadType: ChangeProposalEvaluationPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalEvaluationMutation",[value, getUser()])'
             # Contact From
             updateContactPage:
                 access: "@=hasRole('ROLE_ADMIN')"
@@ -894,7 +879,7 @@ InternalMutation:
                     payloadType: AssignSupervisorToProposalsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignSupervisorToProposalsMutation", [value, getUser()])'
             assignDecisionMakerToProposals:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AssignDecisionMakerToProposalsInput
@@ -903,7 +888,7 @@ InternalMutation:
 
             # AnalysisConfiguration
             configureAnalysis:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ConfigureAnalysisMutation").isGranted(args["input"]["proposalFormId"])'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: ConfigureAnalysisInput

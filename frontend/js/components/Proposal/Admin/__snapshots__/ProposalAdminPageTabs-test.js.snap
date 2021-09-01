@@ -138,24 +138,6 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={6}
-      title="proposal.tabs.evaluation"
-    >
-      <Relay(Connect(injectIntl(ReduxForm)))
-        proposal={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "allFollowers": Object {
-              "totalCount": 169,
-            },
-            "reference": "1-1",
-            "url": "",
-          }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey={7}
       title="global.state"
     >
       <Relay(Connect(ReduxForm))
