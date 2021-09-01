@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
-use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
@@ -178,6 +177,12 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
             }
 
             $this->questions = $questionsClone;
+
+            if ($this->notificationsConfiguration) {
+                $clonedNotificationConfiguration = clone $this->notificationsConfiguration;
+                $clonedNotificationConfiguration->setQuestionnaire($this);
+                $this->setNotificationsConfiguration($clonedNotificationConfiguration);
+            }
         }
     }
 
@@ -532,6 +537,17 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
+    public function initializeNotificationConfiguration(): void
+    {
+        $questionnaireNotificationConfiguration = new QuestionnaireNotificationConfiguration();
+        $questionnaireNotificationConfiguration->setQuestionnaire($this);
+        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyDelete(false);
+        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyCreate(false);
+        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyUpdate(false);
+
+        $this->notificationsConfiguration = $questionnaireNotificationConfiguration;
+    }
+
     private function getCloneQuestionReference(
         array &$cloneReferences,
         QuestionnaireAbstractQuestion $qaq
@@ -557,16 +573,5 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         }
 
         return null;
-    }
-
-    public function initializeNotificationConfiguration(): void
-    {
-        $questionnaireNotificationConfiguration = new QuestionnaireNotificationConfiguration();
-        $questionnaireNotificationConfiguration->setQuestionnaire($this);
-        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyDelete(false);
-        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyCreate(false);
-        $questionnaireNotificationConfiguration->setOnQuestionnaireReplyUpdate(false);
-
-        $this->notificationsConfiguration = $questionnaireNotificationConfiguration;
     }
 }
