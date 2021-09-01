@@ -14,7 +14,7 @@ import DebateStepPageAbsoluteVoteAndShare from './DebateStepPageAbsoluteVoteAndS
 import DebateStepPageVoteForm from './DebateStepPageVoteForm';
 import useOnScreen from '~/utils/hooks/useOnScreen';
 import Flex from '~ui/Primitives/Layout/Flex';
-import Text from '~ui/Primitives/Text';
+import Heading from '~ui/Primitives/Heading';
 import AppBox from '~ui/Primitives/AppBox';
 import CookieMonster from '~/CookieMonster';
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
@@ -80,11 +80,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
         </AnimatePresence>
         {stepClosed && (
           <AppBox textAlign="center" mb={6}>
-            <Text color="neutral-gray.700">
-              {intl.formatMessage({ id: 'thanks-participation-debate-ended' })}
-            </Text>
-
-            <Text color="neutral-gray.700">
+            <Heading as="h3" color="neutral-gray.900" fontSize={[16, 24]} fontWeight={400}>
               {intl.formatMessage(
                 { id: 'summary-debate-participation' },
                 {
@@ -94,7 +90,10 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
                   totalAgainstArgument: debate.argumentsAgainst.totalCount,
                 },
               )}
-            </Text>
+            </Heading>
+            <Heading as="h3" color="neutral-gray.900" fontSize={[16, 24]} fontWeight={400}>
+              {intl.formatMessage({ id: 'thanks-participation-debate-ended' })}
+            </Heading>
           </AppBox>
         )}
 

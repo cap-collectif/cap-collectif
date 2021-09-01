@@ -18,6 +18,7 @@ import type { RelayHookPaginationProps as PaginationProps } from '~/types';
 import { Menu } from '~ds/Menu';
 import Text from '~ui/Primitives/Text';
 import type { Filter } from '~/components/Debate/Page/Arguments/types';
+import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context';
 
 type Props = {|
   +step: ?DebateStepPageArguments_step,
@@ -25,6 +26,7 @@ type Props = {|
 |};
 
 export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node => {
+  const { stepClosed } = useDebateStepPage();
   const [filter, setFilter] = useState<Filter>('DESC');
   const [yesState, setYesState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
   const [noState, setNoState] = useState<?{ ...PaginationProps, hasMore: boolean }>(null);
@@ -39,62 +41,69 @@ export const DesktopDebateStepPageArguments = ({ step, viewer }: Props): Node =>
 
   return (
     <AppBox id="DebateStepPageArguments">
-      <Flex align="center" direction="row" justifyContent="space-between" mb={6}>
-        <Heading as="h3" fontWeight="400" capitalize>
-          <FormattedMessage id="shortcut.opinion" values={{ num: argumentsCount }} />
-        </Heading>
-        <Menu>
-          <Menu.Button>
-            <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
-              <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
-            </Button>
-          </Menu.Button>
-          <Menu.List>
-            <Menu.OptionGroup
-              title={intl.formatMessage({ id: 'arguments.sort' })}
-              type="radio"
-              onChange={newValue => {
-                setFilter(((newValue: any): Filter));
-                const field = newValue === 'MOST_SUPPORTED' ? 'VOTE_COUNT' : 'PUBLISHED_AT';
-                const direction = newValue === 'MOST_SUPPORTED' ? 'DESC' : newValue;
-                if (yesState)
-                  yesState.refetchConnection(
-                    CONNECTION_CONFIG_YES,
-                    CONNECTION_NODES_PER_PAGE,
-                    null,
-                    {
-                      orderBy: { field, direction },
-                      debateId: step?.debate?.id,
-                      value: 'FOR',
-                    },
-                  );
-                if (noState)
-                  noState.refetchConnection(CONNECTION_CONFIG_NO, CONNECTION_NODES_PER_PAGE, null, {
-                    orderBy: { field, direction },
-                    debateId: step?.debate?.id,
-                    value: 'AGAINST',
-                  });
-              }}
-              value={filter}>
-              <Menu.OptionItem value="DESC">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="project.sort.last" />
-                </Text>
-              </Menu.OptionItem>
-              <Menu.OptionItem value="ASC">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="opinion.sort.old" />
-                </Text>
-              </Menu.OptionItem>
-              <Menu.OptionItem value="MOST_SUPPORTED">
-                <Text>
-                  <FormattedMessage tagName={React.Fragment} id="filter.most_supported" />
-                </Text>
-              </Menu.OptionItem>
-            </Menu.OptionGroup>
-          </Menu.List>
-        </Menu>
-      </Flex>
+      {!stepClosed && (
+        <Flex align="center" direction="row" justifyContent="space-between" mb={6}>
+          <Heading as="h3" fontWeight="400" capitalize>
+            <FormattedMessage id="shortcut.opinion" values={{ num: argumentsCount }} />
+          </Heading>
+          <Menu>
+            <Menu.Button>
+              <Button rightIcon={ICON_NAME.ARROW_DOWN} color="gray.500">
+                <FormattedMessage tagName={React.Fragment} id="argument.sort.label" />
+              </Button>
+            </Menu.Button>
+            <Menu.List>
+              <Menu.OptionGroup
+                title={intl.formatMessage({ id: 'arguments.sort' })}
+                type="radio"
+                onChange={newValue => {
+                  setFilter(((newValue: any): Filter));
+                  const field = newValue === 'MOST_SUPPORTED' ? 'VOTE_COUNT' : 'PUBLISHED_AT';
+                  const direction = newValue === 'MOST_SUPPORTED' ? 'DESC' : newValue;
+                  if (yesState)
+                    yesState.refetchConnection(
+                      CONNECTION_CONFIG_YES,
+                      CONNECTION_NODES_PER_PAGE,
+                      null,
+                      {
+                        orderBy: { field, direction },
+                        debateId: step?.debate?.id,
+                        value: 'FOR',
+                      },
+                    );
+                  if (noState)
+                    noState.refetchConnection(
+                      CONNECTION_CONFIG_NO,
+                      CONNECTION_NODES_PER_PAGE,
+                      null,
+                      {
+                        orderBy: { field, direction },
+                        debateId: step?.debate?.id,
+                        value: 'AGAINST',
+                      },
+                    );
+                }}
+                value={filter}>
+                <Menu.OptionItem value="DESC">
+                  <Text>
+                    <FormattedMessage tagName={React.Fragment} id="project.sort.last" />
+                  </Text>
+                </Menu.OptionItem>
+                <Menu.OptionItem value="ASC">
+                  <Text>
+                    <FormattedMessage tagName={React.Fragment} id="opinion.sort.old" />
+                  </Text>
+                </Menu.OptionItem>
+                <Menu.OptionItem value="MOST_SUPPORTED">
+                  <Text>
+                    <FormattedMessage tagName={React.Fragment} id="filter.most_supported" />
+                  </Text>
+                </Menu.OptionItem>
+              </Menu.OptionGroup>
+            </Menu.List>
+          </Menu>
+        </Flex>
+      )}
 
       <Flex direction="row" spacing={6}>
         <Flex direction="column" flex={1}>

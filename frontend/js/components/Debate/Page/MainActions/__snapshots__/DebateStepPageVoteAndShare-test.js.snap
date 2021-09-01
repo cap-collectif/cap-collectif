@@ -7,16 +7,16 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
   <div
     class="sc-bdnxRM kQcgIq"
   >
-    <p
-      class="sc-bdnxRM bXUMKY"
-    >
-      thanks-participation-debate-ended
-    </p>
-    <p
-      class="sc-bdnxRM bXUMKY"
+    <h3
+      class="sc-bdnxRM edsFHk"
     >
       summary-debate-participation
-    </p>
+    </h3>
+    <h3
+      class="sc-bdnxRM edsFHk"
+    >
+      thanks-participation-debate-ended
+    </h3>
   </div>
 </div>
 `;
@@ -28,16 +28,16 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
   <div
     class="sc-bdnxRM kQcgIq"
   >
-    <p
-      class="sc-bdnxRM bXUMKY"
-    >
-      thanks-participation-debate-ended
-    </p>
-    <p
-      class="sc-bdnxRM bXUMKY"
+    <h3
+      class="sc-bdnxRM edsFHk"
     >
       summary-debate-participation
-    </p>
+    </h3>
+    <h3
+      class="sc-bdnxRM edsFHk"
+    >
+      thanks-participation-debate-ended
+    </h3>
   </div>
 </div>
 `;
@@ -49,16 +49,16 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous particip
   <div
     class="sc-bdnxRM kQcgIq"
   >
-    <p
-      class="sc-bdnxRM bXUMKY"
-    >
-      thanks-participation-debate-ended
-    </p>
-    <p
-      class="sc-bdnxRM bXUMKY"
+    <h3
+      class="sc-bdnxRM edsFHk"
     >
       summary-debate-participation
-    </p>
+    </h3>
+    <h3
+      class="sc-bdnxRM edsFHk"
+    >
+      thanks-participation-debate-ended
+    </h3>
   </div>
 </div>
 `;
@@ -70,16 +70,16 @@ exports[`<DebateStepPageVoteAndShare/> renders correctly when viewer not confirm
   <div
     class="sc-bdnxRM kQcgIq"
   >
-    <p
-      class="sc-bdnxRM bXUMKY"
-    >
-      thanks-participation-debate-ended
-    </p>
-    <p
-      class="sc-bdnxRM bXUMKY"
+    <h3
+      class="sc-bdnxRM edsFHk"
     >
       summary-debate-participation
-    </p>
+    </h3>
+    <h3
+      class="sc-bdnxRM edsFHk"
+    >
+      thanks-participation-debate-ended
+    </h3>
   </div>
 </div>
 `;
