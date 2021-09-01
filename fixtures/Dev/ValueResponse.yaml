@@ -618,6 +618,11 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         analysis: '@proposalAnalysisIdf3Mickael'
         value: 100
         createdAt: <(new \DateTime('2021-01-01 03:48:00'))>
+    majorityDecision1Answer0:
+        question: '@majorityDecision1'
+        reply: '@replyExport1'
+        value: null
+        createdAt: <(new \DateTime('2021-01-01 05:45:00'))>
     majorityDecision1Answer1:
         question: '@majorityDecision1'
         reply: '@replyExport1'

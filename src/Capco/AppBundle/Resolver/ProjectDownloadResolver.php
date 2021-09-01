@@ -131,7 +131,7 @@ class ProjectDownloadResolver
         $text = str_ireplace($twoBreaks, "\r\n", $text);
         $text = strip_tags($text);
 
-        return html_entity_decode($text, ENT_QUOTES);
+        return html_entity_decode($text, \ENT_QUOTES);
     }
 
     // *************************** Generate items *******************************************
@@ -196,7 +196,8 @@ class ProjectDownloadResolver
 
         if (
             AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
-            (int) $response['question']['type']
+                (int) $response['question']['type'] &&
+            null !== $response['value']
         ) {
             return $this->translator->trans(
                 MajorityVoteTypeEnum::toI18nKey($response['value']),
