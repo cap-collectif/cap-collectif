@@ -58,7 +58,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@sso&&~@synthesis&&~@randomly-failing'
+        tags: '@sso&&~@randomly-failing'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -67,7 +67,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@consultation&&~@synthesis&&~@randomly-failing'
+        tags: '@consultation&&~@randomly-failing'
     bp:
       paths: ['%paths.base%/features/front/bp']
       contexts: *bp-config

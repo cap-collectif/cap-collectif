@@ -70,10 +70,6 @@ services:
     Capco\AppBundle\EventListener\SoftDeleteEventListener:
         tags:
             - { name: doctrine.event_listener, event: preFlush, method: preFlush }
-    Capco\AppBundle\EventListener\SynthesisLoggableListener:
-        public: true
-        calls:
-            - [setAnnotationReader, ['@annotation_reader']]
     Capco\AppBundle\EventListener\EmptyUsernameListener:
         public: true
         tags:

@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
@@ -25,7 +24,6 @@ use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 class User extends BaseUser implements
-    SynthesisUserInterface,
     ProjectOwner,
     EquatableInterface,
     IndexableInterface

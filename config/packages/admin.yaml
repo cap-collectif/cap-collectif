@@ -788,18 +788,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\SynthesisAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Synthesis\Synthesis,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.label.synthesis }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\OpinionVersionAdmin:
         arguments:
             [

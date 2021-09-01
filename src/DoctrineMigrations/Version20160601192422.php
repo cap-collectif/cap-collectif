@@ -32,16 +32,6 @@ class Version20160601192422 extends AbstractMigration implements ContainerAwareI
         );
     }
 
-    public function postUp(Schema $schema): void
-    {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $syntheses = $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll();
-        foreach ($syntheses as $synthesis) {
-            $synthesis->setDisplayRules(['level' => 3]);
-        }
-        $em->flush();
-    }
-
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs

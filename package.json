@@ -57,7 +57,6 @@
         "flowCommandPath": "node_modules/.bin/flow",
         "concurrentFiles": 5,
         "globExcludePatterns": [
-            "frontend/js/components/Synthesis/**/*.js",
             "frontend/js/__generated__/**/*.js",
             "frontend/js/stories/**/*.js",
             "node_modules/**"

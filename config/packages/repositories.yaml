@@ -350,11 +350,6 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:SourceCategory']
 
-    Capco\AppBundle\Repository\Synthesis\SynthesisRepository:
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        lazy: true
-        arguments: ['CapcoAppBundle:Synthesis\Synthesis']
-
     Capco\AppBundle\Repository\PublicApiTokenRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
