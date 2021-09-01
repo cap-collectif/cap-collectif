@@ -20,6 +20,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AbstractDebateArgumentMutation
 {
@@ -40,6 +41,7 @@ class AbstractDebateArgumentMutation
     protected ValidatorInterface $validator;
     protected TokenGeneratorInterface $tokenGenerator;
     protected DebateNotifier $debateNotifier;
+    protected RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -50,7 +52,8 @@ class AbstractDebateArgumentMutation
         Indexer $indexer,
         ValidatorInterface $validator,
         TokenGeneratorInterface $tokenGenerator,
-        DebateNotifier $debateNotifier
+        DebateNotifier $debateNotifier,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
@@ -61,6 +64,7 @@ class AbstractDebateArgumentMutation
         $this->validator = $validator;
         $this->tokenGenerator = $tokenGenerator;
         $this->debateNotifier = $debateNotifier;
+        $this->requestGuesser = $requestGuesser;
     }
 
     protected function getDebateFromInput(Arg $input, ?User $viewer): Debate
@@ -90,10 +94,12 @@ class AbstractDebateArgumentMutation
                 throw new UserError(self::ALREADY_HAS_ARGUMENT);
             }
         } else {
-            if ($this->anonymousRepository->findOneBy([
-                'email' => $input->offsetGet('email'),
-                'debate' => $debate
-            ])) {
+            if (
+                $this->anonymousRepository->findOneBy([
+                    'email' => $input->offsetGet('email'),
+                    'debate' => $debate,
+                ])
+            ) {
                 throw new UserError(self::ALREADY_HAS_ARGUMENT);
             }
         }

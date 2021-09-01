@@ -11,13 +11,12 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Model\CommentableInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\AddCommentMutation;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddCommentMutationSpec extends ObjectBehavior
 {
@@ -27,15 +26,19 @@ class AddCommentMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
         EventDispatcherInterface $dispatcher,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        RequestGuesser $requestGuesser
     ) {
+        $requestGuesser->getClientIp()->willReturn('1.1.1.1');
+
         $this->beConstructedWith(
             $em,
             $formFactory,
             $globalIdResolver,
             $logger,
             $dispatcher,
-            $commentableCommentsDataLoader
+            $commentableCommentsDataLoader,
+            $requestGuesser
         );
     }
 
@@ -47,18 +50,17 @@ class AddCommentMutationSpec extends ObjectBehavior
     public function it_returns_userError_if_not_found(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
-        User $viewer,
-        RequestStack $requestStack
+        User $viewer
     ) {
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
 
-        $this->__invoke($arguments, $viewer, $requestStack)->shouldBe([
+        $this->__invoke($arguments, $viewer)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => 'Commentable not found.'
-                ]
-            ]
+                    'message' => 'Commentable not found.',
+                ],
+            ],
         ]);
     }
 
@@ -66,19 +68,18 @@ class AddCommentMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         User $viewer,
-        CommentableInterface $commentable,
-        RequestStack $requestStack
+        CommentableInterface $commentable
     ) {
         $commentable->isCommentable()->willReturn(false);
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($commentable);
 
-        $this->__invoke($arguments, $viewer, $requestStack)->shouldBe([
+        $this->__invoke($arguments, $viewer)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => 'Can\'t add a comment to a not commentable.'
-                ]
-            ]
+                    'message' => 'Can\'t add a comment to a not commentable.',
+                ],
+            ],
         ]);
     }
 
@@ -86,20 +87,19 @@ class AddCommentMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         User $viewer,
-        CommentableInterface $commentable,
-        RequestStack $requestStack
+        CommentableInterface $commentable
     ) {
         $commentable->acceptNewComments()->willReturn(false);
         $commentable->isCommentable()->willReturn(true);
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($commentable);
 
-        $this->__invoke($arguments, $viewer, $requestStack)->shouldBe([
+        $this->__invoke($arguments, $viewer)->shouldBe([
             'userErrors' => [
                 [
-                    'message' => "Comment's are not longer accepted"
-                ]
-            ]
+                    'message' => "Comment's are not longer accepted",
+                ],
+            ],
         ]);
     }
 
@@ -112,8 +112,6 @@ class AddCommentMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer,
         Proposal $commentable,
-        RequestStack $requestStack,
-        Request $request,
         Form $form
     ) {
         $formData = ['body' => 'My body'];
@@ -126,9 +124,6 @@ class AddCommentMutationSpec extends ObjectBehavior
         $commentable
             ->addComment(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))
             ->willReturn($commentable);
-
-        $request->getClientIp()->willReturn('1.1.1.1');
-        $requestStack->getCurrentRequest()->willReturn($request);
         $viewer->isVip()->willReturn(false);
         $commentable->acceptNewComments()->willReturn(true);
         $commentable->isCommentable()->willReturn(true);
@@ -145,12 +140,12 @@ class AddCommentMutationSpec extends ObjectBehavior
             )
             ->shouldBeCalled();
 
-        $payload = $this->__invoke($arguments, $viewer, $requestStack);
+        $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
         // TODO: We should use snapshot testing, because we don't test commentEdge
         $payload->shouldBe([
             'commentEdge' => $payload->getWrappedObject()['commentEdge'],
-            'userErrors' => []
+            'userErrors' => [],
         ]);
     }
 }

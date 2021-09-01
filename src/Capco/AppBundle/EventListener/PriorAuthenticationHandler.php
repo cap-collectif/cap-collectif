@@ -8,7 +8,7 @@ use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\AppBundle\Repository\UserConnectionRepository;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class PriorAuthenticationHandler
 {
@@ -46,7 +46,7 @@ class PriorAuthenticationHandler
                     );
                 }
 
-                $ip = IPGuesser::getClientIp($request);
+                $ip = RequestGuesser::getClientIpFromRequest($request);
                 $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailAndIPInLastHour(
                     $email,
                     $ip

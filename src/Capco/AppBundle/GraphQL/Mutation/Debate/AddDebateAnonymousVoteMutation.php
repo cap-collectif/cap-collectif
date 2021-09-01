@@ -15,6 +15,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddDebateAnonymousVoteMutation implements MutationInterface
 {
@@ -28,6 +29,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
     private ValidatorInterface $validator;
     private TokenGeneratorInterface $tokenGenerator;
     private Indexer $indexer;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -35,7 +37,8 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         ValidatorInterface $validator,
         TokenGeneratorInterface $tokenGenerator,
-        Indexer $indexer
+        Indexer $indexer,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->logger = $logger;
@@ -43,6 +46,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
         $this->validator = $validator;
         $this->tokenGenerator = $tokenGenerator;
         $this->indexer = $indexer;
+        $this->requestGuesser = $requestGuesser;
     }
 
     public function __invoke(Arg $input): array
@@ -69,12 +73,13 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
         }
 
         $type = $input->offsetGet('type');
+
         $debateAnonymousVote = (new DebateAnonymousVote())
             ->setToken($this->tokenGenerator->generateToken())
             ->setDebate($debate)
             ->setType($type)
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
-            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+            ->setNavigator($this->requestGuesser->getUserAgent())
+            ->setIpAddress($this->requestGuesser->getClientIp());
         self::setOrigin($debateAnonymousVote, $input);
 
         $this->em->persist($debateAnonymousVote);

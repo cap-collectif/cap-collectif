@@ -13,7 +13,6 @@ use Capco\AppBundle\Entity\OpinionVersionVote;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
@@ -51,7 +50,7 @@ class AddOpinionVoteMutation implements MutationInterface
         $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
-    public function __invoke(Argument $input, User $viewer, RequestStack $requestStack): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $contributionId = GlobalId::fromGlobalId($input->offsetGet('opinionId'))['id'];
         $opinion = $this->opinionRepo->find($contributionId);
@@ -82,13 +81,13 @@ class AddOpinionVoteMutation implements MutationInterface
         if ($contribution instanceof Opinion) {
             $previousVote = $this->opinionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinion' => $contribution
+                'opinion' => $contribution,
             ]);
         }
         if ($contribution instanceof OpinionVersion) {
             $previousVote = $this->versionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinionVersion' => $contribution
+                'opinionVersion' => $contribution,
             ]);
         }
 
@@ -124,7 +123,7 @@ class AddOpinionVoteMutation implements MutationInterface
             'vote' => $vote,
             'voteEdge' => $edge,
             'viewer' => $viewer,
-            'previousVoteId' => $previousVoteId
+            'previousVoteId' => $previousVoteId,
         ];
     }
 }

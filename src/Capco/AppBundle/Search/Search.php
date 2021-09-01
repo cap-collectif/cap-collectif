@@ -14,7 +14,7 @@ use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 abstract class Search
 {
@@ -49,7 +49,7 @@ abstract class Search
             // sprintf with %u is here in order to avoid negative int.
             return sprintf(
                 '%u',
-                ip2long(IPGuesser::getClientIp($requestStack->getCurrentRequest()))
+                ip2long(RequestGuesser::getClientIpFromRequest($requestStack->getCurrentRequest()))
             );
         }
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -14,8 +13,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class ContactProposalAuthorMutation implements MutationInterface
 {
@@ -23,29 +21,32 @@ class ContactProposalAuthorMutation implements MutationInterface
     private MailerService $mailerService;
     private CaptchaChecker $captchaChecker;
     private EmailValidator $emailValidator;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         ProposalRepository $proposalRepository,
         MailerService $mailerService,
         CaptchaChecker $captchaChecker,
-        EmailValidator $emailValidator
+        EmailValidator $emailValidator,
+        RequestGuesser $requestGuesser
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->mailerService = $mailerService;
         $this->captchaChecker = $captchaChecker;
         $this->emailValidator = $emailValidator;
+        $this->requestGuesser = $requestGuesser;
     }
 
-    public function __invoke(Argument $argument, RequestStack $requestStack): array
+    public function __invoke(Argument $argument): array
     {
         $proposal = $this->getProposal($argument);
         $errorLog = $this->getErrorLog(
             $proposal,
             $argument->offsetGet('captcha'),
-            IPGuesser::getClientIp($requestStack->getCurrentRequest())
+            $this->requestGuesser->getClientIp()
         );
 
-        if (is_null($errorLog)) {
+        if (null === $errorLog) {
             $this->sendContactMail(
                 $proposal,
                 $argument->offsetGet('senderName'),
@@ -54,7 +55,7 @@ class ContactProposalAuthorMutation implements MutationInterface
             );
         }
 
-        return ["error" => $errorLog];
+        return ['error' => $errorLog];
     }
 
     private function getErrorLog(?Proposal $proposal, string $captcha, string $ip): ?string
@@ -68,7 +69,9 @@ class ContactProposalAuthorMutation implements MutationInterface
         if (!$proposal->getForm()->canContact()) {
             return ContactProposalAuthorErrorCode::NO_CONTACT_PROPOSAL;
         }
-        if (!$this->emailValidator->isValid($proposal->getAuthor()->getEmail(), new RFCValidation())) {
+        if (
+            !$this->emailValidator->isValid($proposal->getAuthor()->getEmail(), new RFCValidation())
+        ) {
             return ContactProposalAuthorErrorCode::INVALID_EMAIL_AUTHOR;
         }
 
@@ -76,10 +79,10 @@ class ContactProposalAuthorMutation implements MutationInterface
     }
 
     private function sendContactMail(
-        Proposal    $proposal,
-        string      $senderName,
-        string      $senderEmail,
-        string      $message
+        Proposal $proposal,
+        string $senderName,
+        string $senderEmail,
+        string $message
     ): void {
         $this->mailerService->createAndSendMessage(
             ContactProposalAuthorMessage::class,
@@ -87,7 +90,7 @@ class ContactProposalAuthorMutation implements MutationInterface
             [
                 'sender' => [
                     'name' => $senderName,
-                    'email' => $senderEmail
+                    'email' => $senderEmail,
                 ],
                 'senderMessage' => $message,
                 //'copyToAdmin' => true, @todo uncomment when viewer can consent to this copy.

@@ -23,20 +23,20 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddReplyMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $questionnaireRepo;
-    private $responsesFormatter;
-    private $logger;
-    private $replyRepo;
-    private $userNotifier;
-    private $stepUrlResolver;
-    private $publisher;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private QuestionnaireRepository $questionnaireRepo;
+    private ResponsesFormatter $responsesFormatter;
+    private LoggerInterface $logger;
+    private ReplyRepository $replyRepo;
+    private UserNotifier $userNotifier;
+    private StepUrlResolver $stepUrlResolver;
+    private Publisher $publisher;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -47,7 +47,8 @@ class AddReplyMutation implements MutationInterface
         LoggerInterface $logger,
         UserNotifier $userNotifier,
         StepUrlResolver $stepUrlResolver,
-        Publisher $publisher
+        Publisher $publisher,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -58,9 +59,10 @@ class AddReplyMutation implements MutationInterface
         $this->userNotifier = $userNotifier;
         $this->stepUrlResolver = $stepUrlResolver;
         $this->publisher = $publisher;
+        $this->requestGuesser = $requestGuesser;
     }
 
-    public function __invoke(Argument $input, User $user, RequestStack $requestStack): array
+    public function __invoke(Argument $input, User $user): array
     {
         $values = $input->getArrayCopy();
 
@@ -80,11 +82,12 @@ class AddReplyMutation implements MutationInterface
                 throw new UserError('Only one reply by user is allowed for this questionnaire.');
             }
         }
+
         $reply = (new Reply())
             ->setAuthor($user)
             ->setQuestionnaire($questionnaire)
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
-            ->setIpAddress(IPGuesser::getClientIp($requestStack->getCurrentRequest()));
+            ->setNavigator($this->requestGuesser->getUserAgent())
+            ->setIpAddress($this->requestGuesser->getClientIp());
 
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 

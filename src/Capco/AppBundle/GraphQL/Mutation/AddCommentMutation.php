@@ -18,7 +18,6 @@ use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Model\CommentableInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -26,19 +25,20 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddCommentMutation implements MutationInterface
 {
     public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
     public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
     public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
-    private $em;
-    private $globalIdResolver;
-    private $formFactory;
-    private $logger;
-    private $eventDispatcher;
-    private $commentableCommentsDataLoader;
+    private EntityManagerInterface $em;
+    private GlobalIdResolver $globalIdResolver;
+    private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
+    private EventDispatcherInterface $eventDispatcher;
+    private CommentableCommentsDataLoader $commentableCommentsDataLoader;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -46,7 +46,8 @@ class AddCommentMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
         EventDispatcherInterface $dispatcher,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -54,9 +55,10 @@ class AddCommentMutation implements MutationInterface
         $this->logger = $logger;
         $this->eventDispatcher = $dispatcher;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
+        $this->requestGuesser = $requestGuesser;
     }
 
-    public function __invoke(Arg $input, /*User|string*/ $viewer, RequestStack $requestStack): array
+    public function __invoke(Arg $input, /*User|string*/ $viewer): array
     {
         $commentableGlobalId = $input->offsetGet('commentableId');
         $commentableId = GlobalId::fromGlobalId($commentableGlobalId)['id'];
@@ -102,7 +104,7 @@ class AddCommentMutation implements MutationInterface
 
         $comment
             ->setAuthor($viewer)
-            ->setAuthorIp(IPGuesser::getClientIp($requestStack->getCurrentRequest()))
+            ->setAuthorIp($this->requestGuesser->getClientIp())
             ->setRelatedObject($relatedCommentInstance)
             ->setParent($commentable instanceof Comment ? $commentable : null);
 

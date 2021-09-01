@@ -6,6 +6,7 @@ use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="user_connection", indexes={
@@ -15,8 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserConnection
 {
-    use UuidTrait;
     use AuthorInformationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -30,6 +31,7 @@ class UserConnection
     private $email;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="datetime", type="datetime")
      */
     private $datetime;

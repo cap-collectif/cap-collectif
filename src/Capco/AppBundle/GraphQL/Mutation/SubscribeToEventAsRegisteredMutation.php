@@ -11,29 +11,30 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class SubscribeToEventAsRegisteredMutation implements MutationInterface
 {
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $entityManager;
     private EventRegistrationRepository $eventRegistrationRepository;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EventRegistrationRepository $eventRegistrationRepository,
         GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        RequestGuesser $requestGuesser
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->entityManager = $entityManager;
         $this->eventRegistrationRepository = $eventRegistrationRepository;
+        $this->requestGuesser = $requestGuesser;
     }
 
-    public function __invoke(Arg $input, User $viewer, RequestStack $requestStack): array
+    public function __invoke(Arg $input, User $viewer): array
     {
-        $request = $requestStack->getCurrentRequest();
         $eventId = $input->offsetGet('eventId');
         $isPrivate = $input->offsetGet('private');
 
@@ -58,7 +59,7 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
             ->setPrivate($isPrivate)
             ->setUser($viewer)
             ->setUsername($username)
-            ->setIpAddress(IPGuesser::getClientIp($requestStack->getCurrentRequest()))
+            ->setIpAddress($this->requestGuesser->getClientIp())
             ->setEmail($email)
             ->setConfirmed(true);
 

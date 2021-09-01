@@ -10,21 +10,25 @@ use Capco\AppBundle\Repository\ActionTokenRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class TokenManager
 {
     private EntityManagerInterface $em;
     private ActionTokenRepository $repository;
     private LoggerInterface $logger;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
         ActionTokenRepository $repository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->repository = $repository;
         $this->logger = $logger;
+        $this->requestGuesser = $requestGuesser;
     }
 
     public function consumeVoteToken(DebateVoteToken $voteToken, string $value): DebateVote
@@ -81,8 +85,8 @@ class TokenManager
             ->setUser($voteToken->getUser())
             ->setCreatedAt(new \DateTime())
             ->setDebate($voteToken->getDebate())
-            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null)
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
+            ->setNavigator($this->requestGuesser->getUserAgent())
+            ->setIpAddress($this->requestGuesser->getClientIp())
             ->setMailOrigin();
         $this->em->persist($vote);
 

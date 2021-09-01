@@ -13,7 +13,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -26,7 +25,7 @@ use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddProposalVoteMutation implements MutationInterface
 {
@@ -42,6 +41,7 @@ class AddProposalVoteMutation implements MutationInterface
     private StepRequirementsResolver $resolver;
     private LoggerInterface $logger;
     private ValidatorInterface $validator;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -55,7 +55,8 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -69,9 +70,10 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
         $this->globalIdResolver = $globalIdResolver;
+        $this->requestGuesser = $requestGuesser;
     }
 
-    public function __invoke(Argument $input, User $user, RequestStack $request): array
+    public function __invoke(Argument $input, User $user): array
     {
         $proposalId = $input->offsetGet('proposalId');
         $stepId = $input->offsetGet('stepId');
@@ -79,10 +81,10 @@ class AddProposalVoteMutation implements MutationInterface
         $step = $this->globalIdResolver->resolve($stepId, $user);
 
         if (!$proposal) {
-            throw new UserError('Unknown proposal with id: '.$proposalId);
+            throw new UserError('Unknown proposal with id: ' . $proposalId);
         }
         if (!$step) {
-            throw new UserError('Unknown step with id: '.$stepId);
+            throw new UserError('Unknown step with id: ' . $stepId);
         }
 
         /** @var AbstractStep $step */
@@ -111,7 +113,7 @@ class AddProposalVoteMutation implements MutationInterface
             );
             $vote = (new ProposalSelectionVote())->setSelectionStep($step);
         } else {
-            throw new UserError('Wrong step with id: '.$stepId);
+            throw new UserError('Wrong step with id: ' . $stepId);
         }
 
         // Check if step is contributable
@@ -130,15 +132,15 @@ class AddProposalVoteMutation implements MutationInterface
         }
 
         $vote
-            ->setIpAddress(IPGuesser::getClientIp($request->getCurrentRequest()))
+            ->setIpAddress($this->requestGuesser->getClientIp())
             ->setUser($user)
             ->setPrivate($input->offsetGet('anonymously'))
             ->setProposal($proposal);
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
-            $this->logger->error((string)$error->getMessage());
+            $this->logger->error((string) $error->getMessage());
 
-            throw new UserError((string)$error->getMessage());
+            throw new UserError((string) $error->getMessage());
         }
 
         $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted(

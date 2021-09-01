@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddDebateVoteMutation implements MutationInterface
 {
@@ -26,19 +27,22 @@ class AddDebateVoteMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private DebateVoteRepository $repository;
     private Indexer $indexer;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $repository,
-        Indexer $indexer
+        Indexer $indexer,
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->repository = $repository;
         $this->indexer = $indexer;
+        $this->requestGuesser = $requestGuesser;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -60,7 +64,7 @@ class AddDebateVoteMutation implements MutationInterface
 
         $type = $input->offsetGet('type');
         $debateVote = (new DebateVote())->setDebate($debate)->setType($type);
-        self::setAuthor($debateVote, $viewer);
+        $this->setAuthor($debateVote, $viewer);
         self::setOrigin($debateVote, $input);
 
         $previousVote = $this->repository->getOneByDebateAndUser($debate, $viewer);
@@ -106,12 +110,12 @@ class AddDebateVoteMutation implements MutationInterface
         return ['debateVote' => null, 'previousVoteId' => null, 'errorCode' => $message];
     }
 
-    private static function setAuthor(DebateVote $vote, User $viewer): DebateVote
+    private function setAuthor(DebateVote $vote, User $viewer): DebateVote
     {
         return $vote
             ->setUser($viewer)
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
-            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+            ->setNavigator($this->requestGuesser->getUserAgent())
+            ->setIpAddress($this->requestGuesser->getClientIp());
     }
 
     private static function setOrigin(DebateVote $vote, Arg $input): DebateVote

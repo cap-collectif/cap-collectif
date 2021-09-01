@@ -8,30 +8,33 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 {
     public const BAD_CREDENTIALS = 'Bad credentials.';
 
-    private $userConnectionRepository;
-    private $logger;
+    private UserConnectionRepository $userConnectionRepository;
+    private LoggerInterface $logger;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         UserConnectionRepository $userConnectionRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        RequestGuesser $requestGuesser
     ) {
         $this->userConnectionRepository = $userConnectionRepository;
         $this->logger = $logger;
+        $this->requestGuesser = $requestGuesser;
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $data = json_decode($request->getContent(), true);
+        $data = $this->requestGuesser->getJsonContent();
         $email = $data['username'] ?? '';
         $failedAttempts = $this->userConnectionRepository->countFailedAttemptByEmailAndIPInLastHour(
             $email,
-            IPGuesser::getClientIp($request)
+            $this->requestGuesser->getClientIp()
         );
         $this->logger->warning(
             'Une tentative de connection ratée a été réalisée sur l\'adresse email',

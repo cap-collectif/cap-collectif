@@ -9,12 +9,16 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AuthenticationHandlerSpec extends ObjectBehavior
 {
-    public function let(UserConnectionRepository $userConnectionRepository, LoggerInterface $logger)
-    {
-        $this->beConstructedWith($userConnectionRepository, $logger);
+    public function let(
+        UserConnectionRepository $userConnectionRepository,
+        LoggerInterface $logger,
+        RequestGuesser $requestGuesser
+    ) {
+        $this->beConstructedWith($userConnectionRepository, $logger, $requestGuesser);
     }
 
     public function it_is_initializable()
@@ -25,16 +29,19 @@ class AuthenticationHandlerSpec extends ObjectBehavior
     public function it_should_failed_with_password_error(
         UserConnectionRepository $userConnectionRepository,
         Request $request,
+        RequestGuesser $requestGuesser,
         AuthenticationException $exception
     ) {
-        $request
-            ->getContent()
+        $requestGuesser
+            ->getJsonContent()
             ->shouldBeCalled()
-            ->willReturn('{"username": "lbrunet@cap-collectif.com"}');
-        $request
+            ->willReturn(['username' => 'lbrunet@cap-collectif.com']);
+
+        $requestGuesser
             ->getClientIp()
             ->shouldBeCalled()
             ->willReturn('192.168.64.2');
+
         $test = $userConnectionRepository
             ->countFailedAttemptByEmailAndIPInLastHour('lbrunet@cap-collectif.com', '192.168.64.2')
             ->shouldBeCalled()

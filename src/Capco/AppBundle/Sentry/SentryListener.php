@@ -15,7 +15,7 @@ use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Capco\AppBundle\Utils\IPGuesser;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class SentryListener implements EventSubscriberInterface
 {
@@ -37,7 +37,7 @@ class SentryListener implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
-        $userData['ip_address'] = IPGuesser::getClientIp($request);
+        $userData['ip_address'] = RequestGuesser::getClientIpFromRequest($request);
 
         if ($user = $this->security->getUser()) {
             $userData['username'] = $user->getUsername();
@@ -65,7 +65,7 @@ class SentryListener implements EventSubscriberInterface
 
         $request = $event->getRequest();
         $matchedRoute = (string) $request->attributes->get('_route');
-        $refererUrl = filter_var($request->headers->get('referer'), FILTER_SANITIZE_URL);
+        $refererUrl = filter_var($request->headers->get('referer'), \FILTER_SANITIZE_URL);
 
         $this->hub->configureScope(static function (Scope $scope) use (
             $matchedRoute,

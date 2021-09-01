@@ -6,6 +6,19 @@ services:
         bind:
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
+    Capco\AppBundle\EventListener\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/EventListener/*'
+
+    Capco\AppBundle\EventListener\AuthenticationListener:
+        autoconfigure: false
+        tags:
+            - name: kernel.event_listener
+              event: security.authentication.failure
+              method: onAuthenticationFailure
+            - name: kernel.event_listener
+              event: security.interactive_login
+              method: onAuthenticationSuccess
+
     Capco\AdminBundle\EventListener\FilterConfigurator:
         arguments:
             - '@doctrine.orm.entity_manager'

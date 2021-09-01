@@ -16,6 +16,7 @@ use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateVoteMutation;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddDebateVoteMutationSpec extends ObjectBehavior
 {
@@ -24,9 +25,19 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $repository,
-        Indexer $indexer
+        Indexer $indexer,
+        RequestGuesser $requestGuesser
     ) {
-        $this->beConstructedWith($em, $logger, $globalIdResolver, $repository, $indexer);
+        $requestGuesser->getClientIp()->willReturn('1.2.3.4');
+        $requestGuesser->getUserAgent()->willReturn('UserAgent');
+        $this->beConstructedWith(
+            $em,
+            $logger,
+            $globalIdResolver,
+            $repository,
+            $indexer,
+            $requestGuesser
+        );
     }
 
     public function it_is_initializable()

@@ -8,6 +8,7 @@ use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Doctrine\Common\Util\ClassUtils;
 
 class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implements
     MutationInterface
@@ -19,7 +20,7 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
             $this->checkCreateRights($debate, $viewer, $input);
 
             $debateArgument = (new DebateArgument($debate))->setAuthor($viewer);
-            self::setDebateArgumentOrigin($debateArgument, $input);
+            $this->setDebateArgumentOrigin($debateArgument, $input);
             self::setDebateArgumentContent($debateArgument, $input);
 
             $this->saveAndIndex($debateArgument);
@@ -34,11 +35,11 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
     {
         $this->em->persist($debateArgument);
         $this->em->flush();
-        $this->indexer->index(\get_class($debateArgument), $debateArgument->getId());
+        $this->indexer->index(ClassUtils::getClass($debateArgument), $debateArgument->getId());
         $this->indexer->finishBulk();
     }
 
-    protected static function setDebateArgumentOrigin(
+    protected function setDebateArgumentOrigin(
         DebateArgumentInterface $argument,
         Arg $input
     ): DebateArgumentInterface {
@@ -48,8 +49,8 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
         }
 
         $argument
-            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
-            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+            ->setNavigator($this->requestGuesser->getUserAgent())
+            ->setIpAddress($this->requestGuesser->getClientIp());
 
         return $argument;
     }

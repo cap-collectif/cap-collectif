@@ -27,6 +27,8 @@ if ($debug) {
     Debug::enable();
 }
 
+// We can set this in config on SF 5.x
+// https://symfony.com/doc/4.4/deployment/proxies.html
 $trustedProxies = $_SERVER['SYMFONY_TRUSTED_PROXIES'] ?? false;
 Request::setTrustedProxies(
     array_merge(['127.0.0.1', '172.17.0.1'], explode(',', $trustedProxies)),
@@ -40,21 +42,21 @@ if ($trustedHosts = $_SERVER['SYMFONY_TRUSTED_HOSTS'] ?? false) {
 // This part is for infraV2 only. We get all information sended by the router,
 // And we transform them into Symfony app variable.
 if ($instanceName = $_SERVER['HTTP_X_SYMFONY_INSTANCE_NAME'] ?? false) {
-    $_ENV['SYMFONY_INSTANCE_NAME'] = $_SERVER['HTTP_X_SYMFONY_INSTANCE_NAME']; 
-    
-    $_ENV['SYMFONY_DATABASE_NAME'] = $_SERVER['HTTP_X_SYMFONY_DATABASE_NAME']; 
+    $_ENV['SYMFONY_INSTANCE_NAME'] = $_SERVER['HTTP_X_SYMFONY_INSTANCE_NAME'];
+
+    $_ENV['SYMFONY_DATABASE_NAME'] = $_SERVER['HTTP_X_SYMFONY_DATABASE_NAME'];
     $_ENV['SYMFONY_DATABASE_HOST'] = $_SERVER['HTTP_X_SYMFONY_DATABASE_HOST'];
     $_ENV['SYMFONY_DATABASE_USER'] = $_SERVER['HTTP_X_SYMFONY_DATABASE_USER'];
-    $_ENV['SYMFONY_DATABASE_PASSWORD'] =$_SERVER['HTTP_X_SYMFONY_DATABASE_PASSWORD'];
-    
+    $_ENV['SYMFONY_DATABASE_PASSWORD'] = $_SERVER['HTTP_X_SYMFONY_DATABASE_PASSWORD'];
+
     $_ENV['SYMFONY_RABBITMQ_HOST'] = $_SERVER['HTTP_X_SYMFONY_RABBITMQ_HOST'];
     $_ENV['SYMFONY_RABBITMQ_NODENAME'] = $_SERVER['HTTP_X_SYMFONY_RABBITMQ_NODENAME'];
-    
+
     $_ENV['SYMFONY_REDIS_HOST'] = $_SERVER['HTTP_X_SYMFONY_REDIS_HOST'];
-    $_ENV['SYMFONY_REDIS_PREFIX']=$_SERVER['HTTP_X_SYMFONY_REDIS_PREFIX'];
-    
-    $_ENV['SYMFONY_ELASTICSEARCH_HOST']=$_SERVER['HTTP_X_SYMFONY_ELASTICSEARCH_HOST'];
-    $_ENV['SYMFONY_ELASTICSEARCH_INDEX']=$_SERVER['HTTP_X_SYMFONY_ELASTICSEARCH_INDEX'];
+    $_ENV['SYMFONY_REDIS_PREFIX'] = $_SERVER['HTTP_X_SYMFONY_REDIS_PREFIX'];
+
+    $_ENV['SYMFONY_ELASTICSEARCH_HOST'] = $_SERVER['HTTP_X_SYMFONY_ELASTICSEARCH_HOST'];
+    $_ENV['SYMFONY_ELASTICSEARCH_INDEX'] = $_SERVER['HTTP_X_SYMFONY_ELASTICSEARCH_INDEX'];
 }
 
 $kernel = new Kernel($env, $debug);
@@ -62,4 +64,3 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
-

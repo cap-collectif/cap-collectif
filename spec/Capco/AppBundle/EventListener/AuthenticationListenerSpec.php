@@ -2,25 +2,23 @@
 
 namespace spec\Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Entity\UserConnection;
 use Capco\AppBundle\EventListener\AuthenticationListener;
 use Doctrine\ORM\EntityManagerInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Capco\AppBundle\Utils\RequestGuesser;
 
 class AuthenticationListenerSpec extends ObjectBehavior
 {
-    public function let(EntityManagerInterface $entityManager, RequestStack $requestStack)
+    public function let(EntityManagerInterface $entityManager, RequestGuesser $requestGuesser)
     {
-        $this->beConstructedWith($entityManager, $requestStack);
+        $this->beConstructedWith($entityManager, $requestGuesser);
     }
 
     public function it_is_initializable()
@@ -30,61 +28,53 @@ class AuthenticationListenerSpec extends ObjectBehavior
 
     public function it_should_saved_failed_connection_attempt(
         EntityManagerInterface $entityManager,
-        RequestStack $requestStack,
         AuthenticationFailureEvent $event,
-        Request $request
+        RequestGuesser $requestGuesser
     ) {
-        $headerBag = new HeaderBag(['user-agent' => 'TEST']);
-        $requestStack
-            ->getMasterRequest()
+        $requestGuesser
+            ->getJsonContent()
             ->shouldBeCalled()
-            ->willReturn($request);
+            ->willReturn(['username' => 'lbrunet@cap-collectif.com']);
 
-        $request
-            ->getContent()
-            ->shouldBeCalled()
-            ->willReturn('{"username": "lbrunet@cap-collectif.com"}');
-        $request
+        $requestGuesser
             ->getClientIp()
             ->shouldBeCalled()
             ->willReturn('192.168.64.2');
-        $request->headers = $headerBag;
 
-        $expectedUserConnection = new UserConnection();
-        $expectedUserConnection->setDatetime(new \DateTime());
-        $expectedUserConnection->setSuccess(false);
-        $expectedUserConnection->setEmail('lbrunet@cap-collectif.com');
-        $expectedUserConnection->setNavigator('TEST');
-        $expectedUserConnection->setIpAddress('192.168.64.2');
+        $requestGuesser
+            ->getUserAgent()
+            ->shouldBeCalled()
+            ->willReturn('TEST');
 
-        $this->onAuthenticationFailure($event);
         $entityManager
             ->persist(
-                Argument::that(function ($userConnection) use ($expectedUserConnection) {
-                    return $userConnection->isSuccess() === $expectedUserConnection->isSuccess() &&
-                        $userConnection->getEmail() === $expectedUserConnection->getEmail() &&
-                        $userConnection->getIpAddress() ===
-                            $expectedUserConnection->getIpAddress() &&
-                        $userConnection->getNavigator() === $expectedUserConnection->getNavigator();
+                Argument::that(function ($userConnection) {
+                    return false === $userConnection->isSuccess() &&
+                        'lbrunet@cap-collectif.com' === $userConnection->getEmail() &&
+                        '192.168.64.2' === $userConnection->getIpAddress() &&
+                        'TEST' === $userConnection->getNavigator();
                 })
             )
             ->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
+
+        $this->onAuthenticationFailure($event);
     }
 
     public function it_should_saved_successful_connection_attempt(
         EntityManagerInterface $entityManager,
         InteractiveLoginEvent $event,
         Request $request,
+        RequestGuesser $requestGuesser,
         UserInterface $user,
         Session $session,
         OAuthToken $tokenInterface
     ) {
-        $headerBag = new HeaderBag(['user-agent' => 'TEST']);
         $event
             ->getRequest()
             ->shouldBeCalled()
             ->willReturn($request);
+
         $tokenInterface
             ->serialize()
             ->shouldBeCalled()
@@ -106,39 +96,36 @@ class AuthenticationListenerSpec extends ObjectBehavior
                 'a:7:{i:0;s:9:"sqdqsdsqd";i:1;a:1:{s:12:"access_token";s:9:"sqdqsdsqd";}i:2;s:7:"refresh";i:3;i:60;i:4;i:1596457723;i:5;N;i:6;a:5:{i:0;N;i:1;b:0;i:2;a:0:{}i:3;a:0:{}i:4;a:0:{}}}'
             )
             ->shouldBeCalled();
+
         $tokenInterface
             ->getUser()
             ->shouldBeCalled()
             ->willReturn($user);
-        $request
-            ->getContent()
+        $requestGuesser
+            ->getJsonContent()
             ->shouldBeCalled()
-            ->willReturn('{"username": "lbrunet@cap-collectif.com"}');
-        $request
+            ->willReturn(['username' => 'lbrunet@cap-collectif.com']);
+        $requestGuesser
             ->getClientIp()
             ->shouldBeCalled()
             ->willReturn('192.168.64.2');
-        $request->headers = $headerBag;
+        $requestGuesser
+            ->getUserAgent()
+            ->shouldBeCalled()
+            ->willReturn('TEST');
 
-        $expectedUserConnection = new UserConnection();
-        $expectedUserConnection->setDatetime(new \DateTime());
-        $expectedUserConnection->setSuccess(true);
-        $expectedUserConnection->setEmail('lbrunet@cap-collectif.com');
-        $expectedUserConnection->setNavigator('TEST');
-        $expectedUserConnection->setIpAddress('192.168.64.2');
-
-        $this->onAuthenticationSuccess($event);
         $entityManager
             ->persist(
-                Argument::that(function ($userConnection) use ($expectedUserConnection): bool {
-                    return $userConnection->isSuccess() === $expectedUserConnection->isSuccess() &&
-                        $userConnection->getEmail() === $expectedUserConnection->getEmail() &&
-                        $userConnection->getIpAddress() ===
-                            $expectedUserConnection->getIpAddress() &&
-                        $userConnection->getNavigator() === $expectedUserConnection->getNavigator();
+                Argument::that(function ($userConnection): bool {
+                    return true === $userConnection->isSuccess() &&
+                        'lbrunet@cap-collectif.com' === $userConnection->getEmail() &&
+                        '192.168.64.2' === $userConnection->getIpAddress() &&
+                        'TEST' === $userConnection->getNavigator();
                 })
             )
             ->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
+
+        $this->onAuthenticationSuccess($event);
     }
 }
