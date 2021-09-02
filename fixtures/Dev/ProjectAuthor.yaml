@@ -145,5 +145,5 @@ Capco\AppBundle\Entity\ProjectAuthor:
         project: '@projectIdf3'
     pa37:
         createdAt: <(new \DateTime('2020-09-01'))>
-        user: '@userSpyl'
+        user: '@userTheo'
         project: '@projectWithOwner'

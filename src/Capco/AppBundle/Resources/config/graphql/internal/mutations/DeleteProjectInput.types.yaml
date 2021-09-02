@@ -1,0 +1,8 @@
+DeleteProjectInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteProject mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the project to delete'

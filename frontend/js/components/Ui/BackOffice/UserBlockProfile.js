@@ -45,9 +45,11 @@ export const UserBlockProfile = ({ query }: Props) => (
       )}
       <div>{query.user.displayName}</div>
     </ProfileInfo>
-    <IconLinkBar color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
-      <ProfileNeutralIcon color={colors.darkText} />
-    </IconLinkBar>
+    {query.user.isAdmin && (
+      <IconLinkBar color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
+        <ProfileNeutralIcon color={colors.darkText} />
+      </IconLinkBar>
+    )}
     <IconLinkBar
       color={colors.dangerColor}
       message="global-disconnect"
@@ -61,6 +63,7 @@ export default createFragmentContainer(UserBlockProfile, {
   query: graphql`
     fragment UserBlockProfile_query on Query {
       user: viewer {
+        isAdmin
         adminUrl
         displayName
         media {

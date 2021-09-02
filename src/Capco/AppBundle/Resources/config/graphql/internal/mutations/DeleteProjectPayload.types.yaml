@@ -1,0 +1,7 @@
+DeleteProjectPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedProjectId:
+                type: 'ID'
+                description: 'The deleted project id'

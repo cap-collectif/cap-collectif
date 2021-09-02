@@ -33,3 +33,27 @@ exports[`<UserBlockProfile /> renders correctly 1`] = `
   </IconLinkBar>
 </Fragment>
 `;
+
+exports[`<UserBlockProfile /> renders correctly with isAdmin false 1`] = `
+<Fragment>
+  <UserBlockProfile__ProfileInfo>
+    <DefaultAvatar
+      className="img-circle avatar"
+      size={60}
+    />
+    <div>
+      Booba
+    </div>
+  </UserBlockProfile__ProfileInfo>
+  <IconLinkBar
+    color="#dc3545"
+    message="global-disconnect"
+    url="http://localhost/logout"
+  >
+    <PowerButtonIcon
+      color="#dc3545"
+      size={16}
+    />
+  </IconLinkBar>
+</Fragment>
+`;

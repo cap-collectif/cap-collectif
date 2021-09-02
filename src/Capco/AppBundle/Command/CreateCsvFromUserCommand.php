@@ -714,7 +714,7 @@ EOF;
       replies {
         totalCount
       }
-      projects {
+      projects(affiliations: [AUTHOR]) {
         totalCount
       }
       comments {

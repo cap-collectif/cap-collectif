@@ -76,6 +76,9 @@ export const queryContributions = graphql`
         ...IndexContributions_project
       }
     }
+    viewer {
+      ...NoContributionsStep_viewer
+    }
     ...ProjectAdminProposalsPage_query
       @arguments(
         projectId: $projectId
@@ -99,6 +102,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
   const { path: baseUrl } = useRouteMatch();
   const project = dataPreloaded?.project || null;
+  const viewer = dataPreloaded?.viewer || null;
 
   const collectSteps = project?.steps.filter(step => step.__typename === 'CollectStep') || [];
   const debateSteps = project?.steps.filter(step => step.__typename === 'DebateStep') || [];
@@ -118,7 +122,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
         <Route exact path={baseUrl}>
           <Skeleton isLoaded={!!project} placeholder={<ContributionsPlaceholder />}>
             {!hasAtLeastOneContributionsStep ? (
-              <NoContributionsStep project={project} />
+              <NoContributionsStep project={project} viewer={viewer} />
             ) : (
               <IndexContributions project={project} />
             )}

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const ViewerProjectsQuery = /* GraphQL */ `
+const ViewerProjectsAffiliationsQuery = /* GraphQL */ `
   query ViewerProjectsQuery($affiliations: [ProjectAffiliation!]) {
     viewer {
       projects(affiliations: $affiliations) {
@@ -9,6 +9,40 @@ const ViewerProjectsQuery = /* GraphQL */ `
             owner {
               username
             }
+            authors {
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const ViewerProjectsSearchQuery = /* GraphQL */ `
+  query ViewerProjectsQuery($query: String) {
+    viewer {
+      projects(query: $query) {
+        totalCount
+        edges {
+          node {
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+
+const ViewerProjectsOrderQuery = /* GraphQL */ `
+  query ViewerProjectsQuery($order: ProjectOwnerProjectOrder) {
+    viewer {
+      projects(orderBy: $order) {
+        totalCount
+        edges {
+          node {
+            title
+            publishedAt
           }
         }
       }
@@ -19,7 +53,7 @@ const ViewerProjectsQuery = /* GraphQL */ `
 describe('Internal.viewer.projects', () => {
   it('should correctly fetch projects that a user owns when given the `OWNER` affiliations', async () => {
     const response = await graphql(
-      ViewerProjectsQuery,
+      ViewerProjectsAffiliationsQuery,
       {
         affiliations: ['OWNER'],
       },
@@ -31,21 +65,54 @@ describe('Internal.viewer.projects', () => {
     expect(response.viewer.projects.edges[0].node.owner.username).toBe('Théo QP');
   });
 
-  it('should not fetch projects that a user owns when no affiliations given', async () => {
-    let response = await graphql(
-      ViewerProjectsQuery,
-      {
-        affiliations: [],
-      },
-      'internal_theo',
-    );
+  it('should fetch all projects when no affiliations given', async () => {
+    await expect(
+      graphql(
+        ViewerProjectsAffiliationsQuery,
+        {
+          affiliations: [],
+        },
+        'internal_theo',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 
-    expect(response.viewer.projects.totalCount).toBe(0);
-    expect(response.viewer.projects.edges).toHaveLength(0);
+  it('should filter projects by a given search query', async () => {
+    await expect(
+      graphql(
+        ViewerProjectsSearchQuery,
+        {
+          query: 'project',
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 
-    response = await graphql(ViewerProjectsQuery, {}, 'internal_theo');
+  it('should sort projects by a given field and direction', async () => {
+    await expect(
+      graphql(
+        ViewerProjectsOrderQuery,
+        {
+          order: {
+            direction: 'ASC',
+            field: 'PUBLISHED_AT',
+          },
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 
-    expect(response.viewer.projects.totalCount).toBe(0);
-    expect(response.viewer.projects.edges).toHaveLength(0);
+  it('should filter project by author', async () => {
+    await expect(
+      graphql(
+        ViewerProjectsAffiliationsQuery,
+        {
+          affiliations: ['AUTHOR'],
+        },
+        'internal_spylou',
+      ),
+    ).resolves.toMatchSnapshot();
   });
 });

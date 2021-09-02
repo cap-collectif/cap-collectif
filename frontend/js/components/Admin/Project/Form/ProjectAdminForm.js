@@ -49,6 +49,7 @@ type Props = {|
   title: string,
   onTitleChange: string => void,
   initialGroups: Array<{| label: string, value: string |}>,
+  viewerIsAdmin: boolean,
 |};
 
 export type Author = {|
@@ -438,7 +439,16 @@ const changeTitle = debounce((onTitleChange, title) => {
 }, 1000);
 
 export function ProjectAdminForm(props: Props) {
-  const { handleSubmit, title, onTitleChange, project, features, initialGroups, ...rest } = props;
+  const {
+    handleSubmit,
+    title,
+    onTitleChange,
+    project,
+    features,
+    initialGroups,
+    viewerIsAdmin,
+    ...rest
+  } = props;
   changeTitle(onTitleChange, title);
   return (
     <form onSubmit={handleSubmit} id={formName}>
@@ -449,7 +459,13 @@ export function ProjectAdminForm(props: Props) {
         formName={formName}
         {...rest}
       />
-      <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} project={project} {...rest} />
+      <ProjectStepAdmin
+        handleSubmit={handleSubmit}
+        form={formName}
+        project={project}
+        viewerIsAdmin={viewerIsAdmin}
+        {...rest}
+      />
       <ProjectAccessAdminForm {...props} formName={formName} initialGroups={initialGroups} />
       <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
       <ProjectPublishAdminForm

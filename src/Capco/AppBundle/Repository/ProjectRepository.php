@@ -5,11 +5,12 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectAffiliation;
+use Capco\AppBundle\Enum\ProjectOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -148,18 +149,37 @@ class ProjectRepository extends EntityRepository
         User $user,
         int $offset,
         int $limit,
-        ?array $affiliations = []
+        ?array $affiliations = [],
+        ?string $searchQuery = null,
+        ?string $orderByField = ProjectOrderField::PUBLISHED_AT,
+        ?string $orderByDirection = 'DESC'
     ): Paginator {
         $query = $this->getUserProjectPublicQueryBuilder($user, $affiliations);
-        $query->addSelect('u');
+        $query = $this->filterByQueryAndOrder(
+            $query,
+            $searchQuery,
+            $orderByField,
+            $orderByDirection
+        );
         $query->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($query);
     }
 
-    public function countPublicPublished(User $user, ?array $affiliations = []): int
-    {
+    public function countPublicPublished(
+        User $user,
+        ?array $affiliations = [],
+        ?string $searchQuery = null,
+        ?string $orderByField = ProjectOrderField::SORT_FIELD[ProjectOrderField::PUBLISHED_AT],
+        ?string $orderByDirection = 'DESC'
+    ): int {
         $query = $this->getUserProjectPublicQueryBuilder($user, $affiliations);
+        $query = $this->filterByQueryAndOrder(
+            $query,
+            $searchQuery,
+            $orderByField,
+            $orderByDirection
+        );
 
         $query->select('COUNT(DISTINCT(p.id))');
 
@@ -352,21 +372,43 @@ class ProjectRepository extends EntityRepository
             ->getResult();
     }
 
+    private function filterByQueryAndOrder(
+        QueryBuilder $qb,
+        ?string $query = null,
+        ?string $orderByField = ProjectOrderField::SORT_FIELD[ProjectOrderField::PUBLISHED_AT],
+        ?string $orderByDirection = 'DESC'
+    ): QueryBuilder {
+        if ($query) {
+            $qb->andWhere('p.title LIKE :query')->setParameter('query', "%{$query}%");
+        }
+        if ($orderByField && $orderByDirection) {
+            $qb->orderBy("p.{$orderByField}", $orderByDirection);
+        }
+
+        return $qb;
+    }
+
     private function getUserProjectPublicQueryBuilder(
         User $user,
         ?array $affiliations = []
     ): QueryBuilder {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($user, $affiliations);
         if ($affiliations && \in_array(ProjectAffiliation::OWNER, $affiliations, true)) {
+            $qb->addSelect('u');
             $qb->innerJoin('authors.user', 'u');
             $qb->andWhere('p.owner = :user');
-        } else {
-            $qb->innerJoin('authors.user', 'u', Expr\Join::WITH, 'u = :user');
+            $qb->setParameter('user', $user);
         }
 
-        $qb->andWhere('p.visibility = :visibility')
-            ->setParameter('user', $user)
-            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+        if ($affiliations && \in_array(ProjectAffiliation::AUTHOR, $affiliations, true)) {
+            $qb->innerJoin('authors.user', 'u', Join::WITH, 'u = :user');
+            $qb->setParameter('user', $user);
+        }
+
+        $qb->andWhere('p.visibility = :visibility')->setParameter(
+            'visibility',
+            ProjectVisibilityMode::VISIBILITY_PUBLIC
+        );
 
         return $qb;
     }

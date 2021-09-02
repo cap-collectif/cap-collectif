@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Security\PostVoter;
+use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
-class DeletePostMutation implements MutationInterface
+class DeleteProjectMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
@@ -29,20 +29,20 @@ class DeletePostMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $id = $input->offsetGet('id');
-        $post = $this->globalIdResolver->resolve($id, $viewer);
+        $project = $this->globalIdResolver->resolve($id, $viewer);
 
-        $this->em->remove($post);
+        $this->em->remove($project);
         $this->em->flush();
 
-        return ['deletedPostId' => $id];
+        return ['deletedProjectId' => $id];
     }
 
-    public function isGranted(string $postId, User $viewer): bool
+    public function isGranted(string $projectId, User $viewer): bool
     {
-        $post = $this->globalIdResolver->resolve($postId, $viewer);
+        $project = $this->globalIdResolver->resolve($projectId, $viewer);
 
-        if ($post) {
-            return $this->authorizationChecker->isGranted(PostVoter::DELETE, $post);
+        if ($project) {
+            return $this->authorizationChecker->isGranted(ProjectVoter::DELETE, $project);
         }
 
         return false;

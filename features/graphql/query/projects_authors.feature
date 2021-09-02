@@ -24,7 +24,8 @@ Scenario: GraphQL client wants to list projects authors
           {"username":"welcomattic"},
           {"username":"spyl"},
           {"username":"Jpec"},
-          {"username":"Vince"}
+          {"username":"Vince"},
+          {"username":"Th\u00e9o QP"}
         ]
       }
     }

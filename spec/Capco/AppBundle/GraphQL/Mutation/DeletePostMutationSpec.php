@@ -9,7 +9,6 @@ use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -18,11 +17,10 @@ class DeletePostMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
         AuthorizationChecker $authorizationChecker
     ) {
-        $this->beConstructedWith($em, $formFactory, $globalIdResolver, $authorizationChecker);
+        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker);
     }
 
     public function it_is_initializable()

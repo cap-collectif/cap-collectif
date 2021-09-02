@@ -24,6 +24,7 @@ type Props = {|
   intl: IntlShape,
   project: ProjectStepAdmin_project,
   hasFeatureDebate: boolean,
+  viewerIsAdmin: boolean,
 |};
 
 export const validate = ({ steps }: StepTypes) => {
@@ -48,17 +49,27 @@ export const validate = ({ steps }: StepTypes) => {
   return errors;
 };
 
-export const ProjectStepAdmin = ({ form, project, hasFeatureDebate }: Props) => {
+export const ProjectStepAdmin = ({ form, project, hasFeatureDebate, viewerIsAdmin }: Props) => {
   const [stepType, setStepType] = useState('OtherStep');
   const [showAddStepModal, displayAddStepModal] = useState(false);
 
   const stepTypes = React.useMemo(() => {
+    const excludedSteps = [];
+
+    if (!viewerIsAdmin) {
+      excludedSteps.push('ConsultationStep');
+    }
+
     if (!hasFeatureDebate) {
-      return STEP_TYPES.filter(step => step.value !== 'DebateStep');
+      excludedSteps.push('DebateStep');
+    }
+
+    if (excludedSteps.length > 0) {
+      return STEP_TYPES.filter(step => !excludedSteps.includes(step.value));
     }
 
     return STEP_TYPES;
-  }, [hasFeatureDebate]);
+  }, [hasFeatureDebate, viewerIsAdmin]);
 
   return (
     <div className="col-md-12">

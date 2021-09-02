@@ -47,6 +47,7 @@ describe('<ProjectAdminForm />', () => {
       },
       archived: false,
     },
+    viewerIsAdmin: false,
     features,
     initialGroups: [],
   };

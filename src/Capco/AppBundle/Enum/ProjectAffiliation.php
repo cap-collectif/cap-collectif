@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Enum;
 class ProjectAffiliation implements EnumType
 {
     public const OWNER = 'OWNER';
+    public const AUTHOR = 'AUTHOR';
 
     public static function isValid($value): bool
     {
@@ -13,7 +14,7 @@ class ProjectAffiliation implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [self::OWNER];
+        return [self::OWNER, self::AUTHOR];
     }
 
     public static function getAvailableTypesToString(): string

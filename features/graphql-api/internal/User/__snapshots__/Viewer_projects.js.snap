@@ -1,0 +1,669 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.viewer.projects should fetch all projects when no affiliations given 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "Vince",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "Théo QP",
+              },
+            ],
+            "owner": Object {
+              "username": "Théo QP",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "Jpec",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "sfavot",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "welcomattic",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "welcomattic",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "xlacot",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+              Object {
+                "username": "welcomattic",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [],
+            "owner": null,
+          },
+        },
+      ],
+      "totalCount": 36,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.projects should filter project by author 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "spyl",
+              },
+            ],
+            "owner": null,
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.projects should filter projects by a given search query 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "Food project",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Project Analyse",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "English Project",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.projects should sort projects by a given field and direction 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-06 00:00:00",
+            "title": "English Project",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-07 00:00:00",
+            "title": "Projet avec beaucoup d'opinions",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-09 00:00:00",
+            "title": "Projet externe sans compteur",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-10 00:00:00",
+            "title": "Projet externe",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-11 00:00:00",
+            "title": "Questions/Responses",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-16 00:00:00",
+            "title": "Le P16 un projet à base de riz",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-17 00:00:00",
+            "title": "BP avec vote classement",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-18 00:00:00",
+            "title": "Projet à venir",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-19 00:00:00",
+            "title": "Projet avec une étape de participation en continue",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-20 00:00:00",
+            "title": "Projet sans étapes participatives",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-21 00:00:00",
+            "title": "Budget avec vote limité",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-22 00:00:00",
+            "title": "Dépôt avec selection vote simple",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-23 00:00:00",
+            "title": "Appel à projets",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-24 00:00:00",
+            "title": "Projet avec questionnaire",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-25 00:00:00",
+            "title": "Dépot avec selection vote budget",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-26 00:00:00",
+            "title": "Budget Participatif Rennes",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-27 00:00:00",
+            "title": "Projet de loi Renseignement",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-28 00:00:00",
+            "title": "Projet vide",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-29 00:00:00",
+            "title": "Transformation numérique des relations",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-30 00:00:00",
+            "title": "Stratégie technologique de l'Etat et services publics",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-31 00:00:00",
+            "title": "Croissance, innovation, disruption",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2018-12-07 00:00:00",
+            "title": "Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2019-12-10 00:00:00",
+            "title": "Project Analyse",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-01-04 12:00:00",
+            "title": "Budget Participatif IdF",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-03-16 12:00:00",
+            "title": "Solidarité Covid-19",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-16 12:00:00",
+            "title": "Projet pour consolider les exports",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-17 12:00:00",
+            "title": "Débat sur le cannabis",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-17 12:00:00",
+            "title": "Débats sur la vie",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-18 12:00:00",
+            "title": "Sauvons nos cafés",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-19 12:00:00",
+            "title": "Débat sur l'Oculus Quest",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-19 13:00:00",
+            "title": "Projet Archivé",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-19 13:00:00",
+            "title": "Débat du mois",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-19 13:00:00",
+            "title": "Projet avec administrateur de projet",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-06-19 13:00:00",
+            "title": "Débat Wysiwyg",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2020-09-15 12:00:00",
+            "title": "Food project",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2021-05-01 12:00:00",
+            "title": "Budget Participatif IdF 3",
+          },
+        },
+      ],
+      "totalCount": 36,
+    },
+  },
+}
+`;

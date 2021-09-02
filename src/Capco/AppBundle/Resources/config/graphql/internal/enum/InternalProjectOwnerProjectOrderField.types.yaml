@@ -1,0 +1,9 @@
+InternalProjectOwnerProjectOrderField:
+    type: enum
+    config:
+        name: ProjectOwnerProjectOrderField
+        description: 'Ordering options for projects returned from the connection.'
+        values:
+            PUBLISHED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::PUBLISHED_AT")'
+                description: 'Allows ordering a list of projects by when they were published.'

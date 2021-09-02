@@ -14,6 +14,7 @@ const baseProps = {
     $fragmentRefs,
     $refType,
   },
+  viewerIsAdmin: true,
 };
 
 const props = {
@@ -32,6 +33,11 @@ describe('<ProjectStepAdmin />', () => {
 
   it('renders correctly without feature debate', () => {
     const wrapper = shallow(<ProjectStepAdmin {...props.withFeatureDebate} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with isAdmin false', () => {
+    const wrapper = shallow(<ProjectStepAdmin {...props.basic} viewerIsAdmin={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

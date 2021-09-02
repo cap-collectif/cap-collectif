@@ -12,6 +12,7 @@ class ProjectVoter extends Voter
     public const VIEW = 'view';
     public const CREATE = 'create';
     public const EDIT = 'edit';
+    public const DELETE = 'delete';
     public const EXPORT = 'export';
 
     protected function supports($attribute, $subject): bool
@@ -19,7 +20,7 @@ class ProjectVoter extends Voter
         if ($subject instanceof Project) {
             return \in_array(
                 $attribute,
-                [self::VIEW, self::EDIT, self::CREATE, self::EXPORT],
+                [self::VIEW, self::EDIT, self::CREATE, self::DELETE, self::EXPORT],
                 true
             );
         }
@@ -37,11 +38,13 @@ class ProjectVoter extends Voter
 
         switch ($attribute) {
             case self::VIEW:
-                return self::canView($subject, $viewer);
+                return $this->canView($subject, $viewer);
             case self::EDIT:
-                return self::canEdit($subject, $viewer);
+                return $this->canEdit($subject, $viewer);
             case self::CREATE:
                 return self::canCreate($viewer);
+            case self::DELETE:
+                return $this->canDelete($subject, $viewer);
             case self::EXPORT:
                 return self::canDownloadExport($subject, $viewer);
         }
@@ -62,6 +65,11 @@ class ProjectVoter extends Voter
     private static function canCreate(User $viewer): bool
     {
         return $viewer->isAdmin() || $viewer->isProjectAdmin();
+    }
+
+    private function canDelete(Project $project, User $viewer): bool
+    {
+        return self::isAdminOrOwner($project, $viewer);
     }
 
     private static function canDownloadExport(Project $project, User $viewer): bool

@@ -286,6 +286,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     touch={[MockFunction]}
     untouch={[MockFunction]}
     valid={true}
+    viewerIsAdmin={false}
     warning={null}
   />
   <Relay(Connect(ProjectAccessAdminForm))
@@ -449,6 +450,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     touch={[MockFunction]}
     untouch={[MockFunction]}
     valid={true}
+    viewerIsAdmin={false}
     warning={null}
   />
   <Relay(ProjectProposalsAdminForm)

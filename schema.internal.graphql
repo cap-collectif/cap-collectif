@@ -4611,6 +4611,18 @@ type DeleteProjectDistrictPayload {
   clientMutationId: String
 }
 
+input DeleteProjectInput {
+  """The id of the project to delete"""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteProjectPayload {
+  """The deleted project id"""
+  deletedProjectId: ID
+  clientMutationId: String
+}
+
 input DeleteProposalFormInput {
   """The id of the `ProposalForm` to delete."""
   id: ID!
@@ -6713,6 +6725,7 @@ type Mutation {
   updateAlphaProject(input: UpdateAlphaProjectInput!): UpdateAlphaProjectPayload
   duplicateProject(input: DuplicateProjectInput!): DuplicateProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
+  deleteProject(input: DeleteProjectInput!): DeleteProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
@@ -8261,6 +8274,9 @@ type ProjectAbstractStep {
 enum ProjectAffiliation {
   """Projects that are owned by the authenticated user."""
   OWNER
+
+  """Projects where the user is assigned as author."""
+  AUTHOR
 }
 
 """A connection to a list of items."""
@@ -8368,7 +8384,28 @@ interface ProjectOwner {
     
     """
     affiliations: [ProjectAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for posts"""
+    orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
   ): ProjectConnection!
+}
+
+"""Ways in which project in admin list can be ordered."""
+input ProjectOwnerProjectOrder {
+  """The direction in which to order nodes."""
+  direction: OrderDirection! = DESC
+
+  """The field in which to order nodes by."""
+  field: ProjectOwnerProjectOrderField! = PUBLISHED_AT
+}
+
+"""Ordering options for projects returned from the connection."""
+enum ProjectOwnerProjectOrderField {
+  """Allows ordering a list of projects by when they were published."""
+  PUBLISHED_AT
 }
 
 input ProjectStepInput {
@@ -14633,6 +14670,12 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     
     """
     affiliations: [ProjectAffiliation!]
+
+    """the search query"""
+    query: String
+
+    """The ordering direction for posts"""
+    orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
   ): ProjectConnection!
 
   """Get all posts that the user owns."""

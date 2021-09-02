@@ -20,3 +20,14 @@ InternalProjectOwner:
                         description: |
                             Array of viewer's affiliation options for projects returned from the connection.
                             For example, OWNER will include only projects that the current viewer owns.
+                    query:
+                        type: 'String'
+                        description: the search query
+                    orderBy:
+                        type: 'InternalProjectOwnerProjectOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::PUBLISHED_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for posts'

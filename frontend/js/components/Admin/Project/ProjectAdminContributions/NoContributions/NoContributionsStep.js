@@ -7,12 +7,14 @@ import { Container, Tiles } from './NoContributionsStep.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import type { NoContributionsStep_project } from '~relay/NoContributionsStep_project.graphql';
+import type { NoContributionsStep_viewer } from '~relay/NoContributionsStep_viewer.graphql';
 
 type Props = {|
   project: NoContributionsStep_project,
+  viewer: NoContributionsStep_viewer,
 |};
 
-const NoContributionsStep = ({ project }: Props) => {
+const NoContributionsStep = ({ project, viewer }: Props) => {
   const hasQuestionnaireStep =
     project.steps.filter(({ __typename }) => __typename === 'QuestionnaireStep').length > 0;
   const hasConsultationStep =
@@ -21,11 +23,11 @@ const NoContributionsStep = ({ project }: Props) => {
   return (
     <Container>
       <FormattedMessage id="help.title.no-deposition-step" tagName="p" />
-      {(hasConsultationStep || hasQuestionnaireStep) && (
+      {(hasConsultationStep || hasQuestionnaireStep) && viewer.isAdmin && (
         <FormattedMessage id="help.text.no-deposition-step" tagName="p" />
       )}
 
-      {(hasConsultationStep || hasQuestionnaireStep) && (
+      {(hasConsultationStep || hasQuestionnaireStep) && viewer.isAdmin && (
         <Tiles>
           {hasConsultationStep && (
             <>
@@ -96,6 +98,11 @@ const NoContributionsStep = ({ project }: Props) => {
 };
 
 export default createFragmentContainer(NoContributionsStep, {
+  viewer: graphql`
+    fragment NoContributionsStep_viewer on User {
+      isAdmin
+    }
+  `,
   project: graphql`
     fragment NoContributionsStep_project on Project {
       _id

@@ -1,14 +1,14 @@
-PreviewProjectOrder:
+InternalProjectOwnerProjectOrder:
     type: input-object
     config:
-        name: ProjectOrder
-        description: 'Ways in which project can be ordered.'
+        name: ProjectOwnerProjectOrder
+        description: 'Ways in which project in admin list can be ordered.'
         fields:
             direction:
                 type: 'OrderDirection!'
                 description: 'The direction in which to order nodes.'
                 defaultValue: 'DESC'
             field:
-                type: 'PreviewProjectOrderField!'
+                type: 'InternalProjectOwnerProjectOrderField!'
                 description: 'The field in which to order nodes by.'
                 defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::PUBLISHED_AT")'

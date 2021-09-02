@@ -737,7 +737,6 @@ InternalMutation:
                     inputType: DuplicateProjectInput
                     payloadType: DuplicateProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DuplicateProjectMutation", [value])'
-
             updateProject:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
@@ -745,6 +744,13 @@ InternalMutation:
                     inputType: UpdateProjectInput
                     payloadType: UpdateProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectMutation", [value])'
+            deleteProject:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProjectMutation").isGranted(args["input"]["id"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteProjectInput
+                    payloadType: DeleteProjectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProjectMutation", [value, getUser()])'
             # Project District
             createProjectDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"

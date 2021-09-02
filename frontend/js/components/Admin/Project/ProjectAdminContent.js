@@ -88,6 +88,7 @@ const formatNavbarLinks = (
   firstCollectStepId: ?string,
   dataPrefetchPage,
   location: string,
+  viewerIsAdmin: boolean,
 ) => {
   const links = [];
   const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS');
@@ -142,7 +143,9 @@ const formatNavbarLinks = (
     title: 'global.configuration',
     url: getProjectAdminPath(project._id, 'CONFIGURATION'),
     to: getProjectAdminPath(project._id, 'CONFIGURATION'),
-    component: () => <ProjectAdminForm project={project} onTitleChange={setTitle} />,
+    component: () => (
+      <ProjectAdminForm project={project} onTitleChange={setTitle} viewerIsAdmin={viewerIsAdmin} />
+    ),
   });
 
   return links;
@@ -220,8 +223,18 @@ export const ProjectAdminContent = ({
         firstCollectStepId,
         dataPrefetchPage,
         location.pathname,
+        viewerIsAdmin,
       ),
-    [project, features, path, setTitle, firstCollectStepId, dataPrefetchPage, location.pathname],
+    [
+      project,
+      features,
+      path,
+      setTitle,
+      firstCollectStepId,
+      dataPrefetchPage,
+      location.pathname,
+      viewerIsAdmin,
+    ],
   );
 
   return (
@@ -251,15 +264,16 @@ export const ProjectAdminContent = ({
       </Header>
 
       <Content>
-        <BoxContainer className="box container-fluid" color="#ffc206">
-          <BoxDeprecated>
-            <FormattedMessage id="message.page.previous.version" />
-            <a href={project.adminUrl}>
-              <FormattedMessage id="global.consult" /> <i className="cap cap-arrow-66" />
-            </a>
-          </BoxDeprecated>
-        </BoxContainer>
-
+        {viewerIsAdmin && (
+          <BoxContainer className="box container-fluid" color="#ffc206">
+            <BoxDeprecated>
+              <FormattedMessage id="message.page.previous.version" />
+              <a href={project.adminUrl}>
+                <FormattedMessage id="global.consult" /> <i className="cap cap-arrow-66" />
+              </a>
+            </BoxDeprecated>
+          </BoxContainer>
+        )}
         <Switch>
           {links.map(link => (
             <Route key={link.url} path={link.url}>
