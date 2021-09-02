@@ -61,7 +61,7 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { maxProjectsDisp
     }
     if (values?.teaser && values.teaser.length > TEASER_MAX) {
       const error = {};
-      error.teaser = { id: 'characters-maximum', values: { quantité: TEASER_MAX } };
+      error.teaser = { id: 'characters-maximum', values: { quantity: TEASER_MAX } };
       return reject(error);
     }
     return resolve();

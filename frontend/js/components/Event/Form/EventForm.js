@@ -197,6 +197,10 @@ export const validate = (values: FormValues, props: Props) => {
     };
   }
 
+  if (values.metadescription !== null && values?.metadescription?.length > 160) {
+    errors.metadescription = { id: 'characters-maximum', values: { quantity: 160 } };
+  }
+
   return errors;
 };
 
