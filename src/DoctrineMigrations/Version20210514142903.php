@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210709140000 extends AbstractMigration
+final class Version20210514142903 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'add owner relation to project';
     }
 
     public function up(Schema $schema): void
