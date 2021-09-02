@@ -13,6 +13,7 @@ use Capco\UserBundle\Handler\UserInvitationHandler;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class UserInvitationHandlerSpec extends ObjectBehavior
 {
@@ -124,44 +125,41 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $this->handleUserInvite($user)->shouldReturn(null);
     }
 
-//    public function it_should_add_user_to_group(
-//        User $user,
-//        Manager $manager,
-//        UserInviteRepository $userInviteRepository,
-//        EntityManagerInterface $em,
-//        UserInvite $invitation,
-//        Group $group,
-//        UserGroup $userGroup
-//    ) {
-//        $email = 'user-invited-in-group@gmail.com';
-//        $user->getEmail()->willReturn($email);
-//
-//        $manager->isActive(Manager::unstable_project_admin)->willReturn(false);
-//
-//        $invitation->isAdmin()->willReturn(false);
-//        $invitation->getEmail()->willReturn($email);
-//        $invitation->isProjectAdmin()->willReturn(false);
-//
-//        //        $group = (new Group())->setId('group1')->setDescription('group 1');
-//        //        $group->getId()->willReturn('group1');
-//
-//        $invitation->getGroups()->willReturn(new ArrayCollection([$group]));
-//        $invitation->getGroups()->shouldBeCalled();
-//
-//        $userGroup->setGroup($group)->shouldBeCalled();
-//        $userGroup->setUser($user)->shouldBeCalled();
-//        //        $em->persist($userGroup)->shouldBeCalled();
-//
-//        $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
-//
-//        $now = (new \DateTime())->format('Y-m-d');
-//        $date = new \DateTime($now);
-//        $user->setConfirmationToken(null)->shouldBeCalledOnce();
-//        $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
-//
-//        $em->remove($invitation)->shouldBeCalledOnce();
-//        $em->flush()->shouldBeCalledOnce();
-//
-//        $this->handleUserInvite($user);
-//    }
+    public function it_should_add_user_to_group(
+        User $user,
+        Manager $manager,
+        UserInviteRepository $userInviteRepository,
+        EntityManagerInterface $em,
+        UserInvite $invitation,
+        Group $group
+    ) {
+        $email = 'user-invited-in-group@gmail.com';
+        $user->getEmail()->willReturn($email);
+
+        $manager->isActive(Manager::unstable_project_admin)->willReturn(false);
+
+        $invitation->isAdmin()->willReturn(false);
+        $invitation->getEmail()->willReturn($email);
+        $invitation->isProjectAdmin()->willReturn(false);
+
+        $groups = new ArrayCollection([$group->getWrappedObject()]);
+        $invitation
+            ->getGroups()
+            ->shouldBeCalled()
+            ->willReturn($groups);
+
+        $em->persist(Argument::type(UserGroup::class))->shouldBeCalled();
+
+        $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
+
+        $now = (new \DateTime())->format('Y-m-d');
+        $date = new \DateTime($now);
+        $user->setConfirmationToken(null)->shouldBeCalledOnce();
+        $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
+
+        $em->remove($invitation)->shouldBeCalledOnce();
+        $em->flush()->shouldBeCalledOnce();
+
+        $this->handleUserInvite($user);
+    }
 }

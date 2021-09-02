@@ -25,7 +25,7 @@ class UserInvitationHandler
         $this->em = $em;
     }
 
-    public function handleUserInvite(User $user)
+    public function handleUserInvite(User $user): void
     {
         $email = $user->getEmail();
 
