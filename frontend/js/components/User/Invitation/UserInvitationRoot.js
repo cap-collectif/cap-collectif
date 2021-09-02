@@ -72,6 +72,9 @@ const UserInvitationRootPage = ({
   const btnTextColor =
     colors.find(color => color.keyname === 'color.btn.primary.text')?.value || defaultColorText;
 
+  const backgroundColor =
+    colors.find(color => color.keyname === 'color.main_menu.bg')?.value || defaultPrimaryColor;
+
   return (
     <Switch>
       <Route path="/sso">
@@ -83,6 +86,7 @@ const UserInvitationRootPage = ({
             logoFragmentRef={logo}
             primaryColor={primaryColor}
             btnTextColor={btnTextColor}
+            backgroundColor={backgroundColor}
             setFirstVisited={setFirstVisited}
           />
         ) : (
@@ -97,6 +101,7 @@ const UserInvitationRootPage = ({
             queryFragmentRef={query}
             primaryColor={primaryColor}
             btnTextColor={btnTextColor}
+            backgroundColor={backgroundColor}
             logoFragmentRef={logo}
             hasEnabledSSO={hasEnabledSSO}
             email={email}

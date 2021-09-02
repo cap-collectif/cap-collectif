@@ -30,6 +30,7 @@ type ComponentProps = {|
   +hasEnabledSSO: boolean,
   +primaryColor: string,
   +btnTextColor: string,
+  +backgroundColor: string,
 |};
 
 type Props = {|
@@ -59,6 +60,7 @@ export const UserInvitationPage = ({
   hasEnabledSSO,
   primaryColor,
   btnTextColor,
+  backgroundColor,
 }: Props) => {
   const intl = useIntl();
 
@@ -109,7 +111,7 @@ export const UserInvitationPage = ({
         />
       </ContentContainer>
 
-      <LogoContainer bgColor={primaryColor}>
+      <LogoContainer bgColor={backgroundColor}>
         <Symbols />
         {logo.media?.url && <img src={logo.media.url} alt={`logo ${organizationName}`} />}
       </LogoContainer>

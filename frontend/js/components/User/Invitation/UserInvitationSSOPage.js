@@ -30,6 +30,7 @@ type Props = {|
   +logoFragmentRef: UserInvitationSSOPage_logo$key,
   +primaryColor: string,
   +btnTextColor: string,
+  +backgroundColor: string,
   +setFirstVisited: (visited: boolean) => void,
 |};
 
@@ -48,6 +49,7 @@ const UserInvitationSSOPage = ({
   logoFragmentRef,
   primaryColor,
   btnTextColor,
+  backgroundColor,
   setFirstVisited,
 }: Props) => {
   React.useEffect(() => {
@@ -134,7 +136,7 @@ const UserInvitationSSOPage = ({
         justifyContent="center"
         alignItems="center"
         position="relative"
-        backgroundColor={primaryColor}>
+        backgroundColor={backgroundColor}>
         <Symbols />
         <Logo src={logo.media?.url} alt="" />
       </RigthSide>
