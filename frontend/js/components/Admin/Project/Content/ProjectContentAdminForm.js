@@ -20,7 +20,6 @@ import {
   ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import Text from '~ui/Primitives/Text';
 import { clearToasts } from '~ds/Toast';
 import type { GlobalState } from '~/types';
 
@@ -63,7 +62,7 @@ export const InformationIcon: StyledComponent<{}, {}, ComponentType<any>> = styl
 `;
 
 export const renderLabel = (id: string, intl: IntlShape, helpText?: string, optional?: boolean) => (
-  <Text>
+  <p>
     {intl.formatMessage({ id })}
     <span className="excerpt inline">
       {!optional && intl.formatMessage({ id: 'global.optional' })}{' '}
@@ -80,7 +79,7 @@ export const renderLabel = (id: string, intl: IntlShape, helpText?: string, opti
         </OverlayTrigger>
       )}
     </span>
-  </Text>
+  </p>
 );
 
 export const validate = (props: FormValues) => {

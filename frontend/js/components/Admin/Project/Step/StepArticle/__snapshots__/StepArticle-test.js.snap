@@ -10,7 +10,7 @@ exports[`<StepArticle /> renders correctly 1`] = `
     color="gray.900"
     fontWeight="bold"
   >
-    <Text>
+    <p>
       related.articles
       <span
         className="excerpt inline"
@@ -48,7 +48,7 @@ exports[`<StepArticle /> renders correctly 1`] = `
           <ProjectContentAdminForm__InformationIcon />
         </OverlayTrigger>
       </span>
-    </Text>
+    </p>
   </Text>
   <FieldArray
     component={[Function]}
@@ -79,7 +79,7 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
     color="gray.900"
     fontWeight="bold"
   >
-    <Text>
+    <p>
       related.articles
       <span
         className="excerpt inline"
@@ -117,7 +117,7 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
           <ProjectContentAdminForm__InformationIcon />
         </OverlayTrigger>
       </span>
-    </Text>
+    </p>
   </Text>
   <FieldArray
     component={[Function]}
