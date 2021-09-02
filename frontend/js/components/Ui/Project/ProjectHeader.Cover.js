@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { useSelector } from 'react-redux';
 import css from '@styled-system/css';
@@ -16,6 +17,8 @@ import Tooltip from '~ds/Tooltip/Tooltip';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import Heading from '~ui/Primitives/Heading';
 import Flex from '~ui/Primitives/Layout/Flex';
+import Modal from '~ds/Modal/Modal';
+import Play from './SVG/Play';
 
 const DefaultCoverImage = () => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
@@ -42,7 +45,9 @@ export const Cover = ({ children, ...rest }: CoverProps) => {
   const validChildren = cleanChildren(children);
   // eslint-disable-next-line no-use-before-define
   const hasCoverImage = validChildren.some(child => child.type === CoverImage);
-  if (!hasCoverImage) {
+  // eslint-disable-next-line no-use-before-define
+  const hasCoverVideo = validChildren.some(child => child.type === CoverVideo);
+  if (!hasCoverImage && !hasCoverVideo) {
     validChildren.splice(
       0,
       1,
@@ -59,7 +64,7 @@ export const Cover = ({ children, ...rest }: CoverProps) => {
       width="100%"
       justifyContent="center"
       {...rest}>
-      {hasCoverImage ? children : validChildren}
+      {hasCoverImage || hasCoverVideo ? children : validChildren}
     </AppBox>
   );
 };
@@ -128,6 +133,69 @@ export const CoverImage = ({ src, alt, ...rest }: CoverImageProps) => (
     />
   </AppBox>
 );
+type CoverVideoProps = {|
+  ...AppBoxProps,
+  src?: string,
+  alt?: string,
+  +url: string,
+|};
+export const CoverVideo = ({ url, src, alt, ...rest }: CoverVideoProps) => {
+  const isMobile = useIsMobile();
+  const intl = useIntl();
+  const renderButton = () => {
+    if (src) {
+      return (
+        <AppBox minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
+          <AppBox
+            as="img"
+            src={src}
+            alt={alt}
+            width={['100%', '405px']}
+            height="100%"
+            minHeight="270px"
+            style={{ objectFit: 'cover' }}
+          />
+          <Play />
+        </AppBox>
+      );
+    }
+    return (
+      <AppBox minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
+        <DefaultCoverImage />
+        <Play />
+      </AppBox>
+    );
+  };
+  return (
+    <AppBox
+      className="projectHeader__coverVideo"
+      position="relative"
+      width={['100%', '405px']}
+      borderRadius={[0, 'accordion']}
+      overflow="hidden"
+      minHeight="270px"
+      maxHeight="315px"
+      height="100%"
+      {...rest}>
+      <Modal
+        ariaLabel={intl.formatMessage({ id: 'project-header-video-modal' })}
+        fullSizeOnMobile
+        height={isMobile ? '64%' : '60%'}
+        width={isMobile ? '90%' : '60%'}
+        disclosure={renderButton()}>
+        <iframe
+          title="Video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          src={url}
+          width="100%"
+          height="100%"
+        />
+      </Modal>
+    </AppBox>
+  );
+};
 type AuthorsProps = {|
   ...AvatarGroupProps,
   active: boolean,
@@ -142,7 +210,7 @@ export const Authors = ({ children, active, ...rest }: AuthorsProps) => {
       className="projectHeader__authors platform__body"
       minHeight={isMobile ? 13 : 9}
       marginTop={[-8, 0]}
-      zIndex={0}
+      zIndex={1}
       flexWrap="wrap"
       size={isMobile ? 'xl' : 'lg'}
       max={3}

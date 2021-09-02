@@ -11,7 +11,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       className="sc-bdnxRM jcRvHj projectHeader__cover__content"
     >
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
+        className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
         id="project-header"
         onClick={[Function]}
         style={
@@ -55,17 +55,76 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       </h3>
     </div>
     <div
-      className="sc-bdnxRM dZqVuh projectHeader__coverImage"
+      className="sc-bdnxRM cJsGVv projectHeader__coverVideo"
     >
-      <img
-        alt="Media Food"
-        className="sc-bdnxRM bnKRvo"
-        src="https://127.0.0.1/media/default/0001/01/providerReference58.jpg"
+      <div
+        aria-controls="id-1"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-bdnxRM dtWeAb"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        type="button"
+      >
+        <img
+          alt="Media Food"
+          className="sc-bdnxRM bnKRvo"
+          src="https://127.0.0.1/media/default/0001/01/providerReference58.jpg"
+          style={
+            Object {
+              "objectFit": "cover",
+            }
+          }
+        />
+        <svg
+          fill="none"
+          height="48px"
+          style={
+            Object {
+              "left": "50%",
+              "position": "absolute",
+              "top": "50%",
+              "transform": "translate3d(-50%,-50%,0)",
+            }
+          }
+          viewBox="0 0 48 48"
+          width="48px"
+        >
+          <rect
+            fill="#272B30"
+            height="48"
+            opacity="0.6"
+            rx="24"
+            width="48"
+          />
+          <path
+            d="M33 22.2679C34.3333 23.0377 34.3333 24.9623 33 25.7321L21 32.6603C19.6667 33.4301 18 32.4678 18 30.9282V17.0718C18 15.5322 19.6667 14.5699 21 15.3397L33 22.2679Z"
+            fill="white"
+          />
+        </svg>
+      </div>
+      <div
+        aria-label="project-header-video-modal"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-1"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
         style={
           Object {
-            "objectFit": "cover",
+            "display": "none",
           }
         }
+        tabIndex={-1}
       />
     </div>
     <div

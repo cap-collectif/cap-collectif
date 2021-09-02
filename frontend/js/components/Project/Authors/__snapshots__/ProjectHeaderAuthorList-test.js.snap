@@ -21,7 +21,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -97,7 +97,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -173,7 +173,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={
@@ -249,7 +249,7 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX bBJExj ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
+    className="sc-bdnxRM Flex___StyledAppBox-RSPpX cWyFHq ProjectHeaderCover___StyledAvatarGroup-keQKLd projectHeader__authors platform__body"
     id="project-header"
     onClick={[Function]}
     style={

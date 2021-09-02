@@ -9,6 +9,7 @@ import {
   Block,
   Blocks,
   CoverImage,
+  CoverVideo,
   Social,
   Socials,
   Title,
@@ -34,6 +35,7 @@ ProjectHeader.Frise = Frise;
 ProjectHeader.Title = Title;
 ProjectHeader.Content = Content;
 ProjectHeader.CoverImage = CoverImage;
+ProjectHeader.CoverVideo = CoverVideo;
 ProjectHeader.Authors = Authors;
 ProjectHeader.Blocks = Blocks;
 ProjectHeader.Block = Block;

@@ -18,6 +18,7 @@ const FRAGMENT = graphql`
     title
     url
     hasParticipativeStep
+    video
     cover {
       url
       name
@@ -41,6 +42,20 @@ export type Props = {|
 |};
 const ProjectHeader = ({ project }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
+  const renderCover = () => {
+    if (data.video) {
+      return (
+        <ProjectHeaderLayout.CoverVideo
+          url={data.video}
+          src={data.cover?.url}
+          alt={data.cover?.name}
+        />
+      );
+    }
+    if (data.cover) {
+      return <ProjectHeaderLayout.CoverImage src={data.cover.url} alt={data.cover.name} />;
+    }
+  };
   return (
     <ProjectHeaderLayout>
       <ProjectHeaderLayout.Cover>
@@ -58,9 +73,7 @@ const ProjectHeader = ({ project }: Props): React.Node => {
           </ProjectHeaderLayout.Info>
           <ProjectHeaderShareButtons url={data.url} title={data.title} />
         </ProjectHeaderLayout.Content>
-        {data.cover && (
-          <ProjectHeaderLayout.CoverImage src={data.cover.url} alt={data.cover.name} />
-        )}
+        {renderCover()}
         <ProjectRestrictedAccessFragment project={data} />
       </ProjectHeaderLayout.Cover>
       <ProjectStepTabs project={data} />
