@@ -1,11 +1,11 @@
 YesNoPairedVoteValue:
-  type: enum
-  config:
-    description: '3 possible values'
-    values:
-      YES:
-        value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_OK")'
-      NO:
-        value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_NOK")'
-      MITIGE:
-        value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_MITIGE")'
+    type: enum
+    config:
+        description: '3 possible values'
+        values:
+            YES:
+                value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_OK")'
+            NO:
+                value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_NOK")'
+            MITIGE:
+                value: '@=constant("Capco\\AppBundle\\Entity\\OpinionVote::VOTE_MITIGE")'

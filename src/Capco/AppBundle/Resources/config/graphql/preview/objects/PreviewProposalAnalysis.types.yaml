@@ -16,7 +16,7 @@ PreviewProposalAnalysis:
                 description: 'The related proposal.'
             analyst:
                 type: 'PreviewUser!'
-                resolve: "@=value.getUpdatedBy()"
+                resolve: '@=value.getUpdatedBy()'
                 description: 'The last updated by a analyst.'
             estimatedCost:
                 type: 'Int'

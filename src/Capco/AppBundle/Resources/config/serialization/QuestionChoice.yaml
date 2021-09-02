@@ -1,20 +1,19 @@
 Capco\AppBundle\Entity\QuestionChoice:
-  attributes:
-    id:
-      groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
-    title:
-      groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
-      serialized_name: label
-    position:
-      groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
-    description:
-      groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
-    color:
-      groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
-    getQuestion:
-      groups: [ElasticsearchQuestionChoiceNestedQuestion]
-      serialized_name: question
-    elasticsearchTypeName:
-      serialized_name: objectType
-      groups: [ ElasticsearchQuestionChoice ]
-
+    attributes:
+        id:
+            groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
+        title:
+            groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
+            serialized_name: label
+        position:
+            groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
+        description:
+            groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
+        color:
+            groups: [QuestionChoices, Questions, Questionnaires, ElasticsearchQuestionChoice]
+        getQuestion:
+            groups: [ElasticsearchQuestionChoiceNestedQuestion]
+            serialized_name: question
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchQuestionChoice]

@@ -9,6 +9,8 @@ class RegistrationFormRepository extends EntityRepository
 {
     public function findCurrent(): ?RegistrationForm
     {
-        return $this->createQueryBuilder('f')->getQuery()->getOneOrNullResult();
+        return $this->createQueryBuilder('f')
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

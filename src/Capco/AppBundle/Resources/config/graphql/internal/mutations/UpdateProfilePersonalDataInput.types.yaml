@@ -1,47 +1,47 @@
 UpdateProfilePersonalDataInput:
-  type: relay-mutation-input
-  config:
-    description: 'Your personal data'
-    fields:
-      userId:
-        type: 'ID'
-        description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
-      firstname:
-        type: 'String'
-        description: 'Your firstname'
-      lastname:
-        type: 'String'
-        description: 'Your lastname'
-      gender:
-        type: 'GenderValue'
-        description: 'Your gender'
-      phone:
-        type: 'String'
-        description: 'Your phone number'
-      postalAddress:
-        type: 'String'
-        description: 'Your address, geocoded by google'
-      address:
-        type: 'String'
-        description: 'Your address'
-      address2:
-        type: 'String'
-        description: 'Your complementary address'
-      city:
-        type: 'String'
-        description: 'Your city'
-      zipCode:
-        type: 'String'
-        description: 'Your zipcode'
-      dateOfBirth:
-        type: 'String'
-        description: 'Your date of birth'
-      phoneConfirmed:
-        type: 'Boolean'
-        description: 'Is your phone confirmed ?'
-      email:
-        type: 'String'
-        description: 'Your email'
-      birthPlace:
-        type: 'String'
-        description: 'Your birth place'
+    type: relay-mutation-input
+    config:
+        description: 'Your personal data'
+        fields:
+            userId:
+                type: 'ID'
+                description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
+            firstname:
+                type: 'String'
+                description: 'Your firstname'
+            lastname:
+                type: 'String'
+                description: 'Your lastname'
+            gender:
+                type: 'GenderValue'
+                description: 'Your gender'
+            phone:
+                type: 'String'
+                description: 'Your phone number'
+            postalAddress:
+                type: 'String'
+                description: 'Your address, geocoded by google'
+            address:
+                type: 'String'
+                description: 'Your address'
+            address2:
+                type: 'String'
+                description: 'Your complementary address'
+            city:
+                type: 'String'
+                description: 'Your city'
+            zipCode:
+                type: 'String'
+                description: 'Your zipcode'
+            dateOfBirth:
+                type: 'String'
+                description: 'Your date of birth'
+            phoneConfirmed:
+                type: 'Boolean'
+                description: 'Is your phone confirmed ?'
+            email:
+                type: 'String'
+                description: 'Your email'
+            birthPlace:
+                type: 'String'
+                description: 'Your birth place'

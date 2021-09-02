@@ -20,7 +20,9 @@ class AnalyticsContributor
     public function fromEs(array $contributions): self
     {
         $this->contributions = array_map(
-            static fn(array $contribution) => AnalyticsContributorContribution::fromEs($contribution),
+            static fn(array $contribution) => AnalyticsContributorContribution::fromEs(
+                $contribution
+            ),
             $contributions
         );
 

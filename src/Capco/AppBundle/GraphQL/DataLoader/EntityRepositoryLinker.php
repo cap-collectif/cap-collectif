@@ -26,7 +26,6 @@ class EntityRepositoryLinker
         $this->entities = $entities;
     }
 
-
     public function getType(): string
     {
         return $this->type;
@@ -64,6 +63,4 @@ class EntityRepositoryLinker
     {
         $this->entities[] = $entity;
     }
-
-
 }

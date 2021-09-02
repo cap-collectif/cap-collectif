@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\Responses\ValueResponse:
-  attributes:
-    value:
-      groups: [Proposals, Replies]
+    attributes:
+        value:
+            groups: [Proposals, Replies]

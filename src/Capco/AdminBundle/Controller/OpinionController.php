@@ -52,7 +52,7 @@ class OpinionController extends Controller
                 'consultations' => $this->getConsultations(),
                 'export_formats' => $this->has('sonata.admin.admin_exporter')
                     ? $this->get('sonata.admin.admin_exporter')->getAvailableFormats($this->admin)
-                    : $this->admin->getExportFormats()
+                    : $this->admin->getExportFormats(),
             ],
             null
         );
@@ -115,7 +115,7 @@ class OpinionController extends Controller
                         return $this->renderJson(
                             [
                                 'result' => 'ok',
-                                'objectId' => $this->admin->getNormalizedIdentifier($object)
+                                'objectId' => $this->admin->getNormalizedIdentifier($object),
                             ],
                             200,
                             [],
@@ -173,7 +173,7 @@ class OpinionController extends Controller
                 'action' => 'create',
                 'form' => $view,
                 'object' => $object,
-                'consultations' => $this->getConsultations()
+                'consultations' => $this->getConsultations(),
             ],
             null,
             $request
@@ -229,7 +229,7 @@ class OpinionController extends Controller
                             [
                                 'result' => 'ok',
                                 'objectId' => $this->admin->getNormalizedIdentifier($object),
-                                'objectName' => $this->escapeHtml($this->admin->toString($object))
+                                'objectName' => $this->escapeHtml($this->admin->toString($object)),
                             ],
                             200,
                             [],
@@ -263,7 +263,7 @@ class OpinionController extends Controller
                                     '<a href="' .
                                     $this->admin->generateObjectUrl('edit', $object) .
                                     '">',
-                                '%link_end%' => '</a>'
+                                '%link_end%' => '</a>',
                             ],
                             'CapcoAppBundle'
                         )
@@ -303,7 +303,7 @@ class OpinionController extends Controller
                 'action' => 'edit',
                 'form' => $view,
                 'object' => $object,
-                'consultations' => $this->getConsultations()
+                'consultations' => $this->getConsultations(),
             ],
             null
         );
@@ -340,7 +340,7 @@ class OpinionController extends Controller
                 'action' => 'show',
                 'object' => $object,
                 'elements' => $this->admin->getShow(),
-                'consultations' => $this->getConsultations()
+                'consultations' => $this->getConsultations(),
             ],
             null
         );
@@ -413,7 +413,7 @@ class OpinionController extends Controller
                 'object' => $object,
                 'action' => 'delete',
                 'csrf_token' => $this->getCsrfToken('sonata.delete'),
-                'consultations' => $this->getConsultations()
+                'consultations' => $this->getConsultations(),
             ],
             null
         );

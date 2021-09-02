@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\HighlightedEvent:
-  attributes:
-    event:
-      groups: [HighlightedContent]
+    attributes:
+        event:
+            groups: [HighlightedContent]

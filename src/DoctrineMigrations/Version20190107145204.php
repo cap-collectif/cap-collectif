@@ -28,7 +28,7 @@ final class Version20190107145204 extends AbstractMigration
                 'position' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
-                'is_social_network_thumbnail' => 0
+                'is_social_network_thumbnail' => 0,
             ]);
         }
     }

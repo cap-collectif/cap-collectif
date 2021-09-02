@@ -1,10 +1,10 @@
 StepStatusInput:
-  type: input-object
-  config:
-    fields:
-      id:
-        type: 'ID'
-      name:
-        type: 'String'
-      color:
-        type: 'ProposalStepStatusColor'
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'ID'
+            name:
+                type: 'String'
+            color:
+                type: 'ProposalStepStatusColor'

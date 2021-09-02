@@ -48,8 +48,12 @@ class SetUserDefaultLocaleMutation implements MutationInterface
     public function setUserDefaultLocale(User $user, ?string $code): ?User
     {
         if ($code) {
-            if (null === $this->localeRepository->findOneBy(['code' => $code, 'published' => true])) {
-                throw new BadRequestHttpException("The locale with code ${code} does not exist or is not enabled.");
+            if (
+                null === $this->localeRepository->findOneBy(['code' => $code, 'published' => true])
+            ) {
+                throw new BadRequestHttpException(
+                    "The locale with code ${code} does not exist or is not enabled."
+                );
             }
         }
 

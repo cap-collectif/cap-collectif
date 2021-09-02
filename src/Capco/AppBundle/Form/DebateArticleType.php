@@ -13,14 +13,11 @@ class DebateArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('id', RelayGlobalIdType::class)
-            ->add('url', UrlType::class);
+        $builder->add('id', RelayGlobalIdType::class)->add('url', UrlType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults(['csrf_protection' => false, 'data_class' => DebateArticle::class]);
+        $resolver->setDefaults(['csrf_protection' => false, 'data_class' => DebateArticle::class]);
     }
 }

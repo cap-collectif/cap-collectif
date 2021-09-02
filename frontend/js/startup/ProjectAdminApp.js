@@ -4,7 +4,9 @@ import Providers from './Providers';
 import AlertBoxApp from '~/startup/AlertBoxApp';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const ProjectAdminPage = lazy(() => import(/* webpackChunkName: "ProjectAdminPage" */ '~/components/Admin/Project/ProjectAdminPage'));
+const ProjectAdminPage = lazy(() =>
+  import(/* webpackChunkName: "ProjectAdminPage" */ '~/components/Admin/Project/ProjectAdminPage'),
+);
 
 type ProjectAdminAppProps = {|
   +projectId: ?string,

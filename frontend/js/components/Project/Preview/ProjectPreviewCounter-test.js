@@ -11,11 +11,15 @@ describe('<ProjectPreviewCounter />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render with showZero = true', () => {
-    const wrapper = shallow(<ProjectPreviewCounter value={0} showZero label="test" archived={false} />);
+    const wrapper = shallow(
+      <ProjectPreviewCounter value={0} showZero label="test" archived={false} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render render an icon with icon value', () => {
-    const wrapper = shallow(<ProjectPreviewCounter value={1} label="test" icon="cap-icon" archived={false} />);
+    const wrapper = shallow(
+      <ProjectPreviewCounter value={1} label="test" icon="cap-icon" archived={false} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly with value', () => {

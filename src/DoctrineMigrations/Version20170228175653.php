@@ -44,7 +44,7 @@ class Version20170228175653 extends AbstractMigration
         $date = (new \DateTime())->format('Y-m-d H:i:s');
 
         $this->connection->insert('registration_form', [
-            'id' => '1'
+            'id' => '1',
         ]);
     }
 

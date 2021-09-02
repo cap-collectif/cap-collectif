@@ -18,14 +18,14 @@ final class TrashedOpinionAuthorMessage extends AbstractExternalMessage
             '{body}' => self::escape(self::cleanHtml($opinion->getBody())),
             '{trashedDate}' => $opinion->getTrashedAt()->format('d/m/Y'),
             '{trashedTime}' => $opinion->getTrashedAt()->format('H:i:s'),
-            '{opinionLink}' => $params['elementURL']
+            '{opinionLink}' => $params['elementURL'],
         ];
     }
 
     public static function getMySubjectVars(Opinion $opinion, array $params): array
     {
         return [
-            '{title}' => self::escape($opinion->getTitle())
+            '{title}' => self::escape($opinion->getTitle()),
         ];
     }
 }

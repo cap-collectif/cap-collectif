@@ -52,6 +52,6 @@ main.args = {
       id: 'jesaispas',
       label: 'project.types.participatoryFunding',
       value: '5',
-    }
+    },
   ],
 };

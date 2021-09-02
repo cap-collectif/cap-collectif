@@ -48,7 +48,7 @@ class Version20150303192637 extends AbstractMigration implements ContainerAwareI
                 'name' => 'sources',
                 'enabled' => 1,
                 'created_at' => $date,
-                'updated_at' => $date
+                'updated_at' => $date,
             ]);
         }
 
@@ -66,7 +66,7 @@ class Version20150303192637 extends AbstractMigration implements ContainerAwareI
                 'slug' => 'sources',
                 'enabled' => 1,
                 'created_at' => $date,
-                'updated_at' => $date
+                'updated_at' => $date,
             ]);
         }
     }

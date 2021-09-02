@@ -1,6 +1,6 @@
 DeleteGroupPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      deletedGroupTitle:
-        type: 'String!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedGroupTitle:
+                type: 'String!'

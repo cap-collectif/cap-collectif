@@ -19,7 +19,7 @@ final class ProposalOfficialAnswerMessage extends AbstractExternalMessage
     {
         return [
             'proposal' => $proposal,
-            'post' => $params['post']
+            'post' => $params['post'],
         ];
     }
 }

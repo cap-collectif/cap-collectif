@@ -1,9 +1,9 @@
 PublicUserConnection:
-  type: relay-connection
-  config:
-    name: UserConnection
-    nodeType: PublicUser!
-    connectionFields:
-      totalCount:
-        type: Int!
-        description: Identifies the total count of items in the connection.
+    type: relay-connection
+    config:
+        name: UserConnection
+        nodeType: PublicUser!
+        connectionFields:
+            totalCount:
+                type: Int!
+                description: Identifies the total count of items in the connection.

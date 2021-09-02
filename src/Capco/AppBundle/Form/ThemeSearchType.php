@@ -11,20 +11,17 @@ class ThemeSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('term',
-                SearchType::class, [
-                'label' => 'theme.search.term',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-        ;
+        $builder->add('term', SearchType::class, [
+            'label' => 'theme.search.term',
+            'translation_domain' => 'CapcoAppBundle',
+            'required' => false,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-         'csrf_protection' => false,
-     ]);
+            'csrf_protection' => false,
+        ]);
     }
 }

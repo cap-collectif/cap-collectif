@@ -91,7 +91,7 @@ class CreateResponsesFromCsvCommand extends Command
                 ->get(ReplyRepository::class)
                 ->findOneBy([
                     'author' => $author,
-                    'questionnaire' => $questionnaire
+                    'questionnaire' => $questionnaire,
                 ]);
             if (!$reply) {
                 $reply = new Reply();

@@ -61,7 +61,10 @@ trait HasResponsesTrait
                     $response = new MediaResponse();
                 } elseif ($question instanceof MultipleChoiceQuestion) {
                     $response = new ValueResponse();
-                    $value = 'select' === $question->getInputType() ? null : ['labels' => [], 'other' => null];
+                    $value =
+                        'select' === $question->getInputType()
+                            ? null
+                            : ['labels' => [], 'other' => null];
                     $response->setValue($value);
                 } else {
                     $response = new ValueResponse();

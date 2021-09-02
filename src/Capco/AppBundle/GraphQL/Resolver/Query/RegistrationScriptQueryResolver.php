@@ -17,7 +17,7 @@ class RegistrationScriptQueryResolver implements ResolverInterface
     public function __invoke(): string
     {
         $codeParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME
+            'keyname' => SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME,
         ]);
 
         return $codeParameter ? (string) $codeParameter->getValue() : '';

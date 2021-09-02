@@ -50,7 +50,7 @@ class Version20151209165616 extends AbstractMigration
         foreach ($this->links as $link) {
             $this->connection->insert('opinion_relation', [
                 'opinion_source' => $link['link_id'],
-                'opinion_target' => $link['id']
+                'opinion_target' => $link['id'],
             ]);
         }
     }

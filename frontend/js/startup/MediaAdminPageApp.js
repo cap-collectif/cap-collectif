@@ -5,6 +5,6 @@ import MediaAdminPage from '~/components/Admin/Media/MediaAdminPage';
 
 export default () => (
   <Providers>
-      <MediaAdminPage />
-    </Providers>
+    <MediaAdminPage />
+  </Providers>
 );

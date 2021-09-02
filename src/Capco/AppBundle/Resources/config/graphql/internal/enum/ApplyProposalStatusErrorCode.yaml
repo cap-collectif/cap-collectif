@@ -1,12 +1,12 @@
 ApplyProposalStatusErrorCode:
-  type: enum
-  config:
-    name: ApplyProposalStatusErrorCode
-    description: 'Available errors on status assignment of proposals'
-    values:
-      NO_VALID_STATUS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_STATUS")'
-        description: 'No status match your id'
-      NO_VALID_PROPOSAL:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_PROPOSAL")'
-        description: 'No proposal match your id or it does not fit the selected status'
+    type: enum
+    config:
+        name: ApplyProposalStatusErrorCode
+        description: 'Available errors on status assignment of proposals'
+        values:
+            NO_VALID_STATUS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_STATUS")'
+                description: 'No status match your id'
+            NO_VALID_PROPOSAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_PROPOSAL")'
+                description: 'No proposal match your id or it does not fit the selected status'

@@ -111,7 +111,7 @@ class Sanitizer
             'AND',
             'OR',
             'NOT',
-            ' '
+            ' ',
         ];
     }
 

@@ -88,7 +88,7 @@ class CommentController extends CRUDController
             [
                 'object' => $object,
                 'action' => 'delete',
-                'csrf_token' => $this->getCsrfToken('sonata.delete')
+                'csrf_token' => $this->getCsrfToken('sonata.delete'),
             ],
             null
         );

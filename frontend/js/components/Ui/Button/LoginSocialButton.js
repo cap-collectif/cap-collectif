@@ -50,7 +50,11 @@ export const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: str
       return '#034ea2';
   }
 };
-export const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string, isInvitationSSO: boolean = false): string => {
+export const getButtonLinkForType = (
+  type: LoginSocialButtonType,
+  redirectUri: string,
+  isInvitationSSO: boolean = false,
+): string => {
   const destination = isInvitationSSO ? baseUrl : window && window.location.href;
 
   switch (type) {
@@ -201,7 +205,9 @@ export default class LoginSocialButton extends React.Component<Props, State> {
   render() {
     const { type, switchUserMode, text, labelColor, buttonColor } = this.props;
     const { isHover } = this.state;
-    const redirectUri = switchUserMode ? `${baseUrl}/sso/switch-user` : window && window.location.href;
+    const redirectUri = switchUserMode
+      ? `${baseUrl}/sso/switch-user`
+      : window && window.location.href;
 
     if (text === 'grandLyonConnect') {
       return (

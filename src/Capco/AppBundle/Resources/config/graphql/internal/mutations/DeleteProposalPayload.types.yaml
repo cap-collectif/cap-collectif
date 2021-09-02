@@ -1,8 +1,8 @@
 DeleteProposalPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      proposal:
-        type: 'InternalProposal!'
-      step:
-        type: 'InternalCollectStep!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposal:
+                type: 'InternalProposal!'
+            step:
+                type: 'InternalCollectStep!'

@@ -17,5 +17,4 @@ trait UserSSOParisTrait
     {
         return $this->parisId;
     }
-
 }

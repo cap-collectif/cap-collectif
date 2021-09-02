@@ -83,17 +83,17 @@ const Placeholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 const renderCurrentLanguage = (language: LocaleMap, textColor: string, small: boolean) => (
-    <>
-      <LanguageContainer>
-        <SiteEarthIcon color={textColor} small={small} />
-        {!small && (
-          <Language color={textColor}>
-            <span>{language.translationKey}</span>
-          </Language>
-        )}
-      </LanguageContainer>
-      {!small && <Caret id="language-change-caret" className="cap-arrow-39" color={textColor} />}
-    </>
+  <>
+    <LanguageContainer>
+      <SiteEarthIcon color={textColor} small={small} />
+      {!small && (
+        <Language color={textColor}>
+          <span>{language.translationKey}</span>
+        </Language>
+      )}
+    </LanguageContainer>
+    {!small && <Caret id="language-change-caret" className="cap-arrow-39" color={textColor} />}
+  </>
 );
 
 const SiteLanguageChangeButton = ({
@@ -128,9 +128,8 @@ const SiteLanguageChangeButton = ({
       title={renderCurrentLanguage(currentLanguage, textColor, small)}>
       {languageList
         .filter(language => language.code !== currentLanguage.code || small)
-        .sort(
-        (l1: LocaleMap, l2: LocaleMap) => {
-          return (l1.translationKey >= l2.translationKey) ? 1 : -1;
+        .sort((l1: LocaleMap, l2: LocaleMap) => {
+          return l1.translationKey >= l2.translationKey ? 1 : -1;
         })
         .map(language => (
           <MenuLanguageItem
@@ -142,11 +141,11 @@ const SiteLanguageChangeButton = ({
               onChange(language);
             }}>
             {small &&
-            (language.code === currentLanguage ? (
-              <i className="cap-android-done mr-5" />
-            ) : (
-              <Placeholder />
-            ))}
+              (language.code === currentLanguage ? (
+                <i className="cap-android-done mr-5" />
+              ) : (
+                <Placeholder />
+              ))}
             <span>{language.translationKey}</span>
           </MenuLanguageItem>
         ))}

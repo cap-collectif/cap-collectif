@@ -17,7 +17,12 @@ class KnpTranslationFieldFilter extends Filter
      */
     public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data): void
     {
-        if (!$data || !\is_array($data) || !\array_key_exists('value', $data) || null === $data['value']) {
+        if (
+            !$data ||
+            !\is_array($data) ||
+            !\array_key_exists('value', $data) ||
+            null === $data['value']
+        ) {
             return;
         }
 
@@ -44,13 +49,18 @@ class KnpTranslationFieldFilter extends Filter
             $queryBuilder->leftJoin($alias . '.translations', $joinAlias);
         }
 
-        $this->applyWhere($queryBuilder,
-            $queryBuilder->expr()->andX(
-                $queryBuilder->expr()->like(
-                    $joinAlias . ".$field",
-                    $queryBuilder->expr()->literal('%' . $data['value'] . '%')
+        $this->applyWhere(
+            $queryBuilder,
+            $queryBuilder
+                ->expr()
+                ->andX(
+                    $queryBuilder
+                        ->expr()
+                        ->like(
+                            $joinAlias . ".$field",
+                            $queryBuilder->expr()->literal('%' . $data['value'] . '%')
+                        )
                 )
-            )
         );
 
         $this->active = true;
@@ -73,13 +83,16 @@ class KnpTranslationFieldFilter extends Filter
      */
     public function getRenderSettings(): array
     {
-        return [DefaultType::class, [
-            'field_type' => $this->getFieldType(),
-            'field_options' => $this->getFieldOptions(),
-            'operator_type' => $this->getOption('operator_type'),
-            'operator_options' => $this->getOption('operator_options'),
-            'label' => $this->getLabel(),
-        ]];
+        return [
+            DefaultType::class,
+            [
+                'field_type' => $this->getFieldType(),
+                'field_options' => $this->getFieldOptions(),
+                'operator_type' => $this->getOption('operator_type'),
+                'operator_options' => $this->getOption('operator_options'),
+                'label' => $this->getLabel(),
+            ],
+        ];
     }
 
     /**

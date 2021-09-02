@@ -21,7 +21,9 @@ class NoCommentWhenPrivateSubscriber implements EventSubscriberInterface
             $comment = $form->get('comment')->getData();
             $private = $form->get('private')->getData();
             if (!empty($comment) && true === $private) {
-                $form['private']->addError(new FormError('You can not add a comment when voting anonymously.'));
+                $form['private']->addError(
+                    new FormError('You can not add a comment when voting anonymously.')
+                );
             }
         }
     }

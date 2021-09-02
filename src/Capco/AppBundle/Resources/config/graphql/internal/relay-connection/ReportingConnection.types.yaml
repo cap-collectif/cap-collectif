@@ -1,8 +1,8 @@
 ReportingConnection:
-  type: relay-connection
-  config:
-    nodeType: Reporting!
-    connectionFields:
-      totalCount:
-        type: Int!
-        description: Identifies the total count of items in the connection.
+    type: relay-connection
+    config:
+        nodeType: Reporting!
+        connectionFields:
+            totalCount:
+                type: Int!
+                description: Identifies the total count of items in the connection.

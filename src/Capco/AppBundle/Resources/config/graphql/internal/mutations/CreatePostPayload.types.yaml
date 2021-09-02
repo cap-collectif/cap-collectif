@@ -1,10 +1,10 @@
 CreatePostPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      post:
-        type: 'InternalPost'
-        description: 'The created post'
-      errorCode:
-        type: 'CreatePostErrorCode'
-        description: 'Available errorCode for createPost mutation'
+    type: relay-mutation-payload
+    config:
+        fields:
+            post:
+                type: 'InternalPost'
+                description: 'The created post'
+            errorCode:
+                type: 'CreatePostErrorCode'
+                description: 'Available errorCode for createPost mutation'

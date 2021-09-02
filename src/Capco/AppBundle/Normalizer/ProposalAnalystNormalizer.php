@@ -9,7 +9,10 @@ use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ProposalAnalystNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
+class ProposalAnalystNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     public function hasCacheableSupportsMethod(): bool
     {
@@ -19,9 +22,8 @@ class ProposalAnalystNormalizer implements NormalizerInterface, SerializerAwareI
     use SerializerAwareTrait;
     private ObjectNormalizer $normalizer;
 
-    public function __construct(
-        ObjectNormalizer $normalizer
-    ) {
+    public function __construct(ObjectNormalizer $normalizer)
+    {
         $this->normalizer = $normalizer;
     }
 

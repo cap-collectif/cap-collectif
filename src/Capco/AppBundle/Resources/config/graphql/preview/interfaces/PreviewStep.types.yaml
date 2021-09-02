@@ -1,20 +1,20 @@
 PreviewStep:
-  type: interface
-  inherits:
-    - PreviewTimeRangeable
-    - UniformResourceLocatable
-    - Node
-  config:
-    name: Step
-    description: 'A step is a part of a project.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
-    fields:
-      title:
-        description: 'The title of the step.'
-        type: 'String!'
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
-      state:
-        description: 'Identifies the current state of the step.'
-        type: 'PreviewStepState!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStateResolver", [value])'
+    type: interface
+    inherits:
+        - PreviewTimeRangeable
+        - UniformResourceLocatable
+        - Node
+    config:
+        name: Step
+        description: 'A step is a part of a project.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+        fields:
+            title:
+                description: 'The title of the step.'
+                type: 'String!'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+            state:
+                description: 'Identifies the current state of the step.'
+                type: 'PreviewStepState!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStateResolver", [value])'

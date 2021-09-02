@@ -1,18 +1,18 @@
 Trashable:
-  type: interface
-  config:
-    description: 'Entities that can be trashed.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
-    fields:
-      trashed:
-        type: 'Boolean!'
-        description: 'Whether or not the contribution is trashed.'
-      trashedStatus:
-        type: 'TrashableStatus'
-        description: 'Identifies the trashed visibility.'
-      trashedAt:
-        type: 'DateTime'
-        description: 'Identifies the moment the moderator trashed the contribution.'
-      trashedReason:
-        type: 'String'
-        description: 'Identifies the reason why the moderator trashed the contribution.'
+    type: interface
+    config:
+        description: 'Entities that can be trashed.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        fields:
+            trashed:
+                type: 'Boolean!'
+                description: 'Whether or not the contribution is trashed.'
+            trashedStatus:
+                type: 'TrashableStatus'
+                description: 'Identifies the trashed visibility.'
+            trashedAt:
+                type: 'DateTime'
+                description: 'Identifies the moment the moderator trashed the contribution.'
+            trashedReason:
+                type: 'String'
+                description: 'Identifies the reason why the moderator trashed the contribution.'

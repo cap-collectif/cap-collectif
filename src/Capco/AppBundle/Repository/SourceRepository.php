@@ -53,9 +53,10 @@ class SourceRepository extends EntityRepository
             $qb->andWhere('s.opinion = :opinion')->setParameter('opinion', $sourceable->getId());
         }
         if ($sourceable instanceof OpinionVersion) {
-            $qb
-                ->andWhere('s.opinionVersion = :version')
-                ->setParameter('version', $sourceable->getId());
+            $qb->andWhere('s.opinionVersion = :version')->setParameter(
+                'version',
+                $sourceable->getId()
+            );
         }
 
         return $qb;
@@ -188,8 +189,7 @@ class SourceRepository extends EntityRepository
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('s');
-        $qb
-            ->select('count(DISTINCT s)')
+        $qb->select('count(DISTINCT s)')
             ->andWhere('s.author = :author')
             ->setParameter('author', $user);
 
@@ -241,8 +241,7 @@ class SourceRepository extends EntityRepository
     public function createPublicSourcesByAuthorQuery(User $author): QueryBuilder
     {
         $qb = $this->createQueryBuilder('s');
-        $qb
-            ->leftJoin('s.opinion', 'o')
+        $qb->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
 
@@ -453,8 +452,7 @@ class SourceRepository extends EntityRepository
     ): QueryBuilder {
         $qb = $this->createQueryBuilder('s');
 
-        $qb
-            ->leftJoin('s.opinion', 'o')
+        $qb->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
 
@@ -529,7 +527,7 @@ class SourceRepository extends EntityRepository
                 ':viewer' => $viewer,
                 ':author' => $author,
                 ':visibility' => $visibility,
-                ':prvgId' => $viewer->getUserGroupIds()
+                ':prvgId' => $viewer->getUserGroupIds(),
             ]);
         } else {
             $qb->setParameter(':author', $author);

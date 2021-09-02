@@ -38,7 +38,7 @@ class OpinionNotifier extends BaseNotifier
         if ($consultation && $consultation->isModeratingOnCreate()) {
             $this->mailer->createAndSendMessage(NewOpinionModeratorMessage::class, $opinion, [
                 'authorURL' => $this->userUrlResolver->__invoke($opinion->getAuthor()),
-                'moderableURL' => $this->consultationResolver->__invoke($opinion)
+                'moderableURL' => $this->consultationResolver->__invoke($opinion),
             ]);
         }
     }
@@ -50,7 +50,7 @@ class OpinionNotifier extends BaseNotifier
         if ($consultation && $consultation->isModeratingOnUpdate()) {
             $this->mailer->createAndSendMessage(UpdateOpinionModeratorMessage::class, $opinion, [
                 'authorURL' => $this->userUrlResolver->__invoke($opinion->getAuthor()),
-                'moderableURL' => $this->consultationResolver->__invoke($opinion)
+                'moderableURL' => $this->consultationResolver->__invoke($opinion),
             ]);
         }
     }

@@ -101,7 +101,8 @@ class SelectionPage extends Page
         return $this->getSelector("proposal vote button ${id}");
     }
 
-    public function getLoginRedirectDestinationFromVoteButton(){
+    public function getLoginRedirectDestinationFromVoteButton()
+    {
         return $this->getElement('proposal login button')->getAttribute('destination');
     }
 

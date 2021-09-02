@@ -49,11 +49,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
                 foreach ($allLocales as $locale) {
                     if (!isset($existingTranslations[$locale])) {
                         $this->addSql(
-                            self::addTranslationSQL(
-                                $parameterId,
-                                $defaultValue,
-                                $locale
-                            )
+                            self::addTranslationSQL($parameterId, $defaultValue, $locale)
                         );
                     }
                 }
@@ -72,7 +68,9 @@ final class Version20200818134317 extends AbstractMigration implements Container
 
     private function getParameterId(string $parameterKey): ?string
     {
-        $id = $this->connection->fetchColumn("SELECT id FROM site_parameter WHERE keyname = '$parameterKey'");
+        $id = $this->connection->fetchColumn(
+            "SELECT id FROM site_parameter WHERE keyname = '$parameterKey'"
+        );
         if (!$id) {
             return null;
         }
@@ -82,7 +80,9 @@ final class Version20200818134317 extends AbstractMigration implements Container
 
     private function getDefaultValue(string $defaultLocale, array $translations): string
     {
-        return isset($existingTranslations[$defaultLocale]) ? $existingTranslations[$defaultLocale] : '';
+        return isset($existingTranslations[$defaultLocale])
+            ? $existingTranslations[$defaultLocale]
+            : '';
     }
 
     private function getExistingTranslations(string $parameterId): array
@@ -102,7 +102,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
     {
         $query = $this->connection->query('SELECT code FROM locale');
         $locales = [];
-        while($code = $query->fetchColumn(0)) {
+        while ($code = $query->fetchColumn(0)) {
             $locales[] = $code;
         }
 
@@ -114,7 +114,6 @@ final class Version20200818134317 extends AbstractMigration implements Container
         string $value,
         string $locale
     ): string {
-
         $uuid = $this->uuidGenerator->generate($this->entityManager, null);
 
         return 'INSERT INTO `site_parameter_translation` (`id`, `translatable_id`, `value`, `locale`)' .

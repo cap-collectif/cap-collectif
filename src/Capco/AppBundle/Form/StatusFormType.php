@@ -21,7 +21,7 @@ class StatusFormType extends AbstractStepFormType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => Status::class
+            'data_class' => Status::class,
         ]);
     }
 }

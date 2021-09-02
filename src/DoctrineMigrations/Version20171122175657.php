@@ -63,7 +63,7 @@ class Version20171122175657 extends AbstractMigration implements ContainerAwareI
                     'on_proposal_comment_mail' => 1,
                     'unsubscribe_token' => $this->container
                         ->get('fos_user.util.token_generator')
-                        ->generateToken()
+                        ->generateToken(),
                 ]);
                 $this->connection->update(
                     'fos_user',

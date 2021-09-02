@@ -1,9 +1,9 @@
 CommentConnection:
-  type: relay-connection
-  config:
-    nodeType: Comment!
-    connectionFields:
-      totalCount:
-        type: Int!
-      totalCountWithAnswers:
-        type: Int!
+    type: relay-connection
+    config:
+        nodeType: Comment!
+        connectionFields:
+            totalCount:
+                type: Int!
+            totalCountWithAnswers:
+                type: Int!

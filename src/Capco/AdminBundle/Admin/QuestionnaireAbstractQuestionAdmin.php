@@ -9,12 +9,12 @@ use Sonata\AdminBundle\Form\Type\ModelListType;
 class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
 {
     protected $formOptions = [
-        'cascade_validation' => true
+        'cascade_validation' => true,
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
 
     public function postRemove($object)
@@ -46,7 +46,7 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
         $formMapper
             ->add('position', null, [
                 'label' => 'global.position',
-                'required' => true
+                'required' => true,
             ])
             ->add(
                 'question',
@@ -56,10 +56,10 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
                     'label' => 'admin.fields.questionnaire_abstractquestion.questions',
                     'translation_domain' => 'CapcoAppBundle',
                     'btn_delete' => false,
-                    'btn_add' => 'admin.fields.questionnaire_abstractquestion.questions_add'
+                    'btn_add' => 'admin.fields.questionnaire_abstractquestion.questions_add',
                 ],
                 [
-                    'link_parameters' => ['questionnaireId' => $questionnaireId]
+                    'link_parameters' => ['questionnaireId' => $questionnaireId],
                 ]
             );
     }

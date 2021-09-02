@@ -25,8 +25,12 @@ class RequestResponseListener
     private $toggleManager;
     private $excludedPrefixes;
 
-    public function __construct(Manager $toggleManager, Client $client, bool $allowMatchOnResponse = false, iterable $circuitBreakers = [])
-    {
+    public function __construct(
+        Manager $toggleManager,
+        Client $client,
+        bool $allowMatchOnResponse = false,
+        iterable $circuitBreakers = []
+    ) {
         $this->client = $client;
         $this->allowMatchOnResponse = $allowMatchOnResponse;
         $this->circuitBreakers = $circuitBreakers;
@@ -36,7 +40,7 @@ class RequestResponseListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (!$this->toggleManager->isActive('http_redirects')){
+        if (!$this->toggleManager->isActive('http_redirects')) {
             return;
         }
         if (!$event->isMasterRequest()) {
@@ -67,7 +71,9 @@ class RequestResponseListener
 
         410 === $response->getStatusCode()
             ? $event->setResponse((new SymfonyResponse())->setStatusCode(410))
-            : $event->setResponse(new SymfonyRedirectResponse($response->getLocation(), $response->getStatusCode()));
+            : $event->setResponse(
+                new SymfonyRedirectResponse($response->getLocation(), $response->getStatusCode())
+            );
     }
 
     public function onKernelResponse(FilterResponseEvent $event)
@@ -81,13 +87,21 @@ class RequestResponseListener
 
         $symfonyResponse = $event->getResponse();
 
-        if (0 === $rioResponse->getMatchOnResponseStatus() || $rioResponse->getMatchOnResponseStatus() !== $symfonyResponse->getStatusCode()) {
+        if (
+            0 === $rioResponse->getMatchOnResponseStatus() ||
+            $rioResponse->getMatchOnResponseStatus() !== $symfonyResponse->getStatusCode()
+        ) {
             return;
         }
 
         410 === $rioResponse->getStatusCode()
             ? $event->setResponse((new SymfonyResponse())->setStatusCode(410))
-            : $event->setResponse(new SymfonyRedirectResponse($rioResponse->getLocation(), $rioResponse->getStatusCode()));
+            : $event->setResponse(
+                new SymfonyRedirectResponse(
+                    $rioResponse->getLocation(),
+                    $rioResponse->getStatusCode()
+                )
+            );
     }
 
     public function onKernelTerminate(PostResponseEvent $event)
@@ -145,7 +159,7 @@ class RequestResponseListener
         }
 
         if ('' !== $requestUri && '/' !== $requestUri[0]) {
-            $requestUri = '/'.$requestUri;
+            $requestUri = '/' . $requestUri;
         }
 
         if (null === ($baseUrl = $symfonyRequest->getBaseUrl())) {

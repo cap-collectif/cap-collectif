@@ -104,7 +104,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : '.$form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $this->em->flush();
@@ -124,7 +124,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : '.$form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $this->em->flush();
@@ -160,7 +160,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : '.$form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $this->em->flush();
@@ -447,7 +447,7 @@ class ProposalMutation implements ContainerAwareInterface
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
-        $this->logger->info('createProposal: '.json_encode($values, true));
+        $this->logger->info('createProposal: ' . json_encode($values, true));
 
         $form->submit($values);
 
@@ -540,7 +540,7 @@ class ProposalMutation implements ContainerAwareInterface
             $form->remove('author');
         }
 
-        $this->logger->info(__METHOD__.' : '.var_export($values, true));
+        $this->logger->info(__METHOD__ . ' : ' . var_export($values, true));
         $form->submit($values, false);
 
         if (!$form->isValid()) {
@@ -609,42 +609,60 @@ class ProposalMutation implements ContainerAwareInterface
         if ($proposalForm->isUsingWebPage()) {
             if (empty($values['webPageUrl'])) {
                 $socialNetworks->setWebPageUrl(null);
-            } elseif (!empty($values['webPageUrl']) && filter_var($values['webPageUrl'], \FILTER_VALIDATE_URL)) {
+            } elseif (
+                !empty($values['webPageUrl']) &&
+                filter_var($values['webPageUrl'], \FILTER_VALIDATE_URL)
+            ) {
                 $socialNetworks->setWebPageUrl($values['webPageUrl']);
             }
         }
         if ($proposalForm->isUsingFacebook()) {
             if (empty($values['facebookUrl'])) {
                 $socialNetworks->setFacebookUrl(null);
-            } elseif (!empty($values['facebookUrl']) && filter_var($values['facebookUrl'], \FILTER_VALIDATE_URL)) {
+            } elseif (
+                !empty($values['facebookUrl']) &&
+                filter_var($values['facebookUrl'], \FILTER_VALIDATE_URL)
+            ) {
                 $socialNetworks->setFacebookUrl($values['facebookUrl']);
             }
         }
         if ($proposalForm->isUsingTwitter()) {
             if (empty($values['twitterUrl'])) {
                 $socialNetworks->setTwitterUrl(null);
-            } elseif (!empty($values['twitterUrl']) && filter_var($values['twitterUrl'], \FILTER_VALIDATE_URL)) {
+            } elseif (
+                !empty($values['twitterUrl']) &&
+                filter_var($values['twitterUrl'], \FILTER_VALIDATE_URL)
+            ) {
                 $socialNetworks->setTwitterUrl($values['twitterUrl']);
             }
         }
         if ($proposalForm->isUsingInstagram()) {
             if (empty($values['instagramUrl'])) {
                 $socialNetworks->setInstagramUrl(null);
-            } elseif (!empty($values['instagramUrl']) && filter_var($values['instagramUrl'], \FILTER_VALIDATE_URL)) {
+            } elseif (
+                !empty($values['instagramUrl']) &&
+                filter_var($values['instagramUrl'], \FILTER_VALIDATE_URL)
+            ) {
                 $socialNetworks->setInstagramUrl($values['instagramUrl']);
             }
         }
         if ($proposalForm->isUsingLinkedIn()) {
             if (empty($values['linkedInUrl'])) {
                 $socialNetworks->setLinkedInUrl(null);
-            } elseif (!empty($values['linkedInUrl']) && filter_var($values['linkedInUrl'], \FILTER_VALIDATE_URL)) {
+            } elseif (
+                !empty($values['linkedInUrl']) &&
+                filter_var($values['linkedInUrl'], \FILTER_VALIDATE_URL)
+            ) {
                 $socialNetworks->setLinkedInUrl($values['linkedInUrl']);
             }
         }
         if ($proposalForm->isUsingYoutube()) {
             if (empty($values['youtubeUrl'])) {
                 $socialNetworks->setYoutubeUrl(null);
-            } elseif (!empty($values['youtubeUrl']) && filter_var($values['youtubeUrl'], \FILTER_VALIDATE_URL)) {
+            } elseif (
+                !empty($values['youtubeUrl']) &&
+                filter_var($values['youtubeUrl'], \FILTER_VALIDATE_URL)
+            ) {
                 $socialNetworks->setYoutubeUrl($values['youtubeUrl']);
             }
         }
@@ -710,16 +728,16 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $errors = [];
         foreach ($form->getErrors() as $error) {
-            $this->logger->error(__METHOD__.' : '.$error->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . $error->getMessage());
             $this->logger->error(
-                __METHOD__.
-                ' : '.
-                $form->getName().
-                ' '.
-                'Extra data: '.
-                implode('', $form->getExtraData())
+                __METHOD__ .
+                    ' : ' .
+                    $form->getName() .
+                    ' ' .
+                    'Extra data: ' .
+                    implode('', $form->getExtraData())
             );
-            $errors[] = (string)$error->getMessage();
+            $errors[] = (string) $error->getMessage();
         }
         if (!empty($errors)) {
             throw new UserErrors($errors);

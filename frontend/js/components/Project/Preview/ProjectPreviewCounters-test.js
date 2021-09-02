@@ -27,16 +27,16 @@ const props = {
     type: {
       title: 'project.types.interpellation',
     },
-    archived: false
+    archived: false,
   },
 };
 
 const archivedProjectProps = {
   project: {
     ...props.project,
-    archived: true
-  }
-}
+    archived: true,
+  },
+};
 
 const propsWithDistricts = {
   project: {
@@ -65,7 +65,7 @@ const propsWithDistricts = {
     type: {
       title: 'global.consultation',
     },
-    archived: false
+    archived: false,
   },
 };
 

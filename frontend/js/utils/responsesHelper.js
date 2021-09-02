@@ -101,7 +101,7 @@ const QuestionAdminFragment = {
           }
         }
       }
-      
+
       destinationJumps {
         id
         origin {
@@ -109,7 +109,7 @@ const QuestionAdminFragment = {
           title
         }
       }
-      
+
       alwaysJumpDestinationQuestion {
         id
         title

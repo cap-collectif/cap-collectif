@@ -9,6 +9,6 @@ trait ReportingStatus
         ReportingType::OFF => 'reporting.status.offending',
         ReportingType::SPAM => 'reporting.status.spam',
         ReportingType::ERROR => 'reporting.status.error',
-        ReportingType::OFF_TOPIC => 'reporting.status.off_topic'
+        ReportingType::OFF_TOPIC => 'reporting.status.off_topic',
     ];
 }

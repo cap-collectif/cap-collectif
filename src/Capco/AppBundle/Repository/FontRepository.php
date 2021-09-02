@@ -42,7 +42,7 @@ class FontRepository extends EntityRepository
                 'weight' => $font['weight'],
                 'name' => $font['name'],
                 'style' => $font['style'],
-                'fullname' => $font['fullname']
+                'fullname' => $font['fullname'],
             ])
             ->getQuery()
             ->getOneOrNullResult();
@@ -150,7 +150,7 @@ class FontRepository extends EntityRepository
             ->setParameters([
                 'name' => $lastFont->getName(),
                 'style' => 'normal',
-                'weight' => 400
+                'weight' => 400,
             ])
             ->getQuery()
             ->getResult();
@@ -161,7 +161,7 @@ class FontRepository extends EntityRepository
                 ->setParameters([
                     'name' => $lastFont->getName(),
                     'style' => 'normal',
-                    'weight' => 900
+                    'weight' => 900,
                 ])
                 ->addOrderBy('f.weight', 'DESC')
                 ->getQuery()

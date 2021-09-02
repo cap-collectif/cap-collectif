@@ -1,10 +1,10 @@
 AddProposalVotePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      vote:
-        type: 'InternalProposalVote!'
-      viewer:
-        type: 'InternalUser!'
-      voteEdge:
-        type: 'InternalProposalVoteEdge!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            vote:
+                type: 'InternalProposalVote!'
+            viewer:
+                type: 'InternalUser!'
+            voteEdge:
+                type: 'InternalProposalVoteEdge!'

@@ -28,13 +28,14 @@ class ProposalNewsResolver implements ResolverInterface
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getOrderedPublishedPostsByProposal(
-                    $proposal,
-                    $offset,
-                    $field,
-                    $limit,
-                    $direction
-                )
+                return $this->repository
+                    ->getOrderedPublishedPostsByProposal(
+                        $proposal,
+                        $offset,
+                        $field,
+                        $limit,
+                        $direction
+                    )
                     ->getIterator()
                     ->getArrayCopy();
             });

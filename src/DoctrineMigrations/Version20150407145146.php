@@ -35,14 +35,14 @@ class Version20150407145146 extends AbstractMigration
             'Citoyen',
             'Organisation à but lucratif',
             'Organisation à but non lucratif',
-            'Institution'
+            'Institution',
         ];
         $date = (new \DateTime())->format('Y-m-d H:i:s');
         foreach ($types as $type) {
             $this->connection->insert('user_type', [
                 'name' => $type,
                 'created_at' => $date,
-                'updated_at' => $date
+                'updated_at' => $date,
             ]);
         }
     }

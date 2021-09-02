@@ -41,8 +41,7 @@ class SiteParameterRepository extends EntityRepository
         if (in_array($keyname, SiteParameter::NOT_TRANSLATABLE)) {
             $qb->select('p.value');
         } else {
-            $qb
-                ->select('t.value')
+            $qb->select('t.value')
                 ->leftJoin('p.translations', 't', Join::WITH, 't.locale = :locale')
                 ->setParameter('locale', $locale);
         }
@@ -51,8 +50,6 @@ class SiteParameterRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->useResultCache(true, 60)
-            ->getSingleResult()["value"];
-
-
+            ->getSingleResult()['value'];
     }
 }

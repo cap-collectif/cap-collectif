@@ -1,7 +1,7 @@
 DeleteArgumentInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input type of deleteArgument.'
-    fields:
-      argumentId:
-        type: 'ID!'
+    type: relay-mutation-input
+    config:
+        description: 'Input type of deleteArgument.'
+        fields:
+            argumentId:
+                type: 'ID!'

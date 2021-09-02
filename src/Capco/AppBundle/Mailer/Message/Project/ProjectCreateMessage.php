@@ -16,14 +16,14 @@ final class ProjectCreateMessage extends AbstractExternalMessage
             '{username}' => $project->getAuthor()->getUsername(),
             '{sitename}' => $params['siteName'],
             '{editUrl}' => $params['editURL'],
-            '{projectsUrl}' => $params['projectsURL']
+            '{projectsUrl}' => $params['projectsURL'],
         ];
     }
 
     public static function getMySubjectVars(Project $project, array $params): array
     {
         return [
-            '{sitename}' => $params['siteName']
+            '{sitename}' => $params['siteName'],
         ];
     }
 }

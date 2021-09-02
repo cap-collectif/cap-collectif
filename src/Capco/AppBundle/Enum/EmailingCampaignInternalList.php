@@ -8,9 +8,7 @@ class EmailingCampaignInternalList
     public const NOT_CONFIRMED = 'NOT_CONFIRMED';
     public const CONFIRMED = 'CONFIRMED';
 
-    public const ALL = [
-        self::REGISTERED, self::NOT_CONFIRMED, self::CONFIRMED
-    ];
+    public const ALL = [self::REGISTERED, self::NOT_CONFIRMED, self::CONFIRMED];
 
     public static function isValid(string $value): bool
     {

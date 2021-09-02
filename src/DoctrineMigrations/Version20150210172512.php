@@ -74,7 +74,7 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
             'blog.jumbotron.body' => 'rich_text',
             'blog.jumbotron.title' => 'simple_text',
             'blog.disqus.username' => 'simple_text',
-            'global.site.embed_js' => 'javascript'
+            'global.site.embed_js' => 'javascript',
         ];
 
         foreach ($newTypeSettings as $key => $type) {
@@ -110,7 +110,7 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
                 'type' => $parameterTypes['javascript'],
                 'created_at' => $date,
                 'updated_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ]);
         }
     }

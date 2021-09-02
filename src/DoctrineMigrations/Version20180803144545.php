@@ -35,7 +35,7 @@ final class Version20180803144545 extends AbstractMigration
             ['key' => 'argument', 'trashed' => 'is_trashed', 'enabled' => 'is_enabled'],
             ['key' => 'opinion_version', 'trashed' => 'trashed', 'enabled' => 'enabled'],
             ['key' => 'proposal', 'trashed' => 'trashed', 'enabled' => 'enabled'],
-            ['key' => 'comment', 'trashed' => 'is_trashed', 'enabled' => 'is_enabled']
+            ['key' => 'comment', 'trashed' => 'is_trashed', 'enabled' => 'is_enabled'],
         ];
         foreach ($tables as $table) {
             $this->connection->executeQuery(

@@ -84,7 +84,7 @@ export type DestinationJump = {|
   +origin: {|
     +id: string,
     +title: string,
-  |}
+  |},
 |};
 
 export type QuestionChoice = {|

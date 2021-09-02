@@ -24,7 +24,7 @@ class ViewerFollowingConfigurationOpinionVersionResolver implements ResolverInte
         try {
             $follower = $this->followerRepository->findOneBy([
                 'opinionVersion' => $opinion,
-                'user' => $viewer
+                'user' => $viewer,
             ]);
 
             if ($follower) {

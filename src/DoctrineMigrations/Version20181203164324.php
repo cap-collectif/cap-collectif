@@ -71,14 +71,14 @@ final class Version20181203164324 extends AbstractMigration implements Container
                     'opacity' => isset($jsonStyle->opacity) ? $jsonStyle->opacity : null,
                     'size' => isset($jsonStyle->weight) ? $jsonStyle->weight : null,
                     'enabled' => 1,
-                    'id' => $uuidBorderStyle
+                    'id' => $uuidBorderStyle,
                 ]);
                 $style = $this->connection->insert('style', [
                     'style_type' => 'background',
                     'color' => isset($jsonStyle->color) ? $jsonStyle->color : null,
                     'opacity' => 0.2,
                     'enabled' => 1,
-                    'id' => $uuidBackgroundStyle
+                    'id' => $uuidBackgroundStyle,
                 ]);
             } else {
                 if (isset($uuidBorderStyle)) {

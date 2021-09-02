@@ -9,7 +9,7 @@ class GrandLyonMapping implements MappingInterface
         return [
             'identifier' => 'sub',
             'email' => 'email',
-            'nickname' => ['first_name', 'last_name']
+            'nickname' => ['first_name', 'last_name'],
         ];
     }
 }

@@ -15,11 +15,7 @@ class ProposalStepErrorCode implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [
-            self::NO_VALID_STATUS,
-            self::NO_VALID_PROPOSAL,
-            self::NO_VALID_STEP,
-        ];
+        return [self::NO_VALID_STATUS, self::NO_VALID_PROPOSAL, self::NO_VALID_STEP];
     }
 
     public static function getAvailableTypesToString(): string

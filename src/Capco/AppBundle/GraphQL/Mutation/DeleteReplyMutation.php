@@ -61,9 +61,9 @@ class DeleteReplyMutation implements MutationInterface
                                 ->getTitle(),
                             'questionnaire_step_title' => $reply->getStep()->getTitle(),
                             'questionnaire_id' => $reply->getQuestionnaire()->getId(),
-                            'author_name' => $reply->getAuthor()->getUsername()
+                            'author_name' => $reply->getAuthor()->getUsername(),
                         ],
-                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE,
                     ])
                 )
             );

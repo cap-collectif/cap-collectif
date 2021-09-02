@@ -31,13 +31,8 @@ class CommentReportingsResolver implements ResolverInterface
                 $field = $arguments->offsetGet('orderBy')['field'];
                 $direction = $arguments->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getByComment(
-                    $comment,
-                    $offset,
-                    $limit,
-                    $field,
-                    $direction
-                )
+                return $this->repository
+                    ->getByComment($comment, $offset, $limit, $field, $direction)
                     ->getIterator()
                     ->getArrayCopy();
             });

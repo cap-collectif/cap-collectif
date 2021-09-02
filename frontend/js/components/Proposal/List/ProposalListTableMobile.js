@@ -8,7 +8,7 @@ import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
 import type { ImplementationStepTitle_progressSteps } from '~relay/ImplementationStepTitle_progressSteps.graphql';
 import ListGroup from '../../Ui/List/ListGroup';
-import {translateContent} from "~/utils/ContentTranslator";
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   data: Array<Object>,

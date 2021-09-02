@@ -29,8 +29,8 @@ class QuestionResponsesResolver implements ResolverInterface
         if (
             $question->getQuestionnaire() &&
             $question->getQuestionnaire()->isPrivateResult() &&
-            (!$viewer || !$viewer->isAdmin())
-            && $question->getQuestionnaire()->getOwner() !== $viewer
+            (!$viewer || !$viewer->isAdmin()) &&
+            $question->getQuestionnaire()->getOwner() !== $viewer
         ) {
             return $emptyConnection;
         }

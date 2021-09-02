@@ -28,18 +28,16 @@ class ActivitiesService
                     if (isset($project['opinions'])) {
                         foreach ($project['opinions'] as $opinionId => $opinion) {
                             $projectsLeft[$projectId]['opinions'][$opinionId] = $opinion;
-                            $projectsLeft[$projectId]['countActivities'] += $opinion[
-                                'countActivities'
-                            ];
+                            $projectsLeft[$projectId]['countActivities'] +=
+                                $opinion['countActivities'];
                         }
                     }
 
                     if (isset($project['proposals'])) {
                         foreach ($project['proposals'] as $proposalId => $proposal) {
                             $projectsLeft[$projectId]['proposals'][$proposalId] = $proposal;
-                            $projectsLeft[$projectId]['countActivities'] += $proposal[
-                                'countActivities'
-                            ];
+                            $projectsLeft[$projectId]['countActivities'] +=
+                                $proposal['countActivities'];
                         }
                     }
                 } else {

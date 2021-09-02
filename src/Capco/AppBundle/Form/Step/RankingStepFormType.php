@@ -18,7 +18,7 @@ class RankingStepFormType extends AbstractStepFormType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => RankingStep::class
+            'data_class' => RankingStep::class,
         ]);
     }
 }

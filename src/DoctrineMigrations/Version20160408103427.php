@@ -87,7 +87,7 @@ class Version20160408103427 extends AbstractMigration
                 'questionnaire_id' => null,
                 'proposal_form_id' => $question['proposal_form_id'],
                 'question_id' => $question['id'],
-                'position' => $question['position']
+                'position' => $question['position'],
             ]);
             $this->connection->update(
                 'question',
@@ -95,7 +95,7 @@ class Version20160408103427 extends AbstractMigration
                     'question_type' => 'simple',
                     'type' => $question['questionType'],
                     'other_allowed' => 0,
-                    'random_question_choices' => 0
+                    'random_question_choices' => 0,
                 ],
                 ['id' => $question['id']]
             );

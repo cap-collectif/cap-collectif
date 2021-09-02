@@ -1,6 +1,5 @@
 PreviewConsultationConnection:
-  type: relay-connection
-  config:
-    name: ConsultationConnection
-    nodeType: PreviewConsultation!
-
+    type: relay-connection
+    config:
+        name: ConsultationConnection
+        nodeType: PreviewConsultation!

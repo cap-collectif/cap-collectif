@@ -61,7 +61,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
         if (!$vote) {
             $vote = $this->versionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinionVersion' => $contribution
+                'opinionVersion' => $contribution,
             ]);
         }
 
@@ -85,7 +85,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
         return [
             'deletedVoteId' => $deletedVoteId,
             'contribution' => $contribution,
-            'viewer' => $viewer
+            'viewer' => $viewer,
         ];
     }
 }

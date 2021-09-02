@@ -4,7 +4,9 @@ import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ParisUserNotValidModal = lazy(() =>
-  import(/* webpackChunkName: "ParisUserNotValidModal" */ '~/components/User/Profile/ParisUserNotValidModal'),
+  import(
+    /* webpackChunkName: "ParisUserNotValidModal" */ '~/components/User/Profile/ParisUserNotValidModal'
+  ),
 );
 
 export default (props: Object) => (

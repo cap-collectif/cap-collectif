@@ -1,15 +1,15 @@
 UpdateQuestionnaireParametersInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      questionnaireId:
-        type: 'ID!'
-      acknowledgeReplies:
-        type: 'Boolean'
-      anonymousAllowed:
-        type: 'Boolean'
-      multipleRepliesAllowed:
-        type: 'Boolean'
-      privateResult:
-        type: 'Boolean'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            questionnaireId:
+                type: 'ID!'
+            acknowledgeReplies:
+                type: 'Boolean'
+            anonymousAllowed:
+                type: 'Boolean'
+            multipleRepliesAllowed:
+                type: 'Boolean'
+            privateResult:
+                type: 'Boolean'

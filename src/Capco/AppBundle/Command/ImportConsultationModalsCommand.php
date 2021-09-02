@@ -67,7 +67,7 @@ class ImportConsultationModalsCommand extends Command
                 ->get(OpinionRepository::class)
                 ->findOneBy([
                     'title' => $row['opinion'],
-                    'step' => $step
+                    'step' => $step,
                 ]);
 
             if (!\is_object($opinion)) {

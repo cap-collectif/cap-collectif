@@ -1,15 +1,15 @@
 ArgumentVote:
-  type: object
-  inherits:
-    - InternalVote
-    - PublicPublishable
-    - Contribution
-  config:
-    interfaces:
-      - InternalVote
-      - PublicPublishable
-      - Contribution
-    fields:
-      related:
-        type: 'InternalArgument'
-        description: 'Return the related contribution if the contribution is related to another.'
+    type: object
+    inherits:
+        - InternalVote
+        - PublicPublishable
+        - Contribution
+    config:
+        interfaces:
+            - InternalVote
+            - PublicPublishable
+            - Contribution
+        fields:
+            related:
+                type: 'InternalArgument'
+                description: 'Return the related contribution if the contribution is related to another.'

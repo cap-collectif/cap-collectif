@@ -45,7 +45,7 @@ final class Version20191029084430 extends AbstractMigration implements Container
                 'is_default' => 1,
                 'image_id' => $media['id'],
                 'updated_at' => $now->format('Y-m-d H:i:s'),
-                'created_at' => $now->format('Y-m-d H:i:s')
+                'created_at' => $now->format('Y-m-d H:i:s'),
             ];
 
             $this->connection->insert('category_image', $categoryImage);

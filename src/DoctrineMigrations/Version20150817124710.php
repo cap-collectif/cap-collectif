@@ -19,7 +19,7 @@ class Version20150817124710 extends AbstractMigration
             'keyname' => 'admin.mail.notifications',
             'created_at' => $date,
             'updated_at' => $date,
-            'is_enabled' => 1
+            'is_enabled' => 1,
         ]);
 
         $parameters = [
@@ -31,7 +31,7 @@ class Version20150817124710 extends AbstractMigration
                 'type' => 0,
                 'created_at' => $date,
                 'updated_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'admin.mail.notifications.send_address',
@@ -41,8 +41,8 @@ class Version20150817124710 extends AbstractMigration
                 'type' => 4,
                 'created_at' => $date,
                 'updated_at' => $date,
-                'is_enabled' => 1
-            ]
+                'is_enabled' => 1,
+            ],
         ];
         foreach ($parameters as $values) {
             $this->connection->insert('site_parameter', $values);
@@ -53,7 +53,7 @@ class Version20150817124710 extends AbstractMigration
     {
         $parameters = [
             ['keyname' => 'admin.mail.notifications.send_address'],
-            ['keyname' => 'admin.mail.notifications.send_name']
+            ['keyname' => 'admin.mail.notifications.send_name'],
         ];
         foreach ($parameters as $values) {
             $this->connection->delete('site_parameter', $values);
@@ -61,7 +61,7 @@ class Version20150817124710 extends AbstractMigration
 
         $updated = ['keyname' => 'admin.mail.notifications', 'position' => 1];
         $this->connection->update('site_parameter', $updated, [
-            'keyname' => 'admin.mail.notifications.receive_address'
+            'keyname' => 'admin.mail.notifications.receive_address',
         ]);
     }
 }

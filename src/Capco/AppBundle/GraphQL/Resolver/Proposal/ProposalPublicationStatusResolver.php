@@ -14,7 +14,7 @@ class ProposalPublicationStatusResolver implements ResolverInterface
         if ($proposal->isDeleted()) {
             return ProposalPublicationStatus::DELETED;
         }
-        
+
         if ($proposal->isDraft()) {
             return ProposalPublicationStatus::DRAFT;
         }

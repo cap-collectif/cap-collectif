@@ -46,7 +46,10 @@ class UserConnectionResolver implements ResolverInterface
 
         if (null !== $email) {
             $successfulOnly = true === $args->offsetGet('success');
-            $paginator = new Paginator(function (int $offset, int $limit) use ($email, $successfulOnly) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $email,
+                $successfulOnly
+            ) {
                 return $this->userConnectionRepository->findAttemptByEmail(
                     $email,
                     $offset,
@@ -62,7 +65,6 @@ class UserConnectionResolver implements ResolverInterface
                 false
             );
         } else {
-
             $paginator = new Paginator(function () use ($userId) {
                 return $this->userConnectionRepository->findByUserId($userId);
             });

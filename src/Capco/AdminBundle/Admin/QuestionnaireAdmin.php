@@ -127,6 +127,4 @@ class QuestionnaireAdmin extends CapcoAdmin
     {
         $collection->remove('create');
     }
-
-
 }

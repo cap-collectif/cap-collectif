@@ -20,8 +20,7 @@ class SentryHandler extends MonologSentryHandler
         int $level = Logger::DEBUG,
         bool $bubble = true,
         Manager $toggleManager = null
-    )
-    {
+    ) {
         parent::__construct($hub, $level, $bubble);
         $this->toggleManager = $toggleManager;
         $this->hub = $hub;
@@ -32,7 +31,7 @@ class SentryHandler extends MonologSentryHandler
      */
     protected function write(array $record): void
     {
-        if($this->isSentryEnable()) {
+        if ($this->isSentryEnable()) {
             parent::write($record);
         }
     }

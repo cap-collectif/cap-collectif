@@ -1,10 +1,10 @@
 // @flow
-import React, {useEffect} from 'react';
-import {FormattedMessage} from "react-intl";
-import Flex from "~ui/Primitives/Layout/Flex";
-import Button from "~ds/Button/Button";
-import Loader from "~ui/FeedbacksIndicators/Loader";
-import {RETRY_LIMIT} from "~/components/Questionnaire/QuestionnaireAdminResultsPdfModal";
+import React, { useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Button from '~ds/Button/Button';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+import { RETRY_LIMIT } from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModal';
 
 type Props = {|
   +loading: boolean,
@@ -15,13 +15,19 @@ type Props = {|
   +setRetryCount: ((number => number) | number) => void,
 |};
 
-const QuestionnaireAdminResultsPdfModalButton = ({loading, onClose, error, setLoading, retryCount, setRetryCount }: Props) => {
-
+const QuestionnaireAdminResultsPdfModalButton = ({
+  loading,
+  onClose,
+  error,
+  setLoading,
+  retryCount,
+  setRetryCount,
+}: Props) => {
   useEffect(() => {
     if (error && retryCount >= RETRY_LIMIT) {
       setLoading(false);
     }
-  }, [error, retryCount, setLoading])
+  }, [error, retryCount, setLoading]);
 
   if (error && retryCount < RETRY_LIMIT) {
     return (
@@ -32,19 +38,17 @@ const QuestionnaireAdminResultsPdfModalButton = ({loading, onClose, error, setLo
         width="265px"
         onClick={() => {
           setRetryCount(c => c + 1);
-        }}
-      >
+        }}>
         <Flex align="center" justify="center" width="100%">
           <FormattedMessage id="retry" />
         </Flex>
       </Button>
-    )
+    );
   }
-
 
   const renderButtonText = () => {
     if (error && retryCount >= RETRY_LIMIT) {
-      return <FormattedMessage id="global.close" />
+      return <FormattedMessage id="global.close" />;
     }
     if (loading) {
       return (
@@ -54,10 +58,10 @@ const QuestionnaireAdminResultsPdfModalButton = ({loading, onClose, error, setLo
           </Flex>
           <FormattedMessage id="pdf.file.creation" />
         </>
-      )
+      );
     }
-    return <FormattedMessage id="global.close" />
-  }
+    return <FormattedMessage id="global.close" />;
+  };
 
   return (
     <Button
@@ -65,15 +69,12 @@ const QuestionnaireAdminResultsPdfModalButton = ({loading, onClose, error, setLo
       variantSize="medium"
       disabled={loading}
       width="265px"
-      onClick={onClose}
-    >
+      onClick={onClose}>
       <Flex align="center" justify="center" width="100%">
-        {
-          renderButtonText()
-        }
+        {renderButtonText()}
       </Flex>
     </Button>
   );
 };
 
-export default QuestionnaireAdminResultsPdfModalButton
+export default QuestionnaireAdminResultsPdfModalButton;

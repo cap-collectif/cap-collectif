@@ -184,7 +184,7 @@ class SluggableListener extends Base
         $om = $ea->getObjectManager();
         $object = $ea->getObject();
         $meta = $om->getClassMetadata(\get_class($object));
-        if (($config = $this->getConfiguration($om, $meta->name))) {
+        if ($config = $this->getConfiguration($om, $meta->name)) {
             foreach ($config['slugs'] as $slugField => $options) {
                 if ($meta->isIdentifier($slugField)) {
                     $meta->getReflectionProperty($slugField)->setValue($object, '__id__');

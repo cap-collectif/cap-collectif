@@ -105,7 +105,9 @@ class UserSearch extends Search
             $boolQuery->addFilter(new Term(['isEmailConfirmed' => $emailConfirmed]));
         }
         if (null !== $consentInternalCommunication) {
-            $boolQuery->addFilter(new Term(['isConsentInternalCommunication' => $consentInternalCommunication]));
+            $boolQuery->addFilter(
+                new Term(['isConsentInternalCommunication' => $consentInternalCommunication])
+            );
         }
 
         $query = new Query();

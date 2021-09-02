@@ -48,9 +48,9 @@ class DeleteCommentMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'Comment not found.'
-                    ]
-                ]
+                        'message' => 'Comment not found.',
+                    ],
+                ],
             ];
         }
 
@@ -58,9 +58,9 @@ class DeleteCommentMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'You are not author of the comment.'
-                    ]
-                ]
+                        'message' => 'You are not author of the comment.',
+                    ],
+                ],
             ];
         }
 

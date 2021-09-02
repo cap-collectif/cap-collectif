@@ -19,10 +19,10 @@ class EventReviewType extends AbstractType
             ->add('reviewer')
             ->add('comment', TextType::class)
             ->add('refusedReason', ChoiceType::class, [
-                'choices' => EventReviewRefusedReasonType::$refusedReasons
+                'choices' => EventReviewRefusedReasonType::$refusedReasons,
             ])
             ->add('status', ChoiceType::class, [
-                'choices' => EventReviewStatusType::$eventReviewStatus
+                'choices' => EventReviewStatusType::$eventReviewStatus,
             ]);
     }
 
@@ -31,7 +31,7 @@ class EventReviewType extends AbstractType
         $resolver->setDefaults([
             'data_class' => EventReview::class,
             'csrf_protection' => false,
-            'translation_domain' => 'CapcoAppBundle'
+            'translation_domain' => 'CapcoAppBundle',
         ]);
     }
 }

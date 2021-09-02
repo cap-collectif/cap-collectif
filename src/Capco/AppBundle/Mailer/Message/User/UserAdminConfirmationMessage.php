@@ -15,14 +15,14 @@ final class UserAdminConfirmationMessage extends AbstractExternalMessage
         return [
             '{username}' => $user->getUsername(),
             '{sitename}' => $params['siteName'],
-            '{confirmationUrl}' => $params['confirmationURL']
+            '{confirmationUrl}' => $params['confirmationURL'],
         ];
     }
 
     public static function getMySubjectVars(User $user, array $params): array
     {
         return [
-            '{sitename}' => $params['siteName']
+            '{sitename}' => $params['siteName'],
         ];
     }
 }

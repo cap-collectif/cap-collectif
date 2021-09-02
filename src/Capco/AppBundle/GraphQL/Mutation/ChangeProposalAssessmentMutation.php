@@ -135,7 +135,7 @@ class ChangeProposalAssessmentMutation implements MutationInterface
         $message = [
             'type' => 'assessment',
             'proposalId' => $proposalAssessment->getProposal()->getId(),
-            'date' => $proposalAssessment->getUpdatedAt()->format('Y-m-d H:i:s')
+            'date' => $proposalAssessment->getUpdatedAt()->format('Y-m-d H:i:s'),
         ];
         if (
             $proposalAssessment->getState() !== $oldState &&

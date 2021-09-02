@@ -18,8 +18,7 @@ trait ContributionRepositoryTrait
         $from = (new \DateTime())->sub(new \DateInterval($interval));
 
         $qb = $this->createQueryBuilder('o');
-        $qb
-            ->andWhere($qb->expr()->between('o.createdAt', ':from', ':to'))
+        $qb->andWhere($qb->expr()->between('o.createdAt', ':from', ':to'))
             ->andWhere('o.' . $authorField . ' = :author')
             ->setParameters(['from' => $from, 'to' => $now, 'author' => $author]);
 
@@ -59,14 +58,13 @@ trait ContributionRepositoryTrait
         }, $steps->toArray());
 
         $qb = $this->createQueryBuilder('v');
-        $qb
-            ->leftJoin('v.proposal', 'p')
+        $qb->leftJoin('v.proposal', 'p')
             ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 'pfs')
             ->andWhere($qb->expr()->in('pfs.id', ':stepIds'));
 
         $qb->setParameters([
-            ':stepIds' => $stepIds
+            ':stepIds' => $stepIds,
         ]);
 
         return $qb->getQuery()->getResult();

@@ -55,9 +55,9 @@ class ResetDefaultLocaleCommand extends Command
     private function isDefaultLocaleMissing(): bool
     {
         return empty(
-        $this->em->getRepository(Locale::class)->findBy([
-            'default' => true,
-        ])
+            $this->em->getRepository(Locale::class)->findBy([
+                'default' => true,
+            ])
         );
     }
 }

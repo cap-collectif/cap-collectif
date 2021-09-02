@@ -138,7 +138,7 @@ class Version20151012111217 extends AbstractMigration
                 'opinions_ranking_threshold' => $c['opinions_ranking_threshold'],
                 'versions_ranking_threshold' => $c['versions_ranking_threshold'],
                 'include_author_in_ranking' => $c['include_author_in_ranking'],
-                'opinion_term' => $c['opinion_term']
+                'opinion_term' => $c['opinion_term'],
             ]);
         }
 
@@ -147,21 +147,21 @@ class Version20151012111217 extends AbstractMigration
                 'id' => $cas['id'],
                 'project_id' => $cas['consultation_id'],
                 'step_id' => $cas['step_id'],
-                'position' => $cas['position']
+                'position' => $cas['position'],
             ]);
         }
 
         foreach ($this->consultation_events as $ce) {
             $this->connection->insert('project_event', [
                 'event_id' => $ce['event_id'],
-                'project_id' => $ce['consultation_id']
+                'project_id' => $ce['consultation_id'],
             ]);
         }
 
         foreach ($this->consultation_posts as $cp) {
             $this->connection->insert('project_post', [
                 'post_id' => $cp['post_id'],
-                'project_id' => $cp['consultation_id']
+                'project_id' => $cp['consultation_id'],
             ]);
         }
 
@@ -170,14 +170,14 @@ class Version20151012111217 extends AbstractMigration
                 'id' => $ct['id'],
                 'title' => $ct['title'],
                 'created_at' => $ct['created_at'],
-                'updated_at' => $ct['updated_at']
+                'updated_at' => $ct['updated_at'],
             ]);
         }
 
         foreach ($this->theme_consultations as $tc) {
             $this->connection->insert('theme_project', [
                 'theme_id' => $tc['theme_id'],
-                'project_id' => $tc['consultation_id']
+                'project_id' => $tc['consultation_id'],
             ]);
         }
 
@@ -324,7 +324,7 @@ class Version20151012111217 extends AbstractMigration
                 'opinions_ranking_threshold' => $c['opinions_ranking_threshold'],
                 'versions_ranking_threshold' => $c['versions_ranking_threshold'],
                 'include_author_in_ranking' => $c['include_author_in_ranking'],
-                'opinion_term' => $c['opinion_term']
+                'opinion_term' => $c['opinion_term'],
             ]);
         }
 
@@ -333,21 +333,21 @@ class Version20151012111217 extends AbstractMigration
                 'id' => $cas['id'],
                 'consultation_id' => $cas['project_id'],
                 'step_id' => $cas['step_id'],
-                'position' => $cas['position']
+                'position' => $cas['position'],
             ]);
         }
 
         foreach ($this->consultation_events as $ce) {
             $this->connection->insert('consultation_event', [
                 'event_id' => $ce['event_id'],
-                'consultation_id' => $ce['project_id']
+                'consultation_id' => $ce['project_id'],
             ]);
         }
 
         foreach ($this->consultation_posts as $cp) {
             $this->connection->insert('project_post', [
                 'post_id' => $cp['post_id'],
-                'consultation_id' => $cp['project_id']
+                'consultation_id' => $cp['project_id'],
             ]);
         }
 
@@ -356,14 +356,14 @@ class Version20151012111217 extends AbstractMigration
                 'id' => $ct['id'],
                 'title' => $ct['title'],
                 'created_at' => $ct['created_at'],
-                'updated_at' => $ct['updated_at']
+                'updated_at' => $ct['updated_at'],
             ]);
         }
 
         foreach ($this->theme_consultations as $tc) {
             $this->connection->insert('theme_consultation', [
                 'theme_id' => $tc['theme_id'],
-                'consultation_id' => $tc['project_id']
+                'consultation_id' => $tc['project_id'],
             ]);
         }
 

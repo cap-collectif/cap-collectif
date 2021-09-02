@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\Traits\User;
 
 trait UserSSOOpenIdTrait

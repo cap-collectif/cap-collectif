@@ -11,7 +11,7 @@ class DateExtension extends AbstractExtension
     {
         return [
             new TwigFilter('date_diff', [$this, 'getDatesDiff']),
-            new TwigFilter('has_significant_diff', [$this, 'hasSignificantDiff'])
+            new TwigFilter('has_significant_diff', [$this, 'hasSignificantDiff']),
         ];
     }
 

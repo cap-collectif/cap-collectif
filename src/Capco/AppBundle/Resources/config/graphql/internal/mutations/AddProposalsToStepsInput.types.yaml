@@ -1,10 +1,10 @@
 AddProposalsToStepsInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      proposalIds:
-        type: '[ID!]!'
-        description: 'The ids of the proposals to add to steps'
-      stepIds:
-        type: '[ID!]!'
-        description: 'The ids of the steps to which proposals should be moved'
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'The ids of the proposals to add to steps'
+            stepIds:
+                type: '[ID!]!'
+                description: 'The ids of the steps to which proposals should be moved'

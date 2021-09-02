@@ -77,7 +77,7 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
                         'address_json' => $jsonAddress,
                         'similarity_of_new_address' =>
                             ($similarity['percLat'] + $similarity['percLng']) / 2,
-                        'new_address_is_similar' => $similarity['newAddressIsSimilar']
+                        'new_address_is_similar' => $similarity['newAddressIsSimilar'],
                     ],
                     ['id' => $event['id']]
                 );

@@ -79,7 +79,6 @@ class ProjectSearchParameters
         return $this->page;
     }
 
-
     public function toArray(): array
     {
         return [

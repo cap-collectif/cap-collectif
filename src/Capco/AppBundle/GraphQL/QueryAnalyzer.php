@@ -46,7 +46,7 @@ class QueryAnalyzer
                     'graphql_schema' => $currentSchemaName,
                     'host' => '',
                     'clientId' => '',
-                    'createdAt' => \Elastica\Util::convertDateTimeObject($now)
+                    'createdAt' => \Elastica\Util::convertDateTimeObject($now),
                 ]);
             }
         }

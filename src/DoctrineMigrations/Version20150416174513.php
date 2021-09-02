@@ -52,7 +52,7 @@ class Version20150416174513 extends AbstractMigration
             'is_enabled' => 1,
             'updated_at' => $date,
             'created_at' => $date,
-            'associated_features' => 'members_list'
+            'associated_features' => 'members_list',
         ]);
 
         // Add new site parameters
@@ -65,7 +65,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 2,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'members.jumbotron.body',
@@ -75,7 +75,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 1,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'members.jumbotron.title',
@@ -85,7 +85,7 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 0,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'members.content.body',
@@ -95,8 +95,8 @@ class Version20150416174513 extends AbstractMigration
                 'type' => 1,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
-            ]
+                'is_enabled' => 1,
+            ],
         ];
 
         foreach ($newParameters as $values) {
@@ -126,7 +126,7 @@ class Version20150416174513 extends AbstractMigration
             'members.pagination.size',
             'members.jumbotron.body',
             'members.jumbotron.title',
-            'members.content.body'
+            'members.content.body',
         ];
 
         foreach ($params as $keyname) {

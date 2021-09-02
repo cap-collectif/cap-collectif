@@ -26,7 +26,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         'argumentAgainst',
         'voteOk',
         'voteNok',
-        'voteMitige'
+        'voteMitige',
     ];
 
     protected $followerRepository;
@@ -133,7 +133,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         $opinionActivities = [];
 
         $opinions = $this->opinionRepository->findBy([
-            'published' => 1
+            'published' => 1,
         ]);
 
         // @var \Capco\AppBundle\Entity\Opinion
@@ -244,7 +244,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
                 if (
                     \in_array($notifiedOf, [
                         FollowerNotifiedOfInterface::ESSENTIAL,
-                        FollowerNotifiedOfInterface::MINIMAL
+                        FollowerNotifiedOfInterface::MINIMAL,
                     ])
                 ) {
                     $opinion['voteOk'] = self::NOT_FOLLOWED;

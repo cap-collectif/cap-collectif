@@ -288,7 +288,7 @@ EOF;
         'contribution_versions_votesCount' => 'version.votes.totalCount',
         'contribution_versions_votesCountOk' => 'version.votesOk.totalCount',
         'contribution_versions_votesCountMitige' => 'version.votesMitige.totalCount',
-        'contribution_versions_votesCountNok' => 'version.votesNo.totalCount'
+        'contribution_versions_votesCountNok' => 'version.votesNo.totalCount',
     ];
 
     protected static $defaultName = 'capco:export:consultation';

@@ -31,7 +31,7 @@ class Version20170317131656 extends AbstractMigration
                     'bottom_text_displayed' => \count($bottomText) > 0,
                     'top_text_displayed' => \count($topText) > 0,
                     'top_text' => $topText,
-                    'bottom_text' => $bottomText
+                    'bottom_text' => $bottomText,
                 ],
                 ['id' => $form[0]]
             );

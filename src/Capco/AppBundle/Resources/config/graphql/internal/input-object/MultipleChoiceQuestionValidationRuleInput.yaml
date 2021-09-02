@@ -1,8 +1,8 @@
 MultipleChoiceQuestionValidationRuleInput:
-  type: input-object
-  config:
-    fields:
-      type:
-        type: 'MultipleChoiceQuestionValidationRulesTypes!'
-      number:
-        type: 'Int!'
+    type: input-object
+    config:
+        fields:
+            type:
+                type: 'MultipleChoiceQuestionValidationRulesTypes!'
+            number:
+                type: 'Int!'

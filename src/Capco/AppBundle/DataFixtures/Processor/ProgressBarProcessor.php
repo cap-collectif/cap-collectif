@@ -14,8 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ProgressBarProcessor implements ProcessorInterface
 {
     private const FIXTURES_COUNT = 4007;
-    private /*?OutputInterface*/ $output;
-    private /*?ProgressBar*/ $progressBar;
+    /*?OutputInterface*/ private $output;
+    /*?ProgressBar*/ private $progressBar;
 
     public function setOutput(OutputInterface $output)
     {

@@ -16,12 +16,14 @@ final class DebateArgumentConfirmationMessage extends AbstractExternalMessage
         return [];
     }
 
-    public static function getMyTemplateVars(DebateAnonymousArgument $argument, array $params): array
-    {
+    public static function getMyTemplateVars(
+        DebateAnonymousArgument $argument,
+        array $params
+    ): array {
         return [
-            "confirmationUrl" => $params["confirmationUrl"],
-            "organizationName" => $params["organizationName"],
-            "username" => $argument->getUsername() ?? "",
+            'confirmationUrl' => $params['confirmationUrl'],
+            'organizationName' => $params['organizationName'],
+            'username' => $argument->getUsername() ?? '',
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],

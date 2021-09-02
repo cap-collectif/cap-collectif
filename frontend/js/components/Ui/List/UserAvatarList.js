@@ -39,7 +39,7 @@ export const AvatarWrapper: StyledComponent<
   {},
   HTMLDivElement,
 > = styled.div.attrs({
-  className: 'avatar-wrapper'
+  className: 'avatar-wrapper',
 })`
   position: relative;
   z-index: ${props => props.max - props.index};

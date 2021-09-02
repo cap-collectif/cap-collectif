@@ -1,12 +1,10 @@
 UpdatePostInput:
-  type: relay-mutation-input
-  inherits:
-    - CreatePostInput
-  config:
-    description: 'Input of updatePost mutation.'
-    fields:
-      id:
-        type: 'ID!'
-        description: 'The id of the post to update'
-
-
+    type: relay-mutation-input
+    inherits:
+        - CreatePostInput
+    config:
+        description: 'Input of updatePost mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the post to update'

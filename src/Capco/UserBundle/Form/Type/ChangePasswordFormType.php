@@ -17,16 +17,16 @@ class ChangePasswordFormType extends AbstractType
         // copy paste of FOSUser but we add the message to enable traduction
         $constraint = [
             new NotBlank(),
-            new UserPassword(['message' => 'fos_user.password.not_current'])
+            new UserPassword(['message' => 'fos_user.password.not_current']),
         ];
         $builder
             ->add('current_password', PasswordType::class, [
                 'mapped' => false,
-                'constraints' => $constraint
+                'constraints' => $constraint,
             ])
             ->add('new_password', TextType::class, [
                 'mapped' => false,
-                'constraints' => [new PasswordComplexity(), new NotBlank()]
+                'constraints' => [new PasswordComplexity(), new NotBlank()],
             ]);
     }
 

@@ -1,12 +1,12 @@
 AddProposalsToStepsErrorCode:
-  type: enum
-  config:
-    name: AddProposalsToStepsErrorCode
-    description: 'Available errors on step assignment of proposals'
-    values:
-      NO_VALID_PROPOSAL:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_PROPOSAL")'
-        description: 'No proposal match your id'
-      NO_VALID_STEP:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_STEP")'
-        description: 'No step match your id or it does not fit the selected proposals'
+    type: enum
+    config:
+        name: AddProposalsToStepsErrorCode
+        description: 'Available errors on step assignment of proposals'
+        values:
+            NO_VALID_PROPOSAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_PROPOSAL")'
+                description: 'No proposal match your id'
+            NO_VALID_STEP:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStepErrorCode::NO_VALID_STEP")'
+                description: 'No step match your id or it does not fit the selected proposals'

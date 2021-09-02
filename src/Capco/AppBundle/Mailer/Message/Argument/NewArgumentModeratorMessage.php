@@ -13,7 +13,11 @@ final class NewArgumentModeratorMessage extends AbstractModeratorMessage
     public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array
     {
         return [
-            '{type}' => $params['translator']->trans($moderable->getTypeAsString(), ['_locale' => $params['locale']], 'CapcoAppBundle'),
+            '{type}' => $params['translator']->trans(
+                $moderable->getTypeAsString(),
+                ['_locale' => $params['locale']],
+                'CapcoAppBundle'
+            ),
             '{body}' => self::escape($moderable->getBody()),
             '{createdDate}' => $moderable->getCreatedAt()->format('d/m/Y'),
             '{createdTime}' => $moderable->getCreatedAt()->format('H:i:s'),

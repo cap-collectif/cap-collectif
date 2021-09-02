@@ -13,7 +13,7 @@ final class ContactProposalAuthorMessage extends AbstractExternalMessage
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [
-            '{senderName}' => $params['sender']['name']
+            '{senderName}' => $params['sender']['name'],
         ];
     }
 

@@ -21,10 +21,9 @@ class PositionableController extends CRUDController
 
         $this->move($object, -1);
 
-        return new RedirectResponse($this->admin->generateUrl(
-            'list',
-            ['filter' => $this->admin->getFilterParameters()]
-        ));
+        return new RedirectResponse(
+            $this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()])
+        );
     }
 
     public function downAction(Request $request)
@@ -34,10 +33,9 @@ class PositionableController extends CRUDController
 
         $this->move($object, 1);
 
-        return new RedirectResponse($this->admin->generateUrl(
-            'list',
-            ['filter' => $this->admin->getFilterParameters()]
-        ));
+        return new RedirectResponse(
+            $this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()])
+        );
     }
 
     private function move($object, $relativePosition)

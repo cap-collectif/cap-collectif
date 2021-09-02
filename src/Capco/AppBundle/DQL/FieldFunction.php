@@ -27,8 +27,10 @@ class FieldFunction extends FunctionNode
 
         $lexer = $parser->getLexer();
 
-        while (count($this->values) < 1 ||
-            $lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS) {
+        while (
+            count($this->values) < 1 ||
+            $lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS
+        ) {
             $parser->match(Lexer::T_COMMA);
             $this->values[] = $parser->ArithmeticPrimary();
         }

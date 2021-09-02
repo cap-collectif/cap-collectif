@@ -22,16 +22,20 @@ class UpdateRedirectIOProjectIdMutation implements MutationInterface
         $this->siteParameterRepository = $siteParameterRepository;
     }
 
-
     public function __invoke(Argument $args): array
     {
-        $parameter = $this->siteParameterRepository->findOneBy(['keyname' => self::REDIRECTION_IO_PROJECT_ID_PARAM_KEY]);
+        $parameter = $this->siteParameterRepository->findOneBy([
+            'keyname' => self::REDIRECTION_IO_PROJECT_ID_PARAM_KEY,
+        ]);
 
-        if (null === $parameter){
+        if (null === $parameter) {
             throw new \RuntimeException('Site parameter not found');
         }
 
-        $savedValue = $this->updateSiteParameterValue($parameter, (string) $args->offsetGet('projectId'));
+        $savedValue = $this->updateSiteParameterValue(
+            $parameter,
+            (string) $args->offsetGet('projectId')
+        );
 
         if (empty($savedValue)) {
             throw new \RuntimeException('Site parameters not found');
@@ -40,7 +44,7 @@ class UpdateRedirectIOProjectIdMutation implements MutationInterface
         $this->em->flush();
 
         return [
-            'projectId' => $savedValue
+            'projectId' => $savedValue,
         ];
     }
 

@@ -29,8 +29,12 @@ const getStepsFilter = (project: ProjectPreviewBody_project) => {
     const dateB = b.timeRange.startAt ? new Date(b.timeRange.startAt) : 0;
     return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
   });
-  const stepClosed = projectStep.filter(step => step.state === 'CLOSED' && step.__typename !== 'PresentationStep',);
-  const stepFuture = projectStep.filter(step => step.state === 'FUTURE' && step.__typename !== 'PresentationStep',);
+  const stepClosed = projectStep.filter(
+    step => step.state === 'CLOSED' && step.__typename !== 'PresentationStep',
+  );
+  const stepFuture = projectStep.filter(
+    step => step.state === 'FUTURE' && step.__typename !== 'PresentationStep',
+  );
   const stepOpen = projectStep.filter(
     step => step.state === 'OPENED' && step.__typename !== 'PresentationStep',
   );

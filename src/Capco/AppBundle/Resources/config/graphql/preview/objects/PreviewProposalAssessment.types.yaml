@@ -16,7 +16,7 @@ PreviewProposalAssessment:
                 description: 'The related proposal.'
             supervisor:
                 type: 'PreviewUser!'
-                resolve: "@=value.getUpdatedBy()"
+                resolve: '@=value.getUpdatedBy()'
                 description: 'The last updated by a supervisor.'
             state:
                 type: 'ProposalAssessmentState!'

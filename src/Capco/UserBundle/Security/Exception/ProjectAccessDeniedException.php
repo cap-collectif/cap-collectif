@@ -3,7 +3,7 @@ namespace Capco\UserBundle\Security\Exception;
 
 class ProjectAccessDeniedException extends \RuntimeException
 {
-    private $attributes = array();
+    private $attributes = [];
     private $subject;
 
     public function __construct(

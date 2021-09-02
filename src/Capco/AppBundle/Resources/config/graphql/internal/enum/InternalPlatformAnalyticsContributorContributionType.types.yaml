@@ -5,26 +5,26 @@ InternalPlatformAnalyticsContributorContributionType:
         description: 'Represent a type of a contributor contribution'
         values:
             REPLY:
-                value: "reply"
-                description: "The contribution is a reply"
+                value: 'reply'
+                description: 'The contribution is a reply'
             PROPOSAL:
-                value: "proposal"
-                description: "The contribution is a proposal"
+                value: 'proposal'
+                description: 'The contribution is a proposal'
             COMMENT:
-                value: "comment"
-                description: "The contribution is a comment"
+                value: 'comment'
+                description: 'The contribution is a comment'
             OPINION:
-                value: "opinion"
-                description: "The contribution is an opinion"
+                value: 'opinion'
+                description: 'The contribution is an opinion'
             OPINION_VERSION:
-                value: "opinionVersion"
-                description: "The contribution is an opinion version"
+                value: 'opinionVersion'
+                description: 'The contribution is an opinion version'
             ARGUMENT:
-                value: "argument"
-                description: "The contribution is an argument"
+                value: 'argument'
+                description: 'The contribution is an argument'
             DEBATE_ARGUMENT:
-                value: "debateArgument"
-                description: "The contribution is a debate argument"
+                value: 'debateArgument'
+                description: 'The contribution is a debate argument'
             SOURCE:
-                value: "source"
-                description: "The contribution is a source"
+                value: 'source'
+                description: 'The contribution is a source'

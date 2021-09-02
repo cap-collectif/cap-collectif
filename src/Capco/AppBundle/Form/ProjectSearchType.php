@@ -25,17 +25,14 @@ class ProjectSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('term',
-                SearchType::class, [
+            ->add('term', SearchType::class, [
                 'required' => false,
             ])
-            ->add('orderBy',
-                ChoiceType::class, [
-                    'required' => false,
-                    'choices' => Project::$sortOrderLabels,
-                    'placeholder' => false,
-            ])
-        ;
+            ->add('orderBy', ChoiceType::class, [
+                'required' => false,
+                'choices' => Project::$sortOrderLabels,
+                'placeholder' => false,
+            ]);
 
         $builder->add('type', EntityType::class, [
             'required' => false,
@@ -44,13 +41,13 @@ class ProjectSearchType extends AbstractType
         ]);
 
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('theme',
-                EntityType::class, [
+            $builder->add('theme', EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
                 'choice_value' => 'slug',
                 'query_builder' => function (ThemeRepository $tr) {
-                    return $tr->createQueryBuilder('t')
+                    return $tr
+                        ->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },

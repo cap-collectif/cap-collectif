@@ -11,4 +11,6 @@ use Doctrine\ORM\EntityRepository;
  * @method ExternalServiceConfiguration[]    findAll()
  * @method ExternalServiceConfiguration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ExternalServiceConfigurationRepository extends EntityRepository {}
+class ExternalServiceConfigurationRepository extends EntityRepository
+{
+}

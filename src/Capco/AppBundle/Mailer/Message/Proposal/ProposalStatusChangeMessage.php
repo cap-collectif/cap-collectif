@@ -15,10 +15,9 @@ final class ProposalStatusChangeMessage extends AbstractExternalMessage
     {
         return [
             '{proposalTitle}' => self::escape($proposal->getTitle()),
-            '{proposalStatus}' => self::escape($proposal->lastStatus()->getName())
+            '{proposalStatus}' => self::escape($proposal->lastStatus()->getName()),
         ];
     }
-
 
     public static function getMyTemplateVars(Proposal $proposal, array $params): array
     {
@@ -42,14 +41,16 @@ final class ProposalStatusChangeMessage extends AbstractExternalMessage
             'time' => $params['date']->format('H:i:s'),
             'proposalDate' => $fmt->format($params['date']->getTimestamp()),
             'tableStyle' => 'background-color:rgba(0,0,0, 0.6); border-radius: 4px 4px 0 0;',
-            'additionalFooter' => true
+            'additionalFooter' => true,
         ];
     }
 
     public function getFooterVars(): array
     {
         return [
-            '%to%' => $this->getRecipient(0) ? self::escape($this->getRecipient(0)->getEmailAddress()) : '',
+            '%to%' => $this->getRecipient(0)
+                ? self::escape($this->getRecipient(0)->getEmailAddress())
+                : '',
             '%sitename%' => $this->getSitename(),
             '%siteUrl%' => $this->getSiteUrl(),
         ];

@@ -1,34 +1,34 @@
 PreviewMutation:
-  type: object
-  config:
-    description: 'This is the entry point into performing writes in the schema.'
-    name: Mutation
-    fields:
-      addEvent:
-        access: "@=hasRole('ROLE_USER')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: PreviewAddEventInput
-          payloadType: PreviewAddEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
-      changeEvent:
-        access: "@=hasRole('ROLE_USER')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: PreviewChangeEventInput
-          payloadType: PreviewChangeEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
-      deleteEvent:
-        access: "@=hasRole('ROLE_USER')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: PreviewDeleteEventInput
-          payloadType: PreviewDeleteEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'
-      deleteAccountByEmail:
-        access: "@=hasRole('ROLE_SUPER_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: PreviewDeleteAccountByEmailInput
-          payloadType: PreviewDeleteAccountByEmailPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountByEmailMutation", [value, getUser()])'
+    type: object
+    config:
+        description: 'This is the entry point into performing writes in the schema.'
+        name: Mutation
+        fields:
+            addEvent:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: PreviewAddEventInput
+                    payloadType: PreviewAddEventPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
+            changeEvent:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: PreviewChangeEventInput
+                    payloadType: PreviewChangeEventPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
+            deleteEvent:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: PreviewDeleteEventInput
+                    payloadType: PreviewDeleteEventPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'
+            deleteAccountByEmail:
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: PreviewDeleteAccountByEmailInput
+                    payloadType: PreviewDeleteAccountByEmailPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountByEmailMutation", [value, getUser()])'

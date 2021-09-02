@@ -10,14 +10,17 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20200821105044 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'replace proposalform.lat and .lng by .mapCenter';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE proposal_form ADD map_center LONGTEXT DEFAULT NULL');
     }
@@ -29,7 +32,12 @@ final class Version20200821105044 extends AbstractMigration
             if ($row['lat_map'] && $row['lng_map']) {
                 $this->connection->update(
                     'proposal_form',
-                    ['map_center' => self::generateJSONFromCoordinates($row['lat_map'], $row['lng_map'])],
+                    [
+                        'map_center' => self::generateJSONFromCoordinates(
+                            $row['lat_map'],
+                            $row['lng_map']
+                        ),
+                    ],
                     ['id' => $row['id']]
                 );
             }
@@ -44,16 +52,19 @@ final class Version20200821105044 extends AbstractMigration
                     'location_type' => 'GEOMETRIC_CENTER',
                     'location' => [
                         'lat' => $lat,
-                        'lng' => $lng
-                    ]
-                ]
-            ]
+                        'lng' => $lng,
+                    ],
+                ],
+            ],
         ]);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE proposal_form DROP map_center');
     }

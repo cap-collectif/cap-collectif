@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Capco\AppBundle\DTO;
-
 
 interface MapTokenStyleInterface
 {

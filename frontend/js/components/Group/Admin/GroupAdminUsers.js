@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
-import {graphql, usePaginationFragment} from 'react-relay';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { graphql, usePaginationFragment } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { Button, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -15,8 +15,8 @@ import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 import GroupAdminModalImportUsers from './GroupAdminModalImportUsers';
 import type { GlobalState } from '~/types';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import GroupAdminPendingInvitationsList from "~/components/Group/Admin/GroupAdminPendingInvitationsList";
-import type {GroupAdminPendingInvitationsList_group$key} from "~relay/GroupAdminPendingInvitationsList_group.graphql";
+import GroupAdminPendingInvitationsList from '~/components/Group/Admin/GroupAdminPendingInvitationsList';
+import type { GroupAdminPendingInvitationsList_group$key } from '~relay/GroupAdminPendingInvitationsList_group.graphql';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -29,32 +29,35 @@ type Props = {|
 export const formName = 'group-admin-users';
 
 const FRAGMENT = graphql`
-      fragment GroupAdminUsers_group on Group
-        @argumentDefinitions(countUsers: {type: "Int!"}, cursorUsers: {type: "String"}) 
-        @refetchable(queryName: "GroupAdminUsersGroup")
-        {
+  fragment GroupAdminUsers_group on Group
+    @argumentDefinitions(countUsers: { type: "Int!" }, cursorUsers: { type: "String" })
+    @refetchable(queryName: "GroupAdminUsersGroup") {
+    id
+    title
+    users(first: $countUsers, after: $cursorUsers) @connection(key: "GroupAdminUsers_users") {
+      edges {
+        node {
           id
-          title
-          users(first: $countUsers, after: $cursorUsers) 
-          @connection(key: "GroupAdminUsers_users") {
-            edges {
-              node {
-                id
-                ...GroupAdminUsersListGroupItem_user
-              }
-            }
-          }
+          ...GroupAdminUsersListGroupItem_user
         }
-    `
+      }
+    }
+  }
+`;
 
-
-export const GroupAdminUsers = ({group: groupFragmentRef, pendingInvitationFragmentRef, ...props}: Props) => {
-
+export const GroupAdminUsers = ({
+  group: groupFragmentRef,
+  pendingInvitationFragmentRef,
+  ...props
+}: Props) => {
   const intl = useIntl();
   const [showAddUsersModal, setShowAddUsersModal] = React.useState(false);
   const [showImportUsersModal, setShowImportUsersModal] = React.useState(false);
 
-  const { data: group, hasNext, loadNext, isLoadingNext } = usePaginationFragment(FRAGMENT, groupFragmentRef);
+  const { data: group, hasNext, loadNext, isLoadingNext } = usePaginationFragment(
+    FRAGMENT,
+    groupFragmentRef,
+  );
 
   const getAlertForm = () => {
     const {
@@ -96,13 +99,12 @@ export const GroupAdminUsers = ({group: groupFragmentRef, pendingInvitationFragm
         submitting={submitting}
       />
     );
-  }
+  };
 
   const handleClose = () => {
     setShowAddUsersModal(false);
     setShowImportUsersModal(false);
   };
-
 
   return (
     <div className="box box-primary container-fluid">
@@ -129,11 +131,7 @@ export const GroupAdminUsers = ({group: groupFragmentRef, pendingInvitationFragm
           </Button>
         </ButtonToolbar>
         {getAlertForm()}
-        <GroupAdminModalAddUsers
-          show={showAddUsersModal}
-          onClose={handleClose}
-          group={group}
-        />
+        <GroupAdminModalAddUsers show={showAddUsersModal} onClose={handleClose} group={group} />
         {/* $FlowFixMe please use mapDispatchToProps */}
         <GroupAdminModalImportUsers
           show={showImportUsersModal}
@@ -171,11 +169,13 @@ export const GroupAdminUsers = ({group: groupFragmentRef, pendingInvitationFragm
             )}
           </ListGroupItem>
         )}
-        <GroupAdminPendingInvitationsList pendingInvitationFragmentRef={pendingInvitationFragmentRef} />
+        <GroupAdminPendingInvitationsList
+          pendingInvitationFragmentRef={pendingInvitationFragmentRef}
+        />
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   valid: isValid('group-users-add')(state),

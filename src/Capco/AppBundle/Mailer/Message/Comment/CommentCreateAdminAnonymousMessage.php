@@ -14,7 +14,9 @@ final class CommentCreateAdminAnonymousMessage extends AbstractAdminMessage
     {
         return [
             'username' => self::escape($comment->getAuthorName()),
-            'proposal' => self::escape($comment->getRelatedObject() ? $comment->getRelatedObject()->getTitle() : 'none'),
+            'proposal' => self::escape(
+                $comment->getRelatedObject() ? $comment->getRelatedObject()->getTitle() : 'none'
+            ),
             'date' => $comment->getCreatedAt()->format('d/m/Y'),
             'time' => $comment->getCreatedAt()->format('H:i:s'),
             'comment' => self::escape($comment->getBodyTextExcerpt()),

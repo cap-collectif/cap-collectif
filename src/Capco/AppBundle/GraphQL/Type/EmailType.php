@@ -14,9 +14,9 @@ class EmailType
         return $value;
     }
 
-    public static function parseLiteral(
-        $valueNode // : string | array
-    ) {
+    public static function parseLiteral($valueNode)
+    {
+        // : string | array
         return $valueNode->value;
     }
 }

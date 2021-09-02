@@ -24,8 +24,7 @@ class QueryViewerCanSeeEvaluationsPageResolver implements ResolverInterface
         ProposalAnalystRepository $analystRepo,
         ProposalSupervisorRepository $supervisorRepo,
         ProposalDecisionMakerRepository $decisionMakerRepo
-        )
-    {
+    ) {
         $this->toggleManager = $toggleManager;
         $this->analystRepo = $analystRepo;
         $this->supervisorRepo = $supervisorRepo;

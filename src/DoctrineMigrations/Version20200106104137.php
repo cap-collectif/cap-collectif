@@ -67,7 +67,7 @@ final class Version20200106104137 extends AbstractMigration implements Container
                 'locale' => 'fr-FR',
                 'translatable_id' => $sourceCategory['id'],
                 'title' => $sourceCategory['title'],
-                'slug' => $sourceCategory['slug']
+                'slug' => $sourceCategory['slug'],
             ]);
         }
 

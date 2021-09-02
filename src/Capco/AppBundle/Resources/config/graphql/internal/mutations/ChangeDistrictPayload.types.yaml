@@ -1,6 +1,6 @@
 ChangeDistrictPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      district:
-        type: 'ProposalDistrict!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            district:
+                type: 'ProposalDistrict!'

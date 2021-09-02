@@ -37,7 +37,7 @@ describe('<ProjectPublishAdminForm />', () => {
         url: '/sku',
         publishedAt: '18/08/1998',
         locale: null,
-        archived: false
+        archived: false,
       },
       features,
     };

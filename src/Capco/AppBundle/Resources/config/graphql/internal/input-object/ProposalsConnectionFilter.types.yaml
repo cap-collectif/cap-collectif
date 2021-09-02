@@ -1,7 +1,7 @@
 ProposalsConnectionFilter:
-  type: input-object
-  config:
-    fields:
-      viewerIsEvaluer:
-        type: 'Boolean'
-        defaultValue: false
+    type: input-object
+    config:
+        fields:
+            viewerIsEvaluer:
+                type: 'Boolean'
+                defaultValue: false

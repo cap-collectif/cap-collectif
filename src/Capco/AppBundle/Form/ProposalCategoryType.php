@@ -21,19 +21,15 @@ class ProposalCategoryType extends AbstractType
             ->add('id')
             ->add('name', TextType::class)
             ->add('icon', null, [
-                'constraints' => [
-                    new ValidProposalCategoryIcon()
-                ]
+                'constraints' => [new ValidProposalCategoryIcon()],
             ])
             ->add('color', null, [
-                'constraints' => [
-                    new ValidProposalCategoryColor()
-                ]
+                'constraints' => [new ValidProposalCategoryColor()],
             ])
             ->add('categoryImage', EntityType::class, ['class' => CategoryImage::class])
             ->add('newCategoryImage', EntityType::class, [
                 'class' => Media::class,
-                'mapped' => false
+                'mapped' => false,
             ]);
     }
 
@@ -41,7 +37,7 @@ class ProposalCategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => ProposalCategory::class
+            'data_class' => ProposalCategory::class,
         ]);
     }
 }

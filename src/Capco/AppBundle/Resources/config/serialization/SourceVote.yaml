@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\SourceVote:
-  attributes:
-    getSource:
-      type: object
-      serialized_name: source
-      groups: [ElasticsearchVoteNestedSource]
-    getConsultation:
-      type: object
-      serialized_name: consultation
-      groups: [ElasticsearchVoteNestedConsultation]
+    attributes:
+        getSource:
+            type: object
+            serialized_name: source
+            groups: [ElasticsearchVoteNestedSource]
+        getConsultation:
+            type: object
+            serialized_name: consultation
+            groups: [ElasticsearchVoteNestedConsultation]

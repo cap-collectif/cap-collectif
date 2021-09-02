@@ -61,7 +61,7 @@ class Version20180226163217 extends AbstractMigration implements ContainerAwareI
                 'id' => $uuid,
                 'user_id' => $proposal['author_id'],
                 'proposal_id' => $proposal['id'],
-                'followed_at' => $proposal['created_at']
+                'followed_at' => $proposal['created_at'],
             ]);
         }
     }

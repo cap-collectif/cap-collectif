@@ -191,7 +191,8 @@ const mapStateToProps = (state: State, props: RelayProps) => {
     initialValues: {
       ...props.proposalForm.notificationsConfiguration,
       email:
-        props.proposalForm.notificationsConfiguration.email ?? (props.query.viewer.isAdmin ? null : props.query.viewer.email),
+        props.proposalForm.notificationsConfiguration.email ??
+        (props.query.viewer.isAdmin ? null : props.query.viewer.email),
     },
   };
 };

@@ -8,7 +8,8 @@ use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractTranslationMigration extends AbstractMigration implements ContainerAwareInterface
+abstract class AbstractTranslationMigration extends AbstractMigration implements
+    ContainerAwareInterface
 {
     protected static $entities = [];
     protected static $translations;
@@ -22,7 +23,7 @@ abstract class AbstractTranslationMigration extends AbstractMigration implements
 
     public function preUp(Schema $schema): void
     {
-        self::$entities = $this->connection->fetchAll('SELECT * from '.$this->getEntityTable());
+        self::$entities = $this->connection->fetchAll('SELECT * from ' . $this->getEntityTable());
     }
 
     public function postUp(Schema $schema): void
@@ -31,9 +32,9 @@ abstract class AbstractTranslationMigration extends AbstractMigration implements
         $locale = $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default = TRUE');
         foreach (self::$entities as $entity) {
             $dataToInsert = [
-                'id'                => $generator->generate($this->entityManager, null),
-                'translatable_id'   => $entity['id'],
-                'locale'            => $locale
+                'id' => $generator->generate($this->entityManager, null),
+                'translatable_id' => $entity['id'],
+                'locale' => $locale,
             ];
             foreach ($this->getFieldsToTranslate() as $fieldName) {
                 $dataToInsert[$fieldName] = $entity[$fieldName];
@@ -45,7 +46,9 @@ abstract class AbstractTranslationMigration extends AbstractMigration implements
     public function preDown(Schema $schema): void
     {
         $locale = $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default = TRUE');
-        self::$translations = $this->connection->fetchAll("SELECT * FROM ".$this->getTranslationTable()." WHERE locale = '" . $locale . "'");
+        self::$translations = $this->connection->fetchAll(
+            'SELECT * FROM ' . $this->getTranslationTable() . " WHERE locale = '" . $locale . "'"
+        );
     }
 
     public function postDown(Schema $schema): void
@@ -55,11 +58,9 @@ abstract class AbstractTranslationMigration extends AbstractMigration implements
             foreach ($this->getFieldsToTranslate() as $fieldName) {
                 $fieldsToUpdate[$fieldName] = $translation[$fieldName];
             }
-            $this->connection->update(
-                $this->getEntityTable(),
-                $fieldsToUpdate,
-                ['id' => $translation['translatable_id']]
-            );
+            $this->connection->update($this->getEntityTable(), $fieldsToUpdate, [
+                'id' => $translation['translatable_id'],
+            ]);
         }
     }
 

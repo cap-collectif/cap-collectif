@@ -1,10 +1,8 @@
 DeletePostInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input of deletePost mutation.'
-    fields:
-      id:
-        type: 'ID!'
-        description: 'The id of the post to delete'
-
-
+    type: relay-mutation-input
+    config:
+        description: 'Input of deletePost mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the post to delete'

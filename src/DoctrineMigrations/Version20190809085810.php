@@ -27,7 +27,7 @@ final class Version20190809085810 extends AbstractMigration
                 $sources_count,
                 $trashed_sources_count,
                 $votes_count,
-                $contributors_count
+                $contributors_count,
             ) = [
                 $consultationByStep['opinion_count'],
                 $consultationByStep['trashed_opinion_count'],
@@ -38,7 +38,7 @@ final class Version20190809085810 extends AbstractMigration
                 $consultationByStep['sources_count'],
                 $consultationByStep['trashed_sources_count'],
                 $consultationByStep['votes_count'],
-                $consultationByStep['contributors_count']
+                $consultationByStep['contributors_count'],
             ];
             $this->connection->update(
                 'consultation',
@@ -55,7 +55,7 @@ final class Version20190809085810 extends AbstractMigration
                     'contributors_count'
                 ),
                 [
-                    'step_id' => $consultationByStep['step_id']
+                    'step_id' => $consultationByStep['step_id'],
                 ]
             );
         }

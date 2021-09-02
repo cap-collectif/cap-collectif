@@ -10,14 +10,14 @@ final class ContributionModerationMessage extends AbstractExternalMessage
     public const SUBJECT = 'moderation.notification.subject';
     public const TEMPLATE = '@CapcoMail/notifyModeration.html.twig';
 
-    public  static function getMyTemplateVars(Contribution $contribution, array $params): array {
+    public static function getMyTemplateVars(Contribution $contribution, array $params): array
+    {
         return [
             'contribution' => $contribution,
             'trashUrl' => $params['trashURL'],
-            'username' => $contribution->getAuthor()->getUsername()
+            'username' => $contribution->getAuthor()->getUsername(),
         ];
     }
-
 
     public static function getMySubjectVars(Contribution $contribution, array $params): array
     {

@@ -10,7 +10,8 @@ final class NewOpinionModeratorMessage extends AbstractModeratorMessage
     public const SUBJECT = 'notification-subject-new-proposal';
     public const TEMPLATE = 'notification-content-new-proposal';
 
-    public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array {
+    public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array
+    {
         return [
             '{title}' => self::escape($moderable->getTitle()),
             '{body}' => self::escape(self::cleanHtml($moderable->getBody())),
@@ -22,7 +23,8 @@ final class NewOpinionModeratorMessage extends AbstractModeratorMessage
         ];
     }
 
-    public static function getMySubjectVars(ModerableInterface $moderable, array $params): array {
+    public static function getMySubjectVars(ModerableInterface $moderable, array $params): array
+    {
         return [
             '{proposalTitle}' => self::escape($moderable->getTitle()),
             '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),

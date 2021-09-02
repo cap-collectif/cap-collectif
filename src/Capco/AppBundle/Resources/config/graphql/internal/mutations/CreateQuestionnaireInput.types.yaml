@@ -1,12 +1,12 @@
 CreateQuestionnaireInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input of createQuestionnaire.'
-    fields:
-      title:
-        type: 'String!'
-        description: 'The questionnaire form title'
-      type:
-        type: 'QuestionnaireType!'
-        description: 'The questionnaire type'
-        defaultValue: 'QUESTIONNAIRE'
+    type: relay-mutation-input
+    config:
+        description: 'Input of createQuestionnaire.'
+        fields:
+            title:
+                type: 'String!'
+                description: 'The questionnaire form title'
+            type:
+                type: 'QuestionnaireType!'
+                description: 'The questionnaire type'
+                defaultValue: 'QUESTIONNAIRE'

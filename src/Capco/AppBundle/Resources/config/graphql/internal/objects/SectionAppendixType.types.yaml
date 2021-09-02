@@ -1,16 +1,16 @@
 SectionAppendixType:
-  type: object
-  config:
-    description: 'A section'
-    fields:
-      id:
-        type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixIdResolver", [value])'
-      position:
-        type: 'Int!'
-      title:
-        type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixTitleResolver", [value])'
-      helpText:
-        type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixHelpTextResolver", [value])'
+    type: object
+    config:
+        description: 'A section'
+        fields:
+            id:
+                type: 'String'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixIdResolver", [value])'
+            position:
+                type: 'Int!'
+            title:
+                type: 'String'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixTitleResolver", [value])'
+            helpText:
+                type: 'String'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionAppendixHelpTextResolver", [value])'

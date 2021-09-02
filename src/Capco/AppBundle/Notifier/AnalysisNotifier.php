@@ -101,7 +101,11 @@ class AnalysisNotifier extends BaseNotifier
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
         } else {
-            $url = $this->router->generate('user_evaluations', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->router->generate(
+                'user_evaluations',
+                [],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
         }
 
         if ('' === $url) {

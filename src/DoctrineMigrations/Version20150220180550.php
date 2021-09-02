@@ -21,7 +21,7 @@ class Version20150220180550 extends AbstractMigration
             'login.text.top',
             'login.text.bottom',
             'signin.text.top',
-            'signin.text.bottom'
+            'signin.text.bottom',
         ];
 
         foreach ($parameters as $keyname) {

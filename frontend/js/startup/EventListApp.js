@@ -4,7 +4,9 @@ import Providers from './Providers';
 import type { Props as PropsEventListProfile } from '~/components/Event/Profile/EventListProfile';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const EventListProfile = lazy(() => import(/* webpackChunkName: "EventListProfile" */ '~/components/Event/Profile/EventListProfile'));
+const EventListProfile = lazy(() =>
+  import(/* webpackChunkName: "EventListProfile" */ '~/components/Event/Profile/EventListProfile'),
+);
 
 type Props = {
   userId?: $PropertyType<PropsEventListProfile, 'userId'>,

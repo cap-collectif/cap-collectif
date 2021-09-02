@@ -3,19 +3,17 @@
 import * as React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
-import {createMockEnvironment, MockPayloadGenerator} from "relay-test-utils";
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { GroupAdminUsers } from './GroupAdminUsers';
 import {
   RelaySuspensFragmentTest,
   addsSupportForPortals,
   clearSupportForPortals,
 } from '~/testUtils';
-import type {GroupAdminUsersTestQuery} from "~relay/GroupAdminUsersTestQuery.graphql";
-import {formMock} from "~/mocks";
-
+import type { GroupAdminUsersTestQuery } from '~relay/GroupAdminUsersTestQuery.graphql';
+import { formMock } from '~/mocks';
 
 describe('<GroupAdminUsers />', () => {
-
   let environment;
   let testComponentTree;
   let TestComponent;
@@ -23,7 +21,7 @@ describe('<GroupAdminUsers />', () => {
   const defaultProps = {
     dispatch: jest.fn(),
     ...formMock,
-  }
+  };
 
   const SuccessDeleteUser = {
     valid: false,
@@ -57,7 +55,6 @@ describe('<GroupAdminUsers />', () => {
     submitSucceeded: false,
   };
 
-
   const defaultMockResolvers = {
     Group: () => ({
       id: 'group4',
@@ -68,7 +65,7 @@ describe('<GroupAdminUsers />', () => {
             node: {
               id: 'id1',
             },
-          }
+          },
         ],
         pageInfo: {
           hasPreviousPage: false,
@@ -76,18 +73,25 @@ describe('<GroupAdminUsers />', () => {
           startCursor: '1',
           endCursor: '3',
         },
-      }
-    })
-  }
+      },
+    }),
+  };
 
   const query = graphql`
-    query GroupAdminUsersTestQuery($id: ID = "<default>", $countUsers: Int, $cursorUsers: String, $countInvitations: Int, $cursorInvitations: String) @relay_test_operation {
+    query GroupAdminUsersTestQuery(
+      $id: ID = "<default>"
+      $countUsers: Int
+      $cursorUsers: String
+      $countInvitations: Int
+      $cursorInvitations: String
+    ) @relay_test_operation {
       group: node(id: $id) {
         ...GroupAdminUsers_group @arguments(cursorUsers: $cursorUsers, countUsers: $countUsers)
-        ...GroupAdminPendingInvitationsList_group @arguments(countInvitations: $countInvitations, cursorInvitations: $cursorInvitations)
+        ...GroupAdminPendingInvitationsList_group
+          @arguments(countInvitations: $countInvitations, cursorInvitations: $cursorInvitations)
       }
     }
-  `
+  `;
 
   afterEach(() => {
     clearSupportForPortals();
@@ -99,7 +103,9 @@ describe('<GroupAdminUsers />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<GroupAdminUsersTestQuery>(query, {});
       if (!data.group) return null;
-      return <GroupAdminUsers group={data.group} pendingInvitationFragmentRef={data.group} {...props} />;
+      return (
+        <GroupAdminUsers group={data.group} pendingInvitationFragmentRef={data.group} {...props} />
+      );
     };
     TestComponent = props => (
       <RelaySuspensFragmentTest environment={environment}>
@@ -112,23 +118,30 @@ describe('<GroupAdminUsers />', () => {
   });
 
   it('render correctly group admin user with confirmation notification when deleting a user', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...SuccessDeleteUser} />);
+    testComponentTree = ReactTestRenderer.create(
+      <TestComponent {...defaultProps} {...SuccessDeleteUser} />,
+    );
     expect(testComponentTree).toMatchSnapshot();
   });
 
   it('render correctly group admin user with error notification when deleting a user', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...FailDeleteUser} />);
+    testComponentTree = ReactTestRenderer.create(
+      <TestComponent {...defaultProps} {...FailDeleteUser} />,
+    );
     expect(testComponentTree).toMatchSnapshot();
   });
 
   it('render correctly group admin user with confirmation notification when adding a user', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...SuccessAddUser} />);
+    testComponentTree = ReactTestRenderer.create(
+      <TestComponent {...defaultProps} {...SuccessAddUser} />,
+    );
     expect(testComponentTree).toMatchSnapshot();
   });
 
   it('render correctly group admin user with error notification when adding a user', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent {...defaultProps} {...FailAddUser} />);
+    testComponentTree = ReactTestRenderer.create(
+      <TestComponent {...defaultProps} {...FailAddUser} />,
+    );
     expect(testComponentTree).toMatchSnapshot();
   });
-
 });

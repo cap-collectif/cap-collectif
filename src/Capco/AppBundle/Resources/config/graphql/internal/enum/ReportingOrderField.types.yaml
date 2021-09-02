@@ -1,8 +1,8 @@
 ReportingOrderField:
-  type: enum
-  config:
-    description: 'Properties by which report connections can be ordered'
-    values:
-      CREATED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ReportingOrderField::CREATED_AT")'
-        description: 'Allows ordering a list of reports by when they were created.'
+    type: enum
+    config:
+        description: 'Properties by which report connections can be ordered'
+        values:
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ReportingOrderField::CREATED_AT")'
+                description: 'Allows ordering a list of reports by when they were created.'

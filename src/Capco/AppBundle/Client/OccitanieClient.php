@@ -30,7 +30,8 @@ class OccitanieClient
     public function get(string $uri, string $token): int
     {
         $client = new Client([
-                'headers' => ['Content-Type' => 'application/json',
+            'headers' => [
+                'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $token,
             ],
         ]);
@@ -42,11 +43,10 @@ class OccitanieClient
     public function post(string $uri, array $data): array
     {
         $client = new Client([
-                'headers' => ['Content-Type' => 'application/json'
-            ],
+            'headers' => ['Content-Type' => 'application/json'],
         ]);
         $response = $client->post($uri, [
-            'form_params' => $data
+            'form_params' => $data,
         ]);
 
         return json_decode((string) $response->getBody(), true);
@@ -62,10 +62,10 @@ class OccitanieClient
             'client_secret' => $this->clientSecret,
         ]);
 
-        if(!isset($tokenRequest["access_token"])) {
+        if (!isset($tokenRequest['access_token'])) {
             throw new \RuntimeException('Token not valid.');
         }
 
-        return $this->get(self::COUNTER_URL, $tokenRequest["access_token"]);
+        return $this->get(self::COUNTER_URL, $tokenRequest['access_token']);
     }
 }

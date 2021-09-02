@@ -1,11 +1,11 @@
 DeleteAccountType:
-  type: enum
-  config:
-    description: 'Differents strategies to delete an account'
-    values:
-      SOFT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountType::SOFT")'
-        description: 'Anonymize the user and delete his content only on active steps'
-      HARD:
-        value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountType::HARD")'
-        description: 'Anonymize the user and delete his content'
+    type: enum
+    config:
+        description: 'Differents strategies to delete an account'
+        values:
+            SOFT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountType::SOFT")'
+                description: 'Anonymize the user and delete his content only on active steps'
+            HARD:
+                value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountType::HARD")'
+                description: 'Anonymize the user and delete his content'

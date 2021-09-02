@@ -1,15 +1,15 @@
 ResponseInput:
-  type: input-object
-  config:
-    description: 'A response'
-    fields:
-      value:
-        # Maybe use inputUnion type ? https://github.com/facebook/graphql/pull/395
-        type: 'JSON'
-        description: 'If related to a value question'
-      question:
-        type: 'String!'
-        description: 'The question id'
-      medias:
-        type: '[ID!]'
-        description: 'If related to a media question'
+    type: input-object
+    config:
+        description: 'A response'
+        fields:
+            value:
+                # Maybe use inputUnion type ? https://github.com/facebook/graphql/pull/395
+                type: 'JSON'
+                description: 'If related to a value question'
+            question:
+                type: 'String!'
+                description: 'The question id'
+            medias:
+                type: '[ID!]'
+                description: 'If related to a media question'

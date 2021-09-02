@@ -1,8 +1,7 @@
 // @flow
-import React from 'react'
-import {Image, Text, View, StyleSheet} from "@react-pdf/renderer";
+import React from 'react';
+import { Image, Text, View, StyleSheet } from '@react-pdf/renderer';
 import colors from '~/styles/modules/colors';
-
 
 const styles = StyleSheet.create({
   pageNumber: {
@@ -29,32 +28,28 @@ const styles = StyleSheet.create({
     height: 40,
   },
   footer_logo: {
-    'object-fit': 'cover'
+    'object-fit': 'cover',
   },
   footer_text: {
     fontFamily: 'OpenSans',
     color: colors.gray['800'],
     fontSize: 10,
   },
-})
+});
 
 type Props = {
   logoUrl: string,
-  title: string
-}
+  title: string,
+};
 
-const Footer = ({logoUrl, title}: Props) => {
+const Footer = ({ logoUrl, title }: Props) => {
   return (
     <View fixed style={styles.footer}>
       <Image style={styles.footer_logo} src={logoUrl} />
-      <Text style={styles.footer_text}>
-        {title}
-      </Text>
-      <Text style={styles.footer_text} render={({pageNumber}) => (
-        `${pageNumber}`
-      )} fixed/>
+      <Text style={styles.footer_text}>{title}</Text>
+      <Text style={styles.footer_text} render={({ pageNumber }) => `${pageNumber}`} fixed />
     </View>
-  )
-}
+  );
+};
 
 export default Footer;

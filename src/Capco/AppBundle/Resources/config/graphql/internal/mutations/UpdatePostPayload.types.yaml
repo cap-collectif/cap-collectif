@@ -1,10 +1,10 @@
 UpdatePostPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      post:
-        type: 'InternalPost'
-        description: 'The updated post'
-      errorCode:
-        type: 'UpdatePostErrorCode'
-        description: 'Available errorCode for updatePost mutation'
+    type: relay-mutation-payload
+    config:
+        fields:
+            post:
+                type: 'InternalPost'
+                description: 'The updated post'
+            errorCode:
+                type: 'UpdatePostErrorCode'
+                description: 'Available errorCode for updatePost mutation'

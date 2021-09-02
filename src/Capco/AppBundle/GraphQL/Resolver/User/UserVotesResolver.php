@@ -23,11 +23,13 @@ class UserVotesResolver implements ResolverInterface
      * A small function just for twig.
      * Do not use it.
      */
-    public function getAccountedVotes(
-        $viewer,
-        User $user
-    ) {
-        return $this->__invoke($viewer, $user, new Argument(['first' => 0, 'onlyAccounted' => true]));
+    public function getAccountedVotes($viewer, User $user)
+    {
+        return $this->__invoke(
+            $viewer,
+            $user,
+            new Argument(['first' => 0, 'onlyAccounted' => true])
+        );
     }
 
     public function __invoke(

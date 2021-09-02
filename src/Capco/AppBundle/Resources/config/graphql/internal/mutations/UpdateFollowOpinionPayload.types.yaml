@@ -1,10 +1,10 @@
 UpdateFollowOpinionPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      follower:
-        type: 'Follower'
-      followerEdge:
-        type: 'FollowerEdge'
-      opinion:
-        type: 'OpinionOrVersion'
+    type: relay-mutation-payload
+    config:
+        fields:
+            follower:
+                type: 'Follower'
+            followerEdge:
+                type: 'FollowerEdge'
+            opinion:
+                type: 'OpinionOrVersion'

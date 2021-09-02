@@ -22,7 +22,7 @@ final class PlatformAnalyticsTrafficSourceType implements EnumType
             self::DIRECT,
             self::EXTERNAL_LINK,
             self::SOCIAL_NETWORK,
-            self::EMAIL
+            self::EMAIL,
         ];
     }
 

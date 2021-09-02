@@ -6,7 +6,9 @@
 <?php $varNotifierName = lcfirst($notifierName); ?>
 <?php $varEntityName = lcfirst($command_entity_name); ?>
 
-namespace Capco\AppBundle\Processor<?php if (isset($command_entity_name)): ?>\<?php echo $command_entity_name; ?><?php endif; ?>;
+namespace Capco\AppBundle\Processor<?php if (
+    isset($command_entity_name)
+): ?>\<?php echo $command_entity_name;endif; ?>;
 
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -19,7 +21,9 @@ class <?php echo $command_class_name; ?> implements ProcessorInterface
     private $<?php echo $varRepositoryName; ?>;
     private $<?php echo $varNotifierName; ?>;
 
-    public function __construct(<?php echo $repositoryName . ' $' . $varRepositoryName; ?>, <?php echo $notifierName . ' $' . $varNotifierName; ?>)
+    public function __construct(<?php echo $repositoryName .
+        ' $' .
+        $varRepositoryName; ?>, <?php echo $notifierName . ' $' . $varNotifierName; ?>)
     {
         $this-><?php echo $varRepositoryName; ?> = $<?php echo $varRepositoryName; ?>;
         $this-><?php echo $varNotifierName; ?> = $<?php echo $varNotifierName; ?>;

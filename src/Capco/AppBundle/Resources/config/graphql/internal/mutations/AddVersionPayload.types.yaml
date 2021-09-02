@@ -1,11 +1,11 @@
 AddVersionPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      version:
-        type: 'InternalVersion'
-      versionEdge:
-        type: 'VersionEdge'
-      userErrors:
-        type: '[UserError]'
-        description: 'An unsuccessful mutation will return one or more `UserError` objects.'
+    type: relay-mutation-payload
+    config:
+        fields:
+            version:
+                type: 'InternalVersion'
+            versionEdge:
+                type: 'VersionEdge'
+            userErrors:
+                type: '[UserError]'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

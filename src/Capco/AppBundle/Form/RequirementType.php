@@ -22,7 +22,7 @@ class RequirementType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => Requirement::class
+            'data_class' => Requirement::class,
         ]);
     }
 }

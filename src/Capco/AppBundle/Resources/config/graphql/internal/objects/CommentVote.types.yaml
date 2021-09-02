@@ -1,17 +1,17 @@
 CommentVote:
-  type: object
-  inherits:
-    - InternalVote
-    - PublicPublishable
-  config:
-    interfaces:
-      - Node
-      - InternalVote
-      - PublicPublishable
-    fields:
-      contribution:
-        type: 'Comment!'
-        resolve: '@=value.getComment()'
-      kind:
-        type: 'String!'
-        description: "Returns 'commentVote'."
+    type: object
+    inherits:
+        - InternalVote
+        - PublicPublishable
+    config:
+        interfaces:
+            - Node
+            - InternalVote
+            - PublicPublishable
+        fields:
+            contribution:
+                type: 'Comment!'
+                resolve: '@=value.getComment()'
+            kind:
+                type: 'String!'
+                description: "Returns 'commentVote'."

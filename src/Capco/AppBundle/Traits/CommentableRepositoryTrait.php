@@ -13,9 +13,8 @@ trait CommentableRepositoryTrait
         array $commentableIds,
         ?User $viewer = null
     ): array {
-        $qb = $this->getByCommentableIdsQueryBuilder($type, $commentableIds, true, $viewer)->select(
-            'p.id as commentable_id, count(c.id) AS totalCount'
-        )
+        $qb = $this->getByCommentableIdsQueryBuilder($type, $commentableIds, true, $viewer)
+            ->select('p.id as commentable_id, count(c.id) AS totalCount')
             ->groupBy('p.id');
 
         return $qb
@@ -28,11 +27,10 @@ trait CommentableRepositoryTrait
         string $type,
         array $ids,
         ?User $viewer
-    ): array
-    {
-        $qb = $this->getByCommentableIdsQueryBuilder($type, $ids, false, $viewer)->select(
-            'p.id as commentable_id, count(c.id) AS totalCount'
-        )->groupBy('p.id');
+    ): array {
+        $qb = $this->getByCommentableIdsQueryBuilder($type, $ids, false, $viewer)
+            ->select('p.id as commentable_id, count(c.id) AS totalCount')
+            ->groupBy('p.id');
 
         return $qb
             ->getQuery()
@@ -55,7 +53,7 @@ trait CommentableRepositoryTrait
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('c.publishedAt', $direction);
-            if ($type === ProposalComment::class || $type === Proposal::class){
+            if ($type === ProposalComment::class || $type === Proposal::class) {
                 $qb->addOrderBy('c.createdAt', $direction);
             }
         }

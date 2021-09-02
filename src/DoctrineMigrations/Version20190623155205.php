@@ -33,7 +33,7 @@ final class Version20190623155205 extends AbstractMigration implements Container
                     'id' => $this->generator->generate($this->em, null),
                     'user_id' => $pa['author_id'],
                     'project_id' => $pa['id'],
-                    'created_at' => $pa['created_at']
+                    'created_at' => $pa['created_at'],
                 ]);
             }
         }

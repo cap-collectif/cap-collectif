@@ -18,17 +18,13 @@ class SonataMediaResizerServicePass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if ($container->hasDefinition('sonata.media.resizer.simple')) {
-            $definition = $container->getDefinition(
-                'sonata.media.resizer.simple'
-            );
+            $definition = $container->getDefinition('sonata.media.resizer.simple');
 
             $definition->replaceArgument(0, new Reference('sonata.media.adapter.image.imagick'));
         }
 
         if ($container->hasDefinition('sonata.media.resizer.square')) {
-            $definition = $container->getDefinition(
-                'sonata.media.resizer.square'
-            );
+            $definition = $container->getDefinition('sonata.media.resizer.square');
 
             $definition->replaceArgument(0, new Reference('sonata.media.adapter.image.imagick'));
         }

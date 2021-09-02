@@ -1,10 +1,10 @@
 RemoveArgumentVotePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      deletedVoteId:
-        type: 'ID'
-      contribution:
-        type: 'InternalArgument'
-      viewer:
-        type: 'InternalUser!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedVoteId:
+                type: 'ID'
+            contribution:
+                type: 'InternalArgument'
+            viewer:
+                type: 'InternalUser!'

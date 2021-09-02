@@ -1,14 +1,14 @@
 AddArgumentInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input type of AddArgument'
-    fields:
-      argumentableId:
-        type: 'ID!'
-        description: 'The Argumentable ID to argue.'
-      body:
-        type: 'String!'
-        description: 'The contents of the argument body.'
-      type:
-        type: 'ArgumentValue!'
-        description: 'The type of the argument.'
+    type: relay-mutation-input
+    config:
+        description: 'Input type of AddArgument'
+        fields:
+            argumentableId:
+                type: 'ID!'
+                description: 'The Argumentable ID to argue.'
+            body:
+                type: 'String!'
+                description: 'The contents of the argument body.'
+            type:
+                type: 'ArgumentValue!'
+                description: 'The type of the argument.'

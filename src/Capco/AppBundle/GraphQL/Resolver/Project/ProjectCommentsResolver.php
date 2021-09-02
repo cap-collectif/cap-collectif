@@ -40,7 +40,14 @@ class ProjectCommentsResolver implements ResolverInterface
                 }
 
                 return $this->proposalCommentRepository
-                    ->getByProject($project, $offset, $limit, $onlyTrashed, $orderBy['field'], $orderBy['direction'])
+                    ->getByProject(
+                        $project,
+                        $offset,
+                        $limit,
+                        $onlyTrashed,
+                        $orderBy['field'],
+                        $orderBy['direction']
+                    )
                     ->getIterator()
                     ->getArrayCopy();
             });

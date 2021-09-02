@@ -1,6 +1,6 @@
 UpdateProposalFormPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      proposalForm:
-        type: 'ProposalForm!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposalForm:
+                type: 'ProposalForm!'

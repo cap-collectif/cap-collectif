@@ -32,7 +32,7 @@ class Version20180129102441 extends AbstractMigration
             'is_enabled' => 1,
             'position' => 3,
             'category' => 'pages.homepage',
-            'is_social_network_thumbnail' => 0
+            'is_social_network_thumbnail' => 0,
         ]);
         $this->write('-> Reverted "image.picto" into site_image parameter.');
     }

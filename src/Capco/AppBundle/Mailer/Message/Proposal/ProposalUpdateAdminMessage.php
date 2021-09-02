@@ -16,16 +16,24 @@ final class ProposalUpdateAdminMessage extends AbstractAdminMessage
             'userUrl' => $params['authorURL'],
             'username' => self::escape($proposal->getAuthor()->getDisplayName()),
             'proposal' => self::escape($proposal->getTitle()),
-            'date' => (null === $proposal->getUpdatedAt())
-                ? $proposal->getCreatedAt()->format('d/m/Y')
-                : $proposal->getUpdatedAt()->format('d/m/Y'),
-            'time' => (null === $proposal->getUpdatedAt())
-                ? $proposal->getCreatedAt()->format('H:i:s')
-                : $proposal->getUpdatedAt()->format('H:i:s'),
+            'date' =>
+                null === $proposal->getUpdatedAt()
+                    ? $proposal->getCreatedAt()->format('d/m/Y')
+                    : $proposal->getUpdatedAt()->format('d/m/Y'),
+            'time' =>
+                null === $proposal->getUpdatedAt()
+                    ? $proposal->getCreatedAt()->format('H:i:s')
+                    : $proposal->getUpdatedAt()->format('H:i:s'),
             'proposalExcerpt' => self::escape($proposal->getBodyTextExcerpt()),
             'proposalUrl' => $params['proposalURL'],
             'proposalUrlBack' => $params['adminURL'],
-            'project' => self::escape($proposal->getProposalForm()->getStep()->getProject()->getTitle()),
+            'project' => self::escape(
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
         ];
     }
 
@@ -33,7 +41,13 @@ final class ProposalUpdateAdminMessage extends AbstractAdminMessage
     {
         return [
             'username' => self::escape($proposal->getAuthor()->getDisplayName()),
-            'project' => self::escape($proposal->getProposalForm()->getStep()->getProject()->getTitle()),
+            'project' => self::escape(
+                $proposal
+                    ->getProposalForm()
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
         ];
     }
 }

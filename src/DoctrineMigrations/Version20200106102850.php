@@ -52,7 +52,7 @@ final class Version20200106102850 extends AbstractMigration implements Container
                 'translatable_id' => $video['id'],
                 'title' => $video['title'] ?? 'Sans titre',
                 'slug' => $video['slug'] ?? 'sans-titre',
-                'body' => $video['body'] ?? 'No body'
+                'body' => $video['body'] ?? 'No body',
             ]);
         }
 

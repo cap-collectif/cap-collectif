@@ -47,7 +47,7 @@ class Version20180525135721 extends AbstractMigration
             'type' => $parameterTypes['javascript'],
             'created_at' => $date,
             'updated_at' => $date,
-            'is_enabled' => 0
+            'is_enabled' => 0,
         ]);
         $this->connection->insert('site_parameter', [
             'keyname' => 'ad-scripts-on-all-pages',
@@ -58,15 +58,14 @@ class Version20180525135721 extends AbstractMigration
             'type' => $parameterTypes['javascript'],
             'created_at' => $date,
             'updated_at' => $date,
-            'is_enabled' => 0
-
+            'is_enabled' => 0,
         ]);
     }
 
     public function postDown(Schema $schema): void
     {
         $this->connection->delete('site_image', [
-            'keyname' => 'snalytical-tracking-scripts-on-all-pages'
+            'keyname' => 'snalytical-tracking-scripts-on-all-pages',
         ]);
         $this->connection->delete('site_image', ['keyname' => 'ad-scripts-on-all-pages']);
     }

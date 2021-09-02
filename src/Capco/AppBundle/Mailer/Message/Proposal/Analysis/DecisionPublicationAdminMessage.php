@@ -15,7 +15,7 @@ class DecisionPublicationAdminMessage extends AbstractAdminMessage
     {
         return [
             'decisionMakerName' => $proposal->getDecisionMaker()->getUsername(),
-            'proposalName' => $proposal->getTitle()
+            'proposalName' => $proposal->getTitle(),
         ];
     }
 
@@ -29,8 +29,7 @@ class DecisionPublicationAdminMessage extends AbstractAdminMessage
             'proposal' => $proposal,
             'proposalUrl' => $params['proposalUrl'],
             'decisionMakerUrl' => $params['decisionMakerUrl'],
-            'publicationDate' => $params['publicationDate']
+            'publicationDate' => $params['publicationDate'],
         ];
     }
-
 }

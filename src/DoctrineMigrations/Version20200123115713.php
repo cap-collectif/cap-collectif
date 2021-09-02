@@ -36,7 +36,7 @@ final class Version20200123115713 extends AbstractMigration
                 'project',
                 [
                     'header_type' => ProjectHeaderType::THUMBNAIL,
-                    'cover_filter_opacity_percent' => Project::DEFAULT_COVER_FILTER_OPACITY
+                    'cover_filter_opacity_percent' => Project::DEFAULT_COVER_FILTER_OPACITY,
                 ],
                 ['id' => $project['id']]
             );

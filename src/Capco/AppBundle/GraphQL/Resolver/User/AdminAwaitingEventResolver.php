@@ -18,7 +18,7 @@ class AdminAwaitingEventResolver implements ResolverInterface
 
     public function __invoke(User $viewer): int
     {
-        if(!$viewer->isAdmin()){
+        if (!$viewer->isAdmin()) {
             return 0;
         }
 

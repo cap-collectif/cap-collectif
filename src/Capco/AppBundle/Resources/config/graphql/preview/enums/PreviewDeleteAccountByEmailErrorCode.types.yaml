@@ -1,12 +1,12 @@
 PreviewDeleteAccountByEmailErrorCode:
-  type: enum
-  config:
-    name: DeleteAccountByEmailErrorCode
-    description: 'Available errors on DeleteAccountByEmail mutation.'
-    values:
-      NON_EXISTING_EMAIL:
-        value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountByEmailErrorCode::NON_EXISTING_EMAIL")'
-        description: 'The given email does not correspond to an existing user.'
-      DELETION_DENIED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountByEmailErrorCode::DELETION_DENIED")'
-        description: "You can't delete a user that has role 'ROLE_SUPER_ADMIN'."
+    type: enum
+    config:
+        name: DeleteAccountByEmailErrorCode
+        description: 'Available errors on DeleteAccountByEmail mutation.'
+        values:
+            NON_EXISTING_EMAIL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountByEmailErrorCode::NON_EXISTING_EMAIL")'
+                description: 'The given email does not correspond to an existing user.'
+            DELETION_DENIED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\DeleteAccountByEmailErrorCode::DELETION_DENIED")'
+                description: "You can't delete a user that has role 'ROLE_SUPER_ADMIN'."

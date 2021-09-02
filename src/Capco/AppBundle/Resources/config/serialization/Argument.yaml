@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\Argument:
         createdAt:
             groups: [Opinions, OpinionVersions, ElasticsearchArgument]
         trashed:
-            groups: [ElasticsearchArgument]            
+            groups: [ElasticsearchArgument]
         trashedAt:
             groups: [Opinions, OpinionVersions, ElasticsearchArgument]
         trashedStatus:

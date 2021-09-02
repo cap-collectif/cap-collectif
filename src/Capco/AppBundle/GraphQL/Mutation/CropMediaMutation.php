@@ -37,10 +37,7 @@ class CropMediaMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
-        [$mediaId, $filters] = [
-            $args->offsetGet('mediaId'),
-            $args->offsetGet('filters'),
-        ];
+        [$mediaId, $filters] = [$args->offsetGet('mediaId'), $args->offsetGet('filters')];
 
         /** @var Media $media */
         $media = $this->mediaManager->find($mediaId);
@@ -53,15 +50,9 @@ class CropMediaMutation implements MutationInterface
         $filter = 'cropped_media';
         $runtimeFilters = [
             'crop' => [
-                'size' => [
-                    $filters['size']['width'],
-                    $filters['size']['height']
-                ],
-                'start' => [
-                    $filters['start']['x'],
-                    $filters['start']['y']
-                ]
-            ]
+                'size' => [$filters['size']['width'], $filters['size']['height']],
+                'start' => [$filters['start']['x'], $filters['start']['y']],
+            ],
         ];
 
         $filteredBinary = $this->createFilteredBinary($file->getName(), $filter, $runtimeFilters);
@@ -78,7 +69,7 @@ class CropMediaMutation implements MutationInterface
         $binary = $this->dataManager->find($filter, $path);
 
         return $this->filterManager->applyFilter($binary, $filter, [
-            'filters' => $runtimeFilters
+            'filters' => $runtimeFilters,
         ]);
     }
 }

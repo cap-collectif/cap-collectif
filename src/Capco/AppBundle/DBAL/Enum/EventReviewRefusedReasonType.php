@@ -18,7 +18,7 @@ class EventReviewRefusedReasonType extends AbstractEnumType
         self::SPAM,
         self::SYNTAX_ERROR,
         self::WRONG_CONTENT,
-        self::OFF_TOPIC
+        self::OFF_TOPIC,
     ];
 
     public static $refusedReasonsLabels = [
@@ -27,7 +27,7 @@ class EventReviewRefusedReasonType extends AbstractEnumType
         self::SPAM => 'reporting.status.spam',
         self::SYNTAX_ERROR => 'syntax-error',
         self::WRONG_CONTENT => 'reporting.status.error',
-        self::OFF_TOPIC => 'reporting.status.off_topic'
+        self::OFF_TOPIC => 'reporting.status.off_topic',
     ];
 
     protected $name = 'enum_event_review_refused_reason';
@@ -38,6 +38,6 @@ class EventReviewRefusedReasonType extends AbstractEnumType
         self::SYNTAX_ERROR,
         self::WRONG_CONTENT,
         self::OFF_TOPIC,
-        self::NONE
+        self::NONE,
     ];
 }

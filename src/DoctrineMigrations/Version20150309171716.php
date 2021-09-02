@@ -74,7 +74,7 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
                 'created_at' => $formattedDate,
                 'updated_at' => $formattedDate,
                 'Page_id' => null,
-                'associated_features' => 'blog'
+                'associated_features' => 'blog',
             ]);
         }
     }

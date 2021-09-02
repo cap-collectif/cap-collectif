@@ -42,7 +42,7 @@ class OpinionUrlResolver implements ResolverInterface
                     'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
-                    'opinionSlug' => $contribution->getSlug()
+                    'opinionSlug' => $contribution->getSlug(),
                 ],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );

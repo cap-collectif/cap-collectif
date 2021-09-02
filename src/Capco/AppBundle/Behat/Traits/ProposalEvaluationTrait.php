@@ -13,7 +13,10 @@ trait ProposalEvaluationTrait
     public function iGoToTheEvaluationsPage()
     {
         $this->iVisitedPage('evaluations page');
-        $this->waitAndThrowOnFailure(5000, "document.body.innerHTML.toString().indexOf('Ravalement de la façade de la bibliothèque municipale') > -1");
+        $this->waitAndThrowOnFailure(
+            5000,
+            "document.body.innerHTML.toString().indexOf('Ravalement de la façade de la bibliothèque municipale') > -1"
+        );
     }
 
     /**

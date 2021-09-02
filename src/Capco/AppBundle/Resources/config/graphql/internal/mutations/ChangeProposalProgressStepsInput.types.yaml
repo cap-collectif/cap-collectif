@@ -1,8 +1,8 @@
 ChangeProposalProgressStepsInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      progressSteps:
-        type: '[ProgressStepInput!]!'
-      proposalId:
-        type: 'String!'
+    type: relay-mutation-input
+    config:
+        fields:
+            progressSteps:
+                type: '[ProgressStepInput!]!'
+            proposalId:
+                type: 'String!'

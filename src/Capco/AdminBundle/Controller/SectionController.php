@@ -74,15 +74,19 @@ class SectionController extends PositionableController
      * @return Response|RedirectResponse
      *
      */
-    public function editAction($deprecatedId = null) // NEXT_MAJOR: Remove the unused $id parameter
+    public function editAction($deprecatedId = null)
     {
+        // NEXT_MAJOR: Remove the unused $id parameter
         if (isset(\func_get_args()[0])) {
-            @trigger_error(sprintf(
-                'Support for the "id" route param as argument 1 at `%s()` is deprecated since'
-                .' sonata-project/admin-bundle 3.62 and will be removed in 4.0,'
-                .' use `AdminInterface::getIdParameter()` instead.',
-                __METHOD__
-            ), \E_USER_DEPRECATED);
+            @trigger_error(
+                sprintf(
+                    'Support for the "id" route param as argument 1 at `%s()` is deprecated since' .
+                        ' sonata-project/admin-bundle 3.62 and will be removed in 4.0,' .
+                        ' use `AdminInterface::getIdParameter()` instead.',
+                    __METHOD__
+                ),
+                \E_USER_DEPRECATED
+            );
         }
 
         // the key used to lookup the template
@@ -97,14 +101,19 @@ class SectionController extends PositionableController
         $existingObject = $this->admin->getObject($id);
 
         if (!$existingObject) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id: %s', $id));
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id: %s', $id)
+            );
         }
 
         if ($existingObject->getType() === 'projects') {
-            return $this->renderWithExtraParams('CapcoAdminBundle:Section:edit_projects.html.twig', [
-                'action' => 'edit',
-                'object' => $existingObject,
-            ]);
+            return $this->renderWithExtraParams(
+                'CapcoAdminBundle:Section:edit_projects.html.twig',
+                [
+                    'action' => 'edit',
+                    'object' => $existingObject,
+                ]
+            );
         }
 
         $this->checkParentChildAssociation($request, $existingObject);
@@ -137,14 +146,21 @@ class SectionController extends PositionableController
                     $existingObject = $this->admin->update($submittedObject);
 
                     if ($this->isXmlHttpRequest()) {
-                        return $this->handleXmlHttpRequestSuccessResponse($request, $existingObject);
+                        return $this->handleXmlHttpRequestSuccessResponse(
+                            $request,
+                            $existingObject
+                        );
                     }
 
                     $this->addFlash(
                         'sonata_flash_success',
                         $this->trans(
                             'flash_edit_success',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($existingObject))],
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
                             'SonataAdminBundle'
                         )
                     );
@@ -156,17 +172,32 @@ class SectionController extends PositionableController
 
                     $isFormValid = false;
                 } catch (LockException $e) {
-                    $this->addFlash('sonata_flash_error', $this->trans('flash_lock_error', [
-                        '%name%' => $this->escapeHtml($this->admin->toString($existingObject)),
-                        '%link_start%' => sprintf('<a href="%s">', $this->admin->generateObjectUrl('edit', $existingObject)),
-                        '%link_end%' => '</a>',
-                    ], 'SonataAdminBundle'));
+                    $this->addFlash(
+                        'sonata_flash_error',
+                        $this->trans(
+                            'flash_lock_error',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                                '%link_start%' => sprintf(
+                                    '<a href="%s">',
+                                    $this->admin->generateObjectUrl('edit', $existingObject)
+                                ),
+                                '%link_end%' => '</a>',
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
                 }
             }
 
             // show an error message if the form failed validation
             if (!$isFormValid) {
-                if ($this->isXmlHttpRequest() && null !== ($response = $this->handleXmlHttpRequestErrorResponse($request, $form))) {
+                if (
+                    $this->isXmlHttpRequest() &&
+                    null !== ($response = $this->handleXmlHttpRequestErrorResponse($request, $form))
+                ) {
                     return $response;
                 }
 
@@ -193,12 +224,15 @@ class SectionController extends PositionableController
         $template = $this->admin->getTemplate($templateKey);
         // $template = $this->templateRegistry->getTemplate($templateKey);
 
-        return $this->renderWithExtraParams($template, [
-            'action' => 'edit',
-            'form' => $formView,
-            'object' => $existingObject,
-            'objectId' => $objectId,
-        ], null);
+        return $this->renderWithExtraParams(
+            $template,
+            [
+                'action' => 'edit',
+                'form' => $formView,
+                'object' => $existingObject,
+                'objectId' => $objectId,
+            ],
+            null
+        );
     }
-
 }

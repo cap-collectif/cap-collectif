@@ -34,15 +34,20 @@ class ViewConfiguration
         }
         if ($proposalForm->getProject()) {
             foreach ($proposalForm->getProject()->getSteps() as $projectStep) {
-                if ($projectStep->getStep() instanceof CollectStep || $projectStep->getStep() instanceof SelectionStep) {
+                if (
+                    $projectStep->getStep() instanceof CollectStep ||
+                    $projectStep->getStep() instanceof SelectionStep
+                ) {
                     self::updateOneStepFromItsProposal($proposalForm, $projectStep->getStep());
                 }
             }
         }
     }
 
-    private static function updateOneStepFromItsProposal(ProposalForm $proposalForm, AbstractStep $step): void
-    {
+    private static function updateOneStepFromItsProposal(
+        ProposalForm $proposalForm,
+        AbstractStep $step
+    ): void {
         if (
             (self::GRID === $step->getMainView() && !$proposalForm->isGridViewEnabled()) ||
             (self::LIST === $step->getMainView() && !$proposalForm->isListViewEnabled()) ||

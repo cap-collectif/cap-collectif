@@ -4,7 +4,10 @@ import type {
   Action,
   UserInviteModalState,
 } from '~/components/Admin/UserInvite/Modal/UserInviteModal.reducer';
-import { createReducer, initialState } from '~/components/Admin/UserInvite/Modal/UserInviteModal.reducer';
+import {
+  createReducer,
+  initialState,
+} from '~/components/Admin/UserInvite/Modal/UserInviteModal.reducer';
 
 type ProviderProps = {|
   +children: React.Node | ((state: UserInviteModalState) => React.Node),
@@ -15,7 +18,9 @@ export type Context = {|
   +dispatch: Action => void,
 |};
 
-export const UserInviteModalContext: React.Context<?Context> = React.createContext<?Context>(undefined);
+export const UserInviteModalContext: React.Context<?Context> = React.createContext<?Context>(
+  undefined,
+);
 
 export const useUserInviteModalContext = (): Context => {
   const context = React.useContext(UserInviteModalContext);
@@ -28,7 +33,10 @@ export const useUserInviteModalContext = (): Context => {
 };
 
 export const UserInviteModalProvider = ({ children }: ProviderProps): React.Node => {
-  const [state, dispatch] = React.useReducer<UserInviteModalState, Action>(createReducer, initialState);
+  const [state, dispatch] = React.useReducer<UserInviteModalState, Action>(
+    createReducer,
+    initialState,
+  );
 
   const context = React.useMemo<Context>(
     () => ({

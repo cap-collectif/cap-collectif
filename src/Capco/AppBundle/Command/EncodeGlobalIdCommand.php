@@ -35,7 +35,7 @@ class EncodeGlobalIdCommand extends Command
             'Reply',
             'Comment',
             'QuestionChoice',
-            'Source'
+            'Source',
         ];
         $type = $input->getArgument('type');
         if (!\in_array($type, $availableTypes)) {

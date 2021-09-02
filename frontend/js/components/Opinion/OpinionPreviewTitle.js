@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Card from '../Ui/Card/Card';
 import OpinionTypeLabel from './OpinionTypeLabel';
 import type { OpinionPreviewTitle_opinion } from '~relay/OpinionPreviewTitle_opinion.graphql';
-import {translateContent} from "~/utils/ContentTranslator";
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   opinion: OpinionPreviewTitle_opinion,

@@ -15,13 +15,10 @@ class NewsletterSubscriptionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('email',
-                EmailType::class, [
-                'required' => true,
-                'label' => 'homepage.newsletter.form.email',
-            ])
-        ;
+        $builder->add('email', EmailType::class, [
+            'required' => true,
+            'label' => 'homepage.newsletter.form.email',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

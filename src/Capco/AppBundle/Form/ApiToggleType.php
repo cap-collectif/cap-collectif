@@ -11,9 +11,7 @@ class ApiToggleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('enabled', CheckboxType::class, ['required' => true])
-        ;
+        $builder->add('enabled', CheckboxType::class, ['required' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

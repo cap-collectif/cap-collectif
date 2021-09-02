@@ -15,7 +15,7 @@ const mutation = graphql`
 const commit = (): Promise<Response> =>
   commitMutation(environnement, {
     mutation,
-    variables: null
+    variables: null,
   });
 
 export default { commit };

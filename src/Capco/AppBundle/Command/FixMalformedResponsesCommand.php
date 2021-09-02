@@ -26,9 +26,7 @@ class FixMalformedResponsesCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription(
-            'Fix malformed questionnaire responses.'
-        );
+        $this->setDescription('Fix malformed questionnaire responses.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

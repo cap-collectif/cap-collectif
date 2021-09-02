@@ -16,7 +16,9 @@ class GeometryHelper
             return $geometry->pointInPolygon($point);
         }
 
-        throw new \Exception(__CLASS__." : geometry type not handled : ".$geometry->getGeomType());
+        throw new \Exception(
+            __CLASS__ . ' : geometry type not handled : ' . $geometry->getGeomType()
+        );
     }
 
     public static function pointInMultiPolygon(\MultiPolygon $multiPolygon, \Point $point): bool
@@ -28,6 +30,5 @@ class GeometryHelper
         }
 
         return false;
-
     }
 }

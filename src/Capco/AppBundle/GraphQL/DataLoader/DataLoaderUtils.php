@@ -14,12 +14,12 @@ class DataLoaderUtils
     public static function getAfterOffset(array &$results, array $key): void
     {
         $offsetCurrent = $key['args']['after'] ?? null;
-        if ($offsetCurrent !== null){
+        if ($offsetCurrent !== null) {
             $i = 0;
             $offsetCurrent = GlobalIdResolver::getDecodedId($offsetCurrent)['id'];
-            foreach ($results as $result){
+            foreach ($results as $result) {
                 $i++;
-                if ($result->getId() === $offsetCurrent){
+                if ($result->getId() === $offsetCurrent) {
                     break;
                 }
             }
@@ -36,19 +36,22 @@ class DataLoaderUtils
     {
         $offsetCurrent = $key['args']['before'] ?? null;
         $limit = $key['args']['first'] ?? null;
-        if (null !== $offsetCurrent){
+        if (null !== $offsetCurrent) {
             $i = 0;
             $offsetCurrent = GlobalIdResolver::getDecodedId($offsetCurrent)['id'];
-            foreach ($results as $result){
-                if ($result->getId() === $offsetCurrent){
+            foreach ($results as $result) {
+                if ($result->getId() === $offsetCurrent) {
                     break;
                 }
                 $i++;
             }
-            if (null === $limit){
+            if (null === $limit) {
                 $limit = 100;
             }
-            $results = ($i - $limit > 0) ? array_slice($results, $i - $limit, $i) : array_slice($results, 0, $i);
+            $results =
+                $i - $limit > 0
+                    ? array_slice($results, $i - $limit, $i)
+                    : array_slice($results, 0, $i);
         }
     }
 }

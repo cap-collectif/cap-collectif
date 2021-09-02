@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\SiteParameterRepository;
@@ -17,9 +16,9 @@ class QueryNotificationsFromEmailResolver implements ResolverInterface
 
     public function __invoke(): ?string
     {
-        $siteParameter = $this->repository->findOneBy(
-            ['keyname' => 'admin.mail.notifications.send_address']
-        );
+        $siteParameter = $this->repository->findOneBy([
+            'keyname' => 'admin.mail.notifications.send_address',
+        ]);
 
         return $siteParameter ? $siteParameter->getValue() : null;
     }

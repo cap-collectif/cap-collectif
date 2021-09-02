@@ -50,7 +50,7 @@ class Version20150831162737 extends AbstractMigration
                 'is_enabled' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
-            ]
+            ],
         ];
 
         foreach ($colors as $values) {
@@ -64,7 +64,7 @@ class Version20150831162737 extends AbstractMigration
             'color.btn.ghost.bg',
             'color.btn.ghost.text',
             'color.home.bg',
-            'color.home.title'
+            'color.home.title',
         ];
 
         foreach ($colors as $key) {

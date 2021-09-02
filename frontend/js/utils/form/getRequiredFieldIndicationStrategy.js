@@ -1,5 +1,5 @@
 // @flow
-import type { Questions } from "~/components/Form/Form.type";
+import type { Questions } from '~/components/Form/Form.type';
 
 const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);

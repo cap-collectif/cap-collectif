@@ -9,8 +9,7 @@ class ProposalCategoryRepository extends EntityRepository
     public function hydrateFromIdsOrdered(array $ids): array
     {
         $qb = $this->createQueryBuilder('pc');
-        $qb
-            ->addOrderBy("FIELD(pc.id, :ids)")
+        $qb->addOrderBy('FIELD(pc.id, :ids)')
             ->where('pc.id IN (:ids)')
             ->setParameter('ids', $ids);
 

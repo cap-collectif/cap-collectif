@@ -45,7 +45,7 @@ final class Version20190911125714 extends AbstractMigration implements Container
                     'information-for-the-contact-form-2',
                     [],
                     'SonataUserBundle'
-                )
+                ),
             ],
             [ParameterType::STRING, ParameterType::STRING]
         );

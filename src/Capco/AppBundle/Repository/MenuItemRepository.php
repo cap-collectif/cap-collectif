@@ -73,8 +73,7 @@ class MenuItemRepository extends EntityRepository
 
     private function whereIsEnabled(QueryBuilder $qb)
     {
-        $qb
-            ->leftJoin('i.Page', 'page')
+        $qb->leftJoin('i.Page', 'page')
             ->andWhere(
                 'i.isEnabled = :isEnabled AND (page.id IS NULL OR (page.id IS NOT NULL AND page.isEnabled = :isEnabled))'
             )

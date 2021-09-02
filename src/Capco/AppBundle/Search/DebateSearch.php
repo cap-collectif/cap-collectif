@@ -103,7 +103,7 @@ class DebateSearch extends Search
         $hydratedResults = $this->getHydratedResultsFromRepositories(
             [
                 DebateArgument::getElasticsearchTypeName() => $this->debateArgumentRepository,
-                DebateAnonymousArgument::getElasticsearchTypeName() => $this->debateAnonymousArgumentRepository
+                DebateAnonymousArgument::getElasticsearchTypeName() => $this->debateAnonymousArgumentRepository,
             ],
             $response
         );

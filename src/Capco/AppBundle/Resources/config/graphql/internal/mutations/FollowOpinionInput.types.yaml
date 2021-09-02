@@ -1,10 +1,10 @@
 FollowOpinionInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      opinionId:
-        type: 'ID!'
-        description: 'The opinion id'
-      notifiedOf:
-        type: 'SubscriptionTypeValue!'
-        description: 'The type of notification'
+    type: relay-mutation-input
+    config:
+        fields:
+            opinionId:
+                type: 'ID!'
+                description: 'The opinion id'
+            notifiedOf:
+                type: 'SubscriptionTypeValue!'
+                description: 'The type of notification'

@@ -34,7 +34,7 @@ class CollectStepViewerProposalDraftResolver implements ResolverInterface
     {
         $viewer = $this->preventNullableViewer($viewer);
         $proposalForm = $this->proposalFormRepository->findOneBy([
-            'step' => $step->getId()
+            'step' => $step->getId(),
         ]);
 
         if (!$proposalForm) {
@@ -45,7 +45,7 @@ class CollectStepViewerProposalDraftResolver implements ResolverInterface
             'draft' => true,
             'deletedAt' => null,
             'author' => $viewer,
-            'proposalForm' => $proposalForm
+            'proposalForm' => $proposalForm,
         ]);
 
         $connection = $this->builder->connectionFromArray($proposals, $args);

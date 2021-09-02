@@ -26,9 +26,7 @@ class SimpleSAMLServicePass implements CompilerPassInterface
          * If SAML is not enabled which is the case 99% of time,
          * we disable all SAML services.
          */
-        if (
-            !EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')
-        ) {
+        if (!EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {
             $container->removeDefinition(Simple::class);
             $container->removeDefinition(SamlAuthenticator::class);
             $container->removeDefinition(SamlUserProvider::class);
@@ -46,9 +44,7 @@ class SimpleSAMLServicePass implements CompilerPassInterface
             );
             $definitionSimplePreAuthenticator->setArgument('$samlAuthenticator', null);
 
-            $definitionLogoutSuccessHandler = $container->getDefinition(
-                SAMLLogoutHandler::class
-            );
+            $definitionLogoutSuccessHandler = $container->getDefinition(SAMLLogoutHandler::class);
             $definitionLogoutSuccessHandler->setArgument('$samlClient', null);
         }
     }

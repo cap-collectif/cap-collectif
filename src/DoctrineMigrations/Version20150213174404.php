@@ -62,7 +62,7 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
                 'parent_id' => null,
                 'menu_id' => $headerId,
                 'created_at' => $date,
-                'updated_at' => $date
+                'updated_at' => $date,
             ]);
         }
 

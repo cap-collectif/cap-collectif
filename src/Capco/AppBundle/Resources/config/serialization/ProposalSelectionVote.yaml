@@ -1,19 +1,24 @@
 Capco\AppBundle\Entity\ProposalSelectionVote:
-  attributes:
-    selectionStep:
-      groups: [ProposalSelectionVotes]
-      serialized_name: selectionStep
-    getProposal:
-      type: object
-      groups: [ProposalSelectionVotes, ElasticsearchNestedProposal, ElasticsearchVoteNestedProposal]
-      serialized_name: proposal
-    user:
-      groups: [ProposalSelectionVotes]
-    username:
-      groups: [ProposalSelectionVotes]
-    private:
-      groups: [ProposalSelectionVotes, ElasticsearchVote]
-    publishedAt:
-      groups: [ProposalSelectionVotes, ElasticsearchVote]
-    createdAt:
-      groups: [ProposalSelectionVotes, ElasticsearchVote]
+    attributes:
+        selectionStep:
+            groups: [ProposalSelectionVotes]
+            serialized_name: selectionStep
+        getProposal:
+            type: object
+            groups:
+                [
+                    ProposalSelectionVotes,
+                    ElasticsearchNestedProposal,
+                    ElasticsearchVoteNestedProposal,
+                ]
+            serialized_name: proposal
+        user:
+            groups: [ProposalSelectionVotes]
+        username:
+            groups: [ProposalSelectionVotes]
+        private:
+            groups: [ProposalSelectionVotes, ElasticsearchVote]
+        publishedAt:
+            groups: [ProposalSelectionVotes, ElasticsearchVote]
+        createdAt:
+            groups: [ProposalSelectionVotes, ElasticsearchVote]

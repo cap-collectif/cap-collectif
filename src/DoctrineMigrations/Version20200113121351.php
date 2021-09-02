@@ -26,7 +26,7 @@ final class Version20200113121351 extends AbstractTranslationMigration
 
     public function getDescription(): string
     {
-        return "translate districts";
+        return 'translate districts';
     }
 
     public function up(Schema $schema): void

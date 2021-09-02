@@ -9,7 +9,7 @@ class LogicJumpConditionOperator
 
     protected static $operatorName = [
         self::IS => 'logic-jump.is',
-        self::IS_NOT => 'logic-jump.is_not'
+        self::IS_NOT => 'logic-jump.is_not',
     ];
 
     public static function getOperatorValue(string $operatorShortName): string

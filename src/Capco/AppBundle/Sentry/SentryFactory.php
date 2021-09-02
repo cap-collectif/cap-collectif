@@ -33,7 +33,7 @@ class SentryFactory
             'enable_compression' => true,
             'error_types' => E_ALL & ~E_NOTICE & ~E_DEPRECATED,
             'excluded_exceptions' => [
-                AccessDeniedException::class, 
+                AccessDeniedException::class,
                 NotFoundHttpException::class,
                 AccessDeniedHttpException::class,
                 BadRequestHttpException::class,
@@ -44,8 +44,8 @@ class SentryFactory
                 'php_sapi_name' => \PHP_SAPI,
                 'php_version' => \PHP_VERSION,
                 'framework' => 'symfony',
-                'symfony_version' => Kernel::VERSION
-            ]
+                'symfony_version' => Kernel::VERSION,
+            ],
         ]);
 
         // Enable Sentry RequestIntegration

@@ -38,7 +38,7 @@ class ElasticsearchLogger implements LoggerInterface
             'queryString' => $query,
             'itemCount' => $itemCount,
             'response' => $response,
-            'backtrace' => $e->getTraceAsString()
+            'backtrace' => $e->getTraceAsString(),
         ];
 
         if (null !== $this->logger) {

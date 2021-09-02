@@ -31,11 +31,14 @@ trait NotificationsStepTrait
      */
     public function userWithUnsubscribeTokenShouldHaveDisabledNotifications($token)
     {
-        $userNotifications = $this->getRepository('CapcoAppBundle:UserNotificationsConfiguration')
-            ->findOneBy(['unsubscribeToken' => $token]);
+        $userNotifications = $this->getRepository(
+            'CapcoAppBundle:UserNotificationsConfiguration'
+        )->findOneBy(['unsubscribeToken' => $token]);
         foreach ($userNotifications->getNotificationsValues() as $key => $notificationsValue) {
             if (true === $notificationsValue) {
-                throw new \Exception("User has at least one notifications enabled : $key -> $notificationsValue");
+                throw new \Exception(
+                    "User has at least one notifications enabled : $key -> $notificationsValue"
+                );
             }
         }
 

@@ -17,7 +17,7 @@ class Version20151202105028 extends AbstractMigration
             'members.pagination.size',
             'members.jumbotron.body',
             'members.jumbotron.title',
-            'members.content.body'
+            'members.content.body',
         ];
 
         foreach ($params as $param) {

@@ -1,7 +1,7 @@
 NewsConnection:
-  type: relay-connection
-  config:
-    nodeType: InternalPost!
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        nodeType: InternalPost!
+        connectionFields:
+            totalCount:
+                type: Int!

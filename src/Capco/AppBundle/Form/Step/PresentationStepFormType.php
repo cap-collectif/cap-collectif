@@ -11,7 +11,7 @@ class PresentationStepFormType extends AbstractStepFormType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => PresentationStep::class
+            'data_class' => PresentationStep::class,
         ]);
     }
 }

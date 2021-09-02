@@ -17,7 +17,7 @@ class FontProcessor
         'eot' => 'eot',
         'woff' => 'woff',
         'woff2' => 'woff2',
-        'otf' => 'truetype'
+        'otf' => 'truetype',
     ];
     private $logger;
 
@@ -76,7 +76,7 @@ class FontProcessor
                 'format' => $extension,
                 'style' => null,
                 'fullname' => null,
-                'weight' => null
+                'weight' => null,
             ];
         }
         $font->parse();
@@ -107,7 +107,7 @@ class FontProcessor
                 'format' => self::CSS_FORMAT_MAPPING[$extension] ?? 'truetype',
                 'style' => $style,
                 'fullname' => $fullname,
-                'weight' => (int) $font->getFontWeight()
+                'weight' => (int) $font->getFontWeight(),
             ];
         }
     }

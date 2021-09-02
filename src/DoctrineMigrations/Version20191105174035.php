@@ -57,7 +57,7 @@ final class Version20191105174035 extends AbstractMigration implements Container
                 'title' => $page['title'],
                 'slug' => $page['slug'],
                 'body' => $page['body'],
-                'meta_description' => $page['meta_description']
+                'meta_description' => $page['meta_description'],
             ]);
         }
 

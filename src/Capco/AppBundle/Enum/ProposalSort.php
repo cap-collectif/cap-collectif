@@ -28,7 +28,7 @@ final class ProposalSort implements EnumType
             self::COMMENTS,
             self::RANDOM,
             self::CHEAP,
-            self::EXPENSIVE
+            self::EXPENSIVE,
         ];
     }
 

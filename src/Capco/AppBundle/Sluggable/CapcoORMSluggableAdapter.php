@@ -35,8 +35,7 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
             $qb->setParameter('slug', $slug . '%');
         }
 
-        $qb
-            ->select('rec.' . $config['slug'])
+        $qb->select('rec.' . $config['slug'])
             ->from($config['useObjectClass'], 'rec')
             ->where($whereClause);
 
@@ -98,8 +97,7 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
     {
         $em = $this->getObjectManager();
         $qb = $em->createQueryBuilder();
-        $qb
-            ->update($config['useObjectClass'], 'rec')
+        $qb->update($config['useObjectClass'], 'rec')
             ->set(
                 'rec.' . $config['slug'],
                 $qb
@@ -125,8 +123,7 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
     {
         $em = $this->getObjectManager();
         $qb = $em->createQueryBuilder();
-        $qb
-            ->update($config['useObjectClass'], 'rec')
+        $qb->update($config['useObjectClass'], 'rec')
             ->set(
                 'rec.' . $config['slug'],
                 $qb

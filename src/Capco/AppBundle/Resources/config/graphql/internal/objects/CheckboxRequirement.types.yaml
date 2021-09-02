@@ -1,10 +1,10 @@
 CheckboxRequirement:
-  type: object
-  inherits: [Node, Requirement]
-  config:
-    interfaces: [Node, Requirement]
-    description: 'Requires the viewer to check a box'
-    fields:
-      label:
-        type: 'String!'
-        description: 'The condition set by the requirement.'
+    type: object
+    inherits: [Node, Requirement]
+    config:
+        interfaces: [Node, Requirement]
+        description: 'Requires the viewer to check a box'
+        fields:
+            label:
+                type: 'String!'
+                description: 'The condition set by the requirement.'

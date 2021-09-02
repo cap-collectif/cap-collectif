@@ -18,10 +18,11 @@ use Capco\AppBundle\Entity\Debate\DebateVote;
  */
 class DebateArgumentVoteRepository extends EntityRepository
 {
-    public function getOneByDebateArgumentAndUser(DebateArgument $debateArgument, User $user): ?DebateArgumentVote
-    {
-        return $this
-            ->getByDebateArgumentQueryBuilder($debateArgument, false)
+    public function getOneByDebateArgumentAndUser(
+        DebateArgument $debateArgument,
+        User $user
+    ): ?DebateArgumentVote {
+        return $this->getByDebateArgumentQueryBuilder($debateArgument, false)
             ->andWhere('v.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
@@ -35,7 +36,7 @@ class DebateArgumentVoteRepository extends EntityRepository
         array $orderBy
     ): Paginator {
         $qb = $this->getByDebateArgumentQueryBuilder($debateArgument)
-            ->addOrderBy('v.'.$orderBy['field'], $orderBy['direction'])
+            ->addOrderBy('v.' . $orderBy['field'], $orderBy['direction'])
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 

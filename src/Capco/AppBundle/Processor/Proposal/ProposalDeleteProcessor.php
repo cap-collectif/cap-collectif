@@ -43,12 +43,14 @@ class ProposalDeleteProcessor implements ProcessorInterface
         }
 
         $proposal = $this->proposalRepository->find($json['proposalId']);
-        $supervisor = (isset($json['supervisorId']) && $json['supervisorId'])
-            ? $this->userRepository->find($json['supervisorId'])
-            : null;
-        $decisionMaker = (isset($json['decisionMakerId']) && $json['decisionMakerId'])
-            ? $this->userRepository->find($json['decisionMakerId'])
-            : null;
+        $supervisor =
+            isset($json['supervisorId']) && $json['supervisorId']
+                ? $this->userRepository->find($json['supervisorId'])
+                : null;
+        $decisionMaker =
+            isset($json['decisionMakerId']) && $json['decisionMakerId']
+                ? $this->userRepository->find($json['decisionMakerId'])
+                : null;
 
         if (!$filters->isEnabled('softdeleted')) {
             $filters->enable('softdeleted');

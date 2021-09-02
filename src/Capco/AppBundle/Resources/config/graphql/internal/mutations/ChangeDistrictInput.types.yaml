@@ -1,13 +1,13 @@
 ChangeDistrictInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      districtId:
-        type: 'ID!'
-        description: 'The district id'
-      geojson:
-        type: 'GeoJSON'
-      displayedOnMap:
-        type: 'Boolean'
-      name:
-        type: 'String'
+    type: relay-mutation-input
+    config:
+        fields:
+            districtId:
+                type: 'ID!'
+                description: 'The district id'
+            geojson:
+                type: 'GeoJSON'
+            displayedOnMap:
+                type: 'Boolean'
+            name:
+                type: 'String'

@@ -1,7 +1,7 @@
 ContactProposalAuthorPayload:
     type: relay-mutation-payload
     config:
-      fields:
-        error:
-          type: 'String'
-          description: 'the error message, if any'
+        fields:
+            error:
+                type: 'String'
+                description: 'the error message, if any'

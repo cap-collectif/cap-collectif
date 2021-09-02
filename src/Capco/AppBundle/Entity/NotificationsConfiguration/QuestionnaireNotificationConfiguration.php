@@ -24,7 +24,6 @@ class QuestionnaireNotificationConfiguration extends AbstractNotificationConfigu
      */
     private bool $onQuestionnaireReplyDelete = false;
 
-
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="notificationsConfiguration")
      */

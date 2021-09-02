@@ -10,7 +10,6 @@ trait AnonymousVoteRepositoryTrait
             ->select('count(DISTINCT v.email)')
             ->where('v.user IS NULL');
 
-        return $qb->getQuery()
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

@@ -27,6 +27,4 @@ class AnalyticsContributorContribution
     {
         return $this->totalCount;
     }
-
-
 }

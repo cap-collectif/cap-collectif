@@ -53,7 +53,7 @@ class ViewerAwaitingOrRefusedEventResolver implements ResolverInterface
 
         $totalCount = $this->eventRepository->countByUserAndReviewStatus($viewer, $user, [
             EventReviewStatusType::AWAITING,
-            EventReviewStatusType::REFUSED
+            EventReviewStatusType::REFUSED,
         ]);
 
         return $paginator->auto($args, $totalCount);

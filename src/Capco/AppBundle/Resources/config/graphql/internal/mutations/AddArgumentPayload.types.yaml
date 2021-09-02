@@ -1,13 +1,13 @@
 AddArgumentPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      argument:
-        type: 'InternalArgument'
-        description: 'The newly created argument.'
-      argumentEdge:
-        type: 'ArgumentEdge'
-        description: "The edge from the argumentable's arguments connection."
-      userErrors:
-        type: '[UserError!]!'
-        description: 'An unsuccessful mutation will return one or more `UserError` objects.'
+    type: relay-mutation-payload
+    config:
+        fields:
+            argument:
+                type: 'InternalArgument'
+                description: 'The newly created argument.'
+            argumentEdge:
+                type: 'ArgumentEdge'
+                description: "The edge from the argumentable's arguments connection."
+            userErrors:
+                type: '[UserError!]!'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

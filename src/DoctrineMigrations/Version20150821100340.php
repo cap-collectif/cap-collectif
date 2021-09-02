@@ -15,15 +15,11 @@ class Version20150821100340 extends AbstractMigration
         $keys = [
             'admin.mail.notifications.receive_address',
             'admin.mail.notifications.send_name',
-            'admin.mail.notifications.send_address'
+            'admin.mail.notifications.send_address',
         ];
 
         foreach ($keys as $key) {
-            $this->connection->update(
-                'site_parameter',
-                ['is_enabled' => 1],
-                ['keyname' => $key]
-            );
+            $this->connection->update('site_parameter', ['is_enabled' => 1], ['keyname' => $key]);
         }
     }
 

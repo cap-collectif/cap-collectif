@@ -24,5 +24,4 @@ class AnalyticsUsedProposalCategory
     {
         return $this->category;
     }
-
 }

@@ -21,7 +21,7 @@ class Version20171011142014 extends AbstractMigration
                     'entity' => 'proposalForm',
                     'on_create' => 0,
                     'on_update' => 0,
-                    'on_delete' => 0
+                    'on_delete' => 0,
                 ]);
                 $id = $this->connection->lastInsertId();
                 $this->connection->update(

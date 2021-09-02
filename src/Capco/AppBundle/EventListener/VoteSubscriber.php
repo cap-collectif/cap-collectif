@@ -44,7 +44,7 @@ class VoteSubscriber implements EventSubscriberInterface
             $opinion->decreaseVotesCount($event->getPrevious());
         }
     }
-    
+
     public function onAbstractVoteChanged(AbstractVoteChangedEvent $event)
     {
         $vote = $event->getVote();

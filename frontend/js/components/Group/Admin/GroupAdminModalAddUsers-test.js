@@ -21,7 +21,6 @@ describe('<GroupAdminModalAddUsers />', () => {
     intl: intlMock,
   };
 
-
   it('render correctly', () => {
     const wrapper = shallow(<GroupAdminModalAddUsers {...props} />);
     expect(wrapper).toMatchSnapshot();

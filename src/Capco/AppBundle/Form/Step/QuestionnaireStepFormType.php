@@ -15,7 +15,7 @@ class QuestionnaireStepFormType extends AbstractStepFormType
         parent::buildForm($builder, $options);
         $builder
             ->add('questionnaire', RelayNodeType::class, [
-                'class' => Questionnaire::class
+                'class' => Questionnaire::class,
             ])
             ->add('footer');
     }
@@ -24,7 +24,7 @@ class QuestionnaireStepFormType extends AbstractStepFormType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => QuestionnaireStep::class
+            'data_class' => QuestionnaireStep::class,
         ]);
     }
 }

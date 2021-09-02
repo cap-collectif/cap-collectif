@@ -47,7 +47,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     {
         parent::__clone();
         $this->questionnaire = clone $this->questionnaire;
-        $this->questionnaire->setTitle('Copie de '.$this->questionnaire->getTitle());
+        $this->questionnaire->setTitle('Copie de ' . $this->questionnaire->getTitle());
         $this->questionnaire->setStep($this);
     }
 

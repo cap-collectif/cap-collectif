@@ -16,7 +16,7 @@ class ContactFormType extends AbstractType
     {
         $builder
             ->add('translations', TranslationCollectionType::class, [
-                'fields' => ['id', 'title', 'body', 'confidentiality', 'locale']
+                'fields' => ['id', 'title', 'body', 'confidentiality', 'locale'],
             ])
             ->add('interlocutor', TextType::class, [
                 'label' => 'contact.form.interlocutor',

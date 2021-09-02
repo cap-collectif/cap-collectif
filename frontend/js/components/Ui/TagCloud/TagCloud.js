@@ -93,7 +93,11 @@ export const TagCloud = React.forwardRef<Props, HTMLElement>((props: Props, ref)
   const { tags } = props;
   const intl = useIntl();
   const [isHover, setIsHover] = useState(false);
-  return <Container isHover={isHover} ref={ref}>{renderTags(props, tags, intl, setIsHover)}</Container>;
+  return (
+    <Container isHover={isHover} ref={ref}>
+      {renderTags(props, tags, intl, setIsHover)}
+    </Container>
+  );
 });
 
 export default TagCloud;

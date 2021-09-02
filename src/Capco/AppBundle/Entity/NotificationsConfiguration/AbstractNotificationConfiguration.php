@@ -39,5 +39,4 @@ abstract class AbstractNotificationConfiguration
 
         return $this;
     }
-
 }

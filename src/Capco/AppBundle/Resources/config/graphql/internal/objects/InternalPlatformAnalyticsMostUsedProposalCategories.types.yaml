@@ -5,8 +5,8 @@ InternalPlatformAnalyticsMostUsedProposalCategories:
         description: Represent the most used proposal categories for a platform
         fields:
             totalCount:
-                type: "Int!"
-                description: "The total count of the most used proposal categories."
+                type: 'Int!'
+                description: 'The total count of the most used proposal categories.'
             values:
-                type: "[InternalPlatformAnalyticsMostUsedProposalCategory!]!"
-                description: "The most used proposal categories with their total count."
+                type: '[InternalPlatformAnalyticsMostUsedProposalCategory!]!'
+                description: 'The most used proposal categories with their total count.'

@@ -39,7 +39,7 @@ class UpdateProjectDistrictMutation implements MutationInterface
 
         if (!$projectDistrict) {
             $error = [
-                'message' => sprintf('Unknown project district with id: %s', $projectDistrictId)
+                'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
             ];
             $this->logger->error(
                 sprintf('Unknown project district with id: %s', $projectDistrictId)

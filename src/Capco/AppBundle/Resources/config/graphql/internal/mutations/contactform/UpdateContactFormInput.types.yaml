@@ -1,14 +1,14 @@
 UpdateContactFormInput:
-  type: relay-mutation-input
-  config:
-    description: 'Update contact form.'
-    name: UpdateContactFormInput
-    fields:
-      id:
-        type: 'ID!'
-        description: 'ID of the contact form to update.'
-      email:
-        type: 'String!'
-        description: 'Email of the interlocutor of the contact form.'
-      translations:
-          type: '[InternalContactFormTranslationInput!]!'
+    type: relay-mutation-input
+    config:
+        description: 'Update contact form.'
+        name: UpdateContactFormInput
+        fields:
+            id:
+                type: 'ID!'
+                description: 'ID of the contact form to update.'
+            email:
+                type: 'String!'
+                description: 'Email of the interlocutor of the contact form.'
+            translations:
+                type: '[InternalContactFormTranslationInput!]!'

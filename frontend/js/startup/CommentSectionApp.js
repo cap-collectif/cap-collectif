@@ -3,7 +3,9 @@ import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const CommentSection = lazy(() => import(/* webpackChunkName: "CommentSection" */ '~/components/Comment/CommentSection'));
+const CommentSection = lazy(() =>
+  import(/* webpackChunkName: "CommentSection" */ '~/components/Comment/CommentSection'),
+);
 
 type Props = { commentableId: string };
 

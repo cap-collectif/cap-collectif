@@ -21,7 +21,7 @@ class ModelTypeExtension extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'tree' => false
+            'tree' => false,
         ]);
     }
 

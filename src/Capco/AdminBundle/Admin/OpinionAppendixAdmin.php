@@ -13,7 +13,7 @@ class OpinionAppendixAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'type'
+        '_sort_by' => 'type',
     ];
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -27,16 +27,16 @@ class OpinionAppendixAdmin extends AbstractAdmin
                 'data' => $subject->getAppendixType(),
                 'attr' => [
                     'read-only' => true,
-                    'disabled' => true
-                ]
+                    'disabled' => true,
+                ],
             ])
             ->add('appendixType', HiddenType::class, [
-                'property_path' => 'appendixType.id'
+                'property_path' => 'appendixType.id',
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
-                'required' => false
+                'required' => false,
             ]);
     }
 

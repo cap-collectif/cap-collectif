@@ -1,11 +1,18 @@
 <?php echo "<?php\n"; ?>
 
-namespace Capco\AppBundle\Mailer\Message<?php if (isset($command_entity_name)): ?>\<?php echo $command_entity_name; ?><?php endif; ?>;
+namespace Capco\AppBundle\Mailer\Message<?php if (
+    isset($command_entity_name)
+): ?>\<?php echo $command_entity_name;endif; ?>;
 
 use Capco\AppBundle\Mailer\Message\<?php echo $command_message_type; ?>;<?php echo PHP_EOL; ?>
-<?php if (isset($command_related_entity_fqcn)): ?>use <?php echo $command_related_entity_fqcn; ?>;<?php echo PHP_EOL; ?><?php endif; ?>
+<?php if (
+    isset($command_related_entity_fqcn)
+): ?>use <?php echo $command_related_entity_fqcn; ?>;<?php echo PHP_EOL;endif; ?>
 <?php echo PHP_EOL; ?>
-final class <?php echo $command_class_name; ?> extends <?php echo $command_message_type; ?><?php echo PHP_EOL; ?>
+final class <?php echo $command_class_name; ?> extends <?php
+ echo $command_message_type;
+ echo PHP_EOL;
+ ?>
 {
     public static function create(
 <?php if (isset($command_entity_name) && isset($command_related_entity_fqcn)): ?>
@@ -31,7 +38,10 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php if (next($command_subject_vars)): ?>
         $<?php echo $subject_var; ?>,<?php echo PHP_EOL; ?>
 <?php else: ?>
-        $<?php echo $subject_var; ?><?php echo PHP_EOL; ?>
+        $<?php
+        echo $subject_var;
+        echo PHP_EOL;
+        ?>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>
@@ -43,7 +53,10 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php if (next($command_subject_vars)): ?>
             '{<?php echo $subject_var; ?>}' => $<?php echo $subject_var; ?>,<?php echo PHP_EOL; ?>
 <?php else: ?>
-            '{<?php echo $subject_var; ?>}' => $<?php echo $subject_var; ?><?php echo PHP_EOL; ?>
+            '{<?php echo $subject_var; ?>}' => $<?php
+echo $subject_var;
+echo PHP_EOL;
+?>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>
@@ -55,7 +68,10 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php if (next($command_template_vars)): ?>
         $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
 <?php else: ?>
-        $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
+        $<?php
+        echo $template_var;
+        echo PHP_EOL;
+        ?>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>
@@ -65,9 +81,20 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php if (isset($command_template_vars)): ?>
 <?php foreach ($command_template_vars as $template_var): ?>
 <?php if (next($command_template_vars)): ?>
-            '<?php if (!$command_is_twig_template): ?>{<?php endif; ?><?php echo $template_var; ?><?php if (!$command_is_twig_template): ?>}<?php endif; ?>' => $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
+            '<?php
+            if (!$command_is_twig_template): ?>{<?php endif;
+            echo $template_var;
+            if (!$command_is_twig_template): ?>}<?php endif;
+            ?>' => $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
 <?php else: ?>
-            '<?php if (!$command_is_twig_template): ?>{<?php endif; ?><?php echo $template_var; ?><?php if (!$command_is_twig_template): ?>}<?php endif; ?>' => $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
+            '<?php
+            if (!$command_is_twig_template): ?>{<?php endif;
+            echo $template_var;
+            if (!$command_is_twig_template): ?>}<?php endif;
+            ?>' => $<?php
+echo $template_var;
+echo PHP_EOL;
+?>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>

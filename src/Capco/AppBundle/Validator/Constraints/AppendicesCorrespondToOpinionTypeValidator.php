@@ -24,7 +24,8 @@ class AppendicesCorrespondToOpinionTypeValidator extends ConstraintValidator
             foreach ($appendices as $appendix) {
                 $at = $appendix->getAppendixType();
                 if (!$at || !$opinionTypeappendixTypesIds->contains($at->getId())) {
-                    $this->context->buildViolation($constraint->message)
+                    $this->context
+                        ->buildViolation($constraint->message)
                         ->atPath('appendices')
                         ->addViolation();
 

@@ -70,7 +70,7 @@ class MigrateThemesToCategoriesCommand extends Command
         $collectStepSlug = $input->getArgument('step');
 
         $collectStep = $this->collectStepRepository->findOneBy([
-            'slug' => $collectStepSlug
+            'slug' => $collectStepSlug,
         ]);
         if (!$collectStep || !($form = $collectStep->getProposalForm())) {
             $output->writeln(
@@ -90,7 +90,7 @@ class MigrateThemesToCategoriesCommand extends Command
         foreach ($themes as $theme) {
             $proposals = $this->proposalRepository->findBy([
                 'proposalForm' => $form,
-                'theme' => $theme
+                'theme' => $theme,
             ]);
             if (\count($proposals) > 0) {
                 $category = new ProposalCategory();

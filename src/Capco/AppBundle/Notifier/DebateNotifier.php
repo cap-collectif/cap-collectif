@@ -79,15 +79,14 @@ class DebateNotifier extends BaseNotifier
             $argument,
             [
                 'organizationName' => $this->siteParams->getValue('global.site.organization_name'),
-                "confirmationUrl" => $this->router->generate(
-                    "capco_app_debate_publish_argument",
-                    ["token" => $argument->getToken()],
+                'confirmationUrl' => $this->router->generate(
+                    'capco_app_debate_publish_argument',
+                    ['token' => $argument->getToken()],
                     UrlGeneratorInterface::ABSOLUTE_URL
-                )
+                ),
             ],
             (new User())->setEmail($argument->getEmail())
         );
-
     }
 
     private function getParticipantsCount(Debate $debate): int

@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\Steps\QuestionnaireStep:
-  attributes:
-    footer:
-      groups: [QuestionnaireSteps]
+    attributes:
+        footer:
+            groups: [QuestionnaireSteps]

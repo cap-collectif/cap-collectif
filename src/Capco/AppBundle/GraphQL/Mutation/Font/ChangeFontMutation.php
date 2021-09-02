@@ -24,7 +24,7 @@ class ChangeFontMutation implements MutationInterface
     {
         list($headingFontId, $bodyFontId) = [
             GlobalId::fromGlobalId($args->offsetGet('heading'))['id'],
-            GlobalId::fromGlobalId($args->offsetGet('body'))['id']
+            GlobalId::fromGlobalId($args->offsetGet('body'))['id'],
         ];
 
         if (!$headingFontId) {
@@ -37,7 +37,7 @@ class ChangeFontMutation implements MutationInterface
 
         list($headingFont, $bodyFont) = [
             $this->repository->find($headingFontId),
-            $this->repository->find($bodyFontId)
+            $this->repository->find($bodyFontId),
         ];
 
         if (!$headingFont) {
@@ -54,8 +54,7 @@ class ChangeFontMutation implements MutationInterface
         return [
             'fonts' => $this->repository->findAllGroupedByName(),
             'headingFont' => $headingFont,
-            'bodyFont' => $bodyFont
-
+            'bodyFont' => $bodyFont,
         ];
     }
 }

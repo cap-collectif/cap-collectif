@@ -84,7 +84,7 @@ export const HeadContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
-  
+
   .inline-list {
     margin: 0;
   }

@@ -12,26 +12,18 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200220140350 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
-        $this->connection->update(
-            'locale',
-            ['code' => 'sv-SE'],
-            ['traduction_key' => 'swedish']
-        );
+        $this->connection->update('locale', ['code' => 'sv-SE'], ['traduction_key' => 'swedish']);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
-        $this->connection->update(
-            'locale',
-            ['code' => 'sv-SV'],
-            ['traduction_key' => 'swedish']
-        );
+        $this->connection->update('locale', ['code' => 'sv-SV'], ['traduction_key' => 'swedish']);
     }
 }

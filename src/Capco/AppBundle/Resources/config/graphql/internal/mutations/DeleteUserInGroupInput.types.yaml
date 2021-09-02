@@ -1,11 +1,11 @@
 DeleteUserInGroupInput:
-  type: relay-mutation-input
-  config:
-    description: 'Remove an user in a specific group.'
-    fields:
-      userId:
-        type: 'ID!'
-        description: 'The user id'
-      groupId:
-        type: 'ID!'
-        description: 'The group id'
+    type: relay-mutation-input
+    config:
+        description: 'Remove an user in a specific group.'
+        fields:
+            userId:
+                type: 'ID!'
+                description: 'The user id'
+            groupId:
+                type: 'ID!'
+                description: 'The group id'

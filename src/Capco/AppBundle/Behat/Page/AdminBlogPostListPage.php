@@ -11,6 +11,5 @@ class AdminBlogPostListPage extends Page
 
     protected $path = '/admin/capco/app/post/list';
 
-    protected $elements = [
-    ];
+    protected $elements = [];
 }

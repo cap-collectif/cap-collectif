@@ -14,7 +14,7 @@ class ViewerDidAuthorResolver implements ResolverInterface
     public function __invoke(Authorable $entity, $viewer): bool
     {
         $viewer = $this->preventNullableViewer($viewer);
-        
+
         return $entity->getAuthor() === $viewer;
     }
 }

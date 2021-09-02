@@ -1,33 +1,33 @@
 QuestionTypeValue:
-  type: enum
-  config:
-    description: 'Value of type of question'
-    values:
-      text:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT")'
-      textarea:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT")'
-      editor:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_EDITOR")'
-      radio:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RADIO")'
-      select:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SELECT")'
-      checkbox:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_CHECKBOX")'
-      ranking:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RANKING")'
-      medias:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MEDIAS")'
-      button:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_BUTTON")'
-      number:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_NUMBER")'
-      section:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SECTION")'
-      siret:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIRET")'
-      rna:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RNA")'
-      majority:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION")'
+    type: enum
+    config:
+        description: 'Value of type of question'
+        values:
+            text:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT")'
+            textarea:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT")'
+            editor:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_EDITOR")'
+            radio:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RADIO")'
+            select:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SELECT")'
+            checkbox:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_CHECKBOX")'
+            ranking:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RANKING")'
+            medias:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MEDIAS")'
+            button:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_BUTTON")'
+            number:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_NUMBER")'
+            section:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SECTION")'
+            siret:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIRET")'
+            rna:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RNA")'
+            majority:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION")'

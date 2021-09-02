@@ -15,7 +15,12 @@ final class QuestionnaireAcknowledgeReplyCreateMessage extends AbstractExternalM
     public static function getMyTemplateVars(Reply $reply, array $params): array
     {
         return [
-            'projectTitle' => self::escape($reply->getStep()->getProject()->getTitle()),
+            'projectTitle' => self::escape(
+                $reply
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
             'siteName' => self::escape($params['siteName']),
             'date' => $params['date'],
             'time' => $params['time'],
@@ -27,14 +32,14 @@ final class QuestionnaireAcknowledgeReplyCreateMessage extends AbstractExternalM
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
             'stepUrl' => $params['stepURL'],
-            'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : false
+            'timeless' => $reply->getStep() ? $reply->getStep()->isTimeless() : false,
         ];
     }
 
     public static function getMySubjectVars(Reply $reply, array $params): array
     {
         return [
-            '{questionnaireStepTitle}' => $reply->getStep()->getTitle()
+            '{questionnaireStepTitle}' => $reply->getStep()->getTitle(),
         ];
     }
 }

@@ -78,13 +78,19 @@ class ContactForm implements Translatable, SonataTranslatableInterface
         return $this->translate($locale, $fallbackToDefault)->getBodyText();
     }
 
-    public function getBodyExcerpt(int $nb = 100, ?string $locale = null, ?bool $fallbackToDefault = false): string
-    {
+    public function getBodyExcerpt(
+        int $nb = 100,
+        ?string $locale = null,
+        ?bool $fallbackToDefault = false
+    ): string {
         return $this->translate($locale, $fallbackToDefault)->getBodyExcerpt($nb);
     }
 
-    public function getBodyTextExcerpt(int $nb = 100, ?string $locale = null, ?bool $fallbackToDefault = false): string
-    {
+    public function getBodyTextExcerpt(
+        int $nb = 100,
+        ?string $locale = null,
+        ?bool $fallbackToDefault = false
+    ): string {
         return $this->translate($locale, $fallbackToDefault)->getBodyTextExcerpt($nb);
     }
 

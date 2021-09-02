@@ -32,14 +32,14 @@ class PostType extends AbstractType
                         'purify_html_profile' => 'default',
                     ],
                     'title' => [
-                        'required' => true
+                        'required' => true,
                     ],
                     'abstract' => [
-                        'required' => false
+                        'required' => false,
                     ],
                     'metaDescription' => [
-                        'required' => false
-                    ]
+                        'required' => false,
+                    ],
                 ],
             ])
             ->add('displayedOnBlog', CheckboxType::class, [

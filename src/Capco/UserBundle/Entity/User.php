@@ -23,10 +23,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-class User extends BaseUser implements
-    ProjectOwner,
-    EquatableInterface,
-    IndexableInterface
+class User extends BaseUser implements ProjectOwner, EquatableInterface, IndexableInterface
 {
     use UserAddressTrait;
     use UserSSOTrait;

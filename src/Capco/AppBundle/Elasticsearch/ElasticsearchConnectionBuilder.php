@@ -46,7 +46,7 @@ class ElasticsearchConnectionBuilder
     {
         return $this->connectionFromArraySlice($data, $args, [
             'sliceStart' => 0,
-            'arrayLength' => \count($data)
+            'arrayLength' => \count($data),
         ]);
     }
 
@@ -76,12 +76,12 @@ class ElasticsearchConnectionBuilder
                 'after' => '',
                 'before' => '',
                 'first' => null,
-                'last' => null
+                'last' => null,
             ]
         );
         $arraySliceMetaInfo = $this->getOptionsWithDefaults($meta, [
             'sliceStart' => 0,
-            'arrayLength' => 0
+            'arrayLength' => 0,
         ]);
 
         $arraySliceLength = \count($arraySlice);

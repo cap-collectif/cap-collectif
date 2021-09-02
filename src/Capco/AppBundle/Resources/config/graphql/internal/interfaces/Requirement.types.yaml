@@ -1,15 +1,15 @@
 Requirement:
-  type: interface
-  config:
-    description: 'A requirement'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementTypeResolver", [value])'
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Requirement
-      viewerMeetsTheRequirement:
-        type: 'Boolean!'
-        access: "@hasRole=('ROLE_USER')"
-        description: 'Does the viewer meets the requirement ?'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, getUser()])'
+    type: interface
+    config:
+        description: 'A requirement'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementTypeResolver", [value])'
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Requirement
+            viewerMeetsTheRequirement:
+                type: 'Boolean!'
+                access: "@hasRole=('ROLE_USER')"
+                description: 'Does the viewer meets the requirement ?'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, getUser()])'

@@ -24,5 +24,4 @@ class DeleteOfficialResponseErrorCode implements EnumType
     {
         return implode(' | ', self::ALL);
     }
-
 }

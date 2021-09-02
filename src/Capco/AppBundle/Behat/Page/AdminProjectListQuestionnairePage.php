@@ -12,7 +12,7 @@ class AdminProjectListQuestionnairePage extends Page
     protected $path = '/admin/capco/app/questionnaire/list';
 
     protected $elements = [
-        'add button' => '#btn-add-questionnaire'
+        'add button' => '#btn-add-questionnaire',
     ];
 
     public function clickAddQuestionnaireButton()

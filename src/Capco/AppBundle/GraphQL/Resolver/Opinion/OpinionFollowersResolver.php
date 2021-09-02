@@ -31,11 +31,8 @@ class OpinionFollowersResolver implements ResolverInterface
             }
 
             try {
-                $users = $this->userRepository->findUsersFollowingAnOpinion(
-                    $opinion,
-                    $offset,
-                    $limit
-                )
+                $users = $this->userRepository
+                    ->findUsersFollowingAnOpinion($opinion, $offset, $limit)
                     ->getIterator()
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {

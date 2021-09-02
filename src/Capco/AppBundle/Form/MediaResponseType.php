@@ -18,18 +18,17 @@ class MediaResponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('question', EntityType::class, ['class' => MediaQuestion::class])
-          ->add('medias', EntityType::class, [
-              'class' => Media::class,
-              'multiple' => true,
-              'constraints' => [
-                new Assert\Count([
-                  'max' => 20,
-                  'maxMessage' => 'You must add 20 files or less.',
-                ]),
-              ],
-          ])
-        ;
+            ->add('question', EntityType::class, ['class' => MediaQuestion::class])
+            ->add('medias', EntityType::class, [
+                'class' => Media::class,
+                'multiple' => true,
+                'constraints' => [
+                    new Assert\Count([
+                        'max' => 20,
+                        'maxMessage' => 'You must add 20 files or less.',
+                    ]),
+                ],
+            ]);
 
         $builder->add('position', HiddenType::class, [
             'mapped' => false,

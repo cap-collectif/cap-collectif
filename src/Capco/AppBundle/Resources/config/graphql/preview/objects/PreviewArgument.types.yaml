@@ -1,33 +1,33 @@
 PreviewArgument:
-  type: object
-  inherits:
-    - Node
-    - PublicPublishable
-    - Contribution
-    - Trashable
-    - UniformResourceLocatable
-    - Timestampable
-  config:
-    name: Argument
-    description: 'An argument'
-    interfaces:
-      - Node
-      - PublicPublishable
-      - Contribution
-      - Trashable
-      - UniformResourceLocatable
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        type: 'ID!'
-        builderConfig:
-            typeName: Argument
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
-      type:
-        type: 'ArgumentValue!'
-        description: 'The type.'
-      body:
-        type: 'String!'
-        description: 'The content of the argument.'
+    type: object
+    inherits:
+        - Node
+        - PublicPublishable
+        - Contribution
+        - Trashable
+        - UniformResourceLocatable
+        - Timestampable
+    config:
+        name: Argument
+        description: 'An argument'
+        interfaces:
+            - Node
+            - PublicPublishable
+            - Contribution
+            - Trashable
+            - UniformResourceLocatable
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                type: 'ID!'
+                builderConfig:
+                    typeName: Argument
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
+            type:
+                type: 'ArgumentValue!'
+                description: 'The type.'
+            body:
+                type: 'String!'
+                description: 'The content of the argument.'

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '~/redux/modules/default';
 import { RegistrationFormCommunication } from './RegistrationFormCommunication';
-import {$refType, formMock, intlMock} from "~/mocks";
+import { $refType, formMock, intlMock } from '~/mocks';
 
 describe('<RegistrationFormCommunication />', () => {
   const props = {
@@ -29,10 +29,10 @@ describe('<RegistrationFormCommunication />', () => {
         {
           bottomText: '',
           topText: '',
-          locale: 'fr-FR'
-        }
-      ]
-    }
+          locale: 'fr-FR',
+        },
+      ],
+    },
   };
 
   it('renders correctly', () => {

@@ -5,6 +5,6 @@ import LocaleAdminPage from '../components/Admin/Locale/LocaleAdminPage';
 
 export default (props: {}) => (
   <Providers>
-      <LocaleAdminPage {...props} />
-    </Providers>
+    <LocaleAdminPage {...props} />
+  </Providers>
 );

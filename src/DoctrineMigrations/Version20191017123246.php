@@ -76,7 +76,7 @@ final class Version20191017123246 extends AbstractMigration implements Container
                 'name' => 'default',
                 'enabled' => 1,
                 'created_at' => $now->format('Y-m-d H:i:s'),
-                'updated_at' => $now->format('Y-m-d H:i:s')
+                'updated_at' => $now->format('Y-m-d H:i:s'),
             ]);
             $this->connection->insert('classification__category', [
                 'context' => 'default',
@@ -84,7 +84,7 @@ final class Version20191017123246 extends AbstractMigration implements Container
                 'slug' => 'root',
                 'enabled' => 1,
                 'created_at' => $now->format('Y-m-d H:i:s'),
-                'updated_at' => $now->format('Y-m-d H:i:s')
+                'updated_at' => $now->format('Y-m-d H:i:s'),
             ]);
         }
 
@@ -108,7 +108,7 @@ final class Version20191017123246 extends AbstractMigration implements Container
                 'enabled' => 1,
                 'updated_at' => $now->format('Y-m-d H:i:s'),
                 'created_at' => $now->format('Y-m-d H:i:s'),
-                'provider_status' => 1
+                'provider_status' => 1,
             ];
 
             $this->connection->insert('media__media', $media);

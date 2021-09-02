@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
@@ -16,5 +15,4 @@ class ProposalFormMapCenterResolver implements ResolverInterface
 
         return null;
     }
-
 }

@@ -37,9 +37,9 @@ class DeleteFontMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'Font not found.'
-                    ]
-                ]
+                        'message' => 'Font not found.',
+                    ],
+                ],
             ];
         }
 
@@ -49,9 +49,9 @@ class DeleteFontMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'Tried to remove a non-custom font.'
-                    ]
-                ]
+                        'message' => 'Tried to remove a non-custom font.',
+                    ],
+                ],
             ];
         }
 
@@ -62,7 +62,7 @@ class DeleteFontMutation implements MutationInterface
             'deletedFontId' => $fontGlobalId,
             'userErrors' => [],
             'bodyFont' => $bodyFont,
-            'headingFont' => $headingFont
+            'headingFont' => $headingFont,
         ];
     }
 }

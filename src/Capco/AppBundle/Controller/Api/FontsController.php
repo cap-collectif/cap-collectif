@@ -39,7 +39,7 @@ class FontsController extends AbstractController
         'application/font-woff',
         'font/woff2',
         'application/font-woff2',
-        'application/zip'
+        'application/zip',
     ];
 
     private $validator;
@@ -54,8 +54,7 @@ class FontsController extends AbstractController
         FontRepository $fontRepository,
         MediaUrlResolver $mediaUrlResolver,
         EntityManagerInterface $em
-    )
-    {
+    ) {
         $this->validator = $validator;
         $this->fontProcessor = $fontProcessor;
         $this->fontRepository = $fontRepository;
@@ -75,22 +74,22 @@ class FontsController extends AbstractController
         if (!$uploadedFile) {
             return $this->json([
                 'code' => 400,
-                'message' => 'You must provide a file.'
+                'message' => 'You must provide a file.',
             ]);
         }
 
         $violations = $this->validator->validate($uploadedFile, [
             new File([
                 'mimeTypes' => self::ALLOWED_MIMETYPES_FONTS,
-                'mimeTypesMessage' => self::MESSAGE_INVALID_FONT_FORMAT
-            ])
+                'mimeTypesMessage' => self::MESSAGE_INVALID_FONT_FORMAT,
+            ]),
         ]);
 
         if (0 !== \count($violations)) {
             return $this->json(
                 [
                     'code' => 400,
-                    'message' => $violations->get(0)->getMessage()
+                    'message' => $violations->get(0)->getMessage(),
                 ],
                 400
             );
@@ -118,7 +117,7 @@ class FontsController extends AbstractController
         if (count($uploadedFonts) > 0) {
             $lastUploadedFont = $this->fontRepository->getLastUploadedFont();
 
-            if(!$lastUploadedFont) {
+            if (!$lastUploadedFont) {
                 throw new \LogicException('Could not get last uploaded font');
             }
 
@@ -130,15 +129,17 @@ class FontsController extends AbstractController
                     : null,
                 'name' => $lastUploadedFont->getName(),
                 'useAsHeading' => $lastUploadedFont->getUseAsHeading(),
-                'useAsBody' => $lastUploadedFont->getUseAsBody()
+                'useAsBody' => $lastUploadedFont->getUseAsBody(),
             ]);
         }
 
-        return $this->json([
-            'code' => Response::HTTP_BAD_REQUEST,
-            'message' => self::MESSAGE_INVALID_FONT_FORMAT
-        ], Response::HTTP_BAD_REQUEST);
-
+        return $this->json(
+            [
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => self::MESSAGE_INVALID_FONT_FORMAT,
+            ],
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     private function createFontMedia(array $uploadedFont)
@@ -149,8 +150,8 @@ class FontsController extends AbstractController
             $uploadedFont['file'],
             'default',
             sha1($uploadedFont['name'] . uniqid('', true) . random_int(11111, 99999)) .
-            '.' .
-            $uploadedFont['extension']
+                '.' .
+                $uploadedFont['extension']
         );
     }
 }

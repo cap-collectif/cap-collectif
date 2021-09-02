@@ -73,7 +73,7 @@ class UpdateFollowOpinionMutation implements MutationInterface
         return [
             'opinion' => $opinion ?: $version,
             'follower' => $follower,
-            'followerEdge' => $edge
+            'followerEdge' => $edge,
         ];
     }
 }

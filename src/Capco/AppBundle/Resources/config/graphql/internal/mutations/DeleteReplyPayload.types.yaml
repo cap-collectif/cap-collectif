@@ -1,6 +1,6 @@
 DeleteReplyPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      questionnaire:
-        type: 'InternalQuestionnaire!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            questionnaire:
+                type: 'InternalQuestionnaire!'

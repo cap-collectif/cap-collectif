@@ -1229,7 +1229,7 @@ EOF;
         return $stmt->fetchAllAssociative();
     }
 
-    public function prefixUserSSoId(string $userId,string $ssoFieldName,int $key)
+    public function prefixUserSSoId(string $userId, string $ssoFieldName, int $key)
     {
         $qb = $this->createQueryBuilder('u');
 

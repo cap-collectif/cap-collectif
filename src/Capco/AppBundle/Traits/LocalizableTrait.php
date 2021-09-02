@@ -35,13 +35,13 @@ trait LocalizableTrait
         return $this;
     }
 
-    public function isLocalized() : bool
+    public function isLocalized(): bool
     {
-        return (!is_null($this->locale));
+        return !is_null($this->locale);
     }
 
     public function matchLocale(?string $locale): bool
     {
-        return (is_null($this->locale) || is_null($locale) || $locale === $this->locale->getCode());
+        return is_null($this->locale) || is_null($locale) || $locale === $this->locale->getCode();
     }
 }

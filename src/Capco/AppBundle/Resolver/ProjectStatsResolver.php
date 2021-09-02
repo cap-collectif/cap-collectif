@@ -109,8 +109,7 @@ class ProjectStatsResolver
         $themeId = null,
         $districtId = null,
         $categoryId = null
-    ): array
-    {
+    ): array {
         $data = [];
         $count = 0;
         if ('collect' === $step->getType()) {
@@ -120,8 +119,9 @@ class ProjectStatsResolver
         switch ($key) {
             case 'themes':
                 if ('collect' === $step->getType()) {
-                    $locale = $this->requestStack->getCurrentRequest() ?
-                        $this->requestStack->getCurrentRequest()->getLocale() : 'fr-FR';
+                    $locale = $this->requestStack->getCurrentRequest()
+                        ? $this->requestStack->getCurrentRequest()->getLocale()
+                        : 'fr-FR';
                     $data['total'] = $this->countThemes($locale);
                     $data['values'] = $this->getThemesWithProposalsCountForStep(
                         $step,
@@ -197,15 +197,18 @@ class ProjectStatsResolver
         CollectStep $step,
         $count = 0,
         $limit = null
-    ): array
-    {
+    ): array {
         $data = $this->categoryRepo->getCategoriesWithProposalsCountForStep($step, $limit);
 
         return $this->addPercentages($data, $count);
     }
 
-    public function getThemesWithProposalsCountForStep(CollectStep $step, ?string $locale = 'fr-FR', $count = 0, $limit = null): array
-    {
+    public function getThemesWithProposalsCountForStep(
+        CollectStep $step,
+        ?string $locale = 'fr-FR',
+        $count = 0,
+        $limit = null
+    ): array {
         $data = $this->themeRepo->getThemesWithProposalsCountForStep($step, $locale, $limit);
 
         return $this->addPercentages($data, $count);
@@ -235,8 +238,7 @@ class ProjectStatsResolver
         CollectStep $step,
         $count = 0,
         $limit = null
-    ): array
-    {
+    ): array {
         $data = $this->userTypeRepo->getUserTypesWithProposalsCountForStep($step, $limit);
 
         return $this->addPercentages($data, $count);
@@ -265,8 +267,7 @@ class ProjectStatsResolver
         $themeId = null,
         $districtId = null,
         $categoryId = null
-    ): array
-    {
+    ): array {
         $data = $this->proposalRepo->getProposalsWithVotesCountForSelectionStep(
             $step,
             $limit,
@@ -286,8 +287,7 @@ class ProjectStatsResolver
         $themeId = null,
         $districtId = null,
         $categoryId = null
-    ): int
-    {
+    ): int {
         return $this->proposalSelectionVoteRepo->getVotesCountForSelectionStep(
             $step,
             $themeId,
@@ -301,8 +301,7 @@ class ProjectStatsResolver
         $themeId = null,
         $districtId = null,
         $categoryId = null
-    ): int
-    {
+    ): int {
         return $this->proposalRepo->countForSelectionStep(
             $step,
             $themeId,

@@ -31,8 +31,7 @@ class EventCommentRepository extends EntityRepository
         if ($type === EventComment::class) {
             $qb->leftJoin('c.parent', 'p');
         }
-        $qb->andWhere('p.id IN (:ids)')
-            ->setParameter('ids', $commentableIds);
+        $qb->andWhere('p.id IN (:ids)')->setParameter('ids', $commentableIds);
         return $qb;
     }
 
@@ -115,9 +114,10 @@ class EventCommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')->orWhere('c.published = true');
         if ($viewer) {
-            $qb
-                ->orWhere('c.Author = :viewer AND c.published = false')
-                ->setParameter('viewer', $viewer);
+            $qb->orWhere('c.Author = :viewer AND c.published = false')->setParameter(
+                'viewer',
+                $viewer
+            );
         }
 
         return $qb;

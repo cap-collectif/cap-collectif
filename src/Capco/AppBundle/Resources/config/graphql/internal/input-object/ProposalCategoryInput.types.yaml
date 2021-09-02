@@ -1,18 +1,18 @@
 ProposalCategoryInput:
-  type: input-object
-  config:
-    fields:
-      id:
-        type: 'ID'
-      name:
-        type: 'String!'
-      color:
-        type: 'AvailableProposalCategoryColor!'
-      icon:
-        type: 'AvailableProposalCategoryIcon'
-      categoryImage:
-        type: 'ID'
-        description: 'The category image id to illustrate'
-      newCategoryImage:
-        type: 'ID'
-        description: 'The image id to transform as new categoryImage'
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'ID'
+            name:
+                type: 'String!'
+            color:
+                type: 'AvailableProposalCategoryColor!'
+            icon:
+                type: 'AvailableProposalCategoryIcon'
+            categoryImage:
+                type: 'ID'
+                description: 'The category image id to illustrate'
+            newCategoryImage:
+                type: 'ID'
+                description: 'The image id to transform as new categoryImage'

@@ -20,7 +20,7 @@ class Version20150918093902 extends AbstractMigration
             'position' => 28,
             'category' => 'settings.appearance',
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
         ];
 
         $this->connection->insert('site_color', $newColor);

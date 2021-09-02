@@ -21,7 +21,7 @@ class Version20160209010739 extends AbstractMigration
                 'position' => 29,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'color.votes_bar.text',
@@ -30,7 +30,7 @@ class Version20160209010739 extends AbstractMigration
                 'position' => 30,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'color.votes_bar.border',
@@ -39,7 +39,7 @@ class Version20160209010739 extends AbstractMigration
                 'position' => 31,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'color.votes_bar.btn.bg',
@@ -48,7 +48,7 @@ class Version20160209010739 extends AbstractMigration
                 'position' => 32,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'color.votes_bar.btn.text',
@@ -57,8 +57,8 @@ class Version20160209010739 extends AbstractMigration
                 'position' => 33,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
-            ]
+                'is_enabled' => 1,
+            ],
         ];
 
         foreach ($newColors as $color) {
@@ -73,7 +73,7 @@ class Version20160209010739 extends AbstractMigration
             'color.votes_bar.text',
             'color.votes_bar.border',
             'color.votes_bar.btn.bg',
-            'color.votes_bar.btn.text'
+            'color.votes_bar.btn.text',
         ];
 
         foreach ($colors as $color) {

@@ -13,12 +13,11 @@ class ApiProfileAccountFormType extends AbstractType
     {
         $builder->add('newEmailToConfirm', null, [
             'required' => true,
-            'constraints' =>
-                [
-                    new Assert\NotNull(),
-                    new Assert\Email(['message' => 'email.invalid']),
-                    new NotThrowableEmail(['message' => 'email.throwable']),
-                ],
+            'constraints' => [
+                new Assert\NotNull(),
+                new Assert\Email(['message' => 'email.invalid']),
+                new NotThrowableEmail(['message' => 'email.throwable']),
+            ],
         ]);
     }
 

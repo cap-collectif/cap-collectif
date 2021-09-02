@@ -10,7 +10,9 @@ import type {
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProposalsUserVotesPage = lazy(() =>
-  import(/* webpackChunkName: "ProposalsUserVotesPage" */ '~/components/Project/Votes/ProposalsUserVotesPage'),
+  import(
+    /* webpackChunkName: "ProposalsUserVotesPage" */ '~/components/Project/Votes/ProposalsUserVotesPage'
+  ),
 );
 
 export default (data: { projectId: string }) => (

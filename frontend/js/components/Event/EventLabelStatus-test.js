@@ -8,33 +8,33 @@ import { $refType } from '~/mocks';
 describe('<EventLabelStatus />', () => {
   const propsRefused = {
     event: {
-      review: {id: 'review11', status: 'REFUSED', refusedReason: 'SPAM'},
+      review: { id: 'review11', status: 'REFUSED', refusedReason: 'SPAM' },
       $refType,
     },
   };
   const propsApproved = {
     event: {
-      review: {id: 'review11', status: 'APPROVED', refusedReason: 'NONE'},
+      review: { id: 'review11', status: 'APPROVED', refusedReason: 'NONE' },
       $refType,
     },
   };
   const propsAwaiting = {
     event: {
-      review: {id: 'review11', status: 'AWAITING', refusedReason: 'NONE'},
+      review: { id: 'review11', status: 'AWAITING', refusedReason: 'NONE' },
       $refType,
     },
   };
 
   it('renders correcty event refused', () => {
-    const wrapper = shallow(<EventLabelStatus { ...propsRefused } />);
+    const wrapper = shallow(<EventLabelStatus {...propsRefused} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('renders correcty event approved ', () => {
-    const wrapper = shallow(<EventLabelStatus { ...propsApproved } />);
+    const wrapper = shallow(<EventLabelStatus {...propsApproved} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('renders correcty event event waiting', () => {
-    const wrapper = shallow(<EventLabelStatus { ...propsAwaiting } />);
+    const wrapper = shallow(<EventLabelStatus {...propsAwaiting} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

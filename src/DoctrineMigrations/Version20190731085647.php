@@ -20,10 +20,10 @@ final class Version20190731085647 extends AbstractMigration
             $this->connection->update(
                 'opinion',
                 [
-                    'consultation_id' => $consultationByStep['consultation_id']
+                    'consultation_id' => $consultationByStep['consultation_id'],
                 ],
                 [
-                    'consultation_id' => $consultationByStep['step_id']
+                    'consultation_id' => $consultationByStep['step_id'],
                 ]
             );
         }

@@ -16,7 +16,7 @@ describe('<GroupAdminModalImportUsers />', () => {
       title: 'oui',
       users: {
         edges: [],
-      }
+      },
     },
     intl: intlMock,
     pristine: false,

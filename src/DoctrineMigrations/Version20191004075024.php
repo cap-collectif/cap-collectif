@@ -19,6 +19,8 @@ final class Version20191004075024 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE user_connection CHANGE navigator navigator VARCHAR(255) NOT NULL');
+        $this->addSql(
+            'ALTER TABLE user_connection CHANGE navigator navigator VARCHAR(255) NOT NULL'
+        );
     }
 }

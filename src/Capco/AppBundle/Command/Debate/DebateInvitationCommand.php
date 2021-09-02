@@ -70,8 +70,7 @@ class DebateInvitationCommand extends Command
                 null,
                 InputOption::VALUE_NONE,
                 '/!\ Should be used for CI only /!\ .To generate non-randomized tokens.'
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -88,14 +87,26 @@ class DebateInvitationCommand extends Command
                 try {
                     $voteToken = $this->getVoteToken($user, $debate);
                     if (null === $voteToken || ($isReminder && $voteToken->isValid())) {
-                        $this->sendInvitation($user, $debate, $voteToken, $isReminder, $input->getOption(self::OPT_TEST_TOKEN));
+                        $this->sendInvitation(
+                            $user,
+                            $debate,
+                            $voteToken,
+                            $isReminder,
+                            $input->getOption(self::OPT_TEST_TOKEN)
+                        );
                         ++$counter;
                         if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
                             $this->em->flush();
                         }
                     }
                 } catch (\Exception $exception) {
-                    $output->writeln("<error>DebateInvitationCommand error : ".$user->getEmail()." => ".$exception->getMessage()."</error>");
+                    $output->writeln(
+                        '<error>DebateInvitationCommand error : ' .
+                            $user->getEmail() .
+                            ' => ' .
+                            $exception->getMessage() .
+                            '</error>'
+                    );
                 }
             }
             $progressBar->advance();
@@ -122,9 +133,12 @@ class DebateInvitationCommand extends Command
         $this->debateNotifier->sendDebateInvitation($token, $isReminder);
     }
 
-    private function createVoteToken(User $user, Debate $debate,bool $fixedToken = false): DebateVoteToken
-    {
-        $testToken = $fixedToken ? $debate->getId()."-".$user->getId() : null;
+    private function createVoteToken(
+        User $user,
+        Debate $debate,
+        bool $fixedToken = false
+    ): DebateVoteToken {
+        $testToken = $fixedToken ? $debate->getId() . '-' . $user->getId() : null;
 
         $token = new DebateVoteToken($user, $debate, $testToken);
         $this->em->persist($token);

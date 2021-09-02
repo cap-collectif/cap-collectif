@@ -11,10 +11,10 @@ class EventViewerCanJoinBeforeStartResolver implements ResolverInterface
     public function __invoke(Event $event, $viewer): bool
     {
         if ($viewer) {
-            if ($event->getAnimator() && ($event->getAnimator()->getId() === $viewer->getId())) {
+            if ($event->getAnimator() && $event->getAnimator()->getId() === $viewer->getId()) {
                 return true;
             }
-            if ($event->getAuthor() && ($event->getAuthor()->getId() === $viewer->getId())) {
+            if ($event->getAuthor() && $event->getAuthor()->getId() === $viewer->getId()) {
                 return true;
             }
         }
@@ -22,4 +22,3 @@ class EventViewerCanJoinBeforeStartResolver implements ResolverInterface
         return false;
     }
 }
-

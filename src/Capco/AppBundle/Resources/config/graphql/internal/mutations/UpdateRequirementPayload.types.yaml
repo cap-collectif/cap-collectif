@@ -1,9 +1,9 @@
 UpdateRequirementPayload:
-  type: relay-mutation-payload
-  config:
-    description: 'Payload type of UpdateRequirement.'
-    fields:
-      viewer:
-        type: 'InternalUser'
-      requirement:
-        type: 'Requirement'
+    type: relay-mutation-payload
+    config:
+        description: 'Payload type of UpdateRequirement.'
+        fields:
+            viewer:
+                type: 'InternalUser'
+            requirement:
+                type: 'Requirement'

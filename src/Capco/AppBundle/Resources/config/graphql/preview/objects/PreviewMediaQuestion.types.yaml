@@ -1,10 +1,10 @@
 PreviewMediaQuestion:
-  type: object
-  inherits:
-    - PreviewQuestion
-  config:
-    interfaces:
-      - PreviewQuestion
-      - Node
-    name: MediaQuestion
-    description: 'A question which accept document only.'
+    type: object
+    inherits:
+        - PreviewQuestion
+    config:
+        interfaces:
+            - PreviewQuestion
+            - Node
+        name: MediaQuestion
+        description: 'A question which accept document only.'

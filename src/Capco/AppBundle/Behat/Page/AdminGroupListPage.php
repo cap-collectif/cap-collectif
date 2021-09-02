@@ -10,5 +10,4 @@ class AdminGroupListPage extends Page
     use PageTrait;
 
     protected $path = '/admin/capco/app/group/list';
-
 }

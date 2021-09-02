@@ -1,12 +1,12 @@
 UpdateAlphaProjectInput:
-  type: relay-mutation-input
-  inherits:
-    - CreateAlphaProjectInput
-  config:
-    description: 'Update a project'
-    fields:
-      projectId:
-        type: 'ID!'
-      locale:
-        type: 'ID'
-        description: 'The locale id of the project. Null if visible by all languages'
+    type: relay-mutation-input
+    inherits:
+        - CreateAlphaProjectInput
+    config:
+        description: 'Update a project'
+        fields:
+            projectId:
+                type: 'ID!'
+            locale:
+                type: 'ID'
+                description: 'The locale id of the project. Null if visible by all languages'

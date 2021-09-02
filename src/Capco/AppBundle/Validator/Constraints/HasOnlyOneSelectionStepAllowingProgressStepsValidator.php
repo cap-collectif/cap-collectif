@@ -17,10 +17,22 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
         // https://github.com/phpspec/phpspec/issues/991
         // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
         if ($value instanceof Collection) {
-            $steps = 0 === $value->count() ? $value : $value->filter(function ($pas) { return null !== $pas; });
-            $steps = 0 === $steps->count() ? $steps : $steps->map(function (ProjectAbstractStep $pas) { return $pas->getStep(); });
+            $steps =
+                0 === $value->count()
+                    ? $value
+                    : $value->filter(function ($pas) {
+                        return null !== $pas;
+                    });
+            $steps =
+                0 === $steps->count()
+                    ? $steps
+                    : $steps->map(function (ProjectAbstractStep $pas) {
+                        return $pas->getStep();
+                    });
         } else {
-            $steps = (new ArrayCollection($value))->filter(function ($pas) { return null !== $pas; });
+            $steps = (new ArrayCollection($value))->filter(function ($pas) {
+                return null !== $pas;
+            });
         }
 
         if ($this->hasMoreThanOneSelectionStepAllowingProgressSteps($steps)) {
@@ -37,10 +49,11 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
 
     public function hasMoreThanOneSelectionStepAllowingProgressSteps(Collection $steps): bool
     {
-        return $steps->count() > 0 && $steps->filter(
-            function (?AbstractStep $step) {
-                return $step && $step->isSelectionStep() && $step->isAllowingProgressSteps();
-            }
-        )->count() > 1;
+        return $steps->count() > 0 &&
+            $steps
+                ->filter(function (?AbstractStep $step) {
+                    return $step && $step->isSelectionStep() && $step->isAllowingProgressSteps();
+                })
+                ->count() > 1;
     }
 }

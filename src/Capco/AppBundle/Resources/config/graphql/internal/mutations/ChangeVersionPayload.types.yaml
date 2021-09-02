@@ -1,6 +1,6 @@
 ChangeVersionPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      version:
-        type: 'InternalVersion'
+    type: relay-mutation-payload
+    config:
+        fields:
+            version:
+                type: 'InternalVersion'

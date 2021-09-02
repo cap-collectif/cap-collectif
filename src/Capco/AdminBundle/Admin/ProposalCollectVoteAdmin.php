@@ -21,7 +21,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ]);
     }
 
@@ -44,7 +44,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('proposal', ModelType::class, [
-                'label' => 'global.argument.label'
+                'label' => 'global.argument.label',
             ])
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation']);

@@ -17,12 +17,12 @@ class ApiSourceType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
             ->add('body', TextType::class, [
                 'required' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
             ->add('category', null, ['required' => true])
             ->add('link', UrlType::class, ['required' => true, 'default_protocol' => 'http']);
@@ -33,7 +33,7 @@ class ApiSourceType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'data_class' => Source::class,
-            'validation_groups' => ['Default', 'link']
+            'validation_groups' => ['Default', 'link'],
         ]);
     }
 }

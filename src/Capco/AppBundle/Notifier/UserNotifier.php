@@ -53,7 +53,9 @@ final class UserNotifier extends BaseNotifier
             UserAdminConfirmationMessage::class,
             $user,
             [
-                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)
+                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke(
+                    $user
+                ),
             ],
             $user
         );

@@ -15,7 +15,8 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
         return [];
     }
 
-    public static function getMyTemplateVars($report, array $params): array {
+    public static function getMyTemplateVars($report, array $params): array
+    {
         $contribution = $report->getRelated();
         return [
             'user' => $report->getReporter(),
@@ -28,7 +29,7 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
                 'moderate_contribution',
                 [
                     'token' => $contribution->getModerationToken(),
-                    'reason' => 'reporting.status.sexual'
+                    'reason' => 'reporting.status.sexual',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -36,7 +37,7 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
                 'moderate_contribution',
                 [
                     'token' => $contribution->getModerationToken(),
-                    'reason' => 'reporting.status.offending'
+                    'reason' => 'reporting.status.offending',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -44,7 +45,7 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
                 'moderate_contribution',
                 [
                     'token' => $contribution->getModerationToken(),
-                    'reason' => 'infringement-of-rights'
+                    'reason' => 'infringement-of-rights',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -52,7 +53,7 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
                 'moderate_contribution',
                 [
                     'token' => $contribution->getModerationToken(),
-                    'reason' => 'reporting.status.spam'
+                    'reason' => 'reporting.status.spam',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -60,7 +61,7 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
                 'moderate_contribution',
                 [
                     'token' => $contribution->getModerationToken(),
-                    'reason' => 'reporting.status.off_topic'
+                    'reason' => 'reporting.status.off_topic',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -68,10 +69,10 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
                 'moderate_contribution',
                 [
                     'token' => $contribution->getModerationToken(),
-                    'reason' => 'moderation-guideline-violation'
+                    'reason' => 'moderation-guideline-violation',
                 ],
                 RouterInterface::ABSOLUTE_URL
-            )
+            ),
         ];
     }
 }

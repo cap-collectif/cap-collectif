@@ -61,7 +61,7 @@ final class Version20191125094019 extends AbstractMigration implements Container
                 'abstract' => $post['abstract'],
                 'body' => $post['body'],
                 'meta_description' => $post['meta_description'],
-                'slug' => $post['slug']
+                'slug' => $post['slug'],
             ]);
         }
 

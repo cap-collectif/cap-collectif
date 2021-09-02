@@ -22,8 +22,7 @@ class GroupRepository extends EntityRepository
     public function getGroupsByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('g');
-        $qb
-            ->leftJoin('g.userGroups', 'ug')
+        $qb->leftJoin('g.userGroups', 'ug')
             ->andWhere('ug.user = :user')
             ->addOrderBy('g.createdAt', 'ASC')
             ->setParameter('user', $user);
@@ -37,8 +36,7 @@ class GroupRepository extends EntityRepository
         ?int $limit = null
     ): Paginator {
         $qb = $this->createQueryBuilder('g');
-        $qb
-            ->leftJoin('g.projectsVisibleByTheGroup', 'p')
+        $qb->leftJoin('g.projectsVisibleByTheGroup', 'p')
             ->andWhere('p.id = :project')
             ->setParameter('project', $project->getId());
         $query = $qb
@@ -52,8 +50,7 @@ class GroupRepository extends EntityRepository
     public function countGroupsAllowedForProject(Project $project): int
     {
         $qb = $this->createQueryBuilder('g');
-        $qb
-            ->select('COUNT(g.id)')
+        $qb->select('COUNT(g.id)')
             ->leftJoin('g.projectsVisibleByTheGroup', 'p')
             ->andWhere('p.id = :project')
             ->setParameter('project', $project->getId());

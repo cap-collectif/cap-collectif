@@ -1,9 +1,9 @@
 PreviewDeleteAccountByEmailInput:
-  type: relay-mutation-input
-  config:
-    name: DeleteAccountByEmailInput
-    description: "The PreviewDeleteAccountByEmail mutation's input."
-    fields:
-      email:
-        type: 'String!'
-        description: "The user's email to delete"
+    type: relay-mutation-input
+    config:
+        name: DeleteAccountByEmailInput
+        description: "The PreviewDeleteAccountByEmail mutation's input."
+        fields:
+            email:
+                type: 'String!'
+                description: "The user's email to delete"

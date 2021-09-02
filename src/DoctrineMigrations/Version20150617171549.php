@@ -31,7 +31,7 @@ class Version20150617171549 extends AbstractMigration
                 'homepage.jumbotron.body',
                 'homepage.jumbotron.button',
                 'homepage.jumbotron.button_link',
-                'homepage.jumbotron.darken'
+                'homepage.jumbotron.darken',
             ],
             'pages.footer' => ['footer.text.title', 'footer.text.body'],
             'pages.consultations' => [
@@ -39,7 +39,7 @@ class Version20150617171549 extends AbstractMigration
                 'consultations.jumbotron.body',
                 'consultations.content.body',
                 'consultations.pagination',
-                'contributors.pagination'
+                'contributors.pagination',
             ],
             'pages.ideas' => [
                 'ideas.jumbotron.title',
@@ -47,45 +47,45 @@ class Version20150617171549 extends AbstractMigration
                 'ideas.content.body',
                 'ideas.trashed.jumbotron.title',
                 'ideas.trashed.content.body',
-                'ideas.pagination'
+                'ideas.pagination',
             ],
             'pages.themes' => [
                 'themes.jumbotron.title',
                 'themes.jumbotron.body',
                 'themes.content.body',
-                'themes.pagination'
+                'themes.pagination',
             ],
             'pages.blog' => ['blog.pagination.size', 'blog.jumbotron.body', 'blog.jumbotron.title'],
             'pages.events' => [
                 'events.jumbotron.title',
                 'events.jumbotron.body',
-                'events.content.body'
+                'events.content.body',
             ],
             'pages.contact' => [
                 'contact.jumbotron.body',
                 'contact.content.body',
                 'contact.content.address',
                 'contact.content.phone_number',
-                'admin.mail.contact'
+                'admin.mail.contact',
             ],
             'pages.registration' => [
                 'signin.cgu.name',
                 'signin.cgu.link',
                 'signin.text.top',
-                'signin.text.bottom'
+                'signin.text.bottom',
             ],
             'pages.login' => ['login.text.top', 'login.text.bottom'],
             'pages.members' => [
                 'members.pagination.size',
                 'members.jumbotron.body',
                 'members.jumbotron.title',
-                'members.content.body'
+                'members.content.body',
             ],
             'settings.global' => [
                 'admin.mail.notifications',
                 'global.site.fullname',
-                'global.site.embed_js'
-            ]
+                'global.site.embed_js',
+            ],
         ];
 
         foreach ($parameterCategories as $category => $keynames) {
@@ -100,7 +100,7 @@ class Version20150617171549 extends AbstractMigration
 
         $imagesCategories = [
             'pages.homepage' => ['image.header', 'image.picto'],
-            'settings.global' => ['image.logo', 'image.default_avatar']
+            'settings.global' => ['image.logo', 'image.default_avatar'],
         ];
 
         foreach ($imagesCategories as $category => $keynames) {
@@ -119,7 +119,7 @@ class Version20150617171549 extends AbstractMigration
                 'color.footer.bg',
                 'color.footer2.text',
                 'color.footer2.bg',
-                'color.footer.title'
+                'color.footer.title',
             ],
             'settings.global' => [
                 'color.body.bg',
@@ -143,15 +143,15 @@ class Version20150617171549 extends AbstractMigration
                 'color.main_menu.text_active',
                 'color.main_menu.text_hover',
                 'color.main_menu.bg',
-                'color.main_menu.bg_active'
+                'color.main_menu.bg_active',
             ],
             'pages.homepage' => [
                 'color.header2.bg',
                 'color.header2.text',
                 'color.header2.title',
                 'color.btn',
-                'color.btn.text'
-            ]
+                'color.btn.text',
+            ],
         ];
 
         foreach ($colorsCategories as $category => $keynames) {

@@ -48,7 +48,7 @@ class Version20150302191738 extends AbstractMigration implements ContainerAwareI
             SiteParameter::$types['boolean'],
             true,
             $created,
-            $updated
+            $updated,
         ];
 
         $query = $em->createQuery(
@@ -73,7 +73,7 @@ class Version20150302191738 extends AbstractMigration implements ContainerAwareI
     public function postDown(Schema $schema): void
     {
         $this->connection->delete('site_parameter', [
-            'keyname' => 'homepage.jumbotron.darken'
+            'keyname' => 'homepage.jumbotron.darken',
         ]);
     }
 }

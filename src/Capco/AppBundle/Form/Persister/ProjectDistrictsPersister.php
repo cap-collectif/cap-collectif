@@ -28,7 +28,7 @@ class ProjectDistrictsPersister
     {
         $districtEntities = $this->projectDistrictRepository->findByIds($districtsIds);
         $oldPositioners = $this->districtPositionerRepository->findBy([
-            'project' => $project->getId()
+            'project' => $project->getId(),
         ]);
         foreach ($oldPositioners as $positioner) {
             $this->em->remove($positioner);

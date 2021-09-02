@@ -18,19 +18,14 @@ class ProposalEvaluationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('version', IntegerType::class)
-            ->add('responses', PolyCollectionType::class, [
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'index_property' => 'position',
-                'types' => [
-                    ValueResponseType::class,
-                    MediaResponseType::class,
-                ],
-                'type_name' => AbstractResponse::TYPE_FIELD_NAME,
-            ]);
+        $builder->add('version', IntegerType::class)->add('responses', PolyCollectionType::class, [
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'index_property' => 'position',
+            'types' => [ValueResponseType::class, MediaResponseType::class],
+            'type_name' => AbstractResponse::TYPE_FIELD_NAME,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

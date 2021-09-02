@@ -34,7 +34,7 @@ final class UserArchiveNotifier extends BaseNotifier
             [
                 'downloadURL' => $this->userLoginAndShowDataUrlResolver->__invoke(
                     $archive->getUser()
-                )
+                ),
             ],
             $archive->getUser()
         );

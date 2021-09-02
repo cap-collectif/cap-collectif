@@ -17,7 +17,7 @@ class Oauth2SSOConfigurationFormType extends AbstractType
     {
         $builder
             ->add('name', PurifiedTextType::class, [
-                'strip_tags' => true
+                'strip_tags' => true,
             ])
             ->add('enabled', CheckboxType::class)
             ->add('accessTokenUrl', UrlType::class)
@@ -35,7 +35,7 @@ class Oauth2SSOConfigurationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Oauth2SSOConfiguration::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }

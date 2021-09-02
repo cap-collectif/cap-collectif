@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\OpinionVersionVote:
-  attributes:
-    value:
-      groups: [OpinionVersions]
-    opinionVersion:
-      groups: [ElasticsearchVoteNestedVersion]
-    getConsultation:
-      type: object
-      serialized_name: consultation
-      groups: [ElasticsearchVoteNestedConsultation]
+    attributes:
+        value:
+            groups: [OpinionVersions]
+        opinionVersion:
+            groups: [ElasticsearchVoteNestedVersion]
+        getConsultation:
+            type: object
+            serialized_name: consultation
+            groups: [ElasticsearchVoteNestedConsultation]

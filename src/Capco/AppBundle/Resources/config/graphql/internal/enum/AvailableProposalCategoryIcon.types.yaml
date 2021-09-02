@@ -111,4 +111,3 @@ AvailableProposalCategoryIcon:
                 value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ICN")'
             ECOLOGY_LEAF:
                 value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ECOLOGY_LEAF")'
-

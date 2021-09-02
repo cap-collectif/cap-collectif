@@ -20,13 +20,11 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 {
     protected $navigationContext;
 
-
     protected $symfonySession;
 
     public function __construct(?Session $session = null)
     {
         $this->symfonySession = $session;
-
     }
 
     /**

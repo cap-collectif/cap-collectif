@@ -30,7 +30,7 @@ final class QuestionnaireReplyUpdateAdminMessage extends AbstractAdminMessage
             'userUrl' => $params['userURL'],
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
-            'replyShowUrl' => $params['replyShowURL']
+            'replyShowUrl' => $params['replyShowURL'],
         ];
     }
 
@@ -38,7 +38,7 @@ final class QuestionnaireReplyUpdateAdminMessage extends AbstractAdminMessage
     {
         return [
             '{authorName}' => self::escape($reply->getAuthor()->getUsername()),
-            '{questionnaireStepTitle}' => self::escape($reply->getStep()->getTitle())
+            '{questionnaireStepTitle}' => self::escape($reply->getStep()->getTitle()),
         ];
     }
 }

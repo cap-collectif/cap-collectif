@@ -92,7 +92,6 @@ export class ProposalAdminPage extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State, props: Props) => {
-
   return {
     proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
     viewerIsAdmin: props.viewerIsAdmin,
@@ -101,6 +100,6 @@ const mapStateToProps = (state: State, props: Props) => {
       isDirty('proposal-admin-selections')(state) ||
       isDirty('proposal-admin-evaluation')(state) ||
       isDirty('proposal-admin-status')(state),
-  }
+  };
 };
 export default connect<any, any, _, _, _, _>(mapStateToProps)(ProposalAdminPage);

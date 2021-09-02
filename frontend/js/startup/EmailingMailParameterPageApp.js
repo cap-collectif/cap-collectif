@@ -6,7 +6,9 @@ import type { Props } from '~/components/Admin/Emailing/MailParameter/MailParame
 import AlertBoxApp from '~/startup/AlertBoxApp';
 
 const MailParameterQuery = lazy(() =>
-  import(/* webpackChunkName: "MailParameterQuery" */ '~/components/Admin/Emailing/MailParameter/MailParameterQuery'),
+  import(
+    /* webpackChunkName: "MailParameterQuery" */ '~/components/Admin/Emailing/MailParameter/MailParameterQuery'
+  ),
 );
 
 export default ({ id }: Props) => (

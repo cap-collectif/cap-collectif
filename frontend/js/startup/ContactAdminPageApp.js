@@ -6,7 +6,9 @@ import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type { ContactAdminPageAppQueryResponse } from '~relay/ContactAdminPageAppQuery.graphql';
 
-const ContactAdminPage = lazy(() => import(/* webpackChunkName: "ContactAdminPage" */ '~/components/Admin/Contact/ContactAdminPage'));
+const ContactAdminPage = lazy(() =>
+  import(/* webpackChunkName: "ContactAdminPage" */ '~/components/Admin/Contact/ContactAdminPage'),
+);
 
 const renderContactAdminPage = ({
   error,

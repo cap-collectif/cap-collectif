@@ -1,11 +1,11 @@
 ProposalAffiliation:
-  type: enum
-  config:
-    description: The affiliation of a user to a proposal
-    values:
-      OWNER:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAffiliations::OWNER")'
-        description: 'Show only the proposals where the current user is an owner'
-      EVALUER:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAffiliations::EVALUER")'
-        description: 'Show only the proposals where the current user is an evaluer'
+    type: enum
+    config:
+        description: The affiliation of a user to a proposal
+        values:
+            OWNER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAffiliations::OWNER")'
+                description: 'Show only the proposals where the current user is an owner'
+            EVALUER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAffiliations::EVALUER")'
+                description: 'Show only the proposals where the current user is an evaluer'

@@ -1,14 +1,14 @@
 RemoveProposalVotePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      step:
-        type: 'ProposalStep!'
-      proposal:
-        type: 'InternalProposal!'
-      viewer:
-        type: 'InternalUser!'
-      previousVoteId:
-        type: 'ID'
-      areRemainingVotesAccounted:
-        type: 'Boolean!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            step:
+                type: 'ProposalStep!'
+            proposal:
+                type: 'InternalProposal!'
+            viewer:
+                type: 'InternalUser!'
+            previousVoteId:
+                type: 'ID'
+            areRemainingVotesAccounted:
+                type: 'Boolean!'

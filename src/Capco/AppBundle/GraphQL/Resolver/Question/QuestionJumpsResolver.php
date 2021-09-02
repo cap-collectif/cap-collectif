@@ -24,8 +24,6 @@ class QuestionJumpsResolver implements ResolverInterface
 
     public function __invoke(AbstractQuestion $question, Arg $args): Promise
     {
-        return $this->dataLoader->load(
-            compact('question', 'args')
-        );
+        return $this->dataLoader->load(compact('question', 'args'));
     }
 }

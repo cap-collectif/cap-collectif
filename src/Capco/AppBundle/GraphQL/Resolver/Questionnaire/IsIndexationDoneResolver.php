@@ -21,7 +21,7 @@ class IsIndexationDoneResolver implements ResolverInterface
         /**
          * This condition is causing production issues.
          * It should not wait ALL elasticsearch messages.
-         * 
+         *
          * TODO fix me if needed.
          */
         // $queue = $this->peclFactory->getQueue('elasticsearch_indexation', 'rabbitmq');

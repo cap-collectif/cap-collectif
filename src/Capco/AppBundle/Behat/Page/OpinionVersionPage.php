@@ -44,7 +44,7 @@ class OpinionVersionPage extends Page
         // Sources
         'sources add' => '#source-form__add',
         'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
-        'vote first source' => '#sources-list li:first-child .source__btn--vote'
+        'vote first source' => '#sources-list li:first-child .source__btn--vote',
     ];
 
     /**

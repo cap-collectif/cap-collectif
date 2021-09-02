@@ -18,7 +18,7 @@ final class ProposalStatusChangeInCollectMessage extends AbstractExternalMessage
     public static function getMyTemplateVars(Proposal $proposal, array $params): array
     {
         return [
-            'proposal' => $proposal
+            'proposal' => $proposal,
         ];
     }
 }

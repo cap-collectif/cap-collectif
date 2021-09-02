@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\HighlightedPost:
-  attributes:
-    post:
-      groups: [HighlightedContent]
+    attributes:
+        post:
+            groups: [HighlightedContent]

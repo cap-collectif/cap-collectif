@@ -1,18 +1,18 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
-  attributes:
-    collectStep:
-      groups: [ProposalCollectVotes]
-    getProposal:
-      type: object
-      groups: [ProposalCollectVotes, ElasticsearchVoteNestedProposal]
-      serialized_name: proposal
-    user:
-      groups: [ProposalCollectVotes]
-    username:
-      groups: [ProposalCollectVotes]
-    private:
-      groups: [ProposalCollectVotes, ElasticsearchVote]
-    publishedAt:
-      groups: [ProposalSelectionVotes, ElasticsearchVote]
-    createdAt:
-      groups: [ProposalSelectionVotes, ElasticsearchVote]
+    attributes:
+        collectStep:
+            groups: [ProposalCollectVotes]
+        getProposal:
+            type: object
+            groups: [ProposalCollectVotes, ElasticsearchVoteNestedProposal]
+            serialized_name: proposal
+        user:
+            groups: [ProposalCollectVotes]
+        username:
+            groups: [ProposalCollectVotes]
+        private:
+            groups: [ProposalCollectVotes, ElasticsearchVote]
+        publishedAt:
+            groups: [ProposalSelectionVotes, ElasticsearchVote]
+        createdAt:
+            groups: [ProposalSelectionVotes, ElasticsearchVote]

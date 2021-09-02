@@ -36,8 +36,8 @@ class ConnectionTraversor
             // See https://relay.dev/graphql/connections.htm#sec-Edges
             if (!$edges || !is_array($edges)) {
                 $this->logger->error('The GraphQL request resulted in `null` edges.', [
-                    'path' => $path, 
-                    'errors' => isset($data['errors']) ? $data['errors'] : [], 
+                    'path' => $path,
+                    'errors' => isset($data['errors']) ? $data['errors'] : [],
                 ]);
                 return;
             }

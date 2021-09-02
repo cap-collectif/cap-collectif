@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styled, { type StyledComponent} from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/styles/modules/colors';
 import Tag from '../../Ui/Labels/Tag';
 import { formatBigNumber } from '~/utils/bigNumberFormatter';
@@ -11,12 +11,12 @@ type Props = {|
   +label: string,
   +showZero?: boolean,
   +icon?: string,
-  +archived: boolean
+  +archived: boolean,
 |};
 
 const StyledTag: StyledComponent<{}, {}, typeof Tag> = styled(Tag)`
-  color: ${props => props.archived ? colors['neutral-gray']['500'] : 'inherit'}
-`
+  color: ${props => (props.archived ? colors['neutral-gray']['500'] : 'inherit')};
+`;
 
 export class ProjectPreviewCounter extends React.Component<Props> {
   static defaultProps = {

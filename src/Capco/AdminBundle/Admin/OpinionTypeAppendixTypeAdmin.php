@@ -9,23 +9,23 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
 {
     protected $formOptions = [
-        'cascade_validation' => true
+        'cascade_validation' => true,
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('appendixType', ModelType::class, [
                 'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',
-                'required' => true
+                'required' => true,
             ]);
     }
 

@@ -19,7 +19,10 @@ class ParametersExtension extends AbstractExtension
                 'getHasFeatureEnabled',
             ]),
             new TwigFunction('features_list', [ParametersRuntime::class, 'getFeatures']),
-            new TwigFunction('features_flags_for_relay', [ParametersRuntime::class, 'getFeaturesFlagsForRelay']),
+            new TwigFunction('features_flags_for_relay', [
+                ParametersRuntime::class,
+                'getFeaturesFlagsForRelay',
+            ]),
             new TwigFunction('site_parameters_list', [
                 ParametersRuntime::class,
                 'getSiteParameters',

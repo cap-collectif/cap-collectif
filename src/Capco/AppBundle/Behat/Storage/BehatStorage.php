@@ -4,19 +4,19 @@ namespace Capco\AppBundle\Behat\Storage;
 
 class BehatStorage
 {
-    static protected $instance;
+    protected static $instance;
 
     protected $storage = [];
 
-    static public function getInstance(): self
+    public static function getInstance(): self
     {
         if (!self::$instance) {
-            self::$instance = new static;
+            self::$instance = new static();
         }
         return self::$instance;
     }
 
-    static public function __callStatic($method, $args)
+    public static function __callStatic($method, $args)
     {
         $instance = static::getInstance();
         return call_user_func_array([$instance, '_' . $method], $args);

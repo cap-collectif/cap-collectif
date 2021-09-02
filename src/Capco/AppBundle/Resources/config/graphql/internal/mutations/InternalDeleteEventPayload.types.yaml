@@ -1,10 +1,10 @@
 InternalDeleteEventPayload:
-  type: relay-mutation-payload
-  config:
-    name: DeleteEventPayload
-    fields:
-      deletedEventId:
-        type: 'ID'
-      event:
-        type: 'InternalEvent'
-        description: 'The event.'
+    type: relay-mutation-payload
+    config:
+        name: DeleteEventPayload
+        fields:
+            deletedEventId:
+                type: 'ID'
+            event:
+                type: 'InternalEvent'
+                description: 'The event.'

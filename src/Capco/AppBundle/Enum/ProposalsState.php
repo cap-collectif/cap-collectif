@@ -16,12 +16,7 @@ final class ProposalsState implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [
-            self::ALL,
-            self::PUBLISHED,
-            self::TRASHED,
-            self::DRAFT,
-        ];
+        return [self::ALL, self::PUBLISHED, self::TRASHED, self::DRAFT];
     }
 
     public static function getAvailableTypesToString(): string

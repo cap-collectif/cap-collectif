@@ -20,9 +20,11 @@ describe('<Editor />', () => {
   };
 
   it('should render correctly with defaultProps', () => {
-    const wrapper = render(<ThemeProvider theme={theme}>
-      <Editor {...defaultProps} />
-    </ThemeProvider>);
+    const wrapper = render(
+      <ThemeProvider theme={theme}>
+        <Editor {...defaultProps} />
+      </ThemeProvider>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

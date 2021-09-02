@@ -23,7 +23,7 @@ class Version20171108093808 extends AbstractMigration
             'is_enabled' => 1,
             'position' => 2,
             'type' => 0,
-            'category' => 'settings.global'
+            'category' => 'settings.global',
         ];
 
         $this->connection->insert('site_parameter', $values);

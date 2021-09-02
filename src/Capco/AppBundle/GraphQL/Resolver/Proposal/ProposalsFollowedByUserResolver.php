@@ -25,7 +25,10 @@ class ProposalsFollowedByUserResolver implements ResolverInterface
     {
         $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
             try {
-                $proposals = $this->proposalRepository->findFollowingProposalByUser($user, $offset, $limit)->getIterator()->getArrayCopy();
+                $proposals = $this->proposalRepository
+                    ->findFollowingProposalByUser($user, $offset, $limit)
+                    ->getIterator()
+                    ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
                 throw new \RuntimeException('Find following proposal by user failed');

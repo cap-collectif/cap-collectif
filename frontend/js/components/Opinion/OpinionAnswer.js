@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../Answer/AnswerBody';
 import type { OpinionAnswer_opinion } from '~relay/OpinionAnswer_opinion.graphql';
-import {translateContent} from "~/utils/ContentTranslator";
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   opinion: OpinionAnswer_opinion,

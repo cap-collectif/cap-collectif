@@ -18,7 +18,7 @@ class EditCommentPage extends Page
         'delete button' => 'a.btn.btn-danger[href*="/delete"]',
         'cancel button' => 'a.btn.btn-default',
         'edit button' => 'button[type="submit"]',
-        'confirm checkbox' => 'input[type="checkbox"][name="confirm"]'
+        'confirm checkbox' => 'input[type="checkbox"][name="confirm"]',
     ];
 
     public function getCancelButton()

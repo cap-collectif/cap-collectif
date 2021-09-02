@@ -13,7 +13,9 @@ class EventPage extends Page
 
     public function verifyPage()
     {
-        if (!$this->getSession()->wait(10000, "window.jQuery && $('.event-header-info').length > 0")) {
+        if (
+            !$this->getSession()->wait(10000, "window.jQuery && $('.event-header-info').length > 0")
+        ) {
             throw new \RuntimeException(
                 'EventPage did not fully load, check selector in "verifyPage".'
             );

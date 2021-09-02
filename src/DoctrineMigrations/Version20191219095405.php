@@ -60,7 +60,7 @@ final class Version20191219095405 extends AbstractMigration
                 'translatable_id' => $userType['id'],
                 'slug' => $userType['slug'],
                 'name' => $userType['name'],
-                'locale' => $locale
+                'locale' => $locale,
             ]);
         }
     }
@@ -74,7 +74,10 @@ final class Version20191219095405 extends AbstractMigration
         foreach ($userTypeDefaultTranslations as $userTypeDefaultTranslation) {
             $this->connection->update(
                 'user_type',
-                ['name' => $userTypeDefaultTranslation['name'], 'slug' => $userTypeDefaultTranslation['slug']],
+                [
+                    'name' => $userTypeDefaultTranslation['name'],
+                    'slug' => $userTypeDefaultTranslation['slug'],
+                ],
                 ['id' => $userTypeDefaultTranslation['id']]
             );
         }

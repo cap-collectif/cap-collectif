@@ -83,7 +83,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $created,
-                $updated
+                $updated,
             ],
             [
                 'events.jumbotron.body',
@@ -93,7 +93,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $created,
-                $updated
+                $updated,
             ],
             [
                 'events.content.body',
@@ -103,8 +103,8 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $created,
-                $updated
-            ]
+                $updated,
+            ],
         ];
 
         foreach ($newParameters as $values) {
@@ -138,7 +138,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
             $menuId,
             'calendar',
             $created,
-            $updated
+            $updated,
         ];
 
         $menuItemId = $this->connection->fetchColumn(
@@ -161,7 +161,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
         $newParameters = [
             ['events.jumbotron.title'],
             ['events.jumbotron.body'],
-            ['events.content.body']
+            ['events.content.body'],
         ];
 
         $newMenu = [['event']];

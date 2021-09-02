@@ -143,7 +143,7 @@ class AddEventsMutation implements MutationInterface
             'userErrors' => [],
             'notFoundEmails' => array_unique($notFoundEmails),
             'notFoundThemes' => array_unique($notFoundThemes),
-            'brokenDates' => array_unique($brokenDates)
+            'brokenDates' => array_unique($brokenDates),
         ];
     }
 
@@ -164,7 +164,7 @@ class AddEventsMutation implements MutationInterface
                     'body' => $values['body'],
                     'metaDescription' => $values['metaDescription'],
                     'link' => $values['link'],
-                    'locale' => $this->localeRepository->getDefaultCode()
+                    'locale' => $this->localeRepository->getDefaultCode(),
                 ];
                 unset(
                     $values['title'],

@@ -1,11 +1,11 @@
 UnselectProposalInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      stepId:
-        type: 'String!'
-        description: 'The step where the proposal is selected'
-      proposalId:
-        type: 'ID!'
-        description: 'The proposal ID to remove from step.'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            stepId:
+                type: 'String!'
+                description: 'The step where the proposal is selected'
+            proposalId:
+                type: 'ID!'
+                description: 'The proposal ID to remove from step.'

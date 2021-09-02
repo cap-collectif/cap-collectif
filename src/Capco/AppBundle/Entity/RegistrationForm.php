@@ -182,5 +182,4 @@ class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface
     {
         return RegistrationFormTranslation::class;
     }
-
 }

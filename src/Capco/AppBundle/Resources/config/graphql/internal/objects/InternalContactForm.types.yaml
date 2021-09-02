@@ -1,34 +1,34 @@
 InternalContactForm:
-  type: object
-  inherits:
-    - Node
-  config:
-    name: ContactForm
-    interfaces:
-      - Node
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: ContactForm
-        description: 'The title of the contact Form'
-      title:
-        description: 'The title of the contact Form'
-        type: 'String!'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getTitle(args["locale"])'
-      body:
-        description: 'The body of the contact Form'
-        type: 'String!'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getBody(args["locale"])'
-      email:
-        description: 'The mail to send the contact Form'
-        type: 'String!'
-      confidentiality:
-        description: 'The confidentiality text for the contact Form'
-        type: 'String'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getConfidentiality(args["locale"])'
-      translations:
-          type: '[InternalContactFormTranslation!]!'
+    type: object
+    inherits:
+        - Node
+    config:
+        name: ContactForm
+        interfaces:
+            - Node
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ContactForm
+                description: 'The title of the contact Form'
+            title:
+                description: 'The title of the contact Form'
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitle(args["locale"])'
+            body:
+                description: 'The body of the contact Form'
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getBody(args["locale"])'
+            email:
+                description: 'The mail to send the contact Form'
+                type: 'String!'
+            confidentiality:
+                description: 'The confidentiality text for the contact Form'
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getConfidentiality(args["locale"])'
+            translations:
+                type: '[InternalContactFormTranslation!]!'

@@ -10,9 +10,10 @@ class ProjectDistrictRepository extends EntityRepository
     public function findByIds(array $ids): array
     {
         $query = $this->createQueryBuilder('d');
-        $query->andWhere('d.id IN (:ids)')
-        ->leftJoin('d.translations', 'dt')
-        ->setParameter('ids', $ids);
+        $query
+            ->andWhere('d.id IN (:ids)')
+            ->leftJoin('d.translations', 'dt')
+            ->setParameter('ids', $ids);
 
         return $query->getQuery()->getResult();
     }

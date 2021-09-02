@@ -52,7 +52,6 @@ final class ProposalNewsUpdateAdminMessage extends AbstractAdminMessage
         ];
     }
 
-
     public static function getMyFooterVars(
         string $recipientEmail = '',
         string $siteName = '',

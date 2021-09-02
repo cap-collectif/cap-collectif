@@ -24,8 +24,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     public function getByContributionAndValueQB(OpinionVersion $votable, int $value)
     {
         $qb = $this->getPublishedQueryBuilder();
-        $qb
-            ->andWhere('v.opinionVersion = :opinion')
+        $qb->andWhere('v.opinionVersion = :opinion')
             ->setParameter('opinion', $votable->getId())
             ->andWhere('v.value = :value')
             ->setParameter('value', $value);
@@ -147,8 +146,7 @@ class OpinionVersionVoteRepository extends EntityRepository
         OpinionVersion $version
     ): ?OpinionVersionVote {
         $qb = $this->createQueryBuilder('v');
-        $qb
-            ->andWhere('v.opinionVersion = :version')
+        $qb->andWhere('v.opinionVersion = :version')
             ->andWhere('v.user = :author')
             ->setParameter('version', $version)
             ->setParameter('author', $author);
@@ -165,14 +163,12 @@ class OpinionVersionVoteRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder();
 
         if ($asArray) {
-            $qb
-                ->addSelect('u', 'ut')
+            $qb->addSelect('u', 'ut')
                 ->leftJoin('v.user', 'u')
                 ->leftJoin('u.userType', 'ut');
         }
 
-        $qb
-            ->andWhere('v.opinionVersion = :version')
+        $qb->andWhere('v.opinionVersion = :version')
             ->setParameter('version', $versionId)
             ->orderBy('v.updatedAt', 'ASC');
 
@@ -188,8 +184,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ov');
 
-        $qb
-            ->select('count(ov.id)')
+        $qb->select('count(ov.id)')
             ->where('ov.opinionVersion = :version')
             ->setParameter('version', $version);
 

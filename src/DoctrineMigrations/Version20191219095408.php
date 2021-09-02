@@ -58,7 +58,7 @@ final class Version20191219095408 extends AbstractMigration implements Container
                         'id' => $this->generator->generate($this->em, null),
                         'locale' => $locale,
                         'translatable_id' => $parameter['id'],
-                        'value' => $parameter['value']
+                        'value' => $parameter['value'],
                     ]);
                 }
             }
@@ -70,10 +70,10 @@ final class Version20191219095408 extends AbstractMigration implements Container
                 $this->connection->update(
                     'site_parameter',
                     [
-                        'value' => null
+                        'value' => null,
                     ],
                     [
-                        'id' => $parameter['id']
+                        'id' => $parameter['id'],
                     ]
                 );
             }

@@ -1,9 +1,9 @@
 ContributionWithAuthor:
-  type: interface
-  config:
-    description: 'A contribution with an author'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
-    fields:
-      author:
-        type: 'InternalUser!'
-        description: 'The author of the contribution.'
+    type: interface
+    config:
+        description: 'A contribution with an author'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        fields:
+            author:
+                type: 'InternalUser!'
+                description: 'The author of the contribution.'

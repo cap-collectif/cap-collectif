@@ -56,7 +56,7 @@ export class SelectTheme extends React.Component<Props> {
       label,
       optional,
       disabled,
-      placeholder
+      placeholder,
     } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];

@@ -38,7 +38,7 @@ class SectionOpinionsResolver implements ResolverInterface
                 $args->offsetGet('orderBy')['field'],
                 $args->offsetGet('orderBy')['direction'],
                 $args->offsetGet('includeTrashed'),
-                $args->offsetGet('author')
+                $args->offsetGet('author'),
             ];
             $order = OpinionSearch::findOrderFromFieldAndDirection($field, $direction);
             $filters = ['type.id' => $section->getId(), 'published' => true];

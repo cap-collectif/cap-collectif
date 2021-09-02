@@ -1,8 +1,8 @@
 InternalEventConnection:
-  type: relay-connection
-  config:
-    name: EventConnection
-    nodeType: InternalEvent!
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        name: EventConnection
+        nodeType: InternalEvent!
+        connectionFields:
+            totalCount:
+                type: Int!

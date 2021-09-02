@@ -32,7 +32,7 @@ class UpdateProfileMutation implements MutationInterface
         $arguments = $input->getArrayCopy();
 
         $form = $this->formFactory->create(ProfileFormType::class, $user, [
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
         $form->submit($arguments, false);
 

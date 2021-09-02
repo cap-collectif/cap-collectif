@@ -20,13 +20,13 @@ class RecreatePasswordFormType extends AbstractType
             'options' => [
                 'translation_domain' => 'FOSUserBundle',
                 'attr' => [
-                    'autocomplete' => 'new-password'
-                ]
+                    'autocomplete' => 'new-password',
+                ],
             ],
             'constraints' => $constraints,
             'first_options' => ['label' => 'form.new_password'],
             'second_options' => ['label' => 'form.new_password_confirmation'],
-            'invalid_message' => 'fos_user.password.mismatch'
+            'invalid_message' => 'fos_user.password.mismatch',
         ]);
     }
 }

@@ -15,16 +15,16 @@ const props = {
     externalContributionsCount: 234,
     externalVotesCount: 534,
     externalParticipantsCount: 54,
-    archived: false
+    archived: false,
   },
 };
 
 const archivedProjectProps = {
   project: {
     ...props.project,
-    archived: true
-  }
-}
+    archived: true,
+  },
+};
 
 const propsWithoutCounter = {
   project: {
@@ -35,7 +35,7 @@ const propsWithoutCounter = {
     externalContributionsCount: 234,
     externalVotesCount: null,
     externalParticipantsCount: 0,
-    archived: false
+    archived: false,
   },
 };
 

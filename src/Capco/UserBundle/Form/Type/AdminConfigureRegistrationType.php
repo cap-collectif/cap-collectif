@@ -15,7 +15,7 @@ class AdminConfigureRegistrationType extends AbstractType
     {
         $builder
             ->add('translations', TranslationCollectionType::class, [
-                'fields' => ['id', 'locale', 'topText', 'bottomText']
+                'fields' => ['id', 'locale', 'topText', 'bottomText'],
             ])
             ->add('domains', CollectionType::class, [
                 'allow_add' => true,
@@ -27,8 +27,7 @@ class AdminConfigureRegistrationType extends AbstractType
             ->add('bottomTextDisplayed', null, ['required' => false])
             ->add('bottomText', null, ['required' => false])
             ->add('topTextDisplayed', null, ['required' => false])
-            ->add('topText', null, ['required' => false])
-        ;
+            ->add('topText', null, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

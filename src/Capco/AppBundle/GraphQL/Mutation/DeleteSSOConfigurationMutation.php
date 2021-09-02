@@ -37,9 +37,9 @@ class DeleteSSOConfigurationMutation implements MutationInterface
             return [
                 'userErrors' => [
                     [
-                        'message' => 'SSO Configuration not found.'
-                    ]
-                ]
+                        'message' => 'SSO Configuration not found.',
+                    ],
+                ],
             ];
         }
 

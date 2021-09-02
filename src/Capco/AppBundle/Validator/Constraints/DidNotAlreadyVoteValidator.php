@@ -41,7 +41,8 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
 
         foreach ($votes as $vote) {
             if ($vote->getId() !== $object->getId()) {
-                $this->context->buildViolation($constraint->message)
+                $this->context
+                    ->buildViolation($constraint->message)
                     ->atPath('email')
                     ->addViolation();
                 return false;

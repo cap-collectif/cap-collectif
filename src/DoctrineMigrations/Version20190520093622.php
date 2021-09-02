@@ -58,7 +58,7 @@ final class Version20190520093622 extends AbstractMigration implements Container
                     'user_info_url' =>
                         'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/userinfo',
                     'logout_url' =>
-                        'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/logout'
+                        'https://www.laregioncitoyenne.fr/auth/realms/laregioncitoyenne/protocol/openid-connect/logout',
                 ]);
 
                 break;
@@ -73,7 +73,7 @@ final class Version20190520093622 extends AbstractMigration implements Container
                     'authorization_url' => '***REMOVED***',
                     'access_token_url' => '***REMOVED***',
                     'user_info_url' => '***REMOVED***',
-                    'logout_url' => '***REMOVED***'
+                    'logout_url' => '***REMOVED***',
                 ]);
 
                 break;

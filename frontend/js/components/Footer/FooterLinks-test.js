@@ -17,10 +17,13 @@ describe('<FooterLinks />', () => {
       privacyPath: '/privacy',
       legalPath: '/legals',
       textColor: '#000',
-      currentRouteParams: {'_locale': 'fr-FR'},
+      currentRouteParams: { _locale: 'fr-FR' },
       currentRouteName: 'app_homepage',
       defaultLocale: 'en-GB',
-      languageList: [{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }],
+      languageList: [
+        { translationKey: 'french', code: 'fr-FR' },
+        { translationKey: 'english', code: 'en-GB' },
+      ],
     };
 
     const wrapper = shallow(<FooterLinks {...props} />);

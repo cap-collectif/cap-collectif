@@ -9,14 +9,17 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20200821180648 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'remove latMap and lngMap';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE proposal_form DROP lat_map, DROP lng_map');
     }
@@ -31,7 +34,7 @@ final class Version20200821180648 extends AbstractMigration
                     'proposal_form',
                     [
                         'lat_map' => $coordinates['lat'],
-                        'lng_map' => $coordinates['lng']
+                        'lng_map' => $coordinates['lng'],
                     ],
                     ['id' => $row['id']]
                 );
@@ -39,13 +42,17 @@ final class Version20200821180648 extends AbstractMigration
         }
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE proposal_form ADD lat_map DOUBLE PRECISION DEFAULT NULL, ADD lng_map DOUBLE PRECISION DEFAULT NULL');
+        $this->addSql(
+            'ALTER TABLE proposal_form ADD lat_map DOUBLE PRECISION DEFAULT NULL, ADD lng_map DOUBLE PRECISION DEFAULT NULL'
+        );
     }
-
 
     private static function getCoordinatesFromJson(string $json): array
     {

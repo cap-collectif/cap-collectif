@@ -1,7 +1,7 @@
 UpdateLocaleStatusInput:
-  type: relay-mutation-input
-  config:
-    description: 'Update the status of a locale'
-    fields:
-      locales:
-        type: '[LocaleStatusInput!]!'
+    type: relay-mutation-input
+    config:
+        description: 'Update the status of a locale'
+        fields:
+            locales:
+                type: '[LocaleStatusInput!]!'

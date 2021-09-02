@@ -20,7 +20,7 @@ class DebateVoteTokenRepository extends EntityRepository
         return $this->findOneBy([
             'user' => $user,
             'debate' => $debate,
-            'consumptionDate' => null
+            'consumptionDate' => null,
         ]);
     }
 }

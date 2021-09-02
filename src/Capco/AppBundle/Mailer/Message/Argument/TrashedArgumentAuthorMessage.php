@@ -24,7 +24,7 @@ final class TrashedArgumentAuthorMessage extends AbstractExternalMessage
     public static function getMySubjectVars(Argument $argument, array $params): array
     {
         return [
-            '{proposalTitle}' => self::escape($argument->getRelated()->getTitle())
+            '{proposalTitle}' => self::escape($argument->getRelated()->getTitle()),
         ];
     }
 }

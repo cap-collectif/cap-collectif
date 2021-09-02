@@ -1,13 +1,13 @@
 InternalMediaQuestion:
-  type: object
-  inherits:
-    - InternalQuestion
-  config:
-    interfaces:
-      - InternalQuestion
-      - Node
-    name: MediaQuestion
-    description: 'A media question.'
-    fields:
-      kind:
-        resolve: 'media'
+    type: object
+    inherits:
+        - InternalQuestion
+    config:
+        interfaces:
+            - InternalQuestion
+            - Node
+        name: MediaQuestion
+        description: 'A media question.'
+        fields:
+            kind:
+                resolve: 'media'

@@ -1,20 +1,20 @@
 Capco\AppBundle\Entity\Steps\CollectStep:
-  attributes:
-    private:
-      serialized_name: isPrivate
-      groups: [Steps]
-    voteType:
-      groups: [Steps]
-    voteThreshold:
-      groups: [VoteThreshold]
-    votesMin:
-      groups: [Elasticsearch, Steps, ElasticsearchVoteNestedStep]
-    votesLimit:
-      groups: [Steps]
-    budget:
-      groups: [Steps]
-    statuses:
-      groups: [Steps, Statuses]
-    getProposalFormId:
-      serialized_name: proposalFormId
-      groups: [Steps]
+    attributes:
+        private:
+            serialized_name: isPrivate
+            groups: [Steps]
+        voteType:
+            groups: [Steps]
+        voteThreshold:
+            groups: [VoteThreshold]
+        votesMin:
+            groups: [Elasticsearch, Steps, ElasticsearchVoteNestedStep]
+        votesLimit:
+            groups: [Steps]
+        budget:
+            groups: [Steps]
+        statuses:
+            groups: [Steps, Statuses]
+        getProposalFormId:
+            serialized_name: proposalFormId
+            groups: [Steps]

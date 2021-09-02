@@ -13,15 +13,15 @@ class ProposalFormNotificationConfigurationAdmin extends AbstractAdmin
         $formMapper
             ->add('onCreate', CheckboxType::class, [
                 'label' => 'proposal_form.notifications.on_create',
-                'required' => false
+                'required' => false,
             ])
             ->add('onUpdate', CheckboxType::class, [
                 'label' => 'global.modified',
-                'required' => false
+                'required' => false,
             ])
             ->add('onDelete', CheckboxType::class, [
                 'label' => 'global.deleted.feminine',
-                'required' => false
+                'required' => false,
             ])
             ->end();
     }

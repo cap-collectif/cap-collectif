@@ -1,16 +1,16 @@
 PreviewProposalVote:
-  type: object
-  inherits:
-    - PublicPublishable
-    - PreviewPrivatableVote
-    - PreviewVote
-  config:
-    name: ProposalVote
-    description: 'A vote on a proposal for a given step.'
-    interfaces:
-      # TODO: to enable later.
-      # - Node
-      - PublicPublishable
-      - PreviewVote
-      # TODO: to enable later.
-      #- PreviewPrivatableVote
+    type: object
+    inherits:
+        - PublicPublishable
+        - PreviewPrivatableVote
+        - PreviewVote
+    config:
+        name: ProposalVote
+        description: 'A vote on a proposal for a given step.'
+        interfaces:
+            # TODO: to enable later.
+            # - Node
+            - PublicPublishable
+            - PreviewVote
+            # TODO: to enable later.
+            #- PreviewPrivatableVote

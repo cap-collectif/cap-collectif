@@ -16,7 +16,7 @@ class Version20180328092156 extends AbstractMigration
         'position' => 1,
         'type' => 1,
         'is_enabled' => 1,
-        'is_social_network_description' => 0
+        'is_social_network_description' => 0,
     ];
 
     public function up(Schema $schema): void
@@ -29,7 +29,7 @@ class Version20180328092156 extends AbstractMigration
         $defaultValues = [
             'is_enabled' => 1,
             'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
-            'updated_at' => (new \DateTime())->format('Y-m-d H:i:s')
+            'updated_at' => (new \DateTime())->format('Y-m-d H:i:s'),
         ];
         $request = $this->connection->fetchAll(
             "SELECT body FROM page WHERE slug = 'charte' LIMIT 1",
@@ -51,7 +51,10 @@ class Version20180328092156 extends AbstractMigration
             $this->siteParamer['value'] = 'Charte blabla';
         }
 
-        $this->connection->insert('site_parameter', array_merge($this->siteParamer, $defaultValues));
+        $this->connection->insert(
+            'site_parameter',
+            array_merge($this->siteParamer, $defaultValues)
+        );
         $this->write('-> new site parameter');
 
         $this->connection->delete('page', ['slug' => 'charte']);

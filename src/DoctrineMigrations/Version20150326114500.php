@@ -23,7 +23,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.header2.bg',
                 'title' => "Couleur de l'en-tête secondaire",
-                'position' => 5
+                'position' => 5,
             ],
             ['keyname' => 'color.section.bg']
         );
@@ -32,7 +32,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.header2.text',
                 'title' => "Texte de l'en-tête secondaire",
-                'position' => 5
+                'position' => 5,
             ],
             ['keyname' => 'color.section.text']
         );
@@ -41,7 +41,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.header2.title',
                 'title' => "Titre de l'en-tête secondaire",
-                'position' => 5
+                'position' => 5,
             ],
             ['keyname' => 'color.section.title']
         );
@@ -58,7 +58,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.section.text',
                 'title' => 'Texte des sections',
-                'position' => 2
+                'position' => 2,
             ],
             ['keyname' => 'color.body.text']
         );
@@ -73,7 +73,7 @@ class Version20150326114500 extends AbstractMigration
                 'created_at' => $date,
                 'updated_at' => $date,
                 'value' => '#ffffff',
-                'position' => 1
+                'position' => 1,
             ],
             [
                 'keyname' => 'color.body.text',
@@ -82,8 +82,8 @@ class Version20150326114500 extends AbstractMigration
                 'created_at' => $date,
                 'updated_at' => $date,
                 'value' => '#333333',
-                'position' => 1
-            ]
+                'position' => 1,
+            ],
         ];
 
         foreach ($newColors as $color) {
@@ -123,7 +123,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.section.bg',
                 'title' => "Couleur de l'en-tête secondaire",
-                'position' => 5
+                'position' => 5,
             ],
             ['keyname' => 'color.header2.bg']
         );
@@ -132,7 +132,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.section.text',
                 'title' => "Texte de l'en-tête secondaire",
-                'position' => 5
+                'position' => 5,
             ],
             ['keyname' => 'color.header2.text']
         );
@@ -141,7 +141,7 @@ class Version20150326114500 extends AbstractMigration
             [
                 'keyname' => 'color.section.title',
                 'title' => "Titre de l'en-tête secondaire",
-                'position' => 5
+                'position' => 5,
             ],
             ['keyname' => 'color.header2.title']
         );

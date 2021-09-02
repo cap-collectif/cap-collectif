@@ -1,13 +1,13 @@
 InternalResponse:
-  type: interface
-  config:
-    name: Response
-    description: 'A response to a question.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseResolver", [value])'
-    fields:
-      id:
-        type: 'String'
-        description: 'Nullable ID in case of empty response.'
-      question:
-        type: 'InternalQuestion!'
-        description: 'Identifies the question of the response.'
+    type: interface
+    config:
+        name: Response
+        description: 'A response to a question.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseResolver", [value])'
+        fields:
+            id:
+                type: 'String'
+                description: 'Nullable ID in case of empty response.'
+            question:
+                type: 'InternalQuestion!'
+                description: 'Identifies the question of the response.'

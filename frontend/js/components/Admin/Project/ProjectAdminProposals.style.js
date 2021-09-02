@@ -10,17 +10,17 @@ export const ProjectAdminProposalsHeader: StyledComponent<{}, {}, HTMLElement> =
   align-items: center;
   justify-content: space-between;
   margin: 1rem 0;
-  
+
   & > div {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  
+
   & > div:last-of-type {
     display: flex;
     align-items: center;
-  
+
     .clearable-input {
       width: 250px;
     }

@@ -48,7 +48,7 @@ final class Version20200330085715 extends AbstractMigration implements Container
             'is_enabled' => 1,
             'type' => SiteParameter::TYPE_SIMPLE_TEXT,
             'category' => 'pages.redirection',
-            'position' => 2
+            'position' => 2,
         ]);
     }
 

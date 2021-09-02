@@ -77,15 +77,15 @@ const onSubmit = (values, dispatch: Dispatch, props: Props) => {
     isAuthenticated: false,
   })
     .then(() => {
-      const { onClose } = props
-        toast({
-          variant: 'success',
-          content: props.intl.formatHTMLMessage({id: 'event_registration.create.register_success'}),
-        });
-        props.reset();
-        if(onClose){
-          onClose();
-        }
+      const { onClose } = props;
+      toast({
+        variant: 'success',
+        content: props.intl.formatHTMLMessage({ id: 'event_registration.create.register_success' }),
+      });
+      props.reset();
+      if (onClose) {
+        onClose();
+      }
     })
     .catch(() => {
       toast({

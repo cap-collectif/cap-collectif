@@ -23,13 +23,8 @@ class SourceableSourcesResolver implements ResolverInterface
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
 
-            return $this->sourceRepository->getByContribution(
-                $sourceable,
-                $limit,
-                $offset,
-                $field,
-                $direction
-            )
+            return $this->sourceRepository
+                ->getByContribution($sourceable, $limit, $offset, $field, $direction)
                 ->getIterator()
                 ->getArrayCopy();
         });

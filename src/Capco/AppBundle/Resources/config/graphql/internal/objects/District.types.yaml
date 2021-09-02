@@ -1,24 +1,24 @@
 District:
-  type: interface
-  config:
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictTypeResolver", [value])'
-    description: 'A district'
-    fields:
-      id:
-        type: ID!
-      name:
-        type: 'String!'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getName(args["locale"])'
-      geojson:
-        type: GeoJSON
-      geojsonStyle:
-        type: CssJSON
-      displayedOnMap:
-        type: Boolean!
-      border:
-        type: 'Style'
-      background:
-        type: 'Style'
-      translations:
-        type: '[InternalDistrictTranslation!]!'
+    type: interface
+    config:
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictTypeResolver", [value])'
+        description: 'A district'
+        fields:
+            id:
+                type: ID!
+            name:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getName(args["locale"])'
+            geojson:
+                type: GeoJSON
+            geojsonStyle:
+                type: CssJSON
+            displayedOnMap:
+                type: Boolean!
+            border:
+                type: 'Style'
+            background:
+                type: 'Style'
+            translations:
+                type: '[InternalDistrictTranslation!]!'

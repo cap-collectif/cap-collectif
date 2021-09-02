@@ -50,7 +50,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
     public function getScope(): string
     {
         $allowedData = $this->optionsModifier->getAllowedData();
-        $scope =  array_merge(['openid'], $allowedData);
+        $scope = array_merge(['openid'], $allowedData);
 
         return implode(' ', $scope);
     }

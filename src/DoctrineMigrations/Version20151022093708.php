@@ -16,7 +16,7 @@ class Version20151022093708 extends AbstractMigration implements ContainerAwareI
     protected $parameters = [
         'consultations.jumbotron.title' => 'projects.jumbotron.title',
         'consultations.jumbotron.body' => 'projects.jumbotron.body',
-        'consultations.content.body' => 'projects.content.body'
+        'consultations.content.body' => 'projects.content.body',
     ];
     private $container;
 

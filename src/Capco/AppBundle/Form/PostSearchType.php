@@ -37,7 +37,7 @@ class PostSearchType extends AbstractType
                         ->setParameter('enabled', true);
                 },
                 'placeholder' => 'global.select_themes',
-                'attr' => ['onchange' => 'this.form.submit()']
+                'attr' => ['onchange' => 'this.form.submit()'],
             ]);
         }
 
@@ -54,7 +54,7 @@ class PostSearchType extends AbstractType
                     ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
             },
             'placeholder' => 'global.all.projects',
-            'attr' => ['onchange' => 'this.form.submit()']
+            'attr' => ['onchange' => 'this.form.submit()'],
         ]);
     }
 

@@ -299,7 +299,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                 $this->step = null;
                 $this->reference = null;
                 $this->createdAt = new \DateTime();
-                $this->updatedAt = new \DateTime();;
+                $this->updatedAt = new \DateTime();
                 $this->proposals = new ArrayCollection();
 
                 if ($this->evaluationForm) {

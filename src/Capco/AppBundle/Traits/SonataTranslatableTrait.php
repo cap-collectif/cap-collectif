@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Traits;
 
 /**
  * @deprecated
- * 
+ *
  * This trait adds every methods required by SonataTranslatableInterface.
  */
 trait SonataTranslatableTrait
@@ -16,7 +16,7 @@ trait SonataTranslatableTrait
         return $this;
     }
 
-    public function getLocale(): string 
+    public function getLocale(): string
     {
         return $this->getCurrentLocale();
     }

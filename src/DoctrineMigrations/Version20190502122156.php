@@ -71,7 +71,7 @@ class Version20190502122156 extends AbstractMigration implements ContainerAwareI
                 'is_enabled' => 1,
                 'created_at' => $date,
                 'updated_at' => $date,
-            ]
+            ],
         ];
 
         foreach ($newParameters as $values) {

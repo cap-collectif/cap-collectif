@@ -26,7 +26,7 @@ InternalDebateArticle:
                 description: "The url of the article's cover."
                 type: URI
             origin:
-                description: "The origin of the article."
+                description: 'The origin of the article.'
                 type: String
             publishedAt:
                 type: DateTime

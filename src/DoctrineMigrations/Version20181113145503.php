@@ -31,7 +31,7 @@ final class Version20181113145503 extends AbstractMigration
             'parent_id' => null,
             'created_at' => $date,
             'updated_at' => $date,
-            'menu' => 2
+            'menu' => 2,
         ]);
     }
 

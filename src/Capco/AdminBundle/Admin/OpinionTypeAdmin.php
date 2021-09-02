@@ -21,7 +21,7 @@ class OpinionTypeAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     private $tokenStorage;
@@ -68,7 +68,7 @@ class OpinionTypeAdmin extends AbstractAdmin
 
         return [
             'consultation_id' => $consultationId,
-            'consultation_name' => $consultationName
+            'consultation_name' => $consultationName,
         ];
     }
 
@@ -120,43 +120,43 @@ class OpinionTypeAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.fields.opinion_type.group_info')
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('subtitle', null, [
-                'label' => 'global.subtitle'
+                'label' => 'global.subtitle',
             ])
             ->add('description', CKEditorType::class, [
                 'config_name' => 'admin_editor',
                 'label' => 'global.description',
-                'required' => false
+                'required' => false,
             ])
             ->add('parent', ModelType::class, [
                 'label' => 'admin.fields.menu_item.parent',
                 'required' => false,
                 'query' => $this->createQueryForParent(),
-                'btn_add' => false
+                'btn_add' => false,
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('slug', null, [
                 'label' => 'global.link',
                 'attr' => [
                     'readonly' => true,
-                    'disabled' => true
-                ]
+                    'disabled' => true,
+                ],
             ])
             ->end()
             ->with('admin.fields.opinion_type.group_options')
             ->add('color', ChoiceType::class, [
                 'label' => 'global.color',
                 'choices' => OpinionType::$colorsType,
-                'translation_domain' => 'CapcoAppBundle'
+                'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('defaultFilter', ChoiceType::class, [
                 'label' => 'admin.fields.opinion_type.default_filter',
                 'choices' => Opinion::$sortCriterias,
-                'translation_domain' => 'CapcoAppBundle'
+                'translation_domain' => 'CapcoAppBundle',
             ])
             ->end()
             ->with('admin.fields.opinion_type.group_votes');
@@ -167,36 +167,36 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'label_attr' => ['id' => 'voteWidgetType'],
                 'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => true
+                'required' => true,
             ]);
         }
 
         $formMapper
             ->add('votesHelpText', TextareaType::class, [
                 'label' => 'admin.fields.opinion_type.votes_help_text',
-                'required' => false
+                'required' => false,
             ])
             ->add('votesThreshold', IntegerType::class, [
                 'label' => 'admin.fields.opinion_type.votes_threshold',
-                'required' => false
+                'required' => false,
             ])
             ->add('votesThresholdHelpText', TextareaType::class, [
                 'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
-                'required' => false
+                'required' => false,
             ])
             ->end()
             ->with('admin.fields.opinion_type.group_contribution')
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.opinion_type.is_enabled',
-                'required' => false
+                'required' => false,
             ])
             ->add('versionable', null, [
                 'label' => 'admin.fields.opinion_type.versionable',
-                'required' => false
+                'required' => false,
             ])
             ->add('sourceable', null, [
                 'label' => 'admin.fields.opinion_type.sourceable',
-                'required' => false
+                'required' => false,
             ]);
         if ($user->isSuperAdmin()) {
             $formMapper->add('commentSystem', ChoiceType::class, [
@@ -204,7 +204,7 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'label_attr' => ['id' => 'commentSystem'],
                 'choices' => $commentSystemChoices,
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => true
+                'required' => true,
             ]);
         }
         $formMapper
@@ -216,12 +216,12 @@ class OpinionTypeAdmin extends AbstractAdmin
                 [
                     'label' => 'global.context.elements',
                     'by_reference' => false,
-                    'required' => false
+                    'required' => false,
                 ],
                 [
                     'edit' => 'inline',
                     'inline' => 'table',
-                    'sortable' => 'position'
+                    'sortable' => 'position',
                 ]
             )
             ->end();

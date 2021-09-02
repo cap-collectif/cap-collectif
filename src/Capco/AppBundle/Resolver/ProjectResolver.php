@@ -14,8 +14,11 @@ class ProjectResolver
     protected $router;
     protected $requestStack;
 
-    public function __construct(ProjectRepository $projectRepository, RouterInterface $router, RequestStack $requestStack)
-    {
+    public function __construct(
+        ProjectRepository $projectRepository,
+        RouterInterface $router,
+        RequestStack $requestStack
+    ) {
         $this->projectRepository = $projectRepository;
         $this->router = $router;
         $this->requestStack = $requestStack;
@@ -23,13 +26,22 @@ class ProjectResolver
 
     public function resolveAdminEditUrl(Project $project, bool $absolute = true): string
     {
-        return $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId(), '_locale' => $this->requestStack->getCurrentRequest()->getLocale()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+        return $this->router->generate(
+            'admin_capco_app_project_edit',
+            [
+                'id' => $project->getId(),
+                '_locale' => $this->requestStack->getCurrentRequest()->getLocale(),
+            ],
+            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH
+        );
     }
 
     public function resolveIndexUrl(bool $absolute = true): string
     {
-        return $this->router->generate('app_project', [ '_locale' => $this->requestStack->getCurrentRequest()->getLocale()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+        return $this->router->generate(
+            'app_project',
+            ['_locale' => $this->requestStack->getCurrentRequest()->getLocale()],
+            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH
+        );
     }
 }

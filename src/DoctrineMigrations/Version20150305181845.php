@@ -80,7 +80,7 @@ class Version20150305181845 extends AbstractMigration implements ContainerAwareI
             SiteParameter::$types['simple_text'],
             false,
             $created,
-            $updated
+            $updated,
         ];
 
         $query = $em->createQuery(

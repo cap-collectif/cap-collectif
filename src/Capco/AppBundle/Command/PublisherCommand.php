@@ -40,7 +40,6 @@ class PublisherCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         foreach ($this->getEntitiesToBePublished($input) as $item) {
             $this->publish($item, $output);
         }

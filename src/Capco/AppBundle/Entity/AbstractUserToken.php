@@ -28,7 +28,6 @@ abstract class AbstractUserToken
 
     public function __construct(User $user, ?string $token = null)
     {
-
         $this->user = $user;
         $this->token = $token ?? self::generateToken();
     }
@@ -45,7 +44,7 @@ abstract class AbstractUserToken
 
     public function isValid(): bool
     {
-        return (null === $this->getConsumptionDate());
+        return null === $this->getConsumptionDate();
     }
 
     public function getConsumptionDate(): ?\DateTime

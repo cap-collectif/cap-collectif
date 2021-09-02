@@ -267,8 +267,7 @@ class OpinionVersionRepository extends EntityRepository
     public function countAllByAuthor(User $user, ?User $viewer = null): int
     {
         $qb = $this->createQueryBuilder('version');
-        $qb
-            ->select('count(DISTINCT version)')
+        $qb->select('count(DISTINCT version)')
             ->leftJoin('version.parent', 'o')
             ->innerJoin('o.consultation', 'oc')
             ->innerJoin('oc.step', 's')
@@ -288,8 +287,7 @@ class OpinionVersionRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('version');
         $qb->andWhere('version.author = :author')->setParameter('author', $user);
-        $qb
-            ->select('version')
+        $qb->select('version')
             ->leftJoin('version.parent', 'o')
             ->innerJoin('o.consultation', 'oc')
             ->innerJoin('oc.step', 's')

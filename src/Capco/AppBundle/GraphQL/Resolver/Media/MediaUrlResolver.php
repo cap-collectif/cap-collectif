@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class MediaUrlResolver implements ResolverInterface
 {
-
     private $imgProvider;
     private $fileProvider;
     private $router;
@@ -46,26 +45,26 @@ class MediaUrlResolver implements ResolverInterface
         $routingContext = $this->router->getContext();
 
         if ('reference' === $format) {
-            $path = $routingContext->getScheme() . '://' . $routingContext->getHost() . '/' .
+            $path =
+                $routingContext->getScheme() .
+                '://' .
+                $routingContext->getHost() .
+                '/' .
                 'media' .
                 $provider->generatePublicUrl($media, 'reference');
             if ($this->assetsHost && !$isExportContext) {
-                $path = str_replace(
-                    $this->routerRequestContextHost,
-                    $this->assetsHost,
-                    $path
-                );
+                $path = str_replace($this->routerRequestContextHost, $this->assetsHost, $path);
             }
             return $path;
         }
 
-        return $this->assetsHost ?
-            str_replace(
+        return $this->assetsHost
+            ? str_replace(
                 $this->routerRequestContextHost,
                 $this->assetsHost,
                 $provider->generatePublicUrl($media, $format)
-            ) :
-            $provider->generatePublicUrl($media, $format);
+            )
+            : $provider->generatePublicUrl($media, $format);
     }
 
     private function getProvider(string $providerName)

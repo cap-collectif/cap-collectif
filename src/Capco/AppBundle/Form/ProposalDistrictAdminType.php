@@ -17,10 +17,10 @@ class ProposalDistrictAdminType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'purify_html' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
             ->add('geojson', TextType::class, [
-                'constraints' => [new CheckGeoJson()]
+                'constraints' => [new CheckGeoJson()],
             ])
             ->add('geojsonStyle')
             ->add('displayedOnMap', CheckboxType::class);
@@ -30,7 +30,7 @@ class ProposalDistrictAdminType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ProposalDistrict::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }

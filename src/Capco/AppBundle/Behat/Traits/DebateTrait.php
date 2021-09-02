@@ -11,6 +11,8 @@ trait DebateTrait
      */
     public function iGoToAnOpenDebateWidgetPage()
     {
-        $this->visitPageWithParams('widget debate page', ['debateId' => GlobalId::toGlobalId('Debate', 'debateCannabis')]);
+        $this->visitPageWithParams('widget debate page', [
+            'debateId' => GlobalId::toGlobalId('Debate', 'debateCannabis'),
+        ]);
     }
 }

@@ -13,7 +13,7 @@ class StepStatusesResolver implements ResolverInterface
     {
         return $step->getStatuses()->matching(
             AbstractStepRepository::createOrderedByCritera([
-                'position' => Criteria::ASC
+                'position' => Criteria::ASC,
             ])
         );
     }

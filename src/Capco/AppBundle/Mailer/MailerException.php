@@ -1,6 +1,7 @@
 <?php
 
-
 namespace Capco\AppBundle\Mailer;
 
-class MailerException extends \Exception {}
+class MailerException extends \Exception
+{
+}

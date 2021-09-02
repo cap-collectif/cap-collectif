@@ -28,11 +28,10 @@ class SamlUserProvider implements UserProviderInterface
         if (null === $user) {
             $user = $this->userManager->findUserByEmail($id);
 
-            if(null !== $user) {
+            if (null !== $user) {
                 $user->setSamlId($id);
                 $this->userManager->updateUser($user);
-            }
-            else {
+            } else {
                 $user = $this->userManager->createUser();
                 $user->setSamlId($id);
                 $user->setUsername($id);

@@ -95,8 +95,7 @@ class OpinionVoteRepository extends EntityRepository
     public function getByContributionAndValueQB(Opinion $votable, int $value)
     {
         $qb = $this->getPublishedQueryBuilder();
-        $qb
-            ->andWhere('v.opinion = :opinion')
+        $qb->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $votable->getId())
             ->andWhere('v.value = :value')
             ->setParameter('value', $value);
@@ -169,8 +168,7 @@ class OpinionVoteRepository extends EntityRepository
             $qb->addSelect('u as author')->leftJoin('v.user', 'u');
         }
 
-        $qb
-            ->addSelect('o')
+        $qb->addSelect('o')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $opinionId)
@@ -187,8 +185,7 @@ class OpinionVoteRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ov');
 
-        $qb
-            ->select('count(ov.id)')
+        $qb->select('count(ov.id)')
             ->where('ov.opinion = :opinion')
             ->setParameter('opinion', $opinion);
 
@@ -262,7 +259,7 @@ class OpinionVoteRepository extends EntityRepository
                 'from' => $from,
                 'to' => $to,
                 'id' => $opinionId,
-                'vote' => $voteValue
+                'vote' => $voteValue,
             ]);
 
         return (int) $query->getQuery()->getSingleScalarResult();

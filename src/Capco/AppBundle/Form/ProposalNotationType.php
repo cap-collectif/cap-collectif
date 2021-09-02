@@ -14,12 +14,11 @@ class ProposalNotationType extends AbstractType
     {
         $builder
             ->add('estimation', MoneyType::class, [
-              'currency' => 'EUR',
+                'currency' => 'EUR',
             ])
             ->add('likers', null, [
                 'by_reference' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -19,8 +19,12 @@ class SessionWithJsonHandler extends BaseHandler
     private Security $security;
     public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
 
-    public function __construct(ClientInterface $redis, Security $security, array $options = [], string $prefix)
-    {
+    public function __construct(
+        ClientInterface $redis,
+        Security $security,
+        array $options = [],
+        string $prefix
+    ) {
         $options['ttl'] = 1209600; // This is two weeks
         $options['prefix'] = $prefix;
         # /!\ Our session data should be "read-only" :
@@ -35,7 +39,6 @@ class SessionWithJsonHandler extends BaseHandler
         parent::__construct($redis, $options, $prefix, $locking);
         $this->security = $security;
     }
-
 
     // See: https://symfony.com/doc/current/session/proxy_examples.html#read-only-guest-sessions
     private function getUser(): ?User
@@ -53,19 +56,19 @@ class SessionWithJsonHandler extends BaseHandler
      * $data: string
      *
      * We must return 1 to avoid session_close errors
-     * 
+     *
      * @return bool
      */
     public function write($sessionId, $data)
     {
         $viewer = $this->getUser();
-        
+
         return parent::write($sessionId, $this->encode($data, $viewer));
     }
 
     /**
      * $sessionId: string
-     * 
+     *
      * @return string
      */
     public function read($sessionId)
@@ -81,30 +84,30 @@ class SessionWithJsonHandler extends BaseHandler
         $encodedSession = $rawPhpSession . self::SEPARATOR;
         if ($viewer) {
             $encodedSession .= json_encode([
-                'viewer'=> [
+                'viewer' => [
                     'email' => $viewer->getEmail(),
                     'username' => $viewer->getUsername(),
                     'id' => GlobalId::toGlobalId('User', $viewer->getId()),
                     'isAdmin' => $viewer->isAdmin(),
                     'isSuperAdmin' => $viewer->isSuperAdmin(),
-                    'isProjectAdmin' => $viewer->isProjectAdmin()
-            ]]);
+                    'isProjectAdmin' => $viewer->isProjectAdmin(),
+                ],
+            ]);
         }
 
         return $encodedSession;
     }
 
-
     public function decode(string $encodedSession): string
     {
         if (strlen($encodedSession) == 0) {
-            return "";
+            return '';
         }
 
         $decodedArray = explode(self::SEPARATOR, $encodedSession);
 
         if (!$decodedArray || !isset($decodedArray[0])) {
-            return "";
+            return '';
         }
 
         $rawPhpSession = $decodedArray[0];

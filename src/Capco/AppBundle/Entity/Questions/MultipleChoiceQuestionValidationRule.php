@@ -16,7 +16,7 @@ final class MultipleChoiceQuestionValidationRule
     public static $typeLabels = [
         'questionnaire.validation.type.min' => MultipleChoiceQuestionValidationRules::MIN,
         'questionnaire.validation.type.equal' => MultipleChoiceQuestionValidationRules::EQUAL,
-        'questionnaire.validation.type.max' => MultipleChoiceQuestionValidationRules::MAX
+        'questionnaire.validation.type.max' => MultipleChoiceQuestionValidationRules::MAX,
     ];
 
     /**

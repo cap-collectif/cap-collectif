@@ -18,7 +18,7 @@ class EventReviewStatusType extends AbstractEnumType
         self::NOT_PUBLISHED => 'post_is_not_public',
         self::APPROVED => 'approved',
         self::REFUSED => 'global.declined',
-        self::DELETED => 'global.deleted'
+        self::DELETED => 'global.deleted',
     ];
 
     protected $name = 'enum_event_review_status';

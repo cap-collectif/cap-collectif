@@ -1,24 +1,24 @@
 InternalSSOConfiguration:
-  type: interface
-  inherits:
-    - Node
-  config:
-    name: SSOConfiguration
-    description: 'A SSO Configuration'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\TypeResolver", [value])'
-    fields:
-      name:
-        description: 'The name of configured SSO.'
-        type: 'String!'
-      enabled:
-        description: 'Does this configuration is enabled?'
-        type: 'Boolean!'
-      profileUrl:
-        type: 'URI'
-        description: 'Profile URL on the SSO side.'
-      buttonColor:
-        type: 'Color!'
-        description: 'Color in hexadecimal of SSO button.'
-      labelColor:
-        type: 'Color!'
-        description: 'Color in hexadecimal of label SSO button.'
+    type: interface
+    inherits:
+        - Node
+    config:
+        name: SSOConfiguration
+        description: 'A SSO Configuration'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\TypeResolver", [value])'
+        fields:
+            name:
+                description: 'The name of configured SSO.'
+                type: 'String!'
+            enabled:
+                description: 'Does this configuration is enabled?'
+                type: 'Boolean!'
+            profileUrl:
+                type: 'URI'
+                description: 'Profile URL on the SSO side.'
+            buttonColor:
+                type: 'Color!'
+                description: 'Color in hexadecimal of SSO button.'
+            labelColor:
+                type: 'Color!'
+                description: 'Color in hexadecimal of label SSO button.'

@@ -50,8 +50,7 @@ class FollowerRepository extends EntityRepository
     public function countFollowersOfOpinionVersion(OpinionVersion $version): int
     {
         $qb = $this->createQueryBuilder('f');
-        $qb
-            ->select($qb->expr()->count('f.id'))
+        $qb->select($qb->expr()->count('f.id'))
             ->leftJoin('f.opinionVersion', 'ov')
             ->where($qb->expr()->eq('ov.id', ':versionId'))
             ->setParameter(':versionId', $version->getId());
@@ -70,9 +69,10 @@ class FollowerRepository extends EntityRepository
             ->join('f.user', 'u');
 
         if (isset($criteria['proposal'])) {
-            $qb
-                ->andWhere('p.id = :proposalId')
-                ->setParameter('proposalId', $criteria['proposal']->getId());
+            $qb->andWhere('p.id = :proposalId')->setParameter(
+                'proposalId',
+                $criteria['proposal']->getId()
+            );
         }
 
         $sortField = array_keys($orderBy)[0];

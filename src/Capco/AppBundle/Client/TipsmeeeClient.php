@@ -34,8 +34,8 @@ class TipsmeeeClient
             $accounts = $this->makeRequest('GET', 'capco');
 
             return $accounts->toArray();
-        } catch (TransportException | ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface  $exception) {
-            $this->logger->error(__METHOD__.' : '.$exception->getMessage());
+        } catch (TransportException | ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface $exception) {
+            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
             return [];
         }
@@ -46,10 +46,9 @@ class TipsmeeeClient
         try {
             $account = $this->makeRequest('GET', "capco/user/${accountId}/");
 
-
             return $account->toArray();
         } catch (TransportException | ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface $exception) {
-            $this->logger->error(__METHOD__.' : '.$exception->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
             return [];
         }
@@ -69,7 +68,7 @@ class TipsmeeeClient
         try {
             return $this->client->request($method, $path, $options);
         } catch (TransportExceptionInterface $exception) {
-            $this->logger->error('Wrong query parameters.'.__METHOD__.$exception->getMessage());
+            $this->logger->error('Wrong query parameters.' . __METHOD__ . $exception->getMessage());
 
             throw new TransportException($exception->getMessage());
         }

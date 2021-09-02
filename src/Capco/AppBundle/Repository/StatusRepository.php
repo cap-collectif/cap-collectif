@@ -19,8 +19,7 @@ class StatusRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s')
             ->where('s.step = :step')
             ->setParameter('step', $step)
-            ->orderBy('s.position', 'ASC')
-        ;
+            ->orderBy('s.position', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
@@ -32,8 +31,7 @@ class StatusRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
             ->setParameter('project', $project)
-            ->orderBy('s.position', 'ASC')
-        ;
+            ->orderBy('s.position', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

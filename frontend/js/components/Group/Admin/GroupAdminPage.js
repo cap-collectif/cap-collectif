@@ -33,9 +33,21 @@ export class GroupAdminPage extends Component<Props, State> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query GroupAdminPageQuery($id: ID!, $countUsers: Int!, $cursorUsers: String, $countInvitations: Int!, $cursorInvitations: String) {
+            query GroupAdminPageQuery(
+              $id: ID!
+              $countUsers: Int!
+              $cursorUsers: String
+              $countInvitations: Int!
+              $cursorInvitations: String
+            ) {
               group: node(id: $id) {
-                ...GroupAdminPageTabs_group @arguments(countUsers: $countUsers, cursorUsers: $cursorUsers, countInvitations: $countInvitations, cursorInvitations: $cursorInvitations )
+                ...GroupAdminPageTabs_group
+                  @arguments(
+                    countUsers: $countUsers
+                    cursorUsers: $cursorUsers
+                    countInvitations: $countInvitations
+                    cursorInvitations: $cursorInvitations
+                  )
                 ...GroupAdminParameters_group
               }
             }

@@ -11,7 +11,7 @@ class OtherStepFormType extends AbstractStepFormType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => OtherStep::class
+            'data_class' => OtherStep::class,
         ]);
     }
 }

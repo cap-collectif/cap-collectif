@@ -13,7 +13,7 @@ import { MenuContext } from '~ds/Menu/Menu.context';
 import type { TippyPlacementProps } from '~ds/common.type';
 import type { Context } from '~ds/Menu/Menu.context';
 import AppBox from '~ui/Primitives/AppBox';
-import type {AppBoxProps} from "~ui/Primitives/AppBox.type";
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 
 type Props = {|
   ...AppBoxProps,

@@ -55,8 +55,10 @@ class ProposalUpdateProcessor implements ProcessorInterface
         return $proposal;
     }
 
-    private function getUpdateDateFromMessageOrProposal(array $json, Proposal $proposal): \DateTimeInterface
-    {
+    private function getUpdateDateFromMessageOrProposal(
+        array $json,
+        Proposal $proposal
+    ): \DateTimeInterface {
         return isset($json['date']) ? new \DateTime($json['date']) : $proposal->getUpdatedAt();
     }
 }

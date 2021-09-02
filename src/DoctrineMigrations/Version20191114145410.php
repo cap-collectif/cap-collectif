@@ -64,7 +64,7 @@ final class Version20191114145410 extends AbstractMigration implements Container
                 'slug' => $theme['slug'],
                 'teaser' => $theme['teaser'],
                 'body' => $theme['body'],
-                'meta_description' => $theme['meta_description']
+                'meta_description' => $theme['meta_description'],
             ]);
         }
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Capco\AppBundle\Security;
-
 
 use ReCaptcha\ReCaptcha;
 
@@ -15,7 +13,7 @@ class CaptchaChecker
         $this->recaptcha = new ReCaptcha($apiKey);
     }
 
-    public function __invoke(string $captcha, string $ip): bool 
+    public function __invoke(string $captcha, string $ip): bool
     {
         return $this->recaptcha->verify($captcha, $ip)->isSuccess();
     }

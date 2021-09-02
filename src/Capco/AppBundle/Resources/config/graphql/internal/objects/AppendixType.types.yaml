@@ -1,7 +1,7 @@
 AppendixType:
-  type: object
-  config:
-    description: 'An AppendixType'
-    fields:
-      title:
-        type: 'String!'
+    type: object
+    config:
+        description: 'An AppendixType'
+        fields:
+            title:
+                type: 'String!'

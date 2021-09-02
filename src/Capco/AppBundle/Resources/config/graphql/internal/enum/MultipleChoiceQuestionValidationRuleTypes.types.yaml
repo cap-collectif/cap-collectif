@@ -1,11 +1,11 @@
 MultipleChoiceQuestionValidationRulesTypes:
-  type: enum
-  config:
-    description: 'Available types of validation rules'
-    values:
-      MIN:
-        value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::MIN")'
-      EQUAL:
-        value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::EQUAL")'
-      MAX:
-        value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::MAX")'
+    type: enum
+    config:
+        description: 'Available types of validation rules'
+        values:
+            MIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::MIN")'
+            EQUAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::EQUAL")'
+            MAX:
+                value: '@=constant("Capco\\AppBundle\\Enum\\MultipleChoiceQuestionValidationRules::MAX")'

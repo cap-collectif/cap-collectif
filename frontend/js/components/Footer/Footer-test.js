@@ -23,10 +23,13 @@ describe('<Footer />', () => {
       privacyPath: '/privacy',
       legalPath: '/legals',
       features,
-      currentRouteParams: {'_locale': 'fr-FR'},
+      currentRouteParams: { _locale: 'fr-FR' },
       currentRouteName: 'app_homepage',
       defaultLocale: 'en-GB',
-      languageList: [{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }],
+      languageList: [
+        { translationKey: 'french', code: 'fr-FR' },
+        { translationKey: 'english', code: 'en-GB' },
+      ],
     };
 
     const wrapper = shallow(<Footer {...props} />);

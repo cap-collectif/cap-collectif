@@ -10,9 +10,9 @@ class UserInviteStatusResolver implements ResolverInterface
 {
     public function __invoke(UserInvite $userInvite): string
     {
-       if ($userInvite->hasExpired()) {
-           return UserInviteStatus::EXPIRED;
-       }
-       return UserInviteStatus::PENDING;
+        if ($userInvite->hasExpired()) {
+            return UserInviteStatus::EXPIRED;
+        }
+        return UserInviteStatus::PENDING;
     }
 }

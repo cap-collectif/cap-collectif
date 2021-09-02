@@ -1,10 +1,10 @@
 YesNoPairedVote:
-  type: interface
-  inherits:
-    - InternalVote
-    - PublicPublishable
-  config:
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
-    fields:
-      value:
-        type: 'YesNoPairedVoteValue!'
+    type: interface
+    inherits:
+        - InternalVote
+        - PublicPublishable
+    config:
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        fields:
+            value:
+                type: 'YesNoPairedVoteValue!'

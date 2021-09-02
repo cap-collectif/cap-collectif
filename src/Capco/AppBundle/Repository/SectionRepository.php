@@ -23,9 +23,7 @@ class SectionRepository extends EntityRepository implements PositionableReposito
             ->leftJoin('pas.project', 'project')
             ->orderBy('s.position', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -42,9 +40,7 @@ class SectionRepository extends EntityRepository implements PositionableReposito
             ->leftJoin('pas.project', 'project')
             ->orderBy('s.position', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**

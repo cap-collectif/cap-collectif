@@ -123,7 +123,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
                 $this->logger->error(
                     sprintf("step with id '%s' not found", $args->offsetGet('step')),
                     [
-                        'method' => __METHOD__
+                        'method' => __METHOD__,
                     ]
                 );
 

@@ -9,22 +9,28 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20201012110216 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'undraftAt';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE proposal ADD undraft_at DATETIME DEFAULT NULL');
         $this->addSql('ALTER TABLE reply ADD undraft_at DATETIME DEFAULT NULL');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE proposal DROP undraft_at');
         $this->addSql('ALTER TABLE reply DROP undraft_at');
@@ -45,9 +51,11 @@ final class Version20201012110216 extends AbstractMigration
 
     private function getUndraftedEntities(string $type): array
     {
-        return $this->connection->fetchAll("SELECT id, publishedAt, created_at FROM $type WHERE is_draft = false");
+        return $this->connection->fetchAll(
+            "SELECT id, publishedAt, created_at FROM $type WHERE is_draft = false"
+        );
     }
-    
+
     private function setUndraftAt(string $type, array $data): void
     {
         $this->connection->update(

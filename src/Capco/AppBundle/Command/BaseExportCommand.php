@@ -28,7 +28,13 @@ abstract class BaseExportCommand extends Command
             InputOption::VALUE_NONE,
             'Use the export for a snapshot, by replacing dynamic data with placeholders.'
         );
-        $this->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
+        $this->addOption(
+            'delimiter',
+            'd',
+            InputOption::VALUE_OPTIONAL,
+            'Delimiter used in csv',
+            ';'
+        );
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
@@ -39,7 +45,10 @@ abstract class BaseExportCommand extends Command
             : $this->exportUtils->disableSnapshotMode();
     }
 
-    public static function getShortenedFilename(string $filename, string $extension = '.csv'): string{
+    public static function getShortenedFilename(
+        string $filename,
+        string $extension = '.csv'
+    ): string {
         //If filename is too long (> 255) it will cause an error since it includes path, we check for 230 characters
         if (\strlen($filename) >= 230) {
             $filename = md5($filename);

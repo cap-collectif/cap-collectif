@@ -17,10 +17,12 @@ class TranslationCollectionType extends AbstractType
     private $publishedLocales;
     private $defaultLocale;
 
-    public function __construct(TranslationCollectionTypeSubscriber $subscriber, LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        TranslationCollectionTypeSubscriber $subscriber,
+        LocaleRepository $localeRepository
+    ) {
         $this->subscriber = $subscriber;
-        foreach($localeRepository->findEnabledLocales() as $locale) {
+        foreach ($localeRepository->findEnabledLocales() as $locale) {
             $this->availableLocales[] = $locale->getCode();
             if ($locale->isPublished()) {
                 $this->publishedLocales[] = $locale->getCode();
@@ -53,7 +55,7 @@ class TranslationCollectionType extends AbstractType
             'fields' => [],
             'fields_options' => [],
             'excluded_fields' => [],
-            'allow_extra_fields' => true
+            'allow_extra_fields' => true,
         ]);
     }
 

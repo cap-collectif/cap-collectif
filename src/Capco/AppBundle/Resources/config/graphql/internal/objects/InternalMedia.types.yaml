@@ -1,40 +1,40 @@
 InternalMedia:
-  type: object
-  inherits:
-    - UniformResourceLocatable
-  config:
-    name: Media
-    interfaces:
-      - UniformResourceLocatable
-    description: 'A media'
-    fields:
-      id:
-        type: 'ID!'
-        description: 'The id of the media.'
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Media\\MediaUrlResolver", [value, args, context])'
-        args:
-          format:
-            # TODO transform this to enum
-            type: 'String'
-            description: 'The format of the media'
-      name:
-        type: 'String!'
-      size:
-        type: 'String!'
-      enabled:
-        type: 'Boolean!'
-      authorName:
-        type: 'String'
-      description:
-        type: 'String'
-      copyright:
-        type: 'String'
-      contentType:
-        type: 'String!'
-      providerReference:
-        type: 'String!'
-      height:
-          type: 'Int'
-      width:
-          type: 'Int'
+    type: object
+    inherits:
+        - UniformResourceLocatable
+    config:
+        name: Media
+        interfaces:
+            - UniformResourceLocatable
+        description: 'A media'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the media.'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Media\\MediaUrlResolver", [value, args, context])'
+                args:
+                    format:
+                        # TODO transform this to enum
+                        type: 'String'
+                        description: 'The format of the media'
+            name:
+                type: 'String!'
+            size:
+                type: 'String!'
+            enabled:
+                type: 'Boolean!'
+            authorName:
+                type: 'String'
+            description:
+                type: 'String'
+            copyright:
+                type: 'String'
+            contentType:
+                type: 'String!'
+            providerReference:
+                type: 'String!'
+            height:
+                type: 'Int'
+            width:
+                type: 'Int'

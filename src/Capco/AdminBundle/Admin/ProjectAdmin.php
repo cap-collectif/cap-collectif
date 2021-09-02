@@ -183,8 +183,9 @@ final class ProjectAdmin extends CapcoAdmin
         $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
         $query->setParameter('author', $user);
 
-        if($user->hasRole(UserRole::ROLE_PROJECT_ADMIN)) {
-            $query->andWhere($query->getRootAliases()[0] . '.owner = :owner')
+        if ($user->hasRole(UserRole::ROLE_PROJECT_ADMIN)) {
+            $query
+                ->andWhere($query->getRootAliases()[0] . '.owner = :owner')
                 ->setParameter('owner', $user);
         }
 
@@ -252,7 +253,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
-                'actions' => $actions
+                'actions' => $actions,
             ]);
     }
 

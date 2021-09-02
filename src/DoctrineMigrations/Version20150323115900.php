@@ -21,7 +21,7 @@ class Version20150323115900 extends AbstractMigration
             'section',
             [
                 'teaser' =>
-                    "Inscrivez-vous à la lettre d'information pour rester informé de l'actualité."
+                    "Inscrivez-vous à la lettre d'information pour rester informé de l'actualité.",
             ],
             ['type' => 'newsletter']
         );

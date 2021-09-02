@@ -20,8 +20,7 @@ class VideoRepository extends EntityRepository
             ->addSelect('a, m')
             ->leftJoin('v.Author', 'a')
             ->leftJoin('v.media', 'm')
-            ->orderBy('v.position', 'ASC')
-        ;
+            ->orderBy('v.position', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
@@ -40,8 +39,7 @@ class VideoRepository extends EntityRepository
             ->addSelect('a, m')
             ->leftJoin('v.Author', 'a')
             ->leftJoin('v.media', 'm')
-            ->orderBy('v.position', 'ASC')
-        ;
+            ->orderBy('v.position', 'ASC');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -51,9 +49,7 @@ class VideoRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     protected function getIsEnabledQueryBuilder()

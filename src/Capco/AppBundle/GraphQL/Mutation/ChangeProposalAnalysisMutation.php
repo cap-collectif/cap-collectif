@@ -173,7 +173,7 @@ class ChangeProposalAnalysisMutation implements MutationInterface
             'type' => 'analysis',
             'analysisId' => $proposalAnalysis->getId(),
             'proposalId' => $proposalAnalysis->getProposal()->getId(),
-            'date' => $proposalAnalysis->getUpdatedAt()->format('Y-m-d H:i:s')
+            'date' => $proposalAnalysis->getUpdatedAt()->format('Y-m-d H:i:s'),
         ];
         if (
             $proposalAnalysis->getState() !== $oldState &&

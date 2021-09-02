@@ -23,7 +23,8 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                 return;
             }
             if ('min' === $rule->getType() && $valueLength < $rule->getNumber()) {
-                $this->context->buildViolation('error.answer.count.min')
+                $this->context
+                    ->buildViolation('error.answer.count.min')
                     ->atPath('value')
                     ->setParameter('nb', $rule->getNumber())
                     ->addViolation();
@@ -31,7 +32,8 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                 return;
             }
             if ('max' === $rule->getType() && $valueLength > $rule->getNumber()) {
-                $this->context->buildViolation('error.answer.count.max')
+                $this->context
+                    ->buildViolation('error.answer.count.max')
                     ->atPath('value')
                     ->setParameter('nb', $rule->getNumber())
                     ->addViolation();
@@ -39,7 +41,8 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                 return;
             }
             if ('equal' === $rule->getType() && $valueLength !== $rule->getNumber()) {
-                $this->context->buildViolation('error.answer.count.equal')
+                $this->context
+                    ->buildViolation('error.answer.count.equal')
                     ->atPath('value')
                     ->setParameter('nb', $rule->getNumber())
                     ->addViolation();

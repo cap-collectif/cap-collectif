@@ -44,23 +44,21 @@ final class Version20210312153909 extends AbstractMigration implements Container
         $translationId = $query->getOneOrNullResult()['id'];
 
         $query = $em->createQuery(
-            "SELECT spt.id FROM Capco\\AppBundle\\Entity\\SiteParameterTranslation spt WHERE spt.translatable = :translatable"
+            'SELECT spt.id FROM Capco\\AppBundle\\Entity\\SiteParameterTranslation spt WHERE spt.translatable = :translatable'
         );
         $query->setParameter(':translatable', $translationId);
         $result = $query->getArrayResult();
 
-        if(count($result) === 0) {
-            $this->connection->insert(
-                'site_parameter_translation',
-                [
-                    'id' => (new UuidGenerator())->generate(
-                        $this->container->get('doctrine')->getManager(), null
-                    ),
-                    'translatable_id' => $translationId,
-                    'locale' => 'fr-FR',
-                    'value' => '',
-                ]
-            );
+        if (count($result) === 0) {
+            $this->connection->insert('site_parameter_translation', [
+                'id' => (new UuidGenerator())->generate(
+                    $this->container->get('doctrine')->getManager(),
+                    null
+                ),
+                'translatable_id' => $translationId,
+                'locale' => 'fr-FR',
+                'value' => '',
+            ]);
         }
     }
 }

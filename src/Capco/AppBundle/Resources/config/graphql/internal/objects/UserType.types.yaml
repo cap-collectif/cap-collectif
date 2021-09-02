@@ -1,11 +1,11 @@
 UserType:
-  type: object
-  config:
-    description: 'A type of person'
-    fields:
-      id:
-        type: 'ID!'
-        description: 'The id of the type.'
-      name:
-        type: 'String!'
-        description: 'The name of the type.'
+    type: object
+    config:
+        description: 'A type of person'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the type.'
+            name:
+                type: 'String!'
+                description: 'The name of the type.'

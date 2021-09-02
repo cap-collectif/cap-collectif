@@ -1,13 +1,13 @@
 Follower:
-  type: object
-  config:
-    description: 'A follower'
-    fields:
-      proposal:
-        type: 'InternalProposal'
-      opinion:
-        type: 'InternalOpinion'
-      user:
-        type: 'InternalUser!'
-      notifiedOf:
-        type: 'SubscriptionTypeValue'
+    type: object
+    config:
+        description: 'A follower'
+        fields:
+            proposal:
+                type: 'InternalProposal'
+            opinion:
+                type: 'InternalOpinion'
+            user:
+                type: 'InternalUser!'
+            notifiedOf:
+                type: 'SubscriptionTypeValue'

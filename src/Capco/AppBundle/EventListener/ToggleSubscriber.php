@@ -10,7 +10,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ToggleSubscriber implements EventSubscriberInterface
 {
-
     private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)

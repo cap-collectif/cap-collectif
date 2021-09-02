@@ -28,5 +28,5 @@ describe('<WYSIWYGRender />', () => {
     };
     const wrapper = shallow(<WYSIWYGRender {...predefinedProps} />);
     expect(wrapper).toMatchSnapshot();
-  })
+  });
 });

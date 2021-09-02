@@ -44,7 +44,7 @@ final class UpdateFollowProposalMutation implements MutationInterface
         /** @var Follower $follower */
         $follower = $this->followerRepository->findOneBy([
             'user' => $user,
-            'proposal' => $proposal
+            'proposal' => $proposal,
         ]);
 
         if (!$follower) {

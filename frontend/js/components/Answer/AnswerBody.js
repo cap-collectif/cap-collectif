@@ -15,7 +15,11 @@ type Props = {
 export class AnswerBody extends React.Component<Props> {
   render() {
     const { answer } = this.props;
-    const author = answer.authors ? answer.authors.length > 0 ? answer.authors[0] : null : answer.author;
+    const author = answer.authors
+      ? answer.authors.length > 0
+        ? answer.authors[0]
+        : null
+      : answer.author;
     return (
       <div>
         {author ? (

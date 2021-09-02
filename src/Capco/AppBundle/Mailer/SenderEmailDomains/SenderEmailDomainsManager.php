@@ -92,8 +92,10 @@ class SenderEmailDomainsManager
         return false;
     }
 
-    private static function updateDomainFromService(SenderEmailDomain $domain, SenderEmailDomain $serviceDomain): bool
-    {
+    private static function updateDomainFromService(
+        SenderEmailDomain $domain,
+        SenderEmailDomain $serviceDomain
+    ): bool {
         if (self::hasChangeInValidation($domain, $serviceDomain)) {
             $domain->setDkimValidation($serviceDomain->getDkimValidation());
             $domain->setSpfValidation($serviceDomain->getSpfValidation());
@@ -139,11 +141,11 @@ class SenderEmailDomainsManager
             $domain->getDkimValidation() !== $serviceDomain->getDkimValidation();
     }
 
-    private static function doesSenderEmailsMatch(SenderEmailDomain $domain, SenderEmailDomain $serviceDomain): bool
-    {
-        return (
-            $domain->getValue() === $serviceDomain->getValue()
-            && $domain->getService() === $serviceDomain->getService()
-        );
+    private static function doesSenderEmailsMatch(
+        SenderEmailDomain $domain,
+        SenderEmailDomain $serviceDomain
+    ): bool {
+        return $domain->getValue() === $serviceDomain->getValue() &&
+            $domain->getService() === $serviceDomain->getService();
     }
 }

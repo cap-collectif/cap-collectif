@@ -1,10 +1,10 @@
 DeleteVersionPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      deletedVersionId:
-        type: 'ID'
-        description: 'The deleted ID.'
-      opinion:
-        type: 'InternalOpinion'
-        description: 'The parent of the deleted `Version`.'
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedVersionId:
+                type: 'ID'
+                description: 'The deleted ID.'
+            opinion:
+                type: 'InternalOpinion'
+                description: 'The parent of the deleted `Version`.'

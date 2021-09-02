@@ -1,11 +1,11 @@
 UpdateGroupInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      groupId:
-        type: 'ID!'
-      title:
-        type: 'String!'
-      description:
-        type: 'String'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            groupId:
+                type: 'ID!'
+            title:
+                type: 'String!'
+            description:
+                type: 'String'

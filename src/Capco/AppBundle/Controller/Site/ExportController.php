@@ -89,115 +89,106 @@ class ExportController extends Controller
         $this->aclListener->disableAcl();
 
         $data = $this->executor
-            ->execute(
-                'internal',
-                [
-                    'query' => $this->getEventContributorsGraphQLQuery($event->getId()),
-                    'variables' => [],
-                ]
-            )
+            ->execute('internal', [
+                'query' => $this->getEventContributorsGraphQLQuery($event->getId()),
+                'variables' => [],
+            ])
             ->toArray();
 
         if (!isset($data['data'])) {
-            $this->logger->error('GraphQL Query Error: '.$data['errors']);
-            $this->logger->info('GraphQL query: '.json_encode($data));
+            $this->logger->error('GraphQL Query Error: ' . $data['errors']);
+            $this->logger->info('GraphQL query: ' . json_encode($data));
         }
         $fileName =
-            (new \DateTime())->format('Y-m-d').
-            '-registeredAttendees-'.
-            $event->getSlug().
+            (new \DateTime())->format('Y-m-d') .
+            '-registeredAttendees-' .
+            $event->getSlug() .
             '.csv';
         $writer = Creator\WriterFactory::createFromType(Type::CSV);
-        $response = new StreamedResponse(
-            function () use ($writer, $data, $event) {
-                $writer->openToFile('php://output');
-                $writer->addRow(
-                    Creator\WriterEntityFactory::createRowFromArray(
-                        GraphqlQueryAndCsvHeaderHelper::USER_HEADERS_EVENTS
-                    )
-                );
-                $this->connectionTraversor->traverse(
-                    $data,
-                    'participants',
-                    function ($edge) use ($writer) {
-                        $contributor = $edge['node'];
-                        if (isset($contributor['id'])) {
-                            $writer->addRow(
-                                Creator\WriterEntityFactory::createRowFromArray(
-                                    [
-                                        $contributor['id'],
-                                        $contributor['email'],
-                                        $contributor['username'],
-                                        $contributor['userType'] ? $contributor['userType']['name'] : null,
-                                        $edge['registeredAt'],
-                                        $edge['registeredAnonymously'] ? 'yes' : 'no',
-                                        $contributor['createdAt'],
-                                        $contributor['updatedAt'],
-                                        $contributor['lastLogin'],
-                                        $contributor['rolesText'],
-                                        $contributor['consentExternalCommunication'],
-                                        $contributor['enabled'],
-                                        $contributor['isEmailConfirmed'],
-                                        $contributor['locked'],
-                                        $contributor['phoneConfirmed'],
-                                        $contributor['gender'],
-                                        $contributor['dateOfBirth'],
-                                        $contributor['websiteUrl'],
-                                        $contributor['biography'],
-                                        $contributor['address'],
-                                        $contributor['zipCode'],
-                                        $contributor['city'],
-                                        $contributor['phone'],
-                                        $contributor['url'],
-                                    ]
-                                )
-                            );
-                        } else {
-                            $writer->addRow(
-                                Creator\WriterEntityFactory::createRowFromArray(
-                                    [
-                                        null,
-                                        $contributor['notRegisteredEmail'],
-                                        $contributor['username'],
-                                        null,
-                                        $edge['registeredAt'],
-                                        $edge['registeredAnonymously'] ? 'yes' : 'no',
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                    ]
-                                )
-                            );
-                        }
-                    },
-                    function ($pageInfo) use ($event) {
-                        return $this->getEventContributorsGraphQLQuery(
-                            $event->getId(),
-                            $pageInfo['endCursor']
+        $response = new StreamedResponse(function () use ($writer, $data, $event) {
+            $writer->openToFile('php://output');
+            $writer->addRow(
+                Creator\WriterEntityFactory::createRowFromArray(
+                    GraphqlQueryAndCsvHeaderHelper::USER_HEADERS_EVENTS
+                )
+            );
+            $this->connectionTraversor->traverse(
+                $data,
+                'participants',
+                function ($edge) use ($writer) {
+                    $contributor = $edge['node'];
+                    if (isset($contributor['id'])) {
+                        $writer->addRow(
+                            Creator\WriterEntityFactory::createRowFromArray([
+                                $contributor['id'],
+                                $contributor['email'],
+                                $contributor['username'],
+                                $contributor['userType'] ? $contributor['userType']['name'] : null,
+                                $edge['registeredAt'],
+                                $edge['registeredAnonymously'] ? 'yes' : 'no',
+                                $contributor['createdAt'],
+                                $contributor['updatedAt'],
+                                $contributor['lastLogin'],
+                                $contributor['rolesText'],
+                                $contributor['consentExternalCommunication'],
+                                $contributor['enabled'],
+                                $contributor['isEmailConfirmed'],
+                                $contributor['locked'],
+                                $contributor['phoneConfirmed'],
+                                $contributor['gender'],
+                                $contributor['dateOfBirth'],
+                                $contributor['websiteUrl'],
+                                $contributor['biography'],
+                                $contributor['address'],
+                                $contributor['zipCode'],
+                                $contributor['city'],
+                                $contributor['phone'],
+                                $contributor['url'],
+                            ])
+                        );
+                    } else {
+                        $writer->addRow(
+                            Creator\WriterEntityFactory::createRowFromArray([
+                                null,
+                                $contributor['notRegisteredEmail'],
+                                $contributor['username'],
+                                null,
+                                $edge['registeredAt'],
+                                $edge['registeredAnonymously'] ? 'yes' : 'no',
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                            ])
                         );
                     }
-                );
-                $writer->close();
-            }
-        );
+                },
+                function ($pageInfo) use ($event) {
+                    return $this->getEventContributorsGraphQLQuery(
+                        $event->getId(),
+                        $pageInfo['endCursor']
+                    );
+                }
+            );
+            $writer->close();
+        });
 
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="'.$fileName.'"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
 
         return $response;
     }
@@ -214,7 +205,7 @@ class ExportController extends Controller
         }
 
         $fileName = CreateCsvFromEventParticipantsCommand::getFilename($event->getSlug());
-        if (!file_exists($this->exportDir.$fileName)) {
+        if (!file_exists($this->exportDir . $fileName)) {
             $this->flashBag->add(
                 'danger',
                 $this->translator->trans(
@@ -230,10 +221,10 @@ class ExportController extends Controller
         $contentType = 'text/csv';
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($this->exportDir.$fileName);
-        $response->headers->set('X-Accel-Redirect', '/export/'.$fileName);
+        $response = new BinaryFileResponse($this->exportDir . $fileName);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
-        $response->headers->set('Content-Type', $contentType.'; charset=utf-8');
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
@@ -249,7 +240,7 @@ class ExportController extends Controller
     {
         $fileName = CreateCsvFromProjectsContributorsCommand::getFilename($project->getSlug());
 
-        if (!file_exists($this->exportDir.$fileName)) {
+        if (!file_exists($this->exportDir . $fileName)) {
             $this->flashBag->add(
                 'danger',
                 $this->translator->trans(
@@ -265,10 +256,10 @@ class ExportController extends Controller
         $contentType = 'text/csv';
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($this->exportDir.$fileName);
-        $response->headers->set('X-Accel-Redirect', '/export/'.$fileName);
+        $response = new BinaryFileResponse($this->exportDir . $fileName);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
-        $response->headers->set('Content-Type', $contentType.'; charset=utf-8');
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
@@ -287,18 +278,15 @@ class ExportController extends Controller
         }
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step) {
-            $this->logger->error(
-                'An error occured while downloading the csv file',
-                [
-                    'stepId' => $stepId,
-                ]
-            );
+            $this->logger->error('An error occured while downloading the csv file', [
+                'stepId' => $stepId,
+            ]);
 
             throw new BadRequestHttpException('You must provide a valid step id.');
         }
 
         $fileName = CreateStepContributorsCommand::getFilename($step);
-        $absolutePath = $this->exportDir.$fileName;
+        $absolutePath = $this->exportDir . $fileName;
 
         $filesystem = new Filesystem();
         if (!$filesystem->exists($absolutePath)) {
@@ -307,21 +295,18 @@ class ExportController extends Controller
                 $this->translator->trans('file.not-found', [], 'CapcoAppBundle')
             );
 
-            $this->logger->error(
-                'File not found',
-                [
-                    'filename' => $absolutePath,
-                ]
-            );
+            $this->logger->error('File not found', [
+                'filename' => $absolutePath,
+            ]);
 
             return $this->redirect($request->headers->get('referer'));
         }
         $response = new BinaryFileResponse($absolutePath);
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            (new \DateTime())->format('Y-m-d').'_'.$fileName
+            (new \DateTime())->format('Y-m-d') . '_' . $fileName
         );
-        $response->headers->set('Content-Type', 'text/csv'.'; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
     }
@@ -346,12 +331,16 @@ class ExportController extends Controller
             $output
         );
 
-        $filename = Text::sanitizeFileName($step->getProject()->getTitle()).'-'.Text::sanitizeFileName($step->getTitle()).'_vierge.csv';
+        $filename =
+            Text::sanitizeFileName($step->getProject()->getTitle()) .
+            '-' .
+            Text::sanitizeFileName($step->getTitle()) .
+            '_vierge.csv';
 
-        setlocale(LC_CTYPE, str_replace('-','_', $this->locale));
+        setlocale(LC_CTYPE, str_replace('-', '_', $this->locale));
         $filename = iconv('UTF-8', 'ASCII//TRANSLIT', $filename);
 
-        $filePath = '/tmp/'.$filename;
+        $filePath = '/tmp/' . $filename;
         if (!file_exists($filePath)) {
             $this->flashBag->add(
                 'danger',
@@ -364,7 +353,7 @@ class ExportController extends Controller
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
         $response = new BinaryFileResponse($filePath);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
-        $response->headers->set('Content-Type', 'text/csv'.'; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
     }

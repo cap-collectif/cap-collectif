@@ -29,8 +29,7 @@ class QuestionValidationRuleType extends AbstractType implements DataMapperInter
             ->add('number', IntegerType::class, [
                 'label' => 'admin.fields.validation_rule.number',
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function mapDataToForms($data, $forms)

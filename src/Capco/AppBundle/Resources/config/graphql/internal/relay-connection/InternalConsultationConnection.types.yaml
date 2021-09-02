@@ -1,8 +1,8 @@
 InternalConsultationConnection:
-  type: relay-connection
-  config:
-    name: ConsultationConnection
-    nodeType: InternalConsultation!
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        name: ConsultationConnection
+        nodeType: InternalConsultation!
+        connectionFields:
+            totalCount:
+                type: Int!

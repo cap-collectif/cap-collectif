@@ -16,7 +16,7 @@ class Version20180202163622 extends AbstractMigration
         'value' => '',
         'position' => 101,
         'is_social_network_description' => 1,
-        'type' => 0
+        'type' => 0,
     ];
 
     public function up(Schema $schema): void

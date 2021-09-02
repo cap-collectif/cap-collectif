@@ -1,8 +1,8 @@
 FollowOpinionPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      opinion:
-        type: 'OpinionOrVersion'
-      followerEdge:
-        type: 'FollowerEdge'
+    type: relay-mutation-payload
+    config:
+        fields:
+            opinion:
+                type: 'OpinionOrVersion'
+            followerEdge:
+                type: 'FollowerEdge'

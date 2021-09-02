@@ -24,11 +24,8 @@ class OpinionsFollowedByUserResolver implements ResolverInterface
     {
         $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
             try {
-                $opinions = $this->opinionRepository->findFollowingOpinionByUser(
-                    $user,
-                    $offset,
-                    $limit
-                )
+                $opinions = $this->opinionRepository
+                    ->findFollowingOpinionByUser($user, $offset, $limit)
                     ->getIterator()
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {

@@ -29,14 +29,14 @@ class CommentType extends AbstractType
                 'label' => 'opinion.edit_check',
                 'required' => true,
                 'attr' => ['class' => 'confirm-edit-comment'],
-                'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])]
+                'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
             ]);
         }
 
         $builder->add('body', TextType::class, [
             'required' => true,
             'purify_html' => true,
-            'purify_html_profile' => 'default'
+            'purify_html_profile' => 'default',
         ]);
 
         if (!$this->user || !\is_object($this->user)) {
@@ -44,7 +44,7 @@ class CommentType extends AbstractType
                 ->add('authorName', TextType::class, [
                     'required' => true,
                     'purify_html' => true,
-                    'purify_html_profile' => 'default'
+                    'purify_html_profile' => 'default',
                 ])
                 ->add('authorEmail', EmailType::class, ['required' => true]);
         }
@@ -56,7 +56,7 @@ class CommentType extends AbstractType
             'data_class' => Comment::class,
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
-            'actionType' => 'create'
+            'actionType' => 'create',
         ]);
     }
 

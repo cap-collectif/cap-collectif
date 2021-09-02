@@ -9,7 +9,11 @@ import type {
 import environment, { graphqlError } from '~/createRelayEnvironment';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const RedirectIoAdminPage = lazy(() => import(/* webpackChunkName: "RedirectIoAdminPage" */ '~/components/User/Admin/RedirectIoAdminPage'));
+const RedirectIoAdminPage = lazy(() =>
+  import(
+    /* webpackChunkName: "RedirectIoAdminPage" */ '~/components/User/Admin/RedirectIoAdminPage'
+  ),
+);
 
 export default () => (
   <Suspense fallback={<Loader />}>

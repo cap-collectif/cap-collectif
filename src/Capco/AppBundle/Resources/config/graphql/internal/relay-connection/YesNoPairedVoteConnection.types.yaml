@@ -1,7 +1,7 @@
 YesNoPairedVoteConnection:
-  type: relay-connection
-  config:
-    nodeType: YesNoPairedVote
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        nodeType: YesNoPairedVote
+        connectionFields:
+            totalCount:
+                type: Int!

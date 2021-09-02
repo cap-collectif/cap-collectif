@@ -17,7 +17,7 @@ class ProjectStepsResolver implements ResolverInterface
                 ->getSteps()
                 ->matching(
                     ProjectAbstractStepRepository::createOrderedByCritera([
-                        'position' => Criteria::ASC
+                        'position' => Criteria::ASC,
                     ])
                 )
                 ->map(static function (ProjectAbstractStep $pas) {

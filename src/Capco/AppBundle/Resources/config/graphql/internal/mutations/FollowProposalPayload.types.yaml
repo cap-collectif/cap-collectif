@@ -1,8 +1,8 @@
 FollowProposalPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      proposal:
-        type: 'InternalProposal'
-      followerEdge:
-        type: 'FollowerEdge'
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposal:
+                type: 'InternalProposal'
+            followerEdge:
+                type: 'FollowerEdge'

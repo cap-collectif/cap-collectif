@@ -31,8 +31,7 @@ class EventRegistrationRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('registration');
 
-        $qb
-            ->andWhere('registration.confirmed = true')
+        $qb->andWhere('registration.confirmed = true')
             ->andWhere('registration.event = :event')
             ->setParameter('event', $event)
             ->setFirstResult($offset)
@@ -45,12 +44,7 @@ class EventRegistrationRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('er');
 
-        $qb
-            ->select(
-                'er.email, er.username',
-                'user.username as u_username',
-                'user.email as u_email'
-            )
+        $qb->select('er.email, er.username', 'user.username as u_username', 'user.email as u_email')
             ->leftJoin('er.user', 'user')
             ->andWhere('er.event = :event')
             ->setParameter('event', $event);

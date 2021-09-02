@@ -10,7 +10,6 @@ use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 final class Version20200602184400 extends AbstractMigration implements ContainerAwareInterface
 {
     private $entityManager;
@@ -34,9 +33,7 @@ final class Version20200602184400 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql(
-            'DELETE FROM site_parameter WHERE keyname="global.locale"'
-        );
+        $this->addSql('DELETE FROM site_parameter WHERE keyname="global.locale"');
     }
 
     public function down(Schema $schema): void
@@ -48,20 +45,19 @@ final class Version20200602184400 extends AbstractMigration implements Container
 
         $this->addSql(
             $this->generateInsertSql(
-                $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default=1', [],0)
+                $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default=1', [], 0)
             )
         );
     }
 
     private function generateInsertSql(string $locale): string
     {
-        return
-            'INSERT INTO site_parameter '
-            .'(id, value, keyname, is_enabled, is_social_network_description, position, type, category)'
-            ." VALUES ('"
-            .$this->generateUuid().
+        return 'INSERT INTO site_parameter ' .
+            '(id, value, keyname, is_enabled, is_social_network_description, position, type, category)' .
+            " VALUES ('" .
+            $this->generateUuid() .
             "', '" .
-            $locale.
+            $locale .
             "', 'global.locale', 1, 0, 1, '9', 'settings.global')";
     }
 

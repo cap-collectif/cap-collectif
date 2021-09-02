@@ -11,8 +11,7 @@ class SelectionStepRepository extends AbstractStepRepository
     {
         $qb = $this->getEnabledQueryBuilder();
         $expr = $qb->expr();
-        $qb
-            ->leftJoin('ss.projectAbstractStep', 'pas')
+        $qb->leftJoin('ss.projectAbstractStep', 'pas')
             ->andWhere($expr->neq('ss.voteType', VoteType::DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)

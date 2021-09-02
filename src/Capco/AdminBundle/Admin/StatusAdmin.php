@@ -13,11 +13,11 @@ class StatusAdmin extends CapcoAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
 
     protected $formOptions = [
-        'cascade_validation' => true
+        'cascade_validation' => true,
     ];
 
     // Fields to be shown on create/edit forms
@@ -25,17 +25,17 @@ class StatusAdmin extends CapcoAdmin
     {
         $formMapper
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('name', null, [
                 'label' => 'global.name',
-                'required' => true
+                'required' => true,
             ])
             ->add('color', ChoiceType::class, [
                 'choices' => Status::$statusesLabels,
                 'label' => 'global.color',
                 'required' => true,
-                'translation_domain' => 'CapcoAppBundle'
+                'translation_domain' => 'CapcoAppBundle',
             ]);
     }
 

@@ -48,5 +48,4 @@ class AnalyticsTrafficSources
     {
         return $this->totalCount;
     }
-
 }

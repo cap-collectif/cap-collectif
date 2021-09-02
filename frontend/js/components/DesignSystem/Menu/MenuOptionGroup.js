@@ -14,10 +14,19 @@ type Props = {|
   +titleBackgroundColor?: string,
   +value?: string | string[],
   +onChange?: (newValue: string | string[]) => void,
-  +uppercase?: boolean
+  +uppercase?: boolean,
 |};
 
-const MenuOptionGroup = ({children, title, value, onChange, type, titleBackgroundColor, uppercase = true, ...props}: Props) => {
+const MenuOptionGroup = ({
+  children,
+  title,
+  value,
+  onChange,
+  type,
+  titleBackgroundColor,
+  uppercase = true,
+  ...props
+}: Props) => {
   const context = useMemo<Context>(
     () => ({
       onChange,
@@ -28,35 +37,35 @@ const MenuOptionGroup = ({children, title, value, onChange, type, titleBackgroun
   );
 
   return (
-    <MenuOptionGroupContext.Provider value={ context }>
+    <MenuOptionGroupContext.Provider value={context}>
       <AppBox
-        css={ css({
+        css={css({
           pointerEvents: 'all',
           '&:first-of-type .menu__option__group--title': {
             borderTop: 'none',
           },
-        }) }
+        })}
         role="group"
-        { ...props }>
-        { title && (
+        {...props}>
+        {title && (
           <Text
             className="menu__option__group--title"
             color="gray.900"
-            backgroundColor={ titleBackgroundColor }
+            backgroundColor={titleBackgroundColor}
             lineHeight="sm"
-            fontSize={ 1 }
+            fontSize={1}
             fontWeight="semibold"
-            px={ 3 }
-            py={ 2 }
+            px={3}
+            py={2}
             bg="gray.100"
             borderBottom="normal"
             borderTop="normal"
             borderColor="gray.300"
             uppercase={uppercase}>
-            { title }
+            {title}
           </Text>
-        ) }
-        { children }
+        )}
+        {children}
       </AppBox>
     </MenuOptionGroupContext.Provider>
   );

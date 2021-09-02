@@ -1,56 +1,56 @@
 Capco\AppBundle\Entity\ProposalForm:
-  attributes:
-    id:
-      groups: [Proposals, ProposalForms, Elasticsearch, ElasticsearchProposal]
-    title:
-      groups: [ProposalForms]
-    titleHelpText:
-      groups: [ProposalForms]
-    description:
-      groups: [ProposalForms]
-    descriptionHelpText:
-      groups: [ProposalForms]
-    themeHelpText:
-      groups: [ProposalForms]
-    districtHelpText:
-      groups: [ProposalForms]
-    categoryHelpText:
-      groups: [ProposalForms]
-    addressHelpText:
-      groups: [ProposalForms]
-    summaryHelpText:
-      groups: [ProposalForms]
-    usingThemes:
-      groups: [ProposalForms]
-    usingCategories:
-      groups: [ProposalForms]
-    usingDistrict:
-      groups: [ProposalForms]
-    usingAddress:
-      groups: [ProposalForms]
-    themeMandatory:
-      groups: [ProposalForms]
-    categoryMandatory:
-      groups: [ProposalForms]
-    districtMandatory:
-      groups: [ProposalForms]
-    categories:
-      groups: [ProposalForms]
-    districts:
-      groups: [ProposalForms]
-    zoomMap:
-      groups: [ProposalForms]
-    mapCenter:
-      groups: [ProposalForms]
-    commentable:
-      groups: [ProposalForms]
-    costable:
-      groups: [ProposalForms]
-    proposalInAZoneRequired:
-      groups: [ProposalForms]
-    canContribute:
-      serialized_name: isContribuable
-      groups: [ProposalForms]
-    getRealQuestions:
-      serialized_name: fields
-      groups: [ProposalForms]
+    attributes:
+        id:
+            groups: [Proposals, ProposalForms, Elasticsearch, ElasticsearchProposal]
+        title:
+            groups: [ProposalForms]
+        titleHelpText:
+            groups: [ProposalForms]
+        description:
+            groups: [ProposalForms]
+        descriptionHelpText:
+            groups: [ProposalForms]
+        themeHelpText:
+            groups: [ProposalForms]
+        districtHelpText:
+            groups: [ProposalForms]
+        categoryHelpText:
+            groups: [ProposalForms]
+        addressHelpText:
+            groups: [ProposalForms]
+        summaryHelpText:
+            groups: [ProposalForms]
+        usingThemes:
+            groups: [ProposalForms]
+        usingCategories:
+            groups: [ProposalForms]
+        usingDistrict:
+            groups: [ProposalForms]
+        usingAddress:
+            groups: [ProposalForms]
+        themeMandatory:
+            groups: [ProposalForms]
+        categoryMandatory:
+            groups: [ProposalForms]
+        districtMandatory:
+            groups: [ProposalForms]
+        categories:
+            groups: [ProposalForms]
+        districts:
+            groups: [ProposalForms]
+        zoomMap:
+            groups: [ProposalForms]
+        mapCenter:
+            groups: [ProposalForms]
+        commentable:
+            groups: [ProposalForms]
+        costable:
+            groups: [ProposalForms]
+        proposalInAZoneRequired:
+            groups: [ProposalForms]
+        canContribute:
+            serialized_name: isContribuable
+            groups: [ProposalForms]
+        getRealQuestions:
+            serialized_name: fields
+            groups: [ProposalForms]

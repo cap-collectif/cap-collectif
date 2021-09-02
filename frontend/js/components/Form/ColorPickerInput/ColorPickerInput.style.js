@@ -17,7 +17,8 @@ export const ColorPickerInputContainer: StyledComponent<
     z-index: 1;
   }
 
-  ${props => props.hasValue &&
+  ${props =>
+    props.hasValue &&
     css`
       .form-control {
         padding-left: 30px;

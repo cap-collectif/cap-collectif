@@ -1,42 +1,46 @@
 // @flow
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Modal from "~ds/Modal/Modal";
-import Heading from "~ui/Primitives/Heading";
-import Flex from "~ui/Primitives/Layout/Flex";
-import {useQuestionnaireProps} from "~/components/Questionnaire/useQuestionnaireProps";
-import QuestionnaireAdminResultsPdfModalButton from "~/components/Questionnaire/QuestionnaireAdminResultsPdfModalButton";
-import type {QuestionnaireAdminResultsExportMenu_questionnaire} from "~relay/QuestionnaireAdminResultsExportMenu_questionnaire.graphql";
-import QuestionnaireAdminResultsPdfInstance from "~/components/Questionnaire/QuestionnaireAdminResultsPdfInstance";
-import QuestionnaireAdminResultsPdfModalBody from "~/components/Questionnaire/QuestionnaireAdminResultsPdfModalBody";
-import type {ChartsRef} from "~/components/Questionnaire/QuestionnaireAdminResults";
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
+import Flex from '~ui/Primitives/Layout/Flex';
+import { useQuestionnaireProps } from '~/components/Questionnaire/useQuestionnaireProps';
+import QuestionnaireAdminResultsPdfModalButton from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModalButton';
+import type { QuestionnaireAdminResultsExportMenu_questionnaire } from '~relay/QuestionnaireAdminResultsExportMenu_questionnaire.graphql';
+import QuestionnaireAdminResultsPdfInstance from '~/components/Questionnaire/QuestionnaireAdminResultsPdfInstance';
+import QuestionnaireAdminResultsPdfModalBody from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModalBody';
+import type { ChartsRef } from '~/components/Questionnaire/QuestionnaireAdminResults';
 
 type Props = {|
   +show: boolean,
   +onClose: () => void,
   +questionnaire: QuestionnaireAdminResultsExportMenu_questionnaire,
   +logoUrl: string,
-  +chartsRef: ChartsRef
-|}
+  +chartsRef: ChartsRef,
+|};
 
 export const RETRY_LIMIT = 1;
 
-const QuestionnaireAdminResultsPdfModal = ({ show, onClose, questionnaire, logoUrl, chartsRef }: Props) => {
-
-  const {title, step} = questionnaire;
+const QuestionnaireAdminResultsPdfModal = ({
+  show,
+  onClose,
+  questionnaire,
+  logoUrl,
+  chartsRef,
+}: Props) => {
+  const { title, step } = questionnaire;
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [retryCount, setRetryCount] = useState(0);
 
-  const {translations, questions} = useQuestionnaireProps(questionnaire, chartsRef);
+  const { translations, questions } = useQuestionnaireProps(questionnaire, chartsRef);
 
   useEffect(() => {
     if (translations === null && questions === null) {
       setError(false);
       setLoading(true);
     }
-
-  }, [translations, questions])
+  }, [translations, questions]);
 
   return (
     <>
@@ -47,15 +51,18 @@ const QuestionnaireAdminResultsPdfModal = ({ show, onClose, questionnaire, logoU
         preventBodyScroll
         scrollBehavior="inside"
         width="313px"
-        onClose={onClose}
-      >
+        onClose={onClose}>
         <Modal.Header>
           <Heading>
             <FormattedMessage id="global.export" />
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <QuestionnaireAdminResultsPdfModalBody loading={loading} error={error} retryCount={retryCount} />
+          <QuestionnaireAdminResultsPdfModalBody
+            loading={loading}
+            error={error}
+            retryCount={retryCount}
+          />
         </Modal.Body>
         <Modal.Footer as="div">
           <Flex align="center" justify="center" width="100%">
@@ -70,21 +77,19 @@ const QuestionnaireAdminResultsPdfModal = ({ show, onClose, questionnaire, logoU
           </Flex>
         </Modal.Footer>
       </Modal>
-      {
-        (translations !== null && questions !== null && loading === true) && (
-          <QuestionnaireAdminResultsPdfInstance
-            logoUrl={logoUrl}
-            title={title}
-            step={step}
-            questions={questions}
-            translations={translations}
-            setLoading={setLoading}
-            setError={setError}
-          />
-        )
-      }
+      {translations !== null && questions !== null && loading === true && (
+        <QuestionnaireAdminResultsPdfInstance
+          logoUrl={logoUrl}
+          title={title}
+          step={step}
+          questions={questions}
+          translations={translations}
+          setLoading={setLoading}
+          setError={setError}
+        />
+      )}
     </>
   );
 };
 
-export default QuestionnaireAdminResultsPdfModal
+export default QuestionnaireAdminResultsPdfModal;

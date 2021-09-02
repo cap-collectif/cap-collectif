@@ -6,16 +6,16 @@ InternalPlatformAnalyticsTrafficSourceType:
         values:
             SEARCH_ENGINE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\PlatformAnalyticsTrafficSourceType::SEARCH_ENGINE")'
-                description: "The traffic source came from a search engine"
+                description: 'The traffic source came from a search engine'
             DIRECT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\PlatformAnalyticsTrafficSourceType::DIRECT")'
-                description: "The traffic source came from a direct link"
+                description: 'The traffic source came from a direct link'
             EXTERNAL_LINK:
                 value: '@=constant("Capco\\AppBundle\\Enum\\PlatformAnalyticsTrafficSourceType::EXTERNAL_LINK")'
-                description: "The traffic source came from an external link"
+                description: 'The traffic source came from an external link'
             SOCIAL_NETWORK:
                 value: '@=constant("Capco\\AppBundle\\Enum\\PlatformAnalyticsTrafficSourceType::SOCIAL_NETWORK")'
-                description: "The traffic source came from a social network"
+                description: 'The traffic source came from a social network'
             EMAIL:
                 value: '@=constant("Capco\\AppBundle\\Enum\\PlatformAnalyticsTrafficSourceType::EMAIL")'
-                description: "The traffic source came from an email"
+                description: 'The traffic source came from an email'

@@ -1,16 +1,16 @@
 SourceVote:
-  type: object
-  inherits:
-    - InternalVote
-    - PublicPublishable
-    - Contribution
-  config:
-    interfaces:
-      - InternalVote
-      - PublicPublishable
-      - Contribution
-    fields:
-      kind:
-        type: 'String!'
-        description: "Returns 'sourceVote'."
-        resolve: 'sourceVote'
+    type: object
+    inherits:
+        - InternalVote
+        - PublicPublishable
+        - Contribution
+    config:
+        interfaces:
+            - InternalVote
+            - PublicPublishable
+            - Contribution
+        fields:
+            kind:
+                type: 'String!'
+                description: "Returns 'sourceVote'."
+                resolve: 'sourceVote'

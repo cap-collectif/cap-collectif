@@ -54,7 +54,7 @@ class UpdateProposalFusionMutation implements MutationInterface
         }
 
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
-            'proposalForm' => $proposalForm
+            'proposalForm' => $proposalForm,
         ]);
         $form->submit(['childConnections' => $proposalUuids], false);
 

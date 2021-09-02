@@ -33,11 +33,8 @@ class ProjectAllowedGroupsResolver implements ResolverInterface
     {
         try {
             $paginator = new Paginator(function (?int $offset, ?int $limit) use ($project) {
-                return $this->groupRepository->getAllowedUserGroupForProject(
-                    $project,
-                    $offset,
-                    $limit
-                )
+                return $this->groupRepository
+                    ->getAllowedUserGroupForProject($project, $offset, $limit)
                     ->getIterator()
                     ->getArrayCopy();
             });

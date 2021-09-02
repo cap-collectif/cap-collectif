@@ -47,7 +47,7 @@ class Version20150710111651 extends AbstractMigration
         $parametersCategories = [
             'admin.mail.notifications' => 'settings.notifications',
             'ideas.trashed.content.body' => 'pages.ideas_trash',
-            'ideas.trashed.jumbotron.title' => 'pages.ideas_trash'
+            'ideas.trashed.jumbotron.title' => 'pages.ideas_trash',
         ];
 
         $colorsCategories = [
@@ -72,12 +72,12 @@ class Version20150710111651 extends AbstractMigration
             'color.main_menu.text_active' => 'settings.appearance',
             'color.main_menu.text_hover' => 'settings.appearance',
             'color.main_menu.bg' => 'settings.appearance',
-            'color.main_menu.bg_active' => 'settings.appearance'
+            'color.main_menu.bg_active' => 'settings.appearance',
         ];
 
         $imagesCategories = [
             'image.logo' => 'settings.appearance',
-            'image.default_avatar' => 'settings.appearance'
+            'image.default_avatar' => 'settings.appearance',
         ];
 
         foreach ($parametersCategories as $key => $category) {

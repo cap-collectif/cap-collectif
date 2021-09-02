@@ -10,9 +10,14 @@ final class UpdateArgumentModeratorMessage extends AbstractModeratorMessage
     public const SUBJECT = 'notification-subject-modified-argument';
     public const TEMPLATE = 'notification-content-modified-argument';
 
-    public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array {
+    public static function getMyTemplateVars(ModerableInterface $moderable, array $params): array
+    {
         return [
-            '{type}' => $params['translator']->trans($moderable->getTypeAsString(), ['_locale' => $params['locale']], 'CapcoAppBundle'),
+            '{type}' => $params['translator']->trans(
+                $moderable->getTypeAsString(),
+                ['_locale' => $params['locale']],
+                'CapcoAppBundle'
+            ),
             '{body}' => self::escape($moderable->getBody()),
             '{updatedDate}' => $moderable->getUpdatedAt()->format('d/m/Y'),
             '{updatedTime}' => $moderable->getUpdatedAt()->format('H:i:s'),
@@ -22,7 +27,8 @@ final class UpdateArgumentModeratorMessage extends AbstractModeratorMessage
         ];
     }
 
-    public static function getMySubjectVars(ModerableInterface $moderable, array $params): array {
+    public static function getMySubjectVars(ModerableInterface $moderable, array $params): array
+    {
         return [
             '{proposalTitle}' => self::escape($moderable->getRelated()->getTitle()),
             '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),

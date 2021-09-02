@@ -1,11 +1,11 @@
 ArgumentValue:
-  type: enum
-  config:
-    description: 'Value of an argument'
-    values:
-      AGAINST:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Argument::TYPE_AGAINST")'
-        description: 'AGAINST argument'
-      FOR:
-        value: '@=constant("Capco\\AppBundle\\Entity\\Argument::TYPE_FOR")'
-        description: 'FOR argument'
+    type: enum
+    config:
+        description: 'Value of an argument'
+        values:
+            AGAINST:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Argument::TYPE_AGAINST")'
+                description: 'AGAINST argument'
+            FOR:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Argument::TYPE_FOR")'
+                description: 'FOR argument'

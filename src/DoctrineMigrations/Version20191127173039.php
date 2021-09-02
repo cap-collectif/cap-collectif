@@ -17,7 +17,7 @@ final class Version20191127173039 extends AbstractLocaleMigration
                 new Locale('en-GB', 'english'),
                 new Locale('de-DE', 'deutsch'),
                 new Locale('es-ES', 'spanish'),
-                new Locale('nl-NL', 'dutchman')
+                new Locale('nl-NL', 'dutchman'),
             ],
             $this->getPreviousConfDefaultCode()
         );

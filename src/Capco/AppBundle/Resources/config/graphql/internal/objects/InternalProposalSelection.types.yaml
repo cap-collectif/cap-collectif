@@ -1,12 +1,12 @@
 InternalProposalSelection:
-  type: object
-  config:
-    name: ProposalSelection
-    description: 'The selection of a proposal in a step.'
-    fields:
-      step:
-        description: 'The step where the proposal is selected.'
-        type: 'InternalSelectionStep!'
-      status:
-        description: 'The status of the proposal in the step.'
-        type: 'ProposalStepStatus'
+    type: object
+    config:
+        name: ProposalSelection
+        description: 'The selection of a proposal in a step.'
+        fields:
+            step:
+                description: 'The step where the proposal is selected.'
+                type: 'InternalSelectionStep!'
+            status:
+                description: 'The status of the proposal in the step.'
+                type: 'ProposalStepStatus'

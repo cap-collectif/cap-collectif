@@ -1,12 +1,12 @@
 PreviewVote:
-  type: interface
-  inherits:
-    - Node
-  config:
-    name: Vote
-    description: 'A vote.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
-    fields:
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
+    type: interface
+    inherits:
+        - Node
+    config:
+        name: Vote
+        description: 'A vote.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
+        fields:
+            createdAt:
+                type: 'DateTime!'
+                description: 'Identifies the date and time when the object was created.'

@@ -18,7 +18,7 @@ final class UserNewEmailConfirmationMessage extends AbstractExternalMessage
             'confirmationUrl' => $params['confirmationURL'],
             'siteName' => $params['siteName'],
             'baseUrl' => $params['baseURL'],
-            'recipientEmail' => $user->getNewEmailToConfirm()
+            'recipientEmail' => $user->getNewEmailToConfirm(),
         ];
     }
 

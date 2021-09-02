@@ -15,7 +15,7 @@ class AdminShieldConfigurationPage extends Page
         'save button' => '#shield-admin-form_submit',
         'shield admin form toggle' => '#shield-admin-form .form-group .elegant-toggle',
         'toggle france connect' => '#toggle-franceConnect',
-        'toggle oauth2' => 'input[for=\'Oauth2\']'
+        'toggle oauth2' => 'input[for=\'Oauth2\']',
     ];
 
     public function toggleOauth()

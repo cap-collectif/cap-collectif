@@ -111,7 +111,8 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
             )}
 
             {analytics.topContributors &&
-              analytics.contributors && analytics.contributors.totalCount > 0 && (
+              analytics.contributors &&
+              analytics.contributors.totalCount > 0 && (
                 <SectionTopContributors topContributors={analytics.topContributors} />
               )}
           </Flex>

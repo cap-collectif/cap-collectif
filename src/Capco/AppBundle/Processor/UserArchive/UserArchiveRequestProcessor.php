@@ -51,10 +51,10 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         $app = new Application($this->kernel);
         $command = $app->find('capco:export:user');
 
-        if ($this->kernel->getEnvironment() === 'test'){
+        if ($this->kernel->getEnvironment() === 'test') {
             $input = new ArrayInput([
                 'userId' => $user->getId(),
-                '--delimiter' => ','
+                '--delimiter' => ',',
             ]);
         } else {
             $input = new ArrayInput([

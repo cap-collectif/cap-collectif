@@ -19,7 +19,7 @@ final class ProposalStatusChangeInSelectionMessage extends AbstractExternalMessa
     public static function getMyTemplateVars(Selection $selection, array $params): array
     {
         return [
-            'selection' => $selection
+            'selection' => $selection,
         ];
     }
 }

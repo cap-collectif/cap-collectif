@@ -18,18 +18,18 @@ abstract class AbstractStepFormType extends AbstractType
     {
         $builder
             ->add('type', null, [
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('body')
             ->add('title')
             ->add('label')
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss'
+                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('endAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss'
+                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('metaDescription')
             ->add('customCode')
@@ -44,7 +44,7 @@ abstract class AbstractStepFormType extends AbstractType
                     $itemFromDb
                         ->setLabel($itemFromUser->getLabel())
                         ->setType($itemFromUser->getType());
-                }
+                },
             ]);
         if ($builder->getData() instanceof ParticipativeStepInterface) {
             $builder->add('timeless');
@@ -55,7 +55,7 @@ abstract class AbstractStepFormType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => AbstractStep::class
+            'data_class' => AbstractStep::class,
         ]);
     }
 }

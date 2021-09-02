@@ -10,7 +10,9 @@ import type {
 } from '~relay/EventFormPageAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
-const EventFormPage = lazy(() => import(/* webpackChunkName: "EventFormPage" */ '~/components/Event/Form/EventFormPage'));
+const EventFormPage = lazy(() =>
+  import(/* webpackChunkName: "EventFormPage" */ '~/components/Event/Form/EventFormPage'),
+);
 
 type Props = {|
   +eventId: string,

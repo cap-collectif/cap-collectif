@@ -31,7 +31,7 @@ class CollectStepProposalCountResolver implements ResolverInterface
         $count = 0;
         $args = new Argument([
             'first' => 0,
-            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC']
+            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
         ]);
 
         if ($step->getProposalForm()) {
@@ -40,7 +40,7 @@ class CollectStepProposalCountResolver implements ResolverInterface
                     'form' => $step->getProposalForm(),
                     'args' => $args,
                     'viewer' => null,
-                    'request' => null
+                    'request' => null,
                 ])
                 ->then(function ($connection) use (&$count) {
                     $count = $connection->getTotalCount();

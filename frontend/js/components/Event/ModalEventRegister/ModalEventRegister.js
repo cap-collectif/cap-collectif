@@ -35,7 +35,7 @@ const ModalEventRegister = ({ show, onClose, user, event }: Props) => {
       </Modal.Body>
     </Modal>
   );
-}
+};
 
 export default createFragmentContainer(ModalEventRegister, {
   event: graphql`

@@ -8,7 +8,9 @@ import { type ProposalCreateFusionButtonAppQueryResponse } from '~relay/Proposal
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 const ProposalCreateFusionButton = lazy(() =>
-  import(/* webpackChunkName: "ProposalCreateFusionButton" */ '~/components/Proposal/Create/ProposalCreateFusionButton'),
+  import(
+    /* webpackChunkName: "ProposalCreateFusionButton" */ '~/components/Proposal/Create/ProposalCreateFusionButton'
+  ),
 );
 
 export default (data: Props) => (

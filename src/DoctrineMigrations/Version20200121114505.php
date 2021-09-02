@@ -9,12 +9,12 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20200121114505 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Set post body as nullable';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->abortIf(
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),
@@ -22,15 +22,16 @@ final class Version20200121114505 extends AbstractMigration
         );
 
         $this->addSql('ALTER TABLE blog_post_translation CHANGE body body LONGTEXT DEFAULT NULL');
-
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->abortIf(
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
-        $this->addSql('ALTER TABLE blog_post_translation CHANGE body body LONGTEXT CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`');
+        $this->addSql(
+            'ALTER TABLE blog_post_translation CHANGE body body LONGTEXT CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`'
+        );
     }
 }

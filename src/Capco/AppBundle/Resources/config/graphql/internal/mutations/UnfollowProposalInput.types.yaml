@@ -1,10 +1,10 @@
 UnfollowProposalInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      proposalId:
-        type: 'ID'
-        description: 'The proposal id'
-      idsProposal:
-        type: '[ID!]'
-        description: 'Array of proposal id'
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalId:
+                type: 'ID'
+                description: 'The proposal id'
+            idsProposal:
+                type: '[ID!]'
+                description: 'Array of proposal id'

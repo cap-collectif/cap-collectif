@@ -5,7 +5,7 @@ import { OverlayTrigger } from 'react-bootstrap';
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import Tooltip from '../../Utils/Tooltip';
 import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql';
-import {translateContent} from "~/utils/ContentTranslator";
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   vote: OpinionUserVote_vote,
@@ -21,7 +21,9 @@ class OpinionUserVote extends React.Component<Props> {
         <OverlayTrigger
           placement="top"
           overlay={
-            <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{translateContent(vote.author.displayName)}</Tooltip>
+            <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>
+              {translateContent(vote.author.displayName)}
+            </Tooltip>
           }>
           {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatarDeprecated user={vote.author} className="" />

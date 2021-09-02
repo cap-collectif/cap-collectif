@@ -15,8 +15,7 @@ class StatusBelongsToSelectionStepValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('status')
-                ->addViolation()
-            ;
+                ->addViolation();
         }
     }
 }

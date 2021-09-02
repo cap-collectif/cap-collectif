@@ -21,106 +21,106 @@ final class Version20200120121351 extends AbstractMigration implements Container
             'family_name' => 'Helvetica Neue, Helvetica, Arial, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 1,
-            'use_as_body' => 1
+            'use_as_body' => 1,
         ],
         [
             'name' => 'Helvetica',
             'family_name' => 'Helvetica, Arial, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Arial',
             'family_name' => 'Arial, Helvetica, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Tahoma',
             'family_name' => 'Tahoma, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Geneva',
             'family_name' => 'Geneva, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Trebuchet MS',
             'family_name' => '"Trebuchet MS", Helvetica, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Verdana',
             'family_name' => 'Verdana, Geneva, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Georgia',
             'family_name' => 'Georgia, serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Palatino Linotype',
             'family_name' => '"Palatino Linotype", serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Book Antiqua',
             'family_name' => '"Book Antiqua", serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Palatino',
             'family_name' => 'Palatino, serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Times New Roman',
             'family_name' => '"Times New Roman", serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Times',
             'family_name' => 'Times, serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Courier New',
             'family_name' => '"Courier New", monospace',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
         [
             'name' => 'Courier',
             'family_name' => 'Courier, monospace',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
-        ]
+            'use_as_body' => 0,
+        ],
     ];
     private $generator;
     private $em;
@@ -154,7 +154,7 @@ final class Version20200120121351 extends AbstractMigration implements Container
                 array_merge(
                     [
                         'id' => $this->generator->generate($this->em, null),
-                        'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
+                        'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
                     ],
                     $font
                 )

@@ -37,7 +37,7 @@ const getLabelColor = (status: EventReviewStatus) => {
     default:
       return colors.dangerColor;
   }
-}
+};
 
 const getLabelMessage = (status: EventReviewStatus) => {
   switch (status) {

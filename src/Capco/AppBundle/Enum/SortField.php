@@ -9,6 +9,6 @@ final class SortField
 
     public const SORT_FIELD = [
         self::CREATED_AT => 'createdAt',
-        self::UPDATED_AT => 'updatedAt'
+        self::UPDATED_AT => 'updatedAt',
     ];
 }

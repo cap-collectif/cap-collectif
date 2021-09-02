@@ -1,5 +1,5 @@
 // @flow
-import React, {useState, useMemo} from 'react';
+import React, { useState, useMemo } from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ListGroupFlush from '../Ui/List/ListGroupFlush';
@@ -21,38 +21,39 @@ type Props = {
   simpleQuestion: QuestionnaireAdminResultsText_simpleQuestion,
 };
 
-export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement>(({ relay, simpleQuestion }: Props, ref) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [responseSearchTag, setResponseSearchTag] = useState<?{| value: string, count: number |}>(
-    null,
-  );
-  const [view, setView] = useState<VIEW>('tagCloud');
-  const intl = useIntl();
+export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement>(
+  ({ relay, simpleQuestion }: Props, ref) => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [responseSearchTag, setResponseSearchTag] = useState<?{| value: string, count: number |}>(
+      null,
+    );
+    const [view, setView] = useState<VIEW>('tagCloud');
+    const intl = useIntl();
 
-  const tags = useMemo(
-    () =>
-      simpleQuestion.tagCloud
-        .map(tag => {
-          return {
-            tag: {
-              value: tag.value,
-              count: tag.occurrencesCount,
-              onClick: () =>
-                setResponseSearchTag({ value: tag.value, count: tag.occurrencesCount }),
-            },
-            marginBottom: -1 * Math.floor(Math.random() * 25),
-          };
-        })
-        .sort(() => Math.random() - 0.5),
-    [simpleQuestion],
-  );
+    const tags = useMemo(
+      () =>
+        simpleQuestion.tagCloud
+          .map(tag => {
+            return {
+              tag: {
+                value: tag.value,
+                count: tag.occurrencesCount,
+                onClick: () =>
+                  setResponseSearchTag({ value: tag.value, count: tag.occurrencesCount }),
+              },
+              marginBottom: -1 * Math.floor(Math.random() * 25),
+            };
+          })
+          .sort(() => Math.random() - 0.5),
+      [simpleQuestion],
+    );
 
-  const handleLoadMore = () => {
-    setLoading(true);
-    relay.loadMore(RESPONSE_PAGINATION, () => {
-      setLoading(false);
-    });
-  };
+    const handleLoadMore = () => {
+      setLoading(true);
+      relay.loadMore(RESPONSE_PAGINATION, () => {
+        setLoading(false);
+      });
+    };
 
     if (simpleQuestion?.responses?.edges) {
       return (
@@ -142,8 +143,9 @@ export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement
       );
     }
 
-  return null;
-});
+    return null;
+  },
+);
 
 export default createPaginationContainer(
   QuestionnaireAdminResultsText,

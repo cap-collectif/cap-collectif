@@ -53,7 +53,7 @@ class Version20150227184834 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['simple_text'],
                 true,
                 $created,
-                $updated
+                $updated,
             ],
             [
                 'security.shield_mode.password',
@@ -63,8 +63,8 @@ class Version20150227184834 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['simple_text'],
                 true,
                 $created,
-                $updated
-            ]
+                $updated,
+            ],
         ];
 
         foreach ($newParameters as $values) {

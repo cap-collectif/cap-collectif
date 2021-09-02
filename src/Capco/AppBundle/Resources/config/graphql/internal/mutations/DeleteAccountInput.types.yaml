@@ -1,11 +1,11 @@
 DeleteAccountInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      type:
-        type: 'DeleteAccountType!'
-        description: 'You must chose a strategy to delete your account'
-      userId:
-        type: 'ID'
-        description: '(ROLE_SUPER_ADMIN only) The user to delete'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            type:
+                type: 'DeleteAccountType!'
+                description: 'You must chose a strategy to delete your account'
+            userId:
+                type: 'ID'
+                description: '(ROLE_SUPER_ADMIN only) The user to delete'

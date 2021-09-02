@@ -1,4 +1,4 @@
 LocaleConnection:
-  type: relay-connection
-  config:
-    nodeType: Locale
+    type: relay-connection
+    config:
+        nodeType: Locale

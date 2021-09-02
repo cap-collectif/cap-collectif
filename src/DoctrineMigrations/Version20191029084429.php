@@ -82,7 +82,7 @@ final class Version20191029084429 extends AbstractMigration implements Container
                 'id' => $uuid,
                 'district_id' => $district['projectdistrict_id'],
                 'project_id' => $district['project_id'],
-                'position' => $position
+                'position' => $position,
             ];
 
             $this->connection->insert('project_district_positioner', $positioner);
@@ -99,7 +99,7 @@ final class Version20191029084429 extends AbstractMigration implements Container
         foreach ($districts as $district) {
             $projectDistrict = [
                 'projectdistrict_id' => $district['district_id'],
-                'project_id' => $district['project_id']
+                'project_id' => $district['project_id'],
             ];
 
             $this->connection->insert('project_district', $projectDistrict);

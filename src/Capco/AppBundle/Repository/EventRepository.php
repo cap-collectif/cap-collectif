@@ -14,8 +14,7 @@ class EventRepository extends EntityRepository
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('e');
-        $qb
-            ->addSelect('a', 'm', 't')
+        $qb->addSelect('a', 'm', 't')
             ->leftJoin('e.author', 'a')
             ->leftJoin('a.media', 'm')
             ->leftJoin('e.themes', 't')
@@ -31,8 +30,7 @@ class EventRepository extends EntityRepository
     public function countAllByUser(User $user): int
     {
         $qb = $this->createAvailableOrApprovedEventsQueryBuilder('e');
-        $qb
-            ->select('count(DISTINCT e)')
+        $qb->select('count(DISTINCT e)')
             ->andWhere('e.author = :user')
             ->setParameter('user', $user);
 
@@ -56,15 +54,17 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder {
+    private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder
+    {
         $qb = $this->createQueryBuilder($alias);
-        $qb
-            ->leftJoin("$alias.review", 'review')
+        $qb->leftJoin("$alias.review", 'review')
             ->andWhere(
-                $qb->expr()->orX(
-                    $qb->expr()->isNull('review'),
-                    $qb->expr()->eq('review.status', ':reviewStatus')
-                )
+                $qb
+                    ->expr()
+                    ->orX(
+                        $qb->expr()->isNull('review'),
+                        $qb->expr()->eq('review.status', ':reviewStatus')
+                    )
             )
             ->setParameter('reviewStatus', EventReviewStatusType::APPROVED);
 

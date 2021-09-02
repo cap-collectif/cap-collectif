@@ -1,17 +1,17 @@
 InternalContactFormTranslation:
-  type: object
-  config:
-    name: ContactFormTranslation
-    description: 'A translation of a contactForm'
-    fields:
-      locale:
-        type: 'String!'
-      title:
-        description: 'The translated title of the contact Form'
-        type: 'String!'
-      body:
-        description: 'The translated body of the contact Form'
-        type: 'String!'
-      confidentiality:
-        description: 'The translated confidentiality text for the contact Form'
-        type: 'String'
+    type: object
+    config:
+        name: ContactFormTranslation
+        description: 'A translation of a contactForm'
+        fields:
+            locale:
+                type: 'String!'
+            title:
+                description: 'The translated title of the contact Form'
+                type: 'String!'
+            body:
+                description: 'The translated body of the contact Form'
+                type: 'String!'
+            confidentiality:
+                description: 'The translated confidentiality text for the contact Form'
+                type: 'String'

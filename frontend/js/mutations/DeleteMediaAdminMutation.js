@@ -20,7 +20,7 @@ const commit = (
 ): Promise<DeleteMediaAdminMutationResponse> =>
   commitMutation(environment, {
     mutation,
-    variables
+    variables,
   });
 
 export default { commit };

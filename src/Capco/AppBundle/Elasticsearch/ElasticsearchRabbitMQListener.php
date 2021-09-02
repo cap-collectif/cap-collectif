@@ -26,7 +26,7 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
     {
         return [
             KernelEvents::TERMINATE => ['onKernelTerminate', 10],
-            KernelEvents::FINISH_REQUEST => ['onKernelTerminate', 10]
+            KernelEvents::FINISH_REQUEST => ['onKernelTerminate', 10],
         ];
     }
 

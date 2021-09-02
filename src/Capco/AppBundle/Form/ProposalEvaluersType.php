@@ -11,11 +11,9 @@ class ProposalEvaluersType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('evaluers', null, [
-                'by_reference' => false,
-            ])
-        ;
+        $builder->add('evaluers', null, [
+            'by_reference' => false,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

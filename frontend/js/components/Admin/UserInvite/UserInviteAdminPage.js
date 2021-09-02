@@ -9,8 +9,8 @@ import UserInviteByEmailModal from '~/components/Admin/UserInvite/Modal/UserInvi
 import UserInviteByFileModal from '~/components/Admin/UserInvite/Modal/UserInviteByFile/UserInviteByFileModal';
 import UserInviteList from '~/components/Admin/UserInvite/UserInviteList';
 import type { ResultPreloadQuery } from '~/types';
-import type {UserInviteAdminPageAppQuery} from "~relay/UserInviteAdminPageAppQuery.graphql";
-import ButtonGroup from "~ds/ButtonGroup/ButtonGroup";
+import type { UserInviteAdminPageAppQuery } from '~relay/UserInviteAdminPageAppQuery.graphql';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 
 type RelayProps = {|
   +prefetch: ResultPreloadQuery,
@@ -30,20 +30,20 @@ export const UserInviteAdminPage = ({ prefetch }: Props): React.Node => {
       <div className="box-content">
         <ButtonGroup mb={4}>
           <UserInviteByFileModal
-                                 queryFragment={props}
-                                 disclosure={
-                                   <Button variant="secondary" variantSize="small">
-                                     <FormattedMessage id="invite-via-file" />
-                                   </Button>
-                                 }
+            queryFragment={props}
+            disclosure={
+              <Button variant="secondary" variantSize="small">
+                <FormattedMessage id="invite-via-file" />
+              </Button>
+            }
           />
-          <UserInviteByEmailModal queryFragment={props}
-                                  disclosure={
-                                    <Button variant="secondary" variantSize="small">
-                                      <FormattedMessage id="invite-a-user" />
-                                    </Button>
-                                  }
-
+          <UserInviteByEmailModal
+            queryFragment={props}
+            disclosure={
+              <Button variant="secondary" variantSize="small">
+                <FormattedMessage id="invite-a-user" />
+              </Button>
+            }
           />
         </ButtonGroup>
         <UserInviteList query={props} />

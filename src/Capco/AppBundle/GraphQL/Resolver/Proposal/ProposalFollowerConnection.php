@@ -28,10 +28,13 @@ class ProposalFollowerConnection implements ResolverInterface
             $direction = $args->offsetGet('orderBy')['direction'];
             $orderBy = [$field => $direction];
             $criteria = [
-              'proposal' => $proposal,
+                'proposal' => $proposal,
             ];
             try {
-                $followers = $this->userRepository->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)->getIterator()->getArrayCopy();
+                $followers = $this->userRepository
+                    ->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)
+                    ->getIterator()
+                    ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
                 throw new \RuntimeException('Find following proposal by user failed');

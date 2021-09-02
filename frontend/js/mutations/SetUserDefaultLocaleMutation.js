@@ -8,7 +8,7 @@ import type {
 } from '~relay/SetUserDefaultLocaleMutation.graphql';
 
 const mutation = graphql`
-  mutation SetUserDefaultLocaleMutation($input: SetUserDefaultLocaleInput!){
+  mutation SetUserDefaultLocaleMutation($input: SetUserDefaultLocaleInput!) {
     setUserDefaultLocale(input: $input) {
       code
     }

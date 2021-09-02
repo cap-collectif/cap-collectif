@@ -5,8 +5,8 @@ InternalPlatformAnalyticsTrafficSources:
         description: Represent the different traffic sources for a platform
         fields:
             totalCount:
-                type: "Int!"
-                description: "The total count of all the traffic sources combined."
+                type: 'Int!'
+                description: 'The total count of all the traffic sources combined.'
             sources:
-                type: "[InternalPlatformAnalyticsTrafficSource!]!"
-                description: "The available traffic sources with their total count."
+                type: '[InternalPlatformAnalyticsTrafficSource!]!'
+                description: 'The available traffic sources with their total count.'

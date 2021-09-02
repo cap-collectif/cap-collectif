@@ -1,10 +1,10 @@
 ApplyProposalStatusInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      proposalIds:
-        type: '[ID!]!'
-        description: 'The ids of the proposals to add to steps'
-      statusId:
-        type: 'ID'
-        description: 'The id of the status to apply or nothing if the status is to be removed'
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'The ids of the proposals to add to steps'
+            statusId:
+                type: 'ID'
+                description: 'The id of the status to apply or nothing if the status is to be removed'

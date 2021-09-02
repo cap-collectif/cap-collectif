@@ -1,11 +1,11 @@
 PostPublicationStatus:
-  type: enum
-  config:
-    description: 'Available publication statuses for a post.'
-    values:
-      PUBLISHED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::PUBLISHED")'
-        description: 'Normal status, publicly visible'
-      NOT_PUBLISHED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::NOT_PUBLISHED")'
-        description: 'Not publicly visible'
+    type: enum
+    config:
+        description: 'Available publication statuses for a post.'
+        values:
+            PUBLISHED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::PUBLISHED")'
+                description: 'Normal status, publicly visible'
+            NOT_PUBLISHED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::NOT_PUBLISHED")'
+                description: 'Not publicly visible'

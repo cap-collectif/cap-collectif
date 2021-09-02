@@ -26,7 +26,7 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('value', null, ['label' => 'global.value'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -44,11 +44,11 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'label' => 'global.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_list_field.html.twig',
                 'labels' => OpinionVote::$voteTypesLabels,
-                'styles' => OpinionVote::$voteTypesStyles
+                'styles' => OpinionVote::$voteTypesStyles,
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -61,7 +61,7 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'label' => 'global.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_show_field.html.twig',
                 'labels' => OpinionVote::$voteTypesLabels,
-                'styles' => OpinionVote::$voteTypesStyles
+                'styles' => OpinionVote::$voteTypesStyles,
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation']);
@@ -76,12 +76,12 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('value', ChoiceType::class, [
                 'label' => 'global.value',
                 'choices' => OpinionVote::$voteTypesLabels,
-                'translation_domain' => 'CapcoAppBundle'
+                'translation_domain' => 'CapcoAppBundle',
             ]);
     }
 

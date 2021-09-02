@@ -73,7 +73,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
                 'created_at' => $vote['created_at'],
                 'updated_at' => $vote['updated_at'],
                 'confirmed' => 1,
-                'voteType' => 'argument'
+                'voteType' => 'argument',
             ]);
         }
 
@@ -84,7 +84,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
                 'created_at' => $vote['created_at'],
                 'updated_at' => $vote['updated_at'],
                 'confirmed' => 1,
-                'voteType' => 'comment'
+                'voteType' => 'comment',
             ]);
         }
 
@@ -99,7 +99,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
                 'email' => $vote['email'],
                 'ip_address' => $vote['ip_address'],
                 'private' => $vote['private'],
-                'voteType' => 'idea'
+                'voteType' => 'idea',
             ]);
         }
 
@@ -111,7 +111,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
                 'updated_at' => $vote['updated_at'],
                 'confirmed' => 1,
                 'value' => $vote['value'],
-                'voteType' => 'opinion'
+                'voteType' => 'opinion',
             ]);
         }
 
@@ -122,7 +122,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
                 'created_at' => $vote['created_at'],
                 'updated_at' => $vote['created_at'],
                 'confirmed' => 1,
-                'voteType' => 'source'
+                'voteType' => 'source',
             ]);
         }
     }

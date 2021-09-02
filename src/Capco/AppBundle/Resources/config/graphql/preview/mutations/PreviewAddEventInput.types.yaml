@@ -1,14 +1,14 @@
 PreviewAddEventInput:
-  type: relay-mutation-input
-  config:
-    name: AddEventInput
-    description: 'Input type of AddEvent.'
-    fields:
-      startAt:
-        type: 'DateTime!'
-        description: 'When the event start.'
-      endAt:
-        type: 'DateTime'
-        description: 'When the event end.'
-      translations:
-          type: '[PreviewEventTranslationInput!]!'
+    type: relay-mutation-input
+    config:
+        name: AddEventInput
+        description: 'Input type of AddEvent.'
+        fields:
+            startAt:
+                type: 'DateTime!'
+                description: 'When the event start.'
+            endAt:
+                type: 'DateTime'
+                description: 'When the event end.'
+            translations:
+                type: '[PreviewEventTranslationInput!]!'

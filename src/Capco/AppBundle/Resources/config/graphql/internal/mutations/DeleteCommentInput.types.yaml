@@ -1,8 +1,8 @@
 DeleteCommentInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input type of deleteComment.'
-    fields:
-      id:
-        type: 'ID!'
-        description: The ID of the comment to delete.
+    type: relay-mutation-input
+    config:
+        description: 'Input type of deleteComment.'
+        fields:
+            id:
+                type: 'ID!'
+                description: The ID of the comment to delete.

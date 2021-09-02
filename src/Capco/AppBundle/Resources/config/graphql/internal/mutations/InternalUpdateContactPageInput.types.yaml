@@ -1,25 +1,24 @@
 InternalUpdateContactPageInput:
-  type: relay-mutation-input
-  config:
-    name: UpdateContactPageInput
-    description: 'The input associated to the updateContactPage mutation.'
-    fields:
-      title:
-        type: 'String'
-        description: 'The title of the contact page.'
-      description:
-        type: 'HTML'
-        description: 'The description of the contact page.'
-      picto:
-        type: 'ID'
-        description: 'The picto of the contact page.'
-      metadescription:
-        type: 'String'
-        description: 'The metadescription of the contact page.'
-      customcode:
-        type: 'String'
-        description: 'The customcode of the contact page.'
-      locale:
-        type: 'String'
-        description: 'The locale of the contact page.'
-    
+    type: relay-mutation-input
+    config:
+        name: UpdateContactPageInput
+        description: 'The input associated to the updateContactPage mutation.'
+        fields:
+            title:
+                type: 'String'
+                description: 'The title of the contact page.'
+            description:
+                type: 'HTML'
+                description: 'The description of the contact page.'
+            picto:
+                type: 'ID'
+                description: 'The picto of the contact page.'
+            metadescription:
+                type: 'String'
+                description: 'The metadescription of the contact page.'
+            customcode:
+                type: 'String'
+                description: 'The customcode of the contact page.'
+            locale:
+                type: 'String'
+                description: 'The locale of the contact page.'

@@ -70,20 +70,20 @@ class ProposalRevisionNotifier extends BaseNotifier
             ],
             $proposal->getAuthor(),
             $proposal->getAuthor()->getEmail(),
-            $revision->getAuthor()->getEmail(),
+            $revision->getAuthor()->getEmail()
         );
     }
 
-    public function onUpdate(
-        array $revisions,
-        Proposal $proposal,
-        string $revisedAt
-    ) {
+    public function onUpdate(array $revisions, Proposal $proposal, string $revisedAt)
+    {
         $btnColor = $this->siteColorRepository
             ->findOneByKeyname('color.btn.primary.bg')
             ->getValue();
         $btnTextColor = $this->siteColorRepository->findOneByKeyname('color.btn.text')->getValue();
-        $usersToSendNotification = $this->userRepository->getAssignedUsersOnProposal($proposal, $revisedAt);
+        $usersToSendNotification = $this->userRepository->getAssignedUsersOnProposal(
+            $proposal,
+            $revisedAt
+        );
         $ids = array_map(function ($user) {
             return $user['assignedUser'];
         }, $usersToSendNotification);

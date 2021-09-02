@@ -45,7 +45,7 @@ describe('<ProjectAdminForm />', () => {
           isMapViewEnabled: false,
         },
       },
-      archived: false
+      archived: false,
     },
     features,
     initialGroups: [],

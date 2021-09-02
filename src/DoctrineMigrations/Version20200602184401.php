@@ -21,7 +21,7 @@ final class Version20200602184401 extends AbstractMigration implements Container
             'family_name' => 'Open Sans, Arial, sans-serif',
             'is_custom' => 0,
             'use_as_heading' => 0,
-            'use_as_body' => 0
+            'use_as_body' => 0,
         ],
     ];
     private $generator;
@@ -34,7 +34,6 @@ final class Version20200602184401 extends AbstractMigration implements Container
 
     public function up(Schema $schema): void
     {
-
     }
 
     public function postUp(Schema $schema): void
@@ -45,7 +44,7 @@ final class Version20200602184401 extends AbstractMigration implements Container
                 array_merge(
                     [
                         'id' => $this->generator->generate($this->em, null),
-                        'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
+                        'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
                     ],
                     $font
                 )

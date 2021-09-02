@@ -21,12 +21,12 @@ class ValueResponseType extends AbstractType
             ->add('question', EntityType::class, ['class' => AbstractQuestion::class]);
 
         $builder->add('position', HiddenType::class, [
-            'mapped' => false
+            'mapped' => false,
         ]);
 
         $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
             'data' => $this->getBlockPrefix(),
-            'mapped' => false
+            'mapped' => false,
         ]);
     }
 
@@ -35,8 +35,7 @@ class ValueResponseType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ValueResponse::class,
             'model_class' => ValueResponse::class,
-            'allow_extra_fields' => true
-
+            'allow_extra_fields' => true,
         ]);
     }
 

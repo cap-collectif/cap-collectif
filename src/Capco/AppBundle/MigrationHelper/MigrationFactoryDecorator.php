@@ -16,7 +16,7 @@ class MigrationFactoryDecorator implements MigrationFactory
     public function __construct(MigrationFactory $migrationFactory, ContainerInterface $container)
     {
         $this->migrationFactory = $migrationFactory;
-        $this->container        = $container;
+        $this->container = $container;
     }
 
     public function createVersion(string $migrationClassName): AbstractMigration

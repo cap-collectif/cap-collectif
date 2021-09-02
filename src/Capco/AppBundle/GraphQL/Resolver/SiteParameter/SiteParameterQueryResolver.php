@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Resolver\SiteParameter;
 
 use Capco\AppBundle\Entity\SiteParameter;
@@ -11,25 +10,26 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class SiteParameterQueryResolver implements ResolverInterface
 {
-
     private $repository;
     private $translationRepository;
 
-    public function __construct(EntityManagerInterface $entityManager )
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->repository = $entityManager->getRepository(SiteParameter::class);
-        $this->translationRepository = $entityManager->getRepository(SiteParameterTranslation::class);
+        $this->translationRepository = $entityManager->getRepository(
+            SiteParameterTranslation::class
+        );
     }
 
     public function __invoke(Argument $argument): ?SiteParameter
     {
-        $siteParameter = $this->repository->findOneBy(
-            ['keyname' => $argument->offsetGet('keyname')]
-        );
+        $siteParameter = $this->repository->findOneBy([
+            'keyname' => $argument->offsetGet('keyname'),
+        ]);
         if ($siteParameter && $siteParameter->isTranslatable()) {
             $this->loadTranslations($siteParameter);
         }
-        
+
         return $siteParameter;
     }
 

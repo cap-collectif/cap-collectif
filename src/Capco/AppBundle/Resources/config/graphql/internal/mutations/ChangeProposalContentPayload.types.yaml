@@ -1,6 +1,6 @@
 ChangeProposalContentPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      proposal:
-        type: 'InternalProposal!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposal:
+                type: 'InternalProposal!'

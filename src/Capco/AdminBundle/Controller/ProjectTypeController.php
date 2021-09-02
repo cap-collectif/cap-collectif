@@ -58,7 +58,11 @@ class ProjectTypeController extends CRUDController
                                 'result' => 'ok',
                                 'objectId' => $objectId,
                                 'objectName' => $this->escapeHtml(
-                                    $this->trans($existingObject->getTitle(), [], 'SonataAdminBundle')
+                                    $this->trans(
+                                        $existingObject->getTitle(),
+                                        [],
+                                        'SonataAdminBundle'
+                                    )
                                 ),
                             ],
                             200,
@@ -72,7 +76,11 @@ class ProjectTypeController extends CRUDController
                             'success.edition.flash',
                             [
                                 'name' => $this->escapeHtml(
-                                    $this->trans($existingObject->getTitle(), [], 'SonataAdminBundle')
+                                    $this->trans(
+                                        $existingObject->getTitle(),
+                                        [],
+                                        'SonataAdminBundle'
+                                    )
                                 ),
                             ],
                             'SonataAdminBundle'
@@ -92,7 +100,11 @@ class ProjectTypeController extends CRUDController
                             'flash_lock_error',
                             [
                                 'name' => $this->escapeHtml(
-                                    $this->trans($existingObject->getTitle(), [], 'SonataAdminBundle')
+                                    $this->trans(
+                                        $existingObject->getTitle(),
+                                        [],
+                                        'SonataAdminBundle'
+                                    )
                                 ),
                                 'link_start' =>
                                     '<a href="' .
@@ -115,7 +127,11 @@ class ProjectTypeController extends CRUDController
                             'error.edition.flash',
                             [
                                 'name' => $this->escapeHtml(
-                                    $this->trans($existingObject->getTitle(), [], 'SonataAdminBundle')
+                                    $this->trans(
+                                        $existingObject->getTitle(),
+                                        [],
+                                        'SonataAdminBundle'
+                                    )
                                 ),
                             ],
                             'SonataAdminBundle'

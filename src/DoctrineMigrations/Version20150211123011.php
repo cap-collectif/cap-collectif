@@ -46,7 +46,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $date,
-                $date
+                $date,
             ],
             [
                 'login.text.bottom',
@@ -56,7 +56,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $date,
-                $date
+                $date,
             ],
             [
                 'signin.text.top',
@@ -66,7 +66,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $date,
-                $date
+                $date,
             ],
             [
                 'signin.text.bottom',
@@ -76,8 +76,8 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 SiteParameter::$types['rich_text'],
                 true,
                 $date,
-                $date
-            ]
+                $date,
+            ],
         ];
 
         foreach ($newParameters as $values) {
@@ -95,7 +95,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                     'type' => $values[4],
                     'is_enabled' => $values[5],
                     'created_at' => $values[6],
-                    'updated_at' => $values[7]
+                    'updated_at' => $values[7],
                 ]);
             }
         }
@@ -114,7 +114,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
             'login.text.top',
             'login.text.bottom',
             'signin.text.top',
-            'signin.text.bottom'
+            'signin.text.bottom',
         ];
 
         foreach ($parametersKeys as $key) {

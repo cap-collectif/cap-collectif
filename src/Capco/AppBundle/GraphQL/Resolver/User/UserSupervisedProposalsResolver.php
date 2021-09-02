@@ -32,7 +32,7 @@ class UserSupervisedProposalsResolver implements ResolverInterface
     {
         if (!$args) {
             $args = new Argument([
-                'first' => 0
+                'first' => 0,
             ]);
         }
 

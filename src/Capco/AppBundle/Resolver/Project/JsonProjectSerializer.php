@@ -10,10 +10,12 @@ class JsonProjectSerializer extends AbstractProjectSerializer
 
     public function renderProjects(array $projects, bool $withKey = false): ?string
     {
-        return $this->wrapped->getSerializer()->serialize(
-            $withKey ? [$this->serializeKey => $projects] : $projects,
-            $this->outputFormat,
-            SerializationContext::create()->setGroups($this->serializeGroups)
-        );
+        return $this->wrapped
+            ->getSerializer()
+            ->serialize(
+                $withKey ? [$this->serializeKey => $projects] : $projects,
+                $this->outputFormat,
+                SerializationContext::create()->setGroups($this->serializeGroups)
+            );
     }
 }

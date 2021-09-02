@@ -127,7 +127,7 @@ class ProposalCommentRepository extends EntityRepository
         );
         $qb->setParameters([
             ':project' => $project,
-            ':proposalComment' => $this->_em->getClassMetadata(ProposalComment::class)
+            ':proposalComment' => $this->_em->getClassMetadata(ProposalComment::class),
         ]);
 
         return $qb->getQuery()->getResult();
@@ -142,9 +142,10 @@ class ProposalCommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')->orWhere('c.published = true');
         if ($viewer) {
-            $qb
-                ->orWhere('c.Author = :viewer AND c.published = false')
-                ->setParameter('viewer', $viewer);
+            $qb->orWhere('c.Author = :viewer AND c.published = false')->setParameter(
+                'viewer',
+                $viewer
+            );
         }
 
         return $qb;
@@ -184,8 +185,7 @@ class ProposalCommentRepository extends EntityRepository
         if ($type === ProposalComment::class) {
             $qb->leftJoin('c.parent', 'p');
         }
-        $qb->andWhere('p.id IN(:ids)')
-            ->setParameter('ids', $commentableIds);
+        $qb->andWhere('p.id IN(:ids)')->setParameter('ids', $commentableIds);
         return $qb;
     }
 
@@ -199,9 +199,7 @@ class ProposalCommentRepository extends EntityRepository
             $qb->andWhere('c.parent is NULL');
         }
         if ($commentable instanceof Proposal) {
-            $qb
-                ->andWhere('c.proposal = :proposal')
-                ->setParameter('proposal', $commentable);
+            $qb->andWhere('c.proposal = :proposal')->setParameter('proposal', $commentable);
         }
 
         if ($commentable instanceof ProposalComment) {

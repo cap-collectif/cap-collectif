@@ -1,17 +1,17 @@
 ProjectStatus:
-  type: enum
-  config:
-    description: 'Project statuses'
-    values:
-      FUTURE_WITHOUT_FINISHED_STEPS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE_WITHOUT_FINISHED_STEPS")'
-        description: 'The project has not started yet and has no finished step.'
-      FUTURE_WITH_FINISHED_STEPS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE_WITH_FINISHED_STEPS")'
-        description: 'The project has not started yet but has at least one finished step.'
-      OPENED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::OPENED")'
-        description: 'The project is currently open.'
-      CLOSED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::CLOSED")'
-        description: 'The project has been closed.'
+    type: enum
+    config:
+        description: 'Project statuses'
+        values:
+            FUTURE_WITHOUT_FINISHED_STEPS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE_WITHOUT_FINISHED_STEPS")'
+                description: 'The project has not started yet and has no finished step.'
+            FUTURE_WITH_FINISHED_STEPS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::FUTURE_WITH_FINISHED_STEPS")'
+                description: 'The project has not started yet but has at least one finished step.'
+            OPENED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::OPENED")'
+                description: 'The project is currently open.'
+            CLOSED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::CLOSED")'
+                description: 'The project has been closed.'

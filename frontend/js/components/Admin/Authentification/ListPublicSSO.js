@@ -51,7 +51,6 @@ const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(
 `;
 
 export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) => {
-
   const [showFranceConnectModal, setShowFranceConnectModal] = useState<boolean>(false);
 
   const handleClose = () => {

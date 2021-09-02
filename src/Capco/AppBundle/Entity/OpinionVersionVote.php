@@ -19,31 +19,31 @@ class OpinionVersionVote extends AbstractVote
     public static $voteTypes = [
         'ok' => self::VOTE_OK,
         'mitige' => self::VOTE_MITIGE,
-        'nok' => self::VOTE_NOK
+        'nok' => self::VOTE_NOK,
     ];
 
     public static $voteTypesLabels = [
         self::VOTE_OK => 'global.ok',
         self::VOTE_MITIGE => 'global.mitige',
-        self::VOTE_NOK => 'global.nok'
+        self::VOTE_NOK => 'global.nok',
     ];
 
     public static $voteTypesStyles = [
         self::VOTE_OK => [
             'color' => 'success',
             'icon' => 'hand-like-2-1',
-            'icon_checked' => 'hand-like-2'
+            'icon_checked' => 'hand-like-2',
         ],
         self::VOTE_NOK => [
             'color' => 'danger',
             'icon' => 'hand-unlike-2-1',
-            'icon_checked' => 'hand-unlike-2'
+            'icon_checked' => 'hand-unlike-2',
         ],
         self::VOTE_MITIGE => [
             'color' => 'warning',
             'icon' => 'hand-like-2-1 icon-rotate',
-            'icon_checked' => 'hand-like-2 icon-rotate'
-        ]
+            'icon_checked' => 'hand-like-2 icon-rotate',
+        ],
     ];
 
     /**
@@ -128,7 +128,7 @@ class OpinionVersionVote extends AbstractVote
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
             'ElasticsearchVoteNestedVersion',
-            'ElasticsearchVoteNestedConsultation'
+            'ElasticsearchVoteNestedConsultation',
         ]);
     }
 }

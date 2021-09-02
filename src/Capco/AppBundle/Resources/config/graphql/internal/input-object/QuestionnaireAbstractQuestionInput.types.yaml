@@ -1,6 +1,6 @@
 QuestionnaireAbstractQuestionInput:
-  type: input-object
-  config:
-    fields:
-      question:
-        type: 'QuestionInput!'
+    type: input-object
+    config:
+        fields:
+            question:
+                type: 'QuestionInput!'

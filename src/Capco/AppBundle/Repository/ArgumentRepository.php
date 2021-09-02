@@ -63,7 +63,7 @@ class ArgumentRepository extends EntityRepository
 
     public function countByUsersIds(array $ids, ?User $viewer): array
     {
-        $qb  = $this->getIsEnabledQueryBuilder();
+        $qb = $this->getIsEnabledQueryBuilder();
         $qb = $qb
             ->select('aut.id as user_id, COUNT(a.id) AS totalCount')
             ->leftJoin('a.opinion', 'o')
@@ -83,8 +83,7 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('ids', $ids);
 
         $qb = $this->handleArgumentVisibility($qb, $viewer);
-        return $qb->getQuery()
-            ->getArrayResult();
+        return $qb->getQuery()->getArrayResult();
     }
 
     public function getRecentOrdered(?string $locale = null)
@@ -144,8 +143,7 @@ class ArgumentRepository extends EntityRepository
         Argumentable $contribution,
         int $type = null,
         User $author
-    ): array
-    {
+    ): array {
         $qb = $this->createQueryBuilder('a')
             ->andWhere('a.published = false')
             ->andWhere('a.Author = :author')
@@ -157,9 +155,10 @@ class ArgumentRepository extends EntityRepository
             $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
         }
         if ($contribution instanceof OpinionVersion) {
-            $qb
-                ->andWhere('a.opinionVersion = :opinionVersion')
-                ->setParameter('opinionVersion', $contribution);
+            $qb->andWhere('a.opinionVersion = :opinionVersion')->setParameter(
+                'opinionVersion',
+                $contribution
+            );
         }
 
         return $qb->getQuery()->getResult();
@@ -173,8 +172,7 @@ class ArgumentRepository extends EntityRepository
         string $field,
         string $direction,
         bool $includeTrashed = false
-    ): Paginator
-    {
+    ): Paginator {
         $qb = $this->getByContributionQB($contribution, $includeTrashed);
 
         if (null !== $type) {
@@ -204,8 +202,7 @@ class ArgumentRepository extends EntityRepository
         Argumentable $contribution,
         ?int $type = null,
         bool $includeTrashed = false
-    ): int
-    {
+    ): int {
         $qb = $this->getByContributionQB($contribution, $includeTrashed);
         $qb->select('COUNT(a.id)');
 
@@ -213,7 +210,7 @@ class ArgumentRepository extends EntityRepository
             $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
 
-        return (int)$qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -246,8 +243,7 @@ class ArgumentRepository extends EntityRepository
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('version');
-        $qb
-            ->select('count(DISTINCT version)')
+        $qb->select('count(DISTINCT version)')
             ->andWhere('version.Author = :author')
             ->setParameter('author', $user);
 
@@ -390,11 +386,9 @@ class ArgumentRepository extends EntityRepository
         ?User $viewer = null,
         int $first = 0,
         int $offset = 100
-    ): array
-    {
+    ): array {
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb
-            ->leftJoin('a.opinion', 'o')
+        $qb->leftJoin('a.opinion', 'o')
             ->leftJoin('o.consultation', 'oc')
             ->leftJoin('oc.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'pAs')
@@ -417,8 +411,7 @@ class ArgumentRepository extends EntityRepository
         \DateTime $from,
         \DateTime $to,
         string $opinionId
-    ): int
-    {
+    ): int {
         return $this->countPublishedBetweenByOpinion(
             $from,
             $to,
@@ -431,8 +424,7 @@ class ArgumentRepository extends EntityRepository
         \DateTime $from,
         \DateTime $to,
         string $opinionId
-    ): int
-    {
+    ): int {
         return $this->countPublishedBetweenByOpinion($from, $to, $opinionId, Argument::TYPE_FOR);
     }
 
@@ -566,11 +558,9 @@ class ArgumentRepository extends EntityRepository
         \DateTime $to,
         string $opinionId,
         int $type
-    ): int
-    {
+    ): int {
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb
-            ->select('COUNT(a.id)')
+        $qb->select('COUNT(a.id)')
             ->andWhere($qb->expr()->between('a.publishedAt', ':from', ':to'))
             ->andWhere('a.opinion = :id')
             ->andWhere('a.type = :type')
@@ -579,10 +569,10 @@ class ArgumentRepository extends EntityRepository
                 'from' => $from,
                 'to' => $to,
                 'id' => $opinionId,
-                'type' => $type
+                'type' => $type,
             ]);
 
-        return (int)$qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     private function getByContributionQB(Argumentable $contribution, bool $includeTrashed = false)
@@ -595,9 +585,10 @@ class ArgumentRepository extends EntityRepository
             $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
         }
         if ($contribution instanceof OpinionVersion) {
-            $qb
-                ->andWhere('a.opinionVersion = :opinionVersion')
-                ->setParameter('opinionVersion', $contribution);
+            $qb->andWhere('a.opinionVersion = :opinionVersion')->setParameter(
+                'opinionVersion',
+                $contribution
+            );
         }
 
         return $qb;

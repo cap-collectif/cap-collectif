@@ -83,15 +83,9 @@ final class Version20201130152444 extends AbstractMigration implements Container
         );
 
         //proposaldecision.post is removed in Version20201203122444 postup.
-        $this->addSql(
-            '#ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782604B89032C'
-        );
-        $this->addSql(
-            '#DROP INDEX UNIQ_65F782604B89032C ON proposal_decision'
-        );
-        $this->addSql(
-            '#ALTER TABLE proposal_decision DROP post_id'
-        );
+        $this->addSql('#ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782604B89032C');
+        $this->addSql('#DROP INDEX UNIQ_65F782604B89032C ON proposal_decision');
+        $this->addSql('#ALTER TABLE proposal_decision DROP post_id');
     }
 
     public function down(Schema $schema): void
@@ -101,29 +95,17 @@ final class Version20201130152444 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql(
-            'ALTER TABLE official_response_author DROP FOREIGN KEY FK_7A803372E3F174A'
-        );
-        $this->addSql(
-            'ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782602E3F174A'
-        );
-        $this->addSql(
-            '#DROP TABLE official_response'
-        );
-        $this->addSql(
-            '#DROP TABLE official_response_author'
-        );
-        $this->addSql(
-            'DROP INDEX UNIQ_65F782602E3F174A ON proposal_decision'
-        );
+        $this->addSql('ALTER TABLE official_response_author DROP FOREIGN KEY FK_7A803372E3F174A');
+        $this->addSql('ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782602E3F174A');
+        $this->addSql('#DROP TABLE official_response');
+        $this->addSql('#DROP TABLE official_response_author');
+        $this->addSql('DROP INDEX UNIQ_65F782602E3F174A ON proposal_decision');
         $this->addSql(
             '#ALTER TABLE proposal_decision CHANGE official_response_id post_id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\''
         );
         $this->addSql(
             '#ALTER TABLE proposal_decision ADD CONSTRAINT FK_65F782604B89032C FOREIGN KEY (post_id) REFERENCES blog_post (id)'
         );
-        $this->addSql(
-            '#CREATE UNIQUE INDEX UNIQ_65F782604B89032C ON proposal_decision (post_id)'
-        );
+        $this->addSql('#CREATE UNIQUE INDEX UNIQ_65F782604B89032C ON proposal_decision (post_id)');
     }
 }

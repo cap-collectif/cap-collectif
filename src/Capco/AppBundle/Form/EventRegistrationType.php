@@ -26,7 +26,7 @@ class EventRegistrationType extends AbstractType
         if ($options['registered']) {
             $builder->add('submit', SubmitType::class, [
                 'label' => 'event_registration.unsubscribe',
-                'attr' => ['class' => 'btn  btn-danger  btn-block']
+                'attr' => ['class' => 'btn  btn-danger  btn-block'],
             ]);
 
             return;
@@ -36,7 +36,7 @@ class EventRegistrationType extends AbstractType
             $builder
                 ->add('private', null, [
                     'required' => false,
-                    'label' => 'make-my-registration-anonymous'
+                    'label' => 'make-my-registration-anonymous',
                 ])
                 ->add('isPrivacyPolicyAccepted', null, [
                     'required' => true,
@@ -44,11 +44,11 @@ class EventRegistrationType extends AbstractType
                         $options['adminAuthorizeDataTransferTradKey'],
                         [],
                         'CapcoAppBundle'
-                    )
+                    ),
                 ])
                 ->add('submit', SubmitType::class, [
                     'label' => 'global.register',
-                    'attr' => ['class' => 'btn btn-success btn-block']
+                    'attr' => ['class' => 'btn btn-success btn-block'],
                 ]);
 
             return;
@@ -56,14 +56,14 @@ class EventRegistrationType extends AbstractType
 
         $builder
             ->add('username', null, [
-                'label' => 'global.name'
+                'label' => 'global.name',
             ])
             ->add('email', null, [
-                'label' => 'global.email'
+                'label' => 'global.email',
             ])
             ->add('private', null, [
                 'required' => false,
-                'label' => 'make-my-registration-anonymous'
+                'label' => 'make-my-registration-anonymous',
             ])
             ->add('isPrivacyPolicyAccepted', null, [
                 'required' => true,
@@ -71,11 +71,11 @@ class EventRegistrationType extends AbstractType
                     $options['adminAuthorizeDataTransferTradKey'],
                     [],
                     'CapcoAppBundle'
-                )
+                ),
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'global.register',
-                'attr' => ['class' => 'btn  btn-success  btn-block']
+                'attr' => ['class' => 'btn  btn-success  btn-block'],
             ]);
     }
 
@@ -85,7 +85,7 @@ class EventRegistrationType extends AbstractType
             'data_class' => EventRegistration::class,
             'translation_domain' => 'CapcoAppBundle',
             'registered' => false,
-            'adminAuthorizeDataTransferTradKey' => 'privacy-policy-accepted-2'
+            'adminAuthorizeDataTransferTradKey' => 'privacy-policy-accepted-2',
         ]);
     }
 }

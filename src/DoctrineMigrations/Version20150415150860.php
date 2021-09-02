@@ -21,7 +21,6 @@ class Version20150415150860 extends AbstractMigration
 
     public function postUp(Schema $schema): void
     {
-
         $date = (new \DateTime())->format('Y-m-d H:i:s');
 
         $this->connection->insert('site_parameter', [

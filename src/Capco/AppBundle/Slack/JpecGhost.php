@@ -23,7 +23,7 @@ class JpecGhost extends AbstractSlackMessager
 
     public function generateAndSendMessage(AnalysisConfigurationProcess $process)
     {
-        if ("test" !== $this->env) {
+        if ('test' !== $this->env) {
             return $this->send($this->generateSlackMessage($process));
         }
     }

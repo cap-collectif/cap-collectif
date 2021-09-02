@@ -282,9 +282,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         }
         // Session 1
         // https://budgetparticipatif.smartidf.services/project/le-budget-participatif-ecologique/collect/depot-des-projets
-        if (
-            'd6b98b9b-5e3c-11ea-8fab-0242ac110004' === $proposalForm->getId()
-        ) {
+        if ('d6b98b9b-5e3c-11ea-8fab-0242ac110004' === $proposalForm->getId()) {
             $this->shouldPreFillAPIEntreprise = true;
             $this->indexLocalOrGlobal = 1;
             $this->indexTypeQuestion = 20;
@@ -305,9 +303,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             $this->indexEntrepriseKbis = 58;
         }
         // Session 2
-        if (
-            '440118f3-0a0e-11eb-b274-0242ac110004' === $proposalForm->getId()
-        ) {
+        if ('440118f3-0a0e-11eb-b274-0242ac110004' === $proposalForm->getId()) {
             $this->shouldPreFillAPIEntreprise = true;
             $this->indexLocalOrGlobal = 2;
             $this->indexTypeQuestion = 22;

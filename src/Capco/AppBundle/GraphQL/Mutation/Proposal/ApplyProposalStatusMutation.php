@@ -36,7 +36,13 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
         $statusId = $input['statusId'];
         if ($statusId) {
             $status = $this->entityManager->getRepository(Status::class)->find($statusId);
-            if (null === $status || !$this->authorizationChecker->isGranted($accessType, $status->getStep()->getProject())) {
+            if (
+                null === $status ||
+                !$this->authorizationChecker->isGranted(
+                    $accessType,
+                    $status->getStep()->getProject()
+                )
+            ) {
                 return false;
             }
         }
@@ -44,9 +50,12 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
         return $this->isGrantedStatusCheckProposals($input['proposalIds'], $viewer, $accessType);
     }
 
-    private function isGrantedStatusCheckProposals(array $proposalsId, ?User $viewer, string $accessType): bool
-    {
-        foreach($this->getProposals($proposalsId, $viewer) as $proposal) {
+    private function isGrantedStatusCheckProposals(
+        array $proposalsId,
+        ?User $viewer,
+        string $accessType
+    ): bool {
+        foreach ($this->getProposals($proposalsId, $viewer) as $proposal) {
             if (!$this->authorizationChecker->isGranted($accessType, $proposal)) {
                 return false;
             }

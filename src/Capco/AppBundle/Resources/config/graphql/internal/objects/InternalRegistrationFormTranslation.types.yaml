@@ -1,15 +1,15 @@
 InternalRegistrationFormTranslation:
-  type: object
-  config:
-    name: RegistrationFormTranslation
-    description: 'translation of the registration form'
-    fields:
-      locale:
-        type: 'String!'
-        description: 'The locale of the translation'
-      topText:
-        description: 'The bottom text to display'
-        type: 'String'
-      bottomText:
-        description: 'The bottom text to display'
-        type: 'String'
+    type: object
+    config:
+        name: RegistrationFormTranslation
+        description: 'translation of the registration form'
+        fields:
+            locale:
+                type: 'String!'
+                description: 'The locale of the translation'
+            topText:
+                description: 'The bottom text to display'
+                type: 'String'
+            bottomText:
+                description: 'The bottom text to display'
+                type: 'String'

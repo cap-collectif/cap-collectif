@@ -23,8 +23,6 @@ class SocialNetworkRepository extends EntityRepository
             ->addOrderBy('s.position', 'ASC')
             ->setParameter('isEnabled', true);
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        return $qb->getQuery()->getResult();
     }
 }

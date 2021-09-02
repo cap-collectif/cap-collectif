@@ -196,7 +196,11 @@ class MailerService extends MailerFactory
     {
         return $this->router->generate(
             'capco_app_action_token',
-            ['token' =>$this->tokenManager->getOrCreateActionToken($recipient, ActionToken::UNSUBSCRIBE)->getToken()],
+            [
+                'token' => $this->tokenManager
+                    ->getOrCreateActionToken($recipient, ActionToken::UNSUBSCRIBE)
+                    ->getToken(),
+            ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

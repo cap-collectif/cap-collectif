@@ -1,11 +1,11 @@
 LogicJumpConditionOperator:
-  type: enum
-  config:
-    description: 'Possible operator for a logic jump condition'
-    values:
-      IS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\LogicJumpConditionOperator::IS")'
-        description: 'Allows to test an equality.'
-      IS_NOT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\LogicJumpConditionOperator::IS_NOT")'
-        description: 'Allows to test the opposite of an equality test.'
+    type: enum
+    config:
+        description: 'Possible operator for a logic jump condition'
+        values:
+            IS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\LogicJumpConditionOperator::IS")'
+                description: 'Allows to test an equality.'
+            IS_NOT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\LogicJumpConditionOperator::IS_NOT")'
+                description: 'Allows to test the opposite of an equality test.'

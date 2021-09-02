@@ -20,7 +20,10 @@ class DeleteDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutati
             $debate = $this->getDebateFromInput($input, null);
             self::checkDebateIsOpen($debate);
             $argument = $this->getArgumentFromHash($input);
-            $deletedDebateAnonymousArgumentId = GlobalId::toGlobalId('DebateArgument', $this->removeFromDbAndIndex($argument));
+            $deletedDebateAnonymousArgumentId = GlobalId::toGlobalId(
+                'DebateArgument',
+                $this->removeFromDbAndIndex($argument)
+            );
         } catch (UserError $userError) {
             return ['errorCode' => $userError->getMessage()];
         }

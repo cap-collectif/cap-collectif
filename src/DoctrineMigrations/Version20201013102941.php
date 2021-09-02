@@ -21,8 +21,12 @@ final class Version20201013102941 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('ALTER TABLE reply ADD ip_address VARCHAR(255) DEFAULT NULL, ADD navigator LONGTEXT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user_connection CHANGE ip_address ip_address VARCHAR(255) DEFAULT NULL, CHANGE navigator navigator LONGTEXT DEFAULT NULL');
+        $this->addSql(
+            'ALTER TABLE reply ADD ip_address VARCHAR(255) DEFAULT NULL, ADD navigator LONGTEXT DEFAULT NULL'
+        );
+        $this->addSql(
+            'ALTER TABLE user_connection CHANGE ip_address ip_address VARCHAR(255) DEFAULT NULL, CHANGE navigator navigator LONGTEXT DEFAULT NULL'
+        );
     }
 
     public function down(Schema $schema): void

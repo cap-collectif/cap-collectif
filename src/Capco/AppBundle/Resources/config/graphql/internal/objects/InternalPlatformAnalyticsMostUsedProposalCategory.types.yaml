@@ -5,8 +5,8 @@ InternalPlatformAnalyticsMostUsedProposalCategory:
         description: Represent a proposal category and how much it has been used
         fields:
             category:
-                type: "InternalProposalCategory!"
-                description: "The related category."
+                type: 'InternalProposalCategory!'
+                description: 'The related category.'
             totalCount:
-                type: "Int!"
-                description: "How much this category has been used."
+                type: 'Int!'
+                description: 'How much this category has been used.'

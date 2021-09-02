@@ -5,6 +5,6 @@ import Footer from '../components/Footer/Footer';
 
 export default (props: Object) => (
   <Providers>
-      <Footer {...props} />
-    </Providers>
+    <Footer {...props} />
+  </Providers>
 );

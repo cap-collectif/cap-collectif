@@ -5,5 +5,4 @@ use Doctrine\ORM\EntityRepository;
 
 class SourceCategoryRepository extends EntityRepository
 {
-
 }

@@ -49,7 +49,7 @@ class ElasticsearchPaginator
                 [
                     'sliceStart' => 0,
                     'arrayLength' => \count($results->getEntities()),
-                    'cursors' => $results->getCursors()
+                    'cursors' => $results->getCursors(),
                 ]
             );
         });
@@ -76,7 +76,7 @@ class ElasticsearchPaginator
                 [
                     'sliceStart' => 0,
                     'arrayLength' => \count($results->getEntities()),
-                    'cursors' => $results->getCursors()
+                    'cursors' => $results->getCursors(),
                 ]
             );
         });

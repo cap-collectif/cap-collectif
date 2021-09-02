@@ -9,8 +9,12 @@ class MessageRecipient
     private $fullName;
     private $vars;
 
-    public function __construct(string $emailAddress, ?string $locale = null, ?string $fullName = null, array $vars = [])
-    {
+    public function __construct(
+        string $emailAddress,
+        ?string $locale = null,
+        ?string $fullName = null,
+        array $vars = []
+    ) {
         $this->emailAddress = $emailAddress;
         $this->locale = $locale;
         $this->fullName = $fullName;

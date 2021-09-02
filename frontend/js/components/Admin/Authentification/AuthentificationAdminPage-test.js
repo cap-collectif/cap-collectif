@@ -18,8 +18,8 @@ describe('<AuthentificationAdminPage />', () => {
     const Props = {
       features: {
         ...features,
-        login_franceconnect: true
-      }
+        login_franceconnect: true,
+      },
     };
 
     const wrapper = shallow(<AuthentificationAdminPage {...Props} />);

@@ -1,16 +1,16 @@
 LogicJumpConditionInput:
-  type: input-object
-  config:
-    description: 'A particular condition in a logic jump.'
-    fields:
-      id:
-        type: 'ID'
-      operator:
-        type: 'LogicJumpConditionOperator!'
-        description: 'The operator used to check the condition'
-      question:
-        type: 'ID!'
-        description: 'The id of the question you want to have a condition'
-      value:
-        type: 'String'
-        description: 'The answer the selected question should have to trigger the condition'
+    type: input-object
+    config:
+        description: 'A particular condition in a logic jump.'
+        fields:
+            id:
+                type: 'ID'
+            operator:
+                type: 'LogicJumpConditionOperator!'
+                description: 'The operator used to check the condition'
+            question:
+                type: 'ID!'
+                description: 'The id of the question you want to have a condition'
+            value:
+                type: 'String'
+                description: 'The answer the selected question should have to trigger the condition'

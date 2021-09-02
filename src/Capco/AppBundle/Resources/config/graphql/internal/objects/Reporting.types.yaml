@@ -1,31 +1,31 @@
 Reporting:
-  type: object
-  inherits:
-    - Contribution
-    - ContributionWithAuthor
-  config:
-    description: 'A report'
-    interfaces:
-      - Contribution
-      - ContributionWithAuthor
-    fields:
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      author:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingAuthorResolver", [value])'
-      bodyText:
-        type: 'String!'
-        description: 'The escaped content of the argument.'
-      type:
-        type: 'ReportingType!'
-        description: 'Kind of report.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingTypeResolver", [value])'
-      body:
-        type: 'String!'
-        description: 'The content of the argument.'
-      kind:
-        type: 'String!'
-        resolve: 'report'
-      url:
-        resolve: ''
+    type: object
+    inherits:
+        - Contribution
+        - ContributionWithAuthor
+    config:
+        description: 'A report'
+        interfaces:
+            - Contribution
+            - ContributionWithAuthor
+        fields:
+            createdAt:
+                type: 'DateTime!'
+                description: 'Identifies the date and time when the object was created.'
+            author:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingAuthorResolver", [value])'
+            bodyText:
+                type: 'String!'
+                description: 'The escaped content of the argument.'
+            type:
+                type: 'ReportingType!'
+                description: 'Kind of report.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingTypeResolver", [value])'
+            body:
+                type: 'String!'
+                description: 'The content of the argument.'
+            kind:
+                type: 'String!'
+                resolve: 'report'
+            url:
+                resolve: ''

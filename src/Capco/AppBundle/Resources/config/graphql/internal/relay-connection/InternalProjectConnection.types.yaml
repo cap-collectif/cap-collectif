@@ -1,8 +1,8 @@
 InternalProjectConnection:
-  type: relay-connection
-  config:
-    name: ProjectConnection
-    nodeType: InternalProject!
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        name: ProjectConnection
+        nodeType: InternalProject!
+        connectionFields:
+            totalCount:
+                type: Int!

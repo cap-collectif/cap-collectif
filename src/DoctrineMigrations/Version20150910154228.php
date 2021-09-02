@@ -214,7 +214,7 @@ class Version20150910154228 extends AbstractMigration
             foreach ($ots as $ot) {
                 $this->connection->insert('consultationstep_opiniontypes', [
                     'consultationstep_id' => $s['step'],
-                    'opiniontype_id' => $ot
+                    'opiniontype_id' => $ot,
                 ]);
             }
         }
@@ -223,7 +223,7 @@ class Version20150910154228 extends AbstractMigration
             foreach ($ots as $ot) {
                 $this->connection->insert('consultationtype_opiniontypes', [
                     'consultationtype_id' => $ct,
-                    'opiniontype_id' => $ot
+                    'opiniontype_id' => $ot,
                 ]);
             }
         }

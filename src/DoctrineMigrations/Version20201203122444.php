@@ -83,12 +83,8 @@ final class Version20201203122444 extends AbstractMigration implements Container
         $this->connection->exec(
             'ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782604B89032C'
         );
-        $this->connection->exec(
-            'DROP INDEX UNIQ_65F782604B89032C ON proposal_decision'
-        );
-        $this->connection->exec(
-            'ALTER TABLE proposal_decision DROP post_id'
-        );
+        $this->connection->exec('DROP INDEX UNIQ_65F782604B89032C ON proposal_decision');
+        $this->connection->exec('ALTER TABLE proposal_decision DROP post_id');
 
         //remove posts that were official responses
         foreach ($officialResponsesDataInPosts as $data) {
@@ -179,24 +175,35 @@ final class Version20201203122444 extends AbstractMigration implements Container
         //recreate posts that were official responses
         $officialResponsesData = $this->getOfficialResponsesData();
         foreach ($officialResponsesData as $key => $officialResponseData) {
-            $officialResponsesData[$key]['id'] = $this->createPostFromOfficialResponseData($officialResponseData);
+            $officialResponsesData[$key]['id'] = $this->createPostFromOfficialResponseData(
+                $officialResponseData
+            );
         }
 
         //remove new tables
         $this->connection->exec('DROP TABLE official_response');
         $this->connection->exec('DROP TABLE official_response_author');
-        $this->connection->exec('ALTER TABLE proposal_decision CHANGE official_response_id post_id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\'');
+        $this->connection->exec(
+            'ALTER TABLE proposal_decision CHANGE official_response_id post_id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\''
+        );
 
         //restore posts in official responses
         foreach ($officialResponsesData as $officialResponseData) {
             if ($officialResponseData['proposal_decision_id']) {
-                $this->addPostInProposalDecision($officialResponseData['proposal_decision_id'], $officialResponseData['id']);
+                $this->addPostInProposalDecision(
+                    $officialResponseData['proposal_decision_id'],
+                    $officialResponseData['id']
+                );
             }
         }
 
         //restore constraints
-        $this->connection->exec('ALTER TABLE proposal_decision ADD CONSTRAINT FK_65F782604B89032C FOREIGN KEY (post_id) REFERENCES blog_post (id)');
-        $this->connection->exec('CREATE UNIQUE INDEX UNIQ_65F782604B89032C ON proposal_decision (post_id)');
+        $this->connection->exec(
+            'ALTER TABLE proposal_decision ADD CONSTRAINT FK_65F782604B89032C FOREIGN KEY (post_id) REFERENCES blog_post (id)'
+        );
+        $this->connection->exec(
+            'CREATE UNIQUE INDEX UNIQ_65F782604B89032C ON proposal_decision (post_id)'
+        );
     }
 
     private function getOfficialResponsesData(): array
@@ -225,15 +232,20 @@ final class Version20201203122444 extends AbstractMigration implements Container
             'comments_count' => 0,
             'is_commentable' => 0,
             'is_published' => $officialResponseData['is_published'],
-            'published_at' => $officialResponseData['is_published'] ? $officialResponseData['created_at'] : null,
+            'published_at' => $officialResponseData['is_published']
+                ? $officialResponseData['created_at']
+                : null,
             'updated_at' => $officialResponseData['updated_at'],
-            'created_at' => $officialResponseData['created_at']
+            'created_at' => $officialResponseData['created_at'],
         ];
         $this->connection->insert('blog_post', $blogPostData);
 
         $this->translatePost($blogPostData['id'], $officialResponseData);
 
-        $this->addAuthorsToPosts($officialResponseData['official_response_id'], $blogPostData['id']);
+        $this->addAuthorsToPosts(
+            $officialResponseData['official_response_id'],
+            $blogPostData['id']
+        );
 
         return $blogPostData['id'];
     }
@@ -247,16 +259,13 @@ final class Version20201203122444 extends AbstractMigration implements Container
         foreach ($authorsData as $authorsDatum) {
             $this->connection->insert('blog_post_authors', [
                 'user_id' => $authorsDatum['user_id'],
-                'post_id' => $blogPostId
+                'post_id' => $blogPostId,
             ]);
         }
     }
 
-    private function addPostInProposalDecision(
-        string $proposalDecisionId,
-        string $blogPostId
-    ): void {
-
+    private function addPostInProposalDecision(string $proposalDecisionId, string $blogPostId): void
+    {
         $this->connection->update(
             'proposal_decision',
             ['post_id' => $blogPostId],
@@ -271,9 +280,9 @@ final class Version20201203122444 extends AbstractMigration implements Container
             'id' => $id,
             'translatable_id' => $blogPostId,
             'slug' => "Réponse officielle $id",
-            'title' => "Réponse officielle",
+            'title' => 'Réponse officielle',
             'body' => $data['body'],
-            'locale' => $this->em->getRepository(Locale::class)->findDefaultLocale()
+            'locale' => $this->em->getRepository(Locale::class)->findDefaultLocale(),
         ];
         $this->connection->insert('blog_post_translation', $blogPostTranslationData);
     }

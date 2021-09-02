@@ -5,6 +5,6 @@ import CookieContent from '../components/StaticPage/CookieContent';
 
 export default (props: Object) => (
   <Providers>
-      <CookieContent {...props} />
-    </Providers>
+    <CookieContent {...props} />
+  </Providers>
 );

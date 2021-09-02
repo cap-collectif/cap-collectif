@@ -9,17 +9,14 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-
 class QueryContributorsResolver implements ResolverInterface
 {
     public $useElasticsearch = true;
     private UserSearch $userSearch;
     private OccitanieClient $occitanieClient;
 
-    public function __construct(
-        UserSearch $userSearch,
-        OccitanieClient $occitanieClient
-    ) {
+    public function __construct(UserSearch $userSearch, OccitanieClient $occitanieClient)
+    {
         $this->userSearch = $userSearch;
         $this->occitanieClient = $occitanieClient;
     }
@@ -35,9 +32,7 @@ class QueryContributorsResolver implements ResolverInterface
             $value = $this->userSearch->getAllContributors($offset, $limit);
             $totalCount = (int) $value['totalCount'];
 
-            if (
-                strpos(getenv('SYMFONY_INSTANCE_NAME'), 'occitanie') !== false
-            ) {
+            if (strpos(getenv('SYMFONY_INSTANCE_NAME'), 'occitanie') !== false) {
                 $totalCount = $this->occitanieClient->getUserCounters();
             }
 

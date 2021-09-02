@@ -24,7 +24,7 @@ final class QuestionnaireReplyDeleteAdminMessage extends AbstractAdminMessage
             'userUrl' => $params['userURL'],
             'configUrl' => $params['configURL'],
             'baseUrl' => $params['baseURL'],
-            'replyShowUrl' => '#'
+            'replyShowUrl' => '#',
         ];
     }
 
@@ -32,7 +32,7 @@ final class QuestionnaireReplyDeleteAdminMessage extends AbstractAdminMessage
     {
         return [
             '{authorName}' => self::escape($arrayReply['author_name']),
-            '{questionnaireStepTitle}' => self::escape($arrayReply['questionnaire_step_title'])
+            '{questionnaireStepTitle}' => self::escape($arrayReply['questionnaire_step_title']),
         ];
     }
 }

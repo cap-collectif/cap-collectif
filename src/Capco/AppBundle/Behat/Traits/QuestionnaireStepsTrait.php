@@ -112,7 +112,9 @@ trait QuestionnaireStepsTrait
         $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
-        $this->scrollToElement('#CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux');
+        $this->scrollToElement(
+            '#CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
+        );
 
         $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'
@@ -160,7 +162,9 @@ trait QuestionnaireStepsTrait
         $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
-        $this->scrollToElement('#CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux');
+        $this->scrollToElement(
+            '#CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
+        );
 
         $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz'
@@ -530,7 +534,9 @@ trait QuestionnaireStepsTrait
         $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
         );
-        $this->scrollToElement('#CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux');
+        $this->scrollToElement(
+            '#CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux'
+        );
 
         $this->checkElement(
             'CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy'

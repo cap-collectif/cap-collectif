@@ -14,8 +14,10 @@ class ProjectHelper
     protected $projectRepository;
     protected $stepRepository;
 
-    public function __construct(ProjectRepository $projectRepository, AbstractStepRepository $stepRepository)
-    {
+    public function __construct(
+        ProjectRepository $projectRepository,
+        AbstractStepRepository $stepRepository
+    ) {
         $this->projectRepository = $projectRepository;
         $this->stepRepository = $stepRepository;
     }
@@ -44,8 +46,8 @@ class ProjectHelper
         $steps = $this->getAbstractSteps($project);
         foreach ($steps as $step) {
             if (
-                $step instanceof ConsultationStep
-                || ($step instanceof SelectionStep && true === $step->isVotable())
+                $step instanceof ConsultationStep ||
+                ($step instanceof SelectionStep && true === $step->isVotable())
             ) {
                 return true;
             }

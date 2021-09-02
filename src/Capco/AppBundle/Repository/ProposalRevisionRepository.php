@@ -31,9 +31,10 @@ class ProposalRevisionRepository extends EntityRepository
             $qb->andWhere('pr.state = :state')->setParameter('state', $state);
         }
         if ($expiresBefore) {
-            $qb
-                ->andWhere('pr.expiresAt < :expiresBefore')
-                ->setParameter('expiresBefore', $expiresBefore);
+            $qb->andWhere('pr.expiresAt < :expiresBefore')->setParameter(
+                'expiresBefore',
+                $expiresBefore
+            );
         }
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
@@ -55,9 +56,10 @@ class ProposalRevisionRepository extends EntityRepository
             $qb->andWhere('pr.state = :state')->setParameter('state', $state);
         }
         if ($expiresBefore) {
-            $qb
-                ->andWhere('pr.expiresAt < :expiresBefore')
-                ->setParameter('expiresBefore', $expiresBefore);
+            $qb->andWhere('pr.expiresAt < :expiresBefore')->setParameter(
+                'expiresBefore',
+                $expiresBefore
+            );
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();

@@ -15,7 +15,7 @@ const props = {
       { id: 'closed step' },
       { id: 'future step' },
     ],
-    archived: false
+    archived: false,
   },
 };
 
@@ -23,9 +23,9 @@ const archivedProjectProps = {
   ...props,
   project: {
     ...props.project,
-    archived: true
-  }
-}
+    archived: true,
+  },
+};
 
 const openStep = {
   actualStep: {

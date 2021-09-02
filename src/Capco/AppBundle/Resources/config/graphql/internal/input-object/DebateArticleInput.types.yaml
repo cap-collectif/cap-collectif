@@ -1,8 +1,8 @@
 DebateArticleInput:
-  type: input-object
-  config:
-    fields:
-      id:
-        type: 'ID'
-      url:
-        type: 'URI!'
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'ID'
+            url:
+                type: 'URI!'

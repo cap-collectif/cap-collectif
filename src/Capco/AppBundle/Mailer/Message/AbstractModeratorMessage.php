@@ -42,7 +42,7 @@ abstract class AbstractModeratorMessage extends AbstractAdminMessage
             '{sitename}' => $siteName,
             '{business}' => 'Cap Collectif',
             '{businessUrl}' => 'https://cap-collectif.com/',
-            '{siteUrl}' => $siteURL
+            '{siteUrl}' => $siteURL,
         ];
     }
 }

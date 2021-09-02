@@ -36,7 +36,7 @@ class Version20150414121059 extends AbstractMigration
                 'position' => 23,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
+                'is_enabled' => 1,
             ],
             [
                 'keyname' => 'color.footer2.text',
@@ -45,8 +45,8 @@ class Version20150414121059 extends AbstractMigration
                 'position' => 24,
                 'updated_at' => $date,
                 'created_at' => $date,
-                'is_enabled' => 1
-            ]
+                'is_enabled' => 1,
+            ],
         ];
 
         foreach ($newColors as $color) {

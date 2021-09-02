@@ -8,7 +8,9 @@ import type {
 } from '~relay/UpdateRegistrationFormCommunicationMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateRegistrationFormCommunicationMutation($input: UpdateRegistrationFormCommunicationInput!) {
+  mutation UpdateRegistrationFormCommunicationMutation(
+    $input: UpdateRegistrationFormCommunicationInput!
+  ) {
     updateRegistrationFormCommunication(input: $input) {
       registrationForm {
         ...RegistrationFormCommunication_registrationForm

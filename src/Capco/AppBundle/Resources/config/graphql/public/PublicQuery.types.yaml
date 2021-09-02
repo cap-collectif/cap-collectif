@@ -1,29 +1,29 @@
 PublicQuery:
-  type: object
-  config:
-    name: Query
-    description: 'This is entry point into the schema.'
-    fields:
-      viewer:
-        access: "@=hasRole('ROLE_USER')"
-        type: 'PublicUser!'
-        description: 'The currently authenticated user.'
-        resolve: '@=getUser()'
-      node:
-        builder: 'Relay::Node'
-        description: 'Lookup a node by its ID.'
-        args:
-          id:
-            type: 'ID!'
-            description: 'The ID of an object.'
-        builderConfig:
-          nodeInterfaceType: Node
-          idFetcher: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNodeResolver", [value, getUser(), context, info])'
-      nodes:
-        type: '[Node]!'
-        description: 'Lookup nodes by a list of IDs.'
-        args:
-          ids:
-            type: '[ID!]!'
-            description: 'The list of node IDs.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNodesResolver", [args["ids"], getUser(), context, info])'
+    type: object
+    config:
+        name: Query
+        description: 'This is entry point into the schema.'
+        fields:
+            viewer:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'PublicUser!'
+                description: 'The currently authenticated user.'
+                resolve: '@=getUser()'
+            node:
+                builder: 'Relay::Node'
+                description: 'Lookup a node by its ID.'
+                args:
+                    id:
+                        type: 'ID!'
+                        description: 'The ID of an object.'
+                builderConfig:
+                    nodeInterfaceType: Node
+                    idFetcher: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNodeResolver", [value, getUser(), context, info])'
+            nodes:
+                type: '[Node]!'
+                description: 'Lookup nodes by a list of IDs.'
+                args:
+                    ids:
+                        type: '[ID!]!'
+                        description: 'The list of node IDs.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNodesResolver", [args["ids"], getUser(), context, info])'

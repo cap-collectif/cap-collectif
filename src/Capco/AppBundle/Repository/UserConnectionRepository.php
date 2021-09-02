@@ -92,8 +92,7 @@ class UserConnectionRepository extends EntityRepository
             ->setParameter('successful', $successful)
             ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR);
         if ($lastHour) {
-            $qb
-                ->andWhere('c.datetime BETWEEN :from AND :to')
+            $qb->andWhere('c.datetime BETWEEN :from AND :to')
                 ->setParameter('from', new \DateTime('-1 hour'))
                 ->setParameter('to', new \DateTime());
         }

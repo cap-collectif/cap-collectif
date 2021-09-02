@@ -3,12 +3,12 @@ APIEnterpriseEnterprise:
     inherits:
         - APIEnterpriseMandatoryFields
     config:
-        description: "An enterprise."
+        description: 'An enterprise.'
         name: APIEnterpriseEnterprise
         fields:
             availableSirenSituation:
                 type: 'Boolean'
-                description: "The RIB of the enterprise."
+                description: 'The RIB of the enterprise.'
             availableTurnover:
                 type: 'Boolean'
-                description: "The RIB of the association"
+                description: 'The RIB of the association'

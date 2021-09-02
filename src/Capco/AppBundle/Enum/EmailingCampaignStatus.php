@@ -9,13 +9,9 @@ class EmailingCampaignStatus
     public const PLANNED = 'PLANNED';
     public const ARCHIVED = 'ARCHIVED';
 
-    public const EDITABLE = [
-        self::DRAFT, self::PLANNED
-    ];
+    public const EDITABLE = [self::DRAFT, self::PLANNED];
 
-    public const ALL = [
-        self::DRAFT, self::SENT, self::PLANNED, self::ARCHIVED
-    ];
+    public const ALL = [self::DRAFT, self::SENT, self::PLANNED, self::ARCHIVED];
 
     public static function isValid(string $value): bool
     {

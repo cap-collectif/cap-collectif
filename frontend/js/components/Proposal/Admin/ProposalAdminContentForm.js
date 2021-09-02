@@ -189,7 +189,6 @@ const onSubmit = (
     youtubeUrl: '',
   };
 
-  
   if (proposal && proposal.form.isUsingAnySocialNetworks) {
     if (values.webPageUrl) {
       input.webPageUrl = values.webPageUrl;

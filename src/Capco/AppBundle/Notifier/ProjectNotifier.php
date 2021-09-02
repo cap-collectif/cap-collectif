@@ -32,7 +32,7 @@ final class ProjectNotifier extends BaseNotifier
             $project,
             [
                 'editURL' => $this->projectResolver->resolveAdminEditUrl($project),
-                'projectsURL' => $this->projectResolver->resolveIndexUrl()
+                'projectsURL' => $this->projectResolver->resolveIndexUrl(),
             ],
             $project->getAuthor()
         );

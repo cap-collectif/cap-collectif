@@ -16,7 +16,7 @@ class DefaultLocaleCodeDataloader
 
     public function __invoke(): string
     {
-        if (!$this->defaultLocale){
+        if (!$this->defaultLocale) {
             $this->defaultLocale = $this->localeResolver->getDefaultLocaleCode();
         }
 

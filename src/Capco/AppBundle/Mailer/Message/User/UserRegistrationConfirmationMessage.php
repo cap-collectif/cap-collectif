@@ -19,14 +19,14 @@ final class UserRegistrationConfirmationMessage extends AbstractExternalMessage
             'businessName' => 'Cap Collectif',
             'profileUrl' => $params['profileURL'],
             'confirmationUrl' => $params['confirmationURL'],
-            'baseUrl' => $params['baseURL']
+            'baseUrl' => $params['baseURL'],
         ];
     }
 
     public static function getMySubjectVars(User $user, array $params): array
     {
         return [
-            '{username}' => $user->getUsername()
+            '{username}' => $user->getUsername(),
         ];
     }
 }

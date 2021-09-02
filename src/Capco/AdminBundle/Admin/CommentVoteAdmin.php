@@ -28,7 +28,7 @@ class CommentVoteAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             );
     }

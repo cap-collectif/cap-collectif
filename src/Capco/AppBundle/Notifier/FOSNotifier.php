@@ -59,7 +59,9 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
             $user,
             [
                 'profileURL' => $this->userUrlResolver->__invoke($user),
-                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)
+                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke(
+                    $user
+                ),
             ],
             $user
         );

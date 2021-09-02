@@ -13,7 +13,7 @@ class HomePage extends Page
         'Login button' => '.btn.btn--connection',
         'Registration button' => '.btn.btn--registration',
         'Logged user dropdown' => '#navbar-username',
-        'Logout button' => '#logout-button'
+        'Logout button' => '#logout-button',
     ];
 
     /**

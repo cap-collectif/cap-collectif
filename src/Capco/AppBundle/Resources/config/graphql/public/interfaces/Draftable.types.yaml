@@ -1,15 +1,15 @@
 Draftable:
-  type: interface
-  inherits:
-    - Node
-  config:
-    description: 'Entities that can be drafted.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Draftable\\DraftableTypeResolver", [value])'
-    fields:
-      draft:
-        type: 'Boolean!'
-        description: 'Whether or not the entity is a draft.'
-      undraftAt:
-        type: 'DateTime'
-        description: 'Identifies when the entity was undraft at.'
-        resolve: '@=value.getUndraftAt()'
+    type: interface
+    inherits:
+        - Node
+    config:
+        description: 'Entities that can be drafted.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Draftable\\DraftableTypeResolver", [value])'
+        fields:
+            draft:
+                type: 'Boolean!'
+                description: 'Whether or not the entity is a draft.'
+            undraftAt:
+                type: 'DateTime'
+                description: 'Identifies when the entity was undraft at.'
+                resolve: '@=value.getUndraftAt()'

@@ -1,6 +1,6 @@
 RequestUserArchivePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      viewer:
-        type: 'InternalUser!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            viewer:
+                type: 'InternalUser!'

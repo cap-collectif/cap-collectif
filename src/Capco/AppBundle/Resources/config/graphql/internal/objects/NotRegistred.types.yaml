@@ -1,11 +1,11 @@
 NotRegistered:
-  type: object
-  config:
-    description: 'A user without account.'
-    fields:
-      email:
-        type: 'String'
-        description: 'Email of the user.'
-      username:
-        type: 'String'
-        description: 'Username of the user.'
+    type: object
+    config:
+        description: 'A user without account.'
+        fields:
+            email:
+                type: 'String'
+                description: 'Email of the user.'
+            username:
+                type: 'String'
+                description: 'Username of the user.'

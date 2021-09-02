@@ -21,7 +21,7 @@ class Version20160615193504 extends AbstractMigration
             'type' => 1,
             'updated_at' => $date,
             'created_at' => $date,
-            'is_enabled' => 1
+            'is_enabled' => 1,
         ];
 
         $this->connection->insert('site_parameter', $values);

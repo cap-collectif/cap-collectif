@@ -1,18 +1,18 @@
 VersionVote:
-  type: object
-  inherits:
-    - YesNoPairedVote
-    - PublicPublishable
-  config:
-    interfaces:
-      - YesNoPairedVote
-      - PublicPublishable
-      - InternalVote
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: VersionVote
-      kind:
-        type: 'String!'
-        description: "Returns 'vote'."
+    type: object
+    inherits:
+        - YesNoPairedVote
+        - PublicPublishable
+    config:
+        interfaces:
+            - YesNoPairedVote
+            - PublicPublishable
+            - InternalVote
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: VersionVote
+            kind:
+                type: 'String!'
+                description: "Returns 'vote'."

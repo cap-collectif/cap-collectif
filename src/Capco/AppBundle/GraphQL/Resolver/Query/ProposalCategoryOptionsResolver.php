@@ -8,12 +8,11 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalCategoryOptionsResolver implements ResolverInterface
 {
-
     public function __invoke(): array
     {
         return [
             'colors' => AvailableProposalCategoryColor::getAvailableTypes(),
-            'icons' => AvailableProposalCategoryIcon::getAvailableTypes()
+            'icons' => AvailableProposalCategoryIcon::getAvailableTypes(),
         ];
     }
 }

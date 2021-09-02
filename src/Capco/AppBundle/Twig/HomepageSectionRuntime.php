@@ -105,9 +105,8 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         );
     }
 
-    public function getCustomProjects(
-        ?Section $section = null
-    ): string {
+    public function getCustomProjects(?Section $section = null): string
+    {
         $user = ($token = $this->tokenStorage->getToken()) ? $token->getUser() : null;
         $count = $this->projectRepository->countPublished($user);
         $projectsCount = $section->getSectionProjects()->count();

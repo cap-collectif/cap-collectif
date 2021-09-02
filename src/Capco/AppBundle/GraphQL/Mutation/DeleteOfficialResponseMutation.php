@@ -16,10 +16,8 @@ class DeleteOfficialResponseMutation implements MutationInterface
     private GlobalIdResolver $resolver;
     private EntityManagerInterface $em;
 
-    public function __construct(
-        GlobalIdResolver $resolver,
-        EntityManagerInterface $em
-    ) {
+    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $em)
+    {
         $this->resolver = $resolver;
         $this->em = $em;
     }

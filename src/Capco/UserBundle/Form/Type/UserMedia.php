@@ -12,14 +12,10 @@ class UserMedia extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'media',
-            MediaType::class,
-            [
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
-            ]
-        );
+        $builder->add('media', MediaType::class, [
+            'provider' => 'sonata.media.provider.image',
+            'context' => 'default',
+        ]);
     }
 
     /**
@@ -27,11 +23,9 @@ class UserMedia extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => User::class,
-                'csrf_protection' => false,
-            ]
-        );
+        $resolver->setDefaults([
+            'data_class' => User::class,
+            'csrf_protection' => false,
+        ]);
     }
 }

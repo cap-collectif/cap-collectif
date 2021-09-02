@@ -104,7 +104,7 @@ class ProposalCollectVote extends AbstractVote
     public static function getElasticsearchSerializationGroups(): array
     {
         return array_merge(parent::getElasticsearchSerializationGroups(), [
-            'ElasticsearchVoteNestedProposal'
+            'ElasticsearchVoteNestedProposal',
         ]);
     }
 }

@@ -26,7 +26,7 @@ class MediaAdmin extends BaseMediaAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $options = [
-            'choices' => []
+            'choices' => [],
         ];
 
         foreach ($this->pool->getContexts() as $name => $context) {
@@ -41,7 +41,7 @@ class MediaAdmin extends BaseMediaAdmin
                 'context',
                 null,
                 [
-                    'show_filter' => true !== $this->getPersistentParameter('hide_context')
+                    'show_filter' => true !== $this->getPersistentParameter('hide_context'),
                 ],
                 ChoiceType::class,
                 $options
@@ -70,9 +70,9 @@ class MediaAdmin extends BaseMediaAdmin
                 'choices' => $providers,
                 'required' => false,
                 'multiple' => false,
-                'expanded' => false
+                'expanded' => false,
             ],
-            'field_type' => ChoiceType::class
+            'field_type' => ChoiceType::class,
         ]);
     }
 }

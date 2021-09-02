@@ -1,6 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import colors from "~/utils/colors";
+import colors from '~/utils/colors';
 
 const UserAnalystListHiddenContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'user-analyst-list-hidden',

@@ -8,7 +8,7 @@ const CustomProjectList = lazy(() =>
 );
 
 type Props = {|
-  +projectsCount: number
+  +projectsCount: number,
 |};
 
 export default (props: Props) => {

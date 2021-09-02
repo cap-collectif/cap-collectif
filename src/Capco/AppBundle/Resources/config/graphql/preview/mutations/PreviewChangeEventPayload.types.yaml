@@ -1,11 +1,11 @@
 PreviewChangeEventPayload:
-  type: relay-mutation-payload
-  config:
-    name: ChangeEventPayload
-    fields:
-      event:
-        type: 'PreviewEvent'
-        description: 'The event.'
-      userErrors:
-        type: '[UserError!]!'
-        description: 'An unsuccessful mutation will return one or more `UserError` objects.'
+    type: relay-mutation-payload
+    config:
+        name: ChangeEventPayload
+        fields:
+            event:
+                type: 'PreviewEvent'
+                description: 'The event.'
+            userErrors:
+                type: '[UserError!]!'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

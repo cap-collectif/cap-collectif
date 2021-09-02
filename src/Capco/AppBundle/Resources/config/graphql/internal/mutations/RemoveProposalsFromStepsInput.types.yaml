@@ -1,10 +1,10 @@
 RemoveProposalsFromStepsInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      proposalIds:
-        type: '[ID!]!'
-        description: 'The ids of the proposals to remove from steps'
-      stepIds:
-        type: '[ID!]!'
-        description: 'The ids of the steps to which proposals should be removed'
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'The ids of the proposals to remove from steps'
+            stepIds:
+                type: '[ID!]!'
+                description: 'The ids of the steps to which proposals should be removed'

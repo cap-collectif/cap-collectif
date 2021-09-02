@@ -37,7 +37,6 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   };
 
   getLabel = (step: ProjectPreviewProgressBar_actualStep, archived: boolean) => {
-
     if (archived) {
       return <FormattedMessage id="global-archived" />;
     }

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import styled from "styled-components";
+import styled from 'styled-components';
 import Table from '../Ui/Table/Table';
 import type { QuestionnaireAdminResultsRanking_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsRanking_multipleChoiceQuestion.graphql';
 import QuestionnaireAdminResultsRankingLine from './QuestionnaireAdminResultsRankingLine';
@@ -13,7 +13,7 @@ type Props = {
 
 const Container = styled.div`
   width: 768px;
-`
+`;
 
 export const QuestionnaireAdminResultsRanking = React.forwardRef<Props, HTMLElement>(
   ({ multipleChoiceQuestion }: Props, ref) => {

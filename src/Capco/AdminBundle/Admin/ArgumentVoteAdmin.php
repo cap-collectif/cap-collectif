@@ -23,7 +23,7 @@ class ArgumentVoteAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ]);
     }
 
@@ -33,7 +33,7 @@ class ArgumentVoteAdmin extends AbstractAdmin
 
         $listMapper
             ->add('argument', ModelType::class, [
-                'label' => 'global.argument.label'
+                'label' => 'global.argument.label',
             ])
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation'])
@@ -44,7 +44,7 @@ class ArgumentVoteAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('argument', ModelType::class, [
-                'label' => 'global.argument.label'
+                'label' => 'global.argument.label',
             ])
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('createdAt', null, ['label' => 'global.creation']);

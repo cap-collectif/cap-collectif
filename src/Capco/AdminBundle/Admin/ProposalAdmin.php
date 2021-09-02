@@ -79,8 +79,7 @@ class ProposalAdmin extends AbstractAdmin
             ->getContainer()
             ->get('doctrine')
             ->getManager();
-        $em
-            ->getConfiguration()
+        $em->getConfiguration()
             ->getResultCacheImpl()
             ->deleteAll();
 

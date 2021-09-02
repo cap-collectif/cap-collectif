@@ -119,7 +119,7 @@ const QuestionnaireAdminResultsPdfDocument = ({
 
   return (
     <Document>
-      <Page style={{...styles.page, position: 'relative'}}>
+      <Page style={{ ...styles.page, position: 'relative' }}>
         <CoverPage title={title} logoUrl={logoUrl} url={url} translations={translations} />
       </Page>
       <Page style={styles.page}>

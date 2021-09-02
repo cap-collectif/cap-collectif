@@ -41,8 +41,9 @@ const Template = (args: ViewChartProps) => <ViewChart {...args} />;
 export const main = Template.bind({});
 main.storyName = 'default';
 main.args = {
-  label: 'https://jesuisvraimentuntrestresgrandlabeldoncjeseraicoupeemaislajesuispasencorelongdoncjecontinue',
+  label:
+    'https://jesuisvraimentuntrestresgrandlabeldoncjeseraicoupeemaislajesuispasencorelongdoncjecontinue',
   total: 400000,
   count: 250000,
-  level: 0
+  level: 0,
 };

@@ -1,6 +1,6 @@
 UpdateLocaleStatusPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      locales:
-        type: 'LocaleConnection!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            locales:
+                type: 'LocaleConnection!'

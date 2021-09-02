@@ -17,11 +17,11 @@ class ProposalDistrictType extends AbstractType
         $builder->add('id');
         $builder->add('name', TextType::class);
         $builder->add('translations', TranslationCollectionType::class, [
-            'fields' => ['id', 'name', 'locale']
+            'fields' => ['id', 'name', 'locale'],
         ]);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class, [
-            'constraints' => [new CheckGeoJson()]
+            'constraints' => [new CheckGeoJson()],
         ]);
         $builder->add('border', BorderStyleType::class, ['required' => false]);
         $builder->add('background', BackgroundStyleType::class, ['required' => false]);
@@ -32,7 +32,7 @@ class ProposalDistrictType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => ProposalDistrict::class
+            'data_class' => ProposalDistrict::class,
         ]);
     }
 }

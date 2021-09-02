@@ -5,5 +5,4 @@ use Sonata\UserBundle\Entity\BaseGroup;
 
 class Group extends BaseGroup
 {
-
 }

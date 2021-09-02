@@ -18,8 +18,14 @@ class FeaturesCategoryExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('is_category_enabled', [$this, 'isCategoryEnabled']),
             new \Twig_SimpleFunction('is_admin_enabled', [$this, 'isAdminEnabled']),
-            new \Twig_SimpleFunction('get_enabled_pages_categories', [$this, 'getEnabledPagesCategories']),
-            new \Twig_SimpleFunction('get_enabled_settings_categories', [$this, 'getEnabledSettingsCategories']),
+            new \Twig_SimpleFunction('get_enabled_pages_categories', [
+                $this,
+                'getEnabledPagesCategories',
+            ]),
+            new \Twig_SimpleFunction('get_enabled_settings_categories', [
+                $this,
+                'getEnabledSettingsCategories',
+            ]),
         ];
     }
 

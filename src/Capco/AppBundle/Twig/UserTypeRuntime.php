@@ -32,7 +32,9 @@ class UserTypeRuntime implements RuntimeExtensionInterface
     public function getUserTypes(): array
     {
         $cachedItem = $this->cache->getItem(self::CACHE_KEY);
-        $locale = $this->requestStack->getCurrentRequest() ? $this->requestStack->getCurrentRequest()->getLocale() : null;
+        $locale = $this->requestStack->getCurrentRequest()
+            ? $this->requestStack->getCurrentRequest()->getLocale()
+            : null;
         if (null === $locale || empty($locale)) {
             $locale = $this->defaultLocale;
         }

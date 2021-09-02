@@ -21,12 +21,12 @@ class HasUnlistedEmailValidator extends ConstraintValidator
             return;
         }
 
-        $registrations = $this->entityManager->getRepository(
-            'CapcoAppBundle:EventRegistration'
-        )->findBy([
-            'event' => $value->getEvent(),
-            'email' => $value->getEmail(),
-        ]);
+        $registrations = $this->entityManager
+            ->getRepository('CapcoAppBundle:EventRegistration')
+            ->findBy([
+                'event' => $value->getEvent(),
+                'email' => $value->getEmail(),
+            ]);
 
         $present = false;
         foreach ($registrations as $registration) {
@@ -36,7 +36,8 @@ class HasUnlistedEmailValidator extends ConstraintValidator
         }
 
         if ($present) {
-            $this->context->buildViolation($constraint->message)
+            $this->context
+                ->buildViolation($constraint->message)
                 ->atPath('email')
                 ->addViolation();
 

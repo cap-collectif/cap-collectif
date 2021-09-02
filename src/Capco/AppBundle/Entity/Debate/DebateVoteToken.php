@@ -22,7 +22,6 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 class DebateVoteToken extends AbstractUserToken
 {
-
     /**
      * @ORM\ManyToOne(targetEntity=Debate::class)
      * @ORM\JoinColumn(nullable=false)

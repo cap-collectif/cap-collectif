@@ -14,7 +14,7 @@ class Version20150908101448 extends AbstractMigration
     {
         $newKeys = [
             'color.btn.ghost.bg' => 'color.btn.ghost.hover',
-            'color.btn.ghost.text' => 'color.btn.ghost.base'
+            'color.btn.ghost.text' => 'color.btn.ghost.base',
         ];
 
         foreach ($newKeys as $old => $new) {

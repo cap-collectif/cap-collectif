@@ -9,12 +9,12 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20210422121446 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'create external_service_configuration';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->abortIf(
             'mysql' != $this->connection->getDatabasePlatform()->getName(),
@@ -27,7 +27,7 @@ final class Version20210422121446 extends AbstractMigration
         $this->defaultConfiguration();
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->abortIf(
             'mysql' != $this->connection->getDatabasePlatform()->getName(),
@@ -39,8 +39,6 @@ final class Version20210422121446 extends AbstractMigration
 
     private function defaultConfiguration(): void
     {
-        $this->addSql(
-            'INSERT INTO external_service_configuration VALUES ("mailer", "mandrill")'
-        );
+        $this->addSql('INSERT INTO external_service_configuration VALUES ("mailer", "mandrill")');
     }
 }

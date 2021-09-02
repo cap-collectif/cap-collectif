@@ -20,7 +20,7 @@ final class CommentUpdateAdminMessage extends AbstractAdminMessage
             'time' => $comment->getUpdatedAt()->format('H:i:s'),
             'comment' => self::escape($comment->getBodyTextExcerpt()),
             'proposalUrl' => $params['commentURL'],
-            'commentUrlBack' => $params['adminURL']
+            'commentUrlBack' => $params['adminURL'],
         ];
     }
 

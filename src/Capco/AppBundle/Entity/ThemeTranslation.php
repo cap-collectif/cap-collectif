@@ -39,7 +39,6 @@ class ThemeTranslation implements Translation
      */
     private $body;
 
-
     public static function getTranslatableEntityClass(): string
     {
         return Theme::class;

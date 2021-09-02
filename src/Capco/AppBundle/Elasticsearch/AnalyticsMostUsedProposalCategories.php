@@ -30,12 +30,15 @@ class AnalyticsMostUsedProposalCategories
     public function fromEs(ResultSet $set): self
     {
         $categories = array_map(
-            static fn(array $bucket) => ['id' => $bucket['key'], 'doc_count' => $bucket['doc_count']],
+            static fn(array $bucket) => [
+                'id' => $bucket['key'],
+                'doc_count' => $bucket['doc_count'],
+            ],
             $set->getAggregation('most_used_proposal_categories')['buckets']
         );
         $this->totalCount = array_reduce(
             $categories,
-            static fn (int $acc, array $category) => $acc + $category['doc_count'],
+            static fn(int $acc, array $category) => $acc + $category['doc_count'],
             0
         );
         $ids = array_map(static fn(array $category) => $category['id'], $categories);
@@ -43,9 +46,13 @@ class AnalyticsMostUsedProposalCategories
 
         $this->values = array_map(
             static function (array $category, int $i) use ($categoriesFromDb) {
-                return (new AnalyticsUsedProposalCategory($categoriesFromDb[$i], $category['doc_count']));
+                return new AnalyticsUsedProposalCategory(
+                    $categoriesFromDb[$i],
+                    $category['doc_count']
+                );
             },
-            $categories, array_keys($categories)
+            $categories,
+            array_keys($categories)
         );
 
         return $this;

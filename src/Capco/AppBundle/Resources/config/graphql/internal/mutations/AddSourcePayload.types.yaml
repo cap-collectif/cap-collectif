@@ -1,13 +1,13 @@
 AddSourcePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      source:
-        type: 'InternalSource'
-        description: 'The newly created source.'
-      sourceEdge:
-        type: 'SourceEdge'
-        description: "The edge from the sourceable's sources connection."
-      userErrors:
-        type: '[UserError!]!'
-        description: 'An unsuccessful mutation will return one or more `UserError` objects.'
+    type: relay-mutation-payload
+    config:
+        fields:
+            source:
+                type: 'InternalSource'
+                description: 'The newly created source.'
+            sourceEdge:
+                type: 'SourceEdge'
+                description: "The edge from the sourceable's sources connection."
+            userErrors:
+                type: '[UserError!]!'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

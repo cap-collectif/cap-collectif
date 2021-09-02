@@ -26,12 +26,20 @@ const ViewChart = ({ total, count, truncate = 50, level, label, ...props }: View
   return (
     <Flex direction="column" spacing={1} {...props}>
       <Flex direction="row" justify="space-between">
-        <Text color="gray.900" {...(truncate && { title: label })}>{content}</Text>
-        <Text color="blue.900" fontSize={2} fontWeight={FontWeight.Semibold}>{formatBigNumber(count)}</Text>
+        <Text color="gray.900" {...(truncate && { title: label })}>
+          {content}
+        </Text>
+        <Text color="blue.900" fontSize={2} fontWeight={FontWeight.Semibold}>
+          {formatBigNumber(count)}
+        </Text>
       </Flex>
 
       <AppBox width="100%" height="2px" bg="gray.150" borderRadius="normal">
-        <AppBox bg={level <= 2 ? colors[level] : 'blue.400'} width={`${(count / total) * 100}%`} height="100%" />
+        <AppBox
+          bg={level <= 2 ? colors[level] : 'blue.400'}
+          width={`${(count / total) * 100}%`}
+          height="100%"
+        />
       </AppBox>
     </Flex>
   );

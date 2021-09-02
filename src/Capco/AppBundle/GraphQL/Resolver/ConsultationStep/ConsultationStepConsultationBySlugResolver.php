@@ -24,7 +24,8 @@ class ConsultationStepConsultationBySlugResolver implements ResolverInterface
     {
         $slug = $args->offsetGet('slug');
 
-        return $step->getConsultations()
+        return $step
+            ->getConsultations()
             ->matching(ConsultationRepository::createSlugCriteria($slug))
             ->first();
     }

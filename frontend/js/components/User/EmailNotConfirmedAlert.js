@@ -29,12 +29,13 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
           resendingConfirmation: false,
           confirmationSent: true,
         });
-      }).catch(() => {
+      })
+      .catch(() => {
         this.setState({
           resendingConfirmation: false,
           confirmationSent: true,
         });
-      })
+      });
   };
 
   render() {

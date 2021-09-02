@@ -71,7 +71,7 @@ class UnfollowOpinionMutation implements MutationInterface
 
         return [
             'opinion' => $opinion ?: $version,
-            'unfollowerId' => GlobalId::toGlobalId('User', $user->getId())
+            'unfollowerId' => GlobalId::toGlobalId('User', $user->getId()),
         ];
     }
 
@@ -82,7 +82,7 @@ class UnfollowOpinionMutation implements MutationInterface
             /** @var Follower $follower */
             $follower = $this->followerRepository->findOneBy([
                 'user' => $user,
-                'opinion' => $opinion
+                'opinion' => $opinion,
             ]);
             if (!$follower) {
                 throw new UserError('Can\'t find the opinion.');
@@ -96,7 +96,7 @@ class UnfollowOpinionMutation implements MutationInterface
             /** @var Follower $follower */
             $follower = $this->followerRepository->findOneBy([
                 'user' => $user,
-                'opinionVersion' => $opinion
+                'opinionVersion' => $opinion,
             ]);
             if (!$follower) {
                 throw new UserError('Can\'t find the version.');

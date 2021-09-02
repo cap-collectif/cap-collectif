@@ -1,10 +1,10 @@
 PreviewSimpleQuestion:
-  type: object
-  inherits:
-    - PreviewQuestion
-  config:
-    name: SimpleQuestion
-    interfaces:
-      - PreviewQuestion
-      - Node
-    description: 'A simple question'
+    type: object
+    inherits:
+        - PreviewQuestion
+    config:
+        name: SimpleQuestion
+        interfaces:
+            - PreviewQuestion
+            - Node
+        description: 'A simple question'

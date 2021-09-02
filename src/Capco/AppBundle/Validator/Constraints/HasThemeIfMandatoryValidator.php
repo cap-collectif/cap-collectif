@@ -18,11 +18,14 @@ class HasThemeIfMandatoryValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         $form = $object->getProposalForm();
-        if (!$object->getTheme() && $this->toggleManager->isActive('themes') && $form && $form->isUsingThemes() && $form->isThemeMandatory()) {
-            $this->context
-                ->buildViolation($constraint->message)
-                ->addViolation()
-            ;
+        if (
+            !$object->getTheme() &&
+            $this->toggleManager->isActive('themes') &&
+            $form &&
+            $form->isUsingThemes() &&
+            $form->isThemeMandatory()
+        ) {
+            $this->context->buildViolation($constraint->message)->addViolation();
 
             return false;
         }

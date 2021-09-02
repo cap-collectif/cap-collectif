@@ -18,7 +18,7 @@ final class UserConfirmEmailChangedMessage extends AbstractExternalMessage
             'date' => $params['date'],
             'time' => $params['date']->format('H:i:s'),
             'siteName' => $params['siteName'],
-            'baseUrl' => $params['baseURL']
+            'baseUrl' => $params['baseURL'],
         ];
     }
 

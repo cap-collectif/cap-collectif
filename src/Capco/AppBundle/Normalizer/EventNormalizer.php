@@ -60,7 +60,6 @@ class EventNormalizer implements
             return $data;
         }
 
-
         $data['_links'] = [
             'show' => $this->router->generate(
                 'app_event_show',
@@ -87,12 +86,12 @@ class EventNormalizer implements
 
     private static function getSlug(Event $event): string
     {
-        if ("" !== $event->getSlug(null, true)) {
+        if ('' !== $event->getSlug(null, true)) {
             return $event->getSlug(null, true);
         }
 
         foreach ($event->getTranslations() as $translation) {
-            if ("" !== $translation->getSlug()) {
+            if ('' !== $translation->getSlug()) {
                 return $translation->getSlug();
             }
         }

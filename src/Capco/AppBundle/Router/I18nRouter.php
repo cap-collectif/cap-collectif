@@ -83,7 +83,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         if ($isMultilingual && !isset($parameters['_locale'])) {
             $parameters['_locale'] = $defaultLocale;
         }
-        if (!$isMultilingual){
+        if (!$isMultilingual) {
             unset($parameters['_locale']);
         }
 
@@ -260,7 +260,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
                 'scheme' => $this->context->getScheme(),
                 'httpPort' => $this->context->getHttpPort(),
                 'httpsPort' => $this->context->getHttpsPort(),
-                '_route' => $params['_route']
+                '_route' => $params['_route'],
             ];
         }
         if (

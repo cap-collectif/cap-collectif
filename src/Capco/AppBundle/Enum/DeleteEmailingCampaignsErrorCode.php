@@ -7,10 +7,7 @@ class DeleteEmailingCampaignsErrorCode implements EnumType
     public const ID_NOT_FOUND = 'ID_NOT_FOUND';
     public const EMPTY = 'EMPTY';
 
-    public const ALL = [
-        self::ID_NOT_FOUND,
-        self::EMPTY
-    ];
+    public const ALL = [self::ID_NOT_FOUND, self::EMPTY];
 
     public static function isValid($value): bool
     {

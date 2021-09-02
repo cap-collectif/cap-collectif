@@ -12,7 +12,10 @@ trait AdminUserTrait
     public function iGoToTheAdminUserTab($tab)
     {
         $page = $this->getCurrentPage();
-        $this->waitAndThrowOnFailure(3000, "$('" . $page->getSelector('user ' . $tab . ' tab') . "').length > 0");
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('" . $page->getSelector('user ' . $tab . ' tab') . "').length > 0"
+        );
         $page->clickOnTab("user $tab");
         $this->iWait(1);
     }
@@ -23,7 +26,9 @@ trait AdminUserTrait
     public function iDeleteTheUser()
     {
         $element = '#user-admin-page-tabs-pane-6 button[type="button"][class="btn btn-danger"]';
-        $this->getCurrentPage()->find('css', $element)->click();
+        $this->getCurrentPage()
+            ->find('css', $element)
+            ->click();
     }
 
     /**
@@ -31,7 +36,10 @@ trait AdminUserTrait
      */
     public function iConfirmAdminUserDeletion()
     {
-        $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+        $this->getSession()
+            ->getDriver()
+            ->getWebDriverSession()
+            ->accept_alert();
     }
 
     /**

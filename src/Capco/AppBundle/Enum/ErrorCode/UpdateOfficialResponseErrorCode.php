@@ -21,7 +21,7 @@ class UpdateOfficialResponseErrorCode implements EnumType
         self::PROPOSAL_NOT_FOUND,
         self::PROPOSAL_HAS_RESPONSE,
         self::INVALID_DATE,
-        self::NOT_ADMIN
+        self::NOT_ADMIN,
     ];
 
     public static function isValid($value): bool

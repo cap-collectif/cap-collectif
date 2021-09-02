@@ -16,7 +16,7 @@ class DecisionPublicationMessage extends AbstractExternalMessage
     {
         return [
             'decisionMakerName' => $proposal->getDecisionMaker()->getUsername(),
-            'proposalName' => $proposal->getTitle()
+            'proposalName' => $proposal->getTitle(),
         ];
     }
 
@@ -30,8 +30,7 @@ class DecisionPublicationMessage extends AbstractExternalMessage
             'proposal' => $proposal,
             'proposalUrl' => $params['proposalUrl'],
             'decisionMakerUrl' => $params['decisionMakerUrl'],
-            'publicationDate' => $params['publicationDate']
+            'publicationDate' => $params['publicationDate'],
         ];
     }
-
 }

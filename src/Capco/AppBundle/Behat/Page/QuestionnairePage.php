@@ -46,7 +46,7 @@ class QuestionnairePage extends Page
         'second checkbox' =>
             '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy]',
         'third checkbox' =>
-            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz]'
+            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz]',
     ];
 
     /**

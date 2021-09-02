@@ -30,7 +30,7 @@ class Requirement
         self::LASTNAME => 'group.title',
         self::PHONE => 'mobile-phone',
         self::DATE_OF_BIRTH => 'form.label_date_of_birth',
-        self::POSTAL_ADDRESS => 'admin.fields.event.address'
+        self::POSTAL_ADDRESS => 'admin.fields.event.address',
     ];
 
     /**

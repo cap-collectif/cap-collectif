@@ -1,11 +1,11 @@
 ProposalStepVoteType:
-  type: enum
-  config:
-    description: 'Type of vote.'
-    values:
-      DISABLED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::DISABLED")'
-      SIMPLE:
-        value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::SIMPLE")'
-      BUDGET:
-        value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::BUDGET")'
+    type: enum
+    config:
+        description: 'Type of vote.'
+        values:
+            DISABLED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::DISABLED")'
+            SIMPLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::SIMPLE")'
+            BUDGET:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::BUDGET")'

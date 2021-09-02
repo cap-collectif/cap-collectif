@@ -27,7 +27,9 @@ class UserFormType extends AbstractType
                 'purify_html_profile' => 'default',
             ])
             ->add('email', EmailType::class, ['required' => false])
-            ->add('plainPassword', PasswordType::class, ['constraints' => [new PasswordComplexity(), new NotBlank()]])
+            ->add('plainPassword', PasswordType::class, [
+                'constraints' => [new PasswordComplexity(), new NotBlank()],
+            ])
             ->add('roles', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'allow_add' => true,

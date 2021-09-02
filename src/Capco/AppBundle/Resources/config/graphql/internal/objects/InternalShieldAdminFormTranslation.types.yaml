@@ -1,11 +1,11 @@
 InternalShieldAdminFormTranslation:
-  type: object
-  config:
-    name: ShieldAdminFormTranslation
-    fields:
-      locale:
-        type: 'String!'
-        description: 'The locale of the translation'
-      introduction:
-        description: 'Introduction text to show in shield page.'
-        type: 'HTML'
+    type: object
+    config:
+        name: ShieldAdminFormTranslation
+        fields:
+            locale:
+                type: 'String!'
+                description: 'The locale of the translation'
+            introduction:
+                description: 'Introduction text to show in shield page.'
+                type: 'HTML'

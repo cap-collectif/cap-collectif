@@ -8,7 +8,7 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 final class UserArchiveGeneratedMessage extends AbstractExternalMessage
 {
     public const SUBJECT = 'email-name-download-copy';
-    public const TEMPLATE ='@CapcoMail/archiveReady.html.twig';
+    public const TEMPLATE = '@CapcoMail/archiveReady.html.twig';
 
     public static function getMySubjectVars(UserArchive $archive, array $params): array
     {
@@ -25,7 +25,7 @@ final class UserArchiveGeneratedMessage extends AbstractExternalMessage
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
             'to' => self::escape($archive->getUser()->getEmail()),
-            'baseUrl' => $params['siteURL']
+            'baseUrl' => $params['siteURL'],
         ];
     }
 }

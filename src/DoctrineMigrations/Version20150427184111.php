@@ -129,7 +129,7 @@ class Version20150427184111 extends AbstractMigration
                 $this->connection->insert('consultation_abstractstep', [
                     'consultation_id' => $step['consultation_id'],
                     'step_id' => $step['id'],
-                    'position' => $step['position']
+                    'position' => $step['position'],
                 ]);
             }
             $this->connection->update(
@@ -143,12 +143,12 @@ class Version20150427184111 extends AbstractMigration
             if (isset($type['step_id'])) {
                 $this->connection->insert('consultationstep_opiniontypes', [
                     'consultationstep_id' => $type['step_id'],
-                    'opiniontype_id' => $type['opiniontype_id']
+                    'opiniontype_id' => $type['opiniontype_id'],
                 ]);
             } else {
                 $this->connection->delete('consultationstep_opiniontypes', [
                     'consultationstep_id' => $type['consultation_id'],
-                    'opiniontype_id' => $type['opiniontype_id']
+                    'opiniontype_id' => $type['opiniontype_id'],
                 ]);
             }
         }
@@ -168,7 +168,7 @@ class Version20150427184111 extends AbstractMigration
         foreach ($this->consultationTypeOpinionTypes as $ctot) {
             $this->connection->insert('consultationtype_opiniontypes', [
                 'consultationtype_id' => $ctot['consultationtype_id'],
-                'opiniontype_id' => $ctot['opiniontype_id']
+                'opiniontype_id' => $ctot['opiniontype_id'],
             ]);
         }
     }
@@ -288,7 +288,7 @@ class Version20150427184111 extends AbstractMigration
                     [
                         'type' => $step['type'],
                         'position' => $step['position'],
-                        'consultation_id' => $step['consultation_id']
+                        'consultation_id' => $step['consultation_id'],
                     ],
                     ['id' => $step['id']]
                 );
@@ -300,7 +300,7 @@ class Version20150427184111 extends AbstractMigration
         foreach ($this->types as $type) {
             $this->connection->insert('consultation_types', [
                 'consultation_id' => $type['consultation_id'],
-                'opiniontype_id' => $type['opiniontype_id']
+                'opiniontype_id' => $type['opiniontype_id'],
             ]);
         }
 
@@ -315,7 +315,7 @@ class Version20150427184111 extends AbstractMigration
         foreach ($this->consultationTypeOpinionTypes as $ctot) {
             $this->connection->insert('consultation_type_types', [
                 'consultationtype_id' => $ctot['consultationtype_id'],
-                'opiniontype_id' => $ctot['opiniontype_id']
+                'opiniontype_id' => $ctot['opiniontype_id'],
             ]);
         }
     }

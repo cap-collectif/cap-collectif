@@ -22,7 +22,7 @@ class Version20150330161617 extends AbstractMigration
             'color.header2.bg' => "Fond de l'en-tête secondaire",
             'color.btn.primary' => 'Couleur primaire',
             'color.btn' => "Bouton de l'en-tête",
-            'color.footer.bg' => 'Fond du pied de page'
+            'color.footer.bg' => 'Fond du pied de page',
         ];
 
         foreach ($newTitles as $key => $title) {

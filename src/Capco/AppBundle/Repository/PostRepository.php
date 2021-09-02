@@ -319,7 +319,6 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('p')

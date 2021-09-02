@@ -29,8 +29,7 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
         SourceRepository $sourceRepository,
         ArgumentRepository $argumentRepository,
         OpinionVersionRepository $opinionVersionRepository
-    )
-    {
+    ) {
         $this->opinionSearch = $opinionSearch;
         $this->opinionRepository = $opinionRepository;
         $this->sourceRepository = $sourceRepository;
@@ -43,12 +42,14 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
         Argument $args,
         $viewer,
         RequestStack $request
-    ): ConnectionInterface
-    {
+    ): ConnectionInterface {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
         $includeTrashed = $args->offsetGet('includeTrashed');
-        $totalCount = $this->getConsultationStepContributionsTotalCount($consultationStep, $includeTrashed);
+        $totalCount = $this->getConsultationStepContributionsTotalCount(
+            $consultationStep,
+            $includeTrashed
+        );
         $paginator = new ElasticsearchPaginator(function (?string $cursor, $limit) use (
             $includeTrashed,
             $direction,
@@ -61,7 +62,7 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
             $filters = [
                 'step.id' => $consultationStep->getId(),
                 'trashed' => false,
-                'published' => true
+                'published' => true,
             ];
             $seed = Search::generateSeed($request, $viewer);
 
@@ -84,35 +85,24 @@ class ConsultationStepContributionsConnectionResolver implements ResolverInterfa
         return $connection;
     }
 
-    private function getConsultationStepContributionsTotalCount(ConsultationStep $step, bool $includeTrashed = false): int
-    {
+    private function getConsultationStepContributionsTotalCount(
+        ConsultationStep $step,
+        bool $includeTrashed = false
+    ): int {
         $totalCount = 0;
 
-        $totalCount += $this->opinionRepository->countPublishedContributionsByStep(
-            $step
-        );
+        $totalCount += $this->opinionRepository->countPublishedContributionsByStep($step);
 
-        $totalCount += $this->argumentRepository->countPublishedArgumentsByStep(
-            $step
-        );
+        $totalCount += $this->argumentRepository->countPublishedArgumentsByStep($step);
 
-        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByStep(
-            $step
-        );
+        $totalCount += $this->opinionVersionRepository->countPublishedOpinionVersionByStep($step);
 
         $totalCount += $this->sourceRepository->countPublishedSourcesByStep($step);
 
-
         if ($includeTrashed) {
-            $totalCount += $this->opinionRepository->countTrashedContributionsByStep(
-                $step
-            );
-            $totalCount += $this->argumentRepository->countTrashedArgumentsByStep(
-                $step
-            );
-            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByStep(
-                $step
-            );
+            $totalCount += $this->opinionRepository->countTrashedContributionsByStep($step);
+            $totalCount += $this->argumentRepository->countTrashedArgumentsByStep($step);
+            $totalCount += $this->opinionVersionRepository->countTrashedOpinionVersionByStep($step);
             $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
         }
 

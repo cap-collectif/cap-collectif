@@ -11,17 +11,14 @@ class ProposalProgressStepType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('progressSteps',
-                CollectionType::class, [
-                'entry_type' => ProgessStepType::class,
-                'required' => true,
-                'delete_empty' => true,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-            ])
-        ;
+        $builder->add('progressSteps', CollectionType::class, [
+            'entry_type' => ProgessStepType::class,
+            'required' => true,
+            'delete_empty' => true,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

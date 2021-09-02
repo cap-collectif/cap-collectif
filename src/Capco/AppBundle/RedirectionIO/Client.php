@@ -77,7 +77,9 @@ class Client
     {
         $connection = $this->getConnection();
 
-        if (!$connection) return null;
+        if (!$connection) {
+            return null;
+        }
 
         $toSend = $command->getName() . "\0" . $command->getRequest() . "\0";
         $sent = $this->box('doSend', false, [$connection, $toSend]);

@@ -13,8 +13,10 @@ class CheckEmailDomainValidator extends ConstraintValidator
     private $toggleManager;
     private $registrationFormRepo;
 
-    public function __construct(Manager $toggleManager, RegistrationFormRepository $registrationFormRepo)
-    {
+    public function __construct(
+        Manager $toggleManager,
+        RegistrationFormRepository $registrationFormRepo
+    ) {
         $this->toggleManager = $toggleManager;
         $this->registrationFormRepo = $registrationFormRepo;
     }
@@ -39,9 +41,6 @@ class CheckEmailDomainValidator extends ConstraintValidator
             return;
         }
 
-        $this->context
-             ->buildViolation($constraint->message)
-             ->addViolation()
-        ;
+        $this->context->buildViolation($constraint->message)->addViolation();
     }
 }

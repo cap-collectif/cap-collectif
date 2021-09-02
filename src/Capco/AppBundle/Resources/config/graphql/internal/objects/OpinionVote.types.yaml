@@ -1,19 +1,19 @@
 OpinionVote:
-  type: object
-  inherits:
-    - YesNoPairedVote
-    - PublicPublishable
-  config:
-    interfaces:
-      - YesNoPairedVote
-      - PublicPublishable
-      - InternalVote
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: OpinionVote
-      kind:
-        type: 'String!'
-        description: "Returns 'opinionVote'."
-        resolve: 'opinionVote'
+    type: object
+    inherits:
+        - YesNoPairedVote
+        - PublicPublishable
+    config:
+        interfaces:
+            - YesNoPairedVote
+            - PublicPublishable
+            - InternalVote
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: OpinionVote
+            kind:
+                type: 'String!'
+                description: "Returns 'opinionVote'."
+                resolve: 'opinionVote'

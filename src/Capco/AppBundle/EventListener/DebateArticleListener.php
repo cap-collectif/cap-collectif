@@ -29,7 +29,7 @@ class DebateArticleListener
                 new Message(
                     json_encode([
                         'id' => $entity->getId(),
-                        'url' => $entity->getUrl()
+                        'url' => $entity->getUrl(),
                     ])
                 )
             );
@@ -37,7 +37,6 @@ class DebateArticleListener
             $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
         }
     }
-
 
     public function preUpdate(DebateArticle $entity, PreUpdateEventArgs $event)
     {
@@ -48,7 +47,7 @@ class DebateArticleListener
                     new Message(
                         json_encode([
                             'id' => $entity->getId(),
-                            'url' => $event->getNewValue('url')
+                            'url' => $event->getNewValue('url'),
                         ])
                     )
                 );

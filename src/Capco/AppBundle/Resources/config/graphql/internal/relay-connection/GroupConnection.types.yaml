@@ -1,9 +1,9 @@
 GroupConnection:
-  type: relay-connection
-  config:
-    nodeType: Group!
-    connectionFields:
-      totalCount:
-        type: Int!
-      totalUserCount:
-        type: Int!
+    type: relay-connection
+    config:
+        nodeType: Group!
+        connectionFields:
+            totalCount:
+                type: Int!
+            totalUserCount:
+                type: Int!

@@ -11,7 +11,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ConsultationStepConsultationsResolver implements ResolverInterface
 {
-
     private $repository;
 
     public function __construct(ConsultationRepository $repository)

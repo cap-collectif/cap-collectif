@@ -18,7 +18,7 @@ class UserEmailProcessor implements ProcessorInterface
         $this->notifier = $notifier;
     }
 
-    public function process(Message $message, array $options):bool
+    public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
         $user = $this->repository->find($json['userId']);

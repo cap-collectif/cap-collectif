@@ -25,11 +25,8 @@ class OpinionTypeAppendixTypeRepository extends EntityRepository
             ->leftJoin('otat.opinionType', 'ot')
             ->leftJoin('otat.appendixType', 'at')
             ->andWhere('ot.id = :id')
-            ->setParameter('id', $id)
-        ;
+            ->setParameter('id', $id);
 
-        return $qb
-            ->getQuery()
-            ->getScalarResult();
+        return $qb->getQuery()->getScalarResult();
     }
 }

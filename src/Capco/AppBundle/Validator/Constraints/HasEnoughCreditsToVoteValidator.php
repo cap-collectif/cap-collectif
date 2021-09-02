@@ -18,10 +18,7 @@ class HasEnoughCreditsToVoteValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         if (!$this->resolver->voteIsPossible($object)) {
-            $this->context
-                ->buildViolation($constraint->message)
-                ->addViolation()
-            ;
+            $this->context->buildViolation($constraint->message)->addViolation();
 
             return false;
         }

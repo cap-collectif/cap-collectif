@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import SiteLanguageChangeButton, { type LocaleMap } from '../Button/SiteLanguageChangeButton';
-import type {LocaleChoiceTranslation} from "~/components/Navbar/LanguageHeader";
+import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader';
 
 type Props = {|
   +localeChoiceTranslations: Array<LocaleChoiceTranslation>,
@@ -25,12 +25,12 @@ const ChangeLanguageProposalContainer: StyledComponent<{}, {}, HTMLDivElement> =
   @media (max-width: 991px) {
     padding: 20px 15px;
   }
-  
+
   align-items: center;
   transition: all 0.3s ease;
   position: relative;
   padding: 0;
-  #language-header-close{
+  #language-header-close {
     position: absolute;
     top: 30px;
     right: 30px;
@@ -91,7 +91,7 @@ const ChangeLanguageText: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     align-self: start;
     max-width: 85%;
   }
-  
+
   padding-left: 15px;
 `;
 
@@ -107,39 +107,44 @@ const disappearTransition = () => {
 };
 
 const ChangeLanguageOnWebsiteHeader = React.forwardRef<Props, HTMLDivElement>(
-  ({ onChange, onClose, languageList, defaultLanguage, localeChoiceTranslations }: Props, ref: any) => {
+  (
+    { onChange, onClose, languageList, defaultLanguage, localeChoiceTranslations }: Props,
+    ref: any,
+  ) => {
     const [currentLanguage, updateLanguage] = useState(
       languageList.find(e => e.code === defaultLanguage),
     );
 
     if (!currentLanguage) return null;
-    const localChoiceTrans = localeChoiceTranslations.find(localeChoice => localeChoice.code === currentLanguage.code);
+    const localChoiceTrans = localeChoiceTranslations.find(
+      localeChoice => localeChoice.code === currentLanguage.code,
+    );
 
     return (
       <ChangeLanguageProposalContainer ref={ref} id="changeLanguageProposalContainer">
         <div className="container">
-        <Content>
-          <ChangeLanguageText>
-            <span>
-              {localChoiceTrans && localChoiceTrans.message}
-            </span>
-
-          </ChangeLanguageText>
-          <ChangeLanguageForm>
-            <SiteLanguageChangeButton
-              id="language-header-change-button"
-              languageList={languageList}
-              defaultLanguage={defaultLanguage}
-              onChange={updateLanguage}
-              backgroundColor="rgba(255, 255, 255, 0.15) !important" // TODO: Remove this when we'll stop using bootstrap
-              textColor="#FFF"
-              pullRight
-            />
-            <ContinueButton id="language-header-continue-button" bsStyle="primary" onClick={() => onChange(currentLanguage)}>
-              <span>{localChoiceTrans && localChoiceTrans.label}</span>
-            </ContinueButton>
-          </ChangeLanguageForm>
-        </Content>
+          <Content>
+            <ChangeLanguageText>
+              <span>{localChoiceTrans && localChoiceTrans.message}</span>
+            </ChangeLanguageText>
+            <ChangeLanguageForm>
+              <SiteLanguageChangeButton
+                id="language-header-change-button"
+                languageList={languageList}
+                defaultLanguage={defaultLanguage}
+                onChange={updateLanguage}
+                backgroundColor="rgba(255, 255, 255, 0.15) !important" // TODO: Remove this when we'll stop using bootstrap
+                textColor="#FFF"
+                pullRight
+              />
+              <ContinueButton
+                id="language-header-continue-button"
+                bsStyle="primary"
+                onClick={() => onChange(currentLanguage)}>
+                <span>{localChoiceTrans && localChoiceTrans.label}</span>
+              </ContinueButton>
+            </ChangeLanguageForm>
+          </Content>
         </div>
         <Close
           id="language-header-close"

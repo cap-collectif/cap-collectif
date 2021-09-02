@@ -22,6 +22,4 @@ class VoteMin extends Constraint
     {
         return self::CLASS_CONSTRAINT;
     }
-
 }
-

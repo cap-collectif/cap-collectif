@@ -54,7 +54,9 @@ class InviteUsersMutation implements MutationInterface
         ];
 
         $isAdmin = UserRole::ROLE_ADMIN === $role;
-        $isProjectAdmin = $this->manager->isActive(Manager::unstable_project_admin) && UserRole::ROLE_PROJECT_ADMIN === $role;
+        $isProjectAdmin =
+            $this->manager->isActive(Manager::unstable_project_admin) &&
+            UserRole::ROLE_PROJECT_ADMIN === $role;
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);

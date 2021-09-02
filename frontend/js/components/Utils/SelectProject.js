@@ -41,7 +41,17 @@ export class SelectProject extends React.Component<Props> {
   };
 
   render() {
-    const { query, intl, multi, clearable, name, label, optional, disabled, placeholder } = this.props;
+    const {
+      query,
+      intl,
+      multi,
+      clearable,
+      name,
+      label,
+      optional,
+      disabled,
+      placeholder,
+    } = this.props;
     const renderSelectedOption =
       query && query.projects && query.projects.edges
         ? query.projects.edges

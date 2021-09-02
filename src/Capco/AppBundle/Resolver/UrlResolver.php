@@ -134,7 +134,7 @@ class UrlResolver
                 [
                     'projectSlug' => $object->getProject()->getSlug(),
                     'stepSlug' => $object->getStep()->getSlug(),
-                    '_locale' => $locale
+                    '_locale' => $locale,
                 ],
                 $referenceType
             );

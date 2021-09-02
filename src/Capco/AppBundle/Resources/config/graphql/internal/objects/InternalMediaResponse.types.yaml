@@ -1,15 +1,15 @@
 InternalMediaResponse:
-  type: object
-  inherits:
-    - InternalResponse
-  config:
-    name: MediaResponse
-    interfaces:
-      - InternalResponse
-    description: 'A response'
-    fields:
-      question:
-        type: 'InternalQuestion!'
-      medias:
-        type: '[InternalMedia!]!'
-        description: 'Medias'
+    type: object
+    inherits:
+        - InternalResponse
+    config:
+        name: MediaResponse
+        interfaces:
+            - InternalResponse
+        description: 'A response'
+        fields:
+            question:
+                type: 'InternalQuestion!'
+            medias:
+                type: '[InternalMedia!]!'
+                description: 'Medias'

@@ -1,11 +1,11 @@
 GenderValue:
-  type: enum
-  config:
-    description: '3 possible values'
-    values:
-      MALE:
-        value: '@=constant("Sonata\\UserBundle\\Model\\UserInterface::GENDER_MALE")'
-      FEMALE:
-        value: '@=constant("Sonata\\UserBundle\\Model\\UserInterface::GENDER_FEMALE")'
-      OTHER:
-        value: '@=constant("Capco\\UserBundle\\Entity\\User::GENDER_OTHER")'
+    type: enum
+    config:
+        description: '3 possible values'
+        values:
+            MALE:
+                value: '@=constant("Sonata\\UserBundle\\Model\\UserInterface::GENDER_MALE")'
+            FEMALE:
+                value: '@=constant("Sonata\\UserBundle\\Model\\UserInterface::GENDER_FEMALE")'
+            OTHER:
+                value: '@=constant("Capco\\UserBundle\\Entity\\User::GENDER_OTHER")'

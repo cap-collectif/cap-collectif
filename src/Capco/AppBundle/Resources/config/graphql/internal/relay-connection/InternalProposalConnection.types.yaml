@@ -1,10 +1,10 @@
 InternalProposalConnection:
-  type: relay-connection
-  config:
-    name: ProposalConnection
-    nodeType: InternalProposal!
-    connectionFields:
-      totalCount:
-        type: Int!
-      fusionCount:
-        type: Int!
+    type: relay-connection
+    config:
+        name: ProposalConnection
+        nodeType: InternalProposal!
+        connectionFields:
+            totalCount:
+                type: Int!
+            fusionCount:
+                type: Int!

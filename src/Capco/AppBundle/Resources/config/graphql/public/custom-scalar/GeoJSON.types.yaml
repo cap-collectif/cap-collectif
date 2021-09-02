@@ -1,7 +1,7 @@
 GeoJSON:
-  type: custom-scalar
-  config:
-    description: 'A string containing GeoJSON code.'
-    serialize: ["Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType", 'serialize']
-    parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType", 'parseValue']
-    parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType", 'parseLiteral']
+    type: custom-scalar
+    config:
+        description: 'A string containing GeoJSON code.'
+        serialize: ["Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType", 'serialize']
+        parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType", 'parseValue']
+        parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType", 'parseLiteral']

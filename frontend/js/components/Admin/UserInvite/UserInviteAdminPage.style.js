@@ -1,16 +1,14 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 import Modal from '~ds/Modal/Modal';
-import AppBox from "~ui/Primitives/AppBox";
+import AppBox from '~ui/Primitives/AppBox';
 
-export const UserInviteAdminPageContainer: StyledComponent<
-  {},
-  {},
-  HTMLDivElement,
-> = styled(AppBox).attrs({
+export const UserInviteAdminPageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled(
+  AppBox,
+).attrs({
   className: 'user-invite-admin-page container-fluid',
   borderRadius: 'adminSection',
-  pb: 6
+  pb: 6,
 })`
   background: white;
   min-height: 84vh;

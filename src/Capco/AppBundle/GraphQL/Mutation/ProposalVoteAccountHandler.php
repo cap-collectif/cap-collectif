@@ -19,32 +19,32 @@ class ProposalVoteAccountHandler
     public function __construct(
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository
-    )
-    {
+    ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
     private function getVotesFromSpecificClass(AbstractStep $step, User $user): ?Paginator
     {
-        if ($step instanceof SelectionStep){
-            return $this->proposalSelectionVoteRepository->getByAuthorAndStep(
-                $user,
-                $step
-            );
+        if ($step instanceof SelectionStep) {
+            return $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step);
         }
-        if ($step instanceof CollectStep){
-            return $this->proposalCollectVoteRepository->getByAuthorAndStep(
-                $user,
-                $step
-            );
+        if ($step instanceof CollectStep) {
+            return $this->proposalCollectVoteRepository->getByAuthorAndStep($user, $step);
         }
         $class = get_class($step);
-        throw new \RuntimeException("AbstractStep type $class not handled in getVotesFromSpecificClass");
+        throw new \RuntimeException(
+            "AbstractStep type $class not handled in getVotesFromSpecificClass"
+        );
     }
 
     //Use this method after validation but before effective creation or deletion
-    public function checkIfUserVotesAreStillAccounted(AbstractStep $step, AbstractVote $vote, User $user, bool $isAddingVote): bool {
+    public function checkIfUserVotesAreStillAccounted(
+        AbstractStep $step,
+        AbstractVote $vote,
+        User $user,
+        bool $isAddingVote
+    ): bool {
         $isAccounted = true;
         $isSelectionStep = $step instanceof SelectionStep;
         if ($isSelectionStep || $step instanceof CollectStep) {

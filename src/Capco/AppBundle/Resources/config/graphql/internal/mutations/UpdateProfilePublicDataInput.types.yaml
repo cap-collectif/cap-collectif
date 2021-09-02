@@ -1,38 +1,38 @@
 UpdateProfilePublicDataInput:
-  type: relay-mutation-input
-  config:
-    description: 'Update your public data'
-    fields:
-      userId:
-        type: 'ID'
-        description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
-      username:
-        type: 'String!'
-        description: 'Your username'
-      userType:
-        type: 'ID'
-        description: 'Your user type'
-      biography:
-        type: 'String'
-        description: 'Your biography'
-      neighborhood:
-        type: 'String'
-        description: 'Your neighborhood'
-      websiteUrl:
-        type: 'URI'
-        description: 'Your website'
-      linkedInUrl:
-        type: 'String'
-        description: 'Your linkedIn'
-      facebookUrl:
-        type: 'String'
-        description: 'Your facebook'
-      twitterUrl:
-        type: 'String'
-        description: 'Your twitter'
-      profilePageIndexed:
-        type: 'Boolean'
-        description: 'Whether or not this user profile page is indexed.'
-      media:
-        type: 'ID'
-        description: 'Current media id'
+    type: relay-mutation-input
+    config:
+        description: 'Update your public data'
+        fields:
+            userId:
+                type: 'ID'
+                description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
+            username:
+                type: 'String!'
+                description: 'Your username'
+            userType:
+                type: 'ID'
+                description: 'Your user type'
+            biography:
+                type: 'String'
+                description: 'Your biography'
+            neighborhood:
+                type: 'String'
+                description: 'Your neighborhood'
+            websiteUrl:
+                type: 'URI'
+                description: 'Your website'
+            linkedInUrl:
+                type: 'String'
+                description: 'Your linkedIn'
+            facebookUrl:
+                type: 'String'
+                description: 'Your facebook'
+            twitterUrl:
+                type: 'String'
+                description: 'Your twitter'
+            profilePageIndexed:
+                type: 'Boolean'
+                description: 'Whether or not this user profile page is indexed.'
+            media:
+                type: 'ID'
+                description: 'Current media id'

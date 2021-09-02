@@ -45,7 +45,7 @@ export const ModalParticipantList = ({ event, show, onClose }: Props) => {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default createFragmentContainer(ModalParticipantList, {
   event: graphql`

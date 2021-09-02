@@ -60,7 +60,9 @@ class MigrationOnRealDatabasesCommand extends Command
         );
 
         $output->writeln('<info>Loading data...</info>');
-        $job = Process::fromShellCommandline('mysql -h database -u root symfony < ' . 'databases/' . $database);
+        $job = Process::fromShellCommandline(
+            'mysql -h database -u root symfony < ' . 'databases/' . $database
+        );
         $job->setTimeout(3600 * 20);
         $job->run();
         $output->writeln('<info>Done loading data.</info>');
