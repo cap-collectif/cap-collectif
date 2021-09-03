@@ -24,6 +24,7 @@ class DebateInvitationCommand extends Command
     public const OPT_REMINDER = 'reminder';
     public const OPT_TEST_TOKEN = 'test-token';
     public const OPT_BATCH = 'batch';
+    public const OPT_LIMIT = 'limit';
 
     private EntityManagerInterface $em;
     private UserRepository $userRepository;
@@ -66,6 +67,13 @@ class DebateInvitationCommand extends Command
                 10
             )
             ->addOption(
+                self::OPT_LIMIT,
+                'l',
+                InputOption::VALUE_OPTIONAL,
+                'the limit of emails to be sent',
+                null
+            )
+            ->addOption(
                 self::OPT_TEST_TOKEN,
                 null,
                 InputOption::VALUE_NONE,
@@ -78,7 +86,8 @@ class DebateInvitationCommand extends Command
         $debate = $this->getDebate($input);
         $users = $this->userRepository->getConfirmedUsersWithoutVoteInDebate($debate);
         $isReminder = $input->getOption(self::OPT_REMINDER);
-        $progressBar = new ProgressBar($output, \count($users));
+        $limit = $input->getOption(self::OPT_LIMIT);
+        $progressBar = new ProgressBar($output, $limit ?? \count($users));
 
         $counter = 0;
         /** @var User $user */
@@ -98,6 +107,12 @@ class DebateInvitationCommand extends Command
                         if (0 === $counter % $input->getOption(self::OPT_BATCH)) {
                             $this->em->flush();
                         }
+                        if ($limit) {
+                            if ($limit <= $counter) {
+                                break;
+                            }
+                            $progressBar->advance();
+                        }
                     }
                 } catch (\Exception $exception) {
                     $output->writeln(
@@ -109,12 +124,14 @@ class DebateInvitationCommand extends Command
                     );
                 }
             }
-            $progressBar->advance();
+            if (null === $limit) {
+                $progressBar->advance();
+            }
         }
         $this->em->flush();
         $progressBar->finish();
 
-        $output->writeln("\n$counter email(s) sent to invite to debate " . $debate->getId());
+        $output->writeln("\n${counter} email(s) sent to invite to debate " . $debate->getId());
 
         return 0;
     }

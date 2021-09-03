@@ -18,3 +18,15 @@ Scenario: "Dev want to remind users of a debate"
   And I open mail with subject 'email-debate-reminder-subject' from "assistance@cap-collectif.com" to "user@test.com"
   And I should see 'debate-mail-relance' in mail
   Then email should match snapshot 'email_debate_reminder.html'
+
+@parallel-scenario @snapshot-email
+Scenario: Dev want to notify users by pack of 100
+  Given I run "capco:debate:invite debateOculusQuest --test-token --limit 100"
+  Then the command exit code should be 0
+  And 100 mail should be sent
+  And I run "capco:debate:invite debateOculusQuest --test-token --limit 100"
+  And the command exit code should be 0
+  And 200 mail should be sent
+  And I run "capco:debate:invite debateOculusQuest --test-token --limit 100"
+  And the command exit code should be 0
+  And 203 mail should be sent
