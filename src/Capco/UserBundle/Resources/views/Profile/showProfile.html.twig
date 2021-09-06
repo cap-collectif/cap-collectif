@@ -68,7 +68,7 @@
         {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
     {% endif %}
     {% if votesCount is not defined %}
-        {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount + authorVotesResolver.__invoke(user).totalCount %}
+        {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount %}
     {% endif %}
     {% if opinionVersionsCount is not defined %}
         {% set opinionVersionsCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
