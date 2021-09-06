@@ -49,6 +49,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
 
+        $em->persist($user)->shouldBeCalledOnce();
         $em->remove($invitation)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 
@@ -81,6 +82,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
 
+        $em->persist($user)->shouldBeCalledOnce();
         $em->remove($invitation)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 
@@ -113,6 +115,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
 
+        $em->persist($user)->shouldBeCalledOnce();
         $em->remove($invitation)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 
@@ -157,6 +160,7 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->setConfirmationToken(null)->shouldBeCalledOnce();
         $user->setConfirmedAccountAt($date)->shouldBeCalledOnce();
 
+        $em->persist($user)->shouldBeCalledOnce();
         $em->remove($invitation)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
 

@@ -55,6 +55,7 @@ class UserInvitationHandler
         $now = (new \DateTime())->format('Y-m-d');
         $user->setConfirmedAccountAt(new \DateTime($now));
 
+        $this->em->persist($user);
         $this->em->remove($invitation);
 
         $this->em->flush();
