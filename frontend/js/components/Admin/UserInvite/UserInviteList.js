@@ -116,7 +116,7 @@ export const UserInviteList = ({ query: queryFragment }: Props): React.Node => {
                 <ButtonGroup>
                   <ButtonQuickAction
                     icon="TRASH"
-                    label="delete"
+                    label={intl.formatMessage({id: 'global.delete'})}
                     variantColor="danger"
                     onClick={() => cancelInvite([userInvite?.id])}
                   />

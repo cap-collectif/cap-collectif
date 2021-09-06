@@ -76,7 +76,7 @@ const Table = ({ children, actionBar, selectable, isLoading, onReset, ...props }
             <ActionBar>{actionBar}</ActionBar>
 
             <AppBox>
-              <AppBox as="table" {...props}>
+              <AppBox as="table" width="100%" {...props}>
                 {children}
               </AppBox>
               {context.rowsCount === 0 && onReset && <EmptyMessage onReset={onReset} />}
