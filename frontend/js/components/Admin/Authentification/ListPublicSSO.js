@@ -19,6 +19,8 @@ import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
 import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoConfigurations.graphql';
 import type { FranceConnectConfigurationModal_ssoConfiguration$ref } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
+import FranceConnectTeaserModal from '~/components/Admin/Authentification/FranceConnectTeaserModal';
+import AppBox from '~ui/Primitives/AppBox';
 
 type Props = {|
   ssoConfigurations: ListPublicSSO_ssoConfigurations,
@@ -68,19 +70,19 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
   return (
     <>
       <ListGroup>
-        {features.login_franceconnect && franceConnect && (
-          <ListGroupItemWithJustifyContentEnd>
-            <Toggle
-              id="toggle-franceConnect"
-              checked={franceConnect.enabled}
-              onChange={() => toggleStatus(franceConnect)}
-              label={
-                <h5 className="mb-0 mt-0">
-                  <FormattedMessage id="capco.module.login_franceconnect" />
-                </h5>
-              }
-            />
+        <ListGroupItemWithJustifyContentEnd>
+          <Toggle
+            id="toggle-franceConnect"
+            checked={features.login_franceconnect && franceConnect?.enabled}
+            onChange={() => toggleStatus(franceConnect)}
+            label={
+              <h5 className="mb-0 mt-0">
+                <FormattedMessage id="capco.module.login_franceconnect" />
+              </h5>
+            }
+          />
 
+          {features.login_franceconnect && franceConnect?.enabled && (
             <ButtonWithMarginLeftAuto
               bsStyle="warning"
               className="btn-outline-warning"
@@ -89,13 +91,20 @@ export const ListPublicSSO = ({ onToggle, features, ssoConfigurations }: Props) 
               }}>
               <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
             </ButtonWithMarginLeftAuto>
-            <FranceConnectConfigurationModal
-              show={showFranceConnectModal}
-              onClose={handleClose}
-              ssoConfiguration={franceConnect}
-            />
-          </ListGroupItemWithJustifyContentEnd>
-        )}
+          )}
+
+          {!features.login_franceconnect && (
+            <AppBox marginLeft="auto">
+              <FranceConnectTeaserModal />
+            </AppBox>
+          )}
+
+          <FranceConnectConfigurationModal
+            show={showFranceConnectModal}
+            onClose={handleClose}
+            ssoConfiguration={franceConnect}
+          />
+        </ListGroupItemWithJustifyContentEnd>
         <ListGroupItemWithJustifyContentEnd>
           <Toggle
             id="toggle-facebook"
@@ -137,8 +146,7 @@ export default connect<any, any, _, _, _, _>(
 )(
   createFragmentContainer(ListPublicSSO, {
     ssoConfigurations: graphql`
-      fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection
-        @argumentDefinitions(isFranceConnectEnable: { type: "Boolean!" }) {
+      fragment ListPublicSSO_ssoConfigurations on SSOConfigurationConnection {
         edges {
           node {
             ... on SSOConfiguration {
@@ -146,7 +154,6 @@ export default connect<any, any, _, _, _, _>(
               id
               enabled
               ...FranceConnectConfigurationModal_ssoConfiguration
-                @include(if: $isFranceConnectEnable)
             }
           }
         }

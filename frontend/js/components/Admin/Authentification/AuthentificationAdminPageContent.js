@@ -26,10 +26,8 @@ export default createFragmentContainer(AuthentificationAdminPageContent, {
     }
   `,
   ssoConfigurations: graphql`
-    fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection
-      @argumentDefinitions(isFranceConnectEnable: { type: "Boolean!" }) {
+    fragment AuthentificationAdminPageContent_ssoConfigurations on SSOConfigurationConnection {
       ...ListSSOConfiguration_ssoConfigurations
-        @arguments(isFranceConnectEnable: $isFranceConnectEnable)
     }
   `,
 });

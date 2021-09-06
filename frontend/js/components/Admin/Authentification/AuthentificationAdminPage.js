@@ -39,13 +39,12 @@ export const AuthentificationAdminPage = ({ features }: Props) => (
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query AuthentificationAdminPageQuery($isFranceConnectEnable: Boolean!) {
+        query AuthentificationAdminPageQuery {
           shieldAdminForm {
             ...AuthentificationAdminPageContent_shieldAdminForm
           }
           ssoConfigurations {
             ...AuthentificationAdminPageContent_ssoConfigurations
-              @arguments(isFranceConnectEnable: $isFranceConnectEnable)
           }
         }
       `}
