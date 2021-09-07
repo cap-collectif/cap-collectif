@@ -18,6 +18,7 @@ import type { UserInvitationPage_query$key } from '~relay/UserInvitationPage_que
 import type { UserInvitationPage_logo$key } from '~relay/UserInvitationPage_logo.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Icon from '~ds/Icon/Icon';
+import ChartModal from "~/components/User/Registration/ChartModal";
 
 type RelayProps = {|
   +queryFragmentRef: UserInvitationPage_query$key,
@@ -100,6 +101,7 @@ export const UserInvitationPage = ({
           />
         </p>
 
+        <ChartModal />
         <RegistrationForm invitationToken={token} email={email} query={query} />
 
         <SubmitButton
