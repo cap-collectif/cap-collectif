@@ -30,13 +30,15 @@ class QuestionnaireExportResultsUrlResolver implements ResolverInterface
         );
     }
 
-    public function getFileName(Questionnaire $questionnaire): string
+    public function getFileName(Questionnaire $questionnaire, bool $projectAdmin = false): string
     {
-        return CreateCsvFromQuestionnaireCommand::getFileName($questionnaire);
+        return CreateCsvFromQuestionnaireCommand::getFileName($questionnaire, $projectAdmin);
     }
 
-    public function getFilePath(Questionnaire $questionnaire): string
+    public function getFilePath(Questionnaire $questionnaire, bool $projectAdmin = false): string
     {
-        return $this->projectDir . '/public/export/' . $this->getFileName($questionnaire);
+        return $this->projectDir .
+            '/public/export/' .
+            $this->getFileName($questionnaire, $projectAdmin);
     }
 }

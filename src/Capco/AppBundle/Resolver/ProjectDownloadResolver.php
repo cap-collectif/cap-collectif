@@ -24,9 +24,10 @@ class ProjectDownloadResolver
     protected UrlArrayResolver $urlArrayResolver;
     protected MediaUrlResolver $urlResolver;
     protected Factory $phpexcel;
-    protected $headers;
-    protected $data;
-    protected $customFields;
+    protected array $headers;
+    protected array $data;
+    protected array $customFields;
+    private array $projectAdminExcludedHeaders;
     private QuestionnaireExportResultsUrlResolver $exportUrlResolver;
 
     public function __construct(
@@ -46,10 +47,13 @@ class ProjectDownloadResolver
         $this->customFields = [];
         $this->data = [];
         $this->exportUrlResolver = $exportUrlResolver;
+        $this->projectAdminExcludedHeaders = ['author_email', 'phone'];
     }
 
-    public function getQuestionnaireHeaders(Questionnaire $questionnaire): array
-    {
+    public function getQuestionnaireHeaders(
+        Questionnaire $questionnaire,
+        bool $projectAdmin = false
+    ): array {
         $headers = [
             'id',
             'published',
@@ -65,6 +69,9 @@ class ProjectDownloadResolver
             'undraft_at',
         ];
 
+        if ($projectAdmin) {
+            $headers = array_diff($headers, $this->projectAdminExcludedHeaders);
+        }
         foreach ($questionnaire->getRealQuestions() as $question) {
             $headers[] = ['label' => Text::unslug($question->getSlug()), 'raw' => true];
         }
@@ -95,14 +102,16 @@ class ProjectDownloadResolver
         $this->data[] = $item;
     }
 
-    public function getQuestionnaireData(Questionnaire $questionnaire): array
-    {
+    public function getQuestionnaireData(
+        Questionnaire $questionnaire,
+        bool $projectAdmin = false
+    ): array {
         $this->data = [];
         $replies = $this->em
             ->getRepository(Reply::class)
             ->getEnabledByQuestionnaireAsArray($questionnaire);
 
-        $this->getRepliesData($replies);
+        $this->getRepliesData($replies, $projectAdmin);
 
         foreach ($this->data as &$answers) {
             foreach ($answers as $key => $value) {
@@ -113,13 +122,13 @@ class ProjectDownloadResolver
         return $this->data;
     }
 
-    public function getRepliesData(iterable $replies): void
+    public function getRepliesData(iterable $replies, bool $projectAdmin = false): void
     {
         foreach ($replies as $reply) {
             $responses = $this->em
                 ->getRepository(AbstractResponse::class)
                 ->getByReplyAsArray($reply['id']);
-            $this->addItemToData($this->getReplyItem($reply, $responses));
+            $this->addItemToData($this->getReplyItem($reply, $responses, $projectAdmin));
         }
     }
 
@@ -136,7 +145,7 @@ class ProjectDownloadResolver
 
     // *************************** Generate items *******************************************
 
-    private function getReplyItem(array $reply, array $responses): array
+    private function getReplyItem(array $reply, array $responses, bool $projectAdmin = false): array
     {
         $item = [
             'id' => $reply['id'],
@@ -152,6 +161,12 @@ class ProjectDownloadResolver
             'draft' => $this->booleanToString($reply['draft']),
             'undraft_at' => $this->dateToString($reply['undraftAt']),
         ];
+
+        if ($projectAdmin) {
+            foreach ($this->projectAdminExcludedHeaders as $excludedHeader) {
+                unset($item[$excludedHeader]);
+            }
+        }
 
         foreach ($responses as $response) {
             $question = $response['question'];

@@ -176,8 +176,15 @@ class ProjectController extends Controller
     {
         $this->denyAccessUnlessGranted(QuestionnaireVoter::EDIT, $questionnaire);
 
-        $filePath = $this->questionnaireExportResultsUrlResolver->getFilePath($questionnaire);
-        $fileName = $this->questionnaireExportResultsUrlResolver->getFileName($questionnaire);
+        $isProjectAdmin = $this->getUser()->isOnlyProjectAdmin();
+        $filePath = $this->questionnaireExportResultsUrlResolver->getFilePath(
+            $questionnaire,
+            $isProjectAdmin
+        );
+        $fileName = $this->questionnaireExportResultsUrlResolver->getFileName(
+            $questionnaire,
+            $isProjectAdmin
+        );
 
         try {
             return $this->streamResponse(

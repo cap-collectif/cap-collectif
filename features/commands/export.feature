@@ -117,6 +117,13 @@ Scenario: Admin wants to export questionnaires
   And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins.csv" should match its snapshot
   Then the command exit code should be 0
 
+Scenario: Project admin wants to export questionnaires
+  Given I run a command "capco:export:questionnaire" with parameters:
+    | --delimiter |,|
+  And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-administrateur-de-projet-project-admin.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-administrateur-de-projet-2-project-admin.csv" should match its snapshot
+  Then the command exit code should be 0
+
 Scenario: Admin wants to export event participants
   Given I run a command "capco:export:events:participants" with parameters:
     | --delimiter |,|

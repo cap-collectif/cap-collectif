@@ -53,14 +53,18 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         Questionnaire $questionnaire,
         string $fileName,
         string $delimiter,
-        $output
+        OutputInterface $output,
+        bool $projectAdmin = false
     ): void {
         $this->writer = WriterFactory::create(Type::CSV, $delimiter);
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
         $output->writeln(
             '<info>' . sprintf('%s/public/export/%s', $this->projectRootDir, $fileName) . '</info>'
         );
-        $headers = $this->projectDownloadResolver->getQuestionnaireHeaders($questionnaire);
+        $headers = $this->projectDownloadResolver->getQuestionnaireHeaders(
+            $questionnaire,
+            $projectAdmin
+        );
         $formattedHeaders = [];
         foreach ($headers as $header) {
             if (\is_array($header)) {
@@ -71,7 +75,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         }
         $this->writer->addRow(WriterEntityFactory::createRowFromArray($formattedHeaders));
 
-        $formattedEntries = $this->getFormattedData($questionnaire);
+        $formattedEntries = $this->getFormattedData($questionnaire, $projectAdmin);
         $rows = [];
         foreach ($formattedEntries as $formattedData) {
             $row = [];
@@ -84,9 +88,9 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         $this->writer->close();
     }
 
-    public function getFormattedData(Questionnaire $questionnaire): array
+    public function getFormattedData(Questionnaire $questionnaire, bool $projectAdmin): array
     {
-        $data = $this->projectDownloadResolver->getQuestionnaireData($questionnaire);
+        $data = $this->projectDownloadResolver->getQuestionnaireData($questionnaire, $projectAdmin);
         foreach ($data as &$d) {
             foreach ($d as $key => $value) {
                 $d[$key] = $this->exportUtils->parseCellValue(
@@ -98,11 +102,14 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         return $data;
     }
 
-    public static function getFileName(Questionnaire $questionnaire): string
-    {
+    public static function getFileName(
+        Questionnaire $questionnaire,
+        bool $projectAdmin = false
+    ): string {
         $step = $questionnaire->getStep();
+        $extension = '.csv';
         if (!$step) {
-            return self::getShortenedFilename($questionnaire->getSlug());
+            return self::getShortenedFilename($questionnaire->getSlug(), $extension, $projectAdmin);
         }
 
         $fileName = '';
@@ -113,7 +120,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         }
         $fileName .= $step->getSlug();
 
-        return self::getShortenedFilename($fileName);
+        return self::getShortenedFilename($fileName, $extension, $projectAdmin);
     }
 
     protected function configure(): void
@@ -140,9 +147,15 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         $delimiter = $input->getOption('delimiter');
         $questionnaires = $this->questionnaireRepository->findAll();
         foreach ($questionnaires as $questionnaire) {
-            $fileName = self::getFileName($questionnaire);
-            $this->generateSheet($questionnaire, $fileName, $delimiter, $output);
+            $fileName = self::getFileName($questionnaire, false);
+            $this->generateSheet($questionnaire, $fileName, $delimiter, $output, false);
             $this->executeSnapshot($input, $output, $fileName);
+
+            if ($questionnaire->getOwner()) {
+                $fileName = self::getFileName($questionnaire, true);
+                $this->generateSheet($questionnaire, $fileName, $delimiter, $output, true);
+                $this->executeSnapshot($input, $output, $fileName);
+            }
         }
 
         return 0;
