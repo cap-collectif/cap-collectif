@@ -1,34 +1,31 @@
 // @flow
 import React from 'react';
-import { Alert } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { useIntl } from 'react-intl';
+import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import type { ProposalDraftAlert_proposal } from '~relay/ProposalDraftAlert_proposal.graphql';
+import InfoMessage from '~ds/InfoMessage/InfoMessage';
 
-type Props = {
-  proposal: ?ProposalDraftAlert_proposal,
-};
+type Props = {|
+  ...AppBoxProps,
+  +proposal: ?ProposalDraftAlert_proposal,
+|};
 
-export class ProposalDraftAlert extends React.Component<Props> {
-  render() {
-    const { proposal } = this.props;
-    if (proposal?.publicationStatus === 'DRAFT') {
-      return (
-        <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>
-          <strong>
-            <FormattedMessage id="proposal.draft.is_draft" />
-          </strong>
-          <span>
-            {' '}
-            <FormattedMessage id="proposal.draft.explain" />
-          </span>
-        </Alert>
-      );
-    }
-
-    return null;
+export const ProposalDraftAlert = ({ proposal, ...rest }: Props) => {
+  const intl = useIntl();
+  if (proposal?.publicationStatus === 'DRAFT') {
+    return (
+      // TODO: Virer le css une fois le code global nettoyé #12925
+      <InfoMessage {...rest} variant="warning" css={{ p: { marginBottom: '0 !important' } }}>
+        <InfoMessage.Title withIcon fontWeight={400}>
+          {intl.formatMessage({ id: 'proposal.draft.explain' })}
+        </InfoMessage.Title>
+      </InfoMessage>
+    );
   }
-}
+
+  return null;
+};
 
 export default createFragmentContainer(ProposalDraftAlert, {
   proposal: graphql`

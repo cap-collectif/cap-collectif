@@ -3,13 +3,11 @@ import React, { useEffect } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
-
-import { openDeleteProposalModal, openEditProposalModal } from '~/redux/modules/proposal';
-
+import { useDisclosure } from '@liinkiing/react-hooks'; // reviens
+import { openDeleteProposalModal } from '~/redux/modules/proposal';
 import type { ProposalPageHeaderButtons_proposal } from '~relay/ProposalPageHeaderButtons_proposal.graphql';
 import type { ProposalPageHeaderButtons_step } from '~relay/ProposalPageHeaderButtons_step.graphql';
 import type { ProposalPageHeaderButtons_viewer } from '~relay/ProposalPageHeaderButtons_viewer.graphql';
-
 import ProposalVoteButtonWrapperFragment from '~/components/Proposal/Vote/ProposalVoteButtonWrapperFragment';
 import ProposalFollowButton from '~/components/Proposal/Follow/ProposalFollowButton';
 import ProposalVoteModal from '~/components/Proposal/Vote/ProposalVoteModal';
@@ -90,6 +88,7 @@ export const ProposalPageHeaderButtons = ({
   hasVotableStep,
   dispatch,
 }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const isAuthor = viewer && viewer.id === proposal?.author?.id;
   const editable = proposal?.form?.contribuable || proposal?.contribuable;
   const canEditProposal = editable && user?.uniqueId === proposal?.author?.slug;
@@ -101,15 +100,15 @@ export const ProposalPageHeaderButtons = ({
       (canEditProposal || (hasExpiredRevisions && isAuthor)) &&
       window.location.href.includes(EDIT_MODAL_ANCHOR)
     ) {
-      dispatch(openEditProposalModal());
+      onOpen();
     }
-  }, [hasExpiredRevisions, canEditProposal, dispatch, isAuthor]);
+  }, [hasExpiredRevisions, canEditProposal, onOpen, isAuthor]);
   const hasPendingRevisions = proposal?.pendingRevisions
     ? proposal.pendingRevisions.totalCount > 0
     : false;
   return (
     <Buttons>
-      <ProposalEditModal proposal={proposal} />
+      <ProposalEditModal proposal={proposal} show={isOpen} onClose={onClose} />
       <ProposalDeleteModal proposal={proposal} />
 
       <>
@@ -146,9 +145,7 @@ export const ProposalPageHeaderButtons = ({
               id="proposal-edit-button"
               label={hasPendingRevisions || hasExpiredRevisions ? 'review-proposal' : 'global.edit'}
               author={{ uniqueId: proposal?.author?.slug }}
-              onClick={() => {
-                dispatch(openEditProposalModal());
-              }}
+              onClick={onOpen}
               editable={editable}
             />
             <DeleteButton

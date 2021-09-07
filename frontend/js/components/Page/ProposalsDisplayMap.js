@@ -26,6 +26,7 @@ export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   hasMore = step.proposals?.pageInfo.hasNextPage || false;
+  const projectType = step.project && step.project.type ? step.project.type.title : null;
 
   const loadMore = () => {
     if (!hasMore) {
@@ -55,7 +56,9 @@ export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
 
   return step.proposals && step.proposals.edges ? (
     <ProposalLeafletMap
+      projectType={projectType}
       proposals={step.proposals.edges.filter(Boolean).map(edge => edge.node)}
+      proposalForm={step.form}
       isLoading={isLoading}
       hasMore={hasMore}
       hasError={hasError}
@@ -73,6 +76,12 @@ export default createPaginationContainer(
       fragment ProposalsDisplayMap_step on ProposalStep {
         form {
           proposalInAZoneRequired
+          ...ProposalLeafletMap_proposalForm
+        }
+        project {
+          type {
+            title
+          }
         }
         proposals(
           first: $count

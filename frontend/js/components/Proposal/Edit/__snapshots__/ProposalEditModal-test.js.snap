@@ -2,565 +2,764 @@
 
 exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  bsSize="large"
+  ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  onHide={[Function]}
+  fullSizeOnMobile={true}
+  hideCloseButton={false}
+  hideOnClickOutside={false}
+  hideOnEsc={true}
+  onClose={[Function]}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
+  <Modal.Header
+    borderBottom="1px solid #DADEE1"
     closeLabel="close.modal"
+    pb={8}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="contained-modal-title-lg"
+    <Heading>
+      global.edit
+    </Heading>
+  </Modal.Header>
+  <AnimatePresence>
+    <ProposalOtherPanelsModal
+      errorCount={0}
+      modalState="NORMAL"
+      onClose={[MockFunction]}
+      resetModalState={[Function]}
+    />
+    <ForwardRef(MotionComponent)
+      animate={
+        Object {
+          "display": "block",
+          "opacity": 1,
+        }
+      }
+      exit={
+        Object {
+          "display": "none",
+          "opacity": 0,
+        }
+      }
+      initial={
+        Object {
+          "opacity": 0,
+        }
+      }
+      key="normal"
     >
-      <b>
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
+      <Modal.Body>
+        <Relay(ProposalDraftAlert)
+          mb={6}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "DELETED",
+            }
+          }
         />
-      </b>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Relay(ProposalDraftAlert)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "DELETED",
-        }
-      }
-    />
-    <Relay(Connect(injectIntl(ReduxForm)))
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "DELETED",
-        }
-      }
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "contribuable": true,
-        }
-      }
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={false}
-      id="confirm-proposal-edit"
-      isSubmitting={false}
-      label="global.submit"
-      onSubmit={[Function]}
-    />
-  </ModalFooter>
+        <Relay(Connect(injectIntl(ReduxForm)))
+          onSubmitFailed={[Function]}
+          onSubmitSuccess={[MockFunction]}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "DELETED",
+            }
+          }
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "contribuable": true,
+            }
+          }
+        />
+      </Modal.Body>
+      <Modal.Footer
+        borderTop="1px solid #DADEE1"
+        pt={4}
+      >
+        <ButtonGroup>
+          <Button
+            isLoading={false}
+            onClick={[MockFunction]}
+            variant="secondary"
+            variantColor="hierarchy"
+            variantSize="big"
+          >
+            global.cancel
+          </Button>
+          <Button
+            disabled={true}
+            id="confirm-proposal-edit"
+            isLoading={false}
+            onClick={[Function]}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.publish
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+       
+    </ForwardRef(MotionComponent)>
+  </AnimatePresence>
 </ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  bsSize="large"
+  ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  onHide={[Function]}
+  fullSizeOnMobile={true}
+  hideCloseButton={false}
+  hideOnClickOutside={false}
+  hideOnEsc={true}
+  onClose={[Function]}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
+  <Modal.Header
+    borderBottom="1px solid #DADEE1"
     closeLabel="close.modal"
+    pb={8}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="contained-modal-title-lg"
+    <Heading>
+      global.edit
+    </Heading>
+  </Modal.Header>
+  <AnimatePresence>
+    <ProposalOtherPanelsModal
+      errorCount={0}
+      modalState="NORMAL"
+      onClose={[MockFunction]}
+      resetModalState={[Function]}
+    />
+    <ForwardRef(MotionComponent)
+      animate={
+        Object {
+          "display": "block",
+          "opacity": 1,
+        }
+      }
+      exit={
+        Object {
+          "display": "none",
+          "opacity": 0,
+        }
+      }
+      initial={
+        Object {
+          "opacity": 0,
+        }
+      }
+      key="normal"
     >
-      <b>
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
+      <Modal.Body>
+        <Relay(ProposalDraftAlert)
+          mb={6}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "DRAFT",
+            }
+          }
         />
-      </b>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Relay(ProposalDraftAlert)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "DRAFT",
-        }
-      }
-    />
-    <Relay(Connect(injectIntl(ReduxForm)))
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "DRAFT",
-        }
-      }
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "contribuable": true,
-        }
-      }
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={true}
-      id="confirm-proposal-create-as-draft"
-      isSubmitting={false}
-      label="global.save_as_draft"
-      onSubmit={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={false}
-      id="confirm-proposal-edit"
-      isSubmitting={false}
-      label="global.submit"
-      onSubmit={[Function]}
-    />
-  </ModalFooter>
+        <Relay(Connect(injectIntl(ReduxForm)))
+          onSubmitFailed={[Function]}
+          onSubmitSuccess={[MockFunction]}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "DRAFT",
+            }
+          }
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "contribuable": true,
+            }
+          }
+        />
+      </Modal.Body>
+      <Modal.Footer
+        borderTop="1px solid #DADEE1"
+        pt={4}
+      >
+        <ButtonGroup>
+          <Button
+            disabled={true}
+            id="confirm-proposal-create-as-draft"
+            isLoading={false}
+            onClick={[Function]}
+            variant="secondary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.save
+          </Button>
+          <Button
+            disabled={true}
+            id="confirm-proposal-edit"
+            isLoading={false}
+            onClick={[Function]}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.publish
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+       
+    </ForwardRef(MotionComponent)>
+  </AnimatePresence>
 </ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  bsSize="large"
+  ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  onHide={[Function]}
+  fullSizeOnMobile={true}
+  hideCloseButton={false}
+  hideOnClickOutside={false}
+  hideOnEsc={true}
+  onClose={[Function]}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
+  <Modal.Header
+    borderBottom="1px solid #DADEE1"
     closeLabel="close.modal"
+    pb={8}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="contained-modal-title-lg"
+    <Heading>
+      global.edit
+    </Heading>
+  </Modal.Header>
+  <AnimatePresence>
+    <ProposalOtherPanelsModal
+      errorCount={0}
+      modalState="NORMAL"
+      onClose={[MockFunction]}
+      resetModalState={[Function]}
+    />
+    <ForwardRef(MotionComponent)
+      animate={
+        Object {
+          "display": "block",
+          "opacity": 1,
+        }
+      }
+      exit={
+        Object {
+          "display": "none",
+          "opacity": 0,
+        }
+      }
+      initial={
+        Object {
+          "opacity": 0,
+        }
+      }
+      key="normal"
     >
-      <b>
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
+      <Modal.Body>
+        <Relay(ProposalDraftAlert)
+          mb={6}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "PUBLISHED",
+            }
+          }
         />
-      </b>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Relay(ProposalDraftAlert)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "PUBLISHED",
-        }
-      }
-    />
-    <Relay(Connect(injectIntl(ReduxForm)))
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "PUBLISHED",
-        }
-      }
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "contribuable": true,
-        }
-      }
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={false}
-      id="confirm-proposal-edit"
-      isSubmitting={false}
-      label="global.submit"
-      onSubmit={[Function]}
-    />
-  </ModalFooter>
+        <Relay(Connect(injectIntl(ReduxForm)))
+          onSubmitFailed={[Function]}
+          onSubmitSuccess={[MockFunction]}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "PUBLISHED",
+            }
+          }
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "contribuable": true,
+            }
+          }
+        />
+      </Modal.Body>
+      <Modal.Footer
+        borderTop="1px solid #DADEE1"
+        pt={4}
+      >
+        <ButtonGroup>
+          <Button
+            isLoading={false}
+            onClick={[MockFunction]}
+            variant="secondary"
+            variantColor="hierarchy"
+            variantSize="big"
+          >
+            global.cancel
+          </Button>
+          <Button
+            disabled={true}
+            id="confirm-proposal-edit"
+            isLoading={false}
+            onClick={[Function]}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.publish
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+       
+    </ForwardRef(MotionComponent)>
+  </AnimatePresence>
 </ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  bsSize="large"
+  ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  onHide={[Function]}
+  fullSizeOnMobile={true}
+  hideCloseButton={false}
+  hideOnClickOutside={false}
+  hideOnEsc={true}
+  onClose={[Function]}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
+  <Modal.Header
+    borderBottom="1px solid #DADEE1"
     closeLabel="close.modal"
+    pb={8}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="contained-modal-title-lg"
+    <Heading>
+      global.edit
+    </Heading>
+  </Modal.Header>
+  <AnimatePresence>
+    <ProposalOtherPanelsModal
+      errorCount={0}
+      modalState="NORMAL"
+      onClose={[MockFunction]}
+      resetModalState={[Function]}
+    />
+    <ForwardRef(MotionComponent)
+      animate={
+        Object {
+          "display": "block",
+          "opacity": 1,
+        }
+      }
+      exit={
+        Object {
+          "display": "none",
+          "opacity": 0,
+        }
+      }
+      initial={
+        Object {
+          "opacity": 0,
+        }
+      }
+      key="normal"
     >
-      <b>
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
+      <Modal.Body>
+        <Relay(ProposalDraftAlert)
+          mb={6}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "TRASHED",
+            }
+          }
         />
-      </b>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Relay(ProposalDraftAlert)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "TRASHED",
-        }
-      }
-    />
-    <Relay(Connect(injectIntl(ReduxForm)))
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "TRASHED",
-        }
-      }
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "contribuable": true,
-        }
-      }
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={false}
-      id="confirm-proposal-edit"
-      isSubmitting={false}
-      label="global.submit"
-      onSubmit={[Function]}
-    />
-  </ModalFooter>
+        <Relay(Connect(injectIntl(ReduxForm)))
+          onSubmitFailed={[Function]}
+          onSubmitSuccess={[MockFunction]}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "TRASHED",
+            }
+          }
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "contribuable": true,
+            }
+          }
+        />
+      </Modal.Body>
+      <Modal.Footer
+        borderTop="1px solid #DADEE1"
+        pt={4}
+      >
+        <ButtonGroup>
+          <Button
+            isLoading={false}
+            onClick={[MockFunction]}
+            variant="secondary"
+            variantColor="hierarchy"
+            variantSize="big"
+          >
+            global.cancel
+          </Button>
+          <Button
+            disabled={true}
+            id="confirm-proposal-edit"
+            isLoading={false}
+            onClick={[Function]}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.publish
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+       
+    </ForwardRef(MotionComponent)>
+  </AnimatePresence>
 </ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  bsSize="large"
+  ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  onHide={[Function]}
+  fullSizeOnMobile={true}
+  hideCloseButton={false}
+  hideOnClickOutside={false}
+  hideOnEsc={true}
+  onClose={[Function]}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
+  <Modal.Header
+    borderBottom="1px solid #DADEE1"
     closeLabel="close.modal"
+    pb={8}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="contained-modal-title-lg"
+    <Heading>
+      global.edit
+    </Heading>
+  </Modal.Header>
+  <AnimatePresence>
+    <ProposalOtherPanelsModal
+      errorCount={0}
+      modalState="NORMAL"
+      onClose={[MockFunction]}
+      resetModalState={[Function]}
+    />
+    <ForwardRef(MotionComponent)
+      animate={
+        Object {
+          "display": "block",
+          "opacity": 1,
+        }
+      }
+      exit={
+        Object {
+          "display": "none",
+          "opacity": 0,
+        }
+      }
+      initial={
+        Object {
+          "opacity": 0,
+        }
+      }
+      key="normal"
     >
-      <b>
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
+      <Modal.Body>
+        <Relay(ProposalDraftAlert)
+          mb={6}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "TRASHED_NOT_VISIBLE",
+            }
+          }
         />
-      </b>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Relay(ProposalDraftAlert)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "TRASHED_NOT_VISIBLE",
-        }
-      }
-    />
-    <Relay(Connect(injectIntl(ReduxForm)))
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "TRASHED_NOT_VISIBLE",
-        }
-      }
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "contribuable": true,
-        }
-      }
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={false}
-      id="confirm-proposal-edit"
-      isSubmitting={false}
-      label="global.submit"
-      onSubmit={[Function]}
-    />
-  </ModalFooter>
+        <Relay(Connect(injectIntl(ReduxForm)))
+          onSubmitFailed={[Function]}
+          onSubmitSuccess={[MockFunction]}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "TRASHED_NOT_VISIBLE",
+            }
+          }
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "contribuable": true,
+            }
+          }
+        />
+      </Modal.Body>
+      <Modal.Footer
+        borderTop="1px solid #DADEE1"
+        pt={4}
+      >
+        <ButtonGroup>
+          <Button
+            isLoading={false}
+            onClick={[MockFunction]}
+            variant="secondary"
+            variantColor="hierarchy"
+            variantSize="big"
+          >
+            global.cancel
+          </Button>
+          <Button
+            disabled={true}
+            id="confirm-proposal-edit"
+            isLoading={false}
+            onClick={[Function]}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.publish
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+       
+    </ForwardRef(MotionComponent)>
+  </AnimatePresence>
 </ProposalEditModal__ModalProposalEditContainer>
 `;
 
 exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
-  animation={false}
-  aria-labelledby="contained-modal-title-lg"
-  bsSize="large"
+  ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  onHide={[Function]}
+  fullSizeOnMobile={true}
+  hideCloseButton={false}
+  hideOnClickOutside={false}
+  hideOnEsc={true}
+  onClose={[Function]}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
+  <Modal.Header
+    borderBottom="1px solid #DADEE1"
     closeLabel="close.modal"
+    pb={8}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="contained-modal-title-lg"
+    <Heading>
+      global.edit
+    </Heading>
+  </Modal.Header>
+  <AnimatePresence>
+    <ProposalOtherPanelsModal
+      errorCount={0}
+      modalState="NORMAL"
+      onClose={[MockFunction]}
+      resetModalState={[Function]}
+    />
+    <ForwardRef(MotionComponent)
+      animate={
+        Object {
+          "display": "block",
+          "opacity": 1,
+        }
+      }
+      exit={
+        Object {
+          "display": "none",
+          "opacity": 0,
+        }
+      }
+      initial={
+        Object {
+          "opacity": 0,
+        }
+      }
+      key="normal"
     >
-      <b>
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
+      <Modal.Body>
+        <Relay(ProposalDraftAlert)
+          mb={6}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "UNPUBLISHED",
+            }
+          }
         />
-      </b>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Relay(ProposalDraftAlert)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "UNPUBLISHED",
-        }
-      }
-    />
-    <Relay(Connect(injectIntl(ReduxForm)))
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "allRevisions": Object {
-            "edges": Array [],
-            "totalCount": 0,
-          },
-          "form": Object {
-            "$fragmentRefs": null,
-            "contribuable": true,
-          },
-          "id": "1",
-          "publicationStatus": "UNPUBLISHED",
-        }
-      }
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "contribuable": true,
-        }
-      }
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[Function]}
-    />
-    <Connect(SubmitButton)
-      disabled={false}
-      id="confirm-proposal-edit"
-      isSubmitting={false}
-      label="global.submit"
-      onSubmit={[Function]}
-    />
-  </ModalFooter>
+        <Relay(Connect(injectIntl(ReduxForm)))
+          onSubmitFailed={[Function]}
+          onSubmitSuccess={[MockFunction]}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "allRevisions": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "form": Object {
+                "$fragmentRefs": null,
+                "contribuable": true,
+              },
+              "id": "1",
+              "publicationStatus": "UNPUBLISHED",
+            }
+          }
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "contribuable": true,
+            }
+          }
+        />
+      </Modal.Body>
+      <Modal.Footer
+        borderTop="1px solid #DADEE1"
+        pt={4}
+      >
+        <ButtonGroup>
+          <Button
+            isLoading={false}
+            onClick={[MockFunction]}
+            variant="secondary"
+            variantColor="hierarchy"
+            variantSize="big"
+          >
+            global.cancel
+          </Button>
+          <Button
+            disabled={true}
+            id="confirm-proposal-edit"
+            isLoading={false}
+            onClick={[Function]}
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+          >
+            global.publish
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+       
+    </ForwardRef(MotionComponent)>
+  </AnimatePresence>
 </ProposalEditModal__ModalProposalEditContainer>
 `;

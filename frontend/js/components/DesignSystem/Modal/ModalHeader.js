@@ -11,10 +11,15 @@ import { useModal } from '~ds/Modal/Modal.context';
 export type Props = {|
   ...FlexProps,
   +children?: React$Node,
+  +closeLabel?: string,
 |};
 
-const ModalHeader = ({ children, ...rest }: Props) => {
+const ModalHeader = ({ children, closeLabel, ...rest }: Props) => {
   const { hide, hideCloseButton } = useModal();
+  const ref = React.useRef<HTMLButtonElement | null>(null);
+  React.useEffect(() => {
+    if (ref.current) ref.current.focus();
+  }, []);
   return (
     <Flex as="header" p={6} pb={0} align="center" {...rest}>
       <Flex
@@ -32,7 +37,7 @@ const ModalHeader = ({ children, ...rest }: Props) => {
         {children}
       </Flex>
       {!hideCloseButton && (
-        <Button p={0} variantSize="medium" onClick={hide}>
+        <Button ref={ref} p={0} variantSize="medium" onClick={hide} ariaLabel={closeLabel}>
           <Icon name="CROSS" />
         </Button>
       )}

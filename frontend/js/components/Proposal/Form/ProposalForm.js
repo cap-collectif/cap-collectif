@@ -39,7 +39,6 @@ import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '~/types';
 import CreateProposalMutation from '~/mutations/CreateProposalMutation';
-import { closeCreateModal, closeEditProposalModal } from '~/redux/modules/proposal';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
 import environment from '~/createRelayEnvironment';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
@@ -61,6 +60,7 @@ import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import config from '~/config';
 import Text from '~ui/Primitives/Text';
 import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
+import { ProposalFormMapPreview } from './ProposalFormMapPreview';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -120,9 +120,12 @@ type Props = {|
   +titleValue: ?string,
   +tipsmeeeIdDisabled: boolean,
   +addressValue: ?string,
+  +category: ?string,
   +responses: ResponsesInReduxForm,
   +user: { id: string, username: string },
   +geoJsons: Array<GeoJson>,
+  +onSubmitSuccess: () => void,
+  +onSubmitFailed: () => void,
 |};
 
 export type FormValues = {|
@@ -182,7 +185,7 @@ const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 `;
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { proposalForm, proposal, features, intl } = props;
+  const { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed } = props;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -233,7 +236,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           throw new Error('Mutation "changeProposalContent" failed.');
         }
         window.removeEventListener('beforeunload', onUnload);
-        dispatch(closeEditProposalModal());
+        onSubmitSuccess();
         if (window.location.href.includes(EDIT_MODAL_ANCHOR)) {
           window.history.replaceState(
             null,
@@ -244,6 +247,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         window.location.reload();
       })
       .catch(() => {
+        onSubmitFailed();
         throw new SubmissionError({
           _error: 'global.error.server.form',
         });
@@ -266,7 +270,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }
       const createdProposal = response.createProposal.proposal;
       window.removeEventListener('beforeunload', onUnload);
-      dispatch(closeCreateModal());
+      onSubmitSuccess();
       FluxDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
         alert: {
@@ -287,6 +291,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }, TIMEOUT_BEFORE_REDIRECTION);
     })
     .catch(e => {
+      onSubmitFailed();
       if (e instanceof SubmissionError) {
         throw e;
       }
@@ -484,7 +489,9 @@ export class ProposalForm extends React.Component<Props, State> {
       error,
       form,
       responses,
+      addressValue,
       user,
+      category,
       change: changeProps,
     } = this.props;
     const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
@@ -642,9 +649,9 @@ export class ProposalForm extends React.Component<Props, State> {
                 </option>
               )}
             </FormattedMessage>
-            {proposalForm.categories.map(category => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+            {proposalForm.categories.map(cat => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
               </option>
             ))}
           </Field>
@@ -666,6 +673,13 @@ export class ProposalForm extends React.Component<Props, State> {
                   addressComplete ? JSON.stringify([addressComplete]) : addressComplete,
                 ),
             }}
+          />
+        )}
+        {addressValue && (
+          <ProposalFormMapPreview
+            category={category}
+            categories={proposalForm.categories}
+            address={addressValue}
           />
         )}
         {features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
@@ -691,7 +705,6 @@ export class ProposalForm extends React.Component<Props, State> {
             ))}
           </Field>
         )}
-
         {proposalForm.usingDescription && (
           <Field
             id="proposal_body"
@@ -707,7 +720,6 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.descriptionHelpText}
           />
         )}
-
         <FieldArray
           name="responses"
           component={renderResponses}
@@ -883,6 +895,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     geoJsons: formatGeoJsons(proposalForm.districts),
     titleValue: selector(state, 'title'),
     tipsmeeeIdDisabled: proposal && proposal.tipsmeeeId,
+    category: selector(state, 'category'),
     addressValue: selector(state, 'address'),
     features: state.default.features,
     themes: state.default.themes,
@@ -904,6 +917,7 @@ const form = reduxForm({
   form: formName,
   validate,
   onSubmit,
+  destroyOnUnmount: false,
 })(ProposalForm);
 
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form));
@@ -969,6 +983,8 @@ export default createFragmentContainer(container, {
       categories(order: ALPHABETICAL) {
         id
         name
+        color
+        icon
       }
       questions {
         id

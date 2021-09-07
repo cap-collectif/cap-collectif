@@ -6,6 +6,19 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
 <ProposalLeafletMapstyle__MapContainer
   isMobile={false}
 >
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
   <Address
     debounce={1200}
     getAddress={[Function]}
@@ -273,6 +286,19 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
 <ProposalLeafletMapstyle__MapContainer
   isMobile={false}
 >
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
   <Address
     debounce={1200}
     getAddress={[Function]}

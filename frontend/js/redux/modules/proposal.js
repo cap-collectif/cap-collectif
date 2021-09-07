@@ -37,11 +37,8 @@ type CloseCreateFusionModalAction = {
 type OpenCreateFusionModalAction = {
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 };
-type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
-type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
-type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
 type ChangePageAction = { type: 'proposal/CHANGE_PAGE', page: number };
 type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
@@ -115,12 +112,6 @@ export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
 export const openCreateFusionModal = (): OpenCreateFusionModalAction => ({
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 });
-export const closeEditProposalModal = (): CloseEditProposalModalAction => ({
-  type: 'proposal/CLOSE_EDIT_MODAL',
-});
-export const openEditProposalModal = (): OpenEditProposalModalAction => ({
-  type: 'proposal/OPEN_EDIT_MODAL',
-});
 export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({
   type: 'proposal/CLOSE_DELETE_MODAL',
 });
@@ -128,9 +119,6 @@ export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({
   type: 'proposal/OPEN_DELETE_MODAL',
 });
 
-export const openCreateModal = (): OpenCreateModalAction => ({
-  type: 'proposal/OPEN_CREATE_MODAL',
-});
 export const closeCreateModal = (): CloseCreateModalAction => ({
   type: 'proposal/CLOSE_CREATE_MODAL',
 });
@@ -243,7 +231,6 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
 };
 
 export type ProposalAction =
-  | OpenCreateModalAction
   | ChangeFilterAction
   | VoteFailedAction
   | RequestVotingAction
@@ -255,13 +242,11 @@ export type ProposalAction =
   | OpenVoteModalAction
   | OpenDeleteProposalModalAction
   | LoadSelectionsAction
-  | CloseEditProposalModalAction
   | CloseVoteModalAction
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
   | OpenCreateFusionModalAction
   | CloseCreateFusionModalAction
-  | OpenEditProposalModalAction
   | OpenDetailLikersModalAction
   | CloseDetailLikersModalAction
   | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }

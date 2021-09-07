@@ -36,7 +36,7 @@ Scenario: Logged in user wants to create two proposal in under a minute
   When I click the create proposal button
   When I fill the simple proposal form
   And I submit the create proposal form
-  Then I should see "publication-limit-reached"
+  Then I should see "error.title.damn"
   When I reload the page, I should see a confirm popup
 
 @security

@@ -65,6 +65,8 @@ describe('<ProposalLeafletMap />', () => {
     shouldDisplayPictures: true,
     proposalInAZoneRequired: false,
     dispatch: jest.fn(),
+    proposalForm: { $fragmentRefs, $refType, objectType: 'PROPOSAL' },
+    projectType: 'PROPOSAL',
   };
 
   it('should render a map with only valid markers', () => {

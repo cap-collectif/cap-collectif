@@ -28,6 +28,7 @@ const defaultProps = {
   invalid: false,
   pristine: true,
   dispatch: jest.fn(),
+  onClose: jest.fn(),
 };
 
 describe('<ProposalEditModal />', () => {

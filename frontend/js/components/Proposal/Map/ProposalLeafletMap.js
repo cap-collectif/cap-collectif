@@ -11,7 +11,7 @@ import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import L from 'leaflet';
-import { useResize } from '@liinkiing/react-hooks';
+import { useResize, useDisclosure } from '@liinkiing/react-hooks';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import ZoomControl from './ZoomControl';
 import type { MapCenterObject, MapOptions, MapProps, MapRef, PopupRef } from './Map.types';
@@ -20,6 +20,8 @@ import type { MapTokens } from '~/redux/modules/user';
 import ProposalMapPopover from './ProposalMapPopover';
 import LoginOverlay from '~/components/Utils/LoginOverlay';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
+import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql';
+
 import {
   StyledMap,
   BlankPopup,
@@ -36,14 +38,15 @@ import ProposalMapLoaderPane from './ProposalMapLoaderPane';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
-import Button from '~ds/Button/Button';
-import { openCreateModal } from '~/redux/modules/proposal';
 import { geoContains, type GeoJson, type Style } from '~/utils/geojson';
 import ProposalMapDiscoverPane from './ProposalMapDiscoverPane';
 import { getAddressFromLatLng } from '~/utils/googleMapAddress';
 import { formName } from '~/components/Proposal/Form/ProposalForm';
 import { mapToast } from '~ds/Toast';
 import ProposalMapOutOfAreaPane from './ProposalMapOutOfAreaPane';
+import ProposalCreateModal from '../Create/ProposalCreateModal';
+import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
+import Button from '~ds/Button/Button';
 
 type Props = {|
   proposals: ProposalLeafletMap_proposals,
@@ -59,6 +62,8 @@ type Props = {|
   shouldDisplayPictures: boolean,
   proposalInAZoneRequired: boolean,
   dispatch: Dispatch,
+  projectType: ?string,
+  proposalForm: ProposalLeafletMap_proposalForm,
 |};
 
 const convertToGeoJsonStyle = (style: Style) => {
@@ -156,8 +161,17 @@ export const ProposalLeafletMap = ({
   dispatch,
   shouldDisplayPictures,
   proposalInAZoneRequired,
+  projectType,
+  proposalForm,
 }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
+  const titleTradKey =
+    proposalForm?.objectType === 'ESTABLISHMENT'
+      ? getProposalLabelByType(projectType, 'add-establishment')
+      : proposalForm?.objectType === 'PROPOSAL'
+      ? getProposalLabelByType(projectType, 'add')
+      : 'submit-a-question';
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const mapRef = useRef(null);
   const popupRef = useRef(null);
@@ -183,6 +197,17 @@ export const ProposalLeafletMap = ({
 
   return (
     <MapContainer isMobile={isMobile}>
+      <ProposalCreateModal
+        title={titleTradKey}
+        proposalForm={proposalForm}
+        show={isOpen}
+        onClose={onClose}
+        onOpen={async () => {
+          const geoAddr = await getAddressFromLatLng(lastPopoverLatLng);
+          dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr));
+          dispatch(change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr));
+        }}
+      />
       <Address
         id="address"
         getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
@@ -237,21 +262,8 @@ export const ProposalLeafletMap = ({
           autoPan={false}
           className="popup-proposal">
           <LoginOverlay placement="top">
-            <Button
-              variant="primary"
-              variantColor="primary"
-              variantSize="small"
-              onClick={async () => {
-                const geoAddr = await getAddressFromLatLng(lastPopoverLatLng);
-                dispatch(openCreateModal());
-                dispatch(
-                  change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr),
-                );
-                dispatch(
-                  change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr),
-                );
-              }}>
-              {intl.formatMessage({ id: 'proposal.add' })}
+            <Button variant="primary" variantColor="primary" variantSize="small" onClick={onOpen}>
+              {intl.formatMessage({ id: titleTradKey })}
             </Button>
           </LoginOverlay>
         </Popup>
@@ -294,10 +306,10 @@ export const ProposalLeafletMap = ({
                     click: e => {
                       closePopup(mapRef, popupRef);
                       setShowDiscoverPane(false);
-                      const isOpen: boolean = e.target.isPopupOpen();
+                      const isMarkerOpen: boolean = e.target.isPopupOpen();
                       if (!isOnCluster || isMobile) {
-                        setInitialSlide(isOpen ? idx : null);
-                        setIsMobileSliderOpen(isOpen);
+                        setInitialSlide(isMarkerOpen ? idx : null);
+                        setIsMobileSliderOpen(isMarkerOpen);
                         if (isMobile) {
                           goToPosition(mapRef, markers[idx].address);
                           if (slickRef?.current) slickRef.current.slickGoTo(idx);
@@ -368,6 +380,12 @@ const mapStateToProps = (state: State) => ({
 const container = connect<any, any, _, _, _, _>(mapStateToProps)(ProposalLeafletMap);
 
 export default createFragmentContainer(container, {
+  proposalForm: graphql`
+    fragment ProposalLeafletMap_proposalForm on ProposalForm {
+      objectType
+      ...ProposalCreateModal_proposalForm
+    }
+  `,
   proposals: graphql`
     fragment ProposalLeafletMap_proposals on Proposal @relay(plural: true) {
       address {

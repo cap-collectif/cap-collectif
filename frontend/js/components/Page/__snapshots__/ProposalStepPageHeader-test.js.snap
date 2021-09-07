@@ -1,150 +1,229 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalStepPageHeader /> renders with interpellation context in collect step 1`] = `
-<div
-  id="proposal-step-page-header"
->
-  <h3
-    className="h3 d-ib mb-15"
-  >
-    <FormattedMessage
-      id="interpellation.count"
-      values={
-        Object {
-          "num": 5,
-        }
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
       }
-    />
-    <span
-      className="font-weight-300 color-dark-gray"
+    }
+    show={false}
+    title="interpellation.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
     >
-       
       <FormattedMessage
-        id="interpellation.count_fusions"
+        id="interpellation.count"
         values={
           Object {
-            "num": 2,
+            "num": 5,
           }
         }
       />
+      <span
+        className="font-weight-300 color-dark-gray"
+      >
+         
+        <FormattedMessage
+          id="interpellation.count_fusions"
+          values={
+            Object {
+              "num": 2,
+            }
+          }
+        />
+      </span>
+    </h3>
+    <span
+      className="pull-right mb-20 mt-20"
+    >
+      <Connect(LoginOverlay)>
+        <Button
+          disabled={false}
+          id="add-proposal"
+          onClick={[Function]}
+          variant="primary"
+          variantColor="primary"
+          variantSize="small"
+        >
+          interpellation.add
+        </Button>
+      </Connect(LoginOverlay)>
     </span>
-  </h3>
-  <span
-    className="pull-right mb-20 mt-20"
-  >
-    <Relay(Connect(ProposalCreate))
-      projectType="project.types.interpellation"
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "id": "form1",
-          "objectType": "PROPOSAL",
-        }
-      }
-    />
-  </span>
-</div>
+  </div>
+</Fragment>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with interpellation context in selection step 1`] = `
-<div
-  id="proposal-step-page-header"
->
-  <h3
-    className="h3 d-ib mb-15"
-  >
-    <FormattedMessage
-      id="interpellation.count"
-      values={
-        Object {
-          "num": 5,
-        }
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
       }
-    />
-  </h3>
-</div>
-`;
-
-exports[`<ProposalStepPageHeader /> renders with proposal context in collect step 1`] = `
-<div
-  id="proposal-step-page-header"
->
-  <h3
-    className="h3 d-ib mb-15"
+    }
+    show={false}
+    title="interpellation.add"
+  />
+  <div
+    id="proposal-step-page-header"
   >
-    <FormattedMessage
-      id="proposal.count"
-      values={
-        Object {
-          "num": 5,
-        }
-      }
-    />
-    <span
-      className="font-weight-300 color-dark-gray"
+    <h3
+      className="h3 d-ib mb-15"
     >
-       
       <FormattedMessage
-        id="proposal.count_fusions"
+        id="interpellation.count"
         values={
           Object {
-            "num": 2,
+            "num": 5,
           }
         }
       />
-    </span>
-  </h3>
-  <span
-    className="pull-right mb-20 mt-20"
-  >
-    <Relay(Connect(ProposalCreate))
-      projectType="project.types.petition"
-      proposalForm={
-        Object {
-          "$fragmentRefs": null,
-          "id": "form1",
-          "objectType": "PROPOSAL",
-        }
+    </h3>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with proposal context in collect step 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
       }
-    />
-  </span>
-</div>
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="proposal.count"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+      <span
+        className="font-weight-300 color-dark-gray"
+      >
+         
+        <FormattedMessage
+          id="proposal.count_fusions"
+          values={
+            Object {
+              "num": 2,
+            }
+          }
+        />
+      </span>
+    </h3>
+    <span
+      className="pull-right mb-20 mt-20"
+    >
+      <Connect(LoginOverlay)>
+        <Button
+          disabled={false}
+          id="add-proposal"
+          onClick={[Function]}
+          variant="primary"
+          variantColor="primary"
+          variantSize="small"
+        >
+          proposal.add
+        </Button>
+      </Connect(LoginOverlay)>
+    </span>
+  </div>
+</Fragment>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with proposal context in selection step 1`] = `
-<div
-  id="proposal-step-page-header"
->
-  <h3
-    className="h3 d-ib mb-15"
-  >
-    <FormattedMessage
-      id="proposal.count"
-      values={
-        Object {
-          "num": 5,
-        }
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
       }
-    />
-  </h3>
-</div>
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="proposal.count"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+    </h3>
+  </div>
+</Fragment>
 `;
 
 exports[`<ProposalStepPageHeader /> renders with question context in selection step 1`] = `
-<div
-  id="proposal-step-page-header"
->
-  <h3
-    className="h3 d-ib mb-15"
-  >
-    <FormattedMessage
-      id="count-questions"
-      values={
-        Object {
-          "num": 5,
-        }
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "QUESTION",
       }
-    />
-  </h3>
-</div>
+    }
+    show={false}
+    title="submit-a-question"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="count-questions"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+    </h3>
+  </div>
+</Fragment>
 `;

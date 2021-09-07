@@ -11,11 +11,7 @@ describe('<ProposalStepPageHeader />', () => {
       $refType,
       id: 'step1',
       kind: 'selection',
-      form: {
-        id: 'form1',
-        $fragmentRefs,
-        objectType: 'PROPOSAL',
-      },
+      form: { contribuable: true, id: 'form1', $fragmentRefs, objectType: 'PROPOSAL' },
       project: {
         type: {
           title: 'project.types.petition',
@@ -40,11 +36,7 @@ describe('<ProposalStepPageHeader />', () => {
       $refType,
       id: 'step1',
       kind: 'selection',
-      form: {
-        id: 'form1',
-        $fragmentRefs,
-        objectType: 'PROPOSAL',
-      },
+      form: { contribuable: true, id: 'form1', $fragmentRefs, objectType: 'PROPOSAL' },
       project: {
         type: {
           title: 'project.types.interpellation',
@@ -69,11 +61,7 @@ describe('<ProposalStepPageHeader />', () => {
       $refType,
       id: 'step1',
       kind: 'selection',
-      form: {
-        id: 'form1',
-        $fragmentRefs,
-        objectType: 'QUESTION',
-      },
+      form: { contribuable: true, id: 'form1', $fragmentRefs, objectType: 'QUESTION' },
       project: {
         type: {
           title: 'project.types.petition',
@@ -98,11 +86,7 @@ describe('<ProposalStepPageHeader />', () => {
       $refType,
       id: 'step1',
       kind: 'collect',
-      form: {
-        id: 'form1',
-        $fragmentRefs,
-        objectType: 'PROPOSAL',
-      },
+      form: { contribuable: true, id: 'form1', $fragmentRefs, objectType: 'PROPOSAL' },
       project: {
         type: {
           title: 'project.types.petition',
@@ -127,11 +111,7 @@ describe('<ProposalStepPageHeader />', () => {
       $refType,
       id: 'step1',
       kind: 'collect',
-      form: {
-        id: 'form1',
-        $fragmentRefs,
-        objectType: 'PROPOSAL',
-      },
+      form: { contribuable: true, id: 'form1', $fragmentRefs, objectType: 'PROPOSAL' },
       project: {
         type: {
           title: 'project.types.interpellation',

@@ -3,29 +3,14 @@
 exports[`<ProposalDraftAlert /> should not render draft alert 1`] = `""`;
 
 exports[`<ProposalDraftAlert /> should render draft alert 1`] = `
-<Alert
-  bsClass="alert"
-  bsStyle="warning"
-  closeLabel="Close alert"
-  style={
-    Object {
-      "marginBottom": "0",
-      "textAlign": "center",
-    }
-  }
+<ProposalDraftAlert___StyledInfoMessage
+  variant="warning"
 >
-  <strong>
-    <FormattedMessage
-      id="proposal.draft.is_draft"
-      values={Object {}}
-    />
-  </strong>
-  <span>
-     
-    <FormattedMessage
-      id="proposal.draft.explain"
-      values={Object {}}
-    />
-  </span>
-</Alert>
+  <InfoMessage.Title
+    fontWeight={400}
+    withIcon={true}
+  >
+    proposal.draft.explain
+  </InfoMessage.Title>
+</ProposalDraftAlert___StyledInfoMessage>
 `;

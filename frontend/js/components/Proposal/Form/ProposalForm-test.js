@@ -31,10 +31,14 @@ describe('<ProposalForm />', () => {
       {
         id: 'category1',
         name: 'Category 1',
+        color: 'blue',
+        icon: null,
       },
       {
         id: 'category2',
         name: 'Category 2',
+        color: 'red',
+        icon: 'tractor',
       },
     ],
     questions: [
@@ -124,10 +128,14 @@ describe('<ProposalForm />', () => {
       {
         id: 'category1',
         name: 'Category 1',
+        color: 'blue',
+        icon: null,
       },
       {
         id: 'category2',
         name: 'Category 2',
+        color: 'red',
+        icon: 'tractor',
       },
     ],
     questions: [
@@ -207,6 +215,9 @@ describe('<ProposalForm />', () => {
     themes: [{ id: 'theme1', title: 'Theme 1' }],
     submitting: false,
     dispatch: jest.fn(),
+    onSubmitSuccess: jest.fn(),
+    onSubmitFailed: jest.fn(),
+    category: null,
     features: {
       ...features,
       themes: true,

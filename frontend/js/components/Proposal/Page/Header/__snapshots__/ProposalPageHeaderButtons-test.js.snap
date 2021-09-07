@@ -3,6 +3,7 @@
 exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
 <ProposalPageHeaderButtons__Buttons>
   <Relay(Connect(injectIntl(ProposalEditModal)))
+    onClose={[Function]}
     proposal={
       Object {
         "$fragmentRefs": null,
@@ -26,6 +27,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
         "url": "/slash",
       }
     }
+    show={false}
   />
   <Relay(Connect(ProposalDeleteModal))
     proposal={

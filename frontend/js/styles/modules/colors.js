@@ -16,7 +16,7 @@ type Colors = {|
   |},
 |};
 
-const colors: Colors = {
+export const colors: Colors = {
   transparent: 'transparent',
   current: 'currentColor',
   dark: '#30363D',

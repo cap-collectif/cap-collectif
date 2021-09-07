@@ -2,17 +2,18 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
+import { AnimatePresence, motion } from 'framer-motion';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
-import { Button, Modal } from 'react-bootstrap';
+import { Button as BsButton } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import cn from 'classnames';
-import SubmitButton from '../../Form/SubmitButton';
-import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
 import ProposalDraftAlert from '../Page/ProposalDraftAlert';
 import type { Dispatch, GlobalState } from '~/types';
-import { closeEditProposalModal } from '~/redux/modules/proposal';
+import Button from '~ds/Button/Button';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
 import type {
   ProposalEditModal_proposal,
   ProposalRevisionState,
@@ -21,16 +22,20 @@ import { ProposalRevisionItem } from '~/shared/ProposalRevision/Modal/ProposalRe
 import { pxToRem } from '~/utils/styles/mixins';
 import Collapsable from '~ui/Collapsable';
 import { mediaQueryMobile } from '~/utils/sizes';
+import colors from '~/styles/modules/colors';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
+import ProposalOtherPanelsModal from '../Create/ProposalOtherPanelsModal';
 
-type Props = {
-  intl: IntlShape,
-  proposal: ProposalEditModal_proposal,
-  show: boolean,
-  submitting: boolean,
-  invalid: boolean,
-  pristine: boolean,
-  dispatch: Dispatch,
-};
+type Props = {|
+  +intl: IntlShape,
+  +proposal: ProposalEditModal_proposal,
+  +show: boolean,
+  +submitting: boolean,
+  +invalid: boolean,
+  +pristine: boolean,
+  +dispatch: Dispatch,
+  +onClose: () => void,
+|};
 
 const ModalProposalEditContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal).attrs({
   className: 'proposalCreate__modal',
@@ -122,139 +127,193 @@ const getProposalPendingRevisions = (
   );
 };
 
-export class ProposalEditModal extends React.Component<Props> {
-  render() {
-    const { invalid, proposal, show, pristine, submitting, dispatch, intl } = this.props;
-    if (!proposal) return null;
-    const pendingRevisions = getProposalPendingRevisions(proposal);
-    const isRevisionExpired = isProposalRevisionsExpired(proposal);
-    const hasPendingRevisions = pendingRevisions.length > 0;
+const STATE = {
+  NORMAL: 'NORMAL',
+  LEAVE: 'LEAVE',
+  ERROR: 'ERROR',
+};
 
-    return (
-      <ModalProposalEditContainer
-        animation={false}
-        show={show}
-        dialogClassName={cn('custom-modal-dialog', { 'expired-revision': isRevisionExpired })}
-        onHide={() => {
-          if (isRevisionExpired) {
-            dispatch(closeEditProposalModal());
-          } else if (
-            // eslint-disable-next-line no-alert
-            window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
-          ) {
-            dispatch(closeEditProposalModal());
-          }
-        }}
-        bsSize="large"
-        aria-labelledby="contained-modal-title-lg">
-        {isRevisionExpired ? (
-          <>
-            <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })} />
-            <Modal.Body>
-              <span className="d-b emoji-container" role="img" aria-label="Crying Face">
-                😓
-              </span>
-              <FormattedMessage tagName="h2" id="global.sorry" />
-              <FormattedMessage tagName="p" id="expired.review.request" />
-            </Modal.Body>
-          </>
-        ) : (
-          <>
-            <Modal.Header closeButton closeLabel={intl.formatMessage({ id: 'close.modal' })}>
-              <Modal.Title id="contained-modal-title-lg">
-                <b>
-                  <FormattedMessage
-                    id={hasPendingRevisions ? 'review-my-proposal' : 'global.edit'}
-                  />
-                </b>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <ProposalDraftAlert proposal={proposal} />
-              {hasPendingRevisions && (
-                <ProposalRevisionItem as="div" className="mb-10">
-                  <p className="font-weight-bold m-0">
-                    {intl.formatMessage({ id: 'reason.review.request' })}
-                  </p>
-                  <ProposalRevisionsList>
-                    {pendingRevisions.map(revision => (
-                      <li key={revision.id}>
-                        <span>{revision.reason}&nbsp;</span>
-                        <Collapsable closeOnClickAway={false} className="clearfix">
-                          {({ visible }) => (
-                            <Collapsable.Button inline={false} showCaret={false}>
-                              {!visible && (
-                                <Button variant="link" bsStyle="link">
-                                  <FormattedMessage id="open-instructions" />
-                                </Button>
+export const ProposalEditModal = ({
+  invalid,
+  proposal,
+  show,
+  pristine,
+  submitting,
+  dispatch,
+  intl,
+  onClose,
+}: Props) => {
+  const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL');
+  const [errorCount, setErrorCount] = React.useState<number>(0);
+  if (!proposal || !show) return null;
+  const pendingRevisions = getProposalPendingRevisions(proposal);
+  const isRevisionExpired = isProposalRevisionsExpired(proposal);
+  const hasPendingRevisions = pendingRevisions.length > 0;
+
+  return (
+    <ModalProposalEditContainer
+      fullSizeOnMobile
+      show={show}
+      dialogClassName={cn('custom-modal-dialog', { 'expired-revision': isRevisionExpired })}
+      hideCloseButton={modalState === 'LEAVE'}
+      hideOnEsc={modalState !== 'LEAVE'}
+      hideOnClickOutside={false}
+      onClose={() => {
+        if (modalState !== 'LEAVE') setModalState('LEAVE');
+        else onClose();
+      }}
+      ariaLabel={intl.formatMessage({ id: 'contained-modal-title-lg' })}>
+      {isRevisionExpired ? (
+        <>
+          <Modal.Header
+            closeLabel={intl.formatMessage({ id: 'close.modal' })}
+            pb={8}
+            borderBottom={`1px solid ${colors.gray[200]}`}
+          />
+          <Modal.Body>
+            <span className="d-b emoji-container" role="img" aria-label="Crying Face">
+              😓
+            </span>
+            <FormattedMessage tagName="h2" id="global.sorry" />
+            <FormattedMessage tagName="p" id="expired.review.request" />
+          </Modal.Body>
+        </>
+      ) : (
+        <>
+          <Modal.Header
+            closeLabel={intl.formatMessage({ id: 'close.modal' })}
+            pb={8}
+            borderBottom={`1px solid ${colors.gray[200]}`}>
+            <Heading>
+              {intl.formatMessage({
+                id: hasPendingRevisions ? 'review-my-proposal' : 'global.edit',
+              })}
+            </Heading>
+          </Modal.Header>
+          <AnimatePresence>
+            <ProposalOtherPanelsModal
+              errorCount={errorCount}
+              onClose={onClose}
+              modalState={modalState}
+              resetModalState={() => {
+                setModalState('NORMAL');
+                setErrorCount(0);
+              }}
+            />
+            {modalState === 'NORMAL' && (
+              <motion.div
+                key="normal"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, display: 'block' }}
+                exit={{ opacity: 0, display: 'none' }}>
+                <Modal.Body>
+                  <ProposalDraftAlert proposal={proposal} mb={6} />
+                  {hasPendingRevisions && (
+                    <ProposalRevisionItem as="div" className="mb-10">
+                      <p className="font-weight-bold m-0">
+                        {intl.formatMessage({ id: 'reason.review.request' })}
+                      </p>
+                      <ProposalRevisionsList>
+                        {pendingRevisions.map(revision => (
+                          <li key={revision.id}>
+                            <span>{revision.reason}&nbsp;</span>
+                            <Collapsable closeOnClickAway={false} className="clearfix">
+                              {({ visible }) => (
+                                <Collapsable.Button inline={false} showCaret={false}>
+                                  {!visible && (
+                                    <BsButton variant="link" bsStyle="link">
+                                      <FormattedMessage id="open-instructions" />
+                                    </BsButton>
+                                  )}
+                                  <Collapsable.Element isAbsolute={false} ariaLabel="Contenu">
+                                    <div dangerouslySetInnerHTML={{ __html: revision.body }} />
+                                    <BsButton variant="link" bsStyle="link">
+                                      <FormattedMessage id="close-instructions" />
+                                    </BsButton>
+                                  </Collapsable.Element>
+                                </Collapsable.Button>
                               )}
-                              <Collapsable.Element isAbsolute={false} ariaLabel="Contenu">
-                                <div dangerouslySetInnerHTML={{ __html: revision.body }} />
-                                <Button variant="link" bsStyle="link">
-                                  <FormattedMessage id="close-instructions" />
-                                </Button>
-                              </Collapsable.Element>
-                            </Collapsable.Button>
-                          )}
-                        </Collapsable>
-                      </li>
-                    ))}
-                  </ProposalRevisionsList>
-                  {!proposal.form.contribuable && (
-                    <p className="mb-0 mt-20">
-                      {intl.formatMessage({ id: 'warning.review.modification' })}
-                    </p>
+                            </Collapsable>
+                          </li>
+                        ))}
+                      </ProposalRevisionsList>
+                      {!proposal.form.contribuable && (
+                        <p className="mb-0 mt-20">
+                          {intl.formatMessage({ id: 'warning.review.modification' })}
+                        </p>
+                      )}
+                    </ProposalRevisionItem>
                   )}
-                </ProposalRevisionItem>
-              )}
-              <ProposalForm proposalForm={proposal.form} proposal={proposal} />
-            </Modal.Body>
-            <Modal.Footer>
-              <CloseButton
-                onClose={() => {
-                  dispatch(closeEditProposalModal());
-                }}
-              />
-              {proposal.publicationStatus === 'DRAFT' && (
-                <SubmitButton
-                  id="confirm-proposal-create-as-draft"
-                  isSubmitting={submitting}
-                  disabled={pristine}
-                  onSubmit={() => {
-                    dispatch(change(formName, 'draft', true));
-                    setTimeout(() => {
-                      // TODO find a better way
-                      // We need to wait validation values to be updated with 'draft'
-                      dispatch(submit(formName));
-                    }, 200);
-                  }}
-                  label="global.save_as_draft"
-                />
-              )}
-              <SubmitButton
-                label="global.submit"
-                id="confirm-proposal-edit"
-                isSubmitting={submitting}
-                disabled={invalid}
-                onSubmit={() => {
-                  dispatch(change(formName, 'draft', false));
-                  setTimeout(() => {
-                    // TODO find a better way
-                    // We need to wait validation values to be updated with 'draft'
-                    dispatch(submit(formName));
-                  }, 200);
-                }}
-              />
-            </Modal.Footer>
-          </>
-        )}
-      </ModalProposalEditContainer>
-    );
-  }
-}
+                  <ProposalForm
+                    proposalForm={proposal.form}
+                    proposal={proposal}
+                    onSubmitSuccess={onClose}
+                    onSubmitFailed={() => {
+                      setErrorCount(errorCount + 1);
+                      setModalState('ERROR');
+                    }}
+                  />
+                </Modal.Body>
+                <Modal.Footer pt={4} borderTop={`1px solid ${colors.gray[200]}`}>
+                  <ButtonGroup>
+                    {proposal.publicationStatus !== 'DRAFT' && (
+                      <Button
+                        onClick={onClose}
+                        variantSize="big"
+                        variant="secondary"
+                        variantColor="hierarchy"
+                        isLoading={submitting}>
+                        {intl.formatMessage({ id: 'global.cancel' })}
+                      </Button>
+                    )}
+                    {proposal.publicationStatus === 'DRAFT' && (
+                      <Button
+                        id="confirm-proposal-create-as-draft"
+                        variantSize="big"
+                        variant="secondary"
+                        variantColor="primary"
+                        isLoading={submitting}
+                        disabled={pristine}
+                        onClick={() => {
+                          dispatch(change(formName, 'draft', true));
+                          setTimeout(() => {
+                            // TODO find a better way
+                            // We need to wait validation values to be updated with 'draft'
+                            dispatch(submit(formName));
+                          }, 200);
+                        }}>
+                        {intl.formatMessage({ id: 'global.save' })}
+                      </Button>
+                    )}
+                    <Button
+                      id="confirm-proposal-edit"
+                      variantSize="big"
+                      variant="primary"
+                      variantColor="primary"
+                      isLoading={submitting}
+                      disabled={invalid || pristine}
+                      onClick={() => {
+                        dispatch(change(formName, 'draft', false));
+                        setTimeout(() => {
+                          // TODO find a better way
+                          // We need to wait validation values to be updated with 'draft'
+                          dispatch(submit(formName));
+                        }, 200);
+                      }}>
+                      {intl.formatMessage({ id: 'global.publish' })}
+                    </Button>
+                  </ButtonGroup>
+                </Modal.Footer>{' '}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      )}
+    </ModalProposalEditContainer>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
-  show: state.proposal.showEditModal,
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
   invalid: isInvalid(formName)(state),

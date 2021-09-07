@@ -26,6 +26,7 @@ exports[`should render correctly with proposals 1`] = `
       },
     }
   }
+  projectType={null}
   proposals={
     Array [
       Object {

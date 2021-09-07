@@ -133,7 +133,7 @@ export const ProposalPageLogic = ({
           votesPageUrl={votesPageUrl}
         />
       )}
-      <ProposalDraftAlert proposal={proposal} />
+      <ProposalDraftAlert proposal={proposal} alignItems="center" />
       <Tab.Container
         id="proposal-page-tabs"
         activeKey={tabKey}

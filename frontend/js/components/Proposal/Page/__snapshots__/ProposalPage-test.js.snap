@@ -1630,6 +1630,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "name": "name",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "color",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "icon",
+                              "storageKey": null,
+                            },
                           ],
                           "storageKey": "categories(order:\\"ALPHABETICAL\\")",
                         },
@@ -7236,7 +7250,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c0ae89bd74f7a21bdab13cf43916642f",
+          "cacheID": "6a1cfadccc362566db9470e357d72919",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7959,6 +7973,8 @@ fragment ProposalForm_proposalForm on ProposalForm {
   categories(order: ALPHABETICAL) {
     id
     name
+    color
+    icon
   }
   questions {
     __typename
