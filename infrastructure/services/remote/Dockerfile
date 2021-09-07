@@ -31,6 +31,7 @@ RUN set -x \
         gnupg2 \
         dirmngr \
         netcat \
+        vim \
     && \
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
     apt-get clean && \
@@ -162,6 +163,9 @@ RUN curl https://packagecloud.io/install/repositories/varnishcache/varnish66/scr
 	    make && \
 	    make install
 
+# Install antivirus deamon
+RUN apt-get install -y clamav
+
 # Install Supervisor
 RUN apt-get update && \
     apt-get install -y python-pip python-setuptools supervisor --no-install-recommends && \
@@ -196,7 +200,7 @@ COPY infrastructure/services/remote/php-fpm/fpm.conf               /etc/service/
 COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
 COPY infrastructure/services/remote/elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
 COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/capco.vcl
-COPY infrastructure/services/remote/rabbitmq/rabbitmq.config         /etc/rabbitmq/rabbitmq.config
+COPY infrastructure/services/remote/rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
 COPY infrastructure/services/remote/redirectionio/agent.yml        /etc/redirectionio/agent.yml
@@ -204,8 +208,10 @@ COPY infrastructure/services/remote/redirectionio/agent.yml        /etc/redirect
 # Cache storage for rules
 VOLUME /var/lib/redirectionio
 
-# Binaries
-COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
+# Binaries / Scripts
+COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin          /usr/local/bin/rabbitmqadmin
+COPY infrastructure/services/remote/cron/antivirus                  /etc/cron.daily
+COPY infrastructure/services/remote/cron/check_db_schema            /etc/cron.daily
 
 # Daemons
 COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
@@ -231,13 +237,16 @@ RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd
 RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 WORKDIR /var/www
 
-# NodeJS and Yarn
+# NodeJS
+ENV NODE_PATH=/usr/local/lib/node_modules
+
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
+# yarn
 ENV YARN_VERSION 1.22.5
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
     && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \

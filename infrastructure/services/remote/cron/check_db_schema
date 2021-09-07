@@ -1,0 +1,7 @@
+#!/bin/bash
+
+check_result=$(/var/www/bin/console d:s:u --dump-sql)
+
+if [[ "$check_result" != *"OK"* ]]; then
+  curl -X POST -H 'Content-type: application/json' --data '{"text":"['"$SYMFONY_INSTANCE_NAME"'] Database schema is not in sync\n'"$check_result"'"}' $SLACK_WEBHOOK_ANTIVIRUS
+fi

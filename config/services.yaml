@@ -158,6 +158,7 @@ parameters:
     env(SYMFONY_CLOUDFLARE_ELASTIC_USERNAME): 'elastic'
     env(SYMFONY_CLOUDFLARE_ELASTIC_PASSWORD): '***REMOVED***'
     env(SYMFONY_SENTRY_LOG_LEVEL): 'error'
+    env(SYMFONY_SESSION_TIMEOUT_SECONDS): 1209600 # in seconds, 1209600 = two weeks
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
