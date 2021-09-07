@@ -21,6 +21,10 @@ const CreatePostMutation = /* GraphQL*/ `
           id
           username
         }
+        media {
+            id
+            url
+        }
         relatedContent {
           __typename
           ... on Project {
@@ -72,6 +76,7 @@ const optionnalInput = {
   projects: ['UHJvamVjdDpwcm9qZWN0SWRmMw==', 'UHJvamVjdDpwcm9qZWN0Rm9vZA=='],
   proposals: ['UHJvcG9zYWw6cHJvcG9zYWwx', 'UHJvcG9zYWw6cHJvcG9zYWwxMDg='],
   themes: ['theme4'],
+  media: 'media1',
 };
 
 describe('mutations.createPost', () => {

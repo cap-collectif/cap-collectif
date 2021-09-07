@@ -32,3 +32,6 @@ CreatePostInput:
             commentable:
                 type: 'Boolean!'
                 description: 'Whether or not the post should be commentable'
+            media:
+                type: 'ID'
+                description: 'The media attached to the post'

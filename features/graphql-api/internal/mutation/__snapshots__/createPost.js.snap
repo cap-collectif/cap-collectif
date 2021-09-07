@@ -16,6 +16,10 @@ Object {
       "commentable": true,
       "displayedOnBlog": true,
       "isPublished": true,
+      "media": Object {
+        "id": "media1",
+        "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
+      },
       "metaDescription": "meta description",
       "owner": Object {
         "id": "VXNlcjp1c2VyQWRtaW4=",
@@ -71,6 +75,7 @@ Object {
       "commentable": true,
       "displayedOnBlog": true,
       "isPublished": true,
+      "media": null,
       "metaDescription": null,
       "owner": Object {
         "id": "VXNlcjp1c2VyQWRtaW4=",

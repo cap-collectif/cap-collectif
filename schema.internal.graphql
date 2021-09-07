@@ -3174,6 +3174,9 @@ input CreatePostInput {
 
   """Whether or not the post should be commentable"""
   commentable: Boolean!
+
+  """The media attached to the post"""
+  media: ID
   clientMutationId: String
 }
 
@@ -13907,6 +13910,9 @@ input UpdatePostInput {
 
   """Whether or not the post should be commentable"""
   commentable: Boolean!
+
+  """The media attached to the post"""
+  media: ID
   clientMutationId: String
 
   """The id of the post to update"""

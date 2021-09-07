@@ -1,29 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mutations.updatePost admin should update a post with required fields. 1`] = `
-Object {
-  "updatePost": Object {
-    "errorCode": null,
-    "post": Object {
-      "abstract": "Résumé du post FR 1",
-      "authors": Array [
-        Object {
-          "id": "VXNlcjp1c2VyVGhlbw==",
-        },
-      ],
-      "body": "<p>Mon article</p>",
-      "commentable": true,
-      "displayedOnBlog": true,
-      "isPublished": true,
-      "metaDescription": null,
-      "publishedAt": "2020-06-05 12:15:30",
-      "relatedContent": Array [],
-      "title": "Titre !",
-    },
-  },
-}
-`;
-
 exports[`mutations.updatePost admin should update a post with optionnal fields. 1`] = `
 Object {
   "updatePost": Object {
@@ -39,6 +15,10 @@ Object {
       "commentable": true,
       "displayedOnBlog": true,
       "isPublished": true,
+      "media": Object {
+        "id": "media1",
+        "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
+      },
       "metaDescription": "meta description",
       "publishedAt": "2020-06-05 12:15:30",
       "relatedContent": Array [
@@ -68,6 +48,34 @@ Object {
           "title": "Food project",
         },
       ],
+      "title": "Titre !",
+    },
+  },
+}
+`;
+
+exports[`mutations.updatePost admin should update a post with required fields. 1`] = `
+Object {
+  "updatePost": Object {
+    "errorCode": null,
+    "post": Object {
+      "abstract": "Résumé du post FR 1",
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyVGhlbw==",
+        },
+      ],
+      "body": "<p>Mon article</p>",
+      "commentable": true,
+      "displayedOnBlog": true,
+      "isPublished": true,
+      "media": Object {
+        "id": "media1",
+        "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
+      },
+      "metaDescription": null,
+      "publishedAt": "2020-06-05 12:15:30",
+      "relatedContent": Array [],
       "title": "Titre !",
     },
   },
