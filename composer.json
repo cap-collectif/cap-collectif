@@ -202,7 +202,8 @@
         "symfony/maker-bundle": "^1.20",
         "symfony/http-client": "~4.4.18",
         "willdurand/negotiation": "^3.0",
-        "willdurand/jsonp-callback-validator": "^1.1"
+        "willdurand/jsonp-callback-validator": "^1.1",
+        "maximal/emoji": "^1.0"
     },
     "require-dev": {
         "behat/behat": "^3.3",

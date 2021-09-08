@@ -29,6 +29,7 @@ const Placeholder = () => (
 
 export const ProposalPageDescription = ({ proposal }: Props) => {
   if (proposal && !proposal.body && !proposal.summary) return null;
+
   return (
     <Card>
       <CategoryContainer>
@@ -40,7 +41,10 @@ export const ProposalPageDescription = ({ proposal }: Props) => {
         </CategoryTitle>
         {proposal?.summary && (
           <>
-            <p style={{ fontWeight: 600 }}>{proposal?.summary}</p>
+            <p style={{ fontWeight: 600 }}>
+              {' '}
+              <WYSIWYGRender value={proposal.summary} />
+            </p>
             <br />
           </>
         )}

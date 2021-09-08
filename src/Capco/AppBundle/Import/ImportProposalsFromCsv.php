@@ -34,6 +34,7 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
+use Maximal\Emoji\Detector;
 
 class ImportProposalsFromCsv
 {
@@ -316,6 +317,11 @@ class ImportProposalsFromCsv
 
             try {
                 $category = $media = $theme = $district = null;
+                foreach ($row as &$column) {
+                    if(Detector::containsEmoji($column)) {
+                        $column = Detector::removeEmoji($column);
+                    }
+                }
                 if ($this->proposalForm->isUsingDistrict() && !empty($row['district'])) {
                     if (
                         !($district = $this->districtRepository->findDistrictByName(

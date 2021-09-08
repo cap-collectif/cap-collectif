@@ -59,7 +59,9 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
     <p
       className="excerpt small"
     >
-      summaryOrBodyExcerpt
+      <WYSIWYGRender
+        value="summaryOrBodyExcerpt"
+      />
     </p>
     <TagsList>
       <Tag

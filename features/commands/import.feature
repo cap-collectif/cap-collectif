@@ -120,7 +120,7 @@ Scenario: Admin wants to import idf users from a CSV
 Scenario: Admin wants to import a IDF BP
   Given I run "capco:import:idf-proposals-from-csv /__snapshots__/imports/proposals_idf_bp3.csv proposalformIdfBP3 -d ,"
   Then the command exit code should be 0
-  And I should see "2 proposals successfully created." in output
+  And I should see "3 proposals successfully created." in output
 
 Scenario: Admin wants to generate csv model type to import proposals
   Given I run "capco:import-proposals:generate-header-csv proposalformIdfBP3 -d ,"
