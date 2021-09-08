@@ -16,5 +16,5 @@ InternalCreatePostTranslationInput:
                 type: 'String'
                 description: 'post metadescription'
             locale:
-                type: 'String!'
+                type: 'TranslationLocale!'
                 description: 'the locale of the translation'

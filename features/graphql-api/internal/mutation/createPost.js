@@ -49,7 +49,7 @@ const CreatePostMutation = /* GraphQL*/ `
 const translation = {
   title: 'Titre !',
   body: '<p>Mon article</p>',
-  locale: 'fr-FR',
+  locale: 'FR_FR',
 };
 
 const requiredInput = {
@@ -125,7 +125,7 @@ describe('mutations.createPost', () => {
             {
               title: 'Titre !',
               body: "<body onload=alert('test1')>",
-              locale: 'fr-FR',
+              locale: 'FR_FR',
             },
           ],
         },

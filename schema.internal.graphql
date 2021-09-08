@@ -3203,7 +3203,7 @@ input CreatePostTranslationInput {
   metaDescription: String
 
   """the locale of the translation"""
-  locale: String!
+  locale: TranslationLocale!
   clientMutationId: String
 }
 
