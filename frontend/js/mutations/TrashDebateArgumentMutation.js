@@ -50,7 +50,7 @@ const commit = (variables: Variables): Promise<TrashDebateArgumentMutationRespon
         });
         const debateArgumentsTrashed = debateProxy.getLinkedRecord('arguments', {
           first: 0,
-          isPublished: true,
+          isPublished: null,
           isTrashed: true,
         });
         if (!debateArgumentsToUpdate || !debateArgumentsTrashed) return;

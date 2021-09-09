@@ -48,16 +48,17 @@ const commit = (variables: Variables): Promise<DeleteDebateArgumentMutationRespo
 
       const allArgumentsProxy = debateProxy.getLinkedRecord('arguments', {
         first: 0,
-        isPublished: true,
-        isTrashed: false,
+        isPublished: null,
+        isTrashed: null,
       });
       if (!allArgumentsProxy) return;
       const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
+
       allArgumentsProxy.setValue(previousValue - 1, 'totalCount');
 
       const argumentsTrashed = debateProxy.getLinkedRecord('arguments', {
         first: 0,
-        isPublished: true,
+        isPublished: null,
         isTrashed: true,
       });
       if (!argumentsTrashed) return;

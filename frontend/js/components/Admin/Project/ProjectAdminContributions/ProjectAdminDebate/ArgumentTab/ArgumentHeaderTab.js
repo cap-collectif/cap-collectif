@@ -27,6 +27,7 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
     debateArgumentsWaiting,
     argumentsFor,
     argumentsAgainst,
+    debateArgumentsTrashed,
   } = debate;
   const exportUrl = `/debate/${debate.id}/download/arguments`;
   const hasArgumentForOrAgainst = argumentsFor.totalCount > 0 || argumentsAgainst.totalCount > 0;
@@ -57,7 +58,10 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
             )}
           </InlineSelect.Choice>
           <InlineSelect.Choice value="TRASHED">
-            {intl.formatMessage({ id: 'global.trash' })}
+            {intl.formatMessage(
+              { id: 'filter.count.status.trashed' },
+              { num: debateArgumentsTrashed.totalCount },
+            )}
           </InlineSelect.Choice>
         </InlineSelect>
 
@@ -125,6 +129,9 @@ export default createFragmentContainer(ArgumentHeaderTab, {
         totalCount
       }
       debateArgumentsWaiting: arguments(first: 0, isPublished: false, isTrashed: false) {
+        totalCount
+      }
+      debateArgumentsTrashed: arguments(first: 0, isPublished: null, isTrashed: true) {
         totalCount
       }
       argumentsFor: arguments(

@@ -15,6 +15,9 @@ const baseProps = {
     debateArgumentsWaiting: {
       totalCount: 2,
     },
+    debateArgumentsTrashed: {
+      totalCount: 2,
+    },
     argumentsFor: {
       totalCount: 4,
     },

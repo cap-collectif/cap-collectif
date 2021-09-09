@@ -28,7 +28,7 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
       <InlineSelect.Choice
         value="TRASHED"
       >
-        global.trash
+        filter.count.status.trashed
       </InlineSelect.Choice>
     </InlineSelect>
     <ForwardRef
@@ -120,7 +120,7 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
       <InlineSelect.Choice
         value="TRASHED"
       >
-        global.trash
+        filter.count.status.trashed
       </InlineSelect.Choice>
     </InlineSelect>
     <ForwardRef
@@ -212,7 +212,7 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
       <InlineSelect.Choice
         value="TRASHED"
       >
-        global.trash
+        filter.count.status.trashed
       </InlineSelect.Choice>
     </InlineSelect>
     <ForwardRef

@@ -58,6 +58,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
             {debateArguments?.edges
               ?.filter(Boolean)
               .map(edge => edge.node)
+              .filter(Boolean)
               .map(argument => (
                 <AppBox as="li" key={argument.id}>
                   <DebateArgument
