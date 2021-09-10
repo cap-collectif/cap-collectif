@@ -98,6 +98,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/FOSUserBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/theofidry/AliceBundle"
         }
     ],
     "require": {
