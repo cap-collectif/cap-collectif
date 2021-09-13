@@ -46,7 +46,6 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'homepage.customcode',
         'global.timezone',
         'global.site.embed_js',
-        'admin.mail.notifications.send_address',
         'events.map.country',
         'redirectionio.project.id',
     ];
