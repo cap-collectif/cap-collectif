@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,14 +11,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class DebugController extends AbstractController
 {
     /**
-     * @Route("/debug/empty", name="debug_empty", options={"i18n" = false}, condition="'dev' === '%kernel.environment%'")
+     * @Route("/health", name="health_check", options={"i18n" = false})
      */
-    public function empty(Request $request): Response
+    public function health(): Response
     {
-        if ($request->get('twig')) {
-            return $this->render('@CapcoApp/empty.html.twig');
-        }
-
-        return new Response('Nothing to do here');
+        return new JsonResponse([
+            "success" => true,
+            "message" => 'Instance is alive',
+            "data" => [
+                "instance" => getenv('SYMFONY_INSTANCE_NAME')
+            ]
+        ]);
     }
 }

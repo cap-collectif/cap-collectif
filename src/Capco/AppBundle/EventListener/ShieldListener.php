@@ -57,6 +57,9 @@ class ShieldListener
 
         //unsubscribe
         'capco_app_action_token',
+
+        //health check
+        'health_check',
     ];
     protected Manager $manager;
     protected TokenStorageInterface $tokenStorage;
