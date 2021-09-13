@@ -19,6 +19,7 @@ const DEFAULT_PROJECT = {
       id: 'cstep1',
       title: 'Étape de dépôt',
       __typename: 'CollectStep',
+      label: 'step label',
       statuses: [
         {
           id: 'status1',
@@ -59,6 +60,7 @@ const DEFAULT_PROJECT = {
       id: 'sstep1',
       title: 'Étape de sélection',
       __typename: 'SelectionStep',
+      label: 'step label',
       statuses: [
         {
           id: 'status1',

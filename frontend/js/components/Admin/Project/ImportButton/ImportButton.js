@@ -29,9 +29,9 @@ const ImportButton = ({ selectedStepId }: Props) => {
           </Menu.ListItem>
           <Menu.ListItem>
             <Text
-              onClick={() => {
-                setShowModal(true);
-              }}>
+              onClick={() =>
+                setShowModal(true)
+              }>
               {intl.formatMessage({ id: 'import-csv-proposal' })}
             </Text>
           </Menu.ListItem>
@@ -40,9 +40,9 @@ const ImportButton = ({ selectedStepId }: Props) => {
       <ImportProposalsModal
         show={showModal}
         selectedStepId={selectedStepId}
-        onClose={() => {
-          setShowModal(false);
-        }}
+        onClose={() =>
+          setShowModal(false)
+        }
       />
     </>
   );

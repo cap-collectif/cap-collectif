@@ -66,6 +66,7 @@ Array [
   Object {
     "hasTheme": false,
     "id": "cstep1",
+    "label": "step label",
     "title": "Étape de dépôt",
     "type": "CollectStep",
     "votable": false,
@@ -74,6 +75,7 @@ Array [
   Object {
     "hasTheme": false,
     "id": "sstep1",
+    "label": "step label",
     "title": "Étape de sélection",
     "type": "SelectionStep",
     "votable": false,

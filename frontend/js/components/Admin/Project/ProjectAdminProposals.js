@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
@@ -69,6 +69,11 @@ import Button from '~ds/Button/Button';
 import Flex from '~ui/Primitives/Layout/Flex';
 import NewExportButton from '~/components/Admin/Project/ExportButton/NewExportButton';
 import { clearToasts, toast } from '~ds/Toast';
+import Modal from '~ds/Modal/Modal';
+import Heading from '~ui/Primitives/Heading';
+import Text from '~ui/Primitives/Text';
+import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
+import useToastingMachine from '~/utils/hooks/useToastingMachine';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
@@ -90,16 +95,56 @@ type HeaderProps = {|
   +themes: ProjectAdminProposals_themes,
 |};
 
+const displayToastsAfterStepAssignation = (
+  stepsAdded: Uuid[],
+  stepsRemoved: Uuid[],
+  steps: $ReadOnlyArray<StepFilter>,
+  proposals: $ReadOnlyArray<Uuid>,
+  intl: IntlShape,
+) => {
+  const nbProposals = proposals.length;
+  if (stepsAdded.length > 0 || stepsRemoved.length > 0) {
+    let successMessage = 'proposal-placed-in-step';
+    let usedSteps = steps.filter(step => stepsAdded.includes(step.id));
+    if (stepsAdded.length >= 1 && stepsRemoved.length >= 1) {
+      successMessage = 'proposal-move-to-step';
+    } else if (stepsAdded.length < 1 && stepsRemoved.length >= 1) {
+      successMessage = 'withdrawn-proposal-step';
+      usedSteps = steps.filter(step => stepsRemoved.includes(step.id));
+    }
+
+    toast({
+      variant: 'success',
+      content: intl.formatMessage(
+        { id: successMessage },
+        {
+          steps: usedSteps.map(step => step.label).join(', '),
+          num: usedSteps.length,
+          nbProposals,
+        },
+      ),
+      position: 'top',
+    });
+  }
+};
+
 const assignStepProposals = async (
   stepsAdded: Uuid[],
   stepsRemoved: Uuid[],
   selectedProposalIds: $ReadOnlyArray<Uuid>,
   stepSelected: ProposalsStepValues,
   dispatch: any => void,
+  intl: IntlShape,
 ) => {
   try {
-    dispatch({ type: 'START_LOADING' });
-
+    if (selectedProposalIds.length === 1) {
+      toast({
+        variant: 'loading',
+        content: intl.formatMessage({ id: 'loading-contributions' }),
+        position: 'bottom',
+        duration: stepsRemoved.length === 1 && stepsAdded.length === 1 ? 4000 : 2000,
+      });
+    }
     if (stepsAdded.length > 0) {
       await AddProposalsToStepsMutation.commit({
         input: {
@@ -119,8 +164,6 @@ const assignStepProposals = async (
         step: stepSelected,
       });
     }
-
-    dispatch({ type: 'STOP_LOADING' });
   } catch (e) {
     FluxDispatcher.dispatch({
       actionType: UPDATE_ALERT,
@@ -132,26 +175,43 @@ const assignStepProposals = async (
   }
 };
 
+const displaySuccessStatusToast = (selectedProposalIds, intl: IntlShape): void => {
+  toast({
+    variant: 'success',
+    content: intl.formatMessage(
+      { id: 'proposal-status-change' },
+      { num: selectedProposalIds.length },
+    ),
+    position: 'top',
+  });
+};
+
 const assignStatus = async (
   assigneeId: ?Uuid,
   stepSelected: ProposalsStepValues,
   selectedProposalIds: $ReadOnlyArray<Uuid>,
-  closeDropdown: () => void,
-  dispatch: any => void,
+  closeDropdown: ?() => void,
+  intl: IntlShape,
 ) => {
   try {
-    closeDropdown();
-    dispatch({ type: 'START_LOADING' });
-
+    if (closeDropdown) {
+      closeDropdown();
+    }
+    if (selectedProposalIds.length === 1) {
+      toast({
+        variant: 'loading',
+        content: intl.formatMessage({ id: 'loading-contributions' }),
+        position: 'bottom',
+      });
+    }
     await ApplyProposalStatusMutation.commit({
       input: {
         proposalIds: selectedProposalIds,
-        statusId: assigneeId,
+        statusId: assigneeId === 'deleted' ? null : assigneeId,
       },
       step: stepSelected,
     });
-
-    dispatch({ type: 'STOP_LOADING' });
+    displaySuccessStatusToast(selectedProposalIds, intl);
   } catch (e) {
     FluxDispatcher.dispatch({
       actionType: UPDATE_ALERT,
@@ -212,7 +272,9 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
     added: [],
     values: [],
   });
+  const [selectedStatus, setSelectedStatus] = React.useState(null);
   const [selectionStatus, setSelectionStatus] = React.useState(null);
+  const [openConfirmModal, setOpenConfirmModal] = React.useState(false);
 
   React.useEffect(() => {
     setSelectionStatus(getCommonStatusIdWithinProposalIds(project, selectedRows));
@@ -249,7 +311,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       {selectedStep?.type === 'SelectionStep' && districtsWithStep?.length > 0 && (
         <Collapsable align="right">
           <Collapsable.Button>
-            <FormattedMessage id="admin.fields.proposal.map.zone" />
+            {intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}
           </Collapsable.Button>
           <Collapsable.Element
             ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
@@ -302,7 +364,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       {selectedStep?.type === 'SelectionStep' && categoriesWithStep?.length > 0 && (
         <Collapsable align="right">
           <Collapsable.Button>
-            <FormattedMessage id="admin.fields.proposal.category" />
+            {intl.formatMessage({ id: 'admin.fields.proposal.category' })}
           </Collapsable.Button>
           <Collapsable.Element
             ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
@@ -342,7 +404,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       {stepStatuses?.length > 0 && !isRestricted && (
         <Collapsable align="right" key="status-filter">
           <Collapsable.Button>
-            <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
+            {intl.formatMessage({ id: 'admin.fields.proposal.status' }, { tagName: 'p' })}
           </Collapsable.Button>
           <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
             <DropdownSelect
@@ -404,28 +466,164 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       />
     </>
   );
+  let modalBodyMessage = 'mass-placed-proposals-steps';
+  let usedSteps = steps.filter(step => selectionSteps.added.includes(step.id));
+  const usedStepsCompleted = steps.filter(step => selectionSteps.removed.includes(step.id));
+  let stepsOrStatus = '';
+  const stepsOrStatusComplete = usedStepsCompleted.map(step => step.label).join('”, ”');
+  if (selectedRows.length > 1) {
+    if (selectionSteps.added.length >= 1 || selectionSteps.removed.length >= 1) {
+      if (selectionSteps.added.length >= 1 && selectionSteps.removed.length < 1) {
+        modalBodyMessage = 'mass-placed-proposals-steps';
+      } else if (selectionSteps.added.length === 1 && selectionSteps.removed.length === 1) {
+        modalBodyMessage = 'mass-move-proposals-steps';
+      } else if (selectionSteps.added.length >= 1 && selectionSteps.removed.length >= 1) {
+        modalBodyMessage = 'mass-move-proposals-steps';
+      } else if (selectionSteps.added.length < 1 && selectionSteps.removed.length >= 1) {
+        modalBodyMessage = 'mass-withdrawn-proposals-steps';
+        usedSteps = steps.filter(step => selectionSteps.removed.includes(step.id));
+      }
+      stepsOrStatus = usedSteps.map(step => step.label).join('”, ”');
+    } else if (selectedStatus) {
+      if (selectedStatus === 'deleted') {
+        modalBodyMessage = 'proposals-confirm-removes-status';
+        stepsOrStatus = '';
+      } else {
+        modalBodyMessage = 'proposals-confirm-change-status';
+        usedSteps = stepStatuses.filter(status => status.id === selectedStatus);
+        stepsOrStatus = usedSteps.map(step => step.name).join(', ');
+      }
+    }
+  }
+  const { isLoading, startLoading, stopLoading } = useLoadingMachine();
+  const { startToasting, stopToasting } = useToastingMachine();
 
   const renderActions = (
     <React.Fragment>
       {selectedRows.length > 1 && parameters.filters.state === 'PUBLISHED' && (
         <>
           <S.MergeButton onClick={() => setIsMergeModaleVisible(true)} id="merge-button">
-            <FormattedMessage id="proposal.add_fusion" />
+            {intl.formatMessage({ id: 'proposal.add_fusion' })}
           </S.MergeButton>
           <S.Divider />
         </>
       )}
+      <Modal
+        ariaLabel="contained-modal-title-lg"
+        preventBodyScroll
+        scrollBehavior="inside"
+        show={openConfirmModal}
+        hideOnClickOutside={false}
+        hideOnEsc={false}
+        hideCloseButton
+        mt="133px"
+        width={['100%', '555px']}>
+        <Modal.Header borderBottom="1px solid #DADEE1" px={6} py={6}>
+          <Heading>{intl.formatMessage({ id: 'confirm-grouped-action' })}</Heading>
+        </Modal.Header>
+        <Modal.Body p={6}>
+          <Text lineHeight="24px" as="div" px={6}>
+            <FormattedHTMLMessage
+              id={modalBodyMessage}
+              values={{
+                stepsOrStatus,
+                stepsOrStatusComplete,
+                num: selectedRows.length,
+              }}
+            />
+          </Text>
+        </Modal.Body>
+        <Modal.Footer
+          as="div"
+          py={4}
+          px={6}
+          align={['stretch', 'center']}
+          direction={['column', 'row']}
+          borderTop="1px solid #DADEE1">
+          <Button
+            variant="secondary"
+            variantSize="big"
+            variantColor="hierarchy"
+            justifyContent={['center']}
+            disabled={isLoading}
+            mr={6}
+            onClick={() => setOpenConfirmModal(false)}>
+            {intl.formatMessage({ id: 'global.cancel' })}
+          </Button>
+          <Button
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+            disabled={isLoading}
+            isLoading={isLoading}
+            justifyContent={['center', 'flex-start']}
+            onClick={() => {
+              startLoading();
+              if (selectionSteps.added.length >= 1 || selectionSteps.removed.length >= 1) {
+                assignStepProposals(
+                  selectionSteps.added,
+                  selectionSteps.removed,
+                  selectedRows,
+                  selectedStepId,
+                  dispatch,
+                  intl,
+                ).then(() => {
+                  setOpenConfirmModal(false);
+                  setSelectionSteps({
+                    all: [],
+                    removed: [],
+                    added: [],
+                    values: [],
+                  });
+                  displayToastsAfterStepAssignation(
+                    selectionSteps.added,
+                    selectionSteps.removed,
+                    steps,
+                    selectedRows,
+                    intl,
+                  );
+                  stopLoading();
+                });
+              } else {
+                startToasting();
+                assignStatus(selectedStatus, selectedStepId, selectedRows, null, intl).then(() => {
+                  setOpenConfirmModal(false);
+                  setSelectedStatus(null);
+                  stopToasting();
+                  stopLoading();
+                });
+              }
+            }}>
+            {intl.formatMessage({ id: 'global.validate' })}
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Collapsable
         align="right"
-        onClose={() =>
-          assignStepProposals(
-            selectionSteps.added,
-            selectionSteps.removed,
-            selectedRows,
-            selectedStepId,
-            dispatch,
-          )
-        }>
+        onClose={() => {
+          if (selectionSteps.added.length >= 1 || selectionSteps.removed.length >= 1) {
+            if (selectedRows.length > 1) {
+              setOpenConfirmModal(true);
+            } else {
+              assignStepProposals(
+                selectionSteps.added,
+                selectionSteps.removed,
+                selectedRows,
+                selectedStepId,
+                dispatch,
+                intl,
+              ).then(() => {
+                displayToastsAfterStepAssignation(
+                  selectionSteps.added,
+                  selectionSteps.removed,
+                  steps,
+                  selectedRows,
+                  intl,
+                );
+              });
+            }
+          }
+        }}>
         <Collapsable.Button>
           <FormattedMessage tagName="p" id="synthesis.edition.action.publish.field.parent" />
         </Collapsable.Button>
@@ -462,9 +660,19 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
               ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.status' })}>
               <DropdownSelect
                 value={selectionStatus}
-                onChange={newValue =>
-                  assignStatus(newValue, selectedStepId, selectedRows, closeDropdown, dispatch)
-                }
+                onChange={newValue => {
+                  setSelectedStatus(newValue ?? 'deleted');
+                  if (selectedRows.length > 1) {
+                    setOpenConfirmModal(true);
+                  } else {
+                    startToasting();
+                    assignStatus(newValue, selectedStepId, selectedRows, closeDropdown, intl).then(
+                      () => {
+                        setTimeout(stopToasting, 3000);
+                      },
+                    );
+                  }
+                }}
                 title={intl.formatMessage({ id: 'change.status.to' })}>
                 {stepStatuses.length === 0 && (
                   <DropdownSelect.Message>
@@ -522,7 +730,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       ) : (
         <React.Fragment>
           <p>
-            {rowsCount} <FormattedMessage id="global.proposals" />
+            {rowsCount} {intl.formatMessage({ id: 'global.proposals' })}
           </p>
           <AnalysisProposalListFiltersContainer>
             <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
@@ -598,13 +806,14 @@ export const ProjectAdminProposals = ({
 
     loadMore();
   }, [intl, loadMore, project, loading]);
+  const { isToasting } = useToastingMachine();
 
   React.useEffect(() => {
-    if (!loading || !relay.hasMore() || !relay.isLoading()) {
+    if (!loading && (!relay.hasMore() || !relay.isLoading()) && !isToasting) {
       clearToasts();
     }
     loadAll();
-  }, [loadAll, loading, relay]);
+  }, [loadAll, loading, relay, isToasting]);
 
   const isInteractive =
     parameters.filters.state !== 'ALL' &&
@@ -621,7 +830,7 @@ export const ProjectAdminProposals = ({
             leftIcon={ICON_NAME_DS.LONG_ARROW_LEFT}
             size="small"
             mb={4}>
-            <FormattedMessage id="global.steps" />
+            {intl.formatMessage({ id: 'global.steps' })}
           </Button>
         )}
         <Flex justify="space-between">
@@ -681,28 +890,28 @@ export const ProjectAdminProposals = ({
                 });
               }}>
               <InlineSelect.Choice value="ALL">
-                <FormattedMessage
-                  id="filter.count.status.all"
-                  values={{ num: project.proposalsAll?.totalCount }}
-                />
+                {intl.formatMessage(
+                  { id: 'filter.count.status.all' },
+                  { num: project.proposalsAll?.totalCount },
+                )}
               </InlineSelect.Choice>
               <InlineSelect.Choice value="PUBLISHED">
-                <FormattedMessage
-                  id="filter.count.status.published"
-                  values={{ num: project.proposalsPublished?.totalCount }}
-                />
+                {intl.formatMessage(
+                  { id: 'filter.count.status.published' },
+                  { num: project.proposalsPublished?.totalCount },
+                )}
               </InlineSelect.Choice>
               <InlineSelect.Choice value="DRAFT">
-                <FormattedMessage
-                  id="filter.count.status.draft"
-                  values={{ num: project.proposalsDraft?.totalCount }}
-                />
+                {intl.formatMessage(
+                  { id: 'filter.count.status.draft' },
+                  { num: project.proposalsDraft?.totalCount },
+                )}
               </InlineSelect.Choice>
               <InlineSelect.Choice value="TRASHED">
-                <FormattedMessage
-                  id="filter.count.status.trash"
-                  values={{ num: project.proposalsTrashed?.totalCount }}
-                />
+                {intl.formatMessage(
+                  { id: 'filter.count.status.trash' },
+                  { num: project.proposalsTrashed?.totalCount },
+                )}
               </InlineSelect.Choice>
             </InlineSelect>
           </div>
@@ -827,6 +1036,7 @@ const container = createPaginationContainer(
           __typename
           id
           title
+          label
           # ProposalStep could be used here for CollectStep & SelectionStep
           # but relay-hooks doesn't retrieve this in store when preloading
           ... on CollectStep {

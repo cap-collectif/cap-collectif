@@ -64,50 +64,22 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 2,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 3,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -525,6 +497,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -542,6 +515,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -1149,50 +1123,22 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 2,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 3,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -1610,6 +1556,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -1627,6 +1574,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -2208,10 +2156,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
       size="small"
       variant="tertiary"
     >
-      <FormattedMessage
-        id="global.steps"
-        values={Object {}}
-      />
+      global.steps
     </Button>
     <ForwardRef
       justify="space-between"
@@ -2274,50 +2219,22 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 2,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 3,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -2735,6 +2652,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -2752,6 +2670,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -3333,10 +3252,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
       size="small"
       variant="tertiary"
     >
-      <FormattedMessage
-        id="global.steps"
-        values={Object {}}
-      />
+      global.steps
     </Button>
     <ForwardRef
       justify="space-between"
@@ -3371,50 +3287,22 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 2,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 3,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -3832,6 +3720,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -3849,6 +3738,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -4430,10 +4320,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
       size="small"
       variant="tertiary"
     >
-      <FormattedMessage
-        id="global.steps"
-        values={Object {}}
-      />
+      global.steps
     </Button>
     <ForwardRef
       justify="space-between"
@@ -4487,50 +4374,22 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 2,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 3,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -4939,6 +4798,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -4956,6 +4816,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -5537,10 +5398,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
       size="small"
       variant="tertiary"
     >
-      <FormattedMessage
-        id="global.steps"
-        values={Object {}}
-      />
+      global.steps
     </Button>
     <ForwardRef
       justify="space-between"
@@ -5575,50 +5433,22 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 9,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 4,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 2,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 3,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -6027,6 +5857,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -6044,6 +5875,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -6625,10 +6457,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
       size="small"
       variant="tertiary"
     >
-      <FormattedMessage
-        id="global.steps"
-        values={Object {}}
-      />
+      global.steps
     </Button>
     <ForwardRef
       justify="space-between"
@@ -6691,50 +6520,22 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -6817,6 +6618,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -6834,6 +6636,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",
@@ -6898,10 +6701,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
       size="small"
       variant="tertiary"
     >
-      <FormattedMessage
-        id="global.steps"
-        values={Object {}}
-      />
+      global.steps
     </Button>
     <ForwardRef
       justify="space-between"
@@ -6936,50 +6736,22 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           <InlineSelect.Choice
             value="ALL"
           >
-            <FormattedMessage
-              id="filter.count.status.all"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.all
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="PUBLISHED"
           >
-            <FormattedMessage
-              id="filter.count.status.published"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.published
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="DRAFT"
           >
-            <FormattedMessage
-              id="filter.count.status.draft"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.draft
           </InlineSelect.Choice>
           <InlineSelect.Choice
             value="TRASHED"
           >
-            <FormattedMessage
-              id="filter.count.status.trash"
-              values={
-                Object {
-                  "num": 0,
-                }
-              }
-            />
+            filter.count.status.trash
           </InlineSelect.Choice>
         </InlineSelect>
       </div>
@@ -7062,6 +6834,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                     "usingThemes": false,
                   },
                   "id": "cstep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "SUCCESS",
@@ -7079,6 +6852,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                 Object {
                   "__typename": "SelectionStep",
                   "id": "selectionStep1",
+                  "label": "step label",
                   "statuses": Array [
                     Object {
                       "color": "INFO",

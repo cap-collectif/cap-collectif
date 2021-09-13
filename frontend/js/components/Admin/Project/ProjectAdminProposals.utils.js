@@ -43,6 +43,7 @@ export type StepFilter = {|
   +type: string,
   +votesRanking: boolean,
   +votable: boolean,
+  +label: string,
 |};
 
 export type CategoryOrStepFilter = {|
@@ -265,6 +266,7 @@ export const getFormattedStepsChoicesForProject = (
       votesRanking: step.votesRanking || false,
       votable: step.votable || false,
       type: step.__typename,
+      label: step.label,
     })): any): $ReadOnlyArray<StepFilter>);
 };
 

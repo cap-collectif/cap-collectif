@@ -28,6 +28,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
       id: 'cstep1',
       title: 'Étape de dépôt',
       __typename: 'CollectStep',
+      label: 'step label',
       statuses: [
         {
           id: 'status1',
@@ -68,6 +69,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
       __typename: 'SelectionStep',
       id: 'selectionStep1',
       title: 'Sélection',
+      label: 'step label',
       statuses: [
         {
           id: 'status4',
@@ -447,6 +449,7 @@ const DEFAULT_PROJECT = {
       id: 'cstep1',
       title: 'Étape de dépôt',
       __typename: 'CollectStep',
+      label: 'step label',
       statuses: [
         {
           id: 'status1',
@@ -487,6 +490,7 @@ const DEFAULT_PROJECT = {
       __typename: 'SelectionStep',
       id: 'selectionStep1',
       title: 'Sélection',
+      label: 'step label',
       statuses: [
         {
           id: 'status4',
