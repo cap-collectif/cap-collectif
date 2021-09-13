@@ -19,6 +19,7 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
             $debateArgument = (new DebateAnonymousArgument($debate))
                 ->setEmail($input->offsetGet('email'))
                 ->setUsername($input->offsetGet('username'))
+                ->setConsentInternalCommunication($input->offsetGet('consentInternalCommunication'))
                 ->setToken($this->tokenGenerator->generateToken());
 
             self::setDebateArgumentOrigin($debateArgument, $input);

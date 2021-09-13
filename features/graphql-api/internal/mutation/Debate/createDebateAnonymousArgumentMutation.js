@@ -71,4 +71,23 @@ describe('Internal|CreateDebateAnonymousArgument', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+
+  it('create argument and consent', async () => {
+    await expect(
+      graphql(
+        CreateDebateAnonymousArgumentMutation,
+        {
+          input: {
+            debate: toGlobalId('Debate', 'debateCannabis'),
+            body: "j'ai aussi des trucs à dire et en plus je veux bien recevoir vos mails",
+            type: 'FOR',
+            username: 'jean-mi',
+            email: 'jeanmi65@laposte.fr',
+            consentInternalCommunication: true,
+          },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

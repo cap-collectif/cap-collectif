@@ -19,3 +19,7 @@ InternalDebateAnonymousArgument:
             username:
                 type: String
                 description: 'Username (not mandatory)'
+            consentInternalCommunication:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                type: Boolean!
+                description: 'Whether or not the author of the argument consents to receive emails from us.'

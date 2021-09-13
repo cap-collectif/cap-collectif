@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousArgument:
         token: jesuisletokendudebateanonymousargumentfor1
         email: 'kevin94@hotmail.com'
         username: 'rasta94'
+        consentInternalCommunication: true
     DebateAnonymousArgumentAgainst1:
         __construct: ['@debateCannabis']
         id: DebateAnonymousArgumentAgainst1

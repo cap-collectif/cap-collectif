@@ -342,7 +342,7 @@ input AddDebateAnonymousVoteInput {
 
 type AddDebateAnonymousVotePayload {
   """The token of the newly created anonymous vote."""
-  token: String!
+  token: String
 
   """The newly created anonymous vote."""
   debateAnonymousVote: DebateAnonymousVote
@@ -2934,6 +2934,9 @@ input CreateDebateAnonymousArgumentInput {
 
   """The username of the author if no account"""
   username: String = null
+
+  """Does consent to receive internal email."""
+  consentInternalCommunication: Boolean = false
   clientMutationId: String
 }
 
@@ -3731,6 +3734,11 @@ type DebateAnonymousArgument implements Node & AbstractDebateArgument & Trashabl
 
   """Username (not mandatory)"""
   username: String
+
+  """
+  Whether or not the author of the argument consents to receive emails from us.
+  """
+  consentInternalCommunication: Boolean!
 }
 
 """An anonymous debate vote."""

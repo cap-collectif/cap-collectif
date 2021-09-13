@@ -3,7 +3,7 @@ AddDebateAnonymousVotePayload:
     config:
         fields:
             token:
-                type: 'String!'
+                type: 'String'
                 description: 'The token of the newly created anonymous vote.'
             debateAnonymousVote:
                 type: 'InternalDebateAnonymousVote'

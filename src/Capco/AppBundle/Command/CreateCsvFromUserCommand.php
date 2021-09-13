@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\Command\Utils\BooleanCell;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
@@ -472,7 +473,7 @@ EOF;
             foreach (self::COMMENTS_EXPORT_PATHS as $columnName => $columnKey) {
                 $val = Arr::path($content, $columnKey, null, '.');
                 if (\is_bool($val)) {
-                    $val = $val ? 'Yes' : 'No';
+                    $val = BooleanCell::toString($val);
                 }
                 $row[] = $val;
             }

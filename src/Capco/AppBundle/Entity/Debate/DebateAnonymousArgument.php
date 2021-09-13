@@ -51,6 +51,11 @@ class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParti
     use VotableOkTrait;
 
     /**
+     * @ORM\Column(name="consent_internal_communication", type="boolean", nullable=false, options={"default" = false})
+     */
+    protected bool $consentInternalCommunication = false;
+
+    /**
      * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
@@ -149,6 +154,18 @@ class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParti
 
     public function setAuthor(User $user)
     {
+        return $this;
+    }
+
+    public function isConsentInternalCommunication(): bool
+    {
+        return $this->consentInternalCommunication;
+    }
+
+    public function setConsentInternalCommunication(bool $consentInternalCommunication): self
+    {
+        $this->consentInternalCommunication = $consentInternalCommunication;
+
         return $this;
     }
 

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\Command\Utils\BooleanCell;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
 use Capco\AppBundle\Toggle\Manager;
@@ -183,7 +184,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
                 }
             }
             if (\is_bool($val)) {
-                $val = $val ? 'Yes' : 'No';
+                $val = BooleanCell::toString($val);
             }
             $row[] = $val;
         }

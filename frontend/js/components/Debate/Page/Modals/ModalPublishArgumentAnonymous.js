@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useIntl, type IntlShape } from 'react-intl';
+import { useIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, change, SubmissionError } from 'redux-form';
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay';
@@ -34,7 +34,12 @@ const STATE = {
   VERIFY_MAIL: 'VERIFY_MAIL',
 };
 
-type FormValues = {| +username: ?string, +email: string, +charte: boolean |};
+type FormValues = {|
+  +username: ?string,
+  +email: string,
+  +charte: boolean,
+  +consentInternalCommunication: boolean,
+|};
 
 type BeforeConnectProps = {|
   +formName: string,
@@ -45,6 +50,7 @@ type BeforeConnectProps = {|
   +viewerVoteValue: 'FOR' | 'AGAINST',
   +debate: string,
   +argumentBody?: string,
+  +internalCommunicationFrom?: string,
 |};
 
 type StateProps = {|
@@ -78,7 +84,7 @@ const isEmailAlreadyUsed = graphql`
 `;
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { username, email } = values;
+  const { username, email, consentInternalCommunication } = values;
   const { viewerVoteValue, debate, body, setModalState, location, intl } = props;
   return fetchQuery_DEPRECATED(environment, isEmailAlreadyUsed, {
     email,
@@ -103,6 +109,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           debate,
           type: viewerVoteValue,
           widgetOriginURI: location,
+          consentInternalCommunication,
         },
       })
         .then(response => {
@@ -150,6 +157,7 @@ const ModalContent = ({
   intl,
   email,
   debate,
+  internalCommunicationFrom,
   submitting,
 }: Props) => {
   const focusInputRef = React.useCallback(node => {
@@ -283,6 +291,19 @@ const ModalContent = ({
                       <PrivacyPolicyComponent privacyPolicyRequired={privacyPolicyRequired} />
                     </span>
                   </Field>
+                  <Field
+                    id="consent-internal-communication"
+                    name="consentInternalCommunication"
+                    component={component}
+                    type="checkbox"
+                    labelClassName="font-weight-normal">
+                    <FormattedMessage
+                      id="receive-news-and-results-of-the-consultations"
+                      values={{
+                        from: internalCommunicationFrom,
+                      }}
+                    />
+                  </Field>
                 </AppBox>
               </Flex>
             </Modal.Body>
@@ -388,9 +409,7 @@ export const ModalPublishArgumentAnonymous = ({
   );
 };
 
-export const validate = (
-  values: FormValues,
-): { errors: { username?: string, email?: string, charte?: string } } => {
+export const validate = (values: FormValues): { errors: { email?: string, charte?: string } } => {
   const errors = {};
 
   if (!values.email || !isEmail(values.email)) {
@@ -410,10 +429,12 @@ const mapStateToProps = (state: State, props: BeforeConnectProps) => {
     email: formValueSelector(anonymousFormMail)(state, 'email'),
     privacyPolicyRequired: state.default.features.privacy_policy || false,
     cguName: state.default.parameters['signin.cgu.name'],
+    internalCommunicationFrom: state.default.parameters['global.site.communication_from'],
     initialValues: {
       username: null,
       email: '',
       charte: false,
+      consentInternalCommunication: false,
     },
   };
 };

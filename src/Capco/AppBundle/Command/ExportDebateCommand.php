@@ -6,6 +6,7 @@ use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer;
+use Capco\AppBundle\Command\Utils\BooleanCell;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\Repository\DebateRepository;
@@ -34,6 +35,9 @@ class ExportDebateCommand extends BaseExportCommand
         'argument_author_email' => 'argument_author_email',
         'argument_author_userType_name' => 'author.userType.name',
         'argument_author_zipCode' => 'author.zipCode',
+        'argument_author_account' => 'argument_author_account',
+        'argument_author_internal_communication' => 'argument_author_internal_communication',
+        'argument_author_external_communication' => 'argument_author_external_communication',
 
         'argument_geoip_country_name' => 'geoip.countryName',
         'argument_geoip_region_name' => 'geoip.regionName',
@@ -265,14 +269,25 @@ class ExportDebateCommand extends BaseExportCommand
             return self::getRowCellValueVoteOrigin($data);
         }
         if ('argument_author_username' === $treePath) {
-            return isset($data['username']) && null !== $data['username']
-                ? $data['username']
-                : $data['author']['username'];
+            return self::hasAccount($data) ? $data['author']['username'] : $data['username'];
         }
         if ('argument_author_email' === $treePath) {
-            return isset($data['email']) && null !== $data['email']
-                ? $data['email']
-                : $data['author']['email'];
+            return self::hasAccount($data) ? $data['author']['email'] : $data['email'];
+        }
+        if ('argument_author_account' === $treePath) {
+            return BooleanCell::toString(self::hasAccount($data));
+        }
+        if ('argument_author_internal_communication' === $treePath) {
+            return BooleanCell::toString(
+                self::hasAccount($data)
+                    ? $data['author']['consentInternalCommunication']
+                    : $data['consentInternalCommunication']
+            );
+        }
+        if ('argument_author_external_communication' === $treePath) {
+            return BooleanCell::toString(
+                self::hasAccount($data) ?? $data['author']['consentInternalCommunication']
+            );
         }
         $treePathParts = explode('.', $treePath);
         if (1 === \count($treePathParts)) {
@@ -401,11 +416,14 @@ class ExportDebateCommand extends BaseExportCommand
                 userType {
                   name
                 }
+                consentInternalCommunication
+                consentExternalCommunication
               }
             }
             ... on DebateAnonymousArgument {
                 username
                 email
+                consentInternalCommunication
             }
             body
             type
@@ -505,5 +523,10 @@ EOF;
             default:
                 throw new \RuntimeException('unknown order value ' . $orderOption);
         }
+    }
+
+    private static function hasAccount(array $data): bool
+    {
+        return isset($data['author']) && \is_array($data['author']);
     }
 }

@@ -17,6 +17,23 @@ Object {
 }
 `;
 
+exports[`Internal|CreateDebateAnonymousArgument create argument and consent 1`] = `
+Object {
+  "createDebateAnonymousArgument": Object {
+    "debateArgument": Object {
+      "body": "j'ai aussi des trucs à dire et en plus je veux bien recevoir vos mails",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "published": false,
+      "type": "FOR",
+      "username": "jean-mi",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
 exports[`Internal|CreateDebateAnonymousArgument try to create a second argument 1`] = `
 Object {
   "createDebateAnonymousArgument": Object {

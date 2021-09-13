@@ -166,6 +166,8 @@ Scenario: Admin wants to export debate arguments and votes
   And exported "csv" file with name "debate-debateCannabis-arguments.csv" should match its snapshot
   And exported "csv" file with name "debate-debateConfinement-arguments.csv" should match its snapshot
   And exported "csv" file with name "debate-debateOculusQuest-arguments.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateWysiwyg-arguments.csv" should match its snapshot
   And exported "csv" file with name "debate-debateCannabis-votes.csv" should match its snapshot
   And exported "csv" file with name "debate-debateConfinement-votes.csv" should match its snapshot
   And exported "csv" file with name "debate-debateOculusQuest-votes.csv" should match its snapshot
+  And exported "csv" file with name "debate-debateWysiwyg-votes.csv" should match its snapshot
