@@ -9,6 +9,7 @@ import { ICON_NAME } from '~ds/Icon/Icon';
 
 type Props = {
   project: RenderPrivateAccess_project$key,
+  isOnProjectCard?: boolean,
 };
 
 const FRAGMENT = graphql`
@@ -18,7 +19,7 @@ const FRAGMENT = graphql`
   }
 `;
 
-const RenderPrivateAccess = ({ project }: Props): React.Node => {
+const RenderPrivateAccess = ({ project, isOnProjectCard = false }: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
   let visibleBy = 'global.draft.only_visible_by_you';
   if (data && data.visibility && data.visibility === 'ADMIN') {
@@ -31,7 +32,8 @@ const RenderPrivateAccess = ({ project }: Props): React.Node => {
         id="restricted-access"
         icon={ICON_NAME.LOCK}
         variant="neutral-gray"
-        color={data.archived ? 'neutral-gray.500' : 'neutral-gray.800'}>
+        color={data.archived ? 'neutral-gray.500' : 'neutral-gray.800'}
+        mr={isOnProjectCard ? 4 : 0}>
         <FormattedMessage id="restrictedaccess" />
       </Tag>
     </Tooltip>

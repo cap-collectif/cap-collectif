@@ -131,7 +131,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       className="sc-bdnxRM fyCKaM"
     >
       <div
-        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS CLPlG jVkzaf cguwDa"
+        className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS gaGbxY jVkzaf cguwDa"
         id="restricted-access"
         onClick={[Function]}
         onMouseEnter={[Function]}

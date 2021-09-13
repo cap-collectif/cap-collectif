@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for closed step which remains a current step 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >
@@ -222,7 +224,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for future project 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >
@@ -362,7 +366,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >
@@ -650,7 +656,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open step (with no actual participative step) 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >
@@ -1006,7 +1014,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for timeless step 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >
@@ -1291,7 +1301,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements when project is archived 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >
@@ -1392,7 +1404,9 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 `;
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body with h2 title & elements for closed step 1`] = `
-<Body>
+<Body
+  position="relative"
+>
   <div
     className="flex-1"
   >

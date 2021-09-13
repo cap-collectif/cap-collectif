@@ -8,35 +8,46 @@ import type { ProjectRestrictedAccessFragment_project$key } from '~relay/Project
 
 type Props = {
   project: ProjectRestrictedAccessFragment_project$key,
+  isOnProjectCard?: boolean,
 };
 
 const FRAGMENT = graphql`
   fragment ProjectRestrictedAccessFragment_project on Project
     @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
     visibility
+
     ...RenderCustomAccess_project @arguments(count: $count, cursor: $cursor)
     ...RenderPrivateAccess_project
   }
 `;
 
-const ProjectRestrictedAccessFragment = ({ project }: Props): React.Node => {
+const ProjectRestrictedAccessFragment = ({
+  project,
+  isOnProjectCard = false,
+}: Props): React.Node => {
   const data = useFragment(FRAGMENT, project);
-
   if (data && data.visibility) {
     if (data.visibility === 'CUSTOM') {
       return (
-        <AppBox style={{ cursor: 'pointer' }} position="absolute" top="12px" right="10px">
+        <AppBox
+          style={{ cursor: 'pointer' }}
+          position="absolute"
+          top={isOnProjectCard ? '-44px' : '12px'}
+          right={isOnProjectCard ? 0 : '10px'}>
           <React.Fragment>
-            <RenderCustomAccess project={data} />
+            <RenderCustomAccess project={data} isOnProjectCard={isOnProjectCard} />
           </React.Fragment>
         </AppBox>
       );
     }
     if (data.visibility === 'ME' || data.visibility === 'ADMIN') {
       return (
-        <AppBox position="absolute" top="12px" right="10px">
+        <AppBox
+          position="absolute"
+          top={isOnProjectCard ? '-44px' : '12px'}
+          right={isOnProjectCard ? 0 : '10px'}>
           <React.Fragment>
-            <RenderPrivateAccess project={data} />
+            <RenderPrivateAccess project={data} isOnProjectCard={isOnProjectCard} />
           </React.Fragment>
         </AppBox>
       );

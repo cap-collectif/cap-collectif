@@ -178,7 +178,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const isCurrentStep = getCurrentStep(project);
 
     return (
-      <Card.Body>
+      <Card.Body position="relative">
         <div className="flex-1">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}

@@ -3,7 +3,7 @@
 exports[`<RenderCustomAccess /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS CLPlG jVkzaf cguwDa"
+    className="sc-bdnxRM Tag__TagInner-bjwVBq Tag___StyledTagInner-cdSrrS gaGbxY jVkzaf cguwDa"
     id="restricted-access"
     onClick={[Function]}
     onMouseEnter={[Function]}

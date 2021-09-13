@@ -9,7 +9,7 @@ import Tooltip from '~ds/Tooltip/Tooltip';
 import type { RenderCustomAccess_project$key } from '~relay/RenderCustomAccess_project.graphql';
 import { ICON_NAME } from '~ds/Icon/Icon';
 
-type Props = {| +project: RenderCustomAccess_project$key |};
+type Props = {| +project: RenderCustomAccess_project$key, +isOnProjectCard?: boolean |};
 const FRAGMENT = graphql`
   fragment RenderCustomAccess_project on Project
     @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
@@ -21,7 +21,7 @@ const FRAGMENT = graphql`
   }
 `;
 
-const RenderCustomAccess = ({ project }: Props): React.Node => {
+const RenderCustomAccess = ({ project, isOnProjectCard = false }: Props): React.Node => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
   const data = useFragment(FRAGMENT, project);
@@ -45,7 +45,8 @@ const RenderCustomAccess = ({ project }: Props): React.Node => {
           icon={ICON_NAME.LOCK}
           variant="neutral-gray"
           color={data?.archived ? 'neutral-gray.500' : 'neutral-gray.800'}
-          onClick={onOpen}>
+          onClick={onOpen}
+          mr={isOnProjectCard ? 4 : 0}>
           <FormattedMessage id="restrictedaccess" />
         </Tag>
       </Tooltip>

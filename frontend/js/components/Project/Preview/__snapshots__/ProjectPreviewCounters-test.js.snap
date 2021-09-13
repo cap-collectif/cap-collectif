@@ -28,6 +28,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters when projec
     />
     <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
+      isOnProjectCard={true}
       project={
         Object {
           "$fragmentRefs": null,
@@ -154,6 +155,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
     />
     <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
+      isOnProjectCard={true}
       project={
         Object {
           "$fragmentRefs": null,
@@ -245,6 +247,7 @@ exports[`<ProjectPreviewCounters /> should render correctly counters without dis
     />
     <ProjectRestrictedAccessFragment
       icon="cap-lock-2-1"
+      isOnProjectCard={true}
       project={
         Object {
           "$fragmentRefs": null,
