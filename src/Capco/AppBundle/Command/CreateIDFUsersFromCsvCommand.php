@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Entity\Row;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,12 +18,15 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
     const HEADERS = ['username', 'email', 'openid_id'];
     protected UserManagerInterface $userManager;
     protected ConvertCsvToArray $csvReader;
+    private UserRepository $userRepository;
 
     public function __construct(
         ?string $name,
         UserManagerInterface $userManager,
-        ConvertCsvToArray $csvReader
+        ConvertCsvToArray $csvReader,
+        UserRepository $userRepository
     ) {
+        $this->userRepository = $userRepository;
         parent::__construct($name, $userManager, $csvReader);
     }
 
@@ -95,6 +99,9 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
             }
             $needle = $row['email'];
             if (isset($deduplicatedRows[$needle])) {
+                continue;
+            }
+            if($this->userRepository->findOneByEmail($needle)) {
                 continue;
             }
             $deduplicatedRows[$needle] = $row;
