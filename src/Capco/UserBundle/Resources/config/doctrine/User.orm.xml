@@ -44,7 +44,7 @@
         </field>
 
         <field name="facebook_id" column="facebook_id" type="string" length="255" nullable="true" />
-        <field name="facebook_access_token" column="facebook_access_token" type="string" length="255" nullable="true" />
+        <field name="facebook_access_token" column="facebook_access_token" type="string" length="511" nullable="true" />
         <field name="facebookUrl" column="facebook_url" type="string" length="255" nullable="true" />
 
         <field name="openIdAccessToken" column="openid_access_token" type="text" nullable="true" />
