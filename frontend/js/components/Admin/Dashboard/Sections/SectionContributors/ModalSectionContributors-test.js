@@ -24,6 +24,9 @@ describe('<ModalSectionContributors />', () => {
         contributors {
           ...ModalSectionContributors_contributors
         }
+        anonymousContributors {
+          ...ModalSectionContributors_anonymousContributors
+        }
       }
     }
   `;
@@ -42,6 +45,19 @@ describe('<ModalSectionContributors />', () => {
         },
       ],
     }),
+    PlatformAnalyticsAnonymousContributors: () => ({
+      totalCount: 10,
+      values: [
+        {
+          key: '2014-12-01T00:00:00.000Z',
+          totalCount: 6,
+        },
+        {
+          key: '2015-01-01T00:00:00.000Z',
+          totalCount: 4,
+        },
+      ],
+    }),
   };
 
   beforeEach(() => {
@@ -57,9 +73,15 @@ describe('<ModalSectionContributors />', () => {
 
     const TestRenderer = ({ componentProps, queryVariables: variables }) => {
       const data = useLazyLoadQuery<ModalSectionContributorsTestQuery>(query, variables);
-      if (!data?.analytics?.contributors) return null;
+      const anonymousContributors = data?.analytics?.anonymousContributors;
+      const contributors = data?.analytics?.contributors;
+      if (!contributors && !anonymousContributors) return null;
       return (
-        <ModalSectionContributors contributors={data.analytics.contributors} {...componentProps} />
+        <ModalSectionContributors
+          anonymousContributors={anonymousContributors}
+          contributors={contributors}
+          {...componentProps}
+        />
       );
     };
 

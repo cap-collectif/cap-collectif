@@ -235,7 +235,7 @@ Object {
         },
         Object {
           "key": "2016-01-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 0,
         },
         Object {
           "key": "2016-02-01T00:00:00.000Z",
@@ -283,11 +283,11 @@ Object {
         },
         Object {
           "key": "2017-01-01T00:00:00.000Z",
-          "totalCount": 82,
+          "totalCount": 25,
         },
         Object {
           "key": "2017-02-01T00:00:00.000Z",
-          "totalCount": 54,
+          "totalCount": 42,
         },
         Object {
           "key": "2017-03-01T00:00:00.000Z",
@@ -331,23 +331,23 @@ Object {
         },
         Object {
           "key": "2018-01-01T00:00:00.000Z",
-          "totalCount": 58,
+          "totalCount": 8,
         },
         Object {
           "key": "2018-02-01T00:00:00.000Z",
-          "totalCount": 72,
+          "totalCount": 46,
         },
         Object {
           "key": "2018-03-01T00:00:00.000Z",
-          "totalCount": 137,
+          "totalCount": 74,
         },
         Object {
           "key": "2018-04-01T00:00:00.000Z",
-          "totalCount": 17,
+          "totalCount": 5,
         },
         Object {
           "key": "2018-05-01T00:00:00.000Z",
-          "totalCount": 20,
+          "totalCount": 0,
         },
         Object {
           "key": "2018-06-01T00:00:00.000Z",
@@ -2093,56 +2093,8 @@ Object {
     "contributions": Object {
       "values": Array [
         Object {
-          "key": "2016-01-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2016-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
           "key": "2017-01-01T00:00:00.000Z",
-          "totalCount": 39,
+          "totalCount": 8,
         },
         Object {
           "key": "2017-02-01T00:00:00.000Z",
@@ -2190,7 +2142,7 @@ Object {
         },
         Object {
           "key": "2018-01-01T00:00:00.000Z",
-          "totalCount": 50,
+          "totalCount": 0,
         },
         Object {
           "key": "2018-02-01T00:00:00.000Z",
@@ -2198,7 +2150,7 @@ Object {
         },
         Object {
           "key": "2018-03-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 1,
         },
         Object {
           "key": "2018-04-01T00:00:00.000Z",
@@ -2206,7 +2158,7 @@ Object {
         },
         Object {
           "key": "2018-05-01T00:00:00.000Z",
-          "totalCount": 20,
+          "totalCount": 0,
         },
         Object {
           "key": "2018-06-01T00:00:00.000Z",

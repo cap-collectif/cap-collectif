@@ -24,6 +24,9 @@ describe('<SectionContributors />', () => {
         contributors {
           ...SectionContributors_contributors
         }
+        anonymousContributors {
+          ...SectionContributors_anonymousContributors
+        }
       }
     }
   `;
@@ -42,6 +45,19 @@ describe('<SectionContributors />', () => {
         },
       ],
     }),
+    PlatformAnalyticsAnonymousContributors: () => ({
+      totalCount: 10,
+      values: [
+        {
+          key: '2014-12-01T00:00:00.000Z',
+          totalCount: 6,
+        },
+        {
+          key: '2015-01-01T00:00:00.000Z',
+          totalCount: 4,
+        },
+      ],
+    }),
   };
 
   beforeEach(() => {
@@ -57,8 +73,14 @@ describe('<SectionContributors />', () => {
 
     const TestRenderer = ({ componentProps, queryVariables: variables }) => {
       const data = useLazyLoadQuery<SectionContributorsTestQuery>(query, variables);
-      if (!data?.analytics?.contributors) return null;
-      return <SectionContributors contributors={data.analytics.contributors} {...componentProps} />;
+      if (!data?.analytics?.contributors && !data?.analytics?.anonymousContributors) return null;
+      return (
+        <SectionContributors
+          anonymousContributors={data.analytics.anonymousContributors}
+          contributors={data.analytics.contributors}
+          {...componentProps}
+        />
+      );
     };
 
     TestSectionContributors = componentProps => (

@@ -40,6 +40,10 @@ export const DashboardPageQuery: GraphQLTaggedNode = graphql`
         totalCount
         ...SectionContributors_contributors
       }
+      anonymousContributors {
+        totalCount
+        ...SectionContributors_anonymousContributors
+      }
       pageViews {
         totalCount
         ...SectionPageViews_pageViews
@@ -73,8 +77,9 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
   const hasSmallCharts =
     (analytics.visitors && analytics.visitors.totalCount > 0) ||
     (analytics.registrations && analytics.registrations.totalCount > 0) ||
+    (analytics.pageViews && analytics.pageViews.totalCount > 0) ||
     (analytics.contributors && analytics.contributors.totalCount > 0) ||
-    (analytics.pageViews && analytics.pageViews.totalCount > 0);
+      (analytics.anonymousContributors && analytics.anonymousContributors.totalCount > 0);
 
   return (
     <Flex direction="column" spacing={3}>
@@ -93,8 +98,13 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
               filters.projectId === 'ALL' && (
                 <SectionRegistrations registrations={analytics.registrations} />
               )}
-            {analytics.contributors && analytics.contributors.totalCount > 0 && (
-              <SectionContributors contributors={analytics.contributors} />
+            {((analytics.contributors && analytics.contributors.totalCount > 0) ||
+              (analytics.anonymousContributors &&
+                analytics.anonymousContributors.totalCount > 0)) && (
+              <SectionContributors
+                anonymousContributors={analytics.anonymousContributors}
+                contributors={analytics.contributors}
+              />
             )}
             {analytics.pageViews && analytics.pageViews.totalCount > 0 && (
               <SectionPageViews pageViews={analytics.pageViews} />

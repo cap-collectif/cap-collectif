@@ -319,8 +319,20 @@ class AnalyticsSearch
         DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
+        // Does not include comments, since the comments are separately computed
+        $objectTypes = [
+            'reply',
+            'proposal',
+            'opinion',
+            'opinionVersion',
+            'argument',
+            'debateArgument',
+            'debateAnonymousArgument',
+            'source',
+        ];
+
         return $this->createAggregatedQuery(
-            self::CONTRIBUTION_TYPES,
+            $objectTypes,
             'contributions',
             $start,
             $end,
