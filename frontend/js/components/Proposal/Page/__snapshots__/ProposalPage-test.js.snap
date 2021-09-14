@@ -7250,7 +7250,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6a1cfadccc362566db9470e357d72919",
+          "cacheID": "57469280352c4fd3414b555c31e6d05c",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9251,6 +9251,7 @@ fragment ProposalsUserVotesTable_step on ProposalStep {
   viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
     totalCount
   }
+  votesLimit
   votesMin
   ...ProposalUserVoteItem_step
 }

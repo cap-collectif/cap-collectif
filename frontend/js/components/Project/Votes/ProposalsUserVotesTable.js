@@ -367,6 +367,7 @@ export default createFragmentContainer(container, {
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
       }
+      votesLimit
       votesMin
       ...ProposalUserVoteItem_step
     }
