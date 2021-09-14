@@ -191,6 +191,26 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     placeholder="proposal.map.form.placeholder"
     type="address"
   />
+  <ProposalFormMapPreview
+    address={null}
+    categories={
+      Array [
+        Object {
+          "color": "blue",
+          "icon": null,
+          "id": "category1",
+          "name": "Category 1",
+        },
+        Object {
+          "color": "red",
+          "icon": "tractor",
+          "id": "category2",
+          "name": "Category 2",
+        },
+      ]
+    }
+    category={null}
+  />
   <Field
     component={[Function]}
     help="District help"
@@ -676,6 +696,26 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     placeholder="proposal.map.form.placeholder"
     type="address"
   />
+  <ProposalFormMapPreview
+    address={null}
+    categories={
+      Array [
+        Object {
+          "color": "blue",
+          "icon": null,
+          "id": "category1",
+          "name": "Category 1",
+        },
+        Object {
+          "color": "red",
+          "icon": "tractor",
+          "id": "category2",
+          "name": "Category 2",
+        },
+      ]
+    }
+    category={null}
+  />
   <Field
     component={[Function]}
     help="District help"
@@ -1095,6 +1135,26 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
+  />
+  <ProposalFormMapPreview
+    address={null}
+    categories={
+      Array [
+        Object {
+          "color": "blue",
+          "icon": null,
+          "id": "category1",
+          "name": "Category 1",
+        },
+        Object {
+          "color": "red",
+          "icon": "tractor",
+          "id": "category2",
+          "name": "Category 2",
+        },
+      ]
+    }
+    category={null}
   />
   <Field
     component={[Function]}
@@ -1516,6 +1576,26 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     placeholder="proposal.map.form.placeholder"
     type="address"
   />
+  <ProposalFormMapPreview
+    address={null}
+    categories={
+      Array [
+        Object {
+          "color": "blue",
+          "icon": null,
+          "id": "category1",
+          "name": "Category 1",
+        },
+        Object {
+          "color": "red",
+          "icon": "tractor",
+          "id": "category2",
+          "name": "Category 2",
+        },
+      ]
+    }
+    category={null}
+  />
   <Field
     component={[Function]}
     help="District help"
@@ -1935,6 +2015,26 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
+  />
+  <ProposalFormMapPreview
+    address={null}
+    categories={
+      Array [
+        Object {
+          "color": "blue",
+          "icon": null,
+          "id": "category1",
+          "name": "Category 1",
+        },
+        Object {
+          "color": "red",
+          "icon": "tractor",
+          "id": "category2",
+          "name": "Category 2",
+        },
+      ]
+    }
+    category={null}
   />
   <Field
     component={[Function]}

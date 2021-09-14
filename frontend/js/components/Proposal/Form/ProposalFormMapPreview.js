@@ -16,7 +16,7 @@ import { colors } from '~/utils/colors';
 import type { MapProps } from '~/components/Proposal/Map/Map.types';
 
 type Props = {|
-  +address: string,
+  +address: ?string,
   +category: ?string,
   +categories: $ReadOnlyArray<{| +id: string, +name: string, +color: string, +icon: ?string |}>,
 |};
@@ -26,8 +26,12 @@ type Address = {| +geometry: {| +location: {| +lat: number, +lng: number |} |} |
 let L;
 
 export const ProposalFormMapPreview = ({ address, category, categories }: Props) => {
+  const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
   const mapRef = React.useRef(null);
-  const proposalAddress: Address = JSON.parse(address.substring(1, address.length - 1));
+  const proposalAddress: Address = JSON.parse(
+    address ? address.substring(1, address.length - 1) : '{}',
+  );
+
   React.useEffect(() => {
     if (config.canUseDOM) {
       L = require('leaflet'); // eslint-disable-line
@@ -36,15 +40,14 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
   }, []);
 
   React.useEffect(() => {
-    if (mapRef.current)
+    if (mapRef.current && proposalAddress?.geometry)
       mapRef.current.setView([
         proposalAddress.geometry.location.lat,
         proposalAddress.geometry.location.lng,
       ]);
   }, [proposalAddress]);
-  const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
 
-  if (!mapTokens || !L) return null;
+  if (!mapTokens || !L || !address) return null;
 
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const proposalCategory = categories.find(cat => cat.id === category) || {
@@ -71,6 +74,7 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
           display: 'none',
         },
       }}
+      tap={!L.Browser.mobile}
       gestureHandling>
       <TileLayer
         attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'

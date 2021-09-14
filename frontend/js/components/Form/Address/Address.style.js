@@ -106,6 +106,7 @@ export const getStyleSearchBarAddress = (side: 'left' | 'right' = 'left') => css
   z-index: 1;
 
   input {
-    width: 300px;
+    width: 75vw;
+    max-width: 300px;
   }
 `;

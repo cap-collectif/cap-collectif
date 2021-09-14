@@ -7,6 +7,7 @@ export type Context = {|
   +toggle: () => void,
   +hideCloseButton?: boolean,
   +visible: boolean,
+  +fullPageScrollable?: boolean,
 |};
 
 export const ModalContext = React.createContext<Context>({
@@ -15,6 +16,7 @@ export const ModalContext = React.createContext<Context>({
   toggle: () => {},
   visible: false,
   hideCloseButton: false,
+  fullPageScrollable: false,
 });
 
 export const useModal = (): Context => {

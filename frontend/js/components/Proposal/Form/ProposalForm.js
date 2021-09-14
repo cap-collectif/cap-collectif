@@ -675,13 +675,11 @@ export class ProposalForm extends React.Component<Props, State> {
             }}
           />
         )}
-        {addressValue && (
-          <ProposalFormMapPreview
-            category={category}
-            categories={proposalForm.categories}
-            address={addressValue}
-          />
-        )}
+        <ProposalFormMapPreview
+          category={category}
+          categories={proposalForm.categories}
+          address={addressValue}
+        />
         {features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
           <Field
             id="proposal_district"

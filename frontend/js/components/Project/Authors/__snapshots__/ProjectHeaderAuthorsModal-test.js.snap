@@ -24,7 +24,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       id="show-authors-modal"
       style={
         Object {

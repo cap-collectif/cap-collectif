@@ -4,7 +4,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  fullSizeOnMobile={true}
+  fullPageScrollable={true}
   hideCloseButton={false}
   hideOnClickOutside={false}
   hideOnEsc={true}
@@ -12,9 +12,19 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
   show={true}
 >
   <Modal.Header
-    borderBottom="1px solid #DADEE1"
+    borderBottom={
+      Array [
+        "",
+        "1px solid #DADEE1",
+      ]
+    }
     closeLabel="close.modal"
-    pb={8}
+    pb={
+      Array [
+        "",
+        8,
+      ]
+    }
   >
     <Heading>
       global.edit
@@ -95,8 +105,18 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
         />
       </Modal.Body>
       <Modal.Footer
-        borderTop="1px solid #DADEE1"
-        pt={4}
+        borderTop={
+          Array [
+            "",
+            "1px solid #DADEE1",
+          ]
+        }
+        pt={
+          Array [
+            "",
+            4,
+          ]
+        }
       >
         <ButtonGroup>
           <Button
@@ -131,7 +151,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  fullSizeOnMobile={true}
+  fullPageScrollable={true}
   hideCloseButton={false}
   hideOnClickOutside={false}
   hideOnEsc={true}
@@ -139,9 +159,19 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
   show={true}
 >
   <Modal.Header
-    borderBottom="1px solid #DADEE1"
+    borderBottom={
+      Array [
+        "",
+        "1px solid #DADEE1",
+      ]
+    }
     closeLabel="close.modal"
-    pb={8}
+    pb={
+      Array [
+        "",
+        8,
+      ]
+    }
   >
     <Heading>
       global.edit
@@ -222,8 +252,18 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
         />
       </Modal.Body>
       <Modal.Footer
-        borderTop="1px solid #DADEE1"
-        pt={4}
+        borderTop={
+          Array [
+            "",
+            "1px solid #DADEE1",
+          ]
+        }
+        pt={
+          Array [
+            "",
+            4,
+          ]
+        }
       >
         <ButtonGroup>
           <Button
@@ -260,7 +300,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  fullSizeOnMobile={true}
+  fullPageScrollable={true}
   hideCloseButton={false}
   hideOnClickOutside={false}
   hideOnEsc={true}
@@ -268,9 +308,19 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
   show={true}
 >
   <Modal.Header
-    borderBottom="1px solid #DADEE1"
+    borderBottom={
+      Array [
+        "",
+        "1px solid #DADEE1",
+      ]
+    }
     closeLabel="close.modal"
-    pb={8}
+    pb={
+      Array [
+        "",
+        8,
+      ]
+    }
   >
     <Heading>
       global.edit
@@ -351,8 +401,18 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
         />
       </Modal.Body>
       <Modal.Footer
-        borderTop="1px solid #DADEE1"
-        pt={4}
+        borderTop={
+          Array [
+            "",
+            "1px solid #DADEE1",
+          ]
+        }
+        pt={
+          Array [
+            "",
+            4,
+          ]
+        }
       >
         <ButtonGroup>
           <Button
@@ -387,7 +447,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  fullSizeOnMobile={true}
+  fullPageScrollable={true}
   hideCloseButton={false}
   hideOnClickOutside={false}
   hideOnEsc={true}
@@ -395,9 +455,19 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
   show={true}
 >
   <Modal.Header
-    borderBottom="1px solid #DADEE1"
+    borderBottom={
+      Array [
+        "",
+        "1px solid #DADEE1",
+      ]
+    }
     closeLabel="close.modal"
-    pb={8}
+    pb={
+      Array [
+        "",
+        8,
+      ]
+    }
   >
     <Heading>
       global.edit
@@ -478,8 +548,18 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
         />
       </Modal.Body>
       <Modal.Footer
-        borderTop="1px solid #DADEE1"
-        pt={4}
+        borderTop={
+          Array [
+            "",
+            "1px solid #DADEE1",
+          ]
+        }
+        pt={
+          Array [
+            "",
+            4,
+          ]
+        }
       >
         <ButtonGroup>
           <Button
@@ -514,7 +594,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  fullSizeOnMobile={true}
+  fullPageScrollable={true}
   hideCloseButton={false}
   hideOnClickOutside={false}
   hideOnEsc={true}
@@ -522,9 +602,19 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
   show={true}
 >
   <Modal.Header
-    borderBottom="1px solid #DADEE1"
+    borderBottom={
+      Array [
+        "",
+        "1px solid #DADEE1",
+      ]
+    }
     closeLabel="close.modal"
-    pb={8}
+    pb={
+      Array [
+        "",
+        8,
+      ]
+    }
   >
     <Heading>
       global.edit
@@ -605,8 +695,18 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
         />
       </Modal.Body>
       <Modal.Footer
-        borderTop="1px solid #DADEE1"
-        pt={4}
+        borderTop={
+          Array [
+            "",
+            "1px solid #DADEE1",
+          ]
+        }
+        pt={
+          Array [
+            "",
+            4,
+          ]
+        }
       >
         <ButtonGroup>
           <Button
@@ -641,7 +741,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
 <ProposalEditModal__ModalProposalEditContainer
   ariaLabel="contained-modal-title-lg"
   dialogClassName="custom-modal-dialog"
-  fullSizeOnMobile={true}
+  fullPageScrollable={true}
   hideCloseButton={false}
   hideOnClickOutside={false}
   hideOnEsc={true}
@@ -649,9 +749,19 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
   show={true}
 >
   <Modal.Header
-    borderBottom="1px solid #DADEE1"
+    borderBottom={
+      Array [
+        "",
+        "1px solid #DADEE1",
+      ]
+    }
     closeLabel="close.modal"
-    pb={8}
+    pb={
+      Array [
+        "",
+        8,
+      ]
+    }
   >
     <Heading>
       global.edit
@@ -732,8 +842,18 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
         />
       </Modal.Body>
       <Modal.Footer
-        borderTop="1px solid #DADEE1"
-        pt={4}
+        borderTop={
+          Array [
+            "",
+            "1px solid #DADEE1",
+          ]
+        }
+        pt={
+          Array [
+            "",
+            4,
+          ]
+        }
       >
         <ButtonGroup>
           <Button

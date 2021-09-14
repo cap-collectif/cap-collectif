@@ -27,7 +27,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
     style="opacity:0"
   >
     <div
-      class="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      class="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       style="opacity:0;transform:translateY(-20px) translateZ(0)"
     >
       <main

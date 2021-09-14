@@ -24,7 +24,7 @@ exports[`<ModalSectionContributors /> <TestModalSectionContributors /> should re
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       id="modal-section-contributors"
       style={
         Object {

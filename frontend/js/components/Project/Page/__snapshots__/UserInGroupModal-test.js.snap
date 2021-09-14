@@ -24,7 +24,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -137,7 +137,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -250,7 +250,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       id="<Node-mock-id-1>-modal"
       style={
         Object {

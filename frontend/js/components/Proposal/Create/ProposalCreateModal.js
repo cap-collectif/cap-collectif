@@ -77,11 +77,11 @@ const ProposalCreateModal = ({
         if (modalState !== 'LEAVE') setModalState('LEAVE');
         else onClose();
       }}
-      fullSizeOnMobile
+      fullPageScrollable
       ariaLabel={intl.formatMessage({ id: title })}>
       {() => (
         <>
-          <Modal.Header pb={8} borderBottom={`1px solid ${colors.gray[200]}`}>
+          <Modal.Header pb={['', 8]} borderBottom={['', `1px solid ${colors.gray[200]}`]}>
             <Heading>{intl.formatMessage({ id: title })}</Heading>
           </Modal.Header>
           <AnimatePresence>
@@ -111,7 +111,10 @@ const ProposalCreateModal = ({
                     }}
                   />
                 </Modal.Body>
-                <Modal.Footer spacing={2} pt={4} borderTop={`1px solid ${colors.gray[200]}`}>
+                <Modal.Footer
+                  spacing={2}
+                  pt={['', 4]}
+                  borderTop={['', `1px solid ${colors.gray[200]}`]}>
                   <ButtonGroup>
                     <Button
                       id="confirm-proposal-create-as-draft"

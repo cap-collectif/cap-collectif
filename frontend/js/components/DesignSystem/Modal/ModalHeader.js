@@ -7,6 +7,7 @@ import Button from '~ds/Button/Button';
 import type { FlexProps } from '~ui/Primitives/Layout/Flex';
 import ModalHeaderLabel from './ModalHeaderLabel';
 import { useModal } from '~ds/Modal/Modal.context';
+import useIsMobile from '~/utils/hooks/useIsMobile';
 
 export type Props = {|
   ...FlexProps,
@@ -14,14 +15,28 @@ export type Props = {|
   +closeLabel?: string,
 |};
 
+const fixedHeader = {
+  position: 'fixed',
+  top: 0,
+  width: '100%',
+  zIndex: 1000,
+  bg: 'white',
+  boxShadow: '0px 0px 10px rgb(0 0 0 / 15%)',
+  border: 'none',
+  p: 4,
+};
+
 const ModalHeader = ({ children, closeLabel, ...rest }: Props) => {
-  const { hide, hideCloseButton } = useModal();
+  const { hide, hideCloseButton, fullPageScrollable } = useModal();
   const ref = React.useRef<HTMLButtonElement | null>(null);
   React.useEffect(() => {
     if (ref.current) ref.current.focus();
   }, []);
+  const isMobile = useIsMobile();
+
+  const style = fullPageScrollable && isMobile ? fixedHeader : null;
   return (
-    <Flex as="header" p={6} pb={0} align="center" {...rest}>
+    <Flex as="header" p={6} pb={0} align="center" {...style} {...rest}>
       <Flex
         direction="column"
         flex={1}

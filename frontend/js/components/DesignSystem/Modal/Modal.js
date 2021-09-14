@@ -32,6 +32,7 @@ export type ModalProps = {|
   +onOpen?: () => void,
   +onClose?: () => void,
   +fullSizeOnMobile?: boolean,
+  +fullPageScrollable?: boolean,
 |};
 const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   position: 'fixed',
@@ -46,18 +47,22 @@ const ModalContainerInner = styled(motion.custom(AppBox)).attrs({
   flexDirection: 'column',
   alignItems: 'center',
 })``;
-const ModalInner = styled(motion.custom(AppBox)).attrs(props => ({
-  display: 'flex',
-  bg: 'white',
-  flexDirection: 'column',
-  mt: [props.fullSizeOnMobile ? 0 : 'auto', 0],
-  width: ['100%', '50%'],
-  boxShadow: 'medium',
-  borderRadius: 'modal',
-  borderBottomLeftRadius: [props.fullSizeOnMobile ? 'modal' : 0, 'modal'],
-  borderBottomRightRadius: [props.fullSizeOnMobile ? 'modal' : 0, 'modal'],
-  ...props,
-}))``;
+const ModalInner = styled(motion.custom(AppBox)).attrs(
+  ({ fullSizeOnMobile, fullPageScrollable, ...rest }) => ({
+    display: 'flex',
+    bg: 'white',
+    flexDirection: 'column',
+    mt: [fullSizeOnMobile || fullPageScrollable ? 0 : 'auto', 0],
+    width: ['100%', '50%'],
+    boxShadow: 'medium',
+    borderRadius: 'modal',
+    borderBottomLeftRadius: [fullSizeOnMobile || fullPageScrollable ? 'modal' : 0, 'modal'],
+    borderBottomRightRadius: [fullSizeOnMobile || fullPageScrollable ? 'modal' : 0, 'modal'],
+    overflowY: 'auto',
+    ...rest,
+  }),
+)``;
+
 type ProviderProps = {| +children: React$Node, +context: Context |};
 const Provider = React.memo<ProviderProps>(
   ({ context, children }: ProviderProps) => (
@@ -79,6 +84,7 @@ const Modal = ({
   hideOnClickOutside = true,
   hideOnEsc = true,
   preventBodyScroll = true,
+  fullPageScrollable = false,
   ...props
 }: ModalProps) => {
   const isControlled = show === true || show === false;
@@ -101,8 +107,9 @@ const Modal = ({
       toggle: dialog.toggle,
       visible: dialog.visible,
       hideCloseButton,
+      fullPageScrollable,
     }),
-    [dialog, hideCloseButton],
+    [dialog, hideCloseButton, fullPageScrollable],
   );
   useEffect(() => {
     const scrollContainer = $scrollBox.current;

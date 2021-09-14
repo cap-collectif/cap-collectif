@@ -24,7 +24,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       style={
         Object {
           "opacity": 0,
@@ -155,7 +155,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       style={
         Object {
           "opacity": 0,
@@ -286,7 +286,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       style={
         Object {
           "opacity": 0,

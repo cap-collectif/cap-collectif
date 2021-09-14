@@ -152,7 +152,7 @@ export const ProposalEditModal = ({
 
   return (
     <ModalProposalEditContainer
-      fullSizeOnMobile
+      fullPageScrollable
       show={show}
       dialogClassName={cn('custom-modal-dialog', { 'expired-revision': isRevisionExpired })}
       hideCloseButton={modalState === 'LEAVE'}
@@ -182,8 +182,8 @@ export const ProposalEditModal = ({
         <>
           <Modal.Header
             closeLabel={intl.formatMessage({ id: 'close.modal' })}
-            pb={8}
-            borderBottom={`1px solid ${colors.gray[200]}`}>
+            pb={['', 8]}
+            borderBottom={['', `1px solid ${colors.gray[200]}`]}>
             <Heading>
               {intl.formatMessage({
                 id: hasPendingRevisions ? 'review-my-proposal' : 'global.edit',
@@ -254,7 +254,7 @@ export const ProposalEditModal = ({
                     }}
                   />
                 </Modal.Body>
-                <Modal.Footer pt={4} borderTop={`1px solid ${colors.gray[200]}`}>
+                <Modal.Footer pt={['', 4]} borderTop={['', `1px solid ${colors.gray[200]}`]}>
                   <ButtonGroup>
                     {proposal.publicationStatus !== 'DRAFT' && (
                       <Button

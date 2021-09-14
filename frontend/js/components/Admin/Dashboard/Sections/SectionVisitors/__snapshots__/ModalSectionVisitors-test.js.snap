@@ -24,7 +24,7 @@ exports[`<ModalSectionVisitors /> <TestModalSectionVisitors /> should render cor
     }
   >
     <div
-      className="sc-bdnxRM kudCBW Modal__ModalInner-fNqOda"
+      className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
       style={
         Object {
           "opacity": 0,
