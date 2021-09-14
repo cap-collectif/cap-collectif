@@ -15,6 +15,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionRevisedMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
+use Capco\AppBundle\Mailer\Message\UserInvite\UserInviteNewInvitation;
 
 final class MessagesList
 {
@@ -33,6 +34,7 @@ final class MessagesList
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::class,
         'user_account_confirmation_reminder_message' =>
             UserAccountConfirmationReminderMessage::class,
+        'user_invitation' => UserInviteNewInvitation::class,
     ];
     public const TEMPLATE_LIST = [
         'event_create_admin' => EventCreateAdminMessage::TEMPLATE,
@@ -49,5 +51,6 @@ final class MessagesList
         'proposal_acknowledge_create' => ProposalAknowledgeCreateMessage::TEMPLATE,
         'user_account_confirmation_reminder_message' =>
             UserAccountConfirmationReminderMessage::TEMPLATE,
+        'user_invitation' => UserInviteNewInvitation::TEMPLATE,
     ];
 }

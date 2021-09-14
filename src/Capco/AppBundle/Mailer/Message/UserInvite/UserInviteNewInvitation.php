@@ -26,4 +26,16 @@ final class UserInviteNewInvitation extends AbstractExternalMessage
             'siteUrl' => $params['siteURL'],
         ];
     }
+
+    public static function mockData()
+    {
+        return [
+            'siteName' => 'Capco',
+            'baseUrl' => 'capco.dev',
+            'organizationName' => 'Capco',
+            'siteUrl' => 'capco.dev',
+            'invitationUrl' => '/invitation',
+            'user_locale' => 'fr-FR',
+        ];
+    }
 }
