@@ -136,7 +136,7 @@ class SectionAdmin extends AbstractAdmin
         if ($fields['title']) {
             $formMapper->add('title', TextType::class, [
                 'label' => 'global.title',
-                'required' => false,
+                'required' => true,
                 'help' => 'be-concise-1-or-2-words',
             ]);
         } else {

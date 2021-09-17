@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\SectionType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -17,6 +16,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInterface
 {
     public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
+    public const INVALID_FORM = 'INVALID_FORM';
+
     private EntityManagerInterface $em;
     private SectionRepository $sectionRepository;
     private FormFactoryInterface $formFactory;
@@ -75,10 +76,8 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
 
         $form->submit($arguments, false);
 
-        if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
-
-            throw GraphQLException::fromFormErrors($form);
+        if ($form->isSubmitted() && !$form->isValid()) {
+            return ['errorCode' => self::INVALID_FORM];
         }
 
         $this->em->persist($section);

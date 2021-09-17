@@ -21,7 +21,19 @@ exports[`<HomePageProjectsSectionConfigurationPage /> renders correctly 1`] = `
       <Field
         component={[Function]}
         id="teaser"
-        label="admin.fields.project.teaser"
+        label={
+          <ForwardRef>
+            <Text>
+              admin.fields.project.teaser
+            </Text>
+            <Text
+              color="gray.500"
+              ml={2}
+            >
+              global.optional
+            </Text>
+          </ForwardRef>
+        }
         name="teaser"
         placeholder="section-admin-teaser-placeholder"
         type="textarea"

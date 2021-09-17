@@ -9,7 +9,7 @@ HomePageProjectsSectionConfiguration:
                 builderConfig:
                     typeName: HomePageProjectsSectionConfiguration
             title:
-                type: 'String!'
+                type: 'String'
                 description: 'The title of the section'
             teaser:
                 type: 'String'

@@ -5896,7 +5896,7 @@ type HomePageProjectsSectionConfiguration {
   id: ID!
 
   """The title of the section"""
-  title: String!
+  title: String
 
   """The subtitle of the section"""
   teaser: String
@@ -13710,6 +13710,9 @@ Available errors for an `updateHomePageProjectsSectionConfiguration` mutation.
 enum UpdateHomePageProjectsSectionConfigurationErrorCode {
   """Limit of projects that can be dispayed in the homepage"""
   TOO_MANY_PROJECTS
+
+  """The form is not valid"""
+  INVALID_FORM
 }
 
 input UpdateHomePageProjectsSectionConfigurationInput {

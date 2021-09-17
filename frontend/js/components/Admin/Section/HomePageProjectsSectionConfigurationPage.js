@@ -64,6 +64,12 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { maxProjectsDisp
       error.teaser = { id: 'characters-maximum', values: { quantity: TEASER_MAX } };
       return reject(error);
     }
+    if (values.title.trim() === '') {
+      const error = {
+        title: { id: 'error.fill.title' },
+      };
+      return reject(error);
+    }
     return resolve();
   });
 };
@@ -108,6 +114,13 @@ const onSubmit = async (
       });
       return;
     }
+    if (errorCode === 'INVALID_FORM') {
+      toast({
+        variant: 'danger',
+        content: intl.formatHTMLMessage({ id: 'global.error.server.form' }),
+      });
+      return;
+    }
     toast({
       variant: 'success',
       content: intl.formatHTMLMessage({ id: 'all.data.saved' }),
@@ -146,7 +159,14 @@ export const HomePageProjectsSectionConfigurationPage = ({
             name="teaser"
             id="teaser"
             placeholder="section-admin-teaser-placeholder"
-            label={intl.formatMessage({ id: 'admin.fields.project.teaser' })}
+            label={
+              <Flex>
+                <Text>{intl.formatMessage({ id: 'admin.fields.project.teaser' })}</Text>
+                <Text ml={2} color="gray.500">
+                  {intl.formatMessage({ id: 'global.optional' })}
+                </Text>
+              </Flex>
+            }
             component={renderComponent}
           />
           <Field
@@ -280,7 +300,7 @@ const form = injectIntl(
     form: formName,
     onSubmit,
     asyncValidate,
-    asyncChangeFields: ['nbObjects', 'teaser'],
+    asyncChangeFields: ['nbObjects', 'teaser', 'title'],
   })(HomePageProjectsSectionConfigurationPage),
 );
 

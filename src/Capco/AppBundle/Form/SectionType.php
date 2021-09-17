@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SectionType extends AbstractType
 {
@@ -20,6 +21,12 @@ class SectionType extends AbstractType
         $builder
             ->add('translations', TranslationCollectionType::class, [
                 'fields' => ['title', 'teaser', 'locale'],
+                'fields_options' => [
+                    'title' => [
+                        'required' => true,
+                        'constraints' => [new NotBlank()],
+                    ],
+                ],
             ])
             ->add('title', TextType::class, [
                 'purify_html' => true,
