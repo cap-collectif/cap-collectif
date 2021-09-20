@@ -1,0 +1,18 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block sonata_page_content %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {% include 'CapcoAppBundle:Homepage:flashbag.html.twig' %}
+
+    {{ react_render_component('ProposalAdminPageApp', {
+        'props': {
+            'stepId': stepId,
+            'proposalId': null,
+        },
+        'rendering': 'client_side'
+    }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

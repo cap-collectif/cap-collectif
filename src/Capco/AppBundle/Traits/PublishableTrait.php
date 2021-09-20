@@ -9,12 +9,12 @@ trait PublishableTrait
     /**
      * @ORM\Column(name="published", type="boolean", nullable=false)
      */
-    private $published = false;
+    private bool $published = false;
 
     /**
      * @ORM\Column(name="publishedAt", type="datetime", nullable=true)
      */
-    private $publishedAt;
+    private ?\DateTime $publishedAt = null;
 
     public function isPublished(): bool
     {

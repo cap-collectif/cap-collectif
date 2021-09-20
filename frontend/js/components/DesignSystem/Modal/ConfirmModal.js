@@ -40,16 +40,39 @@ export const ConfirmModal = ({
     <Modal hideOnClickOutside={false} hideOnEsc={false} hideCloseButton {...props}>
       {({ hide }) => (
         <>
-          <Modal.Header p={4}>
+          <Modal.Header p={4} className="confirm-modal-header">
             <Heading>{title}</Heading>
           </Modal.Header>
-          {body && <Modal.Body px={4}>{body}</Modal.Body>}
+          {body && <Modal.Body className="confirm-modal-body" px={4}>{body}</Modal.Body>}
           <Modal.Footer
+            className="confirm-modal-footer"
             spacing={4}
             p={4}
             pt={4}
             align={['stretch', 'center']}
             direction={['column', 'row']}>
+            <Button
+              disabled={isLoading}
+              variant="tertiary"
+              justifyContent={['center', 'flex-start']}
+              {...options.cancelButton.props}
+              onClick={async () => {
+                try {
+                  if (onCancel) {
+                    if (isAsync(onCancel)) {
+                      startLoading();
+                    }
+                    await onCancel();
+                    stopLoading();
+                  }
+                  hide();
+                } catch (e) {
+                  stopLoading();
+                  console.error(e);
+                }
+              }}>
+              {options.cancelButton.content}
+            </Button>
             <Button
               disabled={isLoading}
               isLoading={isLoading}
@@ -74,28 +97,6 @@ export const ConfirmModal = ({
                 }
               }}>
               {options.confirmButton.content}
-            </Button>
-            <Button
-              disabled={isLoading}
-              variant="tertiary"
-              justifyContent={['center', 'flex-start']}
-              {...options.cancelButton.props}
-              onClick={async () => {
-                try {
-                  if (onCancel) {
-                    if (isAsync(onCancel)) {
-                      startLoading();
-                    }
-                    await onCancel();
-                    stopLoading();
-                  }
-                  hide();
-                } catch (e) {
-                  stopLoading();
-                  console.error(e);
-                }
-              }}>
-              {options.cancelButton.content}
             </Button>
           </Modal.Footer>
         </>

@@ -51,6 +51,7 @@ import {
   instagramRegEx,
   youtubeRegEx,
 } from '~/components/Utils/SocialNetworkRegexUtils';
+import { type BackOfficeFormValues } from '~/components/Proposal/Admin/ProposalAdminContentCreateForm';
 
 type FormValues = {|
   media: ?{ id: Uuid },
@@ -227,7 +228,7 @@ const onSubmit = (
 };
 
 export const checkProposalContent = (
-  values: FormValues | FrontendFormValues,
+  values: FormValues | FrontendFormValues | BackOfficeFormValues,
   proposalForm:
     | ProposalForm_proposalForm
     | $PropertyType<ProposalAdminContentForm_proposal, 'form'>,
@@ -263,6 +264,7 @@ export const checkProposalContent = (
   }
 
   if (
+    proposalForm.categories &&
     proposalForm.categories.length &&
     proposalForm.usingCategories &&
     proposalForm.categoryMandatory &&
@@ -288,13 +290,14 @@ export const checkProposalContent = (
 const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const validateProposalContent = (
-  values: FormValues | FrontendFormValues,
+  values: FormValues | FrontendFormValues | BackOfficeFormValues,
   proposalForm: ProposalForm_proposalForm,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
   availableQuestions: Array<string>,
   async: boolean = false,
+  isBackOfficeInput: boolean = false,
 ) => {
   const MIN_LENGTH_TITLE = 2;
   const MAX_LENGTH_TITLE = 255;
@@ -319,6 +322,15 @@ export const validateProposalContent = (
         ? 'proposal.constraints.summary'
         : 'proposal.constraints.min.summary';
   }
+
+  if (isBackOfficeInput && !values.publishedAt) {
+    errors.publishedAt = 'global.admin.required';
+  }
+
+  if (isBackOfficeInput && !values.author) {
+    errors.author = 'admin.help.comment.author';
+  }
+
   if (proposalForm.isUsingAnySocialNetworks) {
     if (values.webPageUrl && !isUrl(values.webPageUrl)) {
       errors.webPageUrl = 'error-webPage-url';
@@ -387,7 +399,7 @@ export const validateProposalContent = (
 };
 
 export const warnProposalContent = (
-  values: FormValues | FrontendFormValues,
+  values: FormValues | FrontendFormValues | BackOfficeFormValues,
   proposalForm: ProposalForm_proposalForm,
   features: FeatureToggles,
   intl: IntlShape,

@@ -33,6 +33,7 @@ const formatResponses = (
   responses.reduce(
     (formattedResponses: Array<FormattedResponse>, response: ResponseInReduxForm) => {
       const { question: idQuestion, value } = response;
+
       const questionOfResponse: ?Question = questions.find(q => q.id === idQuestion);
 
       // It's not possible but flow...

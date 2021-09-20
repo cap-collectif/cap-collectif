@@ -18,6 +18,9 @@ class DoctrineListener implements EventSubscriber
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
+        if ($entity instanceof Publishable && $entity->isPublished()) {
+            return;
+        }
         if ($entity instanceof Publishable) {
             self::setPublishedStatus($entity);
         }

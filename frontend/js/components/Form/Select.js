@@ -61,6 +61,7 @@ type Props = {
   labelClassName?: string,
   inputClassName?: string,
   blockClassName?: string,
+  divClassName?: string,
   selectFieldIsObject?: boolean,
   debounce?: boolean, // add delay in async load
   debounceMs?: number,
@@ -171,6 +172,7 @@ const RenderSelect = ({
   input,
   label,
   labelClassName,
+  divClassName,
   inputClassName,
   blockClassName = '',
   multi = false,
@@ -229,7 +231,7 @@ const RenderSelect = ({
     selectValue = value !== undefined || value !== null ? selectLabel && selectLabel[0] : null;
   }
 
-  return (
+  const component = (
     <div className={`form-group ${blockClassName} ${canValidate && error ? ' has-error' : ''}`}>
       {label && (
         <Label
@@ -341,6 +343,12 @@ const RenderSelect = ({
       </div>
     </div>
   );
+
+  if (divClassName) {
+    return <div className={divClassName}>{component}</div>;
+  }
+
+  return component;
 };
 
 export default RenderSelect;

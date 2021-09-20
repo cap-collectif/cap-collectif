@@ -12,6 +12,7 @@ type Props = {
   labelClassName?: ?string,
   inputClassName?: ?string,
   blockClassName?: ?string,
+  divClassName?: ?string,
   placeholder?: ?string,
   ariaControls?: ?string,
   userListToNoSearch?: ?Array<string>,
@@ -113,6 +114,7 @@ export default class UserListField extends React.Component<Props> {
       label,
       labelClassName,
       inputClassName,
+      divClassName,
       clearable,
       autoload,
       placeholder,
@@ -131,6 +133,7 @@ export default class UserListField extends React.Component<Props> {
         name={name}
         id={id}
         label={label}
+        divClassName={divClassName}
         labelClassName={labelClassName}
         inputClassName={inputClassName}
         blockClassName={blockClassName}

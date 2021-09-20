@@ -26,7 +26,7 @@ import {
 } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import { styleGuideColors } from '~/utils/colors';
-import component from '../../Form/Field';
+import component from '~/components/Form/Field';
 import type {
   ProposalFormSearchProposalsQueryResponse,
   ProposalFormSearchProposalsQueryVariables,
@@ -61,6 +61,8 @@ import config from '~/config';
 import Text from '~ui/Primitives/Text';
 import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
 import { ProposalFormMapPreview } from './ProposalFormMapPreview';
+import UserListField from '~/components/Admin/Field/UserListField';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -110,7 +112,7 @@ type RelayProps = {|
   +proposal: ?ProposalForm_proposal,
 |};
 
-type Props = {|
+export type Props = {|
   ...ReduxFormFormProps,
   ...RelayProps,
   +intl: IntlShape,
@@ -126,6 +128,9 @@ type Props = {|
   +geoJsons: Array<GeoJson>,
   +onSubmitSuccess: () => void,
   +onSubmitFailed: () => void,
+  +onSubmit?: () => void,
+  +isBackOfficeInput?: boolean,
+  +errorCount?: number,
 |};
 
 export type FormValues = {|
@@ -156,12 +161,15 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const memoizeAvailableQuestions: any = memoize(() => {});
+export const memoizeAvailableQuestions: any = memoize(() => {});
 
-export const ExternaLinks: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const ExternalLinks: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .form-group {
     max-width: 400px;
     margin-bottom: 24px;
+    .control-label.label-container {
+      font-weight: 400;
+    }
   }
 
   label {
@@ -184,8 +192,11 @@ const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   }
 `;
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed } = props;
+const onSubmit = (
+  values: FormValues,
+  dispatch: Dispatch,
+  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed }: Props,
+) => {
   const data = {
     title: values.title,
     summary: values.summary,
@@ -219,6 +230,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     availableQuestions,
     true,
   );
+
   const errors = {};
   const isEmptyArray = responsesError.responses ? responsesError.responses.filter(Boolean) : [];
   if (isEmptyArray && isEmptyArray.length) {
@@ -255,7 +267,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   return CreateProposalMutation.commit({
-    input: { ...data, proposalFormId: proposalForm.id },
+    input: {
+      ...data,
+      proposalFormId: proposalForm.id,
+    },
   })
     .then(response => {
       if (response.createProposal && response.createProposal.userErrors) {
@@ -283,6 +298,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       });
 
       const TIMEOUT_BEFORE_REDIRECTION = 5000; // 5s
+
       // We may have some MySQL replication latency
       // That's why it's better to wait a bit
       // before redirecting, to avoid 404s…
@@ -326,7 +342,10 @@ export const asyncValidate = (values: FormValues) => {
   });
 };
 
-const validate = (values: FormValues, { proposalForm, features, intl, geoJsons }: Props) => {
+const validate = (
+  values: FormValues,
+  { proposalForm, features, intl, geoJsons, isBackOfficeInput }: Props,
+) => {
   const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
 
   const errors = validateProposalContent(
@@ -336,6 +355,8 @@ const validate = (values: FormValues, { proposalForm, features, intl, geoJsons }
     intl,
     values.draft,
     availableQuestions,
+    false,
+    isBackOfficeInput,
   );
   if (values.address && proposalForm.proposalInAZoneRequired) {
     const address = JSON.parse(values.address.substring(1, values.address.length - 1));
@@ -383,16 +404,21 @@ export class ProposalForm extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
     this.state = {
       titleSuggestions: [],
       isLoadingTitleSuggestions: false,
-      districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
+      districtIdsFilteredByAddress: props.proposalForm.districts?.map(district => district.id),
     };
   }
 
   componentDidMount() {
-    window.addEventListener('beforeunload', onUnload);
-    const { responses, proposalForm, dispatch, intl } = this.props;
+    const { responses, proposalForm, dispatch, intl, isBackOfficeInput } = this.props;
+    if (isBackOfficeInput) {
+      window.removeEventListener('beforeunload', onUnload);
+    } else {
+      window.addEventListener('beforeunload', onUnload);
+    }
     if (TRIGGER_FOR_IDS.includes(proposalForm.id)) {
       handleVisibilityAccordingToType(
         intl,
@@ -451,15 +477,13 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   renderError() {
-    const { error, proposalForm } = this.props;
+    const { error, proposalForm, intl } = this.props;
 
     return error === 'publication-limit-reached' ? (
       <Alert bsStyle="warning">
         <div>
           <h4>
-            <strong>
-              <FormattedMessage id="publication-limit-reached" />
-            </strong>
+            <strong>{intl.formatMessage({ id: 'publication-limit-reached' })}</strong>
           </h4>
           <FormattedMessage
             id={
@@ -493,6 +517,7 @@ export class ProposalForm extends React.Component<Props, State> {
       user,
       category,
       change: changeProps,
+      isBackOfficeInput,
     } = this.props;
     const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
     const titleFieldTradKey =
@@ -518,28 +543,27 @@ export class ProposalForm extends React.Component<Props, State> {
     } = this.state;
 
     const optional = (
-      <span className="excerpt">
+      <Text as="span" fontWeight="normal" color={!isBackOfficeInput ? '#707070' : 'gray.500'}>
         {' '}
-        <FormattedMessage id="global.optional" />
-      </span>
+        {intl.formatMessage({ id: 'global.optional' })}
+      </Text>
     );
     const mandatory = (
-      <span className="excerpt">
-        {' '}
-        <FormattedMessage id="global.mandatory" />
-      </span>
+      <span className="excerpt"> {intl.formatMessage({ id: 'global.mandatory' })}</span>
     );
     return (
       <form id="proposal-form">
-        <WYSIWYGRender className="mb-15" value={proposalForm.description} />
+        {!isBackOfficeInput && <WYSIWYGRender className="mb-15" value={proposalForm.description} />}
         {error && this.renderError()}
         <Field
+          divClassName="bo_width_747"
           name="title"
           component={component}
           type="text"
           id="proposal_title"
           autoComplete="off"
-          help={proposalForm.titleHelpText}
+          help={!isBackOfficeInput ? proposalForm.titleHelpText : null}
+          placeholder={isBackOfficeInput ? 'untitled-proposal' : null}
           label={<FormattedMessage id={titleFieldTradKey} />}
           addonAfter={
             proposalForm.suggestingSimilarProposals ? (
@@ -568,7 +592,7 @@ export class ProposalForm extends React.Component<Props, State> {
                     onClick={() => {
                       this.setState({ titleSuggestions: [] });
                     }}>
-                    <FormattedMessage id="global.close" />
+                    {intl.formatMessage({ id: 'global.close' })}
                   </Button>
                 </Panel.Title>
               </Panel.Heading>
@@ -586,6 +610,7 @@ export class ProposalForm extends React.Component<Props, State> {
         ) : null}
         {proposalForm.usingSummary && (
           <Field
+            divClassName="bo_width_747"
             name="summary"
             component={component}
             type="textarea"
@@ -593,25 +618,57 @@ export class ProposalForm extends React.Component<Props, State> {
             maxLength="140"
             minLength="2"
             autoComplete="off"
-            help={proposalForm.summaryHelpText}
+            help={!isBackOfficeInput ? proposalForm.summaryHelpText : null}
+            placeholder={isBackOfficeInput ? 'summarize-in-few-words' : null}
             label={
               <span>
-                <FormattedMessage id="global.summary" />
+                {intl.formatMessage({ id: 'global.summary' })}
                 {optional}
               </span>
             }
           />
+        )}
+        {isBackOfficeInput && (
+          <>
+            <UserListField
+              id="proposal-admin-author"
+              divClassName="bo_width_560"
+              name="author"
+              ariaControls="ProposalAdminContentForm-filter-user-listbox"
+              label={<FormattedMessage id="global.author" />}
+              labelClassName="control-label"
+              inputClassName="fake-inputClassName"
+              placeholder={intl.formatMessage({ id: 'global.author' })}
+              selectFieldIsObject
+              multi={false}
+              autoload={false}
+              clearable={false}
+            />
+            <Field
+              label={intl.formatMessage({ id: 'global.date.text' })}
+              id="proposal-publishedAt"
+              name="publishedAt"
+              dateProps={{ dateFormat: 'DD/MM/YYYY HH:mm:ss' }}
+              type="datetime"
+              divClassName="bo_width_140"
+              formName={formName}
+              component={component}
+              placeholder="date.placeholder"
+              addonAfter={<Icon name={ICON_NAME.CALENDAR} size={ICON_SIZE.SM} />}
+            />
+          </>
         )}
         {features.themes && proposalForm.usingThemes && (
           <Field
             name="theme"
             type="select"
             id="global.theme"
+            divClassName="bo_width_560"
             component={component}
-            help={proposalForm.themeHelpText}
+            help={!isBackOfficeInput ? proposalForm.themeHelpText : null}
             label={
               <span>
-                <FormattedMessage id="global.theme" />
+                {intl.formatMessage({ id: 'global.theme' })}
                 {!proposalForm.themeMandatory && optional}
               </span>
             }>
@@ -634,11 +691,12 @@ export class ProposalForm extends React.Component<Props, State> {
             id="global.category"
             type="select"
             name="category"
+            divClassName="bo_width_560"
             component={component}
-            help={proposalForm.categoryHelpText}
+            help={!isBackOfficeInput ? proposalForm.categoryHelpText : null}
             label={
               <span>
-                <FormattedMessage id="global.category" />
+                {intl.formatMessage({ id: 'global.category' })}
                 {!proposalForm.categoryMandatory && optional}
               </span>
             }>
@@ -661,10 +719,11 @@ export class ProposalForm extends React.Component<Props, State> {
             id="proposal_address"
             component={component}
             type="address"
-            help={proposalForm.addressHelpText}
+            help={!isBackOfficeInput ? proposalForm.addressHelpText : null}
             name="addressText"
+            divClassName="bo_width_560"
             formName={formName}
-            label={<FormattedMessage id="proposal_form.address" />}
+            label={intl.formatMessage({ id: 'proposal_form.address' })}
             placeholder="proposal.map.form.placeholder"
             addressProps={{
               getAddress: (addressComplete: ?AddressComplete) =>
@@ -680,16 +739,17 @@ export class ProposalForm extends React.Component<Props, State> {
           categories={proposalForm.categories}
           address={addressValue}
         />
-        {features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
+        {features.districts && proposalForm.usingDistrict && proposalForm.districts?.length > 0 && (
           <Field
             id="proposal_district"
             type="select"
             name="district"
+            divClassName="bo_width_560"
             component={component}
-            help={proposalForm.districtHelpText}
+            help={!isBackOfficeInput ? proposalForm.districtHelpText : null}
             label={
               <span>
-                <FormattedMessage id="proposal.district" />
+                {intl.formatMessage({ id: 'proposal.district' })}
                 {!proposalForm.districtMandatory && optional}
               </span>
             }>
@@ -709,18 +769,24 @@ export class ProposalForm extends React.Component<Props, State> {
             type="editor"
             name="body"
             component={component}
+            placeholder={
+              isBackOfficeInput
+                ? intl.formatMessage({ id: 'describe-your-project-in-details' })
+                : null
+            }
             label={
               <span>
-                <FormattedMessage id="proposal.body" />
+                {intl.formatMessage({ id: 'proposal.body' })}
                 {!proposalForm.descriptionMandatory && optional}
               </span>
             }
-            help={proposalForm.descriptionHelpText}
+            help={!isBackOfficeInput ? proposalForm.descriptionHelpText : null}
           />
         )}
         <FieldArray
           name="responses"
           component={renderResponses}
+          divClassName="bo_width_747"
           form={form}
           dispatch={dispatch}
           questions={proposalForm.questions}
@@ -732,13 +798,14 @@ export class ProposalForm extends React.Component<Props, State> {
         />
         {proposalForm.usingIllustration && (
           <Field
+            divClassName="bo_width_747"
             id="proposal_media"
             name="media"
             component={component}
             type="image"
             label={
               <span>
-                <FormattedMessage id="proposal.media" />
+                {intl.formatMessage({ id: 'proposal.media' })}
                 {optional}
               </span>
             }
@@ -746,15 +813,19 @@ export class ProposalForm extends React.Component<Props, State> {
           />
         )}
         {proposalForm.isUsingAnySocialNetworks && (
-          <ExternaLinks paddingY={8} backgroundColor={styleGuideColors.white}>
+          <ExternalLinks
+            paddingY={8}
+            backgroundColor={styleGuideColors.white}
+            className="external-links">
             <Text
-              as="h3"
+              as={isBackOfficeInput ? `span` : `h3`}
               fontWeight="600"
               fontSize="14px"
               lineHeight="24px"
+              display="flex"
               mb={6}
               color={styleGuideColors.gray900}>
-              <FormattedMessage id="your-external-links" />
+              {intl.formatMessage({ id: 'your-external-links' })}
             </Text>
             {proposalForm.usingWebPage && (
               <Field
@@ -763,7 +834,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 placeholder={intl.formatMessage({ id: 'your-url' })}
                 component={component}
                 type="text"
-                label={<FormattedMessage id="form.label_website" />}
+                label={intl.formatMessage({ id: 'form.label_website' })}
               />
             )}
             {proposalForm.usingTwitter && (
@@ -772,7 +843,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 name="twitterUrl"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="share.twitter" />}
+                label={intl.formatMessage({ id: 'share.twitter' })}
                 placeholder="https://twitter.com/pseudo"
               />
             )}
@@ -782,7 +853,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 name="facebookUrl"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="share.facebook" />}
+                label={intl.formatMessage({ id: 'share.facebook' })}
                 placeholder="https://facebook.com/pseudo"
               />
             )}
@@ -792,7 +863,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 name="instagramUrl"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="instagram" />}
+                label={intl.formatMessage({ id: 'instagram' })}
                 placeholder="https://instagram.com/pseudo"
               />
             )}
@@ -802,7 +873,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 name="linkedInUrl"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="share.linkedin" />}
+                label={intl.formatMessage({ id: 'share.linkedin' })}
                 placeholder="https://linkedin.com/in/pseudo"
               />
             )}
@@ -812,11 +883,11 @@ export class ProposalForm extends React.Component<Props, State> {
                 name="youtubeUrl"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="youtube" />}
+                label={intl.formatMessage({ id: 'youtube' })}
                 placeholder="https://youtube.com/channel/pseudo"
               />
             )}
-          </ExternaLinks>
+          </ExternalLinks>
         )}
         {features.unstable__tipsmeee && proposalForm.usingTipsmeee && (
           <>
@@ -835,7 +906,7 @@ export class ProposalForm extends React.Component<Props, State> {
                       : `https://tipsmeee.com/login/capco/${user.username}`
                   }
                   type="button">
-                  <FormattedMessage id="create-tipsmeee" />
+                  {intl.formatMessage({ id: 'create-tipsmeee' })}
                 </Button>
               </p>
               <Field
@@ -847,12 +918,12 @@ export class ProposalForm extends React.Component<Props, State> {
                 disabled={tipsmeeeIdDisabled}
                 label={
                   <span>
-                    <FormattedMessage id="proposal.tipsMeee" />
+                    {intl.formatMessage({ id: 'proposal.tipsMeee' })}
                     {mandatory}
                   </span>
                 }
               />
-              <FormattedMessage id="tipsmeee-code-help" tagName="p" />
+              {intl.formatMessage({ id: 'tipsmeee-code-help', tagName: 'p' })}
             </TipsmeeeFormContainer>
           </>
         )}
@@ -863,15 +934,21 @@ export class ProposalForm extends React.Component<Props, State> {
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => {
+const mapStateToProps = (
+  state: GlobalState,
+  { proposal, proposalForm, isBackOfficeInput }: Props,
+) => {
   const defaultResponses = formatInitialResponsesValues(
     proposalForm.questions,
     proposal ? proposal.responses : [],
   );
-
+  let draft = !isBackOfficeInput;
+  if (proposal) {
+    draft = proposal.publicationStatus === 'DRAFT';
+  }
   return {
     initialValues: {
-      draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
+      draft,
       title: proposal ? proposal.title : null,
       summary: proposal ? proposal.summary : null,
       body: proposal ? proposal.body : null,
@@ -898,6 +975,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     features: state.default.features,
     themes: state.default.themes,
     user: state.user.user,
+    isBackOfficeInput,
     currentStepId: state.project.currentProjectStepById,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
     asyncValidate:
@@ -968,7 +1046,11 @@ export default createFragmentContainer(container, {
       description
       suggestingSimilarProposals
       step {
+        project {
+          _id
+        }
         id
+        slug
         ...interpellationLabelHelper_step @relay(mask: false)
       }
       districts(order: ALPHABETICAL) {

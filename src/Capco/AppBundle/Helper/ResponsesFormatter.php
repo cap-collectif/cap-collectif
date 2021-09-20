@@ -10,7 +10,7 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 
 class ResponsesFormatter
 {
-    protected $questionRepo;
+    protected AbstractQuestionRepository $questionRepo;
 
     public function __construct(AbstractQuestionRepository $questionRepo)
     {

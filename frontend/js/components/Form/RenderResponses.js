@@ -72,6 +72,7 @@ const RenderResponses = ({
   dispatch,
   typeForm = TYPE_FORM.DEFAULT,
   availableQuestions: oldAvailableQuestions = [],
+  divClassName='',
   memoize,
 }: {
   ...FieldArrayProps,
@@ -84,6 +85,7 @@ const RenderResponses = ({
   dispatch: Dispatch,
   typeForm: $Values<typeof TYPE_FORM>,
   availableQuestions: Array<string>,
+  divClassName?: string,
   memoize: any,
 }) => {
   const [lastQuestionType, setLastQuestionType] = useState<?QuestionType>(null);
@@ -118,7 +120,7 @@ const RenderResponses = ({
   }, []);
 
   return (
-    <div>
+    <div className={divClassName}>
       {fields &&
         fields.map((member, index) => {
           const field = questions[index];

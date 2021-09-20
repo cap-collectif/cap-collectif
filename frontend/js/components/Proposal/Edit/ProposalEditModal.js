@@ -247,6 +247,7 @@ export const ProposalEditModal = ({
                   <ProposalForm
                     proposalForm={proposal.form}
                     proposal={proposal}
+                    isBackOfficeInput={false}
                     onSubmitSuccess={onClose}
                     onSubmitFailed={() => {
                       setErrorCount(errorCount + 1);

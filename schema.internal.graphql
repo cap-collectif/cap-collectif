@@ -3261,6 +3261,69 @@ type CreateProposalFormPayload {
   clientMutationId: String
 }
 
+input CreateProposalFromBackOfficeInput {
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
+
+  """The id of the form form proposal"""
+  proposalFormId: ID!
+
+  """If true will create a draft proposal, otherwise a published proposal."""
+  draft: Boolean
+
+  """The proposal title"""
+  title: String
+
+  """The proposal body"""
+  body: HTML
+
+  """The proposal summary"""
+  summary: String
+
+  """The theme id (feature themes must be enabled)"""
+  theme: ID
+
+  """The category id"""
+  category: ID
+
+  """The district id (feature districts must be enabled)"""
+  district: ID
+
+  """The address geocoded by google"""
+  address: String
+
+  """The responses to the form questions"""
+  responses: [ResponseInput]
+
+  """The media id to illustrate"""
+  media: ID
+
+  """The ID of tipsmeee"""
+  tipsmeeeId: String
+  clientMutationId: String
+
+  """The proposal author"""
+  author: ID!
+
+  """The proposal published date"""
+  publishedAt: DateTime!
+}
+
 input CreateProposalFusionInput {
   """Proposal ids from which the fusion is created"""
   fromProposals: [ID!]!
@@ -6865,6 +6928,9 @@ type Mutation {
 
   """Update social networks on a proposal"""
   updateProposalSocialNetworks(input: UpdateProposalSocialNetworksInput!): UpdateProposalSocialNetworksPayload
+
+  """Create a proposal from back office"""
+  createProposalFromBackOffice(input: CreateProposalFromBackOfficeInput!): CreateProposalPayload
 }
 
 """A connection to a list of items."""

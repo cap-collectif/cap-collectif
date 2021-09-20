@@ -10,6 +10,9 @@ import 'core-js';
 const DEFAULT_MERGED_PROPOSALS_PROJECT = {
   id: 'UHJvamVjdDpwcm9dzdqZWN0Ng==',
   slug: 'default-merged-proposal-project',
+  type: {
+    title: 'project.types.participatoryBudgeting',
+  },
   exportableSteps: [
     {
       position: 0,
@@ -422,6 +425,9 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
 const DEFAULT_PROJECT = {
   id: 'UHJvamVjdDpwcm9qZWN0Ng==',
   slug: 'je-suis-un-slug',
+  type: {
+    title: 'project.types.participatoryBudgeting',
+  },
   exportableSteps: [
     {
       position: 0,

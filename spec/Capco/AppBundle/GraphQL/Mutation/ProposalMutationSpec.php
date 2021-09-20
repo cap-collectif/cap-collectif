@@ -2,7 +2,6 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -12,10 +11,13 @@ use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver;
-use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -36,29 +38,35 @@ class ProposalMutationSpec extends ObjectBehavior
 {
     public function let(
         LoggerInterface $logger,
-        ProposalLikersDataLoader $proposalLikersDataLoader,
-        GlobalIdResolver $globalIdResolver,
-        Publisher $publisher,
+        GlobalIdResolver $globalidResolver,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        Manager $manager,
+        ProposalFormRepository $proposalFormRepository,
+        RedisStorageHelper $redisStorageHelper,
+        ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader,
+        Indexer $indexer,
+        Manager $toggleManager,
+        ResponsesFormatter $responsesFormatter,
+        ProposalRepository $proposalRepository,
+        Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
-        RedisCache $cache,
-        AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
-        AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver
+        ProposalLikersDataLoader $proposalLikersDataLoader
     ) {
         $this->beConstructedWith(
             $logger,
-            $proposalLikersDataLoader,
-            $globalIdResolver,
-            $publisher,
+            $globalidResolver,
             $em,
             $formFactory,
-            $manager,
+            $proposalFormRepository,
+            $redisStorageHelper,
+            $proposalFormProposalsDataLoader,
+            $indexer,
+            $toggleManager,
+            $responsesFormatter,
+            $proposalRepository,
+            $publisher,
             $authorizationChecker,
-            $cache,
-            $autoCompleteDocQueryResolver,
-            $autoCompleteFromSiretQueryResolver
+            $proposalLikersDataLoader
         );
     }
 
@@ -78,21 +86,20 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         ProposalForm $proposalForm,
         Container $container,
-        GlobalIdResolver $globalIdResolver,
-        Manager $manager,
+        GlobalIdResolver $globalidResolver,
+        Manager $toggleManager,
         ProposalSocialNetworks $proposalSocialNetworks,
         $wasDraft = true
     ) {
         $this->setContainer($container);
 
         $values = [];
-        $values['id'] = 'UHJvcG9zYWwscHJvcG9zYWwyMQ==';
+        $values['id'] = GlobalId::toGlobalId('Proposal', 'proposal21');
         $values['draft'] = false;
         $values['title'] = 'new title';
         $values['author'] = 'VXNlcix1c2VyNTAx';
         $user = $author;
-        $container->get(Manager::class)->willReturn($manager);
-        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
+        $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
 
         $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
@@ -126,7 +133,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
         $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
 
-        $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
+        $globalidResolver->resolve($values['id'], $user)->willReturn($proposal);
 
         // we set the proposal as non draft
         $proposal
@@ -134,9 +141,6 @@ class ProposalMutationSpec extends ObjectBehavior
             ->shouldBeCalled();
         $proposal->setDraft(false)->shouldBeCalled();
         $proposal->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
-
-        $container->get(Indexer::class)->willReturn($indexer);
-        $container->get('swarrot.publisher')->willReturn($publisher);
 
         $formFactory
             ->create(ProposalAdminType::class, $proposal, [
@@ -180,13 +184,13 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         ProposalForm $proposalForm,
         Container $container,
-        GlobalIdResolver $globalIdResolver,
+        GlobalIdResolver $globalidResolver,
         ProposalRevision $proposalRevision1,
         ProposalRevision $proposalRevision2,
         ProposalRevision $proposalRevision3,
         ProposalRevision $proposalRevision4,
         ProposalSocialNetworks $proposalSocialNetworks,
-        Manager $manager,
+        Manager $toggleManager,
         $wasDraft = false
     ) {
         $this->setContainer($container);
@@ -197,8 +201,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['title'] = 'new title';
         $values['author'] = 'VXNlcix1c2VyNTAx';
         $user = $author;
-        $container->get(Manager::class)->willReturn($manager);
-        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
+        $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
         $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
         $author->isEmailConfirmed()->willReturn(true);
@@ -272,7 +275,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
             ->shouldBeCalled();
 
-        $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
+        $globalidResolver->resolve($values['id'], $user)->willReturn($proposal);
 
         // we set the proposal as non draft
         $proposal->setDraft(false)->shouldBeCalled();
@@ -323,9 +326,9 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         ProposalForm $proposalForm,
         Container $container,
-        GlobalIdResolver $globalIdResolver,
+        GlobalIdResolver $globalidResolver,
         ProposalSocialNetworks $proposalSocialNetworks,
-        Manager $manager
+        Manager $toggleManager
     ) {
         $this->setContainer($container);
 
@@ -333,8 +336,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['id'] = GlobalId::toGlobalId('Proposal', 'proposal10');
         $values['draft'] = false;
         $values['title'] = 'new title';
-        $container->get(Manager::class)->willReturn($manager);
-        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
+        $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
         $proposalAuthor->getId()->willReturn('userSpyl');
         $proposalAuthor->getUsername()->willReturn('aUser');
         $proposalAuthor->isEmailConfirmed()->willReturn(true);
@@ -378,10 +380,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
             ->shouldBeCalled();
 
-        $globalIdResolver->resolve($values['id'], $owner)->willReturn($proposal);
-
-        $container->get(Indexer::class)->willReturn($indexer);
-        $container->get('swarrot.publisher')->willReturn($publisher);
+        $globalidResolver->resolve($values['id'], $owner)->willReturn($proposal);
 
         $formFactory
             ->create(ProposalAdminType::class, $proposal, [
@@ -430,9 +429,9 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         ProposalForm $proposalForm,
         Container $container,
-        GlobalIdResolver $globalIdResolver,
+        GlobalIdResolver $globalidResolver,
         ProposalSocialNetworks $proposalSocialNetworks,
-        Manager $manager
+        Manager $toggleManager
     ) {
         $this->setContainer($container);
 
@@ -440,8 +439,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['id'] = GlobalId::toGlobalId('Proposal', 'proposal10');
         $values['draft'] = false;
         $values['title'] = 'new title';
-        $container->get(Manager::class)->willReturn($manager);
-        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
+        $container->get(Manager::class)->willReturn($toggleManager);
+        $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
         $proposalAuthor->getId()->willReturn('userSpyl');
         $proposalAuthor->getUsername()->willReturn('aUser');
         $proposalAuthor->isEmailConfirmed()->willReturn(true);
@@ -482,10 +481,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
             ->shouldBeCalled();
 
-        $globalIdResolver->resolve($values['id'], $admin)->willReturn($proposal);
-
-        $container->get(Indexer::class)->willReturn($indexer);
-        $container->get('swarrot.publisher')->willReturn($publisher);
+        $globalidResolver->resolve($values['id'], $admin)->willReturn($proposal);
 
         $formFactory
             ->create(ProposalAdminType::class, $proposal, [

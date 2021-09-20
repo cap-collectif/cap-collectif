@@ -322,7 +322,7 @@ InternalMutation:
                 builderConfig:
                     inputType: CreateProposalInput
                     payloadType: CreateProposalPayload
-                    mutateAndGetPayload: "@=mutation('createProposal', [value, getUser()])"
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalMutation", [value, getUser()])'
             addProposalsFromCsv:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
@@ -1361,3 +1361,12 @@ InternalMutation:
                     inputType: UpdateProposalSocialNetworksInput
                     payloadType: UpdateProposalSocialNetworksPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalSocialNetworksMutation", [value, getUser()])'
+
+            createProposalFromBackOffice:
+                description: 'Create a proposal from back office'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateProposalFromBackOfficeInput
+                    payloadType: CreateProposalPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFromBackofficeMutation", [value, getUser()])'

@@ -851,6 +851,38 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                             Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Project",
+                              "kind": "LinkedField",
+                              "name": "project",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "_id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "slug",
+                              "storageKey": null,
+                            },
+                            Object {
                               "abstractKey": "__isProposalStep",
                               "kind": "InlineFragment",
                               "selections": Array [
@@ -910,13 +942,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                           "storageKey": null,
                                         },
                                       ],
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -7250,7 +7275,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "57469280352c4fd3414b555c31e6d05c",
+          "cacheID": "e54bb27ccd3d7c88598de18f7b909043",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7948,7 +7973,12 @@ fragment ProposalForm_proposalForm on ProposalForm {
   description
   suggestingSimilarProposals
   step {
+    project {
+      _id
+      id
+    }
     id
+    slug
     ... on ProposalStep {
       __isProposalStep: __typename
       form {

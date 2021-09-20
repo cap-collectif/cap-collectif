@@ -6,10 +6,28 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDController
 {
-    public function editAnalysisAction()
+    public function createProposalAction(string $stepId): Response
+    {
+        /** @var Project $project */
+        $project =  $this->admin->getSubject();
+        if ($project->getProjectType()->getTitle() !== 'project.types.participatoryBudgeting') {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:createProposal.html.twig', [
+            'object' => $this->admin->getSubject(),
+            'form' => $this->admin->getForm()->createView(),
+            'action' => 'create',
+            'stepId' => $stepId
+        ]);
+    }
+
+    public function editAnalysisAction(): Response
     {
         $this->throwIfNoAccess();
 

@@ -23,9 +23,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      >
+      <ButtonGroup>
         <NewExportButton
           disabled={false}
           exportableSteps={
@@ -53,7 +51,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </ForwardRef>
+      </ButtonGroup>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -531,6 +529,9 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -1110,9 +1111,7 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      />
+      <ButtonGroup />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -1590,6 +1589,9 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -2178,9 +2180,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      >
+      <ButtonGroup>
         <NewExportButton
           disabled={false}
           exportableSteps={
@@ -2208,7 +2208,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </ForwardRef>
+      </ButtonGroup>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -2686,6 +2686,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -3274,9 +3277,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      />
+      <ButtonGroup />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -3754,6 +3755,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -4342,9 +4346,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      >
+      <ButtonGroup>
         <NewExportButton
           disabled={false}
           exportableSteps={
@@ -4363,7 +4365,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </ForwardRef>
+      </ButtonGroup>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -4832,6 +4834,9 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -5420,9 +5425,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      />
+      <ButtonGroup />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -5891,6 +5894,9 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -6479,9 +6485,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      >
+      <ButtonGroup>
         <NewExportButton
           disabled={true}
           exportableSteps={
@@ -6509,7 +6513,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
           onChange={[Function]}
         />
-      </ForwardRef>
+      </ButtonGroup>
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -6652,6 +6656,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={
@@ -6723,9 +6730,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           type="text"
         />
       </div>
-      <ForwardRef
-        spacing={6}
-      />
+      <ButtonGroup />
     </ForwardRef>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <div>
@@ -6868,6 +6873,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "title": "Sélection",
                 },
               ],
+              "type": Object {
+                "title": "project.types.participatoryBudgeting",
+              },
             }
           }
           themes={

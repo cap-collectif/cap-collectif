@@ -5,8 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -19,7 +17,6 @@ use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ProposalEvaluersType;
 use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
-use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -37,7 +34,6 @@ use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Error\UserErrors;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -47,38 +43,46 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ProposalMutation implements ContainerAwareInterface
+class ProposalMutation extends CreateProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
     use ResolverTrait;
-    protected AuthorizationCheckerInterface $authorizationChecker;
 
-    private LoggerInterface $logger;
+    protected AuthorizationCheckerInterface $authorizationChecker;
     private ProposalLikersDataLoader $proposalLikersDataLoader;
-    private GlobalIdResolver $globalIdResolver;
-    private Publisher $publisher;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private Manager $manager;
 
     public function __construct(
         LoggerInterface $logger,
-        ProposalLikersDataLoader $proposalLikersDataLoader,
         GlobalIdResolver $globalidResolver,
-        Publisher $publisher,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        Manager $manager,
-        AuthorizationCheckerInterface $authorizationChecker
+        ProposalFormRepository $proposalFormRepository,
+        RedisStorageHelper $redisStorageHelper,
+        ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader,
+        Indexer $indexer,
+        Manager $toggleManager,
+        ResponsesFormatter $responsesFormatter,
+        ProposalRepository $proposalRepository,
+        Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ProposalLikersDataLoader $proposalLikersDataLoader
     ) {
-        $this->logger = $logger;
-        $this->proposalLikersDataLoader = $proposalLikersDataLoader;
-        $this->globalIdResolver = $globalidResolver;
-        $this->publisher = $publisher;
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->manager = $manager;
+        parent::__construct(
+            $logger,
+            $globalidResolver,
+            $em,
+            $formFactory,
+            $proposalFormRepository,
+            $redisStorageHelper,
+            $proposalFormProposalsDataLoader,
+            $indexer,
+            $toggleManager,
+            $responsesFormatter,
+            $proposalRepository,
+            $publisher
+        );
         $this->authorizationChecker = $authorizationChecker;
+        $this->proposalLikersDataLoader = $proposalLikersDataLoader;
     }
 
     public function isGranted(string $id, ?User $viewer, string $accessType): bool
@@ -193,9 +197,8 @@ class ProposalMutation implements ContainerAwareInterface
         );
 
         // Synchronously index
-        $indexer = $this->container->get(Indexer::class);
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
+        $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
@@ -243,9 +246,8 @@ class ProposalMutation implements ContainerAwareInterface
         );
 
         // Synchronously index
-        $indexer = $this->container->get(Indexer::class);
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
+        $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
@@ -271,9 +273,8 @@ class ProposalMutation implements ContainerAwareInterface
             $user
         );
         // Synchronously index
-        $indexer = $this->container->get(Indexer::class);
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
+        $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
@@ -321,9 +322,8 @@ class ProposalMutation implements ContainerAwareInterface
             )
         );
         // Synchronously index
-        $indexer = $this->container->get(Indexer::class);
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
+        $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
@@ -377,103 +377,8 @@ class ProposalMutation implements ContainerAwareInterface
         $this->em->flush();
 
         // Synchronously index
-        $indexer = $this->container->get(Indexer::class);
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
-
-        return ['proposal' => $proposal];
-    }
-
-    public function create(Argument $input, $user): array
-    {
-        $proposalFormRepo = $this->container->get(ProposalFormRepository::class);
-
-        $values = $input->getArrayCopy();
-
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $proposalFormRepo->find($values['proposalFormId']);
-        if (!$proposalForm) {
-            $error = sprintf('Unknown proposalForm with id "%s"', $values['proposalFormId']);
-            $this->logger->error($error);
-
-            throw new UserError($error);
-        }
-        if (!$proposalForm->canContribute($user) && !$user->isAdmin()) {
-            throw new UserError('You can no longer contribute to this collect step.');
-        }
-        unset($values['proposalFormId']); // This only useful to retrieve the proposalForm
-
-        $draft = false;
-        if (isset($values['draft'])) {
-            $draft = $values['draft'];
-            unset($values['draft']);
-        }
-
-        if (
-            \count(
-                $this->container
-                    ->get(ProposalRepository::class)
-                    ->findCreatedSinceIntervalByAuthor($user, 'PT1M', 'author')
-            ) >= 2
-        ) {
-            $this->logger->error('You contributed too many times.');
-            $error = ['message' => 'You contributed too many times.'];
-
-            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
-        }
-
-        $values = $this->fixValues($values, $proposalForm);
-        $proposal = new Proposal();
-        $follower = new Follower();
-        $follower->setUser($user);
-        $follower->setProposal($proposal);
-        $follower->setNotifiedOf(FollowerNotifiedOfInterface::ALL);
-
-        $proposal
-            ->setDraft($draft)
-            ->setAuthor($user)
-            ->setProposalForm($proposalForm)
-            ->addFollower($follower);
-        if (
-            $proposalForm->getStep() &&
-            ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
-        ) {
-            $proposal->setStatus($defaultStatus);
-        }
-
-        $values = $this::hydrateSocialNetworks($values, $proposal, $proposalForm, true);
-        $form = $this->formFactory->create(ProposalType::class, $proposal, [
-            'proposalForm' => $proposalForm,
-            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
-        ]);
-
-        $this->logger->info('createProposal: ' . json_encode($values, true));
-
-        $form->submit($values);
-
-        if (!$form->isValid()) {
-            $this->handleErrors($form);
-        }
-
-        $this->em->persist($follower);
-        $this->em->persist($proposal);
-        $this->em->flush();
-
-        $this->container->get(RedisStorageHelper::class)->recomputeUserCounters($user);
-
-        // Synchronously index
-        $indexer = $this->container->get(Indexer::class);
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
-
-        $this->container->get(ProposalFormProposalsDataLoader::class)->invalidate($proposalForm);
-
-        $this->container
-            ->get('swarrot.publisher')
-            ->publish(
-                CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
-                new Message(json_encode(['proposalId' => $proposal->getId()]))
-            );
+        $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
@@ -482,9 +387,9 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $viewer = $this->preventNullableViewer($viewer);
         $values = $input->getArrayCopy();
+
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['id'], $viewer);
-
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
             $this->logger->error($error);
@@ -500,7 +405,7 @@ class ProposalMutation implements ContainerAwareInterface
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
 
-        $proposalRevisionsEnabled = $this->manager->isActive(Manager::proposal_revisions);
+        $proposalRevisionsEnabled = $this->toggleManager->isActive(Manager::proposal_revisions);
         // catch all revisions with state pending or expired
         $revisions = $proposalRevisionsEnabled
             ? $proposal
@@ -510,7 +415,7 @@ class ProposalMutation implements ContainerAwareInterface
                         $revision->getState()
                 )
             : [];
-        $wasInRevision = $proposalRevisionsEnabled ? $proposal->isInRevision() : false;
+        $wasInRevision = $proposalRevisionsEnabled && $proposal->isInRevision();
 
         $author = $proposal->getAuthor();
 
@@ -572,23 +477,19 @@ class ProposalMutation implements ContainerAwareInterface
             $messageData['date'] = $now->format('Y-m-d H:i:s');
             $sendNotification = true;
         } else {
-            $sendNotification =
-                $proposal->viewerIsAdminOrOwner($viewer) && $author !== $viewer ? false : true;
+            $sendNotification = !($proposal->viewerIsAdminOrOwner($viewer) && $author !== $viewer);
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
             $messageData['date'] = $proposal->getLastModifiedAt()->format('Y-m-d H:i:s');
         }
-        $indexer = $this->container->get(Indexer::class);
         if ($sendNotification) {
-            $this->container
-                ->get('swarrot.publisher')
-                ->publish($proposalQueue, new Message(json_encode($messageData)));
+            $this->publisher->publish($proposalQueue, new Message(json_encode($messageData)));
         }
         if (isset($values['likers'])) {
             $this->proposalLikersDataLoader->invalidate($proposal);
         }
 
-        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
-        $indexer->finishBulk();
+        $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
@@ -679,69 +580,6 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         return $values;
-    }
-
-    private function fixValues(array $values, ProposalForm $proposalForm)
-    {
-        $toggleManager = $this->container->get(Manager::class);
-
-        if (
-            isset($values['theme']) &&
-            (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes())
-        ) {
-            unset($values['theme']);
-        }
-
-        if (isset($values['category']) && !$proposalForm->isUsingCategories()) {
-            unset($values['category']);
-        }
-
-        if (
-            isset($values['districts']) &&
-            (!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict())
-        ) {
-            unset($values['district']);
-        }
-
-        if (
-            isset($values['tipsmeeeId']) &&
-            (!$toggleManager->isActive(Manager::unstable__tipsmeee) ||
-                !$proposalForm->isUsingTipsmeee())
-        ) {
-            unset($values['tipsmeeeId']);
-        }
-
-        if (isset($values['address']) && !$proposalForm->getUsingAddress()) {
-            unset($values['address']);
-        }
-
-        if (isset($values['responses'])) {
-            $values['responses'] = $this->container
-                ->get(ResponsesFormatter::class)
-                ->format($values['responses']);
-        }
-
-        return $values;
-    }
-
-    private function handleErrors(Form $form)
-    {
-        $errors = [];
-        foreach ($form->getErrors() as $error) {
-            $this->logger->error(__METHOD__ . ' : ' . $error->getMessage());
-            $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $form->getName() .
-                    ' ' .
-                    'Extra data: ' .
-                    implode('', $form->getExtraData())
-            );
-            $errors[] = (string) $error->getMessage();
-        }
-        if (!empty($errors)) {
-            throw new UserErrors($errors);
-        }
     }
 
     private function shouldBeDraft(

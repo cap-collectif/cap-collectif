@@ -74,7 +74,7 @@ import Heading from '~ui/Primitives/Heading';
 import Text from '~ui/Primitives/Text';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 import useToastingMachine from '~/utils/hooks/useToastingMachine';
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
@@ -856,8 +856,8 @@ export const ProjectAdminProposals = ({
               placeholder={intl.formatMessage({ id: 'global.menu.search' })}
             />
           </div>
-          <Flex spacing={6}>
-            {useFeatureFlag('import_proposals') && selectedStepId && (
+          <ButtonGroup>
+            {selectedStepId && project?.type?.title === 'project.types.participatoryBudgeting' && (
               <ImportButton selectedStepId={selectedStepId} />
             )}
             {viewerIsAdmin && project.exportableSteps && (
@@ -875,7 +875,7 @@ export const ProjectAdminProposals = ({
                 linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
               />
             )}
-          </Flex>
+          </ButtonGroup>
         </Flex>
 
         <S.ProjectAdminProposalsHeader>
@@ -1021,6 +1021,9 @@ const container = createPaginationContainer(
         id
         adminAlphaUrl
         slug
+        type {
+          title
+        }
         exportableSteps @include(if: $viewerIsAdmin) {
           position
           step {

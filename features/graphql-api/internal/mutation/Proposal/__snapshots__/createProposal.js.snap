@@ -13,6 +13,25 @@ Object {
 }
 `;
 
+exports[`Internal|create proposal create proposal from back office as admin 1`] = `
+Object {
+  "createProposalFromBackOffice": Object {
+    "proposal": Object {
+      "author": Object {
+        "username": "mauriau",
+      },
+      "body": "Viens on va trash talk comme des haters sur les RS",
+      "facebookUrl": "https://www.facebook.com/JVCArmy/",
+      "publishedAt": "2021-09-02 00:00:00",
+      "tipsmeeeId": null,
+      "title": "j'ai des liens facebook et twitter à vendre",
+      "twitterUrl": "https://twitter.com/bestof_1825",
+      "webPageUrl": "http://cap-collectif.com",
+    },
+  },
+}
+`;
+
 exports[`Internal|create proposal create proposal with social networks 1`] = `
 Object {
   "createProposal": Object {

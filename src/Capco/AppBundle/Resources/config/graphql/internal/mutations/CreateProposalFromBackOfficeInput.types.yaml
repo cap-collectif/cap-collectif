@@ -1,0 +1,13 @@
+CreateProposalFromBackOfficeInput:
+    type: relay-mutation-input
+    inherits:
+        - CreateProposalInput
+    config:
+        description: 'Create a proposal from back office'
+        fields:
+            author:
+                type: 'ID!'
+                description: 'The proposal author'
+            publishedAt:
+                type: 'DateTime!'
+                description: 'The proposal published date'

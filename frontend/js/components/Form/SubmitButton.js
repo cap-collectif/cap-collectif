@@ -15,6 +15,7 @@ type Props = {
   label: string,
   bsStyle: BsStyle,
   className: string,
+  loading: string,
   style: Object,
   disabled: boolean,
   loginOverlay: boolean,
@@ -26,6 +27,7 @@ class SubmitButton extends React.Component<Props> {
   static defaultProps = {
     label: 'global.send',
     bsStyle: 'primary',
+    loading: 'global.loading',
     className: '',
     style: {},
     disabled: false,
@@ -53,6 +55,7 @@ class SubmitButton extends React.Component<Props> {
       disabled,
       style,
       children,
+      loading,
     } = this.props;
     return (
       <LoginOverlay enabled={loginOverlay}>
@@ -64,7 +67,7 @@ class SubmitButton extends React.Component<Props> {
           className={cn(`btn btn-${bsStyle}`, className)}
           style={style}>
           {children}
-          <FormattedMessage id={isSubmitting ? 'global.loading' : label} />
+          <FormattedMessage id={isSubmitting ? loading : label} />
         </button>
       </LoginOverlay>
     );

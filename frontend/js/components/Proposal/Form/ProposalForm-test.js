@@ -12,6 +12,8 @@ describe('<ProposalForm />', () => {
     description: 'Description 1',
     step: {
       id: 'step1',
+      slug: 'step-1',
+      project: null,
     },
     districts: [
       {
@@ -109,6 +111,8 @@ describe('<ProposalForm />', () => {
     description: 'Description 1',
     step: {
       id: 'step1',
+      slug: 'slug',
+      project: null,
     },
     districts: [
       {
@@ -260,6 +264,7 @@ describe('<ProposalForm />', () => {
       $refType,
     },
     geoJsons: [],
+    isBackOfficeInput: false,
   };
 
   it('should render an edit form', () => {
@@ -269,6 +274,10 @@ describe('<ProposalForm />', () => {
 
   it('should render a create Proposal form', () => {
     const wrapper = shallow(<ProposalForm {...props} proposal={null} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render a create Proposal form from back office', () => {
+    const wrapper = shallow(<ProposalForm {...props} proposal={null} isBackOfficeInput/>);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -315,6 +324,7 @@ describe('<ProposalForm />', () => {
         $refType,
         objectType: 'ESTABLISHMENT',
       },
+      isBackOfficeInput: false,
     };
     const wrapper = shallow(<ProposalForm {...establishmentProps} proposal={null} />);
     expect(wrapper).toMatchSnapshot();

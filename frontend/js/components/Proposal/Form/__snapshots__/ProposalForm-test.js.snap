@@ -18,6 +18,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     }
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Title help"
     id="proposal_title"
     label={
@@ -27,6 +28,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       />
     }
     name="title"
+    placeholder={null}
     type="text"
   />
   <Collapse
@@ -70,10 +72,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
               }
             }
           >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
+            global.close
           </Button>
         </PanelTitle>
       </PanelHeading>
@@ -85,40 +84,36 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Summary help"
     id="global.summary"
     label={
       <span>
-        <FormattedMessage
-          id="global.summary"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        global.summary
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     maxLength="140"
     minLength="2"
     name="summary"
+    placeholder={null}
     type="textarea"
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Theme help"
     id="global.theme"
     label={
       <span>
-        <FormattedMessage
-          id="global.theme"
-          values={Object {}}
-        />
+        global.theme
       </span>
     }
     name="theme"
@@ -139,14 +134,12 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Category help"
     id="global.category"
     label={
       <span>
-        <FormattedMessage
-          id="global.category"
-          values={Object {}}
-        />
+        global.category
       </span>
     }
     name="category"
@@ -178,15 +171,11 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       }
     }
     component={[Function]}
+    divClassName="bo_width_560"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal_form.address"
-        values={Object {}}
-      />
-    }
+    label="proposal_form.address"
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
@@ -213,14 +202,12 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="District help"
     id="proposal_district"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.district"
-          values={Object {}}
-        />
+        proposal.district
       </span>
     }
     name="district"
@@ -251,19 +238,18 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     id="proposal_body"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.body"
-          values={Object {}}
-        />
+        proposal.body
       </span>
     }
     name="body"
+    placeholder={null}
     type="editor"
   />
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
+    divClassName="bo_width_747"
     form="formName"
     intl={
       Object {
@@ -319,54 +305,45 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_747"
     help="Illustration help"
     id="proposal_media"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.media"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        proposal.media
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     name="media"
     type="image"
   />
-  <ProposalForm__ExternaLinks
+  <ProposalForm__ExternalLinks
     backgroundColor="#ffffff"
+    className="external-links"
     paddingY={8}
   >
     <Text
       as="h3"
       color="#272B30"
+      display="flex"
       fontSize="14px"
       fontWeight="600"
       lineHeight="24px"
       mb={6}
     >
-      <FormattedMessage
-        id="your-external-links"
-        values={Object {}}
-      />
+      your-external-links
     </Text>
     <Field
       component={[Function]}
       id="proposal_wep_page"
-      label={
-        <FormattedMessage
-          id="form.label_website"
-          values={Object {}}
-        />
-      }
+      label="form.label_website"
       name="webPageUrl"
       placeholder="your-url"
       type="text"
@@ -374,12 +351,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     <Field
       component={[Function]}
       id="proposal_twitter"
-      label={
-        <FormattedMessage
-          id="share.twitter"
-          values={Object {}}
-        />
-      }
+      label="share.twitter"
       name="twitterUrl"
       placeholder="https://twitter.com/pseudo"
       type="text"
@@ -387,12 +359,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     <Field
       component={[Function]}
       id="proposal_facebook"
-      label={
-        <FormattedMessage
-          id="share.facebook"
-          values={Object {}}
-        />
-      }
+      label="share.facebook"
       name="facebookUrl"
       placeholder="https://facebook.com/pseudo"
       type="text"
@@ -400,12 +367,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     <Field
       component={[Function]}
       id="proposal_instagram"
-      label={
-        <FormattedMessage
-          id="instagram"
-          values={Object {}}
-        />
-      }
+      label="instagram"
       name="instagramUrl"
       placeholder="https://instagram.com/pseudo"
       type="text"
@@ -413,12 +375,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     <Field
       component={[Function]}
       id="proposal_linkedin"
-      label={
-        <FormattedMessage
-          id="share.linkedin"
-          values={Object {}}
-        />
-      }
+      label="share.linkedin"
       name="linkedInUrl"
       placeholder="https://linkedin.com/in/pseudo"
       type="text"
@@ -426,17 +383,12 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     <Field
       component={[Function]}
       id="proposal_youtube"
-      label={
-        <FormattedMessage
-          id="youtube"
-          values={Object {}}
-        />
-      }
+      label="youtube"
       name="youtubeUrl"
       placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
-  </ProposalForm__ExternaLinks>
+  </ProposalForm__ExternalLinks>
   <FormattedHTMLMessage
     id="configure-my-tipsmeee"
     tagName="p"
@@ -465,10 +417,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         target="_blank"
         type="button"
       >
-        <FormattedMessage
-          id="create-tipsmeee"
-          values={Object {}}
-        />
+        create-tipsmeee
       </Button>
     </p>
     <Field
@@ -477,18 +426,12 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       id="proposal_tipsmeee"
       label={
         <span>
-          <FormattedMessage
-            id="proposal.tipsMeee"
-            values={Object {}}
-          />
+          proposal.tipsMeee
           <span
             className="excerpt"
           >
              
-            <FormattedMessage
-              id="global.mandatory"
-              values={Object {}}
-            />
+            global.mandatory
           </span>
         </span>
       }
@@ -496,11 +439,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       placeholder="this is tipsmeee"
       type="text"
     />
-    <FormattedMessage
-      id="tipsmeee-code-help"
-      tagName="p"
-      values={Object {}}
-    />
+    tipsmeee-code-help
   </ProposalForm__TipsmeeeFormContainer>
 </form>
 `;
@@ -523,6 +462,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     }
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Title help"
     id="proposal_title"
     label={
@@ -532,6 +472,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
       />
     }
     name="title"
+    placeholder={null}
     type="text"
   />
   <Collapse
@@ -575,10 +516,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
               }
             }
           >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
+            global.close
           </Button>
         </PanelTitle>
       </PanelHeading>
@@ -590,40 +528,36 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Summary help"
     id="global.summary"
     label={
       <span>
-        <FormattedMessage
-          id="global.summary"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        global.summary
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     maxLength="140"
     minLength="2"
     name="summary"
+    placeholder={null}
     type="textarea"
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Theme help"
     id="global.theme"
     label={
       <span>
-        <FormattedMessage
-          id="global.theme"
-          values={Object {}}
-        />
+        global.theme
       </span>
     }
     name="theme"
@@ -644,14 +578,12 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Category help"
     id="global.category"
     label={
       <span>
-        <FormattedMessage
-          id="global.category"
-          values={Object {}}
-        />
+        global.category
       </span>
     }
     name="category"
@@ -683,15 +615,11 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
       }
     }
     component={[Function]}
+    divClassName="bo_width_560"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal_form.address"
-        values={Object {}}
-      />
-    }
+    label="proposal_form.address"
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
@@ -718,14 +646,12 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="District help"
     id="proposal_district"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.district"
-          values={Object {}}
-        />
+        proposal.district
       </span>
     }
     name="district"
@@ -756,19 +682,18 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     id="proposal_body"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.body"
-          values={Object {}}
-        />
+        proposal.body
       </span>
     }
     name="body"
+    placeholder={null}
     type="editor"
   />
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
+    divClassName="bo_width_747"
     form="formName"
     intl={
       Object {
@@ -824,54 +749,45 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_747"
     help="Illustration help"
     id="proposal_media"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.media"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        proposal.media
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     name="media"
     type="image"
   />
-  <ProposalForm__ExternaLinks
+  <ProposalForm__ExternalLinks
     backgroundColor="#ffffff"
+    className="external-links"
     paddingY={8}
   >
     <Text
       as="h3"
       color="#272B30"
+      display="flex"
       fontSize="14px"
       fontWeight="600"
       lineHeight="24px"
       mb={6}
     >
-      <FormattedMessage
-        id="your-external-links"
-        values={Object {}}
-      />
+      your-external-links
     </Text>
     <Field
       component={[Function]}
       id="proposal_wep_page"
-      label={
-        <FormattedMessage
-          id="form.label_website"
-          values={Object {}}
-        />
-      }
+      label="form.label_website"
       name="webPageUrl"
       placeholder="your-url"
       type="text"
@@ -879,12 +795,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     <Field
       component={[Function]}
       id="proposal_twitter"
-      label={
-        <FormattedMessage
-          id="share.twitter"
-          values={Object {}}
-        />
-      }
+      label="share.twitter"
       name="twitterUrl"
       placeholder="https://twitter.com/pseudo"
       type="text"
@@ -892,12 +803,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     <Field
       component={[Function]}
       id="proposal_facebook"
-      label={
-        <FormattedMessage
-          id="share.facebook"
-          values={Object {}}
-        />
-      }
+      label="share.facebook"
       name="facebookUrl"
       placeholder="https://facebook.com/pseudo"
       type="text"
@@ -905,12 +811,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     <Field
       component={[Function]}
       id="proposal_instagram"
-      label={
-        <FormattedMessage
-          id="instagram"
-          values={Object {}}
-        />
-      }
+      label="instagram"
       name="instagramUrl"
       placeholder="https://instagram.com/pseudo"
       type="text"
@@ -918,12 +819,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     <Field
       component={[Function]}
       id="proposal_linkedin"
-      label={
-        <FormattedMessage
-          id="share.linkedin"
-          values={Object {}}
-        />
-      }
+      label="share.linkedin"
       name="linkedInUrl"
       placeholder="https://linkedin.com/in/pseudo"
       type="text"
@@ -931,17 +827,443 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     <Field
       component={[Function]}
       id="proposal_youtube"
-      label={
-        <FormattedMessage
-          id="youtube"
-          values={Object {}}
-        />
-      }
+      label="youtube"
       name="youtubeUrl"
       placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
-  </ProposalForm__ExternaLinks>
+  </ProposalForm__ExternalLinks>
+</form>
+`;
+
+exports[`<ProposalForm /> should render a create Proposal form from back office 1`] = `
+<form
+  id="proposal-form"
+>
+  <Field
+    addonAfter={
+      <Glyphicon
+        bsClass="glyphicon"
+        className=""
+        glyph="refresh"
+      />
+    }
+    autoComplete="off"
+    component={[Function]}
+    divClassName="bo_width_747"
+    help={null}
+    id="proposal_title"
+    label={
+      <FormattedMessage
+        id="global.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    placeholder="untitled-proposal"
+    type="text"
+  />
+  <Collapse
+    appear={false}
+    dimension="height"
+    getDimensionValue={[Function]}
+    in={false}
+    mountOnEnter={false}
+    timeout={300}
+    unmountOnExit={false}
+  >
+    <Uncontrolled(Panel)>
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <PanelTitle
+          bsClass="panel"
+          componentClass="div"
+        >
+          <FormattedMessage
+            id="proposal.suggest_header"
+            values={
+              Object {
+                "matches": 0,
+                "terms": 2,
+              }
+            }
+          />
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="pull-right"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "marginTop": -5,
+              }
+            }
+          >
+            global.close
+          </Button>
+        </PanelTitle>
+      </PanelHeading>
+      <ListGroup
+        bsClass="list-group"
+      />
+    </Uncontrolled(Panel)>
+  </Collapse>
+  <Field
+    autoComplete="off"
+    component={[Function]}
+    divClassName="bo_width_747"
+    help={null}
+    id="global.summary"
+    label={
+      <span>
+        global.summary
+        <Text
+          as="span"
+          color="gray.500"
+          fontWeight="normal"
+        >
+           
+          global.optional
+        </Text>
+      </span>
+    }
+    maxLength="140"
+    minLength="2"
+    name="summary"
+    placeholder="summarize-in-few-words"
+    type="textarea"
+  />
+  <UserListField
+    ariaControls="ProposalAdminContentForm-filter-user-listbox"
+    authorOfEvent={false}
+    autoload={false}
+    className=""
+    clearable={false}
+    debounce={false}
+    divClassName="bo_width_560"
+    id="proposal-admin-author"
+    inputClassName="fake-inputClassName"
+    label={
+      <FormattedMessage
+        id="global.author"
+        values={Object {}}
+      />
+    }
+    labelClassName="control-label"
+    multi={false}
+    name="author"
+    placeholder="global.author"
+    selectFieldIsObject={true}
+  />
+  <Field
+    addonAfter={
+      <Icon
+        name="CALENDAR"
+        size="sm"
+      />
+    }
+    component={[Function]}
+    dateProps={
+      Object {
+        "dateFormat": "DD/MM/YYYY HH:mm:ss",
+      }
+    }
+    divClassName="bo_width_140"
+    formName="proposal-form"
+    id="proposal-publishedAt"
+    label="global.date.text"
+    name="publishedAt"
+    placeholder="date.placeholder"
+    type="datetime"
+  />
+  <Field
+    component={[Function]}
+    divClassName="bo_width_560"
+    help={null}
+    id="global.theme"
+    label={
+      <span>
+        global.theme
+      </span>
+    }
+    name="theme"
+    type="select"
+  >
+    <FormattedMessage
+      id="proposal.select.theme"
+      values={Object {}}
+    >
+      <Component />
+    </FormattedMessage>
+    <option
+      key="theme1"
+      value="theme1"
+    >
+      Theme 1
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    divClassName="bo_width_560"
+    help={null}
+    id="global.category"
+    label={
+      <span>
+        global.category
+      </span>
+    }
+    name="category"
+    type="select"
+  >
+    <FormattedMessage
+      id="proposal.select.category"
+      values={Object {}}
+    >
+      <Component />
+    </FormattedMessage>
+    <option
+      key="category1"
+      value="category1"
+    >
+      Category 1
+    </option>
+    <option
+      key="category2"
+      value="category2"
+    >
+      Category 2
+    </option>
+  </Field>
+  <Field
+    addressProps={
+      Object {
+        "getAddress": [Function],
+      }
+    }
+    component={[Function]}
+    divClassName="bo_width_560"
+    formName="proposal-form"
+    help={null}
+    id="proposal_address"
+    label="proposal_form.address"
+    name="addressText"
+    placeholder="proposal.map.form.placeholder"
+    type="address"
+  />
+  <ProposalFormMapPreview
+    address={null}
+    categories={
+      Array [
+        Object {
+          "color": "blue",
+          "icon": null,
+          "id": "category1",
+          "name": "Category 1",
+        },
+        Object {
+          "color": "red",
+          "icon": "tractor",
+          "id": "category2",
+          "name": "Category 2",
+        },
+      ]
+    }
+    category={null}
+  />
+  <Field
+    component={[Function]}
+    divClassName="bo_width_560"
+    help={null}
+    id="proposal_district"
+    label={
+      <span>
+        proposal.district
+      </span>
+    }
+    name="district"
+    type="select"
+  >
+    <FormattedMessage
+      id="proposal.select.district"
+      values={Object {}}
+    >
+      <Component />
+    </FormattedMessage>
+    <option
+      key="district1"
+      value="district1"
+    >
+      District 1
+    </option>
+    <option
+      key="district2"
+      value="district2"
+    >
+      District 2
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    help={null}
+    id="proposal_body"
+    label={
+      <span>
+        proposal.body
+      </span>
+    }
+    name="body"
+    placeholder="describe-your-project-in-details"
+    type="editor"
+  />
+  <FieldArray
+    change={[MockFunction]}
+    component={[Function]}
+    dispatch={[MockFunction]}
+    divClassName="bo_width_747"
+    form="formName"
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    memoize={[Function]}
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "__typename": "SimpleQuestion",
+          "alwaysJumpDestinationQuestion": null,
+          "choices": Object {
+            "edges": Array [],
+            "pageInfo": Object {
+              "hasNextPage": false,
+            },
+            "totalCount": 0,
+          },
+          "description": null,
+          "destinationJumps": Array [],
+          "helpText": "Question 1",
+          "hidden": false,
+          "id": "question1",
+          "isOtherAllowed": false,
+          "isRangeBetween": true,
+          "jumps": Array [],
+          "level": null,
+          "number": 1,
+          "position": 1,
+          "private": true,
+          "rangeMax": 10,
+          "rangeMin": 0,
+          "required": true,
+          "title": "Lol",
+          "type": "text",
+          "validationRule": null,
+        },
+      ]
+    }
+    responses={Array []}
+  />
+  <Field
+    component={[Function]}
+    divClassName="bo_width_747"
+    help="Illustration help"
+    id="proposal_media"
+    label={
+      <span>
+        proposal.media
+        <Text
+          as="span"
+          color="gray.500"
+          fontWeight="normal"
+        >
+           
+          global.optional
+        </Text>
+      </span>
+    }
+    name="media"
+    type="image"
+  />
+  <ProposalForm__ExternalLinks
+    backgroundColor="#ffffff"
+    className="external-links"
+    paddingY={8}
+  >
+    <Text
+      as="span"
+      color="#272B30"
+      display="flex"
+      fontSize="14px"
+      fontWeight="600"
+      lineHeight="24px"
+      mb={6}
+    >
+      your-external-links
+    </Text>
+    <Field
+      component={[Function]}
+      id="proposal_wep_page"
+      label="form.label_website"
+      name="webPageUrl"
+      placeholder="your-url"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_twitter"
+      label="share.twitter"
+      name="twitterUrl"
+      placeholder="https://twitter.com/pseudo"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_facebook"
+      label="share.facebook"
+      name="facebookUrl"
+      placeholder="https://facebook.com/pseudo"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_instagram"
+      label="instagram"
+      name="instagramUrl"
+      placeholder="https://instagram.com/pseudo"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_linkedin"
+      label="share.linkedin"
+      name="linkedInUrl"
+      placeholder="https://linkedin.com/in/pseudo"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="proposal_youtube"
+      label="youtube"
+      name="youtubeUrl"
+      placeholder="https://youtube.com/channel/pseudo"
+      type="text"
+    />
+  </ProposalForm__ExternalLinks>
 </form>
 `;
 
@@ -963,6 +1285,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     }
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Title help"
     id="proposal_title"
     label={
@@ -972,6 +1295,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
       />
     }
     name="title"
+    placeholder={null}
     type="text"
   />
   <Collapse
@@ -1015,10 +1339,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
               }
             }
           >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
+            global.close
           </Button>
         </PanelTitle>
       </PanelHeading>
@@ -1030,40 +1351,36 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Summary help"
     id="global.summary"
     label={
       <span>
-        <FormattedMessage
-          id="global.summary"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        global.summary
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     maxLength="140"
     minLength="2"
     name="summary"
+    placeholder={null}
     type="textarea"
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Theme help"
     id="global.theme"
     label={
       <span>
-        <FormattedMessage
-          id="global.theme"
-          values={Object {}}
-        />
+        global.theme
       </span>
     }
     name="theme"
@@ -1084,14 +1401,12 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Category help"
     id="global.category"
     label={
       <span>
-        <FormattedMessage
-          id="global.category"
-          values={Object {}}
-        />
+        global.category
       </span>
     }
     name="category"
@@ -1123,15 +1438,11 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
       }
     }
     component={[Function]}
+    divClassName="bo_width_560"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal_form.address"
-        values={Object {}}
-      />
-    }
+    label="proposal_form.address"
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
@@ -1158,14 +1469,12 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="District help"
     id="proposal_district"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.district"
-          values={Object {}}
-        />
+        proposal.district
       </span>
     }
     name="district"
@@ -1196,19 +1505,18 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     id="proposal_body"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.body"
-          values={Object {}}
-        />
+        proposal.body
       </span>
     }
     name="body"
+    placeholder={null}
     type="editor"
   />
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
+    divClassName="bo_width_747"
     form="formName"
     intl={
       Object {
@@ -1264,54 +1572,45 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_747"
     help="Illustration help"
     id="proposal_media"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.media"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        proposal.media
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     name="media"
     type="image"
   />
-  <ProposalForm__ExternaLinks
+  <ProposalForm__ExternalLinks
     backgroundColor="#ffffff"
+    className="external-links"
     paddingY={8}
   >
     <Text
       as="h3"
       color="#272B30"
+      display="flex"
       fontSize="14px"
       fontWeight="600"
       lineHeight="24px"
       mb={6}
     >
-      <FormattedMessage
-        id="your-external-links"
-        values={Object {}}
-      />
+      your-external-links
     </Text>
     <Field
       component={[Function]}
       id="proposal_wep_page"
-      label={
-        <FormattedMessage
-          id="form.label_website"
-          values={Object {}}
-        />
-      }
+      label="form.label_website"
       name="webPageUrl"
       placeholder="your-url"
       type="text"
@@ -1319,12 +1618,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     <Field
       component={[Function]}
       id="proposal_twitter"
-      label={
-        <FormattedMessage
-          id="share.twitter"
-          values={Object {}}
-        />
-      }
+      label="share.twitter"
       name="twitterUrl"
       placeholder="https://twitter.com/pseudo"
       type="text"
@@ -1332,12 +1626,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     <Field
       component={[Function]}
       id="proposal_facebook"
-      label={
-        <FormattedMessage
-          id="share.facebook"
-          values={Object {}}
-        />
-      }
+      label="share.facebook"
       name="facebookUrl"
       placeholder="https://facebook.com/pseudo"
       type="text"
@@ -1345,12 +1634,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     <Field
       component={[Function]}
       id="proposal_instagram"
-      label={
-        <FormattedMessage
-          id="instagram"
-          values={Object {}}
-        />
-      }
+      label="instagram"
       name="instagramUrl"
       placeholder="https://instagram.com/pseudo"
       type="text"
@@ -1358,12 +1642,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     <Field
       component={[Function]}
       id="proposal_linkedin"
-      label={
-        <FormattedMessage
-          id="share.linkedin"
-          values={Object {}}
-        />
-      }
+      label="share.linkedin"
       name="linkedInUrl"
       placeholder="https://linkedin.com/in/pseudo"
       type="text"
@@ -1371,17 +1650,12 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     <Field
       component={[Function]}
       id="proposal_youtube"
-      label={
-        <FormattedMessage
-          id="youtube"
-          values={Object {}}
-        />
-      }
+      label="youtube"
       name="youtubeUrl"
       placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
-  </ProposalForm__ExternaLinks>
+  </ProposalForm__ExternalLinks>
 </form>
 `;
 
@@ -1403,6 +1677,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     }
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Title help"
     id="proposal_title"
     label={
@@ -1412,6 +1687,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
       />
     }
     name="title"
+    placeholder={null}
     type="text"
   />
   <Collapse
@@ -1455,10 +1731,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
               }
             }
           >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
+            global.close
           </Button>
         </PanelTitle>
       </PanelHeading>
@@ -1470,40 +1743,36 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   <Field
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Summary help"
     id="global.summary"
     label={
       <span>
-        <FormattedMessage
-          id="global.summary"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        global.summary
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     maxLength="140"
     minLength="2"
     name="summary"
+    placeholder={null}
     type="textarea"
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Theme help"
     id="global.theme"
     label={
       <span>
-        <FormattedMessage
-          id="global.theme"
-          values={Object {}}
-        />
+        global.theme
       </span>
     }
     name="theme"
@@ -1524,14 +1793,12 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Category help"
     id="global.category"
     label={
       <span>
-        <FormattedMessage
-          id="global.category"
-          values={Object {}}
-        />
+        global.category
       </span>
     }
     name="category"
@@ -1563,15 +1830,11 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
       }
     }
     component={[Function]}
+    divClassName="bo_width_560"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal_form.address"
-        values={Object {}}
-      />
-    }
+    label="proposal_form.address"
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
@@ -1598,14 +1861,12 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="District help"
     id="proposal_district"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.district"
-          values={Object {}}
-        />
+        proposal.district
       </span>
     }
     name="district"
@@ -1636,19 +1897,18 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     id="proposal_body"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.body"
-          values={Object {}}
-        />
+        proposal.body
       </span>
     }
     name="body"
+    placeholder={null}
     type="editor"
   />
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
+    divClassName="bo_width_747"
     form="formName"
     intl={
       Object {
@@ -1704,54 +1964,45 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_747"
     help="Illustration help"
     id="proposal_media"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.media"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        proposal.media
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     name="media"
     type="image"
   />
-  <ProposalForm__ExternaLinks
+  <ProposalForm__ExternalLinks
     backgroundColor="#ffffff"
+    className="external-links"
     paddingY={8}
   >
     <Text
       as="h3"
       color="#272B30"
+      display="flex"
       fontSize="14px"
       fontWeight="600"
       lineHeight="24px"
       mb={6}
     >
-      <FormattedMessage
-        id="your-external-links"
-        values={Object {}}
-      />
+      your-external-links
     </Text>
     <Field
       component={[Function]}
       id="proposal_wep_page"
-      label={
-        <FormattedMessage
-          id="form.label_website"
-          values={Object {}}
-        />
-      }
+      label="form.label_website"
       name="webPageUrl"
       placeholder="your-url"
       type="text"
@@ -1759,12 +2010,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     <Field
       component={[Function]}
       id="proposal_twitter"
-      label={
-        <FormattedMessage
-          id="share.twitter"
-          values={Object {}}
-        />
-      }
+      label="share.twitter"
       name="twitterUrl"
       placeholder="https://twitter.com/pseudo"
       type="text"
@@ -1772,12 +2018,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     <Field
       component={[Function]}
       id="proposal_facebook"
-      label={
-        <FormattedMessage
-          id="share.facebook"
-          values={Object {}}
-        />
-      }
+      label="share.facebook"
       name="facebookUrl"
       placeholder="https://facebook.com/pseudo"
       type="text"
@@ -1785,12 +2026,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     <Field
       component={[Function]}
       id="proposal_instagram"
-      label={
-        <FormattedMessage
-          id="instagram"
-          values={Object {}}
-        />
-      }
+      label="instagram"
       name="instagramUrl"
       placeholder="https://instagram.com/pseudo"
       type="text"
@@ -1798,12 +2034,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     <Field
       component={[Function]}
       id="proposal_linkedin"
-      label={
-        <FormattedMessage
-          id="share.linkedin"
-          values={Object {}}
-        />
-      }
+      label="share.linkedin"
       name="linkedInUrl"
       placeholder="https://linkedin.com/in/pseudo"
       type="text"
@@ -1811,17 +2042,12 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     <Field
       component={[Function]}
       id="proposal_youtube"
-      label={
-        <FormattedMessage
-          id="youtube"
-          values={Object {}}
-        />
-      }
+      label="youtube"
       name="youtubeUrl"
       placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
-  </ProposalForm__ExternaLinks>
+  </ProposalForm__ExternalLinks>
 </form>
 `;
 
@@ -1843,6 +2069,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     }
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Title help"
     id="proposal_title"
     label={
@@ -1852,6 +2079,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       />
     }
     name="title"
+    placeholder={null}
     type="text"
   />
   <Collapse
@@ -1895,10 +2123,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
               }
             }
           >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
+            global.close
           </Button>
         </PanelTitle>
       </PanelHeading>
@@ -1910,40 +2135,36 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
+    divClassName="bo_width_747"
     help="Summary help"
     id="global.summary"
     label={
       <span>
-        <FormattedMessage
-          id="global.summary"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        global.summary
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     maxLength="140"
     minLength="2"
     name="summary"
+    placeholder={null}
     type="textarea"
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Theme help"
     id="global.theme"
     label={
       <span>
-        <FormattedMessage
-          id="global.theme"
-          values={Object {}}
-        />
+        global.theme
       </span>
     }
     name="theme"
@@ -1964,14 +2185,12 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="Category help"
     id="global.category"
     label={
       <span>
-        <FormattedMessage
-          id="global.category"
-          values={Object {}}
-        />
+        global.category
       </span>
     }
     name="category"
@@ -2003,15 +2222,11 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       }
     }
     component={[Function]}
+    divClassName="bo_width_560"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal_form.address"
-        values={Object {}}
-      />
-    }
+    label="proposal_form.address"
     name="addressText"
     placeholder="proposal.map.form.placeholder"
     type="address"
@@ -2038,14 +2253,12 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_560"
     help="District help"
     id="proposal_district"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.district"
-          values={Object {}}
-        />
+        proposal.district
       </span>
     }
     name="district"
@@ -2076,19 +2289,18 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     id="proposal_body"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.body"
-          values={Object {}}
-        />
+        proposal.body
       </span>
     }
     name="body"
+    placeholder={null}
     type="editor"
   />
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
+    divClassName="bo_width_747"
     form="formName"
     intl={
       Object {
@@ -2144,54 +2356,45 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   />
   <Field
     component={[Function]}
+    divClassName="bo_width_747"
     help="Illustration help"
     id="proposal_media"
     label={
       <span>
-        <FormattedMessage
-          id="proposal.media"
-          values={Object {}}
-        />
-        <span
-          className="excerpt"
+        proposal.media
+        <Text
+          as="span"
+          color="#707070"
+          fontWeight="normal"
         >
            
-          <FormattedMessage
-            id="global.optional"
-            values={Object {}}
-          />
-        </span>
+          global.optional
+        </Text>
       </span>
     }
     name="media"
     type="image"
   />
-  <ProposalForm__ExternaLinks
+  <ProposalForm__ExternalLinks
     backgroundColor="#ffffff"
+    className="external-links"
     paddingY={8}
   >
     <Text
       as="h3"
       color="#272B30"
+      display="flex"
       fontSize="14px"
       fontWeight="600"
       lineHeight="24px"
       mb={6}
     >
-      <FormattedMessage
-        id="your-external-links"
-        values={Object {}}
-      />
+      your-external-links
     </Text>
     <Field
       component={[Function]}
       id="proposal_wep_page"
-      label={
-        <FormattedMessage
-          id="form.label_website"
-          values={Object {}}
-        />
-      }
+      label="form.label_website"
       name="webPageUrl"
       placeholder="your-url"
       type="text"
@@ -2199,12 +2402,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <Field
       component={[Function]}
       id="proposal_twitter"
-      label={
-        <FormattedMessage
-          id="share.twitter"
-          values={Object {}}
-        />
-      }
+      label="share.twitter"
       name="twitterUrl"
       placeholder="https://twitter.com/pseudo"
       type="text"
@@ -2212,12 +2410,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <Field
       component={[Function]}
       id="proposal_facebook"
-      label={
-        <FormattedMessage
-          id="share.facebook"
-          values={Object {}}
-        />
-      }
+      label="share.facebook"
       name="facebookUrl"
       placeholder="https://facebook.com/pseudo"
       type="text"
@@ -2225,12 +2418,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <Field
       component={[Function]}
       id="proposal_instagram"
-      label={
-        <FormattedMessage
-          id="instagram"
-          values={Object {}}
-        />
-      }
+      label="instagram"
       name="instagramUrl"
       placeholder="https://instagram.com/pseudo"
       type="text"
@@ -2238,12 +2426,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <Field
       component={[Function]}
       id="proposal_linkedin"
-      label={
-        <FormattedMessage
-          id="share.linkedin"
-          values={Object {}}
-        />
-      }
+      label="share.linkedin"
       name="linkedInUrl"
       placeholder="https://linkedin.com/in/pseudo"
       type="text"
@@ -2251,16 +2434,11 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <Field
       component={[Function]}
       id="proposal_youtube"
-      label={
-        <FormattedMessage
-          id="youtube"
-          values={Object {}}
-        />
-      }
+      label="youtube"
       name="youtubeUrl"
       placeholder="https://youtube.com/channel/pseudo"
       type="text"
     />
-  </ProposalForm__ExternaLinks>
+  </ProposalForm__ExternalLinks>
 </form>
 `;

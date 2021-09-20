@@ -63,8 +63,6 @@ services:
                   alias: 'changeProposalContent',
                   method: 'changeContent',
               }
-            - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
-        autowire: true
 
     Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation:
         tags:

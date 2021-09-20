@@ -78,6 +78,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
           }
         />
         <Relay(Connect(injectIntl(ReduxForm)))
+          isBackOfficeInput={false}
           onSubmitFailed={[Function]}
           onSubmitSuccess={[MockFunction]}
           proposal={
@@ -225,6 +226,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
           }
         />
         <Relay(Connect(injectIntl(ReduxForm)))
+          isBackOfficeInput={false}
           onSubmitFailed={[Function]}
           onSubmitSuccess={[MockFunction]}
           proposal={
@@ -374,6 +376,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
           }
         />
         <Relay(Connect(injectIntl(ReduxForm)))
+          isBackOfficeInput={false}
           onSubmitFailed={[Function]}
           onSubmitSuccess={[MockFunction]}
           proposal={
@@ -521,6 +524,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
           }
         />
         <Relay(Connect(injectIntl(ReduxForm)))
+          isBackOfficeInput={false}
           onSubmitFailed={[Function]}
           onSubmitSuccess={[MockFunction]}
           proposal={
@@ -668,6 +672,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
           }
         />
         <Relay(Connect(injectIntl(ReduxForm)))
+          isBackOfficeInput={false}
           onSubmitFailed={[Function]}
           onSubmitSuccess={[MockFunction]}
           proposal={
@@ -815,6 +820,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
           }
         />
         <Relay(Connect(injectIntl(ReduxForm)))
+          isBackOfficeInput={false}
           onSubmitFailed={[Function]}
           onSubmitSuccess={[MockFunction]}
           proposal={
