@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Import;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Manager\MediaManager;
@@ -84,7 +85,7 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(true);
     }
 
-    private function intializeChoiceTest($row, $proposalForm, $question, $goodChoice)
+    private function intializeChoiceTest(array $row, ProposalForm $proposalForm, AbstractQuestion $question, QuestionChoice $goodChoice)
     {
         $customFields = ['question with bad choice'];
         $proposalForm->getQuestionByTitle('question with bad choice')->willReturn($question);

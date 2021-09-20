@@ -83,7 +83,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
         $user = $this->userManager->createUser();
         $user->setEmail($email);
 
-        $user->setUsername($row['username']);
+        $user->setUsername(trim($row['username']));
         $user->setOpenId($row['openid_id']);
         $user->setEnabled(true);
         $this->userManager->updateUser($user);

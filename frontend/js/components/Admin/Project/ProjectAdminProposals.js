@@ -22,7 +22,7 @@ import type {
   ProposalsStepValues,
   SortValues,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
-import type { FeatureToggles, State, Uuid } from '~/types';
+import type { State, Uuid } from '~/types';
 import InlineSelect from '~ui/InlineSelect';
 import {
   getAllFormattedChoicesForProject,
@@ -74,6 +74,7 @@ import Heading from '~ui/Primitives/Heading';
 import Text from '~ui/Primitives/Text';
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine';
 import useToastingMachine from '~/utils/hooks/useToastingMachine';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
@@ -81,7 +82,6 @@ export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
 const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 
 type Props = {|
-  +features: FeatureToggles,
   +viewerIsAdmin: boolean,
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
@@ -761,7 +761,6 @@ export const ProjectAdminProposals = ({
   baseUrl,
   hasContributionsStep,
   viewerIsAdmin,
-  features,
 }: Props) => {
   const { parameters, dispatch } = useProjectAdminProposalsContext();
   const intl = useIntl();
@@ -858,7 +857,7 @@ export const ProjectAdminProposals = ({
             />
           </div>
           <Flex spacing={6}>
-            {features.import_proposals && selectedStepId && (
+            {useFeatureFlag('import_proposals') && selectedStepId && (
               <ImportButton selectedStepId={selectedStepId} />
             )}
             {viewerIsAdmin && project.exportableSteps && (
@@ -993,7 +992,6 @@ export const ProjectAdminProposals = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  features: state.default.features,
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 });
 

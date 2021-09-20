@@ -112,8 +112,11 @@ class ImportProposalsFromCsv
         $this->customFields = $customFields;
     }
 
-    public function import(bool $dryRun = true, ?OutputInterface $output = null): array
-    {
+    public function import(
+        bool $dryRun = true,
+        bool $skipDuplicateLines = true,
+        ?OutputInterface $output = null
+    ): array {
         $this->setCustomFields($this->proposalForm->getCustomFields());
         $this->headers = array_flip(
             array_merge(
@@ -133,6 +136,7 @@ class ImportProposalsFromCsv
             throw new \RuntimeException(AddProposalsFromCsvMutation::EMPTY_FILE);
         }
         $rows->rewind();
+
         if (!$this->isValidHeaders($rows->current()->toArray())) {
             throw new \RuntimeException(AddProposalsFromCsvMutation::BAD_DATA_MODEL);
         }
@@ -141,14 +145,15 @@ class ImportProposalsFromCsv
         if (empty($this->proposalForm->getStep())) {
             throw new \RuntimeException('STEP_NOT_FOUND');
         }
-
-        $duplicates = $this->getDuplicates($associativeRowsWithHeaderLine);
+        $duplicateLinesToBeSkipped = $skipDuplicateLines
+            ? $this->getDuplicates($associativeRowsWithHeaderLine)
+            : [];
         if ($output) {
             $progress = new ProgressBar($output, $count - 1);
             $progress->start();
         }
         $this->importableProposals = 0;
-        $this->loopRows($associativeRowsWithHeaderLine, $duplicates, $dryRun);
+        $this->loopRows($associativeRowsWithHeaderLine, $duplicateLinesToBeSkipped, $dryRun);
 
         if (!$dryRun && !empty($this->createdProposals)) {
             try {
@@ -175,7 +180,7 @@ class ImportProposalsFromCsv
                 !$dryRun && !empty($this->createdProposals) ? $this->createdProposals : [],
             'importableProposals' => $this->importableProposals,
             'badLines' => $this->badData,
-            'duplicates' => array_values($duplicates),
+            'duplicates' => array_values($duplicateLinesToBeSkipped),
             'mandatoryMissing' => $this->mandatoryMissing,
             'errorCode' => null,
         ];
@@ -197,7 +202,7 @@ class ImportProposalsFromCsv
             ) {
                 $this->badData = $this->incrementBadData($this->badData, $key);
                 $this->logger->error(
-                    sprintf('bad data for question %s in line %d', trim($row[$questionTitle]), $key)
+                    sprintf('bad data for question %s in line %d', trim($questionTitle), $key)
                 );
 
                 return false;
@@ -267,7 +272,7 @@ class ImportProposalsFromCsv
 
     private function getDuplicates(array $rows): array
     {
-        $duplicates = [];
+        $duplicateLinesToBeSkipped = [];
         $proposals = [];
         /** @var Row $row */
         foreach ($rows as $key => $row) {
@@ -277,7 +282,7 @@ class ImportProposalsFromCsv
             }
             $current = [$row['title'], $row['author']];
             if (\in_array($current, $proposals)) {
-                $duplicates[] = $key;
+                $duplicateLinesToBeSkipped[] = $key;
             } elseif (
                 $this->proposalRepository->getProposalByEmailAndTitleOnProposalForm(
                     trim($row['title']),
@@ -285,15 +290,15 @@ class ImportProposalsFromCsv
                     $this->proposalForm
                 ) > 0
             ) {
-                $duplicates[] = $key;
+                $duplicateLinesToBeSkipped[] = $key;
             }
             $proposals[] = $current;
         }
 
-        return $duplicates;
+        return $duplicateLinesToBeSkipped;
     }
 
-    private function loopRows(array $rows, array $duplicates, bool $dryRun = true)
+    private function loopRows(array $rows, array $duplicateLinesToBeSkipped, bool $dryRun = true)
     {
         foreach ($rows as $key => $row) {
             $isCurrentLineFail = false;
@@ -303,14 +308,20 @@ class ImportProposalsFromCsv
             if (1 === $key) {
                 continue;
             }
-            if (\in_array($key, $duplicates)) {
+            if (\in_array($key, $duplicateLinesToBeSkipped)) {
                 continue;
             }
 
             // if row is not valid
             $this->mandatoryMissing = $this->isValidRow($row, $this->mandatoryMissing, $key);
             if (!empty($this->mandatoryMissing[$key])) {
-                $this->logger->error('Mandatory missing in line ' . $key);
+                $this->logger->error(
+                    sprintf(
+                        '%d fields mandatory are missing in line %d',
+                        $this->mandatoryMissing[$key],
+                        $key
+                    )
+                );
 
                 $isCurrentLineFail = true;
             }
@@ -318,7 +329,7 @@ class ImportProposalsFromCsv
             try {
                 $category = $media = $theme = $district = null;
                 foreach ($row as &$column) {
-                    if(Detector::containsEmoji($column)) {
+                    if (Detector::containsEmoji($column)) {
                         $column = Detector::removeEmoji($column);
                     }
                 }
@@ -426,12 +437,16 @@ class ImportProposalsFromCsv
         if ($url && filter_var($url, \FILTER_VALIDATE_URL)) {
             $mediaBinaryFile = @file_get_contents($url);
             if (!$mediaBinaryFile) {
+                $this->logger->error('Error on get file ' . $url);
+
                 return null;
             }
             $fileUrl = explode('/', $url);
             $mediaName = end($fileUrl);
             $filePath = '/tmp/' . $mediaName;
-            file_put_contents($filePath, $mediaBinaryFile);
+            if (!file_put_contents($filePath, $mediaBinaryFile)) {
+                $this->logger->error('Error on create file ' . $filePath);
+            }
 
             return $this->mediaManager->createImageFromPath($filePath, $mediaName);
         }

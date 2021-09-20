@@ -89,7 +89,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $dryRun = $input->offsetGet('dryRun');
 
         try {
-            $proposals = $this->importProposalsFromCsv->import($dryRun);
+            $proposals = $this->importProposalsFromCsv->import($dryRun, true);
             $this->em->remove($media);
 
             $proposals['importedProposals'] = $this->getConnection(

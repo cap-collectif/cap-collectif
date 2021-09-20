@@ -102,7 +102,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
-        $importProposalsFromCsv->import(false)->willThrow(new \RuntimeException('EMPTY_FILE'));
+        $importProposalsFromCsv
+            ->import(false, true)
+            ->willThrow(new \RuntimeException('EMPTY_FILE'));
 
         $fail = [
             'importableProposals' => 0,
@@ -143,7 +145,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
-        $importProposalsFromCsv->import(false)->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
+        $importProposalsFromCsv
+            ->import(false, true)
+            ->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
 
         $fail = [
             'importableProposals' => 0,
@@ -184,7 +188,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 
         $importProposalsFromCsv->setProposalForm($proposalForm)->shouldBeCalled();
         $proposalForm->getStep()->willReturn($step);
-        $importProposalsFromCsv->import(false)->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
+        $importProposalsFromCsv
+            ->import(false, true)
+            ->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
 
         $this->shouldThrow(new \RuntimeException('STEP_NOT_FOUND'))->during('__invoke', [$input]);
     }

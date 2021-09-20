@@ -9,6 +9,7 @@ Object {
     ],
     "duplicates": Array [
       5,
+      6,
     ],
     "errorCode": null,
     "importableProposals": 0,
@@ -24,7 +25,7 @@ Object {
       ],
     },
     "mandatoryMissing": Array [
-      6,
+      7,
     ],
   },
 }
@@ -39,6 +40,7 @@ Object {
     ],
     "duplicates": Array [
       5,
+      6,
     ],
     "errorCode": null,
     "importableProposals": 1,
@@ -46,7 +48,7 @@ Object {
       "edges": Array [],
     },
     "mandatoryMissing": Array [
-      6,
+      7,
     ],
   },
 }

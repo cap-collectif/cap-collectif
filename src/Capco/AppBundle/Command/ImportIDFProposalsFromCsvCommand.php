@@ -53,14 +53,19 @@ class ImportIDFProposalsFromCsvCommand extends Command
                 'Please provide the proposal form id where you want to import proposals.'
             )
             ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';')
-            ->addOption('dryRun', 'dr', InputOption::VALUE_OPTIONAL, '', false);
+            ->addOption('dryRun', 'dr', InputOption::VALUE_OPTIONAL, '', false)
+            ->addOption('skipDuplicateLines', 'idl', InputOption::VALUE_OPTIONAL, '', false);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $this->importProposalsFromCsv->setFilePath($input->getArgument('filePath'));
         $this->importProposalsFromCsv->setDelimiter($input->getOption('delimiter'));
-        $dryRun = $input->getOption('dryRun');
+        $dryRun = filter_var($input->getOption('dryRun'), \FILTER_VALIDATE_BOOLEAN);
+        $skipDuplicateLines = filter_var(
+            $input->getOption('skipDuplicateLines'),
+            \FILTER_VALIDATE_BOOLEAN
+        );
         $proposalFormId = $input->getArgument('proposal-form');
         $proposalForm = $this->proposalFormRepository->find($proposalFormId);
         if (!$proposalForm) {
@@ -71,7 +76,7 @@ class ImportIDFProposalsFromCsvCommand extends Command
         $this->importProposalsFromCsv->setProposalForm($proposalForm);
 
         try {
-            $result = $this->importProposalsFromCsv->import($dryRun, $output);
+            $result = $this->importProposalsFromCsv->import($dryRun, $skipDuplicateLines, $output);
 
             $output->writeln(
                 '<info>' . $result['importableProposals'] . ' proposals are importable.</info>'
