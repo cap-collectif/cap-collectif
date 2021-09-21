@@ -225,3 +225,6 @@ InternalProject:
             owner:
                 type: 'InternalProjectOwner'
                 description: 'The owner of the project.'
+            exportContributorsUrl:
+                type: 'URI'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportContributorsResolver", [value])'

@@ -8343,6 +8343,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The owner of the project."""
   owner: ProjectOwner
+  exportContributorsUrl: URI
 }
 
 """A project abstract step."""

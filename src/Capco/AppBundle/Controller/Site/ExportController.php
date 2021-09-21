@@ -242,22 +242,17 @@ class ExportController extends Controller
         $fileName = CreateCsvFromProjectsContributorsCommand::getFilename($project->getSlug());
 
         if (!file_exists($this->exportDir . $fileName)) {
-            $this->flashBag->add(
-                'danger',
-                $this->translator->trans(
-                    'project_contributors.download.not_yet_generated',
-                    [],
-                    'CapcoAppBundle'
-                )
+            return new JsonResponse(
+                ['errorTranslationKey' => 'project_contributors.download.not_yet_generated'],
+                404
             );
-
-            return $this->redirect($request->headers->get('referer'));
         }
 
         $contentType = 'text/csv';
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
         $response = new BinaryFileResponse($this->exportDir . $fileName);
+        $response->headers->set('X-File-Name', $fileName);
         $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
