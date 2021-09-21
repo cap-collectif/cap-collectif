@@ -20,6 +20,33 @@ export type Style = {|
   |},
 |};
 
+export const convertToGeoJsonStyle = (style: Style) => {
+  const defaultDistrictStyle = {
+    color: '#ff0000',
+    weight: 1,
+    opacity: 0.3,
+  };
+
+  if (!style.border && !style.background) {
+    return defaultDistrictStyle;
+  }
+
+  const districtStyle = {};
+
+  if (style.border) {
+    districtStyle.color = style.border.color;
+    districtStyle.weight = style.border.size;
+    districtStyle.opacity = (style.border.opacity || 0) / 100;
+  }
+
+  if (style.background) {
+    districtStyle.fillColor = style.background.color;
+    districtStyle.fillOpacity = (style.background.opacity || 0) / 100;
+  }
+
+  return districtStyle || defaultDistrictStyle;
+};
+
 export type GeoJson = {|
   district: string,
   style: Style,

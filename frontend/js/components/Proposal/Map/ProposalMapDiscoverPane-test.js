@@ -7,7 +7,7 @@ import { intlMock } from '~/mocks';
 
 describe('<ProposalMapDiscoverPane />', () => {
   it('should render correctly', () => {
-    const props = { intl: intlMock };
+    const props = { intl: intlMock, type: 'CLICK' };
     const wrapper = shallow(<ProposalMapDiscoverPane {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

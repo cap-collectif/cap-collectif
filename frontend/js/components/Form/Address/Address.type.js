@@ -17,10 +17,10 @@ export type AddressComplete = {|
   }>,
   formatted_address: string,
   geometry: {
-    location: {
-      lat: number,
-      lng: number,
-    },
+    location: {|
+      +lat: number,
+      +lng: number,
+    |},
     location_type: string,
     viewport?: {
       Va: {

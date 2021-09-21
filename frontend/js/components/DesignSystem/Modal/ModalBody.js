@@ -11,7 +11,7 @@ export type Props = {|
 |};
 
 const scrollableBody = {
-  mt: '56px',
+  mt: '50px',
   mb: '84px',
   minHeight: 'calc(100vh - 130px)',
 };

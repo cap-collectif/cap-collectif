@@ -12,7 +12,8 @@ export type MapProps = {
   panTo: (?Array<number> | null) => void,
   getPanes: () => { markerPane?: { children: Array<HTMLImageElement> } } | null,
   removeLayer: (typeof L.Marker) => void,
-  on: (string, (e?: { ...?Event, latlng: MapCenterObject }) => void) => void,
+  on: (string, (e?: { ...?Event, latlng: MapCenterObject }) => void | Promise<void>) => void | null,
+  invalidateSize: () => void,
 };
 export type MapRef = {|
   +current: null | MapProps,

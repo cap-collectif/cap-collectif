@@ -19,7 +19,7 @@ const fixedHeader = {
   position: 'fixed',
   top: 0,
   width: '100%',
-  zIndex: 1000,
+  zIndex: 9999,
   bg: 'white',
   boxShadow: '0px 0px 10px rgb(0 0 0 / 15%)',
   border: 'none',

@@ -40,12 +40,14 @@ const FRAGMENT = graphql`
       }
     }
     ...ProposalForm_proposalForm
+    ...ProposalOtherPanelsModal_proposalForm
   }
 `;
 
 const STATE = {
   NORMAL: 'NORMAL',
   LEAVE: 'LEAVE',
+  MAP: 'MAP',
   ERROR: 'ERROR',
 };
 
@@ -86,6 +88,7 @@ const ProposalCreateModal = ({
           </Modal.Header>
           <AnimatePresence>
             <ProposalOtherPanelsModal
+              proposalForm={proposalForm}
               errorCount={errorCount}
               onClose={onClose}
               modalState={modalState}
@@ -102,6 +105,7 @@ const ProposalCreateModal = ({
                 exit={{ opacity: 0, display: 'none' }}>
                 <Modal.Body>
                   <ProposalForm
+                    onAddressEdit={() => setModalState('MAP')}
                     proposalForm={proposalForm}
                     proposal={null}
                     onSubmitSuccess={onClose}
@@ -119,7 +123,7 @@ const ProposalCreateModal = ({
                     <Button
                       id="confirm-proposal-create-as-draft"
                       variantSize="big"
-                      variant="secondary"
+                      variant="tertiary"
                       variantColor="primary"
                       isLoading={submitting}
                       disabled={pristine}

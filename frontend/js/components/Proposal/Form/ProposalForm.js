@@ -44,7 +44,6 @@ import environment from '~/createRelayEnvironment';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import type { ResponsesInReduxForm } from '~/components/Form/Form.type';
-import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import {
   isInterpellationContextFromProposal,
   isInterpellationContextFromStep,
@@ -63,6 +62,8 @@ import { formatGeoJsons, geoContains, type GeoJson } from '~/utils/geojson';
 import { ProposalFormMapPreview } from './ProposalFormMapPreview';
 import UserListField from '~/components/Admin/Field/UserListField';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
+import DsButton from '~ds/Button/Button';
+import { toast } from '~/components/DesignSystem/Toast';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -131,6 +132,7 @@ export type Props = {|
   +onSubmit?: () => void,
   +isBackOfficeInput?: boolean,
   +errorCount?: number,
+  +onAddressEdit?: () => void,
 |};
 
 export type FormValues = {|
@@ -286,18 +288,18 @@ const onSubmit = (
       const createdProposal = response.createProposal.proposal;
       window.removeEventListener('beforeunload', onUnload);
       onSubmitSuccess();
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content:
-            createdProposal && isInterpellationContextFromProposal(createdProposal)
-              ? 'interpellation.create.redirecting'
-              : 'proposal.create.redirecting',
-        },
-      });
-
       const TIMEOUT_BEFORE_REDIRECTION = 5000; // 5s
+      const message =
+        createdProposal && isInterpellationContextFromProposal(createdProposal)
+          ? 'interpellation.create.redirecting'
+          : 'proposal.create.redirecting';
+      toast({
+        variant: 'success',
+        content: intl.formatHTMLMessage({
+          id: values.draft ? 'draft.create.redirecting' : message,
+        }),
+        duration: TIMEOUT_BEFORE_REDIRECTION,
+      });
 
       // We may have some MySQL replication latency
       // That's why it's better to wait a bit
@@ -516,6 +518,7 @@ export class ProposalForm extends React.Component<Props, State> {
       addressValue,
       user,
       category,
+      onAddressEdit,
       change: changeProps,
       isBackOfficeInput,
     } = this.props;
@@ -739,7 +742,12 @@ export class ProposalForm extends React.Component<Props, State> {
           categories={proposalForm.categories}
           address={addressValue}
         />
-        {features.districts && proposalForm.usingDistrict && proposalForm.districts?.length > 0 && (
+        {proposalForm.usingAddress && onAddressEdit && (
+          <DsButton p={0} mb={3} onClick={onAddressEdit} variant="link" variantColor="primary">
+            <FormattedMessage id={addressValue ? 'edit-on-card' : 'locate-on-card'} />
+          </DsButton>
+        )}
+        {features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
           <Field
             id="proposal_district"
             type="select"

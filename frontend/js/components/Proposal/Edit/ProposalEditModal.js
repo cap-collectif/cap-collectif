@@ -130,6 +130,7 @@ const getProposalPendingRevisions = (
 const STATE = {
   NORMAL: 'NORMAL',
   LEAVE: 'LEAVE',
+  MAP: 'MAP',
   ERROR: 'ERROR',
 };
 
@@ -192,6 +193,7 @@ export const ProposalEditModal = ({
           </Modal.Header>
           <AnimatePresence>
             <ProposalOtherPanelsModal
+              proposalForm={proposal.form}
               errorCount={errorCount}
               onClose={onClose}
               modalState={modalState}
@@ -245,6 +247,7 @@ export const ProposalEditModal = ({
                     </ProposalRevisionItem>
                   )}
                   <ProposalForm
+                    onAddressEdit={() => setModalState('MAP')}
                     proposalForm={proposal.form}
                     proposal={proposal}
                     isBackOfficeInput={false}
@@ -260,7 +263,6 @@ export const ProposalEditModal = ({
                     {proposal.publicationStatus !== 'DRAFT' && (
                       <Button
                         onClick={onClose}
-                        variantSize="big"
                         variant="secondary"
                         variantColor="hierarchy"
                         isLoading={submitting}>
@@ -271,7 +273,7 @@ export const ProposalEditModal = ({
                       <Button
                         id="confirm-proposal-create-as-draft"
                         variantSize="big"
-                        variant="secondary"
+                        variant="tertiary"
                         variantColor="primary"
                         isLoading={submitting}
                         disabled={pristine}
@@ -347,6 +349,7 @@ export default createFragmentContainer(container, {
       form {
         contribuable
         ...ProposalForm_proposalForm
+        ...ProposalOtherPanelsModal_proposalForm
       }
       publicationStatus
       ...ProposalForm_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)

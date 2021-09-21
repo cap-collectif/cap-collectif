@@ -9,16 +9,24 @@ import InfoMessage from '~ds/InfoMessage/InfoMessage';
 type Props = {|
   ...AppBoxProps,
   +proposal: ?ProposalDraftAlert_proposal,
+  +message?: string,
 |};
 
-export const ProposalDraftAlert = ({ proposal, ...rest }: Props) => {
+export const ProposalDraftAlert = ({ proposal, message, ...rest }: Props) => {
   const intl = useIntl();
   if (proposal?.publicationStatus === 'DRAFT') {
     return (
       // TODO: Virer le css une fois le code global nettoyé #12925
-      <InfoMessage {...rest} variant="warning" css={{ p: { marginBottom: '0 !important' } }}>
-        <InfoMessage.Title withIcon fontWeight={400}>
-          {intl.formatMessage({ id: 'proposal.draft.explain' })}
+      <InfoMessage
+        {...rest}
+        variant="warning"
+        maxWidth={950}
+        ml="auto"
+        mr="auto"
+        width="100%"
+        css={{ p: { marginBottom: '0 !important' } }}>
+        <InfoMessage.Title withIcon fontWeight={400} fontSize={message ? 14 : 1}>
+          {intl.formatMessage({ id: message || 'proposal.draft.explain' })}
         </InfoMessage.Title>
       </InfoMessage>
     );

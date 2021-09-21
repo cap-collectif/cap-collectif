@@ -883,6 +883,154 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                             Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "ProposalForm",
+                              "kind": "LinkedField",
+                              "name": "form",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "order",
+                                      "value": "ALPHABETICAL",
+                                    },
+                                  ],
+                                  "concreteType": "ProposalDistrict",
+                                  "kind": "LinkedField",
+                                  "name": "districts",
+                                  "plural": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "displayedOnMap",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "geojson",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "Style",
+                                      "kind": "LinkedField",
+                                      "name": "border",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "enabled",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "color",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "opacity",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "size",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "Style",
+                                      "kind": "LinkedField",
+                                      "name": "background",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "enabled",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "color",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "opacity",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "size",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "districts(order:\\"ALPHABETICAL\\")",
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
                               "abstractKey": "__isProposalStep",
                               "kind": "InlineFragment",
                               "selections": Array [
@@ -899,13 +1047,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "objectType",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -1810,6 +1951,31 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "tipsmeeeHelpText",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GoogleMapsAddress",
+                          "kind": "LinkedField",
+                          "name": "mapCenter",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "lat",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "lng",
+                              "storageKey": null,
+                            },
+                          ],
                           "storageKey": null,
                         },
                       ],
@@ -7275,7 +7441,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "e54bb27ccd3d7c88598de18f7b909043",
+          "cacheID": "4a39fcb146c411c9a6293a60c2d31d9f",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7801,6 +7967,46 @@ fragment ProposalAssessmentFormPanel_proposal_2uwUKI on Proposal {
   }
 }
 
+fragment ProposalChangeAddressModal_proposalForm on ProposalForm {
+  id
+  proposalInAZoneRequired
+  mapCenter {
+    lat
+    lng
+  }
+  categories(order: ALPHABETICAL) {
+    id
+    name
+    color
+    icon
+  }
+  step {
+    form {
+      districts(order: ALPHABETICAL) {
+        displayedOnMap
+        geojson
+        id
+        border {
+          id
+          enabled
+          color
+          opacity
+          size
+        }
+        background {
+          id
+          enabled
+          color
+          opacity
+          size
+        }
+      }
+      id
+    }
+    id
+  }
+}
+
 fragment ProposalDecisionFormPanel_proposal_2uwUKI on Proposal {
   id
   ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)
@@ -7945,6 +8151,7 @@ fragment ProposalEditModal_proposal_19sAkT on Proposal {
   form {
     contribuable
     ...ProposalForm_proposalForm
+    ...ProposalOtherPanelsModal_proposalForm
     id
   }
   publicationStatus
@@ -8193,6 +8400,11 @@ fragment ProposalMediaResponse_medias on Media {
 
 fragment ProposalNewsCreateModal_proposal on Proposal {
   id
+}
+
+fragment ProposalOtherPanelsModal_proposalForm on ProposalForm {
+  id
+  ...ProposalChangeAddressModal_proposalForm
 }
 
 fragment ProposalPageAdvancement_proposal on Proposal {

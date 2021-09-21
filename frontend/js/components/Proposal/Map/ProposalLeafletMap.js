@@ -38,7 +38,7 @@ import ProposalMapLoaderPane from './ProposalMapLoaderPane';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
-import { geoContains, type GeoJson, type Style } from '~/utils/geojson';
+import { geoContains, type GeoJson, convertToGeoJsonStyle } from '~/utils/geojson';
 import ProposalMapDiscoverPane from './ProposalMapDiscoverPane';
 import { getAddressFromLatLng } from '~/utils/googleMapAddress';
 import { formName } from '~/components/Proposal/Form/ProposalForm';
@@ -64,34 +64,8 @@ type Props = {|
   dispatch: Dispatch,
   projectType: ?string,
   proposalForm: ProposalLeafletMap_proposalForm,
+  isCollectStep?: boolean,
 |};
-
-const convertToGeoJsonStyle = (style: Style) => {
-  const defaultDistrictStyle = {
-    color: '#ff0000',
-    weight: 1,
-    opacity: 0.3,
-  };
-
-  if (!style.border && !style.background) {
-    return defaultDistrictStyle;
-  }
-
-  const districtStyle = {};
-
-  if (style.border) {
-    districtStyle.color = style.border.color;
-    districtStyle.weight = style.border.size;
-    districtStyle.opacity = (style.border.opacity || 0) / 100;
-  }
-
-  if (style.background) {
-    districtStyle.fillColor = style.background.color;
-    districtStyle.fillOpacity = (style.background.opacity || 0) / 100;
-  }
-
-  return districtStyle || defaultDistrictStyle;
-};
 
 const goToPosition = (mapRef: MapRef, address: ?MapCenterObject) =>
   mapRef.current?.panTo([address?.lat || 0, address?.lng || 0]);
@@ -163,6 +137,7 @@ export const ProposalLeafletMap = ({
   proposalInAZoneRequired,
   projectType,
   proposalForm,
+  isCollectStep,
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false);
   const intl = useIntl();
@@ -181,12 +156,10 @@ export const ProposalLeafletMap = ({
   const [address, setAddress] = useState(null);
   const { width } = useResize();
   const isMobile = width < bootstrapGrid.smMin;
-  const [showDiscoverPane, setShowDiscoverPane] = useState(true);
-
+  const [showDiscoverPane, setShowDiscoverPane] = useState(isCollectStep || false);
   const markers = proposals.filter(
     proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng),
   );
-
   useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
   }, []);
@@ -225,7 +198,8 @@ export const ProposalLeafletMap = ({
         whenCreated={(map: MapProps) => {
           mapRef.current = map;
           map.on('click', (e: ?{ ...?Event, latlng: MapCenterObject }) => {
-            openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired);
+            if (isCollectStep)
+              openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired);
             setIsMobileSliderOpen(false);
             isOnCluster = false;
             setShowDiscoverPane(false);
@@ -242,6 +216,8 @@ export const ProposalLeafletMap = ({
         maxZoom={MAX_MAP_ZOOM}
         style={{
           height: isMobile ? '100vw' : '50vw',
+          // We don't want the map to be bigger than the screen
+          maxHeight: isMobile ? '' : 'calc(100vh - 70px)',
           zIndex: 0,
         }}
         zoomControl={false}
@@ -262,7 +238,12 @@ export const ProposalLeafletMap = ({
           autoPan={false}
           className="popup-proposal">
           <LoginOverlay placement="top">
-            <Button variant="primary" variantColor="primary" variantSize="small" onClick={onOpen}>
+            <Button
+              variant="primary"
+              variantColor="primary"
+              variantSize="small"
+              onClick={onOpen}
+              disabled={!proposalForm?.contribuable}>
               {intl.formatMessage({ id: titleTradKey })}
             </Button>
           </LoginOverlay>
@@ -272,9 +253,11 @@ export const ProposalLeafletMap = ({
           showCoverageOnHover={false}
           zoomToBoundsOnClick
           onClick={e => {
-            if (isOnCluster)
-              openPopup(mapRef, popupRef, e.latlng, geoJsons, proposalInAZoneRequired);
-            else closePopup(mapRef, popupRef);
+            if (isCollectStep) {
+              if (isOnCluster)
+                openPopup(mapRef, popupRef, e.latlng, geoJsons, proposalInAZoneRequired);
+              else closePopup(mapRef, popupRef);
+            }
             isOnCluster = true;
             setShowDiscoverPane(false);
           }}
@@ -383,6 +366,7 @@ export default createFragmentContainer(container, {
   proposalForm: graphql`
     fragment ProposalLeafletMap_proposalForm on ProposalForm {
       objectType
+      contribuable
       ...ProposalCreateModal_proposalForm
     }
   `,

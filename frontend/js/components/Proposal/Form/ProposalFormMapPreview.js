@@ -14,6 +14,7 @@ import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { colors as dsColors } from '~/styles/modules/colors';
 import { colors } from '~/utils/colors';
 import type { MapProps } from '~/components/Proposal/Map/Map.types';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 type Props = {|
   +address: ?string,
@@ -21,14 +22,12 @@ type Props = {|
   +categories: $ReadOnlyArray<{| +id: string, +name: string, +color: string, +icon: ?string |}>,
 |};
 
-type Address = {| +geometry: {| +location: {| +lat: number, +lng: number |} |} |};
-
 let L;
 
 export const ProposalFormMapPreview = ({ address, category, categories }: Props) => {
   const mapTokens: MapTokens = useSelector((state: GlobalState) => state.user.mapTokens);
   const mapRef = React.useRef(null);
-  const proposalAddress: Address = JSON.parse(
+  const proposalAddress: AddressComplete = JSON.parse(
     address ? address.substring(1, address.length - 1) : '{}',
   );
 
@@ -57,6 +56,7 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
     <MapContainer
       whenCreated={(map: MapProps) => {
         mapRef.current = map;
+        setTimeout(() => map.invalidateSize(), 100);
       }}
       doubleClickZoom={false}
       dragging={false}

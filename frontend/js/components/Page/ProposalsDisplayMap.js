@@ -64,6 +64,7 @@ export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
       hasError={hasError}
       proposalInAZoneRequired={step.form?.proposalInAZoneRequired}
       retry={retry}
+      isCollectStep={step.form && step.kind === 'collect'}
       {...rest}
     />
   ) : null;
@@ -74,6 +75,7 @@ export default createPaginationContainer(
   {
     step: graphql`
       fragment ProposalsDisplayMap_step on ProposalStep {
+        kind
         form {
           proposalInAZoneRequired
           ...ProposalLeafletMap_proposalForm

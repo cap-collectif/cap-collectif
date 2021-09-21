@@ -13,6 +13,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "contribuable": true,
         "objectType": "PROPOSAL",
       }
     }
@@ -42,6 +43,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     style={
       Object {
         "height": "50vw",
+        "maxHeight": "calc(100vh - 70px)",
         "zIndex": 0,
       }
     }
@@ -70,6 +72,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         placement="top"
       >
         <Button
+          disabled={false}
           onClick={[Function]}
           variant="primary"
           variantColor="primary"
@@ -293,6 +296,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "contribuable": true,
         "objectType": "PROPOSAL",
       }
     }
@@ -322,6 +326,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     style={
       Object {
         "height": "50vw",
+        "maxHeight": "calc(100vh - 70px)",
         "zIndex": 0,
       }
     }
@@ -350,6 +355,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         placement="top"
       >
         <Button
+          disabled={false}
           onClick={[Function]}
           variant="primary"
           variantColor="primary"

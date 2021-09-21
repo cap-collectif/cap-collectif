@@ -73,6 +73,7 @@ const InfoMessageTitle = ({
   variant,
   withIcon,
   fontWeight,
+  fontSize,
   ...props
 }: InfoMessageTitleProps) => (
   <Flex
@@ -84,7 +85,7 @@ const InfoMessageTitle = ({
     {withIcon && variant && getIcon(variant)}
     <Text
       color={getColor(variant)}
-      fontSize={1}
+      fontSize={fontSize || 1}
       fontWeight={fontWeight || FontWeight.Semibold}
       lineHeight="sm">
       {children}

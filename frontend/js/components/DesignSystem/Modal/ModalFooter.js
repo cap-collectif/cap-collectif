@@ -20,7 +20,7 @@ const fixedFooter = {
   borderRadius: '8px 8px 0px 0px',
   border: 'none',
   p: 4,
-  zIndex: 1000,
+  zIndex: 9999,
 };
 
 const ModalFooter = ({ children, ...rest }: Props) => {

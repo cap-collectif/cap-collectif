@@ -4,9 +4,14 @@ exports[`<ProposalDraftAlert /> should not render draft alert 1`] = `""`;
 
 exports[`<ProposalDraftAlert /> should render draft alert 1`] = `
 <ProposalDraftAlert___StyledInfoMessage
+  maxWidth={950}
+  ml="auto"
+  mr="auto"
   variant="warning"
+  width="100%"
 >
   <InfoMessage.Title
+    fontSize={1}
     fontWeight={400}
     withIcon={true}
   >

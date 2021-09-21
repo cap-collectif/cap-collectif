@@ -37,7 +37,10 @@ export const getDataFromGoogleAddress = (
 export const getAddressFromLatLng = ({ lat, lng }: MapCenterObject) => {
   const geocoder = new window.google.maps.Geocoder();
   return geocoder.geocode({ location: { lat, lng } }).then(response => {
-    return response.results[0];
+    return {
+      ...response.results[0],
+      geometry: { ...response.results[0].geometry, location: { lat, lng } },
+    };
   });
 };
 
