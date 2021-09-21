@@ -33,6 +33,8 @@ export const WhatsNew = ({ newsArray }: Props) => {
       {newsArray.map(
         ({ title, body, url, cover, hasSeparator, isButtonPlain }: NewsBlock, idx: number) => (
           <Flex
+            as={isMobile ? 'a' : 'div'}
+            href={isMobile ? url : undefined}
             key={idx}
             direction={['column', idx % 2 ? 'row' : 'row-reverse']}
             alignItems="center"
