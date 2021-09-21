@@ -23,6 +23,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -290,18 +291,14 @@ class ExportController extends Controller
 
         $filesystem = new Filesystem();
         if (!$filesystem->exists($absolutePath)) {
-            $this->flashBag->add(
-                'danger',
-                $this->translator->trans('file.not-found', [], 'CapcoAppBundle')
-            );
-
             $this->logger->error('File not found', [
                 'filename' => $absolutePath,
             ]);
 
-            return $this->redirect($request->headers->get('referer'));
+            return new JsonResponse(['errorTranslationKey' => 'file.not-found'], 404);
         }
         $response = new BinaryFileResponse($absolutePath);
+        $response->headers->set('X-File-Name', $fileName);
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             (new \DateTime())->format('Y-m-d') . '_' . $fileName
@@ -337,7 +334,7 @@ class ExportController extends Controller
             Text::sanitizeFileName($step->getTitle()) .
             '_vierge.csv';
 
-        setlocale(LC_CTYPE, str_replace('-', '_', $this->locale));
+        setlocale(\LC_CTYPE, str_replace('-', '_', $this->locale));
         $filename = iconv('UTF-8', 'ASCII//TRANSLIT', $filename);
 
         $filePath = '/tmp/' . $filename;

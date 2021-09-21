@@ -21,6 +21,7 @@ use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Symfony\Component\HttpFoundation\Response;
@@ -233,18 +234,10 @@ class ProjectController extends Controller
                 $filename
             );
         } catch (FileNotFoundException $exception) {
-            // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
-
-            $flashBag->add(
-                'danger',
-                $this->translator->trans('project.download.not_yet_generated')
+            return new JsonResponse(
+                ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                404
             );
-
-            $referer = $request->headers->get('referer');
-            $homePageUrl = $this->router->generate('app_homepage');
-
-            return $this->redirect($referer ?? $homePageUrl);
         }
     }
 
@@ -452,6 +445,7 @@ class ProjectController extends Controller
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
         $response = new BinaryFileResponse($filePath);
         $response->headers->set('X-Accel-Redirect', '/export/' . $fileName);
+        $response->headers->set('X-File-Name', $fileName);
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             $date . '_' . $fileName

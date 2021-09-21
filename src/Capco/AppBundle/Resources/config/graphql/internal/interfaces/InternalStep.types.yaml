@@ -51,3 +51,9 @@ InternalStep:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepEventsResolver", [value, args])'
             project:
                 type: 'InternalProject'
+            exportStepUrl:
+                type: 'URI'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportStepUrlResolver", [value])'
+            exportContributorsUrl:
+                type: 'URI'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportContributorsResolver", [value])'

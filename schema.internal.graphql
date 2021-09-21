@@ -1940,6 +1940,8 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 
   """A list of proposals associated to the object."""
   proposals(
@@ -2594,6 +2596,8 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The project"""
   project: Project!
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -4250,6 +4254,8 @@ type DebateStep implements Step & Node {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 
   """The debate of the step."""
   debate: Debate!
@@ -7453,6 +7459,8 @@ type OtherStep implements Node & Step {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 }
 
 """A page."""
@@ -7983,6 +7991,8 @@ type PresentationStep implements Node & Step {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 }
 
 """A vote that can be anonymous."""
@@ -9770,6 +9780,8 @@ interface ProposalStep {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 
   """A list of proposals associated to the object."""
   proposals(
@@ -11022,6 +11034,8 @@ type QuestionnaireStep implements Node & Step {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
   footer: String
 
   """A list of contributor associated with the step."""
@@ -11104,6 +11118,8 @@ type RankingStep implements Node & Step {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -12251,6 +12267,8 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 
   """A list of proposals associated to the object."""
   proposals(
@@ -13024,6 +13042,8 @@ interface Step {
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
   ): EventConnection!
   project: Project
+  exportStepUrl: URI
+  exportContributorsUrl: URI
 }
 
 """Ways in which lists of steps can be ordered upon return."""
