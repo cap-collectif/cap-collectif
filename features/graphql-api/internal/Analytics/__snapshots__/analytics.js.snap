@@ -63,7 +63,7 @@ Object {
       "values": Array [
         Object {
           "key": "2016-01-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 4,
         },
         Object {
           "key": "2016-02-01T00:00:00.000Z",
@@ -559,7 +559,7 @@ Object {
         },
         Object {
           "key": "2016-01-01T00:00:00.000Z",
-          "totalCount": 4,
+          "totalCount": 5,
         },
         Object {
           "key": "2016-02-01T00:00:00.000Z",

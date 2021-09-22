@@ -74,6 +74,8 @@ Scenario: Admin wants to export collect steps
   And exported "csv" file with name "budget-participatif-idf_collecte-des-projets-idf-privee.csv" should match its snapshot
   And exported "csv" file with name "projet-pour-consolider-les-exports_etape-de-depot-des-exports.csv" should match its snapshot
   And exported "csv" file with name "projet-pour-consolider-les-exports_selectionstepexport.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-administrateur-de-projet_budget-participatif-du-projet-avec-administrateur-de-projet.csv" should match its snapshot
+  And exported "csv" file with name "projet-avec-administrateur-de-projet_budget-participatif-du-projet-avec-administrateur-de-projet-project-admin.csv" should match its snapshot
 
 @database
 Scenario: User want to export his datas and 7 days after the cron delete the zip archive

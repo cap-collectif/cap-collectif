@@ -209,7 +209,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_PROJECT_ADMIN')")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
@@ -219,7 +219,14 @@ class ProjectController extends Controller
      */
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
-        $filenameCsv = CreateCsvFromProposalStepCommand::getFilename($step);
+        $user = $this->getUser();
+        $isProjectAdmin = $user->isOnlyProjectAdmin();
+
+        $filenameCsv = CreateCsvFromProposalStepCommand::getFilename(
+            $step,
+            '.csv',
+            $isProjectAdmin
+        );
         $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
 
         $isCSV = file_exists($this->exportDir . $filenameCsv);

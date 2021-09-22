@@ -107,4 +107,14 @@ fragment authorInfos on User {
   }
 }
 EOF;
+
+    public const AUTHOR_INFOS_ANONYMOUS_FRAGMENT = <<<'EOF'
+fragment authorInfos on User {
+  id
+  username
+  userType {
+    ...userTypeInfos
+  }
+}
+EOF;
 }

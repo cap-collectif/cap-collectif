@@ -54,7 +54,6 @@ fragment commentInfos on Comment {
   updatedAt
   author {
     ... authorInfos
-    email
   }
   pinned
   publicationStatus
@@ -97,7 +96,6 @@ fragment commentInfos on Comment {
       updatedAt
       author {
         ... authorInfos
-        email
       }
       pinned
       publicationStatus
@@ -393,7 +391,8 @@ EOF;
 
     public static function getFilename(
         AbstractStep $selectionStep,
-        string $extension = '.csv'
+        string $extension = '.csv',
+        bool $projectAdmin = false
     ): string {
         return self::getShortenedFilename(
             sprintf(
@@ -403,7 +402,8 @@ EOF;
                     : $selectionStep->getId(),
                 $selectionStep->getSlug()
             ),
-            $extension
+            $extension,
+            $projectAdmin
         );
     }
 
@@ -440,14 +440,25 @@ EOF;
             );
         }
 
+        $isProjectAdmin = false;
         /** @var AbstractStep $step */
         foreach ($steps as $step) {
-            if ($step->getProject()) {
+            $project = $step ? $step->getProject() : null;
+            if (!$project) {
+                continue;
+            }
+            if (null !== $project->getOwner() && $project->getOwner()->isOnlyProjectAdmin()) {
+                $isProjectAdmin = true;
+            }
+            $fileName = self::getFilename($step, '.csv', $isProjectAdmin);
+            $this->currentStep = $step;
+            $this->generateSheet($this->currentStep, $input, $output, $fileName, $isProjectAdmin);
+            $this->executeSnapshot($input, $output, $fileName);
+            $this->printMemoryUsage($output);
+
+            if ($isProjectAdmin) {
                 $fileName = self::getFilename($step);
-                $this->currentStep = $step;
                 $this->generateSheet($this->currentStep, $input, $output, $fileName);
-                $this->executeSnapshot($input, $output, $fileName);
-                $this->printMemoryUsage($output);
             }
         }
 
@@ -458,14 +469,18 @@ EOF;
         AbstractStep $step,
         InputInterface $input,
         OutputInterface $output,
-        string $fileName
+        string $fileName,
+        bool $projectAdmin = false
     ): void {
         if (!isset($this->currentData['data']) && isset($this->currentData['error'])) {
             $this->logger->error('GraphQL Query Error: ' . $this->currentData['error']);
             $this->logger->info('GraphQL query: ' . json_encode($this->currentData));
         }
 
-        $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep($this->currentStep);
+        $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep(
+            $this->currentStep,
+            $projectAdmin
+        );
         $proposals = $this->executor
             ->execute('internal', [
                 'query' => $proposalsQuery,
@@ -484,7 +499,7 @@ EOF;
             if ($totalCount > 0) {
                 $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
 
-                $this->headersMap = $this->createHeadersMap($proposals);
+                $this->headersMap = $this->createHeadersMap($proposals, $projectAdmin);
                 $this->writer->addRow(
                     WriterEntityFactory::createRowFromArray(
                         array_merge(['contribution_type'], array_keys($this->headersMap))
@@ -499,9 +514,10 @@ EOF;
                         $this->addProposalRow($proposal, $output);
                         $progress->advance();
                     },
-                    function ($pageInfo) {
+                    function ($pageInfo) use ($projectAdmin) {
                         return $this->getContributionsGraphQLQueryByProposalStep(
                             $this->currentStep,
+                            $projectAdmin,
                             $pageInfo['endCursor']
                         );
                     }
@@ -1104,10 +1120,37 @@ EOF;
         }
     }
 
-    protected function createHeadersMap(array $proposals): array
+    protected function createHeadersMap(array $proposals, bool $projectAdmin = false): array
     {
         $questionNumber = 0;
-        $this->proposalHeaderMap = self::PROPOSAL_HEADER;
+
+        $headers = self::PROPOSAL_HEADER;
+        $columnMappingExceptProposalHeader = self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER;
+        if ($projectAdmin) {
+            $excludedHeaders = ['proposal_author_email', 'proposal_author_isEmailConfirmed'];
+            $columnMappingExceptProposalExcludedHeaders = [
+                'proposal_comments_author_email',
+                'proposal_news_comments_author_email',
+                'proposal_votes_author_isEmailConfirmed',
+                'proposal_comments_author_isEmailConfirmed',
+                'proposal_comments_vote_author_isEmailConfirmed',
+                'proposal_news_authors_isEmailConfirmed',
+                'proposal_news_comments_author_isEmailConfirmed',
+                'proposal_news_comments_vote_author_isEmailConfirmed',
+                'proposal_news_comments_reportings_author_isEmailConfirmed',
+                'proposal_reportings_author_isEmailConfirmed',
+            ];
+
+            foreach ($excludedHeaders as $excludedHeader) {
+                unset($headers[$excludedHeader]);
+            }
+
+            foreach ($columnMappingExceptProposalExcludedHeaders as $excludedHeader) {
+                unset($columnMappingExceptProposalHeader[$excludedHeader]);
+            }
+        }
+
+        $this->proposalHeaderMap = $headers;
 
         $sample = Arr::path(Arr::path($proposals, 'data.node.proposals.edges')[0], 'node');
         $questions = array_filter(
@@ -1146,7 +1189,7 @@ EOF;
             }
         }
 
-        return array_merge($this->proposalHeaderMap, self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER);
+        return array_merge($this->proposalHeaderMap, $columnMappingExceptProposalHeader);
     }
 
     protected function getProject(InputInterface $input): ?Project
@@ -1358,7 +1401,6 @@ ${VOTES_INFOS_FRAGMENT}
                   updatedAt
                   author {
                     ... authorInfos
-                    email
                   }
                   pinned
                   publicationStatus
@@ -1488,6 +1530,7 @@ EOF;
 
     protected function getContributionsGraphQLQueryByProposalStep(
         AbstractStep $proposalStep,
+        bool $projectAdmin = false,
         ?string $proposalAfter = null,
         ?string $votesAfter = null,
         ?string $newsAfter = null,
@@ -1501,7 +1544,9 @@ EOF;
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = $projectAdmin
+            ? GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_ANONYMOUS_FRAGMENT
+            : GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
 
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
@@ -1633,7 +1678,6 @@ ${COMMENT_VOTE_INFOS}
                           updatedAt
                           author {
                             ... authorInfos
-                            email
                           }
                           pinned
                           publicationStatus
