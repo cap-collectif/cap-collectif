@@ -1,0 +1,11 @@
+UpdateProposalIllustrationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateProposalIllustration mutation.'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The id of the proposal to update social networks.'
+            media:
+                type: 'ID'
+                description: 'The media id to illustrate, use null to delete an existing media.'

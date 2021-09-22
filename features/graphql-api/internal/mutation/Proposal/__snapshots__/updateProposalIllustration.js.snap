@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal | Update proposal illustration without illustration Update proposal illustration with illustration 1`] = `
+Object {
+  "updateProposalIllustration": Object {
+    "errorCode": null,
+    "proposal": Object {
+      "media": Object {
+        "id": "imageOculus",
+        "name": "imageOculus",
+        "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+      },
+    },
+  },
+}
+`;
+
+exports[`Internal | Update proposal illustration without illustration access denied 1`] = `
+Object {
+  "updateProposalIllustration": Object {
+    "errorCode": "ACCESS_DENIED",
+    "proposal": null,
+  },
+}
+`;
+
+exports[`Internal | Update proposal illustration without illustration add illustration on proposal 1`] = `
+Object {
+  "updateProposalIllustration": Object {
+    "errorCode": null,
+    "proposal": Object {
+      "media": Object {
+        "id": "imageConfinement",
+        "name": "imageConfinement",
+        "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+      },
+    },
+  },
+}
+`;
+
+exports[`Internal | Update proposal illustration without illustration media not found 1`] = `
+Object {
+  "updateProposalIllustration": Object {
+    "errorCode": "MEDIA_NOT_FOUND",
+    "proposal": null,
+  },
+}
+`;
+
+exports[`Internal | Update proposal illustration without illustration proposal not found 1`] = `
+Object {
+  "updateProposalIllustration": Object {
+    "errorCode": "PROPOSAL_NOT_FOUND",
+    "proposal": null,
+  },
+}
+`;
+
+exports[`Internal | Update proposal illustration without illustration remove illustration on proposal 1`] = `
+Object {
+  "updateProposalIllustration": Object {
+    "errorCode": null,
+    "proposal": Object {
+      "media": null,
+    },
+  },
+}
+`;

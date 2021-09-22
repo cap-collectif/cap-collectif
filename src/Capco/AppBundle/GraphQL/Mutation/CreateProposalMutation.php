@@ -134,7 +134,7 @@ class CreateProposalMutation implements MutationInterface
         User $user,
         User $author,
         bool $draft,
-        $formType
+        string $formType
     ): Proposal {
         $values = $this->fixValues($values, $proposalForm);
         $proposal = new Proposal();

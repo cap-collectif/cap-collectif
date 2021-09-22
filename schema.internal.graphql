@@ -6937,6 +6937,9 @@ type Mutation {
 
   """Create a proposal from back office"""
   createProposalFromBackOffice(input: CreateProposalFromBackOfficeInput!): CreateProposalPayload
+
+  """Update illustration on a proposal"""
+  updateProposalIllustration(input: UpdateProposalIllustrationInput!): UpdateProposalIllustrationPayload
 }
 
 """A connection to a list of items."""
@@ -9478,6 +9481,18 @@ interface ProposalFormOwner {
     """The ordering direction for proposalForms"""
     orderBy: ProposalFormOrder = {field: CREATED_AT, direction: DESC}
   ): ProposalFormConnection!
+}
+
+"""Available errors on proposal illustration mutation"""
+enum ProposalIllustrationErrorCode {
+  """No proposal match your id."""
+  PROPOSAL_NOT_FOUND
+
+  """Access denied."""
+  ACCESS_DENIED
+
+  """No media match."""
+  MEDIA_NOT_FOUND
 }
 
 """Available errors on proposal news mutation"""
@@ -14397,6 +14412,24 @@ type UpdateProposalFusionPayload {
 
   """The proposals that have been removed from the fusion."""
   removedMergedFrom: [Proposal]!
+  clientMutationId: String
+}
+
+input UpdateProposalIllustrationInput {
+  """The id of the proposal to update social networks."""
+  proposalId: ID!
+
+  """The media id to illustrate, use null to delete an existing media."""
+  media: ID
+  clientMutationId: String
+}
+
+type UpdateProposalIllustrationPayload {
+  """The proposal to update."""
+  proposal: Proposal
+
+  """An unsuccessful mutation will return an error message"""
+  errorCode: ProposalIllustrationErrorCode
   clientMutationId: String
 }
 

@@ -1,0 +1,10 @@
+UpdateProposalIllustrationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposal:
+                type: 'InternalProposal'
+                description: 'The proposal to update.'
+            errorCode:
+                type: 'ProposalIllustrationErrorCode'
+                description: 'An unsuccessful mutation will return an error message'

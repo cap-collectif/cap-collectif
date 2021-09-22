@@ -1370,3 +1370,11 @@ InternalMutation:
                     inputType: CreateProposalFromBackOfficeInput
                     payloadType: CreateProposalPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFromBackofficeMutation", [value, getUser()])'
+            updateProposalIllustration:
+                description: 'Update illustration on a proposal'
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProposalIllustrationInput
+                    payloadType: UpdateProposalIllustrationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalIllustrationMutation", [value, getUser()])'

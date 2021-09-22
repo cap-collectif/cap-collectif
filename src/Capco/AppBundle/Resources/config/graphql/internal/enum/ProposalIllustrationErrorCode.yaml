@@ -1,0 +1,11 @@
+ProposalIllustrationErrorCode:
+    type: enum
+    inherits:
+        - ProposalErrorCode
+    config:
+        name: ProposalIllustrationErrorCode
+        description: 'Available errors on proposal illustration mutation'
+        values:
+            MEDIA_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalIllustrationMutation::MEDIA_NOT_FOUND")'
+                description: 'No media match.'
