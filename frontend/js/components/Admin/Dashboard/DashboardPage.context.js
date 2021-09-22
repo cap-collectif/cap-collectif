@@ -13,6 +13,7 @@ export type Filters = {|
 export type Context = {|
   +filters: Filters,
   +setFilters: (key: FilterType, value: string) => void,
+  +isAdmin: boolean
 |};
 
 export const DashboardPageContext: React.Context<Context> = React.createContext<Context>({
@@ -24,6 +25,7 @@ export const DashboardPageContext: React.Context<Context> = React.createContext<
     projectId: 'ALL',
   },
   setFilters: () => {},
+  isAdmin: false
 });
 
 export const useDashboard = (): Context => {

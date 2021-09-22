@@ -7,14 +7,17 @@ import { graphql, useFragment } from 'react-relay';
 import Flex from '~ui/Primitives/Layout/Flex';
 import component from '~/components/Form/Field';
 import type { GlobalState } from '~/types';
-import type { DashboardFilters_query$key } from '~relay/DashboardFilters_query.graphql';
+import type { DashboardFilters_viewer$key } from '~relay/DashboardFilters_viewer.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import Text from '~ui/Primitives/Text';
 import { useDashboard, type Filters } from '~/components/Admin/Dashboard/DashboardPage.context';
 
 const FRAGMENT = graphql`
-  fragment DashboardFilters_query on Query {
-    projects {
+  fragment DashboardFilters_viewer on User
+  @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" })
+  {
+    projects(affiliations: $affiliations)
+    {
       totalCount
       edges {
         node {
@@ -32,7 +35,7 @@ type ReduxProps = {|
 |};
 
 type ComponentProps = {|
-  +query: DashboardFilters_query$key,
+  +viewer: DashboardFilters_viewer$key,
   +defaultFilters: Filters,
 |};
 
@@ -43,11 +46,11 @@ type Props = {|
 
 export const formName = 'form-filters-dashboard';
 
-const DashboardFilters = ({ query: queryFragment, startAt, endAt }: Props): React.Node => {
-  const query = useFragment(FRAGMENT, queryFragment);
+const DashboardFilters = ({ viewer: viewerFragment, startAt, endAt }: Props): React.Node => {
+  const viewer = useFragment(FRAGMENT, viewerFragment);
   const intl = useIntl();
-  const { setFilters } = useDashboard();
-  const { projects } = query;
+  const { setFilters, isAdmin } = useDashboard();
+  const { projects } = viewer;
 
   return (
     <AppBox
@@ -68,7 +71,12 @@ const DashboardFilters = ({ query: queryFragment, startAt, endAt }: Props): Reac
             onChange={(e: SyntheticInputEvent<HTMLSelectElement>, value: string) =>
               setFilters('projectId', value)
             }>
-            <option value="ALL">{intl.formatMessage({ id: 'global.all.projects' })}</option>
+
+            {
+              isAdmin && (
+                <option value="ALL">{intl.formatMessage({ id: 'global.all.projects' })}</option>
+              )
+            }
 
             {projects?.totalCount > 0 &&
               projects?.edges

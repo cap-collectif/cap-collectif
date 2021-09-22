@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Enum\ProjectAffiliation;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Exists;
@@ -41,7 +43,9 @@ class ProjectSearch extends Search
         int $limit,
         array $orderBy,
         ?string $term,
-        array $providedFilters
+        array $providedFilters,
+        ?array $affiliations = null,
+        ?User $user = null
     ): array {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -70,6 +74,18 @@ class ProjectSearch extends Search
             ]);
             $boolQuery->addFilter($localeBoolQuery);
             unset($providedFilters['locale']);
+        }
+
+        $hasOwnerAffiliation =
+            $user && $affiliations && \in_array(ProjectAffiliation::OWNER, $affiliations, true);
+        if ($hasOwnerAffiliation) {
+            $boolQuery->addFilter(new Term(['owner.id' => $user->getId()]));
+        }
+
+        $hasAuthorAffiliation =
+            $user && $affiliations && \in_array(ProjectAffiliation::AUTHOR, $affiliations, true);
+        if ($hasAuthorAffiliation) {
+            $boolQuery->addFilter(new Term(['authors.id' => $user->getId()]));
         }
 
         foreach ($providedFilters as $key => $value) {

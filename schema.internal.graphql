@@ -8478,6 +8478,11 @@ interface ProjectOwner {
 
     """The ordering direction for posts"""
     orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
+
+    """
+    ID of a Status to filter by. If non-null, filter projects by statuses.
+    """
+    status: ID
   ): ProjectConnection!
 }
 
@@ -14780,6 +14785,11 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """The ordering direction for posts"""
     orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
+
+    """
+    ID of a Status to filter by. If non-null, filter projects by statuses.
+    """
+    status: ID
   ): ProjectConnection!
 
   """Get all posts that the user owns."""

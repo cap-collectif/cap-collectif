@@ -15,12 +15,14 @@ describe('<DashboardTitle />', () => {
 
   const query = graphql`
     query DashboardTitleTestQuery @relay_test_operation {
-      ...DashboardTitle_query
+        viewer {
+            ...DashboardTitle_viewer
+        }
     }
   `;
 
   const defaultMockResolvers = {
-    Query: () => ({
+    User: () => ({
       allProject: {
         totalCount: 10,
       },
@@ -40,7 +42,7 @@ describe('<DashboardTitle />', () => {
     const TestRenderer = ({ componentProps, queryVariables: variables }) => {
       const data = useLazyLoadQuery<DashboardTitleTestQuery>(query, variables);
       if (!data) return null;
-      return <DashboardTitle query={data} {...componentProps} />;
+      return <DashboardTitle viewer={data.viewer} {...componentProps} />;
     };
 
     TestDashboardTitle = componentProps => (

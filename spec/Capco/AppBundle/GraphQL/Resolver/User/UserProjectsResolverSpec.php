@@ -4,18 +4,17 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Resolver\User\UserProjectsResolver;
-use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Search\ProjectSearch;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
 class UserProjectsResolverSpec extends ObjectBehavior
 {
-    public function let(ProjectRepository $projectRepository, LoggerInterface $logger)
+    public function let(ProjectSearch $projectSearch)
     {
-        $this->beConstructedWith($projectRepository, $logger);
+        $this->beConstructedWith($projectSearch);
     }
 
     public function it_is_initializable()
@@ -25,7 +24,7 @@ class UserProjectsResolverSpec extends ObjectBehavior
 
     public function it_should_fetch_user_projects(
         User $user,
-        ProjectRepository $projectRepository,
+        ProjectSearch $projectSearch,
         Paginator $paginator,
         \ArrayIterator $arrayIterator,
         Project $project
@@ -35,44 +34,38 @@ class UserProjectsResolverSpec extends ObjectBehavior
             'direction' => 'ASC',
         ];
 
-        $totalCount = 20;
 
         $affiliations = ['OWNER'];
         $query = 'project';
-        $orderByField = 'publishedAt';
-        $orderByDirection = 'ASC';
+        $offset = 0;
+        $limit = 101;
+
+        $filters = [];
 
         $args = new Arg([
             'first' => 100,
-            'after' => null,
             'orderBy' => $orderBy,
             'affiliations' => $affiliations,
             'query' => $query,
         ]);
 
-        $projectRepository
-            ->getByUserPublicPaginated(
-                $user,
-                0,
-                101,
-                $affiliations,
+        $response = [
+            'count' => 1,
+            'projects' => [$project]
+        ];
+
+        $projectSearch
+            ->searchProjects(
+                $offset,
+                $limit,
+                $orderBy,
                 $query,
-                $orderByField,
-                $orderByDirection
+                $filters,
+                $affiliations,
+                $user
             )
             ->shouldBeCalled()
-            ->willReturn($paginator);
-
-        $paginator
-            ->getIterator()
-            ->shouldBeCalled()
-            ->willReturn($arrayIterator);
-        $arrayIterator->getArrayCopy()->willReturn([$project]);
-
-        $projectRepository
-            ->countPublicPublished($user, $affiliations, $query, $orderByField, $orderByDirection)
-            ->shouldBeCalled()
-            ->willReturn($totalCount);
+            ->willReturn($response);
 
         $this->__invoke($user, $args)->shouldReturnConnection();
     }

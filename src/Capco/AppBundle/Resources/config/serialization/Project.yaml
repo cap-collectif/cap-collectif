@@ -75,3 +75,5 @@ Capco\AppBundle\Entity\Project:
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [ElasticsearchProject]
+        owner:
+            groups: [ElasticsearchProject]

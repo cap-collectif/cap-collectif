@@ -31,3 +31,6 @@ InternalProjectOwner:
                                 direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
                             }
                         description: 'The ordering direction for posts'
+                    status:
+                        type: 'ID'
+                        description: 'ID of a Status to filter by. If non-null, filter projects by statuses.'

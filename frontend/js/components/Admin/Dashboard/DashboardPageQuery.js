@@ -22,7 +22,11 @@ const DEFAULT_FILTERS = {
   projectId: 'ALL',
 };
 
-const DashboardPageQueryContainer = (): React.Node => {
+type Props = {|
+  +isAdmin: boolean
+|}
+
+const DashboardPageQueryContainer = ({ isAdmin }: Props): React.Node => {
   const url = React.useMemo(() => new URL(window.location.href), []);
   const filtersFromUrl = getFieldsFromUrl<Filters>(url, {
     default: DEFAULT_FILTERS,
@@ -32,6 +36,7 @@ const DashboardPageQueryContainer = (): React.Node => {
   const [filters, setFilters] = React.useState<Filters>(filtersFromUrl);
   const contextValue = React.useMemo(
     () => ({
+      isAdmin,
       filters,
       setFilters: (key: FilterType, value: string) => {
         setFilters(currentFilters => {
@@ -42,7 +47,7 @@ const DashboardPageQueryContainer = (): React.Node => {
         updateQueryUrl(url, key, { value });
       },
     }),
-    [filters, url],
+    [filters, url, isAdmin],
   );
 
   return (
@@ -54,7 +59,7 @@ const DashboardPageQueryContainer = (): React.Node => {
 
 const DashboardPageQueryRender = (): React.Node => {
   const [queryReference, loadQuery] = useQueryLoader(DashboardPageQuery);
-  const { filters } = useDashboard();
+  const { filters, isAdmin } = useDashboard();
   const prevFilters = React.useRef();
 
   React.useEffect(() => {
@@ -65,10 +70,12 @@ const DashboardPageQueryRender = (): React.Node => {
           endAt: filters.endAt,
           projectId: filters.projectId === 'ALL' ? null : filters.projectId,
         },
+        affiliations: isAdmin ? null : ['OWNER'],
+        isProjectAdmin: !isAdmin
       });
       prevFilters.current = filters;
     }
-  }, [filters, loadQuery, queryReference]);
+  }, [filters, loadQuery, queryReference, isAdmin]);
 
   return queryReference ? (
     <ErrorBoundary
@@ -80,6 +87,8 @@ const DashboardPageQueryRender = (): React.Node => {
             endAt: filters.endAt,
             projectId: filters.projectId === 'ALL' ? null : filters.projectId,
           },
+          affiliations: isAdmin ? null : ['OWNER'],
+          isProjectAdmin: !isAdmin
         });
       }}>
       <DashboardPage queryReference={queryReference} />

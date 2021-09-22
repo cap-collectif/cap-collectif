@@ -4,24 +4,20 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProjectOrderField;
+use Capco\AppBundle\Search\ProjectSearch;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Repository\ProjectRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserProjectsResolver implements ResolverInterface
 {
-    private ProjectRepository $projectRepository;
-    private LoggerInterface $logger;
+    private ProjectSearch $projectSearch;
 
-    public function __construct(ProjectRepository $projectRepository, LoggerInterface $logger)
+    public function __construct(ProjectSearch $projectSearch)
     {
-        $this->projectRepository = $projectRepository;
-        $this->logger = $logger;
+        $this->projectSearch = $projectSearch;
     }
 
     public function __invoke(User $user, ?Argument $args = null): ConnectionInterface
@@ -36,47 +32,38 @@ class UserProjectsResolver implements ResolverInterface
         $affiliations = $args['affiliations'];
         $query = $args->offsetGet('query');
 
-        $field = $args->offsetGet('orderBy')['field'] ?? ProjectOrderField::PUBLISHED_AT;
-        $orderByField = ProjectOrderField::SORT_FIELD[$field];
+        $orderByField = $args->offsetGet('orderBy')['field'] ?? ProjectOrderField::PUBLISHED_AT;
         $orderByDirection = $args->offsetGet('orderBy')['direction'] ?? OrderDirection::DESC;
 
+        $filters = $this->getFilters($args);
+        $orderBy = ['field' => $orderByField, 'direction' => $orderByDirection];
+
+        $totalCount = 0;
         $paginator = new Paginator(function (int $offset, int $limit) use (
-            $user,
             $affiliations,
             $query,
-            $orderByField,
-            $orderByDirection
+            $orderBy,
+            $filters,
+            $user,
+            &$totalCount
         ) {
-            try {
-                $arguments = $this->projectRepository
-                    ->getByUserPublicPaginated(
-                        $user,
-                        $offset,
-                        $limit,
-                        $affiliations,
-                        $query,
-                        $orderByField,
-                        $orderByDirection
-                    )
-                    ->getIterator()
-                    ->getArrayCopy();
-            } catch (\RuntimeException $exception) {
-                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
-                throw new UserError('Error during fetching arguments of ' . $user->getLastname());
-            }
-
-            return $arguments;
+            $response = $this->projectSearch->searchProjects($offset, $limit, $orderBy, $query, $filters, $affiliations, $user);
+            $totalCount = $response['count'];
+            return $response['projects'];
         });
 
-        $totalCount = $this->projectRepository->countPublicPublished(
-            $user,
-            $affiliations,
-            $query,
-            $orderByField,
-            $orderByDirection
-        );
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->setTotalCount($totalCount);
 
-        return $paginator->auto($args, $totalCount);
+        return $connection;
+    }
+
+    private function getFilters(Argument $args): array
+    {
+        $filters = [];
+        if ($args->offsetExists('status') && '' !== $args['status']) {
+            $filters['projectStatus'] = $args->offsetGet('status');
+        }
+        return $filters;
     }
 }

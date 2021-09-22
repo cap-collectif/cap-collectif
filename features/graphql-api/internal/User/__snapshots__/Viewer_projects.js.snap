@@ -309,6 +309,46 @@ Object {
           "node": Object {
             "authors": Array [
               Object {
+                "username": "mauriau",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "mauriau",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
+              },
+            ],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
                 "username": "admin",
               },
               Object {
@@ -340,6 +380,12 @@ Object {
         },
         Object {
           "node": Object {
+            "authors": Array [],
+            "owner": null,
+          },
+        },
+        Object {
+          "node": Object {
             "authors": Array [
               Object {
                 "username": "admin",
@@ -355,7 +401,7 @@ Object {
           },
         },
       ],
-      "totalCount": 36,
+      "totalCount": 41,
     },
   },
 }
@@ -430,11 +476,21 @@ Object {
         },
         Object {
           "node": Object {
+            "title": "Project pour La Force (visible par mauriau seulement)",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "English Project",
           },
         },
       ],
-      "totalCount": 3,
+      "totalCount": 5,
     },
   },
 }
@@ -459,6 +515,12 @@ Object {
         },
         Object {
           "node": Object {
+            "publishedAt": "2014-12-08 00:00:00",
+            "title": "Projet pour le group2",
+          },
+        },
+        Object {
+          "node": Object {
             "publishedAt": "2014-12-09 00:00:00",
             "title": "Projet externe sans compteur",
           },
@@ -473,6 +535,30 @@ Object {
           "node": Object {
             "publishedAt": "2014-12-11 00:00:00",
             "title": "Questions/Responses",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-12 00:00:00",
+            "title": "Un avenir meilleur pour les nains de jardins (custom access)",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-13 00:00:00",
+            "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-14 00:00:00",
+            "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2014-12-15 00:00:00",
+            "title": "Project pour La Force (visible par mauriau seulement)",
           },
         },
         Object {
@@ -662,7 +748,7 @@ Object {
           },
         },
       ],
-      "totalCount": 36,
+      "totalCount": 41,
     },
   },
 }

@@ -410,7 +410,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
             ) : null}
           </Accordion>
 
-          {features.unstable__analytics_page && isAdmin ? (
+          {features.unstable__analytics_page ? (
             <SidebarLink
               text="admin.label.analytics"
               href="/admin/capco/analytics/list"

@@ -9,10 +9,14 @@ const DashboardPageQuery = lazy(() =>
   ),
 );
 
-export default () => (
+type Props = {|
+  +isAdmin: boolean
+|}
+
+export default ({ isAdmin }: Props) => (
   <Providers>
     <Suspense fallback={<DashboardPagePlaceholder />}>
-      <DashboardPageQuery />
+      <DashboardPageQuery isAdmin={isAdmin} />
     </Suspense>
   </Providers>
 );

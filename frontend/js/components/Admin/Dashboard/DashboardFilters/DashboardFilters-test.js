@@ -7,6 +7,7 @@ import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { RelaySuspensFragmentTest } from '~/testUtils';
 import type { DashboardFiltersTestQuery } from '~relay/DashboardFiltersTestQuery.graphql';
 import DashboardFilters from './DashboardFilters';
+import { DashboardPageContext } from '../DashboardPage.context';
 
 describe('<DashboardFilters />', () => {
   let environment;
@@ -15,12 +16,14 @@ describe('<DashboardFilters />', () => {
 
   const query = graphql`
     query DashboardFiltersTestQuery @relay_test_operation {
-      ...DashboardFilters_query
+      viewer {
+        ...DashboardFilters_viewer
+      }
     }
   `;
 
   const defaultMockResolvers = {
-    Query: () => ({
+    User: () => ({
       projects: {
         totalCount: 2,
         edges: [
@@ -41,6 +44,16 @@ describe('<DashboardFilters />', () => {
     }),
   };
 
+  const contextValue = {
+    filters: {
+      startAt: '2014-12-01T00:00:00.000Z',
+      endAt: '2020-12-01T00:00:00.000Z',
+      projectId: 'ALL',
+    },
+    setFilters: jest.fn(),
+    isAdmin: true,
+  };
+
   beforeEach(() => {
     environment = createMockEnvironment();
     const queryVariables = {};
@@ -48,12 +61,14 @@ describe('<DashboardFilters />', () => {
     const TestRenderer = ({ componentProps, queryVariables: variables }) => {
       const data = useLazyLoadQuery<DashboardFiltersTestQuery>(query, variables);
       if (!data) return null;
-      return <DashboardFilters query={data} {...componentProps} />;
+      return <DashboardFilters viewer={data.viewer} {...componentProps} />;
     };
 
-    TestDashboardFilters = componentProps => (
+    TestDashboardFilters = ({ context, ...componentProps }) => (
       <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
+        <DashboardPageContext.Provider value={context}>
+          <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
+        </DashboardPageContext.Provider>
       </RelaySuspensFragmentTest>
     );
 
@@ -63,13 +78,30 @@ describe('<DashboardFilters />', () => {
   });
 
   describe('<TestDashboardFilters />', () => {
-    it('should render correctly', () => {
+    it('should render correctly when user is admin', () => {
       testComponentTree = ReactTestRenderer.create(
         <TestDashboardFilters
           defaultFilters={{
             startAt: '2014-12-01T00:00:00.000Z',
             endAt: '2020-12-01T00:00:00.000Z',
             projectId: 'ALL',
+          }}
+          context={contextValue}
+        />,
+      );
+      expect(testComponentTree).toMatchSnapshot();
+    });
+    it('should render correctly when user is project admin', () => {
+      testComponentTree = ReactTestRenderer.create(
+        <TestDashboardFilters
+          defaultFilters={{
+            startAt: '2014-12-01T00:00:00.000Z',
+            endAt: '2020-12-01T00:00:00.000Z',
+            projectId: 'ALL',
+          }}
+          context={{
+            ...contextValue,
+            isAdmin: false,
           }}
         />,
       );

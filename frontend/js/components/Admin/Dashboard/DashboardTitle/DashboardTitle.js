@@ -3,33 +3,35 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import Flex from '~ui/Primitives/Layout/Flex';
-import type { DashboardTitle_query$key } from '~relay/DashboardTitle_query.graphql';
+import type { DashboardTitle_viewer$key } from '~relay/DashboardTitle_viewer.graphql';
 import Text from '~ui/Primitives/Text';
 import { headingStyles } from '~ui/Primitives/Heading';
 import { FontWeight } from '~ui/Primitives/constants';
 
 type Props = {|
-  query: DashboardTitle_query$key,
+  viewer: DashboardTitle_viewer$key,
 |};
 
 const FRAGMENT = graphql`
-  fragment DashboardTitle_query on Query {
-    allProject: projects {
-      totalCount
+  fragment DashboardTitle_viewer on User
+  @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" })
+  {
+    allProject: projects(affiliations: $affiliations) {
+        totalCount
     }
-    inProgressProjects: projects(status: 1) {
-      totalCount
+    inProgressProjects: projects(affiliations: $affiliations, status: 1) {
+        totalCount
     }
-    doneProjects: projects(status: 2) {
-      totalCount
+    doneProjects: projects(affiliations: $affiliations, status: 2) {
+        totalCount
     }
   }
 `;
 
-const DashboardTitle = ({ query: queryFragment }: Props): React.Node => {
-  const query = useFragment(FRAGMENT, queryFragment);
+const DashboardTitle = ({ viewer: viewerFragment }: Props): React.Node => {
+  const viewer = useFragment(FRAGMENT, viewerFragment);
   const intl = useIntl();
-  const { allProject, inProgressProjects, doneProjects } = query;
+  const { allProject, inProgressProjects, doneProjects } = viewer;
 
   return (
     <Flex direction="row" align="center" justify="space-between" px={6} py={4} bg="white">

@@ -20,13 +20,14 @@ import SectionProposalCategories from '~/components/Admin/Dashboard/Sections/Sec
 import DashboardTitle from '~/components/Admin/Dashboard/DashboardTitle/DashboardTitle';
 import DashboardFilters from '~/components/Admin/Dashboard/DashboardFilters/DashboardFilters';
 import { useDashboard } from '~/components/Admin/Dashboard/DashboardPage.context';
+import DashboardEmptyState from './DashboardEmptyState/DashboardEmptyState';
 
 type Props = {|
   queryReference: PreloadedQuery<DashboardPageQueryType>,
 |};
 
 export const DashboardPageQuery: GraphQLTaggedNode = graphql`
-  query DashboardPageQuery($filter: QueryAnalyticsFilter!) {
+  query DashboardPageQuery($filter: QueryAnalyticsFilter!, $affiliations: [ProjectAffiliation!]) {
     analytics(filter: $filter) {
       visitors {
         totalCount
@@ -65,15 +66,25 @@ export const DashboardPageQuery: GraphQLTaggedNode = graphql`
       }
       ...SectionParticipations_analytics
     }
-    ...DashboardTitle_query
-    ...DashboardFilters_query
+    viewer {
+      recentProjects: projects(affiliations: $affiliations, first: 1) {
+        totalCount
+        edges {
+          node {
+            id
+          }
+        }
+      }
+      ...DashboardFilters_viewer @arguments(affiliations: $affiliations)
+      ...DashboardTitle_viewer @arguments(affiliations: $affiliations)
+    }
   }
 `;
 
 const DashboardPage = ({ queryReference }: Props): React.Node => {
   const query = usePreloadedQuery<DashboardPageQueryType>(DashboardPageQuery, queryReference);
-  const { filters } = useDashboard();
-  const { analytics } = query;
+  const { filters, setFilters, isAdmin } = useDashboard();
+  const { analytics, viewer } = query;
   const hasSmallCharts =
     (analytics.visitors && analytics.visitors.totalCount > 0) ||
     (analytics.registrations && analytics.registrations.totalCount > 0) ||
@@ -81,12 +92,31 @@ const DashboardPage = ({ queryReference }: Props): React.Node => {
     (analytics.contributors && analytics.contributors.totalCount > 0) ||
       (analytics.anonymousContributors && analytics.anonymousContributors.totalCount > 0);
 
+  const recentProjects = viewer?.recentProjects;
+  const hasProjects = !!recentProjects?.totalCount;
+
+  React.useEffect(() => {
+    if (
+      recentProjects?.edges &&
+      recentProjects?.totalCount > 0 &&
+      !isAdmin &&
+      filters.projectId === 'ALL'
+    ) {
+      const ids = recentProjects?.edges?.filter(Boolean).map(edge => edge.node.id);
+      setFilters('projectId', ids[0]);
+    }
+  }, [filters, setFilters, isAdmin, recentProjects]);
+
+  if (!hasProjects) {
+    return <DashboardEmptyState />;
+  }
+
   return (
     <Flex direction="column" spacing={3}>
-      <DashboardTitle query={query} />
+      <DashboardTitle viewer={viewer} />
 
       <Flex direction="column" px={8} py={6} spacing={8}>
-        <DashboardFilters query={query} defaultFilters={filters} />
+        <DashboardFilters viewer={viewer} defaultFilters={filters} />
 
         {hasSmallCharts && (
           <Flex direction="row" justify="flex-start" overflow="auto" spacing={8}>
