@@ -50,8 +50,11 @@ class PostSearchType extends AbstractType
             'query_builder' => function (ProjectRepository $cr) {
                 return $cr
                     ->createQueryBuilder('c')
+                    ->join('c.posts', 'p')
                     ->where('c.visibility = :visibility')
-                    ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+                    ->andWhere('p.displayedOnBlog = true')
+                    ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+                    ;
             },
             'placeholder' => 'global.all.projects',
             'attr' => ['onchange' => 'this.form.submit()'],
